@@ -1,0 +1,163 @@
+{
+  "quizzes": [
+    {
+      "id": 1789966018265,
+      "name": "Mục 2 p1",
+      "folder": "Ôn Thi Quốc Gia",
+      "questions": [
+        {
+          "question": "Bệnh nhân nam 45 tuổi đến phòng khám nha khoa với than phiền đau nhức âm ỉ vùng hàm trên phải đã kéo dài 4 ngày. Cơn đau có tính chất căng tức, tăng rõ rệt khi bệnh nhân cúi đầu xuống nhặt đồ hoặc khi đi cầu thang, và giảm bớt khi nằm nghiêng đầu cao. Bệnh nhân kèm theo cảm giác nặng nề ở má phải, nghẹt mũi bên phải và đôi khi chảy dịch nhầy trong. Khám lâm sàng trong miệng: Răng cối lớn thứ nhất hàm trên (răng số 16) bên phải không có dấu hiệu sâu răng, không có miếng trám, không mòn cổ răng. Nghiệm pháp nhiệt (đá lạnh) trên răng 16 cho cảm giác đau nhói thoáng qua, bệnh nhân báo \"hơi ê nhưng mất ngay\", gõ dọc và gõ ngang đều âm tính. Sờ nắn vùng ngách hành lang phải không đau. Chụp X-quang toàn cảnh thấy màng nhầy đáy xoang hàm phải dày lên rõ rệt, không thấy hình ảnh tiêu xương hay giãn dây chằng nha chu quanh chóp tại răng 16. Chụp X-quang sọ mặt tư thế Waters cho thấy hình ảnh mờ đục (tăng cản quang) vùng xoang hàm phải. Bệnh nhân xác nhận vừa trải qua đợt cảm lạnh nặng và ho khan kéo dài 2 tuần trước đó.",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Viêm tủy không hồi phục do vi khuẩn trên răng 16, cần điều trị nội nha lấy tủy ngay lập tức.",
+            "B. Đau do viêm quanh chóp răng 16 lan vào xoang hàm.",
+            "C. Đau do viêm xoang hàm nguyên phát, qui chiếu (referred pain) vào vùng răng hàm trên.",
+            "D. Đau thần kinh sinh ba thể điển hình do chèn ép nhánh thần kinh khẩu cái lớn."
+          ],
+          "answerStr": "C",
+          "explanation": "Triệu chứng đau tăng khi cúi đầu, nghẹt mũi, hình ảnh đục mờ xoang trên phim chụp và tiền sử cảm lạnh là đặc trưng của viêm xoang hàm. Răng 16 có nghiệm pháp tủy và gõ bình thường, kết hợp không có tiêu xương quanh chóp trên X-quang giúp loại trừ hoàn toàn nguyên nhân nội nha và quanh chóp. Cơ chế đau vùng răng là do nhánh thần kinh khẩu cái lớn chi phối cả xoang và các răng hàm trên, khiến não bộ diễn giải sai tín hiệu đau từ xoang thành đau răng (đau qui chiếu). Đau thần kinh tam giác có tính chất giật, kịch phát khi chạm kích thích, không liên quan đến tư thế cúi đầu.\n",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Bệnh nhân nam 55 tuổi đến khám với than phiền đau nhói, tức vùng sàn miệng và góc hàm bên trái. Bệnh nhân mô tả cơn đau thường âm ỉ vào các buổi sáng, nhưng lại trở nên dữ dội, căng tức và sưng to vùng dưới hàm trái ngay trước và trong lúc ăn các món có vị chua, kéo dài khoảng 1-2 giờ sau khi ăn xong thì sưng đau tự xẹp đi. Khám lâm sàng: Các răng cối dưới trái (răng 36, 37) không có dấu hiệu sâu răng, không trám, không mẻ cắn, nghiệm pháp nhiệt và điện tủy đều cho kết quả trong giới hạn bình thường, gõ dọc và gõ ngang đều âm tính. Sờ nắn sàn miệng trái hai bên dọc theo sống hàm (bimanual palpation) thấy một khối cứng, kích thước khoảng 6mm, bám cố định vào niêm mạc sàn miệng dọc theo đường đi của ống nước bọt dưới hàm, có hiện tượng sưng nề, đỏ quanh lỗ ống. Sờ nắn vùng góc hàm trong trái thấy hạch và tuyến nước bọt dưới hàm sưng nhẹ, mềm, có cảm giác căng tức. Chụp X-quang cận chóp vùng răng 36, 37 không thấy tổn thương quanh chóp. Chụp X-quang sàn miệng góc nghiêng thấy một khối cản quang đậm, dạng vôi hóa nằm dọc theo ống tuyến nước bọt.",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Đau do cứng cơ cắn (Myospasm of masticatory muscles); chụp sọ mặt 3D (CBCT) vùng khớp thái dương hàm.",
+            "B. Đau do sỏi tuyến nước bọt mang tai (Parotid sialolithiasis); chụp MRI tuyến nước bọt.",
+            "C. Đau do sỏi ống tuyến nước bọt dưới hàm gây tắc nghẽn; chụp X-quang sàn miệng (góc nghiêng) hoặc CBCT vùng sàn miệng.",
+            "D. Đau do rối loạn khớp thái dương hàm (TMD); chụp cắt lớp vi tính (CT) hàm dưới."
+          ],
+          "answerStr": "C",
+          "explanation": "Đau tăng trước và trong lúc ăn là dấu hiệu kinh điển của tắc ống tuyến nước bọt do sỏi (hiện tượng căng trướng tuyến do phản xạ tiết nước bọt gặp tắc nghẽn). Vị trí sờ thấy khối cứng ở sàn miệng kèm sưng tuyến dưới hàm xác định đúng cấu trúc giải phẫu bị bệnh là tuyến nước bọt dưới hàm, loại trừ tuyến mang tai nằm vùng trước tai. Các nghiệm pháp nội nha bình thường và không tổn thương quanh chóp loại trừ hoàn toàn nguyên nhân từ răng. Sỏi tuyến dưới hàm thường chứa nhiều canxi cản quang tốt, do đó chụp X-quang sàn miệng góc nghiêng hoặc CBCT là phương pháp tối ưu và kinh tế nhất để định vị sỏi.\n",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Bệnh nhân nữ 28 tuổi đến phòng khám nha khoa trong tình trạng đau nhức âm ỉ kéo dài vùng hàm trên trái, lan dần lên vùng thái dương và quanh hốc mắt trái. Cơn đau có đặc điểm tăng dữ dội mỗi khi bệnh nhân cúi đầu xuống nhặt đồ hoặc khi hắt hơi. Bệnh nhân cho biết đã được phẫu thuật nhổ răng khôn hàm trên bên trái (răng số 28) tại một phòng khám khác 5 ngày trước. Khám lâm sàng thấy ổ răng nhổ trống rỗng, mất cục máu đông bảo vệ, sờ dọc thành xa và thành trong ổ răng thấy mất vách xương, có thể quan sát thấy dịch mủ chảy ra từ sâu trong hốc xương. Bệnh nhân than phiền bị nghẹt mũi và chảy mũi dịch mủ vàng xanh cùng bên trái. Thực hiện nghiệm pháp Valsalva cho kết quả dương tính với bọt khí và một ít dịch mủ thoát ra trực tiếp từ ổ răng nhổ. Chụp X-quang toàn cảnh thấy mờ đục lan tỏa và có dịch trong lòng xoang hàm trái, nhưng các răng cối lớn kề bên (răng 26, 27) không có tổn thương quanh chóp hay sâu răng.",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Viêm xương ổ răng (Alveolar osteitis / Dry socket); do mất cục máu đông khiến hốc xương lộ ra tiếp xúc với môi trường miệng gây đau.",
+            "B. Thông miệng - xoang (Oroantral communication) bội nhiễm gây viêm xoang hàm cấp; do nhổ răng làm vỡ màng xoang, vi khuẩn từ miệng xâm nhập gây viêm xoang.",
+            "C. Tổn thương chấn thương dây thần kinh khẩu cái lớn (Greater palatine nerve); do mũi khoan hoặc rễ răng đâm thủng màng nhầy xoang gây đau thần kinh.",
+            "D. Nhiễm trùng vùng màng xương răng hàm trên; do vi khuẩn từ ổ răng nhổ lan trực tiếp vào xương ổ răng gây viêm tủy xương."
+          ],
+          "answerStr": "B",
+          "explanation": "Nghiệm pháp Valsalva dương tính (có bọt khí thoát ra từ ổ răng) là tiêu chuẩn vàng để chẩn đoán thông miệng - xoang. Triệu chứng đau tăng khi cúi đầu, nghẹt mũi, chảy mũi dịch mủ kèm hình ảnh mức nước trong xoang trên X-quang là biểu hiện của viêm xoang hàm cấp. Cơ chế gây đau là do vi khuẩn từ khoang miệng theo lỗ thông xâm nhập làm viêm nhiễm, ứ đọng dịch mủ tạo áp lực lên thành xoang và kích thích các sợi thần kinh. Viêm xương ổ răng hay nhiễm trùng màng xương cục bộ không giải thích được triệu chứng chảy mũi mủ, có bọt khí thoát ra khi thổi mạnh và hình ảnh mức nước trong xoang.\n",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Bệnh nhân nữ 30 tuổi đến tái khám 2 tuần sau khi phẫu thuật nhổ răng khôn hàm dưới bên phải (răng số 48). Bệnh nhân than phiền bị đau âm ỉ, buốt, kéo dài liên tục vùng hàm dưới phải, lan sang cằm và môi dưới bên phải từ sau khi phẫu thuật đến nay. Đặc biệt, bệnh nhân mô tả cảm giác tê bì như kiến bò, rát bỏng ở môi dưới và cằm bên phải, cơn đau không hề giảm khi bệnh nhân tự uống các loại thuốc giảm đau thông thường (nhóm NSAID). Khám lâm sàng thấy vết mổ nhổ răng đang lành tốt, mô nướu hồng hào, không có sưng nề, không chảy mủ, không có hạch sưng dưới hàm. Răng hàm lớn thứ hai (răng số 47) bên cạnh đáp ứng bình thường với nghiệm pháp lạnh và điện tủy, gõ âm tính. Dữ liệu chụp CBCT trước phẫu thuật cho thấy chóp rễ răng số 48 tiếp xúc trực tiếp và nằm sát vách ống thần kinh răng dưới (Inferior alveolar canal). Bằng cách đánh giá tổng hợp bệnh sử, biểu hiện lâm sàng và dữ kiện cận lâm sàng, bản chất của cơn đau và hướng điều trị ban đầu phù hợp nhất là gì?",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Đau sinh lý sau phẫu thuật (Physiologic post-surgical pain) còn kéo dài; cần kê đơn thuốc giảm đau opioid mạnh hơn.",
+            "B. Đau do viêm xương ổ răng (Alveolar osteitis); cần cạo sạch ổ răng và đặt gạc iodoform vào trong hốc xương.",
+            "C. Đau do tổn thương/dị cảm thần kinh (Neuritis / Neuropathic pain) do chấn thương dây thần kinh hàm dưới; cần chuyển hướng điều trị sang thuốc giảm đau thần kinh (như Gabapentin hoặc Pregabalin).",
+            "D. Đau do nhiễm trùng vùng kẽ răng (Pericoronal infection) lan tỏa; cần cắt nạo và kê đơn kháng sinh phổ rộng."
+          ],
+          "answerStr": "C",
+          "explanation": "Đau kèm tê bì, rát bỏng và không đáp ứng với thuốc NSAID là đặc điểm kinh điển của đau do tổn thương thần kinh. Hình ảnh CBCT trước mổ chỉ điểm nguy cơ cao chóp răng chèn ép trực tiếp ống thần kinh răng dưới, cơ chế gây bệnh là do chấn thương cơ học bó dây thần kinh hàm dưới trong lúc phẫu thuật nhổ răng. Ổ răng lành tốt, không sưng mủ giúp loại trừ hoàn toàn viêm xương ổ răng và nhiễm trùng. Thuốc giảm đau thông thường không có tác dụng với đau thần kinh, bắt buộc phải dùng các thuốc giảm đau thần kinh như Gabapentin.\n",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Bệnh nhân nam 65 tuổi đến cấp cứu vì sưng đau nhức dữ dội vùng mang tai và góc hàm bên phải, đau lan vào trong tai và nhức cơ khi há miệng, nhai nuốt. Bệnh nhân vừa trải qua đại phẫu thuật ổ bụng được 5 ngày, sau mổ bệnh nhân nằm viện, ăn uống rất kém, bị nôn trớ nhiều lần dẫn đến tình trạng mất nước nặng, môi khô, họng khô. Khám lâm sàng: Sưng nề, nóng, đỏ, đau chạm rõ vùng tuyến mang tai phải, ranh giới không rõ. Các răng trên cung hàm đều lành mạnh, không có răng sâu, răng khôn đã nhổ, nghiệm pháp nhiệt và gõ đều âm tính. Sờ nắn khớp thái dương hàm không đau, không tiếng lục cục. Đặc biệt, khi thực hiện massage (vỗ ép) dọc chiều dài tuyến mang tai, bác sĩ quan sát thấy có dịch mủ vàng xanh chảy ra ồ ạt từ lỗ ống Stensen (tại niêm mạc má đối diện răng hàm nhỏ hàm trên). Bằng cách đánh giá tổng hợp các triệu chứng lâm sàng và tiền sử, chẩn đoán và cơ chế bệnh sinh chính xác nhất là gì?",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Viêm khớp thái dương hàm cấp (Acute TMD) do căng cơ sau mổ; do nằm lâu gây cứng cơ nhai.",
+            "B. Nhiễm trùng ổ răng hàm lan tỏa vào khoảng cơ cắn (Masticator space infection); do sức đề kháng giảm sau phẫu thuật.",
+            "C. Viêm tuyến mang tai hóa mủ cấp (Acute suppurative parotitis); do tình trạng mất nước giảm tiết nước bọt, tạo điều kiện cho vi khuẩn đi ngược dòng từ lỗ ống Stensen vào tuyến.",
+            "D. Sỏi ống tuyến nước bọt mang tai (Parotid duct sialolithiasis); do rối loạn chuyển hóa canxi sau phẫu thuật gây tắc nghẽn ống."
+          ],
+          "answerStr": "C",
+          "explanation": "Sưng nóng đỏ đau tại vùng tuyến mang tai kèm dịch mủ chảy ra từ lỗ ống Stensen khi massage là dấu hiệu bệnh lý của viêm tuyến mang tai hóa mủ cấp. Tình trạng mất nước nặng sau đại phẫu làm nước bọt đặc quánh và giảm tiết, mất tác dụng rửa sạch kháng khuẩn, tạo cơ hội cho vi khuẩn từ khoang miệng đi ngược dòng ống nước bọt vào trong tuyến gây viêm mủ. Các răng khỏe mạnh, khớp thái dương hàm bình thường giúp loại trừ nguyên nhân từ răng hay khớp hàm. Sỏi tuyến mang tai thường gây đau tăng lúc ăn do ứ nước bọt, không có dịch mủ chảy ồ ạt.\n",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Bệnh nhân nam 52 tuổi đến tái khám vì đau nhức âm ỉ vùng hàm trên trái, lan lên thái dương và quanh hốc mắt, đau tăng dữ dội khi cúi đầu. Bệnh nhân vừa phẫu thuật cấy ghép Implant kết hợp nâng xoang hàm (sinus lift) bên trái được 10 ngày. Khám lâm sàng thấy vết mổ vùng phẫu thuật nâng xoang trên mào xương ổ răng lành tốt, chỉ khâu đã được cắt, không có sưng nề hay rỉ mủ tại vùng niêm mạc miệng. Tuy nhiên, nội soi mũi thấy có dịch mủ đặc chảy ra từ lỗ xoang hàm giữa bên trái. Chụp CBCT cho thấy hình ảnh mờ đục lan tỏa và có mức nước (air-fluid level) chiếm gần hết thể tích xoang hàm trái; đồng thời thấy một khối vật liệu ghép xương (bone graft) bị trồi lên nằm lọt lệch bên trong lòng xoang, tách rời khỏi vùng mào xương ổ răng. Bằng cách đánh giá tổng hợp dữ kiện lâm sàng và hình ảnh học, chẩn đoán và cơ chế bệnh sinh của tình trạng đau này là gì?",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Đau sinh lý sau phẫu thuật ghép xương (Graft site healing pain); do phản ứng viêm vô khuẩn bình thường của mô xương hàm.",
+            "B. Viêm xoang hàm cấp tính sau phẫu thuật (Acute post-surgical maxillary sinusitis); do vỡ màng xoang khiến vật liệu ghép xương tràn vào xoang, đóng vai trò vật lạ nhiễm khuẩn.",
+            "C. Tổn thương dây thần kinh khẩu cái lớn (Greater palatine nerve) do phẫu thuật gây tê buốt; do mũi khoan chạm vào ống thần kinh.",
+            "D. Thất bại tích hợp xương (Implant failure) giai đoạn sớm gây viêm quanh cấy ghép; do vi khuẩn từ miệng xâm nhập qua vết mổ xuống xương hàm."
+          ],
+          "answerStr": "B",
+          "explanation": "Đau tăng khi cúi đầu, chảy mủ mũi và hình ảnh mức nước trong xoang trên CBCT là hội chứng viêm xoang cấp. Sự hiện diện của vật liệu ghép xương nằm lọt trong lòng xoang là bằng chứng trực tiếp của biến chứng thủng màng nhầy xoang trong lúc nâng xoang. Vật liệu này đóng vai trò vật thể ngoại lai, cản trở lông chuyển và bám dính vi khuẩn, gây ứ đọng dịch mủ tạo áp lực kích thích thần kinh gây đau. Vết mổ niêm mạc lành tốt, không sưng mủ tại Implant giúp loại trừ nhiễm trùng quanh cấy ghép hay đau sinh lý sau mổ.\n",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Bệnh nhân nữ 35 tuổi đến khám vì sưng đau tức vùng má trái mỗi khi bắt đầu ăn. Cơn đau có tính chất tức dữ dội, vùng má sưng to lên trong bữa ăn và tự xẹp đi kèm giảm đau sau khi ăn xong khoảng 1-2 giờ. Bệnh nhân vừa phẫu thuật cắt bỏ một nang niêm dịch (mucocele) tại niêm mạc má trái được 3 tuần. Khám lâm sàng: Tuyến mang tai trái sưng nhẹ, mềm, không có dấu hiệu nóng đỏ. Các răng trên cung hàm đều khỏe mạnh, không sâu, nghiệm pháp tủy và gõ đều âm tính. Soi niêm mạc má trái thấy vết sẹo mổ dài chạy ngang qua lỗ ống Stensen. Lỗ ống này bị hẹp lại, có tổ chức xơ xung quanh. Khi thực hiện massage (vỗ ép) tuyến mang tai, bác sĩ thấy dịch nước bọt trong vắt chảy ra rất ít và khó khăn. Bằng cách đánh giá tổng hợp bệnh sử và lâm sàng, chẩn đoán và cơ chế gây đau chính xác nhất là gì?",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Viêm tuyến mang tai mạn tính tái phát do vi khuẩn; do sức đề kháng suy giảm sau phẫu thuật.",
+            "B. Sỏi tuyến mang tai (Parotid duct sialolithiasis); do rối loạn chuyển hóa canxi sau mổ gây tắc ống.",
+            "C. Hẹp ống Stensen thứ phát do phẫu thuật (Post-surgical duct stricture); do sẹo xơ chèn ép gây tắc cơ học, ứ đọng dịch tuyến trong bữa ăn.",
+            "D. Đau do sẹo thần kinh vùng má (Neuropathic scar pain); do dây thần kinh gò má bị đứt trong lúc mổ."
+          ],
+          "answerStr": "C",
+          "explanation": "Hiện tượng sưng đau tăng lúc ăn và xẹp đi sau khi ăn là dấu hiệu kinh điển của tắc ống tuyến nước bọt do ứ đọng dịch khi phản xạ tiết nước bọt gặp tắc nghẽn. Vết sẹo mổ cắt ngang qua lỗ ống Stensen gây xơ hẹp là nguyên nhân trực tiếp dẫn đến tắc cơ học. Dịch nước bọt trong vắt, không mủ loại trừ viêm nhiễm vi khuẩn. Đau do sẹo thần kinh có tính chất buốt, dị cảm, không gây sưng tuyến theo bữa ăn.\n",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Bệnh nhân nữ 42 tuổi đến khám vì đau nhức âm ỉ vùng hàm trên trái, kèm theo hiện tượng nghẹt mũi và chảy mũi dịch mủ vàng kéo dài 3 tuần. Cơn đau tăng rõ rệt khi bệnh nhân cúi đầu xuống. Bệnh nhân vừa được điều trị nội nha răng hàm nhỏ thứ hai hàm trên (răng số 25) bên trái được 6 tuần. Khám lâm sàng: Răng 25 trám bít kín, gọn gàng ở mặt nhai, nướu quanh răng hồng hào, không có sưng nề, gõ âm tính, nghiệm pháp lạnh không có phản ứng. Chụp CBCT vùng xương hàm trên trái cho thấy hình ảnh vật liệu cản quang (gutta-percha) bị trượt ra khỏi chóp răng số 25, lọt hẳn lên trên nằm gọn trong lòng xoang hàm trái. Xung quanh vật liệu này, màng nhầy xoang hàm trái dày lên đặc quánh và có hình ảnh mức nước (air-fluid level).",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Viêm xoang hàm dị ứng; do vật liệu trám răng gây phản ứng quá mẫn type 1 tại niêm mạc xoang.",
+            "B. Viêm xoang hàm do vật thể ngoại lai (Foreign body sinusitis); do vật liệu trám nội nha bị ép lọt qua chóp răng vào xoang, gây tắc lông chuyển và bội nhiễm.",
+            "C. Đau quanh chóp răng thứ phát do hàn quá giới hạn; gây áp xe chóp răng lan vào xoang.",
+            "D. Viêm tủy không hồi phục thứ phát; do vật liệu trám gây độc tính khiến tủy hoại tử."
+          ],
+          "answerStr": "B",
+          "explanation": "Sự xuất hiện của dịch mủ mũi, đau tăng khi cúi đầu và màng nhầy xoang dày kèm mức nước trên CBCT khẳng định tình trạng viêm xoang cấp. Vật liệu cản quang nằm lọt trong xoang là bằng chứng trực tiếp của việc ép vật liệu trám vượt quá chóp răng vào trong xoang. Vật liệu này đóng vai trò vật thể ngoại lai, cản trở hoạt động của lông chuyển niêm mạc xoang, dẫn đến ứ đọng dịch và bội nhiễm vi khuẩn. Răng không có dấu hiệu sưng nề hay gõ đau, kết hợp hình ảnh không có tiêu xương quanh chóp giúp loại trừ nguyên nhân viêm quanh chóp hay hoại tử tủy.\n",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Bệnh nhân nữ 45 tuổi đến khám vì đau nhức, rát bỏng và đỏ vùng da trước tai, lan lên thái dương bên phải. Triệu chứng này xuất hiện đột ngột và dữ dội mỗi khi bệnh nhân bắt đầu nhai nuốt thức ăn, đặc biệt là khi ăn đồ chua. Bệnh nhân có tiền sử phẫu thuật cắt bỏ khối u tuyến mang tai (parotidectomy) bảo toàn dây thần kinh mặt bên phải 3 tháng trước. Khám lâm sàng: Trong lúc cho bệnh nhân nhai kẹo cao su có vị chua, bác sĩ quan sát thấy vùng da trước tai và thái dương bên phải đỏ bừng lên, có hiện tượng đổ mồ hôi ồ ạt tại khu vực này, đồng thời bệnh nhân than phiền bị đau rát da. Da vùng tai và má không có tổn thương dị ứng hay vết thương ngoài da nào khác. Các tuyến nước bọt dưới hàm và các răng trên cung hàm đều hoàn toàn bình thường.",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Tái phát u tuyến mang tai gây chèn ép thần kinh; cần chụp MRI vùng cổ để đánh giá khối u.",
+            "B. Hẹp ống Stensen thứ phát sau mổ; do sẹo xơ gây ứ đọng dịch nước bọt khi ăn.",
+            "C. Hội chứng Frey (Auriculotemporal syndrome) sau phẫu thuật; do dây thần kinh tai - thái dương bị đứt và tái tạo nối nhầm giữa sợi giao cảm và phó giao cảm.",
+            "D. Đau thần kinh tam giác thể cận não (Trigeminal neuralgia); do chấn thương phẫu thuật kích hoạt điểm kích thích thần kinh."
+          ],
+          "answerStr": "C",
+          "explanation": "Đau rát, đỏ da và đổ mồ hôi vùng trước tai - thái dương khi ăn (đặc biệt đồ chua kích thích tiết nước bọt) là hội chứng Frey kinh điển sau phẫu thuật cắt tuyến mang tai. Cơ chế do sự đứt gãy của dây thần kinh tai - thái dương (auriculotemporal nerve) trong lúc mổ. Trong quá trình tái tạo thần kinh, các sợi phó giao cảm (vốn mang xung động tiết nước bọt khi ăn) đã mọc nhầm nối vào các sợi giao cảm (chi phối mạch máu và tuyến mồ hôi da), dẫn đến hiện tượng nhai ăn thì da đỏ, đổ mồ hôi và rát thay vì tuyến nước bọt tiết dịch.\n",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Bệnh nhân nữ 50 tuổi đến cấp cứu vì sưng đau tức dữ dội vùng góc hàm và cổ hai bên, lan lên vùng mang tai, tình trạng kéo dài 2 ngày nay. Bệnh nhân vừa được tiêm thuốc cản quang có chứa I-ốt để chụp CT xương chậu cách đây 2 ngày. Khám lâm sàng: Sưng nề, đau chạm hai bên tuyến nước bọt dưới hàm và tuyến mang tai, da phủ trên căng bóng nhưng không có dấu hiệu nóng đỏ. Khi massage tuyến nước bọt, bác sĩ thấy dịch nước bọt trong chảy ra bình thường, không có dịch mủ. Bệnh nhân không sốt, không lạnh run. Các răng trên cung hàm đều lành mạnh, không có dấu hiệu sâu răng, tủy chết hay viêm quanh chóp. Sờ nắn vùng cổ không thấy hạch sưng to.",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Viêm tuyến nước bọt hóa mủ cấp (Acute suppurative sialadenitis); do vi khuẩn xâm nhập khi sức đề kháng giảm.",
+            "B. Viêm hạch vùng cổ (Lymphadenitis) do nhiễm trùng răng hàm dưới lan tỏa; cần điều trị nội nha các răng sâu bệnh.",
+            "C. Viêm tuyến nước bọt do thuốc cản quang I-ốt (Iodine-induced sialadenitis); do I-ốt được đào thải và tích lũy nồng độ cao trong ống tuyến, gây kích ứng hóa học và làm đặc quánh dịch nước bọt.",
+            "D. Sỏi tuyến nước bọt hai bên (Bilateral sialolithiasis); do rối loạn chuyển hóa canxi tồn dư sau tiêm thuốc cản quang."
+          ],
+          "answerStr": "C",
+          "explanation": "Khởi phát sưng đau nhiều tuyến nước bọt đột ngột sau 2 ngày dùng thuốc cản quang I-ốt, kèm theo dịch nước bọt trong, không mủ, không sốt là đặc điểm kinh điển của viêm tuyến do I-ốt. Cơ chế là do I-ốt được lọc qua thận và tích lũy nồng độ rất cao tại hệ thống ống tuyến nước bọt, gây kích ứng trực tiếp niêm mạc ống và làm đặc quánh dịch nước bọt, dẫn đến tắc nghẽn cơ học và ứ dịch gây đau. Không có dịch mủ, không sốt và các răng khỏe mạnh giúp loại trừ hoàn toàn nguyên nhân do vi khuẩn hay nhiễm trùng ổ răng.",
+          "isStarred": false,
+          "isHidden": false
+        }
+      ],
+      "date": "19/9/2026"
+    }
+  ],
+  "coverImage": ""
+}
