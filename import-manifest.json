@@ -1,0 +1,765 @@
+{
+  "quizzes": [
+    {
+      "id": 1790100058897,
+      "name": "Thi thử - Bloom 3-4",
+      "folder": "Thi Thử",
+      "questions": [
+        {
+          "question": "Một bệnh nhân nam 32 tuổi, tiền sử khỏe mạnh, được tiêm gây tê vùng thần kinh ổ răng dưới bằng 1,8 mL Lidocaine 2% phối hợp Epinephrine 1:100.000 để nhổ răng hàm lớn. Ngay sau khi hoàn thành mũi tiêm khoảng 1 phút, bệnh nhân báo có vị kim loại trong miệng, ù tai, nói khó và xuất hiện rung giật nhẹ các cơ vùng mặt. Sinh hiệu: Huyết áp 135/85 mmHg, nhịp tim 102 lần/phút. Khám không thấy mày đay, phát ban da hay khó thở. Tình trạng của bệnh nhân nhiều khả năng nhất là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Ngộ độc thuốc tê toàn thân (LAST)",
+            "B. Sốc phản vệ do thuốc tê",
+            "C. Ngất do phản xạ phế vị (Vasovagal syncope)",
+            "D. Phản ứng quá mẫn muộn nhóm IV"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Các triệu chứng thần kinh trung ương khởi phát sớm (vị kim loại, ù tai, rối loạn ngôn ngữ, co giật cơ) là dấu hiệu đặc trưng của ngộ độc thuốc tê toàn thân do thuốc vào mạch máu. Tình trạng này phân biệt với phản vệ nhờ sự vắng mặt của tổn thương da niêm (mày đay, ngứa) và hô hấp (co thắt phế quản), đồng thời phân biệt với ngất phế vị vốn có đặc điểm tụt huyết áp và mạch chậm.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Một bệnh nhân nữ 28 tuổi xuất hiện ngứa toàn thân, mày đay bùng phát, khó thở, thở rít và tụt huyết áp (80/50 mmHg) khoảng 3 phút sau khi tiêm gây tê Lidocaine để điều trị tủy răng. Bác sĩ xác định bệnh nhân đang bị sốc phản vệ độ III. Xử trí khẩn cấp ban đầu về liều lượng, nồng độ và vị trí tiêm Adrenaline (Epinephrine) chuẩn xác nhất cho bệnh nhân này là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Adrenaline 1:1.000 (1 mg/mL), liều 0,5 mg tiêm bắp sâu mặt ngoài giữa đùi",
+            "B. Adrenaline 1:10.000 (0,1 mg/mL), liều 0,5 mg tiêm tĩnh mạch chậm",
+            "C. Adrenaline 1:1.000 (1 mg/mL), liều 1,0 mg tiêm dưới da cơ delta",
+            "D. Adrenaline 1:10.000 (0,1 mg/mL), liều 0,1 mg tiêm bắp sâu vùng mông"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Adrenaline là lựa chọn hàng đầu xử trí sốc phản vệ, liều chuẩn người lớn là 0,5 mg dung dịch 1:1.000 (1 mg/mL). Vị trí ưu tiên duy nhất là tiêm bắp sâu mặt ngoài giữa đùi (cơ rộng ngoài) nhờ khả năng hấp thu nhanh và đạt nồng độ đỉnh trong máu cao hơn so với tiêm dưới da hoặc tiêm ở cơ delta.",
+          "isStarred": false,
+          "isHidden": false,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Một nam thanh niên 22 tuổi, tỏ ra rất lo âu, đột ngột than phiền chóng mặt, hoa mắt, nhìn mờ và tái nhợt ngay sau khi bác sĩ đâm kim tiêm gây tê. Bệnh nhân mất ý thức ngắn trong khoảng 15 giây. Khám sinh hiệu nhận thấy: Huyết áp 80/50 mmHg, nhịp tim 46 lần/phút (chậm), da vã mồ hôi lạnh, không có mày đay hay co thắt phế quản. Khi được đặt nằm đầu thấp, bệnh nhân nhanh chóng tỉnh lại hoàn toàn. Chẩn đoán phù hợp nhất cho trường hợp này là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Ngất do phản xạ phế vị (Vasovagal syncope)",
+            "B. Sốc phản vệ do thuốc tê",
+            "C. Ngộ độc thuốc tê toàn thân (LAST)",
+            "D. Cơn hạ đường huyết cấp"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Ngất phế vị xảy ra do tăng trương lực phó giao cảm dẫn đến giãn mạch và mạch chậm, làm giảm tưới máu não tạm thời nhưng phục hồi nhanh khi nằm đầu thấp. Tình trạng này phân biệt rõ với sốc phản vệ (thường gây nhịp tim nhanh kèm biểu hiện da niêm, hô hấp) và LAST (thường kích thích thần kinh trung ương gây co giật, vị kim loại).",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Một bệnh nhân nam 45 tuổi bị ngộ độc thuốc tê toàn thân (LAST) mức độ nặng với biểu hiện co giật liên tục và tụt huyết áp kéo dài sau khi tiêm Lidocaine. Sau khi đã đảm bảo thông khí và kiểm soát đường thở, bác sĩ quyết định cho chỉ định sử dụng nhũ dịch Lipid 20% (Intralipid 20%) để giải độc. Phác đồ liều khởi đầu và duy trì chuẩn xác nhất bằng nhũ dịch Lipid 20% trong trường hợp này là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Bolus tĩnh mạch 1,5 mL/kg trong 1 - 3 phút, sau đó duy trì truyền tĩnh mạch 0,25 mL/kg/phút",
+            "B. Truyền tĩnh mạch chậm 0,1 mL/kg trong 15 phút, không dùng liều bolus ban đầu",
+            "C. Bolus tĩnh mạch 10 mL/kg ngay lập tức, sau đó duy trì truyền tĩnh mạch 1,0 mL/kg/phút",
+            "D. Tiêm bắp sâu 5,0 mL/kg tại đùi, lặp lại sau mỗi 10 phút nếu chưa ổn định"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Phác đồ xử trí LAST chuẩn bằng nhũ dịch Lipid 20% bắt đầu bằng liều bolus tĩnh mạch 1,5 mL/kg trong 1-3 phút để nhanh chóng bẫy và làm giảm nồng độ thuốc tê tự do trong máu. Tiếp theo, duy trì truyền tĩnh mạch 0,25 mL/kg/phút cho đến khi sinh hiệu ổn định, giúp đảo ngược độc tính trên tim mạch và thần kinh.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Bệnh nhân nam 58 tuổi, tiền sử bệnh mạch vành, đang được sửa soạn cùi răng thì đột ngột xuất hiện đau đè ép dữ dội sau xương ức lan ra vai và hàm trái, kèm vã mồ hôi. Bác sĩ lập tức ngừng thủ thuật, cho bệnh nhân nghỉ ngơi và gọi cấp cứu. Huyết áp đo được 130/80 mmHg, SpO2 96%. Bác sĩ đã cho dùng 1 liều Nitroglycerin xịt dưới lưỡi nhưng sau 5 phút bệnh nhân vẫn còn đau ngực dữ dội. Xử trí dược lý tiếp theo phù hợp nhất theo quy trình cấp cứu ban đầu (MONA) tại phòng khám nha khoa là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Cho bệnh nhân nhai và nuốt 160 – 325 mg Aspirin (loại không bọc) và dùng liều Nitroglycerin thứ 2 dưới lưỡi",
+            "B. Tiêm tĩnh mạch ngay 4 mg Morphine sulfate và tiếp tục hoàn tất thủ thuật nha khoa",
+            "C. Cho uống 300 mg Clopidogrel kết hợp tiêm bắp 0,5 mg Adrenaline",
+            "D. Tăng liều Nitroglycerin gấp đôi và cho thở oxy dòng cao 10 L/phút qua mặt nạ"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Trong quy trình MONA tại nha khoa, việc cho nhai Aspirin (160–325 mg) giúp kháng tiểu cầu nhanh chóng, kết hợp lặp lại Nitroglycerin mỗi 5 phút (tối đa 3 liều nếu huyết áp tâm thu > 90 mmHg). Morphine chỉ sử dụng khi đau không đáp ứng Nitroglycerin do y tế chuyên khoa thực hiện, oxy chỉ chỉ định khi SpO2 < 94% hoặc có khó thở.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Bệnh nhân nam 65 tuổi đang được nhổ răng hàm dưới thì đột ngột than phiền đau đầu dữ dội vùng chẩm, hoa mắt và buồn nôn. Bác sĩ đo huyết áp ghi nhận 210/120 mmHg, nhịp tim 95 lần/phút. Bệnh nhân có tiền sử tăng huyết áp nhưng không uống thuốc đều đặn.",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Ngừng thủ thuật ngay lập tức, cho bệnh nhân ngồi nghỉ thoải mái, trấn an và gọi cấp cứu để chuyển viện khẩn cấp",
+            "B. Cho nhỏ dưới lưỡi viên Nifedipine tác dụng nhanh (10 mg) ngay tại ghế để hạ huyết áp khẩn cấp về mức bình thường",
+            "C. Đặt bệnh nhân nằm ngửa đầu thấp (tư thế Trendelenburg) để tăng tuần hoàn brain và hoàn tất nốt thủ thuật",
+            "D. Tiêm bắp Adrenaline 0,5 mg để hỗ trợ co mạch ngoại vi và ổn định nhịp tim"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Ngừng thủ thuật và đặt bệnh nhân ngồi nghỉ là bước xử trí bắt buộc khi xuất hiện tăng huyết áp kịch phát kèm triệu chứng cơ quan đích. Cho dùng thuốc hạ áp tác dụng nhanh tại phòng khám nha khoa bị chống chỉ định do nguy cơ tụt huyết áp đột ngột gây biến cố thiếu máu tim hoặc não. Bệnh nhân cần được chuyển y tế chuyên khoa khẩn cấp.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Một bệnh nhân nữ 22 tuổi có tiền sử hen suyễn đang trám răng thì đột ngột khó thở dữ dội, thở khò khè và tức ngực. Bác sĩ cho bệnh nhân ngồi thẳng và dùng thuốc xịt Salbutamol (Albuterol). Tuy nhiên sau 5 phút, tình trạng xấu đi: SpO2 giảm còn 88%, tím tái môi và nghe phổi mất hoàn toàn tiếng rì rào phế nang (\"phổi im lặng\"). Hành động cấp cứu tiếp theo phù hợp nhất trong lúc chờ xe cấp cứu là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Tiêm bắp Adrenaline (Epinephrine) 0,3 - 0,5 mg (dung dịch 1:1.000)",
+            "B. Xịt thêm 2 nhát Salbutamol và cho thở oxy liều thấp qua canula mũi",
+            "C. Mở khí quản qua màng nhẫn giáp (Cricothyroidotomy) ngay lập tức",
+            "D. Tiêm tĩnh mạch chậm 100 mg Hydrocortisone và tiếp tục theo dõi"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Dấu hiệu \"phổi im lặng\" (silent chest) và tím tái chứng tỏ cơn hen phế quản nguy kịch, co thắt đường thở quá mức nên không còn đáp ứng với thuốc xịt tại chỗ. Tiêm bắp Adrenaline là can thiệp cứu mạng nhờ tác dụng giãn phế quản mạnh mẽ qua thụ thể beta-2 toàn thân, vượt qua sự kháng thuốc xịt thông thường.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Trong quá trình gắn mão răng sứ cho một bệnh nhân nam 50 tuổi đang ngồi trên ghế nha khoa, mão răng vô tình bị tuột khỏi tay bác sĩ và rơi vào vùng hầu họng. Bệnh nhân đột ngột ôm lấy cổ (dấu hiệu mắc nghẹn toàn cầu), ho yếu ớt, không thể nói chuyện, tím tái và thở rít. Bệnh nhân vẫn còn tỉnh táo.",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Thực hiện ngay nghiệm pháp Heimlich (vòng tay quanh eo từ phía sau, ép mạnh vùng thượng vị theo hướng vào trong và lên trên)",
+            "B. Dùng ngón tay móc sâu vào hầu họng để tìm và lôi dị vật ra ngoài nhanh nhất có thể",
+            "C. Đặt bệnh nhân nằm ngửa phẳng trên ghế và lập tức vỗ mạnh 5 lần vào lưng giữa hai xương bả vai",
+            "D. Cho bệnh nhân uống liên tục một ly nước lớn để đẩy dị vật xuống đường tiêu hóa"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Đối với người lớn còn tỉnh bị tắc nghẽn đường thở hoàn toàn do dị vật, nghiệm pháp Heimlich là phương pháp chuẩn để tạo lực ép khoang bụng tống dị vật ra ngoài. Móc họng mù bị cấm do nguy cơ đẩy dị vật vào sâu hơn gây tắc nghẽn khí quản hoàn toàn. Cho uống nước gây rủi ro sặc nghiêm trọng, còn vỗ lưng ấn ngực ưu tiên dùng cho trẻ dưới 1 tuổi.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Một bệnh nhân nam 48 tuổi, không có tiền sử bệnh lý toàn thân, quay lại phòng khám sau nhổ răng hàm lớn hàm dưới 3 giờ vì ổ răng vẫn chảy máu liên tục. Sau khi bơm rửa sạch cục máu đông hình thành dở dang và kiểm tra thấy máu rỉ từ phần mô mềm nướu quanh ổ răng, biện pháp xử trí tại chỗ tiếp theo phù hợp và hiệu quả nhất là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Khâu ép khép mép vạt niêm mạc ổ răng kết hợp cho cắn gạc ép trực tiếp trong 30–45 phút",
+            "B. Cho bệnh nhân súc miệng liên tục bằng nước muối ấm để làm sạch ổ răng và co mạch",
+            "C. Tiêm tĩnh mạch 1g Tranexamic acid lập tức mà không cần thêm can thiệp cơ học",
+            "D. Kê đơn thuốc kháng sinh đường uống và cho bệnh nhân về nhà theo dõi"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Xử trí chảy máu mô mềm tại chỗ ưu tiên hàng đầu là làm sạch cục máu đông xốp, xác định vị trí chảy máu và thực hiện biện pháp cơ học như khâu ép mép vạt kết hợp cắn gạc. Súc miệng làm bong cục máu đông mới tạo, còn thuốc cầm máu toàn thân chỉ dùng khi các biện pháp tại chỗ thất bại hoặc ở bệnh nhân có rối loạn đông máu.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Bệnh nhân nam 62 tuổi, đang sử dụng Aspirin hàng ngày phòng ngừa biến cố tim mạch, thực hiện nhổ răng hàm lớn. Sau khi nhổ, dù đã cắn gạc chặt trong 45 phút, ổ răng vẫn rỉ máu liên tục từ các thành xương ổ. Kiểm tra không phát hiện rách mô mềm quanh ổ răng. Biện pháp cầm máu tại chỗ bổ sung phù hợp nhất lúc này là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Đặt gạc xốp gelatin/collagen tự tiêu (Spongel hoặc Surgicel) vào lòng ổ răng và khâu chữ X cố định",
+            "B. Bơm rửa lòng ổ răng bằng oxy già (H2O2) đậm đặc để kích thích đông máu",
+            "C. Nạo sâu vào vách xương ổ răng để tạo thương tổn mới cho máu dễ đông hơn",
+            "D. Cho bệnh nhân súc miệng bằng nước muối nóng để co mạch tại chỗ"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Khi chảy máu rỉ ra từ vách xương ổ răng mà cắn gạc không hiệu quả, chèn vật liệu cầm máu tự tiêu giúp tạo khung lưới sinh học cho huyết khối hình thành vững chắc. Mũi khâu chữ X giữ xốp cầm máu không bị di lệch và tạo lực ép cố định ổ răng, giúp kiểm soát hiệu quả tình trạng rỉ máu kéo dài.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Bệnh nhân nam 60 tuổi đang điều trị rung nhĩ bằng Warfarin (chỉ số INR đo trước thủ thuật là 2,4 - trong ngưỡng an toàn). Bác sĩ tiến hành nhổ răng hàm dưới và đã áp dụng các biện pháp cơ học tại chỗ như đặt xốp gạc tự tiêu và khâu ép mép vạt. Để hỗ trợ ngăn ngừa chảy máu rỉ kéo dài sau phẫu thuật mà không cần ngưng thuốc chống đông đường uống, chỉ định dược lý tại chỗ phù hợp nhất là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Cho bệnh nhân ngậm và súc miệng bằng dung dịch Tranexamic acid 4,8% ngay sau thủ thuật và duy trì vài ngày",
+            "B. Tiêm tĩnh mạch cấp cứu 1.000 mg Tranexamic acid phối hợp với tiêm Vitamin K toàn thân",
+            "C. Yêu cầu bệnh nhân ngừng hoàn toàn Warfarin trong 3 ngày tiếp theo sau khi nhổ răng",
+            "D. Kê đơn thuốc chống viêm gSteroid (NSAIDs) liều cao để hỗ trợ co mạch và giảm đau"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Súc miệng bằng dung dịch Tranexamic acid (chất ức chế tiêu sợi huyết) giúp củng cố và duy trì sự ổn định của cục máu đông tại chỗ rất hiệu quả ở bệnh nhân đang dùng thuốc chống đông. Liệu pháp tại chỗ này tránh được nguy cơ biến cố tắc mạch do ngừng Warfarin cũng như hạn chế tác dụng phụ so with dùng đường toàn thân.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Một bệnh nhân nam 55 tuổi có tiền sử đái tháo đường týp 2 đang điều trị bằng Insulin. Vì lo lắng nên bệnh nhân nhịn ăn sáng trước khi đến phòng khám nha khoa làm thủ thuật. Đang trên ghế nha khoa, bệnh nhân vã mồ hôi, run tay, sau đó lơ mơ và đột ngột mất ý thức, không phản ứng khi gọi hỏi.",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Gọi cấp cứu, đảm bảo thông thoáng đường thở và tiêm tĩnh mạch Glucose 50% (hoặc tiêm bắp 1 mg Glucagon)",
+            "B. Đổ từ từ nước đường đậm đặc hoặc nước trái cây vào miệng bệnh nhân để bù đường nhanh",
+            "C. Tiêm bắp Adrenaline 0,5 mg để kích thích nâng huyết áp và làm bệnh nhân tỉnh lại",
+            "D. Đặt viên đường cứng dưới lưỡi bệnh nhân và chờ đường tan hấp thu qua niêm mạc"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Khi bệnh nhân hạ đường huyết đã hôn mê hoặc mất ý thức, tuyệt đối không cho uống hoặc bơm bất kỳ dung dịch nào vào miệng do nguy cơ cao gây sặc vào đường thở. Xử trí bắt buộc là đảm bảo đường thở và bù đường đường toàn thân bằng tiêm tĩnh mạch Glucose ưu trương hoặc tiêm bắp Glucagon, đồng thời liên hệ hỗ trợ y tế khẩn cấp.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Bệnh nhân nữ 38 tuổi đến khám nha khoa để lấy cao răng sâu dưới nướu và nạo túi nha chu (có can thiệp gây chảy máu niêm mạc). Qua khai thác tiền sử tim mạch, trường hợp nào sau đây có chỉ định BẮT BUỘC sử dụng kháng sinh dự phòng viêm nội tâm mạc nhiễm trùng theo khuyến cáo của AHA/ACC?",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Bệnh nhân mang van tim nhân tạo cơ học",
+            "B. Bệnh nhân bị sa van hai lá có hở van nhẹ",
+            "C. Bệnh nhân có tiền sử bệnh van tim do thấp (thấp tim)",
+            "D. Bệnh nhân bị thông liên nhĩ đã được sửa chữa hoàn toàn bằng phẫu thuật cách đây 2 năm"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Kháng sinh dự phòng chỉ được chỉ định cho nhóm nguy cơ rất cao gồm: van tim nhân tạo (hoặc vật liệu nhân tạo sửa van), tiền sử viêm nội tâm mạc nhiễm trùng, bệnh tim bẩm sinh tím chưa sửa chữa hoặc mới sửa trong 6 tháng, và bệnh van tim sau ghép tim. Các tình trạng sa van hai lá, thấp tim hay thông liên nhĩ đã sửa hoàn toàn không còn chỉ định dùng kháng sinh dự phòng.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Một bệnh nhân nam 50 tuổi có tiền sử thay van tim nhân tạo, không có tiền sử dị ứng thuốc, chuẩn bị thực hiện phẫu thuật nhổ răng hàm dưới. Phác đồ kháng sinh dự phòng viêm nội tâm mạc nhiễm trùng chuẩn theo khuyến cáo AHA/ACC dành cho bệnh nhân này là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Uống Amoxicillin 2g trước thủ thuật 30 – 60 phút",
+            "B. Uống Amoxicillin 500mg, ngày 3 lần trong 5 ngày sau thủ thuật",
+            "C. Uống Clindamycin 600mg trước thủ thuật 30 – 60 phút",
+            "D. Tiêm tĩnh mạch Ampicillin 2g ngay sau khi hoàn thành thủ thuật"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Phác đồ chuẩn đầu tay theo AHA/ACC cho người lớn không dị ứng Penicillin là dùng một liều duy nhất Amoxicillin 2g đường uống trong khoảng 30 đến 60 phút trước khi can thiệp nha khoa. Việc dùng kháng sinh kéo dài sau thủ thuật không được khuyến cáo vì không gia tăng hiệu quả phòng ngừa và làm tăng nguy cơ kháng thuốc.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Một bệnh nhân nam 65 tuổi đang điều trị bằng Warfarin do mang van tim cơ học, chuẩn bị nhổ 1 răng hàm nhỏ bị lung lay. Bác sĩ xét nghiệm chỉ số INR trước thủ thuật. Ngưỡng INR an toàn cao nhất để có thể tiến hành nhổ răng ngay tại phòng khám nha khoa mà KHÔNG cần ngừng hoặc điều chỉnh liều Warfarin (kết hợp các biện pháp cầm máu tại chỗ) là bao nhiêu?",
+          "options": [
+            "A. INR =< 3,5",
+            "B. INR =< 1,5",
+            "C. INR =< 5,0",
+            "D. INR phải về 1,0 (mức bình thường)"
+          ],
+          "answerStr": "A",
+          "explanation": "Với các thủ thuật nha khoa nhỏ (nhổ 1 - 3 răng, phẫu thuật nha chu), ngưỡng INR an toàn để can thiệp mà không cần ngừng Warfarin là từ 2,0 đến 3,5. Ngừng Warfarin làm tăng nguy cơ biến cố tắc mạch do dội ngược cao hơn nhiều so với rủi ro chảy máu tại chỗ vốn hoàn toàn kiểm soát được bằng các biện pháp cơ học.",
+          "images": [],
+          "explanationImages": [],
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Bệnh nhân nam 68 tuổi đang điều trị bằng Rivaroxaban (thuốc chống đông thế hệ mới - NOAC/DOAC) 20 mg/ngày do rung nhĩ, đến phòng khám để nhổ 1 răng hàm nhỏ bị lung lay do nha chu (thủ thuật có nguy cơ chảy máu thấp). Xử trí đúng đắn nhất đối với việc sử dụng Rivaroxaban quanh thời điểm thủ thuật là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Tiếp tục dùng Rivaroxaban theo lịch (hoặc hoãn uống liều buổi sáng ngày làm thủ thuật), tiến hành nhổ răng và kết hợp các biện pháp cầm máu tại chỗ",
+            "B. Tạm ngừng Rivaroxaban 5 ngày trước thủ thuật và tiêm chuyển tiếp (bridging) bằng Heparin trọng lượng phân tử thấp",
+            "C. Yêu cầu bệnh nhân ngừng Rivaroxaban ít nhất 10 ngày để chức năng đông máu phục hồi hoàn toàn",
+            "D. Ngừng hẳn Rivaroxaban và thay thế bằng Aspirin 81 mg trước khi tiến hành can thiệp"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Đối với các thủ thuật nha khoa nguy cơ chảy máu thấp, khuyến cáo hiện hành không yêu cầu ngưng NOAC/DOAC do thời gian bán thải ngắn, hoặc chỉ cần hoãn liều uống buổi sáng vào ngày can thiệp. Việc ngưng thuốc nhiều ngày hoặc dùng Heparin chuyển tiếp bị chống chỉ định do làm tăng nguy cơ biến cố tắc mạch mà không mang lại lợi ích.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Một bệnh nhân nam 62 tuổi đặt stent phủ thuốc mạch vành cách đây 6 tháng, đang sử dụng liệu pháp chống kết tập tiểu cầu kép (DAPT) gồm Aspirin 81 mg/ngày và Clopidogrel 75 mg/ngày. Bệnh nhân đến khám để nhổ 1 răng hàm nhỏ bị hư hại nặng. Xử trí đúng đắn nhất đối với việc dùng thuốc chống kết tập tiểu cầu kép trước khi nhổ răng là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Tiếp tục duy trì cả Aspirin và Clopidogrel theo đúng liều lượng, tiến hành nhổ răng và kiểm soát chảy máu bằng các biện pháp tại chỗ",
+            "B. Tạm ngưng Clopidogrel 5 ngày trước thủ thuật nhưng tiếp tục dùng Aspirin để giảm nguy cơ chảy máu",
+            "C. Ngừng cả Aspirin và Clopidogrel từ 7 – 10 ngày trước khi nhổ răng để chức năng tiểu cầu phục hồi hoàn toàn",
+            "D. Ngừng thuốc chống kết tập tiểu cầu kép và tiêm chuyển tiếp bằng Heparin trọng lượng phân tử thấp"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Khuyến cáo hiện hành chỉ định tiếp tục liệu pháp chống kết tập tiểu cầu kép cho các thủ thuật nha khoa thông thường. Việc tự ý ngưng các thuốc này làm tăng đáng kể nguy cơ huyết khối gây tắc stent mạch vành hoặc nhồi máu cơ tim cấp, trong khi nguy cơ chảy máu tại chỗ hoàn toàn có thể kiểm soát hiệu quả bằng các biện pháp cơ học và xốp cầm máu.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Bệnh nhân nam 55 tuổi, tiền sử đái tháo đường týp 2, đến phòng khám nha khoa với mong muốn phẫu thuật cấy ghép Implant vùng răng hàm. Để đảm bảo tỷ lệ tích hợp xương tối ưu và giảm thiểu nguy cơ nhiễm trùng cũng như lành thương kém sau phẫu thuật, ngưỡng chỉ số HbA1c và đường huyết lúc đói được khuyến cáo an toàn nhất để tiến hành phẫu thuật là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. HbA1c < 7,0% và Glucose máu lúc đói < 180 mg/dL (10,0 mmol/L)",
+            "B. HbA1c trong khoảng 8,5% – 10,0% và Glucose máu lúc đói < 250 mg/dL",
+            "C. HbA1c > 10,0% miễn là Glucose máu thử tại chỗ trước phẫu thuật < 200 mg/dL",
+            "D. Chỉ cần Glucose máu lúc đói < 126 mg/dL, chỉ số HbA1c không có giá trị tiên lượng"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Kiểm soát đường huyết tốt với HbA1c dưới 7,0% (hoặc dưới 7,5%–8,0% tùy trường hợp) và glucose lúc đói dưới 180 mg/dL là tiêu chuẩn an toàn cho phẫu thuật Implant. Mức HbA1c kiểm soát kém làm suy giảm chức năng bạch cầu, gia tăng rủi ro nhiễm trùng, giảm tỷ lệ tích hợp xương và gây thất bại phẫu thuật.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Một bệnh nhân nữ 45 tuổi bị viêm khớp dạng thấp, đang sử dụng Prednisone 10 mg/ngày liên tục trong 2 năm qua. Bệnh nhân chuẩn bị nhổ 1 răng hàm lớn bị tổn thương nặng dưới gây tê tại chỗ (thủ thuật nha khoa thông thường). Xử trí đúng đắn nhất đối với liều Corticosteroid của bệnh nhân quanh thời điểm thủ thuật là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Cho bệnh nhân uống liều Prednisone hàng ngày bình thường vào buổi sáng ngày làm thủ thuật, không cần bổ sung thêm steroid",
+            "B. Tạm ngưng Prednisone 3 ngày trước khi nhổ răng để giảm nguy cơ nhiễm trùng và lành thương kém",
+            "C. Tiêm tĩnh mạch ngay 100 mg Hydrocortisone trước khi gây tê cho mọi bệnh nhân dùng steroid kéo dài",
+            "D. Tăng gấp ba liều Prednisone đường uống và duy trì kéo dài 7 ngày sau khi kết thúc thủ thuật"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Bệnh nhân dùng Corticosteroid kéo dài khi thực hiện các thủ thuật nha khoa thông thường dưới gây tê tại chỗ chỉ cần duy trì liều uống hàng ngày vào buổi sáng ngày can thiệp mà không cần bổ sung thêm steroid (liều stress). Việc tạm ngưng thuốc đột ngột bị chống chỉ định vì có thể khởi phát cơn suy tuyến thượng thận cấp nguy hiểm tính mạng.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Bệnh nhân nữ 35 tuổi, có tiền sử bệnh Graves (cường giáp) chưa được kiểm soát tốt (nhịp tim lúc nghỉ 105 lần/phút, run tay, sụt cân), đến khám vì đau răng cấp do viêm tủy. Bác sĩ quyết định tiến hành can thiệp gây tê tại chỗ. Lưu ý quan trọng nhất trong việc chọn lựa thuốc gây tê cho bệnh nhân này là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Tránh sử dụng thuốc gây tê có chứa chất co mạch Epinephrine (hoặc giới hạn tối đa 0,04 mg) do nguy cơ kích hoạt cơn bão giáp và biến cố tim mạch",
+            "B. Sử dụng thuốc tê phối hợp Epinephrine nồng độ cao (1:50.000) để đảm bảo giảm đau tuyệt đối và co mạch tối đa",
+            "C. Hoàn toàn chống chỉ định gây tê tại chỗ, bắt buộc phải nhập viện phẫu thuật dưới gây mê toàn thân",
+            "D. Thay thế Epinephrine bằng Levonordefrin vì chất co mạch này không tác động lên hệ tim mạch ở bệnh nhân cường giáp"
+          ],
+          "answerStr": "A",
+          "explanation": " Ở bệnh nhân cường giáp chưa kiểm soát, cơ tim nhạy cảm quá mức với Catecholamine ngoại sinh. Việc tiêm thuốc tê chứa chất co mạch làm tăng vọt nguy cơ loạn nhịp tim, tăng huyết áp kịch phát và kích hoạt cơn bão giáp cấp tính nguy hiểm tính mạng. Ưu tiên hàng đầu là dùng thuốc tê không co mạch (như Mepivacaine 3%) và kiểm soát đau thật tốt.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Bệnh nhân nam 50 tuổi có tiền sử bệnh Addison (suy tuyến thượng thận mãn tính) đang điều trị bù Hydrocortisone hàng ngày. Trong quá trình phẫu thuật nhổ răng khôn mọc lệch phức tạp và kéo dài, bệnh nhân đột ngột hoa mắt, vã mồ hôi lạnh, buồn nôn, mạch nhanh nhỏ và huyết áp tụt kịch phát xuống 70/40 mmHg. Bác sĩ chẩn đoán nghi ngờ bệnh nhân rơi vào cơn suy tuyến thượng thận cấp (Acute Adrenal Crisis).",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Đặt bệnh nhân nằm đầu thấp, thông thoáng đường thở, tiêm ngay 100 mg Hydrocortisone tĩnh mạch (hoặc tiêm bắp) và thiết lập đường truyền tĩnh mạch bằng NaCl 0,9%",
+            "B. Tiêm bắp Adrenaline 0,5 mg (1:1.000) để nâng huyết áp và kích thích nhịp tim",
+            "C. Cho bệnh nhân ngồi dậy và uống một ly nước đường đậm đặc để chống hạ đường huyết",
+            "D. Tiêm tĩnh mạch chậm 1g Tranexamic acid để chống co mạch và nâng huyết áp"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Cơn suy tuyến thượng thận cấp do thiếu hụt Glucocorticoid nghiêm trọng dưới tác động của stress phẫu thuật là một cấp cứu y khoa nguy hiểm tính mạng với biểu hiện trụy tim mạch và tụt huyết áp kịch phát. Liệu pháp cứu mạng bắt buộc là tiêm ngay 100 mg Hydrocortisone (hoặc Corticosteroid tương đương) đường tĩnh mạch/tiêm bắp phối hợp với hồi sức dịch truyền tĩnh mạch bù thể tích tuần hoàn.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Bệnh nhân nữ 62 tuổi bị ung thư vú di căn xương, đang điều trị bằng Zoledronic acid truyền tĩnh mạch định kỳ (4 mg/tháng). Bệnh nhân đến khám vì có một răng hàm lớn dưới bị lung lay độ 3, đau nhức nhiều và có chỉ định nhổ. Đánh giá nguy cơ hoại tử xương hàm liên quan đến thuốc (MRONJ) ở bệnh nhân này so với bệnh nhân đang dùng Alendronate đường uống điều trị loãng xương là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Nguy cơ MRONJ cao hơn rất nhiều (tăng hàng chục đến hàng trăm lần) do đường dùng tĩnh mạch và liều điều trị ung thư có tác dụng ức chế hủy xương mạnh, tích lũy kéo dài",
+            "B. Nguy cơ MRONJ tương đương nhau vì cả hai thuốc đều thuộc cùng nhóm Bisphosphonate",
+            "C. Nguy cơ MRONJ thấp hơn vì Zoledronic acid truyền tĩnh mạch được đào thải qua thận nhanh hơn thuốc đường uống",
+            "D. Bệnh nhân không có nguy cơ MRONJ vì MRONJ chỉ xảy ra ở những bệnh nhân có tiền sử xạ trị vùng đầu mặt cổ"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Tần suất xuất hiện MRONJ ở bệnh nhân ung thư dùng thuốc chống hủy xương liều cao (Zoledronic acid truyền tĩnh mạch hoặc Denosumab 120 mg/tháng) dao động từ 1% đến 15%. Mức nguy cơ này cao hơn đáng kể so với nhóm bệnh nhân dùng thuốc chống hủy xương đường uống điều trị loãng xương (< 0,1%). Do đó, mọi can thiệp xâm lấn ở bệnh nhân ung thư dùng thuốc chống hủy xương liều cao đều cần hết sức thận trọng.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Bệnh nhân nữ 68 tuổi đang sử dụng Alendronate đường uống 5 năm để điều trị loãng xương, cần nhổ 1 răng hàm lớn dưới bị nứt gãy không thể phục hồi. Để giảm thiểu tối đa nguy cơ bùng phát MRONJ quanh thời điểm nhổ răng, phác đồ dự phòng và kỹ thuật can thiệp phù hợp nhất là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Nhổ răng nhẹ nhàng ít chấn thương, làm nhẵn gờ xương, khâu kín vạt che phủ hoàn toàn ổ xương, kết hợp dùng kháng sinh dự phòng toàn thân và súc miệng Chlorhexidine 0,12%",
+            "B. Yêu cầu bệnh nhân tự ngưng Alendronate 6 tháng trước khi nhổ răng mà không cần hội chẩn với bác sĩ điều trị loãng xương",
+            "C. Nạo thật sâu vách xương ổ răng để kích thích chảy máu và để hở hoàn toàn niêm mạc cho ổ răng tự lành",
+            "D. Chống chỉ định tuyệt đối việc nhổ răng dưới mọi hình thức, chỉ được điều trị kháng sinh toàn thân kéo dài"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Nguyên tắc dự phòng MRONJ khi nhổ răng bao gồm: thao tác bảo tồn tối đa, mài nhẵn các gờ xương nhọn, khâu kín niêm mạc không để lộ xương ổ, kết hợp kháng sinh đường uống dự phòng bắt đầu trước thủ thuật (kéo dài đến khi lành niêm mạc) và súc miệng bằng dung dịch sát khuẩn Chlorhexidine. Việc dừng thuốc chống hủy xương đường uống cần cân nhắc giữa nguy cơ gãy xương và lợi ích nha khoa sau khi hội chẩn với bác sĩ nội tiết.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Bệnh nhân nam 55 tuổi chuẩn bị bước vào đợt xạ trị vùng đầu mặt cổ (liều chiếu xạ dự kiến > 60 Gy) do ung thư vòm họng. Khám nha khoa phát hiện 2 răng hàm nhỏ hàm dưới có tiên lượng rất kém (sâu răng phá hủy đến chóp, nha chu tiến triển). Quy trình chuẩn bị nha khoa đúng đắn nhất TRƯỚC KHI bệnh nhân bắt đầu xạ trị để ngăn ngừa hoại tử xương do xạ trị (ORN) là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Tiến hành nhổ bỏ các răng tiên lượng kém càng sớm càng tốt, đảm bảo thời gian lành thương niêm mạc ít nhất 14 – 21 ngày trước khi bắt đầu mũi chiếu xạ đầu tiên",
+            "B. Giữ lại tất cả các răng, trám tạm thời và chờ hoàn thành xong toàn bộ đợt xạ trị mới tiến hành nhổ răng",
+            "C. Nhổ các răng này ngay trong thời gian bệnh nhân đang tiến hành xạ trị để tận dụng tác dụng diệt khuẩn của tia xạ",
+            "D. Nhổ răng trước khi xạ trị 1 – 2 ngày vì niêm mạc miệng có khả năng tái tạo vô cùng nhanh chóng"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Để phòng ngừa hoại tử xương do xạ (ORN), tất cả các răng có tiên lượng kém hoặc nguy cơ nhiễm trùng cao phải được nhổ bỏ TRƯỚC KHI tiến hành xạ trị vùng đầu mặt cổ. Khoảng thời gian tối thiểu từ khi nhổ răng đến khi bắt đầu chiếu xạ là 14 – 21 ngày (lý tưởng là 3 tuần) nhằm đảm bảo niêm mạc lành hoàn toàn và xương bắt đầu tái cấu trúc trước khi mô bị giảm mạch máu và giảm tế bào do tia xạ.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Bệnh nhân nữ 26 tuổi, đang mang thai ở tuần thứ 18 (tam cá nguyệt thứ hai), đến khám vì đau nhức răng hàm dưới do viêm tủy cấp. Bệnh nhân rất lo lắng việc điều trị nha khoa sẽ ảnh hưởng xấu đến thai nhi và muốn hoãn toàn bộ can thiệp. Quyết định lâm sàng đúng đắn nhất của bác sĩ nha khoa là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Trấn an bệnh nhân và tiến hành điều trị tủy ngay vì tam cá nguyệt thứ hai là thời điểm an toàn nhất để thực hiện các thủ thuật nha khoa cần thiết",
+            "B. Bắt buộc hoãn toàn bộ can thiệp nha khoa đến sau khi sinh, chỉ kê đơn giảm đau Paracetamol",
+            "C. Chuyển điều trị sang tam cá nguyệt thứ ba vì đây là lúc thai nhi đã phát triển hoàn chỉnh và ít nhạy cảm nhất",
+            "D. Kê đơn kháng sinh NSAIDs kết hợp giảm đau Opioid để trì hoãn điều trị đến sau thai kỳ"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Tam cá nguyệt thứ hai (tuần 14 – 27) là khoảng thời gian an toàn nhất cho các can thiệp nha khoa vì giai đoạn tạo cơ quan ở tam cá nguyệt thứ nhất đã hoàn thành và kích thước tử cung chưa quá lớn gây hạ huyết áp tư thế nằm. Trì hoãn điều trị cấp tính có thể dẫn đến nhiễm trùng và đau kéo dài, gây nguy cơ sảy thai hoặc sinh non cao hơn bản thân thủ thuật nha khoa.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Một bệnh nhân nữ 28 tuổi, mang thai ở tuần thứ 22, cần được gây tê tại chỗ để điều trị nha khoa. Khi lựa chọn thuốc gây tê, bác sĩ cần NÊN TRÁNH sử dụng loại thuốc gây tê có chứa chất co mạch Felypressin (như Prilocaine phối hợp Felypressin) vì nguyên nhân nào sau đây?",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Felypressin có cấu trúc tương tự Oxytocin, có thể gây co thắt cơ trơn tử cung dẫn đến sảy thai hoặc sinh sớm",
+            "B. Felypressin gây giãn mạch hệ thống mạnh, dẫn đến tụt huyết áp kịch phát ở thai phụ",
+            "C. Felypressin gây độc trực tiếp lên hệ thần kinh trung ương và cơ tim của thai nhi qua hàng rào nhau thai",
+            "D. Felypressin làm ức chế trung khu hô hấp của mẹ, gây hạ oxy máu thai nhi"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Felypressin là một dẫn xuất của Vasopressin có đặc tính co mạch và kích thích co bóp cơ trơn tử cung tương tự Oxytocin, do đó chống chỉ định ở phụ nữ mang thai vì nguy cơ khởi phát chuyển dạ sớm. Thuốc gây tê lựa chọn an toàn hàng đầu cho thai phụ là Lidocaine 2% phối hợp Epinephrine 1:100.000 (được FDA xếp vào nhóm B an toàn trong thai kỳ).",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Bệnh nhân nữ 30 tuổi, mang thai ở tuần thứ 24, vừa được rạch dẫn lưu áp-xe nha chu. Bệnh nhân cần được kê đơn thuốc giảm đau và kháng sinh toàn thân hỗ trợ. Lựa chọn kê đơn thuốc nào sau đây an toàn nhất cho thai phụ (thuộc Nhóm B theo phân loại của FDA)?",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Paracetamol (Acetaminophen) phối hợp với Amoxicillin",
+            "B. Ibuprofen phối hợp với Tetracycline",
+            "C. Aspirin phối hợp với Doxycycline",
+            "D. Celecoxib phối hợp với Ciprofloxacin"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Paracetamol và Amoxicillin thuộc Nhóm B theo phân loại của FDA, được chứng minh là an toàn hàng đầu để giảm đau và chống nhiễm trùng trong thai kỳ. Các thuốc NSAIDs bị chống chỉ định đặc biệt ở 3 tháng cuối do nguy cơ đóng sớm ống động mạch thai nhi, còn Tetracycline/Doxycycline gây đổi màu răng vĩnh viễn và ảnh hưởng phát triển xương.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Bệnh nhân nữ 31 tuổi, mang thai ở tuần thứ 32, đang nằm ngửa trên ghế nha khoa để trám răng. Sau khoảng 15 phút, bệnh nhân đột ngột than phiền chóng mặt, hoa mắt, buồn nôn, da tái bệch, vã mồ hôi và huyết áp giảm đáng kể. Bác sĩ xác định bệnh nhân gặp hội chứng tụt huyết áp tư thế do chèn ép tĩnh mạch chủ dưới. Xử trí tư thế khẩn cấp đúng đắn nhất lúc này là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Cho bệnh nhân xoay nghiêng người sang bên trái (hoặc kê gối nhỏ dưới hông bên phải) để giải phóng tĩnh mạch chủ dưới",
+            "B. Đặt ghế ở tư thế Trendelenburg (đầu thấp chân cao) để dồn máu về tim và não",
+            "C. Cho bệnh nhân xoay nghiêng hẳn sang bên phải để giảm áp lực lên tĩnh mạch chủ",
+            "D. Giữ nguyên tư thế nằm ngửa và lập tức cho thở oxy liều cao qua mặt nạ"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Ở tam cá nguyệt thứ ba, tử cung kích thước lớn chèn ép tĩnh mạch chủ dưới khi nằm ngửa làm giảm lưu lượng máu tĩnh mạch trở về tim, gây tụt huyết áp đột ngột. Thay đổi tư thế nghiêng bệnh nhân sang bên trái từ 15–30 độ giúp giải phóng lực chèn ép, phục hồi tuần hoàn trở về và cải thiện nhanh chóng các triệu chứng.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Bệnh nhân nam 58 tuổi đến khám vì đau nhói đột ngột như điện giật vùng má và hàm trên bên phải. Cơn đau chỉ kéo dài vài giây đến nửa phút nhưng cực kỳ dữ dội, xuất hiện khi chải răng, rửa mặt hoặc chạm nhẹ vào vùng nhân trung. Bệnh nhân từng được chữa tủy răng 16 ở phòng khám khác nhưng cơn đau không giảm. Đặc điểm lâm sàng quan trọng nhất giúp chẩn đoán phân biệt đau thần kinh sinh ba (Trigeminal Neuralgia) với cơn đau do viêm tủy cấp là gì?",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Cơn đau khởi phát bởi kích thích nhẹ vào vùng điểm cò súng (trigger zone), kéo dài vài giây, có khoảng nghỉ hoàn toàn giữa các cơn và không giảm sau điều trị nha khoa",
+            "B. Cơn đau nhói liên tục kéo dài hàng giờ, lan rộng toàn bộ nửa mặt và tăng lên rõ rệt khi nằm nghỉ",
+            "C. Cơn đau tự phát về đêm, nhạy cảm kéo dài với kích thích nhiệt lạnh và gõ răng đau nhức",
+            "D. Cơn đau mơ hồ âm ỉ kèm theo sốt cao và sưng phồng niêm mạc ngách hành lang"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Đau thần kinh sinh ba đặc trưng bởi cơn đau nhói dạng điện giật/dao đâm xảy ra đột ngột trong thời gian rất ngắn (vài giây đến vài chục giây), bị kích hoạt bởi tác động cơ học nhẹ lên vùng điểm cò súng và có thời kỳ trơ hoàn toàn giữa các cơn. Trong khi đó, viêm tủy cấp gây đau kéo dài hơn, có phản ứng nhạy cảm rõ rệt với nhiệt độ và chấn thương gõ trên răng nguyên nhân.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Bệnh nhân nữ 35 tuổi đến khám vì các đợt đau nhói theo nhịp đập ở nửa mặt và vùng thái dương bên trái, kéo dài từ 12 đến 24 giờ mỗi đợt. Cơn đau thường kèm theo cảm giác buồn nôn, sợ ánh sáng và tiếng động. Khám lâm sàng nha khoa tỉ mỉ và phim X-quang không phát hiện bất kỳ tổn thương tủy hay quanh chóp nào ở các răng. Chẩn đoán lâm sàng phù hợp nhất là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Đau nửa đầu mạch máu (Migraine)",
+            "B. Viêm tủy cấp răng hàm lớn trên",
+            "C. Đau thần kinh sinh ba nhánh V2",
+            "D. Viêm khớp thái dương hàm cấp"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Đau nửa đầu mạch máu (Migraine) có đặc điểm đau nhói theo nhịp mạch đập, kéo dài nhiều giờ đến vài ngày, thường đi kèm triệu chứng toàn thân như buồn nôn, sợ ánh sáng và tiếng động. Việc thăm khám nha khoa cùng X-quang hoàn toàn bình thường giúp loại trừ các nguyên nhân đau do răng hay nha chu.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Bệnh nhân nam 42 tuổi xuất hiện cơn đau âm ỉ liên tục vùng má và hàm trên bên phải sau khi nhổ răng 16 năm ngày. Cơn đau tăng lên rõ rệt khi bệnh nhân cúi đầu về phía trước, kèm theo cảm giác nặng mặt, nghẹt mũi và chảy dịch có mùi hôi ở mũi bên phải. Khám thấy ấn đau vùng hố nanh bên phải, các răng lân cận không nhạy cảm gõ. Chẩn đoán nghĩ đến hàng đầu là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Viêm xoang hàm trên cấp tính (có thể liên quan tới biến chứng sau nhổ răng)",
+            "B. Đau thần kinh sinh ba nhánh V2",
+            "C. Viêm ổ răng khô (Dry socket) vùng răng 16",
+            "D. Hội chứng loạn năng khớp thái dương hàm (TMD)"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Cơn đau tăng lên khi thay đổi tư thế (cúi đầu) kết hợp với chảy dịch mũi hôi và nghẹt mũi một bên sau nhổ răng hàm lớn hàm trên là dấu hiệu đặc trưng của viêm xoang hàm trên cấp. Khác với viêm ổ răng khô đau khu trú tại huyệt ổ răng, viêm xoang gây đau lan tỏa vùng tầng giữa mặt và ấn đau rõ vùng hố nanh.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Bệnh nhân nam 65 tuổi đến khám vì cơn đau rát bỏng, âm ỉ kéo dài liên tục kèm những nhát đau nhói ở vùng da và niêm mạc má bên trái suốt 4 tháng qua. Tiền sử 5 tháng trước bệnh nhân từng bị nổi các mụn nước mọc thành chùm rải rác một bên mặt đã lành để lại sẹo nhẹ. Khám nha khoa không thấy tổn thương răng miệng. Chẩn đoán lâm sàng phù hợp nhất là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Đau thần kinh sau nhiễm Herpes Zoster (Post-herpetic neuralgia)",
+            "B. Đau thần kinh sinh ba nguyên phát (Trigeminal neuralgia)",
+            "C. Đau răng tự phát dai dẳng (Atypical odontalgia)",
+            "D. Viêm tủy mạn tính không hồi phục"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Đau thần kinh sau nhiễm Herpes Zoster đặc trưng bởi cơn đau rát bỏng, âm ỉ dai dẳng (kéo dài trên 3 tháng) tại khu vực phân bố thần kinh từng xuất hiện tổn thương mụn nước một bên mặt. Triệu chứng đau rát liên tục kèm dị cảm da giúp phân biệt rõ tình trạng này với đau thần kinh sinh ba nguyên phát hay đau do nguyên nhân từ răng.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Bệnh nhân nữ 48 tuổi đến khám vì cơn đau âm ỉ, rát bỏng liên tục tại vị trí nhổ răng 26 cách đây 1 năm. Bệnh nhân đã qua nhiều phòng khám, từng chữa tủy các răng lân cận nhưng cơn đau không thuyên giảm. Thăm khám lâm sàng, thử nhiệt, gõ và phim X-quang quanh chóp hoàn toàn bình thường, không ghi nhận tổn thương thực thể nào. Chẩn đoán phù hợp nhất cho trường hợp này là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Đau răng ảo / Đau răng không điển hình (Atypical Odontalgia / Persistent Idiopathic Facial Pain)",
+            "B. Nứt răng ngầm ở các răng lân cận",
+            "C. Viêm xương ổ răng mạn tính",
+            "D. Đau thần kinh sinh ba nhánh V2"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Đau răng ảo (Atypical Odontalgia) là một dạng đau thần kinh mạn tính đặc trưng bởi cảm giác đau âm ỉ, rát bỏng liên tục tại vị trí răng đã nhổ hoặc chữa tủy mà không tìm thấy tổn thương thực thể. Việc nhận diện đúng giúp tránh các can thiệp nha khoa xâm lấn lặp lại (nhổ răng, chữa tủy lại) do không mang lại hiệu quả điều trị.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Bệnh nhân nữ 28 tuổi đến khám vì đột ngột không thể há rộng miệng từ sáng nay (biên độ há miệng tối đa đạt 22 mm). Bệnh nhân có tiền sử tiếng \"click\" rõ ở khớp thái dương hàm bên phải khi há miệng trong 2 năm qua, nhưng từ sáng nay tiếng \"click\" biến mất hoàn toàn và hàm bị lệch sang bên phải khi cố há miệng. Chẩn đoán lâm sàng phù hợp nhất là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Dời đĩa đệm không hồi phục cấp tính khớp thái dương hàm bên phải",
+            "B. Dời đĩa đệm có hồi phục khớp thái dương hàm bên phải",
+            "C. Trật khớp thái dương hàm (dời lồi cầu ra trước gờ khớp)",
+            "D. Viêm thoái hóa khớp thái dương hàm"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Sự biến mất đột ngột của tiếng click kèm theo giới hạn biên độ há miệng nghiêm trọng (< 35 mm) và lệch đường há hàm về phía bên tổn thương là dấu hiệu điển hình của dời đĩa đệm không hồi phục. Đĩa đệm bị lệch ra trước chèn ép lồi cầu, ngăn cản lồi cầu trượt ra trước.\n",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Bệnh nhân nam 32 tuổi đến khám vì đau âm ỉ liên tục vùng góc hàm và vùng thái dương hai bên, đau tăng lên vào buổi sáng khi ngủ dậy và khi ăn thức ăn dai. Thăm khám lâm sàng ghi nhận ấn đau rõ tại điểm cò súng ở cơ cắn và cơ thái dương, đau lan nhẹ ra vùng xung quanh. Biên độ há miệng đạt 42 mm, không có tiếng kêu khớp và lồi cầu trượt hài hòa. Chẩn đoán lâm sàng phù hợp nhất là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Đau cân cơ (Myofascial pain) vùng đầu mặt",
+            "B. Viêm bao khớp thái dương hàm",
+            "C. Dời đĩa đệm có hồi phục",
+            "D. Đau thần kinh sinh ba nhánh V3"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Cơn đau âm ỉ liên tục xuất hiện khi ấn vào các điểm cò súng trên cơ cắn và cơ thái dương, kết hợp biên độ há miệng bình thường và không có tổn thương/tiếng kêu tại khớp là đặc trưng của đau cân cơ. Tình trạng này thường liên quan đến tật nghiến răng hoặc gồng siết cơ hàm.\n",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Bệnh nhân nữ 25 tuổi được chẩn đoán rối loạn khớp thái dương hàm dạng đau cân cơ kết hợp dời đĩa đệm có hồi phục giai đoạn sớm. Bệnh nhân rất lo lắng và đề nghị phẫu thuật khớp hoặc mài chỉnh khớp cắn toàn bộ. Phác đồ xử trí ban đầu đúng đắn nhất theo khuyến cáo lâm sàng là:",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Ưu tiên áp dụng phác đồ điều trị bảo tồn không xâm lấn bao gồm làm máng nhai thư giãn, chườm ấm, bài tập vận động cơ hàm nhẹ nhàng và dùng NSAIDs/thuốc giãn cơ ngắn hạn",
+            "B. Tiến hành phẫu thuật nội soi rửa khớp ngay để đưa đĩa đệm về vị trí giải phẫu ban đầu",
+            "C. Chỉnh hình răng mặt hoặc mài chỉnh khớp cắn toàn bộ ngay lập tức để tái tạo khớp cắn trung tâm",
+            "D. Tiêm Corticosteroid trực tiếp vào ổ khớp thái dương hàm định kỳ 3 lần/tuần"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Hầu hết các trường hợp rối loạn khớp thái dương hàm ban đầu đều đáp ứng tốt với điều trị bảo tồn không xâm lấn. Các can thiệp xâm lấn như phẫu thuật, tiêm khớp hoặc mài chỉnh khớp cắn diện rộng chỉ được xem xét khi điều trị bảo tồn thất bại sau một thời gian theo dõi.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Bệnh nhân nữ 22 tuổi đến khám vì có tiếng kêu ở khớp thái dương hàm bên trái mỗi khi há miệng to và khi nhai. Khám lâm sàng ghi nhận biên độ há miệng bình thường (45 mm), đường há miệng lệch nhẹ sang bên trái ở giữa hành trình nhưng trở lại đường giữa khi há tối đa. Bác sĩ phát hiện tiếng \"click\" xuất hiện ở nửa đầu hành trình há miệng và một tiếng \"click\" nhẹ hơn xuất hiện ngay trước khi hai hàm khép lại hoàn toàn. Dấu hiệu lâm sàng đặc trưng nhất giúp xác định chẩn đoán dời đĩa đệm có hồi phục ở bệnh nhân này là gì?",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Tiếng \"click\" đôi (reciprocal click) xuất hiện lúc há miệng và ngay trước khi đóng miệng hoàn toàn",
+            "B. Tiếng lạo xạo (crepitus) liên tục như tiếng cát mịn cọ xát trong suốt hành trình há miệng",
+            "C. Biên độ há miệng bị giới hạn nghiêm trọng dưới 25 mm kèm lệch hàm cố định sang bên lành",
+            "D. Cơn đau nhói dữ dội như điện giật lan dọc theo phân nhánh V3 của thần kinh sinh ba"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Tiếng \"click\" đôi (reciprocal click) xảy ra khi lồi cầu trượt qua bờ sau đĩa đệm dời ra trước để tái lập vị trí giải phẫu lúc há miệng và trượt khỏi đĩa đệm lần nữa lúc gần đóng miệng hoàn toàn. Đây là dấu hiệu lâm sàng điển hình giúp xác định dời đĩa đệm có hồi phục.\n",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Bệnh nhân nữ 58 tuổi đến khám vì đau âm ỉ vùng khớp thái dương hàm bên phải tăng lên khi nhai thức ăn cứng. Khám lâm sàng thấy biên độ há miệng 36 mm, khi di động hàm ghi nhận âm thanh cọ xát khô nhám kéo dài liên tục. Phim CBCT khớp thái dương hàm ghi nhận hình ảnh phẳng bề mặt lồi cầu, xơ hóa xương dưới sụn và có sự xuất hiện của gai xương (osteophyte). Âm thanh khớp và hình ảnh X-quang/CBCT điển hình nhất hỗ trợ chẩn đoán thoái hóa khớp thái dương hàm ở bệnh nhân này là gì?",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Tiếng lạo xạo (crepitus) cọ xát liên tục kết hợp hình ảnh tiêu xương, phẳng lồi cầu hoặc gai xương",
+            "B. Tiếng \"click\" đơn độc đầu thì há miệng và hình ảnh lồi cầu có cấu trúc giải phẫu hoàn toàn bình thường",
+            "C. Âm thanh bật rống to ở cuối thì há và lồi cầu trượt ra trước gờ khớp hoàn toàn",
+            "D. Khớp hoàn toàn không có âm thanh nhưng lồi cầu bị dính cứng hoàn toàn vào hố thái dương"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Tiếng lạo xạo (crepitus) phản ánh sự cọ xát trực tiếp giữa các bề mặt xương bị bào mòn do suy giảm hoặc rách đĩa đệm. Kết hợp hình ảnh CBCT ghi nhận tiêu xương, phẳng lồi cầu hay xơ xương dưới sụn là tiêu chuẩn chẩn đoán thoái hóa khớp thái dương hàm.\n",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Bệnh nhân nam 30 tuổi được chẩn đoán đau cân cơ vùng mặt kết hợp tật nghiến răng đêm (bruxism). Bác sĩ quyết định chỉ định điều trị bằng máng nhai thư giãn phẳng (stabilization splint) đeo vào ban đêm. Tác dụng sinh học chính của máng nhai thư giãn phẳng trong phác đồ điều trị ban đầu tình trạng này là gì?",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Giảm co thắt cơ nâng hàm, phân bổ đồng đều lực nhai và bảo vệ mô răng khỏi sự mài mòn",
+            "B. Dịch chuyển vĩnh viễn vị trí lồi cầu về phía sau để cố định đĩa đệm vào hố khớp",
+            "C. Mài chỉnh làm thay đổi hoàn toàn và vĩnh viễn hình thái răng để điều trị dứt điểm",
+            "D. Kích thích tăng sinh sụn khớp mới để phục hồi hoàn toàn đĩa đệm bị thoái hóa"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Máng nhai thư giãn phẳng giúp giải tỏa cản trở khớp cắn, giảm hoạt động co thắt của nhóm cơ nâng hàm và phân bổ lực nhai đồng đều. Tác dụng chính của thiết bị này là bảo vệ mô răng và giảm tải áp lực cho hệ thống cơ - khớp thái dương hàm.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Bệnh nhân nữ 24 tuổi đến cấp cứu trong tình trạng miệng há to không thể khép lại được sau khi ngáp lớn. Khám lâm sàng thấy khớp cắn hở toàn bộ vùng răng trước, nước bọt chảy tự do, sờ thấy hố khớp thái dương hàm hai bên trống rỗng và lồi cầu nhô rõ phía trước gờ khớp. Phim X-quang Panorama xác định hai lồi cầu đã vượt qua đỉnh gờ khớp về phía trước. Biểu hiện lâm sàng và X-quang này đặc trưng cho chẩn đoán nào?",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Trật khớp thái dương hàm ra trước cấp tính",
+            "B. Dời đĩa đệm không hồi phục cấp tính",
+            "C. Trật khớp thái dương hàm sang bên",
+            "D. Gãy cổ lồi cầu hai bên do chấn thương"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Trật khớp thái dương hàm ra trước cấp tính xảy ra khi lồi cầu trượt vượt qua đỉnh gờ khớp ra trước và bị kẹt ở hố dưới thái dương do sự co thắt của các cơ nâng hàm. Tình trạng này khiến bệnh nhân không thể tự khép miệng, gây hở khớp cắn vùng răng trước và sờ thấy hố khớp trống rỗng.\n",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Bác sĩ tiến hành nắn chỉnh trật khớp thái dương hàm ra trước cấp tính bằng thủ thuật Nelaton. Bác sĩ bọc gạc hai ngón tay cái, đặt lên mặt nhai các răng hàm lớn hàm dưới hai bên và các ngón còn lại ôm lấy bờ dưới xương hàm dưới. Hướng tác động lực đúng quy trình kỹ thuật Nelaton để đưa lồi cầu trở lại hố khớp là gì?",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Ấn xương hàm dưới xuống dưới, đẩy ra sau, rồi đưa lên trên để đưa lồi cầu qua đỉnh gờ khớp về hố khớp",
+            "B. Đẩy mạnh xương hàm dưới trực tiếp từ sau ra trước rồi nhấc lên trên",
+            "C. Kéo xương hàm dưới sang bên bị trật rồi đẩy mạnh lên trên vào hố khớp",
+            "D. Ấn mạnh cằm trực tiếp lên trên và ra sau mà không cần hạ thấp xương hàm dưới"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Kỹ thuật Nelaton yêu cầu ấn xương hàm dưới xuống dưới để thắng lực co thắt của cơ nâng hàm và giải phóng lồi cầu khỏi vị trí trước gờ khớp, sau đó đẩy ra sau và đưa lên trên để hướng lồi cầu trượt trở lại vào hố khớp.\n",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Sau khi nắn chỉnh thành công trật khớp thái dương hàm ra trước cấp tính cho bệnh nhân, hướng dẫn chăm sóc và bất động khớp đúng đắn nhất để phòng ngừa tái phát trong 2 – 3 tuần đầu là gì?",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Hạn chế biên độ há miệng (không quá 1,5 – 2 cm), ăn thức ăn mềm, đỡ cằm khi ngáp và có thể dùng băng chéo cằm (Barton) hỗ trợ",
+            "B. Yêu cầu bệnh nhân há miệng tối đa liên tục mỗi ngày để luyện tập phục hồi chức năng dẻo dai của dây chằng",
+            "C. Bắt buộc cố định hai hàm bằng dây thép (Intermaxillary Fixation) kéo dài ít nhất 6 tuần",
+            "D. Cho bệnh nhân nhai thức ăn cứng ngay để kích thích tái cấu trúc xương lồi cầu và hố khớp"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Sau nắn chỉnh, bao khớp và dây chằng xung quanh bị giãn rộng nên rất dễ tái phát. Bệnh nhân cần hạn chế há miệng rộng (dưới 2 cm), ăn thức ăn mềm trong 2 – 3 tuần và hỗ trợ giữ cằm khi ngáp/ho để mô liên kết có thời gian hồi phục hoàn toàn.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Mở tủy giảm đau và điều trị tủy răng 36 (GĐ khẩn cấp) → Lấy cao răng, xử lý túi nha chu và trám các răng sâu (GĐ kiểm soát) → Chỉnh nha dựng trục răng xô lệch, cấy ghép Implant răng 46 (GĐ phục hồi) → Khám định kỳ mỗi 6 tháng (GĐ duy trì)",
+            "B. Lấy cao răng toàn miệng trước → Trám các răng sâu → Cấy ghép Implant răng 46 → Điều trị tủy răng 36 sau khi hoàn thành phục hình",
+            "C. Cấy ghép Implant răng 46 ngay để phục hồi sức nhai → Điều trị tủy răng 36 → Trám các răng sâu → Lấy cao răng toàn miệng",
+            "D. Chỉnh nha dựng trục các răng xô lệch trước → Trám các răng sâu → Điều trị tủy răng 36 → Tái khám duy trì định kỳ"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Trật tự chuẩn trong kế hoạch điều trị tích hợp bắt buộc đi theo 4 giai đoạn: 1. Khẩn cấp (loại bỏ đau cấp/nhiễm trùng) → 2. Kiểm soát bệnh (loại bỏ nguyên nhân nha chu, sâu răng, tủy) → 3. Phục hồi chức năng & thẩm mỹ (chỉnh nha, phục hình, Implant) → 4. Duy trì. Can thiệp phục hồi hoặc chỉnh nha khi chưa kiểm soát được vi khuẩn nha chu và sâu răng sẽ dẫn đến thất bại điều trị.\n",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Bệnh nhân nữ 50 tuổi đã hoàn thành giai đoạn cấp cứu xử lý viêm lợi trùm răng khôn. Bệnh nhân có viêm nha chu mạn tính tiến triển toàn miệng (túi nha chu 5 – 6 mm, chảy máu khi thăm khám), nhiều sâu răng ngà chưa trám và mất răng 16, 26 có chỉ định làm phục hình cố định trên Implant. Tiêu chuẩn bắt buộc phải đạt được ở cuối Giai đoạn kiểm soát bệnh trước khi quyết định chuyển sang Giai đoạn phục hồi và chức năng là gì?",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Kiểm soát hoàn toàn tình trạng viêm nha chu (chỉ số chảy máu BOP < 10%, không còn túi nha chu hoạt động) và điều trị dứt điểm tất cả tổn thương sâu răng/tủy",
+            "B. Tiến hành phẫu thuật cấy ghép Implant 16, 26 ngay lập tức song song với việc điều trị túi nha chu",
+            "C. Làm cầu răng sứ cố định trước để ổn định khớp cắn, sau đó mới cạo vôi răng và xử lý gốc răng",
+            "D. Chuyển ngay sang giai đoạn phục hình nếu bệnh nhân không còn cảm giác đau nhức trên lâm sàng"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Điều kiện tiên quyết để chuyển từ Giai đoạn kiểm soát bệnh sang Giai đoạn phục hồi (Implant, phục hình cố định) là mô nha chu phải hoàn toàn lành thương, sạch vi khuẩn và không còn tình trạng viêm hoạt động. Đặt Implant hoặc làm phục hình trên một nền mô nha chu đang viêm nhiễm sẽ làm tăng nguy cơ thất bại tích hợp xương và gây viêm quanh Implant (peri-implantitis).",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Bệnh nhân nam 60 tuổi đến thăm khám với mong muốn làm cầu răng cố định và cấy ghép Implant toàn miệng do mất nhiều răng. Khám lâm sàng và X-quang phát hiện viêm nha chu mạn tính tiến triển nặng, túi nha chu sâu 6–8 mm, tụt lợi toàn bộ, kèm theo răng 21 bị tổn thương quanh chóp kích thước lớn chưa điều trị tủy. Thứ tự ưu tiên xử trí đúng đắn nhất trong kế hoạch điều trị tích hợp cho bệnh nhân này là gì?",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Khởi động điều trị nha chu không phẫu thuật (SRP) và điều trị tủy răng 21 (GĐ kiểm soát) trước khi đánh giá lại để cấy ghép Implant và làm phục hình (GĐ phục hồi)",
+            "B. Tiến hành cấy ghép Implant và mài răng làm cầu tạm ngay lập tức để cải thiện chức năng ăn nhai cho bệnh nhân",
+            "C. Nhổ toàn bộ các răng lung lay, cấy Implant tức thì và kê đơn kháng sinh toàn thân kéo dài",
+            "D. Chuyển bệnh nhân sang Giai đoạn duy trì định kỳ 3 tháng/lần cho đến khi túi nha chu tự co hồi rồi mới điều trị"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Các tổn thương tủy và bệnh lý nha chu hoạt động phải được kiểm soát triệt để trong Giai đoạn kiểm soát bệnh. Việc thực hiện phục hình hay cấy ghép Implant (Giai đoạn phục hồi) khi nền mô nha chu còn viêm nhiễm sẽ dẫn đến nguy cơ thất bại tích hợp xương và viêm quanh Implant rất cao.\n",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Bệnh nhân nữ 42 tuổi đã hoàn thành toàn bộ phẫu thuật cấy ghép Implant và phục hình sứ thẩm mỹ vùng răng trước (Giai đoạn III - Phục hồi). Bệnh nhân được chuyển sang Giai đoạn IV (Duy trì định kỳ). Mục tiêu chính và quy trình xử trí đúng đắn nhất trong Giai đoạn duy trì này là gì?",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Thăm khám định kỳ 3–6 tháng/lần để kiểm tra chỉ số nha chu, vệ sinh răng miệng chuyên sâu, kiểm tra khớp cắn phục hình và chuyển về Giai đoạn II (Kiểm soát) nếu xuất hiện bệnh lý mới",
+            "B. Chỉ yêu cầu bệnh nhân tái khám khi xuất hiện triệu chứng đau nhức hoặc súc vỡ phục hình sứ",
+            "C. Tiếp tục kê đơn kháng sinh dự phòng toàn thân kéo dài để ngăn ngừa vi khuẩn tái phát triển",
+            "D. Mài chỉnh lại toàn bộ khớp cắn và chụp X-quang toàn cảnh Panorama ở mỗi lần tái khám định kỳ"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Giai đoạn duy trì định kỳ nhằm duy trì kết quả điều trị, phát hiện sớm các biến chứng hoặc tái phát viêm nha chu/viêm quanh Implant qua thăm khám mỗi 3–6 tháng. Nếu phát hiện tái phát hay tổn thương mới, bệnh nhân cần được đưa trở lại Giai đoạn II (Kiểm soát bệnh) để xử lý triệt để.",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Bệnh nhân nữ 58 tuổi, có tiền sử Hội chứng Sjögren, đến khám vì chứng khô miệng nghiêm trọng kéo dài, gây khó nuốt, rát niêm mạc và xuất hiện nhiều tổn thương sâu răng vùng cổ răng. Khám ghi nhận các tuyến nước bọt chính vẫn còn một phần chức năng hoạt động. Phác đồ điều trị toàn thân bằng thuốc được lựa chọn hàng đầu để kích thích tăng tiết nước bọt nội sinh cho bệnh nhân này là gì?",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Sử dụng chất chủ vận Cholinergic (như Pilocarpine hoặc Cevimeline)",
+            "B. Sử dụng chất đối kháng Cholinergic (như Atropine hoặc Scopolamine)",
+            "C. Tiêm Corticosteroid toàn thân liều cao kéo dài",
+            "D. Kê đơn thuốc chống dị ứng Antihistamine thế hệ thứ hai"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Pilocarpine và Cevimeline là các chất chủ vận thụ thể Muscarinic Cholinergic giúp kích thích các tế bào tuyến nước bọt còn chức năng tăng tiết nước bọt tự nhiên. Nhóm thuốc đối kháng Cholinergic hay Antihistamine có tác dụng phụ làm trầm trọng thêm tình trạng khô miệng.\n",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Bệnh nhân nam 35 tuổi đến khám vì hôi miệng (halitosis) dai dẳng. Tiền sử tai mũi họng và tiêu hóa hoàn toàn bình thường. Thăm khám khoang miệng ghi nhận lớp mảng bám rêu lưỡi rất dày ở 1/3 sau lưng lưỡi và các túi nha chu sâu 5–6 mm. Nguyên nhân chính sản sinh các hợp chất lưu huỳnh dễ bay hơi (VSC) gây hôi miệng ở bệnh nhân này và biện pháp xử trí căn nguyên hàng đầu là gì?",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Sự phân hủy vi khuẩn yếm khí tại rêu lưỡi và túi nha chu; xử trí bằng vệ sinh rêu lưỡi cơ học kết hợp điều trị nha chu",
+            "B. Trào ngược axit dịch vị dạ dày; xử trí bằng thuốc ức chế bơm proton (PPI)",
+            "C. Dịch mủ viêm từ xoang hàm trên chảy xuống họng; xử trí bằng kháng sinh toàn thân",
+            "D. Giảm tiết nước bọt sinh lý; xử trí bằng cách uống nhiều nước và dùng kẹo cao su chứa đường"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Hơn 85–90% trường hợp hôi miệng bắt nguồn từ khoang miệng do vi khuẩn yếm khí gram âm phân hủy hợp chất chứa lưu huỳnh trên rêu lưỡi và trong túi nha chu. Xử trí triệt để yêu cầu làm sạch rêu lưỡi cơ học hàng ngày kết hợp lấy cao răng và xử lý mặt gốc răng (SRP).",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": " Bệnh nhân nam 65 tuổi sau đợt xạ trị vùng đầu mặt cổ (liều > 60 Gy) do ung thư vòm họng xuất hiện chứng khô miệng nặng, niêm mạc khô ráp, mất vị giác và các tuyến nước bọt chính tổn thương xơ hóa hoàn toàn không còn khả năng hồi phục. Khi các thuốc kích thích tiết nước bọt (như Pilocarpine) không còn hiệu quả do tuyến nước bọt đã mất chức năng, phác đồ điều trị hỗ trợ tại chỗ phù hợp nhất để giảm triệu chứng và ngăn ngừa sâu răng phát triển nhanh (radiation caries) là gì?",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Sử dụng dung dịch nước bọt nhân tạo/chất bôi trơn niêm mạc kết hợp máng chứa Gel Fluoride nồng độ cao (NaF 1,1%) đeo hàng ngày",
+            "B. Tăng liều Pilocarpine lên gấp ba lần đường uống kéo dài 6 tháng",
+            "C. Tiêm Corticosteroid trực tiếp vào các tuyến nước bọt chính để khôi phục chức năng",
+            "D. Ngưng toàn bộ việc vệ sinh răng miệng bằng kem đánh răng có chứa Fluoride để tránh kích ứng niêm mạc"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Khi các nang tuyến nước bọt bị tổn thương xơ hóa do tia xạ, thuốc kích thích tiết nước bọt không còn tác dụng. Phác đồ bắt buộc là thay thế bằng nước bọt nhân tạo để làm dịu niêm mạc kết hợp ứng dụng Fluoride nồng độ cao tại chỗ để ngăn ngừa biến cố sâu răng do xạ trị (radiation caries).\n",
+          "isStarred": false,
+          "isHidden": false
+        },
+        {
+          "question": "Bệnh nhân nữ 40 tuổi đến khám vì hôi miệng kéo dài. Thăm khám nha khoa toàn diện ghi nhận vệ sinh răng miệng rất tốt, chỉ số chảy máu nướu BOP < 5%, không có túi nha chu sâu hay rêu lưỡi. Tuy nhiên, bệnh nhân thường xuyên bị ợ chua, nóng rát vùng sau xương ức tăng lên khi nằm ngửa và hơi thở có mùi chua nhẹ. Bác sĩ xác định nguyên nhân hôi miệng xuất phát từ ngoài khoang miệng. Hướng xử trí đúng đắn nhất đối với trường hợp này là gì?",
+          "images": [],
+          "explanationImages": [],
+          "options": [
+            "A. Chuyển khám chuyên khoa Tiêu hóa để điều trị hội chứng trào ngược dạ dày thực quản (GERD)",
+            "B. Kê đơn nước súc miệng Chlorhexidine 0,12% dùng liên tục kéo dài 6 tháng",
+            "C. Tiến hành nạo túi nha chu và xử lý mặt gốc răng toàn miệng",
+            "D. Yêu cầu bệnh nhân nhổ bỏ các răng hàm lớn có nguy cơ tích tụ thức ăn"
+          ],
+          "answerStr": "A",
+          "explanation": "\n Khi thăm khám khoang miệng hoàn toàn bình thường, nguyên nhân hôi miệng ngoài khoang miệng phải được xem xét (trào ngược dạ dày thực quản, viêm xoang mạn, bệnh lý chuyển hóa). Việc nhận diện triệu chứng trào ngược và chuyển khám đúng chuyên khoa Tiêu hóa giúp điều trị triệt để căn nguyên thay vì can thiệp nha khoa không cần thiết.",
+          "isStarred": false,
+          "isHidden": false
+        }
+      ],
+      "date": "23/9/2026",
+      "isExam": true
+    }
+  ],
+  "coverImage": ""
+}
