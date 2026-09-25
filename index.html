@@ -1720,7 +1720,7 @@
 
                 card.innerHTML = `
                     <div class="w-full aspect-square flex items-center justify-center p-2 mb-1.5 relative">
-                        <img src="${EMBLEM_FOLDER}/e_${id}.png" alt="Huy hiệu #${id}" class="max-w-full max-h-full object-contain ${isUnlocked ? 'filter drop-shadow' : 'filter grayscale contrast-50 blur-[1px]'}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'48\\' height=\\'48\\' fill=\\'%2394a3b8\\'><text x=\\'50%\\' y=\\'55%\\' dominant-baseline=\\'middle\\' text-anchor=\\'middle\\' font-size=\\'24\\'>🎖️</text></svg>'">
+                        <img src="${EMBLEM_FOLDER}/e_${id}.png" alt="Huy hiệu #${id}" class="max-w-full max-h-full object-contain ${isUnlocked ? 'filter drop-shadow' : 'filter grayscale contrast-50 blur-[5px]'}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'48\\' height=\\'48\\' fill=\\'%2394a3b8\\'><text x=\\'50%\\' y=\\'55%\\' dominant-baseline=\\'middle\\' text-anchor=\\'middle\\' font-size=\\'24\\'>🎖️</text></svg>'">
                         ${!isUnlocked ? '<span class="absolute text-xl">🔒</span>' : ''}
                         ${isSelected ? '<span class="absolute top-0 right-0 bg-amber-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold shadow">✓</span>' : ''}
                     </div>
