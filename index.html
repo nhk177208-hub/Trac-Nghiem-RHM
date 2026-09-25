@@ -119,7 +119,7 @@
         </div>
     </div>
 
-    <!-- POPUP NHẬN NGÔI SAO HY VỌNG (TỈ LỆ 5%) (2s) -->
+    <!-- POPUP NHẬN NGÔI SAO HY VỌNG (TỈ LỆ 10%) (2s) -->
     <div id="star-drop-popup" class="fixed inset-0 pointer-events-none z-[100] flex items-center justify-center hidden">
         <div class="bg-amber-500 text-white font-extrabold text-lg px-6 py-3 rounded-2xl shadow-2xl border-2 border-yellow-200 flex items-center gap-2">
             ⭐ +1 Ngôi Sao Hy Vọng!
@@ -1503,8 +1503,8 @@
             // 1. Nổi popup điểm nhanh 1s
             triggerScorePopup(earnedPoints, usedStar);
 
-            // 2. Tỉ lệ 5% nhận Ngôi Sao Hy Vọng (popup 1s)
-            if (Math.random() < 0.05) {
+            // 2. Tỉ lệ 10% nhận Ngôi Sao Hy Vọng (popup 2s)
+            if (Math.random() < 0.1) {
                 SecureStore.addStars(1);
                 updateHopeStarUI();
                 triggerStarDropPopup();
