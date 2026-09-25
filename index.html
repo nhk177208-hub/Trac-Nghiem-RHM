@@ -112,21 +112,21 @@
 
     <div id="custom-toast" class="fixed bottom-5 right-5 bg-gray-900 text-white px-4 py-3 rounded-xl shadow-2xl z-50 transition-all transform translate-y-20 opacity-0 text-sm font-semibold pointer-events-none"></div>
 
-    <!-- POPUP NỔI ĐIỂM KHI TRẢ LỜI ĐÚNG (+10, +15, +20, +30 HOẶC x10 SAO) (0.5s) -->
+    <!-- POPUP NỔI ĐIỂM KHI TRẢ LỜI ĐÚNG (+10, +15, +20, +30 HOẶC x10 SAO) (1s) -->
     <div id="score-popup-container" class="fixed inset-0 pointer-events-none z-[100] flex items-center justify-center hidden">
         <div id="score-popup-badge" class="font-black text-3xl sm:text-4xl text-amber-400 drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] px-6 py-2 rounded-2xl bg-gray-950/80 border border-amber-400">
             +10
         </div>
     </div>
 
-    <!-- POPUP NHẬN NGÔI SAO HY VỌNG (TỈ LỆ 5%) (0.5s) -->
+    <!-- POPUP NHẬN NGÔI SAO HY VỌNG (TỈ LỆ 5%) (1s) -->
     <div id="star-drop-popup" class="fixed inset-0 pointer-events-none z-[100] flex items-center justify-center hidden">
         <div class="bg-amber-500 text-white font-extrabold text-lg px-6 py-3 rounded-2xl shadow-2xl border-2 border-yellow-200 flex items-center gap-2">
             ⭐ +1 Ngôi Sao Hy Vọng!
         </div>
     </div>
 
-    <!-- POPUP ĐẠT STREAK 10, 20, 30... VÀ VINH DANH (0.5s) -->
+    <!-- POPUP ĐẠT STREAK 10, 20, 30... VÀ VINH DANH (2s) -->
     <div id="streak-popup-modal" class="fixed inset-0 bg-black/60 z-[100] flex items-center justify-center hidden select-none pointer-events-none">
         <div id="streak-popup-box" class="bg-gradient-to-b from-amber-500 via-yellow-400 to-amber-600 p-6 sm:p-8 rounded-3xl shadow-[0_0_50px_rgba(245,158,11,0.8)] border-4 border-white text-center max-w-sm w-[90vw]">
             <div id="streak-emblem-container" class="flex justify-center items-center gap-2 mb-3"></div>
@@ -139,7 +139,7 @@
         </div>
     </div>
 
-    <!-- POPUP NHẬN HUY HIỆU NGẪU NHIÊN 1% HOẶC ĐỔI ĐIỂM (0.5s) -->
+    <!-- POPUP NHẬN HUY HIỆU NGẪU NHIÊN 1% HOẶC ĐỔI ĐIỂM (2s) -->
     <div id="emblem-congrat-popup" class="fixed inset-0 bg-black/60 z-[100] flex items-center justify-center hidden select-none pointer-events-none">
         <div id="emblem-congrat-box" class="bg-white p-6 sm:p-8 rounded-3xl shadow-2xl border-4 border-yellow-400 text-center max-w-sm w-[90vw]">
             <div class="text-xs font-bold uppercase tracking-wider text-amber-600 mb-2">🎉 Chúc mừng bạn đã nhận được!</div>
@@ -1510,12 +1510,12 @@
                 triggerStarDropPopup();
             }
 
-            // 3. Tỉ lệ 1% nhận Huy hiệu ngẫu nhiên mới không trùng lặp (popup 0.5s)
+            // 3. Tỉ lệ 1% nhận Huy hiệu ngẫu nhiên mới không trùng lặp (popup 1s)
             if (Math.random() < 0.01) {
                 rewardRandomUnownedEmblem();
             }
 
-            // 4. Kiểm tra mốc Streak (10, 20, 30, 40...) -> hiện huy hiệu & câu khen ngợi (0.5s)
+            // 4. Kiểm tra mốc Streak (10, 20, 30, 40...) -> hiện huy hiệu & câu khen ngợi (1s)
             if (currentStreak > 0 && currentStreak % 10 === 0) {
                 triggerStreakPopup(currentStreak);
             }
@@ -1566,7 +1566,7 @@
             }, 100);
         }
 
-        // Popup chúc mừng đạt Streak (0.5s)
+        // Popup chúc mừng đạt Streak (1s)
         function triggerStreakPopup(streakNum) {
             const modal = document.getElementById('streak-popup-modal');
             const praiseEl = document.getElementById('streak-praise-text');
@@ -1602,7 +1602,7 @@
             }, 500);
         }
 
-        // Popup chúc mừng nhận Huy Hiệu mới (0.5s)
+        // Popup chúc mừng nhận Huy Hiệu mới (1s)
         function triggerEmblemCongratPopup(emblemId) {
             const popup = document.getElementById('emblem-congrat-popup');
             const img = document.getElementById('emblem-congrat-img');
