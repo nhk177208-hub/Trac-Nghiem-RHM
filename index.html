@@ -64,7 +64,7 @@
             100% { opacity: 0; transform: translateY(-20px) scale(1); }
         }
         .animate-score-pop {
-            animation: scorePopupAnim 0.2s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+            animation: scorePopupAnim 0.2s cubic-bezier(1, 0.8, 0.3, 1) forwards;
         }
 
         @keyframes streakModalPop {
@@ -82,7 +82,7 @@
             100% { opacity: 0; transform: scale(1); }
         }
         .animate-star-drop {
-            animation: starDropAnim 0.1s ease-out forwards;
+            animation: starDropAnim 1s ease-out forwards;
         }
 
         @keyframes emblemDropAnim {
@@ -1531,7 +1531,7 @@
             }
         }
 
-        // Popup nổi điểm nhanh (0.2s)
+        // Popup nổi điểm nhanh (1s)
         function triggerScorePopup(points, isMultiplied = false) {
             const container = document.getElementById('score-popup-container');
             const badge = document.getElementById('score-popup-badge');
@@ -1547,7 +1547,7 @@
             container.classList.remove('hidden');
             setTimeout(() => {
                 container.classList.add('hidden');
-            }, 200);
+            }, 1000);
         }
 
         // Popup nhận Ngôi Sao Hy Vọng (1s)
@@ -1563,7 +1563,7 @@
             }
             setTimeout(() => {
                 popup.classList.add('hidden');
-            }, 100);
+            }, 1000);
         }
 
         // Popup chúc mừng đạt Streak (2s)
@@ -1599,7 +1599,7 @@
             modal.classList.remove('hidden');
             setTimeout(() => {
                 modal.classList.add('hidden');
-            }, 500);
+            }, 2000);
         }
 
         // Popup chúc mừng nhận Huy Hiệu mới (3s)
@@ -1622,7 +1622,7 @@
             popup.classList.remove('hidden');
             setTimeout(() => {
                 popup.classList.add('hidden');
-            }, 500);
+            }, 3000);
         }
 
         // Tặng 1 huy hiệu ngẫu nhiên mới chưa sở hữu (không bao giờ trùng lặp)
