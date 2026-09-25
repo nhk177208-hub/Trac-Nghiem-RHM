@@ -112,14 +112,14 @@
 
     <div id="custom-toast" class="fixed bottom-5 right-5 bg-gray-900 text-white px-4 py-3 rounded-xl shadow-2xl z-50 transition-all transform translate-y-20 opacity-0 text-sm font-semibold pointer-events-none"></div>
 
-    <!-- POPUP NỔI ĐIỂM KHI TRẢ LỜI ĐÚNG (+10, +15, +20, +30 HOẶC x10 SAO) (1s) -->
+    <!-- POPUP NỔI ĐIỂM KHI TRẢ LỜI ĐÚNG (+10, +15, +20, +30 HOẶC x10 SAO) (3s) -->
     <div id="score-popup-container" class="fixed inset-0 pointer-events-none z-[100] flex items-center justify-center hidden">
         <div id="score-popup-badge" class="font-black text-3xl sm:text-4xl text-amber-400 drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] px-6 py-2 rounded-2xl bg-gray-950/80 border border-amber-400">
             +10
         </div>
     </div>
 
-    <!-- POPUP NHẬN NGÔI SAO HY VỌNG (TỈ LỆ 5%) (1s) -->
+    <!-- POPUP NHẬN NGÔI SAO HY VỌNG (TỈ LỆ 5%) (2s) -->
     <div id="star-drop-popup" class="fixed inset-0 pointer-events-none z-[100] flex items-center justify-center hidden">
         <div class="bg-amber-500 text-white font-extrabold text-lg px-6 py-3 rounded-2xl shadow-2xl border-2 border-yellow-200 flex items-center gap-2">
             ⭐ +1 Ngôi Sao Hy Vọng!
@@ -1500,22 +1500,22 @@
 
             SecureStore.addPoints(earnedPoints);
 
-            // 1. Nổi popup điểm nhanh 0.2s
+            // 1. Nổi popup điểm nhanh 1s
             triggerScorePopup(earnedPoints, usedStar);
 
-            // 2. Tỉ lệ 5% nhận Ngôi Sao Hy Vọng (popup 0.1s)
+            // 2. Tỉ lệ 5% nhận Ngôi Sao Hy Vọng (popup 1s)
             if (Math.random() < 0.05) {
                 SecureStore.addStars(1);
                 updateHopeStarUI();
                 triggerStarDropPopup();
             }
 
-            // 3. Tỉ lệ 1% nhận Huy hiệu ngẫu nhiên mới không trùng lặp (popup 1s)
+            // 3. Tỉ lệ 1% nhận Huy hiệu ngẫu nhiên mới không trùng lặp (popup 2s)
             if (Math.random() < 0.01) {
                 rewardRandomUnownedEmblem();
             }
 
-            // 4. Kiểm tra mốc Streak (10, 20, 30, 40...) -> hiện huy hiệu & câu khen ngợi (1s)
+            // 4. Kiểm tra mốc Streak (10, 20, 30, 40...) -> hiện huy hiệu & câu khen ngợi (2s)
             if (currentStreak > 0 && currentStreak % 10 === 0) {
                 triggerStreakPopup(currentStreak);
             }
@@ -1550,7 +1550,7 @@
             }, 200);
         }
 
-        // Popup nhận Ngôi Sao Hy Vọng (0.1s)
+        // Popup nhận Ngôi Sao Hy Vọng (1s)
         function triggerStarDropPopup() {
             const popup = document.getElementById('star-drop-popup');
             if (!popup) return;
@@ -1566,7 +1566,7 @@
             }, 100);
         }
 
-        // Popup chúc mừng đạt Streak (1s)
+        // Popup chúc mừng đạt Streak (2s)
         function triggerStreakPopup(streakNum) {
             const modal = document.getElementById('streak-popup-modal');
             const praiseEl = document.getElementById('streak-praise-text');
@@ -1602,7 +1602,7 @@
             }, 500);
         }
 
-        // Popup chúc mừng nhận Huy Hiệu mới (1s)
+        // Popup chúc mừng nhận Huy Hiệu mới (3s)
         function triggerEmblemCongratPopup(emblemId) {
             const popup = document.getElementById('emblem-congrat-popup');
             const img = document.getElementById('emblem-congrat-img');
