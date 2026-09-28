@@ -1,0 +1,844 @@
+1
+00:00:27,000 --> 00:00:30,000
+Chào các em, thầy là
+Bác sĩ Park Jong Chol.
+
+2
+00:00:30,000 --> 00:00:33,000
+Hôm nay đã là bài giảng cuối
+cùng về trụ implant rồi,
+
+3
+00:00:33,000 --> 00:00:35,000
+thời gian trôi nhanh thật các em nhỉ.
+
+4
+00:00:35,000 --> 00:00:36,364
+Vì là bài đúc kết,
+
+5
+00:00:36,364 --> 00:00:41,000
+thầy sẽ truyền tải nhiều kiến thức lâm
+sàng giá trị nhất. Chúng ta bắt đầu nhé!
+
+6
+00:00:51,000 --> 00:01:00,000
+Hôm nay, thầy trò mình sẽ cùng phân tích
+một chủ đề tối quan trọng: bề mặt implant.
+
+7
+00:01:00,000 --> 00:01:02,640
+Để các em dễ nắm bắt,
+
+8
+00:01:02,640 --> 00:01:11,000
+thầy sẽ hệ thống hóa theo tiến trình lịch
+sử. Thế hệ thứ nhất là bề mặt tiện thô.
+
+9
+00:01:11,000 --> 00:01:17,769
+Thế hệ thứ hai được xử
+lý tạo độ nhám nhằm tăng
+
+10
+00:01:17,769 --> 00:01:22,846
+diện tích tiếp xúc. Đến thế hệ thứ ba,
+
+11
+00:01:22,846 --> 00:01:29,051
+người ta biến đổi tính chất
+hóa học bề mặt titanium
+
+12
+00:01:29,051 --> 00:01:33,000
+để đẩy nhanh quá trình lành thương.
+
+13
+00:01:33,000 --> 00:01:43,000
+Tương lai sẽ là thế hệ thứ tư với các đặc
+tính sinh học ưu việt. Bề mặt implant tiến
+
+14
+00:01:43,000 --> 00:01:53,000
+hóa như thế nào và vì sao lại cải tiến?
+Tất cả đều có cơ sở khoa học của nó.
+
+15
+00:01:53,000 --> 00:01:56,818
+Hôm nay, thầy sẽ giải thích
+chi tiết mục đích và động
+
+16
+00:01:56,818 --> 00:02:00,000
+lực thúc đẩy sự tiến hóa này cho các em.
+
+17
+00:02:07,000 --> 00:02:14,579
+Đầu tiên, thầy trò mình cùng
+tìm hiểu thế hệ thứ nhất,
+
+18
+00:02:14,579 --> 00:02:19,000
+khởi đầu từ implant Brånemark nguyên bản.
+
+19
+00:02:19,000 --> 00:02:27,182
+Đây là bề mặt tiện cơ học đơn thuần
+sau khi tiện gọt titanium. Bản
+
+20
+00:02:27,182 --> 00:02:34,818
+thân titanium khi vào cơ thể sẽ
+tự hình thành lớp oxit ổn định,
+
+21
+00:02:34,818 --> 00:02:43,000
+hạn chế phóng thích ion, tương thích
+sinh học và kháng ăn mòn rất tốt.
+
+22
+00:02:43,000 --> 00:02:49,176
+Nhờ vậy mà đạt tích hợp xương
+dù chưa hề xử lý bề mặt. Độ
+
+23
+00:02:49,176 --> 00:02:54,117
+nhám phụ thuộc vào kỹ thuật
+tiện và độ cứng vật liệu,
+
+24
+00:02:54,117 --> 00:02:57,000
+mỗi nghiên cứu ghi nhận một khác.
+
+25
+00:02:57,000 --> 00:03:03,900
+Độ nhám trung bình bề mặt
+tiện thô đạt khoảng 0,5 đến
+
+26
+00:03:03,900 --> 00:03:09,650
+0,8 micromet. Tỷ lệ thành
+công chỉ đạt khoảng 80%,
+
+27
+00:03:09,650 --> 00:03:20,000
+một con số rất đáng lo ngại trên lâm
+sàng, đòi hỏi thế hệ thứ hai ra đời.
+
+28
+00:03:25,000 --> 00:03:30,714
+Ưu điểm vượt trội của thế
+hệ thứ hai là tăng đáng
+
+29
+00:03:30,714 --> 00:03:35,000
+kể diện tích tiếp xúc
+giữa xương và implant.
+
+30
+00:03:35,000 --> 00:03:45,385
+Để tạo nhám, có hai cách: một là
+đắp phủ hạt lên bề mặt titanium,
+
+31
+00:03:45,385 --> 00:03:51,616
+hai là ăn mòn cơ học. Thập niên 70,
+
+32
+00:03:51,616 --> 00:04:02,000
+Straumann tiên phong tạo nhám bằng kỹ
+thuật phun phủ TPS, sau đó đến RBM.
+
+33
+00:04:02,000 --> 00:04:05,840
+RBM tạo nhám bằng phương pháp thổi hạt,
+
+34
+00:04:05,840 --> 00:04:14,000
+còn ngày nay phổ biến nhất là SLA.
+Giờ thầy nói về bề mặt TPS trước nhé.
+
+35
+00:04:14,000 --> 00:04:20,192
+Bề mặt TPS được tạo ra bằng cách
+phun hạt titanium ở nhiệt độ
+
+36
+00:04:20,192 --> 00:04:26,384
+cao. Diện tích bề mặt tăng
+gấp 6 lần so với bề mặt tiện,
+
+37
+00:04:26,384 --> 00:04:33,019
+giúp độ ổn định ban đầu và tích
+hợp xương tốt hơn hẳn. Tuy nhiên,
+
+38
+00:04:33,019 --> 00:04:37,000
+nhược điểm chí mạng là độ nhám quá cao.
+
+39
+00:04:37,000 --> 00:04:43,222
+Khi bị lộ ren ra ngoài, bề
+mặt này cực kỳ khó làm sạch,
+
+40
+00:04:43,222 --> 00:04:49,000
+dẫn đến tiêu xương diễn ra rất
+nhanh. Hơn nữa, khi đặt trụ,
+
+41
+00:04:49,000 --> 00:04:53,889
+các hạt titanium có thể bong
+tróc vào mô xung quanh,
+
+42
+00:04:53,889 --> 00:04:57,000
+khiến tiên lượng không như mong đợi.
+
+43
+00:04:57,000 --> 00:05:00,000
+Chính vì vậy,
+
+44
+00:05:00,000 --> 00:05:17,000
+phương pháp thổi hạt bằng vật liệu tái
+hấp thu RBM đã ra đời để khắc phục.
+
+45
+00:05:17,000 --> 00:05:25,500
+Trên màn hình là quá trình thổi hạt
+lên bề mặt implant. Bề mặt nhẵn bóng
+
+46
+00:05:25,500 --> 00:05:34,000
+ban đầu sau khi thổi hạt áp lực
+cao sẽ trở nên nhám mịn đồng đều.
+
+47
+00:05:34,000 --> 00:05:38,065
+Dù các báo cáo có chênh lệch đôi chút,
+
+48
+00:05:38,065 --> 00:05:43,033
+phương pháp này đã giúp
+tăng diện tích bề mặt tiếp
+
+49
+00:05:43,033 --> 00:05:48,000
+xúc lên vượt bậc so với
+bề mặt tiện cơ học.
+
+50
+00:06:09,000 --> 00:06:14,714
+Nhờ quy trình kép thổi
+hạt và xoi mòn axit,
+
+51
+00:06:14,714 --> 00:06:25,000
+bề mặt đạt độ nhám tối ưu. Hiện nay hầu
+hết các hãng implant đều ứng dụng SLA,
+
+52
+00:06:25,000 --> 00:06:33,000
+dù chất lượng kiểm soát có sự
+khác nhau giữa các nhà sản xuất.
+
+53
+00:06:33,000 --> 00:06:38,628
+Đầu tiên, thổi hạt tạo
+ra các hốc lớn; tiếp đó,
+
+54
+00:06:38,628 --> 00:06:45,279
+xoi mòn axit tạo thêm các
+vi hốc li ti. Quy trình hai
+
+55
+00:06:45,279 --> 00:06:51,419
+bước này tạo độ nhám vượt
+trội hơn hẳn so với RBM,
+
+56
+00:06:51,419 --> 00:06:55,000
+giúp tăng 45% diện tích bề mặt.
+
+57
+00:06:55,000 --> 00:06:58,605
+Diện tích tiếp xúc xương
+
+58
+00:06:58,605 --> 00:07:10,861
+- implant tăng vọt giúp tích hợp xương
+vững chắc hơn. Các em nhìn ca lâm sàng này:
+
+59
+00:07:10,861 --> 00:07:22,396
+đặt trụ RBM vùng răng 15 và 25 kết
+hợp nâng xoang hàm nhưng thất bại,
+
+60
+00:07:22,396 --> 00:07:26,000
+không đạt tích hợp xương.
+
+61
+00:07:26,000 --> 00:07:35,739
+Sau đó được thay thế bằng trụ SLA
+và thành công mỹ mãn. Rõ ràng SLA
+
+62
+00:07:35,739 --> 00:07:45,478
+cho tích hợp xương tốt hơn và lực
+vặn tháo cao hơn nhiều so với RBM.
+
+63
+00:07:45,478 --> 00:07:54,000
+Đó là lý do vì sao SLA trở
+thành tiêu chuẩn vàng hiện nay.
+
+64
+00:08:00,000 --> 00:08:07,364
+Tiếp theo, thầy trò mình cùng
+bước sang thế hệ thứ ba:
+
+65
+00:08:07,364 --> 00:08:17,796
+biến đổi đặc tính hóa học bề mặt. Hướng
+đi đầu tiên là phủ Hydroxyapatite có cấu
+
+66
+00:08:17,796 --> 00:08:27,000
+trúc tương tự xương sinh học bằng công
+nghệ phun plasma hoặc phủ nano HA.
+
+67
+00:08:27,000 --> 00:08:35,500
+Hoặc phủ nano canxi photphat. Hướng đi thứ
+hai là biến bề mặt kỵ nước thông thường
+
+68
+00:08:35,500 --> 00:08:44,000
+thành bề mặt siêu ưa nước để hút máu
+và dịch sinh học bám dính tức thì.
+
+69
+00:08:44,000 --> 00:08:55,735
+Thầy sẽ giải thích rõ từng cơ chế cho các
+em nhé. Trước hết là kỹ thuật phủ HA,
+
+70
+00:08:55,735 --> 00:09:05,000
+xuất hiện từ khoảng năm 1984 bằng
+cách phun bột HA lên bề mặt titanium.
+
+71
+00:09:05,000 --> 00:09:10,688
+Phản ứng tạo xương ban đầu rất
+ấn tượng nên hàng loạt hãng
+
+72
+00:09:10,688 --> 00:09:16,376
+sản xuất ồ ạt áp dụng. Thế
+nhưng sau 5 năm theo dõi,
+
+73
+00:09:16,376 --> 00:09:22,064
+lớp phủ HA bị tiêu biến trong
+cơ thể dẫn đến bong tróc,
+
+74
+00:09:22,064 --> 00:09:26,000
+làm trụ implant lung lay và rơi ra ngoài.
+
+75
+00:09:26,000 --> 00:09:34,217
+Hệ quả là các dòng trụ này bị đào thải
+khỏi thị trường. Các em xem ca này,
+
+76
+00:09:34,217 --> 00:09:42,891
+thầy đặt một trụ phủ HA ở vị trí răng
+36 năm 2011; bảy năm sau, vào năm 2018,
+
+77
+00:09:42,891 --> 00:09:47,000
+bệnh nhân quay lại vì implant bị lung lay.
+
+78
+00:09:47,000 --> 00:09:50,000
+Khám lâm sàng nướu không hề viêm,
+
+79
+00:09:50,000 --> 00:09:56,000
+trên phim X-quang xương quanh implant
+cũng không hề có dấu hiệu tiêu xương.
+
+80
+00:09:56,000 --> 00:10:02,400
+Đặc điểm của thất bại lớp
+phủ HA là không có viêm
+
+81
+00:10:02,400 --> 00:10:07,200
+hay tiêu xương. Thầy
+tháo phục hình bên trên,
+
+82
+00:10:07,200 --> 00:10:14,133
+lắp cây vặn trụ vào vặn nhẹ
+khoảng 10 Ncm là trụ đã
+
+83
+00:10:14,133 --> 00:10:20,000
+xoay rồi. Sau đó thầy thay
+bằng trụ siêu ưa nước.
+
+84
+00:10:20,000 --> 00:10:28,500
+Thành xương còn nguyên vẹn, trụ implant
+được vặn lấy ra cực kỳ sạch sẽ do lớp
+
+85
+00:10:28,500 --> 00:10:34,000
+phủ HA đã tiêu biến hoàn
+toàn. Từ bài học đó,
+
+86
+00:10:34,000 --> 00:10:39,000
+người ta phát triển lớp
+phủ HA đồng nhất hơn.
+
+87
+00:10:39,000 --> 00:10:50,176
+Lớp phủ đồng nhất giúp gia tăng lực liên
+kết phân tử. So sánh hai lớp phủ trên hình,
+
+88
+00:10:50,176 --> 00:10:59,000
+lớp bên trái đồng nhất hơn hẳn, ngăn
+ngừa hiện tượng bong tróc vật liệu.
+
+89
+00:10:59,000 --> 00:11:07,925
+Nhờ vậy mà tránh được tình trạng phải
+tháo bỏ trụ như ca lâm sàng thầy vừa
+
+90
+00:11:07,925 --> 00:11:15,800
+chiếu. Giải pháp thứ hai là tạo
+tính siêu ưa nước cho bề mặt nhám,
+
+91
+00:11:15,800 --> 00:11:20,000
+tăng khả năng thấm ướt máu vượt trội.
+
+92
+00:11:20,000 --> 00:11:27,385
+Cục máu đông hình thành nhanh
+giúp tích hợp xương sớm diễn
+
+93
+00:11:27,385 --> 00:11:34,770
+ra thuận lợi. Trên thị trường
+có các dòng như Osstem CA,
+
+94
+00:11:34,770 --> 00:11:44,000
+BA hay Straumann SLActive, độ thấm ướt
+vượt trội so với bề mặt truyền thống.
+
+95
+00:11:44,000 --> 00:11:55,302
+Để đạt tính siêu ưa nước, trụ SLA được
+ngâm trong dung dịch muối canxi. Xử lý ion
+
+96
+00:11:55,302 --> 00:12:02,837
+canxi giúp bề mặt từ kỵ nước
+chuyển sang siêu ưa nước,
+
+97
+00:12:02,837 --> 00:12:11,000
+chủ động thu hút các thành
+phần máu đến vị trí cấy ghép.
+
+98
+00:12:11,000 --> 00:12:19,707
+Bề mặt hoạt hóa canxi hấp phụ protein tốt
+hơn nhiều so với bề mặt thông thường,
+
+99
+00:12:19,707 --> 00:12:26,366
+tạo tín hiệu chiêu mộ tế bào
+đến kích hoạt lành thương. Hình
+
+100
+00:12:26,366 --> 00:12:32,000
+nhuộm huỳnh quang cho thấy
+lượng protein bám dính dày đặc.
+
+101
+00:12:32,000 --> 00:12:38,707
+Đặc tính thứ ba là hình
+thành cục máu đông trên
+
+102
+00:12:38,707 --> 00:12:43,585
+diện rộng. Như bài trước thầy đã giảng,
+
+103
+00:12:43,585 --> 00:12:52,122
+cục máu đông hình thành sớm giúp
+thiết lập mạng lưới fibrin vững chắc,
+
+104
+00:12:52,122 --> 00:12:57,000
+giúp lành thương nhanh và ổn định hơn.
+
+105
+00:12:57,000 --> 00:13:03,667
+So với bề mặt truyền thống, sự khác biệt về
+khả năng tạo cục máu đông là rất rõ rệt,
+
+106
+00:13:03,667 --> 00:13:09,000
+mang lại tiến trình tích hợp xương an
+toàn và rút ngắn thời gian điều trị.
+
+107
+00:13:09,000 --> 00:13:16,674
+Cách thứ hai để tăng tính ưa
+nước là bề mặt BA của Osstem. Bề
+
+108
+00:13:16,674 --> 00:13:23,837
+mặt SA được phủ một lớp HA siêu
+mỏng có thể tiêu sinh học,
+
+109
+00:13:23,837 --> 00:13:31,000
+kết hợp công nghệ ưa nước giúp
+tăng tốc độ tích hợp xương sớm.
+
+110
+00:13:31,000 --> 00:13:36,211
+Hiệu quả cải thiện hơn 30%
+so với SLA thông thường.
+
+111
+00:13:36,211 --> 00:13:40,474
+Tính ưa nước quyết định khả năng thấm ướt;
+
+112
+00:13:40,474 --> 00:13:49,000
+các em nhìn trụ ngoài cùng bên phải xem,
+máu thấm ướt bao phủ toàn bộ bề mặt.
+
+113
+00:13:49,000 --> 00:14:00,000
+Khả năng bám dính tế bào máu của
+bề mặt ưa nước là vô cùng mạnh mẽ.
+
+114
+00:14:00,000 --> 00:14:04,278
+Công nghệ này kết hợp
+hoàn hảo ưu điểm vi lưu
+
+115
+00:14:04,278 --> 00:14:08,167
+giữ của SLA và đáp ứng sinh học của HA,
+
+116
+00:14:08,167 --> 00:14:14,000
+tối ưu hóa quá trình tạo xương và
+rút ngắn thời gian chờ tải lực.
+
+117
+00:14:14,000 --> 00:14:21,682
+Lớp phủ HA dày trước kia dễ
+bị tiêu hủy làm bong trụ,
+
+118
+00:14:21,682 --> 00:14:26,409
+nhưng với lớp phủ HA siêu mỏng này,
+
+119
+00:14:26,409 --> 00:14:34,091
+nguy cơ bong tróc đã bị triệt
+tiêu hoàn toàn khi nó tham
+
+120
+00:14:34,091 --> 00:14:40,000
+gia trực tiếp vào quá
+trình tái cấu trúc xương.
+
+121
+00:14:40,000 --> 00:14:45,054
+Lớp HA siêu mỏng kích thích
+tích hợp xương sớm rồi
+
+122
+00:14:45,054 --> 00:14:49,189
+tự tiêu biến theo chu
+chuyển xương tự nhiên,
+
+123
+00:14:49,189 --> 00:14:57,000
+khắc phục nhược điểm thế hệ cũ và duy
+trì tích hợp xương ổn định lâu dài.
+
+124
+00:14:57,000 --> 00:15:02,571
+Mục tiêu cốt lõi của những
+cải tiến bề mặt này là gì,
+
+125
+00:15:02,571 --> 00:15:06,000
+các em còn nhớ bài giảng trước không?
+
+126
+00:15:06,000 --> 00:15:13,500
+Đó là giúp giai đoạn ổn định thứ
+phát diễn ra sớm hơn và vững
+
+127
+00:15:13,500 --> 00:15:20,000
+chắc hơn thông qua việc tăng
+tối đa diện tích tiếp xúc xương
+
+128
+00:15:20,000 --> 00:15:25,000
+- implant, đảm bảo tích hợp
+xương thành công bền vững.
+
+129
+00:15:25,000 --> 00:15:38,500
+Gần đây, nhiều vật liệu phủ mới được
+nghiên cứu để tạo bề mặt siêu ưa nước. Khả
+
+130
+00:15:38,500 --> 00:15:50,500
+năng thấm ướt máu và bám dính protein
+tăng hơn 90% so với bề mặt SA,
+
+131
+00:15:50,500 --> 00:15:58,000
+kích hoạt tế bào trung
+mô biệt hóa mạnh mẽ.
+
+132
+00:15:58,000 --> 00:16:03,971
+Công nghệ xử lý bề mặt
+đang phát triển vũ bão;
+
+133
+00:16:03,971 --> 00:16:09,942
+cục máu đông được duy trì
+ổn định trên diện rộng,
+
+134
+00:16:09,942 --> 00:16:17,000
+đóng góp to lớn vào chất lượng
+tích hợp xương trên lâm sàng.
+
+135
+00:16:17,000 --> 00:16:26,771
+Khả năng giữ cục máu đông giữa bề mặt
+mới và bề mặt cũ chênh lệch rất lớn. Bề
+
+136
+00:16:26,771 --> 00:16:35,000
+mặt tân tiến giúp mạng lưới sợi huyết
+bám giữ dày đặc hơn theo thời gian.
+
+137
+00:16:35,000 --> 00:16:41,118
+Hai ống nghiệm trên slide đã
+chứng minh rõ điều đó. Cục máu
+
+138
+00:16:41,118 --> 00:16:46,765
+đông bền vững sẽ đẩy nhanh
+tốc độ khoáng hóa tạo xương,
+
+139
+00:16:46,765 --> 00:16:51,000
+rút ngắn thời gian điều trị cho bệnh nhân.
+
+140
+00:16:51,000 --> 00:16:56,313
+Nhìn lại đường cong lành
+thương thầy từng phân tích,
+
+141
+00:16:56,313 --> 00:17:01,094
+đường ổn định thứ phát dốc lên nhanh hơn,
+
+142
+00:17:01,094 --> 00:17:08,000
+bù đắp kịp thời sự sụt giảm
+của độ ổn định sơ khởi.
+
+143
+00:17:08,000 --> 00:17:09,027
+Tóm lại,
+
+144
+00:17:09,027 --> 00:17:18,784
+bản chất của thế hệ thứ ba là thay đổi
+tính chất hóa lý từ kỵ nước sang siêu
+
+145
+00:17:18,784 --> 00:17:27,000
+ưa nước. Nhưng vì sao tính ưa nước
+lại mang ý nghĩa sống còn như vậy?
+
+146
+00:17:27,000 --> 00:17:36,333
+Bởi tích hợp xương phụ thuộc hoàn
+toàn vào cục máu đông đầu tiên
+
+147
+00:17:36,333 --> 00:17:46,333
+và sự di chuyển của tế bào sinh
+xương. Khi bề mặt siêu ưa nước,
+
+148
+00:17:46,333 --> 00:17:57,000
+máu và dịch mô sẽ lập tức lan tỏa,
+bám dính trọn vẹn lên trụ implant.
+
+149
+00:17:57,000 --> 00:18:07,286
+Protein bám dính kích hoạt tín hiệu
+hóa ứng động dẫn dụ tế bào gốc đến;
+
+150
+00:18:07,286 --> 00:18:15,000
+năng lượng bề mặt cao tạo
+môi trường vi mô tối ưu,
+
+151
+00:18:15,000 --> 00:18:24,000
+giúp rút ngắn thời gian đạt ổn
+định thứ phát để phục hình sớm.
+
+152
+00:18:24,000 --> 00:18:29,778
+Đó chính là thành quả từ những
+nỗ lực nghiên cứu không ngừng
+
+153
+00:18:29,778 --> 00:18:36,000
+của các nhà khoa học mà thầy
+vừa hệ thống hóa cho các em.
+
+154
+00:18:41,000 --> 00:18:48,605
+Đi xa hơn một bước, thầy trò mình
+cùng nhìn về tương lai với bề mặt thế
+
+155
+00:18:48,605 --> 00:18:53,079
+hệ thứ tư. Dù chưa
+thương mại hóa rộng rãi,
+
+156
+00:18:53,079 --> 00:18:58,000
+các hướng nghiên cứu sinh
+học đang cực kỳ hứa hẹn.
+
+157
+00:18:58,000 --> 00:19:05,333
+Ví dụ như gắn kết các yếu tố
+tăng trưởng chiết xuất từ máu tự
+
+158
+00:19:05,333 --> 00:19:11,200
+thân lên bề mặt trụ để thúc
+đẩy lành xương nhanh chóng,
+
+159
+00:19:11,200 --> 00:19:20,000
+tương tự như cơ chế của màng PRF hay
+PRP mà các em hay gặp ở phòng mổ.
+
+160
+00:19:25,000 --> 00:19:30,294
+Nội dung về bề mặt implant
+hôm nay đến đây là trọn
+
+161
+00:19:30,294 --> 00:19:35,147
+vẹn rồi. Thầy đúc kết lại
+các điểm cốt lõi nhé:
+
+162
+00:19:35,147 --> 00:19:40,000
+bề mặt implant phát triển
+qua bốn thế hệ rõ rệt.
+
+163
+00:19:40,000 --> 00:19:51,025
+Thế hệ một là bề mặt tiện thô. Thế hệ hai
+là xử lý cơ học tạo nhám tăng diện tích
+
+164
+00:19:51,025 --> 00:20:01,000
+tiếp xúc. Thế hệ ba là biến đổi hóa học
+bề mặt để tăng tốc độ tích hợp xương.
+
+165
+00:20:01,000 --> 00:20:09,864
+Thế hệ bốn hướng đến hoạt tính sinh
+học tế bào. Đích đến cuối cùng
+
+166
+00:20:09,864 --> 00:20:18,728
+của mọi cải tiến là rút ngắn thời
+gian chờ đạt ổn định thứ phát,
+
+167
+00:20:18,728 --> 00:20:27,000
+mang lại sự tích hợp xương vững
+chắc và bền vững cho bệnh nhân.
+
+168
+00:20:29,000 --> 00:20:32,077
+Trải qua ba bài giảng
+chuyên sâu về trụ implant,
+
+169
+00:20:32,077 --> 00:20:37,000
+các em đã thấy thiết kế đại thể
+và xử lý vi thể bề mặt quyết
+
+170
+00:20:37,000 --> 00:20:41,000
+định thành bại của ca điều trị
+như thế nào rồi đúng không?
+
+171
+00:20:41,000 --> 00:20:46,056
+Thầy tin rằng một khi các em
+thấu hiểu bản chất để chọn
+
+172
+00:20:46,056 --> 00:20:49,945
+đúng loại implant cho từng
+chất lượng xương cụ thể,
+
+173
+00:20:49,945 --> 00:20:55,000
+các em đã nắm chắc 90% thành
+công lâm sàng trong tay rồi.
+
+174
+00:20:55,000 --> 00:20:58,769
+Chúc các em luôn vững tay nghề
+và giàu y đức. Cảm ơn các
+
+175
+00:20:58,769 --> 00:21:02,000
+em đã đồng hành cùng thầy
+đến bài giảng cuối cùng này!

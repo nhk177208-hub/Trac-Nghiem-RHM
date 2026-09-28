@@ -1,0 +1,722 @@
+1
+00:00:27,000 --> 00:00:34,000
+Chào các em, thầy là Bác sĩ Pak Jong Cheol.
+Hôm nay thầy trò ta sẽ cùng bàn về trụ implant nha khoa.
+
+2
+00:00:34,000 --> 00:00:43,000
+Hiện nay trên thị trường có rất nhiều hãng sản xuất
+với vô số thiết kế trụ implant khác nhau.
+
+3
+00:00:43,000 --> 00:00:53,000
+Giá như có một "chiếc nhẫn quyền năng" như trong Chúa nhẫn,
+thì việc chọn dòng sản phẩm nào sẽ dễ dàng hơn nhiều.
+
+4
+00:00:53,000 --> 00:01:02,000
+Tuy nhiên, thực tế lâm sàng không đơn giản như vậy.
+Bởi lẽ đó, ta bắt buộc phải biết chọn loại trụ phù hợp.
+
+5
+00:01:02,000 --> 00:01:06,000
+Muốn đưa ra chỉ định đúng đắn cho bệnh nhân,
+các em cần phải thấu hiểu bản chất từng thiết kế.
+
+6
+00:01:06,000 --> 00:01:12,000
+Vì vậy, qua ba bài giảng liên tiếp bắt đầu từ hôm nay,
+thầy sẽ cùng các em phân tích toàn diện về trụ implant.
+
+7
+00:01:12,000 --> 00:01:23,000
+Trong bài đầu tiên này, chúng ta sẽ xem xét tiến trình thay đổi
+của trụ implant cùng những ưu - nhược điểm của từng loại.
+
+8
+00:01:30,000 --> 00:01:35,000
+Nhìn lên slide, các em sẽ thấy rõ
+ba dạng thiết kế trụ implant cơ bản nhất hiện nay.
+
+9
+00:01:35,000 --> 00:01:42,000
+Hầu hết các hệ thống implant lưu hành hiện nay
+đều thuộc về một trong ba nhóm chính này.
+
+10
+00:01:42,000 --> 00:01:54,000
+Thiết kế cổ điển đầu tiên đặt ngang mức xương là kết nối ngoài;
+như hãng Osstem phân phối dòng này dưới tên US.
+
+11
+00:01:54,000 --> 00:02:03,000
+Thứ hai là dòng đặt ngang mức nướu, tức implant ngang mô mềm;
+như dòng sản phẩm SS của Osstem.
+
+12
+00:02:03,000 --> 00:02:13,000
+Và thứ ba là implant kết nối trong, đặt dưới mào xương;
+chính là dòng TS rất phổ biến của hãng này.
+
+13
+00:02:13,000 --> 00:02:19,000
+Đây chính là ba xu hướng thiết kế implant
+chủ đạo trên thị trường mà các em thường gặp.
+
+14
+00:02:19,000 --> 00:02:31,000
+Vậy ta nên chọn loại nào? Chỉ cần đặt đúng chỉ định và kỹ thuật,
+dù là kết nối ngoài hay implant ngang mô mềm đều rất bền vững.
+
+15
+00:02:31,000 --> 00:02:35,000
+Kể cả dòng implant kết nối trong đặt chìm dưới xương
+cũng đem lại kết quả điều trị tương tự.
+
+16
+00:02:35,000 --> 00:02:46,000
+Từ các ca lâm sàng, các em thấy rõ: bất kể thiết kế nào,
+nếu xử trí chuẩn xác, implant đều tồn tại rất lâu dài.
+
+17
+00:02:46,000 --> 00:02:52,000
+Vậy câu hỏi đặt ra là: Tại sao thiết kế trụ implant
+lại liên tục biến đổi qua thời gian như vậy?
+
+18
+00:02:52,000 --> 00:02:57,000
+Thế hệ implant đầu tiên được dùng rộng rãi
+chính là dòng kết nối ngoài của Branemark.
+
+19
+00:02:57,000 --> 00:03:03,000
+Nếu thiết kế đó thực sự hoàn hảo tuyệt đối,
+thầy tin rằng giới nha khoa đã không cần phải cải tiến.
+
+20
+00:03:03,000 --> 00:03:08,000
+Chính vì còn tồn tại những hạn chế lâm sàng,
+nên kiểu dáng của trụ implant mới cần đổi mới liên tục.
+
+21
+00:03:08,000 --> 00:03:15,000
+Hôm nay, thầy trò ta sẽ cùng phân tích lý do
+và các giai đoạn chuyển dịch cấu tạo của trụ implant.
+
+22
+00:03:15,000 --> 00:03:27,000
+Xuyên suốt ba bài giảng, chúng ta sẽ lần lượt đào sâu:
+thiết kế thân trụ, vật liệu sinh học cấu thành,
+
+23
+00:03:27,000 --> 00:03:39,000
+cùng các công nghệ xử lý bề mặt implant;
+để xem chúng ảnh hưởng thế nào đến sự lành thương và kết quả.
+
+24
+00:03:39,000 --> 00:03:47,000
+Trước hết, bài học hôm nay sẽ tập trung vào hai nội dung:
+thay đổi trong thiết kế và sự phát triển của vật liệu.
+
+25
+00:03:55,000 --> 00:04:02,000
+Thầy nhắc lại, ba hệ thống cơ bản trong điều trị
+chính là ba loại trụ đang hiển thị trên màn hình.
+
+26
+00:04:02,000 --> 00:04:10,000
+Đầu tiên là implant kết nối ngoài,
+như dòng US mà Osstem phát triển.
+
+27
+00:04:10,000 --> 00:04:15,000
+Vị trí tiếp giáp giữa trụ implant và khớp nối abutment
+được định vị hoàn toàn nhô ra bên ngoài thân trụ.
+
+28
+00:04:15,000 --> 00:04:19,000
+Đây chính là cấu trúc cơ bản đặc trưng
+của dạng implant kết nối ngoài.
+
+29
+00:04:19,000 --> 00:04:24,000
+Phần cấu trúc ở đỉnh cổ trụ implant
+thường được gọi là module vùng cổ xương.
+
+30
+00:04:24,000 --> 00:04:33,000
+Nhìn vào vùng cổ, các em thấy một mấu lục giác nhô lên
+ngay trên bệ platform, dùng để gắn khớp nối abutment.
+
+31
+00:04:33,000 --> 00:04:43,000
+Khi vặn vào, giao diện liên kết giữa abutment và trụ
+nằm lộ hoàn toàn ở phía trên mào xương ổ răng.
+
+32
+00:04:43,000 --> 00:04:49,000
+Chính cấu tạo giao diện liên kết nhô ngoài này
+đã bộc lộ nhiều nhược điểm nghiêm trọng.
+
+33
+00:04:49,000 --> 00:05:02,000
+Vì mối nối nằm ngoài, vi kẽ sẽ dễ dàng hình thành,
+gây vi rò vi khuẩn và dẫn đến tiêu xương mào như các em thấy.
+
+34
+00:05:02,000 --> 00:05:08,000
+Một khó khăn nữa trên thực tế
+chính là độ phức tạp cao trong thao tác phẫu thuật.
+
+35
+00:05:08,000 --> 00:05:16,000
+Nếu sống hàm không bằng phẳng và chiều cao xương bất đối xứng
+giữa các vị trí cấy trụ implant liên tiếp nhau,
+
+36
+00:05:16,000 --> 00:05:21,000
+mức xương mào sẽ có xu hướng tự thoái lui
+tiêu biến dần về phía vị trí có mức xương thấp nhất.
+
+37
+00:05:21,000 --> 00:05:27,000
+Phần xương viền quanh trụ cấy ở vị trí cao hơn
+thường sẽ chịu tình trạng tiêu xương rất nặng nề.
+
+38
+00:05:27,000 --> 00:05:35,000
+Khi bề mặt xương bất cân xứng, độ sâu cấy ghép
+và kỹ thuật ghép xương sẽ chi phối hoàn toàn ca mổ.
+
+39
+00:05:35,000 --> 00:05:42,000
+Sai lệch nhỏ có thể dẫn tới thất bại khó vãn hồi.
+Đó là lý do thao tác phẫu thuật loại này rất nhạy cảm.
+
+40
+00:05:42,000 --> 00:05:49,000
+Để khắc phục nhược điểm tiêu xương mào của trụ kết nối ngoài,
+dòng implant ngang mô mềm đã được ra đời.
+
+41
+00:05:49,000 --> 00:06:02,000
+Để xử lý triệt để vi kẽ, phần cổ viền sinh học của abutment
+được tích hợp liền khối ngay vào phần thân của trụ implant.
+
+42
+00:06:02,000 --> 00:06:07,000
+Đây chính là thiết kế giải phẫu
+của dòng implant ngang mô mềm.
+
+43
+00:06:07,000 --> 00:06:12,000
+Cổ trụ implant này mang hình dáng hoàn toàn khác
+khi so sánh với loại kết nối ngoài trước đây.
+
+44
+00:06:12,000 --> 00:06:18,000
+Vậy cấu tạo mới này đã mang lại
+những bước chuyển đổi đáng giá nào?
+
+45
+00:06:18,000 --> 00:06:21,000
+Các em hãy ghi nhớ 4 đặc điểm cốt lõi sau đây.
+
+46
+00:06:21,000 --> 00:06:25,000
+Đặc điểm thứ nhất: Thân trụ mang thiết kế liền khối.
+
+47
+00:06:25,000 --> 00:06:31,000
+Thứ hai: Bệ kết nối được đặt ngang mức mô mềm,
+ngay tại bờ viền nướu.
+
+48
+00:06:31,000 --> 00:06:38,000
+Thứ ba: Mối liên kết giữa trụ implant và khớp nối abutment
+đã được dời vào sâu bên trong thân trụ.
+
+49
+00:06:38,000 --> 00:06:50,000
+Và thứ tư: Giao diện kết nối trong này
+được vát côn thuôn nghiêng.
+
+50
+00:06:50,000 --> 00:06:57,000
+Sự thay đổi cấu trúc mang tính bước ngoặt này
+đã hóa giải được các điểm yếu của hệ thống kết nối ngoài.
+
+51
+00:06:57,000 --> 00:07:05,000
+Với thiết kế cổ loe, phục hình răng sứ bên trên
+sẽ được bắt nối ngay tại bờ viền nướu.
+
+52
+00:07:05,000 --> 00:07:09,000
+Nhờ đó, vị trí sát mào xương hoàn toàn kín khít,
+loại trừ hẳn hiện tượng vi rò vi khuẩn vào mô xương.
+
+53
+00:07:09,000 --> 00:07:23,000
+Mô mềm được che chở, kết nối côn âm sâu bên trong giúp triệt tiêu
+vi dịch chuyển và hạn chế tối đa nguy cơ lỏng ốc kết nối.
+
+54
+00:07:23,000 --> 00:07:33,000
+Từ đó, độ ổn định của xương mào được bảo tồn nguyên vẹn,
+điều này đã được hàng loạt y văn chứng minh.
+
+55
+00:07:33,000 --> 00:07:40,000
+Trên thực tế điều trị thực nghiệm,
+kết quả lành thương lâm sàng đạt được là cực kỳ ấn tượng.
+
+56
+00:07:40,000 --> 00:07:46,000
+Có thể khẳng định, dòng implant ngang mô mềm
+mang lại tiên lượng phục hồi rất tuyệt vời.
+
+57
+00:07:46,000 --> 00:07:52,000
+Sau đó, các hãng tiếp tục phát triển loại implant one-body,
+đúc liền hoàn toàn thân trụ với khớp nối abutment.
+
+58
+00:07:52,000 --> 00:08:00,000
+Khái niệm vít kết nối giữa trụ và abutment
+đã được triệt tiêu hoàn toàn trên thiết kế này.
+
+59
+00:08:00,000 --> 00:08:08,000
+Tuy rất khít sát, nhưng nếu bác sĩ cấy lệch trục dù chỉ một chút,
+khâu chế tác phục hình bên trên sẽ vô cùng nan giải.
+
+60
+00:08:08,000 --> 00:08:17,000
+Mặt khác, với các ca khuyết hổng cần phẫu thuật ghép xương hai thì,
+dòng implant liền khối này hoàn toàn không thể áp dụng.
+
+61
+00:08:17,000 --> 00:08:30,000
+Do đó, chỉ định rất hẹp: chỉ dùng ở vùng răng trước hàm dưới xương mỏng,
+làm phục hình tạm tức thì, hoặc làm trụ nâng đỡ hàm giả tháo lắp.
+
+62
+00:08:30,000 --> 00:08:40,000
+Phạm vi lâm sàng quá hạn hẹp, nên dòng implant liền khối
+không thực sự được đón nhận phổ biến trên lâm sàng.
+
+63
+00:08:42,000 --> 00:08:49,000
+Dù chuyển từ kết nối ngoài sang ngang mô mềm
+đã đem lại bước tiến vượt bậc,
+
+64
+00:08:49,000 --> 00:08:53,000
+nhưng dòng ngang mô mềm vẫn vướng ba nhược điểm lớn.
+Thứ nhất,
+
+65
+00:08:53,000 --> 00:08:58,000
+là sự hạn chế đáng kể trong các giải pháp phục hình.
+
+66
+00:08:58,000 --> 00:09:04,000
+Khi khoảng cách liên cung răng cắn khớp quá hẹp,
+phần cổ loe kim loại trồi cao rất khó mài chỉnh.
+
+67
+00:09:04,000 --> 00:09:13,000
+Trục lưu giữ phục hình không chuẩn,
+mão răng sứ rất dễ bị sút hay rơi trong lúc ăn nhai.
+
+68
+00:09:13,000 --> 00:09:19,000
+Thứ hai, ở vùng thẩm mỹ phía trước nụ cười,
+ta không thể giấu cổ kim loại do không mài chỉnh sâu được.
+
+69
+00:09:19,000 --> 00:09:23,000
+Vì vậy, bài toán thẩm mỹ trở thành một thách thức lớn.
+
+70
+00:09:23,000 --> 00:09:33,000
+Thứ ba là khi mức xương ổ răng gồ ghề không đều.
+Nếu ta cấy dựa theo đỉnh xương cao như phía gần,
+
+71
+00:09:33,000 --> 00:09:36,000
+thì các ren ốc của implant phía xa sẽ lộ trơ trọi ra ngoài.
+
+72
+00:09:36,000 --> 00:09:44,000
+Ngược lại, nếu hạ implant theo mức xương thấp phía xa,
+thì bờ cổ kim loại phía gần lại bị vùi quá sâu dưới xương.
+
+73
+00:09:44,000 --> 00:09:50,000
+Việc xác định độ sâu đặt trụ theo chiều đứng
+trong lúc phẫu thuật là cực kỳ đau đầu.
+
+74
+00:09:50,000 --> 00:09:58,000
+Tâm lý bác sĩ rất ngại để lộ ren implant ngoài xương,
+nên thường có xu hướng vặn trụ sâu hơn bình thường.
+
+75
+00:09:58,000 --> 00:10:09,000
+Thế nhưng, khi vùi sâu ở những vị trí giải phẫu hẹp cạnh chân răng thật,
+nguy cơ biến chứng sẽ là mối lo rất lớn cho các em.
+
+76
+00:10:09,000 --> 00:10:23,000
+Bằng chứng lâm sàng cho thấy: cấy implant ngang mô mềm quá sâu
+sẽ kéo theo hiện tượng tiêu xương vùng cổ dạng phễu rất trầm trọng.
+
+77
+00:10:23,000 --> 00:10:29,000
+Ở một ca khác, khi cố đặt bệ implant ngang mào xương gồ ghề,
+
+78
+00:10:29,000 --> 00:10:41,000
+xương mào cũng bị tiêu biến lan rộng.
+Dù nhiều ưu điểm, hạn chế về phẫu thuật và thẩm mỹ vẫn còn đó.
+
+79
+00:10:41,000 --> 00:10:50,000
+Để giải quyết bài toán nan giải của dòng ngang mô mềm,
+người ta lược bỏ luôn phần cổ viền nhô cao của trụ.
+
+80
+00:10:50,000 --> 00:11:02,000
+Đồng thời, kế thừa kết nối côn ngầm bên trong,
+thế hệ implant kết nối trong đặt chìm dưới xương chính thức ra đời.
+
+81
+00:11:02,000 --> 00:11:07,000
+Thiết kế này đem lại sự thuận tiện và tự tin tối đa
+cho bác sĩ phẫu thuật trong lúc đặt trụ.
+
+82
+00:11:07,000 --> 00:11:16,000
+Nó tương thích đa dạng khớp nối phục hình, giải quyết thẩm mỹ tối ưu,
+nhờ cơ chế thiết kế mang tính đột phá thời đại:
+
+83
+00:11:16,000 --> 00:11:21,000
+Đó chính là chuyển đổi bệ kết nối - Platform Switching.
+Hiện đây là dòng implant được sử dụng nhiều nhất trên thế giới.
+
+84
+00:11:21,000 --> 00:11:29,000
+Ngay cả trong các tình huống gồ xương mào phức tạp,
+khác hẳn dòng kết nối ngoài hay implant ngang mô mềm,
+
+85
+00:11:29,000 --> 00:11:36,000
+nó vẫn bảo tồn độ ổn định của xương viền một cách kinh ngạc,
+điều mà trước đây chúng ta rất chật vật mới đạt được.
+
+86
+00:11:36,000 --> 00:11:41,000
+Các em hãy quan sát cấu trúc bên trong
+của dòng implant kết nối trong đặt chìm.
+
+87
+00:11:41,000 --> 00:11:50,000
+Đặc trưng vùng cổ gồm mối liên kết sâu trong thân trụ
+kết hợp bệ thu hẹp Platform Switching như hình cắt lớp.
+
+88
+00:11:50,000 --> 00:11:57,000
+Bây giờ, thầy so sánh giữa implant kết nối trong đặt chìm
+và implant ngang mô mềm để các em nắm rõ.
+
+89
+00:11:57,000 --> 00:12:02,000
+Điểm chung là cả hai đều có khớp nối abutment
+chui sâu vào bên trong thân của trụ implant.
+
+90
+00:12:02,000 --> 00:12:15,000
+Thế nhưng, hình thái kết nối lại khác biệt: lục giác đối đầu bát giác.
+Ở dòng ngang mô mềm, kết nối abutment
+
+91
+00:12:15,000 --> 00:12:25,000
+luôn có gờ chặn cơ học, trong khi implant đặt chìm
+thì hoàn toàn không có gờ khựng này. Từ sai khác đó,
+
+92
+00:12:25,000 --> 00:12:30,000
+dòng implant kết nối trong đặt chìm cũng nảy sinh
+những điểm yếu kỹ thuật mà các em cần lưu tâm.
+
+93
+00:12:30,000 --> 00:12:40,000
+Thành cổ trụ mỏng hơn đáng kể,
+dẫn đến nguy cơ tét nứt hoặc gãy cổ implant khi chịu tải lớn.
+
+94
+00:12:40,000 --> 00:12:46,000
+Thứ hai, do cấu trúc côn trơn không có gờ chặn dừng,
+
+95
+00:12:46,000 --> 00:12:49,000
+hiện tượng trượt lún sâu của abutment rất dễ xảy ra khi siết ốc.
+
+96
+00:12:49,000 --> 00:13:02,000
+Thứ ba, trên bệnh nhân có sinh học nha chu mỏng,
+nếu đặt trụ quá nông thì nguy cơ tiêu xương viền là rất thảm khốc.
+
+97
+00:13:02,000 --> 00:13:08,000
+Tiếp theo, thầy trò ta cùng xem xét
+sự biến đổi về hình thái hình học thân trụ implant.
+
+98
+00:13:08,000 --> 00:13:15,000
+Thuở sơ khai, đại đa số thân trụ implant
+đều mang thiết kế trụ thẳng hình trụ song song.
+
+99
+00:13:15,000 --> 00:13:23,000
+Với xương cứng đặc D1, D2 thì thân thẳng rất tốt;
+nhưng trong nền xương xốp xơ, độ ổn định ban đầu lại rất yếu,
+
+100
+00:13:23,000 --> 00:13:34,000
+dẫn tới suy giảm quá trình lành thương và tích hợp xương.
+Để khắc phục, thân trụ đã được biến đổi thành dạng thuôn hình nón.
+
+101
+00:13:34,000 --> 00:13:37,000
+Mục tiêu là tăng độ vững ổn ban đầu
+và thúc đẩy lành thương xương tối ưu.
+
+102
+00:13:37,000 --> 00:13:50,000
+Với trụ thẳng, như trên hình các em thấy: ren đầu tiên mở đường,
+và các vòng ren kế tiếp chỉ trượt theo rãnh cắt đã có sẵn.
+
+103
+00:13:50,000 --> 00:14:06,000
+Vì thế, lực vặn đưa trụ vào được duy trì đều. Ngược lại,
+với thân thuôn côn kèm cơ chế tự tạo ren, lực vặn siết sẽ tăng dần.
+
+104
+00:14:06,000 --> 00:14:14,000
+Lực siết này cực kỳ thuận lợi cho chỉ định chịu lực sớm
+cũng như kỹ thuật cấy ghép tức thì sau nhổ răng.
+
+105
+00:14:14,000 --> 00:14:20,000
+Thiết kế thân thuôn giúp gia tăng diện tích tiếp xúc
+và nén chặt vào bè xương xung quanh.
+
+106
+00:14:20,000 --> 00:14:35,000
+Từ đó mang lại độ ổn định sơ khởi vượt trội.
+Hãy nhớ kỹ điều này, các em sẽ hiểu sâu hơn bài tích hợp xương sắp tới.
+
+107
+00:14:35,000 --> 00:14:48,000
+Thân thuôn còn một lợi thế nữa: chóp trụ đi lọt qua miệng lỗ khoan
+rất mượt mà, giúp rút ngắn thời gian phẫu thuật vặn trụ.
+
+108
+00:14:48,000 --> 00:14:53,000
+Như các em thấy, thân implant đi vào êm ái
+mà không hề gặp lực cản ma sát ở miệng xương.
+
+109
+00:14:53,000 --> 00:15:04,000
+Đặc biệt, nếu dùng dòng thuôn nhiều có bước ren đôi,
+các em chỉ cần xoay vặn ba đến bốn vòng là trụ đã vào trọn ổ xương.
+
+110
+00:15:04,000 --> 00:15:10,000
+Một giá trị giải phẫu tuyệt vời nữa của trụ thân thuôn
+là trong trường hợp chân răng hội tụ hoặc xương ổ hẹp dần về chóp.
+
+111
+00:15:10,000 --> 00:15:24,000
+Độ thuôn sẽ né tránh và ngăn tổn thương chóp chân răng kế cận,
+như sơ đồ minh họa chi tiết trên màn hình.
+
+112
+00:15:24,000 --> 00:15:32,000
+Ngày nay, dù có nhiều biến thiên về độ nghiêng nón,
+nhưng dòng thân thuôn côn vẫn chiếm lĩnh tuyệt đối trong phẫu thuật.
+
+113
+00:15:36,000 --> 00:15:44,000
+Bây giờ, chúng ta sẽ chuyển sang nội dung trọng tâm thứ hai:
+vật liệu chế tạo implant nha khoa.
+
+114
+00:15:44,000 --> 00:15:50,000
+Tiêu chuẩn khắt khe hàng đầu của một vật liệu cấy ghép
+bắt buộc phải là tính tương thích sinh học.
+
+115
+00:15:50,000 --> 00:16:01,000
+Tương thích sinh học nghĩa là không kích ứng viêm nhiễm đào thải,
+và hoàn toàn không cản trở sự tăng sinh tế bào sống.
+
+116
+00:16:01,000 --> 00:16:11,000
+Cơ tính có bền vững đến đâu chăng nữa,
+vật liệu cũng không được phép tạo ra bất kỳ độc tính nào cho cơ thể.
+
+117
+00:16:11,000 --> 00:16:16,000
+Giáo sư Branemark tình cờ phát hiện ra titanium
+trong các thí nghiệm buồng quan sát mạch máu trên tai thỏ.
+
+118
+00:16:16,000 --> 00:16:22,000
+Và ngày nay, đại đa số implant nha khoa
+đều được sản xuất từ nguyên liệu này.
+
+119
+00:16:22,000 --> 00:16:33,000
+Trước đây, giới chuyên môn chỉ tin dùng titanium tinh khiết.
+Nhưng tại các vùng chịu lực cắn lớn, hợp kim titanium
+
+120
+00:16:33,000 --> 00:16:38,000
+bổ sung thêm nhôm và vanadium đã được đưa vào sử dụng.
+
+121
+00:16:38,000 --> 00:16:50,000
+Gần đây còn có hợp kim chứa zirconia. Hôm nay thầy sẽ tập trung
+vào titanium - vật liệu tiêu chuẩn vàng lưu hành rộng rãi nhất.
+
+122
+00:16:50,000 --> 00:17:00,000
+Titanium là vật liệu trơ sinh học điển hình nhất;
+khi cấy vào xương, nó tuyệt đối không gây phản ứng bất lợi cho mô.
+
+123
+00:17:00,000 --> 00:17:07,000
+Trong môi trường cơ thể, nó tự hình thành lớp màng oxit thụ động,
+giúp chống lại sự ăn mòn điện hóa một cách vượt trội.
+
+124
+00:17:07,000 --> 00:17:16,000
+Dựa vào hàm lượng oxy và sắt còn tồn dư,
+titanium được phân chia từ Độ 1 đến Độ 4.
+
+125
+00:17:16,000 --> 00:17:25,000
+Bản chất là kim loại, nên nếu ion kim loại bị phóng thích,
+nó sẽ tác động cực kỳ tiêu cực đến sự sống của tế bào.
+
+126
+00:17:25,000 --> 00:17:36,000
+Tuy nhiên, titanium lập tức tạo màng titan dioxit bền vững.
+Chiều dày lớp màng này chỉ vào khoảng 200 nanomet.
+
+127
+00:17:36,000 --> 00:17:47,000
+Chính lớp màng trơ oxit này cho phép tế bào tạo xương bám dính,
+giúp titanium trở thành vật liệu cấy ghép an toàn tuyệt đối.
+
+128
+00:17:47,000 --> 00:17:56,000
+Từng có quan niệm chỉ titanium tinh khiết mới tương thích mô,
+nhưng trước đòi hỏi cơ học chịu tải cao hơn của trụ implant,
+
+129
+00:17:56,000 --> 00:18:01,000
+hợp kim titanium pha nhôm và vanadium đã chính thức được chế tác.
+
+130
+00:18:01,000 --> 00:18:10,000
+Như vậy: Độ 1 đến Độ 4 là titanium nguyên chất thương mại,
+còn Titanium Độ 5 chính là hợp kim bền cơ học.
+
+131
+00:18:10,000 --> 00:18:21,000
+Từ Độ 1 nâng dần lên Độ 5: độ bền uốn và chịu lực tăng vọt,
+nhưng độ tương thích sinh học mô tế bào lại có phần giảm nhẹ.
+
+132
+00:18:21,000 --> 00:18:29,000
+Ngược lại, từ bậc 5 lùi về bậc 1: độ chịu lực cơ học giảm dần,
+nhưng khả năng tương thích mô sống lại tăng lên tối đa.
+
+133
+00:18:29,000 --> 00:18:37,000
+Từng có tranh cãi nảy lửa giữa titanium nguyên chất và hợp kim,
+nhưng đến nay trên lâm sàng mọi thứ đã ngã ngũ rõ ràng.
+
+134
+00:18:37,000 --> 00:18:51,000
+Hiện nay, ở những nơi đòi hỏi độ chịu uốn cao như implant đường kính hẹp,
+thân khớp nối abutment hay ốc kết nối, ta dùng Titanium Độ 5.
+
+135
+00:18:51,000 --> 00:18:56,000
+Còn ở phần thân trụ implant thông thường,
+Titanium Độ 4 vẫn là lựa chọn ưu tiên hàng đầu.
+
+136
+00:19:03,000 --> 00:19:06,000
+Bây giờ, thầy trò ta hãy cùng tổng kết lại
+toàn bộ bài học ngày hôm nay.
+
+137
+00:19:06,000 --> 00:19:08,000
+Về thiết kế hình học và vật liệu implant:
+
+138
+00:19:08,000 --> 00:19:17,000
+Về cấu trúc: có ba trường phái gồm kết nối ngoài,
+ngang mô mềm, và kết nối trong đặt chìm dưới xương.
+
+139
+00:19:17,000 --> 00:19:26,000
+Không có thiết kế nào là hoàn hảo hay tệ hại tuyệt đối;
+mỗi loại đều mang trong mình những ưu và nhược điểm riêng.
+
+140
+00:19:26,000 --> 00:19:38,000
+Thấu hiểu bản chất để chọn đúng giải pháp cho từng trường hợp,
+các em sẽ luôn đạt được kết quả lâm sàng mỹ mãn và lâu bền.
+
+141
+00:19:38,000 --> 00:19:50,000
+Về hình thái thân trụ: ta có dạng thân thẳng và thân thuôn.
+Cá nhân thầy trong thực hành gần như không còn dùng thân thẳng.
+
+142
+00:19:50,000 --> 00:19:58,000
+Thầy ưu tiên thân thuôn vì đạt độ vững ổn ban đầu xuất sắc
+và rất an toàn với các cấu trúc giải phẫu lân cận.
+
+143
+00:19:58,000 --> 00:20:10,000
+Về vật liệu: Hợp kim Titanium Độ 5 được chỉ định cho vị trí chịu lực cao
+như implant đường kính hẹp, phục hình thân răng và ốc liên kết.
+
+144
+00:20:10,000 --> 00:20:19,000
+Trong khi đó, Titanium Độ 4 dùng cho thân trụ thông thường
+nhờ sự cân bằng hài hòa giữa độ chịu lực và tính tương thích sinh học.
+
+145
+00:20:21,000 --> 00:20:28,000
+Hôm nay, thầy trò ta đã làm rõ thiết kế và vật liệu trụ implant.
+Bài giảng phần một xin dừng lại tại đây.
+
+146
+00:20:28,000 --> 00:20:32,000
+Hẹn gặp lại các em ở bài giảng thứ hai
+về kỹ thuật xử lý bề mặt implant.
+
+147
+00:20:32,000 --> 00:20:36,000
+Cảm ơn các em rất nhiều vì đã chú ý lắng nghe!

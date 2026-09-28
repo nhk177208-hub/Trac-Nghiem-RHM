@@ -1,0 +1,728 @@
+1
+00:00:34,000 --> 00:00:37,771
+Chào các em! Thầy là Bác
+sĩ Park Jong-chul. Hôm nay
+
+2
+00:00:37,771 --> 00:00:41,200
+thầy mang đến một trụ
+implant. Ở bài giảng trước,
+
+3
+00:00:41,200 --> 00:00:46,000
+thầy trò mình đã phân tích về
+thiết kế và vật liệu của trụ.
+
+4
+00:00:46,000 --> 00:00:51,000
+Đến bài giảng kế tiếp, thầy sẽ đi
+sâu vào vấn đề xử lý bề mặt implant.
+
+5
+00:00:51,000 --> 00:00:52,000
+Còn hôm nay,
+
+6
+00:00:52,000 --> 00:00:57,000
+chúng ta cùng nghiên cứu về cơ chế
+lành thương của implant trong cơ thể.
+
+7
+00:00:57,000 --> 00:01:02,958
+Sự tiến hóa về thiết kế và
+bề mặt implant nhằm mục đích
+
+8
+00:01:02,958 --> 00:01:08,000
+rút ngắn thời gian lành
+thương và tối ưu chịu lực.
+
+9
+00:01:08,000 --> 00:01:12,136
+Vì vậy, tiến trình lành thương
+sẽ được thầy trò mình đối chiếu
+
+10
+00:01:12,136 --> 00:01:15,000
+song hành với sự phát
+triển của trụ implant.
+
+11
+00:01:20,000 --> 00:01:26,760
+Khái niệm "tích hợp xương" chắc
+chắn các em đều đã biết. Đây
+
+12
+00:01:26,760 --> 00:01:33,000
+là thuật ngữ cốt lõi mô tả sự
+lành thương quanh implant.
+
+13
+00:01:33,000 --> 00:01:40,222
+Chính sự lành thương này
+sẽ quyết định ca phẫu
+
+14
+00:01:40,222 --> 00:01:46,000
+thuật cấy ghép thành công hay thất bại.
+
+15
+00:01:46,000 --> 00:01:49,684
+Về mặt ngữ nghĩa: "Osseo" là xương,
+
+16
+00:01:49,684 --> 00:01:56,000
+còn "Integration" là sự hợp nhất
+của hai thực thể riêng biệt.
+
+17
+00:01:56,000 --> 00:01:58,857
+Giáo sư Brånemark, người khai
+sinh ra implant hiện đại,
+
+18
+00:01:58,857 --> 00:02:02,000
+chính là người đã đặt ra
+thuật ngữ kinh điển này.
+
+19
+00:02:02,000 --> 00:02:06,909
+Thuật ngữ này dùng để mô
+tả mối tương quan giữa bề
+
+20
+00:02:06,909 --> 00:02:11,000
+mặt implant và xương ổ
+răng ở hình bên trái.
+
+21
+00:02:11,000 --> 00:02:18,778
+Khi titanium liên kết trực tiếp với
+xương, ta có tích hợp xương. Ngược lại,
+
+22
+00:02:18,778 --> 00:02:25,000
+nếu mô liên kết xen vào
+giữa, đó là tích hợp sợi.
+
+23
+00:02:25,000 --> 00:02:27,700
+Thời kỳ đầu tại Hoa Kỳ,
+
+24
+00:02:27,700 --> 00:02:34,000
+loại implant dạng bản của hãng Linkow
+từng được sử dụng rất phổ biến.
+
+25
+00:02:34,000 --> 00:02:37,273
+Khi liên kết vào răng thật,
+
+26
+00:02:37,273 --> 00:02:46,000
+lớp tích hợp sợi này được kỳ vọng
+sẽ đóng vai trò như màng nha chu.
+
+27
+00:02:46,000 --> 00:02:52,160
+Tuy nhiên, tình trạng lung lay khiến
+implant thất bại hoàn toàn. Do đó,
+
+28
+00:02:52,160 --> 00:02:57,000
+tích hợp sợi đồng nghĩa
+với một thất bại lâm sàng.
+
+29
+00:02:57,000 --> 00:03:01,783
+Kể từ định nghĩa đầu tiên
+của Giáo sư Brånemark,
+
+30
+00:03:01,783 --> 00:03:08,000
+đã có thêm nhiều định nghĩa
+mới về tích hợp xương ra đời.
+
+31
+00:03:08,000 --> 00:03:13,000
+Đa phần đều tập trung vào vùng
+tiếp xúc giữa xương và implant.
+
+32
+00:03:13,000 --> 00:03:18,000
+Bên cạnh đó là những định nghĩa
+dựa trên góc độ chức năng,
+
+33
+00:03:18,000 --> 00:03:27,000
+khi implant vững ổn tuyệt đối trong
+xương, không triệu chứng khi tải lực;
+
+34
+00:03:27,000 --> 00:03:36,000
+hoặc định nghĩa của Giáo sư Albrektsson
+dưới góc nhìn phản ứng cơ thể.
+
+35
+00:03:36,000 --> 00:03:39,500
+Dù tiếp cận theo cách nào,
+
+36
+00:03:39,500 --> 00:03:47,083
+tiến trình lành thương implant luôn
+được giải thích qua hai giai đoạn:
+
+37
+00:03:47,083 --> 00:03:50,000
+độ vững ổn sơ khởi
+
+38
+00:03:50,000 --> 00:04:00,462
+và độ vững ổn thứ phát, tức là tích
+hợp xương. Độ vững ổn sơ khởi hình
+
+39
+00:04:00,462 --> 00:04:06,000
+thành ngay sau khi khoan
+đặt trụ vào xương;
+
+40
+00:04:06,000 --> 00:04:11,000
+nó đại diện cho lực giữ cơ học ban đầu,
+
+41
+00:04:11,000 --> 00:04:17,000
+nhưng độ vững ổn sơ khởi sẽ
+giảm dần theo thời gian.
+
+42
+00:04:17,000 --> 00:04:19,947
+Ngược lại, với độ vững ổn thứ phát:
+
+43
+00:04:19,947 --> 00:04:24,000
+xương mới sẽ dần dần được
+tân tạo bao quanh implant,
+
+44
+00:04:24,000 --> 00:04:32,500
+trụ tích hợp sinh học vào xương và độ
+ổn định này tăng dần lên. Nghĩa là:
+
+45
+00:04:32,500 --> 00:04:36,000
+độ vững ổn sơ khởi giảm xuống,
+
+46
+00:04:36,000 --> 00:04:44,000
+trong khi độ vững ổn thứ phát đi lên,
+tạo ra một khoảng trũng ổn định;
+
+47
+00:04:44,000 --> 00:04:51,000
+các em cần lưu ý, đây chính là "vùng
+trũng ổn định" (stability dip).
+
+48
+00:04:51,000 --> 00:05:00,379
+Toàn bộ cải tiến về hình thể và bề
+mặt trụ đều nhằm thu hẹp khoảng
+
+49
+00:05:00,379 --> 00:05:08,000
+trũng này. Thầy trò mình sẽ
+xét độ vững ổn sơ khởi trước.
+
+50
+00:05:08,000 --> 00:05:15,222
+Đầu tiên, về độ vững ổn sơ khởi:
+theo nghiên cứu của Raghavendra,
+
+51
+00:05:15,222 --> 00:05:23,000
+tích hợp xương là điều kiện tiên
+quyết cho sự lành thương thành công;
+
+52
+00:05:23,000 --> 00:05:32,107
+nhưng độ vững ổn sơ khởi lại
+chính là tiền đề để đạt được tích
+
+53
+00:05:32,107 --> 00:05:40,000
+hợp xương sau này. Điều đó cho
+thấy nó quan trọng thế nào.
+
+54
+00:05:40,000 --> 00:05:48,125
+Khi cấy ghép, lỗ khoan luôn nhỏ
+hơn đường kính trụ implant để
+
+55
+00:05:48,125 --> 00:05:55,000
+tạo lực nén cơ học khi
+cài trụ vào mô xương,
+
+56
+00:05:55,000 --> 00:06:03,793
+giúp neo chặn vững chắc vào cả xương
+vỏ lẫn xương xốp. Tại xương vỏ,
+
+57
+00:06:03,793 --> 00:06:12,000
+mao mạch bị gián đoạn và chịu ứng
+suất lớn; ta gọi là "press-fit".
+
+58
+00:06:12,000 --> 00:06:20,207
+Vùng ép cơ học này rộng khoảng một
+milimét; trong khi ở xương xốp,
+
+59
+00:06:20,207 --> 00:06:29,000
+các mảnh vụn xương bị dồn nén quanh
+trụ giúp gia tăng giữ cơ học.
+
+60
+00:06:29,000 --> 00:06:34,486
+Nhờ vậy mà đạt được độ
+vững ổn sơ khởi. Nghiên
+
+61
+00:06:34,486 --> 00:06:38,975
+cứu năm 2012 của Javed và Romanos chỉ rõ:
+
+62
+00:06:38,975 --> 00:06:45,958
+độ ổn định sơ khởi phụ thuộc
+vào khóa cơ học với xương vỏ.
+
+63
+00:06:44,820 --> 00:06:48,228
+Tóm lại, muốn có độ vững ổn sơ khởi tốt,
+
+64
+00:06:48,228 --> 00:06:53,000
+phải tăng tối đa diện tích tiếp xúc
+trực tiếp giữa implant và xương,
+
+65
+00:06:53,000 --> 00:07:03,909
+nhằm đạt lực cố định ban đầu tối
+ưu. Nhìn vào biểu đồ lành thương,
+
+66
+00:07:03,909 --> 00:07:17,000
+độ vững ổn sơ khởi giảm dần, nên ta cần
+nâng cao điểm xuất phát của đồ thị;
+
+67
+00:07:17,000 --> 00:07:22,385
+và nếu các em mở rộng diện tích
+tiếp xúc giữa xương và implant,
+
+68
+00:07:22,385 --> 00:07:27,000
+tổng độ ổn định sinh cơ
+học sẽ tăng lên rõ rệt.
+
+69
+00:07:27,000 --> 00:07:32,500
+Như thầy đã phân tích ở bài trước,
+so với thiết kế thân thẳng,
+
+70
+00:07:32,500 --> 00:07:38,000
+thiết kế thuôn hình côn (tapered) tạo
+diện tích tiếp xúc vượt trội hơn.
+
+71
+00:07:38,000 --> 00:07:46,258
+Hình thể implant liên tục được tinh
+chỉnh để tối ưu ổn định sơ khởi. Chính
+
+72
+00:07:46,258 --> 00:07:54,000
+độ vững chắc cơ học ban đầu này
+đã rút ngắn thời điểm chịu lực,
+
+73
+00:07:54,000 --> 00:07:58,091
+mở đường cho các kỹ thuật tải lực tức thì,
+
+74
+00:07:58,091 --> 00:08:03,000
+phục hồi chức năng tức thì
+mà các em thường nghe đến.
+
+75
+00:08:03,000 --> 00:08:10,704
+Hiện nay chúng ta làm cấy ghép
+trong ngày rất nhiều. Tiếp theo,
+
+76
+00:08:10,704 --> 00:08:19,000
+thầy trò mình cùng chuyển sang độ
+vững ổn thứ phát: tích hợp xương.
+
+77
+00:08:19,000 --> 00:08:24,385
+Độ vững ổn thứ phát được thiết
+lập nhờ quá trình tân tạo xương
+
+78
+00:08:24,385 --> 00:08:29,000
+quanh implant. Chúng ta đã nắm
+rõ khái niệm tích hợp xương,
+
+79
+00:08:29,000 --> 00:08:32,808
+và đây chính là tiến
+trình sinh học tạo nên độ
+
+80
+00:08:32,808 --> 00:08:38,000
+ổn định thứ phát. Đi sâu vào cơ
+chế sinh học, các em sẽ thấy:
+
+81
+00:08:38,000 --> 00:08:43,871
+ngay khi đặt trụ, độ vững ổn sơ
+khởi hình thành; vài giờ sau,
+
+82
+00:08:43,871 --> 00:08:51,000
+cục máu đông xuất hiện; trong 24 giờ
+đầu, mạng lưới vi mạch bắt đầu tân tạo.
+
+83
+00:08:51,000 --> 00:08:58,556
+Đến ngày thứ 4, đại thực bào và bạch
+cầu đơn nhân di cư đến dọn dẹp;
+
+84
+00:08:58,556 --> 00:09:07,000
+cục máu đông nhường chỗ cho tế bào trung mô
+từ tủy xương biệt hóa thành tạo cốt bào.
+
+85
+00:09:07,000 --> 00:09:15,690
+Tạo cốt bào bám dính lên bề mặt implant,
+tiết nền collagen; từ ngày 5 đến ngày 7,
+
+86
+00:09:15,690 --> 00:09:21,000
+khuôn xương mới hình thành
+quanh trụ. Đến tuần thứ 4,
+
+87
+00:09:21,000 --> 00:09:24,575
+sự liên kết nối liền diễn
+ra giữa xương tân tạo
+
+88
+00:09:24,575 --> 00:09:28,150
+từ bề mặt trụ và từ xương bè của ổ xương;
+
+89
+00:09:28,150 --> 00:09:34,000
+chính thời điểm này xuất hiện khoảng trũng
+ổn định khi lực cơ học sơ khởi chạm đáy.
+
+90
+00:09:34,000 --> 00:09:41,286
+Nhưng bù lại, độ ổn định thứ phát
+đang tăng tốc. Từ tuần 8 đến tuần 12,
+
+91
+00:09:41,286 --> 00:09:46,000
+xương phiến trưởng thành bao
+quanh khít sát bề mặt implant,
+
+92
+00:09:46,000 --> 00:09:48,824
+hoàn tất giai đoạn tích hợp xương sớm,
+
+93
+00:09:48,824 --> 00:09:53,412
+cho phép phục hình chịu lực
+ăn nhai. Đó chính là bản chất
+
+94
+00:09:53,412 --> 00:09:58,000
+của độ vững ổn thứ phát.
+Hãy soi dưới góc độ tế bào:
+
+95
+00:09:58,000 --> 00:10:05,286
+Sau khi đặt trụ, nếu cục máu
+đông hình thành ổn định,
+
+96
+00:10:05,286 --> 00:10:15,000
+mạng lưới sợi fibrin sẽ giăng kín bề
+mặt implant để tạo cốt bào bám dính.
+
+97
+00:10:15,000 --> 00:10:24,788
+Từ giá thể này, các tạo cốt bào tăng sinh
+mạnh mẽ và tạo ra chất căn bản xương;
+
+98
+00:10:24,788 --> 00:10:32,000
+khuôn xương bị khoáng hóa tạo nên
+liên kết tích hợp xương vững chắc.
+
+99
+00:10:32,000 --> 00:10:37,032
+Để làm rõ cơ chế tạo nên
+độ vững ổn thứ phát này,
+
+100
+00:10:37,032 --> 00:10:44,000
+tác giả Davies đã chia thành hai hiện
+tượng: tạo xương tiếp xúc và tạo xương từ xa.
+
+101
+00:10:44,000 --> 00:10:48,800
+Trước hết là tạo xương từ
+xa (distance osteogenesis):
+
+102
+00:10:48,800 --> 00:10:56,800
+xương chỉ tân tạo từ thành xương
+ổ của bệnh nhân rồi tiến dần về
+
+103
+00:10:56,800 --> 00:11:03,200
+phía implant. Nếu huyết khối
+không bám được lên bề mặt trụ,
+
+104
+00:11:03,200 --> 00:11:08,000
+tạo cốt bào không thể tồn tại ở đó.
+
+105
+00:11:08,000 --> 00:11:14,909
+Do đó, quá trình tân tạo chỉ đi một chiều
+từ ngoài vào trong. Đây là cơ chế tích
+
+106
+00:11:14,909 --> 00:11:20,000
+hợp xương thường thấy ở thế hệ
+implant bề mặt tiện nhẵn thời xưa.
+
+107
+00:11:20,000 --> 00:11:25,690
+Ngược lại, ở hiện tượng tạo xương
+tiếp xúc (contact osteogenesis):
+
+108
+00:11:25,690 --> 00:11:35,000
+xương được tân tạo đồng thời từ cả hai
+phía, từ bề mặt implant lẫn thành xương ổ.
+
+109
+00:11:35,000 --> 00:11:38,361
+Bề mặt implant có độ
+nhám vi thể lý tưởng sẽ
+
+110
+00:11:38,361 --> 00:11:41,111
+kích hoạt tạo xương hướng tâm như thế này;
+
+111
+00:11:41,111 --> 00:11:46,000
+tính chất vi thể của bề mặt trụ
+quyết định trực tiếp đến cơ chế này.
+
+112
+00:11:46,000 --> 00:11:52,697
+Đặc tính bề mặt thay đổi sẽ quyết định
+chất lượng và tốc độ tích hợp xương.
+
+113
+00:11:52,697 --> 00:11:59,000
+Độ vững ổn thứ phát được bồi đắp từ
+lớp xương mới bao quanh sát trụ.
+
+114
+00:11:59,000 --> 00:12:04,054
+Nhờ cải tiến công nghệ
+bề mặt giúp giữ ổn định
+
+115
+00:12:04,054 --> 00:12:08,649
+mạng sợi huyết và hút
+tạo cốt bào bám dính,
+
+116
+00:12:08,649 --> 00:12:16,000
+xương mới hình thành nhanh hơn, rút
+ngắn thời gian đạt độ vững ổn thứ phát.
+
+117
+00:12:16,000 --> 00:12:21,087
+Chính sự tăng tốc của ổn định
+thứ phát sẽ nâng đỡ toàn
+
+118
+00:12:21,087 --> 00:12:25,000
+diện tổng độ ổn định
+sinh cơ học của implant.
+
+119
+00:12:25,000 --> 00:12:30,444
+Sự an toàn của tiến trình lành
+thương phụ thuộc vào hai trụ cột:
+
+120
+00:12:30,444 --> 00:12:34,333
+hình thể trụ giúp tối ưu ổn định sơ khởi,
+
+121
+00:12:34,333 --> 00:12:39,000
+và công nghệ bề mặt giúp
+đẩy nhanh ổn định thứ phát.
+
+122
+00:12:39,000 --> 00:12:45,182
+Hai yếu tố này hiệp đồng
+nâng cao tổng độ ổn định,
+
+123
+00:12:45,182 --> 00:12:51,364
+đảm bảo thành công lâu dài
+cho ca điều trị. Như vậy,
+
+124
+00:12:51,364 --> 00:12:56,000
+chúng ta đã đi qua cơ chế lành thương.
+
+125
+00:12:56,000 --> 00:13:00,000
+Bây giờ, thầy trò mình cùng tổng kết lại
+những điểm mấu chốt của buổi học hôm nay.
+
+126
+00:13:05,000 --> 00:13:08,111
+Nhiều bác sĩ thường chỉ nghĩ đơn giản:
+
+127
+00:13:08,111 --> 00:13:12,000
+lành thương implant tức là
+quá trình tích hợp xương.
+
+128
+00:13:12,000 --> 00:13:18,429
+Nhưng hôm nay, thầy phân tích trên
+lâm sàng dưới hai góc độ cốt lõi:
+
+129
+00:13:18,429 --> 00:13:23,143
+độ vững ổn sơ khởi và độ vững ổn thứ phát,
+
+130
+00:13:23,143 --> 00:13:27,000
+gắn liền với sự phát
+triển của trụ implant.
+
+131
+00:13:27,000 --> 00:13:32,556
+Có nhiều lý do thúc đẩy các nhà
+sản xuất thay đổi thiết kế trụ,
+
+132
+00:13:32,556 --> 00:13:37,000
+nhưng hai độ ổn định này
+chính là động lực lớn nhất.
+
+133
+00:13:37,000 --> 00:13:46,756
+Thứ nhất: thiết kế thân thuôn dạng côn
+làm tăng tương tác cơ học với xương,
+
+134
+00:13:46,756 --> 00:13:55,902
+nâng cao độ vững ổn sơ khởi; từ
+đó nâng cao tổng độ ổn định,
+
+135
+00:13:55,902 --> 00:14:02,000
+che chở cho tiến trình
+tích hợp xương ban đầu.
+
+136
+00:14:02,000 --> 00:14:02,897
+Thứ hai:
+
+137
+00:14:02,897 --> 00:14:10,518
+những cải tiến đột phá trên bề mặt
+implant đã đẩy nhanh độ vững ổn thứ phát,
+
+138
+00:14:10,518 --> 00:14:15,000
+rút ngắn đáng kể thời gian
+lành thương toàn phần.
+
+139
+00:14:15,000 --> 00:14:15,909
+Tựu trung lại,
+
+140
+00:14:15,909 --> 00:14:21,970
+sự phát triển vượt bậc về hình thể đại thể
+lẫn bề mặt vi thể đều hướng tới đích đến:
+
+141
+00:14:21,970 --> 00:14:25,000
+hiệp đồng tối ưu hóa cả hai độ ổn định,
+
+142
+00:14:25,000 --> 00:14:32,000
+thu hẹp tối đa khoảng trũng nguy hiểm và
+mang lại tiên lượng lâm sàng hoàn hảo nhất.
+
+143
+00:14:33,000 --> 00:14:36,704
+Hôm nay là bài học thứ hai về trụ implant,
+
+144
+00:14:36,704 --> 00:14:43,000
+chúng ta đã mổ xẻ cơ chế lành thương
+từ góc nhìn cấu trúc học của trụ.
+
+145
+00:14:43,000 --> 00:14:49,710
+Thầy trò mình đã ôn lại thiết
+kế đại thể ở bài trước,
+
+146
+00:14:49,710 --> 00:14:59,000
+đồng thời mở ra cánh cửa về công nghệ
+xử lý bề mặt cho bài học tiếp theo.
+
+147
+00:14:59,000 --> 00:15:02,818
+Mọi cải tiến kỹ thuật trên
+trụ implant đều gắn bó mật
+
+148
+00:15:02,818 --> 00:15:06,000
+thiết với quy luật sinh
+học của sự lành thương.
+
+149
+00:15:06,000 --> 00:15:09,360
+Ở bài tới, thầy sẽ trực tiếp
+hướng dẫn các em về các công
+
+150
+00:15:09,360 --> 00:15:12,000
+nghệ bề mặt giúp bứt phá
+độ vững ổn thứ phát.
+
+151
+00:15:12,000 --> 00:15:14,000
+Cảm ơn các em đã chú ý lắng nghe!
