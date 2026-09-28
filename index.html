@@ -305,36 +305,41 @@
             transform: scale(1.25);
         }
 
-        /* CHẾ ĐỘ RẠP CHIẾU PHIM (THEATER MODE) - KHÔNG LÀM MỜ TRÊN DƯỚI */
-        .custom-yt-wrapper.theater-mode {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100vw !important;
-            height: 100vh !important;
-            max-width: 100vw !important;
-            max-height: 100vh !important;
-            z-index: 99999 !important;
-            border-radius: 0 !important;
-            background: #000000 !important;
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: center !important;
-            align-items: center !important;
-            box-shadow: none !important;
-        }
-        /* Bỏ hoàn toàn dải đen mờ phía trên đỉnh ở chế độ Rạp chiếu phim */
-        .custom-yt-wrapper.theater-mode .custom-yt-top-barrier {
-            display: none !important;
-        }
-        .custom-yt-wrapper.theater-mode .custom-yt-screen {
-            width: 96vw !important;
-            max-width: 1600px !important;
-            height: auto !important;
-            padding-bottom: min(54vw, calc(100vh - 85px)) !important;
-            box-shadow: none !important;
-            border-radius: 0.75rem !important;
-        }
+       /* CHẾ ĐỘ RẠP CHIẾU PHIM (THEATER MODE) */
+    .custom-yt-wrapper.theater-mode {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: 100vw !important;
+        max-height: 100vh !important;
+        z-index: 99999 !important;
+        border-radius: 0 !important;
+        background: #000000 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        box-shadow: none !important;
+    }
+    .custom-yt-wrapper.theater-mode .custom-yt-top-barrier {
+        display: none !important;
+    }
+    .custom-yt-wrapper.theater-mode .custom-yt-screen {
+        width: 96vw !important;
+        max-width: 1600px !important;
+        height: auto !important;
+        padding-bottom: min(54vw, calc(100vh - 85px)) !important;
+        box-shadow: none !important;
+        border-radius: 0.75rem !important;
+    }
+
+    /* ĐẶT LẠI IFRAME TRONG RẠP PHIM ĐỂ KHÔNG BỊ CẮT VIỀN */
+    .custom-yt-wrapper.theater-mode .custom-yt-screen iframe {
+        top: 0 !important;
+        height: 100% !important;
+    }
         /* Bỏ hiệu ứng làm mờ ở thanh điều khiển để không che mờ phụ đề */
         .custom-yt-wrapper.theater-mode .custom-yt-controls {
             position: absolute !important;
