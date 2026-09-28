@@ -380,7 +380,7 @@
         }
         .custom-yt-wrapper:fullscreen .custom-yt-screen iframe,
         .custom-yt-wrapper:-webkit-full-screen .custom-yt-screen iframe {
-            top: -65px !important;
+            top: -45px !important;
             height: calc(100% + 130px) !important;
         }
         .custom-yt-wrapper:fullscreen .custom-yt-controls,
@@ -1459,7 +1459,7 @@
             </div>
 
             <div class="pt-3 border-t flex justify-between items-center text-xs text-gray-500">
-                <span class="truncate">🛡️ Trình phát video độc quyền: Rạp chiếu phim, Toàn màn hình chuẩn HD • Khóa chuột phải & chống tải video.</span>
+                <span class="truncate">🛡️ Trình phát video độc quyền: Rạp chiếu phim, Toàn màn hình chuẩn HD.</span>
                 <button onclick="closeMonHocDetailModal()" class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-5 rounded-xl text-xs sm:text-sm transition-colors shrink-0">
                     Đóng
                 </button>
@@ -7232,7 +7232,7 @@
         async function loadAndRenderLessons(folderPath) {
             const lessonsListEl = document.getElementById('lessons-list');
             const countBadge = document.getElementById('lessons-count-badge');
-            lessonsListEl.innerHTML = '<div class="p-6 text-center text-sm text-gray-400 italic">⏳ Đang đọc nội dung file Video.txt...</div>';
+            lessonsListEl.innerHTML = '<div class="p-6 text-center text-sm text-gray-400 italic">⏳ Đang tải ...</div>';
 
             let rawText = '';
             try {
@@ -7258,7 +7258,7 @@
             container.innerHTML = '';
 
             if (lessons.length === 0) {
-                container.innerHTML = '<div class="p-6 text-center text-sm text-gray-400 italic">Chưa có bài học nào được định nghĩa trong Video.txt</div>';
+                container.innerHTML = '<div class="p-6 text-center text-sm text-gray-400 italic">Chưa có bài học nào</div>';
                 return;
             }
 
