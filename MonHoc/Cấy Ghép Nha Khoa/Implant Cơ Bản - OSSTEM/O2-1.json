@@ -1,0 +1,159 @@
+{
+  "id": 9001223416028,
+  "name": "Implant Nha khoa là gì ?",
+  "folder": "Bài học/Cấy Ghép Nha Khoa/Implant Cơ Bản - OSSTEM",
+  "questions": [
+    {
+      "question": "Bản chất của \"Tích hợp xương\" (Osseointegration) được định nghĩa là gì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Sự liên kết thông qua một lớp mô đệm sợi đàn hồi giữa xương và Implant",
+        "B. Sự kết nối trực tiếp về mặt cấu trúc và chức năng giữa xương sống với bề mặt Implant chịu lực",
+        "C. Quá trình dán dính cơ học của xi-măng gắn sinh học lên bề mặt kim loại",
+        "D. Tình trạng tế bào tủy xương phát triển bao phủ thân răng phục hình"
+      ],
+      "answerStr": "B",
+      "explanation": "Tích hợp xương là sự kết nối trực tiếp về mặt cấu trúc và chức năng giữa xương sống của cơ thể với bề mặt của trụ Implant chịu lực, không có bất kỳ lớp mô liên kết sợi nào xen vào giữa.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Vật liệu cấy ghép phổ biến nhất được ứng dụng trong cấy ghép Nha khoa là gì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Gốm sinh học Zirconia nguyên khối",
+        "B. Hợp kim Titanium nguyên chất",
+        "C. Silicone y tế phủ Nano",
+        "D. Thép không gỉ y khoa chuyên dụng"
+      ],
+      "answerStr": "B",
+      "explanation": "Trong cấy ghép Nha khoa, hợp kim Titanium nguyên chất là vật liệu được ứng dụng phổ biến nhất nhờ đặc tính tương thích sinh học cao, không gây phản ứng đào thải.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Bệnh nhân đầu tiên trên thế giới được cấy ghép Implant tích hợp xương vào năm nào và do ai thực hiện?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Năm 1952 bởi GS. Albrektsson",
+        "B. Năm 1965 bởi GS. Per-Ingvar Brånemark",
+        "C. Năm 1981 bởi GS. Per-Ingvar Brånemark",
+        "D. Năm 1987 bởi BS. Kang Chung Gyu"
+      ],
+      "answerStr": "B",
+      "explanation": "Kỷ nguyên Implant hiện đại đánh dấu bước ngoặt lịch sử khi ca cấy ghép Implant tích hợp xương đầu tiên trên người được GS. Per-Ingvar Brånemark thực hiện vào năm 1965 (sau khi phát hiện hiện tượng này năm 1952 trên thỏ).",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Chỉ số BIC (Bone-to-Implant Contact) có ý nghĩa cốt lõi nào trong đánh giá kết quả cấy ghép Implant?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Tỉ lệ tiếp xúc trực tiếp giữa xương và bề mặt Implant; chỉ số này càng cao thì độ vững ổn sinh học càng tốt",
+        "B. Mật độ khoáng hóa của xương bè tại vị trí đặt chóp trụ Implant",
+        "C. Chiều cao khoảng sinh học quanh cổ phục hình Implant",
+        "D. Phần trăm xi-măng nha khoa bao bọc kín cổ abutment"
+      ],
+      "answerStr": "A",
+      "explanation": "Chỉ số BIC tính bằng phần trăm tổng chiều dài bề mặt Implant được xương mới tiếp xúc và neo giữ trực tiếp; chỉ số BIC càng cao thì độ vững ổn sinh học của Implant càng bền vững.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Trong 6 tiêu chuẩn vàng quyết định tích hợp xương của Albrektsson (1981), hai yếu tố nào phụ thuộc hoàn toàn vào chuyên môn và quyết định của bác sĩ?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Tính tương thích sinh học và thiết kế hình thái học của trụ",
+        "B. Xử lý bề mặt trụ và số lượng xương của bệnh nhân",
+        "C. Kỹ thuật phẫu thuật và điều kiện tải lực khớp cắn",
+        "D. Chất lượng xương của cơ địa và thời gian lành thương"
+      ],
+      "answerStr": "C",
+      "explanation": "3 yếu tố đầu thuộc vật liệu sản xuất, yếu tố thứ 4 (số lượng & chất lượng xương) thuộc cơ địa bệnh nhân, còn kỹ thuật phẫu thuật và điều kiện tải lực khớp cắn là hai yếu tố sống còn nằm trong tay bác sĩ.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Ưu điểm sinh học lớn nhất của Implant so với phục hình cầu răng cổ điển là gì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Tiết kiệm tối đa chi phí ban đầu cho bệnh nhân",
+        "B. Rút ngắn thời gian hoàn tất điều trị chỉ trong vài ngày",
+        "C. Bảo tồn nguyên vẹn mô răng thật kế cận, không phải mài nhỏ răng làm trụ",
+        "D. Không đòi hỏi kỹ thuật và kiến thức phẫu thuật phức tạp"
+      ],
+      "answerStr": "C",
+      "explanation": "Phục hồi bằng Implant độc lập giúp bảo tồn trọn vẹn mô răng thật của các răng kế cận, tránh biến chứng mài răng, sút xi-măng gắn gây sâu ngầm hay gãy răng trụ như ở cầu răng cố định.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Tình trạng quá tải lực cắn liên tục do nhai lệch một bên trên Implant thường biểu hiện như thế nào trên phim X-quang?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Xuất hiện đường thấu quang quanh cổ Implant",
+        "B. Gãy ngang hoàn toàn thân trụ titanium",
+        "C. Tăng sinh xương đặc quanh chóp chân răng",
+        "D. Mờ đục toàn bộ vùng sống hàm lân cận"
+      ],
+      "answerStr": "A",
+      "explanation": "Quá tải lực cắn cục bộ kéo dài (như ca lâm sàng nhai lệch bên) dẫn đến phản ứng tiêu xương, biểu hiện bằng đường thấu quang rõ rệt quanh cổ Implant trên phim X-quang.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Khác biệt căn bản giữa khái niệm \"Ghép\" (Graft) và \"Cấy ghép\" (Implant) trong y học là gì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Ghép dùng vật liệu trơ không sống; Cấy ghép dùng mô sinh học sống",
+        "B. Ghép đưa vật liệu sinh học sống vào cơ thể; Cấy ghép đưa vật liệu trơ không sống để tái tạo chức năng",
+        "C. Ghép chỉ áp dụng cho xương hàm; Cấy ghép dùng cho nội tạng",
+        "D. Ghép luôn luôn bị cơ thể dung nạp; Cấy ghép luôn tạo phản ứng bọc bao xơ"
+      ],
+      "answerStr": "B",
+      "explanation": "Ghép (Graft) dùng mô/vật liệu sinh học còn sống (như ghép tạng), trong khi Cấy ghép (Implant) là đặt vật liệu trơ không sống (kim loại titanium, silicone...) vào cơ thể để thay thế chức năng cơ quan đã mất.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Đối tượng bệnh nhân nào dưới đây là chống chỉ định tuyệt đối phẫu thuật đặt Implant nha khoa?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Người mất 1 răng cối hàm dưới kèm tiêu xương nhẹ",
+        "B. Bệnh nhân đang trong độ tuổi tăng trưởng xương hàm",
+        "C. Người lớn tuổi mất toàn bộ răng 2 hàm",
+        "D. Người từng đeo hàm giả tháo lắp lâu năm"
+      ],
+      "answerStr": "B",
+      "explanation": "Implant gắn cứng trực tiếp vào mô xương không di chuyển theo sự phát triển tự nhiên, nên chống chỉ định tuyệt đối can thiệp trên đối tượng bệnh nhân đang trong độ tuổi phát triển/tăng trưởng xương.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Về mặt thời gian lành thương thông thường, nhược điểm cần tư vấn trước cho bệnh nhân khi làm Implant là gì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Cần tối thiểu 2 đến 3 tháng để quá trình tích hợp xương hoàn tất trước khi gắn răng sau cùng",
+        "B. Phải nằm viện theo dõi liên tục ít nhất 1 tháng",
+        "C. Không được ăn thức ăn mềm trong 6 tháng đầu",
+        "D. Mất từ 1 đến 2 năm mới có thể lắp phục hình hoàn chỉnh"
+      ],
+      "answerStr": "A",
+      "explanation": "So với cầu răng hay hàm tháo lắp, cấy ghép Implant đòi hỏi thời gian điều trị lâu hơn do cần thời gian lành thương tối thiểu từ 2 đến 3 tháng để đạt được sự tích hợp xương hoàn toàn.",
+      "isStarred": false,
+      "isHidden": false
+    }
+  ],
+  "lessonQuiz": true,
+  "lessonFile": "O2-1.json"
+}

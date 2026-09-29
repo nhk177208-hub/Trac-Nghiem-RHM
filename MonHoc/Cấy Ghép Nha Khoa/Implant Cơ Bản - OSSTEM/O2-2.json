@@ -1,0 +1,234 @@
+{
+  "id": 9001184280635,
+  "name": "Các thành phần cấu tạo Implant",
+  "folder": "Bài học/Cấy Ghép Nha Khoa/Implant Cơ Bản - OSSTEM",
+  "questions": [
+    {
+      "question": "Một hệ thống Implant cơ bản gồm những thành phần cấu tạo chính nào?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Trụ fixture, nắp đậy (cover screw) và trụ lấy dấu (impression coping)",
+        "B. Trụ fixture, khớp nối phục hình (abutment), ốc kết nối (abutment screw) và mão răng phục hình",
+        "C. Trụ lành thương (healing abutment), thân răng sứ và xi-măng gắn kết",
+        "D. Trụ fixture, analog thạch cao và ống sáp đúc phục hình"
+      ],
+      "answerStr": "B",
+      "explanation": "Cấu tạo Implant gồm trụ fixture (thay thế chân răng), abutment (đóng vai trò như cổ răng nâng đỡ), ốc kết nối để khóa chặt abutment vào fixture, và trên cùng là mão răng phục hình.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Thiết kế cơ học đặc trưng của dòng trụ TS fixture là gì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Kết nối lục giác ngoài (external hex), đặt ngang mào xương",
+        "B. Kết nối bát giác trong (internal octa), cổ loe ngang mức mô mềm",
+        "C. Kết nối côn Morse 11 độ, lục giác âm bên trong (internal hex) và là dòng trụ vùi xương",
+        "D. Thiết kế nguyên khối đúc liền (one-piece), không có ốc kết nối"
+      ],
+      "answerStr": "C",
+      "explanation": "Trụ TS fixture là hệ thống vùi xương có kết nối côn Morse 11 độ và ngàm lục giác âm (internal hex) bên trong lòng trụ.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Dòng trụ nào sau đây có độ thuôn 1,5 độ, giúp tăng diện tích nén xương, đạt độ vững ổn ban đầu xuất sắc và rất lý tưởng cho cấy ghép tức thì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Trụ TS2",
+        "B. Trụ TS3",
+        "C. Trụ TS4",
+        "D. Trụ US Mini"
+      ],
+      "answerStr": "B",
+      "explanation": "Dòng TS3 có độ thuôn nhẹ 1,5 độ, giúp tăng nén xương và tạo độ vững ổn ban đầu tuyệt vời, rất thích hợp cho cấy ghép tức thì sau nhổ răng và chịu lực tức thì.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Ưu điểm nổi bật của dòng trụ TS4 (độ thuôn nón 6 độ) trên lâm sàng là gì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Thân thẳng hoàn toàn giúp kiểm soát tốt độ sâu khi xương quá cứng",
+        "B. Đúc liền một khối không cần dùng ốc kết nối abutment",
+        "C. Đặt nhô cao ngang mức nướu không cần rạch vạt",
+        "D. Tối đa hóa diện tích nén ép xương, giúp đạt độ vững ổn sơ khởi tốt ngay cả trong xương xốp D4"
+      ],
+      "answerStr": "D",
+      "explanation": "TS4 có độ thuôn lớn 6 độ dạng hình nón rõ rệt, nén ép xương tối đa nên dễ dàng đạt độ vững ổn sơ khởi cao ở vùng xương có mật độ xốp như xương D4.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Hiệu ứng chuyển bệ (Platform Switching) trên dòng trụ TS mang lại lợi ích sinh học nào?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Giúp tăng chiều cao thân răng lâm sàng ở vùng răng cối",
+        "B. Ngăn mào xương tụt thấp, tạo khoảng trống cho mô mềm quanh cổ dày dặn và bảo tồn mào xương nâng đỡ",
+        "C. Giảm tối đa chi phí sản xuất linh kiện phục hình",
+        "D. Cho phép gắn mão sứ trực tiếp mà không cần dùng khớp nối abutment"
+      ],
+      "answerStr": "B",
+      "explanation": "Nhờ bệ tựa abutment hẹp hơn đường kính đỉnh fixture, platform switching giúp ngăn mào xương tụt thấp và tạo mô mềm dày dặn bao quanh cổ để bảo tồn xương nâng đỡ.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Đặc điểm thiết kế cốt lõi của dòng trụ SS fixture là gì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Implant mức xương (bone level), kết nối lục giác ngoài",
+        "B. Implant mức mô mềm (tissue level), kết nối bát giác trong (internal octa), cổ loe tích hợp liền khối",
+        "C. Thân ren phẳng butt-joint không có độ thuôn",
+        "D. Thiết kế nguyên khối đúc liền dành riêng cho sống hàm mỏng"
+      ],
+      "answerStr": "B",
+      "explanation": "Trụ SS là dòng Implant ngang mức mô mềm (tissue level), có ngàm bát giác trong 8 cạnh, độ thuôn vát 8 độ và có phần cổ loe xuyên nướu đúc liền với thân trụ.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Nhược điểm lâm sàng lớn nhất của dòng trụ SS fixture là gì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Khả năng chống gãy vỡ vùng cổ kém do thành kim loại mỏng",
+        "B. Không thể sử dụng cho kỹ thuật phẫu thuật một thì",
+        "C. Phần cổ xuyên nướu đúc cố định nên không thể mài chỉnh biên dạng thoát mô mềm, hạn chế chỉ định ở vùng thẩm mỹ răng cửa",
+        "D. Thường xuyên bị lún chìm quá sâu vào xương ổ răng khi chịu tải"
+      ],
+      "answerStr": "C",
+      "explanation": "Do cổ xuyên nướu của trụ SS được chế tác cố định về chiều cao và độ loe, bác sĩ không thể tùy chỉnh biên dạng thoát nên dòng trụ này bị hạn chế rất nhiều ở vùng thẩm mỹ phía trước.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Giải mã thông số kỹ thuật của sản phẩm trụ mang mã hiệu \"SS3R4011S18\" bao gồm những gì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Dòng trụ SS, thân thẳng (3), bệ Regular (R), đường kính 4.0mm, dài 11mm, bề mặt SA (S), cổ cao 1,8mm (18)",
+        "B. Dòng trụ SS, thân thuôn côn (3), bệ Regular (R), đường kính 4.0mm, dài 11mm, bề mặt SA (S), cổ cao 1,8mm (18)",
+        "C. Dòng trụ SS, thân thuôn nón (3), bệ Wide (R), đường kính 4.0mm, dài 18mm, bề mặt HA (S), cổ cao 1,1mm",
+        "D. Dòng trụ TS, kết nối bát giác (3), bệ Regular (R), đường kính 4.0mm, dài 11mm, bề mặt trơn nhẵn"
+      ],
+      "answerStr": "B",
+      "explanation": "Mã SS3R4011S18 chỉ: dòng SS, kiểu thân thuôn côn (3), cỡ bệ Regular (R), đường kính 4.0mm, dài 11mm (4011), xử lý bề mặt SA (S), và cổ xuyên nướu cao 1,8mm (18).",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Ưu điểm nổi bật nhất của dòng trụ US fixture (kết nối lục giác ngoài - external hex) trên lâm sàng là gì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Không cần sử dụng ốc vặn kết nối giữa các thành phần",
+        "B. Tiếp xúc mặt phẳng phẳng (butt-joint) giúp chống lún và dễ dàng bù trừ hướng lắp khi các trụ bị lệch trục/phân kỳ trong phục hình toàn hàm bắt ốc",
+        "C. Tự động tạo hiệu ứng platform switching ở mọi kích cỡ bệ",
+        "D. Có thể vùi sâu 2mm dưới mào xương mà không làm tiêu xương"
+      ],
+      "answerStr": "B",
+      "explanation": "Trụ US có bệ lục giác ngoài và tiếp xúc butt-joint giúp triệt tiêu hiện tượng trượt lún, đồng thời dễ bù trừ trục phân kỳ của các trụ, rất ưu việt trong phục hình bắt ốc toàn hàm.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Dòng trụ MS implant chuyên biệt thường được chỉ định ưu tiên cho tình huống lâm sàng nào?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Khoảng mất răng cối lớn hàm dưới có khoảng phục hình rộng",
+        "B. Sống hàm hẹp (như vùng răng cửa hàm dưới), nâng đỡ hàm phủ (overdenture) hoặc làm răng tạm",
+        "C. Vùng xương xốp hàm trên cần ghép xoang hở",
+        "D. Mất răng toàn hàm yêu cầu bắt ốc phục hình đa khối"
+      ],
+      "answerStr": "B",
+      "explanation": "Trụ MS là dòng nguyên khối (one-piece) thân hẹp chuyên dùng cho sống hàm hẹp (như răng cửa hàm dưới), hỗ trợ neo giữ hàm phủ hoặc nâng đỡ phục hình tạm thời.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Quy tắc định vị độ sâu theo mốc giải phẫu khi đặt các dòng trụ TS, US, SS và MS là gì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Tất cả đều phải cấy ngập sâu 1mm dưới mào xương",
+        "B. Trụ TS đặt sâu dưới mào xương; trụ US ngang mào xương; trụ SS và MS đặt ngang mức nướu",
+        "C. Trụ TS đặt ngang mức nướu; trụ SS và MS đặt dưới mào xương",
+        "D. Trụ US đặt sâu dưới mào xương; các trụ còn lại đặt ngang mô mềm"
+      ],
+      "answerStr": "B",
+      "explanation": "Theo bài giảng: Trụ TS đặt sâu dưới mào xương (0,5 - 1mm); trụ US đặt ngang mào xương; còn trụ SS và MS bắt buộc phải đặt ngang mức nướu mô mềm.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Nắp đậy khâu vùi (cover screw) có vai trò chính là gì trong phẫu thuật cấy ghép hai thì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Định hình viền nướu và lối vào chuẩn bị gắn răng sứ",
+        "B. Khóa chặt mão răng sứ vào thân abutment vĩnh viễn",
+        "C. Đậy kín đầu fixture suốt giai đoạn chờ tích hợp xương để bảo vệ lòng trụ và ren không bị mô xương hay mô liên kết xâm lấn",
+        "D. Lấy dấu vị trí không gian ba chiều của Implant trong miệng"
+      ],
+      "answerStr": "C",
+      "explanation": "Nắp đậy (cover screw) được vặn kín đầu fixture trong thì một rồi khâu kín vạt phủ lên để bảo vệ cấu trúc bên trong lòng trụ không bị mô xương hay mô xơ xâm lấn trong thời gian chờ tích hợp xương.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Trụ lành thương nướu (Healing abutment) đóng vai trò then chốt nào trong quy trình điều trị Implant?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Tăng cường khả năng nén ép xương vùng quanh chóp trụ",
+        "B. Sao chép vị trí không gian của fixture lên trên mẫu thạch cao",
+        "C. Nối dài thân cùi răng để làm điểm tựa gắn xi-măng mão sứ",
+        "D. Định hình vòm mô mềm, duy trì đường hầm xuyên nướu lý tưởng chuẩn bị cho việc gắn abutment phục hình chính thức"
+      ],
+      "answerStr": "D",
+      "explanation": "Trụ lành thương có vai trò tái tạo, định hình vòm mô mềm và tạo lập đường hầm xuyên nướu chuẩn giải phẫu để sau đó gắn kết abutment chính thức khít sát mà không chèn ép nướu.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Linh kiện nào sau đây có nhiệm vụ sao chép nguyên vẹn vị trí, hướng và kết nối của trụ fixture trên mẫu thạch cao tại Labo?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Trụ lấy dấu (Impression coping)",
+        "B. Trụ tương tự (Lab analog)",
+        "C. Ống sáp đúc (Burn-out cylinder)",
+        "D. Đầu vặn fixture mount"
+      ],
+      "answerStr": "B",
+      "explanation": "Trụ tương tự (Lab analog) đóng vai trò sao chép y hệt vị trí, cao độ và kiểu liên kết của trụ fixture trên mẫu hàm thạch cao để kỹ thuật viên chế tác phục hình tại labo.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Giải pháp Abutment ba khối (kết hợp abutment một khối lồng với abutment hai khối) thường được ứng dụng để giải quyết tình huống lâm sàng nào?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Thay thế hoàn toàn phẫu thuật ghép xương mào hàm",
+        "B. Chuyển đổi kiểu kết nối cơ học trên các trụ Implant đặc thù/đời cũ sang hệ thống phục hình tương thích mới",
+        "C. Cấy ghép tức thì không cần thời gian chờ lành thương nướu",
+        "D. Giảm đường kính của ren ngoài thân fixture khi khoan đặt trụ"
+      ],
+      "answerStr": "B",
+      "explanation": "Abutment ba khối (như dùng convertible abutment) là giải pháp giúp chuyển đổi cơ học kết nối từ lòng fixture lên phục hình, rất hữu hiệu trong các ca phục hồi trụ đời cũ hoặc hệ thống kết nối phức tạp.",
+      "isStarred": false,
+      "isHidden": false
+    }
+  ],
+  "lessonQuiz": true,
+  "lessonFile": "O2-2.json"
+}

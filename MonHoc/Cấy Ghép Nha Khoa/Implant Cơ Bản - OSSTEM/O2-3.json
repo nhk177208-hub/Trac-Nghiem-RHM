@@ -1,0 +1,159 @@
+{
+  "id": 9001145145242,
+  "name": "Cấu trúc Implant (Phần 1) -Cấu trúc đại thể",
+  "folder": "Bài học/Cấy Ghép Nha Khoa/Implant Cơ Bản - OSSTEM",
+  "questions": [
+    {
+      "question": "Nhược điểm cơ học và sinh học lớn nhất của hệ thống Implant kết nối ngoài (external hex) là gì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Không thể chịu được lực tải tại vùng răng cối lớn hàm dưới",
+        "B. Thân trụ quá dốc khiến quá trình đặt vào xương dễ bị kẹt",
+        "C. Khó tháo rời khớp nối abutment khi cần sửa chữa phục hình",
+        "D. Vị trí tiếp giáp nằm lộ ngoài mào xương dễ tạo vi kẽ, gây vi rò vi khuẩn và dẫn đến tiêu xương mào"
+      ],
+      "answerStr": "D",
+      "explanation": "Giao diện liên kết giữa abutment và trụ ở dòng kết nối ngoài nằm lộ trên mào xương, dễ hình thành vi kẽ và vi rò vi khuẩn, từ đó gây tiêu xương mào viền quanh cổ trụ.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Thiết kế giải phẫu đặc trưng nào của dòng Implant ngang mô mềm (tissue level) giúp loại trừ vi rò vi khuẩn tại sát mào xương?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Khớp nối abutment gắn xi-măng trực tiếp mà không dùng ốc",
+        "B. Vùng cổ viền sinh học loe rộng được đúc tích hợp liền khối với thân trụ, đưa bệ kết nối lên ngang bờ viền nướu",
+        "C. Bề mặt thân trụ được để trơn láng hoàn toàn không xử lý nhám",
+        "D. Sử dụng ren đôi dọc toàn bộ chiều dài thân kim loại"
+      ],
+      "answerStr": "B",
+      "explanation": "Dòng ngang mô mềm tích hợp phần cổ viền sinh học liền khối với thân trụ, đưa vị trí bắt nối phục hình lên ngang mức nướu, giúp khu vực sát mào xương hoàn toàn kín khít và ngăn vi khuẩn xâm nhập vào xương.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Bất lợi lớn nhất của dòng Implant ngang mô mềm khi ứng dụng tại vùng răng cửa trước là gì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Khó giấu cổ kim loại loe nhô cao do không thể mài chỉnh sâu, tạo thách thức lớn về mặt thẩm mỹ",
+        "B. Tỉ lệ tích hợp xương thấp hơn đáng kể so với dòng kết nối ngoài",
+        "C. Nguy cơ gãy gập thân trụ rất cao do kim loại quá mềm",
+        "D. Luôn bắt buộc phải phẫu thuật ghép xương hai thì phức tạp"
+      ],
+      "answerStr": "A",
+      "explanation": "Phần cổ loe kim loại của dòng ngang mô mềm được đúc cố định và trồi lên nướu, không thể hạ thấp hay mài chỉnh sâu theo đường viền lợi nên rất khó đạt yêu cầu thẩm mỹ ở vùng răng cửa.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Biến chứng lâm sàng nghiêm trọng nào thường xảy ra khi bác sĩ cố tình cấy Implant ngang mô mềm quá sâu dưới mào xương?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Gãy hoàn toàn ốc kết nối abutment ngay khi siết lực",
+        "B. Bong tróc hoàn toàn lớp màng oxit thụ động quanh thân trụ",
+        "C. Tiêu xương mào viền quanh cổ dạng phễu rất trầm trọng",
+        "D. Làm đứt hoàn toàn bó mạch thần kinh lân cận"
+      ],
+      "answerStr": "C",
+      "explanation": "Cấy trụ ngang mô mềm quá sâu vào trong xương ổ răng sẽ phá vỡ khoảng sinh học bình thường, kéo theo hiện tượng tiêu xương vùng cổ dạng phễu rất nặng nề.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Cơ chế thiết kế đột phá nào giúp Implant kết nối trong đặt chìm bảo tồn xương mào viền tối ưu ngay cả trên nền xương gồ ghề?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Chuyển đổi bệ kết nối (Platform Switching) kết hợp liên kết côn âm sâu trong thân trụ",
+        "B. Mở rộng tối đa đường kính bệ tựa abutment so với trụ",
+        "C. Tạo rãnh thoát lực cơ học xuyên suốt chiều dài ren ốc",
+        "D. Tích hợp cổ láng không ren đặt ngang màng xương"
+      ],
+      "answerStr": "A",
+      "explanation": "Thiết kế bệ thu hẹp Platform Switching cùng mối nối côn âm sâu bên trong lòng trụ giúp dòng kết nối trong đặt chìm giữ vững mào xương quanh cổ vượt trội.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Điểm yếu kỹ thuật cần lưu ý của dòng Implant kết nối trong đặt chìm (như dòng TS) so với dòng ngang mô mềm là gì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Bước ren thưa khiến thời gian cấy ghép bị kéo dài",
+        "B. Hoàn toàn không thể thực hiện phục hình bắt ốc vặn",
+        "C. Thành cổ trụ mỏng hơn dễ nứt gãy khi chịu tải lớn, đồng thời dễ xảy ra hiện tượng trượt lún sâu của abutment do không có gờ chặn",
+        "D. Tương thích sinh học kém hơn do phải pha thêm tạp chất"
+      ],
+      "answerStr": "C",
+      "explanation": "Do lòng kết nối dạng côn trượt không có gờ chặn cơ học và thành cổ được tiện mỏng hơn, dòng kết nối trong đặt chìm có nguy cơ nứt tét cổ khi quá tải và dễ bị trượt lún abutment sâu hơn khi siết ốc.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Ưu thế lâm sàng vượt trội của trụ có thân thuôn hình nón so với trụ thân thẳng hình trụ song song là gì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Cho phép lực vặn đưa trụ vào được duy trì đều đặn từ đầu đến cuối",
+        "B. Nén chặt bè xương xung quanh khi vặn siết, tạo độ vững ổn ban đầu xuất sắc cho cấy ghép tức thì và chịu lực sớm",
+        "C. Triệt tiêu hoàn toàn nguy cơ lỏng ốc kết nối phục hình bên trên",
+        "D. Giúp giảm thiểu tối đa đường kính lỗ mở vạt nướu"
+      ],
+      "answerStr": "B",
+      "explanation": "Thân thuôn nón kèm cơ chế tự tạo ren làm tăng diện tích tiếp xúc và nén chặt xương bè, giúp lực siết tăng dần và đạt độ vững ổn sơ khởi cao – rất lý tưởng cho cấy ghép tức thì sau nhổ răng.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Trong trường hợp giải phẫu có các chân răng kế cận hội tụ hoặc xương ổ hẹp dần về chóp, thiết kế nào mang lại độ an toàn cao nhất?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Trụ thân thẳng có đường kính lớn",
+        "B. Trụ thân thuôn côn hình nón",
+        "C. Trụ kết nối ngoài hình trụ song song",
+        "D. Trụ liền khối dạng bậc thang"
+      ],
+      "answerStr": "B",
+      "explanation": "Phần chóp thuôn gọn của trụ thân nón giúp mũi trụ né tránh và phòng ngừa va chạm tổn thương vào chóp chân răng kế cận hoặc thành xương hẹp.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Yếu tố nào quyết định tính trơ sinh học và độ tương thích tuyệt đối của Titanium với mô sống cơ thể?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Lớp phủ xi-măng sinh học dày bám chắc ngoài bề mặt trụ",
+        "B. Độ cứng cơ học vượt trội ngăn chặn mọi biến dạng vi thể",
+        "C. Khả năng tự hình thành lớp màng oxit titan dioxit thụ động bền vững dày khoảng 200 nanomet chống ăn mòn điện hóa",
+        "D. Sự phóng thích có kiểm soát các ion kim loại vào bè xương"
+      ],
+      "answerStr": "C",
+      "explanation": "Titanium tiếp xúc với môi trường sẽ lập tức hình thành lớp màng titan dioxit thụ động trơ sinh học (dày khoảng 200 nm), ngăn rò rỉ ion độc và cho phép tế bào xương bám dính trực tiếp.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Quy tắc phân bổ sử dụng giữa Titanium Độ 4 và hợp kim Titanium Độ 5 trong điều trị cấy ghép lâm sàng là gì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Độ 4 dùng cho phục hình toàn hàm; Độ 5 dùng cho phục hình răng đơn lẻ",
+        "B. Độ 5 dùng cho thân trụ thông thường; Độ 4 dùng cho ốc kết nối",
+        "C. Độ 4 dùng cho thân trụ thông thường; Độ 5 dùng cho vị trí cần chịu uốn cao như implant hẹp, thân abutment và ốc kết nối",
+        "D. Cả hai loại đều có độ chịu lực và tương thích sinh học như nhau"
+      ],
+      "answerStr": "C",
+      "explanation": "Titanium Độ 4 (nguyên chất thương mại) cân bằng tốt giữa cơ tính và tương thích sinh học nên được ưu tiên làm thân trụ; còn hợp kim Titanium Độ 5 (pha Al-V) có độ chịu lực và chống uốn cao nên được dùng làm ốc kết nối, abutment hoặc trụ đường kính hẹp.",
+      "isStarred": false,
+      "isHidden": false
+    }
+  ],
+  "lessonQuiz": true,
+  "lessonFile": "O2-3.json"
+}
