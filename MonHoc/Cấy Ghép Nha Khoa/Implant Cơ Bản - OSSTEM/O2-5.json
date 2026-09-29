@@ -1,0 +1,159 @@
+{
+  "id": 9001066874456,
+  "name": "Cấu trúc Implant (Phần 3) - Đặc tính bề mặt",
+  "folder": "Bài học/Cấy Ghép Nha Khoa/Implant Cơ Bản - OSSTEM",
+  "questions": [
+    {
+      "question": "Tiến trình phát triển bề mặt trụ Implant nha khoa qua 4 thế hệ lần lượt theo thứ tự nào sau đây?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Bề mặt tiện thô -> Tạo nhám cơ học -> Biến đổi hóa học (ưa nước/phủ sinh học) -> Hoạt tính sinh học",
+        "B. Phun phủ TPS -> Bề mặt tiện thô -> Xoi mòn axit -> Phủ màng sinh học PRF",
+        "C. Bề mặt siêu ưa nước -> Thổi hạt RBM -> Bề mặt tiện thô -> Xử lý ion canxi",
+        "D. Bề mặt tiện thô -> Hoạt tính sinh học -> Tạo nhám cơ học -> Biến đổi hóa học"
+      ],
+      "answerStr": "A",
+      "explanation": "Bề mặt Implant tiến hóa qua 4 thế hệ: Thế hệ 1 là bề mặt tiện thô; Thế hệ 2 là xử lý tạo độ nhám cơ học nhằm tăng diện tích tiếp xúc; Thế hệ 3 là biến đổi đặc tính hóa học bề mặt để tăng tốc độ tích hợp xương; Thế hệ 4 hướng đến các đặc tính sinh học tế bào.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Nhược điểm lớn nhất của bề mặt Implant tiện thô nguyên bản (Thế hệ 1) trên lâm sàng là gì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Khó khử trùng và dễ giải phóng ion độc tính",
+        "B. Tỷ lệ thành công chỉ đạt khoảng 80% do độ nhám và diện tích tiếp xúc xương thấp",
+        "C. Làm tiêu biến hoàn toàn xương bè xung quanh trong tháng đầu",
+        "D. Gây phản ứng thải ghép cấp tính ngay sau phẫu thuật"
+      ],
+      "answerStr": "B",
+      "explanation": "Bề mặt tiện thô cơ học đơn thuần có độ nhám thấp (khoảng 0,5 đến 0,8 micromet), khiến tỷ lệ thành công chỉ đạt khoảng 80%, đòi hỏi sự ra đời của các phương pháp xử lý tạo nhám ở thế hệ sau.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Hạn chế chí mạng nào của kỹ thuật phun phủ titanium nhiệt độ cao (TPS) khiến phương pháp này không còn được ưa chuộng?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Không thể liên kết được với xương ổ răng",
+        "B. Bề mặt quá trơn láng làm giảm khả năng bám dính của cục máu đông",
+        "C. Độ nhám quá cao gây khó vệ sinh khi lộ ren dẫn đến tiêu xương nhanh, kèm nguy cơ bong tróc hạt titanium vào mô",
+        "D. Làm trụ Implant bị giòn và dễ gãy ngang thân khi chịu lực cắn"
+      ],
+      "answerStr": "C",
+      "explanation": "Bề mặt TPS dù tăng diện tích tiếp xúc gấp 6 lần nhưng nhược điểm lớn là độ nhám quá cao; khi lộ ren sẽ cực kỳ khó làm sạch dẫn đến tiêu xương nhanh, đồng thời các hạt titanium có thể bong tróc vào mô xung quanh.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Quy trình xử lý bề mặt SLA (Sand-blasted and Acid-etched) bao gồm những bước can thiệp nào?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Phun phủ plasma bột Hydroxyapatite rồi ngâm dung dịch muối canxi",
+        "B. Thổi hạt áp lực cao tạo các hốc lớn, sau đó xoi mòn axit tạo thêm các vi hốc li ti",
+        "C. Tiện gọt cơ học chính xác kết hợp đánh bóng bằng bột kim cương",
+        "D. Phủ nano canxi photphat kết hợp chiếu tia cực tím"
+      ],
+      "answerStr": "B",
+      "explanation": "Quy trình tạo bề mặt SLA gồm hai bước: đầu tiên là thổi hạt tạo ra các hốc lớn, tiếp theo là xoi mòn axit tạo thêm các vi hốc li ti, giúp tăng 45% diện tích bề mặt so với RBM và trở thành tiêu chuẩn vàng hiện nay.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Đặc điểm lâm sàng điển hình nhất của tình trạng thất bại trụ Implant phủ Hydroxyapatite (HA) thế hệ cũ (sau 5 đến 7 năm) là gì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Viêm mủ rầm rộ kèm tiêu xương hình chén sâu quanh cổ trụ",
+        "B. Trụ lung lay, xoay nhẹ là lấy ra được sạch sẽ mà không có dấu hiệu viêm mô mềm hay tiêu xương trên X-quang",
+        "C. Gãy hoàn toàn thân trụ titanium ngay vị trí ren đầu tiên",
+        "D. Nướu sưng nề hoại tử lan rộng sang các răng kế cận"
+      ],
+      "answerStr": "B",
+      "explanation": "Lớp phủ HA cũ sau nhiều năm bị tiêu biến trong cơ thể dẫn đến mất liên kết giữa trụ và xương; đặc điểm thất bại là nướu hoàn toàn không viêm, xương không tiêu trên X-quang nhưng trụ bị mất liên kết, vặn nhẹ là xoay và rút ra nguyên vẹn.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Trụ Implant xử lý bề mặt CA (ngâm trong dung dịch muối canxi) mang lại ưu thế vượt trội nào so với bề mặt SA/SLA thông thường?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Tăng gấp đôi độ dày của lớp vỏ kim loại ngoài thân trụ",
+        "B. Kháng lại hoàn toàn lực vặn xoắn cơ học trong xương cứng D1",
+        "C. Chuyển đặc tính bề mặt từ kỵ nước sang siêu ưa nước, chủ động thu hút thành phần máu và tăng khả năng hấp phụ protein",
+        "D. Tiêu biến hoàn toàn sau khi xương mới hình thành bao quanh"
+      ],
+      "answerStr": "C",
+      "explanation": "Việc ngâm trong dung dịch muối canxi giúp bề mặt Implant chuyển từ kỵ nước sang siêu ưa nước, tăng khả năng thấm ướt máu, hấp phụ protein dày đặc và thu hút tế bào đến kích hoạt lành thương nhanh chóng.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Thiết kế bề mặt BA (Bio-absorbable HA) của Osstem đã khắc phục nguy cơ bong tróc của thế hệ HA cũ bằng giải pháp nào?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Tăng độ dày lớp phủ HA lên gấp 10 lần",
+        "B. Trộn bột HA chung với hợp kim Titanium Độ 5 trước khi đúc trụ",
+        "C. Phủ một lớp HA siêu mỏng có thể tiêu sinh học lên bề mặt SA, lớp này kích thích tạo xương sớm rồi tự tiêu biến theo chu chuyển xương tự nhiên",
+        "D. Bọc kín lớp HA bằng một màng oxit titan dioxit thụ động"
+      ],
+      "answerStr": "C",
+      "explanation": "Bề mặt BA sử dụng lớp phủ HA siêu mỏng có thể tự tiêu sinh học; nó kích thích tích hợp xương sớm mà không sợ bong tróc, sau đó tiêu biến dần theo quá trình tái cấu trúc xương tự nhiên.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Ý nghĩa sinh học sống còn của tính chất \"siêu ưa nước\" đối với quá trình tích hợp xương là gì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Tạo điều kiện cho dịch mô rửa trôi toàn bộ tế bào viêm",
+        "B. Giúp máu lan tỏa tức thì, hình thành và duy trì mạng lưới fibrin của cục máu đông ổn định trên diện rộng để dẫn dụ tế bào tạo xương",
+        "C. Làm giảm tối đa nhiệt lượng sinh ra khi khoan xương ổ răng",
+        "D. Ngăn ngừa hoàn toàn sự bám dính của các chuỗi vi khuẩn kỵ khí"
+      ],
+      "answerStr": "B",
+      "explanation": "Tích hợp xương bắt đầu từ cục máu đông đầu tiên; bề mặt siêu ưa nước giúp máu thấm ướt tức thì, thiết lập và duy trì mạng lưới sợi fibrin vững chắc trên diện rộng, tạo môi trường vi mô tối ưu dẫn dụ tế bào gốc biệt hóa tạo xương.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Mục tiêu cốt lõi của những cải tiến bề mặt Implant (từ tạo nhám đến siêu ưa nước) là gì trên đường cong lành thương?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Triệt tiêu hoàn toàn sự sụt giảm sinh lý của độ ổn định sơ khởi",
+        "B. Giúp độ ổn định thứ phát dốc lên nhanh hơn, sớm bù đắp khoảng trống do sụt giảm ổn định sơ khởi và rút ngắn thời gian chờ tải lực",
+        "C. Kéo dài thời gian bán rã của tế bào hủy xương quanh cổ trụ",
+        "D. Cho phép bác sĩ bỏ qua bước đánh giá chất lượng xương của bệnh nhân"
+      ],
+      "answerStr": "B",
+      "explanation": "Đích đến của các cải tiến bề mặt là đẩy nhanh quá trình sinh xương, giúp đường cong ổn định thứ phát tăng sớm hơn để bù đắp sự sụt giảm của độ ổn định ban đầu, từ đó rút ngắn thời gian điều trị và cho phép chịu lực sớm an toàn.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Hướng nghiên cứu nổi bật của bề mặt Implant thế hệ thứ tư trong tương lai là gì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Phun phủ lớp vàng nguyên chất chống ăn mòn tuyệt đối",
+        "B. Tích hợp trực tiếp các yếu tố tăng trưởng sinh học (tương tự cơ chế của PRP/PRF) lên bề mặt trụ để kích hoạt lành xương chủ động",
+        "C. Làm bề mặt hoàn toàn trơn láng để giảm diện tích bám của vi khuẩn",
+        "D. Sử dụng công nghệ nam châm sinh học để hút bè xương vào trụ"
+      ],
+      "answerStr": "B",
+      "explanation": "Thế hệ thứ tư hướng đến hoạt tính sinh học tế bào, tiêu biểu là nghiên cứu gắn kết các yếu tố tăng trưởng chiết xuất từ máu tự thân (tương tự cơ chế màng PRF/PRP) lên bề mặt trụ để thúc đẩy quá trình lành thương xương nhanh chóng.",
+      "isStarred": false,
+      "isHidden": false
+    }
+  ],
+  "lessonQuiz": true,
+  "lessonFile": "O2-5.json"
+}

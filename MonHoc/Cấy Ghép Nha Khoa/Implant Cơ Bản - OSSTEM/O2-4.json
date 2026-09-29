@@ -1,0 +1,159 @@
+{
+  "id": 9001106009849,
+  "name": "Cấu trúc Implant (Phần 2) - Tích hợp xương và độ vững ổn",
+  "folder": "Bài học/Cấy Ghép Nha Khoa/Implant Cơ Bản - OSSTEM",
+  "questions": [
+    {
+      "question": "Thuật ngữ \"Tích hợp xương\" (Osseointegration) được khai sinh bởi ai và mô tả hiện tượng gì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Khai sinh bởi Linkow; mô tả sự hình thành màng nha chu nhân tạo quanh trụ",
+        "B. Khai sinh bởi Albrektsson; mô tả phản ứng bao xơ bảo vệ xương hàm",
+        "C. Khai sinh bởi Per-Ingvar Branemark; mô tả sự liên kết trực tiếp giữa titanium và mô xương không có mô liên kết xen vào",
+        "D. Khai sinh bởi Raghavendra; mô tả lực nén ép cơ học ban đầu tại xương vỏ"
+      ],
+      "answerStr": "C",
+      "explanation": "Giáo sư Per-Ingvar Branemark là người đặt ra thuật ngữ kinh điển Osseointegration để mô tả sự hợp nhất, liên kết trực tiếp giữa bề mặt implant titanium và xương mà không có mô liên kết sợi xen giữa.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Tiến trình lành thương quanh Implant được chia thành hai giai đoạn ổn định cốt lõi nào?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Độ vững ổn sơ khởi (cơ học) và độ vững ổn thứ phát (sinh học)",
+        "B. Độ ổn định tiếp xúc và độ ổn định từ xa",
+        "C. Độ vững ổn nén ép và độ vững ổn chịu lực tức thì",
+        "D. Độ ổn định trước phẫu thuật và độ ổn định sau phục hình"
+      ],
+      "answerStr": "A",
+      "explanation": "Tiến trình lành thương implant luôn gồm hai giai đoạn: độ vững ổn sơ khởi (lực neo giữ cơ học ban đầu ngay sau khi đặt trụ) và độ vững ổn thứ phát (quá trình tân tạo xương sinh học, tức tích hợp xương).",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Hiện tượng \"Vùng trũng ổn định\" (stability dip) xuất hiện trên biểu đồ lành thương do nguyên nhân nào?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Cục máu đông bị tiêu biến hoàn toàn mà không có tế bào di cư đến",
+        "B. Độ vững ổn sơ khởi giảm dần theo thời gian trong khi độ vững ổn thứ phát chưa tăng kịp để bù đắp",
+        "C. Tế bào hủy xương phá hủy toàn bộ vùng xương vỏ quanh cổ trụ",
+        "D. Ốc kết nối abutment bị lỏng trong quá trình chịu tải ăn nhai"
+      ],
+      "answerStr": "B",
+      "explanation": "Theo thời gian, lực giữ cơ học sơ khởi giảm dần, trong khi xương mới tạo lập (ổn định thứ phát) cần thời gian để tăng lên, tạo ra một giai đoạn suy giảm tổng độ ổn định gọi là vùng trũng ổn định (stability dip).",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Độ vững ổn sơ khởi của Implant chủ yếu được thiết lập thông qua cơ chế nào?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Quá trình khoáng hóa collagen của tạo cốt bào bám dính",
+        "B. Khóa cơ học và lực nén ép (press-fit) vào xương vỏ cùng sự dồn nén bè xương xốp khi lỗ khoan nhỏ hơn đường kính trụ",
+        "C. Sự phát triển hướng tâm của mạng lưới vi mạch máu",
+        "D. Lực hút tĩnh điện giữa các ion canxi bề mặt và dịch mô"
+      ],
+      "answerStr": "B",
+      "explanation": "Lỗ khoan phẫu thuật luôn nhỏ hơn đường kính trụ implant, tạo nên hiện tượng nén ép cơ học (press-fit) khoảng 1mm ở xương vỏ và dồn nén mảnh bè xương xốp, tạo khóa cơ học vững chắc ban đầu.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Thiết kế hình thể thân trụ dạng thuôn hình côn (tapered) mang lại lợi ích nổi bật nào cho tiến trình điều trị?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Giúp giảm thiểu đường kính ren để tránh làm nứt xương",
+        "B. Giúp loại bỏ hoàn toàn giai đoạn hình thành cục máu đông",
+        "C. Tạo diện tích tiếp xúc lớn và tăng lực nén cơ học, tối ưu hóa độ vững ổn sơ khởi để phục vụ cấy ghép và chịu lực tức thì",
+        "D. Làm cho quá trình vặn trụ vào xương không gặp lực cản ma sát"
+      ],
+      "answerStr": "C",
+      "explanation": "Thân thuôn hình côn làm tăng diện tích tiếp xúc và nén chặt bè xương, nâng cao độ vững ổn sơ khởi, từ đó mở đường cho các chỉ định chịu lực sớm và tải lực tức thì.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Khoảng thời gian từ tuần thứ 4 trong tiến trình lành thương sinh học có đặc điểm gì quan trọng?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Bắt đầu xuất hiện mạng lưới mao mạch đầu tiên quanh trụ",
+        "B. Diễn ra sự nối liền giữa xương tân tạo từ bề mặt trụ với xương bè ổ xương, đồng thời là lúc lực cơ học sơ khởi chạm đáy",
+        "C. Quá trình khoáng hóa xương phiến trưởng thành hoàn tất 100%",
+        "D. Xương vỏ hoàn toàn tiêu biến để nhường chỗ cho mô tủy"
+      ],
+      "answerStr": "B",
+      "explanation": "Đến khoảng tuần thứ 4, xương tân tạo từ bề mặt trụ và từ xương bè bắt đầu liên kết nối liền nhau; đây cũng là thời điểm lực cơ học sơ khởi chạm đáy và vùng trũng ổn định thể hiện rõ nhất.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Giai đoạn xương phiến trưởng thành bao quanh khít sát bề mặt Implant, hoàn tất giai đoạn tích hợp xương sớm để cho phép phục hình chịu lực thường đạt được ở thời điểm nào?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Sau 24 giờ đầu",
+        "B. Từ ngày thứ 5 đến ngày thứ 7",
+        "C. Từ tuần thứ 8 đến tuần thứ 12",
+        "D. Sau 1 năm đến 2 năm"
+      ],
+      "answerStr": "C",
+      "explanation": "Từ tuần 8 đến tuần 12, xương phiến trưởng thành bao quanh khít sát bề mặt implant, hoàn tất giai đoạn tích hợp xương sớm và cho phép lắp phục hình để chịu lực ăn nhai.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Khái niệm \"Tạo xương từ xa\" (distance osteogenesis) theo mô tả của Davies là gì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Xương được kích thích hình thành từ màng xương bên ngoài má",
+        "B. Xương chỉ tân tạo theo một chiều từ thành xương ổ của bệnh nhân rồi tiến dần về phía bề mặt implant",
+        "C. Xương phát triển đồng thời từ bề mặt implant và thành ổ xương",
+        "D. Xương mới được bồi đắp sau khi implant đã chịu lực ăn nhai nhiều năm"
+      ],
+      "answerStr": "B",
+      "explanation": "Tạo xương từ xa xảy ra khi xương mới chỉ được sinh ra từ thành xương ổ sẵn có của cơ thể rồi tiến dần về phía trụ implant, thường gặp ở thế hệ implant bề mặt tiện nhẵn thời xưa do huyết khối khó bám.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Hiện tượng \"Tạo xương tiếp xúc\" (contact osteogenesis) phụ thuộc trực tiếp vào yếu tố nào?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Bề mặt implant có độ nhám vi thể lý tưởng giúp giữ ổn định mạng lưới fibrin và tạo cốt bào bám dính để sinh xương hướng tâm",
+        "B. Tốc độ quay tối đa của mũi khoan xương lúc phẫu thuật",
+        "C. Độ dày của lớp niêm mạc nướu phủ lên đầu trụ",
+        "D. Chiều dài thân trụ implant đạt trên 15mm"
+      ],
+      "answerStr": "A",
+      "explanation": "Tạo xương tiếp xúc là hiện tượng xương được tân tạo đồng thời từ cả bề mặt implant lẫn thành xương ổ; điều này đòi hỏi bề mặt implant phải có độ nhám vi thể tối ưu để giữ mạng sợi huyết và cho tạo cốt bào bám dính sinh xương.",
+      "isStarred": false,
+      "isHidden": false
+    },
+    {
+      "question": "Mục tiêu cốt lõi của sự phối hợp giữa hình thể đại thể và công nghệ bề mặt vi thể của trụ Implant là gì?",
+      "images": [],
+      "explanationImages": [],
+      "options": [
+        "A. Giảm trọng lượng của trụ kim loại trong xương hàm",
+        "B. Tối ưu ổn định sơ khởi kết hợp đẩy nhanh ổn định thứ phát nhằm thu hẹp tối đa vùng trũng ổn định (stability dip)",
+        "C. Cho phép cấy ghép trên bệnh nhân bị viêm nha chu tiến triển chưa điều trị",
+        "D. Triệt tiêu nhu cầu tạo vạt phẫu thuật khi đặt trụ"
+      ],
+      "answerStr": "B",
+      "explanation": "Hình thể đại thể (thân thuôn) giúp tối ưu hóa độ vững ổn sơ khởi, còn công nghệ bề mặt vi thể đẩy nhanh độ vững ổn thứ phát; hai yếu tố hiệp đồng giúp nâng cao tổng độ ổn định sinh cơ học và thu hẹp vùng trũng ổn định nguy hiểm.",
+      "isStarred": false,
+      "isHidden": false
+    }
+  ],
+  "lessonQuiz": true,
+  "lessonFile": "O2-4.json"
+}
