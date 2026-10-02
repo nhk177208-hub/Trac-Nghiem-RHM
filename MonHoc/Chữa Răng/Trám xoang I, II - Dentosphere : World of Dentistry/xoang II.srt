@@ -1,0 +1,799 @@
+﻿1
+00:00:02,480 --> 00:00:08,559
+Chào các em. Hôm nay anh em ta sẽ tập trung vào các tổn thương mặt bên ở răng cối.
+
+2
+00:00:08,559 --> 00:00:14,480
+Chúng ta sẽ cùng tìm hiểu cách thực hiện phục hình thẩm mỹ cho các xoang sâu này,
+
+3
+00:00:14,480 --> 00:00:24,240
+bằng vật liệu composite nha khoa. Dù composite và hệ thống dán đã có nhiều cải tiến,
+
+4
+00:00:24,240 --> 00:00:31,840
+việc trám răng cối vẫn đòi hỏi kỹ thuật đắp lớp cẩn thận để tránh rò rỉ vi kẽ.
+
+5
+00:00:31,840 --> 00:00:37,840
+Nếu không, bệnh nhân sẽ bị ê buốt sau trám hoặc không đạt được hình thể giải phẫu lý tưởng.
+
+6
+00:00:37,840 --> 00:00:46,239
+Sự khít sát bờ và ngăn ngừa vi kẽ là yếu tố sống còn tại vùng bờ nướu,
+
+7
+00:00:46,239 --> 00:00:54,079
+điều này được quyết định bởi mức độ lan rộng của chính tổn thương sâu răng.
+
+8
+00:00:54,079 --> 00:01:02,000
+Việc tái tạo một tiếp điểm chuẩn khi trám composite xoang II có thể rất thách thức,
+
+9
+00:01:02,000 --> 00:01:10,240
+nhất là khi xoang sâu lan nhiều về phía nướu. Ở những tổn thương nông hơn thế này,
+
+10
+00:01:10,240 --> 00:01:16,640
+việc kiểm soát sẽ tương đối dễ dàng hơn nhờ sự tương quan thuận lợi với mô nướu.
+
+11
+00:01:16,640 --> 00:01:24,799
+Kích thước xoang sâu liên quan trực tiếp đến tiên lượng phục hình,
+
+12
+00:01:24,799 --> 00:01:33,360
+vì xoang nhỏ giúp dễ đặt khuôn đai, tạo độ ôm sát và độ kín tối ưu ở đáy nướu.
+
+13
+00:01:33,360 --> 00:01:42,880
+Khi kích thước xoang tăng lên và lan nhiều về phía nướu, tình huống sẽ càng khó khăn hơn.
+
+14
+00:01:42,880 --> 00:01:51,360
+Khi xoang trám mở rộng, các em phải nhớ kỹ hình thể kháng lực và các yếu tố dán,
+
+15
+00:01:51,360 --> 00:02:00,079
+trong suốt quá trình sửa soạn, đặt khuôn đai và phục hình lớp.
+
+16
+00:02:00,079 --> 00:02:06,240
+Bởi vì bất cứ khi nào tổn thương lan đến chân răng, ta sẽ gặp vấn đề về dán dính.
+
+17
+00:02:06,240 --> 00:02:13,920
+Có thể do hàm lượng khoáng thấp hơn, hoặc do ta đang cố dán lên xê-măng chân răng.
+
+18
+00:02:13,920 --> 00:02:19,760
+Ngà chân răng vốn ít khoáng và nhiều collagen, nên dán sẽ rất khó và kém bền vững.
+
+19
+00:02:19,760 --> 00:02:26,080
+Tiếp theo là khó khăn trong việc cô lập. Khi trám xoang II, tùy vào kích thước,
+
+20
+00:02:26,080 --> 00:02:33,440
+gai nướu ở vùng kẽ thường bị viêm nhiễm. Những gai nướu viêm này sẽ tiết ra dịch rỉ viêm,
+
+21
+00:02:33,440 --> 00:02:40,560
+gây cản trở bề mặt đã xói mòn (etching) hoặc bề mặt xoang vừa sửa soạn.
+
+22
+00:02:40,560 --> 00:02:49,280
+Một biến số khác là độ xuyên thấu của đèn quang trùng hợp ở những vùng sâu này.
+
+23
+00:02:49,280 --> 00:02:57,519
+Nếu xoang quá sâu, ánh sáng đèn chiếu sẽ khó xuyên thấu hoàn toàn,
+
+24
+00:02:57,519 --> 00:03:03,599
+dẫn đến mức độ chuyển hóa của composite bị giảm sút đáng kể.
+
+25
+00:03:03,599 --> 00:03:10,959
+Từ đó, ta có thể gặp vấn đề về kết dính hoặc lớp composite bên dưới không đông cứng hoàn toàn.
+
+26
+00:03:10,959 --> 00:03:19,040
+Ngoài ra còn có nguy cơ sâu răng thứ phát và khó khăn trong vệ sinh răng miệng sau điều trị,
+
+27
+00:03:19,040 --> 00:03:26,879
+do rất dễ dư miếng trám (overhang) ở vùng bờ nướu.
+
+28
+00:03:26,879 --> 00:03:34,560
+Để tái tạo vách bên xoang II, các em cần kỹ thuật đặt khuôn đai thật chuẩn xác.
+
+29
+00:03:34,560 --> 00:03:41,680
+Nó giúp tạo điểm tiếp xúc tốt. Do đó, việc etching men ngà và các bước dán,
+
+30
+00:03:41,680 --> 00:03:50,560
+cùng với việc trám composite từng lớp và hoàn thiện cẩn thận là cực kỳ quan trọng.
+
+31
+00:03:50,560 --> 00:03:58,319
+Tạo được tiếp điểm đúng giải phẫu và khít sát bằng composite là rất khó,
+
+32
+00:03:58,319 --> 00:04:06,799
+vì vật liệu này không thể nhồi nén (condensable) lực mạnh như amalgam được.
+
+33
+00:04:06,799 --> 00:04:14,560
+Nếu các em dùng khuôn đai phẳng của amalgam cho phục hình composite,
+
+34
+00:04:14,560 --> 00:04:21,840
+nó thường tạo ra một tiếp điểm phẳng nằm ở 1/3 nhai của thân răng.
+
+35
+00:04:21,840 --> 00:04:29,440
+Điều này dẫn đến tình trạng thiếu hụt biên dạng (under-contour) của miếng trám.
+
+36
+00:04:29,440 --> 00:04:35,360
+Như các em thấy trên hình minh họa này, nếu anh dùng đai phẳng,
+
+37
+00:04:35,360 --> 00:04:42,720
+nó sẽ không thể tạo ra một tiếp điểm mặt bên cong tròn như tự nhiên.
+
+38
+00:04:42,720 --> 00:04:52,160
+Và một tiếp điểm phẳng không phải là dạng lý tưởng. Việc miếng trám bị thiếu hụt biên dạng
+
+39
+00:04:52,160 --> 00:04:57,840
+sẽ dẫn đến tình trạng nhét thức ăn và kích thích quá mức lên các mô nha chu.
+
+40
+00:04:57,840 --> 00:05:06,800
+Hệ thống khuôn đai dành cho composite được thiết kế chuyên biệt để tạo ra các mặt bên cong,
+
+41
+00:05:06,800 --> 00:05:13,759
+và diện tiếp xúc khít sát. Chúng thường bao gồm các lá đai siêu mỏng tạo sẵn độ cong,
+
+42
+00:05:13,759 --> 00:05:20,880
+và một vòng kẹp tách kẽ (tooth separator). Như các em thấy, nó tạo ra biên dạng tối ưu.
+
+43
+00:05:20,880 --> 00:05:27,600
+Sau khi trám xong, nó sẽ tái tạo lại một tiếp điểm chuẩn giải phẫu.
+
+44
+00:05:27,600 --> 00:05:35,680
+Nói về chỉ định, quy tắc gần như tương tự với mọi ca trám composite vùng răng sau.
+
+45
+00:05:35,680 --> 00:05:42,720
+Nên ưu tiên cho các xoang nhỏ và vừa, tốt nhất là đường hoàn tất vẫn nằm trên men răng.
+
+46
+00:05:42,720 --> 00:05:49,919
+Phần lớn phục hình răng cối nhỏ và cối lớn, đặc biệt khi yêu cầu thẩm mỹ cao.
+
+47
+00:05:49,919 --> 00:05:59,280
+Một miếng trám không chịu toàn bộ các điểm chạm khớp cắn thì nhìn chung sẽ yếu hơn.
+
+48
+00:05:59,280 --> 00:06:06,960
+Chỉ nên áp dụng khi bệnh nhân không có khớp cắn quá tải hoặc thói quen cận chức năng.
+
+49
+00:06:06,960 --> 00:06:14,880
+Và bắt buộc các em phải cô lập tốt vùng làm việc trong quá trình thực hiện.
+
+50
+00:06:14,880 --> 00:06:23,360
+Nếu không thể cô lập đủ tốt, tiên lượng của những ca phục hình này sẽ rất kém.
+
+51
+00:06:23,360 --> 00:06:32,240
+Composite cũng có thể dùng tái tạo cùi để bảo vệ cấu trúc răng yếu trước khi bọc mão.
+
+52
+00:06:32,240 --> 00:06:39,840
+Khi vùng làm việc không thể cô lập hiệu quả, anh nhắc lại đây là một chống chỉ định.
+
+53
+00:06:39,840 --> 00:06:48,639
+Bởi vì nếu vẫn cố trám, composite ở vùng bờ nướu sẽ không đông cứng hoàn toàn.
+
+54
+00:06:48,639 --> 00:06:56,560
+Nguy cơ bong tróc mối dán ở vùng này rất cao. Do đó, trong những tình huống này,
+
+55
+00:06:56,560 --> 00:07:05,919
+các em nên chuyển sang kỹ thuật Sandwich. Các em có thể dùng GIC lai (resin-modified)
+
+56
+00:07:05,919 --> 00:07:15,199
+để lót đáy xoang trước khi phủ composite lên trên bề mặt.
+
+57
+00:07:15,199 --> 00:07:22,479
+Nếu bệnh nhân có lực cắn lớn do thói quen cận chức năng như nghiến răng,
+
+58
+00:07:22,479 --> 00:07:30,560
+hoặc bệnh nhân có nguy cơ sâu răng cao, vệ sinh răng miệng kém...
+
+59
+00:07:30,560 --> 00:07:38,560
+thì trám composite cũng là chống chỉ định. Về ưu điểm, thẩm mỹ là điểm cộng lớn nhất.
+
+60
+00:07:38,560 --> 00:07:46,879
+Tiếp theo, ta không cần mài bỏ nhiều mô răng như khi sửa soạn cho amalgam.
+
+61
+00:07:46,879 --> 00:07:55,039
+Amalgam đòi hỏi nguyên tắc tạo hình khoang nghiêm ngặt để đạt độ lưu giữ và kháng lực.
+
+62
+00:07:55,039 --> 00:08:03,599
+Với composite, việc sửa soạn sẽ dễ dàng và ít xâm lấn hơn nhờ hệ thống dán.
+
+63
+00:08:03,599 --> 00:08:11,360
+Bản thân composite cũng là một vật liệu cách nhiệt rất tốt cho tủy răng.
+
+64
+00:08:11,360 --> 00:08:18,639
+Nguy cơ rò rỉ vi kẽ giảm đi đáng kể nhờ sử dụng hệ thống keo dán (adhesive).
+
+65
+00:08:18,639 --> 00:08:26,319
+Nha khoa dán còn giúp tăng cường độ cứng chắc cho cấu trúc mô răng còn lại.
+
+66
+00:08:26,319 --> 00:08:33,039
+Về nhược điểm, nếu các em thao tác không cẩn thận sẽ gặp hiện tượng co ngót trùng hợp,
+
+67
+00:08:33,039 --> 00:08:41,360
+dẫn đến ê buốt sau trám hoặc sút miếng trám do không tuân thủ quy trình.
+
+68
+00:08:41,360 --> 00:08:49,279
+Một số dòng composite có độ kháng gãy thấp. Kỹ thuật này cũng nhạy cảm và tốn thời gian hơn.
+
+69
+00:08:49,279 --> 00:08:57,920
+Và chi phí vật liệu cũng đắt hơn amalgam. Đó là những nhược điểm chính.
+
+70
+00:08:57,920 --> 00:09:06,000
+Vậy, vấn đề khi dùng composite trám xoang II là gì? Thứ nhất, rất khó cách ly kiểm soát ẩm.
+
+71
+00:09:06,000 --> 00:09:13,839
+Không phải bất khả thi, nhưng khó. Tuy nhiên, nếu dùng đê cao su, các em không cần lo lắng.
+
+72
+00:09:13,839 --> 00:09:21,440
+Ở những vùng xoang mở rộng sâu dưới nướu, việc đặt đai trám cho khít sát
+
+73
+00:09:21,440 --> 00:09:29,600
+hay kỹ thuật dời bờ sâu (deep margin elevation) đều là những quy trình đầy thách thức.
+
+74
+00:09:29,600 --> 00:09:37,040
+Tiếp theo, anh em ta sẽ bàn về các kỹ thuật lâm sàng cho trám composite xoang II.
+
+75
+00:09:37,040 --> 00:09:44,240
+Như các em biết, so màu răng là bước quan trọng nhất khi ưu tiên thẩm mỹ.
+
+76
+00:09:44,240 --> 00:09:51,519
+Cần phải so màu trước khi răng bị khô do bị thổi ngắt quãng hay cách ly quá lâu,
+
+77
+00:09:51,519 --> 00:10:00,720
+bởi vì răng mất nước sẽ trở nên sáng màu hơn do sự suy giảm độ trong mờ.
+
+78
+00:10:00,720 --> 00:10:08,320
+Nếu xoang cần sửa soạn ít hoặc không cần mài, các em nên làm sạch vùng thao tác
+
+79
+00:10:08,320 --> 00:10:15,839
+bằng bột đánh bóng (pumice) để loại bỏ màng bám, mảng ố bề mặt và vôi răng.
+
+80
+00:10:15,839 --> 00:10:22,640
+Ghi nhận tương quan khớp cắn trước khi điều trị là nguyên tắc bắt buộc cho phục hình tối ưu.
+
+81
+00:10:22,640 --> 00:10:29,120
+Nên anh luôn dặn các em phải dùng giấy cắn đánh dấu các điểm chạm trước khi tiến hành trám.
+
+82
+00:10:29,120 --> 00:10:38,000
+Nên gây tê tại chỗ để quy trình diễn ra nhẹ nhàng, không gián đoạn và giúp giảm tiết nước bọt rõ rệt.
+
+83
+00:10:38,000 --> 00:10:45,040
+Cô lập cực kỳ quan trọng. Dù dùng gòn cuộn hay các phương pháp cách ly gián tiếp khác vẫn trám được,
+
+84
+00:10:45,040 --> 00:10:51,519
+nhưng kết quả sẽ rất khó dự đoán. Trong hình ảnh này, các em có thể thấy cách đặt chêm gỗ.
+
+85
+00:10:51,519 --> 00:10:58,480
+Mỗi đai trám sau khi đặt phải được cố định chắc chắn bằng một chêm kẽ răng.
+
+86
+00:10:58,480 --> 00:11:04,640
+Chêm giúp duy trì sự ôm sát của đai trám vào răng và bờ nướu để tránh dư vật liệu (overhang).
+
+87
+00:11:04,640 --> 00:11:11,760
+Nó cũng ngăn tay khoan tốc độ cao làm phạm vào bề mặt răng bên cạnh.
+
+88
+00:11:11,760 --> 00:11:17,920
+Không cần dùng lực chêm quá mạnh nếu các em sẽ dùng thêm vòng giữ khuôn (ring).
+
+89
+00:11:17,920 --> 00:11:26,560
+Nên đặt chêm ở khoảng tiếp cận (embrasure) rộng nhất, từ ngoài vào trong hoặc ngược lại.
+
+90
+00:11:26,560 --> 00:11:34,800
+Lợi ích của việc đặt chêm trước là tạo sự tách kẽ nhẹ giữa các răng kề nhau.
+
+91
+00:11:34,800 --> 00:11:44,399
+Nó đè gai nướu xuống, kiểm soát chảy máu, ngăn rỉ dịch nướu và ép sát đai trám vào bờ nướu.
+
+92
+00:11:44,399 --> 00:11:52,000
+Nguyên tắc của anh là "Nghĩ trước khi khoan". Giờ ta đi vào bước sửa soạn xoang.
+
+93
+00:11:52,000 --> 00:11:58,560
+Chêm các điểm tiếp xúc giúp bảo vệ răng bên cạnh và tránh dư vật liệu phục hình.
+
+94
+00:11:58,560 --> 00:12:06,000
+Dùng tay khoan tốc độ cao để mở đường vào mô răng tổn thương, loại bỏ mô răng bệnh.
+
+95
+00:12:06,000 --> 00:12:13,040
+Tạo hình thể tiện lợi cho thao tác trám, còn sự lưu giữ sẽ đạt được hoàn toàn nhờ hệ thống dán.
+
+96
+00:12:13,040 --> 00:12:20,000
+Với xoang II, vách trục có độ sâu tủy giảm dần giúp bảo tồn mô răng tốt hơn.
+
+97
+00:12:20,000 --> 00:12:27,680
+Thành mặt nhai và thành bên hơi hội tụ về phía nhai để tăng thêm hình thể lưu giữ
+
+98
+00:12:27,680 --> 00:12:35,279
+chống lại các lực tác động theo chiều dọc. Hộp mặt bên có góc chạm mặt ngoài vuông góc bề mặt men.
+
+99
+00:12:35,279 --> 00:12:44,240
+Việc vát mép (bevel) ở mặt nhai là tùy chọn, phụ thuộc vào hướng của trụ men răng.
+
+100
+00:12:44,240 --> 00:12:54,399
+Tuy nhiên, vát mép ở mặt bên phải được thực hiện cực kỳ cẩn thận. Đáy nướu phải vượt qua điểm tiếp xúc
+
+101
+00:12:54,399 --> 00:13:04,000
+về phía chóp và phải là mối nối đối đầu (butt joint). Sau khi sửa soạn, ta chọn hệ thống đai trám.
+
+102
+00:13:04,000 --> 00:13:12,240
+Điều này tùy theo sở thích của bác sĩ, cũng như vị trí và kích thước xoang trám trên lâm sàng.
+
+103
+00:13:12,240 --> 00:13:22,240
+Nếu điểm tiếp xúc chưa được mở hở trong lúc mài, dùng đai trám truyền thống sẽ đơn giản hơn đai chẻ.
+
+104
+00:13:22,240 --> 00:13:32,000
+Nếu dùng khuôn Tofflemire, các em luôn phải miết trước (pre-burnish) đai bằng cây nhồi đầu bi
+
+105
+00:13:32,000 --> 00:13:40,000
+để tạo độ cong nhẹ ở điểm tiếp xúc. Nếu không, nó sẽ tạo ra một tiếp điểm phẳng thiếu biên dạng.
+
+106
+00:13:40,000 --> 00:13:49,120
+Ở các xoang lớn, có thể ưu tiên dùng đai vòng quanh (circumferential band) thay vì đai chẻ từng phần.
+
+107
+00:13:49,120 --> 00:13:58,320
+Những lá đai siêu mỏng, uốn cong sẵn sẽ giúp tạo ra các vùng tiếp xúc chặt và cong tự nhiên.
+
+108
+00:13:58,320 --> 00:14:07,600
+Nên ưu tiên dùng chúng thay vì khuôn Tofflemire truyền thống vốn sinh ra cho vật liệu amalgam.
+
+109
+00:14:07,600 --> 00:14:16,480
+Nếu răng mọc kẹt hoặc dị dạng khiến vòng kẹp khó đưa vào, nha sĩ nên chuẩn bị sẵn
+
+110
+00:14:16,480 --> 00:14:24,880
+nhiều loại vòng kẹp với hình dáng ngàm (tine) khác nhau để tương thích với khoảng tiếp cận.
+
+111
+00:14:24,880 --> 00:14:34,240
+Khi đã đặt đai và vòng tách kẽ, các em phải kiểm tra lại độ khít sát trước khi bôi keo dán.
+
+112
+00:14:34,240 --> 00:14:42,839
+Một khuôn đai chuẩn sẽ không hở bất kỳ khe nào dọc theo bờ nướu giữa mô răng và lá đai.
+
+113
+00:14:42,839 --> 00:14:52,720
+Các lỗi thường gặp: Luôn sử dụng đai trám được tạo hình sẵn để tạo tiếp điểm chuẩn xác.
+
+114
+00:14:52,720 --> 00:15:01,920
+Nếu dùng đai phẳng, nó sẽ tạo ra mặt phẳng và làm miếng trám bị thiếu hụt biên dạng.
+
+115
+00:15:01,920 --> 00:15:11,199
+Đai trám của các em phải đặt vừa vặn thụ động, không bị biến dạng. Nếu đai móp méo, miếng trám sẽ móp méo.
+
+116
+00:15:11,199 --> 00:15:20,399
+Luôn nhớ, ngàm (tines) của vòng giữ khuôn phải được chèn vào giữa đai trám và chêm gỗ,
+
+117
+00:15:20,399 --> 00:15:30,320
+để ôm sát răng từ các góc chuyển tiếp (transitional line angles).
+
+118
+00:15:30,320 --> 00:15:41,040
+Bây giờ, anh em ta sẽ thảo luận một số khía cạnh lâm sàng của xoang II. Tại sao nó lại khó?
+
+119
+00:15:41,040 --> 00:15:49,279
+Qua thực hành lâm sàng, anh nhận thấy khó khăn nhất là việc tìm ra đúng chiếc răng "thủ phạm".
+
+120
+00:15:49,279 --> 00:15:56,959
+Bệnh nhân thường than phiền bị nhét thức ăn, nhưng khi các em khám lâm sàng,
+
+121
+00:15:56,959 --> 00:16:04,399
+gờ bên (marginal ridge) thường vẫn còn nguyên vẹn. Đó chính là bài toán khó cho nha sĩ.
+
+122
+00:16:04,399 --> 00:16:11,920
+Do đó, các em phải đánh giá xoang II dựa trên 5 khía cạnh. Nhưng trước khi khám,
+
+123
+00:16:11,920 --> 00:16:20,639
+phải yêu cầu bệnh nhân cạo vôi và đánh bóng. Vệ sinh kém là nguyên nhân hàng đầu gây xoang II.
+
+124
+00:16:20,639 --> 00:16:29,759
+Với mảng bám và vôi răng dày đặc, các em sẽ dễ dàng bỏ sót rất nhiều chi tiết tổn thương.
+
+125
+00:16:29,759 --> 00:16:38,480
+Sau khi cạo vôi, 5 yếu tố cần đánh giá là: Thứ nhất, xem xét tình trạng sưng đỏ, viêm nhiễm quanh vùng đó.
+
+126
+00:16:38,480 --> 00:16:48,320
+Điều đó chỉ điểm có vị trí nhét thức ăn gây viêm nướu. Thứ hai, tìm kiếm sự thô ráp trên bề mặt răng.
+
+127
+00:16:48,320 --> 00:16:57,040
+Điều này chỉ nhìn thấy nếu các em thổi khô răng và mô mềm. Thứ ba, dùng chỉ nha khoa để thử tiếp điểm.
+
+128
+00:16:57,040 --> 00:17:07,439
+Thứ tư, tìm các vết đổi màu. Như trên hình, có vết sẫm màu ở mặt gần răng cối lớn dù gờ bên hoàn toàn bình thường.
+
+129
+00:17:07,439 --> 00:17:17,760
+Và cuối cùng, các em phải chụp phim cánh cắn (bitewing). Đây là phim X-quang tiêu chuẩn để kiểm tra xoang II.
+
+130
+00:17:17,760 --> 00:17:26,720
+Như anh vừa nói ở slide trước, có một vết đổi màu đen ở mặt nhai, và khi mở tủy ra,
+
+131
+00:17:26,720 --> 00:17:34,480
+tổn thương sâu răng hiện rõ. Các em cần lúp quang học, thổi khô mô mềm và mô cứng để đánh giá chính xác.
+
+132
+00:17:34,480 --> 00:17:43,919
+Tiếp điểm lý tưởng là gì? Ở răng sau, điểm tiếp xúc nằm lệch về phía má và ở vị trí tiếp giáp giữa 1/3 nhai và 1/3 giữa.
+
+133
+00:17:43,919 --> 00:17:53,440
+Ở ca này, tiếp điểm giữa 2 răng cối nhỏ thì tốt, nhưng giữa cối nhỏ và cối lớn thì gặp vấn đề hở kẽ.
+
+134
+00:17:53,440 --> 00:18:03,600
+Gờ bên nguyên vẹn nhưng lại có tổn thương sâu mặt trong. Vùng đó trước đây bị mảng bám che khuất.
+
+135
+00:18:03,600 --> 00:18:13,760
+Nên khi cho bệnh nhân đi cạo vôi đánh bóng, tổn thương mới lộ rõ. Hãy luôn tuân thủ quy trình.
+
+136
+00:18:13,760 --> 00:18:24,240
+Như hình này quá rõ ràng, tiếp điểm bị hở và nhét thức ăn. Nhét thức ăn gây mất khoáng bề mặt,
+
+137
+00:18:24,240 --> 00:18:33,679
+lan tới ngà răng, khiến men răng mất nâng đỡ và vỡ ra dưới tác động của lực nhai hằng ngày.
+
+138
+00:18:33,679 --> 00:18:42,400
+Mũi khoan nào được khuyên dùng cho xoang II? anh khuyên dùng mũi kim cương tròn hoặc carbide tròn.
+
+139
+00:18:42,400 --> 00:18:52,240
+Nhớ là, khi sửa soạn bề mặt nhai, hãy dùng mũi khoan tròn nhỏ kết hợp tay khoan tốc độ cao.
+
+140
+00:18:52,240 --> 00:19:00,960
+Nhưng khi đi sâu gần buồng tủy, nơi có nguy cơ lộ tủy, hãy chuyển sang tay khoan tốc độ chậm cùng mũi tròn nhỏ,
+
+141
+00:19:00,960 --> 00:19:09,039
+kết hợp phun sương. Nếu không nhìn rõ vùng sâu, hãy tắt nước, chỉ dùng hơi (air coolant).
+
+142
+00:19:09,039 --> 00:19:19,200
+Mục đích là để làm mát liên tục và tránh hiện tượng quá nhiệt ngà răng (overheating).
+
+143
+00:19:19,200 --> 00:19:28,960
+Cách ly xoang II thế nào là tốt nhất? Với xoang I như trong hình, các em có thể chỉ cần cô lập một răng.
+
+144
+00:19:28,960 --> 00:19:39,120
+Nhưng với xoang II, các em bắt buộc phải cô lập nhiều răng để không gian thao tác được thoải mái.
+
+145
+00:19:39,120 --> 00:19:49,760
+Nếu chỉ cô lập một răng, các em không thể tạo xoang mặt bên hay đặt khuôn đai chính xác được.
+
+146
+00:19:49,760 --> 00:20:00,000
+Bộ kẹp (clamp) phù hợp nhất cho nha khoa phục hồi là kẹp không có cánh (wingless clamp),
+
+147
+00:20:00,000 --> 00:20:09,039
+vì nó nhỏ gọn và chừa đủ không gian cho các thao tác trám răng mặt bên phức tạp.
+
+148
+00:20:09,039 --> 00:20:20,080
+Xoang chỉ mất một vách bên là dễ trám nhất vì có gờ bên của răng kế cận làm hướng dẫn chiều cao.
+
+149
+00:20:20,080 --> 00:20:31,120
+Nhưng thực tế lâm sàng ít gặp, vì khi một răng có xoang II, mặt bên của răng kề cận thường cũng bị sâu.
+
+150
+00:20:31,120 --> 00:20:41,760
+Khi có 2 răng kề nhau cùng bị sâu, ta có thể đặt 2 đai cùng lúc với chêm gỗ và trám song song.
+
+151
+00:20:41,760 --> 00:20:54,720
+Vách bên vừa được phục hồi sẽ đóng vai trò hướng dẫn để các em tái tạo vách thứ hai. Ở đây, ta đặt hai đai cùng lúc nhưng chỉ trám từng vách một.
+
+152
+00:20:54,720 --> 00:21:04,159
+Sau đó tháo đai và chuyển vòng giữ khuôn sang vách tiếp theo để tạo tiếp điểm chặt. Nếu cố trám hai vách cùng lúc thì sao?
+
+153
+00:21:04,159 --> 00:21:16,720
+Sẽ có khoảng hở giữa hai răng dẫn đến tiếp điểm lỏng lẻo, và bệnh nhân sẽ lại than phiền vì nhét thức ăn.
+
+154
+00:21:16,720 --> 00:21:27,760
+Nên các em phải nhớ là chỉ trám từng vách một khi gặp xoang kề nhau. Điều quan trọng nhất trong xoang II là phải đóng kín tiếp điểm vùng cổ răng.
+
+155
+00:21:27,760 --> 00:21:40,559
+Đó là yếu tố sống còn, vì hở tiếp điểm sẽ gây viêm nhiễm, sâu răng thứ phát và dẫn đến rò rỉ vi kẽ quanh bờ miếng trám.
+
+156
+00:21:40,559 --> 00:21:50,960
+Để đóng kín kẽ cổ răng, các em cần một chêm gỗ thật chặt. Không nên dùng chêm nhựa vì nó rất dễ bị tuột ra.
+
+157
+00:21:50,960 --> 00:22:03,600
+Nếu chêm chưa đủ chặt, hãy dùng chêm to hơn hoặc quấn thêm băng keo Teflon (cao su non) quanh chêm. Nhiều đồng nghiệp hay hỏi anh:
+
+158
+00:22:03,600 --> 00:22:14,960
+"Có thể dùng composite lỏng (flowable) để tái tạo vách bên không?". Câu trả lời là KHÔNG, vì vật liệu này rất mềm, chịu lực kém và dễ vỡ.
+
+159
+00:22:14,960 --> 00:22:26,799
+Các em cần dùng composite đặc (packable) để tạo vách bên, vì nó có tỉ lệ hạt độn cao hơn và cứng chắc hơn nhiều so với loại lỏng.
+
+160
+00:22:26,799 --> 00:22:37,840
+Giờ ta cùng xem một ca lâm sàng xoang II. Bệnh nhân nữ 30 tuổi đến khám vì hay bị nhét thức ăn giữa răng cối lớn thứ nhất và răng cối nhỏ thứ hai hàm trên.
+
+161
+00:22:37,840 --> 00:22:46,960
+Răng gần như bị vôi răng bao phủ hoàn toàn. Nên trước khi khám, anh chỉ định cạo vôi răng trước.
+
+162
+00:22:46,960 --> 00:22:58,000
+Nhiều bệnh nhân hay cự cãi rằng họ chỉ đến trám răng chứ không muốn cạo vôi. Nhưng để đánh giá đúng tổn thương,
+
+163
+00:22:58,000 --> 00:23:09,280
+ở vùng đầy vôi răng là rất khó khăn cho nha sĩ. Nên các em luôn phải yêu cầu làm sạch trước. Khám xong, bước tiếp theo là sửa soạn xoang.
+
+164
+00:23:09,280 --> 00:23:19,200
+Điều quan trọng nhất là phải đặt chêm kẽ (interproximal wedge), vì nó giúp bảo vệ mô mềm và...
+
+165
+00:23:19,200 --> 00:23:27,840
+...ngăn mũi khoan phạm vào răng kế bên. Các em nhớ nhé, chêm tốt phải bằng gỗ, hình tam giác, và...
+
+166
+00:23:27,840 --> 00:23:35,919
+...phải đặt chêm từ ngoài vào trong hoặc ngược lại, tùy thuộc vào khoảng trống của khoang tiếp cận (embrasure).
+
+167
+00:23:35,919 --> 00:23:46,240
+Kế tiếp, ta tiến hành mở xoang. Như anh đã dặn, dùng mũi kim cương tròn với tay khoan siêu tốc ở mặt nhai, nhưng khi đi sâu xuống,
+
+168
+00:23:46,240 --> 00:23:55,360
+hãy dùng mũi kim cương tròn tốc độ chậm, kết hợp phun sương. Nếu khó nhìn chi tiết, các em có thể tắt nước, chỉ dùng hơi.
+
+169
+00:23:55,360 --> 00:24:06,880
+Ở đây, các em thấy xoang còn khá dơ và mất khoáng. Ta không thể dán composite lên đó, lý do là...
+
+170
+00:24:06,880 --> 00:24:14,559
+...mạng lưới collagen đã biến tính và mô ngà bị hủy khoáng, composite sẽ không thể bám dính tốt. Bắt buộc phải làm sạch hoàn toàn mô sâu.
+
+171
+00:24:14,559 --> 00:24:24,720
+Bước tiếp theo là đặt đê cao su. Các em biết tại sao các bước trước anh chưa đặt đê không? Lý do là...
+
+172
+00:24:24,720 --> 00:24:34,320
+...tiếp điểm lúc đó rất gồ ghề. Nếu cố ép tấm đê qua những chỗ gồ ghề đó, đê cao su sẽ bị rách. Tốt nhất là mở xoang, phá tiếp điểm trước rồi mới đặt đê.
+
+173
+00:24:34,320 --> 00:24:47,440
+Lúc này, xoang vẫn còn dơ và nhiều mô sâu mềm. Ta phải làm sạch hết, không được để sót lại bất cứ mô sâu nào, vì đó là phần mô răng yếu,
+
+174
+00:24:47,440 --> 00:24:59,679
+có thể gây bong tróc mối dán composite. Giờ thì xoang đã rất sạch, không còn mô mất khoáng, không còn mô sâu sẫm màu. Men ngà đều lành mạnh, đây là một xoang lý tưởng để trám.
+
+175
+00:24:59,679 --> 00:25:11,039
+Hãy luôn nhớ, phải mở hoàn toàn tiếp điểm giữa răng cối nhỏ và răng cối lớn để đặt đai trám thật thụ động. Bởi vì hình dạng vách bên...
+
+176
+00:25:11,039 --> 00:25:20,799
+...luôn phụ thuộc vào hình dạng của khuôn đai. Nếu đai trám bị biến dạng, vách bên cũng sẽ méo mó theo. Nên đai phải được đặt thụ động,
+
+177
+00:25:20,799 --> 00:25:31,600
+...để giữ nguyên hình thể chuẩn. Tiếp theo, anh đặt hai khuôn đai cùng lúc và chèn chêm gỗ vào kẽ răng.
+
+178
+00:25:31,600 --> 00:25:42,960
+Ta sẽ phục hồi lần lượt từng vách một. Như trên hình, ngàm của vòng giữ khuôn phải kẹp vào giữa đai trám và chêm.
+
+179
+00:25:42,960 --> 00:25:54,240
+Sau khi trám xong một vách, ta sẽ tháo đai ở vách đó ra và chuyển vòng kẹp sang răng tiếp theo. Các em nhìn đây,
+
+180
+00:25:54,240 --> 00:26:04,559
+một vách đã tái tạo xong, ngàm kẹp đã được dời sang răng cối lớn. Luôn nhớ rằng không được đắp hai vách cùng lúc. Lý do là...
+
+181
+00:26:04,559 --> 00:26:16,240
+...như anh đã nói, độ dày của đai có thể để lại khoảng hở giữa hai răng. Cứ trám từng vách một, tháo đai rồi mới dời ngàm sang vách kia.
+
+182
+00:26:16,799 --> 00:26:26,080
+Đến đây, xoang loại II đã được biến đổi thành xoang loại I, và giờ ta chỉ việc trám phần trung tâm mặt nhai.
+
+183
+00:26:26,080 --> 00:26:37,279
+Đáy xoang nên được lót bằng một lớp composite lỏng dày khoảng 1mm. Sau đó, phần còn lại của hộp mặt bên...
+
+184
+00:26:37,279 --> 00:26:47,840
+...sẽ được lấp đầy từng lớp 2mm bằng composite đặc (packable). Chúng ta đắp mặt nhai theo từng múi rãnh, vì khớp cắn của bệnh nhân...
+
+185
+00:26:47,840 --> 00:26:56,960
+...là ưu tiên hàng đầu của nha sĩ. Bề mặt nhai không được trám phẳng lì, điều đó sẽ gây khó khăn trong việc ăn nhai.
+
+186
+00:26:57,120 --> 00:27:11,120
+Và đây là kết quả sau cùng. Composite ôm khít sát, tiếp điểm rất chặt và không còn thấy tổn thương sâu răng. Đây là một...
+
+187
+00:27:11,120 --> 00:27:19,039
+...tiếp điểm lý tưởng giúp bệnh nhân ăn nhai tốt mà không bị nhét thức ăn giữa các răng cối nữa.
+
+188
+00:27:19,039 --> 00:27:30,080
+Sau khi hoàn tất công việc trên lâm sàng, bước tiếp theo là đánh giá lại miếng trám bằng phim X-quang. Phim sẽ giúp các em đánh giá...
+
+189
+00:27:30,080 --> 00:27:45,039
+...các điểm tiếp xúc mặt bên và phần cổ răng của miếng trám, nơi rất dễ hở nếu các em đặt khuôn đai không chuẩn xác.
+
+190
+00:27:45,039 --> 00:27:57,440
+X-quang giúp đánh giá độ khít sát của phục hình. Ở phần cuối bài giảng, anh muốn dặn dò các em vài điều. Phim cánh cắn (bitewing) là tiêu chuẩn cho xoang II.
+
+191
+00:27:57,440 --> 00:28:08,399
+Các em không nên chụp phim quanh chóp (periapical) để khám sâu răng. Phim quanh chóp chỉ tốt để khảo sát vùng cuống răng, nó không cho thấy chi tiết...
+
+192
+00:28:08,399 --> 00:28:17,760
+...về tổn thương sâu răng hay mức độ lan rộng của phục hình. Nên hãy dùng phim cánh cắn. Điều thứ hai, hãy dùng mũi kim cương hoặc carbide tròn để tạo xoang.
+
+193
+00:28:17,760 --> 00:28:32,960
+anh nhắc lại, khi mở xoang ở mặt nhai, các em dùng mũi kim cương tròn tay khoan nhanh. Nhưng khi mài gần sát tủy, phải thao tác cực kỳ chuẩn xác bằng mũi tròn...
+
+194
+00:28:32,960 --> 00:28:46,399
+...với tay khoan tốc độ chậm. Luôn mài xoang bằng chuyển động lướt nhẹ (brushing), đừng nhấn ấn liên tục. Và điều quan trọng nữa là...
+
+195
+00:28:46,399 --> 00:29:00,080
+...luôn mở xoang dưới hệ thống phun sương. Nếu không nhìn rõ, có thể tắt nước, chỉ dùng hơi thổi mát. Kế tiếp, tuyệt đối không tạo xoang mà không đặt chêm gỗ.
+
+196
+00:29:00,080 --> 00:29:13,279
+Điều này rất quan trọng vì chêm kẽ không chỉ bảo vệ mô mềm mà còn bảo vệ răng bên cạnh khi khoan. Thường thì nếu không dùng chêm, các em sẽ...
+
+197
+00:29:13,279 --> 00:29:25,760
+...khoan phạm vào mặt bên của răng lành kế cận. Một khi bị xước, quá trình mất khoáng sẽ bắt đầu, nên phải tuyệt đối tránh. Chêm phải bằng gỗ...
+
+198
+00:29:25,760 --> 00:29:37,039
+...hình tam giác và đủ chặt. Nếu chêm bị lỏng, các em có thể quấn thêm băng keo Teflon quanh chêm. Đặc biệt quan trọng, luôn dùng đai trám uốn cong sẵn cho...
+
+199
+00:29:37,039 --> 00:29:48,799
+...xoang loại II, vì biên dạng của đai sẽ quyết định hình thể vách bên. Đừng dùng đai Tofflemire vì nó luôn tạo ra một miếng trám phẳng lỳ thiếu lồi tối đa.
+
+200
+00:29:48,799 --> 00:29:56,919
+Cuối cùng, sẽ không có gì là thách thức nếu các em không ngừng thực hành, thực hành và rèn luyện suốt đời. Cảm ơn các em đã lắng nghe.
