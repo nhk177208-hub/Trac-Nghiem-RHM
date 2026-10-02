@@ -1,0 +1,4303 @@
+﻿1
+00:00:00,420 --> 00:00:03,420
+[Nhạc nền]
+
+2
+00:00:07,940 --> 00:00:14,009
+[Nhạc nền]
+
+3
+00:00:31,520 --> 00:00:33,980
+Chào các em, thầy rất vui khi được đồng hành cùng các em.
+
+4
+00:00:33,980 --> 00:00:36,899
+Chào mừng đến với chuỗi bài giảng Nha khoa.
+
+5
+00:00:36,899 --> 00:00:39,660
+Trong tập này, chúng ta sẽ tiếp tục bàn về
+
+6
+00:00:39,660 --> 00:00:41,879
+các nguyên tắc cơ bản trong sửa soạn xoang trám,
+
+7
+00:00:41,879 --> 00:00:43,440
+cụ thể là các nguyên tắc cơ học.
+
+8
+00:00:43,440 --> 00:00:46,140
+Hôm nay, thầy trò ta sẽ đi sâu vào
+
+9
+00:00:46,140 --> 00:00:50,340
+hình thể kháng lực và hình thể lưu giữ.
+
+10
+00:00:50,340 --> 00:00:52,620
+Thầy cũng xin nói rõ là thầy không nhận
+
+11
+00:00:52,620 --> 00:00:54,660
+bất kỳ thù lao hay lợi ích tài chính nào
+
+12
+00:00:54,660 --> 00:00:56,879
+từ việc doanh số của các sản phẩm
+
+13
+00:00:56,879 --> 00:00:58,620
+được chiếu hay nhắc đến trong bài giảng này.
+
+14
+00:00:58,620 --> 00:01:01,800
+Đồng thời, thầy hoàn toàn không có xung đột lợi ích
+
+15
+00:01:01,800 --> 00:01:03,899
+với bất kỳ vật liệu hay kỹ thuật nào
+
+16
+00:01:03,899 --> 00:01:05,880
+được đưa ra thảo luận ngày hôm nay.
+
+17
+00:01:05,880 --> 00:01:08,100
+Một lần nữa, thầy muốn nhắc nhở các em rằng
+
+18
+00:01:08,100 --> 00:01:09,380
+bài giảng này đã được bảo hộ bản quyền.
+
+19
+00:01:09,380 --> 00:01:12,180
+Các em không được phép sao chép, chỉnh sửa
+
+20
+00:01:12,180 --> 00:01:14,880
+hay phân phối lại dưới bất kỳ hình thức nào,
+
+21
+00:01:14,880 --> 00:01:16,580
+dù là điện tử hay cơ học,
+
+22
+00:01:16,580 --> 00:01:19,860
+khi chưa có sự cho phép bằng văn bản của thầy.
+
+23
+00:01:19,860 --> 00:01:21,780
+Chúng ta đã học qua phần 1 về định nghĩa,
+
+24
+00:01:21,780 --> 00:01:24,780
+phần 2 là các nguyên tắc chung.
+
+25
+00:01:24,780 --> 00:01:26,939
+Phần 3 là các nguyên tắc sinh học, bao gồm
+
+26
+00:01:26,939 --> 00:01:29,340
+bảo vệ tủy, phòng ngừa sâu răng tái phát,
+
+27
+00:01:29,340 --> 00:01:31,020
+bảo tồn mô răng nâng đỡ,
+
+28
+00:01:31,020 --> 00:01:33,600
+và đảm bảo phẫu trường làm việc sạch sẽ.
+
+29
+00:01:33,600 --> 00:01:35,400
+Chúng ta cũng đã bắt đầu bàn về nguyên tắc cơ học,
+
+30
+00:01:35,400 --> 00:01:37,439
+cụ thể là hình thể đường viền của xoang.
+
+31
+00:01:37,439 --> 00:01:40,140
+Hôm nay, chúng ta sẽ đi tiếp
+
+32
+00:01:40,140 --> 00:01:42,060
+vào các nguyên tắc cơ học khác,
+
+33
+00:01:42,060 --> 00:01:44,460
+đặc biệt là cách tạo ra
+
+34
+00:01:44,460 --> 00:01:46,799
+hình thể kháng lực và hình thể lưu giữ.
+
+35
+00:01:46,799 --> 00:01:49,799
+Đây là nội dung chính của buổi học hôm nay:
+
+36
+00:01:49,799 --> 00:01:53,820
+Định nghĩa, các yếu tố ảnh hưởng đến kháng lực,
+
+37
+00:01:53,820 --> 00:01:55,979
+các kiểu hình thể kháng lực, các loại lưu giữ,
+
+38
+00:01:55,979 --> 00:01:58,320
+phương tiện lưu giữ,
+
+39
+00:01:58,320 --> 00:02:00,119
+và yếu tố chọn lựa chi tiết lưu giữ phù hợp.
+
+40
+00:02:00,119 --> 00:02:03,060
+Chúng ta cùng bắt đầu với định nghĩa nhé.
+
+41
+00:02:03,060 --> 00:02:05,520
+Thế nào là kháng lực và thế nào là lưu giữ?
+
+42
+00:02:05,520 --> 00:02:08,340
+Kháng lực là hình thể xoang trám được tạo ra
+
+43
+00:02:08,340 --> 00:02:10,739
+nhằm mục đích ngăn chặn sự nứt gãy.
+
+44
+00:02:10,739 --> 00:02:12,660
+Sự nứt gãy này có thể xảy ra ở mô răng
+
+45
+00:02:12,660 --> 00:02:16,260
+hoặc ở vật liệu phục hồi.
+
+46
+00:02:16,260 --> 00:02:19,920
+Đó là một thiết kế hình thể
+
+47
+00:02:19,920 --> 00:02:23,459
+nhằm bảo vệ tính toàn vẹn
+
+48
+00:02:23,459 --> 00:02:26,580
+của cấu trúc mô răng còn lại
+
+49
+00:02:26,580 --> 00:02:29,640
+và cả vật liệu phục hồi hay miếng trám của các em.
+
+50
+00:02:29,640 --> 00:02:31,980
+Nó cung cấp cho răng và miếng trám
+
+51
+00:02:31,980 --> 00:02:35,840
+đủ sức bền cơ học để chịu đựng
+
+52
+00:02:35,840 --> 00:02:39,000
+tác động phá hủy của lực nén khớp cắn.
+
+53
+00:02:39,000 --> 00:02:42,000
+Trong khi đó, lưu giữ là hình thể xoang trám
+
+54
+00:02:42,000 --> 00:02:44,879
+được thiết kế để ngăn ngừa
+
+55
+00:02:44,879 --> 00:02:47,959
+sự xê dịch hoặc bong tróc
+
+56
+00:02:47,959 --> 00:02:51,540
+của miếng trám ra khỏi xoang.
+
+57
+00:02:51,540 --> 00:02:54,120
+Thực ra đây là hai khái niệm hoàn toàn khác biệt
+
+58
+00:02:54,120 --> 00:02:59,459
+về mặt ý nghĩa độc lập với nhau.
+
+59
+00:02:59,459 --> 00:03:02,099
+Kháng lực là một chức năng chuyên biệt,
+
+60
+00:03:02,099 --> 00:03:05,099
+còn lưu giữ lại là một chức năng hoàn toàn khác.
+
+61
+00:03:05,099 --> 00:03:08,340
+Nhưng câu hỏi đặt ra ở đây là,
+
+62
+00:03:08,340 --> 00:03:11,700
+tại sao chúng ta lại thường ghép chung chúng lại với nhau?
+
+63
+00:03:11,700 --> 00:03:13,920
+Tại sao lại gộp kháng lực và lưu giữ?
+
+64
+00:03:13,920 --> 00:03:16,019
+Kháng lực nghĩa là không được nứt gãy.
+
+65
+00:03:16,019 --> 00:03:19,200
+Lưu giữ nghĩa là không bị xê dịch hay sút rớt.
+
+66
+00:03:19,200 --> 00:03:21,959
+Đây là một mục tiêu, và kia là một mục tiêu khác.
+
+67
+00:03:21,959 --> 00:03:25,140
+Tại sao lại kết hợp chúng? Đó là vì
+
+68
+00:03:25,140 --> 00:03:27,599
+hình thể kháng lực và hình thể lưu giữ
+
+69
+00:03:27,599 --> 00:03:30,239
+thực chất chính là hai mặt
+
+70
+00:03:30,239 --> 00:03:35,580
+của cùng một đồng xu.
+
+71
+00:03:35,580 --> 00:03:38,220
+Thế nào là hai mặt của cùng một đồng xu?
+
+72
+00:03:38,220 --> 00:03:40,799
+Thứ nhất, cả hai hình thể này đều cấu thành một thiết kế
+
+73
+00:03:40,799 --> 00:03:42,720
+xoang trám nhằm chống lại
+
+74
+00:03:42,720 --> 00:03:44,760
+tác động của lực nhai.
+
+75
+00:03:44,760 --> 00:03:47,879
+Tức là chúng chia sẻ chung một "kẻ thù",
+
+76
+00:03:47,879 --> 00:03:50,159
+đó chính là lực nén khớp cắn.
+
+77
+00:03:50,159 --> 00:03:53,640
+Đó là điểm thứ nhất. Thứ hai, mỗi hình thể
+
+78
+00:03:53,640 --> 00:03:56,519
+đều được xem là một yếu tố cấu thành chính
+
+79
+00:03:56,519 --> 00:03:59,819
+tạo nên hình thể kia. Do đó,
+
+80
+00:03:59,819 --> 00:04:02,640
+lưu giữ là yếu tố trọng yếu để đảm bảo kháng lực,
+
+81
+00:04:02,640 --> 00:04:05,040
+và ngược lại, kháng lực cũng là yếu tố sống còn
+
+82
+00:04:05,040 --> 00:04:08,159
+để đảm bảo khả năng lưu giữ.
+
+83
+00:04:08,159 --> 00:04:10,200
+Nói một cách dễ hiểu,
+
+84
+00:04:10,200 --> 00:04:12,360
+để có được kháng lực tốt
+
+85
+00:04:12,360 --> 00:04:15,120
+và tránh nứt gãy miếng trám,
+
+86
+00:04:15,120 --> 00:04:18,959
+thì miếng trám không được phép xê dịch hay sút rớt.
+
+87
+00:04:18,959 --> 00:04:22,320
+Bởi vì mỗi khi nó bị xê dịch,
+
+88
+00:04:22,320 --> 00:04:25,020
+nó sẽ tạo ra một vi chuyển động.
+
+89
+00:04:25,020 --> 00:04:27,600
+Nếu vùng rìa bị xê dịch mà vùng trung tâm cố định,
+
+90
+00:04:27,600 --> 00:04:29,940
+nó sẽ gãy ngay từ vùng trung tâm.
+
+91
+00:04:29,940 --> 00:04:32,880
+Cũng giống như khi các em bẻ uốn một cây thước,
+
+92
+00:04:32,880 --> 00:04:36,120
+cho đến khi nó gãy đôi ngay ở chính giữa vậy.
+
+93
+00:04:36,120 --> 00:04:39,419
+Và tương tự đối với lưu giữ,
+
+94
+00:04:39,419 --> 00:04:41,580
+để miếng trám có thể bám dính lưu giữ tốt,
+
+95
+00:04:41,580 --> 00:04:44,040
+thì bản thân nó phải nguyên vẹn.
+
+96
+00:04:44,040 --> 00:04:45,840
+Nếu miếng trám bị vỡ nát thành nhiều mảnh vụn,
+
+97
+00:04:45,840 --> 00:04:48,479
+nó sẽ cực kỳ dễ dàng bị sút rớt ra khỏi xoang.
+
+98
+00:04:48,479 --> 00:04:51,360
+Cuối cùng, có những chi tiết lưu giữ
+
+99
+00:04:51,360 --> 00:04:54,120
+mà khi các em sửa soạn xoang để tạo kháng lực,
+
+100
+00:04:54,120 --> 00:04:56,460
+thì tự động nó sẽ tạo ra luôn
+
+101
+00:04:56,460 --> 00:04:59,400
+cả hình thể lưu giữ. Và ngược lại, nếu các em sửa soạn xoang
+
+102
+00:04:59,400 --> 00:05:01,740
+với mục đích lưu giữ, nó cũng sẽ mang lại cho các em
+
+103
+00:05:01,740 --> 00:05:05,820
+khả năng kháng lực tương ứng. Lấy ví dụ,
+
+104
+00:05:05,820 --> 00:05:08,520
+góc mép xoang nên được tạo ở 90 độ.
+
+105
+00:05:08,520 --> 00:05:11,940
+Góc mép xoang (cavo-surface angle) phải đạt 90 độ,
+
+106
+00:05:11,940 --> 00:05:15,900
+để đảm bảo vách men răng
+
+107
+00:05:15,900 --> 00:05:18,660
+được nâng đỡ tốt nhất, giữ nguyên độ dày tối đa,
+
+108
+00:05:18,660 --> 00:05:20,639
+và đồng thời đảm bảo miếng trám amalgam
+
+109
+00:05:20,639 --> 00:05:22,560
+hoàn toàn nguyên vẹn ở vùng rìa,
+
+110
+00:05:22,560 --> 00:05:24,720
+như chúng ta đã thảo luận ở bài trước.
+
+111
+00:05:24,720 --> 00:05:27,479
+Đặc điểm này được xem là một hình thể kháng lực.
+
+112
+00:05:27,479 --> 00:05:31,020
+Nhưng khi các em chủ đích tạo góc mép xoang 90 độ,
+
+113
+00:05:31,020 --> 00:05:34,080
+thì vách xoang sẽ có xu hướng hội tụ về phía mặt nhai,
+
+114
+00:05:34,080 --> 00:05:36,660
+và điều này lại cung cấp luôn cả hình thể lưu giữ.
+
+115
+00:05:36,660 --> 00:05:39,960
+Còn nếu các em muốn sửa soạn một xoang
+
+116
+00:05:39,960 --> 00:05:42,780
+với các vách hội tụ chỉ với mục đích
+
+117
+00:05:42,780 --> 00:05:45,300
+tạo ra khả năng lưu giữ,
+
+118
+00:05:45,300 --> 00:05:47,520
+và độ hội tụ này thường là 5 độ so với trục dọc
+
+119
+00:05:47,520 --> 00:05:50,460
+của răng,
+
+120
+00:05:50,460 --> 00:05:53,100
+thì thao tác này cũng vô tình khiến
+
+121
+00:05:53,100 --> 00:05:55,259
+góc mép xoang đạt 90 độ. Các em thấy đấy,
+
+122
+00:05:55,259 --> 00:05:58,560
+các em chủ định tạo ra thiết kế này
+
+123
+00:05:58,560 --> 00:06:00,419
+để có lưu giữ, nhưng đồng thời
+
+124
+00:06:00,419 --> 00:06:03,720
+nó lại mang đến cho các em góc mép xoang 90 độ
+
+125
+00:06:03,720 --> 00:06:06,060
+chính là hình thể kháng lực. Giờ chúng ta hãy đi sâu
+
+126
+00:06:06,060 --> 00:06:08,759
+vào một vài chi tiết, và bàn về
+
+127
+00:06:08,759 --> 00:06:10,440
+các yếu tố ảnh hưởng đến kháng lực.
+
+128
+00:06:10,440 --> 00:06:11,759
+Khi xét đến các yếu tố này,
+
+129
+00:06:11,759 --> 00:06:13,320
+như đã được đề cập
+
+130
+00:06:13,320 --> 00:06:15,600
+trong phần định nghĩa - hãy cùng nhắc lại một chút
+
+131
+00:06:15,600 --> 00:06:18,780
+về định nghĩa kháng lực nhé.
+
+132
+00:06:18,780 --> 00:06:22,020
+Kháng lực là hình thể
+
+133
+00:06:22,020 --> 00:06:23,160
+xoang trám được tạo ra
+
+134
+00:06:23,160 --> 00:06:27,120
+nhằm mục đích ngăn chặn sự nứt gãy
+
+135
+00:06:27,120 --> 00:06:29,160
+của miếng trám hoặc cấu trúc răng.
+
+136
+00:06:29,160 --> 00:06:32,639
+Vậy, đây là hình thể xoang trám
+
+137
+00:06:32,639 --> 00:06:34,620
+giúp ngăn ngừa sự nứt gãy.
+
+138
+00:06:34,620 --> 00:06:37,160
+Tác nhân nào có thể làm vỡ miếng trám?
+
+139
+00:06:37,160 --> 00:06:39,660
+Chính là Lực nén nhai. Do đó, các em có
+
+140
+00:06:39,660 --> 00:06:41,880
+các yếu tố liên quan đến lực nén khớp cắn,
+
+141
+00:06:41,880 --> 00:06:43,020
+để ngăn ngừa sự nứt gãy của cái gì?
+
+142
+00:06:43,020 --> 00:06:45,539
+Đó là của mô răng, vốn được bảo vệ
+
+143
+00:06:45,539 --> 00:06:46,919
+thông qua thiết kế xoang trám; hoặc của miếng trám,
+
+144
+00:06:46,919 --> 00:06:49,860
+vốn phụ thuộc vào các đặc tính vật lý
+
+145
+00:06:49,860 --> 00:06:51,539
+của vật liệu phục hồi.
+
+146
+00:06:51,539 --> 00:06:54,060
+Vậy chúng ta có ba nhóm yếu tố chính
+
+147
+00:06:54,060 --> 00:06:55,500
+ảnh hưởng đến kháng lực, như đã nêu
+
+148
+00:06:55,500 --> 00:06:57,780
+trong phần định nghĩa: Các yếu tố thuộc về lực nén khớp cắn,
+
+149
+00:06:57,780 --> 00:06:59,819
+các yếu tố thuộc về thiết kế xoang trám,
+
+150
+00:06:59,819 --> 00:07:01,680
+và các yếu tố liên quan đến đặc tính vật lý
+
+151
+00:07:01,680 --> 00:07:03,479
+của vật liệu phục hồi.
+
+152
+00:07:03,479 --> 00:07:05,220
+Xét về yếu tố lực nén nhai,
+
+153
+00:07:05,220 --> 00:07:06,840
+bất kỳ lực tác động nào
+
+154
+00:07:06,840 --> 00:07:09,720
+cũng được xác định bởi ba thông số
+
+155
+00:07:09,720 --> 00:07:12,960
+quan trọng nhất.
+
+156
+00:07:12,960 --> 00:07:15,780
+Thứ nhất là cường độ,
+
+157
+00:07:15,780 --> 00:07:16,979
+tức là độ lớn bao nhiêu.
+
+158
+00:07:16,979 --> 00:07:18,240
+Thứ hai là hướng tác động,
+
+159
+00:07:18,240 --> 00:07:21,539
+tức là nó nhắm vào đâu.
+
+160
+00:07:21,539 --> 00:07:25,020
+Và thứ ba là tính chất của lực.
+
+161
+00:07:25,020 --> 00:07:27,539
+Khi chúng ta phân tích và
+
+162
+00:07:27,539 --> 00:07:29,520
+áp dụng các thông số này vào lực nén khớp cắn,
+
+163
+00:07:29,520 --> 00:07:31,199
+thì cường độ lực nén khớp cắn
+
+164
+00:07:31,199 --> 00:07:33,840
+lớn đến mức nào? Độ lớn của lực nén này
+
+165
+00:07:33,840 --> 00:07:35,940
+là bao nhiêu? Để thầy biết được
+
+166
+00:07:35,940 --> 00:07:39,720
+"kẻ thù" của mình mạnh cỡ nào và làm sao để chống lại nó.
+
+167
+00:07:39,720 --> 00:07:43,860
+Liệu nó là 15, 20 hay 25 theo bất kỳ đơn vị đo lường
+
+168
+00:07:43,860 --> 00:07:47,759
+lực nào?
+
+169
+00:07:47,759 --> 00:07:49,080
+Lực nén khớp cắn rơi vào khoảng
+
+170
+00:07:49,080 --> 00:07:52,139
+- các em lưu ý chữ "khoảng" nhé,
+
+171
+00:07:52,139 --> 00:07:55,740
+nghĩa là không phải một con số tuyệt đối - 75 Newton
+
+172
+00:07:55,740 --> 00:07:57,539
+trên mỗi centimet vuông.
+
+173
+00:07:57,539 --> 00:07:59,220
+Đó chỉ là khoảng ước lượng.
+
+174
+00:07:59,220 --> 00:08:01,020
+Thầy thì không thích dùng khái niệm ước chừng,
+
+175
+00:08:01,020 --> 00:08:03,900
+thầy muốn một con số chính xác tuyệt đối cơ.
+
+176
+00:08:03,900 --> 00:08:05,639
+Vì đây là "kẻ thù" mà, thầy cần thiết kế xoang trám
+
+177
+00:08:05,639 --> 00:08:07,620
+sao cho triệt tiêu hoàn toàn tác động của nó.
+
+178
+00:08:07,620 --> 00:08:11,220
+Tuy nhiên, tất cả các nhà nghiên cứu
+
+179
+00:08:11,220 --> 00:08:13,620
+đều chỉ ra rằng lực này thay đổi ở mỗi bệnh nhân,
+
+180
+00:08:13,620 --> 00:08:16,979
+và các em không thể xác định một con số cố định
+
+181
+00:08:16,979 --> 00:08:19,259
+để mô tả cường độ lực nén khớp cắn.
+
+182
+00:08:19,259 --> 00:08:21,780
+Lý do là vì cường độ này khác nhau
+
+183
+00:08:21,780 --> 00:08:24,300
+tùy thuộc vào sức co bóp của cơ nhai,
+
+184
+00:08:24,300 --> 00:08:26,400
+mà sức cơ thì khác nhau
+
+185
+00:08:26,400 --> 00:08:28,259
+từ người này sang người khác.
+
+186
+00:08:28,259 --> 00:08:30,539
+Ngay trên cùng một bệnh nhân, nó cũng thay đổi
+
+187
+00:08:30,539 --> 00:08:32,459
+theo loại thức ăn, kiểu khớp cắn,
+
+188
+00:08:32,459 --> 00:08:34,979
+sự lồng múi tối đa, tuổi tác, giới tính,
+
+189
+00:08:34,979 --> 00:08:37,680
+và vị trí răng mà các em đang tiến hành
+
+190
+00:08:37,680 --> 00:08:39,620
+đo đạc lực nén khớp cắn.
+
+191
+00:08:39,620 --> 00:08:42,180
+Ví dụ, lực ở rìa cắn răng cửa
+
+192
+00:08:42,180 --> 00:08:45,360
+chắc chắn sẽ khác so với đỉnh múi răng nanh,
+
+193
+00:08:45,360 --> 00:08:47,660
+và khác với mặt nhai của răng cối nhỏ
+
+194
+00:08:47,660 --> 00:08:50,820
+hay mặt nhai của răng cối lớn.
+
+195
+00:08:50,820 --> 00:08:53,580
+Và còn sự thay đổi theo thời gian nữa.
+
+196
+00:08:53,580 --> 00:08:56,040
+Cho dù trên cùng một răng, cùng một loại thức ăn,
+
+197
+00:08:56,040 --> 00:08:58,560
+cùng một sức cơ nhai ở cùng một bệnh nhân,
+
+198
+00:08:58,560 --> 00:09:01,200
+thì lực nhai buổi sáng cũng có thể khác
+
+199
+00:09:01,200 --> 00:09:03,899
+so với lực nhai vào buổi chiều.
+
+200
+00:09:03,899 --> 00:09:06,300
+Đó là lý do chúng ta không có một con số tuyệt đối
+
+201
+00:09:06,300 --> 00:09:08,880
+nào để định nghĩa cường độ lực nén khớp cắn.
+
+202
+00:09:08,880 --> 00:09:10,980
+Vì vậy, chúng ta không dùng thông số này
+
+203
+00:09:10,980 --> 00:09:14,040
+làm định chuẩn thiết kế duy nhất.
+
+204
+00:09:14,040 --> 00:09:14,880
+Thông số thứ hai là hướng lực.
+
+205
+00:09:14,880 --> 00:09:17,220
+Lực nhai có thể truyền xuống
+
+206
+00:09:17,220 --> 00:09:19,260
+dưới dạng lực nén, lực kéo hay lực xé.
+
+207
+00:09:19,260 --> 00:09:21,540
+Tại sao lại có tất cả các dạng lực này?
+
+208
+00:09:21,540 --> 00:09:23,279
+Bởi vì theo những gì chúng ta được biết,
+
+209
+00:09:23,279 --> 00:09:25,920
+thì lực nhai vuông góc
+
+210
+00:09:25,920 --> 00:09:27,899
+với mặt nhai tại mọi điểm tiếp xúc.
+
+211
+00:09:27,899 --> 00:09:32,940
+Nhưng đây có phải là một khái niệm tuyệt đối không?
+
+212
+00:09:32,940 --> 00:09:35,100
+Thực chất không hoàn toàn là như vậy.
+
+213
+00:09:35,100 --> 00:09:37,380
+Nó vuông góc, nhưng bề mặt răng lại
+
+214
+00:09:37,380 --> 00:09:39,360
+không hề bằng phẳng.
+
+215
+00:09:39,360 --> 00:09:42,360
+Cấu trúc giải phẫu của bề mặt răng,
+
+216
+00:09:42,360 --> 00:09:45,600
+hay địa hình bề mặt răng thay đổi
+
+217
+00:09:45,600 --> 00:09:47,459
+từ mặt phẳng đỉnh múi, sườn múi,
+
+218
+00:09:47,459 --> 00:09:49,800
+cho đến các rãnh hố.
+
+219
+00:09:49,800 --> 00:09:51,120
+Nếu các em quan sát biểu đồ này,
+
+220
+00:09:51,120 --> 00:09:54,560
+những đường màu trắng thể hiện
+
+221
+00:09:54,560 --> 00:09:58,560
+hướng tác động của lực nén khớp cắn,
+
+222
+00:09:58,560 --> 00:10:00,420
+chúng vuông góc với bề mặt, nhưng bề mặt
+
+223
+00:10:00,420 --> 00:10:03,480
+lại không hề phẳng. Địa hình giải phẫu
+
+224
+00:10:03,480 --> 00:10:06,180
+của mặt nhai lồi lõm không đồng đều.
+
+225
+00:10:06,180 --> 00:10:10,620
+Do đó, tổng hòa lại, nó trở thành
+
+226
+00:10:10,620 --> 00:10:13,380
+một dạng lực đa hướng.
+
+227
+00:10:13,380 --> 00:10:15,360
+Chính vì thế, chúng ta cũng không thể
+
+228
+00:10:15,360 --> 00:10:17,760
+chỉ định một hướng lực duy nhất.
+
+229
+00:10:17,760 --> 00:10:20,220
+Hướng lực sẽ thay đổi liên tục
+
+230
+00:10:20,220 --> 00:10:23,399
+tùy theo độ uốn lượn giải phẫu của bề mặt răng.
+
+231
+00:10:23,399 --> 00:10:25,860
+Cuối cùng là về tính chất của lực.
+
+232
+00:10:25,860 --> 00:10:29,160
+Nó là tĩnh, động hay có tính chu kỳ?
+
+233
+00:10:29,160 --> 00:10:32,399
+Thực ra nó bao gồm cả ba đặc tính này.
+
+234
+00:10:32,399 --> 00:10:34,320
+Nó tĩnh khi ở khớp cắn trung tâm,
+
+235
+00:10:34,320 --> 00:10:36,060
+động trong các vận động lệch tâm
+
+236
+00:10:36,060 --> 00:10:37,920
+như trượt sang bên, và có tính chu kỳ lặp lại
+
+237
+00:10:37,920 --> 00:10:40,560
+khi các em nhai thức ăn.
+
+238
+00:10:40,560 --> 00:10:43,920
+Tóm lại, lực nén khớp cắn
+
+239
+00:10:43,920 --> 00:10:46,380
+là một lực cắn có tính chu kỳ,
+
+240
+00:10:46,380 --> 00:10:49,920
+với cường độ và hướng đa dạng
+
+241
+00:10:49,920 --> 00:10:52,220
+xuất hiện liên tục trong quá trình nhai,
+
+242
+00:10:52,220 --> 00:10:55,560
+gây mỏi cho cấu trúc mô răng còn lại
+
+243
+00:10:55,560 --> 00:10:57,660
+cũng như vật liệu trám,
+
+244
+00:10:57,660 --> 00:11:00,000
+từ đó thúc đẩy nguy cơ nứt gãy.
+
+245
+00:11:00,000 --> 00:11:01,140
+Đó là lý do tại sao thiết kế xoang trám của các em
+
+246
+00:11:01,140 --> 00:11:04,079
+phải làm giảm thiểu tối đa tác động
+
+247
+00:11:04,079 --> 00:11:06,360
+của loại lực này lên cả miếng trám
+
+248
+00:11:06,360 --> 00:11:07,920
+và cấu trúc răng tự nhiên còn lại.
+
+249
+00:11:07,920 --> 00:11:10,320
+Nghĩa là, các em phải thiết kế xoang
+
+250
+00:11:10,320 --> 00:11:12,720
+để phân tán lực hoàn toàn,
+
+251
+00:11:12,720 --> 00:11:15,660
+sao cho hợp lực tác động cuối cùng
+
+252
+00:11:15,660 --> 00:11:17,579
+lên mô răng và miếng trám
+
+253
+00:11:17,579 --> 00:11:19,440
+bằng 0 (triệt tiêu lực).
+
+254
+00:11:19,440 --> 00:11:23,700
+Chính vì thế, thứ nhất, các em phải xác định
+
+255
+00:11:23,700 --> 00:11:26,660
+chính xác các điểm chạm khớp
+
+256
+00:11:26,660 --> 00:11:30,000
+để tránh đặt đường hoàn tất của miếng trám
+
+257
+00:11:30,000 --> 00:11:32,459
+ngay tại những vị trí tiếp xúc này,
+
+258
+00:11:32,459 --> 00:11:34,860
+vì nó sẽ làm tăng nguy cơ nứt gãy
+
+259
+00:11:34,860 --> 00:11:37,560
+do lực nén nhai trực tiếp.
+
+260
+00:11:37,560 --> 00:11:40,860
+Và nếu các em còn nhớ bức ảnh đầu tiên
+
+261
+00:11:40,860 --> 00:11:43,200
+của chủ đề này, đó là một trong những việc quan trọng nhất
+
+262
+00:11:43,200 --> 00:11:45,420
+trước khi sửa soạn xoang.
+
+263
+00:11:45,420 --> 00:11:48,540
+Chúng ta phải xác định các vùng lồng múi tối đa,
+
+264
+00:11:48,540 --> 00:11:50,160
+một là để đưa bờ mép xoang
+
+265
+00:11:50,160 --> 00:11:52,680
+ra khỏi vùng chạm khớp đó, hoặc ít nhất
+
+266
+00:11:52,680 --> 00:11:54,779
+là phải tạo đủ độ dày cho vật liệu trám
+
+267
+00:11:54,779 --> 00:11:58,140
+và cấu trúc mô răng tại vị trí này.
+
+268
+00:11:58,140 --> 00:12:00,420
+Đây chính là chức năng bảo vệ của thiết kế xoang.
+
+269
+00:12:00,420 --> 00:12:02,040
+Tiếp đến là nhóm yếu tố thứ hai,
+
+270
+00:12:02,040 --> 00:12:04,320
+thuộc về thiết kế xoang trám.
+
+271
+00:12:04,320 --> 00:12:08,040
+Bắt đầu với hướng của các vách trục và vách tủy:
+
+272
+00:12:08,040 --> 00:12:10,680
+chúng phải song song hoặc vuông góc
+
+273
+00:12:10,680 --> 00:12:12,779
+với hướng của lực nhai. Bề mặt vách
+
+274
+00:12:12,779 --> 00:12:16,019
+cần phải phẳng và tuyệt đối nhẵn
+
+275
+00:12:16,019 --> 00:12:17,519
+để tránh hiện tượng tập trung ứng suất.
+
+276
+00:12:17,519 --> 00:12:20,279
+Chúng ta hãy cùng phân tích hai điểm này nhé.
+
+277
+00:12:20,279 --> 00:12:23,100
+Nhìn vào sơ đồ này,
+
+278
+00:12:23,100 --> 00:12:25,260
+chúng ta có ba bề mặt.
+
+279
+00:12:25,260 --> 00:12:27,540
+Một bề mặt phẳng tuyệt đối,
+
+280
+00:12:27,540 --> 00:12:29,820
+một bề mặt nằm nghiêng, và một bề mặt thẳng đứng.
+
+281
+00:12:29,820 --> 00:12:31,860
+Bề mặt nằm ngang sẽ tạo thành
+
+282
+00:12:31,860 --> 00:12:34,019
+một góc 90 độ so với hướng lực tác động.
+
+283
+00:12:34,019 --> 00:12:38,959
+Khi lực ép xuống bề mặt phẳng này ở góc 90 độ,
+
+284
+00:12:38,959 --> 00:12:40,860
+lực sẽ được phân tích thành hai lực nằm ngang.
+
+285
+00:12:40,860 --> 00:12:43,380
+Một lực hướng sang phải, một lực hướng sang trái.
+
+286
+00:12:43,380 --> 00:12:46,079
+Và vì góc tới của lực là bằng nhau (90 độ),
+
+287
+00:12:46,079 --> 00:12:48,959
+nó sẽ được phân tách thành hai thành phần lực nằm ngang,
+
+288
+00:12:48,959 --> 00:12:51,959
+một sang phải và một sang trái, hoàn toàn bằng nhau
+
+289
+00:12:51,959 --> 00:12:54,240
+nhưng ngược chiều.
+
+290
+00:12:54,240 --> 00:12:55,980
+Tác động của chúng sẽ bằng 0 vì chúng sẽ triệt tiêu lẫn nhau.
+
+291
+00:12:55,980 --> 00:12:59,160
+Đó là trường hợp thứ nhất, khi lực vuông góc với bề mặt.
+
+292
+00:12:59,160 --> 00:13:02,279
+Trường hợp thứ hai là
+
+293
+00:13:02,279 --> 00:13:05,220
+bề mặt nằm nghiêng.
+
+294
+00:13:05,220 --> 00:13:07,440
+Khi lực tác động lên bề mặt nghiêng,
+
+295
+00:13:07,440 --> 00:13:09,959
+nó cũng phân tích thành hai lực nằm ngang.
+
+296
+00:13:09,959 --> 00:13:13,680
+Nhưng lực hướng sang trái sẽ lớn hơn
+
+297
+00:13:13,680 --> 00:13:16,440
+so với lực hướng sang phải,
+
+298
+00:13:16,440 --> 00:13:18,240
+vì góc tới lực lúc này lớn hơn.
+
+299
+00:13:18,240 --> 00:13:20,760
+Lúc này hợp lực sẽ hướng sang bên trái,
+
+300
+00:13:20,760 --> 00:13:22,560
+mang tính phá hủy nhiều hơn, có xu hướng
+
+301
+00:13:22,560 --> 00:13:24,720
+làm xê dịch hoặc làm nứt gãy miếng trám
+
+302
+00:13:24,720 --> 00:13:29,040
+hay cấu trúc mô răng.
+
+303
+00:13:29,880 --> 00:13:33,000
+Trường hợp thứ ba là bề mặt
+
+304
+00:13:33,000 --> 00:13:36,740
+song song cùng chiều với lực tác động.
+
+305
+00:13:36,740 --> 00:13:39,720
+Lực sẽ không bị phân tách, mà sẽ truyền thẳng
+
+306
+00:13:39,720 --> 00:13:43,279
+vào khối vật liệu và giảm dần.
+
+307
+00:13:44,880 --> 00:13:47,040
+Yếu tố mấu chốt ở đây chính là độ dày của vật liệu.
+
+308
+00:13:47,040 --> 00:13:51,120
+Lực sẽ từ từ tiêu biến mà không gây hại
+
+309
+00:13:51,120 --> 00:13:52,980
+nếu khối lượng vật liệu đủ lớn.
+
+310
+00:13:52,980 --> 00:13:55,680
+Vậy điều kiện nào có lợi cho chúng ta?
+
+311
+00:13:55,680 --> 00:13:58,560
+Đó chính là trường hợp số một và số ba.
+
+312
+00:13:58,560 --> 00:14:00,300
+Đó là lý do các em phải thiết kế vách xoang
+
+313
+00:14:00,300 --> 00:14:04,079
+hoặc vách tủy/đáy xoang vuông góc hoặc song song
+
+314
+00:14:04,079 --> 00:14:07,380
+với hướng của lực nén khớp cắn,
+
+315
+00:14:07,380 --> 00:14:09,839
+và đồng thời đảm bảo cung cấp đủ độ dày
+
+316
+00:14:09,839 --> 00:14:12,779
+để lực này có thể tự tiêu biến.
+
+317
+00:14:12,779 --> 00:14:14,399
+Bây giờ chúng ta xét hai bề mặt đều vuông góc
+
+318
+00:14:14,399 --> 00:14:18,480
+với hướng của lực nén khớp cắn.
+
+319
+00:14:18,480 --> 00:14:21,300
+Nhưng một bề mặt thì tuyệt đối nhẵn phẳng,
+
+320
+00:14:21,300 --> 00:14:24,360
+còn bề mặt kia lại có các điểm gồ ghề vi thể.
+
+321
+00:14:24,360 --> 00:14:26,399
+Đối với bề mặt thứ nhất, lực sẽ được phân tích
+
+322
+00:14:26,399 --> 00:14:29,220
+thành hai lực nằm ngang
+
+323
+00:14:29,220 --> 00:14:31,320
+tuyệt đối bằng nhau và tự triệt tiêu.
+
+324
+00:14:31,320 --> 00:14:34,440
+Còn bề mặt gồ ghề kia sẽ làm cho lực bị phân tách
+
+325
+00:14:34,440 --> 00:14:36,899
+theo nhiều hướng siêu nhỏ khác nhau.
+
+326
+00:14:36,899 --> 00:14:39,120
+Các em không thể biết chắc hướng nào sẽ chịu lực lớn hơn.
+
+327
+00:14:39,120 --> 00:14:42,000
+Chính sự bất định này
+
+328
+00:14:42,000 --> 00:14:44,579
+sẽ dẫn đến các vi nứt nẻ, và gây vỡ miếng trám
+
+329
+00:14:44,579 --> 00:14:46,079
+ở một mức độ nào đó.
+
+330
+00:14:46,079 --> 00:14:49,139
+Đó là lý do thầy luôn khuyên các bề mặt
+
+331
+00:14:49,139 --> 00:14:52,380
+phải thật sự nhẵn và phẳng;
+
+332
+00:14:52,380 --> 00:14:54,360
+bề mặt gồ ghề là điều tối kỵ.
+
+333
+00:14:54,360 --> 00:14:56,459
+Hãy nhìn vào hình ảnh này,
+
+334
+00:14:56,459 --> 00:14:58,199
+đây là vách xoang nằm cùng hướng
+
+335
+00:14:58,199 --> 00:15:01,139
+với lực nén khớp cắn.
+
+336
+00:15:01,139 --> 00:15:06,060
+Lực nén này sẽ không bị phân tách mà sẽ truyền xuống,
+
+337
+00:15:06,060 --> 00:15:08,279
+từ từ giảm dần theo độ dày của khối vật liệu trám.
+
+338
+00:15:08,279 --> 00:15:10,800
+Đối với vật liệu giòn như amalgam,
+
+339
+00:15:10,800 --> 00:15:13,019
+khối vật liệu này phải đạt độ dày tối thiểu 2mm.
+
+340
+00:15:13,019 --> 00:15:15,600
+Ở góc nhìn khác, vách tủy song song với mặt phẳng nhai
+
+341
+00:15:15,600 --> 00:15:19,199
+và cả hai đều vuông góc với hướng lực nén khớp cắn.
+
+342
+00:15:19,199 --> 00:15:21,779
+Do đó, lực sẽ bị phân tích
+
+343
+00:15:21,779 --> 00:15:23,339
+thành hai lực nằm ngang bằng nhau về độ lớn,
+
+344
+00:15:23,339 --> 00:15:26,459
+nhưng ngược chiều nhau.
+
+345
+00:15:26,459 --> 00:15:29,100
+Kết quả là hợp lực sẽ bằng 0.
+
+346
+00:15:29,100 --> 00:15:30,839
+Trong một số trường hợp cụ thể,
+
+347
+00:15:30,839 --> 00:15:34,500
+chẳng hạn như răng cối nhỏ hàm dưới và răng cối lớn hàm dưới,
+
+348
+00:15:34,500 --> 00:15:36,860
+nơi thân răng thường
+
+349
+00:15:37,040 --> 00:15:38,579
+có xu hướng nghiêng gập nhiều về phía mặt lưỡi.
+
+350
+00:15:38,579 --> 00:15:41,639
+Khi đó, các em cần xem xét mặt phẳng nhai
+
+351
+00:15:41,639 --> 00:15:44,820
+làm kim chỉ nam thiết kế cho mình,
+
+352
+00:15:44,820 --> 00:15:47,100
+chứ không phải dựa vào trục dọc của răng.
+
+353
+00:15:47,100 --> 00:15:50,040
+Bởi vì theo điều kiện A, các em phải sửa soạn vách tủy
+
+354
+00:15:50,040 --> 00:15:53,699
+song song với mặt phẳng nhai.
+
+355
+00:15:53,699 --> 00:15:55,920
+Ở hình B, nếu các em cắt vách tủy
+
+356
+00:15:55,920 --> 00:15:57,899
+vuông góc với trục dọc thân răng (thay vì mặt phẳng nhai),
+
+357
+00:15:57,899 --> 00:16:00,600
+thứ nhất, các em đang làm yếu múi lưỡi.
+
+358
+00:16:00,600 --> 00:16:04,500
+Nó không còn độ toàn vẹn như trong hình A,
+
+359
+00:16:04,500 --> 00:16:07,199
+đáy múi bị hẹp hơn so với chiều cao múi.
+
+360
+00:16:07,199 --> 00:16:11,579
+Trong khi ở hình A, đáy múi rộng hơn hoặc bằng chiều cao.
+
+361
+00:16:11,579 --> 00:16:13,920
+Đồng thời, các em có thể vô tình cắt phạm vào
+
+362
+00:16:13,920 --> 00:16:17,579
+sừng tủy phía ngoài vốn có vị trí cao hơn
+
+363
+00:16:17,579 --> 00:16:19,980
+so với sừng tủy phía lưỡi ở góc độ này.
+
+364
+00:16:19,980 --> 00:16:21,959
+Múi răng sẽ trở nên yếu đi và tủy có nguy cơ bị lộ.
+
+365
+00:16:21,959 --> 00:16:23,880
+Đây là một thiết kế bất lợi.
+
+366
+00:16:23,880 --> 00:16:26,220
+Đây là hình ảnh răng tự nhiên được cắt ra để so sánh.
+
+367
+00:16:26,220 --> 00:16:30,380
+Ở hình A, vách tủy song song với mặt phẳng nhai.
+
+368
+00:16:30,380 --> 00:16:33,420
+Các em có thể khoan sâu hơn mà không lo phạm tủy.
+
+369
+00:16:33,420 --> 00:16:35,699
+Đồng thời, múi lưỡi vẫn được toàn vẹn.
+
+370
+00:16:35,699 --> 00:16:38,040
+Và góc mép xoang của các em đạt được 90 độ.
+
+371
+00:16:38,040 --> 00:16:40,860
+Nhưng nếu các em sửa soạn vách tủy vuông góc
+
+372
+00:16:40,860 --> 00:16:43,259
+với trục dọc của răng, các em sẽ làm nguy hại tủy,
+
+373
+00:16:43,259 --> 00:16:45,540
+đồng thời làm suy yếu múi răng.
+
+374
+00:16:45,540 --> 00:16:47,759
+Đây là cấu trúc của chúng ta;
+
+375
+00:16:47,759 --> 00:16:51,180
+tủy bị lộ, đồng thời
+
+376
+00:16:51,180 --> 00:16:54,899
+góc mép xoang sẽ không đạt 90 độ,
+
+377
+00:16:54,899 --> 00:16:57,720
+tạo ra các bờ amalgam rất mỏng
+
+378
+00:16:57,720 --> 00:17:00,300
+dễ bị nứt gãy bờ. Đó là lý do
+
+379
+00:17:00,300 --> 00:17:03,540
+vách tủy của các em phải song song
+
+380
+00:17:03,540 --> 00:17:06,959
+với hướng của mặt phẳng nhai.
+
+381
+00:17:06,959 --> 00:17:09,419
+làm mốc định hướng cho các em, chứ không phải
+
+382
+00:17:09,419 --> 00:17:12,540
+trục dọc của răng. Bởi vì các em cần đảm bảo
+
+383
+00:17:12,540 --> 00:17:15,540
+điều kiện như ở hình A, tức là vách tủy
+
+384
+00:17:15,540 --> 00:17:17,520
+phải song song với mặt phẳng nhai.
+
+385
+00:17:17,520 --> 00:17:20,880
+Vách tủy vuông góc với hướng lực nén khớp cắn.
+
+386
+00:17:20,880 --> 00:17:24,360
+Trong khi đó ở hình B, nếu các em cắt
+
+387
+00:17:24,360 --> 00:17:27,299
+vuông góc với trục dọc thân răng, thì vách tủy
+
+388
+00:17:27,299 --> 00:17:30,179
+của các em sẽ vuông góc với trục dọc đó.
+
+389
+00:17:30,179 --> 00:17:33,419
+Hậu quả thứ nhất là các em đang
+
+390
+00:17:33,419 --> 00:17:37,020
+làm suy yếu múi trong. Múi răng sẽ không còn
+
+391
+00:17:37,020 --> 00:17:39,539
+sự toàn vẹn nếu so sánh với hình A.
+
+392
+00:17:39,539 --> 00:17:42,900
+Đáy múi lúc này đã hẹp hơn so với chiều cao múi.
+
+393
+00:17:42,900 --> 00:17:45,960
+Trong khi ở hình A, phần đáy múi rộng hơn hoặc bằng
+
+394
+00:17:45,960 --> 00:17:49,760
+chiều cao. Đồng thời, các em có nguy cơ
+
+395
+00:17:49,760 --> 00:17:53,820
+phạm vào sừng tủy ngoài, vốn nằm ở vị trí cao hơn
+
+396
+00:17:53,820 --> 00:17:56,400
+so với sừng tủy trong ở góc nghiêng này.
+
+397
+00:17:56,400 --> 00:18:00,419
+Việc này vừa làm yếu múi, vừa làm lộ tủy răng.
+
+398
+00:18:00,419 --> 00:18:02,940
+Do đó, đây là một thiết kế sai lầm.
+
+399
+00:18:02,940 --> 00:18:04,500
+Tóm lại, hình A là thiết kế thuận lợi và B thì bất lợi.
+
+400
+00:18:04,500 --> 00:18:07,080
+Đây là mặt cắt của một răng tự nhiên,
+
+401
+00:18:07,080 --> 00:18:08,460
+chúng ta cắt dọc răng thật để các em có thể
+
+402
+00:18:08,460 --> 00:18:10,980
+so sánh trực quan giữa hai kiểu tạo xoang này.
+
+403
+00:18:10,980 --> 00:18:15,480
+Các em quan sát vách tủy ở hình A,
+
+404
+00:18:15,480 --> 00:18:17,940
+nó hoàn toàn song song với mặt phẳng nhai.
+
+405
+00:18:17,940 --> 00:18:19,980
+Các em có thể cắt sâu hơn mà không lo làm phạm tủy.
+
+406
+00:18:19,980 --> 00:18:22,500
+Đồng thời, cấu trúc múi trong của các em
+
+407
+00:18:22,500 --> 00:18:25,679
+vẫn được giữ nguyên vẹn. Và góc mép xoang
+
+408
+00:18:25,679 --> 00:18:29,160
+cũng đạt chuẩn 90 độ. Nhưng nếu các em
+
+409
+00:18:29,160 --> 00:18:31,140
+cắt vách tủy vuông góc với trục dọc
+
+410
+00:18:31,140 --> 00:18:32,580
+của thân răng, các em đang tự gây ra hai vấn đề.
+
+411
+00:18:32,580 --> 00:18:34,880
+Thứ nhất là làm nguy hại đến tủy răng.
+
+412
+00:18:34,880 --> 00:18:37,679
+Thứ hai là làm suy yếu cấu trúc múi răng.
+
+413
+00:18:37,679 --> 00:18:41,400
+Và đây là một thực tế phũ phàng, các em thấy đấy,
+
+414
+00:18:41,400 --> 00:18:44,580
+sừng tủy đã bị lộ. Không chỉ vậy,
+
+415
+00:18:44,580 --> 00:18:48,059
+góc mép xoang của các em sẽ không đạt được 90 độ.
+
+416
+00:18:48,059 --> 00:18:50,640
+Nó để lại những đường viền amalgam rất mỏng,
+
+417
+00:18:50,640 --> 00:18:53,299
+khiến miếng trám cực kỳ dễ bị nứt gãy. Đó là lý do
+
+418
+00:18:53,299 --> 00:18:56,760
+vách tủy của các em phải luôn song song với
+
+419
+00:18:56,760 --> 00:18:59,400
+hướng của mặt phẳng nhai.
+
+420
+00:18:59,400 --> 00:19:01,440
+Thiết kế này đảm bảo vách tủy vuông góc
+
+421
+00:19:01,440 --> 00:19:04,260
+với lực nén khớp cắn, chứ tuyệt đối không được
+
+422
+00:19:04,260 --> 00:19:06,539
+vuông góc với trục dọc thân răng.
+
+423
+00:19:06,539 --> 00:19:10,039
+Các em hãy nhớ kỹ nguyên tắc này nhé.
+
+424
+00:19:12,799 --> 00:19:15,360
+Độ sâu của xoang tạo ra đủ khối lượng vật liệu
+
+425
+00:19:15,360 --> 00:19:16,740
+cho miếng trám.
+
+426
+00:19:16,740 --> 00:19:19,740
+Và chính khối lượng vật liệu này chịu trách nhiệm
+
+427
+00:19:19,740 --> 00:19:23,160
+phân tán và triệt tiêu lực nén khớp cắn
+
+428
+00:19:23,160 --> 00:19:25,980
+khi nó truyền xuyên qua miếng trám của các em.
+
+429
+00:19:25,980 --> 00:19:28,080
+Chúng ta phải cung cấp đủ khối lượng vật liệu
+
+430
+00:19:28,080 --> 00:19:32,280
+để quá trình triệt tiêu lực này diễn ra hiệu quả.
+
+431
+00:19:32,280 --> 00:19:34,380
+Vậy các em ưu tiên cách nào hơn?
+
+432
+00:19:34,380 --> 00:19:37,440
+Tăng khối lượng vật liệu bằng cách mở rộng bề ngang xoang,
+
+433
+00:19:37,440 --> 00:19:40,799
+hay bằng cách đào sâu thêm xuống?
+
+434
+00:19:40,799 --> 00:19:43,860
+Thầy khuyến cáo các em nên
+
+435
+00:19:43,860 --> 00:19:47,340
+tăng khối lượng vật liệu phục hồi thông qua độ sâu xoang.
+
+436
+00:19:47,340 --> 00:19:50,160
+Tất nhiên là phải trong giới hạn an toàn
+
+437
+00:19:50,160 --> 00:19:52,679
+để không làm tổn thương tủy, chứ không phải mở rộng bề ngang.
+
+438
+00:19:52,679 --> 00:19:55,140
+Bề rộng xoang của các em chỉ nên giới hạn ở mức
+
+439
+00:19:55,140 --> 00:19:57,440
+từ một phần tư đến một phần ba
+
+440
+00:19:57,440 --> 00:20:00,660
+khoảng cách liên múi.
+
+441
+00:20:00,660 --> 00:20:04,799
+Mặt khác, nếu các em mở rộng bề ngang xoang,
+
+442
+00:20:04,799 --> 00:20:06,660
+các em sẽ làm suy yếu cấu trúc mô răng còn lại.
+
+443
+00:20:06,660 --> 00:20:09,179
+Đồng thời cũng làm miếng trám yếu đi vì nó sẽ
+
+444
+00:20:09,179 --> 00:20:12,600
+phải chịu thêm lực nén không cần thiết.
+
+445
+00:20:12,600 --> 00:20:17,220
+Và miếng trám sẽ chiếm tỷ lệ diện tích lớn hơn, dẫn đến lực phân bố
+
+446
+00:20:17,220 --> 00:20:20,460
+lên nó cũng gia tăng theo.
+
+447
+00:20:20,460 --> 00:20:23,460
+Quan sát hình số 1 bên trái,
+
+448
+00:20:23,460 --> 00:20:27,679
+chúng ta đã tạo đủ không gian cho miếng trám,
+
+449
+00:20:29,720 --> 00:20:32,220
+cung cấp tổng cộng một độ dày
+
+450
+00:20:32,220 --> 00:20:35,940
+tối thiểu 2 milimet khối lượng vật liệu phục hồi.
+
+451
+00:20:35,940 --> 00:20:39,840
+Và chúng ta làm được điều này mà không hề gây nguy hại cho tủy.
+
+452
+00:20:39,840 --> 00:20:43,320
+Đồng thời, bề rộng miếng trám chỉ chiếm từ một phần tư
+
+453
+00:20:43,320 --> 00:20:46,200
+đến một phần ba khoảng cách liên múi.
+
+454
+00:20:46,200 --> 00:20:48,840
+Điều này có nghĩa là khi lực nhai tác động lên,
+
+455
+00:20:48,840 --> 00:20:51,000
+thì thứ nhất,
+
+456
+00:20:51,000 --> 00:20:54,240
+các múi răng của chúng ta vẫn nguyên vẹn và vững chắc.
+
+457
+00:20:54,240 --> 00:20:55,380
+Thứ hai,
+
+458
+00:20:55,380 --> 00:20:58,799
+phần lực nhai mà miếng trám phải gánh chịu
+
+459
+00:20:58,799 --> 00:21:00,600
+sẽ được giảm xuống mức tối thiểu.
+
+460
+00:21:00,600 --> 00:21:03,419
+Trái lại, nếu các em mở rộng bề ngang của xoang
+
+461
+00:21:03,419 --> 00:21:04,980
+cho miếng trám
+
+462
+00:21:04,980 --> 00:21:07,500
+trong khi không có sự lan rộng của mô sâu...
+
+463
+00:21:07,500 --> 00:21:09,000
+Tất nhiên nếu sang thương sâu răng đã lan rộng,
+
+464
+00:21:09,000 --> 00:21:11,460
+thầy nghĩ việc mở rộng xoang là điều bắt buộc.
+
+465
+00:21:11,460 --> 00:21:13,380
+Nhưng trong tình huống lý tưởng, khi không có tổn thương sâu
+
+466
+00:21:13,380 --> 00:21:15,960
+lan sang các thành bên, thì các em không cần thiết
+
+467
+00:21:15,960 --> 00:21:17,700
+phải nới rộng khoảng cách liên múi này làm gì.
+
+468
+00:21:17,700 --> 00:21:20,039
+Và nếu các em cố tình mở rộng bề ngang,
+
+469
+00:21:20,039 --> 00:21:22,320
+chiếm hơn một phần tư hoặc một phần ba khoảng cách đó,
+
+470
+00:21:22,320 --> 00:21:25,440
+thì tỷ lệ chịu lực của miếng trám sẽ tăng lên.
+
+471
+00:21:25,440 --> 00:21:28,380
+Miếng trám sẽ phải gánh chịu
+
+472
+00:21:28,380 --> 00:21:30,480
+quá nhiều lực so với sức chịu đựng tối đa của nó.
+
+473
+00:21:30,480 --> 00:21:34,140
+Đồng thời, hãy lưu ý rằng các em đang làm suy yếu
+
+474
+00:21:34,140 --> 00:21:36,419
+cả múi ngoài và múi trong của răng.
+
+475
+00:21:36,419 --> 00:21:39,720
+Việc này sẽ gây nguy hiểm cho cả độ bền của miếng trám
+
+476
+00:21:39,720 --> 00:21:41,700
+lẫn cấu trúc mô răng tự nhiên. Đó là lý do chúng ta
+
+477
+00:21:41,700 --> 00:21:44,880
+luôn ưu tiên tạo ra
+
+478
+00:21:44,880 --> 00:21:46,760
+khối lượng vật liệu phục hồi
+
+479
+00:21:46,760 --> 00:21:49,980
+thông qua việc tăng độ sâu, thay vì mở rộng bề ngang xoang.
+
+480
+00:21:49,980 --> 00:21:53,640
+Yếu tố thứ ba là tính bảo tồn.
+
+481
+00:21:53,640 --> 00:21:55,799
+Các em phải sửa soạn xoang
+
+482
+00:21:55,799 --> 00:21:57,299
+bảo tồn mô răng tối đa nhất có thể.
+
+483
+00:21:57,299 --> 00:22:00,299
+Đừng quên đây là một trong những chỉ dẫn,
+
+484
+00:22:00,299 --> 00:22:04,740
+một trong những quy tắc vàng của các nguyên lý cơ học.
+
+485
+00:22:04,740 --> 00:22:07,020
+Nếu các em còn nhớ, mục tiêu của các nguyên lý cơ học
+
+486
+00:22:07,020 --> 00:22:09,120
+là cung cấp khả năng kháng lực tối đa chống nứt gãy,
+
+487
+00:22:09,120 --> 00:22:10,860
+và khả năng lưu giữ tối đa chống lại sự xê dịch.
+
+488
+00:22:10,860 --> 00:22:13,020
+Tuy nhiên, tất cả phải đi kèm với việc bảo tồn tối đa
+
+489
+00:22:13,020 --> 00:22:15,059
+cấu trúc mô răng khỏe mạnh.
+
+490
+00:22:15,059 --> 00:22:16,799
+Nếu các em không bảo tồn tốt cấu trúc răng,
+
+491
+00:22:16,799 --> 00:22:19,740
+nếu các em mở xoang quá rộng, các em sẽ làm suy yếu
+
+492
+00:22:19,740 --> 00:22:22,260
+cả sự lưu giữ của phục hồi và độ cứng chắc của răng thật.
+
+493
+00:22:22,260 --> 00:22:24,600
+Yếu tố thứ tư là các góc trong của xoang.
+
+494
+00:22:24,600 --> 00:22:26,400
+Tất cả các góc trong giao giữa các vách xoang
+
+495
+00:22:26,400 --> 00:22:30,299
+đều phải được bo tròn, tuyệt đối không để sắc cạnh.
+
+496
+00:22:30,299 --> 00:22:33,059
+Việc bo tròn các góc này sẽ giúp tăng khối lượng vật liệu
+
+497
+00:22:33,059 --> 00:22:36,059
+cho miếng trám. Đồng thời, nó giúp
+
+498
+00:22:36,059 --> 00:22:38,760
+phân tán lực, giảm bớt sự tập trung ứng suất
+
+499
+00:22:38,760 --> 00:22:40,980
+vốn là nguyên nhân hàng đầu gây nứt gãy
+
+500
+00:22:40,980 --> 00:22:43,980
+miếng trám dưới áp lực ăn nhai.
+
+501
+00:22:43,980 --> 00:22:46,980
+Trên thực tế, có một góc xoang cực kỳ nguy hiểm.
+
+502
+00:22:46,980 --> 00:22:49,740
+Các em nhìn xem, đây là một góc sắc nhọn chưa được xử lý.
+
+503
+00:22:49,740 --> 00:22:51,720
+Và kế bên là một góc đã được bo tròn nhẹ nhàng.
+
+504
+00:22:51,720 --> 00:22:53,580
+Góc tròn này cung cấp độ dày vật liệu và đồng thời
+
+505
+00:22:53,580 --> 00:22:56,100
+phân tán lực nén đều ra xung quanh.
+
+506
+00:22:56,100 --> 00:22:57,900
+Ứng suất sẽ không bị tập trung lại một điểm để gây nứt gãy
+
+507
+00:22:57,900 --> 00:23:00,260
+mô răng hay vật liệu phục hồi nữa.
+
+508
+00:23:00,260 --> 00:23:04,020
+Một trong những góc quan trọng và nguy hiểm bậc nhất
+
+509
+00:23:04,020 --> 00:23:06,780
+chính là góc vách trục-tủy trong các xoang trám kép,
+
+510
+00:23:06,780 --> 00:23:09,179
+đặc biệt là đối với xoang loại II.
+
+511
+00:23:09,179 --> 00:23:10,740
+Góc vách trục-tủy (axio-pulpal line angle) là góc tạo bởi
+
+512
+00:23:10,740 --> 00:23:13,020
+vách tủy và vách trục của xoang,
+
+513
+00:23:13,020 --> 00:23:14,940
+được đánh dấu bởi mũi tên
+
+514
+00:23:14,940 --> 00:23:16,440
+màu xanh dương trên hình các em đang thấy.
+
+515
+00:23:16,440 --> 00:23:21,240
+Ngay phía trên góc trục-tủy này
+
+516
+00:23:21,240 --> 00:23:24,500
+là hố tam giác của răng.
+
+517
+00:23:24,659 --> 00:23:27,539
+Phần amalgam được điêu khắc vào hố tam giác này
+
+518
+00:23:27,539 --> 00:23:29,580
+tạo thành một vùng vật liệu rất mỏng.
+
+519
+00:23:29,580 --> 00:23:31,620
+Và nó lại nằm ngay vị trí chạm khớp
+
+520
+00:23:31,620 --> 00:23:33,960
+với múi răng đối diện.
+
+521
+00:23:33,960 --> 00:23:35,600
+Điều này dẫn đến hệ quả là...
+
+522
+00:23:35,600 --> 00:23:38,460
+Khối amalgam của các em ở khu vực này,
+
+523
+00:23:38,460 --> 00:23:42,360
+vốn đã được điêu khắc mặt nhai lõm xuống thành hố tam giác,
+
+524
+00:23:42,360 --> 00:23:45,600
+nay lại bị ép chặt ở giữa hai lực tác động.
+
+525
+00:23:45,600 --> 00:23:49,159
+Một lực ép từ trên xuống bởi múi răng đối diện.
+
+526
+00:23:49,159 --> 00:23:52,559
+Và một lực chống lại từ dưới lên bởi góc vách nhọn
+
+527
+00:23:52,559 --> 00:23:56,039
+từ bên trong lòng xoang. Áp lực chèn ép này
+
+528
+00:23:56,039 --> 00:24:00,120
+tác động lên miếng amalgam của các em
+
+529
+00:24:00,120 --> 00:24:03,480
+giống hệt như khi các em dùng một cây kéo
+
+530
+00:24:03,480 --> 00:24:05,640
+cắt ngang qua miếng vật liệu vậy.
+
+531
+00:24:05,640 --> 00:24:08,760
+Và kết quả tất yếu là amalgam sẽ nứt gãy
+
+532
+00:24:08,760 --> 00:24:10,140
+ngay tại vị trí chịu lực nguy hiểm này.
+
+533
+00:24:10,140 --> 00:24:12,860
+Đó là lý do...
+
+534
+00:24:15,260 --> 00:24:18,000
+Các em nhìn này, vách này không thẳng đứng mà nằm hơi nghiêng,
+
+535
+00:24:18,000 --> 00:24:20,820
+nếu các em còn nhớ ở bài trước. Đây là một trong những
+
+536
+00:24:20,820 --> 00:24:23,039
+thiết kế xoang loại II được khuyến cáo.
+
+537
+00:24:23,039 --> 00:24:25,500
+Các em chỉ cần tạo vách trục nằm hơi nghiêng
+
+538
+00:24:25,500 --> 00:24:28,740
+hướng về phía trung tâm xoang,
+
+539
+00:24:28,740 --> 00:24:31,620
+hoặc hơi nghiêng về phía thân răng.
+
+540
+00:24:31,620 --> 00:24:35,400
+Thiết kế vách trục nghiêng này
+
+541
+00:24:35,400 --> 00:24:38,100
+sẽ cung cấp thêm độ dày vật liệu
+
+542
+00:24:38,100 --> 00:24:40,380
+cho miếng trám. Đồng thời, góc vách sắc nhọn
+
+543
+00:24:40,380 --> 00:24:42,299
+phải được xử lý bằng cách bo tròn, mài lõm láng,
+
+544
+00:24:42,299 --> 00:24:46,380
+hoặc tạo vát (bevel). Thao tác này sẽ giúp
+
+545
+00:24:46,380 --> 00:24:48,299
+loại bỏ điểm góc nhọn và cung cấp đủ độ dày
+
+546
+00:24:48,299 --> 00:24:52,320
+cho vật liệu phục hồi của các em. Dưới đây là
+
+547
+00:24:52,320 --> 00:24:56,039
+hai hình ảnh xoang kinh điển điển hình.
+
+548
+00:24:56,039 --> 00:24:58,440
+Hình bên trái là góc vách trục-tủy sắc nhọn.
+
+549
+00:24:58,440 --> 00:25:01,200
+Còn hình bên phải là góc vách trục-tủy đã được vát (beveled).
+
+550
+00:25:01,200 --> 00:25:05,539
+Một lần nữa, chúng ta xem lại hai răng
+
+551
+00:25:05,539 --> 00:25:09,900
+được sửa soạn xoang MOD (Gần-Nhai-Xa).
+
+552
+00:25:09,900 --> 00:25:13,440
+Góc vách trục-tủy phía xa được bo tròn,
+
+553
+00:25:13,440 --> 00:25:15,360
+còn góc vách trục-tủy phía gần được vát nghiêng.
+
+554
+00:25:15,360 --> 00:25:17,220
+Răng cối nhỏ này có góc vách trục-tủy
+
+555
+00:25:17,220 --> 00:25:20,039
+phía xa được bo tròn nhằm đảm bảo độ dày vật liệu
+
+556
+00:25:20,039 --> 00:25:24,260
+phục hồi. Đồng thời, nó giúp đẩy lùi
+
+557
+00:25:24,260 --> 00:25:26,940
+góc nhọn này ra khỏi vị trí nguy hiểm
+
+558
+00:25:26,940 --> 00:25:29,640
+ngay dưới hố tam giác. Qua đó cung cấp
+
+559
+00:25:29,640 --> 00:25:31,559
+độ dày tối ưu cho miếng trám, mang lại sự phân tán lực
+
+560
+00:25:31,559 --> 00:25:34,799
+hoàn hảo nhất, đảm bảo ứng suất rơi vào trong giới hạn
+
+561
+00:25:34,799 --> 00:25:38,279
+chịu đựng của cả vật liệu trám và mô răng tự nhiên.
+
+562
+00:25:38,279 --> 00:25:40,740
+Tiếp đến là vách men và góc mép xoang (cavo-surface angle).
+
+563
+00:25:40,740 --> 00:25:42,480
+Đối với các vật liệu giòn như amalgam, góc mép xoang
+
+564
+00:25:42,480 --> 00:25:44,220
+cần phải đạt đúng 90 độ.
+
+565
+00:25:44,220 --> 00:25:46,559
+Trong khi đối với vật liệu dẻo (như vàng đúc),
+
+566
+00:25:46,559 --> 00:25:49,020
+góc này nên được vát rộng ra 135 độ.
+
+567
+00:25:49,020 --> 00:25:51,480
+Chúng ta đã thảo luận sơ đồ này nhiều lần rồi.
+
+568
+00:25:51,480 --> 00:25:54,140
+Thầy sẽ nhắc đi nhắc lại vì nó thực sự rất quan trọng.
+
+569
+00:25:54,140 --> 00:25:57,480
+Nó giải thích lý do tại sao góc mép xoang bắt buộc
+
+570
+00:25:57,480 --> 00:26:00,200
+phải là 90 độ. Nếu các em có một góc mép xoang 90 độ,
+
+571
+00:26:00,200 --> 00:26:02,940
+khi lực nén tác động vào, vách men răng
+
+572
+00:26:02,940 --> 00:26:05,700
+vẫn giữ được độ dày tối đa và được nâng đỡ vững chắc
+
+573
+00:26:05,700 --> 00:26:07,559
+bởi lớp ngà lành mạnh phía dưới.
+
+574
+00:26:07,559 --> 00:26:10,080
+Lực nhai sẽ từ từ tiêu biến qua toàn bộ
+
+575
+00:26:10,080 --> 00:26:12,600
+độ dày vững chãi của khối men răng này.
+
+576
+00:26:12,600 --> 00:26:15,960
+Tương tự đối với amalgam, khối vật liệu amalgam
+
+577
+00:26:15,960 --> 00:26:18,240
+cũng sẽ đạt được độ dày chuẩn khoảng 2 milimet.
+
+578
+00:26:18,240 --> 00:26:20,640
+Vùng này cũng được hỗ trợ bởi ngà răng bên dưới.
+
+579
+00:26:20,640 --> 00:26:22,559
+Và vách xoang nằm song song với hướng lực nén,
+
+580
+00:26:22,559 --> 00:26:24,900
+nên lực sẽ triệt tiêu hiệu quả qua cả độ dày
+
+581
+00:26:24,900 --> 00:26:28,020
+của lớp men răng lẫn sự độc lập của khối amalgam.
+
+582
+00:26:28,020 --> 00:26:29,820
+Sẽ không có bất kỳ sự nứt gãy nào xảy ra.
+
+583
+00:26:29,820 --> 00:26:32,460
+Tuy nhiên, nếu góc mép xoang
+
+584
+00:26:32,460 --> 00:26:33,960
+nhỏ hơn 90 độ, men răng
+
+585
+00:26:33,960 --> 00:26:36,539
+sẽ bị thiếu nâng đỡ (undermined). Lớp men này
+
+586
+00:26:36,539 --> 00:26:39,779
+sẽ phải tựa vào một khối amalgam vốn rất giòn.
+
+587
+00:26:39,779 --> 00:26:43,700
+Khối men răng không còn đủ độ dày để chịu lực
+
+588
+00:26:43,700 --> 00:26:47,340
+hay để triệt tiêu tác động của lực nhai nữa,
+
+589
+00:26:47,340 --> 00:26:50,880
+hậu quả là vách men sẽ bị gãy vỡ.
+
+590
+00:26:50,880 --> 00:26:53,520
+Ngược lại, nếu góc mép xoang
+
+591
+00:26:53,520 --> 00:26:55,740
+lớn hơn 90 độ,
+
+592
+00:26:55,740 --> 00:26:57,299
+lần này thì rìa miếng trám amalgam sẽ bị gãy.
+
+593
+00:26:57,299 --> 00:27:01,140
+Bởi vì tại góc đó, rìa amalgam quá mỏng,
+
+594
+00:27:01,140 --> 00:27:03,960
+không đủ khối lượng vật liệu để chịu đựng
+
+595
+00:27:03,960 --> 00:27:06,480
+tác động của lực nén.
+
+596
+00:27:06,480 --> 00:27:08,460
+Tóm lại: Góc mép xoang 90 độ thì an toàn tuyệt đối
+
+597
+00:27:08,460 --> 00:27:09,620
+cho cả miếng trám lẫn mô răng.
+
+598
+00:27:09,620 --> 00:27:12,240
+Góc mép xoang dưới 90 độ thì vách men răng sẽ gãy.
+
+599
+00:27:12,240 --> 00:27:14,460
+Góc mép xoang lớn hơn 90 độ thì rìa amalgam sẽ vỡ.
+
+600
+00:27:14,460 --> 00:27:16,620
+Riêng đối với phục hình kim loại đúc
+
+601
+00:27:16,620 --> 00:27:18,779
+hay phục hình vàng đúc, góc này sẽ được
+
+602
+00:27:18,779 --> 00:27:21,559
+thiết kế với một đường vát (bevel).
+
+603
+00:27:21,559 --> 00:27:26,039
+Vì vách xoang trong phục hình đúc phải hơi loe ra ngoài,
+
+604
+00:27:26,039 --> 00:27:27,840
+nên các em cần vát mép để tạo không gian
+
+605
+00:27:27,840 --> 00:27:30,900
+cho phần vàng đúc phủ lên, che chở và bảo vệ
+
+606
+00:27:30,900 --> 00:27:33,539
+cho các lăng trụ men răng vùng rìa.
+
+607
+00:27:33,539 --> 00:27:35,820
+Vấn đề tiếp theo là khả năng lưu giữ.
+
+608
+00:27:35,820 --> 00:27:37,860
+Khả năng lưu giữ đóng vai trò rất quan trọng
+
+609
+00:27:37,860 --> 00:27:40,320
+trong hình thể kháng lực, đặc biệt là khi
+
+610
+00:27:40,320 --> 00:27:41,520
+các em sửa soạn các xoang trám kép hoặc xoang phức tạp.
+
+611
+00:27:41,520 --> 00:27:44,520
+Đôi khi,
+
+612
+00:27:46,080 --> 00:27:49,260
+một số bác sĩ khi thiết kế xoang loại II,
+
+613
+00:27:49,260 --> 00:27:51,419
+họ chỉ quá chú tâm vào
+
+614
+00:27:51,419 --> 00:27:54,000
+việc tạo các điểm lẹm lưu giữ ở phần xoang mặt nhai.
+
+615
+00:27:54,000 --> 00:27:56,400
+Mà họ lại bỏ qua không quan tâm đúng mức
+
+616
+00:27:56,400 --> 00:27:57,600
+đến hướng của các vách phần xoang mặt bên.
+
+617
+00:27:57,600 --> 00:27:59,880
+Họ thường mang tâm lý rằng
+
+618
+00:27:59,880 --> 00:28:02,279
+khi nhồi amalgam trong lúc nó vẫn còn mềm,
+
+619
+00:28:02,279 --> 00:28:07,080
+và sau khi nó đông cứng lại, nó sẽ tự động
+
+620
+00:28:07,080 --> 00:28:09,799
+được lưu giữ chắc chắn nhờ phần xoang mặt nhai.
+
+621
+00:28:09,799 --> 00:28:12,360
+Nên dù phần mặt bên có điểm lưu giữ hay không cũng không sao,
+
+622
+00:28:12,360 --> 00:28:14,520
+vì cả khối vật liệu sẽ hoạt động như một khối thống nhất.
+
+623
+00:28:14,520 --> 00:28:17,760
+Nhưng suy nghĩ này hoàn toàn sai lầm nhé các em.
+
+624
+00:28:17,760 --> 00:28:22,320
+Đúng là khối amalgam được lưu giữ
+
+625
+00:28:22,320 --> 00:28:24,120
+và neo chặt vào phần xoang mặt nhai.
+
+626
+00:28:24,120 --> 00:28:27,240
+Tuy nhiên, luôn tồn tại những vi chuyển động (micro-movement)
+
+627
+00:28:27,240 --> 00:28:29,760
+rất nhỏ ở mặt bên mà mắt thường không thấy được,
+
+628
+00:28:29,760 --> 00:28:31,919
+bệnh nhân cũng không cảm nhận được.
+
+629
+00:28:31,919 --> 00:28:34,860
+Sự vi chuyển động liên tục này sẽ gây mỏi vật liệu tại eo xoang (isthmus),
+
+630
+00:28:34,860 --> 00:28:37,679
+kết quả là miếng trám sẽ bị gãy ngang eo.
+
+631
+00:28:37,679 --> 00:28:41,659
+Hiện tượng này giống hệt như
+
+632
+00:28:41,659 --> 00:28:45,480
+khi các em cầm một cây bút chì ở một đầu.
+
+633
+00:28:45,480 --> 00:28:48,360
+Đầu còn lại bị cố định,
+
+634
+00:28:48,360 --> 00:28:50,760
+còn ở giữa thì lơ lửng không có điểm tựa.
+
+635
+00:28:50,760 --> 00:28:52,740
+Khi các em rung lắc cây bút liên tục,
+
+636
+00:28:52,740 --> 00:28:55,799
+các em nghĩ cây bút đủ cứng sẽ không bị gãy
+
+637
+00:28:55,799 --> 00:28:57,419
+bởi vì nó là một khối nguyên vẹn. Nhưng thực chất,
+
+638
+00:28:57,419 --> 00:29:00,720
+luôn có một biên độ dao động vô hình ở phần giữa thân bút.
+
+639
+00:29:00,720 --> 00:29:04,020
+Qua thời gian, phần giữa này sẽ bị mỏi vật liệu,
+
+640
+00:29:04,020 --> 00:29:07,200
+và cuối cùng cây bút chì sẽ gãy đôi như các em thấy trong ảnh số 2.
+
+641
+00:29:07,200 --> 00:29:11,100
+Do đó, đối với các thiết kế xoang kép
+
+642
+00:29:11,100 --> 00:29:13,440
+hoặc xoang phức tạp, thầy khuyến cáo rằng
+
+643
+00:29:13,440 --> 00:29:15,779
+mỗi phần cấu thành của xoang
+
+644
+00:29:15,779 --> 00:29:19,020
+phải có hệ thống lưu giữ độc lập của riêng nó.
+
+645
+00:29:19,020 --> 00:29:21,779
+Từ "ample" nghĩa là tối đa, và "independent" nghĩa là độc lập.
+
+646
+00:29:21,779 --> 00:29:25,260
+Mỗi phần (mặt nhai, mặt bên) phải có khả năng tự lưu giữ.
+
+647
+00:29:25,260 --> 00:29:27,600
+Mục đích là để ngăn ngừa hiện tượng mỏi vật liệu tại eo xoang
+
+648
+00:29:27,600 --> 00:29:29,399
+dẫn đến gãy phục hồi. Nếu không,
+
+649
+00:29:29,399 --> 00:29:33,419
+cho dù khối amalgam là một khối thống nhất,
+
+650
+00:29:33,419 --> 00:29:36,299
+nhưng với các vi chuyển động âm thầm
+
+651
+00:29:36,299 --> 00:29:37,620
+từ phía mặt bên,
+
+652
+00:29:37,620 --> 00:29:40,799
+nó sẽ gây mỏi ứng suất tại vùng eo và khiến miếng trám gãy đôi.
+
+653
+00:29:40,799 --> 00:29:42,840
+Điểm thứ bảy trong các yếu tố
+
+654
+00:29:42,840 --> 00:29:45,740
+liên quan đến thiết kế xoang ảnh hưởng tới kháng lực
+
+655
+00:29:45,740 --> 00:29:50,100
+là xử lý cấu trúc múi răng yếu. Như thầy đã đề cập trước đó,
+
+656
+00:29:50,100 --> 00:29:52,679
+múi yếu được định nghĩa dựa trên tỷ lệ
+
+657
+00:29:52,679 --> 00:29:54,899
+giữa đáy và chiều cao của múi răng.
+
+658
+00:29:54,899 --> 00:29:58,020
+Tỷ lệ này bị biến đổi theo chiều hướng bất lợi,
+
+659
+00:29:58,020 --> 00:30:01,200
+chiều cao múi lớn hơn nhiều so với độ rộng của đáy múi.
+
+660
+00:30:01,200 --> 00:30:03,000
+Khi chúng ta đo khoảng cách từ tâm xoang
+
+661
+00:30:03,000 --> 00:30:05,760
+đến đỉnh múi răng...
+
+662
+00:30:05,760 --> 00:30:07,980
+Nếu khoảng cách này chỉ còn lại một phần ba,
+
+663
+00:30:07,980 --> 00:30:10,200
+hoặc ít hơn hai phần ba tổng khoảng cách lý thuyết,
+
+664
+00:30:10,200 --> 00:30:15,000
+thì đó được coi là một múi răng yếu.
+
+665
+00:30:15,000 --> 00:30:16,860
+Múi yếu đồng nghĩa với việc khi bệnh nhân ăn nhai,
+
+666
+00:30:16,860 --> 00:30:18,840
+các lực tác động theo phương ngang sẽ hoạt động như một cái nêm,
+
+667
+00:30:18,840 --> 00:30:21,299
+tách rộng múi răng và làm nứt gãy múi,
+
+668
+00:30:21,299 --> 00:30:23,640
+như các em đã thấy trong slide này. Chúng ta đã bàn
+
+669
+00:30:23,640 --> 00:30:25,679
+rất chi tiết về vấn đề này ở bài giảng trước.
+
+670
+00:30:25,679 --> 00:30:28,620
+Đối với múi yếu, chúng ta không thể đắp rộng phần đáy thêm được nữa,
+
+671
+00:30:28,620 --> 00:30:31,860
+vì các em đã lấy đi mô răng tự nhiên rồi. Nhưng các em có thể
+
+672
+00:30:31,860 --> 00:30:35,640
+làm giảm chiều cao múi đi. Đối với vật liệu amalgam,
+
+673
+00:30:35,640 --> 00:30:38,460
+chúng ta mài giảm đỉnh múi xuống khoảng 2 milimet,
+
+674
+00:30:38,460 --> 00:30:42,899
+nhường không gian cho vật liệu phục hồi phủ lên.
+
+675
+00:30:42,899 --> 00:30:44,840
+Kỹ thuật này gọi là mài phủ múi (cusp capping).
+
+676
+00:30:44,840 --> 00:30:47,940
+Còn đối với phục hình đúc, các em chỉ cần tạo vát (bevel)
+
+677
+00:30:47,940 --> 00:30:50,520
+để phần đúc kim loại ôm bao phủ lấy múi răng (cusp coverage).
+
+678
+00:30:50,520 --> 00:30:52,919
+Kết hợp vát bờ (bevel) và vát đối (counter bevel).
+
+679
+00:30:52,919 --> 00:30:55,080
+Slide này đã được giới thiệu trong bài trước,
+
+680
+00:30:55,080 --> 00:30:58,500
+minh họa kỹ thuật mài phủ múi với độ dày tối thiểu
+
+681
+00:30:58,500 --> 00:31:00,659
+2 milimet đối với các vật liệu giòn như amalgam.
+
+682
+00:31:00,659 --> 00:31:04,260
+Và đây là kỹ thuật che phủ múi bằng vát đối (counter bevel)
+
+683
+00:31:04,260 --> 00:31:08,580
+áp dụng cho phục hình đúc.
+
+684
+00:31:08,580 --> 00:31:11,580
+Một lần nữa thầy nhắc lại, khi các em dùng
+
+685
+00:31:11,580 --> 00:31:13,440
+vật liệu phục hồi dán (bonded restoration),
+
+686
+00:31:13,440 --> 00:31:15,059
+các em không cần phải mài phủ múi, trừ trường hợp
+
+687
+00:31:15,059 --> 00:31:17,460
+men răng quá yếu và không còn điểm tựa.
+
+688
+00:31:17,460 --> 00:31:20,279
+Còn nếu không, hãy cứ giữ nguyên hiện trạng của răng.
+
+689
+00:31:20,279 --> 00:31:23,220
+Việc sử dụng các vật liệu trám kết dính
+
+690
+00:31:23,220 --> 00:31:26,640
+sẽ tạo ra cầu nối chéo, giúp liên kết các mô răng yếu lại với nhau,
+
+691
+00:31:26,640 --> 00:31:29,640
+và gia cố đáng kể cấu trúc mô răng còn lại.
+
+692
+00:31:29,640 --> 00:31:31,740
+Nó giúp truyền tải ứng suất từ vùng mô răng yếu sang vùng khỏe hơn,
+
+693
+00:31:31,740 --> 00:31:34,860
+từ đó củng cố sức chịu đựng cho múi răng yếu.
+
+694
+00:31:34,860 --> 00:31:37,380
+Cuối cùng là yếu tố liên quan đến tính chất vật lý
+
+695
+00:31:37,380 --> 00:31:40,740
+của vật liệu trám. Đối với các vật liệu giòn,
+
+696
+00:31:40,740 --> 00:31:42,539
+góc mép xoang bắt buộc phải là 90 độ,
+
+697
+00:31:42,539 --> 00:31:45,120
+và nên gia tăng độ sâu xoang trong giới hạn cho phép
+
+698
+00:31:45,120 --> 00:31:46,980
+thay vì mở rộng bề ngang.
+
+699
+00:31:46,980 --> 00:31:49,740
+Trong khi đó, vật liệu dẻo không bị gò bó bởi các
+
+700
+00:31:49,740 --> 00:31:51,779
+giới hạn này, bởi bản thân chúng đã có
+
+701
+00:31:51,779 --> 00:31:53,940
+độ cứng chắc vật liệu rất cao,
+
+702
+00:31:53,940 --> 00:31:56,340
+đủ sức chống lại mọi tác động của lực nén nhai.
+
+703
+00:31:56,340 --> 00:32:00,720
+Tóm lại về các hình thể kháng lực.
+
+704
+00:32:00,720 --> 00:32:03,059
+Nhìn chung, tất cả các yếu tố trên
+
+705
+00:32:03,059 --> 00:32:04,980
+đều có thể được tóm gọn lại thành
+
+706
+00:32:04,980 --> 00:32:06,659
+các đặc điểm của hình thể kháng lực.
+
+707
+00:32:06,659 --> 00:32:08,940
+Các đặc điểm này bao gồm: vách xoang và vách tủy/vách nướu
+
+708
+00:32:08,940 --> 00:32:11,760
+phải tương đối phẳng và nhẵn.
+
+709
+00:32:11,760 --> 00:32:13,880
+Hình dạng xoang hộp (box shape) hay thiết kế tạo ngàm.
+
+710
+00:32:13,880 --> 00:32:16,140
+Chúng ta sẽ đi sâu hơn vào chi tiết này ngay sau đây.
+
+711
+00:32:16,140 --> 00:32:19,220
+Bao gồm và xử lý những cấu trúc mô răng yếu.
+
+712
+00:32:19,220 --> 00:32:22,860
+Bảo tồn tối đa các múi răng và gờ bên.
+
+713
+00:32:22,860 --> 00:32:25,260
+Bo tròn tất cả các góc trong của xoang.
+
+714
+00:32:25,260 --> 00:32:27,299
+Đảm bảo độ dày phù hợp cho từng loại vật liệu phục hồi.
+
+715
+00:32:27,299 --> 00:32:30,659
+Đặt phục hồi tựa trên nền ngà lành mạnh
+
+716
+00:32:30,659 --> 00:32:33,240
+sau khi đã nạo sạch hoàn toàn mô ngà nhiễm trùng.
+
+717
+00:32:33,240 --> 00:32:35,460
+Và cuối cùng là mài hạ múi để che phủ múi khi có chỉ định.
+
+718
+00:32:35,460 --> 00:32:36,559
+Vậy xoang hình hộp là gì,
+
+719
+00:32:36,559 --> 00:32:40,080
+và ưu điểm của nó ra sao? Chúng ta cùng phân tích nhé.
+
+720
+00:32:40,080 --> 00:32:43,679
+Quan sát sơ đồ này. Đây là thiết kế xoang hình hộp.
+
+721
+00:32:43,679 --> 00:32:45,779
+Xoang hình hộp có các vách ngoài, vách trong rõ ràng,
+
+722
+00:32:45,779 --> 00:32:48,720
+với vách tủy cũng phẳng và rõ ràng. Mọi ưu điểm
+
+723
+00:32:48,720 --> 00:32:50,399
+mà chúng ta vừa liệt kê ở trên
+
+724
+00:32:50,399 --> 00:32:53,640
+đều đạt được khi các em sửa soạn xoang hình hộp.
+
+725
+00:32:53,640 --> 00:32:56,100
+Các em có các vách xác định, song song hoặc vuông góc
+
+726
+00:32:56,100 --> 00:32:58,919
+với hướng lực nhai. Vách tủy và vách nướu phẳng.
+
+727
+00:32:58,919 --> 00:33:00,840
+Các góc trong đều được bo tròn cẩn thận.
+
+728
+00:33:00,840 --> 00:33:03,360
+Miếng trám sẽ có một bệ đỡ vô cùng vững chắc.
+
+729
+00:33:03,360 --> 00:33:05,220
+Ngược lại, nếu các em sửa soạn một xoang có dạng cong tròn,
+
+730
+00:33:05,220 --> 00:33:07,320
+giống như hình giọt nước thế này,
+
+731
+00:33:07,320 --> 00:33:09,240
+miếng trám sẽ bị mất đi sự ổn định cơ học cần thiết.
+
+732
+00:33:09,240 --> 00:33:12,779
+Để giữ được sự ổn định cho miếng trám
+
+733
+00:33:12,779 --> 00:33:15,659
+trong suốt quá trình bệnh nhân ăn nhai,
+
+734
+00:33:15,659 --> 00:33:17,940
+nếu lực ép tác động lệch về một bên,
+
+735
+00:33:17,940 --> 00:33:20,460
+miếng trám xoang cong tròn này sẽ dễ dàng bị lật.
+
+736
+00:33:20,460 --> 00:33:24,120
+Lực lật này sẽ hoạt động như một cái nêm, bẩy và làm gãy múi răng.
+
+737
+00:33:24,120 --> 00:33:27,000
+Đó chính là lý do thiết kế xoang hình hộp
+
+738
+00:33:27,000 --> 00:33:29,519
+hay thiết kế nhiều nấc (multi-step) luôn được ưu tiên hơn.
+
+739
+00:33:29,519 --> 00:33:31,740
+Trong hình A, khi các em mài theo
+
+740
+00:33:31,740 --> 00:33:34,799
+các đường giới hạn (recessional lines), xoang của các em
+
+741
+00:33:34,799 --> 00:33:38,399
+sẽ có hình dáng giọt nước như thế này,
+
+742
+00:33:38,399 --> 00:33:40,500
+và nó không còn là một xoang hình hộp nữa.
+
+743
+00:33:40,500 --> 00:33:42,899
+Vậy làm cách nào để khắc phục? Rất đơn giản,
+
+744
+00:33:42,899 --> 00:33:44,760
+các em chỉ cần mở rộng phần cạnh bên một chút
+
+745
+00:33:44,760 --> 00:33:47,100
+để tạo ra thứ gọi là thềm ngà (dentine ledge).
+
+746
+00:33:47,100 --> 00:33:51,179
+Vì nguyên tắc cốt lõi là các em phải có bệ đỡ phẳng ngàm lại
+
+747
+00:33:51,179 --> 00:33:54,840
+để chống lực xoay lật. Hãy nhìn sang
+
+748
+00:33:54,840 --> 00:33:57,120
+hình số 2, hình mặt cắt của răng thật nhé.
+
+749
+00:33:57,120 --> 00:33:59,820
+Nếu các em chỉ giữ lại duy nhất phần lõm tròn
+
+750
+00:33:59,820 --> 00:34:02,220
+của đáy xoang, miếng trám sẽ chao đảo tự do.
+
+751
+00:34:02,220 --> 00:34:04,620
+Nó sẽ bẩy như đòn bẩy và bẻ gãy bất kỳ múi răng nào,
+
+752
+00:34:04,620 --> 00:34:06,600
+cho dù múi răng đó có bản chất chắc khỏe đến đâu.
+
+753
+00:34:06,600 --> 00:34:10,619
+Nhưng phần bệ đỡ phẳng còn lại của vách tủy
+
+754
+00:34:10,619 --> 00:34:14,040
+(thềm ngà) sẽ cung cấp hình thể kháng lực cần thiết.
+
+755
+00:34:14,040 --> 00:34:16,980
+Đó là một trong những ưu điểm nổi trội nhất
+
+756
+00:34:16,980 --> 00:34:22,159
+của xoang hình hộp.
+
+757
+00:34:23,720 --> 00:34:26,700
+Nếu mài theo các đường thoái triển tủy,
+
+758
+00:34:26,700 --> 00:34:29,040
+xoang sẽ có hình giọt nước như thế này,
+
+759
+00:34:29,040 --> 00:34:32,760
+và không còn là hình hộp nữa. Vậy ta
+
+760
+00:34:32,760 --> 00:34:34,679
+khắc phục thế nào? Rất đơn giản,
+
+761
+00:34:34,679 --> 00:34:37,859
+chỉ cần mở rộng sang bên một chút
+
+762
+00:34:37,859 --> 00:34:41,159
+để tạo ra cấu trúc gọi là thềm ngà,
+
+763
+00:34:41,159 --> 00:34:43,320
+bởi vì các em phải có một điểm tựa phẳng đủ rộng
+
+764
+00:34:43,320 --> 00:34:45,899
+để chống lực xoay. Thử tưởng tượng
+
+765
+00:34:45,899 --> 00:34:47,879
+ở hình thứ hai, mặt cắt của răng thật,
+
+766
+00:34:47,879 --> 00:34:50,520
+nếu chỉ có duy nhất
+
+767
+00:34:50,520 --> 00:34:53,280
+phần đáy xoang bị mài lõm tròn,
+
+768
+00:34:53,280 --> 00:34:55,980
+miếng trám sẽ bập bênh và làm bẩy gãy
+
+769
+00:34:55,980 --> 00:34:58,080
+bất cứ múi răng nào, dù nó có khỏe đến đâu.
+
+770
+00:34:58,080 --> 00:35:01,740
+Nhưng chính phần bệ đỡ phẳng còn lại
+
+771
+00:35:01,740 --> 00:35:04,920
+của vách tủy (thềm ngà) sẽ tạo ra
+
+772
+00:35:04,920 --> 00:35:07,200
+hình thể kháng lực. Đây là ưu điểm
+
+773
+00:35:07,200 --> 00:35:10,200
+tuyệt vời của xoang hình hộp. Khoảng cách
+
+774
+00:35:10,200 --> 00:35:12,900
+từ buồng tủy đến vách tủy
+
+775
+00:35:12,900 --> 00:35:15,000
+được gọi là cầu ngà (dentine bridge),
+
+776
+00:35:15,000 --> 00:35:17,880
+và nó thuần túy mang chức năng sinh học.
+
+777
+00:35:17,880 --> 00:35:21,540
+Còn phần diện tích phẳng nằm ngang
+
+778
+00:35:21,540 --> 00:35:24,900
+của vách tủy được gọi là thềm ngà,
+
+779
+00:35:24,900 --> 00:35:27,480
+và nó đóng vai trò
+
+780
+00:35:27,480 --> 00:35:30,680
+quan trọng trong việc tạo ra
+
+781
+00:35:30,680 --> 00:35:34,980
+hình thể kháng lực. Tất nhiên, không cần
+
+782
+00:35:34,980 --> 00:35:38,520
+phải cố tình mài tạo thềm ngà này
+
+783
+00:35:38,520 --> 00:35:40,760
+khi các em sử dụng vật liệu phục hồi dán.
+
+784
+00:35:40,760 --> 00:35:43,560
+Bởi vì bản thân lực dán dính đã đủ mạnh
+
+785
+00:35:43,560 --> 00:35:48,480
+để kháng lại tác động xê dịch
+
+786
+00:35:48,480 --> 00:35:50,280
+của lực nén khớp cắn rồi.
+
+787
+00:35:50,280 --> 00:35:53,160
+Bây giờ thầy trò ta sẽ bàn về
+
+788
+00:35:53,160 --> 00:35:55,500
+các loại lưu giữ nhé. Lưu giữ
+
+789
+00:35:55,500 --> 00:35:58,619
+được phân loại dựa trên hướng
+
+790
+00:35:58,619 --> 00:36:00,839
+mà miếng trám có nguy cơ bị sút ra.
+
+791
+00:36:00,839 --> 00:36:05,460
+Có thể là sút theo hướng trục dọc,
+
+792
+00:36:05,460 --> 00:36:08,579
+hoặc hướng mặt nhai, và hướng sang bên.
+
+793
+00:36:08,579 --> 00:36:11,099
+Miếng trám có thể bị xê dịch hoặc
+
+794
+00:36:11,099 --> 00:36:14,220
+sút rớt theo hướng sang bên như
+
+795
+00:36:14,220 --> 00:36:17,520
+xoang loại II này. Các vùng lẹm này
+
+796
+00:36:17,520 --> 00:36:19,800
+sẽ giúp ngăn không cho miếng trám bị sút rớt
+
+797
+00:36:19,800 --> 00:36:23,700
+theo hướng trục. Còn đuôi én và ngàm mặt nhai
+
+798
+00:36:23,700 --> 00:36:26,339
+sẽ ngăn không cho miếng trám bị xê dịch
+
+799
+00:36:26,339 --> 00:36:29,940
+hoặc sút rớt theo hướng sang bên.
+
+800
+00:36:29,940 --> 00:36:31,020
+Các em phải phân biệt rõ giữa
+
+801
+00:36:31,020 --> 00:36:33,240
+xê dịch (displacement) và sút rớt hoàn toàn.
+
+802
+00:36:33,240 --> 00:36:36,720
+Xê dịch nghĩa là nó nhúc nhích tại chỗ.
+
+803
+00:36:36,720 --> 00:36:38,280
+Miếng trám của các em
+
+804
+00:36:38,280 --> 00:36:41,760
+thiếu ổn định, nó di chuyển nhưng vẫn nằm
+
+805
+00:36:41,760 --> 00:36:44,400
+trong lòng xoang, nó xê dịch nhưng chưa
+
+806
+00:36:44,400 --> 00:36:46,740
+bị sút rớt hay rơi hẳn ra ngoài
+
+807
+00:36:46,740 --> 00:36:48,900
+khỏi xoang. Sút rớt (dislodgement) nghĩa là
+
+808
+00:36:48,900 --> 00:36:51,240
+miếng trám đã hoàn toàn bong ra khỏi
+
+809
+00:36:51,240 --> 00:36:53,220
+xoang răng. Vậy phương tiện tạo lưu giữ
+
+810
+00:36:53,220 --> 00:36:55,380
+là gì? Các phương tiện lưu giữ
+
+811
+00:36:55,380 --> 00:36:57,599
+tùy thuộc vào thiết kế
+
+812
+00:36:57,599 --> 00:37:00,119
+hoặc nhóm hình thể mà các em muốn tạo ra.
+
+813
+00:37:00,119 --> 00:37:02,280
+Các em có thể đạt được
+
+814
+00:37:02,280 --> 00:37:04,980
+lưu giữ bằng cách mài vào ngà răng.
+
+815
+00:37:04,980 --> 00:37:07,020
+Khi các em mài sửa soạn vào lớp ngà
+
+816
+00:37:07,020 --> 00:37:10,920
+với độ sâu từ 0.5 đến 1 milimet...
+
+817
+00:37:10,920 --> 00:37:13,859
+thao tác này sẽ cung cấp
+
+818
+00:37:13,859 --> 00:37:15,960
+khả năng lưu giữ. Chỉ cần đi sâu vào ngà
+
+819
+00:37:15,960 --> 00:37:19,740
+tối thiểu 0.5 milimet là đủ.
+
+820
+00:37:19,740 --> 00:37:22,140
+Hoặc lưu giữ có được từ hình thể đường viền.
+
+821
+00:37:22,140 --> 00:37:23,940
+Một khi các em tuân thủ đúng nguyên tắc
+
+822
+00:37:23,940 --> 00:37:25,800
+tạo hình thể đường viền, nó sẽ tự mang lại
+
+823
+00:37:25,800 --> 00:37:27,660
+khả năng lưu giữ, hoặc thông qua các thay đổi đặc biệt
+
+824
+00:37:27,660 --> 00:37:29,280
+trong thiết kế xoang mà không làm
+
+825
+00:37:29,280 --> 00:37:31,859
+thay đổi đường viền, hoặc các hình thể chuyên biệt
+
+826
+00:37:31,859 --> 00:37:35,520
+dành riêng cho một số loại vật liệu
+
+827
+00:37:35,520 --> 00:37:39,180
+và kỹ thuật phục hồi cụ thể. Khi các em
+
+828
+00:37:39,180 --> 00:37:44,099
+mài sâu vào lớp ngà răng,
+
+829
+00:37:44,099 --> 00:37:46,560
+điều này sẽ tạo ra các điểm lẹm cơ học rõ rệt.
+
+830
+00:37:46,560 --> 00:37:48,720
+Nó sẽ làm tăng lực lưu giữ của vách,
+
+831
+00:37:48,720 --> 00:37:51,300
+tức là lực ma sát lưu giữ của vách xoang.
+
+832
+00:37:51,300 --> 00:37:53,280
+Đồng thời là lực kẹp (grabbing action)
+
+833
+00:37:53,280 --> 00:37:55,560
+của ngà răng mà chúng ta đã thảo luận trước đây,
+
+834
+00:37:55,560 --> 00:37:57,720
+nhờ tính đàn hồi nhớt khi trám bằng
+
+835
+00:37:57,720 --> 00:38:01,980
+vàng lá bọc trên răng tủy sống.
+
+836
+00:38:01,980 --> 00:38:05,460
+Ngoài ra còn có lưu giữ bằng chốt (pin).
+
+837
+00:38:05,460 --> 00:38:09,000
+Sơ đồ này cho các em thấy các điểm lẹm cơ học
+
+838
+00:38:09,000 --> 00:38:11,579
+hiện ra rất rõ ràng khi các em mài sâu
+
+839
+00:38:11,579 --> 00:38:13,740
+vào ngà răng. Đây là lực lưu giữ ma sát.
+
+840
+00:38:13,740 --> 00:38:15,960
+Một khi các em đi sâu xuống lớp ngà,
+
+841
+00:38:15,960 --> 00:38:18,540
+chiều cao các vách xoang sẽ tăng lên,
+
+842
+00:38:18,540 --> 00:38:20,760
+từ đó gia tăng độ lưu giữ
+
+843
+00:38:20,760 --> 00:38:22,920
+lên rất nhiều lần.
+
+844
+00:38:22,920 --> 00:38:26,300
+Đây là hình ảnh chốt (pin) lưu giữ được đặt vào
+
+845
+00:38:26,300 --> 00:38:29,220
+để tái tạo lại bằng amalgam hoặc composite,
+
+846
+00:38:29,220 --> 00:38:30,540
+giúp phục hồi trực tiếp cho một
+
+847
+00:38:30,540 --> 00:38:32,880
+răng đã bị phá hủy cấu trúc nặng nề.
+
+848
+00:38:32,880 --> 00:38:34,140
+
+
+849
+00:38:34,140 --> 00:38:35,940
+Tiếp theo là về
+
+850
+00:38:35,940 --> 00:38:39,300
+hình thể đường viền. Khi các em tuân thủ
+
+851
+00:38:39,300 --> 00:38:43,920
+nguyên tắc tạo đường viền, ví dụ như
+
+852
+00:38:43,920 --> 00:38:45,960
+trong mặt cắt ngang của răng này,
+
+853
+00:38:45,960 --> 00:38:47,579
+các em làm đúng quy tắc hình thể đường viền,
+
+854
+00:38:47,579 --> 00:38:50,640
+nó sẽ tự tạo ra cho các em một đuôi én ở mặt bên,
+
+855
+00:38:50,640 --> 00:38:53,460
+giúp ngăn ngừa sự xê dịch sang bên.
+
+856
+00:38:53,460 --> 00:38:55,680
+Sự mở rộng về phía ngoài và trong khi mài
+
+857
+00:38:55,680 --> 00:38:57,960
+sửa soạn theo các hố và rãnh trũng...
+
+858
+00:38:57,960 --> 00:38:59,839
+
+
+859
+00:38:59,839 --> 00:39:03,960
+Các rãnh hẹp này
+
+860
+00:39:03,960 --> 00:39:06,780
+được xem như ngàm khóa mặt nhai (occlusal lock).
+
+861
+00:39:06,780 --> 00:39:08,400
+Tất cả những chi tiết này đều giúp ngăn cản
+
+862
+00:39:08,400 --> 00:39:11,339
+miếng trám bị xê dịch...
+
+863
+00:39:11,339 --> 00:39:13,380
+
+
+864
+00:39:13,380 --> 00:39:14,640
+sang bên một cách hiệu quả.
+
+865
+00:39:14,640 --> 00:39:16,800
+Khi xét đến hình đuôi én mặt nhai,
+
+866
+00:39:16,800 --> 00:39:20,520
+đặc biệt là ở răng cối lớn và răng cối nhỏ,
+
+867
+00:39:20,520 --> 00:39:23,579
+các em để ý cái răng cối nhỏ này xem.
+
+868
+00:39:23,579 --> 00:39:27,599
+Khi các em tạo xoang loại II, nếu chỉ đơn thuần
+
+869
+00:39:27,599 --> 00:39:29,760
+tuân theo đúng các nguyên tắc
+
+870
+00:39:29,760 --> 00:39:32,820
+của hình thể đường viền, các em sẽ không có được
+
+871
+00:39:32,820 --> 00:39:37,320
+hình đuôi én như phần tô màu xanh dương này đâu.
+
+872
+00:39:37,320 --> 00:39:40,260
+Vì các em chỉ lấy theo một hố tam giác rất hẹp,
+
+873
+00:39:40,260 --> 00:39:42,359
+và sẽ không có bất kỳ cấu trúc cơ học nào
+
+874
+00:39:42,359 --> 00:39:45,540
+có thể đóng vai trò ngăn cản
+
+875
+00:39:45,540 --> 00:39:48,060
+sự xê dịch của miếng trám. Đó là lý do
+
+876
+00:39:48,060 --> 00:39:51,060
+các em phải chủ động tạo thêm
+
+877
+00:39:51,060 --> 00:39:54,599
+phần mở rộng xoang này
+
+878
+00:39:54,599 --> 00:39:57,540
+nhằm mục đích cung cấp sự lưu giữ. Việc mài
+
+879
+00:39:57,540 --> 00:40:00,720
+đuôi én này có nghĩa là...
+
+880
+00:40:00,720 --> 00:40:03,500
+Nhìn này.
+
+881
+00:40:03,500 --> 00:40:06,500
+
+
+882
+00:40:06,500 --> 00:40:11,280
+nó không tự nhiên xuất hiện khi các em
+
+883
+00:40:11,280 --> 00:40:14,579
+chỉ làm theo hướng dẫn của hình thể đường viền.
+
+884
+00:40:14,579 --> 00:40:17,940
+Ở răng cối nhỏ, các em phải tự mài thêm nó.
+
+885
+00:40:17,940 --> 00:40:21,359
+Trong khi đó, ở răng cối lớn,
+
+886
+00:40:21,359 --> 00:40:24,060
+các em đã có sẵn một hố tam giác rộng.
+
+887
+00:40:24,060 --> 00:40:25,560
+
+
+888
+00:40:25,560 --> 00:40:28,280
+Và khi các em mài hố tam giác này
+
+889
+00:40:28,280 --> 00:40:30,960
+tuân thủ đúng theo các nguyên tắc
+
+890
+00:40:30,960 --> 00:40:32,760
+của hình thể đường viền, thì tự động
+
+891
+00:40:32,760 --> 00:40:35,099
+các em sẽ có được
+
+892
+00:40:35,099 --> 00:40:37,460
+một ngàm đuôi én tự nhiên.
+
+893
+00:40:37,460 --> 00:40:39,240
+
+
+894
+00:40:39,240 --> 00:40:40,740
+Đó là lý do
+
+895
+00:40:40,740 --> 00:40:45,240
+tại sao ở răng cối nhỏ, ngàm đuôi én sẽ không
+
+896
+00:40:45,240 --> 00:40:47,400
+tự động xuất hiện khi các em chỉ đơn thuần
+
+897
+00:40:47,400 --> 00:40:50,099
+tuân theo nguyên tắc mài đường viền.
+
+898
+00:40:50,099 --> 00:40:52,500
+Các em phải chủ động cắt tạo hình nó.
+
+899
+00:40:52,500 --> 00:40:55,140
+Và khái niệm này được gọi là
+
+900
+00:40:55,140 --> 00:40:57,599
+"mở rộng xoang để tạo lưu giữ"
+
+901
+00:40:57,599 --> 00:41:00,680
+(Extension for Retention), vì các em cố ý tạo ra nó.
+
+902
+00:41:00,680 --> 00:41:03,900
+Đây là loại mở rộng xoang thứ ba.
+
+903
+00:41:03,900 --> 00:41:06,720
+Trong khi đó ở răng cối lớn, ngàm đuôi én
+
+904
+00:41:06,720 --> 00:41:09,720
+lại là "mở rộng để phòng ngừa"
+
+905
+00:41:09,720 --> 00:41:12,000
+nhưng lại mang đến khả năng lưu giữ tuyệt vời.
+
+906
+00:41:12,000 --> 00:41:15,660
+Vì nếu các em làm theo đúng
+
+907
+00:41:15,660 --> 00:41:17,339
+các nguyên tắc mài hình thể đường viền,
+
+908
+00:41:17,339 --> 00:41:19,560
+thì một cách tự nhiên,
+
+909
+00:41:19,560 --> 00:41:22,800
+các em sẽ tạo ra ngàm đuôi én trên răng cối lớn.
+
+910
+00:41:22,800 --> 00:41:25,380
+Nhưng nó sẽ không tự có ở răng cối nhỏ,
+
+911
+00:41:25,380 --> 00:41:27,420
+mà các em phải chủ ý mài thêm.
+
+912
+00:41:27,420 --> 00:41:30,839
+Đó là lý do chúng ta có loại mở rộng thứ ba.
+
+913
+00:41:30,839 --> 00:41:33,000
+Chúng ta có "mở rộng để phòng ngừa" (hiện ít dùng),
+
+914
+00:41:33,000 --> 00:41:34,980
+"mở rộng để thuận tiện thao tác",
+
+915
+00:41:34,980 --> 00:41:37,079
+và "mở rộng để lưu giữ" (cũng đang hạn chế dần).
+
+916
+00:41:37,079 --> 00:41:39,119
+
+
+917
+00:41:39,119 --> 00:41:41,880
+
+
+918
+00:41:41,880 --> 00:41:46,200
+Bằng cách tinh chỉnh thiết kế xoang, các em
+
+919
+00:41:46,200 --> 00:41:49,260
+có thể tạo thêm rãnh trục ở mặt bên cho xoang loại II
+
+920
+00:41:49,260 --> 00:41:51,420
+hay cho bất kỳ xoang phức tạp nào đối với amalgam
+
+921
+00:41:51,420 --> 00:41:53,460
+và cả phục hình vàng đúc.
+
+922
+00:41:53,460 --> 00:41:54,900
+
+
+923
+00:41:54,900 --> 00:41:56,640
+Đây là
+
+924
+00:41:56,640 --> 00:41:59,339
+cách chúng ta mài rãnh trục ở mặt bên, lấn vào
+
+925
+00:41:59,339 --> 00:42:01,560
+vách ngoài và vách trong nhiều hơn là lấn vào vách trục.
+
+926
+00:42:01,560 --> 00:42:05,040
+Đối với phục hồi amalgam, rãnh này
+
+927
+00:42:05,040 --> 00:42:07,079
+chỉ được mài kéo dài đến ngang mức vách tủy.
+
+928
+00:42:07,079 --> 00:42:09,359
+Nhưng đối với phục hình vàng đúc, nó phải
+
+929
+00:42:09,359 --> 00:42:12,900
+kéo dài hẳn lên tận góc mép xoang (cavo-surface)
+
+930
+00:42:12,900 --> 00:42:15,960
+nhằm đảm bảo đủ khả năng lưu giữ.
+
+931
+00:42:15,960 --> 00:42:18,560
+
+
+932
+00:42:20,880 --> 00:42:23,400
+Một lần nữa,
+
+933
+00:42:23,400 --> 00:42:25,560
+khi các em sửa soạn các rãnh trục ở mặt bên
+
+934
+00:42:25,560 --> 00:42:28,619
+để tăng cường lưu giữ cho
+
+935
+00:42:28,619 --> 00:42:30,359
+các xoang trám kép,
+
+936
+00:42:30,359 --> 00:42:32,280
+các em sẽ cắt nó vào
+
+937
+00:42:32,280 --> 00:42:34,320
+góc vách trục-ngoài và góc vách trục-trong,
+
+938
+00:42:34,320 --> 00:42:36,720
+và ăn lấn vào hướng vách ngoài
+
+939
+00:42:36,720 --> 00:42:39,660
+và vách trong nhiều hơn là hướng vách trục,
+
+940
+00:42:39,660 --> 00:42:42,060
+để tạo độ lưu giữ theo chiều hướng sang bên.
+
+941
+00:42:42,060 --> 00:42:45,000
+Nó chỉ kéo dài đến vách tủy trong trường hợp
+
+942
+00:42:45,000 --> 00:42:47,820
+trám amalgam, nhưng sẽ kéo lên tận
+
+943
+00:42:47,820 --> 00:42:50,720
+góc mép xoang để phục vụ cho việc
+
+944
+00:42:50,720 --> 00:42:53,640
+lắp phục hình vàng đúc.
+
+945
+00:42:53,640 --> 00:42:55,140
+
+
+946
+00:42:55,140 --> 00:42:58,260
+Đó là lý do tại sao nó phải lấn
+
+947
+00:42:58,260 --> 00:43:00,540
+vào mặt ngoài và mặt trong nhiều hơn là
+
+948
+00:43:00,540 --> 00:43:02,400
+mặt trục, để mang lại độ lưu giữ
+
+949
+00:43:02,400 --> 00:43:05,220
+sang bên cần thiết. Đây là giới hạn mở rộng
+
+950
+00:43:05,220 --> 00:43:07,619
+phụ thuộc vào vật liệu phục hình các em chọn.
+
+951
+00:43:07,619 --> 00:43:10,619
+Nếu là miếng trám amalgam, nó chỉ
+
+952
+00:43:10,619 --> 00:43:12,960
+kéo dài đến ngang mức vách tủy. Nhưng nếu là
+
+953
+00:43:12,960 --> 00:43:14,760
+phục hình đúc, thì rãnh này
+
+954
+00:43:14,760 --> 00:43:17,880
+phải kéo dài lên tận góc mép xoang trên cùng.
+
+955
+00:43:17,880 --> 00:43:19,200
+
+
+956
+00:43:19,200 --> 00:43:22,859
+Các rãnh trục ở mặt bên này sẽ cung cấp
+
+957
+00:43:22,859 --> 00:43:25,859
+cả lưu giữ theo trục dọc lẫn hướng sang bên.
+
+958
+00:43:25,859 --> 00:43:28,140
+Dù được thiết kế chủ yếu để giữ theo chiều ngang,
+
+959
+00:43:28,140 --> 00:43:30,180
+ngăn miếng trám bị sút ra
+
+960
+00:43:30,180 --> 00:43:32,720
+bên ngoài...
+
+961
+00:43:32,720 --> 00:43:36,599
+
+
+962
+00:43:36,599 --> 00:43:40,380
+nhưng đối với amalgam, điểm kết thúc của rãnh
+
+963
+00:43:40,380 --> 00:43:42,540
+ngay tại mức vách tủy sẽ tạo thành một điểm chặn,
+
+964
+00:43:42,540 --> 00:43:44,640
+hoạt động như một cái gờ bên trong
+
+965
+00:43:44,640 --> 00:43:47,400
+giúp ngăn chặn sự sút miếng trám
+
+966
+00:43:47,400 --> 00:43:49,740
+theo hướng trục dọc (sút lên trên).
+
+967
+00:43:49,740 --> 00:43:51,780
+Còn đối với vàng đúc, vốn phụ thuộc vào
+
+968
+00:43:51,780 --> 00:43:53,520
+ma sát giữa kim loại và vách xoang,
+
+969
+00:43:53,520 --> 00:43:55,619
+rãnh này làm tăng diện tích bề mặt ma sát.
+
+970
+00:43:55,619 --> 00:43:58,200
+Chính vì vậy, rãnh trục ở mặt bên
+
+971
+00:43:58,200 --> 00:44:01,200
+mang lại cả hai loại lưu giữ trục và ngang.
+
+972
+00:44:01,200 --> 00:44:03,839
+Nhưng hãy nhớ rằng, vai trò chính của nó vẫn là
+
+973
+00:44:03,839 --> 00:44:07,079
+đảm bảo lưu giữ theo hướng sang bên (lateral retention).
+
+974
+00:44:07,079 --> 00:44:10,260
+Chúng ta cũng có thể mài thêm các rãnh nhỏ ở góc trong ngà.
+
+975
+00:44:10,260 --> 00:44:14,099
+Có thể cắm thêm chốt (pin), hay mài thêm
+
+976
+00:44:14,099 --> 00:44:17,099
+các rãnh phụ và ngàm khóa. Tất cả những thao tác này
+
+977
+00:44:17,099 --> 00:44:20,040
+đều được coi là những kỹ thuật tinh chỉnh
+
+978
+00:44:20,040 --> 00:44:21,780
+thiết kế xoang răng nhằm gia tăng
+
+979
+00:44:21,780 --> 00:44:24,480
+khả năng lưu giữ. Một trong những đặc điểm
+
+980
+00:44:24,480 --> 00:44:27,480
+lưu giữ quan trọng nhất
+
+981
+00:44:27,480 --> 00:44:29,760
+chính là đường vát ngược (reverse bevel) ở vách nướu.
+
+982
+00:44:29,760 --> 00:44:31,980
+Nếu các em còn nhớ lúc chúng ta học về
+
+983
+00:44:31,980 --> 00:44:35,099
+các dụng cụ cầm tay, thầy đã nhắc đến
+
+984
+00:44:35,099 --> 00:44:37,079
+một cây đục men có thiết kế vát ngược
+
+985
+00:44:37,079 --> 00:44:42,200
+ở đầu lưỡi cắt phía gần (mesial cutting chisel).
+
+986
+00:44:42,200 --> 00:44:46,440
+
+
+987
+00:44:46,440 --> 00:44:50,700
+
+
+988
+00:44:50,700 --> 00:44:52,500
+Và lúc đó thầy có hứa là sau này
+
+989
+00:44:52,500 --> 00:44:55,079
+chúng ta sẽ gặp lại khái niệm "vát ngược" này
+
+990
+00:44:55,079 --> 00:44:57,660
+trong lúc thiết kế xoang trám.
+
+991
+00:44:57,660 --> 00:45:01,140
+Hãy cùng quan sát qua sơ đồ
+
+992
+00:45:01,140 --> 00:45:05,400
+minh họa này nhé.
+
+993
+00:45:05,400 --> 00:45:07,800
+Hình bên trái cho thấy vách nướu được
+
+994
+00:45:07,800 --> 00:45:09,599
+thiết kế xuôi theo đúng hướng của
+
+995
+00:45:09,599 --> 00:45:13,020
+lăng trụ men răng tại khu vực này.
+
+996
+00:45:13,020 --> 00:45:16,079
+
+
+997
+00:45:16,079 --> 00:45:18,900
+Trong khi đó, hình bên phải
+
+998
+00:45:18,900 --> 00:45:20,880
+chính là kỹ thuật vát ngược (reverse beveling).
+
+999
+00:45:20,880 --> 00:45:24,300
+Chúng khác nhau như thế nào, và khi nào thì áp dụng?
+
+1000
+00:45:24,300 --> 00:45:26,040
+Vát ngược được chỉ định riêng cho phục hình đúc,
+
+1001
+00:45:26,040 --> 00:45:29,119
+nơi mà các vách xoang được thiết kế hơi loe ra ngoài.
+
+1002
+00:45:29,119 --> 00:45:32,460
+Và sẽ không có gì cản miếng phục hình bị xê dịch...
+
+1003
+00:45:32,460 --> 00:45:34,500
+
+
+1004
+00:45:34,500 --> 00:45:38,579
+ngoài lực ma sát giữa các vách
+
+1005
+00:45:38,579 --> 00:45:41,220
+và lớp xi măng gắn.
+
+1006
+00:45:41,220 --> 00:45:43,619
+Khi lực nén tác động vào khu vực này,
+
+1007
+00:45:43,619 --> 00:45:47,400
+
+
+1008
+00:45:47,400 --> 00:45:51,420
+lực sẽ được phân tích thành một lực căng hướng ra ngoài,
+
+1009
+00:45:51,420 --> 00:45:54,480
+nó sẽ đẩy lùi miếng trám hoặc làm bập bênh
+
+1010
+00:45:54,480 --> 00:45:56,579
+xoay quanh điểm tựa là góc vách trục-nướu.
+
+1011
+00:45:56,579 --> 00:45:59,339
+Hãy cùng xem lại sơ đồ này nhé.
+
+1012
+00:45:59,339 --> 00:46:02,700
+Đây là lực nhai tác động lên khu vực mặt bên,
+
+1013
+00:46:02,700 --> 00:46:05,819
+nó sẽ bị phân tích thành lực căng hướng ra ngoài.
+
+1014
+00:46:05,819 --> 00:46:08,579
+Miếng phục hình sẽ xoay bập bênh
+
+1015
+00:46:08,579 --> 00:46:11,880
+xoay quanh góc vách trục-nướu này.
+
+1016
+00:46:11,880 --> 00:46:14,700
+Nhưng nếu các em áp dụng đường vát ngược (reverse bevel),
+
+1017
+00:46:14,700 --> 00:46:17,460
+thì lúc này lực nhai tác động xuống sẽ được
+
+1018
+00:46:17,460 --> 00:46:19,619
+phân tách thành hai lực nằm ngang,
+
+1019
+00:46:19,619 --> 00:46:21,900
+một hướng sang phải và một hướng sang trái,
+
+1020
+00:46:21,900 --> 00:46:24,900
+chúng tự triệt tiêu lẫn nhau.
+
+1021
+00:46:24,900 --> 00:46:27,359
+Miếng phục hình sẽ hoàn toàn nằm im, không bị xê dịch hay xoay nữa.
+
+1022
+00:46:27,359 --> 00:46:29,880
+Lưu ý là vát ngược ở vách nướu này chỉ được
+
+1023
+00:46:29,880 --> 00:46:31,740
+áp dụng giới hạn cho phục hình đúc,
+
+1024
+00:46:31,740 --> 00:46:33,780
+đặc biệt là vàng đúc, tuyệt đối không dùng cho amalgam.
+
+1025
+00:46:33,780 --> 00:46:37,200
+Đối với amalgam, thứ nhất, các em không cần
+
+1026
+00:46:37,200 --> 00:46:39,119
+phải làm vậy, vì bản thân xoang amalgam đã
+
+1027
+00:46:39,119 --> 00:46:41,280
+được mài thuôn tụ hội về phía mặt nhai rồi.
+
+1028
+00:46:41,280 --> 00:46:44,880
+Sự thuôn này thừa sức giữ cho miếng trám không bị bập bênh
+
+1029
+00:46:44,880 --> 00:46:46,800
+hay xoay quanh góc vách trục-nướu.
+
+1030
+00:46:46,800 --> 00:46:49,079
+
+
+1031
+00:46:49,079 --> 00:46:51,540
+Thứ hai,
+
+1032
+00:46:51,540 --> 00:46:54,780
+đường vát ngược này sẽ tạo ra một vùng rìa vật liệu rất mỏng,
+
+1033
+00:46:54,780 --> 00:46:57,480
+kèm theo một góc nhọn sẽ là nơi tập trung ứng suất rất lớn.
+
+1034
+00:46:57,480 --> 00:47:00,060
+Nó vừa làm giảm khối lượng vật liệu tại bờ,
+
+1035
+00:47:00,060 --> 00:47:02,099
+vừa dễ gây ứ đọng thủy ngân dư thừa.
+
+1036
+00:47:02,099 --> 00:47:04,380
+Và chính điều này sẽ làm bờ amalgam trở nên rất bở và yếu.
+
+1037
+00:47:04,380 --> 00:47:07,859
+Đó là lý do thao tác tạo vát ngược là
+
+1038
+00:47:07,859 --> 00:47:10,859
+chống chỉ định tuyệt đối đối với xoang trám amalgam.
+
+1039
+00:47:10,859 --> 00:47:12,240
+Bởi vì nó dẫn đến tập trung ứng suất,
+
+1040
+00:47:12,240 --> 00:47:15,119
+tích tụ thủy ngân, và làm giảm độ dày khối vật liệu.
+
+1041
+00:47:15,119 --> 00:47:17,520
+Tất cả những yếu tố này sẽ làm amalgam suy yếu trầm trọng
+
+1042
+00:47:17,520 --> 00:47:19,079
+
+
+1043
+00:47:19,079 --> 00:47:21,359
+và cực kỳ dễ bị nứt gãy sút vỡ.
+
+1044
+00:47:21,359 --> 00:47:23,700
+Cuối cùng, đối với các loại hình lưu giữ chuyên biệt,
+
+1045
+00:47:23,700 --> 00:47:25,859
+như khi sử dụng hệ thống keo dán ngà
+
+1046
+00:47:25,859 --> 00:47:27,660
+để trám phục hồi nhựa composite,
+
+1047
+00:47:27,660 --> 00:47:29,940
+hoặc dùng chốt lưu giữ đặt bên trong buồng tủy
+
+1048
+00:47:29,940 --> 00:47:34,400
+hoặc ống tủy chân răng.
+
+1049
+00:47:35,000 --> 00:47:37,319
+Chúng ta có thể tổng kết lại rằng,
+
+1050
+00:47:37,319 --> 00:47:39,060
+các yếu tố quyết định việc lựa chọn hình thức lưu giữ
+
+1051
+00:47:39,060 --> 00:47:41,400
+chính là: Loại vật liệu phục hồi (khác nhau giữa
+
+1052
+00:47:41,400 --> 00:47:43,560
+amalgam, composite, vàng đúc hay phục hình gián tiếp).
+
+1053
+00:47:43,560 --> 00:47:45,839
+Khối lượng mô răng tự nhiên còn lại.
+
+1054
+00:47:45,839 --> 00:47:47,700
+Yêu cầu về mặt thẩm mỹ, mức độ lưu giữ cần thiết.
+
+1055
+00:47:47,700 --> 00:47:50,460
+
+
+1056
+00:47:50,460 --> 00:47:54,660
+Và tình trạng tủy sống. Nếu răng còn tủy sống,
+
+1057
+00:47:54,660 --> 00:47:56,460
+các em có thể tận dụng lực kẹp đàn hồi của ngà răng
+
+1058
+00:47:56,460 --> 00:48:00,240
+khi dùng phục hình nhồi vàng lá.
+
+1059
+00:48:00,240 --> 00:48:03,119
+Và cuối cùng là kiểu khớp cắn của bệnh nhân.
+
+1060
+00:48:03,119 --> 00:48:06,300
+
+
+1061
+00:48:06,300 --> 00:48:08,220
+Đây là các giáo trình thầy đã sử dụng
+
+1062
+00:48:08,220 --> 00:48:10,500
+để biên soạn bài giảng này. Thầy rất hoan nghênh
+
+1063
+00:48:10,500 --> 00:48:12,420
+mọi câu hỏi thắc mắc của các em.
+
+1064
+00:48:12,420 --> 00:48:15,300
+Cuối cùng, thầy xin cảm ơn các em
+
+1065
+00:48:15,300 --> 00:48:18,240
+đã dành thời gian quý báu của mình để lắng nghe.
+
+1066
+00:48:18,240 --> 00:48:21,119
+Thầy hy vọng bài giảng này thực sự hữu ích cho các em.
+
+1067
+00:48:21,119 --> 00:48:23,640
+Nếu có thắc mắc gì, các em cứ tự nhiên hỏi nhé.
+
+1068
+00:48:23,640 --> 00:48:26,700
+Đừng quên nhấn đăng ký kênh của thầy
+
+1069
+00:48:26,700 --> 00:48:29,640
+và bật thông báo để cập nhật
+
+1070
+00:48:29,640 --> 00:48:32,760
+những bài giảng mới nhất nhé. Cảm ơn các em!
+
+1071
+00:48:32,760 --> 00:48:35,030
+[Nhạc nền]
+
+1072
+00:48:35,030 --> 00:48:45,380
+[Nhạc nền]
+
+1073
+00:48:45,380 --> 00:48:48,440
+[Nhạc nền]
+
+1074
+00:48:52,020 --> 00:48:55,489
+[Nhạc nền]
+
+1075
+00:48:58,560 --> 00:49:02,560
+[Nhạc nền]
+
+1076
+00:49:11,520 --> 00:49:39,530
+[Nhạc nền]

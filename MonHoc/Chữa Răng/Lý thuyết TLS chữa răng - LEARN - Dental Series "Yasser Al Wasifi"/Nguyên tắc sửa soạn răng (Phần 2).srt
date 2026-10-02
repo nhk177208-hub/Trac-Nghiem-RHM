@@ -1,0 +1,689 @@
+﻿1
+00:00:08,230 --> 00:00:13,999
+
+
+2
+00:00:14,120 --> 00:00:17,120
+Cảm ơn các em.
+
+3
+00:00:30,420 --> 00:00:36,239
+Chào các em, thầy là Yasir Rosifi từ chuỗi bài giảng Nha khoa.
+
+4
+00:00:36,240 --> 00:00:43,260
+Hôm nay, thầy trò ta sẽ tiếp tục bài thứ hai về các nguyên tắc sửa soạn răng cơ bản.
+
+5
+00:00:43,260 --> 00:00:47,579
+Trước tiên, thầy xin đính chính rằng thầy không nhận bất kỳ khoản thù lao nào,
+
+6
+00:00:47,579 --> 00:00:52,079
+từ việc kinh doanh các sản phẩm được đề cập trong bài giảng.
+
+7
+00:00:52,079 --> 00:00:56,940
+Thầy cũng không có xung đột lợi ích với bất kỳ sản phẩm hay kỹ thuật nào.
+
+8
+00:00:56,940 --> 00:01:04,680
+Đồng thời, bài thuyết trình này được bảo hộ bản quyền,
+
+9
+00:01:04,680 --> 00:01:12,600
+không được sao chép hay phân phối nếu không có sự cho phép bằng văn bản từ thầy.
+
+10
+00:01:12,600 --> 00:01:18,600
+Ở phần trước, chúng ta đã thảo luận về phần giới thiệu, định nghĩa và mục tiêu,
+
+11
+00:01:18,600 --> 00:01:23,939
+cùng những yếu tố cần đánh giá trước khi bắt tay vào sửa soạn xoang.
+
+12
+00:01:23,939 --> 00:01:30,180
+Các em đã đi qua chi tiết các nguyên tắc sinh học như bảo vệ tủy răng...
+
+13
+00:01:30,180 --> 00:01:36,240
+khỏi kích thích nhiệt, cơ, hóa học, và cách phòng ngừa sâu răng tái phát.
+
+14
+00:01:36,240 --> 00:01:43,500
+Kể cả bảo tồn cấu trúc mô răng nâng đỡ và chấp nhận môi trường làm việc.
+
+15
+00:01:43,500 --> 00:01:50,040
+Bây giờ, chúng ta sẽ đi sâu vào chi tiết các nguyên tắc cơ học.
+
+16
+00:01:50,040 --> 00:01:57,119
+Bao gồm tạo hình thể ngoài, hình thể kháng lực và lưu giữ, hình thể thuận tiện,
+
+17
+00:01:57,119 --> 00:02:04,200
+loại bỏ ngà nhiễm khuẩn, hoàn thiện vách men ngoài và làm sạch xoang.
+
+18
+00:02:04,200 --> 00:02:11,180
+Khi xem lại tạp chí về lịch sử Nha khoa phục hồi,
+
+19
+00:02:11,180 --> 00:02:19,020
+có một bài báo năm 2005 tổng hợp các sự kiện quan trọng.
+
+20
+00:02:19,020 --> 00:02:26,420
+Chúng ta thấy những nguyên tắc cơ học này đã được G.V. Black đề xướng,
+
+21
+00:02:26,420 --> 00:02:32,840
+từ năm 1891, tức là cách đây hơn 130 năm.
+
+22
+00:02:32,840 --> 00:02:41,280
+Ông được tôn vinh là cha đẻ của nha khoa phục hồi hiện đại.
+
+23
+00:02:41,280 --> 00:02:49,440
+Một câu nói của ông rất đáng giá: "Người hành nghề chuyên nghiệp không có quyền nào khác,
+
+24
+00:02:49,440 --> 00:02:54,599
+ngoài việc làm một sinh viên học tập suốt đời."
+
+25
+00:02:54,599 --> 00:03:03,300
+Đó là lý do các nguyên tắc của ông vẫn liên tục được cải tiến cho đến ngày nay.
+
+26
+00:03:03,300 --> 00:03:09,900
+Tất cả những tiến bộ gần đây trong nha khoa phục hồi đều dựa trên triết lý của ông.
+
+27
+00:03:09,900 --> 00:03:17,340
+Đó là nỗ lực bảo tồn cấu trúc răng nguyên vẹn nhiều nhất có thể.
+
+28
+00:03:17,340 --> 00:03:25,019
+Đây là tượng của G.V. Black tại công viên Lincoln ở Chicago, Hoa Kỳ.
+
+29
+00:03:25,019 --> 00:03:32,459
+Thầy nhắc lại, mục tiêu của nguyên tắc cơ học là cung cấp sức kháng lực tối đa chống lại nứt gãy,
+
+30
+00:03:32,459 --> 00:03:39,180
+cho cả mô răng lành mạnh còn lại và cho chính vật liệu phục hồi.
+
+31
+00:03:39,180 --> 00:03:47,580
+Bên cạnh đó là sự lưu giữ tối đa chống lại lực bật sút, đi kèm với việc bảo tồn tối đa mô răng.
+
+32
+00:03:47,580 --> 00:03:56,040
+Hay nói cách khác, các em chỉ được phép cắt mô răng ở mức tối thiểu.
+
+33
+00:03:56,040 --> 00:04:04,560
+Sáu bước cơ học theo chuẩn bao gồm: thiết kế hình thể ngoài, hình thể kháng lực và lưu giữ,
+
+34
+00:04:04,560 --> 00:04:13,019
+hình thể thuận tiện, lấy sạch ngà nhiễm khuẩn, hoàn thiện vách men ngoài, và làm sạch xoang.
+
+35
+00:04:13,019 --> 00:04:21,560
+Tuy nhiên, đối với một sang thương sâu lớn, bước lấy ngà nhiễm khuẩn sẽ được đưa lên số 2.
+
+36
+00:04:21,560 --> 00:04:28,620
+Khi đó, trình tự sẽ là: tạo hình thể ngoài, lấy ngà sâu, sau đó mới đến kháng lực và lưu giữ.
+
+37
+00:04:28,620 --> 00:04:36,060
+Cuối cùng là hình thể thuận tiện, hoàn thiện vách men, và làm sạch xoang trám.
+
+38
+00:04:36,060 --> 00:04:44,820
+Tại sao các em lại thay đổi trình tự với những ca sâu răng lớn này?
+
+39
+00:04:44,820 --> 00:04:53,580
+Bởi vì các em cần loại bỏ hoàn toàn mô sâu và miếng trám cũ ngay sau khi tạo hình thể ngoài ban đầu.
+
+40
+00:04:53,580 --> 00:05:02,100
+Hãy thử tưởng tượng một lỗ sâu rất lớn. Đầu tiên các em mở hình thể ngoài.
+
+41
+00:05:02,100 --> 00:05:11,940
+Sau đó, các em phải loại bỏ ngay mô bệnh để đánh giá các yếu tố sau đây.
+
+42
+00:05:11,940 --> 00:05:21,240
+Thứ nhất, các em cần xác định mức độ tổn thương của tủy răng.
+
+43
+00:05:21,240 --> 00:05:29,220
+Nếu cứ làm kháng lực, lưu giữ xong mới lấy ngà, các em có thể phát hiện tủy đã bị lộ từ lâu.
+
+44
+00:05:29,220 --> 00:05:38,880
+Kể cả khi tủy an toàn, các em vẫn phải đánh giá xem lượng mô răng lành lặn còn lại có đủ chịu lực hay không.
+
+45
+00:05:38,880 --> 00:05:47,580
+Điều này quyết định kỹ thuật phục hồi và thiết kế xoang phù hợp nhất.
+
+46
+00:05:47,580 --> 00:05:58,500
+Nếu sau khi lấy sâu, các em thấy các vách bị mỏng yếu, các em có thể phải chuyển sang dùng miếng trám dán.
+
+47
+00:05:58,500 --> 00:06:08,100
+Sử dụng hệ thống keo dán ngà răng để liên kết các vách yếu ớt với các múi răng khỏe hơn.
+
+48
+00:06:08,100 --> 00:06:17,699
+Hoặc các em có thể phải chuyển sang các phục hình gián tiếp, thậm chí bọc mão toàn diện.
+
+49
+00:06:17,699 --> 00:06:27,240
+Đó là lý do quy trình sửa soạn xoang ngày nay được chia thành giai đoạn đầu và giai đoạn cuối.
+
+50
+00:06:27,240 --> 00:06:35,880
+Bởi vì trong một số ca, sau khi lấy sạch ngà sâu, các em có thể phải đánh giá lại...
+
+51
+00:06:35,880 --> 00:06:45,000
+...hình thể kháng lực và lưu giữ của mình. Bước này được gọi là tạo kháng lực và lưu giữ thứ phát.
+
+52
+00:06:45,000 --> 00:06:51,720
+Sau khi mở hình thể ngoài và tạo xoang, các em thiết kế kháng lực và lưu giữ sơ khởi.
+
+53
+00:06:51,720 --> 00:07:02,100
+Nhưng khi lấy ngà sâu, các em nhận ra mình đã mở rộng xoang quá nhiều... làm mất đi các yếu tố lưu giữ và kháng lực ban đầu.
+
+54
+00:07:02,100 --> 00:07:13,620
+Đó là lý do các em cần phải đánh giá lại và bổ sung kháng lực, lưu giữ thứ phát.
+
+55
+00:07:13,620 --> 00:07:24,599
+Vì thế, trong nhiều giáo trình, các bước sửa soạn xoang được chia làm hai giai đoạn: sơ khởi và hoàn thiện.
+
+56
+00:07:24,599 --> 00:07:36,240
+Giai đoạn sơ khởi nhằm mục đích đi qua lớp men, tiếp cận đến độ sâu của sang thương... bằng cách mở rộng sang hai bên.
+
+57
+00:07:36,240 --> 00:07:46,800
+Định hướng các vách xoang để chống nứt gãy, đây chính là kháng lực và lưu giữ sơ khởi.
+
+58
+00:07:46,800 --> 00:08:03,599
+Giai đoạn hoàn thiện diễn ra sau khi đã loại bỏ hoàn toàn tổn thương sâu. Răng được cách ly, và các em cân nhắc việc bảo vệ tủy...
+
+59
+00:08:03,599 --> 00:08:11,639
+...đồng thời củng cố độ vững chắc cho xoang trám để có tiên lượng tốt bằng cách tạo kháng lực và lưu giữ thứ phát.
+
+60
+00:08:11,639 --> 00:08:22,440
+Trình tự khi đó sẽ là: Bước 1 tạo hình thể ngoài. Bước 2 và 3 là kháng lực, lưu giữ sơ khởi. Bước 4 là hình thể thuận tiện.
+
+61
+00:08:22,440 --> 00:08:35,779
+Giai đoạn hoàn thiện bắt đầu ở bước 5: lấy mô bệnh hoặc miếng trám cũ. Các em có thể kết thúc ở đây nếu sang thương nhỏ hoặc vừa.
+
+62
+00:08:35,779 --> 00:08:45,360
+Nhưng với lỗ sâu lớn, các em phải tiến hành tiếp các bước che tủy, kháng lực và lưu giữ thứ phát...
+
+63
+00:08:45,360 --> 00:08:54,300
+...sau đó là hoàn thiện vách men ngoài và bước cuối cùng là làm sạch xoang.
+
+64
+00:08:54,300 --> 00:09:04,260
+Nào, thầy trò ta hãy bắt đầu với Hình thể ngoài. Thầy sẽ nói về định nghĩa, các nguyên tắc cơ bản và yếu tố chi phối.
+
+65
+00:09:04,260 --> 00:09:17,940
+Hình thể ngoài được định nghĩa là ranh giới bên ngoài của xoang trám đã hoàn thiện, chính là đường bờ này.
+
+66
+00:09:17,940 --> 00:09:28,980
+Khi các em tạo xoang, mỗi điểm trên đường này tạo thành một góc bờ xoang (cavo-surface angle).
+
+67
+00:09:28,980 --> 00:09:42,240
+Vậy các em cũng có thể định nghĩa nó là kiểu phân bố của góc bờ xoang. Đó là hai cách định nghĩa về hình thể ngoài.
+
+68
+00:09:42,240 --> 00:10:03,240
+Để tạo được hình thể ngoài chuẩn, chúng ta có những nguyên tắc cơ bản buộc phải áp dụng cho mọi loại xoang, không có ngoại lệ.
+
+69
+00:10:03,240 --> 00:10:17,100
+Bên cạnh đó, chúng ta có các "yếu tố chi phối" thay đổi linh hoạt tùy theo tình trạng từng răng và loại phục hồi.
+
+70
+00:10:17,100 --> 00:10:28,800
+Tùy vào các yếu tố chi phối, các em có thể phải nới rộng đường hoàn tất. Giờ thầy trò ta đi vào các nguyên tắc cơ bản trước nhé.
+
+71
+00:10:28,800 --> 00:10:44,579
+Nguyên tắc số 1, để phòng ngừa sâu răng tái phát: Các em phải lấy sạch toàn bộ chu vi mô sâu theo bề mặt ngang.
+
+72
+00:10:44,579 --> 00:10:59,519
+Điều này rất hiển nhiên vì mục đích là loại bỏ sâu răng. Nhưng lưu ý, ở bước này ta chỉ mở rộng theo chiều ngang ngoài - trong, gần - xa.
+
+73
+00:10:59,519 --> 00:11:07,500
+Các em chưa cần quan tâm đến độ sâu. Việc lấy ngà sâu phía dưới sẽ là nhiệm vụ của bước số 4.
+
+74
+00:11:07,500 --> 00:11:28,440
+Đó là nguyên tắc đầu tiên. Nguyên tắc số 2: Phải mở rộng xoang bao gồm tất cả các hố, rãnh và các vùng dễ nhồi nhét thức ăn.
+
+75
+00:11:28,440 --> 00:11:42,000
+Điều này nhằm tránh sâu răng tái phát vì đây là những vùng ứ đọng mảng bám. Nguyên tắc số 3: Bờ xoang phải nằm ở vùng dễ tự làm sạch.
+
+76
+00:11:42,000 --> 00:12:07,260
+Các em mở rộng đến mô lành nhưng tuyệt đối không để lại men mất ngà nâng đỡ. Nếu không, men sẽ vỡ, tạo vi kẽ gây sâu tái phát.
+
+77
+00:12:07,260 --> 00:12:22,560
+Kế tiếp, đường viền xoang phải là những đường cong trơn tru, bo tròn mọi góc nhọn để phân tán lực và tránh mắc thức ăn.
+
+78
+00:12:22,560 --> 00:12:39,000
+Nguyên tắc số 6: Nếu hai xoang nằm sát nhau, các em phải nối chúng lại để tránh để lại một gờ men yếu, rất dễ gãy vỡ.
+
+79
+00:12:39,000 --> 00:13:00,839
+Giả sử các em tạo xoang loại I ở răng cối lớn hàm trên và giữ lại gờ chéo. Nhưng kiểm tra lại thấy rãnh nứt sâu chạy ngang qua nó...
+
+80
+00:13:00,839 --> 00:13:24,959
+Khi mở rộng xoang để lấy phần sâu đó, gờ chéo sẽ trở nên rất mỏng và chắc chắn sẽ gãy. Nên theo nguyên tắc, ta phải cắt thông chúng.
+
+81
+00:13:24,959 --> 00:13:48,120
+Các em nhìn hình răng số 7 hàm trên này xem, sau khi lấy sạch ngà sâu, gờ chéo còn lại quá mỏng. Ta bắt buộc phải cắt thông xoang.
+
+82
+00:13:48,120 --> 00:14:03,180
+Tương tự trên răng cối nhỏ dưới có gờ ngang, nếu tạo hai xoang nhỏ mà gờ ngang quá mỏng thì cũng phải mở thông luôn để tránh gãy.
+
+83
+00:14:03,180 --> 00:14:28,079
+Tuy nhiên, nếu các em dùng phục hồi dán như Composite kết hợp keo dán ngà, thì KHÔNG cần cắt thông gờ men yếu đó nữa.
+
+84
+00:14:28,079 --> 00:14:45,420
+Vì ưu điểm tuyệt vời của keo dán ngà là nó sẽ liên kết chặt cấu trúc yếu này với các múi và vách răng chắc khỏe khác xung quanh.
+
+85
+00:14:45,420 --> 00:15:09,600
+Nhờ lớp dán này, lực nhai tác động lên gờ yếu sẽ được san sẻ qua phần khỏe, giúp gia cố cho toàn bộ cấu trúc mô răng.
+
+86
+00:15:09,600 --> 00:15:31,139
+Nguyên tắc cuối cùng của hình thể ngoài là "Mở rộng để phòng ngừa", do G.V. Black đề xướng cách đây hơn 130 năm.
+
+87
+00:15:31,139 --> 00:16:01,139
+Ông cho rằng phải mở rộng bờ xoang tối đa ra vùng tự làm sạch để đảm bảo không đọng thức ăn. Black rất chuộng triết lý mở rộng tối đa này.
+
+88
+00:16:01,139 --> 00:16:32,839
+Nhưng việc "mở rộng phòng ngừa" này có điểm trừ lớn: nó làm yếu mô răng và yếu cả miếng trám do tăng diện tích bề mặt chịu lực nhai.
+
+89
+00:16:32,839 --> 00:16:55,620
+Điều này đi ngược lại với chính mục tiêu cốt lõi của nguyên tắc cơ học mà thầy nhắc lúc nãy: kháng lực tối đa đi kèm bảo tồn mô răng tối đa.
+
+90
+00:16:55,620 --> 00:17:27,120
+Hơn nữa, mũi khoan cắt đi 1 milimet vuông ngà răng không cần thiết là các em đang làm lộ hở đến 20.000 - 45.000 ống ngà, gây kích thích tủy.
+
+91
+00:17:27,120 --> 00:17:51,780
+Nếu áp dụng tư tưởng mở rộng này cho xoang loại II, các em còn có nguy cơ làm tổn thương mô nướu và cấu trúc nâng đỡ quanh răng.
+
+92
+00:17:51,780 --> 00:18:17,000
+Hơn thế, kéo dài bờ viền xoang cũng làm tăng diện tích có nguy cơ bị vi khuẩn tấn công lần nữa. Tư tưởng này hoàn toàn vi phạm nguyên tắc sinh học và cơ học.
+
+93
+00:18:17,000 --> 00:18:52,380
+Vậy tại sao G.V. Black lại mâu thuẫn với chính triết lý bảo tồn mô răng của mình? Hãy nhớ bối cảnh cách đây 130 năm, chúng ta có 3 lý do để hiểu cho ông.
+
+94
+00:18:52,380 --> 00:19:20,039
+Thứ nhất, công nghệ phay thời đó chưa thể sản xuất ra những mũi khoan nha khoa tinh xảo, bé xíu như bây giờ. Bắt buộc ông phải cắt bằng mũi khoan to.
+
+95
+00:19:20,039 --> 00:19:38,400
+Thứ hai, ngày trước chưa có các thiết bị chẩn đoán sâu răng sớm. Đa số bệnh nhân đến ghế nha khoa khi lỗ sâu đã phá hủy rất nặng nề rồi.
+
+96
+00:19:38,400 --> 00:19:59,220
+Thứ ba, bệnh nhân thời đó chưa có kiến thức tốt về vệ sinh răng miệng. Vì vậy, các em nhớ: triết lý "Mở rộng để phòng ngừa" nay KHÔNG CÒN giá trị nữa.
+
+97
+00:19:59,220 --> 00:20:13,340
+Giờ thầy trò ta đi tiếp sang các yếu tố chi phối hình thể ngoài. Có 8 yếu tố sẽ quyết định việc các em nên mở rộng xoang nhiều hay ít.
+
+98
+00:20:13,340 --> 00:20:34,440
+Đó là: tuổi tác, tình trạng vệ sinh răng, loại vật liệu trám, kỹ thuật thực hiện, yêu cầu thẩm mỹ, hình thể thuận tiện, sự hiện diện của múi yếu và kích thước vùng tiếp giáp.
+
+99
+00:20:34,440 --> 00:20:47,520
+Ở bệnh nhân trẻ tuổi, hệ thống hố rãnh giải phẫu còn rất rõ ràng. Vậy nên khi tạo xoang loại I, các em phải mở rộng theo tất cả các hố rãnh này.
+
+100
+00:20:47,520 --> 00:21:00,840
+Nhưng nếu ở người lớn tuổi, răng bị mài mòn và các ranh giới giải phẫu tự nhiên đã bị xóa sạch...
+...thì hình thể ngoài sẽ được thu hẹp lại, các em cần thiết kế một đường hoàn tất cực kỳ bảo tồn.
+
+101
+00:21:14,880 --> 00:21:28,799
+Ngược lại, khi vệ sinh răng miệng kém, bệnh nhân không tuân thủ các biện pháp phòng ngừa tại nhà...
+...các em phải mở rộng xoang bao gồm tất cả các hố, rãnh và điểm dễ nhồi nhét thức ăn.
+
+102
+00:21:28,799 --> 00:21:41,520
+Hình A là bệnh nhân có vệ sinh răng miệng tốt, còn hình B là vệ sinh kém.
+Yếu tố tiếp theo ảnh hưởng đến thiết kế là tính chất vật lý của vật liệu phục hồi.
+
+103
+00:21:41,520 --> 00:21:53,400
+Đối với vật liệu giòn như Amalgam, ta cần độ rộng eo tối thiểu và độ sâu tối đa.
+Độ rộng eo chỉ nên từ 1/4 đến 1/3 khoảng cách đỉnh múi, giúp giảm diện tích chịu lực nhai.
+
+104
+00:21:53,400 --> 00:22:07,500
+Trong khi đó, độ sâu phải đảm bảo khối vật liệu đạt độ dày ít nhất 2 milimet.
+Trái lại, vật liệu dẻo dai thì không yêu cầu quá khắt khe về độ dày do đặc tính bền chắc của chúng.
+
+105
+00:22:17,700 --> 00:22:30,120
+Tiếp đến là ảnh hưởng của kỹ thuật thực hiện. Với phục hình đúc gián tiếp...
+...nghĩa là lấy dấu, điêu khắc sáp và đúc thành khối cứng chắc rồi gắn xi măng vào xoang.
+
+106
+00:22:30,120 --> 00:22:42,419
+Dù bản chất hợp kim đúc rất dai và bền, lẽ ra không cần mở rộng hình thể xoang...
+...nhưng chính các bước kỹ thuật lại bắt buộc ta phải làm điều đó. Thứ nhất là do chất lấy dấu.
+
+107
+00:22:42,419 --> 00:22:57,659
+Các em cần một khối vật liệu lấy dấu đủ dày để tránh bị xé rách khi gỡ khuôn.
+Thứ hai, sáp điêu khắc rất giòn, các em không thể đúc thành công một phần rìa sáp quá mỏng.
+
+108
+00:22:57,659 --> 00:23:13,980
+Do hiện tượng áp suất dội ngược, kim loại sẽ không chảy đều. Vì thế, ta phải nới rộng đường hoàn tất...
+...để tăng thể tích khối sáp, đảm bảo thao tác đúc diễn ra chính xác và dễ dàng hơn.
+
+109
+00:23:46,440 --> 00:24:01,679
+Về yếu tố thẩm mỹ, các em cần cắt mô răng ở mức tối thiểu...
+...để bảo tồn tối đa cấu trúc tự nhiên của răng, duy trì được vẻ hài hòa.
+
+110
+00:24:01,679 --> 00:24:14,880
+Thậm chí, ở xoang loại III, các em có thể giữ lại lớp men mất ngà nâng đỡ ở vách ngoài.
+Bình thường, thầy luôn nhắc không được để lại men yếu vì nó dễ vỡ tạo vi kẽ gây sâu tái phát.
+
+111
+00:24:14,880 --> 00:24:26,820
+Nhưng hãy nhìn vào sơ đồ xoang loại III này. Đối với vách ngoài mặt môi, nếu nó mất ngà nâng đỡ...
+...hãy cứ giữ nguyên vách đó lại vì mục đích thẩm mỹ.
+
+112
+00:24:26,820 --> 00:24:39,179
+Không có bất kỳ vật liệu nhân tạo nào có thể phục hồi vẻ đẹp tự nhiên hoàn hảo bằng men răng thật.
+Nó có dễ gãy không? Không hề, vì không có lực nhai trực tiếp nào tác động lên vùng này.
+
+113
+00:24:39,179 --> 00:24:55,400
+Lực tác động duy nhất chỉ đến từ môi trường và hệ thống cơ mặt, hoàn toàn không đáng lo ngại.
+Chuyển sang xoang loại V, vách nướu và vách cắn của các em phải tạo song song với đường viền nướu.
+
+114
+00:25:01,520 --> 00:25:15,500
+Việc hai đường ranh giới song song sẽ giúp ánh sáng phản xạ đi theo cùng một hướng.
+Người đối diện sẽ khó nhận ra đâu là ranh giới giữa miếng trám và mô răng thật.
+
+115
+00:25:15,500 --> 00:25:28,620
+Đây là một dạng ảo ảnh thị giác, và trong nha khoa, ta gọi nó là "Đường cong duyên dáng" (Graceful Curve).
+Yếu tố thứ 6 chi phối hình thể xoang là Hình thể thuận tiện.
+
+116
+00:25:35,700 --> 00:25:50,820
+Để thao tác làm việc dễ dàng, đặc biệt ở xoang loại II và loại III, các em cần mở rộng đường viền xoang.
+Ở xoang loại II, làm sao các em tiếp cận được mặt bên nếu không mở đường từ mặt nhai?
+
+117
+00:25:50,820 --> 00:26:05,279
+Do đó, lối tiếp cận từ mặt nhai chính là một dạng "Mở rộng hình thể ngoài"...
+...nó được tính vào phần hình thể thuận tiện để vươn tới sang thương vùng tiếp giáp.
+
+118
+00:26:05,279 --> 00:26:19,620
+Tương tự ở xoang loại III, tổn thương nằm ở mặt bên của răng trước.
+Nhưng để tối ưu thẩm mỹ, các em nên tiếp cận mở tủy từ mặt trong để tránh cắt vách ngoài.
+
+119
+00:26:19,620 --> 00:26:35,100
+Nếu không, các em sẽ vướng phải các răng lân cận. Đây là phân loại "Mở rộng thuận tiện".
+Thầy nhắc lại, tư tưởng "Mở rộng phòng ngừa" hiện đã bị bác bỏ, còn "Mở rộng thuận tiện" thì cần tiết chế tối đa.
+
+120
+00:26:54,720 --> 00:27:10,799
+Yếu tố thứ 7: Sự hiện diện của múi yếu. Thế nào là một múi yếu?
+Khi chiều rộng đáy múi lớn hơn hoặc bằng chiều cao múi, đó là một múi khỏe.
+
+121
+00:27:10,799 --> 00:27:24,960
+Ngược lại, nếu đáy múi nhỏ hơn chiều cao múi, nó được xem là múi yếu.
+Làm sao để tính toán tỷ lệ này? Các em tính từ tâm xoang trám đến đỉnh múi...
+
+122
+00:27:24,960 --> 00:27:38,340
+Hãy chia khoảng cách đó làm 3 phần. Nếu chân múi chỉ chiếm 1/3, múi đó quá yếu và rất dễ gãy vỡ.
+Hậu quả của việc để lại múi yếu trên lâm sàng là gì, tại sao ta phải lo lắng?
+
+123
+00:28:01,380 --> 00:28:16,559
+Khi bệnh nhân bắt đầu nhai, lực nén thẳng đứng sẽ phân tích thành hai thành phần lực xé ngang.
+Múi răng yếu sẽ không chịu nổi lực căng này, nó sẽ bị xé toạc và chẻ đôi dọc theo thân răng.
+
+124
+00:28:31,679 --> 00:28:45,960
+Vậy các em giải quyết vấn đề này bằng cách nào?
+Các em không thể đắp thêm chiều rộng đáy múi, nhưng CÓ THỂ làm giảm chiều cao của múi răng đó.
+
+125
+00:28:45,960 --> 00:29:01,500
+Để hạ thấp, ta buộc phải mở rộng xoang trùm lên phần đỉnh múi, mài bớt ít nhất 2 milimet mô răng.
+Kỹ thuật này được gọi là "Hạ múi" (Cuspal Coverage), áp dụng phổ biến với miếng trám Amalgam.
+
+126
+00:29:01,500 --> 00:29:17,520
+Lúc này, hình thể ngoài không dừng lại ở đường ranh giới thông thường nữa...
+...mà sẽ lan rộng trùm lên đỉnh múi, chỉ để bảo vệ múi răng mỏng manh đó.
+
+127
+00:29:17,520 --> 00:29:30,980
+Riêng với phục hình vàng đúc, các em không cần hạ múi tới 2 milimet, chỉ cần vát nhẹ các bờ men.
+Kỹ thuật này cũng được coi là bao phủ múi (Cuspal Coverage).
+
+128
+00:29:30,980 --> 00:29:43,620
+Đây là hình ảnh hoàn thiện của ca hạ múi. Vì sâu răng lan rộng bắt buộc ta phải cắt nhiều mô răng.
+Đáy múi đã hẹp đi, ta không thể đắp bù thêm đáy múi được nữa.
+
+129
+00:29:43,620 --> 00:29:57,840
+Nên bắt buộc ta hạ thấp đỉnh múi xuống ít nhất 2 milimet để dành không gian cho Amalgam.
+Điều này giúp phục hình bằng vật liệu độ bền cao chịu thay lực nhai cho múi răng yếu.
+
+130
+00:30:08,580 --> 00:30:24,539
+Một lần nữa thầy nhấn mạnh, nếu các em đang dùng vật liệu dán như Composite...
+...các em sẽ được hưởng lợi tuyệt vời từ hệ thống keo dán ngà siêu chắc.
+
+131
+00:30:24,539 --> 00:30:42,020
+Với Composite, các em HOÀN TOÀN KHÔNG CẦN phải cắt hạ múi răng nữa.
+Vì lớp keo dán đã khóa chặt múi yếu vào các vách khỏe mạnh, san sẻ lực nhai đồng đều.
+
+132
+00:30:42,020 --> 00:30:55,980
+Lớp keo dán này giúp gia cố toàn phần cấu trúc răng, trừ phi lớp men đó đã quá giòn và mỏng vỡ.
+Cuối cùng, yếu tố thứ 8 ảnh hưởng đến hình thể xoang: Kích thước của vùng tiếp giáp mặt bên.
+
+133
+00:30:58,679 --> 00:31:12,840
+Kích thước mặt tiếp giáp theo chiều ngoài - trong và kích thước mặt nhai...
+...sẽ chi phối thiết kế đường viền phần eo xoang (isthmus) ở xoang loại II.
+
+134
+00:31:12,840 --> 00:31:25,200
+Vì nguyên tắc chung là bờ xoang phải được đặt ở vùng dễ tự làm sạch, tức là vùng khoang tiếp cận (embrasure).
+Do đó, các em phải xác định được chiều rộng ngoài - trong của diện tiếp giáp này.
+
+135
+00:31:25,200 --> 00:31:39,480
+Khi các em đi mũi khoan từ mặt nhai, mở rộng qua phần eo xoang để tiến vào khoang tiếp cận...
+...thì ngay tại vị trí này, góc bờ xoang (cavo-surface angle) sẽ đạt mức 90 độ lý tưởng.
+
+136
+00:31:39,480 --> 00:31:53,940
+Đây gọi là đường viền thẳng (straight outline), áp dụng khi diện tiếp giáp hẹp.
+Nhưng nếu diện tiếp giáp ở mức độ vừa phải, đặc biệt là ở vách ngoài...
+
+137
+00:31:53,940 --> 00:32:09,000
+...các em sẽ thấy đường viền được thiết kế uốn cong đều đặn (uniform) và trơn tru hơn.
+Điều này giúp đảm bảo nguyên tắc là phần eo xoang phải mở thẳng ra vùng khoang tiếp cận.
+
+138
+00:32:09,000 --> 00:32:23,220
+Như vậy, chúng ta có đường viền thẳng và đường viền cong đều.
+Nhưng nếu diện tiếp giáp quá rộng, mà các em vẫn tiếp tục cắt theo một đường cong đều...
+
+139
+00:32:23,220 --> 00:32:36,240
+...thì mũi khoan sẽ bị đẩy đi rất xa. Hậu quả là các em sẽ cắt mất một lượng lớn cấu trúc mô răng.
+Và đồng thời, góc bờ xoang tại vị trí đó cũng không còn đạt được 90 độ nữa.
+
+140
+00:32:36,240 --> 00:32:51,179
+Quy tắc đúng ở đây là: các em cứ đi theo đường cong đều, nhưng trước khi thoát ra ngoài khoang tiếp cận...
+...hãy bẻ hướng mũi khoan ngược lại một chút để tạo thành hình dáng như đầu mũi tên thế này.
+
+141
+00:32:51,179 --> 00:33:04,440
+Thiết kế này được gọi là "Đường cong ngược" (Reverse Curve).
+Nó được áp dụng trong trường hợp diện tiếp giáp quá rộng theo chiều ngoài - trong.
+
+142
+00:33:04,440 --> 00:33:21,240
+Các em đang đi đường cong đều, rồi uốn ngược lại để điểm kết thúc nằm chính xác tại điểm bắt đầu của khoang tiếp cận phía ngoài.
+Đường cong ngược là thiết kế bắt buộc để đảm bảo góc bờ xoang luôn là 90 độ và bảo tồn được vùng tam giác men ngà này.
+
+143
+00:33:36,240 --> 00:33:51,480
+Trong hình này, vị trí số 1 chính là đường cong ngược, còn số 2, 3, 4 là đường cong đều.
+Các em hãy lưu ý, chúng ta hầu như luôn cần đường cong ngược ở vách ngoài chứ không phải vách trong.
+
+144
+00:33:51,480 --> 00:34:07,320
+Tại sao lại như vậy? Các em nhớ lại kiến thức trước, vùng tiếp giáp mặt bên luôn có xu hướng lệch về phía ngoài.
+Nếu các em buộc phải tạo một đường cong ngược ở đường viền phần eo xoang phía trong...
+
+145
+00:34:07,320 --> 00:34:25,800
+...thì nguyên nhân không phải do kích thước diện tiếp giáp, mà là do sang thương sâu đã lan quá rộng về phía trong.
+Trong trường hợp này, các em vẫn xử lý tương tự như khi đối phó với diện tiếp giáp rộng.
+
+146
+00:34:25,800 --> 00:34:42,659
+Các em phải tránh việc mở rộng xoang quá mức bằng cách sử dụng đường cong ngược.
+Tóm lại, đường cong ngược hầu như luôn hướng về phía ngoài vì diện tiếp giáp lệch ngoài.
+
+147
+00:34:42,659 --> 00:35:00,960
+Nếu cần tạo ở vách trong, thì nguyên nhân chính là do mức độ lan rộng của sâu răng.
+Vậy còn kích thước theo chiều đứng, tức chiều nhai - nướu (occlusogingival) của vùng tiếp giáp thì sao?
+
+148
+00:35:00,960 --> 00:35:17,760
+Nó sẽ quyết định việc thiết kế hình thể xoang mặt bên có tạo bậc (step) hay không có bậc.
+Mặc định, thiết kế của bất kỳ xoang phức hợp (compound cavity) nào cũng là KHÔNG tạo bậc.
+
+149
+00:35:17,760 --> 00:35:34,320
+Đó là nguyên tắc chung. Các em mở xoang ở mặt nhai, làm phẳng tới mức sàn tủy (pulpal floor) và dừng lại.
+Các em phải tôn trọng và bảo vệ sàn tủy gốc. Nhưng nếu lúc này diện tiếp giáp vẫn còn dính chặt...
+
+150
+00:35:34,320 --> 00:35:54,780
+...hoặc sang thương sâu, rãnh nứt vẫn còn kéo dài xuống hướng nướu, các em sẽ có hai lựa chọn.
+Một là đánh tụt toàn bộ sàn tủy xuống sâu hơn và làm nguy hiểm đến tủy răng.
+
+151
+00:35:54,780 --> 00:36:09,240
+Hai là, các em cố gắng tránh tủy bằng cách tạo một cái "bậc" (step) đi xuống vùng mặt bên.
+Mục đích của việc tạo xoang phức hợp có bậc, thiết lập hai mức cao độ khác nhau là gì?
+
+152
+00:36:09,240 --> 00:36:27,660
+Đó là để bao gộp hoàn toàn phần sâu răng, phần diện tiếp giáp hoặc bất kỳ vùng ứ đọng nào...
+...nằm sâu hơn mức sàn tủy, mà tuyệt đối KHÔNG làm nguy hại đến buồng tủy phía dưới.
+
+153
+00:36:27,660 --> 00:36:43,500
+Về bản chất, các em đang khéo léo đi đường vòng để né tủy thay vì đâm thẳng vào nó.
+Thầy nhắc lại lần nữa: thiết kế mặc định của xoang phức hợp luôn là xoang không có bậc.
+
+154
+00:36:43,500 --> 00:37:00,359
+Các em chỉ cần tạo thêm bậc tùy thuộc vào kích thước chiều nhai - nướu của tổn thương, của vùng tiếp giáp...
+...hoặc khi có rãnh phụ kéo dài. Các em phải dừng lại ở mức sàn tủy để kiểm tra trước.
+
+155
+00:37:00,359 --> 00:37:19,260
+Nếu vùng tiếp giáp vẫn chưa được mở thoát tự do về hướng nướu, hoặc sâu răng vẫn còn...
+...thì thay vì hạ thấp toàn bộ sàn tủy, hãy tạo một cái bậc nhỏ đi xuống để xử lý sạch khu vực đó một cách an toàn.
+
+156
+00:37:19,260 --> 00:37:39,900
+Đó là toàn bộ nội dung của bài hôm nay. Dưới đây là các tài liệu tham khảo thầy đã sử dụng.
+Các câu hỏi của các em luôn được hoan nghênh. Cảm ơn các em đã dành thời gian lắng nghe bài giảng này.
+
+157
+00:37:39,900 --> 00:37:53,700
+Thầy hy vọng đây là một bài học nhẹ nhàng và dễ hiểu đối với tất cả các em.
+Đừng quên đăng ký kênh và bật thông báo để đón xem thêm nhiều bài giảng bổ ích nhé. Chào các em!
+
+158
+00:38:10,950 --> 00:38:17,010
+[Âm nhạc]

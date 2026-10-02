@@ -1,0 +1,1335 @@
+﻿1
+00:00:29,400 --> 00:00:36,320
+Chào các em. Thầy là Yasser El Wassif từ chuỗi bài giảng Nha khoa.
+
+2
+00:00:36,320 --> 00:00:42,880
+Hôm nay chúng ta sẽ thảo luận một chủ đề quan trọng trong Chữa răng, đó là Nguyên tắc Sửa soạn Răng.
+
+3
+00:00:42,880 --> 00:00:51,400
+Chủ đề này rất quan trọng vì nó là nền tảng cơ bản của bộ môn Chữa răng.
+
+4
+00:00:51,400 --> 00:00:58,840
+Nó cũng là cơ sở để phát triển các kỹ thuật mới trong lĩnh vực Chữa răng sau này.
+
+5
+00:00:58,840 --> 00:01:05,760
+Trước hết, thầy xin nói rõ là thầy không nhận bất kỳ thù lao hay hoa hồng nào
+
+6
+00:01:05,760 --> 00:01:13,200
+từ các sản phẩm được giới thiệu hay thảo luận trong bài giảng này.
+
+7
+00:01:13,200 --> 00:01:21,080
+Đồng thời, thầy cũng không có mâu thuẫn lợi ích với bất kỳ sản phẩm hay kỹ thuật nào.
+
+8
+00:01:21,080 --> 00:01:27,680
+Bài giảng này được bảo vệ bản quyền.
+
+9
+00:01:27,680 --> 00:01:33,360
+Các em không được sao chép, phân phối dưới bất kỳ hình thức nào khi chưa có sự cho phép của thầy.
+
+10
+00:01:33,360 --> 00:01:40,560
+Mục tiêu bài học hôm nay sẽ tập trung làm rõ sự cần thiết và mục đích của việc sửa soạn răng.
+
+11
+00:01:40,560 --> 00:01:47,040
+Tại sao chúng ta phải sửa soạn khi phục hồi răng, và tầm quan trọng của nó là gì?
+
+12
+00:01:47,040 --> 00:01:54,400
+Thầy cũng sẽ giải thích các yếu tố ảnh hưởng đến quá trình này trước khi chúng ta bắt đầu.
+
+13
+00:01:54,400 --> 00:02:00,160
+Chúng ta sẽ nhận diện các nguyên tắc sinh học và cơ học trong sửa soạn răng,
+
+14
+00:02:00,160 --> 00:02:05,440
+từ đó ứng dụng và tuân thủ các nguyên tắc này vào từng bước thực hành.
+
+15
+00:02:05,440 --> 00:02:11,720
+Bài học gồm 4 phần: phần 1 về định nghĩa, phần 2 là nguyên tắc chung,
+
+16
+00:02:11,720 --> 00:02:17,240
+phần 3 đi sâu vào nguyên tắc sinh học, và phần 4 là nguyên tắc cơ học.
+
+17
+00:02:17,240 --> 00:02:24,880
+Giờ thì thầy trò chúng ta cùng bắt đầu phần một với một đoạn giới thiệu ngắn nhé.
+
+18
+00:02:24,880 --> 00:02:32,640
+Khái niệm về bộ môn Chữa răng trước đây thường chỉ gói gọn trong ba chữ: khoan, trám, và thu tiền.
+
+19
+00:02:32,640 --> 00:02:40,080
+Đó từng là cách người ta miêu tả công việc của chúng ta: khoan một cái xoang, trám nó lại rồi nhận tiền.
+
+20
+00:02:40,080 --> 00:02:48,720
+Nhưng ngày nay, khái niệm đó không còn đúng nữa. Chúng ta không chỉ là những người thợ khoan răng.
+
+21
+00:02:48,720 --> 00:02:55,360
+Việc đặt một khối vật liệu vào để trám kín răng không phải là cách giải quyết toàn bộ vấn đề.
+
+22
+00:02:55,360 --> 00:03:03,480
+Không phải mọi phương pháp điều trị trong Chữa răng hiện nay đều liên quan đến việc cắt gọt.
+
+23
+00:03:03,480 --> 00:03:12,160
+Đó là lý do thuật ngữ 'sửa soạn răng' được dùng thay vì 'tạo xoang trám' như trước.
+
+24
+00:03:12,160 --> 00:03:20,800
+Bởi vì điều trị Chữa răng không chỉ là xử lý xoang trám. Chúng ta bắt đầu coi sâu răng
+
+25
+00:03:20,800 --> 00:03:28,880
+như một bệnh lý có căn nguyên, một dạng bệnh dịch cần kiểm soát các nguyên nhân từ trước.
+
+26
+00:03:28,880 --> 00:03:35,120
+Theo sách Sturdevant's Art and Science tái bản lần thứ 7 năm 2019,
+
+27
+00:03:35,120 --> 00:03:43,360
+sửa soạn răng là sự thay đổi hình thể cơ học đối với một răng bị khiếm khuyết, tổn thương,
+
+28
+00:03:43,360 --> 00:03:51,560
+nhằm tạo ra một hình dạng cho phép đặt vật liệu phục hồi vào đó,
+
+29
+00:03:51,560 --> 00:04:00,040
+giúp tái lập hình thể và chức năng bình thường, bao gồm cả điều chỉnh thẩm mỹ khi có chỉ định.
+
+30
+00:04:00,040 --> 00:04:08,720
+Đó chính là 'sửa soạn răng' - một quá trình thay đổi cơ học lên vùng mô bệnh.
+
+31
+00:04:08,720 --> 00:04:16,200
+Trong một cuốn sách khác của Roca Gomes - các nha sĩ người Tây Ban Nha,
+
+32
+00:04:16,200 --> 00:04:23,360
+tựa đề Modern Operative Dentistry năm 2020, sửa soạn răng được định nghĩa là
+
+33
+00:04:23,360 --> 00:04:30,520
+phương pháp điều trị cơ sinh học đối với tổn thương sâu răng.
+
+34
+00:04:30,520 --> 00:04:39,080
+Đó là một thiết kế vừa loại bỏ mô bệnh, vừa giúp phân bố lực nhai sao cho
+
+35
+00:04:39,080 --> 00:04:47,160
+cấu trúc răng còn lại và vật liệu phục hồi đạt sức đề kháng tối đa,
+
+36
+00:04:47,160 --> 00:04:54,760
+chống lại mọi tổn thương tiếp diễn về sau.
+
+37
+00:04:54,760 --> 00:05:02,919
+Do đó, các em đang thiết kế một xoang trám giúp phân tán lực một cách hợp lý,
+
+38
+00:05:02,919 --> 00:05:10,080
+để cấu trúc răng khỏe mạnh còn lại có thể chịu đựng được lực nhai này.
+
+39
+00:05:10,080 --> 00:05:15,280
+Đồng thời đảm bảo xoang có khả năng tiếp nhận và lưu giữ tốt vật liệu phục hồi.
+
+40
+00:05:15,280 --> 00:05:21,720
+Bây giờ, chúng ta cùng xem bức ảnh này nhé. Ở hình A, các em thấy một xoang sâu.
+
+41
+00:05:21,720 --> 00:05:29,320
+Đây là sự phá hủy cấu trúc răng do tác nhân vi sinh vật gây ra.
+
+42
+00:05:29,320 --> 00:05:36,120
+Các em không thể kiểm soát mức độ lan rộng hay độ sâu của tổn thương ngay từ đầu,
+
+43
+00:05:36,120 --> 00:05:42,400
+nó phụ thuộc vào tác nhân gây bệnh và sự tấn công của vi khuẩn vào sâu mô răng.
+
+44
+00:05:42,400 --> 00:05:50,360
+Khi bắt đầu sửa chữa khiếm khuyết này, việc đầu tiên là lấy dụng cụ và cắt bỏ các mô bệnh.
+
+45
+00:05:50,360 --> 00:05:57,600
+Đồng thời, tạo một thiết kế xoang cho phép phân bố lực và tối đa hóa sức đề kháng
+
+46
+00:05:57,600 --> 00:06:04,120
+của cả mô răng và vật liệu trước lực phá hủy. Quá trình đó gọi là tạo xoang trám.
+
+47
+00:06:04,120 --> 00:06:09,120
+Và đây là hình ảnh thiết kế xoang đã hoàn tất, được lót nền bảo vệ,
+
+48
+00:06:09,120 --> 00:06:16,840
+và hình cuối cùng là răng sau khi được phục hồi hoàn chỉnh.
+
+49
+00:06:16,840 --> 00:06:23,840
+Nhưng thầy cần nhấn mạnh: quy trình phục hồi này chỉ để sửa chữa khiếm khuyết, chứ không phải để điều trị sâu răng.
+
+50
+00:06:23,840 --> 00:06:30,080
+Để điều trị sâu răng - một loại bệnh dịch, các em phải xác định mọi yếu tố căn nguyên.
+
+51
+00:06:30,080 --> 00:06:37,000
+Và cần quản lý chúng, bao gồm cả thói quen của bệnh nhân, chế độ ăn, cách dự phòng,
+
+52
+00:06:37,000 --> 00:06:42,720
+cũng như tình trạng khoáng hóa của răng. Đó mới là điều trị sâu răng toàn diện.
+
+53
+00:06:42,720 --> 00:06:50,160
+Nhưng mục tiêu hôm nay của chúng ta chỉ là tạo ra một thiết kế sao cho
+
+54
+00:06:50,160 --> 00:06:57,280
+giảm thiểu tác động phá hủy của lực, đồng thời bảo tồn được tính toàn vẹn sinh học của răng.
+
+55
+00:06:57,280 --> 00:07:03,320
+Bao gồm cả khối mô răng và các cấu trúc nâng đỡ xung quanh nó.
+
+56
+00:07:03,320 --> 00:07:10,720
+Do đó, việc sửa soạn xoang chỉ là để sửa chữa các mô đã hỏng, chứ không phải trị bệnh sâu răng.
+
+57
+00:07:10,720 --> 00:07:18,960
+Nó là một phần của tiến trình điều trị, nhưng không phải là toàn bộ phương pháp điều trị.
+
+58
+00:07:18,960 --> 00:07:26,200
+Nếu muốn điều trị dứt điểm sâu răng cho bệnh nhân, kế hoạch điều trị của các em phải bao gồm:
+
+59
+00:07:26,200 --> 00:07:33,440
+Một là chẩn đoán bệnh. Hai là xác định các yếu tố nguy cơ. Ba là đánh giá vệ sinh răng miệng.
+
+60
+00:07:33,440 --> 00:07:39,480
+Bốn là xem xét thói quen ăn uống, thói quen dự phòng, độ khoáng hóa mô răng,
+
+61
+00:07:39,480 --> 00:07:46,680
+tình trạng nước bọt và việc sử dụng Fluoride. Cuối cùng mới là bước sửa soạn xoang.
+
+62
+00:07:46,680 --> 00:07:54,320
+Vậy thì 'nhu cầu' và 'mục tiêu' khác nhau thế nào? Nhu cầu là những gì bệnh nhân than phiền với em.
+
+63
+00:07:54,320 --> 00:08:02,760
+Và em sẽ phiên dịch chúng thành các mục tiêu điều trị. Nhu cầu của họ là gì?
+
+64
+00:08:02,760 --> 00:08:08,840
+Bệnh nhân đến gặp em với một chiếc răng bị bệnh, không còn khả năng sử dụng nữa.
+
+65
+00:08:08,840 --> 00:08:14,560
+Chiếc răng đó có thể gây đau, mất chức năng, hoặc bị mất thẩm mỹ, ảnh hưởng đến phát âm.
+
+66
+00:08:14,560 --> 00:08:20,840
+Tất cả những điều đó được gọi chung là 'răng tổn thương'. Đó là lời than phiền của bệnh nhân.
+
+67
+00:08:20,840 --> 00:08:28,120
+Họ cần chiếc răng này được can thiệp sao cho có thể chấp nhận được về mặt sinh học.
+
+68
+00:08:28,120 --> 00:08:35,360
+'Chấp nhận được về mặt sinh học' nghĩa là gì? Thứ nhất, không có triệu chứng, họ không thấy đau đớn.
+
+69
+00:08:35,360 --> 00:08:44,480
+Thứ hai, đảm bảo chức năng: dùng để nói, đảm bảo thẩm mỹ, hay ăn nhai, và không gây hôi miệng.
+
+70
+00:08:44,480 --> 00:08:53,040
+Và đảm bảo không phát sinh thêm bệnh lý nào về sau. Đó chính là nhu cầu của bệnh nhân.
+
+71
+00:08:53,040 --> 00:09:00,920
+Họ nói: 'Tôi có vấn đề ở răng này, tôi muốn giải quyết nó'. Giải quyết thế nào là nhiệm vụ của nha sĩ.
+
+72
+00:09:00,920 --> 00:09:08,240
+Và các em chuyển đổi nhu cầu đó thành các 'mục tiêu' của can thiệp phục hồi.
+
+73
+00:09:08,240 --> 00:09:16,200
+Mục tiêu là gì? 'Tôi muốn sửa chữa lại chiếc răng sau khi nó bị phá hủy bởi sâu răng.'
+
+74
+00:09:16,200 --> 00:09:24,000
+Đó là đích đến chính của chúng ta hôm nay: chỉ tập trung sửa chữa cấu trúc khiếm khuyết,
+
+75
+00:09:24,000 --> 00:09:31,880
+chứ không phải điều trị nguyên nhân sâu răng. Thầy muốn thay thế hoặc sửa chữa một miếng trám cũ bị hỏng,
+
+76
+00:09:31,880 --> 00:09:39,000
+hoặc muốn đảm bảo đáp ứng được nhu cầu thẩm mỹ cho bệnh nhân.
+
+77
+00:09:39,000 --> 00:09:46,880
+Bằng cách đặt một miếng trám mới hoặc thay thế miếng cũ, nghĩa là thầy muốn phục hồi lại hình thể,
+
+78
+00:09:46,880 --> 00:09:55,160
+khớp cắn, chức năng, sửa chữa răng nứt gãy, hoặc có thể chỉ là sửa soạn răng mang tính dự phòng,
+
+79
+00:09:55,160 --> 00:10:03,160
+giống như kỹ thuật trám bít hố rãnh vậy.
+
+80
+00:10:03,160 --> 00:10:11,840
+Đó là những điều cần đạt được trong quá trình xử trí phục hồi. Vì vậy, khi phục hồi hay sửa soạn răng,
+
+81
+00:10:11,840 --> 00:10:17,880
+các em phải tập trung vào việc bảo tồn tối đa cấu trúc răng lành lặn.
+
+82
+00:10:17,880 --> 00:10:24,080
+Loại bỏ sạch các khiếm khuyết, đồng thời đặc biệt chú ý bảo vệ phức hợp tủy - ngà.
+
+83
+00:10:24,080 --> 00:10:31,920
+Không được gây kích thích tủy và không vi phạm các nguyên lý sinh học của mô nâng đỡ quanh răng.
+
+84
+00:10:31,920 --> 00:10:39,600
+Thứ ba, thiết kế xoang phải cho phép phân bố lực nằm trong ngưỡng an toàn,
+
+85
+00:10:39,600 --> 00:10:48,760
+để cấu trúc răng lành mạnh còn lại cũng như miếng trám có thể chịu đựng được mà không bị phá vỡ.
+
+86
+00:10:48,760 --> 00:10:58,320
+Nghĩa là thiết kế của em sẽ không làm gãy vỡ vật liệu hay cấu trúc răng còn lại,
+
+87
+00:10:58,320 --> 00:11:05,760
+và miếng trám vẫn được lưu giữ ổn định ở vị trí tự nhiên mà không gây ra hư hỏng.
+
+88
+00:11:05,760 --> 00:11:14,360
+Ngoài ra, nếu làm việc ở vùng răng trước - vùng thẩm mỹ, các em phải xem xét tính thẩm mỹ
+
+89
+00:11:14,360 --> 00:11:21,600
+của vật liệu phục hồi mỗi khi có chỉ định xử trí vùng răng cửa.
+
+90
+00:11:21,600 --> 00:11:30,360
+Nhưng, các em cần khắc cốt ghi tâm một quan điểm cực kỳ quan trọng thế này.
+
+91
+00:11:30,360 --> 00:11:39,000
+Đó là phương pháp tiếp cận của chúng ta: luôn cố gắng lấy đi lượng mô răng ít nhất có thể.
+
+92
+00:11:39,000 --> 00:11:47,480
+Chỉ mài đi vừa đủ để xoang trám có thể tiếp nhận và lưu giữ được vật liệu phục hồi.
+
+93
+00:11:47,480 --> 00:11:55,240
+Đó chính là kim chỉ nam của chúng ta ngày hôm nay.
+
+94
+00:11:55,240 --> 00:12:03,520
+Làm thế nào để thiết kế một xoang trám có thể tiếp nhận và lưu giữ vật liệu,
+
+95
+00:12:03,520 --> 00:12:11,800
+giúp phục hồi chức năng, thẩm mỹ, khớp cắn mà chỉ phải cắt gọt tối thiểu mô răng lành?
+
+96
+00:12:11,800 --> 00:12:19,160
+Đồng thời hạn chế tối đa kích thích lên phức hợp tủy - ngà và bảo tồn mọi cấu trúc sống nâng đỡ răng?
+
+97
+00:12:19,160 --> 00:12:25,720
+Đó là lý do trước khi sửa soạn, chúng ta cần xác định nhiều yếu tố, bao gồm yếu tố bệnh nhân.
+
+98
+00:12:25,720 --> 00:12:35,280
+Như: nguyện vọng, cách chăm sóc tại nhà, mức độ rủi ro, tuổi tác, sự hợp tác và vấn đề gây tê.
+
+99
+00:12:35,280 --> 00:12:42,600
+Ví dụ, nếu bệnh nhân có chống chỉ định với thuốc tê,
+
+100
+00:12:42,600 --> 00:12:51,160
+nghĩa là các em sẽ phải mài mô răng trong khi bệnh nhân vẫn có thể cảm nhận được cơn đau.
+
+101
+00:12:51,160 --> 00:12:59,080
+Khi đó, các em có thể phải thay đổi kỹ thuật hoặc kế hoạch điều trị của mình,
+
+102
+00:12:59,080 --> 00:13:06,920
+để chọn một loại vật liệu phục hồi khác không đòi hỏi phải cắt gọt mô răng quá nhiều gây đau cho bệnh nhân.
+
+103
+00:13:06,920 --> 00:13:13,800
+Bệnh nhân cũng cần có sự hợp tác. Tuổi tác của họ cũng quyết định kế hoạch điều trị và loại vật liệu sẽ dùng.
+
+104
+00:13:13,800 --> 00:13:21,040
+Các yếu tố nguy cơ bao gồm: việc sử dụng Fluoride, thành phần nước bọt, thói quen ăn uống.
+
+105
+00:13:21,040 --> 00:13:28,520
+Còn về việc chăm sóc răng miệng tại nhà thì sao? Bệnh nhân có chải răng một hay hai lần mỗi ngày?
+
+106
+00:13:28,520 --> 00:13:36,400
+Chải vào lúc nào? Và nguyện vọng thực sự của họ là gì? Họ chỉ quan tâm đến thẩm mỹ,
+
+107
+00:13:36,400 --> 00:13:43,800
+hay muốn hết đau, muốn phục hồi chức năng ăn nhai, hoặc là tất cả những điều trên?
+
+108
+00:13:43,800 --> 00:13:49,480
+Tiếp đến là các yếu tố giải phẫu. Các em đang thao tác ở vùng nào, trên mặt răng nào?
+
+109
+00:13:49,480 --> 00:13:54,360
+Hướng của các trụ men ra sao, và cách thiết lập vách xoang như thế nào?
+
+110
+00:13:54,360 --> 00:14:00,760
+Bề dày lớp ngà còn lại là bao nhiêu? Vị trí của nó so với tủy răng, và làm thế nào để bảo vệ tủy?
+
+111
+00:14:00,760 --> 00:14:08,960
+Đường viền thân răng thế nào nếu các em đang mài ở mặt ngoài hoặc mặt trong, gần đường vòng lớn nhất?
+
+112
+00:14:08,960 --> 00:14:16,040
+Đồng thời, nếu có một miếng trám cũ bị hỏng, thì phạm vi của miếng trám cũ đó tới đâu?
+
+113
+00:14:16,040 --> 00:14:23,800
+Tiếp theo là các yếu tố thuộc về quy trình. Đây là những cân nhắc quan trọng
+
+114
+00:14:23,800 --> 00:14:31,400
+cần được đánh giá trước khi các em bắt tay vào thực hiện kế hoạch điều trị.
+
+115
+00:14:31,400 --> 00:14:39,280
+Bao gồm kỹ năng của bác sĩ, thiết kế dụng cụ, loại mũi khoan, và khả năng cô lập răng.
+
+116
+00:14:39,280 --> 00:14:47,200
+Tất cả những yếu tố kỹ thuật này liên quan mật thiết đến kế hoạch của các em. Nếu chưa quen làm Composite răng sau,
+
+117
+00:14:47,200 --> 00:14:54,120
+thì kế hoạch điều trị của các em sẽ hướng tới việc sử dụng Amalgam.
+
+118
+00:14:54,120 --> 00:15:01,160
+Điều đó phụ thuộc vào kỹ năng của người thao tác. Giả sử các em đã làm tốt Composite răng sau,
+
+119
+00:15:01,160 --> 00:15:07,000
+nhưng lại thiếu dụng cụ chuyên dụng để điêu khắc, hoặc mũi khoan không phù hợp thì sao?
+
+120
+00:15:07,000 --> 00:15:13,520
+Đó đều là những yếu tố phải được cân nhắc kỹ lưỡng trước khi bắt đầu phục hồi mô răng.
+
+121
+00:15:13,520 --> 00:15:21,680
+Các yếu tố khác liên quan đến chính tổn thương. Khi chẩn đoán, các em cần đánh giá mô xương nâng đỡ,
+
+122
+00:15:21,680 --> 00:15:30,320
+đặc biệt là với các xoang loại 2 phức tạp. Xương ổ răng nằm ở vị trí nào
+
+123
+00:15:30,320 --> 00:15:37,640
+để chúng ta tránh xâm phạm khoảng sinh học, khớp cắn, hay mức độ nghiêm trọng của tổn thương?
+
+124
+00:15:37,640 --> 00:15:43,480
+Tình trạng nướu, tình trạng tủy thế nào? Hướng tiến triển của đường nứt gãy ra sao?
+
+125
+00:15:43,480 --> 00:15:51,360
+Về vật liệu phục hồi: Tính chất vật lý, đặc điểm màu sắc và tính hiệu quả chi phí của vật liệu là gì?
+
+126
+00:15:51,360 --> 00:15:58,320
+'Hiệu quả chi phí' nghĩa là gì? Nếu tiên lượng và các yếu tố khác cho thấy
+
+127
+00:15:58,320 --> 00:16:04,720
+chiếc răng này sẽ không tồn tại được quá 3 tháng hay 1 năm,
+
+128
+00:16:04,720 --> 00:16:12,240
+thì trong trường hợp đó, thầy sẽ không hướng tới các phục hồi sứ gián tiếp đắt tiền,
+
+129
+00:16:12,240 --> 00:16:18,960
+hay sử dụng công nghệ cao như CAD/CAM. Hiệu quả chi phí ở đây là mức giá phải trả
+
+130
+00:16:18,960 --> 00:16:26,640
+tương quan với tiên lượng của ca bệnh, khi chiếc răng không thể tồn tại quá 3 tháng.
+
+131
+00:16:26,640 --> 00:16:34,040
+Một trong những yếu tố quan trọng nhất chính là bức ảnh này. Trước khi bắt đầu bất kỳ mũi khoan nào,
+
+132
+00:16:34,040 --> 00:16:40,680
+bất kể là răng nào, tổn thương gì hay dùng vật liệu nào,
+
+133
+00:16:40,680 --> 00:16:49,440
+các em đều phải xác định 'vùng chịu lực tâm' (centric holding areas).
+
+134
+00:16:49,440 --> 00:16:57,200
+Hãy tưởng tượng, không phải toàn bộ mặt nhai răng hàm trên đều tiếp xúc với mặt nhai hàm dưới.
+
+135
+00:16:57,200 --> 00:17:04,839
+Chỉ có các sườn múi, hơi cách xa đỉnh múi một chút, mới là nơi chạm khớp.
+
+136
+00:17:04,839 --> 00:17:12,400
+Đỉnh múi thực sự không chạm, mà chính các sườn của 'kim tự tháp' múi răng mới tiếp xúc với răng đối diện.
+
+137
+00:17:12,400 --> 00:17:20,839
+Các em phải xác định điều này bằng giấy cắn. Như các em thấy ở đây, đây chính là các vùng chịu lực tâm.
+
+138
+00:17:20,839 --> 00:17:27,560
+Đây là khu vực tập trung lực nhai chính. Các em phải xác định nó trước khi bắt đầu.
+
+139
+00:17:27,560 --> 00:17:34,480
+Nếu các dấu giấy cắn này bị phai đi trong lúc làm, hãy bảo bệnh nhân cắn lại lần nữa.
+
+140
+00:17:34,480 --> 00:17:41,920
+Đặc biệt là nếu các em dự định phục hồi chiếc răng này bằng vật liệu Composite.
+
+141
+00:17:41,920 --> 00:17:47,960
+Việc đánh dấu sẽ giúp các em có được hình dung và mường tượng trong đầu
+
+142
+00:17:47,960 --> 00:17:54,200
+về việc đặt đường hoàn tất ở đâu, đâu là vùng chịu stress và đâu là vùng không chịu lực.
+
+143
+00:17:54,200 --> 00:18:01,960
+Giờ chúng ta cùng chuyển sang các nguyên tắc sửa soạn răng nhé.
+
+144
+00:18:01,960 --> 00:18:08,840
+Về cơ bản, nguyên tắc sửa soạn răng cũng giống hệt như ngành kỹ thuật xây dựng vậy.
+
+145
+00:18:08,840 --> 00:18:15,160
+Tưởng tượng các em là chủ một mảnh đất và đang muốn xây một ngôi nhà.
+
+146
+00:18:15,160 --> 00:18:22,840
+Các em có bản đồ khu đất và tiến hành ký hợp đồng với một kỹ sư xây dựng để thiết kế.
+
+147
+00:18:22,840 --> 00:18:30,080
+Người kỹ sư đó sẽ lên bản vẽ thiết kế cho tòa nhà này như thế nào?
+
+148
+00:18:30,080 --> 00:18:39,320
+Thứ nhất, về mặt 'sinh học', anh ta sẽ tìm nguồn cấp nước, cấp điện, hệ thống thoát nước,
+
+149
+00:18:39,320 --> 00:18:46,480
+xem hướng nào thông gió tốt, và mặt tiền của tòa nhà nên hướng ra mặt đường nào.
+
+150
+00:18:46,480 --> 00:18:54,320
+Tất cả những yếu tố đó được coi là thuộc về 'sinh lý' đối với những người sẽ sống trong tòa nhà.
+
+151
+00:18:54,320 --> 00:19:01,560
+Thứ hai, anh ta sẽ tư duy theo góc độ 'cơ học'. Các em muốn xây bao nhiêu tầng?
+
+152
+00:19:01,560 --> 00:19:09,160
+Bao nhiêu căn hộ? Dựa vào đó, anh ta sẽ thiết kế một kết cấu bê tông cốt thép
+
+153
+00:19:09,160 --> 00:19:17,720
+đủ sức chống chọi lại mọi lực tác động, tính toán độ sâu nền móng, hệ thống lõi chịu lực.
+
+154
+00:19:17,720 --> 00:19:24,240
+Và cuối cùng, khi xong phần thô, anh ta mới nghĩ đến diện mạo thẩm mỹ của công trình.
+
+155
+00:19:24,240 --> 00:19:30,680
+Cửa sổ mặt tiền, cổng chính ra sao, trồng cây gì? Có làm sân vườn hay không?
+
+156
+00:19:30,680 --> 00:19:37,960
+Sửa soạn xoang trám cũng y hệt như vậy. Các em sẽ phải tư duy như một kỹ sư xây dựng,
+
+157
+00:19:37,960 --> 00:19:44,160
+bao hàm cả khía cạnh sinh học, cơ học và thẩm mỹ.
+
+158
+00:19:44,160 --> 00:19:51,320
+Yếu tố sinh học quan tâm đến sức khỏe, độ sống của răng và các tổ chức nâng đỡ.
+
+159
+00:19:51,320 --> 00:19:57,680
+Yếu tố cơ học liên quan đến cấu trúc vật lý của thiết kế xoang.
+
+160
+00:19:57,680 --> 00:20:04,880
+Và cuối cùng là thẩm mỹ - điều này thay đổi tùy thuộc vào loại vật liệu và vị trí khiếm khuyết.
+
+161
+00:20:04,880 --> 00:20:11,840
+Vì các kỹ thuật phục hồi thẩm mỹ vẫn luôn được cải tiến từng ngày,
+
+162
+00:20:11,840 --> 00:20:19,640
+nên trong bài này, chúng sửa soạn, chúng ta sẽ chỉ tập trung bàn về nguyên tắc sinh học và cơ học thôi nhé.
+
+163
+00:20:19,640 --> 00:20:25,720
+Nguyên tắc sinh học nhắm tới việc bảo vệ sự sống và chức năng của răng cùng mô nâng đỡ.
+
+164
+00:20:25,720 --> 00:20:33,560
+Còn nguyên tắc cơ học, các em hãy lắng nghe thầy thật kỹ đoạn này nhé.
+
+165
+00:20:33,560 --> 00:20:40,600
+Nguyên tắc cơ học nhằm cung cấp sức đề kháng tối đa chống lại hiện tượng nứt gãy
+
+166
+00:20:40,600 --> 00:20:47,840
+cho cả cấu trúc răng và vật liệu phục hồi. Đồng thời mang lại sự lưu giữ tối đa
+
+167
+00:20:47,840 --> 00:20:55,280
+để miếng trám không bị sút ra, nhưng vẫn phải bảo tồn tối đa cấu trúc răng nguyên vẹn.
+
+168
+00:20:55,280 --> 00:21:03,560
+Thầy nhắc lại: Nguyên tắc cơ học tạo sức đề kháng chống gãy vỡ cho mô răng và miếng trám,
+
+169
+00:21:03,560 --> 00:21:11,680
+tạo sức lưu giữ tối đa chống sút miếng trám, với sự mài ngót mô răng là ít nhất.
+
+170
+00:21:11,680 --> 00:21:19,240
+Vậy để đạt được mục tiêu sinh học, chúng ta cần thực hiện các bước sau:
+
+171
+00:21:19,240 --> 00:21:25,560
+Bảo vệ tủy khỏi các kích thích cơ học, nhiệt độ và hóa học trong lúc mài răng.
+
+172
+00:21:25,560 --> 00:21:32,960
+Ngăn ngừa sâu răng tái phát, bảo tồn mô răng và làm việc trong môi trường vô trùng tuyệt đối.
+
+173
+00:21:32,960 --> 00:21:39,240
+Trong khi đó, để đạt được nguyên tắc cơ học, các bước sẽ bắt đầu bằng việc thiết lập đường viền,
+
+174
+00:21:39,240 --> 00:21:45,800
+tạo hình dạng kháng lực và lưu giữ, hình dạng tiện lợi, loại bỏ ngà nhiễm khuẩn,
+
+175
+00:21:45,800 --> 00:21:52,200
+hoàn thiện vách men cũng như các vách ngoài xoang, và cuối cùng là làm sạch xoang.
+
+176
+00:21:52,200 --> 00:21:59,160
+Hãy bắt đầu với nguyên tắc sinh học, và như thầy vừa nói, tiêu chí đầu tiên là bảo vệ tủy.
+
+177
+00:21:59,160 --> 00:22:07,440
+Bảo vệ tủy khỏi kích thích cơ học. Số một, tránh gây chấn thương trực tiếp cho tủy.
+
+178
+00:22:07,440 --> 00:22:14,920
+Nghĩa là gì? Hãy tránh sử dụng mũi khoan theo hướng thẳng đứng từ trên xuống.
+
+179
+00:22:14,920 --> 00:22:23,000
+Các em chỉ nên tiếp cận qua men để vào ngà bằng mũi khoan tròn theo hướng đứng mà thôi.
+
+180
+00:22:23,000 --> 00:22:30,520
+Sau đó, mọi mũi khoan khác đều phải di chuyển theo hướng xéo hoặc ngang.
+
+181
+00:22:30,520 --> 00:22:37,440
+Bởi vì ngà răng mềm hơn men răng tới 5 lần, nên một lực ép nhẹ theo hướng đứng
+
+182
+00:22:37,440 --> 00:22:45,640
+cũng có thể xuyên thủng tủy ngay lập tức và gây chấn thương tủy trực tiếp.
+
+183
+00:22:45,640 --> 00:22:54,080
+Số hai, tránh đặt lực không cần thiết và sử dụng sai hướng dụng cụ.
+
+184
+00:22:54,080 --> 00:23:01,520
+Như thầy đã nói, không dùng dụng cụ theo hướng đứng trừ mũi khoan tròn nhỏ lúc mở tủy.
+
+185
+00:23:01,520 --> 00:23:08,960
+Một khi đã chạm tới lớp ngà, các em phải ngừng cắt theo chiều dọc.
+
+186
+00:23:08,960 --> 00:23:16,320
+Mọi thao cụ sau đó nên mài theo chiều ngang, nếu không, áp lực sẽ làm lộ tủy trực tiếp.
+
+187
+00:23:16,320 --> 00:23:24,360
+Thứ ba, tránh cắt ngang qua các đường thoái trào của tủy răng, tránh cắt mô ngà dư thừa,
+
+188
+00:23:24,360 --> 00:23:31,920
+và làm yếu cấu trúc răng một cách vô lý. Hãy bo tròn mọi góc cạnh nhọn để tránh tập trung stress
+
+189
+00:23:31,920 --> 00:23:39,640
+làm nứt gãy răng và dẫn đến hở tủy.
+
+190
+00:23:39,640 --> 00:23:47,760
+Thầy xin quay lại ý thứ ba: tránh cắt qua các đường thoái trào. Đường thoái trào là gì?
+
+191
+00:23:47,760 --> 00:23:55,600
+Như các em thấy trong ảnh này, ngà răng được bồi đắp theo nhịp độ đều đặn lấn vào buồng tủy.
+
+192
+00:23:55,600 --> 00:24:02,160
+Nguyên bào ngà tiết ra một lớp ngà, khiến buồng tủy bị thu hẹp dần.
+
+193
+00:24:02,160 --> 00:24:09,400
+Quá trình này diễn ra theo nhịp độ có tính chu kỳ, gồm những giai đoạn hoạt động và nghỉ ngơi,
+
+194
+00:24:09,400 --> 00:24:16,240
+tạo ra các đường gọi là đường thoái trào của tủy. Giống như khi cắt ngang thân cây gỗ,
+
+195
+00:24:16,240 --> 00:24:24,360
+các em sẽ thấy những vòng tròn đồng tâm thể hiện nhịp độ sinh trưởng của cây.
+
+196
+00:24:24,360 --> 00:24:31,560
+Nhưng với tủy răng, các em không thể nhìn bằng mắt thường mà phải dùng kính hiển vi.
+
+197
+00:24:31,560 --> 00:24:38,800
+Hãy hình dung rằng, các đường thoái trào này có cùng hình dạng uốn lượn với buồng tủy.
+
+198
+00:24:38,800 --> 00:24:45,480
+Do tủy thu hẹp lại theo đúng hình thái giải phẫu ban đầu của nó, như ở vùng trần buồng tủy đây.
+
+199
+00:24:45,480 --> 00:24:52,080
+Đó là lý do khi mài một xoang trám sâu vào lớp ngà khoảng 0.5 mm,
+
+200
+00:24:52,080 --> 00:25:01,800
+các em phải dừng lại và kiểm tra thành tủy xem còn ngà sâu hay không.
+
+201
+00:25:01,800 --> 00:25:08,200
+Thầy nhắc lại: trần buồng tủy có dạng cong uốn lượn như các em thấy trên hình.
+
+202
+00:25:08,200 --> 00:25:14,480
+Và các em có thể suy ra là đường thoái trào cũng sẽ có dạng cong tương tự.
+
+203
+00:25:14,480 --> 00:25:21,320
+Khi đạt đến độ sâu xoang thông thường, các em nên dừng lại và kiểm tra.
+
+204
+00:25:21,320 --> 00:25:29,440
+Giả sử đây là một tổn thương sâu răng và các em cần loại bỏ hoàn toàn tổn thương này.
+
+205
+00:25:29,440 --> 00:25:36,360
+Sau khi đã xác định độ sâu cách đường ranh giới men - ngà 0.5 mm,
+
+206
+00:25:36,360 --> 00:25:44,840
+các em không được tiếp tục mài sâu xuống theo phương nằm ngang, vì nó sẽ cắt ngang các đường thoái trào.
+
+207
+00:25:44,840 --> 00:25:52,520
+Đường thoái trào có dạng cong, nhưng các em lại mài xoang theo phương ngang phẳng.
+
+208
+00:25:52,520 --> 00:26:00,640
+Nếu cứ hạ thấp đáy xoang như thế này, các em sẽ gây hở sừng tủy do chấn thương,
+
+209
+00:26:00,640 --> 00:26:07,880
+trong khi phần mô răng sâu thì lại vẫn còn y nguyên chưa lấy sạch.
+
+210
+00:26:07,880 --> 00:26:14,800
+Đó chính là hậu quả của việc cắt ngang qua đường thoái trào. Khi muốn lấy sạch ngà sâu
+
+211
+00:26:14,800 --> 00:26:22,080
+nằm vượt quá độ sâu xoang chuẩn (0.5 mm dưới đường ranh giới men - ngà),
+
+212
+00:26:22,080 --> 00:26:29,560
+hãy dừng việc mài phẳng. Chỉ tiến hành loại bỏ chọn lọc tại khu vực sâu răng đó
+
+213
+00:26:29,560 --> 00:26:36,960
+bằng mũi khoan tròn lớn, mài song song với các đường thoái trào và trần buồng tủy.
+
+214
+00:26:36,960 --> 00:26:43,000
+Nếu vẫn còn sâu răng, hãy tiếp tục dùng mũi khoan tròn đó mài theo hướng song song.
+
+215
+00:26:43,000 --> 00:26:51,200
+Cuối cùng, tất cả ngà nhiễm khuẩn sẽ được lấy sạch hoàn toàn.
+
+216
+00:26:51,200 --> 00:26:58,200
+Bằng cách di chuyển mũi khoan tròn song song với đường thoái trào,
+
+217
+00:26:58,200 --> 00:27:04,440
+các em sẽ không làm lộ sừng tủy hay gây chấn thương cho tủy răng.
+
+218
+00:27:04,440 --> 00:27:10,360
+Đây là một hình ảnh khác minh họa cho tổn thương này. Sau khi làm sạch,
+
+219
+00:27:10,360 --> 00:27:18,680
+đây là phần thành tủy còn lại. Các em có thể thấy ta dùng mũi khoan tròn lớn
+
+220
+00:27:18,680 --> 00:27:25,040
+để mài song song với đường thoái trào cho đến khi loại bỏ sạch mô bệnh.
+
+221
+00:27:25,040 --> 00:27:31,320
+Đây là vị trí của sừng tủy, và đây là giới hạn của các em. Nếu các em cố gắng
+
+222
+00:27:31,320 --> 00:27:37,320
+mài phẳng để hạ thấp toàn bộ thành tủy, các em có thể làm lộ tủy răng.
+
+223
+00:27:37,320 --> 00:27:45,000
+Nhưng nếu đi song song với đường thoái trào bằng mũi khoan tròn hoặc cây nạo ngà,
+
+224
+00:27:45,000 --> 00:27:52,920
+các em có thể làm sạch sâu hơn ở vùng chỉ định mà không gây hở tủy.
+
+225
+00:27:52,920 --> 00:28:01,280
+Có thể thấy phần xoang các em mài thậm chí còn sâu hơn cả mức gây lộ tủy (nếu mài ngang),
+
+226
+00:28:01,280 --> 00:28:08,080
+nhưng lại không hề phạm vào sừng tủy nào. Đó là lý do cây nạo ngà được thiết kế
+
+227
+00:28:08,080 --> 00:28:17,240
+để cắt theo chiều ngang và đi theo từng cặp: một cây bên phải, một cây bên trái.
+
+228
+00:28:17,240 --> 00:28:24,080
+Cây bên phải sẽ thực hiện động tác hớt nhẹ từ rìa vào trung tâm,
+
+229
+00:28:24,080 --> 00:28:31,240
+chứ không đi hết toàn bộ vùng tổn thương. Sau đó cây bên trái sẽ đi từ hướng ngược lại
+
+230
+00:28:31,240 --> 00:28:37,160
+từ ngoại vi vào trung tâm rồi nhấc ra.
+
+231
+00:28:37,160 --> 00:28:46,480
+Nếu các em nạo thành một đường dài liên tục, một nửa đường nạo sẽ đi song song,
+
+232
+00:28:46,480 --> 00:28:53,520
+nhưng nửa còn lại sẽ cắt ngang qua đường thoái trào và gây nguy hiểm cho tủy.
+
+233
+00:28:53,520 --> 00:28:59,840
+Số hai, làm sao để bảo vệ tủy khỏi kích thích hóa học? Đầu tiên là kiểm soát sinh nhiệt.
+
+234
+00:28:59,840 --> 00:29:07,920
+Giảm thiểu và kiểm soát nhiệt lượng sinh ra trong quá trình sửa soạn xoang,
+
+235
+00:29:07,920 --> 00:29:15,520
+để giữ cho nhiệt độ ngà răng nằm trong giới hạn dung nạp nhiệt bình thường.
+
+236
+00:29:15,520 --> 00:29:21,920
+Tránh việc mài răng mà không dùng nước xịt mát, cũng như tránh mài liên tục quá lâu.
+
+237
+00:29:21,920 --> 00:29:29,640
+Để chống lại kích thích hóa chất, không sử dụng các vật liệu có tính ăn mòn để rửa xoang trám.
+
+238
+00:29:29,640 --> 00:29:35,760
+Vào khoảng 100 năm trước, người ta hay dùng viên bông tẩm hợp chất Phenolic
+
+239
+00:29:35,760 --> 00:29:43,840
+để làm sạch và sát khuẩn xoang trám. Phenolic là chất ăn mòn, dễ bay hơi,
+
+240
+00:29:43,840 --> 00:29:50,120
+có thể ngấm qua các ống ngà vào tủy và gây ra tình trạng chết tủy.
+
+241
+00:29:50,120 --> 00:29:59,320
+Đồng thời, tránh xịt hơi làm khô xoang quá lâu, vì nó sẽ kích hoạt dòng chảy dịch ngà di chuyển nhanh
+
+242
+00:29:59,320 --> 00:30:06,280
+để bù đắp cho vùng bị mất nước. Sự di chuyển nhanh này sẽ hút nhân của nguyên bào ngà
+
+243
+00:30:06,280 --> 00:30:15,320
+vào bên trong ống ngà, làm phá vỡ sự nguyên vẹn của lớp nguyên bào ngà (vùng giàu tế bào),
+
+244
+00:30:15,320 --> 00:30:24,160
+từ đó dẫn đến những bệnh lý tổn thương tủy không hồi phục.
+
+245
+00:31:24,160 --> 00:31:31,960
+Mục thứ hai, làm sao để phòng ngừa sâu răng tái phát nhằm đạt được nguyên tắc sinh học?
+
+246
+00:31:31,960 --> 00:31:38,520
+Thứ nhất, chiếc răng này đang bị sâu, và để ngăn ngừa sâu tái phát,
+
+247
+00:31:38,520 --> 00:31:45,560
+các em phải loại bỏ thực sự hoàn toàn tổn thương, không để lại bất kỳ rác vụn hay mô bệnh nào.
+
+248
+00:31:45,560 --> 00:31:51,240
+Cần lấy sạch toàn bộ men và ngà sâu. Sau đó, các em nên gộp cả các hố rãnh,
+
+249
+00:31:51,240 --> 00:31:58,800
+vì đây là những vùng dễ bị nhồi nhét thức ăn và dẫn đến sâu răng thứ phát.
+
+250
+00:31:58,800 --> 00:32:06,440
+Tiếp theo, hãy mở rộng xoang trám đến vùng tự làm sạch được.
+
+251
+00:32:06,440 --> 00:32:12,360
+Nên mở rộng xoang để đặt đường viền ở sườn múi, thay vì ở vùng trung tâm.
+
+252
+00:32:12,360 --> 00:32:18,800
+Sườn múi răng được coi là điểm bắt đầu của khu vực tự làm sạch.
+
+253
+00:32:18,800 --> 00:32:25,520
+Và sau đó, tuyệt đối không để lại men mất bồi tựa (undermined enamel).
+
+254
+00:32:25,520 --> 00:32:33,600
+Men mất bồi tựa là phần men không được nâng đỡ bởi lớp ngà lành lặn phía dưới.
+
+255
+00:32:33,600 --> 00:32:42,040
+Khu vực này có thể bị gãy, để lại một bờ rãnh (ditch) dễ dàng đọng thức ăn.
+
+256
+00:32:42,040 --> 00:32:48,880
+Đây là hình ảnh men mất bồi tựa như các em thấy ở Hình 8. Nó đã bị gãy
+
+257
+00:32:48,880 --> 00:32:54,840
+vì thiếu sự nâng đỡ của ngà răng, tạo ra một rãnh dẫn đến sâu răng tái phát.
+
+258
+00:32:54,840 --> 00:33:00,720
+Đó là lý do các em cần tạo độ nghiêng phù hợp cho góc bề mặt xoang (cavosurface angle)
+
+259
+00:33:00,720 --> 00:33:07,920
+sao cho tương thích với loại vật liệu phục hồi. Vật liệu chúng ta thường dùng nhất
+
+260
+00:33:07,920 --> 00:33:14,560
+là Amalgam hoặc Composite, đều là những vật liệu giòn. Một vật liệu giòn
+
+261
+00:33:14,560 --> 00:33:22,240
+không thể làm bệ đỡ cho một vật liệu giòn khác như men răng được.
+
+262
+00:33:22,240 --> 00:33:27,960
+Men răng phải được nâng đỡ bởi một vật liệu đàn hồi nhớt - ở đây chính là ngà răng.
+
+263
+00:33:27,960 --> 00:33:34,000
+Cũng giống như các em không thể kê thủy tinh lên thủy tinh, mà phải lót giấy hoặc mút xốp ở giữa.
+
+264
+00:33:34,000 --> 00:33:40,840
+Nếu không, khi có lực tác động, nó sẽ truyền trực tiếp xuống lớp kính dưới và làm vỡ cả hai.
+
+265
+00:33:40,840 --> 00:33:47,200
+Trong sơ đồ này, các em có thể thấy nếu góc bề mặt xoang là 90 độ,
+
+266
+00:33:47,200 --> 00:33:54,160
+các trụ men sẽ đứng trọn vẹn với toàn bộ độ dày và được nâng đỡ bởi lớp ngà lành.
+
+267
+00:33:54,160 --> 00:34:00,040
+Khi có lực nhai, nó sẽ truyền vào khối Amalgam tiếp xúc ở góc 90 độ, vốn được ngà lành nâng đỡ.
+
+268
+00:34:00,040 --> 00:34:08,760
+Vách men cũng được ngà nâng đỡ, do đó không có thứ gì bị nứt vỡ cả.
+
+269
+00:34:08,760 --> 00:34:15,760
+Nhưng nếu góc này nhỏ hơn 90 độ, các em sẽ tạo ra lớp men mất bồi tựa.
+
+270
+00:34:15,760 --> 00:34:23,639
+Bên dưới nó lại là Amalgam giòn, dẫn đến việc men răng sẽ bị gãy vỡ.
+
+271
+00:34:23,639 --> 00:34:29,800
+Còn nếu góc lớn hơn 90 độ, lực nhai sẽ tác động lên vùng bờ viền Amalgam mỏng
+
+272
+00:34:29,800 --> 00:34:37,520
+nằm đè lên men giòn và không đủ độ dày để chịu lực, khiến Amalgam bị vỡ.
+
+273
+00:34:37,520 --> 00:34:44,200
+Tóm lại, nếu góc bề mặt xoang là 90 độ với vật liệu giòn, cả phục hồi và mô răng đều an toàn.
+
+274
+00:34:44,200 --> 00:34:51,200
+Nếu nhỏ hơn 90 độ, men răng có thể gãy; còn lớn hơn 90 độ, Amalgam hoặc vật liệu giòn sẽ vỡ.
+
+275
+00:34:51,200 --> 00:34:57,960
+Một lần nữa, hãy tránh để lại các góc cạnh nhọn vì sẽ dễ tạo điểm lưu giữ thức ăn.
+
+276
+00:34:57,960 --> 00:35:03,560
+Toàn bộ xoang trám nên được tạo hình với các đường cong chuyển tiếp hài hòa.
+
+277
+00:35:03,560 --> 00:35:12,080
+Cuối cùng, đây là hình dáng thiết kế xoang giúp các em đạt được nguyên tắc sinh học
+
+278
+00:35:12,080 --> 00:35:20,200
+trong việc phòng ngừa sâu răng tái phát. Xin lưu ý rằng chủ đề này,
+
+279
+00:35:20,200 --> 00:35:26,480
+cùng với các yếu tố ngừa sâu răng, sẽ được lặp lại khi chúng ta học về Hình thể ngoài (outline form)
+
+280
+00:35:26,480 --> 00:35:32,760
+ở bài giảng sau nhé. Yếu tố sinh học cuối cùng: các em phải bảo tồn mô nâng đỡ quanh răng.
+
+281
+00:35:32,760 --> 00:35:39,760
+Đây là một vấn đề vô cùng quan trọng. Bệnh nhân sẽ nhận lại được gì
+
+282
+00:35:39,760 --> 00:35:47,120
+nếu các em trám xong cái răng, nhưng lại gây sang chấn cho mô nha chu nâng đỡ của họ?
+
+283
+00:35:47,120 --> 00:35:54,160
+Răng tuy lành lặn nhưng lại đau đớn, bệnh nhân hoàn toàn không thể sử dụng được,
+
+284
+00:35:54,160 --> 00:36:01,240
+và nguồn gốc cơn đau lại xuất phát từ chính cấu trúc nha chu bị tổn thương.
+
+285
+00:36:01,240 --> 00:36:07,440
+Ích lợi gì khi sửa chữa mô răng cứng mà lại gây lung lay răng và phá hủy nha chu?
+
+286
+00:36:07,440 --> 00:36:15,800
+Các em đang phục hồi khiếm khuyết, tái tạo tiếp xúc, và thiết lập lại lực nhai,
+
+287
+00:36:15,800 --> 00:36:24,160
+nhưng lại đặt lực đó lên một hệ thống nâng đỡ đã bị vi phạm, yếu ớt và lung lay.
+
+288
+00:36:24,160 --> 00:36:31,760
+Chiếc răng có thể sẽ bị nhổ bỏ khỏi huyệt ổ răng do tình trạng lung lay này.
+
+289
+00:36:31,760 --> 00:36:40,360
+Vì vậy, các em phải đặc biệt chú ý bảo tồn được khoảng sinh học ít nhất là 2 mm.
+
+290
+00:36:40,360 --> 00:36:48,480
+Nếu bờ phục hồi của các em xâm phạm vào khoảng sinh học này và đi sâu xuống dưới nướu,
+
+291
+00:36:48,480 --> 00:36:57,560
+răng sẽ hình thành túi nha chu, tạo thêm chỗ nhồi nhét thức ăn và dẫn tới sâu tái phát.
+
+292
+00:36:57,560 --> 00:37:04,680
+Gây tổn thương hệ thống dây chằng nha chu, làm sâu thêm túi nha chu, mất xương nâng đỡ,
+
+293
+00:37:04,680 --> 00:37:11,480
+và dần dần răng sẽ lung lay, mất chức năng. Đó là lý do các em có thể cần
+
+294
+00:37:11,480 --> 00:37:20,520
+tái lập lại vị trí khoảng sinh học này. Có thể thực hiện bằng kỹ thuật nâng bờ vai (deep margin elevation)
+
+295
+00:37:20,520 --> 00:37:27,360
+với vật liệu lót nền, hoặc phẫu thuật làm dài thân răng lâm sàng,
+
+296
+00:37:27,360 --> 00:37:33,320
+hoặc thậm chí dùng chỉnh nha để làm trồi răng. Thầy trò ta cùng bàn chi tiết hơn nhé.
+
+297
+00:37:33,320 --> 00:37:40,520
+Đây là khoảng sinh học (A). Nó là khoảng cách tính từ đáy khe nướu
+
+298
+00:37:40,520 --> 00:37:47,520
+xuống đến đỉnh mào xương ổ răng. Khu vực này chứa biểu mô bám dính,
+
+299
+00:37:47,520 --> 00:37:53,880
+chính là cấu trúc nâng đỡ chính giúp neo giữ răng vào xương ổ. Nếu bờ phục hồi (B)
+
+300
+00:37:53,880 --> 00:38:02,560
+vi phạm vào khoảng này và lấn sâu vào khe nướu, xâm lấn và phá hủy biểu mô bám dính,
+
+301
+00:38:02,560 --> 00:38:11,960
+thì theo thời gian, phần biểu mô bám dính này sẽ bị bong ra và tụt xuống thấp hơn.
+
+302
+00:38:11,960 --> 00:38:19,080
+Đồng thời, mào xương ổ cũng sẽ bị tiêu ngót. Khi các em xâm phạm khoảng sinh học, răng sẽ lung lay.
+
+303
+00:38:19,080 --> 00:38:28,240
+Như chiếc răng này chẳng hạn, phục hồi cũ đã vi phạm nghiêm trọng khoảng sinh học.
+
+304
+00:38:28,240 --> 00:38:37,040
+Các em có thể nhận thấy trên phim quanh chóp này, mào xương ổ răng đang bắt đầu tiêu và phẳng dần đi.
+
+305
+00:38:37,040 --> 00:38:44,040
+Trong khi ở vùng mô nha chu khỏe mạnh liền kề, đỉnh xương ổ răng vẫn nhọn và có hình vòm thế này.
+
+306
+00:38:44,040 --> 00:38:51,920
+Trong những trường hợp đó, các em có thể cần làm bộc lộ và nâng cao bờ viền xoang
+
+307
+00:38:51,920 --> 00:39:00,000
+bằng thủ thuật làm dài thân răng. Chẳng hạn như ca lâm sàng này, một miếng trám cũ bị hỏng.
+
+308
+00:39:00,000 --> 00:39:08,320
+Khi tháo miếng trám ra, thành nướu nằm tuốt sâu dưới nướu. Thầy đã nhờ bác sĩ nha chu
+
+309
+00:39:08,320 --> 00:39:15,840
+mở vạt và hạ thấp mức xương. Thủ thuật này gọi là làm dài thân răng (crown lengthening).
+
+310
+00:39:15,840 --> 00:39:22,960
+Bác sĩ đang dùng cây đo túi nha chu để kiểm tra độ sâu và sau đó tiến hành khâu lại.
+
+311
+00:39:22,960 --> 00:39:30,680
+Nhằm tái lập một vị trí mới cho biểu mô bám dính, một vị trí mới cho biểu mô khe nướu,
+
+312
+00:39:30,680 --> 00:39:37,040
+và thiết lập mức xương mới để tránh bị chèn ép từ miếng trám. Sau phẫu thuật và lành thương,
+
+313
+00:39:37,040 --> 00:39:45,480
+đây là bờ viền của phục hồi mới. Nó đã nằm ở vị trí cao hơn hẳn nhờ thủ thuật làm dài thân răng.
+
+314
+00:39:45,480 --> 00:39:52,320
+Trong một ca lâm sàng khác, sâu răng vùng kẽ. Sau khi lấy sạch mô bệnh, đường viền nằm ngang nướu,
+
+315
+00:39:52,320 --> 00:40:00,040
+hơi sâu vào rãnh nướu nhưng chưa chèn ép biểu mô. Giải pháp ở đây là co tách mô nướu.
+
+316
+00:40:00,040 --> 00:40:08,960
+Sử dụng đê cao su (rubber dam) ấn phần nướu tự do xuống, sau đó nâng bờ viền lên bằng GIC.
+
+317
+00:40:08,960 --> 00:40:16,800
+Đây là phim cánh cắn. Bây giờ lớp GIC đã trở thành đáy xoang mặt bên mới của các em.
+
+318
+00:40:16,800 --> 00:40:24,600
+Và các em có thể tiếp tục thao tác phục hồi mà không gây tổn hại cho mô nha chu nâng đỡ.
+
+319
+00:40:24,600 --> 00:40:30,800
+Cuối cùng, đây là ảnh trước khi làm, và đây là kỹ thuật nâng bờ vai (deep margin elevation)
+
+320
+00:40:30,800 --> 00:40:37,680
+ứng dụng kỹ thuật 'sandwich' với vật liệu Glass Ionomer. Nó sẽ trở thành thành nướu mới.
+
+321
+00:40:37,680 --> 00:40:44,520
+Và đây là phục hồi hoàn chỉnh cuối cùng, hoàn toàn không vi phạm khoảng sinh học.
+
+322
+00:40:44,520 --> 00:40:52,040
+Các em có thể thấy mào xương ổ răng vẫn giữ được hình vòm nhọn, không có dấu hiệu tiêu ngót.
+
+323
+00:40:52,040 --> 00:41:00,040
+Để khép lại, các em phải đảm bảo làm việc trong một môi trường hoàn toàn vô trùng.
+
+324
+00:41:00,040 --> 00:41:08,920
+Có ích lợi gì khi chữa một cái răng sâu nhưng lại lây nhiễm HIV, viêm gan C,
+
+325
+00:41:08,920 --> 00:41:16,520
+hoặc Corona, hay cúm cho bệnh nhân? Vì vậy, hãy dùng dụng cụ vô trùng, vật tư tiêu hao dùng một lần.
+
+326
+00:41:16,520 --> 00:41:23,120
+Đặt đê cao su để giữ môi trường khô sạch và giảm thiểu tối đa nguy cơ lây nhiễm qua giọt bắn.
+
+327
+00:41:23,120 --> 00:41:31,720
+Tuân thủ nghiêm ngặt các hướng dẫn kiểm soát nhiễm khuẩn tại phòng khám của ADA và WHO.
+
+328
+00:41:31,720 --> 00:41:38,680
+Và slide này cũng chính thức khép lại bài giảng của chúng ta ngày hôm nay.
+
+329
+00:41:38,680 --> 00:41:46,520
+Đây là danh sách các sách giáo khoa tham khảo mà thầy đã sử dụng để chuẩn bị bài giảng này.
+
+330
+00:41:46,520 --> 00:41:55,480
+Thầy luôn hoan nghênh mọi câu hỏi của các em. Các em có thể liên hệ trực tiếp qua email hoặc WhatsApp.
+
+331
+00:41:55,480 --> 00:42:04,120
+Cảm ơn các em đã dành thời gian lắng nghe. Chúc các em mọi điều tốt đẹp nhất.
+
+332
+00:42:04,120 --> 00:42:13,320
+Và cuối cùng, đừng quên đăng ký kênh và đón chờ bài giảng tiếp theo nhé.
+
+333
+00:42:13,320 --> 00:42:24,840
+Thầy sẽ cố gắng lên bài sớm nhất có thể. Xin chào và hẹn gặp lại các em!
+
+334
+00:42:24,840 --> 00:42:35,440
+(Kết thúc video)
