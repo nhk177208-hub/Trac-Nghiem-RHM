@@ -1,1319 +1,631 @@
 1
-00:00:18,000 --> 00:00:19,524
-Chuẩn bị ghi hình,
+00:00:18,000 --> 00:00:26,000
+Chuẩn bị bắt đầu, tập đầu tiên của khóa học Master Course do Bác sĩ Kang Chung Gyu trình bày, chuẩn bị trong 3, 2, 1.
 
 2
-00:00:19,524 --> 00:00:26,000
-khóa học Master Course tập đầu tiên. Bác
-sĩ Kang Chung Gyu sẵn sàng: ba, hai, một!
+00:00:26,000 --> 00:00:30,000
+Chào các em, thầy là Bác sĩ Kang Chung Gyu, giám đốc Nha khoa K.
 
 3
-00:00:26,000 --> 00:00:30,000
-Thầy là Bác sĩ Kang Chung Gyu, hiện
-đang phụ trách phòng khám Nha khoa K.
+00:00:30,000 --> 00:00:37,000
+Thầy tốt nghiệp năm 1987 và đã hành nghề nha khoa được khoảng 30 năm rồi.
 
 4
-00:00:30,000 --> 00:00:37,000
-Thầy tốt nghiệp năm 1987, tính đến nay
-đã gắn bó với ngành ngót nghét 30 năm.
+00:00:43,000 --> 00:00:51,000
+Đảm nhận bài giảng mở đầu này khiến thầy có chút áp lực, nhưng đồng thời cũng cảm thấy rất vinh dự.
 
 5
-00:00:43,000 --> 00:00:47,000
-Được giao trọng trách mở
-màn bài giảng đầu tiên này,
+00:00:51,000 --> 00:00:58,000
+Khóa học Master Course giống như một chiếc la bàn trong thế giới Implant, ngay cả khi các em chưa từng phẫu thuật cấy ghép bao giờ.
 
 6
-00:00:47,000 --> 00:00:51,000
-thầy có chút áp lực nhưng
-cũng rất đỗi vinh dự.
+00:00:58,000 --> 00:01:05,000
+Các em vẫn sẽ học được cách đặt Implant đúng vị trí và thực hiện phục hình sao cho chuẩn xác.
 
 7
-00:00:51,000 --> 00:00:54,818
-Khóa Master Course này sẽ
-đóng vai trò như chiếc la bàn
+00:01:05,000 --> 00:01:11,000
+Các em cũng sẽ biết cách bảo trì đúng chuẩn và phòng ngừa mọi biến chứng dù qua một thời gian dài.
 
 8
-00:00:54,818 --> 00:00:58,000
-định hướng cho các em bước
-vào thế giới Implant.
+00:01:11,000 --> 00:01:15,000
+Thầy sẽ cố gắng hết sức để truyền đạt những hướng dẫn này một cách thật hệ thống và dễ hiểu.
 
 9
-00:01:05,000 --> 00:01:11,000
-Đồng thời biết bảo trì lâu dài và
-ngăn ngừa mọi biến chứng về sau.
+00:01:24,000 --> 00:01:30,000
+Nội dung bài học hôm nay gồm: Tại sao chúng ta cần Implant?
 
 10
-00:01:11,000 --> 00:01:15,000
-Thầy sẽ nỗ lực truyền đạt toàn bộ phác
-đồ một cách hệ thống nhất cho các em.
+00:01:30,000 --> 00:01:36,000
+Ưu nhược điểm của Implant nha khoa, Implant là gì, cũng như các chỉ định và chống chỉ định của nó.
 
 11
-00:01:24,000 --> 00:01:30,000
-Bài học hôm nay: Trước hết, tại
-sao chúng ta cần cấy ghép Implant?
+00:01:36,000 --> 00:01:43,000
+Lịch sử của Implant nha khoa sẽ được điểm lại, và sau đó thầy sẽ giải thích về khái niệm tích hợp xương.
 
 12
-00:01:30,000 --> 00:01:33,474
-Ưu và nhược điểm của Implant;
-Bản chất Implant là gì;
+00:01:43,000 --> 00:01:52,000
+Thầy biết nhiều em đã nắm rõ vì nó rất cơ bản, nhưng nó lại cực kỳ quan trọng nên chúng ta sẽ cùng lướt qua nhé.
 
 13
-00:01:33,474 --> 00:01:36,000
-Chỉ định và chống chỉ định lâm sàng;
+00:01:57,000 --> 00:02:00,000
+Chúng ta cùng suy nghĩ xem, tại sao lại cần cấy ghép Implant?
 
 14
-00:01:36,000 --> 00:01:41,950
-Chúng ta sẽ điểm qua lịch sử hình thành,
-rồi đi sâu vào khái niệm then chốt:
+00:02:00,000 --> 00:02:08,000
+Trước khi Implant trở nên phổ biến, chúng ta thường làm cầu răng và hàm giả cho bệnh nhân.
 
 15
-00:01:41,950 --> 00:01:43,000
-Tích hợp xương.
+00:02:08,000 --> 00:02:18,000
+Tuy nhiên, khi Implant được ứng dụng rộng rãi, nó đã khắc phục được rất nhiều nhược điểm của cầu răng và hàm giả.
 
 16
-00:01:43,000 --> 00:01:48,538
-Chắc hẳn nhiều em đã biết, đây là
-kiến thức nền tảng nhưng cực kỳ sống
+00:02:18,000 --> 00:02:28,000
+Cùng với những ưu điểm riêng biệt, tại vùng mất răng, Implant mang lại chức năng ăn nhai tối ưu, đó chính là lý do nó trở nên cần thiết.
 
 17
-00:01:48,538 --> 00:01:52,000
-còn nên thầy trò mình cùng ôn lại thật kỹ.
+00:02:31,000 --> 00:02:41,000
+Đầu tiên, các em hãy xem qua một vài ca lâm sàng để hiểu rõ hơn tại sao chúng ta cần Implant.
 
 18
-00:01:57,000 --> 00:02:00,000
-Nào, các em cùng suy ngẫm: Tại
-sao chúng ta phải làm Implant?
+00:02:41,000 --> 00:02:50,000
+Đây là ca thứ nhất, bệnh nhân này đã đeo hàm giả trong một thời gian dài và đây là tình trạng lúc đến khám.
 
 19
-00:02:00,000 --> 00:02:02,947
-Trước khi Implant phổ biến rộng rãi,
+00:02:50,000 --> 00:03:04,000
+Ở bên phải, phục hình cầu răng có tựa hàm khung bị sút ra và chốt mão răng cũng rớt theo do lực nhai tập trung vào vùng mất răng quá lâu.
 
 20
-00:02:02,947 --> 00:02:08,000
-chúng ta thường chỉ làm cầu
-răng hoặc hàm giả tháo lắp.
+00:03:04,000 --> 00:03:10,000
+Hậu quả là toàn bộ phần phục hình cầu răng này bị lung lay và sút ra ngoài.
 
 21
-00:02:08,000 --> 00:02:11,913
-Thế nhưng khi kỹ thuật
-cấy ghép phát triển,
+00:03:10,000 --> 00:03:21,000
+Nếu ngay từ đầu bệnh nhân được cấy Implant ở vùng góc trên bên trái, phần răng trụ sẽ được giữ nguyên vẹn như một răng tự nhiên.
 
 22
-00:02:11,913 --> 00:02:18,000
-Implant đã khắc phục hầu hết nhược
-điểm của cầu răng và hàm giả.
+00:03:21,000 --> 00:03:29,000
+Nhờ đó, răng làm trụ cầu sẽ không bị quá tải và bệnh nhân có thể sử dụng nó lâu dài hơn rất nhiều.
 
 23
-00:02:18,000 --> 00:02:24,207
-Với những ưu thế vượt trội, Implant tái
-lập chức năng tối ưu tại vị trí mất răng.
+00:03:29,000 --> 00:03:44,000
+Chuyển sang ca thứ hai, ở góc phần tư dưới trái, bệnh nhân mất hai răng cối và hai răng phía trước được bọc mão phay bệ tựa để mang hàm giả tháo lắp.
 
 24
-00:02:24,207 --> 00:02:28,000
-Đó là lý do phương pháp
-này trở nên thiết yếu.
+00:03:44,000 --> 00:04:02,000
+Do bệnh nhân đeo hàm này quá lâu, một vấn đề đã phát sinh vào năm 2009; sau 7 năm sử dụng, phần răng trụ bị bong xi măng, sâu răng tiến triển và bắt buộc phải điều trị lại.
 
 25
-00:02:31,000 --> 00:02:33,381
-Để hiểu rõ điều đó,
+00:04:05,000 --> 00:04:13,000
+Chân răng may mắn vẫn còn tốt nên thầy đã cho chữa tủy lại, đồng thời cấy Implant vào vùng mất răng.
 
 26
-00:02:33,381 --> 00:02:41,000
-thầy trò mình cùng phân tích một vài
-ca lâm sàng thực tế ngay sau đây.
+00:04:13,000 --> 00:04:24,000
+Nếu bệnh nhân chọn cấy Implant ngay từ đầu, hai răng trụ phía trước đã không bị mài và được bảo tồn như răng thật trong một thời gian dài.
 
 27
-00:02:41,000 --> 00:02:46,000
-Đây là ca lâm sàng đầu tiên: Bệnh
-nhân đeo hàm giả rất nhiều năm,
+00:04:24,000 --> 00:04:44,000
+Ở ca thứ ba này, bệnh nhân mất ba răng và được làm một cầu răng dài 7 đơn vị; ở vị trí răng trụ 24 và 25, thân răng lâm sàng rất ngắn.
 
 28
-00:02:46,000 --> 00:02:50,000
-khi đến khám với thầy thì
-tình trạng đã như thế này.
+00:04:44,000 --> 00:04:49,000
+Hậu quả là cầu răng bị bong xi măng và các răng trụ bắt đầu lung lay.
 
 29
-00:02:50,000 --> 00:02:54,968
-Ở bên phải, cầu răng
-lưu giữ đã sút mối dán,
+00:04:49,000 --> 00:05:06,000
+Thầy đã tháo cầu răng ra, và vì không thể làm lại cầu mới, thầy bọc mão rời cho các răng trụ ở hai đầu, sau đó cấy hai Implant vào khoảng mất răng ở giữa.
 
 30
-00:02:54,968 --> 00:02:59,484
-cùi giả đúc rơi ra ngoài.
-Suốt thời gian dài,
+00:05:06,000 --> 00:05:20,000
+Hai tháng sau, phục hình trên Implant được hoàn tất; các em có thể thấy hình ảnh trước và sau khi điều trị lại bằng Implant và phục hình.
 
 31
-00:02:59,484 --> 00:03:04,000
-lực nhai tập trung quá
-mức lên vùng mất răng,
+00:05:20,000 --> 00:05:33,000
+Giá như bệnh nhân cấy Implant từ đầu, các răng trụ ở hai bên đã không phải gánh lực và được bảo vệ như răng khỏe mạnh lâu dài.
 
 32
-00:03:04,000 --> 00:03:10,000
-hệ quả là cầu răng tựa bị sút súc
-và bật hoàn toàn ra khỏi răng trụ.
+00:05:33,000 --> 00:05:44,000
+Chúng ta đến với ca thứ tư, bệnh nhân mất hai răng ở giữa và được làm một cầu răng dài 6 đơn vị.
 
 33
-00:03:10,000 --> 00:03:16,069
-Nếu bệnh nhân này được cấy Implant
-ngay từ đầu ở phần hàm trên bên trái,
+00:05:44,000 --> 00:05:55,000
+Sau một thời gian dài, phần nhịp cầu ở giữa bị gãy, đòi hỏi phải điều trị lại; thầy đã cấy hai Implant vào khoảng mất răng và gắn phục hình.
 
 34
-00:03:16,069 --> 00:03:21,000
-mão răng nâng đỡ đã được bảo
-tồn nguyên vẹn như răng thật,
+00:05:55,000 --> 00:06:06,000
+Đối với bệnh nhân này, nếu vùng khuyết hổng được phục hồi bằng Implant ngay từ đầu thì các răng lân cận đã giữ được sự toàn vẹn tự nhiên.
 
 35
-00:03:21,000 --> 00:03:29,000
-và cầu răng nâng đỡ này bệnh nhân đã có
-thể sử dụng bền bỉ thêm rất nhiều năm.
+00:06:06,000 --> 00:06:22,000
+Ca lâm sàng thứ năm, bệnh nhân mất răng cối tận cùng và được làm cầu răng với (cantilever) tựa vào hai răng phía trước, một giải pháp khá phổ biến khi Implant chưa thịnh hành.
 
 36
-00:03:29,000 --> 00:03:37,500
-Các em nhìn sang ca thứ hai: Phân hàm
-dưới bên trái mất 2 răng cối lớn,
+00:06:22,000 --> 00:06:38,000
+Tuy nhiên, khi nhai ở vùng chót, lực đòn bẩy tác động lên các răng trụ phía trước gây bong xi măng và dẫn đến sâu răng trụ.
 
 37
-00:03:37,500 --> 00:03:44,000
-hai răng phía trước làm mão tựa
-để mang hàm khung tháo lắp.
+00:06:38,000 --> 00:06:47,000
+Thầy bắt buộc phải điều trị lại bằng cách chữa tủy và bọc mão hai răng phía trước, đồng thời cấy Implant vào vị trí mất răng phía sau.
 
 38
-00:04:05,000 --> 00:04:09,870
-May mắn là chân răng còn tốt:
-Thầy đã điều trị nội nha lại,
+00:06:47,000 --> 00:06:57,000
+Tương tự các trường hợp trên, nếu cấy Implant từ đầu, những răng phía trước đã được giữ gìn khỏe mạnh như một chiếc răng tự nhiên.
 
 39
-00:04:09,870 --> 00:04:13,000
-rồi tiến hành cấy Implant
-vào vùng mất răng.
+00:06:57,000 --> 00:07:14,000
+Ca thứ sáu, bệnh nhân này đã mang hàm giả tháo lắp bán phần hai hàm trong một thời gian dài, với lý do đến khám là đau nhức dữ dội không thể nhai được.
 
 40
-00:04:13,000 --> 00:04:17,125
-Nếu ca này được đặt Implant ngay từ đầu,
+00:07:14,000 --> 00:07:20,000
+Trước đó, bệnh nhân được làm mão lồng (telescope crown) để lưu giữ hàm giả cho cả hàm trên và hàm dưới.
 
 41
-00:04:17,125 --> 00:04:24,000
-hai răng trụ mang mão đã được giữ
-gìn nguyên vẹn, khỏe mạnh dài lâu.
+00:07:20,000 --> 00:07:35,000
+Khi thầy tháo hàm giả ra, các em sẽ thấy một điểm tì đè rất nghiêm trọng; mỗi khi ăn, thức ăn cọ xát vào đó khiến bệnh nhân đau đớn không thể dùng bữa nổi.
 
 42
-00:04:24,000 --> 00:04:35,667
-Ta xem tiếp ca thứ ba: Bệnh nhân mất 3
-răng và được làm một cầu răng dài 7 đơn vị.
+00:07:35,000 --> 00:07:45,000
+Thầy đã tiến hành cấy Implant, cho tải lực tức thì và sau đó gắn phục hình sau cùng.
 
 43
-00:04:35,667 --> 00:04:44,000
-Răng 2 4 và 2 5 làm trụ nhưng
-thân răng lâm sàng quá ngắn,
+00:07:45,000 --> 00:07:58,000
+Nhìn vào hình ảnh hoàn thiện, vùng vòm miệng đã hồi phục trạng thái bình thường; giờ đây bệnh nhân có thể nhai thức ăn một cách thoải mái mà không hề đau đớn.
 
 44
-00:04:44,000 --> 00:04:49,000
-dẫn đến tình trạng sút dán xi-măng
-và các răng trụ bắt đầu lung lay.
+00:07:58,000 --> 00:08:08,000
+Ở hàm dưới, các răng hỏng cũng được nhổ bỏ, cấy Implant vào vùng mất răng, tải lực tức thì và hoàn tất phục hình.
 
 45
-00:04:49,000 --> 00:04:56,969
-Thầy đã tháo bỏ cầu răng cũ; không
-thể làm lại cầu dài được nữa,
+00:08:08,000 --> 00:08:24,000
+Nếu giải pháp Implant được đưa ra từ đầu, bệnh nhân đã không phải trải qua khoảng thời gian khó khăn đó, mà có thể ăn nhai thoải mái hệt như răng thật.
 
 46
-00:04:56,969 --> 00:05:06,000
-nên phía trước và sau thầy bọc lại từng
-mão đơn, ở giữa cấy 2 trụ Implant.
+00:08:24,000 --> 00:08:36,000
+Ở ca lâm sàng cuối cùng này, như các em thấy, bên trái bệnh nhân bị mất răng nên mọi hoạt động nhai đều dồn sang các Implant ở bên phải (nhai một bên).
 
 47
-00:05:06,000 --> 00:05:13,583
-Hai tháng sau thì lắp phục
-hình sau cùng. Đây là hình ảnh
+00:08:36,000 --> 00:08:45,000
+Do tình trạng quá tải lực lên Implant, như vùng thầy khoanh đỏ trên phim.
 
 48
-00:05:13,583 --> 00:05:20,000
-trước và sau khi phục hồi
-bằng Implant rất vững ổn.
+00:08:45,000 --> 00:08:49,000
+Một đường thấu quang quanh Implant đã xuất hiện, cho thấy sự tiêu xương.
 
 49
-00:05:20,000 --> 00:05:25,107
-Nếu bệnh nhân được cấy
-Implant nâng đỡ ngay từ đầu,
+00:08:49,000 --> 00:09:05,000
+Sau khi vùng mất răng bên trái được cấy Implant và phục hồi; hai năm sau, vùng thấu quang màu đỏ đã biến mất và xương lành thương tái tạo bình thường.
 
 50
-00:05:25,107 --> 00:05:33,000
-các răng trụ ở hai bên đã không bị
-tổn hại và tồn tại như răng thật.
+00:09:05,000 --> 00:09:17,000
+Hầu hết các bệnh lý nha khoa, đặc biệt là bệnh nha chu, đều bắt nguồn từ việc quá tải lực; điều này rất rõ ràng đối với các bác sĩ lâm sàng giàu kinh nghiệm.
 
 51
-00:05:33,000 --> 00:05:39,769
-Đến ca thứ tư: Bệnh nhân mất 2
-răng ở giữa và được làm cầu 6
+00:09:17,000 --> 00:09:28,000
+Khi thực hiện cấy ghép Implant, lực nhai sẽ được phân tán đều và không bị quá tải, giúp các răng còn lại được duy trì khỏe mạnh trong thời gian dài.
 
 52
-00:05:39,769 --> 00:05:44,000
-đơn vị. Sau một thời gian sử dụng khá dài,
+00:09:28,000 --> 00:09:33,000
+Do đó, tại vùng mất răng, cấy ghép Implant chính là sự lựa chọn tối ưu nhất.
 
 53
-00:05:44,000 --> 00:05:49,107
-nhịp cầu chính giữa bị gãy ngang
-buộc phải làm lại toàn bộ:
+00:09:36,000 --> 00:09:44,000
+Bây giờ, thầy trò ta hãy phân tích chi tiết hơn về ưu và nhược điểm của điều trị Implant.
 
 54
-00:05:49,107 --> 00:05:55,000
-Thầy tiến hành cấy 2 trụ Implant vào
-khoảng mất răng và gắn phục hình.
+00:09:44,000 --> 00:09:51,000
+Thứ nhất, khi so sánh với hàm giả tháo lắp, Implant có những lợi thế nào?
 
 55
-00:05:55,000 --> 00:05:59,840
-Nếu ban đầu phục hồi mất
-răng bằng Implant độc lập,
+00:09:51,000 --> 00:10:05,000
+Như các em biết, hàm giả gây vướng víu, cộm cấn và kích thích mô mềm, khiến rất nhiều bệnh nhân có tâm lý kháng cự khi phải đeo chúng.
 
 56
-00:05:59,840 --> 00:06:06,000
-thì các răng kế cận đã được bảo
-tồn nguyên vẹn mô răng thật.
+00:10:05,000 --> 00:10:16,000
+Một rắc rối khác là răng trụ tận cùng sẽ phải gánh phần lớn lực nhai từ vùng mất răng, rất dễ dẫn đến các bệnh lý hư hỏng răng trụ.
 
 57
-00:06:06,000 --> 00:06:08,500
-Ca lâm sàng thứ năm:
+00:10:16,000 --> 00:10:26,000
+Ngược lại, Implant mang lại cảm giác ăn nhai rất giống răng thật và có lực nhai khỏe hơn hẳn so với hàm tháo lắp.
 
 58
-00:06:08,500 --> 00:06:18,000
-Mất răng cối lớn tận cùng phía xa. Bác sĩ
-trước làm cầu đèo tựa lên 2 răng trước,
+00:10:26,000 --> 00:10:41,000
+Lực nhai của nó mạnh gấp 5 đến 7 lần; nếu hàm giả chỉ đạt khoảng 20% so với răng thật, thì Implant đạt tới 80% sức nhai và giúp khôi phục chức năng tối ưu.
 
 59
-00:06:18,000 --> 00:06:22,000
-vì trước đây cấy ghép chưa thịnh hành.
+00:10:41,000 --> 00:10:50,000
+Implant giúp phân tán lực nhai đồng đều, kéo dài tuổi thọ của các răng còn lại; điều này đã được chứng minh qua nhiều y văn.
 
 60
-00:06:22,000 --> 00:06:28,788
-Tuy nhiên, khi lực nhai tác động
-lên nhịp vươn tận cùng phía xa,
+00:10:50,000 --> 00:11:03,000
+Tuổi thọ trung bình của hàm giả tháo lắp bán phần (RPD) là khoảng 5 đến 10 năm, nhưng tuổi thọ của răng trụ mang móc thường chỉ khoảng 5 năm, rất ngắn.
 
 61
-00:06:28,788 --> 00:06:38,000
-hiệu ứng đòn bẩy đè nặng lên răng trụ phía
-trước gây sút mối dán và sâu răng nặng.
+00:11:03,000 --> 00:11:16,000
+Theo một nghiên cứu khác tại Hàn Quốc, nếu hàm tháo lắp bán phần được làm thật tỉ mỉ, bệnh nhân có thể dùng được từ 7 đến 9 năm.
 
 62
-00:06:38,000 --> 00:06:42,500
-Thầy phải chữa tủy lại cho răng
-trước, bọc lại mão bảo vệ,
+00:11:16,000 --> 00:11:27,000
+Tuy nhiên, nếu không được bảo dưỡng tốt, tuổi thọ của nó sẽ giảm sút; và đối với răng trụ thì tuổi thọ chỉ còn khoảng 3 đến 5 năm.
 
 63
-00:06:42,500 --> 00:06:47,000
-còn vị trí mất răng phía sau
-thì tiến hành cấy trụ Implant.
+00:11:27,000 --> 00:11:31,000
+Đây là một điểm rất quan trọng mà các em phải giải thích rõ ràng cho bệnh nhân trước khi điều trị.
 
 64
-00:06:47,000 --> 00:06:53,154
-Tương tự như vậy, nếu ca này được cấy
-Implant đúng chỉ định ngay từ đầu,
+00:11:38,000 --> 00:11:40,000
+Tiếp theo, chúng ta hãy so sánh giữa cầu răng và Implant.
 
 65
-00:06:53,154 --> 00:06:57,000
-răng trụ phía trước đã
-được bảo tồn nguyên bản.
+00:11:40,000 --> 00:11:51,000
+Với cầu răng, các em bắt buộc phải mài răng thật để làm trụ, và toàn bộ lực nhai sẽ dồn lên các răng trụ này.
 
 66
-00:06:57,000 --> 00:07:04,969
-Sang ca thứ sáu: Bệnh nhân mang hàm
-giả bán phần hai hàm nhiều năm,
+00:11:51,000 --> 00:12:00,000
+Sau một thời gian dài sử dụng, hiện tượng bong xi măng ở răng trụ cũng như bệnh lý viêm nha chu rất dễ xảy ra.
 
 67
-00:07:04,969 --> 00:07:14,000
-đến gặp thầy với than phiền chính là đau
-buốt dữ dội, không thể nhai được gì.
+00:12:00,000 --> 00:12:12,000
+Theo y văn, tỷ lệ tồn tại sau 20 năm của cầu răng 3 đơn vị là khoảng 73%, và nguyên nhân thất bại hàng đầu chính là sâu răng trụ.
 
 68
-00:07:14,000 --> 00:07:16,857
-Bệnh nhân từng làm mão
-chụp lồng Telescope để lưu
+00:12:12,000 --> 00:12:27,000
+Sâu răng thường do sút xi măng vì quá tải lực kéo dài; tình trạng này càng dễ xảy ra nếu hướng lắp cầu răng không tốt hoặc thân răng lâm sàng quá ngắn.
 
 69
-00:07:16,857 --> 00:07:20,000
-giữ hàm giả tháo lắp ở
-cả hàm trên và dưới.
+00:12:27,000 --> 00:12:39,000
+Như hình ảnh minh họa, với cầu răng 3 đơn vị, các răng trụ rất dễ bị sâu hoặc mắc bệnh nha chu.
 
 70
-00:07:20,000 --> 00:07:26,000
-Khi tháo hàm giả ra, niêm mạc vòm
-miệng loét trợt rất nghiêm trọng.
+00:12:39,000 --> 00:12:45,000
+Thậm chí có thể gây gãy chân răng trụ; những biến chứng này chúng ta bắt gặp rất thường xuyên trên lâm sàng.
 
 71
-00:07:26,000 --> 00:07:30,286
-Cứ có thức ăn chạm vào là đau nhức nhối,
+00:12:45,000 --> 00:12:57,000
+Mặt khác, nếu làm Implant, các răng thật kề cận sẽ được bảo tồn nguyên vẹn, không bị mài và không phải chịu quá tải lực.
 
 72
-00:07:30,286 --> 00:07:35,000
-bệnh nhân hoàn toàn kiệt
-sức vì không ăn uống được.
+00:12:57,000 --> 00:13:15,000
+So sánh lực nhai, cầu răng dồn toàn bộ lực vùng mất răng lên hai răng trụ hai bên; trong khi Implant tự phân tán lực đều đặn.
 
 73
-00:07:35,000 --> 00:07:37,273
-Thầy quyết định cấy Implant,
+00:13:15,000 --> 00:13:25,000
+Ở ca lâm sàng đầu tiên này, bệnh nhân mất răng số 16 và đã được làm một cầu răng 3 đơn vị.
 
 74
-00:07:37,273 --> 00:07:45,000
-tiến hành chịu lực tức thì và gắn phục
-hình cố định sau cùng cho bệnh nhân.
+00:13:25,000 --> 00:13:38,000
+Một ngày nọ, bệnh nhân đến than phiền về sự khó chịu và đau nhức ở vùng hàm trên bên phải do bong xi măng và sâu răng trụ.
 
 75
-00:07:45,000 --> 00:07:51,906
-Các em xem kết quả sau điều trị: Niêm
-mạc khẩu cái đã hồi phục hồng hào,
+00:13:38,000 --> 00:13:49,000
+Các em có thể thấy mô sâu lan rộng theo thời gian, bắt buộc thầy phải tháo cầu, chữa tủy và lên kế hoạch điều trị lại.
 
 76
-00:07:51,906 --> 00:07:58,000
-bệnh nhân nhai thoải mái, êm ái,
-không còn chút cảm giác đau đớn nào.
+00:13:49,000 --> 00:14:00,000
+Khi điều trị lại, do răng cối bị nghiêng gần, thầy đã cho chỉnh nha dựng trục răng, đồng thời chữa tủy răng số 17.
 
 77
-00:08:08,000 --> 00:08:14,400
-Nếu người bệnh được can thiệp
-cấy ghép Implant ngay từ sớm,
+00:14:00,000 --> 00:14:08,000
+Một Implant đã được cấy ghép vào và phục hình hoàn tất; sau 2 năm 6 tháng, kết quả vẫn cực kỳ ổn định.
 
 78
-00:08:14,400 --> 00:08:24,000
-họ đã không phải chịu đựng chuỗi ngày đau
-đớn và ăn nhai tự nhiên như răng thật.
+00:14:08,000 --> 00:14:22,000
+Cũng ở bệnh nhân này, phần mão răng số 27 ở góc hàm trên bên trái bị thủng mặt nhai và cần phải điều trị lại.
 
 79
-00:08:24,000 --> 00:08:29,032
-Đây là ca lâm sàng cuối cùng:
-Cung hàm bên trái mất răng,
+00:14:22,000 --> 00:14:32,000
+Trong tình huống này, tuyệt đối không nên làm cầu răng nữa; thay vào đó thầy bọc mão răng trụ và cấy ghép Implant vào vùng mất răng.
 
 80
-00:08:29,032 --> 00:08:32,516
-bên phải đã cấy Implant
-nhưng bệnh nhân lại
+00:14:36,000 --> 00:14:44,000
+Qua ca thứ hai, các em sẽ thấy một trong những tác dụng phụ nghiêm trọng nhất của cầu răng.
 
 81
-00:08:32,516 --> 00:08:36,000
-chỉ nhai lệch một bên suốt thời gian dài.
+00:14:44,000 --> 00:14:52,000
+Ở vùng hàm trên bên phải, bệnh nhân có mùi hôi miệng và than đau thấu xương mỗi khi nhai thức ăn.
 
 82
-00:08:36,000 --> 00:08:39,857
-Chính vì Implant chịu
-lực quá tải liên tục,
+00:14:52,000 --> 00:14:59,000
+Nguyên nhân là do tình trạng viêm nha chu rất nặng xung quanh chân răng trụ.
 
 83
-00:08:39,857 --> 00:08:45,000
-các em hãy quan sát kỹ vùng
-viền đỏ trên phim X-quang:
+00:14:59,000 --> 00:15:13,000
+Răng trụ lung lay nghiêm trọng do nha chu nên phải nhổ bỏ, và thầy đã nỗ lực lên kế hoạch cấy Implant tức thì vào vùng đó.
 
 84
-00:08:45,000 --> 00:08:49,000
-Xuất hiện đường thấu quang
-quanh cổ Implant rất rõ.
+00:15:13,000 --> 00:15:19,000
+Tuy nhiên, sống hàm tại vùng nhịp cầu đã bị teo hẹp rất nhiều, do đó kỹ thuật bảo tồn huyệt ổ răng và ghép xương GBR đã được thực hiện trước.
 
 85
-00:08:49,000 --> 00:08:57,242
-Sau khi cấy Implant tái lập khớp cắn bên
-trái, hai năm sau chụp kiểm tra lại,
+00:15:19,000 --> 00:15:32,000
+Năm tháng sau khi quay lại kiểm tra, mô mềm đã đóng kín vết thương kỳ đầu rất đẹp và sống hàm đủ điều kiện để cấy Implant.
 
 86
-00:08:57,242 --> 00:09:05,000
-vùng thấu quang quanh cổ Implant đã biến
-mất hoàn toàn, xương lành thương đặc chắc.
+00:15:32,000 --> 00:15:38,000
+Implant đã được cấy ghép thành công và phục hình sau cùng đã được hoàn tất.
 
 87
-00:09:05,000 --> 00:09:10,806
-Đa số bệnh lý răng miệng bắt nguồn
-từ tình trạng quá tải lực cắn,
+00:15:38,000 --> 00:15:44,000
+Nếu so sánh hình ảnh trước và sau, các em sẽ thấy hiệu quả tuyệt vời của việc ghép xương GBR và bảo tồn huyệt ổ răng đúng cách.
 
 88
-00:09:10,806 --> 00:09:17,000
-nhất là bệnh nha chu - các bác sĩ
-lâm sàng đều thấy rất rõ điều này.
+00:15:44,000 --> 00:15:51,000
+Từ một ca lâm sàng ban đầu rất khó, tình hình đã được xoay chuyển trở nên vô cùng thuận lợi.
 
 89
-00:09:17,000 --> 00:09:23,286
-Khi cấy Implant, lực nhai được phân bổ
-hài hòa, triệt tiêu sang chấn khớp cắn,
+00:15:51,000 --> 00:15:59,000
+Các kỹ thuật để đạt được sự tái tạo mô xuất sắc như vậy sẽ được thầy hướng dẫn chi tiết trong các bài giảng GBR và khóa nâng cao.
 
 90
-00:09:23,286 --> 00:09:28,000
-giúp các răng thật còn lại
-tồn tại vững chắc lâu dài.
+00:15:59,000 --> 00:16:10,000
+Tất nhiên, Implant không phải là không có nhược điểm. Chúng ta hãy xem xét những hạn chế này dưới góc độ của cả bệnh nhân và bác sĩ.
 
 91
-00:09:28,000 --> 00:09:33,000
-Do đó, với vùng mất răng, phục hình trên
-Implant chính là lựa chọn tối ưu nhất.
+00:16:10,000 --> 00:16:22,000
+Từ phía bệnh nhân, chi phí điều trị ban đầu khá đắt đỏ; tuy nhiên ngày nay Implant đã được hỗ trợ bảo hiểm ở nhiều nơi.
 
 92
-00:09:36,000 --> 00:09:36,842
-Bây giờ,
+00:16:22,000 --> 00:16:26,000
+Và chi phí cũng đã giảm đáng kể so với trước đây, nên đây không còn là rào cản quá lớn.
 
 93
-00:09:36,842 --> 00:09:44,000
-thầy trò mình cùng phân tích ưu và nhược
-điểm chi tiết của phương pháp này nhé.
+00:16:26,000 --> 00:16:35,000
+Thứ hai là thời gian điều trị; so với các phương pháp phục hình truyền thống, cấy ghép Implant thường mất nhiều thời gian hơn.
 
 94
-00:09:44,000 --> 00:09:51,000
-Đầu tiên, so với hàm giả tháo lắp, Implant
-mang lại những lợi điểm vượt trội nào?
+00:16:35,000 --> 00:16:41,000
+Nhanh nhất cũng phải từ 2 đến 3 tháng, nên quá trình này dài hơn so với làm cầu răng hay hàm giả.
 
 95
-00:09:51,000 --> 00:09:57,774
-Như các em biết, hàm tháo lắp thường
-gây vướng víu, cấn đau niêm mạc,
+00:16:41,000 --> 00:16:53,000
+Ngoài ra, bệnh nhân còn mang tâm lý sợ phẫu thuật; về phía bác sĩ, Implant đòi hỏi một nền tảng kiến thức và kinh nghiệm lâm sàng vững chắc.
 
 96
-00:09:57,774 --> 00:10:05,000
-kích ứng mô mềm khiến bệnh nhân rất
-khó chịu và thường e ngại khi mang.
+00:16:53,000 --> 00:17:04,000
+Hơn nữa, nếu Implant thất bại, việc khắc phục sẽ rất khó khăn và thời gian điều trị có thể bị kéo dài đáng kể.
 
 97
-00:10:05,000 --> 00:10:11,742
-Một nhược điểm lớn nữa: Răng trụ tận cùng
-phải gánh toàn bộ tải lực từ yên mất răng,
+00:17:04,000 --> 00:17:11,000
+Cuối cùng, bệnh nhân bắt buộc phải duy trì vệ sinh răng miệng kỹ lưỡng và tái khám định kỳ.
 
 98
-00:10:11,742 --> 00:10:16,000
-lâu ngày sẽ dẫn đến lung
-lay và tổn thương nha chu.
+00:17:11,000 --> 00:17:22,000
+Mặc dù vậy, những ưu điểm vượt trội mà Implant mang lại hoàn toàn làm lu mờ những nhược điểm này.
 
 99
-00:10:16,000 --> 00:10:21,200
-Ngược lại, Implant mang lại cảm
-giác sinh học hệt như răng thật,
+00:17:25,000 --> 00:17:31,000
+Bây giờ, thầy trò ta sẽ tìm hiểu xem Implant nha khoa thực chất là gì.
 
 100
-00:10:21,200 --> 00:10:26,000
-với hiệu suất ăn nhai vượt
-trội hơn hẳn hàm tháo lắp.
+00:17:31,000 --> 00:17:37,000
+Implant là một thứ được cấy vào cơ thể; chúng ta hãy phân tích một chút về từ nguyên của nó.
 
 101
-00:10:26,000 --> 00:10:31,000
-Lực nhai khỏe hơn gấp
-5 đến 7 lần! Hàm tháo
+00:17:37,000 --> 00:17:44,000
+"Im" có nghĩa là vào bên trong, và "plant" nghĩa là trồng cấy.
 
 102
-00:10:31,000 --> 00:10:35,091
-lắp chỉ đạt khoảng 20% lực nhai răng thật,
+00:17:44,000 --> 00:17:53,000
+Ghép hai từ này lại, "implant" dùng để chỉ bất kỳ vật thể nhân tạo nào được cấy ghép vào bên trong cơ thể con người.
 
 103
-00:10:35,091 --> 00:10:41,000
-trong khi phục hình Implant khôi
-phục lên tới hơn 80% sức nhai.
+00:17:53,000 --> 00:18:01,000
+Nó có thể là Implant nha khoa, thủy tinh thể nhân tạo trong mắt, hay các khớp xương nhân tạo.
 
 104
-00:10:41,000 --> 00:10:46,667
-Nhờ phân bổ đều lực cắn, Implant bảo
-vệ và kéo dài tuổi thọ các răng còn
+00:18:01,000 --> 00:18:07,000
+Tất cả những thứ đó đều được gọi là implant. Vậy sự khác biệt giữa ghép mô (graft) và implant là gì?
 
 105
-00:10:46,667 --> 00:10:50,000
-lại. Dữ liệu y văn quốc tế cho thấy rõ:
+00:18:07,000 --> 00:18:24,000
+"Graft" là dùng vật liệu sinh học sống cấy vào cơ thể để thay thế một cơ quan, ví dụ như ghép thận hoặc ghép gan.
 
 106
-00:10:50,000 --> 00:10:56,500
-Tuổi thọ trung bình của hàm khung
-tháo lắp chỉ từ 5 đến 10 năm,
+00:18:24,000 --> 00:18:30,000
+Còn "implant" là việc sử dụng vật liệu vô sinh cấy vào cơ thể để đảm nhiệm chức năng của một bộ phận bị hỏng.
 
 107
-00:10:56,500 --> 00:11:03,000
-còn các răng trụ mang móc thường
-suy yếu và hỏng sau khoảng 5 năm.
+00:18:30,000 --> 00:18:37,000
+Vật liệu này thường là kim loại, silicone hoặc nhựa tổng hợp.
 
 108
-00:11:03,000 --> 00:11:10,893
-Một nghiên cứu khác tại Hàn Quốc cũng
-kết luận: Nếu giữ gìn cực kỳ cẩn thận,
+00:18:37,000 --> 00:18:43,000
+Về kim loại, trong lĩnh vực nha khoa, Titanium là vật liệu được sử dụng phổ biến nhất.
 
 109
-00:11:10,893 --> 00:11:16,000
-hàm khung mới duy trì
-được khoảng 7 đến 9 năm.
+00:18:43,000 --> 00:18:56,000
+Implant nha khoa đóng vai trò thay thế cho chân răng đã mất, và cơ thể chúng ta hoàn toàn chấp nhận chiếc răng nhân tạo này mà không có phản ứng đào thải.
 
 110
-00:11:16,000 --> 00:11:20,714
-Nếu vệ sinh kém, độ bền giảm rất nhanh;
+00:18:56,000 --> 00:19:05,000
+Khi một chiếc răng hỏng do sâu hoặc chấn thương phải nhổ đi, chúng ta sẽ sử dụng Implant nha khoa để phục hồi lại nó.
 
 111
-00:11:20,714 --> 00:11:27,000
-răng trụ suy thoái chỉ
-sau 3 đến 5 năm mang hàm.
+00:19:10,000 --> 00:19:13,000
+Tiếp theo, chúng ta hãy xem qua các chỉ định và chống chỉ định của Implant.
 
 112
-00:11:27,000 --> 00:11:33,780
-Đây là tiên lượng các em cần tư vấn rõ
-cho bệnh nhân ngay từ buổi khám đầu tiên.
+00:19:16,000 --> 00:19:27,000
+Chỉ định của Implant bao gồm: sống hàm mất răng toàn bộ, sống hàm mất răng bán phần, và mất răng đơn lẻ.
 
 113
-00:11:33,787 --> 00:11:40,000
-Tiếp theo, hãy so sánh giữa
-cầu răng cố định và Implant.
+00:19:27,000 --> 00:19:33,000
+Về cơ bản, mọi trường hợp mất răng đều có thể xem xét ứng dụng cấy ghép Implant.
 
 114
-00:11:40,000 --> 00:11:44,481
-Làm cầu bắt buộc phải
-mài mô răng trụ kế cận,
+00:19:33,000 --> 00:19:46,000
+Về chống chỉ định, cũng giống như các phẫu thuật nha khoa khác, chúng ta không làm Implant nếu bệnh nhân có bệnh lý toàn thân chưa kiểm soát được, hoặc có vấn đề về tâm lý.
 
 115
-00:11:44,481 --> 00:11:51,000
-và toàn bộ lực cắn vùng mất răng
-sẽ dồn hết lên hai đầu trụ này.
+00:19:46,000 --> 00:19:55,000
+Khác với các phẫu thuật phần mềm thông thường, Implant cấy ghép trực tiếp vào xương hàm.
 
 116
-00:11:51,000 --> 00:11:55,680
-Sau thời gian dài chịu tải,
-xi-măng gắn dễ bị sút mối dán,
+00:19:55,000 --> 00:20:06,000
+Do đó, tuyệt đối không cấy Implant cho bệnh nhân ở độ tuổi đang phát triển xương, và phải hết sức thận trọng với bệnh nhân loãng xương.
 
 117
-00:11:55,680 --> 00:12:00,000
-dẫn đến viêm nha chu và sâu
-răng trụ ngầm bên dưới.
+00:20:06,000 --> 00:20:17,000
+Tóm lại, Implant được tiến hành khi bệnh nhân bị mất răng, có nguyện vọng phục hình và tình trạng sức khỏe toàn thân cho phép.
 
 118
-00:12:00,000 --> 00:12:06,333
-Y văn chỉ ra tỉ lệ tồn tại sau 20
-năm của cầu 3 đơn vị chỉ đạt 73%,
+00:20:17,000 --> 00:20:19,000
+Khi đủ các điều kiện đó, phương pháp điều trị này sẽ được thực hiện.
 
 119
-00:12:06,333 --> 00:12:12,000
-và thủ phạm gây thất bại hàng đầu
-chính là sâu tái phát ở bờ phục hình.
+00:20:24,000 --> 00:20:27,000
+Bây giờ, chúng ta sẽ đi ngược thời gian để tìm hiểu lịch sử của Implant nha khoa.
 
 120
-00:12:12,000 --> 00:12:16,355
-Lực quá tải lâu ngày làm tróc lớp xi-măng;
+00:20:27,000 --> 00:20:29,000
+Thầy trò ta sẽ lướt qua phần này một chút nhé.
 
 121
-00:12:16,355 --> 00:12:21,194
-nguy cơ càng cao nếu
-hướng lắp răng trụ không
+00:20:29,000 --> 00:20:41,000
+Vào thời cổ đại, người ta đã dùng đá và ngà voi để cắm vào xương hàm của người chết hoặc dùng như một giải pháp tạm thời.
 
 122
-00:12:21,194 --> 00:12:27,000
-song song hoặc thân răng lâm
-sàng quá ngắn, lưu giữ kém.
+00:20:41,000 --> 00:20:53,000
+Đến thời Trung cổ, có một chuyện khá nực cười là họ nhổ răng của người nghèo để cắm sang cho người giàu.
 
 123
-00:12:27,000 --> 00:12:32,000
-Như các em thấy, ở cầu răng 3 đơn vị,
+00:20:53,000 --> 00:20:58,000
+Theo thầy, tỷ lệ thành công của những phương pháp đó chắc chắn là vô cùng thấp.
 
 124
-00:12:32,000 --> 00:12:39,000
-răng trụ rất dễ bị sâu chân răng
-hoặc viêm nha chu tiêu xương,
+00:20:58,000 --> 00:21:01,000
+Về lịch sử của Implant hiện đại...
 
 125
-00:12:39,000 --> 00:12:45,000
-thậm chí nứt gãy cùi răng thật -
-những sự cố này gặp rất thường xuyên.
+00:21:01,000 --> 00:21:09,000
+Nó bắt đầu từ những năm 1930, khi rất nhiều loại vật liệu và hình dáng Implant khác nhau được thử nghiệm và phát triển.
 
 126
-00:12:45,000 --> 00:12:50,600
-Trái lại, nếu làm Implant, chúng
-ta bảo tồn trọn vẹn mô răng thật,
+00:21:09,000 --> 00:21:19,000
+Nhưng khái niệm quan trọng nhất của Implant nha khoa hiện đại mới được thiết lập lần đầu tiên bởi Giáo sư Brånemark vào năm 1965.
 
 127
-00:12:50,600 --> 00:12:57,000
-răng bên cạnh không bị quá tải nên
-duy trì sinh học cực kỳ khỏe mạnh.
+00:21:19,000 --> 00:21:27,000
+Hình bên trái là vị bệnh nhân đầu tiên được cấy ghép Implant thành công, và bên phải chính là chân dung Giáo sư Brånemark.
 
 128
-00:13:15,000 --> 00:13:18,182
-Các em theo dõi ca thực tế:
+00:21:27,000 --> 00:21:33,000
+Khái niệm cấy ghép tích hợp xương hoàn toàn do Giáo sư Brånemark khởi xướng.
 
 129
-00:13:18,182 --> 00:13:25,000
-Bệnh nhân mất răng 1 6 và từng
-được làm cầu răng 3 đơn vị.
+00:21:33,000 --> 00:21:45,000
+Chuyện kể rằng vào năm 1952 tại một trường đại học ở Thụy Điển, vị giáo sư chỉnh hình Brånemark đang tiến hành nghiên cứu về quá trình lành thương của xương.
 
 130
-00:13:25,000 --> 00:13:29,194
-Bệnh nhân đến khám vì
-đau buốt vùng hàm trên
+00:21:45,000 --> 00:21:55,000
+Ông đã cấy một buồng quan sát bằng Titanium vào xương đùi thỏ; vài tháng sau khi nghiên cứu kết thúc, ông cố gắng lấy nó ra.
 
 131
-00:13:29,194 --> 00:13:32,968
-bên phải. Khám thấy cầu răng đã sút dán,
+00:21:55,000 --> 00:21:57,000
+Nhưng ông đã không thể tháo nó ra được, vì buồng Titanium này đã dính chặt hoàn toàn vào mô xương.
 
 132
-00:13:32,968 --> 00:13:38,000
-vi kẽ xuất hiện và răng
-trụ đã bị sâu phá hủy.
+00:21:57,000 --> 00:22:02,000
+Và ông đã đặt tên cho hiện tượng kỳ diệu này là Tích hợp xương (Osseointegration).
 
 133
-00:13:38,000 --> 00:13:43,077
-Tổn thương sâu tiến triển theo
-thời gian buộc phải chữa tủy
+00:22:07,000 --> 00:22:11,000
+Vậy, Tích hợp xương là gì?
 
 134
-00:13:43,077 --> 00:13:49,000
-lại và tháo dỡ toàn bộ cầu
-cũ để can thiệp lại từ đầu.
+00:22:11,000 --> 00:22:20,000
+Đó là sự kết nối trực tiếp cả về mặt cấu trúc và chức năng giữa mô xương sống và bề mặt Implant.
 
 135
-00:13:49,000 --> 00:13:53,469
-Vì răng trụ bị nghiêng gần nhẹ,
-thầy chỉnh nha dựng thẳng trục,
+00:22:20,000 --> 00:22:25,000
+Như các em có thể thấy trên hình ảnh vi thể, hoàn toàn không có mô trung gian nào xen giữa xương và Implant.
 
 136
-00:13:53,469 --> 00:14:00,000
-điều trị tủy răng 1 7, sau đó cấy một
-trụ Implant vào vị trí mất răng 1 6.
+00:22:25,000 --> 00:22:28,000
+Hiện tượng dính chặt tuyệt đối này chính là Tích hợp xương.
 
 137
-00:14:00,000 --> 00:14:04,000
-Phục hình gắn sau đó; tái
-khám sau 2 năm 6 tháng,
+00:22:28,000 --> 00:22:43,000
+Ngược lại, ở hình bên phải, các em thấy có mô mềm bao quanh; nói cách khác là hiện tượng bao xơ đã xảy ra, dẫn đến thất bại trong việc tích hợp xương.
 
 138
-00:14:04,000 --> 00:14:08,000
-mô nha chu và xương quanh
-Implant vẫn vô cùng ổn định.
+00:22:45,000 --> 00:22:57,000
+Tóm lại, tích hợp xương là khi bề mặt Implant được neo giữ vững chắc trực tiếp vào xương mà không bị lớp mô mềm nào bọc lại.
 
 139
-00:14:08,000 --> 00:14:13,385
-Cũng trên bệnh nhân này,
-ở phân hàm đối diện,
+00:22:57,000 --> 00:23:03,000
+Hình ảnh này cho thấy các tế bào xương mới được hình thành và bám trực tiếp lên bề mặt của Implant.
 
 140
-00:14:13,385 --> 00:14:22,000
-mão răng 2 7 bị thủng mặt nhai
-gây hư hại và cần phục hồi lại.
+00:23:03,000 --> 00:23:10,000
+Dưới kính hiển vi điện tử quét (SEM), các em có thể quan sát rõ mô xương mới đan xen chặt chẽ vào cấu trúc bề mặt Implant.
 
 141
-00:14:22,000 --> 00:14:28,207
-Ca này dứt khoát không làm cầu nối
-dài: Thầy bọc mão đơn bảo vệ răng 2 7,
+00:23:10,000 --> 00:23:22,000
+Trong lĩnh vực này có một thuật ngữ cực kỳ quan trọng là BIC, viết tắt của "Bone to Implant Contact" - tức là diện tích tiếp xúc giữa xương và Implant.
 
 142
-00:14:28,207 --> 00:14:32,000
-còn vị trí mất răng thì
-cấy ghép Implant độc lập.
+00:23:22,000 --> 00:23:32,000
+BIC được tính bằng tổng chiều dài đoạn xương mới bám dính trực tiếp chia cho tổng chiều dài bề mặt Implant nằm trong xương.
 
 143
-00:14:36,000 --> 00:14:41,000
-Quan sát ca thứ hai: Đây là biến
-chứng điển hình và nặng nề nhất
+00:23:32,000 --> 00:23:40,000
+Chỉ số này được thể hiện dưới dạng phần trăm, phản ánh mức độ thành công của quá trình tích hợp xương.
 
 144
-00:14:41,000 --> 00:14:44,000
-của việc phục hình cầu răng sai chỉ định.
+00:23:40,000 --> 00:23:45,000
+Tỷ lệ BIC càng cao, chứng tỏ sự tích hợp xương càng tốt và Implant càng vững ổn.
 
 145
-00:14:44,000 --> 00:14:48,000
-Bệnh nhân bị hôi miệng
-nặng và đau buốt mỗi
+00:23:45,000 --> 00:23:56,000
+Do đó, khi thử nghiệm một công nghệ xử lý bề mặt mới trên động vật, các nhà nghiên cứu luôn dùng chỉ số BIC để đánh giá xem độ tích hợp xương có được cải thiện hay không.
 
 146
-00:14:48,000 --> 00:14:52,000
-khi cắn thức ăn ở vùng hàm trên bên phải.
+00:23:56,000 --> 00:24:09,000
+Khi các em đi sâu vào chuyên ngành Implant, thuật ngữ này sẽ xuất hiện liên tục, nên các em nhớ khắc sâu khái niệm này nhé.
 
 147
-00:14:52,000 --> 00:14:59,000
-Kiểm tra thấy mô nha chu quanh răng
-trụ đã viêm nhiễm và phá hủy rất nặng.
+00:24:09,000 --> 00:24:18,000
+Thêm một cột mốc nữa, vào năm 1981, sáu tiêu chí quan trọng để đạt được sự tích hợp xương đã được công bố.
 
 148
-00:14:59,000 --> 00:15:04,310
-Răng trụ lung lay độ ba
-do tiêu xương trầm trọng,
+00:24:18,000 --> 00:24:29,000
+Thứ nhất là tính tương thích sinh học của vật liệu, thứ hai là thiết kế đại thể, và thứ ba là đặc tính bề mặt Implant; ba yếu tố này thuộc về vật liệu.
 
 149
-00:15:04,310 --> 00:15:13,000
-bắt buộc phải nhổ bỏ. Thầy đã tính đến
-phương án cấy Implant tức thì ngay sau nhổ,
+00:24:29,000 --> 00:24:34,000
+Yếu tố thứ tư là chất lượng xương hàm, điều này hoàn toàn phụ thuộc vào cơ địa của bệnh nhân.
 
 150
-00:15:13,000 --> 00:15:15,077
-tuy nhiên sống hàm còn lại quá mỏng manh,
+00:24:34,000 --> 00:24:38,000
+Thứ năm là kỹ thuật phẫu thuật của bác sĩ, và thứ sáu là điều kiện tải lực phục hình.
 
 151
-00:15:15,077 --> 00:15:19,000
-buộc phải thực hiện kỹ thuật bảo tồn ổ
-răng và ghép xương có hướng dẫn (GBR).
+00:24:38,000 --> 00:24:42,000
+Hai yếu tố cuối cùng này phụ thuộc trực tiếp vào tay nghề và tư duy lâm sàng của người bác sĩ phẫu thuật.
 
 152
-00:15:19,000 --> 00:15:25,276
-Năm tháng sau mở vạt kiểm tra,
-vạt đóng kín thì đầu rất đẹp,
+00:24:42,000 --> 00:24:46,000
+Thầy sẽ đi sâu vào chi tiết của từng yếu tố này trong các bài giảng tiếp theo của khóa Cơ bản và khóa thực hành trực tiếp.
 
 153
-00:15:25,276 --> 00:15:32,000
-xương tái tạo đầy đặn và đã đủ
-thể tích an toàn để đặt Implant.
+00:24:48,000 --> 00:24:52,000
+Bây giờ, chúng ta cùng xem lại tóm tắt những nội dung đã trao đổi hôm nay.
 
 154
-00:15:32,000 --> 00:15:38,000
-Thầy tiến hành cấy trụ Implant
-và hoàn tất phục hình sau cùng.
+00:25:17,000 --> 00:25:22,000
+Vậy là bài giảng đầu tiên của khóa học Master Course cơ bản về Implant đã khép lại.
 
 155
-00:15:38,000 --> 00:15:44,000
-So sánh trước và sau, nhờ ghép xương
-GBR và bảo tồn ổ răng chuẩn xác,
+00:25:22,000 --> 00:25:32,000
+Ban đầu, mọi thứ có vẻ khó khăn và xa lạ, nhưng nếu các em xác định rõ mục tiêu và không ngừng nỗ lực tiến bước...
 
 156
-00:15:44,000 --> 00:15:47,333
-từ một ca lâm sàng tiêu
-xương rất phức tạp,
+00:25:32,000 --> 00:25:35,000
+...thì chắc chắn các em sẽ gặt hái được những kết quả lâm sàng tuyệt vời.
 
 157
-00:15:47,333 --> 00:15:51,000
-chúng ta đã xoay chuyển
-tình thế thành công mỹ mãn.
+00:25:35,000 --> 00:25:38,000
+Khóa học Master Course sẽ luôn đồng hành và dẫn lối cho các em trên con đường này.
 
 158
-00:15:51,000 --> 00:15:54,143
-Quy trình và kỹ thuật ghép
-xương GBR chuyên sâu này,
-
-159
-00:15:54,143 --> 00:15:59,000
-thầy sẽ hướng dẫn chi tiết cho các em
-trong khóa học Nâng cao sắp tới nhé.
-
-160
-00:15:59,000 --> 00:16:04,893
-Tất nhiên, Implant không phải là chiếc
-đũa thần không tì vết. Hãy cùng nhìn
-
-161
-00:16:04,893 --> 00:16:10,000
-nhận khách quan nhược điểm từ
-góc độ bệnh nhân và bác sĩ.
-
-162
-00:16:10,000 --> 00:16:16,923
-Về phía bệnh nhân, chi phí điều
-trị ban đầu tương đối cao. Dù vậy,
-
-163
-00:16:16,923 --> 00:16:22,000
-hiện nay đã có thêm các
-gói hỗ trợ chi phí,
-
-164
-00:16:22,000 --> 00:16:26,000
-giá thành vật liệu tiếp cận dễ dàng
-hơn, nên rào cản này không còn quá lớn.
-
-165
-00:16:26,000 --> 00:16:31,885
-Thứ hai là thời gian điều trị: So với
-làm răng sứ hay hàm giả thông thường,
-
-166
-00:16:31,885 --> 00:16:35,000
-cấy Implant cần thời gian
-lành thương lâu hơn,
-
-167
-00:16:35,000 --> 00:16:41,000
-tối thiểu từ 2 đến 3 tháng
-để tích hợp xương hoàn tất.
-
-168
-00:16:41,000 --> 00:16:46,455
-Bên cạnh đó là tâm lý sợ đau
-khi phẫu thuật. Về phía nha sĩ,
-
-169
-00:16:46,455 --> 00:16:53,000
-kỹ thuật này đòi hỏi kiến thức giải phẫu
-vững vàng và tay nghề lâm sàng dày dạn.
-
-170
-00:16:53,000 --> 00:16:58,500
-Nếu Implant thất bại, việc
-xử lý sửa chữa rất gian nan,
-
-171
-00:16:58,500 --> 00:17:04,000
-thời gian điều trị khắc phục
-sẽ kéo dài hơn rất nhiều.
-
-172
-00:17:04,000 --> 00:17:07,957
-Đồng thời, bệnh nhân bắt buộc
-phải duy trì vệ sinh răng miệng
-
-173
-00:17:07,957 --> 00:17:11,000
-nghiêm ngặt và tuân thủ
-lịch tái khám định kỳ.
-
-174
-00:17:11,000 --> 00:17:17,417
-Dẫu vậy, giá trị sinh học và chức
-năng mà Implant mang lại hoàn
-
-175
-00:17:17,417 --> 00:17:22,000
-toàn vượt trội so với
-những bất tiện kể trên.
-
-176
-00:17:25,000 --> 00:17:31,000
-Bây giờ, thầy trò mình đi vào bản chất:
-Cấy ghép Nha khoa thực chất là gì?
-
-177
-00:17:31,000 --> 00:17:37,000
-Implant nghĩa là cấy đặt vào bên trong.
-Nếu xét về nguồn gốc từ nguyên học:
-
-178
-00:17:37,000 --> 00:17:44,000
-Tiền tố "Im" nghĩa là bên trong, và
-"Plant" có nghĩa là gieo trồng, cấy đặt.
-
-179
-00:17:53,000 --> 00:17:57,333
-Đó có thể là trụ Implant nha
-khoa, thủy tinh thể nhân tạo,
-
-180
-00:17:57,333 --> 00:18:01,000
-hay các khớp háng nhân tạo
-trong chấn thương chỉnh hình.
-
-181
-00:18:01,000 --> 00:18:04,462
-Tất cả đều được gọi chung là vật
-liệu cấy ghép. Các em cần phân
-
-182
-00:18:04,462 --> 00:18:07,000
-biệt rạch ròi giữa Ghép (Graft)
-và Cấy ghép (Implant) nhé.
-
-183
-00:18:07,000 --> 00:18:18,769
-Ghép (Graft) là dùng vật liệu sinh học
-sống đưa vào cơ thể để thay thế cơ quan,
-
-184
-00:18:18,769 --> 00:18:24,000
-chẳng hạn như ghép thận hay ghép gan.
-
-185
-00:18:24,000 --> 00:18:26,870
-Còn Implant là đưa vật
-liệu trơ không sống vào cơ
-
-186
-00:18:26,870 --> 00:18:30,000
-thể để tái tạo chức năng
-của một bộ phận bị mất.
-
-187
-00:18:30,000 --> 00:18:37,000
-Vật liệu này có thể là kim loại
-sinh học, silicone hoặc nhựa y tế.
-
-188
-00:18:37,000 --> 00:18:38,579
-Trong cấy ghép Nha khoa,
-
-189
-00:18:38,579 --> 00:18:43,000
-hợp kim Titanium nguyên chất là vật
-liệu được ứng dụng phổ biến nhất.
-
-190
-00:18:43,000 --> 00:18:48,515
-Trụ Implant đóng vai trò thay thế
-chân răng đã mất trong xương hàm,
-
-191
-00:18:48,515 --> 00:18:52,454
-với tính tương thích
-sinh học cao giúp cơ thể
-
-192
-00:18:52,454 --> 00:18:56,000
-dung nạp mà không sinh phản ứng đào thải.
-
-193
-00:18:56,000 --> 00:19:00,065
-Khi một chiếc răng hỏng do sâu
-hoặc chấn thương buộc phải nhổ bỏ,
-
-194
-00:19:00,065 --> 00:19:05,000
-chúng ta đặt trụ Implant để tái tạo lại
-trọn vẹn từ chân răng đến thân răng.
-
-195
-00:19:10,000 --> 00:19:13,000
-Tiếp theo, hãy nắm thật chắc chỉ
-định và chống chỉ định lâm sàng.
-
-196
-00:19:16,000 --> 00:19:24,381
-Chỉ định cấy ghép bao gồm: Sống hàm
-mất răng toàn bộ, mất răng từng phần,
-
-197
-00:19:24,381 --> 00:19:27,000
-hoặc mất răng đơn lẻ.
-
-198
-00:19:27,000 --> 00:19:28,364
-Nói một cách tổng quát:
-
-199
-00:19:28,364 --> 00:19:33,000
-Bất cứ vị trí khuyết hổng mất răng nào
-đều có thể chỉ định cấy ghép Implant.
-
-200
-00:19:33,000 --> 00:19:38,515
-Về chống chỉ định, cũng tương tự
-như các tiểu phẫu răng miệng khác:
-
-201
-00:19:38,515 --> 00:19:43,636
-Khi bệnh nhân mắc bệnh lý toàn
-thân chưa kiểm soát ổn định,
-
-202
-00:19:43,636 --> 00:19:46,000
-hoặc có rối loạn tâm thần.
-
-203
-00:19:46,000 --> 00:19:50,765
-Không được phép phẫu
-thuật bừa bãi. Đặc biệt,
-
-204
-00:19:50,765 --> 00:19:55,000
-Implant can thiệp trực tiếp vào mô xương,
-
-205
-00:19:55,000 --> 00:20:00,500
-nên tuyệt đối không cấy trên bệnh
-nhân đang tuổi tăng trưởng xương,
-
-206
-00:20:00,500 --> 00:20:06,000
-và phải hết sức thận trọng trên
-người bệnh bị loãng xương nặng.
-
-207
-00:20:06,000 --> 00:20:17,000
-Tóm lại, hễ mất răng, sức khỏe toàn thân
-cho phép và người bệnh có nhu cầu phục hồi,
-
-208
-00:20:17,000 --> 00:20:19,000
-chúng ta hoàn toàn tự tin
-chỉ định cấy ghép Implant.
-
-209
-00:20:24,000 --> 00:20:27,000
-Thầy trò mình cùng điểm lại đôi nét về
-lịch sử hình thành của ngành cấy ghép nhé.
-
-210
-00:20:27,000 --> 00:20:29,000
-Lịch sử này vô cùng thú vị.
-
-211
-00:20:29,000 --> 00:20:35,923
-Thời cổ đại, con người từng dùng
-đá mài hoặc ngà voi chôn vào xương
-
-212
-00:20:35,923 --> 00:20:41,000
-hàm người chết hoặc dùng
-như một giải pháp tạm thời.
-
-213
-00:20:41,000 --> 00:20:44,111
-Thời Trung cổ, nghe hơi kỳ lạ,
-
-214
-00:20:44,111 --> 00:20:49,000
-người ta nhổ răng người
-nghèo rồi đem cấy ghép trực
-
-215
-00:20:49,000 --> 00:20:53,000
-tiếp sang miệng của giới quý tộc giàu có.
-
-216
-00:20:53,000 --> 00:20:58,000
-Theo thầy, chắc chắn tỉ lệ thành
-công lúc bấy giờ là vô cùng thấp.
-
-217
-00:20:58,000 --> 00:21:01,000
-Thời kỳ hiện đại bắt đầu định hình ra sao?
-
-218
-00:21:01,000 --> 00:21:06,091
-Từ những năm 1930, hàng loạt vật
-liệu và kiểu dáng thiết kế Implant
-
-219
-00:21:06,091 --> 00:21:09,000
-đã được đưa vào nghiên cứu thử nghiệm.
-
-220
-00:21:09,000 --> 00:21:15,087
-Thế nhưng, bước ngoặt vĩ đại nhất
-của Implant học hiện đại được xác
-
-221
-00:21:15,087 --> 00:21:19,000
-lập vào năm 1965 bởi Giáo
-sư Per-Ingvar Brånemark.
-
-222
-00:21:19,000 --> 00:21:23,522
-Bên trái là bệnh nhân đầu tiên
-trên thế giới được cấy ghép,
-
-223
-00:21:23,522 --> 00:21:27,000
-còn bên phải chính là Giáo
-sư Brånemark khả kính.
-
-224
-00:21:27,000 --> 00:21:30,176
-Kỷ nguyên Implant tích
-hợp xương chính thức khai
-
-225
-00:21:30,176 --> 00:21:33,000
-sinh từ phát hiện của Giáo sư Brånemark.
-
-226
-00:21:33,000 --> 00:21:40,286
-Năm 1952 tại Đại học Lund Thụy Điển, khi
-nghiên cứu về quá trình lành thương xương,
-
-227
-00:21:40,286 --> 00:21:45,000
-Giáo sư Brånemark, vốn là một
-phẫu thuật viên chỉnh hình,
-
-228
-00:21:45,000 --> 00:21:50,667
-đã cấy một buồng quan sát quang học bằng
-Titanium vào xương đùi thỏ. Vài tháng sau,
-
-229
-00:21:50,667 --> 00:21:55,000
-khi kết thúc nghiên cứu, ông cố
-gắng tháo buồng kim loại ra.
-
-230
-00:21:55,000 --> 00:21:58,713
-Thế nhưng không thể tháo được:
-Nó đã dính chặt vào mô xương!
-
-231
-00:21:58,756 --> 00:22:03,756
-Và ông đã đặt tên cho hiện tượng kỳ diệu
-này là: Tích hợp xương (Osseointegration).
-
-232
-00:22:07,000 --> 00:22:11,000
-Vậy Tích hợp xương là gì?
-
-233
-00:22:11,000 --> 00:22:15,821
-Đó là sự kết nối trực tiếp về
-mặt cấu trúc và chức năng giữa
-
-234
-00:22:15,821 --> 00:22:20,000
-xương sống của cơ thể với bề
-mặt của trụ Implant chịu lực.
-
-235
-00:22:20,000 --> 00:22:21,667
-Các em nhìn lát cắt vi thể:
-
-236
-00:22:21,667 --> 00:22:25,000
-Không hề có bất kỳ lớp mô đệm
-nào xen giữa xương và Implant.
-
-237
-00:22:25,000 --> 00:22:28,000
-Đó chính là Tích hợp xương hoàn hảo.
-
-238
-00:22:28,000 --> 00:22:33,417
-Còn ở hình bên phải, xen
-kẽ ở giữa là mô mềm sợi
-
-239
-00:22:33,417 --> 00:22:36,750
-- tức hiện tượng bọc bao xơ
-(fibrous encapsulation),
-
-240
-00:22:36,750 --> 00:22:43,000
-và điều này đồng nghĩa với việc tích
-hợp xương đã thất bại hoàn toàn.
-
-241
-00:22:45,000 --> 00:22:51,375
-Tích hợp xương nghĩa là trên bề mặt
-trụ không bị mô liên kết sợi bọc lấy,
-
-242
-00:22:51,375 --> 00:22:57,000
-mà tế bào xương bám dính trực tiếp,
-neo giữ trụ vững chắc cơ học.
-
-243
-00:22:57,000 --> 00:22:58,826
-Như các em thấy trên tiêu bản:
-
-244
-00:22:58,826 --> 00:23:03,000
-Mô xương mới được tạo lập và phát
-triển áp sát ngay trên bề mặt Implant.
-
-245
-00:23:03,000 --> 00:23:05,962
-Đây là ảnh chụp kính hiển
-vi điện tử quét SEM:
-
-246
-00:23:05,962 --> 00:23:10,000
-Xương mới hình thành và bám trực
-tiếp vào từng vi cấu trúc của trụ.
-
-247
-00:23:10,000 --> 00:23:16,222
-Trong thực hành, chúng ta có một
-chỉ số cực kỳ quan trọng: BIC
-
-248
-00:23:16,222 --> 00:23:22,000
-- Bone-to-Implant Contact, tức Tỉ lệ diện
-tích tiếp xúc giữa xương và Implant.
-
-249
-00:23:22,000 --> 00:23:27,652
-Chỉ số này tính bằng phần trăm
-tổng chiều dài bề mặt Implant
-
-250
-00:23:27,652 --> 00:23:32,000
-được xương mới tiếp xúc
-và neo giữ trực tiếp.
-
-251
-00:23:40,000 --> 00:23:45,000
-Chỉ số BIC càng cao, độ vững ổn sinh
-học của Implant càng tuyệt vời.
-
-252
-00:23:45,000 --> 00:23:49,667
-Bởi vậy, khi nghiên cứu xử lý bề
-mặt Implant mới trên động vật,
-
-253
-00:23:49,667 --> 00:23:56,000
-người ta luôn đo xem chỉ số BIC có tăng
-lên và tích hợp xương có nhanh hơn không.
-
-254
-00:23:56,000 --> 00:24:04,840
-Trong suốt quá trình hành nghề cấy ghép,
-khái niệm BIC này sẽ theo sát các em,
-
-255
-00:24:04,840 --> 00:24:09,000
-nên hãy khắc sâu vào tâm trí nhé.
-
-256
-00:24:09,000 --> 00:24:14,625
-Vào năm 1981, Giáo sư Albrektsson
-và cộng sự đã đề ra 6 tiêu chuẩn
-
-257
-00:24:14,625 --> 00:24:18,000
-vàng để quyết định tích
-hợp xương thành công:
-
-258
-00:24:18,000 --> 00:24:23,176
-Thứ nhất là tính tương thích sinh học;
-thứ hai là thiết kế hình thái học;
-
-259
-00:24:23,176 --> 00:24:29,000
-thứ ba là xử lý bề mặt trụ. Ba yếu
-tố này thuộc về vật liệu sản xuất.
-
-260
-00:24:29,065 --> 00:24:35,357
-Thứ tư là số lượng và chất lượng xương,
-yếu tố này phụ thuộc vào cơ địa bệnh nhân.
-
-261
-00:24:35,422 --> 00:24:37,494
-Thứ năm là kỹ thuật phẫu thuật;
-
-262
-00:24:37,494 --> 00:24:42,525
-thứ sáu là điều kiện tải lực khớp
-cắn. Hai yếu tố sống còn sau cùng này
-
-263
-00:24:42,557 --> 00:24:48,486
-hoàn toàn nằm trong tay chuyên môn
-và quyết định của bác sĩ phẫu thuật.
-
-264
-00:24:48,508 --> 00:24:50,898
-Toàn bộ chi tiết kỹ thuật lâm sàng,
-
-265
-00:24:50,898 --> 00:24:54,781
-thầy sẽ phân tích sâu trong phần
-thực hành lâm sàng tiếp theo.
-
-266
-00:24:54,798 --> 00:24:55,198
-Bây giờ,
-
-267
-00:24:55,198 --> 00:24:58,798
-chúng ta cùng đúc kết lại những thông điệp
-lâm sàng cốt lõi của bài học hôm nay.
-
-268
-00:25:15,578 --> 00:25:22,000
-Vậy là thầy trò mình đã hoàn thành bài mở
-đầu của khóa học Cấy ghép Nha khoa Cơ bản.
-
-269
-00:25:22,000 --> 00:25:26,706
-Ban đầu, cấy ghép có thể khiến các
-em thấy bỡ ngỡ và nhiều thách thức;
-
-270
-00:25:26,706 --> 00:25:32,000
-nhưng chỉ cần nắm vững giải phẫu, kiên trì
-mục tiêu và thấu hiểu bản chất sinh học,
-
-271
-00:25:32,000 --> 00:25:35,000
-thầy tin chắc các em sẽ gặt
-hái kết quả điều trị xuất sắc.
-
-272
-00:25:35,000 --> 00:25:38,000
-Khóa Master Course này sẽ luôn
-đồng hành mở đường cho các em.
-
-273
 00:25:38,000 --> 00:25:41,000
-Chúc các em luôn giữ vững ngọn lửa
-đam mê. Cảm ơn các em đã theo dõi!
+Thầy hy vọng các em sẽ giữ mãi ngọn lửa đam mê này, cảm ơn các em đã chú ý lắng nghe.
