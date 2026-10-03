@@ -1,375 +1,375 @@
 1
 00:00:24,000 --> 00:00:26,000
-Xin mời thầy giới thiệu về bản thân.
+Xin mời thầy giới thiệu về bản thân.[cite: 1]
 
 2
 00:00:26,000 --> 00:00:36,000
-Xin chào, tôi là một người bạn đồng hành quen thuộc trong lĩnh vực Implant. Tôi là Giáo sư Park Chang Jo, thuộc chuyên khoa "Phẫu thuật Răng Hàm Mặt", Bệnh viện Đại học Hanyang.
+Chào các em, thầy là một người bạn đồng hành quen thuộc trong lĩnh vực Implant. Thầy là Giáo sư Park Chang Jo, chuyên khoa Phẫu thuật Răng Hàm Mặt, Bệnh viện Đại học Hanyang.[cite: 1]
 
 3
 00:00:42,000 --> 00:00:50,000
-Tôi là giám đốc của Khóa học Master Course Cơ bản. Tôi sẽ cố gắng giải thích để các bạn có thể dễ dàng hiểu được và tôi sẽ lặp đi lặp lại.
+Thầy là Giám đốc Khóa học Master Course Cơ bản. Thầy sẽ giảng giải thật dễ hiểu và sẽ lặp lại liên tục.[cite: 1]
 
 4
 00:00:50,000 --> 00:01:07,000
-Tôi sẽ nhắc lại những điều quan trọng nhiều lần để các bạn có thể ghi nhớ dựa trên các kiến thức nền tảng đã được thiết lập, và tôi cũng sẽ đề cập đến những thông tin mới cập nhật. Tôi sẽ dùng sự tận tâm của mình để chia sẻ kiến thức này với các bạn.
+Những kiến thức trọng tâm sẽ được nhắc lại nhiều lần để các em khắc sâu nền tảng. Đồng thời, thầy cũng cập nhật những xu hướng mới nhất bằng tất cả sự tận tâm của mình.[cite: 1]
 
 5
 00:01:16,000 --> 00:01:24,000
-Xin chào, tôi là Giáo sư Park Chang Jo, Khoa "Phẫu thuật Răng Hàm Mặt", Bệnh viện Đại học Hanyang.
+Chào các em, thầy là Giáo sư Park Chang Jo, chuyên khoa Phẫu thuật Răng Hàm Mặt, Bệnh viện Đại học Hanyang.[cite: 1]
 
 6
 00:01:24,000 --> 00:01:42,000
-Ngày nay, rất nhiều thứ thay đổi vô cùng nhanh chóng, mỗi ngày chúng ta đều tiếp nhận vô số điều mới mẻ. Nên nếu bạn chỉ nói về những điều cơ bản, bạn có thể bị xem là người lỗi thời; chụp X-quang trong nha khoa là một ví dụ điển hình.
+Ngày nay, mọi thứ thay đổi chóng mặt, mỗi ngày chúng ta đều tiếp nhận vô số điều mới mẻ. Nên nếu chỉ nói về kiến thức cơ bản, các em có thể bị xem là lỗi thời; X-quang trong nha khoa là một ví dụ.[cite: 1]
 
 7
 00:01:42,000 --> 00:02:02,000
-Nó được thực hiện như một công việc thường ngày. Do đó, nó thường bị coi là điều thứ yếu, không quá quan trọng, nhưng khi nghiên cứu về cấy ghép Implant, chúng ta cần ghi chép, chẩn đoán và phân tích tình trạng của từng bệnh nhân cụ thể.
+Nó giống như một công việc thường ngày, dễ bị xem nhẹ. Nhưng khi học về Implant, chúng ta cần ghi chép, chẩn đoán và phân tích chi tiết tình trạng của từng bệnh nhân.[cite: 1]
 
 8
 00:02:02,000 --> 00:02:15,000
-Vì thế, tầm quan trọng của nó là không thể bàn cãi. Hôm nay, tôi sẽ trình bày về X-quang, cách chụp phim và đọc phim cơ bản. Đầu tiên, chúng ta hãy cùng xem qua nội dung bài học.
+Vì thế, tầm quan trọng của nó là không thể bàn cãi. Hôm nay, thầy sẽ hướng dẫn cách chụp và đọc phim X-quang cơ bản, chúng ta cùng xem qua nội dung trước nhé.[cite: 1]
 
 9
 00:02:21,000 --> 00:02:44,000
-Một là chụp cắt lớp vi tính nha khoa, hay chụp cắt lớp vi tính chùm tia hình nón (CBCT). Hai là phim toàn cảnh Panorama mà các bạn đã quá quen thuộc. Ba là quy trình chụp phim quanh chóp chuẩn.
+Một là chụp cắt lớp vi tính chùm tia hình nón (CBCT). Hai là phim toàn cảnh Panorama rất quen thuộc, và ba là quy trình chụp phim quanh chóp chuẩn.[cite: 1]
 
 10
 00:02:44,000 --> 00:03:03,000
-Đầu tiên là chụp cắt lớp vi tính chùm tia hình nón. Nó được viết tắt là CBCT, dùng để chỉ thiết bị chụp hoặc chính hình ảnh chụp ra.
+Đầu tiên là chụp cắt lớp vi tính chùm tia hình nón. Viết tắt là CBCT, dùng để chỉ cả thiết bị lẫn hình ảnh chụp ra.[cite: 1]
 
 11
 00:03:03,000 --> 00:03:24,000
-Hãy so sánh nó với máy chụp CT truyền thống. Trong trường hợp chụp CT truyền thống như thế này, các tia X hình quạt rất mỏng được tích hợp lại từng bước một. Trong khi đó, CT chùm tia hình nón sử dụng các tia X có hình nón kem rất dày.
+Hãy so sánh với CT truyền thống: các tia X hình quạt rất mỏng được tích hợp từng bước một. Trong khi đó, CBCT sử dụng chùm tia X hình nón rất dày.[cite: 1]
 
 12
 00:03:24,000 --> 00:03:50,000
-Vì vậy, trong một khoảng thời gian ngắn, ta có thể thu được những thông tin chi tiết hơn. Nó giống như hình nón kem, do đó nó được đặt tên là CT chùm tia hình nón (Cone Beam CT). Ưu điểm thứ nhất là thiết bị đã trở nên nhỏ gọn hơn, giúp tiết kiệm diện tích.
+Nhờ vậy, ta thu được thông tin chi tiết hơn trong thời gian ngắn. Ưu điểm đầu tiên là thiết bị nhỏ gọn, giúp tiết kiệm không gian phòng khám.[cite: 1]
 
 13
 00:03:50,000 --> 00:04:12,000
-Hai là có thể thu được các lát cắt hình ảnh mỏng và chi tiết hơn. Hình ảnh chi tiết là yếu tố nền tảng. Do đó, thông tin trở nên chính xác hơn. Bốn là, các chùm tia X được phát ra cùng một lúc.
+Hai là thu được các lát cắt mỏng và sắc nét hơn, mang lại nguồn dữ liệu chuẩn xác. Ba là chùm tia X được phát ra cùng một lúc.[cite: 1]
 
 14
 00:04:12,000 --> 00:04:29,000
-Chính vì vậy, mức độ phơi nhiễm bức xạ cho bệnh nhân đã giảm đi đáng kể. Thiết bị trở nên nhỏ gọn hơn, hình ảnh chi tiết hơn, độ chính xác cao hơn và mức độ phơi nhiễm bức xạ được giảm thiểu tối đa.
+Điều này giúp giảm thiểu đáng kể lượng bức xạ cho bệnh nhân. Tóm lại: máy nhỏ gọn hơn, ảnh chi tiết, độ chính xác cao và cực kỳ an toàn.[cite: 1]
 
 15
 00:04:29,000 --> 00:04:43,000
-Hãy nhìn vào ca lâm sàng này, một bệnh nhân nam trẻ tuổi bị viêm nha chu tiến triển nhanh. Toàn bộ răng sẽ được nhổ bỏ và tiến hành cấy ghép Implant.
+Các em hãy xem ca lâm sàng này: một bệnh nhân nam trẻ tuổi bị viêm nha chu tiến triển nhanh. Toàn bộ răng sẽ được nhổ để cấy ghép Implant.[cite: 1]
 
 16
 00:04:43,000 --> 00:05:10,000
-Tuy nhiên, tình trạng xương quanh răng rất kém. Như các bạn thấy, các thủ thuật phức tạp sẽ được thực hiện cùng một lúc. Đặt Implant tức thì đang là xu hướng hiện nay. Nhưng trong ca này, chúng tôi sẽ nhổ răng và tiến hành ghép xương (GBR) theo từng giai đoạn cho quá trình điều trị Implant.
+Tuy nhiên, tình trạng xương nền rất kém, đòi hỏi nhiều thủ thuật phức tạp cùng lúc. Dù cấy tức thì đang là xu hướng, ca này thầy chọn nhổ răng và ghép xương (GBR) theo từng giai đoạn.[cite: 1]
 
 17
 00:05:10,000 --> 00:05:13,000
-Hình ảnh hàm trên và hàm dưới trước phẫu thuật.
+Hình ảnh hàm trên và hàm dưới trước phẫu thuật.[cite: 1]
 
 18
 00:05:13,000 --> 00:05:38,000
-Vẫn còn một vài răng sót lại nhưng chúng bị lung lay nghiêm trọng và tình trạng không được tốt. Do đó, chúng tôi quyết định nhổ bỏ toàn bộ. Đây là hình ảnh lâm sàng ngay sau phẫu thuật. So sánh trước và sau phẫu thuật. Các bạn có đoán được những thủ thuật nào đã được thực hiện trong khoảng thời gian đó không?
+Các răng còn lại lung lay nghiêm trọng nên thầy quyết định nhổ toàn bộ. So sánh hình ảnh trước và ngay sau phẫu thuật, các em đoán xem thầy đã làm những thủ thuật gì?[cite: 1]
 
 19
 00:05:38,000 --> 00:06:05,000
-Phim toàn cảnh Panorama trước phẫu thuật. Quá trình chụp phim Panorama sẽ được giải thích ngay sau đây. Đây là quy trình cơ bản nhất mà tôi tin rằng các bạn đều đã biết. Chỉ với một bức phim Panorama, bạn có thể lập kế hoạch phẫu thuật một cách đầy đủ hay không?
+Đây là phim Panorama trước phẫu thuật, quy trình cơ bản nhất mà các em đều biết. Chỉ với một phim Panorama, liệu các em có đủ dữ liệu để lên kế hoạch phẫu thuật không?[cite: 1]
 
 20
 00:06:05,000 --> 00:06:26,000
-CT sẽ bổ sung cho điều đó. CT cung cấp góc nhìn ba chiều chính xác hơn và kế hoạch phẫu thuật cuối cùng có thể được thiết lập. CBCT là cơ sở nền tảng, và dựa trên phim Panorama, kế hoạch phẫu thuật sẽ được phác thảo.
+CT sẽ bù đắp thiếu sót đó bằng góc nhìn không gian ba chiều cực kỳ chuẩn xác. CBCT là nền tảng cốt lõi để phác thảo kế hoạch phẫu thuật chi tiết nhất.[cite: 1]
 
 21
 00:06:26,000 --> 00:06:41,000
-Một khối xương (block bone) sẽ được lấy từ hàm dưới bên phải và ghép vào nhiều vị trí khác nhau. Kỹ thuật tái tạo xương có hướng dẫn (GBR) sẽ được thực hiện tại các vị trí nhổ răng ở vùng răng sau hàm trên hai bên.
+Một khối xương được lấy từ hàm dưới bên phải để ghép vào nhiều vị trí khác. Kỹ thuật tái tạo xương có hướng dẫn (GBR) sẽ được thực hiện tại vùng răng sau hàm trên hai bên.[cite: 1]
 
 22
 00:06:41,000 --> 00:06:58,000
-Thủ thuật nâng xoang quy mô lớn sẽ được tiến hành. Nếu chỉ có phim Panorama, chúng ta không thể lập kế hoạch phẫu thuật như thế này. Nhờ có hình ảnh CBCT, kế hoạch phẫu thuật này mới có thể được thiết lập.
+Thủ thuật nâng xoang quy mô lớn cũng được tiến hành. Nếu chỉ có phim Panorama, các em không thể nào lập được một kế hoạch phẫu thuật hoàn chỉnh như thế này.[cite: 1]
 
 23
 00:06:58,000 --> 00:07:32,000
-Vì vậy, sự tiến bộ của CBCT cũng đã thúc đẩy sự phát triển của ngành cấy ghép Implant. Hình ảnh sau phẫu thuật cho thấy có điều gì đó đã thay đổi. Hãy xem điều gì đã thay đổi. Đầu tiên, nâng xoang hai bên quy mô lớn đã được thực hiện vì bệnh nhân có lượng xương còn lại rất mỏng ở vùng răng sau hàm trên.
+Chính sự tiến bộ của CBCT đã thúc đẩy ngành Implant phát triển. Hãy nhìn xem, bệnh nhân đã được nâng xoang hai bên quy mô lớn vì xương hàm trên còn lại rất mỏng.[cite: 1]
 
 24
 00:07:32,000 --> 00:07:57,000
-Sau khi nhổ răng, tại vị trí sẽ đặt Implant trong tương lai, kỹ thuật tái tạo xương có hướng dẫn (GBR) đã được thực hiện. Những vật thể hình tròn xung quanh là các chốt xương (bone tacks) để cố định màng, chúng hiển thị trên phim X-quang như thế này.
+Tại vị trí cấy Implant tương lai, kỹ thuật ghép xương GBR đã được thực hiện. Những vật thể hình tròn trên phim X-quang chính là các chốt (bone tacks) để cố định màng.[cite: 1]
 
 25
 00:07:57,000 --> 00:08:11,000
-Ở bệnh nhân này, phần xương khối (block bone) được lấy từ vùng răng sau hàm dưới, sau đó chia nhỏ và ghép vào vùng răng sau hàm trên bên trái và vùng răng sau hai bên của hàm dưới.
+Xương khối được lấy từ vùng răng sau hàm dưới, chia nhỏ và ghép vào vùng răng sau hàm trên bên trái cùng hai bên hàm dưới.[cite: 1]
 
 26
 00:08:11,000 --> 00:08:30,000
-Một quy trình rất phức tạp, khó có thể thực hiện tất cả những điều này cùng một lúc. Nhưng nhờ có CBCT, quy trình phẫu thuật đã diễn ra rất trôi chảy và dễ dàng. Kết quả điều trị cũng có thể được kiểm tra bằng CBCT.
+Một quy trình cực kỳ phức tạp và khó làm cùng lúc. Nhưng nhờ có CBCT, ca phẫu thuật đã diễn ra rất trơn tru và dễ dàng.[cite: 1]
 
 27
 00:08:30,000 --> 00:08:53,000
-Trước đây, phim Panorama có những hạn chế trong việc dự đoán kết quả điều trị hoặc các biến chứng. Nhờ sử dụng CBCT, vấn đề này đã được giải quyết và chúng ta có thể đánh giá chính xác bằng CBCT. Sự tiến bộ của CBCT đã thúc đẩy sự tiến bộ của ngành cấy ghép Implant.
+Trước đây, phim Panorama có nhiều hạn chế trong việc dự đoán kết quả hay biến chứng. Nhờ CBCT, chúng ta có thể đánh giá và kiểm soát mọi thứ một cách tuyệt đối.[cite: 1]
 
 28
 00:08:53,000 --> 00:09:13,000
-Hình ảnh phim Panorama trước và sau phẫu thuật. Vui lòng so sánh chúng qua hình ảnh CBCT trước và sau phẫu thuật. Chúng có thể được so sánh để thấy những thay đổi về mặt không gian ba chiều.
+Các em hãy so sánh phim Panorama và CBCT trước, sau phẫu thuật. Chúng ta có thể thấy rõ những thay đổi về mặt không gian ba chiều.[cite: 1]
 
 29
 00:09:13,000 --> 00:09:32,000
-Làm thế nào để các cấu trúc giải phẫu quan trọng được giữ nguyên vẹn. Các lát cắt của CBCT đã được tái tạo lại để tạo thành góc nhìn toàn cảnh (Panoramic view). Như vậy, phim Panorama được tạo ra từ các lát cắt của CBCT.
+CBCT giúp bảo tồn nguyên vẹn các cấu trúc giải phẫu quan trọng. Các lát cắt của CBCT cũng được tái tạo lại để tạo thành góc nhìn toàn cảnh Panorama.[cite: 1]
 
 30
 00:09:32,000 --> 00:10:03,000
-Vị trí và khối lượng xương ghép có thể được kiểm tra. Cấu trúc giải phẫu quan trọng, tình trạng của xoang hàm và ống thần kinh răng dưới. Vị trí và mối tương quan với các cấu trúc khác có thể được kiểm tra chắc chắn bằng CBCT. Sự phát triển của CBCT cũng đã dẫn dắt lĩnh vực phẫu thuật Implant.
+Vị trí, khối lượng xương ghép, tình trạng xoang hàm hay ống thần kinh răng dưới đều được kiểm tra chắc chắn. Nó thực sự đã dẫn dắt toàn bộ lĩnh vực phẫu thuật Implant.[cite: 1]
 
 31
 00:10:03,000 --> 00:10:35,000
-CBCT là chìa khóa cho một ca phẫu thuật Implant thành công. Tôi có thể khẳng định điều đó. Như các bạn đã biết, xu hướng nổi bật trong Implant hiện nay là kỹ thuật số. Nếu không biết về kỹ thuật số, bạn khó có thể tham gia vào những cuộc thảo luận chuyên sâu. Việc quét trong miệng (intraoral scanning) được thực hiện để lấy dữ liệu về tình trạng trong miệng.
+Thầy khẳng định: CBCT là chìa khóa cho một ca Implant thành công. Xu hướng hiện nay là nha khoa kỹ thuật số, bắt đầu từ việc quét lấy dấu trong miệng (intraoral scan).[cite: 1]
 
 32
 00:10:35,000 --> 00:11:02,000
-Các thông tin có thể được kết hợp lại với nhau. Thông tin ba chiều chính xác hơn có thể được sử dụng cho phẫu thuật Implant có máng hướng dẫn kỹ thuật số (digitally guided implant surgery). Có các phần mềm dùng để lập kế hoạch cho các ca phẫu thuật như vậy. Tôi tin rằng các bạn đã nghe về điều này nhiều lần, nhưng...
+Các dữ liệu ba chiều chính xác này được tích hợp để phục vụ cho phẫu thuật Implant có máng hướng dẫn kỹ thuật số. Có các phần mềm chuyên dụng để lập kế hoạch, các em hẳn đã nghe nhiều rồi.[cite: 1]
 
 33
 00:11:02,000 --> 00:11:44,000
-Việc lập kế hoạch phẫu thuật Implant hướng dẫn bằng kỹ thuật số như vậy, bắt buộc phải cần đến phim CBCT. Phần mềm Implant Studio được sử dụng khá rộng rãi để đáp ứng nhu cầu đó. Osstem đang phát triển phần mềm OneGuide Clinic, hiện đang trong giai đoạn thử nghiệm beta. Hãy nhìn vào đây, đối với phẫu thuật Implant hướng dẫn bằng kỹ thuật số, điều quan trọng nhất chính là dữ liệu CT, tức là CBCT.
+Để lập kế hoạch bằng phần mềm như Implant Studio hay OneGuide Clinic, bắt buộc phải có phim CBCT. Dữ liệu CBCT chính là cốt lõi của phẫu thuật hướng dẫn kỹ thuật số.[cite: 1]
 
 34
 00:11:44,000 --> 00:12:01,000
-Nếu không có CBCT, phẫu thuật Implant hướng dẫn bằng kỹ thuật số là bất khả thi. Những thông tin quan trọng nhất cung cấp cho phẫu thuật có máng hướng dẫn đều đến từ CBCT.
+Không có CBCT thì không thể phẫu thuật Implant kỹ thuật số. Mọi thông tin quan trọng nhất cung cấp cho máng hướng dẫn đều đến từ phim CBCT.[cite: 1]
 
 35
 00:12:01,000 --> 00:12:16,000
-Sau khi lên kế hoạch ảo, phẫu thuật thực tế có thể được thực hiện bằng cách sử dụng bộ OneGuide kit này. Nó đã được chuẩn bị sẵn sàng.
+Sau khi lên kế hoạch ảo, phẫu thuật thực tế sẽ được thực hiện bằng bộ OneGuide kit đã chuẩn bị sẵn này.[cite: 1]
 
 36
 00:12:20,000 --> 00:12:44,000
-Đối với phẫu thuật nâng xoang, bộ CAS kit (One CAS kit) là tuyệt đối cần thiết, và để cấy các trụ Implant nhỏ, bộ MS kit (One MS kit) đã sẵn sàng. Vậy là cả ba bộ kit đó đều có sẵn và sẽ được tích hợp vào một hệ thống máng hướng dẫn duy nhất.
+Đối với nâng xoang, bộ CAS kit là tuyệt đối cần thiết, còn để cấy Implant nhỏ thì dùng bộ MS kit. Cả ba bộ kit này sẽ được tích hợp vào một hệ thống máng hướng dẫn duy nhất.[cite: 1]
 
 37
 00:12:44,000 --> 00:13:07,000
-Một ca lâm sàng, bệnh nhân nam khá lớn tuổi. Bệnh nhân đang đeo hàm giả tháo lắp bán phần (RPD) ở cả hai hàm và ông ấy không muốn đeo chúng nữa.
+Một ca lâm sàng: Bệnh nhân nam khá lớn tuổi đang đeo hàm tháo lắp bán phần (RPD) ở cả hai hàm và không muốn sử dụng chúng nữa.[cite: 1]
 
 38
 00:13:07,000 --> 00:13:37,000
-Trong trường hợp này, OneGuide và OneCAS (bộ kit chuyên dụng cho nâng xoang) có thể được sử dụng để mang lại sự phục hồi Implant toàn hàm dễ dàng và thoải mái. Đó là những gì đã được thực hiện trước phẫu thuật. Các răng còn lại sẽ được nhổ đi nhưng vị trí đó sẽ được tận dụng. Đây là máng hướng dẫn OneGuide được gắn vào trong miệng.
+Ca này dùng OneGuide và OneCAS (bộ nâng xoang) để phục hồi Implant toàn hàm dễ dàng, êm ái. Răng cũ nhổ đi, máng hướng dẫn OneGuide sẽ được gắn trực tiếp vào miệng.[cite: 1]
 
 39
 00:13:37,000 --> 00:14:01,000
-Máng hướng dẫn Template guide hay đôi khi còn gọi là stent. Công cụ này có các lỗ để hướng dẫn mũi khoan; sau khi khoan, việc đặt trụ Implant có thể được điều hướng. Đây chính là chìa khóa của phẫu thuật có máng hướng dẫn.
+Máng hướng dẫn (hay stent) có các lỗ để dẫn đường mũi khoan và đặt trụ Implant. Đây chính là chìa khóa của phẫu thuật có máng hướng dẫn.[cite: 1]
 
 40
 00:14:01,000 --> 00:14:27,000
-Thông qua các lỗ trên máng hướng dẫn, thao tác khoan sẽ được dẫn đường và các trụ Implant sẽ được cấy vào. Độ ổn định ban đầu rất tốt nên các trụ lành thương (healing abutments) đã được gắn vào. Trong hầu hết các ca lâm sàng, trụ lành thương được gắn trực tiếp. Các răng trước phẫu thuật đã được nhổ bỏ và 8 trụ Implant ở hàm trên...
+Thông qua các lỗ trên máng, thao tác khoan được dẫn đường và Implant được cấy vào chuẩn xác. Độ ổn định ban đầu rất tốt nên thầy đã gắn luôn các trụ lành thương (healing abutments).[cite: 1]
 
 41
 00:14:27,000 --> 00:14:46,000
-8 trụ Implant ở hàm dưới đã được đặt một cách đơn giản, dễ dàng và chính xác. Do đó, phẫu thuật Implant hướng dẫn kỹ thuật số đã được thực hiện thành công. Nếu bạn so sánh hình ảnh trước và sau phẫu thuật.
+8 trụ Implant hàm trên và 8 trụ hàm dưới được đặt vô cùng dễ dàng và chính xác. Các em hãy tự so sánh hình ảnh trước và sau phẫu thuật nhé.[cite: 1]
 
 42
 00:14:46,000 --> 00:15:16,000
-Một ca phẫu thuật Implant hướng dẫn kỹ thuật số như vậy, điều gì đã làm cho nó trở nên khả thi? Đúng vậy, chính CBCT đã biến điều đó thành hiện thực; không có nó, ca phẫu thuật có máng hướng dẫn này không thể thực hiện được. Sự tiến bộ của CBCT đã dẫn dắt sự phát triển của phẫu thuật Implant. Vì vậy, CBCT là một quy trình chụp phim X-quang rất quan trọng.
+Điều gì đã biến ca phẫu thuật này thành hiện thực? Chính là CBCT. Sự tiến bộ của CBCT đã dẫn dắt phẫu thuật Implant, biến nó thành một quy trình cực kỳ quan trọng.[cite: 1]
 
 43
 00:15:21,000 --> 00:16:08,000
-Chủ đề tiếp theo là chụp phim toàn cảnh (Panoramic radiology). Máy này được sử dụng để chụp phim toàn cảnh. Ưu điểm của chúng: thứ nhất, có thể quan sát được vùng bao phủ rộng lớn. Hai là, mức độ bức xạ thấp ở mức tương đối. Ba là, việc chụp phim có thể được thực hiện rất đơn giản và nhanh chóng. Đó là một trong những ưu điểm lớn nhất của phim Panorama.
+Chủ đề tiếp theo là phim Panorama. Ưu điểm lớn nhất của nó là quan sát được vùng bao phủ rộng, bức xạ thấp, thao tác chụp rất đơn giản và nhanh chóng.[cite: 1]
 
 44
 00:16:08,000 --> 00:16:30,000
-Chụp phim Panorama là bước cơ bản khi nghiên cứu về Implant. Khi đã chụp xong phim Panorama, chúng ta có thể quyết định các thủ thuật tiếp theo, các hình ảnh tiếp theo hay cần chụp thêm các loại phim X-quang nào khác. Vì vậy, đây là thông tin cơ bản và rất quan trọng.
+Phim Panorama là bước nền tảng trong Implant. Dựa vào đó, chúng ta mới quyết định được các thủ thuật hay các phim X-quang chuyên sâu tiếp theo.[cite: 1]
 
 45
 00:16:30,000 --> 00:16:47,000
-Một điều nữa, tại Hàn Quốc, CBCT được sử dụng rất tích cực và rộng rãi. Nhưng ở các quốc gia khác, phim Panorama vẫn được sử dụng khá nhiều cho phẫu thuật Implant.
+Tại Hàn Quốc, CBCT được dùng rất phổ biến. Nhưng ở nhiều quốc gia khác, phim Panorama vẫn đóng vai trò chủ đạo trong phẫu thuật Implant.[cite: 1]
 
 46
 00:16:47,000 --> 00:17:15,000
-Vì vậy, đây là nền tảng cơ bản của phẫu thuật dựa trên phim Panorama. Đó là lợi ích của việc sử dụng Panorama. Cách đây rất lâu, khi tôi còn là bác sĩ nội trú tại khoa phẫu thuật Răng Hàm Mặt, tôi phải làm việc với các phim Panorama.
+Vì vậy, nền tảng của phẫu thuật dựa trên Panorama vẫn rất quan trọng. Khi thầy còn là bác sĩ nội trú Răng Hàm Mặt, mọi thứ đều phải dựa vào phim Panorama.[cite: 1]
 
 47
 00:17:15,000 --> 00:17:48,000
-Một lớp giấy can trong suốt được đặt lên trên phim Panorama; các răng, cấu trúc giải phẫu quan trọng được đánh dấu và xác định mối liên quan của chúng. Quá trình đó gọi là gì? Nó được gọi là vẽ phim (tracing) X-quang Panorama. Thông qua quá trình vẽ phim và kết quả quét diện rộng từ Panorama...
+Chúng ta phải đặt một lớp giấy can lên phim để vẽ lại răng và các cấu trúc giải phẫu quan trọng. Kỹ thuật này gọi là vẽ phim (tracing) X-quang Panorama.[cite: 1]
 
 48
 00:17:48,000 --> 00:18:11,000
-Chúng tôi có thể xác định được răng, xương hàm, xoang hàm trên và ống thần kinh răng dưới. Vị trí cũng như mối liên quan tương đối của chúng cũng được nhận diện rõ ràng.
+Nhờ vẽ phim, thầy trò ta xác định được răng, xương hàm, xoang hàm trên và đường đi của ống thần kinh răng dưới.[cite: 1]
 
 49
 00:18:11,000 --> 00:18:35,000
-Và quan trọng hơn, thông qua phim Panorama, chúng ta có thể xác định được chiều cao xương tại vị trí sẽ đặt Implant sau này. Đó là mục đích lớn nhất của việc sử dụng phương pháp vẽ phim X-quang Panorama.
+Và quan trọng nhất, chúng ta xác định được chiều cao xương tại vị trí dự định cấy Implant. Đó là mục đích lớn nhất của kỹ thuật vẽ phim Panorama.[cite: 1]
 
 50
 00:18:35,000 --> 00:18:57,000
-Quá trình vẽ phim đã được thực hiện ngay trên đó. Đây là một bệnh nhân cấy ghép Implant. Trên phim Panorama, giấy trong suốt được đặt lên, sau đó dùng một cây bút chì sắc nhọn để vẽ lại các hình ảnh. Kỹ thuật này được gọi là vẽ phim (tracing).
+Ví dụ với bệnh nhân này, thầy đặt giấy trong suốt lên phim Panorama rồi dùng bút chì nhọn để vẽ lại (tracing).[cite: 1]
 
 51
 00:18:57,000 --> 00:19:29,000
-Thông qua việc vẽ phim Panorama, chúng tôi xác định được các yếu tố quan trọng. Đầu tiên là xoang hàm trên: vị trí, ranh giới và tình trạng của xoang được xác định. Sau đó là phẫu thuật hàm dưới, với cấu trúc giải phẫu rất quan trọng là vị trí của ống thần kinh răng dưới và mối liên quan của nó với các răng lân cận.
+Thông qua đó, các em nhận diện được các yếu tố then chốt: vị trí, ranh giới xoang hàm trên và đường đi của ống thần kinh răng dưới.[cite: 1]
 
 52
 00:19:29,000 --> 00:19:43,000
-Đồng thời, chiều cao của phần xương bị khuyết hổng cũng được xác định. Các cấu trúc giải phẫu quan trọng đã được định vị nhờ phương pháp vẽ phim.
+Đồng thời, chiều cao phần xương khuyết hổng cũng được đo đạc. Việc vẽ phim giúp định vị rõ ràng các cấu trúc giải phẫu trọng yếu.[cite: 1]
 
 53
 00:19:43,000 --> 00:19:56,000
-Tôi hy vọng các bạn hiểu được mục đích của việc vẽ phim. Chiều cao xương ở vùng khuyết hổng có thể được đo lường như tôi đã trình bày. Chúng không đơn thuần được đo bằng một cây thước kẻ.
+Thầy hy vọng các em hiểu mục đích của việc vẽ phim. Chiều cao xương khuyết hổng không thể chỉ đơn thuần đo bằng một cây thước kẻ.[cite: 1]
 
 54
 00:19:56,000 --> 00:20:20,000
-Mẫu phim X-quang (X-ray template) được sử dụng cho mục đích đó. Ở Hàn Quốc, xu hướng kỹ thuật số hiện nay đang rất mạnh mẽ, do đó chiều cao xương có thể được đo đạc bằng phần mềm. Tuy nhiên, ở nhiều quốc gia khác, mẫu phim X-quang vẫn đang được sử dụng. Như các bạn thấy ở đây, có rất nhiều đường kính Implant khác nhau.
+Chúng ta phải dùng đến mẫu phim X-quang (X-ray template). Dù hiện nay phần mềm có thể đo tự động, nhưng mẫu phim này vẫn được dùng ở rất nhiều quốc gia.[cite: 1]
 
 55
 00:20:20,000 --> 00:20:50,000
-Và các chiều dài tương ứng với từng đường kính đều được chỉ định rõ ở đây. Ví dụ, Implant có đường kính 3.5 và chiều dài 8.5 mm nằm ở đây; lấy một ví dụ khác, Implant đường kính 4.5 và dài 10 mm sẽ trông như thế này.
+Các kích thước được chỉ định rõ: ví dụ Implant đường kính 3.5 dài 8.5mm, hay đường kính 4.5 dài 10mm sẽ trông như thế này.[cite: 1]
 
 56
 00:20:50,000 --> 00:21:13,000
-Các hình ảnh trụ Implant hiển thị trên mẫu phim X-quang không phải là kích thước thực tế. Như đã được chú thích ở đây, nó lớn hơn 125% so với kích thước thật. Kích thước đã được phóng đại lên 25%, vì sao lại như vậy?
+Lưu ý, hình ảnh trụ Implant trên mẫu phim không phải kích thước thực tế. Nó đã được phóng đại 25%, các em biết vì sao không?[cite: 1]
 
 57
 00:21:13,000 --> 00:21:36,000
-Tôi tin rằng các bạn đã biết lý do, đó là vì Panorama là một bức ảnh trải phẳng. Do đó, những biến dạng hình ảnh là điều không thể tránh khỏi. Kích thước hình ảnh sẽ bị thay đổi so với kích thước ban đầu.
+Chắc các em cũng đoán được: vì Panorama là ảnh trải phẳng nên hình ảnh chắc chắn sẽ bị biến dạng kích thước.[cite: 1]
 
 58
 00:21:36,000 --> 00:21:57,000
-Nếu bạn so sánh những thay đổi theo chiều ngang và chiều dọc. Sự biến dạng theo chiều dọc, đặc biệt là sự phóng đại (chứ không phải thu nhỏ), mới là vấn đề cốt lõi. Ở hầu hết các thiết bị chụp Panorama, hình ảnh thường bị phóng đại 25%.
+Đặc biệt là sự biến dạng phóng đại theo chiều dọc. Ở hầu hết các máy chụp Panorama, hình ảnh thường bị phóng đại lên khoảng 25%.[cite: 1]
 
 59
 00:21:57,000 --> 00:22:24,000
-Vì vậy, trên mẫu phim X-quang mà các bạn thấy lúc nãy, các hình ảnh trụ Implant đã được phóng đại thêm 25%. Làm thế nào chúng ta có thể sử dụng những mẫu phim X-quang như vậy? Ở ca lâm sàng này, phẫu thuật Implant đã được lên kế hoạch cho bệnh nhân. Ở các vùng răng sau hàm trên và hàm dưới...
+Đó là lý do các mẫu phim X-quang cũng phải phóng đại trụ Implant thêm 25%. Trở lại ca lâm sàng này, bệnh nhân sẽ cấy Implant ở cả hàm trên và hàm dưới.[cite: 1]
 
 60
 00:22:24,000 --> 00:22:40,000
-Implant sẽ được đặt ở cả hai bên. Trước đây chúng ta đã thực hiện quy trình như thế nào? Việc đầu tiên phải làm là chụp phim Panorama, bởi vì phim Panorama là cơ sở cho toàn bộ quy trình cấy ghép Implant.
+Trước đây, quy trình diễn ra thế nào? Đầu tiên, chúng ta bắt buộc phải chụp phim Panorama vì đây là nền tảng của mọi thao tác.[cite: 1]
 
 61
 00:22:40,000 --> 00:23:04,000
-Sau khi chụp xong, phim được rửa ra, một tờ giấy trong suốt được đặt lên trên và kỹ thuật vẽ phim (tracing) được thực hiện bằng một chiếc bút chì nhọn. Bằng cách vẽ lại, chúng ta có thể nhận diện được răng, xương hàm, xoang hàm trên và đường đi của ống thần kinh răng dưới.
+Sau khi có phim, thầy dùng giấy can và bút chì nhọn để vẽ lại. Bước này giúp xác định răng, xương hàm, xoang hàm trên và ống thần kinh răng dưới.[cite: 1]
 
 62
 00:23:04,000 --> 00:23:30,000
-Không chỉ vậy, tại các vị trí sẽ cấy ghép Implant, chiều cao xương sẽ được đo đạc cẩn thận. Phim Panorama thường có hình ảnh bị biến dạng, chủ yếu là biến dạng theo chiều dọc. Nó bị phóng đại hay thu nhỏ? Nó bị phóng đại lên.
+Tiếp theo, chiều cao xương tại vị trí cấy Implant sẽ được đo lường cẩn thận. Vì phim Panorama bị biến dạng phóng đại theo chiều dọc...[cite: 1]
 
 63
 00:23:30,000 --> 00:24:02,000
-Vì vậy, mẫu phim X-quang đã được phóng đại 125% được đưa ra. Lúc nãy các bạn không nhận ra vì nó có màu trắng đục, nhưng thực chất nó trong suốt. Tờ giấy trong suốt này được đặt lên trên các hình ảnh đã bị phóng đại 125%. Những trụ Implant cần được lựa chọn phải phù hợp với chiều cao xương đó. Và phải tránh các cấu trúc giải phẫu quan trọng.
+...nên thầy sẽ ướm mẫu phim X-quang trong suốt (đã phóng đại 125%) lên trên. Qua đó, thầy chọn được trụ Implant phù hợp với chiều cao xương và tránh các cấu trúc nguy hiểm.[cite: 1]
 
 64
 00:24:02,000 --> 00:24:31,000
-Khi lựa chọn trụ Implant, chúng ta cần tránh đụng vào xoang hàm trên hoặc ống thần kinh răng dưới. Một điều nữa, trước đây phim Panorama được sử dụng rất phổ biến vì nó được dùng để chế tác máng phẫu thuật Implant (surgical stent). Máng này đôi khi còn được gọi là máng hướng dẫn (guide).
+Khi chọn trụ, tuyệt đối phải tránh xoang hàm trên và ống thần kinh răng dưới. Ngoài ra, phim Panorama khi xưa còn được dùng để chế tác máng phẫu thuật (surgical guide).[cite: 1]
 
 65
 00:24:31,000 --> 00:25:07,000
-Ở bệnh nhân này, một nữ bệnh nhân trẻ tuổi bị chấn thương vùng mặt, khiến rất nhiều răng bị phá hủy. Implant sẽ được cấy ghép sau khi nhổ răng. Vị trí của các Implant và mối tương quan giữa chúng cần phải được xác định rõ. Do đó, những gì chúng tôi đã làm là... đây là hình ảnh trước phẫu thuật.
+Các em xem bệnh nhân nữ trẻ tuổi bị chấn thương mặt này. Rất nhiều răng bị phá hủy và cần cấy Implant sau khi nhổ.[cite: 1]
 
 66
 00:25:07,000 --> 00:25:38,000
-Thật là khủng khiếp. Tổn thương do chấn thương là rất nghiêm trọng. Đây là một bệnh nhân trẻ, toàn bộ răng cửa đều bị phá hủy. Cô ấy hẳn đã phải chịu đựng những cơn đau khủng khiếp. Sống hàm trên mất răng toàn bộ, thao tác nhổ răng được thực hiện trước và phần nướu đã lành lỏng. Các mẫu hàm được đúc ra như thế này, và đối với những chiếc răng đã mất, một mẫu hàm sáp chẩn đoán (diagnostic wax-up) sẽ được tạo hình.
+Tổn thương rất khủng khiếp, toàn bộ răng cửa bị phá hủy. Sau khi nhổ răng và để nướu lành, thầy tạo hình sáp chẩn đoán (diagnostic wax-up) cho 8 chiếc răng đã mất.[cite: 1]
 
 67
 00:25:38,000 --> 00:26:20,000
-Một, hai, ba, bốn, năm... tám chiếc răng được tạo hình như thế này. Sau đó, trên cơ sở đó, một máng hướng dẫn X-quang (radiologic stent) sẽ được chế tác. Tại vị trí sẽ cấy ghép Implant, chúng tôi đặt các thanh kim loại vào: một, hai, ba, bốn, năm, sáu. Sáu thanh kim loại được nhìn thấy ở đây, và Implant sẽ được đặt tại những vị trí này. Sau đó, máng hướng dẫn X-quang sẽ được tháo ra.
+Dựa vào đó, một máng hướng dẫn X-quang được chế tác. Thầy đặt 6 thanh kim loại vào đúng vị trí dự định cấy Implant, sau đó tháo máng này ra.[cite: 1]
 
 68
 00:26:20,000 --> 00:26:36,000
-Máng này được đưa vào miệng bệnh nhân và tiến hành chụp phim Panorama. Bạn có thể thấy rõ các thanh kim loại, Implant sẽ được cấy vào đúng các vị trí đó. Chúng ta đã biết chính xác chiều dài của các thanh kim loại này.
+Máng được gắn lại vào miệng bệnh nhân và chụp phim Panorama. Các em sẽ thấy rõ vị trí Implant tương lai qua các thanh kim loại đã biết trước chiều dài.[cite: 1]
 
 69
 00:26:36,000 --> 00:27:17,000
-Do đó, mức độ biến dạng do độ phóng đại theo chiều dọc có thể được xác định chính xác. Dựa vào đó, chúng ta sẽ chọn được đường kính và chiều dài của Implant. Sau khi xác định được các Implant, máng X-quang hay mẫu hướng dẫn X-quang sẽ được lấy ra và các thanh kim loại cũng được tháo bỏ. Máng hướng dẫn có lỗ sẽ được đưa vào miệng bệnh nhân, và các lỗ này sẽ làm nhiệm vụ dẫn đường cho mũi khoan.
+Từ đó, thầy tính được chính xác mức độ phóng đại để chọn kích thước Implant. Cuối cùng, các thanh kim loại được tháo ra, máng hướng dẫn có lỗ sẽ được dùng để dẫn đường mũi khoan.[cite: 1]
 
 70
 00:27:17,000 --> 00:27:41,000
-Đây có thể được coi là phiên bản rất sơ khai của máng hướng dẫn (template) - loại công cụ mà các bạn thấy được sử dụng trong phẫu thuật Implant hướng dẫn kỹ thuật số hiện nay. Trước đây, khi chúng ta chưa có công nghệ kỹ thuật số hay CBCT, đây là kỹ thuật tiên tiến nhất. Sau khi phẫu thuật, trên phim Panorama, bạn có thể thấy các Implant đã được đặt rất chính xác.
+Đây là phiên bản sơ khai nhất của máng hướng dẫn kỹ thuật số mà các em thấy hiện nay. Sau phẫu thuật, các em có thể thấy trên phim Panorama, Implant được đặt rất chính xác.[cite: 1]
 
 71
 00:27:41,000 --> 00:28:15,000
-Trong quá khứ, thông qua phim X-quang Panorama, máng X-quang, máng hướng dẫn phẫu thuật (surgical guide/stent)... hay gọi bằng bất kỳ tên nào khác; sau khi tháo bỏ các thanh kim loại, máng hướng dẫn phẫu thuật đã được sử dụng theo cách như vậy và nó là một bước hoàn toàn bắt buộc. Vì vậy, tôi muốn cho các bạn xem hình ảnh ngay sau phẫu thuật này, vị trí của các Implant là rất tốt.
+Ngày xưa, việc sử dụng máng hướng dẫn phẫu thuật chế tác từ phim Panorama là bước hoàn toàn bắt buộc. Các em thấy đấy, vị trí của các Implant ngay sau mổ là rất tốt.[cite: 1]
 
 72
 00:28:15,000 --> 00:28:32,000
-Và mối liên quan với các răng kế cận khá chính xác, tạo ra một độ ổn định ban đầu tốt. Sau đó, các trụ lành thương (healing abutments) được gắn vào và khâu lại. Phim Panorama vẫn có thể được sử dụng rất tích cực, và tôi muốn nhấn mạnh điều này.
+Nhờ độ ổn định ban đầu tốt, thầy đã gắn luôn trụ lành thương. Qua ca này, thầy muốn nhấn mạnh: phim Panorama vẫn đang đóng vai trò cực kỳ đắc lực.[cite: 1]
 
 73
 00:28:32,000 --> 00:28:54,000
-Nếu bạn quan sát trên phim Panorama và thấy có điều gì đó bất thường, một cấu trúc lạ hoặc tình trạng không quen thuộc xuất hiện. Xin đừng bỏ qua, điều đó có thể đồng nghĩa với một tình trạng bệnh lý.
+Nếu quan sát phim Panorama và thấy một cấu trúc hay tình trạng lạ, các em tuyệt đối đừng bỏ qua vì đó có thể là bệnh lý.[cite: 1]
 
 74
 00:28:54,000 --> 00:29:07,000
-Chúng ta nhìn vào phim Panorama gần như mỗi ngày. Do đó, nếu có điều gì sai lệch, điều gì đó không bình thường, bằng trực giác chúng ta có thể nắm bắt được nó, vì vậy đừng lờ đi.
+Chúng ta xem phim Panorama mỗi ngày. Nên nếu có gì bất thường, trực giác của các em sẽ nhận ra ngay, đừng bao giờ phớt lờ nó.[cite: 1]
 
 75
 00:29:07,000 --> 00:29:18,000
-Vậy là chúng tôi đã tiến hành chụp phim CT và phát hiện ra một khối u nguyên bào men (ameloblastoma).
+Nhờ sự cẩn thận đó, khi chụp CT, thầy trò ta đã phát hiện ra một khối u nguyên bào men (ameloblastoma).[cite: 1]
 
 76
 00:28:18,000 --> 00:29:42,000
-Chụp phim Panorama là một quy trình quan trọng hàng ngày. Dù hiện nay đã có CBCT, nhưng đối với phẫu thuật Implant, lập kế hoạch phẫu thuật hay kiểm tra kết quả phẫu thuật, phim Panorama vẫn đóng vai trò rất quan trọng. Nếu có điều gì bất ổn, một cấu trúc lạ nào đó được quan sát thấy, chúng ta cần phải ghi nhớ và cần phải đặt nghi vấn về nó.
+Dù CBCT đã phổ biến, phim Panorama vẫn là quy trình hàng ngày không thể thiếu. Bất cứ khi nào thấy cấu trúc lạ trên phim, các em phải đặt nghi vấn ngay.[cite: 1]
 
 77
 00:29:46,000 --> 00:29:59,000
-Cuối cùng là phim X-quang tiêu chuẩn, hay phim chụp quanh chóp chuẩn (periapical radiology).
+Cuối cùng là phim X-quang tiêu chuẩn, hay phim quanh chóp (periapical radiology).[cite: 1]
 
 78
 00:29:59,000 --> 00:30:09,000
-Hình ảnh phim Panorama ở vùng răng sau hàm trên và hàm dưới bên trái. Các Implant đã được cấy ghép vào.
+Đây là hình ảnh phim Panorama vùng răng sau hàm trên và dưới bên trái đã được cấy Implant.[cite: 1]
 
 79
 00:30:09,000 --> 00:30:13,000
-Nếu bạn muốn quan sát chi tiết hơn nữa...
+Nếu các em muốn quan sát chi tiết hơn nữa...[cite: 1]
 
 80
 00:30:13,000 --> 00:30:35,000
-Nếu bạn muốn quan sát chi tiết hơn nữa, phim Panorama là không đủ. Trong trường hợp đó, có thể chụp phim quanh chóp (periapical x-ray). Góc nhìn từ phim quanh chóp như vậy, hay phim chóp chuẩn, mang lại ưu điểm là cung cấp thông tin vô cùng chi tiết.
+Chỉ dùng phim Panorama là không đủ, chúng ta phải chụp phim quanh chóp. Ưu điểm tuyệt vời của phim chóp chuẩn là cung cấp thông tin cực kỳ sắc nét và chi tiết.[cite: 1]
 
 81
 00:30:35,000 --> 00:30:55,000
-Mặt khác, phim Panorama mang lại góc nhìn tổng thể rộng hơn, trong khi phim chóp răng chỉ bao quát một khu vực rất hẹp.
+Ngược lại với phim Panorama có độ bao phủ rộng, phim quanh chóp chỉ hiển thị được một khu vực rất nhỏ.[cite: 1]
 
 82
 00:30:55,000 --> 00:31:25,000
-Vì vậy, nhược điểm là thông tin chỉ giới hạn trong một phạm vi khu trú. Vậy tại sao nó lại cung cấp được thông tin chi tiết? Hãy thử so sánh với góc nhìn của Panorama, bạn có thể thấy rõ sự khác biệt giữa việc so sánh phim quanh chóp và phim toàn cảnh. Trên phim X-quang, hình ảnh trụ Implant, mối tương quan với xương và răng được hiển thị vô cùng chi tiết.
+Nhược điểm của nó là phạm vi khu trú. Nhưng bù lại, hình ảnh trụ Implant cũng như mối tương quan với xương và răng được hiển thị vô cùng chi tiết.[cite: 1]
 
 83
 00:31:25,000 --> 00:31:45,000
-Và rõ ràng, so với CBCT, thông tin này bị giới hạn. Độ bao phủ của hình ảnh bị thu hẹp, đó là điều chúng ta phải công nhận. Chúng ta đã xem qua CBCT, phim Panorama...
+Và tất nhiên, độ bao phủ hình ảnh của nó bị giới hạn rất nhiều so với CBCT. Chúng ta đã cùng đi qua CBCT, phim Panorama...[cite: 1]
 
 84
 00:31:45,000 --> 00:32:09,000
-Và quy trình chụp phim quanh chóp chuẩn. Khi nói đến phim X-quang, nhiều bác sĩ lo lắng về lượng bức xạ mà bệnh nhân phải phơi nhiễm là bao nhiêu, và thông tin này rất cần thiết khi chúng ta giải thích về X-quang cho bệnh nhân.
+...và phim quanh chóp chuẩn. Rất nhiều bác sĩ lo lắng về mức độ phơi nhiễm bức xạ, đây là kiến thức cần thiết để các em giải thích cho bệnh nhân.[cite: 1]
 
 85
 00:32:09,000 --> 00:32:45,000
-Nếu bạn xem biểu đồ này, giới hạn phơi nhiễm bức xạ cho phép của mỗi người mỗi năm được quy định là 1 Sievert. Nếu mức phơi nhiễm thấp hơn con số đó, nó được coi là an toàn; nếu vượt qua mức đó, nó được xem là có đôi chút rủi ro. Bạn có thể thấy, phim Panorama và CBCT có mức độ phơi nhiễm rất thấp. Phim quanh chóp chuẩn thậm chí còn thấp hơn thế nhiều.
+Giới hạn an toàn là 1 Sievert/người/năm. Các em có thể thấy, mức phơi nhiễm của Panorama và CBCT là rất thấp, phim quanh chóp thậm chí còn thấp hơn nữa.[cite: 1]
 
 86
 00:32:45,000 --> 00:33:11,000
-Đến mức nó thậm chí còn không xuất hiện trên biểu đồ này. Khi giải thích điều này cho bệnh nhân, có lẽ bạn có thể nói thế này: một chuyến bay khứ hồi đến châu Âu còn làm bạn phơi nhiễm với bức xạ nhiều hơn cả chụp X-quang nha khoa. Điều đó có nghĩa là các quy trình chụp X-quang nha khoa là cực kỳ an toàn.
+Các em có thể giải thích với bệnh nhân rằng: một chuyến bay khứ hồi đi châu Âu còn nhiễm xạ nhiều hơn cả chụp X-quang nha khoa. Điều đó chứng tỏ chúng cực kỳ an toàn.[cite: 1]
 
 87
 00:33:17,000 --> 00:33:49,000
-Chụp cắt lớp chùm tia hình nón (CBCT), hay CT nha khoa, đang là xu hướng kỹ thuật số gần đây. Nó là một yếu tố tuyệt đối cần thiết cho nha khoa kỹ thuật số. Nó hỗ trợ việc lập kế hoạch phẫu thuật chính xác, và kết quả phẫu thuật có thể được đánh giá chuẩn xác bằng CBCT. Không có CBCT, chúng ta không thể bàn đến vấn đề kỹ thuật số. Phim Panorama là quy trình cơ bản nhất.
+Tổng kết lại: CBCT là công cụ thiết yếu của nha khoa kỹ thuật số, giúp lập kế hoạch và đánh giá phẫu thuật chuẩn xác. Trong khi đó, Panorama là quy trình cơ bản nhất.[cite: 1]
 
 88
 00:33:49,000 --> 00:34:15,000
-Và nó có thể quét một vùng diện tích rộng lớn. Thông qua quá trình quét diện rộng này, răng, xương hàm, cấu trúc xương và mối quan hệ của chúng với các cấu trúc giải phẫu quan trọng có thể được xác định. Chiều cao xương tại khu vực sẽ đặt Implant cũng có thể được xác định, và đây là một yếu tố rất quan trọng.
+Nó giúp ta quét toàn cảnh xương hàm, đánh giá tương quan giải phẫu và xác định sơ bộ chiều cao xương tại vùng cấy Implant.[cite: 1]
 
 89
 00:34:15,000 --> 00:34:34,000
-Sau khi chụp xong phim Panorama, các quy trình chụp X-quang tiếp theo có thể được lựa chọn. Chụp phim quanh chóp chuẩn có nhược điểm là độ bao phủ hẹp, nhưng nó lại mang đến những thông tin rất chi tiết.
+Dựa vào Panorama, ta sẽ chỉ định các phim X-quang chuyên sâu tiếp theo. Phim quanh chóp tuy phạm vi hẹp nhưng lại cực kỳ chi tiết.[cite: 1]
 
 90
 00:34:34,000 --> 00:34:41,000
-Vì thế, trong kỷ nguyên kỹ thuật số, CBCT là một công cụ cực kỳ cần thiết.
+Vì thế, trong kỷ nguyên kỹ thuật số, các công cụ này là hoàn toàn bắt buộc.[cite: 1]
 
 91
 00:34:44,000 --> 00:34:50,000
-Được trở thành "người đầu tiên" đối với một ai đó là một điều rất ý nghĩa.
+Trở thành "người đầu tiên" truyền đạt kiến thức cho một ai đó là điều rất ý nghĩa.[cite: 1]
 
 92
 00:34:50,000 --> 00:35:06,000
-Vì vậy, ngày hôm nay sẽ được tôi nhớ mãi như một ngày vô cùng đặc biệt, bởi vì đây là ngày đầu tiên tôi được gặp gỡ các bạn. Đối với bạn, cảm giác khi trở thành một chuyên gia Implant (Implant master) là như thế nào?
+Thầy sẽ nhớ mãi ngày hôm nay, ngày đầu tiên được gặp gỡ các em. Cảm giác của các em khi bước chân vào con đường trở thành chuyên gia Implant thế nào?[cite: 1]
 
 93
 00:35:06,000 --> 00:35:16,000
-Đây chính là bước đi đầu tiên. Tôi hy vọng các bạn sẽ nhớ đến ngày hôm nay như một khởi đầu. Tôi sẽ làm việc thật chăm chỉ để có thể gặp lại các bạn trong những lần tiếp theo.
+Đây là bước đi đầu tiên. Thầy hy vọng các em sẽ luôn ghi nhớ nó, và thầy trò ta sẽ còn đồng hành trong nhiều bài giảng tới.[cite: 1]
 
 94
 00:35:16,000 --> 00:35:20,000
-Xin trân trọng cảm ơn.
+Cảm ơn các em rất nhiều.[cite: 1]
