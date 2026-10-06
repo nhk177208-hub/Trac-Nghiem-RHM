@@ -9566,8 +9566,24 @@
             narrEnCache = { k: key, v: best };
             return best;
         }
+const NARR_EN_RATE = 0.95;   // giọng Anh thường nói nhanh hơn giọng Việt → hạ nhẹ cho đều nhịp (1 = không đổi)
+        const NARR_EN_PRON = /^(covid|laser|sars|aids|nasa|nato|ram|rom|peek|fifa|unesco|asean|gerd|lego|ielts|toefl|json|scrum)$/i;   // viết tắt đọc thành từ
+        function narrSpell(w) {   // viết tắt 2–5 chữ in hoa: ≤3 chữ hoặc không có nguyên âm → tách chữ cái để đọc từng chữ
+            if (!/^[A-Z]{2,5}$/.test(w) || NARR_EN_PRON.test(w)) return w;
+            return (w.length <= 3 || !/[AEIOU]/.test(w)) ? w.split('').join(' ') : w;
+        }
+        const narrSplitCache = new Map();
         function narrTokLang(core) {   // 'vi' | 'en' | 'amb' | 'n' (số/ký hiệu)
             if (!core) return 'n';
+            if (/[-\/_]/.test(core)) {
+                const ps = core.split(/[-\/_]+/).filter(p => p.replace(/[^A-Za-z]/g, '').length >= 2 || /[^\x00-\x7F]/.test(p));
+                if (ps.length) {
+                    const ls = ps.map(narrTokLang);
+                    if (ls.every(l => l === 'en')) return 'en';
+                    if (ls.some(l => l === 'vi')) return 'vi';
+                    return ls.some(l => l === 'en') ? 'en' : 'amb';
+                }
+            }
             if (/[^\x00-\x7F]/.test(core)) return 'vi';
             const letters = core.replace(/[^A-Za-z]/g, '');
             if (!letters) return 'n';
@@ -9580,6 +9596,8 @@
             return (parts.length === 1 && NARR_EN_JOIN.test(parts[0])) ? 'amb' : 'vi';
         }
         function narrSplitLang(text) {   // → [{en: bool, text}] giữ nguyên thứ tự và dấu câu
+            const hit = narrSplitCache.get(text);
+            if (hit) return hit.map(x => ({ en: x.en, text: x.text }));
             const toks = text.split(/(\s+)/).map(t => ({ t: t, ws: /^\s+$/.test(t) || t === '', l: 'n' }));
             const words = [];
             toks.forEach(k => { if (!k.ws) { k.l = narrTokLang(k.t.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, '')); words.push(k); } });
@@ -9589,7 +9607,7 @@
             }
             let cur = 'vi';
             words.forEach(k => { if (k.l === 'amb') k.l = 'vi'; if (k.l === 'n') k.l = cur; else cur = k.l; });
-            const segs = [];
+            let segs = [];
             let last = 'vi';
             toks.forEach(k => {
                 const l = k.ws ? last : k.l; last = l;
@@ -9597,7 +9615,9 @@
                 if (segs.length && segs[segs.length - 1].en === en) segs[segs.length - 1].text += k.t;
                 else segs.push({ en: en, text: k.t });
             });
-            return segs;
+            if (narrSplitCache.size > 800) narrSplitCache.clear();
+            narrSplitCache.set(text, segs);
+            return segs.map(x => ({ en: x.en, text: x.text }));
         }
         function narrBuildUtts(text, r, ur) {
             const en = narrCfg.en ? narrEnVoice(r.g) : null;
@@ -9606,11 +9626,12 @@
             const segs = en ? narrSplitLang(text) : [{ en: false, text: text }];
             const out = [];
             segs.forEach(sg => {
-                const t = sg.text.trim(); if (!/[\p{L}\p{N}]/u.test(t)) return;
+                let t = sg.text.trim(); if (!/[\p{L}\p{N}]/u.test(t)) return;
+                if (sg.en && en) t = t.replace(/\b[A-Z]{2,5}\b/g, narrSpell);
                 const u = new SpeechSynthesisUtterance(t);
                 if (sg.en && en) { u.voice = en; u.lang = en.lang || 'en-US'; u._en = true; }
                 else { u.lang = (r.voice && r.voice.lang) || 'vi-VN'; if (r.voice) u.voice = r.voice; }
-                u.pitch = u._en ? enPitch : r.pitch; u.rate = ur; out.push(u);
+                u.pitch = u._en ? enPitch : r.pitch; u.rate = u._en ? Math.min(3, Math.max(0.5, ur * NARR_EN_RATE)) : ur; out.push(u);
             });
             return out;
         }
