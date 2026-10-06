@@ -8487,6 +8487,7 @@
                                         <div class="sp-row"><span class="sp-label">Giọng</span><select class="narr-voice-select" onchange="setNarrCfg('voice', this.value)" onmousedown="narrEdgeNotice()" ontouchstart="narrEdgeNotice()" onfocus="narrEdgeNotice()"></select></div>
                                         <div class="sp-row"><label><input type="checkbox" class="narr-en-check" checked onchange="setNarrCfg('en', this.checked)"> Từ tiếng Anh / viết tắt đọc bằng giọng Anh</label></div>
                                         <div class="sp-row"><span class="sp-label">Liền mạch</span><input type="range" class="custom-range-slider narr-join-range" min="0" max="3" step="1" value="2" oninput="setNarrCfg('join', this.value)"><span class="sp-val narr-join-val">Gộp từ Anh ngắn</span></div>
+                                        <div class="sp-row"><span class="sp-label">Nghỉ Việt↔Anh</span><input type="range" class="custom-range-slider narr-gap-range" min="0" max="0.3" step="0.05" value="0" oninput="setNarrCfg('gap', this.value)"><span class="sp-val narr-gap-val">0.00s</span></div>
                                         <div class="sp-row"><span class="sp-label">Độ trầm</span><input type="range" class="custom-range-slider narr-pitch-range" min="0" max="100" step="5" value="50" oninput="setNarrCfg('pitch', this.value)"><span class="sp-val narr-pitch-val">50%</span></div>
                                         <div class="sp-row"><span class="sp-label">Tốc độ</span><input type="range" class="custom-range-slider narr-rate-range" min="0.5" max="2.5" step="0.1" value="1" oninput="setNarrCfg('rate', this.value)"><span class="sp-val narr-rate-val">1.0x</span></div>
                                         <div class="sp-row"><span class="sp-label">Âm gốc</span><input type="range" class="custom-range-slider narr-orig-range" min="0" max="100" step="1" value="0" oninput="setNarrCfg('orig', this.value)"><span class="sp-val narr-orig-val">0%</span></div>
@@ -9256,7 +9257,7 @@
 
 
         /* ===== THUYẾT MINH: đọc sub tiếng Việt (GitHub) bằng giọng máy, đồng bộ theo thời gian video ===== */
-        const NARR_DEF = { voice: 'm-auto', rate: 1, orig: 0, pitch: 50, sync: 'video', en: true, join: 2 };   // sync: 'video' = tự cân đối tốc độ video theo câu thuyết minh (mặc định) | 'voice' = tự tăng tốc giọng đọc cho trọn câu
+        const NARR_DEF = { voice: 'm-auto', rate: 1, orig: 0, pitch: 50, sync: 'video', en: true, join: 2, gap: 0 };   // sync: 'video' = tự cân đối tốc độ video theo câu thuyết minh (mặc định) | 'voice' = tự tăng tốc giọng đọc cho trọn câu
         // Chỉ dùng giọng tiếng Việt. Máy thường chỉ có 1–2 giọng Việt thật, nên ngoài giọng thật còn có các kiểu giọng Nam/Nữ (đổi cao độ).
         const NARR_UA_EDGE = (function () {
             try {
@@ -9303,6 +9304,7 @@
                 narrCfg.sync = sv.sync === 'voice' ? 'voice' : 'video';
                 narrCfg.en = sv.en !== false;
                 if (isFinite(+sv.join) && sv.join !== null && sv.join !== '') narrCfg.join = Math.min(3, Math.max(0, Math.round(+sv.join)));
+                if (isFinite(+sv.gap) && sv.gap !== null && sv.gap !== '') narrCfg.gap = Math.min(0.3, Math.max(0, Math.round(+sv.gap * 20) / 20));
                 if (isFinite(+sv.pitch) && sv.pitch !== null && sv.pitch !== '') narrCfg.pitch = Math.min(100, Math.max(0, +sv.pitch));
                 if (localStorage.getItem('ytNarrOrigV2')) narrCfg.orig = Math.min(100, Math.max(0, isFinite(+sv.orig) && sv.orig !== null && sv.orig !== '' ? +sv.orig : 0));   // lần đầu sau cập nhật: về mặc định 0%
             }
@@ -9385,6 +9387,8 @@ const NARR_JOIN_TXT = ['Tách rõ', 'Bỏ ngắt nghỉ', 'Gộp từ Anh ngắn
             document.querySelectorAll('.narr-pitch-val').forEach(el => { el.textContent = Math.round(narrCfg.pitch) + '%'; });
             document.querySelectorAll('.narr-en-check').forEach(el => { el.checked = !!narrCfg.en; });
             document.querySelectorAll('.narr-join-range').forEach(el => { el.value = narrCfg.join; });
+            document.querySelectorAll('.narr-gap-range').forEach(el => { el.value = narrCfg.gap; });
+            document.querySelectorAll('.narr-gap-val').forEach(el => { el.textContent = narrCfg.gap.toFixed(2) + 's'; });
             document.querySelectorAll('.narr-join-val').forEach(el => { el.textContent = NARR_JOIN_TXT[narrCfg.join] || ''; });
             const syncVoice = narrCfg.sync === 'voice';
             document.querySelectorAll('.narr-sync-video').forEach(el => { el.checked = !syncVoice; });
@@ -9402,6 +9406,7 @@ const NARR_JOIN_TXT = ['Tách rõ', 'Bỏ ngắt nghỉ', 'Gộp từ Anh ngắn
             else if (key === 'sync') narrCfg.sync = val === 'voice' ? 'voice' : 'video';
             else if (key === 'en') narrCfg.en = !!val;
             else if (key === 'join') narrCfg.join = Math.min(3, Math.max(0, Math.round(+val || 0)));
+            else if (key === 'gap') narrCfg.gap = Math.min(0.3, Math.max(0, Math.round((parseFloat(val) || 0) * 20) / 20));
             try { localStorage.setItem('ytNarrCfg', JSON.stringify(narrCfg)); } catch (e) {}
             if (key === 'sync') {
                 Object.keys(activeYtPlayers).forEach(id => { const o = activeYtPlayers[id]; if (o) narrRestoreRate(o); });   // trả tốc độ video về đúng mức người dùng chọn
@@ -9414,6 +9419,7 @@ const NARR_JOIN_TXT = ['Tách rõ', 'Bỏ ngắt nghỉ', 'Gộp từ Anh ngắn
             }
             if (key === 'pitch') document.querySelectorAll('.narr-pitch-val').forEach(el => { el.textContent = Math.round(narrCfg.pitch) + '%'; });
             if (key === 'join') document.querySelectorAll('.narr-join-val').forEach(el => { el.textContent = NARR_JOIN_TXT[narrCfg.join] || ''; });
+            if (key === 'gap') document.querySelectorAll('.narr-gap-val').forEach(el => { el.textContent = narrCfg.gap.toFixed(2) + 's'; });
             if (key === 'voice') narrRenderVoices();
             if (key === 'orig') Object.keys(activeYtPlayers).forEach(applyYtVolume);
         }
@@ -9657,17 +9663,27 @@ function narrJoinSegs(segs, lv) {   // lv 0..3 — xem mô tả ở đầu file 
             });
             return out;
         }
-        function narrPlayChain(utts, run, onDone) {   // đưa toàn bộ đoạn (Việt/Anh) vào hàng đợi một lượt; bị huỷ khi narr.run đổi
+        function narrPlayChain(utts, run, onDone) {   // gap = 0: xếp hàng liên tục | gap > 0: chờ gap giây giữa mỗi lần đổi giọng
             if (narr.run !== run) return;
             if (!utts.length) { if (onDone) onDone(); return; }
-            let left = utts.length, fin = false;
-            const end = () => { if (fin || narr.run !== run) return; if (--left <= 0) { fin = true; if (onDone) onDone(); } };
-            utts.forEach(u => {
-                const orig = u.onstart;
-                u.onstart = () => { if (narr.run === run) narr.cur = u; if (orig) orig(); };
-                u.onend = end; u.onerror = end;
-                try { window.speechSynthesis.speak(u); } catch (e) { end(); }
-            });
+            const gap = Math.max(0, +narrCfg.gap || 0) * 1000;
+            const hook = u => { const orig = u.onstart; u.onstart = () => { if (narr.run === run) narr.cur = u; if (orig) orig(); }; };
+            if (gap <= 0) {
+                let left = utts.length, fin = false;
+                const end = () => { if (fin || narr.run !== run) return; if (--left <= 0) { fin = true; if (onDone) onDone(); } };
+                utts.forEach(u => { hook(u); u.onend = end; u.onerror = end; try { window.speechSynthesis.speak(u); } catch (e) { end(); } });
+                return;
+            }
+            let i = 0;
+            const next = () => {
+                if (narr.run !== run) return;
+                if (i >= utts.length) { if (onDone) onDone(); return; }
+                const u = utts[i++], last = i >= utts.length; let f = false; hook(u); narr.cur = u;
+                const fin = () => { if (f || narr.run !== run) return; f = true; if (last) next(); else setTimeout(next, gap); };
+                u.onend = fin; u.onerror = fin;
+                try { window.speechSynthesis.speak(u); } catch (e) { fin(); }
+            };
+            next();
         }
         function narrSpeak(d, cue, text, t, video, now) { narrSpeakSys(d, cue, text, t, video, now, narrResolve()); }
         function narrSpeakSys(d, cue, text, t, video, now, rr) {
@@ -9693,7 +9709,7 @@ function narrJoinSegs(segs, lv) {   // lv 0..3 — xem mô tả ở đầu file 
                 if (narr.started && !hasEn) narrLearnCps(ck, len, (performance.now() - narr.t0) / 1000, ur);
             };
             try { window.speechSynthesis.cancel(); } catch (e) {}
-            narr.run = run; narr.cur = utts[0]; narr.speaking = true; narr.started = false; narr.cue = cue; narr.est = len / (cps * ur) * (hasEn ? 1.4 : 1); narr.schedAt = now;
+            narr.run = run; narr.cur = utts[0]; narr.speaking = true; narr.started = false; narr.cue = cue; narr.est = len / (cps * ur) * (hasEn ? 1.4 : 1) + Math.max(0, utts.length - 1) * (narrCfg.gap || 0); narr.schedAt = now;
             setTimeout(() => { if (narr.run === run && narr.idx === idx) narrPlayChain(utts, run, done); }, 40);
         }
         function narrCancel() {
