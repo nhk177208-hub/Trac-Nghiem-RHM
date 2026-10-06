@@ -15,15 +15,14 @@
             }
         })();
     
-        /* ===== BỘ SỬA GIỌNG TTS (MICROSOFT AN - NAMMINH - APPLE DÙNG GIỌNG MẶC ĐỊNH) ===== */
+        /* ===== BỘ SỬA GIỌNG TTS (APPLE CHỈ DÙNG DUY NHẤT 1 GIỌNG MẶC ĐỊNH) ===== */
         var isAppleDevice = /iPad|iPhone|iPod|Macintosh/i.test(navigator.userAgent || '');
 
         function getTTSVoice(lang) {
+            if (isAppleDevice) return null;
             lang = lang || 'vi';
             var voices = (window.speechSynthesis && window.speechSynthesis.getVoices) ? window.speechSynthesis.getVoices() : [];
             if (!voices || !voices.length) return null;
-            if (isAppleDevice) return null; // Người dùng Apple chỉ nghe 1 giọng mặc định duy nhất của máy
-
             if (lang === 'en') {
                 var enVoice = voices.find(function(x) { return /NamMinh/i.test(x.name); });
                 if (enVoice) return enVoice;
@@ -62,6 +61,19 @@
                 window.speechSynthesis.speak(utter);
             });
         }
+
+        window.speakText = function(text) {
+            if (!window.speechSynthesis || !text) return;
+            window.speechSynthesis.cancel();
+            var utter = new SpeechSynthesisUtterance(text);
+            if (!isAppleDevice) {
+                var isEnglish = /^[A-Za-z0-9\s.,!?'"]+$/.test(text.trim()) && /[a-zA-Z]{3}/.test(text.trim());
+                var v = getTTSVoice(isEnglish ? 'en' : 'vi');
+                if (v) utter.voice = v;
+                utter.lang = isEnglish ? 'en-US' : 'vi-VN';
+            }
+            window.speechSynthesis.speak(utter);
+        };
 
         if (typeof window !== 'undefined' && window.speechSynthesis) {
             window.speechSynthesis.onvoiceschanged = function() {
@@ -1198,47 +1210,53 @@
     </style>
 
 <script>
-/* Apple chỉ dùng giọng mặc định */
-window.getViVoice = function(lang) {
-    if (/iPad|iPhone|iPod|Macintosh/i.test(navigator.userAgent || '')) return null;
-    lang = lang || 'vi';
-    var voices = (window.speechSynthesis && window.speechSynthesis.getVoices) ? window.speechSynthesis.getVoices() : [];
-    if (!voices || !voices.length) return null;
-    
-    if (lang === 'en') {
-        var enV = voices.find(function(x) { return /NamMinh/i.test(x.name); });
-        if (enV) return enV;
-        enV = voices.find(function(x) { return (x.lang && x.lang.indexOf('en') === 0) && /male|david|mark|george|guy|natural/i.test(x.name); });
-        if (enV) return enV;
-        return voices.find(function(x) { return x.lang && x.lang.indexOf('en') === 0; }) || null;
-    }
-    
-    var viV = voices.find(function(x) { return /An/i.test(x.name) && ((x.lang && x.lang.indexOf('vi') >= 0) || /vietnamese/i.test(x.name)); });
-    if (viV) return viV;
-    viV = voices.find(function(x) { return (x.lang && x.lang.toLowerCase().replace('_', '-').indexOf('vi') === 0) || /vietnamese|vietnam/i.test(x.name); });
-    return viV || null;
-};
-
-window.speakText = function(text) {
-    if (!window.speechSynthesis || !text) return;
-    window.speechSynthesis.cancel();
-    var utter = new SpeechSynthesisUtterance(text);
-    if (!/iPad|iPhone|iPod|Macintosh/i.test(navigator.userAgent || '')) {
-        var isEnglish = /^[A-Za-z0-9\s.,!?'"]+$/.test(text.trim()) && /[a-zA-Z]{3}/.test(text.trim());
-        if (isEnglish) {
-            var enVoice = window.getViVoice('en');
-            if (enVoice) utter.voice = enVoice;
-            utter.lang = 'en-US';
-            utter.rate = 0.95;
+/* Tự động gắn tùy chọn điều chỉnh độ rộng cho popup nhắc mục Mindmap */
+(function() {
+    function setupPopWidthOption(pop) {
+        if (!pop || pop.querySelector('.pp-popwidth-row')) return;
+        var curW = localStorage.getItem('mindmap_pop_w') || '350';
+        pop.style.setProperty('--cm-pop-w', curW + 'px');
+        
+        var row = document.createElement('div');
+        row.className = 'pp-r pp-popwidth-row';
+        row.style.cssText = 'display:flex;align-items:center;gap:0.5rem;margin-top:0.4rem;padding-top:0.35rem;border-top:1px dashed rgba(125,211,252,0.3);';
+        row.innerHTML = '<span class="pp-l" style="width:8.6em;flex:none;font-weight:700;">Độ rộng khung:</span>' +
+            '<input type="range" min="260" max="550" step="10" value="' + curW + '" style="flex:1;min-width:0;cursor:pointer;">' +
+            '<span class="pp-v" style="width:3.6em;flex:none;text-align:right;color:#fcd34d;font-weight:800;">' + curW + 'px</span>';
+            
+        var rangeInput = row.querySelector('input');
+        var valSpan = row.querySelector('.pp-v');
+        rangeInput.addEventListener('input', function() {
+            var val = this.value;
+            valSpan.textContent = val + 'px';
+            pop.style.setProperty('--cm-pop-w', val + 'px');
+            localStorage.setItem('mindmap_pop_w', val);
+        });
+        
+        var targetPos = pop.querySelector('.pp-bg') || pop.querySelector('.pp-info') || pop.lastElementChild;
+        if (targetPos && targetPos.parentNode) {
+            targetPos.parentNode.insertBefore(row, targetPos);
         } else {
-            var viVoice = window.getViVoice('vi');
-            if (viVoice) utter.voice = viVoice;
-            utter.lang = 'vi-VN';
-            utter.rate = 1.0;
+            pop.appendChild(row);
         }
     }
-    window.speechSynthesis.speak(utter);
-};
+
+    var obs = new MutationObserver(function(muts) {
+        muts.forEach(function(m) {
+            m.addedNodes.forEach(function(node) {
+                if (node.nodeType === 1) {
+                    if (node.classList && node.classList.contains('cm-pop')) setupPopWidthOption(node);
+                    var inner = node.querySelectorAll ? node.querySelectorAll('.cm-pop') : [];
+                    inner.forEach(setupPopWidthOption);
+                }
+            });
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        obs.observe(document.body, { childList: true, subtree: true });
+        document.querySelectorAll('.cm-pop').forEach(setupPopWidthOption);
+    });
+})();
 </script>
 </head>
 <body class="bg-gray-100 min-h-screen font-sans text-gray-800" onload="initApp()" oncontextmenu="return false;">
