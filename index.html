@@ -1049,13 +1049,7 @@
         .yt-chapmap .cm-pop .pp-bg { margin-top: 0.4rem; position: relative; padding: 0.45rem 0; border-radius: 0.5rem; overflow: hidden; background: linear-gradient(135deg, #64748b, #0f172a 55%, #475569); text-align: center; }
         .yt-chapmap .cm-pop .pp-bg .yt-journey { position: relative; left: auto; right: auto; top: auto; }
         .yt-chapmap .cm-pop .pp-bg .yt-jnotice { position: relative; left: auto; top: auto; transform: none; opacity: 1; display: inline-block; max-width: 96%; }
-        .yt-chapmap .cm-pop.big { --cm-pop-w: 760px; left: 0.5rem; right: 0.5rem; margin-inline: auto; font-size: 14px; padding: 0.8rem 1rem; }
-        .yt-chapmap .cm-pop.big button { height: 34px; padding: 0 0.8rem; font-size: 14px; }
-        .yt-chapmap .cm-pop.big .pp-r { margin-top: 0.7rem; gap: 0.8rem; }
-        .yt-chapmap .cm-pop.big .pp-l { width: 11em; }
-        .yt-chapmap .cm-pop.big .pp-v { width: 4.4em; }
-        .yt-chapmap .cm-pop.big .pp-info { font-size: 13px; }
-        .yt-chapmap .cm-pop.big .pp-bg { min-height: 160px; display: flex; align-items: center; justify-content: center; }
+        
         .yt-journey { position: absolute; left: 0; right: 0; top: 0; z-index: 18; overflow: hidden; pointer-events: none; }
         .yt-journey .jr-c { position: absolute; top: 0; box-sizing: border-box; }
         .yt-journey .jr-c svg { position: absolute; left: 0; top: 0; overflow: visible; }
@@ -13039,7 +13033,7 @@ window.PGR = (function () {
     }
 
     /* ===== HÀNH TRÌNH (timeline mục lục trên đầu video) + NHẮC KHI CHUYỂN MỤC ===== */
-    var JR_DEF = { h: 44, w: 150, tip: 14, font: 12, tr: 45 }, JN_DEF = { font: 20, sec: 1, pause: false };
+    var JR_DEF = { h: 44, w: 150, tip: 14, font: 12, tr: 45 }, JN_DEF = { font: 20, sec: 1, pause: false, bw: 0 };
     function lsObj(k, def) { var o = null, r = {}, x; try { o = JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) {} for (x in def) r[x] = (o && typeof o[x] === typeof def[x]) ? o[x] : def[x]; return r; }
     function lsPut(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
     function lsFlag(k) { try { return localStorage.getItem(k) === '1'; } catch (e) { return false; } }
@@ -13102,13 +13096,13 @@ window.PGR = (function () {
     }
     var POP_ROWS = {
         jr: [['h', 'Độ cao', 24, 90, 1, 'px'], ['w', 'Độ rộng ô', 80, 320, 5, 'px'], ['tip', 'Độ hẹp (mũi nhọn)', 0, 40, 1, 'px'], ['font', 'Kích cỡ chữ', 9, 26, 1, 'px'], ['tr', 'Độ trong suốt', 0, 90, 5, '%']],
-        nt: [['font', 'Kích cỡ chữ', 12, 48, 1, 'px'], ['sec', 'Thời gian hiện', 0.25, 3, 0.25, 's']]
+        nt: [['font', 'Kích cỡ chữ', 12, 48, 1, 'px'], ['bw', 'Độ rộng khung', 0, 100, 5, '%'], ['sec', 'Thời gian hiện', 0.25, 3, 0.25, 's']]
     };
     function popFill(pid, pop) {
         var kind = pop.getAttribute('data-k'), cfg = kind === 'jr' ? JR : JN, d = activeYtPlayers[pid], w = wrap(pid);
         POP_ROWS[kind].forEach(function (r) {
             var inp = pop.querySelector('input[data-k="' + r[0] + '"]'); if (!inp) return;
-            inp.value = cfg[r[0]]; inp.parentNode.querySelector('.pp-v').textContent = (r[0] === 'sec' ? Number(cfg.sec).toFixed(2) : cfg[r[0]]) + r[5];
+            inp.value = cfg[r[0]]; inp.parentNode.querySelector('.pp-v').textContent = (r[0] === 'sec' ? Number(cfg.sec).toFixed(2) : (kind === 'nt' && r[0] === 'bw' && !cfg.bw) ? 'Auto' : cfg[r[0]] + r[5]);
         });
         var ck = pop.querySelector('input[data-k="pause"]'); if (ck) ck.checked = !!cfg.pause;
         var bg = pop.querySelector('.pp-bg'), info = pop.querySelector('.pp-info'); if (!bg || !d || !d.chapters || !d.chapters.length) return;
@@ -13119,8 +13113,8 @@ window.PGR = (function () {
             var pv = bg.querySelector('.yt-journey'); if (!pv) { pv = document.createElement('div'); pv.className = 'yt-journey'; bg.appendChild(pv); }
             jrDraw(pv, bg.clientWidth || 320, d, act);
         } else {
-            info.textContent = 'Popup hiện giữa video mỗi khi sang phần mới; khung tự to theo cỡ chữ.';
-            bg.innerHTML = '<div class="yt-jnotice show" style="font-size:' + JN.font + 'px"><div class="jn-no"></div><div class="jn-tt"></div></div>';
+            info.textContent = 'Popup hiện giữa video mỗi khi sang phần mới. Độ rộng khung = % bề ngang video (Auto = vừa chữ).';
+            bg.innerHTML = '<div class="yt-jnotice show" style="font-size:' + JN.font + 'px' + (JN.bw ? ';width:' + Math.min(96, JN.bw) + '%' : '') + '"><div class="jn-no"></div><div class="jn-tt"></div></div>';
             bg.querySelector('.jn-no').textContent = 'MỤC ' + c.no; bg.querySelector('.jn-tt').textContent = jrTitle(d, c);
         }
     }
@@ -13131,7 +13125,7 @@ window.PGR = (function () {
         var def = kind === 'jr' ? JR_DEF : JN_DEF, key = kind === 'jr' ? 'ytjr_cfg' : 'ytjn_cfg', cfg = kind === 'jr' ? JR : JN;
         var bar = m.querySelector('.cm-bar'); m.style.setProperty('--cm-pop-top', (bar.offsetHeight + 4) + 'px');
         var pop = document.createElement('div'); pop.className = 'cm-pop'; pop.setAttribute('data-k', kind);
-        var h = '<div class="pp-h"><b>⚙ ' + (kind === 'jr' ? 'Cài đặt hành trình' : 'Cài đặt nhắc khi chuyển mục') + '</b><button type="button" data-p="big" title="Mở rộng / thu nhỏ khung cài đặt">⤢</button><button type="button" data-p="def">Mặc định</button><button type="button" data-p="x">✕</button></div>';
+        var h = '<div class="pp-h"><b>⚙ ' + (kind === 'jr' ? 'Cài đặt hành trình' : 'Cài đặt nhắc khi chuyển mục') + '</b><button type="button" data-p="def">Mặc định</button><button type="button" data-p="x">✕</button></div>';
         POP_ROWS[kind].forEach(function (r) { h += '<label class="pp-r"><span class="pp-l">' + r[1] + '</span><input type="range" data-k="' + r[0] + '" min="' + r[2] + '" max="' + r[3] + '" step="' + r[4] + '"><span class="pp-v"></span></label>'; });
         if (kind === 'nt') h += '<label class="pp-r pp-ck"><input type="checkbox" data-k="pause"><span>Tạm dừng video khi hiện thông báo</span></label>';
         pop.innerHTML = h + '<div class="pp-info"></div><div class="pp-bg"></div>';
@@ -13142,10 +13136,8 @@ window.PGR = (function () {
         pop.addEventListener('click', function (e) {
             var b = e.target.closest && e.target.closest('button[data-p]'); if (!b) return;
             if (b.getAttribute('data-p') === 'x') { pop.remove(); jrPaintBar(pid); return; }
-            if (b.getAttribute('data-p') === 'big') { var isBig = pop.classList.toggle('big'); try { localStorage.setItem('ytcm_pop_big', isBig ? '1' : '0'); } catch (er) {} b.textContent = isBig ? '⤡' : '⤢'; popFill(pid, pop); return; }
             var x; for (x in def) cfg[x] = def[x]; lsPut(key, cfg); popFill(pid, pop); if (kind === 'jr') jrAll(true);
         });
-        if (lsFlag('ytcm_pop_big')) { pop.classList.add('big'); var bb = pop.querySelector('button[data-p="big"]'); if (bb) bb.textContent = '⤡'; }
         m.appendChild(pop); popFill(pid, pop);
     }
     // popup giữa video khi sang phần mới của mục lục
@@ -13154,7 +13146,7 @@ window.PGR = (function () {
         var d = activeYtPlayers[pid], w = wrap(pid), c = d && d.chapters && d.chapters[i]; if (!c || !w || w.classList.contains('chap-open')) return;
         var scr = w.querySelector('.custom-yt-screen'); if (!scr) return;
         var el = scr.querySelector('.yt-jnotice'); if (!el) { el = document.createElement('div'); el.className = 'yt-jnotice'; scr.appendChild(el); }
-        el.style.fontSize = JN.font + 'px'; el.innerHTML = '<div class="jn-no"></div><div class="jn-tt"></div>';
+        el.style.fontSize = JN.font + 'px'; el.style.width = JN.bw ? JN.bw + '%' : ''; el.style.maxWidth = JN.bw ? '100%' : ''; el.innerHTML = '<div class="jn-no"></div><div class="jn-tt"></div>';
         el.firstChild.textContent = 'MỤC ' + c.no; el.lastChild.textContent = jrTitle(d, c);
         void el.offsetWidth; el.classList.add('show'); clearTimeout(d._jnT);
         var st = -9; try { st = d.player.getPlayerState(); } catch (e) {}
