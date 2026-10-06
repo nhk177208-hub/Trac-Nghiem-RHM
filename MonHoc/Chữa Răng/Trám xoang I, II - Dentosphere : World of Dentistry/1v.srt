@@ -1,267 +1,1095 @@
 1
-00:00:02,480 --> 00:00:06,080
-Chào buổi sáng các em.
+00:00:03,199 --> 00:00:09,840
+Chào buổi sáng các em, chào mừng đến với buổi học về nha khoa thẩm mỹ.
 
 2
-00:00:04,000 --> 00:00:24,240
-Trong buổi học hôm nay, anh em chúng ta sẽ tập trung vào các tổn thương mặt bên ở nhóm răng sau, và các em sẽ học cách thực hiện phục hình thẩm mỹ cho những sang thương sâu răng này bằng composite nha khoa.
+00:00:07,680 --> 00:00:20,000
+Từ hôm nay, chúng ta sẽ bắt đầu các quy trình phục hình thẩm mỹ răng sau, bao gồm sâu răng loại một, loại hai và loại sáu.
 
 3
-00:00:21,840 --> 00:00:46,239
-Mặc dù hệ thống composite và hệ thống dán đã có những cải tiến vượt bậc kể từ khi ra đời, việc phục hình răng sau vẫn đòi hỏi kỹ thuật thao tác cẩn thận để tránh rò rỉ vi kẽ, ê buốt sau trám, hoặc tạo hình giải phẫu không lý tưởng.
+00:00:16,960 --> 00:00:25,599
+Anh sẽ cùng các em thảo luận riêng biệt về từng quy trình này nhé.
 
 4
-00:00:43,520 --> 00:00:59,199
-Sự khít sát bờ viền và ngăn ngừa rò rỉ vi kẽ là quan trọng nhất ở bờ nướu, vốn được quyết định bởi chính mức độ lan rộng của sang thương.
+00:00:23,519 --> 00:00:31,840
+Giống như mọi phương pháp điều trị, chẩn đoán chính xác là bước bắt buộc trước khi tiến hành.
 
 5
-00:00:56,480 --> 00:01:12,640
-Việc tạo điểm tiếp xúc thích hợp khi trám composite xoang loại 2 có thể đặc biệt thử thách khi sang thương lan rộng nhiều hơn về phía nướu.
+00:00:28,800 --> 00:00:48,559
+Mặc dù nguyên nhân đổi màu răng có thể khó xác định, nhưng như chúng ta đã bàn ở buổi trước, có nhiều phương pháp điều trị, bao gồm cả thủ thuật thẩm mỹ bảo tồn và không bảo tồn.
 
 6
-00:01:10,240 --> 00:01:21,439
-Ở những sang thương nông hơn như trường hợp này, các em sẽ thấy dễ xử lý hơn tương đối nhiều nhờ vào mối tương quan thuận lợi với các mô lân cận.
+00:00:46,079 --> 00:00:55,600
+Trong nhóm các thủ thuật thẩm mỹ bảo tồn, chúng ta đã chia làm hai nhóm phương pháp.
 
 7
-00:01:21,759 --> 00:01:36,560
-Kích thước sang thương liên quan trực tiếp đến tiên lượng, vì khi đó việc đặt đai trám sẽ dễ dàng hơn, giúp giữ chặt và bít kín tối ưu ở thềm nướu.
+00:00:52,879 --> 00:01:07,520
+Thứ nhất là quy trình điều trị không xâm lấn, nghĩa là chúng ta không dùng tay khoan tốc độ cao, mà đúng với định nghĩa, nó hoàn toàn không xâm lấn.
 
 8
-00:01:36,799 --> 00:01:48,960
-Khi kích thước sang thương lớn hơn và lan rộng sâu hơn về phía nướu, tình huống lâm sàng sẽ càng trở nên thử thách.
+00:01:05,199 --> 00:01:18,000
+Tiếp theo là xâm lấn tối thiểu, khi chúng ta chỉ mài mô răng tính bằng micromét, ví dụ từ ba trăm đến bốn trăm micromét.
 
 9
-00:01:46,320 --> 00:02:02,399
-Khi xoang trám được mở rộng, các em phải luôn ghi nhớ hình thể kháng lực cũng như các yếu tố liên quan đến dán trong quá trình sửa soạn, đặt khuôn và phục hình.
+00:01:15,280 --> 00:01:24,240
+Những loại thủ thuật này được chúng ta gọi là quy trình thẩm mỹ bảo tồn xâm lấn tối thiểu.
 
 10
-00:02:00,079 --> 00:02:13,920
-Bởi vì bất cứ khi nào có liên quan đến chân răng, chúng ta sẽ gặp một số vấn đề về dán do hàm lượng khoáng ít hơn, có thể là chúng ta đang cố dán lên xê-măng.
+00:01:21,600 --> 00:01:31,840
+Bao gồm cả các thủ thuật thẩm mỹ xâm lấn, chúng ta sẽ giải quyết từng tình trạng lâm sàng cụ thể.
 
 11
-00:02:11,440 --> 00:02:21,680
-Đồng thời, ngà chân răng vốn đã có hàm lượng khoáng rất thấp và lượng collagen cao hơn, đó là lý do tại sao các em sẽ gặp khó khăn khi dán.
+00:01:30,159 --> 00:01:43,600
+Nói về chỉ định của trám composite xoang loại một, có một số chỉ định tuyệt đối khi thực hiện trám composite mặt nhai.
 
 12
-00:02:19,760 --> 00:02:33,440
-Tiếp theo sẽ là các vấn đề về cô lập, vì bất cứ khi nào có xoang loại hai, tùy thuộc vào kích thước, có thể tình cờ kèm theo tình trạng gai nướu bị viêm.
+00:01:41,280 --> 00:01:48,960
+Đó là các miếng trám có kích thước nhỏ và vừa, ưu tiên có đường hoàn tất nằm trên men răng.
 
 13
-00:02:31,519 --> 00:02:46,400
-Và những gai nướu viêm này sẽ tiết ra dịch viêm, gây cản trở lên bề mặt vừa được xói mòn hoặc mới được sửa soạn.
+00:01:46,640 --> 00:01:55,600
+Hầu hết các ca trám răng cối nhỏ hoặc răng cối lớn, đặc biệt khi vấn đề thẩm mỹ được coi trọng.
 
 14
-00:02:43,519 --> 00:03:02,159
-Một biến số khác là độ xuyên thấu của ánh sáng ở những vùng này; nếu xoang càng sâu, khả năng ánh sáng xuyên qua đúng cách càng thấp, dẫn đến mức độ chuyển hóa của composite sẽ kém hơn.
+00:01:51,920 --> 00:02:05,360
+Miếng trám không chịu toàn bộ các điểm chạm khớp cắn, hoặc miếng trám không có bất kỳ điểm chạm khớp cắn nào.
 
 15
-00:02:59,440 --> 00:03:10,959
-Và do mức độ chuyển hóa thấp, có thể dẫn đến các vấn đề về kết dính hoặc composite không được quang trùng hợp hoàn toàn.
+00:02:02,560 --> 00:02:10,160
+Miếng trám có thể được cô lập đúng cách trong suốt quá trình thực hiện.
 
 16
-00:03:08,879 --> 00:03:21,840
-Sẽ có nguy cơ xuất hiện sâu răng thứ phát cũng như các vấn đề về duy trì vệ sinh sau điều trị, vì tại vùng này cũng rất dễ xảy ra tình trạng dư bờ miếng trám.
+00:02:07,759 --> 00:02:15,120
+Một số phục hồi có vai trò làm nền móng cho bọc răng sứ hoặc tái tạo cùi răng.
 
 17
-00:03:19,040 --> 00:03:35,360
-Để tái tạo thành bên và nhồi composite xoang loại 2, các em cần đặt đai trám chuẩn xác để tạo điểm tiếp xúc tốt, do đó phải thực hiện đúng các bước xói mòn và dán keo men ngà.
+00:02:12,720 --> 00:02:22,080
+Một số miếng trám rất lớn được dùng để gia cố phần cấu trúc răng còn lại hoặc đã bị suy yếu.
 
 18
-00:03:34,560 --> 00:03:46,799
-Ngoài ra, việc đắp composite từng lớp và hoàn tất cẩn thận là cực kỳ quan trọng.
+00:02:19,360 --> 00:02:27,760
+Và trong các trường hợp mà bệnh nhân có băn khoăn về vấn đề tài chính.
 
 19
-00:03:43,680 --> 00:03:58,319
-Việc tạo ra các điểm tiếp xúc khít sát và đúng giải phẫu thường khó đạt được với phục hình composite, vì vật liệu này không thể nhồi nén cứng như amalgam.
+00:02:25,920 --> 00:02:36,400
+Nói về chống chỉ định của trám composite, đó là khi vị trí làm việc không thể cô lập đúng cách.
 
 20
-00:03:55,599 --> 00:04:14,560
-Nếu các em dùng đai trám amalgam phẳng cho phục hình composite, nó thường tạo ra một điểm tiếp xúc thẳng nằm ở một phần ba mặt nhai của răng, dẫn đến tình trạng thiếu độ phồng giải phẫu.
+00:02:32,800 --> 00:02:41,440
+Các em lưu ý, cô lập là khâu quan trọng nhất của bất kỳ ca trám composite nào.
 
 21
-00:04:12,239 --> 00:04:26,960
-Như các em thấy trong minh họa này, nếu anh dùng đai trám phẳng, nó sẽ không tạo ra được tiếp xúc bên có độ cong tự nhiên, dẫn đến một điểm tiếp xúc phẳng không hề lý tưởng.
+00:02:38,720 --> 00:02:48,400
+Chống chỉ định tiếp theo là khi có lực nhai quá lớn ở những bệnh nhân có thói quen cận chức năng.
 
 22
-00:04:26,960 --> 00:04:33,120
-Việc phục hình bị thiếu độ phồng giải phẫu sẽ dẫn đến tình trạng kích thích quá mức các mô nướu lân cận.
+00:02:46,560 --> 00:02:55,040
+Hoặc khi tất cả các điểm chạm khớp cắn chỉ nằm trên vật liệu composite.
 
 23
-00:04:33,440 --> 00:04:47,520
-Hệ thống đai trám dành cho vật liệu composite được thiết kế chuyên biệt để tạo ra các mặt bên cong và vùng tiếp xúc khít sát.
+00:02:52,800 --> 00:02:59,280
+Và vệ sinh răng miệng kém cũng là một trong những chống chỉ định của việc trám composite.
 
 24
-00:04:42,720 --> 00:04:52,160
-Hệ thống này thường bao gồm các dải đai trám mỏng được uốn cong và vòng chêm tách răng.
+00:02:58,000 --> 00:03:15,920
+Khi nói về ưu điểm của trám composite, chúng ta biết rằng chúng đều đạt tính thẩm mỹ cao, là vật liệu có màu giống răng, và giúp loại bỏ mô răng một cách bảo tồn.
 
 25
-00:04:49,520 --> 00:05:06,800
-Các em có thể thấy nó tạo ra độ phồng tối ưu ở vùng tiếp xúc bên, nên sau khi phục hình xong, chúng ta sẽ có một điểm tiếp xúc đúng giải phẫu và lý tưởng.
+00:03:13,440 --> 00:03:26,799
+Chúng ta không mài răng theo quan điểm mài mở rộng để phòng ngừa mà Black đã mô tả.
 
 26
-00:05:04,160 --> 00:05:16,240
-Nói về chỉ định, những điều này gần như giống hệt các chỉ định khi thực hiện phục hình composite ở vùng răng sau nói chung.
+00:03:23,760 --> 00:03:30,159
+Thay vào đó, chúng ta chỉ lấy đi riêng phần bị tổn thương mà thôi.
 
 27
-00:05:13,759 --> 00:05:23,120
-Xin nhắc lại, các phục hình từ nhỏ đến trung bình, tốt nhất là nằm trong giới hạn bờ men, luôn được khuyến cáo.
+00:03:26,799 --> 00:03:35,920
+Kỹ thuật này tương đối dễ dàng và quá trình sửa soạn cũng ít phức tạp hơn.
 
 28
-00:05:20,880 --> 00:05:30,080
-Đa phần áp dụng cho phục hình răng cối nhỏ và cối lớn, đặc biệt là khi yêu cầu về thẩm mỹ ở mức độ cao.
+00:03:32,959 --> 00:03:42,000
+Nó cung cấp khả năng cách nhiệt, giảm vi kẽ, và có thêm một số lợi ích từ chính hệ thống keo dán.
 
 29
-00:05:27,600 --> 00:05:38,560
-Một phục hình không chịu toàn bộ các điểm tiếp xúc mặt nhai nhìn chung sẽ yếu hơn.
+00:03:40,239 --> 00:03:53,760
+Ví dụ như giảm sâu răng tái phát, giảm nhạy cảm sau điều trị, tăng độ lưu giữ và tăng cường sức mạnh cho phần cấu trúc răng còn lại.
 
 30
-00:05:35,680 --> 00:05:47,520
-Và nên áp dụng cho phục hình không chịu lực khớp cắn quá mức, hoặc bệnh nhân không mắc các thói quen cận chức năng như nghiến răng.
+00:03:51,120 --> 00:03:58,560
+Khi nói về nhược điểm, hầu hết các nhược điểm đều liên quan đến vật liệu.
 
 31
-00:05:45,600 --> 00:05:59,280
-Cần đảm bảo răng có thể được cô lập tốt trong quá trình thực hiện; nếu các em không thể cô lập đầy đủ, tiên lượng cho những phục hình này sẽ rất kém.
+00:03:57,680 --> 00:04:05,920
+Nếu các em không dùng đúng vật liệu được khuyến cáo, hiện tượng mòn khu trú sẽ xảy ra nhiều hơn.
 
 32
-00:05:56,800 --> 00:06:10,800
-Một số phục hình có thể dùng làm cùi giả bảo vệ mão răng, và một số phục hình rất lớn được dùng để gia cố cho cấu trúc răng còn lại hoặc đã suy yếu.
+00:04:03,519 --> 00:04:13,120
+Nếu không thao tác đúng như hướng dẫn, sẽ xảy ra các hiệu ứng do co ngót trùng hợp.
 
 33
-00:06:08,960 --> 00:06:20,960
-Khi vùng thao tác không thể cô lập đúng cách, như anh đã nói, thì đó thuộc vào nhóm chống chỉ định.
+00:04:10,239 --> 00:04:25,280
+Nếu vật liệu không tốt, hệ số giãn nở nhiệt tuyến tính có thể thay đổi, và tính sinh học của một số thành phần như hema vẫn chưa rõ ràng.
 
 34
-00:06:18,080 --> 00:06:25,759
-Bởi vì nếu các em vẫn cố trám, composite ở vùng nướu sẽ ít được quang trùng hợp nhất, và có nguy cơ cao thất bại trong việc dán tại vùng đó.
+00:04:23,280 --> 00:04:28,800
+Vật liệu này đòi hỏi nhiều thời gian thực hiện hơn so với amalgam.
 
 35
-00:06:25,759 --> 00:06:42,479
-Vì vậy, luôn chống chỉ định; thay vào đó các em nên thử kỹ thuật sandwich bằng glass ionomer lai (RMGIC) ở vùng này trước khi đắp composite.
+00:04:27,600 --> 00:04:31,199
+Và nó cũng nhạy cảm với kỹ thuật hơn nhiều.
 
 36
-00:06:39,840 --> 00:06:51,280
-Bất cứ khi nào có lực nhai lớn do thói quen cận chức năng, điều này cũng nằm trong nhóm chống chỉ định.
+00:04:28,800 --> 00:04:41,960
+Các em cần xoi mòn, bôi primer, dán keo, đắp composite, tạo tiếp điểm mặt bên, hoàn tất và đánh bóng, đồng thời đắt tiền hơn amalgam.
 
 37
-00:06:48,639 --> 00:07:01,840
-Với những bệnh nhân có tính nhạy cảm sâu răng cao và vệ sinh răng miệng kém, composite hoàn toàn chống chỉ định trong các tình huống này.
+00:04:42,560 --> 00:04:50,639
+Được rồi, chúng ta hãy thảo luận về các kỹ thuật lâm sàng của trám composite xoang loại một.
 
 38
-00:06:59,599 --> 00:07:11,680
-Nói tóm lại, khi bàn về ưu điểm, tính thẩm mỹ luôn là điểm cộng số một.
+00:04:48,240 --> 00:04:53,977
+Quy trình lâm sàng ban đầu, bước đầu tiên và quan trọng nhất, chính là so màu răng.
 
 39
-00:07:09,280 --> 00:07:22,479
-Tiếp theo là chúng ta không cần mài bỏ nhiều mô răng như khi trám amalgam, vốn đòi hỏi một hình thể xoang nghiêm ngặt để đạt được sự lưu giữ và kháng lực lý tưởng.
+00:04:53,977 --> 00:05:10,880
+Phải xác định màu răng trước khi răng bị làm khô kéo dài, vì răng mất nước sẽ trở nên sáng hơn và giảm độ trong mờ.
 
 40
-00:07:21,520 --> 00:07:38,560
-Còn với composite, việc sửa soạn xoang sẽ dễ dàng và bớt phức tạp hơn; đồng thời nhờ hệ thống dán, nó tạo ra lớp cách ly và bản thân composite cũng là một vật liệu cách nhiệt.
+00:05:08,320 --> 00:05:25,759
+Chúng ta có thể mài răng rất ít hoặc không mài, cần làm sạch vị trí bằng bột đánh bóng pumice để loại bỏ màng sinh học, mảng bám, mảng bám màu bề mặt, và đôi khi lấy cao răng cũng rất quan trọng.
 
 41
-00:07:36,880 --> 00:07:51,919
-Sử dụng hệ thống keo dán giúp giảm thiểu nguy cơ rò rỉ vi kẽ, và chúng ta cũng đang gia cố lại cấu trúc mô răng còn lại nhờ vào composite và nha khoa dán.
+00:05:23,759 --> 00:05:31,520
+Nắm rõ sự tương quan khớp cắn là điều tối quan trọng để đạt được phục hồi tối ưu.
 
 42
-00:07:49,520 --> 00:08:13,440
-Về nhược điểm, nếu không cẩn thận, các em sẽ gặp hiệu ứng co rút khi trùng hợp, gây ê buốt sau trám hoặc sút mối dán nếu không tuân thủ nghiêm ngặt các hướng dẫn trong quá trình sửa soạn, xói mòn và bôi keo dán.
+00:05:30,000 --> 00:05:43,520
+Sau đó, chúng ta tiến hành gây tê tại chỗ, tại sao? Vì nó mang lại trải nghiệm dễ chịu, không bị gián đoạn, và cũng giảm tiết nước bọt đáng kể.
 
 43
-00:08:11,360 --> 00:08:33,039
-Một số loại vật liệu có độ dai phá hủy thấp, kỹ thuật thực hiện nhạy cảm và tốn thời gian hơn so với amalgam, chưa kể chi phí cũng cao hơn, đó là những nhược điểm cần lưu ý.
+00:05:41,039 --> 00:05:47,440
+Cô lập là bước cực kỳ quan trọng để trám composite thành công.
 
 44
-00:08:29,919 --> 00:08:44,000
-Do đó, vấn đề số một khi dùng composite cho xoang loại 2 là rất khó (dù không phải là không thể) để đạt được sự kiểm soát độ ẩm tốt.
+00:05:45,840 --> 00:05:57,039
+Mặc dù vẫn có thể trám composite bằng cách cô lập gián tiếp với gòn cuộn, nhưng kết quả sẽ rất khó đoán.
 
 45
-00:08:42,399 --> 00:08:49,279
-Nhưng nếu các em dùng đê cao su (rubber dam), thì các em sẽ không phải lo lắng về điều đó nữa.
+00:05:54,800 --> 00:06:11,199
+Phần tiếp theo là sửa soạn răng, chúng ta chỉ lấy đi phần cấu trúc răng bị hỏng, chứ không mài mở rộng để phòng ngừa như Black đã mô tả.
 
 46
-00:08:46,080 --> 00:09:01,519
-Ngoài ra, ở những xoang kéo dài sâu dưới nướu, việc khít sát đai trám hay nâng bờ viền sâu đều là những thủ thuật rất khó nhằn.
+00:06:07,440 --> 00:06:18,880
+Và chúng ta cũng tạo hình dạng thuận tiện nhằm đặt composite theo cách được khuyến cáo.
 
 47
-00:09:05,120 --> 00:09:13,839
-Tiếp theo, anh em ta sẽ thảo luận về các kỹ thuật lâm sàng cho phục hình trám composite xoang loại 2.
+00:06:16,800 --> 00:06:24,800
+Sự lưu giữ của miếng trám composite luôn đạt được nhờ sự hỗ trợ của keo dán.
 
 48
-00:09:12,720 --> 00:09:23,760
-Như các em đã biết, màu răng là thông số quan trọng nhất khi tính thẩm mỹ là ưu tiên hàng đầu.
+00:06:30,000 --> 00:06:36,560
+Các em, chúng ta cùng bàn về một ca lâm sàng trám composite xoang loại một nhé.
 
 49
-00:09:20,080 --> 00:09:37,040
-Màu răng cần được xác định trước khi răng bị thổi khô quá lâu, vì khi mất nước, màu răng sẽ trở nên sáng hơn do sự suy giảm độ trong mờ.
+00:06:34,400 --> 00:06:47,199
+Như các em thấy, đây là răng cối lớn hàm dưới, bệnh nhân than phiền không thể nhai bằng răng này, và điều đó hoàn toàn đúng vì mặt nhai đang bị làm phẳng.
 
 50
-00:09:34,320 --> 00:09:53,680
-Khi mài ít hoặc không sửa soạn răng, các em cần làm sạch vùng thao tác bằng bột đánh bóng (pumice) để loại bỏ màng bám, vết dính bề mặt, cùng với vôi răng nếu có.
+00:06:46,400 --> 00:06:59,280
+Và các em biết rằng răng cối lớn tự nhiên không bao giờ có mặt nhai phẳng, nó luôn có múi, rãnh và trũng để hỗ trợ việc ăn nhai.
 
 51
-00:09:49,680 --> 00:10:03,519
-Nắm rõ tương quan khớp cắn trước phẫu thuật là cực kỳ quan trọng để có một phục hình tối ưu, vì vậy các em phải ghi dấu khớp cắn trước khi tiến hành trám.
+00:06:56,400 --> 00:07:07,039
+Nên chúng ta cần phục hồi lại răng này tự nhiên nhất có thể để bệnh nhân nhai được như răng thật.
 
 52
-00:10:00,720 --> 00:10:15,839
-Nên tiến hành gây tê tại chỗ để quá trình điều trị nhẹ nhàng, không bị gián đoạn, đồng thời nó cũng giúp giảm tiết nước bọt đáng kể.
+00:07:07,440 --> 00:07:20,160
+Các em lưu ý, trước khi bắt đầu quy trình, chúng ta cần ghi dấu khớp cắn, vì khớp cắn của bệnh nhân đã bị thay đổi bởi nha sĩ trước đó.
 
 53
-00:10:13,680 --> 00:10:29,120
-Việc cô lập là vô cùng quan trọng để ca trám composite thành công; mặc dù các em vẫn có thể dùng gòn cuộn và các phương pháp cô lập gián tiếp khác, nhưng kết quả sẽ rất khó lường.
+00:07:18,080 --> 00:07:27,520
+Vì vậy, việc duy trì khớp cắn tự nhiên trong những trường hợp này có thể sẽ khó khăn.
 
 54
-00:10:29,600 --> 00:10:41,360
-Trên hình ảnh minh họa này, các em có thể thấy cách đặt chêm vào răng; mỗi đai trám đều phải được cố định chắc chắn bằng một chêm kẽ răng.
+00:07:25,680 --> 00:07:37,759
+Do đó, trước hết chúng ta phải ghi lại các điểm chạm khớp cắn thực sự của bệnh nhân, và việc này được thực hiện bằng giấy cắn.
 
 55
-00:10:39,200 --> 00:10:54,240
-Chúng ta cần dùng chêm để duy trì sự khít sát của đai trám với răng và bờ nướu, giúp tránh tình trạng dư bờ và bảo vệ răng bên cạnh không bị mũi khoan tốc độ cao cắt trúng.
+00:07:34,639 --> 00:07:52,479
+Và nhớ chụp ảnh lại các dấu này, để khi điều chỉnh khớp cắn ở bước cuối, chúng ta biết cách duy trì những ghi nhận trước đó trên miếng trám hoàn thiện.
 
 56
-00:10:51,519 --> 00:11:00,360
-Không cần dùng lực chêm quá mạnh khi các em sử dụng thêm các khí cụ tách răng khác như vòng giữ đai.
+00:07:50,080 --> 00:08:00,560
+Điều này rất quan trọng, các em phải biết các điểm nhai nằm ở đâu, nó sẽ giúp ích rất nhiều cho việc điều chỉnh khớp cắn sau cùng.
 
 57
-00:11:02,160 --> 00:11:11,760
-Vì vậy, hãy chèn chêm ở khoang kẽ răng rộng từ phía má sang phía lưỡi hoặc từ phía lưỡi sang phía má.
+00:08:01,840 --> 00:08:07,599
+Tiếp theo là vấn đề chúng ta dùng mũi khoan nào để mở xoang.
 
 58
-00:11:10,399 --> 00:11:23,200
-Nói về lợi ích của việc đặt chêm, nó sẽ vô tình tạo ra sự tách kẽ nhẹ, giúp đè ép khối gai nướu kẽ răng và kiểm soát tình trạng chảy máu.
+00:08:07,599 --> 00:08:16,240
+Rõ ràng là mũi khoan tròn, có thể là mũi kim cương hoặc mũi carbide, tùy theo sở thích.
 
 59
-00:11:21,120 --> 00:11:33,519
-Nó ngăn ngừa rỉ dịch khe nướu, ép chặt đai trám ở vùng nướu và đảm bảo thiết lập các điểm tiếp xúc khít sát.
+00:08:14,080 --> 00:08:27,199
+Nhưng lời khuyên của anh cho người mới bắt đầu là các em phải dùng mũi khoan kim cương tròn vì nó dễ kiểm soát và dễ cầm chắc tay hơn.
 
 60
-00:11:34,800 --> 00:11:47,680
-Hãy suy nghĩ kỹ trước khi khoan; giờ chúng ta sẽ chuyển sang phần sửa soạn xoang răng, chêm tách các tiếp xúc bên.
+00:08:24,479 --> 00:08:36,800
+Nhưng với mũi carbide, các em có thể mài răng chỉ trong một phút, vì vậy hãy luyện tập với mũi carbide rồi hẵng dùng nó trong việc sửa soạn xoang sâu.
 
 61
-00:11:46,880 --> 00:11:58,560
-Để bảo vệ răng kế cận và ngăn ngừa tình trạng dư bờ ở miếng trám, các em hãy dùng tay khoan tốc độ cao để mở đường vào phần cấu trúc răng bị hỏng.
+00:08:34,560 --> 00:08:41,479
+Đối với trường hợp này, các em có thể dùng mũi khoan kim cương tròn, đây là một mũi khoan rất tốt.
 
 62
-00:11:56,240 --> 00:12:08,480
-Sau khi loại bỏ cấu trúc hỏng và tạo hình thể thuận tiện cho phục hình, sự lưu giữ sẽ đạt được thông qua hệ thống dán.
+00:08:41,919 --> 00:08:53,120
+Việc tiếp theo là sửa soạn xoang sâu, và trong ca này anh dùng một mũi kim cương tròn nhỏ cùng với tay khoan xịt sương mù hơi và nước.
 
 63
-00:12:09,200 --> 00:12:20,000
-Sửa soạn xoang loại 2 với vách trục nông hơn về phía tủy sẽ giúp các em bảo tồn cấu trúc mô răng tốt hơn rất nhiều.
+00:08:53,120 --> 00:09:03,600
+Tại sao phải xịt nước? Để chúng ta không làm khô ngà răng, vì ngà răng chứa nhiều nước và collagen, đồng thời có rất nhiều ống ngà.
 
 64
-00:12:17,680 --> 00:12:27,680
-Vách bên và vách nhai hơi hội tụ về phía mặt nhai sẽ cung cấp thêm hình thể lưu giữ chống lại các chuyển động theo chiều dọc.
+00:09:03,600 --> 00:09:15,839
+Nên nếu các em làm khô nó, ngà răng sẽ đẩy hết nước ra ngoài, dẫn đến nhạy cảm ngà, và lời than phiền thường xuyên nhất của bệnh nhân khi trám composite là ê buốt sau điều trị.
 
 65
-00:12:25,440 --> 00:12:35,279
-Khi chuẩn bị hộp mặt bên, góc bờ xoang cần tạo thành góc vuông với bề mặt men răng ở cả phía má và phía lưỡi.
+00:09:13,200 --> 00:09:21,760
+Đó là cách chúng ta xử lý vấn đề này: tuyệt đối không mài răng trong tình trạng khô.
 
 66
-00:12:33,120 --> 00:12:47,279
-Việc vát bờ (bevel) trên mặt nhai có thể tối ưu dựa theo hướng các trụ men, trong khi việc vát bờ ở mặt bên cần phải được thực hiện thật thận trọng.
+00:09:21,760 --> 00:09:30,000
+Chúng ta luôn dùng tia nước phun sương để làm mát ngà răng, giúp nước vẫn giữ nguyên vị trí của nó.
 
 67
-00:12:45,760 --> 00:12:53,480
-Thềm nướu cần phải mở rộng qua khỏi ranh giới điểm tiếp xúc về phía chóp, và nên được tạo hình kiểu khớp nối phẳng (butt joint).
+00:09:31,120 --> 00:09:34,880
+Tiếp đến là quy trình xoi mòn.
+
+68
+00:09:33,200 --> 00:09:43,120
+Như các em biết, men răng và ngà răng là hai bề mặt bản chất khác nhau, nên chúng ta cần hệ thống riêng biệt cho cả hai.
+
+69
+00:09:40,640 --> 00:09:52,240
+Vì men răng khoáng hóa cao hơn, ít nước hơn và không có collagen, chúng ta dùng kỹ thuật xoi mòn toàn bộ bằng loại axit mạnh nhất, sau đó có thể rửa sạch và làm khô men răng.
+
+70
+00:09:50,080 --> 00:09:59,839
+Sẽ không có vấn đề gì xảy ra, nhưng khi chuyển sang ngà răng, ngà răng có nhiều nước và collagen nên chúng ta không được làm khô nó.
+
+71
+00:09:59,839 --> 00:10:06,320
+Chúng ta cần một hệ thống vừa có thể xoi mòn vừa dán keo, mà không cần phải rửa và làm khô.
+
+72
+00:10:04,560 --> 00:10:16,079
+Kỹ thuật tự xoi mòn là phương pháp tốt nhất trong việc xoi mòn và dán ngà răng, đây cũng là hệ thống giúp hạn chế tối đa ê buốt sau điều trị.
+
+73
+00:10:14,480 --> 00:10:17,897
+Sẽ không có nhạy cảm sau điều trị khi các em dùng hệ thống tự xoi mòn.
+
+74
+00:10:17,897 --> 00:10:20,320
+Vậy nhé các em, xoi mòn toàn bộ cho men răng và tự xoi mòn cho ngà răng.
+
+75
+00:10:20,320 --> 00:10:27,440
+Thời gian là khoảng hai mươi giây, và với kỹ thuật xoi mòn toàn bộ, axit phosphoric ba mươi bảy phần trăm là loại rất thông dụng.
+
+76
+00:10:27,440 --> 00:10:34,399
+Nó có sẵn trên thị trường, là vật liệu phổ biến nhất mà các em có thể tìm thấy ở bất kỳ phòng khám nào.
+
+77
+00:10:32,480 --> 00:10:38,738
+Sau đó các em bôi keo dán, giống như trong hệ thống tự xoi mòn, chất xoi mòn và keo dán được tích hợp trong cùng một lọ.
+
+78
+00:10:38,738 --> 00:10:50,560
+Nhưng với xoi mòn toàn bộ, các em cần một hệ thống keo dán riêng khi xoi mòn và dán lên men răng, vì vậy có thể dùng tự xoi mòn lên men sau khi đã xoi mòn toàn bộ.
+
+79
+00:10:48,880 --> 00:10:56,925
+Điều quan trọng là khi bôi keo dán, các em phải bôi từ hai đến ba lớp để nó phủ kín tất cả các ống ngà.
+
+80
+00:10:56,925 --> 00:11:08,160
+Về cơ bản nó làm ướt toàn bộ ngà răng và không được để sót bất kỳ vùng nào không có keo dán đi tới, các em phải tuân thủ điều này.
+
+81
+00:11:05,839 --> 00:11:16,399
+Sau đó chiếu đèn khoảng hai mươi giây, và trước khi chiếu đèn, cần thổi khô nhẹ để giữ lại một lớp rất mỏng bám trên bề mặt răng.
+
+82
+00:11:16,480 --> 00:11:26,000
+Điều quan trọng nhất tiếp theo là cách lấp đầy xoang trước khi đi vào tạo hình khớp cắn.
+
+83
+00:11:22,880 --> 00:11:31,600
+Cách tốt nhất trong bước này là các em bơm một lớp composite lỏng dày khoảng một milimét ở đáy xoang.
+
+84
+00:11:31,600 --> 00:11:36,480
+Tại sao lại dùng composite lỏng? Vì nó có thể chảy len lỏi mọi nơi và thích ứng rất tốt.
+
+85
+00:11:36,480 --> 00:11:44,399
+Và các em có thể thấy trong hình ảnh là không hề có bọt khí, không có co ngót, không bị bong keo, các em có thể đánh giá toàn bộ bề mặt.
+
+86
+00:11:42,399 --> 00:11:49,200
+Sau đó các em đắp phần còn lại của xoang sâu bằng từng lớp hai milimét.
+
+87
+00:11:47,040 --> 00:11:55,519
+Mục đích cơ bản của việc đắp từng lớp hai milimét là để tránh hiện tượng co ngót trùng hợp.
+
+88
+00:11:53,440 --> 00:12:00,830
+Và các em à, khi chiếu đèn quang trùng hợp, hãy luôn tăng dần cường độ ánh sáng theo thời gian.
+
+89
+00:12:00,830 --> 00:12:08,800
+Bởi vì nếu dùng đèn quang trùng hợp công suất cao ngay lập tức, nó sẽ dẫn đến co ngót và gây nhạy cảm.
+
+90
+00:12:06,560 --> 00:12:19,120
+Nhưng nếu dùng loại đèn có chế độ tăng dần cường độ theo từng bước, các em có thể tránh được co ngót trùng hợp cũng như hiện tượng ê buốt sau điều trị.
+
+91
+00:12:16,639 --> 00:12:28,960
+Vậy nên trong bức ảnh đó, các em có thể quan sát miếng trám từ góc nghiêng, hoàn toàn không có khe hở, không co ngót, và nó thích ứng cực kỳ tốt.
+
+92
+00:12:28,960 --> 00:12:38,160
+Khi các em có những miếng trám thích ứng hoàn hảo như vậy, bệnh nhân sẽ không bao giờ than phiền về tình trạng ê buốt hay bong tróc miếng trám, nên các em phải làm được điều này.
+
+93
+00:12:38,160 --> 00:12:38,959
+Nhưng để làm được, các em cần có thiết bị phóng đại.
+
+94
+00:12:38,959 --> 00:12:48,320
+Chúng ta đang dùng gì ở phòng khám? Chúng ta không có thiết bị phóng đại, nên hoàn toàn không biết composite đang chảy tới đâu, composite lỏng đi về đâu, vậy nên các em cần phóng đại cho việc đó.
+
+95
+00:12:48,320 --> 00:12:55,519
+Các em cần được huấn luyện cách sử dụng kính lúp phóng đại, kính hiển vi, vân vân.
+
+96
+00:12:53,519 --> 00:12:55,999
+Tiếp theo, đây cơ bản là kỹ thuật đắp hình chiếc bánh pizza.
+
+97
+00:12:55,999 --> 00:13:04,280
+Và như chúng ta biết về bánh pizza, có rất nhiều miếng cắt trong đó, nhưng chúng đều bằng nhau về kích thước.
+
+98
+00:13:04,280 --> 00:13:12,480
+Tuy nhiên, cách chúng ta đắp tạo hình trên răng cối lớn này cũng theo kiểu pizza, nhưng các múi cắt trên răng lại không hề giống nhau.
+
+99
+00:13:12,480 --> 00:13:20,800
+Tạo hóa đã thiết kế răng cối lớn thành những khối khác biệt, mỗi múi răng có khối lượng, kích thước, thể tích và hình thái học hoàn toàn khác nhau.
+
+100
+00:13:20,800 --> 00:13:30,320
+Vì vậy trước hết, các em phải nghiên cứu kỹ hình thái học, thì mới có thể bắt chước trên miếng trám của mình.
+
+101
+00:13:28,160 --> 00:13:30,320
+Ví dụ ở răng cối lớn hàm dưới, chúng ta có năm múi răng.
+
+102
+00:13:30,320 --> 00:13:42,480
+Múi lớn nhất là múi gần ngoài, rồi đến múi gần trong, rồi múi xa trong, rồi múi xa ngoài, và sau cùng là múi xa.
+
+103
+00:13:40,160 --> 00:13:48,880
+Múi dễ tạo hình nhất là múi gần ngoài, cần lưu ý kỹ các mốc giải phẫu.
+
+104
+00:13:47,040 --> 00:13:53,519
+Các em chỉ cần lấy một lớp composite, đặt dọc theo múi răng và tạo hình bằng cây chóp nhựa.
+
+105
+00:13:53,519 --> 00:14:08,160
+Và các em có thể dùng thêm chút dung dịch làm trơn để múi răng thích ứng tốt hơn, nhưng đừng làm tăng thể tích so với giải phẫu ban đầu.
+
+106
+00:14:06,000 --> 00:14:16,079
+Đây là múi răng đồng đều và dễ tạo hình nhất, nhưng chúng ta phải nghiên cứu kỹ giải phẫu trước khi thực hiện.
+
+107
+00:14:13,839 --> 00:14:21,093
+Đến múi tiếp theo là múi xa ngoài, nó có hình dạng đặc trưng hình tam giác, nên các em không thể đắp thành hình chữ nhật được.
+
+108
+00:14:21,093 --> 00:14:29,627
+Vì vậy các em phải nhớ giới hạn của múi răng, không được để composite hoặc múi răng tràn sang các múi lân cận.
+
+109
+00:14:29,627 --> 00:14:38,519
+Phải giữ đúng đường viền cạnh, và điều này chỉ có thể làm được qua quá trình rèn luyện đúng cách, nhớ đừng tạo hình quá phồng.
+
+110
+00:14:38,519 --> 00:14:42,139
+Các em phải miết nó phẳng dọc theo các thành xoang, không bao giờ được đắp vượt lên trên thành.
+
+111
+00:14:42,139 --> 00:14:54,399
+Các em có thể thấy đường hoàn tất ở đây rất rõ ràng, không có composite bị dư, hãy ghi nhớ điều đó rồi các em sẽ thực hiện được.
+
+112
+00:14:51,600 --> 00:15:00,800
+Tiếp theo là múi gần trong và xa trong, cả hai múi này được tạo hình cùng lúc, và điều đó chỉ khả thi nếu các em thực sự thao tác cứng tay.
+
+113
+00:15:00,800 --> 00:15:04,880
+Nhưng với người mới bắt đầu, các em phải đắp theo từng múi một.
+
+114
+00:15:04,880 --> 00:15:13,440
+Và sau đó là chiếu đèn, dĩ nhiên mỗi lớp đắp cần chiếu đèn quang trùng hợp ít nhất hai mươi giây.
+
+115
+00:15:13,440 --> 00:15:21,920
+Hãy chiếu đèn thật kỹ, thậm chí chiếu lâu hơn một chút cũng không sao, hoàn toàn không có hại gì.
+
+116
+00:15:19,120 --> 00:15:26,453
+Nhưng chỉ có một điều duy nhất là đầu đèn không bao giờ được chạm vào mặt nhai.
+
+117
+00:15:26,453 --> 00:15:31,600
+Phải để cách mặt nhai một chút vì nó có thể làm vấy bẩn và hỏng tạo hình khớp cắn.
+
+118
+00:15:29,279 --> 00:15:42,320
+Nó cũng làm dơ đầu đèn quang trùng hợp, và hiệu suất của đèn sẽ bị giảm sau thủ thuật đó vì các em làm rất nhiều ca ở phòng khám.
+
+119
+00:15:40,079 --> 00:15:47,220
+Và sau đó các em hoàn thành việc tạo hình, múi xa là múi dễ làm nhất, nó cũng là múi nhỏ nhất, vậy là các em đã hoàn tất.
+
+120
+00:15:47,220 --> 00:15:58,240
+Và sau đó có thể đánh giá thấy rằng năm múi răng đã hoàn chỉnh, và mỗi múi đều có hình thái học chuẩn xác như những gì chúng ta đã học trong sách giải phẫu.
+
+121
+00:15:55,360 --> 00:16:06,399
+Hãy thực hiện theo các bước này, nhưng chỉ sau khi đã nghiên cứu kỹ hình thái học và thể tích chính xác của các múi răng.
+
+122
+00:16:06,839 --> 00:16:09,040
+Bước tiếp theo là hoàn tất và đánh bóng.
+
+123
+00:16:09,040 --> 00:16:15,160
+Sau khi thực hiện xong miếng trám, điều quan trọng nhất là làm thế nào để hoàn tất và đánh bóng.
+
+124
+00:16:15,160 --> 00:16:22,639
+Bởi vì nếu không được hoàn tất và đánh bóng kỹ lưỡng, miếng trám của các em sẽ không tồn tại được lâu.
+
+125
+00:16:20,480 --> 00:16:30,289
+Nó có thể dễ bắt màu, thức ăn có thể lắng đọng ở đó, và cuối cùng sẽ dẫn đến đổi màu, miếng trám kém chất lượng và bong sút.
+
+126
+00:16:30,289 --> 00:16:36,959
+Vì vậy, hoàn tất và đánh bóng là bước bắt buộc và cực kỳ quan trọng, và các em cũng cần rèn luyện kỹ năng này.
+
+127
+00:16:35,360 --> 00:16:43,463
+Anh xin chia sẻ rằng, đối với mặt ngoài miếng trám, các em cần một đĩa nhám thô để lấy đi composite dư thừa tràn qua các bờ múi răng.
+
+128
+00:16:43,463 --> 00:16:51,211
+Bởi vì nếu không lấy sạch, bệnh nhân có thể bị cộm vướng, họ sẽ than phiền khớp cắn không ổn và không thể nhai được.
+
+129
+00:16:51,211 --> 00:16:59,199
+Và nếu bệnh nhân về nhà với khớp cắn như vậy, cùng với những rìa miếng trám dư thừa, ngay hôm sau họ sẽ quay lại với một cơn đau.
+
+130
+00:16:57,120 --> 00:17:03,199
+Nên các em phải lấy đi mọi mảnh composite dư ở các thành xoang và khắp nơi.
+
+131
+00:17:03,519 --> 00:17:11,439
+Mặt bên trong của miếng trám sẽ được làm láng bằng mũi khoan kim cương mịn với thao tác thật nhẹ nhàng.
+
+132
+00:17:11,439 --> 00:17:18,480
+Các em không cần mài gọt, chỉ di chuyển mũi khoan ở tốc độ rất chậm để lấy đi phần composite dư mà thôi.
+
+133
+00:17:18,480 --> 00:17:24,702
+Và các em có thể làm bước này trong điều kiện khô, vì môi trường khô sẽ giúp dễ quan sát hơn.
+
+134
+00:17:24,702 --> 00:17:33,919
+Nếu dùng nước ở bước này, các chi tiết có thể bị che khuất và các em có thể mài nhầm những phần cần giữ lại.
+
+135
+00:17:33,919 --> 00:17:39,039
+Sau đó, trước khi đánh bóng, các em phải xịt rửa sạch mọi mảnh vụn.
+
+136
+00:17:39,039 --> 00:17:52,799
+Nếu không rửa sạch, các mảnh vụn này có thể tích tụ trong các hố rãnh, tạo màu sắc xấu cho miếng trám, nên việc đầu tiên là phải rửa sạch.
+
+137
+00:17:51,039 --> 00:18:01,240
+Không thể tưởng tượng nổi miếng trám trông sẽ đẹp thế nào ngay cả khi chỉ mới bước đầu hoàn tất, vì các em đã có một bề mặt cực kỳ đồng nhất, nhẵn mịn và không hề thô ráp.
+
+138
+00:18:01,240 --> 00:18:08,880
+Chỉ khi có bề mặt như vậy, các em mới đạt được kết quả đánh bóng tuyệt mỹ.
+
+139
+00:18:06,320 --> 00:18:13,840
+Và độ bóng này sẽ tồn tại vĩnh viễn nếu bề mặt đã được làm láng nhẵn nhụi.
+
+140
+00:18:12,080 --> 00:18:33,919
+Tiếp theo, trước khi đánh bóng, các em cần có kem đánh bóng, có thể dùng kem đánh bóng hạt kim cương hoặc bất kỳ loại nào có sẵn tại phòng khám, nhưng điều quan trọng là chỉ thoa một chút lên mặt răng, phết đều bằng chổi vi sợi, rồi dùng đài đánh bóng lông dê hoặc các dụng cụ tương tự để đánh bóng.
+
+141
+00:18:31,440 --> 00:18:49,679
+Việc đánh bóng này sẽ làm cho miếng trám của các em nhẵn mịn, sáng bóng, tạo ra một bề mặt tuyệt đẹp, đến mức vi khuẩn cũng không thể bám vào bề mặt hoàn thiện này, vì vậy hãy cố gắng đánh bóng thật kỹ.
+
+142
+00:18:47,679 --> 00:18:52,187
+Sau khi hoàn thành tất cả quy trình, việc đầu tiên là đánh giá các điểm chạm khớp cắn.
+
+143
+00:18:52,187 --> 00:19:00,320
+Chúng ta đã ghi lại đúng các điểm chạm khớp cắn trong bức ảnh ban đầu, nên các em có thể thấy các điểm tương tự trong bức ảnh cuối.
+
+144
+00:19:00,320 --> 00:19:12,213
+Điều đó có nghĩa là chúng ta biết cách ghi nhận khớp cắn cũ và sao chép chính xác chúng vào hình ảnh sau cùng, điều này chỉ khả thi nếu có hồ sơ tư liệu từ các bức ảnh chụp.
+
+145
+00:19:12,213 --> 00:19:20,080
+Vậy hãy chụp ảnh và bám sát các điểm đánh dấu trên hình để tinh chỉnh khớp cắn ở khâu cuối cùng.
+
+146
+00:19:20,080 --> 00:19:29,120
+Và về màu giả rãnh, các em biết đấy, chín mươi phần trăm trường hợp hố rãnh đều bị nhiễm màu, nên chúng ta chỉ cần phủ một chút màu để làm cho răng cối lớn trông tự nhiên như răng thật.
+
+147
+00:19:29,120 --> 00:19:44,030
+Chắc chắn vẫn có một vài trường hợp không có hố rãnh nhiễm màu, nhưng chín mươi phần trăm là có, và chúng tôi đã trám rất nhiều răng cối lớn trên lâm sàng, hầu như răng nào cũng có rãnh màu ngoại trừ một số ít.
+
+148
+00:19:44,030 --> 00:19:58,219
+Nên một số bệnh nhân và bác sĩ hỏi tôi, thưa thầy, trông có vẻ khá xấu vì thầy đang phủ một đường màu nâu vào rãnh, nhìn nó không đẹp và nhỡ chúng ta dùng mũi khoan mài nó vì nghĩ đó là sâu răng, nhưng thực ra nó không phải sâu răng, nó chỉ là một rãnh nhiễm màu.
+
+149
+00:19:58,219 --> 00:20:11,679
+Và nếu có kinh nghiệm, các em sẽ không thể nhầm nó với sâu răng được, vì tổn thương sâu răng nhìn hoàn toàn khác, ngoài ra thì việc tạo màu rãnh không mang lại lợi ích gì thêm.
+
+150
+00:20:11,679 --> 00:20:23,039
+Trong hình ảnh này, chúng ta có thể thấy một miếng trám amalgam cũ với đường hoàn tất không sát khít kèm theo sâu răng tái phát.
+
+151
+00:20:20,960 --> 00:20:30,480
+Các em cũng có thể thấy tổn thương sâu mặt ngoài ban đầu của bệnh nhân nằm ở phía xa, và tổn thương thứ phát nằm quanh miếng trám amalgam.
+
+152
+00:20:28,720 --> 00:20:41,600
+Trong những tổn thương này, như các em thấy bề mặt amalgam trông rất tệ, và hình thái giải phẫu của răng cũng chưa được tái tạo tốt.
+
+153
+00:20:41,760 --> 00:20:50,040
+Cô lập là bước đầu tiên, như các em thấy đê cao su đã được đặt, và đường nét mũi khoan kim cương trông rất đẹp ở chỗ này.
+
+154
+00:20:50,040 --> 00:20:58,400
+Trong kỷ nguyên nha khoa hiện đại, nếu không cô lập thì chúng ta không thể tạo ra những miếng trám xuất sắc.
+
+155
+00:20:56,240 --> 00:21:17,760
+Sau khi sửa soạn xoang, điểm khác biệt giữa mài xoang amalgam và composite là với amalgam chúng ta cần độ sâu nhất định, độ sâu trục cụ thể, góc cạnh, đáy phẳng, nhưng với composite, chúng ta thường không cần sửa soạn như vậy vì quá trình dán keo đã được thực hiện bằng một bước riêng biệt.
+
+156
+00:21:17,039 --> 00:21:30,960
+Chúng ta chỉ cần lấy sạch tổn thương sâu răng bằng mũi kim cương tròn hoặc mũi carbide, bắt đầu bằng tay khoan tốc độ cao và kết thúc bằng tay khoan tốc độ chậm, điều đó sẽ giúp kiểm soát việc mài xoang tốt hơn.
+
+157
+00:21:29,360 --> 00:21:32,480
+Và đây là bước tạo hình.
+
+158
+00:21:30,960 --> 00:21:43,280
+Như các bác sĩ ở đây đã giải thích rất kỹ, việc tạo hình bao gồm các bước đắp lớp khác nhau như kỹ thuật pizza, kỹ thuật đắp từng lớp và kỹ thuật đắp dần từng múi răng.
+
+159
+00:21:40,960 --> 00:21:52,559
+Các em phải đắp dần từng múi theo phương pháp đắp liên tiếp, hoặc đắp từng lớp với kỹ thuật chia nhỏ.
+
+160
+00:21:50,400 --> 00:22:02,159
+Đây là việc ghi dấu khớp cắn sau cùng để xem miếng trám có bị cộm hay không, bằng cách thay đổi các điểm trượt để điều chỉnh khớp cắn của bệnh nhân.
+
+161
+00:22:00,559 --> 00:22:10,159
+Việc duy trì tốt các điểm chạm này giúp bệnh nhân tiếp tục sử dụng răng theo đúng cách họ đã quen nhai trước đây.
+
+162
+00:22:07,919 --> 00:22:16,400
+Không phải điểm nào cũng là điểm cộm vướng, các em có thể thấy rất nhiều vệt màu trên giấy cắn, nhưng chúng không phải là điểm chạm sớm.
+
+163
+00:22:13,919 --> 00:22:26,720
+Điểm cộm thực sự thường có hình dạng mắt bò, bóng loáng ở giữa và có màu đậm ở viền tùy thuộc vào loại giấy cắn chúng ta đang dùng.
+
+164
+00:22:24,720 --> 00:22:29,919
+Vậy không phải điểm màu nào cũng là điểm chạm cộm cần điều chỉnh.
+
+165
+00:22:28,080 --> 00:22:34,960
+Thông thường các em sẽ kiểm tra bằng giấy cắn khi bệnh nhân cắn hai hàm lại với nhau.
+
+166
+00:22:33,200 --> 00:22:45,679
+Giấy cắn nên bị thủng ở giữa và các em có thể thấy một chấm sáng bóng trên mặt răng bệnh nhân, và đây là bức ảnh kiểm tra sau một tuần.
+
+167
+00:22:43,679 --> 00:22:57,600
+Khi răng đã bù đủ nước, các em có thể thấy màu sắc cực kỳ hài hòa, sắc độ hoàn hảo, điêu khắc hoàn hảo và bệnh nhân rất hài lòng với miếng trám như thế này.
+
+168
+00:22:56,000 --> 00:23:02,799
+Chúng ta xem một ca khác để quan sát tổn thương ban đầu.
+
+169
+00:23:00,799 --> 00:23:09,039
+Như các em thấy, có sự phá vỡ tính nguyên vẹn của men răng và tổn thương đang lan tới đường nối men ngà.
+
+170
+00:23:06,960 --> 00:23:25,919
+Nhìn bề ngoài thì có vẻ là một lỗ sâu rất nhỏ, nhưng hãy nhớ tổn thương hố rãnh thường có hình chữ V, với cổ chữ V nằm ở mặt nhai và phần đáy rộng nằm sát đường nối men ngà, khi các em bắt đầu mở những xoang này ra, chúng sẽ lớn dần lên.
+
+171
+00:23:23,760 --> 00:23:30,799
+Lại áp dụng đê cao su một lần nữa, hãy nhìn cách đặt đê cao su, rất đẹp.
+
+172
+00:23:28,960 --> 00:23:34,640
+Không có chút nước bọt nào rỉ vào được nếu các em đặt đê cao su đúng cách.
+
+173
+00:23:33,280 --> 00:23:40,080
+Tiếp theo, chúng ta sẽ nói về thuốc nhuộm phát hiện sâu răng.
+
+174
+00:23:37,200 --> 00:23:49,840
+Chất phát hiện sâu răng là một tác nhân khi bôi lên bề mặt cấu trúc răng sẽ làm lộ rõ bất kỳ dị vật nào bám trên đó.
+
+175
+00:23:47,760 --> 00:23:58,799
+Cơ chế hoạt động của nó là làm thay đổi màu của mảng bám răng để tương phản với cấu trúc răng trắng sáng.
+
+176
+00:23:57,440 --> 00:24:07,360
+Mảng bám răng có khả năng giữ lại một lượng lớn chất nhuộm màu có thể được dùng cho mục đích phát hiện sâu răng.
+
+177
+00:24:05,520 --> 00:24:15,919
+Đặc tính này xuất phát từ tương tác do sự chênh lệch độ phân cực giữa các thành phần của mảng bám và thuốc nhuộm.
+
+178
+00:24:13,600 --> 00:24:25,120
+Các hạt này bám chặt vào bề mặt nhờ lực tương tác tĩnh điện, protein và liên kết hydro như polysaccharid.
+
+179
+00:24:22,799 --> 00:24:36,640
+Có nhiều loại thuốc nhuộm khác nhau dùng trong nha khoa được điều chế từ i-ốt như fast green, erythrosine, basic fuchsin, bismarck brown và nhiều loại khác nữa.
+
+180
+00:24:36,880 --> 00:24:47,440
+Nên nhớ tại bước này, bất cứ khi nào bôi thuốc nhuộm phát hiện sâu răng, chúng ta sẽ bôi nó trong mười giây rồi rửa sạch hoàn toàn.
+
+181
+00:24:45,120 --> 00:25:06,000
+Sau khi xịt rửa, nếu thuốc nhuộm vẫn còn lưu lại ở các khu vực nào, thì khu vực đó bị coi là sâu răng, nên các em phải làm sạch vùng này thật cẩn thận, theo dõi kỹ để tiếp tục lấy đi những phần mô bị nhiễm màu và sau đó mới tiến hành trám.
+
+182
+00:25:03,679 --> 00:25:16,960
+Đây là quá trình tạo hình miếng trám xoang gần nhai xa, hai múi răng được đắp lên, các em có thể thấy các trũng và rãnh, cùng với từng múi được tạo nét riêng biệt rất đẹp.
+
+183
+00:25:14,960 --> 00:25:21,200
+Sau khi tháo đê cao su, hãy nhìn các điểm chạm khớp cắn.
+
+184
+00:25:18,880 --> 00:25:25,120
+Những điểm chạm này bắt buộc phải có để kiểm tra khớp cắn.
+
+185
+00:25:23,120 --> 00:25:37,440
+Nhớ rằng múi chịu lực của hàm dưới là các múi ngoài, và của hàm trên là các múi trong, chúng đóng vai trò duy trì kích thước dọc của khuôn mặt.
+
+186
+00:25:35,120 --> 00:25:41,360
+Hãy cùng thảo luận về những gì chúng ta vừa trao đổi.
+
+187
+00:25:39,679 --> 00:25:50,480
+Anh có một câu hỏi rất đơn giản: tại sao sâu răng loại một lại phổ biến hơn cả?
+
+188
+00:25:47,840 --> 00:25:55,039
+Vì tổn thương xoang loại một nằm trên mặt nhai của các răng cối lớn hàm dưới.
+
+189
+00:25:53,039 --> 00:26:01,840
+Nên các trũng và rãnh chính là nơi lý tưởng để giữ lại các vật thể lạ bên ngoài bám vào.
+
+190
+00:25:59,840 --> 00:26:04,759
+Vậy theo các bác sĩ ở đây, liệu có phải tất cả các trũng và rãnh đều là nơi chứa mảng bám không?
+
+191
+00:26:04,759 --> 00:26:14,559
+Không đâu bác sĩ Delaware, anh đã khám rất nhiều răng cối lớn hàm dưới, đối với răng cối lớn hàm trên, các trũng rãnh thường nhẵn và có khả năng tự làm sạch.
+
+192
+00:26:12,000 --> 00:26:22,400
+Nên không nhất thiết bệnh nhân nào cũng bị sâu răng loại một, chỉ những bệnh nhân có hố rãnh sâu hẹp dễ gây đọng thức ăn mới bị.
+
+193
+00:26:20,640 --> 00:26:25,799
+Ý anh là bề mặt rãnh không dính liền nhau?
+
+194
+00:26:22,400 --> 00:26:40,240
+Đúng vậy, khi các thùy phát triển không liên kết sát với nhau thì nguy cơ sâu răng loại một sẽ cao hơn, và yếu tố thứ ba cực kỳ quan trọng là do đây là bề mặt bệnh nhân dùng để nhai.
+
+195
+00:26:37,360 --> 00:26:44,980
+Đây cũng là mặt phẳng mà lông bàn chải không thể chui lọt vào những hố rãnh sâu hẹp, đó cũng là một nguyên nhân.
+
+196
+00:26:44,980 --> 00:26:48,000
+Hy vọng chúng ta có thể phòng ngừa các tổn thương xoang loại một.
+
+197
+00:26:46,000 --> 00:26:56,080
+Để giải quyết, Kashif, chúng ta có thể dùng keo trám bít hố rãnh, hoặc thực hiện kỹ thuật sửa soạn tạo hình men răng để chúng trở nên dễ tự làm sạch hơn.
+
+198
+00:26:54,240 --> 00:26:59,234
+Nếu thức ăn bị ứ đọng trên mặt răng, tổn thương sâu răng sẽ bắt đầu tiến triển.
+
+199
+00:26:59,234 --> 00:27:05,360
+Nếu bề mặt dễ làm sạch, sâu răng sẽ không xuất hiện.
+
+200
+00:27:03,440 --> 00:27:06,693
+Anh có thể giải thích rõ hơn về kỹ thuật tạo hình men răng không, nó là gì vậy?
+
+201
+00:27:06,693 --> 00:27:12,240
+Kỹ thuật tạo hình men răng về cơ bản là dùng mũi khoan tròn nhỏ và cứng, chẳng hạn như mũi kích thước một phần mười sáu, để mài khu vực đó thành bề mặt tự làm sạch.
+
+202
+00:27:12,240 --> 00:27:27,039
+Thực chất, những hố rãnh này giống như các thung lũng xen giữa những ngọn núi, và thung lũng này thường đọng lại rất nhiều mảnh vụn thức ăn cũng như các chất sinh màu khác trong chế độ ăn, vì thế chúng ta cần biến chúng thành khu vực tự làm sạch, đó là một thủ thuật phòng ngừa.
+
+203
+00:27:25,440 --> 00:27:28,880
+Chính xác.
+
+204
+00:27:27,039 --> 00:27:35,760
+Câu hỏi tiếp theo là, cơ chế bệnh sinh của tổn thương sâu răng loại một diễn ra như thế nào?
+
+205
+00:27:33,120 --> 00:27:38,799
+Sâu răng loại một bắt đầu ra sao?
+
+206
+00:27:35,760 --> 00:27:51,919
+Chúng ta biết rằng bên trong các rãnh hẹp này có một lượng thức ăn bị kẹt lại, tạo màng sinh học vi khuẩn, màng này sẽ tiết ra axit lactic làm quá trình khử khoáng xảy ra.
+
+207
+00:27:49,440 --> 00:27:54,240
+Vậy vượt ra khỏi yếu tố đó, cơ chế bệnh sinh là gì?
+
+208
+00:27:51,919 --> 00:28:07,600
+Những gì xảy ra trong sinh bệnh học của sâu răng loại một hoặc sâu men răng được chia thành nhiều vùng khác nhau, như vùng trong mờ, vùng tối, thân thương tổn và vùng bề mặt, tùy thuộc vào kích thước lỗ rỗ của men răng.
+
+209
+00:28:07,600 --> 00:28:16,080
+Kích thước lỗ rỗ sẽ lớn dần khi càng vào sâu, dẫn đến tổn thương càng ngày càng lan rộng.
+
+210
+00:28:13,679 --> 00:28:21,200
+Chuyển sang một câu hỏi khác cho bác sĩ Zuhair, thuốc nhuộm phát hiện sâu răng là gì?
+
+211
+00:28:18,640 --> 00:28:35,520
+Các em biết đấy, thông thường chúng ta luôn lấy sạch cả phần mô nhiễm khuẩn lẫn phần mô bị ảnh hưởng bằng cách dùng tay khoan và cố gắng nạo bỏ phần ngà mềm, đôi khi trong lúc lấy ngà mềm, chúng ta lại vô tình làm mất luôn cả vùng mô bị ảnh hưởng.
+
+212
+00:28:33,279 --> 00:28:37,440
+Thuốc nhuộm phát hiện sâu răng không phải là phát minh mới đây.
+
+213
+00:28:35,520 --> 00:28:39,600
+Nó là một loại thuốc nhuộm bán sẵn trên thị trường.
+
+214
+00:28:37,440 --> 00:28:53,760
+Các em chỉ cần bôi lên bề mặt răng nơi muốn làm sạch sâu răng, và điểm hay nhất của thuốc nhuộm này là nó chỉ bắt màu phần mô nhiễm khuẩn nơi collagen bị biến tính, nhưng chừa lại phần mô bị ảnh hưởng nơi cấu trúc collagen vẫn còn nguyên vẹn.
+
+215
+00:28:51,840 --> 00:28:59,640
+Nó có màu hồng, màu xanh lá cây hoặc màu xanh dương, bất kỳ màu nào đang có mặt trên thị trường.
+
+216
+00:29:01,520 --> 00:29:07,840
+Với những tổn thương nông, chúng ta dùng màu gì cũng được.
+
+217
+00:29:06,000 --> 00:29:16,880
+Chúng ta có thể dùng thuốc nhuộm màu hồng hoặc đỏ cho vùng nông, nhưng không nên dùng cho những vùng quá sâu, bởi vì sẽ rất khó để phân biệt được giữa màu đỏ của điểm lộ tủy răng và màu thuốc nhuộm.
+
+218
+00:29:16,880 --> 00:29:28,168
+Vì vậy, điều cực kỳ quan trọng khi dùng thuốc nhuộm phát hiện sâu răng là chúng ta phải dùng màu xanh dương hoặc xanh lá cho các tổn thương sâu, nhằm phân biệt rõ giữa việc lộ tủy và vùng nhuộm màu.
+
+219
+00:29:28,168 --> 00:29:41,547
+Và cơ chế hoạt động của nó dựa trên sự khác biệt về độ phân cực giữa thành phần của mảng bám và thuốc nhuộm, vì bất cứ thứ gì tích tụ trên bề mặt trắng đều sẽ hiện rõ sự chênh lệch phân cực khi bôi thuốc nhuộm lên, đúng vậy.
+
+220
+00:29:41,547 --> 00:29:48,720
+Và cách sử dụng là các em chỉ cần lấy cọ vi sợi bôi thuốc lên mặt răng, đợi hai mươi giây rồi rửa thật sạch.
+
+221
+00:29:46,799 --> 00:29:56,343
+Khu vực nào còn bắt màu thì các em phải loại bỏ, nhưng vùng nào không bắt màu chính là mô bị ảnh hưởng, vùng đó có khả năng tái khoáng hóa được.
+
+222
+00:29:56,343 --> 00:30:02,304
+Vậy Kashif, anh có thể kể tên vài loại thuốc nhuộm mà chúng ta đang dùng làm chất phát hiện sâu răng không?
+
+223
+00:30:02,304 --> 00:30:08,399
+Chúng ta có rhodamine, erythrosin, và fast green.
+
+224
+00:30:07,120 --> 00:30:11,520
+Đây là ba loại thuốc nhuộm đang được bán phổ biến.
+
+225
+00:30:09,520 --> 00:30:18,053
+Ngoài ra còn có bismarck brown, merbromin và basic fuchsin, thường được bán trên thị trường với thương hiệu Caries Detector.
+
+226
+00:30:18,053 --> 00:30:18,109
+Caries Detector, đúng rồi.
+
+227
+00:30:18,109 --> 00:30:23,520
+Các em có thể yêu cầu trợ lý phòng khám mua sản phẩm đó.
+
+228
+00:30:21,120 --> 00:30:29,039
+Câu hỏi tiếp theo là điểm khác biệt giữa mài răng để trám amalgam và composite là gì?
+
+229
+00:30:27,440 --> 00:30:31,359
+Hai vật liệu này không có bất kỳ điểm nào chung cả.
+
+230
+00:30:31,359 --> 00:30:36,880
+Amalgam là vật liệu xâm lấn, đòi hỏi các em phải tạo độ sâu cũng như độ rộng của hình thể xoang đúng tiêu chuẩn.
+
+231
+00:30:35,120 --> 00:30:42,799
+Các em thậm chí phải mài cả mô răng lành mạnh để tạo lẹm, nhưng với composite thì không cần làm tất cả những điều đó.
+
+232
+00:30:41,279 --> 00:30:47,039
+Các em chỉ cần làm sạch sâu răng và chúng ta sẽ dán dính composite.
+
+233
+00:30:45,360 --> 00:30:56,880
+Vậy thưa bác sĩ, chúng ta có thể nói là dùng amalgam để mở rộng phòng ngừa, và dùng composite để phòng ngừa mở rộng không?
+
+234
+00:30:55,440 --> 00:31:02,559
+Có chứ, hoàn toàn có thể, em nói đúng, vì chúng ta chỉ lấy đi phần cấu trúc bị hỏng.
+
+235
+00:30:59,840 --> 00:31:09,851
+Với amalgam, chúng ta cần tuân thủ quy tắc nghiêm ngặt về hình học của các chiều kích thước, chẳng hạn như độ sâu; nếu độ sâu nhỏ hơn hai milimét, miếng trám amalgam sẽ không tồn tại được.
+
+236
+00:31:09,851 --> 00:31:24,240
+Tuy nhiên, nếu bàn về hình thái kháng lực, đó là yếu tố áp dụng chung cho mọi loại vật liệu, nhưng khi nói đến hình thái lưu giữ, chúng ta đều biết composite được giữ lại bằng hệ thống dán chứ không phải bằng các lẹm cắt.
+
+237
+00:31:22,240 --> 00:31:29,279
+Nên chúng ta không cần tạo bất kỳ lẹm cắt nào trong phục hồi composite cả.
+
+238
+00:31:27,440 --> 00:31:35,600
+Vậy amalgam là vật liệu lưu giữ cơ học vi thể, còn composite là vật liệu lưu giữ cơ học vi thể kết hợp dán dính hóa học.
+
+239
+00:31:35,600 --> 00:31:41,760
+Và điểm quan trọng cuối cùng là màu sắc: amalgam có màu bạc tối, còn composite có màu trắng.
+
+240
+00:31:41,760 --> 00:31:56,080
+Thêm vào đó, chúng ta phải nhồi amalgam với lực nén mạnh bằng cây nhồi, các em có thể cảm nhận được độ chắc của nó; trong khi với composite, các em chỉ cần đắp và đắp rồi điêu khắc theo cách mình muốn.
+
+241
+00:31:53,600 --> 00:32:03,279
+Đến câu hỏi tiếp theo, loại mũi khoan nào được khuyến cáo khi sửa soạn trám composite?
+
+242
+00:32:00,159 --> 00:32:07,600
+Về cơ bản, chúng ta dùng mũi khoan tròn, có thể là mũi kim cương hoặc mũi carbide.
+
+243
+00:32:05,919 --> 00:32:15,600
+Anh đã nhắc trong các slide bài giảng trước rằng kiểm soát mũi carbide là một việc khá khó, nhưng mũi kim cương lại rất dễ thao tác.
+
+244
+00:32:13,120 --> 00:32:19,360
+Điều đó có nghĩa là các em chỉ nên dùng mũi carbide khi đã được đào tạo bài bản về kỹ năng này.
+
+245
+00:32:17,360 --> 00:32:24,533
+Vậy anh có nghĩ rằng dùng mũi kim cương ở giai đoạn đầu sửa soạn sẽ mang lại lợi ích gì không, hoặc dùng mũi carbide khi chúng ta đang ở lớp tổn thương nông?
+
+246
+00:32:24,533 --> 00:32:33,120
+Anh nghĩ mũi kim cương nên được ưu tiên hơn vì chúng tạo ra nhiều lớp mùn ngà, từ đó hình thành các nút bít ống ngà.
+
+247
+00:32:31,360 --> 00:32:41,679
+Nhưng khi đi sâu vào vùng sâu răng, chúng ta bắt buộc phải có vài mũi carbide để có thể nạo vét dễ dàng.
+
+248
+00:32:39,760 --> 00:32:51,519
+Nếu có đủ thời gian, chúng ta nên bắt đầu bằng tay khoan tốc độ cao, và kết thúc bằng tay khoan tốc độ chậm gắn mũi carbide để kiểm soát chính xác việc mài xoang.
+
+249
+00:32:49,440 --> 00:32:55,210
+Em nói đúng, chuẩn rồi, vậy chúng ta sẽ chuyển sang kỹ thuật xoi mòn và dán keo.
+
+250
+00:32:55,210 --> 00:33:04,880
+Đâu là kỹ thuật lý tưởng nhất: xoi mòn toàn bộ, tự xoi mòn, hay xoi mòn chọn lọc phù hợp nhất cho trám composite xoang loại một?
+
+251
+00:33:02,399 --> 00:33:06,799
+Đối với men răng, chúng ta đã thảo luận rằng men răng là cấu trúc khoáng hóa rất cao.
+
+252
+00:33:06,799 --> 00:33:15,279
+Vì vậy chúng ta cần loại axit mạnh nhất, và nó chỉ có trong kỹ thuật xoi mòn toàn bộ và xoi mòn chọn lọc.
+
+253
+00:33:13,679 --> 00:33:21,440
+Xoi mòn chọn lọc có nghĩa là chúng ta chỉ xử lý men răng, sau đó dùng hệ thống tự xoi mòn dành riêng cho ngà răng.
+
+254
+00:33:19,360 --> 00:33:24,960
+Như vậy, với men răng thì dùng xoi mòn chọn lọc, còn ngà răng thì dùng tự xoi mòn.
+
+255
+00:33:22,960 --> 00:33:32,434
+Các bác sĩ ở đây đều có kinh nghiệm với kỹ thuật xoi mòn toàn bộ, men răng là lớp cứng nhất nên việc xoi mòn thực chất chỉ làm tăng diện tích bề mặt tiếp xúc.
+
+256
+00:33:32,434 --> 00:33:37,440
+Nó làm giảm sức căng bề mặt để chất dán có thể thấm vào hoàn hảo.
+
+257
+00:33:36,000 --> 00:33:43,360
+Và tiêu chuẩn lý tưởng nhất cho men răng là keo dán thế hệ thứ tư và thứ năm.
+
+258
+00:33:41,519 --> 00:33:52,509
+Còn tự xoi mòn thuộc thế hệ thứ bảy và thứ tám được đóng trong một lọ duy nhất, loại này khó kiểm soát vì nồng độ nước cũng như hạn sử dụng của nó thường gặp vấn đề.
+
+259
+00:33:52,509 --> 00:34:01,200
+Xin bổ sung một chút, thế hệ thứ sáu cũng là hệ thống tự xoi mòn nhưng primer bản thân nó mang tính axit, nên chúng ta không cần thêm bước xoi mòn riêng biệt ở thế hệ thứ sáu.
+
+260
+00:34:01,200 --> 00:34:10,360
+Vì vậy, điều quan trọng là khi làm việc trên ngà răng, chúng ta nên dùng phương pháp tự xoi mòn thay vì xoi mòn toàn bộ.
+
+261
+00:34:10,360 --> 00:34:22,639
+Nếu không, hệ thống xoi mòn toàn bộ sẽ làm khô bề mặt, khiến cấu trúc collagen bị sập, đồng thời nó cũng tẩy sạch toàn bộ nút bít ống ngà, từ đó gây ra tình trạng ê buốt sau điều trị.
+
+262
+00:34:20,399 --> 00:34:32,240
+Đúng vậy, câu hỏi cuối cùng là tại sao composite lại có khuynh hướng co ngót nhiều hơn ở xoang loại một?
+
+263
+00:34:30,320 --> 00:34:36,639
+Bởi vì chúng ta đã thảo luận về hệ số cấu hình xoang, hay còn gọi là hệ số C, và xoang loại một có hệ số C cao nhất, tại sao vậy?
+
+264
+00:34:36,639 --> 00:34:39,119
+Vì chúng ta có rất nhiều thành dán dính.
+
+265
+00:34:39,119 --> 00:34:46,159
+Nhiều thành dán dính, và cơ chế co ngót của composite diễn ra như thế nào?
+
+266
+00:34:43,440 --> 00:34:55,919
+Nó luôn co ngót từ mặt dán dính về phía mặt tự do, nên nếu có càng nhiều mặt dán dính, xu hướng co ngót của composite càng cao.
+
+267
+00:34:53,599 --> 00:35:11,640
+Để khắc phục tình trạng này, như các em thấy trong phần trình bày của bác sĩ Zuhair, anh ấy đã dùng composite lỏng; loại này tuy co ngót nhiều hơn nhưng lại không gây ra quá nhiều lực kéo lên bề mặt, nên nó có thể dễ dàng thích ứng với bề mặt cấu trúc răng tức thì.
+
+268
+00:35:11,640 --> 00:35:21,119
+Trên lớp nền đó, chúng ta có thể dùng bất kỳ loại composite đặc nào, vậy hệ số cấu hình là yếu tố quan trọng nhất và nó phụ thuộc vào thiết kế xoang trám.
+
+269
+00:35:19,200 --> 00:35:36,079
+Ở xoang loại một, chúng ta có thể dùng nhựa trùng hợp sẵn, hoặc composite gốc silorane, và cũng có thể áp dụng kỹ thuật dọn tuyết như bác sĩ Kashif đã giải thích, nghĩa là dùng composite lỏng ở đáy rồi đắp composite đặc lên trên để nhựa chảy lấp đầy các bọt khí.
+
+270
+00:35:38,240 --> 00:35:45,440
+Vào phần cuối của bài giảng, anh muốn nói rằng bài học này là thành quả nỗ lực của cả tập thể.
+
+271
+00:35:42,800 --> 00:35:54,640
+Anh rất biết ơn bác sĩ Kashif, bác sĩ Taimoor và bác sĩ Lover đã dành thời gian quý báu của mình, và hy vọng chúng ta sẽ duy trì mô hình này trong các bài giảng tiếp theo.
+
+272
+00:35:52,640 --> 00:36:00,480
+Và chúng ta luôn cố gắng tăng tính tương tác; bất kỳ ai cũng có thể giảng bài, nhưng thông qua sự tương tác này, chúng ta sẽ giải quyết được rất nhiều thắc mắc một cách tự do.
+
+273
+00:36:00,480 --> 00:36:07,200
+Bất cứ khi nào nghe giảng, các em sẽ gỡ rối được rất nhiều vấn đề đang xuất hiện trong đầu.
+
+274
+00:36:05,520 --> 00:36:11,720
+Hai người thì tốt hơn một, và ba người thì tốt hơn hai, chúc các em một ngày thật vui vẻ nhé.
