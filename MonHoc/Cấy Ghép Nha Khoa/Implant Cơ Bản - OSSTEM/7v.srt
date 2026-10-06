@@ -1,231 +1,231 @@
 1
 00:00:27,000 --> 00:00:39,000
-Chào các em, thầy là Bác sĩ Park Jong Chol, và trong phẫu thuật cấy ghép implant, việc nắm vững giải phẫu học là vô cùng quan trọng.
+Chào các em, thầy là Bác sĩ Park Jong Chol. Trong phẫu thuật Implant, việc nắm vững kiến thức giải phẫu là vô cùng quan trọng. Chúng ta cần hiểu rõ hình thái học của...
 
 2
 00:00:39,000 --> 00:00:53,000
-Chúng ta cần hiểu rõ hình thái vùng phẫu thuật, đường đi của mạch máu và thần kinh để phòng tránh rủi ro cũng như giảm thiểu biến chứng.
+...vùng phẫu thuật để thao tác cho chuẩn xác, cũng như phải nắm được đường đi của các mạch máu và dây thần kinh. Từ đó biết cách phòng tránh rủi ro và giảm thiểu tối đa biến chứng.
 
 3
 00:00:53,000 --> 00:01:08,000
-Do đó, hơn hết, ta phải hiểu cấu trúc và hình thái của khu vực này, nên bài giảng hôm nay sẽ bàn về các lưu ý giải phẫu khi đặt implant, bắt đầu với xương hàm dưới.
+Vì vậy, hiểu rõ từng cấu trúc và hình thái giải phẫu là điều quan trọng hơn cả. Trong bài giảng này, thầy trò ta sẽ bàn về các lưu ý giải phẫu khi cấy ghép Implant. Đầu tiên là hàm dưới.
 
 4
 00:01:17,000 --> 00:01:31,000
-Hôm nay, chúng ta sẽ tìm hiểu về giải phẫu xương hàm dưới qua ba yếu tố chính, thứ nhất là cần cẩn trọng với đặc điểm hình thái của xương hàm dưới.
+Hôm nay chúng ta sẽ tìm hiểu về giải phẫu xương hàm dưới. Trọng tâm gồm ba phần: thứ nhất là những lưu ý về hình thái xương hàm dưới khi phẫu thuật Implant.
 
 5
 00:01:31,000 --> 00:01:44,000
-Cùng với hình thái xương, yếu tố thứ hai là nguồn cung cấp máu, và thứ ba là thần kinh cảm giác, trước khi thầy tóm tắt lại nội dung.
+Thứ hai là hệ thống cung cấp máu của hàm dưới. Thứ ba là các dây thần kinh cảm giác vùng hàm dưới. Cuối cùng, thầy sẽ tóm tắt lại những nội dung cốt lõi nhất.
 
 6
 00:01:44,000 --> 00:02:00,000
-Đầu tiên là hình thái xương hàm dưới, đây là xương nằm ở phần dưới của khuôn mặt và có độ dày lớn hơn so với xương hàm trên.
+Đầu tiên, hãy cùng xem xét hình thái xương hàm dưới. Trên khuôn mặt, phần xương nằm ở dưới cùng chính là xương hàm dưới. Xương này dày và đặc hơn xương hàm trên.
 
 7
 00:02:00,000 --> 00:02:27,000
-Nhờ lớp xương vỏ đặc và cứng cáp, hàm dưới tạo môi trường thuận lợi để cấy ghép, đòi hỏi góc độ hướng trục implant phải tương đồng với răng thật.
+Do hàm dưới có cấu trúc xương đặc, đây là một môi trường rất lý tưởng để cấy Implant. Dù không phải lúc nào cũng vậy, nhưng thông thường trục của Implant sẽ tương đồng với trục răng thật. Do đó, ta cần hiểu rõ hướng và góc độ của các răng hàm dưới.
 
 8
 00:02:27,000 --> 00:02:42,000
-Mọi răng hàm dưới đều có độ nghiêng về phía gần để tạo thành đường cong Spee tự nhiên, do đó các em cần chú ý khi đặt implant như hình bên trái.
+Tất cả các răng hàm dưới đều có xu hướng nghiêng về phía gần. Điều này tạo ra một đường cong tự nhiên gọi là đường cong Spee. Vì vậy, khi cắm một trụ Implant như hình bên trái...
 
 9
 00:02:42,000 --> 00:03:01,000
-Hướng của implant phải nghiêng về phía gần giống với răng thật, giúp đồng nguyên với hướng co cơ nhai và đảm bảo tối ưu về mặt cơ học.
+...độ nghiêng của trụ nên tương đồng với răng thật, tức là phải nghiêng về phía gần. Hướng này trùng với hướng co cơ nhai, nên xét về mặt cơ học, Implant hàm dưới cần được cắm nghiêng gần.
 
 10
 00:03:01,000 --> 00:03:15,000
-Ngược lại, như hình bên phải, implant nghiêng về phía xa có thể làm hỏng chân răng phía gần và tăng nguy cơ gãy vít kết nối.
+Ở hình bên phải, nếu Implant nghiêng xa thì có thể làm hỏng chân răng phía gần, đồng thời xét về cơ học, nó mang lại rủi ro gãy vít kết nối (abutment screw).
 
 11
 00:03:15,000 --> 00:03:35,000
-Do vậy, implant hàm dưới cần nghiêng gần, và nếu xét theo chiều ngoài - trong, răng cửa sẽ hơi nghiêng ngoài trong khi toàn bộ răng sau đều nghiêng nhẹ về phía lưỡi.
+Do đó, cắm Implant hàm dưới thì phải hơi nghiêng về phía gần. Còn xét về độ nghiêng ngoài - trong của răng thật hàm dưới: các răng trước hơi nghiêng ngoài, nhưng toàn bộ răng cối lại hơi nghiêng về phía lưỡi.
 
 12
 00:03:35,000 --> 00:03:53,000
-Điều này tạo nên đường cong Wilson, nên khi cấy implant vùng răng cối dưới mà để nghiêng má thì sẽ bất lợi cho răng đối diện lẫn chức năng cơ học.
+Sự nghiêng này tạo nên đường cong Wilson tự nhiên. Nên khi cắm Implant vùng răng cối dưới như hình bên phải, nếu cắm nghiêng ra ngoài thì sẽ không tốt cho răng đối diện lẫn chức năng cơ học.
 
 13
 00:03:53,000 --> 00:04:16,000
-Các em cần cẩn thận với nguy cơ thủng vách lưỡi khi đặt implant, nhưng với sống hàm tiêu xương trầm trọng thì đôi khi rất khó để tạo độ nghiêng lưỡi phù hợp.
+Các em cũng cần cẩn thận với rủi ro thủng vách xương mặt lưỡi khi thao tác. Tuy nhiên, khi sống hàm bị tiêu ngót nghiêm trọng, đôi khi rất khó để cắm Implant nghiêng về phía lưỡi. Ở khớp cắn hạng I bình thường...
 
 14
 00:04:16,000 --> 00:04:43,000
-Dù bình thường múi chức năng răng dưới lọt vào trũng trung tâm răng trên, nhưng nếu tiêu xương nhiều, ta phải giảm độ nghiêng lưỡi và đặt implant thẳng đứng hơn để dễ làm phục hình.
+...răng hàm dưới nghiêng gần, núm chịu lực của răng dưới sẽ khớp vào trũng trung tâm răng trên. Nhưng khi mất răng, xương ổ bị tiêu cả chiều dọc lẫn ngang, nếu ta cắm Implant nương theo phần xương còn lại thì trụ sẽ bị nghiêng lưỡi quá mức. Lúc này, cần giảm độ nghiêng lưỡi để cắm thẳng hơn...
 
 15
 00:04:43,000 --> 00:05:13,000
-Kinh nghiệm chẩn đoán và máng hướng dẫn phẫu thuật kỹ thuật số rất hữu ích, song nếu đặt implant ít nghiêng lưỡi hơn ở mặt trong hàm dưới, các em phải lưu ý hố tuyến dưới hàm và dưới lưỡi.
+...giúp cho việc phục hình sau này dễ dàng hơn. Để chốt được góc độ cắm Implant, chẩn đoán trước phẫu thuật cùng kinh nghiệm của bác sĩ là rất quan trọng. Gần đây, máng hướng dẫn kỹ thuật số sẽ giúp định vị Implant chuẩn xác hơn. Tuy nhiên, nếu cắm Implant ít nghiêng lưỡi ở vùng mặt lưỡi hàm dưới, các em phải cẩn thận vì có tuyến nước bọt dưới hàm và dưới lưỡi ở vùng hõm này.
 
 16
 00:05:13,000 --> 00:05:27,000
-Hãy hết sức cẩn thận để tránh làm thủng vùng này, đồng thời đặc biệt chú ý đến hai cấu trúc quan trọng là ống thần kinh răng dưới và lỗ cằm.
+Các em phải thật cẩn trọng để không làm thủng vách xương vùng này. Hai cấu trúc khác ở hàm dưới mà ta phải đặc biệt lưu tâm là ống thần kinh răng dưới và lỗ cằm.
 
 17
 00:05:27,000 --> 00:05:43,000
-Trước khi phẫu thuật, thầy yêu cầu các em phải xác định chính xác vị trí của chúng trên X-quang để không xâm phạm vào các mạch máu và thần kinh bên trong.
+Trước khi mổ, chúng ta phải xác định rõ vị trí của chúng trên phim X-quang, tuyệt đối không được chạm vào vì có các dây thần kinh và mạch máu chạy qua đó.
 
 18
 00:05:50,000 --> 00:06:10,000
-Tiếp theo là nguồn cấp máu cho hàm dưới, xuất phát từ động mạch cảnh ngoài phân nhánh thành động mạch hàm, rồi tiếp tục tách ra động mạch huyệt răng dưới.
+Phần tiếp theo là hệ thống cấp máu của hàm dưới. Máu từ tim bơm lên, nuôi dưỡng xương hàm từ phía dưới. Từ động mạch cảnh ngoài chia ra nhánh động mạch hàm, rồi từ đó phân nhánh thành động mạch huyệt răng dưới.
 
 19
 00:06:10,000 --> 00:06:30,000
-Động mạch này đi vào lỗ hàm dưới, chui qua ống thần kinh răng dưới rồi chẻ ra động mạch cằm và động mạch răng cửa để nuôi dưỡng vùng phía trước.
+Động mạch này chui qua lỗ hàm dưới, đi vào ống thần kinh răng dưới, rồi thoát ra ở lỗ cằm thành động mạch cằm. Động mạch cửa thì chạy ra vùng răng trước. Tóm lại, máu nuôi hàm dưới đi từ động mạch cảnh, qua động mạch hàm.
 
 20
 00:06:30,000 --> 00:06:55,000
-Động mạch huyệt răng dưới phân nhánh thành động mạch cằm và răng cửa, mang ba đặc điểm cấp máu chính mà thứ nhất là dòng chảy từ sau ra trước.
+Từ đây, động mạch huyệt răng dưới chạy ra, sau đó chia thành nhánh động mạch cằm và động mạch cửa. Có ba đặc điểm phân bố mạch máu chính. Thứ nhất, máu được cấp từ phía sau ra phía trước.
 
 21
 00:06:55,000 --> 00:07:07,000
-Máu từ tim sẽ lưu thông từ vùng răng sau ra vùng răng trước, và đặc điểm thứ hai là các mạch máu chạy song song với sống hàm.
+Máu đi từ tim, chảy từ vùng răng sau ra vùng răng trước. Thứ hai, các mạch máu chạy song song với sống hàm.
 
 22
 00:07:07,000 --> 00:07:20,000
-Nhờ đường đi song song này, phần đỉnh sống hàm mất răng sẽ được bao phủ bởi một dải mô vô mạch rộng khoảng một đến hai milimet.
+Thứ ba, vì chúng chạy song song như vậy, nên phần sống hàm mất răng sẽ được bao phủ bởi một vùng vô mạch rộng khoảng 1 đến 2 milimet.
 
 23
 00:07:20,000 --> 00:07:47,000
-Ba đặc điểm phân bố mạch máu này đóng vai trò sống còn khi thiết kế đường rạch cơ bản, chi tiết thầy sẽ nói rõ hơn trong bài giảng về thiết kế vạt.
+Như các em đã thấy, ba đặc điểm phân bố mạch máu này mang tính quyết định khi thiết kế đường rạch phẫu thuật Implant. Chi tiết sẽ được giảng trong bài thiết kế vạt. Còn về hệ thống mạch máu, chúng ta cần lưu ý thêm...
 
 24
 00:07:47,000 --> 00:08:05,000
-Về hõm lưỡi hàm dưới, tuyến dưới hàm và dưới lưỡi cùng nằm ở hố này nên đặt implant vào vị trí C là lý tưởng nhất.
+...vùng lồi lõm mặt lưỡi hàm dưới. Ở mặt lưỡi, như đã nói, tuyến nước bọt dưới hàm và dưới lưỡi nằm trong hõm này. Ở hình C, Implant được đặt rất chuẩn.
 
 25
 00:08:05,000 --> 00:08:32,000
-Nếu các em đặt ở A hoặc B, đặc biệt khi quá nghiêng như B hoặc dùng implant quá dài tại hố dưới hàm sâu, vách xương mặt lưỡi sẽ dễ dàng bị xuyên thủng.
+Tuy nhiên, nếu cắm như hình A hoặc B, đặc biệt ở hình B trụ bị nghiêng quá nhiều, thì rất dễ gây thủng vách xương mặt lưỡi. Nếu hõm dưới hàm quá sâu mà các em lại dùng Implant dài, thì nguy cơ xuyên thủng vách xương như thế này là rất cao.
 
 26
 00:08:32,000 --> 00:08:53,000
-Trong trường hợp đó, hãy sử dụng implant ngắn để tránh thủng xương, vì mũi khoan có thể làm rách mạch máu bên dưới gây chảy máu ồ ạt rất nguy hiểm.
+Trong trường hợp này, các em phải dùng Implant ngắn để tránh thủng xương. Nếu làm thủng, mũi khoan có thể cắt đứt các mạch máu bên dưới gây chảy máu ồ ạt, nên phải cực kỳ cẩn thận.
 
 27
 00:09:00,000 --> 00:09:29,000
-Kế tiếp là thần kinh cảm giác, xuất phát từ hạch sinh ba chẻ thành các nhánh chi phối mắt, hàm trên và hàm dưới, trong đó nhánh hàm dưới phân ra sáu nhánh nhỏ.
+Tiếp theo là dây thần kinh cảm giác hàm dưới. Trong nha khoa, các dây thần kinh chủ yếu xuất phát từ hạch sinh ba: nhánh mắt đi lên mắt, nhánh hàm trên đi vào hàm trên, và nhánh hàm dưới chi phối vùng hàm dưới. Thần kinh hàm dưới lại phân thành sáu nhánh nhỏ.
 
 28
 00:09:29,000 --> 00:09:47,000
-Các em cần cẩn thận với thần kinh má dài, thần kinh lưỡi và thần kinh huyệt răng dưới đi qua lỗ hàm dưới vào trong thân xương.
+Chúng ta cần hết sức lưu ý. Khi cắm Implant, các nhánh cần quan tâm là thần kinh má dài, thần kinh lưỡi và thần kinh huyệt răng dưới chui qua lỗ hàm dưới để đi vào trong xương hàm.
 
 29
 00:09:47,000 --> 00:10:00,000
-Thần kinh huyệt răng dưới chi phối cảm giác hàm dưới, sau đó sẽ tách thành thần kinh cằm và thần kinh răng cửa.
+Thần kinh huyệt răng dưới chi phối toàn bộ cảm giác của hàm dưới. Từ lỗ cằm, nó tiếp tục chia thành nhánh thần kinh cằm và thần kinh cửa.
 
 30
 00:10:00,000 --> 00:10:24,000
-Thần kinh cằm chui ra khỏi lỗ cằm để chi phối cảm giác môi dưới, nên việc xác định chính xác vị trí lỗ cằm trước mổ là bắt buộc để tránh tổn thương.
+Thần kinh cằm chui ra từ lỗ cằm và chi phối cảm giác môi dưới. Việc xác định lỗ cằm là tối quan trọng vì rất dễ bị tổn thương khi cấy Implant. Nên trước khi mổ, các em phải định vị được nó. Ở hàm còn răng...
 
 31
 00:10:24,000 --> 00:10:45,000
-Ở hàm còn răng, lỗ cằm thường nằm giữa khoảng cách từ sống hàm đến bờ dưới xương, nhìn chung là nằm dưới chóp của các chân răng cối nhỏ.
+...lỗ cằm nằm ở vị trí trung điểm giữa đỉnh sống hàm và bờ dưới xương hàm, thường nằm ngay dưới chóp các răng cối nhỏ. Với hàm còn răng thì dễ, nhưng với hàm mất răng toàn bộ...
 
 32
 00:10:45,000 --> 00:11:00,000
-Nếu phim X-quang không rõ ràng thì ở hàm mất răng, vị trí này nằm ở một phần tư khoảng cách từ đường khớp cằm đến bờ sau cành lên trên phim toàn cảnh.
+...nếu X-quang không hiển thị rõ thì rất dễ nhầm lẫn. Ở ca mất răng, lỗ cằm nằm ở vị trí 1/4 khoảng cách từ đường giữa cằm đến bờ sau cành lên xương hàm dưới trên phim Panorama.
 
 33
 00:11:00,000 --> 00:11:26,000
-Bên cạnh đó, lỗ cằm có cấu trúc quai thần kinh trước, và theo nghiên cứu thì mười hai phần trăm trường hợp đoạn quai này dài đến ba milimet.
+Các em nhớ nhé, trên phim Panorama, tỷ lệ là 1/4 từ đường giữa cằm đến bờ sau cành lên. Ống thần kinh cằm có một vòng lặp ra trước (anterior loop), theo nghiên cứu của Misch và Crawford, 12% trường hợp vòng lặp này nhô cao 3 milimet.
 
 34
 00:11:26,000 --> 00:11:46,000
-Phần lớn các ca lâm sàng có quai thần kinh trước dài từ hai milimet trở lên, nên các em phải tính toán đến chiều dài ba milimet này khi đặt implant phía trước lỗ cằm.
+Còn theo Arzouman, 92 đến 96% trường hợp vòng lặp ra trước dài từ 2 milimet trở lên. Vì vậy, khi cắm Implant ở phía trước lỗ cằm, hãy mặc định vòng lặp này dài khoảng 3 milimet.
 
 35
 00:11:46,000 --> 00:11:58,000
-Kết hợp với khoảng cách an toàn hai milimet, nguyên tắc là implant phải được đặt cách lỗ cằm ít nhất năm milimet để tránh tai biến.
+Cộng thêm 2 milimet vùng an toàn cần thiết, suy ra các em phải cắm Implant cách lỗ cằm ít nhất 5 milimet để đảm bảo an toàn tuyệt đối.
 
 36
 00:11:58,000 --> 00:12:21,000
-Có một bệnh nhân làm implant phủ hàm ở nơi khác và bị mất cảm giác môi, khi đàn em gọi hỏi, thầy đã phân tích lại dù bác sĩ trước nói rằng đặt implant trước lỗ cằm là an toàn.
+Bệnh nhân này cắm Implant làm hàm phủ (overdenture) ở phòng khám khác và đến chỗ đàn em của thầy than phiền bị tê môi. Người em đó gọi cho thầy nghi ngờ thần kinh cằm bị tổn thương, dù bác sĩ phẫu thuật khẳng định cắm phía trước lỗ cằm thì không sao cả.
 
 37
 00:12:21,000 --> 00:12:44,000
-Qua việc dò lại đường đi thần kinh và tính toán vị trí một phần tư khoảng cách cằm đến cành lên ở hàm mất răng, rõ ràng là quai trước thần kinh cằm đã bị xâm phạm.
+Nếu các em can lại đường đi của thần kinh huyệt răng dưới và thần kinh cằm, có vẻ như Implant đã chạm vào vòng lặp ra trước. Để kiểm tra chéo bằng quy tắc định vị trên hàm mất răng: lỗ cằm nằm ở 1/4 từ đường giữa đến bờ sau cành lên.
 
 38
 00:12:44,000 --> 00:13:06,000
-Chấn thương xảy ra vì chỉ né lỗ cằm là chưa đủ, khoảng an toàn năm milimet là bắt buộc, như trong ca lâm sàng tiếp theo đây có thực hiện đường rạch giảm căng.
+Rõ ràng Implant nằm quá sát vòng lặp và nghi ngờ đã gây tổn thương thần kinh cằm. Chỉ tránh lỗ cằm thôi là chưa đủ, phải đảm bảo khoảng cách an toàn 5 milimet khi cắm Implant. Ở ca tiếp theo, bác sĩ đã rạch giảm căng...
 
 39
 00:13:06,000 --> 00:13:21,000
-Bác sĩ đã rạch giảm căng để kéo vạt mô mềm sau ghép xương và dù đã kiểm tra để né dây thần kinh nhưng thần kinh cằm vẫn bị chấn thương.
+...và làm đứt thần kinh cằm. Sau khi cấy Implant, để ghép xương thì cần kéo vạt mô mềm nên bác sĩ đã rạch giảm căng. Dù đã kiểm tra vị trí thần kinh cằm...
 
 40
 00:13:21,000 --> 00:13:45,000
-Hậu quả là rối loạn cảm giác kéo dài suốt một năm rưỡi, do đó, thao tác mô mềm quanh vùng thần kinh cằm phải cực kỳ nhẹ nhàng và chuẩn xác.
+...và đường rạch đã cố tránh dây thần kinh, nhưng bệnh nhân vẫn bị mất cảm giác suốt một năm rưỡi. Do đó, khi thao tác vùng thần kinh cằm, việc xử lý mô mềm phải cực kỳ tinh tế. Nếu ống thần kinh huyệt răng dưới bị uốn cong...
 
 41
 00:13:45,000 --> 00:14:10,000
-Ống thần kinh dưới thường uốn cong dưới răng khôn và nằm sát chân răng cối lớn thứ hai nhất, nếu tổn thương nhánh này sẽ là một tai biến vô cùng nghiêm trọng.
+...thì 50% trường hợp nó nằm ngay dưới răng khôn. Xét về khoảng cách, nó nằm sát chân răng cối lớn thứ hai nhất. Thần kinh huyệt răng dưới chạy trong ống tủy xương, nếu làm tổn thương nó thì sẽ là một thảm họa cực kỳ khó giải quyết.
 
 42
 00:14:10,000 --> 00:14:34,000
-Tổn thương có thể do mũi khoan trực tiếp, do huyết khối chèn ép, hoặc do các mảnh xương vụn đẩy xuống ép vào dây thần kinh khi ta đặt implant.
+Có nhiều nguyên nhân gây tổn thương. Thứ nhất là khoan trúng trực tiếp. Thứ hai là do tụ máu chèn ép lên dây thần kinh. Thứ ba là mảnh vụn xương lúc cắm Implant bị đẩy xuống gây chèn ép, và dù hiếm gặp...
 
 43
 00:14:34,000 --> 00:14:56,000
-Một nguyên nhân hiếm gặp khác là xương lành thương mọc chèn ép thần kinh, như ca lâm sàng đặt implant răng bốn sáu và bốn bảy của một đồng nghiệp đi trước.
+...vết thương lành, xương mọc bít lên và chèn ép dây thần kinh cũng gây tổn thương. Thầy may mắn chưa từng gặp tai biến này, nhưng đây là ca của một đàn anh cắm Implant ở răng 46 và 47.
 
 44
 00:14:56,000 --> 00:15:16,000
-Implant ở vị trí bốn sáu đã xâm phạm ống thần kinh dưới, dù được tháo ngay để đặt lại cao hơn nhưng bệnh nhân vẫn bị dị cảm vĩnh viễn không phục hồi.
+Nhìn vào Implant ở vị trí 46, ống thần kinh huyệt răng dưới đã bị xâm phạm. Dù trụ được tháo ra ngay lập tức để cắm nông hơn, nhưng bệnh nhân vẫn bị dị cảm vĩnh viễn. Vậy nên, là một bác sĩ nha khoa...
 
 45
 00:15:16,000 --> 00:15:29,000
-Vì thế, dù các em là bác sĩ mới vào nghề hay đã dày dạn kinh nghiệm, sự cẩn trọng tuyệt đối khi làm việc gần thần kinh chưa bao giờ là thừa.
+...bất kể các em là chuyên gia hay mới vào nghề, khi cắm Implant gần các dây thần kinh, sự cẩn trọng không bao giờ là thừa.
 
 46
 00:15:29,000 --> 00:15:50,000
-Chuyển sang thần kinh lưỡi, đây là một nhánh của thần kinh hàm dưới giúp chi phối cảm giác cho sàn miệng và hai phần ba trước của lưỡi.
+Tiếp theo là thần kinh lưỡi. Đây là nhánh phía lưỡi của thần kinh hàm dưới, chi phối cảm giác sàn miệng và 2/3 trước của lưỡi. Nó tách ra từ thần kinh hàm dưới...
 
 47
 00:15:50,000 --> 00:16:12,000
-Nhánh này nằm gần sống hàm mặt lưỡi nhất tại vị trí răng khôn rồi dần tản ra xa khi tiến về phía trước, hoàn toàn không chạy ngầm trong xương như nhiều em lầm tưởng.
+...và chạy sát sống hàm nhất ở mặt lưỡi của răng cối lớn thứ ba, sau đó đi xa dần sống hàm khi tiến ra phía trước. Nó chạy ngang và rất sát với mặt lưỡi. Nhiều người hỏi liệu thần kinh lưỡi có nằm trong xương không...
 
 48
 00:16:12,000 --> 00:16:32,000
-Thần kinh lưỡi luôn nằm trong mô mềm sát với sống hàm vùng răng khôn, đòi hỏi thao tác lật vạt mặt lưỡi phải hết sức nhẹ nhàng và tinh tế.
+...nhưng thực tế nó luôn nằm trong mô mềm, rất sát sống hàm mặt lưỡi vùng răng khôn. Vì vậy, các em phải cực kỳ dè chừng khi lật vạt ở mặt lưỡi.
 
 49
 00:16:32,000 --> 00:16:43,000
-Thống kê cho thấy tỷ lệ tổn thương thần kinh lưỡi còn cao hơn cả thần kinh cằm, nên các em tuyệt đối không được chủ quan.
+Theo một số báo cáo, tỷ lệ tổn thương thần kinh lưỡi thậm chí còn cao hơn thần kinh cằm, nên các em tuyệt đối không được chủ quan.
 
 50
 00:16:43,000 --> 00:17:10,000
-Cuối cùng, thần kinh má dài chi phối cảm giác da và niêm mạc má, cần được gây tê tốt khi lật vạt niêm mạc má, và đó là toàn bộ các giải phẫu hàm dưới liên quan đến implant.
+Thần kinh má dài là nhánh mặt má của thần kinh hàm dưới, chi phối cảm giác da má và niêm mạc. Để lật vạt ở niêm mạc má, ta phải gây tê dây thần kinh này. Từ đầu đến giờ, chúng ta đã bàn về giải phẫu hàm dưới ứng dụng trong Implant.
 
 51
 00:17:10,000 --> 00:17:16,000
-Thầy đã trình bày qua ba nội dung chính, giờ các em hãy cùng thầy điểm lại những mấu chốt quan trọng nhất của bài học.
+Thầy đã trình bày ba nội dung chính. Bây giờ, thầy sẽ tóm tắt lại những ý trọng tâm nhất.
 
 52
 00:17:21,000 --> 00:17:31,000
-Thứ nhất, implant hàm dưới cần được đặt theo trục góc độ mô phỏng chính xác với hướng nghiêng tự nhiên của răng thật.
+Thứ nhất, về hình thái hàm dưới, Implant nên được cắm theo góc độ tương đồng với trục của răng thật.
 
 53
 00:17:31,000 --> 00:17:46,000
-Thứ hai là đặc điểm phân bố mạch máu, cần đặc biệt lưu ý hõm lưỡi hàm dưới để phòng tránh biến chứng xuyên thủng vách xương mặt lưỡi.
+Thứ hai, về hệ thống cấp máu và đặc điểm mạch máu hàm dưới. Do hình thái lõm ở mặt lưỡi, nguy cơ thủng vách xương rất dễ xảy ra, nên ta phải cẩn thận tránh đụng chạm vùng này.
 
 54
 00:17:46,000 --> 00:18:02,000
-Thứ ba, hãy luôn cẩn trọng bảo vệ các nhánh thần kinh cảm giác, bao gồm thần kinh huyệt răng dưới, thần kinh cằm, thần kinh răng cửa và thần kinh má dài.
+Thứ ba, về thần kinh cảm giác hàm dưới. Bao gồm thần kinh cửa, thần kinh cằm, thần kinh huyệt răng dưới và thần kinh má dài; chúng ta phải chú ý bảo vệ các cấu trúc này khi cắm Implant.
 
 55
 00:18:02,000 --> 00:18:10,000
-Thầy biết các em từng cảm thấy mệt mỏi với môn giải phẫu ở trường đại học, nhưng bài giảng ứng dụng hôm nay thế nào?
+Có lẽ hồi ở trường Y các em đã quá ngán ngẩm với những giờ học giải phẫu, vậy bài học hôm nay thì sao?
 
 56
 00:18:10,000 --> 00:18:20,000
-Thầy tin rằng việc thấu hiểu giải phẫu cũng chính là hiểu rõ cơ thể người bệnh, là nền tảng vững chắc nhất cho sự thành công của một ca cấy ghép.
+Thầy tin rằng hiểu về giải phẫu chính là hiểu về cơ thể con người. Đó là nền móng vững chắc cho mọi ca Implant thành công.
 
 57
 00:18:20,000 --> 00:18:34,000
-Dù đây là một chủ đề khá khô khan, nhưng qua kinh nghiệm thực tiễn, kiến thức của các em sẽ được mở rộng để đem lại kết quả phẫu thuật hoàn hảo.
+Dù đây có thể là một chủ đề khô khan, nhưng qua trải nghiệm thực tế, vốn hiểu biết của các em sẽ sâu sắc hơn và mang lại những ca phẫu thuật trọn vẹn.
 
 58
 00:18:34,000 --> 00:18:45,000
-Hãy luôn nắm thật chắc kiến thức giải phẫu, thầy hy vọng bài giảng này sẽ giúp ích cho các ca phẫu thuật implant sắp tới của các em, cảm ơn các em rất nhiều.
+Các em cần phải nắm thật vững kiến thức giải phẫu. Thầy hy vọng bài giảng này sẽ hữu ích cho con đường cấy ghép Implant của các em, cảm ơn các em rất nhiều.
