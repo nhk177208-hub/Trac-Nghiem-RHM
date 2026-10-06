@@ -15,14 +15,15 @@
             }
         })();
     
-        /* ===== BỘ SỬA GIỌNG TTS (APPLE CHỈ DÙNG DUY NHẤT 1 GIỌNG MẶC ĐỊNH) ===== */
+        /* ===== BỘ SỬA GIỌNG TTS (MICROSOFT AN - NAMMINH - APPLE DÙNG GIỌNG MẶC ĐỊNH) ===== */
         var isAppleDevice = /iPad|iPhone|iPod|Macintosh/i.test(navigator.userAgent || '');
 
         function getTTSVoice(lang) {
-            if (isAppleDevice) return null;
             lang = lang || 'vi';
             var voices = (window.speechSynthesis && window.speechSynthesis.getVoices) ? window.speechSynthesis.getVoices() : [];
             if (!voices || !voices.length) return null;
+            if (isAppleDevice) return null; // Người dùng Apple chỉ nghe 1 giọng mặc định duy nhất của máy
+
             if (lang === 'en') {
                 var enVoice = voices.find(function(x) { return /NamMinh/i.test(x.name); });
                 if (enVoice) return enVoice;
@@ -1109,7 +1110,7 @@
         .yt-journey .jr-c.on .jr-t { font-weight: 800; }
         .yt-journey .jr-n { flex: none; min-width: 1.9em; height: 1.9em; padding: 0 0.35em; box-sizing: border-box; border-radius: 999px; background: #fff; color: #111; display: inline-flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.95em; text-shadow: none; }
         .yt-journey .jr-x { flex: 1 1 auto; min-width: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; }
-        .yt-jnotice { position: absolute; left: 50%; top: 50%; z-index: 31; width: var(--jn-w, fit-content); max-width: var(--jn-max-w, 86%); box-sizing: border-box; transform: translate(-50%, -50%) scale(0.92); opacity: 0; transition: opacity 0.18s ease, transform 0.18s ease; pointer-events: none; text-align: center; color: #fff; background: rgba(2, 6, 23, 0.84); border: 1.5px solid rgba(255, 255, 255, 0.4); border-radius: 0.7em; padding: 0.6em 1.1em; font-weight: 800; line-height: 1.3; box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45); }
+        .yt-jnotice { position: absolute; left: 50%; top: 50%; z-index: 31; width: var(--jn-max-w, 86%) !important; max-width: var(--jn-max-w, 86%) !important; box-sizing: border-box; transform: translate(-50%, -50%) scale(0.92); opacity: 0; transition: opacity 0.18s ease, transform 0.18s ease; pointer-events: none; text-align: center; color: #fff; background: rgba(2, 6, 23, 0.84); border: 1.5px solid rgba(255, 255, 255, 0.4); border-radius: 0.7em; padding: 0.6em 1.1em; font-weight: 800; line-height: 1.3; box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45); }
         .yt-jnotice.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         .yt-jnotice .jn-no { font-size: 0.6em; font-weight: 800; color: #7dd3fc; letter-spacing: 0.04em; margin-bottom: 0.2em; }
         .yt-jnotice .jn-tt { overflow-wrap: anywhere; }
@@ -1197,14 +1198,18 @@
     </style>
 
 <style>
-/* Ẩn hoàn toàn mọi bảng/khung hướng dẫn đổi giọng của Apple */
-.apple-guide-box, .sp-apple-note, .apple-tts-tip,
-.custom-yt-subpanel .sp-note:has(:contains("MacBook")),
-.custom-yt-subpanel .sp-note:has(:contains("iPhone")) {
-    display: none !important;
+/* Khóa độ rộng nhắc mục trên video */
+.yt-jnotice, .custom-yt-wrapper .yt-jnotice {
+    width: var(--jn-max-w, 86%) !important;
+    max-width: var(--jn-max-w, 86%) !important;
+}
+.yt-jnotice .jn-tt {
+    max-width: 100% !important;
+    width: 100% !important;
 }
 </style>
 <script>
+/* Cố định Apple chỉ nghe 1 giọng mặc định duy nhất */
 window.speakText = function(text) {
     if (!window.speechSynthesis || !text) return;
     window.speechSynthesis.cancel();
@@ -1219,29 +1224,44 @@ window.speakText = function(text) {
 };
 
 (function() {
-    // Tự động tìm và loại bỏ bảng hướng dẫn Apple nếu sinh ra bằng DOM/JS
-    function cleanAppleNotice() {
-        var targets = document.querySelectorAll('.sp-note, .custom-yt-subpanel div, .custom-yt-subpanel p');
-        targets.forEach(function(el) {
-            var txt = el.textContent || '';
-            if (txt.indexOf('MacBook, iPhone, iPad') >= 0 || (txt.indexOf('Linh') >= 0 && txt.indexOf('Microsoft An') >= 0)) {
-                el.style.display = 'none';
-                el.innerHTML = '';
+    // 1. Quét và xóa tận gốc bất kỳ khối DOM nào chứa nội dung hướng dẫn Apple
+    function purgeAppleNotice() {
+        var allElements = document.querySelectorAll('div, p, section, span, li');
+        allElements.forEach(function(el) {
+            if (el.children.length <= 4 && el.textContent) {
+                var t = el.textContent;
+                if ((t.indexOf('MacBook, iPhone, iPad') >= 0 || t.indexOf('Cách tải giọng Microsoft An') >= 0) && t.indexOf('Linh') >= 0) {
+                    el.remove();
+                }
             }
         });
     }
 
-    // Thêm thanh trượt độ rộng popup nhắc mục ngoài video vào menu cài đặt mindmap (.cm-pop)
+    // 2. Cập nhật độ rộng popup nhắc mục ngoài video trực tiếp lên CSS và toàn bộ khung video
+    function applyNoticeWidth(val) {
+        var percent = val + '%';
+        document.documentElement.style.setProperty('--jn-max-w', percent);
+        document.querySelectorAll('.custom-yt-wrapper, .yt-jnotice').forEach(function(el) {
+            el.style.setProperty('--jn-max-w', percent, 'important');
+        });
+        // Cập nhật cả khung preview bên trong menu cài đặt
+        var prevNotice = document.querySelector('.pp-bg .yt-jnotice');
+        if (prevNotice) {
+            prevNotice.style.setProperty('width', percent, 'important');
+            prevNotice.style.setProperty('max-width', percent, 'important');
+        }
+    }
+
     function setupNoticeWidthOption(pop) {
         if (!pop || pop.querySelector('.pp-jnotice-width-row')) return;
         var curW = localStorage.getItem('yt_jnotice_w') || '86';
-        document.documentElement.style.setProperty('--jn-max-w', curW + '%');
+        applyNoticeWidth(curW);
 
         var row = document.createElement('div');
         row.className = 'pp-r pp-jnotice-width-row';
         row.style.cssText = 'display:flex;align-items:center;gap:0.5rem;margin-top:0.4rem;padding-top:0.35rem;border-top:1px dashed rgba(125,211,252,0.3);';
         row.innerHTML = '<span class="pp-l" style="width:8.6em;flex:none;font-weight:700;">Độ rộng popup:</span>' +
-            '<input type="range" min="40" max="100" step="2" value="' + curW + '" style="flex:1;min-width:0;cursor:pointer;">' +
+            '<input type="range" min="30" max="100" step="2" value="' + curW + '" style="flex:1;min-width:0;cursor:pointer;">' +
             '<span class="pp-v" style="width:3.6em;flex:none;text-align:right;color:#fcd34d;font-weight:800;">' + curW + '%</span>';
 
         var rangeInput = row.querySelector('input');
@@ -1249,10 +1269,7 @@ window.speakText = function(text) {
         rangeInput.addEventListener('input', function() {
             var val = this.value;
             valSpan.textContent = val + '%';
-            document.documentElement.style.setProperty('--jn-max-w', val + '%');
-            document.querySelectorAll('.custom-yt-wrapper').forEach(function(w) {
-                w.style.setProperty('--jn-max-w', val + '%');
-            });
+            applyNoticeWidth(val);
             localStorage.setItem('yt_jnotice_w', val);
         });
 
@@ -1264,24 +1281,18 @@ window.speakText = function(text) {
         }
     }
 
-    var obs = new MutationObserver(function(muts) {
-        cleanAppleNotice();
-        muts.forEach(function(m) {
-            m.addedNodes.forEach(function(node) {
-                if (node.nodeType === 1) {
-                    if (node.classList && node.classList.contains('cm-pop')) setupNoticeWidthOption(node);
-                    var inner = node.querySelectorAll ? node.querySelectorAll('.cm-pop') : [];
-                    inner.forEach(setupNoticeWidthOption);
-                }
-            });
-        });
+    var obs = new MutationObserver(function() {
+        purgeAppleNotice();
+        document.querySelectorAll('.cm-pop').forEach(setupNoticeWidthOption);
+        var curW = localStorage.getItem('yt_jnotice_w') || '86';
+        applyNoticeWidth(curW);
     });
 
     document.addEventListener('DOMContentLoaded', function() {
         var curW = localStorage.getItem('yt_jnotice_w') || '86';
-        document.documentElement.style.setProperty('--jn-max-w', curW + '%');
+        applyNoticeWidth(curW);
         obs.observe(document.body, { childList: true, subtree: true });
-        cleanAppleNotice();
+        purgeAppleNotice();
         document.querySelectorAll('.cm-pop').forEach(setupNoticeWidthOption);
     });
 })();
