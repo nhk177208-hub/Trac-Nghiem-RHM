@@ -9545,17 +9545,32 @@
         /* ----- Từ tiếng Anh / viết tắt: đọc bằng giọng Anh rồi quay lại giọng Việt ----- */
         const NARR_VI_SYL = /^(ngh|ng|nh|ch|gh|kh|ph|th|tr|gi|qu|[bcdghklmnpqrstvx])?[aeiouy]{1,3}(ng|nh|ch|[cmnpt])?$/;   // cấu trúc âm tiết tiếng Việt (không dấu)
         const NARR_EN_JOIN = /^(the|of|and|to|in|on|for|is|are|a|an|at|as|by|or|it|we|he|me|my|do|go|no|so|be|if|up|us|am)$/;   // từ ngắn vừa giống âm tiết Việt vừa là từ Anh: chỉ tính là Anh khi đứng cạnh từ Anh chắc chắn
-        function narrEnVoice() {
+        const NARR_EN_MALE = /\b(guy|davis|christopher|eric|brian|andrew|ryan|george|roger|steffan|mark|david|james|richard|alex|daniel|fred|tom|aaron|arthur|gordon|rishi|oliver|ethan|thomas|male)\b/i;
+        const NARR_EN_FEMALE = /\b(aria|jenny|michelle|emma|ava|sonia|libby|zira|hazel|susan|samantha|karen|moira|tessa|victoria|fiona|allison|nicky|female)\b/i;
+        function narrEnGender(v) {   // 'm' | 'f' | '' (không rõ)
+            const n = String(v.name || '');
+            if (/\bfemale\b/i.test(n)) return 'f';
+            if (NARR_EN_MALE.test(n)) return 'm';
+            if (NARR_EN_FEMALE.test(n)) return 'f';
+            return '';
+        }
+        let narrEnCache = { k: '', v: null };
+        function narrEnVoice(g) {   // g = 'm' | 'f' : giới tính của giọng Việt đang chọn
             const vs = narrVoices().filter(v => /^en/i.test(v.lang || ''));
             if (!vs.length) return null;
+            const key = (g || '-') + '|' + vs.length + '|' + vs.map(v => v.voiceURI).join(',');
+            if (narrEnCache.k === key && narrEnCache.v) return narrEnCache.v;
             const score = v => {
                 const n = String(v.name || '') + ' ' + String(v.voiceURI || ''); let sc = 0;
                 if (/^en[-_]US/i.test(v.lang)) sc += 4; else if (/^en[-_](GB|AU|CA)/i.test(v.lang)) sc += 2;
                 if (/natural|online|enhanced|premium/i.test(n)) sc += 3;
-                if (/samantha|aria|jenny|guy|zira|google\s?us/i.test(n)) sc += 2;
+                const eg = narrEnGender(v);
+                if (g && eg) sc += (eg === g) ? 20 : -20;   // đúng giới tính được ưu tiên mạnh
                 return sc;
             };
-            return vs.slice().sort((a, b) => score(b) - score(a))[0];
+            const best = vs.slice().sort((a, b) => score(b) - score(a))[0];
+            narrEnCache = { k: key, v: best };
+            return best;
         }
         function narrTokLang(core) {   // 'vi' | 'en' | 'amb' | 'n' (số/ký hiệu)
             if (!core) return 'n';
@@ -9591,7 +9606,9 @@
             return segs;
         }
         function narrBuildUtts(text, r, ur) {
-            const en = narrCfg.en ? narrEnVoice() : null;
+            const en = narrCfg.en ? narrEnVoice(r.g) : null;
+            const enG = en ? (narrEnGender(en) || 'f') : '';
+            const enPitch = !en ? r.pitch : (r.g === 'm' && enG === 'f') ? Math.max(0.1, r.pitch * 0.72) : (r.g === 'f' && enG === 'm') ? Math.min(2, r.pitch * 1.25) : r.pitch;
             const segs = en ? narrSplitLang(text) : [{ en: false, text: text }];
             const out = [];
             segs.forEach(sg => {
@@ -9599,20 +9616,21 @@
                 const u = new SpeechSynthesisUtterance(t);
                 if (sg.en && en) { u.voice = en; u.lang = en.lang || 'en-US'; u._en = true; }
                 else { u.lang = (r.voice && r.voice.lang) || 'vi-VN'; if (r.voice) u.voice = r.voice; }
-                u.pitch = r.pitch; u.rate = ur; out.push(u);
+                u.pitch = u._en ? enPitch : r.pitch; u.rate = ur; out.push(u);
             });
             return out;
         }
-        function narrPlayChain(utts, run, onDone) {   // đọc lần lượt từng đoạn (Việt/Anh); bị huỷ khi narr.run đổi
-            let i = 0;
-            const next = () => {
-                if (narr.run !== run) return;
-                if (i >= utts.length) { if (onDone) onDone(); return; }
-                const u = utts[i++]; narr.cur = u;
-                u.onend = next; u.onerror = next;
-                try { window.speechSynthesis.speak(u); } catch (e) { narr.speaking = false; }
-            };
-            next();
+        function narrPlayChain(utts, run, onDone) {   // đưa toàn bộ đoạn (Việt/Anh) vào hàng đợi một lượt; bị huỷ khi narr.run đổi
+            if (narr.run !== run) return;
+            if (!utts.length) { if (onDone) onDone(); return; }
+            let left = utts.length, fin = false;
+            const end = () => { if (fin || narr.run !== run) return; if (--left <= 0) { fin = true; if (onDone) onDone(); } };
+            utts.forEach(u => {
+                const orig = u.onstart;
+                u.onstart = () => { if (narr.run === run) narr.cur = u; if (orig) orig(); };
+                u.onend = end; u.onerror = end;
+                try { window.speechSynthesis.speak(u); } catch (e) { end(); }
+            });
         }
         function narrSpeak(d, cue, text, t, video, now) { narrSpeakSys(d, cue, text, t, video, now, narrResolve()); }
         function narrSpeakSys(d, cue, text, t, video, now, rr) {
