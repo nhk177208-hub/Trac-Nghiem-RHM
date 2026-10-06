@@ -15,34 +15,52 @@
             }
         })();
     
-        /* ===== HỆ THỐNG XỬ LÝ GIỌNG NÓI TTS (MICROSOFT AN & GIỌNG LINH APPLE) ===== */
-        function getViVoice() {
-            const voices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
-            if (!voices || voices.length === 0) return null;
-
-            // 1. Ưu tiên tìm giọng Microsoft An (Edge / SAPI / Microsoft Natural)
-            let v = voices.find(x => /An/i.test(x.name) && (x.lang.includes('vi') || /vietnamese/i.test(x.name)));
-            if (v) return v;
-
-            // 2. Tìm các giọng Tiếng Việt khác (bao gồm giọng Linh / Enhanced / Premium trên iOS/macOS)
-            v = voices.find(x => (x.lang && x.lang.toLowerCase().replace('_', '-').startsWith('vi')) || /vietnamese|vietnam|linh|nam|minh/i.test(x.name));
-            if (v) return v;
-
-            // 3. Dự phòng giọng tiếng Việt theo mã ISO
-            v = voices.find(x => x.lang && (x.lang === 'vi-VN' || x.lang === 'vi_VN'));
-            if (v) return v;
-
-            // 4. Tìm giọng theo URI hoặc chứa tên Linh
-            v = voices.find(x => /vi[-_]VN/i.test(x.voiceURI) || /linh/i.test(x.name));
-            if (v) return v;
-
-            return null;
+        /* ===== BỘ SỬA GIỌNG TTS (MICROSOFT AN - NAMMINH - CHUYỂN NGỮ MƯỢT MÀ) ===== */
+        function getTTSVoice(lang) {
+            lang = lang || 'vi';
+            var voices = (window.speechSynthesis && window.speechSynthesis.getVoices) ? window.speechSynthesis.getVoices() : [];
+            if (!voices || !voices.length) return null;
+            if (lang === 'en') {
+                var enVoice = voices.find(function(x) { return /NamMinh/i.test(x.name); });
+                if (enVoice) return enVoice;
+                enVoice = voices.find(function(x) { return (x.lang && x.lang.indexOf('en') === 0) && /male|david|mark|george|guy/i.test(x.name); });
+                if (enVoice) return enVoice;
+                return voices.find(function(x) { return x.lang && x.lang.indexOf('en') === 0; }) || null;
+            }
+            var viVoice = voices.find(function(x) { return /An/i.test(x.name) && ((x.lang && x.lang.indexOf('vi') >= 0) || /vietnamese/i.test(x.name)); });
+            if (viVoice) return viVoice;
+            viVoice = voices.find(function(x) { return (x.lang && x.lang.toLowerCase().replace('_', '-').indexOf('vi') === 0) || /vietnamese|vietnam/i.test(x.name); });
+            return viVoice || null;
         }
 
-        // Lắng nghe sự kiện nạp giọng nói của trình duyệt/hệ thống
+        function speakFluidText(text) {
+            if (!window.speechSynthesis || !text) return;
+            window.speechSynthesis.cancel();
+            var parts = text.split(/([A-Za-z0-9\s]{4,})/g).filter(Boolean);
+            parts.forEach(function(part) {
+                var trimmed = part.trim();
+                if (!trimmed) return;
+                var isEnglish = /^[A-Za-z0-9\s.,!?'"]+$/.test(trimmed) && /[a-zA-Z]{3,}/.test(trimmed);
+                var utter = new SpeechSynthesisUtterance(part);
+                if (isEnglish) {
+                    var enV = getTTSVoice('en');
+                    if (enV) utter.voice = enV;
+                    utter.lang = 'en-US';
+                    utter.rate = 0.95;
+                } else {
+                    var viV = getTTSVoice('vi');
+                    if (viV) utter.voice = viV;
+                    utter.lang = 'vi-VN';
+                    utter.rate = 1.0;
+                }
+                window.speechSynthesis.speak(utter);
+            });
+        }
+
         if (typeof window !== 'undefined' && window.speechSynthesis) {
-            window.speechSynthesis.onvoiceschanged = () => {
-                getViVoice();
+            window.speechSynthesis.onvoiceschanged = function() {
+                getTTSVoice('vi');
+                getTTSVoice('en');
             };
         }
 </script>
