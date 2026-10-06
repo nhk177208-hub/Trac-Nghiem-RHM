@@ -1051,7 +1051,7 @@
         .yt-chapmap .cm-pop .pp-bg .yt-jnotice { position: relative; left: auto; top: auto; transform: none; opacity: 1; display: inline-block; max-width: 96%; }
         
         .yt-journey { position: absolute; left: 0; right: 0; top: 0; z-index: 18; overflow: hidden; pointer-events: none; }
-        .yt-journey .jr-c { position: absolute; top: 0; box-sizing: border-box; }
+        .yt-journey .jr-c { position: absolute; top: 0; box-sizing: border-box; pointer-events: auto; cursor: pointer; }
         .yt-journey .jr-c svg { position: absolute; left: 0; top: 0; overflow: visible; }
         .yt-journey .jr-c.on svg { filter: drop-shadow(0 0 5px rgba(74, 222, 128, 0.95)); }
         .yt-journey .jr-t { position: absolute; inset: 0; display: flex; align-items: center; gap: 0.4em; box-sizing: border-box; overflow: hidden; color: #fff; font-weight: 700; line-height: 1.2; text-align: left; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9); }
@@ -13047,6 +13047,19 @@ window.PGR = (function () {
         var p = (W - tip) / n;
         return { n: n, p: p, tip: tip, gap: gap, cw: p + tip - gap, h: JR.h };
     }
+    function jrBindClick(host) {   // bấm vào mũi tên hành trình → tua video tới mục đó
+        if (host._jrBound || (host.parentNode && host.parentNode.classList.contains('pp-bg'))) return;   // khung xem trước trong cài đặt thì bỏ qua
+        host._jrBound = 1;
+        ['pointerdown', 'touchstart', 'mousedown', 'dblclick'].forEach(function (ev) {
+            host.addEventListener(ev, function (e) { if (e.target.closest && e.target.closest('.jr-c')) e.stopPropagation(); }, { passive: true });
+        });
+        host.addEventListener('click', function (e) {
+            var cp = e.target.closest && e.target.closest('.jr-c'); if (!cp) return; e.stopPropagation();
+            var d = host._jrD, c = d && d.chapters && d.chapters[parseInt(cp.getAttribute('data-i'), 10)]; if (!c) return;
+            try { d.player.seekTo(c.t, true); d.player.playVideo(); } catch (er) {}
+            d._chapIdx = -2; toast('⏩ ' + fmt(c.t) + ' · ' + jrTitle(d, c));
+        });
+    }
     function jrDraw(host, W, d, act) {
         var ch = d.chapters || [], total = ch.length, g = jrGeom(W, total), n = g.n, h = g.h, tip = g.tip, cw = g.cw, f = JR.font;
         var start = Math.max(0, Math.min(total - n, act - Math.floor((n - 1) / 2)));
@@ -13059,10 +13072,10 @@ window.PGR = (function () {
                 '<svg width="' + cw.toFixed(1) + '" height="' + h + '"><polygon points="' + pts.join(' ') + '" fill="rgba(15,23,42,' + al.toFixed(2) + ')" stroke="' + (on ? '#4ade80' : 'rgba(255,255,255,0.42)') + '" stroke-width="' + (on ? 2.4 : 1.2) + '" stroke-linejoin="round"/></svg>' +
                 '<div class="jr-t" style="font-size:' + f + 'px;padding-left:' + (tip + 6) + 'px;padding-right:' + (tip + 2) + 'px"><b class="jr-n"></b><span class="jr-x"></span></div></div>';
         }
-        host.style.height = h + 'px'; host.innerHTML = html;
+        host.style.height = h + 'px'; host.innerHTML = html; host._jrD = d; jrBindClick(host);
         var cs = host.querySelectorAll('.jr-c');
         for (k = 0; k < cs.length; k++) {
-            var c = ch[start + k], t = cs[k].querySelector('.jr-x'); cs[k].querySelector('.jr-n').textContent = c.no; t.textContent = jrTitle(d, c); t.title = c.title;
+            var c = ch[start + k], t = cs[k].querySelector('.jr-x'); cs[k].setAttribute('data-i', String(start + k)); cs[k].querySelector('.jr-n').textContent = c.no; t.textContent = jrTitle(d, c); t.title = c.title;
         }
         return g;
     }
@@ -13096,7 +13109,7 @@ window.PGR = (function () {
     }
     var POP_ROWS = {
         jr: [['h', 'Độ cao', 24, 90, 1, 'px'], ['w', 'Độ rộng ô', 80, 320, 5, 'px'], ['tip', 'Độ hẹp (mũi nhọn)', 0, 40, 1, 'px'], ['font', 'Kích cỡ chữ', 9, 26, 1, 'px'], ['tr', 'Độ trong suốt', 0, 90, 5, '%']],
-        nt: [['font', 'Kích cỡ chữ', 12, 48, 1, 'px'], ['bw', 'Độ rộng khung', 0, 100, 5, '%'], ['sec', 'Thời gian hiện', 0.25, 3, 0.25, 's']]
+        nt: [['font', 'Kích cỡ chữ', 12, 48, 1, 'px'], ['bw', 'Độ rộng khung', 0, 90, 5, '%'], ['sec', 'Thời gian hiện', 0.25, 3, 0.25, 's']]
     };
     function popFill(pid, pop) {
         var kind = pop.getAttribute('data-k'), cfg = kind === 'jr' ? JR : JN, d = activeYtPlayers[pid], w = wrap(pid);
@@ -13114,7 +13127,7 @@ window.PGR = (function () {
             jrDraw(pv, bg.clientWidth || 320, d, act);
         } else {
             info.textContent = 'Popup hiện giữa video mỗi khi sang phần mới. Độ rộng khung = % bề ngang video (Auto = vừa chữ).';
-            bg.innerHTML = '<div class="yt-jnotice show" style="font-size:' + JN.font + 'px' + (JN.bw ? ';width:' + Math.min(96, JN.bw) + '%' : '') + '"><div class="jn-no"></div><div class="jn-tt"></div></div>';
+            bg.innerHTML = '<div class="yt-jnotice show" style="font-size:' + JN.font + 'px' + (JN.bw ? ';width:' + Math.min(90, JN.bw) + '%' : '') + '"><div class="jn-no"></div><div class="jn-tt"></div></div>';
             bg.querySelector('.jn-no').textContent = 'MỤC ' + c.no; bg.querySelector('.jn-tt').textContent = jrTitle(d, c);
         }
     }
@@ -13146,7 +13159,7 @@ window.PGR = (function () {
         var d = activeYtPlayers[pid], w = wrap(pid), c = d && d.chapters && d.chapters[i]; if (!c || !w || w.classList.contains('chap-open')) return;
         var scr = w.querySelector('.custom-yt-screen'); if (!scr) return;
         var el = scr.querySelector('.yt-jnotice'); if (!el) { el = document.createElement('div'); el.className = 'yt-jnotice'; scr.appendChild(el); }
-        el.style.fontSize = JN.font + 'px'; el.style.width = JN.bw ? JN.bw + '%' : ''; el.style.maxWidth = JN.bw ? '100%' : ''; el.innerHTML = '<div class="jn-no"></div><div class="jn-tt"></div>';
+        el.style.fontSize = JN.font + 'px'; el.style.width = JN.bw ? Math.min(90, JN.bw) + '%' : ''; el.style.maxWidth = '90%'; el.innerHTML = '<div class="jn-no"></div><div class="jn-tt"></div>';
         el.firstChild.textContent = 'MỤC ' + c.no; el.lastChild.textContent = jrTitle(d, c);
         void el.offsetWidth; el.classList.add('show'); clearTimeout(d._jnT);
         var st = -9; try { st = d.player.getPlayerState(); } catch (e) {}
