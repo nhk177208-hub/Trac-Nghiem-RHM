@@ -1190,6 +1190,51 @@
         .ws-bar { flex: 0 0 44px; height: 4px; border-radius: 3px; background: #fde68a; overflow: hidden; }
         .ws-bar i { display: block; height: 100%; background: #2563eb; }
     </style>
+
+<script>
+/* ===== BỘ SỬA GIỌNG TTS MỚI: MICROSOFT AN & NAMMINH ===== */
+window.getViVoice = function(lang) {
+    lang = lang || 'vi';
+    var voices = (window.speechSynthesis && window.speechSynthesis.getVoices) ? window.speechSynthesis.getVoices() : [];
+    if (!voices || !voices.length) return null;
+    
+    if (lang === 'en') {
+        // Giọng nam NamMinh hoặc các giọng nam tiếng Anh tiêu chuẩn
+        var enV = voices.find(function(x) { return /NamMinh/i.test(x.name); });
+        if (enV) return enV;
+        enV = voices.find(function(x) { return (x.lang && x.lang.indexOf('en') === 0) && /male|david|mark|george|guy|natural/i.test(x.name); });
+        if (enV) return enV;
+        return voices.find(function(x) { return x.lang && x.lang.indexOf('en') === 0; }) || null;
+    }
+    
+    // Tiếng Việt: Ưu tiên Microsoft An
+    var viV = voices.find(function(x) { return /An/i.test(x.name) && ((x.lang && x.lang.indexOf('vi') >= 0) || /vietnamese/i.test(x.name)); });
+    if (viV) return viV;
+    viV = voices.find(function(x) { return (x.lang && x.lang.toLowerCase().replace('_', '-').indexOf('vi') === 0) || /vietnamese|vietnam/i.test(x.name); });
+    return viV || null;
+};
+
+window.speakText = function(text) {
+    if (!window.speechSynthesis || !text) return;
+    window.speechSynthesis.cancel();
+    
+    var isEnglish = /^[A-Za-z0-9\s.,!?'"]+$/.test(text.trim()) && /[a-zA-Z]{3}/.test(text.trim());
+    var utter = new SpeechSynthesisUtterance(text);
+    
+    if (isEnglish) {
+        var enVoice = window.getViVoice('en');
+        if (enVoice) utter.voice = enVoice;
+        utter.lang = 'en-US';
+        utter.rate = 0.95;
+    } else {
+        var viVoice = window.getViVoice('vi');
+        if (viVoice) utter.voice = viVoice;
+        utter.lang = 'vi-VN';
+        utter.rate = 1.0;
+    }
+    window.speechSynthesis.speak(utter);
+};
+</script>
 </head>
 <body class="bg-gray-100 min-h-screen font-sans text-gray-800" onload="initApp()" oncontextmenu="return false;">
 
@@ -9318,10 +9363,10 @@
         const NARR_IS_ANDROID = /Android/i.test(navigator.userAgent || '');
         const NARR_IS_WIN = /Windows/i.test(navigator.userAgent || '');
         let NARR_IS_EDGE = NARR_UA_EDGE && !NARR_IS_IOS;   // Edge iOS dùng lõi Safari, không có HoaiMy/NamMinh
-        // Edge: HoaiMy (nữ) + NamMinh (nam). Apple (iPhone/iPad/Mac): thêm Linh (nâng cao). Còn lại: 1 giọng mặc định của hệ thống.
+        // Edge: HoaiMy (nữ) + NamMinh (nam). Apple (iPhone/iPad/Mac): thêm Microsoft An. Còn lại: 1 giọng mặc định của hệ thống.
         const NARR_PRESETS_EDGE = { 'm-auto': { g: 'f', label: 'HoaiMy (nữ)' }, 'm-deep': { g: 'm', label: 'NamMinh (nam)' } };
         const NARR_PRESETS_STD = { 'm-auto': { g: 'f', label: NARR_IS_APPLE ? 'Giọng mặc định (Linh)' : (NARR_IS_ANDROID ? 'Giọng tiếng Việt của máy' : (NARR_IS_WIN ? 'Giọng mặc định (Microsoft An)' : 'Giọng mặc định')) } };
-        const NARR_PRESETS_LINH = { 'linh-hq': { g: 'f', label: 'Linh (nâng cao)' } };
+        const NARR_PRESETS_LINH = { 'linh-hq': { g: 'f', label: 'Microsoft An' } };
         function narrBuildPresets(edge) { return Object.assign({}, edge ? NARR_PRESETS_EDGE : NARR_PRESETS_STD, NARR_IS_APPLE ? NARR_PRESETS_LINH : {}); }
         let NARR_PRESETS = narrBuildPresets(NARR_IS_EDGE);
         function narrMsName(v) { return String((v.name || '') + ' ' + (v.voiceURI || '')).replace(/[\s_\-]+/g, ''); }
@@ -9339,7 +9384,7 @@
         function narrEdgeNotice() {
             if (NARR_IS_EDGE && !NARR_IS_APPLE) return;
             const t = Date.now(); if (window.__narrNoticeT && t - window.__narrNoticeT < 6000) return; window.__narrNoticeT = t;
-            showToast(NARR_IS_APPLE ? 'Có thể dùng giọng Linh (nâng cao) 🎙 Xem nút ❓ Hướng dẫn trong cài đặt sub để tải' : (NARR_IS_ANDROID ? 'Dùng trình duyệt Edge để có thêm giọng HoaiMy, NamMinh 🎙 Xem nút ❓ trong cài đặt sub' : 'Trình duyệt Microsoft Edge có thêm giọng đọc (HoaiMy, NamMinh) 🎙 Xem nút ❓ trong cài đặt sub'));
+            showToast(NARR_IS_APPLE ? 'Có thể dùng giọng Microsoft An 🎙 Xem nút ❓ Hướng dẫn trong cài đặt sub để tải' : (NARR_IS_ANDROID ? 'Dùng trình duyệt Edge để có thêm giọng HoaiMy, NamMinh 🎙 Xem nút ❓ trong cài đặt sub' : 'Trình duyệt Microsoft Edge có thêm giọng đọc (HoaiMy, NamMinh) 🎙 Xem nút ❓ trong cài đặt sub'));
         }
         let narrCfg = Object.assign({}, NARR_DEF);
         try {
@@ -9424,7 +9469,7 @@
             let t = '';
             if (!all.length) t = 'Thiết bị chưa tải danh sách giọng đọc.';
             else if (!vi.length) t = 'Thiết bị chưa có giọng tiếng Việt: hãy cài trong cài đặt hệ thống (chuyển văn bản thành giọng nói).';
-            if (r.missing) t = 'Chưa tải giọng Linh (nâng cao) về máy nên đang đọc bằng giọng mặc định. Bấm ❓ Hướng dẫn để xem cách tải.';
+            if (r.missing) t = 'Chưa tải giọng Microsoft An về máy nên đang đọc bằng giọng mặc định. Bấm ❓ Hướng dẫn để xem cách tải.';
             document.querySelectorAll('.narr-hint').forEach(h => { if (h.textContent !== t) h.textContent = t; });
         }
         function narrApplyUI() {
@@ -9467,7 +9512,7 @@
         function narrTest() {
             if (!('speechSynthesis' in window)) { showToast('Trình duyệt không hỗ trợ đọc to'); return; }
             const r = narrResolve();
-            if (r.missing) showToast('Chưa tải giọng Linh (nâng cao) — đọc thử bằng giọng mặc định');
+            if (r.missing) showToast('Chưa tải giọng Microsoft An — đọc thử bằng giọng mặc định');
             const utts = narrBuildUtts('Xin chào, đây là giọng lồng tiếng của bài giảng. Ví dụ: API, HTML và Machine Learning.', r, narrCfg.rate);
             try { window.speechSynthesis.cancel(); } catch (e) {}
             const run = {}; narr.run = run;
@@ -9482,7 +9527,7 @@
             const secs = [
                 sec('pc', '💻 Máy tính (PC)', '<b>Trình duyệt Microsoft Edge:</b> chọn thêm 2 giọng <b>HoaiMy</b> (nữ) và <b>NamMinh</b> (nam), ngoài giọng mặc định.<br><b>Chrome, Firefox, Opera…:</b> chỉ có giọng mặc định <b>Microsoft An</b>. Muốn có HoaiMy và NamMinh, hãy mở ứng dụng bằng Edge.'),
                 sec('android', '🤖 Điện thoại Android', 'Ứng dụng dùng <b>giọng tiếng Việt mặc định của hệ thống</b>.<br>Nếu dùng <b>trình duyệt Edge trên Android</b>: mở menu của Edge (nút ⋯), bấm <b>Đọc to</b> để Edge nạp hai giọng <b>HoaiMy</b> và <b>NamMinh</b>, sau đó quay lại ứng dụng là có thể chọn.'),
-                sec('apple', '🍎 MacBook, iPhone, iPad', 'Ngoài giọng mặc định <b>Linh</b>, bạn có thể chọn <b>Linh (nâng cao)</b> — giọng tự nhiên, rõ hơn nhưng cần tải về máy trước. Nếu chưa tải, danh sách sẽ ghi “(chưa tải)” và app tạm đọc bằng giọng mặc định.<br><b>Cách tải giọng Linh (nâng cao):</b><br>• <b>iPhone / iPad:</b> Cài đặt → Trợ năng → Nội dung được đọc (Spoken Content) → Giọng nói (Voices) → Tiếng Việt → Linh → chọn bản <b>Nâng cao</b> (Enhanced) → bấm biểu tượng tải về ☁️ và chờ tải xong.<br>• <b>MacBook:</b> Cài đặt hệ thống → Trợ năng → Nội dung được đọc → Giọng hệ thống → Quản lý giọng nói… (Manage Voices) → Tiếng Việt → Linh → tích chọn bản <b>Nâng cao</b> (Enhanced) để tải.<br>Tải xong, đóng hẳn trình duyệt rồi mở lại ứng dụng (hoặc tải lại trang), sau đó chọn <b>Linh (nâng cao)</b> ở mục Giọng và bấm <b>Nghe thử</b>. Tên menu có thể khác nhẹ tùy phiên bản iOS/macOS.'),
+                sec('apple', '🍎 MacBook, iPhone, iPad', 'Ngoài giọng mặc định <b>Linh</b>, bạn có thể chọn <b>Microsoft An</b> — giọng tự nhiên, rõ hơn nhưng cần tải về máy trước. Nếu chưa tải, danh sách sẽ ghi “(chưa tải)” và app tạm đọc bằng giọng mặc định.<br><b>Cách tải giọng Microsoft An:</b><br>• <b>iPhone / iPad:</b> Cài đặt → Trợ năng → Nội dung được đọc (Spoken Content) → Giọng nói (Voices) → Tiếng Việt → Linh → chọn bản <b>Nâng cao</b> (Enhanced) → bấm biểu tượng tải về ☁️ và chờ tải xong.<br>• <b>MacBook:</b> Cài đặt hệ thống → Trợ năng → Nội dung được đọc → Giọng hệ thống → Quản lý giọng nói… (Manage Voices) → Tiếng Việt → Linh → tích chọn bản <b>Nâng cao</b> (Enhanced) để tải.<br>Tải xong, đóng hẳn trình duyệt rồi mở lại ứng dụng (hoặc tải lại trang), sau đó chọn <b>Microsoft An</b> ở mục Giọng và bấm <b>Nghe thử</b>. Tên menu có thể khác nhẹ tùy phiên bản iOS/macOS.'),
             ].sort((a, b) => (b.id === me) - (a.id === me));
             const m = document.createElement('div'); m.id = 'narr-guide-modal';
             m.style.cssText = 'position:fixed;inset:0;z-index:2147483600;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:12px';
