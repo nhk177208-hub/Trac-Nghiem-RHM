@@ -909,6 +909,7 @@
         .yt-volpop .vs { position: relative; flex: 1; width: 100%; }
         .yt-volpop .yt-vp-range { position: absolute; left: 50%; top: 50%; width: 88px; transform: translate(-50%, -50%) rotate(-90deg); margin: 0; }
         .yt-volbox.open .yt-volpop { display: block; }
+        @media (hover: none) and (pointer: coarse) { .yt-volpop { display: none !important; } }
         @media (hover: hover) and (pointer: fine) { .yt-volbox:hover .yt-volpop { display: block; } }
         /* ===== HÀNG NÚT CỦA BÀI HỌC: GỌN, MỘT HÀNG ===== */
         .lc-acts { flex-wrap: nowrap !important; gap: 0.35rem !important; }
@@ -8898,15 +8899,14 @@
                                     <div class="yt-chapnav flex items-center gap-1 bg-gray-800/90 border border-gray-600 rounded-lg px-1.5 py-1">
                                         <button type="button" onclick="ytChapToggle('${playerId}')" id="chap-btn-${playerId}" class="text-xs font-bold text-gray-100 px-1 active:scale-95" title="Sơ đồ tư duy (AI)"><span class="yt-ic">🧠</span></button>
                                     </div>
+                                    <button type="button" id="focus-btn-${playerId}" onclick="ytFocusDialog('${playerId}')" class="yt-focus-btn bg-gray-800 hover:bg-gray-700 border border-gray-600 px-2.5 py-1 rounded-lg text-xs font-bold text-gray-200" title="Chế độ tập trung"><span class="yt-ic">🎯</span><span class="yt-lbl"> Tập trung: </span><b class="fo-st">Tắt</b></button>
+                                    <button type="button" onclick="openVideoAi('${playerId}')" class="bg-gradient-to-r from-indigo-600 to-purple-600 border border-indigo-400 px-2.5 py-1 rounded-lg text-xs font-bold text-white" title="Hỏi AI về video này"><span class="yt-ic">🤖</span><span class="yt-lbl"> Hỏi AI</span></button>
 
-                                    <div class="yt-volbox relative flex items-center bg-gray-800/90 border border-gray-600 rounded-lg px-2 py-1" title="Âm lượng">
-                                        <button type="button" onclick="ytVolBtn('${playerId}')" id="mute-btn-${playerId}" class="text-sm leading-none active:scale-95" title="Âm lượng">🔊</button>
-                                        <div class="yt-volpop"><div class="vb"><span id="vol-label-${playerId}" class="yt-vp-label">100%</span><div class="vs"><input type="range" id="vol-${playerId}" min="0" max="100" step="1" value="100" class="custom-range-slider yt-vp-range" oninput="setYtVolume('${playerId}', this.value)"></div></div></div>
-                                    </div>
+
 
                                     <span class="yt-spacer"></span>
 
-                                    <button type="button" id="focus-btn-${playerId}" onclick="ytFocusDialog('${playerId}')" class="yt-focus-btn bg-gray-800 hover:bg-gray-700 border border-gray-600 px-2.5 py-1 rounded-lg text-xs font-bold text-gray-200" title="Chế độ tập trung"><span class="yt-ic">🎯</span><span class="yt-lbl"> Tập trung: </span><b class="fo-st">Tắt</b></button>
+                                    
                                     <select onchange="setYtQuality('${playerId}', this.value)" class="yt-quality bg-gray-800 border border-gray-600 rounded-lg px-1 py-1 text-[11px] text-gray-200 outline-none cursor-pointer" title="Cài đặt chất lượng">
                                         <option value="hd1080" selected class="bg-gray-900">1080p</option>
                                         <option value="hd720" class="bg-gray-900">720p</option>
@@ -8934,8 +8934,13 @@
                                     <button type="button" onclick="toggleYtCaptions('${playerId}')" id="cc-btn-${playerId}" class="bg-blue-600 border border-blue-400 px-2.5 py-1 rounded-lg text-xs font-bold text-white" title="Bật/Tắt phụ đề"><span class="yt-ic">Aa</span><span class="yt-lbl"> Phụ đề: Bật</span></button>
                                     <button type="button" onclick="toggleSubPanel('${playerId}', true)" class="bg-gray-800 hover:bg-gray-700 border border-gray-600 px-2.5 py-1 rounded-lg text-xs font-bold text-gray-200" title="Cài đặt phụ đề và lồng tiếng"><span class="yt-ic">⚙</span><span class="yt-lbl"> Cài đặt sub &amp; lồng tiếng</span></button>
                                     <button type="button" onclick="toggleNarration('${playerId}')" id="narr-btn-${playerId}" class="bg-gray-800 hover:bg-gray-700 border border-gray-600 px-2.5 py-1 rounded-lg text-xs font-bold text-gray-200" title="Bật/Tắt lồng tiếng (đọc sub tiếng Việt bằng giọng máy)"><span class="yt-ic">🎙</span><span class="yt-lbl"> Lồng tiếng: Tắt</span></button>
-                                    <button type="button" onclick="openVideoAi('${playerId}')" class="bg-gradient-to-r from-indigo-600 to-purple-600 border border-indigo-400 px-2.5 py-1 rounded-lg text-xs font-bold text-white" title="Hỏi AI về video này"><span class="yt-ic">🤖</span><span class="yt-lbl"> Hỏi AI</span></button>
+                                    
 
+
+                                                                        <div class="yt-volbox relative flex items-center bg-gray-800/90 border border-gray-600 rounded-lg px-2 py-1" title="Âm lượng">
+                                        <button type="button" onclick="ytVolBtn('${playerId}')" id="mute-btn-${playerId}" class="text-sm leading-none active:scale-95" title="Âm lượng">🔊</button>
+                                        <div class="yt-volpop"><div class="vb"><span id="vol-label-${playerId}" class="yt-vp-label">100%</span><div class="vs"><input type="range" id="vol-${playerId}" min="0" max="100" step="1" value="100" class="custom-range-slider yt-vp-range" oninput="setYtVolume('${playerId}', this.value)"></div></div></div>
+                                    </div>
 
                                     <button onclick="toggleYtTheaterMode('${playerId}')" id="theater-btn-${playerId}" class="bg-purple-900/80 hover:bg-purple-800 border border-purple-500 font-bold px-2.5 py-1 rounded-lg text-xs flex items-center shadow-sm active:scale-95" title="Bật/Tắt Chế độ Rạp Chiếu Phim">${YT_THEATER_HTML_OFF}</button>
 
@@ -9171,6 +9176,8 @@
             syncYtVolumeUI();
             scheduleYtWatermarkLayout();
             paintCcButton(playerId, data.ccActive); paintNarrButton(playerId);
+            try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
+            try { if (ytTouchSys()) { event.target.setVolume(100); } } catch (e) {}
             try {
                 if (data.rate && data.rate !== 1) data.player.setPlaybackRate(data.rate);
                 if (typeof data.player.unloadModule === 'function') data.player.unloadModule('captions');
@@ -10730,12 +10737,15 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
 
         const ytVolumeState = { volume: 100, muted: false };
 
+        /* Thiết bị cảm ứng: âm lượng do phím cứng/hệ thống của máy điều khiển; trình phát YouTube luôn giữ 100% để không bị nhân đôi giảm tiếng */
+        function ytTouchSys() { try { return window.matchMedia('(hover: none) and (pointer: coarse)').matches; } catch (e) { return false; } }
+
         function applyYtVolume(playerId) {
             const d = activeYtPlayers[playerId];
             if (!d || !d.player) return;
             try {
                 if (typeof d.player.setVolume !== 'function') return;
-                const vol = d.narrOn ? Math.round(ytVolumeState.volume * narrCfg.orig / 100) : ytVolumeState.volume;   // đang thuyết minh: hạ âm lượng video gốc
+                const base = ytTouchSys() ? 100 : ytVolumeState.volume; const vol = d.narrOn ? Math.round(base * narrCfg.orig / 100) : base;   // đang thuyết minh: hạ âm lượng video gốc
                 d.player.setVolume(vol);
                 if (ytVolumeState.muted) d.player.mute(); else d.player.unMute();
             } catch (e) {}
@@ -13930,8 +13940,8 @@ window.PGR = (function () {
     window.ytVolBtn = function (pid) {
         var b = $('mute-btn-' + pid), box = b && b.closest('.yt-volbox'); if (!box) return;
         if (window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches) { toggleYtMute(pid); return; }
-        var o = box.classList.toggle('open'); clearTimeout(box._t);
-        if (o) { box._t = setTimeout(function () { box.classList.remove('open'); }, 4000); try { showControlsDirectly(pid); } catch (e) {} }
+        toggleYtMute(pid);
+        try { if (!ytVolumeState.muted) showToast('🔊 Đã bật tiếng — chỉnh to/nhỏ bằng phím âm lượng của thiết bị'); else showToast('🔇 Đã tắt tiếng'); } catch (e) {}
     };
     document.addEventListener('pointerdown', function (e) { document.querySelectorAll('.yt-volbox.open').forEach(function (b) { if (!b.contains(e.target)) b.classList.remove('open'); }); }, true);
     document.addEventListener('input', function (e) { var b = e.target && e.target.closest && e.target.closest('.yt-volbox'); if (b) { clearTimeout(b._t); b._t = setTimeout(function () { b.classList.remove('open'); }, 4000); } }, true);
