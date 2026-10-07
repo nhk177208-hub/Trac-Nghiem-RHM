@@ -1,1 +1,1247 @@
+1
+00:00:38,640 --> 00:00:46,320
+Chào mừng các em quay trở lại, thầy là Yaser Asif từ chuỗi bài giảng Learn Dental Series.
 
+2
+00:00:43,520 --> 00:00:54,640
+Trong tập này, chúng ta sẽ tiếp tục thảo luận về chủ đề chẩn đoán, lập kế hoạch điều trị và nha khoa phục hồi.
+
+3
+00:00:52,480 --> 00:01:06,960
+Trước tiên, thầy muốn khẳng định rằng thầy không nhận bất kỳ khoản thù lao hay lợi ích nào từ việc bán các sản phẩm được đề cập trong bài giảng này.
+
+4
+00:01:04,720 --> 00:01:13,840
+Bài trình bày này không được tài trợ bởi bất kỳ công ty hay tổ chức nào và chỉ được biên soạn hoàn toàn vì mục đích giáo dục.
+
+5
+00:01:13,840 --> 00:01:31,253
+Thầy cũng xin nhắc lại rằng bài giảng này được bảo vệ bản quyền và không được phép sao chép hay truyền tải dưới bất kỳ hình thức nào nếu chưa có sự cho phép của tác giả.
+
+6
+00:01:31,253 --> 00:01:43,306
+Mục tiêu bài học hôm nay là giúp các em liên kết được các dấu chứng lâm sàng của răng miệng với kế hoạch điều trị dự kiến.
+
+7
+00:01:43,306 --> 00:01:58,400
+Trong các tập trước, chúng ta đã bắt đầu thảo luận phần một về đánh giá bệnh nhân và thu thập thông tin, bao gồm dữ liệu nhân khẩu học, lý do đến khám, bệnh sử và nha sử.
+
+8
+00:01:58,400 --> 00:02:14,000
+Chúng ta cũng đã làm rõ cách thu thập thông tin cũng như tầm quan trọng của chúng trong việc thiết lập kế hoạch điều trị và xử trí vấn đề của bệnh nhân.
+
+9
+00:02:12,800 --> 00:02:25,312
+Sau đó, chúng ta sẽ tiến tới bước khám lâm sàng và chẩn đoán, bắt đầu bằng việc thăm khám sâu răng, đây cũng là chủ đề trọng tâm của chúng ta.
+
+10
+00:02:25,312 --> 00:02:34,640
+Trong chương này, chúng ta đã đi từ các kỹ thuật thăm khám truyền thống.
+
+11
+00:02:33,120 --> 00:02:49,120
+Và khi bàn về kỹ thuật truyền thống, chúng ta có rất nhiều phương pháp như khám bằng mắt thường, khám bằng xúc giác, phân tích phim X-quang cùng những hạn chế của từng phương pháp.
+
+12
+00:02:46,640 --> 00:03:08,000
+Chúng ta đã bắt đầu với phương pháp khám bằng mắt thường và nhận ra rằng có một giới hạn rất lớn trong việc não bộ diễn dịch lại những gì mắt chúng ta nhìn thấy.
+
+13
+00:03:05,920 --> 00:03:18,583
+Và tùy thuộc vào kiến thức cũng như kỹ năng của các em trong nha khoa phục hồi và kiểm soát sâu răng, việc khám bằng mắt thường mang tính chủ quan khác nhau ở mỗi bác sĩ.
+
+14
+00:03:18,583 --> 00:03:46,480
+Đó là lý do vì sao đã có rất nhiều nỗ lực từ các nhà dịch tễ học và chuyên gia sâu răng nhằm xây dựng các chỉ số phát hiện sâu răng, giúp lượng hóa và tiêu chuẩn hóa tính chủ quan của phương pháp khám bằng mắt thường.
+
+15
+00:03:44,959 --> 00:04:09,040
+Các chỉ số này bao gồm Hệ thống Đánh giá và Phát hiện Sâu răng Quốc tế, viết tắt là ICDAS, sử dụng đặc điểm bề mặt quan sát được để đánh giá độ sâu mô học tiềm năng của sang thương sâu răng.
+
+16
+00:04:06,640 --> 00:04:38,639
+Như thầy đã đề cập, đây là nỗ lực nhằm tiêu chuẩn hóa sự khác biệt chủ quan giữa các bác sĩ, giữa các quốc gia và nền văn hóa, thông qua việc thu thập một lượng lớn dữ liệu trong suốt thời gian dài để lượng hóa thành các thang điểm.
+
+17
+00:04:35,280 --> 00:04:53,919
+Tiếp theo là chỉ số PUFA, tập trung vào việc phân loại các mức độ nghiêm trọng nhất của bệnh lý sâu răng, bao gồm tổn thương tủy, loét, lỗ dò và áp xe.
+
+18
+00:04:51,440 --> 00:05:07,280
+Hệ thống tiếp theo là CAST, viết tắt của Phổ Đánh giá và Điều trị Sâu răng, bao gồm việc phân loại sang thương sâu răng từ giai đoạn sớm đến các mức độ nghiêm trọng hơn.
+
+19
+00:05:05,440 --> 00:05:21,840
+Và cuối cùng là hệ thống phân loại sâu răng của Hiệp hội Nha khoa Hoa Kỳ (ADA), mô tả cả sang thương có tạo xoang và chưa tạo xoang qua biểu hiện lâm sàng mà không gắn liền với một phương pháp điều trị cụ thể nào.
+
+20
+00:05:19,120 --> 00:05:35,440
+Quyết định điều trị là của các em, các em chỉ cần thu thập dữ liệu và tùy theo từng ca bệnh cùng vật liệu sẵn có để đưa ra hướng xử trí phù hợp nhất.
+
+21
+00:05:34,080 --> 00:05:53,794
+Hệ thống phân loại sâu răng của ADA cũng liên kết biểu hiện sang thương lâm sàng với các dấu chứng trên phim X-quang, nhằm cung cấp cách tiếp cận để xác định mức độ hoạt động của sang thương theo thời gian.
+
+22
+00:05:53,794 --> 00:06:11,759
+Chúng ta hãy bắt đầu với chỉ số đầu tiên là ICDAS, từ này là viết tắt của Hệ thống Đánh giá và Phát hiện Sâu răng Quốc tế.
+
+23
+00:06:08,319 --> 00:06:21,600
+Ý tưởng cốt lõi nằm ở hai khía cạnh: phát hiện và đánh giá, các em hãy nhớ kỹ điều này nhé.
+
+24
+00:06:19,360 --> 00:06:32,920
+Chúng ta cần một phương pháp để chấm điểm việc phát hiện và đánh giá, đó là lý do ICDAS ra đời như một hệ thống điểm lâm sàng dùng để phát hiện và đánh giá sâu răng.
+
+25
+00:06:32,920 --> 00:06:58,480
+Nó được tạo ra để ứng dụng trong đào tạo nha khoa giữa giảng viên và sinh viên, cũng như trong thực hành lâm sàng để giúp các bác sĩ giao tiếp và hội chẩn dễ dàng hơn chỉ bằng một con số.
+
+26
+00:06:58,480 --> 00:07:12,639
+Nhờ đó, bác sĩ hoặc chuyên gia tiếp nhận ca bệnh có thể hình dung ngay tình trạng ban đầu từ điểm số mà các em ghi trong hồ sơ bệnh án của bệnh nhân.
+
+27
+00:07:09,280 --> 00:07:25,306
+Hệ thống này cũng được dùng trong nghiên cứu và các khảo sát dịch tễ học, giúp tiết kiệm nhiều thời gian hơn so với việc mô tả sang thương bằng văn bản dài dòng.
+
+28
+00:07:25,306 --> 00:07:29,520
+Điểm số này phản ánh rất nhiều thông tin về ca bệnh của các em.
+
+29
+00:07:29,520 --> 00:07:44,879
+Hệ thống điểm này có thể áp dụng cho cả mặt thân răng và mặt chân răng, dùng để phát hiện và đánh giá cả sâu men, sâu ngà, sang thương chưa tạo xoang và sang thương có tạo xoang.
+
+30
+00:07:43,440 --> 00:07:56,560
+ICDAS cũng đo lường những thay đổi bề mặt và độ sâu mô học tiềm năng của sang thương bằng cách dựa vào các đặc điểm quan sát được trên bề mặt.
+
+31
+00:07:55,440 --> 00:08:14,720
+Sau đó, hệ thống sẽ kết hợp giữa dấu chứng lâm sàng với độ sâu mô học dự kiến của sang thương, từ đó ảnh hưởng trực tiếp đến quyết định điều trị lâm sàng của các em.
+
+32
+00:08:10,840 --> 00:08:33,000
+Vì vậy, ICDAS hướng tới việc thu thập thông tin chất lượng cao hơn để đưa ra quyết định chẩn đoán, tiên lượng và xử trí sâu răng phù hợp ở cả cấp độ cá nhân lẫn y tế cộng đồng.
+
+33
+00:08:31,360 --> 00:08:49,760
+Mọi thứ bắt đầu vào năm 2002 với phiên bản ban đầu chỉ được gọi là ICDAS, nhưng sau các lần sửa đổi, người ta gọi nó là ICDAS 1 để phân biệt với các phiên bản nâng cấp sau này.
+
+34
+00:08:49,760 --> 00:09:05,839
+ICDAS 1 tập trung vào hai thành phần: thành phần D (Detection) là phát hiện và thành phần A (Assessment) là phương pháp đánh giá.
+
+35
+00:09:03,839 --> 00:09:23,519
+Vào thời điểm này, ICDAS 1 không bao gồm các thông tin liên quan đến sâu chân răng hay các răng đã được phục hồi trước đó.
+
+36
+00:09:20,720 --> 00:09:30,040
+Nó chỉ tập trung vào việc xác định xem sang thương đã tạo xoang hay chưa và có đang tiến triển hay không.
+
+37
+00:09:30,040 --> 00:09:47,440
+Đối với những sang thương sâu răng khởi phát nguyên thủy chưa được xử trí hoặc chưa được phục hồi trước đó, nó không có thông tin về khả năng sử dụng của miếng trám hay tình trạng sâu răng hiện tại.
+
+38
+00:09:44,880 --> 00:09:50,080
+Thầy nhắc lại, phiên bản này cũng không bao gồm thông tin về sâu chân răng.
+
+39
+00:09:50,080 --> 00:10:04,480
+Thành phần D trong ICDAS đại diện cho việc phát hiện sâu răng theo từng giai đoạn của quá trình tiến triển sâu răng.
+
+40
+00:10:01,680 --> 00:10:10,560
+Bắt đầu từ quá trình khử khoáng cho đến sang thương sâu răng xâm lấn vào ngà và tiến sát tủy.
+
+41
+00:10:08,800 --> 00:10:23,600
+Nó phụ thuộc vào hình thái bề mặt, xem đó là vùng ứ đọng mảng bám như hố rãnh, mặt láng, thân răng hay chân răng.
+
+42
+00:10:19,920 --> 00:10:30,373
+Trạng thái của miếng trám hoặc vật liệu trám bít là ý tưởng chính để xây dựng và sửa đổi thành ICDAS 2.
+
+43
+00:10:30,373 --> 00:10:36,640
+Tuy nhiên đối với ICDAS 1, nó chỉ phụ thuộc vào giai đoạn sâu răng và hình thái bề mặt.
+
+44
+00:10:36,640 --> 00:10:48,446
+Phương pháp đánh giá bao gồm giai đoạn đã tạo xoang hay chưa, cùng với mức độ hoạt động là sang thương đang tiến triển hay đã ngưng tiến triển.
+
+45
+00:10:48,446 --> 00:10:54,100
+Bây giờ chúng ta sẽ đi sâu vào chi tiết của ICDAS 1 nhé.
+
+46
+00:10:54,100 --> 00:11:27,440
+ICDAS 1 chấm điểm thăm khám sâu răng bằng mắt thường theo thang điểm từ 0 đến 6, chỉ áp dụng cho sâu thân răng nguyên phát ở hố rãnh hoặc mặt láng, hoạt động hoặc không hoạt động, không bao gồm răng đã phục hồi và sâu chân răng.
+
+47
+00:11:26,000 --> 00:11:33,109
+Thang điểm này rất đơn giản, điểm 0 nghĩa là răng lành mạnh, hoàn toàn không có hoạt động sâu răng.
+
+48
+00:11:33,109 --> 00:11:37,840
+Điểm 1 nghĩa là có những thay đổi trực quan đầu tiên trên men răng.
+
+49
+00:11:37,840 --> 00:11:48,832
+Điểm 2 là những thay đổi rõ rệt hơn trên men răng, nhưng tất cả vẫn chưa có bất kỳ sự phá vỡ cấu trúc bề mặt răng nào.
+
+50
+00:11:48,832 --> 00:12:05,680
+Sau đó đến điểm 3, chúng ta bắt đầu thấy sự phá vỡ men răng khu trú mà chưa có dấu chứng lâm sàng của việc xâm lấn sâu hơn, đây có thể coi là giai đoạn bắt đầu tạo xoang nhỏ.
+
+51
+00:12:05,680 --> 00:12:18,000
+Đến điểm 4, ánh xám đen từ lớp ngà bên dưới bắt đầu xuất hiện, chứng tỏ sang thương đã bắt đầu lan rộng sang hai bên dọc theo đường nối men-ngà.
+
+52
+00:12:18,000 --> 00:12:24,640
+Điểm 5 là một lỗ sâu rõ rệt có thể nhìn thấy được lớp ngà răng.
+
+53
+00:12:24,640 --> 00:12:32,320
+Và điểm 6 là một lỗ sâu lớn lộ rõ lớp ngà răng, mang tính xâm lấn và phá hủy trầm trọng nhất.
+
+54
+00:12:32,320 --> 00:12:40,640
+Đây là các hình ảnh lâm sàng minh họa cho những gì các em có thể thấy ở từng mức điểm.
+
+55
+00:12:40,640 --> 00:12:43,493
+Điểm 0 là răng hoàn toàn lành mạnh.
+
+56
+00:12:43,493 --> 00:12:48,102
+Điểm 1 là những thay đổi đầu tiên trên men răng.
+
+57
+00:12:48,102 --> 00:12:50,880
+Điểm 2 là những thay đổi rõ rệt trên men răng.
+
+58
+00:12:50,880 --> 00:12:59,706
+Điểm 3 là phá vỡ men răng khu trú, bắt đầu tạo lỗ sâu nhỏ nhưng chưa có dấu hiệu xâm lấn sâu hơn.
+
+59
+00:12:59,706 --> 00:13:07,394
+Điểm 4 là ánh xám đen hắt lên từ lớp ngà bên dưới.
+
+60
+00:13:07,394 --> 00:13:16,299
+Điểm 5 là xoang sâu rõ rệt nhìn thấy lớp ngà, và cuối cùng điểm 6 là lỗ sâu lan rộng lộ rõ lớp ngà bên dưới.
+
+61
+00:13:16,299 --> 00:13:27,200
+Xét về tiêu chí hoạt động của sâu răng, các điểm 1, 2 hoặc 3 có thể là sang thương đang hoạt động hoặc đã ngưng tiến triển.
+
+62
+00:13:24,639 --> 00:13:34,160
+Điểm 4 gần như chắc chắn là đang hoạt động vì đã hình thành xoang sâu và đang tiếp tục xâm lấn sâu hơn vào lớp ngà răng.
+
+63
+00:13:34,160 --> 00:13:46,800
+Tuy nhiên đối với điểm 5 hoặc 6, sang thương lại có thể đang tiến triển hoặc đã ngưng tiến triển.
+
+64
+00:13:45,040 --> 00:14:08,560
+Ngưng tiến triển nghĩa là tủy răng đã phản ứng bảo vệ bằng cách tạo ra lớp ngà xơ hóa, giúp cản trở và giới hạn sự lan rộng của sâu răng, lớp này được xem là ngà bị ảnh hưởng thay vì ngà nhiễm khuẩn.
+
+65
+00:14:08,560 --> 00:14:13,360
+Và lớp ngà này sẽ có độ cứng khá vững chắc.
+
+66
+00:14:13,360 --> 00:14:45,839
+Nếu sang thương được đánh giá là điểm 1, 2 hoặc 3, với bề mặt men răng có màu trắng hoặc vàng đục, mất độ bóng, cảm giác thô ráp khi dùng đầu thám trâm rà qua, và nằm ở vùng ứ đọng mảng bám như hố rãnh, vùng cổ răng hay mặt bên mất tiếp xúc, thì đây được coi là sang thương đang hoạt động.
+
+67
+00:14:43,360 --> 00:15:29,120
+Ngược lại, với các mã 1, 2 hoặc 3 nhưng bề mặt men có màu trắng, nâu hoặc đen, men răng bóng và có cảm giác cứng khi rà bằng thám trâm, nằm cách xa viền nướu và không thuộc vùng ứ đọng mảng bám, thì đó là sang thương ngưng tiến triển có thể xử trí bằng tái khoáng hóa, thay đổi thói quen, trám bít hố rãnh, phục hồi nhựa dự phòng (PRR) hoặc điều trị phục hồi không sang chấn (ART).
+
+68
+00:15:27,120 --> 00:15:42,720
+Hệ thống này không trực tiếp đưa ra quyết định điều trị khác biệt, nhưng nó hỗ trợ ra quyết định thông qua việc tiêu chuẩn hóa kết quả khám sâu răng bằng mắt thường.
+
+69
+00:15:42,720 --> 00:16:09,040
+Và dựa trên dữ liệu thu thập về đánh giá nguy cơ sâu răng, tình trạng vệ sinh răng miệng, thái độ và chế độ ăn của bệnh nhân, các em có thể chọn giải pháp từ tái khoáng hóa cho đến phục hồi nhựa dự phòng hay điều trị phục hồi không sang chấn.
+
+70
+00:16:07,199 --> 00:16:20,800
+Các em có thể thắc mắc tại sao cùng một sang thương đốm trắng lại có thể là không hoạt động, và cũng đốm trắng đó lại có thể là đang hoạt động?
+
+71
+00:16:18,240 --> 00:16:27,600
+Đó chỉ là sự khác biệt ở thời điểm mà các em tiến hành thăm khám ca bệnh.
+
+72
+00:16:25,040 --> 00:16:51,759
+Sang thương có thể từ màu trắng chuyển sang vàng tùy thuộc vào mức độ bắt màu, nhưng tất cả đều là tình trạng khử khoáng như chúng ta đã bàn về sang thương đốm trắng và hiện tượng xuất hiện rồi biến mất khi khám bằng mắt thường.
+
+73
+00:16:48,800 --> 00:17:00,560
+Cả hai đều bị khử khoáng, nhưng cả hai đều có thể đang tiến triển hoặc đã ngưng tiến triển.
+
+74
+00:16:58,959 --> 00:17:15,559
+Do đó, nếu chúng ta có một sang thương đốm trắng bắt đầu hoạt động hoặc được xác định là đang hoạt động...
+
+75
+00:17:14,240 --> 00:17:23,360
+Quá trình khử khoáng men răng sẽ làm thay đổi khả năng phản xạ và truyền ánh sáng.
+
+76
+00:17:21,039 --> 00:17:30,720
+Sau đó, các vi rỗ bề mặt do sự khử khoáng men răng sẽ bắt đầu ngả sang màu vàng.
+
+77
+00:17:29,360 --> 00:17:48,480
+Và nếu là sang thương đang hoạt động, nó sẽ tiếp tục lan xuống ngà răng mà chưa kịp có đủ thời gian để lấp đầy các vi rỗ này bằng nhiều mảng bám màu hơn.
+
+78
+00:17:43,520 --> 00:18:16,160
+Nhưng khi nó bắt đầu như một sang thương đốm trắng, sau đó quá trình sâu răng dừng lại hoặc bệnh nhân thay đổi thói quen vệ sinh răng miệng, bắt đầu thiết lập lại biện pháp chải răng dự phòng đúng cách nhờ lời khuyên từ các bác sĩ đồng nghiệp của chúng ta để bảo vệ lớp ngà răng...
+
+79
+00:18:15,360 --> 00:18:36,559
+Khi đó, các rỗ bề mặt vẫn còn mở và tiếp tục bắt màu, khiến nó trở nên nâu và sẫm màu hơn mà không lan rộng thêm vì quá trình sâu răng đã dừng lại, nhưng vi rỗ vẫn sẵn sàng tiếp nhận thêm các chất gây đổi màu.
+
+80
+00:18:35,200 --> 00:18:47,760
+Đó là lý do giải thích tại sao điểm 4 hầu như luôn là sang thương đang hoạt động.
+
+81
+00:18:44,320 --> 00:18:59,600
+Đối với điểm 5 hoặc 6, lúc này sang thương đã vào đến lớp ngà, nếu khi dùng thám trâm rà nhẹ thấy lỗ sâu mềm hoặc có cảm giác dai như da thì chắc chắn nó đang tiến triển.
+
+82
+00:18:55,360 --> 00:19:06,480
+Nếu xoang sâu lộ ra bề mặt ngà bóng loáng và có cảm giác cứng khi rà thám trâm nhẹ nhàng, thì rất có thể nó đã ngưng tiến triển.
+
+83
+00:19:05,520 --> 00:19:22,880
+Một lần nữa, bảng này cho thấy định nghĩa thế nào là răng lành mạnh cùng các thuật ngữ nha khoa cũng như điểm số phát hiện của ICDAS.
+
+84
+00:19:19,120 --> 00:19:36,320
+Giai đoạn sớm tương ứng với mã 1 và 2, sâu răng đã hình thành là 3 và 4, sâu răng nghiêm trọng là 5 và 6 vì lúc này sang thương đã nằm bên trong và đang tích cực xâm lấn ngà răng.
+
+85
+00:19:36,480 --> 00:19:58,400
+Bảng này tiếp tục cho thấy định nghĩa hoặc độ sâu mô học của sang thương và liên kết nó với biểu hiện lâm sàng từ mã 0 đến mã 6.
+
+86
+00:19:54,640 --> 00:20:11,600
+Mã 0 là bề mặt răng lành mạnh, không có thay đổi sau khi thổi khô 5 giây, hoặc có thiểu sản, mòn ngót hay các hiện tượng không do sâu răng khác.
+
+87
+00:20:09,440 --> 00:20:41,600
+Mã 1 là những thay đổi đầu tiên trên men răng chỉ thấy được sau khi thổi khô hoặc sự đổi màu giới hạn mỏng trong vùng hố rãnh, với độ sâu sang thương chiếm 90% ở lớp men ngoài và chỉ 10% chạm đến lớp ngà, và cứ tiếp tục như vậy.
+
+88
+00:20:39,520 --> 00:20:47,679
+Điều này sẽ xuất hiện trong phần mô tả chính của hệ thống phân loại sâu răng ADA.
+
+89
+00:20:44,720 --> 00:21:01,440
+Đây là một bảng nhắc lại, tập trung vào việc liên kết biểu hiện lâm sàng của sang thương với độ sâu mô học dự kiến trên lâm sàng.
+
+90
+00:20:59,600 --> 00:21:29,360
+Đến năm 2009, trong một nỗ lực nhằm hoàn thiện và tăng tính ứng dụng lâm sàng cho ICDAS 1, hệ thống ICDAS 2 đã được phát triển.
+
+91
+00:21:25,120 --> 00:21:49,120
+Hệ thống này được sửa đổi và điều phối bởi ủy ban điều hành ICDAS, mô tả sâu thân răng và sâu chân răng dựa trên tình trạng sâu răng liên quan đến miếng trám và vật liệu trám bít, gọi tắt là CARS.
+
+92
+00:21:46,320 --> 00:21:08,159
+Trong ICDAS 2, mã số của chúng ta sẽ gồm hai chữ số, chữ số đầu tiên liên quan đến tình trạng của răng: đã được phục hồi hay chưa và phục hồi bằng vật liệu gì.
+
+93
+00:22:04,559 --> 00:22:15,760
+Nó bắt đầu từ số 0 đến số 9, trong đó 90 là răng bị mất hoàn toàn.
+
+94
+00:22:12,640 --> 00:22:29,760
+Sau đó là chữ số thứ hai mang dải điểm từ 0 đến 6 tương tự như trong hệ thống ICDAS 1 mà chúng ta đã thảo luận.
+
+95
+00:22:25,039 --> 00:22:42,159
+Có một vài thay đổi nhỏ giữa các dấu chứng quan sát được khi chấm điểm từ 0 đến 6, và như thầy đã đề cập, sâu chân răng cũng được đưa vào hệ thống này.
+
+96
+00:22:38,880 --> 00:22:57,840
+Bây giờ chúng ta sẽ bàn về chữ số đầu tiên, tức là chữ số mới bắt đầu từ 0 đến 9, mô tả tình trạng chung của răng thay vì chỉ mô tả sang thương sâu răng.
+
+97
+00:22:55,919 --> 00:23:08,880
+Mã số 0 có nghĩa là răng hoàn toàn lành mạnh, chưa từng được khám hay phục hồi trước đó.
+
+98
+00:23:05,679 --> 00:23:15,919
+Vì vậy, nếu các em ghi mã răng là 0 0, điều đó có nghĩa là chiếc răng này hoàn toàn lành mạnh.
+
+99
+00:23:13,919 --> 00:23:34,240
+Nếu ghi là 0 1, tức là răng chưa từng được phục hồi hay điều trị trước đó, nhưng chữ số 1 thứ hai cho thấy có sự thay đổi đầu tiên về mặt hình ảnh trên men răng như thang điểm từ 0 đến 6.
+
+100
+00:23:31,360 --> 00:23:39,120
+Chữ số 1 ở vị trí đầu tiên đại diện cho việc trám bít hố rãnh một phần.
+
+101
+00:23:35,440 --> 00:23:40,667
+Số 2 là trám bít toàn bộ, số 3 là răng đã được phục hồi trên hai mặt răng.
+
+102
+00:23:40,667 --> 00:24:01,880
+Nếu các em mô tả một chiếc răng với ba số 0, điều đó có nghĩa là miếng trám của các em đang hoạt động rất tốt, đó là một phục hồi trực tiếp có màu giống răng hoặc phục hồi hai mặt thành công, không có dấu chứng thất bại hay sâu răng tái phát nào cả.
+
+103
+00:24:01,880 --> 00:24:17,600
+Do đó, một phục hồi Composite thành công không có than phiền hay dấu hiệu sâu răng tái phát sẽ được chấm là 3 ở loại phục hồi, và 0 ở tình trạng của bản thân chiếc răng dưới góc độ tiến triển sâu răng.
+
+104
+00:24:17,600 --> 00:24:32,240
+Phục hồi Amalgam mang mã số 4, mão thép không gỉ là 5, mão sứ, mão vàng, mão sứ kim loại hoặc mặt dán sứ (veneer) mang mã số 6.
+
+105
+00:24:29,679 --> 00:24:45,200
+Miếng trám bị bong sút hoặc nứt vỡ mang mã số 7, miếng trám tạm là mã 8, và cuối cùng, răng bị mất mang mã 9.
+
+106
+00:24:42,000 --> 00:24:54,480
+Tuy nhiên có một sự phân loại nhỏ hơn trong nhóm mã 9 đối với răng thật bị mất.
+
+107
+00:24:51,120 --> 00:25:12,799
+Nếu răng được chấm mã 90, có nghĩa là răng đã mất và số 0 biểu thị việc phục hồi bằng Implant, nhưng nguyên nhân mất răng không phải do sâu răng.
+
+108
+00:25:10,559 --> 00:25:23,919
+Số 9 luôn mang ý nghĩa là các em không còn răng thật ở vị trí đó nữa, răng đã mất hoàn toàn.
+
+109
+00:25:20,559 --> 00:25:33,440
+Nhưng nếu nó được phục hồi bằng Implant hoặc bất kỳ loại phục hình nào khác, các em nên hỏi về nguyên nhân nhổ răng hoặc nguyên nhân mất răng.
+
+110
+00:25:32,080 --> 00:25:43,040
+Do đó 90 có nghĩa là răng bị mất vì những lý do không do sâu răng và đã được phục hồi bằng Implant.
+
+111
+00:25:43,040 --> 00:25:50,548
+91 là răng được phục hồi bằng Implant nhưng nguyên nhân nhổ bỏ là do sang thương sâu răng nghiêm trọng.
+
+112
+00:25:50,548 --> 00:26:04,640
+Nếu răng được chấm mã 92, có nghĩa là răng bị nhổ do nguyên nhân khác ngoài sâu răng và được thay thế bằng một nhịp cầu.
+
+113
+00:26:01,360 --> 00:26:19,919
+Nếu răng được chấm mã 93, có nghĩa là răng bị nhổ do sâu răng và được phục hồi bằng một nhịp cầu.
+
+114
+00:26:17,120 --> 00:26:30,480
+96 có nghĩa là không thể thăm khám mặt chân răng, bề mặt này bị che khuất và bị loại trừ khỏi đánh giá.
+
+115
+00:26:29,039 --> 00:26:36,480
+97 là răng bị mất do sâu răng và chưa được phục hồi.
+
+116
+00:26:34,720 --> 00:26:45,520
+98 là răng bị mất vì các lý do khác ngoài sâu răng.
+
+117
+00:26:41,360 --> 00:26:50,400
+99 là răng hoàn toàn chưa mọc.
+
+118
+00:26:46,480 --> 00:26:53,039
+Đó là toàn bộ chi tiết phân loại của mã số 9.
+
+119
+00:26:51,440 --> 00:27:17,600
+Bây giờ chúng ta sẽ làm bài tập đánh mã cho một chiếc răng đã phục hồi bằng Amalgam và có ánh xám đen từ lớp ngà bên dưới, có thể đi kèm hoặc không đi kèm sự phá vỡ cấu trúc men răng theo hệ thống ICDAS II.
+
+120
+00:27:13,600 --> 00:27:35,279
+Vì răng được phục hồi bằng Amalgam nên sẽ mang chữ số đầu là 4, trong khi xuất hiện bóng đen bên dưới men răng do sâu răng nên chữ số thứ hai cũng là 4, vậy mã số của răng này sẽ là 44.
+
+121
+00:27:32,000 --> 00:27:45,679
+Khi thầy giao tiếp với một đồng nghiệp hoặc khi đồng nghiệp đó tiếp nhận điều trị tiếp tục cho bệnh nhân của thầy, thầy chỉ cần viết ICDAS II 44.
+
+122
+00:27:45,679 --> 00:28:08,799
+Bác sĩ đó sẽ tự hiểu rằng chiếc răng này đã được trám Amalgam trước đây và hiện đang có sâu tái phát với bóng đen ánh lên từ lớp ngà bên dưới, và các em có thể ước lượng được tình trạng của răng trước khi điều trị.
+
+123
+00:28:06,799 --> 00:28:19,760
+Trong một ca bệnh khác, hãy đánh mã cho răng số 46 và 47 theo hệ thống ICDAS II nhé.
+
+124
+00:28:17,279 --> 00:28:28,320
+Răng số 46 hoàn toàn chưa được phục hồi, còn răng số 47 đã được phục hồi bằng Composite.
+
+125
+00:28:24,399 --> 00:28:42,840
+Răng số 46 chưa phục hồi nên chữ số đầu là 0, và nó cho thấy những thay đổi đầu tiên trên men răng nên chữ số thứ hai là 1, vậy chiếc răng này sẽ mang mã số là 01.
+
+126
+00:28:42,840 --> 00:28:59,919
+Răng số 47 đã được phục hồi bằng Composite nên theo nguyên tắc chữ số đầu tiên của ICDAS II, nó sẽ mang mã số 3.
+
+127
+00:28:56,840 --> 00:29:12,960
+Đồng thời, có những thay đổi rõ rệt trên men răng xung quanh miếng trám, không chỉ là những thay đổi khởi phát, nên chữ số thứ hai sẽ là 2.
+
+128
+00:29:09,840 --> 00:29:24,720
+Vậy răng số 47 sẽ được đánh mã là 32 theo hệ thống ICDAS II.
+
+129
+00:29:23,679 --> 00:29:44,720
+Điều này cho thấy sự giao tiếp giữa các đối tác trong điều trị ca bệnh trở nên dễ dàng như thế nào, cho dù là giữa giảng viên và bác sĩ nội trú, giảng viên và sinh viên hay giữa các đồng nghiệp với nhau.
+
+130
+00:29:42,720 --> 00:29:51,360
+Nếu các em muốn hội chẩn ở mức độ cao hơn, vòng tròn mã hóa đó đã mô tả chính xác tình trạng thực tế của bệnh nhân.
+
+131
+00:29:50,480 --> 00:30:09,360
+Khi xem xét đến sâu chân răng, mã số của nó rất đơn giản, mã E có nghĩa là không thể quan sát trực tiếp bề mặt nên nó bị loại trừ.
+
+132
+00:30:06,960 --> 00:30:33,760
+Trong một số trường hợp cụ thể, chân răng không bị lộ và vẫn được che phủ bởi mô nướu khỏe mạnh nên không có sâu răng, thầy cũng không thể thăm khám được, khi đó nó được đánh mã E.
+
+133
+00:30:30,640 --> 00:30:33,600
+Tiếp theo là mã số 0.
+
+134
+00:30:33,600 --> 00:30:50,559
+Mã 0 nghĩa là mặt chân răng không xuất hiện sự đổi màu bất thường nào khác biệt so với các vùng chân răng xung quanh, và cũng không có bất kỳ khuyết hổng bề mặt nào ở đường nối men - xê măng hoặc mặt chân răng.
+
+135
+00:30:50,559 --> 00:31:00,948
+Tức là mặt chân răng có hình thái tự nhiên, vấn đề duy nhất chỉ là bệnh nhân mắc bệnh lý nướu làm lộ chân răng mà thôi.
+
+136
+00:31:00,948 --> 00:31:05,840
+Đó chỉ là vấn đề tụt nướu chứ không có quá trình tiến triển sâu răng nào.
+
+137
+00:31:05,840 --> 00:31:09,302
+Tiếp theo là mã 1.
+
+138
+00:31:09,302 --> 00:31:21,919
+Có một vùng ranh giới rõ rệt trên mặt chân răng hoặc ở đường nối men - xê măng bị đổi màu nhưng không có hiện tượng tạo xoang lõm.
+
+139
+00:31:19,279 --> 00:31:28,320
+Sự mất cấu trúc hình thái tự nhiên nếu có thì cũng không vượt quá 0.5 milimet.
+
+140
+00:31:26,240 --> 00:31:43,039
+Điều này có nghĩa là trên lâm sàng đang có tình trạng tụt nướu lộ chân răng, chân răng bắt đầu bị tổn thương nhưng đây là tổn thương tối thiểu không vượt quá 0.5 milimet.
+
+141
+00:31:41,840 --> 00:32:01,760
+Mã 2 cũng tương tự như mã 1, điểm khác biệt duy nhất là tổn thương hoặc sự mất cấu trúc giải phẫu vượt quá hoặc bằng 0.5 milimet và có thể đo lường bằng cây đo túi nha chu có chia vạch.
+
+142
+00:31:59,200 --> 00:32:16,457
+Đối với mức độ hoạt động của sâu chân răng, chúng ta đã thảo luận ở phần ICDAS về tính hoạt động và cách đo lường cho các mã 1, 2, 3, mã 4 hầu như luôn tiến triển, và mã 5, 6 có thể tiến triển hoặc ngưng tiến triển.
+
+143
+00:32:16,457 --> 00:32:21,160
+Và chúng ta đã bàn về mọi tiêu chí để đánh giá hoạt động sâu chân răng rồi.
+
+144
+00:32:21,160 --> 00:32:27,080
+Chúng ta có thể tuân theo một hệ thống đánh giá tương tự.
+
+145
+00:32:27,080 --> 00:32:38,102
+Về màu sắc: nếu đang hoạt động, nó sẽ có màu vàng hoặc nâu nhạt; còn nếu ngưng tiến triển, nó sẽ bắt màu sẫm.
+
+146
+00:32:38,102 --> 00:32:44,743
+Về cảm giác khi dùng thám trâm rà: sâu chân răng đang hoạt động sẽ cho cảm giác mềm hoặc dai như da.
+
+147
+00:32:44,743 --> 00:32:52,799
+Còn đối với sâu chân răng ngưng tiến triển, bề mặt sẽ cứng tương tự như bề mặt thân răng.
+
+148
+00:32:50,320 --> 00:32:59,749
+Vẻ ngoài cũng vậy: sang thương chân răng đang hoạt động sẽ có bề mặt đục mờ, trong khi sang thương ngưng tiến triển sẽ có bề mặt sáng bóng.
+
+149
+00:32:59,749 --> 00:33:06,416
+Sâu chân răng đang tiến triển có bề mặt thô ráp, còn ngưng tiến triển sẽ có bề mặt trơn láng.
+
+150
+00:33:06,416 --> 00:33:13,760
+Về việc tạo xoang: sang thương hoạt động có thể tạo xoang hoặc chưa tạo xoang, nhưng hầu hết sang thương ngưng tiến triển đều đã tạo xoang.
+
+151
+00:33:12,559 --> 00:33:34,720
+Về vị trí, sâu chân răng đang hoạt động thường nằm sát ngay mào viền nướu, trong khi sang thương ngưng tiến triển nằm cách xa mào nướu hơn và gần về phía thân răng.
+
+152
+00:33:30,399 --> 00:33:42,159
+Nhìn chung đối với sang thương ngưng tiến triển, theo kinh nghiệm lâm sàng của thầy, các em hãy kiểm tra móc của hàm giả tháo lắp mà bệnh nhân đang mang.
+
+153
+00:33:42,159 --> 00:33:55,679
+Vùng này có thể là vị trí đặt móc và bị ảnh hưởng bởi áp lực đè ép trong quá trình bệnh nhân sử dụng, đặc biệt là với hàm giả tháo lắp tạm bằng nhựa.
+
+154
+00:33:52,720 --> 00:34:06,080
+Đó có thể là nguyên nhân của sang thương này, bắt đầu dưới dạng mòn ngót vùng cổ răng rồi chồng lấp thêm yếu tố sâu răng, đó là lý do vì sao nó chủ yếu ở trạng thái ngưng tiến triển.
+
+155
+00:34:03,679 --> 00:34:13,931
+Một hệ thống sửa đổi khác nhưng không phổ biến lắm đối với hầu hết các bác sĩ thực hành là M-ICDAS.
+
+156
+00:34:13,931 --> 00:34:35,119
+M-ICDAS là một dạng sửa đổi của ICDAS, nó thu gọn các mã điểm từ 0 đến 6 xuống chỉ còn 0 đến 4, liên kết biểu hiện lâm sàng với độ sâu mô học tương đương của sang thương bên dưới.
+
+157
+00:34:35,119 --> 00:34:45,119
+Nó liên kết độ sâu của sang thương với hình ảnh mô học hơn là chỉ dựa vào tình trạng lâm sàng đơn thuần.
+
+158
+00:34:42,560 --> 00:34:56,960
+Hệ thống này cũng liên kết hình ảnh trên phim X-quang và mức độ sâu ở men răng với những gì hiển thị trên phim.
+
+159
+00:34:55,119 --> 00:35:06,699
+Nó không được ứng dụng quá nhiều trên lâm sàng, nhưng lại hữu ích trong việc đánh giá mức độ lan rộng và tốc độ tiến triển của sang thương sâu răng.
+
+160
+00:35:06,699 --> 00:35:14,880
+Các em có thể dùng nó để ghi chú hồ sơ bệnh án khi muốn theo dõi ca bệnh hoặc nhằm mục đích pháp lý y khoa.
+
+161
+00:35:14,880 --> 00:35:30,800
+Ví dụ, sang thương khởi đầu ở mã 0 nhưng bệnh nhân không tuân thủ hướng dẫn vệ sinh nên nó chuyển sang mã 1, và cứ thế tiếp tục.
+
+162
+00:35:27,200 --> 00:35:38,880
+Hệ thống này rất hữu ích trong việc viết ghi chú, theo dõi và giám sát ca bệnh.
+
+163
+00:35:37,440 --> 00:35:57,359
+Trong hệ thống ICDAS hoặc ICDAS sửa đổi, mã 0 có biểu hiện lâm sàng là không có hoặc có sự thay đổi rất nhẹ về độ trong mờ của men răng sau khi thổi khô hơn 5 giây.
+
+164
+00:35:54,400 --> 00:36:06,250
+Và tình trạng mô học dự kiến tương ứng là men răng chưa bị khử khoáng hoặc chỉ có một dải đục hẹp trên bề mặt kèm khử khoáng nhẹ.
+
+165
+00:36:05,599 --> 00:36:27,760
+Mã 1 cho thấy men răng có một chút đốm đục hoặc đổi màu giống như sang thương đốm trắng, rất khó thấy trên bề mặt ướt nhưng lại hiện rõ sau khi thổi khô khoảng 5 giây hoặc hơn.
+
+166
+00:36:25,359 --> 00:36:33,040
+Tuy nhiên vẫn chưa có hiện tượng tạo xoang lõm trên mặt nhai hay mặt láng.
+
+167
+00:36:30,160 --> 00:36:41,839
+Tình trạng này cho thấy sự khử khoáng đã lan đến một nửa bên ngoài, tương đương 50% lớp ngoài của men răng.
+
+168
+00:36:40,400 --> 00:36:45,119
+Sau đó đến mã 2.
+
+169
+00:36:41,839 --> 00:36:55,599
+Ở mã 2, đốm đục men răng vốn là sang thương lan rộng sẽ bắt đầu đổi màu rõ rệt hơn sau khi thổi khô.
+
+170
+00:36:53,440 --> 00:37:17,359
+Nó bắt đầu chuyển sang màu xám hoặc nâu và có thể nhìn thấy mà không cần thổi khô, ngay cả trong điều kiện ướt hoặc khô, vì nó đã bắt đầu bắt màu từ khói thuốc, thực phẩm và đồ uống.
+
+171
+00:37:14,400 --> 00:37:20,720
+Nhưng trên lâm sàng các em vẫn chưa phát hiện được sang thương tạo xoang lõm.
+
+172
+00:37:17,359 --> 00:37:24,480
+Các em vẫn chưa thể phát hiện bằng mắt thường bất kỳ lỗ sâu nào.
+
+173
+00:37:20,720 --> 00:37:43,119
+Trong trường hợp này, mức độ mô học được dự kiến là đã liên quan đến toàn bộ bề mặt men răng hoặc chạm tới đường nối men - ngà, liên quan đến 50% lớp men bên trong và bắt đầu tiến tới 1/3 ngoài của ngà răng.
+
+174
+00:37:40,880 --> 00:37:47,760
+Điều đó có nghĩa là sang thương đã bắt đầu lan rộng sang hai bên dọc theo đường nối men-ngà.
+
+175
+00:37:46,560 --> 00:37:55,920
+Tiếp theo là mã 3, biểu hiện lâm sàng là sự phá vỡ cấu trúc men răng khu trú.
+
+176
+00:37:53,920 --> 00:38:12,000
+Men răng xuất hiện đốm đục hoặc đổi màu, có thể kèm theo ánh xám đen hoặc bóng mờ hắt lên từ lớp ngà bên dưới, quá trình khử khoáng bắt đầu xâm lấn từ 1/3 giữa đến 1/3 trong của ngà răng.
+
+177
+00:38:09,680 --> 00:38:26,000
+Cùng lúc đó, chúng ta có thể ghi nhận mã 4 là một xoang sâu lớn làm bộc lộ lớp ngà răng bên dưới.
+
+178
+00:38:23,040 --> 00:38:33,680
+Men răng bị đổi màu, phá vỡ cấu trúc bộc lộ lớp ngà bên dưới một cách rõ rệt.
+
+179
+00:38:31,520 --> 00:38:51,040
+Đây là một mức độ nguy hiểm, cảnh báo các em về tình trạng của tủy khi quá trình khử khoáng và sâu răng đã bắt đầu xâm lấn vào 1/3 trong của lớp ngà, hướng thẳng về phía buồng tủy.
+
+180
+00:38:50,240 --> 00:39:07,040
+Và đó là toàn bộ kết luận về năm giai đoạn của ICDAS hoặc ICDAS sửa đổi, trải dài từ mã 0 đến mã 4.
+
+181
+00:39:05,920 --> 00:39:21,040
+Như thầy đã đề cập trước đó, hệ thống ICDAS cũng liên kết độ sâu của sang thương trên phim X-quang tương ứng với điểm số ICDAS.
+
+182
+00:39:18,800 --> 00:39:24,960
+Sự liên kết này với phim X-quang sẽ được thảo luận chi tiết hơn trong tập tiếp theo.
+
+183
+00:39:25,440 --> 00:39:33,920
+Nó bắt đầu từ E0 và kéo dài đến D3.
+
+184
+00:39:31,440 --> 00:39:42,560
+E0 nghĩa là hoàn toàn không có sự khử khoáng hay hình ảnh thấu quang nào ở lớp men răng.
+
+185
+00:39:37,040 --> 00:39:48,480
+Có hai giai đoạn ở men là E1, E2, và đối với lớp ngà là D1, D2, D3 chia theo từng phần ba của ngà răng.
+
+186
+00:39:45,359 --> 00:39:55,359
+Đó là sự tương quan giữa điểm số ICDAS và sang thương trên men răng.
+
+187
+00:39:51,440 --> 00:40:05,520
+E1 là tình trạng hình ảnh thấu quang xuất hiện ở nửa ngoài lớp men răng.
+
+188
+00:40:02,560 --> 00:40:13,119
+E2 liên quan đến nửa trong của men răng và được tương đương với điểm số ICDAS 1 hoặc 2.
+
+189
+00:40:09,760 --> 00:40:24,000
+D1 tương đương với ICDAS khi quá trình khử khoáng và vùng thấu quang xuất hiện ở 1/3 ngoài của ngà răng.
+
+190
+00:40:20,240 --> 00:40:39,040
+D2 tương đương với mã ICDAS 3, khi sang thương lan rộng và vùng khử khoáng liên quan đến 1/3 giữa của ngà răng, kéo theo đó là vùng thấu quang trên phim cũng chạm tới 1/3 giữa của ngà.
+
+191
+00:40:36,560 --> 00:40:48,000
+D3 là quá trình khử khoáng và thấu quang lan đến 1/3 trong của lớp ngà, tương đương với mã số ICDAS là 4.
+
+192
+00:40:45,119 --> 00:41:01,839
+Đây là một hình ảnh lâm sàng cho thấy các giai đoạn và biểu hiện khác nhau của ICDAS, trong đó mã số 1 chỉ là sang thương đốm trắng khởi phát và trở nên rõ rệt khi thổi khô.
+
+193
+00:40:58,560 --> 00:41:11,520
+Mã số 2 là rãnh mặt nhai có màu nâu, chưa tạo xoang và kèm theo bóng xám đổi màu ánh lên từ bên dưới bề mặt nhai.
+
+194
+00:41:08,000 --> 00:41:31,040
+Mã ICDAS 3 là một lỗ sâu nhỏ có thể phát hiện được cùng với sự đổi màu trắng và nâu trên bề mặt nhai, dù các em có thổi khô hay không, và trong điều kiện ướt hay khô đều quan sát được; còn mã 4 là một sang thương tạo xoang lớn bộc lộ rõ rệt như trong hình.
+
+195
+00:41:26,480 --> 00:41:39,720
+Chỉ số thứ hai là PUFA, viết tắt của Tủy (Pulp), Loét (Ulcer), Lỗ dò (Fistula) và Áp xe (Abscess).
+
+196
+00:41:35,599 --> 00:41:49,839
+Chỉ số này mô tả hậu quả hoặc các biến chứng của sang thương sâu răng không được điều trị.
+
+197
+00:41:46,839 --> 00:41:58,160
+Nó biểu thị gánh nặng của các sang thương sâu răng đã tạo xoang mà không được xử trí.
+
+198
+00:41:56,400 --> 00:42:14,880
+Vì vậy, nó không được thiết kế để phát hiện các sang thương ở giai đoạn sớm, mà dùng để xác định các di chứng của sâu răng không điều trị và mức độ nguy hiểm của chúng.
+
+199
+00:42:11,359 --> 00:42:32,560
+Nó chủ yếu được dùng để mô tả tình trạng tổng thể của bệnh nhân liên quan đến bệnh lý sâu răng cũng như khả năng tiếp cận dịch vụ quản lý sâu răng ở quốc gia hoặc khu vực đó.
+
+200
+00:42:31,040 --> 00:42:45,280
+Chỉ số này được sử dụng để đánh giá sự hiện diện của các bệnh lý răng miệng do những giai đoạn tiến triển muộn của sâu răng tạo xoang không được điều trị gây ra.
+
+201
+00:42:43,520 --> 00:43:03,359
+Đó là lý do vì sao nó chủ yếu được dùng ở các nước đang phát triển có thu nhập thấp và trung bình, nơi các răng sâu không được chữa trị vì nhiều lý do khác nhau, và chỉ số DMFT thông dụng không thể đo lường hết được.
+
+202
+00:42:59,280 --> 00:43:07,200
+Vì sao những tình trạng này lại bị bỏ sót?
+
+203
+00:43:05,359 --> 00:43:17,760
+Đó là lý do hiện nay chúng ta đang phải đánh giá một tình trạng nghiêm trọng vượt ra ngoài phạm vi của hệ thống ICDAS.
+
+204
+00:43:15,680 --> 00:43:35,040
+Và mã số của tình trạng này sử dụng các chữ cái P, U, F, A: P đại diện cho sự liên quan đến tủy, U là sự hiện diện của vết loét do sang chấn, F là có lỗ dò, và A là áp xe.
+
+205
+00:43:35,040 --> 00:43:47,920
+Các chữ cái in hoa được dùng cho răng vĩnh viễn, trong khi các chữ cái in thường đại diện cho răng sữa.
+
+206
+00:43:45,119 --> 00:43:50,800
+Chúng ta sẽ thảo luận chi tiết qua các hình ảnh chụp sắp tới nhé.
+
+207
+00:43:50,800 --> 00:44:03,771
+Số một là tổn thương tủy: có một lỗ mở đi thẳng vào buồng tủy có thể nhìn thấy được, hoặc cấu trúc thân răng đã bị phá hủy phần lớn do sâu răng.
+
+208
+00:44:03,771 --> 00:44:22,079
+Giai đoạn này bắt đầu sau khi vượt qua các mã điểm của ICDAS, tức là đã qua lớp ngà và bắt đầu gây ra nhiều vấn đề bệnh lý răng miệng hơn do tình trạng sâu răng không được xử trí.
+
+209
+00:44:19,440 --> 00:44:32,000
+Tiếp theo là tình trạng loét: xuất hiện vết loét do sang chấn ở mô mềm, lưỡi, niêm mạc hoặc má do mảnh vỡ của răng hoặc chân răng sắc nhọn quẹt vào.
+
+210
+00:44:29,920 --> 00:44:41,599
+Hoặc lỗ dò: một đường dò xả mủ có nguồn gốc từ một ổ áp xe và mở ra trong khoang miệng.
+
+211
+00:44:39,280 --> 00:44:51,200
+Sự hiện diện của lỗ dò chứng tỏ đây là tình trạng mạn tính vì mủ đã tự tìm đường thoát ra ngoài.
+
+212
+00:44:48,560 --> 00:45:00,640
+Và cuối cùng là áp xe, khi xuất hiện ổ áp xe răng - huyệt răng.
+
+213
+00:44:54,800 --> 00:45:14,319
+Từ những bức ảnh này, các em có thể thấy độ tuổi của bệnh nhân là thanh thiếu niên với bộ răng hỗn hợp, vệ sinh răng miệng kém và không được điều trị đúng mức vì nhiều nguyên nhân khác nhau.
+
+214
+00:45:13,200 --> 00:45:24,000
+Tiếp theo là CAST, hệ thống Phổ Đánh giá và Điều trị Sâu răng.
+
+215
+00:45:21,040 --> 00:45:38,319
+Hệ thống này liên kết ba chỉ số lại với nhau trong việc đánh giá, phát hiện và chấm điểm các sang thương sâu răng.
+
+216
+00:45:34,560 --> 00:45:44,400
+Nó là sự nối tiếp của ICDAS khi xem xét thêm các di chứng của răng sâu không được chữa trị.
+
+217
+00:45:44,400 --> 00:46:01,760
+Hệ thống CAST được gọi là "phổ" (spectrum) vì nó có phạm vi bao phủ rộng hơn, theo dõi từ khi răng còn lành mạnh cho đến lúc bị nhổ bỏ nếu như tình trạng bệnh không được điều trị.
+
+218
+00:46:00,800 --> 00:46:14,160
+Vì vậy, hệ thống Phổ Đánh giá và Điều trị Sâu răng liên kết cả ba chỉ số DMFT, ICDAS II và PUFA lại với nhau.
+
+219
+00:46:11,520 --> 00:46:25,440
+Chính vì thế nó bao trùm toàn bộ phổ của bệnh lý sâu răng, từ lúc mới khởi phát sang thương cho đến khi gây ra áp xe quanh chóp.
+
+220
+00:46:26,480 --> 00:46:56,400
+Nó khác biệt so với các chỉ số sâu răng thông thường ở chỗ: một chiếc răng đã phục hồi được coi là răng lành mạnh, dựa trên cơ sở chức năng và giá trị sử dụng trên lâm sàng của răng vẫn đảm bảo tốt.
+
+221
+00:46:52,480 --> 00:47:03,920
+Đó là lý do tại sao răng đã phục hồi được xếp vào nhóm thứ ba trong danh sách đánh giá.
+
+222
+00:47:00,640 --> 00:47:24,400
+Nó không được liệt kê giống như hệ thống ICDAS, nơi mà răng chưa phục hồi mang mã số 0 ở chữ số đầu tiên, và chữ số thứ hai từ 0 đến 6 mô tả tình trạng sâu răng thực tế.
+
+223
+00:47:22,960 --> 00:47:44,400
+Hệ thống này đi kèm với các mã điểm phân cấp từ 0 đến 6 để mô tả cụ thể tình trạng sau khi đã đánh mã 0 cho răng lành mạnh.
+
+224
+00:47:41,680 --> 00:47:59,040
+Tuy nhiên ở hệ thống CAST, nó chỉ bao gồm một chữ số và luôn coi một răng đã phục hồi là răng lành mạnh miễn là phục hình đó vẫn hoạt động thành công trên lâm sàng.
+
+225
+00:47:57,599 --> 00:48:05,000
+Bây giờ chúng ta sẽ cùng khảo sát các mã điểm này nhé.
+
+226
+00:48:05,000 --> 00:48:14,559
+Mã 0 là một chiếc răng hoàn toàn lành mạnh, không có dấu hiệu rõ ràng nào về sự hiện diện của sang thương sâu răng.
+
+227
+00:48:12,480 --> 00:48:22,800
+Mã 1 là răng đã được trám bít hố rãnh một phần hoặc toàn bộ.
+
+228
+00:48:22,800 --> 00:48:34,040
+Mã 2 là chiếc răng có sự phục hồi thành công, nó được đánh giá tương tự như mã 0 và 1 nhưng điểm khác biệt là răng đang mang một loại vật liệu phục hồi.
+
+229
+00:48:34,040 --> 00:48:51,520
+Một xoang sâu đã được phục hồi bằng vật liệu trực tiếp hoặc gián tiếp, hiện tại không có sâu tái phát, không có lỗ dò, áp xe hay bất kỳ dấu hiệu thất bại nào của miếng trám.
+
+230
+00:48:50,160 --> 00:49:03,691
+Tiếp theo là men răng chưa phục hồi nhưng bắt đầu cho thấy những thay đổi về mặt hình ảnh, đó là mã 3 của hệ thống CAST.
+
+231
+00:49:03,691 --> 00:49:22,160
+Có sự đổi màu rõ rệt do sâu răng (trắng hoặc nâu), bao gồm cả sự phá vỡ cấu trúc men khu trú nhưng chưa có dấu hiệu lâm sàng nào cho thấy tổn thương xâm lấn vào lớp ngà, bất kể nó đã tạo xoang hay chưa.
+
+232
+00:49:20,079 --> 00:49:33,653
+Sau đó đến lớp ngà với hai mã số: mã 4 dành cho sự đổi màu bên trong ngà răng do sâu răng, tạo ra bóng xám đen hắt lên dưới lớp men.
+
+233
+00:49:33,653 --> 00:49:49,999
+Vùng này hiển thị dưới dạng bóng tối đục sẫm màu có thể nhìn xuyên qua men răng, bất kể cấu trúc men bên trên đã bị phá vỡ hay chưa, đây được coi là mã 4.
+
+234
+00:49:49,999 --> 00:50:05,680
+Khi tổn thương thực sự tạo xoang lõm vào lớp ngà nhưng chưa có dấu hiệu lan tới tủy thì đó là mã số 5.
+
+235
+00:50:03,359 --> 00:50:28,000
+Sang thương có thể nằm ở 1/3 giữa hoặc 1/3 trong, nhưng không có dấu hiệu viêm tủy trực tiếp do sâu răng hay bệnh lý tủy gián tiếp do quá trình sâu răng gây ra.
+
+236
+00:50:24,400 --> 00:50:36,160
+Tiếp đến là mã 6 và 7 dành cho trường hợp tủy đã bị ảnh hưởng.
+
+237
+00:50:32,880 --> 00:50:45,200
+Xoang sâu của các em đã chạm đến buồng tủy hoặc có thể chỉ còn lại các mảnh chân răng.
+
+238
+00:50:42,800 --> 00:50:54,479
+Nếu tổn thương tiến triển nghiêm trọng đến mức gây ra lỗ dò hoặc áp xe quanh chóp kèm sưng mủ, nó sẽ mang mã số 7.
+
+239
+00:50:54,479 --> 00:51:08,000
+Điều này chứng tỏ tủy đã bị tổn thương nghiêm trọng do sâu răng, dẫn đến bệnh lý tủy và quanh chóp ở ca bệnh này.
+
+240
+00:51:04,079 --> 00:51:12,319
+Nếu răng bị mất hoặc phải nhổ bỏ do sâu răng, nó sẽ được đánh mã 8.
+
+241
+00:51:11,200 --> 00:51:23,119
+Nếu răng có bất kỳ đặc điểm nào khớp với các mã khác hoặc không thuộc các phân loại trên thì được đánh mã 9.
+
+242
+00:51:22,319 --> 00:51:38,480
+Ví dụ như răng bị mất do sang chấn hoặc răng mọc ngầm, không khớp với bất kỳ mã nào từ 0 đến 8.
+
+243
+00:51:34,800 --> 00:51:40,640
+Khi đó, răng sẽ mang mã số 9.
+
+244
+00:51:38,480 --> 00:51:58,079
+Và cuối cùng là hệ thống phân loại sâu răng của Hiệp hội Nha khoa Hoa Kỳ (ADA), mô tả hầu hết các sang thương có tạo xoang và chưa tạo xoang qua biểu hiện lâm sàng mà không gắn liền với một phương pháp điều trị cụ thể.
+
+245
+00:51:56,559 --> 00:52:11,839
+Nó không đưa ra quyết định lâm sàng trực tiếp cho các em vì các em vẫn chưa hoàn tất quá trình đánh giá nguy cơ sâu răng của bệnh nhân.
+
+246
+00:52:09,920 --> 00:52:26,880
+Các em cần phân loại ca bệnh theo hệ thống ADA kết hợp với một bảng đánh giá nguy cơ sâu răng hoàn chỉnh.
+
+247
+00:52:24,160 --> 00:52:34,559
+Các em có thể dùng đánh giá nguy cơ sâu răng của ADA hoặc hệ thống CAMBRA, nội dung này sẽ được thảo luận chi tiết trong tập tiếp theo.
+
+248
+00:52:32,160 --> 00:53:00,000
+Khi đó, các em sẽ có một bức tranh toàn cảnh để dựa vào đó đưa ra quyết định lập kế hoạch điều trị, đó là lý do hệ thống phân loại này không đề xuất một phương pháp điều trị cụ thể vì bức tranh lâm sàng vẫn chưa hoàn chỉnh nếu thiếu phần đánh giá nguy cơ sâu răng.
+
+249
+00:52:57,440 --> 00:53:07,119
+Tuy nhiên, hệ thống này liên kết biểu hiện lâm sàng của sang thương với những phát hiện trên phim X-quang.
+
+250
+00:53:02,960 --> 00:53:16,640
+Và nó cung cấp cách tiếp cận để xác định mức độ nghiêm trọng và tốc độ hoạt động của sang thương trong suốt quá trình thăm khám.
+
+251
+00:53:16,800 --> 00:53:48,480
+Hệ thống phân loại sâu răng ADA chấm điểm từng mặt răng dựa trên loại bề mặt (mặt láng hay hố rãnh), sự hiện diện hay vắng mặt của sang thương, vị trí bắt nguồn tổn thương (vùng tự làm sạch hay vùng ứ đọng), mức độ thay đổi nghiêm trọng, ước tính tốc độ hoạt động của sang thương, đồng thời luôn yêu cầu phải có phim X-quang đi kèm.
+
+252
+00:53:47,119 --> 00:53:58,160
+Điều này cung cấp cho các em một góc nhìn toàn diện và rộng lớn về ca bệnh của mình.
+
+253
+00:53:54,640 --> 00:54:12,319
+Quá trình đánh giá này bao gồm việc nhận diện và phân loại sang thương, từ sang thương đốm trắng, phục hồi mới làm do bệnh lý sâu răng, sang thương tạo xoang cho đến các vùng thấu quang trên phim.
+
+254
+00:54:10,079 --> 00:54:30,000
+Tuy nhiên cần lưu ý rằng mức độ lan rộng trên phim X-quang chỉ là một ước tính về lượng khoáng chất bị mất mát, chứ không thể hiện hoàn toàn chính xác hình ảnh thực tế của sang thương.
+
+255
+00:54:26,319 --> 00:54:34,480
+Đây là một hạn chế quan trọng của phim X-quang mà các em phải ghi nhớ.
+
+256
+00:54:31,680 --> 00:54:44,880
+Phim X-quang chỉ mô tả vùng thấu quang dựa trên sự mất khoáng, không phải là hình ảnh mô học thực sự của tổn thương.
+
+257
+00:54:42,160 --> 00:55:10,079
+Thiết kế của hệ thống phân loại sâu răng ADA nhằm tạo điều kiện dễ dàng cho việc đo lường tính hiệu quả của các bệnh lý sâu răng đương đại, cũng như chiến lược xử trí của các em trong thực hành lâm sàng với mục tiêu cải thiện sức khỏe răng miệng nói riêng và sức khỏe tổng thể của bệnh nhân nói chung.
+
+258
+00:55:08,559 --> 00:55:21,920
+Hãy cùng xem xét biểu đồ này do Hiệp hội Nha khoa Hoa Kỳ thiết kế và được cung cấp miễn phí trên mạng lưới trực tuyến.
+
+259
+00:55:18,000 --> 00:55:25,680
+Các em có thể tải xuống từ trang web chính thức của tổ chức ADA.
+
+260
+00:55:22,799 --> 00:55:51,820
+Như các em thấy, cột đầu tiên bên trái mô tả biểu hiện lâm sàng để đơn giản hóa tình trạng bệnh, xem liệu có sự hiện diện của yếu tố nhiễm khuẩn hay không, biểu hiện ở mặt nhai, hố rãnh, mặt láng, xoang sâu và những dấu hiệu X-quang dự kiến cho ca bệnh đó là gì.
+
+261
+00:55:51,820 --> 00:56:13,200
+Thầy muốn nhắc nhở các em rằng tất cả những điều này là cả một hệ thống dữ liệu khổng lồ đến từ các nghiên cứu dịch tễ học và nghiên cứu sâu răng trên toàn thế giới mà Hiệp hội Nha khoa Hoa Kỳ đã dày công tập hợp.
+
+262
+00:56:10,400 --> 00:56:25,200
+Giai đoạn đầu tiên được coi là lành mạnh khi không phát hiện ra bất kỳ sang thương nào trên lâm sàng.
+
+263
+00:56:22,559 --> 00:56:30,880
+Các mô cứng của răng trông hoàn toàn bình thường về màu sắc, độ trong mờ và độ bóng loáng.
+
+264
+00:56:28,799 --> 00:56:35,599
+Không có bất kỳ sự thay đổi nào trên bề mặt hoặc răng đã được phục hồi hoàn hảo.
+
+265
+00:56:33,839 --> 00:56:41,119
+Vì vậy, răng đã phục hồi cũng có thể được đánh mã là 0.
+
+266
+00:56:39,920 --> 00:56:56,720
+Răng lành mạnh có nghĩa là cấu trúc ban đầu vẫn tốt, miếng trám đang hoạt động ổn định không có biến chứng và tiên lượng của ca bệnh rất tuyệt vời.
+
+267
+00:56:53,839 --> 00:57:13,200
+Đó là lý do cấu trúc răng lành mạnh sẽ mang mã 0 đối với ICDAS, và đây là hình ảnh lâm sàng của nó ở vùng hố rãnh cũng như mặt láng.
+
+268
+00:57:10,480 --> 00:57:18,720
+Ký hiệu X-quang của nó sẽ là E0 vì không hề có vùng thấu quang nào.
+
+269
+00:57:15,839 --> 00:57:43,040
+Tiếp theo là biểu hiện lâm sàng "khởi phát" (Initial), đây là sang thương sớm nhất phát hiện được trên lâm sàng tương thích với sự khử khoáng nhẹ, chỉ giới hạn ở men răng hoặc khử khoáng nông ở xê măng, ngà răng và chỉ có thể phát hiện dưới dạng tổn thương nhẹ nhất.
+
+270
+00:57:41,520 --> 00:57:52,150
+Đó là sang thương hoàn toàn chưa tạo xoang trên lâm sàng, nằm trong khoảng từ ICDAS 1 đến ICDAS 2.
+
+271
+00:57:52,150 --> 00:57:57,680
+Cả hai mã này đều được coi là tổn thương khởi phát.
+
+272
+00:57:54,400 --> 00:58:04,079
+Trên phim X-quang, nó sẽ hiển thị dưới dạng A1, E2 hoặc D1.
+
+273
+00:58:00,240 --> 00:58:24,399
+Hệ thống phân loại sâu răng ADA đánh giá rằng sự khử khoáng men răng khởi phát này sẽ lan dần đến đường nối men-ngà và bắt đầu xâm lấn lớp ngà, hiển thị dưới dạng D1 trên phim X-quang.
+
+274
+00:58:24,399 --> 00:58:30,079
+Nó được xem là giai đoạn tổn thương khởi phát.
+
+275
+00:58:27,040 --> 00:59:08,319
+Giai đoạn khởi phát yêu cầu một phương pháp điều trị bảo tồn không xâm lấn, bắt đầu từ việc thay đổi thói quen và cải thiện vệ sinh răng miệng, tái khoáng hóa bề mặt, thâm nhập hoặc trám bít men răng bị khử khoáng bằng vật liệu bít hố rãnh, cho đến các phục hồi nhựa dự phòng hoặc phục hồi tự động.
+
+276
+00:59:04,799 --> 00:59:16,839
+Đến thời điểm này, tất cả các thủ thuật đều chưa đòi hỏi thiết kế xoang trám phức tạp thường quy.
+
+277
+00:59:16,839 --> 00:59:33,359
+Tiếp theo là giai đoạn trung bình (Moderate), khi bắt đầu có dấu hiệu phá vỡ men răng rõ rệt và sự xâm lấn vừa phải vào lớp ngà.
+
+278
+00:59:31,440 --> 00:59:46,960
+Các em có thể quan sát thấy những sang thương đã hình thành xoang lõm nông hoặc vi lỗ sâu, tương đương với mức ICDAS 3 và ICDAS 4.
+
+279
+00:59:44,640 --> 00:59:58,000
+Vùng thấu quang hoặc ký hiệu trên phim X-quang của nó thường là D2 và không vượt quá mức D2.
+
+280
+00:59:56,400 --> 01:00:13,440
+Ở tình trạng này, các em sẽ bắt đầu phải thiết kế xoang trám để xử trí, điều này phụ thuộc vào đánh giá nguy cơ sâu răng đang ở mức thuận lợi.
+
+281
+01:00:11,760 --> 01:00:24,800
+Đây không phải là một đường cắt xâm lấn quá mức, các em có thể thay đổi từ Amalgam sang phục hồi dán Composite để tạo ra một xoang trám bảo tồn hơn.
+
+282
+01:00:24,800 --> 01:00:41,280
+Đường cắt của các em sẽ giới hạn ở vùng sang thương với điều kiện các biện pháp vệ sinh răng miệng được thực hiện xuất sắc, và điều này có thể xác định được thông qua kết quả đánh giá nguy cơ sâu răng của bệnh nhân.
+
+283
+01:00:41,280 --> 01:00:47,040
+Cuối cùng là sang thương giai đoạn tiến triển (Advanced), khi men răng hoàn toàn bị tạo xoang lớn và ngà răng bị bộc lộ.
+
+284
+01:00:44,319 --> 01:00:57,040
+Sang thương bên trong cho thấy sự khử khoáng rất trầm trọng và dường như xâm lấn sâu hơn vào ngà răng.
+
+285
+01:00:53,920 --> 01:01:10,880
+Nó lan rộng hoặc phát tán một cách nhanh chóng, thường được phát hiện muộn và được coi là một lỗ sâu có tạo xoang sâu trong ngà răng.
+
+286
+01:01:06,960 --> 01:01:21,520
+Nó tương đương với điểm số 5 hoặc 6 của ICDAS và được đánh dấu bằng ký hiệu thấu quang D3 trên phim X-quang.
+
+287
+01:01:20,240 --> 01:01:31,080
+Tình trạng này sẽ cần một hướng xử trí khác liên quan đến tủy và cách để phục hồi lại những chiếc răng bị hư hỏng trên diện rộng này.
+
+288
+01:01:31,080 --> 01:01:58,160
+Khả năng cao kế hoạch điều trị của các em sẽ là phục hồi dán hoặc phục hình gián tiếp Onlay, tùy thuộc vào khả năng tiếp cận và cô lập vùng làm việc trong khoang miệng cũng như cấu trúc mô cứng còn lại của răng cùng nhiều yếu tố khác.
+
+289
+01:01:56,319 --> 01:02:11,200
+Đây là một biểu đồ khác mô tả việc thăm khám trực quan các sang thương khác nhau dựa trên hệ thống phân loại ADA.
+
+290
+01:02:10,079 --> 01:02:32,354
+Răng lành mạnh là răng không có sâu răng, thậm chí sau khi thổi khô trong 5 giây, không có thiểu sản, không mòn ngót, không xói mòn và không có bất kỳ tổn thương không do sâu răng nào khác, kể cả khi đã trám thì chất lượng phục hồi vẫn cực kỳ xuất sắc.
+
+291
+01:02:32,354 --> 01:02:47,920
+Giai đoạn sớm thể hiện những thay đổi trực quan đầu tiên trên men răng như đổi màu đốm đục, nhưng hoàn toàn chưa tạo xoang.
+
+292
+01:02:45,359 --> 01:02:57,960
+Nhóm sang thương giai đoạn trung bình có hiện tượng phá vỡ cấu trúc men khu trú, xuất hiện bóng đen của ngà dọc theo vùng tổn thương này.
+
+293
+01:02:57,960 --> 01:03:14,960
+Sau đó là sự phá hủy tạo thành xoang sâu lớn bộc lộ men và ngà, xâm lấn đến khoảng một nửa lớp ngà và tiếp tục lan rộng vào sâu hơn.
+
+294
+01:03:15,520 --> 01:03:30,640
+Để đánh giá lại mức độ hoạt động của sang thương sâu răng, một lần nữa chúng ta cần xem xét vị trí của tổn thương.
+
+295
+01:03:27,920 --> 01:03:39,440
+Sang thương không hoạt động hoặc ngưng tiến triển thường nằm ở vùng không bị ứ đọng mảng bám.
+
+296
+01:03:37,119 --> 01:03:51,039
+Trong khi sang thương đang hoạt động sẽ nằm ở vùng dễ ứ đọng mảng bám như hố rãnh, mặt bên hoặc vùng cổ răng sát nướu.
+
+297
+01:03:48,480 --> 01:04:01,920
+Đối với mảng bám trên bề mặt sang thương, ở sang thương ngưng tiến triển, nó có thể quan sát được nhưng không dày và không bám dính chặt, trong khi ở sang thương đang tiến triển, nó sẽ rất dày và dính chặt.
+
+298
+01:03:59,520 --> 01:04:16,960
+Như thầy đã đề cập trước đó, vẻ ngoài bề mặt của sang thương ngưng tiến triển sẽ sáng bóng và có màu từ nâu đến đen, trong khi sang thương đang hoạt động sẽ có màu trắng đến vàng, đục mờ và mất đi độ bóng.
+
+299
+01:04:13,520 --> 01:04:29,920
+Về cảm giác xúc giác, sang thương ngưng tiến triển cho cảm giác trơn láng, men và ngà răng rất cứng, trong khi sang thương đang hoạt động sẽ có men răng thô ráp và ngà răng mềm, dai như da.
+
+300
+01:04:28,480 --> 01:04:38,240
+Nếu sang thương nằm gần nướu, mô nướu ở sang thương ngưng tiến triển sẽ không bị viêm.
+
+301
+01:04:35,280 --> 01:04:46,799
+Không có hiện tượng chảy máu khi thăm khám bằng cây đo túi, nghĩa là vệ sinh răng miệng của bệnh nhân tốt hơn nhiều so với tình trạng sang thương đang hoạt động.
+
+302
+01:04:44,400 --> 01:04:55,599
+Và ngược lại, ở sang thương đang hoạt động, nướu thường bị viêm và dễ dàng chảy máu khi chạm vào thám trâm.
+
+303
+01:04:53,359 --> 01:05:15,960
+Hệ thống ICDAS được xây dựng dựa trên nguồn dữ liệu khổng lồ từ các nhà dịch tễ học và chuyên gia về sâu răng trên toàn thế giới nhằm mục đích duy nhất là tiêu chuẩn hóa nhận thức trực quan của chúng ta về các sang thương sâu răng.
+
+304
+01:05:15,960 --> 01:05:34,340
+Hệ thống này đòi hỏi các em phải luyện tập rất nhiều, hãy không ngừng rèn luyện thị giác để tuân theo các biểu đồ và thang điểm này thông qua việc quan sát thực tế thật nhuần nhuyễn.
+
+305
+01:05:34,340 --> 01:05:49,440
+Như chúng ta vẫn thường nói: "Trăm hay không bằng tay quen", thầy tin rằng việc thăm khám sâu răng bằng mắt thường sẽ trở nên vô cùng dễ dàng với các em khi đã đủ thuần thục.
+
+306
+01:05:47,039 --> 01:05:51,599
+Đây là những tài liệu giáo khoa mà thầy đã sử dụng để chuẩn bị cho bài giảng này.
+
+307
+01:05:51,599 --> 01:06:04,480
+Nếu các em muốn tìm hiểu thêm nhiều thông tin hơn, xin đừng ngần ngại và hãy cứ tự nhiên đặt câu hỏi cho thầy bất cứ lúc nào nhé.
+
+308
+01:06:04,480 --> 01:06:11,839
+Các em chỉ cần để lại bình luận trên video này và thầy sẽ giải đáp cho các em trong thời gian sớm nhất có thể.
+
+309
+01:06:11,839 --> 01:06:16,456
+Hoặc các em cũng có thể liên hệ với thầy qua thông tin liên lạc được đính kèm ở đây.
+
+310
+01:06:16,456 --> 01:06:21,200
+Và cuối cùng, cảm ơn các em đã dành thời gian để lắng nghe bài giảng này.
+
+311
+01:06:21,200 --> 01:06:29,946
+Đừng quên đăng ký kênh và bật thông báo để cập nhật những video bài giảng mới nhất nhé.
+
+312
+01:06:29,946 --> 01:07:39,920
+Cảm ơn các em.
