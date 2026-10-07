@@ -9177,7 +9177,7 @@
             scheduleYtWatermarkLayout();
             paintCcButton(playerId, data.ccActive); paintNarrButton(playerId);
             try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
-            try { if (ytTouchSys()) { event.target.setVolume(100); } } catch (e) {}
+            try { applyYtVolume(playerId); } catch (e) {}
             try {
                 if (data.rate && data.rate !== 1) data.player.setPlaybackRate(data.rate);
                 if (typeof data.player.unloadModule === 'function') data.player.unloadModule('captions');
@@ -10116,7 +10116,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             if (!/[\p{L}\p{N}]/u.test(t)) return [];
             const u = new SpeechSynthesisUtterance(t);
             u.lang = (r.voice && r.voice.lang) || 'vi-VN'; if (r.voice) u.voice = r.voice;
-            u.pitch = r.pitch; u.rate = ur;
+            u.pitch = r.pitch; u.rate = ur; u.volume = narrVolume();
             return [u];
         }
         function narrPlayChain(utts, run, onDone) {   // đưa các đoạn vào hàng đợi đọc, xong hết thì gọi onDone
@@ -10736,6 +10736,8 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         }
 
         const ytVolumeState = { volume: 100, muted: false };
+        /* Âm lượng giọng lồng tiếng theo nút âm lượng của trình phát (0..1) */
+        function narrVolume() { return ytVolumeState.muted ? 0 : Math.max(0, Math.min(1, ytVolumeState.volume / 100)); }
 
         /* Thiết bị cảm ứng: âm lượng do phím cứng/hệ thống của máy điều khiển; trình phát YouTube luôn giữ 100% để không bị nhân đôi giảm tiếng */
         function ytTouchSys() { try { return window.matchMedia('(hover: none) and (pointer: coarse)').matches; } catch (e) { return false; } }
@@ -10745,7 +10747,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             if (!d || !d.player) return;
             try {
                 if (typeof d.player.setVolume !== 'function') return;
-                const base = ytTouchSys() ? 100 : ytVolumeState.volume; const vol = d.narrOn ? Math.round(base * narrCfg.orig / 100) : base;   // đang thuyết minh: hạ âm lượng video gốc
+                const base = ytVolumeState.volume; try { if (narr && narr.cur) narr.cur.volume = narrVolume(); } catch (e2) {} const vol = d.narrOn ? Math.round(base * narrCfg.orig / 100) : base;   // đang thuyết minh: hạ âm lượng video gốc
                 d.player.setVolume(vol);
                 if (ytVolumeState.muted) d.player.mute(); else d.player.unMute();
             } catch (e) {}
@@ -12172,7 +12174,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         const list = [], map = new Map();
         return { list, add(uri, title) { if (map.has(uri)) return map.get(uri); const n = list.length + 1; list.push({ n, uri, title: String(title || uri) }); map.set(uri, n); return n; } };
     }
-    const AI_DR_MODELS = ['gemini-2.5-flash', 'gemini-3.5-flash-lite', 'gemini-3.5-flash'];   // gói Free chỉ cho Google Search grounding trên dòng 2.5 (~500 lượt/ngày); các model Flash 3.x không có grounding miễn phí
+    const AI_DR_MODELS = ['gemini-2.5-flash', 'gemini-2.5-flash-lite', 'gemini-3.5-flash-lite', 'gemini-3.5-flash'];   // gói Free chỉ cho Google Search grounding trên dòng 2.5 (~500 lượt/ngày); các model Flash 3.x không có grounding miễn phí
     async function aiDrCallG(system, user, onStatus) {
         const mk = (search) => JSON.stringify(Object.assign({ systemInstruction: { parts: [{ text: system }] }, contents: [{ role: 'user', parts: [{ text: user }] }], generationConfig: { temperature: 0.3, maxOutputTokens: AI_MAX_OUT } }, search ? { tools: [{ google_search: {} }] } : {}));
         let last = null; const tried = [];
@@ -12611,7 +12613,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     })();
 
     /* Gọi Gemini có tự thử lại + dự phòng model khi quá tải */
-    const GEMINI_FALLBACK_MODELS = ['gemini-flash-latest', 'gemini-flash-lite-latest'];
+    const GEMINI_FALLBACK_MODELS = ['gemini-flash-latest', 'gemini-flash-lite-latest', 'gemini-2.5-flash', 'gemini-2.5-flash-lite'];
     function aiBody(contents, yv, useSearch, noTools) {
         const cap = aiState.tlTurn ? 65536 : aiLenCap(aiState.full ? 65536 : 32768);   // tìm hiểu sâu: không giới hạn độ dài
         const b = { systemInstruction: { parts: [{ text: aiSystemPrompt() + (aiState.guided ? '' : AI_IMG_TAG_NOTE) + (aiState.tlTurn ? '' : aiLenNote()) }] }, contents, generationConfig: yv ? { maxOutputTokens: cap, mediaResolution: 'MEDIA_RESOLUTION_LOW' } : (aiState.frameTurn ? { maxOutputTokens: cap, mediaResolution: 'MEDIA_RESOLUTION_MEDIUM' } : { maxOutputTokens: cap }) };
@@ -12686,12 +12688,13 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     async function aiVerifyKey(p, v) {
         try {
             if (p === 'gemini') {
-                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_CHAT_MODEL}:generateContent`, {
-                    method: 'POST', headers: { 'Content-Type': 'application/json', 'X-goog-api-key': v },
-                    body: JSON.stringify({ contents: [{ parts: [{ text: 'ping' }] }], generationConfig: { maxOutputTokens: 8 } })
-                });
-                if (!res.ok && res.status !== 429) { let em = ''; try { em = (await res.json()).error.message; } catch (e) {} return { ok: false, msg: em || ('HTTP ' + res.status) }; }
-                return { ok: true };
+                // Chỉ liệt kê model: không tốn lượt chat, không phụ thuộc model nào đang quá tải / còn miễn phí
+                const res = await fetch('https://generativelanguage.googleapis.com/v1beta/models?pageSize=1', { headers: { 'X-goog-api-key': v } });
+                if (res.ok) return { ok: true };
+                let em = ''; try { em = (await res.json()).error.message; } catch (e) {}
+                const badKey = (res.status === 400 || res.status === 401 || res.status === 403) && /API key|API_KEY|credential|PERMISSION_DENIED|expired/i.test(em);
+                if (badKey) return { ok: false, msg: em || ('HTTP ' + res.status) };
+                return { ok: true, unchecked: true };   // 429 / 5xx / lỗi tạm: chưa chắc khóa sai -> vẫn lưu, lỗi thật sẽ báo khi dùng
             }
             const res = await fetch(p === 'groq' ? 'https://api.groq.com/openai/v1/models' : 'https://openrouter.ai/api/v1/auth/key', { headers: { 'Authorization': 'Bearer ' + v } });
             if (res.status === 401 || res.status === 403) return { ok: false, msg: 'khóa không đúng hoặc đã bị thu hồi.' };
@@ -13941,7 +13944,7 @@ window.PGR = (function () {
         var b = $('mute-btn-' + pid), box = b && b.closest('.yt-volbox'); if (!box) return;
         if (window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches) { toggleYtMute(pid); return; }
         toggleYtMute(pid);
-        try { if (!ytVolumeState.muted) showToast('🔊 Đã bật tiếng — chỉnh to/nhỏ bằng phím âm lượng của thiết bị'); else showToast('🔇 Đã tắt tiếng'); } catch (e) {}
+        try { if (!ytVolumeState.muted) showToast('🔊 Đã bật tiếng'); else showToast('🔇 Đã tắt tiếng'); } catch (e) {}
     };
     document.addEventListener('pointerdown', function (e) { document.querySelectorAll('.yt-volbox.open').forEach(function (b) { if (!b.contains(e.target)) b.classList.remove('open'); }); }, true);
     document.addEventListener('input', function (e) { var b = e.target && e.target.closest && e.target.closest('.yt-volbox'); if (b) { clearTimeout(b._t); b._t = setTimeout(function () { b.classList.remove('open'); }, 4000); } }, true);
