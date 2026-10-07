@@ -1,0 +1,971 @@
+1
+00:00:23,600 --> 00:00:44,079
+Chào mừng các em, đây là Chuỗi bài giảng Nha khoa.
+
+2
+00:00:41,840 --> 00:00:55,920
+Trong tập này, chúng ta sẽ bắt đầu thảo luận về một chủ đề quan trọng trong lĩnh vực nha khoa phục hồi, đó là chẩn đoán và lập kế hoạch điều trị trong nha khoa chữa răng.
+
+3
+00:00:54,239 --> 00:01:16,799
+Nếu các em hiểu rõ và áp dụng hoàn hảo chủ đề này, các em sẽ mang lại sự hài lòng cao cho bệnh nhân về kết quả điều trị, đồng thời đây cũng là nền tảng vững chắc để xây dựng danh tiếng trong sự nghiệp lâm sàng của mình.
+
+4
+00:01:13,439 --> 00:01:23,439
+Thầy xin tuyên bố rằng thầy không nhận bất kỳ khoản phí, thù lao hay tiền bản quyền nào từ việc kinh doanh các sản phẩm được chiếu hoặc nhắc đến trong bài.
+
+5
+00:01:20,880 --> 00:01:31,680
+Và thầy cũng khẳng định bài trình bày này không được tài trợ bởi bất kỳ công ty, tổ chức hay cơ quan nào.
+
+6
+00:01:29,200 --> 00:01:34,000
+Bài giảng này chỉ được chuẩn bị với mục đích giáo dục.
+
+7
+00:01:33,040 --> 00:01:48,640
+Các em lưu ý, bài trình bày này được bảo vệ bản quyền, đừng quên điều này nhé, không được sao chép hay truyền bá dưới bất kỳ hình thức nào nếu chưa có sự cho phép của tác giả.
+
+8
+00:01:46,640 --> 00:02:07,360
+Khi kết thúc bài giảng này, các em sẽ có khả năng ghi nhận dữ liệu bệnh nhân và hiểu được tầm quan trọng của nó, ghi nhận lý do đến khám và phân tích bệnh sử, cũng như liên kết giữa tiền sử y khoa, nha khoa với kế hoạch điều trị dự kiến.
+
+9
+00:02:04,000 --> 00:02:16,319
+Sau đó, trong những tập tiếp theo, chúng ta sẽ thảo luận về cách liên kết các triệu chứng lâm sàng ở miệng và răng với kế hoạch điều trị một cách hợp lý.
+
+10
+00:02:14,000 --> 00:02:27,280
+Chẩn đoán sâu răng bằng nhiều phương pháp khác nhau, bao gồm tất cả những kỹ thuật và thao tác cập nhật nhất để phát hiện các tổn thương sớm.
+
+11
+00:02:24,080 --> 00:02:39,760
+Đồng thời, các em cũng sẽ biết cách chẩn đoán, đánh giá chính xác các miếng trám cũ và thiết kế một kế hoạch điều trị phục hồi phù hợp, phối hợp liên chuyên khoa một cách logic với các lĩnh vực khác.
+
+12
+00:02:38,160 --> 00:02:45,120
+Bài học của chúng ta được chia thành ba phần chính.
+
+13
+00:02:43,040 --> 00:02:49,200
+Sau phần giới thiệu, phần một là đánh giá bệnh nhân và thu thập thông tin.
+
+14
+00:02:47,360 --> 00:02:53,519
+Chúng ta sẽ thảo luận về thông tin nhân trắc học, lý do đến khám, tiền sử y khoa và nha khoa.
+
+15
+00:02:52,239 --> 00:03:12,200
+Tiếp theo là phần quan trọng nhất, đó là khám lâm sàng và chẩn đoán, bao gồm khám sâu răng vì đây là chuyên khoa của chúng ta, sau đó là đánh giá các phục hình hoặc miếng trám hiện có.
+
+16
+00:03:12,200 --> 00:03:27,280
+Và kế đến là đánh giá các khiếm khuyết khác của răng liên quan đến nha khoa phục hồi và chữa răng, cũng như các phương tiện hỗ trợ chẩn đoán, kiểm tra khớp cắn, thăm khám bệnh nhân đang bị đau và răng bị nứt.
+
+17
+00:03:24,159 --> 00:03:36,799
+Cuối cùng là phần thiết kế kế hoạch điều trị dựa trên những thông tin đã thu thập từ việc đánh giá bệnh nhân và khám lâm sàng.
+
+18
+00:03:34,640 --> 00:03:52,400
+Chúng ta sẽ bàn về tiên lượng của từng ca bệnh, cách xác định hoặc dự đoán tiên lượng cho mỗi trường hợp, sau đó là cách thiết kế kế hoạch điều trị và những yếu tố cần lưu ý khi phối hợp đa chuyên khoa.
+
+19
+00:03:49,519 --> 00:04:03,471
+Hãy cùng bắt đầu hành trình của chúng ta, và thầy muốn làm rõ rằng chẩn đoán chính là nghệ thuật nhận diện hoặc phát hiện vấn đề.
+
+20
+00:04:03,471 --> 00:04:05,191
+Tại sao nó lại là một nghệ thuật?
+
+21
+00:04:05,191 --> 00:04:13,519
+Đó là nghệ thuật dựa trên nền tảng khoa học, như chúng ta thường nói, nghệ thuật và khoa học luôn đi đôi với nhau.
+
+22
+00:04:10,799 --> 00:04:26,133
+Nghệ thuật là vì nó đòi hỏi sự đúc kết hoàn hảo từ kinh nghiệm thực tiễn và áp dụng nhuần nhuyễn vào từng ca bệnh, người bác sĩ cần có sự đam mê, nhạy bén và óc tò mò.
+
+23
+00:04:26,133 --> 00:04:34,507
+Nhưng những yếu tố này cũng đồng nghĩa với việc đôi khi các em làm việc rất khẩn trương, với tất cả sự đam mê, trực giác và trí tò mò.
+
+24
+00:04:34,507 --> 00:04:47,280
+Nếu mô tả một người bằng những đặc tính này, có thể họ làm việc khá vội vàng, nhưng khi các em đang chẩn đoán vấn đề của bệnh nhân thì lại là chuyện khác.
+
+25
+00:04:43,680 --> 00:04:56,560
+Ngoài ba yếu tố trên, các em cần phải đủ kiên nhẫn để lắng nghe và dành thời gian tìm hiểu vấn đề thực sự của bệnh nhân.
+
+26
+00:04:54,160 --> 00:05:04,160
+Sau đó, các em cần có một trực giác nhạy bén để phán đoán xem sự thật nằm ở đâu.
+
+27
+00:05:01,520 --> 00:05:12,080
+Bệnh nhân đang nói dối hay đang nói sự thật về tình trạng của họ?
+
+28
+00:05:07,440 --> 00:05:21,120
+Đây là những phẩm chất quan trọng được nuôi dưỡng qua kinh nghiệm, kỹ năng và quá trình thực hành lâm sàng.
+
+29
+00:05:18,080 --> 00:05:22,560
+Hãy nhớ rằng chỉ có thực hành mới mang lại sự hoàn thiện.
+
+30
+00:05:22,560 --> 00:05:35,120
+Đó là lý do tại sao quy trình chẩn đoán của chúng ta chỉ gồm hai bước hay hai nhóm chính.
+
+31
+00:05:33,280 --> 00:05:51,600
+Bước đầu tiên là đánh giá bệnh nhân và thu thập thông tin, đơn giản chỉ là một cuộc trò chuyện, trao đổi với bệnh nhân để tìm ra sự thật đằng sau những triệu chứng.
+
+32
+00:05:48,639 --> 00:06:08,960
+Sau khi hoàn tất việc đánh giá và thu thập thông tin, các em mới sử dụng tư duy phản biện lâm sàng để hướng tới một định hướng chuyên khoa cụ thể trong nha khoa.
+
+33
+00:06:07,600 --> 00:06:31,840
+Khi bệnh nhân than phiền rằng họ đang đau dữ dội và chỉ vào một chiếc răng, nếu là bác sĩ tổng quát, trong đầu thầy sẽ nghĩ ngay ca này nằm ở ranh giới giữa nội nha và ngoại khoa, hoặc là lấy tủy, hoặc là nhổ luôn chiếc răng đó.
+
+34
+00:06:29,680 --> 00:06:47,360
+Nếu bệnh nhân đau nhói từng cơn, đau liên tục và hơi sưng, thì đó là dấu hiệu của tình trạng nhiễm trùng.
+
+35
+00:06:43,039 --> 00:06:53,120
+Suy nghĩ của thầy sẽ hướng về bệnh lý quanh chóp và đồng thời là có thể cần can thiệp ngoại khoa.
+
+36
+00:06:50,080 --> 00:07:18,000
+Nhưng khi bệnh nhân đến với yêu cầu cải thiện thẩm mỹ vùng răng trước hoặc muốn có nụ cười đẹp hơn, các em sẽ nghĩ đến nha khoa phục hồi hoặc phục hình cố định.
+
+37
+00:07:15,039 --> 00:07:26,160
+Tất cả những điều đó giờ đây đều nằm dưới khái niệm chung gọi là nha khoa thẩm mỹ.
+
+38
+00:07:23,199 --> 00:07:27,599
+Đó là lý do tại sao việc lắng nghe bệnh nhân lại rất quan trọng.
+
+39
+00:07:26,160 --> 00:07:44,560
+Việc dành thời gian cho bước đánh giá và thu thập thông tin là một khâu cực kỳ quan trọng, giúp định hướng lộ trình để các em đưa ra phương án điều trị đúng đắn nhất cho ca bệnh.
+
+40
+00:07:43,199 --> 00:08:06,240
+Đồng thời, các em có thể xác định được kiểu tính cách của bệnh nhân, biết được những vấn đề hoặc biến chứng mà họ từng gặp phải trong các đợt điều trị nha khoa trước đây.
+
+41
+00:08:04,240 --> 00:08:10,400
+Tiếp theo mới đến phần khám lâm sàng.
+
+42
+00:08:07,360 --> 00:08:25,280
+Khám lâm sàng là khi các em mời bệnh nhân lên ghế nha, nhằm xác nhận lại những dự định mà bản đồ tư duy của các em vừa vạch ra.
+
+43
+00:08:22,479 --> 00:08:44,800
+Những gì các em suy nghĩ về ca bệnh, dù là nội nha hay nhổ răng, các em đã biết đây là một vấn đề cấp tính, nhưng hướng đi cuối cùng sẽ được xác định chính xác qua việc khám lâm sàng.
+
+44
+00:08:42,719 --> 00:08:50,880
+Do đó, các em phải luôn bắt đầu bằng việc đánh giá bệnh nhân và thu thập thông tin.
+
+45
+00:08:49,040 --> 00:08:58,720
+Nếu thiếu đi bước đánh giá và thu thập thông tin, quá trình khám lâm sàng sẽ giống như các em đang mò mẫm trong một mê cung vậy.
+
+46
+00:08:55,760 --> 00:09:08,080
+Đó sẽ là một bài toán khó, các em không biết nên bắt đầu bằng dụng cụ nào và không biết làm sao để phát hiện ra vấn đề của bệnh nhân.
+
+47
+00:09:05,839 --> 00:09:33,279
+Nhiều người nghĩ đánh giá và thu thập thông tin là một bước mất thời gian, nhưng thực chất nó lại giúp tiết kiệm rất nhiều thời gian khi bước vào khám lâm sàng, nếu các em làm tốt khâu này trước khi mời bệnh nhân lên ghế nha.
+
+48
+00:09:30,320 --> 00:09:38,960
+Chúng ta hãy bắt đầu với chủ đề đánh giá bệnh nhân và thu thập thông tin, trước hết là dữ liệu nhân trắc học.
+
+49
+00:09:38,960 --> 00:09:46,160
+Dữ liệu nhân trắc học cơ bản của mỗi người gồm những gì, đầu tiên đương nhiên là họ tên.
+
+50
+00:09:45,200 --> 00:09:51,839
+Tại sao thầy cần phải biết tên bệnh nhân?
+
+51
+00:09:49,200 --> 00:10:13,920
+Nó không chỉ là thủ tục hồ sơ yêu cầu mỗi bệnh án phải có đầy đủ họ tên, mà về mặt đạo đức, việc gọi bệnh nhân bằng tên riêng sẽ tạo ra sự giao tiếp chuẩn mực và gắn kết hơn rất nhiều.
+
+52
+00:10:12,880 --> 00:10:40,480
+Nếu các em xưng hô lịch sự bằng tên của họ, điều này thể hiện sự tôn trọng, giúp bệnh nhân giảm bớt căng thẳng, đồng thời họ sẽ thấy các em thực sự quan tâm và muốn giải quyết vấn đề cho họ.
+
+53
+00:10:37,600 --> 00:10:40,480
+Yếu tố thứ hai là địa chỉ.
+
+54
+00:10:40,480 --> 00:10:50,399
+Tại sao thầy phải biết bệnh nhân sống ở đâu hoặc họ đến từ vùng nào?
+
+55
+00:10:48,000 --> 00:11:00,000
+Bởi vì trong thời điểm này, chúng ta đang phải đối phó với đại dịch COVID-19.
+
+56
+00:10:57,360 --> 00:11:10,720
+Khi biết khu vực bệnh nhân sinh sống, các em sẽ nắm được tình hình dịch tễ của vùng đó.
+
+57
+00:11:06,399 --> 00:11:38,480
+Giả sử khu vực đó đang có dịch bệnh lưu hành, các em sẽ không từ chối điều trị, nhưng ít nhất các em sẽ áp dụng các biện pháp phòng ngừa đặc biệt để tránh lây nhiễm chéo theo đúng sơ đồ kiểm soát dịch bệnh.
+
+58
+00:11:38,480 --> 00:11:46,480
+Vì một bệnh nhân có thể lây cho ba người khác, số ca nhiễm mới sẽ tiếp tục tăng lên theo cấp số nhân ba mỗi lần.
+
+59
+00:11:44,800 --> 00:11:48,720
+Đó là lý do thứ nhất.
+
+60
+00:11:46,480 --> 00:12:15,440
+Thứ hai, địa chỉ phản ánh khả năng di chuyển và tần suất hẹn tái khám của bệnh nhân, bởi vì trong nha khoa phục hồi, đôi khi chúng ta cần làm phục hình gián tiếp hoặc phục hồi trực tiếp kéo dài ít nhất hai đến ba lần hẹn.
+
+61
+00:12:11,519 --> 00:12:29,120
+Dựa vào địa chỉ và khả năng đi lại của bệnh nhân, thầy có thể thiết kế phương án giải quyết vấn đề phù hợp nhất.
+
+62
+00:12:25,760 --> 00:12:49,760
+Liệu bệnh nhân này có điều kiện để đi lại nhiều lần không, nếu khó khăn, thầy nên chuyển tuyến cho một đồng nghiệp khác ở gần họ hơn, hoặc thay đổi sang một phương pháp phục hồi khác phù hợp hơn.
+
+63
+00:12:46,240 --> 00:12:56,560
+Đó là lý do chúng ta cần biết địa chỉ, ngoài ra ở một số quốc gia, địa chỉ còn cần thiết để gửi hóa đơn thanh toán.
+
+64
+00:12:53,680 --> 00:13:09,200
+Bệnh nhân cần thanh toán chi phí, và các em gửi hóa đơn cho họ để thu phí, hoặc để xác định công ty bảo hiểm gần nhất chi trả cho dịch vụ điều trị này.
+
+65
+00:13:09,519 --> 00:13:13,600
+Tiếp theo, còn về tuổi tác thì sao?
+
+66
+00:13:13,600 --> 00:13:19,519
+Tại sao các em phải ghi nhận độ tuổi?
+
+67
+00:13:16,720 --> 00:13:32,959
+Tất cả bệnh nhân trong nha khoa phục hồi của chúng ta đều là người trưởng thành, chúng ta không điều trị cho trẻ nhỏ hay can thiệp trên răng sữa, mà chúng ta làm việc với bộ răng vĩnh viễn của người lớn.
+
+68
+00:13:33,519 --> 00:13:57,600
+Nhưng khái niệm người trưởng thành trải dài từ 18 tuổi cho đến 100 tuổi hoặc hơn thế nữa, phạm vi tuổi tác của chúng ta rất rộng.
+
+69
+00:13:54,560 --> 00:14:14,079
+Điều này có nghĩa là kích thước buồng tủy và khoảng cách từ sang thương hay xoang trám đến tủy răng sẽ thay đổi khi bệnh nhân lớn tuổi hơn.
+
+70
+00:14:11,680 --> 00:14:26,079
+Càng lớn tuổi, tủy răng sẽ càng rút nhỏ lại và cách xa hơn so với vị trí sang thương hay thiết kế xoang trám của các em.
+
+71
+00:14:23,120 --> 00:14:34,000
+Do đó, các em cần biết tuổi để ước lượng độ sâu của xoang trám và tuân thủ đúng các nguyên tắc sinh học.
+
+72
+00:14:32,000 --> 00:14:46,720
+Các em cũng cần đánh giá vị trí bám dính của nướu: nướu đang ở vị trí sinh lý bình thường, hay bệnh nhân có nguy cơ bị tụt nướu không?
+
+73
+00:14:44,480 --> 00:15:00,079
+Đồng thời đánh giá tình trạng canxi hóa của cấu trúc răng: răng có bị mòn ngót hay xơ hóa ngà không, từ đó lựa chọn vật liệu và kỹ thuật phục hồi phù hợp.
+
+74
+00:14:56,399 --> 00:15:12,480
+Khi bệnh nhân của các em lớn tuổi hơn, các em thường hướng tới các loại phục hồi trực tiếp.
+
+75
+00:15:10,560 --> 00:15:28,560
+Xu hướng chọn vật liệu kim loại cho răng cối phía sau thường cao hơn là vật liệu thẩm mỹ, trừ khi ca đó có chỉ định phục hồi dán, nhưng thẩm mỹ không phải là ưu tiên hàng đầu lúc này.
+
+76
+00:15:25,279 --> 00:15:35,199
+Bệnh nhân cần một miếng trám cứng chắc, bền bỉ bất kể nó có đẹp hay không, ngoại trừ trường hợp đó là vùng răng cửa phía trước.
+
+77
+00:15:35,199 --> 00:15:52,480
+Nếu bệnh nhân của các em thuộc nhóm trẻ tuổi, từ 18 đến khoảng 40, sự lựa chọn của các em sẽ luôn thiên về thẩm mỹ.
+
+78
+00:15:49,120 --> 00:15:57,360
+Người trẻ tuổi ưu tiên tính thẩm mỹ, trong khi người lớn tuổi lại đặt chức năng ăn nhai lên hàng đầu.
+
+79
+00:15:55,839 --> 00:16:05,120
+Họ quan tâm miếng trám sẽ tồn tại và hoạt động hiệu quả được bao lâu chứ không quá bận tâm về tính thẩm mỹ.
+
+80
+00:16:02,959 --> 00:16:22,959
+Tiếp theo là giới tính sinh học (sex), và ở đây thầy muốn làm rõ một chút về các hệ thống hồ sơ và quản lý nha khoa.
+
+81
+00:16:19,120 --> 00:16:25,199
+Nhiều hệ thống ưu tiên dùng thuật ngữ giới tính xã hội (gender) thay vì giới tính sinh lý.
+
+82
+00:16:22,959 --> 00:16:45,120
+Nhưng không, "gender" thiên về thái độ và bản dạng cá nhân, trong khi "sex" là thuật ngữ sinh lý và giải phẫu liên quan trực tiếp đến cơ thể, điều này mới là quan trọng nhất đối với thầy.
+
+83
+00:16:43,040 --> 00:17:01,839
+Việc bệnh nhân thể hiện tính nam hay tính nữ, hoặc bất cứ dạng nào ở giữa, đó là thái độ, hành vi và sở thích cá nhân của họ.
+
+84
+00:16:57,440 --> 00:17:22,799
+Còn "sex" là thuật ngữ mô tả giải phẫu, sinh lý cơ thể và hệ thống nội tiết của bệnh nhân, từ đó dự đoán được tình trạng y khoa có liên quan đến kế hoạch điều trị của chúng ta.
+
+85
+00:17:22,799 --> 00:17:29,520
+Đó là lý do chúng ta xác định rõ giới tính sinh lý là nam hoặc nữ.
+
+86
+00:17:26,240 --> 00:17:29,520
+Tại sao thầy phải ghi nhận yếu tố này?
+
+87
+00:17:29,760 --> 00:17:43,679
+Thông thường, thầy có thể quan sát bệnh nhân bằng mắt thường và ghi xuống giới tính sinh học của họ một cách dễ dàng.
+
+88
+00:17:40,400 --> 00:18:11,679
+Nhưng hiện nay, thứ nhất là do có sự chuyển giới, điều này không phổ biến ở các nước Ả Rập, nhưng lại rất phổ biến ở các nền văn hóa khác, nên có thể vẻ ngoài là nam nhưng sinh lý lại là nữ và ngược lại.
+
+89
+00:18:08,880 --> 00:18:33,380
+Thứ hai, một số tên gọi có thể dùng chung cho cả nam và nữ, nên khi có đồng nghiệp xem hồ sơ hoặc khi thầy chuyển tuyến hội chẩn, họ cần biết giới tính sinh lý của bệnh nhân vì tên gọi không đủ để xác định.
+
+90
+00:18:33,380 --> 00:18:49,200
+Đồng thời, một số hệ thống quản lý chỉ hiển thị chữ viết tắt của tên, nên các em bắt buộc phải ghi rõ giới tính sinh học của bệnh nhân.
+
+91
+00:18:48,320 --> 00:18:58,594
+Quan trọng nhất là trong kế hoạch điều trị, những gì nãy giờ thầy nói là công tác hành chính, vậy còn yếu tố lâm sàng thì sao?
+
+92
+00:18:58,594 --> 00:19:41,600
+Về mặt lâm sàng, một số bệnh lý có liên quan đặc thù đến giới tính, chẳng hạn như phì đại nướu hoặc mòn răng do thai kỳ chỉ có ở nữ giới, như các em thấy trong bức ảnh tiếp theo đây, tình trạng này là do trào ngược dạ dày và tăng tiết axit trong thai kỳ, đặc biệt là khi mang thai liên tục mà không có thời gian nghỉ giữa các lần sinh.
+
+93
+00:19:39,200 --> 00:19:46,240
+Cần lưu ý các chống chỉ định về thuốc tê và chụp phim X-quang đối với phụ nữ có thai.
+
+94
+00:19:44,559 --> 00:19:54,240
+Về lựa chọn vật liệu và kỹ thuật, nữ giới luôn ưu tiên tính thẩm mỹ cao hơn so với các vật liệu phục hình bằng kim loại.
+
+95
+00:19:52,480 --> 00:20:14,914
+Nếu có một bệnh nhân nam, các em sẽ không cần hỏi xem anh ta có thai hay không, nhưng với bệnh nhân nữ, câu hỏi tiếp theo phải là cô ấy có đang mang thai không, và nếu có thì đang ở tam cá nguyệt thứ mấy, vì điều này ảnh hưởng đến việc dùng thuốc tê và chụp X-quang.
+
+96
+00:20:14,914 --> 00:20:26,640
+Nhưng thực tế là đối với bệnh nhân nam, các em sẽ không bao giờ cần hỏi về những tình trạng này.
+
+97
+00:20:22,559 --> 00:20:46,159
+Đây là hình ảnh lâm sàng, bên trái là viêm nướu thai kỳ, nếu không chăm sóc kỹ có thể tiến triển thành nướu phì đại dạng polyp như hình bên phải, do mô nha chu không được giữ gìn đúng cách trong thời gian mang thai.
+
+98
+00:20:42,880 --> 00:21:24,110
+Trong trường hợp này, nếu có vết sâu kẽ giữa răng cửa giữa và răng cửa bên, như ảnh bên trái, các em sẽ thấy miếng trám GIC hoặc Composite loại III ở mặt gần răng cửa bên đã bị đổi màu bờ viền, do bác sĩ khi trám đã không để ý đến viêm nướu thai kỳ, khiến máu từ nướu thấm vào làm nhiễm bẩn bờ vát.
+
+99
+00:21:24,110 --> 00:21:42,420
+Đáng lẽ bác sĩ đó nên chuyển bệnh nhân cho bác sĩ nha chu xử lý trước, và bác sĩ nha chu có thể chuyển bệnh nhân đến bác sĩ sản khoa để kiểm soát tình trạng viêm nướu thai kỳ này trước khi chúng ta tiến hành nha khoa phục hồi.
+
+100
+00:21:42,420 --> 00:21:47,440
+Tiếp theo là nghề nghiệp của bệnh nhân.
+
+101
+00:21:45,200 --> 00:21:48,213
+Tại sao các em cần phải biết nghề nghiệp của bệnh nhân?
+
+102
+00:21:48,213 --> 00:22:25,120
+Thứ nhất, nó cung cấp manh mối về mối liên hệ giữa một số nghề nghiệp và các khiếm khuyết trên răng, như các em thấy trong hình, răng mòn lõm tạo hình một chiếc ghim, do bệnh nhân này là thợ may hoặc nhà thiết kế thời trang, họ có thói quen ngậm ghim giữa hai răng cửa suốt hơn 20 năm, làm mòn răng và để lại những rãnh khuyết thế này, thợ mộc cũng gặp tình trạng tương tự.
+
+103
+00:22:23,039 --> 00:22:54,000
+Nếu các em muốn phục hồi răng này bằng miếng trám composite, nghe có vẻ đơn giản, nhưng thực tế, các em có thể thấy khớp cắn của bệnh nhân đã dịch chuyển thành cắn đối đầu, bệnh nhân cố gắng tìm sự thăng bằng ở vùng răng cửa, và lực cắn vẫn tiếp tục tác động lên vùng bị khuyết.
+
+104
+00:22:51,440 --> 00:23:05,679
+Vì thế, công việc này không hề đơn giản chỉ là vát bờ và nhồi composite, bởi vì khớp cắn của bệnh nhân đã chuyển sang thế đối đầu.
+
+105
+00:23:03,440 --> 00:23:28,880
+Đồng thời, không chỉ có lực tác động từ khớp cắn đối đầu, mà việc bệnh nhân tiếp tục ngậm vật kim loại cứng giữa các răng sẽ khiến miếng trám của các em thất bại, và các em sẽ rơi vào cái bẫy phải trám đi trám lại liên tục mỗi ngày, trừ khi các em giải quyết được căn nguyên của vấn đề.
+
+106
+00:23:25,760 --> 00:23:31,120
+Đó là lý do các em phải thu thập đủ thông tin về nghề nghiệp của bệnh nhân.
+
+107
+00:23:31,120 --> 00:23:46,533
+Nghề nghiệp của bệnh nhân cũng quyết định mức độ quan tâm của họ đến điều trị phục hồi, cách chọn vật liệu, kỹ thuật, cũng như quỹ thời gian mà các em có thể dựa vào để lên kế hoạch điều trị.
+
+108
+00:23:46,533 --> 00:24:06,960
+Giả sử bệnh nhân của các em là một người dẫn chương trình truyền hình và phải lên sóng trực tiếp mỗi ngày, điều này có nghĩa là bệnh nhân đó không thể bước ra khỏi phòng khám của các em với một miếng trám tạm được.
+
+109
+00:24:06,960 --> 00:24:16,400
+Họ cần phải bước ra với một phục hình thẩm mỹ hoàn chỉnh chỉ trong một lần hẹn.
+
+110
+00:24:14,640 --> 00:24:21,760
+Đồng thời, cần áp dụng triết lý can thiệp tối thiểu.
+
+111
+00:24:21,760 --> 00:24:26,960
+Tại sao phải áp dụng can thiệp tối thiểu?
+
+112
+00:24:26,960 --> 00:24:45,840
+Can thiệp tối thiểu ở đây không có nghĩa là các em chỉ cần một xoang trám rất bảo tồn, bởi vì việc mở xoang bảo tồn còn phụ thuộc vào nhiều yếu tố khác như kích thước, mức độ và mức độ hoạt động của chính sang thương đó.
+
+113
+00:24:43,200 --> 00:24:57,280
+Nhưng ý thầy ở đây là can thiệp tối thiểu tức là thực hiện điều trị nhanh nhất, ít biến chứng nhất, cho đến khi các em sắp xếp được đủ thời gian với bệnh nhân để hoàn thiện ca điều trị đó.
+
+114
+00:24:57,280 --> 00:25:06,159
+Đó là lý do các em phải biết nghề nghiệp của họ.
+
+115
+00:25:03,760 --> 00:25:14,799
+Hãy đến với một yếu tố quan trọng nhất ngay sau thông tin nhân trắc học, đó là lý do đến khám.
+
+116
+00:25:14,799 --> 00:25:18,639
+Lý do đến khám có ý nghĩa gì?
+
+117
+00:25:18,639 --> 00:25:33,066
+Lý do đến khám được định nghĩa là vấn đề chính yếu thúc đẩy bệnh nhân, bắt buộc họ phải tìm đến phòng khám nha khoa.
+
+118
+00:25:33,066 --> 00:25:36,799
+Đây là nguyên nhân cốt lõi đưa bệnh nhân đến phòng khám.
+
+119
+00:25:36,799 --> 00:25:46,480
+Bằng cách hỏi họ, vấn đề của anh chị là gì, và nó phải được ghi lại bằng chính lời lẽ của bệnh nhân.
+
+120
+00:25:43,760 --> 00:25:48,880
+Đừng dịch nó sang thuật ngữ nha khoa.
+
+121
+00:25:48,880 --> 00:26:04,559
+Hãy ghi chép lại y nguyên lời bệnh nhân nói, vì họ là người đang chịu đựng và hiểu rõ nhất về tình trạng của mình.
+
+122
+00:26:02,720 --> 00:26:25,039
+Trong lĩnh vực nha khoa, đặc biệt nếu là bác sĩ tổng quát, chúng ta có thể nghe hàng trăm lý do đến khám khác nhau, được mô tả theo nhiều cách khác nhau, mức độ nghiêm trọng khác nhau tùy thuộc vào tính cách, tuổi tác bệnh nhân và ảnh hưởng tâm lý của vấn đề đó.
+
+123
+00:26:25,039 --> 00:26:39,360
+Nhưng có bốn lý do chính mà khi bệnh nhân nhắc đến, các em phải nghĩ ngay đến mảng nha khoa chữa răng.
+
+124
+00:26:36,080 --> 00:26:58,320
+Đó là lý do khi bắt đầu bài giảng, thầy đã nhấn mạnh tầm quan trọng của việc lắng nghe, dành thời gian đánh giá bệnh nhân, vì nó vạch ra lộ trình tư duy phản biện để các em biết mình nên làm gì tiếp theo để điều trị cho họ.
+
+125
+00:26:57,120 --> 00:27:01,919
+Thứ nhất: Nhồi nhét và đọng thức ăn.
+
+126
+00:27:01,919 --> 00:27:06,480
+Nhồi nhét và đọng thức ăn đồng nghĩa với việc đã có lỗ sâu.
+
+127
+00:27:06,480 --> 00:27:30,720
+Lỗ hổng hoặc khoảng trống này có thể do răng chen chúc, do sâu răng, đặc biệt là ở vùng kẽ răng mà bệnh nhân không nhìn thấy bằng mắt thường, hoặc có thể do các vấn đề nha chu như túi nha chu ngang.
+
+128
+00:27:28,640 --> 00:27:36,799
+Nhưng khi nghe vậy, các em phải lập tức nghĩ đến nha khoa chữa răng, cụ thể là sâu mặt bên.
+
+129
+00:27:35,200 --> 00:27:53,120
+Nếu bệnh nhân than phiền trực tiếp và rõ ràng về việc có lỗ sâu hay mẻ vỡ răng, thì dù có đi kèm với cơn đau hay không, vấn đề nằm ở ranh giới giữa chữa răng và nội nha.
+
+130
+00:27:51,200 --> 00:28:14,480
+Đổi màu răng cũng vậy: liệu đó là do sâu răng, do các khiếm khuyết khác như nhiễm fluor, hay chỉ là nhiễm màu ngoại lai do hút thuốc, uống nhiều trà, cà phê và chỉ cần đánh bóng hoặc tẩy trắng răng?
+
+131
+00:28:12,799 --> 00:28:24,320
+Tiếp đến là tình trạng tệ nhất, đó là nhạy cảm hoặc đau nhức, báo hiệu có điều gì đó bất thường, vì đau được định nghĩa là một cảm giác cảnh báo...
+
+132
+00:28:22,880 --> 00:28:32,320
+Trong chủ đề đau và quá mẫn cảm, đó là một cảm giác báo động cho thấy đã có một mức độ tổn thương mô nhất định.
+
+133
+00:28:30,799 --> 00:28:37,009
+Nhưng đó chưa phải là toàn bộ câu chuyện.
+
+134
+00:28:37,009 --> 00:28:45,279
+Bệnh nhân có thể chỉ nói rằng họ bị nhét thức ăn ở một vị trí, hoặc có lỗ sâu, hoặc đang bị đau, hay răng bị đổi màu.
+
+135
+00:28:44,559 --> 00:28:53,536
+Không, các em phải hỏi thêm thông tin chi tiết cho từng lời than phiền đó, phần này gọi là khai thác bệnh sử.
+
+136
+00:28:53,536 --> 00:29:03,152
+Khai thác bệnh sử là một nhiệm vụ vô cùng, vô cùng quan trọng phải làm trước khi tiến hành khám lâm sàng.
+
+137
+00:29:03,152 --> 00:29:13,486
+Hỏi về bệnh sử của lý do đến khám sẽ giúp các em khoanh vùng vị trí xuất phát của vấn đề.
+
+138
+00:29:13,486 --> 00:29:20,320
+Tính chất, đặc điểm và mức độ khẩn cấp của vấn đề được xác định rõ qua bệnh sử.
+
+139
+00:29:18,080 --> 00:29:27,840
+Lưu ý rằng cho đến thời điểm này, các em vẫn chưa mời bệnh nhân ngồi lên ghế nha.
+
+140
+00:29:24,799 --> 00:29:38,445
+Điều này cũng khuyến khích bệnh nhân tự giác cung cấp thêm thông tin, giúp phác họa bức tranh toàn cảnh về vấn đề của họ.
+
+141
+00:29:38,445 --> 00:29:55,840
+Và về mặt tâm lý, nó tăng cường sự tin tưởng và tự tin giữa các em và bệnh nhân, vì họ nhận thấy các em đang thực sự quan tâm tìm hiểu và giải quyết vấn đề của họ.
+
+142
+00:29:51,039 --> 00:30:05,520
+Các em đang nỗ lực hết mình để giải quyết vấn đề cho họ, đó là lý do các em đi sâu vào chi tiết giống như một thám tử vậy.
+
+143
+00:30:03,840 --> 00:30:13,440
+Các em cần hỏi về thời điểm khởi phát.
+
+144
+00:30:09,679 --> 00:30:13,057
+Tình trạng này bắt đầu từ khi nào?
+
+145
+00:30:13,057 --> 00:30:26,626
+Dù là nhét thức ăn, đau nhức hay đổi màu, lần đầu tiên bệnh nhân nhận ra hay than phiền về nó là khi nào?
+
+146
+00:30:26,626 --> 00:30:35,279
+Vị trí: hãy để bệnh nhân tự mô tả hoặc dùng ngón tay chỉ chính xác vào vị trí đó.
+
+147
+00:30:31,200 --> 00:30:40,950
+Nhìn chung, việc bệnh nhân chỉ rõ được một chiếc răng cụ thể rất khác với việc chỉ vào một vùng chung chung.
+
+148
+00:30:40,950 --> 00:31:08,320
+Nếu họ chỉ ra được một chiếc răng, điều này cho thấy cơn đau đang ảnh hưởng đến các thụ thể áp lực, báo hiệu có tình trạng bệnh lý vùng quanh chóp hoặc nha chu, hoặc tổn thương đã lan đến dây chằng nha chu, nghĩa là vấn đề chóp răng và tủy răng đang cùng xuất hiện.
+
+149
+00:31:07,039 --> 00:31:31,440
+Nhưng nếu họ không thể chỉ ra một chiếc răng cụ thể mà chỉ vào một vùng, bao gồm hai đến ba chiếc răng hoặc toàn bộ một phần tư hàm, thì tình trạng này có tính lan tỏa hơn thay vì khu trú tại một răng, đó là một cơn đau xuất chiếu.
+
+150
+00:31:29,039 --> 00:31:37,760
+Trong trường hợp đó, nó cho thấy vấn đề đang ảnh hưởng đến các thụ thể cảm giác.
+
+151
+00:31:37,760 --> 00:31:42,080
+Các thụ thể cảm giác này chủ yếu nằm trong tủy răng.
+
+152
+00:31:42,080 --> 00:32:00,159
+Tủy răng chứa nhiều thụ thể cảm giác hơn các mô răng khác, do đó các em có thể dự đoán đây là bệnh lý tủy, và tình trạng vẫn đang giới hạn ở các mô mà các em có thể phát hiện qua khám lâm sàng.
+
+153
+00:32:00,159 --> 00:32:07,600
+Tiếp theo là mô tả loại triệu chứng.
+
+154
+00:32:06,399 --> 00:32:07,600
+Triệu chứng thuộc loại nào?
+
+155
+00:32:07,600 --> 00:32:12,320
+Có phải là đau âm ỉ không?
+
+156
+00:32:09,360 --> 00:32:11,109
+Hay là đau theo nhịp mạch đập?
+
+157
+00:32:11,109 --> 00:32:12,857
+Hay đau nhói dữ dội?
+
+158
+00:32:12,857 --> 00:32:21,440
+Nhưng các em tuyệt đối đừng mớm lời hoặc nhét chữ vào miệng bệnh nhân nhé.
+
+159
+00:32:19,200 --> 00:32:28,880
+Đừng hỏi kiểu như "Có phải đau giật theo nhịp mạch đập không, có hay không?"
+
+160
+00:32:26,559 --> 00:32:28,068
+Hay "Có phải đau nhói không?"
+
+161
+00:32:28,068 --> 00:32:32,559
+Có thể các em nghĩ làm vậy là thông minh.
+
+162
+00:32:30,080 --> 00:32:37,013
+Nhưng đó là cách trao đổi vô cùng tệ hại với bệnh nhân.
+
+163
+00:32:37,013 --> 00:32:47,279
+Hãy để họ tự mô tả, yêu cầu họ mô tả cơn đau, đừng mớm lời gợi ý cho họ.
+
+164
+00:32:44,960 --> 00:32:58,986
+Bởi vì bệnh nhân luôn mặc định rằng các em là chuyên gia, là bác sĩ nha khoa và biết nhiều hơn họ, nên họ sẽ dễ dàng gật đầu hùa theo gợi ý của các em.
+
+165
+00:32:58,986 --> 00:33:11,200
+Họ sẽ nghĩ rằng chắc bác sĩ biết nó đau theo nhịp mạch đập thật, bác sĩ đúng còn mình sai, trong khi thực tế tình trạng của họ không hề giống như vậy.
+
+166
+00:33:11,200 --> 00:33:20,480
+Tiếp theo, số 4, hỏi về tần suất: đợt đau này bắt đầu từ bao lâu trước đây?
+
+167
+00:33:21,039 --> 00:33:29,200
+Nó kéo dài bao lâu kể từ năm ngoái, sau đó dừng lại, rồi tháng sau lại xuất hiện, có phải diễn tiến như vậy không?
+
+168
+00:33:29,200 --> 00:33:34,960
+Thời lượng: cơn đau kéo dài trong bao lâu?
+
+169
+00:33:34,960 --> 00:33:40,960
+Và tần suất xuất hiện, đó có phải là một cơn đau liên tục không?
+
+170
+00:33:40,960 --> 00:33:51,679
+Chúng ta luôn lấy cơn đau làm ví dụ vì nó là một trong những lý do đến khám có bệnh sử phức tạp nhất.
+
+171
+00:33:49,519 --> 00:33:56,080
+Nhưng nguyên tắc này có thể áp dụng cho tất cả các lý do đến khám khác theo cách này hay cách khác.
+
+172
+00:33:54,559 --> 00:33:59,840
+Vậy, đó là đau liên tục?
+
+173
+00:33:57,840 --> 00:33:59,840
+Hay đau từng cơn?
+
+174
+00:33:59,840 --> 00:34:08,399
+Nếu là đau từng cơn, khoảng thời gian giữa mỗi đợt là bao lâu?
+
+175
+00:34:05,519 --> 00:34:16,240
+Yếu tố kích phát và thuyên giảm: Có điều gì làm triệu chứng nặng hơn hay thuyên giảm không?
+
+176
+00:34:13,440 --> 00:34:25,200
+Hầu hết bệnh nhân thường kể rằng, tôi đã uống rất nhiều thuốc giảm đau nhưng vẫn bị hành hạ.
+
+177
+00:34:22,720 --> 00:34:37,959
+Nếu các em liên kết điều này với loại và thời gian đau, chắc chắn các em sẽ phát hiện ra đó là cơn đau giật theo nhịp mạch đập, liên tục nhưng cường độ thấp.
+
+178
+00:34:37,959 --> 00:34:49,119
+Điều này chứng tỏ có một ổ nhiễm trùng mạn tính, đang bắt đầu chuyển sang đợt cấp, đó là lý do thuốc giảm đau không còn tác dụng.
+
+179
+00:34:46,800 --> 00:35:04,880
+Bệnh nhân ở một số quốc gia có thể tự mua thuốc kháng sinh, ở nhiều nước trong đó có quê hương Ai Cập của thầy, và hầu hết các nơi khác, kháng sinh được bán thoải mái mà không cần đơn thuốc bác sĩ.
+
+180
+00:35:04,880 --> 00:35:24,240
+Bệnh nhân có thể đã tự dùng kháng sinh và nói với các em rằng cơn đau giảm hẳn sau khi uống kháng sinh, từ đó các em có thể dự đoán có tình trạng nhiễm trùng, vì vậy nó mới đáp ứng với kháng sinh.
+
+181
+00:35:20,960 --> 00:35:33,480
+Câu trả lời cho tất cả những yếu tố trên sẽ cung cấp cho các em những manh mối bám sát nhất để giải quyết vấn đề của bệnh nhân, như thầy đã nói từ trước.
+
+182
+00:35:33,480 --> 00:35:48,080
+Nó sẽ giúp các em vẽ ra một bản đồ tư duy, dẫn dắt tư duy phản biện của các em giới hạn phạm vi tìm kiếm để đi đến một chẩn đoán xác định.
+
+183
+00:35:48,080 --> 00:35:56,800
+Vậy mà chúng ta lại luôn vội vàng bỏ qua phần hỏi bệnh sử để nhảy ngay vào cầm dụng cụ khám.
+
+184
+00:35:54,640 --> 00:36:05,829
+Hậu quả là chúng ta có thể bỏ sót chẩn đoán xác định về vấn đề thực sự của bệnh nhân, dẫn đến kế hoạch điều trị không hoàn toàn phù hợp.
+
+185
+00:36:05,829 --> 00:36:11,440
+Vì thế, xin các em, hãy lắng nghe để thấu hiểu, chứ không phải lắng nghe để đối đáp.
+
+186
+00:36:11,440 --> 00:36:21,760
+Các em không lắng nghe để vội vàng trả lời những thắc mắc của bệnh nhân.
+
+187
+00:36:19,359 --> 00:36:27,839
+Các em cần lắng nghe để hiểu rõ cặn kẽ vấn đề và từ đó giải quyết nó.
+
+188
+00:36:25,359 --> 00:36:32,800
+Tiếp theo là phần khai thác tiền sử y khoa trước khi khám và chẩn đoán.
+
+189
+00:36:30,560 --> 00:36:41,440
+Đôi khi ở quầy lễ tân, bệnh nhân đã điền sẵn một phiếu câu hỏi tiền sử y khoa toàn diện dưới dạng đánh dấu Có hoặc Không.
+
+190
+00:36:39,760 --> 00:36:56,240
+Phiếu này đóng vai trò là trọng tâm để giúp bác sĩ nhận diện các bệnh lý nền có nguy cơ gây biến chứng hoặc chống chỉ định với một số thủ thuật nha khoa sau này.
+
+191
+00:36:54,240 --> 00:37:20,400
+Đó là lý do tại sao một phiếu khảo sát tiền sử y khoa giúp các em tiết kiệm thời gian, trong lúc phỏng vấn và đánh giá bệnh nhân, các em chỉ cần tập trung xoáy sâu vào các mục bệnh nhân đánh "Có" hoặc những thông tin mới để đảm bảo nắm rõ tình trạng sức khỏe của họ.
+
+192
+00:37:17,839 --> 00:37:22,400
+Tại sao các em cần phải có báo cáo về tình trạng sức khỏe toàn thân hay tiền sử y khoa?
+
+193
+00:37:22,400 --> 00:37:27,200
+Liệu có chống chỉ định nào đối với điều trị nha khoa phục hồi không?
+
+194
+00:37:27,200 --> 00:37:38,720
+Không, về nguyên tắc chung, không có chống chỉ định toàn thân nào cấm điều trị nha khoa phục hồi, ngoại trừ bệnh tiểu đường không kiểm soát hoặc bệnh nhân mới bị nhồi máu cơ tim gần đây.
+
+195
+00:37:38,720 --> 00:37:54,079
+Và cả hai tình trạng đó cũng chỉ là chống chỉ định tạm thời cho đến khi sức khỏe bệnh nhân ổn định, được giải quyết hoặc kiểm soát tốt.
+
+196
+00:37:52,079 --> 00:38:02,160
+Lý do là vì chúng ta e ngại biến chứng của thuốc tê, nên ta sẽ đợi đến khi bệnh tình được kiểm soát, vậy thôi.
+
+197
+00:38:00,400 --> 00:38:03,839
+Chúng ta không cần phải vội vã.
+
+198
+00:38:02,160 --> 00:38:14,320
+Các trường hợp cấp cứu trong nha khoa chữa răng là vô cùng hiếm, trừ khi ca đó cần phải chuyển sang chuyên khoa nội nha.
+
+199
+00:38:12,560 --> 00:38:23,839
+Nhưng đối với điều trị phục hồi và bảo tồn, đa phần cơn đau mà chúng ta gặp tối đa chỉ là ê buốt chứ không phải đau nhức dữ dội.
+
+200
+00:38:23,839 --> 00:38:28,240
+Khi nó trở thành cơn đau nhói dữ dội, các em phải chuyển ca đó cho bác sĩ nội nha.
+
+201
+00:38:28,240 --> 00:38:37,920
+Đó là lý do tại sao chúng ta không cần vội vàng, đây không phải là tình huống cấp cứu y tế, vì vậy làm ơn hãy khai thác kỹ tiền sử y khoa.
+
+202
+00:38:37,920 --> 00:38:55,200
+Các em có thể giải quyết tạm thời vấn đề cho bệnh nhân bằng cách nạo sạch ngà sâu và trám bằng vật liệu làm dịu tủy cho đến khi họ kiểm soát được bệnh lý toàn thân, như vậy sẽ an toàn hơn và tránh được biến chứng do thuốc tê.
+
+203
+00:38:53,119 --> 00:39:15,359
+Trong một số trường hợp, bệnh nhân có thể cần uống kháng sinh dự phòng trước khi bắt đầu can thiệp nha khoa, hoặc cần nạo ngà sâu, đặt thuốc làm dịu tủy và trám kín lại, vì các bệnh lý toàn thân như mang van tim nhân tạo, tiền sử sốt thấp khớp, đang hóa trị hoặc xạ trị ung thư.
+
+204
+00:39:12,160 --> 00:39:21,200
+Các em cần thực hiện thủ thuật dưới sự bảo vệ của kháng sinh dự phòng.
+
+205
+00:39:18,800 --> 00:39:37,088
+Trái ngược với tình huống trên, đối với bệnh nhân mắc các bệnh truyền nhiễm, chúng ta vừa e ngại nguy cơ bệnh nhân bị nhiễm trùng, lại vừa sợ lây nhiễm bệnh cho bệnh nhân hoặc từ bệnh nhân.
+
+206
+00:39:37,088 --> 00:39:48,560
+Với những bệnh nhân mắc bệnh truyền nhiễm, về mặt đạo đức các em không được phép từ chối điều trị, các em chỉ cần tuân thủ nghiêm ngặt...
+
+207
+00:39:45,599 --> 00:39:51,119
+Quy trình kiểm soát nhiễm khuẩn, chỉ vậy thôi.
+
+208
+00:39:48,560 --> 00:40:03,359
+Trong một số trường hợp nhất định, cần có phác đồ đặc biệt và các biện pháp phòng ngừa chuyên biệt, đặc biệt là hiện nay chúng ta đang đối mặt với đại dịch COVID-19.
+
+209
+00:40:01,200 --> 00:40:26,160
+Quy định về đồ bảo hộ cá nhân và phác đồ kiểm soát nhiễm khuẩn đã thay đổi hoàn toàn và trở nên vô cùng nghiêm ngặt, bao quát hầu hết các bệnh truyền nhiễm nguy hiểm, bao gồm cả Viêm gan, Herpes, Giang mai, Lao và nhiều bệnh khác.
+
+210
+00:40:25,040 --> 00:40:36,319
+Bệnh nhân có quyền được điều trị, nhưng các em phải tuân thủ đúng phác đồ kiểm soát nhiễm khuẩn chuyên biệt đã được khuyến cáo, vậy thôi.
+
+211
+00:40:33,760 --> 00:40:41,440
+Nhưng làm sao các em biết được điều này nếu không hỏi về tiền sử y khoa?
+
+212
+00:40:39,280 --> 00:40:57,760
+Các em cũng cần nắm rõ tiền sử y khoa để tránh tương tác thuốc bất lợi nếu bệnh nhân đang dùng thuốc khác và các em cần kê đơn thuốc kháng sinh hoặc giảm đau cho họ.
+
+213
+00:40:55,200 --> 00:41:19,680
+Các em phải chắc chắn về tình trạng sức khỏe của bệnh nhân để tránh các phản ứng có hại và tương tác thuốc, ngay cả khi đó chỉ là tình trạng nhạy cảm với kháng sinh, dị ứng với thuốc giảm đau, hay các vấn đề về dạ dày và tiêu hóa dẫn đến chống chỉ định với một số loại thuốc giảm đau.
+
+214
+00:41:18,160 --> 00:41:33,440
+Một số bệnh lý toàn thân có thể chống chỉ định với các kỹ thuật, thiết bị hoặc máy móc sử dụng trong điều trị nha khoa, ví dụ như bệnh nhân đang mang máy tạo nhịp tim.
+
+215
+00:41:31,119 --> 00:41:42,480
+Tuyệt đối không nên sử dụng máy thử tủy điện cho bệnh nhân này, vì nó có thể gây nhiễu tần số của máy tạo nhịp tim.
+
+216
+00:41:40,319 --> 00:41:54,720
+Vấn đề đặt ra qua tất cả các tình huống vừa bàn luận là, liệu bệnh nhân có biết mình đang mắc bệnh gì không?
+
+217
+00:41:50,000 --> 00:42:04,880
+Họ đang mắc một bệnh lý toàn thân nghiêm trọng, hay họ chỉ là bệnh nhân có hệ miễn dịch suy yếu với một vấn đề nhỏ?
+
+218
+00:42:02,079 --> 00:42:16,720
+Một số bệnh nhân thì nắm rất rõ về tình trạng bệnh lý của mình, nhưng một phần lớn khác lại không hề hay biết mình đang mắc bệnh toàn thân.
+
+219
+00:42:15,119 --> 00:42:29,839
+Đó là lý do tại sao phiếu khảo sát hay hồ sơ tiền sử y khoa của các em không nên chỉ đưa ra các thuật ngữ y khoa khô khan.
+
+220
+00:42:27,280 --> 00:42:49,599
+Các em nên hỏi họ những câu hỏi mở, ví dụ như về tình trạng sụt cân không rõ nguyên nhân, rụng tóc bất thường, mề đay do thức ăn hay các phản ứng ngoài da với một số loại thuốc.
+
+221
+00:42:50,000 --> 00:43:03,200
+Bệnh nhân của các em có thể từng trải qua việc này một lần trong đời và coi đó là chuyện bình thường, nhưng đôi khi nó lại phản ánh một bất thường nào đó trong cơ thể.
+
+222
+00:43:00,400 --> 00:43:11,040
+Hãy hỏi họ về vấn đề tiểu tiện, việc đi tiểu nhiều lần trong ngày có thể là dấu hiệu của bệnh tiểu đường.
+
+223
+00:43:08,560 --> 00:43:27,040
+Tất cả những điều này đều phải được hỏi tới, và các em có thể dễ dàng tìm thấy hàng ngàn, hàng triệu mẫu phiếu bệnh sử chuẩn y khoa trên mạng, được phê duyệt bởi các tổ chức uy tín một cách hoàn toàn miễn phí.
+
+224
+00:43:25,760 --> 00:43:52,263
+Hầu hết mọi người thường sử dụng bảng kiểm dưới dạng "Có/Không", chủ yếu hỏi về các bệnh lý tim mạch bao gồm sốt thấp khớp, huyết áp, các bệnh hô hấp, hen suyễn, khó thở, và ngày nay chúng ta có thể bổ sung thêm tình trạng mắc COVID-19.
+
+225
+00:43:52,263 --> 00:44:17,760
+Tiểu đường, động kinh, vàng da, các loại thuốc đang dùng hoặc mới dùng, dị ứng, chảy máu, xuất huyết, rối loạn đông máu, các bệnh khác, phẫu thuật, tiền sử nhập viện, mang thai (mặc dù mang thai là trạng thái sinh lý chứ không phải bệnh lý), HIV/AIDS, nguy cơ mắc bệnh truyền nhiễm.
+
+226
+00:44:15,839 --> 00:44:37,599
+Scully và Cawson đã đưa ra một danh sách kiểm tra các bệnh lý y khoa cần xem xét và chăm sóc đặc biệt, sắp xếp theo bảng chữ cái từ A B C D đến N để dễ nhớ.
+
+227
+00:44:35,599 --> 00:44:50,319
+Thiếu máu (Anemia), rối loạn chảy máu (Bleeding disorder), rối loạn tim mạch-hô hấp (Cardiorespiratory disorder), điều trị bằng thuốc và dị ứng (Drug treatment and allergies), bệnh nội tiết (Endocrine diseases)... đó là các danh mục.
+
+228
+00:44:48,640 --> 00:44:54,800
+Các em nên đặt những câu hỏi cụ thể theo từng phần đó.
+
+229
+00:44:52,400 --> 00:45:21,200
+Điều trị bằng thuốc, dị ứng, bệnh nội tiết bao gồm tiểu đường, tuyến giáp, vấn đề mỡ và tĩnh mạch, rối loạn tiêu hóa, tiền sử nhập viện, nhiễm trùng, bệnh thận, bệnh gan, mang thai hoặc chuẩn bị mang thai, trạng thái tinh thần, các vấn đề thần kinh, danh sách này được mô tả bởi Scully và Cawson vào năm 2014.
+
+230
+00:45:19,280 --> 00:45:30,400
+Hạng mục quan trọng cuối cùng trong phần đánh giá bệnh nhân và thu thập thông tin chính là tiền sử nha khoa.
+
+231
+00:45:27,920 --> 00:45:46,098
+Tiền sử nha khoa cho biết trước đây bệnh nhân đã từng làm những điều trị nha khoa nào, nó giúp các em đánh giá mức độ quan tâm của bệnh nhân đến răng miệng, đồng thời giúp các em dự đoán được những gì mình sẽ nhìn thấy trong miệng họ.
+
+232
+00:45:46,098 --> 00:46:06,000
+Để thầy lấy một ví dụ, nếu các em hỏi bệnh nhân rằng họ đã từng đến nha sĩ chưa, hay đã làm điều trị gì trên răng chưa, và họ trả lời rằng tôi luôn đợi đến khi răng hỏng nặng và tôi thà nhổ đi cho xong.
+
+233
+00:46:03,760 --> 00:46:12,400
+Thì chắc chắn các em chuẩn bị thấy một mớ hỗn độn trong miệng họ.
+
+234
+00:46:10,160 --> 00:46:41,440
+Thầy sẽ dự đoán mình sắp thấy chân răng tàn, răng vỡ vỡ lớn, hoặc chí ít vì bệnh nhân không mặn mà gì với việc điều trị nha khoa, nên thầy phải chuẩn bị tâm lý rằng sẽ rất vất vả để thuyết phục họ thực hiện các điều trị phục hồi bảo tồn thay vì nhổ bỏ răng một cách chấn thương.
+
+235
+00:46:39,680 --> 00:46:53,985
+Đó là lý do tại sao nó cung cấp ý niệm về mức độ quan tâm của bệnh nhân cũng như những gì các em sắp đối mặt trong miệng họ, đồng thời cung cấp thông tin về các biến chứng họ từng gặp phải và nguyên nhân đằng sau những biến chứng đó.
+
+236
+00:46:53,985 --> 00:47:12,240
+Giả sử bệnh nhân từng bị sưng và tụ máu dưới da sau khi tiêm thuốc tê.
+
+237
+00:47:11,119 --> 00:47:24,411
+Liệu đó là do phản ứng dị ứng hay nhạy cảm với thuốc tê, hay là sai sót kỹ thuật do nha sĩ trước gây ra?
+
+238
+00:47:24,411 --> 00:48:00,240
+Thầy cần phải biết cốt lõi vấn đề là gì, bối cảnh và tình trạng xung quanh vấn đề đó ra sao để biết cách phòng tránh, cũng như để mang lại cho bệnh nhân trải nghiệm điều trị nha khoa không đau, giải quyết cả tình trạng chảy máu sau nhổ răng, sau phẫu thuật hay điều trị nha chu, tìm hiểu lý do vì sao họ lại bỏ ngang điều trị, vấn đề thực sự của họ là gì, từ đó thiết lập sự tin tưởng giữa hai bên.
+
+239
+00:47:57,359 --> 00:48:06,880
+Do đó, việc thấu hiểu trải nghiệm trong quá khứ là vô cùng quan trọng để cung cấp chế độ chăm sóc tối ưu trong tương lai.
+
+240
+00:48:04,880 --> 00:48:18,000
+Đây là những sách giáo khoa thầy đã sử dụng để chuẩn bị cho bài trình bày này, nếu các em muốn tìm hiểu thêm thông tin, các em có thể tham khảo chúng.
+
+241
+00:48:15,119 --> 00:48:37,280
+Xin đừng ngần ngại đặt câu hỏi, các câu hỏi của các em luôn được hoan nghênh bất cứ lúc nào, các em có thể đặt câu hỏi bằng cách bình luận dưới video này và thầy sẽ trả lời sớm nhất có thể, hoặc dùng địa chỉ email của thầy trong slide tiếp theo để hỏi và thầy cũng sẽ phản hồi sớm nhất.
+
+242
+00:48:34,480 --> 00:48:41,680
+Cuối cùng, thầy muốn cảm ơn các em đã dành thời gian lắng nghe.
+
+243
+00:48:39,440 --> 00:48:49,800
+Đừng quên đăng ký kênh của thầy và bật thông báo để cập nhật những video mới nhất, cảm ơn các em.
