@@ -1,0 +1,563 @@
+1
+00:00:27,039 --> 00:00:44,613
+Chào mừng các em, đây là bài giảng từ chuỗi Learned Intel.
+
+2
+00:00:44,613 --> 00:00:53,520
+Trong phần này, thầy trò ta sẽ tiếp tục chủ đề chẩn đoán và lên kế hoạch điều trị trong nha khoa phục hồi.
+
+3
+00:00:53,520 --> 00:00:57,120
+Chúng ta vẫn đang tập trung vào việc chẩn đoán bệnh sâu răng.
+
+4
+00:00:55,440 --> 00:01:06,400
+Thầy xin nói rõ là thầy không nhận bất kỳ khoản thù lao hay tiền bản quyền nào từ việc bán các sản phẩm được nhắc đến trong bài giảng này.
+
+5
+00:01:04,400 --> 00:01:14,773
+Ngoài ra, bài giảng này không được tài trợ bởi bất kỳ công ty hay tổ chức nào và chỉ phục vụ cho mục đích giáo dục.
+
+6
+00:01:14,773 --> 00:01:26,406
+Các em lưu ý đây là bài giảng có bản quyền, không được phép sao chép hay phát tán dưới mọi hình thức nếu chưa có sự cho phép bằng văn bản từ tác giả.
+
+7
+00:01:26,406 --> 00:01:35,565
+Trong bài giảng hôm nay, chúng ta sẽ tiếp tục liên hệ giữa các dấu hiệu lâm sàng răng miệng với kế hoạch điều trị dự kiến.
+
+8
+00:01:35,565 --> 00:01:49,200
+Đồng thời, thầy trò ta cũng tìm hiểu cách chẩn đoán sâu răng chính xác bằng nhiều kỹ thuật khác nhau, từ giai đoạn sớm cho đến giai đoạn muộn.
+
+9
+00:01:49,200 --> 00:02:00,240
+Ở các bài trước, chúng ta đã thảo luận phần một về đánh giá bệnh nhân và thu thập thông tin bao gồm dữ liệu nhân khẩu học, lý do đến khám, bệnh sử y khoa và nha khoa.
+
+10
+00:02:00,240 --> 00:02:07,584
+Tiếp theo, trong phần hai, chúng ta đã bắt đầu đi vào phần khám lâm sàng.
+
+11
+00:02:07,584 --> 00:02:13,973
+Chúng ta bắt đầu khám sâu răng, và hiện tại vẫn đang dừng ở các kỹ thuật chẩn đoán sâu răng truyền thống.
+
+12
+00:02:13,973 --> 00:02:24,613
+Trong các kỹ thuật truyền thống, chúng ta đã bắt đầu với khám bằng mắt thường, nhưng vẫn còn một số vấn đề chưa được đề cập đến.
+
+13
+00:02:24,613 --> 00:02:34,400
+Chúng ta đã nói về cách khám bằng mắt thường đơn giản với ánh sáng và gương nha khoa rồi.
+
+14
+00:02:30,879 --> 00:03:12,400
+Kế đến, để đánh giá khách quan hơn và giảm thiểu sự khác biệt giữa các bác sĩ, chúng ta đã giới thiệu nhiều hệ thống phân loại như ICDAS hay của Hiệp hội Nha khoa Hoa Kỳ nhằm chuẩn hóa việc khám bằng mắt thường.
+
+15
+00:03:09,360 --> 00:03:38,000
+Hôm nay, thầy sẽ tiếp tục giới thiệu các kỹ thuật hỗ trợ cải thiện việc khám bằng mắt thường, giúp các em phát hiện chính xác sâu răng ở những giai đoạn rất sớm.
+
+16
+00:03:36,799 --> 00:03:54,799
+Kỹ thuật đơn giản nhất để nâng cao khả năng khám bằng mắt thường chính là dùng kính phóng đại, cho phép bác sĩ quan sát chi tiết nhỏ với độ chính xác và độ phân giải cao.
+
+17
+00:03:52,720 --> 00:04:25,600
+Việc phóng đại có thể thực hiện bằng nhiều cách, chẳng hạn như dùng camera trong miệng để truyền hình ảnh phóng to lên màn hình, kết hợp với nguồn sáng giúp các em quan sát rõ tổn thương.
+
+18
+00:04:22,720 --> 00:04:39,040
+Các em cũng có thể dùng kính lúp với nhiều mức phóng đại khác nhau, hoặc thậm chí là kính hiển vi nha khoa cung cấp độ phóng đại lên đến hai mươi lần.
+
+19
+00:04:36,560 --> 00:05:02,461
+Ở bảng này, các em có thể thấy độ phân giải được cải thiện như thế nào khi sử dụng các công cụ phóng đại tương ứng với từng mức độ khác nhau.
+
+20
+00:05:02,461 --> 00:05:21,474
+Hình bên trái là ví dụ về camera trong miệng đang truyền hình ảnh phóng to lên màn hình với ánh sáng tốt hơn, đồng thời giúp các em dễ dàng thảo luận ca bệnh với bệnh nhân.
+
+21
+00:05:21,474 --> 00:05:25,230
+Màn hình này sẽ giúp tăng cường khả năng giao tiếp và giải thích cho bệnh nhân của các em.
+
+22
+00:05:25,230 --> 00:05:39,520
+Còn ở bên phải là kính lúp nha khoa có hoặc không có đèn gắn đầu mà thầy đã từng giới thiệu ở các bài trước.
+
+23
+00:05:36,400 --> 00:05:49,280
+Đây là một cách khác sử dụng kính hiển vi, một thiết bị đóng vai trò quan trọng trong nội nha nhiều hơn là trong chữa răng.
+
+24
+00:05:49,280 --> 00:05:56,880
+Nó vẫn rất hữu ích trong chữa răng, nhưng thông thường sẽ được sử dụng nhiều nhất cho việc điều trị nội nha.
+
+25
+00:05:54,400 --> 00:06:06,960
+Nếu xét về tính hiệu quả và giá trị kinh tế thì nó cũng mang lại lợi ích rất lớn.
+
+26
+00:06:03,680 --> 00:06:19,120
+Khi dùng trong chữa răng, như hình bên phải, nó có thể giúp các em nhìn thấy cả những vết nứt vi thể và toàn bộ chi tiết bờ xoang trám.
+
+27
+00:06:16,160 --> 00:06:19,120
+Tiếp theo, chúng ta nói đến kỹ thuật xuyên sáng.
+
+28
+00:06:19,120 --> 00:06:46,319
+Trong kỹ thuật xuyên sáng, các em đặt nguồn sáng ở mặt ngoài hoặc mặt trong của răng, và dùng gương nha khoa ở mặt đối diện để quan sát ánh sáng đi qua vùng kẽ của các răng sau.
+
+29
+00:06:42,880 --> 00:06:56,411
+Sâu răng mặt bên sẽ xuất hiện như một vùng tối, giúp các em chẩn đoán được tổn thương tạo xoang ở những vùng này ngay cả khi mới chớm.
+
+30
+00:06:56,411 --> 00:07:12,479
+Kỹ thuật này rất đơn giản, chỉ cần một nguồn sáng từ một phía và một chiếc gương để thu nhận hình ảnh vùng tối như trong bức ảnh này.
+
+31
+00:07:08,880 --> 00:07:26,213
+Có hai thiết bị xuyên sáng, loại cơ bản nhất là thiết bị xuyên sáng sợi quang học viết tắt là FOTI, hoặc phiên bản kỹ thuật số của nó được gọi là DIFOTI.
+
+32
+00:07:26,213 --> 00:07:49,520
+Từ chữ kỹ thuật số, các em có thể hiểu rằng hình ảnh sẽ được truyền lên màn hình và phần mềm sẽ cho phép chúng ta xử lý hình ảnh đó để có thêm nhiều dữ liệu chẩn đoán.
+
+33
+00:07:46,000 --> 00:07:58,800
+Nguyên lý rất đơn giản, ánh sáng đi qua một khe nhỏ trên thiết bị dạng tay khoan nha khoa, chiếu xuyên qua bề mặt răng và làm lộ ra các khiếm khuyết sâu răng.
+
+34
+00:07:58,800 --> 00:08:11,599
+Phương pháp phát hiện sâu men này thực sự chỉ đơn giản như vậy thôi.
+
+35
+00:08:09,120 --> 00:08:35,200
+Điều này dựa trên việc men răng bị sâu có độ truyền sáng thấp hơn men răng lành, do quá trình khử khoáng phá vỡ cấu trúc tinh thể nên nó hấp thụ nhiều ánh sáng hơn và xuất hiện dưới dạng vùng tối màu.
+
+36
+00:08:35,200 --> 00:08:51,600
+Phương pháp này sử dụng một nguồn sáng cường độ cao để chiếu sáng răng, khi đó vùng men hoặc ngà răng bị mất khoáng sẽ hiện lên dưới dạng một vùng tối.
+
+37
+00:08:49,360 --> 00:09:08,560
+Các em có thể tận dụng ngay nguồn sáng sợi quang trên đầu nối tay khoan của ghế nha khoa để phát hiện sâu răng ở mặt bên và mặt nhai.
+
+38
+00:09:05,680 --> 00:09:19,920
+Sâu răng kẽ có thể được chẩn đoán bằng cách đặt đầu dò ánh sáng lên nướu ngay dưới đường viền cổ răng, ánh sáng đi qua mô răng sẽ tạo ra một bóng tối tại vị trí sâu mặt bên.
+
+39
+00:09:19,920 --> 00:09:25,279
+Cơ chế thực hiện chỉ đơn giản như vậy.
+
+40
+00:09:22,800 --> 00:09:41,520
+Dù thiết bị này có ưu điểm là tận dụng được nguồn sáng có sẵn trên mâm dụng cụ ghế nha khoa, nhưng nó chỉ thực sự hữu ích đối với các tổn thương mặt bên và mặt nhai.
+
+41
+00:09:41,520 --> 00:09:52,462
+Độ nhạy và độ đặc hiệu của nó không đủ để phát hiện những tổn thương sâu răng ở giai đoạn cực kỳ sớm hoặc chớm sâu.
+
+42
+00:09:52,462 --> 00:10:07,760
+Bên cạnh đó, đây không phải là phương pháp định lượng để các em có thể chấm điểm hay theo dõi tiến triển sâu răng theo thời gian.
+
+43
+00:10:05,120 --> 00:10:15,839
+Tóm lại, nó chỉ đơn thuần giúp cải thiện tầm nhìn đối với sâu răng mới chớm ở những vùng mặt bên khó tiếp cận.
+
+44
+00:10:14,160 --> 00:10:31,040
+Đây là thiết bị xuyên sáng sợi quang, các em có thể dùng ngay tay khoan có đèn trên ghế máy để kiểm tra mặt nhai và mặt bên như trong hình A và B.
+
+45
+00:10:28,640 --> 00:10:49,279
+Việc tích hợp thêm thành phần kỹ thuật số vào thiết bị FOTI sẽ mang lại nhiều lợi ích hơn cho phương pháp xuyên sáng để phát hiện sâu răng sớm.
+
+46
+00:10:46,560 --> 00:10:56,320
+Lát nữa thầy trò ta sẽ thấy rằng thiết bị này còn bổ sung khả năng chấm điểm cả định tính và định lượng cho sâu răng.
+
+47
+00:10:56,320 --> 00:11:14,480
+Nó không chỉ dùng để phát hiện sâu răng mà còn phát hiện được các đường gãy, vết nứt vi thể, sâu răng thứ phát và bất kỳ nguyên nhân gây mất khoáng nào khác.
+
+48
+00:11:11,480 --> 00:11:24,160
+Thiết bị có thể định lượng và định tính bất kỳ sự mất khoáng hay khiếm khuyết nào trong cấu trúc răng của bệnh nhân.
+
+49
+00:11:22,320 --> 00:11:35,040
+Nó sử dụng nguyên lý ánh sáng xuyên qua mô răng để ngay lập tức tạo ra một hình ảnh kỹ thuật số có độ phân giải cao.
+
+50
+00:11:32,800 --> 00:11:41,880
+Điều này dựa trên nguyên lý rằng các mô răng bị sâu sẽ làm tán xạ và hấp thụ nhiều ánh sáng hơn so với mô lành xung quanh.
+
+51
+00:11:41,880 --> 00:11:56,399
+Đó là lý do tại sao vùng sâu răng hiện lên như một bóng mờ tối màu nổi bật trên nền sáng và trong suốt của các mô răng lành lặn xung quanh.
+
+52
+00:11:53,519 --> 00:12:08,240
+Thiết bị này bao gồm một đèn chiếu sợi quang đặt trong đầu ngậm, làm nhiệm vụ truyền ánh sáng tới một trong các bề mặt của răng.
+
+53
+00:12:06,240 --> 00:12:15,600
+Khi ánh sáng đi qua các lớp men răng và ngà răng, nó sẽ tán xạ ra nhiều hướng và đi tới bề mặt không được chiếu sáng ở phía đối diện.
+
+54
+00:12:15,600 --> 00:12:23,680
+Ánh sáng sau đó sẽ được dẫn qua đầu ngậm đi vào một cảm biến hình ảnh điện tử siêu nhỏ nằm bên trong tay cầm.
+
+55
+00:12:23,680 --> 00:12:39,279
+Camera này sẽ ghi nhận kỹ thuật số ánh sáng phát ra từ mặt láng hoặc mặt nhai, rồi truyền dữ liệu tới phần mềm để xử lý.
+
+56
+00:12:39,279 --> 00:12:50,446
+Đầu ngậm của các em sẽ có hai bên, một bên phát sáng và một bên là bề mặt tiếp nhận ánh sáng tán xạ đi xuyên qua răng.
+
+57
+00:12:50,446 --> 00:12:59,839
+Sự tán xạ này có sự khác biệt giữa mô răng lành và mô bệnh, nên nó có thể được chuyển tiếp vào camera cảm biến hình ảnh.
+
+58
+00:12:59,839 --> 00:13:10,240
+Tín hiệu từ camera đó sẽ được bộ xử lý trung tâm chuyển đổi thành dạng số để các em có thể phân tích bằng nhiều cách khác nhau.
+
+59
+00:13:10,480 --> 00:13:22,960
+Sâu răng sẽ xuất hiện dưới dạng vùng tối màu hơn so với nền sáng và trong suốt của mô răng lành, giống như trong kỹ thuật xuyên sáng sợi quang học mà chúng ta vừa bàn.
+
+60
+00:13:22,960 --> 00:13:32,560
+Hình ảnh này sẽ hiển thị trên màn hình theo thời gian thực và được lưu vào ổ cứng để các em dễ dàng theo dõi bệnh nhân về sau.
+
+61
+00:13:32,560 --> 00:13:42,400
+Bằng cách so sánh hình ảnh trước và sau, quá trình thu nhận hình ảnh có thể được thực hiện và kiểm soát thông qua phần mềm.
+
+62
+00:13:42,400 --> 00:13:51,199
+Các em chỉ cần cầm phần đầu ngậm và nhấp nút để chụp lại nhiều hình ảnh khác nhau.
+
+63
+00:13:48,240 --> 00:13:59,040
+Mọi hình ảnh đều được hiển thị trên một màn hình lớn có độ phân giải cao để cả bác sĩ và bệnh nhân cùng quan sát.
+
+64
+00:13:56,880 --> 00:14:13,519
+Điều này rất hữu ích để giáo dục và tạo động lực cho bệnh nhân, giúp họ hình dung được mức độ phá hủy cấu trúc răng hoặc mức độ sâu răng đang ẩn nấp ở những vùng khó thấy.
+
+65
+00:14:11,519 --> 00:14:22,399
+Một ưu điểm khác của thiết bị này là khả năng tính toán lượng khoáng trung bình bị mất đi và đối chiếu giữa mô lành với mô bệnh.
+
+66
+00:14:22,399 --> 00:14:45,279
+Thiết bị có thể xác định độ mất khoáng thông qua việc phân tích độ cản quang giữa các phần mô lành và mô bệnh trên cùng một răng ở những thời điểm khác nhau.
+
+67
+00:14:42,480 --> 00:14:49,630
+Vì vậy, nó được xem là một phương pháp chẩn đoán vừa định tính vừa định lượng đối với cấu trúc răng bị mất.
+
+68
+00:14:49,630 --> 00:14:57,199
+Đây là đầu ngậm, hình ảnh minh họa cho các em thấy đâu là bên phát sáng và đâu là bên tiếp nhận ánh sáng.
+
+69
+00:14:57,199 --> 00:15:05,440
+Còn đây là màn hình để các em và bệnh nhân cùng nhau quan sát và phát hiện tổn thương.
+
+70
+00:15:05,440 --> 00:15:11,440
+Bệnh nhân có thể tự hình dung được mức độ tổn thương trên răng của mình.
+
+71
+00:15:11,440 --> 00:15:27,120
+Sơ đồ bên phải cho thấy ánh sáng từ nguồn phát sẽ đi qua cấu trúc răng, sau đó bị khúc xạ, phản xạ và truyền qua mô răng.
+
+72
+00:15:24,720 --> 00:15:41,040
+Sự tán xạ ánh sáng này ở vùng khiếm khuyết sẽ diễn ra theo cách khác, tạo ra hình ảnh tổn thương tối màu hơn so với các mô lành xung quanh.
+
+73
+00:15:41,040 --> 00:15:57,759
+Chúng ta có thể kiểm tra các ảnh chụp bằng máy iTero; ở góc trên bên trái, các em sẽ thấy mặt bên của răng lành lặn khi nhìn từ mặt nhai, mặt ngoài và mặt trong.
+
+74
+00:15:54,399 --> 00:16:06,160
+Ở góc dưới bên trái, các em sẽ thấy sự khác biệt về độ tối màu của các tổn thương sâu răng mặt bên.
+
+75
+00:16:03,040 --> 00:16:19,680
+Dù xem từ mặt nhai, mặt ngoài hay mặt trong, bức ảnh minh họa rõ ràng và sinh động nhất chính là hình ảnh sâu mặt nhai nằm ở phía bên phải.
+
+76
+00:16:17,759 --> 00:16:31,040
+Hình ảnh này sẽ minh họa cho các em và bệnh nhân thấy rõ sự hiện diện của tổn thương sâu răng.
+
+77
+00:16:27,600 --> 00:16:38,662
+Ưu điểm của thiết bị DIAGNOdent là độ nhạy vượt trội so với phim X-quang truyền thống, giúp phát hiện sớm các tổn thương.
+
+78
+00:16:38,662 --> 00:16:50,560
+Lát nữa chúng ta sẽ bàn về việc phim X-quang không thể phát hiện tổn thương nếu mô răng chưa mất ít nhất bốn mươi phần trăm lượng khoáng.
+
+79
+00:16:48,639 --> 00:16:58,103
+Sự mất khoáng dưới bốn mươi phần trăm sẽ không đủ tạo ra vùng thấu quang để nhìn thấy được trên phim X-quang.
+
+80
+00:16:58,103 --> 00:17:04,663
+Nhưng với thiết bị DIAGNOdent, độ nhạy cao và chính xác hơn nhiều so với chụp phim X-quang.
+
+81
+00:17:04,663 --> 00:17:10,319
+Hơn nữa, việc chụp ảnh diễn ra rất nhanh; các em chỉ cần nhấp chuột là đã có thể ghi lại nhiều khung hình khác nhau.
+
+82
+00:17:10,319 --> 00:17:24,319
+Việc đặt và giữ cảm biến cũng rất dễ dàng cho bệnh nhân, hoàn toàn không có tia phóng xạ nên độ an toàn cao hơn hẳn.
+
+83
+00:17:22,640 --> 00:17:32,674
+Tuy nhiên, nó vẫn không thể phân biệt giữa sâu răng với vùng mô khoáng hóa cao, rãnh hố sâu sậm màu, hay thậm chí là các vết nứt vi thể.
+
+84
+00:17:32,674 --> 00:17:47,120
+Phương pháp này không thể hiện được độ sâu của tổn thương do ánh sáng bị tán xạ và hội tụ tại những vùng không phải men răng.
+
+85
+00:17:44,400 --> 00:17:49,986
+Trên hình ảnh hai chiều này, các em sẽ không thể quan sát được chiều không gian thứ ba.
+
+86
+00:17:49,986 --> 00:17:53,760
+Vì vậy, các em không đánh giá được tiến triển sâu bên dưới của tổn thương.
+
+87
+00:17:53,760 --> 00:17:59,109
+Hơn nữa, việc chẩn đoán hoàn toàn phụ thuộc vào người quan sát chứ không có sự hỗ trợ phân tích từ máy tính.
+
+88
+00:17:59,109 --> 00:18:07,600
+Nó chỉ đơn giản là so sánh ảnh cũ và ảnh mới chứ không hề chấm điểm cụ thể cho mức độ mất khoáng.
+
+89
+00:18:07,600 --> 00:18:25,120
+Vì dữ liệu được lưu trong máy tính, các em có thể so sánh tình trạng trước và sau điều trị ở nhiều thời điểm khác nhau.
+
+90
+00:18:21,520 --> 00:18:27,120
+Đó là tất cả những gì liên quan đến phương pháp khám bằng mắt.
+
+91
+00:18:25,120 --> 00:18:40,320
+Chúng ta đã thảo luận về khám mắt thường truyền thống, cách chuẩn hóa bằng các chỉ số, và cách nâng cao hiệu quả bằng kính phóng đại hoặc kỹ thuật xuyên sáng.
+
+92
+00:18:40,320 --> 00:18:44,000
+Kỹ thuật xuyên sáng có thể là dạng sợi quang học cơ bản hoặc xuyên sáng hình ảnh kỹ thuật số.
+
+93
+00:18:44,000 --> 00:18:58,240
+Bây giờ, thầy trò ta cùng chuyển sang một phương pháp phát hiện sâu răng khác: kỹ thuật khám bằng xúc giác.
+
+94
+00:18:55,440 --> 00:19:04,640
+Như ông G. V. Black đã đề cập trong cuốn sách giáo khoa nha khoa phục hồi xuất bản năm một ngàn chín trăm hai mươi bốn của mình.
+
+95
+00:19:01,919 --> 00:19:17,679
+Ông cho rằng cần dùng thám trâm nhọn ấn với một lực nhẹ, và nếu cảm thấy có lực cản khi rút lên, thì hố rãnh đó nên được chỉ định trám ngay cả khi chưa có dấu hiệu sâu răng.
+
+96
+00:19:17,679 --> 00:19:33,600
+Có nghĩa là ông ấy chỉ hoàn toàn dựa vào cảm giác mắc dính do lực cản nhẹ khi kéo đầu thám trâm nhọn dọc theo các hố rãnh.
+
+97
+00:19:31,120 --> 00:19:44,080
+Đó là cách ông kiểm tra bề mặt, dựa trên kết cấu và sự gián đoạn của mô răng, nhưng đôi khi đó chỉ là sự gián đoạn giả mạo.
+
+98
+00:19:41,440 --> 00:20:04,640
+Ông cho rằng cảm giác mắc kẹt thám trâm chính là dấu hiệu sâu răng, và để phòng ngừa, cần phải tạo xoang mở rộng, nhưng quan điểm này ngày nay không còn áp dụng được nữa.
+
+99
+00:20:03,360 --> 00:20:20,240
+Các nhà sản xuất cũng đã thiết kế thám trâm với nhiều hình dáng khác nhau để dễ dàng tiếp cận mọi vùng răng, trong đó có cả thám trâm hình sừng bò.
+
+100
+00:20:17,440 --> 00:20:39,039
+Ngày nay, các em còn có thể dùng chỉ nha khoa không sáp luồn qua tiếp điểm, nếu chỉ bị tưa thì chứng tỏ bề mặt kẽ răng đang bị nhám và có nguy cơ sâu răng mặt bên.
+
+101
+00:20:35,840 --> 00:20:47,940
+Chiếc thám trâm nổi tiếng nhất không mang tên nhà thám hiểm Marco Polo, Christopher Columbus, hay Neil Armstrong.
+
+102
+00:20:47,940 --> 00:20:58,400
+Mà chiếc thám trâm lừng danh nhất chính là thám trâm nha khoa số hai mươi ba.
+
+103
+00:20:54,880 --> 00:21:15,760
+Nó quen thuộc với các nha sĩ hơn bất kỳ nhà thám hiểm nào, và có nhiều hình dạng như bẻ góc, uốn cong, hay hình sừng bò để phát hiện sâu mặt bên như ở hình giữa.
+
+104
+00:21:15,760 --> 00:21:30,480
+Các em cũng có thể dùng chỉ nha khoa không sáp để đưa qua vùng kẽ răng nhằm mục đích thăm khám mặt bên.
+
+105
+00:21:28,159 --> 00:21:32,320
+Và kỹ thuật này rất hiệu quả trong việc phát hiện các tổn thương sâu răng.
+
+106
+00:21:30,480 --> 00:21:40,480
+Tuy nhiên, chúng ta còn dùng chỉ tơ để kiểm tra bằng xúc giác độ chặt và sự toàn vẹn của tiếp điểm trong các phục hồi trực tiếp và gián tiếp.
+
+107
+00:21:40,480 --> 00:21:52,960
+Ngoài ra, các em có thể dựa vào cảm giác xúc giác của chỉ nha khoa để kiểm tra xem có dư bờ phục hình hay dư xê-măng khi gắn phục hình gián tiếp hay không.
+
+108
+00:21:51,760 --> 00:22:12,720
+Nhưng khi khám sâu răng, các em phải dùng loại chỉ không sáp, vì lớp sáp sẽ che mất hiện tượng tưa chỉ khi sợi chỉ cọ xát vào các bờ nhám của vùng sâu mặt bên.
+
+109
+00:22:12,720 --> 00:22:40,799
+Ngược lại, để kiểm tra tiếp điểm hoặc miếng trám dư, các em nên dùng chỉ có sáp để chỉ lướt êm qua vùng tiếp xúc mà không làm hỏng mối trám, đặc biệt là trám amalgam vì nó cần ít nhất hai mươi bốn giờ để đông cứng hoàn toàn.
+
+110
+00:22:38,720 --> 00:22:56,720
+Về việc sử dụng thám trâm, nhiều nghiên cứu khuyến cáo hoàn toàn không nên dùng đầu thám trâm nhọn, vì những tác hại nó gây ra còn lớn hơn cả lợi ích trong việc phát hiện sâu răng.
+
+111
+00:22:55,760 --> 00:23:13,120
+Đây là một nghiên cứu cũ từ ít nhất ba mươi lăm năm trước, có tựa đề Nghiên cứu bằng Kính hiển vi Quang học về Tác động của Thám trâm Lên Mặt nhai.
+
+112
+00:23:13,120 --> 00:23:26,880
+Nghiên cứu này khẳng định rằng việc dùng thám trâm nhọn theo cách truyền thống để chẩn đoán sâu răng là một vấn đề rất đáng lo ngại.
+
+113
+00:23:23,520 --> 00:23:52,000
+Tại sao vậy, bởi vì thói quen dùng lực đâm thám trâm vào hố rãnh sẽ phá vỡ bề mặt chưa tạo xoang và biến nó thành một xoang sâu thực sự, do đó các bác sĩ lâm sàng cần ngừng ngay hành động này.
+
+114
+00:23:49,039 --> 00:23:56,400
+Một điều nữa, cơ sở nào để khẳng định rằng cảm giác mắc dính đó là do sự gián đoạn của bề mặt men răng?
+
+115
+00:23:56,400 --> 00:24:08,240
+Cảm giác đó hoàn toàn có thể chỉ là lực ma sát giữa các thành song song của rãnh nứt với thân của cây thám trâm mà thôi.
+
+116
+00:24:05,520 --> 00:24:26,960
+Thậm chí, việc đâm mạnh thám trâm nhọn có thể trực tiếp gây thủng men răng ở những vùng đang bắt đầu tái khoáng hóa, hoặc những vùng vốn có khả năng tự phục hồi.
+
+117
+00:24:22,880 --> 00:24:52,880
+Hơn thế nữa, việc ấn mạnh đầu thám trâm không chỉ làm chấn thương men răng mà còn vô tình đẩy vi khuẩn gây sâu răng vào sâu bên trong mô răng lành lặn, tạo điều kiện cho chúng phát triển thành sâu răng thực sự.
+
+118
+00:24:50,240 --> 00:24:57,200
+Và hình ảnh từ kính hiển vi quang học này đã chỉ ra rõ những tổn thương do thám trâm gây ra.
+
+119
+00:24:56,000 --> 00:25:02,160
+Ở trường hợp bên trái, hình A, ban đầu chỉ là một rãnh nứt tự nhiên trên bề mặt răng.
+
+120
+00:25:02,160 --> 00:25:11,670
+Nhưng ngay sau khi các em ấn thám trâm nhọn vào, các em có thể thấy rõ men răng đã bị phá hủy như thế nào.
+
+121
+00:25:11,670 --> 00:25:19,600
+Và ở một trường hợp khác, nếu các em kéo nhẹ thám trâm sang ngang, tổn thương sẽ lan rộng ra cả thành bên của rãnh nứt.
+
+122
+00:25:16,159 --> 00:25:20,799
+Đó mới chỉ là hình ảnh ghi nhận dưới kính hiển vi quang học mà thôi.
+
+123
+00:25:19,600 --> 00:25:45,640
+Chuyển sang một nghiên cứu mới hơn vào năm hai ngàn lẻ bảy bằng kính hiển vi điện tử quét với độ phóng đại lớn hơn, các em có thể thấy rõ mũi tên chỉ vào vùng chấn thương nghiêm trọng do đầu thám trâm nhọn gây ra trên mặt nhai.
+
+124
+00:25:45,640 --> 00:26:16,227
+Ở hình bên trái, trong ô vuông có những vết xước do ấn thám trâm vào thành rãnh song song, cảm giác mắc dính do ma sát đó dễ bị nhầm thành sâu răng dù mô răng vẫn đang hoàn toàn khỏe mạnh.
+
+125
+00:26:16,227 --> 00:26:25,440
+Một hình ảnh khác với độ phóng đại cao hơn cho thấy mức độ tổn thương nặng nề ở cả hai bên thành rãnh nứt.
+
+126
+00:26:25,440 --> 00:26:31,360
+Hình ảnh này thì cho thấy tổn thương gây ra bởi chính đầu nhọn của cây thám trâm mà các em sử dụng.
+
+127
+00:26:31,360 --> 00:26:53,950
+Việc này không chỉ phá vỡ chất gian lăng trụ và men răng ở hố rãnh, vốn là vùng men rất mỏng và yếu do sự hợp nhất không hoàn toàn trong quá trình hình thành mầm răng.
+
+128
+00:26:53,950 --> 00:27:07,520
+Vì lớp men ở đây rất mỏng nên nó dễ bị tổn thương và tạo thành lỗ sâu thực sự ngay sau khi các em dùng thám trâm tác động lên bề mặt vốn dĩ đang lành lặn.
+
+129
+00:27:04,400 --> 00:27:11,840
+Đây chính là vết thương do đầu mũi thám trâm đâm sâu vào bên trong lớp men răng.
+
+130
+00:27:10,559 --> 00:27:31,120
+Một hình ảnh khác cho thấy lực ma sát đã dồn các mảnh vỡ men răng cùng với vi khuẩn gây sâu răng và các tạp chất vi thể xuống sâu tận đáy rãnh.
+
+131
+00:27:31,120 --> 00:28:12,091
+Đó là lý do tại sao các chuyên gia về sâu răng khuyến cáo nên dùng cây thăm dò chỉ số nha chu của tổ chức y tế thế giới có đầu bi tròn với đường kính khoảng không phẩy năm milimét để khám xúc giác một cách an toàn.
+
+132
+00:28:12,091 --> 00:28:21,039
+Nhờ thiết kế đầu tròn, thiết bị này sẽ ít xâm lấn và ít gây hại cho men răng hơn, đồng thời nó còn được khắc vạch chia độ rất tiện dụng.
+
+133
+00:28:21,039 --> 00:28:46,000
+Nó được các bác sĩ nha chu và chuyên gia sâu răng tin dùng vì thiết kế đầu bi giúp ngăn chặn việc đâm xuyên qua cả mô mềm lẫn mô cứng, ngay cả khi các em đang đo độ sâu của túi nha chu.
+
+134
+00:28:43,279 --> 00:28:50,288
+Cuối cùng, đây là danh sách các sách giáo khoa mà thầy đã sử dụng để chuẩn bị cho bài giảng này.
+
+135
+00:28:50,288 --> 00:28:55,306
+Các em cứ thoải mái đặt câu hỏi bất cứ lúc nào, thầy luôn sẵn sàng giải đáp.
+
+136
+00:28:55,306 --> 00:29:00,620
+Các em có thể để lại bình luận dưới video này và thầy sẽ trả lời sớm nhất có thể.
+
+137
+00:29:00,620 --> 00:29:05,920
+Ngoài ra, các em cũng có thể gửi email cho thầy và thầy sẽ phản hồi nhanh nhất có thể.
+
+138
+00:29:05,920 --> 00:29:11,160
+Một lần nữa, cảm ơn các em đã dành thời gian lắng nghe bài giảng của thầy.
+
+139
+00:29:11,160 --> 00:29:19,720
+Các em đừng quên đăng ký kênh và bật thông báo để cập nhật những bài giảng mới nhất nhé.
+
+140
+00:29:19,720 --> 00:29:20,020
+Cảm ơn các em.
+
+141
+00:29:17,008 --> 00:30:27,039
+Vâng, xin chào các em.
