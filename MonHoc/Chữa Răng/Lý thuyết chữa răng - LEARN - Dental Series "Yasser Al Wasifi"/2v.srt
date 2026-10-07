@@ -1,1 +1,760 @@
 
+1
+00:00:38,640 --> 00:00:45,920
+Chào mừng các em quay trở lại, thầy là Yasir Wazife từ chuỗi bài giảng nha khoa.
+
+2
+00:00:44,079 --> 00:00:53,120
+Chúng ta sẽ tiếp tục thảo luận về chủ đề chẩn đoán, lập kế hoạch điều trị và nha khoa phục hồi.
+
+3
+00:00:50,879 --> 00:00:58,187
+Thầy xin nói rõ là thầy không nhận bất kỳ khoản thù lao hay tiền bản quyền nào từ việc bán các sản phẩm được đề cập trong bài giảng này.
+
+4
+00:00:58,187 --> 00:01:08,720
+Bài giảng này cũng không được tài trợ bởi bất kỳ công ty hay tổ chức nào, và chỉ phục vụ duy nhất cho mục đích giáo dục.
+
+5
+00:01:06,000 --> 00:01:25,119
+Thầy cũng nhắc các em về bản quyền của bài trình bày này, nó đã được bảo hộ và không được phép sao chép dưới mọi hình thức nếu chưa có sự cho phép bằng văn bản.
+
+6
+00:01:22,240 --> 00:01:37,360
+Trong tập này, chúng ta sẽ tiếp tục bài học và hôm nay thầy trò mình sẽ liên hệ giữa các dấu hiệu lâm sàng ở răng miệng với kế hoạch điều trị tương ứng.
+
+7
+00:01:34,320 --> 00:01:42,159
+Và chúng ta sẽ tập trung vào việc chẩn đoán chính xác bệnh sâu răng bằng nhiều phương pháp khác nhau.
+
+8
+00:01:40,079 --> 00:01:55,154
+Ở tập trước, chúng ta đã bắt đầu phần một, bao gồm đánh giá bệnh nhân và thu thập thông tin về nhân khẩu học, lý do đến khám, bệnh sử y khoa và bệnh sử nha khoa.
+
+9
+00:01:55,154 --> 00:02:04,719
+Hôm nay, chúng ta sẽ đi tiếp sang phần khám lâm sàng và chẩn đoán.
+
+10
+00:02:04,719 --> 00:02:06,132
+Đặc biệt, chúng ta sẽ bắt đầu với việc chẩn đoán bệnh sâu răng.
+
+11
+00:02:06,132 --> 00:02:13,376
+Trước hết, thầy muốn phân biệt rõ hai thuật ngữ là khám và chẩn đoán.
+
+12
+00:02:13,376 --> 00:02:29,520
+Khám là một quá trình, trong khi chẩn đoán là kết quả, giống như khi chúng ta tổ chức thi cho tất cả sinh viên trong một lớp vậy.
+
+13
+00:02:26,640 --> 00:02:44,400
+Dù là sinh viên đứng đầu hay nằm trong nhóm cuối, tất cả đều phải tham gia kỳ thi bất kể mức độ thông minh hay chỉ số I Q của các em.
+
+14
+00:02:41,040 --> 00:02:52,959
+Nhưng việc phân loại kết quả, sinh viên này đạt điểm A cộng, sinh viên kia được điểm B, đó chính là chẩn đoán, tức là kết quả của bài kiểm tra.
+
+15
+00:02:50,640 --> 00:03:05,840
+Vì vậy, quá trình quan sát và kiểm tra cả những tình trạng bình thường lẫn bất thường, bất kể lời than phiền của bệnh nhân, được gọi là khám lâm sàng.
+
+16
+00:03:02,840 --> 00:03:18,400
+Chẩn đoán là sự xác định và đánh giá những điểm khác biệt so với bình thường, đặt tên cho sự bất thường mà chúng ta quan sát hoặc kiểm tra được.
+
+17
+00:03:18,400 --> 00:03:24,080
+Đó chính là sự khác biệt cốt lõi.
+
+18
+00:03:21,360 --> 00:03:30,528
+Do đó, những gì chúng ta sắp thực hiện là quá trình thăm khám, và theo sau đó kết quả thu được sẽ là chẩn đoán.
+
+19
+00:03:30,528 --> 00:03:38,228
+Chính vì thế, quy trình thăm khám luôn liên quan chặt chẽ hoặc dẫn đến một chẩn đoán xác định.
+
+20
+00:03:38,228 --> 00:03:46,879
+Chúng ta sẽ bắt đầu với trọng tâm chính của bài, đó là quy trình khám sâu răng.
+
+21
+00:03:44,720 --> 00:04:00,480
+Khám sâu răng, như triết gia Xô-cơ-rát từng nói, việc tìm ra một phương pháp chính xác để phát hiện và chẩn đoán bất kỳ bệnh lý nào chính là mục tiêu của nghệ thuật chữa bệnh.
+
+22
+00:03:57,760 --> 00:04:07,973
+Bởi vì nếu các em không chẩn đoán đúng tình trạng bệnh, các em sẽ không thể lập ra một kế hoạch điều trị hoàn hảo để giải quyết nó.
+
+23
+00:04:07,973 --> 00:04:22,560
+Đó là lý do tại sao chẩn đoán sâu răng không chỉ đơn thuần là phát hiện ra nó, mà còn là một bước ngoặt quan trọng trên con đường đưa ra quyết định điều trị.
+
+24
+00:04:20,720 --> 00:04:30,560
+Các em không thể có được quyết định điều trị hay kế hoạch điều trị nếu thiếu đi một chẩn đoán sâu răng chính xác và hoàn hảo.
+
+25
+00:04:28,400 --> 00:04:36,446
+Và chẩn đoán sâu răng cũng không chỉ dừng lại ở việc xác định sự hiện diện của nó, xem nó có ở đó hay không, có nhìn thấy hay không.
+
+26
+00:04:36,446 --> 00:04:44,240
+Nó là một quá trình tư duy trí tuệ để xác định sự hiện diện, mức độ lan rộng và mức độ hoạt động của sang thương.
+
+27
+00:04:44,240 --> 00:05:06,639
+Tất cả những điều này là một phần không thể tách rời trong chẩn đoán sâu răng, không chỉ đánh giá mức độ hoạt động của sang thương mà còn cả hoàn cảnh, môi trường và các điều kiện liên quan đến sự phát triển của nó.
+
+28
+00:05:04,080 --> 00:05:15,120
+Bởi vì mức độ hoạt động của sang thương sẽ đòi hỏi cách xử trí can thiệp chủ động hoặc theo dõi không can thiệp.
+
+29
+00:05:12,560 --> 00:05:26,560
+Can thiệp chủ động có thể là điều trị có phục hồi hoặc không phục hồi, trong khi đối với sang thương sâu răng ngưng tiến triển, chúng ta cần một kế hoạch khác.
+
+30
+00:05:24,160 --> 00:05:43,211
+Đó là lý do tại sao chẩn đoán sớm sâu răng lại cực kỳ quan trọng, vì quá trình sâu răng có thể được thay đổi ngay khi các em phát hiện sớm và có thể đảo ngược mà không cần can thiệp xâm lấn hay tạo xoang.
+
+31
+00:05:43,211 --> 00:06:08,479
+Việc điều trị sâu răng có thể đơn giản như thay đổi thói quen vệ sinh răng miệng của bệnh nhân và bổ sung flour, nhưng cũng có thể xâm lấn nghiêm trọng như phục hình gián tiếp hoặc thậm chí phải điều trị tủy.
+
+32
+00:06:04,400 --> 00:06:13,840
+Chính vì thế, như câu nói của Xô-cơ-rát, một mục tiêu mà không có kế hoạch thì chỉ là một điều ước viển vông.
+
+33
+00:06:11,840 --> 00:06:18,720
+Các em phải lập kế hoạch thật tốt để đạt được mục tiêu điều trị của mình.
+
+34
+00:06:16,160 --> 00:06:18,720
+Để thầy cho các em xem một ví dụ nhé.
+
+35
+00:06:18,720 --> 00:06:28,960
+Cả bốn ca lâm sàng này đều được chẩn đoán là sâu hố rãnh.
+
+36
+00:06:26,479 --> 00:06:53,360
+Nếu các em tư duy theo phương pháp điều trị kinh điển truyền thống do G V Black đưa ra từ hơn một trăm hai mươi năm trước, các em sẽ sửa soạn một xoang loại một tiêu chuẩn bao trùm toàn bộ hố rãnh cho tất cả các ca này.
+
+37
+00:06:50,160 --> 00:07:11,039
+Trong khi thực tế, nha khoa hiện đại cùng tất cả các y văn và kỹ thuật mới nhất sẽ chỉ cho các em những cách xử trí hoàn toàn khác, dù tất cả đều được xếp loại là xoang loại một mặt nhai đơn giản.
+
+38
+00:07:09,280 --> 00:07:20,560
+Nhưng điều đầu tiên, liệu chúng có thực sự đơn giản như cái tên mà các em vừa đọc hay không?
+
+39
+00:07:19,440 --> 00:07:24,160
+Tất cả chúng có giống hệt nhau một cách dễ dàng như các em nói từ đơn giản không?
+
+40
+00:07:24,160 --> 00:07:29,960
+Các em gọi là đơn giản vì nó chỉ ở trên một mặt răng, nhưng các em chưa cân nhắc đến việc xử lý tổn thương mô cứng bên dưới.
+
+41
+00:07:29,960 --> 00:07:35,440
+Các em hoàn toàn không biết cấu trúc bên trong răng và những gì đang diễn ra bên dưới vùng đổi màu này.
+
+42
+00:07:35,440 --> 00:07:59,520
+Đó là lý do khi bắt tay vào xử lý bốn ca này, các em sẽ phát hiện ca đầu tiên chỉ là một chút đổi màu ở rãnh sâu, chỉ cần xói mòn bề mặt và đặt chất trám bít hố rãnh có hoặc không có flour là xong.
+
+43
+00:07:57,759 --> 00:08:16,491
+Hoặc các em có thể dùng flour thoa tại chỗ chuyên sâu tại phòng khám, hay dùng nước súc miệng tại nhà, bất kỳ phương pháp nào các em chọn đều được.
+
+44
+00:08:16,491 --> 00:08:24,560
+Nhưng đó vẫn là một phương pháp không sang chấn, các em không cần can thiệp mũi khoan, không cần phải cắt bỏ cấu trúc răng thật.
+
+45
+00:08:24,560 --> 00:08:43,360
+Trường hợp thứ hai cho thấy sang thương sâu răng chỉ mới xâm nhập nhẹ vào lớp men răng, vừa chạm đến đường nối men ngà nhưng không lan ra toàn bộ bề mặt răng.
+
+46
+00:08:43,360 --> 00:08:50,399
+Nếu các em vẫn muốn làm một xoang loại một kinh điển theo nguyên tắc của Black, các em sẽ gây ra tổn thương mô răng rất lớn.
+
+47
+00:08:50,399 --> 00:08:59,920
+Các em có thể tưởng tượng sâu răng chỉ giới hạn ở một lỗ nhỏ, nhưng các em lại định phá hủy toàn bộ bề mặt nhai còn lại nguyên vẹn sao.
+
+48
+00:08:58,160 --> 00:09:19,920
+Thay vào đó, các em chỉ cần làm trám resin phòng ngừa, tạo một xoang xâm lấn tối thiểu để trám lại bằng vật liệu thích hợp, kết hợp trám bít hố rãnh cho các vùng lân cận.
+
+49
+00:09:19,920 --> 00:09:42,480
+Sang trường hợp thứ ba, nếu chỉ nhìn từ mặt nhai, có vẻ nó chỉ lan rộng hơn ca thứ hai một chút, nhưng khi mở xoang ra, chúng ta mới thấy múi ngoài đã bị nâng đỡ kém đến mức nào.
+
+50
+00:09:40,080 --> 00:10:01,600
+Đó là lúc các em cần lót một lớp vật liệu nền có độ đàn hồi tốt, và thiết kế xoang để thực hiện trám composite trực tiếp nhằm gia cố lại các múi ngoài đã yếu và liên kết chúng với các múi trong vững chắc.
+
+51
+00:10:01,600 --> 00:10:05,680
+Và đây chính là phương pháp bảo tồn tối đa cho trường hợp phức tạp như vậy.
+
+52
+00:10:05,680 --> 00:10:21,497
+Trong khi ở trường hợp cuối, nhìn bên ngoài rất giống ca thứ ba, nhưng khi mở ra, chúng ta lại thấy sâu răng lan rộng ra phía ngoài sang hẳn phía đối diện, và mọi chuyện không còn đơn giản như tưởng tượng nữa.
+
+53
+00:10:21,497 --> 00:10:30,959
+Các em hãy nhớ lại, cả bốn hình ảnh ban đầu đều được phân loại hoặc chẩn đoán là sâu răng đơn giản.
+
+54
+00:10:27,680 --> 00:10:42,240
+Nhưng ca thứ ba rõ ràng không hề đơn giản về mặt sinh học lẫn cơ học, vì múi ngoài đã bị mất nâng đỡ mô cứng bên dưới, và chúng ta phải đánh giá ngay mức độ hoạt động của sâu răng.
+
+55
+00:10:40,000 --> 00:10:54,000
+Nếu áp dụng quan điểm của G V Black cho ca thứ ba, các em sẽ phải mài sạch tất cả những phần đổi màu này, và rồi bệnh nhân sẽ phải chuyển sang bác sĩ nội nha để điều trị tủy.
+
+56
+00:10:51,279 --> 00:11:11,040
+Tương tự cho trường hợp cuối cùng, dù được chẩn đoán là xoang loại một mặt nhai đơn giản, nhưng khi lấy sạch mô sâu, chúng ta phát hiện tổn thương lan rộng ra phía ngoài theo chiều gần xa, biến nó thành một xoang phức hợp.
+
+57
+00:11:07,519 --> 00:11:17,680
+Vậy nên, thuật ngữ đơn giản vốn chỉ dùng để mô tả số lượng mặt răng liên quan trong các phân loại xoang truyền thống.
+
+58
+00:11:15,519 --> 00:11:23,040
+Về mặt quy trình thủ thuật, cái tên đó hoàn toàn không có giá trị gì trong việc lập kế hoạch điều trị.
+
+59
+00:11:20,240 --> 00:11:30,640
+Nó không lột tả được mức độ nặng nhẹ hay tính chất đơn giản, phức tạp của ca lâm sàng, mà nó chỉ đơn thuần là đếm số mặt răng bị tổn thương.
+
+60
+00:11:28,320 --> 00:11:50,880
+Như các em có thể thấy ở đây, bác sĩ đang cố gắng đánh giá khớp cắn và phát hiện một sang thương sâu mặt nhai rất lớn, vì thế có thể họ sẽ phải chọn giải pháp phục hình thẩm mỹ gián tiếp.
+
+61
+00:11:47,680 --> 00:11:51,680
+Và đây chính là kết cục cuối cùng cho ca lâm sàng của các em.
+
+62
+00:11:50,880 --> 00:11:59,839
+Vậy là chúng ta có hai trường hợp ở bên trái và hai trường hợp ở bên phải.
+
+63
+00:11:56,800 --> 00:12:09,200
+Tất cả đều được chẩn đoán thường quy theo quan điểm cũ là xoang loại một mặt nhai đơn giản, nhưng hướng điều trị thì không hề đơn giản chút nào.
+
+64
+00:12:05,680 --> 00:12:29,360
+Hai ca bên trái chỉ là những sang thương sâu răng sớm với mức độ mài mô răng cực kỳ ít, trong khi hai ca còn lại ở bên phải đã bị phá hủy cấu trúc rất trầm trọng.
+
+65
+00:12:28,480 --> 00:12:44,079
+Chúng không hề đơn giản như cái tên ta gọi, bởi vì về mặt cơ học, sâu răng đã làm rỗng các múi ngoài, và về mặt sinh học, sang thương đã lan sâu sát vào buồng tủy.
+
+66
+00:12:43,040 --> 00:12:52,114
+Các em cần phải đánh giá chuẩn xác về mức độ lan rộng cũng như mức độ hoạt động của sang thương sâu răng.
+
+67
+00:12:52,114 --> 00:13:02,399
+Ngoài ra, ở ca cuối cùng, chúng ta còn thấy nó không thể gọi là đơn giản được nữa vì tổn thương đã bao gồm nhiều hơn một mặt răng.
+
+68
+00:12:58,720 --> 00:13:30,320
+Đó là lý do chúng ta rất cần một công cụ chẩn đoán có khả năng phát hiện sâu răng ở giai đoạn sớm như hai ca bên trái, vì chúng ta muốn điều trị sâu răng càng đơn giản và ít xâm lấn càng tốt.
+
+69
+00:13:26,480 --> 00:13:53,519
+Nếu xét đến nguy cơ thất bại của miếng trám, ở các ca bên trái, khi phát hiện sớm, thầy trò mình vẫn còn rất nhiều cơ hội để làm lại miếng trám nhiều lần trước khi phải chuyển sang phục hình gián tiếp.
+
+70
+00:13:50,800 --> 00:14:18,560
+Trong khi ở các ca bên phải, chúng ta không còn những cơ hội đó, các em sẽ phải bọc răng sứ toàn diện hoặc lấy tủy răng, rồi dẫn đến nhổ răng và cuối cùng là phải làm cầu răng hoặc cấy ghép implant.
+
+71
+00:14:14,639 --> 00:14:34,000
+Tình trạng bệnh tiến triển rất nhanh và buộc phải dùng đến các phương pháp can thiệp thô bạo hơn, đó là lý do thầy luôn ưu tiên phát hiện sớm như hai ca bên trái để bảo tồn mô răng tối đa.
+
+72
+00:14:31,680 --> 00:14:50,160
+Tóm lại, phương pháp phát hiện sâu răng phải có khả năng tìm ra các sang thương ở giai đoạn càng sớm càng tốt, khi quá trình hủy khoáng vẫn có thể được đảo ngược hoặc ngưng tiến triển.
+
+73
+00:14:46,959 --> 00:14:56,959
+Nhờ đó, chúng ta sẽ tránh được việc phải can thiệp trám răng quá sớm khi chưa thực sự cần thiết.
+
+74
+00:14:54,320 --> 00:15:07,279
+Ở giai đoạn này, các em không chỉ giữ lại được cấu trúc răng thật mà còn tiết kiệm được thời gian, chi phí, cũng như giảm bớt căng thẳng cho cả bác sĩ lẫn bệnh nhân.
+
+75
+00:15:04,000 --> 00:15:35,680
+Ngoài ra, nếu xét về kiểm soát nhiễm khuẩn nói chung, thời gian hẹn chỉ mất vài phút thay vì kéo dài hàng giờ, điều này đặc biệt quan trọng để rút ngắn thời gian điều trị và tối ưu hóa kết quả lâm sàng.
+
+76
+00:15:32,480 --> 00:15:39,839
+Các em cũng phải bảo đảm mang lại một tiên lượng hoàn hảo cho bệnh nhân của mình.
+
+77
+00:15:38,079 --> 00:15:48,079
+Chính vì vậy, chúng ta không nên nhầm lẫn giữa hai thuật ngữ, các em phải phân biệt rõ sự khác nhau giữa việc phát hiện và việc chẩn đoán.
+
+78
+00:15:44,880 --> 00:16:26,320
+Phát hiện đơn thuần là xác định sự tồn tại, mức độ và độ hoạt động của sâu răng, nhưng chẩn đoán thì phức tạp hơn nhiều, đòi hỏi các em phải đánh giá cả các yếu tố nguy cơ như thái độ và hành vi của bệnh nhân, vì tất cả sẽ quyết định sự thành công của các phương pháp điều trị xâm lấn tối thiểu.
+
+79
+00:16:23,199 --> 00:16:34,839
+Bởi vì một chẩn đoán chính xác và chẩn đoán sớm đúng lúc sẽ tạo nên nền tảng vững chắc cho kế hoạch điều trị thành công và ngăn ngừa sâu răng tái phát.
+
+80
+00:16:32,639 --> 00:16:50,320
+Châm ngôn có câu chúng ta không thể chữa những gì mình không thấy, nên các em phải quan sát và đánh giá vấn đề bằng mọi cách từ mọi góc độ và khía cạnh khác nhau.
+
+81
+00:16:48,399 --> 00:16:59,600
+Do đó, một kế hoạch kiểm soát sâu răng chuẩn mực chỉ có thể được thiết lập khi các em nhìn nhận sang thương sâu răng của mình trong một không gian ba chiều.
+
+82
+00:16:57,600 --> 00:17:02,399
+Vậy ba chiều ở đây mang ý nghĩa gì?
+
+83
+00:16:59,600 --> 00:17:03,519
+Chiều thứ nhất chính là khả năng phát hiện sớm sang thương.
+
+84
+00:17:02,399 --> 00:17:12,613
+Chiều thứ hai bao gồm các yếu tố góp phần và yếu tố nguy cơ, những tác nhân này sẽ ảnh hưởng trực tiếp đến chiều thứ ba, tức là mức độ hoạt động của bệnh.
+
+85
+00:17:12,613 --> 00:17:27,600
+Chính vì vậy, khi các em muốn lên một chương trình dự phòng hoặc đảo ngược quá trình mất khoáng của sâu răng, các em phải nhìn nhận sang thương toàn diện từ cả ba khía cạnh này.
+
+86
+00:17:25,439 --> 00:17:47,840
+Bây giờ, thầy trò mình hãy cùng xem xét lại các quan điểm cũ trong chẩn đoán sâu răng và cách mà y học đã cải tiến để phát hiện sớm tổn thương cũng như đánh giá mọi điều kiện liên quan đến sự lan rộng và mức độ hoạt động của chúng.
+
+87
+00:17:47,840 --> 00:17:55,647
+Chúng ta sẽ bắt đầu từ các kỹ thuật truyền thống, sau đó đi sâu vào những lý thuyết tiên tiến và các công cụ hỗ trợ phát hiện sâu răng trong việc đánh giá nguy cơ.
+
+88
+00:17:55,647 --> 00:18:05,679
+Thầy sẽ mở đầu với các phương pháp truyền thống, và cách đơn giản nhất chính là nhìn bằng mắt, hay còn gọi là khám bằng thị giác.
+
+89
+00:18:02,480 --> 00:18:18,960
+Khám bằng thị giác là kỹ thuật thăm khám phổ biến và đơn giản nhất trong thực hành nha khoa hàng ngày.
+
+90
+00:18:17,120 --> 00:18:21,919
+Phương pháp này hoàn toàn dựa vào việc các em nhìn thấy sang thương sâu răng, rất đơn giản phải không?
+
+91
+00:18:21,919 --> 00:18:28,799
+Nhưng các em cần phải có một đôi mắt tinh tường hoặc khả năng quan sát thực sự sắc bén.
+
+92
+00:18:28,799 --> 00:18:44,480
+Đó là lý do y văn luôn khuyến cáo sử dụng kính phóng đại, đơn giản nhất là kính lúp nha khoa, hiện được cung cấp rộng rãi bởi tất cả các thương hiệu với nhiều độ phóng đại khác nhau.
+
+93
+00:18:42,160 --> 00:18:56,960
+Bên cạnh đó, chúng ta cần một hệ thống chiếu sáng tốt, có thể từ đèn ghế nha khoa hoặc hệ thống đèn lép tích hợp trên kính lúp của các em.
+
+94
+00:18:53,520 --> 00:18:59,223
+Sự kết hợp này mang lại khả năng tiếp cận tuyệt vời để quan sát thật rõ bề mặt răng.
+
+95
+00:18:59,223 --> 00:19:13,467
+Kế tiếp, bề mặt răng phải được làm sạch và thổi khô, vì đôi khi chúng ta rất dễ chẩn đoán nhầm và không thể phân biệt giữa sâu răng với thức ăn thừa hay các mảng đổi màu khác.
+
+96
+00:19:13,467 --> 00:19:23,840
+Do đó, các em bắt buộc phải dùng tay xịt hơi nước để rửa sạch mọi mảnh vụn trên bề mặt răng.
+
+97
+00:19:20,640 --> 00:19:42,507
+Đôi khi răng có thể bị che phủ bởi mảng bám hoặc cao răng, vì vậy để chẩn đoán chính xác, bệnh nhân cần được vệ sinh răng miệng hoặc cạo vôi răng trước khi các em tiến hành thăm khám.
+
+98
+00:19:42,507 --> 00:19:54,034
+Việc này giúp loại trừ khả năng mảng bám hay cao răng đang che khuất một sang thương sâu răng tiềm ẩn bên dưới.
+
+99
+00:19:54,034 --> 00:19:57,360
+Thứ tư, ngày nay chúng ta không còn dùng thám trâm mũi nhọn nữa.
+
+100
+00:19:57,360 --> 00:20:04,240
+Thay vào đó, thầy trò mình sẽ sử dụng cây dò nha chu đầu tròn của Tổ chức Y tế Thế giới.
+
+101
+00:20:04,240 --> 00:20:19,520
+Bởi vì thám trâm mũi nhọn có thể làm vỡ lớp men răng vốn đã mỏng manh do mất khoáng, vô tình tạo ra một xoang sâu thực sự trên lâm sàng.
+
+102
+00:20:19,520 --> 00:20:36,240
+Đồng thời, làm sao các em có thể chắc chắn cảm giác vướng mắc từ thám trâm không phải do lực ma sát giữa thành rãnh giải phẫu tự nhiên và kích thước của mũi thám trâm.
+
+103
+00:20:36,240 --> 00:20:47,679
+Và một khi các em cố gắng ấn mạnh tay xuống, các em đang trực tiếp gây ra những vi nứt gãy trên men răng của bệnh nhân.
+
+104
+00:20:44,640 --> 00:20:51,579
+Đã có quá nhiều tranh cãi và những lưu ý nghiêm ngặt về việc sử dụng loại dụng cụ này.
+
+105
+00:20:51,579 --> 00:20:59,600
+Đó là nguyên nhân vì sao hiện nay y văn luôn khuyến cáo sử dụng cây dò đầu tròn của Tổ chức Y tế Thế giới.
+
+106
+00:20:57,120 --> 00:21:11,210
+Đôi khi đối với sâu răng mặt bên, các em cần đặt thun tách kẽ, đặc biệt là khi muốn quan sát trực tiếp mà không có phim tia x hoặc phương tiện hỗ trợ nào khác.
+
+107
+00:21:11,210 --> 00:21:42,080
+Trong trường hợp đó, chúng ta có thể chêm gỗ nới rộng kẽ răng trong vài phút, hoặc đặt thun tách kẽ chỉnh nha tối đa trong ba ngày để đẩy mô mềm ra xa và tạo một khoảng hở nhỏ đủ để kiểm tra mặt bên của răng.
+
+108
+00:21:39,600 --> 00:21:47,919
+Cuối cùng, các em phải dành đủ thời gian để kiểm tra thật kỹ lưỡng tất cả các mặt răng.
+
+109
+00:21:47,919 --> 00:21:56,640
+Khám toàn diện năm mặt của răng: hai mặt bên, mặt ngoài, mặt trong, và mặt nhai hoặc rìa cắn.
+
+110
+00:21:53,520 --> 00:22:02,960
+Mọi thứ không đơn giản như khi các em nhìn bằng mắt thường, thấy bề mặt không đổi màu thì vội kết luận là răng khỏe mạnh.
+
+111
+00:22:02,960 --> 00:22:14,640
+Không đâu, các em phải kiên nhẫn kiểm tra và quan sát răng từ mọi phía, bao gồm cả mô mềm và mô nha chu xung quanh.
+
+112
+00:22:12,480 --> 00:22:22,799
+Đây là một ví dụ về kính lúp phóng đại, với độ phóng đại lớn hơn ở hình bên phải.
+
+113
+00:22:20,159 --> 00:22:31,120
+Kính lúp này được tích hợp sẵn một đèn chiếu sáng đi kèm.
+
+114
+00:22:31,120 --> 00:22:44,320
+Riêng bản thân thầy thì thấy đèn đeo trán này hơi phiền phức, thầy chưa quen dùng và cần phải tập luyện nhiều hơn để thao tác thuần thục.
+
+115
+00:22:41,120 --> 00:22:59,840
+Trên hình là một sang thương sâu răng đang hoạt động, nhưng chúng ta không thể xác định chính xác mức độ lan rộng hay hoạt động của nó vì nó bị mảng bám che phủ, điều này cho thấy tầm quan trọng của việc làm sạch bề mặt răng.
+
+116
+00:22:57,760 --> 00:23:23,440
+Làm sạch bề mặt như ở hình C sẽ mang lại cho các em cái nhìn rõ ràng và mường tượng chính xác về mức độ cũng như tính hoạt động của sang thương, điều mà hình A và B không thể làm được do mảng bám che khuất.
+
+117
+00:23:20,720 --> 00:23:33,120
+Ngoài ra, ở tình trạng như hình A, các em cũng không thể biết chắc đó có phải là sâu răng hay có hiện tượng mất khoáng hay không, bởi vì răng vẫn đang ướt do nước bọt.
+
+118
+00:23:30,960 --> 00:23:54,960
+Các em phải thổi khô bề mặt sau khi rửa sạch bằng tay xịt hơi nước, và sau khi khô như trên hình B, các em sẽ phát hiện một vùng mất khoáng màu trắng đục, biểu hiện cho giai đoạn đầu của sâu hố rãnh.
+
+119
+00:23:53,600 --> 00:24:22,000
+Cuối cùng, chiếc răng này có một sang thương đốm trắng ở vùng cổ răng, đốm trắng này có thể do quá trình tăng khoáng hoặc kém khoáng hóa, và như các em thấy ở hình B, có một vùng đổi màu hình nón rộng trong men răng, chứng tỏ có sự mất khoáng.
+
+120
+00:24:18,720 --> 00:24:55,120
+Tại thời điểm này sang thương chưa tạo xoang, nếu các em không dùng thám trâm mũi nhọn đâm vào như ở hình C, chúng ta hoàn toàn có thể xâm nhập bằng resin, hoặc áp dụng các liệu pháp tái khoáng hóa đơn giản bằng flour để trám bít các vi ống men bị xốp do mất khoáng.
+
+121
+00:24:51,919 --> 00:25:26,880
+Đó là lý do tuyệt đối không được dùng thám trâm mũi nhọn, nó sẽ làm sập lớp men mỏng manh này và tạo thành một xoang thực sự, buộc các em phải mài xoang và dán các vật liệu nhân tạo như xê-măng G I C hay composite lỏng với kỹ thuật phức tạp hơn nhiều so với việc tái khoáng.
+
+122
+00:25:24,880 --> 00:25:35,919
+Chính vì thế nó không được khuyến cáo, đây là một minh chứng rất cụ thể giải thích vì sao ngày nay chúng ta không còn dùng thám trâm mũi nhọn nữa.
+
+123
+00:25:32,240 --> 00:26:10,559
+Một góc nhìn khác cho thấy thun tách kẽ chỉnh nha có thể được đặt trong vài phút hoặc tối đa là ba ngày để tách nướu và tạo một khoảng không gian tạm thời giúp các em quan sát, sau đó răng sẽ tự trở về vị trí cũ nhờ giới hạn đàn hồi của các sợi dây chằng nha chu.
+
+124
+00:26:08,320 --> 00:26:25,600
+Đừng lạm dụng lực tách quá mức nếu không kẽ hở sẽ thành vĩnh viễn, đây chỉ là một biện pháp tạm thời để các em quan sát trực tiếp những gì đang lẩn khuất ở vùng kẽ răng dù có kính phóng đại hay không.
+
+125
+00:26:23,520 --> 00:26:43,520
+Vậy là chúng ta đã tìm hiểu xong về khám thị giác, nguyên lý của nó hoàn toàn dựa trên những biến đổi cấu trúc của răng, chủ yếu bị chi phối bởi cơ chế mà sâu răng xâm nhập vào lớp men.
+
+126
+00:26:41,120 --> 00:26:59,039
+Quá trình sâu răng làm hòa tan men răng bởi a-xít, tập trung ở chất gian lăng trụ nhiều hơn là bên trong trụ men, từ đó tạo ra hiện tượng xốp vi thể trên bề mặt men răng do mất khoáng.
+
+127
+00:26:56,320 --> 00:27:10,080
+Hậu quả là nó làm thay đổi khả năng phản xạ ánh sáng của men răng, tạo ra hình ảnh trắng đục như phấn hoặc làm biến đổi màu sắc vốn có của lớp men này.
+
+128
+00:27:07,440 --> 00:27:16,760
+Giai đoạn tiếp theo, các vi lỗ rỗ xốp này sẽ hấp thu màu từ cặn thức ăn, dẫn đến việc men răng chuyển sang màu tối sậm hơn.
+
+129
+00:27:14,320 --> 00:27:31,200
+Vậy tóm lại, mọi thứ bắt nguồn từ sự hình thành các vi lỗ do men răng bị mất khoáng, làm biến đổi tính truyền sáng và phản xạ ánh sáng, tạo ra một đốm trắng đục trên lâm sàng.
+
+130
+00:27:29,120 --> 00:27:41,760
+Các vi lỗ này sau đó bị lấp đầy bởi các chất màu, cho đến khi quá trình mất khoáng diễn ra hoàn toàn và men răng bị phá hủy tạo thành xoang sâu thực thụ.
+
+131
+00:27:39,919 --> 00:28:01,200
+Đó là toàn bộ các giai đoạn mà các em có thể quan sát bằng mắt thường trong quá trình sâu men, từ đó các em sẽ nhận diện được xoang sâu ở giai đoạn trễ hoặc những đốm đổi màu ở giai đoạn sớm.
+
+132
+00:28:00,080 --> 00:28:15,120
+Nhưng khi nhìn thấy những dấu hiệu đó thì có nghĩa là men răng đã bị tổn thương, và đôi khi cả bệnh nhân lẫn bác sĩ đều không nhận ra được quá trình mất khoáng này.
+
+133
+00:28:12,159 --> 00:28:31,440
+Nếu chỉ dựa vào thị giác, các em đang phó mặc vào sự may mắn của bản thân và mức độ quan tâm của bệnh nhân đối với hàm răng của họ, một điều hoàn toàn không có cơ sở khoa học chắc chắn.
+
+134
+00:28:29,840 --> 00:28:48,080
+Do đó, việc kết luận có hay không có sang thương sâu răng theo cách này chỉ mang tính chủ quan thông qua đánh giá độ toàn vẹn, kết cấu, độ trong mờ và sự biến đổi màu sắc của men răng.
+
+135
+00:28:45,440 --> 00:28:56,000
+Tóm tắt lại, phương pháp khám bằng thị giác sẽ giúp chúng ta phát hiện sâu răng thông qua sự đổi màu men hoặc sự hình thành xoang hổng trên bề mặt.
+
+136
+00:28:56,240 --> 00:29:01,720
+Bây giờ, thầy trò mình hãy lướt nhanh qua các ca lâm sàng này nhé.
+
+137
+00:29:01,720 --> 00:29:09,919
+Ca đầu tiên là một trường hợp sâu hố rãnh trên đỉnh múi, một tổn thương có tạo xoang rất rõ rệt.
+
+138
+00:29:06,880 --> 00:29:26,880
+Ca số hai, răng đã mất đi độ trong mờ và bị biến đổi màu sắc, do men răng bị mất khoáng nghiêm trọng và các lỗ xốp đã ngấm đầy màu từ thức ăn thức uống.
+
+139
+00:29:24,320 --> 00:29:30,900
+Ca thứ ba là hình ảnh đốm trắng đục như phấn hoặc một bóng mờ xuất hiện ngay dưới gờ mép.
+
+140
+00:29:30,900 --> 00:29:35,519
+Nó không chỉ có màu trắng đục mà trung tâm sang thương còn kèm theo những vết đổi màu nâu đen.
+
+141
+00:29:35,519 --> 00:29:53,840
+Sang ca thứ tư, một sang thương sâu răng mặt láng, hoặc có thể coi là một đốm trắng trong một số trường hợp, thể hiện sự đổi màu rất rõ ràng.
+
+142
+00:29:52,320 --> 00:30:04,080
+Tương tự với ca E, sâu răng mặt láng xuất hiện với màu trắng đục hoặc sậm đen tùy thuộc vào mức độ thâm nhập của các vết dính ngoại sinh.
+
+143
+00:30:02,000 --> 00:30:16,159
+Và tình trạng tệ nhất là sâu răng kèm theo tụt nướu, biểu hiện bằng sự đổi màu và hình thành xoang hổng với lớp mảng bám dày đặc.
+
+144
+00:30:13,200 --> 00:30:20,251
+Bây giờ, chúng ta sẽ đi sâu phân tích một trường hợp cụ thể hơn, đó là sang thương đốm trắng ở vùng cổ răng.
+
+145
+00:30:20,251 --> 00:30:41,520
+Như thầy đã đề cập, vùng màu trắng đục xuất hiện ở cổ răng rất dễ bị chẩn đoán nhầm thành quá trình tăng khoáng hoặc kém khoáng hóa thông thường, trong khi men răng chưa hề bị rỗ xốp.
+
+146
+00:30:39,279 --> 00:30:45,256
+Đối với những ca này, chúng ta sẽ áp dụng một phương pháp gọi là hiện tượng biến mất rồi xuất hiện trở lại.
+
+147
+00:30:45,256 --> 00:30:56,913
+Các em hãy hình dung phần men răng này đang bị mất khoáng, nó sẽ tạo ra những vi khoảng trống vô hình và ngay lập tức bị lấp đầy bởi nước bọt.
+
+148
+00:30:56,913 --> 00:31:28,240
+Khi các vi hốc này đang ngập trong nước bọt, trước khi bị nhuộm màu bởi mảng bám thức ăn, sang thương có vẻ như một vết đổi màu vô hại mà không hề có lỗ xốp, do đó các em cần phải xác định sự hiện diện của vi lỗ xốp chứ không phải là sự đổi màu.
+
+149
+00:31:28,240 --> 00:31:49,546
+Bằng một thủ thuật đơn giản dựa trên nguyên lý quang học, nếu bề mặt có các vi lỗ xốp, chúng sẽ bị nước bọt lấp kín và che đi màu trắng đục, nhưng khi thổi khô giống như thổi xói mòn, nước bọt bay hơi khỏi vi hốc và đốm trắng đục sẽ lộ diện.
+
+150
+00:31:49,546 --> 00:31:57,451
+Do vậy, thầy trò mình sẽ dùng hiện tượng biến mất và xuất hiện trở lại, chỉ cần thổi khô, đốm trắng sẽ hiện ra.
+
+151
+00:31:57,451 --> 00:32:07,400
+Sau đó, khi bệnh nhân súc miệng hoặc ta dùng vòi nước xịt ướt bề mặt, đốm trắng sẽ biến mất, rồi ta thổi khô lại một lần nữa thì nó lại xuất hiện rành rành.
+
+152
+00:32:07,400 --> 00:32:28,880
+Khám nghiệm đó chứng minh đây là một quá trình mất khoáng đang hoạt động tích cực ở cổ răng, nhưng nó chưa ngấm đủ các chất màu ngoại sinh để chúng ta có thể kết luận chắc chắn là sâu răng nếu chỉ nhìn thoáng qua.
+
+153
+00:32:24,960 --> 00:32:39,360
+Ngược lại, nếu đốm trắng này không hề thay đổi dù ướt hay khô, điều đó chứng tỏ không có các vi lỗ xốp làm ảnh hưởng đến khả năng truyền và phản xạ ánh sáng của men răng.
+
+154
+00:32:36,320 --> 00:32:52,559
+Đây là một mẹo đơn giản dành cho đốm trắng ở cổ răng, được gọi là hiện tượng biến mất và xuất hiện trở lại, giúp hỗ trợ chẩn đoán bằng thị giác về sự hiện diện và hoạt động của sâu răng.
+
+155
+00:32:50,559 --> 00:33:13,279
+Nhìn chung, phương pháp khám bằng mắt thường có một hạn chế lớn, đó là tính chủ quan giữa các bác sĩ, đặc biệt là đối với các tổn thương sớm.
+
+156
+00:33:09,840 --> 00:33:20,000
+Do đó, độ tin cậy và tính hợp lệ của nó như một công cụ chẩn đoán sâu răng sớm vẫn còn nhiều nghi vấn.
+
+157
+00:33:19,039 --> 00:33:32,080
+Bởi vì với kinh nghiệm và thị lực của mình, thầy có thể cho rằng vùng men răng đó đang bị đổi màu.
+
+158
+00:33:29,919 --> 00:33:42,799
+Nhưng một bác sĩ khác lại không thấy sự đổi màu, hoặc cho rằng đó chỉ là màu sắc bình thường của răng bệnh nhân này.
+
+159
+00:33:39,440 --> 00:33:56,960
+Vì thế, độ chuẩn xác của việc chẩn đoán sâu răng bằng mắt thường sẽ cao hơn rất nhiều khi sang thương đã hình thành xoang hổng thay vì...
+
+160
+00:33:54,799 --> 00:34:07,079
+Sang thương chưa tạo xoang, lúc đó thì các bác sĩ sẽ không còn phải tranh cãi với nhau đây là xoang hổng hay không phải xoang hổng nữa.
+
+161
+00:34:07,079 --> 00:34:26,800
+Tuy nhiên, những đốm đổi màu sớm luôn gây ra những luồng tranh luận chủ quan khốc liệt giữa các bác sĩ lâm sàng, khiến phương pháp này không đáng tin cậy và thiếu chính xác cho các tổn thương sớm.
+
+162
+00:34:25,520 --> 00:34:37,440
+Và khi sang thương đã thực sự sập thành xoang hổng, đó là một thảm họa, chúng ta đã rơi vào nhóm bệnh nhân bên phải.
+
+163
+00:34:34,960 --> 00:34:51,040
+Như thầy trò mình đã thảo luận, lúc này chúng ta buộc phải tạo xoang, đánh giá tình trạng tủy, mức độ phá hủy men răng, và đắn đo xem nên làm phục hình trực tiếp hay gián tiếp.
+
+164
+00:34:48,000 --> 00:34:53,760
+Không, mục tiêu của chúng ta là phải ở nhóm bên trái.
+
+165
+00:34:51,040 --> 00:35:02,960
+Khi đó, chúng ta chỉ cần trám bít hố rãnh, hoặc đôi khi việc can thiệp hố rãnh cũng đã bị coi là một phương pháp xâm lấn quá mức.
+
+166
+00:34:59,119 --> 00:35:13,063
+Chúng ta chỉ cần thay đổi thói quen của bệnh nhân, bôi các tác nhân tái khoáng hóa để lấp đầy các vi nứt, chặn đứng hoạt động của sâu răng và đảo ngược hoàn toàn quá trình mất khoáng.
+
+167
+00:35:13,063 --> 00:35:22,000
+Tối đa lắm nếu phải điều trị, chúng ta cũng chỉ làm trám resin phòng ngừa mà thôi.
+
+168
+00:35:20,320 --> 00:35:32,720
+Vậy thì chẳng lẽ thầy trò mình cứ phải chờ cho đến khi sang thương hình thành xoang hổng để chẩn đoán xem đó có phải là sâu răng hay không sao?
+
+169
+00:35:29,359 --> 00:35:47,040
+Chính vì thế, trong khoảng mười lăm đến hai mươi năm trở lại đây, y học đã cho ra đời hệ thống các chỉ số phát hiện sâu răng để khắc phục tình trạng này.
+
+170
+00:35:45,440 --> 00:36:01,439
+Các chỉ số này ra đời nhằm khắc phục những hạn chế của khám thị giác, bằng cách đưa ra các tiêu chí đáng tin cậy để phát hiện tổn thương sớm và theo dõi tình trạng lâm sàng của chúng.
+
+171
+00:36:01,439 --> 00:36:08,560
+Chúng dựa trên các nghiên cứu dịch tễ học khổng lồ để đo lường mức độ lưu hành và tính nghiêm trọng của bệnh sâu răng.
+
+172
+00:36:06,240 --> 00:36:20,240
+Đây là một công trình đồ sộ sử dụng khối dữ liệu khổng lồ từ nhiều quốc gia và các bác sĩ lâm sàng trên toàn thế giới.
+
+173
+00:36:17,040 --> 00:36:31,440
+Công trình này thu hút sự đóng góp của một lượng lớn các chuyên gia nghiên cứu sâu răng trên toàn cầu.
+
+174
+00:36:28,320 --> 00:36:50,320
+Tất cả họ đều là những nhà dịch tễ học và chuyên gia đầu ngành, cùng nhau thu thập dữ liệu về sự đồng thuận trong khám sâu răng bằng mắt và đối chiếu chúng với mô hình mô học hoặc sự tiến triển mô học của sang thương.
+
+175
+00:36:47,920 --> 00:37:01,920
+Đó là lý do các chỉ số này được thiết kế để phân loại chi tiết các giai đoạn của sâu răng, bao gồm cả tổn thương chưa tạo xoang sớm lẫn tổn thương đã tạo xoang rõ ràng.
+
+176
+00:36:59,440 --> 00:37:23,109
+Trong các tập tiếp theo, thầy trò mình sẽ thảo luận chi tiết về các chỉ số này, nổi bật nhất là I C D A S, hệ thống đánh giá và phát hiện sâu răng quốc tế, sử dụng các đặc điểm bề mặt để đo lường mức độ thay đổi và chiều sâu mô học tiềm năng của sâu răng.
+
+177
+00:37:23,109 --> 00:37:40,160
+Nhìn chung, tất cả các hệ thống này đều cố gắng tiêu chuẩn hóa và chuyển đổi những gì các em nhìn thấy thành một con số, một điểm số để mô tả tình trạng bệnh và đôi khi là chỉ định luôn hướng điều trị tương ứng.
+
+178
+00:37:40,160 --> 00:37:51,280
+Đây là một nỗ lực tuyệt vời nhằm chuẩn hóa và loại bỏ tính chủ quan trong quá trình thăm khám lâm sàng giữa các bác sĩ với nhau.
+
+179
+00:37:49,920 --> 00:37:52,100
+Tiếp theo là hệ thống PUFA.
+
+180
+00:37:52,100 --> 00:38:00,800
+PUFA là viết tắt của hệ thống đánh giá tủy răng, vết loét, lỗ rò và áp-xe.
+
+181
+00:37:57,839 --> 00:38:06,880
+Hệ thống này tập trung vào việc phân loại các mức độ nghiêm trọng nhất của bệnh lý sâu răng.
+
+182
+00:38:03,760 --> 00:38:28,880
+Sau đó là CAST, phổ đánh giá và điều trị sâu răng, bao gồm cả phân loại sâu răng giai đoạn sớm lẫn giai đoạn nặng, và cuối cùng là hệ thống phân loại sâu răng của Hiệp hội Nha khoa Hoa Kỳ, mô tả tổn thương dựa trên lâm sàng mà không gắn liền với hướng điều trị cụ thể.
+
+183
+00:38:26,960 --> 00:38:42,560
+Tuy nhiên, hệ thống này liên kết chặt chẽ biểu hiện lâm sàng với dấu hiệu trên phim tia x, tạo ra một phương pháp chuẩn mực để xác định mức độ hoạt động của sâu răng theo thời gian.
+
+184
+00:38:40,240 --> 00:38:46,720
+Những hệ thống phân loại này sẽ được thảo luận chi tiết trong các tập tiếp theo.
+
+185
+00:38:44,480 --> 00:38:50,194
+Đây là các tài liệu tham khảo thầy đã sử dụng để chuẩn bị cho bài giảng này.
+
+186
+00:38:50,194 --> 00:38:56,720
+Nếu các em cần đọc thêm, đây là những tài liệu thầy khuyên nên tìm hiểu.
+
+187
+00:38:56,720 --> 00:39:19,599
+Cuối cùng, đừng ngần ngại đặt câu hỏi cho thầy bất cứ lúc nào bằng cách để lại bình luận dưới video này, hoặc gửi email qua thông tin liên hệ, thầy sẽ giải đáp cho các em trong thời gian sớm nhất.
+
+188
+00:39:16,000 --> 00:39:24,880
+Cảm ơn các em đã dành thời gian theo dõi bài giảng hôm nay.
+
+189
+00:39:22,240 --> 00:39:34,287
+Đừng quên đăng ký kênh, thích video này và bật thông báo để cập nhật liên tục các bài giảng mới nhất từ kênh giáo dục nha khoa của chúng ta nhé.
+
+190
+00:39:34,287 --> 00:39:39,320
+Một lần nữa xin cảm ơn các em, chào tạm biệt.
