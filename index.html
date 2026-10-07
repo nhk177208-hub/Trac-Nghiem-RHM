@@ -1091,6 +1091,36 @@
         .yt-chappanel .pg-in { width: 2.2rem; height: 1.6rem; font-size: 11px; }
         .yt-chappanel .pg-info { display: none; }
         @media (max-width: 480px) { .yt-chappanel .pg-b[data-a="m5"], .yt-chappanel .pg-b[data-a="p5"] { display: none; } }
+        /* ===== Thanh số trang: gọn trong 1 dòng (PC + mobile) ===== */
+        .pg-bar.pg-bar.pg-bar { flex-wrap: nowrap !important; justify-content: center; align-items: center; gap: 0.35rem 0.5rem; padding: 0.3rem 0.45rem; font-size: 12px; min-width: 0; overflow: hidden; }
+        .pg-bar .pg-size { flex: none; gap: 0.3rem; }
+        .pg-bar .pg-lbl { white-space: nowrap; }
+        .pg-bar .pg-nav { flex: 0 1 auto; flex-wrap: nowrap; gap: 0.25rem; min-width: 0; }
+        .pg-bar .pg-go { flex: none; gap: 0.25rem; white-space: nowrap; }
+        .pg-bar .pg-sl { opacity: 0.6; }
+        .pg-bar .pg-b { flex: none; height: 1.95rem; }
+        .pg-bar .pg-sel, .pg-bar .pg-in { height: 1.95rem; }
+        .pg-bar .pg-in { width: 3rem; }
+        .pg-bar .pg-info { width: auto; flex: none; margin-left: 0.25rem; white-space: nowrap; }
+        @media (max-width: 720px) {
+            .pg-bar .pg-info { display: none; }
+        }
+        @media (max-width: 560px) {
+            .pg-bar.pg-bar.pg-bar { justify-content: space-between; gap: 0.2rem; padding: 0.25rem 0.3rem; }
+            .pg-bar .pg-lbl { display: none; }
+            .pg-bar .pg-size { gap: 0; }
+            .pg-bar .pg-sel { padding: 0 0.1rem; font-size: 12px; }
+            .pg-bar .pg-nav { gap: 0.15rem; }
+            .pg-bar .pg-go { gap: 0.15rem; }
+            .pg-bar .pg-b { min-width: 1.85rem; padding: 0 0.3rem; font-size: 12px; }
+            .pg-bar .pg-b[data-a="prev"], .pg-bar .pg-b[data-a="next"] { font-size: 0; }
+            .pg-bar .pg-b[data-a="prev"]::before { content: "‹"; font-size: 18px; line-height: 1; }
+            .pg-bar .pg-b[data-a="next"]::before { content: "›"; font-size: 18px; line-height: 1; }
+            .pg-bar .pg-in { width: 2.4rem; padding: 0; }
+        }
+        @media (max-width: 380px) {
+            .pg-bar .pg-b[data-a="m5"], .pg-bar .pg-b[data-a="p5"] { display: none; }
+        }
 
         /* ===== v25-1-5: trắc nghiệm tương tác chiếm 50% bên trái, chat AI 50% bên phải ===== */
         #ai-tutor-modal.ai-quiz-split.ai-quiz-split { align-items: stretch !important; justify-content: flex-end !important; }
@@ -12970,13 +13000,13 @@ window.PGR = (function () {
         var bar = document.createElement('div');
         bar.className = 'pg-bar pg-off' + (st.dark ? ' pg-dark' : '');
         bar.innerHTML =
-            '<label class="pg-size">Hiển thị <select class="pg-sel" title="Số mục tối đa mỗi trang">' +
+            '<label class="pg-size"><span class="pg-lbl">Hiển thị</span> <select class="pg-sel" title="Số mục tối đa mỗi trang">' +
             SIZES.map(function (s) { return '<option value="' + s + '">' + s + '</option>'; }).join('') +
-            '</select> mục/trang</label>' +
+            '</select> <span class="pg-lbl">mục/trang</span></label>' +
             '<div class="pg-nav">' +
             '<button type="button" class="pg-b" data-a="m5" title="Lùi 5 trang">« 5</button>' +
             '<button type="button" class="pg-b" data-a="prev" title="Trang trước">‹ Trước</button>' +
-            '<span class="pg-go">Trang <input class="pg-in" type="text" inputmode="numeric" maxlength="5" title="Nhập số trang rồi bấm Enter / Đi"> / <b class="pg-tot">1</b>' +
+            '<span class="pg-go"><span class="pg-lbl">Trang</span><input class="pg-in" type="text" inputmode="numeric" maxlength="5" title="Nhập số trang rồi bấm Enter / Đi"><span class="pg-sl">/</span><b class="pg-tot">1</b>' +
             '<button type="button" class="pg-b pg-gobtn" data-a="go" title="Nhảy đến trang đã nhập">Đi</button></span>' +
             '<button type="button" class="pg-b" data-a="next" title="Trang sau">Sau ›</button>' +
             '<button type="button" class="pg-b" data-a="p5" title="Tới 5 trang">5 »</button>' +
