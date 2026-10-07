@@ -8899,7 +8899,7 @@
                                     <div class="yt-chapnav flex items-center gap-1 bg-gray-800/90 border border-gray-600 rounded-lg px-1.5 py-1">
                                         <button type="button" onclick="ytChapToggle('${playerId}')" id="chap-btn-${playerId}" class="text-xs font-bold text-gray-100 px-1 active:scale-95" title="Sơ đồ tư duy (AI)"><span class="yt-ic">🧠</span></button>
                                     </div>
-                                    <button type="button" id="focus-btn-${playerId}" onclick="ytFocusDialog('${playerId}')" class="yt-focus-btn bg-gray-800 hover:bg-gray-700 border border-gray-600 px-2.5 py-1 rounded-lg text-xs font-bold text-gray-200" title="Chế độ tập trung"><span class="yt-ic">🎯</span><span class="yt-lbl"> Tập trung: </span><b class="fo-st">Tắt</b></button>
+                                    <button type="button" id="focus-btn-${playerId}" onclick="ytFocusDialog('${playerId}')" class="yt-focus-btn bg-gray-800 hover:bg-gray-700 border border-gray-600 px-2.5 py-1 rounded-lg text-xs font-bold text-gray-200" title="Chế độ tập trung"><span class="yt-ic">🎯</span><span class="yt-lbl"> Tập trung</span></button>
                                     <button type="button" onclick="openVideoAi('${playerId}')" class="bg-gradient-to-r from-indigo-600 to-purple-600 border border-indigo-400 px-2.5 py-1 rounded-lg text-xs font-bold text-white" title="Hỏi AI về video này"><span class="yt-ic">🤖</span><span class="yt-lbl"> Hỏi AI</span></button>
 
 
@@ -12138,7 +12138,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     async function aiGeminiJsonG(system, user, maxTok) {
         // maxOutputTokens tính cả token "suy nghĩ" của model, nên phải đặt dư; nếu không JSON bị cắt cụt và parse lỗi
         const body = { systemInstruction: { parts: [{ text: system }] }, contents: [{ role: 'user', parts: [{ text: user }] }], generationConfig: { maxOutputTokens: (maxTok >= AI_MAX_OUT ? AI_MAX_OUT : Math.min(AI_MAX_OUT, Math.max(maxTok || 900, 4096))), responseMimeType: 'application/json' } };
-        const models = [GEMINI_CHAT_MODEL].concat(GEMINI_FALLBACK_MODELS).filter((m, i, a) => a.indexOf(m) === i);
+        await aiGeminiModelsRefresh();const models = [GEMINI_CHAT_MODEL].concat(GEMINI_FALLBACK_MODELS).filter((m, i, a) => a.indexOf(m) === i);
         for (const model of models) {
             for (let attempt = 0; attempt < 2; attempt++) {
                 if (attempt) await aiSleep(1000);
@@ -12197,7 +12197,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
                         return { raw, gm: cand.groundingMetadata || null, noSearch: round === 1 };
                     }
                     const m = (data.error && data.error.message) || ('HTTP ' + res.status);
-                    if ((res.status === 400 || res.status === 401 || res.status === 403) && /API key|API_KEY|credential|PERMISSION_DENIED/.test(m)) { const er = new Error(m); er.badKey = true; throw er; }
+                    if ((res.status === 400 || res.status === 401 || res.status === 403) && /API key|API_KEY|credential/i.test(m)) { const er = new Error(m); er.badKey = true; throw er; }
                     last = { status: res.status, msg: m }; tried.push(AI_DR_MODELS[mi] + (round ? ' (không search)' : '') + ': ' + res.status);
                     if (res.status === 429) break;
                     if (res.status === 500 || res.status === 503 || res.status === 504) continue;
@@ -12614,6 +12614,38 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
 
     /* Gọi Gemini có tự thử lại + dự phòng model khi quá tải */
     const GEMINI_FALLBACK_MODELS = ['gemini-flash-latest', 'gemini-flash-lite-latest', 'gemini-2.5-flash', 'gemini-2.5-flash-lite'];
+    const GEMINI_STATIC_MODELS = GEMINI_FALLBACK_MODELS.slice();
+    const aiModelCache = { key: '', t: 0, p: null };
+    function aiRankModels(items) {   // chỉ lấy dòng Flash dùng được generateContent; ổn định trước, bản mới trước, bản thường trước bản lite
+        const out = [];
+        (items || []).forEach(m => {
+            const id = String(m.name || '').replace(/^models\//, '');
+            if (!/^gemini-/.test(id) || !/flash/.test(id)) return;
+            if (!(m.supportedGenerationMethods || []).includes('generateContent')) return;
+            if (/image|tts|live|audio|embedding|robotics|computer|veo|imagen|aqa|dialog|customtools|vision|deep-research|-pro/i.test(id)) return;
+            const ver = parseFloat((id.match(/gemini-(\d+(?:\.\d+)?)/) || [0, 0])[1]) || 0;
+            out.push({ id: id, ver: ver, lite: /lite/.test(id) ? 1 : 0, prev: /preview|exp/.test(id) ? 1 : 0 });
+        });
+        out.sort((a, b) => (a.prev - b.prev) || (b.ver - a.ver) || (a.lite - b.lite));
+        return out.map(x => x.id);
+    }
+    function aiGeminiModelsRefresh(force) {   // cập nhật tại chỗ GEMINI_FALLBACK_MODELS; lưu 30 phút theo khóa
+        const k = aiState.key; if (!k) return Promise.resolve();
+        if (!force && aiModelCache.key === k && aiModelCache.p && Date.now() - aiModelCache.t < 30 * 60e3) return aiModelCache.p;
+        aiModelCache.key = k; aiModelCache.t = Date.now();
+        aiModelCache.p = (async () => {
+            try {
+                const ac = new AbortController(), tm = setTimeout(() => ac.abort(), 6000);
+                const res = await fetch('https://generativelanguage.googleapis.com/v1beta/models?pageSize=200', { headers: { 'X-goog-api-key': k }, signal: ac.signal });
+                clearTimeout(tm);
+                if (!res.ok) { aiModelCache.t = 0; return; }
+                const d = await res.json();
+                const list = aiRankModels(d.models).slice(0, 6).concat(GEMINI_STATIC_MODELS).filter((m, i, a) => a.indexOf(m) === i);
+                GEMINI_FALLBACK_MODELS.splice(0, GEMINI_FALLBACK_MODELS.length, ...list);
+            } catch (e) { aiModelCache.t = 0; }
+        })();
+        return aiModelCache.p;
+    }
     function aiBody(contents, yv, useSearch, noTools) {
         const cap = aiState.tlTurn ? 65536 : aiLenCap(aiState.full ? 65536 : 32768);   // tìm hiểu sâu: không giới hạn độ dài
         const b = { systemInstruction: { parts: [{ text: aiSystemPrompt() + (aiState.guided ? '' : AI_IMG_TAG_NOTE) + (aiState.tlTurn ? '' : aiLenNote()) }] }, contents, generationConfig: yv ? { maxOutputTokens: cap, mediaResolution: 'MEDIA_RESOLUTION_LOW' } : (aiState.frameTurn ? { maxOutputTokens: cap, mediaResolution: 'MEDIA_RESOLUTION_MEDIUM' } : { maxOutputTokens: cap }) };
@@ -12627,6 +12659,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         while (contents.length > 1 && contents[0].role !== 'user') contents.shift();
         if (yv) contents = contents.map((c, i) => i === 0 ? { role: c.role, parts: [{ fileData: { fileUri: 'https://www.youtube.com/watch?v=' + aiState.video.yt } }].concat(c.parts) } : c);
         const hasVideo = !!yv || !!aiState.frameTurn; let useSearch = false;
+        await aiGeminiModelsRefresh();
         let last = null;
         for (let mi = 0; mi < GEMINI_FALLBACK_MODELS.length; mi++) {
             for (let attempt = 0; attempt < 3; attempt++) {
@@ -12649,7 +12682,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
                         return txt;
                     }
                     const m = (data.error && data.error.message) || ('HTTP ' + res.status);
-                    if ((res.status === 400 || res.status === 401 || res.status === 403) && (/API key|API_KEY|credential/i.test(m) || (!hasVideo && /PERMISSION_DENIED/.test(m)))) { const er = new Error(m); er.badKey = true; throw er; }
+                    if ((res.status === 400 || res.status === 401 || res.status === 403) && (/API key|API_KEY|credential/i.test(m) )) { const er = new Error(m); er.badKey = true; throw er; }
                     last = { status: res.status, msg: m };
                     if (useSearch && (res.status === 400 || res.status === 403)) { useSearch = false; continue; }   // không tra cứu được thì trả lời không kèm tra cứu
                     if (res.status === 429 && useSearch) { useSearch = false; continue; }   // hết hạn mức tra cứu web: trả lời không tra cứu
@@ -12667,6 +12700,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         er.quota = (st === 429);
         er.friendly = (hasVideo && (st === 400 || st === 403 || st === 404)) ? 'AI chưa xem được video này (video riêng tư / không công khai, hoặc quá dài so với hạn mức). Bài này tạm thời chưa hỗ trợ Hỏi AI.'
             : st === 0 ? 'Không kết nối được tới Gemini. Hãy kiểm tra mạng (hoặc tắt chặn quảng cáo/VPN) rồi thử lại.'
+            : (st === 403 || st === 404) ? 'Các model Gemini miễn phí hiện không dùng được với khóa này (Google có thể đã đổi quy định gói miễn phí). Chi tiết: ' + er.message
             : st === 429 ? 'Bạn đã dùng hết lượt miễn phí trong phút/ngày này. Hãy đợi một lát rồi thử lại.'
             : (st === 503 || st === 500 || st === 504) ? 'Máy chủ Gemini đang quá tải. Hãy thử lại sau ít phút.'
             : 'Lỗi: ' + er.message;
@@ -13155,7 +13189,7 @@ window.PGR = (function () {
     /* --- gọi Gemini --- */
     async function callGemini(system, parts) { return aiJsonCall(system, parts, callGeminiG, 16384); }
     async function callGeminiG(system, parts) {
-        var models = (typeof GEMINI_FALLBACK_MODELS !== 'undefined' ? GEMINI_FALLBACK_MODELS : ['gemini-flash-latest']);
+        try { if (typeof aiGeminiModelsRefresh === 'function') await aiGeminiModelsRefresh(); } catch (e0) {}var models = (typeof GEMINI_FALLBACK_MODELS !== 'undefined' ? GEMINI_FALLBACK_MODELS : ['gemini-flash-latest']);
         var last = { status: 0, msg: '' };
         for (var mi = 0; mi < models.length; mi++) {
             for (var at = 0; at < 2; at++) {
