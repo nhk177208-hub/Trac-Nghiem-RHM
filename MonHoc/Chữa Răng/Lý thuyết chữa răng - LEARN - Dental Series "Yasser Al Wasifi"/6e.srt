@@ -1,0 +1,971 @@
+﻿1
+00:00:37,000 --> 00:00:54,670
+Welcome everybody, this is Yasir Al-Othifi from Learned Dental Series, and this
+is episode we will continue our discussion about diagnosis and treatment
+planning in operative dentistry.
+
+2
+00:00:54,670 --> 00:01:23,630
+Still we are, diagnosing or klin in the topic of clinical examination of dental
+caries. Let me first clear that I don't receive fees, compensation, or realities
+from the sales of any of the products shown or discussed in this presentation,
+and this presentation has not been sponsored by any company, agency, or
+organization, and only be prepared for educational purposes.
+
+3
+00:01:23,630 --> 00:01:34,630
+Also, this presentation is copyright copyright protected and could not be
+transmitted by any mechanical or electronic means without prior permission from
+the author.
+
+4
+00:01:34,630 --> 00:01:51,130
+In this episode, still we are, trying to properly diagnose dental caries at, by
+different techniques and at different stages. We already finished our, in the
+previous episodes, our, part one,
+
+5
+00:01:51,130 --> 00:02:01,730
+which includes patient assessment and information gathering in terms of
+demographic data, chief complaint and its history, medical history, and dental
+history.
+
+6
+00:02:01,730 --> 00:02:07,730
+Then we go forward for for clinical examination, starting with examination of
+dental caries, which is the main focus and the main target of our topic in
+general, and which is our main interest as operative dentist.
+
+7
+00:02:08,130 --> 00:02:16,830
+We already finished the traditional techniques including visual examination,
+tactile examination, radiographic examination,
+
+8
+00:02:16,830 --> 00:02:30,130
+and we already discussed the limitations of, traditional techniques in general,
+and how to improve the result and sensitivity of these tests including visual
+and radiographic examination.
+
+9
+00:02:30,330 --> 00:02:36,430
+In this episode, we will go forward to discuss advanced caries detection aids.
+
+10
+00:02:36,730 --> 00:02:40,430
+Let us start with the electronic caries detector.
+
+11
+00:02:40,430 --> 00:03:10,930
+Electronic caries detectors are mainly based on the fact that sound enamel is a
+good insulator, while caries enamel due to porosity created by demineralization,
+these pores are filled with fluids such as ions and ions from saliva, which
+becomes more conductor to, electric current, insensistive electric current,
+okay, that indicate demineralization the demineralization state of your, tooth
+structure.
+
+12
+00:03:11,130 --> 00:03:21,430
+The electronic detector can measure quantitatively any change in enamel
+electrical conductivity referred it to demineralization.
+
+13
+00:03:21,830 --> 00:03:29,630
+That means that the slight drop in enamel resistance values indicates the
+presence of early demineralization.
+
+14
+00:03:29,930 --> 00:03:45,330
+We have in dental market a lot of a lot of, devices, a lot of equipment, all
+based on this difference in resistance between the electric resistance between
+sound enamel and caries enamel.
+
+15
+00:03:45,630 --> 00:03:59,730
+All of these are commercially available ones, just we will discuss them in
+brief, okay, it's not our topic, we are discussing the main idea, which is a
+difference in electric conductivity due to difference in resistance, okay?
+
+16
+00:04:00,230 --> 00:04:19,430
+One of the system is Vanguard electronic caries detector where the electric
+conductivity is expressed in numerical numbers starting from 0 to 9, this scale
+indicates that, okay, when the scale increased, indicates that there is increase
+in demineralization in your enamel.
+
+17
+00:04:19,830 --> 00:04:49,030
+Then comes caries meter L, which is the oldest one and the most common one,
+which, uses color lights to indicate caries extent, it translates this, electric
+conductivity into a colored light, where green light equals sound, yellow equals
+enamel caries, orange dentin caries, and red caries reaching to the bulb or the
+severity of demineralization are aggressive, okay?
+
+18
+00:04:49,830 --> 00:05:10,130
+Then come electronic caries monitor, which measures the bulk resistance of the,
+tooth tissue when the tooth as a whole, the crown as a whole, showing a drop in
+its electrical resistance and increase the conductivity, that means that there
+is a caries in a wear or another, okay?
+
+19
+00:05:10,530 --> 00:05:25,930
+But now, the most recently introduced is what is called caries scan, caries scan
+involves the passing of an insensitive level of electric current through the
+tooth, identifies the presence and location of your decay.
+
+20
+00:05:26,130 --> 00:05:34,530
+Also, it includes a light colored light indicators with the same technique as
+caries meter.
+
+21
+00:05:34,730 --> 00:05:40,330
+These photographs showing a different techniques or different devices.
+
+22
+00:05:40,430 --> 00:05:51,330
+The one to the left is the electronic caries monitor, and that gel, this gel is
+an electrolyte that facilitates the transmission of insensitive electric
+current,
+
+23
+00:05:51,630 --> 00:06:00,730
+while the other to the right is the newest one, which is the caries scan and
+caries scan, proof.
+
+24
+00:06:01,030 --> 00:06:06,130
+Then comes another simple technique, which is caries detection dye.
+
+25
+00:06:06,430 --> 00:06:21,030
+The idea of caries detection dye, okay, is using indicator dye of protein, okay,
+which is called non-specific protein dye to stain the organic matrix of less
+mineralized dentin.
+
+26
+00:06:21,530 --> 00:06:29,830
+It depends on the idea that dentin is caries means that dentin is demineralized.
+
+27
+00:06:30,030 --> 00:06:38,930
+From where did you get this demineralization? This is by extracting the caries,
+extracting the hydroxyapatite crystals in between the collagen matrix.
+
+28
+00:06:39,130 --> 00:06:47,330
+Then your collagen matrix is much more exposed and ready to be infiltrated by
+any non-specific protein,
+
+29
+00:06:47,730 --> 00:06:50,330
+including dye protein.
+
+30
+00:06:50,630 --> 00:07:16,830
+This is the idea, okay? That's why this diagnostic aid, okay, is helpful for
+detecting caries dentin, demineralized dentin with damaged collagen near to that
+of the bulb that and this technique is used mainly for removal painless removal
+of caries with chemo-mechanical, caries removal techniques like carisolv,
+
+31
+00:07:17,130 --> 00:07:23,730
+okay?, especially when you are in need to differentiate between affected and
+infected dentin.
+
+32
+00:07:24,030 --> 00:07:29,430
+It only penetrates destructed demineralized collagen matrix of dentin.
+
+33
+00:07:29,830 --> 00:07:30,330
+Okay?
+
+34
+00:07:30,730 --> 00:07:56,330
+And this techniques, this technique could be helpful in diagnosis of occlusal
+caries lesion, but mostly it is designed to detect the degree of affection of
+last layer at near to that to the bulb, at the bulpal floor, when you are
+hesitated to take this decision.
+
+35
+00:07:56,530 --> 00:08:21,830
+You couldn't take the decision either to remove or to leave, this layer of
+dentin and exposing the bulb. This technique involves multiple applications and
+multiple removal of the lesion, you apply the dye, then you apply your caries
+removal gel,
+
+36
+00:08:22,230 --> 00:08:46,430
+okay, until it already remove or you denaturate collagen, sometimes you are in
+need to use a special, round bird to remove this or a special brush coming with
+your system.
+
+37
+00:08:46,730 --> 00:08:56,430
+This is the photograph showing how the dye could could, stain your dentin and
+how it is removed after that in the second photo.
+
+38
+00:08:56,430 --> 00:09:09,630
+And then you reapply the dye again and reapply your caries removing gel until it
+is unstained at all, and you are now safe to place your restoration.
+
+39
+00:09:10,030 --> 00:09:26,530
+Then coming something much more accurate and definite, which is laser
+fluorescence or fluorescence technique.
+
+40
+00:09:27,130 --> 00:09:49,030
+Fluorescence phenomena is defined as exaggerating the reflected wavelengths more
+than the emitted wavelengths when you are applying a emitted light with a
+specific wavelengths to an object, the reflectance light
+
+41
+00:09:49,030 --> 00:09:54,163
+having a larger wave lens even reflectance that's why it appears fluorescent.
+
+42
+00:09:54,163 --> 00:10:01,830
+Okay? And this fluorescence differs from material to another according to its
+structure, including tooth structure.
+
+43
+00:10:01,830 --> 00:10:11,430
+There is no material at this world, okay? That haven't fluorescence, but the
+degree of fluorescence it changes changed from material to another.
+
+44
+00:10:11,430 --> 00:10:17,330
+Okay? That's why the main idea is the intensity of fluorescent light is
+proportional to the amount of material that goes fluorescence and accordingly,
+there will be a difference between fluorescence of sound tooth structure and
+that of caries tooth structure that could be visible by quantitative laser or
+by, blue light, intensive blue light.
+
+45
+00:10:17,730 --> 00:10:35,430
+This is the idea. Then we are playing with light and the amount of reflectance
+of tooth tissue including in some cases the bacterial metabolites.
+
+46
+00:10:35,830 --> 00:10:46,330
+We have two examples or two tools, depending on this idea.
+
+47
+00:10:46,630 --> 00:11:09,130
+Diagnodent, which uses argon laser fluorescence, okay, quantitative laser or
+light fluorescence, quantitative light fluorescence using blue light.
+
+48
+00:11:09,130 --> 00:11:18,930
+Let us start with Diagnodent. In this technique, the quantity of mineral loss,
+okay, in caries lesion could be scored, okay, and could be measured.
+
+49
+00:11:18,930 --> 00:11:26,330
+Your lesion or the area you are expecting to have a caries lesion is subjected
+to argon laser and will emit fluorescence.
+
+50
+00:11:26,330 --> 00:11:39,930
+This fluorescent is this fluorescent is collimated, okay, and captured by
+camera, okay, which showing a difference in fluorescence from healthy tissues or
+sound tooth structures to caries tooth structure.
+
+51
+00:11:39,930 --> 00:11:51,630
+The initial mineral loss of non-cavitated enamel and dentin lesions on buccal
+occlusal surfaces, okay, as well as bacterial activity could be measured because
+it also plays a great role in detecting the fluorescence of bacterial
+metabolites indicating the bacterial activity at your lesion lesion.
+
+52
+00:11:52,230 --> 00:12:25,130
+Red argon laser is transported through a fiber bundle to a dip of a special
+handpiece, okay, and the step is is autoclavable, okay, with different
+diameters, okay, placed against the tooth surface.
+
+53
+00:12:25,530 --> 00:12:46,330
+Then the laser light penetrates the tooth and the difference in fluorescence
+between sound and demineralized enamel and the fluorescence of bacterial
+metabolites are recorded by device giving a quantitative record
+
+54
+00:12:46,730 --> 00:12:58,230
+of the existing decay with audible sound, then the resultant will be a
+quantitative record in a form of a score
+
+55
+00:12:58,230 --> 00:13:03,630
+and at the same time audible sound to alarm you that there is something
+abnormal.
+
+56
+00:13:03,630 --> 00:13:10,763
+The intensity of the florescent is displayed as a number, okay? It range is
+starting from 0 up to 99, okay?
+
+57
+00:13:10,763 --> 00:13:15,430
+Zero indicated minimal fluorescent fluorescent and the tooth is sound,
+
+58
+00:13:15,430 --> 00:13:18,097
+while 99 indicates maximum fluorescence.
+
+59
+00:13:18,097 --> 00:13:34,230
+Also, the design of this device based on a huge database which compared the
+amount of demineralization to the scored number that will be resulted.
+
+60
+00:13:34,230 --> 00:13:46,563
+That's why the reading could be compared with the reading of healthy tooth
+structure, okay, and the difference could be calculated, okay, according to the
+database of your device, okay?
+
+61
+00:13:46,563 --> 00:13:51,897
+A reading of 10 to 20 indicates some enamel softening, that should be monitored.
+
+62
+00:13:51,897 --> 00:13:57,697
+A reading from 21 up to 99 indicates definite area of decay that required
+intervention,
+
+63
+00:13:57,697 --> 00:14:02,563
+okay, according to the severity is it up to or, near to 20 or near to 99.
+
+64
+00:14:02,563 --> 00:14:09,430
+The device has two forms, one classical form, okay, and one portable form which
+is a new bin design or diagno bin, okay?
+
+65
+00:14:09,430 --> 00:14:15,097
+The one to the left is the classical one and the two to the right are the diagno
+bin.
+
+66
+00:14:15,097 --> 00:14:32,430
+And the most right one indicating the cover sleeve that is autoclavable to,
+avoid, or to prevent cross infection as a means of infection control, and also
+this step is autoclavable and your device is supplied with multiple tips,
+
+67
+00:14:32,430 --> 00:14:37,297
+different in lens and diameter to allow accessibility in different areas.
+
+68
+00:14:37,297 --> 00:14:58,330
+This schematic diagram showing that the difference between dental explorer and
+diagnodent it depends on the argon laser, the laser is a collimated, coherent
+light that could not be, divergent light,
+
+69
+00:14:58,330 --> 00:15:02,263
+is the same as ordinary light, it trans in a straight line.
+
+70
+00:15:02,263 --> 00:15:22,330
+That's why it could penetrate your fissure to its depth, while your explorer
+could not, penetrate the whole fissure, especially if the if your fissure is
+wider at its bottom, it may be catch on the top while the caries lesion is still
+or it couldn't penetrate the whole fissure while the caries lesion is a starting
+demineralization and its activity as shown on the picture to the left, okay,
+
+71
+00:15:22,830 --> 00:15:40,830
+and the base while at the base of the fissure, while your coherent collimated,
+laser beam, okay, could penetrate to this depth and could not be, faded, okay,
+light, like ordinary light.
+
+72
+00:15:41,230 --> 00:15:57,430
+Then the reflectance of this, fluorescent light, the fluorescent of the tissue,
+is then come again to your tip, okay, to provide you with either acoustic
+signal,
+
+73
+00:15:57,430 --> 00:15:59,230
+okay, or a digital display.
+
+74
+00:15:59,230 --> 00:16:21,530
+Let us see or review these photographs, okay, which shows, the tip of your,
+diagno pen, okay, and the sleeve to the left side, which is interchangeable,
+both of them are autoclavable, okay?
+
+75
+00:16:21,530 --> 00:16:26,597
+And now you are operating the argon laser, okay, and waiting for the result.
+
+76
+00:16:26,597 --> 00:16:37,330
+Let us discuss the score produced, okay, the acoustic notification, okay, or the
+acoustic beep just alarm you that there is something abnormal and you should
+respect your monitor, okay?
+
+77
+00:16:37,730 --> 00:16:48,830
+What is the digit appear, okay? For fissure caries, if the value is between 0
+and 12, then it is considered a healthy tooth substance.
+
+78
+00:16:48,830 --> 00:16:52,363
+And for proximal caries, the value is between 0 to 7.
+
+79
+00:16:52,363 --> 00:17:01,630
+Okay? For fissure caries to interpret it by diagnotent as a starting
+demineralization, the the values will be between 13 up to 24.
+
+80
+00:17:01,830 --> 00:17:18,330
+While that for proximal caries to, interpret it or diagnose it as being starting
+demineralization, the values will range between 8 up to 15.
+
+81
+00:17:18,330 --> 00:17:23,397
+This is according to the manufacturer guide supplied with your device, okay?
+
+82
+00:17:23,397 --> 00:17:35,330
+But if the values are over 25 in fissure caries and more than 16 for proximal
+caries, then there is a strong demineralization that indicate immediate
+intervention to manage this.
+
+83
+00:17:35,730 --> 00:17:39,130
+Let us review certain cases, okay?
+
+84
+00:17:39,630 --> 00:17:59,330
+The one to the left, there is no visible caries, while after diagnosing it with
+diagnotent, we discovered a caries hidden at this area detected with
+diagenodent, and this is after opening it with round bur,
+
+85
+00:17:59,330 --> 00:18:02,397
+just it's a an early detection of your caries.
+
+86
+00:18:02,397 --> 00:18:22,330
+And how much beautiful your conservative design, just cutting the area,
+accessing the caries, and all bits and the fissures, even that appears in your,
+diagnotent and in this transillumination photograph, okay?
+
+87
+00:18:22,730 --> 00:18:33,330
+Above, just indicated for bits and the fissure sealant, and this is the case
+after treatment, treating the tooth conservatively.
+
+88
+00:18:33,730 --> 00:18:49,730
+And how much, let us image imagine, how much you conserve a tooth structure.
+Case one, showing number one, no caries shown at the first molar.
+
+89
+00:18:50,030 --> 00:18:57,630
+Also radiographically, there is no radiolucency that could indicate dental
+caries,
+
+90
+00:18:57,630 --> 00:19:01,297
+as you as we discussed before in the previous episodes.
+
+91
+00:19:01,297 --> 00:19:04,630
+That we are in need for at least 40% demineralization to be radiographically
+noted.
+
+92
+00:19:05,130 --> 00:19:22,230
+But when we use the diagnotent bin, it demonstrated a score of 28, which which
+is within the demineralization or within even the active caries stage.
+
+93
+00:19:22,630 --> 00:19:42,030
+That's why, when the operator trying to gaining access through the triangular
+fossa, he discovered this caries at the dentin enamel junction is starting
+demineralization, but this demineralization is still not enough
+
+94
+00:19:42,330 --> 00:19:59,930
+to be interpreted or denoted as, something we couldn't expect, it indicates
+aggressive lesion, okay? It's scored 90.
+
+95
+00:20:00,330 --> 00:20:14,230
+When the operator opens this lesion, as you could see in figure four, okay,
+actually it is an aggressive caries lesion, okay?
+
+96
+00:20:14,630 --> 00:20:28,930
+It may be hidden in radiograph due to superimposition, okay, of other tooth
+structure, and also it may be hidden to visual examination because it is to the
+lingual and the tooth is much more far posterior
+
+97
+00:20:29,330 --> 00:20:35,330
+that you couldn't inspect it actually, you couldn't inspect it perfectly.
+
+98
+00:20:35,730 --> 00:20:48,330
+And the tooth is also restored with bonded restoration as conservative as
+possible.
+
+99
+00:20:48,730 --> 00:21:04,930
+Another one is this first molar, okay, tooth, in the upper and radiograph didn't
+show any visible caries involvement due to the demineralization is out
+
+100
+00:21:05,330 --> 00:21:18,130
+of the zone to be detected or out of the amount to be detected by radiograph or
+to be differentiated by radiograph, surely it is less than 40%.
+
+101
+00:21:18,530 --> 00:21:22,130
+Then in figure 3, okay,
+
+102
+00:21:22,530 --> 00:21:31,030
+, the diagnodent reveals a score of 31.
+
+103
+00:21:31,430 --> 00:21:50,030
+Okay? When the operator opens this, distal fissure, okay, he discovered a caries
+extended to or near to dentinoenamel junction that needs intervention with
+minimal invasive and conservative cavity preparation.
+
+104
+00:21:50,430 --> 00:22:07,130
+Then comes the other type which acting on the idea of fluorescence, which is
+quantitative light induced fluorescence.
+
+105
+00:22:07,530 --> 00:22:17,330
+The main difference between them is the first is using argon laser fluorescence
+and this one is,
+
+106
+00:22:17,730 --> 00:22:36,530
+using auto fluorescence of each teeth when subjected to light, especially when
+it is, in the blue zone.
+
+107
+00:22:36,930 --> 00:22:58,630
+This device using, intensive blue zone light, okay, that is focused or emitted
+to the tooth and measures the auto fluorescence of your subject, okay, which is
+different from,
+
+108
+00:22:59,130 --> 00:23:08,930
+healthy tissues to caries tissues with the same idea.
+
+109
+00:23:09,330 --> 00:23:25,730
+Then this auto fluorescence is then captured or detected by special intraoral
+camera, which produces fluorescent image.
+
+110
+00:23:26,130 --> 00:23:42,830
+Then the fluorescent image, okay, and the degree of emitted fluorescent
+fluorescence will be related to the degree of demineralization, okay, and the
+mineral contents of yours, tissues, especially enamel.
+
+111
+00:23:43,230 --> 00:23:56,530
+Okay? The difference between the fluorescence of sound tooth tissues and that of
+caries lesion can be made visible quantitatively by light induced fluorescence
+method,
+
+112
+00:23:56,930 --> 00:24:06,330
+okay, as a quantitative method to diagnose dental caries, okay?
+
+113
+00:24:06,730 --> 00:24:16,830
+The intensity of demineralization is related to the degree of dark tents you
+could see or respect from, the device.
+
+114
+00:24:17,230 --> 00:24:28,930
+This picture fluorescent image is transmitted into your, computer, and there is
+a software system that can process the image to provide you
+
+115
+00:24:29,330 --> 00:24:43,630
+with quantitative parameters such as the lesion area, the lesion depth, and the
+lesion volume.
+
+116
+00:24:43,930 --> 00:24:50,030
+Just I would like you to note something, okay, and record this note.
+
+117
+00:24:50,430 --> 00:25:21,030
+Okay? All the advancements in caries detection, either using visual examination,
+radiographic examination, advanced caries detection aids or tools, are based on
+the development in digital systems and the development in photo processing
+softwares.
+
+118
+00:25:21,330 --> 00:25:34,730
+Okay? And in order to do that, you should feed these softwares with a huge data,
+correlate between
+
+119
+00:25:35,130 --> 00:25:48,330
+the clinical appearance of your caries lesion and the degree of demineralization
+and also the histological pattern expected from this image.
+
+120
+00:25:48,730 --> 00:26:10,530
+Okay? And this is a huge work done by a a great group of epidemiologists, okay,
+and cariologists worldwide.
+
+121
+00:26:10,830 --> 00:26:22,330
+Without this data, okay, and without feeding these softwares by these data,
+okay, they could not
+
+122
+00:26:22,730 --> 00:26:35,330
+run an accurate detection of dental caries using artificial intelligence, okay,
+and still up now, any update in these software
+
+123
+00:26:35,730 --> 00:26:52,530
+for all of the devices discussed in this episode and the other episode, okay,
+regarding, improving, visual examination or regarding,
+
+124
+00:26:52,530 --> 00:26:57,463
+recent advances in radiographic techniques for detection of dental caries,
+
+125
+00:26:57,463 --> 00:27:11,830
+there is no update unless you have updated data regarding the link between or
+the correlation between the clinical appearance, the degree of demineralization
+
+126
+00:27:12,130 --> 00:27:18,330
+and the histological pattern of your lesion.
+
+127
+00:27:18,630 --> 00:27:36,530
+Okay? That's why this is one of these devices devices that use software, okay,
+software based in based on artificial intelligence
+
+128
+00:27:36,930 --> 00:27:54,330
+that could locate the lesion area, lesion depth, and lesion volume, okay?
+Depending on the correlation between the fluorescence, okay,
+
+129
+00:27:54,630 --> 00:28:10,330
+and their trials to link it with different characteristics of caries lesion or
+different presentation of caries lesion.
+
+130
+00:28:10,630 --> 00:28:36,730
+These parameters can detect and differentiate the lesions at a very early stage,
+okay, and make qualitative light fluorescence system more sensitive to changes
+of caries over a time, okay?
+
+131
+00:28:37,030 --> 00:28:46,730
+To uses blue light in a range of 488 nanometers to illuminate the tooth, which
+normally fluorescent a green color at this range of light,
+
+132
+00:28:47,130 --> 00:29:08,530
+okay? But the tooth should be dried perfectly to neglect the effect of saliva,
+okay, in fluorescence, because if you don't try it perfectly, then the coming
+fluorescence
+
+133
+00:29:08,830 --> 00:29:21,030
+is the fluorescence of saliva including the debris and its proteins, okay, and
+the tooth structure.
+
+134
+00:29:21,330 --> 00:29:30,330
+That's why you should perfectly, perfectly dry the tooth and before drying the
+tooth, it is preferred to
+
+135
+00:29:30,730 --> 00:29:43,030
+polish it and scale it, okay, or scale scaling and polishing.
+
+136
+00:29:43,330 --> 00:29:47,830
+Okay? But the problem it cannot differentiate between
+
+137
+00:29:48,230 --> 00:30:01,330
+decay and hypoplasia because both of them are loss of minerals, okay? It only
+detects auto fluorescence fluorescence of the lesion of the tooth,
+
+138
+00:30:01,730 --> 00:30:17,030
+okay? That indicates demineralization or or lower mineral contents of this
+structure.
+
+139
+00:30:17,330 --> 00:30:31,030
+And that's why still you are in need for other clinical investigations, okay?
+
+140
+00:30:31,330 --> 00:30:52,330
+To, to to to have an an accurate decision about the detection and diagnosis of
+your caries lesion, okay?
+
+141
+00:30:52,630 --> 00:31:07,130
+Because this is also a device, okay, that measurement is only limited, okay, to
+several hundred micrometers from the surface which is responsible for
+
+142
+00:31:07,430 --> 00:31:13,030
+the auto fluorescence of the tooth structure.
+
+143
+00:31:13,330 --> 00:31:22,030
+Up till now, this device could not access the interproximal area, it's only for
+occlusal area.
+
+144
+00:31:22,330 --> 00:31:49,030
+Okay? In contrast to that of diagnotent, diagnodent having already
+interproximal, tips that could access the interproximal area, okay? And this is
+the device of, quantitative light induced fluorescence,
+
+145
+00:31:49,430 --> 00:32:16,830
+okay, which is connected to your CPU, and this is the handpiece which emits the
+light in the blue zone, okay, and at the same time, having an intraoral camera,
+inside.
+
+146
+00:32:17,230 --> 00:32:27,130
+Okay? Then comes, a case where you have these teeth in the figure A, okay?
+
+147
+00:32:27,530 --> 00:32:36,630
+It seems to be absolutely sound, it seems to be absolutely, healthy, okay?
+
+148
+00:32:36,930 --> 00:32:51,330
+When we already examine it with white light image, okay, and, this, quantitative
+light fluorescence,
+
+149
+00:32:51,630 --> 00:33:04,630
+okay, you could notice a cervical darkness which includes which denotes or
+indicates cervical mineral loss,
+
+150
+00:33:05,030 --> 00:33:20,130
+okay? And after improving the oral hygiene after treating the patient for six
+months with fluoride and, oral hygiene program,
+
+151
+00:33:20,530 --> 00:33:29,930
+okay, then another, image, fluorescent image is taken by the same device,
+
+152
+00:33:30,330 --> 00:33:43,030
+and you could compare and contrast between B and C, the degree of darkness is
+much more lesser.
+
+153
+00:33:43,330 --> 00:33:53,130
+Then comes critical question, I think all of you are thinking about it, okay?
+
+154
+00:33:53,430 --> 00:34:02,130
+As being a professional restorative dentist, as being a professor of operative,
+dentistry,
+
+155
+00:34:02,530 --> 00:34:25,930
+which of these advanced devices and which of these advanced technologies, either
+advancements in visual examination, either advancements in radiographic,
+examination, and now these advanced devices for detection of dental caries,
+which of these devices do you prefer?
+
+156
+00:34:26,330 --> 00:34:29,030
+Okay?
+
+157
+00:34:29,330 --> 00:34:32,330
+I would like answer to answer you that this is
+
+158
+00:34:32,730 --> 00:34:40,030
+not the question.
+
+159
+00:34:40,330 --> 00:34:42,330
+The question the question, for whom
+
+160
+00:34:43,130 --> 00:34:52,330
+could I use one of these technologies?
+
+161
+00:34:52,630 --> 00:35:10,530
+Actually, I couldn't relay on one of these unless I have a full record of the
+patient, okay, many years ago.
+
+162
+00:35:10,830 --> 00:35:28,130
+But the question is, when the patient did come to your clinic? This is the
+problem.
+
+163
+00:35:28,430 --> 00:35:41,130
+Okay? How many patients are keen for regular examination of their teeth, okay,
+before complaining from any aggressive problem?
+
+164
+00:35:41,530 --> 00:35:52,230
+This is the question. The majority of our patients, especially in dental
+colleges, as they provide,
+
+165
+00:35:52,530 --> 00:36:04,630
+free service or free healthcare services for most of the patients, okay? And
+even in our Arab and Egyptian, countries,
+
+166
+00:36:04,930 --> 00:36:20,130
+up till now, we don't have the patient which having the mentality and the
+culture for regular checkup without complaining.
+
+167
+00:36:20,430 --> 00:36:31,930
+Not only in dentistry, in all the health surfaces, okay? That's why mostly
+
+168
+00:36:32,630 --> 00:36:58,130
+of, or most of our patient, 99% of our patient coming with you with visually
+obvious caries lesion
+
+169
+00:36:58,430 --> 00:37:05,130
+that you could inspect a cavitation.
+
+170
+00:37:05,430 --> 00:37:25,530
+It is not hard for us as being in Egypt or in Arab countries, in this culture,
+okay? It is not difficult for us to examine caries visually by simple methods.
+
+171
+00:37:25,830 --> 00:37:34,930
+Even we don't need explorer, okay? Just only the most helpful one who's caries
+detection dye.
+
+172
+00:37:35,330 --> 00:37:51,330
+Why? Because most of caries are deep, okay? We needed to differentiate between
+affected and infected dentin, whether to remove the last layer or not to remove
+the last layer.
+
+173
+00:37:51,630 --> 00:38:09,130
+And we don't need to complicate the treatment in expense of, okay? We could
+improve the oral hygiene because this is depends on also on attitude of patient.
+
+174
+00:38:09,430 --> 00:38:23,030
+Still, up till now, caries risk assessment is much more beneficial for us, we
+could gain too much information for it, okay? For me,
+
+175
+00:38:23,330 --> 00:38:52,330
+if I have one of these recent devices, the only patients that I could apply it
+for them is my kids because already as being a dentist, I'm daily inspect or
+weekly at least I am inspect their teeth, this is my interest and those are my
+kids,
+
+176
+00:38:52,630 --> 00:39:05,130
+okay? The only two, okay, my son and my daughter, okay? That's that's it, okay?
+Otherwise,
+
+177
+00:39:05,430 --> 00:39:15,330
+okay, I don't know when the patient come to me.
+
+178
+00:39:15,630 --> 00:39:34,330
+Okay? Unless we have the concept of, checkup every three or six months, even
+when we go for caries risk assessment and we advise the patient
+
+179
+00:39:34,730 --> 00:39:46,330
+to, revisit us, okay, for, reevaluation every three or every six months, this
+will not happen.
+
+180
+00:39:46,730 --> 00:39:51,330
+This didn't happen at all, okay?
+
+181
+00:39:51,630 --> 00:39:58,330
+What is the percent of of people or patients who will follow your instructions
+to that extent
+
+182
+00:39:58,730 --> 00:40:02,330
+and they are keen to follow it to that extent?
+
+183
+00:40:02,630 --> 00:40:24,330
+That's why, okay, I didn't use, any one of these not because they are not
+beneficial, no.
+
+184
+00:40:24,730 --> 00:40:43,330
+It's the great devices, great techniques for detection of early caries lesion,
+but the question is when the patient could came to you, could come to you for
+diagnosis.
+
+185
+00:40:43,630 --> 00:40:53,330
+This is the question. Finally, those are, the text, books I used in preparing my
+presentation,
+
+186
+00:40:53,730 --> 00:41:16,330
+okay? Please feel free feel free to ask me at any time as your questions are
+welcome, okay, just comment to this video and I will reply to your, questions by
+comment as soon as possible.
+
+187
+00:41:16,730 --> 00:41:26,330
+And those are my contact on info, when you would like to contact me.
+
+188
+00:41:26,730 --> 00:41:40,330
+Finally, I would like to thank you to assign this time to listen to me, please
+don't forget to subscribe to my channel and activate notification to get all the
+new episodes.
+
+189
+00:41:40,730 --> 00:41:41,330
+Thank you.
+
+190
+00:41:41,730 --> 00:41:42,330
+Yasser Al-Nasif.

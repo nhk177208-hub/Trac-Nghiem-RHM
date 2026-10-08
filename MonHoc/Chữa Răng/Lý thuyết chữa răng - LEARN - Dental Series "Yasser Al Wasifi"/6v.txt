@@ -1,0 +1,759 @@
+1
+00:00:37,000 --> 00:00:54,670
+Chào mừng các em, thầy là Yasir Al-Othifi từ chuỗi bài giảng Nha khoa, và trong tập này chúng ta sẽ tiếp tục thảo luận về chẩn đoán và lập kế hoạch điều trị trong nha khoa phục hồi.
+
+2
+00:00:54,670 --> 00:01:23,630
+Chúng ta vẫn đang ở chủ đề khám lâm sàng bệnh lý sâu răng; thầy xin nói rõ là thầy không nhận thù lao hay tiền bản quyền từ bất kỳ sản phẩm nào được nhắc đến, và bài giảng này hoàn toàn vì mục đích giáo dục.
+
+3
+00:01:23,630 --> 00:01:34,630
+Ngoài ra, bài giảng này đã được bảo vệ bản quyền và không được phép sao chép hay truyền tải dưới bất kỳ hình thức nào nếu chưa có sự cho phép của tác giả.
+
+4
+00:01:34,630 --> 00:01:51,130
+Trong phần này, chúng ta sẽ tiếp tục tìm hiểu cách chẩn đoán sâu răng chính xác bằng nhiều phương pháp và ở các giai đoạn khác nhau, nối tiếp phần một mà chúng ta đã hoàn thành ở các tập trước.
+
+5
+00:01:51,130 --> 00:02:01,730
+Ở phần trước, chúng ta đã bàn về đánh giá bệnh nhân và thu thập thông tin cá nhân, lý do đến khám, bệnh sử, tiền sử y khoa và tiền sử nha khoa.
+
+6
+00:02:01,730 --> 00:02:07,730
+Sau đó, chúng ta sẽ chuyển sang khám lâm sàng, bắt đầu bằng việc khám sâu răng, đây là trọng tâm chính của bài học và cũng là mối quan tâm hàng đầu của bác sĩ nha khoa phục hồi.
+
+7
+00:02:08,130 --> 00:02:16,830
+Chúng ta đã tìm hiểu xong các phương pháp truyền thống bao gồm khám bằng mắt thường, khám bằng xúc giác và chụp phim X-quang.
+
+8
+00:02:16,830 --> 00:02:30,130
+Đồng thời, thầy trò mình cũng đã thảo luận về những hạn chế của các phương pháp truyền thống, và cách cải thiện độ nhạy của việc khám bằng mắt cũng như trên phim X-quang.
+
+9
+00:02:30,330 --> 00:02:36,430
+Ở tập này, chúng ta sẽ đi sâu vào các công cụ hỗ trợ phát hiện sâu răng tiên tiến.
+
+10
+00:02:36,730 --> 00:02:40,430
+Hãy bắt đầu với máy phát hiện sâu răng điện tử.
+
+11
+00:02:40,430 --> 00:03:10,930
+Máy này hoạt động dựa trên nguyên lý men răng lành mạnh là chất cách điện tốt, trong khi men răng sâu bị rỗ do mất khoáng; các lỗ rỗ này chứa dịch và ion từ nước bọt làm tăng tính dẫn điện, qua đó cho thấy tình trạng khử khoáng của cấu trúc răng.
+
+12
+00:03:11,130 --> 00:03:21,430
+Máy dò điện tử có thể đo lường định lượng mọi sự thay đổi trong độ dẫn điện của men răng và đối chiếu với mức độ mất khoáng.
+
+13
+00:03:21,830 --> 00:03:29,630
+Điều này có nghĩa là một sự sụt giảm nhẹ trong điện trở của men răng cũng chỉ ra sự hiện diện của quá trình khử khoáng sớm.
+
+14
+00:03:29,930 --> 00:03:45,330
+Trên thị trường nha khoa hiện nay có rất nhiều loại thiết bị đều dựa trên sự chênh lệch điện trở giữa men răng lành mạnh và men răng bị sâu.
+
+15
+00:03:45,630 --> 00:03:59,730
+Các em có thể dễ dàng tìm mua tất cả những máy này, thầy chỉ lướt qua nhanh thôi vì trọng tâm của chúng ta là nguyên lý dẫn điện dựa trên sự khác biệt về điện trở.
+
+16
+00:04:00,230 --> 00:04:19,430
+Một trong những hệ thống đó là máy dò Vanguard, trong đó độ dẫn điện được biểu thị bằng các con số từ không đến chín, và khi chỉ số này tăng lên nghĩa là mức độ mất khoáng ở men răng cũng tăng theo.
+
+17
+00:04:19,830 --> 00:04:49,030
+Tiếp theo là Caries Meter L, một dòng máy đời cũ và rất phổ biến, nó chuyển đổi độ dẫn điện thành tín hiệu đèn màu: đèn xanh lá là răng lành, màu vàng là sâu men răng, màu cam là sâu ngà răng, và màu đỏ báo hiệu sâu tới tủy hoặc mất khoáng rất nghiêm trọng.
+
+18
+00:04:49,830 --> 00:05:10,130
+Kế đến là máy theo dõi sâu răng điện tử, chuyên đo điện trở tổng thể của mô răng; khi điện trở của toàn bộ thân răng giảm xuống và độ dẫn điện tăng lên, điều đó chứng tỏ răng đã bị sâu ở một mức độ nào đó.
+
+19
+00:05:10,530 --> 00:05:25,930
+Nhưng hiện tại, công nghệ mới nhất vừa ra mắt gọi là Caries Scan, thiết bị này truyền một dòng điện cường độ cực nhỏ qua răng để xác định sự hiện diện và vị trí của tổn thương sâu răng.
+
+20
+00:05:26,130 --> 00:05:34,530
+Nó cũng được trang bị hệ thống đèn màu cảnh báo với cơ chế tương tự như Caries Meter.
+
+21
+00:05:34,730 --> 00:05:40,330
+Những hình ảnh này minh họa cho các thiết bị và công nghệ khác nhau mà thầy vừa nhắc đến.
+
+22
+00:05:40,430 --> 00:05:51,330
+Hình bên trái là máy theo dõi sâu răng điện tử, và loại gel các em thấy là một chất điện phân giúp truyền dẫn dòng điện cường độ thấp.
+
+23
+00:05:51,630 --> 00:06:00,730
+Còn thiết bị ở bên phải chính là dòng máy mới nhất, bao gồm Caries Scan và đầu dò Caries Scan.
+
+24
+00:06:01,030 --> 00:06:06,130
+Sau đó, chúng ta có một phương pháp đơn giản hơn, đó là dùng thuốc nhuộm phát hiện sâu răng.
+
+25
+00:06:06,430 --> 00:06:21,030
+Nguyên lý của thuốc nhuộm này là sử dụng chất chỉ thị protein, hay còn gọi là thuốc nhuộm protein không đặc hiệu, để nhuộm màu khuôn hữu cơ của phần ngà răng đã bị mất khoáng.
+
+26
+00:06:21,530 --> 00:06:29,830
+Điều này xuất phát từ thực tế là sâu ngà răng đồng nghĩa với việc ngà răng đã bị mất khoáng.
+
+27
+00:06:30,030 --> 00:06:38,930
+Quá trình mất khoáng này xảy ra do sâu răng đã phá hủy và lấy đi các tinh thể hydroxyapatite nằm xen kẽ trong lưới collagen.
+
+28
+00:06:39,130 --> 00:06:47,330
+Lúc này, lưới collagen sẽ bị lộ ra nhiều hơn và dễ dàng bị xâm nhập bởi các protein không đặc hiệu,
+
+29
+00:06:47,730 --> 00:06:50,330
+trong đó có cả protein của thuốc nhuộm.
+
+30
+00:06:50,630 --> 00:07:16,830
+Đó chính là cơ chế, do vậy công cụ này rất hữu ích để phát hiện ngà răng sâu có cấu trúc collagen bị phá hủy gần sát tủy; và phương pháp này chủ yếu được dùng để lấy sạch sâu răng không đau bằng kỹ thuật hóa cơ, như dùng Carisolv.
+
+31
+00:07:17,130 --> 00:07:23,730
+Đặc biệt là khi các em cần phân biệt giữa ngà răng bị ảnh hưởng và ngà răng bị nhiễm khuẩn.
+
+32
+00:07:24,030 --> 00:07:29,430
+Thuốc nhuộm này chỉ thấm vào hệ thống collagen của ngà răng đã bị mất khoáng và phá hủy.
+
+33
+00:07:29,830 --> 00:07:30,330
+Các em nắm được phần này chưa?
+
+34
+00:07:30,730 --> 00:07:56,330
+Kỹ thuật này cũng có thể dùng để chẩn đoán sâu mặt nhai, nhưng công dụng chính của nó là đánh giá mức độ tổn thương của lớp ngà cuối cùng ở sàn tủy, khi các em còn phân vân chưa đưa ra quyết định.
+
+35
+00:07:56,530 --> 00:08:21,830
+Khi các em đắn đo không biết nên lấy bỏ lớp ngà này đi và làm lộ tủy hay là giữ lại; quy trình này đòi hỏi phải bôi thuốc và nạo tổn thương nhiều lần, đầu tiên bôi thuốc nhuộm, sau đó bôi gel lấy sâu răng,
+
+36
+00:08:22,230 --> 00:08:46,430
+cho đến khi làm sạch hoặc làm biến tính collagen; đôi khi các em sẽ cần dùng một mũi khoan tròn chuyên dụng hoặc một loại chổi đặc biệt đi kèm với bộ sản phẩm.
+
+37
+00:08:46,730 --> 00:08:56,430
+Đây là hình ảnh cho thấy thuốc nhuộm bắt màu ngà răng như thế nào, và ở bức hình thứ hai là sau khi nó được làm sạch.
+
+38
+00:08:56,430 --> 00:09:09,630
+Sau đó, các em tiếp tục bôi thuốc nhuộm và gel lấy sâu răng cho đến khi ngà răng không còn bắt màu nữa, lúc này các em có thể an tâm bắt đầu trám răng.
+
+39
+00:09:10,030 --> 00:09:26,530
+Tiếp theo, chúng ta sẽ tìm hiểu một công nghệ chính xác và rõ ràng hơn nhiều, đó là huỳnh quang laser hay kỹ thuật huỳnh quang.
+
+40
+00:09:27,130 --> 00:09:49,030
+Hiện tượng huỳnh quang được định nghĩa là sự khuếch đại bước sóng phản xạ lớn hơn bước sóng phát ra; nghĩa là khi các em chiếu một ánh sáng có bước sóng nhất định vào vật thể, thì ánh sáng phản xạ lại,
+
+41
+00:09:49,030 --> 00:09:54,163
+sẽ có bước sóng lớn hơn, đó là lý do tạo ra hiệu ứng phát quang.
+
+42
+00:09:54,163 --> 00:10:01,830
+Mức độ phát huỳnh quang sẽ khác nhau tùy thuộc vào cấu trúc của từng vật liệu, kể cả cấu trúc răng cũng vậy.
+
+43
+00:10:01,830 --> 00:10:11,430
+Trên đời này không có vật liệu nào là không có tính huỳnh quang cả, nhưng cường độ huỳnh quang sẽ thay đổi tùy theo từng loại vật liệu.
+
+44
+00:10:11,430 --> 00:10:17,330
+Vì vậy, nguyên lý chính là cường độ ánh sáng huỳnh quang tỷ lệ thuận với lượng vật liệu phát quang; do đó sẽ có sự khác biệt giữa cấu trúc răng lành và răng sâu, và chúng ta có thể quan sát được điều này qua hệ thống định lượng bằng laser hoặc ánh sáng xanh cường độ cao.
+
+45
+00:10:17,730 --> 00:10:35,430
+Đó chính là nguyên lý hoạt động; chúng ta đang lợi dụng ánh sáng và lượng phản xạ của mô răng, thậm chí ở một số trường hợp là cả các chất chuyển hóa của vi khuẩn.
+
+46
+00:10:35,830 --> 00:10:46,330
+Dựa trên nguyên lý này, chúng ta có hai ví dụ hoặc hai công cụ.
+
+47
+00:10:46,630 --> 00:11:09,130
+Đó là máy Diagnodent sử dụng huỳnh quang laser argon, và máy huỳnh quang ánh sáng định lượng sử dụng ánh sáng xanh.
+
+48
+00:11:09,130 --> 00:11:18,930
+Thầy trò mình cùng bắt đầu với Diagnodent; bằng kỹ thuật này, mức độ mất khoáng ở vùng răng sâu có thể được đánh giá và đo lường bằng điểm số.
+
+49
+00:11:18,930 --> 00:11:26,330
+Tổn thương hoặc vùng mà các em nghi ngờ bị sâu răng sẽ được chiếu laser argon và từ đó phát ra huỳnh quang.
+
+50
+00:11:26,330 --> 00:11:39,930
+Ánh sáng huỳnh quang này được chuẩn trực và ghi lại qua camera, qua đó phản ánh sự khác biệt về độ phát quang giữa mô răng lành mạnh và mô răng bị sâu.
+
+51
+00:11:39,930 --> 00:11:51,630
+Máy có thể đo lường mức độ mất khoáng ban đầu ở các tổn thương men, ngà chưa tạo lỗ trên mặt ngoài hoặc mặt nhai, đồng thời đánh giá được hoạt động của vi khuẩn nhờ khả năng phát hiện huỳnh quang từ chất chuyển hóa của chúng tại vùng tổn thương.
+
+52
+00:11:52,230 --> 00:12:25,130
+Tia laser argon màu đỏ được truyền qua một chùm cáp quang đến đầu dò của tay khoan chuyên dụng; các đầu dò này có nhiều đường kính khác nhau, có thể hấp sấy vô trùng và được đặt trực tiếp lên bề mặt răng.
+
+53
+00:12:25,530 --> 00:12:46,330
+Sau đó ánh sáng laser sẽ xuyên qua răng, và sự chênh lệch huỳnh quang giữa men răng lành với men răng mất khoáng, cùng với huỳnh quang từ chất chuyển hóa của vi khuẩn, sẽ được thiết bị ghi lại dưới dạng số liệu định lượng,
+
+54
+00:12:46,730 --> 00:12:58,230
+về tình trạng sâu răng hiện tại kèm theo âm thanh cảnh báo; kết quả thu được sẽ là một con số định lượng thể hiện qua điểm số,
+
+55
+00:12:58,230 --> 00:13:03,630
+và đồng thời có tiếng bíp phát ra để báo động cho các em biết vùng đó có dấu hiệu bất thường.
+
+56
+00:13:03,630 --> 00:13:10,763
+Cường độ huỳnh quang được hiển thị bằng một con số với thang điểm dao động từ không đến chín mươi chín.
+
+57
+00:13:10,763 --> 00:13:15,430
+Số không cho thấy mức độ phát huỳnh quang tối thiểu, nghĩa là răng hoàn toàn lành mạnh.
+
+58
+00:13:15,430 --> 00:13:18,097
+Còn số chín mươi chín báo hiệu cường độ phát quang đạt mức tối đa.
+
+59
+00:13:18,097 --> 00:13:34,230
+Ngoài ra, thiết bị này được thiết kế dựa trên một cơ sở dữ liệu khổng lồ nhằm đối chiếu mức độ mất khoáng với điểm số tương ứng trả về.
+
+60
+00:13:34,230 --> 00:13:46,563
+Do đó, hệ thống sẽ so sánh chỉ số đo được với chỉ số của cấu trúc răng lành mạnh, và tự động tính toán sự chênh lệch dựa trên cơ sở dữ liệu được tích hợp sẵn.
+
+61
+00:13:46,563 --> 00:13:51,897
+Chỉ số từ mười đến hai mươi báo hiệu men răng bắt đầu bị mềm và cần được theo dõi sát sao.
+
+62
+00:13:51,897 --> 00:13:57,697
+Từ hai mươi mốt đến chín mươi chín thì chắc chắn vùng đó đã bị sâu và bắt buộc phải can thiệp điều trị,
+
+63
+00:13:57,697 --> 00:14:02,563
+tùy thuộc vào mức độ nghiêm trọng mà chỉ số sẽ xoay quanh mốc hai mươi hay sát mức chín mươi chín.
+
+64
+00:14:02,563 --> 00:14:09,430
+Thiết bị này có hai phiên bản: một phiên bản cổ điển và một phiên bản cầm tay nhỏ gọn mang tên Diagno Pen.
+
+65
+00:14:09,430 --> 00:14:15,097
+Chiếc máy ở bên trái là dòng cổ điển, còn hai thiết bị bên phải chính là dòng Diagno Pen.
+
+66
+00:14:15,097 --> 00:14:32,430
+Hình ngoài cùng bên phải cho thấy vỏ bọc có thể hấp sấy vô trùng để kiểm soát nhiễm khuẩn và tránh lây nhiễm chéo; phần đầu dò này cũng hấp sấy được, và mỗi máy đều đi kèm với nhiều loại đầu dò khác nhau,
+
+67
+00:14:32,430 --> 00:14:37,297
+đa dạng về chiều dài cũng như đường kính để các em dễ dàng tiếp cận các vị trí khác nhau trong khoang miệng.
+
+68
+00:14:37,297 --> 00:14:58,330
+Sơ đồ này minh họa sự khác biệt giữa thám trâm nha khoa và máy Diagnodent; điểm mấu chốt nằm ở tia laser argon, đây là chùm sáng đồng pha, được chuẩn trực và không bị phân kỳ,
+
+69
+00:14:58,330 --> 00:15:02,263
+không giống như ánh sáng thông thường, nó truyền đi theo một đường thẳng tắp.
+
+70
+00:15:02,263 --> 00:15:22,330
+Nhờ vậy mà tia laser có thể chiếu sâu tận đáy rãnh, trong khi thám trâm không thể lách hết toàn bộ rãnh được; đặc biệt nếu rãnh lớn ở dưới nhưng lại hẹp ở trên thì thám trâm sẽ bị kẹt lại, bỏ sót quá trình mất khoáng và hoạt động sâu răng đang diễn ra bên dưới như hình bên trái.
+
+71
+00:15:22,830 --> 00:15:40,830
+Ngược lại, chùm tia laser chuẩn trực và đồng pha hoàn toàn có thể xuyên thẳng xuống tận đáy rãnh mà không bị suy hao ánh sáng như các nguồn sáng thông thường.
+
+72
+00:15:41,230 --> 00:15:57,430
+Sau đó, ánh sáng huỳnh quang phản xạ từ mô răng sẽ truyền ngược trở lại đầu dò, và phát ra tín hiệu cảnh báo bằng âm thanh,
+
+73
+00:15:57,430 --> 00:15:59,230
+hoặc hiển thị thông số trên màn hình kỹ thuật số cho các em.
+
+74
+00:15:59,230 --> 00:16:21,530
+Chúng ta cùng xem lại những bức hình này nhé, đây là đầu dò của Diagno Pen và lớp vỏ bọc bên trái có thể thay thế được; cả hai bộ phận này đều có thể hấp sấy vô trùng.
+
+75
+00:16:21,530 --> 00:16:26,597
+Và bây giờ các em chỉ việc khởi động tia laser argon và chờ xem kết quả.
+
+76
+00:16:26,597 --> 00:16:37,330
+Thầy trò mình sẽ bàn về điểm số trả về nhé; tiếng bíp báo động chỉ để nhắc nhở các em rằng có dấu hiệu bất thường, nhưng các em phải thật sự chú ý đến thông số trên màn hình.
+
+77
+00:16:37,730 --> 00:16:48,830
+Con số hiện lên là bao nhiêu? Đối với sâu hố rãnh, nếu chỉ số nằm trong khoảng từ không đến mười hai thì đây vẫn là cấu trúc răng lành mạnh.
+
+78
+00:16:48,830 --> 00:16:52,363
+Còn đối với sâu mặt bên, chỉ số an toàn là từ không đến bảy.
+
+79
+00:16:52,363 --> 00:17:01,630
+Để chẩn đoán là men răng bắt đầu mất khoáng ở vùng hố rãnh, máy Diagnodent sẽ báo thông số từ mười ba đến hai mươi tư.
+
+80
+00:17:01,830 --> 00:17:18,330
+Trong khi đó, với sâu mặt bên, sự mất khoáng giai đoạn sớm được biểu thị bằng điểm số từ tám đến mười lăm.
+
+81
+00:17:18,330 --> 00:17:23,397
+Đây là những tiêu chuẩn được nhà sản xuất ghi rõ trong sách hướng dẫn sử dụng đi kèm với thiết bị.
+
+82
+00:17:23,397 --> 00:17:35,330
+Tuy nhiên, nếu chỉ số vượt mức hai mươi lăm đối với sâu hố rãnh và trên mười sáu đối với sâu mặt bên, điều này cho thấy tình trạng mất khoáng nghiêm trọng và cần tiến hành can thiệp điều trị ngay lập tức.
+
+83
+00:17:35,730 --> 00:17:39,130
+Chúng ta hãy cùng phân tích một vài ca lâm sàng cụ thể nhé.
+
+84
+00:17:39,630 --> 00:17:59,330
+Ở hình bên trái, hoàn toàn không thấy dấu hiệu sâu răng bằng mắt thường; nhưng sau khi thăm khám bằng Diagnodent, chúng ta phát hiện một lỗ sâu ẩn dưới vị trí này, và đây là hình ảnh sau khi mở tủy bằng mũi khoan tròn;
+
+85
+00:17:59,330 --> 00:18:02,397
+đây rõ ràng là một công cụ giúp phát hiện sâu răng rất sớm.
+
+86
+00:18:02,397 --> 00:18:22,330
+Và các em thấy kỹ thuật tạo xoang bảo tồn này đẹp mắt làm sao, chúng ta chỉ mài đúng phần răng bị tổn thương, lấy sạch sâu răng và xử lý toàn bộ các hố rãnh đã được phát hiện qua Diagnodent cũng như bức ảnh chụp xuyên sáng này.
+
+87
+00:18:22,730 --> 00:18:33,330
+Hình bên trên là chỉ định trám bít hố rãnh, và đây là kết quả sau khi đã điều trị bảo tồn răng tối đa.
+
+88
+00:18:33,730 --> 00:18:49,730
+Các em thử tưởng tượng xem chúng ta đã bảo tồn được nhiều mô răng đến mức nào; chuyển sang ca thứ nhất, hình số một, chiếc răng cối lớn thứ nhất hoàn toàn không thấy lỗ sâu.
+
+89
+00:18:50,030 --> 00:18:57,630
+Trên phim X-quang cũng không xuất hiện bất kỳ vùng thấu quang nào gợi ý là có sâu răng.
+
+90
+00:18:57,630 --> 00:19:01,297
+Như thầy trò mình đã thảo luận ở các tập trước.
+
+91
+00:19:01,297 --> 00:19:04,630
+Đó là chúng ta cần mức độ mất khoáng lên đến ít nhất bốn mươi phần trăm thì mới có thể nhìn thấy được trên phim X-quang.
+
+92
+00:19:05,130 --> 00:19:22,230
+Nhưng khi đo bằng Diagno Pen, máy hiển thị điểm số hai mươi tám, tức là răng đã ở giai đoạn mất khoáng, thậm chí là sâu răng đang tiến triển.
+
+93
+00:19:22,630 --> 00:19:42,030
+Chính vì thế, khi bác sĩ tiến hành mở lối vào qua trũng tam giác, họ đã phát hiện vùng ranh giới men ngà đang bắt đầu bị mất khoáng; tuy nhiên mức độ mất khoáng này vẫn chưa đủ,
+
+94
+00:19:42,330 --> 00:19:59,930
+để có thể chẩn đoán hay phát hiện ra, và một diễn biến nằm ngoài dự đoán đã xảy ra, báo hiệu đây là một tổn thương nghiêm trọng với điểm số lên tới chín mươi.
+
+95
+00:20:00,330 --> 00:20:14,230
+Khi bác sĩ mở rộng tổn thương này, như các em thấy ở hình số bốn, thực sự đây là một lỗ sâu răng rất nghiêm trọng.
+
+96
+00:20:14,630 --> 00:20:28,930
+Nó bị che khuất trên phim X-quang do hiện tượng chồng ảnh của các cấu trúc răng khác, và cũng rất khó quan sát bằng mắt thường vì tổn thương nằm ở mặt lưỡi và thuộc nhóm răng sau,
+
+97
+00:20:29,330 --> 00:20:35,330
+khiến cho các em không thể quan sát hay thăm khám một cách kỹ lưỡng được.
+
+98
+00:20:35,730 --> 00:20:48,330
+Sau đó, răng này đã được trám phục hồi bằng vật liệu dán dính với kỹ thuật bảo tồn tối đa có thể.
+
+99
+00:20:48,730 --> 00:21:04,930
+Một trường hợp khác là răng cối lớn thứ nhất hàm trên này; ảnh X-quang không cho thấy dấu hiệu sâu răng nào vì mức độ mất khoáng nằm ngoài,
+
+100
+00:21:05,330 --> 00:21:18,130
+vùng có thể nhận biết hoặc chưa đạt ngưỡng có thể phát hiện và phân biệt được trên phim X-quang, chắc chắn là dưới ngưỡng bốn mươi phần trăm.
+
+101
+00:21:18,530 --> 00:21:22,130
+Nhìn tiếp sang hình số ba,
+
+102
+00:21:22,530 --> 00:21:31,030
+máy Diagnodent báo kết quả lên đến ba mươi mốt.
+
+103
+00:21:31,430 --> 00:21:50,030
+Khi bác sĩ mở rãnh phía xa này ra, họ phát hiện lỗ sâu đã lan đến hoặc gần sát ranh giới men ngà; tình trạng này đòi hỏi phải can thiệp ngay bằng kỹ thuật sửa soạn xoang trám xâm lấn tối thiểu và bảo tồn mô răng.
+
+104
+00:21:50,430 --> 00:22:07,130
+Tiếp theo, chúng ta có một thiết bị khác cũng hoạt động dựa trên nguyên lý huỳnh quang, đó là máy kích phát huỳnh quang bằng ánh sáng định lượng.
+
+105
+00:22:07,530 --> 00:22:17,330
+Sự khác biệt cơ bản giữa hai công nghệ này là máy đầu tiên sử dụng huỳnh quang laser argon, còn máy này,
+
+106
+00:22:17,730 --> 00:22:36,530
+sử dụng khả năng tự phát huỳnh quang của mỗi răng khi được chiếu sáng, đặc biệt là với ánh sáng thuộc vùng quang phổ màu xanh.
+
+107
+00:22:36,930 --> 00:22:58,630
+Thiết bị này chiếu tập trung một luồng ánh sáng xanh cường độ cao lên bề mặt răng và đo lường mức độ tự phát huỳnh quang của mô răng; mức độ này sẽ khác nhau,
+
+108
+00:22:59,130 --> 00:23:08,930
+giữa mô lành mạnh và mô bị sâu, về cơ bản vẫn áp dụng chung một nguyên lý như trên.
+
+109
+00:23:09,330 --> 00:23:25,730
+Ánh sáng tự phát huỳnh quang này sau đó sẽ được một camera trong miệng chuyên dụng ghi lại và xử lý thành hình ảnh huỳnh quang.
+
+110
+00:23:26,130 --> 00:23:42,830
+Thông qua hình ảnh huỳnh quang đó, cường độ ánh sáng huỳnh quang phát ra sẽ tỉ lệ thuận với mức độ mất khoáng và hàm lượng khoáng chất trong mô răng, đặc biệt là ở lớp men răng.
+
+111
+00:23:43,230 --> 00:23:56,530
+Sự khác biệt về độ phát quang giữa mô răng lành và tổn thương sâu răng có thể được hiển thị định lượng trực quan bằng phương pháp kích phát huỳnh quang bằng ánh sáng,
+
+112
+00:23:56,930 --> 00:24:06,330
+đây được xem là một phương pháp định lượng rất hữu ích trong chẩn đoán sâu răng.
+
+113
+00:24:06,730 --> 00:24:16,830
+Mức độ mất khoáng sẽ tương ứng với sắc độ vùng tối mà các em quan sát được thông qua thiết bị.
+
+114
+00:24:17,230 --> 00:24:28,930
+Hình ảnh huỳnh quang này sẽ được truyền trực tiếp về máy tính, và một hệ thống phần mềm sẽ xử lý hình ảnh đó để cung cấp cho các em,
+
+115
+00:24:29,330 --> 00:24:43,630
+các thông số định lượng như diện tích, độ sâu và thể tích của tổn thương.
+
+116
+00:24:43,930 --> 00:24:50,030
+Thầy muốn các em đặc biệt lưu ý điều này và hãy ghi chép lại cẩn thận nhé.
+
+117
+00:24:50,430 --> 00:25:21,030
+Tất cả những bước tiến trong việc phát hiện sâu răng, dù là khám bằng mắt thường, chụp X-quang, hay dùng các công cụ hỗ trợ hiện đại, thì đều bắt nguồn từ sự phát triển của hệ thống kỹ thuật số và phần mềm xử lý hình ảnh.
+
+118
+00:25:21,330 --> 00:25:34,730
+Và để làm được điều đó, chúng ta phải nạp cho các phần mềm này một lượng dữ liệu khổng lồ nhằm thiết lập mối tương quan giữa,
+
+119
+00:25:35,130 --> 00:25:48,330
+biểu hiện lâm sàng của tổn thương sâu răng, mức độ mất khoáng, và cả những biến đổi mô học dự kiến dựa trên hình ảnh thu được.
+
+120
+00:25:48,730 --> 00:26:10,530
+Đây thực sự là một khối lượng công việc đồ sộ được thực hiện bởi đội ngũ xuất sắc các nhà dịch tễ học và chuyên gia về bệnh lý sâu răng trên toàn thế giới.
+
+121
+00:26:10,830 --> 00:26:22,330
+Nếu không có nguồn dữ liệu này, và nếu không nạp những dữ liệu đó vào hệ thống, thì phần mềm,
+
+122
+00:26:22,730 --> 00:26:35,330
+không thể nào sử dụng trí tuệ nhân tạo để phát hiện sâu răng chính xác được; và cho đến tận bây giờ, mọi bản cập nhật của các phần mềm này,
+
+123
+00:26:35,730 --> 00:26:52,530
+dành cho tất cả các thiết bị mà chúng ta đã thảo luận trong tập này cũng như tập trước, liên quan đến việc cải thiện chất lượng khám bằng mắt thường hoặc,
+
+124
+00:26:52,530 --> 00:26:57,463
+những tiến bộ mới nhất trong kỹ thuật chụp phim X-quang để phát hiện sâu răng,
+
+125
+00:26:57,463 --> 00:27:11,830
+đều không thể thực hiện được nếu không có nguồn dữ liệu cập nhật về mối liên hệ hay sự tương quan giữa biểu hiện lâm sàng, mức độ mất khoáng,
+
+126
+00:27:12,130 --> 00:27:18,330
+và biến đổi mô học của tổn thương.
+
+127
+00:27:18,630 --> 00:27:36,530
+Chính vì thế, đây là một trong những thiết bị sử dụng phần mềm, một phần mềm được xây dựng trên nền tảng trí tuệ nhân tạo,
+
+128
+00:27:36,930 --> 00:27:54,330
+có khả năng xác định vị trí, độ sâu và thể tích của tổn thương, dựa trên mối tương quan của tín hiệu huỳnh quang,
+
+129
+00:27:54,630 --> 00:28:10,330
+và những nỗ lực liên kết tín hiệu đó với từng đặc điểm cũng như các dạng lâm sàng khác nhau của bệnh lý sâu răng.
+
+130
+00:28:10,630 --> 00:28:36,730
+Những thông số này giúp chúng ta phát hiện và chẩn đoán phân biệt tổn thương từ rất sớm, đồng thời giúp hệ thống huỳnh quang ánh sáng định tính trở nên nhạy bén hơn trước những diễn tiến của bệnh lý sâu răng theo thời gian.
+
+131
+00:28:37,030 --> 00:28:46,730
+Máy sử dụng ánh sáng xanh ở bước sóng bốn trăm tám mươi tám nanomét để chiếu lên răng, thông thường răng sẽ phát ra huỳnh quang màu xanh lục dưới dải ánh sáng này.
+
+132
+00:28:47,130 --> 00:29:08,530
+Tuy nhiên, các em phải thổi khô răng hoàn toàn để loại bỏ ảnh hưởng của nước bọt lên tín hiệu huỳnh quang, bởi vì nếu không làm thật khô, tín hiệu huỳnh quang thu được,
+
+133
+00:29:08,830 --> 00:29:21,030
+sẽ bị lẫn lộn giữa huỳnh quang của nước bọt chứa các mảng vụn và protein, với huỳnh quang của cấu trúc răng.
+
+134
+00:29:21,330 --> 00:29:30,330
+Đó là lý do vì sao các em cần phải thổi răng thật sự, thật sự khô ráo; và trước khi thổi khô, tốt nhất là các em nên,
+
+135
+00:29:30,730 --> 00:29:43,030
+cạo cao răng và đánh bóng răng thật sạch sẽ.
+
+136
+00:29:43,330 --> 00:29:47,830
+Các em hiểu chưa? Nhưng nhược điểm của máy này là nó không phân biệt được giữa,
+
+137
+00:29:48,230 --> 00:30:01,330
+sâu răng và thiểu sản men răng vì cả hai đều là tình trạng mất khoáng; máy chỉ ghi nhận khả năng tự phát huỳnh quang từ vùng tổn thương trên răng,
+
+138
+00:30:01,730 --> 00:30:17,030
+để báo hiệu hiện tượng mất khoáng hoặc sự sụt giảm hàm lượng khoáng chất trong cấu trúc răng.
+
+139
+00:30:17,330 --> 00:30:31,030
+Vì vậy, các em vẫn bắt buộc phải kết hợp thêm các phương pháp thăm khám lâm sàng khác nhé.
+
+140
+00:30:31,330 --> 00:30:52,330
+Để có thể đưa ra quyết định chẩn đoán và phát hiện tổn thương sâu răng một cách chính xác nhất.
+
+141
+00:30:52,630 --> 00:31:07,130
+Bởi vì thiết bị này có một hạn chế là phạm vi đo lường của nó chỉ giới hạn ở mức vài trăm micromét tính từ bề mặt răng, đây là lớp có khả năng,
+
+142
+00:31:07,430 --> 00:31:13,030
+tạo ra hiện tượng tự phát huỳnh quang của cấu trúc răng.
+
+143
+00:31:13,330 --> 00:31:22,030
+Cho đến hiện tại, thiết bị này vẫn chưa thể tiếp cận được vùng kẽ răng, mà chỉ dùng được trên mặt nhai mà thôi.
+
+144
+00:31:22,330 --> 00:31:49,030
+Trái ngược với Diagnodent, dòng máy này đã được trang bị các đầu dò chuyên dụng có khả năng luồn lách vào vùng kẽ răng; và đây chính là thiết bị kích phát huỳnh quang bằng ánh sáng định lượng,
+
+145
+00:31:49,430 --> 00:32:16,830
+được kết nối trực tiếp với CPU máy tính, còn đây là tay khoan phát ra ánh sáng trong phổ màu xanh lục, và đồng thời được tích hợp sẵn một camera trong miệng.
+
+146
+00:32:17,230 --> 00:32:27,130
+Tiếp theo, chúng ta cùng xem xét ca lâm sàng với những chiếc răng trong hình A này nhé.
+
+147
+00:32:27,530 --> 00:32:36,630
+Có vẻ như răng hoàn toàn nguyên vẹn và khỏe mạnh, đúng không nào?
+
+148
+00:32:36,930 --> 00:32:51,330
+Nhưng khi thăm khám bằng hình ảnh dưới ánh sáng trắng và kết hợp với máy huỳnh quang ánh sáng định lượng,
+
+149
+00:32:51,630 --> 00:33:04,630
+các em có thể nhận thấy một vùng tối ở cổ răng, báo hiệu tình trạng mất khoáng đang diễn ra tại đây.
+
+150
+00:33:05,030 --> 00:33:20,130
+Và sau khi cải thiện vệ sinh răng miệng cũng như điều trị bằng fluoride trong vòng sáu tháng kết hợp với chương trình chăm sóc vệ sinh chuyên sâu,
+
+151
+00:33:20,530 --> 00:33:29,930
+một bức ảnh huỳnh quang khác đã được chụp lại bằng chính thiết bị này,
+
+152
+00:33:30,330 --> 00:33:43,030
+lúc này các em có thể đối chiếu hình B với hình C, rõ ràng là mức độ sậm màu đã giảm đi đáng kể.
+
+153
+00:33:43,330 --> 00:33:53,130
+Và bây giờ là một câu hỏi rất quan trọng mà thầy đoán là tất cả các em đều đang thắc mắc.
+
+154
+00:33:53,430 --> 00:34:02,130
+Với tư cách là một bác sĩ chuyên phục hồi, hay một giáo sư về nha khoa phục hồi,
+
+155
+00:34:02,530 --> 00:34:25,930
+giữa những thiết bị và công nghệ tiên tiến này, từ những cải tiến trong khám bằng mắt thường, chụp phim X-quang, cho đến các máy phát hiện sâu răng hiện đại, thầy thích sử dụng công cụ nào nhất?
+
+156
+00:34:26,330 --> 00:34:29,030
+Các em có nghĩ vậy không?
+
+157
+00:34:29,330 --> 00:34:32,330
+Thầy xin trả lời với các em rằng đây,
+
+158
+00:34:32,730 --> 00:34:40,030
+không phải là vấn đề cốt lõi.
+
+159
+00:34:40,330 --> 00:34:42,330
+Câu hỏi thực sự phải là, chúng ta áp dụng,
+
+160
+00:34:43,130 --> 00:34:52,330
+những công nghệ này cho đối tượng bệnh nhân nào?
+
+161
+00:34:52,630 --> 00:35:10,530
+Thật ra, thầy không thể dựa vào một trong những thiết bị này nếu không có hồ sơ bệnh án đầy đủ của bệnh nhân từ nhiều năm trước.
+
+162
+00:35:10,830 --> 00:35:28,130
+Vấn đề là, khi nào thì bệnh nhân mới chịu đến phòng khám của các em? Đây mới là rắc rối lớn nhất.
+
+163
+00:35:28,430 --> 00:35:41,130
+Thử hỏi có bao nhiêu bệnh nhân tự giác đi khám răng định kỳ, trước khi họ phải rên rỉ vì những cơn đau nhức dữ dội?
+
+164
+00:35:41,530 --> 00:35:52,230
+Đó mới là câu hỏi đáng suy ngẫm; phần lớn bệnh nhân của chúng ta, nhất là ở các trường đại học nha khoa, nơi luôn cung cấp,
+
+165
+00:35:52,530 --> 00:36:04,630
+dịch vụ chăm sóc sức khỏe miễn phí cho hầu hết người bệnh; và ngay cả ở các nước Ả Rập hay Ai Cập của chúng ta,
+
+166
+00:36:04,930 --> 00:36:20,130
+tính đến thời điểm hiện tại, văn hóa và ý thức đi khám răng định kỳ khi chưa có triệu chứng đau vẫn còn rất hạn chế ở bệnh nhân.
+
+167
+00:36:20,430 --> 00:36:31,930
+Không chỉ riêng trong nha khoa mà trong tất cả các dịch vụ y tế khác cũng vậy; đó là lý do vì sao hầu hết,
+
+168
+00:36:32,630 --> 00:36:58,130
+chín mươi chín phần trăm bệnh nhân tìm đến chúng ta khi lỗ sâu đã hiển hiện rõ mồn một trước mắt,
+
+169
+00:36:58,430 --> 00:37:05,130
+mà các em có thể dễ dàng thấy rõ lỗ sâu đó.
+
+170
+00:37:05,430 --> 00:37:25,530
+Với thực trạng văn hóa ở Ai Cập hay các nước Ả Rập, việc thăm khám sâu răng bằng mắt thường qua các phương pháp đơn giản là điều không hề khó khăn với các nha sĩ chúng ta.
+
+171
+00:37:25,830 --> 00:37:34,930
+Thậm chí chúng ta còn chẳng cần đến thám trâm, công cụ đắc lực nhất lúc này chỉ là thuốc nhuộm phát hiện sâu răng mà thôi.
+
+172
+00:37:35,330 --> 00:37:51,330
+Vì sao lại vậy? Vì đa phần các ca đều là sâu răng rất sâu; chúng ta cần phân biệt giữa ngà răng bị ảnh hưởng và ngà răng nhiễm khuẩn, để quyết định xem có nên lấy bỏ lớp ngà cuối cùng hay không.
+
+173
+00:37:51,630 --> 00:38:09,130
+Và chúng ta không cần phải làm phức tạp hóa quá trình điều trị để đánh đổi lấy rủi ro; chúng ta có thể cải thiện vệ sinh răng miệng cho họ, bởi vì điều này cũng phụ thuộc rất nhiều vào thái độ hợp tác của người bệnh.
+
+174
+00:38:09,430 --> 00:38:23,030
+Đến tận bây giờ, việc đánh giá nguy cơ sâu răng mang lại nhiều lợi ích và cung cấp cho chúng ta một lượng thông tin vô giá; đối với cá nhân thầy,
+
+175
+00:38:23,330 --> 00:38:52,330
+nếu thầy sở hữu một trong những thiết bị hiện đại này, những bệnh nhân duy nhất mà thầy có thể áp dụng chính là các con của thầy; bởi vì với tư cách là một nha sĩ, thầy luôn kiểm tra răng miệng cho chúng hàng ngày hoặc chí ít là hàng tuần, đó vừa là sự quan tâm của thầy vừa vì đó là con thầy.
+
+176
+00:38:52,630 --> 00:39:05,130
+Thầy chỉ áp dụng cho hai đứa thôi, đó là con trai và con gái thầy, đơn giản vậy thôi; còn nếu không thì,
+
+177
+00:39:05,430 --> 00:39:15,330
+thầy cũng chẳng biết khi nào bệnh nhân mới chịu tìm đến mình nữa.
+
+178
+00:39:15,630 --> 00:39:34,330
+Trừ khi người dân có thói quen đi khám định kỳ mỗi ba đến sáu tháng; thậm chí khi chúng ta tiến hành đánh giá nguy cơ sâu răng và khuyên bệnh nhân,
+
+179
+00:39:34,730 --> 00:39:46,330
+quay lại tái khám và đánh giá lại sau mỗi ba hoặc sáu tháng, thì điều đó cũng hiếm khi xảy ra trong thực tế.
+
+180
+00:39:46,730 --> 00:39:51,330
+Chuyện này thực sự không bao giờ xảy ra đâu các em.
+
+181
+00:39:51,630 --> 00:39:58,330
+Tỷ lệ những người hoặc bệnh nhân tuân thủ tuyệt đối theo lời dặn của bác sĩ đến mức đó,
+
+182
+00:39:58,730 --> 00:40:02,330
+và thật sự kiên trì làm theo, liệu được bao nhiêu phần trăm?
+
+183
+00:40:02,630 --> 00:40:24,330
+Đó là lý do tại sao thầy không sử dụng bất kỳ công cụ nào trong số này, không phải vì chúng không tốt đâu.
+
+184
+00:40:24,730 --> 00:40:43,330
+Đó đều là những thiết bị và công nghệ tuyệt vời để phát hiện tổn thương sâu răng giai đoạn sớm; nhưng vấn đề cốt lõi vẫn là bao giờ thì bệnh nhân mới đến gặp các em để được chẩn đoán.
+
+185
+00:40:43,630 --> 00:40:53,330
+Đó mới là dấu hỏi lớn. Cuối cùng, đây là danh sách những quyển sách giáo khoa mà thầy đã dùng để chuẩn bị cho bài giảng này,
+
+186
+00:40:53,730 --> 00:41:16,330
+Các em cứ thoải mái đặt câu hỏi bất cứ lúc nào nhé, thầy rất hoan nghênh; cứ bình luận ngay bên dưới video này và thầy sẽ giải đáp nhanh nhất có thể.
+
+187
+00:41:16,730 --> 00:41:26,330
+Và đây là thông tin liên lạc của thầy nếu các em cần trao đổi thêm.
+
+188
+00:41:26,730 --> 00:41:40,330
+Lời cuối cùng, thầy muốn cảm ơn các em đã dành thời gian lắng nghe bài giảng; đừng quên đăng ký kênh và bật thông báo để không bỏ lỡ những tập mới nhất nhé.
+
+189
+00:41:40,730 --> 00:41:41,330
+Cảm ơn các em.
+
+190
+00:41:41,730 --> 00:41:42,330
+Yasser Al-Nasif.
