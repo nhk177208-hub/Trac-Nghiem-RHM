@@ -1174,15 +1174,6 @@
         .ws-row-acts { display: flex; align-items: center; gap: .25rem; flex: none; }
         .ws-bar { flex: 0 0 44px; height: 4px; border-radius: 3px; background: #fde68a; overflow: hidden; }
         .ws-bar i { display: block; height: 100%; background: #2563eb; }
-
-        /* ===== VIDEO CÓ THUYẾT MINH MP3: ẩn các mục dành cho TTS ===== */
-        .custom-yt-wrapper.mp3-mode .custom-yt-subpanel .sp-row:has(.narr-voice-select),
-        .custom-yt-wrapper.mp3-mode .custom-yt-subpanel .sp-row:has(.narr-pitch-range),
-        .custom-yt-wrapper.mp3-mode .custom-yt-subpanel .sp-row:has(.narr-rate-range),
-        .custom-yt-wrapper.mp3-mode .custom-yt-subpanel .sp-row:has(.narr-sync-video),
-        .custom-yt-wrapper.mp3-mode .custom-yt-subpanel .sp-row:has(button[onclick="narrGuideOpen()"]),
-        .custom-yt-wrapper.mp3-mode .custom-yt-subpanel .sp-note,
-        .custom-yt-wrapper.mp3-mode .custom-yt-subpanel button[onclick="narrTest()"] { display: none !important; }
     </style>
 
 
@@ -8405,10 +8396,6 @@
             return (match && match[1].length === 11) ? match[1] : null;
         }
 
-        function isMp3Link(l) {
-            l = String(l || '').trim();
-            return /^https?:\/\/(drive\.google\.com|drive\.usercontent\.google\.com|docs\.google\.com)\//i.test(l) || /^https?:\/\/\S+\.mp3(\?\S*)?$/i.test(l);
-        }
         function parseVideoTxt(content) {
             if (!content) return [];
             const lines = content.replace(/\r\n?/g, '\n').split('\n').map(l => l.trim()).filter(Boolean);
@@ -8417,16 +8404,14 @@
             while (i < lines.length) {
                 const titleLine = lines[i];
                 let linkLine = (i + 1 < lines.length) ? lines[i + 1] : '';
-                const mp3Line = (i + 2 < lines.length && extractYouTubeId(linkLine) && isMp3Link(lines[i + 2])) ? lines[i + 2] : '';
                 
                 if (/^https?:\/\//i.test(linkLine)) {
                     lessons.push({
                         title: titleLine,
                         url: linkLine,
-                        videoId: extractYouTubeId(linkLine),
-                        mp3: mp3Line
+                        videoId: extractYouTubeId(linkLine)
                     });
-                    i += mp3Line ? 3 : 2;
+                    i += 2;
                 } else {
                     const m = titleLine.match(/(https?:\/\/[^\s]+)/i);
                     if (m) {
@@ -8848,7 +8833,7 @@
                     </div>
 
                     <div id="video-wrapper-${playerId}" class="hidden pt-2">
-                        <div id="custom-wrapper-${playerId}" class="custom-yt-wrapper pre-play shadow-2xl relative${lesson.mp3 ? ' mp3-mode' : ''}" oncontextmenu="return false;">
+                        <div id="custom-wrapper-${playerId}" class="custom-yt-wrapper pre-play shadow-2xl relative" oncontextmenu="return false;">
                             <div class="custom-yt-stage">
                                 <div class="custom-yt-screen">
                                     <div id="${playerId}"></div>
@@ -8966,7 +8951,7 @@
                     </div>
                 `;
                 container.appendChild(card);
-                lessonSrtInfo[playerId] = { folder: lesson.srtFolder || '', title: lesson.title, mp3: lesson.mp3 || '' };
+                lessonSrtInfo[playerId] = { folder: lesson.srtFolder || '', title: lesson.title };
                 registerLessonQuiz(playerId, lesson, index);
             });
             applySubCfg();
@@ -9138,8 +9123,7 @@
                 videoId: videoId,
                 isSeeking: false,
                 ccActive: subsPref,
-                mp3Url: (lessonSrtInfo[playerId] || {}).mp3 || '',
-                narrOn: !!((lessonSrtInfo[playerId] || {}).mp3) || ('speechSynthesis' in window),   // mặc định bật lồng tiếng
+                narrOn: ('speechSynthesis' in window),   // mặc định bật lồng tiếng
                 srtCues: [], srtState: 'loading', subTimer: null, srtLastIdx: -1,
                 ccUserSet: false,
                 ccTrack: null,
@@ -9441,13 +9425,13 @@
                 data.srtVi = vi || []; data.srtEn = en || [];
                 data.srtCues = vi || en; data.srtLang = vi ? 'vi' : 'en';   // srtCues = bản dùng cho AI / lồng tiếng (ưu tiên tiếng Việt)
                 data.srtState = 'ready'; data.srtLastIdx = -1;
-                if (!vi && data.narrOn && !data.mp3Url) { data.narrOn = false; try { window.speechSynthesis.cancel(); } catch (e) {} applyYtVolume(playerId); paintNarrButton(playerId); }
+                if (!vi && data.narrOn) { data.narrOn = false; try { window.speechSynthesis.cancel(); } catch (e) {} applyYtVolume(playerId); paintNarrButton(playerId); }
                 paintCcButton(playerId, data.ccActive);
                 subRefresh(playerId);
                 return;
             }
             data.srtState = 'none';
-            if (data.narrOn && !data.mp3Url) { data.narrOn = false; try { window.speechSynthesis.cancel(); } catch (e) {} applyYtVolume(playerId); paintNarrButton(playerId); }   // bài chưa có sub: không lồng tiếng được
+            if (data.narrOn) { data.narrOn = false; try { window.speechSynthesis.cancel(); } catch (e) {} applyYtVolume(playerId); paintNarrButton(playerId); }   // bài chưa có sub: không lồng tiếng được
             paintCcButton(playerId, data.ccActive);
             subRefresh(playerId);
         }
@@ -9861,18 +9845,12 @@
             const btn = document.getElementById(`narr-btn-${playerId}`); if (!btn) return;
             const d = activeYtPlayers[playerId], on = !!(d && d.narrOn);
             btn.className = on ? NARR_ON_CLASS : CC_OFF_CLASS;
-            btn.innerHTML = '<span class="yt-ic">🎙</span><span class="yt-lbl"> ' + (d && d.mp3Url ? 'Thuyết minh' : 'Lồng tiếng') + ': ' + (on ? 'Bật' : 'Tắt') + '</span>';
+            btn.innerHTML = '<span class="yt-ic">🎙</span><span class="yt-lbl"> Lồng tiếng: ' + (on ? 'Bật' : 'Tắt') + '</span>';
         }
         function toggleNarration(playerId) {
             const d = activeYtPlayers[playerId];
             if (!d || !d.player) { showToast('Hãy bấm Video bài giảng để mở video trước'); return; }
             lastActivePlayerId = playerId; showControlsDirectly(playerId); resetInactivityTimer(playerId);
-            if (d.mp3Url) {
-                d.narrOn = !d.narrOn;
-                if (d.narrOn) { mp3Ensure(playerId, d); showToast('Đã bật thuyết minh (file mp3)'); }
-                else { try { if (d.mp3A) d.mp3A.pause(); } catch (e) {} showToast('Đã tắt thuyết minh'); }
-                applyYtVolume(playerId); paintNarrButton(playerId); return;
-            }
             if (!('speechSynthesis' in window)) { showToast('Trình duyệt không hỗ trợ lồng tiếng (đọc to)'); return; }
             if (!d.narrOn) {
                 if (d.srtState === 'loading') { showToast('Đang tải phụ đề, thử lại sau vài giây'); return; }
@@ -10187,7 +10165,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             if (typeof YT !== 'undefined' && YT.PlayerState) {
                 for (const id in activeYtPlayers) {
                     const d = activeYtPlayers[id];
-                    if (!d || !d.narrOn || d.mp3Url || !d.player || typeof d.player.getPlayerState !== 'function') continue;
+                    if (!d || !d.narrOn || !d.player || typeof d.player.getPlayerState !== 'function') continue;
                     let st = -1; try { st = d.player.getPlayerState(); } catch (e) {}
                     if (st === YT.PlayerState.PLAYING) { act = { id, d }; break; }
                 }
@@ -10219,48 +10197,6 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             }
             if (video) narrBalanceVideo(d, t, now); else narrEffLabel('');
         }
-        /* ===== THUYẾT MINH BẰNG FILE MP3 (Google Drive): thay cho TTS khi video có link mp3 ===== */
-        const mp3Live = [];
-        function mp3Sources(link) {
-            link = String(link || '');
-            const m = link.match(/\/d\/([\w-]{15,})/) || link.match(/[?&]id=([\w-]{15,})/);
-            if (m) return ['https://drive.usercontent.google.com/download?id=' + m[1] + '&export=download&confirm=t', 'https://drive.google.com/uc?export=download&id=' + m[1]];
-            return [link];
-        }
-        function mp3Ensure(id, d) {
-            if (d.mp3A) return d.mp3A;
-            const srcs = mp3Sources(d.mp3Url), a = new Audio(); let k = 0;
-            a.preload = 'auto'; a.referrerPolicy = 'no-referrer';
-            a.addEventListener('error', () => {
-                if (d.mp3Dead) return;
-                if (k + 1 < srcs.length) { k++; a.src = srcs[k]; }
-                else if (!d.mp3Err) { d.mp3Err = 1; showToast('⚠️ Không tải được file mp3 thuyết minh (link Drive cần chia sẻ "Bất kỳ ai có đường liên kết")'); }
-            });
-            a.src = srcs[0]; d.mp3A = a; mp3Live.push({ id: id, d: d, a: a });
-            return a;
-        }
-        function mp3Tick() {
-            for (let i = mp3Live.length - 1; i >= 0; i--) {   // dọn audio của player đã bị hủy
-                const e = mp3Live[i];
-                if (activeYtPlayers[e.id] !== e.d) { e.d.mp3Dead = 1; try { e.a.pause(); e.a.removeAttribute('src'); e.a.load(); } catch (x) {} mp3Live.splice(i, 1); }
-            }
-            Object.keys(activeYtPlayers).forEach(id => {
-                const d = activeYtPlayers[id];
-                if (!d || !d.mp3Url || !d.player || typeof d.player.getPlayerState !== 'function') return;
-                if (!d.narrOn) { if (d.mp3A && !d.mp3A.paused) d.mp3A.pause(); return; }
-                const a = mp3Ensure(id, d);
-                let st = -1, t = 0, rate = 1;
-                try { st = d.player.getPlayerState(); t = d.player.getCurrentTime() || 0; rate = d.player.getPlaybackRate() || 1; } catch (x) { return; }
-                try { a.volume = narrVolume(); } catch (x) {}
-                if (st !== 1) { if (!a.paused) a.pause(); return; }
-                if (a.readyState >= 1) {
-                    if (Math.abs(a.currentTime - t) > 0.4) { try { a.currentTime = t; } catch (x) {} }
-                    if (Math.abs(a.playbackRate - rate) > 0.01) { try { a.playbackRate = rate; } catch (x) {} }
-                }
-                if (a.paused) { const p = a.play(); if (p && p.catch) p.catch(() => {}); }
-            });
-        }
-        setInterval(mp3Tick, 150);
         setInterval(narrTick, 100);
 
         // Đẩy phụ đề lên ngay phía trên bảng cài đặt
