@@ -1,0 +1,751 @@
+1
+00:00:37,472 --> 00:00:41,272
+Chào mừng các em, thầy là Yasser Ossaily từ chuỗi bài giảng Nha khoa.[cite: 2]
+
+2
+00:00:41,732 --> 00:00:47,882
+Trong tập này, chúng ta sẽ tiếp tục thảo luận về chẩn đoán và lập kế hoạch điều trị trong nha khoa phục hồi.[cite: 2]
+
+3
+00:00:48,332 --> 00:01:03,482
+Thầy xin khẳng định là thầy không nhận thù lao hay tiền bản quyền từ bất kỳ sản phẩm nào được nhắc đến, và bài giảng này hoàn toàn vì mục đích giáo dục.[cite: 2]
+
+4
+00:01:04,202 --> 00:01:12,442
+Bài giảng này đã được bảo vệ bản quyền và không được phép truyền tải dưới bất kỳ hình thức nào nếu chưa có sự cho phép trước của tác giả.[cite: 2]
+
+5
+00:01:13,112 --> 00:01:23,002
+Chúng ta vẫn đang thảo luận về cách chẩn đoán chính xác bệnh lý sâu răng bằng các kỹ thuật và công cụ phát hiện khác nhau.[cite: 2]
+
+6
+00:01:23,002 --> 00:01:34,292
+Ở phần đầu của chủ đề này, chúng ta đã bàn về đánh giá bệnh nhân và thu thập thông tin cá nhân, lý do đến khám, tiền sử y khoa và tiền sử nha khoa.[cite: 2]
+
+7
+00:01:34,522 --> 00:01:57,692
+Sau đó chúng ta chuyển sang khám lâm sàng, và cho đến lúc này chúng ta vẫn đang hoàn thiện phần khám và phát hiện sâu răng, bao gồm các phương pháp truyền thống như khám bằng mắt, bằng xúc giác, chụp X-quang, cũng như những tiến bộ của các kỹ thuật này.[cite: 2]
+
+8
+00:01:57,852 --> 00:02:12,752
+Trong tập trước, thầy trò mình đã thảo luận chi tiết về các tổn thương sâu răng tiến triển, cũng như tính hợp lệ và độ tin cậy của việc sử dụng các thiết bị phát hiện tiên tiến.[cite: 2]
+
+9
+00:02:13,012 --> 00:02:20,122
+Hôm nay, để hoàn thiện bức tranh toàn cảnh về phát hiện sâu răng, chúng ta sẽ cùng tìm hiểu về đánh giá nguy cơ sâu răng.[cite: 2]
+
+10
+00:02:20,652 --> 00:02:35,482
+Như chúng ta đã bàn, chẩn đoán không chỉ là phát hiện có hay không có lỗ sâu, mà còn phải xác định được các yếu tố gây ra và làm phát triển tổn thương đó.[cite: 2]
+
+11
+00:02:35,482 --> 00:02:56,512
+Bởi vì vai trò của các em không chỉ là điều trị lỗ sâu hiện tại, mà còn phải đảm bảo tiên lượng thành công cho miếng trám, cũng như ngăn ngừa hình thành lỗ sâu mới.[cite: 2]
+
+12
+00:02:56,882 --> 00:03:05,692
+Đó là lý do tại sao chúng ta phải thu thập mọi dữ liệu về môi trường và các điều kiện liên quan đến tổn thương sâu răng này.[cite: 2]
+
+13
+00:03:05,902 --> 00:03:19,462
+Các em cần tìm hiểu những yếu tố nào dẫn đến tổn thương, tại sao nó lại mãn tính hay cấp tính, đang tiến triển hay ngừng tiến triển, và làm thế nào để điều trị nó một cách hợp lý.[cite: 2]
+
+14
+00:03:19,462 --> 00:03:23,512
+Các em rõ chưa, đó chính là lý do chúng ta đang bàn về đánh giá nguy cơ sâu răng lúc này.[cite: 2]
+
+15
+00:03:23,512 --> 00:03:34,902
+Trước khi đi sâu vào xem đánh giá nguy cơ sâu răng là gì và thực hiện ra sao, thầy trò mình hãy bắt đầu với các yếu tố nguy cơ.[cite: 2]
+
+16
+00:03:35,792 --> 00:03:44,202
+Đánh giá nguy cơ sâu răng là một phần quan trọng trong toàn bộ quy trình chăm sóc bệnh nhân như chúng ta đã thảo luận.[cite: 2]
+
+17
+00:03:44,202 --> 00:04:04,422
+Vì vậy, các em phải thu thập đầy đủ dữ liệu từ việc thăm khám và phỏng vấn người bệnh để có cái nhìn tổng quan về các yếu tố nguy cơ của họ, cũng như cách xác định các yếu tố dương tính.[cite: 2]
+
+18
+00:04:04,422 --> 00:04:11,832
+Nói chung, theo hệ thống quản lý và phân loại sâu răng quốc tế thì chúng ta sẽ phân ra các cấp độ.[cite: 2]
+
+19
+00:04:20,672 --> 00:04:33,742
+Ở cấp độ bệnh nhân, các em cần thu thập dữ liệu liên quan đến bản thân họ, bao gồm cả thái độ và những kinh nghiệm trước đây của họ đối với các dịch vụ y tế.[cite: 2]
+
+20
+00:04:33,742 --> 00:04:44,382
+Còn ở cấp độ trong miệng, chúng ta chỉ quan tâm đến xoang sâu, cũng như tình trạng và mối liên quan của răng với các yếu tố môi trường khác trong khoang miệng.[cite: 2]
+
+21
+00:04:44,602 --> 00:04:48,332
+Hãy bắt đầu với các yếu tố nguy cơ sâu răng ở cấp độ bệnh nhân.[cite: 2]
+
+22
+00:04:48,812 --> 00:05:01,812
+Yếu tố nguy hiểm nhất và nghiêm trọng nhất chính là tia xạ, khi bệnh nhân cho biết họ đã từng xạ trị vùng đầu và cổ.[cite: 2]
+
+23
+00:05:01,812 --> 00:05:12,502
+Điều này ảnh hưởng đến nhiều tuyến nước bọt chính và làm giảm tiết nước bọt, từ đó tác động xấu đến hệ vi khuẩn trong miệng cũng như sức khỏe tổng thể của người bệnh.[cite: 2]
+
+24
+00:05:12,722 --> 00:05:26,542
+Đó là lý do một khi bệnh nhân báo cáo đã từng xạ trị đầu cổ, họ sẽ tự động được xếp vào nhóm nguy cơ cao.[cite: 2]
+
+25
+00:05:26,792 --> 00:05:30,932
+Được phân loại là bệnh nhân có nguy cơ sâu răng cao nhé các em.[cite: 2]
+
+26
+00:05:31,252 --> 00:05:45,392
+Tiếp theo là tình trạng khô miệng, có thể do vấn đề tại chỗ, do thuốc, do sử dụng chất kích thích, hoặc do bệnh nhân tự báo cáo.[cite: 2]
+
+27
+00:05:45,392 --> 00:05:47,462
+Các em hiểu chứ?[cite: 2]
+
+28
+00:05:47,782 --> 00:06:01,912
+Về mảng vệ sinh răng miệng kém, đó là khi bệnh nhân không hề thực hiện các biện pháp vệ sinh phòng ngừa như dùng chỉ nha khoa, hoặc đánh răng không thường xuyên.[cite: 2]
+
+29
+00:06:02,162 --> 00:06:02,662
+Và vân vân.[cite: 2]
+
+30
+00:06:02,942 --> 00:06:03,552
+Được chưa nào?[cite: 2]
+
+31
+00:06:03,882 --> 00:06:15,522
+Thiếu tiếp xúc với fluoride bôi tại chỗ, khi bệnh nhân của các em không dùng fluoride mà lại thường xuyên tiêu thụ nhiều đồ uống có đường và ăn vặt.[cite: 2]
+
+32
+00:06:15,522 --> 00:06:15,822
+Các em theo kịp không?[cite: 2]
+
+33
+00:06:16,482 --> 00:06:33,912
+Và khi các em hỏi về lý do đến khám cùng với tiền sử nha khoa, họ sẽ nói rằng họ chỉ tìm đến phòng khám khi gặp phải vấn đề quá lớn không thể tự giải quyết.[cite: 2]
+
+34
+00:06:33,912 --> 00:06:38,002
+Đây được gọi là đi khám răng dựa trên triệu chứng.[cite: 2]
+
+35
+00:06:38,252 --> 00:06:55,222
+Nếu các em nhớ lại lúc chúng ta bàn về tiền sử nha khoa ở tập đầu, thầy đã nói rằng nó rất quan trọng vì nó phản ánh mức độ quan tâm của bệnh nhân.[cite: 2]
+
+36
+00:06:55,222 --> 00:07:05,152
+Cũng như văn hóa y tế, văn hóa nha khoa và những kiến thức nha khoa mà họ có về tầm quan trọng của việc chẩn đoán sớm.[cite: 2]
+
+37
+00:07:05,412 --> 00:07:15,562
+Tình trạng kinh tế xã hội cũng đóng vai trò lớn, vì kinh tế thấp chính là rào cản trong việc tiếp cận các dịch vụ y tế.[cite: 2]
+
+38
+00:07:15,562 --> 00:07:30,202
+Đó là lý do bệnh nhân có thể trì hoãn điều trị và chỉ đi khám khi có triệu chứng đau đớn vì điều kiện kinh tế của họ.[cite: 2]
+
+39
+00:07:30,202 --> 00:07:37,472
+Đối với trẻ em, yếu tố nguy cơ là tiền sử sâu răng nhiều của mẹ hoặc người chăm sóc.[cite: 2]
+
+40
+00:07:37,472 --> 00:07:44,202
+Điều này phản ánh thái độ của gia đình và mức độ quan tâm của người mẹ hoặc người chăm sóc đối với việc bảo vệ răng cho trẻ.[cite: 2]
+
+41
+00:07:44,822 --> 00:07:56,192
+Và giờ chúng ta sẽ chuyển sang khám lâm sàng để đánh giá các yếu tố nguy cơ sâu răng ở cấp độ trong miệng.[cite: 2]
+
+42
+00:07:56,552 --> 00:07:59,612
+Số một là tình trạng giảm tiết nước bọt.[cite: 2]
+
+43
+00:08:00,612 --> 00:08:04,722
+Đây là dấu hiệu rõ ràng nhất của chứng khô miệng.[cite: 2]
+
+44
+00:08:05,122 --> 00:08:14,612
+Và chỉ số pufa cũng là một chỉ báo quan trọng mỗi khi bệnh nhân bị giảm tiết nước bọt.[cite: 2]
+
+45
+00:08:14,932 --> 00:08:20,102
+Và bất cứ khi nào chỉ số pufa của bệnh nhân tăng cao.[cite: 2]
+
+46
+00:08:20,102 --> 00:08:34,932
+Như thầy trò mình đã thảo luận, nó liên quan đến hở tủy, loét, lỗ rò, áp xe hay các tình trạng nhiễm trùng nha khoa do di chứng của sâu răng không được điều trị.[cite: 2]
+
+47
+00:08:34,932 --> 00:08:45,362
+Khi cả hai yếu tố này đều cao, bệnh nhân sẽ tự động được xem là người có nguy cơ sâu răng cao.[cite: 2]
+
+48
+00:08:45,742 --> 00:08:57,292
+Vậy là hiện tại chúng ta có ba yếu tố chính giúp phân loại bệnh nhân ngay mà không cần phải đi vào quá nhiều chi tiết.[cite: 2]
+
+49
+00:08:57,292 --> 00:09:02,822
+Để xếp họ vào nhóm bệnh nhân có nguy cơ sâu răng cao.[cite: 2]
+
+50
+00:09:02,822 --> 00:09:14,652
+Số một, ở cấp độ bệnh nhân, đó là những người đang xạ trị vùng đầu và cổ.[cite: 2]
+
+51
+00:09:14,652 --> 00:09:30,822
+Số hai, ở cấp độ trong miệng, là bệnh nhân bị giảm tiết nước bọt hoặc có chỉ số pufa cao.[cite: 2]
+
+52
+00:09:31,052 --> 00:09:47,382
+Tiếp theo, tiền sử sâu răng và các tổn thương đang tiến triển cũng sẽ chỉ ra bệnh nhân thuộc nhóm nguy cơ cao hay thấp dựa trên số lượng lỗ sâu mà các em tìm thấy.[cite: 2]
+
+53
+00:09:47,782 --> 00:10:04,992
+Sau đó là sự hiện diện của mảng bám dày màu đen, bằng chứng của màng sinh học dính chặt phản ánh mức độ vệ sinh răng miệng mà bệnh nhân đang thực hiện.[cite: 2]
+
+54
+00:10:05,152 --> 00:10:20,252
+Đôi khi nếu các em hỏi trực tiếp bệnh nhân về các biện pháp vệ sinh răng miệng, họ sẽ trả lời rằng họ có đánh răng thường xuyên.[cite: 2]
+
+55
+00:10:20,252 --> 00:10:30,082
+Thực ra họ không hề nói dối đâu, họ nói thật đấy, nhưng có thể họ đang dùng sai loại bàn chải hoặc đánh răng sai kỹ thuật.[cite: 2]
+
+56
+00:10:30,082 --> 00:10:42,512
+Như chỉ đánh răng cửa, không dùng nước súc miệng, không dùng tăm, và cũng không hề dùng chỉ nha khoa.[cite: 2]
+
+57
+00:10:42,512 --> 00:10:52,282
+Và họ cứ đinh ninh rằng với cách đánh răng như vậy là họ đã giữ gìn vệ sinh răng miệng rất tốt rồi.[cite: 2]
+
+58
+00:10:52,282 --> 00:11:05,212
+Nhưng thực tế khi khám lâm sàng, các em lại thấy bệnh nhân có rất nhiều mảng bám dày, điều đó có nghĩa là vấn đề vệ sinh răng miệng của họ nghiêm trọng hơn họ tưởng rất nhiều.[cite: 2]
+
+59
+00:11:06,122 --> 00:11:09,612
+Ngoài ra, sự hiện diện của các khí cụ hoặc miếng trám răng.[cite: 2]
+
+60
+00:11:09,612 --> 00:11:17,392
+Cũng gây tăng khả năng tích tụ màng sinh học, cùng với tình trạng răng chen chúc và sai khớp cắn.[cite: 2]
+
+61
+00:11:17,392 --> 00:11:31,752
+Đó là lý do chỉnh nha rất quan trọng, không chỉ vì tính thẩm mỹ, mà nó còn là cách để tái lập lại tương quan tốt giữa các răng với nhau.[cite: 2]
+
+62
+00:11:31,752 --> 00:11:44,752
+Nhờ vậy, nó giúp vệ sinh dễ dàng hơn nhiều và làm giảm sự ứ đọng của các carbohydrate gây sâu răng.[cite: 2]
+
+63
+00:11:44,752 --> 00:11:49,702
+Và tình trạng lộ chân răng cũng làm tăng nguy cơ sâu răng nhé các em.[cite: 2]
+
+64
+00:11:50,052 --> 00:11:54,602
+Đó là những yếu tố nguy cơ sâu răng mà chúng ta đang tìm kiếm và cố gắng thu thập dữ liệu.[cite: 2]
+
+65
+00:11:54,852 --> 00:12:02,132
+Làm thế nào chúng ta có thể thu thập những dữ liệu này để xác định chính xác đánh giá nguy cơ sâu răng cho người bệnh?[cite: 2]
+
+66
+00:12:02,132 --> 00:12:05,102
+Cách thứ nhất là dùng biểu mẫu đánh giá nguy cơ sâu răng của Hiệp hội Nha khoa Hoa Kỳ.[cite: 2]
+
+67
+00:12:05,652 --> 00:12:08,572
+Đây là phương pháp đơn giản và phổ biến nhất.[cite: 2]
+
+68
+00:12:08,572 --> 00:12:42,532
+Các em sẽ có một biểu mẫu được chia thành các phần và ba cột chính; nếu câu trả lời nằm ở cột đầu tiên thì đó là nguy cơ thấp, được đánh mã màu xanh lá như các em thấy trong hình này.[cite: 2]
+
+69
+00:12:42,532 --> 00:12:56,882
+Đây là hình ảnh của biểu mẫu đánh giá nguy cơ sâu răng theo Hiệp hội Nha khoa Hoa Kỳ mà thầy trò mình sẽ thảo luận chi tiết ngay sau đây.[cite: 2]
+
+70
+00:12:56,882 --> 00:13:04,992
+Tiếp đến, nếu câu trả lời của các em nằm ở cột thứ hai được đánh mã màu vàng.[cite: 2]
+
+71
+00:13:05,192 --> 00:13:16,032
+Thì đó là nguy cơ trung bình, còn nếu rơi vào cột màu đỏ hoặc hồng nhạt thì đó là nguy cơ cao.[cite: 2]
+
+72
+00:13:16,032 --> 00:13:30,982
+Bây giờ chúng ta sẽ bàn về phần đầu tiên bao gồm dữ liệu chung của người bệnh, tên, ngày sinh, tuổi, ngày đánh giá và chữ viết tắt tên người bệnh.[cite: 2]
+
+73
+00:13:30,982 --> 00:13:35,492
+Đây là những dữ liệu nhân khẩu học thường quy mà các em vẫn thu thập từ tất cả bệnh nhân của mình.[cite: 2]
+
+74
+00:13:35,802 --> 00:13:41,012
+Sau đó mới đến phần đánh giá nguy cơ sâu răng của chúng ta.[cite: 2]
+
+75
+00:13:41,012 --> 00:14:02,392
+Phần đầu tiên liên quan đến các yếu tố góp phần, bao gồm mức độ tiếp xúc với fluoride, tần suất và lượng thức ăn hoặc đồ uống có đường như nước trái cây, nước ngọt có ga và không ga.[cite: 2]
+
+76
+00:14:02,582 --> 00:14:26,592
+Cùng với tiền sử sâu răng của mẹ hoặc người chăm sóc đối với trẻ từ sáu đến mười bốn tuổi, và thói quen chăm sóc răng miệng tại nhà do bệnh nhân tự báo cáo so với lời khuyên của nha sĩ.[cite: 2]
+
+77
+00:14:27,172 --> 00:14:32,492
+Và các em sẽ cho bệnh nhân trả lời phần này là có hay không?[cite: 2]
+
+78
+00:14:32,492 --> 00:14:38,252
+Thường xuyên hay không thường xuyên, và không có lỗ sâu nào trong hai mươi bốn tháng qua.[cite: 2]
+
+79
+00:14:38,442 --> 00:14:46,332
+Và đó là ba cột để các em phân loại câu trả lời của người bệnh xem họ thuộc nhóm nguy cơ thấp, nguy cơ trung bình hay nguy cơ cao.[cite: 2]
+
+80
+00:14:46,852 --> 00:14:52,922
+Tiếp theo là phần thứ hai mô tả về tình trạng sức khỏe tổng thể.[cite: 2]
+
+81
+00:14:52,922 --> 00:15:10,232
+Các em nhớ nhé, tất cả những thông tin nãy giờ đều thuộc về yếu tố cấp độ bệnh nhân, chúng ta vẫn chưa chuyển sang khám lâm sàng và các yếu tố trong miệng đâu.[cite: 2]
+
+82
+00:15:10,532 --> 00:15:21,052
+Nhóm này bao gồm sức khỏe tổng quát, các nhu cầu chăm sóc sức khỏe đặc biệt như khuyết tật về phát triển hay tâm thần ảnh hưởng đến việc tự chăm sóc.[cite: 2]
+
+83
+00:15:21,052 --> 00:15:27,082
+Nghĩa là bệnh nhân của các em có khả năng tự chăm sóc sức khỏe và đặc biệt là vệ sinh răng miệng như thế nào.[cite: 2]
+
+84
+00:15:27,422 --> 00:15:36,422
+Về hóa trị hoặc xạ trị, như các em thấy trong mục hóa trị hoặc xạ trị, câu trả lời sẽ là không hoặc có.[cite: 2]
+
+85
+00:15:36,702 --> 00:15:46,202
+Chỉ có nguy cơ thấp hoặc nguy cơ cao chứ không có mức trung gian, bởi vì như thầy đã nói, bệnh nhân xạ trị vùng đầu và cổ sẽ tự động bị xếp vào nhóm nguy cơ cao.[cite: 2]
+
+86
+00:15:46,462 --> 00:15:52,482
+Tiếp theo là rối loạn ăn uống, bệnh nhân có mắc chứng rối loạn ăn uống hay không.[cite: 2]
+
+87
+00:15:52,792 --> 00:15:59,332
+Yếu tố này không bị xếp vào mức nguy cơ cao, mà chỉ dao động giữa mức thấp và trung bình.[cite: 2]
+
+88
+00:15:59,562 --> 00:16:03,222
+Các loại thuốc làm giảm tiết nước bọt.[cite: 2]
+
+89
+00:16:03,582 --> 00:16:07,412
+Hay việc lạm dụng ma túy hoặc rượu bia.[cite: 2]
+
+90
+00:16:07,602 --> 00:16:11,752
+Tất cả những yếu tố từ nãy đến giờ đều là các yếu tố nguy cơ ở cấp độ bệnh nhân.[cite: 2]
+
+91
+00:16:12,392 --> 00:16:17,372
+Sau đó mới đến các tình trạng lâm sàng cuối cùng liên quan đến yếu tố cấp độ trong miệng.[cite: 2]
+
+92
+00:16:17,372 --> 00:16:32,482
+Bao gồm các tổn thương đã tạo lỗ hoặc chưa tạo lỗ, lỗ sâu hoặc miếng trám răng, số lượng của chúng trong ít nhất ba mươi sáu tháng qua là bao nhiêu, không có tổn thương nào, có một hoặc hai, hay có từ ba trở lên.[cite: 2]
+
+93
+00:16:32,742 --> 00:16:39,192
+Tình trạng mất răng do sâu răng trong vòng ba năm qua, và mảng bám có thể nhìn thấy bằng mắt thường.[cite: 2]
+
+94
+00:16:39,542 --> 00:16:47,342
+Tiếp theo là hình thái răng bất thường làm tăng khả năng tích tụ mảng bám và ứ đọng thức ăn.[cite: 2]
+
+95
+00:16:47,342 --> 00:16:55,772
+Tình trạng lộ chân răng, miếng trám bị dư hoặc hở bờ, hở tiếp điểm, hay mang khí cụ nha khoa, đặc biệt là khí cụ chỉnh nha.[cite: 2]
+
+96
+00:16:56,282 --> 00:17:02,162
+Chứng khô miệng (xerostomia) nghiêm trọng, và sau đó là phần cuối cùng, đó là đánh giá tổng thể ca bệnh.[cite: 2]
+
+97
+00:17:02,522 --> 00:17:07,712
+Đánh giá ở mức thấp, trung bình hay cao rất đơn giản.[cite: 2]
+
+98
+00:17:07,712 --> 00:17:16,882
+Chỉ cần tất cả câu trả lời của các em đều nằm ở cột màu xanh lá, thì đó là nguy cơ thấp.[cite: 2]
+
+99
+00:17:16,882 --> 00:17:26,542
+Nếu chỉ cần một câu trả lời dịch sang cột màu vàng bên phải, thì bệnh nhân sẽ được xếp loại là nguy cơ trung bình.[cite: 2]
+
+100
+00:17:26,542 --> 00:17:36,542
+Nếu người bệnh có dù chỉ một câu trả lời rơi vào cột nguy cơ cao, thì họ sẽ bị xếp ngay vào nhóm bệnh nhân có nguy cơ cao.[cite: 2]
+
+101
+00:17:37,002 --> 00:17:43,742
+Và trong biểu mẫu này, các em có thể ghi lại những hướng dẫn hoặc lời khuyên dành cho bệnh nhân dựa trên những gì họ còn thiếu sót và tình trạng tồi tệ nhất của họ là gì.[cite: 2]
+
+102
+00:17:44,202 --> 00:17:51,362
+Ví dụ nếu bệnh nhân ghi nhận rằng họ không được bổ sung fluoride và bị xếp vào nhóm nguy cơ cao.[cite: 2]
+
+103
+00:17:51,682 --> 00:18:03,412
+Tiếp theo là phần thứ hai mô tả về tình trạng sức khỏe tổng thể; các em nhớ nhé, tất cả những thông tin nãy giờ đều thuộc về yếu tố cấp độ bệnh nhân.[cite: 2]
+
+104
+00:18:03,412 --> 00:18:13,972
+Chúng ta vẫn chưa chuyển sang thăm khám lâm sàng và các yếu tố trong miệng đâu.[cite: 2]
+
+105
+00:18:14,332 --> 00:18:27,532
+Nhóm này bao gồm sức khỏe tổng quát, các nhu cầu chăm sóc sức khỏe đặc biệt như khuyết tật về phát triển hay tâm thần ảnh hưởng đến việc tự chăm sóc.[cite: 2]
+
+106
+00:18:27,532 --> 00:18:32,482
+Nghĩa là bệnh nhân của các em có khả năng tự chăm sóc sức khỏe và đặc biệt là vệ sinh răng miệng như thế nào.[cite: 2]
+
+107
+00:18:32,482 --> 00:18:35,812
+Về hóa trị hoặc xạ trị thì sao?[cite: 2]
+
+108
+00:18:36,192 --> 00:18:47,382
+Đánh giá nguy cơ sâu răng là một phần quan trọng trong toàn bộ quy trình chăm sóc bệnh nhân như chúng ta đã thảo luận.[cite: 2]
+
+109
+00:18:47,382 --> 00:18:59,032
+Vì vậy, các em phải thu thập đầy đủ dữ liệu phù hợp từ việc thăm khám và phỏng vấn người bệnh.[cite: 2]
+
+110
+00:18:59,032 --> 00:19:07,122
+Để có cái nhìn tổng quan về các yếu tố nguy cơ của họ, cũng như cách xác định các yếu tố dương tính.[cite: 2]
+
+111
+00:19:07,122 --> 00:19:11,832
+Nói chung, theo hệ thống quản lý và phân loại sâu răng quốc tế.[cite: 2]
+
+112
+00:19:12,382 --> 00:19:22,652
+Các yếu tố nguy cơ sâu răng được chia thành hai nhóm: yếu tố cấp độ bệnh nhân và yếu tố cấp độ trong miệng.[cite: 2]
+
+113
+00:19:22,652 --> 00:19:35,322
+Ở cấp độ bệnh nhân, các em cần thu thập dữ liệu liên quan đến bản thân họ, bao gồm cả thái độ và những kinh nghiệm trước đây của họ.[cite: 2]
+
+114
+00:19:35,322 --> 00:19:47,162
+Đối với các dịch vụ y tế, còn ở cấp độ trong miệng, chúng ta chỉ quan tâm đến xoang sâu, cũng như tình trạng và mối liên quan của răng với các yếu tố môi trường khác trong khoang miệng.[cite: 2]
+
+115
+00:19:47,162 --> 00:19:59,372
+Hãy bắt đầu với các yếu tố nguy cơ ở cấp độ bệnh nhân, yếu tố nguy hiểm nhất chính là tia xạ, khi bệnh nhân cho biết họ đã từng xạ trị vùng đầu và cổ.[cite: 2]
+
+116
+00:19:59,372 --> 00:20:09,682
+Điều này ảnh hưởng đến nhiều tuyến nước bọt chính và làm giảm tiết nước bọt, từ đó tác động xấu đến hệ vi khuẩn trong miệng cũng như sức khỏe tổng thể của người bệnh.[cite: 2]
+
+117
+00:20:09,682 --> 00:20:19,462
+Đó là lý do một khi bệnh nhân báo cáo đã từng xạ trị đầu cổ, họ sẽ tự động được xếp vào nhóm nguy cơ cao.[cite: 2]
+
+118
+00:20:19,462 --> 00:20:25,962
+Được phân loại là bệnh nhân có nguy cơ sâu răng cao nhé các em.[cite: 2]
+
+119
+00:20:25,962 --> 00:20:39,912
+Tiếp theo là tình trạng khô miệng, có thể do vấn đề tại chỗ, do thuốc, do sử dụng chất kích thích, hoặc do bệnh nhân tự báo cáo.[cite: 2]
+
+120
+00:20:39,912 --> 00:20:41,282
+Các em hiểu chứ?[cite: 2]
+
+121
+00:20:41,872 --> 00:20:56,592
+Về mảng vệ sinh răng miệng kém, đó là khi bệnh nhân không hề thực hiện các biện pháp vệ sinh phòng ngừa như dùng chỉ nha khoa hoặc đánh răng thường xuyên.[cite: 2]
+
+122
+00:20:56,592 --> 00:20:59,422
+Hay đánh răng không thường xuyên, vân vân.[cite: 2]
+
+123
+00:20:59,622 --> 00:21:00,672
+Các em theo kịp không?[cite: 2]
+
+124
+00:21:00,912 --> 00:21:10,592
+Thiếu tiếp xúc với fluoride bôi tại chỗ, khi bệnh nhân của các em không dùng fluoride mà lại thường xuyên tiêu thụ nhiều đồ uống có đường và ăn vặt.[cite: 2]
+
+125
+00:21:10,592 --> 00:21:10,972
+Được chưa nào?[cite: 2]
+
+126
+00:21:11,452 --> 00:21:26,562
+Và khi các em hỏi về lý do đến khám cùng với tiền sử nha khoa, họ sẽ nói rằng họ chỉ tìm đến phòng khám khi gặp phải vấn đề quá lớn không thể tự giải quyết.[cite: 2]
+
+127
+00:21:26,562 --> 00:21:30,982
+Đây được gọi là đi khám răng dựa trên triệu chứng.[cite: 2]
+
+128
+00:21:31,252 --> 00:21:42,592
+Nếu các em nhớ lại lúc chúng ta bàn về tiền sử nha khoa ở tập đầu, thầy đã nói rằng nó rất quan trọng.[cite: 2]
+
+129
+00:21:42,592 --> 00:21:55,222
+Vì nó phản ánh mức độ quan tâm của bệnh nhân, cũng như văn hóa y tế, văn hóa nha khoa và những kiến thức nha khoa mà họ có về tầm quan trọng của việc chẩn đoán sớm.[cite: 2]
+
+130
+00:21:55,222 --> 00:21:56,592
+Các em hiểu chứ?[cite: 2]
+
+131
+00:21:56,592 --> 00:27:06,122
+Tình trạng kinh tế xã hội cũng đóng vai trò lớn, vì kinh tế thấp chính là rào cản trong việc tiếp cận các dịch vụ y tế.[cite: 2]
+
+132
+00:27:06,122 --> 00:27:16,222
+Đó là lý do bệnh nhân có thể trì hoãn điều trị và chỉ đi khám khi có triệu chứng đau đớn vì điều kiện kinh tế của họ.[cite: 2]
+
+133
+00:27:16,222 --> 00:27:21,542
+Đối với trẻ em, yếu tố nguy cơ là tiền sử sâu răng nhiều của mẹ hoặc người chăm sóc.[cite: 2]
+
+134
+00:27:21,542 --> 00:27:28,012
+Điều này phản ánh thái độ của gia đình và mức độ quan tâm của người mẹ hoặc người chăm sóc.[cite: 2]
+
+135
+00:27:28,012 --> 00:27:30,632
+Đối với việc bảo vệ răng cho trẻ.[cite: 2]
+
+136
+00:27:30,632 --> 00:27:31,052
+Các em đồng ý không?[cite: 2]
+
+137
+00:27:31,422 --> 00:27:36,562
+Và giờ chúng ta sẽ chuyển sang khám lâm sàng để đánh giá các yếu tố nguy cơ.[cite: 2]
+
+138
+00:27:36,562 --> 00:27:39,192
+Ở cấp độ trong miệng.[cite: 2]
+
+139
+00:27:39,542 --> 00:27:42,522
+Số một là tình trạng giảm tiết nước bọt.[cite: 2]
+
+140
+00:27:43,082 --> 00:27:46,542
+Đây là dấu hiệu rõ ràng nhất của chứng khô miệng.[cite: 2]
+
+141
+00:27:46,542 --> 00:27:54,602
+Và chỉ số pufa cũng là một chỉ báo quan trọng mỗi khi bệnh nhân bị giảm tiết nước bọt.[cite: 2]
+
+142
+00:27:54,602 --> 00:28:00,672
+Và bất cứ khi nào chỉ số pufa của bệnh nhân tăng cao.[cite: 2]
+
+143
+00:28:00,672 --> 00:28:16,222
+Như thầy trò mình đã thảo luận, nó liên quan đến hở tủy, loét, lỗ rò, áp xe hay các tình trạng nhiễm trùng nha khoa do di chứng của sâu răng không được điều trị.[cite: 2]
+
+144
+00:28:16,222 --> 00:28:20,592
+Khi cả hai yếu tố này đều cao, thì người bệnh cũng.[cite: 2]
+
+145
+00:28:20,592 --> 00:28:34,932
+Sẽ tự động được xem là bệnh nhân có nguy cơ sâu răng cao; vậy là hiện tại chúng ta có ba yếu tố chính giúp phân loại bệnh nhân ngay mà không cần.[cite: 2]
+
+146
+00:28:35,322 --> 00:28:45,362
+Phải đi vào quá nhiều chi tiết để xếp họ vào nhóm bệnh nhân có nguy cơ sâu răng cao.[cite: 2]
+
+147
+00:28:45,362 --> 00:28:53,622
+Số một, ở cấp độ bệnh nhân, đó là những người đang xạ trị vùng đầu và cổ.[cite: 2]
+
+148
+00:28:53,622 --> 00:29:06,122
+Số hai, ở cấp độ trong miệng, là bệnh nhân bị giảm tiết nước bọt hoặc có chỉ số pufa cao.[cite: 2]
+
+149
+00:29:06,122 --> 00:29:15,542
+Tiếp theo, tiền sử sâu răng và các tổn thương đang tiến triển cũng sẽ chỉ ra bệnh nhân thuộc nhóm nguy cơ cao.[cite: 2]
+
+150
+00:29:15,542 --> 00:29:28,012
+Hay thấp dựa trên số lượng lỗ sâu mà các em tìm thấy; sau đó là sự hiện diện của mảng bám dày màu đen.[cite: 2]
+
+151
+00:29:28,012 --> 00:29:38,202
+Bằng chứng của màng sinh học dính chặt phản ánh mức độ vệ sinh răng miệng mà người bệnh.[cite: 2]
+
+152
+00:29:38,202 --> 00:29:45,192
+Đang thực hiện; đôi khi nếu các em hỏi trực tiếp bệnh nhân về các biện pháp vệ sinh răng miệng của họ.[cite: 2]
+
+153
+00:29:45,192 --> 00:29:56,592
+Họ sẽ trả lời rằng họ có đánh răng thường xuyên; thực ra họ không hề nói dối đâu, họ nói thật đấy.[cite: 2]
+
+154
+00:29:56,592 --> 00:30:04,932
+Nhưng có thể họ đang dùng sai loại bàn chải hoặc đánh răng sai kỹ thuật như chỉ đánh răng cửa.[cite: 2]
+
+155
+00:30:04,932 --> 00:30:16,882
+Họ không dùng nước súc miệng, không dùng tăm, và cũng không hề dùng chỉ nha khoa; và họ cứ đinh ninh rằng với cách đánh răng như vậy.[cite: 2]
+
+156
+00:30:17,382 --> 00:30:26,542
+Là họ đã giữ gìn vệ sinh răng miệng rất tốt rồi; nhưng thực tế khi khám lâm sàng, các em lại thấy.[cite: 2]
+
+157
+00:30:26,542 --> 00:30:35,882
+Bệnh nhân có rất nhiều mảng bám dày, điều đó có nghĩa là vấn đề vệ sinh răng miệng của họ nghiêm trọng hơn họ tưởng rất nhiều.[cite: 2]
+
+158
+00:30:35,882 --> 00:30:43,252
+Ngoài ra, sự hiện diện của các khí cụ hoặc miếng trám răng cũng gây tăng khả năng tích tụ màng sinh học.[cite: 2]
+
+159
+00:30:43,682 --> 00:30:52,382
+Cùng với tình trạng răng chen chúc và sai khớp cắn; đó là lý do chỉnh nha rất quan trọng, không chỉ vì tính thẩm mỹ.[cite: 2]
+
+160
+00:30:52,382 --> 00:31:00,672
+Mà nó còn là cách để tái lập lại tương quan tốt giữa các răng với nhau.[cite: 2]
+
+161
+00:31:00,672 --> 00:31:06,592
+Nhờ vậy, nó giúp việc vệ sinh răng miệng trở nên dễ dàng hơn rất nhiều.[cite: 2]
+
+162
+00:31:06,592 --> 00:31:21,012
+Và làm giảm sự ứ đọng của các carbohydrate gây sâu răng; ngoài ra tình trạng lộ chân răng cũng làm tăng nguy cơ sâu răng.[cite: 2]
+
+163
+00:31:21,252 --> 00:31:25,592
+Đó là những yếu tố nguy cơ sâu răng mà chúng ta đang tìm kiếm.[cite: 2]
+
+164
+00:31:25,592 --> 00:31:36,562
+Và cố gắng thu thập dữ liệu; vậy làm thế nào để thu thập những dữ liệu này nhằm xác định chính xác đánh giá nguy cơ sâu răng cho người bệnh?[cite: 2]
+
+165
+00:31:36,562 --> 00:31:40,672
+Cách thứ nhất là dùng biểu mẫu đánh giá nguy cơ sâu răng của Hiệp hội Nha khoa Hoa Kỳ.[cite: 2]
+
+166
+00:31:41,222 --> 00:31:44,202
+Đây là phương pháp đơn giản và phổ biến nhất hiện nay.[cite: 2]
+
+167
+00:31:44,202 --> 00:31:52,482
+Các em sẽ có một biểu mẫu được chia thành các phần và đồng thời.[cite: 2]
+
+168
+00:31:52,482 --> 00:32:00,592
+Được chia thành ba cột chính; nếu câu trả lời nằm ở cột đầu tiên.[cite: 2]
+
+169
+00:32:00,592 --> 00:32:10,592
+Thì đó là nguy cơ thấp, được đánh mã màu xanh lá như các em thấy trong phần này hay trong bức hình này.[cite: 2]
+
+170
+00:32:10,592 --> 00:32:20,592
+Đây là hình ảnh của biểu mẫu đánh giá nguy cơ sâu răng theo Hiệp hội Nha khoa Hoa Kỳ mà thầy trò mình sẽ thảo luận chi tiết ngay sau đây.[cite: 2]
+
+171
+00:32:20,592 --> 00:32:30,382
+Tiếp đến, nếu câu trả lời của các em nằm ở cột thứ hai được đánh mã màu vàng, thì đó là nguy cơ trung bình.[cite: 2]
+
+172
+00:32:30,382 --> 00:32:36,562
+Còn nếu rơi vào cột màu đỏ hoặc hồng nhạt thì đó là nguy cơ cao.[cite: 2]
+
+173
+00:32:36,562 --> 00:32:45,392
+Bây giờ chúng ta sẽ bàn về phần đầu tiên bao gồm dữ liệu chung của người bệnh như tên, ngày sinh, tuổi.[cite: 2]
+
+174
+00:32:45,392 --> 00:32:49,252
+Ngày đánh giá và chữ viết tắt tên người bệnh.[cite: 2]
+
+175
+00:32:49,252 --> 00:32:54,672
+Đây là những dữ liệu nhân khẩu học thường quy mà các em vẫn thường thu thập từ tất cả bệnh nhân của mình.[cite: 2]
+
+176
+00:32:54,892 --> 00:32:57,252
+Sau đó mới đến phần đánh giá nguy cơ sâu răng của chúng ta.[cite: 2]
+
+177
+00:32:57,652 --> 00:33:10,222
+Phần đầu tiên liên quan đến các yếu tố góp phần, bao gồm mức độ tiếp xúc với fluoride, tần suất và lượng thức ăn hoặc đồ uống có đường như nước trái cây.[cite: 2]
+
+178
+00:33:10,222 --> 00:33:23,592
+Nước ngọt có ga và không ga, cùng với tiền sử sâu răng của mẹ hoặc người chăm sóc đối với trẻ từ sáu đến mười bốn tuổi.[cite: 2]
+
+179
+00:33:23,592 --> 00:33:30,632
+Và thói quen chăm sóc răng miệng tại nhà do bệnh nhân tự báo cáo so với lời khuyên của nha sĩ.[cite: 2]
+
+180
+00:33:31,252 --> 00:33:35,882
+Và các em sẽ cho bệnh nhân trả lời phần này là có hay không?[cite: 2]
+
+181
+00:33:35,882 --> 00:33:41,012
+Thường xuyên hay không thường xuyên, và không có lỗ sâu nào trong hai mươi bốn tháng qua.[cite: 2]
+
+182
+00:33:41,252 --> 00:33:51,522
+Và đó là ba cột để các em phân loại câu trả lời của người bệnh xem họ thuộc nhóm nguy cơ thấp.[cite: 2]
+
+183
+00:33:51,522 --> 00:33:55,332
+Nguy cơ trung bình hay nguy cơ cao.[cite: 2]
+
+184
+00:33:55,332 --> 00:34:04,992
+Tiếp theo là phần thứ hai mô tả về tình trạng sức khỏe tổng thể.[cite: 2]
+
+185
+00:34:04,992 --> 00:34:11,832
+Các em nhớ nhé, tất cả những thông tin nãy giờ đều thuộc về yếu tố cấp độ bệnh nhân.[cite: 2]
+
+186
+00:34:11,832 --> 00:34:20,592
+Chúng ta vẫn chưa chuyển sang khám lâm sàng và các yếu tố trong miệng đâu.[cite: 2]
+
+187
+00:34:20,592 --> 00:34:32,482
+Nhóm này bao gồm sức khỏe tổng quát, các nhu cầu chăm sóc sức khỏe đặc biệt như khuyết tật về phát triển hay tâm thần ảnh hưởng đến việc tự chăm sóc.[cite: 2]
+
+188
+00:34:32,482 --> 00:34:37,472
+Nghĩa là bệnh nhân của các em có khả năng tự chăm sóc
