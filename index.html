@@ -9284,7 +9284,7 @@ async function bkDetectChapter() {
         }
     } finally { btn.disabled = false; btn.textContent = '📑 Nhận diện mục lục'; }
     // Phần đầu trang 1 trước tiêu đề đầu tiên (giới thiệu/mở đầu) luôn có mục để bấm tới
-    if (found.length && found[0].s > 300) found.unshift({ title: 'Mở đầu', en: 'Introduction', num: '', lvl: 1, s: 0, e: 0, text: '', intro: true });
+    if (found.length && found[0].s > 0) found.unshift({ title: 'Mở đầu', en: 'Introduction', num: '', lvl: 1, s: 0, e: 0, text: '', intro: true });
     if (found.length) {
         bkSecs = bkMergeSecs(found, bkSecs.filter(x => x.manual));
         bkRelink();
@@ -9316,7 +9316,7 @@ function bkEnsureSecGrip() {
 function bkNumbers() {
     const c = [0, 0, 0, 0, 0]; const out = [];
     bkSecs.forEach(s => {
-        if (s.intro) { out.push(''); return; }
+        if (s.intro) { out.push('0'); return; }
         if (s.manual) { out.push(s.num || ''); return; }
         const L = Math.max(1, Math.min(4, s.lvl || 1));
         c[L]++; for (let k = L + 1; k < 5; k++) c[k] = 0;
@@ -9514,6 +9514,7 @@ function bkOpenAi() {
             }
 
 bkPrepare(subject);
+            if (parentSubject) { const bkb = document.getElementById('bk-open-btn'); if (bkb) bkb.classList.add('hidden'); }
             const hasVideo = !!subject.videoPath;
             lessonsContainer.classList.toggle('hidden', showSubs && !hasVideo);
 
