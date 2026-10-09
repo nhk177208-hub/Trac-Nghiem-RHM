@@ -8889,9 +8889,22 @@ async function bkExtract(doc, tok, onProg) {
     raw.forEach(pg => {
         const W = pg.w, body = pg.its.filter(it => !it.hf);
         // Quy luật đọc: cột trái (đầu → cuối trang) → cột phải (đầu → cuối trang) → sang trang sau (cột trái)
-        // Hình, khung, bảng không làm đảo thứ tự vì chỉ phân theo vị trí bắt đầu của từng dòng chữ
         const byYX = (a, b) => b.y - a.y || a.x - b.x;
-        const ord = body.filter(it => it.x < W * 0.5).sort(byYX).concat(body.filter(it => it.x >= W * 0.5).sort(byYX));
+        let ord = body.filter(it => it.x < W * 0.5).sort(byYX).concat(body.filter(it => it.x >= W * 0.5).sort(byYX));
+        // Bỏ khối "CHAPTER OUTLINE": mọi dòng ngắn từ nhãn đến dòng thân bài dài đầu tiên ở cột trái (cả hai cột)
+        const lab = ord.find(it => /^chapter outline$/i.test(it.str.trim()));
+        if (lab) {
+            const firstLong = ord.filter(it => it.x < W * 0.5 && it.y < lab.y).sort(byYX).find(it => it.str.trim().length > 70);
+            const yb = firstLong ? firstLong.y : -Infinity;
+            ord = ord.filter(it => !(it.y <= lab.y && it.y > yb && it.str.trim().length <= 70));
+        }
+        // Bỏ chú thích hình/bảng/tên ảnh và các dòng đáp án dạng bảng (A, … B, … )
+        ord = ord.filter(it => {
+            const t = it.str.trim();
+            if (/^(table|tbl\.?|fig\.?|figure|hình|bảng|sơ đồ|ảnh)\s*\d/i.test(t)) return false;
+            if (/^[A-Ea-e][,.)]\s/.test(t)) return false;
+            return true;
+        });
         const col = it => it.x < W * 0.5 ? 0 : 1;   // đổi cột thì xuống dòng
         const base = G.length; let txt = ''; let prev = null; const rg = {};
         ord.forEach(it => {
@@ -9050,12 +9063,12 @@ const BK_TR = {
 };
 const BK_TR_GLOSS = ' Thuật ngữ RHM theo chuẩn giảng dạy miền Nam Việt Nam: nướu (không dùng "lợi"), răng cối (không dùng "răng hàm"), răng cối nhỏ (tiền cối), răng cối lớn, răng khôn, răng nanh, răng cửa, men răng, ngà răng, tủy răng, buồng tủy, ống tủy, chóp chân răng, cổ răng, thân răng, xương ổ răng, mô nha chu, viêm nha chu, sâu răng, khớp thái dương hàm, cung hàm, khớp cắn, phục hình, cầu răng, mão răng, trụ implant. '
     + 'Khi gặp số răng theo hệ Mỹ (Universal, 1–32) thì đổi sang hệ FDI hai chữ số theo bảng: 1→18, 2→17, 3→16, 4→15, 5→14, 6→13, 7→12, 8→11, 9→21, 10→22, 11→23, 12→24, 13→25, 14→26, 15→27, 16→28, 17→38, 18→37, 19→36, 20→35, 21→34, 22→33, 23→32, 24→31, 25→41, 26→42, 27→43, 28→44, 29→45, 30→46, 31→47, 32→48. '
-    + 'Bỏ qua và KHÔNG dịch chú thích hình ảnh, sơ đồ (các dòng bắt đầu bằng Hình, Fig., Figure, Sơ đồ, Ảnh) và chữ nằm trong ảnh.';
+    + 'TUYỆT ĐỐI KHÔNG dịch bảng biểu (nội dung ô, cột, đáp án dạng bảng như "A, …", "B, …"), tên bảng (Table …), chú thích hình, tên ảnh (Fig., Figure, Hình …) và chữ trong ảnh: bỏ hẳn khỏi bản dịch.';
 const BK_TR_SYS = {
     natural: 'Bạn là giáo sư đầu ngành Răng Hàm Mặt (RHM) đang dịch tài liệu cho sinh viên. Dịch sang tiếng Việt TỰ NHIÊN, DỄ HIỂU, mạch lạc như khi giảng bài. Được diễn đạt lại câu cho thuận tiếng Việt nhưng KHÔNG thêm, bớt hay suy diễn ý.' + BK_TR_GLOSS,
     faithful: 'Bạn là giáo sư đầu ngành Răng Hàm Mặt (RHM) đang dịch tài liệu chuyên môn. Dịch sang tiếng Việt BÁM SÁT văn gốc: giữ trật tự ý và cấu trúc câu gần nhất có thể nhưng vẫn tự nhiên; KHÔNG thêm, bớt hay suy diễn ý.' + BK_TR_GLOSS
 };
-const BK_TR_EN = 'You are a professor of Dental, Oral and Maxillofacial Surgery (RHM) translating teaching material for students. Translate into clear, natural, accurate English with standard medical terminology. Do NOT add, remove or infer any content.';
+const BK_TR_EN = 'You are a professor of Dental, Oral and Maxillofacial Surgery (RHM) translating teaching material for students. Translate into clear, natural, accurate English with standard medical terminology. Do NOT add, remove or infer any content. Do not translate tables, table labels, figure captions or image text.';
 function bkSetTrStyle(k) { BK_TR.style = k; try { localStorage.setItem('bk_tr_style', k); } catch (e) {} bkPaintTr(); }
 function bkPaintTr() {
     document.querySelectorAll('[data-bk-st]').forEach(b => {
@@ -9078,11 +9091,18 @@ function bkPickSource() {
     return t.value.trim();
 }
 function bkChunks(text, max) {
-    const paras = text.replace(/\r/g, '').split(/\n\s*\n|\n/).map(s => s.trim()).filter(Boolean);
+    // ghép các dòng đã ngắt giữa câu (gạch nối cuối dòng với từ viết thường thì nối liền), rồi chia theo CÂU HOÀN CHỈNH
+    const flat = text.replace(/\r/g, '')
+        .replace(/\b([a-z]{2,})-\n\s*([a-z])/g, '$1$2')
+        .replace(/-\n\s*/g, '-')
+        .replace(/\s*\n\s*/g, ' ').replace(/\s+/g, ' ').trim();
+    if (!flat) return [];
+    const sents = flat.split(/(?<=[.!?])\s+(?=[A-Z"“(])/);
     const out = []; let cur = '';
-    paras.forEach(p => {
-        if (cur && (cur + '\n' + p).length > max) { out.push(cur); cur = p; }
-        else cur = cur ? cur + '\n' + p : p;
+    sents.forEach(s => {
+        s = s.trim(); if (!s) return;
+        if (cur && (cur + ' ' + s).length > max) { out.push(cur); cur = s; }
+        else cur = cur ? cur + ' ' + s : s;
     });
     if (cur) out.push(cur);
     return out;
@@ -9091,7 +9111,7 @@ async function bkCallTr(text) {
     // Vie + Eng cùng bật → song ngữ (gốc + tiếng Việt); chỉ Vie → dịch tiếng Việt; chỉ Eng → dịch tiếng Anh
     const bi = !!(aiLangCfg.vi && aiLangCfg.en), base = aiLangCfg.vi ? BK_TR_SYS[BK_TR.style] : BK_TR_EN;
     if (bi) {
-        const sys = base + ' Hãy tách văn bản gốc thành các đoạn nhỏ (mỗi đoạn 1–3 câu), giữ nguyên thứ tự, giữ nguyên văn gốc ở "src" (không sửa) và dịch từng đoạn sang tiếng Việt ở "vi". Trả về MỘT đối tượng JSON: {"p":[{"src":"...","vi":"..."}]}. Không thêm chữ nào ngoài JSON.';
+        const sys = base + ' Đoạn gốc đã được ghép thành câu hoàn chỉnh. Trả về các cặp "src" (nguyên văn một câu hoặc nhóm câu liền kề) và "vi" (bản dịch tương ứng). Mỗi "src" phải kết thúc đúng dấu câu, KHÔNG cắt giữa câu, KHÔNG tách một câu thành nhiều cặp. Không đưa vào bảng biểu, đáp án dạng bảng, tên bảng, chú thích hình hay tên ảnh. Trả về MỘT đối tượng JSON: {"p":[{"src":"...","vi":"..."}]}. Không thêm chữ nào ngoài JSON.';
         const v = await aiGeminiJson(sys, text, 8000);
         const pairs = (v && Array.isArray(v.p)) ? v.p.filter(x => x && x.vi) : [];
         return pairs.length ? { bi: pairs } : null;
@@ -9129,11 +9149,13 @@ async function bkRunTr(text, title) {
     if (bkTrBusy) { showToast('Đang dịch, hãy đợi phần hiện tại xong'); return; }
     document.getElementById('ai-tutor-modal').classList.remove('hidden');
     bkTrBusy = true;
+    let first = null;
     try {
         const parts = bkChunks(text, 1500), n = parts.length;
         for (let i = 0; i < n; i++) {
             const label = (title ? title + ' · ' : '') + (n > 1 ? 'Phần ' + (i + 1) + '/' + n : 'Bản dịch');
             const bubble = aiAddMsg('ai', '⏳ Đang dịch ' + label + '…');
+            if (!first) first = bubble;
             aiScrollToTop(bubble, true);
             const res = await bkCallTr(parts[i]);
             if (res) bkPaintResult(bubble, res, label);
@@ -9151,6 +9173,8 @@ async function bkRunTr(text, title) {
             }
             aiScrollToTop(bubble, true);
         }
+        // Dịch xong: cuộn về bong bóng đầu tiên của đoạn/phân mục vừa dịch
+        if (first) aiScrollToTop(first, true);
     } finally { bkTrBusy = false; }
 }
 let bkObs = null;
