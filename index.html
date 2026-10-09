@@ -9078,21 +9078,16 @@ function bkBackToShelf() {
     bkRenderShelf();
 }
 /* Đánh dấu phân mục thủ công: tô chọn tiêu đề trong PDF → thêm vào danh sách đúng vị trí */
-function bkMarkSel() {
+/* Dịch nhanh: mở box chat và dịch đoạn đang tô đen trong PDF (hoặc đoạn đã tô gần nhất) */
+function bkQuickTr() {
     const sel = window.getSelection ? window.getSelection() : null;
-    if (!sel || !sel.rangeCount || !sel.toString().trim()) { showToast('Hãy tô chọn tiêu đề phân mục trong PDF rồi bấm 🔖'); return; }
-    const rg = sel.getRangeAt(0), node = rg.startContainer, el = node.nodeType === 1 ? node : node.parentNode;
-    const sp = el && el.closest ? el.closest('.bk-tl span') : null;
-    if (!sp || !sp._r) { showToast('Không xác định được vị trí đoạn đã tô (thử tô chữ khác)'); return; }
-    const s = sp._r.s + (node.nodeType === 3 ? rg.startOffset : 0);
-    const def = sel.toString().trim().replace(/\s+/g, ' ').slice(0, 80);
-    const name = window.prompt('Tên phân mục:', def);
-    if (name === null) return;
-    const t = name.trim() || def;
-    bkSecs.push({ title: t, en: t, s: s, manual: true });
-    bkSecSel = -1;
-    bkRelink(); bkSaveManual(); bkRenderSecList();
-    showToast('Đã thêm phân mục vào danh sách');
+    const live = sel && sel.rangeCount ? sel.toString().trim() : '';
+    const src = live || bkPdfSel;
+    if (!src) { showToast('Hãy tô đen đoạn cần dịch trong PDF rồi bấm ⚡ Dịch nhanh'); return; }
+    if (!aiAnyKey()) { aiShowGate(); return; }
+    bkPdfSel = '';
+    bkOpenAi();
+    bkRunTr(src, '');
 }
 function bkLoadManual(url) {
     try {
@@ -9117,13 +9112,12 @@ const BK_TR = {
     style: (() => { try { return localStorage.getItem('bk_tr_style') || 'natural'; } catch (e) { return 'natural'; } })()
 };
 const BK_TR_GLOSS = ' Thuật ngữ RHM theo chuẩn giảng dạy miền Nam Việt Nam: nướu (không dùng "lợi"), răng cối (không dùng "răng hàm"), răng cối nhỏ (tiền cối), răng cối lớn, răng khôn, răng nanh, răng cửa, men răng, ngà răng, tủy răng, buồng tủy, ống tủy, chóp chân răng, cổ răng, thân răng, xương ổ răng, mô nha chu, viêm nha chu, sâu răng, khớp thái dương hàm, cung hàm, khớp cắn, phục hình, cầu răng, mão răng, trụ implant. '
-    + 'Khi gặp số răng theo hệ Mỹ (Universal, 1–32) thì đổi sang hệ FDI hai chữ số theo bảng: 1→18, 2→17, 3→16, 4→15, 5→14, 6→13, 7→12, 8→11, 9→21, 10→22, 11→23, 12→24, 13→25, 14→26, 15→27, 16→28, 17→38, 18→37, 19→36, 20→35, 21→34, 22→33, 23→32, 24→31, 25→41, 26→42, 27→43, 28→44, 29→45, 30→46, 31→47, 32→48. '
-    + 'TUYỆT ĐỐI KHÔNG dịch bảng biểu (nội dung ô, cột, đáp án dạng bảng như "A, …", "B, …"), tên bảng (Table …), chú thích hình, tên ảnh (Fig., Figure, Hình …) và chữ trong ảnh: bỏ hẳn khỏi bản dịch.';
+    + 'Khi gặp số răng theo hệ Mỹ (Universal, 1–32) thì đổi sang hệ FDI hai chữ số theo bảng: 1→18, 2→17, 3→16, 4→15, 5→14, 6→13, 7→12, 8→11, 9→21, 10→22, 11→23, 12→24, 13→25, 14→26, 15→27, 16→28, 17→38, 18→37, 19→36, 20→35, 21→34, 22→33, 23→32, 24→31, 25→41, 26→42, 27→43, 28→44, 29→45, 30→46, 31→47, 32→48. ';
 const BK_TR_SYS = {
     natural: 'Bạn là giáo sư đầu ngành Răng Hàm Mặt (RHM) đang dịch tài liệu cho sinh viên. Dịch sang tiếng Việt TỰ NHIÊN, DỄ HIỂU, mạch lạc như khi giảng bài. Được diễn đạt lại câu cho thuận tiếng Việt nhưng KHÔNG thêm, bớt hay suy diễn ý.' + BK_TR_GLOSS,
     faithful: 'Bạn là giáo sư đầu ngành Răng Hàm Mặt (RHM) đang dịch tài liệu chuyên môn. Dịch sang tiếng Việt BÁM SÁT văn gốc: giữ trật tự ý và cấu trúc câu gần nhất có thể nhưng vẫn tự nhiên; KHÔNG thêm, bớt hay suy diễn ý.' + BK_TR_GLOSS
 };
-const BK_TR_EN = 'You are a professor of Dental, Oral and Maxillofacial Surgery (RHM) translating teaching material for students. Translate into clear, natural, accurate English with standard medical terminology. Do NOT add, remove or infer any content. Do not translate tables, table labels, figure captions or image text.';
+const BK_TR_EN = 'You are a professor of Dental, Oral and Maxillofacial Surgery (RHM) translating teaching material for students. Translate into clear, natural, accurate English with standard medical terminology. Do NOT add, remove or infer any content.';
 function bkSetTrStyle(k) { BK_TR.style = k; try { localStorage.setItem('bk_tr_style', k); } catch (e) {} bkPaintTr(); }
 function bkPaintTr() {
     document.querySelectorAll('[data-bk-st]').forEach(b => {
@@ -9146,8 +9140,9 @@ function bkPickSource() {
     return t.value.trim();
 }
 function bkChunks(text, max) {
-    // ghép các dòng đã ngắt giữa câu (gạch nối cuối dòng với từ viết thường thì nối liền), rồi chia theo CÂU HOÀN CHỈNH
-    const flat = text.replace(/\r/g, '')
+    // chuẩn hóa chữ (ký tự đặc biệt, dấu nháy cong, ligature, gạch nối mềm) rồi ghép dòng và chia theo CÂU HOÀN CHỈNH
+    const flat = String(text || '').normalize('NFKC').replace(/[\u00ad\u200b\u200c\u200d\ufeff]/g, '')
+        .replace(/[\u201c\u201d]/g, '"').replace(/[\u2018\u2019]/g, "'").replace(/\r/g, '')
         .replace(/\b([a-z]{2,})-\n\s*([a-z])/g, '$1$2')
         .replace(/-\n\s*/g, '-')
         .replace(/\s*\n\s*/g, ' ').replace(/\s+/g, ' ').trim();
@@ -9166,14 +9161,15 @@ async function bkCallTr(text) {
     // Vie + Eng cùng bật → song ngữ (gốc + tiếng Việt); chỉ Vie → dịch tiếng Việt; chỉ Eng → dịch tiếng Anh
     const bi = !!(aiLangCfg.vi && aiLangCfg.en), base = aiLangCfg.vi ? BK_TR_SYS[BK_TR.style] : BK_TR_EN;
     if (bi) {
-        const sys = base + ' Đoạn gốc đã được ghép từ nhiều dòng, cột và trang. Hãy ráp các mảnh câu bị ngắt (do chuyển cột, hình, trang hay xuống dòng) thành câu hoàn chỉnh rồi trả về các cặp "src" (nguyên văn một câu hoặc nhóm câu liền kề, đã nối các chỗ ngắt) và "vi" (bản dịch tương ứng). Mỗi "src" phải kết thúc đúng dấu câu, KHÔNG để câu lửng, KHÔNG tách một câu thành nhiều cặp. Không đưa vào bảng biểu, đáp án dạng bảng, tên bảng, chú thích hình hay tên ảnh. Trả về MỘT đối tượng JSON: {"p":[{"src":"...","vi":"..."}]}. Không thêm chữ nào ngoài JSON.';
+        const sys = base + ' Đoạn gốc đã được ghép từ nhiều dòng, cột và trang. Hãy ráp các mảnh câu bị ngắt (do chuyển cột, hình, trang hay xuống dòng) thành câu hoàn chỉnh rồi trả về các cặp "src" (nguyên văn một câu hoặc nhóm câu liền kề, đã nối các chỗ ngắt) và "vi" (bản dịch tương ứng). Mỗi "src" phải kết thúc đúng dấu câu, KHÔNG để câu lửng, KHÔNG tách một câu thành nhiều cặp. Trả về MỘT đối tượng JSON hợp lệ: {"p":[{"src":"...","vi":"..."}]}; trong chuỗi dùng dấu nháy đơn thay cho dấu nháy kép. Không thêm chữ nào ngoài JSON.';
         const v = await aiGeminiJson(sys, text, 8000);
         const pairs = (v && Array.isArray(v.p)) ? v.p.filter(x => x && x.vi) : [];
-        return pairs.length ? { bi: pairs } : null;
+        if (pairs.length) return { bi: pairs };
+        // JSON song ngữ lỗi thì dự phòng: dịch thường để không mất nội dung
     }
-    const sys = base + ' Đoạn gốc có thể bị ngắt câu do chuyển cột, hình hay trang: hãy ráp lại thành câu hoàn chỉnh khi dịch, không để câu lửng. Trả về MỘT đối tượng JSON: {"t":"<bản dịch>"}; ngăn các đoạn bằng một dòng trống. Không thêm chữ nào ngoài JSON.';
-    const v = await aiGeminiJson(sys, text, 8000);
-    return (v && typeof v.t === 'string' && v.t.trim()) ? { t: v.t.trim() } : null;
+    const sys = base + ' Đoạn gốc có thể bị ngắt câu do chuyển cột, hình hay trang: hãy ráp lại thành câu hoàn chỉnh khi dịch, không để câu lửng. Trả về MỘT đối tượng JSON hợp lệ: {"t":"<bản dịch>"}; ngăn các đoạn bằng một dòng trống; trong chuỗi dùng dấu nháy đơn thay cho dấu nháy kép. Không thêm chữ nào ngoài JSON.';
+    const v2 = await aiGeminiJson(sys, text, 8000);
+    return (v2 && typeof v2.t === 'string' && v2.t.trim()) ? { t: v2.t.trim() } : null;
 }
 function bkPaintResult(bubble, res, label) {
     bubble.innerHTML = '';
@@ -9246,13 +9242,12 @@ function bkFindAll(hay, needle) {   // mọi vị trí của tiêu đề (khớp
     return out;
 }
 async function bkAiOutline(body, ref) {
-    const sys = 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Quét TOÀN BỘ đoạn văn bản chương sách được gửi và lập MỤC LỤC các tiêu đề (giống bookmark của PDF): liệt kê mọi tiêu đề mục và tiểu mục theo đúng thứ tự xuất hiện. Với mỗi mục trả về: "src" = tiêu đề GIỮ NGUYÊN NGUYÊN VĂN như in, kể cả số thứ tự (ví dụ "1.2 Enamel"), không kèm số trang; "vi" = tên tiếng Việt ngắn gọn theo thuật ngữ RHM miền Nam; "lvl" = 1 cho mục lớn, 2 cho mục con (1.1), 3 cho mục nhỏ hơn (1.1.1). Các câu/tiêu đề bị ngắt do chuyển cột, hình hay trang phải được ráp lại trước khi nhận diện. Bỏ qua header, footer, số trang, chú thích hình, tiêu đề bảng, khung nội dung không phải tiêu đề mục. Nếu không có tiêu đề nào, trả về {"sections":[]}. Trả về MỘT đối tượng JSON: {"sections":[{"src":"...","vi":"...","lvl":1}]}. Không thêm chữ nào ngoài JSON.';
+    const sys = 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Quét TOÀN BỘ đoạn văn bản chương sách được gửi và lập MỤC LỤC các tiêu đề (giống bookmark của PDF): liệt kê mọi tiêu đề mục và tiểu mục theo đúng thứ tự xuất hiện, kể cả phần giới thiệu/mở đầu (Introduction, Overview) nếu có tiêu đề. Với mỗi mục trả về: "src" = tiêu đề GIỮ NGUYÊN NGUYÊN VĂN như in, kể cả số thứ tự nếu có (ví dụ "1.2 Enamel"), không kèm số trang; "vi" = tên tiếng Việt ngắn gọn theo thuật ngữ RHM miền Nam; "lvl" = 1 cho mục lớn, 2 cho mục con (1.1), 3 cho mục nhỏ hơn (1.1.1). Các câu/tiêu đề bị ngắt do chuyển cột, hình hay trang phải được ráp lại trước khi nhận diện. Bỏ qua header, footer, số trang, chú thích hình, tiêu đề bảng, khung nội dung không phải tiêu đề mục. Nếu không có tiêu đề nào, trả về {"sections":[]}. Trả về MỘT đối tượng JSON: {"sections":[{"src":"...","vi":"...","lvl":1}]}. Không thêm chữ nào ngoài JSON.';
     const v = await aiGeminiJson(sys, (ref ? 'MỤC LỤC THAM KHẢO:\n' + ref + '\n\n' : '') + 'ĐOẠN VĂN CẦN QUÉT:\n' + body, 3000);
     return (v && Array.isArray(v.sections) ? v.sections : [])
         .map(s => ({ src: String(s.src || '').trim(), vi: String(s.vi || s.src || '').trim(), lvl: Math.max(1, Math.min(4, parseInt(s.lvl, 10) || 1)) }))
         .filter(s => s.src);
 }
-/* định vị từng tiêu đề trong khoảng [a, b) của chữ chương; bỏ dòng mục lục (có số trang) nếu còn bản khớp khác */
 function bkLocateIn(list, a, b) {
     const T = bkText, out = []; let cur = a;
     const isToc = i => { const le = T.indexOf('\n', i); const line = T.slice(i, le < 0 ? i + 160 : le); return /\.{3,}|…|\s\d{1,4}\s*$/.test(line); };
@@ -9271,7 +9266,6 @@ function bkMergeSecs(x, y) {
     const a = x.concat(y).sort((p, q) => p.s - q.s);
     return a.filter((p, i) => i === 0 || p.s !== a[i - 1].s);
 }
-/* Nhận diện mục lục: quét TOÀN BỘ chương theo từng đoạn ~40k ký tự (có chồng lấp để không hụt tiêu đề ở mép đoạn) */
 async function bkDetectChapter() {
     if (!bkDoc) return;
     if (!bkText.trim()) { showToast('Chương này chưa có chữ để nhận diện'); return; }
@@ -9289,17 +9283,51 @@ async function bkDetectChapter() {
             catch (e) { fail++; }
         }
     } finally { btn.disabled = false; btn.textContent = '📑 Nhận diện mục lục'; }
+    // Phần đầu trang 1 trước tiêu đề đầu tiên (giới thiệu/mở đầu) luôn có mục để bấm tới
+    if (found.length && found[0].s > 300) found.unshift({ title: 'Mở đầu', en: 'Introduction', num: '', lvl: 1, s: 0, e: 0, text: '', intro: true });
     if (found.length) {
-        bkSecs = bkMergeSecs(found, bkSecs.filter(x => x.manual));   // giữ các mục đánh dấu tay
+        bkSecs = bkMergeSecs(found, bkSecs.filter(x => x.manual));
         bkRelink();
     }
     bkSecSel = -1; bkHl = null; bkApplyHlAll(); bkRenderSecList();
     document.getElementById('bk-sec-tr').classList.add('hidden');
-    if (!found.length) showToast(fail ? 'AI chưa đọc được, thử lại sau' : 'Chưa nhận diện được mục lục. Tô chọn tiêu đề rồi bấm 🔖 để đánh dấu tay.');
+    if (!found.length) showToast(fail ? 'AI chưa đọc được, thử lại sau' : 'Chưa nhận diện được mục lục.');
+}
+/* Kéo đổi độ rộng cột mục lục (giống khung chat) */
+function bkEnsureSecGrip() {
+    const p = document.getElementById('bk-sec-panel'); if (!p || document.getElementById('bk-sec-grip')) return;
+    try { const w = localStorage.getItem('bk_sec_w'); if (w) document.documentElement.style.setProperty('--bk-sec-w', w + 'px'); } catch (e) {}
+    const g = document.createElement('span'); g.id = 'bk-sec-grip'; g.title = 'Kéo để chỉnh độ rộng cột mục lục';
+    p.appendChild(g);
+    let drag = false;
+    const apply = e => {
+        const r = p.getBoundingClientRect();
+        document.documentElement.style.setProperty('--bk-sec-w', Math.round(Math.max(150, Math.min(520, e.clientX - r.left))) + 'px');
+    };
+    g.addEventListener('pointerdown', e => { e.preventDefault(); e.stopPropagation(); drag = true; g.classList.add('drag'); try { g.setPointerCapture(e.pointerId); } catch (er) {} });
+    g.addEventListener('pointermove', e => { if (drag) { e.preventDefault(); apply(e); } });
+    const end = () => {
+        if (!drag) return; drag = false; g.classList.remove('drag');
+        try { localStorage.setItem('bk_sec_w', String(parseInt(document.documentElement.style.getPropertyValue('--bk-sec-w'), 10) || 240)); } catch (e) {}
+    };
+    g.addEventListener('pointerup', end); g.addEventListener('pointercancel', end);
+}
+/* Số thứ tự: dùng số in trong sách nếu có; nếu không thì đánh số tự động theo cấp (1, 1.1, 1.2…). Mục giới thiệu không đánh số */
+function bkNumbers() {
+    const c = [0, 0, 0, 0, 0]; const out = [];
+    bkSecs.forEach(s => {
+        if (s.intro) { out.push(''); return; }
+        if (s.manual) { out.push(s.num || ''); return; }
+        const L = Math.max(1, Math.min(4, s.lvl || 1));
+        c[L]++; for (let k = L + 1; k < 5; k++) c[k] = 0;
+        out.push(s.num || c.slice(1, L + 1).join('.'));
+    });
+    return out;
 }
 function bkRenderSecList() {
     const list = document.getElementById('bk-sec-list'), n = document.getElementById('bk-sec-n'), tr = document.getElementById('bk-sec-tr');
     if (!list) return;
+    bkEnsureSecGrip();
     ['vi', 'en'].forEach(l => {
         const b = document.getElementById('bk-lang-' + l); if (!b) return;
         const on = bkSecLang === l;
@@ -9307,15 +9335,16 @@ function bkRenderSecList() {
         b.classList.toggle('bg-white', !on); b.classList.toggle('text-gray-500', !on);
     });
     if (!bkSecs.length) {
-        list.innerHTML = '<p class="text-xs text-gray-500 p-1">Bấm “📑 Nhận diện mục lục” để AI lập mục lục, hoặc tô chọn tiêu đề rồi bấm “🔖 Đánh dấu phân mục”.</p>';
+        list.innerHTML = '<p class="text-xs text-gray-500 p-1">Bấm “📑 Nhận diện mục lục” để AI lập mục lục.</p>';
         n.textContent = ''; tr.classList.add('hidden'); return;
     }
     n.textContent = bkSecs.length + ' mục';
+    const nums = bkNumbers();
     list.innerHTML = bkSecs.map((s, i) => {
         const label = bkSecLang === 'en' ? (s.en || s.title) : s.title;
-        const num = s.num ? s.num + ' ' : '';
+        const num = nums[i] ? nums[i] + ' ' : '';
         const ind = ((s.lvl || 1) - 1) * 0.9;
-        return '<button type="button" onclick="bkSelSec(' + i + ')" style="margin-left:' + ind + 'rem" class="bk-sec-item w-full text-left text-sm rounded-lg px-2.5 py-1.5 bg-white border border-gray-200 hover:bg-amber-50 break-words' + (s.lvl > 1 ? ' text-gray-600' : ' font-bold') + (i === bkSecSel ? ' bk-sec-on' : '') + '">' + (s.manual ? '🔖 ' : '') + bkEsc(num + label) + '</button>';
+        return '<button type="button" onclick="bkSelSec(' + i + ')" style="margin-left:' + ind + 'rem" class="bk-sec-item w-full text-left text-sm rounded-lg px-2.5 py-1.5 bg-white border border-gray-200 hover:bg-amber-50 break-words' + ((s.lvl || 1) > 1 ? ' text-gray-600' : ' font-bold') + (i === bkSecSel ? ' bk-sec-on' : '') + '">' + (s.manual ? '🔖 ' : '') + bkEsc(num + label) + '</button>';
     }).join('');
 }
 function bkSetSecLang(l) { bkSecLang = l; bkRenderSecList(); }
@@ -11839,7 +11868,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             <button type="button" onclick="bkBackToShelf()" class="bg-white/10 hover:bg-white/20 font-bold text-xs sm:text-sm px-3 py-1.5 rounded-lg shrink-0">⬅ Chương</button>
             <span id="bk-v-title" class="flex-1 min-w-0 truncate font-bold text-sm"></span>
             <button id="bk-sec-btn" type="button" onclick="bkDetectChapter()" class="shrink-0 text-xs sm:text-sm font-bold bg-amber-500 hover:bg-amber-600 text-white px-3 py-1.5 rounded-lg active:scale-95 transition-all">📑 Nhận diện mục lục</button>
-            <button id="bk-mark-btn" type="button" onclick="bkMarkSel()" class="shrink-0 text-xs sm:text-sm font-bold bg-white/15 hover:bg-white/25 text-white px-3 py-1.5 rounded-lg active:scale-95 transition-all" title="Tô chọn tiêu đề trong PDF rồi bấm để thêm vào danh sách phân mục">🔖 Đánh dấu phân mục</button>
+            <button id="bk-mark-btn" type="button" onclick="bkQuickTr()" class="shrink-0 text-xs sm:text-sm font-bold bg-white/15 hover:bg-white/25 text-white px-3 py-1.5 rounded-lg active:scale-95 transition-all" title="Mở box chat và dịch đoạn đang tô đen trong PDF">⚡ Dịch nhanh</button>
             <button type="button" onclick="bkCloseAll()" class="text-white text-2xl font-black px-2 leading-none shrink-0">✕</button>
         </div>
         <div id="bk-main" class="flex flex-col md:flex-row flex-1 min-h-0">
@@ -11876,6 +11905,13 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         #bk-sec-panel.bk-col > :not(:first-child) { display: none !important; }
         #bk-sec-panel.bk-col .bk-sec-hd-t, #bk-sec-panel.bk-col .bk-sec-lang { display: none !important; }
         #bk-chat-grip { display: none; position: absolute; top: 0; bottom: 0; width: 18px; z-index: 100001; cursor: ew-resize; touch-action: none; }
+        #bk-sec-panel { position: relative; }
+        @media (min-width: 768px) { #bk-sec-panel { width: var(--bk-sec-w, 15rem) !important; } }
+        #bk-sec-grip { display: none; position: absolute; top: 0; bottom: 0; right: -9px; width: 18px; z-index: 5; cursor: ew-resize; touch-action: none; }
+        #bk-sec-grip::after { content: ""; position: absolute; left: 6px; top: 50%; width: 5px; height: 48px; margin-top: -24px; border-radius: 5px; background: #cbd5e1; opacity: 0.8; }
+        #bk-sec-grip:hover::after, #bk-sec-grip.drag::after { background: #6366f1; opacity: 1; }
+        @media (min-width: 768px) { #bk-sec-grip { display: block; } }
+        #bk-sec-panel.bk-col #bk-sec-grip { display: none !important; }
         #bk-chat-grip::after { content: ""; position: absolute; left: 6px; top: 50%; width: 5px; height: 48px; margin-top: -24px; border-radius: 5px; background: #cbd5e1; opacity: 0.8; box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.35); }
         #bk-chat-grip:hover::after, #bk-chat-grip.drag::after { background: #6366f1; opacity: 1; }
         @media (min-width: 768px) {
