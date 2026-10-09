@@ -8888,22 +8888,11 @@ async function bkExtract(doc, tok, onProg) {
     const pages = []; let G = '';
     raw.forEach(pg => {
         const W = pg.w, body = pg.its.filter(it => !it.hf);
-        const isFull = it => it.x < W * 0.5 && it.x + it.w > W * 0.52;
-        const full = body.filter(isFull);
-        const L = body.filter(it => !isFull(it) && it.x < W * 0.5);
-        const R = body.filter(it => !isFull(it) && it.x >= W * 0.5);
-        const two = L.length >= 3 && R.length >= 3 && full.length <= body.length * 0.2;
+        // Quy luật đọc: cột trái (đầu → cuối trang) → cột phải (đầu → cuối trang) → sang trang sau (cột trái)
+        // Hình, khung, bảng không làm đảo thứ tự vì chỉ phân theo vị trí bắt đầu của từng dòng chữ
         const byYX = (a, b) => b.y - a.y || a.x - b.x;
-        let ord;
-        if (two) {
-            const band = (lo, hi) => L.filter(i => i.y < hi && i.y >= lo).sort(byYX).concat(R.filter(i => i.y < hi && i.y >= lo).sort(byYX));
-            ord = []; let hi = Infinity;
-            full.slice().sort((a, b) => b.y - a.y).forEach(f => { ord.push(...band(f.y, hi)); ord.push(f); hi = f.y; });
-            ord.push(...band(-Infinity, hi));
-        } else {
-            ord = body.slice().sort(byYX);
-        }
-        const col = it => !two ? 0 : (isFull(it) ? 2 : (it.x >= W * 0.5 ? 1 : 0));   // đổi cột/dải thì xuống dòng
+        const ord = body.filter(it => it.x < W * 0.5).sort(byYX).concat(body.filter(it => it.x >= W * 0.5).sort(byYX));
+        const col = it => it.x < W * 0.5 ? 0 : 1;   // đổi cột thì xuống dòng
         const base = G.length; let txt = ''; let prev = null; const rg = {};
         ord.forEach(it => {
             if (prev) {
@@ -9178,7 +9167,7 @@ function bkFindAll(hay, needle) {   // mọi vị trí của tiêu đề (khớp
     return out;
 }
 async function bkAiOutline(body, ref) {
-    const sys = 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Quét TOÀN BỘ đoạn văn bản chương sách được gửi và liệt kê MỌI phân mục (mọi tiêu đề mục và tiểu mục xuất hiện trong đoạn, theo thứ tự). Mục lục đầu chương (nếu có) chỉ để tham khảo, có thể thiếu hoặc không khớp, KHÔNG được dựa vào đó để bỏ sót. Với mỗi phân mục trả về "src": tiêu đề GIỮ NGUYÊN NGUYÊN VĂN như in trong đoạn, gồm số mục nếu có (ví dụ 1.2), KHÔNG kèm số trang hay dấu chấm dẫn; và "vi": tên tiếng Việt ngắn gọn theo thuật ngữ RHM miền Nam. Không liệt kê header, footer, số trang, chú thích hình, tiêu đề bảng. Nếu không có phân mục nào, trả về {"sections":[]}. Trả về MỘT đối tượng JSON: {"sections":[{"src":"...","vi":"..."}]}. Không thêm chữ nào ngoài JSON.';
+    const sys = 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Quét TOÀN BỘ đoạn văn bản chương sách được gửi và liệt kê MỌI phân mục (mọi tiêu đề mục và tiểu mục xuất hiện trong đoạn, theo thứ tự). Không dựa vào mục lục để nhận diện; chỉ dựa vào tiêu đề thực sự xuất hiện trong đoạn. Với mỗi phân mục trả về "src": tiêu đề GIỮ NGUYÊN NGUYÊN VĂN như in trong đoạn, gồm số mục nếu có (ví dụ 1.2), KHÔNG kèm số trang hay dấu chấm dẫn; và "vi": tên tiếng Việt ngắn gọn theo thuật ngữ RHM miền Nam. Không liệt kê header, footer, số trang, chú thích hình, tiêu đề bảng. Nếu không có phân mục nào, trả về {"sections":[]}. Trả về MỘT đối tượng JSON: {"sections":[{"src":"...","vi":"..."}]}. Không thêm chữ nào ngoài JSON.';
     const v = await aiGeminiJson(sys, (ref ? 'MỤC LỤC THAM KHẢO:\n' + ref + '\n\n' : '') + 'ĐOẠN VĂN CẦN QUÉT:\n' + body, 3000);
     return (v && Array.isArray(v.sections) ? v.sections : [])
         .map(s => ({ src: String(s.src || '').trim(), vi: String(s.vi || s.src || '').trim() })).filter(s => s.src);
@@ -9209,7 +9198,7 @@ async function bkDetectChapter() {
     const btn = document.getElementById('bk-sec-btn'), list = document.getElementById('bk-sec-list');
     btn.disabled = true;
     const CH = 40000, L = bkText.length, n = Math.ceil(L / CH);
-    const ref = bkText.slice(0, Math.min(bkPages[Math.min(2, bkPages.length - 1)].ge, 4000));
+    const ref = '';
     let found = [], fail = 0;
     try {
         for (let k = 0; k < n; k++) {
