@@ -8902,6 +8902,8 @@ async function bkImageBoxes(page) {
         if (f === OPS.save) stack.push(m.slice());
         else if (f === OPS.restore) m = stack.pop() || [1, 0, 0, 1, 0, 0];
         else if (f === OPS.transform) m = bkMat(a, m);
+        else if (OPS.paintFormXObjectBegin !== undefined && f === OPS.paintFormXObjectBegin) { stack.push(m.slice()); if (a && a[0]) m = bkMat(a[0], m); }
+        else if (OPS.paintFormXObjectEnd !== undefined && f === OPS.paintFormXObjectEnd) { m = stack.pop() || m; }
         else if (f === OPS.paintImageXObject || f === OPS.paintInlineImageXObject || f === OPS.paintImageMaskXObject) {
             const xs = [m[4], m[0] + m[4], m[2] + m[4], m[0] + m[2] + m[4]], ys = [m[5], m[1] + m[5], m[3] + m[5], m[1] + m[3] + m[5]];
             boxes.push({ x0: Math.min(...xs), x1: Math.max(...xs), y0: Math.min(...ys), y1: Math.max(...ys), r: 0 });
@@ -8941,6 +8943,7 @@ async function bkImageBoxes(page) {
         if (c.n >= 6 && w >= 0.25 * vw && h >= 25 && h < 0.95 * vh) {
             // lề trái rộng hơn để bắt cả nhãn trục (tên nghiên cứu) đứng bên trái biểu đồ
             boxes.push({ x0: c.x0 - 0.45 * w, x1: c.x1 + 0.1 * w, y0: c.y0 - 3, y1: c.y1 + 16, r: 2 });
+            if (c.n >= 12 && w >= 0.6 * vw) boxes.push({ x0: c.x0 - 4, x1: c.x1 + 4, y0: c.y0 - 36, y1: c.y0 - 2, r: 3 });
         }
     });
     return boxes;
@@ -13662,7 +13665,46 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         const box = document.getElementById('ai-messages');   // câu đang đọc ra ngoài vùng nhìn thấy thì cuộn tới
         if (box && rect && (rect.width || rect.height)) { const br = box.getBoundingClientRect(); if (rect.top < br.top + 4 || rect.bottom > br.bottom - 4) box.scrollBy({ top: rect.top - br.top - br.height / 3, behavior: 'smooth' }); }
     }
-    function aiTtsStart(bubble, from, to, btn) {   // đọc cả bong bóng (from/to rỗng) hoặc chỉ đoạn [from, to)
+    /* Đọc to trong khung chat: đoạn tiếng Anh đọc bằng giọng Anh bản xứ (nam nếu chọn NamMinh, còn lại dùng giọng nữ) */
+function aiIsEnglishText(t) {
+    const s = String(t || '');
+    if (/[ăâđêôơưạảấầẩẫậắằẳẵặẹẻẽếềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]/i.test(s)) return false;
+    const words = s.match(/[A-Za-z]+/g) || [];
+    if (!words.length) return false;
+    const stop = /^(the|and|of|to|in|is|are|was|were|for|with|that|this|by|on|as|or|an|a|from|be|at|it|its|which|has|have|not|these|those)$/i;
+    if (words.filter(w => stop.test(w)).length >= 1) return true;
+    const letters = s.replace(/\s/g, '').length || 1;
+    return words.length >= 3 && words.join('').length / letters > 0.8;
+}
+function aiEnVoice(pref) {
+    let all = []; try { all = window.speechSynthesis.getVoices() || []; } catch (e) {}
+    const en = all.filter(v => /^en[-_]/i.test(v.lang || ''));
+    if (!en.length) return null;
+    const wantMale = pref === 'm-deep';
+    const male = /guy|ryan|davis|george|james|david|mark|brian|eric|christopher|male|tony|liam|ryan/i;
+    const female = /aria|jenny|zira|samantha|ana|emma|michelle|sara|hazel|susan|katherine|female|jessa|natasha|libby|female/i;
+    const score = v => {
+        const n = v.name || ''; let s = 0;
+        if (/natural|online|neural/i.test(n)) s += 4;
+        if (/en[-_]US/i.test(v.lang || '')) s += 2;
+        if (wantMale) { if (male.test(n)) s += 8; if (female.test(n)) s -= 8; }
+        else { if (female.test(n)) s += 8; if (male.test(n)) s -= 8; }
+        return s;
+    };
+    return en.slice().sort((a, b) => score(b) - score(a))[0];
+}
+/* Tạo phát âm cho một đoạn: tiếng Anh → giọng Anh cùng giới; còn lại → giọng đã chọn */
+function aiUttFor(text, v) {
+    const ut = new SpeechSynthesisUtterance(text);
+    if (aiIsEnglishText(text)) {
+        const ev = aiEnVoice(aiVoicePrefKey());
+        ut.lang = (ev && ev.lang) || 'en-US'; if (ev) ut.voice = ev;
+    } else {
+        ut.lang = (v && v.lang) || 'vi-VN'; if (v) ut.voice = v;
+    }
+    return ut;
+}
+function aiTtsStart(bubble, from, to, btn) {   // đọc cả bong bóng (from/to rỗng) hoặc chỉ đoạn [from, to)
         if (!('speechSynthesis' in window)) { showToast('Trình duyệt không hỗ trợ đọc to'); return; }
         aiTtsStop();
         const { flat } = aiTtsMap(bubble); if (from == null) from = 0; if (to == null) to = flat.length;
@@ -13677,7 +13719,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
                 const u = units[ui++]; aiTtsMark(bubble, u.s, u.e);
                 pieces = u.t.length > 220 ? (u.t.match(/.{1,200}(\s|$)/g) || [u.t]) : [u.t]; pi = 0;
             }
-            const ut = new SpeechSynthesisUtterance(pieces[pi++]); ut.lang = (v && v.lang) || 'vi-VN'; if (v) ut.voice = v; ut.rate = aiRateGet(); ut.pitch = aiVoicePitch();
+            const ut = aiUttFor(pieces[pi++], v); ut.rate = aiRateGet(); ut.pitch = aiVoicePitch();
             ut.onend = speak;
             ut.onerror = (e) => { if (aiTts === st && e.error !== 'canceled' && e.error !== 'interrupted') { aiTtsStop(); showToast('Không đọc được (thiết bị chưa có giọng đọc tiếng Việt?)'); } };
             st.cur = ut; window.speechSynthesis.speak(ut);
