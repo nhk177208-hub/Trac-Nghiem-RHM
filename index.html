@@ -8955,6 +8955,8 @@ async function bkExtract(doc, tok, onProg) {
         // 2) chữ cỡ nhỏ hơn thân bài (chú thích, chữ trong bảng, chú thích cuối bảng)
         body0.forEach(it => { if (it.fh < 0.85 * bodyFh) excl.add(it); });
         body0.forEach(it => { if (!it.str.trim()) excl.add(it); });
+        body0.forEach(it => { const t = it.str.trim(); if (/PART\s+[IVXLC\d]+\s*[•·\-–]/i.test(t) || /^\d{1,4}\s+PART\b/i.test(t)) excl.add(it); });
+        { const fn = body0.filter(o => /^[*†‡]/.test(o.str.trim()) && o.y < pg.h * 0.4).sort((a, b) => b.y - a.y)[0]; if (fn) body0.forEach(o => { if (o.y <= fn.y + 0.5 * fn.fh) excl.add(o); }); }
         const bkLbl = /^\(?[A-Ha-h]\)?(\s+\(?[A-Ha-h]\)?)*$/;
         body0.forEach(it => { if (bkLbl.test(it.str.trim()) && body0.filter(o => o !== it && o.str.trim() && Math.abs(o.y - it.y) < 0.5 * it.fh).every(o => bkLbl.test(o.str.trim()))) excl.add(it); });
         // 3) chú thích bảng / hình và các dòng liên quan
@@ -8962,7 +8964,7 @@ async function bkExtract(doc, tok, onProg) {
             if (excl.has(it) || !isCap(it.str) || body0.some(o => o !== it && o.str.trim() && Math.abs(o.y - it.y) < 0.5 * it.fh && o.x < it.x - 1)) return;
             excl.add(it);
             body0.forEach(o => { if (!excl.has(o) && Math.abs(o.y - it.y) < 0.6 * it.fh && o.x > it.x && o.x - (it.x + it.w) < 0.25 * W) excl.add(o); });
-            { let cur0 = it; for (;;) { const nx0 = body0.filter(o => !excl.has(o) && o.y < cur0.y && (o.x < W * 0.5) === (it.x < W * 0.5) && Math.abs(o.fh - it.fh) < 0.6 && cur0.y - o.y <= 2.2 * cur0.fh).sort((a, b) => b.y - a.y)[0]; if (!nx0) break; excl.add(nx0); cur0 = nx0; } }
+            { let cur0 = it; for (let n0 = 0; n0 < 3; n0++) { const nx0 = body0.filter(o => !excl.has(o) && o.y < cur0.y && (o.x < W * 0.5) === (it.x < W * 0.5) && Math.abs(o.fh - it.fh) < 0.6 && cur0.y - o.y <= 2.2 * cur0.fh).sort((a, b) => b.y - a.y)[0]; if (!nx0) break; excl.add(nx0); cur0 = nx0; } }
             const side = it.x < W * 0.5;
             if (/^(table|tbl|bảng)/i.test(it.str.trim())) {
                 // bảng: vùng từ chú thích xuống tới đoạn văn dài đầu tiên (có khoảng cách đoạn) đều là bảng/chú thích bảng
@@ -8980,7 +8982,7 @@ async function bkExtract(doc, tok, onProg) {
             } else {
                 // hình / chú thích hình: các dòng liền sau cùng cỡ chữ, sát nhau, cùng cột
                 let cur = it;
-                for (;;) {
+                for (let n1 = 0; n1 < 3; n1++) {
                     const nx = body0.filter(o => !excl.has(o) && o.y < cur.y && (o.x < W * 0.5) === side && Math.abs(o.fh - it.fh) < 0.6 && cur.y - o.y <= 2.2 * cur.fh).sort((a, b) => b.y - a.y)[0];
                     if (!nx) break;
                     excl.add(nx); cur = nx;
@@ -9025,7 +9027,7 @@ async function bkExtract(doc, tok, onProg) {
                 if (gapUp >= 1.2 * ln.fh && gapDn >= 1.2 * ln.fh && rg[ln.items[0].idx]) cands.push({ s: rg[ln.items[0].idx].s, t: t, fh: ln.fh });
             });
         }
-        pages.push({ num: pg.num, w: pg.w, h: pg.h, rg, gs: base, ge: base + txt.length, cands });
+        pages.push({ num: pg.num, w: pg.w, h: pg.h, rg, gs: base, ge: base + txt.length, cands, bfh: bodyFh });
         G += txt + '\n\n';
     });
     return { pages, text: G };
@@ -9390,6 +9392,13 @@ async function bkDetectChapter() {
             catch (e) { fail++; }
         }
     } finally { btn.disabled = false; btn.textContent = '📑 Nhận diện mục lục'; }
+    // Tiêu đề (dòng ngắn đứng riêng) mà AI bỏ sót: thêm vào mục lục rồi sắp theo vị trí
+    {
+        bkPages.forEach(p => (p.cands || []).forEach(c => {
+            if (!found.some(f => Math.abs(f.s - c.s) <= 3)) found.push({ title: c.t, en: c.t, num: '', lvl: c.fh >= 1.08 * (p.bfh || 10) ? 1 : 2, s: c.s, e: 0, text: '' });
+        }));
+        found.sort((x, y) => x.s - y.s);
+    }
     // Phần đầu trang 1 trước tiêu đề đầu tiên (giới thiệu/mở đầu) luôn có mục để bấm tới
     if (found.length && found[0].s > 0) found.unshift({ title: 'Mở đầu', en: 'Introduction', num: '', lvl: 1, s: 0, e: 0, text: '', intro: true });
     if (found.length) {
