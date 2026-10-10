@@ -8904,6 +8904,13 @@ async function bkImageBoxes(page) {
     }
     return boxes;
 }
+function bkIsAuthorLine(t) {
+    const s = String(t || '').trim();
+    if (s.length < 8 || s.length > 120) return false;
+    const letters = s.replace(/[^A-Za-zÀ-ỹ]/g, ''); if (letters.length < 6) return false;
+    const up = letters.replace(/[^A-ZÀ-Ỹ]/g, '').length / letters.length;
+    return up > 0.7 && /\b(and|&)\b/i.test(s);
+}
 function bkModeFh(items) {   // cỡ chữ phổ biến nhất của trang (là cỡ thân bài)
     const c = {}; items.forEach(it => { const k = Math.round(it.fh * 2) / 2; c[k] = (c[k] || 0) + (it.str || '').length; });
     let best = 10, n = -1; Object.keys(c).forEach(k => { if (c[k] > n) { n = c[k]; best = +k; } }); return best;
@@ -8941,7 +8948,8 @@ async function bkExtract(doc, tok, onProg) {
         const excl = new Set();
         // tiêu đề chương (chữ rất lớn ở nửa trên trang 1) không phải phân mục và không đưa vào chữ chương
         if (pg.num === 1) body0.forEach(it => { if (it.fh >= 1.6 * bodyFh && it.y > pg.h * 0.45) excl.add(it); });
-        const isCap = t => /^(table|tbl\.?|fig\.?|figure|hình|bảng|sơ đồ|ảnh)\s*\d/i.test(t.trim());
+        if (pg.num === 1) body0.forEach(it => { if (it.y > pg.h * 0.35 && bkIsAuthorLine(body0.filter(o => Math.abs(o.y - it.y) < 0.5 * it.fh).map(o => o.str).join(' '))) body0.forEach(o => { if (Math.abs(o.y - it.y) < 0.5 * it.fh) excl.add(o); }); });
+        const isCap = t => /^(table|tbl\.?|fig\.?|figure|box|hình|bảng|hộp|sơ đồ|ảnh)\s*\d/i.test(t.trim());
         // 1) chữ nằm trong khung ảnh (hình, ảnh chụp, phim X-quang…)
         (pg.boxes || []).forEach(b => body0.forEach(it => { if (it.x >= b.x0 - 2 && it.x <= b.x1 + 2 && it.y >= b.y0 - 2 && it.y <= b.y1 + 2) excl.add(it); }));
         // 2) chữ cỡ nhỏ hơn thân bài (chú thích, chữ trong bảng, chú thích cuối bảng)
@@ -8950,6 +8958,8 @@ async function bkExtract(doc, tok, onProg) {
         body0.forEach(it => {
             if (excl.has(it) || !isCap(it.str)) return;
             excl.add(it);
+            body0.forEach(o => { if (!excl.has(o) && Math.abs(o.y - it.y) < 0.6 * it.fh && o.x > it.x && o.x - (it.x + it.w) < 0.25 * W) excl.add(o); });
+            { let cur0 = it; for (;;) { const nx0 = body0.filter(o => !excl.has(o) && o.y < cur0.y && (o.x < W * 0.5) === (it.x < W * 0.5) && Math.abs(o.fh - it.fh) < 0.6 && cur0.y - o.y <= 2.2 * cur0.fh).sort((a, b) => b.y - a.y)[0]; if (!nx0) break; excl.add(nx0); cur0 = nx0; } }
             const side = it.x < W * 0.5;
             if (/^(table|tbl|bảng)/i.test(it.str.trim())) {
                 // bảng: vùng từ chú thích xuống tới đoạn văn dài đầu tiên (có khoảng cách đoạn) đều là bảng/chú thích bảng
