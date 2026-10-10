@@ -8966,12 +8966,13 @@ async function bkExtract(doc, tok, onProg) {
             body0.forEach(o => { if (!excl.has(o) && Math.abs(o.y - it.y) < 0.6 * it.fh && o.x > it.x && o.x - (it.x + it.w) < 0.25 * W) excl.add(o); });
             { let cur0 = it; for (let n0 = 0; n0 < 3; n0++) { const nx0 = body0.filter(o => !excl.has(o) && o.y < cur0.y && (o.x < W * 0.5) === (it.x < W * 0.5) && Math.abs(o.fh - it.fh) < 0.6 && cur0.y - o.y <= 2.2 * cur0.fh).sort((a, b) => b.y - a.y)[0]; if (!nx0) break; excl.add(nx0); cur0 = nx0; } }
             const side = it.x < W * 0.5;
+            if (!/^(table|tbl|bảng)/i.test(it.str.trim())) { const upL = body0.filter(o => !excl.has(o) && o.y > it.y && o.y - it.y < 0.6 * pg.h).sort((a, b) => a.y - b.y); for (const o of upL) { const wc = o.str.trim().split(/\s+/).length; if (wc >= 6 || (/[.!?]$/.test(o.str.trim()) && wc >= 4)) break; excl.add(o); } }
             if (/^(table|tbl|bảng)/i.test(it.str.trim())) {
                 // bảng: vùng từ chú thích xuống tới đoạn văn dài đầu tiên (có khoảng cách đoạn) đều là bảng/chú thích bảng
                 const below = body0.filter(o => o.y < it.y).sort((a, b) => b.y - a.y);
                 let yStop = null, prevY = it.y;
                 for (const o of below) {
-                    const isPara = o.str.trim().length > 60 && o.fh >= 0.95 * bodyFh;
+                    const isPara = o.str.trim().split(/\s+/).length >= 9 && /[.!?]$/.test(o.str.trim()) && o.fh >= 0.95 * bodyFh;
                     if (isPara && prevY - o.y > 2.0 * o.fh) { yStop = o.y; break; }
                     prevY = o.y;
                 }
