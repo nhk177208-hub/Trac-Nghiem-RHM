@@ -8772,7 +8772,7 @@ function bkRenderShelf() {
     const title = document.getElementById('bookshelf-title'), cnt = document.getElementById('bookshelf-count');
     const back = document.getElementById('bk-shelf-back'), hint = document.getElementById('bookshelf-hint');
     if (bkBook) {
-        title.textContent = '📖 ' + bkBook.title;
+        title.innerHTML = (bkBook.cover ? '<img src="' + bkEsc(bkBook.cover) + '" alt="" class="inline-block w-6 h-8 object-cover rounded shadow mr-2 align-middle" onerror="this.remove()">' : '📖 ') + bkEsc(bkBook.title);
         back.classList.remove('hidden');
         hint.textContent = 'Bấm vào chương để đọc PDF';
         if (bkBook.err) { cnt.textContent = 0; list.innerHTML = '<div class="p-6 text-center text-sm text-red-600">' + bkEsc(bkBook.err) + '</div>'; return; }
@@ -9172,6 +9172,7 @@ async function bkCallTr(text) {
     return (v2 && typeof v2.t === 'string' && v2.t.trim()) ? { t: v2.t.trim() } : null;
 }
 function bkPaintResult(bubble, res, label) {
+    bubble._tr = res;
     bubble.innerHTML = '';
     const head = document.createElement('div');
     head.className = 'text-[11px] font-bold text-indigo-700 mb-1.5';
@@ -9194,22 +9195,57 @@ function bkPaintResult(bubble, res, label) {
     }
 
 }
+let bkLastTr = '', bkLectCtx = '';
+/* Giảng bài cho một bong bóng dịch: giảng bong bóng đó và các bong bóng liên quan ở dưới (cùng một lần dịch) */
+async function bkLectureBubble(b) {
+    const run = b.dataset.bkRun;
+    const group = [b]; let nx = b.nextElementSibling;
+    if (run) while (nx && nx.dataset && nx.dataset.bkRun === run) { group.push(nx); nx = nx.nextElementSibling; }
+    const src = group.map(g => g._tr ? (g._tr.bi ? g._tr.bi.map(p => p.src + '\n' + p.vi).join('\n') : g._tr.t) : '').filter(Boolean).join('\n\n');
+    if (!src) { showToast('Chưa có nội dung để giảng'); return; }
+    if (!aiAnyKey()) { aiShowGate(); return; }
+    const out = aiAddMsg('ai', '🎓 Đang chuẩn bị bài giảng…');
+    group[group.length - 1].after(out);
+    const v = await aiGeminiJson(bkLectureSys(), src, 4000);
+    out.innerHTML = '';
+    const head = document.createElement('div'); head.className = 'text-[11px] font-bold text-amber-800 mb-1.5'; head.textContent = '🎓 Bài giảng';
+    out.appendChild(head);
+    const t = v && typeof v.t === 'string' ? v.t.trim() : '';
+    if (!t) { out.textContent = 'Chưa soạn được bài giảng, thử lại sau.'; return; }
+    t.split(/\n\s*\n/).forEach(par => { const p = document.createElement('p'); p.className = 'bk-p'; p.textContent = par.trim(); if (p.textContent) out.appendChild(p); });
+    aiScrollToTop(out, true);
+}
+function bkLectureSys() {
+    return 'Bạn là giáo sư đầu ngành Răng Hàm Mặt đang giảng bài cho sinh viên. Dựa vào nội dung gốc và bản dịch dưới đây (mỗi dòng: câu gốc → bản dịch), hãy giảng bằng tiếng Việt: giải thích ý chính, thuật ngữ, cơ chế sinh lý bệnh, liên hệ lâm sàng ngắn gọn và các điểm cần nhớ. Không đọc lại nguyên văn từng câu. Trả về MỘT đối tượng JSON hợp lệ: {"t":"<bài giảng>"}; trong chuỗi dùng dấu nháy đơn. Không thêm chữ nào ngoài JSON.';
+}
+/* Giảng bài bằng Gemini Live cho phần vừa dịch (nút ở thanh chat nhanh) */
+function bkLiveSys(text) {
+    return '\n\nNHIỆM VỤ LÚC NÀY: Bạn là giáo sư đầu ngành Răng Hàm Mặt đang giảng trực tiếp cho sinh viên về đoạn dưới đây (bản gốc và bản dịch). Giảng ý chính, thuật ngữ, cơ chế và liên hệ lâm sàng ngắn gọn, mạch lạc; không đọc lại nguyên văn từng câu; sau đó trả lời câu hỏi của sinh viên.\n\nNỘI DUNG:\n' + String(text).slice(0, 12000);
+}
+function bkLectureQuick() {
+    if (!bkLastTr) { showToast('Chưa có nội dung vừa dịch để giảng'); return; }
+    if (aiState.live) { aiStopLive(); return; }
+    bkLectCtx = bkLastTr;
+    aiStartLive(false);
+}
 async function bkRunTr(text, title) {
     if (!text) { showToast('Hãy dán đoạn sách vào ô nhập hoặc bôi đen đoạn cần dịch'); return; }
     if (!aiAnyKey()) { aiShowGate(); return; }
     if (bkTrBusy) { showToast('Đang dịch, hãy đợi phần hiện tại xong'); return; }
     document.getElementById('ai-tutor-modal').classList.remove('hidden');
     bkTrBusy = true;
-    let first = null;
+    const run = 'r' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    let first = null; const got = [];
     try {
         const parts = bkChunks(text, 1500), n = parts.length;
         for (let i = 0; i < n; i++) {
             const label = (title ? title + ' · ' : '') + (n > 1 ? 'Phần ' + (i + 1) + '/' + n : 'Bản dịch');
             const bubble = aiAddMsg('ai', '⏳ Đang dịch ' + label + '…');
+            bubble.dataset.bkRun = run;
             if (!first) first = bubble;
             aiScrollToTop(bubble, true);
             const res = await bkCallTr(parts[i]);
-            if (res) bkPaintResult(bubble, res, label);
+            if (res) { bkPaintResult(bubble, res, label); got.push(res); }
             else {
                 bubble.innerHTML = '<span style="color:#b91c1c">Chưa dịch được ' + bkEsc(label) + '. </span>';
                 const rb = document.createElement('button'); rb.type = 'button';
@@ -9224,9 +9260,14 @@ async function bkRunTr(text, title) {
             }
             aiScrollToTop(bubble, true);
         }
-        // Dịch xong: cuộn về bong bóng đầu tiên của đoạn/phân mục vừa dịch
-        if (first) aiScrollToTop(first, true);
-    } finally { bkTrBusy = false; }
+        if (first) aiScrollToTop(first, true);   // dịch xong: cuộn về bong bóng đầu tiên
+    } finally {
+        bkTrBusy = false;
+        if (got.length) {
+            bkLastTr = got.map(r => r.bi ? r.bi.map(p => p.src + '\n' + p.vi).join('\n') : r.t).join('\n\n');
+            if (typeof aiEnsureQuickTts === 'function') aiEnsureQuickTts();
+        }
+    }
 }
 let bkObs = null;
 /* ----- Phân mục: AI đọc mục lục/đầu chương → định vị từng tiêu đề trong chữ chương ----- */
@@ -9361,6 +9402,7 @@ function bkSelSec(i) {
     const tr = document.getElementById('bk-sec-tr');
     tr.textContent = '🌐 Dịch phân mục này';
     tr.classList.remove('hidden');
+    const rs = document.getElementById('bk-sec-rescan'); if (rs) rs.classList.remove('hidden');
     bkApplyHlAll();
     let pg = bkPages[0];
     bkPages.forEach(p => { if (p.gs <= s.s) pg = p; });
@@ -9368,6 +9410,41 @@ function bkSelSec(i) {
         const top = pg.el.getBoundingClientRect().top - bkWrapEl.getBoundingClientRect().top + bkWrapEl.scrollTop - 8;
         bkWrapEl.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
     }
+}
+/* Quét lại mục đang chọn: 2 lần (lập danh sách mục con → đối chiếu với đoạn văn), rồi mới đưa kết quả vào mục lục */
+async function bkAiSub(seg, title, pass, prev) {
+    const sys = pass === 1
+        ? 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Đoạn văn dưới đây thuộc mục "' + title + '". Liệt kê các TIÊU ĐỀ MỤC CON nằm bên trong đoạn (KHÔNG liệt kê chính tiêu đề "' + title + '", KHÔNG liệt kê câu văn thường, hình, bảng hay chú thích). Với mỗi mục trả về "src" = tiêu đề GIỮ NGUYÊN NGUYÊN VĂN như in (kể cả số thứ tự), "vi" = tên tiếng Việt ngắn gọn, "lvl" = 2 hoặc 3. Trả về MỘT đối tượng JSON: {"sections":[{"src":"...","vi":"...","lvl":2}]}. Không thêm chữ nào ngoài JSON.'
+        : 'Bạn là giáo sư đầu ngành Răng Hàm Mặt, đang KIỂM TRA ĐỐI CHIẾU. Đối chiếu danh sách mục con dưới đây với đoạn văn của mục "' + title + '". Mỗi mục phải là tiêu đề có thật, xuất hiện nguyên văn trong đoạn; xóa các mục là câu văn thường, hình, bảng hoặc không có thật; bổ sung tiêu đề con còn thiếu; "lvl" = 2 hoặc 3. Trả về MỘT đối tượng JSON cùng định dạng: {"sections":[{"src":"...","vi":"...","lvl":2}]}. Không thêm chữ nào ngoài JSON.';
+    const body = pass === 1 ? seg : 'DANH SÁCH CẦN KIỂM TRA:\n' + JSON.stringify(prev.map(x => ({ src: x.src, vi: x.vi, lvl: x.lvl }))) + '\n\nĐOẠN VĂN:\n' + seg;
+    const v = await aiGeminiJson(sys, body, 3000);
+    return (v && Array.isArray(v.sections) ? v.sections : [])
+        .map(x => ({ src: String(x.src || '').trim(), vi: String(x.vi || x.src || '').trim(), lvl: Math.max(2, Math.min(4, parseInt(x.lvl, 10) || 2)) }))
+        .filter(x => x.src);
+}
+async function bkRescanSel() {
+    const i = bkSecSel, s = bkSecs[i]; if (!s || !bkText) return;
+    if (!aiAnyKey()) { aiShowGate(); return; }
+    const btn = document.getElementById('bk-sec-rescan');
+    const seg = bkText.slice(s.s, Math.min(s.e, s.s + 40000));
+    btn.disabled = true; btn.textContent = '⏳ Quét lần 1/2…';
+    let kids = [];
+    try {
+        const a = await bkAiSub(seg, s.title, 1, null);
+        btn.textContent = '⏳ Đối chiếu lần 2/2…';
+        const b = a.length ? await bkAiSub(seg, s.title, 2, a) : [];
+        const fin = b.length ? b : a;
+        fin.forEach(x => { x.lvl = Math.max(s.lvl + 1, x.lvl); });
+        kids = bkLocateIn(fin, s.s + 1, s.e);
+    } catch (e) { showToast('Chưa quét lại được, thử lại sau'); return; }
+    finally { btn.disabled = false; btn.textContent = '🔁 Quét lại mục đang chọn'; }
+    if (!kids.length) { showToast('Không tìm thấy mục con nào trong mục này'); return; }
+    bkSecs = bkSecs.filter(x => x.manual || !(x.s > s.s && x.s < s.e)).concat(kids);
+    bkRelink();
+    const idx = bkSecs.indexOf(s);
+    bkRenderSecList();
+    bkSelSec(idx >= 0 ? idx : 0);
+    showToast('Đã thêm ' + kids.length + ' mục con (đã đối chiếu)');
 }
 function bkTranslateSel() {
     const s = bkSecs[bkSecSel]; if (!s) return;
@@ -9384,8 +9461,8 @@ function bkRenderBar() {
     b.textContent = '🌐 Dịch'; b.title = '🌐 Dịch';
     b.onclick = () => { const src = bkPickSource(); bkPdfSel = ''; bkRunTr(src, ''); };
     box.appendChild(b);
+    if (typeof aiEnsureQuickTts === 'function') aiEnsureQuickTts();
 }
-/* ----- Bố cục khung chat khi đọc sách: mặc định 1/3 phải; Vie + Eng cùng lúc (song ngữ) thì 2/3 ----- */
 function bkSetCls(el, c, on) { if (el && el.classList.contains(c) !== on) el.classList.toggle(c, on); }
 /* Tay nắm kéo độ rộng khung chat đọc sách (giống cửa sổ khác): 2 biến trên :root, nhớ riêng cho 1/3 và 2/3 */
 function bkEnsureGrip() {
@@ -11884,7 +11961,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
                     </div>
                 </div>
                 <div id="bk-sec-list" class="flex-1 min-h-0 overflow-y-auto p-2 space-y-1.5"><p class="text-xs text-gray-500 p-1">Bấm “📑 Nhận diện mục lục” để AI tìm, hoặc tô chọn tiêu đề rồi bấm “🔖 Đánh dấu phân mục”.</p></div>
-                <div class="p-2 bg-white border-t"><button id="bk-sec-tr" type="button" onclick="bkTranslateSel()" class="hidden w-full text-sm font-extrabold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl py-2 shadow active:scale-95">🌐 Dịch phân mục này</button></div>
+                <div class="p-2 bg-white border-t space-y-1.5"><button id="bk-sec-rescan" type="button" onclick="bkRescanSel()" class="hidden w-full text-sm font-extrabold text-indigo-900 bg-indigo-100 hover:bg-indigo-200 border border-indigo-300 rounded-xl py-2 active:scale-95">🔁 Quét lại mục đang chọn</button><button id="bk-sec-tr" type="button" onclick="bkTranslateSel()" class="hidden w-full text-sm font-extrabold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl py-2 shadow active:scale-95">🌐 Dịch phân mục này</button></div>
             </aside>
             <div id="bk-pdf-wrap" class="flex-1 min-w-0 min-h-0 overflow-y-auto relative bg-gray-600">
                 <div id="bk-pdf-status" class="hidden sticky top-2 mx-auto w-fit z-10 bg-gray-900/85 text-white text-xs px-3 py-1.5 rounded-full shadow"></div>
@@ -13472,20 +13549,32 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         if (!b) { showToast('Chưa có nội dung để đọc'); return; }
         aiTtsStart(b, null, null, aiTtsBubbleBtn(b));
     }
-    function aiEnsureQuickTts() {   // nút "Đọc to" dính sát mép phải của khu nút nhanh
+    function aiEnsureQuickTts() {   // nút "Giảng bài" và "Đọc to" dính sát mép phải của khu nút nhanh
         const box = document.getElementById('ai-quickrow') || document.getElementById('ai-quick'); if (!box) return;
+        let lb = document.getElementById('bk-lect-quick');
+        if (!lb) { lb = document.createElement('button'); lb.id = 'bk-lect-quick'; lb.type = 'button'; lb.className = 'shrink-0 whitespace-nowrap text-xs font-bold border rounded-full px-3 py-1.5 bg-amber-50 text-amber-800 border-amber-300 shadow-sm active:scale-95'; lb.textContent = '🎓 Giảng bài'; lb.title = 'Gọi Gemini Live giảng phần vừa dịch'; lb.onclick = bkLectureQuick; }
+        lb.classList.toggle('hidden', !(aiState.mode === 'book' && bkLastTr));
         let b = document.getElementById('ai-tts-quick');
         if (!b) { b = document.createElement('button'); b.id = 'ai-tts-quick'; b.type = 'button'; b.className = 'shrink-0 whitespace-nowrap text-xs font-bold border rounded-full px-3 py-1.5 bg-violet-50 text-violet-700 border-violet-200 shadow-sm active:scale-95'; b.onclick = aiTtsQuick; }
-        box.appendChild(b); aiTtsSync();
+        box.appendChild(lb); box.appendChild(b); aiTtsSync();
     }
     function aiEnsureTtsBars() {
         const box = document.getElementById('ai-messages'); if (!box) return;
         box.querySelectorAll(':scope > .ai-bub').forEach(b => {
-            const f = b.firstElementChild; if (f && f.classList.contains('ai-ttsbar')) return;
-            const bar = document.createElement('div'); bar.className = 'ai-ttsbar mb-1';
-            const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'text-xs font-bold border rounded-full px-2.5 py-1 bg-indigo-50 text-indigo-700 border-indigo-200 active:scale-95';
-            aiTtsLabel(btn, !!(aiTts && aiTts.bubble === b)); if (aiTts && aiTts.bubble === b) aiTts.btn = btn;
-            btn.onclick = () => aiTtsToggle(b, btn); bar.appendChild(btn); b.insertAdjacentElement('afterbegin', bar);
+            let f = b.firstElementChild;
+            if (!(f && f.classList.contains('ai-ttsbar'))) {
+                const bar = document.createElement('div'); bar.className = 'ai-ttsbar mb-1';
+                const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'text-xs font-bold border rounded-full px-2.5 py-1 bg-indigo-50 text-indigo-700 border-indigo-200 active:scale-95';
+                aiTtsLabel(btn, !!(aiTts && aiTts.bubble === b)); if (aiTts && aiTts.bubble === b) aiTts.btn = btn;
+                btn.onclick = () => aiTtsToggle(b, btn); bar.appendChild(btn); b.insertAdjacentElement('afterbegin', bar);
+                f = bar;
+            }
+            // Bong bóng dịch sách: thêm nút 🎓 Giảng bài ngay bên trái nút đọc to
+            if (b._tr && !f.querySelector('.bk-lect-btn')) {
+                const lb = document.createElement('button'); lb.type = 'button'; lb.className = 'bk-lect-btn text-xs font-bold border rounded-full px-2.5 py-1 bg-amber-50 text-amber-800 border-amber-300 active:scale-95 mr-1.5';
+                lb.textContent = '🎓 Giảng bài'; lb.onclick = () => bkLectureBubble(b);
+                f.insertBefore(lb, f.firstChild);
+            }
         });
     }
     (function () {
@@ -13745,6 +13834,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     function aiToggleLive() { if (aiState.live) aiStopLive(); else aiStartLive(false); }
 
     async function aiStartLive(flat) {
+        const bkLect = bkLectCtx; bkLectCtx = '';
         aiTtsStop();
         if (!aiAnyKey()) { aiShowGate('🎙️ Nói trực tiếp chỉ dùng được với khóa Gemini.', null, 'gemini'); return; }
         if (aiState.mode === 'video' && aiState.video && aiState.video.yt) { aiAddMsg('sys', 'ℹ️ Bài này chưa hỗ trợ nói trực tiếp, hãy hỏi bằng chữ — AI vẫn xem được video.'); return; }
@@ -13761,13 +13851,13 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         const url = 'wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1beta.GenerativeService.BidiGenerateContent?key=' + encodeURIComponent(aiState.key);
         const ws = new WebSocket(url); L.ws = ws;
         ws.onopen = () => {
-            const setup = { model: 'models/' + GEMINI_LIVE_MODEL, systemInstruction: { parts: [{ text: aiSystemPrompt(true) }] }, inputAudioTranscription: {}, outputAudioTranscription: {} };
+            const setup = { model: 'models/' + GEMINI_LIVE_MODEL, systemInstruction: { parts: [{ text: aiSystemPrompt(true) + (bkLect ? bkLiveSys(bkLect) : '') }] }, inputAudioTranscription: {}, outputAudioTranscription: {} };
             if (L.flat) setup.responseModalities = ['AUDIO']; else setup.generationConfig = { responseModalities: ['AUDIO'] };
             ws.send(JSON.stringify({ setup }));
         };
         ws.onmessage = async (ev) => {
             let msg; try { msg = JSON.parse(typeof ev.data === 'string' ? ev.data : await ev.data.text()); } catch (e) { return; }
-            if (msg.setupComplete) { L.ready = true; aiUsageBump('live-start'); aiBeginMic(L); aiSetStatus('🔴 Đang nghe — hãy nói...'); document.getElementById('ai-mic-btn').textContent = '⏹️'; document.getElementById('ai-mic-btn').classList.add('bg-red-600'); return; }
+            if (msg.setupComplete) { L.ready = true; aiUsageBump('live-start'); aiBeginMic(L); if (bkLect) L.ws.send(JSON.stringify({ realtimeInput: { text: 'Hãy bắt đầu giảng phần vừa dịch cho mình.' } })); aiSetStatus('🔴 Đang nghe — hãy nói...'); document.getElementById('ai-mic-btn').textContent = '⏹️'; document.getElementById('ai-mic-btn').classList.add('bg-red-600'); return; }
             const sc = msg.serverContent; if (!sc) return;
             if (sc.interrupted) { aiClearPlayback(L); }
             if (sc.inputTranscription && sc.inputTranscription.text) {
