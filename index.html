@@ -8947,7 +8947,7 @@ async function bkExtract(doc, tok, onProg) {
         const bodyFh = bkModeFh(body0);
         const excl = new Set();
         // tiêu đề chương (chữ rất lớn ở nửa trên trang 1) không phải phân mục và không đưa vào chữ chương
-        if (pg.num === 1) body0.forEach(it => { if (it.fh >= 1.6 * bodyFh && it.y > pg.h * 0.45) excl.add(it); });
+        if (pg.num === 1) body0.forEach(it => { if (it.fh >= 2.0 * bodyFh && it.y > pg.h * 0.6) excl.add(it); });
         if (pg.num === 1) body0.forEach(it => { if (it.y > pg.h * 0.35 && bkIsAuthorLine(body0.filter(o => Math.abs(o.y - it.y) < 0.5 * it.fh).map(o => o.str).join(' '))) body0.forEach(o => { if (Math.abs(o.y - it.y) < 0.5 * it.fh) excl.add(o); }); });
         const isCap = t => /^(table|tbl\.?|fig\.?|figure|box|hình|bảng|hộp|sơ đồ|ảnh)\s*\d/i.test(t.trim());
         // 1) chữ nằm trong khung ảnh (hình, ảnh chụp, phim X-quang…)
@@ -9016,16 +9016,31 @@ async function bkExtract(doc, tok, onProg) {
             rg[it.idx] = { s: base + txt.length, e: base + txt.length + it.str.length };
             txt += it.str; prev = it;
         });
-        const cands = []; {   // dòng ngắn đứng riêng (có khoảng trống trên và dưới): ứng viên tiêu đề để gợi ý cho AI
+        const cands = []; {   // tiêu đề: dòng in đậm/cỡ lớn hơn thân bài hoặc đứng riêng, sau một câu kết thúc; nối các dòng của cùng một tiêu đề
             const lines = []; let cur = null;
-            ord.forEach(it => { if (cur && Math.abs(it.y - cur.y) < 0.5 * it.fh) cur.items.push(it); else { cur = { y: it.y, fh: it.fh, items: [it] }; lines.push(cur); } });
-            lines.forEach((ln, k) => {
-                const t = ln.items.map(q => q.str).join(' ').replace(/\s+/g, ' ').trim();
-                if (t.length < 3 || t.length > 90 || /[.,;:]$/.test(t) || !/[A-Za-z]/.test(t)) return;
-                const up = lines[k - 1], dn = lines[k + 1];
+            ord.forEach(it => { if (cur && Math.abs(it.y - cur.y) < 0.5 * it.fh && (it.x < W * 0.5) === cur.left) cur.items.push(it); else { cur = { y: it.y, fh: it.fh, left: it.x < W * 0.5, items: [it] }; lines.push(cur); } });
+            const txtOf = ln => ln.items.map(q => q.str).join(' ').replace(/\s+/g, ' ').trim();
+            const okTxt = t => t.length >= 3 && t.length <= 110 && !/[.,;:]$/.test(t) && /^[A-Z]/.test(t) && /[A-Za-z]{3}/.test(t) && !/%/.test(t) && !/\d{3,}/.test(t) && !/\(\d/.test(t);
+            const isH = lines.map((ln, k) => {
+                const t = txtOf(ln); if (!okTxt(t)) return false;
+                const up = lines.slice(0, k).reverse().find(l => l.left === ln.left);
+                const dn = lines.slice(k + 1).find(l => l.left === ln.left);
                 const gapUp = up ? up.y - ln.y : 1e9, gapDn = dn ? ln.y - dn.y : 1e9;
-                if (gapUp >= 1.2 * ln.fh && gapDn >= 1.2 * ln.fh && rg[ln.items[0].idx]) cands.push({ s: rg[ln.items[0].idx].s, t: t, fh: ln.fh });
+                const afterOk = !up || /[.!?:)"”]$/.test(txtOf(up)) || gapUp >= 2 * ln.fh;
+                return afterOk && (ln.fh >= 1.08 * bodyFh || gapDn >= 1.2 * ln.fh);
             });
+            let run = null;
+            const flush = () => { if (run && rg[run.first.idx]) cands.push({ s: rg[run.first.idx].s, t: run.text, fh: run.fh }); run = null; };
+            lines.forEach((ln, k) => {
+                const t = txtOf(ln);
+                if (run && (ln.left !== run.left || (run.lastY - ln.y) >= 1.7 * ln.fh)) flush();
+                const cont = run && run.fh >= 1.08 * bodyFh && okTxt(t) && Math.abs(ln.fh - run.fh) < 1;
+                if (isH[k] || cont) {
+                    if (!run) run = { first: ln.items[0], left: ln.left, lastY: ln.y, text: t, fh: ln.fh };
+                    else { run.text += ' ' + t; run.lastY = ln.y; }
+                } else flush();
+            });
+            flush();
         }
         pages.push({ num: pg.num, w: pg.w, h: pg.h, rg, gs: base, ge: base + txt.length, cands, bfh: bodyFh });
         G += txt + '\n\n';
@@ -9361,6 +9376,8 @@ function bkLocateIn(list, a, b) {
     const T = bkText, out = []; let cur = a;
     const isToc = i => { const le = T.indexOf('\n', i); const line = T.slice(i, le < 0 ? i + 160 : le); return /\.{3,}|…|\s\d{1,4}\s*$/.test(line); };
     list.forEach(o => {
+        const body = o.src.replace(/^\s*\d+(?:\.\d+)*\s*/, '');
+        if (!/^[A-Z0-9"“(]/.test(body) || /%/.test(o.src)) return;
         const occ = bkFindAll(T, o.src).filter(i => i >= cur && i < b);
         if (!occ.length) return;
         const nt = occ.filter(i => !isToc(i));
