@@ -8839,8 +8839,15 @@ function bkInitViewer() {
     const ti = document.getElementById('ai-input');
     if (ti) ti.addEventListener('input', () => { bkPdfSel = ''; });
 }
-function bkCw() { return Math.max(240, Math.min((bkPagesEl ? bkPagesEl.clientWidth : 800) - 24, 1000)); }
+let bkZoom = 1;
+function bkCw() { return Math.max(240, Math.min((bkPagesEl ? bkPagesEl.clientWidth : 800) - 24, 1000)) * bkZoom; }
+function bkZoomBy(d) {
+    bkZoom = Math.round(Math.max(0.6, Math.min(2.5, bkZoom + d * 0.2)) * 10) / 10;
+    const l = document.getElementById('bk-zoom-lbl'); if (l) l.textContent = Math.round(bkZoom * 100) + '%';
+    bkRefit();
+}
 function bkNear(el) {
+
     const r = el.getBoundingClientRect(), w = bkWrapEl.getBoundingClientRect();
     return r.bottom > w.top - 900 && r.top < w.bottom + 900;
 }
@@ -8867,6 +8874,7 @@ function bkMat(A, B) {
 }
 async function bkImageBoxes(page) {
     const L = window.pdfjsLib, OPS = L.OPS, ops = await page.getOperatorList();
+    const vw = page.view ? page.view[2] - page.view[0] : 612, vh = page.view ? page.view[3] - page.view[1] : 792;
     const boxes = []; const stack = []; let m = [1, 0, 0, 1, 0, 0];
     for (let i = 0; i < ops.fnArray.length; i++) {
         const f = ops.fnArray[i], a = ops.argsArray[i];
@@ -8876,6 +8884,22 @@ async function bkImageBoxes(page) {
         else if (f === OPS.paintImageXObject || f === OPS.paintInlineImageXObject || f === OPS.paintImageMaskXObject) {
             const xs = [m[4], m[0] + m[4], m[2] + m[4], m[0] + m[2] + m[4]], ys = [m[5], m[1] + m[5], m[3] + m[5], m[1] + m[3] + m[5]];
             boxes.push({ x0: Math.min(...xs), x1: Math.max(...xs), y0: Math.min(...ys), y1: Math.max(...ys) });
+        } else if (f === OPS.constructPath && a && a[0]) {
+            // hình chữ nhật (khung nền, hộp chữ, nền bảng): chữ nằm trong không đưa vào chữ chương
+            const po = a[0], co = a[1] || []; let k = 0;
+            for (const op of po) {
+                if (op === OPS.rectangle) {
+                    const x = co[k], y = co[k + 1], w = co[k + 2], h = co[k + 3]; k += 4;
+                    const pts = [[x, y], [x + w, y], [x, y + h], [x + w, y + h]].map(([u, v]) => [m[0] * u + m[2] * v + m[4], m[1] * u + m[3] * v + m[5]]);
+                    const x0 = Math.min(...pts.map(p => p[0])), x1 = Math.max(...pts.map(p => p[0]));
+                    const y0 = Math.min(...pts.map(p => p[1])), y1 = Math.max(...pts.map(p => p[1]));
+                    if ((x1 - x0) >= 0.2 * vw && (y1 - y0) >= 20 && (x1 - x0) < 0.95 * vw && (y1 - y0) < 0.6 * vh) boxes.push({ x0, x1, y0, y1, r: 1 });
+                }
+                else if (op === OPS.moveTo || op === OPS.lineTo) k += 2;
+                else if (op === OPS.curveTo) k += 6;
+                else if (OPS.curveTo2 !== undefined && op === OPS.curveTo2) k += 4;
+                else if (OPS.curveTo3 !== undefined && op === OPS.curveTo3) k += 4;
+            }
         }
     }
     return boxes;
@@ -8915,6 +8939,8 @@ async function bkExtract(doc, tok, onProg) {
         const W = pg.w, body0 = pg.its.filter(it => !it.hf);
         const bodyFh = bkModeFh(body0);
         const excl = new Set();
+        // tiêu đề chương (chữ rất lớn ở nửa trên trang 1) không phải phân mục và không đưa vào chữ chương
+        if (pg.num === 1) body0.forEach(it => { if (it.fh >= 1.6 * bodyFh && it.y > pg.h * 0.45) excl.add(it); });
         const isCap = t => /^(table|tbl\.?|fig\.?|figure|hình|bảng|sơ đồ|ảnh)\s*\d/i.test(t.trim());
         // 1) chữ nằm trong khung ảnh (hình, ảnh chụp, phim X-quang…)
         (pg.boxes || []).forEach(b => body0.forEach(it => { if (it.x >= b.x0 - 2 && it.x <= b.x1 + 2 && it.y >= b.y0 - 2 && it.y <= b.y1 + 2) excl.add(it); }));
@@ -8952,14 +8978,19 @@ async function bkExtract(doc, tok, onProg) {
         // Quy luật đọc: cột trái (đầu → cuối trang) → cột phải (đầu → cuối trang) → sang trang sau (cột trái)
         const byYX = (a, b) => b.y - a.y || a.x - b.x;
         let ord = body.filter(it => it.x < W * 0.5).sort(byYX).concat(body.filter(it => it.x >= W * 0.5).sort(byYX));
-        // Bỏ khối "CHAPTER OUTLINE": mọi dòng ngắn từ nhãn đến dòng thân bài dài đầu tiên ở cột trái (cả hai cột)
+        // Khung mục lục (CHAPTER OUTLINE): chỉ bỏ các dòng ngắn đều nhau ngay dưới nhãn; dừng ở khoảng trống lớn (tiêu đề phân mục ngay sau khung)
         const lab = ord.find(it => /^chapter outline$/i.test(it.str.trim()));
         if (lab) {
-            const firstLong = ord.filter(it => it.x < W * 0.5 && it.y < lab.y).sort(byYX).find(it => it.str.trim().length > 70);
-            const yb = firstLong ? firstLong.y : -Infinity;
-            ord = ord.filter(it => !(it.y <= lab.y && it.y > yb && it.str.trim().length <= 70));
+            const L2 = ord.filter(it => it.x < W * 0.5 && it.y < lab.y).sort(byYX);
+            let prevY = lab.y, yb = Infinity;
+            for (const it of L2) {
+                const gap = prevY - it.y;
+                if (it.str.trim().length > 70 || gap > 1.9 * Math.max(it.fh, lab.fh)) break;
+                prevY = it.y; yb = it.y;
+            }
+            ord = ord.filter(it => !(it.y <= lab.y && it.y >= yb && it.str.trim().length <= 70));
         }
-        const col = it => it.x < W * 0.5 ? 0 : 1;   // đổi cột thì xuống dòng
+        const col = it => it.x < W * 0.5 ? 0 : 1;   // đổi cột thì xuống dòng   // đổi cột thì xuống dòng
         const base = G.length; let txt = ''; let prev = null; const rg = {};
 
         ord.forEach(it => {
@@ -9161,15 +9192,14 @@ async function bkCallTr(text) {
     // Vie + Eng cùng bật → song ngữ (gốc + tiếng Việt); chỉ Vie → dịch tiếng Việt; chỉ Eng → dịch tiếng Anh
     const bi = !!(aiLangCfg.vi && aiLangCfg.en), base = aiLangCfg.vi ? BK_TR_SYS[BK_TR.style] : BK_TR_EN;
     if (bi) {
-        const sys = base + ' Đoạn gốc đã được ghép từ nhiều dòng, cột và trang. Hãy ráp các mảnh câu bị ngắt (do chuyển cột, hình, trang hay xuống dòng) thành câu hoàn chỉnh rồi trả về các cặp "src" (nguyên văn một câu hoặc nhóm câu liền kề, đã nối các chỗ ngắt) và "vi" (bản dịch tương ứng). Mỗi "src" phải kết thúc đúng dấu câu, KHÔNG để câu lửng, KHÔNG tách một câu thành nhiều cặp. Trả về MỘT đối tượng JSON hợp lệ: {"p":[{"src":"...","vi":"..."}]}; trong chuỗi dùng dấu nháy đơn thay cho dấu nháy kép. Không thêm chữ nào ngoài JSON.';
+        const sys = base + ' Đoạn gốc đã được ghép từ nhiều dòng, cột và trang. Hãy ráp các mảnh câu bị ngắt (do chuyển cột, hình, trang hay xuống dòng) thành câu hoàn chỉnh rồi trả về các cặp "src" (nguyên văn một câu hoặc nhóm câu liền kề, đã nối các chỗ ngắt) và "vi" (bản dịch tương ứng). Mỗi "src" phải kết thúc đúng dấu câu, KHÔNG để câu lửng, KHÔNG tách một câu thành nhiều cặp. Trả về MỘT đối tượng JSON hợp lệ: {"p":[{"src":"...","vi":"..."}]}; trong chuỗi dùng dấu nháy đơn thay cho dấu nháy kép và không viết chuỗi "\\n" (dùng xuống dòng thật). Không thêm chữ nào ngoài JSON.';
         const v = await aiGeminiJson(sys, text, 8000);
-        const pairs = (v && Array.isArray(v.p)) ? v.p.filter(x => x && x.vi) : [];
+        const pairs = (v && Array.isArray(v.p) ? v.p : []).filter(x => x && x.vi).map(x => ({ src: bkUnesc(x.src), vi: bkUnesc(x.vi) }));
         if (pairs.length) return { bi: pairs };
-        // JSON song ngữ lỗi thì dự phòng: dịch thường để không mất nội dung
     }
-    const sys = base + ' Đoạn gốc có thể bị ngắt câu do chuyển cột, hình hay trang: hãy ráp lại thành câu hoàn chỉnh khi dịch, không để câu lửng. Trả về MỘT đối tượng JSON hợp lệ: {"t":"<bản dịch>"}; ngăn các đoạn bằng một dòng trống; trong chuỗi dùng dấu nháy đơn thay cho dấu nháy kép. Không thêm chữ nào ngoài JSON.';
+    const sys = base + ' Đoạn gốc có thể bị ngắt câu do chuyển cột, hình hay trang: hãy ráp lại thành câu hoàn chỉnh khi dịch, không để câu lửng. Trả về MỘT đối tượng JSON hợp lệ: {"t":"<bản dịch>"}; ngăn các đoạn bằng một dòng trống; trong chuỗi dùng dấu nháy đơn thay cho dấu nháy kép và không viết chuỗi "\\n" (dùng xuống dòng thật). Không thêm chữ nào ngoài JSON.';
     const v2 = await aiGeminiJson(sys, text, 8000);
-    return (v2 && typeof v2.t === 'string' && v2.t.trim()) ? { t: v2.t.trim() } : null;
+    return (v2 && typeof v2.t === 'string' && v2.t.trim()) ? { t: bkUnesc(v2.t.trim()) } : null;
 }
 function bkPaintResult(bubble, res, label) {
     bubble._tr = res;
@@ -9197,6 +9227,8 @@ function bkPaintResult(bubble, res, label) {
 }
 let bkLastTr = '', bkLectCtx = '';
 /* Giảng bài cho một bong bóng dịch: giảng bong bóng đó và các bong bóng liên quan ở dưới (cùng một lần dịch) */
+/* Chuyển các chuỗi \n viết thẳng (do AI trả về) thành xuống dòng thật */
+function bkUnesc(s) { return String(s || '').replace(/\\r\\n|\\n/g, '\n').replace(/\\t/g, ' ').replace(/\r\n/g, '\n'); }
 async function bkLectureBubble(b) {
     const run = b.dataset.bkRun;
     const group = [b]; let nx = b.nextElementSibling;
@@ -9210,8 +9242,8 @@ async function bkLectureBubble(b) {
     out.innerHTML = '';
     const head = document.createElement('div'); head.className = 'text-[11px] font-bold text-amber-800 mb-1.5'; head.textContent = '🎓 Bài giảng';
     out.appendChild(head);
-    const t = v && typeof v.t === 'string' ? v.t.trim() : '';
-    if (!t) { out.textContent = 'Chưa soạn được bài giảng, thử lại sau.'; return; }
+    const t = bkUnesc(v && typeof v.t === 'string' ? v.t.trim() : '');
+    if (!t) { out.appendChild(document.createTextNode('Chưa soạn được bài giảng, thử lại sau.')); return; }
     t.split(/\n\s*\n/).forEach(par => { const p = document.createElement('p'); p.className = 'bk-p'; p.textContent = par.trim(); if (p.textContent) out.appendChild(p); });
     aiScrollToTop(out, true);
 }
@@ -9222,11 +9254,13 @@ function bkLectureSys() {
 function bkLiveSys(text) {
     return '\n\nNHIỆM VỤ LÚC NÀY: Bạn là giáo sư đầu ngành Răng Hàm Mặt đang giảng trực tiếp cho sinh viên về đoạn dưới đây (bản gốc và bản dịch). Giảng ý chính, thuật ngữ, cơ chế và liên hệ lâm sàng ngắn gọn, mạch lạc; không đọc lại nguyên văn từng câu; sau đó trả lời câu hỏi của sinh viên.\n\nNỘI DUNG:\n' + String(text).slice(0, 12000);
 }
+let bkLastRun = '';
+/* Nút ⚡/🎓 ở thanh chat nhanh: làm y như nút 🎓 Giảng bài ở bong bóng của lần dịch gần nhất */
 function bkLectureQuick() {
-    if (!bkLastTr) { showToast('Chưa có nội dung vừa dịch để giảng'); return; }
-    if (aiState.live) { aiStopLive(); return; }
-    bkLectCtx = bkLastTr;
-    aiStartLive(false);
+    if (!bkLastRun) { showToast('Chưa có bản dịch nào để giảng'); return; }
+    const first = Array.from(document.querySelectorAll('#ai-messages .ai-bub')).find(b => b.dataset && b.dataset.bkRun === bkLastRun);
+    if (!first) { showToast('Chưa có bản dịch nào để giảng'); return; }
+    bkLectureBubble(first);
 }
 async function bkRunTr(text, title) {
     if (!text) { showToast('Hãy dán đoạn sách vào ô nhập hoặc bôi đen đoạn cần dịch'); return; }
@@ -9235,6 +9269,7 @@ async function bkRunTr(text, title) {
     document.getElementById('ai-tutor-modal').classList.remove('hidden');
     bkTrBusy = true;
     const run = 'r' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    bkLastRun = run;
     let first = null; const got = [];
     try {
         const parts = bkChunks(text, 1500), n = parts.length;
@@ -9260,7 +9295,7 @@ async function bkRunTr(text, title) {
             }
             aiScrollToTop(bubble, true);
         }
-        if (first) aiScrollToTop(first, true);   // dịch xong: cuộn về bong bóng đầu tiên
+        if (first) aiScrollToTop(first, true);
     } finally {
         bkTrBusy = false;
         if (got.length) {
@@ -9395,23 +9430,41 @@ function bkToggleSec() {
     document.getElementById('bk-sec-col').textContent = p.classList.contains('bk-col') ? '▶' : '◀';
 }
 /* Chọn một phân mục: sáng lên trong PDF, cuộn tới trang và hiện nút dịch */
+/* Cuộn tới đúng dòng chứa vị trí tiêu đề (nếu trang chưa vẽ thì ước lượng theo tỉ lệ ký tự) */
+function bkScrollToPos(pos) {
+    let pg = bkPages[0]; bkPages.forEach(p => { if (p.gs <= pos) pg = p; });
+    if (!pg || !pg.el || !bkWrapEl) return;
+    const pr = pg.el.getBoundingClientRect(), wr = bkWrapEl.getBoundingClientRect();
+    const frac = pg.ge > pg.gs ? Math.max(0, Math.min(1, (pos - pg.gs) / (pg.ge - pg.gs))) : 0;
+    let y = pr.top + frac * pr.height;
+    if (pg.spans && pg.spans.length) {
+        const hit = pg.spans.find(sp => sp._r && sp._r.s <= pos && sp._r.e > pos) ||
+            pg.spans.filter(sp => sp._r && sp._r.s >= pos).sort((a, b) => a._r.s - b._r.s)[0];
+        if (hit) y = hit.getBoundingClientRect().top;
+    }
+    bkWrapEl.scrollTo({ top: Math.max(0, bkWrapEl.scrollTop + (y - wr.top) - 60), behavior: 'smooth' });
+}
 function bkSelSec(i) {
     const s = bkSecs[i]; if (!s) return;
     bkSecSel = i; bkHl = { s: s.s, e: s.e };
     bkRenderSecList();
     const tr = document.getElementById('bk-sec-tr');
-    tr.textContent = '🌐 Dịch phân mục này';
+    tr.textContent = '🌐 Dịch mục';
     tr.classList.remove('hidden');
-    const rs = document.getElementById('bk-sec-rescan'); if (rs) rs.classList.remove('hidden');
     bkApplyHlAll();
-    let pg = bkPages[0];
-    bkPages.forEach(p => { if (p.gs <= s.s) pg = p; });
-    if (pg && pg.el && bkWrapEl) {
-        const top = pg.el.getBoundingClientRect().top - bkWrapEl.getBoundingClientRect().top + bkWrapEl.scrollTop - 8;
-        bkWrapEl.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
-    }
+    bkScrollToPos(s.s);
+    setTimeout(() => { if (bkSecSel === i) bkScrollToPos(s.s); }, 450);
 }
-/* Quét lại mục đang chọn: 2 lần (lập danh sách mục con → đối chiếu với đoạn văn), rồi mới đưa kết quả vào mục lục */
+/* Vị trí và tiêu đề của đoạn đang tô trong PDF */
+function bkSelPos() {
+    const sel = window.getSelection ? window.getSelection() : null;
+    if (!sel || !sel.rangeCount || !sel.toString().trim()) return null;
+    const rg = sel.getRangeAt(0), node = rg.startContainer, el = node.nodeType === 1 ? node : node.parentNode;
+    const sp = el && el.closest ? el.closest('.bk-tl span') : null;
+    if (!sp || !sp._r) return null;
+    return { pos: sp._r.s + (node.nodeType === 3 ? rg.startOffset : 0), title: sel.toString().trim().replace(/\s+/g, ' ').slice(0, 160) };
+}
+/* Quét lại: 2 lần (lập danh sách mục con → đối chiếu với đoạn văn) rồi mới đưa vào mục lục */
 async function bkAiSub(seg, title, pass, prev) {
     const sys = pass === 1
         ? 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Đoạn văn dưới đây thuộc mục "' + title + '". Liệt kê các TIÊU ĐỀ MỤC CON nằm bên trong đoạn (KHÔNG liệt kê chính tiêu đề "' + title + '", KHÔNG liệt kê câu văn thường, hình, bảng hay chú thích). Với mỗi mục trả về "src" = tiêu đề GIỮ NGUYÊN NGUYÊN VĂN như in (kể cả số thứ tự), "vi" = tên tiếng Việt ngắn gọn, "lvl" = 2 hoặc 3. Trả về MỘT đối tượng JSON: {"sections":[{"src":"...","vi":"...","lvl":2}]}. Không thêm chữ nào ngoài JSON.'
@@ -9423,28 +9476,43 @@ async function bkAiSub(seg, title, pass, prev) {
         .filter(x => x.src);
 }
 async function bkRescanSel() {
-    const i = bkSecSel, s = bkSecs[i]; if (!s || !bkText) return;
+    if (!bkText) { showToast('Chương chưa tải xong'); return; }
     if (!aiAnyKey()) { aiShowGate(); return; }
     const btn = document.getElementById('bk-sec-rescan');
-    const seg = bkText.slice(s.s, Math.min(s.e, s.s + 40000));
-    btn.disabled = true; btn.textContent = '⏳ Quét lần 1/2…';
+    const selp = bkSelPos();
+    let start, title, lvl, heading;
+    if (selp) {   // đang tô tiêu đề trong PDF → phân mục mới tại vị trí đó
+        start = selp.pos; title = selp.title;
+        const cont = bkSecs.filter(x => x.s <= start).sort((a, b) => b.s - a.s)[0];
+        lvl = Math.min(4, (cont ? (cont.lvl || 1) : 0) + 1);
+        heading = { title: title, en: title, num: '', lvl: lvl, s: start, e: 0, text: '' };
+    } else {      // không tô gì → quét lại mục đang chọn
+        const cur = bkSecs[bkSecSel];
+        if (!cur) { showToast('Hãy tô tiêu đề phân mục trong PDF rồi bấm Quét lại'); return; }
+        start = cur.s; title = cur.title; lvl = cur.lvl || 1; heading = cur;
+    }
+    const after = bkSecs.filter(x => x.s > start && x.lvl <= lvl).map(x => x.s);
+    const endPos = after.length ? Math.min(...after) : bkText.length;
+    const seg = bkText.slice(start, Math.min(endPos, start + 40000));
     let kids = [];
+    btn.disabled = true; btn.textContent = '⏳ Quét 1/2…';
     try {
-        const a = await bkAiSub(seg, s.title, 1, null);
-        btn.textContent = '⏳ Đối chiếu lần 2/2…';
-        const b = a.length ? await bkAiSub(seg, s.title, 2, a) : [];
+        const a = await bkAiSub(seg, title, 1, null);
+        btn.textContent = '⏳ Đối chiếu 2/2…';
+        const b = a.length ? await bkAiSub(seg, title, 2, a) : [];
         const fin = b.length ? b : a;
-        fin.forEach(x => { x.lvl = Math.max(s.lvl + 1, x.lvl); });
-        kids = bkLocateIn(fin, s.s + 1, s.e);
+        fin.forEach(x => { x.lvl = Math.max(lvl + 1, x.lvl); });
+        kids = bkLocateIn(fin, start + 1, endPos);
     } catch (e) { showToast('Chưa quét lại được, thử lại sau'); return; }
-    finally { btn.disabled = false; btn.textContent = '🔁 Quét lại mục đang chọn'; }
-    if (!kids.length) { showToast('Không tìm thấy mục con nào trong mục này'); return; }
-    bkSecs = bkSecs.filter(x => x.manual || !(x.s > s.s && x.s < s.e)).concat(kids);
+    finally { btn.disabled = false; btn.textContent = '🔁 Quét lại'; }
+    if (!kids.length && !selp) { showToast('Không tìm thấy mục con nào trong mục này'); return; }
+    bkSecs = bkSecs.filter(x => x.manual || !(x.s >= start && x.s < endPos && x !== heading)).concat([heading], kids);
+    bkSecs = bkMergeSecs(bkSecs, []);
     bkRelink();
-    const idx = bkSecs.indexOf(s);
+    const idx = bkSecs.indexOf(heading);
     bkRenderSecList();
-    bkSelSec(idx >= 0 ? idx : 0);
-    showToast('Đã thêm ' + kids.length + ' mục con (đã đối chiếu)');
+    if (idx >= 0) bkSelSec(idx);
+    showToast('Đã quét lại: ' + kids.length + ' mục con (đã đối chiếu)');
 }
 function bkTranslateSel() {
     const s = bkSecs[bkSecSel]; if (!s) return;
@@ -9456,11 +9524,6 @@ function bkTranslateSel() {
 function bkRenderBar() {
     const box = document.getElementById('ai-quick'); if (!box) return;
     box.innerHTML = '';
-    const b = document.createElement('button'); b.type = 'button';
-    b.className = 'shrink-0 text-xs font-bold border rounded-full px-3 py-1.5 bg-indigo-50 text-indigo-700 border-indigo-200';
-    b.textContent = '🌐 Dịch'; b.title = '🌐 Dịch';
-    b.onclick = () => { const src = bkPickSource(); bkPdfSel = ''; bkRunTr(src, ''); };
-    box.appendChild(b);
     if (typeof aiEnsureQuickTts === 'function') aiEnsureQuickTts();
 }
 function bkSetCls(el, c, on) { if (el && el.classList.contains(c) !== on) el.classList.toggle(c, on); }
@@ -11945,8 +12008,13 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         <div class="flex items-center gap-2 px-3 py-2 bg-gray-800 text-white shrink-0">
             <button type="button" onclick="bkBackToShelf()" class="bg-white/10 hover:bg-white/20 font-bold text-xs sm:text-sm px-3 py-1.5 rounded-lg shrink-0">⬅ Chương</button>
             <span id="bk-v-title" class="flex-1 min-w-0 truncate font-bold text-sm"></span>
-            <button id="bk-sec-btn" type="button" onclick="bkDetectChapter()" class="shrink-0 text-xs sm:text-sm font-bold bg-amber-500 hover:bg-amber-600 text-white px-3 py-1.5 rounded-lg active:scale-95 transition-all">📑 Nhận diện mục lục</button>
+            <div class="shrink-0 flex items-center gap-1 bg-white/10 rounded-lg px-1">
+                <button type="button" onclick="bkZoomBy(-1)" class="font-black text-base px-2 py-0.5 hover:bg-white/20 rounded" title="Thu nhỏ">−</button>
+                <span id="bk-zoom-lbl" class="text-xs font-bold w-11 text-center">100%</span>
+                <button type="button" onclick="bkZoomBy(1)" class="font-black text-base px-2 py-0.5 hover:bg-white/20 rounded" title="Phóng to">+</button>
+            </div>
             <button id="bk-mark-btn" type="button" onclick="bkQuickTr()" class="shrink-0 text-xs sm:text-sm font-bold bg-white/15 hover:bg-white/25 text-white px-3 py-1.5 rounded-lg active:scale-95 transition-all" title="Mở box chat và dịch đoạn đang tô đen trong PDF">⚡ Dịch nhanh</button>
+            <button id="bk-sec-btn" type="button" onclick="bkDetectChapter()" class="shrink-0 text-xs sm:text-sm font-bold bg-amber-500 hover:bg-amber-600 text-white px-3 py-1.5 rounded-lg active:scale-95 transition-all">📑 Nhận diện mục lục</button>
             <button type="button" onclick="bkCloseAll()" class="text-white text-2xl font-black px-2 leading-none shrink-0">✕</button>
         </div>
         <div id="bk-main" class="flex flex-col md:flex-row flex-1 min-h-0">
@@ -11961,7 +12029,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
                     </div>
                 </div>
                 <div id="bk-sec-list" class="flex-1 min-h-0 overflow-y-auto p-2 space-y-1.5"><p class="text-xs text-gray-500 p-1">Bấm “📑 Nhận diện mục lục” để AI tìm, hoặc tô chọn tiêu đề rồi bấm “🔖 Đánh dấu phân mục”.</p></div>
-                <div class="p-2 bg-white border-t space-y-1.5"><button id="bk-sec-rescan" type="button" onclick="bkRescanSel()" class="hidden w-full text-sm font-extrabold text-indigo-900 bg-indigo-100 hover:bg-indigo-200 border border-indigo-300 rounded-xl py-2 active:scale-95">🔁 Quét lại mục đang chọn</button><button id="bk-sec-tr" type="button" onclick="bkTranslateSel()" class="hidden w-full text-sm font-extrabold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl py-2 shadow active:scale-95">🌐 Dịch phân mục này</button></div>
+                <div class="p-2 bg-white border-t flex gap-2"><button id="bk-sec-rescan" type="button" onclick="bkRescanSel()" class="flex-1 text-sm font-extrabold text-indigo-900 bg-indigo-100 hover:bg-indigo-200 border border-indigo-300 rounded-xl py-2 active:scale-95">🔁 Quét lại</button><button id="bk-sec-tr" type="button" onclick="bkTranslateSel()" class="hidden flex-1 text-sm font-extrabold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl py-2 shadow active:scale-95">🌐 Dịch mục</button></div>
             </aside>
             <div id="bk-pdf-wrap" class="flex-1 min-w-0 min-h-0 overflow-y-auto relative bg-gray-600">
                 <div id="bk-pdf-status" class="hidden sticky top-2 mx-auto w-fit z-10 bg-gray-900/85 text-white text-xs px-3 py-1.5 rounded-full shadow"></div>
@@ -11990,6 +12058,10 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         #bk-sec-grip:hover::after, #bk-sec-grip.drag::after { background: #6366f1; opacity: 1; }
         @media (min-width: 768px) { #bk-sec-grip { display: block; } }
         #bk-sec-panel.bk-col #bk-sec-grip { display: none !important; }
+        @media (min-width: 768px) {
+            #book-viewer.bk-chat-side > div:first-child { padding-right: calc(var(--bk-vw-s, 33.333) * 1% + 0.75rem); }
+            #book-viewer.bk-chat-wide > div:first-child { padding-right: calc(var(--bk-vw-w, 66.667) * 1% + 0.75rem); }
+        }
         #bk-chat-grip::after { content: ""; position: absolute; left: 6px; top: 50%; width: 5px; height: 48px; margin-top: -24px; border-radius: 5px; background: #cbd5e1; opacity: 0.8; box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.35); }
         #bk-chat-grip:hover::after, #bk-chat-grip.drag::after { background: #6366f1; opacity: 1; }
         @media (min-width: 768px) {
