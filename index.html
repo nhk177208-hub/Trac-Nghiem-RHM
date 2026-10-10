@@ -8872,10 +8872,17 @@ function bkMat(A, B) {
     return [A[0] * B[0] + A[1] * B[2], A[0] * B[1] + A[1] * B[3], A[2] * B[0] + A[3] * B[2], A[2] * B[1] + A[3] * B[3],
         A[4] * B[0] + A[5] * B[2] + B[4], A[4] * B[1] + A[5] * B[3] + B[5]];
 }
+function bkBB(pts) {
+    let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+    pts.forEach(([x, y]) => { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; });
+    return { x0, x1, y0, y1 };
+}
+/* Vùng đồ họa của trang (ảnh, hộp nền, bảng có kẻ, biểu đồ vẽ bằng nét): chữ nằm trong không đưa vào chữ chương */
 async function bkImageBoxes(page) {
     const L = window.pdfjsLib, OPS = L.OPS, ops = await page.getOperatorList();
     const vw = page.view ? page.view[2] - page.view[0] : 612, vh = page.view ? page.view[3] - page.view[1] : 792;
-    const boxes = []; const stack = []; let m = [1, 0, 0, 1, 0, 0];
+    const boxes = []; const segs = []; const stack = []; let m = [1, 0, 0, 1, 0, 0];
+    const ap = (u, v) => [m[0] * u + m[2] * v + m[4], m[1] * u + m[3] * v + m[5]];
     for (let i = 0; i < ops.fnArray.length; i++) {
         const f = ops.fnArray[i], a = ops.argsArray[i];
         if (f === OPS.save) stack.push(m.slice());
@@ -8883,25 +8890,45 @@ async function bkImageBoxes(page) {
         else if (f === OPS.transform) m = bkMat(a, m);
         else if (f === OPS.paintImageXObject || f === OPS.paintInlineImageXObject || f === OPS.paintImageMaskXObject) {
             const xs = [m[4], m[0] + m[4], m[2] + m[4], m[0] + m[2] + m[4]], ys = [m[5], m[1] + m[5], m[3] + m[5], m[1] + m[3] + m[5]];
-            boxes.push({ x0: Math.min(...xs), x1: Math.max(...xs), y0: Math.min(...ys), y1: Math.max(...ys) });
+            boxes.push({ x0: Math.min(...xs), x1: Math.max(...xs), y0: Math.min(...ys), y1: Math.max(...ys), r: 0 });
         } else if (f === OPS.constructPath && a && a[0]) {
-            // hình chữ nhật (khung nền, hộp chữ, nền bảng): chữ nằm trong không đưa vào chữ chương
-            const po = a[0], co = a[1] || []; let k = 0;
+            const po = a[0], co = a[1] || []; let k = 0; const pts = [];
             for (const op of po) {
                 if (op === OPS.rectangle) {
                     const x = co[k], y = co[k + 1], w = co[k + 2], h = co[k + 3]; k += 4;
-                    const pts = [[x, y], [x + w, y], [x, y + h], [x + w, y + h]].map(([u, v]) => [m[0] * u + m[2] * v + m[4], m[1] * u + m[3] * v + m[5]]);
-                    const x0 = Math.min(...pts.map(p => p[0])), x1 = Math.max(...pts.map(p => p[0]));
-                    const y0 = Math.min(...pts.map(p => p[1])), y1 = Math.max(...pts.map(p => p[1]));
-                    if ((x1 - x0) >= 0.2 * vw && (y1 - y0) >= 20 && (x1 - x0) < 0.95 * vw && (y1 - y0) < 0.6 * vh) boxes.push({ x0, x1, y0, y1, r: 1 });
-                }
-                else if (op === OPS.moveTo || op === OPS.lineTo) k += 2;
-                else if (op === OPS.curveTo) k += 6;
-                else if (OPS.curveTo2 !== undefined && op === OPS.curveTo2) k += 4;
-                else if (OPS.curveTo3 !== undefined && op === OPS.curveTo3) k += 4;
+                    const c4 = [ap(x, y), ap(x + w, y), ap(x, y + h), ap(x + w, y + h)];
+                    const rb = bkBB(c4), rw = rb.x1 - rb.x0, rh = rb.y1 - rb.y0;
+                    // hộp nền lớn (khung mục lục, hộp chữ, nền bảng)
+                    if (rw >= 0.2 * vw && rh >= 20 && rw < 0.95 * vw && rh < 0.6 * vh) boxes.push({ ...rb, r: 1 });
+                    pts.push(...c4);
+                } else if (op === OPS.moveTo || op === OPS.lineTo) { pts.push(ap(co[k], co[k + 1])); k += 2; }
+                else if (op === OPS.curveTo) { pts.push(ap(co[k + 4], co[k + 5])); k += 6; }
+                else if (OPS.curveTo2 !== undefined && op === OPS.curveTo2) { pts.push(ap(co[k + 2], co[k + 3])); k += 4; }
+                else if (OPS.curveTo3 !== undefined && op === OPS.curveTo3) { pts.push(ap(co[k + 2], co[k + 3])); k += 4; }
+            }
+            if (pts.length) segs.push({ ...bkBB(pts), n: po.length });
+        }
+    }
+    // gom các nét gần nhau thành cụm: bảng có kẻ, biểu đồ vẽ bằng nét → vùng đồ họa
+    let cl = segs.slice(0, 600).map(s => ({ x0: s.x0, x1: s.x1, y0: s.y0, y1: s.y1, n: s.n }));
+    let merged = true;
+    while (merged) {
+        merged = false;
+        outer: for (let i = 0; i < cl.length; i++) for (let j = i + 1; j < cl.length; j++) {
+            const A = cl[i], B = cl[j], g = 4;
+            if (A.x0 - g <= B.x1 && B.x0 - g <= A.x1 && A.y0 - g <= B.y1 && B.y0 - g <= A.y1) {
+                cl[i] = { x0: Math.min(A.x0, B.x0), x1: Math.max(A.x1, B.x1), y0: Math.min(A.y0, B.y0), y1: Math.max(A.y1, B.y1), n: A.n + B.n };
+                cl.splice(j, 1); merged = true; break outer;
             }
         }
     }
+    cl.forEach(c => {
+        const w = c.x1 - c.x0, h = c.y1 - c.y0;
+        if (c.n >= 6 && w >= 0.25 * vw && h >= 25 && h < 0.95 * vh) {
+            // lề trái rộng hơn để bắt cả nhãn trục (tên nghiên cứu) đứng bên trái biểu đồ
+            boxes.push({ x0: c.x0 - 0.18 * w, x1: c.x1 + 4, y0: c.y0 - 3, y1: c.y1 + 3, r: 2 });
+        }
+    });
     return boxes;
 }
 function bkIsAuthorLine(t) {
@@ -8966,7 +8993,7 @@ async function bkExtract(doc, tok, onProg) {
             body0.forEach(o => { if (!excl.has(o) && Math.abs(o.y - it.y) < 0.6 * it.fh && o.x > it.x && o.x - (it.x + it.w) < 0.25 * W) excl.add(o); });
             { let cur0 = it; for (let n0 = 0; n0 < 3; n0++) { const nx0 = body0.filter(o => !excl.has(o) && o.y < cur0.y && (o.x < W * 0.5) === (it.x < W * 0.5) && Math.abs(o.fh - it.fh) < 0.6 && cur0.y - o.y <= 2.2 * cur0.fh).sort((a, b) => b.y - a.y)[0]; if (!nx0) break; excl.add(nx0); cur0 = nx0; } }
             const side = it.x < W * 0.5;
-            if (!/^(table|tbl|bảng)/i.test(it.str.trim())) { const upL = body0.filter(o => !excl.has(o) && o.y > it.y && o.y - it.y < 0.6 * pg.h).sort((a, b) => a.y - b.y); for (const o of upL) { const wc = o.str.trim().split(/\s+/).length; if (wc >= 6 || (/[.!?]$/.test(o.str.trim()) && wc >= 4)) break; excl.add(o); } }
+            if (!/^(table|tbl|bảng)/i.test(it.str.trim())) { const upL = body0.filter(o => !excl.has(o) && o.y > it.y && o.y - it.y < 0.6 * pg.h).sort((a, b) => a.y - b.y); for (const o of upL) { const wc = o.str.trim().split(/\s+/).length; if (wc >= 12 || (/[.!?]$/.test(o.str.trim()) && wc >= 6)) break; excl.add(o); } }
             if (/^(table|tbl|bảng)/i.test(it.str.trim())) {
                 // bảng: vùng từ chú thích xuống tới đoạn văn dài đầu tiên (có khoảng cách đoạn) đều là bảng/chú thích bảng
                 const below = body0.filter(o => o.y < it.y).sort((a, b) => b.y - a.y);
