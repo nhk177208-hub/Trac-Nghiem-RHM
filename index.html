@@ -8954,9 +8954,12 @@ async function bkExtract(doc, tok, onProg) {
         (pg.boxes || []).forEach(b => body0.forEach(it => { if (it.x >= b.x0 - 2 && it.x <= b.x1 + 2 && it.y >= b.y0 - 2 && it.y <= b.y1 + 2) excl.add(it); }));
         // 2) chữ cỡ nhỏ hơn thân bài (chú thích, chữ trong bảng, chú thích cuối bảng)
         body0.forEach(it => { if (it.fh < 0.85 * bodyFh) excl.add(it); });
+        body0.forEach(it => { if (!it.str.trim()) excl.add(it); });
+        const bkLbl = /^\(?[A-Ha-h]\)?(\s+\(?[A-Ha-h]\)?)*$/;
+        body0.forEach(it => { if (bkLbl.test(it.str.trim()) && body0.filter(o => o !== it && o.str.trim() && Math.abs(o.y - it.y) < 0.5 * it.fh).every(o => bkLbl.test(o.str.trim()))) excl.add(it); });
         // 3) chú thích bảng / hình và các dòng liên quan
         body0.forEach(it => {
-            if (excl.has(it) || !isCap(it.str)) return;
+            if (excl.has(it) || !isCap(it.str) || body0.some(o => o !== it && o.str.trim() && Math.abs(o.y - it.y) < 0.5 * it.fh && o.x < it.x - 1)) return;
             excl.add(it);
             body0.forEach(o => { if (!excl.has(o) && Math.abs(o.y - it.y) < 0.6 * it.fh && o.x > it.x && o.x - (it.x + it.w) < 0.25 * W) excl.add(o); });
             { let cur0 = it; for (;;) { const nx0 = body0.filter(o => !excl.has(o) && o.y < cur0.y && (o.x < W * 0.5) === (it.x < W * 0.5) && Math.abs(o.fh - it.fh) < 0.6 && cur0.y - o.y <= 2.2 * cur0.fh).sort((a, b) => b.y - a.y)[0]; if (!nx0) break; excl.add(nx0); cur0 = nx0; } }
@@ -9011,7 +9014,18 @@ async function bkExtract(doc, tok, onProg) {
             rg[it.idx] = { s: base + txt.length, e: base + txt.length + it.str.length };
             txt += it.str; prev = it;
         });
-        pages.push({ num: pg.num, w: pg.w, h: pg.h, rg, gs: base, ge: base + txt.length });
+        const cands = []; {   // dòng ngắn đứng riêng (có khoảng trống trên và dưới): ứng viên tiêu đề để gợi ý cho AI
+            const lines = []; let cur = null;
+            ord.forEach(it => { if (cur && Math.abs(it.y - cur.y) < 0.5 * it.fh) cur.items.push(it); else { cur = { y: it.y, fh: it.fh, items: [it] }; lines.push(cur); } });
+            lines.forEach((ln, k) => {
+                const t = ln.items.map(q => q.str).join(' ').replace(/\s+/g, ' ').trim();
+                if (t.length < 3 || t.length > 90 || /[.,;:]$/.test(t) || !/[A-Za-z]/.test(t)) return;
+                const up = lines[k - 1], dn = lines[k + 1];
+                const gapUp = up ? up.y - ln.y : 1e9, gapDn = dn ? ln.y - dn.y : 1e9;
+                if (gapUp >= 1.2 * ln.fh && gapDn >= 1.2 * ln.fh && rg[ln.items[0].idx]) cands.push({ s: rg[ln.items[0].idx].s, t: t, fh: ln.fh });
+            });
+        }
+        pages.push({ num: pg.num, w: pg.w, h: pg.h, rg, gs: base, ge: base + txt.length, cands });
         G += txt + '\n\n';
     });
     return { pages, text: G };
@@ -9327,12 +9341,19 @@ function bkFindAll(hay, needle) {   // mọi vị trí của tiêu đề (khớp
     while ((j = S.indexOf(sq, j + 1)) >= 0) out.push(map[j]);
     return out;
 }
-async function bkAiOutline(body, ref) {
-    const sys = 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Quét TOÀN BỘ đoạn văn bản chương sách được gửi và lập MỤC LỤC các tiêu đề (giống bookmark của PDF): liệt kê mọi tiêu đề mục và tiểu mục theo đúng thứ tự xuất hiện, kể cả phần giới thiệu/mở đầu (Introduction, Overview) nếu có tiêu đề. Với mỗi mục trả về: "src" = tiêu đề GIỮ NGUYÊN NGUYÊN VĂN như in, kể cả số thứ tự nếu có (ví dụ "1.2 Enamel"), không kèm số trang; "vi" = tên tiếng Việt ngắn gọn theo thuật ngữ RHM miền Nam; "lvl" = 1 cho mục lớn, 2 cho mục con (1.1), 3 cho mục nhỏ hơn (1.1.1). Các câu/tiêu đề bị ngắt do chuyển cột, hình hay trang phải được ráp lại trước khi nhận diện. Bỏ qua header, footer, số trang, chú thích hình, tiêu đề bảng, khung nội dung không phải tiêu đề mục. Nếu không có tiêu đề nào, trả về {"sections":[]}. Trả về MỘT đối tượng JSON: {"sections":[{"src":"...","vi":"...","lvl":1}]}. Không thêm chữ nào ngoài JSON.';
-    const v = await aiGeminiJson(sys, (ref ? 'MỤC LỤC THAM KHẢO:\n' + ref + '\n\n' : '') + 'ĐOẠN VĂN CẦN QUÉT:\n' + body, 3000);
+async function bkAiOutline(body, hints) {
+    const sys = 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Quét TOÀN BỘ đoạn văn bản chương sách được gửi và lập MỤC LỤC các tiêu đề mục (giống bookmark của PDF), theo đúng thứ tự xuất hiện, kể cả phần giới thiệu/mở đầu nếu có tiêu đề. Với mỗi mục trả về: "src" = tiêu đề GIỮ NGUYÊN NGUYÊN VĂN như in, kể cả số thứ tự nếu có (ví dụ "1.2 Enamel"), không kèm số trang; "vi" = tên tiếng Việt ngắn gọn theo thuật ngữ RHM miền Nam; "lvl" = 1 cho mục lớn, 2 cho mục con (1.1), 3 cho mục nhỏ hơn. KHÔNG lập mục từ: tên chương, tên tác giả, nhãn hình (A, B, C…), chú thích hình/bảng (Fig., Table…), nhãn hộp (Box…), tiêu đề bảng, chữ trong hình, header, footer, số trang, câu văn thường. Các câu bị ngắt do chuyển cột, hình hay trang phải được ráp lại trước khi nhận diện. Trả về MỘT đối tượng JSON: {"sections":[{"src":"...","vi":"...","lvl":1}]}; nếu không có tiêu đề nào, {"sections":[]}. Không thêm chữ nào ngoài JSON.';
+    const user = 'ĐOẠN VĂN CẦN QUÉT:\n' + body + (hints ? '\n\nDÒNG NGẮN ĐỨNG RIÊNG (ứng viên tiêu đề dò từ PDF; chỉ chọn những dòng thật sự là tiêu đề mục, đối chiếu với đoạn văn):\n' + hints : '');
+    const v = await aiGeminiJson(sys, user, 3000);
     return (v && Array.isArray(v.sections) ? v.sections : [])
         .map(s => ({ src: String(s.src || '').trim(), vi: String(s.vi || s.src || '').trim(), lvl: Math.max(1, Math.min(4, parseInt(s.lvl, 10) || 1)) }))
         .filter(s => s.src);
+}
+/* ứng viên tiêu đề (dòng ngắn đứng riêng) nằm trong khoảng [a, b) của chữ chương */
+function bkHintsFor(a, b) {
+    const out = [];
+    bkPages.forEach(p => (p.cands || []).forEach(c => { if (c.s >= a && c.s < b) out.push(c.t); }));
+    return out.join('\n').slice(0, 4000);
 }
 function bkLocateIn(list, a, b) {
     const T = bkText, out = []; let cur = a;
@@ -9365,7 +9386,7 @@ async function bkDetectChapter() {
             const a = k * CH, b = Math.min(L, a + CH + 1500);
             btn.textContent = '⏳ Quét ' + (k + 1) + '/' + n;
             list.innerHTML = '<p class="text-xs text-gray-500 p-1">🔍 AI đang lập mục lục: đoạn ' + (k + 1) + '/' + n + '…</p>';
-            try { found = bkMergeSecs(found, bkLocateIn(await bkAiOutline(bkText.slice(a, b), ''), a, b)); }
+            try { found = bkMergeSecs(found, bkLocateIn(await bkAiOutline(bkText.slice(a, b), bkHintsFor(a, b)), a, b)); }
             catch (e) { fail++; }
         }
     } finally { btn.disabled = false; btn.textContent = '📑 Nhận diện mục lục'; }
