@@ -8915,7 +8915,7 @@ async function bkImageBoxes(page) {
                     const c4 = [ap(x, y), ap(x + w, y), ap(x, y + h), ap(x + w, y + h)];
                     const rb = bkBB(c4), rw = rb.x1 - rb.x0, rh = rb.y1 - rb.y0;
                     // hộp nền lớn (khung mục lục, hộp chữ, nền bảng)
-                    if (rw >= 0.2 * vw && rh >= 20 && rw < 0.95 * vw && rh < 0.6 * vh) boxes.push({ ...rb, r: 1 });
+                    if (rw >= 0.2 * vw && rh >= 20 && rw < 0.95 * vw && rh < 0.95 * vh) boxes.push({ ...rb, r: 1 });
                     pts.push(...c4);
                 } else if (op === OPS.moveTo || op === OPS.lineTo) { pts.push(ap(co[k], co[k + 1])); k += 2; }
                 else if (op === OPS.curveTo) { pts.push(ap(co[k + 4], co[k + 5])); k += 6; }
@@ -8993,10 +8993,11 @@ async function bkExtract(doc, tok, onProg) {
         const excl = new Set();
         // tiêu đề chương (chữ rất lớn ở nửa trên trang 1) không phải phân mục và không đưa vào chữ chương
         if (pg.num === 1) body0.forEach(it => { if (it.fh >= 2.0 * bodyFh && it.y > pg.h * 0.6) excl.add(it); });
+        if (pg.num === 1) body0.forEach(it => { const t = it.str.trim(); if (it.y > pg.h * 0.35 && t.length >= 4 && t.length <= 50 && /^[A-Z][A-Z .,'*-]+\*?$/.test(t) && t.split(/\s+/).length <= 5) excl.add(it); });
         if (pg.num === 1) body0.forEach(it => { if (it.y > pg.h * 0.35 && bkIsAuthorLine(body0.filter(o => Math.abs(o.y - it.y) < 0.5 * it.fh).map(o => o.str).join(' '))) body0.forEach(o => { if (Math.abs(o.y - it.y) < 0.5 * it.fh) excl.add(o); }); });
         const isCap = t => /^(table|tbl\.?|fig\.?|figure|box|hình|bảng|hộp|sơ đồ|ảnh)\s*\d/i.test(t.trim());
         // 1) chữ nằm trong khung ảnh (hình, ảnh chụp, phim X-quang…)
-        (pg.boxes || []).forEach(b => body0.forEach(it => { if (it.x >= b.x0 - 2 && it.x <= b.x1 + 2 && it.y >= b.y0 - 2 && it.y <= b.y1 + 2) excl.add(it); }));
+        (pg.boxes || []).forEach(b => body0.forEach(it => { if (it.x >= b.x0 - 2 && it.x <= b.x1 + 2 && it.y >= b.y0 - 2 && it.y <= b.y1 + 2) { if ((b.r === 2 || b.r === 3) && it.str.trim().split(/\s+/).length > 8) return; excl.add(it); } }));
         // 2) chữ cỡ nhỏ hơn thân bài (chú thích, chữ trong bảng, chú thích cuối bảng)
         body0.forEach(it => { if (it.fh < 0.85 * bodyFh) excl.add(it); });
         body0.forEach(it => { if (!it.str.trim()) excl.add(it); });
@@ -12136,7 +12137,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
                     </div>
                 </div>
                 <div id="bk-sec-list" class="flex-1 min-h-0 overflow-y-auto p-2 space-y-1.5"><p class="text-xs text-gray-500 p-1">Bấm “📑 Nhận diện mục lục” để AI tìm, hoặc tô chọn tiêu đề rồi bấm “🔖 Đánh dấu phân mục”.</p></div>
-                <div class="p-2 bg-white border-t flex gap-2"><button id="bk-sec-rescan" type="button" onclick="bkRescanSel()" class="flex-1 text-sm font-extrabold text-indigo-900 bg-indigo-100 hover:bg-indigo-200 border border-indigo-300 rounded-xl py-2 active:scale-95">🔁 Quét lại</button><button id="bk-sec-tr" type="button" onclick="bkTranslateSel()" class="hidden flex-1 text-sm font-extrabold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl py-2 shadow active:scale-95">🌐 Dịch mục</button></div>
+                <div class="p-2 bg-white border-t flex gap-2"><button id="bk-sec-tr" type="button" onclick="bkTranslateSel()" class="hidden flex-1 text-sm font-extrabold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl py-2 shadow active:scale-95">🌐 Dịch mục</button></div>
             </aside>
             <div id="bk-pdf-wrap" class="flex-1 min-w-0 min-h-0 overflow-y-auto relative bg-gray-600">
                 <div id="bk-pdf-status" class="hidden sticky top-2 mx-auto w-fit z-10 bg-gray-900/85 text-white text-xs px-3 py-1.5 rounded-full shadow"></div>
