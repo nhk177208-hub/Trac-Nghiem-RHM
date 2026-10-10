@@ -8695,7 +8695,8 @@
 /* ===== TỦ SÁCH MÔN HỌC: Books.txt (link thư mục GitHub) → chương = file PDF → xem PDF (PDF.js) → phân mục (AI + đánh dấu tay) → dịch trong hộp chat ===== */
 let bkSubject = null, bkBooks = [], bkBook = null, bkCur = null, bkReady = Promise.resolve([]), bkToken = 0;
 let bkDoc = null, bkPages = [], bkText = '', bkSecSel = -1, bkHl = null, bkPdfSel = '', bkSecLang = 'vi';
-let bkViewTok = 0, bkIO = null, bkRO = null, bkRoTimer = 0, bkInitDone = false, bkPdfLibP = null, bkWrapEl = null, bkPagesEl = null;
+let bkViewTok = 0, bkInitDone = false, bkPdfLibP = null, bkWrapEl = null, bkPagesEl = null;
+let bkVP = [], bkScale = 1, bkBusy = 0, bkTodo = [], bkSelT = 0, bkZT = 0, bkMc = null, bkFm = {};
 const bkEsc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 function bkDir(subject) {
     if (subject.videoPath) return subject.videoPath.split('/').slice(0, -1).join('/');
@@ -8820,45 +8821,335 @@ function bkPdfLib() {
     });
     return bkPdfLibP;
 }
+/* ===================================================================
+   TRÌNH ĐỌC PDF (viết lại theo Tủ Sách RHM)
+   - Mỗi trang gồm 3 lớp xếp chồng cùng một gốc toạ độ:
+       canvas (ảnh trang)  <  lớp tô sáng (.bk-hll)  <  lớp chữ trong suốt (.bk-tl)
+   - Chỉ vẽ các trang gần vùng đang xem, trang ở xa được giải phóng bộ nhớ.
+   - Lớp chữ: mỗi đoạn chữ đặt đúng đường cơ sở (baseline) thật của PDF và co giãn ngang
+     cho đúng độ rộng thật → vùng bôi đen khớp với chữ; chữ lấy ra để dịch được ghép đúng
+     khoảng trắng / xuống dòng / thứ tự 2 cột.
+   - Đọc chữ & phân mục (bkExtract) chạy nền SAU khi trang đã hiện, không chặn việc đọc.
+   =================================================================== */
 function bkInitViewer() {
     if (bkInitDone) return; bkInitDone = true;
     bkWrapEl = document.getElementById('bk-pdf-wrap'); bkPagesEl = document.getElementById('bk-pdf-pages');
-    bkIO = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting && en.target.__pg) bkRenderPage(en.target.__pg); }), { root: bkWrapEl, rootMargin: '900px 0px' });
-    if (window.ResizeObserver) {
-        bkRO = new ResizeObserver(() => { clearTimeout(bkRoTimer); bkRoTimer = setTimeout(bkRefit, 150); });
-        bkRO.observe(bkWrapEl);
-    }
+    let raf = 0;
+    const kick = () => { if (raf) return; raf = requestAnimationFrame(() => { raf = 0; bkRefresh(); }); };
+    bkWrapEl.addEventListener('scroll', kick, { passive: true });
+    window.addEventListener('resize', kick);
+    if (window.ResizeObserver) new ResizeObserver(kick).observe(bkWrapEl);
+    bkWrapEl.addEventListener('mousedown', e => { const tl = e.target && e.target.closest ? e.target.closest('.bk-tl') : null; if (tl) tl.classList.add('selecting'); });
+    document.addEventListener('mouseup', () => bkVP.forEach(p => p.tl.classList.remove('selecting')));
     bkWrapEl.addEventListener('pointerdown', () => { bkPdfSel = ''; });
-    document.addEventListener('selectionchange', () => {   // nhớ đoạn đang tô đen trong PDF để nút Dịch bên chat dùng
-        const sel = window.getSelection ? window.getSelection() : null;
-        if (!sel || !sel.anchorNode || !bkWrapEl) return;
-        const an = sel.anchorNode.nodeType === 1 ? sel.anchorNode : sel.anchorNode.parentNode;
-        if (!an || !bkWrapEl.contains(an)) return;
-        const t = sel.toString().trim(); if (t) bkPdfSel = t;
+    // nhớ đoạn đang tô đen trong PDF (bấm nút bên chat làm mất vùng chọn) để Dịch dùng
+    document.addEventListener('selectionchange', () => {
+        clearTimeout(bkSelT);
+        bkSelT = setTimeout(() => { const s = bkSelText(); if (s) bkPdfSel = s; }, 120);
     });
+    bkWrapEl.addEventListener('wheel', e => { if (!e.ctrlKey) return; e.preventDefault(); bkZoomBy(e.deltaY < 0 ? 1 : -1); }, { passive: false });
     const ti = document.getElementById('ai-input');
     if (ti) ti.addEventListener('input', () => { bkPdfSel = ''; });
 }
-let bkZoom = 1;
-function bkCw() { return Math.max(240, Math.min((bkPagesEl ? bkPagesEl.clientWidth : 800) - 24, 1000)) * bkZoom; }
-function bkZoomBy(d) {
-    bkZoom = Math.round(Math.max(0.6, Math.min(2.5, bkZoom + d * 0.2)) * 10) / 10;
-    const l = document.getElementById('bk-zoom-lbl'); if (l) l.textContent = Math.round(bkZoom * 100) + '%';
-    bkRefit();
+/* ---------- phóng to / thu nhỏ ---------- */
+function bkUpdZoom() { const l = document.getElementById('bk-zoom-lbl'); if (l) l.textContent = Math.round(bkScale * 100) + '%'; }
+function bkZoomBy(d) { bkSetScale(Math.max(0.3, Math.min(4, bkScale + d * 0.2))); }
+function bkSetScale(s) {
+    s = Math.round(s * 10) / 10;
+    if (!bkVP.length || s === bkScale || !bkWrapEl) return;
+    const ratio = (bkWrapEl.scrollTop + bkWrapEl.clientHeight / 2) / Math.max(1, bkWrapEl.scrollHeight);
+    bkScale = s; bkUpdZoom();
+    bkVP.forEach(pg => { bkRelease(pg); bkSizePage(pg); });
+    bkWrapEl.scrollTop = ratio * bkWrapEl.scrollHeight - bkWrapEl.clientHeight / 2;
+    clearTimeout(bkZT); bkZT = setTimeout(bkRefresh, 60);
 }
-function bkNear(el) {
-
-    const r = el.getBoundingClientRect(), w = bkWrapEl.getBoundingClientRect();
-    return r.bottom > w.top - 900 && r.top < w.bottom + 900;
+function bkSizePage(pg) {
+    pg.wrap.style.width = (pg.vp1.width * bkScale) + 'px';
+    pg.wrap.style.height = (pg.vp1.height * bkScale) + 'px';
 }
+/* ---------- vẽ trang theo nhu cầu ---------- */
+function bkHoldsSel(pg) {
+    const s = document.getSelection();
+    return !!(s && s.rangeCount && !s.isCollapsed && s.getRangeAt(0).intersectsNode(pg.wrap));
+}
+function bkRefresh() {
+    if (!bkVP.length || !bkWrapEl) return;
+    const mr = bkWrapEl.getBoundingClientRect(), vh = mr.height || 800;
+    const near0 = mr.top - vh * 1.2, near1 = mr.bottom + vh * 1.2;
+    const far0 = mr.top - vh * 3, far1 = mr.bottom + vh * 3;
+    const center = mr.top + vh / 2, todo = [];
+    bkVP.forEach(pg => {
+        const r = pg.wrap.getBoundingClientRect();
+        if (r.bottom >= near0 && r.top <= near1) {
+            if (pg.state === 'idle') todo.push({ pg, d: Math.abs((r.top + r.bottom) / 2 - center) });
+        } else if ((r.bottom < far0 || r.top > far1) && pg.state !== 'idle' && !bkHoldsSel(pg)) {
+            bkRelease(pg);
+        }
+    });
+    todo.sort((a, b) => a.d - b.d);
+    bkTodo = todo.map(t => t.pg);
+    bkPump();
+}
+function bkPump() {
+    while (bkBusy < 2 && bkTodo.length) {
+        const pg = bkTodo.shift();
+        if (pg.state !== 'idle') continue;
+        bkBusy++;
+        bkRenderPage(pg).finally(() => { bkBusy--; bkPump(); });
+    }
+}
+function bkOutScale(vp) {
+    let o = Math.min(Math.max(window.devicePixelRatio || 1, 1.5), 3);
+    o = Math.min(o, Math.sqrt(16e6 / (vp.width * vp.height)));
+    return Math.max(o, 1);
+}
+async function bkRenderPage(pg) {
+    if (pg.state !== 'idle') return;
+    pg.state = 'rendering';
+    const gen = ++pg.gen, vt = bkViewTok, scale = bkScale;
+    const stale = () => gen !== pg.gen || vt !== bkViewTok;
+    try {
+        const vp = pg.page.getViewport({ scale });
+        const out = bkOutScale(vp);
+        const cw = Math.max(1, Math.round(vp.width * out)), ch = Math.max(1, Math.round(vp.height * out));
+        // vẽ ra canvas mới rồi mới thay vào → không bị nháy trắng
+        const cv = document.createElement('canvas');
+        cv.className = 'bk-cv';
+        cv.width = cw; cv.height = ch;
+        cv.style.width = vp.width + 'px'; cv.style.height = vp.height + 'px';
+        pg.task = pg.page.render({
+            canvasContext: cv.getContext('2d', { alpha: false }),
+            viewport: vp,
+            transform: [cw / vp.width, 0, 0, ch / vp.height, 0, 0],
+            background: '#ffffff'
+        });
+        await pg.task.promise;
+        pg.task = null;
+        if (stale()) return;
+        pg.canvas.replaceWith(cv);
+        pg.canvas = cv;
+        const data = await bkPageData(pg);
+        if (stale()) return;
+        bkBuildTl(pg, data);
+        pg.state = 'done';
+        bkApplyHl(pg);
+    } catch (e) {
+        if (gen !== pg.gen) return;
+        pg.task = null;
+        if (e && e.name === 'RenderingCancelledException') { pg.state = 'idle'; return; }
+        console.error('Lỗi vẽ trang ' + pg.num, e);
+        pg.state = 'error';
+    }
+}
+function bkRelease(pg) {
+    pg.gen++;
+    if (pg.task) { try { pg.task.cancel(); } catch (e) {} pg.task = null; }
+    pg.canvas.width = 0; pg.canvas.height = 0;
+    pg.tl.textContent = ''; pg.hlL.textContent = '';
+    pg.state = 'idle';
+}
+/* ---------- dữ liệu chữ của trang (đơn vị: px ở tỉ lệ 1, đã sắp theo thứ tự đọc) ---------- */
+function bkPageData(pg) {
+    if (pg.dataP) return pg.dataP;
+    pg.dataP = (async () => {
+        const U = window.pdfjsLib.Util, vp = pg.vp1;
+        const tc = await pg.page.getTextContent();
+        const items = [];
+        tc.items.forEach((it, idx) => {
+            if (!it.str) return;
+            const tx = U.transform(vp.transform, it.transform);
+            const fh = Math.hypot(tx[2], tx[3]);
+            if (!(fh > 0)) return;
+            const st = tc.styles[it.fontName] || {};
+            let angle = Math.atan2(tx[1], tx[0]);
+            if (st.vertical) angle += Math.PI / 2;
+            items.push({ idx, str: it.str, x: tx[4], y: tx[5], fh, w: it.width * vp.scale, angle, fam: st.fontFamily || 'sans-serif', ws: !it.str.trim() });
+        });
+        return { W: vp.width, H: vp.height, items: bkOrderItems(items, vp.width) };
+    })();
+    pg.dataP.catch(() => { pg.dataP = null; });
+    return pg.dataP;
+}
+// Sắp theo thứ tự đọc: nhận ra bố cục 2 cột (có rãnh trống ở giữa) → hết cột trái rồi sang cột phải
+function bkOrderItems(items, W) {
+    const hz = [], other = [];
+    items.forEach(d => (Math.abs(Math.sin(d.angle)) < 0.05 && Math.cos(d.angle) > 0 ? hz : other).push(d));
+    const lineSort = arr => {
+        arr = arr.slice().sort((a, b) => a.y - b.y);
+        const out = []; let g = [], gy = 0;
+        const flush = () => { g.sort((a, b) => a.x - b.x); out.push(...g); g = []; };
+        arr.forEach(d => {
+            if (g.length && Math.abs(d.y - gy) > 0.45 * Math.min(d.fh, g[0].fh)) flush();
+            if (!g.length) gy = d.y;
+            g.push(d);
+        });
+        flush();
+        return out;
+    };
+    // tìm rãnh dọc trống trong khoảng 30%–70% bề rộng trang
+    const bins = 200, bw = W / bins, cnt = new Array(bins).fill(0);
+    hz.forEach(d => {
+        const a = Math.max(0, Math.floor(d.x / bw)), b = Math.min(bins - 1, Math.floor((d.x + d.w) / bw));
+        for (let k = a; k <= b; k++) cnt[k]++;
+    });
+    const tol = Math.max(1, Math.floor(hz.length * 0.03));
+    let best = null, run = null;
+    for (let k = Math.floor(bins * 0.3); k <= Math.floor(bins * 0.7); k++) {
+        if (cnt[k] <= tol) {
+            if (!run) run = { a: k, b: k }; else run.b = k;
+            if (!best || run.b - run.a > best.b - best.a) best = { a: run.a, b: run.b };
+        } else run = null;
+    }
+    let ordered = null;
+    if (best && (best.b - best.a + 1) * bw >= W * 0.02) {
+        const g0 = best.a * bw, g1 = (best.b + 1) * bw, gc = (g0 + g1) / 2;
+        const cross = d => d.x < g0 && d.x + d.w > g1;
+        const L = hz.filter(d => !cross(d) && d.x + d.w / 2 < gc);
+        const R = hz.filter(d => !cross(d) && d.x + d.w / 2 >= gc);
+        const span = a => a.length ? [Math.min(...a.map(d => d.y)), Math.max(...a.map(d => d.y))] : [0, 0];
+        const [l0, l1] = span(L), [r0, r1] = span(R);
+        const ov = Math.min(l1, r1) - Math.max(l0, r0);
+        if (L.length >= 8 && R.length >= 8 && ov > 0.5 * Math.min(l1 - l0, r1 - r0)) {
+            ordered = [];
+            let band = [];
+            const flushBand = () => {
+                ordered.push(...lineSort(band.filter(d => d.x + d.w / 2 < gc)), ...lineSort(band.filter(d => d.x + d.w / 2 >= gc)));
+                band = [];
+            };
+            hz.slice().sort((a, b) => a.y - b.y).forEach(d => {
+                if (cross(d)) { flushBand(); ordered.push(d); } else band.push(d);
+            });
+            flushBand();
+        }
+    }
+    if (!ordered) ordered = lineSort(hz);
+    return ordered.concat(other);
+}
+/* ---------- lớp chữ trong suốt ---------- */
+function bkMctx() { return bkMc || (bkMc = document.createElement('canvas').getContext('2d')); }
+function bkFontBase(fam) {
+    if (bkFm[fam] != null) return bkFm[fam];
+    const ctx = bkMctx();
+    ctx.font = '100px ' + fam;
+    const m = ctx.measureText('Hg');
+    let r = 0.8;
+    if (typeof m.fontBoundingBoxAscent === 'number' && m.fontBoundingBoxAscent + m.fontBoundingBoxDescent > 0) {
+        const asc = m.fontBoundingBoxAscent / 100, desc = m.fontBoundingBoxDescent / 100;
+        r = (1 - (asc + desc)) / 2 + asc;   // vị trí baseline trong hộp dòng khi line-height = 1
+    }
+    return (bkFm[fam] = r);
+}
+function bkBuildTl(pg, data) {
+    const s = bkScale, tl = pg.tl, ctx = bkMctx();
+    tl.textContent = '';
+    const frag = document.createDocumentFragment();
+    data.items.forEach(d => {
+        if (d.ws) return;
+        const fh = d.fh * s;
+        if (!(fh > 0.3)) return;
+        const fam = d.fam;
+        const off = bkFontBase(fam) * fh;
+        ctx.font = fh.toFixed(2) + 'px ' + fam;
+        const w0 = ctx.measureText(d.str).width, target = d.w * s;
+        const sa = Math.sin(d.angle), ca = Math.cos(d.angle);
+        const span = document.createElement('span');
+        span.textContent = d.str;
+        const st = span.style;
+        st.left = (d.x * s + off * sa).toFixed(2) + 'px';
+        st.top = (d.y * s - off * ca).toFixed(2) + 'px';
+        st.fontSize = fh.toFixed(2) + 'px';
+        st.fontFamily = fam;
+        let tf = d.angle ? 'rotate(' + d.angle.toFixed(5) + 'rad)' : '';
+        if (w0 > 0 && target > 0) {
+            const sx = target / w0;
+            if (Math.abs(sx - 1) > 0.005) tf += ' scaleX(' + sx.toFixed(4) + ')';
+        }
+        if (tf) st.transform = tf;
+        span._g = { x: d.x * s, y: d.y * s, fh, w: target, p: pg.num };
+        span._n = pg.num; span._i = d.idx;
+        frag.appendChild(span);
+    });
+    const end = document.createElement('div');
+    end.className = 'bk-end';
+    frag.appendChild(end);
+    tl.appendChild(frag);
+}
+/* vị trí chữ (trong toàn bộ chữ chương) của một span — có sau khi đọc chữ nền xong */
+function bkSpanR(sp) {
+    const ex = bkPages[(sp._n || 0) - 1];
+    return ex && ex.rg ? ex.rg[sp._i] : null;
+}
+/* ---------- lấy chữ đã bôi đen (ghép đúng khoảng trắng / xuống dòng) ---------- */
+function bkJoinParts(parts) {
+    let out = '';
+    parts.forEach((p, i) => {
+        if (!i) { out = p.t; return; }
+        const a = parts[i - 1], fh = Math.max(a.fh, p.fh);
+        let sep = '';
+        if (a.p !== p.p) sep = '\n\n';
+        else if (Math.abs(p.y - a.y) < 0.5 * fh && p.x >= a.x - 1) {
+            const gap = p.x - (a.x + a.w);
+            sep = (gap > 0.12 * a.fh && !/\s$/.test(out) && !/^\s/.test(p.t)) ? ' ' : '';
+        } else {
+            const dy = p.y - a.y;
+            if (dy < -0.5 * fh || dy > 1.9 * fh) sep = '\n';
+            else if (/[A-Za-z\u00C0-\u1EF9]-$/.test(out) && /^[a-z\u00E0-\u1EF9]/.test(p.t)) { out = out.slice(0, -1); sep = ''; }
+            else sep = /\s$/.test(out) ? '' : ' ';
+        }
+        out += sep + p.t;
+    });
+    return out.replace(/[ \t]+/g, ' ').replace(/ ?\n ?/g, '\n').trim();
+}
+function bkSelText() {
+    const sel = document.getSelection();
+    if (!sel || !sel.rangeCount || sel.isCollapsed) return '';
+    const range = sel.getRangeAt(0), parts = [];
+    bkVP.forEach(pg => {
+        if (pg.state !== 'done' || !range.intersectsNode(pg.tl)) return;
+        pg.tl.querySelectorAll(':scope > span').forEach(span => {
+            if (!range.intersectsNode(span)) return;
+            const node = span.firstChild;
+            let t = span.textContent, a = 0, b = t.length;
+            if (node && node === range.startContainer) a = range.startOffset;
+            else if (span === range.startContainer) a = range.startOffset > 0 ? b : 0;
+            if (node && node === range.endContainer) b = range.endOffset;
+            else if (span === range.endContainer) b = range.endOffset > 0 ? b : 0;
+            t = t.slice(a, b);
+            if (t && span._g) parts.push({ t, ...span._g });
+        });
+    });
+    return bkJoinParts(parts);
+}
+/* ---------- tô sáng phân mục đang chọn (hộp vàng đúng vị trí chữ) ---------- */
+async function bkApplyHl(pg) {
+    const ex = bkPages[pg.num - 1];
+    if (!(bkHl && ex && ex.rg && ex.ge > bkHl.s && ex.gs < bkHl.e && pg.state === 'done')) { pg.hlL.textContent = ''; return; }
+    let data;
+    try { data = await bkPageData(pg); } catch (e) { return; }
+    pg.hlL.textContent = '';
+    if (pg.state !== 'done' || !bkHl) return;
+    const s = bkScale, frag = document.createDocumentFragment();
+    data.items.forEach(d => {
+        if (d.ws) return;
+        const r = ex.rg[d.idx];
+        if (!r || !(r.e > bkHl.s && r.s < bkHl.e)) return;
+        const el = document.createElement('div');
+        el.className = 'bk-hr';
+        el.style.cssText = 'left:' + (d.x * s - 1).toFixed(1) + 'px;top:' + ((d.y - d.fh * 0.88) * s - 1).toFixed(1) + 'px;width:' + (d.w * s + 2).toFixed(1) + 'px;height:' + (d.fh * 1.15 * s + 2).toFixed(1) + 'px';
+        frag.appendChild(el);
+    });
+    pg.hlL.appendChild(frag);
+}
+function bkApplyHlAll() { bkVP.forEach(bkApplyHl); }
 function bkSetStatus(msg) {
     const el = document.getElementById('bk-pdf-status'); if (!el) return;
     el.textContent = msg || ''; el.classList.toggle('hidden', !msg);
 }
 function bkFreeDoc() {
+    bkVP.forEach(pg => { pg.gen++; if (pg.task) { try { pg.task.cancel(); } catch (e) {} pg.task = null; } });
+    bkVP = []; bkTodo = [];
     try { if (bkDoc) bkDoc.destroy(); } catch (e) {}
     bkDoc = null; bkPages = []; bkText = ''; bkPdfSel = '';
-    if (bkIO) bkIO.disconnect();
     if (bkPagesEl) bkPagesEl.innerHTML = '';
     bkSecSel = -1; bkHl = null;
     bkSecs = [];
@@ -9112,76 +9403,34 @@ async function bkExtract(doc, tok, onProg) {
     });
     return { pages, text: G };
 }
-function bkBuildPages() {
-    if (bkIO) bkIO.disconnect();
+/* ---------- dựng khung các trang (chưa vẽ) ---------- */
+async function bkBuildVP(tok) {
     bkPagesEl.innerHTML = '';
-    const cw = bkCw();
-    bkPages.forEach(pg => {
-        pg.rendered = false; pg.busy = false; pg.again = false; pg.tok = 0; pg.w0 = 0; pg.spans = [];
-        const el = document.createElement('div'); el.className = 'bk-pg';
-        el.style.width = cw + 'px'; el.style.height = Math.round(cw * pg.h / pg.w) + 'px';
-        el.__pg = pg; pg.el = el;
-        bkPagesEl.appendChild(el); bkIO.observe(el);
-    });
-}
-async function bkRenderPage(pg) {
-    if (!pg || !pg.el || !bkDoc) return;
-    const cw = bkCw();
-    if (pg.rendered && Math.abs(pg.w0 - cw) < 3) return;
-    if (pg.busy) { pg.again = true; return; }
-    pg.busy = true;
-    const vt = bkViewTok, tk = ++pg.tok;
-    try {
-        const L = window.pdfjsLib;
-        const page = await bkDoc.getPage(pg.num);
-        if (vt !== bkViewTok) return;
-        const base = page.getViewport({ scale: 1 });
-        const vp = page.getViewport({ scale: cw / base.width });
-        const dpr = Math.min(window.devicePixelRatio || 1, 2.5);
-        const cv = document.createElement('canvas');
-        cv.width = Math.floor(vp.width * dpr); cv.height = Math.floor(vp.height * dpr);
-        cv.style.width = vp.width + 'px'; cv.style.height = vp.height + 'px'; cv.style.display = 'block';
-        await page.render({ canvasContext: cv.getContext('2d'), viewport: vp, transform: dpr !== 1 ? [dpr, 0, 0, dpr, 0, 0] : null }).promise;
-        const tc = await page.getTextContent();
-        if (vt !== bkViewTok || tk !== pg.tok) return;
-        const tl = document.createElement('div'); tl.className = 'bk-tl';
-        tl.style.width = vp.width + 'px'; tl.style.height = vp.height + 'px';
-        pg.spans = [];
-        tc.items.forEach((it, idx) => {
-            if (!it.str) return;
-            const t = L.Util.transform(vp.transform, it.transform);
-            const fh = Math.hypot(t[2], t[3]) || 10;
-            const sp = document.createElement('span');
-            sp.textContent = it.str;
-            sp.style.left = t[4] + 'px'; sp.style.top = (t[5] - fh) + 'px'; sp.style.fontSize = fh + 'px';
-            sp._r = pg.rg[idx]; tl.appendChild(sp); pg.spans.push(sp);
+    bkVP = [];
+    const n = bkDoc.numPages;
+    for (let i = 1; i <= n; i += 24) {
+        const nums = [];
+        for (let k = i; k < Math.min(n + 1, i + 24); k++) nums.push(k);
+        const got = await Promise.all(nums.map(k => bkDoc.getPage(k)));
+        if (tok !== bkViewTok) return false;
+        const frag = document.createDocumentFragment();
+        got.forEach((page, j) => {
+            const num = nums[j], vp1 = page.getViewport({ scale: 1 });
+            const wrap = document.createElement('div');
+            wrap.className = 'bk-pg'; wrap.dataset.page = num;
+            const canvas = document.createElement('canvas'); canvas.className = 'bk-cv';
+            const hlL = document.createElement('div'); hlL.className = 'bk-hll';
+            const tl = document.createElement('div'); tl.className = 'bk-tl';
+            wrap.append(canvas, hlL, tl);
+            const pg = { num, page, vp1, wrap, canvas, hlL, tl, state: 'idle', gen: 0, task: null, dataP: null };
+            bkVP.push(pg);
+            bkSizePage(pg);
+            frag.appendChild(wrap);
         });
-        pg.el.replaceChildren(cv, tl);
-        pg.el.style.width = vp.width + 'px'; pg.el.style.height = vp.height + 'px';
-        pg.w0 = cw; pg.rendered = true;
-        bkApplyHl(pg);
-    } catch (e) { console.error(e); }
-    finally {
-        pg.busy = false;
-        if (pg.again) { pg.again = false; bkRenderPage(pg); }
+        bkPagesEl.appendChild(frag);
+        if (i === 1) bkRefresh();
     }
-}
-function bkApplyHl(pg) {
-    if (!pg || !pg.spans) return;
-    pg.spans.forEach(sp => { const r = sp._r; sp.classList.toggle('bk-hl', !!(bkHl && r && r.e > bkHl.s && r.s < bkHl.e)); });
-}
-function bkApplyHlAll() { bkPages.forEach(bkApplyHl); }
-function bkRefit() {
-    if (!bkPages.length || !bkPagesEl) return;
-    const cw = bkCw();
-    bkPages.forEach(pg => {
-        if (!pg.el) return;
-        if (pg.rendered && Math.abs(pg.w0 - cw) > 2) pg.rendered = false;
-        if (!pg.rendered) {
-            pg.el.style.width = cw + 'px'; pg.el.style.height = Math.round(cw * pg.h / pg.w) + 'px';
-            if (bkNear(pg.el)) bkRenderPage(pg);
-        }
-    });
+    return true;
 }
 async function bkOpenChapter(i) {
     const c = bkBook && bkBook.chapters && bkBook.chapters[i]; if (!c) return;
@@ -9195,17 +9444,38 @@ async function bkOpenChapter(i) {
     bkSetStatus('⏳ Đang tải chương…');
     try {
         const L = await bkPdfLib();
-        const doc = await L.getDocument({ url: c.url }).promise;
+        const res = await fetch(c.url);
+        if (!res.ok) throw new Error('lỗi tải ' + res.status);
+        const buf = await res.arrayBuffer();
+        if (tok !== bkViewTok) return;
+        const doc = await L.getDocument({ data: buf }).promise;
         if (tok !== bkViewTok) { try { doc.destroy(); } catch (e) {} return; }
         bkDoc = doc;
-        const ex = await bkExtract(doc, tok, (n, t) => bkSetStatus('⏳ Đang đọc chương: trang ' + n + '/' + t));
-        if (!ex || tok !== bkViewTok) return;
-        bkPages = ex.pages; bkText = ex.text;
-        bkBuildPages();
-        bkSecs = bkLoadManual(c.url); bkRelink(); bkRenderSecList();
-        bkSetStatus(bkText.trim() ? '' : 'Chương này không có chữ (có thể là PDF scan), AI không đọc được nội dung.');
+        const first = await doc.getPage(1);
+        if (tok !== bkViewTok) return;
+        // mở ra vừa bề ngang khung đọc
+        const avail = Math.max(240, bkWrapEl.clientWidth - 24);
+        bkScale = Math.max(0.3, Math.min(2.5, Math.floor(avail / first.getViewport({ scale: 1 }).width * 10) / 10));
+        bkUpdZoom();
+        bkSetStatus('⏳ Đang dựng các trang…');
+        if (!(await bkBuildVP(tok))) return;
+        bkRefresh();
+        bkSetStatus('⏳ Đang đọc chữ để phân mục…');
     } catch (e) {
         if (tok === bkViewTok) bkSetStatus('Không mở được chương. ' + ((e && e.message) || '') + ' Kiểm tra file PDF trên GitHub đã công khai chưa.');
+        return;
+    }
+    // đọc chữ + nhận diện tiêu đề chạy nền: PDF đã hiện và đọc được ngay
+    try {
+        const ex = await bkExtract(bkDoc, tok, (n, t) => bkSetStatus('⏳ Đang đọc chữ chương: trang ' + n + '/' + t));
+        if (!ex || tok !== bkViewTok) return;
+        bkPages = ex.pages; bkText = ex.text;
+        bkSecs = bkLoadManual(c.url); bkRelink(); bkRenderSecList();
+        bkApplyHlAll();
+        bkSetStatus(bkText.trim() ? '' : 'Chương này không có chữ (có thể là PDF scan), AI không đọc được nội dung.');
+    } catch (e) {
+        console.error(e);
+        if (tok === bkViewTok) bkSetStatus('PDF đã mở nhưng chưa đọc được chữ để phân mục/dịch. ' + ((e && e.message) || ''));
     }
 }
 function bkBackToShelf() {
@@ -9217,8 +9487,7 @@ function bkBackToShelf() {
 /* Đánh dấu phân mục thủ công: tô chọn tiêu đề trong PDF → thêm vào danh sách đúng vị trí */
 /* Dịch nhanh: mở box chat và dịch đoạn đang tô đen trong PDF (hoặc đoạn đã tô gần nhất) */
 function bkQuickTr() {
-    const sel = window.getSelection ? window.getSelection() : null;
-    const live = sel && sel.rangeCount ? sel.toString().trim() : '';
+    const live = bkSelText();
     const src = live || bkPdfSel;
     if (!src) { showToast('Hãy tô đen đoạn cần dịch trong PDF rồi bấm ⚡ Dịch nhanh'); return; }
     if (!aiAnyKey()) { aiShowGate(); return; }
@@ -9269,7 +9538,7 @@ function bkPickSource() {
     const s = sel ? sel.toString().trim() : '';
     const an = sel && sel.anchorNode ? (sel.anchorNode.nodeType === 1 ? sel.anchorNode : sel.anchorNode.parentNode) : null;
     if (s && an && box && box.contains(an)) return s;            // tô đen trong khung chat
-    if (s && an && bkWrapEl && bkWrapEl.contains(an)) return s;  // tô đen trong PDF
+    if (s && an && bkWrapEl && bkWrapEl.contains(an)) return bkSelText() || s;  // tô đen trong PDF
     if (bkPdfSel) return bkPdfSel;                               // đoạn đã tô trong PDF (nhớ lại khi bấm từ chat)
     const t = document.getElementById('ai-input');
     if (!t) return '';
@@ -9459,7 +9728,7 @@ function bkMergeSecs(x, y) {
 }
 async function bkDetectChapter() {
     if (!bkDoc) return;
-    if (!bkText.trim()) { showToast('Chương này chưa có chữ để nhận diện'); return; }
+    if (!bkText.trim()) { showToast('Chương đang được đọc chữ (xem thanh trạng thái) hoặc không có chữ — thử lại sau giây lát'); return; }
     if (!aiAnyKey()) { aiShowGate(); return; }
     const btn = document.getElementById('bk-sec-btn'), list = document.getElementById('bk-sec-list');
     btn.disabled = true;
@@ -9553,18 +9822,23 @@ function bkToggleSec() {
 }
 /* Chọn một phân mục: sáng lên trong PDF, cuộn tới trang và hiện nút dịch */
 /* Cuộn tới đúng dòng chứa vị trí tiêu đề (nếu trang chưa vẽ thì ước lượng theo tỉ lệ ký tự) */
-function bkScrollToPos(pos) {
-    let pg = bkPages[0]; bkPages.forEach(p => { if (p.gs <= pos) pg = p; });
-    if (!pg || !pg.el || !bkWrapEl) return;
-    const pr = pg.el.getBoundingClientRect(), wr = bkWrapEl.getBoundingClientRect();
-    const frac = pg.ge > pg.gs ? Math.max(0, Math.min(1, (pos - pg.gs) / (pg.ge - pg.gs))) : 0;
-    let y = pr.top + frac * pr.height;
-    if (pg.spans && pg.spans.length) {
-        const hit = pg.spans.find(sp => sp._r && sp._r.s <= pos && sp._r.e > pos) ||
-            pg.spans.filter(sp => sp._r && sp._r.s >= pos).sort((a, b) => a._r.s - b._r.s)[0];
-        if (hit) y = hit.getBoundingClientRect().top;
-    }
-    bkWrapEl.scrollTo({ top: Math.max(0, bkWrapEl.scrollTop + (y - wr.top) - 60), behavior: 'smooth' });
+async function bkScrollToPos(pos) {
+    if (!bkPages.length || !bkWrapEl || !bkVP.length) return;
+    let ex = bkPages[0]; bkPages.forEach(p => { if (p.gs <= pos) ex = p; });
+    const pg = bkVP[ex.num - 1]; if (!pg) return;
+    const frac = ex.ge > ex.gs ? Math.max(0, Math.min(1, (pos - ex.gs) / (ex.ge - ex.gs))) : 0;
+    let y = frac * pg.vp1.height * bkScale;
+    try {
+        const data = await bkPageData(pg);
+        let hit = data.items.find(d => { const r = ex.rg[d.idx]; return r && r.s <= pos && r.e > pos; });
+        if (!hit) {
+            const later = data.items.filter(d => ex.rg[d.idx] && ex.rg[d.idx].s >= pos).sort((a, b) => ex.rg[a.idx].s - ex.rg[b.idx].s);
+            hit = later[0];
+        }
+        if (hit) y = (hit.y - hit.fh) * bkScale;
+    } catch (e) {}
+    const top = pg.wrap.getBoundingClientRect().top - bkWrapEl.getBoundingClientRect().top + bkWrapEl.scrollTop + y - 60;
+    bkWrapEl.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
 }
 function bkSelSec(i) {
     const s = bkSecs[i]; if (!s) return;
@@ -9580,11 +9854,14 @@ function bkSelSec(i) {
 /* Vị trí và tiêu đề của đoạn đang tô trong PDF */
 function bkSelPos() {
     const sel = window.getSelection ? window.getSelection() : null;
-    if (!sel || !sel.rangeCount || !sel.toString().trim()) return null;
+    if (!sel || !sel.rangeCount || sel.isCollapsed) return null;
     const rg = sel.getRangeAt(0), node = rg.startContainer, el = node.nodeType === 1 ? node : node.parentNode;
     const sp = el && el.closest ? el.closest('.bk-tl span') : null;
-    if (!sp || !sp._r) return null;
-    return { pos: sp._r.s + (node.nodeType === 3 ? rg.startOffset : 0), title: sel.toString().trim().replace(/\s+/g, ' ').slice(0, 160) };
+    const r = sp ? bkSpanR(sp) : null;
+    if (!r) return null;
+    const title = bkSelText().replace(/\s+/g, ' ').slice(0, 160);
+    if (!title) return null;
+    return { pos: r.s + (node.nodeType === 3 ? rg.startOffset : 0), title: title };
 }
 /* Quét lại: 2 lần (lập danh sách mục con → đối chiếu với đoạn văn) rồi mới đưa vào mục lục */
 async function bkAiSub(seg, title, pass, prev) {
@@ -12161,12 +12438,17 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         <button id="bk-ai-btn" type="button" onclick="bkOpenAi()" class="fixed bottom-5 right-5 z-[56] bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-extrabold text-sm px-4 py-2.5 rounded-full shadow-xl ring-2 ring-indigo-200 flex items-center gap-1.5 active:scale-95 transition-all">🤖 AI Chat</button>
     </div>
     <style>
-        .bk-tl { position: absolute; left: 0; top: 0; overflow: hidden; line-height: 1; }
-        .bk-tl span { position: absolute; white-space: pre; color: transparent; cursor: text; font-family: sans-serif; }
-        .bk-tl span.bk-hl { background: rgba(250, 204, 21, 0.55); border-radius: 2px; box-shadow: 0 0 0 1px rgba(202, 138, 4, 0.5); }
-        .bk-tl ::selection { background: rgba(37, 99, 235, 0.35); }
-        .bk-pg { position: relative; background: #fff; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.45); flex: none; overflow: hidden; margin: 0 auto; }
-        #bk-pdf-pages { display: flex; flex-direction: column; align-items: stretch; gap: 14px; padding: 12px 8px 56px; }
+        /* Trình đọc PDF: canvas < lớp tô sáng < lớp chữ, cùng gốc toạ độ (0,0) của trang */
+        .bk-pg { position: relative; margin: 12px auto; background: #fff; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.45); overflow: hidden; isolation: isolate; flex: none; }
+        .bk-cv { position: absolute; left: 0; top: 0; margin: 0; padding: 0; border: 0; max-width: none; display: block; background: #fff; }
+        .bk-hll { position: absolute; left: 0; top: 0; right: 0; bottom: 0; z-index: 1; pointer-events: none; mix-blend-mode: multiply; }
+        .bk-hr { position: absolute; background: rgba(250, 204, 21, 0.65); border-radius: 2px; }
+        .bk-tl { position: absolute; left: 0; top: 0; right: 0; bottom: 0; z-index: 2; overflow: hidden; line-height: 1; text-align: initial; -webkit-user-select: text; user-select: text; }
+        .bk-tl > span { position: absolute; margin: 0; padding: 0; line-height: 1; color: transparent; white-space: pre; cursor: text; transform-origin: 0 0; }
+        .bk-tl .bk-end { display: block; position: absolute; left: 0; right: 0; top: 100%; bottom: 0; z-index: -1; cursor: default; -webkit-user-select: none; user-select: none; }
+        .bk-tl.selecting .bk-end { top: 0; }
+        .bk-tl ::selection { background: rgba(37, 99, 235, 0.3); }
+        #bk-pdf-pages { display: block; padding: 4px 8px 56px; }
         .bk-sec-on { background: #fde68a !important; border-color: #f59e0b !important; }
         #book-viewer #bk-main { transition: padding 0.2s ease; }
         #bk-sec-panel.bk-col { width: 2.5rem !important; max-height: none !important; }
