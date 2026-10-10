@@ -8872,6 +8872,20 @@ function bkMat(A, B) {
     return [A[0] * B[0] + A[1] * B[2], A[0] * B[1] + A[1] * B[3], A[2] * B[0] + A[3] * B[2], A[2] * B[1] + A[3] * B[3],
         A[4] * B[0] + A[5] * B[2] + B[4], A[4] * B[1] + A[5] * B[3] + B[5]];
 }
+/* Chữ in đậm: lấy từ tên font đã nạp của trang (nếu PDF cho biết) */
+function bkIsBold(page, fn) {
+    try {
+        if (!fn || !page.commonObjs || !page.commonObjs.has(fn)) return false;
+        const o = page.commonObjs.get(fn); const nm = String((o && (o.name || o.loadedName)) || fn);
+        return /bold|black|semibold|heavy|demi/i.test(nm) || !!(o && (o.bold || o.black));
+    } catch (e) { return false; }
+}
+/* Vị trí i có phải đầu dòng (sau xuống dòng hoặc sau dấu câu kết thúc) */
+function bkLineStart(T, i) {
+    if (i <= 0) return true;
+    const pre = T.slice(Math.max(0, i - 8), i);
+    return /\n\s*$/.test(pre) || /[.!?:)"”]\s*$/.test(pre);
+}
 function bkBB(pts) {
     let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
     pts.forEach(([x, y]) => { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; });
@@ -8926,7 +8940,7 @@ async function bkImageBoxes(page) {
         const w = c.x1 - c.x0, h = c.y1 - c.y0;
         if (c.n >= 6 && w >= 0.25 * vw && h >= 25 && h < 0.95 * vh) {
             // lề trái rộng hơn để bắt cả nhãn trục (tên nghiên cứu) đứng bên trái biểu đồ
-            boxes.push({ x0: c.x0 - 0.18 * w, x1: c.x1 + 4, y0: c.y0 - 3, y1: c.y1 + 3, r: 2 });
+            boxes.push({ x0: c.x0 - 0.45 * w, x1: c.x1 + 0.1 * w, y0: c.y0 - 3, y1: c.y1 + 16, r: 2 });
         }
     });
     return boxes;
@@ -8949,12 +8963,13 @@ async function bkExtract(doc, tok, onProg) {
         if (tok !== bkViewTok) return null;
         const page = await doc.getPage(p);
         const vp = page.getViewport({ scale: 1 });
+        await page.getOperatorList();
         const tc = await page.getTextContent();
         const its = [];
         tc.items.forEach((it, idx) => {
             if (!it.str) return;
             const t = it.transform;
-            its.push({ idx, str: it.str, x: t[4], y: t[5], w: it.width || 0, fh: Math.hypot(t[2], t[3]) || 10 });
+            its.push({ idx, str: it.str, x: t[4], y: t[5], w: it.width || 0, fh: Math.hypot(t[2], t[3]) || 10, bd: bkIsBold(page, it.fontName) });
         });
         const boxes = await bkImageBoxes(page);
         raw.push({ num: p, w: vp.width, h: vp.height, its, boxes });
@@ -9044,29 +9059,33 @@ async function bkExtract(doc, tok, onProg) {
             rg[it.idx] = { s: base + txt.length, e: base + txt.length + it.str.length };
             txt += it.str; prev = it;
         });
-        const cands = []; {   // tiêu đề: dòng in đậm/cỡ lớn hơn thân bài hoặc đứng riêng, sau một câu kết thúc; nối các dòng của cùng một tiêu đề
+        const cands = []; {   // tiêu đề: dòng bắt đầu bằng chữ in đậm (cả dòng, hoặc đầu đề nhỏ kết thúc bằng dấu chấm); nếu trang không có chữ đậm thì dùng cỡ chữ
             const lines = []; let cur = null;
             ord.forEach(it => { if (cur && Math.abs(it.y - cur.y) < 0.5 * it.fh && (it.x < W * 0.5) === cur.left) cur.items.push(it); else { cur = { y: it.y, fh: it.fh, left: it.x < W * 0.5, items: [it] }; lines.push(cur); } });
             const txtOf = ln => ln.items.map(q => q.str).join(' ').replace(/\s+/g, ' ').trim();
-            const okTxt = t => t.length >= 3 && t.length <= 110 && !/[.,;:]$/.test(t) && /^[A-Z]/.test(t) && /[A-Za-z]{3}/.test(t) && !/%/.test(t) && !/\d{3,}/.test(t) && !/\(\d/.test(t);
+            const boldLead = ln => { let s = ''; for (const q of ln.items) { if (!q.bd) break; s += q.str; } return s.replace(/\s+/g, ' ').trim(); };
+            const hasBold = lines.some(ln => ln.items.some(q => q.bd));
+            const okTxt = t => t.length >= 3 && t.length <= 110 && /^[A-Z]/.test(t) && /[A-Za-z]{3}/.test(t) && !/%/.test(t) && !/\d{3,}/.test(t) && !/\(\d/.test(t) && !/et al/i.test(t) && !/^combined$/i.test(t);
+            const wholeB = lines.map(ln => !hasBold || (boldLead(ln).length >= txtOf(ln).length - 1 && boldLead(ln).length >= 3));
+            const upIdx = lines.map((ln, k) => { for (let j = k - 1; j >= 0; j--) if (lines[j].left === ln.left) return j; return -1; });
             const isH = lines.map((ln, k) => {
                 const t = txtOf(ln); if (!okTxt(t)) return false;
-                const up = lines.slice(0, k).reverse().find(l => l.left === ln.left);
+                const j = upIdx[k], up = j >= 0 ? lines[j] : null;
                 const dn = lines.slice(k + 1).find(l => l.left === ln.left);
                 const gapUp = up ? up.y - ln.y : 1e9, gapDn = dn ? ln.y - dn.y : 1e9;
-                const afterOk = !up || /[.!?:)"”]$/.test(txtOf(up)) || gapUp >= 2 * ln.fh;
-                return afterOk && (ln.fh >= 1.08 * bodyFh || gapDn >= 1.2 * ln.fh);
+                const afterOk = !up || /[.!?:)"”]$/.test(txtOf(up)) || gapUp >= 2 * ln.fh || (hasBold && j >= 0 && wholeB[j] && gapUp < 1.7 * ln.fh);
+                if (!afterOk) return false;
+                if (hasBold) { const lead = boldLead(ln); return lead.length >= 3 && (wholeB[k] || (/\.$/.test(lead) && lead.length <= 60)); }
+                return ln.fh >= 1.08 * bodyFh || gapDn >= 1.2 * ln.fh;
             });
+            const runIn = lines.map((ln, k) => hasBold && isH[k] && !wholeB[k] ? boldLead(ln).replace(/\.$/, '').trim() : '');
             let run = null;
             const flush = () => { if (run && rg[run.first.idx]) cands.push({ s: rg[run.first.idx].s, t: run.text, fh: run.fh }); run = null; };
             lines.forEach((ln, k) => {
-                const t = txtOf(ln);
-                if (run && (ln.left !== run.left || (run.lastY - ln.y) >= 1.7 * ln.fh)) flush();
-                const cont = run && run.fh >= 1.08 * bodyFh && okTxt(t) && Math.abs(ln.fh - run.fh) < 1;
-                if (isH[k] || cont) {
-                    if (!run) run = { first: ln.items[0], left: ln.left, lastY: ln.y, text: t, fh: ln.fh };
-                    else { run.text += ' ' + t; run.lastY = ln.y; }
-                } else flush();
+                if (runIn[k]) { flush(); if (rg[ln.items[0].idx]) cands.push({ s: rg[ln.items[0].idx].s, t: runIn[k], fh: ln.fh }); return; }
+                const mergeable = isH[k] && wholeB[k];
+                if (run && (!mergeable || ln.left !== run.left || (run.lastY - ln.y) >= 1.7 * ln.fh)) flush();
+                if (mergeable) { if (!run) run = { first: ln.items[0], left: ln.left, lastY: ln.y, text: txtOf(ln), fh: ln.fh }; else { run.text += ' ' + txtOf(ln); run.lastY = ln.y; } }
             });
             flush();
         }
@@ -9387,7 +9406,7 @@ function bkFindAll(hay, needle) {   // mọi vị trí của tiêu đề (khớp
     return out;
 }
 async function bkAiOutline(body, hints) {
-    const sys = 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Quét TOÀN BỘ đoạn văn bản chương sách được gửi và lập MỤC LỤC các tiêu đề mục (giống bookmark của PDF), theo đúng thứ tự xuất hiện, kể cả phần giới thiệu/mở đầu nếu có tiêu đề. Với mỗi mục trả về: "src" = tiêu đề GIỮ NGUYÊN NGUYÊN VĂN như in, kể cả số thứ tự nếu có (ví dụ "1.2 Enamel"), không kèm số trang; "vi" = tên tiếng Việt ngắn gọn theo thuật ngữ RHM miền Nam; "lvl" = 1 cho mục lớn, 2 cho mục con (1.1), 3 cho mục nhỏ hơn. KHÔNG lập mục từ: tên chương, tên tác giả, nhãn hình (A, B, C…), chú thích hình/bảng (Fig., Table…), nhãn hộp (Box…), tiêu đề bảng, chữ trong hình, header, footer, số trang, câu văn thường. Các câu bị ngắt do chuyển cột, hình hay trang phải được ráp lại trước khi nhận diện. Trả về MỘT đối tượng JSON: {"sections":[{"src":"...","vi":"...","lvl":1}]}; nếu không có tiêu đề nào, {"sections":[]}. Không thêm chữ nào ngoài JSON.';
+    const sys = 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Quét TOÀN BỘ đoạn văn bản chương sách được gửi và lập MỤC LỤC các tiêu đề mục (giống bookmark của PDF), theo đúng thứ tự xuất hiện, kể cả phần giới thiệu/mở đầu nếu có tiêu đề. Với mỗi mục trả về: "src" = tiêu đề GIỮ NGUYÊN NGUYÊN VĂN như in, kể cả số thứ tự nếu có (ví dụ "1.2 Enamel"), không kèm số trang; "vi" = tên tiếng Việt ngắn gọn theo thuật ngữ RHM miền Nam; "lvl" = 1 cho mục lớn, 2 cho mục con (1.1), 3 cho mục nhỏ hơn. KHÔNG lập mục từ: tên chương, tên tác giả, nhãn hình (A, B, C…), chú thích hình/bảng (Fig., Table…), nhãn hộp (Box…), tiêu đề bảng, chữ trong hình, header, footer, số trang, câu văn thường, câu nằm giữa đoạn văn, tên nghiên cứu trên biểu đồ (ví dụ Smith et al. 2010), Combined, nhãn trục số. Chỉ lấy tiêu đề in đậm đứng đầu dòng hoặc tiêu đề cỡ lớn. Các câu bị ngắt do chuyển cột, hình hay trang phải được ráp lại trước khi nhận diện. Trả về MỘT đối tượng JSON: {"sections":[{"src":"...","vi":"...","lvl":1}]}; nếu không có tiêu đề nào, {"sections":[]}. Không thêm chữ nào ngoài JSON.';
     const user = 'ĐOẠN VĂN CẦN QUÉT:\n' + body + (hints ? '\n\nDÒNG NGẮN ĐỨNG RIÊNG (ứng viên tiêu đề dò từ PDF; chỉ chọn những dòng thật sự là tiêu đề mục, đối chiếu với đoạn văn):\n' + hints : '');
     const v = await aiGeminiJson(sys, user, 3000);
     return (v && Array.isArray(v.sections) ? v.sections : [])
@@ -9406,7 +9425,7 @@ function bkLocateIn(list, a, b) {
     list.forEach(o => {
         const body = o.src.replace(/^\s*\d+(?:\.\d+)*\s*/, '');
         if (!/^[A-Z0-9"“(]/.test(body) || /%/.test(o.src)) return;
-        const occ = bkFindAll(T, o.src).filter(i => i >= cur && i < b);
+        const occ = bkFindAll(T, o.src).filter(i => i >= cur && i < b && bkLineStart(T, i) && !/et al/i.test(o.src));
         if (!occ.length) return;
         const nt = occ.filter(i => !isToc(i));
         const pick = nt.length ? nt[0] : occ[0];
