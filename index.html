@@ -9140,7 +9140,27 @@ async function bkApplyHl(pg) {
     });
     pg.hlL.appendChild(frag);
 }
-function bkApplyHlAll() { bkVP.forEach(bkApplyHl); }
+function bkApplyHlAll() { bkVP.forEach(bkApplyHl); bkVP.forEach(bkApplyQzHl); }
+async function bkApplyQzHl(pg) {
+    const ex = bkPages[pg.num - 1];
+    if (!pg.qzL) { pg.qzL = document.createElement('div'); pg.qzL.className = 'bk-hll'; pg.wrap.insertBefore(pg.qzL, pg.tl); }
+    if (!(bkQzHl && ex && ex.rg && ex.ge > bkQzHl.s && ex.gs < bkQzHl.e && pg.state === 'done')) { pg.qzL.textContent = ''; return; }
+    let data;
+    try { data = await bkPageData(pg); } catch (e) { return; }
+    pg.qzL.textContent = '';
+    if (pg.state !== 'done' || !bkQzHl) return;
+    const s = bkScale, frag = document.createDocumentFragment();
+    data.items.forEach(d => {
+        if (d.ws) return;
+        const r = ex.rg[d.idx];
+        if (!r || !(r.e > bkQzHl.s && r.s < bkQzHl.e)) return;
+        const el = document.createElement('div');
+        el.className = 'bk-qzhr';
+        el.style.cssText = 'left:' + (d.x * s - 1).toFixed(1) + 'px;top:' + ((d.y - d.fh * 0.88) * s - 1).toFixed(1) + 'px;width:' + (d.w * s + 2).toFixed(1) + 'px;height:' + (d.fh * 1.15 * s + 2).toFixed(1) + 'px';
+        frag.appendChild(el);
+    });
+    pg.qzL.appendChild(frag);
+}
 function bkSetStatus(msg) {
     const el = document.getElementById('bk-pdf-status'); if (!el) return;
     el.textContent = msg || ''; el.classList.toggle('hidden', !msg);
@@ -9362,7 +9382,7 @@ async function bkExtract(doc, tok, onProg) {
             const hasBold = lines.some(ln => ln.items.some(q => q.bd));
             const colX = { L: Infinity, R: Infinity };
             lines.forEach(ln => { const k = ln.left ? 'L' : 'R'; colX[k] = Math.min(colX[k], ln.items[0].x); });
-            const okTxt = t => t.length >= 3 && t.length <= 110 && /^[A-Z]/.test(t) && /[A-Za-z]{3}/.test(t) && !/\d{3,}/.test(t) && !/\(\d/.test(t) && !/et al/i.test(t) && !/^combined$/i.test(t);
+            const okTxt = t => t.length >= 3 && t.length <= 110 && /^[A-Z]/.test(t) && /[A-Za-z]{3}/.test(t) && !/%/.test(t) && !/\d{3,}/.test(t) && !/\(\d/.test(t) && !/et al/i.test(t) && !/^combined$/i.test(t);
             const wholeB = lines.map(ln => !hasBold || (boldLead(ln).length >= txtOf(ln).length - 1 && boldLead(ln).length >= 3));
             const upIdx = lines.map((ln, k) => { for (let j = k - 1; j >= 0; j--) if (lines[j].left === ln.left) return j; return -1; });
             const isH = lines.map((ln, k) => {
@@ -9711,9 +9731,9 @@ function bkLocateIn(list, a, b) {
     const isToc = i => { const le = T.indexOf('\n', i); const line = T.slice(i, le < 0 ? i + 160 : le); return /\.{3,}|…|\s\d{1,4}\s*$/.test(line); };
     list.forEach(o => {
         const body = o.src.replace(/^\s*\d+(?:\.\d+)*\s*/, '');
-        if (!/^[A-Z0-9"“(%]/.test(body)) return;
+        if (!/^[A-Z0-9"“(]/.test(body) || /%/.test(o.src)) return;
         const occ = bkFindAll(T, o.src).filter(i => i >= cur && i < b && i < cur + 30000 && bkLineStart(T, i) && (o.src.length >= 15 || /^[ \t\r]*(\n|$)/.test(T.slice(i + o.src.length, i + o.src.length + 4))) && !/et al/i.test(o.src));
-        if (!occ.length) { occ.push(...bkFindAll(T, o.src).filter(i => i >= a && i < b && bkLineStart(T, i) && !/et al/i.test(o.src))); if (!occ.length) return; }
+        if (!occ.length) return;
         const nt = occ.filter(i => !isToc(i));
         const pick = nt.length ? nt[0] : occ[0];
         const num = (o.src.match(/^\s*(\d+(?:\.\d+)*)/) || [])[1] || '';
@@ -12442,6 +12462,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         .bk-pg { position: relative; margin: 12px auto; background: #fff; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.45); overflow: hidden; isolation: isolate; flex: none; }
         .bk-cv { position: absolute; left: 0; top: 0; margin: 0; padding: 0; border: 0; max-width: none; display: block; background: #fff; }
         .bk-hll { position: absolute; left: 0; top: 0; right: 0; bottom: 0; z-index: 1; pointer-events: none; mix-blend-mode: multiply; }
+        .bk-qzhr { position: absolute; background: rgba(34, 197, 94, 0.38); border-radius: 3px; pointer-events: none; }
         .bk-hr { position: absolute; background: rgba(250, 204, 21, 0.65); border-radius: 2px; }
         .bk-tl { position: absolute; left: 0; top: 0; right: 0; bottom: 0; z-index: 2; overflow: hidden; line-height: 1; text-align: initial; -webkit-user-select: text; user-select: text; }
         .bk-tl > span { position: absolute; margin: 0; padding: 0; line-height: 1; color: transparent; white-space: pre; cursor: text; transform-origin: 0 0; }
@@ -14067,6 +14088,7 @@ function aiIsEnWord(t) { var s = String(t || '').trim(); return s.length > 0 && 
         if (b._lt && b._lt.en && b._lt.vi && b._cur === 'both') aiTtsStartBi(b, aiTtsBubbleBtn(b)); else aiTtsStart(b, null, null, aiTtsBubbleBtn(b));
     }
     /* ===== TRẮC NGHIỆM TƯƠNG TÁC TRONG CHAT ĐỌC SÁCH ===== */
+var bkQzHl = null;
 let bkQz = { items: [], idx: 0, done: {}, ok: 0 };
 function bkQzTitle(t) { const h = document.getElementById('ai-en-title'); if (h) h.textContent = t; }
 function bkQzEnsureBtn() {
@@ -14122,14 +14144,14 @@ async function bkQzStart(n, lvl) {
     if (!aiAnyKey()) { aiShowGate(); return; }
     const titles = bkSecs.filter(x => x.title).map(x => x.title).slice(0, 120);
     const lvlTxt = { easy: 'dễ (kiến thức nhận biết trực tiếp)', mid: 'vừa (hiểu và so sánh)', hard: 'khó (vận dụng, phân biệt tinh vi)' }[lvl];
-    const sys = 'Bạn là giảng viên ra đề Răng Hàm Mặt. Dựa CHỈ vào nội dung chương sách được cung cấp, tạo đúng ' + n + ' câu hỏi trắc nghiệm 4 đáp án (chỉ 1 đáp án đúng), mức độ ' + lvlTxt + '. Viết bằng tiếng Việt. Chỉ trả về MỘT đối tượng JSON dạng {"questions":[{"q":"<câu hỏi>","o":["<A>","<B>","<C>","<D>"],"a":<chỉ số đáp án đúng 0-3>,"x":"<giải thích ngắn 1-3 câu>","sec":"<tiêu đề mục liên quan nhất, chép đúng từ danh sách mục; để rỗng nếu không có>","ref":"<chép NGUYÊN VĂN 8–15 từ TIẾNG ANH liên tiếp trong nội dung chương, nằm trong đoạn chứa đáp án đúng; không dịch, không sửa>"}]}. Các câu hỏi không trùng ý; đáp án đúng đặt ngẫu nhiên; không dùng "tất cả đều đúng". Danh sách mục của chương: ' + JSON.stringify(titles);
+    const sys = 'Bạn là giảng viên ra đề Răng Hàm Mặt. Dựa CHỈ vào nội dung chương sách được cung cấp, tạo đúng ' + n + ' câu hỏi trắc nghiệm 4 đáp án (chỉ 1 đáp án đúng), mức độ ' + lvlTxt + '. Viết bằng tiếng Việt. Chỉ trả về MỘT đối tượng JSON dạng {"questions":[{"q":"<câu hỏi>","o":["<A>","<B>","<C>","<D>"],"a":<chỉ số đáp án đúng 0-3>,"x":"<giải thích ngắn 1-3 câu>","sec":"<tiêu đề mục liên quan nhất, chép đúng từ danh sách mục; để rỗng nếu không có>"}]}. Các câu hỏi không trùng ý; đáp án đúng đặt ngẫu nhiên; ĐỘ DÀI 4 ĐÁP ÁN PHẢI GẦN BẰNG NHAU: mỗi đáp án nhiễu dài ngang đáp án đúng (chênh lệch số ký tự không quá khoảng 15%), cùng văn phong, cùng cấu trúc ngữ pháp, cùng mức chi tiết; không để đáp án đúng ngắn hơn hoặc dài hơn rõ rệt so với các đáp án còn lại; không dùng "tất cả đều đúng". Danh sách mục của chương: ' + JSON.stringify(titles);
     const box = document.getElementById('ai-messages');
     bkQzTitle('📝 Trắc nghiệm'); aiEnPanelOpen(); const bd0 = document.querySelector('#ai-en-panel .ai-en-body'); if (bd0) bd0.innerHTML = '<div class="ai-en-empty">⏳ Đang soạn câu hỏi trắc nghiệm…</div>'; aiAddMsg('sys', '⏳ Đang soạn ' + n + ' câu trắc nghiệm (' + lvlTxt.split(' ')[0] + ')…');
     try {
         const r = await window.bkQzCallAI(sys, [{ text: 'NỘI DUNG CHƯƠNG SÁCH:\n' + bkText.slice(0, 60000) }]);
         const qs = ((r && r.questions) || []).filter(q => q && q.q && Array.isArray(q.o) && q.o.length === 4 && typeof q.a === 'number' && q.a >= 0 && q.a < 4);
         if (!qs.length) { showToast('Chưa tạo được câu hỏi, hãy thử lại'); return; }
-        bkQz = { items: qs.slice(0, n).map(q => { const si = bkSecs.findIndex(x => x.title === q.sec); return { q: String(q.q), o: q.o.map(String), a: q.a, x: String(q.x || ''), si: si, ref: String(q.ref || '') }; }), idx: 0, done: {}, ok: 0 };
+        bkQz = { items: qs.slice(0, n).map(q => { const si = bkSecs.findIndex(x => x.title === q.sec); return { q: String(q.q), o: q.o.map(String), a: q.a, x: String(q.x || ''), si: si }; }), idx: 0, done: {}, ok: 0 };
         bkQzTitle('📝 Trắc nghiệm');
         const p = aiEnPanelOpen(); if (!p) return;
         bkQzRender();
@@ -14176,8 +14198,8 @@ function bkQzToggle() {
     const pp = aiEnPanelOpen(); if (pp) { bkQzTitle('📝 Trắc nghiệm'); bkQzRender(); }
 }
 function bkQzGoto(it) {
-    if (it.ref) { const re = new RegExp(String(it.ref).trim().split(/\s+/).filter(Boolean).map(w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('\\s+'), 'i'); const m = re.exec(bkText || ''); if (m) { bkScrollToPos(m.index); return; } } if (it.si >= 0 && bkSecs[it.si]) { bkSelSec(it.si); return; }
-    const T = String(bkText || '').toLowerCase();
+    if (it.si >= 0 && bkSecs[it.si]) { bkSelSec(it.si); return; }
+    const T = String(bkText || '').toLowerCase().replace(/\s+/g, ' ');
     const q = String(it.q || '').toLowerCase().replace(/\s+/g, ' ');
     let pos = -1;
     for (const len of [40, 25]) { if (pos < 0 && q.length >= len) pos = T.indexOf(q.slice(0, len)); }
@@ -14188,9 +14210,36 @@ function bkQzGoto(it) {
     if (best >= 0) { bkSelSec(best); return; }
     showToast('Không tìm thấy vị trí câu này trong sách');
 }
+async function bkQzLocateAndGo(it) {
+    if (!bkText || !bkText.trim()) { bkQzGoto(it); return; }
+    const esc = w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const findRef = ref => {
+        const ws = String(ref || '').trim().split(/\s+/).filter(Boolean);
+        if (ws.length < 3) return null;
+        let m = new RegExp(ws.map(esc).join('\\s+'), 'i').exec(bkText);
+        if (!m && ws.length > 6) m = new RegExp(ws.slice(0, 6).map(esc).join('\\s+'), 'i').exec(bkText);
+        return m ? { s: m.index, e: m.index + m[0].length } : null;
+    };
+    let loc = it.loc || null;
+    if (!loc && aiAnyKey()) {
+        try {
+            showToast('AI đang định vị câu hỏi trong sách…');
+            const sys = 'Bạn định vị câu hỏi trong chương sách. Tìm ĐOẠN văn trong nội dung chương chứa thông tin để trả lời câu hỏi và đáp án đúng. Chỉ trả về MỘT đối tượng JSON {"ref":"<chép NGUYÊN VĂN 8–20 từ TIẾNG ANH liên tiếp, đúng từng chữ, lấy từ đoạn đó>"}, không viết gì khác.';
+            const user = 'CÂU HỎI: ' + it.q + '\nĐÁP ÁN ĐÚNG: ' + (it.o[it.a] || '') + '\nGIẢI THÍCH: ' + (it.x || '') + '\n\nNỘI DUNG CHƯƠNG:\n' + bkText.slice(0, 60000);
+            const r = await window.bkQzCallAI(sys, [{ text: user }]);
+            loc = findRef(r && r.ref);
+        } catch (e) { loc = null; }
+        if (loc) it.loc = loc;
+    }
+    if (!loc) loc = findRef(it.ref);
+    if (!loc) { bkQzGoto(it); return; }
+    bkQzHl = loc;
+    bkApplyHlAll();
+    bkScrollToPos(loc.s);
+}
 function bkQzReview() {
     const it = bkQz.items[bkQz.idx]; if (!it) return;
-    bkQzGoto(it);
+    bkQzLocateAndGo(it);
 }
 function bkQzExplain() {
     const it = bkQz.items[bkQz.idx]; if (!it) return;
