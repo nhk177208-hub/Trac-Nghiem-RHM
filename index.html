@@ -9288,7 +9288,7 @@ async function bkExtract(doc, tok, onProg) {
         if (pg.num === 1) body0.forEach(it => { if (it.y > pg.h * 0.35 && bkIsAuthorLine(body0.filter(o => Math.abs(o.y - it.y) < 0.5 * it.fh).map(o => o.str).join(' '))) body0.forEach(o => { if (Math.abs(o.y - it.y) < 0.5 * it.fh) excl.add(o); }); });
         const isCap = t => /^(table|tbl\.?|fig\.?|figure|box|hình|bảng|hộp|sơ đồ|ảnh)\s*\d/i.test(t.trim());
         // 1) chữ nằm trong khung ảnh (hình, ảnh chụp, phim X-quang…)
-        (pg.boxes || []).forEach(b => body0.forEach(it => { if (it.x >= b.x0 - 2 && it.x <= b.x1 + 2 && it.y >= b.y0 - 2 && it.y <= b.y1 + 2) { if (b.r === 1) return; if ((b.r === 2 || b.r === 3) && (it.bd || it.str.trim().split(/\s+/).length > 8)) return; excl.add(it); } }));
+        (pg.boxes || []).forEach(b => body0.forEach(it => { if (it.x >= b.x0 - 2 && it.x <= b.x1 + 2 && it.y >= b.y0 - 2 && it.y <= b.y1 + 2) { const lw = (o0) => body0.filter(o => (o.x < W * 0.5) === (o0.x < W * 0.5) && Math.abs(o.y - o0.y) < 0.5 * o0.fh).reduce((n, o) => n + o.str.trim().split(/\s+/).filter(Boolean).length, 0); if ((b.r === 2 || b.r === 3) && (it.bd || lw(it) > 3)) return; excl.add(it); } }));
         // 2) chữ cỡ nhỏ hơn thân bài (chú thích, chữ trong bảng, chú thích cuối bảng)
         body0.forEach(it => { if (it.fh < 0.85 * bodyFh) excl.add(it); });
         body0.forEach(it => { if (!it.str.trim()) excl.add(it); });
@@ -9306,16 +9306,16 @@ async function bkExtract(doc, tok, onProg) {
             if (!/^(table|tbl|bảng)/i.test(it.str.trim())) { const upL = body0.filter(o => !excl.has(o) && o.y > it.y && o.y - it.y < 0.6 * pg.h).sort((a, b) => a.y - b.y); for (const o of upL) { const wc = o.str.trim().split(/\s+/).length; if (o.bd || wc >= 12 || (/[.!?]$/.test(o.str.trim()) && wc >= 6)) break; excl.add(o); } }
             if (/^(table|tbl|bảng)/i.test(it.str.trim())) {
                 // bảng: vùng từ chú thích xuống tới đoạn văn dài đầu tiên (có khoảng cách đoạn) đều là bảng/chú thích bảng
-                const below = body0.filter(o => o.y < it.y).sort((a, b) => b.y - a.y);
+                const below = body0.filter(o => o.y < it.y && (o.x < W * 0.5) === side).sort((a, b) => b.y - a.y);
                 let yStop = null, prevY = it.y;
                 for (const o of below) {
-                    const isPara = o.str.trim().split(/\s+/).length >= 9 && /[.!?]$/.test(o.str.trim()) && o.fh >= 0.95 * bodyFh;
+                    const isPara = below.filter(q => Math.abs(q.y - o.y) < 0.5 * o.fh).reduce((n, q) => n + q.str.trim().split(/\s+/).filter(Boolean).length, 0) >= 9 && o.fh >= 0.95 * bodyFh;
                     if (isPara && prevY - o.y > 2.0 * o.fh) { yStop = o.y; break; }
                     prevY = o.y;
                 }
                 body0.forEach(o => {
-                    if (o.y >= it.y || excl.has(o)) return;
-                    if (yStop !== null ? o.y > yStop : (o.str.trim().length <= 60 && (o.x < W * 0.5) === side)) excl.add(o);
+                    if (o.y >= it.y || excl.has(o) || (o.x < W * 0.5) !== side) return;
+                    if (yStop !== null && o.y > yStop) excl.add(o);
                 });
             } else {
                 // hình / chú thích hình: các dòng liền sau cùng cỡ chữ, sát nhau, cùng cột
