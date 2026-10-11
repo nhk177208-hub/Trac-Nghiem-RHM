@@ -12513,7 +12513,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
                     <p id="ai-live-status" class="text-xs text-gray-500 truncate">Chat hoặc nói trực tiếp (Gemini)</p>
                 </div>
                 <div class="flex items-center gap-1 shrink-0">
-                    <button id="ai-enwin-hbtn" type="button" onclick="bkQzChooser()" class="text-xs font-extrabold px-2.5 py-1.5 rounded-full border border-indigo-300 bg-white text-indigo-700 shrink-0 mr-1" title="Tạo câu hỏi trắc nghiệm tương tác từ chương đang đọc">❓ Trắc nghiệm</button>
+                    <button id="ai-enwin-hbtn" type="button" onclick="bkQzToggle()" class="text-xs font-extrabold px-2.5 py-1.5 rounded-full border border-indigo-300 bg-white text-indigo-700 shrink-0 mr-1" title="Ẩn/hiện cửa sổ trắc nghiệm">❓ Trắc nghiệm</button>
                     <div id="ai-lang-box" class="flex items-center rounded-full border border-indigo-300 overflow-hidden shrink-0 mr-1" title="Ngôn ngữ chat (chọn cả hai = song ngữ)">
                         <button id="ai-lang-vie" type="button" onclick="aiLangToggle('vi')" class="text-xs font-extrabold px-2.5 py-1.5 bg-indigo-600 text-white">Vie</button>
                         <button id="ai-lang-eng" type="button" onclick="aiLangToggle('en')" class="text-xs font-extrabold px-2.5 py-1.5 bg-white text-gray-500">Eng</button>
@@ -12998,7 +12998,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         setTimeout(() => { aiEnPanelPlace(); }, 0); aiEnPanelPlace(); aiEnPaintBtns(); return p;
     }
     function aiEnClear() {
-        const list = document.querySelector('#ai-en-panel .ai-en-body'); if (!list) return;
+        const list = document.querySelector('#ai-en-panel .ai-en-body'); if (!list) return; try { if (bkQz && bkQz.items && bkQz.items.length) { bkQzTitle('📝 Trắc nghiệm'); bkQzRender(); return; } } catch (e) {}
         list.innerHTML = '<div class="ai-en-empty">Chưa có đoạn nào. Bấm “🇬🇧 Cửa sổ phụ” dưới một bong bóng chat để xem bản tiếng Anh ở đây.</div>';
     }
     async function aiEnFill(ent, bubble, out) {
@@ -14096,7 +14096,7 @@ function bkQzNavPaint() {
     nav.classList.toggle('hidden', !bkQz.items.length);
     nav.querySelector('[data-q="prev"]').disabled = bkQz.idx <= 0;
     nav.querySelector('[data-q="next"]').disabled = bkQz.idx >= bkQz.items.length - 1;
-    const okA = !!(bkQz.done[bkQz.idx] && bkQz.done[bkQz.idx].ok); nav.querySelector('[data-q="review"]').classList.toggle('hidden', !okA); nav.querySelector('[data-q="expl"]').classList.toggle('hidden', !okA); nav.querySelector('[data-q="review"]').disabled = !(it && it.si >= 0);
+    const okA = !!(bkQz.done[bkQz.idx] && bkQz.done[bkQz.idx].ok); const ans = !!bkQz.done[bkQz.idx]; nav.querySelector('[data-q="review"]').classList.toggle('hidden', !ans); nav.querySelector('[data-q="expl"]').classList.toggle('hidden', !ans); nav.querySelector('[data-q="review"]').disabled = false;
 }
 function bkQzChooser() {
     if (!bkCur || !bkText || !bkText.trim()) { showToast('Hãy mở một chương sách trước'); return; }
@@ -14170,9 +14170,27 @@ function bkQzMove(d) {
     const n = bkQz.idx + d; if (n < 0 || n >= bkQz.items.length) return;
     bkQz.idx = n; bkQzRender();
 }
+function bkQzToggle() {
+    const p = document.getElementById('ai-en-panel');
+    if (p && !p.classList.contains('hidden')) { aiEnPanelClose(); return; }
+    const pp = aiEnPanelOpen(); if (pp) { bkQzTitle('📝 Trắc nghiệm'); bkQzRender(); }
+}
+function bkQzGoto(it) {
+    if (it.si >= 0 && bkSecs[it.si]) { bkSelSec(it.si); return; }
+    const T = String(bkText || '').toLowerCase().replace(/\s+/g, ' ');
+    const q = String(it.q || '').toLowerCase().replace(/\s+/g, ' ');
+    let pos = -1;
+    for (const len of [40, 25]) { if (pos < 0 && q.length >= len) pos = T.indexOf(q.slice(0, len)); }
+    if (pos >= 0) { bkScrollToPos(Math.min(pos, bkText.length - 1)); return; }
+    const words = [...new Set(q.split(/[^\p{L}\p{N}]+/u).filter(w => w.length >= 4))];
+    let best = -1, bestN = 0;
+    bkSecs.forEach((sc, k) => { const tt = String(sc.title || '').toLowerCase(); const n = words.filter(w => tt.includes(w)).length; if (n > bestN) { bestN = n; best = k; } });
+    if (best >= 0) { bkSelSec(best); return; }
+    showToast('Không tìm thấy vị trí câu này trong sách');
+}
 function bkQzReview() {
     const it = bkQz.items[bkQz.idx]; if (!it) return;
-    if (it.si >= 0) bkSelSec(it.si); else showToast('Câu này chưa gắn với mục nào trong chương');
+    bkQzGoto(it);
 }
 function bkQzExplain() {
     const it = bkQz.items[bkQz.idx]; if (!it) return;
