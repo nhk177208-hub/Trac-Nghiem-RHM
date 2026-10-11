@@ -1,0 +1,1191 @@
+1
+00:00:37,478 --> 00:00:55,338
+Chào các em, lại là thầy Yasser Raseef từ loạt bài Learn Dental Series đây. Trong tập này, chúng ta sẽ đúc kết lại chủ đề chẩn đoán và lên kế hoạch điều trị, bằng cách thảo luận về việc thiết kế và chỉ định một kế hoạch điều trị phù hợp cho ca nha khoa phục hồi của mình.
+
+2
+00:00:56,328 --> 00:01:12,398
+Thầy xin tuyên bố rằng mình không nhận thù lao, bồi thường hay tiền bản quyền từ việc bán bất kỳ sản phẩm nào được trình bày hay thảo luận. Đồng thời, bài giảng này không được tài trợ bởi bất kỳ cơ quan, công ty hay tổ chức nào và chỉ được chuẩn bị duy nhất cho mục đích giáo dục.
+
+3
+00:01:12,788 --> 00:01:23,238
+Ngoài ra, bài giảng này được bảo vệ bản quyền và không thể được truyền bá dưới bất kỳ hình thức nào trừ khi các em nhận được sự cho phép trước từ tác giả.
+
+4
+00:01:23,588 --> 00:01:28,478
+Trong tập này, chúng ta sẽ cố gắng thiết kế một kế hoạch điều trị phục hồi thích hợp.
+
+5
+00:01:28,848 --> 00:01:48,162
+Chúng ta đã thảo luận về chủ đề này trong các tập trước. Ở phần một, chúng ta đã bàn về việc đánh giá bệnh nhân và thu thập thông tin dựa trên dữ liệu nhân khẩu học, lý do đến khám, bệnh sử y khoa và bệnh sử nha khoa,
+
+6
+00:01:48,162 --> 00:02:05,778
+sau đó chúng ta tiến tới khám lâm sàng và chẩn đoán, bao gồm khám sâu răng, khám các miếng trám răng hiện có, khám các khiếm khuyết khác không phải do sâu răng,
+
+7
+00:02:06,018 --> 00:02:06,318
+trên bề mặt răng.
+
+8
+00:02:06,318 --> 00:02:17,388
+Cuối cùng, giờ đây chúng ta đã có tất cả dữ liệu có thể dùng để thiết kế kế hoạch điều trị, và hãy cùng bắt đầu thảo luận về cách thực hiện điều đó.
+
+9
+00:02:19,468 --> 00:02:39,548
+Trong phần này, trước hết các em nên ghi nhớ tư tưởng sau: để luôn tôn trọng chất lượng, chúng ta phải đưa ra cho bệnh nhân các giải pháp khác nhau, không tập trung vào những gì chúng ta muốn, cũng không phải những gì họ muốn, mà là những gì họ cần và những gì chúng ta có thể làm.
+
+10
+00:02:39,548 --> 00:02:40,428
+Điều này rất quan trọng.
+
+11
+00:02:40,428 --> 00:02:53,798
+Những gì họ cần và những gì chúng ta có thể làm. Chúng ta sẽ bắt đầu phần thảo luận về lên kế hoạch điều trị bằng cách tìm hiểu tiên lượng là gì, sau đó là cách chỉ định kế hoạch điều trị và những cân nhắc đa chuyên khoa khi thực hiện điều đó.
+
+12
+00:02:54,608 --> 00:02:56,558
+Hãy bắt đầu với tiên lượng.
+
+13
+00:02:57,178 --> 00:03:17,478
+Tiên lượng nghĩa là gì? Tiên lượng là một thuật ngữ dùng để mô tả sự dự đoán về tiến triển và kết quả có thể xảy ra của một bệnh lý hoặc tình trạng, cũng như kết quả dự kiến từ sự can thiệp hoặc điều trị của chúng ta, dù đó là điều trị dự phòng hay điều trị phục hồi.
+
+14
+00:03:18,428 --> 00:03:32,418
+Tiên lượng được dùng để ước tính khả năng hồi phục từ một bệnh lý hoặc tình trạng bất kể loại hình điều trị nào, đồng thời cũng có thể dự đoán tác động của phương pháp điều trị đó đối với quá trình hồi phục.
+
+15
+00:03:33,008 --> 00:03:59,858
+Trong nha khoa phục hồi, tiên lượng có thể được dùng để mô tả sự thành công của một quy trình điều trị cụ thể xét về mặt thời gian sử dụng, tức là nó sẽ kéo dài bao lâu, giá trị chức năng đối với bệnh nhân khi các em phục hồi lại chức năng cho họ một cách thoải mái,
+
+16
+00:03:59,858 --> 00:04:11,168
+mức độ thoải mái của bệnh nhân, việc họ sẽ không phải chịu đựng bất kỳ sự khó chịu nào sau khi các em hoàn thành, và cuối cùng là giá trị thẩm mỹ đối với bệnh nhân.
+
+17
+00:04:11,168 --> 00:04:35,198
+Đó là lý do các em nên tham chiếu đến các mục tiêu chính của nha khoa chữa răng, đó là phục hồi chức năng của răng và khớp cắn bằng cách mang lại khả năng ăn nhai hiệu quả và thoải mái. Các em hiểu chứ? Chức năng của răng và khớp cắn không chỉ là ăn nhai, mà còn là phát âm,
+
+18
+00:04:35,198 --> 00:04:44,258
+và cách phát âm các chữ cái, bất kể bệnh nhân sử dụng ngôn ngữ nào, và đồng thời, thẩm mỹ cũng là một chức năng chính.
+
+19
+00:04:44,258 --> 00:04:54,218
+Tiên lượng có thể được đánh giá theo thang điểm và mô tả là xuất sắc, tốt, trung bình, kém hoặc vô vọng.
+
+20
+00:04:54,218 --> 00:05:01,818
+Nha sĩ nên thảo luận về tất cả các tiên lượng dự kiến của ca bệnh, trách nhiệm của nha sĩ là gì và trách nhiệm của bệnh nhân là gì, bởi điều đó đóng vai trò lớn trong tiên lượng của ca bệnh.
+
+21
+00:05:01,818 --> 00:05:02,650
+Ai chịu trách nhiệm về việc gì?
+
+22
+00:05:03,322 --> 00:05:12,562
+Trách nhiệm của nha sĩ là thiết kế hoàn hảo một xoang trám hoặc thiết kế hoàn hảo một kế hoạch điều trị và thực hiện nó một cách hoàn hảo.
+
+23
+00:05:12,672 --> 00:05:23,562
+Nhưng đó chưa phải là phần kết của câu chuyện, từ thời điểm này, phần tiếp theo sẽ thuộc về trách nhiệm của bệnh nhân.
+
+24
+00:05:23,562 --> 00:05:24,382
+Đó là lý do các em cần làm rõ điều này với họ.
+
+25
+00:05:24,492 --> 00:05:43,892
+Họ cần phải tuân thủ những gì, về các hướng dẫn hay biện pháp vệ sinh răng miệng, hoặc họ nên sửa đổi thói quen nào, tần suất và khoảng cách của các lần tái khám bảo trì là bao lâu.
+
+26
+00:05:43,992 --> 00:05:54,912
+Mỗi bên liên quan đều nên biết và hiểu rõ tầm nhìn về trách nhiệm của mình trong tiên lượng điều trị và cách thực hiện điều đó.
+
+27
+00:05:55,332 --> 00:06:05,762
+Và theo đó, bác sĩ nên mô tả cho bệnh nhân biết trên một thang đo về tiên lượng dự kiến trong từng điều kiện là gì.
+
+28
+00:06:06,002 --> 00:06:22,112
+Tiên lượng xuất sắc có nghĩa là các em đã hoàn thành công việc của mình một cách hoàn hảo, đồng thời bệnh nhân cũng thực hiện tốt các công việc và trách nhiệm của họ một cách hoàn hảo, và cứ tương tự như vậy đối với các mức độ khác.
+
+29
+00:06:22,732 --> 00:06:29,922
+Tất cả những điều này nên được làm rõ qua lời nói và cả trong một mẫu phiếu tiên lượng bằng văn bản.
+
+30
+00:06:30,072 --> 00:06:44,092
+Đó là lý do tại sao sự đồng thuận sau khi được thông báo đầy đủ lại quan trọng, và bệnh nhân nên ký vào giấy đồng ý trong những ca mà trách nhiệm về tiên lượng phụ thuộc vào họ.
+
+31
+00:06:45,492 --> 00:06:57,322
+Các chỉ định tiên lượng bao gồm hai yếu tố chính: yếu tố ở cấp độ răng và yếu tố thuộc về chính tình trạng đó.
+
+32
+00:06:57,322 --> 00:07:03,642
+Các yếu tố ở cấp độ răng xét về khả năng phục hồi, tình trạng của tủy răng và tình trạng của mô nha chu.
+
+33
+00:07:03,722 --> 00:07:03,722
+Điều này nên được đánh giá cẩn thận trong quá trình khám lâm sàng và nên được giải thích rõ cho bệnh nhân.
+
+34
+00:07:03,722 --> 00:07:12,262
+Các em nên sử dụng mọi phương tiện hỗ trợ có sẵn để xác định khả năng phục hồi của răng, tình trạng tủy răng và tình trạng mô nha chu.
+
+35
+00:07:12,562 --> 00:07:28,802
+Khả năng phục hồi đòi hỏi phải trả lời câu hỏi: liệu việc điều trị phục hồi có thể được sử dụng để sửa chữa và khôi phục cấu trúc răng thành công trong trung và dài hạn hay không?
+
+36
+00:07:28,802 --> 00:07:34,842
+Đây là câu hỏi cần được trả lời bằng cách xác định khả năng phục hồi.
+
+37
+00:07:35,132 --> 00:07:44,622
+Và theo đó, những lợi ích mang lại là gì, và cơ sở hợp lý cho phương pháp điều trị phục hồi của các em là gì?
+
+38
+00:07:44,992 --> 00:07:52,602
+Nó có đảm bảo rằng có thể sửa chữa và khôi phục cấu trúc răng thành công trong trung và dài hạn hay không?
+
+39
+00:07:52,692 --> 00:08:10,392
+Điều này có thể được ước tính qua mức độ tổn thương của mô cứng thân răng, mức độ lan rộng của tổn thương sâu răng, lượng cấu trúc răng bị mất không do sâu răng như chấn thương, mòn răng hoặc khiếm khuyết phát triển.
+
+40
+00:08:10,392 --> 00:08:11,222
+Điều này rất tốt.
+
+41
+00:08:11,442 --> 00:08:23,132
+Hãy tính toán và xác định chính xác theo quá trình khám lâm sàng cũng như mức độ tổn thương của răng.
+
+42
+00:08:23,132 --> 00:08:31,722
+Tiếp theo là tình trạng tủy răng, miễn là răng vẫn còn tủy sống và bình thường.
+
+43
+00:08:31,722 --> 00:08:40,052
+Và cảm giác của nó nằm trong giới hạn bình thường, thì điều này chỉ ra một tiên lượng từ tốt đến xuất sắc.
+
+44
+00:08:40,052 --> 00:08:47,472
+Tình trạng mô nha chu bao gồm mức xương ổ răng, dây chằng nha chu, độ lung lay, và các biện pháp vệ sinh răng miệng.
+
+45
+00:08:47,472 --> 00:08:52,802
+Tất cả những yếu tố đó, các em hiểu chứ?
+
+46
+00:08:52,802 --> 00:09:02,042
+Cùng với mức độ tổn thương và việc nó xâm lấn đến đâu hoặc mối liên quan của nó với khoảng sinh học như thế nào.
+
+47
+00:09:02,042 --> 00:09:07,352
+Tất cả những điều đó có thể cung cấp một bằng chứng tốt về tiên lượng dự kiến cho ca bệnh của các em.
+
+48
+00:09:07,642 --> 00:09:11,762
+Sau đó là đến chính bản thân tình trạng bệnh lý một cách tổng thể.
+
+49
+00:09:12,412 --> 00:09:17,952
+Mức độ dễ dàng trong việc loại bỏ hoặc thay đổi các yếu tố nguyên nhân để ngăn ngừa hoặc làm chậm sự tiến triển của bệnh và sự tái phát của nó ra sao?
+
+50
+00:09:18,582 --> 00:09:22,112
+Thầy lấy một ví dụ, nếu bệnh nhân đang bị tình trạng khô miệng (xerostomia).
+
+51
+00:09:22,112 --> 00:09:22,902
+Tình trạng khô miệng.
+
+52
+00:09:22,902 --> 00:09:33,582
+Chứng khô miệng này là do dùng thuốc hay do một tình trạng tại chỗ?
+
+53
+00:09:33,582 --> 00:09:37,962
+Hay có thể là do hóa trị hoặc xạ trị?
+
+54
+00:09:38,842 --> 00:09:52,702
+Nếu bệnh nhân bị khô miệng do hóa trị hoặc xạ trị, thì tiên lượng sẽ phức tạp hơn nhiều và có xu hướng nghiêng về tiên lượng kém.
+
+55
+00:09:52,702 --> 00:10:02,732
+Nhưng nếu đó là do yếu tố tại chỗ hoặc do thói quen của bệnh nhân có thể thay đổi và có thể duy trì trở lại bình thường,
+
+56
+00:10:02,732 --> 00:10:04,782
+thì tiên lượng sẽ tốt.
+
+57
+00:10:05,400 --> 00:10:18,990
+Ngay cả khi quá trình giáo dục phải mở rộng vì lý do này hay lý do khác, nhưng mọi thứ có thể cải thiện nếu bệnh nhân đang được điều trị bằng flu-o và liệu pháp duy trì vệ sinh răng miệng, và bệnh nhân đang tuân thủ các hướng dẫn đó.
+
+58
+00:10:18,990 --> 00:10:19,760
+Đúng không nào?
+
+59
+00:10:19,760 --> 00:10:27,710
+Đó là lý do hạng mục thứ hai liên quan đến chính tình trạng bệnh lý chính là mức độ động lực của bệnh nhân để kiểm soát tình trạng đó.
+
+60
+00:10:27,710 --> 00:10:28,590
+Các em hiểu chứ?
+
+61
+00:10:28,590 --> 00:10:40,698
+Chính vì vậy chúng ta cần ghi nhận lại trong dữ liệu nhân khẩu học về thói quen vệ sinh răng miệng, bệnh sử nha khoa trước đây, tần suất cạo vôi răng,
+
+62
+00:10:40,698 --> 00:10:58,700
+tần suất đi khám nha sĩ, cũng như trình độ học vấn và nghề nghiệp của bệnh nhân vì điều đó phản ánh mức độ quan tâm; và ngay cả khi hiện tại họ chưa quan tâm, chúng ta vẫn cần xem xét xem họ có thể được tiếp thêm động lực đến mức nào.
+
+63
+00:10:58,700 --> 00:10:59,350
+Được rồi.
+
+64
+00:10:59,350 --> 00:11:15,420
+Bằng cách đó, các em có thể tránh được việc răng bị phá hủy thêm bằng cách bảo tồn những chiếc răng của họ thông qua việc tuân thủ các hướng dẫn, và tất cả những điều này nên được ghi chép đầy đủ trong hồ sơ lâm sàng của các em.
+
+65
+00:11:15,420 --> 00:11:19,930
+Tiếp theo là phần lên kế hoạch điều trị.
+
+66
+00:11:20,510 --> 00:11:28,410
+Để xây dựng một kế hoạch điều trị nha khoa, các em nên làm theo bốn bước để thu thập tất cả các dữ liệu.
+
+67
+00:11:28,410 --> 00:11:29,350
+Các em nắm rõ chưa?
+
+68
+00:11:29,350 --> 00:11:52,170
+Số một là thăm khám, xác định vấn đề và đánh giá rủi ro, đây là những gì chúng ta đã thảo luận trong mười một tập trước, bao gồm dữ liệu nhân khẩu học, bệnh sử của bệnh nhân, thăm khám lâm sàng về tất cả các mục cần quan tâm trong phần chẩn đoán của chúng ta.
+
+69
+00:11:52,170 --> 00:11:58,870
+Sau đó là đưa ra quyết định đề xuất can thiệp dựa trên tất cả các dữ liệu này.
+
+70
+00:11:58,870 --> 00:12:01,940
+Vậy quyết định đó là gì?
+
+71
+00:12:01,940 --> 00:12:06,070
+Đó là có can thiệp hay điều trị ca này hay không.
+
+72
+00:12:06,070 --> 00:12:16,630
+Thứ ba, có phương pháp quản lý thay thế nào không? Các lựa chọn thay thế là gì, lợi ích cũng như ưu và nhược điểm của từng phương pháp điều trị thay thế của chúng ta là gì.
+
+73
+00:12:16,630 --> 00:12:39,730
+Kế đến là lựa chọn phương pháp điều trị với sự tham gia của bệnh nhân; tất cả các bước này nên có sự tham gia của bệnh nhân trong quá trình thảo luận để chọn lựa điều trị nào là tốt nhất, đâu là những lựa chọn thay thế, thảo luận về mọi ưu điểm và nhược điểm, cũng như thảo luận về các hướng dẫn cần tuân thủ cho từng lựa chọn điều trị đó.
+
+74
+00:12:41,590 --> 00:12:47,200
+Và rồi tất cả những điều này đều bị ảnh hưởng bởi hai yếu tố chính.
+
+75
+00:12:47,200 --> 00:12:52,760
+Yếu tố thứ nhất là chính bệnh nhân và yếu tố thứ hai là nha sĩ - người sẽ thực hiện điều này.
+
+76
+00:12:53,730 --> 00:13:11,580
+Việc lựa chọn phương án điều trị sẽ phụ thuộc vào sở thích của bệnh nhân, động lực, sức khỏe toàn thân, trạng thái cảm xúc, cũng như nguồn lực tài chính cũng là một vấn đề quan trọng, cùng với các yêu cầu về chức năng, thẩm mỹ và kỹ thuật mà bệnh nhân cần.
+
+77
+00:13:12,240 --> 00:13:30,686
+Sau đó mới đến vai trò của nha sĩ, bao gồm kiến thức, kinh nghiệm và quá trình đào tạo của họ, sự hỗ trợ từ phòng thí nghiệm mà họ có hoặc hợp tác, sự tương thích giữa nha sĩ và bệnh nhân, sự sẵn có của các bác sĩ chuyên khoa nếu các em cần đến họ để thực hiện một phương pháp điều trị,
+
+78
+00:13:30,686 --> 00:13:42,890
+hay những phương pháp điều trị khác sẽ giúp các em hoàn thành việc quản lý phục hồi của mình, chẳng hạn như bác sĩ nha chu, bác sĩ chỉnh nha hoặc bác sĩ nội nha sẽ được thảo luận sau ở phần slide tới.
+
+79
+00:13:43,290 --> 00:13:48,480
+Và dĩ nhiên cũng bao gồm các yêu cầu về chức năng, thẩm mỹ và kỹ thuật của bệnh nhân.
+
+80
+00:13:49,600 --> 00:13:59,890
+Xin đừng rơi vào cái bẫy phải tuân theo mọi yêu cầu của bệnh nhân mà bất chấp kỹ năng và kinh nghiệm của chính các em.
+
+81
+00:14:00,310 --> 00:14:20,510
+Bởi vì ngày nay hầu hết bệnh nhân của chúng ta đều lên mạng để tra cứu về hầu hết các phương pháp điều trị, và họ nghĩ rằng tất cả các phương pháp điều trị có sẵn đó đều phù hợp với họ, chẳng hạn như những bệnh nhân đòi hỏi một nụ cười mới hoặc các thiết kế nụ cười khác nhau bất chấp việc các em khuyên họ nên đến gặp bác sĩ nha chu trước tiên.
+
+82
+00:14:20,980 --> 00:14:28,630
+Họ có thể không hiểu tầm quan trọng của việc quản lý tình trạng nha chu trước khi tiến hành điều trị phục hình đó.
+
+83
+00:14:28,630 --> 00:14:42,340
+Và họ cứ nghĩ rằng mọi ca bệnh, đặc biệt là trường hợp của họ, đều thích hợp để tiến hành phương pháp này ngay, để rồi cuối cùng họ sẽ chỉ đổ lỗi cho các em chứ không phải bản thân họ khi phục hình đó bị hư hoặc điều trị thất bại.
+
+84
+00:14:43,170 --> 00:14:50,420
+Tiếp theo, về kế hoạch điều trị, chúng ta có hai loại: kế hoạch điều trị lý tưởng và kế hoạch điều trị tối ưu.
+
+85
+00:14:50,420 --> 00:14:56,750
+Kế hoạch điều trị lý tưởng là nơi phương pháp điều trị tốt nhất, điều trị lý tưởng nhất được thực hiện.
+
+86
+00:14:57,922 --> 00:15:02,352
+Bất chấp hay nói cách khác là không bị giới hạn bởi bệnh nhân và giới hạn về mặt nha khoa.
+
+87
+00:15:02,352 --> 00:15:08,702
+Điều này thực sự không khả thi ngoại trừ ở các trường đại học nha khoa hoặc các bệnh viện thực hành giáo dục.
+
+88
+00:15:08,702 --> 00:15:30,012
+Bởi vì lúc đó các em có một người thực hiện, có thể là sinh viên sau đại học hoặc đại học, người muốn thực hành mọi phương pháp điều trị tốt nhất không phụ thuộc vào kỹ năng hiện tại, vì họ đang ở trong môi trường muốn học cách thực hiện điều này dưới sự giám sát của chuyên gia hoặc giảng viên.
+
+89
+00:15:30,012 --> 00:15:38,302
+Đồng thời, những giới hạn từ phía bệnh nhân lại gần như không có vì quá trình điều trị được cung cấp hoàn toàn miễn phí.
+
+90
+00:15:38,302 --> 00:15:44,702
+Đó là lý do tại sao đó là tình huống duy nhất được áp dụng dưới dạng một kế hoạch điều trị lý tưởng.
+
+91
+00:15:45,672 --> 00:15:57,592
+Những giới hạn duy nhất trong điều kiện này chính là những hạn chế về cơ sở vật chất của cơ sở y tế đó, của bệnh viện hay của trường đại học đó mà thôi.
+
+92
+00:15:57,592 --> 00:16:07,182
+Và thầy nghĩ, bằng cách này hay cách khác, đó là những giới hạn trong một thời gian nhất định, chứ không phải là mãi mãi.
+
+93
+00:16:07,272 --> 00:16:13,422
+Sau đó là kế hoạch điều trị thực hành thực tế trên lâm sàng, chính là kế hoạch điều trị tối ưu.
+
+94
+00:16:13,422 --> 00:16:27,052
+Đây là nơi hình thức điều trị hoặc lựa chọn điều trị tối đa được thực hiện dựa trên mối tương quan với điều kiện toàn thân và răng miệng của bệnh nhân, cũng như kiến thức và kinh nghiệm của nha sĩ.
+
+95
+00:16:27,582 --> 00:16:29,432
+Đây là phương pháp được sử dụng phổ biến nhất.
+
+96
+00:16:29,432 --> 00:16:36,772
+Đó là lý do thầy đã đề cập trong những slide trước rằng luôn luôn có những phương pháp điều trị thay thế.
+
+97
+00:16:37,652 --> 00:16:41,872
+Không bao giờ chỉ có duy nhất một lựa chọn trong điều trị.
+
+98
+00:16:41,872 --> 00:16:48,802
+Nếu chỉ có một lựa chọn trong điều trị, thì đó chính là những hạn chế của người nha sĩ.
+
+99
+00:16:48,802 --> 00:17:12,792
+Bởi vì nha sĩ đó không biết bất kỳ giải pháp thay thế nào khác, họ chỉ chú trọng vào một cách duy nhất, chẳng hạn như chỉ tập trung vào việc trám a-man-gam cho răng cối vùng răng sau bởi họ không được đào tạo về phục hình dán dính vùng răng sau, hoặc đã được đào tạo nhưng không có thiết bị hoặc vật liệu để thực hiện tốt, các em hiểu chứ?
+
+100
+00:17:13,732 --> 00:17:17,842
+Đó là lý do các em nên giữ vững quan điểm này.
+
+101
+00:17:17,842 --> 00:17:28,672
+Sự thành công của kế hoạch điều trị được xác định bởi khả năng đáp ứng cả những nhu cầu ban đầu và những nhu cầu lâu dài của bệnh nhân.
+
+102
+00:17:29,152 --> 00:17:33,712
+Vừa phải đáp ứng nhu cầu ban đầu hiện tại, vừa đáp ứng cả nhu cầu lâu dài về sau.
+
+103
+00:17:33,712 --> 00:17:36,082
+Đây mới là một kế hoạch điều trị thành công.
+
+104
+00:17:36,082 --> 00:17:45,582
+Và vì thế, chúng ta không chỉ có một phương pháp điều trị duy nhất, mà luôn luôn có các phương pháp điều trị thay thế hoặc các lựa chọn điều trị khác nhau.
+
+105
+00:17:46,452 --> 00:17:50,892
+Kế hoạch điều trị nên tuân theo các giai đoạn và trình tự nhất định.
+
+106
+00:17:51,192 --> 00:17:54,442
+Kế hoạch điều trị không phải là một danh sách dịch vụ tĩnh.
+
+107
+00:17:54,732 --> 00:17:58,112
+Đó thường là một chuỗi các hoạt động gồm nhiều giai đoạn và mang tính động.
+
+108
+00:17:58,112 --> 00:18:11,792
+Các em có thể sử dụng mọi kỹ năng tư duy phản biện của mình để thiết kế một lộ trình nhằm đạt được tiên lượng thành công và kết quả điều trị thành công cho bệnh nhân của mình.
+
+109
+00:18:11,792 --> 00:18:13,652
+Đó chính là kế hoạch điều trị.
+
+110
+00:18:13,652 --> 00:18:21,662
+Nó là lộ trình để đạt được các mục tiêu trong điều trị phục hồi của các em và đồng thời cũng đạt được mục tiêu của bệnh nhân.
+
+111
+00:18:21,662 --> 00:18:26,232
+Chính vì vậy nó là một quá trình động, không phải trạng thái tĩnh, và cũng không phải chỉ là một chuỗi các bước.
+
+112
+00:18:26,232 --> 00:18:27,592
+Thế tính động có nghĩa là gì?
+
+113
+00:18:27,592 --> 00:18:40,302
+Tính động có nghĩa là thỉnh thoảng các em nên đặt ra một số điểm dừng nhất định để đánh giá quá trình điều trị của mình và đánh giá kết quả của mình trước khi chuyển sang bước tiếp theo.
+
+114
+00:18:40,302 --> 00:18:49,532
+Trong một số trường hợp, các em có thể phải lùi lại nhiều bước chỉ để đánh giá lại hoặc làm lại một quá trình điều trị.
+
+115
+00:18:49,532 --> 00:18:51,922
+Đặc biệt là đối với các quá trình điều trị nha chu.
+
+116
+00:18:51,922 --> 00:18:53,802
+Hãy để thầy cho các em một ví dụ nhé.
+
+117
+00:18:54,422 --> 00:18:57,922
+Các em đang nạo sạch một tổn thương sâu răng nghiêm trọng hoặc lan rộng.
+
+118
+00:18:58,572 --> 00:19:03,882
+Các em tiến hành trám tạm thời bằng vật liệu có khả năng phóng thích flu-o.
+
+119
+00:19:03,882 --> 00:19:11,702
+Và sau đó giới thiệu bệnh nhân của mình sang gặp bác sĩ nha chu, bác sĩ nha chu đã hoàn thành công việc của họ một cách cẩn thận và hoàn hảo.
+
+120
+00:19:11,702 --> 00:19:17,802
+Tuy nhiên, bệnh nhân đã không tuân thủ các hướng dẫn và không duy trì tốt việc vệ sinh răng miệng.
+
+121
+00:19:17,802 --> 00:19:35,632
+Nếu các em đang thiết kế một chuỗi các bước tĩnh cứng nhắc, thì khi bệnh nhân quay lại với các em, các em sẽ cứ thế thay thế phần trám tạm flu-o đó bằng miếng trám hoàn tất sau cùng mà bất chấp tình trạng vệ sinh răng miệng hiện tại.
+
+122
+00:19:35,632 --> 00:19:55,676
+Nhưng nếu đó là một kế hoạch điều trị động, thì các em nên đánh giá lại vệ sinh răng miệng và tình trạng nha chu một lần nữa; điều đó có thể dẫn các em đến quyết định gửi bệnh nhân quay lại cho bác sĩ nha chu hoặc yêu cầu bệnh nhân thực hiện lại các bước chăm sóc ban đầu.
+
+123
+00:19:56,086 --> 00:20:12,326
+Tuân theo việc vệ sinh răng miệng, bắt buộc hoặc tạo động lực cho họ bằng cách này hay cách khác, nhưng đừng vội tiến hành phục hình sau cùng trừ khi các em chắc chắn rằng tình trạng nha chu đã đủ tốt để đảm bảo một tiên lượng chuẩn xác.
+
+124
+00:20:12,326 --> 00:20:33,006
+Đó là ý nghĩa của tính động, tức là các em có những điểm dừng dứt khoát vào những thời điểm khác nhau để đánh giá điều trị của mình, đánh giá nhận thức của bệnh nhân đối với điều trị, đánh giá mức độ động lực của họ, từ đó quyết định xem các em sẽ tiếp tục bước tiếp theo, quay lại bước trước hay chỉ đơn giản là chờ đợi để kiểm soát tình hình.
+
+125
+00:20:33,006 --> 00:20:33,586
+Các em rõ chứ?
+
+126
+00:20:33,706 --> 00:20:39,536
+Đó là lý do trình tự thực hiện hợp lý là một thành phần then chốt của một kế hoạch điều trị thành công.
+
+127
+00:20:39,776 --> 00:20:40,386
+Tuyệt đối lưu ý nhé!
+
+128
+00:20:40,386 --> 00:20:45,746
+Một số phương pháp điều trị cũng có thể đi theo sau các phương pháp khác theo một trình tự hoặc trật tự logic.
+
+129
+00:20:45,746 --> 00:21:03,136
+Các phương pháp điều trị khác có thể hoặc phải diễn ra đồng thời và đòi hỏi sự phối hợp hoặc có thể song song với nhau, điều này tùy thuộc vào ca bệnh của các em cũng như kế hoạch điều trị mà các em chỉ định.
+
+130
+00:21:03,136 --> 00:21:18,926
+Các giai đoạn của kế hoạch điều trị chủ yếu gồm có năm giai đoạn: giai đoạn cấp bách hoặc cấp cứu, giai đoạn kiểm soát, giai đoạn đánh giá lại hoặc giai đoạn duy trì, giai đoạn điều trị dứt điểm, và giai đoạn chăm sóc lại cũng như tái đánh giá.
+
+131
+00:21:18,926 --> 00:21:37,966
+Trong một số trường hợp đơn giản, chẳng hạn như xoang trám mặt nhai đơn giản ở một bệnh nhân có tình trạng vệ sinh răng miệng tốt thuận lợi và trạng thái khớp cắn thuận lợi, thì các em có thể kết hợp tất cả các giai đoạn lại với nhau để tiến ngay đến giai đoạn dứt điểm, rồi sau đó quay lại để theo dõi chăm sóc hoặc đánh giá lại.
+
+132
+00:21:37,966 --> 00:21:47,946
+Vì vậy, đối với hầu hết các bệnh nhân trong kế hoạch điều trị nha khoa chữa răng phục hồi, hai giai đoạn đầu thường được kết hợp với nhau cho một ca bệnh đơn lẻ.
+
+133
+00:21:47,946 --> 00:22:07,886
+Đối với một ca bệnh đơn giản, thầy không cần đến quy trình cấp cứu, thầy không cần chờ giai đoạn kiểm soát, thầy cũng không cần đánh giá lại ca bệnh hoặc có một giai đoạn duy trì bởi vì tủy răng khi đó vẫn còn sống, chiếc răng vẫn tủy sống và tình trạng nha chu thì khá tốt, tình trạng khớp cắn cũng khá ổn định.
+
+134
+00:22:07,886 --> 00:22:22,416
+Thì ngay trong cùng một buổi hẹn đó, chúng ta có thể bỏ qua ba giai đoạn kia và tiến hành ngay giai đoạn dứt điểm, bao gồm sửa soạn xoang sâu và trám phục hồi trong một lần hẹn, rồi bệnh nhân sẽ quay lại để tái khám theo chỉ định của nha sĩ.
+
+135
+00:22:22,596 --> 00:22:27,136
+Chúng ta hãy bắt đầu với giai đoạn một, giai đoạn cấp bách hoặc cấp cứu.
+
+136
+00:22:27,996 --> 00:22:41,866
+Bệnh nhân ở tình trạng này có thể đến gặp các em với biểu hiện sưng, đau, chảy máu hoặc nhiễm trùng cần phải được quản lý càng sớm càng tốt trước khi bắt đầu giai đoạn tiếp theo.
+
+137
+00:22:41,866 --> 00:23:01,956
+Bất kể đây có phải là phương pháp điều trị lý tưởng hoặc tốt nhất hay không, thì đây vẫn là sự xử trí cấp cứu cần bắt đầu ngay lập tức sau khi đã xem xét cẩn thận tình trạng y khoa và bệnh sử của bệnh nhân.
+
+138
+00:23:01,956 --> 00:23:02,946
+Các em rõ chưa?
+
+139
+00:23:03,326 --> 00:23:06,046
+Tiếp theo là giai đoạn kiểm soát.
+
+140
+00:23:06,536 --> 00:23:17,466
+Giai đoạn kiểm soát là gì? Giai đoạn kiểm soát là khoảng thời gian cần thiết về mặt hình thức để kiểm soát một phương pháp điều trị dứt điểm, để kiểm soát một số điều trị giống như thế.
+
+141
+00:23:17,656 --> 00:23:21,526
+Thầy đang chờ cơn đau giảm xuống trong giai đoạn cấp cứu.
+
+142
+00:23:21,526 --> 00:23:32,846
+Thầy đang chờ hiện tượng chảy máu ngừng lại, thầy đang chờ thuốc phát huy tác dụng trong một số trường hợp nhất định.
+
+143
+00:23:33,166 --> 00:23:38,836
+Tuy nhiên, đó là nếu ca bệnh thuộc trường hợp cấp cứu, nhưng nếu ca bệnh là bình thường thì sao?
+
+144
+00:23:38,956 --> 00:23:46,276
+Có thể bệnh nhân sẽ đến với nhiều vấn đề cùng lúc, ví dụ như một bệnh lý đang hoạt động ở mức độ trên diện rộng.
+
+145
+00:23:46,276 --> 00:24:00,541
+Lúc này tiên lượng chưa rõ ràng, do đó thầy muốn loại bỏ căn bệnh đang hoạt động đó, chẳng hạn như sâu răng và viêm nhiễm, loại bỏ các điều kiện bất lợi, bảo vệ dự phòng, loại bỏ nguyên nhân tiềm ẩn của bệnh lý, và bắt đầu các hoạt động phòng ngừa.
+
+146
+00:24:00,541 --> 00:24:14,276
+Ví dụ như lấy cao răng và làm sạch nha chu, mài chỉnh khớp cắn, làm sạch sâu răng và trám tạm bằng vật liệu có hoặc không chứa flu-o, thay thế hoặc sửa chữa miếng trám bị hỏng, và sử dụng các biện pháp kiểm soát sâu răng.
+
+147
+00:24:14,276 --> 00:24:20,396
+Sau đó, chúng ta đến với giai đoạn đánh giá lại hoặc giai đoạn duy trì.
+
+148
+00:24:20,396 --> 00:24:28,756
+Ở giai đoạn này, đó chính là khoảng thời gian cho phép giữa giai đoạn kiểm soát và giai đoạn dứt điểm để tình trạng viêm thuyên giảm hoặc để tổn thương lành lại.
+
+149
+00:24:28,956 --> 00:24:38,976
+Giả sử như các em đang đặt can-xi hy-đrô-xít chỉ để làm dịu tủy răng, hoặc đặt kẽm ô-xít để giảm đau trong viêm tủy có khả năng hồi phục.
+
+150
+00:24:38,976 --> 00:24:44,958
+Khoảng thời gian tiêu tốn cho việc giảm đau đó được gọi là giai đoạn duy trì.
+
+151
+00:24:44,958 --> 00:24:58,648
+Nếu các em kê đơn thuốc kháng sinh hoặc thuốc giảm đau cho bệnh nhân của mình, và chỉ khuyên họ dùng nó trong khoảng hai hoặc ba ngày, hoặc bất kỳ khoảng thời gian nào các em chỉ định cho họ.
+
+152
+00:24:58,938 --> 00:25:07,438
+Việc chỉ chờ đợi thuốc này phát huy tác dụng cũng được xem là giai đoạn đánh giá lại hoặc giai đoạn duy trì.
+
+153
+00:25:07,908 --> 00:25:27,498
+Sau đó, thói quen chăm sóc răng miệng tại nhà được củng cố, thúc đẩy, việc điều trị tiếp theo được hỗ trợ, và bệnh nhân nên được đánh giá lại về phản ứng tủy, sự giảm đau, việc cầm máu, cũng như những biện pháp chăm sóc tại nhà họ đang tuân thủ là gì trước khi chuyển sang giai đoạn dứt điểm.
+
+154
+00:25:28,768 --> 00:25:41,588
+Sau đó đến giai đoạn dứt điểm, nó được gọi là dứt điểm bởi vì phương pháp điều trị dứt điểm cuối cùng sẽ được thực hiện; phương pháp điều trị dứt điểm này có thể là trám răng, có thể là nội nha, có thể là chỉnh nha, hoặc có thể là phục hình.
+
+155
+00:25:41,588 --> 00:25:49,498
+Và quy trình điều trị dứt điểm này có thể diễn ra trong một lần hẹn duy nhất hoặc có thể kéo dài từ một đến hai năm giống như đối với điều trị chỉnh nha.
+
+156
+00:25:49,818 --> 00:26:09,918
+Đó là khởi đầu của quá trình điều trị thực sự nhằm giải quyết vấn đề của bệnh nhân bằng phương án điều trị đáng tin cậy nhất, nhằm đạt được các mục tiêu của kế hoạch điều trị cho cả các em và cho bệnh nhân của các em.
+
+157
+00:26:10,288 --> 00:26:18,668
+Nó có thể là một lần hẹn duy nhất, có thể là nhiều lần hẹn, và nó có thể kéo dài bao lâu cho đến khi các em hoàn thành xong quá trình điều trị của mình.
+
+158
+00:26:19,508 --> 00:26:44,418
+Tuy nhiên, trong những ca đa chuyên khoa hoặc các ca nha khoa phục hồi có liên quan đến nhiều phần tư hàm, thầy khuyên các em từ kinh nghiệm của mình, điều thầy luôn thích làm là xác định các điểm dừng rõ ràng ngay cả ở chính giai đoạn điều trị dứt điểm này.
+
+159
+00:26:44,868 --> 00:26:48,388
+Để đánh giá lại quá trình điều trị mà các em đã thực hiện.
+
+160
+00:26:48,388 --> 00:26:54,478
+Để thầy cùng thảo luận và làm rõ điều này cho các em nhé: ngay cả khi các em chỉ có một ca sửa soạn xoang đơn giản,
+
+161
+00:26:54,478 --> 00:26:59,138
+cho chỉ một chiếc răng duy nhất và đó là toàn bộ ca bệnh.
+
+162
+00:26:59,508 --> 00:27:09,318
+Ngay cả trong lần hẹn này, các em vẫn nên có những điểm dừng xác định rõ ràng, những điểm dừng này bao gồm, thứ nhất là thổi khô xoang trám và quan sát cẩn thận.
+
+163
+00:27:09,318 --> 00:27:19,018
+Quan sát sự hiện diện hay vắng mặt của mô sâu răng, xem các em đã làm sạch nó đúng cách hay chưa?
+
+164
+00:27:19,018 --> 00:27:23,038
+Một điểm dừng khác là trước khi các em đưa vật liệu trám vào.
+
+165
+00:27:23,038 --> 00:27:25,658
+Các em nên kiểm tra lại xoang của mình.
+
+166
+00:27:25,958 --> 00:27:34,288
+Và xem mình có đang tuân thủ các nguyên tắc cơ bản hay không, hoặc các em đang sửa soạn một xoang có chuẩn xác hay không?
+
+167
+00:27:34,548 --> 00:27:54,898
+Giả sử các em phải tiến hành phục hình dán dính, thì các em cần có những điểm dừng rõ ràng cho bước xoi mòn, các em nên đánh giá lại quy trình bôi keo dán của mình, các em nên đánh giá lại quá trình chiếu đèn quang trùng hợp cho lớp com-pô-sít đầu tiên của mình.
+
+168
+00:27:54,898 --> 00:28:08,298
+Trước tất cả những bước đó, các em nên đánh giá xem khuôn trám ma-trận thế nào nếu đây là xoang trám phức hợp; ngay cả khi đó là một lần hẹn duy nhất, các em vẫn nên có các điểm dừng nhất định để đánh giá lại các quy trình và độ chính xác trong thao tác của mình.
+
+169
+00:28:08,618 --> 00:28:14,238
+Dù đó là phục hồi cho một răng đơn lẻ, phục hồi một phần tư hàm,
+
+170
+00:28:14,238 --> 00:28:17,598
+phục hồi nhiều răng hay các phục hình đa chuyên khoa.
+
+171
+00:28:17,598 --> 00:28:27,228
+Tất cả những điều này nên được chỉ định rõ trong kế hoạch điều trị của các em, và sau đó đến giai đoạn cuối cùng, đó là giai đoạn chăm sóc lại và tái đánh giá.
+
+172
+00:28:27,448 --> 00:28:30,958
+Giai đoạn tái đánh giá là quá trình thăm khám và đánh giá định kỳ.
+
+173
+00:28:30,958 --> 00:28:40,958
+Theo dõi sát sao ca bệnh của các em để phát hiện nhu cầu cần điều chỉnh nhằm ngăn ngừa sự hư hỏng trong tương lai, đồng thời tạo cơ hội để củng cố việc chăm sóc tại nhà.
+
+174
+00:28:41,368 --> 00:29:01,168
+Thầy lấy ví dụ, đặc biệt là với các phục hồi dán dính, với miếng trám mặt nhai trên răng vùng sau, rất khó để ngay trong lần hẹn đầu tiên khi vừa làm xong miếng trám, các em có thể xác định được ngay liệu bệnh nhân có điểm chạm khớp cắn sớm cần phải mài chỉnh lại hay không.
+
+175
+00:29:01,168 --> 00:29:03,798
+Đặc biệt là nếu bệnh nhân đang bị gây tê.
+
+176
+00:29:04,008 --> 00:29:17,238
+Với kỹ thuật gây tê vùng thần kinh huyệt răng dưới, điều đó sẽ khiến bệnh nhân không thể cắn lại một cách chuẩn xác và khó mà xác định được xem có điểm cắn cộm sớm hay không.
+
+177
+00:29:17,238 --> 00:29:23,038
+Do đó, các em cần có một lần tái đánh giá và lần hẹn theo dõi tiếp theo.
+
+178
+00:29:23,238 --> 00:29:50,328
+Một lần theo dõi ngay trong vòng vài ngày và một lần khác tùy thuộc vào mức độ nghiêm trọng của ca bệnh và giá trị rủi ro của bệnh nhân theo như đánh giá rủi ro; đó là lý do tần suất tái khám trong giai đoạn này sẽ phụ thuộc vào nguy cơ mắc bệnh răng miệng của bệnh nhân.
+
+179
+00:29:51,500 --> 00:29:52,770
+Chỉ mất vài phút thôi.
+
+180
+00:29:53,560 --> 00:30:03,230
+Nhưng với bệnh nhân có nguy cơ thấp, các em có thể chỉ cần đánh giá lại cho họ cứ sau mỗi chín đến mười hai tháng.
+
+181
+00:30:03,580 --> 00:30:21,020
+Nhưng với bệnh nhân có nguy cơ cao, các em cần gặp họ thường xuyên hơn nhiều, tối đa là ba đến bốn tháng một lần chỉ để trấn an, đảm bảo rằng họ đang tuân thủ các biện pháp vệ sinh để làm giảm nguy cơ sâu răng của họ.
+
+182
+00:30:21,620 --> 00:30:27,960
+Vậy nếu các em là một phần của một ca bệnh đa chuyên khoa, toàn diện và phức tạp thì sao?
+
+183
+00:30:27,960 --> 00:30:28,850
+Khi đó,
+
+184
+00:30:30,510 --> 00:30:33,080
+trong điều kiện như vậy,
+
+185
+00:30:35,670 --> 00:30:42,240
+giai đoạn điều trị dứt điểm sẽ quá dày đặc với rất nhiều chuyên khoa khác nhau.
+
+186
+00:30:43,730 --> 00:30:51,620
+Chúng ta nên có một bản hướng dẫn, các hướng dẫn chung quy định ai nên bắt đầu trước.
+
+187
+00:30:51,620 --> 00:30:57,260
+Ai sẽ là người chuẩn bị nền tảng ca bệnh cho các chuyên khoa khác?
+
+188
+00:30:57,260 --> 00:31:01,080
+Quá trình điều trị này là trách nhiệm của ai?
+
+189
+00:31:01,080 --> 00:31:09,890
+Đó có thể là trách nhiệm của thầy, nhưng sự thành công và tiên lượng của nó lại là trách nhiệm của một chuyên khoa khác.
+
+190
+00:31:10,130 --> 00:31:21,960
+Chính vì vậy, chúng ta nên có các hướng dẫn ở những giai đoạn điều trị dứt điểm và giai đoạn kiểm soát trong các ca bệnh đa chuyên khoa, toàn diện và phức tạp.
+
+191
+00:31:23,180 --> 00:31:35,310
+Mối liên hệ giữa điều trị phục hồi và nội nha: tất cả các răng có miếng trám lớn đều cần được đánh giá tủy và vùng quanh chóp.
+
+192
+00:31:36,150 --> 00:31:59,710
+Trừ khi các em hoàn tất quá trình điều trị của mình ngay trong lúc sửa soạn xoang, hoặc trong quá trình trám tạm sau khi các em đã trám tạm ca này và bệnh nhân quay lại tái khám, thì hãy bắt đầu lại bằng việc đánh giá tủy và quanh chóp, vì nó có thể đã trải qua những thay đổi bệnh lý mà cả các em và bệnh nhân đều không nhận ra.
+
+193
+00:32:00,080 --> 00:32:05,470
+Nếu có chỉ định, chiếc răng đó nên được điều trị nội nha trước khi phục hình.
+
+194
+00:32:05,790 --> 00:32:06,940
+Các em hiểu chứ?
+
+195
+00:32:07,880 --> 00:32:21,740
+Bởi vì quy trình phục hình sẽ trở nên phức tạp hơn rất nhiều nếu các em cần can thiệp nội nha chen giữa các đợt điều trị của mình, do đó hãy hoàn thành điều trị nội nha trước tiên.
+
+196
+00:32:22,330 --> 00:32:38,080
+Những chiếc răng đã điều trị nội nha trước đó mà không thấy dấu hiệu lành thương, hoặc có miếng trám không đạt yêu cầu hay miếng trám tiếp xúc với dịch miệng, thì các phần trám nội nha và miếng trám tiếp xúc dịch miệng đó cần được đánh giá lại để xem có cần điều trị nội nha lại hay không.
+
+197
+00:32:38,080 --> 00:32:51,020
+Đó là lý do khi các em thực hiện phục hình thân răng cho một chiếc răng đã được điều trị nội nha trước đó, các em nên hỏi bệnh nhân xem họ đã hoàn thành việc điều trị nội nha này được bao lâu rồi.
+
+198
+00:32:51,460 --> 00:32:56,550
+Và về miếng trám tạm của họ thì sao, nó có còn toàn vẹn hay không?
+
+199
+00:32:56,810 --> 00:33:11,400
+Một khi miếng trám tạm bị hòa tan và bị cuốn trôi, thì hãy hội chẩn lại với bác sĩ nội nha của các em về việc có nên điều trị nội nha lại hay không, và đánh giá lại ca bệnh trước khi các em đóng kín nó bằng phục hình thân răng.
+
+200
+00:33:12,330 --> 00:33:25,450
+Tuy nhiên, mối quan hệ chính yếu giữa nha khoa phục hồi và các chuyên khoa khác là giữa phục hồi và nha chu, và chúng ta đã điểm qua ý tưởng này ở các tập trước.
+
+201
+00:33:25,450 --> 00:33:31,800
+Nhìn chung, điều trị nha chu nên đi trước chăm sóc phục hồi, nên đi trước quá trình chăm sóc của mọi chuyên khoa khác.
+
+202
+00:33:32,470 --> 00:33:44,470
+Đặc biệt là khi việc cải thiện vệ sinh răng miệng thông qua quy trình lấy cao răng ban đầu và xử lý mặt chân răng có thể tạo ra một môi trường mong muốn hơn cho việc thực hiện điều trị phục hồi.
+
+203
+00:33:45,150 --> 00:34:01,310
+Như chúng ta đã thảo luận ở vài phút trước, tỷ lệ thành công và tiên lượng phụ thuộc vào việc sức khỏe nha chu của các em vững chắc đến mức nào, cũng như mức độ bệnh nhân của các em tuân thủ các biện pháp dự phòng vệ sinh răng miệng ra sao.
+
+204
+00:34:01,620 --> 00:34:12,450
+Một chiếc răng có tiên lượng nha chu đáng ngờ không nên tiếp nhận bất kỳ một điều trị phục hồi diện rộng nào cho đến khi quá trình điều trị nha chu mang lại một tiên lượng khả quan hơn.
+
+205
+00:34:12,860 --> 00:34:27,830
+Với chiếc răng có tiên lượng nha chu tốt, điều trị phục hồi có thể được thực hiện trước hoặc sau điều trị nha chu, miễn là không có sự cản trở lẫn nhau giữa chúng.
+
+206
+00:34:28,730 --> 00:34:38,780
+Điều trị phục hồi không bị tổn hại do tình trạng mô hiện có, và ngược lại tình trạng nha chu không bị suy yếu bởi điều kiện của công việc phục hồi.
+
+207
+00:34:38,780 --> 00:34:54,400
+Để thầy lấy ví dụ, một bệnh nhân bị đổi màu răng và tích tụ cao răng đen ở vùng răng cửa trước, đặc biệt là mặt lưỡi của các răng cửa hàm dưới thường cho thấy sự tích tụ cao răng đen ở hầu hết bệnh nhân, đúng không?
+
+208
+00:34:56,050 --> 00:35:01,159
+Bệnh nhân tại thời điểm này đang được điều trị nha chu.
+
+209
+00:35:01,159 --> 00:35:16,039
+Và đồng thời, bệnh nhân cũng được chuyển đến cho các em vì một lỗ sâu nhỏ ở mặt nhai ở vùng răng cối hàm trên hoặc hàm dưới, nó không cản trở đến liệu pháp nha chu, và liệu pháp nha chu cũng không cản trở đến nó.
+
+210
+00:35:16,199 --> 00:35:22,599
+Chính vì vậy, các em có thể tiến hành điều trị song song cả phục hồi và nha chu.
+
+211
+00:35:23,119 --> 00:35:32,619
+Bởi vì cả hai không hề gây trở ngại cho nhau, và không phương pháp nào trong số đó phải chịu trách nhiệm cho tiên lượng của phương pháp kia.
+
+212
+00:35:33,389 --> 00:35:45,129
+Việc điều trị một tổn thương sâu răng sâu thường đòi hỏi phải kiểm soát sâu răng, tạo nền và trám tạm thân răng, hoặc điều trị tủy, hoặc cả hai trước khi điều trị nha chu.
+
+213
+00:35:46,099 --> 00:35:48,559
+Thậm chí ngay cả khi đó chỉ là việc trám tạm.
+
+214
+00:35:49,359 --> 00:36:02,959
+Tương tự, việc điều chỉnh những khiếm khuyết phục hình lớn và đường viền của phục hình được xem là một phần của liệu pháp điều trị nha chu ban đầu, vì nó giúp tăng cường phản ứng lành thương thuận lợi của mô.
+
+215
+00:36:03,449 --> 00:36:17,899
+Nếu tình trạng của mô nha chu đang trở nên tồi tệ hơn vì tạo hình đường viền phục hình không đúng cách, thì khi đó việc quản lý phục hình nên được thực hiện trước.
+
+216
+00:36:18,039 --> 00:36:24,079
+Đó là lý do tại sao ca bệnh cần được đánh giá xem yếu tố nào đang ảnh hưởng đến yếu tố nào.
+
+217
+00:36:24,589 --> 00:36:24,969
+Các em hiểu chứ?
+
+218
+00:36:25,679 --> 00:36:32,589
+Nếu việc điều trị phục hình đang cản trở tiên lượng của liệu pháp điều trị nha chu, thì việc phục hình sẽ phải thực hiện trước.
+
+219
+00:36:32,909 --> 00:36:39,739
+Bởi vì môi trường nên được chuẩn bị thuận lợi cho tiên lượng của liệu pháp điều trị nha chu.
+
+220
+00:36:40,259 --> 00:36:58,219
+Và ngược lại, nếu điều trị nha chu cản trở tiên lượng của phương pháp điều trị chữa răng hoặc phục hồi đúng đắn, thì nha chu nên được thực hiện trước để thay đổi môi trường trở nên thuận lợi cho một quy trình phục hình thành công.
+
+221
+00:36:58,989 --> 00:37:03,779
+Trong một số trường hợp, nếu quy trình phẫu thuật nha chu yêu cầu phải có phục hình cố định vĩnh viễn,
+
+222
+00:37:05,169 --> 00:37:15,549
+yêu cầu phục hình vĩnh viễn như inlay, onlay, bọc răng sứ và mão răng, thì nên trì hoãn lại cho đến khi giai đoạn phẫu thuật hoàn tất.
+
+223
+00:37:16,199 --> 00:37:17,279
+Được chưa?
+
+224
+00:37:17,959 --> 00:37:19,829
+Nhưng việc trám răng đơn giản thì có thể hoàn thành ngay.
+
+225
+00:37:20,529 --> 00:37:21,269
+Được chứ?
+
+226
+00:37:21,739 --> 00:37:30,389
+Những chiếc răng cần phục hình có nguy cơ xâm phạm khoảng sinh học của mô nha chu như chúng ta đã thảo luận trước đó, cần được phẫu thuật làm dài thân răng lâm sàng thích hợp.
+
+227
+00:37:30,859 --> 00:37:39,759
+Thủ thuật phẫu thuật này được thực hiện trước khi đặt phục hình sau cùng chỉ nhằm mục đích làm rõ vị trí đường viền nướu của các em đang ở đâu.
+
+228
+00:37:40,309 --> 00:37:49,439
+Thông thường, cần ít nhất sáu tuần sau khi phẫu thuật trước khi bắt tay vào tiến hành các quy trình phục hình sau cùng để có sự lành thương thích hợp.
+
+229
+00:37:50,399 --> 00:37:52,149
+Về phần chỉnh nha.
+
+230
+00:37:53,489 --> 00:38:02,689
+Rõ ràng là các em không nên bắt đầu điều trị chỉnh nha trừ khi các trường hợp đó hoàn toàn sạch sâu răng.
+
+231
+00:38:03,839 --> 00:38:06,929
+Đó là một nguyên tắc lớn và vô cùng rõ ràng.
+
+232
+00:38:07,079 --> 00:38:10,399
+Tất cả các răng đều phải không bị sâu răng trước khi gắn khâu chỉnh nha.
+
+233
+00:38:10,999 --> 00:38:32,249
+Bởi vì việc gắn khâu chỉnh nha vốn dĩ sẽ tạo thêm nhiều vùng, nhiều nơi trú ẩn khiến cho thức ăn, vi sinh vật, đặc biệt là các vi sinh vật sinh sâu răng và mảng bám tích tụ, nhất là nếu bệnh nhân không tuân thủ các hướng dẫn của bác sĩ chỉnh nha về việc duy trì vệ sinh răng miệng.
+
+234
+00:38:32,739 --> 00:38:54,809
+Đó là lý do tại sao, khi bệnh nhân chỉnh nha của các em, một bệnh nhân mang khâu hoặc mắc cài không tuân thủ chính xác và cẩn thận các hướng dẫn vệ sinh răng miệng, nó sẽ trở thành một thảm họa khi bác sĩ chỉnh nha tháo bỏ những mắc cài hoặc khâu này.
+
+235
+00:38:56,139 --> 00:39:09,449
+Do đó, việc điều trị sâu răng có thể bao gồm trám a-man-gam hoặc trám com-pô-sít, và đôi khi là phục hình đúc, phải được hoàn thành trước khi bắt đầu quá trình điều trị chỉnh nha.
+
+236
+00:39:10,339 --> 00:39:18,509
+Và những bệnh nhân đang trải qua điều trị chỉnh nha cần tiếp nhận các biện pháp và chương trình phòng ngừa sâu răng cường độ cao hơn.
+
+237
+00:39:19,999 --> 00:39:30,959
+Khi cân nhắc đến phẫu thuật miệng, tất cả các răng mọc ngầm, đang mọc và những răng vô vọng đều nên được nhổ bỏ trước khi điều trị chữa răng hoặc phục hình.
+
+238
+00:39:31,349 --> 00:39:42,389
+Khuyến nghị này đặc biệt áp dụng khi chiếc răng cối lớn thứ hai chuẩn bị được trám lại có thể bị tổn thương hoặc bị dịch chuyển trong quá trình nhổ răng cối lớn thứ ba.
+
+239
+00:39:42,999 --> 00:39:52,649
+Bởi vì người nhổ có thể tựa bẩy nhổ răng của họ và làm hỏng miếng trám của các em hoặc làm vỡ một hay nhiều múi răng.
+
+240
+00:39:53,970 --> 00:39:59,040
+Do vậy, những vấn đề này cần được loại bỏ hoặc sửa chữa trước khi tiến hành phục hình sau cùng.
+
+241
+00:39:59,480 --> 00:40:09,440
+Và cũng cần ít nhất sáu tuần sau khi phẫu thuật để vết thương của các em có thể lành lại đúng cách.
+
+242
+00:40:10,190 --> 00:40:28,610
+Trong trường hợp thế này, phim cánh cắn cho thấy các múi gần của răng cối lớn thứ ba hàm dưới bị kẹt dưới đường viền cổ răng của răng cối lớn thứ hai và đang gây ra sâu răng mặt xa.
+
+243
+00:40:29,090 --> 00:40:34,520
+Trong trường hợp như vậy, nếu các em xem xét lại tình trạng lâm sàng, việc nào nên làm trước?
+
+244
+00:40:34,970 --> 00:40:46,370
+Trám xoang loại hai cho mặt bên, tức là mặt xa của răng cối lớn thứ hai, hay là phẫu thuật nhổ chiếc răng cối lớn thứ ba mọc kẹt bán phần sẽ được thực hiện trước?
+
+245
+00:40:46,370 --> 00:40:54,680
+Chắc chắn là chiếc răng cối bị kẹt bán phần đó nên được phẫu thuật nhổ bỏ trước. Nhưng tại sao?
+
+246
+00:40:55,460 --> 00:41:01,820
+Lý do thứ nhất, tại sao các em lại tự giới hạn lối vào vùng răng này, tại sao lại làm giảm tầm nhìn của mình tới khu vực đó?
+
+247
+00:41:01,820 --> 00:41:09,200
+Làm sao các em có thể quan sát thành nướu của mình, làm sao các em có thể kiểm tra việc loại bỏ đúng cách tổn thương sâu răng của mình?
+
+248
+00:41:09,410 --> 00:41:13,160
+Làm sao các em có thể tiếp cận dễ dàng tình trạng này?
+
+249
+00:41:13,490 --> 00:41:14,660
+Đó là lý do thứ nhất.
+
+250
+00:41:14,900 --> 00:41:17,030
+Làm sao các em có thể đặt khuôn trám để phục hình?
+
+251
+00:41:17,780 --> 00:41:25,370
+Làm sao các em có thể đưa và nhồi vật liệu trám các em đã chọn vào khoang xoang một cách hoàn hảo để phục hồi nó?
+
+252
+00:41:25,790 --> 00:41:39,260
+Làm sao các em có thể đảm bảo rằng mình đang phục hồi lại chính xác các đường viền mặt bên của răng và xoang trám của mình, trong khi múi răng bên cạnh vẫn đang bị kẹt ngay bên trong cái xoang đó?
+
+253
+00:41:40,040 --> 00:41:42,170
+Tất cả các yếu tố này đều cần được cân nhắc.
+
+254
+00:41:42,740 --> 00:41:49,310
+Thậm chí ngay cả khi nó là điều dễ dàng với các em nhờ vào kinh nghiệm, kỹ năng hoặc bằng cách nào đó.
+
+255
+00:41:49,700 --> 00:42:09,440
+Nhưng bác sĩ phẫu thuật thì sao, khi họ cố gắng chia cắt thân chiếc răng này và đặt bẩy nhổ răng vào lúc đó, họ có thể sẽ làm xê dịch hoặc đánh bật miếng trám của các em, và chắc chắn là một trong các múi răng hoặc một trong các đường viền của các em sẽ bị nứt vỡ.
+
+256
+00:42:10,190 --> 00:42:15,710
+Và bệnh nhân của các em thậm chí có thể không chú ý đến điều này.
+
+257
+00:42:17,120 --> 00:42:18,860
+Chính vì lẽ đó.
+
+258
+00:42:19,040 --> 00:42:23,630
+Hãy để bác sĩ phẫu thuật nhổ chiếc răng đó đi.
+
+259
+00:42:24,140 --> 00:42:53,600
+Và đợi cho đến khi các mô nướu của các em lành lặn và huyệt ổ răng lành tốt, lúc đó các em sẽ tiếp cận rõ ràng, dễ dàng và có tầm nhìn quan sát thích hợp vào vùng tổn thương đó; các em có thể đặt khuôn ma-trận của mình một cách hoàn hảo, có thể nhồi vật liệu của mình đúng cách và có thể tái tạo hoàn chỉnh các đặc điểm giải phẫu của bề mặt tiếp cận đó.
+
+260
+00:42:53,960 --> 00:42:58,460
+Cuối cùng, thế còn phục hình cố định, phục hình tháo lắp hay phục hình trên implant thì sao?
+
+261
+00:42:59,300 --> 00:43:04,520
+Các miếng trám phục hồi trực tiếp nên được hoàn tất trước khi đặt các phục hình gián tiếp.
+
+262
+00:43:04,520 --> 00:43:15,710
+Nhìn chung, mọi phương pháp điều trị nha khoa thuộc bất kỳ chuyên khoa nào cũng phải được hoàn tất trọn vẹn trước khi các em tiến tới giai đoạn phục hình.
+
+263
+00:43:15,710 --> 00:43:19,730
+Giai đoạn phục hình luôn luôn là giai đoạn cuối cùng.
+
+264
+00:43:20,480 --> 00:43:32,450
+Các bằng chứng nên rõ ràng, mọi điều trị phải được hoàn tất, tất cả các mô phải ở trong tình trạng tốt, phải lành lặn, rồi sau đó mới đến quy trình quản lý phục hình của các em.
+
+265
+00:43:32,450 --> 00:43:33,320
+Các em hiểu chứ?
+
+266
+00:43:33,980 --> 00:43:50,870
+Các miếng trám như tái tạo cùi răng, các chi tiết lưu giữ phải được đặt thật chắc chắn bên trong xoang và bên trong phần phục hồi của các em, để không bị bong ra trong quá trình sửa soạn các phục hình cố định hay mão cố định.
+
+267
+00:43:51,290 --> 00:44:01,580
+Đó là lý do các em nên kiểm tra rõ ràng các chi tiết lưu giữ của mình để đảm bảo rằng vật liệu của các em sẽ không bị xê dịch trong quá trình sửa soạn mão răng.
+
+268
+00:44:02,600 --> 00:44:12,380
+Đồng thời, quá trình sửa soạn răng của các em cũng phải cho phép thiết kế các hàm giả tháo lắp bán phần, điều này cần được cân nhắc thật kỹ.
+
+269
+00:44:12,770 --> 00:44:20,210
+Nếu bệnh nhân, đặc biệt là trong ca bệnh có những chiếc răng nghiêm trọng và ở giữa là một khoảng mất răng, các em phải hỏi bệnh nhân trước.
+
+270
+00:44:20,720 --> 00:44:36,440
+Anh chị định phục hồi khoảng mất răng này bằng phục hình như thế nào, và loại phục hình nào anh chị đang dự định thực hiện?
+
+271
+00:44:36,440 --> 00:44:41,810
+Bởi vì điều này có thể trực tiếp ảnh hưởng đến quyết định trám phục hồi của các em.
+
+272
+00:44:42,020 --> 00:44:52,040
+Giả sử các em chỉ có một lỗ sâu nhỏ ở hố rãnh, và chiếc răng này sẽ làm răng trụ để giữ một phần giữ bao phủ toàn diện cho cầu răng.
+
+273
+00:44:52,340 --> 00:45:02,590
+Đôi khi các em không cần phải xử lý gì cả vì các em phát hiện nó là mức độ E một, hoặc thậm chí là E hai theo ký hiệu trên phim X-quang của các em.
+
+274
+00:45:02,800 --> 00:45:09,980
+Nhưng nó sẽ hoàn toàn bị loại bỏ khi các em tiến hành mài giảm mặt nhai của chiếc răng trụ này.
+
+275
+00:45:10,300 --> 00:45:14,780
+Thành thử các em không cần phải sửa soạn bất cứ thứ gì khác ngoài chuyện đó.
+
+276
+00:45:14,780 --> 00:45:21,360
+Các em đang lãng phí thời gian của mình, vật liệu của mình và thời gian của bệnh nhân, cũng như chi phí của bệnh nhân nữa.
+
+277
+00:45:21,600 --> 00:45:34,190
+Đồng thời, điều quan trọng nhất là các em đang hy sinh quá nhiều cấu trúc răng theo chiều sâu, bởi vì các em sẽ cần phải tiến sâu qua đường nối men-ngà ít nhất không phẩy năm mi-li-mét.
+
+278
+00:45:34,480 --> 00:45:41,350
+Trong khi tổn thương sâu răng này có thể hoàn toàn được loại bỏ cùng với việc mài giảm mặt nhai nằm ngay bên trong lớp men răng.
+
+279
+00:45:41,770 --> 00:45:47,410
+Đó là lý do tại sao khi các em có một khoảng mất răng, các em nên hỏi bệnh nhân trước tiên.
+
+280
+00:45:47,730 --> 00:45:48,420
+Được chứ.
+
+281
+00:45:48,890 --> 00:45:51,740
+Kế hoạch của anh chị để phục hồi khoảng mất răng này là gì?
+
+282
+00:45:52,230 --> 00:45:52,930
+Rõ chưa nào?
+
+283
+00:45:53,190 --> 00:46:06,300
+Nếu đó là một hàm giả tháo lắp bán phần, thì các em nên gửi ca đó cho bác sĩ phục hình để thiết kế hàm giả bán phần xem họ có cần đặt một ổ tựa mặt nhai trên chiếc răng này không?
+
+284
+00:46:06,760 --> 00:46:08,760
+điều đó sẽ ảnh hưởng đến lựa chọn của các em.
+
+285
+00:46:09,080 --> 00:46:15,730
+Và lúc này bác sĩ phục hình sẽ đề xuất cho các em một loại vật liệu được khuyên dùng để trám chiếc răng này.
+
+286
+00:46:16,150 --> 00:46:21,190
+Hoặc ca đó dự định được phục hồi bằng implant.
+
+287
+00:46:21,500 --> 00:46:34,190
+Thì khi phục hồi bằng cấy ghép implant, nếu nó chỉ là một xoang nhai, các em cứ tiến hành ngay việc phục hồi đã chọn, hay nói cách khác là bước điều trị nha khoa bảo tồn đã chọn.
+
+288
+00:46:34,190 --> 00:46:58,450
+Nhưng nếu đó là một tổn thương mặt bên, các em nên xem xét và tái tạo lại các đường viền của mình một cách hoàn chỉnh và chính xác như răng tự nhiên, và đôi khi các em nên hỏi xem bác sĩ phục hình hay bác sĩ cấy ghép implant có cần điều chỉnh nào trên bề mặt hay không.
+
+289
+00:46:59,020 --> 00:46:59,920
+Các em hiểu chứ?
+
+290
+00:47:01,010 --> 00:47:14,970
+Đó là lý do thầy xin khẳng định lại lần nữa rằng, việc thiết kế phần trám phục hồi và lựa chọn vật liệu phục hồi thích hợp phải tương thích với thiết kế quản lý phục hình cố định và tháo lắp của các em.
+
+291
+00:47:15,660 --> 00:47:35,640
+Cuối cùng, chúng ta đã hoàn thành bài thảo luận về chẩn đoán và lên kế hoạch điều trị, thầy hy vọng các em có thể hiểu được vấn đề, thầy mong nó sẽ hữu ích cho các em ở một phương diện nào đó, và thầy cầu nguyện Thượng đế rằng thầy có thể truyền đạt thêm bất kỳ kiến thức nào cho các em trong mười hai tập phim này.
+
+292
+00:47:35,640 --> 00:47:56,500
+Lời cuối, đây là những sách giáo khoa thầy đã sử dụng, đây là tài liệu hướng dẫn cho hệ thống quản lý và phân loại sâu răng quốc tế đối với hệ thống I-C-D-A-S và đối với hệ thống Cam-bra, chúng được cung cấp miễn phí trên mạng, các em có thể tải về và theo dõi xem họ có cập nhật gì mới không.
+
+293
+00:47:56,750 --> 00:48:03,130
+Cuối cùng, cứ thoải mái hỏi thầy bất kỳ lúc nào vì những câu hỏi của các em luôn được chào đón hai mươi bốn trên bảy.
+
+294
+00:48:03,130 --> 00:48:10,080
+Các em có thể đặt câu hỏi bằng cách bình luận dưới video này và thầy sẽ trả lời các em trong thời gian sớm nhất có thể.
+
+295
+00:48:10,300 --> 00:48:18,310
+Ngoài ra, các em cũng có thể gửi email cho thầy về bất kỳ thắc mắc nào và thầy sẽ phản hồi lại sớm nhất có thể.
+
+296
+00:48:18,670 --> 00:48:36,340
+Thầy muốn gửi lời cảm ơn đến các em vì đã dành thời gian để lắng nghe bài giảng, và thầy muốn nhắc các em hãy đăng ký kênh của thầy, đồng thời bật thông báo để nhận tất cả những cập nhật mới nhất nhé.
+
+297
+00:48:36,340 --> 00:48:39,250
+Và cuối cùng, đừng quên nhấn thích video này nhé.
+
+298
+00:48:39,250 --> 00:48:44,160
+Một lần nữa xin cảm ơn các em, hẹn gặp lại các em ở một chủ đề khác.

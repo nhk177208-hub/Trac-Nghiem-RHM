@@ -1,0 +1,951 @@
+1
+00:00:37,380 --> 00:00:42,500
+Chào mừng các em quay trở lại, thầy là Yasser Morsi fee từ chuỗi bài giảng Learn Dental Series.
+
+2
+00:00:43,080 --> 00:00:49,230
+Hôm nay chúng ta sẽ tiếp tục thảo luận về chẩn đoán và lập kế hoạch điều trị trong nha khoa phục hồi.
+
+3
+00:00:49,230 --> 00:00:57,290
+Trước tiên, thầy xin nói rõ rằng thầy không nhận bất kỳ khoản thù lao hay tiền bản quyền nào từ các sản phẩm được nhắc đến.
+
+4
+00:00:57,720 --> 00:01:06,320
+Bài thuyết trình này cũng không được tài trợ bởi tổ chức nào và chỉ nhằm phục vụ mục đích giáo dục.
+
+5
+00:01:06,940 --> 00:01:15,350
+Nội dung này được bảo vệ bản quyền và không được phép sao chép dưới mọi hình thức nếu chưa có sự đồng ý của tác giả.
+
+6
+00:01:16,480 --> 00:01:28,180
+Trong bài học này, chúng ta sẽ tiếp tục tìm hiểu cách chẩn đoán đúng các khiếm khuyết răng và những than phiền chính của bệnh nhân.
+
+7
+00:01:28,180 --> 00:01:38,290
+Như đã nói ở phần trước, chúng ta đã đi qua quy trình đánh giá bệnh nhân và bắt đầu khám lâm sàng để phát hiện sâu răng.
+
+8
+00:01:38,290 --> 00:01:44,750
+Thông qua mọi phương pháp, kể cả kỹ thuật chẩn đoán sâu răng tiên tiến và đánh giá nguy cơ sâu răng.
+
+9
+00:01:44,910 --> 00:01:48,880
+Chúng ta cũng đã kiểm tra các miếng trám răng hiện có xem có khiếm khuyết nào không.
+
+10
+00:01:48,880 --> 00:01:52,880
+Và trong tập trước, chúng ta đã xem xét các khiếm khuyết răng khác.
+
+11
+00:01:52,880 --> 00:02:19,450
+Hôm nay, chúng ta sẽ thảo luận về các công cụ hỗ trợ khám như thử gõ, sờ, thử nhiệt, thử tủy điện, thử xoang, thử thuốc tê và đánh giá nha chu.
+
+12
+00:02:21,360 --> 00:02:37,790
+Các nghiệm pháp này rất hữu ích khi các em cần thêm thông tin về tình trạng sức khỏe của răng và các mô nâng đỡ.
+
+13
+00:02:37,790 --> 00:02:40,890
+Hãy bắt đầu với nghiệm pháp gõ răng.
+
+14
+00:02:40,890 --> 00:02:54,600
+Nghiệm pháp gõ được thực hiện bằng cách gõ nhẹ lên mặt nhai hoặc cạnh cắn của răng bằng đầu cán gương hoặc bất kỳ dụng cụ cầm tay nào.
+
+15
+00:02:54,600 --> 00:03:04,140
+Mục đích là xem răng có đau khi gõ hay không, điều này có thể cho thấy tình trạng viêm nha chu quanh chóp.
+
+16
+00:03:04,420 --> 00:03:17,910
+Thầy muốn lưu ý rằng chúng ta có thể gõ dọc hoặc gõ ngang, trong đó gõ dọc là gõ lên mặt nhai và cạnh cắn.
+
+17
+00:03:17,910 --> 00:03:27,700
+Gõ dọc giúp kiểm tra vùng quanh chóp, còn gõ ngang để đánh giá tình trạng các sợi dây chằng nha chu nâng đỡ răng.
+
+18
+00:03:27,700 --> 00:03:30,340
+Các em hiểu chứ?
+
+19
+00:03:30,340 --> 00:03:42,500
+Chúng ta cần phải cẩn thận khi gõ và diễn giải các phản ứng đau khi khám các răng hàm trên, đặc biệt là vùng răng cối nhỏ và răng cối lớn thứ nhất.
+
+20
+00:03:42,500 --> 00:03:54,340
+Bởi vì ở một số bệnh nhân bị viêm xoang mãn tính, họ có thể thấy đau khi gõ do viêm xoang chứ không phải do bệnh lý nha chu hay quanh chóp.
+
+21
+00:03:54,340 --> 00:04:04,090
+Đó là lý do các em phải ghi nhận tiền sử y khoa của bệnh nhân thật cẩn thận và hỏi kỹ về bệnh viêm xoang.
+
+22
+00:04:04,090 --> 00:04:17,150
+Đừng mặc định rằng hễ gõ đau ở các răng cối nhỏ và răng cối lớn hàm trên thì đó chắc chắn là bệnh lý nha chu hay quanh chóp.
+
+23
+00:04:17,380 --> 00:04:35,090
+Bên cạnh đó, việc gõ răng nên được thực hiện ngẫu nhiên chứ không theo thứ tự lần lượt từ răng cửa đến răng cối.
+
+24
+00:04:35,090 --> 00:04:35,530
+Tại sao vậy?
+
+25
+00:04:35,530 --> 00:04:50,000
+Bởi vì nếu đi theo thứ tự, khi em tiến dần đến răng đang bị tổn thương, bệnh nhân sẽ chuẩn bị sẵn tâm lý để cảm thấy đau.
+
+26
+00:04:51,205 --> 00:04:59,665
+Giả sử bệnh nhân đang đau ở răng cối nhỏ hàm dưới số năm hoặc răng cối lớn số bảy.
+
+27
+00:04:59,855 --> 00:05:15,575
+Em hãy gõ thử lên răng cửa, rồi chuyển sang răng cối hàm trên, sau đó quay lại răng cửa dưới, nhằm đánh lạc hướng bệnh nhân trước khi gõ vào răng tổn thương.
+
+28
+00:05:15,575 --> 00:05:32,825
+Nếu em cứ khám theo một trình tự dễ đoán, bệnh nhân sẽ có thể phản ứng ngay cả khi răng đó không thực sự đau.
+
+29
+00:05:33,095 --> 00:05:50,825
+Phản ứng dương tính với gõ có thể chỉ ra hoại tử tủy một phần hoặc toàn phần, tổn thương quanh chóp, áp xe nha chu bên, hoặc răng đang di chuyển nhanh do chỉnh nha.
+
+30
+00:05:50,825 --> 00:06:18,735
+Về vấn đề tổn thương quanh chóp, nếu bệnh nhân đang bị áp xe và có hiện tượng sưng rõ ràng, thì việc gõ lên răng đó là không nhân đạo vì sẽ gây ra cơn đau dữ dội.
+
+31
+00:06:18,955 --> 00:06:41,895
+Nếu các em đã thu thập đủ dấu hiệu, triệu chứng và tiền sử bệnh cho thấy đó là một ổ áp xe quanh chóp, kể cả việc thấy sưng trong hoặc ngoài miệng.
+
+32
+00:06:42,875 --> 00:06:52,385
+Thì đừng bao giờ gõ lên chiếc răng đó vì các em không cần thiết phải làm bệnh nhân đau đớn thêm như vậy.
+
+33
+00:06:52,675 --> 00:06:55,145
+Tiếp theo là nghiệm pháp sờ.
+
+34
+00:06:55,535 --> 00:07:02,995
+Nghiệm pháp sờ được chỉ định khi nghi ngờ có bệnh lý tủy và răng hơi nhạy cảm khi gõ.
+
+35
+00:07:03,185 --> 00:07:28,635
+Trong trường hợp này, sau khi quan sát kỹ toàn bộ mô mềm và mô cứng, các em sẽ dùng ngón trỏ vuốt dọc theo niêm mạc mặt ngoài và mặt trong vùng quanh chóp.
+
+36
+00:07:28,845 --> 00:07:45,225
+Áp xe ổ răng ở giai đoạn tiến triển và một số dạng nang có thể gây ra cảm giác đau khi sờ, dù đôi khi chưa có biểu hiện sưng.
+
+37
+00:07:45,225 --> 00:07:55,175
+Nhưng khi các em dùng ngón tay ấn vào mô, bệnh nhân có thể biểu hiện sự nhạy cảm và đau đớn.
+
+38
+00:07:55,695 --> 00:08:02,905
+Ngoài ra, nghiệm pháp sờ cũng giúp phát hiện những khối sưng không đau.
+
+39
+00:08:03,305 --> 00:08:29,455
+Trong những ca có áp xe kèm theo sưng trên lâm sàng, việc sờ sẽ giúp cảm nhận độ phập phều của mủ bên dưới, từ đó quyết định xem đã có thể rạch dẫn lưu hay chưa.
+
+40
+00:08:29,675 --> 00:08:35,865
+Tiếp theo là thử nhiệt, tất cả các bài kiểm tra này đều nhằm xác định sự sống của tủy răng.
+
+41
+00:08:36,245 --> 00:08:41,105
+Nói chính xác hơn, đó không phải là thử độ sống, mà là thử độ nhạy cảm của tủy.
+
+42
+00:08:41,485 --> 00:09:01,145
+Các em có thể dùng một thỏi đá nhỏ, xịt lạnh cô lập, hoặc dùng côn gutta-percha hơ nóng.
+
+43
+00:09:01,525 --> 00:09:12,925
+Tuy nhiên, phương pháp thử nhiệt đáng tin cậy nhất là dùng nước nóng hoặc lạnh sau khi đã cô lập răng hoàn toàn bằng đê cao su.
+
+44
+00:09:12,925 --> 00:09:29,955
+Bệnh nhân có thể cảm thấy hơi nóng hoặc hơi lạnh một chút, và đó là phản ứng bình thường nếu cơn đau dịu đi trong vài giây sau khi dừng thử nghiệm.
+
+45
+00:09:30,285 --> 00:09:59,125
+Nhưng nếu cơn đau kéo dài khoảng mười giây sau khi đã lấy tác nhân kích thích ra, điều này cho thấy tình trạng sung huyết hoặc viêm tủy có khả năng hồi phục.
+
+46
+00:10:00,488 --> 00:10:09,518
+Khi đó, các em cần xem xét việc trám răng để giải tỏa tình trạng sung huyết của tủy sau khi đã làm sạch xoang sâu.
+
+47
+00:10:10,558 --> 00:10:18,408
+Tuy nhiên, nếu thử đá lạnh gây ra cơn đau dữ dội và kéo dài thì đó thường là dấu hiệu của viêm tủy không hoàn nguyên.
+
+48
+00:10:18,678 --> 00:10:25,538
+Đau do tác nhân nóng nhưng lại giảm nhanh khi chườm lạnh cũng chỉ ra bệnh lý viêm tủy không hoàn nguyên.
+
+49
+00:10:25,538 --> 00:10:43,748
+Vì vậy, nếu thử nóng gây đau nhưng thử lạnh làm giảm đau, các em có thể chẩn đoán đó là viêm tủy không hoàn nguyên có triệu chứng.
+
+50
+00:10:43,748 --> 00:10:52,938
+Và nếu cơn đau kéo dài hơn sau khi chườm đá thì cũng là dấu hiệu của tình trạng viêm tủy.
+
+51
+00:10:53,478 --> 00:11:02,538
+Răng không có phản ứng với thử nghiệm nhiệt đồng nghĩa với việc tủy đã chết, hoặc mất độ nhạy cảm.
+
+52
+00:11:02,838 --> 00:11:17,788
+Tiếp đến là máy thử tủy điện, đây là công cụ kiểm tra thông qua cảm giác ngứa ran do dòng điện cường độ thấp chạy qua tủy.
+
+53
+00:11:19,448 --> 00:11:32,158
+Khi răng không có phản ứng, nghĩa là răng không cảm thấy bất kỳ sự ngứa ran nào, điều đó cho thấy tủy đã hoại tử và các dây thần kinh cảm giác đã hỏng.
+
+54
+00:11:32,548 --> 00:11:53,338
+Nhưng nếu có phản ứng thì răng vẫn còn sống, và em phải so sánh mức độ với một răng khỏe mạnh bên cạnh hoặc răng đối xứng cùng loại.
+
+55
+00:11:54,348 --> 00:12:03,948
+Nếu kết quả độ nhạy cảm tương đồng, điều đó gợi ý rằng tình trạng tủy của chiếc răng đó là bình thường.
+
+56
+00:12:03,948 --> 00:12:24,178
+Nếu răng phản ứng sớm hơn so với răng bình thường, điều đó có thể chỉ ra tình trạng sung huyết hoặc viêm tủy hoàn nguyên, còn nếu phản ứng chậm thì tủy có thể đang thoái hóa.
+
+57
+00:12:24,418 --> 00:12:30,028
+Thế nhưng đây không phải là một phương pháp mang tính quyết định.
+
+58
+00:12:30,028 --> 00:12:39,398
+Các em phải tổng hợp mọi thông tin để đưa ra chẩn đoán chính xác xem tủy răng còn sống hay đã hoại tử.
+
+59
+00:12:39,698 --> 00:12:50,818
+Vấn đề của máy thử tủy điện là nó không phù hợp để kiểm tra những răng có miếng trám lớn hoặc đã được bọc mão răng sứ toàn diện.
+
+60
+00:12:50,818 --> 00:13:01,078
+Bởi vì miếng trám kim loại sẽ dẫn điện rất nhanh, còn vật liệu phi kim loại lại đóng vai trò như một chất cách điện.
+
+61
+00:13:01,078 --> 00:13:18,058
+Với các mão răng sứ cũng tương tự, đặc biệt khi bờ phục hình nằm dưới nướu, các em sẽ khó phân biệt được cảm giác ngứa ran đó đến từ mô nướu hay từ tủy răng.
+
+62
+00:13:18,338 --> 00:13:32,888
+Ngoài ra, răng bắt buộc phải được cách ly và thổi khô hoàn toàn, một số thiết bị cũng yêu cầu các em bôi thêm gel dẫn điện.
+
+63
+00:13:33,368 --> 00:13:36,268
+Nhưng với các máy móc hiện nay, điều này đôi khi không còn cần thiết.
+
+64
+00:13:36,978 --> 00:13:49,438
+Các em cũng phải xem xét tiền sử bệnh, vì những thiết bị thử tủy điện này không được khuyến cáo sử dụng cho bệnh nhân đang mang máy tạo nhịp tim nhân tạo.
+
+65
+00:13:49,438 --> 00:14:01,398
+Đây là bức ảnh về một máy thử tủy điện đang hiển thị chỉ số, số liệu này cần được so sánh với các răng khỏe mạnh như chúng ta vừa thảo luận.
+
+66
+00:14:01,728 --> 00:14:04,548
+Tiếp đến là tạo xoang thử nghiệm.
+
+67
+00:14:04,878 --> 00:14:06,318
+Tạo xoang thử nghiệm là gì?
+
+68
+00:14:06,318 --> 00:14:30,628
+Trong một số ca, chúng ta rất khó chẩn đoán độ nhạy cảm của tủy trên những răng có miếng trám lớn hoặc mão răng sứ bằng thử nhiệt hay thử điện.
+
+69
+00:14:30,968 --> 00:14:44,608
+Đối với những trường hợp đó, người ta từng dùng một phương pháp cũ, theo thầy là khá xâm lấn và thiếu tính đạo đức y khoa.
+
+70
+00:14:44,608 --> 00:14:57,578
+Đó là lý do bức ảnh minh họa có màu đen trắng vì nó rất cũ và hiện nay hiếm khi được sử dụng.
+
+71
+00:14:57,838 --> 00:15:03,450
+Phương pháp này dùng mũi khoan sinh nhiệt để khoan thử vào răng nhằm đánh giá phản ứng của tủy.
+
+72
+00:15:03,450 --> 00:15:08,729
+Mục đích của nó là để kiểm tra độ nhạy cảm của răng.
+
+73
+00:15:08,879 --> 00:15:14,499
+Nếu bệnh nhân không có phản ứng, tủy răng có thể đã hoại tử.
+
+74
+00:15:14,499 --> 00:15:17,829
+Nếu có phản ứng đau, có thể kết luận tủy vẫn còn sống.
+
+75
+00:15:18,149 --> 00:15:28,249
+Tuy nhiên, các em phải hiểu rằng chính bài kiểm tra này có thể gây ra thêm tổn thương cho tủy răng.
+
+76
+00:15:29,019 --> 00:15:31,709
+Giống hệt như việc dùng côn gutta-percha hơ nóng vậy.
+
+77
+00:15:31,919 --> 00:15:39,549
+Đó là lý do phương pháp này không còn được khuyên dùng, mà tốt hơn là dùng nước nóng trong điều kiện đã cô lập đê cao su.
+
+78
+00:15:39,949 --> 00:15:52,499
+Bản thân những phương pháp đó được coi là các tác nhân kích thích có khả năng gây khởi phát bệnh lý tủy.
+
+79
+00:15:52,499 --> 00:15:56,289
+Chính vì thế, hiện nay chúng hoàn toàn không được khuyến cáo.
+
+80
+00:15:57,439 --> 00:16:05,649
+Xin lưu ý rằng thử nóng lạnh và thử tủy điện thực chất là các phương pháp đo độ nhạy cảm của tủy.
+
+81
+00:16:05,919 --> 00:16:18,389
+Bởi vì chúng gián tiếp xác định tình trạng sức khỏe của tủy thông qua việc đánh giá chức năng của các dây thần kinh tủy răng.
+
+82
+00:16:18,569 --> 00:16:23,189
+Đó là lý do tại sao người ta gọi nó là độ nhạy cảm.
+
+83
+00:16:23,189 --> 00:16:23,619
+Chúng ta đang đo lường.
+
+84
+00:16:23,619 --> 00:16:33,559
+độ nhạy của dây thần kinh tủy, còn thuật ngữ độ sống tủy thực sự phải liên quan đến lưu lượng máu.
+
+85
+00:16:33,839 --> 00:16:40,189
+Và mức độ máu được cung cấp oxy như thế nào, do đó độ sống của tủy phải là sự đánh giá trực tiếp.
+
+86
+00:16:40,189 --> 00:16:42,869
+về lưu lượng máu bên trong tủy răng.
+
+87
+00:16:42,869 --> 00:16:46,289
+À xin lỗi, đó phải được gọi là đánh giá trực tiếp.
+
+88
+00:16:46,479 --> 00:16:49,679
+Đó mới là sự đánh giá trực tiếp về độ sống của tủy.
+
+89
+00:16:49,819 --> 00:16:56,639
+Đây là sự khác biệt hiện nay theo quan điểm của Hiệp hội Nội nha Hoa Kỳ.
+
+90
+00:16:56,639 --> 00:17:22,419
+Chúng ta đang dùng độ nhạy cảm chứ không phải độ sống, vì độ sống tủy được đo bằng các thiết bị khác như máy đo lưu lượng Doppler laser và máy đo bão hòa oxy mạch đập.
+
+91
+00:17:23,859 --> 00:17:33,739
+Vậy tại sao các bác sĩ lâm sàng và nha sĩ nói chung lại thực hiện thử độ nhạy cảm thay vì thử độ sống của tủy?
+
+92
+00:17:34,319 --> 00:17:49,089
+Bởi vì những thiết bị đo lưu lượng máu có cường độ ứng dụng hạn chế và rất khó để tinh chỉnh chuyên biệt cho ngành nha khoa.
+
+93
+00:17:49,089 --> 00:17:56,619
+Mặc dù chúng hiện có sẵn trên thị trường nhưng lại đắt đỏ và không dễ thao tác.
+
+94
+00:17:57,059 --> 00:18:11,729
+Tiếp theo là thử nghiệm thuốc tê, một công cụ rất hữu ích khi các em gặp tình trạng đau lan tỏa mà không thể xác định chính xác chiếc răng gây đau trong một phần tư hàm.
+
+95
+00:18:12,139 --> 00:18:21,679
+Giả sử có một bệnh nhân đang chịu cơn đau cấp tính dữ dội ở vùng hàm dưới bên phải.
+
+96
+00:18:21,679 --> 00:18:43,179
+Khi khai thác bệnh sử, các em dự đoán sẽ tìm thấy một lỗ sâu lớn hoặc tình trạng hở tủy ở vùng răng đó.
+
+97
+00:18:43,509 --> 00:18:52,089
+Và các em hy vọng khi bệnh nhân há miệng, các em sẽ phát hiện được ngay chiếc răng gây ra vấn đề.
+
+98
+00:18:52,089 --> 00:19:12,889
+Nhưng vấn đề ở đây là việc thăm khám bằng mắt hoặc dụng cụ không chỉ ra được nguyên nhân rõ ràng, vì tất cả các răng trông có vẻ lành lặn hoặc tất cả đều bị hư hỏng nghiêm trọng.
+
+99
+00:19:13,369 --> 00:19:29,079
+Chúng ta phải giải quyết đúng chiếc răng gây ra sự than phiền chính, nếu không, việc điều trị sai răng sẽ chỉ làm tình trạng tồi tệ hơn.
+
+100
+00:19:29,509 --> 00:19:33,559
+Đó là lý do chúng ta cần đến kỹ thuật thử thuốc tê.
+
+101
+00:19:33,839 --> 00:19:51,139
+Phương pháp này bao gồm việc tiêm thuốc tê tại chỗ vào từng khu vực nhất định để tìm ra chiếc răng mà khi tê thì cơn đau của bệnh nhân biến mất.
+
+102
+00:19:51,399 --> 00:19:54,859
+Điều đó có nghĩa là răng đó phản ứng với thuốc tê cục bộ.
+
+103
+00:19:54,859 --> 00:19:55,200
+Đúng là răng này rồi.
+
+104
+00:19:55,289 --> 00:19:59,629
+Vậy đây chính là chiếc răng tổn thương mà các em cần bắt đầu điều trị.
+
+105
+00:20:00,309 --> 00:20:11,609
+Mặc dù sau đó các em cũng phải kiểm soát tình trạng của các răng khác, nhưng ở giai đoạn cấp cứu thì việc đầu tiên là phải cắt cơn đau.
+
+106
+00:20:11,609 --> 00:20:17,229
+Cấp cứu nghĩa là các em đang phải xử lý cơn đau, chảy máu hoặc các tình huống khẩn cấp.
+
+107
+00:20:18,439 --> 00:20:28,459
+Bất kể kế hoạch điều trị dứt điểm là gì, trong cấp cứu, các em phải ngừng đau, cầm máu và kiểm soát nhiễm trùng.
+
+108
+00:20:28,459 --> 00:20:28,929
+Đó là ý nghĩa của cấp cứu.
+
+109
+00:20:28,929 --> 00:20:29,459
+Được chứ?
+
+110
+00:20:29,709 --> 00:20:44,229
+Đó là lý do chúng ta sẽ bắt đầu tiêm chóp để gây tê các răng nghi ngờ cho đến khi tìm thấy răng làm cơn đau thuyên giảm sau khi tiêm.
+
+111
+00:20:44,229 --> 00:20:44,699
+Nhớ nhé.
+
+112
+00:20:45,359 --> 00:20:53,589
+Các em phải bắt đầu tiêm từ đường giữa đi dần ra phía sau, tức là từ răng trước ra răng sau.
+
+113
+00:20:53,589 --> 00:21:07,319
+Bởi vì nếu em tiêm từ răng sau trước, cơn đau chắc chắn sẽ biến mất do em đã gây tê luôn đường đi chính của dây thần kinh.
+
+114
+00:21:07,929 --> 00:21:12,099
+Ví dụ như thần kinh ổ răng trên sau, hay bất kể nhánh nào.
+
+115
+00:21:12,099 --> 00:21:15,399
+Kỹ thuật các em sử dụng là gì đi nữa.
+
+116
+00:21:15,399 --> 00:21:21,749
+Thì nếu tiêm từ răng trong cùng, tất cả các răng phía trước đó đều sẽ bị tê theo.
+
+117
+00:21:22,969 --> 00:21:25,549
+Và ngược lại thì không bị như thế.
+
+118
+00:21:25,549 --> 00:21:29,829
+Do đó, chúng ta bắt đầu bằng kỹ thuật gây tê tiêm chóp.
+
+119
+00:21:29,829 --> 00:21:38,029
+Tiêm ở ngách hành lang mặt ngoài, hoặc có thể tiêm dây chằng vòng quanh răng.
+
+120
+00:21:38,029 --> 00:21:40,659
+Chỉ vài giọt và đợi xem phản ứng của bệnh nhân.
+
+121
+00:21:40,949 --> 00:21:51,179
+Nhược điểm duy nhất của thử nghiệm này là nó tốn thời gian và đòi hỏi phải tiêm nhiều lần trong cùng một phần tư hàm.
+
+122
+00:21:51,779 --> 00:22:02,659
+Nhưng hầu hết trong các ca cấp cứu sâu răng, nguyên nhân thường khá rõ ràng, nên rất hiếm khi các em thực sự phải dùng đến nghiệm pháp này.
+
+123
+00:22:02,899 --> 00:22:07,039
+Tiếp theo là một trong những công cụ hỗ trợ quan trọng nhất.
+
+124
+00:22:07,039 --> 00:22:09,129
+Đó là đánh giá nha chu.
+
+125
+00:22:09,839 --> 00:22:10,229
+Tại sao?
+
+126
+00:22:10,859 --> 00:22:22,949
+Vì tầm quan trọng hiển nhiên của mô nha chu nên mọi thao tác phục hồi đều phải được thực hiện với sự tôn trọng, thấu hiểu và quan tâm đến nha chu.
+
+127
+00:22:23,669 --> 00:22:26,029
+Vấn đề là, như các em thấy trong bức ảnh này.
+
+128
+00:22:26,639 --> 00:22:28,769
+Bệnh nhân khẳng định họ dùng chỉ nha khoa hàng ngày.
+
+129
+00:22:30,609 --> 00:22:34,319
+Nhưng trên thực tế, có những dấu hiệu cho chúng ta biết điều ngược lại.
+
+130
+00:22:35,159 --> 00:22:48,599
+Sự khác biệt trong khái niệm về các biện pháp vệ sinh răng miệng và tầm quan trọng của nó giữa bệnh nhân và nha sĩ là một vấn đề lớn.
+
+131
+00:22:48,599 --> 00:22:51,299
+Trong những ca lâm sàng như thế này,
+
+132
+00:22:53,539 --> 00:22:59,159
+thầy muốn hỏi các em, làm thế nào để giải quyết những vấn đề đó.
+
+133
+00:22:59,429 --> 00:23:04,339
+Thứ nhất, làm sao chẩn đoán được sự hiện diện của các tổn thương hay khiếm khuyết vùng cổ răng.
+
+134
+00:23:05,119 --> 00:23:08,809
+Khi mà toàn bộ vùng cổ răng đang bị mảng bám bao phủ.
+
+135
+00:23:09,609 --> 00:23:11,239
+Đó thực sự chỉ là mảng bám?
+
+136
+00:23:11,839 --> 00:23:21,749
+Hay là một sự khử khoáng, hay kết hợp cả xoang sâu khử khoáng và mảng bám tích tụ cùng với vôi răng.
+
+137
+00:23:22,259 --> 00:23:29,459
+Thứ hai, làm thế nào các em xác định chính xác sự lan rộng về phía cổ răng của tổn thương.
+
+138
+00:23:29,459 --> 00:23:42,589
+Vì vậy, các em có thể nhận thấy ở răng phía bên, xoang trám đã lan cao hơn vùng cổ răng bởi vì bác sĩ không thể xác định được điểm dừng chuẩn xác.
+
+139
+00:23:42,589 --> 00:23:43,539
+Em hiểu chứ?
+
+140
+00:23:43,949 --> 00:23:47,529
+Bác sĩ không thể xác định được chính xác giới hạn của tổn thương sâu răng.
+
+141
+00:23:47,999 --> 00:23:56,579
+Làm sao để giảm nguy cơ chảy máu trong quá trình sửa soạn xoang và trong khi dán vật liệu trám.
+
+142
+00:23:57,369 --> 00:24:02,329
+Và làm thế nào để em có thể xác định được màu sắc và tông màu của răng.
+
+143
+00:24:03,029 --> 00:24:23,639
+Đó là một khó khăn lớn, trừ khi các em phục hồi lại sức khỏe nha chu và bệnh nhân duy trì được vệ sinh răng miệng tốt, nếu không thì chưa thể bắt đầu phục hình được.
+
+144
+00:24:23,919 --> 00:24:34,039
+Nếu bệnh nhân có những sang thương sâu răng đang hoạt động như thế này, hãy loại bỏ mô sâu và trám tạm bằng GIC.
+
+145
+00:24:35,019 --> 00:24:49,809
+Bởi vì vật liệu này ít nhất có khả năng phóng thích fluor, đồng thời có nhiều tông màu nên phần nào giải quyết tạm thời được vấn đề thẩm mỹ.
+
+146
+00:24:50,119 --> 00:24:53,949
+Cho đến khi em duy trì được vệ sinh răng miệng tốt và bệnh nhân tuân thủ đúng các hướng dẫn.
+
+147
+00:24:54,499 --> 00:24:59,159
+Nhưng trong những trường hợp cụ thể này, hãy để thầy chỉ cho các em thấy vùng này.
+
+148
+00:25:00,422 --> 00:25:01,072
+Nhìn nhé.
+
+149
+00:25:01,372 --> 00:25:14,112
+Đây là một ca lâm sàng toàn diện của Ahmed Al-Juhani, một học trò của thầy và hiện đang là bác sĩ chuyên khoa nha tại Ả Rập Xê Út.
+
+150
+00:25:15,682 --> 00:25:29,282
+Trong ca này, làm sao em có thể so màu, làm sao xác định bờ cổ răng của tổn thương sâu, và đó có thực sự là sâu răng hay không, mọi thứ đều phải được đánh giá kỹ.
+
+151
+00:25:29,582 --> 00:25:37,242
+Để đánh giá mô nha chu đúng cách, các em có thể dùng phương pháp khám bằng mắt, sờ bằng dụng cụ hoặc chụp phim X-quang.
+
+152
+00:25:37,242 --> 00:25:47,122
+Các em cần kiểm tra sự hiện diện của mảng bám, cặn bẩn, tình trạng viêm, và phải ghi nhận mức độ vệ sinh răng miệng tại nhà của bệnh nhân vào hồ sơ.
+
+153
+00:25:47,422 --> 00:25:59,012
+Bởi vì, răng không thể được phục hồi đúng cách khi xung quanh đầy cặn bẩn và mô nướu đang chảy máu.
+
+154
+00:25:59,322 --> 00:26:06,762
+Nướu cần phải đủ khỏe mạnh để đảm bảo quy trình phục hình của các em thành công.
+
+155
+00:26:07,142 --> 00:26:19,970
+Xét về tiên lượng lâu dài, sự thành công của bất kỳ điều trị phục hồi nào phụ thuộc rất nhiều vào khả năng bệnh nhân giữ sạch miếng trám.
+
+156
+00:26:19,970 --> 00:26:37,272
+Và điều này có thể đạt được song song với việc hướng dẫn vệ sinh răng miệng dự phòng, nếu không, môi trường đó sẽ không thuận lợi cho quy trình phục hình.
+
+157
+00:26:37,972 --> 00:26:54,552
+Vì vậy, các em phải quan sát xem nướu có khỏe mạnh, màu hồng nhạt, kết cấu săn chắc, bờ nướu mỏng như lưỡi dao, trong khi nướu viêm thì đỏ, mềm bở, bờ tròn và bề mặt láng bóng.
+
+158
+00:26:54,552 --> 00:27:07,472
+Đồng thời, khi khám bằng cây đo túi nha chu, các em phải đo độ sâu của khe nướu xung quanh răng theo một trình tự có hệ thống từ mọi phía.
+
+159
+00:27:07,822 --> 00:27:15,892
+Bất kỳ khe nướu nào sâu hơn ba milimét đều phải được ghi nhận vào hồ sơ là túi nha chu.
+
+160
+00:27:16,232 --> 00:27:27,522
+Các em cũng cần chú ý tụt nướu, chảy máu nướu, và đánh giá độ lung lay của răng để xác định mức độ tổn thương của hệ thống nha chu nâng đỡ.
+
+161
+00:27:28,282 --> 00:27:53,542
+Nhưng xin lưu ý, đôi khi răng lung lay là do lực nhai bất thường hoặc các thói quen cận chức năng, nên khi phát hiện răng lung lay, đó không hẳn hoàn toàn do bệnh lý nha chu.
+
+162
+00:27:53,692 --> 00:28:04,342
+Các em cũng phải kiểm tra khớp cắn của bệnh nhân, và kiểm tra tình trạng tủy vì những tổn thương quanh chóp tạm thời cũng có thể gây lung lay răng.
+
+163
+00:28:04,432 --> 00:28:20,152
+Không phải tất cả răng lung lay đều liên quan đến nha chu, nó có thể là do sự di chuyển nhanh trong chỉnh nha, hoặc do giữ cố định sau chỉnh nha không đúng cách.
+
+164
+00:28:20,482 --> 00:28:32,992
+Cuối cùng là khảo sát X-quang, đây là một trong những bước quan trọng nhất để đánh giá nha chu và các em thường không cần những góc chụp quá đặc biệt.
+
+165
+00:28:33,142 --> 00:28:50,852
+Phim cánh cắn chuẩn với mức độ phơi sáng và góc độ đúng là công cụ chẩn đoán hình ảnh tốt nhất để đánh giá mô nha chu, đặc biệt là mào xương ổ răng.
+
+166
+00:28:50,852 --> 00:28:56,942
+Xem tiêu xương là cục bộ hay khu trú, tiêu xương theo chiều dọc hay chiều ngang.
+
+167
+00:28:57,222 --> 00:29:07,572
+Tiêu xương dọc luôn luôn có thể là hậu quả của sự kết hợp giữa viêm nhiễm và các thói quen lệch lạc hoặc lực nhai bất thường.
+
+168
+00:29:07,882 --> 00:29:13,352
+Trong khi đó, tiêu xương ngang thường chỉ liên quan đến quá trình viêm.
+
+169
+00:29:13,822 --> 00:29:25,902
+Phim X-quang cũng cần được đánh giá để xác định mối tương quan giữa bờ của miếng trám hiện có với mức mào xương ổ răng.
+
+170
+00:29:26,292 --> 00:29:34,782
+Đây là một vấn đề cực kỳ quan trọng đối với sự thành công của quy trình phục hồi cũng như sức khỏe của mô nha chu.
+
+171
+00:29:36,312 --> 00:29:43,952
+Bởi vì chúng ta có một khái niệm gọi là khoảng sinh học, dài ít nhất hai milimét.
+
+172
+00:29:43,952 --> 00:29:54,802
+Đó là khoảng cách từ biểu mô bám dính và mô liên kết nằm giữa đáy khe nướu đến mào xương ổ răng.
+
+173
+00:29:55,320 --> 00:30:07,780
+Bờ phục hình phải nằm cách xa đáy khe nướu nhất có thể để duy trì sức khỏe nướu và tránh xâm phạm vào khoảng sinh học.
+
+174
+00:30:08,250 --> 00:30:26,250
+Nếu bờ phục hình của em xâm phạm khoảng sinh học, răng sẽ bị tiêu xương, tổn thương nha chu, và dẫn đến nhiều biến chứng như túi nha chu và lung lay răng.
+
+175
+00:30:26,420 --> 00:30:32,890
+Và bằng cách này hay cách khác, tất cả sẽ dẫn đến nhồi nhét thức ăn và nguy cơ sâu răng tái phát.
+
+176
+00:30:33,250 --> 00:30:54,100
+Vì thế, trong các xoang trám phức hợp hay xoang tiếp cận vùng kẽ, các em không thể quan sát được nếu không chụp phim cánh cắn để đảm bảo bờ phục hình không xâm phạm khoảng sinh học.
+
+177
+00:30:54,600 --> 00:31:05,510
+Do đó, các em cần đánh giá kỹ ca lâm sàng của mình để tính toán xem bờ nướu của miếng trám nên được mở rộng đến đâu.
+
+178
+00:31:05,510 --> 00:31:21,170
+Trong một số trường hợp, sâu răng đã tiến sát mào xương ổ răng và bờ miếng trám của em sẽ xâm phạm khoảng sinh học.
+
+179
+00:31:21,470 --> 00:31:37,500
+Khi đó, các em cần đánh giá ca bệnh thật cẩn thận và hội chẩn với bác sĩ nha chu để phẫu thuật làm dài thân răng lâm sàng hoặc kéo trồi răng bằng chỉnh nha.
+
+180
+00:31:38,080 --> 00:32:05,020
+Nếu tổn thương chưa xâm phạm khoảng sinh học, nhưng độ sâu của nó lại nằm sát đáy khe nướu ở ranh giới sát sao, các em sẽ phải đối mặt với khó khăn khác.
+
+181
+00:32:05,020 --> 00:32:25,340
+Với trường hợp sát giới hạn cuối cùng này, các em không cần phẫu thuật làm dài thân răng lâm sàng, nhưng lại cần kỹ thuật nâng bờ sâu vì độ sâu đó không thuận lợi cho quy trình dán, đặt khuôn trám hay thao tác vật liệu.
+
+182
+00:32:25,340 --> 00:32:29,220
+Các em có thể quan sát ca này nhé.
+
+183
+00:32:29,220 --> 00:32:40,360
+Sơ đồ minh họa cho thấy vùng A là khoảng sinh học, tức là khoảng cách từ đáy khe nướu đến đỉnh mào xương ổ răng.
+
+184
+00:32:40,360 --> 00:32:55,680
+Bờ phục hình của em tuyệt đối không được xâm phạm khoảng trống này, nếu không bệnh nhân sẽ gặp vấn đề nha chu, nhồi nhét thức ăn, sâu răng tái phát và nguy cơ răng lung lay rất lớn.
+
+185
+00:32:55,680 --> 00:33:05,660
+Chúng ta cũng không thể bỏ qua tình trạng ê buốt do lộ chân răng mà bệnh nhân sẽ than phiền.
+
+186
+00:33:06,230 --> 00:33:27,420
+Trong trường hợp này, các em có thể thấy trên phim cánh cắn, bệnh nhân đã được phẫu thuật làm dài thân răng để di dời mào xương ổ răng và khoảng sinh học ra xa khỏi bờ nướu.
+
+187
+00:33:27,420 --> 00:33:28,370
+Thấy không?
+
+188
+00:33:28,370 --> 00:33:44,190
+Và để điều chỉnh bờ nướu, đây là một ca lâm sàng cho thấy bệnh nhân có một miếng trám hỗn hợp composite và amalgam bị lỗi.
+
+189
+00:33:44,190 --> 00:33:54,730
+Khi chúng ta tháo miếng trám ra, chúng ta phát hiện bờ xoang đã và sẽ tiếp tục phải mở rộng đến mức xâm phạm vào khoảng sinh học.
+
+190
+00:33:54,730 --> 00:34:03,570
+Trong ca này, bác sĩ điều trị đã hội chẩn với bác sĩ chuyên khoa nha chu.
+
+191
+00:34:03,570 --> 00:34:14,490
+Và phẫu thuật làm dài thân răng lâm sàng đã được thực hiện để gọt bớt một phần xương ổ răng, đẩy khoảng sinh học lùi xuống dưới.
+
+192
+00:34:14,490 --> 00:34:34,550
+Việc này nhằm đưa bờ phục hình lên cao hơn, và sau khi lành thương hoàn toàn, các em có thể thấy thành nướu hiện ra rất rõ ràng, đủ để đặt đê cao su, khuôn trám và thực hiện quy trình dán mà không làm kích thích mô nướu hay làm hỏng chất lượng dán.
+
+193
+00:34:34,550 --> 00:34:42,380
+Ở một ca khác, các em có thể thấy trên phim cánh cắn, bờ xoang của chúng ta có vẻ khá sâu nhưng chưa xâm phạm.
+
+194
+00:34:42,380 --> 00:34:49,870
+Độ sâu sinh học vẫn còn đó nhưng chúng ta lại e ngại điều này.
+
+195
+00:34:49,870 --> 00:34:54,960
+Đó là lý do chúng ta đang ở mức độ cho phép tối thiểu.
+
+196
+00:34:54,960 --> 00:35:07,650
+Bờ phục hình của chúng ta chỉ nằm ngay trên đáy khe nướu một chút, trong khi lẽ ra chúng ta không nên đi quá một nửa hoặc hai phần ba khoảng cách này.
+
+197
+00:35:07,650 --> 00:35:21,270
+Trong tình huống này, bác sĩ đặt đê cao su, sau khi làm sạch hoàn toàn sẽ dùng chỉ co nướu và đặt khuôn trám vòng auto matrix.
+
+198
+00:35:21,270 --> 00:35:33,560
+Chỉ để nâng thành nướu lên bằng GIC lai nhựa, thủ thuật này được gọi là nâng bờ sâu.
+
+199
+00:35:33,560 --> 00:35:46,590
+Nhằm đảm bảo quy trình dán dính với cấu trúc răng được hoàn hảo mà không làm kích thích mô nướu và tránh bị mô nướu làm giảm chất lượng dán.
+
+200
+00:35:46,590 --> 00:35:49,590
+Thủ thuật này gọi là nâng bờ sâu.
+
+201
+00:35:49,590 --> 00:36:01,830
+Và các em có thể thấy trên phim chụp X-quang cánh cắn, nó là một công cụ hỗ trợ vô cùng hữu ích trong chẩn đoán và theo dõi tình trạng này.
+
+202
+00:36:01,830 --> 00:36:10,660
+Đó là lý do việc đưa ra quyết định đòi hỏi một chút khéo léo và các em phải vận dụng mọi kỹ năng tư duy phản biện của mình.
+
+203
+00:36:10,660 --> 00:36:20,890
+Quyết định xem nên nâng bờ sâu bằng GIC lai nhựa, phẫu thuật làm dài thân răng lâm sàng hay kéo trồi bằng chỉnh nha?
+
+204
+00:36:20,890 --> 00:36:25,760
+Và tại sao lại dùng GIC lai nhựa mà không dùng GIC truyền thống để nâng bờ sâu?
+
+205
+00:36:25,760 --> 00:36:42,880
+Điều đầu tiên, chúng ta phải xác định được mức độ dự kiến cho phần đáy nướu của xoang sửa soạn.
+
+206
+00:36:42,880 --> 00:37:01,430
+Nếu nó nằm gần đáy khe nướu nhưng vẫn chưa xâm phạm vào khoảng sinh học, thì vấn đề của các em chỉ là quy trình dán và quang trùng hợp cho composite.
+
+207
+00:37:01,430 --> 00:37:19,330
+Khu vực này khó tiếp cận, các em có thể làm kích thích mô nướu, không cô lập tốt và không kiểm soát được dịch tiết để có được một quy trình dán chất lượng cao.
+
+208
+00:37:19,330 --> 00:37:28,680
+Chính lúc đó, chúng ta cần tiến hành kỹ thuật nâng bờ sâu với GIC lai nhựa.
+
+209
+00:37:28,680 --> 00:37:54,960
+Chúng ta sẽ chọn và nhét chỉ co nướu kích thước phù hợp, sau đó đắp GIC lai nhựa để nâng cao bờ xoang lên ngang mức đỉnh nướu rời rồi mới tiến hành trám composite hoặc thậm chí là trám amalgam.
+
+210
+00:37:54,960 --> 00:37:56,680
+Rõ chứ?
+
+211
+00:37:56,680 --> 00:37:58,290
+Đó là điểm thứ nhất.
+
+212
+00:37:58,290 --> 00:38:12,040
+Nếu bờ phục hình dự kiến có vẻ sẽ xâm phạm vào khoảng sinh học, thì chúng ta chỉ có một trong hai lựa chọn: làm dài thân răng lâm sàng hoặc trồi răng bằng chỉnh nha.
+
+213
+00:38:12,040 --> 00:38:18,800
+Tuy nhiên, việc ra quyết định trong trường hợp này thuộc về bác sĩ chuyên khoa nha chu chứ không phải chúng ta.
+
+214
+00:38:18,800 --> 00:38:29,820
+Nhưng xét về kiến thức tổng quát, xương ổ răng chỉ có thể mài bớt đến một giới hạn nhất định, nếu không em sẽ phá hủy cấu trúc nâng đỡ răng.
+
+215
+00:38:29,820 --> 00:38:37,320
+Chính vì vậy, các em phải đánh giá nguyên nhân nào gây ra sự xâm phạm đó.
+
+216
+00:38:37,320 --> 00:38:43,320
+Có phải do chiếc răng đó chưa mọc hoàn toàn không?
+
+217
+00:38:43,320 --> 00:38:56,120
+Nên dù bờ phục hình của em đã ở đúng vị trí nhưng thân răng lại chưa mọc đủ cao đến mức cần thiết.
+
+218
+00:38:56,120 --> 00:39:07,040
+Trong tình huống đó, bác sĩ nha chu hoặc chính chúng ta có thể ưu tiên phương pháp kéo trồi bằng chỉnh nha và trám răng tạm thời cho đến khi hoàn tất chỉnh nha.
+
+219
+00:39:07,040 --> 00:39:34,910
+Nhưng nếu răng đã mọc hoàn toàn và đạt đúng mặt phẳng nhai, đồng thời mối tương quan giữa bám dính nướu, thân răng và đường nối men xê măng nằm đúng vị trí, không vượt quá đường viền sinh học, thì hãy chọn phẫu thuật làm dài thân răng lâm sàng.
+
+220
+00:39:34,910 --> 00:39:43,828
+Tuy nhiên, thầy vẫn khẳng định rằng quyết định này không thuộc thẩm quyền của thầy với tư cách là bác sĩ phục hình.
+
+221
+00:39:44,558 --> 00:39:46,818
+Mà đó là quyết định của bác sĩ nha chu.
+
+222
+00:39:47,468 --> 00:39:48,178
+Giờ chuyển sang ý tiếp theo.
+
+223
+00:39:48,738 --> 00:39:53,028
+Tại sao lại dùng GIC lai nhựa mà không dùng GIC truyền thống?
+
+224
+00:39:54,078 --> 00:39:55,338
+Trong kỹ thuật nâng bờ sâu.
+
+225
+00:39:57,918 --> 00:40:03,898
+GIC truyền thống mặc dù có khả năng dán dính vào cấu trúc răng tốt hơn.
+
+226
+00:40:04,448 --> 00:40:09,028
+Và thậm chí là bám dính tốt hơn nhiều so với GIC lai nhựa.
+
+227
+00:40:09,748 --> 00:40:26,288
+Đồng thời, khả năng giải phóng fluor của nó cũng cao hơn, nhưng nó lại cực kỳ nhạy cảm với sự tạp nhiễm hơi ẩm và phản ứng đông cứng axit-bazơ của nó cần hai mươi bốn giờ để trưởng thành hoàn toàn.
+
+228
+00:40:27,498 --> 00:40:27,898
+Nhớ nhé.
+
+229
+00:40:28,268 --> 00:40:36,748
+Đó là lý do chúng ta sử dụng GIC lai nhựa vì nó ít nhạy cảm với độ ẩm hơn trong các giai đoạn đầu.
+
+230
+00:40:37,738 --> 00:40:38,148
+Được rồi.
+
+231
+00:40:38,488 --> 00:40:41,218
+Phản ứng của nó là sự kết hợp giữa phản ứng nhựa và axit-bazơ.
+
+232
+00:40:41,598 --> 00:40:53,838
+Phản ứng nền nhựa này diễn ra nhanh hơn khi dùng đèn quang trùng hợp, cho phép đông cứng tức thì ngay cả khi đó là loại GIC lai nhựa trùng hợp hóa học.
+
+233
+00:40:53,838 --> 00:41:05,798
+Nhờ đó, thầy có thể đắp composite ngay lập tức mà không phải đợi hai mươi bốn giờ để vật liệu đông cứng hoàn toàn như GIC truyền thống.
+
+234
+00:41:06,828 --> 00:41:21,128
+Cuối cùng, đây là những cuốn giáo trình mà thầy khuyên các em nên đọc thêm về các công cụ chẩn đoán, đặc biệt là cuốn nghệ thuật và khoa học trong nha khoa phục hồi của Sturdevant.
+
+235
+00:41:21,378 --> 00:41:29,718
+Đừng ngần ngại đặt câu hỏi, các em có thể hỏi thầy bằng cách bình luận dưới video này và thầy sẽ trả lời sớm nhất có thể.
+
+236
+00:41:30,048 --> 00:41:37,478
+Các em cũng có thể liên hệ với thầy qua email và thầy cũng sẽ hồi đáp trong thời gian sớm nhất.
+
+237
+00:41:37,478 --> 00:41:42,238
+Một lần nữa, thầy muốn cảm ơn các em đã dành thời gian lắng nghe.
+
+238
+00:41:42,238 --> 00:41:53,318
+Đừng quên ấn thích video, đăng ký kênh và bật thông báo để nhận được những cập nhật sớm nhất nhé, xin cảm ơn từ thầy Yasser Losif.

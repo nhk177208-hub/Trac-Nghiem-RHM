@@ -1,0 +1,1498 @@
+﻿1
+00:00:37,478 --> 00:00:55,338
+Welcome again, everyone. This is Yasser Raseef from Learn Dental Series. In this
+episode, we will finalize our discussion about the topic of diagnosis and
+treatment planning by discussing how to design and assign suitable treatment
+plan for our restorative case.
+
+2
+00:00:56,328 --> 00:01:12,398
+Let me declare that I don't receive fees, compensation or royalties from the
+sales of any of the products shown or discussed. Also, this presentation has not
+been sponsored by any agency, company or organization and is only prepared for
+educational purposes.
+
+3
+00:01:12,788 --> 00:01:23,238
+Also, this presentation is copyright protected and cannot be transmitted by any
+mean unless you get a prior permission from the author.
+
+4
+00:01:23,588 --> 00:01:28,478
+In this episode, we will try to design a proper restorative treatment plan.
+
+5
+00:01:28,848 --> 00:01:48,162
+Already we discussed in our previous episodes about this topic. We discussed in
+part one patient assessment and information gathering in terms of demographic
+data, chief complain, medical history and dental history,
+
+6
+00:01:48,162 --> 00:02:05,778
+then we are going forward for clinical examination and diagnosis including
+examination of dental caries, examination of existing restoration, examination
+of other tooth defects rather than caries,
+
+7
+00:02:06,018 --> 00:02:06,318
+tooth.
+
+8
+00:02:06,318 --> 00:02:17,388
+Finally, we have now all the data that we could use in designing our treatment
+plan and let us go to discuss how to design our treatment plan.
+
+9
+00:02:19,468 --> 00:02:39,548
+In this part, you should hold this thought firstly: always respecting the
+quality we must offer to the patient different solutions, focused on not what we
+want, not what they want, but what they need and we can.
+
+10
+00:02:39,548 --> 00:02:40,428
+This is important.
+
+11
+00:02:40,428 --> 00:02:53,798
+What they need and we can. We will start our discussion in treatment planning by
+by discussing what is prognosis then the assignment of treatment planning and
+interdisciplinary considerations when assigning our treatment plan.
+
+12
+00:02:54,608 --> 00:02:56,558
+Let us start with prognosis.
+
+13
+00:02:57,178 --> 00:03:17,478
+What is meant by prognosis? Prognosis is a term used to describe the prediction
+of the probable course and outcome of a disease or a condition as well as the
+outcome of expected from our intervention or our treatment, either it is
+preventive or operative treatment.
+
+14
+00:03:18,428 --> 00:03:32,418
+Prognosis is used to estimate the recovery from a disease or a condition
+regardless the type of treatment and also can predict the effect of this
+treatment in this recovery.
+
+15
+00:03:33,008 --> 00:03:59,858
+In operatively, prognosis can be used to describe the success of a particular
+treatment procedure in terms of time of service, how long it will last,
+functional value to the patient, then you are restoring to his function, okay,
+in a comfortable way, okay,
+
+16
+00:03:59,858 --> 00:04:11,168
+how much the comfort for your patient, you will not suffering from any
+complaints after you finished, and the aesthetic value for the patient.
+
+17
+00:04:11,168 --> 00:04:35,198
+That's why you should refer to the main objectives of operative dentistry to
+restore tooth function and occlusion by providing efficient and comfortable
+mastication, okay? Tooth function and occlusion, the functional is not only
+mastication, but also it is speech,
+
+18
+00:04:35,198 --> 00:04:44,258
+pronunciation of your letters, okay? Regardless the language the patient use,
+and at the same time, aesthetic is a major function.
+
+19
+00:04:44,258 --> 00:04:54,218
+Prognosis can be scaled and described as excellent, good, fair, poor or
+hopeless, okay?
+
+20
+00:04:54,218 --> 00:05:01,818
+The dentist should discuss all the expected prognosis of the case and what is
+his responsibility and what is the patient responsibility that plays major role
+in the prognosis of the case, okay?
+
+21
+00:05:01,818 --> 00:05:02,650
+Who is responsible about what?
+
+22
+00:05:03,322 --> 00:05:12,562
+The responsibility of the dentist is to perfectly design a cavity or perfectly
+design a treatment plan and perform it perfectly.
+
+23
+00:05:12,672 --> 00:05:23,562
+But this is not the end of the story, the story at this point started to be the
+responsibility of your patient.
+
+24
+00:05:23,562 --> 00:05:24,382
+That's why you should clarify this to him.
+
+25
+00:05:24,492 --> 00:05:43,892
+What he should follow, either instructions or hygiene measures, or what he
+should modify in his attitude and what is the frequency of maintenance visits
+and the interval of maintenance visits.
+
+26
+00:05:43,992 --> 00:05:54,912
+Each one in this party should know and get a clear vision about what is his
+responsibility in the prognosis of the treatment and how to perform this, okay?
+
+27
+00:05:55,332 --> 00:06:05,762
+And accordingly, the operator should describe to the patient in a scale what the
+expected prognosis in each condition.
+
+28
+00:06:06,002 --> 00:06:22,112
+Excellent prognosis mean that you you performed all your job, okay, in a perfect
+way and the patient also performed his job and his responsibilities in a perfect
+way and so on, okay?
+
+29
+00:06:22,732 --> 00:06:29,922
+All of these should be clear in a verbal and a written prognosis form.
+
+30
+00:06:30,072 --> 00:06:44,092
+That's why it comes the importance of informed consents and the patient should
+sign a consent in certain cases where the responsibility in prognosis lies on
+him.
+
+31
+00:06:45,492 --> 00:06:57,322
+Prognostic indications includes two main factors, tooth level factor and the
+condition itself.
+
+32
+00:06:57,322 --> 00:07:03,642
+Tooth level factors in terms of restorability, status of the bulb and status
+ofium.
+
+33
+00:07:03,722 --> 00:07:03,722
+This should be carefully evaluated in clinical examination and should be
+clarified to your patient.
+
+34
+00:07:03,722 --> 00:07:12,262
+You should use all the available adjunctive aids to determine tooth
+responsibility, status of the bulb and status ofium.
+
+35
+00:07:12,562 --> 00:07:28,802
+Restorability that entails can operative treatment be used to repair and
+reinstate the tooth structure successfully in mid and long term?
+
+36
+00:07:28,802 --> 00:07:34,842
+This is the question that should be answered by determining the restorability,
+okay?
+
+37
+00:07:35,132 --> 00:07:44,622
+And that is what is the benefits, what is the rational of your operative
+treatment?
+
+38
+00:07:44,992 --> 00:07:52,602
+Does it ensure that does it ensure that it will repair and reinstate the tooth
+structure successfully in mid and long term, okay?
+
+39
+00:07:52,692 --> 00:08:10,392
+This could be estimated by the severity of damage of the coronal hard tissues,
+extent of the carious lesion, the amount of tooth structure lost due to other
+than carious lesion like trauma, tooth wear or developmental defect.
+
+40
+00:08:10,392 --> 00:08:11,222
+This is good.
+
+41
+00:08:11,442 --> 00:08:23,132
+Be calculated and determined exactly according to the clinical examination and
+the severity of damage of the tooth.
+
+42
+00:08:23,132 --> 00:08:31,722
+Then comes the status of the bulb, as long as the tooth is vital and normal,
+okay?
+
+43
+00:08:31,722 --> 00:08:40,052
+And its sensibility within the normal, this indicates a good to excellent
+prognosis.
+
+44
+00:08:40,052 --> 00:08:47,472
+Status of the production including alveolar bone levels, production ligament,
+mobility, oral hygiene measures.
+
+45
+00:08:47,472 --> 00:08:52,802
+All of that, okay?
+
+46
+00:08:52,802 --> 00:09:02,042
+With the extent of damage and how it reaches or how how how is its relation to
+the biological widths?
+
+47
+00:09:02,042 --> 00:09:07,352
+All of that could give a good testament about the expected prognosis of your
+case.
+
+48
+00:09:07,642 --> 00:09:11,762
+Then comes the condition itself as a whole, okay?
+
+49
+00:09:12,412 --> 00:09:17,952
+How much the ease with which the etiological factors can be removed or modified
+to prevent or slow the progress of the disease and its recarance?
+
+50
+00:09:18,582 --> 00:09:22,112
+Let me give you an example if the patient having a zerostomia, okay?
+
+51
+00:09:22,112 --> 00:09:22,902
+Try mouse.
+
+52
+00:09:22,902 --> 00:09:33,582
+Is this zerostomia is due to medication or localized condition, okay?
+
+53
+00:09:33,582 --> 00:09:37,962
+Or it may be due to radio or chemotherapy, okay?
+
+54
+00:09:38,842 --> 00:09:52,702
+If the patient having this zerostomia due to radio or chemotherapy, then the
+prognosis is much more complicated and tends to be poor one.
+
+55
+00:09:52,702 --> 00:10:02,732
+But if it is due to localized factor or due to patient habits that could be
+modified and could be retained again to normal, okay?
+
+56
+00:10:02,732 --> 00:10:04,782
+Then the prognosis will be good.
+
+57
+00:10:05,400 --> 00:10:18,990
+Even if education is extensive to a cause or another, but it could be improved
+if the patient is receiving a fluoride therapy and oral hygiene maintenance
+therapy and the patient is following the instruction.
+
+58
+00:10:18,990 --> 00:10:19,760
+Okay?
+
+59
+00:10:19,760 --> 00:10:27,710
+That's why the second item related to the condition itself is the degree of
+patient motivation to manage the condition.
+
+60
+00:10:27,710 --> 00:10:28,590
+Okay?
+
+61
+00:10:28,590 --> 00:10:40,698
+That's why we are recording in our demographic data, the oral hygiene habits,
+the history of the the past dental history, the frequency of prophylaxis,
+
+62
+00:10:40,698 --> 00:10:58,700
+the frequency of visiting dentist and education and occupation of the patient
+that reflects the degree of interest and even if he is not interested at the
+time this time of the time being, but how much you could be motivated.
+
+63
+00:10:58,700 --> 00:10:59,350
+Okay?
+
+64
+00:10:59,350 --> 00:11:15,420
+That's why you could avoid further tooth destruction by preserving his teeth,
+okay, by following the instruction, okay, and all of these should be documented
+fully in your clinical notes.
+
+65
+00:11:15,420 --> 00:11:19,930
+Then comes the treatment planning.
+
+66
+00:11:20,510 --> 00:11:28,410
+To develop a dental treatment plan, you should follow four steps for gathering
+all the data.
+
+67
+00:11:28,410 --> 00:11:29,350
+Okay?
+
+68
+00:11:29,350 --> 00:11:52,170
+Number one, examination, problem identification and risk assessment, this is
+what we had discussed in 11 episodes before this one, okay, including
+demographic data, including history of the patient, including clinical
+examination of all interesting items in our diagnosis.
+
+69
+00:11:52,170 --> 00:11:58,870
+Then comes decision to recommend intervention according to all of these data,
+okay?
+
+70
+00:11:58,870 --> 00:12:01,940
+What is the decision, okay?
+
+71
+00:12:01,940 --> 00:12:06,070
+To intervene this case or to treat this case.
+
+72
+00:12:06,070 --> 00:12:16,630
+Third, is there any alternative managements? What are the alternatives and what
+are the benefits, the cons and the pros of each alternative of our treatment.
+
+73
+00:12:16,630 --> 00:12:39,730
+Then selection of the treatment with the patient involvement, all of these
+should involve the patient in our discussion to select what treatment and what
+is the treatment alternative, what is the best one and what are the alternatives
+and discussing all the advantages and disadvantages and discussing what the
+instructions should be followed for each treatment option, okay?
+
+74
+00:12:41,590 --> 00:12:47,200
+Then all of these are influenced by two main factors.
+
+75
+00:12:47,200 --> 00:12:52,760
+Factor one is the patient himself and factor two is the dentist who will perform
+this.
+
+76
+00:12:53,730 --> 00:13:11,580
+The selection of treatment option will depend on patient preferences,
+motivation, systemic health, emotional status, financial resources also is an
+important issue, okay? And functional, aesthetic and technical demands the
+patient needs.
+
+77
+00:13:12,240 --> 00:13:30,686
+Then comes the role of dentist including his knowledge, experience and training,
+what is the laboratory support he have or he dealing with, dentist patient
+compatibility, availability of specialist if you are in need for other
+specialists to perform a treatment,
+
+78
+00:13:30,686 --> 00:13:42,890
+other treatments that will help you to perform your restorative management like
+periodontist or orthodontist or endodontist that will be discussed later in the
+coming slide.
+
+79
+00:13:43,290 --> 00:13:48,480
+And also the patient functional, aesthetic and technical demands.
+
+80
+00:13:49,600 --> 00:13:59,890
+Please don't fail in the trap of obeying the patient needs regardless your
+skills and experience.
+
+81
+00:14:00,310 --> 00:14:20,510
+Because nowadays most of our patients are searching Googling most of the
+treatment and they thought that all the available treatments are suitable for
+him, like patients that are asking for a new smile or different smile designs
+regardless when you are advising him to go for periodontist first, okay?
+
+82
+00:14:20,980 --> 00:14:28,630
+He may not understand the importance of periodontal condition management before
+going for that condition, okay?
+
+83
+00:14:28,630 --> 00:14:42,340
+And he thought that all the cases, especially his case is suitable to go for
+this and finally he will blame only you, not himself when the restoration fails
+or the treatment fails.
+
+84
+00:14:43,170 --> 00:14:50,420
+Then treatment planning, we have two types of treatment plan, ideal treatment
+plan and optimal treatment plan.
+
+85
+00:14:50,420 --> 00:14:56,750
+Ideal treatment plan where the best treatment, the best ideal treatment is
+performed.
+
+86
+00:14:57,922 --> 00:15:02,352
+Okay, regards or respect to the patient and dental limitations.
+
+87
+00:15:02,352 --> 00:15:08,702
+This is not truly applicable except for dental colleges or educational
+hospitals, okay?
+
+88
+00:15:08,702 --> 00:15:30,012
+Because you have an operator, which may be an post or a post or undergraduate
+student who would like to practice all the best treatment regardless his skill
+he is already in a condition he would like to know how to perform this under
+supervision of consultant or instructor.
+
+89
+00:15:30,012 --> 00:15:38,302
+At the same time, the patient limitations are nothing because the treatment is
+offered for free.
+
+90
+00:15:38,302 --> 00:15:44,702
+That's why it is the only situation where it is applied as ideal treatment plan,
+okay?
+
+91
+00:15:45,672 --> 00:15:57,592
+The only limitations in this condition is the facility limitations, okay, of
+this property or of this hospital or of this college, okay?
+
+92
+00:15:57,592 --> 00:16:07,182
+And I think it is by a way or another, it is a limited time limitations, okay,
+not forever, okay?
+
+93
+00:16:07,272 --> 00:16:13,422
+Then comes the actual clinically practice treatment plan is the optimal
+treatment plan.
+
+94
+00:16:13,422 --> 00:16:27,052
+Where the maximum form of treatment, okay, or treatment option is done in
+relation to the patient general and oral conditions as well as the dentist
+knowledge and experience, okay?
+
+95
+00:16:27,582 --> 00:16:29,432
+This is the most common use.
+
+96
+00:16:29,432 --> 00:16:36,772
+That's why we mentioned in the previous slides that there is always alternative
+treatments.
+
+97
+00:16:37,652 --> 00:16:41,872
+There is no only one option in treatment.
+
+98
+00:16:41,872 --> 00:16:48,802
+If there is one option in treatment, then this is the limitations of the
+dentist.
+
+99
+00:16:48,802 --> 00:17:12,792
+Because he doesn't know any other alternatives, he is just focusing in only one
+way, he is focusing in amalgam restoration for posterior teeth because he is not
+trained on posterior bonded restorations or he is trained, but haven't any
+equipment or material to perform it well, okay?
+
+100
+00:17:13,732 --> 00:17:17,842
+That's why you should hold this thought.
+
+101
+00:17:17,842 --> 00:17:28,672
+The success of the treatment plan is determined by its ability to meet both
+patients initial, كويس, and long-term needs.
+
+102
+00:17:29,152 --> 00:17:33,712
+Initial needs now and long-term needs now.
+
+103
+00:17:33,712 --> 00:17:36,082
+This is the successful treatment plan.
+
+104
+00:17:36,082 --> 00:17:45,582
+Okay? That's why we don't have only one treatment, always we have treatment
+alternatives or treatment options.
+
+105
+00:17:46,452 --> 00:17:50,892
+Treatment plan should follow certain phases and sequence.
+
+106
+00:17:51,192 --> 00:17:54,442
+Okay, treatment plan is not a static list of service.
+
+107
+00:17:54,732 --> 00:17:58,112
+It's often a multi-phase and a dynamic series of activities.
+
+108
+00:17:58,112 --> 00:18:11,792
+You could use all your critical thinking skills to design a road map to get a
+successful prognosis and a successful treatment of your patient.
+
+109
+00:18:11,792 --> 00:18:13,652
+This is the treatment plan.
+
+110
+00:18:13,652 --> 00:18:21,662
+It is the road map to achieve your goals of restorative treatment and achieve
+the patient target and goals also.
+
+111
+00:18:21,662 --> 00:18:26,232
+That's why it is a dynamic, not a static, not a sequence of steps.
+
+112
+00:18:26,232 --> 00:18:27,592
+What is meant by dynamic?
+
+113
+00:18:27,592 --> 00:18:40,302
+Dynamic means that you should assign certain stops every now and then to
+evaluate your treatment and evaluate your outcome before proceeding to the next
+step.
+
+114
+00:18:40,302 --> 00:18:49,532
+Okay? In certain cases, you may go back too many steps just to re-evaluate or
+redo a treatment, okay?
+
+115
+00:18:49,532 --> 00:18:51,922
+Especially for that for periodontal treatment.
+
+116
+00:18:51,922 --> 00:18:53,802
+Let me give you an example, okay?
+
+117
+00:18:54,422 --> 00:18:57,922
+You are excavating a severe or extensive caries lesion.
+
+118
+00:18:58,572 --> 00:19:03,882
+You are temporizing it with fluoride releasing material.
+
+119
+00:19:03,882 --> 00:19:11,702
+And refer your patient for periodontist, the periodontist finished his job
+carefully and perfectly.
+
+120
+00:19:11,702 --> 00:19:17,802
+But the patient didn't follow the instructions and didn't maintain oral hygiene.
+
+121
+00:19:17,802 --> 00:19:35,632
+If you are designing aesthetic sequence of steps, then the patient came to you
+again, okay, will come to you, sorry, will come to you again and you will
+replace your fluoride temporization with final restoration regardless the
+condition of oral hygiene.
+
+122
+00:19:35,632 --> 00:19:55,676
+But if it is a dynamic treatment plan, then you should assess the oral hygiene
+again and the periodontal condition again that may drive you should refer the
+patient again to the periodontist or let the patient again.
+
+123
+00:19:56,086 --> 00:20:12,326
+Follow the oral hygiene or force him or motivate him by a way or another, but
+don't go for final respiration unless you make sure that your periodontal
+condition is fair enough to ensure proper diagnosis.
+
+124
+00:20:12,326 --> 00:20:33,006
+That's what is mean meant by dynamic that you have definite stops every now and
+then to evaluate your treatment, evaluate the perception of patient to your
+treatment, evaluate the degree of motivation, and if you are continue to the
+next step or go back or just wait to control the condition.
+
+125
+00:20:33,006 --> 00:20:33,586
+Okay?
+
+126
+00:20:33,706 --> 00:20:39,536
+That's why proper sequencing is a crucial component of the successful treatment
+plan.
+
+127
+00:20:39,776 --> 00:20:40,386
+Okay?
+
+128
+00:20:40,386 --> 00:20:45,746
+Certain treatments also may follow others in a logic sequence or order.
+
+129
+00:20:45,746 --> 00:21:03,136
+Other treatments can be or must be occur concurrently and require coordination
+or may be parallel to each other, okay? It differs according to your case and
+your assigned treatment plan.
+
+130
+00:21:03,136 --> 00:21:18,926
+Phases of treatment plan are mainly five, okay, which is termed urgent or
+emergency phase, control phase, revaluation or holding phase, definitive phase,
+recare and reassessment phase.
+
+131
+00:21:18,926 --> 00:21:37,966
+In certain simple cases, like that of simple occlusal cavity in a patient with a
+favorable good oral hygiene and a favorable state of occlusion, then you could
+join all phases together to go for definitive phase immediately and then come
+back for follow up for recare or assessment.
+
+132
+00:21:37,966 --> 00:21:47,946
+That's why most of the patient in operative dentistry treatment planning, the
+first two phases are joined with each other for a single case.
+
+133
+00:21:47,946 --> 00:22:07,886
+For a simple cases, I don't have emergency, I don't have to wait for control
+phase, I don't have to reevaluate the case or have a holding phase because the
+bulb is already vital, the tooth is vital and the periodontal condition is fair
+and the occlusal condition is fair.
+
+134
+00:22:07,886 --> 00:22:22,416
+Then in the same visit, okay, we could neglect or those three phases and go for
+definitive phase including cavity preparation and restoration in one visit, then
+the patient will came for follow up as assigned by the dentist.
+
+135
+00:22:22,596 --> 00:22:27,136
+Let us start with phase one, urgent or emergency phase.
+
+136
+00:22:27,996 --> 00:22:41,866
+The patient at this condition may present to you with swelling, pain, bleeding
+or infection that should have to be management as soon as possible before
+initiation of subsequent phase.
+
+137
+00:22:41,866 --> 00:23:01,956
+Regardless, this is the ideal or the best treatment or not, this is an emergency
+management, okay, that should begins begin immediately after reviewing reviewing
+reviewing carefully your patient medical condition and history.
+
+138
+00:23:01,956 --> 00:23:02,946
+Okay?
+
+139
+00:23:03,326 --> 00:23:06,046
+Then comes the control phase.
+
+140
+00:23:06,536 --> 00:23:17,466
+What is the control phase? Control phase the time needs formally to control a
+definite to control some treatment like that.
+
+141
+00:23:17,656 --> 00:23:21,526
+I am waiting to pain to subside in emergency phase, okay?
+
+142
+00:23:21,526 --> 00:23:32,846
+I am waiting for bleeding to stop, I am waiting for medication to get some
+action in certain cases, okay?
+
+143
+00:23:33,166 --> 00:23:38,836
+But this is if the case is emergency, but if the case is normal, okay?
+
+144
+00:23:38,956 --> 00:23:46,276
+Maybe the patient present with multiple problems like extensive active disease.
+
+145
+00:23:46,276 --> 00:24:00,541
+The prognosis is unclear, that's why I would like to eliminate the active
+disease, that such as cares and inflammation, removing conditions, preventing
+maintenance, eliminating potential cause of the disease, beginning preventive
+activities,
+
+146
+00:24:00,541 --> 00:24:14,276
+just such as periodontal depride and scaling, close adjustment, cares removal
+and temporization either with fluoride containing temporary filling or not,
+replacement or repair of defective restoration, use of cares control measures.
+
+147
+00:24:14,276 --> 00:24:20,396
+Okay, after that comes reevaluation or holding phase.
+
+148
+00:24:20,396 --> 00:24:28,756
+At this phase, okay, it is the time allowed between the control and definitive
+phase for resolution of inflammation or for healing.
+
+149
+00:24:28,956 --> 00:24:38,976
+Let us say that you are applying calcium hydroxide just to sedate your bulb or
+zinc oxide to relieve pain of reversible pulpitis, okay?
+
+150
+00:24:38,976 --> 00:24:44,958
+The time consumed for relief of spain is called the holding phase.
+
+151
+00:24:44,958 --> 00:24:58,648
+If you are subscribing for your patient an antibiotic or analgesic, just advise
+them to use it for two or three days, whatever the time you assign for him,
+okay?
+
+152
+00:24:58,938 --> 00:25:07,438
+Just waiting this drug to get its action, it is it is considered as reevaluation
+or holding phase.
+
+153
+00:25:07,908 --> 00:25:27,498
+Then home core home care habits are reinforced, motivated and further treatment
+is assist and the patient should be re-assisted for the bulb response, relief of
+pain, stop of bleeding, what are the home care he is following before going for
+definitive phase.
+
+154
+00:25:28,768 --> 00:25:41,588
+After definitive after that comes the definitive phase, it is called definitive
+because the definitive treatment is done, this definitive treatment may be
+restoration, may be endo, maybe ortho, maybe prosdontics.
+
+155
+00:25:41,588 --> 00:25:49,498
+And this definitive treatment may be a single visit or may be up to one to two
+years like that for orthodontic treatment, okay?
+
+156
+00:25:49,818 --> 00:26:09,918
+It is the starting of the actual treatment for solving the patient problem by
+the most reliable treatment option, okay? to achieve the goals of your treatment
+plan for you and for your patient, okay?
+
+157
+00:26:10,288 --> 00:26:18,668
+It may be a single visit, may be multiple visits, and how long does take, okay?
+until you finish your treatment.
+
+158
+00:26:19,508 --> 00:26:44,418
+But in multidisciplinary cases or cases or of operative dentistry that may
+involve multiple quadrants, I advised you from my experience, okay? And from my
+opinion, what I always like to do is to determine even at this definitive phase
+definite stops.
+
+159
+00:26:44,868 --> 00:26:48,388
+to assist the treatment you have done.
+
+160
+00:26:48,388 --> 00:26:54,478
+Let me discuss it with you and clarify it to you, okay? If you have even a
+simple cavity preparation.
+
+161
+00:26:54,478 --> 00:26:59,138
+for just only one tooth and this is all the case.
+
+162
+00:26:59,508 --> 00:27:09,318
+Even with this this visit, you should have definite stops, okay? These stops
+including number one, drying the cavity and respecting.
+
+163
+00:27:09,318 --> 00:27:19,018
+the presence or absence of your caries, did you remove it correctly or not,
+okay?
+
+164
+00:27:19,018 --> 00:27:23,038
+Another stop, okay, is before applying your material.
+
+165
+00:27:23,038 --> 00:27:25,658
+You should inspect your cavity.
+
+166
+00:27:25,958 --> 00:27:34,288
+And are you following the basics, okay, or are you preparing an accurate cavity
+or not?
+
+167
+00:27:34,548 --> 00:27:54,898
+After if suppose you have to go for bonded restoration, then you have definite
+stops for etching, you should reevaluate, you should reevaluate your bonding
+procedure, you should reevaluate the curing of your first increment of
+composite.
+
+168
+00:27:54,898 --> 00:28:08,298
+You should before all of that you should assess the matrix if it is a compound
+cavity, even if it is a single visit, you should have definite spots to reassess
+your procedures and the accuracy of your procedures.
+
+169
+00:28:08,618 --> 00:28:14,238
+Either it is a single tooth restoration, quadrant restoration.
+
+170
+00:28:14,238 --> 00:28:17,598
+multi tooth restoration or multidisciplinary restorations.
+
+171
+00:28:17,598 --> 00:28:27,228
+All of these should be assigned in your treatment plan, then comes the last
+phase which is re care and reassessment phase.
+
+172
+00:28:27,448 --> 00:28:30,958
+Reassessment phase, it's a regular evaluation and examination.
+
+173
+00:28:30,958 --> 00:28:40,958
+follow up of your case to reveal the need for adjustment to prevent future
+breakdown and provide opportunity to reinforce home care.
+
+174
+00:28:41,368 --> 00:29:01,168
+Let me give you example, you need especially for bonded restoration, to scalar
+restoration and posterior teeth, it is difficult difficult in the first visit
+when you finish your restoration in certain cases, to determine if the patient
+is having a premature occlusal contact or not that need occlusal readjustment.
+
+175
+00:29:01,168 --> 00:29:03,798
+especially if the patient is anethized.
+
+176
+00:29:04,008 --> 00:29:17,238
+with inferior alveolar nerve block, okay, that will not enable the patient to
+bite correctly and determine if there is a premature contact or not.
+
+177
+00:29:17,238 --> 00:29:23,038
+Then you are in need for reassessment, okay, and follow-up visit.
+
+178
+00:29:23,238 --> 00:29:50,328
+One immediate within few days and one according to the severity of the case and
+the risk value of the patient, according to the risk assessment, that's why the
+frequency of recall during this phase will depend on the patient risk for dental
+disease.
+
+179
+00:29:51,500 --> 00:29:52,770
+just for a few minutes.
+
+180
+00:29:53,560 --> 00:30:03,230
+But patient for low risk, okay, you may in need to to reevaluate him every 9 to
+12 months.
+
+181
+00:30:03,580 --> 00:30:21,020
+But patients with high risk, okay, you need to see him much more frequently,
+maximum three to four months just to reassure that he is following the hygiene
+measures that will lower the care risk of the patient.
+
+182
+00:30:21,620 --> 00:30:27,960
+What if you are a part of interdisciplinary, comprehensive, complicated case?
+
+183
+00:30:27,960 --> 00:30:28,850
+Then,
+
+184
+00:30:30,510 --> 00:30:33,080
+in such a condition, okay,
+
+185
+00:30:35,670 --> 00:30:42,240
+the defensive phase will be too much crowded with much disciplines.
+
+186
+00:30:43,730 --> 00:30:51,620
+We should have a guidelines, general guidelines, who should start first?
+
+187
+00:30:51,620 --> 00:30:57,260
+Okay? Who will prepare the case for the other discipline?
+
+188
+00:30:57,260 --> 00:31:01,080
+Okay? Is this treatment is the responsibility of whom?
+
+189
+00:31:01,080 --> 00:31:09,890
+It may be the responsibility of mine, but it success and prognosis is the
+responsibility of other discipline.
+
+190
+00:31:10,130 --> 00:31:21,960
+That's why we should have guidelines in the defensive phases and control phases
+in cases of multidisciplinary, comprehensive, complicated cases, okay?
+
+191
+00:31:23,180 --> 00:31:35,310
+The relation between operative and endodontics, all teeth with large
+restorations should have pulpal and peribical evaluation.
+
+192
+00:31:36,150 --> 00:31:59,710
+Unless you finalize your treatment during cavity preparation, you during
+temporization after you temporize this case and the patient came to you for the
+next visit, start with pulpal and peribical evaluation again, it may undergo
+changes, pathological changes, okay? And you couldn't recognize it and your
+patient also couldn't recognize it.
+
+193
+00:32:00,080 --> 00:32:05,470
+If indicated, okay, teeth should have endodontic treatment before restoration.
+
+194
+00:32:05,790 --> 00:32:06,940
+Okay?
+
+195
+00:32:07,880 --> 00:32:21,740
+Because restorative procedure will be must more complicated if you need
+endodontic intervention in between your treatments, that's why finish firstly
+your endodontic treatment, okay?
+
+196
+00:32:22,330 --> 00:32:38,080
+Tooth with a previous endodontic treatment that show no evidence of healing or
+has an inadequate filling or a filling exposed to oral fluids, okay, endodontic
+fillings and fillings exposed to oral fluids should be evaluated for
+retreatments.
+
+197
+00:32:38,080 --> 00:32:51,020
+That's why when you are performing a corona restoration for a previously
+endodontic treated tooth, you should ask the patient for how long he finished
+this endodontreatment.
+
+198
+00:32:51,460 --> 00:32:56,550
+And what about the TF? It is integral or not?
+
+199
+00:32:56,810 --> 00:33:11,400
+Once the TF is soluble and washed away, then reconsult your endodontist for
+retreatment or not and reevaluate the case before you seal it with corona
+restoration.
+
+200
+00:33:12,330 --> 00:33:25,450
+But the major relation, the major relation between operative and other
+discipline is between operative and periodontics and already we gave an idea
+about it in previous episodes.
+
+201
+00:33:25,450 --> 00:33:31,800
+Generally periodontal treatment should precede operative care should precede all
+disciplines care, okay?
+
+202
+00:33:32,470 --> 00:33:44,470
+Especially when improved oral hygiene including initial scaling and root
+planning procedure can create a more desirable environment for performing
+operative treatment.
+
+203
+00:33:45,150 --> 00:34:01,310
+As we discussed before, few minutes ago, that the success and prognosis rate is
+depending upon to how much the furnace of your periodontal health and how much
+your patient is following oral hygiene prophylactic measure.
+
+204
+00:34:01,620 --> 00:34:12,450
+A tooth with a questionable periodontal prognosis should not receive any
+extensive restorative management until periodontal treatment provides a more
+favorable prognosis.
+
+205
+00:34:12,860 --> 00:34:27,830
+A tooth that has a good periodontal prognosis operative treatment could be
+performed before or after periodontal therapy as long as there is no interfering
+between them, okay?
+
+206
+00:34:28,730 --> 00:34:38,780
+The operative treatment is not compromised by existing tissue condition and the
+periodontal condition is not compromised by the operative condition.
+
+207
+00:34:38,780 --> 00:34:54,400
+Let me give you example, a patient having a staining and black and calculus
+accumulation in anterior teeth especially the lingual surface of lower
+anteriors, also showing black and calculus accumulation in most of patients,
+okay?
+
+208
+00:34:56,050 --> 00:35:01,159
+The patient at this time, okay, is under periodontal therapy.
+
+209
+00:35:01,159 --> 00:35:16,039
+And at the same time, it is he is referred to you because of simple occlusal
+caries in upper or lower molar area, not interfering with periodontal therapy or
+periodontal therapy not interfering with it.
+
+210
+00:35:16,199 --> 00:35:22,599
+That's why you could go for parallel treatment, operative and endo sorry,
+operative and period, okay?
+
+211
+00:35:23,119 --> 00:35:32,619
+Because both of them are not interfering to each other, and both of them, no one
+of them is responsible for the prognosis of the other.
+
+212
+00:35:33,389 --> 00:35:45,129
+Treatment of deep caries lesion, often requires caries control, foundation and
+temporization of root care or root canal therapy or both before periodontal
+therapy.
+
+213
+00:35:46,099 --> 00:35:48,559
+Even if it is temporization.
+
+214
+00:35:49,359 --> 00:36:02,959
+Also, correction of gross restorative defects and restoration contours is is
+considered as a part of initial periodontal therapy, as it enhances a favorable
+tissue response.
+
+215
+00:36:03,449 --> 00:36:17,899
+If the condition of peridium is getting worse because of improper contouring of
+a restoration, then restorative management should come first.
+
+216
+00:36:18,039 --> 00:36:24,079
+That's why the case should be evaluated, who is affecting whom.
+
+217
+00:36:24,589 --> 00:36:24,969
+Okay?
+
+218
+00:36:25,679 --> 00:36:32,589
+If the operative is interfering with the prognosis of periodontal therapy, then
+operative comes first.
+
+219
+00:36:32,909 --> 00:36:39,739
+Because the environment should be favorable for periodontal therapy prognosis.
+
+220
+00:36:40,259 --> 00:36:58,219
+And vice versa, if the periodontal treatment interferes with proper operative or
+restorative treatment prognosis, then it should come first to alter the
+environment favorable for successful restorative procedure.
+
+221
+00:36:58,989 --> 00:37:03,779
+In certain cases, if periodontal surgical procedure are required permanent
+
+222
+00:37:05,169 --> 00:37:15,549
+restoration, okay, are required permanent restoration such as inlays, onlays,
+crown and the grocess should be delayed until surgical phase is completed.
+
+223
+00:37:16,199 --> 00:37:17,279
+Okay?
+
+224
+00:37:17,959 --> 00:37:19,829
+But simple restoration could be finished.
+
+225
+00:37:20,529 --> 00:37:21,269
+Okay?
+
+226
+00:37:21,739 --> 00:37:30,389
+Teeth requiring restoration that may encroach on biological width as we
+discussed before of theum, should have appropriate crown lengthening.
+
+227
+00:37:30,859 --> 00:37:39,759
+Okay, surgical procedure performed before final restoration is placed just to
+clarify where is the level of your gingival margin.
+
+228
+00:37:40,309 --> 00:37:49,439
+Usually, a minimum of six weeks is required after surgery before final
+restorative procedure are undertaken for proper healing, okay?
+
+229
+00:37:50,399 --> 00:37:52,149
+Orthodontics.
+
+230
+00:37:53,489 --> 00:38:02,689
+It's clear that you shouldn't start orthodontic treatment unless the case are
+caries free.
+
+231
+00:38:03,839 --> 00:38:06,929
+It's a big rule, obvious big rule.
+
+232
+00:38:07,079 --> 00:38:10,399
+All teeth should be caries free before orthodontic banding.
+
+233
+00:38:10,999 --> 00:38:32,249
+Because already orthodontic banding adding more areas, more shelters to stagnate
+food, microorganism, okay, microorganismgenic micro organisms, plaque
+accumulation, all of that, especially if the patient didn't follow the
+instructions of the orthodontist to maintain his oral hygiene.
+
+234
+00:38:32,739 --> 00:38:54,809
+That's why when your orthodontic patient, patient with bands or braces is not
+following exactly and neatly the oral hygiene instructions, it will be a
+disaster when the orthodontist remove these braces or these bands, okay?
+
+235
+00:38:56,139 --> 00:39:09,449
+That's why treatment of caries which may include placement of amalgam or
+composite restoration, okay, and sometimes cast restorations should be finished
+before orthodontic treatment is completed.
+
+236
+00:39:10,339 --> 00:39:18,509
+And patient undergoing orthodontic treatment should receive more intense caries
+prevention measures and program.
+
+237
+00:39:19,999 --> 00:39:30,959
+When considering oral surgery, all impacted and erupted and hopeless teeth,
+okay, should be removed before operative or restorative treatment.
+
+238
+00:39:31,349 --> 00:39:42,389
+This recommendation especially applies when second molar that are to be restored
+might be damaged or dislodged during removal of third molar, okay?
+
+239
+00:39:42,999 --> 00:39:52,649
+Because the operator may rest his elevator and damage your restoration or
+destruct a cusp or another.
+
+240
+00:39:53,970 --> 00:39:59,040
+Okay, so the solutions should be eliminated or corrected before final
+restoration.
+
+241
+00:39:59,480 --> 00:40:09,440
+Okay, and at least also six weeks are required after surgery for proper healing
+of your wound.
+
+242
+00:40:10,190 --> 00:40:28,610
+In such a case, despite wing showing that your cusp your mesial cusps of lower
+third molar, okay, are impeded under the cervical line of second molar and
+causing distal caries.
+
+243
+00:40:29,090 --> 00:40:34,520
+In such a case, if you review the clinical condition, okay, which comes first?
+
+244
+00:40:34,970 --> 00:40:46,370
+Class two for proximal surface, distal surface of the second molar or surgical
+extraction of the partially impacted third molar comes first.
+
+245
+00:40:46,370 --> 00:40:54,680
+Surely the partially impacted molar should be extracted or removed surgically
+first. Why?
+
+246
+00:40:55,460 --> 00:41:01,820
+Number one, why you limit the access to area, why you decrease the visibility to
+your area?
+
+247
+00:41:01,820 --> 00:41:09,200
+How could you examine your gingival floor, how could you examine the proper
+removal of your your caries lesion?
+
+248
+00:41:09,410 --> 00:41:13,160
+How could you get access, easy access to this condition?
+
+249
+00:41:13,490 --> 00:41:14,660
+This is number one.
+
+250
+00:41:14,900 --> 00:41:17,030
+How could you apply matrix for restoration?
+
+251
+00:41:17,780 --> 00:41:25,370
+How could you apply perfectly and back your cavity with your material of choice
+to restore it, okay?
+
+252
+00:41:25,790 --> 00:41:39,260
+How could you ensure that you restore the proximal contours of your tooth, your
+cavity, wise, while your cusp is impeded inside this cavity?
+
+253
+00:41:40,040 --> 00:41:42,170
+All of these factors should be considered.
+
+254
+00:41:42,740 --> 00:41:49,310
+Even if it is easy for you by your experience or by your skill or by anyway,
+okay?
+
+255
+00:41:49,700 --> 00:42:09,440
+What about the surgeon when he is trying to decapitate this tooth and applying
+his elevator at this time, he may displace or dislodge your restoration and
+surely one of your cusps or one of your margins will be distracted.
+
+256
+00:42:10,190 --> 00:42:15,710
+And your patient may not notice this.
+
+257
+00:42:17,120 --> 00:42:18,860
+Okay, that's why.
+
+258
+00:42:19,040 --> 00:42:23,630
+Let the surgeon extract this tooth, okay?
+
+259
+00:42:24,140 --> 00:42:53,600
+And wait until your gingival tissues are healing well and the socket is healed
+well, okay, and you will clearly and accessibly could gain proper access and
+visibility to your region, lesion, you could properly apply your matrix, you
+could properly condense your material and can properly reproduce your anatomical
+features of this proximal surface.
+
+260
+00:42:53,960 --> 00:42:58,460
+Finally, what about fixed, removable or implant prosthodontics?
+
+261
+00:42:59,300 --> 00:43:04,520
+Operative direct restorations should be completed before placing indirect
+restorations.
+
+262
+00:43:04,520 --> 00:43:15,710
+In general, all dental treatments under any specialty should be completely
+finished before you are going for the prosthodontic phase.
+
+263
+00:43:15,710 --> 00:43:19,730
+Prosthodontic phase is always coming the last one.
+
+264
+00:43:20,480 --> 00:43:32,450
+Evidencing should be clear, all the treatments should be finished, all tissues
+should in a good condition, should be healed, okay, then comes your
+prosthodontic management.
+
+265
+00:43:32,450 --> 00:43:33,320
+Okay?
+
+266
+00:43:33,980 --> 00:43:50,870
+Restoration such as foundation, retention features must be placed well inside
+your cavity and inside your restoration in order to not to gain withdrawn during
+the preparation of the fixed prosthodontics or the fixed crown.
+
+267
+00:43:51,290 --> 00:44:01,580
+That's why you should clearly inspect your retentive features to ensure that
+your material will not be displaced during preparation of your crown.
+
+268
+00:44:02,600 --> 00:44:12,380
+Also, your tooth preparation should allow for the design of removable partial
+dentures, should be considered well, okay?
+
+269
+00:44:12,770 --> 00:44:20,210
+If the patient specially if you have a case with serious teeth and in between
+there is an edentulous span, you should firstly ask your patient.
+
+270
+00:44:20,720 --> 00:44:36,440
+How could are you intended to restore this edentulous span with a prosthodontics
+and which type of prosthodontics you are planning to get, okay?
+
+271
+00:44:36,440 --> 00:44:41,810
+Because this could already affect your decision, restorative decision.
+
+272
+00:44:42,020 --> 00:44:52,040
+Suppose you have just a simple bit and fisher caries, okay, and this tooth will
+be an abutment to retain a full coverage retainer for a bridge.
+
+273
+00:44:52,340 --> 00:45:02,590
+Sometimes your management will be nothing because as you detect it as E1, or
+even E2 in your radiographic notation.
+
+274
+00:45:02,800 --> 00:45:09,980
+But it will be absolutely removed, okay, while you are going for closer
+reduction of this abutment tooth.
+
+275
+00:45:10,300 --> 00:45:14,780
+That's why you are not need to prepare anything other than than this.
+
+276
+00:45:14,780 --> 00:45:21,360
+You are wasting your time, your material and patient time and also patient fees,
+okay?
+
+277
+00:45:21,600 --> 00:45:34,190
+At the same time, which is most important, you are sacrificing too much tooth
+structures in depth because you are will be in need to go forward after junction
+for at least 0.5 millimeter.
+
+278
+00:45:34,480 --> 00:45:41,350
+While this carious lesion may be completely eradicated with a closer reduction
+within enamel.
+
+279
+00:45:41,770 --> 00:45:47,410
+Okay, that's why when you have an dentulous space, you should ask the patient
+first.
+
+280
+00:45:47,730 --> 00:45:48,420
+Okay.
+
+281
+00:45:48,890 --> 00:45:51,740
+What's your plan for restoring this dentulous space?
+
+282
+00:45:52,230 --> 00:45:52,930
+Okay.
+
+283
+00:45:53,190 --> 00:46:06,300
+If it is a partial denture, okay, then you should refer the case for prodonstist
+for the design of partial denture, does he need to put an occlusal rest seat in
+this tooth?
+
+284
+00:46:06,760 --> 00:46:08,760
+that will affect your choice.
+
+285
+00:46:09,080 --> 00:46:15,730
+Okay, and what is the recommended material he should recommend to you a material
+for restoring this tooth at this time.
+
+286
+00:46:16,150 --> 00:46:21,190
+Okay, or the case is planned to be restored with implant.
+
+287
+00:46:21,500 --> 00:46:34,190
+Then when it is restored with implant, you just if it is an occlusal cavity,
+okay, just go straight forward for the selected restorative management, okay, or
+the selected restorative operative dentistry.
+
+288
+00:46:34,190 --> 00:46:58,450
+But but if it is a approximate lesion, you should consider and reformulate your
+contours and exactly and perfectly, okay, as the natural one, okay, and
+sometimes you should ask if the prostodontist or the implantologist requires
+some modification, okay, in the surface.
+
+289
+00:46:59,020 --> 00:46:59,920
+Okay.
+
+290
+00:47:01,010 --> 00:47:14,970
+That's why I reassure again that the design of operative restoration and
+selection of appropriate restorative material must be compatible with the design
+of your removable and fixed restorative management.
+
+291
+00:47:15,660 --> 00:47:35,640
+Finally, we finished our discussion about diagnosis and treatment planning I
+hope you could understand that I hope it will be beneficial for you by any mean
+and I pray to Allah I may add any any knowledge to you in those 12 episodes.
+
+292
+00:47:35,640 --> 00:47:56,500
+Finally, those are my textbooks I used, those are handouts for international
+care classification and management system that for ICDAS and that for Cambra,
+they are available for free online, you could download at okay and follow up if
+they have any update.
+
+293
+00:47:56,750 --> 00:48:03,130
+Finally, feel free to ask me at any time as your questions are welcomed 24/7.
+
+294
+00:48:03,130 --> 00:48:10,080
+You could ask by commenting to this video and I will reply to you as soon as
+possible.
+
+295
+00:48:10,300 --> 00:48:18,310
+Also, you could email me and I will by any inquiry and I will reply to you as
+soon as possible.
+
+296
+00:48:18,670 --> 00:48:36,340
+I would like to thank you to assign this time to listen to me and I would like
+to remind you by subscribing to my channel and activate the notification to get
+all the new updates.
+
+297
+00:48:36,340 --> 00:48:39,250
+And finally, don't forget to like this video.
+
+298
+00:48:39,250 --> 00:48:44,160
+Thank you again, until we meet in another topic.
