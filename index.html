@@ -8773,14 +8773,14 @@ function bkRenderShelf() {
     const title = document.getElementById('bookshelf-title'), cnt = document.getElementById('bookshelf-count');
     const back = document.getElementById('bk-shelf-back'), hint = document.getElementById('bookshelf-hint');
     if (bkBook) {
-        title.innerHTML = (bkBook.cover ? '<img src="' + bkEsc(bkBook.cover) + '" alt="" class="inline-block w-6 h-8 object-cover rounded shadow mr-2 align-middle" onerror="this.remove()">' : '📖 ') + bkEsc(bkBook.title);
+        title.innerHTML = (bkBook.cover ? '<img src="' + bkEsc(bkBook.cover) + '" alt="" class="inline-block w-6 h-8 object-cover rounded shadow mr-2 align-middle" onerror="this.remove()">' : '') + bkEsc(bkBook.title);
         back.classList.remove('hidden');
         hint.textContent = 'Bấm vào chương để đọc PDF';
         if (bkBook.err) { cnt.textContent = 0; list.innerHTML = '<div class="p-6 text-center text-sm text-red-600">' + bkEsc(bkBook.err) + '</div>'; return; }
         if (!bkBook.chapters) { cnt.textContent = '…'; list.innerHTML = '<div class="p-6 text-center text-sm text-gray-400 italic">⏳ Đang tải danh sách chương...</div>'; return; }
         const cs = bkBook.chapters;
         cnt.textContent = cs.length;
-        list.innerHTML = cs.length ? cs.map((c, i) => '<button type="button" onclick="bkOpenChapter(' + i + ')" class="w-full text-left bg-sky-50 hover:bg-sky-100 border border-sky-200 rounded-2xl p-3.5 flex items-center gap-3 active:scale-[0.99] transition-all"><span class="shrink-0 w-9 h-9 rounded-lg bg-gradient-to-b from-sky-500 to-sky-700 text-white flex items-center justify-center text-sm font-black shadow">' + i + '</span><span class="min-w-0 flex-1 font-bold text-sm sm:text-base text-gray-800 break-words">' + bkEsc(c.title) + '</span><span class="shrink-0 text-xs font-bold text-sky-700">📖 Đọc</span></button>').join('')
+        list.innerHTML = cs.length ? '<div class="flex flex-col sm:flex-row gap-5 items-start">' + (bkBook.cover ? '<div class="w-full sm:w-[32%] shrink-0"><img src="' + bkEsc(bkBook.cover) + '" alt="" class="w-full max-w-[300px] sm:max-w-none h-auto mx-auto sm:mx-0 rounded-2xl shadow-xl" onerror="this.remove()"></div>' : '') + '<div class="flex-1 min-w-0 w-full space-y-3">' + cs.map((c, i) => '<button type="button" onclick="bkOpenChapter(' + i + ')" class="w-full text-left bg-sky-50 hover:bg-sky-100 border border-sky-200 rounded-2xl p-3.5 flex items-center gap-3 active:scale-[0.99] transition-all"><span class="shrink-0 w-9 h-9 rounded-lg bg-gradient-to-b from-sky-500 to-sky-700 text-white flex items-center justify-center text-sm font-black shadow">' + i + '</span><span class="min-w-0 flex-1 font-bold text-sm sm:text-base text-gray-800 break-words">' + bkEsc(c.title.replace(/^\s*\d+\s*[.)]\s*/, '')) + '</span></button>').join('') + '</div></div>'
             : '<div class="p-6 text-center text-sm text-gray-400 italic">Thư mục này chưa có file PDF nào.</div>';
         return;
     }
@@ -10385,7 +10385,7 @@ bkCloseAll();
             openEditScreen(quiz.id);
         }
 
-        function toggleLessonVideo(playerId, videoId) {
+        function toggleLessonVideo(playerId, videoId) { setTimeout(function () { try { window.ytPaintClaims(); } catch (e) {} }, 0);
             const wrapper = document.getElementById(`video-wrapper-${playerId}`);
             const btnText = document.getElementById(`btn-text-${playerId}`);
             if (!wrapper) return;
@@ -12385,7 +12385,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     </style>
     <!-- TỦ SÁCH: danh sách sách → chương (thư mục GitHub) -->
     <div id="bookshelf-modal" class="fixed inset-0 bg-black bg-opacity-60 hidden flex items-center justify-center p-3 sm:p-5 z-50 select-none">
-        <div class="bg-white rounded-3xl max-w-3xl w-[96vw] p-5 sm:p-7 shadow-2xl flex flex-col max-h-[90vh]">
+        <div class="bg-white rounded-3xl max-w-5xl w-[96vw] p-5 sm:p-7 shadow-2xl flex flex-col max-h-[90vh]">
             <div class="flex justify-between items-start pb-3.5 border-b gap-2">
                 <div class="min-w-0 flex-1">
                     <button id="bk-shelf-back" type="button" onclick="bkShelfBack()" class="hidden mb-2 text-xs bg-amber-50 hover:bg-amber-100 text-amber-800 font-bold px-2.5 py-1 rounded-lg border border-amber-300">⬅ Các sách</button>
@@ -15337,7 +15337,7 @@ window.PGR = (function () {
                 b.setAttribute('data-st', st);
                 b.title = st === 'ready' ? 'Bấm để nhận 300 điểm và mở/ẩn video' : st === 'wait' ? 'Xem hết video lần đầu (không tua nhảy) để nhận 300 điểm' : '';
             }
-            if (st === 'done') { if (g.style.display !== 'none') g.style.display = 'none'; return; }
+            var wr = document.getElementById('video-wrapper-' + pid), op = !!wr && !wr.classList.contains('hidden'), bt = document.getElementById('btn-text-' + pid); if (bt) { var lb = st === 'ready' ? 'Nhận quà' : (op ? 'Ẩn<span class="cb-long"> video</span>' : (st !== 'done' && cv > 0.01 ? 'Xem tiếp' : 'Video<span class="cb-long"> bài giảng</span>')); if (bt.getAttribute('data-lb') !== lb) { bt.setAttribute('data-lb', lb); bt.innerHTML = lb; } } if (st === 'done') { if (g.style.display !== 'none') g.style.display = 'none'; return; }
             var txt = st === 'ready' ? '🎁 300' : (cv > 0.01 ? Math.min(99, Math.floor(cv / 0.9 * 100)) + '%' : '');   // %: đạt 90% yêu cầu = 100%
             if (g.textContent !== txt) g.textContent = txt;
             var want = txt ? '' : 'none'; if (g.style.display !== want) g.style.display = want;
@@ -15610,7 +15610,7 @@ window.PGR = (function () {
 (function () {
     var KEY = 'ytWatchState', RKEY = 'ytResumePos';
     var S = { filter: 'all', dismissed: false, skip: {}, sig: '' };
-    var last = {}, raf = 0;
+    var last = {}, raf = 0; function loadSkip() { try { return JSON.parse(localStorage.getItem('ytWatchSkip') || '{}') || {}; } catch (e) { return {}; } } function saveSkip() { try { localStorage.setItem('ytWatchSkip', JSON.stringify(S.skip)); } catch (e) {} }
 
     function load() { try { return JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { return {}; } }
     function save(m) {
@@ -15821,7 +15821,7 @@ window.PGR = (function () {
             if (chip) { S.filter = chip.getAttribute('data-f'); applyFilter(); return; }
             var btn = e.target.closest('[data-act]'); if (!btn) return;
             var act = btn.getAttribute('data-act');
-            if (act === 'skipone') { var r1 = btn.closest('.ws-row'); if (r1) { S.skip[r1.getAttribute('data-vid')] = 1; renderResume(true); } return; }
+            if (act === 'skipone') { var r1 = btn.closest('.ws-row'); if (r1) { S.skip[r1.getAttribute('data-vid')] = 1; saveSkip(); renderResume(true); } return; }
             if (act === 'quick') {
                 var items = partial(); if (!items.length) { showToast('Không còn video nào đang xem dở'); return; }
                 openCard(items[0].card, false); return;
@@ -15842,7 +15842,7 @@ window.PGR = (function () {
     function afterRender(lessons) {
         var b = box(); if (!b) return;
         var old = document.getElementById('watch-panel'); if (old) old.remove();
-        S.filter = 'all'; S.dismissed = false; S.skip = {}; S.sig = '\u0000';
+        S.filter = 'all'; S.dismissed = false; S.skip = loadSkip(); S.sig = '\u0000';
         var has = 0;
         Array.prototype.slice.call(b.children).forEach(function (card, i) {
             var L = lessons && lessons[i]; if (!L || !L.videoId) return;
