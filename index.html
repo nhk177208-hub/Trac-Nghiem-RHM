@@ -938,7 +938,7 @@
         .yt-chappanel .cp-sum { display: block; margin-top: 2px; font-size: 11.5px; font-weight: 500; color: #94a3b8; line-height: 1.35; }
         .yt-focusrow { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.4rem; }
         .yt-focus-btn, .yt-claim-btn { border-radius: 0.5rem; padding: 0.25rem 0.65rem; font-size: 12px; font-weight: 800; border: 1px solid #4b5563; background: #1f2937; color: #e5e7eb; white-space: nowrap; }
-        .yt-focus-btn.on { background: #16a34a; border-color: #4ade80; color: #fff; } button.yt-mm-trk { background: rgba(22, 163, 74, 0.35); border-radius: 0.5rem; } button.yt-mm-trk .yt-ic { color: #4ade80; text-shadow: 0 0 6px #22c55e, 0 0 2px #86efac; }
+        .yt-focus-btn.on { background: #16a34a; border-color: #4ade80; color: #fff; } .yt-chapnav.yt-mm-trk { background-color: #15803d !important; border-color: #4ade80 !important; box-shadow: 0 0 8px rgba(74, 222, 128, 0.7); } .yt-chapnav.yt-mm-trk .yt-ic { text-shadow: 0 0 6px #bbf7d0, 0 0 2px #86efac; }
         .yt-claim-btn { background: linear-gradient(90deg, #d97706, #f59e0b); border-color: #fcd34d; color: #111827; margin-left: auto; }
         .yt-claim-btn:disabled { opacity: 0.55; filter: grayscale(0.5); cursor: not-allowed; }
         .yt-focusinfo { font-size: 11px; font-weight: 700; color: #bfdbfe; }
@@ -13992,8 +13992,8 @@ function aiEnVoice(pref) {
 }
 /* Tạo phát âm cho một đoạn: tiếng Anh → giọng Anh cùng giới; còn lại → giọng đã chọn */
 function aiUttFor(text, v) {
-    const ut = new SpeechSynthesisUtterance(text);
-    if (aiIsEnglishText(text)) {
+    let enForce = false; if (typeof text === 'string' && text.charCodeAt(0) === 1) { enForce = true; text = text.slice(1); } const ut = new SpeechSynthesisUtterance(text);
+    if (enForce || aiIsEnglishText(text)) {
         const ev = aiEnVoice(aiVoicePrefKey());
         ut.lang = (ev && ev.lang) || 'en-US'; if (ev) ut.voice = ev;
     } else {
@@ -14001,7 +14001,7 @@ function aiUttFor(text, v) {
     }
     return ut;
 }
-function aiTtsStart(bubble, from, to, btn) {   // đọc cả bong bóng (from/to rỗng) hoặc chỉ đoạn [from, to)
+function aiIsEnWord(t) { var s = String(t || '').trim(); return s.length > 0 && /^[A-Za-z][A-Za-z\s'\-.,\/]*$/.test(s) && /[A-Za-z]{2,}/.test(s); } function aiLangPieces(arr) { var out = []; arr.forEach(function (p) { if (p.charCodeAt(0) === 1) { out.push(p); return; } var re = /\(([^()]*)\)/g, last = 0, m; while ((m = re.exec(p))) { var pre = p.slice(last, m.index); if (pre.trim()) out.push(pre); if (aiIsEnWord(m[1])) out.push('\u0001' + m[1].trim()); else out.push('(' + m[1] + ')'); last = m.index + m[0].length; } var rest = p.slice(last); if (rest.trim()) out.push(rest); }); return out; } function aiPlainSents(t) { var a = String(t || '').replace(/\[\[(EN|VI)\]\]/g, ' ').replace(/[*#_`>]/g, ' ').replace(/\s+/g, ' ').trim().match(/[^.!?…]+[.!?…]*/g) || []; return a.map(function (x) { return x.trim(); }).filter(function (x) { return /[\p{L}\p{N}]/u.test(x); }); } function aiTtsStartBi(bubble, btn) { if (!('speechSynthesis' in window)) { showToast('Trình duyệt không hỗ trợ đọc to'); return; } aiTtsStop(); var lt = bubble._lt || {}, en = aiPlainSents(lt.en), vi = aiPlainSents(lt.vi), seq = [], n = Math.max(en.length, vi.length); for (var i = 0; i < n; i++) { if (en[i]) seq.push('\u0001' + en[i]); if (vi[i]) seq.push(vi[i]); } var pieces = aiLangPieces(seq); if (!pieces.length) { showToast('Chưa có nội dung để đọc'); return; } var st = { bubble: bubble, btn: btn || null }; aiTts = st; aiTtsLabel(st.btn, true); aiTtsSync(); var v = aiVoicePick(), pi = 0; var speak = function () { if (aiTts !== st) return; if (pi >= pieces.length) { aiTtsStop(); return; } var ut = aiUttFor(pieces[pi++], v); ut.rate = aiRateGet(); ut.pitch = aiVoicePitch(); ut.onend = speak; ut.onerror = function (e) { if (aiTts === st && e.error !== 'canceled' && e.error !== 'interrupted') { aiTtsStop(); showToast('Không đọc được (thiết bị chưa có giọng đọc tiếng Việt?)'); } }; st.cur = ut; window.speechSynthesis.speak(ut); }; setTimeout(speak, 80); } function aiTtsStart(bubble, from, to, btn) {   // đọc cả bong bóng (from/to rỗng) hoặc chỉ đoạn [from, to)
         if (!('speechSynthesis' in window)) { showToast('Trình duyệt không hỗ trợ đọc to'); return; }
         aiTtsStop();
         const { flat } = aiTtsMap(bubble); if (from == null) from = 0; if (to == null) to = flat.length;
@@ -14014,7 +14014,7 @@ function aiTtsStart(bubble, from, to, btn) {   // đọc cả bong bóng (from/t
             if (pi >= pieces.length) {
                 if (ui >= units.length) { aiTtsStop(); return; }
                 const u = units[ui++]; aiTtsMark(bubble, u.s, u.e);
-                pieces = u.t.length > 220 ? (u.t.match(/.{1,200}(\s|$)/g) || [u.t]) : [u.t]; pi = 0;
+                pieces = aiLangPieces(u.t.length > 220 ? (u.t.match(/.{1,200}(\s|$)/g) || [u.t]) : [u.t]); pi = 0;
             }
             const ut = aiUttFor(pieces[pi++], v); ut.rate = aiRateGet(); ut.pitch = aiVoicePitch();
             ut.onend = speak;
@@ -14025,7 +14025,7 @@ function aiTtsStart(bubble, from, to, btn) {   // đọc cả bong bóng (from/t
     }
     function aiTtsToggle(bubble, btn) {
         const si = aiTtsSelInfo(bubble); if (si) { aiTtsStartSel(si); return; }
-        if (aiTts && aiTts.bubble === bubble) { aiTtsStop(); return; }
+        if (aiTts && aiTts.bubble === bubble) { aiTtsStop(); return; } if (bubble._lt && bubble._lt.en && bubble._lt.vi && bubble._cur === 'both') { aiTtsStartBi(bubble, btn); return; }
         aiTtsStart(bubble, null, null, btn);
     }
     function aiTtsBubbleBtn(b) { return b ? b.querySelector(':scope > .ai-ttsbar button') : null; }
@@ -14062,7 +14062,7 @@ function aiTtsStart(bubble, from, to, btn) {   // đọc cả bong bóng (from/t
         const bs = box.querySelectorAll(':scope > .ai-bub'); let b = null;
         for (let i = bs.length - 1; i >= 0; i--) { if (aiTtsMap(bs[i]).flat.replace(/[….\s]/g, '')) { b = bs[i]; break; } }
         if (!b) { showToast('Chưa có nội dung để đọc'); return; }
-        aiTtsStart(b, null, null, aiTtsBubbleBtn(b));
+        if (b._lt && b._lt.en && b._lt.vi && b._cur === 'both') aiTtsStartBi(b, aiTtsBubbleBtn(b)); else aiTtsStart(b, null, null, aiTtsBubbleBtn(b));
     }
     function aiEnsureQuickTts() {   // nút "Giảng bài" và "Đọc to" dính sát mép phải của khu nút nhanh
         const box = document.getElementById('ai-quickrow') || document.getElementById('ai-quick'); if (!box) return;
@@ -14640,7 +14640,7 @@ window.PGR = (function () {
         var d = activeYtPlayers[pid], b = $('chap-btn-' + pid); if (!d || !b) return;
         b.classList.toggle('animate-pulse', !!d.chapBusy && !d.chapters);
         b.innerHTML = (d.chapBusy && !d.chapters) ? '<span class="yt-ic">⏳</span>' : '<span class="yt-ic">🧠</span>';
-        b.title = (d.chapBusy && !d.chapters) ? 'AI đang vẽ sơ đồ...' : 'Sơ đồ tư duy (AI)'; b.classList.toggle('yt-mm-trk', lsFlag('ytjr_on') || lsFlag('ytjn_on'));
+        b.title = (d.chapBusy && !d.chapters) ? 'AI đang vẽ sơ đồ...' : 'Sơ đồ tư duy (AI)'; if (b.parentElement) b.parentElement.classList.toggle('yt-mm-trk', lsFlag('ytjr_on') || lsFlag('ytjn_on'));
         paintStat(pid);
     }
     function paintStat(pid) {
