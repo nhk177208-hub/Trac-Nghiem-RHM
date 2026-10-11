@@ -1,0 +1,1251 @@
+1
+00:00:39,117 --> 00:00:42,927
+Chào mừng các em quay trở lại, thầy là Yasser Wassef từ chuỗi bài giảng Learn Dental. 
+
+2
+00:00:43,257 --> 00:00:50,537
+Trong tập này, chúng ta sẽ tiếp tục thảo luận về sự dán và các vật liệu dán trong nha khoa, đặc biệt là dán vào ngà răng. 
+
+3
+00:00:51,277 --> 00:01:00,677
+Thầy xin nhắc lại về phần miễn trừ trách nhiệm, thầy không nhận thù lao, bồi thường hay tiền bản quyền từ việc bán bất kỳ sản phẩm nào được đề cập trong bài giảng này. 
+
+4
+00:01:00,677 --> 00:01:09,617
+Đồng thời, bài giảng không được tài trợ bởi bất kỳ công ty hay tổ chức nào và chỉ được biên soạn cho mục đích giáo dục. 
+
+5
+00:01:09,837 --> 00:01:23,237
+Bài giảng này được bảo vệ bản quyền và không được phép sao chép, phân phối hoặc truyền tải dưới bất kỳ hình thức nào mà không có sự cho phép trước của tác giả. 
+
+6
+00:01:23,717 --> 00:01:29,807
+Hôm nay, chúng ta sẽ tiếp tục làm rõ cơ sở và nguyên tắc của việc dán vào men răng và ngà răng. 
+
+7
+00:01:30,347 --> 00:01:45,547
+Chúng ta đã thảo luận trong các tập đầu về nha khoa dán nói chung, lịch sử ra đời, các thuật ngữ quan trọng, các phương thức dán và lợi ích của việc đưa kỹ thuật dán vào nha khoa. 
+
+8
+00:01:45,927 --> 00:01:54,017
+Sau đó, chúng ta đã tìm hiểu về các bề mặt dán, đó là các cấu trúc răng bao gồm men răng và ngà răng. 
+
+9
+00:01:54,197 --> 00:02:01,377
+Chúng ta đã bắt đầu với việc dán vào men răng, một quá trình đơn giản và dễ dàng hơn nhiều so với dán vào ngà răng. 
+
+10
+00:02:01,557 --> 00:02:06,837
+Khi chúng ta xem xét cấu trúc men răng bao gồm đặc điểm mô học và thành phần hóa học của nó. 
+
+11
+00:02:07,127 --> 00:02:29,987
+Nguyên lý dán vào men răng được thực hiện thông qua xoi mòn bằng a-xít, làm mất khoáng có chọn lọc các trụ men nhiều hơn chất gian trụ, từ đó tạo ra các vi lỗ xốp để nhựa có thể thâm nhập vào, hình thành nên các đuôi nhựa đông cứng và tạo khóa ngàm cơ học với men răng. 
+
+12
+00:02:30,507 --> 00:02:42,067
+Và chúng ta đã chuyển điều này thành các bước lâm sàng để dán men răng, thảo luận chi tiết về đặc tính của a-xít được sử dụng và thời gian áp dụng hợp lý. 
+
+13
+00:02:42,237 --> 00:02:54,497
+Các bước lâm sàng bao gồm rửa sạch, thổi khô và bôi chất dán cho đến khi chúng ta đạt được độ bền yêu cầu hay độ bền tối ưu khi dán vào men răng. 
+
+14
+00:02:54,727 --> 00:03:17,387
+Sau đó chúng ta chuyển sang ngà răng, xem xét cấu trúc mô học và hóa học của nó, làm rõ sự khác biệt so với men răng khi nó có nhiều thành phần hữu cơ và ít vô cơ hơn, đồng thời cấu trúc dường như không đồng nhất như men răng. 
+
+15
+00:03:18,067 --> 00:03:35,463
+Đồng thời, chúng ta cũng đã thảo luận về các vấn đề gặp phải khi dán ngà răng bao gồm cấu trúc không đồng nhất, cũng như sự khác biệt về mức độ khoáng hóa theo độ tuổi và theo từng vùng trên cùng một lớp ngà của một răng. 
+
+16
+00:03:35,463 --> 00:03:52,927
+Cùng với đó là năng lượng bề mặt bị giảm do hàm lượng hữu cơ cao, và chúng ta đã làm rõ rằng việc xoi mòn ngà răng sẽ làm giảm năng lượng bề mặt của nó vì thành phần hữu cơ đóng vai trò lớn hơn trong cấu trúc. 
+
+17
+00:03:53,307 --> 00:04:10,967
+Và lớp mùn ngà cùng với bản chất ướt nội tại của nó là những rào cản lớn ngăn cản việc đạt được sự kết dính tối ưu của composite hay các phục hồi dán vào ngà răng. 
+
+18
+00:04:11,417 --> 00:04:26,477
+Khi thảo luận về các nguyên lý và bước lâm sàng của dán ngà, chúng ta kết luận rằng lý thuyết lai hóa ngà răng là phù hợp nhất và chúng ta đã bắt đầu tìm hiểu về quá trình xoi mòn cũng như đánh mồi. 
+
+19
+00:04:26,857 --> 00:04:31,757
+Khi thảo luận về chất mồi, chúng ta gặp một vấn đề lớn. 
+
+20
+00:04:31,757 --> 00:04:41,877
+Đó là tùy thuộc vào dung môi của chất mồi, nó là gốc a-xê-tôn, gốc ê-ta-nol hay gốc nước? 
+
+21
+00:04:41,877 --> 00:04:55,337
+Sự khác biệt nằm ở tốc độ bay hơi, khi a-xê-tôn và ê-ta-nol bay hơi nhanh hơn rất nhiều so với nước. 
+
+22
+00:04:55,739 --> 00:05:00,789
+Khi dùng chất mồi gốc ê-ta-nol hoặc a-xê-tôn, chúng ta nên để ngà ướt. 
+
+23
+00:05:00,789 --> 00:05:03,399
+Hay chúng ta nên để nó khô? 
+
+24
+00:05:03,399 --> 00:05:06,249
+Chúng ta đang bối rối, rốt cuộc là ướt hay khô? 
+
+25
+00:05:06,849 --> 00:05:10,049
+Cụ thể thì các em cần đặc điểm gì từ ngà răng? 
+
+26
+00:05:10,579 --> 00:05:19,429
+Hãy bắt đầu thảo luận từ điểm chúng ta đã dừng lại ở tập trước về việc dán ngà ướt hay khô mà chúng ta đang bối rối. 
+
+27
+00:05:22,199 --> 00:05:23,679
+Chúng ta hãy cùng xem xét điều này. 
+
+28
+00:05:24,569 --> 00:05:32,219
+Năm một chín chín hai, Kanka và Van Meerbeek đã đề xuất một chiến lược gọi là dán ướt. 
+
+29
+00:05:32,219 --> 00:05:33,909
+Vậy dán ướt nghĩa là gì? 
+
+30
+00:05:33,909 --> 00:05:38,159
+Dán ướt có nghĩa là các em hãy giữ cho cấu trúc ngà răng ướt sau khi xoi mòn. 
+
+31
+00:05:38,579 --> 00:05:46,929
+Chỉ cần lấy bớt nước thừa bằng ống hút lực mạnh và thấm nhẹ bằng viên gòn. 
+
+32
+00:05:47,179 --> 00:05:53,149
+Ngay cả khi các em sẽ sử dụng chất mồi gốc a-xê-tôn hoặc ê-ta-nol. 
+
+33
+00:05:53,479 --> 00:06:02,289
+Tại sao ư? Bởi vì chúng vốn đã làm mất nước hóa học của collagen bằng cách thay thế nước. 
+
+34
+00:06:02,289 --> 00:06:12,059
+Sau đó a-xê-tôn sẽ tự bay hơi, để lại các vi khoảng trống collagen luôn mở và hoàn toàn không có nước. 
+
+35
+00:06:12,549 --> 00:06:15,119
+Vậy collagen có bị xẹp lại khi mất nước không? 
+
+36
+00:06:17,069 --> 00:06:18,779
+Nó sẽ không xẹp xuống. 
+
+37
+00:06:19,129 --> 00:06:19,739
+Không hề. 
+
+38
+00:06:20,029 --> 00:06:20,729
+Tại sao không? 
+
+39
+00:06:20,729 --> 00:06:21,199
+Các em có chắc không? 
+
+40
+00:06:21,449 --> 00:06:24,129
+Chúng ta chắc chắn nó sẽ không xẹp. 
+
+41
+00:06:24,129 --> 00:06:26,059
+Vì trong khi a-xê-tôn bay hơi, monomer của các em đã kết tủa dọc theo thành sợi collagen. 
+
+42
+00:06:26,059 --> 00:06:38,199
+Giữ ổn định nó ở trạng thái giãn nở hoàn toàn. 
+
+43
+00:06:38,199 --> 00:06:50,149
+Đó là lý do các vi lỗ xốp vẫn tiếp tục mở ra và sẵn sàng tiếp nhận nhựa thâm nhập vào, tạo thành bề mặt dán. 
+
+44
+00:06:50,569 --> 00:07:03,379
+Không chỉ vậy, monomer của các em sẽ tự sắp xếp để phản ứng với sợi collagen bằng phần ưa nước, trong khi phần kỵ nước hướng ra xa. 
+
+45
+00:07:03,769 --> 00:07:06,169
+Đó chính là khái niệm dán ướt. 
+
+46
+00:07:06,619 --> 00:07:11,929
+Và các em để ngà răng ẩm để tránh làm ngà răng bị mất nước quá mức. 
+
+47
+00:07:11,929 --> 00:07:23,429
+Nếu các em thổi khô ngà răng khi sử dụng chất mồi gốc a-xê-tôn hay ê-ta-nol, mạng lưới collagen sẽ bị xẹp. 
+
+48
+00:07:23,819 --> 00:07:33,039
+Sau đó hiện tượng mất nước lại tiếp tục xảy ra khi a-xê-tôn hoặc ê-ta-nol bay hơi. 
+
+49
+00:07:33,039 --> 00:07:46,929
+Đó là lý do Kanka và Van Meerbeek đề xuất dán ướt, chỉ để ngà răng ẩm ở mức độ tránh làm mất nước quá mức. 
+
+50
+00:07:47,299 --> 00:08:13,129
+Nhược điểm của dán ướt là do chất mồi gốc a-xê-tôn hoặc ê-ta-nol bay hơi rất nhanh, nghĩa là không có đủ thời gian cho chất mồi thấm xuống toàn bộ chiều sâu của lớp collagen bị lộ. 
+
+51
+00:08:13,309 --> 00:08:25,469
+Nó có thể bay hơi trước khi làm ướt hoàn toàn hoặc đánh mồi xong lớp collagen bộc lộ, không cho phép nó giãn nở. 
+
+52
+00:08:25,969 --> 00:08:38,999
+Đó là lý do tại sao các em phải bôi nhiều lớp, chứ không chỉ một hay hai lớp. 
+
+53
+00:08:38,999 --> 00:09:08,859
+Các em nên bôi ba hoặc bốn lớp và để thời gian cho từng lớp phát huy tác dụng mà không được thổi khô nó, vì nếu các em thổi khô bằng không khí, các em đang đẩy nhanh sự bay hơi của dung môi trước khi làm ướt hoàn toàn collagen lộ ra, nên lớp thứ hai sẽ cung cấp thêm lượng dung môi mới. 
+
+54
+00:09:09,089 --> 00:09:30,559
+A-xê-tôn hoặc ê-ta-nol sẽ hòa tan lớp thứ nhất, giúp lớp này chảy xuống mạng lưới collagen chưa được bao phủ và lớp thứ hai sẽ thay thế vị trí đó. 
+
+55
+00:09:30,909 --> 00:09:39,879
+Khi các em bôi lớp thứ ba, quá trình cũng diễn ra tương tự. 
+
+56
+00:09:40,129 --> 00:09:57,079
+Nó sẽ hòa tan lớp thứ hai và đẩy lớp thứ nhất xuống sâu hơn rất nhiều vì bản chất dễ bay hơi của dung môi. 
+
+57
+00:09:58,086 --> 00:10:21,756
+Chất mồi gốc ê-ta-nol hoặc a-xê-tôn không nên để sẵn ra khay trộn, vì nếu để ngoài không khí mở, dung môi sẽ bay hơi, làm chất mồi trở nên nhớt và không thể thấm sâu vào phần ngà đã xoi mòn. 
+
+58
+00:10:22,086 --> 00:10:36,256
+Đó là lý do vì sao các em phải hướng dẫn trợ lý chỉ nhỏ thuốc ra chổi quét vi điểm ngay lúc cần và tự các em phải bôi chà sát nhẹ ngay lập tức lên ngà răng. 
+
+59
+00:10:36,526 --> 00:10:48,816
+Sau đó để yên trong ít nhất ba mươi giây mà không được thổi khô, vì việc thổi khô bằng hơi sẽ làm tăng tốc độ bay hơi của nó. 
+
+60
+00:10:49,106 --> 00:11:05,036
+Hãy đợi ít nhất ba mươi giây trước khi bôi lớp thứ hai để lớp đầu tiên thấm sâu nhất có thể, bao phủ mạng lưới collagen bị lộ. 
+
+61
+00:11:05,776 --> 00:11:16,916
+Một lần nữa, hãy hướng dẫn trợ lý của em đậy nắp chai lại ngay lập tức. 
+
+62
+00:11:17,466 --> 00:11:36,486
+Để chai hở ra ngoài không khí quá lâu đồng nghĩa với việc các em đang rút ngắn thời hạn sử dụng của chai chất mồi do sự bay hơi của các dung môi. 
+
+63
+00:11:36,486 --> 00:11:48,916
+Vì vậy, nếu các em mở rồi đậy nắp quá nhiều lần cho một đến hai ca mỗi ngày. 
+
+64
+00:11:49,056 --> 00:12:13,196
+Hoặc nếu các em quên đậy nắp và để nó hở một lúc, thì ở lần bôi thứ hai, hãy bôi ít nhất bốn lớp, vì các lớp màng của các em đã không còn đủ dung môi do bốc hơi. 
+
+65
+00:12:13,196 --> 00:12:13,866
+Đó là góc độ thực hành lâm sàng. 
+
+66
+00:12:14,146 --> 00:12:31,406
+Ngoài ra, vấn đề thứ hai trong chiến lược dán ướt là do các em không thổi khô men và ngà răng, các em không thể kiểm tra bằng mắt xem việc xoi mòn đã đủ mức chưa. 
+
+67
+00:12:31,726 --> 00:12:51,306
+Việc thổi khô cho phép các em thấy men răng bằng mắt thường chuyển sang màu trắng đục mờ như phấn. 
+
+68
+00:12:51,306 --> 00:12:51,956
+Đồng thời ngà răng được xoi mòn đúng cách sẽ có vẻ mờ đục. 
+
+69
+00:12:51,956 --> 00:13:02,226
+Nhưng ở chiến lược này, thầy không có bất kỳ dấu hiệu nào để kiểm tra chứng minh quá trình xoi mòn đã đủ. 
+
+70
+00:13:02,226 --> 00:13:05,726
+Thầy chỉ có thể dựa vào độ chính xác của các thao tác thực hành. 
+
+71
+00:13:06,196 --> 00:13:12,656
+Và nó sẽ không thể hiện ra men răng màu trắng đục hay ngà răng mờ đục. 
+
+72
+00:13:13,356 --> 00:13:16,066
+Để chứng tỏ rằng việc xoi mòn đã chuẩn. 
+
+73
+00:13:16,666 --> 00:13:20,956
+Trái ngược với điều này là chiến lược dán khô. 
+
+74
+00:13:21,236 --> 00:13:24,546
+Trước tiên hãy tổng kết lại chiến lược dán ướt. 
+
+75
+00:13:25,276 --> 00:13:43,396
+Đừng thổi khô trước hay sau khi bôi chất mồi nếu chất mồi là gốc a-xê-tôn hoặc ê-ta-nol, và hãy bôi nhiều lớp. 
+
+76
+00:13:43,396 --> 00:13:43,626
+Tóm lại đây là những gì được gọi là dán ướt. 
+
+77
+00:13:45,316 --> 00:13:48,316
+Song song với nó là dán khô. 
+
+78
+00:13:48,316 --> 00:13:57,696
+Dán khô có nghĩa là, sau khi xoi mòn ngà răng, các em rửa sạch và thổi khô bằng hơi trong hai đến ba giây. 
+
+79
+00:13:57,986 --> 00:14:05,416
+Việc này sẽ lấy đi nước khỏi các vi khoảng trống, dẫn đến mạng lưới collagen bị xẹp. 
+
+80
+00:14:05,706 --> 00:14:18,306
+Trong trường hợp sử dụng chất mồi gốc nước, xin đừng thổi khô ngà răng, trừ khi dùng chất mồi gốc nước. 
+
+81
+00:14:18,666 --> 00:14:29,966
+Ở đây, các em đang phụ thuộc vào việc giãn nở và bù nước cho collagen, dựa vào hàm lượng nước của chất mồi. 
+
+82
+00:14:30,406 --> 00:14:38,916
+Và nước cũng không bay hơi nhanh như chất mồi gốc ê-ta-nol hoặc a-xê-tôn. 
+
+83
+00:14:39,346 --> 00:14:46,336
+Nên các em sẽ có đủ thời gian để bão hòa collagen bằng nước giúp nó nở ra lại. 
+
+84
+00:14:46,646 --> 00:14:55,656
+Vậy tại sao các em lại thổi khô trước khi bôi? Đó là để tránh hiện tượng quá ướt đã được thảo luận trong tập trước. 
+
+85
+00:14:56,266 --> 00:15:07,396
+Để tránh việc làm loãng quá mức monomer của chất mồi, khiến nó vón cục và tạo thành các bọng nước gây tắc nghẽn. 
+
+86
+00:15:08,039 --> 00:15:21,519
+Tắc nghẽn các vi lỗ xốp bộc lộ bởi quá trình xoi mòn, từ đó ngăn cản việc hình thành một lớp lai đồng đều. 
+
+87
+00:15:22,239 --> 00:15:26,209
+Đó là lý do các em phải thổi khô trước khi bôi. 
+
+88
+00:15:26,479 --> 00:15:30,459
+Thổi khô trước khi bôi chất mồi gốc nước. 
+
+89
+00:15:30,459 --> 00:15:34,639
+Và chỉ cần bôi một lớp hoặc tối đa là hai lớp. 
+
+90
+00:15:35,659 --> 00:15:38,359
+Không giống như a-xê-tôn và ê-ta-nol. 
+
+91
+00:15:38,359 --> 00:15:48,499
+Với chúng thì nên bôi ba hoặc bốn lớp, tùy thuộc vào việc chai chất mồi của các em đã cũ đến đâu. 
+
+92
+00:15:49,049 --> 00:15:51,719
+Còn ở đây chỉ cần bôi tối đa một hoặc hai lớp. 
+
+93
+00:15:52,979 --> 00:16:04,549
+Do nó chứa khoảng ba mươi lăm đến năm mươi phần trăm hema, giúp tối đa hóa khả năng giãn nở của các sợi collagen đã bị xẹp. 
+
+94
+00:16:04,549 --> 00:16:16,529
+Nhưng đồng thời, nó vẫn chứa thêm nước, và dung môi nước của loại chất mồi này không bay hơi nhanh như a-xê-tôn hay ê-ta-nol. 
+
+95
+00:16:17,079 --> 00:16:23,889
+Vì vậy, các em lại cần dùng hơi thổi khoảng hai đến ba giây để làm khô nó. 
+
+96
+00:16:24,849 --> 00:16:36,139
+Nhược điểm là các em không thể chắc chắn liệu toàn bộ các sợi collagen đã giãn nở hết hay chưa. 
+
+97
+00:16:37,309 --> 00:16:46,249
+Đó chính là nhược điểm của chúng ta trong trường hợp này, vì có thể vẫn còn những vùng collagen bị xẹp. 
+
+98
+00:16:46,599 --> 00:17:13,749
+Khu vực collagen bị xẹp này sẽ ngăn cản quá trình tạo ra lớp lai hiệu quả, có thể dẫn đến vùng thiếu chất mồi, thiếu chất dán và không có lớp lai do giãn nở không đúng cách, gọi là vùng giống lai. 
+
+99
+00:17:13,749 --> 00:17:14,829
+Khi đó lớp lai của các em sẽ không đồng nhất. 
+
+100
+00:17:15,679 --> 00:17:21,739
+Vậy để kết luận vấn đề này, nếu các em dùng chất mồi gốc ê-ta-nol hoặc a-xê-tôn. 
+
+101
+00:17:23,069 --> 00:17:35,089
+Số một, đừng lấy sẵn nó ra khay trộn, hãy bảo trợ lý nhỏ từng giọt lên chổi quét vi điểm ngay tại thời điểm thao tác. 
+
+102
+00:17:35,869 --> 00:17:50,019
+Bôi nó vào ngà răng và cũng dặn trợ lý đậy nắp lại ngay lập tức để không làm mất đi nhiều dung môi vốn bốc hơi rất nhanh ngoài không khí. 
+
+103
+00:17:50,779 --> 00:18:02,629
+Hãy để lớp màng của em có đủ thời gian thâm nhập vào ngà răng đã xoi mòn, ít nhất từ mười đến ba mươi giây. 
+
+104
+00:18:03,289 --> 00:18:10,089
+Đừng thổi khô ngà răng cả trước và sau khi bôi chất mồi. 
+
+105
+00:18:10,089 --> 00:18:34,499
+Trước khi bôi chất mồi nhằm tránh tình trạng mất nước quá mức, vì chất mồi gốc a-xê-tôn hoặc ê-ta-nol sẽ đóng vai trò như một chất đẩy nước hóa học xuất sắc, loại bỏ nước nếu các em thổi khô bằng hơi rồi làm khô thêm bằng hóa học, dẫn đến collagen tiếp tục bị xẹp thay vì giãn nở. 
+
+106
+00:18:34,499 --> 00:18:44,149
+Hãy bôi nhiều lớp, không thổi khô các lớp bằng hơi để không bao giờ đẩy nhanh sự bay hơi của nó, và để đủ thời gian cho việc bôi phủ. 
+
+107
+00:18:45,739 --> 00:18:49,299
+Đó là quy trình cho chiến lược dán ướt. 
+
+108
+00:18:49,299 --> 00:19:06,219
+Nếu các em sử dụng chất mồi gốc nước, hãy chuyển sang chiến lược dán khô, bao gồm việc thổi khô từ hai đến ba giây trước khi bôi chất mồi gốc nước. 
+
+109
+00:19:06,219 --> 00:19:17,259
+Hãy bôi chất mồi gốc nước bằng thao tác chà sát nhẹ, cho nó đủ thời gian để thấm vào, cũng ít nhất ba mươi giây hoặc hơn. 
+
+110
+00:19:18,469 --> 00:19:28,309
+Làm khô nó hoặc đẩy nhanh quá trình khô của nó vì tốc độ bay hơi của chất mồi gốc nước chậm hơn rất nhiều so với chất mồi gốc a-xê-tôn và ê-ta-nol. 
+
+111
+00:19:28,309 --> 00:19:35,309
+Hãy bôi lớp thứ hai để đảm bảo rằng các em đang làm ướt lại tất cả bề mặt ngà. 
+
+112
+00:19:35,309 --> 00:19:52,709
+Nếu không, sẽ có những vùng không được bôi phủ do mạng lưới collagen bị xẹp, tạo ra vùng giống lai, và đây là một vấn đề khi sử dụng chất mồi gốc nước. 
+
+113
+00:19:55,339 --> 00:19:59,299
+Một lần nữa, chúng ta chưa giải thích rõ, dán ướt hay dán khô? 
+
+114
+00:20:00,239 --> 00:20:05,649
+Thầy xin trả lời rằng đây là một câu hỏi chưa chính xác. 
+
+115
+00:20:06,500 --> 00:20:09,160
+Đó không phải là câu hỏi các em nên đặt ra. 
+
+116
+00:20:09,160 --> 00:20:17,240
+Các em nên hỏi dưới dạng "ướt tới mức nào" và "khô tới mức nào". 
+
+117
+00:20:17,630 --> 00:20:29,080
+Có những mức độ ướt khác nhau và những mức độ khô khác nhau, vì nếu các em để ngà răng quá ướt, ngay cả với chất mồi gốc a-xê-tôn hay ê-ta-nol. 
+
+118
+00:20:29,730 --> 00:20:36,300
+Các lớp bôi của các em không thể loại bỏ hay thay thế được hết lượng nước đó. 
+
+119
+00:20:36,800 --> 00:20:48,030
+Và nếu các em để ngà răng quá khô, khi sử dụng chất mồi gốc nước, các em sẽ tạo ra những vùng giống lai. 
+
+120
+00:20:48,770 --> 00:21:09,510
+Vì vậy, sẽ luôn có một mức độ ướt hay một mức độ khô, một sự thỏa hiệp nằm ở giữa, để có thể đạt được những lợi thế tối đa và lực dán tối đa vào ngà răng. 
+
+121
+00:21:09,510 --> 00:21:13,910
+Từ đó mang lại chất lượng cao nhất cho lớp lai được hình thành. 
+
+122
+00:21:14,700 --> 00:21:26,670
+Thầy sẽ thảo luận cùng các em qua một ví dụ phổ biến mà tất cả các giảng viên đều sử dụng khi nói về chủ đề dán ngà ướt hay khô. 
+
+123
+00:21:26,670 --> 00:21:29,850
+Như các em thấy trong bức ảnh này, đây là ảnh của một bãi biển. 
+
+124
+00:21:29,850 --> 00:21:38,940
+Nếu chúng ta phóng to một phần của bức ảnh, các em có thể chú ý thấy bốn vùng tính từ trái sang phải. 
+
+125
+00:21:39,770 --> 00:21:44,250
+Vùng ngoài cùng bên trái là biển, chính là vùng nước. 
+
+126
+00:21:44,750 --> 00:21:52,900
+Sau đó đến một lớp ngập đầy nước, được gọi là vùng ướt. 
+
+127
+00:21:53,880 --> 00:21:56,640
+Tiếp theo là một vùng ít ướt hơn gọi là vùng ẩm. 
+
+128
+00:21:57,090 --> 00:22:00,840
+Và cuối cùng là vùng hoàn toàn khô ráo. 
+
+129
+00:22:02,270 --> 00:22:17,090
+Thông thường, khu vực được mọi người vui chơi nhiều nhất ở bãi biển là vùng ở giữa, tức là vùng ẩm. Tại sao vậy? 
+
+130
+00:22:17,730 --> 00:22:27,550
+Bởi vì vùng ngoài cùng bên trái, là vùng ướt, mọi người không thể tận hưởng bãi biển vì nước quá nhiều. 
+
+131
+00:22:28,020 --> 00:22:42,300
+Nước quá nhiều có thể làm hỏng đồ đạc, mọi người có thể không tận hưởng được bãi biển vì nước liên tục tấn công theo những cơn sóng. 
+
+132
+00:22:42,690 --> 00:22:53,090
+Vùng khô ráo cũng là khu vực không phù hợp, tại sao ư? Vì nó sẽ quá nóng để tận hưởng bãi biển. 
+
+133
+00:22:53,950 --> 00:22:58,180
+Nhưng vùng ở giữa, vùng ẩm, là vùng lý tưởng nhất. 
+
+134
+00:22:58,180 --> 00:23:11,940
+Nó có một chút nước giúp cho cát được chắc chắn, và đồng thời có nhiệt độ thích hợp cho các hoạt động vui chơi. 
+
+135
+00:23:12,570 --> 00:23:20,780
+Điều này cũng giống như chúng ta, chúng ta cần ngà răng không quá ướt, không quá khô, chúng ta cần nó ẩm. 
+
+136
+00:23:21,850 --> 00:23:29,730
+Đó là một trạng thái thỏa hiệp, phù hợp cho cả dán khô và dán ướt. 
+
+137
+00:23:29,990 --> 00:23:53,350
+Nếu chúng ta để ngà răng hoàn toàn ướt như vùng bên trái, các em sẽ không có không gian để chất mồi thâm nhập, và lượng nước trong ngà răng sẽ cao hơn nhiều so với khả năng đẩy nước của dung môi a-xê-tôn hay ê-ta-nol. 
+
+138
+00:23:54,280 --> 00:24:17,730
+Và nếu các em để ngà răng quá khô, ngay cả khi dùng chiến lược dán khô, ngà răng sẽ hấp thụ hết nước đến mức không có tác dụng gì, ngay cả khi dùng chất mồi gốc nước cho ba, bốn hay năm lớp bôi. 
+
+139
+00:24:18,030 --> 00:24:26,810
+Nó sẽ không làm giãn nở lại collagen như các em mong đợi, làm ảnh hưởng đến chất lượng lớp lai. 
+
+140
+00:24:27,050 --> 00:24:45,640
+Vì vậy, để ngà răng ẩm ở khoảng giữa, bằng cách làm khô nhẹ bằng ống hút lực mạnh và viên gòn, là điều kiện phù hợp nhất cho chất mồi gốc ê-ta-nol và a-xê-tôn. 
+
+141
+00:24:46,040 --> 00:25:07,449
+Và nếu các em sử dụng chất mồi gốc nước, chỉ cần bắt đầu từ mức độ ẩm này, thổi khô từ hai đến ba giây là đủ phù hợp cho chiến lược dán khô. 
+
+142
+00:25:08,089 --> 00:25:22,449
+Vậy hãy để ngà răng ẩm ở khoảng giữa, rồi tùy thuộc vào chất mồi của các em, hoặc là cứ giữ nguyên như vậy, hoặc thổi khô nhẹ bằng hơi trong hai giây. 
+
+143
+00:25:24,129 --> 00:25:25,339
+Thầy hy vọng điều đó đã rõ ràng. 
+
+144
+00:25:26,209 --> 00:25:28,279
+Vẫn chưa rõ sao? 
+
+145
+00:25:28,809 --> 00:25:29,279
+Được rồi. 
+
+146
+00:25:30,099 --> 00:25:35,109
+Vậy thầy sẽ nói thêm, đó là hãy xác định rõ chất mồi của các em. 
+
+147
+00:25:35,259 --> 00:25:35,969
+Đó là bí quyết. 
+
+148
+00:25:36,589 --> 00:25:42,169
+Các em phải đọc chính xác hướng dẫn của nhà sản xuất về chất mồi của mình. 
+
+149
+00:25:42,569 --> 00:25:45,369
+Các em phải xác định được loại dung môi. 
+
+150
+00:25:46,259 --> 00:26:01,079
+Và dung môi của chất mồi sẽ giúp quyết định và xác định các bước lâm sàng các em nên thực hiện để có lớp lai chất lượng cao nhất cùng hiệu quả kết dính tối đa với ngà răng. 
+
+151
+00:26:01,349 --> 00:26:08,749
+Chai thuốc mà các em đang xem ở đây, nếu đọc dòng thứ hai, các em sẽ thấy nó chứa ê-tyl al-co-hol. 
+
+152
+00:26:09,679 --> 00:26:11,249
+Vậy thì đó là chất mồi gốc cồn. 
+
+153
+00:26:12,999 --> 00:26:14,299
+Nó là gốc cồn. 
+
+154
+00:26:14,699 --> 00:26:19,229
+Nó dễ bay hơi và phù hợp cho kỹ thuật dán ướt. 
+
+155
+00:26:19,679 --> 00:26:23,369
+Chúng ta hãy thảo luận lại điều này chi tiết hơn. 
+
+156
+00:26:23,549 --> 00:26:36,919
+Chất mồi gốc a-xê-tôn là một chất đẩy nước tuyệt vời, rất phù hợp cho dán ướt, nhưng nó bay hơi nhanh ngay sau khi được lấy ra. 
+
+157
+00:26:36,919 --> 00:26:41,459
+Đó là lý do các em phải nhỏ nó trực tiếp lên chổi quét vi điểm. 
+
+158
+00:26:41,609 --> 00:26:43,659
+Nó có thể bốc hơi ngay từ vật chứa. 
+
+159
+00:26:43,659 --> 00:26:46,809
+Làm thay đổi thành phần hóa học, vì vậy các em phải đậy nắp ngay lập tức. 
+
+160
+00:26:47,169 --> 00:26:56,359
+Hãy bôi nhiều lớp để mỗi lớp có thể hòa tan lớp trước đó, thấm sâu xuống và bao phủ toàn bộ mạng lưới collagen bị lộ. 
+
+161
+00:26:56,829 --> 00:26:58,259
+Đó là với gốc a-xê-tôn. 
+
+162
+00:26:58,899 --> 00:26:59,679
+Rõ chứ? 
+
+163
+00:27:00,179 --> 00:27:10,119
+Nếu trên nhãn ghi là gốc ê-ta-nol, thì nó bay hơi chậm hơn a-xê-tôn một chút, nhưng vẫn nhanh hơn rất nhiều so với nước. 
+
+164
+00:27:10,539 --> 00:27:15,279
+Nó cung cấp năng lượng bề mặt và độ thâm nhập tốt cùng với mùi ít gây khó chịu hơn. 
+
+165
+00:27:15,649 --> 00:27:16,349
+Được chứ? 
+
+166
+00:27:16,839 --> 00:27:31,059
+Nhược điểm của nó là dù vẫn phù hợp cho dán ướt, nhưng nó cần thêm thời gian để khô và có thể phải dùng hơi, mà khi cần hơi, chúng ta lại sợ làm xẹp collagen một lần nữa. 
+
+167
+00:27:31,249 --> 00:27:32,199
+Rõ chứ? 
+
+168
+00:27:32,489 --> 00:27:38,719
+Và mọi người luôn nhắc đến việc bôi nhiều lớp là một nhược điểm, vì các em đang làm tăng số lượng các bước thực hiện. 
+
+169
+00:27:39,079 --> 00:27:45,649
+Như thầy đã đề cập trước đó, việc gia tăng số lượng bước sẽ mở ra cơ hội cho những sai sót gia tăng. 
+
+170
+00:27:45,979 --> 00:27:55,599
+Đó là lý do chúng ta muốn giảm bớt các bước, nhất là khi chúng ta đang làm việc bên trong một xoang trám vô cùng nhỏ bé mà với bác sĩ nha khoa chúng ta thì kích thước đó đã là đủ lớn. 
+
+171
+00:27:55,599 --> 00:28:06,829
+Nhưng nếu các em mô tả kích thước đó cho một kỹ sư xây dựng, ông ấy sẽ cười vì ông ấy quen giải quyết bằng ki-lô-mét, trong khi chúng ta đang làm việc với vi-mét và na-nô-mét. 
+
+172
+00:28:07,369 --> 00:28:08,309
+Đúng chứ? 
+
+173
+00:28:18,949 --> 00:28:26,599
+Loại thứ ba là chất mồi gốc nước, nó cung cấp sự bay hơi chậm nhưng có khả năng làm giãn nở các sợi collagen đã xẹp. 
+
+174
+00:28:26,839 --> 00:28:35,969
+Nhờ vậy khả năng này cao hơn từ chín đến năm mươi phần trăm so với ê-ta-nol và a-xê-tôn, và nó phù hợp với kỹ thuật dán khô. 
+
+175
+00:28:36,289 --> 00:28:49,419
+Nhược điểm của nó là thời gian khô lâu có thể cần dùng hơi thổi, mà khi cần dùng hơi, chúng ta lại lo sợ làm xẹp mạng lưới collagen một lần nữa, gây cản trở cho quá trình kết dính. 
+
+176
+00:28:49,909 --> 00:28:58,159
+Nếu không được loại bỏ đúng cách, nó có thể dẫn đến sự hình thành bóng nước, hay còn gọi là hiện tượng quá ướt. 
+
+177
+00:28:58,899 --> 00:29:00,349
+Đó là về chất mồi của chúng ta. 
+
+178
+00:29:00,999 --> 00:29:08,819
+Các nhà nghiên cứu của chúng ta trong một nỗ lực nhằm giải quyết những vấn đề dán ướt hay dán khô này. 
+
+179
+00:29:09,209 --> 00:29:17,159
+Đồng thời nỗ lực giảm bớt số lượng bước, họ đã kết hợp hai bước thành một. 
+
+180
+00:29:17,449 --> 00:29:39,359
+Họ kết hợp bước xoi mòn và đánh mồi trong cùng một thời điểm, chiến lược này và loại keo dán này là một thế hệ hoàn toàn mới mà chúng ta sẽ thảo luận chi tiết trong tập riêng về keo dán, chúng được gọi là chất mồi tự xoi mòn. 
+
+181
+00:29:39,359 --> 00:29:51,889
+Đó là một nhóm các monomer có tính a-xít, cung cấp hai tác dụng trong một, nó vừa xoi mòn ngà răng vừa đánh mồi ngà răng cùng lúc. 
+
+182
+00:29:52,100 --> 00:30:12,450
+Tráng phủ bằng chất mồi ngay lập tức, ngay trong cùng một bước. Nếu các em hình dung, chất mồi tự xoi mòn là một nhóm các polymer mang tính a-xít, nó sẽ không cần phải rửa bằng nước và cũng sẽ không rửa trôi lớp mùn ngà của các em. 
+
+183
+00:30:12,450 --> 00:30:21,500
+Khi đó nó chỉ khử khoáng một phần lớp mùn ngà bằng cách thấm qua nó, nhưng không loại bỏ nó hoàn toàn. 
+
+184
+00:30:21,500 --> 00:30:28,660
+Nó sử dụng luôn lớp mùn ngà của các em làm thành phần chính của lớp lai. 
+
+185
+00:30:28,660 --> 00:30:35,180
+Vì vậy lớp lai của các em sẽ bao gồm một phần ngà răng chứa cả lớp mùn ngà trong đó. 
+
+186
+00:30:35,180 --> 00:30:48,650
+Và đó là lý do nó sẽ không làm mở ống ngà, nên cảm giác nhạy cảm sau điều trị sẽ ít xảy ra hơn so với kỹ thuật xoi mòn toàn bộ. 
+
+187
+00:30:48,650 --> 00:31:05,300
+Chúng ta đã thảo luận trong quy trình nhiều bước, khi xoi mòn là một bước riêng biệt, chúng ta có thể tạo ra nguy cơ lớn là để lại các ống ngà bị mở không được che phủ và collagen bị lộ cũng không được che phủ. 
+
+188
+00:31:05,300 --> 00:31:08,030
+Nhưng ở đây, không có cơ hội nào cho điều đó xảy ra. 
+
+189
+00:31:08,030 --> 00:31:21,010
+Đó là lý do các em sẽ giảm được số bước thao tác, giảm được các sai sót, và một khi các em mở ngà hoặc khử khoáng ngà, nó sẽ bị thâm nhập ngay bởi polymer của chất mồi. 
+
+190
+00:31:21,010 --> 00:31:27,900
+Các em đã bỏ qua được vấn đề ướt hay khô, cũng như ướt bao nhiêu và khô bao nhiêu là đủ. 
+
+191
+00:31:27,900 --> 00:31:39,480
+Đồng thời các em khắc phục hoặc giải quyết được vấn đề nhạy cảm sau điều trị do quy trình dán nhiều bước hoặc chiến lược xoi mòn và rửa. 
+
+192
+00:31:39,480 --> 00:31:48,810
+Vấn đề này sẽ được thảo luận rất chi tiết trong phần chất mồi tự xoi mòn dưới chủ đề dán trong tập tiếp theo. 
+
+193
+00:31:50,010 --> 00:31:55,550
+Đoạn phim này cho các em thấy sự khác biệt giữa các chiến lược dán khác nhau. 
+
+194
+00:31:55,550 --> 00:32:02,010
+Đây là hình ảnh collagen bị xẹp sau khi chúng ta xoi mòn ngà và thổi khô ngà. 
+
+195
+00:32:02,010 --> 00:32:29,990
+Khi chúng ta bôi chất mồi gốc nước, các em sẽ thấy sự giãn nở của collagen diễn ra, vì nó đã được làm ướt bởi nước, nhưng thực tế có thể để lại hiện tượng quá ướt, tạo thành bóng nước như các em thấy. 
+
+196
+00:32:29,990 --> 00:32:36,300
+Và nó sẽ dẫn đến sự thất bại của tính chất kết dính. 
+
+197
+00:32:36,300 --> 00:32:52,770
+Nhưng khi các em sử dụng chất mồi gốc a-xê-tôn hoặc ê-ta-nol, nó sẽ hoạt động như một chất đẩy nước tuyệt vời, nhưng các em có thể thấy nó không đủ khả năng đi sâu xuống vì nó bay hơi ngay lập tức. 
+
+198
+00:32:52,770 --> 00:32:56,320
+Vì vậy các em cần bôi thành nhiều lớp. 
+
+199
+00:32:56,320 --> 00:33:06,400
+Nhưng đối với chất mồi tự xoi mòn, nó sẽ phản ứng ngay với nước nội tại có sẵn bên trong ngà răng. 
+
+200
+00:33:06,400 --> 00:33:11,440
+Và ngay lập tức nó bộc lộ collagen rồi bao phủ lên đó. 
+
+201
+00:33:11,440 --> 00:33:20,100
+Nó không loại bỏ toàn bộ lớp mùn ngà, nhưng nó vẫn mang lại lực dán nằm trong phạm vi chấp nhận được. 
+
+202
+00:33:20,100 --> 00:33:30,350
+Lực dán của nó yếu hơn quy trình dán nhiều bước, vốn được coi là tiêu chuẩn vàng cho dán ngà răng. 
+
+203
+00:33:30,350 --> 00:33:40,550
+Nhưng nó vẫn nằm trong phạm vi có thể chấp nhận, mặc dù yếu hơn so với quy trình nhiều bước, nhưng vẫn đạt yêu cầu lâm sàng. 
+
+204
+00:33:41,600 --> 00:33:50,430
+Vui lòng ghi nhớ rằng chất mồi gốc a-xê-tôn và ê-ta-nol nên được bôi thành nhiều lớp và để tự khô mà không dùng thêm hơi. 
+
+205
+00:33:50,430 --> 00:33:54,930
+Đừng cố đẩy nhanh sự bay hơi của nó. 
+
+206
+00:33:54,930 --> 00:34:01,210
+Mỗi lớp bôi bổ sung sẽ hòa tan lớp trước đó, đẩy nó xuống để bao phủ phần collagen bộc lộ sâu hơn. 
+
+207
+00:34:01,210 --> 00:34:08,580
+Trong khi các chất mồi gốc nước lại cần dùng hơi thổi nhẹ trước và sau khi bôi để tránh hiện tượng quá ướt. 
+
+208
+00:34:08,580 --> 00:34:15,850
+Và bước cuối cùng để dán vào ngà là quá trình tẩm nhựa hoặc thâm nhập nhựa. 
+
+209
+00:34:15,850 --> 00:34:24,000
+Bước này nhằm đóng kín mọi vi lỗ xốp được tạo ra bởi việc xoi mòn. 
+
+210
+00:34:24,000 --> 00:34:35,250
+Và đạt được một cấu trúc mô học mới được hình thành từ cả nhựa, tinh thể hy-đrô-xy-a-pa-tit và collagen kết hợp lại. 
+
+211
+00:34:35,250 --> 00:34:38,500
+Cấu trúc này được gọi là lớp lai. 
+
+212
+00:34:38,500 --> 00:34:47,300
+Lớp lai này là lớp được hình thành do nhựa thâm nhập vào ngà răng sau khi xoi mòn bề mặt ngà. 
+
+213
+00:34:47,300 --> 00:34:57,439
+Ở đây, qua ảnh chụp hiển vi điện tử quét cho thấy composite với các hạt độn đặc trưng ở ngay phần trên cùng. 
+
+214
+00:34:57,769 --> 00:35:01,289
+Sau đó đến lớp keo dán và tiếp theo là lớp lai. 
+
+215
+00:35:01,289 --> 00:35:12,329
+Lớp lai này bao gồm nhựa đã thấm thấu vào ngà răng và bên trong mạng lưới collagen ở dạng ba chiều. 
+
+216
+00:35:12,329 --> 00:35:32,189
+Và độ dày ở khu vực này, bắt đầu từ chữ H kéo xuống cạnh dưới của bức ảnh hiển vi, độ dày này từ năm đến tám hoặc tối đa là mười vi-mét, thể hiện bề dày của lớp lai. 
+
+217
+00:35:32,609 --> 00:35:40,279
+Khi bôi nhựa hay chất dán của các em. 
+
+218
+00:35:40,659 --> 00:35:54,819
+Tương tự như chất mồi, hãy bôi một lớp đồng đều bằng động tác chà sát nhẹ để đẩy nó vào bên trong phần ngà răng đã được xoi mòn và đánh mồi. 
+
+219
+00:35:54,819 --> 00:35:55,679
+Đúng không nào. 
+
+220
+00:35:56,059 --> 00:36:05,559
+Và cung cấp cho nó đủ thời gian để thấm sâu và tẩm vào ngà răng. 
+
+221
+00:36:05,559 --> 00:36:06,379
+Các em rõ chứ? 
+
+222
+00:36:06,669 --> 00:36:10,229
+Nó phải đủ mỏng để có thể chảy đều. 
+
+223
+00:36:10,229 --> 00:36:20,339
+Nhưng đừng thổi mỏng lớp này bằng hơi, hãy dùng chổi quét vi điểm để làm mỏng nó, như vậy tốt hơn dùng hơi nhiều. 
+
+224
+00:36:20,339 --> 00:36:27,379
+Vì dùng hơi có thể làm bay hơi một số thành phần, và không chỉ có vậy. 
+
+225
+00:36:27,379 --> 00:36:35,739
+Hơi thổi có thể làm đọng keo dán của các em tại các góc của xoang trám. 
+
+226
+00:36:35,739 --> 00:36:39,209
+Khi các em dùng hơi đẩy nó. 
+
+227
+00:36:39,209 --> 00:36:55,579
+Nó có thể đọng lại ở góc, khi đọng lại ở góc, nó sẽ tạo thành điểm yếu hoạt động như vùng tập trung ứng suất chứa đầy nhựa, và điều đó sẽ ảnh hưởng xấu đến miếng trám của các em. 
+
+228
+00:36:55,579 --> 00:36:56,429
+Đúng vậy. 
+
+229
+00:36:56,689 --> 00:37:02,229
+Tại các góc của xoang trám. 
+
+230
+00:37:02,229 --> 00:37:08,889
+Nhưng điều quan trọng nhất là sự hình thành lớp ức chế ô-xy do tác động của luồng hơi. 
+
+231
+00:37:08,889 --> 00:37:16,019
+Như các em biết, các monomer mà các em sử dụng. 
+
+232
+00:37:16,019 --> 00:37:22,359
+Quá trình trùng hợp của nó bị ức chế bởi ô-xy, dẫn đến bề mặt lớp màng mỏng. 
+
+233
+00:37:22,359 --> 00:37:35,199
+Sẽ bị trùng hợp kém, đông cứng kém, và đồng thời không có đủ gốc tự do để tạo liên kết với lớp composite đầu tiên. 
+
+234
+00:37:35,199 --> 00:37:40,399
+Vì vậy, khi các em làm mỏng nó bằng hơi. 
+
+235
+00:37:40,399 --> 00:37:43,059
+Các em đang làm giảm lực dán. 
+
+236
+00:37:43,059 --> 00:37:51,129
+Giữa keo dán này với composite, thậm chí nhiều hơn sự suy giảm giữa keo dán này với cấu trúc ngà răng. 
+
+237
+00:37:51,129 --> 00:37:56,649
+Đó là lý do các em nên làm mỏng nó bằng chổi quét vi điểm thì tốt hơn. 
+
+238
+00:37:56,649 --> 00:38:03,679
+Hãy cho nó cơ hội ít nhất ba mươi đến bốn mươi giây để thẩm thấu vào bên trong ngà răng. 
+
+239
+00:38:03,679 --> 00:38:11,559
+Sau đó là chiếu đèn quang trùng hợp đủ thời gian từ mọi góc độ theo đúng hướng dẫn của nhà sản xuất, và thậm chí sẽ tốt hơn. 
+
+240
+00:38:11,559 --> 00:38:16,109
+Nếu chiếu lâu hơn mức được khuyến cáo, giả sử như. 
+
+241
+00:38:16,109 --> 00:38:19,609
+Nhà sản xuất hướng dẫn và đề xuất các em. 
+
+242
+00:38:19,609 --> 00:38:29,079
+Chiếu đèn nó trong mười giây, sẽ rất có hại nếu các em chiếu ít hơn mười giây, nhưng sẽ tốt hơn nhiều. 
+
+243
+00:38:29,079 --> 00:38:37,629
+Nếu các em chiếu nhiều hơn mười giây, đặc biệt là khi các em không biết chính xác. 
+
+244
+00:38:37,629 --> 00:38:41,549
+Công suất phát ra từ đèn quang trùng hợp của các em là bao nhiêu. 
+
+245
+00:38:41,549 --> 00:38:52,559
+Ngay cả khi chiếc đèn quang trùng hợp của các em là máy mới đi chăng nữa, thì công suất của nó vẫn suy giảm dần theo thời gian. 
+
+246
+00:38:52,559 --> 00:38:59,709
+Đó là lý do các em nên tăng thời gian chiếu đèn, đặc biệt nếu các em đang dùng một chiếc máy cũ. 
+
+247
+00:38:59,709 --> 00:39:00,639
+Được chứ? 
+
+248
+00:39:00,919 --> 00:39:10,419
+Bởi vì thực tế, tổng năng lượng mà thiết bị này tạo ra trong hai mươi giây chưa chắc đã đạt đúng chuẩn năng lượng như nhà sản xuất yêu cầu. 
+
+249
+00:39:10,419 --> 00:39:22,759
+Nó chắc chắn sẽ thấp hơn mức yêu cầu, đó là lý do tại sao việc chiếu đèn thêm thời gian sẽ mang lại lợi ích hơn là làm giảm lực dán. 
+
+250
+00:39:23,069 --> 00:39:30,359
+Các em hãy lưu ý rằng lực dán vào ngà răng sẽ phụ thuộc vào sự thâm nhập hoàn toàn của nhựa vào ngà răng bị khử khoáng. 
+
+251
+00:39:30,359 --> 00:39:35,309
+Bao gồm cả collagen bộc lộ, điều này cũng giống như việc dán vào men răng. 
+
+252
+00:39:35,309 --> 00:39:39,209
+Lực dán vào men răng bị ảnh hưởng. 
+
+253
+00:39:39,686 --> 00:39:45,296
+Vì áp suất có thể ngăn chặn sự thâm nhập hoàn toàn của nhựa vào các vi lỗ xốp của men răng. 
+
+254
+00:39:45,396 --> 00:40:03,356
+Điều này cũng tương tự, hãy cố gắng tạo cơ hội cho chất mồi thấm sâu bằng cách bôi nhiều lớp, và đồng thời cho nó đủ thời gian thâm nhập tẩm vào ngà, bao gồm cả ống ngà mở và màng lưới collagen bộc lộ đến độ sâu phù hợp. 
+
+255
+00:40:03,656 --> 00:40:26,986
+Vì nếu không thâm nhập hay bao phủ hoàn toàn collagen lộ ra, sẽ gây nên thảm họa dưới dạng thoái hóa collagen, vì bất kỳ sợi collagen nào bị lộ mà không được che phủ sẽ bị tấn công bởi enzym matrix metalloproteinase, làm phá hủy nó dẫn đến thất bại dán và nhạy cảm sau điều trị. 
+
+256
+00:40:27,936 --> 00:40:40,276
+Đó là lý do tại sao khi áp dụng quy trình dán nhiều bước hoặc xoi mòn toàn bộ hay xoi mòn và rửa với các bước riêng rẽ. 
+
+257
+00:40:40,926 --> 00:40:51,566
+Và chúng ta lại đi vào cuộc tranh luận về ướt hay khô, các em có thể dễ gặp phải vấn đề lâm sàng dưới dạng nhạy cảm sau điều trị. 
+
+258
+00:40:52,206 --> 00:41:00,656
+Điều này là do enzym matrix metalloproteinase gây thoái hóa lớp collagen bị lộ, đồng nghĩa với việc các em đang để lại mạng collagen không được che phủ. 
+
+259
+00:41:01,016 --> 00:41:05,356
+Và rủi ro này rất dễ xảy ra với chiến lược dán nhiều bước xoi mòn và rửa. 
+
+260
+00:41:05,896 --> 00:41:31,596
+Nhưng đối với chất mồi tự xoi mòn, các em vốn không làm mở ống ngà nên sẽ không lo việc nhạy cảm sau điều trị, nhưng vấn đề là liệu độ a-xít của chất mồi tự xoi mòn này có đủ để xoi mòn và kết dính hiệu quả với men răng hay không? 
+
+261
+00:41:31,936 --> 00:41:42,816
+Đó là điều chúng ta sẽ khám phá trong các tập tiếp theo khi thảo luận chi tiết, nhưng thầy sẽ tiết lộ trước một điều. 
+
+262
+00:41:43,106 --> 00:42:07,026
+Độ a-xít của chất mồi tự xoi mòn có đủ mạnh để tạo lực dán chất lượng cao với men răng hay không vẫn còn là một dấu chấm hỏi lớn. 
+
+263
+00:42:07,476 --> 00:42:20,366
+Và đôi khi các em cần phải xoi mòn men răng theo phương pháp xoi mòn chọn lọc, đây là một quy trình bổ sung trước khi bôi chất mồi tự xoi mòn. 
+
+264
+00:42:21,046 --> 00:42:35,846
+Đặc biệt là trong những trường hợp men răng dày hoặc men răng chưa được sửa soạn như khi đóng khe hở nhỏ kẽ răng. 
+
+265
+00:42:36,606 --> 00:42:52,906
+Nếu các em không xoi mòn men răng một cách chọn lọc thì lực dán ở bề mặt men răng sẽ yếu hơn, có thể dẫn đến hiện tượng hở bờ và đổi màu bờ viền phục hình. 
+
+266
+00:42:53,516 --> 00:43:01,646
+Đó là lý do tại sao không có vật liệu phục hồi lý tưởng hay kỹ thuật phục hồi hoàn toàn lý tưởng. 
+
+267
+00:43:01,646 --> 00:43:20,886
+Các em cần tìm ra một kỹ thuật phù hợp mà mình đã được huấn luyện thành thạo, kết hợp với tư duy phản biện trong lập kế hoạch điều trị, kỹ năng điều trị cũng như ứng dụng lâm sàng của các hệ thống keo dán này. 
+
+268
+00:43:21,576 --> 00:43:29,486
+Vậy thì những nguyên nhân nào dẫn đến việc nhựa thâm nhập không hoàn toàn vào ngà răng? 
+
+269
+00:43:29,486 --> 00:43:43,886
+Nhựa thâm nhập không hoàn toàn vào ngà răng như sơ đồ minh họa này, đây là nhựa, đây là collagen lộ ra, còn đây là toàn bộ lớp ngà răng đã được khử khoáng của các em. 
+
+270
+00:43:44,136 --> 00:43:50,626
+Nhưng nhựa dán của các em đã không thấm hết toàn bộ chiều sâu của vùng này. 
+
+271
+00:43:50,626 --> 00:43:57,776
+Có khu vực nền trắng ở đây là vùng collagen ngà răng đã khử khoáng bị lộ mà không được nhựa che phủ. 
+
+272
+00:43:58,126 --> 00:44:06,956
+Tại sao lại vậy? Tại sao chất dán của các em không thấm xuống hết chiều sâu khiến cho lớp lai chỉ được hình thành giới hạn ở nửa trên? 
+
+273
+00:44:07,196 --> 00:44:21,346
+Điều này có thể là do việc làm khô quá mức dẫn đến mạng lưới collagen bị xẹp nghiêm trọng, đó là lý do câu hỏi không phải là ướt hay khô, mà là ướt tới mức nào và khô tới mức nào. 
+
+274
+00:44:21,536 --> 00:44:43,096
+Hoặc cũng có thể do các em chỉ bôi một lớp duy nhất, đặc biệt với chất mồi gốc a-xê-tôn hoặc ê-ta-nol thì nó bay hơi ngay lập tức, không có cơ hội chảy xuống để làm ướt tất cả các phần collagen bị lộ. 
+
+275
+00:44:43,938 --> 00:44:51,268
+Chính vì vậy dung môi của nó bay hơi mà không có đủ thời gian để làm ướt tất cả. 
+
+276
+00:44:51,678 --> 00:44:54,368
+Tương tự như vậy đối với keo dán nhựa. 
+
+277
+00:44:54,598 --> 00:45:02,278
+Các em đã không bôi hoặc không để cho nó đủ thời gian thấm vào các sợi collagen đã bị khử khoáng. 
+
+278
+00:45:02,588 --> 00:45:09,398
+Tất cả những điều này đối với quy trình dán nhiều bước sẽ dẫn đến hệ quả là nhạy cảm sau điều trị. 
+
+279
+00:45:09,398 --> 00:45:30,218
+Và dưới tác động của enzym matrix metalloproteinase, lớp collagen lộ này sẽ bị thoái hóa và phá hủy, dẫn đến nhạy cảm sau điều trị cũng như thất bại phía dưới lớp lai, hiện tượng này được gọi là vi kẽ bờ viền na-nô, nó sẽ được bàn luận trong chủ đề sự khít sát sau này. 
+
+280
+00:45:30,868 --> 00:45:36,408
+Để kết luận, bề mặt ngà răng này được xử lý xoi mòn. 
+
+281
+00:45:36,408 --> 00:45:40,188
+Với a-xít xoi mòn. 
+
+282
+00:45:40,188 --> 00:45:45,178
+Tiếp theo là bôi chất mồi và cho nó đủ thời gian để thấm. 
+
+283
+00:45:45,178 --> 00:45:49,968
+Sau đó các em mới bôi keo dán. 
+
+284
+00:45:50,888 --> 00:45:52,968
+Và kết thúc bằng việc chiếu đèn. 
+
+285
+00:45:53,378 --> 00:45:59,718
+Đó là bốn bước để dán vào ngà răng. 
+
+286
+00:45:59,998 --> 00:46:05,228
+Hay nói cách khác là ba bước bôi hóa chất và bước thứ tư là chiếu đèn để đông cứng keo dán. 
+
+287
+00:46:05,698 --> 00:46:12,798
+Số một là xoi mòn bằng cách bôi a-xít xoi mòn trong mười lăm giây. 
+
+288
+00:46:12,798 --> 00:46:25,218
+Rửa sạch trong ít nhất mười lăm giây và làm khô nhẹ bằng ống hút lực mạnh và viên gòn để lấy đi phần nước lớn hoặc những giọt nước đọng lại. 
+
+289
+00:46:25,458 --> 00:46:28,058
+Như vậy là a-xít xoi mòn đã được rửa sạch. 
+
+290
+00:46:28,428 --> 00:46:40,428
+Sau đó bôi chất mồi thành nhiều lớp bằng động tác chà sát nhẹ, cho đủ thời gian, để nó tự khô nếu là chất mồi gốc a-xê-tôn hay ê-ta-nol. 
+
+291
+00:46:41,028 --> 00:46:51,918
+Hoặc giúp nó bay hơi nhanh chóng bằng một lần thổi hơi trong hai đến ba giây nếu nó là chất mồi gốc nước. 
+
+292
+00:46:51,918 --> 00:47:07,088
+Như vậy chất mồi được để cho khô, bằng cách tự khô đối với gốc a-xê-tôn và ê-ta-nol, hoặc dùng hơi thổi nhẹ đối với gốc nước. 
+
+293
+00:47:07,678 --> 00:47:19,738
+Tiếp đến là bôi chất dán, bôi một lớp đồng đều, dùng cọ làm mỏng đi, để yên ba mươi đến bốn mươi giây để nó thâm nhập mà không được dùng hơi thổi khô. 
+
+294
+00:47:20,048 --> 00:47:24,708
+Cuối cùng là quang trùng hợp bằng đèn đủ thời gian từ tất cả các góc độ. 
+
+295
+00:47:25,108 --> 00:47:37,648
+Nên nhớ chất xoi mòn phải được rửa sạch, chất mồi phải được làm khô dù là tự khô hay bằng hơi. 
+
+296
+00:47:38,278 --> 00:47:42,598
+Sau đó là keo dán phải được chiếu đèn quang trùng hợp. 
+
+297
+00:47:42,988 --> 00:47:51,268
+Riêng với chất mồi tự xoi mòn, các em không cần thực hiện bước đầu tiên là xoi mòn và rửa. 
+
+298
+00:47:51,268 --> 00:48:00,748
+Không cần rửa, không cần lau, chỉ cần bôi và để cho nó đủ thời gian tự khô theo hướng dẫn của nhà sản xuất. 
+
+299
+00:48:01,058 --> 00:48:03,318
+Kế tiếp là bôi keo dán và chiếu đèn. 
+
+300
+00:48:03,998 --> 00:48:04,898
+Nhớ nhé. 
+
+301
+00:48:05,288 --> 00:48:06,278
+Xin đừng quên điều này. 
+
+302
+00:48:06,808 --> 00:48:16,348
+Xoi mòn cần rửa, đánh mồi cần làm khô hoặc tự khô hoặc thổi hơi, dán cần chiếu đèn. 
+
+303
+00:48:16,858 --> 00:48:24,018
+Đối với chất mồi tự xoi mòn, các em không cần thực hiện bước đầu tiên. 
+
+304
+00:48:24,018 --> 00:48:28,108
+Nghĩa là không cần rửa và không cần dùng nước. 
+
+305
+00:48:28,108 --> 00:48:48,078
+Đây là hình ảnh kính hiển vi điện tử quét cho thấy phía bên trái là composite, sau đó đến chất dán và chất mồi, rồi đến lớp lai nằm ở phía trên, bao gồm nhựa thấm vào bề mặt ngà răng và mạng lưới collagen dưới dạng ba chiều. 
+
+306
+00:48:48,078 --> 00:48:49,008
+Và cấu trúc này được gọi là lớp lai. 
+
+307
+00:48:49,008 --> 00:48:55,608
+Các em cứ thoải mái đặt câu hỏi, đừng ngần ngại nhé, mọi thắc mắc của các em đều luôn được chào đón bất cứ lúc nào. 
+
+308
+00:48:55,828 --> 00:49:03,258
+Các em có thể hỏi hoặc gửi thắc mắc bằng cách bình luận vào video này và thầy sẽ trả lời sớm nhất có thể. 
+
+309
+00:49:03,528 --> 00:49:14,838
+Đồng thời, các em có thể liên hệ với thầy qua email hoặc bất kỳ mạng xã hội nào mà thầy thường dùng, chủ yếu là Twitter, và thầy sẽ phản hồi lại ngay. 
+
+310
+00:49:15,148 --> 00:49:19,248
+Cuối cùng, cảm ơn các em đã dành thời gian để lắng nghe bài giảng. 
+
+311
+00:49:19,388 --> 00:49:25,138
+Thầy hy vọng các em thích nó và chúng ta sẽ tiếp tục nội dung về vật liệu dán trong tập tiếp theo. 
+
+312
+00:49:25,138 --> 00:49:32,738
+Vui lòng đừng quên đăng ký kênh nhé, thầy rất vinh hạnh nếu các em trở thành người đăng ký kênh của mình. 
+
+313
+00:49:32,738 --> 00:49:44,868
+Và hãy bật thông báo để nhận mọi cập nhật mới nhất cho các tập bài giảng trong chuỗi Learn Dental của thầy nhé, cảm ơn các em, thầy là Yasser Alwasify. 

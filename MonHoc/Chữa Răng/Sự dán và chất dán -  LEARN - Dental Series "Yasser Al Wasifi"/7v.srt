@@ -1,0 +1,1751 @@
+﻿1
+00:00:37,750 --> 00:00:51,100
+Chào mừng các em trở lại với loạt bài giảng nha khoa, và trong tập này chúng ta sẽ kết thúc phần thảo luận về chủ đề dán và keo dán trong nha khoa phục hồi. 
+
+2
+00:00:51,100 --> 00:01:06,900
+Thầy xin đính chính rằng thầy không nhận thù lao hay tiền bản quyền từ việc bán bất kỳ sản phẩm nào được giới thiệu, đồng thời thầy cũng không có xung đột lợi ích với các vật liệu xuất hiện trong bài trình bày này. 
+
+3
+00:01:07,120 --> 00:01:16,890
+Bài giảng này không được tài trợ bởi bất kỳ công ty hay tổ chức nào và chỉ được chuẩn bị duy nhất cho mục đích giáo dục. 
+
+4
+00:01:16,890 --> 00:01:27,520
+Bài giảng này cũng được bảo vệ bản quyền và không được phép sao chép, phân phối dưới bất kỳ hình thức nào nếu chưa có sự cho phép bằng văn bản từ tác giả. 
+
+5
+00:01:28,420 --> 00:01:37,720
+Bây giờ chúng ta sẽ tiếp tục lựa chọn hệ thống dán và kỹ thuật phù hợp nhất cho các vật liệu phục hồi và các kiểu sửa soạn xoang trám khác nhau. 
+
+6
+00:01:37,890 --> 00:01:57,060
+Trong tập đầu tiên, chúng ta đã thảo luận tổng quan về nha khoa dán, sau đó thảo luận về bề mặt dán bao gồm cấu trúc răng như men răng và ngà răng, và cuối cùng phần ba nói về keo dán hay chất dán ngà. 
+
+7
+00:01:57,060 --> 00:02:07,630
+Bao gồm các yêu cầu lý tưởng, sự phát triển, phân loại, và bây giờ chúng ta sẽ thảo luận về thành phần của các chất dán ngà hiện đại. 
+
+8
+00:02:07,630 --> 00:02:14,390
+Tất cả các chất dán ngà hiện đại được giới thiệu đều có cấu tạo từ ba thành phần. 
+
+9
+00:02:14,390 --> 00:02:22,560
+Cơ bản là monomer và dung môi, và ở các dòng sản phẩm mới thì hạt độn được thêm vào để bổ sung một số chức năng nhất định. 
+
+10
+00:02:22,560 --> 00:02:31,950
+Monomer của chúng ta là thành phần quan trọng nhất và được xem là yếu tố cốt lõi của keo dán. 
+
+11
+00:02:31,950 --> 00:02:50,040
+Nó là thành phần mang lại lực dán tuyệt vời với monomer của composite, đồng thời lồng khớp cơ học với cấu trúc răng bao gồm các vi rỗ ở men răng, mạng lưới collagen bộc lộ và các ống ngà. 
+
+12
+00:02:50,040 --> 00:02:57,170
+Monomer của chúng ta chia làm hai nhóm, monomer liên kết chéo hoặc monomer chức năng. 
+
+13
+00:02:57,170 --> 00:03:02,500
+Đặc biệt, monomer chức năng là các monomer có mặt trong primer tự xoi mòn. 
+
+14
+00:03:02,500 --> 00:03:12,790
+Monomer liên kết chéo tạo độ cứng chắc cho lớp keo dán và có đặc tính kỵ nước, giúp ngăn chặn sự hấp thụ nước của keo dán sau khi quang trùng hợp. 
+
+15
+00:03:13,110 --> 00:03:27,700
+Trong khi đó, polymer chức năng là các phân tử ưa nước, có trọng lượng phân tử thấp, chịu trách nhiệm khử khoáng bề mặt răng và tạo liên kết hóa học với canxi và tinh thể hydroxyapatite. 
+
+16
+00:03:27,700 --> 00:03:40,400
+Khả năng khử khoáng và bám dính vào hydroxyapatite của chúng thay đổi tùy theo từng loại monomer chức năng, phụ thuộc vào loại primer tự xoi mòn mà các em đang sử dụng. 
+
+17
+00:03:40,400 --> 00:03:50,810
+Cho dù đó là loại có tính axit mạnh, trung bình, nhẹ hay siêu nhẹ, thì tiếp theo sẽ là vai trò của dung môi. 
+
+18
+00:03:51,680 --> 00:04:12,290
+Dung môi có tác dụng cải thiện độ thấm ướt của monomer ưa nước, và làm giảm độ nhớt của keo dán để tăng khả năng khuếch tán và xâm nhập của nó, đặc biệt là hỗn hợp primer và keo dán vào các vi rỗ đã được tạo ra. 
+
+19
+00:04:12,290 --> 00:04:16,890
+Như chúng ta đã thảo luận trước đây, chúng ta chỉ có ba loại dung môi. 
+
+20
+00:04:16,890 --> 00:04:19,450
+Đó là acetone, ethanol hoặc nước. 
+
+21
+00:04:19,450 --> 00:04:28,460
+Những gì chúng ta có thể bổ sung hiện nay là hỗn hợp giữa nước và ethanol, cùng với hỗn hợp giữa nước và acetone. 
+
+22
+00:04:28,460 --> 00:04:44,766
+Nhìn chung như đã nói, dung môi acetone hoặc ethanol trong primer hay keo dán đều được dùng cho kỹ thuật dán ướt, vì chúng rất dễ bay hơi và hoạt động như một chất... 
+
+23
+00:04:44,766 --> 00:05:01,350
+...chất đuổi nước tuyệt vời, nó phản ứng với nước và bay hơi cùng với nước, để lại monomer giúp ổn định màng collagen đã giãn nở và ngăn nó sụp đổ trở lại. 
+
+24
+00:05:03,138 --> 00:05:14,108
+Do đó, nó đảm bảo màng collagen được làm ướt đúng cách, hoặc monomer nhựa của các em thấm tốt vào trong mạng lưới collagen. 
+
+25
+00:05:14,448 --> 00:05:21,958
+Đó là lý do vì sao khi sử dụng acetone hoặc ethanol, các em phải bôi nhiều lớp như thầy đã giải thích trước đó. 
+
+26
+00:05:22,398 --> 00:05:37,078
+Mặt khác, nước là chất làm ướt lại cực kỳ tốt và làm tăng độ mở của các vi kẽ để monomer xâm nhập vào, nhưng vấn đề là nó rất khó bay hơi. 
+
+27
+00:05:37,078 --> 00:05:46,818
+Vì vậy, các em phải hỗ trợ nó bay hơi bằng cách thổi khô bằng hơi khoảng hai đến ba giây tối đa. 
+
+28
+00:05:47,258 --> 00:05:49,858
+Nên thổi khô trước và sau khi bôi keo. 
+
+29
+00:05:50,418 --> 00:05:59,938
+Ý tưởng pha trộn dung môi như hỗn hợp nước và ethanol đã có trong một số keo dán xoi mòn và rửa để tận dụng ưu điểm của cả hai. 
+
+30
+00:06:00,248 --> 00:06:13,798
+Ethanol có thể bay hơi kéo theo lượng nước thừa, và đồng thời nhờ có nước, các em có thể làm khô vật liệu của mình một cách an toàn. 
+
+31
+00:06:14,028 --> 00:06:20,568
+Đó là cách lấy được lợi ích của cả hai, ngoài ra còn có hỗn hợp của acetone với nước. 
+
+32
+00:06:20,838 --> 00:06:31,238
+Hỗn hợp này thường có trong keo dán tự xoi mòn, còn hỗn hợp nước và ethanol lại dùng cho keo dán xoi mòn và rửa. 
+
+33
+00:06:31,238 --> 00:06:37,248
+Hỗn hợp acetone và nước rất phổ biến trong các loại keo dán tự xoi mòn. 
+
+34
+00:06:37,678 --> 00:06:52,088
+Tại sao nó lại phổ biến trong keo tự xoi mòn hơn là xoi mòn và rửa, đó là vì bản chất bay hơi quá nhanh của acetone. 
+
+35
+00:06:52,548 --> 00:06:52,938
+Chính vì vậy... 
+
+36
+00:06:53,198 --> 00:07:06,548
+...trong trường hợp dùng primer tự xoi mòn, nếu các em trộn acetone với nước thì sẽ không nguy hiểm bằng khi dùng chiến lược xoi mòn và rửa. 
+
+37
+00:07:07,088 --> 00:07:25,148
+Bởi vì trong keo dán tự xoi mòn, nếu các em làm cho acetone bay hơi nhanh thì cũng không gây hại như keo dán xoi mòn và rửa vốn dĩ có một bước xoi mòn bằng axit riêng biệt. 
+
+38
+00:07:25,148 --> 00:07:34,598
+Trong keo dán tự xoi mòn, các em đang xử lý lớp mùn ngà, bộc lộ và khử khoáng một phần khung collagen. 
+
+39
+00:07:34,598 --> 00:07:42,168
+Nhưng đồng thời các em cũng đang che phủ nó, các em chỉ cần thêm nước để làm chậm quá trình bay hơi của acetone và giảm số lớp keo cần bôi. 
+
+40
+00:07:42,478 --> 00:07:55,038
+Cuối cùng, hạt độn được bổ sung, nhưng chúng chỉ thực sự phổ biến khi chúng ta có công nghệ nano để tạo ra các hạt độn kích thước nano. 
+
+41
+00:07:55,468 --> 00:08:14,038
+Vì vậy, keo dán có thể được phân loại thành keo dán có hạt độn, thường là các loại keo đa năng mới có chứa hạt độn nhờ ưu điểm của hạt kích thước nano, và keo không có hạt độn là các dòng sản phẩm cũ. 
+
+42
+00:08:14,038 --> 00:08:27,138
+Hàm lượng hạt độn trong chất dán ngà hoàn toàn khác biệt về kích thước và số lượng so với hạt độn trong composite. 
+
+43
+00:08:27,368 --> 00:08:38,538
+Trong composite, các em cần tăng lượng hạt độn để tăng độ cứng chắc và giảm thành phần nhựa vốn là nguyên nhân gây ra sự co ngót khi quang trùng hợp. 
+
+44
+00:08:38,938 --> 00:08:45,978
+Bởi vì khung nhựa trong composite là phần chịu trách nhiệm cho hiện tượng co ngót quang trùng hợp. 
+
+45
+00:08:46,258 --> 00:09:01,348
+Đồng thời, việc thêm nhiều hạt độn hơn giúp tăng tính thẩm mỹ cho kết quả phục hồi cuối cùng, và cũng làm giảm độ co ngót. 
+
+46
+00:09:01,348 --> 00:09:09,378
+Tuy nhiên nó lại làm giảm độ chảy lỏng của vật liệu, nhưng đối với composite thì độ lỏng không quá quan trọng. 
+
+47
+00:09:09,898 --> 00:09:29,848
+Nhưng với chất dán thì khác, nếu thêm quá nhiều hạt độn vào keo dán, nó sẽ trở nên quá nhớt, khiến nó không thể thâm nhập hay thấm ướt đầy đủ vào lớp ngà đã xoi mòn bằng primer tự xoi mòn hoặc axit. 
+
+48
+00:09:30,478 --> 00:09:46,048
+Đó là lý do tại sao hạt độn của chúng ta phải là dạng nano và số lượng phải giới hạn, để không ảnh hưởng đến độ chảy lỏng mà còn giúp keo chảy tốt vào giữa các sợi collagen và ống ngà. 
+
+49
+00:09:46,398 --> 00:10:14,479
+Vai trò của hạt độn không chỉ cải thiện sức mạnh của lớp keo dán và lực dán vào men, ngà răng, mà đôi khi nó làm tăng nhẹ độ nhớt của lớp keo, giúp đan xen tốt hơn vào các sợi collagen. 
+
+50
+00:10:14,479 --> 00:10:25,369
+Và đồng thời, nó cho phép các em dùng luồng hơi để đẩy mỏng keo dán thay vì chỉ dùng cọ quét. 
+
+51
+00:10:25,369 --> 00:10:40,839
+Chúng ta cũng không sợ bị ức chế bởi oxy vì các em đã thay thế một lượng nhựa bằng hạt độn, điều này sẽ tăng độ cứng để nén chặt lực dán vào cấu trúc răng. 
+
+52
+00:10:40,839 --> 00:11:04,169
+Một số hạt độn có mục đích điều trị, như hạt glass ionomer đã phản ứng dạng micro hoặc nano, mang lại ưu điểm phóng thích fluor, và một số hạt có tác dụng kháng khuẩn để tăng tính điều trị cho keo dán. 
+
+53
+00:11:04,169 --> 00:11:12,819
+Cuối cùng, sự hiện diện của hạt độn giúp làm tăng độ cản quang của chất dán. 
+
+54
+00:11:12,819 --> 00:11:29,179
+Điều này rất quan trọng vì bản chất keo dán không có hạt độn sẽ thấu quang, trên phim X-quang nó sẽ trông giống hệt như sâu răng hoặc bờ phục hồi bị hở. 
+
+55
+00:11:29,179 --> 00:11:43,819
+Nhưng khi thêm hạt độn, nó có xu hướng cản quang hơn và tạo sự tương phản rõ rệt với kẽ hở vi phẫu hoặc sâu răng, nhờ đó chúng ta có thể phân biệt được. 
+
+56
+00:11:43,819 --> 00:12:11,009
+Bảng này hay sơ đồ này tóm tắt thành phần của các vật liệu hiện có cho cả chiến lược xoi mòn và rửa hoặc tự xoi mòn, cho thấy dung môi là gì, monomer là gì, keo dán có hay không có hạt độn một cách rất chi tiết. 
+
+57
+00:12:11,009 --> 00:12:17,659
+Tiếp theo, chúng ta hãy chuyển sang một trong những vấn đề quan trọng nhất là tính tương thích sinh học của keo dán. 
+
+58
+00:12:17,659 --> 00:12:36,249
+Tất cả các vật liệu dùng trong quy trình phục hồi đều phải tương thích sinh học, đây là một đặc tính bắt buộc, vật liệu chúng ta dùng phải được mô dung nạp tốt. 
+
+59
+00:12:36,249 --> 00:12:53,689
+Chất dán ngà nên có chức năng kép, vừa bảo vệ vừa phòng ngừa, với tác dụng thúc đẩy sức khỏe cho nền răng bên dưới, tức là men và ngà răng. 
+
+60
+00:12:53,689 --> 00:13:02,309
+Điều này sẽ mang lại tiên lượng tốt hơn cho điều trị phục hồi và tính tương thích sinh học của nó. 
+
+61
+00:13:02,309 --> 00:13:13,039
+Các nghiên cứu trong phòng thí nghiệm khẳng định rằng tất cả các chất dán ngà đều tương thích sinh học, và không có khả năng gây độc gen. 
+
+62
+00:13:13,039 --> 00:13:40,409
+Nghiên cứu trong phòng thí nghiệm khác với điều kiện thực tế ở chỗ vật liệu được dùng ở nồng độ cao hơn, và vật liệu thử nghiệm không chịu tác động của môi trường miệng như nước bọt, chất nhầy, mức creatine, lưu lượng máu hay hệ vi khuẩn miệng, tất cả những yếu tố bảo vệ đó đều không có trong môi trường thí nghiệm. 
+
+63
+00:13:40,409 --> 00:14:03,550
+Chính vì vậy, khi vật liệu có vẻ được dung nạp tốt và không có độc tính gen trong phòng thí nghiệm, thì trong thực tế lâm sàng nó sẽ còn an toàn hơn nhờ vào nhiều yếu tố bảo vệ trong miệng như nước bọt. 
+
+64
+00:14:03,550 --> 00:14:19,139
+Bao gồm cả lớp dịch nhầy, mức creatine, lưu lượng máu, hệ vi khuẩn miệng và sự dao động nhiệt độ trong miệng, tất cả đều được xem là cơ chế bảo vệ. 
+
+65
+00:14:19,139 --> 00:14:38,942
+Hệ quả là, chúng ta có thể kết luận rằng mọi loại keo dán ngà thương mại hiện nay đều dung nạp mô tốt và tương thích sinh học cao. 
+
+66
+00:14:38,942 --> 00:14:50,109
+Ngoại trừ khả năng tạo lực dán và khả năng đóng kín các vi kẽ của chúng. 
+
+67
+00:14:50,109 --> 00:14:59,750
+Nếu chúng ta coi nó là vật liệu không dung nạp mô, thì nguyên nhân chính là rò rỉ vi thể hoặc rò rỉ nano dẫn đến ê buốt sau trám, đổi màu và sâu răng tái phát. 
+
+68
+00:14:59,750 --> 00:15:00,050
+Nhưng bản thân vật liệu thì không mang độc tính sinh học hay gây độc cho gen. 
+
+69
+00:15:00,050 --> 00:15:05,180
+Sự không tương thích sinh học thực chất chỉ đến từ sự rò rỉ. 
+
+70
+00:15:05,180 --> 00:15:15,730
+Sự rò rỉ này phá hoại tính tương thích sinh học của mối nối keo dán đàn hồi mà các em đang cố gắng tạo ra. 
+
+71
+00:15:16,870 --> 00:15:23,680
+Cuối cùng chúng ta hãy bàn về sự thất bại của lớp dán và độ bền của lực dán. 
+
+72
+00:15:23,680 --> 00:15:31,470
+Khi chúng ta muốn tạo ra một lớp nối đàn hồi để lấp đầy không gian. 
+
+73
+00:15:31,470 --> 00:15:52,460
+Vi kẽ hình thành giữa vật liệu phục hồi nhựa do sự co ngót quang trùng hợp, bất kể mức độ co ngót hay chênh lệch hệ số giãn nở nhiệt, kết quả cuối cùng là các em có một khe hở và các em muốn trám kín khe hở này. 
+
+74
+00:15:52,460 --> 00:16:10,200
+Và ý tưởng của chúng ta về việc dán vào cấu trúc răng như đã bàn trong tập đầu tiên, nhằm tạo ra một mối nối đàn hồi lấp đầy vĩnh viễn không gian này. 
+
+75
+00:16:10,200 --> 00:16:17,430
+Đó là lý do vì sao mọi thất bại của lớp dán đều dựa trên sự suy giảm độ bền của lực dán. 
+
+76
+00:16:17,750 --> 00:16:34,950
+Độ bền của lực dán liên quan trực tiếp đến độ bền và chất lượng của lớp lai, lớp này phải bền bỉ và có chất lượng tốt. 
+
+77
+00:16:34,950 --> 00:16:47,850
+Nếu không, nó sẽ hỏng theo thời gian, gây ra đổi màu đường hoàn tất, rò rỉ bờ khối trám, tiếp theo là mất lưu giữ và gây nhạy cảm ê buốt sau khi trám. 
+
+78
+00:16:48,380 --> 00:16:54,720
+Như một quy luật chung, sớm hay muộn. 
+
+79
+00:16:57,190 --> 00:17:01,860
+Miễn là nó không phải cấu trúc răng thật sự, thì nó sẽ thất bại theo thời gian. 
+
+80
+00:17:02,440 --> 00:17:16,530
+Nhưng mục tiêu của chúng ta là hiểu lý do tại sao nó bị thoái hóa và làm thế nào để làm chậm quá trình thoái hóa đó, nhằm cải thiện độ bền của mối dán. 
+
+81
+00:17:16,940 --> 00:17:25,800
+Đó là lý do chúng ta thảo luận chủ đề này dựa trên hai vấn đề chính. 
+
+82
+00:17:26,360 --> 00:17:35,390
+Số một, hãy xem những yếu tố nào ảnh hưởng đến tính toàn vẹn và sự thoái hóa của lớp lai này. 
+
+83
+00:17:35,840 --> 00:17:47,040
+Và số hai, các chiến lược nào để giảm thiểu sự thoái hóa này và kéo dài thời gian tồn tại của lớp lai. 
+
+84
+00:17:47,460 --> 00:17:53,350
+Đầu tiên, hãy bắt đầu với các yếu tố ảnh hưởng đến sự toàn vẹn và thoái hóa của lớp lai. 
+
+85
+00:17:53,350 --> 00:18:00,690
+Theo định nghĩa, lớp lai của chúng ta được cấu tạo một phần từ ngà răng và một phần từ nhựa composite. 
+
+86
+00:18:00,690 --> 00:18:08,010
+Nó là một lớp được hình thành do nhựa thẩm thấu vào bên trong ngà răng sau khi bề mặt ngà được xử lý. 
+
+87
+00:18:08,620 --> 00:18:18,540
+Nếu xem xét tính toàn vẹn của lớp lai này bị ảnh hưởng bởi sự thoái hóa, các em có hai thành phần chính có thể bị phân hủy. 
+
+88
+00:18:19,040 --> 00:18:26,350
+Hoặc là bản thân khung nhựa, hoặc là các sợi collagen, hoặc là cả hai. 
+
+89
+00:18:26,880 --> 00:18:41,300
+Sự thoái hóa nhựa có nghĩa là quá trình thủy phân và rửa trôi keo dán ra khỏi các khoảng không gian giữa các sợi collagen, hoặc bản thân sợi collagen bị thoái hóa do bị hòa tan và mất cấu trúc. 
+
+90
+00:18:41,300 --> 00:18:49,650
+Đó là nhóm đầu tiên, gồm những yếu tố ảnh hưởng đến tính toàn vẹn và sự thoái hóa của lớp lai. 
+
+91
+00:20:08,130 --> 00:20:27,189
+Sự phân hủy thủy phân xảy ra do phản ứng hóa học giữa nước và nhựa, làm phá vỡ các liên kết cộng hóa trị giữa các polymer của nhựa này, từ đó dẫn đến sự hao hụt khối lượng nhựa. 
+
+92
+00:20:29,169 --> 00:20:31,069
+Vậy thì nguồn nước đó từ đâu ra? 
+
+93
+00:20:32,269 --> 00:20:37,709
+Có thể là do các em dùng monomer nhựa ưa nước trong thành phần keo dán. 
+
+94
+00:20:39,319 --> 00:20:57,769
+Điều này khiến hệ thống nhựa hút nước mạnh và tạo ra một lớp lai hoạt động như màng bán thấm, liên tục hút thêm nước từ ngà răng lên và sau khi quang trùng hợp vẫn cho phép nước di chuyển qua giao diện dán. 
+
+95
+00:20:58,899 --> 00:21:22,959
+Hoặc sự chuyển động của nước bắt đầu như một cơ chế khuếch tán, tạo ra các kênh rãnh lớn chứa đầy nước nhanh chóng làm phân hủy pha ưa nước của keo dán, đây chính là hiện tượng cây nước do quá ẩm mà chúng ta đã nhắc đến. 
+
+96
+00:21:24,339 --> 00:21:33,789
+Ngoài ra, mạng lưới collagen trước đó đã thấm nhựa sẽ bị hòa tan và dần dần bị rửa trôi. 
+
+97
+00:21:34,459 --> 00:21:42,909
+Khi đó, mạng lưới collagen không hòa tan bên dưới sẽ bị bộc lộ và trở nên dễ bị tổn thương bởi các enzyme tiêu protein. 
+
+98
+00:21:42,909 --> 00:22:03,769
+Một khi nhựa bị tách ra khỏi collagen do thoái hóa, hoặc do quá nhiều thành phần ưa nước, hoặc do hiện tượng quá ướt làm nước phá vỡ liên kết hóa học, thì màng collagen sẽ không còn được nhựa bảo vệ. 
+
+99
+00:22:04,199 --> 00:22:16,739
+Lúc này, mạng lưới collagen lại bị phơi bày và dễ dàng bị tấn công bởi các enzyme tiêu protein. 
+
+100
+00:22:17,889 --> 00:22:29,829
+Các enzyme tiêu protein cơ chất và hydrolase cũng đưa nước vào qua các liên kết peptide để bẻ gãy chuỗi polymer collagen. 
+
+101
+00:22:31,279 --> 00:22:45,019
+Khi các em làm lộ collagen ra, các enzyme MMPs và hydrolase lại đưa nước vào cắt đứt các liên kết peptide đặc hiệu và điều này làm tình trạng tồi tệ hơn. 
+
+102
+00:22:46,309 --> 00:22:58,139
+Tất cả các hệ thống dán đều có những mức độ quang trùng hợp không hoàn toàn nhất định, và điều này tương quan với lượng dịch luân chuyển qua lớp keo dán. 
+
+103
+00:22:58,779 --> 00:23:22,489
+Đó là lý do thầy đã khuyên các em trong các tập trước, phải đảm bảo quá trình quang trùng hợp đạt mức tối đa và hoàn toàn bằng cách dùng cọ dàn mỏng đều thành nhiều lớp. 
+
+104
+00:23:22,489 --> 00:23:37,129
+Bất kể là xoi mòn và rửa hay primer tự xoi mòn, khi thực hiện quy trình dán, các em phải chiếu đèn đủ thời gian để đảm bảo nhựa được trùng hợp hoàn toàn, giúp giảm sự khuếch tán của nước và tăng độ bền lực dán. 
+
+105
+00:23:37,389 --> 00:23:43,619
+Đó là lý do thầy khuyên các em, nếu nhà sản xuất yêu cầu chiếu đèn mười giây. 
+
+106
+00:23:43,959 --> 00:24:08,749
+Sẽ không sao nếu các em chiếu hai mươi giây, nhất là khi các em không chắc công suất bằng Joule phát ra từ đèn trám của mình có đủ mức năng lượng yêu cầu trong mười giây hay không. 
+
+107
+00:24:08,749 --> 00:24:15,179
+Bởi vì tất cả các thiết bị hay đèn quang trùng hợp đều bị suy giảm công suất theo thời gian. 
+
+108
+00:24:15,179 --> 00:24:34,199
+Sau đó là đến bản thân sợi collagen, các sợi collagen này rất dễ bị thoái hóa và đã bắt đầu phơi nhiễm với... 
+
+109
+00:24:34,999 --> 00:24:55,769
+...hoạt tính phân giải gelatin và phân giải collagen nếu chúng ta để chúng trơ ra, đó chính là thao tác nguy hiểm hay tính nhạy cảm kỹ thuật của chiến lược xoi mòn và rửa. 
+
+110
+00:24:56,569 --> 00:25:09,649
+Bởi vì các enzyme tiêu protein có thể tấn công và phân hủy collagen bị bộc lộ của các em, trong đó có hai loại enzyme tiêu protein chính. 
+
+111
+00:25:10,150 --> 00:25:13,160
+Loại đầu tiên là matrix metalloproteinase. 
+
+112
+00:25:13,160 --> 00:25:16,050
+Loại thứ hai là cysteine cathepsin. 
+
+113
+00:25:16,460 --> 00:25:30,630
+Matrix metalloproteinase trong ngà răng, đặc biệt là típ hai và típ chín thuộc một họ enzyme lớn, đóng vai trò quan trọng trong quá trình trưởng thành của ngà răng. 
+
+114
+00:25:31,200 --> 00:25:33,660
+Nó giúp ngà răng trưởng thành. 
+
+115
+00:25:33,660 --> 00:25:41,080
+Nhưng chúng sẽ bị kẹt lại và bất hoạt sau khi mạng lưới collagen được khoáng hóa hoàn toàn. 
+
+116
+00:25:41,850 --> 00:25:45,540
+Nó chịu trách nhiệm cho sự đổi mới của collagen. 
+
+117
+00:25:46,340 --> 00:25:54,350
+Bởi vì nó tấn công các collagen yếu, khoáng hóa kém để thay thế bằng collagen mạnh hơn. 
+
+118
+00:25:55,180 --> 00:26:00,680
+Vậy thì tác dụng chính của nó là giúp ngà răng đạt đến độ trưởng thành. 
+
+119
+00:26:01,830 --> 00:26:12,970
+Nó loại bỏ collagen yếu để thay thế bằng một mạng lưới vững chắc hơn trong suốt quá trình trưởng thành và hình thành ngà răng. 
+
+120
+00:26:13,500 --> 00:26:14,100
+Đúng vậy. 
+
+121
+00:26:15,500 --> 00:26:25,690
+Sau đó trong quá trình dán, khi ngà răng đã đủ trưởng thành thì enzyme này sẽ trở nên bất hoạt. 
+
+122
+00:26:27,300 --> 00:26:36,940
+Cho đến khi quy trình dán của các em để lại một mạng lưới collagen bị bộc lộ không có gì che phủ. 
+
+123
+00:26:38,060 --> 00:26:50,140
+Điều này xảy ra nhiều nhất với kỹ thuật xoi mòn và rửa, hoặc do thao tác sai khi dùng primer tự xoi mòn. 
+
+124
+00:26:50,600 --> 00:27:00,300
+Lúc này, enzyme sẽ tấn công collagen bị hở vì nó cho rằng đây là một phần yếu cần được làm mới và nó sẽ làm biến tính collagen này. 
+
+125
+00:27:01,250 --> 00:27:04,950
+Dẫn đến tình trạng ê buốt răng sau khi phục hồi. 
+
+126
+00:27:05,600 --> 00:27:09,960
+Do sự thoái hóa của collagen, đây chính là hiện tượng được gọi là rò rỉ vi kẽ cấp độ nano. 
+
+127
+00:27:10,470 --> 00:27:16,810
+Và như đã đề cập, nó sẽ dẫn đến sự thất bại bên dưới lớp lai. 
+
+128
+00:27:17,620 --> 00:27:28,990
+Loại enzyme tiêu protein thứ hai là cysteine cathepsin, loại này được chứng minh là đóng vai trò lớn trong sự tiến triển của sâu ngà. 
+
+129
+00:27:29,610 --> 00:27:40,220
+Trong tổn thương sâu răng, nó chịu trách nhiệm khử khoáng, phá vỡ và làm biến tính mạng lưới collagen của ngà răng. 
+
+130
+00:27:41,080 --> 00:27:50,650
+Chúng có khả năng cắt đứt các chuỗi xoắn ốc collagen ở nhiều vị trí, và tạo ra nhiều mảnh vỡ collagen. 
+
+131
+00:27:52,020 --> 00:28:11,520
+Vì vậy, khi muốn bổ sung một cơ chế bảo vệ để làm chậm hoặc giảm thiểu sự thoái hóa của lớp lai, điều đầu tiên chúng ta phải tập trung là các enzyme tiêu protein này. 
+
+132
+00:28:12,810 --> 00:28:14,410
+Đó là lý do... 
+
+133
+00:28:18,300 --> 00:28:44,760
+...khi thảo luận các chiến lược giảm thoái hóa lớp lai, điều số một là ức chế hoạt động của enzyme bằng cách thêm các chất ức chế matrix metalloproteinase vào primer mới, như chlorhexidine, ethylenediaminetetraacetic acid (EDTA), hợp chất amoni bậc bốn hay bisphosphonate. 
+
+134
+00:28:45,180 --> 00:28:56,160
+Các chất này được thêm vào primer thế hệ mới để ức chế matrix metalloproteinase, và một hoặc sự kết hợp của những chất này đã có mặt trong keo dán thế hệ thứ tám. 
+
+135
+00:28:56,610 --> 00:29:17,180
+Sau đó, việc thêm vào các chất liên kết chéo sẽ giúp mạng lưới collagen liên kết chéo hóa học với nhau một cách tự nhiên và liên kết với nhựa. 
+
+136
+00:29:17,890 --> 00:29:32,710
+Các vật liệu này cho phép tạo ra sự biến đổi sinh học của khung collagen để tăng cường tính chất cơ sinh học của ngà răng, khiến nó ít bị tổn thương bởi các enzyme tiêu protein. 
+
+137
+00:29:33,260 --> 00:29:56,180
+Vì vậy, chúng ta có thể kết luận rằng thứ nhất, chúng ta đã thêm các chất kháng enzyme tiêu protein và kháng matrix metalloproteinase, thứ hai, chúng ta tăng cường khả năng chống lại sự tấn công của enzyme cho collagen bằng chất liên kết chéo. 
+
+138
+00:29:57,140 --> 00:29:58,480
+Các chất này bao gồm aldehyde... 
+
+139
+00:30:00,975 --> 00:30:04,545
+...carbohydrate và các chất liên kết chéo có nguồn gốc thực vật. 
+
+140
+00:30:05,455 --> 00:30:22,685
+Hiện nay chúng đã được thêm vào một số loại primer từ thế hệ thứ bảy, và chúng được coi như một trong những chất sát khuẩn hoặc chất chống ê buốt của keo thế hệ thứ bảy. 
+
+141
+00:30:23,315 --> 00:30:30,135
+Tiếp theo là việc loại bỏ lượng nước dư thừa không liên kết bên trong lớp lai. 
+
+142
+00:30:31,735 --> 00:30:37,795
+Đặc biệt là khi các em đang sử dụng dung môi ethanol hoặc nước. 
+
+143
+00:30:39,105 --> 00:30:45,055
+Ethanol không bay hơi nhanh bằng acetone. 
+
+144
+00:30:45,275 --> 00:30:49,505
+Nên nó có thể để lại một ít nước trên bề mặt. 
+
+145
+00:30:49,795 --> 00:31:02,465
+Như chúng ta đã thảo luận, nếu các em không kiểm soát tốt độ ẩm của ngà răng, lượng nước đọng lại có thể dẫn đến hiện tượng quá ướt. 
+
+146
+00:31:02,965 --> 00:31:14,955
+Vì thế nếu để dư nước, đặc biệt khi các em đang dùng kỹ thuật dán ướt với dung môi primer là ethanol... 
+
+147
+00:31:17,195 --> 00:31:34,325
+...thì các em phải đảm bảo ethanol đã đẩy được toàn bộ phần nước trong mô răng ra ngoài. 
+
+148
+00:31:34,825 --> 00:31:38,555
+Đó là lý do các em phải bôi thành nhiều lớp. 
+
+149
+00:31:39,845 --> 00:31:43,385
+Và cho nó đủ thời gian để tự khô. 
+
+150
+00:31:43,385 --> 00:31:53,605
+Nếu không, phần nhựa kỵ nước của các em sẽ hấp thụ thêm nước thông qua thành phần ưa nước. 
+
+151
+00:31:56,065 --> 00:32:13,085
+Đó là lý do chúng tôi luôn khuyên các bác sĩ lâm sàng có kinh nghiệm nên dùng primer tự xoi mòn thay vì dùng kỹ thuật xoi mòn và rửa. 
+
+152
+00:32:13,225 --> 00:32:26,575
+Mặc dù lực dán của hệ thống xoi mòn và rửa cao hơn, nhưng khả năng thoái hóa sinh học của nó cũng cao hơn rất nhiều nếu các em không kiểm soát hay nắm vững kỹ thuật. 
+
+153
+00:32:27,095 --> 00:32:33,705
+Bởi vì rất khó để xác định thế nào là đủ ẩm và thế nào là quá khô. 
+
+154
+00:32:34,215 --> 00:33:00,385
+Chính vì thế, cách tiếp cận tốt nhất trong trường hợp các em không chắc có loại bỏ hết nước hay không là dùng keo dán tự xoi mòn, nó sẽ phản ứng và lập tức đuổi nước ra khỏi lớp lai, như clip thầy đã cho xem ở tập ba. 
+
+155
+00:33:02,345 --> 00:33:07,245
+Tiếp theo, các em có thể tạo điều kiện tái khoáng hóa cho lớp lai. 
+
+156
+00:33:08,735 --> 00:33:23,255
+Đây là một kỹ thuật mới cho phép tái khoáng hóa phỏng sinh học lớp lai bằng các vật liệu phóng thích ion mô phỏng quá trình tái khoáng tự nhiên. 
+
+157
+00:33:23,255 --> 00:33:34,185
+Bởi vì các em không bao giờ chắc chắn rằng nhựa đã thẩm thấu hoàn toàn 100% vào mô ngà hay chưa. 
+
+158
+00:33:34,185 --> 00:33:55,355
+Điều này có nghĩa là sẽ luôn có các khoảng trống chứa nước bên trong lớp lai, rủi ro này ở hệ thống xoi mòn và rửa lớn hơn nhiều so với primer tự xoi mòn, và nước có thể dần hòa tan... 
+
+159
+00:33:56,705 --> 00:33:59,505
+...các sợi collagen vốn dĩ không hòa tan. 
+
+160
+00:34:00,425 --> 00:34:19,795
+Sau đó, các nhà nghiên cứu phát hiện ra rằng có thể đưa tinh thể hydroxyapatite vào những khoảng chứa nước đó, việc này vừa tái khoáng hóa collagen vừa vô hiệu hóa hoạt động của matrix metalloproteinase... 
+
+161
+00:34:20,165 --> 00:34:29,015
+...bởi vì enzyme này không thể tấn công mạng lưới collagen khi chúng đã được bao phủ và khoáng hóa hoàn toàn. 
+
+162
+00:34:29,925 --> 00:34:49,905
+Đây là ưu điểm của việc bổ sung một số hạt độn điều trị kích thước nano vào các chất dán ngà thế hệ thứ tám, nhằm tăng cường khả năng khoáng hóa cho lớp lai. 
+
+163
+00:34:51,145 --> 00:35:02,495
+Cuối cùng, các nhà nghiên cứu nhận ra rằng họ có thể dán dính vào collagen mà không cần phải loại bỏ hoàn toàn khoáng chất hay khử khoáng toàn bộ. 
+
+164
+00:35:03,305 --> 00:35:16,889
+Điều này diễn ra như thế nào, các em có thể tách canxi khỏi các sợi collagen mà không làm mất khoáng toàn bộ sợi. 
+
+165
+00:35:18,009 --> 00:35:25,249
+Nghĩa là, các em khử khoáng các cấu trúc nằm giữa các sợi collagen với nhau. 
+
+166
+00:35:26,509 --> 00:35:30,719
+Nhưng vẫn giữ nguyên khoáng chất bên trong bản thân từng sợi collagen. 
+
+167
+00:35:32,669 --> 00:35:37,149
+Nhờ vậy nó được ổn định giữ nguyên hình dạng mà không bị sụp đổ. 
+
+168
+00:35:37,709 --> 00:35:41,629
+Đây chính là kỹ thuật dán khô bằng cách chelation canxi. 
+
+169
+00:35:42,079 --> 00:35:49,409
+Đó là một kỹ thuật mới được ứng dụng trong các loại primer tự xoi mòn vừa được phát triển. 
+
+170
+00:35:49,609 --> 00:35:52,119
+Vậy kỹ thuật dán khô chelation canxi là gì? 
+
+171
+00:35:52,649 --> 00:36:11,169
+Thay vì xoi mòn ngà răng bằng axit phosphoric, người ta dùng mười lăm phần trăm theo trọng lượng chất chelate canxi có phân tử lượng lớn, như natri polyacrylate, để làm chất xoi mòn mới. 
+
+172
+00:36:12,309 --> 00:36:16,069
+Nó được dùng trong một số nhãn hiệu primer tự xoi mòn. 
+
+173
+00:36:16,069 --> 00:36:19,809
+Tác dụng của phân tử này là gì? 
+
+174
+00:36:20,129 --> 00:36:32,759
+Phân tử này sẽ tạo phức chelate với canxi, nhưng kích thước nó đủ lớn để chỉ hoạt động ở khoảng không gian giữa các sợi collagen, chứ không chui vào trong sợi được. 
+
+175
+00:36:33,789 --> 00:36:38,339
+Nó chỉ hoạt động như những phân tử lớn ở không gian gian sợi. 
+
+176
+00:36:39,429 --> 00:36:48,809
+Nên nó chỉ lấy đi tinh thể apatite ở không gian bên ngoài sợi, mà không lấy đi khoáng chất bên trong sợi collagen. 
+
+177
+00:36:49,159 --> 00:36:56,419
+Nhờ đó mà mạng lưới collagen của các em vẫn sẽ đứng thẳng vững chắc mà không bị xẹp xuống. 
+
+178
+00:36:58,129 --> 00:37:03,029
+Bởi vì nó vẫn còn cứng nhờ vào lượng khoáng chất giữ lại bên trong. 
+
+179
+00:37:03,579 --> 00:37:09,189
+Như vậy, chúng ta đã chuyển từ axit phosphoric sang natri polyacrylate. 
+
+180
+00:37:10,459 --> 00:37:19,099
+Sau ba mươi giây tạo phức chelate, phản ứng sẽ bị dừng lại bằng cách xịt nước và thổi khô. 
+
+181
+00:37:19,999 --> 00:37:23,899
+Các em hoàn toàn có thể xịt hơi thổi khô nếu muốn. 
+
+182
+00:37:24,249 --> 00:37:29,409
+Tại sao thầy lại thổi khô được, vì collagen của thầy sẽ không bị xẹp xuống. 
+
+183
+00:37:29,929 --> 00:37:40,499
+Do thầy chỉ rút canxi từ các khoảng không gian giữa các sợi, chứ không phải rút từ bên trong bản thân các sợi collagen. 
+
+184
+00:37:41,169 --> 00:37:43,689
+Nên collagen vẫn sẽ giữ nguyên cấu trúc không gian của nó. 
+
+185
+00:37:44,819 --> 00:38:03,869
+Và vì các sợi collagen vẫn được khoáng hóa hoàn toàn, không bị co rút hay sụp đổ khi lượng nước còn sót lại bị bay hơi dưới tác động của luồng hơi thổi mạnh hay lực hút chân không... 
+
+186
+00:38:03,869 --> 00:38:15,489
+...nên nó cho phép các em thực hiện chiến lược dán khô với độ tin cậy tuyệt đối rằng mình sẽ bao phủ được toàn bộ collagen. 
+
+187
+00:38:16,179 --> 00:38:38,339
+Mạng lưới collagen lúc này rất an toàn để nhựa kỵ nước len lỏi và khuếch tán vào bên trong một cách dễ dàng và hiệu quả, giảm rủi ro để hở collagen. 
+
+188
+00:38:38,699 --> 00:38:45,719
+Vì vậy ở giai đoạn này, nó sẽ không thể bị tấn công bởi các enzyme tiêu protein nữa. 
+
+189
+00:38:46,609 --> 00:39:05,419
+Cuối cùng chúng ta chuyển sang phần lưu ý lâm sàng, để hệ thống hóa lại nội dung của cả sáu tập thành các bước ứng dụng lâm sàng, hoặc có thể coi đây là mười ba nguyên tắc vàng. 
+
+190
+00:39:06,299 --> 00:39:12,889
+Những nguyên tắc này phải được xem xét kỹ lưỡng khi áp dụng các khái niệm về keo dán trong nha khoa phục hồi. 
+
+191
+00:39:13,259 --> 00:39:15,959
+Nguyên tắc số một, chỉ định ca bệnh. 
+
+192
+00:39:17,789 --> 00:39:26,779
+Không phải trường hợp nào cũng phù hợp với phục hồi dán và quy trình dán. 
+
+193
+00:39:26,779 --> 00:39:28,659
+Thực ra không có chống chỉ định tuyệt đối. 
+
+194
+00:39:30,199 --> 00:39:39,089
+Nhưng ở một số trường hợp, bệnh nhân bị chống chỉ định tạm thời cho đến khi tình trạng được điều chỉnh hoặc trở nên thuận lợi hơn. 
+
+195
+00:39:39,609 --> 00:40:00,829
+Thứ nhất, bệnh nhân có lực cắn mạnh hoặc có thói quen cận chức năng, vì độ kháng mòn của composite thấp hơn nhiều so với vàng và do cấu trúc không đồng nhất nên tất cả các loại composite đều bị mài mòn ở các mức độ khác nhau. 
+
+196
+00:40:01,149 --> 00:40:09,219
+Ở một bệnh nhân như thế này, các em có thể nhận thấy kiểu mài mòn răng, đặc biệt là ở vị trí này. 
+
+197
+00:40:09,549 --> 00:40:23,380
+Răng cối nhỏ thứ hai hàm dưới bên phải này bị chống chỉ định tạm thời với phục hồi composite, và đương nhiên là chống chỉ định với các loại phục hồi dán. 
+
+198
+00:40:23,680 --> 00:40:33,560
+Lực cắn lớn sẽ tạo thêm lực xé lên mối nối dán của chúng ta, dẫn đến tổn thương và thất bại của lớp keo dán này. 
+
+199
+00:40:33,920 --> 00:40:45,080
+Ca bệnh có thể được chỉ định nếu chúng ta thực hiện điều chỉnh khớp cắn và lên kế hoạch điều trị, hoặc chuyển cho chuyên gia về rối loạn khớp thái dương hàm. 
+
+200
+00:40:45,520 --> 00:40:54,450
+Cho dù là áp dụng máng nâng khớp, máng nhai hay máng chống nghiến ban đêm, bệnh nhân cần được điều trị cho đến khi tình trạng này được khắc phục. 
+
+201
+00:40:55,230 --> 00:41:08,700
+Một lần nữa, vì chúng ta đang sử dụng một loại vật liệu nhạy cảm kỹ thuật và kẻ thù lớn nhất cản trở sự khít sát chính là nước bọt, trừ khi các em có thể cô lập ca bệnh của mình một cách đúng chuẩn. 
+
+202
+00:41:09,200 --> 00:41:21,810
+Bằng cách đặt đê cao su để vùng can thiệp dễ tiếp cận và được cô lập hoàn toàn, nếu không thì hiện tượng nhiễm bẩn do nước bọt sẽ không thể kiểm soát được. 
+
+203
+00:41:21,810 --> 00:41:39,850
+Và ca bệnh của các em sẽ bị chống chỉ định phục hồi dán do kẻ thù này, ví dụ như chiếc răng khôn hàm dưới mọc ngầm một phần này, không thể cô lập đúng chuẩn bằng đê cao su. 
+
+204
+00:41:40,250 --> 00:41:49,430
+Tiếp theo, một chống chỉ định tạm thời khác là các xoang trám mở rộng sâu dưới nướu, vì sao vậy? 
+
+205
+00:41:50,290 --> 00:42:06,000
+Bởi vì khi các em mở rộng sâu xuống dưới nướu, xoang trám sẽ không còn men răng, càng đi sâu xuống dưới thì viền men răng càng trở nên mỏng và ít đi. 
+
+206
+00:42:06,580 --> 00:42:10,980
+Không những vậy, việc cô lập cũng sẽ trở nên khó khăn hơn. 
+
+207
+00:42:11,750 --> 00:42:17,360
+Sẽ có hiện tượng rỉ nước bọt hoặc dịch nướu chảy vào xoang. 
+
+208
+00:42:17,650 --> 00:42:36,660
+Đồng thời, quy trình dán cũng sẽ khó khăn, vật liệu của các em có thể làm kích ứng mô nướu, và máu sẽ làm nhiễm bẩn thành nướu khiến quy trình dán thất bại. 
+
+209
+00:42:37,010 --> 00:42:49,420
+Bên cạnh đó, các em cũng phải nghĩ xem làm cách nào để đưa đèn chiếu tới vùng này, nhằm quang trùng hợp đúng chuẩn cho keo dán và nhựa composite. 
+
+210
+00:42:50,410 --> 00:42:53,030
+Trong tình huống như vậy, chúng ta có hai giải pháp. 
+
+211
+00:42:53,610 --> 00:43:14,770
+Nó tùy thuộc vào khoảng sinh học của xoang trám sau khi lấy sạch mô sâu, liệu vách xoang có xâm phạm vào độ sâu sinh học của bám dính nha chu hay xâm phạm khoảng sinh học hay không. 
+
+212
+00:43:15,480 --> 00:43:26,820
+Điều này nghĩa là sao, là nó nằm trong khe nướu hay đi sâu hơn vào biểu mô bám dính và xâm phạm khoảng sinh học. 
+
+213
+00:43:27,360 --> 00:43:31,780
+Trong những điều kiện đó, các em đứng trước hai sự lựa chọn. 
+
+214
+00:43:32,600 --> 00:43:56,600
+Hoặc là phẫu thuật làm dài thân răng lâm sàng vừa đủ để bộc lộ lớp men răng ở viền nướu, và các em sẽ chọn phẫu thuật làm dài thân răng nếu không thể bộc lộ men ở thành nướu mà không vi phạm khoảng sinh học. 
+
+215
+00:43:57,440 --> 00:44:12,380
+Nếu các em có thể bộc lộ men răng mà không xâm phạm độ sâu sinh học, các em chỉ cần đặt chỉ co nướu và sử dụng glass ionomer biến tính nhựa để nâng bờ dưới nướu. 
+
+216
+00:44:12,720 --> 00:44:24,610
+Tuy nhiên xin hãy nhớ một điều, ngay cả khi các em tiến hành phẫu thuật làm dài thân răng, các em cũng vẫn cần phải nâng đường hoàn tất. 
+
+217
+00:44:25,080 --> 00:44:53,290
+Do đó, cách giải quyết trong tình huống này là chỉ nâng viền nướu bằng glass ionomer biến tính nhựa, hoặc nâng bờ dưới nướu bằng glass ionomer biến tính nhựa, kỹ thuật này trước đây gọi là kỹ thuật sandwich hở. 
+
+218
+00:44:54,090 --> 00:44:54,550
+Hoặc nhắc lại là phẫu thuật làm dài thân răng kết hợp với nâng viền nướu. 
+
+219
+00:44:54,550 --> 00:45:04,870
+Yếu tố quyết định chính trong tình trạng này là khoảng sinh học có bị xâm phạm hay không. 
+
+220
+00:45:05,780 --> 00:45:07,400
+Đây là một ca lâm sàng cụ thể. 
+
+221
+00:45:08,939 --> 00:45:10,229
+Với tổn thương sâu răng mở rộng sâu xuống dưới nướu. 
+
+222
+00:45:12,949 --> 00:45:26,329
+Các em thấy không còn men răng nào để sử dụng ở thành nướu, nhưng xét về mặt cơ học thì đây lại là một ca rất lý tưởng để làm phục hồi dán. 
+
+223
+00:45:27,429 --> 00:45:41,279
+Bởi vì nó đã bị phá hủy quá nhiều, cần được gia cố bằng cách sử dụng keo dán để liên kết chéo các cấu trúc lại với nhau. 
+
+224
+00:45:42,129 --> 00:45:44,159
+Đó là một ví dụ cho trường hợp như vậy. 
+
+225
+00:45:45,069 --> 00:45:49,259
+Chúng ta hãy xem xét một ca lâm sàng tương tự, ca này. 
+
+226
+00:45:50,079 --> 00:46:01,189
+Ca này, như các em thấy ở đây, là một phục hồi thất bại do sâu răng tái phát, sâu tiến triển vào cả composite và men răng, trông giống như một mớ hỗn độn của nhiều phục hồi. 
+
+227
+00:46:01,929 --> 00:46:18,769
+Sau khi lấy bỏ phục hồi cũ bị lỗi, viền nướu đã xâm phạm vào khoảng sinh học, do đó ca này có chỉ định phẫu thuật nha chu để làm dài thân răng. 
+
+228
+00:46:19,939 --> 00:46:27,219
+Giống như ca này, chúng ta tiến hành phẫu thuật làm dài thân răng để bộc lộ men răng ở vùng nướu. 
+
+229
+00:46:27,649 --> 00:46:31,859
+Đây là hình ảnh sau khi khâu, và đây là hình ảnh sau khi vết thương lành hoàn toàn. 
+
+230
+00:46:31,859 --> 00:46:45,649
+Bây giờ, các em có thể nhận thấy sự khác biệt giữa hình thứ hai ở hàng trên hay hình ở giữa với hình bên phải, hoặc là hình cuối cùng ở hàng dưới. 
+
+231
+00:46:45,649 --> 00:46:51,389
+Sự khác biệt giờ đây đã hoàn toàn rõ ràng. 
+
+232
+00:46:51,389 --> 00:47:02,799
+Chúng ta thấy men răng ở thành nướu đã đủ độ nguyên vẹn, đồng thời, thoạt nhìn có vẻ như các em đã nâng cao đáy xoang, nhưng thực chất là các em đã hạ thấp mức xương ổ răng. 
+
+233
+00:47:03,119 --> 00:47:17,389
+Để duy trì khoảng sinh học, các em phải đưa mức bám dính của xương và biểu mô bám dính xuống vị trí thấp hơn so với xoang trám của chúng ta. 
+
+234
+00:47:17,609 --> 00:47:29,449
+Lúc này, thầy có thể đặt khuôn trám, đặt chêm, có thể trực tiếp quan sát mọi chi tiết của xoang trám và hoàn toàn tận dụng được men răng. 
+
+235
+00:47:29,889 --> 00:47:38,729
+Còn đây là một ca lâm sàng khác, ca này sẽ không cần bọc mão răng sứ. 
+
+236
+00:47:39,199 --> 00:47:56,219
+Phim X-quang cánh cắn cho thấy xoang sâu kết thúc ngay trước biểu mô bám dính, nó nằm sâu dưới nướu nhưng chưa xâm phạm vào khoảng sinh học. 
+
+237
+00:47:56,739 --> 00:48:07,409
+Về mặt lâm sàng, sau khi lấy sạch mô sâu, thành nướu của chúng ta nằm ngay dưới viền nướu tự do. 
+
+238
+00:48:07,409 --> 00:48:30,519
+Những gì chúng ta cần làm là đặt chỉ co nướu để đẩy nướu tự do ra, tiến hành cô lập đúng chuẩn và lộn mép đê cao su, đây là một trong những bước cực kỳ quan trọng mà hầu hết nha sĩ đều bỏ qua. 
+
+239
+00:48:30,879 --> 00:48:44,389
+Các em nên lộn mép đê cao su vào trong, thao tác này đóng vai trò như một phương pháp bảo vệ và co nướu hiệu quả. 
+
+240
+00:48:45,049 --> 00:48:58,479
+Tiếp theo, chúng ta làm sạch xoang trám, hoàn tất việc bộc lộ và sau đó đặt hệ thống khuôn trám vòng đai. 
+
+241
+00:48:58,909 --> 00:49:14,009
+Sau đó chúng ta tiến hành các bước dán, trám đáy xoang để thực hiện nâng viền nướu hoặc nâng bờ dưới nướu lên một mức độ phù hợp. 
+
+242
+00:49:14,269 --> 00:49:28,759
+Lúc này glass ionomer biến tính nhựa là sự lựa chọn tốt nhất và phù hợp nhất cho hầu hết các ca, nhưng nếu các em có thể dùng composite lỏng thì nó còn tốt hơn cả glass ionomer biến tính nhựa. 
+
+243
+00:49:29,169 --> 00:49:42,099
+Và đây là một phim X-quang cánh cắn rất thú vị, cho thấy các em đang nâng thành nướu lên và cách xa khỏi vùng nướu dính. 
+
+244
+00:49:42,499 --> 00:49:55,319
+Đây là thành nướu, và đây là ca lâm sàng sau khi hoàn tất, phim cánh cắn này dùng để kiểm tra tiếp xúc bên và đường hoàn tất vùng nướu của các em. 
+
+245
+00:49:55,319 --> 00:49:58,129
+Đây là phim chụp ban đầu. 
+
+246
+00:49:58,129 --> 00:50:17,100
+Phim cánh cắn phải được chụp thật chuẩn xác, vì quyết định điều trị của các em phụ thuộc hoàn toàn vào sự hoàn hảo của phim cánh cắn này. 
+
+247
+00:50:17,100 --> 00:50:29,540
+Nó giúp xác định vị trí thành nướu dự kiến so với biểu mô bám dính và mào xương ổ răng, nhằm tránh việc xâm phạm vào khoảng sinh học. 
+
+248
+00:50:30,350 --> 00:50:54,870
+Vậy trong trường hợp chúng ta tránh được việc xâm phạm khoảng sinh học, đó là lý do vì sao ta đặt đê cao su, dùng chỉ co nướu, lộn mép đê cao su bằng bất kỳ dụng cụ nhựa nào để tăng cường bảo vệ và co nướu, việc này rất dễ thực hiện. 
+
+249
+00:50:54,870 --> 00:51:15,410
+Nếu muốn bảo vệ tốt hơn nữa, các em có thể dùng chỉ nha khoa buộc đê cao su quanh răng, nhưng phải đảm bảo sợi chỉ không lọt vào trong xoang trám mà phải nằm gọn trong rãnh nướu. 
+
+250
+00:51:15,410 --> 00:51:34,079
+Sau đó chúng ta đặt vật liệu là glass ionomer biến tính nhựa hoặc composite lỏng để nâng bờ phục hồi, thuật ngữ gọi là nâng bờ dưới nướu, và khi dùng GIC thì một số tài liệu gọi đây là kỹ thuật sandwich hở. 
+
+251
+00:51:34,079 --> 00:51:52,130
+Và cuối cùng, phim cánh cắn dùng để kiểm tra đường hoàn tất, thành nướu, độ khít sát vùng nướu và kiểm tra xem các em đóng kín bờ phục hồi cũng như tiếp xúc bên như thế nào. 
+
+252
+00:51:52,130 --> 00:52:06,560
+Tóm lại, quyết định nâng bờ dưới nướu bằng glass ionomer biến tính nhựa hay phẫu thuật làm dài thân răng phụ thuộc vào độ chính xác của phim cánh cắn và cách các em đánh giá ca bệnh. 
+
+253
+00:52:06,980 --> 00:52:13,340
+Câu hỏi cuối cùng là tại sao lại dùng glass ionomer biến tính nhựa mà không dùng GIC thông thường? 
+
+254
+00:52:13,340 --> 00:52:32,620
+Đó là vì phản ứng quang trùng hợp và quá trình đông cứng ban đầu của glass ionomer biến tính nhựa chỉ mất vài giây theo thời gian chiếu đèn được khuyến cáo. 
+
+255
+00:52:33,910 --> 00:52:37,250
+Trong khi đó, đối với GIC thông thường. 
+
+256
+00:52:39,000 --> 00:52:46,720
+Nếu các em còn nhớ, phản ứng đông cứng của nó có giai đoạn đông cứng ban đầu hay giai đoạn nguyên phát, sau đó mới đến giai đoạn trưởng thành. 
+
+257
+00:52:48,350 --> 00:52:57,690
+Các em không thể đắp bất kỳ vật liệu nào lên trên nó cho đến khi nó trưởng thành hoàn toàn. 
+
+258
+00:52:58,770 --> 00:53:06,430
+Và sự trưởng thành của nó phụ thuộc vào thời gian các em cô lập và phủ lớp vec-ni bảo vệ. 
+
+259
+00:53:07,410 --> 00:53:15,220
+Phải mất ít nhất hai mươi bốn giờ thì các em mới có thể chắc chắn rằng nó đã trưởng thành đúng mức. 
+
+260
+00:53:15,840 --> 00:53:24,230
+Vì vậy các em không thể trám composite ngay lên trên nó được. 
+
+261
+00:53:24,700 --> 00:53:29,850
+Các em không thể tiếp tục thực hiện trừ khi hai mươi bốn giờ đã trôi qua. 
+
+262
+00:53:43,650 --> 00:53:54,590
+Còn phản ứng gốc nhựa của glass ionomer biến tính nhựa sẽ hoạt động như một lớp cách ly tuyệt đối cho toàn bộ bề mặt GIC bị lộ ra ngoài. 
+
+263
+00:53:54,860 --> 00:54:11,328
+Trong khi đó, quá trình trưởng thành của phản ứng axit-bazơ vẫn tiếp diễn và được bảo vệ bởi lớp trùng hợp gốc nhựa... 
+
+264
+00:54:11,328 --> 00:54:27,920
+...khỏi bất kỳ sự nhiễm ẩm nào, đồng thời nó sẽ tiếp tục tăng độ cứng chắc và phóng thích fluor. 
+
+265
+00:54:27,920 --> 00:54:33,580
+Mặc dù hàm lượng fluor trong GIC thông thường là khá đáng kể. 
+
+266
+00:54:34,130 --> 00:54:51,320
+Nó lớn hơn rất nhiều so với lượng fluor phóng thích từ glass ionomer biến tính nhựa, nhưng trong trường hợp này thì hiệu quả của glass ionomer biến tính nhựa vẫn tốt hơn. 
+
+267
+00:54:51,320 --> 00:54:51,520
+Trường hợp cuối cùng hay điều kiện cuối cùng chống chỉ định với phục hồi dán là bác sĩ chưa đủ kiến thức, đào tạo, kỹ năng hoặc kinh nghiệm. 
+
+268
+00:54:52,150 --> 00:55:15,990
+Hãy dành thời gian để rèn luyện bản thân, không có gì đáng xấu hổ khi thực hành trên mô hình răng nhựa hay răng đã nhổ, không bao giờ là quá già để học một điều gì đó mới mẻ cả. 
+
+269
+00:55:16,960 --> 00:55:30,330
+Bản thân thầy cho đến tận bây giờ, sau ba mươi năm làm nghề, nếu dùng vật liệu mới thầy vẫn phải thử nghiệm, vì những vật liệu này không hề có khi thầy còn là sinh viên hay học sau đại học. 
+
+270
+00:55:31,230 --> 00:55:35,670
+Thường xuyên có sự cập nhật liên tục về các loại vật liệu. 
+
+271
+00:55:36,100 --> 00:55:48,550
+Nên việc tham gia các hội thảo hay thử nghiệm vật liệu trên mẫu trước khi áp dụng cho bệnh nhân là hoàn toàn bình thường. 
+
+272
+00:55:49,000 --> 00:55:58,050
+Đó là lý do vì sao sự thiếu hụt kiến thức, kỹ năng và kinh nghiệm của bác sĩ là một chống chỉ định tuyệt đối để đánh cược với kết quả điều trị. 
+
+273
+00:55:59,210 --> 01:06:03,890
+Yếu tố lâm sàng thứ hai cần xem xét là đánh giá tình trạng nha chu. 
+
+274
+01:06:03,890 --> 01:06:14,920
+Nếu tình trạng nha chu không khỏe mạnh thì tất cả các phục hồi dán sẽ thất bại. 
+
+275
+01:06:15,890 --> 01:06:32,850
+Nếu ca bệnh chưa phù hợp về mặt nha chu, các em cứ lấy sạch mô sâu, trám tạm và trì hoãn quy trình phục hồi cho đến khi tình trạng nha chu ổn định hơn. 
+
+276
+01:06:33,590 --> 01:06:35,910
+Tại sao lại như vậy, hãy xem xét ca lâm sàng này. 
+
+277
+01:06:36,300 --> 01:06:40,930
+Ở ca răng trước này, chúng ta thấy có quá nhiều cao răng và mảng bám. 
+
+278
+01:06:41,610 --> 01:06:45,100
+Thứ nhất, nếu thầy tiến hành phục hồi trong điều kiện này... 
+
+279
+01:06:46,330 --> 01:06:51,340
+...làm sao thầy có thể xác định chính xác bờ nướu của tổn thương nằm ở đâu? 
+
+280
+01:06:52,680 --> 01:07:18,070
+Và ngay cả khi thầy đã cạo vôi răng vùng này, mô nướu vẫn rất dễ chảy máu, và sự nhiễm máu hay nước bọt trong quá trình dán chắc chắn sẽ làm quy trình thất bại. 
+
+281
+01:07:18,700 --> 01:07:19,360
+Các em hiểu chưa? 
+
+282
+01:07:19,820 --> 01:07:29,390
+Một vấn đề khác, có người sẽ trả lời thầy rằng, em sẽ làm sạch vùng này và nếu chảy máu, em sẽ dùng chỉ co nướu có tẩm chất cầm máu. 
+
+283
+01:07:29,880 --> 01:07:45,750
+Nhưng thầy lại hỏi các em, làm sao các em xác định được chính xác màu sắc hay sắc độ của răng trong khi đây là vùng răng cửa. 
+
+284
+01:07:45,750 --> 01:07:48,880
+Mối quan tâm hàng đầu của bệnh nhân là tính thẩm mỹ. 
+
+285
+01:07:49,190 --> 01:08:07,490
+Vậy làm sao các em có thể so màu chính xác, do đó với ca này, nếu có tổn thương sâu răng đang tiến triển, tất cả những gì các em làm là lấy sạch mô sâu và trám tạm cho đến khi tình trạng nha chu đủ tốt để phục hồi. 
+
+286
+01:08:07,490 --> 01:08:18,660
+Còn đây là một ca lâm sàng khác, hãy tạm gác ca trước lại và tập trung vào ca này, như các em thấy, đường hoàn tất của chúng ta nằm ở đâu? 
+
+287
+01:08:19,080 --> 01:08:21,320
+Đó là câu hỏi thứ nhất. 
+
+288
+01:08:21,810 --> 01:08:23,530
+Làm thế nào thầy có thể xác định được hình dạng chính xác? 
+
+289
+01:08:24,360 --> 01:08:26,570
+Và làm thế nào để cầm máu? 
+
+290
+01:08:26,570 --> 01:08:33,310
+Đó là lý do tại sao các em phải luôn đánh giá tình trạng nha chu của ca bệnh đầu tiên. 
+
+291
+01:08:34,020 --> 01:08:37,480
+Tiếp theo là vai trò của việc sửa soạn xoang trám. 
+
+292
+01:08:38,630 --> 01:08:42,310
+Xoang trám của các em được sửa soạn để lấy sạch mô sâu. 
+
+293
+01:08:43,260 --> 01:08:49,950
+Do đó các em phải đảm bảo loại bỏ hoàn toàn men răng bị sâu và lớp ngà nhiễm khuẩn. 
+
+294
+01:08:51,340 --> 01:08:58,050
+Bất kỳ mô sâu nào còn sót lại đều là bề mặt rất kém để thực hiện dán. 
+
+295
+01:08:59,180 --> 01:09:08,880
+Vì vậy, vách men răng của các em phải sạch tuyệt đối và không còn mô sâu. 
+
+296
+01:09:09,820 --> 01:09:25,050
+Phải loại bỏ tất cả các vùng men răng yếu bở, nhưng không nhất thiết phải lấy đi toàn bộ men răng không có ngà nâng đỡ, nếu phần men này dày, nguyên vẹn, không lộ và không chịu lực nhai chính thì có thể giữ lại. 
+
+297
+01:09:25,570 --> 01:09:46,330
+Và đó là lý do trước khi bôi keo dán, các em nên đánh giá lại bờ xoang trám bằng cách cho bệnh nhân cắn trên giấy cắn để xác định xem có lực dư thừa tác động lên bờ xoang hay không, nếu có thì các em phải cắt bỏ phần men răng đó. 
+
+298
+01:09:46,810 --> 01:09:49,190
+Bất kể nó có ngà nâng đỡ hay không. 
+
+299
+01:09:49,190 --> 01:09:51,230
+Nhưng chắc chắn là phần men răng yếu bở thì phải được lấy đi. 
+
+300
+01:09:52,100 --> 01:09:59,910
+Lớp ngà bị ảnh hưởng bởi quá trình sâu răng nhưng không bị nhiễm khuẩn thì có thể được giữ lại. 
+
+301
+01:10:00,450 --> 01:10:04,260
+Nhưng ít nhất nó phải được che phủ bởi một lớp men răng chất lượng cao. 
+
+302
+01:10:05,200 --> 01:10:13,850
+Về bề mặt men răng, các em nên hỏi bệnh nhân xem họ có bị nhiễm fluor, có đang điều trị fluor hay có tẩy trắng răng không. 
+
+303
+01:10:16,428 --> 01:10:20,208
+Hãy bắt đầu với trường hợp thứ ba, đó là tẩy trắng răng. 
+
+304
+01:10:20,608 --> 01:10:26,558
+Men răng mới tẩy trắng không thể tiếp nhận bất kỳ phục hồi dán nào. 
+
+305
+01:10:27,418 --> 01:10:32,488
+Trừ khi đã qua ít nhất một tuần kể từ lúc thực hiện tẩy trắng răng. 
+
+306
+01:10:32,488 --> 01:10:41,218
+Tại sao, bởi vì men răng lúc này đang siêu bão hòa với oxy nguyên tử, và oxy hoạt động như một chất ức chế quang trùng hợp. 
+
+307
+01:10:41,648 --> 01:10:49,438
+Đối với men răng bị nhiễm fluor hoặc đang được điều trị bằng fluor, các em nên tăng thời gian xoi mòn bằng axit. 
+
+308
+01:10:50,138 --> 01:11:01,958
+Nếu đang sử dụng primer tự xoi mòn hoặc keo dán đa năng, các em nên xoi mòn chọn lọc phần men răng nhiễm fluor, vì nó bị tăng khoáng hóa. 
+
+309
+01:11:02,468 --> 01:11:12,758
+Đối với men răng, đặc biệt là ở răng cửa thì nên được vát viền, nhưng thời điểm vát viền phải hợp lý. 
+
+310
+01:11:13,658 --> 01:11:22,268
+Nó phải được vát ngay trước khi bôi axit xoi mòn, nếu các em vát men răng rồi trám tạm thì ở lần sau các em phải làm mới bề mặt men răng lại lần nữa. 
+
+311
+01:11:22,558 --> 01:11:44,038
+Nhưng việc vát men răng chỉ nên thực hiện ở những vùng không chịu lực nhai, các em nên dùng giấy cắn để kiểm tra khớp cắn trước khi vát men răng, vì chúng ta không nên để lại một lớp composite quá mỏng ở vùng chịu lực nhai. 
+
+312
+01:11:44,918 --> 01:11:56,978
+Các em nên xem xét việc khử khoáng chọn lọc bằng primer tự xoi mòn hoặc keo dán đa năng khi dán lên men răng chưa mài. 
+
+313
+01:11:57,608 --> 01:11:58,228
+Các em nhớ nhé. 
+
+314
+01:11:59,308 --> 01:12:11,508
+Vậy các em sẽ xoi mòn chọn lọc lớp men chưa mài khi sử dụng keo dán tự xoi mòn hoặc keo dán đa năng. 
+
+315
+01:12:11,988 --> 01:12:17,268
+Nếu không, các em chuyển sang kỹ thuật xoi mòn và rửa. 
+
+316
+01:12:17,768 --> 01:12:30,038
+Đối với men răng nguyên thủy chưa từng được sửa soạn, tốt nhất là nên làm nhám nó bằng đĩa nhám hoặc mũi khoan kim cương mịn trước khi xoi mòn, điều này sẽ giúp axit hoạt động hiệu quả hơn. 
+
+317
+01:12:30,648 --> 01:12:41,418
+Về thành phần ngà răng trong xoang trám, việc dán rất dễ thất bại khi thực hiện trên ngà xơ hóa mức độ cao. 
+
+318
+01:12:41,418 --> 01:12:51,668
+Bởi vì ngà xơ hóa bị tăng khoáng hóa và chất xử lý bề mặt, đặc biệt là primer tự xoi mòn, không đủ mạnh để tác động lên nó. 
+
+319
+01:12:52,038 --> 01:13:03,438
+Chính vì vậy, khi phát hiện ngà xơ hóa, tốt nhất các em nên làm nhám bề mặt bằng mũi khoan kim cương tròn độ nhám thấp. 
+
+320
+01:13:03,848 --> 01:13:07,898
+Thao tác này sẽ giúp tăng cường đáng kể lưu giữ cơ học với ngà răng. 
+
+321
+01:13:08,748 --> 01:13:25,618
+Cuối cùng, có một quan niệm sai lầm cho rằng khi dùng keo dán thì các em có thể bỏ qua yếu tố lưu giữ, không hề, các em chỉ có thể bỏ qua các hình thức lưu giữ phụ thêm như chốt, rãnh hay rãnh đuôi én mà thôi. 
+
+322
+01:13:25,928 --> 01:13:34,138
+Nhưng các em vẫn cần sự lưu giữ cơ học chính yếu thông qua các lẹm dưới. 
+
+323
+01:13:34,638 --> 01:13:39,878
+Tuy nhiên, các em không cần phải mở rộng xoang để tăng lưu giữ hay đặt thêm chốt răng. 
+
+324
+01:13:40,398 --> 01:13:43,288
+Đồng thời, các em cũng không cần thiết lập các hình thể kháng lực bổ sung. 
+
+325
+01:13:44,078 --> 01:13:58,428
+Các em có thể giữ lại múi răng yếu hoặc men răng không có ngà nâng đỡ, chúng sẽ được liên kết chéo với phần răng chắc khỏe còn lại và hoạt động như một khối thống nhất nhờ mối nối keo dán. 
+
+326
+01:13:59,018 --> 01:14:18,598
+Về việc trám tạm, thứ nhất, nếu các em không có đủ thời gian để hoàn thành phục hồi trong hôm nay, thì hãy hoãn lại toàn bộ quy trình dán. 
+
+327
+01:14:18,728 --> 01:14:31,588
+Thực tế là các em nên trì hoãn mọi bước dán cho đến thời điểm các em trám xoang bằng vật liệu phục hồi composite. 
+
+328
+01:14:31,918 --> 01:14:47,428
+Bao gồm cả việc vát viền men răng, nếu các em đã vát men răng thì phải làm mới bề mặt bằng mũi khoan kim cương một lần nữa trước khi bôi chất xử lý bề mặt. 
+
+329
+01:14:47,428 --> 01:15:05,618
+Và khi lựa chọn vật liệu trám tạm, các em phải chọn loại không chứa eugenol, vì eugenol làm ức chế quá trình quang trùng hợp đúng chuẩn của keo dán và nhựa composite. 
+
+330
+01:15:06,038 --> 01:15:10,050
+Ngoài ra, một số tài liệu cũ cũng cho rằng eugenol có thể làm đổi màu đường hoàn tất. 
+
+331
+01:15:10,050 --> 01:15:10,350
+Các em phải hiểu rõ hệ thống dán của mình. 
+
+332
+01:15:10,439 --> 01:15:17,929
+Đừng sử dụng bất kỳ vật liệu nào một cách mù quáng, các em phải xem kỹ hướng dẫn của nhà sản xuất. 
+
+333
+01:15:18,179 --> 01:15:26,219
+Nếu đó là vật liệu mới, các em nên thực tập trước trên răng đã nhổ hoặc răng nhựa trước khi áp dụng trên bệnh nhân. 
+
+334
+01:15:26,649 --> 01:15:32,859
+Và khi lựa chọn hệ thống dán, các em nên chọn một thương hiệu uy tín. 
+
+335
+01:15:33,369 --> 01:15:42,259
+Không nên sử dụng những vật liệu không rõ nguồn gốc hay từ các nhà sản xuất không đáng tin cậy. 
+
+336
+01:15:42,759 --> 01:15:47,739
+Và điều quan trọng là nên sử dụng hệ thống vật liệu theo chuỗi khép kín. 
+
+337
+01:15:47,739 --> 01:15:52,049
+Thế nào là hệ thống vật liệu theo chuỗi khép kín? 
+
+338
+01:15:52,459 --> 01:16:09,629
+Các nhà sản xuất luôn phát triển sản phẩm theo một dòng thống nhất, bao gồm loại nhựa, loại silane, loại dung môi và loại hạt độn cho cả composite lẫn keo dán có hạt độn. 
+
+339
+01:16:09,629 --> 01:16:14,309
+Đó là lý do các em nên sử dụng cùng một chuỗi vật liệu khép kín. 
+
+340
+01:16:14,309 --> 01:16:27,249
+Nghĩa là nếu các em dùng composite của thương hiệu A, thì axit xoi mòn cũng nên là của thương hiệu A. 
+
+341
+01:16:27,729 --> 01:16:34,329
+Chất trám nền hay che tủy cũng nên cùng hãng, và keo dán cũng phải thuộc thương hiệu đó. 
+
+342
+01:16:34,669 --> 01:16:39,429
+Đó chính là ý nghĩa của việc sử dụng chuỗi hệ thống khép kín. 
+
+343
+01:16:41,469 --> 01:16:45,699
+Nguyên tắc số năm, cô lập, sau đó là cô lập, và luôn luôn là cô lập. 
+
+344
+01:16:46,269 --> 01:16:59,429
+Tuyệt đối không được thực hiện phục hồi dán nếu không đặt đê cao su để cô lập. 
+
+345
+01:16:59,759 --> 01:17:03,429
+Đây là loại vật liệu vô cùng nhạy cảm với kỹ thuật. 
+
+346
+01:17:03,829 --> 01:17:20,379
+Như chúng ta đã thảo luận trong các tập trước, vật liệu này có tính ưa nước cao nên không thể dung nạp sự nhiễm bẩn từ nước bọt. 
+
+347
+01:17:20,379 --> 01:17:23,919
+Vì vậy, đặt đê cao su là một điều kiện bắt buộc. 
+
+348
+01:17:24,639 --> 01:17:33,109
+Đê cao su không chỉ bảo vệ xoang đã sửa soạn và quy trình dán của các em, mà còn bảo vệ các răng lân cận. 
+
+349
+01:17:33,719 --> 01:17:38,159
+Khỏi việc vô tình bị dính axit xoi mòn và keo dán. 
+
+350
+01:17:38,499 --> 01:17:42,839
+Và khi đặt đê cao su, hãy nhớ lộn mép đê vào trong. 
+
+351
+01:17:43,759 --> 01:17:50,349
+Các em có thể đặt một sợi chỉ co nướu có độ dày phù hợp trước khi đặt đê. 
+
+352
+01:17:50,709 --> 01:17:54,099
+Sau đó mới đặt đê cao su và lộn mép đê. 
+
+353
+01:17:54,099 --> 01:18:03,149
+Việc cô lập nhiều răng cùng lúc sẽ tốt hơn rất nhiều so với chỉ cô lập một răng duy nhất, ít nhất là để các em so màu răng. 
+
+354
+01:18:03,349 --> 01:18:17,489
+Các răng lân cận tốt nhất nên được bọc lại bằng băng keo Teflon, đây là vật liệu cách ly hoàn hảo để tránh axit hay keo dán vô tình dính lên bề mặt men răng kế bên. 
+
+355
+01:18:17,489 --> 01:18:21,589
+Đai nhựa trong suốt cũng có thể được sử dụng trong trường hợp này. 
+
+356
+01:18:22,379 --> 01:18:34,829
+Thầy cũng khuyến cáo nên dùng chỉ nha khoa để cố định đê cao su thay vì dùng clamp, vì clamp sẽ làm giảm không gian thao tác trên phẫu trường. 
+
+357
+01:18:34,829 --> 01:18:41,179
+Đôi khi nó có thể cản trở quy trình dán chuẩn xác. 
+
+358
+01:18:41,359 --> 01:18:46,929
+Bởi vì khi các em bơm rửa, clamp có thể gây vướng víu cho ống hút phẫu thuật hay ống hút áp lực cao. 
+
+359
+01:18:47,079 --> 01:18:50,279
+Đồng thời, nó cũng có thể cản trở việc quang trùng hợp bằng... 
+
+360
+01:18:51,699 --> 01:18:59,849
+...đèn chiếu, các em có thể đặt clamp đê cao su ở những răng nằm xa nhất, tức là răng trong cùng. 
+
+361
+01:19:00,399 --> 01:19:11,729
+Nhưng ở các khoảng kẽ răng khi cô lập nhiều răng, tốt nhất là sử dụng chỉ nha khoa như trong ca lâm sàng này. 
+
+362
+01:19:12,049 --> 01:19:20,269
+Ở một ca lâm sàng khác, chúng ta đã đặt chỉ co nướu. 
+
+363
+01:19:20,379 --> 01:19:38,479
+Sau đó chúng ta cố định đê cao su bằng chỉ nha khoa, và các em có thể thấy mép đê đã được lộn vào trong. 
+
+364
+01:19:38,479 --> 01:19:39,049
+Các em thấy không? 
+
+365
+01:19:41,249 --> 01:19:47,459
+Hãy cố gắng dán vào men răng nhiều nhất có thể, xoang trám của các em phải luôn có sự hiện diện của men răng. 
+
+366
+01:19:48,099 --> 01:19:54,119
+Quy trình dán vào men răng ít phức tạp hơn nhiều so với ngà răng. 
+
+367
+01:19:54,559 --> 01:20:09,109
+Đó là lý do xoang trám phải có men răng, và đó cũng là lý do chúng ta phải phẫu thuật làm dài thân răng hoặc nâng bờ dưới nướu để đảm bảo mình có lớp men răng vững chắc. 
+
+368
+01:20:09,109 --> 01:20:18,409
+Để đảm bảo quy trình dán thành công, đừng bao giờ hy sinh men răng của mình, vì nó là yếu tố cốt lõi quyết định sự thành bại. 
+
+369
+01:20:18,999 --> 01:20:30,609
+Tiếp theo, hãy giữ cho ngà răng ẩm sau khi xoi mòn, chúng ta đã thảo luận kỹ về dán khô, dán ẩm hay dán ướt, điều này tùy thuộc vào hệ thống keo dán của các em. 
+
+370
+01:20:30,999 --> 01:20:54,860
+Nhưng nhìn chung, dù dùng keo tự xoi mòn hay hệ thống xoi mòn và rửa, các em không cần phải thổi khô men răng quá mức, vì điều đó sẽ làm sụp đổ mạng lưới collagen, và chúng ta không chắc có thể làm nó nở ra lại hay không. 
+
+371
+01:20:54,860 --> 01:21:04,149
+Và kể cả khi mạng lưới này nở ra lại, các em cũng không thể chắc chắn liệu primer và keo dán có thấm sâu vào hoàn toàn hay không. 
+
+372
+01:21:04,649 --> 01:21:27,829
+Đó là lý do tại sao tốt nhất chỉ nên hút lượng nước thừa bằng ống hút áp lực cao ở miệng xoang trong lúc bơm rửa, và nhớ để vòi xịt nước theo hướng nằm nghiêng thay vì xịt thẳng vuông góc vào ngà răng. 
+
+373
+01:21:28,329 --> 01:21:36,059
+Tiếp theo, dùng một viên gòn nhỏ thấm sạch lượng nước đọng lại trong xoang. 
+
+374
+01:21:37,079 --> 01:21:45,259
+Trong một số trường hợp, chúng ta bôi thêm các chất có khả năng ức chế hoạt động của enzyme tiêu protein như đã thảo luận. 
+
+375
+01:21:45,369 --> 01:22:00,235
+Thường dùng nhất là chlorhexidine digluconate hai phần trăm, bôi sau bước xoi mòn và rửa để ức chế các enzyme matrix metalloproteinase nội tại. 
+
+376
+01:22:00,235 --> 01:22:17,769
+Một số hệ thống keo dán xoi mòn và rửa thế hệ mới có bổ sung sẵn chlorhexidine digluconate ngay trong chai primer. 
+
+377
+01:22:18,819 --> 01:22:22,829
+Và hãy bôi cũng như làm khô primer đúng kỹ thuật. 
+
+378
+01:22:23,459 --> 01:22:27,209
+Xin nhắc lại, thao tác này dành cho hệ thống xoi mòn và rửa. 
+
+379
+01:22:27,959 --> 01:22:31,459
+Còn đối với kỹ thuật dán tự xoi mòn thì quy trình này được tinh giản hơn. 
+
+380
+01:22:31,929 --> 01:22:42,439
+Nhưng đối với xoi mòn và rửa, hãy nhớ dung môi trong primer là gì, vì nó quyết định cách bôi và cách làm khô primer. 
+
+381
+01:22:42,439 --> 01:22:48,649
+Nếu đó là acetone hoặc ethanol, như chúng ta đã đề cập trước đó. 
+
+382
+01:22:49,869 --> 01:22:53,709
+Thì các em không nên thổi khô ngà răng trước khi bôi primer. 
+
+383
+01:22:53,709 --> 01:22:58,059
+Hãy bôi thành nhiều lớp và để primer tự bay hơi. 
+
+384
+01:22:58,279 --> 01:23:03,359
+Đừng thổi khô quá mức hay dùng luồng hơi để đẩy nhanh tốc độ bay hơi của nó. 
+
+385
+01:23:04,989 --> 01:23:30,779
+Đối với primer gốc nước, các em có thể thổi khô ngà răng tối đa từ hai đến ba giây, sau đó bôi primer thành nhiều lớp và có thể hỗ trợ primer bay hơi bằng cách thổi hơi tối đa hai đến ba giây. 
+
+386
+01:23:31,269 --> 01:23:37,079
+Bước tiếp theo là tiến hành bôi lớp keo dán. 
+
+387
+01:23:37,399 --> 01:23:42,589
+Lời khuyên là các em không nên dùng hơi thổi làm cho lớp keo dán trở nên quá mỏng. 
+
+388
+01:23:43,139 --> 01:23:51,599
+Như đã thảo luận, tốt nhất là các em nên làm mỏng và dàn đều keo dán bằng một cây cọ nhỏ khô ráo. 
+
+389
+01:23:51,599 --> 01:23:55,849
+Đừng dùng hơi thổi mỏng, đặc biệt là thổi với lực quá mạnh. 
+
+390
+01:23:55,849 --> 01:24:11,569
+Bởi vì nó sẽ khiến keo thấm không đều, vùng này thấm quá nhiều trong khi vùng khác lại không đủ keo dán để che phủ mạng lưới collagen đang bị lộ ra. 
+
+391
+01:24:11,569 --> 01:24:21,129
+Thêm vào đó, sự ức chế quang trùng hợp của oxy có thể cản trở quá trình quang trùng hợp diễn ra hoàn toàn. 
+
+392
+01:24:21,579 --> 01:24:39,849
+Ở những xoang sâu, nên dùng vật liệu có tính đàn hồi như glass ionomer biến tính nhựa hoặc composite lỏng lót ở đáy xoang để làm lớp triệt tiêu lực uốn, đồng thời giảm lượng composite đặc phải sử dụng. 
+
+393
+01:24:39,849 --> 01:24:58,669
+Bằng cách này, các em đang thay đổi hình thể xoang trám theo hướng có lợi để vật liệu khít sát hơn, sử dụng ít composite đặc hơn giúp giảm co ngót thể tích và hỗ trợ quá trình quang trùng hợp đạt hiệu quả tối ưu. 
+
+394
+01:24:58,909 --> 01:25:04,149
+Ý tưởng này cũng tương tự như kỹ thuật đắp từng lớp composite. 
+
+395
+01:25:04,799 --> 01:25:10,949
+Ngày nay, chúng ta đã có vật liệu khối giúp trám composite vào xoang một lần. 
+
+396
+01:25:10,949 --> 01:25:39,896
+Tuy nhiên, điều này còn tùy thuộc vào loại đèn quang trùng hợp các em dùng, kỹ thuật đắp lớp vẫn cần thiết không chỉ để giảm khối lượng co ngót và lực co rút, mà ngay cả khi các em có một cây đèn quang trùng hợp mới với công suất cao... 
+
+397
+01:25:40,006 --> 01:25:51,136
+...bất kể là đèn LED hay đèn halogen, thì độ xuyên thấu tối đa của nó cũng chỉ đạt hai milimét độ dày của mỗi lớp trám. 
+
+398
+01:25:51,136 --> 01:25:58,476
+Đó là lý do tại sao tốt nhất mỗi lớp trám của các em phải mỏng hơn mức này, tức là dưới hai milimét. 
+
+399
+01:25:59,016 --> 01:26:03,246
+Cuối cùng là một số lời khuyên chung. 
+
+400
+01:26:03,356 --> 01:26:04,286
+Đó là những lời khuyên nào? 
+
+401
+01:26:04,526 --> 01:26:11,876
+Lời khuyên là các em nên sử dụng các thiết bị phóng đại quang học như kính lúp hoặc kính hiển vi. 
+
+402
+01:26:11,876 --> 01:26:26,776
+Tất cả các thao tác sửa soạn, trám xoang bằng phục hồi dán, quy trình bôi keo dán và đắp composite đều sẽ tốt hơn và nên được thực hiện... 
+
+403
+01:26:27,156 --> 01:26:33,346
+...dưới sự phóng đại, tốt nhất là nên làm mọi thứ dưới kính phóng đại. 
+
+404
+01:26:33,606 --> 01:26:42,656
+Hãy chú ý kỹ đến thời gian và cách thao tác của từng loại vật liệu mà chúng ta đã thảo luận. 
+
+405
+01:26:43,166 --> 01:26:46,706
+Luôn luôn sử dụng ống hút áp lực cao. 
+
+406
+01:26:49,246 --> 01:26:51,156
+Nó sẽ giúp ích rất nhiều. 
+
+407
+01:26:51,156 --> 01:27:03,436
+Khi chiếu đèn quang trùng hợp, hãy đặt đầu đèn càng sát bề mặt càng tốt, và như thầy đã khuyên, nên kéo dài thời gian chiếu thay vì rút ngắn lại. 
+
+408
+01:27:04,196 --> 01:27:24,566
+Bởi vì chất lượng của quá trình quang trùng hợp phụ thuộc vào mức năng lượng phát ra từ thiết bị, mà mức năng lượng này lại bị ảnh hưởng bởi tuổi thọ của bóng đèn. 
+
+409
+01:27:24,566 --> 01:27:40,986
+Và nó sẽ yếu dần theo thời gian, đó là lý do nếu đèn chiếu của các em đã cũ, ngay cả khi nhà sản xuất hướng dẫn chiếu composite hoặc keo dán trong hai mươi giây. 
+
+410
+01:27:40,986 --> 01:27:49,886
+Thì xin hãy chiếu thêm hai mươi giây nữa cho an toàn, và khi chiếu đèn, hãy chú ý đến các vùng lẹm của xoang trám. 
+
+411
+01:27:50,716 --> 01:28:03,226
+Vì chúng ta không bỏ qua yếu tố lưu giữ cơ học, chúng ta chỉ bỏ qua các hình thức lưu giữ phụ thêm không cần thiết. 
+
+412
+01:28:03,226 --> 01:28:13,636
+Chính vì xoang trám có vùng lẹm nên các em phải nghiêng đầu đèn chiếu theo nhiều hướng khác nhau để đảm bảo keo dán được quang trùng hợp từ mọi góc độ. 
+
+413
+01:28:13,636 --> 01:28:19,696
+Đặc biệt là đối với những xoang trám mà trước đây từng được trám bằng amalgam. 
+
+414
+01:28:20,026 --> 01:28:24,696
+Vùng lẹm và các góc đường vách thường rất rõ ràng. 
+
+415
+01:28:25,076 --> 01:28:29,546
+Nên trong những ca đó, xin các em hãy thật lưu ý đến các vùng lẹm này. 
+
+416
+01:28:29,976 --> 01:28:31,706
+Cuối cùng là thông điệp tổng kết. 
+
+417
+01:28:32,066 --> 01:28:41,966
+Tóm lại, không có một kỹ thuật hay hệ thống keo dán nào là hoàn hảo và vượt trội hoàn toàn so với phần còn lại. 
+
+418
+01:28:42,586 --> 01:28:48,126
+Và các em cũng không thể chỉ đích danh loại nào là tốt nhất. 
+
+419
+01:28:48,566 --> 01:29:00,826
+Các em phải hiểu, học hỏi và đọc kỹ về vật liệu mình đang dùng, vì mỗi loại đều có ưu nhược điểm riêng. 
+
+420
+01:29:01,456 --> 01:29:13,166
+Bác sĩ lâm sàng có thể sử dụng kỹ thuật hoặc hệ thống dán yêu thích của mình, hoặc linh hoạt lựa chọn tùy theo tình huống lâm sàng. 
+
+421
+01:29:14,176 --> 01:29:28,066
+Sự phát triển của keo dán trong ba mươi năm qua đã giúp tạo ra những phục hồi thẩm mỹ hơn, bảo tồn mô lành tốt hơn và giảm đáng kể tỷ lệ nhổ răng. 
+
+422
+01:29:28,296 --> 01:29:31,306
+Đừng bao giờ quên điều này nhé. 
+
+423
+01:29:31,566 --> 01:29:46,376
+Các slide tiếp theo là tài liệu tham khảo thầy dùng để chuẩn bị cho bài giảng này, bao gồm khoảng ba mươi hai bài báo và bốn cuốn sách giáo khoa. 
+
+424
+01:29:46,376 --> 01:29:56,336
+Đây là sáu bài báo đầu tiên, tiếp theo là phần còn lại. 
+
+425
+01:29:57,206 --> 01:30:03,976
+Và đây là những bài báo khác. 
+
+426
+01:30:05,016 --> 01:30:05,476
+Các em có thể tra cứu và tham khảo chúng vào bất kỳ lúc nào các em muốn. 
+
+427
+01:30:05,476 --> 01:30:20,946
+Và thầy tin rằng những nghiên cứu cũng như sự tiến bộ trong lĩnh vực nha khoa dán sẽ không bao giờ dừng lại. 
+
+428
+01:30:23,236 --> 01:30:24,726
+Ba mươi hai tài liệu tham khảo. 
+
+429
+01:30:28,786 --> 01:30:30,916
+Và đó là danh sách sách giáo khoa. 
+
+430
+01:30:31,196 --> 01:30:35,846
+Cuối cùng, các em cứ thoải mái đặt câu hỏi cho thầy bất cứ lúc nào. 
+
+431
+01:30:35,846 --> 01:30:38,416
+Thầy luôn luôn hoan nghênh những câu hỏi của các em. 
+
+432
+01:30:38,816 --> 01:30:43,406
+Các em có thể đặt câu hỏi bằng cách để lại bình luận dưới video này. 
+
+433
+01:30:43,406 --> 01:30:47,936
+Thầy sẽ phản hồi sớm nhất có thể, hoặc các em có thể liên hệ với thầy qua thông tin này. 
+
+434
+01:30:47,936 --> 01:30:51,376
+Hãy liên hệ bất cứ lúc nào và thầy sẽ giải đáp cho các em trong thời gian sớm nhất. 
+
+435
+01:30:51,376 --> 01:30:54,816
+Cuối cùng, cảm ơn các em đã dành thời gian lắng nghe bài giảng của thầy. 
+
+436
+01:30:55,146 --> 01:30:55,146
+Đây là tập cuối cùng trong chuyên đề nha khoa dán và keo dán, các em đừng quên đăng ký kênh của thầy nhé. 
+
+437
+01:30:55,146 --> 01:31:02,106
+Hãy bật thông báo để theo dõi thêm các chủ đề về nha khoa phục hồi tiền lâm sàng và lâm sàng. 
+
+438
+01:31:02,386 --> 01:31:04,336
+Cảm ơn các em, Yasser Nassefi. 

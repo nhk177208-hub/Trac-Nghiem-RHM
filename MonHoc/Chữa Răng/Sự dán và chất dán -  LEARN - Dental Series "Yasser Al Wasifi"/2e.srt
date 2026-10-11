@@ -1,0 +1,960 @@
+﻿1
+00:00:38,077 --> 00:00:41,907
+Welcome everybody, this is Yasser from Learn Dental Series.
+
+2
+00:00:41,907 --> 00:00:47,387
+Today we will continue our topic of adhesion and adhesives in restorative
+dentistry.
+
+3
+00:00:47,887 --> 00:00:56,247
+Let me remind you about my disclaimer, I don't receive fees, compensation, or
+royalties from the sales of any of the products shown or discussed.
+
+4
+00:00:56,547 --> 00:01:05,157
+Also, this presentation has not been sponsored by any company, agency, or
+organization and is only prepared for educational purposes.
+
+5
+00:01:05,677 --> 00:01:15,937
+This presentation is copyright protected and could not be could not be
+transmitted by any mean unless you get a prior written permission from the
+author.
+
+6
+00:01:16,487 --> 00:01:24,737
+Today we will focus on clarifying the rational and the principles of bonding to
+tooth structure including enamel and dentine.
+
+7
+00:01:25,137 --> 00:01:42,507
+In the last lecture or video, we discussed part one, including adhesive
+dentistry in general and the principles of adhesion, including history and
+introduction, definitions and modes of adhesion, and what are the advantages of
+introducing adhesion in restorative dentistry.
+
+8
+00:01:42,757 --> 00:01:54,497
+Today, we will continue part two, which are the adherences, which is tooth
+structures including adhesion to enamel and adhesion to dentine, and let us
+start with adhesion to enamel.
+
+9
+00:01:54,927 --> 00:02:01,077
+In adhesion we in adhesion to enamel, we will discuss mainly three main points.
+
+10
+00:02:01,377 --> 00:02:06,577
+Number one, what are the enamel structure, including histological and chemical
+structure.
+
+11
+00:02:06,917 --> 00:02:16,717
+We should identify the structure of adherent before we adhere with it, to select
+the proper concept of adhesion to enamel.
+
+12
+00:02:16,717 --> 00:02:24,497
+Which is the second item, important item, related to the structure of enamel.
+
+13
+00:02:24,497 --> 00:02:24,897
+And what are the clinical steps to apply adhesion to enamel?
+
+14
+00:02:25,757 --> 00:02:36,427
+When considering enamel structure, enamel is basically enamel rods and
+alescalrified inter rod substance substance.
+
+15
+00:02:36,427 --> 00:02:37,387
+This is the unit structure of enamel.
+
+16
+00:02:37,387 --> 00:02:41,807
+Enamel rods are more homogenous and are more oriented, pattern oriented.
+
+17
+00:02:42,067 --> 00:02:49,037
+That's why it is more calcified with a slight percentage rather than the inter
+rod substance.
+
+18
+00:02:49,337 --> 00:02:56,807
+And this difference will be the main idea in adhesion to enamel and in the
+concept of adhering to enamel.
+
+19
+00:02:57,147 --> 00:03:16,667
+This is a scanning electron micrograph showing in figure number A to the left
+side, showing the enamel rods in a longitudinal section, which is gray, and the
+inter rod substance is darker than the enamel rods due to its less inorganic
+contents or it is less mineral contents.
+
+20
+00:03:17,017 --> 00:03:30,407
+This is a cross-sectional view showing the same, the rods are in a keyhole
+pattern, and the inter rod is the line, darker line surrounding it due to its
+less mineralization than the rod itself.
+
+21
+00:03:30,707 --> 00:03:36,657
+That's why we when we consider or review the chemical structure of enamel.
+
+22
+00:03:36,887 --> 00:03:44,757
+Enamel chemically composed of 25 up to sorry, 95 up to 97% inorganic structure.
+
+23
+00:03:45,147 --> 00:03:54,677
+The range from 95 to 97 is the difference between the rods and the inter rod
+substance.
+
+24
+00:03:54,677 --> 00:03:59,267
+The inter rod substance is less calcified, it takes the 95%.
+
+25
+00:03:59,267 --> 00:04:04,387
+And the rods itself is hyper mineralized than the inter rod, which recorded 97%.
+
+26
+00:04:04,817 --> 00:04:10,747
+And 1% organic structure and 2 to 4% by weight water.
+
+27
+00:04:11,167 --> 00:04:25,597
+While when considering it by volume, it shows from 88 up to 90 inorganic
+structure, also the lower limit is related to the inter rod substance and the
+upper limit is related to the rods itself.
+
+28
+00:04:25,967 --> 00:04:32,427
+2% organic structure, 8 to 9, 8 to 10% water by volume.
+
+29
+00:04:33,347 --> 00:04:45,717
+So that the highest value of chemical structure of enamel is inorganic, which is
+shown to be higher in rods rather than inter rod substance.
+
+30
+00:04:46,037 --> 00:04:57,177
+This pie chart will show you the difference or will illustrate much more the
+percentage of constituents in enamel composition, chemical composition.
+
+31
+00:04:57,547 --> 00:05:11,069
+Number one by weight, 95% in organic, 88% in organic by volume, by weight 1%
+organic, 2% organic by volume,
+
+32
+00:05:12,429 --> 00:05:17,049
+4% water by weight and 10% water by volume.
+
+33
+00:05:18,645 --> 00:05:27,445
+In general, we could conclude that enamel is nearly a homogeneous structure,
+mostly inorganic.
+
+34
+00:05:27,545 --> 00:05:47,665
+When we try to design a strategy to bond with enamel, chemically we would like
+to bond with the inorganic structure, or we would like to manipulate the
+inorganic structure which constitutes the majority of the mostly homogeneous
+enamel to bond with.
+
+35
+00:05:48,535 --> 00:05:58,395
+That's why when we trying to design a concept of adhesion to enamel, it is based
+on enamel solubility.
+
+36
+00:05:59,045 --> 00:06:07,375
+Enamel is proven to be soluble to acids, and the degree of solubility differs
+according to the nature of acid.
+
+37
+00:06:08,475 --> 00:06:27,835
+What is meant by, if you're using organic acid, it will have a great affinity to
+the tissue with higher organic structure, which is relatively the interrod
+substance, interrod substance is less mineralized, higher organic content,
+slightly higher organic content than the rods.
+
+38
+00:06:27,835 --> 00:06:36,225
+So, organic acid dissolves both, but it dissolves the interrod substance much
+more than the rods.
+
+39
+00:06:36,355 --> 00:06:56,205
+That's why the acid produced by acute cares such as lactic acid are penetrating
+interrod substance and cares is said to be running across the enamel parallel to
+the enamel rods, that means that it dissolves both, but the dissolution is
+faster in interrod substance than in rods.
+
+40
+00:06:57,135 --> 00:07:07,015
+But when you apply inorganic acid, its chemical affinity and chemical ability
+will be toward the tissue higher in inorganic contents.
+
+41
+00:07:07,375 --> 00:07:20,745
+That's why inorganic acid will dissolve both enamel rods and interrod substance,
+but it selectively removes from rods more than the interrods, and this is what
+is called acid etching technique.
+
+42
+00:07:21,015 --> 00:07:37,035
+In caries we couldn't stop the progress, we couldn't control the progress of
+acid, but here we could control the progress by applying the acid in a form of
+gel, and for a limited time, then rinsing it and washing it away to stop its
+action.
+
+43
+00:07:37,395 --> 00:07:44,475
+That is the difference between acid etching in enamel and acid of dental caries.
+
+44
+00:07:44,475 --> 00:07:59,435
+Again, acid etching of enamel will result in selective demineralization,
+solubility of all of all enamel surface, but with selective demineralization of
+rods more than the interrod, and you could stop it by washing it away, okay?
+
+45
+00:08:00,515 --> 00:08:03,145
+And for application for a limited time.
+
+46
+00:08:03,385 --> 00:08:17,495
+But for dental caries, it is organic acid which dissolves in also selectively in
+interrod more than the rods, so the dental caries across the enamel through the
+interrod substance parallel to the rods itself.
+
+47
+00:08:17,805 --> 00:08:34,635
+And it is not in a gel form, it is not seen by naked eye or by any diagnostic
+tools, it it it seems to be microscopic, and at the same time it is not in a gel
+form, we couldn't control its time or its application, that's why it's continue.
+
+48
+00:08:35,845 --> 00:08:54,875
+That's why the development of acid etching technique that selectively
+demineralize the rods more than the interrod substance, creates irregularities
+which are not uniform between enamel rods and interrod substance, these
+irregularities is termed micro pores.
+
+49
+00:08:55,265 --> 00:09:14,015
+These micro pores will allow infiltration of the resin inside it, and the resin
+will solidify by curing inside it, making micro tags that will mechanically
+interlock with the enamel structure, and this is the concept of adhesion to
+enamel by acid etching technique.
+
+50
+00:09:14,585 --> 00:09:27,075
+This is the surface of untreated enamel, showing uniform height or uniform level
+of both the rods and interrod substance.
+
+51
+00:09:27,445 --> 00:09:40,705
+This scanning microgram showing the rods in a key hole pattern, and the interrod
+which are darker in color and shows haphazard arrangement of crystal crystal
+appetite, okay?
+
+52
+00:09:40,705 --> 00:09:44,405
+That's why it is less mineralized due to this irregular pattern.
+
+53
+00:09:44,955 --> 00:09:56,905
+After application of acid etching, you could notice that the surface
+irregularities increased due to selective demineralization of rods more than
+interrod, again and again and again, of rods
+
+54
+00:09:57,689 --> 00:10:11,389
+More zen in t rot and you could stop this progress of acid by washing it
+according to a limited time of application and you could see it according to it
+is colored or with contrast colors than that of the tooth structure.
+
+55
+00:10:11,949 --> 00:10:26,679
+Another micrograph scanning electron micrograph showing another level of acid
+etching or selective dissolution and this is a magnified replica showing the
+irregularities creating in enamel.
+
+56
+00:10:26,679 --> 00:10:53,729
+This is another schematic diagram showing an A untreated enamel, B H enamel, you
+could compare between A and B, you could notice that the level of B is lower
+than the the level of A, means that both are disluted, enamel rods and the inter
+rod substance, but the irregularities resulted from the selective dissolution of
+rods more than the inter rod creating this microbores.
+
+57
+00:10:53,729 --> 00:11:01,889
+In figure C, microbores are resin infiltrated showing the resin tag that
+solidify making mechanical interlocking.
+
+58
+00:11:01,889 --> 00:11:18,179
+Then in figure D, composite resin is applied which adheres to bonding agent
+chemically because both are resnous materials and bonding agent are adheres to
+tooth structure which is enamel micromechanically.
+
+59
+00:11:18,179 --> 00:11:31,059
+Then if you consider the term describes the bonding between bonding agent or
+resin infiltrated into enamel, it is a micromechanical mechanical.
+
+60
+00:11:31,059 --> 00:11:44,989
+The bond between composite and the bonding agent is chemical, the total bond
+between composite resin and at the same time the tooth structure is chemico
+micromechanical bonding.
+
+61
+00:11:44,989 --> 00:11:47,649
+This is the conclusion of the total adhesive mind.
+
+62
+00:11:48,119 --> 00:11:56,689
+When applying acid etching to enamel, what are the pattern shown or describes
+the etching of enamel.
+
+63
+00:11:58,119 --> 00:12:06,179
+As described by Went and Silverstone, they discovered three types of enamel
+etching pattern.
+
+64
+00:12:06,399 --> 00:12:13,149
+Type one, the etching dissolves in prism core without dissolution of prism
+periphery.
+
+65
+00:12:13,749 --> 00:12:21,079
+Type two is the reverse of type one where the prism periphery are dissolved
+without dissolution of the prism core.
+
+66
+00:12:21,239 --> 00:12:29,789
+Type three is a combination of both the enamel prism are dissolved in core and
+in periphery.
+
+67
+00:12:30,449 --> 00:12:43,299
+Let us review this schematic diagram, this shows a part of enamel schematic
+diagram of enamel showing that the rods in darker shapes and inter rod substance
+which are the grayish shadow in between.
+
+68
+00:12:43,519 --> 00:13:10,899
+Applying acid etching gel with contrast color for a recommended time as assigned
+by manufacturer instructions, then washing it away, you could notice the
+difference in level of both enamel of all enamel surfaces after application of
+acid, both are disluted, either rods and inter rod substance,
+
+69
+00:13:10,899 --> 00:13:21,379
+but you could note that the rods are more lower than the inter rod substance,
+that means that selective demineralization of rods more than the inter rod,
+okay?
+
+70
+00:13:21,689 --> 00:13:27,949
+Type one etching, it involves only the core of enamel prisms.
+
+71
+00:13:28,169 --> 00:13:31,519
+Type two, pre-free of the enamel prisms.
+
+72
+00:13:31,519 --> 00:13:38,009
+Type three, both core and periphery of enamel prisms.
+
+73
+00:13:40,109 --> 00:13:47,689
+Which one we could produce, this is a research topic, okay?
+
+74
+00:13:47,689 --> 00:14:08,199
+Which related to the type of enamel, the type of enamel wall, it's enamel, where
+is the direction of enamel rods, what type of cavity wall, acid etching, it's
+BKA, it's BH, it's type, whatever type of bonding.
+
+75
+00:14:08,199 --> 00:14:11,199
+In general, we have here at this level.
+
+76
+00:14:11,199 --> 00:14:18,699
+Three types of etching matter, let us show something else.
+
+77
+00:14:18,699 --> 00:14:28,629
+This is the initial level of enamel and this is the dissolution level of both
+which is approximately 10 microns.
+
+78
+00:14:29,109 --> 00:14:46,409
+And at the same time it dissolves great greater depths in rods, which
+constitutes from 5 up to 50 microns deep.
+
+79
+00:14:46,809 --> 00:14:51,689
+This is scanning electromicrograph showing etching pattern type 1.
+
+80
+00:14:52,150 --> 00:14:55,425
+in which the core are dissolved more than the periphery.
+
+81
+00:14:55,425 --> 00:15:12,125
+This is a scanning electron micrograph showing etching pattern type two where
+are the free are dissolved more than the core the core of the prism itself and
+this is a combination which are type three etching pattern.
+
+82
+00:15:14,905 --> 00:15:19,905
+Let us translate this all into a clinical steps for adhesion of enamel.
+
+83
+00:15:21,565 --> 00:15:26,155
+Clinical steps for adhesion of enamel, they are only two steps.
+
+84
+00:15:27,145 --> 00:15:29,895
+Step number one, surface treatment of enamel.
+
+85
+00:15:30,945 --> 00:15:42,605
+We should identify why, what is the rational of enamel surface etching and what
+is the specification of acid agent to use and how to apply this and what are the
+clinical considerations.
+
+86
+00:15:43,255 --> 00:15:53,225
+After creation of micro pores, it should be sealed or it should allow
+infiltration of resin into this pores of enamel or surface treated enamel.
+
+87
+00:15:53,225 --> 00:15:55,835
+Let us start with enamel surface treatment.
+
+88
+00:15:56,315 --> 00:15:59,065
+What are the rational of enamel surface treatment?
+
+89
+00:15:59,875 --> 00:16:24,125
+In general, any enamel surface, either cut or version enamel, not cut or
+unprepared before, it is either smooth or covered with black, once you say it,
+covered with means that there is a contaminants that equip the free surface
+energy.
+
+90
+00:16:26,065 --> 00:16:35,835
+Equal to enamel is not a good candidate at this condition for adhesion because
+its surface energy is low.
+
+91
+00:16:36,975 --> 00:16:41,025
+And this will prevent the wetting of bonding agent.
+
+92
+00:16:42,035 --> 00:16:47,995
+Because the surface energy of enamel surface is not free, it is occupied by
+contaminant.
+
+93
+00:16:48,745 --> 00:16:51,535
+That's why we apply acid etching.
+
+94
+00:16:52,435 --> 00:17:05,565
+Apply acid etching, number one to clean the enamel surface, once you say it
+clean means that as we reviewed before in the last lecture or the previous
+video, okay, it means that increasing surface energy.
+
+95
+00:17:07,125 --> 00:17:22,555
+Any adherent surface you described it as clean or you will clean it, it means to
+regard to increasing the surface energy because you remove the surface
+contaminant that occupy the surface energy.
+
+96
+00:17:23,265 --> 00:17:38,955
+Followed by the effect of acid itself as enamel is acid soluble and the acid
+solubility of enamel is selective, more in rods, more in inter-rod substance, it
+will create rough surface or micro pores or irregularities.
+
+97
+00:17:40,485 --> 00:17:48,395
+In the inorganic part of enamel, this means that you are also increasing the
+surface area you adhere with.
+
+98
+00:17:48,395 --> 00:17:54,965
+Because the surface area of flat surface is lesser than the surface area of
+irregular surface.
+
+99
+00:17:54,965 --> 00:18:07,835
+This irregularities not only give chamber for mechanical interlocking allows
+infiltration of resin inside dentin, but also it increases the surface area you
+bond with.
+
+100
+00:18:09,045 --> 00:18:14,405
+This is why we apply acid for surface treatment of enamel.
+
+101
+00:18:16,105 --> 00:18:23,545
+What about this acid? What kind of acid we use, what about concentration, form,
+time, all of these specifications.
+
+102
+00:18:24,565 --> 00:18:33,595
+Acid etching, as we discussed before, is discovered or firstly initiated by the
+attempt of Buonocore in 19 55.
+
+103
+00:18:34,735 --> 00:18:38,925
+Buonocore used phosphoric acid 85% for 1 minute.
+
+104
+00:18:40,575 --> 00:18:52,825
+to etch enamel, to allow it or to make it a good substrate to bond with acrylic
+resin restorative materials which are available at this time before discovery of
+composite.
+
+105
+00:18:56,115 --> 00:19:14,245
+But, although phosphoric acid is the most commonly used, but more acids are
+added or the form now is a poly acid content containing phosphoric acid plus
+maleic acid, nitric acid, oxalic acid, citric acid, polyacrylic acid.
+
+106
+00:19:14,245 --> 00:19:28,675
+So, the type of acid most commonly used is phosphoric acid, but nowadays also
+recently acidic monomers are used with type called self-etching adhesive or
+self-etching primers will be discussed later, inshallah.
+
+107
+00:19:30,435 --> 00:19:44,945
+The concentration experimentally, many experimental studies assign 27% to be the
+most acceptable and effective concentration of phosphoric acid to use for to
+each enamel.
+
+108
+00:19:44,945 --> 00:19:46,755
+But this is experimentally.
+
+109
+00:19:46,755 --> 00:20:00,325
+What is meant experimentally means ideal condition, ideal condition of
+temperature, of moisture control, of personal preference, of operator, of
+timing, of thickness of gel.
+
+110
+00:20:00,400 --> 00:20:04,600
+of layering of gel, all of these are 27%.
+
+111
+00:20:04,600 --> 00:20:11,630
+But commercially, the commercially available asset etching ranged from 30% to
+40%.
+
+112
+00:20:12,480 --> 00:20:31,460
+Because by the addition of all of these factors including mouth temperature,
+including isolation, proper isolation, including layering, including thickness
+of enamel, the actual effective result will be equal to that of 27%
+experimentally.
+
+113
+00:20:31,460 --> 00:20:35,770
+But actually, actually, let me inform you something.
+
+114
+00:20:35,770 --> 00:20:40,210
+Acid concentration and pH is not the main issue.
+
+115
+00:20:41,410 --> 00:20:51,500
+Experiments and researches discovered that the dissociation factor of the acid
+is most important than pH, which is called BKA.
+
+116
+00:20:52,210 --> 00:20:58,950
+PH is the total number of hydrogen ions in the formula of acid.
+
+117
+00:21:02,560 --> 00:21:11,530
+As long as the acid having too much hydrogen, the pH will be lowered and the
+acidity will be higher.
+
+118
+00:21:12,060 --> 00:21:27,820
+But the BKA, how does the acid lose this hydrogen and substitute it with other
+material to produce salts, which is related to the acid reactivity rather than
+the acidity itself.
+
+119
+00:21:28,150 --> 00:21:32,800
+That's why BKA is much important than concentration at pH.
+
+120
+00:21:33,600 --> 00:21:34,140
+Okay?
+
+121
+00:21:36,190 --> 00:21:42,900
+Then, what if the concentration of acid agent is less than 27?
+
+122
+00:21:42,900 --> 00:21:50,440
+To avoid any biological harm to enamel or to dentin, if it sags to dentin or
+reach to dentin.
+
+123
+00:21:51,580 --> 00:21:58,730
+Less than 27% is useless because di calcium phosphate monohydrate precipitate is
+formed.
+
+124
+00:21:58,730 --> 00:22:03,440
+This is the salt that will be formed if the concentration is less than 27%.
+
+125
+00:22:04,020 --> 00:22:29,470
+And this salt, which is di calcium phosphate monohydrate precipitate is
+difficult to be washed away and interfere with bonding because your pores will
+be sealed with it and you will will not have any room for resin to infiltrate
+inside the pores.
+
+126
+00:22:29,470 --> 00:22:30,740
+You already created a pore, but it is obliterated with insoluble unwashable
+salt, so it's useless.
+
+127
+00:22:30,740 --> 00:22:56,940
+Concentration above 40% dissolved less calcium with poorer etching because the
+calcium salt they dissolve again have the ability with this higher concentration
+to re-react and it may be refill again or reobliterate again the pores.
+
+128
+00:25:07,730 --> 00:25:10,520
+Mostly and most popularly blue or green.
+
+129
+00:25:12,270 --> 00:25:22,320
+Is there a red acid etchant? Yes, there is a red acid etchant, but not for use
+inside oral cavity or intraoral, you couldn't distinguish it.
+
+130
+00:25:22,760 --> 00:25:30,660
+It could be used to etch the fitting surface of inlay or onlays or any adhesive
+indirect restoration.
+
+131
+00:25:32,120 --> 00:25:37,340
+Then it is supplied in a form of syringe.
+
+132
+00:25:38,580 --> 00:25:44,590
+With tips, this tips are disposable for only single use.
+
+133
+00:25:47,740 --> 00:25:58,100
+You just adapt one of these tip for one patient, okay? Apply it from this very
+thin needle to enamel surface.
+
+134
+00:25:58,490 --> 00:26:11,790
+And as you could see here, as being gel, it is constant and it is fixed to the
+enamel surface for the recommended time.
+
+135
+00:26:15,040 --> 00:26:22,450
+Another photographs showing application of acid etching gel with the available
+tips.
+
+136
+00:26:25,900 --> 00:26:34,190
+The left side photographs showing application of enamel to the whole surface,
+application of acid etching to the whole surface of enamel.
+
+137
+00:26:34,440 --> 00:26:44,150
+I think this is preparation for adhesive resin adhesive restoration, indirect
+restoration, either laminates or crowns.
+
+138
+00:26:44,720 --> 00:26:57,170
+The second big one showing application of enamel acid etch only limited to
+enamel, that's by the help of its contrast color and its consistency being gel.
+
+139
+00:26:58,180 --> 00:27:19,010
+Then, after the recommended time, to stop the action of etched enamel, it should
+be rinsed with water stream to remove acid etchant gel and to remove the formed
+salts that will allow to open the pores or to clarify the open pores.
+
+140
+00:27:19,960 --> 00:27:23,580
+But remember, don't allow your patient to rinse his mouth.
+
+141
+00:27:23,790 --> 00:27:29,670
+Why? Because if he rinses his mouth, the etched enamel will get contaminated
+with saliva.
+
+142
+00:27:29,670 --> 00:27:39,430
+Saliva having a salivary proteins, one of them is mucin with low molecular
+weight that could occupy the formed pores.
+
+143
+00:27:41,210 --> 00:27:58,480
+Then you should dry the etched enamel to remove water which you used before to
+rinse acid etching that occupies the pores, okay? And to get the pores empty,
+ready to be infiltrated with resin part.
+
+144
+00:27:59,490 --> 00:28:13,060
+One of the best criteria describes the properly etched enamel, its color, it
+enamelness, it appears chalky, white, frosty appearance, velvety
+appearance,ness.
+
+145
+00:28:13,980 --> 00:28:22,300
+Let us inspect this case, okay? This tooth is already isolated with rubber dam
+as a mean of protection of soft tissue.
+
+146
+00:28:22,580 --> 00:28:28,220
+Rubber dam has inverted edge to protect the the the.
+
+147
+00:28:28,580 --> 00:28:35,380
+Also it is tied with dental floss, another mean of protection also and much
+better to avoid salivary contamination.
+
+148
+00:28:35,620 --> 00:28:56,850
+Neighboring teeth are protected by Teflon tape to avoid any accidental etching
+or bonding while applying bonding agent, you could protect it again with
+celluloid matrix or mylar strip to avoid any sagging of the bonding agent to the
+neighboring unwanted surfaces for bonding or for etching.
+
+149
+00:28:57,340 --> 00:29:15,120
+This is the application of acid etching, then using suction to remove excess and
+washing, rinsing with water, a bone dryness, it looks chalky white rather than
+the other bulk of the labial surface.
+
+150
+00:29:15,780 --> 00:29:34,190
+This case showing the molar tooth preparing for preventative resin restoration,
+this cavity, okay? Will be prepared are is prepared for to receive composite
+resin restoration and the other surface is prepared for bit and fissure sealant,
+okay?
+
+151
+00:29:34,400 --> 00:29:40,950
+And you could notes the chalky white appearance of enamel or etched enamel.
+
+152
+00:29:41,640 --> 00:30:10,800
+The other right one, I hate it because it is considered as an ethical violation
+in restorative dentistry, as there is no obvious cause for etching the teeth,
+even if it is for orthodontic purposes, but this is not the place where they
+bond braces, but I don't know why the operator etched half of the labial
+surfaces, it's only it only showing.
+
+153
+00:30:11,472 --> 00:30:18,522
+The chalky white velvety appearance or frosty appearance, but I think it's a
+crime to do this for a patient.
+
+154
+00:30:20,852 --> 00:30:38,822
+The left side scanning electromicroscopic micrograph showing H enamel,
+uncontaminated, properly rinsed, properly dried, the right one showing this
+enamel contaminated with saliva salivary protein occupying the formed the formed
+micro pores.
+
+155
+00:30:38,822 --> 00:30:54,542
+That's why if salivary contamination contaminated enamel, enamel should be re
+etched for 10 seconds to re patent the formed micro pores again and to remove
+this salivary protein.
+
+156
+00:30:55,552 --> 00:31:17,821
+Also from our recommendation fluoridated enamel, you should ask the patient and
+you should ask the the importance of dental history if he received fluoride
+therapy before or the type of toothpaste he used is full of fluoride,
+
+157
+00:31:17,821 --> 00:31:33,192
+any type of fluoride therapy either local or systemic, whatever the fluoride
+therapy he received, because the enamel at this time will be hypermineralized.
+
+158
+00:31:33,192 --> 00:31:49,632
+And when you are going to etch it, you are in need to increase the etching time
+for fluoridated enamel to get the required result.
+
+159
+00:31:50,222 --> 00:32:18,312
+If you have uncut enamel surface and you need to prepare the tooth minimal
+invasively to receive let us say closure of minimal diastema without
+preparation, you need to properly clean and polish the surface immediately
+before etching.
+
+160
+00:32:18,312 --> 00:32:28,602
+This is to add extra cleaning of the tooth surface to ease the job or the
+procedure or the required job from acid etchant, okay?
+
+161
+00:32:29,462 --> 00:32:38,302
+Some operators prefer also to slightly rough this surface with any finishing
+discs just to facilitate the action of acid.
+
+162
+00:32:39,122 --> 00:33:00,612
+Again, accidental etching of neighboring teeth or uninvolved enamel surfaces
+should be avoided as it is difficult to be remineralized again, and the
+resultant will be rough enamel surface that will induce discoloration.
+
+163
+00:33:00,612 --> 00:33:20,712
+Protection of neighboring enamel as we discussed in the previous illustrated
+diagrams and photos by rubber dam isolation, teflon tape, Myler strips, all of
+these will protect uninvolved enamel surfaces and uninvolved neighboring teeth.
+
+164
+00:33:21,392 --> 00:33:24,782
+Step number two is resin infiltration into enamel.
+
+165
+00:33:25,572 --> 00:33:38,222
+Resin infiltration into enamel using a microbrush supplied always with the kit
+of bonding agent, just wet it and paint enamel or hd enamel surface.
+
+166
+00:33:38,772 --> 00:33:41,232
+No, it's not like that.
+
+167
+00:33:42,582 --> 00:33:44,822
+Number one, you should apply it actively.
+
+168
+00:33:44,822 --> 00:33:51,252
+Actively means rubbing, rubbing, continuous rubbing, okay?
+
+169
+00:33:51,772 --> 00:34:11,472
+Continuous rubbing to allow penetration, full penetration of resin to infiltrate
+all the formed pores till the bottom of each pore, and you should allow it for
+sufficient time to penetrate.
+
+170
+00:34:12,172 --> 00:34:16,772
+And it is preferable to apply multi coats.
+
+171
+00:34:17,832 --> 00:34:38,672
+Apply the first coat in active better, let it sufficient time from 15 up to 30
+seconds, okay, then apply the second coat, then thinning with a dry brush, then
+curing.
+
+172
+00:34:39,262 --> 00:34:46,132
+This to get the most effective bonding with the tooth structure.
+
+173
+00:34:47,362 --> 00:35:07,350
+This is a scanning electromicrograph on the left side, showing the microbores
+infiltrated with resin tags, okay? And this is the schematic diagrams showing
+the micromechanical interlocking between the micro tags and the microbores of
+enamel.
+
+174
+00:35:07,350 --> 00:35:07,350
+Again, this is another photo scanning electron micrograph showing the enamel
+infiltrated with resin creating micro tags that solidify and creates the
+required micromechanical locking.
+
+175
+00:35:07,350 --> 00:35:18,612
+The right one is a scanning electromicroscope microscopic photograph or
+micrograph showing for the above composite resin, and the bonding agent followed
+by the enamel treated with acid or acid etched enamel, okay?
+
+176
+00:35:19,102 --> 00:35:31,972
+You could notice, as we discussed before in a schematic diagram, the bond
+between bonding agent or the adhesion between bonding agent and the enamel is
+micromechanical, and between bonding agent and the above composite is chemical.
+
+177
+00:35:34,442 --> 00:35:44,722
+The adhesion of resin monomer to enamel, as we said before, is a micromechanical
+bonding through the formation of resin tags, which becomes interlocked with the
+enamel surface.
+
+178
+00:35:45,402 --> 00:35:55,032
+The bond strength in this case is affected by the degree of diffusion of resin
+or infiltration of resin inside enamel.
+
+179
+00:35:55,662 --> 00:36:18,392
+This is affected strongly by the bore diameter rather than the bore lens,
+because the bore diameter is responsible for full penetration of resin inside
+the formed bores and escape of air or displacing air instead displacing the air
+inside these pores.
+
+180
+00:36:19,042 --> 00:36:33,352
+While if the bore diameter is narrow and the lens is long, this means that a
+back pressure porosity will be created that will prevent proper penetration or
+infiltration of the resin inside enamel.
+
+181
+00:36:34,482 --> 00:36:36,562
+I hope you could understand me.
+
+182
+00:36:37,272 --> 00:36:42,432
+Please feel free to ask your questions are welcomed at any time.
+
+183
+00:36:43,122 --> 00:36:47,602
+You could contact me for any inquiry at any time.
+
+184
+00:36:48,132 --> 00:36:57,782
+My contact info will be displayed now in the last slide, okay? And you could
+also comment at this video and I will reply as soon as possible.
+
+185
+00:36:58,502 --> 00:37:01,592
+Thank you for assigning this time to listen to me.
+
+186
+00:37:01,732 --> 00:37:06,392
+Don't forget to subscribe to my channel and activate the notification.
+
+187
+00:37:06,692 --> 00:37:07,252
+Thank you.

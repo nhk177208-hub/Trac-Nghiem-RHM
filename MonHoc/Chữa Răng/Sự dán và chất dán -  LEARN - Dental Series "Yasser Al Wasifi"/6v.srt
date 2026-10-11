@@ -1,0 +1,1199 @@
+﻿1
+00:00:39,176 --> 00:00:43,796
+Chào các em, thầy là Yasser Elwasif từ chuỗi bài giảng Learn Dental Series. 
+
+2
+00:00:44,206 --> 00:00:53,056
+Trong tập này, thầy trò ta sẽ tiếp tục thảo luận về chủ đề sự dán và vật liệu dán ngà trong nha khoa phục hồi. 
+
+3
+00:00:54,046 --> 00:01:14,396
+Thầy xin đính chính là thầy không nhận bất kỳ thù lao hay hoa hồng nào từ việc bán các sản phẩm được nhắc đến, và đồng thời, bài giảng này không được tài trợ bởi bất kỳ công ty hay tổ chức nào mà chỉ nhằm mục đích giáo dục. 
+
+4
+00:01:15,006 --> 00:01:30,086
+Bài giảng này cũng được bảo vệ bản quyền, và không một phần nào được phép truyền tải hay sao chép dưới bất kỳ hình thức nào nếu chưa có sự cho phép bằng văn bản từ tác giả. 
+
+5
+00:01:31,066 --> 00:01:38,866
+Hôm nay, chúng ta sẽ tập trung ôn lại và áp dụng các bước lâm sàng để dán vào cả men răng và ngà răng. 
+
+6
+00:01:38,866 --> 00:01:45,076
+Đồng thời, chúng ta sẽ chọn hệ thống dán và kỹ thuật phù hợp cho các điều trị phục hình dán khác nhau. 
+
+7
+00:01:45,326 --> 00:02:07,036
+Trong tập đầu tiên, thầy xin nhắc lại là chúng ta đã thảo luận chi tiết về nha khoa dán, bao gồm lịch sử, định nghĩa, thuật ngữ khoa học, các cơ chế dán và cuối cùng là những ưu điểm của việc ứng dụng sự dán trong nha khoa phục hồi. 
+
+8
+00:02:07,696 --> 00:02:31,626
+Sau đó, từ tập hai đến tập năm, trong suốt bốn tập, chúng ta đã thảo luận về bề mặt dán, đại diện là cấu trúc men răng và ngà răng, bao gồm việc ôn lại cấu trúc mô học, hóa học của cả men và ngà, và so sánh chúng với nhau. 
+
+9
+00:02:32,326 --> 00:02:54,126
+Tiếp theo, chúng ta đã hệ thống hóa thành khái niệm dán vào men răng và các bước lâm sàng để dán men, tương tự như vậy, chúng ta đã thảo luận về các vấn đề thường gặp khi dán vào ngà và đưa ra các nguyên tắc cũng như bước lâm sàng phù hợp nhất, đó chính là tạo lớp lai ngà răng. 
+
+10
+00:02:54,496 --> 00:03:07,976
+Trong tập này, chúng ta sẽ bắt đầu thảo luận chi tiết về bản thân vật liệu dán, hay còn được biết đến phổ biến là keo dán ngà. 
+
+11
+00:03:08,526 --> 00:03:21,719
+Khi bàn về keo dán ngà, chúng ta sẽ xem xét các yêu cầu lý tưởng được đề xuất, lịch sử phát triển, và phân loại của keo dán. 
+
+12
+00:03:21,719 --> 00:03:40,386
+Ngoài ra, chúng ta cũng sẽ tìm hiểu về thành phần của các loại keo dán ngà đương đại, tính sinh tương thích, độ bền và sự thất bại của mối dán, và cuối cùng là những lưu ý lâm sàng khi áp dụng keo dán cho các phục hình. 
+
+13
+00:03:41,136 --> 00:03:52,486
+Chúng ta hãy bắt đầu với các yêu cầu lý tưởng, như thầy đã đề cập nhiều lần trước đây, không có vật liệu nào là lý tưởng hay tốt nhất, mà chỉ có vật liệu phù hợp nhất. 
+
+14
+00:03:52,486 --> 00:04:08,796
+Đó là lý do tại sao các yêu cầu lý tưởng của chúng ta sẽ không thể áp dụng cho một vật liệu duy nhất, mỗi vật liệu đều có ưu điểm và nhược điểm riêng. 
+
+15
+00:04:09,116 --> 00:04:22,686
+Vì vậy, khi lựa chọn vật liệu, chúng ta chọn loại phù hợp nhất với tình trạng lâm sàng, cũng như kiến thức và kinh nghiệm sử dụng vật liệu đó của bản thân. 
+
+16
+00:04:23,196 --> 00:04:27,796
+Chúng ta hãy bắt đầu với các yêu cầu lý tưởng được đề xuất cho một keo dán ngà. 
+
+17
+00:04:28,096 --> 00:04:38,256
+Thứ nhất, nó phải tương thích với tất cả các vật liệu phục hình được sử dụng, điều mà hoàn toàn không thể tìm thấy ở bất kỳ vật liệu nào. 
+
+18
+00:04:38,996 --> 00:04:49,196
+Đó là lý do các em sẽ thấy một vật liệu rất tương thích với vật liệu phục hình X, nhưng lại không tương thích với vật liệu phục hình Y. 
+
+19
+00:04:49,826 --> 00:04:59,050
+Và điều này sẽ được đúc kết vào cuối chuyên đề này, đó là nên sử dụng một hệ thống vật liệu khép kín. 
+
+20
+00:04:59,088 --> 00:05:03,478
+Tức là các vật liệu được sản xuất bởi cùng một hãng hay cùng một thương hiệu. 
+
+21
+00:05:04,208 --> 00:05:19,648
+Thứ hai, nó không được gây kích thích tủy và các mô xung quanh, sau đó yêu cầu quan trọng của các em là nó phải tương thích hóa học với vật liệu phục hình, với cấu trúc răng và môi trường miệng. 
+
+22
+00:05:20,368 --> 00:05:23,548
+Nó phải có hiệu quả dán tương đương giữa men răng và ngà răng. 
+
+23
+00:05:24,128 --> 00:05:32,538
+Bởi vì chúng nằm trong cùng một xoang trám, nên keo dán phải dán được vào nhiều loại ngà khác nhau, bao gồm cả ngà xơ, cũng như men răng đã sửa soạn và chưa sửa soạn. 
+
+24
+00:05:32,538 --> 00:05:39,808
+Và tất nhiên, không một vật liệu đơn lẻ nào có thể đáp ứng trọn vẹn những yêu cầu này. 
+
+25
+00:05:40,438 --> 00:05:54,428
+Như chúng ta đã thảo luận trước đây, chiến lược etching và rửa phù hợp để dán vào men răng đã sửa soạn và chưa sửa soạn, trong khi các primer tự etching thì phù hợp và thành công hơn nhiều khi dán vào ngà răng. 
+
+26
+00:05:54,988 --> 00:05:59,728
+Ngoại trừ ngà xơ luôn cần được sự chăm sóc đặc biệt. 
+
+27
+00:06:00,428 --> 00:06:18,518
+Tiếp theo, keo dán phải có tính ưa nước để đẩy nước ra khỏi ngà răng và tương thích với tính ưa nước của ngà, nhưng đồng thời nó cũng phải có tính kỵ nước để tạo ái lực tốt với nhựa dán kỵ nước bên trên. 
+
+28
+00:06:18,518 --> 00:06:20,958
+Giúp nó có thể xâm nhập sâu vào ngà răng. 
+
+29
+00:06:20,958 --> 00:06:36,368
+Và trong các tập trước, chúng ta chưa tìm thấy vật liệu đơn lẻ nào vừa có tính ưa nước vừa có tính kỵ nước cùng lúc, đó là lý do chúng ta phải sử dụng một phân tử lưỡng cực gọi là primer. 
+
+30
+00:06:36,988 --> 00:06:49,098
+Sau đó là độ nhớt thấp để có thể khuếch tán tốt, tạo độ thấm ướt cao, giúp xâm nhập sâu vào bề mặt ngà và men răng đã được khử khoáng. 
+
+31
+00:06:49,368 --> 00:06:53,728
+Vật liệu cũng cần có độ dày màng tối thiểu để mang lại lực dán cao. 
+
+32
+00:06:53,948 --> 00:07:17,508
+Lực dán của nó phải đạt ít nhất mười bảy megapascal, và đây là một trong những thông số quan trọng nhất, không có lý do gì để chấp nhận một loại keo dán nếu các nghiên cứu không chứng minh được lực dán của nó lớn hơn mức này. 
+
+33
+00:07:17,508 --> 00:07:30,448
+Tại sao lại như vậy? Bởi vì ứng suất co ngót tạo ra do sự trùng hợp của composite là khoảng mười bảy megapascal. 
+
+34
+00:07:30,808 --> 00:07:58,088
+Vì vậy, để có một lớp dán ổn định, không bị thoái hóa, đóng vai trò như một khớp nối đàn hồi giúp giảm thiểu vi kẽ do co ngót trùng hợp và bịt kín khoảng hở này, nó phải có lực dán ít nhất mười bảy megapascal để chống lại ứng suất từ composite. 
+
+35
+00:07:58,448 --> 00:08:06,468
+Và đây sẽ là tiêu chuẩn tối thiểu để chúng ta chấp nhận hay loại bỏ bất kỳ một loại keo dán ngà nào. 
+
+36
+00:08:06,878 --> 00:08:35,248
+Độ bền dán của vật liệu phải duy trì được sự bám dính khít sát ở bờ viền dưới môi trường miệng phức tạp, bao gồm lực nhai, môi trường ẩm ướt và sự biến thiên nhiệt độ liên tục. 
+
+37
+00:08:35,248 --> 00:08:45,388
+Nó phải ổn định dưới tất cả các điều kiện này, và phải phù hợp cho cả môi trường ẩm hay khô của ngà răng và khoang miệng. 
+
+38
+00:08:45,388 --> 00:08:57,798
+Không được có bọt khí hay khuyết tật sau khi quang trùng hợp, và nếu vật liệu có khả năng phóng thích fluor thì đó là một điểm cộng, và nó nên trùng hợp được với nhiều loại đèn trám khác nhau. 
+
+39
+00:08:57,798 --> 00:09:05,048
+Bao gồm đèn halogen thạch anh tungsten, đèn LED và tất cả các loại đèn thương mại có sẵn. 
+
+40
+00:09:05,248 --> 00:09:07,848
+Nó nên dễ thao tác và không quá nhạy cảm kỹ thuật. 
+
+41
+00:09:07,928 --> 00:09:18,018
+Tuy dễ thao tác, nhưng mức độ nhạy cảm kỹ thuật lại khác nhau tùy thuộc vào số bước thực hiện. 
+
+42
+00:09:18,178 --> 00:09:18,518
+Càng tăng số bước thì kỹ thuật càng nhạy cảm. 
+
+43
+00:09:18,518 --> 00:09:18,558
+Và như chúng ta đã nhắc đến, điều này mở ra cánh cửa cho những lỗi lầm. 
+
+44
+00:09:18,558 --> 00:09:28,888
+Nhìn chung, các em cần nhớ rõ rằng không có một loại keo dán ngà đơn lẻ nào có thể đáp ứng trọn vẹn tất cả những yêu cầu lý tưởng này. 
+
+45
+00:09:29,178 --> 00:09:39,048
+Nhưng một bác sĩ lâm sàng thông thái sẽ tự đánh giá ca bệnh và môi trường miệng để chọn ra loại keo dán ngà phù hợp nhất. 
+
+46
+00:09:39,458 --> 00:09:46,438
+Đồng thời, kiến thức, kỹ năng và kinh nghiệm của bác sĩ cũng rất quan trọng trong việc lựa chọn. 
+
+47
+00:09:46,438 --> 00:09:54,758
+Đây là một chủ đề vừa rất dễ nhưng cũng vừa rất khó, đó là lý do vì sao trăm hay không bằng tay quen. 
+
+48
+00:09:56,272 --> 00:10:06,832
+Vì vậy, các em luôn cần được thực hành, đào tạo và cập nhật liên tục để nâng cao kỹ năng, kinh nghiệm và kiến thức trong lĩnh vực này. 
+
+49
+00:10:07,952 --> 00:10:22,142
+Do đó, các em có thể cần chuẩn bị sẵn hai hoặc ba loại keo dán ngà và các chiến lược dán khác nhau, nhưng chắc chắn là không dùng tất cả chúng trong cùng một xoang trám, vì nó khác nhau tùy từng ca bệnh. 
+
+50
+00:10:22,782 --> 00:10:27,502
+Bây giờ, chúng ta hãy cùng nhìn lại lịch sử phát triển của các thế hệ keo dán ngà. 
+
+51
+00:10:27,502 --> 00:10:54,872
+Mọi thứ bắt đầu với những gì được gọi là thế hệ thứ nhất, xuất phát từ các thử nghiệm của Michael Buonocore, và được công thức hóa thành các keo dán thương mại từ năm một ngàn chín trăm năm mươi tám đến những năm bảy mươi, và hiện nay chúng không còn tồn tại nữa. 
+
+52
+00:10:54,872 --> 00:10:58,432
+Thế hệ này dựa trên các hợp chất gốc phosphate hữu cơ. 
+
+53
+00:10:58,622 --> 00:11:06,872
+Các phosphate hữu cơ này phản ứng hóa học với canxi hydroxyapatite vô cơ và hoặc thành phần collagen. 
+
+54
+00:11:06,872 --> 00:11:20,702
+Nên nó được thiết kế để liên kết ion với hydroxyapatite, hoặc liên kết cộng hóa trị như liên kết hydro với collagen thông qua một dạng hấp phụ. 
+
+55
+00:11:21,032 --> 00:11:27,302
+Nhưng thực tế vào thời điểm đó, người ta vẫn chưa khám phá ra sự tồn tại của lớp mùn ngà. 
+
+56
+00:11:27,542 --> 00:11:38,102
+Chính vì vậy, nhược điểm của nó là lực dán rất thấp, chỉ dao động trong khoảng từ hai đến ba megapascal. 
+
+57
+00:11:38,102 --> 00:12:04,722
+Lực dán như vậy là không thể chấp nhận được, thời đó họ chưa biết rằng cần tới mười bảy megapascal để chống lại ứng suất co ngót trùng hợp của composite, đặc biệt là composite hóa trùng hợp thời kỳ đó có độ co ngót thể tích rất lớn. 
+
+58
+00:12:04,722 --> 00:12:18,102
+Đồng thời, ứng suất tạo ra còn mạnh hơn mười bảy megapascal rất nhiều, vật liệu dễ bị thoái hóa theo thời gian khi tiếp xúc với độ ẩm do họ chưa biết cách xử lý ngà răng. 
+
+59
+00:12:18,352 --> 00:12:26,652
+Các thành phần riêng lẻ trong dung dịch không ổn định, dễ bị hòa tan, khiến khả năng lưu giữ lâu dài rất kém. 
+
+60
+00:12:26,652 --> 00:12:38,682
+Lực dán quá thấp, không cải thiện được vi kẽ bờ viền, và thời đó họ chỉ mới xoi mòn men răng theo khuyến cáo của Michael Buonocore, còn lớp mùn ngà thì hoàn toàn không được làm sạch. 
+
+61
+00:12:38,942 --> 00:12:39,852
+Thầy nghĩ là lúc đó lớp mùn ngà chưa được khám phá ra. 
+
+62
+00:12:39,852 --> 00:13:00,322
+Ví dụ cho thế hệ này là một bức ảnh khá mờ vì nó đã quá cũ, đại diện là keo dán Cervident của công ty S S White. 
+
+63
+00:13:00,942 --> 00:13:07,012
+Sau đó, trong nỗ lực để dán vào lớp mùn ngà... 
+
+64
+00:13:07,352 --> 00:13:17,442
+Vào cuối những năm bảy mươi đến giữa những năm tám mươi, thế hệ thứ hai đã được phát triển, dựa trên gốc phosphate ester. 
+
+65
+00:13:17,782 --> 00:13:24,542
+Các em lưu ý rằng các phosphate ester này liên kết với ngà răng thông qua tương tác phân cực. 
+
+66
+00:13:24,952 --> 00:13:29,052
+Nó chứa phenyl phosphate và HEMA trong dung môi ethanol. 
+
+67
+00:13:29,522 --> 00:13:48,142
+Người ta thoa vật liệu lên men răng đã xoi mòn, còn ngà răng thì để nguyên, sau khi bôi tích cực, ethanol bay hơi, để lại phenyl phosphate và HEMA tương tác phân cực với ngà răng. 
+
+68
+00:13:48,142 --> 00:13:50,932
+Vậy tương tác phân cực với ngà răng nghĩa là gì? 
+
+69
+00:13:51,322 --> 00:13:56,972
+Đó là sự tương tác giữa nhóm phosphate mang điện tích âm của keo dán... 
+
+70
+00:13:57,432 --> 00:14:11,102
+Hãy nhớ kỹ điều này, nhóm phosphate mang điện tích âm sẽ liên kết với các ion canxi mang điện tích dương trong cấu trúc ngà và lớp mùn ngà. 
+
+71
+00:14:11,742 --> 00:14:22,142
+Một khi chúng ta nói về điện tích âm và dương, thì dạng liên kết này thuộc loại cơ chế dán nào? 
+
+72
+00:14:22,432 --> 00:14:28,002
+Đúng vậy, đó là loại liên kết yếu nhất và kém ổn định nhất, liên kết tĩnh điện. 
+
+73
+00:14:28,212 --> 00:14:38,102
+Vì thế, các em sẽ thấy lực dán của nó dao động không ổn định, từ hai đến tận bảy megapascal. 
+
+74
+00:14:38,262 --> 00:14:45,482
+Nó phụ thuộc vào lượng điện tích ion mà vật liệu cần liên kết. 
+
+75
+00:14:45,482 --> 00:14:51,082
+Đồng thời, nó cũng rất khiêm tốn vì các điện tích sẽ triệt tiêu lẫn nhau. 
+
+76
+00:14:51,932 --> 00:14:57,972
+Sự triệt tiêu này diễn ra rất nhanh, nếu ban đầu nó đạt bảy thì chẳng mấy chốc sẽ giảm xuống chỉ còn hai megapascal. 
+
+77
+00:14:58,992 --> 00:15:04,972
+Và nếu bắt đầu từ hai, nó có thể tăng lên bảy rồi lại giảm xuống sau khi trung hòa. 
+
+78
+00:15:05,532 --> 00:15:11,302
+Thứ hai, nó được dùng để các polymer thâm nhập vào bề mặt lớp mùn ngà. 
+
+79
+00:15:11,952 --> 00:15:21,682
+Điều này tạo ra một chút lưu giữ cơ học, nhưng không có nhiều giá trị vì nó chỉ thâm nhập vào lớp bề mặt lỏng lẻo. 
+
+80
+00:15:22,482 --> 00:15:28,412
+Đó chính là những nhược điểm thực sự của nó, bao gồm cả lực dán khiêm tốn. 
+
+81
+00:15:28,722 --> 00:15:38,342
+Lực dán bị suy giảm theo thời gian là điều đã được dự đoán trước, cũng như sự thiếu ổn định thủy phân trong môi trường miệng. 
+
+82
+00:15:38,622 --> 00:15:56,272
+Hai nhược điểm đầu tiên xuất phát từ cơ chế hoạt động tĩnh điện, cơ chế mà chúng ta đã mô tả trong tập một là yếu nhất, bởi vì khi các điện tích tự trung hòa, bề mặt dán sẽ bị bong tróc. 
+
+83
+00:15:57,002 --> 00:16:19,122
+Đồng thời, chúng ta vẫn chỉ đang xoi mòn men răng theo thử nghiệm của Buonocore mà không loại bỏ lớp mùn ngà dù đã phát hiện ra nó, chúng ta chỉ đang cố gắng kiểm soát lớp mùn này chứ chưa loại bỏ hay biến đổi nó hoàn toàn. 
+
+84
+00:16:19,382 --> 00:16:28,042
+Các ví dụ tiêu biểu là keo dán Scotchbond của 3M Dental và hệ thống Clearfil Bond của công ty Kuraray. 
+
+85
+00:16:28,802 --> 00:16:38,212
+Các em cũng có thể thấy độ phân giải của những bức ảnh này rất thấp vì chúng quá cũ, việc tìm ảnh cho thế hệ này thực sự khó khăn. 
+
+86
+00:16:38,532 --> 00:16:43,532
+Sau đó, từ giữa đến cuối những năm tám mươi, thế hệ thứ ba ra đời. 
+
+87
+00:16:44,132 --> 00:17:03,242
+Ý tưởng của thế hệ thứ ba là họ tin rằng lớp mùn ngà có một bề mặt lỏng lẻo không thuận lợi cho việc dán, nhưng từ góc độ tương thích sinh học... 
+
+88
+00:17:03,512 --> 00:17:23,552
+Họ không muốn xử lý quá mạnh trên lớp mùn ngà vì họ muốn ngà răng được bịt kín hoàn toàn để bảo vệ tủy và ngăn ngừa ê buốt sau trám. 
+
+89
+00:17:23,962 --> 00:17:29,232
+Vì vậy, họ cố gắng cố định và củng cố lớp mùn ngà. 
+
+90
+00:17:30,122 --> 00:17:35,572
+Thế nên đầu tiên, họ thay đổi quan điểm để không loại bỏ lớp mùn ngà. 
+
+91
+00:17:36,052 --> 00:17:41,992
+Thế hệ thứ nhất hoàn toàn chưa biết về lớp mùn ngà, nhưng sự thất bại đã dẫn đến việc phát hiện ra nó. 
+
+92
+00:17:42,332 --> 00:17:56,952
+Đến thế hệ thứ hai, họ cố gắng dán vào lớp bề mặt lỏng lẻo này, hoặc tin rằng họ có thể thâm nhập và dán vào nó bằng lực hút phân cực giữa các điện tích trái dấu. 
+
+93
+00:17:57,322 --> 00:18:16,322
+Tới thế hệ thứ ba, họ cố gắng cố định hay biến đổi lớp mùn ngà, làm cho nó chắc chắn hơn bằng cách cho monomer có tính axit thâm nhập vào, vốn mạnh hơn nhiều so với lớp bề mặt lỏng lẻo này. 
+
+94
+00:18:16,632 --> 00:18:26,782
+Họ sử dụng các tác nhân axit hoặc chất tạo phức chelate có thể làm giảm lượng canxi và thay thế bằng một chất bổ sung là sắt oxalat. 
+
+95
+00:18:27,172 --> 00:18:37,172
+Họ cố gắng khử khoáng lớp bề mặt và thay thế các ion canxi bằng sắt oxalat, thứ được cho là bền vững hơn nhiều. 
+
+96
+00:18:37,542 --> 00:18:46,452
+Vì vậy, trong điều kiện này, chúng ta xoi mòn men răng và làm biến đổi hoặc loại bỏ một phần lớp mùn ngà. 
+
+97
+00:18:47,552 --> 00:19:05,422
+Tuy nhiên, một trong những nhược điểm của nó là dù giới hạn lực dán có cao hơn thế hệ một và hai vốn không vượt quá bảy megapascal, thì ở đây chúng ta đạt được mười hai đến mười lăm megapascal. 
+
+98
+00:19:05,762 --> 00:19:16,822
+Nhưng mặc dù có kết quả phòng thí nghiệm tuyệt vời, các chất dán này lại không đạt được sự chấp thuận trong các thử nghiệm lâm sàng. 
+
+99
+00:19:16,822 --> 00:19:27,282
+Đặc biệt là chúng gây đổi màu bờ viền cùng với một vấn đề khác được ghi nhận là do sắt oxalat. 
+
+100
+00:19:27,282 --> 00:19:30,962
+Vấn đề được cho là do sắt oxalat gây đổi màu theo thời gian. 
+
+101
+00:19:31,272 --> 00:19:41,622
+Ví dụ cho thế hệ này là Scotchbond 2 của 3M Dental, Tenure của Den Mat, Universal Bond 2 và ART của Kulzer. 
+
+102
+00:19:53,662 --> 00:19:54,862
+Sau đó, thế hệ thứ tư xuất hiện. 
+
+103
+00:19:56,785 --> 00:20:10,025
+Dựa trên công trình của Fusayama và Nakabayashi cùng cộng sự, phát triển từ khái niệm tạo lớp lai ngà răng mà chúng ta đã thảo luận trong ba đến bốn tập trước. 
+
+104
+00:20:10,795 --> 00:20:30,715
+Nó đặc trưng bởi khả năng dán vào cả men và ngà răng, mang lại lực dán mạnh và ổn định lên tới hai mươi bảy megapascal trên ngà, trong khi chúng ta chỉ cần mười bảy megapascal. 
+
+105
+00:20:30,935 --> 00:20:32,125
+Hiệu suất cải thiện rõ rệt khi được bôi lên bề mặt ngà răng ẩm. 
+
+106
+00:20:32,445 --> 00:21:02,345
+Và dựa trên khái niệm này, chúng ta có ba bước chính nếu các em còn nhớ: gel axit xoi mòn, primer và keo dán, và chúng ta đã thảo luận rất chi tiết về lý do sử dụng từng loại, đặc biệt là dung môi của primer như gốc acetone, gốc ethanol hay gốc nước. 
+
+107
+00:21:02,345 --> 00:21:03,125
+Chúng ta đã thảo luận về dán khô. 
+
+108
+00:21:03,125 --> 00:21:05,915
+Chúng ta cũng đã thảo luận về dán ướt, và sự khác biệt giữa chúng. 
+
+109
+00:21:06,145 --> 00:21:14,225
+Thế hệ thứ tư rất nhạy cảm kỹ thuật vì nó đòi hỏi nhiều bước, và mỗi bước, đặc biệt là primer và keo dán, cần phải bôi nhiều lớp. 
+
+110
+00:21:14,865 --> 00:21:41,465
+Nghĩa là, nếu các em coi bước xử lý axit là một bước, và primer cần hai đến ba lớp thì các em sẽ có bốn lần bôi, keo dán thêm hai lớp nữa thì tổng cộng lên đến sáu thao tác, và vật liệu này rất nhạy cảm với độ ẩm trong một môi trường phải được cách ly hoàn toàn. 
+
+111
+00:21:42,515 --> 00:21:51,945
+Mặc dù có những nhược điểm này, mặc dù nó đòi hỏi các em phải được rèn luyện và hiểu biết sâu sắc hơn về bản chất của vật liệu... 
+
+112
+00:21:52,505 --> 00:22:03,975
+Và các em cần biết như chúng ta đã thảo luận trước đây, thế nào là đủ ẩm, thế nào là đủ khô, primer của các em là gốc acetone, ethanol hay gốc nước. 
+
+113
+00:22:04,175 --> 00:22:08,835
+Cũng như cách bôi và cách tránh các nhược điểm. 
+
+114
+00:22:08,835 --> 00:22:23,815
+Mặc dù có tất cả những khuyết điểm này, nó vẫn là tiêu chuẩn để đánh giá bất kỳ hệ thống mới nào sau này. 
+
+115
+00:22:24,245 --> 00:22:32,895
+Nó là cây thước, là cán cân của chúng ta để cân đong đo đếm các vật liệu khác cho đến tận ngày nay. 
+
+116
+00:22:33,295 --> 00:22:37,745
+Và đây là một nhận định rất quan trọng. 
+
+117
+00:22:38,075 --> 00:22:40,795
+Cho đến nay, nó vẫn được xem là tiêu chuẩn vàng. 
+
+118
+00:22:41,405 --> 00:22:46,765
+Để từ đó chúng ta chuẩn hóa các vật liệu khác. 
+
+119
+00:22:47,425 --> 00:22:54,345
+Đây là thế hệ thứ tư dựa trên sự tạo lớp lai. 
+
+120
+00:22:54,805 --> 00:23:14,865
+Ví dụ tiêu biểu là Scotchbond Multi-Purpose, OptiBond FL của Kerr, All-Bond 2 của Bisco, và tất cả các thế hệ tiếp theo đều là những nỗ lực nhằm giảm bớt sự phức tạp của thế hệ thứ tư. 
+
+121
+00:23:14,865 --> 00:23:19,805
+Chúng là nỗ lực để giảm số bước và nhờ đó... 
+
+122
+00:23:20,185 --> 00:23:27,805
+Chúng ta sẽ giảm thiểu khả năng mắc lỗi trong thao tác. 
+
+123
+00:23:28,015 --> 00:23:42,305
+Đó là một nỗ lực để làm cho vật liệu trở nên thân thiện hơn với người dùng, nhưng không có khái niệm nào mới ra đời sau khái niệm tạo lớp lai ngà răng. 
+
+124
+00:23:42,415 --> 00:23:53,305
+Tất cả các thử nghiệm vẫn dựa trên sự lai hóa và hình thành lớp lai, chỉ là tìm cách tạo ra nó bằng một quy trình nhanh hơn và ít nhạy cảm kỹ thuật hơn. 
+
+125
+00:23:53,945 --> 00:23:54,235
+Vâng. 
+
+126
+00:23:54,755 --> 00:24:07,205
+Thế hệ thứ năm xuất hiện vào cuối những năm chín mươi cho đến nay, có xu hướng đơn giản hóa kỹ thuật dán thành hai bước. 
+
+127
+00:24:07,755 --> 00:24:24,335
+Nó mang lại lực dán khoảng hai mươi lăm megapascal, thấp hơn so với thế hệ thứ tư nhưng vẫn vượt qua mức yêu cầu mười bảy megapascal, nên nó hoàn toàn có thể chấp nhận được. 
+
+128
+00:24:24,815 --> 00:24:37,275
+Hệ thống này kết hợp cả primer và keo dán với nhau trong một bước, vì vậy các em sẽ chỉ có hai thành phần. 
+
+129
+00:24:37,465 --> 00:24:46,285
+Một thành phần là chất xoi mòn hay axit, và thành phần còn lại là primer và keo dán kết hợp. 
+
+130
+00:24:46,432 --> 00:24:48,542
+Hoặc là một hệ thống phối trộn hóa học. 
+
+131
+00:24:48,692 --> 00:24:53,542
+Thực ra, thầy vẫn chưa tìm hiểu sâu xem họ đã bào chế nó như thế nào. 
+
+132
+00:24:53,762 --> 00:25:07,402
+Tuy nhiên, nhược điểm được ghi nhận là nó thiếu nhiều thành phần cần thiết để thực hiện việc dán đa chất nền, vì vậy nó không dán hiệu quả đồng đều trên cả men và ngà răng. 
+
+133
+00:25:07,402 --> 00:25:19,752
+Và dù các em đang giảm được số lượng lọ, giảm số bước, nhưng trên lâm sàng các em vẫn cần phải quét nhiều lớp. 
+
+134
+00:25:19,752 --> 00:25:31,742
+Đó là lý do tại sao các em chỉ giảm được số bước về mặt hình thức, giảm được số lượng lọ phải dùng, nhưng thực tế các em vẫn cần quét vật liệu nhiều lần. 
+
+135
+00:25:31,742 --> 00:25:39,102
+Ví dụ cho hệ thống này là Prime & Bond NT của Dentsply và Excite của Ivoclar Vivadent. 
+
+136
+00:25:39,272 --> 00:25:47,022
+Sau đó, bước sang thập niên đầu của thế kỷ hai mươi mốt... 
+
+137
+00:25:47,722 --> 00:25:54,922
+Và vào đầu thế kỷ hai mươi mốt... 
+
+138
+00:25:55,222 --> 00:26:00,422
+Kỷ nguyên của các primer tự etching đã mở ra. 
+
+139
+00:26:01,892 --> 00:26:18,132
+Được giới thiệu qua thế hệ thứ sáu, nó cũng nhằm đơn giản hóa kỹ thuật dán, giảm số bước thực hiện và khắc phục các vấn đề gặp phải khi dùng chiến lược etching và rửa. 
+
+140
+00:26:18,132 --> 00:26:31,732
+Bao gồm tính nhạy cảm của vùng phẫu trường, và nỗ lực giải quyết vấn đề mà chúng ta đã bàn luận trước đó, thế nào là đủ ướt và thế nào là đủ khô, cũng như việc các em phải nhận biết loại primer của mình. 
+
+141
+00:26:31,732 --> 00:26:38,522
+Đó là gốc acetone, gốc ethanol hay gốc nước? 
+
+142
+00:26:38,522 --> 00:26:53,482
+Và liệu các em nên chọn dán ướt hay dán khô, vì dán ướt có thể để lại collagen bị phơi bày mà không được che phủ như chúng ta đã thảo luận. 
+
+143
+00:26:53,482 --> 00:27:02,772
+Điều này sẽ tạo cơ hội cho enzym matrix metalloproteinase làm biến tính collagen, dẫn đến nhạy cảm sau điều trị và rò rỉ vi thể. 
+
+144
+00:27:02,772 --> 00:27:12,682
+Hoặc nếu các em chọn dán khô bằng loại có chứa nước, nó cũng sẽ dẫn đến một vấn đề khác. 
+
+145
+00:27:13,142 --> 00:27:22,192
+Đó là những gì các em vừa phơi bày ra phải được che phủ và ngấm ngay lập tức bởi primer và keo dán. 
+
+146
+00:27:22,192 --> 00:27:33,202
+Họ đã giới thiệu các primer tự etching đầu tiên vào đầu những năm hai ngàn. 
+
+147
+00:27:33,202 --> 00:27:50,732
+Đến nay nó vẫn hiện diện thông qua sự ra mắt của thế hệ thứ sáu, giúp đơn giản hóa kỹ thuật dán và giảm số bước xuống chỉ còn hai hoặc một bước. 
+
+148
+00:27:50,732 --> 00:28:12,102
+Hệ thống này cho lực dán thấp hơn nhưng vẫn trong mức chấp nhận được, các em chỉ cần mười bảy megapascal thì nó cung cấp đến hai mươi megapascal, nhưng lại giảm thiểu được rất nhiều vấn đề, đặc biệt là hiện tượng nhạy cảm sau điều trị. 
+
+149
+00:28:12,102 --> 00:28:21,752
+Hệ thống này kết hợp khâu xoi mòn và quét primer vào chung một bước, và quét keo dán ở một bước riêng biệt. 
+
+150
+00:28:21,752 --> 00:28:38,572
+Chất xoi mòn hay tác nhân xử lý mà các em dùng là một monomer có tính axit, có khả năng thâm nhập hoặc khử khoáng một phần bề mặt ngà và lớp mùn ngà. 
+
+151
+00:28:38,572 --> 00:28:59,072
+Nó không loại bỏ lớp mùn ngà, mà sử dụng lớp này như một phần của lớp lai, ngấm vào nó bằng monomer axit để khử khoáng, đồng thời bao phủ các sợi collagen và ngà răng bị bộc lộ cùng một lúc. 
+
+152
+00:28:59,072 --> 00:29:12,892
+Nó có thể gồm hai bước với một lọ chứa chất xoi mòn và primer, tiếp theo là một lọ keo dán, hoặc có thể tích hợp cả chất xoi mòn, primer và keo dán tất cả trong một bước duy nhất. 
+
+153
+00:29:12,892 --> 00:29:22,772
+Ưu điểm chính của nó là khả năng dán vào ngà răng khô cũng tốt như ngà răng ướt. 
+
+154
+00:29:22,772 --> 00:29:32,392
+Bởi vì các em đã có thể bỏ qua bước xác định xem ngà thế nào là đủ ướt, thế nào là đủ khô, hay dung môi là gốc acetone, ethanol mà chúng ta đã bàn trước đó. 
+
+155
+00:29:32,392 --> 00:29:39,232
+Đó là lý do chúng dán vào ngà bề mặt cũng như ngà sâu với chất lượng tương đương nhau. 
+
+156
+00:29:39,232 --> 00:29:51,342
+Hệ thống này giúp đơn giản hóa kỹ thuật dán, nhưng ở giai đoạn phát triển đầu tiên, nó lại gặp phải quá nhiều nhược điểm. 
+
+157
+00:29:52,703 --> 00:30:07,453
+Ví dụ, nếu các em muốn dùng nó trên bề mặt men răng nguyên thủy chưa sửa soạn, có thể các em sẽ cần xoi mòn chọn lọc hoặc làm nhám bề mặt men, đặc biệt trong các ca đóng khe hở nhỏ. 
+
+158
+00:30:08,193 --> 00:30:25,323
+Chúng không thể dán vào nhựa hóa trùng hợp hoặc lưỡng trùng hợp, đó là lý do chúng không phù hợp cho phục hình thẩm mỹ gián tiếp khi dùng xê-măng nhựa hoặc xê-măng nhựa dán. 
+
+159
+00:30:26,013 --> 00:30:38,433
+Hầu hết các hệ thống này, trong giai đoạn đầu phát triển, không tương thích với nhiều loại đèn quang trùng hợp và không có phiên bản nào phù hợp để dán amalgam. 
+
+160
+00:30:38,433 --> 00:30:54,570
+Và bởi vì các em không kiểm soát được lượng nước của ngà răng, mặc dù các em không rửa bề mặt hay thậm chí có thổi khô đi một chút. 
+
+161
+00:30:54,570 --> 00:31:08,993
+Thì lượng nước còn sót lại trên bề mặt ngà răng vẫn sẽ làm giảm đáng kể lực dán và đe dọa đến độ bền của mối dán. 
+
+162
+00:31:09,573 --> 00:31:22,923
+Ví dụ cho hệ thống này là AdheSE hai bước của hãng Ivoclar Vivadent, và loại phổ biến nhất là Prompt L-Pop của hãng 3M dưới dạng keo dán một bước. 
+
+163
+00:31:23,533 --> 00:31:32,053
+Tiếp đến là thế hệ thứ bảy, xuất hiện từ cuối những năm hai ngàn cho đến nay. 
+
+164
+00:31:32,953 --> 00:31:47,873
+Đây là phiên bản nâng cấp của primer tự etching thế hệ thứ sáu, được tích hợp thêm chất khử trùng và chất chống ê buốt vào chung một lọ. 
+
+165
+00:31:48,503 --> 00:32:04,543
+Nó mang lại lực dán khoảng hai mươi đến hai mươi lăm megapascal, một mức khá hợp lý và lọ này đóng vai trò như chất xoi mòn, primer, keo dán, chất khử trùng và cả chất chống ê buốt. 
+
+166
+00:32:05,113 --> 00:32:25,423
+Thế hệ này giúp đơn giản hóa đáng kể quy trình dán, loại trừ các lỗi thao tác tiềm ẩn, mang lại lực dán hai mươi đến hai mươi lăm megapascal, đây là một mức rất ổn vì các em hãy nhớ, chúng ta chỉ cần từ mười bảy megapascal trở lên. 
+
+167
+00:32:25,923 --> 00:32:40,613
+Tuy nhiên, nó lại có quá nhiều nhược điểm, đó là lý do hiện nay nó không còn phổ biến, mặc dù vẫn được sản xuất nhưng hầu hết các bác sĩ lâm sàng không thích dùng. 
+
+168
+00:32:40,983 --> 00:33:09,483
+Nhược điểm lớn nhất là lượng nước đáng kể trong công thức, đặc biệt là các chất khử trùng và chống ê buốt đều mang gốc nước, điều này dẫn đến sự thủy phân và phá vỡ cấu trúc hóa học của lớp lai, khiến độ bền và lực dán trở nên thiếu ổn định. 
+
+169
+00:33:09,843 --> 00:33:34,693
+Sau khi bôi và quang trùng hợp, chúng thường ưa nước hơn hệ thống keo tự etching hai bước, dễ hấp thụ nước hơn, làm hạn chế độ sâu thâm nhập của nhựa, chính tính ưa nước này đã làm giảm chất lượng của lớp lai được tạo ra. 
+
+170
+00:33:35,023 --> 00:33:43,463
+Đó là lý do tại sao các dữ liệu lâm sàng và khoa học chứng minh rằng loại keo dán này ưa nước và bị thoái hóa rất nhanh. 
+
+171
+00:33:43,883 --> 00:34:01,954
+Bên cạnh đó, đặc tính axit của dung dịch này đã được chứng minh là phản ứng nghịch lại với hệ thống khởi phát của composite, dẫn đến tình trạng quang trùng hợp không hoàn toàn. 
+
+172
+00:34:01,954 --> 00:34:13,153
+Sự trùng hợp kém ở lớp composite đầu tiên sẽ cản trở sự liên kết đúng đắn giữa keo dán và khối vật liệu composite phục hình. 
+
+173
+00:34:13,153 --> 00:34:19,813
+Ví dụ điển hình là G-Bond của công ty GC và iBond của Kulzer. 
+
+174
+00:34:21,083 --> 00:34:27,003
+Và khoảng mười năm trước cho đến nay, thế hệ thứ tám đã ra đời. 
+
+175
+00:34:27,423 --> 00:34:33,973
+Thế hệ thứ tám được tích hợp thêm các hạt độn kích thước nano. 
+
+176
+00:34:34,573 --> 00:34:58,150
+Họ đã loại bỏ chất khử trùng và chống ê buốt của thế hệ thứ bảy, sử dụng lại công thức primer tự etching một bước của thế hệ thứ sáu, nhưng kết hợp thêm hạt độn nano giúp cải thiện khả năng keo dán thâm nhập sâu vào bên trong ngà răng. 
+
+177
+00:34:58,150 --> 00:35:04,040
+Và đồng thời, cải thiện chất lượng của lớp lai ngà răng. 
+
+178
+00:35:04,410 --> 00:35:21,150
+Chất lượng lớp lai được nâng cao nhờ thêm hạt độn và tăng độ sâu thâm nhập, do đó lớp lai của các em được cải thiện cả về chất lượng lẫn số lượng, thể hiện qua độ dày của nó. 
+
+179
+00:35:21,150 --> 00:35:35,950
+Chúng cũng là hệ thống keo tự etching lưỡng trùng hợp, rất phù hợp để dán với các vật liệu nhựa dán khi thực hiện phục hình gián tiếp. 
+
+180
+00:35:36,790 --> 00:36:02,020
+Hơn nữa, hầu hết các nhà sản xuất ghi nhận rằng vật liệu này chứa chất kháng enzym matrix metalloproteinase, giúp ức chế hoạt động phân hủy collagen, đặc biệt là khi collagen bị bộc lộ hoặc bị giáng hóa sinh học bởi lượng nước còn sót lại. 
+
+181
+00:36:02,020 --> 00:36:08,560
+Việc ức chế hoạt động enzym này sẽ làm tăng độ bền dán và hiệu quả của mối dán. 
+
+182
+00:36:08,800 --> 00:36:22,430
+Theo thực nghiệm, nó được cho là mang lại lực dán lên tới ba mươi megapascal, nghĩa là trên lâm sàng nó dễ dàng vượt qua mức tiêu chuẩn mười bảy megapascal của chúng ta. 
+
+183
+00:36:22,430 --> 00:36:31,230
+Ưu điểm của nó chính là nhờ hệ thống hạt độn nano, cũng như tác dụng chống lại enzym matrix metalloproteinase. 
+
+184
+00:36:31,230 --> 00:36:48,650
+Ví dụ cho loại này là Futurabond của hãng Voco và Tetric N-Bond Universal, và đây cũng là phần giới thiệu đầu tiên về các loại keo dán đa năng hay keo dán universal mà chúng ta sẽ thảo luận sau. 
+
+185
+00:36:48,650 --> 00:36:58,040
+Tóm lại, chúng ta có thế hệ thứ nhất gồm hai bước: xoi mòn men răng tiếp nối bằng bước bôi keo dán. 
+
+186
+00:36:58,040 --> 00:37:08,640
+Hệ thống này có hai thành phần, lực dán chỉ từ hai đến ba megapascal, và như đã đề cập, thời đó họ chưa khám phá ra sự tồn tại của lớp mùn ngà. 
+
+187
+00:37:08,640 --> 00:37:22,920
+Thế hệ thứ hai dựa trên lực hút phân cực tĩnh điện, phụ thuộc vào các hợp chất phosphonate hữu cơ. 
+
+188
+00:37:22,920 --> 00:37:29,660
+Số bước thực hiện cũng là hai, gồm xoi mòn men rồi bôi keo dán, và có hai thành phần vật liệu. 
+
+189
+00:37:29,660 --> 00:37:37,980
+Nó mang lại lực dán khiêm tốn từ hai đến bảy megapascal, và độ bền của mối dán vẫn còn nhiều nghi vấn. 
+
+190
+00:37:37,980 --> 00:38:01,980
+Tiếp theo là thế hệ thứ ba với thử nghiệm đầu tiên nhằm cố định hay thay đổi lớp mùn ngà bằng sắt oxalat, bao gồm ba bước: xoi mòn men, tiếp đến xử lý ngà bằng sắt oxalat, và cuối cùng là bôi keo dán. 
+
+191
+00:38:01,980 --> 00:38:14,040
+Số thành phần là từ hai đến ba, mang lại kết quả khá nhưng chưa thể vượt qua tiêu chuẩn kiểm tra tối thiểu của chúng ta. 
+
+192
+00:38:14,040 --> 00:38:34,300
+Lực dán chỉ đạt từ mười hai đến mười lăm megapascal, sau đó kỷ nguyên tạo lớp lai ngà răng bắt đầu bằng thế hệ thứ tư với chiến lược xoi mòn và rửa, gồm ba thành phần, mang lại lực dán lên đến hai mươi bảy megapascal. 
+
+193
+00:38:34,300 --> 00:38:44,360
+Thế hệ thứ năm là một nỗ lực giảm số bước bằng cách gom chung cả primer và keo dán vào một lọ, còn chất xoi mòn ở một lọ riêng. 
+
+194
+00:38:44,360 --> 00:38:54,120
+Vì vậy, nó vẫn thuộc nhóm xoi mòn và rửa với hai thành phần, đạt lực dán tối đa khoảng hai mươi lăm megapascal. 
+
+195
+00:38:54,120 --> 00:39:07,840
+Sau đó, gia đình tự etching ra đời với thế hệ thứ sáu, có thể được thực hiện qua hai bước hoặc một bước. 
+
+196
+00:39:07,840 --> 00:39:23,280
+Hai bước nghĩa là các em kết hợp chất xoi mòn và primer trong một lọ rồi mới quét keo dán, còn loại một bước thì gom chung tất cả, mang lại lực dán hai mươi megapascal, một mức hoàn toàn có thể chấp nhận được. 
+
+197
+00:39:23,280 --> 00:39:46,520
+Tiếp đến là thế hệ thứ bảy, keo tự etching một thành phần chứa chất khử trùng và chống ê buốt, cung cấp lực dán hai mươi đến hai mươi lăm megapascal nhưng độ bền lại bị đặt dấu hỏi. 
+
+198
+00:39:46,520 --> 00:40:08,217
+Nguyên nhân là do nó bị thoái hóa bởi tính ưa nước, và cuối cùng là thế hệ thứ tám, keo tự etching một bước, mang lại lực dán thực nghiệm trên ba mươi megapascal và ứng dụng đa năng, đây là kết luận cho phần nghiên cứu về các loại keo dán ngà của chúng ta. 
+
+199
+00:40:08,427 --> 00:40:25,327
+Nếu chúng ta đúc kết lại thiết kế của các thành phần này, đặc biệt là từ thế hệ thứ tư, thứ năm lên đến thế hệ thứ tám, tất cả đều hoạt động dựa trên cơ chế tạo lớp lai ngà răng. 
+
+200
+00:40:25,327 --> 00:40:40,687
+Các em hãy hình dung đây là cấu trúc răng ưa nước, còn đây là vật liệu phục hình kỵ nước, và ở giữa chúng, các em áp dụng ba bước hoặc ba chiến lược tương ứng. 
+
+201
+00:40:40,947 --> 00:40:46,127
+Bước một là xoi mòn, bước hai là bôi primer, và bước ba là bôi keo dán. 
+
+202
+00:40:46,127 --> 00:40:51,087
+Nếu các em thực hiện chúng tách biệt hoàn toàn, thì đó là thế hệ thứ tư. 
+
+203
+00:40:51,367 --> 00:41:17,587
+Nếu các em để chất xoi mòn là một bước, và kết hợp keo dán với primer thành một bước riêng biệt nhằm giảm thiểu các bước lâm sàng và hạn chế sai sót, giúp vật liệu thân thiện với người dùng hơn. 
+
+204
+00:41:17,697 --> 00:41:19,597
+Thì hệ thống này được gọi là thế hệ thứ năm. 
+
+205
+00:41:19,597 --> 00:41:29,847
+Nếu các em kết hợp chất xoi mòn và primer vào chung một bước, rồi bôi keo dán ở bước tiếp theo thì sao? 
+
+206
+00:41:29,987 --> 00:41:48,927
+Đó là thế hệ thứ sáu với quy trình hai bước, còn nếu gom cả ba thành phần vào chung một bước duy nhất, thì ta có thế hệ thứ sáu loại một bước, thế hệ thứ bảy và thế hệ thứ tám. 
+
+207
+00:41:48,927 --> 00:42:14,047
+Khi các em xoi mòn bề mặt men và ngà bằng một bước riêng biệt, còn primer và keo dán được dùng chung hoặc riêng lẻ, chỉ cần các em xoi mòn riêng rồi rửa sạch bằng nước, thì đó được gọi là chiến lược xoi mòn và rửa. 
+
+208
+00:42:14,297 --> 00:42:40,637
+Nhưng nếu các em gộp chất xoi mòn và primer làm một bước còn keo dán là bước khác, hoặc gộp tất cả làm một, thì các em không cần rửa bằng nước nữa mà chỉ cần thổi khô. 
+
+209
+00:42:40,637 --> 00:42:43,667
+Và đây chính là hệ thống tự etching. 
+
+210
+00:42:43,667 --> 00:43:01,187
+Nó sẽ được gọi là primer tự etching nếu keo dán nằm ở bước riêng, hoặc nếu tất cả gộp chung vào một bước thì gọi là keo dán tự etching vì thao tác dán chỉ cần thực hiện một lần duy nhất. 
+
+211
+00:43:01,187 --> 00:43:25,807
+Nếu các em nhìn vào sơ đồ phác thảo này, ở thế hệ thứ tư, chúng ta có quá trình xoi mòn để loại bỏ lớp mùn ngà, tiếp theo là quét primer và sau đó là quét keo dán. 
+
+212
+00:43:25,807 --> 00:43:55,587
+Đến thế hệ thứ năm, xoi mòn loại bỏ lớp mùn ngà, sau đó bôi chung keo dán và primer trong một bước, còn ở thế hệ thứ sáu loại hai bước, lúc này lớp mùn ngà không bị loại bỏ mà sẽ tham gia cùng keo dán để tạo thành một phần không thể thiếu của lớp lai. 
+
+213
+00:43:55,587 --> 00:44:11,837
+Đối với keo dán tự etching một bước, các em bôi tất cả cùng lúc mà không loại bỏ lớp mùn ngà, mà sẽ biến đổi, cố định và kết hợp nó vào trong lớp lai ngà răng của mình. 
+
+214
+00:44:11,837 --> 00:44:16,027
+Và đây chính là lớp lai của các em. 
+
+215
+00:44:16,027 --> 00:44:35,097
+Tuy nhiên, tính toàn vẹn của lớp lai sẽ khác nhau tùy theo hệ thống, một sơ đồ khác minh họa chiến lược xoi mòn và rửa, nơi ngà răng có các nút mùn ngà bít ống ngà và lớp mùn bề mặt. 
+
+216
+00:44:35,097 --> 00:45:03,977
+Khi xử lý ngà, các em làm bộc lộ mạng lưới collagen, loại bỏ hoàn toàn lớp mùn bề mặt, sau đó primer sẽ ngấm vào mạng lưới collagen bộc lộ và các ống ngà, theo sau là keo dán ngà, bên dưới chính là các ảnh chụp hiển vi điện tử quét mà chúng ta đã thảo luận. 
+
+217
+00:45:04,239 --> 00:45:11,649
+Với thế hệ thứ năm, chất xoi mòn là một bước, còn lọ keo dán sẽ chứa chung cả thành phần primer. 
+
+218
+00:45:14,669 --> 00:45:44,559
+Đối với chiến lược tự etching, có thể là hai bước với primer axit riêng và keo dán riêng, hoặc gộp tất cả trong một bước như các thế hệ thứ sáu, thứ bảy và thứ tám. 
+
+219
+00:45:45,169 --> 00:45:59,489
+Đó là lý do tại sao việc phân loại keo dán ngà rất dễ dàng, chúng ta có thể phân loại theo thế hệ, theo số bước thực hiện, hoặc theo chiến lược xoi mòn hay chiến lược dán. 
+
+220
+00:45:59,909 --> 00:46:25,999
+Về các thế hệ, chúng ta vừa bàn qua, thế hệ thứ nhất từ cuối năm một ngàn chín trăm năm mươi tám đến thập niên bảy mươi, thế hệ thứ hai đến giữa thập niên tám mươi, thế hệ thứ ba đến cuối thập niên tám mươi, và thế hệ thứ tư với sự tạo lớp lai vào đầu thập niên chín mươi. 
+
+221
+00:46:26,439 --> 00:46:47,479
+Tiếp đó, thế hệ thứ năm từ cuối thập niên chín mươi đến nay, thế hệ thứ sáu với primer tự etching vào đầu thế kỷ, thế hệ thứ bảy vào cuối những năm hai ngàn, và thế hệ thứ tám xuất hiện vào những năm hai ngàn không trăm mười. 
+
+222
+00:46:47,919 --> 00:46:53,229
+Các thế hệ thứ tư, thứ năm, thứ bảy và thứ tám đều dựa trên nguyên lý tạo lớp lai ngà răng. 
+
+223
+00:46:53,349 --> 00:47:06,659
+Điểm khác biệt giữa các thế hệ là thế hệ sau luôn cố gắng đơn giản hóa quy trình và khắc phục những vấn đề lâm sàng của thế hệ trước. 
+
+224
+00:47:07,269 --> 00:47:27,169
+Nếu phân loại theo số bước, chúng ta sẽ có hệ thống ba bước gồm chất xoi mòn, primer và keo dán đại diện cho thế hệ thứ tư, đây cũng là điều kiện đầu tiên được đề xuất để tạo lớp lai ngà răng. 
+
+225
+00:47:27,979 --> 00:47:37,589
+Quy trình ba bước này bắt đầu bằng việc xoi mòn rồi rửa bằng nước và thổi khô, sau đó là bôi primer và cuối cùng là bôi keo dán. 
+
+226
+00:47:37,879 --> 00:47:58,829
+Lớp primer có thể tự khô nếu chứa gốc acetone hoặc ethanol, hoặc hỗ trợ bằng cách thổi hơi nhẹ từ hai đến ba giây nếu chứa gốc nước, sau đó mới quét keo dán và tiến hành quang trùng hợp. 
+
+227
+00:47:59,399 --> 00:48:15,609
+Tiếp theo là hệ thống hai bước, loại hai bước đầu tiên ra đời khi người ta tách riêng bước xoi mòn và gom chung keo dán cùng primer vào một lọ. 
+
+228
+00:48:15,739 --> 00:48:40,039
+Đó là thế hệ thứ năm, sau đó là loại hai bước thứ hai đánh dấu sự đổi mới của primer tự etching, nơi chất xoi mòn và primer nằm chung một bước theo sau là keo dán, với hệ thống này các em hoàn toàn không cần phải rửa bằng nước nữa. 
+
+229
+00:48:40,349 --> 00:48:53,359
+Các em vừa bôi chất xoi mòn và primer trong một bước một cách tích cực, để nó tự khô vừa đủ, và một số hãng khuyên nên xịt hơi nhẹ từ hai đến ba giây trước khi quét keo dán. 
+
+230
+00:48:53,359 --> 00:49:06,259
+Và cuối cùng là loại một bước gom chung tất cả, đây là keo dán một bước thuộc thế hệ thứ sáu, thế hệ thứ bảy và thế hệ thứ tám. 
+
+231
+00:49:06,499 --> 00:49:20,979
+Sơ đồ phác thảo này rất phổ biến, nếu tìm trên Google các em sẽ thấy rất nhiều sơ đồ tương tự mô tả sự khác biệt giữa quy trình một, hai và ba bước. 
+
+232
+00:49:21,419 --> 00:49:27,429
+Nhưng điều quan trọng nhất vẫn là phân loại theo kiểu xoi mòn hay chiến lược dán. 
+
+233
+00:49:27,669 --> 00:49:34,559
+Chúng ta đã bàn luận rất nhiều về các chiến lược dán này trong những tập trước. 
+
+234
+00:49:35,219 --> 00:49:48,649
+Chúng ta có ba chiến lược dán đương đại, phụ thuộc vào cách keo dán tương tác với lớp mùn ngà và quy trình các bước thực hiện. 
+
+235
+00:49:48,909 --> 00:50:02,489
+Liệu các em sẽ loại bỏ hoàn toàn lớp mùn ngà và bôi primer, bôi keo dán ở các bước riêng rẽ, hay các em sẽ tận dụng lớp mùn ngà bằng các primer tự etching? 
+
+236
+00:50:02,989 --> 00:50:11,218
+Các chiến lược này bao gồm chiến lược dán xoi mòn và rửa ba bước, hoặc hai bước tương tự như ở các thế hệ trước. 
+
+237
+00:50:11,218 --> 00:50:17,828
+Chúng ta sẽ dùng hệ thống keo tự etching bao gồm thế hệ thứ sáu, thứ bảy cho đến thứ tám. 
+
+238
+00:50:17,828 --> 00:50:30,328
+Và một loại mới được bổ sung gần đây là chiến lược dán đa năng hay keo dán universal, có thể hoạt động ở cả chế độ xoi mòn và rửa hoặc tự etching. 
+
+239
+00:50:30,328 --> 00:50:36,088
+Chúng ta hãy bắt đầu với hệ thống dán mà trước đây được gọi là xoi mòn toàn bộ. 
+
+240
+00:50:36,088 --> 00:50:46,158
+Chiến lược này đòi hỏi việc hòa tan và loại bỏ hoàn toàn lớp mùn ngà bằng một bước sử dụng gel axit xoi mòn riêng biệt. 
+
+241
+00:50:46,158 --> 00:50:59,788
+Vì vậy, các em cần phải rửa sạch axit này, và thầy nhắc lại là axit này được bôi ít nhất ba mươi giây trên men răng và tối đa mười lăm giây trên ngà răng. 
+
+242
+00:50:59,788 --> 00:51:11,738
+Tùy thuộc vào số bước, nó có thể là hệ thống ba bước bao gồm việc xoi mòn riêng biệt ba mươi giây trên men và mười lăm giây trên ngà. 
+
+243
+00:51:11,738 --> 00:51:18,238
+Tiếp theo là rửa sạch, sau đó làm khô một chút tùy thuộc vào loại primer của các em. 
+
+244
+00:51:18,238 --> 00:51:38,328
+Các em có thể thổi khô bằng hơi nếu dùng primer gốc nước, hoặc dùng ống hút phẫu thuật kết hợp viên gòn để thấm bớt nước đọng nhằm thực hiện dán ướt khi dùng primer gốc acetone hoặc ethanol. 
+
+245
+00:51:38,328 --> 00:51:41,738
+Tiếp theo là bước quét keo dán. 
+
+246
+00:51:41,738 --> 00:51:49,358
+Như vậy đó là ba bước: chất xoi mòn hay chất xử lý bề mặt, tiếp đến là primer. 
+
+247
+00:51:49,358 --> 00:52:00,898
+Chất xoi mòn sẽ được rửa và làm khô, primer chỉ được làm khô bề mặt tự nhiên hoặc thổi hơi khô, và sau đó là keo dán cần được quang trùng hợp. 
+
+248
+00:52:00,898 --> 00:52:13,678
+Hoặc là hệ thống hai bước, trong đó xoi mòn bằng axit phosphoric là một bước riêng, còn keo dán và primer được kết hợp chung trong một lọ. 
+
+249
+00:52:13,678 --> 00:52:27,668
+Chiến lược xoi mòn và rửa sử dụng axit sẽ loại bỏ lớp mùn bề mặt và làm bộc lộ mạng lưới collagen. 
+
+250
+00:52:27,668 --> 00:52:45,058
+Ở độ sâu khoảng năm đến mười micromet, mạng lưới collagen mất khoáng này lơ lửng trong nước xịt rửa, lượng nước này cần được thay thế bởi monomer của primer như chúng ta đã thảo luận. 
+
+251
+00:52:45,058 --> 00:52:47,648
+Chúng ta đã biết primer gốc acetone hay ethanol sẽ thay thế lượng nước này như thế nào. 
+
+252
+00:52:47,648 --> 00:53:03,848
+Nhưng vấn đề thường gặp nhất, như đã đề cập, là với hệ thống này chúng ta không chắc chắn đã che phủ hoàn toàn các sợi collagen bị phơi bày, do đó enzym matrix metalloproteinase có thể được kích hoạt và làm biến tính collagen. 
+
+253
+00:53:03,848 --> 00:53:13,508
+Điều này dẫn đến thất bại của mối dán, và tồi tệ hơn cả là tình trạng nhạy cảm ê buốt sau điều trị. 
+
+254
+00:53:13,508 --> 00:53:15,618
+Đây là vấn đề phổ biến nhất ở hệ thống này. 
+
+255
+00:53:15,618 --> 00:53:22,488
+Đây là các ảnh chụp hiển vi điện tử quét cho thấy sự bao bọc của nhựa dán quanh các sợi collagen đã được xoi mòn bằng axit trong chiến lược xoi mòn và rửa. 
+
+256
+00:53:22,488 --> 00:53:45,588
+Nhưng các em có thể thấy nửa trên của mạng lưới collagen ngấm rất nhiều nhựa, trong khi nửa dưới lại không được thâm nhập hiệu quả như vậy. 
+
+257
+00:53:45,588 --> 00:53:57,518
+Điều đó chứng tỏ vẫn còn nhiều tranh cãi về khả năng nhựa thâm nhập vào các sợi collagen bị bộc lộ, và chắc chắn sẽ còn sót lại các sợi collagen không được che phủ hoặc các ống ngà chưa được bịt kín, dẫn đến nhạy cảm sau điều trị. 
+
+258
+00:53:57,518 --> 00:54:15,668
+Vì vậy, việc sử dụng hệ thống này đòi hỏi nhiều kinh nghiệm, chủ yếu dành cho các bác sĩ lành nghề chứ không dành cho sinh viên hay những người chưa có kinh nghiệm. 
+
+259
+00:54:15,668 --> 00:54:45,058
+Trong hệ thống xoi mòn và rửa, có vài cách để cải thiện hiệu quả, chẳng hạn như dùng dung dịch HEMA gốc nước để bù nước trước khi bôi primer gốc acetone nhằm đảm bảo collagen nở ra đúng mức và thúc đẩy primer thâm nhập sâu vào collagen đã bộc lộ. 
+
+260
+00:54:45,058 --> 00:54:52,888
+Và lượng nước trong dung dịch HEMA này sẽ bị đẩy ra ngoài nhờ sự bay hơi của dung môi. 
+
+261
+00:54:52,888 --> 00:55:07,238
+Ngoài ra, việc chà xát tích cực dung dịch primer cũng làm tăng sự khuếch tán và thâm nhập của nhựa vào bên trong, đồng thời kéo dài thời gian để vật liệu thấm sâu. 
+
+262
+00:55:07,727 --> 00:55:22,327
+Đối với các primer gốc acetone hay ethanol, các em có thể tăng gấp đôi hoặc gấp ba số lần quét vật liệu lên răng, đặc biệt nếu dung môi bay hơi quá nhanh. 
+
+263
+00:55:22,567 --> 00:55:31,917
+Đó là lý do tại sao khi áp dụng kỹ thuật xoi mòn và rửa trên lâm sàng, người ta khuyên các em không nên xoi mòn ngà răng quá mười lăm giây. 
+
+264
+00:55:32,137 --> 00:55:44,977
+Bởi vì xoi mòn trên mười lăm giây sẽ làm tăng sự biến tính collagen và làm tăng độ sâu khử khoáng đến mức các em không thể lấp đầy hoàn toàn bằng nhựa dán. 
+
+265
+00:55:45,367 --> 00:56:01,247
+Hãy để ngà răng hơi ẩm trước khi bôi primer, đặc biệt nếu dung môi của các em là acetone hoặc ethanol, giống như khái niệm dán ướt chúng ta đã học. 
+
+266
+00:56:01,557 --> 00:56:19,407
+Chúng ta cũng đã trả lời câu hỏi thế nào là đủ ướt và đủ khô, đó là chỉ cần hút đi lượng nước đọng bằng ống hút công suất cao, rồi dùng viên gòn để thấm bớt phần nước dư. 
+
+267
+00:56:19,737 --> 00:56:46,667
+Trong trường hợp lỡ làm ngà răng quá khô do thổi hơi quá mức, các em sẽ cần bôi các chất bù ẩm như HEMA để làm phồng lại các sợi collagen bị xẹp, giúp các primer gốc acetone, ethanol hay gốc nước có thể thấm thấu vào. 
+
+268
+00:56:46,667 --> 00:57:04,727
+Hãy bôi tích cực dung dịch primer hay keo dán trong ít nhất mười lăm giây, việc chà xát này sẽ giúp vật liệu thâm nhập sâu vào bên trong ngà răng. 
+
+269
+00:57:05,207 --> 00:57:11,837
+Đồng thời, hãy để dung môi tự bay hơi, đừng ép nó bay hơi quá nhanh. 
+
+270
+00:57:12,147 --> 00:57:20,387
+Đừng lạm dụng việc thổi hơi để ép bay hơi, trừ khi đó là vật liệu gốc nước và các em đã bôi rất nhiều lớp cần thổi nhẹ để tránh hiện tượng keo đọng quá nhiều. 
+
+271
+00:57:20,387 --> 00:57:35,507
+Chỉ cần làm khô nhẹ nhàng bằng cách thổi hơi từ hai đến ba giây. 
+
+272
+00:57:36,017 --> 00:57:55,007
+Cuối cùng, các em nên bôi nhiều lớp primer và keo dán để đảm bảo sự thâm nhập hoàn toàn vào mạng lưới collagen bị bộc lộ, vào ngà quanh ống, ngà gian ống và bên trong các ống ngà. 
+
+273
+00:57:55,007 --> 00:58:14,677
+Đặc biệt nếu dung môi của các em là acetone hay ethanol, vì mỗi lớp bôi sau sẽ hòa tan một phần lớp trước đó, giúp keo chảy sâu hơn và che phủ nhiều hơn mạng lưới bên dưới. 
+
+274
+00:58:15,057 --> 00:58:31,307
+Che phủ nhiều hơn phần collagen bị phơi bày của các em. 
+
+275
+00:58:31,307 --> 00:58:53,467
+Trong một phẫu trường cách ly tuyệt đối bằng đê cao su và có hệ thống hút áp lực cao, hãy bôi nhiều lớp primer và keo dán, cho mỗi lớp đủ thời gian để thấm vào bề mặt ngà đã được xử lý. 
+
+276
+00:58:53,757 --> 00:59:14,687
+Để bịt kín các ống ngà mở và che phủ lượng collagen bị bộc lộ, người ta phát triển chiến lược tiếp theo nhằm giảm số bước thao tác, giúp kỹ thuật bớt nhạy cảm và hạn chế vấn đề hơn. 
+
+277
+00:59:14,687 --> 00:59:27,017
+Và khi giảm thiểu số bước, các em cũng làm giảm khả năng xảy ra sai sót, đó chính là chiến lược dán tự etching. 
+
+278
+00:59:27,477 --> 00:59:54,607
+Đây là loại vật liệu thân thiện hơn với người dùng, ít nhạy cảm kỹ thuật và giúp rút ngắn thời gian thao tác. 
+
+279
+00:59:54,837 --> 01:00:06,817
+Chiến lược này chủ yếu dựa trên nguyên tắc là các em chỉ làm bộc lộ những gì các em có khả năng che phủ lại được một cách chính xác. 
+
+280
+01:00:06,817 --> 01:00:13,529
+Nó không để lại collagen bị phơi bày quá mức nhằm tránh ê buốt sau điều trị, giải quyết được vấn đề lượng nước và bỏ qua câu hỏi nhức nhối về việc thế nào là đủ ướt hay đủ khô. 
+
+281
+01:00:13,999 --> 01:00:18,469
+Và từ đó, chúng ta có một vật liệu ngấm thâm nhập hoặc làm tất cả các chức năng cùng một lúc trong một bước. 
+
+282
+01:00:18,669 --> 01:00:23,039
+Về các bước trong chiến lược dán tự etching. 
+
+283
+01:00:23,649 --> 01:00:38,459
+Nó không yêu cầu một bước xoi mòn bằng axit riêng biệt. 
+
+284
+01:00:38,799 --> 01:00:44,139
+Ngoại trừ trường hợp các em xử lý trên men răng, đây là một nhược điểm, nó không dán vào men răng tốt và hiệu quả xoi mòn thấp hơn nhiều so với hệ thống xoi mòn và rửa. 
+
+285
+01:00:44,489 --> 01:00:58,349
+Bởi vì nồng độ axit của nó không đủ mạnh như khi dùng kỹ thuật xoi mòn riêng biệt. 
+
+286
+01:00:58,849 --> 01:01:12,499
+Tuy nhiên, khi tương tác với nền collagen, nó có khả năng liên kết hiệu quả giữa các sợi collagen và hệ thống monomer có sẵn trong vật liệu này. 
+
+287
+01:01:12,849 --> 01:01:28,559
+Đó là lý do dù chất lượng lớp lai không đạt mức lý tưởng như kỹ thuật xoi mòn bằng axit, nó vẫn rất đồng đều và đủ mức đạt yêu cầu. 
+
+288
+01:01:28,789 --> 01:01:44,299
+Đây là một ảnh chụp hiển vi điện tử quét cho thấy mức độ thâm nhập nhựa đồng nhất và liền khối hơn hẳn so với kỹ thuật xoi mòn và rửa. 
+
+289
+01:01:44,299 --> 01:01:59,919
+Nhìn vào hai bức ảnh để so sánh, ảnh bên trái áp dụng kỹ thuật xoi mòn và rửa, dù lớp lai có vẻ dày hơn nhưng lại không hề đồng nhất. 
+
+290
+01:01:59,919 --> 01:02:08,179
+Nửa trên hoàn toàn khác với nửa dưới, trong khi ảnh tự etching bên phải dù độ thâm nhập mỏng hơn, nhưng nó đồng nhất hơn rất nhiều và cung cấp mức lưu giữ thỏa đáng. 
+
+291
+01:02:08,179 --> 01:02:19,808
+Và nếu các em có thể đạt được một lớp lai thỏa đáng mà không cần khử khoáng quá mức, điều đó sẽ tốt hơn nhiều so với việc khử khoáng ngà răng quá sâu, vừa vô ích lại vừa sinh ra lắm vấn đề. 
+
+292
+01:02:19,808 --> 01:02:41,528
+Với loại keo dán có tính axit mạnh, độ pH dưới một, nó cho phép tương tác sâu vài micromet vào ngà và men răng, khá hiệu quả trên men răng đã sửa soạn, nhưng cả bốn loại này đều không hiệu quả trên men răng nguyên thủy chưa sửa soạn. 
+
+293
+01:02:41,848 --> 01:03:02,728
+Loại trung bình có độ pH từ một đến hai, cho độ sâu tương tác một đến hai micromet là khá đạt yêu cầu, tiếp theo là loại yếu có pH khoảng hai, và loại cực yếu với pH trên hai phẩy năm, tạo ra một lớp lai chỉ mỏng ở mức nanomet. 
+
+294
+01:03:03,178 --> 01:03:10,328
+Nhưng tất cả các loại này đều không thích hợp để dùng trực tiếp trên men răng nguyên thủy chưa được sửa soạn. 
+
+295
+01:03:10,728 --> 01:03:39,458
+Loại mạnh và trung bình có thể phù hợp với vách men của xoang đã sửa soạn, trong khi loại yếu và cực yếu sẽ cần thêm một bước xoi mòn men răng chọn lọc trước khi bôi primer tự etching nhằm tối ưu hóa sự kết dính với men răng. 
+
+296
+01:03:40,778 --> 01:04:04,698
+Mức độ khử khoáng hay sự tương tác với lớp mùn ngà ở tất cả các loại này đều phụ thuộc vào một yếu tố, vấn đề quan trọng nhất không phải là độ pH, mà chính là giá trị pKa, tức là hằng số phân ly của axit. 
+
+297
+01:04:04,698 --> 01:04:30,258
+Trong khi pH đo nồng độ ion hydro trong dung dịch, thì pKa thể hiện tốc độ axit giải phóng hydro để hình thành liên kết mới, quyết định khả năng phản ứng của axit. 
+
+298
+01:04:30,738 --> 01:04:35,278
+Còn độ pH thì chỉ đơn thuần là quyết định mức độ axit của dung dịch đó mà thôi. 
+
+299
+01:04:35,278 --> 01:04:49,648
+Ví dụ các em có một axit nhiều hydro, làm cho độ pH rất thấp và tính axit cực mạnh, nhưng nó lại không dễ dàng phân ly như axit clohydric chỉ có một ion hydro nhưng dễ bị mất đi để kết hợp với natri. 
+
+300
+01:04:50,008 --> 01:04:51,708
+Và tạo thành muối natri clorua. 

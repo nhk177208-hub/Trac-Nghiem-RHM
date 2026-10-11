@@ -1,0 +1,1127 @@
+1
+00:00:33,284 --> 00:00:36,704
+Chào các em, thầy là Youssef Al-Cifi, một bác sĩ nha khoa người Ai Cập.
+
+2
+00:00:37,334 --> 00:00:39,994
+Thầy cũng là một người cha và là một người đàn ông của gia đình.
+
+3
+00:00:40,454 --> 00:00:49,494
+Về mặt học thuật, thầy là phó giáo sư chuyên ngành nha khoa phục hồi tại Đại học Taibah ở Ả Rập Xê Út và Đại học Ain Shams ở Ai Cập.
+
+4
+00:00:50,054 --> 00:00:51,354
+Thầy là một nhà nghiên cứu, một nhà giáo dục.
+
+5
+00:00:52,324 --> 00:00:55,774
+Thầy cũng là người sáng lập kênh chuỗi video Học Nha khoa.
+
+6
+00:00:56,554 --> 00:01:04,564
+Đồng thời, thầy là huấn luyện viên kỹ năng thuyết trình, họa sĩ bán thời gian và luôn tự hào mình là một người học tập suốt đời.
+
+7
+00:01:05,474 --> 00:01:14,284
+Thầy xin nói trước rằng mình không nhận bất kỳ khoản thù lao, bồi thường hay tiền bản quyền nào từ việc bán các sản phẩm được trình bày hoặc thảo luận.
+
+8
+00:01:14,284 --> 00:01:20,734
+Thầy cũng tuyên bố không có bất kỳ xung đột lợi ích nào đối với các sản phẩm và kỹ thuật được đề cập.
+
+9
+00:01:21,324 --> 00:01:28,184
+Tất cả các sản phẩm, thiết bị và kỹ thuật được giới thiệu đều là những thứ thường được sử dụng nhất trong thực hành lâm sàng nha khoa phục hồi chuyên nghiệp.
+
+10
+00:01:28,184 --> 00:01:38,994
+Cuối cùng, bài trình bày này không được tài trợ bởi bất kỳ công ty, cơ quan hay tổ chức nào và chỉ được chuẩn bị cho mục đích giáo dục.
+
+11
+00:01:39,464 --> 00:01:59,074
+Thầy cũng xin tuyên bố rằng bài giảng này đã được bảo vệ bản quyền, nên không phần nào của bài giảng được phép sao chép, phân phối hoặc truyền tải dưới bất kỳ hình thức hay phương tiện nào, kể cả sao chép, ghi âm hoặc các phương pháp điện tử và cơ học khác mà không có sự cho phép bằng văn bản trước của thầy.
+
+12
+00:02:00,674 --> 00:02:21,364
+Đến cuối bài giảng này, các em dự kiến sẽ thảo luận về các nguyên tắc của sự dán dính, nhận biết cơ sở lý luận và lợi ích của nha khoa dán, làm rõ nguyên lý và các nguyên tắc dán vào cả men răng và ngà răng, đồng thời ôn lại và áp dụng các bước lâm sàng để dán vào cả men răng và ngà răng.
+
+13
+00:02:21,364 --> 00:02:32,484
+Nhưng kết quả quan trọng nhất là làm thế nào để chọn được hệ thống keo dán và kỹ thuật phù hợp cho các vật liệu phục hồi và bề mặt sửa soạn khác nhau.
+
+14
+00:02:32,994 --> 00:02:35,484
+Chủ đề của chúng ta bao gồm ba phần.
+
+15
+00:02:35,484 --> 00:02:42,504
+Phần đầu tiên sẽ bao gồm cuộc thảo luận về nha khoa dán và khái niệm về sự dán dính nói chung.
+
+16
+00:02:42,504 --> 00:03:07,124
+Và phần hai sẽ nói về bề mặt nhận dán hay cấu trúc răng, bao gồm men răng và ngà răng, cùng với cách dán, những vấn đề gặp phải khi dán vào cấu trúc răng dù là men hay ngà, khái niệm về sự dán vào men và ngà, và các bước hay nguyên tắc lâm sàng khi dán vào cấu trúc răng.
+
+17
+00:03:07,514 --> 00:03:35,344
+Cuối cùng, phần ba sẽ thảo luận về bản thân chất dán, keo dán, tác nhân dán ngà, bao gồm các yêu cầu lý tưởng của nó, quá trình phát triển, phân loại, thành phần của các chất dán hiện đại, cách tăng cường tính tương thích sinh học và độ bền của liên kết dán, và cuối cùng là những khuyến nghị khi các em sử dụng phục hồi dán và khi sử dụng keo dán.
+
+18
+00:03:35,344 --> 00:03:40,854
+Chúng ta hãy bắt đầu hành trình với phần đầu tiên là lời giới thiệu về nha khoa dán.
+
+19
+00:03:42,064 --> 00:03:54,024
+Nếu chúng ta bàn về lịch sử và cách nó phát triển, thì đây không phải là một khái niệm mới mà đã có lịch sử tới bảy mươi năm trong các ngành khoa học nha khoa.
+
+20
+00:03:54,914 --> 00:04:05,104
+Bao gồm cả việc vấn đề cốt lõi ở đây chính là sự thiếu liên tục giữa răng và miếng trám tại bề mặt tiếp xúc.
+
+21
+00:04:05,684 --> 00:04:24,414
+Tại sao lại như vậy? Bởi vì chúng ta đã tạo và sửa soạn một xoang trám bao gồm cấu trúc răng là men và ngà răng với các tính chất vật lý, cơ học và thẩm mỹ nhất định khác với vật liệu phục hồi mà các em sử dụng, dù là kim loại hay phi kim loại, dù là phục hồi trực tiếp hay gián tiếp.
+
+22
+00:04:25,594 --> 00:04:40,384
+Mọi vật liệu đều có một thuộc tính vốn có gọi là hệ số giãn nở nhiệt, kiểm soát những thay đổi thể tích của nó theo sự tăng giảm hoặc dao động nhiệt độ.
+
+23
+00:04:41,174 --> 00:04:46,064
+Hệ thống phục hồi của chúng ta, bao gồm cấu trúc răng và miếng trám cũng tương tự.
+
+24
+00:04:47,164 --> 00:04:53,074
+Không có hai vật liệu nào hoàn toàn giống nhau về hệ số giãn nở và co ngót vì nhiệt.
+
+25
+00:04:53,074 --> 00:04:54,494
+Vậy thì vấn đề ở đây là gì?
+
+26
+00:04:54,494 --> 00:05:10,667
+Vấn đề là hệ thống phục hồi của chúng ta đã nằm trong một môi trường luôn biến đổi, đó là môi trường miệng khi chúng ta ăn, uống, thậm chí là hít thở, nóng và lạnh thay đổi liên tục chỉ trong vòng vài giây.
+
+27
+00:05:12,337 --> 00:05:22,667
+Mối liên hệ giữa điều này và hệ thống phục hồi của chúng ta là gì? Đó là chúng ta đang sử dụng hai vật liệu hoàn toàn khác biệt về hệ số giãn nở và co ngót vì nhiệt.
+
+28
+00:05:23,387 --> 00:05:33,877
+Khi tiếp xúc với nhau tại giao diện này, chúng phản ứng với sự tăng giảm nhiệt độ theo những cách khác nhau, từ đó tạo ra một khoảng hở.
+
+29
+00:05:34,407 --> 00:05:58,097
+Khoảng hở này tạo ra sự gián đoạn cho phép vi sinh vật, các chất kích thích và các yếu tố gây hại xâm nhập vào tủy răng, cuối cùng dẫn đến tình trạng quá mẫn cảm, đổi màu bờ miếng trám, sự xuống cấp ở viền của vật liệu phục hồi, và sâu răng tái phát do sự xâm nhập của vi sinh vật và thức ăn.
+
+30
+00:05:58,097 --> 00:05:58,907
+Đây là vấn đề chính.
+
+31
+00:06:00,827 --> 00:06:07,567
+Khi xem xét các vật liệu phục hồi làm từ nhựa nền, vấn đề này cao hơn nhiều so với amalgam.
+
+32
+00:06:08,027 --> 00:06:19,617
+Khi chọn một vật liệu phục hồi, chúng ta chọn loại vật liệu có hệ số giãn nở và co ngót vì nhiệt không hoàn toàn giống với cấu trúc răng vì điều đó là không thể.
+
+33
+00:06:20,257 --> 00:06:28,317
+Điều đó là phi thực tế, nhưng chúng ta chọn một vật liệu có hệ số giãn nở và co ngót vì nhiệt gần với cấu trúc của răng.
+
+34
+00:06:28,757 --> 00:06:55,927
+Các giá trị hệ số giãn nở và co ngót vì nhiệt càng gần với cấu trúc răng thì khoảng hở sẽ càng nhỏ, độ sát khít càng tốt, tiến triển hay hiệu suất lâm sàng của vật liệu phục hồi sẽ càng tốt và các vấn đề như sâu răng, sâu răng tái phát, quá mẫn cảm, đổi màu bờ miếng trám sẽ càng giảm.
+
+35
+00:06:57,217 --> 00:07:09,837
+Đối với các vật liệu phục hồi làm từ nhựa nền, vấn đề này còn lớn hơn nhiều vì nó xảy ra quá trình co ngót trùng hợp ngay khi nhựa trùng hợp, không có phản ứng trùng hợp nào mà không có sự co ngót.
+
+36
+00:07:11,547 --> 00:07:29,987
+Do đó, tất cả các nhà nghiên cứu đều cố gắng bịt kín khoảng hở này hoặc làm kín sự gián đoạn này bằng một khớp nối dán đàn hồi kết nối giữa chúng, giúp truyền tải ứng suất từ phần yếu nhất sang phần mạnh nhất, và tất cả chúng sẽ hoạt động như một khối thống nhất.
+
+37
+00:07:31,107 --> 00:07:32,377
+Được rồi.
+
+38
+00:07:33,377 --> 00:07:38,407
+Những thử nghiệm đầu tiên được tiến hành bởi Tiến sĩ Oscar Hager vào năm một ngàn chín trăm bốn mươi chín.
+
+39
+00:07:39,617 --> 00:07:44,757
+Ông là một nhà hóa học người Thụy Sĩ làm việc cho công ty nha khoa hợp nhất Dtray.
+
+40
+00:07:45,037 --> 00:08:03,647
+Ông đã cố gắng ứng dụng một loại vật liệu để bịt kín ống ngà, làm giảm tính thấm của ngà răng đối với các sản phẩm ăn mòn của amalgam và cải thiện độ lưu giữ bằng cách thêm đặc tính bám dính vào vật liệu amalgam.
+
+41
+00:08:04,007 --> 00:08:07,567
+Và nó bắt đầu với bề mặt ban đầu là ngà răng.
+
+42
+00:08:08,117 --> 00:08:14,807
+Và điều này có đôi chút bất ngờ vì tất cả chúng ta đều nghĩ rằng mọi thứ bắt đầu với men răng.
+
+43
+00:08:14,807 --> 00:08:17,807
+Không, tất cả các thử nghiệm đều bắt đầu với ngà răng.
+
+44
+00:08:18,517 --> 00:08:34,617
+Nhưng nó không được ghi nhận, nó không nổi tiếng, cho đến khi có những thử nghiệm của Michelle Bonacore, người đã báo cáo việc xói mòn men răng để tăng tính bám dính của vật liệu từ nhựa nền với cấu trúc răng.
+
+45
+00:08:35,497 --> 00:08:52,627
+Nhưng cũng có những thử nghiệm của Kramer và Mclean vào năm một ngàn chín trăm năm mươi hai, những người đầu tiên thực hiện các nghiên cứu thực nghiệm trong lĩnh vực dán dính vào cấu trúc răng, nhưng nó lại ít được chú ý.
+
+46
+00:08:52,627 --> 00:08:53,457
+Nó không được nổi tiếng.
+
+47
+00:08:54,537 --> 00:09:05,307
+Như thầy đã nói trước đó, cho đến nỗ lực của Bonacore vào năm một ngàn chín trăm năm mươi lăm, đó là lý do tại sao Michelle Bonacore được coi là cha đẻ của nha khoa dán.
+
+48
+00:09:06,057 --> 00:09:18,997
+Michelle Bonacore nhận thấy rằng trong sử dụng công nghiệp hay nhận xét phổ biến rằng, việc sử dụng sơn acrylic lên kim loại trong công nghiệp là rất phổ biến.
+
+49
+00:09:19,947 --> 00:09:29,957
+Các công nhân đã sử dụng axit phosphoric để xói mòn kim loại hoặc làm sạch kim loại để tăng tính bám dính giữa sơn acrylic và kim loại.
+
+50
+00:09:30,497 --> 00:09:36,297
+Ông đã thử áp dụng cùng một ý tưởng sơn kim loại này với men răng.
+
+51
+00:09:36,297 --> 00:09:54,907
+Ông đã sử dụng axit phosphoric tám mươi lăm phần trăm trong ba mươi giây và ông đã thành công trong việc tạo ra bề mặt men bị xói mòn với các vi xốp, sau đó áp dụng chất dán là chất dán nhựa đông đặc bên trong các lỗ xốp này và tạo ra khả năng bám dính hay lưu giữ vi cơ học.
+
+52
+00:09:56,477 --> 00:09:59,997
+Hãy cùng đi vào các nguyên tắc của sự dán dính và bắt đầu với định nghĩa.
+
+53
+00:09:59,997 --> 00:10:01,527
+Sự dán dính có nghĩa là gì?
+
+54
+00:10:02,317 --> 00:10:08,687
+Adhesion là một từ tiếng Latinh phát âm là adhe.kurat.
+
+55
+00:10:10,216 --> 00:10:16,716
+Ad nghĩa là tới, herement nghĩa là dính, vì vậy adhesion có nghĩa là dán dính.
+
+56
+00:10:18,116 --> 00:10:28,426
+Về mặt hóa học, nó được định nghĩa là sự tương tác giữa các phân tử bề mặt của các vật liệu không giống nhau khi chúng được đưa vào tiếp xúc gần gũi và đối diện nhau.
+
+57
+00:10:29,406 --> 00:10:34,866
+Trong khi đó, lực dính dính nội phân tử cũng tương tự, nhưng đó là sự tương tác giữa các phân tử của cùng một vật liệu.
+
+58
+00:10:35,656 --> 00:10:52,646
+Nếu chúng ta thảo luận về sơ đồ này, các em có thể thấy rằng có một lực dính dính nội phân tử giữa các vật liệu giống nhau được thể hiện bằng màu xanh lam và liên kết giữa hai vật liệu khác nhau, màu xanh lam và màu đỏ, là lực dán dính.
+
+59
+00:10:53,686 --> 00:11:05,536
+Đó là lý do tại sao nếu các em coi phần màu xám là một bề mặt răng và phần còn lại là vật liệu phục hồi, và ở giữa chúng là chất kết dính, keo dán hay chất dán.
+
+60
+00:11:06,146 --> 00:11:11,116
+Lực hút giữa các phân tử của chính bản thân chất dán là một liên kết nội phân tử.
+
+61
+00:11:12,126 --> 00:11:26,956
+Trong khi đó, lực hút hay liên kết giữa chất dán và cấu trúc răng, giữa chất dán và composite hoặc miếng trám là một liên kết dán dính. Đó là sự khác biệt giữa hai liên kết này.
+
+62
+00:11:27,976 --> 00:11:35,846
+Bề mặt nhận dán là bề mặt mà chúng ta sẽ dán vào, bề mặt mà chúng ta sẽ bôi vật liệu dán lên.
+
+63
+00:11:35,846 --> 00:11:46,686
+Trong khi đó, chất dán chính là bản thân keo dán, là vật liệu mà khi bôi lên bề mặt chất có thể kết nối chúng lại với nhau.
+
+64
+00:11:46,686 --> 00:11:54,686
+Nó là một chất lỏng nhớt sẽ đông đặc lại và truyền tải ứng suất giữa hai bề mặt.
+
+65
+00:11:55,816 --> 00:12:01,626
+Hãy nhớ cụm từ truyền tải ứng suất giữa hai bề mặt.
+
+66
+00:12:02,606 --> 00:12:17,026
+Sau đó tại sơ đồ này, chúng ta có thể nhận thấy rằng ở bên trái có một bề mặt nhận dán, sau đó chúng ta bôi chất dán và ở giữa chúng có một bề mặt tiếp xúc.
+
+67
+00:12:17,836 --> 00:12:34,346
+Từ phía bên kia, chúng ta sẽ áp dụng một bề mặt nhận dán khác, sau đó ở giữa chúng sẽ là hệ thống dán hoặc xê măng gắn với một bề mặt tiếp xúc khác, tất cả những thứ này tạo thành khớp nối dán và quá trình dán.
+
+68
+00:12:35,416 --> 00:12:50,646
+Và các em có thể nhận thấy phần màu vàng này là chất dán kết nối hai bề mặt nhận dán, và đó là lý do tại sao bất kỳ lực nào tác dụng lên một trong số chúng đều có thể truyền tải ứng suất sang phần kia và ngược lại.
+
+69
+00:12:51,846 --> 00:13:00,116
+Cường độ liên kết dán là thước đo khả năng chịu tải của lõi dán trước khi nó bị phá vỡ.
+
+70
+00:13:00,766 --> 00:13:08,046
+Và độ bền của liên kết là khoảng thời gian mà liên kết vẫn giữ được hiệu quả và không bị phá vỡ.
+
+71
+00:13:09,956 --> 00:13:33,256
+Liên kết phải chịu nhiều loại ứng suất khác nhau bao gồm lực căng, lực cắt, lực tách nứt, lực bóc tách trong khoang miệng, hay chính xác hơn là trong quy trình phục hồi, chúng ta phải xử lý lực căng và lực cắt nhiều hơn so với lực tách nứt và lực bóc tách vốn rất hiếm gặp trong quy trình phục hồi hoặc nha khoa phục hồi.
+
+72
+00:13:34,336 --> 00:13:41,916
+Một trong những yếu tố quan trọng nhất là năng lượng bề mặt, như một yếu tố chính tạo nên sự thành công của quy trình dán.
+
+73
+00:13:42,696 --> 00:13:43,866
+Năng lượng bề mặt là gì?
+
+74
+00:13:44,696 --> 00:13:51,866
+Để hình dung về năng lượng bề mặt, chúng ta hãy xem xét khối lập phương của bất kỳ vật liệu nào.
+
+75
+00:13:53,066 --> 00:13:54,666
+Đây là một mảnh của một vật liệu bất kỳ.
+
+76
+00:13:55,636 --> 00:14:01,586
+Bên trong nó, có các nguyên tử được sắp xếp theo cấu trúc không gian của vật liệu, đúng không?
+
+77
+00:14:02,376 --> 00:14:07,606
+Các nguyên tử này được liên kết với nhau bằng liên kết giữa các nguyên tử.
+
+78
+00:14:10,626 --> 00:14:19,816
+Độ lớn của liên kết giữa các nguyên tử và khoảng cách giữa các nguyên tử phân loại vật liệu thành chất khí, chất lỏng và chất rắn.
+
+79
+00:14:21,346 --> 00:14:22,736
+Hãy xem xét chất rắn.
+
+80
+00:14:23,916 --> 00:14:31,616
+Được rồi, chất rắn có liên kết giữa các nguyên tử cao và khoảng cách giữa các nguyên tử nhỏ hơn.
+
+81
+00:14:32,146 --> 00:14:35,816
+Nhưng còn bản thân nguyên tử, sự ổn định của nguyên tử thì sao?
+
+82
+00:14:37,406 --> 00:14:41,706
+Các em hãy xem xét nguyên tử lõi hoặc nguyên tử trung tâm này.
+
+83
+00:14:42,596 --> 00:14:49,296
+Nó là nguyên tử ổn định nhất vì như các em có thể thấy, nó được liên kết với tám nguyên tử khác.
+
+84
+00:14:50,826 --> 00:14:56,686
+Trong khi đó, các nguyên tử khác kém ổn định hơn, các nguyên tử khác ở bề mặt thì bị bao quanh từ bốn phía.
+
+85
+00:14:58,826 --> 00:15:08,696
+Mỗi nguyên tử trong số đó để đạt được sự ổn định cần phải có tám liên kết, nhưng thực tế thì một nguyên tử có ba, một nguyên tử có năm, một nguyên tử có ba, một nguyên tử có năm và
+
+86
+00:15:10,166 --> 00:15:13,256
+như các em có thể nhận thấy trên sơ đồ này, trong sơ đồ này.
+
+87
+00:15:14,877 --> 00:15:23,367
+Để được ổn định, mỗi nguyên tử trong số chúng phải thỏa mãn và có đủ tám liên kết.
+
+88
+00:15:24,997 --> 00:15:32,747
+Các liên kết còn lại màu cam ở bề mặt chính là năng lượng bề mặt tự do.
+
+89
+00:15:34,117 --> 00:15:41,717
+Để các nguyên tử này ổn định, nó phải hút bất kỳ thứ gì, bao gồm cả bụi bẩn, chất bẩn hay bất cứ thứ gì.
+
+90
+00:15:42,127 --> 00:15:51,007
+Và tùy thuộc vào số lượng các liên kết tự do này, độ bền và sự ổn định của liên kết sẽ cao hơn.
+
+91
+00:15:53,397 --> 00:16:10,807
+Vì vậy, để dán dính tốt, các em cần năng lượng bề mặt dư thừa hoặc vật liệu có năng lượng bề mặt cao, và các em nên nhắm đến việc cải thiện và tăng cường năng lượng bề mặt của bề mặt mà các em đang dán dính vào.
+
+92
+00:16:11,507 --> 00:16:18,207
+Vì vậy, năng lượng bề mặt được định nghĩa là năng lượng dư thừa ở bề mặt của vật liệu so với phần thân của nó.
+
+93
+00:16:19,357 --> 00:16:28,587
+Nhưng các em nên cân nhắc rằng năng lượng bề mặt có thể bị tiêu hao và lãng phí bởi bụi bẩn và chất gây ô nhiễm trên bề mặt, đó là lý do tại sao.
+
+94
+00:16:29,797 --> 00:16:41,337
+Tất cả các bề mặt được sử dụng trong quy trình dán phải được làm sạch và làm khô tuyệt đối trước khi bôi vật liệu dán để giải phóng năng lượng bề mặt.
+
+95
+00:16:42,437 --> 00:16:48,507
+Đây là một trong những yếu tố quan trọng nhất quyết định sự thành công của quy trình dán.
+
+96
+00:16:49,287 --> 00:16:56,127
+Điều này liên quan đến các chất rắn hoặc bề mặt nhận dán bao gồm cả cấu trúc răng.
+
+97
+00:16:56,397 --> 00:16:59,637
+Nhưng còn bản thân chất keo hay chất dán thì sao?
+
+98
+00:16:59,757 --> 00:17:00,217
+Nó là một chất lỏng.
+
+99
+00:17:01,137 --> 00:17:07,557
+Chất lỏng đã có liên kết giữa các nguyên tử yếu hơn và khoảng cách giữa các nguyên tử lớn hơn.
+
+100
+00:17:09,087 --> 00:17:17,607
+Có một yếu tố khác ảnh hưởng đến sự thành công của quy trình dán liên quan đến bản thân chất lỏng dán dính.
+
+101
+00:17:17,607 --> 00:17:20,437
+Đó là khả năng thấm ướt của vật liệu.
+
+102
+00:17:20,767 --> 00:17:29,427
+Thấm ướt được định nghĩa là khả năng của một vật liệu lỏng lan tỏa và chảy dễ dàng trên toàn bộ bề mặt và bám dính vào nó.
+
+103
+00:17:31,737 --> 00:17:34,357
+Điều này liên quan đến sức căng bề mặt của chất lỏng.
+
+104
+00:17:34,557 --> 00:17:36,347
+Sức căng bề mặt của chất lỏng là gì?
+
+105
+00:17:36,507 --> 00:17:42,027
+Về sức căng bề mặt của chất lỏng, một số chất lỏng có liên kết giữa các nguyên tử cao hơn những chất khác.
+
+106
+00:17:42,437 --> 00:17:50,817
+Liên kết giữa các nguyên tử cao hơn này làm cho giọt chất lỏng có hình cầu hoặc có xu hướng hình cầu.
+
+107
+00:17:51,327 --> 00:17:53,717
+Nó không lan tỏa dễ dàng trên bề mặt.
+
+108
+00:17:53,947 --> 00:18:03,067
+Tại sao? Bởi vì nó được thu hẹp lại hoặc kết nối với nhau làm cho giọt nước có hình tròn hoặc hình cầu.
+
+109
+00:18:04,047 --> 00:18:05,627
+Ví dụ cho điều này là thủy ngân.
+
+110
+00:18:06,067 --> 00:18:12,077
+Thủy ngân là kim loại, nhưng lại ở dạng lỏng ở nhiệt độ phòng.
+
+111
+00:18:13,527 --> 00:18:19,997
+Thủy ngân có sức căng bề mặt cao hơn dẫn đến khả năng thấm ướt thấp hơn.
+
+112
+00:18:20,917 --> 00:18:24,767
+Và các em không thể phá vỡ liên kết giữa các nguyên tử của nó.
+
+113
+00:18:24,767 --> 00:18:27,457
+Đó là lý do tại sao các em nên đánh trộn amalgam.
+
+114
+00:18:31,147 --> 00:18:32,097
+Tại sao lại phải đánh trộn?
+
+115
+00:18:32,497 --> 00:18:34,827
+Nếu các em ôn lại về miếng trám amalgam,
+
+116
+00:18:39,357 --> 00:18:49,347
+quy trình đánh trộn nhằm mục đích đầu tiên là làm giảm sức căng bề mặt của thủy ngân, đồng thời tăng khả năng chảy lỏng và khả năng thấm ướt của nó.
+
+117
+00:18:49,887 --> 00:18:50,827
+Như thế nào?
+
+118
+00:18:51,187 --> 00:18:54,707
+Khi các em đánh trộn amalgam, nó tạo ra nhiệt ma sát.
+
+119
+00:18:54,707 --> 00:19:17,497
+Nhiệt này đáp ứng đủ để giải phóng nguyên tử khỏi liên kết, các nguyên tử sẽ có năng lượng dư thừa để giải phóng liên kết giữa các nguyên tử trên bề mặt và làm tăng khoảng cách giữa các nguyên tử, cho phép hợp kim thâm nhập và cho phép thiếc thâm nhập để bắt đầu phản ứng với thủy ngân.
+
+120
+00:19:19,607 --> 00:19:21,827
+Đó là sức căng bề mặt và sự thấm ướt.
+
+121
+00:19:22,607 --> 00:19:29,267
+Đối với quy trình dán, chúng ta cần bề mặt có sức căng bề mặt thấp nhất và khả năng thấm ướt cao nhất.
+
+122
+00:19:30,767 --> 00:19:34,467
+Đối với chất lỏng là keo dán.
+
+123
+00:19:34,777 --> 00:19:42,017
+Nhưng đối với bề mặt nhận dán, chúng ta cần năng lượng bề mặt cao hơn để thu hút các phân tử của chất lỏng và bám dính vào nó.
+
+124
+00:19:43,617 --> 00:19:46,677
+Khả năng thấm ướt bề mặt được đo bằng góc tiếp xúc.
+
+125
+00:19:46,987 --> 00:19:54,267
+Đó là góc tạo bởi chất dán và bề mặt nhận dán hoặc bề mặt tiếp xúc tại giao diện.
+
+126
+00:19:54,927 --> 00:20:03,297
+Góc tiếp xúc của bề mặt càng nhỏ thì sự thấm ướt của keo dán càng nhiều và quy trình dán sẽ càng thành công.
+
+127
+00:20:03,777 --> 00:20:09,907
+Hãy hình dung những bề mặt này và chúng ta có một giọt chất lỏng lan tỏa trên đó.
+
+128
+00:20:11,772 --> 00:20:12,172
+Được rồi.
+
+129
+00:20:12,912 --> 00:20:14,592
+Đây được gọi là sự thấm ướt.
+
+130
+00:20:15,132 --> 00:20:19,922
+Góc tiếp xúc ở đâu? Nó là góc giữa bề mặt và tiếp tuyến của giọt nước này.
+
+131
+00:20:20,212 --> 00:20:21,552
+Đây là góc tiếp xúc.
+
+132
+00:20:22,332 --> 00:20:24,332
+Chúng ta có rất nhiều khả năng.
+
+133
+00:20:25,492 --> 00:20:34,112
+Hoặc là chúng ta có độ thấm ướt tốt với độ lan tỏa tối đa, hoặc thấm ướt một phần, hoặc thấm ướt kém như amalgam.
+
+134
+00:20:34,922 --> 00:20:45,602
+Điều này được chi phối bởi góc tiếp xúc, để thấm ướt tốt các em nên có góc tiếp xúc nhỏ hơn và để thấm ướt kém thì góc tiếp xúc lớn nhất.
+
+135
+00:20:46,132 --> 00:20:47,522
+Ở sơ đồ này, được chứ?
+
+136
+00:20:48,892 --> 00:21:03,512
+Một lần nữa, để bám dính tốt hơn, năng lượng bề mặt của bề mặt nhận dán phải cao hơn, do đó các em nên làm sạch và làm khô nó, cao hơn sức căng bề mặt của chất lỏng dán để cung cấp sự thấm ướt tốt của chất dán với cường độ liên kết dán cao hơn.
+
+137
+00:21:04,402 --> 00:21:21,972
+Sơ đồ này thảo luận hay giải thích rằng các em sẽ thấy tình huống tốt nhất để dán dính thích hợp và để liên kết bền vững là năng lượng bề mặt cao của bề mặt nhận dán với khả năng thấm ướt tốt của chất dán.
+
+138
+00:21:23,062 --> 00:21:33,492
+Trong khi đó, điều kiện tồi tệ nhất là năng lượng bề mặt thấp với không thấm ướt hoặc tăng sức căng bề mặt hoặc góc tiếp xúc rất cao.
+
+139
+00:21:34,612 --> 00:21:36,062
+Thế còn về các cơ chế dán dính thì sao?
+
+140
+00:21:36,362 --> 00:21:42,162
+Các cơ chế dán dính, có ba cơ chế dán dính, là cơ học, hóa học, tĩnh điện.
+
+141
+00:21:43,062 --> 00:21:48,912
+Hay chúng ta hãy nói các chế độ tương tác giữa bề mặt nhận dán và chất dán là gì.
+
+142
+00:21:50,032 --> 00:22:00,062
+Cơ chế đơn giản nhất và đầu tiên được phát hiện hoặc áp dụng, hãy nói là được áp dụng bởi Michel Bonocore là sự dán dính cơ học.
+
+143
+00:22:00,372 --> 00:22:17,432
+Sự dán dính cơ học có nghĩa là các em có các lỗ vi xốp trong đó các em bôi chất dán đông đặc lại bên trong, tạo ra các ngàm vi cơ học và dẫn đến sự dán dính vi cơ học.
+
+144
+00:22:18,042 --> 00:22:19,672
+Ví dụ, quá trình xói mòn men răng.
+
+145
+00:22:21,242 --> 00:22:23,072
+Quy trình này được phát minh bởi Michel Bonocore.
+
+146
+00:22:24,582 --> 00:22:40,212
+Nhưng liệu nó có thể trải qua một phản ứng hóa học hoặc một liên kết hóa học giữa chất nền, bề mặt nhận dán và keo dán không, liệu chúng có thể phản ứng với nhau hay liên kết với nhau về mặt hóa học không?
+
+147
+00:22:41,302 --> 00:22:43,582
+Hãy cùng thảo luận về điều này.
+
+148
+00:22:44,062 --> 00:22:46,022
+Có một sự dán dính hóa học.
+
+149
+00:22:46,802 --> 00:22:55,852
+Sự dán dính hóa học là một quy trình dán bằng cách làm thay đổi các nguyên tử hoặc phân tử ở bề mặt tiếp xúc.
+
+150
+00:22:56,512 --> 00:23:01,692
+Nó đề cập đến lực năng lượng giữa các nguyên tử hoặc phân tử tại giao diện.
+
+151
+00:23:02,472 --> 00:23:07,612
+Và nó có thể diễn ra theo hai cách, hoặc là hấp phụ hoặc là khuếch tán.
+
+152
+00:23:07,862 --> 00:23:08,712
+Sự khác biệt là gì?
+
+153
+00:23:09,432 --> 00:23:21,692
+Hấp phụ, nó diễn ra khi liên kết hóa học phát triển giữa chất dán và bề mặt nhận dán bao gồm các lực hóa trị ion và cộng hóa trị sơ cấp tại bề mặt, có một bề mặt tiếp xúc.
+
+154
+00:23:24,162 --> 00:23:29,512
+Chúng chỉ dừng lại ở giao diện, được chứ, ở giữa nhau.
+
+155
+00:23:29,992 --> 00:23:30,592
+Đối mặt với nhau.
+
+156
+00:23:31,182 --> 00:23:35,572
+Nhưng điều gì là mạnh mẽ hơn, được chứ, hoặc mạnh mẽ hơn là sự khuếch tán hóa học.
+
+157
+00:23:37,642 --> 00:23:45,602
+Đó là sự kết hợp tại giao diện cho phép sự biến mất của giao diện này.
+
+158
+00:23:48,142 --> 00:23:56,522
+Các nguyên tử từ mỗi bên vượt qua và phản ứng với các phân tử từ bên kia, giống như sơ đồ hoạt hình này.
+
+159
+00:23:57,022 --> 00:23:58,952
+Được rồi? Sẽ không có bề mặt tiếp xúc nào cả.
+
+160
+00:23:59,432 --> 00:24:00,902
+Ví dụ cho điều này, là hàn.
+
+161
+00:24:01,942 --> 00:24:05,772
+Đây là cường độ liên kết mạnh nhất và bền bỉ nhất.
+
+162
+00:24:06,832 --> 00:24:13,712
+Và chúng ta hướng tới việc đạt được loại bám dính này giữa miếng trám và cấu trúc răng.
+
+163
+00:24:13,892 --> 00:24:18,822
+Nó có diễn ra nhưng rất hiếm và tỷ lệ của nó không đáng kể đến mức đó.
+
+164
+00:24:20,232 --> 00:24:22,572
+Tiếp theo, cái cuối cùng là cơ chế tĩnh điện.
+
+165
+00:24:24,662 --> 00:24:30,142
+Cơ chế tĩnh điện, nó rất dễ hiểu và tất cả chúng ta đều chơi trò này khi còn nhỏ, đúng không?
+
+166
+00:24:31,092 --> 00:24:46,472
+Một vật thể mang điện tích khác nhau sẽ hút một vật thể khác mang điện tích khác nhau, một điện tích dương và một điện tích âm hút nhau cho đến khi cả hai đều trung hòa và liên kết bị phá vỡ.
+
+167
+00:24:47,272 --> 00:24:51,342
+Vì vậy, nó không bền và không ổn định.
+
+168
+00:24:51,812 --> 00:25:03,652
+Hãy nhớ rằng các điện tích khác nhau giữa hai vật thể khác nhau sẽ hút nhau cho đến khi chúng trung hòa, chúng hoàn toàn bị trung hòa, chúng trung hòa lẫn nhau.
+
+169
+00:25:04,702 --> 00:25:10,278
+Và một khi chúng được trung hòa, cuối cùng, liên kết sẽ thất bại.
+
+170
+00:25:10,948 --> 00:25:19,808
+Ví dụ về điều đó là quần áo hút lông tay hoặc lông chân, thước kẻ hút giấy, mẩu giấy, đúng không?
+
+171
+00:25:20,378 --> 00:25:26,458
+Và đôi khi giữa kim loại và polymer, có một sự dán dính tĩnh điện không ổn định.
+
+172
+00:25:30,405 --> 00:25:54,785
+Nếu chúng ta sắp xếp các cơ chế dán dính từ cao nhất đến thấp nhất, chúng ta sẽ thấy rằng sự khuếch tán là cao nhất, cung cấp cường độ liên kết bền bỉ nhất, tiếp theo là sự hấp phụ, tiếp theo là sự dán dính cơ học, tiếp theo là sự dán dính tĩnh điện.
+
+173
+00:25:55,785 --> 00:25:59,145
+Thế còn về việc dán nhựa vào cấu trúc răng thì sao?
+
+174
+00:26:00,585 --> 00:26:02,125
+Các cơ chế thì sao?
+
+175
+00:26:03,225 --> 00:26:05,105
+Chúng ta có bốn cơ chế có thể xảy ra.
+
+176
+00:26:05,715 --> 00:26:23,935
+Sự dán dính cơ học, đó là sự thâm nhập của nhựa vào cấu trúc răng và sự hình thành các đuôi nhựa, có thể với men răng đã xói mòn hoặc ngà răng đã được xử lý bên trong các vi lỗ được tạo ra bằng cách xói mòn men răng và bên trong mạng lưới collagen được tạo ra bằng cách xử lý ngà răng.
+
+177
+00:26:24,835 --> 00:26:36,325
+Sự hấp phụ, cái thứ hai, là liên kết hóa học của thành phần vô cơ hoặc thành phần hữu cơ của cấu trúc răng, các thành phần hữu cơ với chất dán.
+
+178
+00:26:36,805 --> 00:26:44,905
+Sự khuếch tán, đó là sự kết tủa của chất trên bề mặt răng mà các phân tử đơn phân nhựa có thể liên kết cơ học hoặc hóa học.
+
+179
+00:26:44,905 --> 00:26:54,275
+Và nó rất hiếm, chúng ta hướng tới việc tăng cường sự tham gia của sự khuếch tán thay vì chỉ cơ học và hấp phụ.
+
+180
+00:26:54,925 --> 00:27:04,295
+Và cuối cùng, nó thường được coi là sự kết hợp nhưng với các tỷ lệ khác nhau trong sự dán dính với cấu trúc răng.
+
+181
+00:27:05,565 --> 00:27:11,735
+Để có được sự dán dính tối ưu cho tất cả các loại chất dán đều giống nhau.
+
+182
+00:27:12,565 --> 00:27:29,275
+Nếu các em có cái này, là keo dán gia dụng hoặc công nghiệp như epoxy, dựa trên chất xúc tác và chỉ cần lật xô của các em lại, các em sẽ tìm thấy các hướng dẫn.
+
+183
+00:27:29,545 --> 00:27:38,355
+Tất cả các hướng dẫn đều giống nhau, bao gồm dán giấy, gỗ hoặc kim loại hoặc thậm chí cả cấu trúc răng đều cùng một khái niệm.
+
+184
+00:27:38,885 --> 00:27:42,355
+Điều thứ nhất trong các hướng dẫn là làm sạch bề mặt nhận dán.
+
+185
+00:27:42,985 --> 00:27:45,565
+Để loại bỏ bất kỳ bụi bẩn nào, tại sao?
+
+186
+00:27:46,645 --> 00:27:51,135
+Bởi vì bụi bẩn đã chiếm mất năng lượng bề mặt, năng lượng bề mặt tự do của bề mặt đó.
+
+187
+00:27:51,365 --> 00:27:55,785
+Đó là lý do tại sao các em nên làm sạch bề mặt để tăng năng lượng bề mặt.
+
+188
+00:27:56,575 --> 00:27:59,135
+Để sử dụng toàn bộ sức mạnh của năng lượng bề mặt tự do.
+
+189
+00:27:59,735 --> 00:28:05,105
+Loại bỏ bụi bẩn, loại bỏ các chất ô nhiễm, bề mặt đó phải sạch và khô.
+
+190
+00:28:05,525 --> 00:28:06,195
+Đó là bước đầu tiên.
+
+191
+00:28:06,655 --> 00:28:13,845
+Bước thứ hai, bôi keo dán của các em hay bôi chất dán của các em và để nó lan tỏa.
+
+192
+00:28:16,025 --> 00:28:17,365
+Cho phép nó lan tỏa.
+
+193
+00:28:18,045 --> 00:28:20,885
+Để nó thấm ướt hoặc làm ướt bề mặt.
+
+194
+00:28:21,525 --> 00:28:24,835
+Sau đó cho phép nó tương thích gần gũi.
+
+195
+00:28:26,345 --> 00:28:30,445
+Nên được nhồi ép, sau đó cho phép nó dán dính.
+
+196
+00:28:30,725 --> 00:28:40,715
+Sự dán dính này có thể là vật lý giữa các điện tích âm và dương, hóa học, có thể là hấp phụ hoặc khuếch tán và cơ học dưới hình thức lồng ghép cơ học.
+
+197
+00:28:41,175 --> 00:28:47,145
+Cuối cùng là chiếu đèn trùng hợp để làm đông đặc chất dán của các em.
+
+198
+00:28:47,855 --> 00:28:51,385
+Và đó là tất cả quy trình dán.
+
+199
+00:28:52,475 --> 00:29:02,845
+Dù là keo dán, hay chất dán gia dụng, hoặc chất dán công nghiệp hay thậm chí là chất dán với cấu trúc răng.
+
+200
+00:29:03,575 --> 00:29:11,595
+Cuối cùng, khi chúng ta giới thiệu khái niệm dán vào nha khoa phục hồi, chúng ta đạt được những lợi ích gì?
+
+201
+00:29:12,585 --> 00:29:13,355
+Tại sao?
+
+202
+00:29:14,585 --> 00:29:17,825
+Những lợi ích của nha khoa phục hồi dán là gì?
+
+203
+00:29:18,195 --> 00:29:25,105
+Như chúng ta đã đề cập ở phần giới thiệu, đầu tiên, nó chủ yếu được thiết kế để giảm thiểu khoảng hở.
+
+204
+00:29:26,915 --> 00:29:32,235
+giữa răng và miếng trám tại bề mặt tiếp xúc, đặc biệt là với vật liệu phục hồi làm từ nhựa nền.
+
+205
+00:29:33,995 --> 00:29:37,795
+Đó được gọi là giảm thiểu vi kẽ.
+
+206
+00:29:38,785 --> 00:29:56,945
+Vi kẽ sau đó sẽ dẫn đến sự hình thành khoảng hở, đó là sự rò rỉ vi thể, sự nhạy cảm sau phục hồi, sự đổi màu, sâu răng tái phát, ảnh hưởng đến tủy răng, sự xuống cấp của vật liệu phục hồi tại bề mặt tiếp xúc và sự thất bại của toàn bộ quy trình phục hồi.
+
+207
+00:29:57,225 --> 00:30:00,375
+Nhưng nó cũng cung cấp rất nhiều ưu điểm.
+
+208
+00:30:01,475 --> 00:30:03,775
+Như nó tối đa hóa việc bảo tồn răng.
+
+209
+00:30:04,415 --> 00:30:09,265
+Các em không cần phải cắt bỏ thêm các cấu trúc lưu giữ.
+
+210
+00:30:11,405 --> 00:30:22,220
+Khi các em cần hy sinh quá nhiều cấu trúc răng quý giá vì mục đích lưu giữ, để thêm sự lưu giữ, hãy chuyển sang phục hồi dán.
+
+211
+00:30:22,780 --> 00:30:27,840
+Nó tốt hơn nhiều, nó bảo tồn cấu trúc răng nhiều hơn và các em sẽ thấy các ca bệnh ngay bây giờ, được chứ.
+
+212
+00:30:28,840 --> 00:30:34,600
+Nó cũng cung cấp sự ổn định và lưu giữ lâu dài của vật liệu phục hồi.
+
+213
+00:30:34,600 --> 00:30:49,130
+Nhưng nó được coi là tính năng lưu giữ bổ sung, chủ yếu nó cải thiện sự sát khít và nó không thể bỏ qua sự lưu giữ ban đầu.
+
+214
+00:30:49,130 --> 00:30:55,230
+Một lần nữa, các em không được phép chuẩn bị một khoang trám với bất kỳ hướng vách nào.
+
+215
+00:30:55,230 --> 00:31:00,480
+Với vách phân kỳ và các em dựa vào độ dán dính để ổn định miếng trám của mình.
+
+216
+00:31:00,480 --> 00:31:02,780
+Các em vẫn cần đến sự lưu giữ ban đầu.
+
+217
+00:31:03,640 --> 00:31:05,120
+Các em vẫn cần tạo vùng lẹm.
+
+218
+00:31:05,620 --> 00:31:14,070
+Các em đang cải thiện sự lưu giữ này và cải thiện sự sát khít, nhưng nó không thể thay thế cho ranh giới ban đầu.
+
+219
+00:31:15,070 --> 00:31:26,670
+Như chúng ta cũng đã đề cập, truyền tải ứng suất, nó cho phép truyền tải ứng suất giữa múi răng yếu và múi răng khỏe, vật liệu yếu và vật liệu mạnh.
+
+220
+00:31:28,890 --> 00:31:34,420
+Đó là lý do tại sao, nó cho phép củng cố cấu trúc răng bị suy yếu còn lại.
+
+221
+00:31:35,970 --> 00:31:47,170
+Việc giới thiệu sự dán dính, làm tăng phạm vi ứng dụng của vật liệu phục hồi thẩm mỹ và chúng ta có thể thảo luận một số ca bệnh cụ thể ngay bây giờ.
+
+222
+00:31:48,890 --> 00:32:00,660
+Bây giờ chúng ta hãy xem lại một số ca lâm sàng như trường hợp này, nó có vẻ đơn giản, có vẻ chỉ là sâu rãnh và hố, nhưng khi mở ra, nó sẽ biến mất như thế này.
+
+223
+00:32:01,560 --> 00:32:04,040
+Được rồi, chúng ta coi nó như một xoang trám loại một.
+
+224
+00:32:04,560 --> 00:32:08,940
+Hãy suy nghĩ về ca lâm sàng này theo khái niệm cũ.
+
+225
+00:32:10,350 --> 00:32:14,090
+Và hãy xem lại nó theo khái niệm mới về nha khoa dán.
+
+226
+00:32:14,890 --> 00:32:18,490
+Từ quan điểm của khái niệm cũ bởi bác sĩ G.V. Black.
+
+227
+00:32:21,820 --> 00:32:27,710
+Các nguyên tắc sửa soạn xoang của G.V. Black hướng dẫn chúng ta loại bỏ tất cả men răng không có ngà nâng đỡ.
+
+228
+00:32:29,020 --> 00:32:30,950
+Và các múi răng yếu cần được bảo vệ.
+
+229
+00:32:34,020 --> 00:32:35,650
+Chúng ta hãy xem lại ca bệnh này.
+
+230
+00:32:37,010 --> 00:32:40,460
+Múi ngoài gần có rất nhiều men răng không có ngà nâng đỡ.
+
+231
+00:32:41,680 --> 00:32:44,650
+Múi ngoài xa có rất nhiều men răng không có ngà nâng đỡ.
+
+232
+00:32:45,180 --> 00:32:53,940
+Bây giờ chúng ta không thảo luận về việc sâu răng này hay liệu đây là sâu răng hay là sâu răng mãn tính đã ngừng phát triển, hay nó bị ảnh hưởng hay bị nhiễm trùng.
+
+233
+00:32:54,410 --> 00:33:01,210
+Nhưng thực sự chúng ta nên dừng lại ở mức này vì đây thực sự là sâu răng đã ngừng phát triển và các em không nên loại bỏ nó.
+
+234
+00:33:01,610 --> 00:33:04,380
+Được rồi, nhưng đây không phải là vấn đề để thảo luận ngay bây giờ.
+
+235
+00:33:04,580 --> 00:33:05,770
+Nó nằm ngoài phạm vi thảo luận của chúng ta.
+
+236
+00:33:07,190 --> 00:33:16,920
+Nếu các em làm theo hướng dẫn của G.V. Black thì với mũi tên, các em nên loại bỏ toàn bộ phần này và các em nên loại bỏ toàn bộ phần này, khi đó xoang trám sẽ là một xoang phức tạp.
+
+237
+00:33:17,800 --> 00:33:25,420
+Thay vì một xoang trám mặt nhai đơn giản, nó sẽ là một xoang trám mặt nhai mở rộng ra mặt ngoài và đó là một sự mở rộng lớn.
+
+238
+00:33:26,260 --> 00:33:26,900
+Đó là một điều.
+
+239
+00:33:27,670 --> 00:33:32,820
+Thứ hai, khi các em loại bỏ tất cả những phần này và tất cả những phần này, hai múi ngoài sẽ trở nên rất yếu.
+
+240
+00:33:33,750 --> 00:33:38,490
+Áp dụng lại các nguyên tắc của G.V. Black, các em nên che phủ các múi răng này.
+
+241
+00:33:39,940 --> 00:33:45,440
+Sau đó nó sẽ không phải là amalgam, nó phải là phục hồi kim loại đúc, cụ thể là vàng.
+
+242
+00:33:47,200 --> 00:33:50,190
+Nhưng nếu các em áp dụng các nguyên tắc dán, điều đó rất dễ dàng.
+
+243
+00:33:50,950 --> 00:33:53,550
+Phủ một lớp lót có tính đàn hồi.
+
+244
+00:33:54,550 --> 00:33:56,460
+Là GIC có thêm thành phần nhựa.
+
+245
+00:33:57,000 --> 00:34:04,300
+Rồi bôi keo dán và sau đó trám vật liệu phục hồi composite hoặc composite khối.
+
+246
+00:34:05,250 --> 00:34:14,020
+Bằng cách sử dụng các đặc tính dán hoặc khái niệm dán đi kèm với hoặc các em đang cần dùng cho phục hồi composite.
+
+247
+00:34:14,610 --> 00:34:24,210
+Thứ nhất, các em bảo tồn được cấu trúc răng, cấu trúc răng quý giá, củng cố cấu trúc răng yếu và bổ sung thêm sự ổn định và lưu giữ.
+
+248
+00:34:25,250 --> 00:34:34,950
+Bởi vì khi các em bôi keo dán, các em đang liên kết chéo các phần yếu này với phần khỏe nhất và các em bảo tồn được cấu trúc răng quý giá.
+
+249
+00:34:35,700 --> 00:34:42,530
+Được rồi, một ưu điểm khác được thêm vào ba ưu điểm kia là bệnh nhân được hưởng lợi từ composite và tính thẩm mỹ.
+
+250
+00:34:43,630 --> 00:34:49,420
+Bởi vì đó là loại vật liệu được coi là vật liệu phục hồi dán hoặc miếng trám dán.
+
+251
+00:34:52,090 --> 00:34:53,360
+Còn về việc thất bại thì sao?
+
+252
+00:34:54,220 --> 00:34:56,490
+Liệu nó có thể thất bại không? Có, nó có thể thất bại.
+
+253
+00:34:57,450 --> 00:35:07,610
+Nhưng các em vẫn có cơ hội để lặp lại quy trình và bảo tồn cấu trúc răng hết lần này đến lần khác, đồng thời trì hoãn quyết định làm inlay cho mão răng.
+
+254
+00:35:09,960 --> 00:35:13,370
+Một lần nữa, việc sử dụng keo dán làm giảm vi kẽ.
+
+255
+00:35:15,231 --> 00:35:20,841
+Như các em thấy ở đây, phần phía nướu không bám dính đúng cách vào cấu trúc răng.
+
+256
+00:35:21,161 --> 00:35:30,681
+Được rồi, có một vấn đề với sự dán dính ở đây đang cho thấy sự đổi màu bờ miếng trám và sau này nó sẽ dẫn đến sâu răng.
+
+257
+00:35:31,291 --> 00:35:49,481
+Sự dán dính giúp bịt kín khoảng hở, ngăn ngừa đổi màu bờ, sâu răng tái phát, viêm tủy, tất cả những điều này đều là ưu điểm của nha khoa phục hồi dán hoặc nó có thể được ngăn ngừa bằng nha khoa phục hồi dán.
+
+258
+00:35:50,181 --> 00:35:53,221
+Một trường hợp khác là gãy góc cắn của răng cửa.
+
+259
+00:35:53,401 --> 00:36:14,961
+Đối với những trường hợp gãy góc cắn này từ hai mươi đến ba mươi năm trước, lựa chọn đầu tiên và giải pháp phục hồi tốt nhất là tiến hành bọc răng sứ, mài đi năm bề mặt là hai mặt bên, mặt ngoài, mặt trong, và rìa cắn.
+
+260
+00:36:14,961 --> 00:36:25,741
+Phải hy sinh quá nhiều cấu trúc răng, cấu trúc răng và chúng ta sẽ không thể tái tạo lại chính xác màu sắc, kết cấu hay hình dạng như ban đầu.
+
+261
+00:36:26,381 --> 00:36:49,401
+Nó sẽ trông thiếu tự nhiên, nhưng nếu chúng ta chỉ vát men răng và làm nhẵn các cạnh sắc, áp dụng xói mòn bằng axit để tạo ra các vi lỗ và trám phục hồi bằng composite, các em đang bảo tồn được cấu trúc răng.
+
+262
+00:36:49,401 --> 00:37:07,431
+Việc sửa soạn không xâm lấn và đồng thời khi composite được sử dụng, các em đang mở rộng phạm vi ứng dụng hoặc chỉ định của composite không chỉ bên trong xoang trám, không chỉ dùng trong quản lý sâu răng hay phục hồi lại tổn thương sâu răng.
+
+263
+00:37:08,201 --> 00:37:10,201
+Đó là sự khác biệt giữa chúng.
+
+264
+00:37:12,291 --> 00:37:17,741
+Một trường hợp khác là thưa răng cửa nhẹ, không phải là dạng thưa lớn nhé?
+
+265
+00:37:18,641 --> 00:37:33,741
+Tương tự trước đây, lựa chọn điều trị đầu tiên cũng là bọc răng sứ hoặc tiến hành điều trị chỉnh nha cho những khoảng trống nhỏ này.
+
+266
+00:37:34,611 --> 00:37:52,641
+Nhưng sau khi đánh giá ca bệnh, thực hiện đắp sáp và làm mô phỏng, đo lường các khoảng cách cần được làm kín và đồng thời tính toán tỷ lệ vàng của các răng cửa.
+
+267
+00:37:54,781 --> 00:38:08,301
+Vì nếu chúng ta không chuẩn bị cho tất cả những điều này, kết quả có thể quá rộng, quá thô và có thể làm ảnh hưởng đến thẩm mỹ.
+
+268
+00:38:08,301 --> 00:38:15,821
+Các em nên xem xét tất cả các yếu tố này trước khi tiến hành điều trị này, phương pháp điều trị này là gì?
+
+269
+00:38:15,821 --> 00:38:17,471
+Chỉ cần làm nhám và làm sạch.
+
+270
+00:38:17,471 --> 00:38:17,841
+Chỉ vậy thôi.
+
+271
+00:38:19,461 --> 00:38:25,511
+Nhưng các em cũng nên cân nhắc đến khớp cắn và loại khớp cắn ở vùng răng trước của bệnh nhân.
+
+272
+00:38:26,081 --> 00:38:26,901
+Được chứ?
+
+273
+00:38:27,311 --> 00:38:30,501
+Tất cả những yếu tố này đều ảnh hưởng đến sự thành công của quy trình của các em.
+
+274
+00:38:30,801 --> 00:38:50,491
+Nhưng nếu bệnh nhân có thói quen cắn xấu, như hay cắn bút bi hoặc bút chì giữa các răng, liệu nó có thể thất bại không? Có, nó có thể thất bại, nhưng các em vẫn còn cơ hội khác để làm lại, để làm lại, để làm lại.
+
+275
+00:38:50,951 --> 00:38:58,861
+Cho đến khi các em phải bọc mão răng, thầy nghĩ các em có quá nhiều cơ hội để lặp lại việc trám này.
+
+276
+00:38:58,861 --> 00:38:59,751
+Vì vậy, đây là một quy trình sửa soạn bảo tồn không xâm lấn và phạm vi ứng dụng của phục hồi thẩm mỹ trực tiếp cũng được tăng lên.
+
+277
+00:38:59,751 --> 00:39:03,481
+Cuối cùng, các em cứ thoải mái đặt câu hỏi, các câu hỏi của các em luôn được chào đón.
+
+278
+00:39:03,801 --> 00:39:15,831
+Thông tin liên hệ của thầy được trình bày ở slide cuối cùng, các em có thể liên hệ với thầy hoặc để lại bình luận cho video này và thầy sẽ trả lời các em trong thời gian sớm nhất có thể.
+
+279
+00:39:16,051 --> 00:39:27,451
+Đừng quên đăng ký và bật thông báo cho kênh của thầy để nhận tất cả các video mới cập nhật về chuỗi bài học nha khoa, đặc biệt là trong chuyên ngành nha khoa phục hồi.
+
+280
+00:39:40,691 --> 00:39:44,191
+Cuối cùng, cảm ơn các em đã dành thời gian lắng nghe thầy.
+
+281
+00:39:44,951 --> 00:39:49,491
+Đây là thông tin liên hệ của thầy, các em có thể liên hệ với thầy bất cứ lúc nào và thầy sẽ trả lời.
+
+282
+00:39:49,491 --> 00:39:56,921
+Nếu các em muốn nhận phiên bản PDF của bài trình bày này, các em có thể liên hệ với thầy để sắp xếp, cảm ơn các em.

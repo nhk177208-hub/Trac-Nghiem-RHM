@@ -1,0 +1,747 @@
+1
+00:00:38,077 --> 00:00:41,907
+Chào các em, thầy là Yasser từ chuỗi bài giảng Learn Dental Series. 
+
+2
+00:00:41,907 --> 00:00:47,387
+Hôm nay, thầy trò chúng ta sẽ tiếp tục chủ đề về sự dán và vật liệu dán trong nha khoa phục hồi. 
+
+3
+00:00:47,887 --> 00:00:56,247
+Thầy xin nhắc lại là thầy không nhận bất kỳ khoản phí, thù lao hay tiền bản quyền nào từ việc bán các sản phẩm được đề cập đến trong bài. 
+
+4
+00:00:56,547 --> 00:01:05,157
+Ngoài ra, bài giảng này không được tài trợ bởi bất kỳ công ty hay tổ chức nào và chỉ được chuẩn bị với mục đích giáo dục. 
+
+5
+00:01:05,677 --> 00:01:15,937
+Bài giảng này được bảo vệ bản quyền và không được phép sao chép dưới mọi hình thức nếu chưa có sự đồng ý bằng văn bản của tác giả. 
+
+6
+00:01:16,487 --> 00:01:24,737
+Hôm nay, chúng ta sẽ tập trung làm rõ cơ sở và nguyên tắc dán vào cấu trúc răng, bao gồm men răng và ngà răng. 
+
+7
+00:01:25,137 --> 00:01:42,507
+Trong bài học trước, chúng ta đã thảo luận phần một, bao gồm nha khoa dán nói chung, lịch sử, các kiểu dán cũng như ưu điểm của vật liệu dán trong nha khoa phục hồi. 
+
+8
+00:01:42,757 --> 00:01:54,497
+Hôm nay, các em sẽ học phần hai về cấu trúc răng để dán, bao gồm dán vào men răng và ngà răng, và hãy bắt đầu với dán vào men răng. 
+
+9
+00:01:54,927 --> 00:02:01,077
+Khi nói về dán vào men răng, chúng ta sẽ thảo luận ba điểm chính. 
+
+10
+00:02:01,377 --> 00:02:06,577
+Điểm thứ nhất, cấu trúc của men răng là gì, bao gồm cấu trúc mô học và hóa học. 
+
+11
+00:02:06,917 --> 00:02:16,717
+Chúng ta cần hiểu rõ cấu trúc của bề mặt dán để có thể chọn đúng nguyên lý dán vào men răng. 
+
+12
+00:02:16,717 --> 00:02:24,497
+Đó cũng là điểm quan trọng thứ hai liên quan đến cấu trúc của men răng. 
+
+13
+00:02:24,497 --> 00:02:24,897
+Và điểm thứ ba, các bước lâm sàng để dán vào men răng là gì? 
+
+14
+00:02:25,757 --> 00:02:36,427
+Khi xem xét cấu trúc men răng, về cơ bản men răng gồm các trụ men và chất gian trụ ít vôi hóa hơn. 
+
+15
+00:02:36,427 --> 00:02:37,387
+Đây là cấu trúc đơn vị của men răng. 
+
+16
+00:02:37,387 --> 00:02:41,807
+Các trụ men đồng nhất và có hướng sắp xếp rõ ràng hơn. 
+
+17
+00:02:42,067 --> 00:02:49,037
+Vì vậy, chúng có tỷ lệ vôi hóa cao hơn một chút so với chất gian trụ. 
+
+18
+00:02:49,337 --> 00:02:56,807
+Và sự khác biệt này chính là ý tưởng chủ đạo trong cơ chế dán vào men răng. 
+
+19
+00:02:57,147 --> 00:03:16,667
+Đây là ảnh chụp kính hiển vi điện tử quét ở hình A bên trái, cho thấy các trụ men qua lát cắt dọc có màu xám, còn chất gian trụ sậm màu hơn do chứa ít khoáng vô cơ hơn. 
+
+20
+00:03:17,017 --> 00:03:30,407
+Đây là mặt cắt ngang cũng cho thấy điều tương tự, các trụ men có dạng lỗ khóa và chất gian trụ là đường sậm màu bao quanh do nó ít khoáng hóa hơn trụ men. 
+
+21
+00:03:30,707 --> 00:03:36,657
+Vì vậy, bây giờ chúng ta hãy cùng xem xét cấu trúc hóa học của men răng. 
+
+22
+00:03:36,887 --> 00:03:44,757
+Về mặt hóa học, men răng bao gồm từ chín mươi lăm đến chín mươi bảy phần trăm cấu trúc vô cơ. 
+
+23
+00:03:45,147 --> 00:03:54,677
+Khoảng chênh lệch từ chín mươi lăm đến chín mươi bảy là sự khác biệt giữa trụ men và chất gian trụ. 
+
+24
+00:03:54,677 --> 00:03:59,267
+Chất gian trụ vôi hóa kém hơn, chiếm khoảng chín mươi lăm phần trăm. 
+
+25
+00:03:59,267 --> 00:04:04,387
+Và bản thân trụ men lại khoáng hóa cao hơn chất gian trụ, đạt mức chín mươi bảy phần trăm. 
+
+26
+00:04:04,817 --> 00:04:10,747
+Phần còn lại là một phần trăm cấu trúc hữu cơ và hai đến bốn phần trăm trọng lượng là nước. 
+
+27
+00:04:11,167 --> 00:04:25,597
+Trong khi đó, nếu xét theo thể tích, cấu trúc vô cơ chiếm từ tám mươi tám đến chín mươi phần trăm, với giới hạn dưới thuộc về chất gian trụ và giới hạn trên là của trụ men. 
+
+28
+00:04:25,967 --> 00:04:32,427
+Và cũng tính theo thể tích, men răng có hai phần trăm hữu cơ và tám đến mười phần trăm nước. 
+
+29
+00:04:33,347 --> 00:04:45,717
+Như vậy, thành phần hóa học chiếm tỷ lệ cao nhất của men răng là chất vô cơ, và hàm lượng này ở trụ men cao hơn so với chất gian trụ. 
+
+30
+00:04:46,037 --> 00:04:57,177
+Biểu đồ tròn này sẽ minh họa rõ hơn tỷ lệ phần trăm các thành phần trong cấu trúc hóa học của men răng. 
+
+31
+00:04:57,547 --> 00:05:11,069
+Theo trọng lượng có chín mươi lăm phần trăm vô cơ, còn theo thể tích là tám mươi tám phần trăm vô cơ, hữu cơ chiếm một phần trăm theo trọng lượng và hai phần trăm theo thể tích. 
+
+32
+00:05:12,429 --> 00:05:17,049
+Và nước chiếm bốn phần trăm theo trọng lượng và mười phần trăm theo thể tích. 
+
+33
+00:05:18,645 --> 00:05:27,445
+Nói chung, chúng ta có thể kết luận rằng men răng có cấu trúc gần như đồng nhất và chủ yếu là chất vô cơ. 
+
+34
+00:05:27,545 --> 00:05:47,665
+Khi xây dựng chiến lược dán vào men răng, về mặt hóa học, chúng ta sẽ tác động vào cấu trúc vô cơ chiếm phần lớn thành phần men răng để tạo lưu giữ. 
+
+35
+00:05:48,535 --> 00:05:58,395
+Đó là lý do tại sao cơ chế dán vào men răng lại được dựa trên tính hòa tan của men răng. 
+
+36
+00:05:59,045 --> 00:06:07,375
+Men răng đã được chứng minh là hòa tan trong axit, và mức độ hòa tan phụ thuộc vào bản chất của loại axit đó. 
+
+37
+00:06:08,475 --> 00:06:27,835
+Nghĩa là, nếu các em dùng axit hữu cơ, nó sẽ tác động mạnh lên mô có nhiều thành phần hữu cơ hơn, cụ thể là chất gian trụ vì nó chứa nhiều hữu cơ và ít khoáng hóa hơn trụ men. 
+
+38
+00:06:27,835 --> 00:06:36,225
+Vì thế, axit hữu cơ hòa tan cả hai, nhưng nó làm tan chất gian trụ nhiều hơn hẳn so với trụ men. 
+
+39
+00:06:36,355 --> 00:06:56,205
+Đó là lý do các axit do sâu răng cấp tính tạo ra sẽ xâm nhập vào chất gian trụ, lan song song với trụ men, nghĩa là nó hòa tan cả hai nhưng quá trình hòa tan ở chất gian trụ diễn ra nhanh hơn. 
+
+40
+00:06:57,135 --> 00:07:07,015
+Ngược lại, khi các em dùng axit vô cơ, ái lực hóa học của nó sẽ hướng tới loại mô có tỷ lệ chất vô cơ cao hơn. 
+
+41
+00:07:07,375 --> 00:07:20,745
+Vì vậy, axit vô cơ sẽ hòa tan cả trụ men và chất gian trụ, nhưng lại ưu tiên lấy đi phần trụ men nhiều hơn, và đây chính là kỹ thuật xoi mòn bằng axit. 
+
+42
+00:07:21,015 --> 00:07:37,035
+Ở bệnh lý sâu răng, chúng ta không thể kiểm soát tác động của axit, nhưng ở đây, ta kiểm soát bằng cách dùng axit dạng gel trong một khoảng thời gian nhất định rồi rửa sạch để ngừng quá trình này lại. 
+
+43
+00:07:37,395 --> 00:07:44,475
+Đó là sự khác biệt giữa xoi mòn men răng bằng axit và axit do sâu răng tạo ra. 
+
+44
+00:07:44,475 --> 00:07:59,435
+Thầy nhắc lại, xoi mòn men răng sẽ làm khử khoáng có chọn lọc, hòa tan toàn bộ bề mặt men nhưng tác động lên trụ men nhiều hơn chất gian trụ, và các em có thể dừng nó lại bằng cách rửa sạch. 
+
+45
+00:08:00,515 --> 00:08:03,145
+Và chỉ quét axit trong một khoảng thời gian giới hạn. 
+
+46
+00:08:03,385 --> 00:08:17,495
+Nhưng đối với bệnh sâu răng, đó là axit hữu cơ và nó lại ưu tiên hòa tan chất gian trụ nhiều hơn, vì thế sâu răng lan qua men răng dọc theo chất gian trụ song song với các trụ men. 
+
+47
+00:08:17,805 --> 00:08:34,635
+Và nó không ở dạng gel, cũng không thể nhìn thấy bằng mắt thường, nó xảy ra ở mức độ vi thể nên chúng ta không thể kiểm soát thời gian tác động của nó, khiến nó tiếp tục phá hủy răng. 
+
+48
+00:08:35,845 --> 00:08:54,875
+Vì vậy, sự ra đời của kỹ thuật xoi mòn bằng axit giúp khử khoáng trụ men nhiều hơn chất gian trụ, tạo ra bề mặt gồ ghề không đồng đều được gọi là các vi lỗ. 
+
+49
+00:08:55,265 --> 00:09:14,015
+Các vi lỗ này sẽ cho phép nhựa xâm nhập vào, sau đó đông cứng lại bằng quang trùng hợp, tạo thành các đuôi nhựa cài ngàm vi cơ học với cấu trúc men răng, và đây là nguyên lý dán bằng xoi mòn axit. 
+
+50
+00:09:14,585 --> 00:09:27,075
+Đây là bề mặt men răng chưa được xử lý, cho thấy cả trụ men và chất gian trụ đều nằm cùng một độ cao đồng nhất. 
+
+51
+00:09:27,445 --> 00:09:40,705
+Bức ảnh vi thể này cho thấy các trụ men có dạng lỗ khóa, còn chất gian trụ sậm màu hơn và thể hiện sự sắp xếp lộn xộn của các tinh thể hydroxyapatite. 
+
+52
+00:09:40,705 --> 00:09:44,405
+Đó là lý do nó ít được khoáng hóa hơn do cấu trúc không đều này. 
+
+53
+00:09:44,955 --> 00:09:56,905
+Sau khi xoi mòn bằng axit, các em có thể thấy độ gồ ghề bề mặt tăng lên do sự khử khoáng có chọn lọc, nhấn mạnh lại là trụ men bị khử nhiều hơn chất gian trụ. 
+
+54
+00:09:57,689 --> 00:10:11,389
+Và các em có thể ngừng sự ăn mòn của axit bằng cách rửa sạch sau thời gian giới hạn, và có thể nhận biết gel axit dễ dàng nhờ màu sắc tương phản với cấu trúc răng. 
+
+55
+00:10:11,949 --> 00:10:26,679
+Một bức ảnh hiển vi điện tử quét khác cho thấy một mức độ xoi mòn axit khác, và đây là một bản sao phóng to cho thấy sự gồ ghề được tạo ra trên men răng. 
+
+56
+00:10:26,679 --> 00:10:53,729
+Đây là sơ đồ cho thấy bề mặt men răng chưa xử lý ở hình A và đã xoi mòn ở hình B, mức độ của B thấp hơn A chứng tỏ cả trụ men và chất gian trụ đều bị hòa tan, tạo ra các vi lỗ. 
+
+57
+00:10:53,729 --> 00:11:01,889
+Ở hình C, các vi lỗ đã được xâm nhập nhựa, cho thấy các đuôi nhựa đông cứng tạo ra sự cài ngàm cơ học. 
+
+58
+00:11:01,889 --> 00:11:18,179
+Sau đó ở hình D, nhựa composite được đắp lên và dán dính hóa học với keo dán vì cả hai đều là vật liệu nhựa, trong khi keo dán lại dính vào men răng nhờ vi cơ học. 
+
+59
+00:11:18,179 --> 00:11:31,059
+Vậy nên, thuật ngữ mô tả sự dán dính giữa keo dán hoặc nhựa thấm vào men răng chính là cơ chế bám dính vi cơ học. 
+
+60
+00:11:31,059 --> 00:11:44,989
+Liên kết giữa composite và keo dán là liên kết hóa học, nên tổng thể sự liên kết giữa composite với cấu trúc răng là cơ chế kết hợp giữa hóa học và vi cơ học. 
+
+61
+00:11:44,989 --> 00:11:47,649
+Đó là kết luận chung về khái niệm dán tổng thể. 
+
+62
+00:11:48,119 --> 00:11:56,689
+Khi quét axit xoi mòn lên men răng, những kiểu hình nào được tạo ra hay mô tả quá trình xoi mòn men răng. 
+
+63
+00:11:58,119 --> 00:12:06,179
+Theo mô tả của Went và Silverstone, họ đã phát hiện ra ba kiểu hình xoi mòn men răng. 
+
+64
+00:12:06,399 --> 00:12:13,149
+Kiểu một, axit hòa tan lõi của trụ men mà không làm tan phần ngoại vi của trụ. 
+
+65
+00:12:13,749 --> 00:12:21,079
+Kiểu hai ngược lại với kiểu một, ngoại vi trụ men bị hòa tan trong khi lõi trụ thì không. 
+
+66
+00:12:21,239 --> 00:12:29,789
+Kiểu ba là sự kết hợp của cả hai, trụ men bị hòa tan ở cả vùng lõi lẫn vùng ngoại vi. 
+
+67
+00:12:30,449 --> 00:12:43,299
+Chúng ta cùng xem sơ đồ men răng này, cho thấy các trụ men có dạng tối màu hơn và chất gian trụ là bóng xám nằm ở giữa. 
+
+68
+00:12:43,519 --> 00:13:10,899
+Khi dùng gel axit xoi mòn có màu tương phản trong thời gian nhà sản xuất khuyến cáo rồi rửa sạch, các em sẽ thấy toàn bộ bề mặt men răng đều bị giảm độ cao do cả trụ men và chất gian trụ đều bị hòa tan. 
+
+69
+00:13:10,899 --> 00:13:21,379
+Nhưng hãy lưu ý rằng trụ men thấp hơn nhiều so với chất gian trụ, nghĩa là trụ men bị khử khoáng có chọn lọc nhiều hơn. 
+
+70
+00:13:21,689 --> 00:13:27,949
+Xoi mòn kiểu một chỉ liên quan đến phần lõi của các trụ men. 
+
+71
+00:13:28,169 --> 00:13:31,519
+Kiểu hai tác động vào phần ngoại vi của các trụ men. 
+
+72
+00:13:31,519 --> 00:13:38,009
+Và kiểu ba là hòa tan cả lõi và ngoại vi của trụ men. 
+
+73
+00:13:40,109 --> 00:13:47,689
+Chúng ta có thể tạo ra kiểu nào trong lâm sàng, đây thực chất là một chủ đề nghiên cứu. 
+
+74
+00:13:47,689 --> 00:14:08,199
+Điều đó phụ thuộc vào loại men răng, vách men răng, hướng của các trụ men, loại thành xoang, hằng số phân ly axit, độ pH hay loại keo dán mà chúng ta dùng. 
+
+75
+00:14:08,199 --> 00:14:11,199
+Nói chung, chúng ta cần nắm vững ba kiểu này ở mức độ hiện tại. 
+
+76
+00:14:11,199 --> 00:14:18,699
+Đó là ba loại kiểu hình xoi mòn, bây giờ thầy sẽ cho các em xem một khía cạnh khác. 
+
+77
+00:14:18,699 --> 00:14:28,629
+Đây là bề mặt ban đầu của men răng và đây là mức độ hòa tan của cả hai thành phần, rơi vào khoảng mười micromét. 
+
+78
+00:14:29,109 --> 00:14:46,409
+Và đồng thời, nó hòa tan sâu hơn ở các trụ men, tạo ra độ sâu từ năm đến năm mươi micromét. 
+
+79
+00:14:46,809 --> 00:14:51,689
+Đây là ảnh hiển vi điện tử quét cho thấy kiểu xoi mòn số một. 
+
+80
+00:14:52,150 --> 00:14:55,425
+Trong đó phần lõi bị hòa tan nhiều hơn phần ngoại vi. 
+
+81
+00:14:55,425 --> 00:15:12,125
+Đây là ảnh hiển vi cho thấy kiểu xoi mòn số hai với ngoại vi bị tan nhiều hơn lõi, và bên cạnh là sự kết hợp tạo thành kiểu xoi mòn số ba. 
+
+82
+00:15:14,905 --> 00:15:19,905
+Bây giờ chúng ta sẽ chuyển tất cả các kiến thức này thành các bước lâm sàng để dán vào men răng. 
+
+83
+00:15:21,565 --> 00:15:26,155
+Về các bước lâm sàng để dán vào men răng, chúng ta chỉ có hai bước. 
+
+84
+00:15:27,145 --> 00:15:29,895
+Bước số một, xử lý bề mặt men răng. 
+
+85
+00:15:30,945 --> 00:15:42,605
+Chúng ta cần hiểu rõ tại sao phải xoi mòn, thông số của chất axit cần dùng là gì, cách sử dụng ra sao và có những lưu ý lâm sàng nào. 
+
+86
+00:15:43,255 --> 00:15:53,225
+Sau khi tạo ra các vi lỗ, chúng ta sẽ cho phép nhựa thẩm thấu vào các lỗ hổng này trên men răng đã được xử lý. 
+
+87
+00:15:53,225 --> 00:15:55,835
+Hãy bắt đầu với quá trình xử lý bề mặt men răng. 
+
+88
+00:15:56,315 --> 00:15:59,065
+Cơ sở của việc xử lý bề mặt men răng là gì? 
+
+89
+00:15:59,875 --> 00:16:24,125
+Nói chung, mọi bề mặt men răng dù đã cắt hay còn nguyên vẹn đều nhẵn hoặc bị bao phủ bởi mảng bám, tức là có các chất bẩn làm giảm năng lượng bề mặt tự do. 
+
+90
+00:16:26,065 --> 00:16:35,835
+Điều này khiến men răng ở trạng thái đó không phải là bề mặt tốt để dán dính vì năng lượng bề mặt của nó đang rất thấp. 
+
+91
+00:16:36,975 --> 00:16:41,025
+Và điều này sẽ cản trở khả năng thấm ướt của keo dán. 
+
+92
+00:16:42,035 --> 00:16:47,995
+Bởi vì năng lượng bề mặt của men răng không còn tự do mà đã bị chiếm chỗ bởi các chất bẩn. 
+
+93
+00:16:48,745 --> 00:16:51,535
+Đó là lý do các em phải xoi mòn bằng axit. 
+
+94
+00:16:52,435 --> 00:17:05,565
+Quét axit xoi mòn trước tiên là để làm sạch bề mặt men răng, và làm sạch ở đây đồng nghĩa với việc gia tăng năng lượng bề mặt như thầy đã giảng ở bài trước. 
+
+95
+00:17:07,125 --> 00:17:22,555
+Bất kỳ bề mặt dán nào khi được làm sạch cũng đồng nghĩa với việc tăng năng lượng bề mặt, do chúng ta đã loại bỏ chất bẩn chiếm chỗ. 
+
+96
+00:17:23,265 --> 00:17:38,955
+Tiếp theo là nhờ đặc tính men răng dễ hòa tan trong axit có chọn lọc, axit sẽ tạo ra bề mặt gồ ghề hay các vi lỗ. 
+
+97
+00:17:40,485 --> 00:17:48,395
+Sự hòa tan phần vô cơ của men răng cũng đồng nghĩa với việc các em đang làm tăng diện tích bề mặt để dán dính. 
+
+98
+00:17:48,395 --> 00:17:54,965
+Bởi vì diện tích của một bề mặt phẳng luôn nhỏ hơn diện tích của một bề mặt gồ ghề. 
+
+99
+00:17:54,965 --> 00:18:07,835
+Sự gồ ghề này không chỉ tạo khoang cho sự lưu giữ cơ học khi nhựa thẩm thấu vào trong, mà còn tăng diện tích bề mặt dán. 
+
+100
+00:18:09,045 --> 00:18:14,405
+Đây chính là lý do chúng ta dùng axit để xử lý bề mặt men răng. 
+
+101
+00:18:16,105 --> 00:18:23,545
+Vậy chất axit này là gì, chúng ta dùng loại nào, nồng độ, dạng bào chế hay thời gian xoi mòn ra sao. 
+
+102
+00:18:24,565 --> 00:18:33,595
+Như đã thảo luận, kỹ thuật xoi mòn axit được Buonocore khởi xướng và phát hiện lần đầu vào năm một ngàn chín trăm năm mươi lăm. 
+
+103
+00:18:34,735 --> 00:18:38,925
+Buonocore đã dùng axit phosphoric tám mươi lăm phần trăm trong vòng một phút. 
+
+104
+00:18:40,575 --> 00:18:52,825
+Mục đích xoi mòn là biến men răng thành một nền tảng tốt để dán với nhựa acrylic, loại vật liệu phục hồi phổ biến thời đó trước khi composite ra đời. 
+
+105
+00:18:56,115 --> 00:19:14,245
+Mặc dù axit phosphoric vẫn được dùng phổ biến nhất, nhưng hiện nay còn có dạng kết hợp đa axit bao gồm axit phosphoric, axit maleic, nitric, oxalic, citric và polyacrylic. 
+
+106
+00:19:14,245 --> 00:19:28,675
+Dù axit phosphoric thông dụng nhất, nhưng gần đây các monomer có tính axit cũng được sử dụng trong các hệ thống keo dán tự xoi mòn, và thầy trò ta sẽ thảo luận chi tiết sau. 
+
+107
+00:19:30,435 --> 00:19:44,945
+Về nồng độ, nhiều nghiên cứu thực nghiệm đã chứng minh hai mươi bảy phần trăm là nồng độ axit phosphoric lý tưởng và hiệu quả nhất để xoi mòn men răng. 
+
+108
+00:19:44,945 --> 00:19:46,755
+Nhưng đó là điều kiện trong phòng thí nghiệm. 
+
+109
+00:19:46,755 --> 00:20:00,325
+Điều kiện phòng thí nghiệm nghĩa là mọi thứ đều lý tưởng, từ nhiệt độ, kiểm soát độ ẩm, kỹ năng thao tác, thời gian cho đến độ dày của lớp gel. 
+
+110
+00:20:00,400 --> 00:20:04,600
+Trong điều kiện hoàn hảo như vậy, nồng độ hai mươi bảy phần trăm là tốt nhất. 
+
+111
+00:20:04,600 --> 00:20:11,630
+Nhưng trên thị trường lâm sàng, các loại axit xoi mòn thương mại thường dao động từ ba mươi đến bốn mươi phần trăm. 
+
+112
+00:20:12,480 --> 00:20:31,460
+Bởi vì khi tính thêm các yếu tố cản trở như nhiệt độ miệng, cách cô lập, hay độ dày men răng, kết quả thực tế đạt được sẽ tương đương với mức hai mươi bảy phần trăm trong thực nghiệm. 
+
+113
+00:20:31,460 --> 00:20:35,770
+Tuy nhiên, các em cần biết một điều rất quan trọng. 
+
+114
+00:20:35,770 --> 00:20:40,210
+Nồng độ axit và độ pH không phải là yếu tố cốt lõi. 
+
+115
+00:20:41,410 --> 00:20:51,500
+Các nghiên cứu phát hiện ra rằng hằng số phân ly của axit, hay còn gọi là pKa, quan trọng hơn nhiều so với độ pH. 
+
+116
+00:20:52,210 --> 00:20:58,950
+pH thể hiện tổng số lượng ion hydro trong công thức của axit. 
+
+117
+00:21:02,560 --> 00:21:11,530
+Miễn là axit có nhiều hydro thì độ pH sẽ càng thấp và tính axit sẽ càng cao. 
+
+118
+00:21:12,060 --> 00:21:27,820
+Nhưng hằng số pKa lại cho biết cách axit giải phóng hydro và phản ứng để tạo ra muối, phản ánh khả năng phản ứng của axit thay vì chỉ là độ axit. 
+
+119
+00:21:28,150 --> 00:21:32,800
+Đó là lý do tại sao hằng số pKa lại quan trọng hơn cả nồng độ hay độ pH. 
+
+120
+00:21:33,600 --> 00:21:34,140
+Các em nắm rõ chưa? 
+
+121
+00:21:36,190 --> 00:21:42,900
+Vậy điều gì sẽ xảy ra nếu nồng độ axit thấp hơn hai mươi bảy phần trăm? 
+
+122
+00:21:42,900 --> 00:21:50,440
+Việc này thường nhằm tránh gây hại sinh học cho men răng hoặc ngà răng nếu axit vô tình tràn xuống ngà. 
+
+123
+00:21:51,580 --> 00:21:58,730
+Tuy nhiên nồng độ dưới hai mươi bảy phần trăm là vô dụng vì nó sẽ tạo ra kết tủa dicalcium phosphate monohydrate. 
+
+124
+00:21:58,730 --> 00:22:03,440
+Đây là loại muối sinh ra khi nồng độ axit thấp hơn mức hai mươi bảy phần trăm. 
+
+125
+00:22:04,020 --> 00:22:29,470
+Loại muối kết tủa này rất khó rửa sạch và sẽ cản trở quá trình dán, do nó bít kín các vi lỗ vừa được tạo ra, khiến nhựa không còn chỗ để thấm vào. 
+
+126
+00:22:29,470 --> 00:22:30,740
+Các em đã tạo ra vi lỗ nhưng lại bị lấp đầy bởi muối không tan không thể rửa trôi, nên mọi thứ đều vô dụng. 
+
+127
+00:22:30,740 --> 00:22:56,940
+Còn nồng độ trên bốn mươi phần trăm lại hòa tan ít canxi hơn và xoi mòn kém hơn, vì với nồng độ cao muối canxi hòa tan có khả năng phản ứng ngược lại và bít kín các vi lỗ một lần nữa. 
+
+128
+00:25:07,730 --> 00:25:10,520
+Màu sắc của axit dạng gel chủ yếu và phổ biến nhất là màu xanh dương hoặc xanh lục. 
+
+129
+00:25:12,270 --> 00:25:22,320
+Vậy có axit xoi mòn màu đỏ không, câu trả lời là có, nhưng nó không dùng trong miệng vì các em sẽ khó phân biệt màu với các mô mềm. 
+
+130
+00:25:22,760 --> 00:25:30,660
+Axit màu đỏ có thể được dùng để xoi mòn mặt trong của phục hình inlay, onlay hoặc bất kỳ phục hình gián tiếp nào khác. 
+
+131
+00:25:32,120 --> 00:25:37,340
+Thông thường axit được đóng gói dưới dạng ống tiêm. 
+
+132
+00:25:38,580 --> 00:25:44,590
+Kèm theo đó là các đầu bơm kim chỉ sử dụng một lần rồi bỏ. 
+
+133
+00:25:47,740 --> 00:25:58,100
+Mỗi bệnh nhân các em chỉ dùng một đầu bơm, rồi bơm axit qua đầu kim nhỏ này lên bề mặt men răng. 
+
+134
+00:25:58,490 --> 00:26:11,790
+Và như các em thấy, vì ở dạng gel nên nó nằm yên trên bề mặt men răng trong suốt thời gian xoi mòn được khuyến cáo. 
+
+135
+00:26:15,040 --> 00:26:22,450
+Một hình ảnh khác cho thấy thao tác bơm gel axit xoi mòn bằng đầu bơm chuyên dụng. 
+
+136
+00:26:25,900 --> 00:26:34,190
+Hình bên trái minh họa việc quét axit xoi mòn lên toàn bộ bề mặt men răng. 
+
+137
+00:26:34,440 --> 00:26:44,150
+Thầy nghĩ đây là khâu chuẩn bị để dán phục hình nhựa hoặc phục hình gián tiếp như mặt dán sứ veneer hay mão răng. 
+
+138
+00:26:44,720 --> 00:26:57,170
+Hình lớn thứ hai cho thấy axit xoi mòn chỉ khu trú gọn trên men răng, nhờ vào màu sắc tương phản và độ đặc của dạng gel. 
+
+139
+00:26:58,180 --> 00:27:19,010
+Sau đó khi hết thời gian khuyến cáo, để dừng quá trình xoi mòn các em phải xịt rửa bằng tia nước để làm trôi gel axit và muối tạo thành, giúp làm lộ rõ các vi lỗ. 
+
+140
+00:27:19,960 --> 00:27:23,580
+Nhưng hãy nhớ, tuyệt đối không được cho bệnh nhân tự súc miệng. 
+
+141
+00:27:23,790 --> 00:27:29,670
+Tại sao vậy, vì nếu bệnh nhân súc miệng, bề mặt men răng đã xoi mòn sẽ bị nhiễm nước bọt. 
+
+142
+00:27:29,670 --> 00:27:39,430
+Nước bọt chứa các protein, trong đó có mucin trọng lượng phân tử thấp có thể dễ dàng xâm nhập và bít kín các vi lỗ vừa được tạo ra. 
+
+143
+00:27:41,210 --> 00:27:58,480
+Tiếp theo các em phải thổi khô để làm bốc hơi lượng nước dùng rửa axit đọng trong các vi lỗ, giúp chúng hoàn toàn trống rỗng và sẵn sàng cho nhựa thấm vào. 
+
+144
+00:27:59,490 --> 00:28:13,060
+Một trong những tiêu chí tốt nhất để nhận biết men răng đã xoi mòn đạt chuẩn là nó có màu trắng đục như phấn, trắng sương mù hoặc có vẻ mịn màng như nhung. 
+
+145
+00:28:13,980 --> 00:28:22,300
+Chúng ta cùng xem ca lâm sàng này, chiếc răng này đã được cô lập bằng đê cao su nhằm mục đích bảo vệ mô mềm. 
+
+146
+00:28:22,580 --> 00:28:28,220
+Đê cao su có bờ lộn ngược vào trong để tạo sự bảo vệ tối đa. 
+
+147
+00:28:28,580 --> 00:28:35,380
+Ngoài ra răng còn được buộc thêm chỉ tơ nha khoa, một phương pháp bảo vệ xuất sắc để tránh hoàn toàn việc nhiễm nước bọt. 
+
+148
+00:28:35,620 --> 00:28:56,850
+Các răng lân cận được bảo vệ bằng băng dính teflon, hoặc băng giấy trong mylar strip, nhằm tránh xoi mòn hay dính keo dán vô ý sang các bề mặt không mong muốn. 
+
+149
+00:28:57,340 --> 00:29:15,120
+Sau khi bơm axit xoi mòn rồi dùng ống hút và xịt nước rửa sạch, thổi khô hoàn toàn, các em có thể thấy bề mặt có màu trắng đục phấn khác hẳn với phần còn lại của mặt ngoài. 
+
+150
+00:29:15,780 --> 00:29:34,190
+Ca này cho thấy răng cối lớn đang chuẩn bị cho phục hồi nhựa dự phòng, xoang trám này sẽ tiếp nhận miếng trám composite còn bề mặt rãnh kế bên chuẩn bị để trám bít hố rãnh. 
+
+151
+00:29:34,400 --> 00:29:40,950
+Và các em cũng có thể thấy rõ màu trắng đục phấn của men răng sau khi xoi mòn. 
+
+152
+00:29:41,640 --> 00:30:10,800
+Tuy nhiên hình bên phải là điều thầy rất không đồng tình vì đây bị coi là vi phạm đạo đức trong nha khoa phục hồi, do bác sĩ đã xoi mòn phân nửa mặt ngoài mà không có lý do rõ ràng kể cả khi để chỉnh nha. 
+
+153
+00:30:11,472 --> 00:30:18,522
+Nó tuy cho thấy hình ảnh men trắng đục phấn rất rõ, nhưng thầy cho rằng làm vậy với bệnh nhân là một sai lầm nghiêm trọng. 
+
+154
+00:30:20,852 --> 00:30:38,822
+Ảnh chụp vi thể bên trái cho thấy men răng xoi mòn sạch, được rửa và thổi khô đúng cách, trong khi ảnh bên phải cho thấy men răng nhiễm protein nước bọt đã lấp kín các vi lỗ. 
+
+155
+00:30:38,822 --> 00:30:54,542
+Đó là lý do nếu men răng lỡ bị nhiễm nước bọt, các em phải xoi mòn lại trong mười giây để mở thông lại các vi lỗ và làm sạch màng protein nước bọt đó. 
+
+156
+00:30:55,552 --> 00:31:17,821
+Ngoài ra, với men răng nhiễm fluor, các em cần hỏi kỹ tiền sử nha khoa bệnh nhân xem họ có từng điều trị fluor hay dùng kem đánh răng chứa nhiều fluor không. 
+
+157
+00:31:17,821 --> 00:31:33,192
+Bất kể là trị liệu fluor tại chỗ hay toàn thân, vì men răng lúc này sẽ bị khoáng hóa quá mức bình thường. 
+
+158
+00:31:33,192 --> 00:31:49,632
+Và khi xoi mòn, các em buộc phải tăng thời gian xoi mòn trên loại men răng nhiễm fluor này để đạt được kết quả như mong muốn. 
+
+159
+00:31:50,222 --> 00:32:18,312
+Nếu các em làm việc trên bề mặt men chưa mài và muốn điều trị xâm lấn tối thiểu, ví dụ đóng khe thưa không sửa soạn, các em cần làm sạch và đánh bóng kỹ bề mặt ngay trước khi xoi mòn. 
+
+160
+00:32:18,312 --> 00:32:28,602
+Bước này giúp làm sạch thêm bề mặt răng, qua đó tạo điều kiện thuận lợi hơn cho axit xoi mòn phát huy tác dụng. 
+
+161
+00:32:29,462 --> 00:32:38,302
+Một số bác sĩ cũng chuộng việc làm nhám nhẹ bề mặt bằng đĩa đánh bóng để axit dễ dàng tác động hơn. 
+
+162
+00:32:39,122 --> 00:33:00,612
+Thầy nhắc lại, phải tránh việc vô tình xoi mòn trúng răng lân cận hoặc bề mặt men không liên quan, vì chúng rất khó tái khoáng hóa và sẽ để lại bề mặt nhám dễ bị đổi màu. 
+
+163
+00:33:00,612 --> 00:33:20,712
+Việc bảo vệ men răng lân cận bằng đê cao su, băng dính teflon, hoặc băng mylar strip như đã thảo luận sẽ giúp bảo vệ an toàn các bề mặt không liên quan. 
+
+164
+00:33:21,392 --> 00:33:24,782
+Bước thứ hai là để nhựa thẩm thấu vào men răng. 
+
+165
+00:33:25,572 --> 00:33:38,222
+Nhiều người nghĩ chỉ cần lấy cọ siêu nhỏ trong bộ keo dán, nhúng ướt rồi quét nhẹ lên bề mặt men răng đã xoi mòn là xong. 
+
+166
+00:33:38,772 --> 00:33:41,232
+Không, hoàn toàn không phải như vậy. 
+
+167
+00:33:42,582 --> 00:33:44,822
+Điều thứ nhất, các em phải bôi keo một cách chủ động. 
+
+168
+00:33:44,822 --> 00:33:51,252
+Bôi chủ động nghĩa là các em phải chà xát liên tục lên bề mặt men răng. 
+
+169
+00:33:51,772 --> 00:34:11,472
+Chà xát liên tục và để đủ thời gian giúp nhựa thẩm thấu hoàn toàn xuống tận đáy của tất cả các vi lỗ vừa được tạo ra. 
+
+170
+00:34:12,172 --> 00:34:16,772
+Và tốt nhất là các em nên quét thành nhiều lớp. 
+
+171
+00:34:17,832 --> 00:34:38,672
+Hãy quét lớp đầu tiên thật mạnh tay, chờ đủ mười lăm đến ba mươi giây, sau đó quét lớp thứ hai, làm mỏng keo bằng cọ khô rồi mới chiếu đèn quang trùng hợp. 
+
+172
+00:34:39,262 --> 00:34:46,132
+Cách này sẽ giúp các em đạt được hiệu quả dán dính tối đa với cấu trúc răng. 
+
+173
+00:34:47,362 --> 00:35:07,350
+Bên trái là ảnh chụp hiển vi điện tử quét cho thấy các vi lỗ đã được lấp đầy bằng các đuôi nhựa, còn sơ đồ minh họa sự cài ngàm vi cơ học giữa đuôi nhựa và vi lỗ của men răng. 
+
+174
+00:35:07,350 --> 00:35:07,350
+Một lần nữa, đây lại là một ảnh hiển vi cho thấy men răng ngấm nhựa tạo thành các đuôi nhựa đông cứng, từ đó sinh ra sự lưu giữ vi cơ học cần thiết. 
+
+175
+00:35:07,350 --> 00:35:18,612
+Hình bên phải là ảnh hiển vi cho thấy cấu trúc gồm nhựa composite ở trên, tiếp đến là keo dán rồi đến men răng đã xoi mòn bằng axit ở dưới cùng. 
+
+176
+00:35:19,102 --> 00:35:31,972
+Các em có thể chú ý như sơ đồ trước đó, liên kết giữa keo dán và men răng là vi cơ học, còn giữa keo dán và composite phía trên là liên kết hóa học. 
+
+177
+00:35:34,442 --> 00:35:44,722
+Sự dán dính của monomer nhựa vào men răng, như thầy đã nói, là liên kết vi cơ học thông qua các đuôi nhựa cài ngàm chặt chẽ với bề mặt men răng. 
+
+178
+00:35:45,402 --> 00:35:55,032
+Độ bền dán trong trường hợp này bị ảnh hưởng bởi mức độ khuếch tán hay thẩm thấu của nhựa vào bên trong men răng. 
+
+179
+00:35:55,662 --> 00:36:18,392
+Điều này bị ảnh hưởng mạnh bởi đường kính vi lỗ thay vì chiều sâu, vì đường kính quyết định việc nhựa có xuyên thấu hoàn toàn để đẩy hết không khí đọng bên trong các vi lỗ ra ngoài hay không. 
+
+180
+00:36:19,042 --> 00:36:33,352
+Ngược lại, nếu đường kính hẹp mà lỗ quá sâu sẽ sinh ra áp lực ngược, tạo bọt khí và ngăn cản quá trình nhựa thẩm thấu đúng cách vào men răng. 
+
+181
+00:36:34,482 --> 00:36:36,562
+Thầy hy vọng các em đã hiểu rõ phần này. 
+
+182
+00:36:37,272 --> 00:36:42,432
+Nếu có gì thắc mắc, các em cứ thoải mái đặt câu hỏi bất cứ lúc nào. 
+
+183
+00:36:43,122 --> 00:36:47,602
+Các em có thể liên hệ với thầy để giải đáp thắc mắc bất kỳ lúc nào. 
+
+184
+00:36:48,132 --> 00:36:57,782
+Thông tin liên hệ của thầy hiện đang hiển thị ở slide cuối, hoặc các em cũng có thể bình luận dưới video này và thầy sẽ trả lời sớm nhất. 
+
+185
+00:36:58,502 --> 00:37:01,592
+Cảm ơn các em đã dành thời gian lắng nghe bài giảng. 
+
+186
+00:37:01,732 --> 00:37:06,392
+Đừng quên đăng ký kênh và bật thông báo để nhận bài học mới nhé. 
+
+187
+00:37:06,692 --> 00:37:07,252
+Cảm ơn các em. 

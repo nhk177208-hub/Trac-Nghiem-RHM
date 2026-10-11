@@ -1,0 +1,655 @@
+1
+00:00:38,291 --> 00:00:42,591
+Chào mừng các em, thầy là Yasser Wassify từ chuỗi bài giảng Learn Dental. 
+
+2
+00:00:43,321 --> 00:00:47,881
+Hôm nay, chúng ta sẽ tiếp tục thảo luận về chủ đề dán và vật liệu dán. 
+
+3
+00:00:48,161 --> 00:00:57,651
+Trước tiên, thầy xin đính chính rằng thầy không nhận thù lao, bồi thường hay tiền bản quyền từ việc bán bất kỳ sản phẩm nào được đề cập trong bài giảng này. 
+
+4
+00:00:58,371 --> 00:01:08,521
+Đồng thời, bài giảng này không được tài trợ bởi bất kỳ công ty, tổ chức nào, và chỉ phục vụ duy nhất cho mục đích giáo dục. 
+
+5
+00:01:09,181 --> 00:01:18,661
+Ngoài ra, bài giảng này được bảo hộ bản quyền và không được phép phát tán dưới bất kỳ hình thức nào nếu chưa có sự cho phép bằng văn bản của tác giả. 
+
+6
+00:01:19,461 --> 00:01:27,421
+Hôm nay, chúng ta vẫn tập trung làm rõ cơ sở và nguyên tắc dán dính trên cả men răng và ngà răng. 
+
+7
+00:01:27,911 --> 00:01:40,921
+Ở tập đầu, chúng ta đã bàn về các nguyên tắc dán dính nói chung, các phương thức dán và ưu điểm của việc ứng dụng dán trong nha khoa phục hồi. 
+
+8
+00:01:41,341 --> 00:01:54,911
+Trong tập hai, chúng ta đã bắt đầu nói về các bề mặt dán, tức là cấu trúc răng hay lớp nền dán, bao gồm cấu trúc men và ngà của xoang trám đã sửa soạn. 
+
+9
+00:01:55,231 --> 00:02:12,059
+Chúng ta cũng đã thảo luận mọi yếu tố liên quan đến men răng, từ việc ôn lại cấu trúc men, đến khái niệm dán trên men răng thông qua kỹ thuật xoi mòn bằng axit do Michel Pono giới thiệu. 
+
+10
+00:02:12,059 --> 00:02:30,561
+Kỹ thuật này hòa tan chọn lọc các trụ men nhiều hơn so với chất gian trụ, tạo ra các vi lỗ xốp để keo dán nhựa xâm nhập, hình thành các vi đuôi nhựa đông cứng lại, tạo sự lưu giữ vi cơ học với men răng. 
+
+11
+00:02:30,981 --> 00:02:43,611
+Các bước lâm sàng gồm hai bước chính: một là xoi mòn men răng bằng axit, và hai là sự xâm nhập của nhựa dán vào men răng. 
+
+12
+00:02:43,611 --> 00:02:48,861
+Hôm nay, trong tập 3 này, chúng ta sẽ tiếp tục với chủ đề dán dính trên ngà răng. 
+
+13
+00:02:49,021 --> 00:03:06,121
+Về việc dán dính ngà răng, theo trình tự tương tự như khi bàn về men răng, chúng ta sẽ xem xét cấu trúc ngà, các vấn đề gặp phải khi dán trên ngà, cùng nguyên tắc và các bước lâm sàng để dán ngà răng. 
+
+14
+00:03:06,841 --> 00:03:23,880
+Chúng ta hãy 
+
+15
+00:03:23,880 --> 00:03:50,656
+bắt đầu với 
+
+16
+00:03:50,656 --> 00:04:17,432
+việc ôn tập 
+
+17
+00:04:17,432 --> 00:04:41,774
+về cấu trúc 
+
+18
+00:04:41,774 --> 00:04:41,774
+của ngà răng. 
+
+19
+00:03:10,221 --> 00:03:24,581
+Về mặt lịch sử, đơn vị cơ bản cấu tạo nên ngà răng chính là các ống ngà chạy xuyên suốt toàn bộ bề dày của ngà răng từ mọi phía, cả ở thân răng lẫn chân răng. 
+
+20
+00:03:24,581 --> 00:03:30,131
+Toàn bộ cấu trúc mặt cắt của ngà răng được cấu thành từ các ống ngà. 
+
+21
+00:03:30,341 --> 00:03:45,921
+Các ống ngà này chứa các đuôi nguyên sinh chất hoặc bào tương của nguyên bào ngà lấp đầy ống, và bao quanh các đuôi bào tương này là dịch ngà. 
+
+22
+00:03:47,371 --> 00:03:53,941
+Phần đầu hoặc thân tế bào chính là lớp nguyên bào ngà nằm ở tủy răng. 
+
+23
+00:03:54,671 --> 00:04:05,181
+Nằm giữa các ống ngà là mạng lưới collagen của ngà gian ống, nơi chứa đựng các tinh thể hydroxyapatite canxi. 
+
+24
+00:04:06,331 --> 00:04:25,291
+Theo mô học, các ống ngà này có đường đi uốn lượn hình chữ S ở vùng thân răng, và bắt đầu ít cong hơn hoặc thẳng hơn ở vùng rìa cắn, chóp múi, còn ở vùng chân răng thì có xu hướng chạy thẳng. 
+
+25
+00:04:25,661 --> 00:04:31,951
+Ngoài ra, số lượng và đường kính ống ngà cũng thay đổi từ đường nối men-ngà cho đến tủy răng. 
+
+26
+00:04:32,961 --> 00:04:39,991
+Ở vị trí gần đường nối men-ngà, chúng có đường kính nhỏ và nằm cách xa nhau. 
+
+27
+00:04:39,991 --> 00:05:01,811
+Đó là lý do tại sao mỗi milimet vuông chỉ chứa khoảng 20.000 ống ngà; trong khi khi gần đến tủy, đường kính ống ngà to dần và chúng xích lại gần nhau hơn, đạt mật độ khoảng 45.000 ống ngà trên mỗi milimet vuông. 
+
+28
+00:05:02,261 --> 00:05:17,129
+Nếu các em ngẫm nghĩ về tạo tác kỳ diệu này, các em sẽ thấy sự sắp xếp hay cấu trúc này là một cơ chế bảo vệ tự nhiên dành cho tủy răng. 
+
+29
+00:05:17,679 --> 00:05:31,119
+Bằng cách nào? Thứ nhất, ống ngà có đường kính hẹp hơn khi ở gần đường nối men-ngà, chúng nằm cách xa nhau, và ở vùng thân răng, chúng uốn lượn theo hình chữ S. 
+
+30
+00:05:31,509 --> 00:05:41,039
+Toàn bộ cấu trúc này giúp làm chậm và cản trở sự di chuyển của bất kỳ tác nhân gây kích thích nào tiến vào tủy răng. 
+
+31
+00:05:41,039 --> 00:05:46,829
+Thêm vào đó, hướng chảy của dịch ngà là hướng ra ngoài chứ không phải hướng vào trong. 
+
+32
+00:05:47,199 --> 00:06:06,889
+Vì vậy, thử tưởng tượng xem, một vi sinh vật muốn xâm nhập và gây nhiễm trùng tủy thì nó phải có trọng lượng phân tử cực nhỏ để chui lọt qua đường kính hẹp của ống ngà từ đường nối men-ngà. 
+
+33
+00:06:07,299 --> 00:06:17,179
+Nó phải tìm được đường đi hay cổng vào tại đường nối men-ngà, nơi mà các ống ngà nằm cách khá xa nhau. 
+
+34
+00:06:17,179 --> 00:06:23,489
+Đồng thời, vi khuẩn đó còn phải có khả năng bơi ngược dòng chảy của dịch ngà. 
+
+35
+00:06:23,489 --> 00:06:30,399
+Tất cả những yếu tố đó đều là các cơ chế bảo vệ tự nhiên nhằm bảo vệ an toàn cho tủy răng. 
+
+36
+00:06:30,599 --> 00:06:40,889
+Đó là lý do ống ngà có xu hướng thẳng hơn ở bên dưới rìa cắn và chóp múi, vì tại đây lớp men răng dày đã đóng vai trò bảo vệ tốt hơn. 
+
+37
+00:06:40,889 --> 00:06:47,299
+Cho nên, vùng này không quá cần đến đường đi uốn lượn chữ S như các vùng ngà răng khác. 
+
+38
+00:06:47,299 --> 00:06:54,959
+Tương tự như vậy đối với vùng chân răng, nơi đã được vùi ngập bên trong mô nha chu bám dính và xương ổ răng. 
+
+39
+00:06:54,959 --> 00:06:58,279
+Đó là lý do tại sao ở chân răng, ống ngà cũng có xu hướng thẳng hơn. 
+
+40
+00:06:58,509 --> 00:07:13,729
+Và điều này giải thích tại sao khi bệnh nhân bị lộ chân răng, tình trạng nhạy cảm ngà lại tăng lên, bởi vì con đường đi qua ống ngà thẳng để tới tủy đã trở nên ngắn và dễ dàng hơn nhiều. 
+
+41
+00:07:14,029 --> 00:07:20,389
+Dưới đây là hình ảnh vi phẫu điện tử quét có màu, cho thấy cấu trúc của ngà răng. 
+
+42
+00:07:20,519 --> 00:07:28,019
+Đây là hình thái mô học và chúng ta sẽ liên hệ nó với rất nhiều vấn đề gặp phải khi dán ngà răng. 
+
+43
+00:07:30,630 --> 00:07:39,050
+Đặc trưng là ngà răng có cấu trúc không đồng nhất, nó không đồng nhất hay có xu hướng đồng nhất như men răng. 
+
+44
+00:07:39,480 --> 00:07:48,640
+Tính theo trọng lượng, ngà răng chứa 70 đến 75% chất vô cơ, 20% chất hữu cơ và 5 đến 10% nước. 
+
+45
+00:07:49,230 --> 00:07:55,450
+Nó có hàm lượng nước phong phú và thành phần hữu cơ dồi dào hơn so với men răng. 
+
+46
+00:07:55,930 --> 00:08:05,120
+Tính theo thể tích, ngà răng gồm 50% vô cơ, 25% nước và 25% hữu cơ. 
+
+47
+00:08:05,120 --> 00:08:11,370
+Vậy nên, ngà răng khoáng hóa kém hơn men răng, nhưng lại khoáng hóa cao hơn xương và xê măng răng. 
+
+48
+00:08:11,750 --> 00:08:21,260
+Hàm lượng khoáng chất thay đổi hoặc có xu hướng tăng dần theo thời gian, và ngà răng sẽ mất đi tính đàn hồi nhớt khi tuổi tác càng cao. 
+
+49
+00:08:21,800 --> 00:08:40,530
+Khi so sánh qua biểu đồ này, ta thấy thành phần vô cơ chiếm khoảng 70% trọng lượng và 50% thể tích, trong khi thành phần hữu cơ chiếm 20% trọng lượng và 25% thể tích. 
+
+50
+00:08:41,750 --> 00:08:45,480
+Nước chiếm 10% trọng lượng và 25% thể tích. 
+
+51
+00:08:45,930 --> 00:08:52,310
+Do đó, các em phải cân nhắc thật kỹ trước khi thực hiện dán trên ngà răng. 
+
+52
+00:08:52,470 --> 00:08:58,630
+Nó chứa một lượng nước rất lớn, làm tăng tính ưa nước của ngà. 
+
+53
+00:08:58,940 --> 00:09:17,670
+Cùng với các thành phần hữu cơ, tổng cộng cả hai yếu tố này chiếm đến 50% thể tích của ngà răng; đây là những đặc tính hoặc vật chất gây cản trở nghiêm trọng đến quá trình dán ngà. 
+
+54
+00:09:18,570 --> 00:09:27,460
+Đồng thời, trước khi chúng ta chuyển sang một vấn đề khác, thầy nghĩ thầy sẽ thảo luận điều này sớm hơn dự định. 
+
+55
+00:09:27,890 --> 00:09:33,870
+Khi các em xoi mòn ngà răng, axit xoi mòn được dùng để loại bỏ các thành phần vô cơ. 
+
+56
+00:09:34,410 --> 00:09:41,030
+Đó là lý do tại sao axit có khả năng hòa tan các trụ men nhiều hơn là chất gian trụ. 
+
+57
+00:09:41,160 --> 00:10:02,340
+Ở đây, khi các em xoi mòn và loại bỏ một phần thể tích vô cơ vốn chiếm 50% của ngà răng, các em đang làm giảm tỷ lệ vô cơ và để cho chất hữu cơ cùng nước chiếm ưu thế, từ đó làm trầm trọng thêm các đặc tính cản trở dán dính của ngà răng. 
+
+58
+00:10:02,870 --> 00:10:13,210
+Thầy muốn nhắc lại một chút về men răng. Biểu đồ này hiển thị cấu trúc men răng, cho thấy men răng đồng nhất hơn ngà răng rất nhiều. 
+
+59
+00:10:13,710 --> 00:10:29,490
+Như thế nào? Cấu trúc men răng chứa khoảng 95 đến 97% vô cơ; trong đó trụ men chiếm phần lớn và chất gian trụ chiếm phần nhỏ hơn. 
+
+60
+00:10:29,880 --> 00:10:37,030
+Điều này tương đương với 88% phần trăm thể tích của cấu trúc men răng. 
+
+61
+00:10:38,490 --> 00:10:43,100
+Còn chất hữu cơ chỉ chiếm 1% theo trọng lượng và 2% theo thể tích. 
+
+62
+00:10:43,830 --> 00:10:51,030
+Phần còn lại là nước, chiếm khoảng 4% trọng lượng và 10% thể tích. 
+
+63
+00:10:51,300 --> 00:11:03,430
+Khi các em dùng axit xoi mòn men răng và lấy đi một phần cấu trúc vô cơ, thì phần lớn cấu trúc còn lại vẫn là chất vô cơ chiếm tỷ lệ áp đảo. 
+
+64
+00:11:04,020 --> 00:11:11,010
+Vì vậy, men răng rõ ràng là đồng nhất hơn, đồng nhất hơn ngà răng rất rất nhiều. 
+
+65
+00:11:11,810 --> 00:11:25,710
+Đó là lý do khi chúng ta cân nhắc việc dán trên ngà răng, có sáu vấn đề cần được tính đến để thiết kế một quy trình dán ngà tối ưu. 
+
+66
+00:11:26,780 --> 00:11:31,230
+Trong đó, bốn vấn đề đầu tiên liên quan trực tiếp đến cấu trúc ngà răng. 
+
+67
+00:11:31,230 --> 00:11:40,990
+À, chính xác là năm vấn đề liên quan đến cấu trúc, và một vấn đề liên quan đến quy trình sửa soạn xoang trám. 
+
+68
+00:11:41,690 --> 00:11:52,890
+Thứ nhất là thành phần không đồng nhất của ngà. Ngà răng có cấu trúc dị thể do được cấu tạo từ cả phần vô cơ lẫn phần hữu cơ. 
+
+69
+00:11:52,890 --> 00:12:06,920
+Và phần hữu cơ chiếm một tỷ lệ đáng kể không thể chối cãi, không thể bỏ qua khi các em xây dựng kỹ thuật hay nguyên lý dán trên ngà. 
+
+70
+00:12:09,360 --> 00:12:17,090
+Khi các em xoi mòn bề mặt ngà, quá trình này sẽ làm hòa tan phần khoáng vô cơ. 
+
+71
+00:12:17,090 --> 00:12:34,240
+Điều này làm bộc lộ nhiều sợi collagen hơn, về mặt tương đối sẽ làm tăng tỷ lệ chất hữu cơ và làm giảm năng lượng bề mặt, bởi vì mọi chất hữu cơ đều có năng lượng bề mặt thấp hơn chất vô cơ. 
+
+72
+00:12:35,110 --> 00:12:36,100
+Đó là vấn đề số một. 
+
+73
+00:12:36,560 --> 00:12:37,890
+Vấn đề số hai, 
+
+74
+00:12:39,420 --> 00:12:49,500
+Nếu các em thiết kế nguyên lý dán ngà thông qua các ống ngà, thì nó có một cấu trúc mô học rất phức tạp. 
+
+75
+00:12:50,070 --> 00:13:01,440
+Các ống ngà thay đổi đa dạng về số lượng, đường kính, cũng như tỷ lệ phân bố giữa ống ngà và sợi collagen từ đường nối men-ngà cho đến tận tủy. 
+
+76
+00:13:02,090 --> 00:13:18,010
+Do đó, làm sao các em có thể thiết kế một hệ thống dán chung được? Hệ thống dán áp dụng cho 20.000 ống ngà hay cho 45.000 ống ngà khi nằm gần tủy? 
+
+77
+00:13:19,110 --> 00:13:28,810
+Đường kính, hướng đi, số lượng và tỷ lệ phân bố của chúng biến thiên liên tục từ đường nối men-ngà xuống tận tủy răng. 
+
+78
+00:13:29,550 --> 00:13:40,300
+Thêm vào đó, năng lượng bề mặt thấp vốn có của ngà răng, do hàm lượng chất hữu cơ cao, khiến cho sức căng bề mặt tại đây bị giảm sút. 
+
+79
+00:13:40,510 --> 00:13:55,764
+Hơn nữa, như chúng ta đã nhắc đến, việc xoi mòn ngà làm loại bỏ hoặc hòa tan một phần thành phần vô cơ, 
+
+80
+00:13:55,764 --> 00:14:11,270
+tạo cơ hội cho thành phần hữu cơ thể hiện rõ hơn sự cản trở dán dính trong quá trình dán lên ngà răng. 
+
+81
+00:14:11,270 --> 00:14:23,290
+Tại sao? Bởi vì lúc này, các em đang làm giảm thêm năng lượng bề mặt bằng cách giảm đi lượng chất vô cơ. 
+
+82
+00:14:23,290 --> 00:14:46,900
+Tất cả những điều này dẫn đến việc sức căng bề mặt của keo dán lỏng sẽ lớn hơn năng lượng bề mặt của chính ngà răng, làm giảm đi khả năng thấm ướt và sự xâm nhập của keo dán vào bên trong ngà răng. 
+
+83
+00:14:47,750 --> 00:14:59,650
+Không chỉ vậy, ngay cả thành phần khoáng hóa chiếm 50% thể tích ngà răng cũng rất khác biệt và biến đổi, không chỉ theo độ tuổi, không chỉ trong cùng một khoang miệng của một bệnh nhân, mà thậm chí trên cùng một chiếc răng cũng có sự khác nhau. 
+
+84
+00:15:00,277 --> 00:15:12,097
+Bởi vì ngà thân răng, vốn chiếm khối lượng chính của ngà, thì canxi hóa và khoáng hóa cao hơn so với ngà vỏ và ngà gian cầu. 
+
+85
+00:15:12,987 --> 00:15:22,057
+Chưa kể do những kích thích lên tủy trong một số trường hợp, ngà xơ hóa không ống ngà sẽ được hình thành. 
+
+86
+00:15:22,607 --> 00:15:35,517
+Lớp ngà này bị canxi hóa cao hơn nhiều và cần được xử lý đặc biệt; người ta gọi nó là ngà cẩm thạch vì nó có cấu trúc tựa như đá cẩm thạch, rất khó để xoi mòn bằng axit. 
+
+87
+00:15:35,867 --> 00:15:38,657
+Tất cả những sự khác biệt này tồn tại theo từng vùng khác nhau. 
+
+88
+00:15:41,777 --> 00:15:44,257
+Một trong những vấn đề lớn nhất chính là lớp mùn ngà. 
+
+89
+00:15:44,677 --> 00:15:46,057
+Lớp mùn ngà là gì? 
+
+90
+00:15:47,037 --> 00:15:52,957
+Chúng ta hãy cùng xem bức ảnh chụp cửa sổ kính bên phải này. 
+
+91
+00:15:53,447 --> 00:16:08,767
+Bức ảnh phía trên là một ô cửa bám đầy bụi bẩn; bụi dính vào kính trong một ngày mưa, rồi sức nóng của mặt trời làm chúng bám chặt và trét đều trên bề mặt kính. 
+
+92
+00:16:09,577 --> 00:16:22,267
+Nếu các em cố gắng lau sạch kính bằng những cách thông thường, các em sẽ tạo ra nhiều lực ma sát hơn, làm vết bẩn bị kéo vệt ra, khiến mặt kính mờ đục. 
+
+93
+00:16:23,737 --> 00:16:43,417
+Nếu muốn có một tấm kính trong suốt, các em phải dùng dung dịch tẩy rửa để hòa tan lớp bụi bẩn đã bị trét cứng bởi nước mưa, nắng nóng, và cả nhiệt ma sát sinh ra từ khăn hay giấy khi lau chùi. 
+
+94
+00:16:44,727 --> 00:16:49,427
+Khi các em khoan cắt tạo xoang trám, một tình trạng tương tự cũng xảy ra. 
+
+95
+00:16:50,207 --> 00:16:52,137
+Các em đang cắt sửa soạn một xoang trám. 
+
+96
+00:16:53,497 --> 00:17:01,027
+Các mảnh vụn sẽ bắn ra trong quá trình cắt; đó là các mùn ngà, vụn men răng, và các mô sâu răng. 
+
+97
+00:17:01,817 --> 00:17:18,077
+Chúng bị nhồi nhét và trét mỏng bởi dụng cụ cắt cùng nhiệt ma sát trong môi trường nước bọt; thậm chí ngay cả khi các em sửa soạn xoang với răng được cách ly hoàn toàn bằng đê cao su. 
+
+98
+00:17:18,647 --> 00:17:33,057
+Sự tuôn chảy của dịch ngà, tất cả những yếu tố đó, đang xào nấu lớp mùn hay các mảnh vụn này với nhau, tạo thành một hỗn hợp nhão bị nén chặt và trét bít vào bên trong các ống ngà. 
+
+99
+00:17:34,077 --> 00:17:36,077
+Người ta gọi đó là lớp mùn ngà. 
+
+100
+00:17:36,587 --> 00:18:02,477
+Đó là một lớp màng vi thể mỏng, không nhìn thấy bằng mắt thường, tạo thành từ bất kỳ mảnh vụn canxi hóa nào sinh ra khi khoan cắt ngà, men hay xê măng; chúng bị đánh bóng bởi dụng cụ cắt do nhiệt ma sát, bị ép chặt vào ống ngà và bề mặt ngà để trở thành một phần của các mô bên dưới. 
+
+101
+00:18:03,397 --> 00:18:27,077
+Lớp mùn ngà này, như các em thấy trong ảnh chụp vi phẫu điện tử quét, gồm hai lớp tách biệt: lớp đầu tiên là một lớp bề mặt lỏng lẻo, mỏng, xốp và yếu; trong khi đó, có một nút chặn nằm thụt sâu bên trong các ống ngà, bị nén rất chặt. 
+
+102
+00:18:28,587 --> 00:18:52,971
+Khi các em nghĩ đến tình trạng nhạy cảm ngà, hiện tượng ê buốt này xảy ra theo thuyết thủy động học, thông qua sự di chuyển lên xuống của dịch ngà và sự cọ xát của nó dọc theo đuôi bào tương của nguyên bào ngà bên trong ống ngà. 
+
+103
+00:18:52,971 --> 00:19:18,177
+Tín hiệu này được truyền vào tế bào, chính là nguyên bào ngà, kích thích tiết ra dịch rỉ viêm và các chất dẫn truyền đến đám rối thần kinh bên dưới; quá trình này diễn ra chỉ trong một phần nhỏ của giây, dẫn đến sự ê buốt. 
+
+104
+00:19:20,567 --> 00:19:26,157
+Đây là cơ chế được Brännström giải thích, và cũng là những gì được làm rõ qua thuyết thủy động học. 
+
+105
+00:19:27,217 --> 00:19:45,047
+Sau đó, sau khi khoan cắt xoang trám, lớp mùn ngà sẽ bịt kín các ống ngà này bằng một khối mảnh vụn nén chặt, bị trét bởi dụng cụ và nhiệt ma sát, kết hợp với dịch ngà hoặc đôi khi là nước bọt. 
+
+106
+00:19:45,987 --> 00:19:53,430
+Đó là cái nút chặn ngà; trong khi các em vẫn còn một lớp xốp yếu và lỏng lẻo nằm trên bề mặt răng. 
+
+107
+00:19:53,920 --> 00:20:01,150
+Về bản chất, lớp mùn ngà này mang lại những lợi ích lớn; nó giúp giảm tính thấm của ngà răng. 
+
+108
+00:20:01,860 --> 00:20:07,180
+Bằng cách ngăn chặn vi khuẩn xâm nhập vào bề mặt cũng như chặn đứng vi khuẩn tiến sâu vào trong các ống ngà. 
+
+109
+00:20:07,510 --> 00:20:13,450
+Tất cả điều này ngăn cản sự tuôn chảy ra ngoài của dịch ngà và bịt kín hoàn toàn các ống ngà. 
+
+110
+00:20:13,710 --> 00:20:20,990
+Nhờ vậy, tình trạng nhạy cảm ngà sẽ giảm đi, đồng thời ngăn cản sự trao đổi ion giữa vật liệu phục hình và cấu trúc răng. 
+
+111
+00:20:20,990 --> 00:20:27,260
+Đó là lý do tại sao, thầy xin mở ngoặc nói thêm một chút nhé. Đó là lý do, 
+
+112
+00:20:28,590 --> 00:20:31,830
+Khoảng 30, 40 hay có lẽ là 50 năm về trước, 
+
+113
+00:20:33,910 --> 00:20:38,080
+tất cả các nhà nghiên cứu đều khuyến cáo sử dụng vecni copal lót dưới miếng trám amalgam. 
+
+114
+00:20:38,760 --> 00:20:41,290
+Vật liệu đó sẽ trám bít các ống ngà. 
+
+115
+00:20:42,380 --> 00:20:48,390
+Nhằm ngăn chặn sự trao đổi ion của các sản phẩm ăn mòn xâm nhập vào ngà răng. 
+
+116
+00:20:49,070 --> 00:20:49,540
+Các em nắm được không? 
+
+117
+00:20:50,100 --> 00:20:52,510
+Và để cải thiện khả năng bít kín của amalgam. 
+
+118
+00:20:53,360 --> 00:21:04,680
+Nhưng sau khi phát hiện ra lớp mùn ngà này vào đầu những năm 60, cỡ khoảng năm 1962, 
+
+119
+00:21:06,040 --> 00:21:11,370
+họ nhận ra rằng các ống ngà thực chất không hề mở ra sau khi chúng ta sửa soạn xong xoang trám. 
+
+120
+00:21:12,790 --> 00:21:23,590
+Đặc biệt nếu các em hình dung họ khoan xoang trám bằng tay khoan tốc độ thấp, không có hệ thống làm mát hoặc làm mát không đủ, thì sự bám dính của nút chặn ngà khi đó còn bền chắc hơn ngày nay rất nhiều. 
+
+121
+00:21:24,100 --> 00:21:24,720
+Đúng không nào? 
+
+122
+00:21:26,040 --> 00:21:37,690
+Vậy nên họ đã ngừng sử dụng vecni vì họ không muốn gia tăng các bước phục hồi răng; bởi vì càng thêm nhiều bước, các em càng tạo ra nhiều cơ hội xảy ra sai sót. 
+
+123
+00:21:40,220 --> 00:21:49,740
+Nếu các em muốn có một quy trình phục hồi thành công, các em phải giảm thiểu khả năng mắc lỗi bằng cách giảm đi số lượng các bước thực hiện. 
+
+124
+00:21:50,660 --> 00:21:51,370
+Các em hiểu ý thầy chứ? 
+
+125
+00:21:52,020 --> 00:21:54,650
+Do đó, lớp mùn ngà mang lại những lợi ích tuyệt vời. 
+
+126
+00:21:55,230 --> 00:22:07,590
+Tuy nhiên, nó lại là một bất lợi khi các em cân nhắc đến quá trình dán dính, điều mà các em cực kỳ cần đối với các vật liệu phục hồi gốc nhựa. 
+
+127
+00:22:08,850 --> 00:22:25,910
+Chúng ta cần dán để cải thiện sự khít sát, giảm vi kẽ, bít kín các khe hở sinh ra do sự chênh lệch hệ số giãn nở và co thắt nhiệt; đồng thời để bù trừ cho sự co ngót trùng hợp, hướng sự co ngót đó về phía bề mặt tự do thay vì các bề mặt dán. 
+
+128
+00:22:26,230 --> 00:22:26,780
+Đúng không? 
+
+129
+00:22:27,350 --> 00:22:37,290
+Nhưng khi áp dụng nguyên lý này, keo dán của các em sẽ phải đối mặt với lớp mùn bề mặt lỏng lẻo; làm sao các em có thể dán lên một bề mặt lỏng lẻo được? 
+
+130
+00:22:39,030 --> 00:22:40,740
+Vậy làm thế nào để giải quyết vấn đề này? 
+
+131
+00:22:42,380 --> 00:23:04,610
+Nếu các em loại bỏ hoàn toàn lớp mùn ngà, các em sẽ đạt được độ bền dán cao nhất; nhưng đồng thời, khả năng cao – hay đúng hơn là chắc chắn – các em sẽ gây ra tình trạng nhạy cảm ngà sau khi phục hồi. 
+
+132
+00:23:06,560 --> 00:23:17,240
+Nếu các em không loại bỏ nó, các em sẽ giảm thiểu ê buốt hậu phẫu đến mức tối đa; nhưng đổi lại, đó sẽ là một thất bại, một quy trình dán hoàn toàn thất bại. 
+
+133
+00:23:17,980 --> 00:23:19,870
+Các em có thể giải quyết chuyện này bằng cách nào? 
+
+134
+00:23:20,320 --> 00:23:22,880
+Hầu hết các nhà nghiên cứu đều nghiêng về một giải pháp. 
+
+135
+00:23:23,720 --> 00:23:25,280
+Đó là xử lý ngà răng. 
+
+136
+00:23:26,500 --> 00:23:28,030
+Xử lý ngà có nghĩa là gì? 
+
+137
+00:23:28,590 --> 00:23:30,430
+Nó có khác gì so với xoi mòn không? 
+
+138
+00:23:31,550 --> 00:23:34,600
+Về mặt kỹ thuật mà nói, các em sử dụng cùng một loại gel axit. 
+
+139
+00:23:36,060 --> 00:23:46,820
+Nhưng xét về mặt khái niệm tổng quát, xử lý ngà mang ý nghĩa điều chỉnh lại các đặc tính bề mặt ban đầu. 
+
+140
+00:23:47,660 --> 00:23:48,900
+Như vậy nghĩa là sao? 
+
+141
+00:23:50,090 --> 00:23:52,070
+Men răng vốn không có độ xốp. 
+
+142
+00:23:52,740 --> 00:23:55,300
+Men răng không hề có bất kỳ lỗ xốp nào. 
+
+143
+00:23:55,610 --> 00:24:00,310
+Các em đang tạo ra các vi lỗ bằng gel axit, đó là lý do người ta gọi nó là xoi mòn. 
+
+144
+00:24:02,210 --> 00:24:15,170
+Trong khi đó, ngà răng vốn đã có sẵn các lỗ xốp, các em chỉ cần cải thiện tính thấm của nó mà thôi. 
+
+145
+00:24:15,800 --> 00:24:20,500
+Đó là lý do bước này được gọi là xử lý bề mặt ngà. 
+
+146
+00:24:21,330 --> 00:24:26,560
+Chúng ta sẽ bàn chi tiết về nó ngay trong vài giây tới. 
+
+147
+00:24:27,410 --> 00:24:38,030
+Quy trình này sẽ dẫn đến việc loại bỏ hoàn toàn lớp mùn lỏng lẻo trên bề mặt, và loại bỏ một phần nút chặn ngà, chú ý là không loại bỏ toàn bộ nút chặn. 
+
+148
+00:24:38,580 --> 00:24:43,620
+Hoặc ngày nay, ngay cả khi toàn bộ nút chặn bị lấy đi ở một số hệ thống dán nhất định, thầy vẫn sẽ bít kín nó lại. 
+
+149
+00:24:44,340 --> 00:24:51,770
+Đồng thời làm bộc lộ mạng lưới collagen của ngà gian ống. 
+
+150
+00:24:52,690 --> 00:24:58,520
+Chúng ta cùng xem lại những hình ảnh vi phẫu điện tử quét này. 
+
+151
+00:24:58,850 --> 00:24:59,921
+bị bịt kín. 
+
+152
+00:25:00,980 --> 00:25:26,760
+Chúng ta đã loại bỏ toàn bộ lớp bề mặt và mở tung mạng lưới collagen; trên lát cắt ngang này, rất dễ thấy rằng các em đã có một mạng lưới collagen ngà gian ống xốp và hoàn toàn lộ ra ngoài. 
+
+153
+00:25:26,760 --> 00:25:35,530
+Tất cả những không gian vi thể này sẽ được lấp đầy bởi keo dán; các em đã mở được ngà răng, và đây là một góc nhìn khác, hay một lát cắt ngang khác. 
+
+154
+00:25:36,370 --> 00:25:50,120
+Nó có đơn giản như vậy không? Không, không hề đơn giản như vậy đâu, mọi chi tiết sâu hơn sẽ được bàn đến ở phần sau. 
+
+155
+00:25:50,830 --> 00:26:07,410
+Nhưng khi các em mở ống ngà ra, các em sẽ trực tiếp đối mặt với vấn đề thứ sáu, đó là độ ẩm nội tại của ngà răng; ngà răng luôn ướt vì chứa dịch ngà, vậy làm sao các em giải quyết điều này? 
+
+156
+00:26:07,410 --> 00:26:12,640
+Đặc biệt là khi các em tiến càng sâu về phía tủy. 
+
+157
+00:26:13,470 --> 00:26:24,590
+Độ ẩm này càng tăng, đồng nghĩa với việc ngà răng càng ưa nước, trong khi các em lại đang cố gắng xâm nhập nó bằng vật liệu nhựa mang đặc tính kỵ nước. 
+
+158
+00:26:27,920 --> 00:26:32,120
+Vật liệu đó sẽ bị dội ngược ra khỏi ngà răng. 
+
+159
+00:26:33,180 --> 00:26:57,180
+Cho nên, trên chính bề mặt ngà, ngay cả khi đã xử lý xong lớp mùn ngà, các em vẫn phải đối mặt với độ ẩm nội tại của ngà; đây là bản chất tự nhiên của ngà răng, vậy làm sao các em có thể giải quyết tất cả những khó khăn này? 
+
+160
+00:26:57,180 --> 00:27:07,050
+Ở đây có một sơ đồ minh họa cho thấy các ống ngà bị bịt kín bởi các nút chặn mùn ngà và lớp mùn bề mặt; một khi các em loại bỏ chúng, các em sẽ đối mặt ngay với một bề mặt ưa nước. 
+
+161
+00:27:07,050 --> 00:27:17,910
+Và đây là một sơ đồ màu khác minh họa việc nút chặn ngà và lớp mùn bề mặt đang bịt kín các ống ngà, giúp giảm tính thấm và kiểm soát lượng dịch ngà rỉ ra. 
+
+162
+00:27:17,910 --> 00:27:31,590
+Nhưng làm thế nào thầy có thể xử lý lớp mùn ngà lỏng lẻo trên bề mặt này? Thầy không thể dán dính trên một cấu trúc đã lỏng lẻo sẵn được. 
+
+163
+00:27:33,100 --> 00:28:02,400
+Các em đừng ngần ngại đặt câu hỏi nhé, mọi thắc mắc luôn được hoan nghênh; các em có thể để lại bình luận dưới video này và thầy sẽ trả lời sớm nhất có thể; ngoài ra các em cũng có thể liên hệ với thầy qua thông tin liên lạc, qua email hoặc gửi tin nhắn trực tiếp qua Twitter hay các nền tảng mạng xã hội sẽ được cung cấp ở slide tiếp theo, và thầy cũng sẽ phản hồi sớm nhất có thể. 
+
+164
+00:28:03,450 --> 00:28:13,960
+Cảm ơn các em đã dành thời gian lắng nghe bài giảng của thầy, và đừng quên đăng ký kênh cũng như bật thông báo để cập nhật những video mới nhất nhé. Cảm ơn các em. 

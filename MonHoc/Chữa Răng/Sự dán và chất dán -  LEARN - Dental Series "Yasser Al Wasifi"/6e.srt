@@ -1,0 +1,1840 @@
+﻿1
+00:00:39,176 --> 00:00:43,796
+Welcome everybody, this is Yasser Elwasif from Learn Dental Series.
+
+2
+00:00:44,206 --> 00:00:53,056
+In this episode, we will continue our discussion of the topic of adhesion and
+adhesives in restorative dentistry.
+
+3
+00:00:54,046 --> 00:01:14,396
+Let me disclaim that I don't receive fees, compensation or realities from the
+sales of any of the products shown in this discussion, and at the same time,
+this presentation has not been sponsored by any company, agency or organization
+and is only prepared for educational purposes.
+
+4
+00:01:15,006 --> 00:01:30,086
+This presentation is also copyright protected and no part of it could be
+transmitted or reproduced by any means unless or without you have a prior
+written permission of the author.
+
+5
+00:01:31,066 --> 00:01:38,866
+Today, we will focus in recalling and applying clinical steps of bonding to both
+enamel and dentin.
+
+6
+00:01:38,866 --> 00:01:45,076
+Also, select the suitable adhesive system and technique for different bonded
+restorative treatments.
+
+7
+00:01:45,326 --> 00:02:07,036
+In the first episode, let me remind you that we discussed adhesive dentistry in
+details as a concept including history and introduction, including definitions
+and scientific terminologies, including modes of adhesion and finally what are
+the advantages of introducing adhesion in restorative dentistry.
+
+8
+00:02:07,696 --> 00:02:31,626
+Then from episode 2 up to episode 5 for four episodes, we discussed the
+substrate or the adherent represented by the tooth structure enamel and dentin,
+including reviewing histological and chemical structures of both enamel and
+dentin and comparing them with each other.
+
+9
+00:02:32,326 --> 00:02:54,126
+Followed by formulating this as a concept of adhesion to enamel and clinical
+steps for adhesion of enamel, in a same way, we discussed the problems
+encountered in adhesion to dentin and formulate the most suitable principles and
+clinical steps to bond with dentin, which was dentin hybridization.
+
+10
+00:02:54,496 --> 00:03:07,976
+In this episode, we will start to discuss the adhesive itself or what is
+popularly known as the glue or the dentin bonding agents in full details.
+
+11
+00:03:08,526 --> 00:03:21,719
+When discussing the adhesives or the dentin bonding agents, we will discuss what
+are the proposed ideal requirements, how it developed, what is the
+classification of dentin bonding agent,
+
+12
+00:03:21,719 --> 00:03:40,386
+what is the composition of the contemporary dentin bonding agents and what about
+its biocompatibility and bond durability and failure and finally, what are the
+clinical considerations or the clinical tips when applying adhesive bonding
+agent for bonded restoration.
+
+13
+00:03:41,136 --> 00:03:52,486
+Let us start with ideal requirements, as we mentioned before, many times that
+there is no ideal, there is no best, but there is the most suitable.
+
+14
+00:03:52,486 --> 00:04:08,796
+That's why our requirements or ideal requirements will not be applied for a
+single material, each material has its own advantages and its own disadvantages
+and subjected to pros and cons, okay?
+
+15
+00:04:09,116 --> 00:04:22,686
+That's why when we select a material, we select the most suitable one according
+to our clinical condition and according to our knowledge and experience in using
+such a material.
+
+16
+00:04:23,196 --> 00:04:27,796
+Let us start with the proposed ideal requirement for dentin bonding agent.
+
+17
+00:04:28,096 --> 00:04:38,256
+Number one, it should be compatible with the all used restorative materials,
+which is absolutely impossible to find such a requirement, okay?
+
+18
+00:04:38,996 --> 00:04:49,196
+That's why you will find a material highly compatible with a restorative
+material X and not compatible with a restorative material Y.
+
+19
+00:04:49,826 --> 00:04:59,050
+Okay, and this will be formulated by the end of this topic to use a closed chain
+group or a material.
+
+20
+00:04:59,088 --> 00:05:03,478
+manufactured by the same brand or by the same manufacturer.
+
+21
+00:05:04,208 --> 00:05:19,648
+Number two should be non-irritant to the pulp and the surrounding tissues, then
+your prime requirements is to be chemically compatible with the restorative
+material and chemically compatible with the tooth structure and the oral
+environment.
+
+22
+00:05:20,368 --> 00:05:23,548
+It should bond with the same efficiency to enamel and dentin.
+
+23
+00:05:24,128 --> 00:05:32,538
+Because they are in the same cavity, to different types of dentin, including
+sclerotic dentin, to cut and uncut enamel.
+
+24
+00:05:32,538 --> 00:05:39,808
+And also, this requirement are not fulfilled by any mean by a single material.
+
+25
+00:05:40,438 --> 00:05:54,428
+Okay? You, as we discussed before, etch and rinse strategy is suitable to bond
+with cut and uncut enamel, while self-etching primers are suitable and much more
+successful to bond with dentin.
+
+26
+00:05:54,988 --> 00:05:59,728
+Except also sclerotic dentins needs special care.
+
+27
+00:06:00,428 --> 00:06:18,518
+Okay? Then, should be hydrophilic to displace water from dentin and to penetrate
+inside the hydrophilic or be compatible with the hydrophilicity of dentin, while
+at the same time it should be hydrophobic to have a great affinity to the
+hydrophobic bonding agent.
+
+28
+00:06:18,518 --> 00:06:20,958
+Permitting its infiltration into dentin.
+
+29
+00:06:20,958 --> 00:06:36,368
+And we didn't find in the previous episodes a single material that has this
+property, to be hydrophilic and hydrophobic at the same time, that's why we used
+a bipolar molecule called primer.
+
+30
+00:06:36,988 --> 00:06:49,098
+Coming after that, the low viscosity to diffuse enough, okay, to give a great
+wet ability and to diffuse enough and infiltrate or imrignate dentin surface and
+demineralized enamel.
+
+31
+00:06:49,368 --> 00:06:53,728
+Should have a minimal film thickness to provide high bond strength.
+
+32
+00:06:53,948 --> 00:07:17,508
+Its bond strength should be at least 17MPa and this is one of the most important
+parameters that we have no excuse for any manufacturer to produce to produce a
+bonding agent with experimental and clinical studies proving that its bond
+strength is higher than 17MPa.
+
+33
+00:07:17,508 --> 00:07:30,448
+Why? Because the shrinkage stresses produced by polymerization of composite
+resin due to its polymerization shrinkage is about 17MPa.
+
+34
+00:07:30,808 --> 00:07:58,088
+So, to have a stabilized, antidegradable bonding layer, okay, elastic joint that
+will function to reduce the leakage produced by the polymerization shrinkage and
+seal this gap, it should has a bond strength of at least 17MPa to counteract the
+shrinkage stresses produced by composite resin.
+
+35
+00:07:58,448 --> 00:08:06,468
+And this will be our zero point to approve or disapprove any dentin bonding
+agent.
+
+36
+00:08:06,878 --> 00:08:35,248
+Bond durability of your bonding agent should maintain perfect marginal seal
+under our complex oral environment, including closing leading force, aqueous
+environment or the wet environment of the oral cavity and thermal fluctuation,
+different thermal changes.
+
+37
+00:08:35,248 --> 00:08:45,388
+It should be stable under all of these conditions, should be suitable for both
+moist and dry environment of dentin and of oral cavity.
+
+38
+00:08:45,388 --> 00:08:57,798
+Should have no voids or effects after polymerization, if it is fluoride
+releasing its an additional advantages and better to be fluoride release should
+polymerize with different curing lights.
+
+39
+00:08:57,798 --> 00:09:05,048
+Including including canstent, quartz, halogen, including light emitting diodes
+and all available commercial types.
+
+40
+00:09:05,248 --> 00:09:07,848
+Should be easily manipulated and non-technique sensitive.
+
+41
+00:09:07,928 --> 00:09:18,018
+Easily manipulated, okay, but not non-technique sensitive, it differs according
+to the number of steps.
+
+42
+00:09:18,178 --> 00:09:18,518
+Increasing the number of steps, increasing your technique sensitivity.
+
+43
+00:09:18,518 --> 00:09:18,558
+And as we mentioned before, opens the door for mistakes.
+
+44
+00:09:18,558 --> 00:09:28,888
+In general, you should highlight that no single dentin bonding agent could
+fulfill by any mean all these ideal requirements.
+
+45
+00:09:29,178 --> 00:09:39,048
+But the smart clinician should evaluate the case, the oral and the oral
+environment to select the most suitable dentin bonding agent for his case.
+
+46
+00:09:39,458 --> 00:09:46,438
+Also, clinician knowledge, skills and experience are important in selecting the
+suitable dentin bonding agent.
+
+47
+00:09:46,438 --> 00:09:54,758
+It's a very easy and at the same time it's a very difficult topic, that's why
+practice makes perfect.
+
+48
+00:09:56,272 --> 00:10:06,832
+Okay, that's why you are in need for training, continuous training, continuous
+updating to increase your skills, experience and knowledge in this field.
+
+49
+00:10:07,952 --> 00:10:22,142
+So, you may have two or three different dentin bonding agents and different
+dentin bonding strategies to be used, but surely not at the same cavity, it
+differs from a case to another one.
+
+50
+00:10:22,782 --> 00:10:27,502
+Let us review historically the development of dentin bonding agents.
+
+51
+00:10:27,502 --> 00:10:54,872
+It all started started with what is called first generation, which started with
+the trials of Michelle Bonocore, okay, and formulated in two dentin bonding
+agent commercially available called first generation which started from 1958 up
+to 70s and it is no longer present nowadays, okay?
+
+52
+00:10:54,872 --> 00:10:58,432
+This based on organic phosphates.
+
+53
+00:10:58,622 --> 00:11:06,872
+These organic phosphates react chemically with inorganic calcium hydroxyapatite
+and or the collagen component.
+
+54
+00:11:06,872 --> 00:11:20,702
+So it is designed for ionic bonding to hydroxyapatite or for covalent bonding
+like hydrogen bonding to collagen to a sort or believe to be a sort of
+absorption.
+
+55
+00:11:21,032 --> 00:11:27,302
+But actually at this time they didn't discover yet what is called smear layer.
+
+56
+00:11:27,542 --> 00:11:38,102
+Okay, that's why Exobax was low bond strength which ranges about 2 to 3 MPa.
+
+57
+00:11:38,102 --> 00:12:04,722
+That's why it is not acceptable at this time, they didn't discover the 17 MPa
+required to counteract the polymerization shrinkage of stress of composite
+especially at this time composite was chemically cured and already has a massive
+polymerization shrinkage or volumetric shrinkage due to polymerization, okay?
+
+58
+00:12:04,722 --> 00:12:18,102
+At the same time. the stresses were much more aggressive than 17, it
+deteriorates by time, okay, when exposed to moisture because they didn't treat
+dentin yet.
+
+59
+00:12:18,352 --> 00:12:26,652
+Unstable individual components in solution, its components dissolved easily and
+acceptable long-term retention.
+
+60
+00:12:26,652 --> 00:12:38,682
+It was very low, no improvement in marginal leakage, and this time they was they
+were only etch inamel as recommended by Michelle Bonocore, but smear layer is
+not removed.
+
+61
+00:12:38,942 --> 00:12:39,852
+I think it was not discovered yet.
+
+62
+00:12:39,852 --> 00:13:00,322
+The example was this hazy picture because it is was old enough, okay, it's hard
+to find an example online, okay, or any image online for this generation and its
+example was Servident adhesive by SSUY Company.
+
+63
+00:13:00,942 --> 00:13:07,012
+Then, in a trial to bond with the smear layer, okay?
+
+64
+00:13:07,352 --> 00:13:17,442
+They didn't know how to deal with in late 70s up to mid 80s the second
+generation was developed, which is based on phosphate ester.
+
+65
+00:13:17,782 --> 00:13:24,542
+Please note that these phosphate esters bond by polar interaction to dentin.
+
+66
+00:13:24,952 --> 00:13:29,052
+Okay, it contains phenyl phosphate and HEMA in ethanol.
+
+67
+00:13:29,522 --> 00:13:48,142
+Once ethanol evaporated, they are applied on etched enamel, okay, but dentin
+left raw as it is, okay, in an active application ethanol evaporated and leaving
+phenyl phosphate, okay, and HEMA to react in a polar interaction to dentin.
+
+68
+00:13:48,142 --> 00:13:50,932
+What is meant by polar interaction to dentin?
+
+69
+00:13:51,322 --> 00:13:56,972
+That means that interaction between the bonding agent negatively charged
+phosphate.
+
+70
+00:13:57,432 --> 00:14:11,102
+Remember this statement, negatively charged phosphate group to the positively
+charged calcium ions, okay, in dentin structure and smear layer.
+
+71
+00:14:11,742 --> 00:14:22,142
+Okay, once we say positively charged and negatively charged, then this bond
+which type of of of bonding mode or adhesive bond?
+
+72
+00:14:22,432 --> 00:14:28,002
+Yes, exactly, it's the weakest one, unstable one, electrostatic one.
+
+73
+00:14:28,212 --> 00:14:38,102
+So, you will find that its range is a wondering one, not from two to three, it's
+from two up to seven.
+
+74
+00:14:38,262 --> 00:14:45,482
+It depends on how much the quantity of ionic charge you need to bond with.
+
+75
+00:14:45,482 --> 00:14:51,082
+And at the same time, it's modest because it will neutralize each other.
+
+76
+00:14:51,932 --> 00:14:57,972
+as soon as possible, and if it is started with seven, soon it will drop to two.
+
+77
+00:14:58,992 --> 00:15:04,972
+Okay? And when it started with two, it will build up up to seven then comes down
+after neutralization.
+
+78
+00:15:05,532 --> 00:15:11,302
+Second, it is used to penetrate a layer of smear, okay, layer by polymers.
+
+79
+00:15:11,952 --> 00:15:21,682
+Okay? That gives a little fraction of mechanical interlocking, but of no value
+BO because you are penetrating the superficial layer.
+
+80
+00:15:22,482 --> 00:15:28,412
+That's why it is it's true backs including modest bond strength.
+
+81
+00:15:28,722 --> 00:15:38,342
+Okay? It is expected bond strength deterioration or decreased over time,
+expected also, inadequate hydrolytic stability in oral environment.
+
+82
+00:15:38,622 --> 00:15:56,272
+The first two drawbacks is due to the mode of action, it was electrostatic mode
+of action, which we described in the first episode as the weakest mode of
+adhesion because once your charges are neutralized by each other, you will have
+a debonded surface.
+
+83
+00:15:57,002 --> 00:16:19,122
+And at the same time, still we are etching enamel as recommended by Michelle
+Bunoco according to his trial, okay, but not removing the smear layer we already
+discovered that and trying to manage it, okay, but up till now we didn't remove
+it or modify it at all.
+
+84
+00:16:19,382 --> 00:16:28,042
+Example of that, okay, was the Scotch bond by 3M dental, okay, clear file bond
+bond system by Kurari company, okay?
+
+85
+00:16:28,802 --> 00:16:38,212
+Also you could notice how old the photos from its resolution and it is it was
+difficult to find a photograph for it.
+
+86
+00:16:38,532 --> 00:16:43,532
+Then comes in mid 80s up to late 80s, okay, the third generation.
+
+87
+00:16:44,132 --> 00:17:03,242
+The idea of third generation they believe that you have a smear layer with
+superficial loose layer, which is the layer you facing and unfavorable for
+bonding, but at the same time from the point of biological compatibility,
+
+88
+00:17:03,512 --> 00:17:23,552
+they don't like to maneuver or treat or doing any management for your smear
+layer because they need the dentin to be sealed properly sealed, okay, to
+preserve your pulp and to prevent post-op hypersensitivity, okay?
+
+89
+00:17:23,962 --> 00:17:29,232
+So they are trying to fix and reinforce the smear layer.
+
+90
+00:17:30,122 --> 00:17:35,572
+Okay? Then firstly, they modify not to remove the smear layer.
+
+91
+00:17:36,052 --> 00:17:41,992
+The first generation, they didn't know that there is smear layer at all, but it
+is discovered due to failure.
+
+92
+00:17:42,332 --> 00:17:56,952
+Then comes the second generation, they try to bond with the superficial layer or
+they believe they could penetrate it and bond with it by polar attraction
+between dissimilar charges, okay?
+
+93
+00:17:57,322 --> 00:18:16,322
+Then comes the third generation trying to fix or modify the smear layer, okay,
+and make it much more reinforced by trying to infiltrate it by acidic monomer,
+okay, which much more stronger than this superficial layer.
+
+94
+00:18:16,632 --> 00:18:26,782
+They use acidic or kelating agent that might reduce the availability of calcium
+and replacing it with a supplement which was ferric oxalate.
+
+95
+00:18:27,172 --> 00:18:37,172
+Then they are trying to demineralize a superficial layer and substitute the
+calcium ions with ferric oxalate which thought to be much more stronger.
+
+96
+00:18:37,542 --> 00:18:46,452
+So, in such a condition, we are etching enamel and modifying or partial remove
+the smear layer, okay?
+
+97
+00:18:47,552 --> 00:19:05,422
+One of its drawbacks, okay, although their bond strength limit get higher than
+that of the first and second generation, which didn't exceed 7 MPa, here we
+having 12 to 15 MPa.
+
+98
+00:19:05,762 --> 00:19:16,822
+But still although they have an excellent laboratory result, these bonding agent
+does not meet the acceptance in the clinical trials.
+
+99
+00:19:16,822 --> 00:19:27,282
+Especially they have marginal discoloration with another recorded problem due to
+ferric oxalate, okay?
+
+100
+00:19:27,282 --> 00:19:30,962
+Which thought to be due to ferric oxalate, which discolored by time.
+
+101
+00:19:31,272 --> 00:19:41,622
+Example of that comes Scotchbond 2 by 3M dental, Ture by Den Mat, Universal Bond
+2, ART by Kulzer.
+
+102
+00:19:53,662 --> 00:19:54,862
+Comes the fourth generation.
+
+103
+00:19:56,785 --> 00:20:10,025
+Based on Fushima work and Nakaishi at all works, based on the concept of dentin
+hybridization, which we already discussed in three to four episodes before,
+okay?
+
+104
+00:20:10,795 --> 00:20:30,715
+Which is characterized by ability to bond to both enamel and dentin, strong
+stable bond strengths which reach up to 27, we are in need only for 70, it
+reached to 27 MPa to dentin.
+
+105
+00:20:30,935 --> 00:20:32,125
+Improve performance when applied to moist dentin surface.
+
+106
+00:20:32,445 --> 00:21:02,345
+And based on this concept, we have three major steps, if you remember it, acid
+etching gel, primer, and bonding agent, and we discussed in detail in details
+the rational behind using each one of them, including especially primer, we
+discussed in detail the solvent, what are the strategy of your solvent, which is
+acetone based, ethanol based, or water based.
+
+107
+00:21:02,345 --> 00:21:03,125
+We discussed try bonding.
+
+108
+00:21:03,125 --> 00:21:05,915
+We discussed wet bonding, okay, and the difference between them.
+
+109
+00:21:06,145 --> 00:21:14,225
+The fourth generation is a very technique sensitive because it requires multi
+steps and each step specially priming and bonding requires multi coats.
+
+110
+00:21:14,865 --> 00:21:41,465
+That means that, okay, if you consider conditioning as one step, okay, and
+primer for two to three coats, then you will have four times of application,
+bonding for two coats, then it becomes six all of these and the material are
+technique sensitive to moisture in a completely isolated field.
+
+111
+00:21:42,515 --> 00:21:51,945
+Although of these drawbacks, although it needs much more training and much more
+understanding of the rational of the material, okay?
+
+112
+00:21:52,505 --> 00:22:03,975
+And you should know as we discussed before, how wet is wet and how dry dry,
+what's your solvent, is it acetone, ethanol or water based primer, okay?
+
+113
+00:22:04,175 --> 00:22:08,835
+And how to apply and how to avoid the drawbacks.
+
+114
+00:22:08,835 --> 00:22:23,815
+Although of all of these drawbacks, it is still the standard by which any newer
+system are judged.
+
+115
+00:22:24,245 --> 00:22:32,895
+It is our ruler, it is our balance to weight other materials till now, okay?
+
+116
+00:22:33,295 --> 00:22:37,745
+And this is an important statement.
+
+117
+00:22:38,075 --> 00:22:40,795
+Still up till now, it is considered as the golden standard.
+
+118
+00:22:41,405 --> 00:22:46,765
+By which we standardize other materials, okay?
+
+119
+00:22:47,425 --> 00:22:54,345
+This is the fourth generation which is based on hybridization. Okay?
+
+120
+00:22:54,805 --> 00:23:14,865
+Example, Scotch bond multipurpose, Optibond FL by care, all bond 2 by Besco,
+okay? And all the coming generations are trials to reduce the complications of
+fourth generation.
+
+121
+00:23:14,865 --> 00:23:19,805
+Are a trial to reduce the number of steps and thereby, okay, or thereby.
+
+122
+00:23:20,185 --> 00:23:27,805
+We will reduce the ability to mistakes or the number of mistakes.
+
+123
+00:23:28,015 --> 00:23:42,305
+And it's a trial to made it user friendly material. The first trial was to
+modify this, but there is no new concept, okay, after the concept of a
+hybridization.
+
+124
+00:23:42,415 --> 00:23:53,305
+It was all trials based on hybridization and formation of hybrid layer, but how
+to produce it by a faster way and much more much more less techniques and stuff.
+
+125
+00:23:53,945 --> 00:23:54,235
+Okay?
+
+126
+00:23:54,755 --> 00:24:07,205
+Fifth generation appears at late 90s till now, it tends to simplify the adhesive
+technique into two steps, okay?
+
+127
+00:24:07,755 --> 00:24:24,335
+And it provides bond strength of about 25 MPa, it is lesser than fourth
+generation, but still above the required 17 MPa, so it is acceptable, okay?
+
+128
+00:24:24,815 --> 00:24:37,275
+It entails that joining both primer and bond with each other in one step, then
+you will have two components.
+
+129
+00:24:37,465 --> 00:24:46,285
+One of them is the conditioner or acid etching and the other prime and bond at
+the same time. This system.
+
+130
+00:24:46,432 --> 00:24:48,542
+Okay, or a chemistry track, okay?
+
+131
+00:24:48,692 --> 00:24:53,542
+Actually, I don't read yet how they already formulated it, okay?
+
+132
+00:24:53,762 --> 00:25:07,402
+But it's recorded drawback, lack of many components necessary to perform multi
+substrate bonding, then it doesn't bond efficiently with enamel and dentine,
+okay, by the same way.
+
+133
+00:25:07,402 --> 00:25:19,752
+And still, still, you are reducing the number of bottles, okay, the number of
+steps, but actually clinically you are still for multi need need for multi
+codes, okay?
+
+134
+00:25:19,752 --> 00:25:31,742
+That's why you reduced physically the number of steps, physically in your back
+you reduced the number of bottles, but actually you are still in need for multi
+codes.
+
+135
+00:25:31,742 --> 00:25:39,102
+Example for that, prime and bond empty by dent supply and exide by Evoclar
+vident.
+
+136
+00:25:39,272 --> 00:25:47,022
+Okay? Then comes the era in the early twenties, okay?
+
+137
+00:25:47,722 --> 00:25:54,922
+And by the start of 21st century, okay, 21st century.
+
+138
+00:25:55,222 --> 00:26:00,422
+Then comes the era of self- etching primers.
+
+139
+00:26:01,892 --> 00:26:18,132
+Introduced by what is called sixth generation, but also tends to simplify the
+adhesive technique and to reduce the number of steps and also to counter act the
+problems encountered in using H and R strategy.
+
+140
+00:26:18,132 --> 00:26:31,732
+Including both operative site sensitivity, and in a trial to solve the problem
+we discussed it before, how wet it is wet and how dry it dry and you should
+identify your primer.
+
+141
+00:26:31,732 --> 00:26:38,522
+Is it acetone based, ethanol based, or water based?
+
+142
+00:26:38,522 --> 00:26:53,482
+And should I go for wet bonding, okay, or should I go for dry bonding, wet
+bonding may leave as we discussed uncovered exposed collagen.
+
+143
+00:26:53,482 --> 00:27:02,772
+That may give a chance to matrix metalloproteinase to denature it leading to
+post-operative sensitivity and nano leakage.
+
+144
+00:27:02,772 --> 00:27:12,682
+Or you should go for dry bonding using water content that will result in also
+another problem.
+
+145
+00:27:13,142 --> 00:27:22,192
+That what you exposed should be covered immediately and infiltrated immediately
+by primer and bond.
+
+146
+00:27:22,192 --> 00:27:33,202
+They introduced the first self-etching primers, okay? In the early 2000s.
+
+147
+00:27:33,202 --> 00:27:50,732
+Okay, until now its presence, okay, by introducing the sixth generation to
+simplify the adhesive technique and reduce the number of steps, okay, to be two
+or one step.
+
+148
+00:27:50,732 --> 00:28:12,102
+Okay, the system already produced a lower bond strength, okay, but still within
+the acceptable range, you just need 17 MPa, it provides you with 20 MPa, but
+with too much lesser problems, okay, especially post-operative hypersensitivity.
+
+149
+00:28:12,102 --> 00:28:21,752
+The system combines etching and priming in one step and bonding in another step,
+okay?
+
+150
+00:28:21,752 --> 00:28:38,572
+Then the agent or conditioner you use is acidic monomer that penetrates or
+partially demineralized demineralized the dentin and the smear layer.
+
+151
+00:28:38,572 --> 00:28:59,072
+It didn't remove the smear layer, but already it uses it at as a component of
+your hybrid layer, okay, infiltrating it with acidic monomer that demineralize
+and at the same time coat the exposed collagen and dentin at the same time.
+
+152
+00:28:59,072 --> 00:29:12,892
+It may be in two steps including a bottle of agent and primer, okay, and then a
+bottle of bonding agent or maybe all in one etching primer and bonding in one
+step.
+
+153
+00:29:12,892 --> 00:29:22,772
+Okay? The major advantage is the bond to dry as well as wet dentin.
+
+154
+00:29:22,772 --> 00:29:32,392
+Because you already skipped the procedure of how wet it and how dry is dry is it
+acetone, ethanol, blah blah blah, we discussed before.
+
+155
+00:29:32,392 --> 00:29:39,232
+That's why they bond to superficial as well as deep dentin with the same
+quality.
+
+156
+00:29:39,232 --> 00:29:51,342
+And simplified the bonding technique, but at its first development suffers from
+too much drawbacks, okay, that
+
+157
+00:29:52,703 --> 00:30:07,453
+So, if you would like to use it with version uncut in a mill, okay, maybe you
+need a selective etching or maybe you need to raffle the enamel surface,
+especially in cases to close minor diamonds, okay?
+
+158
+00:30:08,193 --> 00:30:25,323
+They could not bond with chemically curing resin or dual cured resin, that's why
+it is not suitable with indirect restoration when using indirect aesthetic
+restorations when using cements, okay, resin cement or adhesive, resin cement.
+
+159
+00:30:26,013 --> 00:30:38,433
+Most of these systems, when firstly developed, were not compatible with
+different types of curing units, are not able or we have no version of it
+suitable for bonding with amalgam.
+
+160
+00:30:38,433 --> 00:30:54,570
+And due to you didn't manage the water contents, okay, of dentin, okay, although
+you didn't rinse it, you didn't wash it, okay, even just a little bit dryness,
+
+161
+00:30:54,570 --> 00:31:08,993
+but there is a residual water content of the dentin surface which is
+considerably reduce its bond strength and jeopardize its bond durability.
+
+162
+00:31:09,573 --> 00:31:22,923
+Example for that was adhesive to steps by Evoclar Vivadent and the most commonly
+used was Prombit Ebub by 3M space as a one-step bonding agent.
+
+163
+00:31:23,533 --> 00:31:32,053
+Then comes the seventh generations, okay, generation in late 2000s up till now,
+okay?
+
+164
+00:31:32,953 --> 00:31:47,873
+It is a new version of six generation, okay, self-etching primers including
+incorporation incorporation of disinfectant, desensizer agent in one bottle,
+okay?
+
+165
+00:31:48,503 --> 00:32:04,543
+It provides upon the senders of about 20 to 25 megapascal, which is considerable
+reasonable or considerable enough and the bottle come to act as agent, primer,
+bond, disinfectant and desensizer, okay?
+
+166
+00:32:05,113 --> 00:32:25,423
+It's greatly simplify the bonding protocol, eliminate the possible application
+errors, okay, provides a bond strength of 20 up to 25 megapascal, which is
+considerable reasonable, enough, okay, because I remember you just we need 17
+megapascal and above, okay?
+
+167
+00:32:25,923 --> 00:32:40,613
+But it has too much, too much drawbacks, that's why it is not commonly available
+now, okay, although it is still manufactured, but most of clinicians didn't
+prefer it, okay?
+
+168
+00:32:40,983 --> 00:33:09,483
+It's drawback, okay, is a significant amount of water in its formulation,
+especially it has a disinfectant, okay, and desensizer based on water, which for
+leads to hydrolysis and chemical breakdown of our formed hybrid layer, so its
+bond durability and bond strength is unstable, although it it is from 20 to 25,
+but it is unstable.
+
+169
+00:33:09,843 --> 00:33:34,693
+Once placed and polymerized, they are generally more hydrophilic than two steps
+of self-etching adhesive system, okay, and more prone to water sorption that
+limits the depth of resin infiltration on the tooth structure and that's why,
+okay, its hydrophilicity limits the quality of produced hybrid layer.
+
+170
+00:33:35,023 --> 00:33:43,463
+That's why the clinical and scientific data of this adhesive proves that they
+are hydrophilic and degrade more rapidly, okay?
+
+171
+00:33:43,883 --> 00:34:01,954
+And the chemistry as being acidic involved in this liquid has shown to adverse
+adversely react with composite initiator system and it resulting in improper
+polymerization
+
+172
+00:34:01,954 --> 00:34:13,153
+of the first increment of your composition of your composite reason that also
+interfere with proper bonding between the bonding agent and the composite reason
+material.
+
+173
+00:34:13,153 --> 00:34:19,813
+Example for that was was G bond of GC America and I bond ofzer.
+
+174
+00:34:21,083 --> 00:34:27,003
+Then 10 years ago, okay, till now comes the eighth generation.
+
+175
+00:34:27,423 --> 00:34:33,973
+The eighth generation, okay, it incorporates a nano sized filler.
+
+176
+00:34:34,573 --> 00:34:58,150
+They already removed the antiseptic decent sizer agent, okay, from the seventh
+generation, use the same formulation of one step sixth generation self etching
+primer, but with incorporation of nano sized filler that improves infiltration
+of your bonding agent inside dentin.
+
+177
+00:34:58,150 --> 00:35:04,040
+And at the same time, improve the quality of your hybrid layer.
+
+178
+00:35:04,410 --> 00:35:21,150
+Okay? The quality of your hybrid layer by adding filler, at the same time by
+increasing the depth of penetration, so your hybrid layer is improved in a
+quality and in a quantity represented by depth or thickness, okay?
+
+179
+00:35:21,150 --> 00:35:35,950
+They are also dual cured self-etching adhesive which will be suitable to bond
+with adhesive resin materials, okay, for bonding indirect restoration, okay?
+
+180
+00:35:36,790 --> 00:36:02,020
+Also it believes to contain, okay, or most manufacturers write down that it
+contains anti anti matrix metalloproteinase enzyme that inhibit the enzymatic
+activity that deteriorate your collagen, especially if it is exposed, okay, or
+biodegraded by remnants of water, okay?
+
+181
+00:36:02,020 --> 00:36:08,560
+By inhibiting this enzymatic activity, it will increase the bond durability and
+the bond efficiency.
+
+182
+00:36:08,800 --> 00:36:22,430
+Okay? It is believed to give experimentally bond strength up to 30 MPa, okay,
+that means that clinically it will pass our grade of 17 MPa easily.
+
+183
+00:36:22,430 --> 00:36:31,230
+Its advantages is it's nano filler, okay, and also the action of anti matrix
+metallo proteinase.
+
+184
+00:36:31,230 --> 00:36:48,650
+Example for that, okay, is the futurabond by Voco and tetric N-bond universal,
+okay, and those was the first introduction of universal adhesive agents that
+will be discussed later on.
+
+185
+00:36:48,650 --> 00:36:58,040
+Okay? We could conclude that we have a first generation or number of steps, two
+steps enamel etching followed by bonding.
+
+186
+00:36:58,040 --> 00:37:08,640
+Then it has two components, its bond strength was 2 to 3 MPa, and as we
+mentioned before, they didn't discover at this time that there is something
+called smear layer.
+
+187
+00:37:08,640 --> 00:37:22,920
+Then comes second generation, which bond by electrostatic polar charge
+attraction, okay, depends on organic phosphonates, okay?
+
+188
+00:37:22,920 --> 00:37:29,660
+Number of steps was two, also etching of enamel then application of bonding,
+components are two.
+
+189
+00:37:29,660 --> 00:37:37,980
+Gives the modest bond strength which was between 2 to 7 and the bond durability
+was questionable, okay?
+
+190
+00:37:37,980 --> 00:38:01,980
+Then comes third generation that depends on the first trial to fix or to modify
+the smear layer, okay, which termed dentin conditioning by ferric oxalate, okay,
+then it comes three steps, okay, conditioning or etching to enamel followed by
+dentin conditioning by ferric oxalate, followed by bonding agent,
+
+191
+00:38:01,980 --> 00:38:14,040
+okay, and the component was between 2 to 3 and provides a satisfactory result
+but could not pass our test, okay?
+
+192
+00:38:14,040 --> 00:38:34,300
+It was only between 12 and 15 MPa, and starting the era of dentin hybridization
+by H and Re 3 components fourth generation, okay, that provides bond strength up
+to 27 MPa.
+
+193
+00:38:34,300 --> 00:38:44,360
+Fifth generation as a trial to reduce the number of steps by adding boost primer
+and bonding in one bottle, and agent in one bottle.
+
+194
+00:38:44,360 --> 00:38:54,120
+So it is still H and R category of two components with maximum bond strength or
+bond strength with 25 MPa.
+
+195
+00:38:54,120 --> 00:39:07,840
+Then introduced the sixth generation of self-etching family, okay, six
+generation which may be two steps or one steps.
+
+196
+00:39:07,840 --> 00:39:23,280
+Two stop two steps mean that you are combining boost primer and agent as one
+bottle followed by bonding agent or all in one as one step, provides 20 MPa,
+which is acceptable.
+
+197
+00:39:23,280 --> 00:39:46,520
+Coming the seventh generation, one component self etching primer, but it
+contains disinfectant and desensitizer, okay, which degraded due to its
+increased hydrophilicity, okay, and provides bond strengths of 20 up to 25 MPa,
+but its durability is questionable
+
+198
+00:39:46,520 --> 00:40:08,217
+due to its degradation by water contents, and finally the eighth generation, one
+step self-agent, okay, one component provides over experimentally over 30 MPa,
+universal application the conclusion of our study volume of our dentin bonding
+agent.
+
+199
+00:40:08,427 --> 00:40:25,327
+If we conclude the design, okay, of all of these components, especially starting
+from the fourth one, fourth generation, fifth generation up to the eighth
+generation, okay, which is based on dentin hybridization.
+
+200
+00:40:25,327 --> 00:40:40,687
+If you imagine this is a hydrophilic tooth structure and this is a hydrophobic
+restorative material and in between them you apply three steps or you apply
+three strategies.
+
+201
+00:40:40,947 --> 00:40:46,127
+Number one, etchant, okay, number two, priming, number two, bonding agent.
+
+202
+00:40:46,127 --> 00:40:51,087
+If you are doing them separately, then it is the fourth generation.
+
+203
+00:40:51,367 --> 00:41:17,587
+If you combining etchant as one step and combining bonding and priming as
+another step, okay, in a trial to reduce to reduce the number of clinical steps
+and hereby you are reducing the ability to mistake, okay, and make the material
+more user-friendly, okay, but still the etchant is a separate step.
+
+204
+00:41:17,697 --> 00:41:19,597
+This is called the fifth generation.
+
+205
+00:41:19,597 --> 00:41:29,847
+If you combine etchant and primer as one step, then bonding in another step,
+okay?
+
+206
+00:41:29,987 --> 00:41:48,927
+This is the sixth generation, two steps, okay? If you combine all three with
+each other in one step, this is the sixth generation, single step, the seventh
+generation and eighth generation.
+
+207
+00:41:48,927 --> 00:42:14,047
+When you are performing etchant or etching or conditioning to enamel and dentin
+in a separate step, and primer and bond, either with each other or separately,
+okay, once you etch separately, okay, and rinse, it is etch and rinse or total
+etch system.
+
+208
+00:42:14,297 --> 00:42:40,637
+Okay? Both of them are total etch system or what is called etch and rinse. If
+you join etchant and primer either in one step and bonding in another, or all
+with each other, you are not in need for rinsing anymore, you are in need for
+drying, okay?
+
+209
+00:42:40,637 --> 00:42:43,667
+And this is a self-etching system.
+
+210
+00:42:43,667 --> 00:43:00,957
+Either it is called self-etching primer, if you use bonding in a separate step,
+or when they are all coming in one step, they are called self-etching adhesive,
+because it's a single application for adhesive, okay?
+
+211
+00:43:01,187 --> 00:43:25,807
+Once, okay? If you imagine this is schematic diagram, okay, we are trying number
+one, to apply the force generation separate steps, here comes the etching,
+removing the smear layer, priming, then comes bonding, okay?
+
+212
+00:43:25,807 --> 00:43:55,587
+Fifth generation, etching, removing the smear layer and coming bond and primer
+at a single step, okay? For sixth generation, two steps, you are applying
+etching and the primer, you could note that you didn't remove the smear layer
+and comes the bonding agent with you in your hybrid layer or as a part, integral
+part of your hybrid layer.
+
+213
+00:43:55,587 --> 00:44:11,837
+And for self adhesive, you applying all at once, okay, without removal of smear
+layer, also by modifying or fixing the smear layer or using it with you in your
+hybrid layer.
+
+214
+00:44:11,837 --> 00:44:16,027
+And here comes your hybrid layer.
+
+215
+00:44:16,027 --> 00:44:35,097
+Okay? But the integrity differs from system to system. Another schematic diagram
+showing the etch and rinse strategy where you have a dentinal plug and
+superficial layer.
+
+216
+00:44:35,097 --> 00:45:03,977
+When you condition dentin, you already expose the collagen, remove all the
+superficial layer, okay, and then comes the primer to infiltrate inside the
+exposed collagen network and dentinal tubules followed by dentin adhesive and
+hereby underneath are the scanning electron micrographs discussed before.
+
+217
+00:45:04,239 --> 00:45:11,649
+Steps or fifth generation conditioner okay and one bottle of adhesive including
+both bonding agent and
+
+218
+00:45:14,669 --> 00:45:44,559
+primer okay or a self etch strategy either two steps including acidic primer
+which combines both acid agent and acid agent and primer and adhesive okay in a
+separate step or all in one okay as one step like that of sixth generation okay
+seventh generation and eighth generation.
+
+219
+00:45:45,169 --> 00:45:59,489
+That's why when we classify our dentin dentin bonding agents it's very easy to
+classify it either by generation or by number of steps or according to etching
+pattern or adhesive strategy.
+
+220
+00:45:59,909 --> 00:46:25,999
+By generation we already discussed it now okay in late 1958 first generation up
+to 70s okay then comes in late 70s up to mid 80s second generation then in mid
+80s up to late 80s third generation okay then comes the hybridization by fourth
+generation in the early 90s okay
+
+221
+00:46:26,439 --> 00:46:47,479
+and in late 90s up to now okay fifth generation then comes in the early century
+self etching primers sixth generation then in the late 2000s okay thousands okay
+comes the seventh generation and in 2010s okay comes the eighth generation.
+
+222
+00:46:47,919 --> 00:46:53,229
+Fourth, fifth, seventh, eighth are all based on dentin hybridization.
+
+223
+00:46:53,349 --> 00:47:06,659
+The difference between each generation and the previous one is the next
+generation is trying to simplify and counteract the clinical problems coming
+from the previous generation.
+
+224
+00:47:07,269 --> 00:47:27,169
+If we classify our dentin bonding agents according to number of steps we will
+find three steps each and primer bonding agent which is the fourth generation
+okay and this was the first proposed condition hybridization of dentin.
+
+225
+00:47:27,979 --> 00:47:37,589
+Then all of these are three steps each followed by primer followed by bonding
+agent each is rinsed and dried.
+
+226
+00:47:37,879 --> 00:47:58,829
+Primer is only dried either self drying or by air as we mentioned many times
+before left for self dryness if it is acetone or ethanol based helped dryness by
+air blast for 2 to 3 seconds if it is water based then comes bonding agent which
+which should be light cured.
+
+227
+00:47:59,399 --> 00:48:15,609
+Then comes two steps okay which firstly was two steps one the first one was
+discovered when we do each separately and combine bonding agent and primer in
+one bottle.
+
+228
+00:48:15,739 --> 00:48:40,039
+This was fifth generation then comes two steps two which is the start of the
+innovation of self etching primer which is each and primer in one step followed
+by bonding okay then at this time you are not in need for washing or for rinsing
+at all
+
+229
+00:48:40,349 --> 00:48:53,359
+you are applying each and the primer as a one step in agitation or active
+application okay and let it for drying sufficiently for self dryness and some
+manufacturer recommended a blast of 2 to 3 seconds of air then comes the bonding
+agent okay.
+
+230
+00:48:53,359 --> 00:49:06,259
+Then comes one step all at once okay and this is one step adhesive which is
+sixth generation, one step, seventh generation and finally the eighth
+generation.
+
+231
+00:49:06,499 --> 00:49:20,979
+This schematic diagram is commonly found on if you google it you will find many
+of these schematic diagram okay describing the difference between one, two and
+three steps.
+
+232
+00:49:21,419 --> 00:49:27,429
+But what is the most important is according to the etching pattern or the
+adhesive strategy.
+
+233
+00:49:27,669 --> 00:49:34,559
+This adhesive strategy includes we already discussed a lot of it in the previous
+episodes okay.
+
+234
+00:49:35,219 --> 00:49:48,649
+We have three strategies three contemporary adhesive strategies okay depending
+on how the adhesive will interact with your smear layer and what are the steps?
+
+235
+00:49:48,909 --> 00:50:02,489
+Do you will do you will remove totally the smear layer okay and applying primer
+in a separate step applying bonding in a separate step or would you use the
+smear layer by self etching primers?
+
+236
+00:50:02,989 --> 00:50:11,218
+These strategies are Etch and rinse adhesive strategy, three steps, okay, or two
+steps like that of the first generation.
+
+237
+00:50:11,218 --> 00:50:17,828
+We'll serve its adhesive including six generation, seven generation up to eighth
+generation.
+
+238
+00:50:17,828 --> 00:50:30,328
+And what is recently added is a multi-mode or what is called universal adhesive
+strategy that works as etch and rinse or self etch adhesive system.
+
+239
+00:50:30,328 --> 00:50:36,088
+Let us start with self etch adhesive system which is formerly known as total
+etch.
+
+240
+00:50:36,088 --> 00:50:46,158
+And the strategy entails complete dissolution or dissolving of the smear layer,
+okay, in a separate acid etch and gel step.
+
+241
+00:50:46,158 --> 00:50:59,788
+So you need to rinse this acid, okay, and this acid again, I remember you, it is
+applied for at least 30 seconds for enamel and maximum 15 seconds to dentin.
+
+242
+00:50:59,788 --> 00:51:11,738
+And according the number of steps, it is either three steps including separate
+etching for 13 seconds in enamel and 15 seconds in dentin, okay?
+
+243
+00:51:11,738 --> 00:51:18,238
+Then rinsing, then a little bit dryness according to your primer, okay?
+
+244
+00:51:18,238 --> 00:51:38,328
+Either you dry it with air, then surely you will use water-based primer or you
+use a vacuum high volume factor with vacuum with cotton pellets to pick up gross
+water and this will be wet bonding when you are your primer is acetone or
+ethanol-based, okay?
+
+245
+00:51:38,328 --> 00:51:41,738
+Then comes the adhesive step.
+
+246
+00:51:41,738 --> 00:51:49,358
+Okay, those are three steps, etchant or conditioner, primer, okay?
+
+247
+00:51:49,358 --> 00:52:00,898
+Etchant will be rinsed, okay, and dried, primer only dried, either surface dried
+or air dried, and coming after that the bonding which should be cute.
+
+248
+00:52:00,898 --> 00:52:13,678
+Or comes in two steps where phosphoric acid etching is a separate step while
+bonding and primer are joining joined in one bottle system.
+
+249
+00:52:13,678 --> 00:52:27,668
+Etch and rinse strategy with acid etchant, okay, removes the superficial layer,
+okay, exposed the collagen matrix, okay?
+
+250
+00:52:27,668 --> 00:52:45,058
+For approximately five to 10 microns, okay, this mineral-free network of
+collagen is suspended in the rinsed water that should be removed and substituted
+by the monomer of your primer and we discussed before, okay?
+
+251
+00:52:45,058 --> 00:52:47,648
+How the primer either acetone-based or ethanol-based replaces this water.
+
+252
+00:52:47,648 --> 00:53:03,848
+But the most common problem as we mentioned before, that in this system we are
+not sure that we covered all the exposed collagen perfectly, and that's why
+matrix metalloproteinase may be activated and denaturate this collagen.
+
+253
+00:53:03,848 --> 00:53:13,508
+Leading to bonding failure, but what is the most worst worst is the
+post-operative hypersensitivity.
+
+254
+00:53:13,508 --> 00:53:15,618
+This is the most common problem in this system.
+
+255
+00:53:15,618 --> 00:53:22,488
+Okay, these are scanning micro graphs showing that resin encapsulation of acid
+etched collagen with etch and rinse, okay?
+
+256
+00:53:22,488 --> 00:53:45,588
+But you could note that the upper half of your collagen network are heavily
+loaded with resin, while the lower half is not as efficiently infiltrated by
+resin like the upper half.
+
+257
+00:53:45,588 --> 00:53:57,518
+And that's proves that there is a controversy about infiltration of resin inside
+the exposed collagen, and you may or surely unexposed exposed collagen or
+unsealed tubules may be left resulting in post operative hypersensitivity.
+
+258
+00:53:57,518 --> 00:54:15,668
+So, the use of this system needs much more experience, okay, and mainly mainly
+it's for professionally experienced operator rather than GBs or students, okay,
+or inexperienced operator, okay?
+
+259
+00:54:15,668 --> 00:54:45,058
+Etch and rinses there are several approaches to improve its performance by using
+aqueous two hydro-ethyl methacrylate based rewriting agent, prior to application
+of acetone to ensure proper proper expansion of the collagen, okay, and to
+motivate its the infiltration of the primer inside your exposed collagen, okay?
+
+260
+00:54:45,058 --> 00:54:52,888
+And this aqueous solution, okay, its water content will be displaced by
+vaporization of your solvent, okay?
+
+261
+00:54:52,888 --> 00:55:07,238
+Also by vigorous agitation of the primer solution, okay, this may increase the
+emulsion or the suspension or the infiltration of the resin inside, extending
+the time of infiltration, okay?
+
+262
+00:55:07,727 --> 00:55:22,327
+Acetone, dry, acetone, and the silicone, oil, ethanol, based primers with air,
+also, double the number of quotes, or triple the number of quotes, especially if
+the primer is acetone, or ethanol based.
+
+263
+00:55:22,567 --> 00:55:31,917
+That's why when you clinically apply, H and rinse, they advised you, don't etch
+dentine for more than 15 seconds.
+
+264
+00:55:32,137 --> 00:55:44,977
+Okay? Because more than 15 seconds, it will cause, it will enhance collagen
+denaturation, increase the demineralization depth that you couldn't fully
+infiltrate inside it.
+
+265
+00:55:45,367 --> 00:56:01,247
+Okay? Leave the dentine moist before applying primer, okay? Especially, if,
+your, solvent is acetone or ethanol, as we, termed before with bonding, okay?
+
+266
+00:56:01,557 --> 00:56:19,407
+And we answered the question of how wet is wet and how dry is dry, by just only
+evacuating the excess water by high vac, okay, and pick up the gross water by a
+cotton, pellet or a cotton pledget.
+
+267
+00:56:19,737 --> 00:56:46,667
+In case of excessive dentine desiccation, okay, if you forget and desiccate
+dentine by air, okay, you are in need to apply a rehydration agents like hydroxy
+ethyl methacrylate to hydroxy ethyl methacrylate that efficiently reexpand
+collapsed collagen and help the acetone, ethanol or water based material, okay,
+primer to reexpand collagen.
+
+268
+00:56:46,667 --> 00:57:04,727
+Okay? And actively apply your primer, okay, adhesive solution for at least 15
+seconds to demineralize, dentine or remineralize dentine by active application
+that will help to infiltrate inside, dentine.
+
+269
+00:57:05,207 --> 00:57:11,837
+At the same time, promote your solvent to evaporate, okay? Don't force evaporate
+it.
+
+270
+00:57:12,147 --> 00:57:20,387
+Okay? Don't extra evaporate it with water with air blast, okay, unless it is a
+water-based and you used many quotes that you are need to avoid overwrite
+phenomena.
+
+271
+00:57:20,387 --> 00:57:35,507
+Just, dry it with two to three seconds of, air blast.
+
+272
+00:57:36,017 --> 00:57:55,007
+Finally, you should apply multi quotes of your primer and bonding to allow for
+proper penetration and infiltration into the exposed collagen, matrix, peri and
+intertubular, and to the dentinal tubules.
+
+273
+00:57:55,007 --> 00:58:14,677
+Especially, if your solvent is acetone or ethanol, and we discussed it in the
+previous episode in details, because each each, coat will dissolve the first
+one, getting it to flow more down and to cover much more of your,
+
+274
+00:58:15,057 --> 00:58:31,307
+of your, exposed collagen.
+
+275
+00:58:31,307 --> 00:58:53,467
+In absolutely isolated operative feel, by using dam application, okay, and with
+high volume suction, apply multi quotes of primer and bond and allow sufficient
+time for each coat to infiltrate into your conditioned dentine.
+
+276
+00:58:53,757 --> 00:59:14,687
+To seal the open dentinal tubules and cover the exposed collagen, okay? Then
+comes the next strategy, which developed to reduce the number of steps to ease
+the application and made it less technique-sensitive, okay? With a lesser
+problem.
+
+277
+00:59:14,687 --> 00:59:27,017
+And when you reduce the number of steps, you reduced the ability to mistakes,
+which is the self-edge adhesive strategy.
+
+278
+00:59:27,477 --> 00:59:27,477
+It is comes to be more user-friendly and less technique-sensitive material,
+okay? And reduce the time of application, okay?
+
+279
+00:59:27,477 --> 00:59:54,607
+It's strategy based on mainly you are exposing what you could cover, okay? Or
+covering what you had already exposed exactly.
+
+280
+00:59:54,837 --> 01:00:06,817
+Not leaving much more collagen exposed to avoid post operative sensitivity and
+to solve the problem of water contents and to, skip the question of how wet is
+wet and how dry is dry.
+
+281
+01:00:06,817 --> 01:00:13,529
+Okay? Okay, and it comes something to infiltrate or one step, all of them at the
+same time.
+
+282
+01:00:13,999 --> 01:00:18,469
+The self-etching adhesive strategy steps, steps, okay?
+
+283
+01:00:18,669 --> 01:00:23,039
+Not required a separate acid etching.
+
+284
+01:00:23,649 --> 01:00:38,459
+Okay, except if you are dealing with enamel, this is the problem, it couldn't
+properly bond with enamel, okay, and its effectiveness is much more lesser than
+H and rins.
+
+285
+01:00:38,799 --> 01:00:44,139
+Okay, because acidity is not effective that a separate etching technique, okay?
+
+286
+01:00:44,489 --> 01:00:58,349
+But still, okay, it it deals with with collagen substrate, okay, and effectively
+could coble between collagen fibrile and the monomers exist in this system,
+okay?
+
+287
+01:00:58,849 --> 01:01:12,499
+That's why although the quality of hybrid layer is not as that produced by acid
+etching technique, okay, but it is still uniform and still satisfactory.
+
+288
+01:01:12,849 --> 01:01:28,559
+This is a scanning electron micrograph showing the amount of prosthesis, okay,
+and how homogeneously it is risen infiltrated better than this than that
+produced with H and rins technique.
+
+289
+01:01:28,789 --> 01:01:44,299
+Here we could compare the two pictures, okay, although this seems to the left
+side H and rins application, it seems to be more thicker, but it is not
+homogeneous.
+
+290
+01:01:44,299 --> 01:01:59,919
+The upper half is not like the lower half and self etch, okay, it is not the
+same quality, okay, but it is much more homogeneous and provides satisfactory
+level.
+
+291
+01:01:59,919 --> 01:02:08,179
+And if you could get a satisfactory hybrid layer without too much
+demineralization, it is much better, okay, than demineralized too much dentin,
+okay, of no value, but producing problems.
+
+292
+01:02:19,808 --> 01:02:41,528
+Strong, its pH is less than one, allowing interaction of some micrometers,
+depth, dentin and enamel, and it is effective in cut enamel, okay, normal
+enamel, normal cavity preparation, but still all the four, okay, are not
+effective for version uncut enamel or unprepare enamel.
+
+293
+01:02:41,848 --> 01:03:02,728
+Intermediate, it's between 1 and 2, allowing interaction depths of 1 to 2
+microns, which is satisfactory, okay, like adhese 1, F, mild, it's about two,
+ultra mild, more than 2.5, okay, it's it shows a nanometric, lips of hybrid
+layer, okay?
+
+294
+01:03:03,178 --> 01:03:10,328
+But all of these are not suitable for unprepared version enamel, okay?
+
+295
+01:03:10,728 --> 01:03:39,458
+Strong and intermediate may be suitable with cavity prepared cavity or enamel
+wall of the prepared cavity, while mild and ultra mild will be in need for a
+selective etching procedure, okay, on enamel separately, okay, in addition to
+the application of self etching primer after that, to qualify, to highly qualify
+the bonding with enamel.
+
+296
+01:03:40,778 --> 01:04:04,698
+But the degree of demineralization or interaction with a smear layer, okay, all
+of them could be demineralized dentin, okay, depending on that, the most
+important issue is not the pH, okay, it is the PKA, which is the dissociation of
+acid.
+
+297
+01:04:04,698 --> 01:04:30,258
+While the pH is a measure of concentration of hydrogen ions in an aqueous
+solution of acid, but PKA is the dissociation, how fast it could lose this
+hydrogen and be replaced by any another salt, which governs the reactivity of
+the acid, while the pH, it governs
+
+298
+01:04:30,738 --> 01:04:35,278
+the acidity of your acid, the degree of acidity.
+
+299
+01:04:35,278 --> 01:04:49,648
+It may be you have H6, H8, H12, okay, that means the pH is highly lowered, okay,
+and your acid is highly acidic, but it couldn't lose it easily like HCL, which
+has one hydrogen ion, but it could be lost easily and replaced by sodium to
+produce sodium hydrochloride.
+
+300
+01:04:50,008 --> 01:04:51,708
+Okay? Or sodium chloride.
+
+301
+01:04:52,808 --> 01:05:12,128
+Okay? When using self etching, okay, take care of these clinical application
+tips, each enamel separately with phosphoric acid, especially if you are using
+mild or ultra or extra mild self etching, okay, because they are not acidic
+enough to produce uniform hybridization or uniform penetration of enamel.
+
+302
+01:05:12,813 --> 01:05:24,723
+with microtex, that's why you may in need for a separate steps, with the lowest
+PH, which is mild and ultra ultra mild, okay?
+
+303
+01:05:25,193 --> 01:05:48,943
+Then apply self etch adhesive by actively scrubbing them vigorously into the
+surface, rubbing improves bonding performance and improves the depth of
+demineralization, followed by, okay, for one step adhesive, apply more than one
+adhesive coat, okay,
+
+304
+01:05:49,253 --> 01:06:04,433
+and or place separate hydrophobic coating resin, okay, this coats will add a
+hydrophobicity of the resin that allows much more bond strength and interface
+durability.
+
+305
+01:06:04,433 --> 01:06:30,133
+Sometimes for heat marriage systems, okay, which more hydrophilic, okay, you may
+promote accelerated composite build up and polymerization, why? If you left it
+much time, okay, this will absorb water, which is time dependent, okay,
+
+306
+01:06:30,263 --> 01:06:40,023
+that will act as adhesive layer between the composite and the first layer faced
+composite of the bonding agent, okay?
+
+307
+01:06:40,023 --> 01:07:02,363
+Because it is highly rich and enhance water absorption, okay, highly rich in
+water and enhance the capacity of water absorption, that's why when using self
+etching primer, he marriage systems, you should apply immediately immediately
+and in a faster time, the first increment in the shortest possible time.
+
+308
+01:07:02,363 --> 01:07:29,043
+While using hema free system protocols, okay, strong air drying of adhesive
+system could solve this problem because it undergoes separation or phase
+separation after solvent evaporation, that's why it will include also water
+separated from it,
+
+309
+01:07:29,043 --> 01:07:45,153
+okay, and gradually rises the water surface, that's why just you are just in
+need to dry it, air dry it to displace this water, and this could be
+
+310
+01:07:45,493 --> 01:08:02,803
+could solve the problem, and here will be the problem not between the bonding
+agent and the tooth structure, but it will be between the self etching primer
+adhesive and the composite.
+
+311
+01:08:02,803 --> 01:08:25,023
+Is it is hema containing, then before adsorption of much more water, okay, that
+will be incorporated inside your adhesive layer, okay, that will alter or
+decrease the bondability between your bonding agent and composite.
+
+312
+01:08:25,023 --> 01:08:42,583
+So, again, you should read and know quite well, okay, what the manufacturing
+instructions, okay, of your self etching adhesive.
+
+313
+01:08:42,583 --> 01:09:01,083
+In general, self etching adhesives are developed to reduce the number of
+clinical steps of etch and rance adhesives accordingly possibility to mistake
+and boost operative sensitivity are reduced.
+
+314
+01:09:01,083 --> 01:09:08,983
+But, professional use based on perfect understanding of the material especially
+its ability to bond with enamel should be considered.
+
+315
+01:09:08,983 --> 01:09:35,863
+Its effectiveness to each in to each enamel and bond with it compared to H and
+runs is questionable, that's why this may result in especially with mild and
+extra mild or ultra mild type of BH, okay, may result in improper bonding with
+enamel that will lead to marginal and marginal discoloration.
+
+316
+01:09:35,863 --> 01:09:51,583
+So, with these type mild and ultra mild self etching primers, okay, you are in
+need for extra selective etching of enamel, okay, like that of H and rance.
+
+317
+01:09:51,583 --> 01:10:10,443
+And also, fluorost or enamel receiving fluoride treatments are in need for extra
+demineralization because it is extra mineralized, so, mild and ultra mild are
+ineffective in bonding with such enamel.
+
+318
+01:10:10,443 --> 01:10:16,699
+Finally comes multi mode universal adhesive, which is the newest one.
+
+319
+01:10:17,009 --> 01:10:28,209
+Okay, that could act that the new thesis could be used under H&Rs with separate
+etching procedure or could be used alone as a self etching mode.
+
+320
+01:10:28,919 --> 01:10:43,429
+The chemical interaction, okay, is a crucial characteristics of this universal
+adhesive to enhance durability of dentin resin interface and still questionable,
+but it is clinically acceptable.
+
+321
+01:10:43,429 --> 01:10:44,149
+Okay?
+
+322
+01:10:47,059 --> 01:10:57,149
+It needs the same precautions, okay, like that and the same clinical application
+tips like that of self etching adhesive, okay?
+
+323
+01:10:57,569 --> 01:11:07,449
+You still need to etch enamel selectively use phosphoric acid, especially if it
+is unprepared or it is fluorosed or receiving fluoride treatment, okay?
+
+324
+01:11:08,919 --> 01:11:25,559
+Use it as a self etch mode to optimize dentin bonding, okay, to avoid the
+problem of wet and dry and to avoid the problem of leaving exposed collagen
+uncovered or un infiltrated, okay?
+
+325
+01:11:26,119 --> 01:11:48,709
+Increased solvent evaporation time, that means that like that of total H system
+or H and R system, give it a chance to penetrate and infiltrate and leave it for
+self evaporation unless advised by manufacturer to apply air blast, okay?
+
+326
+01:11:49,609 --> 01:12:09,659
+Apply the adhesive by actively scrubbing them vigorously onto the surface, it is
+the same as that of self etching primer that motivate much more penetration and
+demineralization and much more infiltration or effective infiltration, finally
+apply a separate hydrophobic coating resin, okay?
+
+327
+01:12:09,659 --> 01:12:22,649
+If needed in a single step, okay, to improve the performance, but and durability
+of bond strength if it is required or it is advised by the manufacturer.
+
+328
+01:12:22,939 --> 01:12:31,459
+Finally, this is schematic diagram describing the difference in steps between H
+and R adhesive strategy and self adhesive.
+
+329
+01:12:31,869 --> 01:12:41,779
+This is another adhesive strategies schematic diagram showing the adhesive
+strategies, H and R, okay, using separate etching procedure.
+
+330
+01:12:41,869 --> 01:12:51,569
+Self etch there is no separate etching procedure, it is either two steps
+including one bottle of agent and primer and the other is bonding or one step.
+
+331
+01:12:52,059 --> 01:12:56,309
+Finally, we could note that
+
+332
+01:12:59,839 --> 01:13:16,389
+multi mode H and R or self etch, okay, it acts like that of total H could be
+used or with selective enamel etching and it is the most commonly used specially
+nowadays, especially that contains filler in its composition.
+
+333
+01:13:16,829 --> 01:13:35,566
+This is just a summary of the commonly used now contemporary or currently
+available brands, okay, and currently used I don't recommend one over one and
+I'm not in a conflict of interest with any of the mentioned products,
+
+334
+01:13:35,566 --> 01:13:49,999
+but it is just a conclusion mentioned in many textbooks about different adhesive
+strategies and what is the available currently used adhesive systems under each
+strategy.
+
+335
+01:13:50,459 --> 01:14:05,329
+Finally, H and R adhesive are still considered as the gold standard procedure to
+optimize adhesion to dentin to enamel structure, especially enamel, it is the
+gold standard for enamel.
+
+336
+01:14:05,409 --> 01:14:28,809
+However, reason dentin interface proved to be much more unstable as a result of
+dentin hybrid layer degradation with time due to its inhomogeneity, it's not
+uniform and due to decomposition of exposed uncovered collagens that we could
+not ensure it is properly covered or infiltrated with the resultant post
+operative hypersensitivity.
+
+337
+01:14:29,949 --> 01:14:48,899
+In a contralateral to that or in a controversy, self etch adhesives are
+considered as the gold standard when it comes to bonding to dentin, H and R when
+it comes to bonding to enamel substrate it is the gold standard, when it comes
+to bond to dentin, self etch is the gold standard.
+
+338
+01:14:48,899 --> 01:15:02,609
+Okay, because they are their excellent performance in both in vitro and in vivo
+studies, however, they behavior largely depend on their composition, their
+aggressiveness and BH and hydro fell stic.
+
+339
+01:15:02,879 --> 01:15:23,829
+Okay, but still with enamel they are unfavorable, okay, and they may lead to
+marginal ding and marginal discoloration when dealing with especially moderate,
+mild and ultra mild that will need to selective enamel demineralization step.
+
+340
+01:15:24,169 --> 01:15:37,319
+Please, don't hesitate to ask me, feel free to ask as your questions are
+welcomed, you could ask me or any inquiry of you, okay, by commenting on this
+video and I will reply as soon as possible.
+
+341
+01:15:37,319 --> 01:15:53,719
+Also you could contact me via my contact info appears here and finally thank you
+for assigning this time to listen to me, I know it's a very long episode, but it
+should be discussed as one bulk like that in this sequence.
+
+342
+01:15:53,969 --> 01:16:03,719
+Okay, finally, don't forget to subscribe to my channel, don't forget to activate
+the notification to get all the new updated episode. Yes.
