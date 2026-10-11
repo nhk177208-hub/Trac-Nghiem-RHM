@@ -9378,7 +9378,7 @@ async function bkExtract(doc, tok, onProg) {
                     if (lead.length < 3) return false;
                     if (wholeB[k]) {
                         if (!flushL) return false;
-                        if (j >= 0 && wholeB[j] && gapUp < 1.7 * ln.fh) return true;          // dòng tiếp của đề mục nhiều dòng
+                        if (j >= 0 && (wholeB[j] || !/[.!?:)"”]$/.test(txtOf(lines[j]))) && gapUp < 1.7 * ln.fh) return true;          // dòng tiếp của đề mục nhiều dòng
                         const big = ln.fh >= 1.08 * bodyFh;
                         return gapUp >= 1.5 * ln.fh || (big && gapUp >= 1.1 * ln.fh);
                     }
@@ -9712,7 +9712,7 @@ function bkLocateIn(list, a, b) {
     list.forEach(o => {
         const body = o.src.replace(/^\s*\d+(?:\.\d+)*\s*/, '');
         if (!/^[A-Z0-9"“(]/.test(body) || /%/.test(o.src)) return;
-        const occ = bkFindAll(T, o.src).filter(i => i >= cur && i < b && bkLineStart(T, i) && !/et al/i.test(o.src));
+        const occ = bkFindAll(T, o.src).filter(i => i >= cur && i < b && i < cur + 30000 && bkLineStart(T, i) && (o.src.length >= 15 || /^[ \t\r]*(\n|$)/.test(T.slice(i + o.src.length, i + o.src.length + 4))) && !/et al/i.test(o.src));
         if (!occ.length) return;
         const nt = occ.filter(i => !isToc(i));
         const pick = nt.length ? nt[0] : occ[0];
@@ -9746,7 +9746,7 @@ async function bkDetectChapter() {
     // Tiêu đề (dòng ngắn đứng riêng) mà AI bỏ sót: thêm vào mục lục rồi sắp theo vị trí
     {
         bkPages.forEach(p => (p.cands || []).forEach(c => {
-            if (!found.some(f => Math.abs(f.s - c.s) <= 3)) found.push({ title: c.t, en: c.t, num: '', lvl: c.fh >= 1.08 * (p.bfh || 10) ? 1 : 2, s: c.s, e: 0, text: '' });
+            if (!found.some(f => Math.abs(f.s - c.s) <= 3 || (c.s > f.s && c.s - f.s < 400 && c.t.split(' ').length <= 2))) found.push({ title: c.t, en: c.t, num: '', lvl: c.fh >= 1.08 * (p.bfh || 10) ? 1 : 2, s: c.s, e: 0, text: '' });
         }));
         found.sort((x, y) => x.s - y.s);
     }
@@ -12475,6 +12475,8 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             #ai-tutor-modal.ai-bk-panel > div { pointer-events: auto; width: calc(var(--bk-vw-s, 33.333) * 1%) !important; max-width: none !important; height: 100% !important; max-height: none !important; border-radius: 0 !important; margin-right: 0 !important; }
             #ai-tutor-modal.ai-bk-panel.ai-split > div { width: calc(var(--bk-vw-w, 66.667) * 1%) !important; }
             #ai-tutor-modal.ai-bk-panel #bk-chat-grip { display: block; pointer-events: auto; right: calc(var(--bk-vw-s, 33.333) * 1% - 9px); }
+        #ai-tutor-modal.ai-bk-panel #ai-en-panel, #ai-tutor-modal.ai-bk-panel #ai-en-panel * { pointer-events: auto !important; }
+        #ai-tutor-modal.ai-bk-panel section.ai-quizdlg, #ai-tutor-modal.ai-bk-panel section.ai-quizdlg * { pointer-events: auto !important; }
             #ai-tutor-modal.ai-bk-panel.ai-split #bk-chat-grip { right: calc(var(--bk-vw-w, 66.667) * 1% - 9px); }
         }
     </style>
@@ -12511,7 +12513,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
                     <p id="ai-live-status" class="text-xs text-gray-500 truncate">Chat hoặc nói trực tiếp (Gemini)</p>
                 </div>
                 <div class="flex items-center gap-1 shrink-0">
-                    <button id="ai-enwin-hbtn" type="button" onclick="aiEnToggle()" class="text-xs font-extrabold px-2.5 py-1.5 rounded-full border border-indigo-300 bg-white text-indigo-700 shrink-0 mr-1" title="Bật/tắt cửa sổ phụ tiếng Anh">🇬🇧 Phụ</button>
+                    <button id="ai-enwin-hbtn" type="button" onclick="bkQzChooser()" class="text-xs font-extrabold px-2.5 py-1.5 rounded-full border border-indigo-300 bg-white text-indigo-700 shrink-0 mr-1" title="Tạo câu hỏi trắc nghiệm tương tác từ chương đang đọc">❓ Trắc nghiệm</button>
                     <div id="ai-lang-box" class="flex items-center rounded-full border border-indigo-300 overflow-hidden shrink-0 mr-1" title="Ngôn ngữ chat (chọn cả hai = song ngữ)">
                         <button id="ai-lang-vie" type="button" onclick="aiLangToggle('vi')" class="text-xs font-extrabold px-2.5 py-1.5 bg-indigo-600 text-white">Vie</button>
                         <button id="ai-lang-eng" type="button" onclick="aiLangToggle('en')" class="text-xs font-extrabold px-2.5 py-1.5 bg-white text-gray-500">Eng</button>
