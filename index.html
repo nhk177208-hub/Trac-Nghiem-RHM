@@ -9974,7 +9974,7 @@ function bkSyncSplit() {
     const m = document.getElementById('ai-tutor-modal'), vw = document.getElementById('book-viewer'); if (!m) return;
     bkEnsureGrip();
     const enP = document.getElementById('ai-en-panel');
-    const side = aiState.mode === 'book' && !m.classList.contains('hidden') && !m.classList.contains('ai-in-video') && window.innerWidth >= 768;
+    const side = aiState.mode === 'book' && !m.classList.contains('hidden') && !m.classList.contains('ai-chat-off') && !m.classList.contains('ai-in-video') && window.innerWidth >= 768;
     const wide = side && !!((aiLangCfg.vi && aiLangCfg.en) || (enP && !enP.classList.contains('hidden')));
     bkSetCls(m, 'ai-bk-panel', side);
     if (aiState.mode === 'book') bkSetCls(m, 'ai-split', wide);
@@ -12496,6 +12496,9 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             #ai-tutor-modal.ai-bk-panel > div { pointer-events: auto; width: calc(var(--bk-vw-s, 33.333) * 1%) !important; max-width: none !important; height: 100% !important; max-height: none !important; border-radius: 0 !important; margin-right: 0 !important; }
             #ai-tutor-modal.ai-bk-panel.ai-split > div { width: calc(var(--bk-vw-w, 66.667) * 1%) !important; }
             #ai-tutor-modal.ai-bk-panel #bk-chat-grip { display: block; pointer-events: auto; right: calc(var(--bk-vw-s, 33.333) * 1% - 9px); }
+        #ai-tutor-modal > div > div:first-child { flex-wrap: wrap !important; row-gap: 6px; }
+        #ai-tutor-modal > div > div:first-child > div:last-child { flex-wrap: wrap; justify-content: flex-end; max-width: 100%; }
+        #ai-tutor-modal > div > div:first-child > div:last-child > button:last-child { flex: none !important; }
         #ai-tutor-modal.ai-chat-off { background: transparent !important; pointer-events: none !important; }
         #ai-tutor-modal.ai-chat-off > div:not(#ai-en-panel) { display: none !important; }
         #ai-tutor-modal.ai-chat-off #ai-en-panel, #ai-tutor-modal.ai-chat-off #ai-en-panel * { pointer-events: auto !important; }
@@ -13183,7 +13186,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         }
         aiPlaceModal(); aiScrollBottom();
     }
-    function closeAiTutor() { try { aiQuizCloseDlg(); } catch (e) {} aiTtsStop(); const kp = document.getElementById('ai-key-panel'); if (kp) kp.classList.add('hidden'); aiStopLive(); aiModalEl.classList.add('ai-chat-off'); aiPlaceModal(); }
+    function closeAiTutor() { try { aiQuizCloseDlg(); } catch (e) {} aiTtsStop(); const kp = document.getElementById('ai-key-panel'); if (kp) kp.classList.add('hidden'); aiStopLive(); aiModalEl.classList.add('ai-chat-off'); try { bkSyncSplit(); } catch (e) {} aiPlaceModal(); }
     function aiOpenKeyPanel() { aiProvRender(); aiVoiceRender(); aiRateSet(aiRateGet()); aiLenRender(); document.getElementById('ai-key-panel').classList.remove('hidden'); }
     function aiCloseKeyPanel() { document.getElementById('ai-key-panel').classList.add('hidden'); }
     (function () {   // nhãn nút luôn khớp trạng thái bảng cài đặt (Cài đặt / Đóng cài đặt)
