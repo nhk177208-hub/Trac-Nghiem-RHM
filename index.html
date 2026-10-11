@@ -12496,6 +12496,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             #ai-tutor-modal.ai-bk-panel > div { pointer-events: auto; width: calc(var(--bk-vw-s, 33.333) * 1%) !important; max-width: none !important; height: 100% !important; max-height: none !important; border-radius: 0 !important; margin-right: 0 !important; }
             #ai-tutor-modal.ai-bk-panel.ai-split > div { width: calc(var(--bk-vw-w, 66.667) * 1%) !important; }
             #ai-tutor-modal.ai-bk-panel #bk-chat-grip { display: block; pointer-events: auto; right: calc(var(--bk-vw-s, 33.333) * 1% - 9px); }
+        #ai-tutor-modal > div { position: relative; z-index: 100060; }
         #ai-tutor-modal > div > div:first-child { flex-wrap: nowrap !important; align-items: center; min-width: 0; container-type: inline-size; }
         #ai-tutor-modal > div > div:first-child > div:last-child { flex-wrap: nowrap; justify-content: flex-end; min-width: 0; max-width: 100%; }
         #ai-tutor-modal > div > div:first-child > div:last-child > button:last-child { flex: none !important; }
@@ -14838,7 +14839,7 @@ window.PGR = (function () {
         var d = activeYtPlayers[pid], b = $('chap-btn-' + pid); if (!d || !b) return;
         b.classList.toggle('animate-pulse', !!d.chapBusy && !d.chapters);
         b.innerHTML = (d.chapBusy && !d.chapters) ? '<span class="yt-ic">⏳</span>' : '<span class="yt-ic">🧠</span>';
-        b.title = (d.chapBusy && !d.chapters) ? 'AI đang vẽ sơ đồ...' : 'Sơ đồ tư duy (AI)'; if (b.parentElement) b.parentElement.classList.toggle('yt-mm-trk', lsFlag('ytjr_on') || lsFlag('ytjn_on'));
+        b.title = (d.chapBusy && !d.chapters) ? 'AI đang vẽ sơ đồ...' : 'Sơ đồ tư duy (AI)'; if (b.parentElement) b.parentElement.classList.toggle('yt-mm-trk', (lsFlag('ytjr_on') || lsFlag('ytjn_on')) && !!d.chapters);
         paintStat(pid);
     }
     function paintStat(pid) {
@@ -15567,7 +15568,7 @@ window.PGR = (function () {
     function focusLvl() { try { return localStorage.getItem('ytfocus_lvl') || 'mid'; } catch (e) { return 'mid'; } } function activeTrials(d) { var all = d.trials; if (!all) return []; var dur = 0; try { dur = (d.player && d.player.getDuration) ? (d.player.getDuration() || 0) : 0; } catch (e) {} if (!(dur > 0) || all.length <= 1) return all; var rate = { low: 5, mid: 10, high: 20 }[focusLvl()] || 9; var cap = Math.max(1, Math.round(rate * dur / 3600)); if (all.length <= cap) return all; var out = []; for (var i = 0; i < cap; i++) out.push(all[Math.floor(i * all.length / cap)]); return out; } function paint(pid) {
         var b = $('focus-btn-' + pid); if (b) { var on = isOn(); b.classList.toggle('on', on); b.title = 'Chế độ tập trung: ' + (on ? 'đang mở' : 'đang tắt'); var s = b.querySelector('.fo-st'); if (s) s.textContent = on ? 'Mở' : 'Tắt'; }
     }
-    window.ytFocusPaint = paint; setInterval(function () { try { var on = (localStorage.getItem('ytjr_on') === '1' || localStorage.getItem('ytjn_on') === '1'); document.querySelectorAll('[id^=\"chap-btn-\"]').forEach(function (b) { var g = b.parentElement; if (g && g.classList.contains('yt-chapnav') && g.classList.contains('yt-mm-trk') !== on) g.classList.toggle('yt-mm-trk', on); }); } catch (e) {} }, 400);
+    window.ytFocusPaint = paint; setInterval(function () { try { var on = (localStorage.getItem('ytjr_on') === '1' || localStorage.getItem('ytjn_on') === '1'); document.querySelectorAll('[id^=\"chap-btn-\"]').forEach(function (b) { var g = b.parentElement; if (g && g.classList.contains('yt-chapnav') && g.classList.contains('yt-mm-trk') !== (on && !!(activeYtPlayers[b.id.slice(9)] && activeYtPlayers[b.id.slice(9)].chapters))) g.classList.toggle('yt-mm-trk', (on && !!(activeYtPlayers[b.id.slice(9)] && activeYtPlayers[b.id.slice(9)].chapters))); }); } catch (e) {} }, 400);
     function closeDlg(pid) { var w = $('custom-wrapper-' + pid), o = w && w.querySelector('.yt-focusdlg'); if (o) o.remove(); try { resetInactivityTimer(pid); } catch (e) {} }
     window.ytFocusDialog = function (pid) {
         var d = activeYtPlayers[pid], w = $('custom-wrapper-' + pid); if (!w) return;
