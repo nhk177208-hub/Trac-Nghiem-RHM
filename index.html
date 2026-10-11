@@ -8932,7 +8932,7 @@ async function bkRenderPage(pg) {
         if (stale()) return;
         bkBuildTl(pg, data);
         pg.state = 'done';
-        bkApplyHl(pg);
+        bkApplyHl(pg); bkApplyQzHl(pg);
     } catch (e) {
         if (gen !== pg.gen) return;
         pg.task = null;
@@ -8945,7 +8945,7 @@ function bkRelease(pg) {
     pg.gen++;
     if (pg.task) { try { pg.task.cancel(); } catch (e) {} pg.task = null; }
     pg.canvas.width = 0; pg.canvas.height = 0;
-    pg.tl.textContent = ''; pg.hlL.textContent = '';
+    pg.tl.textContent = ''; pg.hlL.textContent = ''; if (pg.qzL) pg.qzL.textContent = '';
     pg.state = 'idle';
 }
 /* ---------- dữ liệu chữ của trang (đơn vị: px ở tỉ lệ 1, đã sắp theo thứ tự đọc) ---------- */
@@ -9499,7 +9499,7 @@ async function bkOpenChapter(i) {
     }
 }
 function bkBackToShelf() {
-    bkViewTok++; bkFreeDoc(); bkCloseChat();
+    bkViewTok++; bkFreeDoc(); bkCloseChat(); try { aiEnPanelClose(); } catch (e) {}
     document.getElementById('book-viewer').classList.add('hidden');
     document.getElementById('bookshelf-modal').classList.remove('hidden');
     bkRenderShelf();
@@ -9661,7 +9661,7 @@ async function bkRunTr(text, title) {
     if (!text) { showToast('Hãy dán đoạn sách vào ô nhập hoặc bôi đen đoạn cần dịch'); return; }
     if (!aiAnyKey()) { aiShowGate(); return; }
     if (bkTrBusy) { showToast('Đang dịch, hãy đợi phần hiện tại xong'); return; }
-    document.getElementById('ai-tutor-modal').classList.remove('hidden');
+    document.getElementById('ai-tutor-modal').classList.remove('hidden', 'ai-chat-off');
     bkTrBusy = true;
     const run = 'r' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
     bkLastRun = run;
@@ -9987,7 +9987,7 @@ function bkCloseChat() {
     if (aiState.mode === 'book' && m && !m.classList.contains('hidden') && typeof closeAiTutor === 'function') closeAiTutor();
 }
 function bkCloseAll() {
-    bkViewTok++; bkFreeDoc(); bkCloseChat();
+    bkViewTok++; bkFreeDoc(); bkCloseChat(); try { aiEnPanelClose(); } catch (e) {}
     document.getElementById('book-viewer').classList.add('hidden');
     document.getElementById('bookshelf-modal').classList.add('hidden');
 }
@@ -10014,7 +10014,7 @@ function bkOpenAi() {
         aiAddMsg('ai', 'Chào bạn! Mình có thể giải thích, tóm tắt hoặc ra câu hỏi ôn về chương "' + bkCur.title + '". Bôi đen đoạn trong PDF rồi bấm 🌐 Dịch để dịch đoạn đó.');
         aiQuotaApply();
     }
-    document.getElementById('ai-tutor-modal').classList.remove('hidden');
+    document.getElementById('ai-tutor-modal').classList.remove('hidden', 'ai-chat-off');
     aiPlaceModal(); bkSyncSplit(); bkPaintTr(); aiScrollBottom();
 }
         async function openMonHocDetail(subject, parentSubject = null) {
@@ -12496,6 +12496,9 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             #ai-tutor-modal.ai-bk-panel > div { pointer-events: auto; width: calc(var(--bk-vw-s, 33.333) * 1%) !important; max-width: none !important; height: 100% !important; max-height: none !important; border-radius: 0 !important; margin-right: 0 !important; }
             #ai-tutor-modal.ai-bk-panel.ai-split > div { width: calc(var(--bk-vw-w, 66.667) * 1%) !important; }
             #ai-tutor-modal.ai-bk-panel #bk-chat-grip { display: block; pointer-events: auto; right: calc(var(--bk-vw-s, 33.333) * 1% - 9px); }
+        #ai-tutor-modal.ai-chat-off { background: transparent !important; pointer-events: none !important; }
+        #ai-tutor-modal.ai-chat-off > div:not(#ai-en-panel) { display: none !important; }
+        #ai-tutor-modal.ai-chat-off #ai-en-panel, #ai-tutor-modal.ai-chat-off #ai-en-panel * { pointer-events: auto !important; }
         #ai-tutor-modal #ai-title { white-space: nowrap !important; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex: 1 1 auto; }
         #ai-tutor-modal div:has(> #ai-title) { min-width: 0; flex: 1 1 auto; }
         #ai-tutor-modal.ai-bk-panel #ai-en-panel, #ai-tutor-modal.ai-bk-panel #ai-en-panel * { pointer-events: auto !important; }
@@ -13151,7 +13154,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         if (!aiAnyKey()) { aiShowGate(); return; }
         try { d.player.pauseVideo(); } catch (e) {}
         const sig = 'v|' + playerId + '|' + (info.title || '') + '|' + ytId;
-        document.getElementById('ai-tutor-modal').classList.remove('hidden');
+        document.getElementById('ai-tutor-modal').classList.remove('hidden', 'ai-chat-off');
         if (sig !== aiState.qSig || aiState.mode !== 'video') {
             aiStopLive(); aiState.qSig = sig; aiState.mode = 'video'; aiState.history = []; try { aiEnClear(); } catch (e) {}
             aiState.video = { playerId, title: info.title || '', snapshot: '', yt: ytId };
@@ -13170,7 +13173,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     function openAiTutor() {
         if (!aiAnyKey()) { aiShowGate(); return; }
         const sig = String(currentIndex) + '|' + aiStrip((questions[currentIndex] || {}).question).slice(0, 80);
-        document.getElementById('ai-tutor-modal').classList.remove('hidden');
+        document.getElementById('ai-tutor-modal').classList.remove('hidden', 'ai-chat-off');
         if (sig !== aiState.qSig || aiState.mode === 'video') {
             aiStopLive(); aiState.qSig = sig; aiState.history = []; aiState.mode = 'quiz'; try { aiEnClear(); } catch (e) {}
             document.getElementById('ai-title').textContent = '🤖 Hỏi AI về câu này';
@@ -13180,7 +13183,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         }
         aiPlaceModal(); aiScrollBottom();
     }
-    function closeAiTutor() { try { aiQuizCloseDlg(); } catch (e) {} try { aiEnPanelClose(); } catch (e) {} aiTtsStop(); const kp = document.getElementById('ai-key-panel'); if (kp) kp.classList.add('hidden'); aiStopLive(); aiModalEl.classList.add('hidden'); aiPlaceModal(); }
+    function closeAiTutor() { try { aiQuizCloseDlg(); } catch (e) {} aiTtsStop(); const kp = document.getElementById('ai-key-panel'); if (kp) kp.classList.add('hidden'); aiStopLive(); aiModalEl.classList.add('ai-chat-off'); aiPlaceModal(); }
     function aiOpenKeyPanel() { aiProvRender(); aiVoiceRender(); aiRateSet(aiRateGet()); aiLenRender(); document.getElementById('ai-key-panel').classList.remove('hidden'); }
     function aiCloseKeyPanel() { document.getElementById('ai-key-panel').classList.add('hidden'); }
     (function () {   // nhãn nút luôn khớp trạng thái bảng cài đặt (Cài đặt / Đóng cài đặt)
@@ -14201,7 +14204,7 @@ function bkQzToggle() {
 }
 document.addEventListener('DOMContentLoaded', () => {
     const m = document.getElementById('ai-tutor-modal'); if (!m) return;
-    new MutationObserver(() => { if (m.classList.contains('hidden')) { const p = document.getElementById('ai-en-panel'); if (p) p.classList.add('hidden'); } }).observe(m, { attributes: true, attributeFilter: ['class'] });
+    void m;
 });
 function bkQzGoto(it) {
     if (it.si >= 0 && bkSecs[it.si]) { bkSelSec(it.si); return; }
@@ -14241,7 +14244,7 @@ async function bkQzLocateAndGo(it) {
     if (!loc) { bkQzGoto(it); return; }
     bkQzHl = loc;
     bkApplyHlAll();
-    await bkScrollToPos(loc.s); bkApplyHlAll(); setTimeout(bkApplyHlAll, 400);
+    await bkScrollToPos(loc.s); bkApplyHlAll(); setTimeout(bkApplyHlAll, 400); { const T = bkText; let a = loc.s, b = loc.e; for (let k = 0; k < 2; k++) { const p = T.lastIndexOf('. ', a - 2); if (p < 0 || a - p > 700) break; a = p + 2; } for (let k = 0; k < 2; k++) { const q = T.indexOf('. ', b); if (q < 0 || q - b > 700) break; b = q + 1; } const tx = T.slice(a, b).replace(/\s+/g, ' ').trim().slice(0, 1400); bkOpenAi(); bkRunTr(tx, ''); }
 }
 function bkQzReview() {
     const it = bkQz.items[bkQz.idx]; if (!it) return;
@@ -14251,7 +14254,7 @@ function bkQzExplain() {
     const it = bkQz.items[bkQz.idx]; if (!it) return;
     if (!aiAnyKey()) { aiShowGate(); return; }
     const inp = document.getElementById('ai-input');
-    const mm = document.getElementById('ai-tutor-modal'); if (mm && mm.classList.contains('hidden')) { mm.classList.remove('hidden'); try { aiPlaceModal(); } catch (e) {} } inp.value = 'Hãy giải thích kỹ hơn câu trắc nghiệm này: "' + it.q + '" Đáp án đúng là ' + String.fromCharCode(65 + it.a) + '. ' + it.o[it.a] + '. Giải thích vì sao đáp án đúng, vì sao các đáp án còn lại sai, và kiến thức nền liên quan trong chương.';
+    const mm = document.getElementById('ai-tutor-modal'); if (mm && (mm.classList.contains('hidden') || mm.classList.contains('ai-chat-off'))) { mm.classList.remove('hidden', 'ai-chat-off'); try { aiPlaceModal(); } catch (e) {} } inp.value = 'Hãy giải thích kỹ hơn câu trắc nghiệm này: "' + it.q + '" Đáp án đúng là ' + String.fromCharCode(65 + it.a) + '. ' + it.o[it.a] + '. Giải thích vì sao đáp án đúng, vì sao các đáp án còn lại sai, và kiến thức nền liên quan trong chương.';
     aiSend();
 }
 function aiEnsureQuickTts() {   // nút "Giảng bài" và "Đọc to" dính sát mép phải của khu nút nhanh
