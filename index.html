@@ -8773,7 +8773,7 @@ function bkRenderShelf() {
     const title = document.getElementById('bookshelf-title'), cnt = document.getElementById('bookshelf-count');
     const back = document.getElementById('bk-shelf-back'), hint = document.getElementById('bookshelf-hint');
     if (bkBook) {
-        title.innerHTML = (bkBook.cover ? '<img src="' + bkEsc(bkBook.cover) + '" alt="" class="inline-block w-6 h-8 object-cover rounded shadow mr-2 align-middle" onerror="this.remove()">' : '') + bkEsc(bkBook.title);
+        title.innerHTML = '<span class="inline-block mr-2 align-middle text-lg">📖</span>' + bkEsc(bkBook.title);
         back.classList.remove('hidden');
         hint.textContent = 'Bấm vào chương để đọc PDF';
         if (bkBook.err) { cnt.textContent = 0; list.innerHTML = '<div class="p-6 text-center text-sm text-red-600">' + bkEsc(bkBook.err) + '</div>'; return; }
@@ -9600,7 +9600,7 @@ function bkPaintResult(bubble, res, label) {
     bubble._tr = res;
     bubble.innerHTML = '';
     const head = document.createElement('div');
-    head.className = 'text-[11px] font-bold text-indigo-700 mb-1.5';
+    head.className = 'text-[11px] font-bold text-indigo-700 mb-1.5 bk-tr-head';
     head.textContent = label;
     bubble.appendChild(head);
     if (res.bi) {
@@ -12496,9 +12496,11 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             #ai-tutor-modal.ai-bk-panel > div { pointer-events: auto; width: calc(var(--bk-vw-s, 33.333) * 1%) !important; max-width: none !important; height: 100% !important; max-height: none !important; border-radius: 0 !important; margin-right: 0 !important; }
             #ai-tutor-modal.ai-bk-panel.ai-split > div { width: calc(var(--bk-vw-w, 66.667) * 1%) !important; }
             #ai-tutor-modal.ai-bk-panel #bk-chat-grip { display: block; pointer-events: auto; right: calc(var(--bk-vw-s, 33.333) * 1% - 9px); }
-        #ai-tutor-modal > div > div:first-child { flex-wrap: wrap !important; row-gap: 6px; }
-        #ai-tutor-modal > div > div:first-child > div:last-child { flex-wrap: wrap; justify-content: flex-end; max-width: 100%; }
+        #ai-tutor-modal > div > div:first-child { flex-wrap: nowrap !important; align-items: center; min-width: 0; container-type: inline-size; }
+        #ai-tutor-modal > div > div:first-child > div:last-child { flex-wrap: nowrap; justify-content: flex-end; min-width: 0; max-width: 100%; }
         #ai-tutor-modal > div > div:first-child > div:last-child > button:last-child { flex: none !important; }
+        @container (max-width: 520px) { #ai-tutor-modal #ai-lang-box { display: none !important; } }
+        @container (max-width: 400px) { #ai-tutor-modal #ai-enwin-hbtn { display: none !important; } }
         #ai-tutor-modal.ai-chat-off { background: transparent !important; pointer-events: none !important; }
         #ai-tutor-modal.ai-chat-off > div:not(#ai-en-panel) { display: none !important; }
         #ai-tutor-modal.ai-chat-off #ai-en-panel, #ai-tutor-modal.ai-chat-off #ai-en-panel * { pointer-events: auto !important; }
@@ -13944,7 +13946,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     }
     function aiVoiceSet(v) { try { if (v) localStorage.setItem('ai_tts_voice', v); else localStorage.removeItem('ai_tts_voice'); } catch (e) {} aiVoiceTest(); }
     try { if ('speechSynthesis' in window) window.speechSynthesis.addEventListener('voiceschanged', aiVoiceRender); } catch (e) {}
-    const AI_TTS_SKIP = '.ai-actrow,.ai-ttsbar,.ai-refbar,.ai-imgwrap,.ai-liverefs,.ai-dr-refs,.ai-dr-note,.ai-cite,img,script,style';
+    const AI_TTS_SKIP = '.bk-tr-head,.bk-bi-hd,.ai-actrow,.ai-ttsbar,.ai-refbar,.ai-imgwrap,.ai-liverefs,.ai-dr-refs,.ai-dr-note,.ai-cite,img,script,style';
     function aiTtsMap(root) {   // gom chữ của bong bóng (bỏ nút, link dẫn, ảnh) thành 1 chuỗi + bảng vị trí từng text node
         let flat = ''; const segs = [];
         (function walk(n) {
@@ -14035,8 +14037,8 @@ function aiUttFor(text, v) {
 function aiIsEnWord(t) { var s = String(t || '').trim(); return s.length > 0 && /^[A-Za-z][A-Za-z\s'\-.,\/]*$/.test(s) && /[A-Za-z]{2,}/.test(s); } function aiLangPieces(arr) { var out = []; arr.forEach(function (p) { if (p.charCodeAt(0) === 1) { out.push(p); return; } var re = /\(([^()]*)\)/g, last = 0, m; while ((m = re.exec(p))) { var pre = p.slice(last, m.index); if (pre.trim()) out.push(pre); if (aiIsEnWord(m[1])) out.push('\u0001' + m[1].trim()); else out.push('(' + m[1] + ')'); last = m.index + m[0].length; } var rest = p.slice(last); if (rest.trim()) out.push(rest); }); return out; } function aiPlainSents(t) { var a = String(t || '').replace(/\[\[(EN|VI)\]\]/g, ' ').replace(/[*#_`>]/g, ' ').replace(/\s+/g, ' ').trim().match(/[^.!?…]+[.!?…]*/g) || []; return a.map(function (x) { return x.trim(); }).filter(function (x) { return /[\p{L}\p{N}]/u.test(x); }); } function aiTtsStartBi(bubble, btn) { if (!('speechSynthesis' in window)) { showToast('Trình duyệt không hỗ trợ đọc to'); return; } aiTtsStop(); var lt = bubble._lt || {}, en = aiPlainSents(lt.en), vi = aiPlainSents(lt.vi), seq = [], n = Math.max(en.length, vi.length); for (var i = 0; i < n; i++) { if (en[i]) seq.push('\u0001' + en[i]); if (vi[i]) seq.push(vi[i]); } var pieces = aiLangPieces(seq); if (!pieces.length) { showToast('Chưa có nội dung để đọc'); return; } var st = { bubble: bubble, btn: btn || null }; aiTts = st; aiTtsLabel(st.btn, true); aiTtsSync(); var v = aiVoicePick(), pi = 0; var speak = function () { if (aiTts !== st) return; if (pi >= pieces.length) { aiTtsStop(); return; } var ut = aiUttFor(pieces[pi++], v); ut.rate = aiRateGet(); ut.pitch = aiVoicePitch(); ut.onend = speak; ut.onerror = function (e) { if (aiTts === st && e.error !== 'canceled' && e.error !== 'interrupted') { aiTtsStop(); showToast('Không đọc được (thiết bị chưa có giọng đọc tiếng Việt?)'); } }; st.cur = ut; window.speechSynthesis.speak(ut); }; setTimeout(speak, 80); } function aiTtsStart(bubble, from, to, btn) {   // đọc cả bong bóng (from/to rỗng) hoặc chỉ đoạn [from, to)
         if (!('speechSynthesis' in window)) { showToast('Trình duyệt không hỗ trợ đọc to'); return; }
         aiTtsStop();
-        const { flat } = aiTtsMap(bubble); if (from == null) from = 0; if (to == null) to = flat.length;
-        const units = aiTtsSentences(flat, from, to).map(u => ({ s: u.s, e: u.e, t: aiTtsClean(flat.slice(u.s, u.e)) })).filter(u => /[\p{L}\p{N}]/u.test(u.t));
+        let runB = (bubble.dataset && bubble.dataset.bkRun) ? Array.from(document.querySelectorAll('#ai-messages .ai-bub')).filter(x => x.dataset && x.dataset.bkRun === bubble.dataset.bkRun) : [bubble]; if (runB.indexOf(bubble) < 0) runB = [bubble]; runB = runB.slice(runB.indexOf(bubble)); if (from == null) from = 0;
+        const units = []; runB.forEach(bb => { const fl = aiTtsMap(bb).flat; const f0 = bb === bubble ? from : 0, t0 = (bb === bubble && to != null) ? to : fl.length; aiTtsSentences(fl, f0, t0).forEach(u => { const t = aiTtsClean(fl.slice(u.s, u.e)); if (/[\p{L}\p{N}]/u.test(t)) units.push({ b: bb, s: u.s, e: u.e, t: t }); }); });
         if (!units.length) { showToast('Chưa có nội dung để đọc'); return; }
         const st = { bubble, btn: btn || null }; aiTts = st; aiTtsLabel(st.btn, true); aiTtsSync();
         const v = aiVoicePick(); let ui = 0, pi = 0, pieces = [];
@@ -14044,7 +14046,7 @@ function aiIsEnWord(t) { var s = String(t || '').trim(); return s.length > 0 && 
             if (aiTts !== st) return;
             if (pi >= pieces.length) {
                 if (ui >= units.length) { aiTtsStop(); return; }
-                const u = units[ui++]; aiTtsMark(bubble, u.s, u.e);
+                const u = units[ui++]; aiTtsMark(u.b, u.s, u.e);
                 pieces = aiLangPieces(u.t.length > 220 ? (u.t.match(/.{1,200}(\s|$)/g) || [u.t]) : [u.t]); pi = 0;
             }
             const ut = aiUttFor(pieces[pi++], v); ut.rate = aiRateGet(); ut.pitch = aiVoicePitch();
