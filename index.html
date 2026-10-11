@@ -8778,9 +8778,9 @@ function bkRenderShelf() {
         hint.textContent = 'Bấm vào chương để đọc PDF';
         if (bkBook.err) { cnt.textContent = 0; list.innerHTML = '<div class="p-6 text-center text-sm text-red-600">' + bkEsc(bkBook.err) + '</div>'; return; }
         if (!bkBook.chapters) { cnt.textContent = '…'; list.innerHTML = '<div class="p-6 text-center text-sm text-gray-400 italic">⏳ Đang tải danh sách chương...</div>'; return; }
-        const cs = bkBook.chapters; list.classList.add('overflow-hidden'); list.classList.remove('overflow-y-auto');
+        const cs = bkBook.chapters; var CH = Math.max(160, Math.floor(list.clientHeight * (window.innerWidth >= 640 ? 1 : 0.4)) - 16), CW = Math.floor(CH / 1.414); list.classList.add('overflow-hidden'); list.classList.remove('overflow-y-auto');
         cnt.textContent = cs.length;
-        list.innerHTML = cs.length ? '<div class="bk-chap-wrap">' + (bkBook.cover ? '<div class="bk-chap-cov">' + bkFrameHtml(bkBook.cover, '') + '</div>' : '') + '<div class="bk-chap-list space-y-3">' + cs.map((c, i) => '<button type="button" onclick="bkOpenChapter(' + i + ')" class="w-full text-left bg-sky-50 hover:bg-sky-100 border border-sky-200 rounded-2xl p-3.5 flex items-center gap-3 active:scale-[0.99] transition-all"><span class="shrink-0 w-9 h-9 rounded-lg bg-gradient-to-b from-sky-500 to-sky-700 text-white flex items-center justify-center text-sm font-black shadow">' + i + '</span><span class="min-w-0 flex-1 font-bold text-sm sm:text-base text-gray-800 break-words">' + bkEsc(c.title.replace(/^\s*\d+\s*[.)]\s*/, '')) + '</span></button>').join('') + '</div></div>'
+        list.innerHTML = cs.length ? '<div class="bk-chap-wrap">' + (bkBook.cover ? '<div class="bk-chap-cov" style="width:' + CW + 'px;height:' + CH + 'px">' + bkFrameHtml(bkBook.cover, '') + '</div>' : '') + '<div class="bk-chap-list space-y-3">' + cs.map((c, i) => '<button type="button" onclick="bkOpenChapter(' + i + ')" class="w-full text-left bg-sky-50 hover:bg-sky-100 border border-sky-200 rounded-2xl p-3.5 flex items-center gap-3 active:scale-[0.99] transition-all"><span class="shrink-0 w-9 h-9 rounded-lg bg-gradient-to-b from-sky-500 to-sky-700 text-white flex items-center justify-center text-sm font-black shadow">' + i + '</span><span class="min-w-0 flex-1 font-bold text-sm sm:text-base text-gray-800 break-words">' + bkEsc(c.title.replace(/^\s*\d+\s*[.)]\s*/, '')) + '</span></button>').join('') + '</div></div>'
             : '<div class="p-6 text-center text-sm text-gray-400 italic">Thư mục này chưa có file PDF nào.</div>';
         return;
     }
@@ -8788,7 +8788,7 @@ function bkRenderShelf() {
     back.classList.add('hidden');
     hint.textContent = 'Bấm vào sách để xem các chương';
     cnt.textContent = bkBooks.length;
-    list.classList.remove('overflow-hidden'); list.classList.add('overflow-y-auto'); if (!window.bkRO && window.ResizeObserver) { window.bkRO = new ResizeObserver(function () { if (!bkBook && !document.getElementById('bookshelf-modal').classList.contains('hidden')) bkRenderShelf(); }); window.bkRO.observe(list); } list.innerHTML = bkShelfHtml(list.clientWidth, list.clientHeight) + (bkBooks.length ? '' : '<div class="p-6 text-center text-sm text-gray-400 italic">Chưa có sách. Hãy tạo file <b>Books.txt</b> trong thư mục môn học trên GitHub.</div>');
+    list.classList.remove('overflow-hidden'); list.classList.add('overflow-y-auto'); if (!window.bkRO && window.ResizeObserver) { window.bkRO = new ResizeObserver(function () { if (!document.getElementById('bookshelf-modal').classList.contains('hidden')) bkRenderShelf(); }); window.bkRO.observe(list); } list.innerHTML = bkShelfHtml(list.clientWidth, list.clientHeight) + (bkBooks.length ? '' : '<div class="p-6 text-center text-sm text-gray-400 italic">Chưa có sách. Hãy tạo file <b>Books.txt</b> trong thư mục môn học trên GitHub.</div>');
         
 }
 async function bkOpenBook(i) {
