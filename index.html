@@ -12496,6 +12496,8 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             #ai-tutor-modal.ai-bk-panel > div { pointer-events: auto; width: calc(var(--bk-vw-s, 33.333) * 1%) !important; max-width: none !important; height: 100% !important; max-height: none !important; border-radius: 0 !important; margin-right: 0 !important; }
             #ai-tutor-modal.ai-bk-panel.ai-split > div { width: calc(var(--bk-vw-w, 66.667) * 1%) !important; }
             #ai-tutor-modal.ai-bk-panel #bk-chat-grip { display: block; pointer-events: auto; right: calc(var(--bk-vw-s, 33.333) * 1% - 9px); }
+        #ai-tutor-modal #ai-title { white-space: nowrap !important; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex: 1 1 auto; }
+        #ai-tutor-modal div:has(> #ai-title) { min-width: 0; flex: 1 1 auto; }
         #ai-tutor-modal.ai-bk-panel #ai-en-panel, #ai-tutor-modal.ai-bk-panel #ai-en-panel * { pointer-events: auto !important; }
         #ai-tutor-modal.ai-bk-panel section.ai-quizdlg, #ai-tutor-modal.ai-bk-panel section.ai-quizdlg * { pointer-events: auto !important; }
             #ai-tutor-modal.ai-bk-panel.ai-split #bk-chat-grip { right: calc(var(--bk-vw-w, 66.667) * 1% - 9px); }
@@ -14197,6 +14199,10 @@ function bkQzToggle() {
     if (p && !p.classList.contains('hidden')) { aiEnPanelClose(); return; }
     const pp = aiEnPanelOpen(); if (pp) { bkQzTitle('📝 Trắc nghiệm'); bkQzRender(); }
 }
+document.addEventListener('DOMContentLoaded', () => {
+    const m = document.getElementById('ai-tutor-modal'); if (!m) return;
+    new MutationObserver(() => { if (m.classList.contains('hidden')) { const p = document.getElementById('ai-en-panel'); if (p) p.classList.add('hidden'); } }).observe(m, { attributes: true, attributeFilter: ['class'] });
+});
 function bkQzGoto(it) {
     if (it.si >= 0 && bkSecs[it.si]) { bkSelSec(it.si); return; }
     const T = String(bkText || '').toLowerCase().replace(/\s+/g, ' ');
@@ -14235,7 +14241,7 @@ async function bkQzLocateAndGo(it) {
     if (!loc) { bkQzGoto(it); return; }
     bkQzHl = loc;
     bkApplyHlAll();
-    bkScrollToPos(loc.s);
+    await bkScrollToPos(loc.s); bkApplyHlAll(); setTimeout(bkApplyHlAll, 400);
 }
 function bkQzReview() {
     const it = bkQz.items[bkQz.idx]; if (!it) return;
@@ -14245,7 +14251,7 @@ function bkQzExplain() {
     const it = bkQz.items[bkQz.idx]; if (!it) return;
     if (!aiAnyKey()) { aiShowGate(); return; }
     const inp = document.getElementById('ai-input');
-    inp.value = 'Hãy giải thích kỹ hơn câu trắc nghiệm này: "' + it.q + '" Đáp án đúng là ' + String.fromCharCode(65 + it.a) + '. ' + it.o[it.a] + '. Giải thích vì sao đáp án đúng, vì sao các đáp án còn lại sai, và kiến thức nền liên quan trong chương.';
+    const mm = document.getElementById('ai-tutor-modal'); if (mm && mm.classList.contains('hidden')) { mm.classList.remove('hidden'); try { aiPlaceModal(); } catch (e) {} } inp.value = 'Hãy giải thích kỹ hơn câu trắc nghiệm này: "' + it.q + '" Đáp án đúng là ' + String.fromCharCode(65 + it.a) + '. ' + it.o[it.a] + '. Giải thích vì sao đáp án đúng, vì sao các đáp án còn lại sai, và kiến thức nền liên quan trong chương.';
     aiSend();
 }
 function aiEnsureQuickTts() {   // nút "Giảng bài" và "Đọc to" dính sát mép phải của khu nút nhanh
