@@ -1,619 +1,1091 @@
 1
-00:00:38,211 --> 00:00:42,521
-Chào mừng các em, thầy là Yasser Wasifi từ chuỗi bài giảng nha khoa Learn Dental Series.[cite: 1]
+00:00:38,256 --> 00:00:42,506
+Chào mừng các em, thầy là Yasser Wassify từ chuỗi bài giảng Learn Dental.
 
 2
-00:00:42,521 --> 00:00:49,031
-Trong tập này, chúng ta sẽ tiếp tục thảo luận về chủ đề chẩn đoán và lập kế hoạch điều trị trong nha khoa phục hồi.[cite: 1]
+00:00:42,506 --> 00:00:49,076
+Trong tập này, thầy trò ta sẽ tiếp tục bàn về chủ đề chẩn đoán và lập kế hoạch điều trị trong chữa răng.
 
 3
-00:00:49,031 --> 00:00:58,071
-Trước hết, thầy xin tuyên bố rằng mình không nhận thù lao, tiền bồi thường hay tiền bản quyền từ việc bán bất kỳ sản phẩm nào được đưa ra hay thảo luận.[cite: 1]
+00:00:49,706 --> 00:00:58,126
+Trước hết, thầy xin nói rõ rằng thầy không nhận thù lao hay hoa hồng từ việc bán bất kỳ sản phẩm nào được trình bày.
 
 4
-00:00:58,071 --> 00:01:06,661
-Đồng thời, bài trình bày này không được tài trợ bởi bất kỳ công ty, cơ quan hay tổ chức nào và chỉ được chuẩn bị cho mục đích giáo dục.[cite: 1]
+00:00:58,336 --> 00:01:06,316
+Bài giảng này cũng không được tài trợ bởi bất kỳ công ty, tổ chức nào và chỉ nhằm mục đích giáo dục.
 
 5
-00:01:06,661 --> 00:01:14,621
-Bài trình bày này được bảo hộ bản quyền và không được phép truyền bá dưới bất kỳ hình thức nào nếu không có sự cho phép bằng văn bản từ tác giả.[cite: 1]
+00:01:06,706 --> 00:01:14,366
+Bài trình bày này được bảo hộ bản quyền và không được phép sao chép dưới mọi hình thức nếu chưa có sự đồng ý bằng văn bản từ tác giả.
 
 6
-00:01:14,621 --> 00:01:21,841
-Trong bài giảng này, chúng ta sẽ tiếp tục tìm hiểu cách chẩn đoán sâu răng chính xác bằng các kỹ thuật khác nhau.[cite: 1]
+00:01:14,736 --> 00:01:21,846
+Trong bài này, chúng ta sẽ tiếp tục học cách chẩn đoán chính xác sâu răng bằng các kỹ thuật khác nhau.
 
 7
-00:01:21,841 --> 00:01:32,801
-Ở phần đầu của chủ đề này, chúng ta đã bàn về đánh giá bệnh nhân và thu thập thông tin về dữ liệu nhân khẩu học, lý do đến khám, bệnh sử y khoa và bệnh sử nha khoa.[cite: 1]
+00:01:22,426 --> 00:01:32,486
+Ở phần đầu của chủ đề này, chúng ta đã thảo luận về việc đánh giá bệnh nhân và thu thập thông tin về nhân khẩu học, lý do đến khám, bệnh sử và tiền sử nha khoa.
 
 8
-00:01:32,801 --> 00:01:36,791
-Sau đó, chúng ta chuyển sang khám lâm sàng.[cite: 1]
+00:01:32,966 --> 00:01:43,766
+Sau đó, chúng ta chuyển sang khám lâm sàng, và hiện tại chúng ta vẫn đang ở phần đầu tiên của khám lâm sàng là khám sâu răng.
 
 9
-00:01:36,791 --> 00:01:48,541
-Chúng ta vẫn đang ở phần đầu của việc khám lâm sàng, đánh giá sâu răng, và vẫn đang thảo luận về tất cả các kỹ thuật truyền thống lâu đời được dùng phổ biến cho đến nay.[cite: 1]
+00:01:43,836 --> 00:01:49,196
+Chúng ta vẫn đang bàn về các kỹ thuật truyền thống cũ nhưng được sử dụng phổ biến nhất cho đến nay.
 
 10
-00:01:48,541 --> 00:02:01,811
-Chúng ta đã thảo luận về khám bằng mắt thường và những tiến bộ của nó, cũng như các chỉ số phát hiện sâu răng để chuẩn hóa việc khám này giữa những bác sĩ khác nhau.[cite: 1]
+00:01:49,526 --> 00:02:01,406
+Chúng ta đã thảo luận về khám bằng thị giác, các bước tiến trong khám thị giác, cũng như các chỉ số phát hiện sâu răng để chuẩn hóa việc thăm khám giữa các bác sĩ.
 
 11
-00:02:01,811 --> 00:02:19,471
-Được rồi, tiếp theo chúng ta đã chuyển sang khám bằng xúc giác và bàn về những nhược điểm hay cạm bẫy của việc dùng thám trâm nhọn, cũng như cách đổi sang thám trâm đầu bi của Tổ chức Y tế Thế giới (W H O) để tránh các lỗi này.[cite: 1]
+00:02:01,556 --> 00:02:19,466
+Sau đó, ta chuyển sang khám bằng xúc giác, và đã bàn về những nhược điểm, cạm bẫy của việc dùng thám trâm nhọn, cũng như lý do ta chuyển sang dùng thám trâm đầu bi của WHO để tránh những cạm bẫy này.
 
 12
-00:02:19,471 --> 00:02:30,951
-Trong tập này, chúng ta sẽ chuyển sang một trong những kỹ thuật khám truyền thống và cả hiện đại quan trọng nhất, đó là khám bằng phim X quang.[cite: 1]
+00:02:19,866 --> 00:02:30,826
+Trong tập này, chúng ta sẽ chuyển sang một trong những kỹ thuật khám quan trọng nhất, kết hợp giữa truyền thống và hiện đại, đó là khám bằng tia X.
 
 13
-00:02:30,951 --> 00:02:50,561
-X quang được mô tả vào năm một ngàn chín trăm hai mươi ba như một công cụ hỗ trợ mang tính cách mạng nhất trong chẩn đoán nha khoa, và từ đó đến nay, ứng dụng của nó luôn là một công cụ quan trọng để phát hiện sâu răng.[cite: 1]
+00:02:31,426 --> 00:02:40,406
+X-quang được mô tả vào năm 1923 như một trong những công cụ hỗ trợ mang tính cách mạng nhất trong chẩn đoán nha khoa.
 
 14
-00:02:50,561 --> 00:03:05,471
-Cấp độ công nghệ đầu tiên hỗ trợ cho mắt nhìn cơ bản của bác sĩ là phim cánh cắn, được thực hiện sau khi các em khám bằng mắt thường hoặc dưới sự hỗ trợ của các dụng cụ phóng đại đã thảo luận trước đó.[cite: 1]
+00:02:40,406 --> 00:02:50,536
+Và kể từ thời điểm đó, ứng dụng của nó trong chẩn đoán là một công cụ quan trọng để phát hiện sâu răng.
 
 15
-00:03:05,471 --> 00:03:28,901
-Phim cánh cắn hỗ trợ cho quá trình khám lâm sàng, cho phép phát hiện nhạy hơn các sang thương sâu răng mặt bên và mặt nhai xâm nhập vào ngà răng, đồng thời giúp các em ước lượng độ sâu của sang thương tốt hơn so với khi chỉ khám bằng mắt thường.[cite: 1]
+00:02:50,936 --> 00:03:05,616
+Cấp độ công nghệ đầu tiên vượt qua giới hạn của mắt thường chính là phim cắn cánh, được dùng sau khi các em đã khám bằng mắt hoặc với sự trợ giúp của kính lúp.
 
 16
-00:03:28,901 --> 00:03:38,251
-Kỹ thuật chụp phim cánh cắn là phương pháp X quang thích hợp nhất để phát hiện sâu răng, không phải phim quanh chóp, mà bắt buộc là phim cánh cắn, và chúng ta sẽ thảo luận lý do tại sao.[cite: 1]
+00:03:06,016 --> 00:03:17,346
+Phim cắn cánh hỗ trợ cho khám lâm sàng, và cho phép phát hiện nhạy hơn các sang thương sâu mặt bên và mặt nhai.
 
 17
-00:03:38,251 --> 00:04:19,781
-Kỹ thuật này đòi hỏi phải có cây giữ phim, và đây chính là mấu chốt làm nên tầm quan trọng của phim cánh cắn; vì cây giữ phim như trong ảnh sẽ giúp chuẩn hóa vị trí và góc độ tia X để quan sát vùng khảo sát, đồng thời bệnh nhân sẽ cắn vào dụng cụ này để giữ phim cố định.[cite: 1]
+00:03:17,766 --> 00:03:28,456
+Đặc biệt là sâu ngà, và giúp các em ước lượng tốt hơn về độ sâu của sang thương so với việc chỉ khám bằng mắt.
 
 18
-00:04:19,781 --> 00:04:33,201
-Đó là lý do tại sao các em có thể chuẩn hóa được góc tia X, đặc biệt là góc ngang, giúp tránh tình trạng chồng hình.[cite: 1]
+00:03:28,846 --> 00:03:38,256
+Kỹ thuật chụp cắn cánh là kỹ thuật X-quang phù hợp nhất để phát hiện sâu răng, không phải phim quanh chóp, và thầy sẽ giải thích lý do tại sao.
 
 19
-00:04:33,201 --> 00:04:49,491
-Ý tưởng chính của phim cánh cắn là tạo ra điều kiện chụp chuẩn hóa cho chùm tia X, nhờ đó sai số về kích thước được giảm thiểu tối đa, đặc biệt là lỗi giãn dài hay chồng hình, và góc ngang thực tế là không độ vì tia X đi song song với cây giữ phim.[cite: 1]
+00:03:38,566 --> 00:04:01,696
+Kỹ thuật này đòi hỏi phải có cây giữ phim, và đây chính là ý nghĩa đằng sau tầm quan trọng của phim cắn cánh, vì cây giữ phim sẽ chuẩn hóa vị trí và góc độ tia chụp.
 
 20
-00:04:49,491 --> 00:05:04,911
-Đây là mẫu của một sinh viên của thầy, Abdulbari Al-Johani tại Đại học Taibah, một mô hình minh họa cho phim cánh cắn.[cite: 1]
+00:04:01,886 --> 00:04:19,466
+Các em dùng một cây giữ phim để bệnh nhân cắn vào, điều này giúp chuẩn hóa góc độ, đặc biệt là góc ngang, giúp tránh hiện tượng chồng hình.
 
 21
-00:05:04,911 --> 00:05:20,451
-Trong đó, các răng chen chúc rất nhiều và bệnh nhân đang ở giai đoạn hệ răng hỗn hợp, nhưng đồng thời đây vẫn là một góc ngang chính xác cho phim cánh cắn, và các em có thể nhận ra bóng của cây giữ phim.[cite: 1]
+00:04:19,786 --> 00:04:32,486
+Đây là ý tưởng chính của phim cắn cánh, đảm bảo điều kiện chụp được chuẩn hóa bởi chùm tia X.
 
 22
-00:05:20,451 --> 00:05:40,801
-Hoặc có thể là miếng cao su mà bệnh nhân cắn vào để giữ phim; nếu chúng ta tập trung vào vùng này, các em sẽ thấy phim cánh cắn chính xác đến mức nào khi cung cấp hình ảnh giúp phát hiện sâu răng mặt bên ở cả mặt gần và mặt xa của răng cối nhỏ này cùng các răng lân cận.[cite: 1]
+00:04:32,486 --> 00:04:49,016
+Vì vậy, mức độ sai lệch kích thước là tối thiểu, đặc biệt là hiện tượng dãn ảnh hay chồng hình, và góc ngang thực tế bằng 0 vì tia đi song song với cây giữ phim.
 
 23
-00:05:40,801 --> 00:06:12,781
-Đó là lý do tại sao các sang thương sâu răng có thể phát hiện được trên phim X quang, nhưng quá trình khử khoáng vẫn phải đạt đến một mức độ nhất định mới phân biệt được với mô lành; và đây sẽ là vấn đề chính để chúng ta cải tiến kỹ thuật chụp X quang nhằm phát hiện sớm sang thương sâu răng ngay từ giai đoạn khử khoáng ban đầu.[cite: 1]
+00:04:49,486 --> 00:04:54,496
+Đây là phim của một học trò của thầy, Abdelbari Aljuhani tại Đại học Taiibah.
 
 24
-00:06:12,781 --> 00:06:35,801
-Chúng ta đang sử dụng phim cánh cắn để chẩn đoán đặc hiệu các sang thương sâu răng mặt bên, bởi vì sâu răng mặt bên bản chất nằm ở vị trí khuất, rất khó có thể chẩn đoán thông qua quan sát bằng mắt thường.[cite: 1]
+00:04:54,676 --> 00:05:04,150
+Đây là một phim cắn cánh ở vùng răng chen chúc, nên chúng ta cần sự lồng múi tối đa.
 
 25
-00:06:35,801 --> 00:07:17,391
-Do đó, chúng ta chẩn đoán các sang thương mặt bên bằng xúc giác qua thám trâm sừng bò, nhưng chúng ta đã từ chối dùng thám trâm nhọn ở các phần trước; ngoài ra chúng ta có thể dùng chỉ nha khoa không sáp và dựa vào hiện tượng tưa chỉ để nhận biết, dù cho các em không thể nhìn thấy sang thương sâu răng bằng mắt thường.[cite: 1]
+00:05:04,150 --> 00:05:20,410
+Đồng thời, đây là một góc ngang rất chuẩn cho phim cắn cánh, các em có thể thấy bóng của cây giữ phim hoặc miếng cao su mà bệnh nhân cắn vào.
 
 26
-00:07:17,391 --> 00:07:33,481
-Trong một thử nghiệm nhằm cải thiện việc khám bằng mắt, chúng ta đã bàn về việc có thể dùng thun tách kẽ chỉnh nha hoặc chêm gỗ kích thước lớn, nhưng cách này có thể dẫn đến tổn thương vĩnh viễn cho các sợi dây chằng nha chu.[cite: 1]
+00:05:20,410 --> 00:05:40,130
+Nếu nhìn kỹ vào vùng này, các em sẽ thấy phim cắn cánh ghi nhận hình ảnh cực kỳ chính xác để phát hiện sâu mặt bên ở cả mặt gần và mặt xa của răng cối nhỏ này và các mặt răng lân cận.
 
 27
-00:07:33,481 --> 00:07:44,201
-Độ nhạy trung bình của thử nghiệm này với vai trò là công cụ phát hiện sâu răng mặt bên dao động từ năm mươi đến bảy mươi phần trăm, được coi là mức đáng tin cậy.[cite: 1]
+00:05:40,130 --> 00:05:54,590
+Vì vậy, các sang thương sâu răng có thể được phát hiện trên X-quang, nhưng vẫn cần một mức độ khử khoáng nhất định để tạo sự tương phản với mô lành.
 
 28
-00:07:44,201 --> 00:07:48,881
-Nhưng các em đừng quên rằng cấu trúc răng phải bị khử khoáng ít nhất bốn mươi phần trăm thì mới thấy được.[cite: 1]
+00:05:54,590 --> 00:06:12,390
+Và đây sẽ là vấn đề cốt lõi để chúng ta cải tiến kỹ thuật X-quang, nhằm mục tiêu phát hiện sớm các sang thương sâu răng ở giai đoạn khử khoáng sớm.
 
 29
-00:07:48,881 --> 00:08:14,281
-Phải như vậy thì mới có thể phát hiện chắc chắn sang thương sâu răng, và đây vẫn sẽ là mục tiêu của chúng ta trong quá trình thăm khám bằng X quang.[cite: 1]
+00:06:12,730 --> 00:06:26,550
+Chúng ta đang sử dụng phim cắn cánh đặc biệt là để phát hiện các sang thương sâu mặt bên.
 
 30
-00:08:14,281 --> 00:08:35,611
-Nhìn chung, quá trình khảo sát bệnh nhân bằng phim X quang bao gồm rất nhiều góc nhìn, trong đó phim cánh cắn dùng để phát hiện sâu răng mặt bên và đánh giá mức xương ổ răng; còn phim quanh chóp, dù chụp theo kỹ thuật song song hay kỹ thuật phân giác, đều được dùng để khảo sát tình trạng vùng quanh chóp.[cite: 1]
+00:06:26,550 --> 00:06:35,850
+Bởi vì bản chất sâu mặt bên nằm ở vị trí khuất, rất khó chẩn đoán bằng mắt thường.
 
 31
-00:08:35,611 --> 00:08:42,541
-Phim toàn cảnh hay phim panorama được sử dụng để có cái nhìn tổng quát cắt lớp toàn bộ vùng miệng hoặc toàn bộ hệ răng.[cite: 1]
+00:06:35,850 --> 00:06:47,810
+Vì thế, ta chẩn đoán sâu mặt bên bằng xúc giác, dùng thám trâm cong sừng bò, nhưng chúng ta đã loại bỏ việc dùng thám trâm nhọn ở các bài trước.
 
 32
-00:08:42,541 --> 00:08:55,701
-Đặc biệt là khi các em muốn đánh giá khớp thái dương hàm; phim X quang như đã đề cập cũng có thể phát hiện sang thương sâu răng mặt bên, thường xuất hiện dưới dạng một vùng thấu quang hình tam giác.[cite: 1]
+00:06:47,810 --> 00:06:57,830
+Và như đã nói, các em có thể dùng chỉ nha khoa không sáp, dựa vào sự tưa chỉ để nhận biết.
 
 33
-00:08:55,701 --> 00:09:10,021
-Đỉnh của tam giác thấu quang này sẽ hướng về phía đường nối men ngà, phim X quang còn được dùng cho các ca sâu mặt nhai từ trung bình đến sâu, có thể thấy dưới dạng vùng thấu quang trong ngà răng.[cite: 1]
+00:06:57,830 --> 00:07:02,270
+Nhưng các em vẫn không thể nhìn thấy sang thương sâu răng bằng mắt.
 
 34
-00:09:10,021 --> 00:09:23,001
-Phim X quang cũng có thể được dùng để kiểm tra các khiếm khuyết của miếng trám, đặc biệt là hình thể đường viền không chuẩn, bờ dư, hay sâu răng tái phát, nhất là ở những vùng nướu khó tiếp cận.[cite: 1]
+00:07:02,270 --> 00:07:17,090
+Để cải thiện việc khám bằng mắt, ta có thể dùng thun tách kẽ hoặc chêm gỗ quá cỡ, nhưng việc này có thể gây tổn thương vĩnh viễn sợi nha chu.
 
 35
-00:09:23,001 --> 00:09:30,941
-Các bất thường về tủy răng như sỏi tủy hay nội tiêu cũng có thể được phát hiện qua phim X quang.[cite: 1]
+00:07:17,650 --> 00:07:33,390
+Độ nhạy trung bình của phương pháp này trong việc phát hiện sâu mặt bên dao động từ 50 đến 70%, được coi là khá đáng tin cậy.
 
 36
-00:09:30,941 --> 00:09:46,411
-Phim quanh chóp rất hữu ích trong việc chẩn đoán áp xe quanh chóp, u hạt nha chu, nang chân răng và tất cả các bệnh lý liên quan đến vùng quanh chóp.[cite: 1]
+00:07:33,390 --> 00:07:48,310
+Nhưng xin đừng quên, mô răng phải mất khoáng ít nhất 40% thì mới có thể phát hiện rõ trên phim X-quang, và đây vẫn là bài toán trong chẩn đoán hình ảnh.
 
 37
-00:09:46,411 --> 00:09:56,661
-Ngoài ra, sự thông suốt hay mức độ đóng kín của lỗ chóp răng cũng có thể được đánh giá thông qua khảo sát X quang.[cite: 1]
+00:07:48,310 --> 00:07:60,150
+Nhìn chung, khám X-quang bao gồm nhiều góc độ chụp, trong đó phim cắn cánh dùng để phát hiện sâu mặt bên và đánh giá mức xương.
 
 38
-00:09:56,661 --> 00:10:06,571
-Sự hiện diện của các răng cối lớn mọc ngầm hay răng dư cũng có thể được phát hiện bằng các phim X quang trong miệng.[cite: 1]
+00:08:00,510 --> 00:08:11,530
+Phim quanh chóp, dù dùng kỹ thuật song song hay kỹ thuật phân giác, đều được dùng để đánh giá tình trạng vùng quanh chóp.
 
 39
-00:10:06,571 --> 00:10:20,101
-Bằng cách này hay cách khác, nhằm chuẩn hóa quá trình đọc phim X quang, một hệ thống ký hiệu phân loại trên X quang đã được phát triển.[cite: 1]
+00:08:11,530 --> 00:08:23,330
+Phim toàn cảnh (Panorex) chụp cắt lớp toàn bộ vùng miệng và hàm răng, đặc biệt cần thiết khi các em muốn đánh giá cả khớp thái dương hàm (TMJ).
 
 40
-00:10:20,101 --> 00:10:30,401
-Đặc biệt là đối với bệnh sâu răng, hệ thống này chia thành ba mức độ tổn thương ở men răng và ba mức độ tổn thương ở ngà răng.[cite: 1]
+00:08:23,730 --> 00:08:35,870
+Như đã đề cập, phim X-quang có thể phát hiện sâu mặt bên, thường xuất hiện dưới dạng một vùng thấu quang hình tam giác với đỉnh hướng về phía đường nối men-ngà.
 
 41
-00:10:30,401 --> 00:10:57,291
-Bắt đầu từ E không nghĩa là không có tổn thương men răng rõ rệt, có thể đã bắt đầu khử khoáng nhưng mức độ chưa đủ để nhận diện trên X quang; E một là tổn thương men chưa tạo lỗ xoang; còn E hai là đã tạo xoang ở men răng.[cite: 1]
+00:08:36,250 --> 00:08:43,490
+Nó cũng dùng để xem các sang thương sâu mặt nhai từ trung bình đến sâu, thể hiện bằng vùng thấu quang trong ngà.
 
 42
-00:10:57,291 --> 00:11:18,421
-Tiếp đến là ngà răng; D một là khử khoáng ở nửa ngoài của ngà răng, D ba là khử khoáng ở nửa trong của ngà răng, và D hai cùng D ba là các sang thương đã tạo xoang trong ngà răng.[cite: 1]
+00:08:43,490 --> 00:08:55,030
+Có thể dùng để kiểm tra các khiếm khuyết của miếng trám như sai biên dạng, bờ dư, và sâu tái phát, đặc biệt ở các vùng cổ răng khó tiếp cận.
 
 43
-00:11:18,421 --> 00:11:37,891
-Chi tiết hơn, hình ảnh này cho các em thấy mối tương quan giữa hệ thống ký hiệu trên X quang và các mức điểm hay mã ICDAS mà chúng ta đã thảo luận trước đó.[cite: 1]
+00:08:55,350 --> 00:09:10,250
+Các bất thường tủy như sỏi tủy, nội tiêu cũng có thể được xác định. Phim quanh chóp rất hữu ích trong chẩn đoán áp xe quanh chóp, u hạt, nang chân răng và các bệnh lý quanh chóp khác.
 
 44
-00:11:37,891 --> 00:11:47,451
-Thực ra đây không phải là một phim quanh chóp mà là hình ảnh mô phỏng trên máy tính, nhưng chúng ta có thể dùng nó để làm rõ các ký hiệu phân loại trên X quang.[cite: 1]
+00:09:10,250 --> 00:09:21,990
+Ngoài ra, mức độ thông thoáng hoặc sự trưởng thành của lỗ chóp cũng có thể được đánh giá qua phim X-quang.
 
 45
-00:11:47,451 --> 00:12:13,251
-ICDAS không cho thấy không có tổn thương men răng, tương đương E không; E một là tổn thương men chưa tạo xoang, tương đương ICDAS một; còn E hai là tổn thương men đã tạo xoang rõ ràng ở các hố rãnh, được xếp vào mã ICDAS hai.[cite: 1]
+00:09:22,670 --> 00:09:31,030
+Sự hiện diện của răng cối lớn mọc ngầm hay răng dư cũng được phát hiện qua phim X-quang trong miệng.
 
 46
-00:12:13,251 --> 00:12:19,861
-ICDAS ba là lúc sang thương bắt đầu lan vào ngà răng, tức là tình trạng khử khoáng ở nửa ngoài của ngà răng, tương ứng với D một.[cite: 1]
+00:09:31,350 --> 00:09:46,290
+Để chuẩn hóa việc đọc phim, người ta đã phát triển hệ thống phân loại X-quang đặc biệt cho sâu răng, gồm 3 mức độ ở men và 3 mức độ ở ngà răng.
 
 47
-00:12:19,861 --> 00:12:35,851
-ICDAS bốn được ký hiệu là D hai, biểu thị sự khử khoáng ở nửa trong của ngà răng; đồng thời, trong hệ thống phân loại sâu răng của Hiệp hội Nha khoa Hoa Kỳ...[cite: 1]
+00:09:46,630 --> 00:09:56,650
+Bắt đầu từ E0, không có tổn thương men rõ rệt, có thể đã bắt đầu khử khoáng nhưng mức độ chưa đủ lớn.
 
 48
-00:12:35,851 --> 00:12:46,851
-...nếu các em còn nhớ, có hàng cuối cùng này mô tả biểu hiện trên X quang của các sang thương sâu răng mặt bên.[cite: 1]
+00:09:57,200 --> 00:10:04,200
+Chưa đủ để đọc được trên phim X-quang. E1 là tổn thương men chưa tạo xoang, E2 là tổn thương men đã tạo xoang.
 
 49
-00:12:46,851 --> 00:13:03,491
-Bắt đầu với cấu trúc răng lành mạnh là E không, và các sang thương khởi phát được đánh giá nằm trong khoảng từ E một, E hai cho đến D một.[cite: 1]
+00:10:06,200 --> 00:10:18,630
+Sau đó đến ngà răng, D1 là khử khoáng ở nửa ngoài của ngà, D3 là khử khoáng ở nửa trong của ngà, còn D2 và D3 là tổn thương ngà đã tạo xoang.
 
 50
-00:13:03,491 --> 00:13:25,751
-Tiếp đó là sang thương trung bình ở hố rãnh mặt nhai, lúc này các em chắc chắn có thể nhận thấy một vùng thấu quang mỏng có đáy rộng nằm trong ngà răng, đi kèm với rất ít hoặc không có thay đổi nào ở men răng.[cite: 1]
+00:10:19,040 --> 00:10:30,460
+Bức ảnh này cho thấy chi tiết mối tương quan giữa hệ thống phân loại X-quang và mã số ICDAS mà chúng ta đã học trước đó.
 
 51
-00:13:25,751 --> 00:13:49,881
-Hình ảnh sẽ khác nhau tùy thuộc vào việc men răng đã tạo xoang hay chưa, bởi vì nó vẫn đang ở giai đoạn trung bình; và dải cản quang này như chúng ta đã bàn ở góc nhìn trước, bây giờ đã trở nên rõ nét hơn so với giai đoạn mới chớm.[cite: 1]
+00:10:30,460 --> 00:10:39,070
+Thực chất đây là hình đồ họa chứ không phải phim X-quang thật, nhưng chúng ta dùng nó để làm rõ hệ thống phân loại X-quang.
 
 52
-00:13:49,881 --> 00:14:04,281
-Điều này cũng cho thấy sự vôi hóa bên trong ngà răng như một cơ chế sửa chữa, đó có thể là ngà xơ hóa hoặc ngà sửa chữa.[cite: 1]
+00:10:39,070 --> 00:10:44,660
+ICDAS 0 cho thấy không có tổn thương men, đúng không?
 
 53
-00:14:04,281 --> 00:14:26,391
-Vùng cản quang nằm dưới vùng thấu quang này báo hiệu hành động sửa chữa hay phản ứng tự vệ của tủy răng; tuy nhiên vùng cản quang này có thể không nhìn thấy được khi sâu răng lan ra phía mặt ngoài bởi vì...[cite: 1]
+00:10:44,660 --> 00:10:53,320
+Tương đương với E0. E1, chỉ là tổn thương men chưa tạo xoang, được xếp vào ICDAS 1.
 
 54
-00:14:26,391 --> 00:14:40,924
-...bề mặt gần với bộ cảm biến X quang nhất là mặt trong, nên mặt trong thường sẽ che khuất phần lớn hoặc chồng lên hình ảnh X quang của mặt ngoài, do đó vùng cản quang này có thể bị lấp mất.[cite: 1]
+00:10:53,320 --> 00:11:01,480
+E2 là tổn thương men đã tạo xoang, rất rõ ở các hố rãnh, được mã hóa là ICDAS 2.
 
 55
-00:14:48,331 --> 00:15:13,111
-Ở những sang thương mặt nhai mức độ nặng, các em sẽ quan sát thấy cả trên lâm sàng khi khám bằng mắt và trên phim X quang một lỗ sâu lớn ở răng đi kèm với một vùng thấu quang lớn.[cite: 1]
+00:11:01,480 --> 00:11:10,500
+ICDAS 3, bắt đầu lan vào ngà răng, tức là tình trạng khử khoáng ở nửa ngoài ngà răng, D1.
 
 56
-00:15:13,111 --> 00:15:32,421
-Điều đó có thể khẳng định phần nào rằng tủy răng đã bị nhiễm trùng, nhưng thực tế vẫn luôn tồn tại một sai số nhỏ hiếm gặp về góc chụp cần được cân nhắc, khiến chúng ta không thể xác nhận chính xác tủy đã lộ hay chưa.[cite: 1]
+00:11:10,500 --> 00:11:18,250
+ICDAS 4 được ký hiệu là D2, tức là sự khử khoáng lan đến nửa trong của ngà răng.
 
 57
-00:15:32,421 --> 00:15:36,721
-Đó là lý do tại sao nó mang tính kết luận nhưng không mang tính quyết định khi các em cân nhắc xem tủy răng có bị ảnh hưởng hay không.[cite: 1]
+00:11:18,250 --> 00:11:40,165
+Tương tự, trong hệ thống phân loại sâu răng của Hiệp hội Nha khoa Hoa Kỳ (ADA), nếu các em nhớ lại, ở hàng cuối cùng có mô tả hình ảnh X-quang của sâu mặt bên.
 
 58
-00:15:36,721 --> 00:15:53,941
-Tiếp theo là sang thương sâu răng mặt bên; loại sâu răng này rất khó để phân biệt hay phát hiện trên phim X quang, đặc biệt là ở những giai đoạn sớm.[cite: 1]
+00:11:40,165 --> 00:11:58,570
+Cấu trúc răng lành mạnh là E0, các tổn thương sớm được xếp từ E1, E2 đến D1, tiếp theo là tổn thương trung bình D2, và tổn thương lớn hay tiến triển mạnh là D3.
 
 59
-00:15:53,941 --> 00:16:13,601
-Bởi vì mật độ cản quang dọc theo vùng mặt bên rất lớn, và tia X phải xuyên qua lớp men răng dày theo chiều ngoài trong của chiếc răng.[cite: 1]
+00:11:59,070 --> 00:12:14,000
+Bây giờ, chúng ta hãy cùng xem xét các hình thái sâu răng ở những vị trí khác nhau trên phim cắn cánh, phần này sẽ giải đáp câu hỏi: sâu răng trông như thế nào trên phim X-quang?
 
 60
-00:16:13,601 --> 00:16:33,861
-Điều đó sẽ không cho phép phát hiện sự mất khoáng sớm với một lượng nhỏ hay bất kỳ mức độ khử khoáng thấp nào.[cite: 1]
+00:12:14,000 --> 00:12:23,610
+Đầu tiên, hãy bắt đầu với sâu hố rãnh và xem xét sang thương sâu răng chớm hay sâu mặt nhai giai đoạn đầu.
 
 61
-00:16:33,861 --> 00:16:47,881
-Đó là lý do tại sao trong hầu hết các trường hợp, các sang thương mặt bên mới chớm không thể xuất hiện trên phim X quang; các em sẽ cần những kỹ thuật X quang tiên tiến hơn phim cánh cắn và phim X quang truyền thống để có thể phát hiện được chúng.[cite: 1]
+00:12:23,610 --> 00:12:33,660
+Nó có thể hoàn toàn không xuất hiện trên phim cắn cánh, điều này như thầy đã phân tích...
 
 62
-00:16:47,881 --> 00:17:10,511
-Trong trường hợp sâu răng mặt bên mới chớm, nếu có thể nhìn thấy, nó thường trông giống như một vùng dễ bị sâu, thể hiện trên phim X quang dưới dạng một vết khuyết nhỏ ở bề mặt ngoài.[cite: 1]
+00:12:33,660 --> 00:12:40,540
+Vì tỷ lệ khử khoáng dưới 40% nên không thể phát hiện được bằng X-quang.
 
 63
-00:17:10,511 --> 00:17:37,791
-Vết khuyết này thường chỉ liên quan đến một phần nhỏ của nửa ngoài men răng; và đôi khi như chúng ta đã nói, chẩn đoán có thể bị bỏ sót và cách tốt nhất là quan sát dưới độ phóng đại, thậm chí phim X quang cũng cần được phóng to.[cite: 1]
+00:12:40,540 --> 00:12:53,770
+Nếu lớn hơn một chút, các em có thể nhận thấy một vùng thấu quang, cho thấy sâu răng bắt đầu từ thành hố rãnh, có xu hướng lan rộng vuông góc với đường nối men-ngà.
 
 64
-00:17:37,791 --> 00:17:50,791
-Sau đó là sang thương mặt bên mức độ trung bình, tổn thương nửa ngoài của men răng nhưng chưa lan đến đường nối men ngà.[cite: 1]
+00:12:53,770 --> 00:13:03,380
+Tạo ra bóng thấu quang tại vị trí đường nối men-ngà này.
 
 65
-00:17:50,791 --> 00:18:03,221
-Phần lớn, khoảng sáu mươi đến bảy mươi phần trăm, xuất hiện dưới dạng một khiếm khuyết hay vùng thấu quang hình tam giác với đáy rộng hướng ra bề mặt ngoài.[cite: 1]
+00:13:03,380 --> 00:13:25,380
+Đôi khi ta thấy vùng cản quang tăng lên bên dưới vùng thấu quang này, đây là cơ chế bảo vệ xơ hóa ống ngà hoặc hình thành ngà thứ cấp nếu đó là sâu răng mạn tính.
 
 66
-00:18:03,221 --> 00:18:18,911
-Đỉnh của tam giác hướng về phía đường nối men ngà, nhưng vẫn chưa chạm tới ranh giới này; đôi khi ở khoảng mười sáu phần trăm các trường hợp, nó xuất hiện dưới dạng hình ảnh thấu quang lan tỏa.[cite: 1]
+00:13:25,380 --> 00:13:50,500
+Tiếp đến là sâu mặt nhai ở mức độ trung bình tại hố rãnh, các em sẽ thấy rõ một dải thấu quang mỏng đáy rộng ở trong ngà, với rất ít hoặc không có thay đổi ở men răng, tùy thuộc vào việc men đã tạo xoang hay chưa.
 
 67
-00:18:18,911 --> 00:18:36,431
-Và đồng thời có khoảng mười bảy phần trăm là sự kết hợp của cả hai dạng trên; nhưng phổ biến nhất vẫn là vùng thấu quang hình tam giác với đáy rộng hướng ra mặt ngoài và đỉnh nhọn hướng về phía đường nối men ngà.[cite: 1]
+00:13:50,500 --> 00:14:18,950
+Dải cản quang này giờ đây nổi bật hơn so với giai đoạn sâu chớm, chứng tỏ sự canxi hóa trong ngà răng như một cơ chế sửa chữa (ngà xơ hoặc ngà thứ cấp), phản ánh phản ứng bảo vệ của tủy răng.
 
 68
-00:18:36,431 --> 00:18:49,621
-Đó là lý do tại sao chúng ta thấy rõ sự lan rộng sang hai bên từ đỉnh nón trong men răng, sau đó đi từ đáy nón tiến vào ngà răng.[cite: 1]
+00:14:18,950 --> 00:14:32,540
+Sự cản quang này có thể không nhìn thấy được khi sâu răng lan ra phía ngoài (phía má), bởi vì mặt răng nằm gần cảm biến nhất lại là mặt trong.
 
 69
-00:18:49,621 --> 00:19:04,141
-Và trong trường hợp đó, tổn thương sẽ không vượt quá một nửa ngà răng; vì thế chúng ta gọi đây là sang thương mặt bên tiến triển, và chúng ta cũng không thể chắc chắn liệu tủy răng đã bị ảnh hưởng hay chưa.[cite: 1]
+00:14:32,540 --> 00:14:48,010
+Do đó, mặt trong thường che khuất hoặc chồng hình lên hình ảnh X-quang của các mặt ngoài, khiến vùng cản quang này không thể nhận ra được.
 
 70
-00:19:04,141 --> 00:19:28,531
-Đối với sâu răng mặt bên mức độ nặng hay xâm lấn, sang thương sẽ đâm xuyên quá một nửa độ dày của ngà răng; và bây giờ các em có thể nhận thấy dải men răng còn lại rất hẹp, mặc dù trong một số ca...[cite: 1]
+00:14:48,300 --> 00:15:13,240
+Ở những sang thương mặt nhai nghiêm trọng, các em sẽ quan sát thấy nhịp mạch tủy khi khám lâm sàng, và trên phim X-quang sẽ thấy một xoang lớn cùng vùng thấu quang lớn.
 
 71
-00:19:28,531 --> 00:19:42,531
-...sẽ có tổn thương ở vùng gờ bên do cấu trúc gờ bên bị mất nâng đỡ bên dưới, tuy nhiên dấu hiệu này lúc có lúc không, nhưng nhiều khả năng nó sẽ cho thấy rằng...[cite: 1]
+00:15:13,530 --> 00:15:36,080
+Phần nào xác nhận có sự nhiễm trùng tủy, nhưng thực ra vẫn có một chút sai số về góc chụp, do đó hình ảnh này chỉ có tính gợi ý chứ không mang tính quyết định liệu tủy đã bị lộ hay chưa.
 
 72
-00:19:42,531 --> 00:20:01,371
-...đã có hiện tượng sập men hoặc gãy men răng do gờ bên bị mất mô nâng đỡ bên dưới; và đó là biểu hiện phổ biến nhất của sâu răng ở vùng mặt bên.[cite: 1]
+00:15:36,580 --> 00:15:42,120
+Được rồi, tiếp theo là sang thương sâu mặt bên.
 
 73
-00:20:01,371 --> 00:20:12,781
-Đó là khi chúng ta đọc kết quả từ phim cánh cắn; tiếp theo là sâu răng mặt ngoài và mặt trong, hay còn được biết đến là các sang thương xoang năm dành cho tổn thương mặt láng.[cite: 1]
+00:15:42,400 --> 00:15:54,420
+Sâu mặt bên rất khó phân biệt hay phát hiện trên phim X-quang, đặc biệt là ở những giai đoạn sớm.
 
 74
-00:20:12,781 --> 00:20:24,471
-Trong trường hợp như vậy, phim cánh cắn đặc biệt ở vùng răng cửa sẽ không cung cấp nhiều thông tin và cũng không dễ thực hiện...[cite: 1]
+00:15:54,820 --> 00:16:17,700
+Bởi vì mật độ cản quang dọc theo vùng mặt bên rất dày, tia X phải đâm xuyên qua toàn bộ độ dày men răng theo chiều ngoài-trong, khiến ta không thể phát hiện sự mất khoáng lượng nhỏ.
 
 75
-00:20:24,471 --> 00:20:41,281
-...như phim quanh chóp, và chúng ta có thể chuyển sang chụp phim quanh chóp với kỹ thuật song song thay vì dùng kỹ thuật phân giác.[cite: 1]
+00:16:17,700 --> 00:16:33,840
+Đó là lý do tại sao trong hầu hết các trường hợp, sâu mặt bên giai đoạn chớm không thể hiện trên phim X-quang.
 
 76
-00:20:41,281 --> 00:20:56,551
-Tất cả đều bắt đầu dưới dạng một sang thương hình tròn, sau đó lớn dần lên và trở nên hơi giống hình bầu dục hoặc hình bán nguyệt.[cite: 1]
+00:16:33,840 --> 00:16:48,420
+Các em cần những kỹ thuật chẩn đoán hình ảnh tiên tiến hơn phim cắn cánh hay X-quang truyền thống để phát hiện nó.
 
 77
-00:20:56,551 --> 00:21:13,131
-Nó thể hiện một đường viền men răng lành mạnh bao quanh vùng thấu quang rõ nét, ở phía gần và phía xa nếu chưa bị ảnh hưởng; đôi khi nó xếp chồng lên ranh giới và có thể trông giống như...[cite: 1]
+00:16:48,660 --> 00:17:15,320
+Ở sâu mặt bên chớm, nếu có thể nhìn thấy, nó thường xuất hiện dưới dạng một rãnh khuyết ở mặt ngoài, không xâm lấn quá một chút của nửa ngoài men răng.
 
 78
-00:21:13,131 --> 00:21:32,481
-...giống như một sang thương mặt nhai khi các em đang khám một răng cối; nó có thể biểu hiện hoặc xếp chồng lên đường nối men ngà khi sang thương sâu răng của các em lan rộng lên trên mặt nhai nhiều hơn...[cite: 1]
+00:17:15,590 --> 00:17:31,150
+Và đôi khi như thầy đã đề cập, chúng ta có thể chẩn đoán sót, nên tốt nhất là xem phim X-quang dưới độ phóng đại lớn.
 
 79
-00:21:32,481 --> 00:21:49,031
-...giả sử là hơn một nửa chiều dài thân răng; do đó nó có thể bị chẩn đoán nhầm là sâu mặt nhai sâu, vì vậy việc khám lâm sàng trong những trường hợp này là chẩn đoán xác định và giúp đảm bảo xem...[cite: 1]
+00:17:31,520 --> 00:17:38,080
+Tiếp đến là sâu mặt bên mức độ trung bình.
 
 80
-00:21:49,031 --> 00:22:04,601
-...mức độ lan rộng của xoang năm này là bao nhiêu; đó là lý do tại sao hầu hết các bác sĩ lâm sàng không ưu tiên chụp phim X quang cho các sang thương vùng cổ răng, mặt ngoài và mặt trong.[cite: 1]
+00:17:38,720 --> 00:18:04,260
+Tổn thương ở nửa ngoài của men răng nhưng chưa lan tới đường nối men-ngà, khoảng 67 đến 70% trường hợp sẽ biểu hiện dưới dạng khuyết hổng hay thấu quang hình tam giác.
 
 81
-00:22:04,601 --> 00:22:13,681
-Việc chụp phim không mang lại giá trị gì cho họ, vì phần lớn sang thương đã biểu hiện rõ ràng trên lâm sàng và các em hoàn toàn có thể quan sát kỹ bằng mắt thường.[cite: 1]
+00:18:04,640 --> 00:18:19,250
+Với đáy rộng nằm ở mặt ngoài và đỉnh hướng về phía đường nối men-ngà, nhưng chưa chạm tới đường nối này.
 
 82
-00:22:13,681 --> 00:22:36,461
-Và việc chụp phim X quang sẽ không bổ sung thêm thông tin gì mới; thế còn sâu chân răng thì sao, sâu chân răng hay còn gọi là sâu cement chân răng, thường xuất hiện ở mặt ngoài, mặt trong hoặc mặt bên ở khoảng bốn mươi đến bảy mươi phần trăm người cao tuổi, đặc biệt là nhóm bệnh nhân lão khoa.[cite: 1]
+00:18:19,500 --> 00:18:33,480
+Đôi khi, khoảng 16% trường hợp, nó xuất hiện dưới dạng thấu quang lan tỏa, và có thể 17% là kết hợp cả hai dạng.
 
 83
-00:22:36,461 --> 00:22:56,761
-Thông thường, tổn thương này bắt đầu như một sang thương ngà ở vùng cổ răng nhưng lan xuống chân răng do tụt nướu; nó xuất hiện dưới dạng một vùng thấu quang hình đĩa với bờ không rõ ràng và có xu hướng lan về phía...[cite: 1]
+00:18:33,740 --> 00:18:59,650
+Nhưng chủ yếu vẫn là dạng thấu quang tam giác với đáy rộng ra ngoài và đỉnh hướng vào trong. Sang thương mặt bên tiến triển sẽ biểu hiện như một hình nón thấu quang.
 
 84
-00:22:56,761 --> 00:23:09,131
-...chân răng, vượt quá đường nối men xê-măng hay vượt khỏi đường cổ răng.[cite: 1]
+00:18:59,870 --> 00:19:18,240
+Xâm lấn vào chính ngà răng, với đáy nằm ở đường nối men-ngà, cho thấy sự lan rộng sang hai bên của sâu răng dọc theo đường nối này.
 
 85
-00:23:09,131 --> 00:23:37,401
-Đối với sâu răng tái phát, nó xuất hiện như một vùng thấu quang nằm ngay sát miếng trám; vùng thấu quang này hay biểu hiện X quang của sâu răng tái phát này phụ thuộc vào mức độ khử khoáng và phạm vi lan rộng của miếng trám.[cite: 1]
+00:19:18,530 --> 00:19:41,130
+Và đây là hình nón thứ hai, trong khi hình nón thấu quang đầu tiên nằm ở men răng với đáy rộng quay ra ngoài và đỉnh hướng về phía đường nối men-ngà.
 
 86
-00:23:37,401 --> 00:23:53,301
-Trong một số trường hợp nhất định, nếu các em có xoang nhai, và phía dưới mặt nhai ở sàn tủy, đặc biệt nếu đó là xoang nhai trong, bởi vì mặt trong nằm sát với phim của các em hơn rất nhiều...[cite: 1]
+00:19:41,130 --> 00:19:53,079
+Đó là lý do tại sao đây là hình ảnh phổ biến nhất của sâu mặt bên khi đọc trên phim cắn cánh.
 
 87
-00:23:53,301 --> 00:24:14,051
-...nên nó sẽ chồng lên mọi hình ảnh khác hay mọi lớp khác trong phim của các em; đôi khi phần mở rộng mặt trong hay xoang mặt trong sẽ che khuất vùng thấu quang này và không cho phép các em xác định hay phát hiện tình trạng sâu răng tái phát ở sàn tủy.[cite: 1]
+00:19:53,239 --> 00:20:00,999
+Tiếp theo là sâu mặt ngoài và mặt trong, còn gọi là sâu răng hạng V ở các bề mặt nhẵn.
 
 88
-00:24:14,051 --> 00:24:34,901
-Thỉnh thoảng chúng ta có thể phát hiện thấy vùng cản quang gia tăng bên dưới vùng thấu quang này như một cơ chế bảo vệ thông qua sự xơ hóa ống ngà, hoặc sự hình thành ngà sửa chữa nếu đó là một sang thương sâu răng mạn tính.[cite: 1]
+00:20:00,999 --> 00:20:15,529
+Trong trường hợp này, phim cắn cánh ở vùng răng cửa không cung cấp nhiều thông tin và không dễ chụp như phim quanh chóp.
 
 89
-00:24:34,901 --> 00:24:50,041
-Tiếp đó là sang thương trung bình ở hố rãnh mặt nhai, lúc này các em chắc chắn có thể nhận thấy một vùng thấu quang mỏng có đáy rộng nằm trong ngà răng, đi kèm với rất ít hoặc không có thay đổi nào ở men răng.[cite: 1]
+00:20:15,529 --> 00:20:24,509
+Và chúng ta có thể tiến hành chụp phim quanh chóp với kỹ thuật song song thay vì kỹ thuật phân giác.
 
 90
-00:24:50,041 --> 00:25:04,911
-Dải cản quang này như chúng ta đã bàn ở góc nhìn trước, bây giờ đã trở nên rõ nét hơn so với giai đoạn mới chớm.[cite: 1]
+00:20:24,779 --> 00:20:33,989
+Ban đầu, tất cả đều là tổn thương dạng tròn, sau đó mở rộng thành hình elip hoặc hình bán nguyệt.
 
 91
-00:25:04,911 --> 00:25:16,891
-Điều này cũng cho thấy sự vôi hóa bên trong ngà răng như một cơ chế sửa chữa, đó có thể là ngà xơ hóa hoặc ngà sửa chữa.[cite: 1]
+00:20:34,159 --> 00:20:42,369
+Nó thể hiện một vùng men không sâu viền rõ rệt xung quanh vùng thấu quang, đó là mặt gần và mặt xa nếu chưa bị ảnh hưởng.
 
 92
-00:25:16,891 --> 00:25:33,721
-Vùng cản quang nằm dưới vùng thấu quang này báo hiệu hành động sửa chữa hay phản ứng tự vệ của tủy răng; tuy nhiên vùng cản quang này có thể không nhìn thấy được khi sâu răng lan ra phía mặt ngoài bởi vì...[cite: 1]
+00:20:42,559 --> 00:20:54,699
+Và đôi khi nó chồng hình lên đường nối men-ngà, có thể trông giống như sâu mặt nhai khi các em khám vùng răng cối.
 
 93
-00:25:33,721 --> 00:25:54,671
-...bề mặt gần với bộ cảm biến X quang nhất là mặt trong, nên mặt trong thường sẽ che khuất phần lớn hoặc chồng lên hình ảnh X quang của mặt ngoài, do đó vùng cản quang này có thể bị lấp mất.[cite: 1]
+00:20:55,079 --> 00:21:09,809
+Nó có thể biểu hiện ra hoặc chồng hình với đường nối men-ngà khi sang thương sâu lan đến mặt nhai quá một nửa chiều dài thân răng.
 
 94
-00:25:54,671 --> 00:26:12,751
-Ở những sang thương mặt nhai mức độ nặng, các em sẽ quan sát thấy cả trên lâm sàng khi khám bằng mắt và trên phim X quang một lỗ sâu lớn ở răng đi kèm với một vùng thấu quang lớn.[cite: 1]
+00:21:09,809 --> 00:21:15,039
+Điều này có thể khiến ta chẩn đoán nhầm thành sâu mặt nhai sâu.
 
 95
-00:26:12,751 --> 00:26:35,881
-Điều đó có thể khẳng định phần nào rằng tủy răng đã bị nhiễm trùng, nhưng thực tế vẫn luôn tồn tại một sai số nhỏ hiếm gặp về góc chụp cần được cân nhắc, khiến chúng ta không thể xác nhận chính xác tủy đã lộ hay chưa.[cite: 1]
+00:21:15,179 --> 00:21:25,759
+Vì vậy, khám lâm sàng trong những trường hợp này là chẩn đoán xác định, giúp xác định mức độ lan rộng của xoang hạng V.
 
 96
-00:26:35,881 --> 00:26:42,501
-Đó là lý do tại sao nó mang tính kết luận nhưng không mang tính quyết định khi các em cân nhắc xem tủy răng có bị ảnh hưởng hay không.[cite: 1]
+00:21:26,609 --> 00:21:38,779
+Đó là lý do tại sao hầu hết các bác sĩ lâm sàng không thích dùng phim X-quang để khám sâu mặt ngoài và mặt trong vùng cổ răng.
 
 97
-00:26:42,501 --> 00:27:03,001
-Tiếp theo là sang thương sâu răng mặt bên; loại sâu răng này rất khó để phân biệt hay phát hiện trên phim X quang, đặc biệt là ở những giai đoạn sớm.[cite: 1]
+00:21:38,779 --> 00:21:48,529
+Nó không có giá trị nhiều đối với họ, chủ yếu các sang thương này rất rõ ràng trên lâm sàng và các em hoàn toàn có thể kiểm tra trực quan bằng mắt.
 
 98
-00:27:03,001 --> 00:27:23,731
-Bởi vì mật độ cản quang dọc theo vùng mặt bên rất lớn, và tia X phải xuyên qua lớp men răng dày theo chiều ngoài trong của chiếc răng.[cite: 1]
+00:21:48,809 --> 00:21:53,719
+Và việc chụp phim X-quang sẽ không cung cấp thêm bất kỳ thông tin mới nào.
 
 99
-00:27:23,731 --> 00:27:37,451
-Điều đó sẽ không cho phép phát hiện sự mất khoáng sớm với một lượng nhỏ hay bất kỳ mức độ khử khoáng thấp nào.[cite: 1]
+00:21:54,329 --> 00:21:56,889
+Còn sâu chân răng thì sao?
 
 100
-00:27:37,451 --> 00:27:50,451
-Đó là lý do tại sao trong hầu hết các trường hợp, các sang thương mặt bên mới chớm không thể xuất hiện trên phim X quang; các em sẽ cần những kỹ thuật X quang tiên tiến hơn phim cánh cắn và phim X quang truyền thống để có thể phát hiện được chúng.[cite: 1]
+00:21:57,399 --> 00:22:00,999
+Sâu chân răng, hay còn gọi là sâu xê măng.
 
 101
-00:27:50,451 --> 00:28:13,081
-Trong trường hợp sâu răng mặt bên mới chớm, nếu có thể nhìn thấy, nó thường trông giống như một vùng dễ bị sâu, thể hiện trên phim X quang dưới dạng một vết khuyết nhỏ ở bề mặt ngoài.[cite: 1]
+00:22:01,029 --> 00:22:13,239
+Gặp ở khoảng 40 đến 70% người cao tuổi, đặc biệt là bệnh nhân lão khoa, có thể xuất hiện ở mặt ngoài, mặt trong hoặc mặt bên.
 
 102
-00:28:13,081 --> 00:28:40,451
-Vết khuyết này thường chỉ liên quan đến một phần nhỏ của nửa ngoài men răng; và đôi khi như chúng ta đã nói, chẩn đoán có thể bị bỏ sót và cách tốt nhất là quan sát dưới độ phóng đại, thậm chí phim X quang cũng cần được phóng to.[cite: 1]
+00:22:13,579 --> 00:22:21,579
+Thông thường, tổn thương bắt đầu ở ngà vùng cổ răng, nhưng lan xuống chân răng do tụt nướu.
 
 103
-00:28:40,451 --> 00:28:59,041
-Sau đó là sang thương mặt bên mức độ trung bình, tổn thương nửa ngoài của men răng nhưng chưa lan đến đường nối men ngà.[cite: 1]
+00:22:21,849 --> 00:22:36,279
+Nó xuất hiện dưới dạng vùng thấu quang hình đĩa ranh giới không rõ, có xu hướng lan về phía chân răng, vượt qua đường nối men-xê măng hay đường viền cổ răng.
 
 104
-00:28:59,041 --> 00:29:13,311
-Phần lớn, khoảng sáu mươi đến bảy mươi phần trăm, xuất hiện dưới dạng một khiếm khuyết hay vùng thấu quang hình tam giác với đáy rộng hướng ra bề mặt ngoài.[cite: 1]
+00:22:36,789 --> 00:22:46,589
+Đối với sâu tái phát, nó xuất hiện dưới dạng vùng thấu quang nằm ngay sát miếng trám.
 
 105
-00:29:13,311 --> 00:29:34,901
-Đỉnh của tam giác hướng về phía đường nối men ngà, nhưng vẫn chưa chạm tới ranh giới này; đôi khi ở khoảng mười sáu phần trăm các trường hợp, nó xuất hiện dưới dạng hình ảnh thấu quang lan tỏa.[cite: 1]
+00:22:47,309 --> 00:23:03,569
+Hình ảnh X-quang của sâu tái phát này phụ thuộc vào mức độ khử khoáng và phạm vi miếng trám của các em.
 
 106
-00:29:34,901 --> 00:29:52,551
-Và đồng thời có khoảng mười bảy phần trăm là sự kết hợp của cả hai dạng trên; nhưng phổ biến nhất vẫn là vùng thấu quang hình tam giác với đáy rộng hướng ra mặt ngoài và đỉnh nhọn hướng về phía đường nối men ngà.[cite: 1]
+00:23:04,209 --> 00:23:26,609
+Trong một số trường hợp, nếu các em có xoang nhai-ngoài, và bên dưới mặt nhai tại sàn tủy, đặc biệt nếu là xoang nhai-trong, vì mặt trong gần với phim hơn và chồng hình lên tất cả các phần khác của hình ảnh.
 
 107
-00:29:52,551 --> 00:30:05,741
-Đó là lý do tại sao chúng ta thấy rõ sự lan rộng sang hai bên từ đỉnh nón trong men răng, sau đó đi từ đáy nón tiến vào ngà răng.[cite: 1]
+00:23:26,769 --> 00:23:37,749
+Đôi khi phần mở rộng ra mặt trong hay mặt ngoài của các em chồng lên vùng thấu quang này, khiến các em không thể xác định hoặc phát hiện sâu tái phát ở sàn tủy.
 
 108
-00:30:05,741 --> 00:30:20,261
-Và trong trường hợp đó, tổn thương sẽ không vượt quá một nửa ngà răng; vì thế chúng ta gọi đây là sang thương mặt bên tiến triển, và chúng ta cũng không thể chắc chắn liệu tủy răng đã bị ảnh hưởng hay chưa.[cite: 1]
+00:23:37,749 --> 00:23:54,619
+Đó là lý do tại sao đôi khi rất khó phát hiện, nhất là khi các em có xoang mở rộng ra mặt ngoài hoặc mặt trong, hay khi dùng vật liệu như Canxi Hydroxide vì nó xuất hiện như một dải thấu quang.
 
 109
-00:30:20,261 --> 00:30:42,551
-Đối với sâu răng mặt bên mức độ nặng hay xâm lấn, sang thương sẽ đâm xuyên quá một nửa độ dày của ngà răng; và bây giờ các em có thể nhận thấy dải men răng còn lại rất hẹp, mặc dù trong một số ca...[cite: 1]
+00:23:54,849 --> 00:24:00,039
+Các em không thể chắc chắn vùng thấu quang này có phải là sâu tái phát hay không.
 
 110
-00:30:42,551 --> 00:30:56,241
-...sẽ có tổn thương ở vùng gờ bên do cấu trúc gờ bên bị mất nâng đỡ bên dưới, tuy nhiên dấu hiệu này lúc có lúc không, nhưng nhiều khả năng nó sẽ cho thấy rằng...[cite: 1]
+00:24:00,259 --> 00:24:25,119
+Bên dưới Composite và GIC, đặc biệt là Composite vì hầu hết keo dán dùng dưới Composite đều thấu quang. Ngoại trừ các dòng keo dán mới có hạt độn, việc thêm hạt độn nano giúp tăng độ cản quang để phân biệt nó với vùng thấu quang của sâu răng.
 
 111
-00:30:56,241 --> 00:31:14,331
-...đã có hiện tượng sập men hoặc gãy men răng do gờ bên bị mất mô nâng đỡ bên dưới; và đó là biểu hiện phổ biến nhất của sâu răng ở vùng mặt bên.[cite: 1]
+00:24:25,979 --> 00:24:40,919
+Nhưng thông tin phổ biến và hữu ích nhất từ phim cắn cánh là trong trường hợp sâu tái phát ở bờ nướu của các xoang mặt bên.
 
 112
-00:31:14,331 --> 00:31:25,751
-Đó là khi chúng ta đọc kết quả từ phim cánh cắn; tiếp theo là sâu răng mặt ngoài và mặt trong, hay còn được biết đến là các sang thương xoang năm dành cho tổn thương mặt láng.[cite: 1]
+00:24:41,279 --> 00:24:55,788
+Đây là công cụ giá trị nhất để phát hiện sâu tái phát bên dưới sàn nướu của xoang mặt bên, chính là phim cắn cánh.
 
 113
-00:31:25,751 --> 00:31:37,361
-Trong trường hợp như vậy, phim cánh cắn đặc biệt ở vùng răng cửa sẽ không cung cấp nhiều thông tin và cũng không dễ thực hiện...[cite: 1]
+00:24:56,398 --> 00:25:04,688
+Cũng có một số bóng mờ X-quang có thể bị chẩn đoán nhầm thành sâu răng.
 
 114
-00:31:37,361 --> 00:31:54,671
-...như phim quanh chóp, và chúng ta có thể chuyển sang chụp phim quanh chóp với kỹ thuật song song thay vì dùng kỹ thuật phân giác.[cite: 1]
+00:25:05,008 --> 00:25:08,688
+Thứ nhất là hiện tượng thấu quang vùng cổ răng, hay còn gọi là cháy cổ răng.
 
 115
-00:31:54,671 --> 00:32:09,111
-Tất cả đều bắt đầu dưới dạng một sang thương hình tròn, sau đó lớn dần lên và trở nên hơi giống hình bầu dục hoặc hình bán nguyệt.[cite: 1]
+00:25:08,928 --> 00:25:14,938
+Hiện tượng cháy cổ răng này rất rõ ở vùng cổ răng.
 
 116
-00:32:09,111 --> 00:32:27,461
-Nó thể hiện một đường viền men răng lành mạnh bao quanh vùng thấu quang rõ nét, ở phía gần và phía xa nếu chưa bị ảnh hưởng; đôi khi nó xếp chồng lên ranh giới và có thể trông giống như...[cite: 1]
+00:25:16,358 --> 00:25:26,458
+Nó được giới hạn bởi mũ men răng ở phía trên và đường viền xương ổ răng ở phía dưới.
 
 117
-00:32:27,461 --> 00:32:46,331
-...giống như một sang thương mặt nhai khi các em đang khám một răng cối; nó có thể biểu hiện hoặc xếp chồng lên đường nối men ngà khi sang thương sâu răng của các em lan rộng lên trên mặt nhai nhiều hơn...[cite: 1]
+00:25:26,678 --> 00:25:35,228
+Nó có hình tam giác nhưng ít hiện rõ ở phần trung tâm của răng.
 
 118
-00:32:46,331 --> 00:33:04,181
-...giả sử là hơn một nửa chiều dài thân răng; do đó nó có thể bị chẩn đoán nhầm là sâu mặt nhai sâu, vì vậy việc khám lâm sàng trong những trường hợp này là chẩn đoán xác định và giúp đảm bảo xem...[cite: 1]
+00:25:35,298 --> 00:25:45,358
+Nó trông có vẻ sậm màu và liên quan nhiều đến mức xương ổ răng hơn là mức độ sâu cổ răng ở vùng nướu.
 
 119
-00:33:04,181 --> 00:33:23,771
-...mức độ lan rộng của xoang năm này là bao nhiêu; đó là lý do tại sao hầu hết các bác sĩ lâm sàng không ưu tiên chụp phim X quang cho các sang thương vùng cổ răng, mặt ngoài và mặt trong.[cite: 1]
+00:25:45,718 --> 00:26:05,318
+Điều này cũng chủ yếu liên quan đến kích thước răng, đi từ mặt ngoài rộng để thu hẹp lại hoặc có kích thước gần-xa nhỏ hơn ở vùng mặt trong.
 
 120
-00:33:23,771 --> 00:33:30,431
-Việc chụp phim không mang lại giá trị gì cho họ, vì phần lớn sang thương đã biểu hiện rõ ràng trên lâm sàng và các em hoàn toàn có thể quan sát kỹ bằng mắt thường.[cite: 1]
+00:26:05,318 --> 00:26:11,738
+Do đó, mặt ngoài luôn rộng hơn, đặc biệt ở vùng cổ răng, so với mặt trong.
 
 121
-00:33:30,431 --> 00:33:43,001
-Và việc chụp phim X quang sẽ không bổ sung thêm thông tin gì mới; thế còn sâu chân răng thì sao...[cite: 1]
+00:26:11,928 --> 00:26:28,558
+Vì vậy, khi chùm tia đi qua mặt ngoài rồi đi qua mặt trong, ở vùng cổ răng này sẽ có sự chênh lệch về độ cản quang.
 
 122
-00:33:43,001 --> 00:34:03,491
-Sâu chân răng hay còn gọi là sâu cement chân răng, thường xuất hiện ở mặt ngoài, mặt trong hoặc mặt bên ở khoảng bốn mươi đến bảy mươi phần trăm người cao tuổi, đặc biệt là nhóm bệnh nhân lão khoa.[cite: 1]
+00:26:29,338 --> 00:26:52,478
+Bởi vì sẽ có một phần chụp kép của cả mặt ngoài và mặt trong ở vùng lõi hướng về tủy, trong khi vùng rìa ngoài chỉ xuyên qua vùng ngoài rộng hơn.
 
 123
-00:34:03,491 --> 00:34:25,041
-Thông thường, tổn thương này bắt đầu như một sang thương ngà ở vùng cổ răng nhưng lan xuống chân răng do tụt nướu; nó xuất hiện dưới dạng một vùng thấu quang hình đĩa với bờ không rõ ràng và có xu hướng lan về phía...[cite: 1]
+00:26:52,638 --> 00:26:59,498
+Do đó, sẽ có sự chênh lệch cản quang tạo ra hình ảnh giống như vết cháy xém.
 
 124
-00:34:25,041 --> 00:34:36,781
-...chân răng, vượt quá đường nối men xê-măng hay vượt khỏi đường cổ răng.[cite: 1]
+00:26:59,498 --> 00:27:09,798
+Hoặc thấu quang gia tăng, nhưng các em có thể phân biệt nó nhờ vào vùng mũ men và vị trí gần xương ổ răng, trong khi những vùng này rất hiếm khi bị sâu.
 
 125
-00:34:36,781 --> 00:34:56,241
-Đối với sâu răng tái phát, nó xuất hiện như một vùng thấu quang nằm ngay sát miếng trám; vùng thấu quang này hay biểu hiện X quang của sâu răng tái phát này phụ thuộc vào mức độ khử khoáng và phạm vi lan rộng của miếng trám.[cite: 1]
+00:27:09,798 --> 00:27:10,738
+Trừ khi có sự tụt nướu rõ ràng ở người lớn tuổi, và đó là sâu chân răng.
 
 126
-00:34:56,241 --> 00:35:16,891
-Trong một số trường hợp nhất định, nếu các em có xoang nhai, và phía dưới mặt nhai ở sàn tủy, đặc biệt nếu đó là xoang nhai trong, bởi vì mặt trong nằm sát với phim của các em hơn rất nhiều...[cite: 1]
+00:27:10,928 --> 00:27:21,848
+Ngoài ra, trong một số trường hợp, các em có thể thấy một hình ảnh không thể nhầm lẫn với sâu răng vì đó là vùng cản quang quá mức, đặc biệt là bên dưới miếng trám Amalgam.
 
 127
-00:35:16,891 --> 00:35:34,021
-...nên nó sẽ chồng lên mọi hình ảnh khác hay mọi lớp khác trong phim của các em; đôi khi phần mở rộng mặt trong hay xoang mặt trong sẽ che khuất vùng thấu quang này và không cho phép các em xác định hay phát hiện tình trạng sâu răng tái phát ở sàn tủy.[cite: 1]
+00:27:21,848 --> 00:27:33,678
+Nếu là miếng trám cũ, các sản phẩm ăn mòn như thiếc và kẽm sẽ xâm nhập vào cấu trúc ngà răng khoảng vài micron.
 
 128
-00:35:34,021 --> 00:35:55,731
-Thỉnh thoảng chúng ta có thể phát hiện thấy vùng cản quang gia tăng bên dưới vùng thấu quang này như một cơ chế bảo vệ thông qua sự xơ hóa ống ngà, hoặc sự hình thành ngà sửa chữa nếu đó là một sang thương sâu răng mạn tính.[cite: 1]
+00:27:33,828 --> 00:27:43,788
+Khu vực này sẽ xuất hiện cản quang hơn, đó chỉ là các sản phẩm ăn mòn từ miếng trám Amalgam cũ xâm nhập vào ngà răng.
 
 129
-00:35:55,731 --> 00:36:13,251
-Tiếp đó là sang thương trung bình ở hố rãnh mặt nhai, lúc này các em chắc chắn có thể nhận thấy một vùng thấu quang mỏng có đáy rộng nằm trong ngà răng, đi kèm với rất ít hoặc không có thay đổi nào ở men răng.[cite: 1]
+00:27:44,818 --> 00:28:05,008
+Đây là một ví dụ từ một sinh viên của thầy, Abdulrahman Alni tại Đại học Taibah, cho thấy phim cắn cánh phát hiện nhiều sang thương sâu răng ở mặt nhai và mặt bên ở các giai đoạn khác nhau như đã phân tích.
 
 130
-00:36:13,251 --> 00:36:26,541
-Dải cản quang này như chúng ta đã bàn ở góc nhìn trước, bây giờ đã trở nên rõ nét hơn so với giai đoạn mới chớm.[cite: 1]
+00:28:06,538 --> 00:28:22,208
+Bắt đầu từ sâu mặt nhai giai đoạn chớm, tổn thương sâu trung bình đến sâu tiến triển, và sâu mặt bên từ chớm đến trung bình ở mặt gần của răng cối lớn thứ hai.
 
 131
-00:36:26,541 --> 00:36:44,251
-Điều này cũng cho thấy sự vôi hóa bên trong ngà răng như một cơ chế sửa chữa, đó có thể là ngà xơ hóa hoặc ngà sửa chữa.[cite: 1]
+00:28:22,848 --> 00:28:38,558
+Một hình ảnh khác cũng từ sinh viên này cho thấy các mức độ lan rộng sâu răng khác nhau được chẩn đoán qua phim cắn cánh.
 
 132
-00:36:44,251 --> 00:37:02,101
-Vùng cản quang nằm dưới vùng thấu quang này báo hiệu hành động sửa chữa hay phản ứng tự vệ của tủy răng; tuy nhiên vùng cản quang này có thể không nhìn thấy được khi sâu răng lan ra phía mặt ngoài bởi vì...[cite: 1]
+00:28:40,768 --> 00:28:59,068
+Vấn đề của chúng ta trong chẩn đoán bằng X-quang là, thứ nhất, ta cần giảm tổng lượng tia phơi nhiễm cho bệnh nhân để giảm nguy cơ sinh học cho cả bác sĩ và bệnh nhân.
 
 133
-00:37:02,101 --> 00:37:25,641
-...bề mặt gần với bộ cảm biến X quang nhất là mặt trong, nên mặt trong thường sẽ che khuất phần lớn hoặc chồng lên hình ảnh X quang của mặt ngoài, do đó vùng cản quang này có thể bị lấp mất.[cite: 1]
+00:28:59,378 --> 00:29:12,138
+Tại sao? Vì đôi khi hoặc hầu hết thời gian, sẽ có nhiều sai sót khi ta cố gắng tránh hiện tượng chồng hình ở vùng kẽ mặt bên.
 
 134
-00:37:25,641 --> 00:37:37,761
-Ở những sang thương mặt nhai mức độ nặng, các em sẽ quan sát thấy cả trên lâm sàng khi khám bằng mắt và trên phim X quang một lỗ sâu lớn ở răng đi kèm với một vùng thấu quang lớn.[cite: 1]
+00:29:12,138 --> 00:29:25,468
+Vì vậy, chúng ta cần đưa thêm các công nghệ kỹ thuật số vào hình ảnh X-quang truyền thống.
 
 135
-00:37:37,761 --> 00:37:50,841
-Điều đó có thể khẳng định phần nào rằng tủy răng đã bị nhiễm trùng, nhưng thực tế vẫn luôn tồn tại một sai số nhỏ hiếm gặp về góc chụp cần được cân nhắc, khiến chúng ta không thể xác nhận chính xác tủy đã lộ hay chưa.[cite: 1]
+00:29:26,458 --> 00:29:44,520
+Đặc biệt là phim X-quang truyền thống sử dụng nền phim cellulose, có hạn sử dụng đối với lớp nhũ tương.
 
 136
-00:37:50,841 --> 00:37:58,331
-Đó là lý do tại sao nó mang tính kết luận nhưng không mang tính quyết định khi các em cân nhắc xem tủy răng có bị ảnh hưởng hay không.[cite: 1]
+00:29:44,520 --> 00:29:52,240
+Hoặc lớp phủ bạc bromua, màng phim này sẽ tiếp xúc với nhiều mức độ ẩm và nhiệt độ khác nhau, làm ảnh hưởng đến chất lượng hình ảnh.
 
 137
-00:37:58,331 --> 00:38:19,461
-Tiếp theo là sang thương sâu răng mặt bên; loại sâu răng này rất khó để phân biệt hay phát hiện trên phim X quang, đặc biệt là ở những giai đoạn sớm.[cite: 1]
+00:29:52,240 --> 00:29:53,100
+Đúng không nào?
 
 138
-00:38:19,461 --> 00:38:43,911
-Bởi vì mật độ cản quang dọc theo vùng mặt bên rất lớn, và tia X phải xuyên qua lớp men răng dày theo chiều ngoài trong của chiếc răng.[cite: 1]
+00:29:53,100 --> 00:30:04,120
+Chưa kể đến các dung dịch rửa phim bao gồm nhiệt độ, nồng độ, hạn sử dụng của chúng.
 
 139
-00:38:43,911 --> 00:38:57,491
-Điều đó sẽ không cho phép phát hiện sự mất khoáng sớm với một lượng nhỏ hay bất kỳ mức độ khử khoáng thấp nào.[cite: 1]
+00:30:04,120 --> 00:30:08,240
+Ánh sáng trong phòng tối của các em nữa.
 
 140
-00:38:57,491 --> 00:39:10,971
-Đó là lý do tại sao trong hầu hết các trường hợp, các sang thương mặt bên mới chớm không thể xuất hiện trên phim X quang; các em sẽ cần những kỹ thuật X quang tiên tiến hơn phim cánh cắn và phim X quang truyền thống để có thể phát hiện được chúng.[cite: 1]
+00:30:08,240 --> 00:30:17,100
+Và cách các em rửa phim, tất cả những yếu tố này tạo cơ hội cho rất nhiều lỗi xảy ra.
 
 141
-00:39:10,971 --> 00:39:34,201
-Trong trường hợp sâu răng mặt bên mới chớm, nếu có thể nhìn thấy, nó thường trông giống như một vùng dễ bị sâu, thể hiện trên phim X quang dưới dạng một vết khuyết nhỏ ở bề mặt ngoài.[cite: 1]
+00:30:17,100 --> 00:30:29,060
+Đó là lý do chúng ta cần áp dụng hệ thống kỹ thuật số nếu có thể để giảm thiểu tất cả những sai sót này.
 
 142
-00:39:34,201 --> 00:39:58,551
-Vết khuyết này thường chỉ liên quan đến một phần nhỏ của nửa ngoài men răng; và đôi khi như chúng ta đã nói, chẩn đoán có thể bị bỏ sót và cách tốt nhất là quan sát dưới độ phóng đại, thậm chí phim X quang cũng cần được phóng to.[cite: 1]
+00:30:29,060 --> 00:30:45,260
+Thứ nhất là để loại bỏ khâu rửa phim và phòng tối, loại bỏ các loại phim thông thường với hạn sử dụng và độ nhạy của lớp phủ bạc bromua hay nhũ tương.
 
 143
-00:39:58,551 --> 00:40:17,301
-Sau đó là sang thương mặt bên mức độ trung bình, tổn thương nửa ngoài của men răng nhưng chưa lan đến đường nối men ngà.[cite: 1]
+00:30:45,260 --> 00:30:56,480
+Đó là lý do tại sao những tiến bộ trong X-quang đã bắt đầu thêm thành phần kỹ thuật số này để giảm thiểu những vấn đề đó.
 
 144
-00:40:17,301 --> 00:40:32,741
-Phần lớn, khoảng sáu mươi đến bảy mươi phần trăm, xuất hiện dưới dạng một khiếm khuyết hay vùng thấu quang hình tam giác với đáy rộng hướng ra bề mặt ngoài.[cite: 1]
+00:30:56,480 --> 00:30:57,600
+Tuyệt vời chứ?
 
 145
-00:40:32,741 --> 00:40:54,331
-Đỉnh của tam giác hướng về phía đường nối men ngà, nhưng vẫn chưa chạm tới ranh giới này; đôi khi ở khoảng mười sáu phần trăm các trường hợp, nó xuất hiện dưới dạng hình ảnh thấu quang lan tỏa.[cite: 1]
+00:30:59,260 --> 00:31:13,260
+X-quang kỹ thuật số đã loại bỏ loại phim truyền thống, dùng một cảm biến hoặc tấm phốt pho để thu nhận hình ảnh và xử lý kỹ thuật số.
 
 146
-00:40:54,331 --> 00:41:11,981
-Và đồng thời có khoảng mười bảy phần trăm là sự kết hợp của cả hai dạng trên; nhưng phổ biến nhất vẫn là vùng thấu quang hình tam giác với đáy rộng hướng ra mặt ngoài và đỉnh nhọn hướng về phía đường nối men ngà.[cite: 1]
+00:31:13,260 --> 00:31:22,240
+Xử lý kỹ thuật số nghĩa là hình ảnh X-quang sẽ được truyền qua dây dẫn hoặc các phương thức khác tới máy tính.
 
 147
-00:41:11,981 --> 00:41:25,171
-Đó là lý do tại sao chúng ta thấy rõ sự lan rộng sang hai bên từ đỉnh nón trong men răng, sau đó đi từ đáy nón tiến vào ngà răng.[cite: 1]
+00:31:22,240 --> 00:31:25,560
+Nơi các em có thể kiểm tra, thao tác và lưu trữ.
 
 148
-00:41:25,171 --> 00:41:39,691
-Và trong trường hợp đó, tổn thương sẽ không vượt quá một nửa ngà răng; vì thế chúng ta gọi đây là sang thương mặt bên tiến triển, và chúng ta cũng không thể chắc chắn liệu tủy răng đã bị ảnh hưởng hay chưa.[cite: 1]
+00:31:25,560 --> 00:31:32,000
+Các em có thể phóng to, cắt một phần ảnh và theo dõi ca bệnh của mình.
 
 149
-00:41:39,691 --> 00:42:01,981
-Đối với sâu răng mặt bên mức độ nặng hay xâm lấn, sang thương sẽ đâm xuyên quá một nửa độ dày của ngà răng; và bây giờ các em có thể nhận thấy dải men răng còn lại rất hẹp, mặc dù trong một số ca...[cite: 1]
+00:31:32,940 --> 00:31:48,280
+Ưu điểm của X-quang kỹ thuật số là kỹ thuật dễ dàng, nhanh chóng, giảm thiểu thời gian phơi nhiễm và tổng lượng bức xạ, không cần phòng tối và dung dịch rửa phim.
 
 150
-00:42:01,981 --> 00:42:15,671
-...sẽ có tổn thương ở vùng gờ bên do cấu trúc gờ bên bị mất nâng đỡ bên dưới, tuy nhiên dấu hiệu này lúc có lúc không, nhưng nhiều khả năng nó sẽ cho thấy rằng...[cite: 1]
+00:31:48,280 --> 00:31:54,180
+Nhờ đó chúng ta đã loại trừ được mọi lỗi rửa phim phổ biến.
 
 151
-00:42:15,671 --> 00:42:33,761
-...đã có hiện tượng sập men hoặc gãy men răng do gờ bên bị mất mô nâng đỡ bên dưới; và đó là biểu hiện phổ biến nhất của sâu răng ở vùng mặt bên.[cite: 1]
+00:31:54,180 --> 00:32:12,760
+Các em có thể chỉnh sửa hình ảnh giống như trên Photoshop hoặc bất kỳ phần mềm xử lý ảnh nào, bao gồm chỉnh độ tương phản, độ sáng, đo kích thước, phóng to...
 
 152
-00:42:33,761 --> 00:42:45,181
-Đó là khi chúng ta đọc kết quả từ phim cánh cắn; tiếp theo là sâu răng mặt ngoài và mặt trong, hay còn được biết đến là các sang thương xoang năm dành cho tổn thương mặt láng.[cite: 1]
+00:32:12,760 --> 00:32:36,096
+Và khả năng lưu trữ không bị hư hỏng, bởi vì những loại phim thông thường với lớp nhũ tương bạc bromua nếu lưu trữ lâu sẽ mất độ tương phản, sai lệch kích thước...
 
 153
-00:42:45,181 --> 00:42:56,791
-Trong trường hợp như vậy, phim cánh cắn đặc biệt ở vùng răng cửa sẽ không cung cấp nhiều thông tin và cũng không dễ thực hiện...[cite: 1]
+00:32:36,096 --> 00:32:56,560
+Sẽ làm mất chi tiết và kích thước của những chi tiết đó, và nếu các em không rửa sạch hoặc sấy khô phim đúng cách, màu sắc của phim sẽ thay đổi theo thời gian.
 
 154
-00:42:56,791 --> 00:43:14,101
-...như phim quanh chóp, và chúng ta có thể chuyển sang chụp phim quanh chóp với kỹ thuật song song thay vì dùng kỹ thuật phân giác.[cite: 1]
+00:32:56,780 --> 00:33:08,120
+Nhưng ở đây, các em lưu trữ nó dưới dạng bản mềm kỹ thuật số, vì vậy các em có thể lưu hàng loạt phim trong thời gian dài mà chất lượng ảnh không hề thay đổi.
 
 155
-00:43:14,101 --> 00:43:28,541
-Tất cả đều bắt đầu dưới dạng một sang thương hình tròn, sau đó lớn dần lên và trở nên hơi giống hình bầu dục hoặc hình bán nguyệt.[cite: 1]
+00:33:08,120 --> 00:33:11,260
+Nó bắt đầu với một kỹ thuật rất đơn giản.
+
+156
+00:33:11,260 --> 00:33:20,900
+Khoảng hơn 25 năm trước, đó là hệ thống tấm ảnh phốt pho Digora.
+
+157
+00:33:20,900 --> 00:33:25,340
+Hệ thống này rất đơn giản.
+
+158
+00:33:25,340 --> 00:33:39,520
+Nó đơn giản như máy ảnh kỹ thuật số, loại máy có thẻ nhớ bên trong để lưu lại tất cả các bức ảnh mà các em đã chụp.
+
+159
+00:33:39,520 --> 00:33:49,900
+Sau đó các em đưa nó qua cổng kết nối vào laptop hoặc CPU, và mở bằng một phần mềm chuyên dụng để xử lý và thao tác trên ảnh.
+
+160
+00:33:49,900 --> 00:33:51,300
+Ý tưởng là vậy.
+
+161
+00:33:51,300 --> 00:34:03,240
+Hoặc thậm chí thay vì dùng thẻ nhớ, các em dùng USB flash để cắm và tháo rời, vân vân.
+
+162
+00:34:03,240 --> 00:34:25,100
+Sau đó, hệ thống sử dụng một màn lưu trữ phốt pho, tức là một tấm nhận ảnh tái sử dụng giống như thẻ nhớ, được đặt thay thế cho phim và rất nhạy cảm với chùm tia X.
+
+163
+00:34:32,939 --> 00:34:38,299
+Cảm biến cung cấp phim với một màn hoặc tấm phốt pho lưu trữ.
+
+164
+00:34:38,639 --> 00:34:45,839
+Tấm này sau đó được kết nối với máy tính hoặc CPU để truyền hình ảnh.
+
+165
+00:34:46,149 --> 00:34:56,809
+Và phần mềm các em dùng rất nhạy, cho phép phân biệt tới 1,024 tông màu xám.
+
+166
+00:34:56,939 --> 00:35:16,499
+Trong khi với phim thông thường, mắt thường của một bác sĩ tinh mắt nhất cũng chỉ phân biệt tối đa 30 tông xám.
+
+167
+00:35:16,769 --> 00:35:33,529
+Đó là lý do hệ thống này cho phép bác sĩ phân biệt được sự thay đổi sớm nhất trong cấu trúc răng và có thể nhận diện ít nhất 1024 mức độ thấu quang hay tông xám.
+
+168
+00:35:33,979 --> 00:35:48,389
+Ưu điểm của hệ thống này là phim chụp chính xác với thời gian phơi sáng tối thiểu, khả năng tạo biểu đồ thang tỷ lệ giống như các em đang vẽ hay đánh dấu sang thương trên phần mềm.
+
+169
+00:35:48,679 --> 00:35:57,179
+Giống như các em đang khoanh vùng màu sắc, kích thước hay diện tích trên một bức ảnh vậy.
+
+170
+00:35:57,959 --> 00:36:03,149
+Và điều này sẽ cho phép các em xác định được ranh giới của sang thương.
+
+171
+00:36:03,789 --> 00:36:10,239
+Nó có thể ước tính chiều sâu xâm lấn của sang thương, đặc biệt là các hệ thống mới mà ta sẽ bàn luận.
+
+172
+00:36:10,609 --> 00:36:30,289
+Trong các slide tới, hệ thống sử dụng trí tuệ nhân tạo (AI) để ước lượng chính xác chiều sâu xâm lấn, sự tiến triển của sang thương cùng hệ thống lưu trữ như bất kỳ bức ảnh kỹ thuật số nào.
+
+173
+00:36:30,629 --> 00:36:37,279
+Nhưng nhược điểm lại đến từ chính tấm phốt pho tái sử dụng này.
+
+174
+00:36:40,349 --> 00:36:44,609
+Tấm tái sử dụng này có thể xuống cấp theo thời gian.
+
+175
+00:36:46,579 --> 00:36:57,309
+Nếu dùng thẻ nhớ hay USB quá nhiều thì theo thời gian nó cũng hỏng, ngay cả ổ cứng cũng vậy.
+
+176
+00:36:58,719 --> 00:37:08,389
+Đây là một vấn đề, và đó là lý do độ nhạy của nó với tia X sẽ giảm dần theo thời gian.
+
+177
+00:37:09,639 --> 00:37:22,899
+Một nhược điểm khác là bất kỳ sự thay đổi hay chỉnh sửa hình ảnh nào cũng sẽ ảnh hưởng đến kết quả nếu các em không lưu lại bản gốc.
+
+178
+00:37:23,669 --> 00:37:49,919
+Khi lưu trữ hồ sơ hình ảnh, các em phải lưu giữ ảnh gốc, vì bất kỳ thao tác nào như chụp lại, cắt xén, phóng to hay đổi độ tương phản đều sẽ ảnh hưởng đến kết quả, nhất là khi các em muốn theo dõi ca bệnh.
+
+179
+00:37:59,399 --> 00:38:08,369
+Bức ảnh này cho thấy các tấm phốt pho tái sử dụng, máy quét và phần mềm được sử dụng trong hệ thống Digora.
+
+180
+00:38:09,279 --> 00:38:27,769
+Tiếp đến là một hệ thống chính xác hơn nhiều và phổ biến cho đến nay, với nhiều bản nâng cấp phần mềm từ các hãng khác nhau tung ra thị trường nha khoa, nhưng tất cả đều dựa trên công nghệ X-quang kỹ thuật số Sensor (RVG).
+
+181
+00:38:28,079 --> 00:38:32,459
+RVG là một hệ thống X-quang có ba thành phần.
+
+182
+00:38:33,179 --> 00:38:54,429
+Bao gồm một thành phần X-quang là cảm biến kim loại độ nhạy cao thay cho tấm phốt pho tái sử dụng, có thể hấp sấy vô trùng và có nhiều kích cỡ.
+
+183
+00:38:54,429 --> 00:38:57,359
+Và nó có thể cắm trực tiếp vào máy tính (CPU) của các em.
+
+184
+00:38:58,149 --> 00:39:12,589
+Như các em đã biết, chất lượng của bản sao hình ảnh kỹ thuật số sẽ giảm tùy thuộc vào tần suất các em sao chép, ví dụ truyền từ máy ảnh sang thẻ nhớ.
+
+185
+00:39:12,779 --> 00:39:25,100
+Rồi từ thẻ nhớ chuyển qua máy tính bàn hoặc laptop, rồi từ laptop copy qua USB để cắm sang máy khác.
+
+186
+00:39:25,270 --> 00:39:30,200
+Mỗi lần truyền dữ liệu như vậy, nó sẽ mất đi một phần chất lượng.
+
+187
+00:39:32,550 --> 00:39:40,210
+Và các em phải xử lý nó để lấy lại chất lượng cao nhất một lần nữa.
+
+188
+00:39:40,210 --> 00:39:48,730
+Nhưng trong hệ thống của chúng ta, cảm biến kim loại được kết nối trực tiếp với CPU, nên chất lượng tốt hơn rất nhiều.
+
+189
+00:39:48,960 --> 00:39:57,040
+Vì thế chúng ta đã loại bỏ được máy quét ảnh hay phương tiện truyền tải trung gian.
+
+190
+00:39:58,960 --> 00:40:11,500
+Phần mềm đi kèm chính xác hơn nhiều, cho phép phóng to, xoay chiều, cắt, chỉnh sửa và in ấn tương tự bất kỳ phần mềm xử lý ảnh nào.
+
+191
+00:40:12,480 --> 00:40:34,230
+Và các phiên bản phần mềm gần đây có thể tạo ra hình ảnh tương thích với video, tạo thành video thay vì chỉ là ảnh tĩnh phẳng.
+
+192
+00:40:34,620 --> 00:40:50,660
+Ưu điểm của hệ thống RVG là có thành phần video chính là màn hình, CPU, và thành phần đồ họa là máy in độ phân giải cao.
+
+193
+00:40:50,660 --> 00:41:09,480
+Các em có thể tạo ra bao nhiêu bản sao tùy thích mà không cần dùng phim nền cellulose. Bản in hoàn toàn giống việc các em in bất kỳ bức ảnh nào từ máy tính.
+
+194
+00:41:09,850 --> 00:41:36,470
+Đó là lý do ưu điểm của hệ thống RVG là cung cấp phim X-quang chính xác với thời gian phơi sáng rất ngắn, giảm ít nhất 90% lượng tia xạ so với phim cũ.
+
+195
+00:41:36,930 --> 00:41:47,520
+Các em có thể tạo biểu đồ theo tỷ lệ vì đây là hệ thống kỹ thuật số.
+
+196
+00:41:47,520 --> 00:42:03,350
+Hình ảnh có thể được phóng to, xoay, cắt xén, hỗ trợ xử lý hình ảnh thêm nữa, tự động lưu bản gốc và hệ thống lưu trữ cũng được số hóa.
+
+197
+00:42:03,740 --> 00:42:22,750
+Nhược điểm là chi phí đầu tư ban đầu cao, phần mềm cần được nâng cấp liên tục, và sau một thời gian phần cứng máy tính có thể không còn tương thích với phần mềm mới.
+
+198
+00:42:22,750 --> 00:42:47,310
+Khi đó các em phải mua máy mới, giống như điện thoại di động vậy, dù của hãng nào thì nó cũng chỉ chấp nhận một số lần nâng cấp hệ điều hành nhất định, sau đó sẽ không hỗ trợ cập nhật phần mềm nữa.
+
+199
+00:42:47,310 --> 00:42:58,720
+Và các em phải đổi sang mẫu điện thoại đời mới hơn.
+
+200
+00:42:58,720 --> 00:43:19,180
+Vì vậy chi phí đầu tư cao làm chậm lại sự phát triển của phần mềm, bởi nhà sản xuất không thể đưa ra tất cả phần mềm cùng lúc, nếu không các em sẽ phải thay máy liên tục.
+
+201
+00:43:19,830 --> 00:43:29,700
+Ngoài ra, phần mềm điều hành cũng phức tạp hơn so với X-quang truyền thống.
+
+202
+00:43:29,700 --> 00:43:50,200
+Với X-quang truyền thống, các em không cần xử lý lại hình ảnh, chỉ cần cầm tấm phim giơ lên xem, hoặc dùng đèn đọc phim và kính lúp.
+
+203
+00:43:50,200 --> 00:43:58,100
+Nó đơn giản hơn rất nhiều so với phần mềm X-quang phức tạp này.
+
+204
+00:43:58,550 --> 00:43:58,550
+Đây là một bộ máy RVG, cảm biến cắm vào CPU để vận hành máy tính và mang lại tất cả những lợi ích kể trên.
+
+205
+00:43:46,670 --> 00:43:54,170
+Tiếp theo là phần mềm chuyên dụng cho sâu răng, gọi là hệ thống chẩn đoán X-quang hỗ trợ bằng máy tính.
+
+206
+00:43:54,510 --> 00:43:58,550
+Nó là một phần mềm chứ không phải là kỹ thuật chụp mới.
+
+207
+00:43:58,550 --> 00:44:04,790
+Nó tương tự RVG nhưng có tích hợp phần mềm phát hiện sâu răng.
+
+208
+00:44:05,190 --> 00:44:28,520
+Phổ biến nhất là phần mềm Logicon, dựa trên phần mềm AI được nhà sản xuất nạp khối lượng cơ sở dữ liệu khổng lồ về sự lan rộng vi thể của sâu răng, so với hình ảnh X-quang.
+
+209
+00:44:28,980 --> 00:44:46,080
+Vì vậy, hệ thống cho phép phân tích mức độ thấu quang và đánh dấu bằng các màu đặc biệt, giúp các em phát hiện mức độ mất khoáng.
+
+210
+00:44:46,080 --> 00:44:50,900
+Các em hiểu chứ?
+
+211
+00:44:50,900 --> 00:45:11,950
+Đây là hệ thống X-quang hỗ trợ bằng máy tính, nhưng hiện nay hầu hết các hệ thống RVG trên thị trường nha khoa đều thêm một module lựa chọn cho các bác sĩ chữa răng, đó là kỹ thuật X-quang loại trừ (Subtraction Radiology).
+
+212
+00:45:11,950 --> 00:45:21,630
+Không chỉ dùng trong nha khoa phục hồi mà còn dành cho bác sĩ phẫu thuật hàm mặt, cấy ghép implant và nha chu.
+
+213
+00:45:21,630 --> 00:45:29,070
+X-quang loại trừ rất đơn giản, đó là phép trừ hình ảnh.
+
+214
+00:45:29,070 --> 00:45:39,420
+Lấy một hình ảnh X-quang kỹ thuật số ở một thời điểm cụ thể và trừ đi một hình ảnh chụp mới.
+
+215
+00:45:39,420 --> 00:45:47,100
+Các em chỉ cần đặt chúng chồng lên nhau và lấy phần mềm trừ phần giống nhau đi.
+
+216
+00:45:47,100 --> 00:45:54,590
+Sự chênh lệch sẽ hiện ra dưới dạng vùng tăng cản quang hoặc thấu quang ở một khu vực nhất định.
+
+217
+00:45:54,590 --> 00:46:02,370
+Nhờ đó, các em có thể xác định xem sang thương đang tiến triển hay đang thu hẹp lại.
+
+218
+00:46:02,370 --> 00:46:08,090
+Cái này rất hữu ích trong việc theo dõi sang thương sâu răng.
+
+219
+00:46:08,090 --> 00:46:16,390
+Trong việc theo dõi sự tạo xương sau phẫu thuật, ví dụ phẫu thuật bóc nang.
+
+220
+00:46:16,390 --> 00:46:23,160
+Và các em cần theo dõi quá trình tích hợp xương hoặc sự tạo xương mới.
+
+221
+00:46:23,160 --> 00:46:29,110
+Trong khoảng trống đó, hoặc sau khi xử trí áp xe quanh chóp.
+
+222
+00:46:29,110 --> 00:46:34,100
+Bằng cách điều trị nội nha.
+
+223
+00:46:34,100 --> 00:46:45,460
+Các em cần đo mức độ lành thương bằng sự tạo xương, ta cần chụp một phim ngay sau phẫu thuật.
+
+224
+00:46:45,460 --> 00:46:58,920
+Sau hai tháng các em chụp thêm một phim, ba tháng chụp thêm phim nữa, và chỉ cần đặt chúng vào phần mềm để tính toán sự thay đổi vùng thấu quang hay cản quang.
+
+225
+00:46:58,920 --> 00:46:59,710
+Rất tiện lợi!
+
+226
+00:46:59,710 --> 00:47:04,700
+Đó là lý do tại sao các em cần nhiều hơn một phim X-quang để so sánh.
+
+227
+00:47:04,700 --> 00:47:20,630
+Nhưng vấn đề là, các em phải đảm bảo kích thước và góc chụp là như nhau, cùng một liều tia X, cùng một góc ngang và góc đứng, dùng cùng một sensor.
+
+228
+00:47:20,630 --> 00:47:25,020
+Hoặc cùng sensor có thông số kỹ thuật y hệt.
+
+229
+00:47:25,020 --> 00:47:26,050
+Và khi trừ đi...
+
+230
+00:47:26,050 --> 00:47:34,910
+Nếu không có sự thay đổi, thì điểm ảnh (pixel) nhận được sẽ là 0.
+
+231
+00:47:34,910 --> 00:47:51,170
+Nếu nó thấu quang nhiều hơn thì kết quả sẽ là số âm, nếu cản quang nhiều hơn sẽ là số dương, và dựa vào điểm số này, các em sẽ biết sang thương đang tiến triển hay thu hẹp.
+
+232
+00:47:51,170 --> 00:47:56,700
+Hãy để thầy cho các em xem một ví dụ.
+
+233
+00:47:56,700 --> 00:48:02,550
+Đây là ba phim cắn cánh, thực ra là hai phim thôi.
+
+234
+00:48:02,550 --> 00:48:11,000
+Phim đầu tiên, các em thấy một vùng thấu quang nhỏ ở mặt gần của răng cối lớn thứ nhất.
+
+235
+00:48:11,000 --> 00:48:16,540
+Các em có thể nhận ra nó nằm sát miếng trám mặt xa của răng cối nhỏ.
+
+236
+00:48:16,540 --> 00:48:20,410
+Các em thấy chứ?
+
+237
+00:48:20,410 --> 00:48:37,930
+Sau đó là phim tiếp theo, chụp sau 12 tháng, bác sĩ chụp lại phim cắn cánh thứ hai và vẫn thấy vùng thấu quang này.
+
+238
+00:48:37,930 --> 00:49:05,160
+Bằng mắt thường, có vẻ như nó to hơn một chút so với ban đầu, nhưng khi dùng phần mềm đặt chồng hai ảnh lên nhau, các em có thể thấy rõ sự gia tăng vùng thấu quang, nghĩa là ca này đang tiến triển nặng hơn.
+
+239
+00:49:05,160 --> 00:49:14,130
+Sâu răng đang tiến triển và bây giờ các em cần can thiệp điều trị để xử lý sang thương này.
+
+240
+00:49:14,130 --> 00:49:33,750
+Đó là ý tưởng của X-quang loại trừ, nó chỉ là một tính năng phần mềm thêm vào cho hệ thống RVG.
+
+241
+00:49:34,000 --> 00:49:38,590
+Cung cấp một bức tranh toàn diện về ca lâm sàng và tình trạng sâu răng.
+
+242
+00:49:39,120 --> 00:49:49,000
+Tóm lại, những hạn chế của mọi kỹ thuật truyền thống, bao gồm khám bằng mắt, bằng xúc giác và X-quang, được kết luận trong slide sau.
+
+243
+00:49:49,420 --> 00:49:56,560
+Thứ nhất, ta thấy có sự khác biệt rất lớn giữa kết quả khám bằng gương, thám trâm với kết quả mô học thực tế.
+
+244
+00:49:56,560 --> 00:50:23,000
+Đó là lý do tại sao các chỉ số phát hiện sâu răng ra đời dựa trên cơ sở dữ liệu khổng lồ từ các phát hiện vi thể bởi các nhà dịch tễ học và chuyên gia sâu răng, nhằm cố gắng kết hợp giữa thăm khám thị giác, X-quang, xúc giác với kích thước mô học dự đoán của sang thương.
+
+245
+00:50:23,770 --> 00:50:33,700
+Đồng thời, ta cũng nhận ra rằng dùng thám trâm chọc mạnh tay có thể tạo xoang và làm tình trạng răng tệ hơn, nhất là khi men răng mới chớm mất khoáng.
+
+246
+00:50:36,500 --> 00:50:44,820
+Việc thám trâm bị mắc kẹt vào các rãnh sâu hẹp có thành song song nhưng không bị sâu có thể dẫn đến chẩn đoán sai lầm.
+
+247
+00:50:45,870 --> 00:51:02,000
+Như thầy đã bàn ở các bài trước, thám trâm có thể bị kẹt lại do lực ma sát giữa thân thám trâm và thành rãnh song song.
+
+248
+00:51:02,790 --> 00:51:09,480
+Ngay cả X-quang cũng không thể phát hiện các tổn thương men răng sớm.
+
+249
+00:51:09,880 --> 00:51:25,350
+Và phim X-quang chỉ cho thấy tổn thương ngà răng vào thời điểm nó đã tiến sát tới tủy. Như thầy đã nhắc, mô răng phải mất khoáng ít nhất 40% mới hiện rõ trên phim X-quang.
+
+250
+00:51:25,900 --> 00:51:34,670
+Những cạm bẫy đặc thù của X-quang là bản chất phim chỉ là góc nhìn hai chiều của một vật thể ba chiều.
+
+251
+00:51:35,350 --> 00:51:44,740
+Bất kỳ bức ảnh nào, không riêng gì phim X-quang, đều chỉ là hình ảnh 2D của một vấn đề 3D.
+
+252
+00:51:45,140 --> 00:51:53,460
+Tuy nhiên ở một bức ảnh thông thường, các em dùng màu sắc và ánh sáng để ước lượng chiều sâu của không gian.
+
+253
+00:51:53,890 --> 00:52:04,560
+Nhưng ở đây, thầy không có lợi thế đó, vì thầy đang xử lý các tông màu xám không thể cho phép ước tính chiều sâu chính xác.
+
+254
+00:52:05,060 --> 00:52:24,000
+Chúng ta đang sử dụng AI trong X-quang kỹ thuật số để nạp cho phần mềm một dữ liệu lớn nhằm cố gắng ước tính gần chính xác mức độ lan rộng của sang thương.
+
+255
+00:52:24,480 --> 00:52:33,600
+Do đó, các em không thể ước lượng được độ sâu thực tế của sang thương qua phim X-quang.
+
+256
+00:52:33,600 --> 00:52:43,110
+Do hiện tượng chồng hình, độ sâu của tổn thương thể hiện trên phim X-quang luôn nông hơn so với độ sâu thực tế.
+
+257
+00:52:43,520 --> 00:52:50,890
+Trên phim X-quang, luôn có sự chồng lấp mặt bên, đặc biệt là ở những vùng góc hẹp trong miệng.
+
+258
+00:52:51,380 --> 00:53:05,980
+Vì khi chuyển góc chụp giống như kiểu vòng cua chữ U, để chuyển từ vùng răng cối nhỏ sang răng cối lớn, từ răng nanh sang răng cối nhỏ.
+
+259
+00:53:05,980 --> 00:53:17,710
+Ở vùng răng cối nhỏ, sự chồng lấp mặt bên là rất nhiều, khiến việc phát hiện sâu mặt bên vùng này rất khó khăn.
+
+260
+00:53:17,990 --> 00:53:23,000
+Và sẽ ra sao nếu bệnh nhân có răng chen chúc?
+
+261
+00:53:23,000 --> 00:53:23,560
+Vấn đề sẽ còn tồi tệ hơn nữa.
+
+262
+00:53:23,560 --> 00:53:23,880
+Các em hiểu chứ?
+
+263
+00:53:24,770 --> 00:53:32,750
+Sâu men mặt nhai giai đoạn sớm không thể phát hiện được vì cần có sự mất khoáng ít nhất 40%.
+
+264
+00:53:33,250 --> 00:53:40,000
+Các bất thường về hình thái răng như thiểu sản men (hố thiểu sản) có thể bị nhầm với sâu mặt bên.
+
+265
+00:53:40,670 --> 00:53:42,970
+Tuy nhiên các em vẫn có thể phân biệt được.
+
+266
+00:53:43,570 --> 00:53:52,420
+Và cộng thêm hiện tượng cháy cổ răng ở một số trường hợp có thể bị chẩn đoán nhầm thành sâu chân răng.
+
+267
+00:53:52,420 --> 00:54:04,930
+Vì vậy ở tập tiếp theo, thầy trò ta sẽ thảo luận chi tiết về các thử nghiệm cải tiến trong phương pháp và công cụ phát hiện sâu răng.
+
+268
+00:54:05,390 --> 00:54:12,830
+Đây là các tài liệu tham khảo, nếu các em muốn tìm hiểu thêm thông tin.
+
+269
+00:54:13,190 --> 00:54:17,990
+Đừng ngại đặt câu hỏi, thầy luôn sẵn sàng giải đáp cho các em.
+
+270
+00:54:18,240 --> 00:54:24,000
+Đừng quên đăng ký kênh và bật thông báo để nhận các bài giảng mới nhất nhé.
+
+271
+00:54:25,130 --> 00:54:27,940
+Cảm ơn các em đã dành thời gian lắng nghe.
+
+272
+00:54:28,380 --> 00:54:30,240
+Hy vọng các em đã học được nhiều điều bổ ích.
+
+273
+00:54:30,240 --> 00:54:34,670
+Được rồi, nếu Thượng đế phù hộ, thầy trò ta sẽ gặp lại nhau trong các tập tiếp theo nhé.
