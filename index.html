@@ -718,7 +718,7 @@
         #ai-tutor-modal #ai-messages, #ai-tutor-modal.ai-in-video #ai-messages { font-size: calc(14px * var(--ai-zoom, 1)); }
         #ai-tutor-modal.ai-in-video #ai-messages { font-size: calc(13px * var(--ai-zoom, 1)); }
         #ai-tutor-modal #ai-messages .text-xs { font-size: calc(12px * var(--ai-zoom, 1)); }
-        #ai-tutor-modal #ai-quickrow button { font-size: 12px; }
+        #ai-tutor-modal #ai-quickrow button { font-size: 12px; } #bk-quiz-nav{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:6px 8px;border-top:1px solid #e5e7eb;background:#fff;} #bk-quiz-nav button{font-size:12px;font-weight:800;border:1px solid #c7d2fe;border-radius:9999px;padding:4px 10px;background:#eef2ff;color:#3730a3;} #bk-quiz-nav button:disabled{opacity:.4;} #bk-quiz-nav .bk-qz-mid{display:flex;gap:6px;} #bk-quiz-nav.hidden{display:none;} .bk-qz-choose{background:#f8fafc;border:1px solid #cbd5e1;border-radius:12px;padding:8px;margin:6px 0;font-size:12px;} .bk-qz-choose .bk-qz-row{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0;} .bk-qz-choose button{border:1px solid #94a3b8;border-radius:8px;padding:3px 9px;background:#fff;font-weight:700;} .bk-qz-choose button.on{background:#4f46e5;color:#fff;border-color:#4f46e5;} .bk-qz-card{padding:8px;} .bk-qz-no{font-size:12px;font-weight:800;color:#4338ca;margin-bottom:4px;} .bk-qz-q{font-weight:700;font-size:14px;margin-bottom:8px;} .bk-qz-opt{display:block;width:100%;text-align:left;border:1px solid #cbd5e1;border-radius:10px;padding:6px 8px;margin-bottom:5px;background:#fff;font-size:13px;} .bk-qz-opt.ok{background:#dcfce7;border-color:#16a34a;} .bk-qz-opt.bad{background:#fee2e2;border-color:#dc2626;} .bk-qz-res .ok{color:#15803d;font-weight:800;} .bk-qz-res .bad{color:#b91c1c;font-weight:800;} .bk-qz-x{margin-top:6px;font-size:12.5px;color:#334155;}
         #ai-tutor-modal #ai-input { font-size: calc(14px * var(--ai-zoom, 1)); }
         #ai-tutor-modal #ai-messages, #ai-tutor-modal #ai-messages * { line-height: 1.5; }
         #ai-tutor-modal #ai-quickrow button { line-height: 1.4; }
@@ -9383,7 +9383,7 @@ async function bkExtract(doc, tok, onProg) {
                         return gapUp >= 1.5 * ln.fh || (big && gapUp >= 1.1 * ln.fh);
                     }
                     // đầu đề nhỏ (run-in): thụt đầu đoạn, kết thúc bằng dấu chấm, đứng sau câu kết thúc
-                    return !flushL && /\.$/.test(lead) && lead.length <= 60 && (upEnds || gapUp >= 1.5 * ln.fh);
+                    return /\.$/.test(lead) && lead.length <= 60 && (upEnds || gapUp >= 1.5 * ln.fh);
                 }
                 return flushL && ln.fh >= 1.08 * bodyFh && gapUp >= 1.2 * ln.fh;
             });
@@ -13018,7 +13018,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     function aiEnScroll(ent) { const list = ent.parentElement; try { list.scrollTo({ top: Math.max(0, ent.offsetTop - 4), behavior: 'smooth' }); } catch (e) { list.scrollTop = ent.offsetTop; } }
     function aiEnSide(bubble, out) {
         const p = aiEnPanelOpen(); if (!p) return;
-        const ent = aiEnEntry(bubble, out); setTimeout(() => aiEnScroll(ent), 60);
+        bkQzTitle('🇬🇧 English'); const ent = aiEnEntry(bubble, out); setTimeout(() => aiEnScroll(ent), 60);
     }
     function aiEnToggle(bubble) {
         const p = document.getElementById('ai-en-panel'); if (!p) return;
@@ -13033,7 +13033,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     (function () {
         const m = document.getElementById('ai-tutor-modal'); if (!m || document.getElementById('ai-en-panel')) return;
         const p = document.createElement('aside'); p.id = 'ai-en-panel'; p.className = 'ai-en-panel hidden';
-        p.innerHTML = '<div class="ai-en-head"><span>🇬🇧 English</span><button type="button" aria-label="Đóng" onclick="aiEnPanelClose()">✕</button></div><div class="ai-en-body" lang="en"></div>' + ['n','s','e','w','ne','nw','se','sw'].map(d => '<div class="ai-en-rz" data-d="' + d + '"></div>').join('');
+        p.innerHTML = '<div class="ai-en-head"><span id="ai-en-title">🇬🇧 English</span><button type="button" aria-label="Đóng" onclick="aiEnPanelClose()">✕</button></div><div class="ai-en-body" lang="en"></div>' + ['n','s','e','w','ne','nw','se','sw'].map(d => '<div class="ai-en-rz" data-d="' + d + '"></div>').join('');
         ['click', 'touchstart'].forEach(n => p.addEventListener(n, e => e.stopPropagation()));
         m.appendChild(p); aiEnPanelInit(p);
         setTimeout(() => { try { aiEnClear(); } catch (e) {} }, 0);
@@ -14064,14 +14064,129 @@ function aiIsEnWord(t) { var s = String(t || '').trim(); return s.length > 0 && 
         if (!b) { showToast('Chưa có nội dung để đọc'); return; }
         if (b._lt && b._lt.en && b._lt.vi && b._cur === 'both') aiTtsStartBi(b, aiTtsBubbleBtn(b)); else aiTtsStart(b, null, null, aiTtsBubbleBtn(b));
     }
-    function aiEnsureQuickTts() {   // nút "Giảng bài" và "Đọc to" dính sát mép phải của khu nút nhanh
+    /* ===== TRẮC NGHIỆM TƯƠNG TÁC TRONG CHAT ĐỌC SÁCH ===== */
+let bkQz = { items: [], idx: 0, done: {}, ok: 0 };
+function bkQzTitle(t) { const h = document.getElementById('ai-en-title'); if (h) h.textContent = t; }
+function bkQzEnsureBtn() {
+    const box = document.getElementById('ai-quickrow') || document.getElementById('ai-quick'); if (!box) return;
+    let b = document.getElementById('bk-quiz-quick');
+    if (!b) {
+        b = document.createElement('button'); b.id = 'bk-quiz-quick'; b.type = 'button';
+        b.className = 'shrink-0 whitespace-nowrap text-xs font-bold border rounded-full px-3 py-1.5 bg-emerald-50 text-emerald-700 border-emerald-300 shadow-sm active:scale-95';
+        b.textContent = '📝 Trắc nghiệm'; b.title = 'Tạo câu hỏi trắc nghiệm tương tác từ chương đang đọc';
+        b.onclick = bkQzChooser; box.insertBefore(b, box.firstChild);
+    }
+    b.classList.toggle('hidden', !(aiState.mode === 'book' && bkCur));
+    let nav = document.getElementById('bk-quiz-nav');
+    if (!nav) {
+        nav = document.createElement('div'); nav.id = 'bk-quiz-nav'; nav.className = 'hidden';
+        nav.innerHTML = '<button type="button" data-q="prev">⬅</button><span class="bk-qz-mid"><button type="button" data-q="review">📍 Xem lại</button><button type="button" data-q="expl">💡 Giải thích</button></span><button type="button" data-q="next">➡</button>';
+        nav.addEventListener('click', e => {
+            const t = e.target.closest('button[data-q]'); if (!t) return; const k = t.dataset.q;
+            if (k === 'prev') bkQzMove(-1); else if (k === 'next') bkQzMove(1); else if (k === 'review') bkQzReview(); else bkQzExplain();
+        });
+        box.parentElement.insertBefore(nav, box);
+    }
+}
+function bkQzNavPaint() {
+    const nav = document.getElementById('bk-quiz-nav'); if (!nav) return;
+    const it = bkQz.items[bkQz.idx];
+    nav.classList.toggle('hidden', !bkQz.items.length);
+    nav.querySelector('[data-q="prev"]').disabled = bkQz.idx <= 0;
+    nav.querySelector('[data-q="next"]').disabled = bkQz.idx >= bkQz.items.length - 1;
+    nav.querySelector('[data-q="review"]').disabled = !(it && it.si >= 0);
+}
+function bkQzChooser() {
+    if (!bkCur || !bkText || !bkText.trim()) { showToast('Hãy mở một chương sách trước'); return; }
+    if (aiState.busy) { showToast('AI đang trả lời, hãy đợi một chút rồi bấm lại'); return; }
+    const box = document.getElementById('ai-messages'); if (!box) return;
+    const old = document.getElementById('bk-qz-choose'); if (old) old.remove();
+    const sel = { n: 0, lvl: 'mid' };
+    const el = document.createElement('div'); el.id = 'bk-qz-choose'; el.className = 'bk-qz-choose';
+    el.innerHTML = '<div><b>Số câu hỏi:</b></div><div class="bk-qz-row" data-g="n"></div><div><b>Độ khó:</b></div><div class="bk-qz-row" data-g="lvl"></div><div class="bk-qz-row"><button type="button" class="bk-qz-go">▶ Bắt đầu</button><button type="button" class="bk-qz-cancel">Huỷ</button></div>';
+    const rowN = el.querySelector('[data-g="n"]'), rowL = el.querySelector('[data-g="lvl"]');
+    [5, 10, 15, 20].forEach(n => { const b = document.createElement('button'); b.type = 'button'; b.textContent = n + ' câu'; b.onclick = () => { sel.n = n; paint(); }; rowN.appendChild(b); });
+    const cu = document.createElement('button'); cu.type = 'button'; cu.textContent = 'Tự điền'; cu.onclick = () => { const v = parseInt(prompt('Nhập số câu (1–30):', '8'), 10); if (v >= 1 && v <= 30) { sel.n = v; paint(); } }; rowN.appendChild(cu);
+    [['easy', 'Dễ'], ['mid', 'Vừa'], ['hard', 'Khó']].forEach(([k, l]) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = l; b.onclick = () => { sel.lvl = k; paint(); }; rowL.appendChild(b); });
+    const paint = () => {
+        rowN.querySelectorAll('button').forEach(b => b.classList.toggle('on', b.textContent === sel.n + ' câu' || (b.textContent === 'Tự điền' && sel.n && ![5, 10, 15, 20].includes(sel.n))));
+        rowL.querySelectorAll('button').forEach((b, i) => b.classList.toggle('on', ['easy', 'mid', 'hard'][i] === sel.lvl));
+    };
+    el.querySelector('.bk-qz-go').onclick = () => { if (!sel.n) { showToast('Chọn số câu trước'); return; } el.remove(); bkQzStart(sel.n, sel.lvl); };
+    el.querySelector('.bk-qz-cancel').onclick = () => el.remove();
+    paint(); box.appendChild(el); box.scrollTop = box.scrollHeight;
+}
+async function bkQzStart(n, lvl) {
+    if (!aiAnyKey()) { aiShowGate(); return; }
+    const titles = bkSecs.filter(x => x.title).map(x => x.title).slice(0, 120);
+    const lvlTxt = { easy: 'dễ (kiến thức nhận biết trực tiếp)', mid: 'vừa (hiểu và so sánh)', hard: 'khó (vận dụng, phân biệt tinh vi)' }[lvl];
+    const sys = 'Bạn là giảng viên ra đề Răng Hàm Mặt. Dựa CHỈ vào nội dung chương sách được cung cấp, tạo đúng ' + n + ' câu hỏi trắc nghiệm 4 đáp án (chỉ 1 đáp án đúng), mức độ ' + lvlTxt + '. Viết bằng tiếng Việt. Chỉ trả về MỘT đối tượng JSON dạng {"questions":[{"q":"<câu hỏi>","o":["<A>","<B>","<C>","<D>"],"a":<chỉ số đáp án đúng 0-3>,"x":"<giải thích ngắn 1-3 câu>","sec":"<tiêu đề mục liên quan nhất, chép đúng từ danh sách mục; để rỗng nếu không có>"}]}. Các câu hỏi không trùng ý; đáp án đúng đặt ngẫu nhiên; không dùng "tất cả đều đúng". Danh sách mục của chương: ' + JSON.stringify(titles);
+    const box = document.getElementById('ai-messages');
+    aiAddMsg('sys', '⏳ Đang soạn ' + n + ' câu trắc nghiệm (' + lvlTxt.split(' ')[0] + ')…');
+    try {
+        const r = await callGemini(sys, [{ text: 'NỘI DUNG CHƯƠNG SÁCH:\n' + bkText.slice(0, 60000) }]);
+        const qs = ((r && r.questions) || []).filter(q => q && q.q && Array.isArray(q.o) && q.o.length === 4 && typeof q.a === 'number' && q.a >= 0 && q.a < 4);
+        if (!qs.length) { showToast('Chưa tạo được câu hỏi, hãy thử lại'); return; }
+        bkQz = { items: qs.slice(0, n).map(q => { const si = bkSecs.findIndex(x => x.title === q.sec); return { q: String(q.q), o: q.o.map(String), a: q.a, x: String(q.x || ''), si: si }; }), idx: 0, done: {}, ok: 0 };
+        bkQzTitle('📝 Trắc nghiệm');
+        const p = aiEnPanelOpen(); if (!p) return;
+        bkQzRender();
+        aiAddMsg('ai', '📝 Đã tạo ' + bkQz.items.length + ' câu trắc nghiệm. Chọn đáp án ở cửa sổ phụ “Trắc nghiệm”; đáp án đúng được +20 điểm.');
+    } catch (e) { showToast('Chưa tạo được câu hỏi: ' + ((e && (e.friendly || e.message)) || '')); }
+}
+function bkQzRender() {
+    const body = document.querySelector('#ai-en-panel .ai-en-body'); if (!body) return;
+    const it = bkQz.items[bkQz.idx];
+    if (!it) { body.innerHTML = '<div class="ai-en-empty">Chưa có câu hỏi trắc nghiệm. Bấm “📝 Trắc nghiệm” trong khung chat.</div>'; bkQzNavPaint(); return; }
+    const st = bkQz.done[bkQz.idx];
+    body.innerHTML = '<div class="bk-qz-card"><div class="bk-qz-no"></div><div class="bk-qz-q"></div><div class="bk-qz-opts"></div><div class="bk-qz-res"></div></div>';
+    body.querySelector('.bk-qz-no').textContent = 'Câu ' + (bkQz.idx + 1) + '/' + bkQz.items.length + ' · Đúng: ' + bkQz.ok;
+    body.querySelector('.bk-qz-q').textContent = it.q;
+    const opts = body.querySelector('.bk-qz-opts');
+    it.o.forEach((t, i) => {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'bk-qz-opt';
+        b.textContent = String.fromCharCode(65 + i) + '. ' + t;
+        if (st) { b.disabled = true; if (i === it.a) b.classList.add('ok'); else if (st.sel === i) b.classList.add('bad'); }
+        b.onclick = () => bkQzAnswer(i); opts.appendChild(b);
+    });
+    if (st) {
+        const r = body.querySelector('.bk-qz-res');
+        r.innerHTML = '<div class="' + (st.ok ? 'ok' : 'bad') + '"></div><div class="bk-qz-x"></div>';
+        r.firstChild.textContent = st.ok ? '✅ Chính xác! +20 điểm' : '❌ Chưa đúng. Đáp án đúng: ' + String.fromCharCode(65 + it.a);
+        r.querySelector('.bk-qz-x').textContent = 'Giải thích: ' + it.x;
+    }
+    bkQzNavPaint();
+}
+function bkQzAnswer(i) {
+    if (bkQz.done[bkQz.idx]) return;
+    const it = bkQz.items[bkQz.idx], ok = i === it.a;
+    bkQz.done[bkQz.idx] = { sel: i, ok: ok };
+    if (ok) { bkQz.ok++; try { SecureStore.addPoints(20); triggerScorePopup(20); } catch (e) {} }
+    bkQzRender();
+}
+function bkQzMove(d) {
+    const n = bkQz.idx + d; if (n < 0 || n >= bkQz.items.length) return;
+    bkQz.idx = n; bkQzRender();
+}
+function bkQzReview() {
+    const it = bkQz.items[bkQz.idx]; if (!it) return;
+    if (it.si >= 0) bkSelSec(it.si); else showToast('Câu này chưa gắn với mục nào trong chương');
+}
+function bkQzExplain() {
+    const it = bkQz.items[bkQz.idx]; if (!it) return;
+    if (!aiAnyKey()) { aiShowGate(); return; }
+    const inp = document.getElementById('ai-input');
+    inp.value = 'Hãy giải thích kỹ hơn câu trắc nghiệm này: "' + it.q + '" Đáp án đúng là ' + String.fromCharCode(65 + it.a) + '. ' + it.o[it.a] + '. Giải thích vì sao đáp án đúng, vì sao các đáp án còn lại sai, và kiến thức nền liên quan trong chương.';
+    aiSend();
+}
+function aiEnsureQuickTts() {   // nút "Giảng bài" và "Đọc to" dính sát mép phải của khu nút nhanh
         const box = document.getElementById('ai-quickrow') || document.getElementById('ai-quick'); if (!box) return;
         let lb = document.getElementById('bk-lect-quick');
         if (!lb) { lb = document.createElement('button'); lb.id = 'bk-lect-quick'; lb.type = 'button'; lb.className = 'shrink-0 whitespace-nowrap text-xs font-bold border rounded-full px-3 py-1.5 bg-amber-50 text-amber-800 border-amber-300 shadow-sm active:scale-95'; lb.textContent = '🎓 Giảng bài'; lb.title = 'Gọi Gemini Live giảng phần vừa dịch'; lb.onclick = bkLectureQuick; }
         lb.classList.toggle('hidden', !(aiState.mode === 'book' && bkLastTr));
         let b = document.getElementById('ai-tts-quick');
         if (!b) { b = document.createElement('button'); b.id = 'ai-tts-quick'; b.type = 'button'; b.className = 'shrink-0 whitespace-nowrap text-xs font-bold border rounded-full px-3 py-1.5 bg-violet-50 text-violet-700 border-violet-200 shadow-sm active:scale-95'; b.onclick = aiTtsQuick; }
-        box.appendChild(lb); box.appendChild(b); aiTtsSync();
+        box.appendChild(lb); box.appendChild(b); aiTtsSync(); bkQzEnsureBtn();
     }
     function aiEnsureTtsBars() {
         const box = document.getElementById('ai-messages'); if (!box) return;
