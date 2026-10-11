@@ -9362,7 +9362,7 @@ async function bkExtract(doc, tok, onProg) {
             const hasBold = lines.some(ln => ln.items.some(q => q.bd));
             const colX = { L: Infinity, R: Infinity };
             lines.forEach(ln => { const k = ln.left ? 'L' : 'R'; colX[k] = Math.min(colX[k], ln.items[0].x); });
-            const okTxt = t => t.length >= 3 && t.length <= 110 && /^[A-Z]/.test(t) && /[A-Za-z]{3}/.test(t) && !/%/.test(t) && !/\d{3,}/.test(t) && !/\(\d/.test(t) && !/et al/i.test(t) && !/^combined$/i.test(t);
+            const okTxt = t => t.length >= 3 && t.length <= 110 && /^[A-Z]/.test(t) && /[A-Za-z]{3}/.test(t) && !/\d{3,}/.test(t) && !/\(\d/.test(t) && !/et al/i.test(t) && !/^combined$/i.test(t);
             const wholeB = lines.map(ln => !hasBold || (boldLead(ln).length >= txtOf(ln).length - 1 && boldLead(ln).length >= 3));
             const upIdx = lines.map((ln, k) => { for (let j = k - 1; j >= 0; j--) if (lines[j].left === ln.left) return j; return -1; });
             const isH = lines.map((ln, k) => {
@@ -9711,9 +9711,9 @@ function bkLocateIn(list, a, b) {
     const isToc = i => { const le = T.indexOf('\n', i); const line = T.slice(i, le < 0 ? i + 160 : le); return /\.{3,}|…|\s\d{1,4}\s*$/.test(line); };
     list.forEach(o => {
         const body = o.src.replace(/^\s*\d+(?:\.\d+)*\s*/, '');
-        if (!/^[A-Z0-9"“(]/.test(body) || /%/.test(o.src)) return;
+        if (!/^[A-Z0-9"“(%]/.test(body)) return;
         const occ = bkFindAll(T, o.src).filter(i => i >= cur && i < b && i < cur + 30000 && bkLineStart(T, i) && (o.src.length >= 15 || /^[ \t\r]*(\n|$)/.test(T.slice(i + o.src.length, i + o.src.length + 4))) && !/et al/i.test(o.src));
-        if (!occ.length) return;
+        if (!occ.length) { occ.push(...bkFindAll(T, o.src).filter(i => i >= a && i < b && bkLineStart(T, i) && !/et al/i.test(o.src))); if (!occ.length) return; }
         const nt = occ.filter(i => !isToc(i));
         const pick = nt.length ? nt[0] : occ[0];
         const num = (o.src.match(/^\s*(\d+(?:\.\d+)*)/) || [])[1] || '';
@@ -14122,14 +14122,14 @@ async function bkQzStart(n, lvl) {
     if (!aiAnyKey()) { aiShowGate(); return; }
     const titles = bkSecs.filter(x => x.title).map(x => x.title).slice(0, 120);
     const lvlTxt = { easy: 'dễ (kiến thức nhận biết trực tiếp)', mid: 'vừa (hiểu và so sánh)', hard: 'khó (vận dụng, phân biệt tinh vi)' }[lvl];
-    const sys = 'Bạn là giảng viên ra đề Răng Hàm Mặt. Dựa CHỈ vào nội dung chương sách được cung cấp, tạo đúng ' + n + ' câu hỏi trắc nghiệm 4 đáp án (chỉ 1 đáp án đúng), mức độ ' + lvlTxt + '. Viết bằng tiếng Việt. Chỉ trả về MỘT đối tượng JSON dạng {"questions":[{"q":"<câu hỏi>","o":["<A>","<B>","<C>","<D>"],"a":<chỉ số đáp án đúng 0-3>,"x":"<giải thích ngắn 1-3 câu>","sec":"<tiêu đề mục liên quan nhất, chép đúng từ danh sách mục; để rỗng nếu không có>"}]}. Các câu hỏi không trùng ý; đáp án đúng đặt ngẫu nhiên; không dùng "tất cả đều đúng". Danh sách mục của chương: ' + JSON.stringify(titles);
+    const sys = 'Bạn là giảng viên ra đề Răng Hàm Mặt. Dựa CHỈ vào nội dung chương sách được cung cấp, tạo đúng ' + n + ' câu hỏi trắc nghiệm 4 đáp án (chỉ 1 đáp án đúng), mức độ ' + lvlTxt + '. Viết bằng tiếng Việt. Chỉ trả về MỘT đối tượng JSON dạng {"questions":[{"q":"<câu hỏi>","o":["<A>","<B>","<C>","<D>"],"a":<chỉ số đáp án đúng 0-3>,"x":"<giải thích ngắn 1-3 câu>","sec":"<tiêu đề mục liên quan nhất, chép đúng từ danh sách mục; để rỗng nếu không có>","ref":"<chép NGUYÊN VĂN 8–15 từ TIẾNG ANH liên tiếp trong nội dung chương, nằm trong đoạn chứa đáp án đúng; không dịch, không sửa>"}]}. Các câu hỏi không trùng ý; đáp án đúng đặt ngẫu nhiên; không dùng "tất cả đều đúng". Danh sách mục của chương: ' + JSON.stringify(titles);
     const box = document.getElementById('ai-messages');
     bkQzTitle('📝 Trắc nghiệm'); aiEnPanelOpen(); const bd0 = document.querySelector('#ai-en-panel .ai-en-body'); if (bd0) bd0.innerHTML = '<div class="ai-en-empty">⏳ Đang soạn câu hỏi trắc nghiệm…</div>'; aiAddMsg('sys', '⏳ Đang soạn ' + n + ' câu trắc nghiệm (' + lvlTxt.split(' ')[0] + ')…');
     try {
         const r = await window.bkQzCallAI(sys, [{ text: 'NỘI DUNG CHƯƠNG SÁCH:\n' + bkText.slice(0, 60000) }]);
         const qs = ((r && r.questions) || []).filter(q => q && q.q && Array.isArray(q.o) && q.o.length === 4 && typeof q.a === 'number' && q.a >= 0 && q.a < 4);
         if (!qs.length) { showToast('Chưa tạo được câu hỏi, hãy thử lại'); return; }
-        bkQz = { items: qs.slice(0, n).map(q => { const si = bkSecs.findIndex(x => x.title === q.sec); return { q: String(q.q), o: q.o.map(String), a: q.a, x: String(q.x || ''), si: si }; }), idx: 0, done: {}, ok: 0 };
+        bkQz = { items: qs.slice(0, n).map(q => { const si = bkSecs.findIndex(x => x.title === q.sec); return { q: String(q.q), o: q.o.map(String), a: q.a, x: String(q.x || ''), si: si, ref: String(q.ref || '') }; }), idx: 0, done: {}, ok: 0 };
         bkQzTitle('📝 Trắc nghiệm');
         const p = aiEnPanelOpen(); if (!p) return;
         bkQzRender();
@@ -14176,8 +14176,8 @@ function bkQzToggle() {
     const pp = aiEnPanelOpen(); if (pp) { bkQzTitle('📝 Trắc nghiệm'); bkQzRender(); }
 }
 function bkQzGoto(it) {
-    if (it.si >= 0 && bkSecs[it.si]) { bkSelSec(it.si); return; }
-    const T = String(bkText || '').toLowerCase().replace(/\s+/g, ' ');
+    if (it.ref) { const re = new RegExp(String(it.ref).trim().split(/\s+/).filter(Boolean).map(w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('\\s+'), 'i'); const m = re.exec(bkText || ''); if (m) { bkScrollToPos(m.index); return; } } if (it.si >= 0 && bkSecs[it.si]) { bkSelSec(it.si); return; }
+    const T = String(bkText || '').toLowerCase();
     const q = String(it.q || '').toLowerCase().replace(/\s+/g, ' ');
     let pos = -1;
     for (const len of [40, 25]) { if (pos < 0 && q.length >= len) pos = T.indexOf(q.slice(0, len)); }
