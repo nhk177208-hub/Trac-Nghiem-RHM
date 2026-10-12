@@ -9614,7 +9614,7 @@ function bkChunks(text, max) {
 }
 async function bkCallTr(text) {
     // Vie + Eng cùng bật → song ngữ (gốc + tiếng Việt); chỉ Vie → dịch tiếng Việt; chỉ Eng → dịch tiếng Anh
-    const bi = !!(aiLangCfg.vi && aiLangCfg.en), base = aiLangCfg.vi ? BK_TR_SYS[BK_TR.style] : BK_TR_EN;
+    const bi = !!(aiLangCfg.vi && aiLangCfg.en), base = aiLangCfg.vi ? BK_TR_SYS[BK_TR.style] + (typeof rhmDictGlossary === 'function' ? rhmDictGlossary(text) : '') : BK_TR_EN;
     if (bi) {
         const sys = base + ' Đoạn gốc đã được ghép từ nhiều dòng, cột và trang. Hãy ráp các mảnh câu bị ngắt (do chuyển cột, hình, trang hay xuống dòng) thành câu hoàn chỉnh rồi trả về các cặp "src" (nguyên văn một câu hoặc nhóm câu liền kề, đã nối các chỗ ngắt) và "vi" (bản dịch tương ứng). Mỗi "src" phải kết thúc đúng dấu câu, KHÔNG để câu lửng, KHÔNG tách một câu thành nhiều cặp. Trả về MỘT đối tượng JSON hợp lệ: {"p":[{"src":"...","vi":"..."}]}; trong chuỗi dùng dấu nháy đơn thay cho dấu nháy kép và không viết chuỗi "\\n" (dùng xuống dòng thật). Không thêm chữ nào ngoài JSON.';
         const v = await aiGeminiJson(sys, text, 8000);
@@ -16231,32 +16231,42 @@ window.isIOSDevice = function () {
 #dict-modal .rd-book.one .rd-pg{box-shadow:none}
 #dict-modal .rd-book.one #rd-R,#dict-modal .rd-book.one .rd-spine{display:none}
 #dict-modal .rd-spine{position:absolute;left:50%;top:0;bottom:0;width:46px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,rgba(70,45,10,.2) 44%,rgba(70,45,10,.34) 50%,rgba(70,45,10,.2) 56%,transparent);pointer-events:none;z-index:6}
-#dict-modal .rd-hd{position:absolute;left:22px;right:16px;top:16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;z-index:2}
-#dict-modal .rd-ttl{font-size:clamp(17px,2.5vw,34px);font-weight:900;color:#5b21b6;line-height:1.1}
-#dict-modal .rd-bdg{background:#ede9fe;color:#5b21b6;font-weight:700;font-size:clamp(11px,1.2vw,16px);padding:6px 14px;border-radius:999px;white-space:nowrap}
-#dict-modal .rd-body{position:absolute;left:28px;right:30px;top:86px;bottom:62px;overflow:hidden}
+#dict-modal .rd-hd{position:absolute;left:24px;right:16px;top:16px;display:flex;align-items:center;gap:10px;flex-wrap:nowrap;z-index:2}
+#dict-modal .rd-ttl{font-size:clamp(14px,1.7vw,22px);font-weight:900;color:#5b21b6;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+#dict-modal .rd-bdg{background:#ede9fe;color:#5b21b6;font-weight:700;font-size:clamp(10px,.95vw,13px);padding:4px 11px;border-radius:999px;white-space:nowrap;flex:none}
+#dict-modal .rd-body{position:absolute;left:28px;right:30px;top:58px;bottom:62px;overflow:hidden}
 #dict-modal .rd-m{position:absolute;left:0;top:0;visibility:hidden;pointer-events:none;display:flow-root}
-#dict-modal .rd-cap{font-family:Georgia,'Times New Roman',serif;font-weight:900;color:#6d28d9;font-size:clamp(40px,5.2vw,68px);line-height:1;padding:6px 0 4px 44%}
+#dict-modal .rd-cap{font-family:Georgia,'Times New Roman',serif;font-weight:900;color:#6d28d9;font-size:clamp(30px,3.9vw,51px);line-height:1;padding:6px 0 4px 44%}
 #dict-modal .rd-row{display:grid;grid-template-columns:44% 1fr;gap:8px;padding:10px 0;border-bottom:1px dashed rgba(110,90,40,.3);font-size:clamp(13px,1.45vw,20px);line-height:1.3}
 #dict-modal .rd-en{font-weight:800;color:#1c1830;padding-right:8px;overflow-wrap:anywhere}
 #dict-modal .rd-vi{color:#2d2a3e;overflow-wrap:anywhere}
 #dict-modal .rd-ft{position:absolute;left:44%;bottom:20px;font-size:clamp(11px,1.1vw,15px);color:#8c7d5b}
 #dict-modal .rd-empty{padding:30px 6px;color:#6b5f45;font-size:clamp(13px,1.3vw,17px);line-height:1.5}
-#dict-modal .rd-editing .rd-row{cursor:pointer}
-#dict-modal .rd-editing .rd-row:hover{background:rgba(109,40,217,.1)}
+#dict-modal .rd-row{position:relative;cursor:pointer}
+#dict-modal .rd-row:hover{background:rgba(109,40,217,.07)}
+#dict-modal .rd-row.sel{background:rgba(109,40,217,.12)}
+#dict-modal .rd-act{position:absolute;right:4px;top:50%;transform:translateY(-50%);display:flex;gap:6px;background:#fdf8ec;border:1.5px solid #c4b5fd;border-radius:12px;padding:4px;box-shadow:0 4px 14px rgba(60,40,10,.25);z-index:3}
+#dict-modal .rd-ab{width:32px;height:32px;border:0;border-radius:9px;background:#ede9fe;color:#5b21b6;display:flex;align-items:center;justify-content:center;cursor:pointer}
+#dict-modal .rd-ab:hover{background:#ddd6fe}
+#dict-modal .rd-ab.dan{background:#fee2e2;color:#b91c1c}
+#dict-modal .rd-ab svg{width:18px;height:18px}
+#dict-modal .rd-pop.wide{width:min(420px,92%)}
+#dict-modal .rd-sub{color:#374151;font-size:14px;margin:-4px 0 8px}
+#dict-modal .rd-info{max-height:300px;overflow-y:auto;touch-action:pan-y;margin-bottom:8px}
+#dict-modal .rd-info p{margin:0 0 8px;font-size:14px;line-height:1.5;color:#1f1d2b}
 #dict-modal .rd-row.flash{animation:rdFlash 1.8s ease-out}
 @keyframes rdFlash{0%,55%{background:#fde68a}100%{background:transparent}}
 #dict-modal .rd-nav{position:absolute;bottom:12px;width:62px;height:50px;border-radius:14px;border:0;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:8;transition:opacity .2s}
-#dict-modal .rd-prev{left:14px;background:rgba(255,255,255,.8);color:#6d28d9;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+#dict-modal .rd-prev{left:14px;background:#6d28d9;color:#fff;box-shadow:0 4px 12px rgba(109,40,217,.5)}
 #dict-modal .rd-next{right:14px;background:#6d28d9;color:#fff;box-shadow:0 4px 12px rgba(109,40,217,.5)}
 #dict-modal .rd-nav.dis{opacity:.35;pointer-events:none}
 #dict-modal .rd-nav svg{width:30px;height:30px}
-#dict-modal .rd-rib{position:absolute;top:12px;right:108px;display:flex;gap:14px;z-index:20}
-#dict-modal .rd-rb{width:60px;height:84px;border:0;background:#7c3aed;color:#fff;clip-path:polygon(0 0,100% 0,100% 100%,50% 80%,0 100%);display:flex;align-items:flex-start;justify-content:center;padding-top:16px;cursor:pointer;transition:transform .15s,background .15s,height .15s}
-#dict-modal .rd-rb svg{width:26px;height:26px}
-#dict-modal .rd-rb:hover{transform:translateY(4px);background:#6d28d9}
-#dict-modal .rd-rb.on{height:96px;background:#5b21b6}
-#dict-modal .rd-pop{position:absolute;top:104px;right:112px;width:min(330px,92%);background:#fff;border:2px solid #6d28d9;border-radius:16px;padding:14px;box-shadow:0 18px 40px rgba(0,0,0,.4);z-index:25}
+#dict-modal .rd-rib{position:absolute;top:22px;right:72px;display:flex;gap:8px;z-index:20}
+#dict-modal .rd-rb{width:30px;height:42px;border:0;background:#7c3aed;color:#fff;clip-path:polygon(0 0,100% 0,100% 100%,50% 80%,0 100%);display:flex;align-items:flex-start;justify-content:center;padding-top:8px;cursor:pointer;transition:transform .15s,background .15s,height .15s}
+#dict-modal .rd-rb svg{width:14px;height:14px}
+#dict-modal .rd-rb:hover{transform:translateY(2px);background:#6d28d9}
+#dict-modal .rd-rb.on{height:50px;background:#5b21b6}
+#dict-modal .rd-pop{position:absolute;top:76px;right:72px;width:min(330px,92%);background:#fff;border:2px solid #6d28d9;border-radius:16px;padding:14px;box-shadow:0 18px 40px rgba(0,0,0,.4);z-index:25}
 #dict-modal .rd-pop.hidden{display:none!important}
 #dict-modal .rd-pt{font-weight:900;color:#5b21b6;margin-bottom:8px}
 #dict-modal .rd-in{width:100%;border:1.5px solid #c4b5fd;border-radius:10px;padding:8px 10px;margin-bottom:8px;font-size:15px;outline:none}
@@ -16285,17 +16295,18 @@ window.isIOSDevice = function () {
 #dict-modal .rd-leaf .rd-face::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(60,40,10,.35),rgba(255,255,255,0) 70%);opacity:0;animation:rdShade .8s ease-in-out}
 @keyframes rdShade{0%,100%{opacity:0}50%{opacity:1}}
 @media (max-width:759px){
- #dict-modal .rd-wrap{--rd-h:clamp(340px,68vh,620px);padding-top:78px;display:flex;flex-direction:column}
+ #dict-modal .rd-wrap{--rd-h:clamp(340px,68vh,620px);padding-top:62px;display:flex;flex-direction:column}
  #dict-modal .rd-tabs.L,#dict-modal .rd-tabs.R{display:none}
  #dict-modal .rd-tabs.M{display:flex;flex-direction:row;overflow-x:auto;width:100%;height:38px;margin:8px 0 0;border-radius:10px;touch-action:pan-x;order:3}
  #dict-modal .rd-tabs.M .rd-tab{flex:0 0 36px;border-radius:8px;margin:0 2px 0 0}
- #dict-modal .rd-rib{right:70px;top:8px;gap:8px}
- #dict-modal .rd-rb{width:44px;height:62px;padding-top:12px}
- #dict-modal .rd-rb.on{height:70px}
- #dict-modal .rd-rb svg{width:22px;height:22px}
+ #dict-modal .rd-rib{right:62px;top:10px;gap:7px}
+ #dict-modal .rd-rb{width:28px;height:40px;padding-top:7px}
+ #dict-modal .rd-rb.on{height:46px}
+ #dict-modal .rd-rb svg{width:13px;height:13px}
  #dict-modal .rd-x{width:52px;height:38px}
- #dict-modal .rd-pop{right:8px;left:8px;width:auto;top:110px}
- #dict-modal .rd-body{left:18px;right:18px;top:92px}
+ #dict-modal .rd-pop{right:8px;left:8px;width:auto;top:70px}
+ #dict-modal .rd-pop.wide{width:auto}
+ #dict-modal .rd-body{left:18px;right:18px}
  #dict-modal .rd-hd{left:16px}
 }
 @media (prefers-reduced-motion:reduce){#dict-modal .rd-leaf{transition:none}}
@@ -16305,7 +16316,7 @@ window.isIOSDevice = function () {
 (function () {
     'use strict';
     const KEY = 'quizApp_rhm_dict_v1', AZ = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const rd = { terms: [], pages: [], termPage: new Map(), letterPage: {}, cur: 0, per: 2, lock: false, edit: false, pop: '', editT: null };
+    const rd = { terms: [], pages: [], termPage: new Map(), letterPage: {}, cur: 0, per: 2, lock: false, pop: '', editT: null, infoT: null, sel: null };
     const $ = id => document.getElementById(id);
     const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     const clean = s => String(s || '').normalize('NFKC').replace(/\\n|\\t/g, ' ').replace(/\s+/g, ' ').trim();
@@ -16320,12 +16331,12 @@ window.isIOSDevice = function () {
     function sget() { try { return typeof kv !== 'undefined' ? kv.getItem(KEY) : localStorage.getItem(KEY); } catch (e) { return null; } }
     function sset(v) { try { if (typeof kv !== 'undefined') kv.setItem(KEY, v); else localStorage.setItem(KEY, v); } catch (e) {} }
     function sortTerms() { rd.terms.sort((a, b) => a.en.localeCompare(b.en, 'en', { sensitivity: 'base' }) || a.en.localeCompare(b.en)); }
-    function load() {
+    function parse() {
         let a = []; try { a = JSON.parse(sget() || '[]'); } catch (e) {}
-        rd.terms = (Array.isArray(a) ? a : []).filter(x => x && x.en && x.vi && letterOf(x.en)).map(x => ({ en: clean(x.en), vi: clean(x.vi), ts: x.ts || 0 }));
-        sortTerms(); count();
+        return (Array.isArray(a) ? a : []).filter(x => x && x.en && x.vi && letterOf(x.en)).map(x => ({ en: clean(x.en), vi: clean(x.vi), ts: x.ts || 0, u: x.u ? 1 : 0, i: x.i ? String(x.i) : '' }));
     }
-    function save() { sset(JSON.stringify(rd.terms.map(t => ({ en: t.en, vi: t.vi, ts: t.ts })))); count(); }
+    function load() { rd.terms = parse(); sortTerms(); count(); }
+    function save() { sset(JSON.stringify(rd.terms.map(t => ({ en: t.en, vi: t.vi, ts: t.ts, u: t.u ? 1 : 0, i: t.i || '' })))); count(); }
     function count() { const e = $('rhm-dict-count'); if (e) e.textContent = String(rd.terms.length); }
 
     /* ---------- chia trang theo chiều cao thật ---------- */
@@ -16376,6 +16387,7 @@ window.isIOSDevice = function () {
         return hd + '<div class="rd-body">' + rd.pages[i].map(itemHTML).join('') + '</div><div class="rd-ft">Trang ' + (i + 1) + '</div>';
     }
     function render() {
+        rd.sel = null;
         $('rd-L').innerHTML = pageHTML(rd.cur, 'L');
         if (rd.per === 2) $('rd-R').innerHTML = pageHTML(rd.cur + 1, 'R');
         paintTabs(); paintNav();
@@ -16409,6 +16421,7 @@ window.isIOSDevice = function () {
     function flipTo(nw, after) {
         if (rd.lock) return;
         if (nw === rd.cur) { if (after) after(); return; }
+        clearSel();
         const dir = nw > rd.cur ? 1 : -1, old = rd.cur, Lp = $('rd-L'), Rp = $('rd-R');
         const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (reduce) { rd.cur = nw; render(); if (after) after(); return; }
@@ -16457,29 +16470,71 @@ window.isIOSDevice = function () {
         });
     }
 
-    /* ---------- ruy-băng + hộp nhỏ (thêm/sửa, tìm, đến trang) ---------- */
-    function paintRib() {
-        ['edit', 'search', 'jump'].forEach(n => $('rd-rb-' + n).classList.toggle('on', (rd.pop === 'add' || rd.pop === 'row') ? n === 'edit' : rd.pop === n));
-        $('rd-book').classList.toggle('rd-editing', rd.edit);
+    /* ---------- chọn dòng: Thông tin / Sửa / Xóa ---------- */
+    const IC = {
+        info: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="7.8" r=".7" fill="currentColor"/></svg>',
+        edit: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
+        del: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 10v6M14 10v6"/></svg>'
+    };
+    function clearSel() {
+        rd.sel = null;
+        document.querySelectorAll('#dict-modal .rd-row.sel').forEach(r => { r.classList.remove('sel'); const a = r.querySelector('.rd-act'); if (a) a.remove(); });
     }
-    function closePop() { rd.pop = ''; rd.edit = false; rd.editT = null; $('rd-pop').classList.add('hidden'); paintRib(); }
+    function selectRow(row) {
+        const t = rd.terms[+row.dataset.k]; if (!t) return;
+        const same = rd.sel === t; clearSel(); if (same) return;
+        rd.sel = t; row.classList.add('sel');
+        row.insertAdjacentHTML('beforeend', '<div class="rd-act"><button type="button" class="rd-ab" data-act="r-info" title="Thông tin">' + IC.info + '</button><button type="button" class="rd-ab" data-act="r-edit" title="Sửa">' + IC.edit + '</button><button type="button" class="rd-ab dan" data-act="r-del" title="Xóa">' + IC.del + '</button></div>');
+    }
+
+    /* ---------- ruy-băng + hộp nhỏ (thêm, sửa, thông tin, tìm, đến trang) ---------- */
+    function paintRib() {
+        ['edit', 'search', 'jump'].forEach(n => $('rd-rb-' + n).classList.toggle('on', n === 'edit' ? (rd.pop === 'add' || rd.pop === 'row') : rd.pop === n));
+    }
+    function closePop() { rd.pop = ''; rd.editT = null; rd.infoT = null; const p = $('rd-pop'); p.classList.add('hidden'); p.classList.remove('wide'); paintRib(); }
     function openPop(mode, t) {
-        rd.pop = mode; rd.edit = mode === 'add' || mode === 'row'; rd.editT = mode === 'row' ? t : null;
+        rd.pop = mode; rd.editT = mode === 'row' ? t : null; rd.infoT = mode === 'info' ? t : null;
         const p = $('rd-pop'); let h = '', focus = '';
         if (mode === 'add') {
-            h = '<div class="rd-pt">✏️ Thêm thuật ngữ</div><input id="rd-in-en" class="rd-in" placeholder="Thuật ngữ tiếng Anh" autocomplete="off"><input id="rd-in-vi" class="rd-in" placeholder="Nghĩa tiếng Việt" autocomplete="off"><div class="rd-pb"><button type="button" class="rd-pbtn pri" data-act="add">＋ Thêm</button></div><div class="rd-hint">Bấm vào một dòng trong sách để sửa hoặc xóa.</div>'; focus = 'rd-in-en';
+            h = '<div class="rd-pt">✏️ Thêm thuật ngữ</div><input id="rd-in-en" class="rd-in" placeholder="Thuật ngữ tiếng Anh" autocomplete="off"><input id="rd-in-vi" class="rd-in" placeholder="Nghĩa tiếng Việt" autocomplete="off"><div class="rd-pb"><button type="button" class="rd-pbtn pri" data-act="add">＋ Thêm</button></div><div class="rd-hint">Bấm vào một dòng trong sách để xem thông tin, sửa hoặc xóa.</div>'; focus = 'rd-in-en';
         } else if (mode === 'row') {
-            h = '<div class="rd-pt">✏️ Sửa thuật ngữ</div><input id="rd-in-en" class="rd-in" value="' + esc(t.en) + '" autocomplete="off"><input id="rd-in-vi" class="rd-in" value="' + esc(t.vi) + '" autocomplete="off"><div class="rd-pb"><button type="button" class="rd-pbtn pri" data-act="save">Lưu</button><button type="button" class="rd-pbtn dan" data-act="del">Xóa</button><button type="button" class="rd-pbtn" data-act="cancel">Hủy</button></div>'; focus = 'rd-in-vi';
+            h = '<div class="rd-pt">✏️ Sửa thuật ngữ</div><input id="rd-in-en" class="rd-in" value="' + esc(t.en) + '" autocomplete="off"><input id="rd-in-vi" class="rd-in" value="' + esc(t.vi) + '" autocomplete="off"><div class="rd-pb"><button type="button" class="rd-pbtn pri" data-act="save">Lưu</button><button type="button" class="rd-pbtn dan" data-act="del">Xóa</button><button type="button" class="rd-pbtn" data-act="cancel">Hủy</button></div><div class="rd-hint">Các lần dịch sau sẽ dùng đúng nghĩa bạn vừa sửa.</div>'; focus = 'rd-in-vi';
+        } else if (mode === 'info') {
+            h = '<div class="rd-pt">ℹ️ ' + esc(t.en) + '</div><div class="rd-sub">' + esc(t.vi) + '</div><div id="rd-info" class="rd-info overflow-y-auto"></div><div class="rd-pb"><button type="button" class="rd-pbtn" data-act="info-redo">↻ Tạo lại</button><button type="button" class="rd-pbtn" data-act="cancel">Đóng</button></div>';
         } else if (mode === 'search') {
             h = '<div class="rd-pt">🔍 Tìm thuật ngữ</div><input id="rd-in-q" class="rd-in" placeholder="Gõ tiếng Anh hoặc tiếng Việt…" autocomplete="off"><div id="rd-res" class="overflow-y-auto"></div>'; focus = 'rd-in-q';
         } else if (mode === 'jump') {
             const T = Math.max(rd.pages.length, 1);
             h = '<div class="rd-pt">⏩ Đến trang</div><input id="rd-in-p" class="rd-in" type="number" min="1" max="' + T + '" placeholder="1 – ' + T + '" inputmode="numeric"><div class="rd-pb"><button type="button" class="rd-pbtn pri" data-act="gopage">Đi</button></div>'; focus = 'rd-in-p';
         }
-        p.innerHTML = h; p.classList.remove('hidden'); paintRib();
-        setTimeout(() => { const f = $(focus); if (f) f.focus(); }, 30);
+        p.innerHTML = h; p.classList.toggle('wide', mode === 'info'); p.classList.remove('hidden'); paintRib();
+        if (focus) setTimeout(() => { const f = $(focus); if (f) f.focus(); }, 30);
     }
     function togglePop(mode) { if (rd.pop === mode || (mode === 'add' && rd.pop === 'row')) closePop(); else openPop(mode); }
+    /* Thông tin thuật ngữ do AI soạn (lưu lại để lần sau mở ngay) */
+    function infoSys() {
+        return 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Giải thích thuật ngữ cho sinh viên RHM bằng tiếng Việt, rõ ràng, súc tích (khoảng 80–140 từ), gồm: định nghĩa; đặc điểm hoặc cơ chế chính; ý nghĩa lâm sàng hoặc ứng dụng; thuật ngữ liên quan hoặc dễ nhầm lẫn (nếu có). Dùng cách gọi theo chuẩn giảng dạy miền Nam Việt Nam (nướu, răng cối…). Không bịa số liệu. Chia thành 2–4 đoạn ngắn, mỗi đoạn một ý. Trả về MỘT đối tượng JSON hợp lệ: {"t":"<nội dung>"}; trong chuỗi dùng dấu nháy đơn thay cho dấu nháy kép; ngăn các đoạn bằng dòng trống. Không thêm chữ nào ngoài JSON.';
+    }
+    function paintInfo(txt) {
+        const box = $('rd-info'); if (!box) return;
+        box.innerHTML = String(txt).split(/\n+/).map(x => x.trim()).filter(Boolean).map(x => '<p>' + esc(x) + '</p>').join('');
+    }
+    async function showInfo(t, force) {
+        if (!t) return;
+        const cached = t.i && !force;
+        if (!cached) {
+            if (typeof aiGeminiJson !== 'function') { toast('Chưa có AI để tạo thông tin'); return; }
+            if (typeof aiAnyKey === 'function' && !aiAnyKey()) { if (typeof aiShowGate === 'function') aiShowGate(); return; }
+        }
+        openPop('info', t);
+        if (cached) { paintInfo(t.i); return; }
+        $('rd-info').textContent = '⏳ AI đang soạn thông tin…';
+        let v = null; try { v = await aiGeminiJson(infoSys(), 'Thuật ngữ: ' + t.en + '\nNghĩa tiếng Việt: ' + t.vi, 1500); } catch (e) {}
+        if (rd.pop !== 'info' || rd.infoT !== t) return;
+        const txt = v && typeof v.t === 'string' ? v.t.replace(/\\n/g, '\n').replace(/\r\n/g, '\n').trim() : '';
+        if (!txt) { $('rd-info').textContent = 'Chưa tạo được thông tin, bấm ↻ Tạo lại.'; return; }
+        t.i = txt; save(); paintInfo(txt);
+    }
     function doSearch() {
         const q = fold($('rd-in-q').value.trim()), box = $('rd-res'); if (!box) return;
         if (!q) { box.innerHTML = ''; return; }
@@ -16491,7 +16546,7 @@ window.isIOSDevice = function () {
         if (!en || !vi) { toast('Hãy nhập đủ tiếng Anh và tiếng Việt'); return; }
         if (!letterOf(en)) { toast('Thuật ngữ phải bắt đầu bằng chữ cái A–Z'); return; }
         if (rd.terms.some(t => nk(t.en) === nk(en))) { toast('Thuật ngữ này đã có trong từ điển'); return; }
-        const t = { en, vi, ts: Date.now() }; rd.terms.push(t); sortTerms(); save(); repaginate(null);
+        const t = { en, vi, ts: Date.now(), u: 1, i: '' }; rd.terms.push(t); sortTerms(); save(); repaginate(null);
         $('rd-in-en').value = ''; $('rd-in-vi').value = ''; $('rd-in-en').focus(); showTerm(t); toast('Đã thêm "' + en + '"');
     }
     function saveRow() {
@@ -16499,10 +16554,11 @@ window.isIOSDevice = function () {
         const en = cap1(clean($('rd-in-en').value)), vi = clean($('rd-in-vi').value);
         if (!en || !vi || !letterOf(en)) { toast('Nội dung chưa hợp lệ'); return; }
         if (rd.terms.some(x => x !== t && nk(x.en) === nk(en))) { toast('Đã có thuật ngữ trùng tên'); return; }
-        t.en = en; t.vi = vi; sortTerms(); save(); closePop(); repaginate(t); showTerm(t);
+        if (en !== t.en || vi !== t.vi) t.i = '';
+        t.en = en; t.vi = vi; t.u = 1; sortTerms(); save(); closePop(); repaginate(t); showTerm(t);
     }
-    function delRow() {
-        const t = rd.editT; if (!t) return;
+    function delTerm(t) {
+        if (!t) return;
         if (!confirm('Xóa thuật ngữ "' + t.en + '"?')) return;
         const a = anchor(); rd.terms.splice(rd.terms.indexOf(t), 1); save(); closePop(); repaginate(a === t ? null : a);
     }
@@ -16524,7 +16580,9 @@ window.isIOSDevice = function () {
             case 'close': window.closeRhmDict(); break;
             case 'prev': step(-1); break; case 'next': step(1); break;
             case 'rb-edit': togglePop('add'); break; case 'rb-search': togglePop('search'); break; case 'rb-jump': togglePop('jump'); break;
-            case 'add': addTerm(); break; case 'save': saveRow(); break; case 'del': delRow(); break; case 'cancel': openPop('add'); break;
+            case 'add': addTerm(); break; case 'save': saveRow(); break; case 'del': delTerm(rd.editT); break; case 'cancel': closePop(); break;
+            case 'r-info': showInfo(rd.sel); break; case 'r-edit': if (rd.sel) openPop('row', rd.sel); break; case 'r-del': delTerm(rd.sel); break;
+            case 'info-redo': showInfo(rd.infoT, true); break;
             case 'hit': { const t = rd.terms[+el.dataset.k]; closePop(); if (t) showTerm(t); break; }
             case 'gopage': { const v = parseInt($('rd-in-p').value, 10); if (v >= 1) { closePop(); goPage(v - 1); } break; }
         }
@@ -16535,13 +16593,13 @@ window.isIOSDevice = function () {
             if (e.target === m) { window.closeRhmDict(); return; }
             const a = e.target.closest('[data-act]'); if (a) { act(a.dataset.act, a); return; }
             const tab = e.target.closest('.rd-tab'); if (tab) { gotoLetter(tab.dataset.l); return; }
-            const row = e.target.closest('.rd-row'); if (row && rd.edit && !rd.lock) { const t = rd.terms[+row.dataset.k]; if (t) openPop('row', t); }
+            const row = e.target.closest('.rd-row'); if (row && !rd.lock) selectRow(row); else if (!e.target.closest('.rd-pop')) clearSel();
         });
         m.addEventListener('input', e => { if (e.target.id === 'rd-in-q') doSearch(); });
         window.addEventListener('keydown', e => {
             if (!isOpen()) return;
             const tg = document.activeElement && document.activeElement.tagName, typing = tg === 'INPUT' || tg === 'TEXTAREA';
-            if (e.key === 'Escape') { e.stopPropagation(); e.preventDefault(); rd.pop ? closePop() : window.closeRhmDict(); return; }
+            if (e.key === 'Escape') { e.stopPropagation(); e.preventDefault(); rd.pop ? closePop() : (rd.sel ? clearSel() : window.closeRhmDict()); return; }
             if (typing) {
                 if (e.key === 'Enter') {
                     if (e.target.id === 'rd-in-en') { const v = $('rd-in-vi'); if (v) v.focus(); }
@@ -16599,6 +16657,22 @@ window.isIOSDevice = function () {
             if (isOpen() && !rd.lock) { const a = anchor(); repaginate(a); }
             toast('📖 Đã thêm ' + added + ' thuật ngữ mới vào Từ điển RHM');
         } catch (e) { console.warn('[Từ điển RHM]', e); }
+    };
+
+    /* Thuật ngữ do người dùng thêm/sửa tay: đưa vào lời nhắc dịch để các lần sau dịch đúng theo từ này */
+    window.rhmDictGlossary = function (text) {
+        try {
+            const f = fold(text); if (f.length < 3) return '';
+            const hit = [];
+            parse().forEach(t => {
+                if (!t.u || hit.length >= 40) return;
+                const base = fold(t.en.replace(/\s*\(.*\)\s*$/, '')).trim(); if (base.length < 3) return;
+                const re = new RegExp('(^|[^a-z0-9])' + base.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '($|[^a-z0-9])');
+                if (re.test(f)) hit.push(t);
+            });
+            if (!hit.length) return '';
+            return ' BẮT BUỘC dịch đúng theo các thuật ngữ người dùng đã chỉnh trong từ điển (ưu tiên hơn mọi quy ước khác): ' + hit.map(t => '"' + t.en + '" = "' + t.vi + '"').join('; ') + '. ';
+        } catch (e) { return ''; }
     };
 })();
 </script>
