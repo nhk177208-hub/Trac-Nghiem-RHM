@@ -18333,6 +18333,172 @@ function viSelText(range) {
     return _opm.apply(this, arguments);
   };
 })();
+</script><style>
+.rhm-trio{display:grid !important;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;width:min(1180px,96vw);max-width:96vw;align-items:stretch;justify-content:stretch}
+.rhm-trio>*{min-width:0}
+@media (max-width:900px){
+  .rhm-trio{grid-template-columns:minmax(0,1fr);width:min(520px,94vw);align-items:stretch}
+}
+.rhm-col{display:flex;flex-direction:column;min-width:0;border-radius:16px;padding:18px 20px;border:1px solid #e9d5ff;background:#faf5ff;box-shadow:0 25px 50px -12px rgba(0,0,0,.25)}
+.rhm-col.rhm-notes{background:#f0fdfa;border-color:#99f6e4}
+.rhm-hd{display:flex;gap:10px;align-items:center}
+.rhm-ic{font-size:24px;line-height:1}
+.rhm-tt{font-weight:800;color:#1f2937;font-size:15px}
+.rhm-cn{font-size:12px;color:#6b7280}
+.rhm-hint{font-size:11.5px;color:#6b7280;line-height:1.45;margin-top:8px}
+.rhm-qa{flex:1 1 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;margin:12px 0;min-height:240px;background:#fff;border:1px dashed #d8b4fe;border-radius:12px;padding:12px}
+.rhm-col.rhm-notes .rhm-qa{border-color:#5eead4}
+.rhm-qe{font-size:13px;color:#6b7280;text-align:center;padding:10px}
+.rhm-cv{width:min(240px,100%);height:auto;image-rendering:pixelated;background:#fff;border-radius:8px}
+.rhm-nav{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#374151;flex-wrap:wrap;justify-content:center}
+.rhm-nav button{border:1px solid #c4b5fd;background:#fff;color:#5b21b6;border-radius:8px;padding:4px 10px;font-weight:700;cursor:pointer}
+.rhm-nav button:disabled{opacity:.4;cursor:not-allowed}
+.rhm-col.rhm-notes .rhm-nav button{border-color:#5eead4;color:#0f766e}
+.rhm-r2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.rhm-s{font-size:13px;font-weight:700;padding:9px 8px;border-radius:10px;border:1px solid #c4b5fd;background:#fff;color:#5b21b6;cursor:pointer}
+.rhm-col.rhm-notes .rhm-s{border-color:#5eead4;color:#0f766e}
+.rhm-bg{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:68px;padding:12px 8px;border-radius:12px;border:0;color:#fff;font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.12);text-align:center;line-height:1.3}
+.rhm-bg.rhm-dict{background:#7c3aed}
+.rhm-bg.rhm-dict.dk{background:#5b21b6}
+.rhm-bg.rhm-notes{background:#0f766e}
+.rhm-bg.rhm-notes.dk{background:#115e59}
+.rhm-st{min-height:1rem;font-size:12px;color:#6b7280;text-align:center;margin-top:6px}
+.rhm-ft{margin-top:16px;padding-top:12px;border-top:1px solid #e5e7eb;text-align:left}
+.rhm-ft button{background:#e5e7eb;color:#374151;border:0;border-radius:12px;padding:8px 20px;font-weight:600;font-size:14px;cursor:pointer}
+</style>
+<script>
+(function () {
+  'use strict';
+  var DK = 'quizApp_rhm_dict_v1', NK = 'quizApp_rhm_notes_v1';
+  var st = { dict: { qrs: [], i: 0 }, notes: { qrs: [], i: 0 } };
+
+  function rdArr(k) {
+    try { var v = JSON.parse(kv.getItem(k) || '[]'); return Array.isArray(v) ? v : []; } catch (e) { return []; }
+  }
+  function toastM(m) { try { showToast(m); } catch (e) {} }
+
+  /* ---------- dữ liệu đưa vào mã QR (bỏ ảnh, rút gọn trường) ---------- */
+  function dictItems() {
+    return rdArr(DK).map(function (t) {
+      return { e: String(t.en || '').slice(0, 120), p: String(t.p || '').slice(0, 16), v: String(t.vi || '').slice(0, 300),
+        i: String(t.i || '').slice(0, 200), s: t.s ? 1 : 0 };
+    }).filter(function (t) { return t.e && t.v; });
+  }
+  function notesItems() {
+    var out = [];
+    rdArr(NK).forEach(function (n) {
+      var b = String(n.b || '').replace(/\[\[img:\d+\]\]/g, ''), parts = [];
+      for (var o = 0; o < b.length; o += 500) parts.push(b.slice(o, o + 500));
+      if (!parts.length) parts.push('');
+      parts.forEach(function (p, j) {
+        out.push({ t: String(n.t || 'Ghi chú').slice(0, 80), c: String(n.cat || '').slice(0, 30), d: n.ts || 0,
+          b: p, p: j, pn: parts.length });
+      });
+    });
+    return out;
+  }
+
+  /* ---------- chia thành nhiều mã QR (mỗi mã vừa dung lượng) ---------- */
+  async function packAll(k, items) {
+    var pre = 'RHM' + (k === 'dict' ? 'D' : 'N') + '.';
+    async function txt(arr, i, n) { return pre + (await pqPack({ v: 2, k: k, i: i, n: n, d: arr })); }
+    var chunks = [], cur = [];
+    for (var j = 0; j < items.length; j++) {
+      var trial = cur.concat([items[j]]);
+      if (pqMakeQr(await txt(trial, 1, 99))) { cur = trial; continue; }
+      if (!cur.length) throw new Error('Có một mục quá dài để đưa vào mã QR');
+      chunks.push(cur); cur = [items[j]];
+    }
+    if (cur.length) chunks.push(cur);
+    var out = [];
+    for (var c = 0; c < chunks.length; c++) {
+      var q = pqMakeQr(await txt(chunks[c], c + 1, chunks.length));
+      if (!q) throw new Error('Không tạo được mã QR, thử lại');
+      out.push({ qr: q, n: chunks[c].length });
+    }
+    return out;
+  }
+  function qrScale(qr) { return Math.max(2, Math.floor(240 / (qr.getModuleCount() + 8))); }
+
+  function show(k) {
+    var s = st[k], box = document.getElementById('rhm-qa-' + k), stt = document.getElementById('rhm-qst-' + k);
+    if (!box) return;
+    if (!s.qrs.length) { box.innerHTML = '<div class="rhm-qe">Bấm “📷 Tạo mã QR” để tạo mã.</div>'; if (stt) stt.textContent = ''; return; }
+    var q = s.qrs[s.i], cv = pqDraw(q.qr, qrScale(q.qr), '');
+    cv.className = 'rhm-cv';
+    box.innerHTML = '';
+    box.appendChild(cv);
+    var nav = document.createElement('div');
+    nav.className = 'rhm-nav';
+    nav.innerHTML = '<button type="button" data-x="' + k + '-prev"' + (s.i <= 0 ? ' disabled' : '') + '>‹ Trước</button>' +
+      '<span>Mã ' + (s.i + 1) + ' / ' + s.qrs.length + ' · ' + q.n + ' mục</span>' +
+      '<button type="button" data-x="' + k + '-next"' + (s.i >= s.qrs.length - 1 ? ' disabled' : '') + '>Sau ›</button>';
+    box.appendChild(nav);
+    if (stt) stt.textContent = 'Ảnh không đưa vào mã QR (dùng Word/JSON để giữ ảnh).';
+  }
+  async function genQr(k) {
+    var box = document.getElementById('rhm-qa-' + k);
+    if (!box) return;
+    box.innerHTML = '<div class="rhm-qe">⏳ Đang tạo mã QR…</div>';
+    try {
+      var items = k === 'dict' ? dictItems() : notesItems();
+      if (!items.length) { st[k] = { qrs: [], i: 0 }; box.innerHTML = '<div class="rhm-qe">Chưa có dữ liệu để tạo mã.</div>'; return; }
+      await pqLib('gen');
+      st[k] = { qrs: await packAll(k, items), i: 0 };
+      show(k);
+    } catch (e) {
+      console.error(e);
+      box.innerHTML = '<div class="rhm-qe">❌ ' + (e && e.message ? e.message : 'Không tạo được mã QR') + '</div>';
+    }
+  }
+
+  /* ---------- khung cột ---------- */
+  function colHTML(k) {
+    var d = k === 'dict';
+    return '<div class="rhm-col rhm-' + k + '">' +
+      '<div class="rhm-hd"><span class="rhm-ic">' + (d ? '📖' : '📒') + '</span><div><div class="rhm-tt">' +
+      (d ? 'Từ điển thuật ngữ RHM' : 'Sổ ghi chú RHM') + '</div><div class="rhm-cn" id="hs-cnt-' + k + '"></div></div></div>' +
+      '<div class="rhm-hint">' + (d ? 'Word: bảng 4 cột. JSON giữ đủ ảnh và trạng thái đã lưu.' : 'Word: tiêu đề Heading 2 và dòng “Phân mục”. JSON giữ đủ ảnh và phân mục.') + '</div>' +
+      '<div class="rhm-qa" id="rhm-qa-' + k + '"></div>' +
+      '<div class="rhm-r2"><button type="button" class="rhm-s" data-x="' + k + '-word">⬇ Xuất Word</button>' +
+      '<button type="button" class="rhm-s" data-x="' + k + '-json">⬇ Xuất JSON</button></div>' +
+      '<div class="rhm-r2" style="margin-top:12px"><button type="button" class="rhm-bg rhm-' + k + '" data-x="' + k + '-qr">📷 Tạo mã QR</button>' +
+      '<label class="rhm-bg rhm-' + k + ' dk">⬆ Nhập từ Word / JSON<input type="file" accept=".json,.docx,.doc,.html,.htm" data-x="' + k + '-imp" hidden></label></div>' +
+      '<div class="rhm-st" id="rhm-qst-' + k + '"></div>' +
+      '<div class="rhm-ft"><button type="button" data-x="close">Đóng</button></div>' +
+      '</div>';
+  }
+  function onClick(e) {
+    var b = e.target.closest('[data-x]'); if (!b || b.tagName === 'INPUT') return;
+    var x = b.getAttribute('data-x');
+    if (x === 'close') { if (typeof closeProgressModal === 'function') closeProgressModal(); return; }
+    var mt = /^(dict|notes)-(qr|prev|next)$/.exec(x); if (!mt) return;
+    var k = mt[1], a = mt[2];
+    if (a === 'qr') { genQr(k); return; }
+    var s = st[k]; if (!s.qrs.length) return;
+    if (a === 'prev' && s.i > 0) { s.i--; show(k); }
+    if (a === 'next' && s.i < s.qrs.length - 1) { s.i++; show(k); }
+  }
+  function rebuild() {
+    var m = document.getElementById('progress-modal'); if (!m) return;
+    var trio = m.querySelector('.rhm-trio'); if (!trio) return;
+    var box = Array.prototype.find.call(trio.children, function (c) {
+      return !c.classList.contains('hs-box') && !c.classList.contains('rhm-col');
+    });
+    if (!box) return;
+    trio.querySelectorAll('.hs-box,.rhm-col').forEach(function (c) { c.remove(); });
+    box.style.width = '100%'; box.style.maxWidth = 'none'; box.style.flex = '';
+    trio.insertAdjacentHTML('beforeend', colHTML('dict') + colHTML('notes'));
+    if (!trio.getAttribute('data-v3')) { trio.setAttribute('data-v3', '1'); trio.addEventListener('click', onClick); }
+    show('dict'); show('notes');
+  }
+  var prevOpen = window.openProgressModal;
+  window.openProgressModal = function () {
+    var r = prevOpen.apply(this, arguments);
+    try { rebuild(); if (window.rhmIO && window.rhmIO.refresh) window.rhmIO.refresh(); } catch (e) { console.warn(e); }
+    return r;
+  };
+})();
 </script></body>
 <style>
 #note-modal .rd-book, #note-modal .rd-pg { background: #fdf8ec; }
