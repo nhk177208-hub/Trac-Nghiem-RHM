@@ -2101,7 +2101,7 @@
                     <p id="topic-modal-sub" class="text-sm text-gray-500"></p>
                 </div>
                 <div class="flex items-center gap-2 flex-wrap justify-end">
-                    <button id="topic-add-json-btn" onclick="triggerTopicJsonImport()" class="dev-only text-sm bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-1.5 px-3 rounded-xl shadow-sm transition-colors">➕ Thêm đề JSON</button>
+                    <button id="topic-add-json-btn" onclick="rhmEditFromTopic()" class="dev-only text-sm bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-1.5 px-3 rounded-xl shadow-sm transition-colors">✏️ Edit đề</button>
                     <select id="topic-sort-select" onchange="renderTopicModal()" class="text-sm bg-gray-50 hover:bg-gray-100 text-gray-700 font-semibold py-1.5 px-2 rounded-xl border border-gray-300 outline-none cursor-pointer">
                         <option value="newest">🕒 Mới nhất</option>
                         <option value="oldest">⏳ Cũ nhất</option>
@@ -7540,7 +7540,7 @@
                 btn.innerHTML = `
                     <img src="${TOPIC_ICONS[n - 1] || 'images/img_037.webp'}" alt="${topicFullName(n)}" draggable="false" onerror="this.style.opacity=0.15" class="w-9 h-9 sm:w-20 sm:h-20 object-contain shrink-0 ${c > 0 ? '' : 'opacity-60'}">
                     <span class="flex flex-col items-center text-center min-w-0">
-                        <span class="font-bold text-[11px] sm:text-lg leading-tight text-center w-full ${c > 0 ? 'text-blue-800' : 'text-gray-500'}" style="display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;line-height:1.25;min-height:calc(4 * 1.25em)">${n === 37 ? 'Thi Thử' : (TOPIC_FULL_NAMES[n - 1] || ('Chủ đề ' + n))}</span>
+                        <span class="font-bold text-[11px] sm:text-lg leading-tight text-center w-full ${c > 0 ? 'text-blue-800' : 'text-gray-500'}" style="display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;line-height:1.25;min-height:calc(4 * 1.25em);text-align:justify;text-justify:inter-word;hyphens:auto">${n === 37 ? 'Thi Thử' : (TOPIC_FULL_NAMES[n - 1] || ('Chủ đề ' + n))}</span>
                         
                     </span>`;
                 grid.appendChild(btn);
@@ -7744,7 +7744,25 @@
             showToast(`Đã chuyển vào ${quiz.folder}!`);
         }
 
-        function triggerTopicJsonImport() {
+        function rhmEditFromTopic() {
+    var n = currentTopic;
+    if (!n) return;
+    var list = getSavedQuizzes();
+    var q = {
+        id: Date.now() + Math.floor(Math.random() * 10000),
+        name: 'Bộ đề mới',
+        folder: (n === 37) ? 'Thi Thử' : topicName(n),
+        isExam: n === 37,
+        questions: [],
+        date: new Date().toLocaleDateString('vi-VN')
+    };
+    list.unshift(q);
+    kv.setItem('quizAppSavedQuizzes', JSON.stringify(list));
+    closeTopicModal();
+    openEditScreen(q.id);
+    renderSavedQuizzes();
+}
+function triggerTopicJsonImport() {
             document.getElementById('import-topic-json-input').click();
         }
 
@@ -17476,9 +17494,9 @@ function openPop(mode, t) {
 #note-modal .qz-fb.ok{background:#dcfce7;color:#166534}
 #note-modal .qz-fb.bad{background:#fee2e2;color:#991b1b}
 #note-modal .qz-cv{font-weight:500;margin-top:4px;color:#374151}
-@media (prefers-reduced-motion:reduce){#note-modal .rd-nw{animation:none}}#note-modal .nt-ed-acts.nt-ed-acts-r { position: absolute; top: 14px; left: 16px; right: auto; z-index: 12; flex-wrap: nowrap; }
+@media (prefers-reduced-motion:reduce){#note-modal .rd-nw{animation:none}}#note-modal .nt-ed-acts.nt-ed-acts-r { position: absolute; top: 14px; left: var(--bm-i); right: auto; z-index: 12; flex-wrap: nowrap; }
 #dict-modal .rd-nwv { background: #fee2e2; color: #b91c1c; }
-#dict-modal .rd-nwv:hover { background: #fecaca; }
+#dict-modal .rd-nwv:hover { background: #fecaca; }button[onclick="openStorageModal()"], button[onclick*="exportQuizToJson"] { display: none !important; }
 @media (max-width:759px){
  #note-modal .rd-wrap{--rd-h:calc(var(--rd-vh) - 8px - 62px - 50px);padding-top:62px;display:flex;flex-direction:column}
  #note-modal .rd-tabs.L,#note-modal .rd-tabs.R{display:none}
@@ -17674,7 +17692,7 @@ function openPop(mode, t) {
 function moveEdActs() {
     var a = $('nt-L').querySelector('.nt-ed-acts');
     if (!a) return;
-    if (nt.per === 2) { a.classList.add('nt-ed-acts-r'); $('nt-R').insertBefore(a, $('nt-R').firstChild); }
+    if (nt.per === 2 && !$('nt-L').querySelector('.nt-editing')) { a.classList.add('nt-ed-acts-r'); $('nt-R').insertBefore(a, $('nt-R').firstChild); }
 }
     function repaginate(id) { snapshotInline();
         if (!paginate()) return;
