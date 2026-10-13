@@ -2285,7 +2285,7 @@
                 
                 // Ngăn chặn sự kiện wheel hoặc touchmove lan truyền ra document khi chạm đỉnh hoặc đáy
                 el.addEventListener('wheel', function(e) {
-                    const scrollable = e.target.closest('.overflow-y-auto, .overflow-auto');
+                    const scrollable = e.target.closest('.overflow-y-auto, .overflow-auto, .rd-nt, .rd-mt, .rd-pop, .rd-info, .qz-body, .rv-card, .rd-tip');
                     if (!scrollable) {
                         e.preventDefault();
                         return;
@@ -14142,7 +14142,7 @@ function aiFetch(url, opts, ms) {
 
     /* --- bảng ⚙️ Cài đặt: chọn nhà cung cấp chính, nhập / xóa khóa, đổi model --- */
     const aiEscAttr = (x) => String(x).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
-    function aiProvRenderBase() {
+    function aiProvRender() {
         const box = document.getElementById('ai-prov-cards'); if (!box) return;
         const au = document.getElementById('ai-auto-switch'); if (au) au.checked = !!aiState.auto;
         const have = AI_PROV_IDS.filter(p => aiKeyOf(p)), cur = have.includes(aiState.prefer) ? aiState.prefer : (have[0] || '');
@@ -14150,7 +14150,7 @@ function aiFetch(url, opts, ms) {
         box.innerHTML = AI_PROV_IDS.map(p => {
             const c = AI_PROV[p], has = !!aiKeyOf(p), open = !has || aiState.provOpen === p;
             const mrow = (vision, label, def) => '<p class="text-[11px] font-bold text-amber-900 mt-2">' + label + '</p><div class="flex gap-2 mt-1"><input id="ai-pm-' + p + (vision ? '-v' : '') + '" type="text" autocomplete="off" spellcheck="false" value="' + aiEscAttr(aiModelRaw(p, vision)) + '" placeholder="' + aiEscAttr(def) + '" class="flex-1 ' + inp + '"><button type="button" onclick="aiModelSave(\'' + p + '\')" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-3 rounded-xl text-xs">Lưu</button></div>';
-            const models = p === 'gemini' ? '' : mrow(false, 'Model chat (bỏ trống = mặc định)', c.model) + (c.vision ? mrow(true, 'Model khi gửi ảnh (bỏ trống = mặc định)', c.vision) : '');
+            const models = p === 'gemini' ? gemLvBlock() : mrow(false, 'Model chat (bỏ trống = mặc định)', c.model) + (c.vision ? mrow(true, 'Model khi gửi ảnh (bỏ trống = mặc định)', c.vision) : '');
             return '<div class="rounded-xl border p-2.5 ' + (p === cur ? 'border-indigo-400 bg-indigo-50' : 'border-amber-200 bg-white') + '">' +
                 '<div class="flex items-center gap-2"><label class="flex items-center gap-2 flex-1 min-w-0 text-sm font-bold text-gray-800"><input type="radio" name="ai-prefer" ' + (p === cur ? 'checked ' : '') + (has ? '' : 'disabled ') + 'onchange="aiPreferSet(\'' + p + '\')"> ' + c.name + (p === 'gemini' ? ' <span class="text-[10px] font-bold text-indigo-600">(mặc định)</span>' : '') + (p === cur ? ' <span class="text-[10px] font-bold text-indigo-600">· đang dùng chính</span>' : '') + '</label>' +
                 '<span class="text-[11px] shrink-0 ' + (has ? 'text-emerald-700' : 'text-gray-400') + '">' + (has ? '✅ Đã có khóa' : '⚪ Chưa có khóa') + '</span></div>' +
@@ -16032,7 +16032,7 @@ window.isIOSDevice = function () {
         toast(t.s ? '⭐ Đã lưu "' + t.en + '"' : 'Đã bỏ lưu "' + t.en + '"');
     }
     function paintNewT() {
-        const box = $('rd-nt'), n = $('rd-ntn'), slot = $('rd-nwslot'); if (!box) return; if (slot) slot.innerHTML = (nNew() ? '<button type="button" class="rd-bdg rd-nwc" data-act="clr-new" title="Bấm để bỏ hết dấu MỚI">' + nNew() + ' mới ✕</button>' : '') + '<button type="button" class="rd-bdg rd-nwx" data-act="cancel" title="Đóng cửa sổ">✕</button>';
+        const box = $('rd-nt'), n = $('rd-ntn'), slot = $('rd-nwslot'); if (!box) return; if (slot) slot.innerHTML = (nNew() ? '<button type="button" class="rd-bdg rd-nwc" data-act="clr-new" title="Bấm để bỏ hết dấu MỚI">' + nNew() + ' mới ✕</button>' : '') + '<button type="button" class="rd-nwx" data-act="cancel" title="Đóng">✕</button>';
         const list = []; rd.terms.forEach((t, k) => { if (t.n) list.push(k); });
         list.sort((a, b) => (rd.terms[b].ts || 0) - (rd.terms[a].ts || 0));
         if (n) n.textContent = String(list.length);
@@ -16208,7 +16208,7 @@ function openPop(mode, t) {
         } else if (mode === 'more') {
             h = '<div class="rd-pt">＋ Thêm từ liên quan</div><div class="rd-sub"><b>' + esc(t.en) + '</b> — ' + esc(viLine(t.vi)) + '</div><div id="rd-mt" class="rd-mt"><div class="rd-hint" style="padding:10px">⏳ AI đang gợi ý từ cùng bộ và từ loại…</div></div><div class="rd-pb" id="rd-mb"></div><div class="rd-hint">Tick chọn các từ muốn thêm. Từ mới thêm sẽ có dấu MỚI.</div>';
         } else if (mode === 'newt') {
-            h = '<div class="rd-pt" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="flex:1">🆕 Thuật ngữ mới (<span id="rd-ntn">0</span>)</span><span id="rd-nwslot"></span></div><div id="rd-nt" class="rd-nt overflow-y-auto"></div>';
+            h = '<div class="rd-pt" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="flex:1">🆕 Thuật ngữ mới (<span id="rd-ntn">0</span>)</span><span id="rd-nwslot"></span></div><div id="rd-nt" class="rd-nt"></div>';
         } else if (mode === 'saved') {
             h = '<div class="rd-pt">⭐ Từ đã lưu (<span id="rd-svn">0</span>)</div><div id="rd-res" class="overflow-y-auto"></div>';
         } else if (mode === 'search') {
@@ -16838,7 +16838,7 @@ function openPop(mode, t) {
 <style>
 /* ===== Từ điển: cột từ loại, nút loa, khung info co giãn ===== */
 #dict-modal .rd-row{grid-template-columns:minmax(0,1fr) 11% minmax(0,1fr)}
-#dict-modal .rd-cap{padding-left:56%}
+#dict-modal .rd-cap{padding-left:0;text-align:center}
 #dict-modal .rd-ps{font-style:italic;font-weight:600;color:#7c3aed;font-size:.88em;align-self:center;overflow-wrap:anywhere}
 #dict-modal .rd-spk{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;padding:0;margin-right:4px;border:0;background:none;color:#5b21b6;opacity:.25;vertical-align:-3px;cursor:pointer}
 #dict-modal .rd-spk:hover{opacity:.85}
@@ -17018,14 +17018,7 @@ function openPop(mode, t) {
 #note-modal .qz-cv{font-weight:500;margin-top:4px;color:#374151}
 @media (prefers-reduced-motion:reduce){#note-modal .rd-nw{animation:none}}#note-modal .nt-ed-acts.nt-ed-acts-r { position: absolute; top: 14px; left: var(--bm-i); right: auto; z-index: 12; flex-wrap: nowrap; }
 #dict-modal .rd-nwv { background: #fee2e2; color: #b91c1c; }
-#dict-modal .rd-nwv:hover { background: #fecaca; }#dict-modal .rd-body .rd-cap { padding-left: 0 !important; text-align: left; }
-#dict-modal .rd-nwx { background: #f3f4f6; color: #374151; border: 0; cursor: pointer; font-family: inherit; }
-#dict-modal .rd-nwx:hover { background: #e5e7eb; }
-.rhm-tr-box { border: 1px solid #e5e7eb; border-radius: 14px; padding: 12px 10px; background: #fafafa; text-align: center; }
-.rhm-tr-title { font-weight: 800; color: #1f2937; margin-bottom: 8px; font-size: 14px; }
-.rhm-tr-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 6px; }
-.rhm-tr-btn { font-size: 13px; font-weight: 700; padding: 7px 12px; border-radius: 10px; border: 1px solid #cbd5e1; background: #fff; color: #334155; min-width: 118px; }
-.rhm-tr-btn:hover { background: #eef2ff; border-color: #a5b4fc; }#dict-modal .rd-pop.info-ctr { top: 50%; left: 50%; right: auto; transform: translate(-50%, -50%); width: min(840px, 92%); max-height: 86%; overflow-y: auto; overscroll-behavior: contain; }
+#dict-modal .rd-nwv:hover { background: #fecaca; }#dict-modal .rd-pop.info-ctr { top: 50%; left: 50%; right: auto; transform: translate(-50%, -50%); width: min(840px, 92%); max-height: 86%; overflow-y: auto; overscroll-behavior: contain; }
 #dict-modal .rd-pop.info-ctr .rd-info { max-height: none; overflow: visible; }
 #dict-modal .rd-pop.info-ctr .rd-info p { text-align: justify; text-justify: inter-word; hyphens: auto; }
 @media (max-width:759px){
@@ -17697,323 +17690,179 @@ function moveEdActs() {
 </div>
 <!-- ===== Cài đặt trang chủ (gộp Đề xuất câu hỏi, Góp ý, Khóa API, Nhập/Xuất tiến độ, Thêm vào MH chính) ===== -->
 <div id="home-settings-modal" class="fixed inset-0 bg-black bg-opacity-60 hidden flex items-center justify-center p-4 z-50" onclick="if(event.target===this)closeHomeSettings()">
-    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl p-4 max-h-[92vh] overflow-y-auto">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-4">
         <div class="flex items-center justify-between mb-3">
             <h3 class="text-lg font-black text-gray-800">⚙️ Cài Đặt</h3>
             <button type="button" onclick="closeHomeSettings()" class="w-9 h-9 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 font-black">✕</button>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 items-start">
-            <div class="flex flex-col gap-2">
-                <button type="button" onclick="homeSettingsGo('openSuggestQuestionModal')" class="text-left text-sm bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold py-2.5 px-3.5 rounded-xl border border-blue-300">💡 Đề xuất câu hỏi</button>
-                <button type="button" onclick="homeSettingsGo('openAppFeedbackModal')" class="text-left text-sm bg-teal-50 hover:bg-teal-100 text-teal-800 font-semibold py-2.5 px-3.5 rounded-xl border border-teal-300">📩 Góp ý / Liên hệ</button>
-                <button type="button" onclick="hsOpenKeys()" class="text-left text-sm bg-amber-50 hover:bg-amber-100 text-amber-800 font-semibold py-2.5 px-3.5 rounded-xl border border-amber-300 flex items-center justify-between">🔑 Cài đặt khóa API</button>
-                <button type="button" onclick="homeSettingsGo('openProgressModal')" class="text-left text-sm bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold py-2.5 px-3.5 rounded-xl border border-indigo-300">🔄 Nhập / Xuất Tiến Độ</button>
-                <button type="button" id="btn-add-home" onclick="homeSettingsGo('addToHomeScreen')" class="text-left text-sm bg-sky-50 hover:bg-sky-100 text-sky-800 font-semibold py-2.5 px-3.5 rounded-xl border border-sky-300">📲 Thêm vào MH chính</button>
-            </div>
-            <div class="flex flex-col gap-3">
-                <div class="rhm-tr-box">
-                    <div class="rhm-tr-title">📖 Từ điển thuật ngữ RHM</div>
-                    <div class="rhm-tr-row">
-                        <button type="button" class="rhm-tr-btn" onclick="rhmTrExport('dict','word')">⬇ Xuất Word</button>
-                        <button type="button" class="rhm-tr-btn" onclick="rhmTrExport('dict','json')">⬇ Xuất JSON</button>
-                    </div>
-                    <div class="rhm-tr-row">
-                        <button type="button" class="rhm-tr-btn" onclick="rhmTrPick('dict','word')">⬆ Nhập Word</button>
-                        <button type="button" class="rhm-tr-btn" onclick="rhmTrPick('dict','json')">⬆ Nhập JSON</button>
-                    </div>
-                </div>
-                <div class="rhm-tr-box">
-                    <div class="rhm-tr-title">📒 Sổ ghi chú RHM</div>
-                    <div class="rhm-tr-row">
-                        <button type="button" class="rhm-tr-btn" onclick="rhmTrExport('notes','word')">⬇ Xuất Word</button>
-                        <button type="button" class="rhm-tr-btn" onclick="rhmTrExport('notes','json')">⬇ Xuất JSON</button>
-                    </div>
-                    <div class="rhm-tr-row">
-                        <button type="button" class="rhm-tr-btn" onclick="rhmTrPick('notes','word')">⬆ Nhập Word</button>
-                        <button type="button" class="rhm-tr-btn" onclick="rhmTrPick('notes','json')">⬆ Nhập JSON</button>
-                    </div>
-                </div>
-            </div>
+        <div class="flex flex-col gap-2">
+            <button type="button" onclick="homeSettingsGo('openSuggestQuestionModal')" class="text-left text-sm bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold py-2.5 px-3.5 rounded-xl border border-blue-300">💡 Đề xuất câu hỏi</button>
+            <button type="button" onclick="homeSettingsGo('openAppFeedbackModal')" class="text-left text-sm bg-teal-50 hover:bg-teal-100 text-teal-800 font-semibold py-2.5 px-3.5 rounded-xl border border-teal-300">📩 Góp ý / Liên hệ</button>
+            <button type="button" onclick="hsOpenKeys()" class="text-left text-sm bg-amber-50 hover:bg-amber-100 text-amber-800 font-semibold py-2.5 px-3.5 rounded-xl border border-amber-300 flex items-center justify-between">🔑 Cài đặt khóa API</button>
+            <button type="button" onclick="homeSettingsGo('openProgressModal')" class="text-left text-sm bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold py-2.5 px-3.5 rounded-xl border border-indigo-300">🔄 Nhập / Xuất Tiến Độ</button>
+            <button type="button" id="btn-add-home" onclick="homeSettingsGo('addToHomeScreen')" class="text-left text-sm bg-sky-50 hover:bg-sky-100 text-sky-800 font-semibold py-2.5 px-3.5 rounded-xl border border-sky-300">📲 Thêm vào MH chính</button>
         </div>
-        <input type="file" id="rhm-tr-file" class="hidden">
     </div>
 </div>
+<style>
+/* ===== Hàng nút trang chủ: PC một hàng (Cài Đặt ngoài cùng bên phải), điện thoại lưới 2 cột ===== */
+.home-bar{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px}
+.home-bar>button{display:flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap}
+.home-bar{justify-content:flex-end}
+@media (max-width:640px){
+    .home-bar{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .home-bar>button{width:100%;min-height:44px;padding:8px 6px!important;font-size:13px!important;white-space:normal;line-height:1.25;margin:0!important}
+    .home-bar>.hb-set{margin-left:0}
+    .home-bar>.hb-dev{grid-column:1/-1}
+}
+/* ===== Lật trang kiểu "app khác" (tờ giấy xoay 3D 0.7s, đổi nội dung ở giữa) ===== */
+#dict-modal .rd-book,#note-modal .rd-book{perspective:none!important}
+#dict-modal .rd-book.flip,#note-modal .rd-book.flip{perspective:1800px!important}
+.bk3-leaf{position:absolute;top:0;bottom:0;width:50%;background:linear-gradient(90deg,#f6efdc,#fdf8ee);z-index:7;box-shadow:0 0 14px rgba(0,0,0,.25);backface-visibility:hidden;-webkit-backface-visibility:hidden;pointer-events:none;will-change:transform}
+.bk3-leaf.one{width:100%}
+.bk3-leaf.next{right:0;transform-origin:left center;animation:bk3fn .7s ease-in-out forwards}
+.bk3-leaf.prev{left:0;transform-origin:right center;animation:bk3fp .7s ease-in-out forwards}
+.bk3-leaf.one.next{right:auto;left:0}
+@keyframes bk3fn{0%{transform:rotateY(0)}100%{transform:rotateY(-180deg)}}
+@keyframes bk3fp{0%{transform:rotateY(0)}100%{transform:rotateY(180deg)}}
+/* ===== Căn lề chuẩn như sách thật: Top / Bottom / Outer (ngoài) / Inner (gáy) ===== */
+#dict-modal,#note-modal{--bm-t:58px;--bm-b:62px;--bm-o:30px;--bm-i:42px}
+@media (max-width:759px){#dict-modal,#note-modal{--bm-t:56px;--bm-b:60px;--bm-o:20px;--bm-i:20px}}
+#dict-modal .rd-pg.rd-L .rd-body,#note-modal .rd-pg.rd-L .rd-body{left:var(--bm-o);right:var(--bm-i);top:var(--bm-t);bottom:var(--bm-b)}
+#dict-modal .rd-pg.rd-R .rd-body,#note-modal .rd-pg.rd-R .rd-body{left:var(--bm-i);right:var(--bm-o);top:var(--bm-t);bottom:var(--bm-b)}
+#dict-modal .rd-book.one .rd-pg .rd-body,#note-modal .rd-book.one .rd-pg .rd-body{left:var(--bm-o);right:var(--bm-o)}
+#dict-modal .rd-pg .rd-hd,#note-modal .rd-pg .rd-hd{left:var(--bm-o);right:var(--bm-i)}
+#dict-modal .rd-book.one .rd-pg .rd-hd,#note-modal .rd-book.one .rd-pg .rd-hd{right:var(--bm-o)}
+#dict-modal .rd-pg .rd-ft,#note-modal .rd-pg .rd-ft{left:0;right:0;text-align:center;bottom:calc(var(--bm-b) / 2 - 9px)}
+/* ===== Sổ ghi chú: hiển thị đủ nội dung (tràn sang trang kế), dropcap theo môn học cách 1 dòng ===== */
+.nt-b,#note-modal .nt-b{display:block!important;-webkit-line-clamp:unset!important;line-clamp:unset!important;overflow:visible!important}
+#note-modal .nt-cap{font-size:calc(clamp(13px,min(1.4vw,2.5vh),22px) * var(--nt-fs,1));margin-bottom:1.5em}
+#note-modal .nt-mid{border-bottom:none!important}
+#note-modal .nt-tc{font-size:.78em;font-style:italic;color:#0f766e;opacity:.85;margin-bottom:2px}
+</style>
 <script>
 (function () {
     'use strict';
-    var DK = 'quizApp_rhm_dict_v1', NK = 'quizApp_rhm_notes_v1', NM = 'quizApp_rhm_notes_meta_v1';
-    var cur = { kind: '', fmt: '' };
-    function $(id) { return document.getElementById(id); }
-    function say(m) { try { showToast(m); } catch (e) {} }
-    function getJ(k, d) { try { var v = JSON.parse(kv.getItem(k) || 'null'); return v == null ? d : v; } catch (e) { return d; } }
-    function setJ(k, v) { kv.setItem(k, JSON.stringify(v)); }
-    function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
-    function nl(s) { return esc(s).replace(/\n/g, '<br>'); }
-    function isImg(s) { return typeof s === 'string' && /^data:image\//.test(s); }
-    function stamp() { return new Date().toISOString().slice(0, 10).replace(/-/g, ''); }
-    function fmtDate(ts) { try { return new Date(ts).toLocaleString('vi-VN'); } catch (e) { return ''; } }
-    function download(text, name, mime) {
-        var u = URL.createObjectURL(new Blob([text], { type: mime }));
-        var a = document.createElement('a'); a.href = u; a.download = name;
-        document.body.appendChild(a); a.click(); a.remove();
-        setTimeout(function () { URL.revokeObjectURL(u); }, 4000);
-    }
-    function letter(en) {
-        var c = String(en || '').trim().charAt(0).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
-        return /^[A-Z]$/.test(c) ? c : '#';
-    }
-    function sigOf(t, b) { return String(t || '') + '|' + String(b || '').slice(0, 80); }
-    function imgsHtml(list, w) {
-        return (list || []).filter(isImg).map(function (s) { return '<img src="' + s + '" style="max-width:' + w + 'pt">'; }).join('');
-    }
-    function updateCounts() {
-        var a = $('rhm-dict-count'); if (a) a.textContent = String(getJ(DK, []).length);
-        var b = $('rhm-note-count'); if (b) b.textContent = String(getJ(NK, []).length);
-    }
-
-    function wrapDoc(title, body) {
-        return '\ufeff<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">'
-            + '<head><meta charset="utf-8"><title>' + esc(title) + '</title><style>'
-            + '@page{size:A4;margin:2cm}'
-            + 'body{font-family:"Times New Roman",Times,serif;font-size:12pt;color:#1f1d2b;line-height:1.35}'
-            + 'h1{font-family:Arial,sans-serif;text-align:center;color:#5b21b6;font-size:20pt;margin:0 0 4pt}'
-            + '.sub{text-align:center;color:#6b7280;font-size:10pt;margin:0 0 14pt}'
-            + 'h2.letter{font-family:Arial,sans-serif;color:#6d28d9;font-size:15pt;border-bottom:1.5pt solid #c4b5fd;padding-bottom:2pt;margin:16pt 0 6pt}'
-            + 'table{width:100%;border-collapse:collapse;margin-bottom:6pt}'
-            + 'th{background:#ede9fe;color:#5b21b6;font-family:Arial,sans-serif;font-size:10pt;text-align:left;padding:5pt 6pt;border:0.75pt solid #c4b5fd}'
-            + 'td{padding:4pt 6pt;border:0.75pt solid #e9d5ff;vertical-align:top;font-size:11.5pt}'
-            + 'td.en{font-weight:bold;color:#1c1830}'
-            + 'td.p{font-style:italic;color:#7c3aed}'
-            + 'img{margin:3pt 0;border:0.5pt solid #ddd6fe}'
-            + '</style></head><body>' + body + '</body></html>';
-    }
-    function dictWord(terms) {
-        var by = {}, order = [];
-        terms.slice().sort(function (a, b) { return String(a.en).localeCompare(String(b.en), 'en', { sensitivity: 'base' }); }).forEach(function (t) {
-            var L = letter(t.en); if (!by[L]) { by[L] = []; order.push(L); } by[L].push(t);
-        });
-        var body = '<h1>Từ điển thuật ngữ RHM</h1><p class="sub">Tổng ' + terms.length + ' thuật ngữ · Xuất ngày ' + fmtDate(Date.now()) + '</p>';
-        order.forEach(function (L) {
-            body += '<h2 class="letter">' + L + '</h2><table><thead><tr><th style="width:32%">Tiếng Anh</th><th style="width:12%">Từ loại</th><th>Tiếng Việt</th></tr></thead><tbody>';
-            by[L].forEach(function (t) {
-                body += '<tr><td class="en">' + esc(t.en) + '</td><td class="p">' + esc(t.p || '') + '</td><td>' + nl(t.vi) + imgsHtml(t.im, 140) + '</td></tr>';
-            });
-            body += '</tbody></table>';
-        });
-        return wrapDoc('Từ điển thuật ngữ RHM', body);
-    }
-    function notesWord(notes) {
-        var groups = {}, order = [];
-        notes.slice().sort(function (a, b) { return (a.cat || '~').localeCompare(b.cat || '~', 'vi') || ((b.ts || 0) - (a.ts || 0)); }).forEach(function (n) {
-            var g = n.cat || 'Chưa phân mục'; if (!groups[g]) { groups[g] = []; order.push(g); } groups[g].push(n);
-        });
-        var body = '<h1>Sổ ghi chú RHM</h1><p class="sub">Tổng ' + notes.length + ' ghi chú · Xuất ngày ' + fmtDate(Date.now()) + '</p>';
-        order.forEach(function (g) {
-            body += '<h2 class="letter">' + esc(g) + '</h2><table><thead><tr><th style="width:24%">Tiêu đề</th><th style="width:12%">Phân mục</th><th>Nội dung</th><th style="width:15%">Ngày tạo</th></tr></thead><tbody>';
-            groups[g].forEach(function (n) {
-                var text = String(n.b || '').replace(/\[\[img:\d+\]\]/g, '').trim();
-                body += '<tr><td class="en">' + esc(n.t) + '</td><td>' + esc(n.cat || '') + '</td><td>' + nl(text) + imgsHtml(n.im, 300) + '</td><td>' + esc(fmtDate(n.ts)) + '</td></tr>';
-            });
-            body += '</tbody></table>';
-        });
-        return wrapDoc('Sổ ghi chú RHM', body);
-    }
-
-    function exportDict(fmt) {
-        var terms = getJ(DK, []);
-        if (!terms.length) { say('Từ điển chưa có thuật ngữ nào'); return; }
-        if (fmt === 'json') download(JSON.stringify({ type: 'rhm-dict', version: 1, exported: Date.now(), terms: terms }, null, 2), 'tu-dien-rhm-' + stamp() + '.json', 'application/json');
-        else download(dictWord(terms), 'tu-dien-rhm-' + stamp() + '.doc', 'application/msword');
-        say('Đã xuất ' + terms.length + ' thuật ngữ');
-    }
-    function exportNotes(fmt) {
-        var notes = getJ(NK, []);
-        if (!notes.length) { say('Sổ ghi chú chưa có ghi chú nào'); return; }
-        var meta = getJ(NM, {}), cats = Array.isArray(meta.cats) ? meta.cats : [];
-        if (fmt === 'json') download(JSON.stringify({ type: 'rhm-notes', version: 1, exported: Date.now(), cats: cats, notes: notes }, null, 2), 'so-ghi-chu-rhm-' + stamp() + '.json', 'application/json');
-        else download(notesWord(notes), 'so-ghi-chu-rhm-' + stamp() + '.doc', 'application/msword');
-        say('Đã xuất ' + notes.length + ' ghi chú');
-    }
-    window.rhmTrExport = function (kind, fmt) { if (kind === 'dict') exportDict(fmt); else exportNotes(fmt); };
-
-    function cellText(td) {
-        var c = td.cloneNode(true);
-        Array.prototype.forEach.call(c.querySelectorAll('br'), function (b) { b.parentNode.replaceChild(document.createTextNode('\n'), b); });
-        return c.textContent.replace(/\u00a0/g, ' ').replace(/[ \t]+\n/g, '\n').trim();
-    }
-    function cellImgs(td) {
-        return Array.prototype.map.call(td.querySelectorAll('img'), function (i) { return i.getAttribute('src') || ''; }).filter(isImg);
-    }
-    function tableRows(html, header) {
-        var doc = new DOMParser().parseFromString(html, 'text/html'), out = [];
-        Array.prototype.forEach.call(doc.querySelectorAll('table'), function (tb) {
-            var trs = tb.querySelectorAll('tr'); if (!trs.length) return;
-            var first = trs[0].querySelectorAll('th,td');
-            if (!first.length || cellText(first[0]) !== header) return;
-            for (var i = 1; i < trs.length; i++) {
-                var tds = trs[i].querySelectorAll('td,th');
-                if (tds.length) out.push(tds);
-            }
-        });
-        return out;
-    }
-    function fromWordDict(html) {
-        return tableRows(html, 'Tiếng Anh').map(function (tds) {
-            var v = tds[2] || tds[0];
-            return { en: cellText(tds[0]), p: cellText(tds[1] || tds[0]).toLowerCase().replace(/[^a-z, .]/g, '').slice(0, 16), vi: cellText(v), im: cellImgs(v) };
-        }).filter(function (x) { return x.en && x.vi; });
-    }
-    function fromWordNotes(html) {
-        return tableRows(html, 'Tiêu đề').map(function (tds) {
-            var b = tds[2] || tds[0];
-            return { t: cellText(tds[0]), cat: cellText(tds[1] || tds[0]), b: cellText(b), im: cellImgs(b), ts: Date.now() };
-        }).filter(function (x) { return x.t || x.b; });
-    }
-
-    function normVi(s) {
-        return String(s || '').normalize('NFC').toLowerCase().replace(/[\s\u00a0]+/g, ' ').replace(/[.,;:!?()"'“”]/g, '').trim();
-    }
-    function hasSame(dict, en, vi) {
-        var e = String(en || '').trim().toLowerCase(), nv = normVi(vi);
-        return dict.some(function (t) { return String(t.en || '').trim().toLowerCase() === e && normVi(t.vi) === nv; });
-    }
-    function mergeDict(list) {
-        var dict = getJ(DK, []), added = 0;
-        list.forEach(function (x) {
-            if (!x || !x.en || !x.vi) return;
-            var en = String(x.en).trim(), p = String(x.p || '').trim().toLowerCase().slice(0, 16);
-            if (hasSame(dict, en, x.vi)) return;
-            dict.push({ en: en, vi: String(x.vi), p: p, im: (Array.isArray(x.im) ? x.im : []).filter(isImg).slice(0, 6), ts: x.ts || Date.now(), u: x.u ? 1 : 0, i: x.i ? String(x.i) : '', s: x.s ? 1 : 0, n: 1, f: x.f ? 1 : 0 });
-            added++;
-        });
-        setJ(DK, dict); updateCounts();
-        var skip = list.length - added;
-        say(added ? 'Đã nhập ' + added + ' mục mới' + (skip ? ' (bỏ qua ' + skip + ' mục trùng)' : '') : 'Không có mục mới: tất cả đã có trong từ điển');
-    }
-    function mergeNotes(list, cats) {
-        var notes = getJ(NK, []), meta = getJ(NM, {}), have = {}, ids = {}, added = 0;
-        notes.forEach(function (n) { have[sigOf(n.t, n.b)] = 1; if (n.id) ids[n.id] = 1; });
-        meta.cats = Array.isArray(meta.cats) ? meta.cats : [];
-        function addCat(c) {
-            c = String(c || '').replace(/\s+/g, ' ').trim().slice(0, 30);
-            if (c && meta.cats.indexOf(c) < 0) meta.cats.push(c);
-        }
-        (Array.isArray(cats) ? cats : []).forEach(addCat);
-        list.forEach(function (x) {
-            if (!x || !x.b) return;
-            if (x.id && ids[x.id]) return;
-            var t = String(x.t || 'Ghi chú').slice(0, 120), s = sigOf(t, x.b);
-            if (have[s]) return; have[s] = 1;
-            var cat = String(x.cat || '').replace(/\s+/g, ' ').trim().slice(0, 30);
-            addCat(cat);
-            notes.push({ id: 'n' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7), t: t, b: String(x.b), ts: x.ts || Date.now(), c: x.c || null, cat: cat, im: (Array.isArray(x.im) ? x.im : []).filter(isImg).slice(0, 6) });
-            added++;
-        });
-        setJ(NK, notes); setJ(NM, meta); updateCounts();
-        say(added ? 'Đã nhập ' + added + ' ghi chú mới (bỏ qua ' + (list.length - added) + ' trùng)' : 'Không có ghi chú mới để nhập');
-    }
-    function importJson(text) {
-        var obj;
-        try { obj = JSON.parse(String(text).replace(/^\uFEFF/, '')); } catch (e) { say('File JSON không hợp lệ'); return; }
-        if (cur.kind === 'dict') {
-            var a = Array.isArray(obj) ? obj : (obj && obj.type === 'rhm-dict' ? obj.terms : null);
-            if (!Array.isArray(a)) { say('File này không phải Từ điển RHM'); return; }
-            mergeDict(a);
-        } else {
-            var b = Array.isArray(obj) ? obj : (obj && obj.type === 'rhm-notes' ? obj.notes : null);
-            if (!Array.isArray(b)) { say('File này không phải Sổ ghi chú RHM'); return; }
-            mergeNotes(b, obj && obj.cats);
-        }
-    }
-    function importHtml(html) {
-        if (cur.kind === 'dict') {
-            var a = fromWordDict(html);
-            if (!a.length) { say('Không tìm thấy bảng Từ điển RHM trong file'); return; }
-            mergeDict(a);
-        } else {
-            var b = fromWordNotes(html);
-            if (!b.length) { say('Không tìm thấy bảng Sổ ghi chú RHM trong file'); return; }
-            mergeNotes(b, null);
-        }
-    }
-    function importFile(file) {
-        if (!file) return;
-        var name = String(file.name || '').toLowerCase();
-        var fail = function () { say('Không đọc được file'); };
-        if (cur.fmt === 'json' || /\.json$/.test(name)) { file.text().then(importJson).catch(fail); return; }
-        if (/\.docx$/.test(name)) {
-            if (!window.mammoth) { say('Chưa tải được bộ đọc Word (cần mạng)'); return; }
-            file.arrayBuffer().then(function (ab) { return window.mammoth.convertToHtml({ arrayBuffer: ab }); })
-                .then(function (r) { importHtml(r.value); }).catch(fail);
-            return;
-        }
-        file.text().then(importHtml).catch(fail);
-    }
-    window.rhmTrPick = function (kind, fmt) {
-        cur.kind = kind; cur.fmt = fmt;
-        var f = $('rhm-tr-file');
-        f.accept = fmt === 'json' ? '.json,application/json' : '.docx,.doc,.html,.htm';
-        f.value = '';
-        f.click();
+    /* Lật trang: tạo tờ giấy, đổi nội dung ở 350ms (lúc tờ giấy nghiêng 90°), gỡ tờ giấy ở 720ms */
+    window.rhmFlip = function (book, dir, single, swap, done) {
+        var leaf = document.createElement('div');
+        leaf.className = 'bk3-leaf ' + (dir > 0 ? 'next' : 'prev') + (single ? ' one' : '');
+        book.classList.add('flip'); book.appendChild(leaf);
+        setTimeout(swap, 350);
+        setTimeout(function () { leaf.remove(); book.classList.remove('flip'); done(); }, 720);
     };
-    $('rhm-tr-file').addEventListener('change', function (e) {
-        var f = e.target.files && e.target.files[0];
-        e.target.value = '';
-        importFile(f);
-    });
-    updateCounts();
-})();
-</script>
-<script>
-/* Mức suy luận Gemini nằm trong card khóa Gemini (Cài đặt ngoài trang chủ và khung chat) */
-function aiProvRender() {
-    aiProvRenderBase();
-    rhmGemLevelsInto();
-}
-function rhmGemCfgLv() {
-    var c = { lv: 'low' };
-    try {
-        var s = JSON.parse(localStorage.getItem('gemini_cfg_v1') || 'null');
-        if (s && (s.lv === 'low' || s.lv === 'medium' || s.lv === 'high')) c.lv = s.lv;
-    } catch (e) {}
-    return c;
-}
-function rhmGemSet(k, v) {
-    var c = rhmGemCfgLv();
-    c[k] = v;
-    try { localStorage.setItem('gemini_cfg_v1', JSON.stringify(c)); } catch (e) {}
-    rhmGemPaint();
-}
-function rhmGemPaint() {
-    var c = rhmGemCfgLv();
-    document.querySelectorAll('[data-gl]').forEach(function (b) {
-        var on = b.getAttribute('data-gl') === c.lv;
-        b.classList.toggle('bg-indigo-600', on); b.classList.toggle('text-white', on); b.classList.toggle('border-indigo-600', on);
-        b.classList.toggle('bg-white', !on); b.classList.toggle('text-gray-700', !on); b.classList.toggle('border-gray-300', !on);
-    });
-}
-function rhmGemLevelsInto() {
-    var box = document.getElementById('ai-prov-cards');
-    if (!box || !box.firstElementChild) return;
-    var card = box.firstElementChild;
-    if (card.querySelector('[data-gl]')) { rhmGemPaint(); return; }
-    var btns = [['low', 'Thấp'], ['medium', 'Trung bình'], ['high', 'Cao']].map(function (x) {
-        return '<button type="button" data-gl="' + x[0] + '" onclick="rhmGemSet(\'lv\',\'' + x[0] + '\')" class="border rounded-xl px-2 py-1.5 text-sm font-bold">' + x[1] + '</button>';
-    }).join('');
-    card.insertAdjacentHTML('beforeend', '<div class="mt-3 pt-2 border-t border-amber-200"><div class="text-xs font-bold text-gray-900">Mức suy luận Gemini</div><div class="mt-2 grid grid-cols-3 gap-2">' + btns + '</div><p class="mt-1.5 text-[11px] text-gray-500">Áp dụng cho mọi tính năng gọi Gemini: chat, dịch, giảng bài, trắc nghiệm, tìm hiểu sâu, mục lục.</p></div>');
-    rhmGemPaint();
-}
-/* Gỡ khối Mức suy luận đặt riêng trong khung chat (đã chuyển vào card khóa Gemini) */
-(function () {
-    var panel = document.getElementById('ai-key-panel');
-    if (!panel) return;
-    Array.prototype.slice.call(panel.querySelectorAll('.font-bold')).forEach(function (el) {
-        if (/Mức suy luận Gemini/.test(el.textContent) && el.parentElement && el.parentElement.parentElement) {
-            el.parentElement.parentElement.removeChild(el.parentElement);
+    /* Số trang hiển thị: điện thoại luôn 1 trang (kể cả xoay ngang hoặc bật "trang web cho máy tính"), PC/máy tính bảng lớn 2 trang */
+    window.rhmPer = function () {
+        var coarse = false, small = false;
+        try { coarse = matchMedia('(pointer:coarse)').matches; small = Math.min(screen.width, screen.height) < 820; } catch (e) {}
+        return (window.innerWidth < 760 || (coarse && small)) ? 1 : 2;
+    };
+    /* Từ điển / Sổ ghi chú mở trên hộp chat: chặn mọi chạm lọt xuống nền phía sau */
+    var IDS = ['dict-modal', 'note-modal'], held = [];
+    var shown = function (m) { return !!m && !m.classList.contains('hidden'); };
+    function isolate(on) {
+        if (!on) { held.forEach(function (s) { s.removeAttribute('inert'); }); held = []; return; }
+        if (held.length) return;
+        var m = IDS.map(function (i) { return document.getElementById(i); }).filter(shown)[0]; if (!m) return;
+        var n = m;
+        while (n && n !== document.body && n.parentElement) {
+            Array.prototype.forEach.call(n.parentElement.children, function (s) {
+                if (s === n || /^(SCRIPT|STYLE|LINK|META)$/.test(s.tagName) || s.hasAttribute('inert')) return;
+                if (s.id === 'custom-toast' || s.id === 'nt-selbtn' || (s.querySelector && s.querySelector('#ai-gate-input'))) return;
+                s.setAttribute('inert', ''); held.push(s);
+            });
+            n = n.parentElement;
         }
-    });
+    }
+    function initGuard() {
+        IDS.forEach(function (id) {
+            var m = document.getElementById(id); if (!m) return;
+            var was = shown(m);
+            new MutationObserver(function () {
+                var now = shown(m);
+                if (now && !was) { m._openAt = Date.now(); isolate(true); }
+                else if (!now && was && !IDS.some(function (i) { return shown(document.getElementById(i)); })) isolate(false);
+                was = now;
+            }).observe(m, { attributes: true, attributeFilter: ['class'] });
+            ['click', 'mousedown', 'mouseup', 'pointerdown', 'pointerup', 'touchstart', 'touchend'].forEach(function (ev) {
+                m.addEventListener(ev, function (e) {   /* vừa mở: bỏ qua cú chạm "ma" đang dở dang */
+                    if (Date.now() - (m._openAt || 0) < 450) { if (e.cancelable) e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation(); }
+                }, true);
+                m.addEventListener(ev, function (e) { e.stopPropagation(); });   /* không cho sự kiện nổi bọt ra nền */
+            });
+        });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initGuard); else initGuard();
+    /* Cài đặt trang chủ */
+    window.openHomeSettings = function () {
+        var m = document.getElementById('home-settings-modal'); if (!m) return;
+        document.querySelectorAll('body > *').forEach(function (s) {
+            if (s === m || s.hasAttribute('inert') || /^(SCRIPT|STYLE|LINK|META)$/.test(s.tagName) || s.id === 'custom-toast') return;
+            s.setAttribute('inert', ''); s.setAttribute('data-hs-inert', '1');
+        });
+        m.classList.remove('hidden');
+    };
+    window.closeHomeSettings = function () {
+        var m = document.getElementById('home-settings-modal'); if (m) m.classList.add('hidden');
+        document.querySelectorAll('[data-hs-inert]').forEach(function (s) { s.removeAttribute('inert'); s.removeAttribute('data-hs-inert'); });
+    };
+    window.homeSettingsGo = function (fn) {
+        window.closeHomeSettings();
+        var MAP = { openSuggestQuestionModal: 'suggest-question-modal', openAppFeedbackModal: 'app-feedback-modal', openProgressModal: 'progress-modal' };
+        setTimeout(function () {
+            try { if (typeof window[fn] === 'function') window[fn](); } catch (e) { console.warn(e); }
+            var mm = MAP[fn] && document.getElementById(MAP[fn]);
+            if (!mm || mm.classList.contains('hidden')) return;
+            var mo = new MutationObserver(function () {
+                if (!mm.classList.contains('hidden')) return;
+                mo.disconnect();
+                setTimeout(function () { window.openHomeSettings(); }, 80);
+            });
+            mo.observe(mm, { attributes: true, attributeFilter: ['class'] });
+        }, 60);
+    };
+    (function () { var m = document.getElementById('home-settings-modal'); if (m) ['click', 'mousedown', 'mouseup', 'pointerdown', 'pointerup', 'touchstart', 'touchend'].forEach(function (ev) { m.addEventListener(ev, function (e) { e.stopPropagation(); }); }); })();
+
+    /* Cửa sổ khóa API đầy đủ: các thẻ nhà cung cấp của box chat được DI CHUYỂN sang cửa sổ này (không sao chép),
+       nên mọi nút (lưu, dán, xóa khóa, chọn nhà cung cấp, model) dùng đúng hàm gốc. Đóng cửa sổ thì trả thẻ về chỗ cũ. */
+    window.hsProvHome = null;
+    function hsMoveBack() {
+        var h = window.hsProvHome; if (!h) return;
+        var put = function (el, par, nx) { if (!el || !par) return; par.insertBefore(el, nx && nx.parentNode === par ? nx : null); };
+        put(h.lab, h.labParent, h.labNext); put(h.box, h.boxParent, h.boxNext);
+        window.hsProvHome = null;
+    }
+    window.hsOpenKeys = function () {
+        var box = document.getElementById('ai-prov-cards'), au = document.getElementById('ai-auto-switch');
+        var lab = au ? au.closest('label') : null, host = document.getElementById('hs-prov-host'), m = document.getElementById('hs-keys-modal');
+        if (!box || !host || !m) return;
+        window.closeHomeSettings(); hsMoveBack();
+        window.hsProvHome = { box: box, boxParent: box.parentNode, boxNext: box.nextSibling, lab: lab, labParent: lab ? lab.parentNode : null, labNext: lab ? lab.nextSibling : null };
+        if (lab) host.appendChild(lab);
+        host.appendChild(box);
+        aiProvRender();
+        m.style.display = 'flex';
+        hsLock(m);
+    };
+    window.hsCloseKeys = function () {
+        var m = document.getElementById('hs-keys-modal'); if (m) m.style.display = 'none';
+        hsMoveBack(); hsUnlock();
+        window.openHomeSettings();
+    };
+    window.hsLock = function (m) {
+        document.querySelectorAll('body > *').forEach(function (s) {
+            if (s === m || s.hasAttribute('inert') || /^(SCRIPT|STYLE|LINK|META)$/.test(s.tagName) || s.id === 'custom-toast') return;
+            s.setAttribute('inert', ''); s.setAttribute('data-hs-inert', '1');
+        });
+    };
+    window.hsUnlock = function () {
+        document.querySelectorAll('[data-hs-inert]').forEach(function (s) { s.removeAttribute('inert'); s.removeAttribute('data-hs-inert'); });
+    };
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { var k = document.getElementById('hs-keys-modal'); if (k && k.style.display !== 'none') window.hsCloseKeys(); } });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') window.closeHomeSettings(); });
 })();
 </script>
+
 <style>
 html.rhm-modal-open, html.rhm-modal-open body { overflow: hidden !important; overscroll-behavior: none !important; }
 </style>
@@ -18078,7 +17927,363 @@ function viSelText(range) {
     } catch (e) { return String(range.toString()).trim(); }
 }
 </script>
-</body>
+<style>
+.hs-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;align-items:stretch}
+@media (min-width:640px){.hs-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr)}}
+.hs-left{min-width:0}
+.hs-right{display:flex;flex-direction:column;gap:12px;min-width:0}
+.hs-box{flex:1 1 0;display:flex;flex-direction:column;gap:8px;border:1px solid #e9d5ff;border-radius:14px;padding:12px;background:#faf5ff;min-width:0}
+.hs-box[data-k=notes]{background:#f0fdfa;border-color:#99f6e4}
+.hs-bh{display:flex;align-items:center;gap:10px}
+.hs-ic{font-size:24px;line-height:1}
+.hs-tt{font-weight:800;color:#1f2937;font-size:15px}
+.hs-cn{font-size:12px;color:#6b7280}
+.hs-acts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.hs-b{display:block;font-size:13px;font-weight:700;padding:8px 10px;border-radius:10px;border:1px solid #c4b5fd;background:#fff;color:#5b21b6;cursor:pointer;text-align:center;line-height:1.3}
+.hs-b:hover{background:#f5f3ff}
+.hs-box[data-k=notes] .hs-b{border-color:#5eead4;color:#0f766e}
+.hs-box[data-k=notes] .hs-b:hover{background:#ccfbf1}
+.hs-imp{background:#5b21b6;color:#fff;border-color:#5b21b6}
+.hs-imp:hover{background:#4c1d95}
+.hs-box[data-k=notes] .hs-imp{background:#0f766e;border-color:#0f766e}
+.hs-box[data-k=notes] .hs-imp:hover{background:#115e59}
+.hs-hint{font-size:11.5px;color:#6b7280;line-height:1.45}
+.rd-nwx{flex:none;width:28px;height:28px;border:0;border-radius:999px;background:#e5e7eb;color:#374151;font-weight:900;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;margin-left:4px}
+.rd-nwx:hover{background:#d1d5db}
+</style>
+<script>
+(function () {
+  'use strict';
+  var DK = 'quizApp_rhm_dict_v1', NK = 'quizApp_rhm_notes_v1', NMK = 'quizApp_rhm_notes_meta_v1';
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  var toastM = function (m) { try { showToast(m); } catch (e) {} };
+  var fold = function (s) { return String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[đĐ]/g, 'd').toLowerCase(); };
+  var rdGet = function (k) { try { var v = JSON.parse(kv.getItem(k) || '[]'); return Array.isArray(v) ? v : []; } catch (e) { return []; } };
+  var rdSet = function (k, v) { kv.setItem(k, JSON.stringify(v)); };
+  var metaGet = function () { try { return JSON.parse(kv.getItem(NMK) || '{}') || {}; } catch (e) { return {}; } };
+  var metaSet = function (o) { kv.setItem(NMK, JSON.stringify(o)); };
+  var stamp = function () { return new Date().toISOString().slice(0, 10).replace(/-/g, ''); };
+  var imgsOK = function (a) { return (Array.isArray(a) ? a : []).filter(function (x) { return typeof x === 'string' && /^data:image\//.test(x); }).slice(0, 6); };
+  var saveBlob = function (text, name, type) {
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([text], { type: type })); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+  };
+  var dkey = function (en, p) {
+    return String(en).normalize('NFKC').toLowerCase().trim().replace(/[.,;:]+$/, '') + '|' + String(p || '').toLowerCase().replace(/[^a-z, .]/g, '').replace(/\s+/g, ' ').trim();
+  };
+
+  /* ---------- Word (.doc dạng HTML, Word mở được) ---------- */
+  var docHead = function (title) {
+    return '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">' +
+      '<head><meta charset="utf-8"><title>' + esc(title) + '</title><style>' +
+      'body{font-family:Calibri,Arial,sans-serif;font-size:11pt;color:#1f1d2b}' +
+      'h1{font-family:Georgia,serif;color:#5b21b6;text-align:center;font-size:20pt;margin:0}' +
+      'p.sub{text-align:center;color:#6b7280;font-size:10pt;margin:2pt 0 14pt}' +
+      'h2{font-family:Georgia,serif;color:#0f766e;font-size:14pt;margin:16pt 0 2pt;padding-bottom:2pt;border-bottom:1pt solid #5eead4}' +
+      'p.meta{color:#6b7280;font-size:9.5pt;font-style:italic;margin:0 0 6pt}' +
+      'p{margin:0 0 5pt;line-height:135%}' +
+      'img{max-width:200pt;max-height:150pt;margin:4pt 4pt 2pt 0;border:0.5pt solid #ddd6fe}' +
+      '</style></head><body>';
+  };
+  var viH = function (s) { return esc(s).replace(/\n/g, '<br>'); };
+  var imgH = function (a) { return imgsOK(a).map(function (s) { return '<img src="' + s + '" alt="">'; }).join(''); };
+  var th = '<th bgcolor="#5b21b6" style="background:#5b21b6;color:#ffffff;text-align:left;padding:5pt">';
+
+  function exportDictWord() {
+    var T = rdGet(DK); if (!T.length) { toastM('Từ điển đang trống'); return; }
+    var rows = T.map(function (t, k) {
+      return '<tr' + (k % 2 ? ' bgcolor="#faf5ff"' : '') + '><td style="font-weight:bold;color:#1c1830">' + esc(t.en) + '</td>' +
+        '<td style="font-style:italic;color:#7c3aed">' + esc(t.p || '') + '</td><td>' + viH(t.vi) + '</td>' +
+        '<td>' + (t.i ? viH(t.i) : '') + (imgH(t.im) ? '<div>' + imgH(t.im) + '</div>' : '') + '</td></tr>';
+    }).join('');
+    var html = docHead('Từ điển thuật ngữ RHM') + '<h1>Từ điển thuật ngữ RHM</h1>' +
+      '<p class="sub">Tổng cộng ' + T.length + ' thuật ngữ · xuất ngày ' + new Date().toLocaleDateString('vi-VN') + '</p>' +
+      '<table border="1" cellspacing="0" cellpadding="5" width="100%" style="border-collapse:collapse;border:1px solid #ddd6fe">' +
+      '<tr>' + th + 'Tiếng Anh</th>' + th + 'Từ loại</th>' + th + 'Tiếng Việt</th>' + th + 'Thông tin</th></tr>' + rows + '</table></body></html>';
+    saveBlob('\ufeff' + html, 'tu-dien-rhm_' + stamp() + '.doc', 'application/msword');
+    toastM('Đã xuất Word từ điển');
+  }
+  function bodyHtml(b, im) {
+    var out = [], arr = imgsOK(im), used = [];
+    String(b || '').split('\n').forEach(function (line) {
+      if (!line.trim()) return;
+      var h = '';
+      line.split(/(\[\[img:\d+\]\])/).forEach(function (p) {
+        var m = p.match(/^\[\[img:(\d+)\]\]$/);
+        if (m) { used.push(+m[1]); var s = arr[+m[1]]; if (s) h += '<img src="' + s + '" alt="">'; }
+        else if (p) h += esc(p);
+      });
+      if (h) out.push('<p>' + h + '</p>');
+    });
+    arr.forEach(function (s, k) { if (used.indexOf(k) < 0) out.push('<p><img src="' + s + '" alt=""></p>'); });
+    return out.join('');
+  }
+  function exportNotesWord() {
+    var N = rdGet(NK); if (!N.length) { toastM('Sổ ghi chú đang trống'); return; }
+    var body = N.slice().sort(function (a, b) { return (a.cat || '').localeCompare(b.cat || '', 'vi') || (b.ts || 0) - (a.ts || 0); }).map(function (n) {
+      return '<h2>' + esc(n.t || 'Ghi chú') + '</h2><p class="meta">Phân mục: ' + esc(n.cat || 'Chưa phân mục') +
+        ' | Tạo lúc: ' + esc(new Date(n.ts || 0).toLocaleString('vi-VN')) + '</p>' + bodyHtml(n.b, n.im);
+    }).join('');
+    var html = docHead('Sổ ghi chú RHM') + '<h1>Sổ ghi chú RHM</h1><p class="sub">Tổng cộng ' + N.length +
+      ' ghi chú · xuất ngày ' + new Date().toLocaleDateString('vi-VN') + '</p>' + body + '</body></html>';
+    saveBlob('\ufeff' + html, 'so-ghi-chu-rhm_' + stamp() + '.doc', 'application/msword');
+    toastM('Đã xuất Word sổ ghi chú');
+  }
+
+  /* ---------- JSON ---------- */
+  function exportDictJSON() {
+    var T = rdGet(DK); if (!T.length) { toastM('Từ điển đang trống'); return; }
+    var out = { app: 'Trac Nghiem RHM', type: 'tu-dien-rhm', v: 1, count: T.length, terms: T.map(function (t) {
+      return { en: t.en, p: t.p || '', vi: t.vi, i: t.i || '', s: t.s ? 1 : 0, u: t.u ? 1 : 0, ts: t.ts || 0, im: imgsOK(t.im) };
+    }) };
+    saveBlob(JSON.stringify(out, null, 1), 'tu-dien-rhm_' + stamp() + '.json', 'application/json');
+    toastM('Đã xuất JSON từ điển');
+  }
+  function exportNotesJSON() {
+    var N = rdGet(NK); if (!N.length) { toastM('Sổ ghi chú đang trống'); return; }
+    var M = metaGet();
+    var out = { app: 'Trac Nghiem RHM', type: 'so-ghi-chu-rhm', v: 1, count: N.length, cats: M.cats || [], notes: N.map(function (n) {
+      return { id: n.id, t: n.t, b: n.b, ts: n.ts || 0, c: n.c || null, cat: n.cat || '', im: imgsOK(n.im), tu: n.tu ? 1 : 0, cu: n.cu ? 1 : 0 };
+    }) };
+    saveBlob(JSON.stringify(out, null, 1), 'so-ghi-chu-rhm_' + stamp() + '.json', 'application/json');
+    toastM('Đã xuất JSON sổ ghi chú');
+  }
+
+  /* ---------- Đọc file nhập ---------- */
+  function cellText(c) {
+    var k = c.cloneNode(true);
+    k.querySelectorAll('img').forEach(function (x) { x.remove(); });
+    k.querySelectorAll('br').forEach(function (b) { b.replaceWith('\n'); });
+    k.querySelectorAll('p,div,li').forEach(function (p) { p.after('\n'); });
+    return k.textContent.split('\n').map(function (s) { return s.replace(/\s+/g, ' ').trim(); }).filter(Boolean).join('\n');
+  }
+  function tableTerms(doc) {
+    var out = [];
+    doc.querySelectorAll('table').forEach(function (tb) {
+      var map = null;
+      tb.querySelectorAll('tr').forEach(function (tr) {
+        var cells = Array.prototype.filter.call(tr.children, function (c) { return c.tagName === 'TD' || c.tagName === 'TH'; });
+        if (!cells.length) return;
+        var heads = cells.map(function (c) { return fold(cellText(c)); });
+        if (heads.some(function (h) { return /tieng anh|english/.test(h); }) && heads.some(function (h) { return /tieng viet|nghia|vietnam/.test(h); })) {
+          map = {};
+          heads.forEach(function (h, i) {
+            if (/tieng anh|english/.test(h)) map.en = i;
+            else if (/loai|pos/.test(h)) map.p = i;
+            else if (/tieng viet|nghia|vietnam/.test(h)) map.vi = i;
+            else if (/thong tin|info|giai thich/.test(h)) map.i = i;
+          });
+          return;
+        }
+        var m = map || { en: 0, p: 1, vi: 2, i: 3 };
+        var at = function (k) { return m[k] != null ? cells[m[k]] : null; };
+        var en = at('en') ? cellText(at('en')) : '', vi = at('vi') ? cellText(at('vi')) : '';
+        if (!en || !vi) return;
+        var im = [];
+        cells.forEach(function (c) { c.querySelectorAll('img').forEach(function (x) { var s = x.getAttribute('src') || ''; if (/^data:image\//.test(s)) im.push(s); }); });
+        out.push({ en: en.replace(/\n/g, ' '), p: at('p') ? cellText(at('p')).replace(/\n/g, ' ') : '', vi: vi,
+          i: at('i') ? cellText(at('i')) : '', s: 0, u: 1, ts: Date.now(), im: im.slice(0, 6) });
+      });
+    });
+    return out;
+  }
+  function parseDictJSON(o) {
+    var a = Array.isArray(o) ? o : (o.terms || []);
+    return a.map(function (t) {
+      return { en: String(t.en || '').trim(), p: String(t.p || '').trim(), vi: String(t.vi || '').trim(), i: String(t.i || ''),
+        s: t.s ? 1 : 0, u: 1, ts: t.ts || Date.now(), im: imgsOK(t.im) };
+    }).filter(function (t) { return t.en && t.vi; });
+  }
+  function parseNotesJSON(o) {
+    var a = Array.isArray(o) ? o : (o.notes || []);
+    return a.map(function (n) {
+      return { id: n.id ? String(n.id) : '', t: String(n.t || '').trim(), b: String(n.b || ''), ts: n.ts || 0, c: n.c || null,
+        cat: String(n.cat || '').trim(), im: imgsOK(n.im), tu: n.tu ? 1 : 0, cu: n.cu ? 1 : 0 };
+    }).filter(function (n) { return n.b.trim() || n.im.length; });
+  }
+  function inlineMark(el, arr) {
+    var s = '';
+    el.childNodes.forEach(function (c) {
+      if (c.nodeType === 3) { s += c.data; return; }
+      if (c.nodeType !== 1) return;
+      if (c.tagName === 'BR') { s += '\n'; return; }
+      if (c.tagName === 'IMG') {
+        var src = c.getAttribute('src') || '';
+        if (/^data:image\//.test(src)) { arr.push(src); s += '[[img:' + (arr.length - 1) + ']]'; }
+        return;
+      }
+      s += inlineMark(c, arr);
+    });
+    return s;
+  }
+  function notesFromDoc(doc) {
+    var out = [], cur = null;
+    Array.prototype.forEach.call(doc.body.children, function (el) {
+      var tg = el.tagName;
+      if (tg === 'H2') {
+        if (cur) out.push(cur);
+        cur = { t: cellText(el).replace(/\n/g, ' '), cat: '', b: [], im: [], ts: Date.now() };
+        return;
+      }
+      if (!cur || tg === 'TABLE') return;
+      var txt = cellText(el);
+      if (!txt && !el.querySelector('img')) return;
+      var f = fold(txt);
+      if (f.indexOf('phan muc:') === 0) {
+        var c = txt.slice(txt.indexOf(':') + 1).split('|')[0].trim();
+        cur.cat = /^chưa phân mục$/i.test(c) ? '' : c;
+        return;
+      }
+      if (f.indexOf('tao luc:') === 0) return;
+      var line = inlineMark(el, cur.im).replace(/[ \t]+/g, ' ').replace(/ *\n */g, '\n').trim();
+      if (line) cur.b.push(line);
+    });
+    if (cur) out.push(cur);
+    return out.filter(function (n) { return n.b.length || n.im.length; }).map(function (n) {
+      n.b = n.b.join('\n'); n.im = imgsOK(n.im); return n;
+    });
+  }
+  function mergeDict(list) {
+    var T = rdGet(DK), add = 0, upd = 0;
+    list.forEach(function (x) {
+      var k = dkey(x.en, x.p), ex = null;
+      T.some(function (t) { if (dkey(t.en, t.p) === k) { ex = t; return true; } return false; });
+      if (ex) {
+        var ch = 0;
+        if (x.i && !ex.i) { ex.i = x.i; ch = 1; }
+        if (x.im.length && !(ex.im || []).length) { ex.im = x.im; ch = 1; }
+        if (x.s && !ex.s) { ex.s = 1; ch = 1; }
+        if (ch) upd++;
+        return;
+      }
+      T.push({ en: x.en, vi: x.vi, p: x.p, i: x.i || '', s: x.s ? 1 : 0, u: 1, ts: x.ts || Date.now(), im: x.im || [], n: 0 });
+      add++;
+    });
+    T.sort(function (a, b) { return a.en.localeCompare(b.en, 'en', { sensitivity: 'base' }); });
+    rdSet(DK, T);
+    return { add: add, upd: upd };
+  }
+  function mergeNotes(list, fromJson) {
+    var N = rdGet(NK), ids = {}, add = 0, skip = 0, meta = metaGet(), catSet = (meta.cats || []).slice();
+    N.forEach(function (n) { ids[n.id] = 1; });
+    list.forEach(function (x) {
+      var body = String(x.b || '').trim();
+      if (!body && !(x.im && x.im.length)) { skip++; return; }
+      var t = String(x.t || '').trim() || body.split('\n')[0].slice(0, 48);
+      if (fromJson && x.id && ids[x.id]) { skip++; return; }
+      var dup = N.some(function (n) { return fold(n.t) === fold(t) && String(n.b).trim() === body; });
+      if (dup) { skip++; return; }
+      var id = (fromJson && x.id && !ids[x.id]) ? String(x.id) : 'n' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+      ids[id] = 1;
+      var cat = String(x.cat || '').trim();
+      if (cat && catSet.indexOf(cat) < 0) catSet.push(cat);
+      N.push({ id: id, t: t, b: body, ts: x.ts || Date.now(), c: x.c || null, cat: cat, im: imgsOK(x.im), tu: x.tu ? 1 : 0, cu: x.cu ? 1 : 0 });
+      add++;
+    });
+    rdSet(NK, N);
+    meta.cats = catSet; metaSet(meta);
+    return { add: add, skip: skip };
+  }
+  function refreshCounts() {
+    var d = rdGet(DK).length, n = rdGet(NK).length;
+    var a = $('hs-cnt-dict'), b = $('hs-cnt-notes');
+    if (a) a.textContent = d + ' thuật ngữ';
+    if (b) b.textContent = n + ' ghi chú';
+    var x = $('rhm-dict-count'), y = $('rhm-note-count');
+    if (x) x.textContent = String(d);
+    if (y) y.textContent = String(n);
+  }
+  function importFile(kind, file) {
+    var nm = (file.name || '').toLowerCase(), isJson = /\.json$/.test(nm);
+    var p = isJson ? file.text()
+      : (/\.docx$/.test(nm) ? file.arrayBuffer().then(function (ab) { return mammoth.convertToHtml({ arrayBuffer: ab }); }).then(function (r) { return r.value; })
+        : file.text());
+    return Promise.resolve(p).then(function (data) {
+      var list;
+      if (isJson) {
+        var txt = String(data).replace(/^\uFEFF/, ''), o = JSON.parse(txt);
+        list = kind === 'dict' ? parseDictJSON(Array.isArray(o) ? o : o) : parseNotesJSON(o);
+      } else {
+        var doc = new DOMParser().parseFromString(String(data).replace(/^\uFEFF/, ''), 'text/html');
+        list = kind === 'dict' ? tableTerms(doc) : notesFromDoc(doc);
+      }
+      if (!list || !list.length) { toastM('Không tìm thấy dữ liệu hợp lệ trong file'); return; }
+      var r = kind === 'dict' ? mergeDict(list) : mergeNotes(list, isJson);
+      refreshCounts();
+      toastM('✅ Đã nhập: thêm ' + r.add + (kind === 'dict' ? ', bổ sung ' + r.upd : ', bỏ qua ' + r.skip) + ' mục');
+    }).catch(function (e) { toastM('❌ Không đọc được file: ' + (e && e.message ? e.message : e)); });
+  }
+
+  /* ---------- Khung Cài đặt: cột phải ---------- */
+  function boxHTML(k) {
+    var dict = k === 'dict';
+    return '<div class="hs-box" data-k="' + k + '">' +
+      '<div class="hs-bh"><span class="hs-ic">' + (dict ? '📖' : '📒') + '</span><div><div class="hs-tt">' +
+      (dict ? 'Từ điển thuật ngữ RHM' : 'Sổ ghi chú RHM') + '</div><div class="hs-cn" id="hs-cnt-' + (dict ? 'dict' : 'notes') + '"></div></div></div>' +
+      '<div class="hs-acts"><button type="button" class="hs-b" data-x="' + k + '-word">⬇ Xuất Word</button>' +
+      '<button type="button" class="hs-b" data-x="' + k + '-json">⬇ Xuất JSON</button></div>' +
+      '<label class="hs-b hs-imp">⬆ Nhập từ Word hoặc JSON<input type="file" accept=".json,.docx,.doc,.html,.htm" data-x="' + k + '-imp" hidden></label>' +
+      '<div class="hs-hint">' + (dict
+        ? 'Word: bảng có các cột Tiếng Anh, Từ loại, Tiếng Việt, Thông tin. JSON giữ đủ ảnh và trạng thái đã lưu.'
+        : 'Word: mỗi ghi chú là một tiêu đề (Heading 2), kèm dòng “Phân mục” và nội dung. JSON giữ đủ ảnh và phân mục.') +
+      ' Nhập chỉ thêm mục mới, không xóa dữ liệu hiện có.</div></div>';
+  }
+  function enhance() {
+    var m = $('home-settings-modal'); if (!m || m.getAttribute('data-enh')) return;
+    var box = m.firstElementChild; if (!box) return;
+    var left = box.querySelector('.flex.flex-col.gap-2'); if (!left) return;
+    m.setAttribute('data-enh', '1');
+    box.style.maxWidth = 'min(880px,96vw)';
+    var grid = document.createElement('div'); grid.className = 'hs-grid';
+    var lw = document.createElement('div'); lw.className = 'hs-left';
+    left.parentNode.insertBefore(grid, left); lw.appendChild(left); grid.appendChild(lw);
+    var rt = document.createElement('div'); rt.className = 'hs-right';
+    rt.innerHTML = boxHTML('dict') + boxHTML('notes');
+    grid.appendChild(rt);
+    rt.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-x]'); if (!b || b.tagName === 'INPUT') return;
+      var x = b.getAttribute('data-x');
+      if (x === 'dict-word') exportDictWord();
+      else if (x === 'dict-json') exportDictJSON();
+      else if (x === 'notes-word') exportNotesWord();
+      else if (x === 'notes-json') exportNotesJSON();
+    });
+    rt.addEventListener('change', function (e) {
+      var inp = e.target; if (!inp.matches || !inp.matches('input[data-x]')) return;
+      var f = inp.files && inp.files[0], k = inp.getAttribute('data-x').indexOf('dict') === 0 ? 'dict' : 'notes';
+      inp.value = ''; if (f) importFile(k, f);
+    });
+  }
+  var _ohs = window.openHomeSettings;
+  window.openHomeSettings = function () {
+    try { enhance(); refreshCounts(); } catch (e) { console.warn(e); }
+    return _ohs.apply(this, arguments);
+  };
+
+  /* ---------- Mức suy luận Gemini: chuyển vào thẻ khóa Gemini ---------- */
+  window.gemLvBlock = function () {
+    var L = [['low', 'Thấp'], ['medium', 'Trung bình'], ['high', 'Cao']];
+    return '<div class="mt-2 rounded-xl border border-indigo-200 bg-white p-2.5"><div class="text-xs font-bold text-gray-800">Mức suy luận Gemini</div>' +
+      '<div class="mt-1.5 grid grid-cols-3 gap-2">' + L.map(function (x) {
+        return '<button type="button" data-gl="' + x[0] + '" onclick="rhmGemSet(\'lv\',\'' + x[0] + '\')" class="border rounded-xl px-2 py-1.5 text-xs font-bold">' + x[1] + '</button>';
+      }).join('') + '</div>' +
+      '<p class="mt-1.5 text-[11px] text-gray-500">Áp dụng cho mọi tính năng dùng Gemini (chat, dịch, trắc nghiệm, mục lục, tìm hiểu sâu). Mức càng cao trả lời càng kỹ nhưng chậm hơn.</p></div>';
+  };
+  var _apr = window.aiProvRender;
+  window.aiProvRender = function () {
+    var r = _apr.apply(this, arguments);
+    try { rhmGemPaint(); } catch (e) {}
+    return r;
+  };
+  document.querySelectorAll('#ai-key-panel [data-gl]').forEach(function (b) {
+    var c = b.closest('.rounded-2xl');
+    if (c && c.parentElement && c.parentElement.id === 'ai-key-panel') c.remove();
+  });
+})();
+</script></body>
 <style>
 #note-modal .rd-book, #note-modal .rd-pg { background: #fdf8ec; }
 #note-modal .rd-body.nt-scroll { overflow-y: auto; overscroll-behavior: contain; touch-action: pan-y; -webkit-overflow-scrolling: touch; }
