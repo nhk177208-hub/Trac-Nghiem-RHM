@@ -1326,6 +1326,11 @@
                         <button onclick="openRhmDict()" class="ha-badge text-sm bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-bold py-1.5 px-3.5 rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5" title="Từ điển thuật ngữ RHM — tự thêm khi bạn dịch trong hộp chat đọc sách">
                             📖 Từ Điển RHM <span id="rhm-dict-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span>
                         </button>
+
+                        <!-- NÚT SỔ GHI CHÚ RHM -->
+                        <button onclick="openRhmNote()" class="ha-badge text-sm text-white font-bold py-1.5 px-3.5 rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5" style="background:linear-gradient(90deg,#0d9488,#059669)" title="Sổ ghi chú — lưu từ các bong bóng chat AI">
+                            📒 Sổ Ghi Chú <span id="rhm-note-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span>
+                        </button>
                         <!-- NÚT SAO LƯU / KHÔI PHỤC TIẾN ĐỘ -->
                         <button onclick="openProgressModal()" class="text-sm bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold py-1.5 px-3 rounded-xl border border-indigo-300 transition-colors flex items-center shadow-sm" title="Nhập hoặc Xuất toàn bộ tiến độ làm bài, huy hiệu, sao hy vọng và điểm">
                             🔄 Nhập / Xuất Tiến Độ
@@ -1612,8 +1617,28 @@
                 <div id="rd-tabR" class="rd-tabs R"></div>
             </div>
             <div id="rd-pop" class="rd-pop hidden"></div>
-            <div id="rd-tip" class="rd-tip hidden"></div>
+            <div id="rd-tip" class="rd-tip hidden overflow-y-auto"></div>
             <div id="rd-rv" class="rv hidden"></div>
+        </div>
+    </div>
+
+    <!-- MODAL: SỔ GHI CHÚ RHM -->
+    <div id="note-modal" class="fixed inset-0 bg-black bg-opacity-60 hidden flex items-center justify-center p-2 z-50">
+        <div class="rd-wrap">
+            <button type="button" class="rd-x" data-act="close" title="Đóng">✕</button>
+            <div class="rd-rib">
+                <button type="button" class="rd-rb" id="nt-rb-search" data-act="rb-search" title="Tìm ghi chú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+            </div>
+            <div class="rd-row0">
+                <div id="nt-book" class="rd-book">
+                    <div id="nt-L" class="rd-pg rd-L"></div>
+                    <div id="nt-R" class="rd-pg rd-R"></div>
+                    <div class="rd-spine"></div>
+                    <button type="button" id="nt-prev" class="rd-nav rd-prev dis" data-act="prev" title="Trang trước"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H4M10 6l-6 6 6 6"/></svg></button>
+                    <button type="button" id="nt-next" class="rd-nav rd-next" data-act="next" title="Trang sau"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg></button>
+                </div>
+            </div>
+            <div id="nt-pop" class="rd-pop hidden overflow-y-auto"></div>
         </div>
     </div>
 
@@ -2375,7 +2400,7 @@
                 'add-question-modal', 'exam-create-modal', 'report-error-modal',
                 'folder-modal', 'navigator-modal', 'view-quiz-modal',
                 'bookmarked-modal', 'blocked-modal', 'storage-modal',
-                'image-lightbox-modal', 'dev-password-modal', 'dict-modal'
+                'image-lightbox-modal', 'dev-password-modal', 'dict-modal', 'note-modal'
             ];
 
             modalIds.forEach(id => {
@@ -9710,7 +9735,7 @@ async function bkRunTr(text, title) {
         for (let i = 0; i < n; i++) {
             const label = (title ? title + ' · ' : '') + (n > 1 ? 'Phần ' + (i + 1) + '/' + n : 'Bản dịch');
             const bubble = aiAddMsg('ai', '⏳ Đang dịch ' + label + '…');
-            bubble.dataset.bkRun = run;
+            bubble.dataset.bkRun = run; try { bubble.dataset.ntPage = window.ntBookPage ? window.ntBookPage() : ''; } catch (e) {}
             if (!first) first = bubble;
             aiScrollToTop(bubble, true);
             const res = await bkCallTr(parts[i]);
@@ -14058,7 +14083,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     }
     function aiVoiceSet(v) { try { if (v) localStorage.setItem('ai_tts_voice', v); else localStorage.removeItem('ai_tts_voice'); } catch (e) {} aiVoiceTest(); }
     try { if ('speechSynthesis' in window) window.speechSynthesis.addEventListener('voiceschanged', aiVoiceRender); } catch (e) {}
-    const AI_TTS_SKIP = '.bk-tr-head,.bk-bi-hd,.ai-actrow,.ai-ttsbar,.ai-refbar,.ai-imgwrap,.ai-liverefs,.ai-dr-refs,.ai-dr-note,.ai-cite,img,script,style';
+    const AI_TTS_SKIP = '.bk-tr-head,.bk-bi-hd,.ai-actrow,.ai-ttsbar,.ai-refbar,.ai-imgwrap,.ai-liverefs,.ai-dr-refs,.ai-dr-note,.ai-cite,.nt-savebar,img,script,style';
     function aiTtsMap(root) {   // gom chữ của bong bóng (bỏ nút, link dẫn, ảnh) thành 1 chuỗi + bảng vị trí từng text node
         let flat = ''; const segs = [];
         (function walk(n) {
@@ -16461,22 +16486,24 @@ window.isIOSDevice = function () {
     const viHTML = s => String(s || '').split('\n').map(x => esc(capVi(x))).join('<br>');
     const cleanPos = s => String(s || '').toLowerCase().replace(/[^a-z, .]/g, '').replace(/\s+/g, ' ').trim().slice(0, 16);
     const cleanIm = a => (Array.isArray(a) ? a : []).filter(x => typeof x === 'string' && /^data:image\//.test(x)).slice(0, 6);
+    const tk = (en, p) => nk(en) + '|' + cleanPos(p);
 
     /* ---------- dữ liệu ---------- */
     function sget() { try { return typeof kv !== 'undefined' ? kv.getItem(KEY) : localStorage.getItem(KEY); } catch (e) { return null; } }
     function sset(v) { try { if (typeof kv !== 'undefined') kv.setItem(KEY, v); else localStorage.setItem(KEY, v); } catch (e) {} }
-    function sortTerms() { rd.terms.sort((a, b) => a.en.localeCompare(b.en, 'en', { sensitivity: 'base' }) || a.en.localeCompare(b.en)); }
+    function sortTerms() { rd.terms.sort((a, b) => a.en.localeCompare(b.en, 'en', { sensitivity: 'base' }) || a.en.localeCompare(b.en) || String(a.p || '').localeCompare(String(b.p || ''))); }
     function parse() {
         let a = []; try { a = JSON.parse(sget() || '[]'); } catch (e) {}
-        return (Array.isArray(a) ? a : []).filter(x => x && x.en && x.vi && letterOf(x.en)).map(x => ({ en: clean(x.en), vi: cleanVi(x.vi), p: cleanPos(x.p), im: cleanIm(x.im), ts: x.ts || 0, u: x.u ? 1 : 0, i: x.i ? String(x.i) : '', s: x.s ? 1 : 0, n: x.n ? 1 : 0 }));
+        return (Array.isArray(a) ? a : []).filter(x => x && x.en && x.vi && letterOf(x.en)).map(x => ({ en: clean(x.en), vi: cleanVi(x.vi), p: cleanPos(x.p), im: cleanIm(x.im), ts: x.ts || 0, u: x.u ? 1 : 0, i: x.i ? String(x.i) : '', s: x.s ? 1 : 0, n: x.n ? 1 : 0, f: x.f ? 1 : 0 }));
     }
     function load() { rd.terms = parse(); sortTerms(); count(); }
-    function save() { sset(JSON.stringify(rd.terms.map(t => ({ en: t.en, vi: t.vi, p: t.p || '', im: t.im || [], ts: t.ts, u: t.u ? 1 : 0, i: t.i || '', s: t.s ? 1 : 0, n: t.n ? 1 : 0 })))); count(); }
+    function save() { sset(JSON.stringify(rd.terms.map(t => ({ en: t.en, vi: t.vi, p: t.p || '', im: t.im || [], ts: t.ts, u: t.u ? 1 : 0, i: t.i || '', s: t.s ? 1 : 0, n: t.n ? 1 : 0, f: t.f ? 1 : 0 })))); count(); }
     function count() { const e = $('rhm-dict-count'); if (e) e.textContent = String(rd.terms.length); }
     const nNew = () => rd.terms.filter(t => t.n).length;
     const newChip = () => { const n = nNew(); return n ? '<button type="button" class="rd-bdg rd-nwc" data-act="clr-new" title="Bấm để bỏ hết dấu MỚI">' + n + ' mới ✕</button>' : ''; };
     function refreshChip() { const n = nNew(); document.querySelectorAll('#dict-modal .rd-nwc').forEach(b => { if (n) b.textContent = n + ' mới ✕'; else b.remove(); }); }
-    const enHTML = t => esc(t.en) + (t.p ? '<span class="rd-pos">(' + esc(t.p) + ')</span>' : '') + (t.s ? '<span class="rd-sv" title="Đã lưu">★</span>' : '') + (t.n ? '<span class="rd-nw">MỚI</span>' : '');
+    const SPK = '<button type="button" class="rd-spk" data-act="spk" title="Đọc to"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 6a9 9 0 0 1 0 12"/></svg></button>';
+    const enHTML = t => SPK + esc(t.en) + (t.s ? '<span class="rd-sv" title="Đã lưu">★</span>' : '') + (t.n ? '<span class="rd-nw">MỚI</span>' : '');
     function clearNew() {
         let c = 0; rd.terms.forEach(t => { if (t.n) { t.n = 0; c++; } }); if (!c) return; save();
         document.querySelectorAll('#dict-modal .rd-row.isnew').forEach(r => r.classList.remove('isnew'));
@@ -16506,7 +16533,7 @@ window.isIOSDevice = function () {
     function itemHTML(it) {
         if (it.t === 'cap') return '<div class="rd-cap">' + it.L + '</div>';
         const t = rd.terms[it.k];
-        return '<div class="rd-row' + (t.n ? ' isnew' : '') + '" data-k="' + it.k + '"><div class="rd-en">' + enHTML(t) + '</div><div class="rd-vi">' + viHTML(t.vi) + '</div></div>';
+        return '<div class="rd-row' + (t.n ? ' isnew' : '') + '" data-k="' + it.k + '"><div class="rd-en">' + enHTML(t) + '</div><div class="rd-ps">' + esc(t.p || '') + '</div><div class="rd-vi">' + viHTML(t.vi) + '</div></div>';
     }
     function paginate() {
         const body = $('rd-L').querySelector('.rd-body'); if (!body) return false;
@@ -16693,23 +16720,33 @@ window.isIOSDevice = function () {
     }
     function togglePop(mode) { if (rd.pop === mode) closePop(); else openPop(mode); }
 
-    /* ---------- rê chuột vào từ đã có thông tin (hoặc ảnh) → tự hiện khung info ---------- */
-    let tipT = 0, tipRow = null;
-    function hideTip() { clearTimeout(tipT); tipRow = null; const el = $('rd-tip'); if (el) el.classList.add('hidden'); }
+    /* ---------- rê chuột vào từ đã có thông tin (hoặc ảnh) → tự hiện khung info (tự co giãn, cuộn được, không biến mất khi rê vào) ---------- */
+    let tipT = 0, tipHide = 0, tipRow = null;
+    function hideTip() { clearTimeout(tipT); clearTimeout(tipHide); tipRow = null; const el = $('rd-tip'); if (el) el.classList.add('hidden'); }
+    function tipLater() { clearTimeout(tipT); clearTimeout(tipHide); tipHide = setTimeout(hideTip, 500); }
     function showTip(row, t, mx) {
         const el = $('rd-tip'), wrap = el && el.parentNode; if (!el || !wrap || !row.isConnected) return;
         el.innerHTML = '<div class="rd-pt">ℹ️ ' + esc(t.en) + (t.p ? '<span class="rd-pos">(' + esc(t.p) + ')</span>' : '') + '</div><div class="rd-sub">' + viHTML(t.vi) + '</div><div class="rd-info">' + infoBody(t, t.i) + '</div>';
-        el.classList.remove('hidden');
-        const w = wrap.getBoundingClientRect(), r = row.getBoundingClientRect(), tw = el.offsetWidth, th = el.offsetHeight;
-        let left = (mx - w.left) - tw / 2; left = Math.max(8, Math.min(left, w.width - tw - 8));
-        let top = r.bottom - w.top + 6; if (top + th > w.height - 8) top = Math.max(8, r.top - w.top - th - 6);
-        el.style.left = left + 'px'; el.style.top = top + 'px';
+        el.style.maxHeight = 'none'; el.style.width = ''; el.classList.remove('hidden');
+        const w = wrap.getBoundingClientRect(), r = row.getBoundingClientRect();
+        el.style.width = Math.min(560, w.width - 16) + 'px';
+        const full = el.scrollHeight + 4, below = w.bottom - r.bottom - 12, above = r.top - w.top - 12;
+        let place = (below >= full || below >= above) ? 'b' : 'a', room = place === 'b' ? below : above;
+        if (room < 140) { place = 'm'; room = w.height - 16; }
+        const h = Math.min(full, room); el.style.maxHeight = h + 'px';
+        let top = place === 'b' ? r.bottom - w.top + 6 : (place === 'a' ? r.top - w.top - h - 6 : 8);
+        top = Math.max(8, Math.min(top, w.height - h - 8));
+        let left = (mx - w.left) - el.offsetWidth / 2; left = Math.max(8, Math.min(left, w.width - el.offsetWidth - 8));
+        el.style.left = left + 'px'; el.style.top = top + 'px'; el.scrollTop = 0;
     }
     function tipOver(e) {
-        const row = e.target && e.target.closest ? e.target.closest('#dict-modal .rd-row') : null;
-        if (row === tipRow) return;
+        const tip = $('rd-tip'), tg = e.target;
+        if (tg && tg.closest && tg.closest('#rd-tip')) { clearTimeout(tipHide); return; }
+        const row = tg && tg.closest ? tg.closest('#dict-modal .rd-row') : null;
+        if (row && row === tipRow) { clearTimeout(tipHide); return; }
+        if (!row) { if (tipRow || (tip && !tip.classList.contains('hidden'))) tipLater(); else clearTimeout(tipT); return; }
         hideTip();
-        if (!row || rd.lock || rd.rv || rd.pop) return;
+        if (rd.lock || rd.rv || rd.pop) return;
         const t = rd.terms[+row.dataset.k]; if (!t || rd.sel === t || !(t.i || (t.im && t.im.length))) return;
         tipRow = row; const mx = e.clientX;
         tipT = setTimeout(() => { if (tipRow === row && !rd.pop && !rd.rv && !rd.lock) showTip(row, t, mx); }, 300);
@@ -16767,13 +16804,13 @@ window.isIOSDevice = function () {
         }
         let v = null; try { v = await aiGeminiJson(moreSys(), 'Thuật ngữ: ' + t.en + '\nNghĩa tiếng Việt: ' + viLine(t.vi), 3000); } catch (e) {}
         if (rd.pop !== 'more' || !rd.more || rd.more.t !== t) return;
-        const seen = new Set([nk(t.en)]), items = [];
+        const seen = new Set([tk(t.en, t.p)]), items = [];
         const take = (arr, g) => (Array.isArray(arr) ? arr : []).forEach(x => {
             if (!x) return;
             const en = cap1(clean(x.en)), vi = cleanVi(String(x.vi || '').replace(/\\n/g, '\n'));
             if (!en || !vi || en.length > 90 || vi.length > 180 || !letterOf(en)) return;
-            const k = nk(en); if (seen.has(k)) return; seen.add(k);
-            items.push({ en, vi, p: cleanPos(x.pos), form: g === 'form' ? clean(x.form).slice(0, 20) : '', g, have: rd.terms.some(y => nk(y.en) === k) });
+            const k = tk(en, x.pos); if (seen.has(k)) return; seen.add(k);
+            items.push({ en, vi, p: cleanPos(x.pos), form: g === 'form' ? clean(x.form).slice(0, 20) : '', g, have: rd.terms.some(y => tk(y.en, y.p) === k) });
         });
         take(v && v.same, 'same'); take(v && v.forms, 'form');
         rd.more.items = items; moreRender();
@@ -16806,10 +16843,10 @@ window.isIOSDevice = function () {
         const mo = rd.more; if (!mo) return;
         const cks = Array.from(document.querySelectorAll('#rd-mt .rd-ck:checked'));
         if (!cks.length) { toast('Hãy tick chọn ít nhất một từ'); return; }
-        const have = new Set(rd.terms.map(x => nk(x.en))), added = [];
+        const have = new Set(rd.terms.map(x => tk(x.en, x.p))), added = [];
         cks.forEach(c => {
-            const it = mo.items[+c.dataset.i]; if (!it || have.has(nk(it.en))) return;
-            have.add(nk(it.en));
+            const it = mo.items[+c.dataset.i]; if (!it || have.has(tk(it.en, it.p))) return;
+            have.add(tk(it.en, it.p));
             const t = { en: it.en, vi: it.vi, p: it.p, ts: Date.now(), u: 0, i: '', n: 1, s: 0, im: [] };
             rd.terms.push(t); added.push(t);
         });
@@ -16856,7 +16893,7 @@ window.isIOSDevice = function () {
         const en = cap1(clean($('rd-in-en').value)), vi = cleanVi($('rd-in-vi').value), pe = $('rd-in-pos'), p = cleanPos(pe ? pe.value : '');
         if (!en || !vi) { toast('Hãy nhập đủ tiếng Anh và tiếng Việt'); return; }
         if (!letterOf(en)) { toast('Thuật ngữ phải bắt đầu bằng chữ cái A–Z'); return; }
-        if (rd.terms.some(t => nk(t.en) === nk(en))) { toast('Thuật ngữ này đã có trong từ điển'); return; }
+        if (rd.terms.some(t => tk(t.en, t.p) === tk(en, p))) { toast('Thuật ngữ này đã có trong từ điển'); return; }
         const t = { en, vi, p, ts: Date.now(), u: 1, i: '', n: 1, s: 0, im: [] }; rd.terms.push(t); sortTerms(); save(); repaginate(null);
         $('rd-in-en').value = ''; $('rd-in-vi').value = ''; if (pe) pe.value = ''; $('rd-in-en').focus(); showTerm(t); toast('Đã thêm "' + en + '"');
     }
@@ -16864,7 +16901,7 @@ window.isIOSDevice = function () {
         const t = rd.editT; if (!t) return;
         const en = cap1(clean($('rd-in-en').value)), vi = cleanVi($('rd-in-vi').value), pe = $('rd-in-pos');
         if (!en || !vi || !letterOf(en)) { toast('Nội dung chưa hợp lệ'); return; }
-        if (rd.terms.some(x => x !== t && nk(x.en) === nk(en))) { toast('Đã có thuật ngữ trùng tên'); return; }
+        const np = cleanPos(pe ? pe.value : t.p); if (rd.terms.some(x => x !== t && tk(x.en, x.p) === tk(en, np))) { toast('Đã có thuật ngữ trùng tên (cùng từ loại)'); return; }
         if (en !== t.en || vi !== t.vi) t.i = '';
         t.en = en; t.vi = vi; t.p = cleanPos(pe ? pe.value : t.p); t.im = cleanIm(rd.editIm); t.u = 1; sortTerms(); save(); closePop(); repaginate(t); showTerm(t);
     }
@@ -17084,6 +17121,45 @@ window.isIOSDevice = function () {
             + '<div class="rd-pb" style="margin-top:12px">' + (r.wrong.length ? '<button type="button" class="rd-pbtn pri" data-act="rv-again">🔁 Ôn lại ' + r.wrong.length + ' từ</button>' : '') + '<button type="button" class="rd-pbtn" data-act="rv-back">⚙️ Chọn lại</button><button type="button" class="rd-pbtn" data-act="rv-close">Đóng</button></div></div>';
     }
     function rvAgain() { const r = rv.run; if (!r || !r.wrong.length) return; rvBegin(shuffle(r.wrong), r.mode); }
+    /* ---------- đọc to từ tiếng Anh (cùng giọng Anh với hộp chat) ---------- */
+    function speakEn(t) {
+        if (!t) return;
+        if (!('speechSynthesis' in window)) { toast('Trình duyệt không hỗ trợ đọc to'); return; }
+        const txt = String(t.en || '').replace(/[()]/g, ', ').replace(/\s+/g, ' ').trim(); if (!txt) return;
+        try {
+            speechSynthesis.cancel();
+            let ut;
+            if (typeof aiUttFor === 'function') ut = aiUttFor('\u0001' + txt, typeof aiVoicePick === 'function' ? aiVoicePick() : null);
+            else { ut = new SpeechSynthesisUtterance(txt); ut.lang = 'en-US'; }
+            if (typeof aiRateGet === 'function') ut.rate = aiRateGet();
+            if (typeof aiVoicePitch === 'function') ut.pitch = aiVoicePitch();
+            speechSynthesis.speak(ut);
+        } catch (e) {}
+    }
+    /* ---------- tự điền từ loại cho từ cũ; từ nhiều từ loại thì tách mỗi từ loại một hàng ---------- */
+    let fpBusy = false;
+    function posSys() {
+        return `Bạn là giáo sư đầu ngành Răng Hàm Mặt. Với mỗi thuật ngữ trong danh sách (đánh số i), hãy xác định TỪ LOẠI bằng mã ngắn: n (danh từ, kể cả cụm danh từ), v (động từ), adj (tính từ), adv (trạng từ), abbr (viết tắt), pl (danh từ số nhiều). Nếu cùng một từ thật sự có nhiều từ loại được dùng trong y khoa (ví dụ restore: v và n) thì liệt kê tất cả, mỗi từ loại kèm nghĩa tiếng Việt riêng ngắn gọn; nếu chỉ có một từ loại thì không cần "vi". Trả về MỘT đối tượng JSON hợp lệ: {"items":[{"i":1,"pos":[{"p":"n","vi":"..."}]}]}; trong chuỗi dùng dấu nháy đơn. Không thêm chữ nào ngoài JSON.`;
+    }
+    async function fillPos() {
+        if (fpBusy || !aiReady()) return;
+        const todo = rd.terms.filter(t => !t.p && !t.f).slice(0, 40); if (!todo.length) return;
+        fpBusy = true;
+        try {
+            const v = await aiGeminiJson(posSys(), todo.map((t, i) => (i + 1) + '. ' + t.en + ' = ' + viLine(t.vi)).join('\n'), 4000);
+            const arr = v && Array.isArray(v.items) ? v.items : [];
+            todo.forEach(t => { t.f = 1; });
+            arr.forEach(it => {
+                const t = todo[(+it.i || 0) - 1]; if (!t) return;
+                const ps = (Array.isArray(it.pos) ? it.pos : []).map(x => ({ p: cleanPos(x && x.p), vi: cleanVi(x && x.vi) })).filter(x => x.p); if (!ps.length) return;
+                t.p = ps[0].p; if (ps.length > 1 && ps[0].vi && !t.u) t.vi = ps[0].vi;
+                ps.slice(1).forEach(x => { if (!x.vi || rd.terms.some(y => tk(y.en, y.p) === tk(t.en, x.p))) return; rd.terms.push({ en: t.en, vi: x.vi, p: x.p, ts: Date.now(), u: 0, i: '', n: 0, s: 0, im: [], f: 1 }); });
+            });
+            sortTerms(); save(); if (isOpen() && !rd.lock) repaginate(anchor());
+        } catch (e) {} finally { fpBusy = false; }
+        if (isOpen() && rd.terms.some(t => !t.p && !t.f)) setTimeout(fillPos, 400);
+    }
+
     /* ---------- mở / đóng ---------- */
     window.openRhmDict = function () {
         load(); rd.per = window.innerWidth >= 760 ? 2 : 1; rd.cur = 0; rd.lock = false;
@@ -17092,6 +17168,7 @@ window.isIOSDevice = function () {
         rd.pages = []; $('rd-L').innerHTML = pageHTML(0, 'L'); $('rd-R').innerHTML = '';
         $('dict-modal').classList.remove('hidden'); closePop(); rvClose();
         requestAnimationFrame(() => requestAnimationFrame(() => repaginate(null)));
+        setTimeout(fillPos, 800);
     };
     window.closeRhmDict = function () { closePop(); rvClose(); $('dict-modal').classList.add('hidden'); };
 
@@ -17113,6 +17190,7 @@ window.isIOSDevice = function () {
             case 'img-del': { const i = +el.dataset.i; if (rd.editIm && i >= 0) { rd.editIm.splice(i, 1); paintThumbs(); } break; }
             case 'sv-un': toggleSave(rd.terms[+el.dataset.k]); break;
             case 'clr-new': clearNew(); break;
+            case 'spk': { const r0 = el.closest('.rd-row'); speakEn(r0 && rd.terms[+r0.dataset.k]); break; }
             case 'rv-close': rvClose(); break; case 'rv-opt': rvOpt(el); break; case 'rv-start': rvStart(); break; case 'rv-back': rvSetup(); break;
             case 'rv-flip': fcFlip(); break; case 'rv-yes': fcMark(true); break; case 'rv-no': fcMark(false); break;
             case 'rv-ans': qzAnswer(+el.dataset.v); break; case 'rv-next': qzNext(); break; case 'rv-prev': qzPrev(); break; case 'rv-again': rvAgain(); break;
@@ -17123,7 +17201,7 @@ window.isIOSDevice = function () {
     function init() {
         const m = $('dict-modal'); if (!m) return;
         m.addEventListener('click', e => {
-            if (e.target === m) { window.closeRhmDict(); return; }
+            if (e.target === m) { window.closeRhmDict(); return; } if (e.target.closest && e.target.closest('#rd-tip')) return;
             const a = e.target.closest('[data-act]'); if (a) { act(a.dataset.act, a); return; }
             const tab = e.target.closest('.rd-tab'); if (tab) { gotoLetter(tab.dataset.l); return; }
             const row = e.target.closest('.rd-row'); if (row && !rd.lock) selectRow(row); else if (!e.target.closest('.rd-pop')) clearSel();
@@ -17135,7 +17213,7 @@ window.isIOSDevice = function () {
             else if (x && x.classList && x.classList.contains('rd-ck')) moreCount();
         });
         m.addEventListener('mouseover', tipOver);
-        m.addEventListener('mouseleave', hideTip);
+        m.addEventListener('mouseleave', tipLater);
         document.addEventListener('paste', e => {
             if (!isOpen() || rd.pop !== 'row') return;
             const its = (e.clipboardData && e.clipboardData.items) || [], fs = [];
@@ -17182,7 +17260,7 @@ window.isIOSDevice = function () {
 
     /* ---------- tự thêm thuật ngữ mới sau mỗi lần dịch trong hộp chat đọc sách ---------- */
     function harvestSys() {
-        return 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Từ BẢN GỐC (tiếng Anh) và BẢN DỊCH tiếng Việt, hãy rút ra các THUẬT NGỮ CHUYÊN MÔN nha khoa/y khoa đáng đưa vào từ điển cho sinh viên RHM: danh từ hoặc cụm danh từ chuyên ngành (tên bệnh, kỹ thuật, vật liệu, dụng cụ, thuốc, cấu trúc giải phẫu, chỉ số, viết tắt chuyên ngành). KHÔNG lấy từ thông thường, động từ, tính từ chung, tên riêng người hoặc tổ chức, số liệu. Mỗi thuật ngữ gồm \"en\" (dạng chuẩn tiếng Anh, viết thường trừ tên riêng và viết tắt; nếu là viết tắt thì ghi dạng \"CBCT (cone beam computed tomography)\") và \"vi\" (nghĩa tiếng Việt ngắn gọn, đúng cách gọi trong bản dịch, không giải thích dài). Tối đa 30 thuật ngữ, ưu tiên thuật ngữ quan trọng. Nếu không có gì đáng lấy thì trả về mảng rỗng. Trả về MỘT đối tượng JSON hợp lệ: {\"terms\":[{\"en\":\"...\",\"vi\":\"...\"}]}; trong chuỗi dùng dấu nháy đơn thay cho dấu nháy kép. Không thêm chữ nào ngoài JSON.'
+        return 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Từ BẢN GỐC (tiếng Anh) và BẢN DỊCH tiếng Việt, hãy rút ra các THUẬT NGỮ CHUYÊN MÔN nha khoa/y khoa đáng đưa vào từ điển cho sinh viên RHM: danh từ hoặc cụm danh từ chuyên ngành (tên bệnh, kỹ thuật, vật liệu, dụng cụ, thuốc, cấu trúc giải phẫu, chỉ số, viết tắt chuyên ngành). KHÔNG lấy từ thông thường, động từ, tính từ chung, tên riêng người hoặc tổ chức, số liệu. Mỗi thuật ngữ gồm \"en\" (dạng chuẩn tiếng Anh, viết thường trừ tên riêng và viết tắt; nếu là viết tắt thì ghi dạng \"CBCT (cone beam computed tomography)\") và \"vi\" (nghĩa tiếng Việt ngắn gọn, đúng cách gọi trong bản dịch, không giải thích dài). Mỗi mục có thêm \"p\" là mã từ loại ngắn (n, v, adj, adv, abbr); nếu cùng một từ có nhiều từ loại với nghĩa khác nhau thì trả về mỗi từ loại một mục riêng (cùng \"en\", khác \"p\"). Tối đa 30 thuật ngữ, ưu tiên thuật ngữ quan trọng. Nếu không có gì đáng lấy thì trả về mảng rỗng. Trả về MỘT đối tượng JSON hợp lệ: {\"terms\":[{\"en\":\"...\",\"p\":\"n\",\"vi\":\"...\"}]}; trong chuỗi dùng dấu nháy đơn thay cho dấu nháy kép. Không thêm chữ nào ngoài JSON.'
             + (typeof BK_TR_GLOSS !== 'undefined' ? BK_TR_GLOSS : '');
     }
     window.rhmDictHarvest = async function (src, results) {
@@ -17194,13 +17272,16 @@ window.isIOSDevice = function () {
             const v = await aiGeminiJson(harvestSys(), 'BẢN GỐC:\n' + original.slice(0, 6000) + '\n\nBẢN DỊCH:\n' + vi.slice(0, 8000), 3000);
             const list = v && Array.isArray(v.terms) ? v.terms : []; if (!list.length) return;
             load();
-            const have = new Set(rd.terms.map(t => nk(t.en))); let added = 0;
+            const have = new Set(rd.terms.map(t => tk(t.en, t.p))); let added = 0;
             list.forEach(x => {
                 if (!x) return;
                 const en = cap1(clean(x.en)), vv = clean(x.vi);
                 if (!en || !vv || en.length > 90 || vv.length > 180 || !letterOf(en)) return;
-                const k = nk(en); if (have.has(k)) return;
-                have.add(k); rd.terms.push({ en, vi: capVi(vv), ts: Date.now(), n: 1 }); added++;
+                const p0 = cleanPos(x.p), ex = p0 ? rd.terms.find(t => !t.p && nk(t.en) === nk(en)) : null;
+                if (ex) { ex.p = p0; ex.f = 1; added++; return; }
+                if (!p0 && rd.terms.some(t => nk(t.en) === nk(en))) return;
+                const k = tk(en, p0); if (have.has(k)) return;
+                have.add(k); rd.terms.push({ en, vi: capVi(vv), p: p0, ts: Date.now(), n: 1, f: p0 ? 1 : 0 }); added++;
             });
             if (!added) return;
             sortTerms(); save();
@@ -17224,6 +17305,447 @@ window.isIOSDevice = function () {
             return ' BẮT BUỘC dịch đúng theo các thuật ngữ người dùng đã chỉnh trong từ điển (ưu tiên hơn mọi quy ước khác): ' + hit.map(t => '"' + t.en + '" = "' + lowVi(String(t.vi).replace(/\n+/g, ' / ')) + '"').join('; ') + '. ';
         } catch (e) { return ''; }
     };
+})();
+</script>
+<style>
+/* ===== Từ điển: cột từ loại, nút loa, khung info co giãn ===== */
+#dict-modal .rd-row{grid-template-columns:36% 12% 1fr}
+#dict-modal .rd-cap{padding-left:48%}
+#dict-modal .rd-ps{font-style:italic;font-weight:600;color:#7c3aed;font-size:.88em;align-self:center;overflow-wrap:anywhere}
+#dict-modal .rd-spk{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;padding:0;margin-right:4px;border:0;background:none;color:#5b21b6;opacity:.25;vertical-align:-3px;cursor:pointer}
+#dict-modal .rd-spk:hover{opacity:.85}
+#dict-modal .rd-spk svg{width:15px;height:15px}
+#dict-modal .rd-tip{pointer-events:auto;max-height:none;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y}
+#dict-modal .rd-tip .rd-imgs img{max-height:200px}
+/* ===== Sổ ghi chú ===== */
+.nt-it{padding:10px 6px;border-bottom:1px dashed rgba(40,90,80,.35);cursor:pointer;font-size:clamp(13px,min(1.4vw,2.5vh),22px);line-height:1.35}
+.nt-it:hover{background:rgba(15,118,110,.08)}
+.nt-h{display:flex;align-items:center;gap:8px}
+.nt-t{font-weight:800;color:#115e59;overflow-wrap:anywhere}
+.nt-i{flex:none;width:22px;height:22px;border-radius:50%;border:1.5px solid #0d9488;color:#0f766e;background:transparent;font:italic 800 13px/1 Georgia,serif;cursor:pointer;padding:0}
+.nt-i:hover{background:#ccfbf1}
+.nt-b{margin-top:4px;color:#2d2a3e;white-space:pre-wrap;overflow-wrap:anywhere;text-align:justify;display:-webkit-box;-webkit-line-clamp:10;-webkit-box-orient:vertical;overflow:hidden}
+#note-modal .nt-ln{font-size:14px;line-height:1.5;margin:2px 0;color:#1f1d2b}
+#note-modal textarea.rd-in{resize:vertical;font-family:inherit;line-height:1.35;display:block}
+@media (max-width:759px){#note-modal .rd-wrap{--rd-h:calc(var(--rd-vh) - 8px - 62px)}}
+.nt-savebar{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;text-align:left}
+.nt-savebar button{font-size:12px;font-weight:700;border:1px solid #99f6e4;background:#f0fdfa;color:#0f766e;border-radius:999px;padding:3px 10px}
+.nt-savebar button:active{transform:scale(.96)}
+#nt-selbtn{position:fixed;z-index:100060;border:0;border-radius:999px;padding:7px 14px;background:#0f766e;color:#fff;font:700 13px system-ui,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer}
+/* ===== TỪ ĐIỂN RHM (sách mở hai trang) ===== */
+#note-modal{padding:4px!important;--rd-vh:100vh}
+@supports (height:100dvh){#note-modal{--rd-vh:100dvh}}
+#note-modal .rd-wrap{position:relative;width:min(calc(100vw - 8px),2400px);height:calc(var(--rd-vh) - 8px);padding-top:50px;box-sizing:border-box;--rd-h:calc(var(--rd-vh) - 8px - 50px)}
+#note-modal .rd-row0{display:flex;height:var(--rd-h)}
+#note-modal .rd-x{position:absolute;top:0;right:0;z-index:30;background:#e11d1d;color:#fff;border:0;border-radius:12px;width:62px;height:40px;font-size:22px;font-weight:900;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+#note-modal .rd-tabs{width:44px;flex:none;display:flex;flex-direction:column;background:#0f766e;border-radius:12px}
+#note-modal .rd-tabs.M{display:none}
+#note-modal .rd-tab{flex:1;min-height:0;border:0;background:#f0fdfa;color:#115e59;font-weight:800;font-size:clamp(11px,1.7vh,15px);cursor:pointer;margin-bottom:2px;padding:0;transition:background .15s}
+#note-modal .rd-tabs.L .rd-tab{border-radius:10px 0 0 10px}
+#note-modal .rd-tabs.R .rd-tab{border-radius:0 10px 10px 0}
+#note-modal .rd-tab:hover{background:#99f6e4}
+#note-modal .rd-tab.on{background:#fff;color:#0f766e;outline:3px solid #0f766e;outline-offset:-3px;font-size:clamp(14px,2.2vh,19px)}
+#note-modal .rd-tab.off{opacity:.45}
+#note-modal .rd-book{position:relative;flex:1;min-width:0;display:flex;perspective:2600px;background:#f3faf5}
+#note-modal .rd-pg{position:relative;flex:1;min-width:0;background:#f3faf5;overflow:hidden;color:#1f1d2b}
+#note-modal .rd-pg.rd-L{box-shadow:inset -28px 0 30px -24px rgba(60,40,10,.38)}
+#note-modal .rd-pg.rd-R{box-shadow:inset 28px 0 30px -24px rgba(60,40,10,.38)}
+#note-modal .rd-book.one .rd-pg{box-shadow:none}
+#note-modal .rd-book.one #rd-R,#note-modal .rd-book.one .rd-spine{display:none}
+#note-modal .rd-spine{position:absolute;left:50%;top:0;bottom:0;width:46px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,rgba(70,45,10,.2) 44%,rgba(70,45,10,.34) 50%,rgba(70,45,10,.2) 56%,transparent);pointer-events:none;z-index:6}
+#note-modal .rd-hd{position:absolute;left:24px;right:16px;top:16px;display:flex;align-items:center;gap:10px;flex-wrap:nowrap;z-index:2}
+#note-modal .rd-ttl{font-size:clamp(14px,min(1.7vw,2.8vh),26px);font-weight:900;color:#115e59;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+#note-modal .rd-bdg{background:#ccfbf1;color:#115e59;font-weight:700;font-size:clamp(10px,.95vw,13px);padding:4px 11px;border-radius:999px;white-space:nowrap;flex:none}
+#note-modal .rd-body{position:absolute;left:28px;right:30px;top:58px;bottom:62px;overflow:hidden}
+#note-modal .rd-m{position:absolute;left:0;top:0;visibility:hidden;pointer-events:none;display:flow-root}
+#note-modal .rd-cap{font-family:Georgia,'Times New Roman',serif;font-weight:900;color:#0f766e;font-size:clamp(30px,min(3.9vw,6vh),60px);line-height:1;padding:6px 0 4px 44%}
+#note-modal .rd-row{display:grid;grid-template-columns:44% 1fr;gap:8px;padding:10px 0;border-bottom:1px dashed rgba(110,90,40,.3);font-size:clamp(13px,min(1.45vw,2.6vh),24px);line-height:1.3}
+#note-modal .rd-en{font-weight:800;color:#1c1830;padding-right:8px;overflow-wrap:anywhere}
+#note-modal .rd-vi{color:#2d2a3e;overflow-wrap:anywhere}
+#note-modal .rd-ft{position:absolute;left:44%;bottom:20px;font-size:clamp(11px,1.1vw,15px);color:#8c7d5b}
+#note-modal .rd-empty{padding:30px 6px;color:#6b5f45;font-size:clamp(13px,1.3vw,17px);line-height:1.5}
+#note-modal .rd-row{position:relative;cursor:pointer}
+#note-modal .rd-row:hover{background:rgba(15,118,110,.07)}
+#note-modal .rd-row.sel{background:rgba(15,118,110,.12)}
+#note-modal .rd-act{position:absolute;right:4px;top:50%;transform:translateY(-50%);display:flex;gap:6px;background:#f3faf5;border:1.5px solid #5eead4;border-radius:12px;padding:4px;box-shadow:0 4px 14px rgba(60,40,10,.25);z-index:3}
+#note-modal .rd-ab{width:32px;height:32px;border:0;border-radius:9px;background:#ccfbf1;color:#115e59;display:flex;align-items:center;justify-content:center;cursor:pointer}
+#note-modal .rd-ab:hover{background:#99f6e4}
+#note-modal .rd-ab.dan{background:#fee2e2;color:#b91c1c}
+#note-modal .rd-ab svg{width:18px;height:18px}
+#note-modal .rd-pop.wide{width:min(420px,92%)}
+#note-modal .rd-sub{color:#374151;font-size:14px;margin:-4px 0 8px}
+#note-modal .rd-info{max-height:300px;overflow-y:auto;touch-action:pan-y;margin-bottom:8px}
+#note-modal .rd-info p{margin:0 0 8px;font-size:14px;line-height:1.5;color:#1f1d2b}
+#note-modal .rd-row.flash{animation:rdFlash 1.8s ease-out}
+@keyframes rdFlash{0%,55%{background:#fde68a}100%{background:transparent}}
+#note-modal .rd-nav{position:absolute;bottom:12px;width:62px;height:50px;border-radius:14px;border:0;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:8;transition:opacity .2s}
+#note-modal .rd-prev{left:14px;background:#0f766e;color:#fff;box-shadow:0 4px 12px rgba(15,118,110,.5)}
+#note-modal .rd-next{right:14px;background:#0f766e;color:#fff;box-shadow:0 4px 12px rgba(15,118,110,.5)}
+#note-modal .rd-nav.dis{opacity:.35;pointer-events:none}
+#note-modal .rd-nav svg{width:30px;height:30px}
+#note-modal .rd-rib{position:absolute;top:22px;right:72px;display:flex;gap:8px;z-index:20}
+#note-modal .rd-rb{width:33px;height:46px;border:0;background:#0d9488;color:#fff;clip-path:polygon(0 0,100% 0,100% 100%,50% 80%,0 100%);display:flex;align-items:flex-start;justify-content:center;padding-top:9px;cursor:pointer;transition:transform .15s,background .15s,height .15s}
+#note-modal .rd-rb svg{width:15.4px;height:15.4px}
+#note-modal .rd-rb:hover{transform:translateY(2px);background:#0f766e}
+#note-modal .rd-rb.on{height:55px;background:#115e59}
+#note-modal .rd-pop{position:absolute;top:76px;right:72px;width:min(330px,92%);background:#fff;border:2px solid #0f766e;border-radius:16px;padding:14px;box-shadow:0 18px 40px rgba(0,0,0,.4);z-index:25}
+#note-modal .rd-pop.hidden{display:none!important}
+#note-modal .rd-pt{font-weight:900;color:#115e59;margin-bottom:8px}
+#note-modal .rd-in{width:100%;border:1.5px solid #5eead4;border-radius:10px;padding:8px 10px;margin-bottom:8px;font-size:15px;outline:none}
+#note-modal .rd-in:focus{border-color:#0f766e}
+#note-modal .rd-pb{display:flex;gap:8px;flex-wrap:wrap}
+#note-modal .rd-pbtn{border:0;border-radius:10px;padding:8px 14px;font-weight:800;font-size:14px;cursor:pointer;background:#ccfbf1;color:#115e59}
+#note-modal .rd-pbtn.pri{background:#0f766e;color:#fff}
+#note-modal .rd-pbtn.dan{background:#fee2e2;color:#b91c1c}
+#note-modal .rd-hint{font-size:12px;color:#6b7280;margin-top:8px}
+#note-modal #rd-res{max-height:260px;overflow-y:auto;touch-action:pan-y}
+#note-modal .rd-hit{display:block;width:100%;text-align:left;border:0;background:transparent;padding:7px 8px;border-radius:8px;cursor:pointer;font-size:14px;color:#1f1d2b}
+#note-modal .rd-hit:hover{background:#f0fdfa}
+#note-modal .rd-hit b{color:#115e59}
+#note-modal .rd-nw{display:inline-block;vertical-align:middle;margin-left:8px;background:#ef4444;color:#fff;font:800 .52em/1 system-ui,sans-serif;letter-spacing:.05em;padding:.35em .55em;border-radius:999px;box-shadow:0 1px 5px rgba(239,68,68,.55);animation:rdNew 1.6s ease-in-out infinite}
+@keyframes rdNew{50%{transform:scale(1.12)}}
+#note-modal .rd-row.isnew:not(.sel){background:linear-gradient(90deg,rgba(239,68,68,.12),transparent 75%);box-shadow:inset 4px 0 0 #ef4444}
+#note-modal .rd-sv{color:#f59e0b;margin-left:6px;font-size:.85em;vertical-align:middle}
+#note-modal .rd-nwc{background:#fee2e2;color:#b91c1c;border:0;cursor:pointer;font-family:inherit}
+#note-modal .rd-nwc:hover{background:#fecaca}
+#note-modal .rd-ab.sv.on{background:#fef3c7;color:#d97706}
+#note-modal .rd-ab.sv.on svg{fill:currentColor}
+#note-modal .rd-pos{font-weight:600;font-style:italic;color:#0d9488;font-size:.78em;margin-left:5px;white-space:nowrap}
+#note-modal .rd-pop.tall{max-height:calc(100% - 96px);overflow-y:auto;touch-action:pan-y}
+#note-modal .rd-pop.more{width:min(520px,94%)}
+#note-modal textarea.rd-in{resize:vertical;font-family:inherit;line-height:1.35;min-height:60px;display:block}
+#note-modal .rd-imgrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+#note-modal .rd-thumbs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+#note-modal .rd-thumbs:empty{display:none}
+#note-modal .rd-th{position:relative;width:76px;height:76px;border:1.5px solid #5eead4;border-radius:10px;overflow:hidden;background:#f0fdfa}
+#note-modal .rd-th img{width:100%;height:100%;object-fit:cover;display:block}
+#note-modal .rd-thx{position:absolute;top:2px;right:2px;width:22px;height:22px;border:0;border-radius:999px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;line-height:22px;cursor:pointer;padding:0}
+#note-modal .rd-imgs{display:flex;flex-direction:column;gap:8px;margin:6px 0 8px}
+#note-modal .rd-imgs img{max-width:100%;max-height:260px;object-fit:contain;border-radius:10px;border:1px solid #99f6e4;background:#fff;align-self:flex-start}
+#note-modal .rd-tip{position:absolute;z-index:22;width:min(380px,86%);max-height:min(60%,420px);overflow:hidden;background:#fff;border:2px solid #0f766e;border-radius:14px;padding:12px 14px;box-shadow:0 14px 34px rgba(0,0,0,.38);pointer-events:none}
+#note-modal .rd-tip.hidden{display:none!important}
+#note-modal .rd-tip .rd-pt{margin-bottom:4px}
+#note-modal .rd-tip .rd-info{max-height:none;overflow:hidden;margin-bottom:0}
+#note-modal .rd-tip .rd-imgs img{max-height:120px}
+#note-modal .rd-mt{max-height:min(360px,46vh);overflow-y:auto;touch-action:pan-y;margin-bottom:8px;border:1px solid #99f6e4;border-radius:10px}
+#note-modal .rd-tbl{width:100%;border-collapse:collapse;font-size:14px;color:#1f1d2b}
+#note-modal .rd-tbl th{position:sticky;top:0;background:#ccfbf1;color:#115e59;text-align:left;padding:6px 8px;font-size:12px}
+#note-modal .rd-tbl td{padding:6px 8px;border-top:1px solid #ccfbf1;vertical-align:top}
+#note-modal .rd-tbl tr[data-act]{cursor:pointer}
+#note-modal .rd-tbl tr[data-act]:hover{background:#f0fdfa}
+#note-modal .rd-tbl tr.have{opacity:.5}
+#note-modal .rd-tbl .rd-tg td{background:#f0fdfa;color:#115e59;font-weight:800;font-size:12px;padding:5px 8px}
+#note-modal .rd-tbl .rd-fm{display:inline-block;margin-left:6px;background:#ccfbf1;color:#115e59;border-radius:999px;padding:1px 7px;font-size:11px;font-weight:700;font-style:normal}
+#note-modal .rd-ck{width:18px;height:18px;accent-color:#0f766e}
+#note-modal .rd-pbtn:disabled{opacity:.4;cursor:not-allowed}
+#note-modal .rv-card.qzc{display:flex;flex-direction:column;overflow:hidden}
+#note-modal .qz-body{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;padding-right:4px}
+#note-modal .qz-nav{flex:none;display:flex;justify-content:space-between;gap:10px;margin-top:10px;padding-top:10px;border-top:1px solid #ccfbf1}
+#note-modal .qz-nav .rd-pbtn{flex:0 1 auto;min-width:130px}
+#note-modal .rd-pop.wide #rd-res{max-height:min(420px,52vh)}
+#note-modal .rd-svr{display:flex;align-items:center;gap:4px}
+#note-modal .rd-svr .rd-hit{flex:1;min-width:0;overflow-wrap:anywhere}
+#note-modal .rd-svx{border:0;background:#fef3c7;color:#d97706;border-radius:8px;width:32px;height:32px;flex:none;cursor:pointer;font-size:18px}
+#note-modal .rv{position:absolute;inset:0;z-index:40;background:rgba(24,12,48,.66);display:flex;align-items:center;justify-content:center;padding:10px;border-radius:12px}
+#note-modal .rv.hidden{display:none!important}
+#note-modal .rv-card{background:#fff;border:2px solid #0f766e;border-radius:18px;width:min(580px,100%);max-height:100%;overflow-y:auto;touch-action:pan-y;padding:16px;box-shadow:0 20px 50px rgba(0,0,0,.5);color:#1f1d2b}
+#note-modal .rv-card.big{width:min(820px,100%)}
+#note-modal .rv-h{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+#note-modal .rv-t{font-weight:900;color:#115e59;font-size:18px;flex:1;min-width:0}
+#note-modal .rv-pg{font-weight:800;font-size:13px;color:#6b7280;white-space:nowrap}
+#note-modal .rv-x{border:0;background:#ccfbf1;color:#115e59;border-radius:9px;width:34px;height:34px;font-size:16px;font-weight:900;cursor:pointer;flex:none}
+#note-modal .rv-bar{height:6px;border-radius:99px;background:#ccfbf1;margin-bottom:12px;overflow:hidden}
+#note-modal .rv-bar i{display:block;height:100%;background:#0f766e;transition:width .3s}
+#note-modal .rv-sec{font-weight:800;font-size:12px;color:#6b7280;margin:12px 0 6px;text-transform:uppercase;letter-spacing:.04em}
+#note-modal .rv-g{display:flex;flex-wrap:wrap;gap:6px}
+#note-modal .rv-o{border:2px solid #99f6e4;background:#f0fdfa;color:#115e59;border-radius:12px;padding:8px 13px;font-weight:800;font-size:14px;cursor:pointer}
+#note-modal .rv-o.on{background:#0f766e;border-color:#0f766e;color:#fff}
+#note-modal .rv-hid{display:none!important}
+#note-modal .rv-load{padding:34px 8px;text-align:center;color:#6b7280;font-weight:700}
+#note-modal .rv-big{font-size:46px;font-weight:900;color:#0f766e;text-align:center;line-height:1.1;margin-top:6px}
+#note-modal .rv-sub{text-align:center;color:#4b5563;font-weight:700;margin:4px 0}
+#note-modal .rv-list{max-height:200px;overflow-y:auto;font-size:14px;line-height:1.5}
+#note-modal .rv-list div{padding:4px 0;border-bottom:1px dashed #99f6e4}
+#note-modal .fc{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;width:100%;min-height:min(260px,40vh);border:2px solid #5eead4;border-radius:18px;background:#f3faf5;padding:20px;cursor:pointer;text-align:center;margin-bottom:10px}
+#note-modal .fc.back{background:#f0fdfa}
+#note-modal .fc-lab{font-size:12px;font-weight:800;color:#5f8f86;text-transform:uppercase;letter-spacing:.05em}
+#note-modal .fc-en{font:900 clamp(24px,5vw,40px)/1.2 Georgia,serif;color:#1c1830;overflow-wrap:anywhere}
+#note-modal .fc-vi{font:800 clamp(20px,4vw,32px)/1.3 system-ui,sans-serif;color:#115e59;overflow-wrap:anywhere}
+#note-modal .fc-sm{font-size:14px;color:#6b7280}
+#note-modal .fc-btns{justify-content:center}
+#note-modal .qz-ctx{background:#f3faf5;border-left:5px solid #0f766e;border-radius:10px;padding:12px 14px;font:clamp(15px,2.2vw,19px)/1.55 Georgia,serif;margin-bottom:10px}
+#note-modal .qz-ctx b{background:#ccfbf1;color:#115e59;border-radius:4px;padding:0 3px}
+#note-modal .qz-nc{color:#6b7280;font-style:italic}
+#note-modal .qz-q{font-weight:700;margin:8px 0}
+#note-modal .qz-ops{display:grid;gap:8px}
+#note-modal .qz-op{display:flex;align-items:flex-start;gap:10px;width:100%;text-align:left;border:2px solid #99f6e4;background:#f0fdfa;border-radius:12px;padding:10px 12px;font-size:15px;line-height:1.35;cursor:pointer;color:#1f1d2b}
+#note-modal .qz-op:not(:disabled):hover{background:#ccfbf1}
+#note-modal .qz-op:disabled{cursor:default}
+#note-modal .qz-l{flex:none;width:24px;height:24px;border-radius:50%;background:#0f766e;color:#fff;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center}
+#note-modal .qz-op.ok{background:#dcfce7;border-color:#16a34a}
+#note-modal .qz-op.bad{background:#fee2e2;border-color:#dc2626}
+#note-modal .qz-fb{margin:10px 0 6px;padding:10px 12px;border-radius:12px;font-weight:700;font-size:14px}
+#note-modal .qz-fb.ok{background:#dcfce7;color:#166534}
+#note-modal .qz-fb.bad{background:#fee2e2;color:#991b1b}
+#note-modal .qz-cv{font-weight:500;margin-top:4px;color:#374151}
+@media (prefers-reduced-motion:reduce){#note-modal .rd-nw{animation:none}}
+/* tờ giấy đang lật */
+#note-modal .rd-leaf{position:absolute;top:0;bottom:0;z-index:7;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.5,.05,.25,1),opacity .8s ease-in;will-change:transform}
+#note-modal .rd-leaf.nx{left:50%;width:50%;transform-origin:left center}
+#note-modal .rd-leaf.pv{left:0;width:50%;transform-origin:right center}
+#note-modal .rd-leaf.nx.go{transform:rotateY(-180deg)}
+#note-modal .rd-leaf.pv.go{transform:rotateY(180deg)}
+#note-modal .rd-leaf.one{left:0;width:100%;transform-origin:left center}
+#note-modal .rd-leaf.nx1.go{transform:rotateY(-110deg);opacity:0}
+#note-modal .rd-leaf.pv1{transform:rotateY(-110deg);opacity:0}
+#note-modal .rd-leaf.pv1.go{transform:rotateY(0);opacity:1}
+#note-modal .rd-leaf .rd-face{position:absolute;inset:0;flex:none;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+#note-modal .rd-leaf .rd-face.b{transform:rotateY(180deg)}
+#note-modal .rd-leaf .rd-face::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(60,40,10,.35),rgba(255,255,255,0) 70%);opacity:0;animation:rdShade .8s ease-in-out}
+@keyframes rdShade{0%,100%{opacity:0}50%{opacity:1}}
+@media (max-width:759px){
+ #note-modal .rd-wrap{--rd-h:calc(var(--rd-vh) - 8px - 62px - 50px);padding-top:62px;display:flex;flex-direction:column}
+ #note-modal .rd-tabs.L,#note-modal .rd-tabs.R{display:none}
+ #note-modal .rd-tabs.M{display:flex;flex-direction:row;overflow-x:auto;width:100%;height:38px;margin:8px 0 0;border-radius:10px;touch-action:pan-x;order:3}
+ #note-modal .rd-tabs.M .rd-tab{flex:0 0 36px;border-radius:8px;margin:0 2px 0 0}
+ #note-modal .rd-rib{right:62px;top:10px;gap:7px}
+ #note-modal .rd-rb{width:31px;height:44px;padding-top:8px}
+ #note-modal .rd-rb.on{height:51px}
+ #note-modal .rd-rb svg{width:14.3px;height:14.3px}
+ #note-modal .rd-x{width:52px;height:38px}
+ #note-modal .rd-pop{right:8px;left:8px;width:auto;top:70px}
+ #note-modal .rd-pop.wide{width:auto}
+ #note-modal .rd-body{left:18px;right:18px}
+ #note-modal .rd-hd{left:16px}
+}
+@media (prefers-reduced-motion:reduce){#note-modal .rd-leaf{transition:none}}
+
+</style>
+<script>
+/* ===== SỔ GHI CHÚ RHM: lưu ghi chú từ bong bóng chat AI (sách / video / câu hỏi) ===== */
+(function () {
+    'use strict';
+    const KEY = 'quizApp_rhm_notes_v1', BAR = 'nt-savebar';
+    const nt = { notes: [], pages: [], cur: 0, per: 2, pop: '', ed: null };
+    const $ = id => document.getElementById(id);
+    const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const toast = m => { try { showToast(m); } catch (e) {} };
+    const isOpen = () => { const m = $('note-modal'); return !!m && !m.classList.contains('hidden'); };
+    const fold = s => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[đĐ]/g, 'd').toLowerCase();
+    const fmt = ts => { try { return new Date(ts).toLocaleString('vi-VN'); } catch (e) { return ''; } };
+    function sget() { try { return typeof kv !== 'undefined' ? kv.getItem(KEY) : localStorage.getItem(KEY); } catch (e) { return null; } }
+    function sset(v) { try { if (typeof kv !== 'undefined') kv.setItem(KEY, v); else localStorage.setItem(KEY, v); } catch (e) {} }
+    function count() { const e = $('rhm-note-count'); if (e) e.textContent = String(nt.notes.length); }
+    function load() { let a = []; try { a = JSON.parse(sget() || '[]'); } catch (e) {} nt.notes = (Array.isArray(a) ? a : []).filter(x => x && x.id && x.b); count(); }
+    function save() { sset(JSON.stringify(nt.notes)); count(); }
+    const list = () => nt.notes.slice().sort((a, b) => b.ts - a.ts);
+    const quickTitle = b => { const l = String(b || '').split('\n').map(x => x.trim()).find(Boolean) || 'Ghi chú'; return l.length > 48 ? l.slice(0, 48) + '…' : l; };
+
+    /* ---------- vẽ sổ ---------- */
+    function itemHTML(n) {
+        return '<div class="nt-it" data-act="n-edit" data-id="' + n.id + '"><div class="nt-h"><b class="nt-t">' + esc(n.t || 'Ghi chú') + '</b><button type="button" class="nt-i" data-act="n-info" data-id="' + n.id + '" title="Vị trí và thời gian tạo">i</button></div><div class="nt-b">' + esc(n.b) + '</div></div>';
+    }
+    function pageHTML(i, pos) {
+        const T = nt.pages.length, tot = Math.max(T, 1), showHd = pos === 'L' || nt.per === 1;
+        const hd = showHd ? '<div class="rd-hd"><span class="rd-ttl">Sổ ghi chú</span><span class="rd-bdg">Tổng ' + nt.notes.length + ' · trang ' + Math.min(i + 1, tot) + '/' + tot + '</span></div>' : '';
+        if (T === 0) return i === 0 ? hd + '<div class="rd-body"><div class="rd-empty">Sổ ghi chú còn trống.<br>Trong hộp chat AI, bấm 📒 Lưu ghi chú ở cuối bong bóng (hoặc bôi đen một đoạn rồi bấm 📒 Lưu ghi chú) để lưu vào đây.</div></div>' : '<div class="rd-body"></div>';
+        if (i < 0 || i >= T) return hd + '<div class="rd-body"></div>';
+        return hd + '<div class="rd-body">' + nt.pages[i].map(itemHTML).join('') + '</div><div class="rd-ft">Trang ' + (i + 1) + '</div>';
+    }
+    function paginate() {
+        const body = $('nt-L').querySelector('.rd-body'); if (!body) return false;
+        const H = body.clientHeight, W = body.clientWidth; if (H < 60 || W < 60) return false;
+        const m = document.createElement('div'); m.className = 'rd-m'; m.style.width = W + 'px'; $('nt-L').appendChild(m);
+        const pages = []; let cur = [];
+        list().forEach(n => {
+            const t = document.createElement('div'); t.innerHTML = itemHTML(n); const el = t.firstChild; m.appendChild(el);
+            if (m.offsetHeight > H && cur.length) { el.remove(); pages.push(cur); cur = []; m.innerHTML = ''; m.appendChild(el); }
+            cur.push(n);
+        });
+        if (cur.length) pages.push(cur); m.remove(); nt.pages = pages; return true;
+    }
+    function render() {
+        $('nt-L').innerHTML = pageHTML(nt.cur, 'L'); $('nt-R').innerHTML = nt.per === 2 ? pageHTML(nt.cur + 1, 'R') : '';
+        $('nt-prev').classList.toggle('dis', nt.cur <= 0); $('nt-next').classList.toggle('dis', nt.cur + nt.per >= nt.pages.length);
+    }
+    function repaginate(id) {
+        if (!paginate()) return;
+        let p = nt.cur; if (id) { const k = nt.pages.findIndex(pg => pg.some(n => n.id === id)); if (k >= 0) p = k; }
+        p = Math.max(0, Math.min(p, Math.max(nt.pages.length - 1, 0))); if (nt.per === 2) p -= p % 2;
+        nt.cur = p; render();
+    }
+    function step(d) { const p = nt.cur + d * nt.per; if (p < 0 || p >= nt.pages.length) return; nt.cur = p; render(); }
+
+    /* ---------- hộp nhỏ: thông tin vị trí, sửa, tìm ---------- */
+    function closePop() { nt.pop = ''; nt.ed = null; const p = $('nt-pop'); if (p) { p.classList.add('hidden'); p.classList.remove('wide', 'tall'); } const b = $('nt-rb-search'); if (b) b.classList.remove('on'); }
+    function ctxLines(c) {
+        c = c || {}; const L = [], add = (k, v) => { if (v !== undefined && v !== null && String(v).trim() !== '') L.push([k, String(v)]); };
+        if (c.k === 'book') { add('Loại', 'Sách'); add('Môn', c.subj); add('Tên sách', c.book); add('Chương', c.chap); add('Trang', c.page); }
+        else if (c.k === 'video') { add('Loại', 'Video bài giảng'); add('Môn', c.mon); add('Khóa học', c.khoa); add('Video', c.video); add('Thời gian video', c.time); }
+        else if (c.k === 'quiz') { add('Loại', 'Câu hỏi'); add('Chủ đề', c.topic); add('Bộ câu hỏi', c.set); add('Câu số', c.q); }
+        else add('Vị trí', 'Không rõ');
+        return L;
+    }
+    function openPop(html, cls) { closePop(); const p = $('nt-pop'); p.innerHTML = html; (cls || '').split(' ').filter(Boolean).forEach(c => p.classList.add(c)); p.classList.remove('hidden'); return p; }
+    function openInfo(id) {
+        const n = nt.notes.find(x => x.id === id); if (!n) return;
+        openPop('<div class="rd-pt">ℹ️ ' + esc(n.t) + '</div>' + ctxLines(n.c).map(r => '<div class="nt-ln"><b>' + esc(r[0]) + ':</b> ' + esc(r[1]) + '</div>').join('') + '<div class="nt-ln"><b>Tạo lúc:</b> ' + esc(fmt(n.ts)) + '</div><div class="rd-pb" style="margin-top:10px"><button type="button" class="rd-pbtn" data-act="cancel">Đóng</button></div>', 'wide'); nt.pop = 'info';
+    }
+    function openEdit(id) {
+        const n = nt.notes.find(x => x.id === id); if (!n) return;
+        openPop('<div class="rd-pt">✏️ Ghi chú</div><input id="nt-in-t" class="rd-in" value="' + esc(n.t) + '" placeholder="Tiêu đề" autocomplete="off"><textarea id="nt-in-b" class="rd-in" rows="10" autocomplete="off">' + esc(n.b) + '</textarea><div class="rd-pb"><button type="button" class="rd-pbtn pri" data-act="n-save">Lưu</button><button type="button" class="rd-pbtn dan" data-act="n-del">Xóa</button><button type="button" class="rd-pbtn" data-act="cancel">Đóng</button></div>', 'wide tall'); nt.pop = 'edit'; nt.ed = n;
+    }
+    function saveEdit() {
+        const n = nt.ed; if (!n) return; const t = $('nt-in-t').value.trim(), b = $('nt-in-b').value.trim();
+        if (!b) { toast('Nội dung ghi chú không được để trống'); return; }
+        if (t !== n.t) n.tu = 1; n.t = t || quickTitle(b); n.b = b; save(); closePop(); repaginate(n.id);
+    }
+    function delNote() { const n = nt.ed; if (!n || !confirm('Xóa ghi chú "' + n.t + '"?')) return; nt.notes = nt.notes.filter(x => x !== n); save(); closePop(); repaginate(null); }
+    function openSearch() {
+        if (nt.pop === 'search') { closePop(); return; }
+        openPop('<div class="rd-pt">🔍 Tìm ghi chú</div><input id="nt-in-q" class="rd-in" placeholder="Gõ từ khóa…" autocomplete="off"><div id="nt-res" class="overflow-y-auto" style="max-height:min(420px,52vh)"></div>'); nt.pop = 'search';
+        $('nt-rb-search').classList.add('on'); setTimeout(() => { const f = $('nt-in-q'); if (f) f.focus(); }, 30);
+    }
+    function doSearch() {
+        const q = fold($('nt-in-q').value.trim()), box = $('nt-res'); if (!box) return; if (!q) { box.innerHTML = ''; return; }
+        const hits = list().filter(n => fold(n.t + ' ' + n.b).includes(q)).slice(0, 40);
+        box.innerHTML = hits.length ? hits.map(n => '<button type="button" class="rd-hit" data-act="n-hit" data-id="' + n.id + '"><b>' + esc(n.t) + '</b></button>').join('') : '<div class="rd-hint">Không tìm thấy.</div>';
+    }
+    function goNote(id) { closePop(); const k = nt.pages.findIndex(pg => pg.some(n => n.id === id)); if (k >= 0) { nt.cur = nt.per === 2 ? k - k % 2 : k; render(); } }
+
+    window.openRhmNote = function () {
+        load(); nt.per = window.innerWidth >= 760 ? 2 : 1; nt.cur = 0; nt.pages = [];
+        $('nt-book').classList.toggle('one', nt.per === 1); $('nt-L').innerHTML = pageHTML(0, 'L'); $('nt-R').innerHTML = '';
+        $('note-modal').classList.remove('hidden'); closePop();
+        requestAnimationFrame(() => requestAnimationFrame(() => repaginate(null)));
+    };
+    window.closeRhmNote = function () { closePop(); $('note-modal').classList.add('hidden'); };
+
+    /* ---------- lưu từ bong bóng chat ---------- */
+    window.ntBookPage = function () {
+        try {
+            const s = getSelection(); let el = s && s.rangeCount ? s.getRangeAt(0).startContainer : null; if (el && el.nodeType === 3) el = el.parentElement;
+            const pg = el && el.closest ? el.closest('.bk-pg') : null; if (pg && pg.dataset.page) return pg.dataset.page;
+            const wrap = typeof bkWrapEl !== 'undefined' ? bkWrapEl : null; if (!wrap) return '';
+            const wr = wrap.getBoundingClientRect(), mid = wr.top + wr.height / 2; let best = '', bd = 1e9;
+            document.querySelectorAll('.bk-pg').forEach(p => { const r = p.getBoundingClientRect(), d = (r.top <= mid && r.bottom >= mid) ? 0 : Math.min(Math.abs(r.top - mid), Math.abs(r.bottom - mid)); if (d < bd) { bd = d; best = p.dataset.page; } });
+            return best;
+        } catch (e) { return ''; }
+    };
+    function mmss(s) { s = Math.max(0, Math.floor(s || 0)); const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = s % 60, p = v => String(v).padStart(2, '0'); return (h ? h + ':' + p(m) : String(m)) + ':' + p(x); }
+    function ctxNow(b) {
+        const mode = typeof aiState !== 'undefined' ? aiState.mode : '';
+        try {
+            if (mode === 'book' && typeof bkCur !== 'undefined' && bkCur) return { k: 'book', subj: typeof bkSubject !== 'undefined' && bkSubject ? bkSubject.name : '', book: bkCur.book || '', chap: bkCur.title || '', page: (b && b.dataset && b.dataset.ntPage) || window.ntBookPage() || '' };
+            if (mode === 'video' && aiState.video) {
+                const v = aiState.video, info = (typeof lessonSrtInfo !== 'undefined' && lessonSrtInfo[v.playerId]) || {}, d = typeof activeYtPlayers !== 'undefined' ? activeYtPlayers[v.playerId] : null;
+                let t = ''; try { t = mmss(d.player.getCurrentTime()); } catch (e) {}
+                const act = typeof currentActiveMonHoc !== 'undefined' ? currentActiveMonHoc : null, par = typeof currentParentMonHoc !== 'undefined' ? currentParentMonHoc : null;
+                return { k: 'video', mon: par ? par.name : (act ? act.name : ''), khoa: par && act ? act.name : '', video: info.title || v.title || '', time: t };
+            }
+            let topic = '', set = typeof currentQuizName !== 'undefined' ? currentQuizName : '';
+            const cq = typeof questions !== 'undefined' && typeof currentIndex !== 'undefined' ? questions[currentIndex] : null;
+            const qu = (typeof getSavedQuizzes === 'function' && typeof currentQuizId !== 'undefined' && currentQuizId != null) ? getSavedQuizzes().find(x => x.id === currentQuizId) : null;
+            const tn = qu && typeof getQuizTopic === 'function' ? getQuizTopic(qu) : 0;
+            if (tn > 0 && typeof topicFullName === 'function') topic = topicFullName(tn); else if (cq && cq.__srcTopicLabel) topic = cq.__srcTopicLabel;
+            if (cq && cq.__srcQuizName) set = cq.__srcQuizName;
+            return { k: 'quiz', topic, set, q: typeof currentIndex !== 'undefined' ? currentIndex + 1 : '' };
+        } catch (e) { return { k: '' }; }
+    }
+    function bubbleText(b) {
+        if (b._tr) { const r = b._tr; return (r.bi ? r.bi.map(p => (p.src || '') + '\n' + (p.vi || '')).join('\n\n') : String(r.t || '')).trim(); }
+        const hid = []; b.querySelectorAll('.' + BAR + ',.ai-ttsbar,.ai-actrow,.ai-refbar,.ai-liverefs,.ai-dr-refs,.ai-dr-note,.ai-quota-hint').forEach(x => { hid.push([x, x.style.display]); x.style.display = 'none'; });
+        let t = ''; try { t = (b.innerText || b.textContent || '').trim(); } catch (e) {}
+        hid.forEach(h => { h[0].style.display = h[1]; }); return t;
+    }
+    async function aiTitle(n) {
+        try {
+            if (typeof aiGeminiJson !== 'function' || (typeof aiAnyKey === 'function' && !aiAnyKey())) return;
+            const v = await aiGeminiJson('Bạn đặt tiêu đề cho ghi chú học tập Răng Hàm Mặt. Đọc nội dung và đặt MỘT tiêu đề tiếng Việt ngắn gọn (tối đa 10 từ), nêu đúng chủ đề chính, không dùng dấu ngoặc kép. Trả về MỘT đối tượng JSON hợp lệ: {"t":"<tiêu đề>"}. Không thêm chữ nào ngoài JSON.', n.b.slice(0, 2500), 300);
+            const t = v && typeof v.t === 'string' ? v.t.replace(/\s+/g, ' ').replace(/^["']|["']$/g, '').trim().slice(0, 90) : '';
+            const cur = nt.notes.find(x => x.id === n.id); if (!t || !cur || cur.tu) return;
+            cur.t = t; save(); if (isOpen() && !nt.pop) repaginate(cur.id);
+        } catch (e) {}
+    }
+    function saveFrom(bubs, sel) {
+        const body = (sel || bubs.map(bubbleText).filter(Boolean).join('\n\n')).slice(0, 20000);
+        if (!body) { toast('Chưa có nội dung để lưu'); return; }
+        const n = { id: 'n' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), t: quickTitle(body), b: body, ts: Date.now(), c: ctxNow(bubs[0]) };
+        nt.notes.push(n); save(); toast('📒 Đã lưu vào Sổ ghi chú'); aiTitle(n);
+        if (isOpen()) repaginate(n.id);
+    }
+    function selIn(b) {
+        try { const s = getSelection(); if (!s || s.isCollapsed || !s.rangeCount) return ''; const r = s.getRangeAt(0); if (!b.contains(r.commonAncestorContainer)) return ''; const bar = b.querySelector(':scope > .' + BAR); if (bar && bar.contains(r.commonAncestorContainer)) return ''; return s.toString().trim(); } catch (e) { return ''; }
+    }
+    function ensureBars() {
+        const box = $('ai-messages'); if (!box) return;
+        const bs = Array.prototype.slice.call(box.querySelectorAll(':scope > .ai-bub')), runs = {};
+        bs.forEach(b => { const r = b.dataset && b.dataset.bkRun; if (r) (runs[r] = runs[r] || []).push(b); });
+        bs.forEach(b => {
+            let bar = b.querySelector(':scope > .' + BAR); const txt = b.textContent || '';
+            if (/⏳ Đang|🎓 Đang chuẩn bị/.test(txt) && txt.length < 160) { if (bar) bar.remove(); return; }
+            const r = b.dataset && b.dataset.bkRun, grp = r ? runs[r] : null, want = (grp && grp.length > 1 && grp[grp.length - 1] === b) ? String(grp.length) : '';
+            if (!bar) { bar = document.createElement('div'); bar.className = BAR; bar.dataset.run = '-'; }
+            if (bar.dataset.run !== want) { bar.dataset.run = want; bar.innerHTML = '<button type="button" data-nt="one">📒 Lưu ghi chú</button>' + (want ? '<button type="button" data-nt="run">📒 Lưu cả ' + want + ' phần vừa dịch</button>' : ''); }
+            if (b.lastElementChild !== bar) b.appendChild(bar);
+        });
+    }
+    let sb = null, selT = 0;
+    function selBtn() {
+        if (sb) return sb; sb = document.createElement('button'); sb.type = 'button'; sb.id = 'nt-selbtn'; sb.textContent = '📒 Lưu ghi chú'; sb.style.display = 'none';
+        sb.addEventListener('mousedown', e => e.preventDefault());
+        sb.addEventListener('click', () => { const b = sb._b, t = sb._t; sb.style.display = 'none'; try { getSelection().removeAllRanges(); } catch (e) {} if (b && t) saveFrom([b], t); });
+        document.body.appendChild(sb); return sb;
+    }
+    function selCheck() {
+        const box = $('ai-messages'), s = getSelection(), el = selBtn();
+        if (!box || !s || s.isCollapsed || !s.rangeCount) { el.style.display = 'none'; return; }
+        const r = s.getRangeAt(0); let n = r.commonAncestorContainer; if (n.nodeType === 3) n = n.parentElement;
+        const b = n && n.closest ? n.closest('#ai-messages > .ai-bub') : null, t = s.toString().trim();
+        if (!b || t.length < 2 || n.closest('.' + BAR)) { el.style.display = 'none'; return; }
+        const rc = r.getBoundingClientRect(); el._b = b; el._t = t; el.style.display = 'block';
+        const w = el.offsetWidth || 110; let top = rc.top - 40; if (top < 8) top = rc.bottom + 10;
+        el.style.top = top + 'px'; el.style.left = Math.max(8, Math.min(innerWidth - w - 8, rc.left + rc.width / 2 - w / 2)) + 'px';
+    }
+
+    function init() {
+        load();
+        const m = $('note-modal');
+        if (m) {
+            m.addEventListener('click', e => {
+                if (e.target === m) { window.closeRhmNote(); return; }
+                const a = e.target.closest('[data-act]'); if (!a) return; const id = a.dataset.id;
+                switch (a.dataset.act) {
+                    case 'close': window.closeRhmNote(); break; case 'prev': step(-1); break; case 'next': step(1); break;
+                    case 'rb-search': openSearch(); break; case 'n-edit': openEdit(id); break; case 'n-info': openInfo(id); break;
+                    case 'n-save': saveEdit(); break; case 'n-del': delNote(); break; case 'cancel': closePop(); break; case 'n-hit': goNote(id); break;
+                }
+            });
+            m.addEventListener('input', e => { if (e.target.id === 'nt-in-q') doSearch(); });
+            window.addEventListener('keydown', e => {
+                if (!isOpen()) return;
+                const tg = document.activeElement && document.activeElement.tagName, typing = tg === 'INPUT' || tg === 'TEXTAREA';
+                if (e.key === 'Escape') { e.stopPropagation(); e.preventDefault(); nt.pop ? closePop() : window.closeRhmNote(); return; }
+                if (typing) return;
+                if (e.key === 'ArrowRight') { e.stopPropagation(); e.preventDefault(); step(1); } else if (e.key === 'ArrowLeft') { e.stopPropagation(); e.preventDefault(); step(-1); }
+            }, true);
+            let rt = 0; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (!isOpen()) return; nt.per = window.innerWidth >= 760 ? 2 : 1; $('nt-book').classList.toggle('one', nt.per === 1); $('nt-L').innerHTML = pageHTML(nt.cur, 'L'); repaginate(null); }, 160); });
+        }
+        const box = $('ai-messages');
+        if (box) {
+            let sch = false; new MutationObserver(() => { if (sch) return; sch = true; requestAnimationFrame(() => { sch = false; ensureBars(); }); }).observe(box, { childList: true, subtree: true });
+            box.addEventListener('mousedown', e => { if (e.target.closest && e.target.closest('.' + BAR + ' button')) e.preventDefault(); });
+            box.addEventListener('click', e => {
+                const bt = e.target.closest && e.target.closest('.' + BAR + ' button'); if (!bt) return; const b = bt.closest('.ai-bub'); if (!b) return;
+                if (bt.dataset.nt === 'run' && b.dataset.bkRun) saveFrom(Array.prototype.slice.call(box.querySelectorAll(':scope > .ai-bub')).filter(x => x.dataset.bkRun === b.dataset.bkRun), '');
+                else saveFrom([b], selIn(b));
+            });
+            ensureBars();
+        }
+        document.addEventListener('selectionchange', () => { clearTimeout(selT); selT = setTimeout(selCheck, 250); });
+        [800, 2500, 6000].forEach(ms => setTimeout(() => { if (!isOpen()) load(); }, ms));
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
 </script>
 </body>
