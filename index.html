@@ -16459,8 +16459,8 @@ window.isIOSDevice = function () {
     function save() { sset(JSON.stringify(rd.terms.map(t => ({ en: t.en, vi: t.vi, p: t.p || '', im: t.im || [], ts: t.ts, u: t.u ? 1 : 0, i: t.i || '', s: t.s ? 1 : 0, n: t.n ? 1 : 0, f: t.f ? 1 : 0 })))); count(); }
     function count() { const e = $('rhm-dict-count'); if (e) e.textContent = String(rd.terms.length); }
     const nNew = () => rd.terms.filter(t => t.n).length;
-    const newChip = () => { const n = nNew(); return n ? '<span class="rd-nwg"><button type="button" class="rd-nwc-b" data-act="clr-new" title="Bấm để bỏ hết dấu MỚI">' + n + ' mới ✕</button><button type="button" class="rd-nwc-l" data-act="new-list" title="Xem các thuật ngữ mới">👁 Xem</button></span>' : ''; };
-    function refreshChip() { const n = nNew(); document.querySelectorAll('#dict-modal .rd-nwg').forEach(g => { if (n) { const b = g.querySelector('[data-act="clr-new"]'); if (b) b.textContent = n + ' mới ✕'; } else g.remove(); }); }
+    const newChip = () => { const n = nNew(); return n ? '<button type="button" class="rd-bdg rd-nwc" data-act="clr-new" title="Bấm để bỏ hết dấu MỚI">' + n + ' mới ✕</button>' : ''; };
+    function refreshChip() { const n = nNew(); document.querySelectorAll('#dict-modal .rd-nwc').forEach(b => { if (n) b.textContent = n + ' mới ✕'; else b.remove(); }); }
     const SPK = '<button type="button" class="rd-spk" data-act="spk" title="Đọc to"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 6a9 9 0 0 1 0 12"/></svg></button>';
     const enHTML = t => SPK + esc(t.en) + (t.s ? '<span class="rd-sv" title="Đã lưu">★</span>' : '') + (t.n ? '<span class="rd-nw">MỚI</span>' : '');
     function clearNew() {
@@ -16621,7 +16621,7 @@ window.isIOSDevice = function () {
     function paintRib() {
         ['add', 'search', 'saved', 'review', 'jump'].forEach(n => { const b = $('rd-rb-' + n); if (b) b.classList.toggle('on', n === 'review' ? !!rd.rv : rd.pop === n); });
     }
-    function closePop() { rd.pop = ''; rd.editT = null; rd.infoT = null; rd.more = null; rd.editIm = null; const p = $('rd-pop'); p.classList.add('hidden'); p.classList.remove('wide', 'more', 'tall', 'nlw'); paintRib(); }
+    function closePop() { rd.pop = ''; rd.editT = null; rd.infoT = null; rd.more = null; rd.editIm = null; const p = $('rd-pop'); p.classList.add('hidden'); p.classList.remove('wide', 'more', 'tall'); paintRib(); }
     function openPop(mode, t) {
         hideTip();
         rd.pop = mode; rd.editT = mode === 'row' ? t : null; rd.infoT = mode === 'info' ? t : null;
@@ -17111,14 +17111,7 @@ window.isIOSDevice = function () {
     window.closeRhmDict = function () { closePop(); rvClose(); $('dict-modal').classList.add('hidden'); };
 
     /* ---------- sự kiện ---------- */
-    function openNewList() {
-        closePop(); clearSel();
-        const list = []; rd.terms.forEach((t, k) => { if (t.n) list.push({ t, k }); });
-        const rows = list.length ? list.map(x => '<tr data-act="hit" data-k="' + x.k + '"><td><b>' + esc(x.t.en) + '</b></td><td>' + (x.t.p ? '<i class="rd-pos2">' + esc(x.t.p) + '</i>' : '') + '</td><td>' + viHTML(x.t.vi) + '</td></tr>').join('') : '<tr><td colspan="3" class="rd-hint">Không còn thuật ngữ mới nào.</td></tr>';
-        const p = $('rd-pop');
-        p.innerHTML = '<div class="rd-pt">🆕 Thuật ngữ mới (' + list.length + ')</div><div class="rd-mt nl-mt"><table class="rd-tbl"><thead><tr><th>Tiếng Anh</th><th>Từ loại</th><th>Tiếng Việt</th></tr></thead><tbody>' + rows + '</tbody></table></div><div class="rd-pb"><button type="button" class="rd-pbtn" data-act="cancel">Đóng</button></div>';
-        p.classList.add('tall', 'nlw'); p.classList.remove('hidden'); rd.pop = 'newlist'; paintRib();
-    }function act(a, el) {
+    function act(a, el) {
         switch (a) {
             case 'close': window.closeRhmDict(); break;
             case 'prev': step(-1); break; case 'next': step(1); break;
@@ -17134,7 +17127,7 @@ window.isIOSDevice = function () {
             case 'img-pick': { const f = $('rd-in-img'); if (f) f.click(); break; }
             case 'img-del': { const i = +el.dataset.i; if (rd.editIm && i >= 0) { rd.editIm.splice(i, 1); paintThumbs(); } break; }
             case 'sv-un': toggleSave(rd.terms[+el.dataset.k]); break;
-            case 'clr-new': clearNew(); break; case 'new-list': openNewList(); break;
+            case 'clr-new': clearNew(); break;
             case 'qz-lang': qzLang(el.dataset.l); break;
             case 'spk': { const r0 = el.closest('.rd-row'); speakEn(r0 && rd.terms[+r0.dataset.k]); break; }
             case 'rv-close': rvClose(); break; case 'rv-opt': rvOpt(el); break; case 'rv-start': rvStart(); break; case 'rv-back': rvSetup(); break;
@@ -17451,21 +17444,7 @@ window.isIOSDevice = function () {
 #note-modal .qz-fb.ok{background:#dcfce7;color:#166534}
 #note-modal .qz-fb.bad{background:#fee2e2;color:#991b1b}
 #note-modal .qz-cv{font-weight:500;margin-top:4px;color:#374151}
-@media (prefers-reduced-motion:reduce){#note-modal .rd-nw{animation:none}}<style>
-#note-modal .nt-ed-acts{display:none!important}
-#note-modal .nt-hd-acts{display:flex;gap:6px;flex:none;align-items:center;margin-left:auto}
-#note-modal .nt-hd-acts .nt-ed-btn{padding:5px 12px;white-space:nowrap}
-#note-modal .rd-pg .nt-hd-only{left:var(--bm-o);right:var(--bm-o);justify-content:flex-end}
-#dict-modal .rd-nwg{display:inline-flex;gap:6px;align-items:center;flex:none}
-#dict-modal .rd-nwc-b,#dict-modal .rd-nwc-l{border:0;border-radius:999px;padding:4px 11px;font-weight:700;font-size:clamp(10px,.95vw,13px);cursor:pointer;font-family:inherit;white-space:nowrap}
-#dict-modal .rd-nwc-b{background:#fee2e2;color:#b91c1c}
-#dict-modal .rd-nwc-b:hover{background:#fecaca}
-#dict-modal .rd-nwc-l{background:#ede9fe;color:#5b21b6}
-#dict-modal .rd-nwc-l:hover{background:#ddd6fe}
-#dict-modal .rd-pop.nlw{width:min(680px,94%)}
-#dict-modal .nl-mt{max-height:min(520px,60vh)}
-#dict-modal .rd-pos2{font-weight:600;font-style:italic;color:#7c3aed;white-space:nowrap}
-</style>
+@media (prefers-reduced-motion:reduce){#note-modal .rd-nw{animation:none}}
 @media (max-width:759px){
  #note-modal .rd-wrap{--rd-h:calc(var(--rd-vh) - 8px - 62px - 50px);padding-top:62px;display:flex;flex-direction:column}
  #note-modal .rd-tabs.L,#note-modal .rd-tabs.R{display:none}
@@ -17621,7 +17600,7 @@ window.isIOSDevice = function () {
     }
     function pageHTML(i, pos) {
         const T = nt.pages.length, tot = Math.max(T, 1), showHd = pos === 'L' || nt.per === 1;
-        const edHere = !!nt.edId && (nt.pages[i] || []).some(it => it.n && it.n.id === nt.edId); const actsH = edHere ? '<span class="nt-hd-acts"><button type="button" class="nt-ed-btn" data-act="n-imgpick">🖼️ Thêm ảnh</button><button type="button" class="nt-ed-btn pri" data-act="ed-save">Lưu</button><button type="button" class="nt-ed-btn" data-act="ed-cancel">Hủy</button><button type="button" class="nt-ed-btn dan" data-act="ed-del">Xóa</button></span>' : ''; const hd = showHd ? '<div class="rd-hd"><span class="rd-ttl">Sổ ghi chú</span><span class="rd-bdg">Tổng ' + nt.notes.length + ' · trang ' + Math.min(i + 1, tot) + '/' + tot + '</span>' + actsH + '</div>' : (edHere ? '<div class="rd-hd nt-hd-only">' + actsH + '</div>' : '');
+        const hd = showHd ? '<div class="rd-hd"><span class="rd-ttl">Sổ ghi chú</span><span class="rd-bdg">Tổng ' + nt.notes.length + ' · trang ' + Math.min(i + 1, tot) + '/' + tot + '</span></div>' : '';
         if (T === 0) return i === 0 ? hd + '<div class="rd-body"><div class="rd-empty">Sổ ghi chú còn trống.<br>Trong hộp chat AI, bấm 📒 Lưu ghi chú ở cuối bong bóng (hoặc bôi đen một đoạn rồi bấm 📒 Lưu ghi chú) để lưu vào đây.</div></div>' : '<div class="rd-body"></div>';
         if (i < 0 || i >= T) return hd + '<div class="rd-body"></div>';
         return hd + '<div class="rd-body' + (nt.edId ? ' nt-scroll' : '') + '">' + nt.pages[i].map(itemHTML).join('') + '</div><div class="rd-ft">Trang ' + (i + 1) + '</div>';
@@ -18138,7 +18117,7 @@ window.isIOSDevice = function () {
         <div class="flex flex-col gap-2">
             <button type="button" onclick="homeSettingsGo('openSuggestQuestionModal')" class="text-left text-sm bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold py-2.5 px-3.5 rounded-xl border border-blue-300">💡 Đề xuất câu hỏi</button>
             <button type="button" onclick="homeSettingsGo('openAppFeedbackModal')" class="text-left text-sm bg-teal-50 hover:bg-teal-100 text-teal-800 font-semibold py-2.5 px-3.5 rounded-xl border border-teal-300">📩 Góp ý / Liên hệ</button>
-            <button type="button" onclick="hsOpenKeys()" class="text-left text-sm bg-amber-50 hover:bg-amber-100 text-amber-800 font-semibold py-2.5 px-3.5 rounded-xl border border-amber-300 flex items-center justify-between">🔑 Cài đặt khóa API</button>
+            <button type="button" onclick="hsOpenKeys()" class="text-left text-sm bg-amber-50 hover:bg-amber-100 text-amber-800 font-semibold py-2.5 px-3.5 rounded-xl border border-amber-300 flex items-center justify-between">🔑 Cài đặt khóa API <span>›</span></button>
             <button type="button" onclick="homeSettingsGo('openProgressModal')" class="text-left text-sm bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold py-2.5 px-3.5 rounded-xl border border-indigo-300">🔄 Nhập / Xuất Tiến Độ</button>
             <button type="button" id="btn-add-home" onclick="homeSettingsGo('addToHomeScreen')" class="text-left text-sm bg-sky-50 hover:bg-sky-100 text-sky-800 font-semibold py-2.5 px-3.5 rounded-xl border border-sky-300">📲 Thêm vào MH chính</button>
         </div>
@@ -18272,7 +18251,7 @@ window.isIOSDevice = function () {
     };
     window.hsCloseKeys = function () {
         var m = document.getElementById('hs-keys-modal'); if (m) m.style.display = 'none';
-        hsMoveBack(); hsUnlock(); setTimeout(function () { if (window.openHomeSettings) window.openHomeSettings(); }, 0);
+        hsMoveBack(); hsUnlock();
     };
     window.hsLock = function (m) {
         document.querySelectorAll('body > *').forEach(function (s) {
