@@ -13079,7 +13079,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     }
     ['pointerup', 'touchend', 'click'].forEach(ev => document.addEventListener(ev, function (e) {   // dự phòng: chạm đúng vùng nút X là đóng chat, dù có phần tử khác đè lên
         try {
-            const b = document.getElementById('ai-close-btn'); if (!b || aiModalEl.classList.contains('hidden') || aiModalEl.classList.contains('ai-chat-off')) return;
+            if (e.target && e.target.closest && e.target.closest('.fixed.inset-0:not(#ai-tutor-modal)')) return; const b = document.getElementById('ai-close-btn'); if (!b || aiModalEl.classList.contains('hidden') || aiModalEl.classList.contains('ai-chat-off')) return;
             const t = (e.changedTouches && e.changedTouches[0]) || e, r = b.getBoundingClientRect();
             if (!r.width || t.clientX < r.left - 4 || t.clientX > r.right + 4 || t.clientY < r.top - 4 || t.clientY > r.bottom + 4) return;
             if (e.type === 'pointerup' && e.pointerType === 'mouse') return;
@@ -17719,22 +17719,21 @@ window.isIOSDevice = function () {
         const nr = document.createRange(); nr.setStartAfter(sp); nr.collapse(true);
         sel.removeAllRanges(); sel.addRange(nr); nt.edRange = nr.cloneRange(); snapshotInline();
     }
-    function editorHTML() {
-        return '<div class="nt-it nt-editing">'
-            + '<input id="nt-ed-t" class="nt-ed-title" value="' + esc(nt.edT || '') + '" placeholder="Tiêu đề ghi chú" autocomplete="off">'
+    function editorHTML() {return '<div class="nt-it nt-editing">'
+            + '<div class="nt-ed-head"><input id="nt-ed-t" class="nt-ed-title" value="' + esc(nt.edT || '') + '" placeholder="Tiêu đề ghi chú" autocomplete="off">'
+            + '<div class="nt-ed-acts"><button type="button" class="nt-ed-btn" data-act="n-imgpick">🖼️ Thêm ảnh</button><button type="button" class="nt-ed-btn pri" data-act="ed-save">Lưu</button><button type="button" class="nt-ed-btn" data-act="ed-cancel">Hủy</button><button type="button" class="nt-ed-btn dan" data-act="ed-del">Xóa</button></div></div>'
+            + '<input id="nt-in-img" type="file" accept="image/*" multiple hidden>'
             + '<div class="nt-ed-cat">Phân mục: <input id="nt-ed-c" class="nt-ed-cin" list="nt-cat-list" value="' + esc(nt.edC || '') + '" placeholder="chọn hoặc gõ mới" autocomplete="off"></div>'
             + '<div id="nt-ed-body" class="nt-ed-body" contenteditable="true" spellcheck="false">' + bodyHTML(nt.edB, nt.edIm, true) + '</div>'
-            + '<div class="nt-ed-bar"><button type="button" class="nt-ed-btn pri" data-act="ed-save">Lưu</button><button type="button" class="nt-ed-btn" data-act="ed-cancel">Hủy</button><button type="button" class="nt-ed-btn dan" data-act="ed-del">Xóa ghi chú</button></div>'
             + '</div><datalist id="nt-cat-list">' + allCats().map(c => '<option value="' + esc(c) + '">').join('') + '</datalist>';
-    }
-    function startInline(id) {
+    }function startInline(id) {
         if (nt.lock) return;
         const n = nt.notes.find(x => x.id === id); if (!n) return;
         if (nt.edId && nt.edId !== id) closeInline(false);
         const im = cleanIm(n.im).slice(); let b = String(n.b || '');
         const refs = new Set((b.match(/\[\[img:\d+\]\]/g) || []).map(t => +t.slice(6, -2)));
         im.forEach((_, k) => { if (!refs.has(k)) b += (b && !/\n$/.test(b) ? '\n' : '') + '[[img:' + k + ']]'; });
-        openPop('<div class="rd-pt">🖼️ Chèn ảnh</div><div class="rd-imgrow"><button type="button" class="rd-pbtn pri" data-act="n-imgpick">🖼️ Thêm ảnh</button></div><input id="nt-in-img" type="file" accept="image/*" multiple hidden>', '', 'inline');
+        closePop();
         nt.isNew = false; nt.ed = n; nt.edId = id; nt.edB = b; nt.edIm = im; nt.edT = n.t || ''; nt.edC = n.cat || ''; nt.edRange = null;
         repaginate(id);
     }
@@ -18067,7 +18066,7 @@ window.isIOSDevice = function () {
             window.addEventListener('keydown', e => {
                 if (!isOpen()) return;
                 const tg = document.activeElement && document.activeElement.tagName, typing = tg === 'INPUT' || tg === 'TEXTAREA';
-                if (e.key === 'Escape') { e.stopPropagation(); e.preventDefault(); nt.rv ? rvClose() : nt.pop ? closePop() : window.closeRhmNote(); return; }
+                if (e.key === 'Escape') { e.stopPropagation(); e.preventDefault(); nt.rv ? rvClose() : nt.pop ? closePop() : nt.edId ? null : window.closeRhmNote(); return; }
                 if (typing) { if (e.key === 'Enter' && e.target.id === 'nt-in-q' && sMode === 'topic') topicSearch(); else if (e.key === 'Enter' && e.target.id === 'rv-topic') rvStart(); return; }
                 if (nt.rv || nt.edId) return;
                 if (e.key === 'ArrowRight') { e.stopPropagation(); e.preventDefault(); step(1); } else if (e.key === 'ArrowLeft') { e.stopPropagation(); e.preventDefault(); step(-1); }
@@ -18343,4 +18342,43 @@ function viSelText(range) {
 #note-modal .nt-ed-btn.dan { background: #fee2e2; color: #b91c1c; border-color: #fecaca; }
 #note-modal img.nt-ed-img { display: block; max-width: 100%; max-height: 240px; object-fit: contain; margin: 6px 0; border-radius: 8px; border: 1px solid #99f6e4; user-select: none; }
 </style>
+<style>
+#note-modal .nt-ed-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+#note-modal .nt-ed-head > .nt-ed-title { width: auto; flex: 1 1 180px; min-width: 0; margin-bottom: 0; }
+#note-modal .nt-ed-acts { display: flex; gap: 6px; flex-wrap: wrap; }
+#note-modal .nt-ed-acts .nt-ed-btn { padding: 5px 11px; }
+</style>
+<script>
+(function () {
+    'use strict';
+    var until = 0, seen = new WeakMap();
+    function isOv(el) { return !!el && !!el.classList && el.classList.contains('fixed') && el.classList.contains('inset-0'); }
+    function vis(el) { return !el.classList.contains('hidden') && el.style.display !== 'none'; }
+    document.querySelectorAll('.fixed.inset-0').forEach(function (el) { seen.set(el, vis(el)); });
+    new MutationObserver(function (muts) {
+        muts.forEach(function (mu) {
+            var el = mu.target; if (!isOv(el)) return;
+            var v = vis(el);
+            if (seen.has(el) && seen.get(el) !== v) until = Date.now() + 450;
+            seen.set(el, v);
+        });
+    }).observe(document.body, { attributes: true, attributeFilter: ['class', 'style'], subtree: true });
+    ['pointerdown', 'mousedown', 'mouseup', 'pointerup', 'touchstart', 'touchend', 'click'].forEach(function (ev) {
+        window.addEventListener(ev, function (e) {
+            if (Date.now() < until) { if (e.cancelable) e.preventDefault(); e.stopPropagation(); }
+        }, true);
+    });
+    ['dict-modal', 'note-modal', 'hs-keys-modal', 'home-settings-modal'].forEach(function (id) {
+        var m = document.getElementById(id); if (!m) return;
+        ['click', 'mousedown', 'mouseup', 'pointerdown', 'pointerup', 'touchstart', 'touchend'].forEach(function (ev) {
+            m.addEventListener(ev, function (e) { e.stopPropagation(); });
+        });
+    });
+    document.addEventListener('wheel', function (e) {
+        var sc = e.target && e.target.closest ? e.target.closest('#note-modal .rd-body.nt-scroll, #note-modal .rd-pop.tall, #dict-modal .rd-pop.tall') : null;
+        if (!sc || sc.scrollHeight <= sc.clientHeight) return;
+        e.preventDefault(); sc.scrollTop += e.deltaY;
+    }, { passive: false, capture: true });
+})();
+</script>
 </html>
