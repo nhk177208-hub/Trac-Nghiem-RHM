@@ -18506,7 +18506,9 @@ function viSelText(range) {
 .rhm-bar-t{font-weight:800;color:#334155;font-size:15px}
 .rhm-x{width:36px;height:36px;border:0;border-radius:999px;background:#e2e8f0;color:#334155;font-size:17px;font-weight:900;cursor:pointer;flex:none}
 .rhm-x:hover{background:#cbd5e1}
-.rhm-ui .rhm-trio{width:min(1180px,100%);max-width:100%}
+.rhm-ui .rhm-trio{width:100%;max-width:100%}
+.rhm-r3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+.rhm-r3 .rhm-s3{min-height:68px;box-sizing:border-box;margin:0;padding:10px 6px;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.25;font-size:13px;border-radius:12px}
 .rhm-col{box-sizing:border-box;padding:24px}
 .rhm-qa{flex:none !important;box-sizing:border-box;margin:0 !important;min-height:0 !important;position:relative;display:flex;align-items:center;justify-content:center;padding:8px;border:1px solid #e0e7ff;border-radius:12px;background:#fff}
 .rhm-qs{min-height:1rem;margin-top:6px;font-size:12px;color:#6b7280;text-align:center}
@@ -18529,9 +18531,9 @@ function viSelText(range) {
       '<div class="rhm-qa" id="rhm-qa-' + k + '"></div>' +
       '<div class="rhm-qs" id="rhm-qst-' + k + '"></div>' +
       '<div class="rhm-spacer"></div>' +
-      '<div class="rhm-r2"><button type="button" class="rhm-s" data-x="' + k + '-word">⬇ Xuất Word</button>' +
-      '<button type="button" class="rhm-s" data-x="' + k + '-json">⬇ Xuất JSON</button></div>' +
-      '<div class="rhm-big"><label class="rhm-bg rhm-' + k + ' dk">⬆ Nhập từ Word / JSON' +
+      '<div class="rhm-r3"><button type="button" class="rhm-s rhm-s3" data-x="' + k + '-word">⬇ Xuất Word</button>' +
+      '<button type="button" class="rhm-s rhm-s3" data-x="' + k + '-json">⬇ Xuất JSON</button>' +
+      '<label class="rhm-bg rhm-' + k + ' dk rhm-s3">⬆ Nhập file' +
       '<input type="file" accept=".json,.docx,.doc,.html,.htm" data-x="' + k + '-imp" hidden></label></div>' +
       '</div>';
   }
@@ -18596,8 +18598,6 @@ function viSelText(range) {
       qa.style.flex = 'none'; qa.style.width = pr.width + 'px'; qa.style.height = pr.height + 'px'; qa.style.alignSelf = 'center';
       var cv = qa.querySelector('canvas'); if (cv) { cv.style.width = pcw + 'px'; cv.style.height = 'auto'; cv.style.maxWidth = 'none'; }
       var nav = qa.querySelector('.rhm-nav'); if (nav && qs) qs.insertBefore(nav, qs.firstChild);
-      var pb = Math.max(0, colR.bottom - br.bottom);
-      if (Math.abs(parseFloat(col.style.paddingBottom || '0') - pb) > 0.5) col.style.paddingBottom = pb + 'px';
     });
   }
 
@@ -18640,6 +18640,7 @@ function viSelText(range) {
     var r = prevOpen.apply(this, arguments);
     try {
       build(); observe(); if (IO.refresh) IO.refresh();
+      Promise.all([Q.genQr('dict'), Q.genQr('notes')]).then(function () { requestAnimationFrame(sync); });
       requestAnimationFrame(sync); setTimeout(sync, 300);
     } catch (e) { console.warn(e); }
     return r;
