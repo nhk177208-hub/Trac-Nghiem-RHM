@@ -18423,7 +18423,7 @@ function viSelText(range) {
   function show(k) {
     var s = st[k], box = document.getElementById('rhm-qa-' + k), stt = document.getElementById('rhm-qst-' + k);
     if (!box) return;
-    if (!s.qrs.length) { box.innerHTML = '<div class="rhm-qe">Bấm “📷 Tạo mã QR” để tạo mã.</div>'; if (stt) stt.textContent = ''; return; }
+    if (!s.qrs.length) { box.innerHTML = '<div class="rhm-qe">Bấm “Xuất Tiến Độ” hoặc “Nhập Tiến Độ” để tạo mã QR.</div>'; if (stt) stt.textContent = ''; return; }
     var q = s.qrs[s.i], cv = pqDraw(q.qr, qrScale(q.qr), '');
     cv.className = 'rhm-cv';
     box.innerHTML = '';
@@ -18492,10 +18492,156 @@ function viSelText(range) {
     if (!trio.getAttribute('data-v3')) { trio.setAttribute('data-v3', '1'); trio.addEventListener('click', onClick); }
     show('dict'); show('notes');
   }
+  window.rhmQr = { genQr: genQr, show: show, st: st };
   var prevOpen = window.openProgressModal;
   window.openProgressModal = function () {
     var r = prevOpen.apply(this, arguments);
     try { rebuild(); if (window.rhmIO && window.rhmIO.refresh) window.rhmIO.refresh(); } catch (e) { console.warn(e); }
+    return r;
+  };
+})();
+</script><style>
+.rhm-ui{display:flex;flex-direction:column;background:#f1f5f9;border-radius:20px;box-shadow:0 25px 60px -12px rgba(0,0,0,.45);padding:0 16px 16px;max-width:96vw;max-height:96vh;overflow:auto;box-sizing:border-box}
+.rhm-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 4px 12px}
+.rhm-bar-t{font-weight:800;color:#334155;font-size:15px}
+.rhm-x{width:36px;height:36px;border:0;border-radius:999px;background:#e2e8f0;color:#334155;font-size:17px;font-weight:900;cursor:pointer;flex:none}
+.rhm-x:hover{background:#cbd5e1}
+.rhm-ui .rhm-trio{width:min(1180px,100%);max-width:100%}
+.rhm-col{box-sizing:border-box;padding:24px}
+.rhm-qa{flex:none !important;box-sizing:border-box;margin:0 !important;min-height:0 !important;position:relative;display:flex;align-items:center;justify-content:center;padding:8px;border:1px solid #e0e7ff;border-radius:12px;background:#fff}
+.rhm-qs{min-height:1rem;margin-top:6px;font-size:12px;color:#6b7280;text-align:center}
+.rhm-spacer{flex:1 1 auto;min-height:14px}
+.rhm-big{margin-top:12px}
+.rhm-big .rhm-bg{width:100%;box-sizing:border-box}
+</style>
+<script>
+(function () {
+  'use strict';
+  var Q = window.rhmQr, IO = window.rhmIO;
+  if (!Q || !IO) return;
+
+  function colHTML(k) {
+    var d = k === 'dict';
+    return '<div class="rhm-col rhm-' + k + '">' +
+      '<div class="rhm-top"><div class="rhm-hd"><span class="rhm-ic">' + (d ? '📖' : '📒') + '</span><div><div class="rhm-tt">' +
+      (d ? 'Từ điển thuật ngữ RHM' : 'Sổ ghi chú RHM') + '</div><div class="rhm-cn" id="hs-cnt-' + k + '"></div></div></div>' +
+      '<div class="rhm-hint">' + (d ? 'Word: bảng 4 cột. JSON giữ đủ ảnh và trạng thái đã lưu.' : 'Word: tiêu đề Heading 2 và dòng “Phân mục”. JSON giữ đủ ảnh và phân mục.') + '</div></div>' +
+      '<div class="rhm-qa" id="rhm-qa-' + k + '"></div>' +
+      '<div class="rhm-qs" id="rhm-qst-' + k + '"></div>' +
+      '<div class="rhm-spacer"></div>' +
+      '<div class="rhm-r2"><button type="button" class="rhm-s" data-x="' + k + '-word">⬇ Xuất Word</button>' +
+      '<button type="button" class="rhm-s" data-x="' + k + '-json">⬇ Xuất JSON</button></div>' +
+      '<div class="rhm-big"><label class="rhm-bg rhm-' + k + ' dk">⬆ Nhập từ Word / JSON' +
+      '<input type="file" accept=".json,.docx,.doc,.html,.htm" data-x="' + k + '-imp" hidden></label></div>' +
+      '</div>';
+  }
+
+  /* Ẩn nút ✕ và nút Đóng của bảng Tiến Độ (chỉ còn ✕ của khung chung) */
+  function tidyProgress(box) {
+    box.querySelectorAll('button').forEach(function (b) {
+      if (b.getAttribute('onclick') !== 'closeProgressModal()') return;
+      var t = b.textContent.trim();
+      if (t === '✕') b.style.display = 'none';
+      else if (t === 'Đóng') { var f = b.closest('.mt-4') || b; f.style.display = 'none'; }
+    });
+  }
+
+  /* Bọc trio trong khung chung có một nút ✕ */
+  function wrap(m, trio) {
+    var ui = m.querySelector('.rhm-ui');
+    if (ui) return ui;
+    ui = document.createElement('div'); ui.className = 'rhm-ui';
+    var bar = document.createElement('div'); bar.className = 'rhm-bar';
+    bar.innerHTML = '<span class="rhm-bar-t">📚 Dữ liệu tiến độ · Từ điển · Sổ ghi chú</span><button type="button" class="rhm-x" aria-label="Đóng">✕</button>';
+    bar.querySelector('.rhm-x').addEventListener('click', function () {
+      if (typeof closeProgressModal === 'function') closeProgressModal();
+    });
+    ui.appendChild(bar);
+    m.insertBefore(ui, trio);
+    ui.appendChild(trio);
+    return ui;
+  }
+
+  function progBox(trio) {
+    return Array.prototype.find.call(trio.children, function (c) {
+      return !c.classList.contains('rhm-col') && !c.classList.contains('hs-box');
+    });
+  }
+
+  /* Đồng bộ: 2 cột QR có cùng vị trí và kích thước với mã QR của Tiến Độ */
+  function sync() {
+    var m = document.getElementById('progress-modal'); if (!m || m.classList.contains('hidden')) return;
+    var trio = m.querySelector('.rhm-trio'); if (!trio) return;
+    var cols = trio.querySelectorAll('.rhm-col'); if (!cols.length) return;
+    var pbox = progBox(trio), pq = document.getElementById('pq-box'), pc = document.getElementById('pq-canvas');
+    var pbtn = pbox && Array.prototype.find.call(pbox.querySelectorAll('button'), function (b) { return /Xuất Tiến Độ/.test(b.textContent); });
+    if (!pq || !pbtn) return;
+    var mobile = getComputedStyle(trio).gridTemplateColumns.split(' ').length < 2;
+    if (mobile) {
+      cols.forEach(function (col) {
+        col.style.paddingTop = ''; col.style.paddingBottom = '';
+        var t = col.querySelector('.rhm-top'); if (t) t.style.height = '';
+        var q = col.querySelector('.rhm-qa'); if (q) { q.style.width = ''; q.style.height = ''; }
+      });
+      return;
+    }
+    var cr = pbox.getBoundingClientRect(), pr = pq.getBoundingClientRect(), br = pbtn.getBoundingClientRect();
+    var cs = getComputedStyle(pbox), pt = parseFloat(cs.paddingTop), pl = parseFloat(cs.paddingLeft), pri = parseFloat(cs.paddingRight);
+    var pcw = (pc && pc.style.display !== 'none' && pc.getBoundingClientRect().width) ? pc.getBoundingClientRect().width : (pr.width - 18);
+    cols.forEach(function (col) {
+      col.style.paddingTop = pt + 'px'; col.style.paddingLeft = pl + 'px'; col.style.paddingRight = pri + 'px';
+      var top = col.querySelector('.rhm-top'), qa = col.querySelector('.rhm-qa'), qs = col.querySelector('.rhm-qs');
+      var colR = col.getBoundingClientRect();
+      top.style.height = Math.max(0, pr.top - colR.top - pt) + 'px';
+      qa.style.flex = 'none'; qa.style.width = pr.width + 'px'; qa.style.height = pr.height + 'px'; qa.style.alignSelf = 'center';
+      var cv = qa.querySelector('canvas'); if (cv) { cv.style.width = pcw + 'px'; cv.style.height = 'auto'; cv.style.maxWidth = 'none'; }
+      var nav = qa.querySelector('.rhm-nav'); if (nav && qs) qs.insertBefore(nav, qs.firstChild);
+      var pb = Math.max(0, colR.bottom - br.bottom);
+      if (Math.abs(parseFloat(col.style.paddingBottom || '0') - pb) > 0.5) col.style.paddingBottom = pb + 'px';
+    });
+  }
+
+  function build() {
+    var m = document.getElementById('progress-modal'); if (!m) return;
+    var trio = m.querySelector('.rhm-trio'); if (!trio) return;
+    var box = progBox(trio); if (!box) return;
+    trio.querySelectorAll('.rhm-col,.hs-box').forEach(function (c) { c.remove(); });
+    tidyProgress(box);
+    wrap(m, trio);
+    trio.insertAdjacentHTML('beforeend', colHTML('dict') + colHTML('notes'));
+    Q.show('dict'); Q.show('notes');
+    sync();
+  }
+
+  /* Theo dõi thay đổi kích thước bảng Tiến Độ (khi mã QR Tiến Độ hiện xong) */
+  var ro = null;
+  function observe() {
+    if (ro || !window.ResizeObserver) return;
+    ro = new ResizeObserver(function () { sync(); });
+    var pq = document.getElementById('pq-box');
+    var trio = document.querySelector('#progress-modal .rhm-trio');
+    if (trio) { var pb = progBox(trio); if (pb) ro.observe(pb); }
+    if (pq) ro.observe(pq);
+  }
+  window.addEventListener('resize', function () { sync(); });
+
+  /* Bấm Xuất/Nhập Tiến Độ là tạo luôn mã QR cho Từ điển và Sổ ghi chú */
+  var prevT = window.pqTogglePanel;
+  window.pqTogglePanel = function () {
+    var r = prevT.apply(this, arguments);
+    try {
+      Promise.all([Q.genQr('dict'), Q.genQr('notes')]).then(function () { requestAnimationFrame(sync); });
+    } catch (e) { console.warn(e); }
+    return r;
+  };
+
+  var prevOpen = window.openProgressModal;
+  window.openProgressModal = function () {
+    var r = prevOpen.apply(this, arguments);
+    try {
+      build(); observe(); if (IO.refresh) IO.refresh();
+      requestAnimationFrame(sync); setTimeout(sync, 300);
+    } catch (e) { console.warn(e); }
     return r;
   };
 })();
