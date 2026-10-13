@@ -9016,7 +9016,7 @@ async function bkOpenChapter(i) {
         const ex = await bkExtract(bkDoc, tok, (n, t) => bkSetStatus('⏳ Đang đọc chữ chương: trang ' + n + '/' + t));
         if (!ex || tok !== bkViewTok) return;
         bkPages = ex.pages; bkText = ex.text;
-        bkSecs = bkLoadManual(c.url); bkRelink(); bkRenderSecList();
+        bkSecs = bkLoadManual(c.url); bkRelink(); bkRenderSecList(); bkUpdateSecBtn();
         bkApplyHlAll();
         bkSetStatus(bkText.trim() ? '' : 'Chương này không có chữ (có thể là PDF scan), AI không đọc được nội dung.');
     } catch (e) {
@@ -9043,12 +9043,12 @@ function bkQuickTr() {
 }
 function bkLoadManual(url) {
     try {
-        const a = JSON.parse(localStorage.getItem('bk_man_' + url) || '[]');
-        return Array.isArray(a) ? a.map(x => ({ title: x.title, en: x.title, s: x.s, manual: true })) : [];
+        const a = JSON.parse(localStorage.getItem('bk_sec_' + url) || '[]');
+        return Array.isArray(a) ? a.map(x => ({ title: x.title, en: x.en || x.title, num: x.num || '', lvl: x.lvl || 1, s: x.s, manual: !!x.manual, intro: !!x.intro, e: 0, text: '' })) : [];
     } catch (e) { return []; }
 }
 function bkSaveManual() {
-    try { localStorage.setItem('bk_man_' + bkCur.url, JSON.stringify(bkSecs.filter(x => x.manual).map(x => ({ title: x.title, s: x.s })))); } catch (e) {}
+    try { localStorage.setItem('bk_sec_' + bkCur.url, JSON.stringify(bkSecs.map(x => ({ title: x.title, en: x.en, num: x.num || '', lvl: x.lvl || 1, s: x.s, manual: !!x.manual, intro: !!x.intro })))); } catch (e) {}
 }
 function bkRelink() {   // sắp xếp theo vị trí, mỗi phân mục kéo dài tới đầu phân mục kế tiếp
     const a = bkSecs.slice().sort((x, y) => x.s - y.s);
@@ -9273,6 +9273,12 @@ function bkMergeSecs(x, y) {
     const a = x.concat(y).sort((p, q) => p.s - q.s);
     return a.filter((p, i) => i === 0 || p.s !== a[i - 1].s);
 }
+function bkUpdateSecBtn() {
+    var b = document.getElementById('bk-sec-btn');
+    if (!b) return;
+    b.disabled = false;
+    b.textContent = bkSecs.length ? '🔄 Cập nhật mục lục' : '📑 Nhận diện mục lục';
+}
 async function bkDetectChapter() {
     if (!bkDoc) return;
     if (!bkText.trim()) { showToast('Chương đang được đọc chữ (xem thanh trạng thái) hoặc không có chữ — thử lại sau giây lát'); return; }
@@ -9289,7 +9295,7 @@ async function bkDetectChapter() {
             try { found = bkMergeSecs(found, bkLocateIn(await bkAiOutline(bkText.slice(a, b), bkHintsFor(a, b)), a, b)); }
             catch (e) { fail++; }
         }
-    } finally { btn.disabled = false; btn.textContent = '📑 Nhận diện mục lục'; }
+    } finally { btn.disabled = false; bkUpdateSecBtn(); }
     // Tiêu đề (dòng ngắn đứng riêng) mà AI bỏ sót: thêm vào mục lục rồi sắp theo vị trí
     {
         bkPages.forEach(p => (p.cands || []).forEach(c => {
@@ -9303,7 +9309,7 @@ async function bkDetectChapter() {
         bkSecs = bkMergeSecs(found, bkSecs.filter(x => x.manual));
         bkRelink();
     }
-    bkSecSel = -1; bkHl = null; bkApplyHlAll(); bkRenderSecList();
+    bkSaveManual(); bkSecSel = -1; bkHl = null; bkApplyHlAll(); bkRenderSecList(); bkUpdateSecBtn();
     document.getElementById('bk-sec-tr').classList.add('hidden');
     if (!found.length) showToast(fail ? 'AI chưa đọc được, thử lại sau' : 'Chưa nhận diện được mục lục.');
 }
@@ -12141,7 +12147,16 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
                         
                     </div>
                 </div>
-<p class="font-bold text-amber-900 mb-1">🔑 Nhà cung cấp AI &amp; khóa API</p>
+<div class="rounded-2xl bg-white border border-amber-200 p-3 mb-2">
+                    <div class="font-bold text-gray-900">Mức suy luận Gemini</div>
+                    <div class="mt-2 grid grid-cols-3 gap-2">
+                        <button type="button" data-gl="low" onclick="rhmGemSet('lv','low')" class="border rounded-xl px-2 py-2 text-sm font-bold">Thấp</button>
+                        <button type="button" data-gl="medium" onclick="rhmGemSet('lv','medium')" class="border rounded-xl px-2 py-2 text-sm font-bold">Trung bình</button>
+                        <button type="button" data-gl="high" onclick="rhmGemSet('lv','high')" class="border rounded-xl px-2 py-2 text-sm font-bold">Cao</button>
+                    </div>
+                    <p class="mt-2 text-[11px] text-gray-500">Áp dụng cho các lần gọi Gemini tiếp theo. Mức càng cao thì trả lời càng kỹ nhưng chậm hơn.</p>
+                </div>
+                <p class="font-bold text-amber-900 mb-1">🔑 Nhà cung cấp AI &amp; khóa API</p>
                 <p class="text-xs text-amber-800 mb-2">Mặc định dùng <b>Gemini</b>. Khi Gemini hết lượt hoặc lỗi, app <b>tự chuyển</b> sang nhà cung cấp khác đã có khóa (nếu bật bên dưới). Bạn cũng có thể tự chọn nhà cung cấp chính bằng nút tròn.</p>
                 <label class="flex items-center gap-2 text-xs font-bold text-amber-900 mb-2"><input id="ai-auto-switch" type="checkbox" onchange="aiAutoSet(this.checked)"> Tự chuyển nhà cung cấp khi hết lượt / lỗi</label>
                 <div id="ai-prov-cards" class="space-y-2"></div>
@@ -12755,7 +12770,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         aiPlaceModal(); aiScrollBottom();
     }
     function closeAiTutor() { aiModalEl.classList.add('ai-chat-off'); try { aiQuizCloseDlg(); } catch (e) {} try { aiTtsStop(); } catch (e) {} try { const kp = document.getElementById('ai-key-panel'); if (kp) kp.classList.add('hidden'); } catch (e) {} try { aiStopLive(); } catch (e) {} try { bkSyncSplit(); } catch (e) {} try { aiPlaceModal(); } catch (e) {} }
-    function aiOpenKeyPanel() { aiProvRender(); aiVoiceRender(); aiRateSet(aiRateGet()); aiLenRender(); document.getElementById('ai-key-panel').classList.remove('hidden'); }
+    function aiOpenKeyPanel() { rhmGemPaint(); aiProvRender(); aiVoiceRender(); aiRateSet(aiRateGet()); aiLenRender(); document.getElementById('ai-key-panel').classList.remove('hidden'); }
     function aiCloseKeyPanel() { document.getElementById('ai-key-panel').classList.add('hidden'); }
     (function () {   // nhãn nút luôn khớp trạng thái bảng cài đặt (Cài đặt / Đóng cài đặt)
         const pn = document.getElementById('ai-key-panel'), lb = document.getElementById('ai-settings-lbl'); if (!pn || !lb) return;
@@ -13256,7 +13271,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
                 if (attempt > 0) { onStatus('⏳ AI đang bận, đang thử lại (' + attempt + '/2)...'); await aiSleep(1200 * attempt); }
                 else if (mi > 0) onStatus('⏳ Đang chuyển sang model dự phòng...');
                 try {
-                    const res = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' + AI_DR_MODELS[mi] + ':generateContent', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-goog-api-key': aiState.key }, body });
+                    const res = await aiFetch('https://generativelanguage.googleapis.com/v1beta/models/' + AI_DR_MODELS[mi] + ':generateContent', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-goog-api-key': aiState.key }, body });
                     let data = {}; try { data = await res.json(); } catch (e) {}
                     if (res.ok) {
                         const cand = (data.candidates && data.candidates[0]) || {};
@@ -13915,7 +13930,7 @@ function aiEnsureQuickTts() {   // nút "Giảng bài" và "Đọc to" dính sá
         return out.map(x => x.id);
     }
     function aiGeminiModelsRefresh(force) {   // cập nhật tại chỗ GEMINI_FALLBACK_MODELS; lưu 30 phút theo khóa
-        const k = aiState.key; if (!k) return Promise.resolve();
+        const k = null; if (!k) return Promise.resolve();
         if (!force && aiModelCache.key === k && aiModelCache.p && Date.now() - aiModelCache.t < 30 * 60e3) return aiModelCache.p;
         aiModelCache.key = k; aiModelCache.t = Date.now();
         aiModelCache.p = (async () => {
@@ -13938,15 +13953,46 @@ function aiEnsureQuickTts() {   // nút "Giảng bài" và "Đọc to" dính sá
         return b;
     }
     const aiSleep = (ms) => new Promise(r => setTimeout(r, ms));
-    function aiFetch(url, opts, ms) {
+    var RHM_GEM_MODEL = 'gemini-flash-lite-latest';
+var RHM_GEM_LEVELS = { low: 'low', medium: 'medium', high: 'high' };
+function rhmGemCfg() {
+    var c = { lv: 'low' };
+    try {
+        var s = JSON.parse(localStorage.getItem('gemini_cfg_v1') || 'null');
+        if (s && RHM_GEM_LEVELS[s.lv]) c.lv = s.lv;
+    } catch (e) {}
+    return c;
+}
+function rhmGemSet(k, v) {
+    var c = rhmGemCfg();
+    c[k] = v;
+    try { localStorage.setItem('gemini_cfg_v1', JSON.stringify(c)); } catch (e) {}
+    rhmGemPaint();
+}
+function rhmGemPaint() {
+    var c = rhmGemCfg();
+    document.querySelectorAll('[data-gl]').forEach(function (b) {
+        var on = b.getAttribute('data-gl') === c.lv;
+        b.classList.toggle('bg-indigo-600', on); b.classList.toggle('text-white', on); b.classList.toggle('border-indigo-600', on);
+        b.classList.toggle('bg-white', !on); b.classList.toggle('text-gray-700', !on); b.classList.toggle('border-gray-300', !on);
+    });
+}
+function aiFetch(url, opts, ms) {
         if (/:generateContent/.test(url) && opts && typeof opts.body === 'string') {
+            var cfg = rhmGemCfg();
+            var nu = url.replace(/models\/[^:\/]+:generateContent/, 'models/' + RHM_GEM_MODEL + ':generateContent');
             var nb = null;
             try { nb = JSON.parse(opts.body); } catch (e) { nb = null; }
-            if (nb && !(nb.generationConfig && nb.generationConfig.thinkingConfig)) {
-                var tc = /gemini-3/.test(url) ? { thinkingLevel: 'minimal' } : { thinkingBudget: 0 };
-                var o2 = Object.assign({}, opts, { body: JSON.stringify(Object.assign({}, nb, { generationConfig: Object.assign({}, nb.generationConfig || {}, { thinkingConfig: tc }) })) });
-                return aiFetchRaw(url, o2, ms).then(function (r) { return r.status === 400 ? aiFetchRaw(url, opts, ms) : r; });
+            if (nb) {
+                var gc = Object.assign({}, nb.generationConfig || {}, { thinkingConfig: { thinkingLevel: RHM_GEM_LEVELS[cfg.lv] } });
+                var o2 = Object.assign({}, opts, { body: JSON.stringify(Object.assign({}, nb, { generationConfig: gc })) });
+                return aiFetchRaw(nu, o2, ms).then(function (r) {
+                    if (r.status !== 400) return r;
+                    var o3 = Object.assign({}, opts, { body: JSON.stringify(Object.assign({}, nb, { generationConfig: Object.assign({}, nb.generationConfig || {}) })) });
+                    return aiFetchRaw(nu, o3, ms);
+                });
             }
+            return aiFetchRaw(nu, opts, ms);
         }
         return aiFetchRaw(url, opts, ms);
     }
