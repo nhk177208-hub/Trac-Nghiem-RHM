@@ -18515,6 +18515,7 @@ function viSelText(range) {
 .rhm-spacer{flex:1 1 auto;min-height:14px}
 .rhm-big{margin-top:12px}
 .rhm-big .rhm-bg{width:100%;box-sizing:border-box}
+.rhm-ui .rhm-qa canvas{width:100% !important;height:auto !important;max-width:100% !important;max-height:100%;display:block}
 </style>
 <script>
 (function () {
@@ -18610,6 +18611,7 @@ function viSelText(range) {
     wrap(m, trio);
     trio.insertAdjacentHTML('beforeend', colHTML('dict') + colHTML('notes'));
     Q.show('dict'); Q.show('notes');
+    if (!trio.getAttribute('data-sync-click')) { trio.setAttribute('data-sync-click', '1'); trio.addEventListener('click', function () { setTimeout(sync, 0); }); }
     sync();
   }
 
@@ -18626,14 +18628,6 @@ function viSelText(range) {
   window.addEventListener('resize', function () { sync(); });
 
   /* Bấm Xuất/Nhập Tiến Độ là tạo luôn mã QR cho Từ điển và Sổ ghi chú */
-  var prevT = window.pqTogglePanel;
-  window.pqTogglePanel = function () {
-    var r = prevT.apply(this, arguments);
-    try {
-      Promise.all([Q.genQr('dict'), Q.genQr('notes')]).then(function () { requestAnimationFrame(sync); });
-    } catch (e) { console.warn(e); }
-    return r;
-  };
 
   var prevOpen = window.openProgressModal;
   window.openProgressModal = function () {
