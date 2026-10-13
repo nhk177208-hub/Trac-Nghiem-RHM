@@ -1332,7 +1332,7 @@
                 </div>
 
                 <div id="topic-grid" class="grid grid-cols-6 gap-1.5 sm:gap-3"></div>
-                <div id="topic-uncat" class="hidden mt-4"></div>
+                <div id="topic-uncat" class="hidden mt-4 dev-only"></div>
             </div>
 
 <div class="dev-only" style="margin-top:12px"><button onclick="rhmEditHome()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 px-4 rounded-xl transition-colors text-base shadow-sm">✏️ Edit đề</button></div>
@@ -7150,7 +7150,7 @@ const TOPIC_COUNT = 37;
                 btn.innerHTML = `
                     <img src="${TOPIC_ICONS[n - 1] || 'images/img_037.webp'}" alt="${topicFullName(n)}" draggable="false" onerror="this.style.opacity=0.15" class="w-9 h-9 sm:w-20 sm:h-20 object-contain shrink-0 ${c > 0 ? '' : 'opacity-60'}">
                     <span class="flex flex-col items-center text-center min-w-0">
-                        <span class="font-bold text-[11px] sm:text-lg leading-tight text-center w-full ${c > 0 ? 'text-blue-800' : 'text-gray-500'}" style="display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;line-height:1.25;min-height:calc(4 * 1.25em);text-align:center">${n === 37 ? 'Thi Thử' : (TOPIC_FULL_NAMES[n - 1] || ('Chủ đề ' + n))}</span>
+                        <span class="font-bold text-[11px] sm:text-lg leading-tight text-center w-full ${c > 0 ? 'text-blue-800' : 'text-gray-500'}" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.25;min-height:calc(2 * 1.25em);text-align:center">${n === 37 ? 'Thi Thử' : (TOPIC_FULL_NAMES[n - 1] || ('Chủ đề ' + n))}</span>
                         
                     </span>`;
                 grid.appendChild(btn);
