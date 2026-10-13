@@ -17198,7 +17198,7 @@ window.isIOSDevice = function () {
 
     /* ---------- tự thêm thuật ngữ mới sau mỗi lần dịch trong hộp chat đọc sách ---------- */
     function harvestSys() {
-        return 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Từ BẢN GỐC (tiếng Anh) và BẢN DỊCH tiếng Việt, hãy rút ra các THUẬT NGỮ CHUYÊN MÔN nha khoa/y khoa đáng đưa vào từ điển cho sinh viên RHM: danh từ hoặc cụm danh từ chuyên ngành (tên bệnh, kỹ thuật, vật liệu, dụng cụ, thuốc, cấu trúc giải phẫu, chỉ số, viết tắt chuyên ngành). KHÔNG lấy từ thông thường, động từ, tính từ chung, tên riêng người hoặc tổ chức, số liệu. Mỗi thuật ngữ gồm \"en\" (dạng chuẩn tiếng Anh, viết thường trừ tên riêng và viết tắt; nếu là viết tắt thì ghi dạng \"CBCT (cone beam computed tomography)\") và \"vi\" (nghĩa tiếng Việt ngắn gọn, đúng cách gọi trong bản dịch, không giải thích dài). Mỗi mục có thêm \"p\" là mã từ loại ngắn (n, v, adj, adv, abbr); nếu cùng một từ có nhiều từ loại với nghĩa khác nhau thì trả về mỗi từ loại một mục riêng (cùng \"en\", khác \"p\"). Tối đa 30 thuật ngữ, ưu tiên thuật ngữ quan trọng. Nếu không có gì đáng lấy thì trả về mảng rỗng. Trả về MỘT đối tượng JSON hợp lệ: {\"terms\":[{\"en\":\"...\",\"p\":\"n\",\"vi\":\"...\"}]}; trong chuỗi dùng dấu nháy đơn thay cho dấu nháy kép. Không thêm chữ nào ngoài JSON.'
+        return 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Từ BẢN GỐC (tiếng Anh) và BẢN DỊCH tiếng Việt, hãy rút ra các THUẬT NGỮ CHUYÊN MÔN nha khoa/y khoa đáng đưa vào từ điển cho sinh viên RHM: danh từ hoặc cụm danh từ chuyên ngành (tên bệnh, kỹ thuật, vật liệu, dụng cụ, thuốc, cấu trúc giải phẫu, chỉ số, viết tắt chuyên ngành). KHÔNG lấy từ thông thường, tên riêng người hoặc tổ chức, số liệu. Ngoài danh từ, được lấy cả ĐỘNG TỪ, TÍNH TỪ và TRẠNG TỪ là thuật ngữ chuyên ngành (mã p tương ứng là v, adj, adv), ví dụ extract (v), apical (adj). Với danh từ có SỐ NHIỀU BẤT QUY TẮC (không chỉ thêm s hoặc es, ví dụ tooth thành teeth, bacterium thành bacteria), thêm MỘT mục riêng cho dạng số nhiều đó với p là n và vi mở đầu bằng số nhiều của, kèm nghĩa; dạng số nhiều thêm s hoặc es thì KHÔNG thêm. Mỗi thuật ngữ gồm \"en\" (dạng chuẩn tiếng Anh, viết thường trừ tên riêng và viết tắt; nếu là viết tắt thì ghi dạng \"CBCT (cone beam computed tomography)\") và \"vi\" (nghĩa tiếng Việt ngắn gọn, đúng cách gọi trong bản dịch, không giải thích dài). Mỗi mục có thêm \"p\" là mã từ loại ngắn (n, v, adj, adv, abbr); nếu cùng một từ có nhiều từ loại với nghĩa khác nhau thì trả về mỗi từ loại một mục riêng (cùng \"en\", khác \"p\"). Tối đa 30 thuật ngữ, ưu tiên thuật ngữ quan trọng. Nếu không có gì đáng lấy thì trả về mảng rỗng. Trả về MỘT đối tượng JSON hợp lệ: {\"terms\":[{\"en\":\"...\",\"p\":\"n\",\"vi\":\"...\"}]}; trong chuỗi dùng dấu nháy đơn thay cho dấu nháy kép. Không thêm chữ nào ngoài JSON.'
             + (typeof BK_TR_GLOSS !== 'undefined' ? BK_TR_GLOSS : '');
     }
     window.rhmDictHarvest = async function (src, results) {
@@ -17553,7 +17553,7 @@ window.isIOSDevice = function () {
         nt.notes = (Array.isArray(a) ? a : []).filter(x => x && x.id && x.b).map(x => Object.assign(x, { cat: cleanCat(x.cat), im: cleanIm(x.im) }));
         let m = {}; try { m = JSON.parse(sget(MKEY) || '{}') || {}; } catch (e) {}
         nt.cats = (Array.isArray(m.cats) ? m.cats : []).map(cleanCat).filter(Boolean);
-        if (m.sv === 2 && ['new', 'old', 'cat', 'ttl'].includes(m.sort)) nt.sort = m.sort; else nt.sort = 'cat';
+        if (m.sv === 2 && ['new', 'old', 'cat', 'ttl'].includes(m.sort)) nt.sort = m.sort; else nt.sort = 'new';
         if (m.fs >= 0.7 && m.fs <= 2) nt.fs = +m.fs;
         count(); applyFs();
     }
@@ -17966,7 +17966,7 @@ window.isIOSDevice = function () {
         <div class="flex flex-col gap-2">
             <button type="button" onclick="homeSettingsGo('openSuggestQuestionModal')" class="text-left text-sm bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold py-2.5 px-3.5 rounded-xl border border-blue-300">💡 Đề xuất câu hỏi</button>
             <button type="button" onclick="homeSettingsGo('openAppFeedbackModal')" class="text-left text-sm bg-teal-50 hover:bg-teal-100 text-teal-800 font-semibold py-2.5 px-3.5 rounded-xl border border-teal-300">📩 Góp ý / Liên hệ</button>
-            <button type="button" onclick="homeSettingsGo('openApiSettingsFromHome')" class="text-left text-sm bg-amber-50 hover:bg-amber-100 text-amber-800 font-semibold py-2.5 px-3.5 rounded-xl border border-amber-300">🔑 Cài đặt khóa API</button>
+            <button type="button" onclick="hsKeysToggle()" class="text-left text-sm bg-amber-50 hover:bg-amber-100 text-amber-800 font-semibold py-2.5 px-3.5 rounded-xl border border-amber-300 flex items-center justify-between">🔑 Cài đặt khóa API <span id="hs-keys-arrow">▼</span></button><div id="hs-keys" style="display:none" class="flex flex-col gap-2 rounded-xl border border-amber-200 bg-amber-50/60 p-2.5"></div>
             <button type="button" onclick="homeSettingsGo('openProgressModal')" class="text-left text-sm bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold py-2.5 px-3.5 rounded-xl border border-indigo-300">🔄 Nhập / Xuất Tiến Độ</button>
             <button type="button" id="btn-add-home" onclick="homeSettingsGo('addToHomeScreen')" class="text-left text-sm bg-sky-50 hover:bg-sky-100 text-sky-800 font-semibold py-2.5 px-3.5 rounded-xl border border-sky-300">📲 Thêm vào MH chính</button>
         </div>
@@ -17976,7 +17976,7 @@ window.isIOSDevice = function () {
 /* ===== Hàng nút trang chủ: PC một hàng (Cài Đặt ngoài cùng bên phải), điện thoại lưới 2 cột ===== */
 .home-bar{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px}
 .home-bar>button{display:flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap}
-.home-bar>.hb-set{margin-left:auto}
+.home-bar{justify-content:flex-end}
 @media (max-width:640px){
     .home-bar{display:grid;grid-template-columns:1fr 1fr;gap:8px}
     .home-bar>button{width:100%;min-height:44px;padding:8px 6px!important;font-size:13px!important;white-space:normal;line-height:1.25;margin:0!important}
@@ -18062,12 +18062,57 @@ window.isIOSDevice = function () {
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initGuard); else initGuard();
     /* Cài đặt trang chủ */
-    window.openHomeSettings = function () { var m = document.getElementById('home-settings-modal'); if (m) m.classList.remove('hidden'); };
-    window.closeHomeSettings = function () { var m = document.getElementById('home-settings-modal'); if (m) m.classList.add('hidden'); };
-    window.homeSettingsGo = function (fn) { window.closeHomeSettings(); setTimeout(function () { try { if (typeof window[fn] === 'function') window[fn](); } catch (e) { console.warn(e); } }, 60); };
-    window.openApiSettingsFromHome = function () {
-        try { var m = document.getElementById('ai-tutor-modal'); m.classList.remove('hidden', 'ai-chat-off'); aiOpenKeyPanel(); if (typeof aiPlaceModal === 'function') aiPlaceModal(); } catch (e) { console.warn(e); }
+    window.openHomeSettings = function () {
+        var m = document.getElementById('home-settings-modal'); if (!m) return;
+        document.querySelectorAll('body > *').forEach(function (s) {
+            if (s === m || s.hasAttribute('inert') || /^(SCRIPT|STYLE|LINK|META)$/.test(s.tagName) || s.id === 'custom-toast') return;
+            s.setAttribute('inert', ''); s.setAttribute('data-hs-inert', '1');
+        });
+        m.classList.remove('hidden');
     };
+    window.closeHomeSettings = function () {
+        var m = document.getElementById('home-settings-modal'); if (m) m.classList.add('hidden');
+        document.querySelectorAll('[data-hs-inert]').forEach(function (s) { s.removeAttribute('inert'); s.removeAttribute('data-hs-inert'); });
+    };
+    window.homeSettingsGo = function (fn) { window.closeHomeSettings(); setTimeout(function () { try { if (typeof window[fn] === 'function') window[fn](); } catch (e) { console.warn(e); } }, 60); };
+    (function () { var m = document.getElementById('home-settings-modal'); if (m) ['click', 'mousedown', 'mouseup', 'pointerdown', 'pointerup', 'touchstart', 'touchend'].forEach(function (ev) { m.addEventListener(ev, function (e) { e.stopPropagation(); }); }); })();
+
+    /* Khóa API trong Cài Đặt: chỉ phần khóa (trạng thái, nhập / dán / xóa khóa), dùng lại đúng các hàm kiểm tra và lưu khóa của box chat */
+    window.hsKeysToggle = function () {
+        var b = document.getElementById('hs-keys'); if (!b) return;
+        var open = b.style.display === 'none'; b.style.display = open ? 'flex' : 'none';
+        var a = document.getElementById('hs-keys-arrow'); if (a) a.textContent = open ? '▲' : '▼';
+        if (open) window.hsKeysRender();
+    };
+    window.hsKeysRender = function () {
+        var box = document.getElementById('hs-keys'); if (!box) return;
+        box.innerHTML = AI_PROV_IDS.map(function (p) {
+            var c = AI_PROV[p], has = !!aiKeyOf(p);
+            var ph = has ? 'Nhập khóa mới để đổi...' : 'Dán khóa ' + c.name + '...';
+            return `<div class="rounded-xl bg-white border border-amber-200 p-2.5">`
+                + `<div class="flex items-center justify-between gap-2"><span class="font-bold text-gray-800 text-sm">${c.name}</span><span class="text-[11px] ${has ? 'text-emerald-700' : 'text-gray-400'}">${has ? '✅ Đã có khóa' : '⚪ Chưa có khóa'}</span></div>`
+                + `<div class="flex gap-2 mt-2"><input id="hs-pk-${p}" type="password" autocomplete="off" spellcheck="false" placeholder="${ph}" class="flex-1 min-w-0 p-2 border border-amber-300 rounded-xl text-xs outline-none"><button type="button" onclick="hsKeySave('${p}')" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-3 rounded-xl text-xs">Lưu</button></div>`
+                + `<div class="flex flex-wrap gap-3 mt-2 text-xs">${c.keyUrl ? `<a href="${c.keyUrl}" target="_blank" rel="noopener noreferrer" class="font-bold text-indigo-700 underline">Lấy khóa ${c.name}</a>` : ''}`
+                + `<button type="button" onclick="hsKeyPaste('${p}')" class="font-bold text-emerald-700 underline">Dán khóa đã sao chép</button>`
+                + (has ? `<button type="button" onclick="hsKeyClear('${p}')" class="font-bold text-red-600 underline">Xóa khóa</button>` : '') + `</div></div>`;
+        }).join('');
+    };
+    window.hsKeySave = async function (p) {
+        var el = document.getElementById('hs-pk-' + p), v = ((el && el.value) || '').trim();
+        if (!v) { showToast('Hãy dán khóa trước'); return; }
+        var bad = aiKeyProblem(p, v); if (bad) { showToast(bad); return; }
+        showToast('Đang kiểm tra khóa ' + AI_PROV[p].name + '...');
+        var r = await aiVerifyKey(p, v); if (!r.ok) { showToast('❌ Khóa không dùng được: ' + r.msg); return; }
+        var saved = aiKeySet(p, v); aiQuotaSet(false);
+        window.hsKeysRender();
+        showToast(saved ? '✅ Đã lưu khóa ' + AI_PROV[p].name : '✅ Đã dùng khóa (phiên này), trình duyệt không cho lưu lâu dài');
+    };
+    window.hsKeyPaste = async function (p) {
+        var r = await aiReadClipboardKey(); if (r.err) { showToast(r.err); return; }
+        var el = document.getElementById('hs-pk-' + p); if (el) el.value = r.key;
+        window.hsKeySave(p);
+    };
+    window.hsKeyClear = function (p) { aiForgetKey(p); window.hsKeysRender(); showToast('Đã xóa khóa ' + AI_PROV[p].name); };
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') window.closeHomeSettings(); });
 })();
 </script>
