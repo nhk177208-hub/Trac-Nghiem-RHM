@@ -1335,38 +1335,7 @@
                 <div id="topic-uncat" class="hidden mt-4"></div>
             </div>
 
-            <!-- KHỐI SOẠN ĐỀ DÀNH CHO NHÀ PHÁT TRIỂN (DEV ONLY) -->
-            <div class="dev-only">
-                <hr class="my-6 border-gray-200">
-                <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                    <span class="mr-2">➕</span> Thêm bộ đề mới từ File Word hoặc Văn bản
-                </h2>
-                <div class="mb-5 bg-blue-50 p-4 rounded-xl border border-blue-200">
-                    <h3 class="font-bold text-blue-800 mb-1.5 text-sm">Quy tắc soạn đề:</h3>
-                    <p class="text-sm text-gray-600">Câu hỏi bắt đầu bằng "Câu [số]:", các đáp án A, B, C, D, đáp án đúng ghi "Đáp án: [A/B/C/D]" và giải thích ghi "Giải thích: [...]". Hỗ trợ dấu chấm hỏi (?) hoặc dấu hai chấm (:).</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                        <label class="block text-gray-700 font-bold mb-1.5 text-sm">Tên bộ đề</label>
-                        <input type="text" id="quiz-name" class="w-full p-3 border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500 outline-none" placeholder="VD: Đề thi Nha Khoa Lâm Sàng...">
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 font-bold mb-1.5 text-sm">Phân chủ đề (VD: Chủ đề 1 hoặc Thi Thử)</label>
-                        <input type="text" id="quiz-folder" list="folder-suggestions" class="w-full p-3 border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500 outline-none" placeholder="VD: Chủ đề 1 hoặc Thi Thử">
-                        <datalist id="folder-suggestions"></datalist>
-                    </div>
-                </div>
-                <div class="mb-5">
-                    <label class="block text-gray-700 font-bold mb-1.5 text-sm">1. Tải lên file Word (.docx), Text (.txt) hoặc Markdown (.md)</label>
-                    <input type="file" id="file-input" accept=".docx, .txt, .md, .markdown" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 mb-3"/>
-                    <div class="flex items-center justify-center my-2 text-sm text-gray-400 font-medium">HOẶC DÁN VĂN BẢN TRỰC TIẾP (NHẤN CTRL+V)</div>
-                    <textarea id="manual-input" rows="5" class="w-full p-3.5 border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Nhấn Ctrl+V để dán nội dung câu hỏi vào đây..."></textarea>
-                </div>
-                <button onclick="processAndStart()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 px-4 rounded-xl transition-colors text-base shadow-sm">
-                    🚀 Lưu Đề & Gắn Ảnh/Giải Thích
-                </button>
-                <p id="error-msg" class="text-red-500 text-center mt-2.5 hidden font-medium text-sm"></p>
-            </div>
+<div class="dev-only" style="margin-top:12px"><button onclick="rhmEditHome()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 px-4 rounded-xl transition-colors text-base shadow-sm">✏️ Edit đề</button></div>
         </div>
 
         <!-- EDIT SCREEN: CHỈNH SỬA ĐỀ THI -->
@@ -1423,9 +1392,13 @@
             </div>
 
             <p class="text-xs text-gray-500 mb-5">Bạn có thể sửa văn bản câu hỏi, đáp án, đánh dấu sao, ẩn/hiện câu hỏi, gắn tối đa <b>5 ảnh minh họa câu hỏi</b> & <b>5 ảnh giải thích</b>, viết giải thích kèm <b>Hyperlink (URL)</b>!</p>
+            <div class="mb-5 bg-blue-50 p-4 rounded-xl border border-blue-200">
+                <h3 class="font-bold text-blue-800 mb-1.5 text-sm">Quy tắc soạn đề:</h3>
+                <p class="text-sm text-gray-600">Câu hỏi bắt đầu bằng "Câu [số]:", các đáp án A, B, C, D, đáp án đúng ghi "Đáp án: [A/B/C/D]" và giải thích ghi "Giải thích: [...]". Hỗ trợ dấu chấm hỏi (?) hoặc dấu hai chấm (:).</p>
+            </div>
             <div id="edit-questions-container"></div>
 
-            <button id="return-to-quiz-btn" onclick="returnToQuizFromEdit()" title="Quay lại tiếp tục làm bài" class="hidden fixed bottom-40 right-8 z-40 bg-emerald-600 hover:bg-emerald-700 text-white p-3.5 rounded-full shadow-2xl transition-all items-center justify-center text-lg border-2 border-white hover:scale-110">
+            <button id="return-to-quiz-btn" onclick="returnToQuizFromEdit()" title="Quay lại tiếp tục làm bài" style="display:none !important" class="hidden fixed bottom-40 right-8 z-40 bg-emerald-600 hover:bg-emerald-700 text-white p-3.5 rounded-full shadow-2xl transition-all items-center justify-center text-lg border-2 border-white hover:scale-110">
                 ⬅️
             </button>
             <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Về đầu trang" class="fixed bottom-24 right-8 z-40 bg-indigo-600 hover:bg-indigo-700 text-white p-3.5 rounded-full shadow-2xl transition-all flex items-center justify-center text-lg border-2 border-white hover:scale-110">
@@ -1957,9 +1930,7 @@
                 <button onclick="closeExamModal()" class="text-gray-500 hover:text-gray-700 font-bold text-lg">✕</button>
             </div>
             <div class="dev-only flex items-center gap-2 flex-wrap mb-3 pb-3 border-b">
-                <button onclick="openExamCreateModal()" class="text-xs bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-3 rounded-xl shadow-sm transition-colors">➕ Tạo đề mới</button>
-                <button onclick="triggerExamJsonImport()" class="text-xs bg-violet-600 hover:bg-violet-700 text-white font-semibold py-2 px-3 rounded-xl shadow-sm transition-colors">📂 Nhập JSON</button>
-                <input type="file" id="exam-json-input" accept=".json" multiple class="hidden" onchange="importExamJsonFiles(event)">
+<button onclick="rhmEditExam()" class="text-xs bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-3 rounded-xl shadow-sm transition-colors">✏️ Edit đề</button>
             </div>
             <div class="overflow-y-auto flex-1 pr-1 text-sm space-y-3">
                 <p class="text-gray-600 text-xs">Chọn một đề thi bên dưới để bắt đầu làm bài hoặc tiếp tục làm dở.</p>
@@ -6161,8 +6132,8 @@
         function updateCancelImportButton() {
             const btn = document.getElementById('cancel-import-btn');
             if (!btn) return;
-            if (!importUndo) { btn.classList.add('hidden'); return; }
-            btn.textContent = importUndo.kind === 'new' ? '↩️ Huỷ nhập & về trang chủ' : `↩️ Huỷ nhập file vừa rồi (+${importUndo.added})`;
+            
+            btn.textContent = '✖ Hủy';
             btn.classList.remove('hidden');
         }
 
@@ -6182,7 +6153,7 @@
         }
 
         function cancelImportAndBack() {
-            if (!importUndo) return;
+            if (!importUndo) { closeEditScreen(); return; }
             const u = importUndo;
             if (!confirm(u.kind === 'new' ? 'Huỷ nhập và xoá bộ đề vừa tạo?' : `Huỷ nhập ${u.added} câu hỏi vừa thêm?`)) return;
             let quizzes = getSavedQuizzes();
@@ -7378,7 +7349,32 @@
             showToast("Đã xóa đề thi!");
         }
 
-        function triggerExamJsonImport() {
+        function rhmMakeBlank(folder, isExam) {
+    var list = getSavedQuizzes();
+    var q = {
+        id: Date.now() + Math.floor(Math.random() * 10000),
+        name: 'Bộ đề mới',
+        folder: folder,
+        isExam: !!isExam,
+        questions: [],
+        date: new Date().toLocaleDateString('vi-VN')
+    };
+    list.unshift(q);
+    kv.setItem('quizAppSavedQuizzes', JSON.stringify(list));
+    return q;
+}
+function rhmEditHome() {
+    var q = rhmMakeBlank('Chung', false);
+    openEditScreen(q.id);
+}
+function rhmEditExam() {
+    closeExamModal();
+    var q = rhmMakeBlank(topicName(37), true);
+    editingIsExam = true;
+    openEditScreen(q.id);
+    renderSavedQuizzes();
+}
+function triggerExamJsonImport() {
             document.getElementById('exam-json-input').click();
         }
 
@@ -7528,6 +7524,7 @@
             if (!grid) return;
             grid.innerHTML = '';
             for (let n = 1; n <= TOPIC_COUNT; n++) {
+                if (n === 37) continue;
                 const c = counts[n];
                 const btn = document.createElement('button');
                 btn.type = 'button';
@@ -7540,7 +7537,7 @@
                 btn.innerHTML = `
                     <img src="${TOPIC_ICONS[n - 1] || 'images/img_037.webp'}" alt="${topicFullName(n)}" draggable="false" onerror="this.style.opacity=0.15" class="w-9 h-9 sm:w-20 sm:h-20 object-contain shrink-0 ${c > 0 ? '' : 'opacity-60'}">
                     <span class="flex flex-col items-center text-center min-w-0">
-                        <span class="font-bold text-[11px] sm:text-lg leading-tight text-center w-full ${c > 0 ? 'text-blue-800' : 'text-gray-500'}" style="display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;line-height:1.25;min-height:calc(4 * 1.25em);text-align:justify;text-justify:inter-word;hyphens:auto">${n === 37 ? 'Thi Thử' : (TOPIC_FULL_NAMES[n - 1] || ('Chủ đề ' + n))}</span>
+                        <span class="font-bold text-[11px] sm:text-lg leading-tight text-center w-full ${c > 0 ? 'text-blue-800' : 'text-gray-500'}" style="display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;line-height:1.25;min-height:calc(4 * 1.25em);text-align:center">${n === 37 ? 'Thi Thử' : (TOPIC_FULL_NAMES[n - 1] || ('Chủ đề ' + n))}</span>
                         
                     </span>`;
                 grid.appendChild(btn);
@@ -7613,10 +7610,7 @@
                 return;
             }
 
-            const moveOptions = Array.from({ length: TOPIC_COUNT }, (_, i) => {
-                const num = i + 1;
-                return `<option value="${num}">${num === 37 ? 'Thi Thử' : topicName(num)}</option>`;
-            }).join('');
+
 
             container.innerHTML = '';
             list.forEach(quiz => {
@@ -7644,9 +7638,7 @@
                     </label>
                     <div class="flex items-center gap-2 flex-wrap justify-end">
                         <button onclick="openViewQuizModal(${quiz.id})" class="text-teal-600 hover:text-teal-800 bg-teal-50 hover:bg-teal-100 px-3 py-1.5 rounded-xl font-bold text-sm shadow-sm">👁️ Xem trước</button>
-                        <select onchange="moveQuizToTopic(${quiz.id}, this.value)" class="dev-only text-sm bg-white border border-gray-300 rounded-xl py-1.5 px-2 outline-none cursor-pointer" title="Chuyển sang chủ đề khác">
-                            <option value="">↪ Chuyển…</option>${moveOptions}
-                        </select>
+
                         <button onclick="exportQuizToJson(${quiz.id})" class="dev-only text-amber-600 hover:text-amber-800 bg-amber-50 hover:bg-amber-100 px-3 py-1.5 rounded-xl font-bold text-sm shadow-sm">📤 JSON</button>
                         <button onclick="closeTopicModal(); openEditScreen(${quiz.id})" class="dev-only text-purple-600 hover:text-purple-800 bg-purple-50 hover:bg-purple-100 px-3 py-1.5 rounded-xl font-bold text-sm shadow-sm">✏️ Edit</button>
                         <button onclick="deleteQuiz(${quiz.id})" class="dev-only text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded-xl font-bold text-sm shadow-sm">🗑️ Xóa</button>
