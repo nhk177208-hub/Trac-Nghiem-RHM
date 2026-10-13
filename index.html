@@ -12147,16 +12147,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
                         
                     </div>
                 </div>
-<div class="rounded-2xl bg-white border border-amber-200 p-3 mb-2">
-                    <div class="font-bold text-gray-900">Mức suy luận Gemini</div>
-                    <div class="mt-2 grid grid-cols-3 gap-2">
-                        <button type="button" data-gl="low" onclick="rhmGemSet('lv','low')" class="border rounded-xl px-2 py-2 text-sm font-bold">Thấp</button>
-                        <button type="button" data-gl="medium" onclick="rhmGemSet('lv','medium')" class="border rounded-xl px-2 py-2 text-sm font-bold">Trung bình</button>
-                        <button type="button" data-gl="high" onclick="rhmGemSet('lv','high')" class="border rounded-xl px-2 py-2 text-sm font-bold">Cao</button>
-                    </div>
-                    <p class="mt-2 text-[11px] text-gray-500">Áp dụng cho các lần gọi Gemini tiếp theo. Mức càng cao thì trả lời càng kỹ nhưng chậm hơn.</p>
-                </div>
-                <p class="font-bold text-amber-900 mb-1">🔑 Nhà cung cấp AI &amp; khóa API</p>
+<p class="font-bold text-amber-900 mb-1">🔑 Nhà cung cấp AI &amp; khóa API</p>
                 <p class="text-xs text-amber-800 mb-2">Mặc định dùng <b>Gemini</b>. Khi Gemini hết lượt hoặc lỗi, app <b>tự chuyển</b> sang nhà cung cấp khác đã có khóa (nếu bật bên dưới). Bạn cũng có thể tự chọn nhà cung cấp chính bằng nút tròn.</p>
                 <label class="flex items-center gap-2 text-xs font-bold text-amber-900 mb-2"><input id="ai-auto-switch" type="checkbox" onchange="aiAutoSet(this.checked)"> Tự chuyển nhà cung cấp khi hết lượt / lỗi</label>
                 <div id="ai-prov-cards" class="space-y-2"></div>
@@ -14142,7 +14133,7 @@ function aiFetch(url, opts, ms) {
 
     /* --- bảng ⚙️ Cài đặt: chọn nhà cung cấp chính, nhập / xóa khóa, đổi model --- */
     const aiEscAttr = (x) => String(x).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
-    function aiProvRender() {
+    function aiProvRenderBase() {
         const box = document.getElementById('ai-prov-cards'); if (!box) return;
         const au = document.getElementById('ai-auto-switch'); if (au) au.checked = !!aiState.auto;
         const have = AI_PROV_IDS.filter(p => aiKeyOf(p)), cur = have.includes(aiState.prefer) ? aiState.prefer : (have[0] || '');
@@ -16032,7 +16023,7 @@ window.isIOSDevice = function () {
         toast(t.s ? '⭐ Đã lưu "' + t.en + '"' : 'Đã bỏ lưu "' + t.en + '"');
     }
     function paintNewT() {
-        const box = $('rd-nt'), n = $('rd-ntn'), slot = $('rd-nwslot'); if (!box) return; if (slot) slot.innerHTML = nNew() ? '<button type="button" class="rd-bdg rd-nwc" data-act="clr-new" title="Bấm để bỏ hết dấu MỚI">' + nNew() + ' mới ✕</button>' : '';
+        const box = $('rd-nt'), n = $('rd-ntn'), slot = $('rd-nwslot'); if (!box) return; if (slot) slot.innerHTML = (nNew() ? '<button type="button" class="rd-bdg rd-nwc" data-act="clr-new" title="Bấm để bỏ hết dấu MỚI">' + nNew() + ' mới ✕</button>' : '') + '<button type="button" class="rd-bdg rd-nwx" data-act="cancel" title="Đóng cửa sổ">✕</button>';
         const list = []; rd.terms.forEach((t, k) => { if (t.n) list.push(k); });
         list.sort((a, b) => (rd.terms[b].ts || 0) - (rd.terms[a].ts || 0));
         if (n) n.textContent = String(list.length);
@@ -16208,7 +16199,7 @@ function openPop(mode, t) {
         } else if (mode === 'more') {
             h = '<div class="rd-pt">＋ Thêm từ liên quan</div><div class="rd-sub"><b>' + esc(t.en) + '</b> — ' + esc(viLine(t.vi)) + '</div><div id="rd-mt" class="rd-mt"><div class="rd-hint" style="padding:10px">⏳ AI đang gợi ý từ cùng bộ và từ loại…</div></div><div class="rd-pb" id="rd-mb"></div><div class="rd-hint">Tick chọn các từ muốn thêm. Từ mới thêm sẽ có dấu MỚI.</div>';
         } else if (mode === 'newt') {
-            h = '<div class="rd-pt" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="flex:1">🆕 Thuật ngữ mới (<span id="rd-ntn">0</span>)</span><span id="rd-nwslot"></span></div><div id="rd-nt" class="rd-nt"></div>';
+            h = '<div class="rd-pt" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="flex:1">🆕 Thuật ngữ mới (<span id="rd-ntn">0</span>)</span><span id="rd-nwslot"></span></div><div id="rd-nt" class="rd-nt overflow-y-auto"></div>';
         } else if (mode === 'saved') {
             h = '<div class="rd-pt">⭐ Từ đã lưu (<span id="rd-svn">0</span>)</div><div id="rd-res" class="overflow-y-auto"></div>';
         } else if (mode === 'search') {
@@ -17018,7 +17009,14 @@ function openPop(mode, t) {
 #note-modal .qz-cv{font-weight:500;margin-top:4px;color:#374151}
 @media (prefers-reduced-motion:reduce){#note-modal .rd-nw{animation:none}}#note-modal .nt-ed-acts.nt-ed-acts-r { position: absolute; top: 14px; left: var(--bm-i); right: auto; z-index: 12; flex-wrap: nowrap; }
 #dict-modal .rd-nwv { background: #fee2e2; color: #b91c1c; }
-#dict-modal .rd-nwv:hover { background: #fecaca; }#dict-modal .rd-pop.info-ctr { top: 50%; left: 50%; right: auto; transform: translate(-50%, -50%); width: min(840px, 92%); max-height: 86%; overflow-y: auto; overscroll-behavior: contain; }
+#dict-modal .rd-nwv:hover { background: #fecaca; }#dict-modal .rd-body .rd-cap { padding-left: 0 !important; text-align: left; }
+#dict-modal .rd-nwx { background: #f3f4f6; color: #374151; border: 0; cursor: pointer; font-family: inherit; }
+#dict-modal .rd-nwx:hover { background: #e5e7eb; }
+.rhm-tr-box { border: 1px solid #e5e7eb; border-radius: 14px; padding: 12px 10px; background: #fafafa; text-align: center; }
+.rhm-tr-title { font-weight: 800; color: #1f2937; margin-bottom: 8px; font-size: 14px; }
+.rhm-tr-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 6px; }
+.rhm-tr-btn { font-size: 13px; font-weight: 700; padding: 7px 12px; border-radius: 10px; border: 1px solid #cbd5e1; background: #fff; color: #334155; min-width: 118px; }
+.rhm-tr-btn:hover { background: #eef2ff; border-color: #a5b4fc; }#dict-modal .rd-pop.info-ctr { top: 50%; left: 50%; right: auto; transform: translate(-50%, -50%); width: min(840px, 92%); max-height: 86%; overflow-y: auto; overscroll-behavior: contain; }
 #dict-modal .rd-pop.info-ctr .rd-info { max-height: none; overflow: visible; }
 #dict-modal .rd-pop.info-ctr .rd-info p { text-align: justify; text-justify: inter-word; hyphens: auto; }
 @media (max-width:759px){
@@ -17690,179 +17688,295 @@ function moveEdActs() {
 </div>
 <!-- ===== Cài đặt trang chủ (gộp Đề xuất câu hỏi, Góp ý, Khóa API, Nhập/Xuất tiến độ, Thêm vào MH chính) ===== -->
 <div id="home-settings-modal" class="fixed inset-0 bg-black bg-opacity-60 hidden flex items-center justify-center p-4 z-50" onclick="if(event.target===this)closeHomeSettings()">
-    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-4">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl p-4 max-h-[92vh] overflow-y-auto">
         <div class="flex items-center justify-between mb-3">
             <h3 class="text-lg font-black text-gray-800">⚙️ Cài Đặt</h3>
             <button type="button" onclick="closeHomeSettings()" class="w-9 h-9 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 font-black">✕</button>
         </div>
-        <div class="flex flex-col gap-2">
-            <button type="button" onclick="homeSettingsGo('openSuggestQuestionModal')" class="text-left text-sm bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold py-2.5 px-3.5 rounded-xl border border-blue-300">💡 Đề xuất câu hỏi</button>
-            <button type="button" onclick="homeSettingsGo('openAppFeedbackModal')" class="text-left text-sm bg-teal-50 hover:bg-teal-100 text-teal-800 font-semibold py-2.5 px-3.5 rounded-xl border border-teal-300">📩 Góp ý / Liên hệ</button>
-            <button type="button" onclick="hsOpenKeys()" class="text-left text-sm bg-amber-50 hover:bg-amber-100 text-amber-800 font-semibold py-2.5 px-3.5 rounded-xl border border-amber-300 flex items-center justify-between">🔑 Cài đặt khóa API</button>
-            <button type="button" onclick="homeSettingsGo('openProgressModal')" class="text-left text-sm bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold py-2.5 px-3.5 rounded-xl border border-indigo-300">🔄 Nhập / Xuất Tiến Độ</button>
-            <button type="button" id="btn-add-home" onclick="homeSettingsGo('addToHomeScreen')" class="text-left text-sm bg-sky-50 hover:bg-sky-100 text-sky-800 font-semibold py-2.5 px-3.5 rounded-xl border border-sky-300">📲 Thêm vào MH chính</button>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 items-start">
+            <div class="flex flex-col gap-2">
+                <button type="button" onclick="homeSettingsGo('openSuggestQuestionModal')" class="text-left text-sm bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold py-2.5 px-3.5 rounded-xl border border-blue-300">💡 Đề xuất câu hỏi</button>
+                <button type="button" onclick="homeSettingsGo('openAppFeedbackModal')" class="text-left text-sm bg-teal-50 hover:bg-teal-100 text-teal-800 font-semibold py-2.5 px-3.5 rounded-xl border border-teal-300">📩 Góp ý / Liên hệ</button>
+                <button type="button" onclick="hsOpenKeys()" class="text-left text-sm bg-amber-50 hover:bg-amber-100 text-amber-800 font-semibold py-2.5 px-3.5 rounded-xl border border-amber-300 flex items-center justify-between">🔑 Cài đặt khóa API</button>
+                <button type="button" onclick="homeSettingsGo('openProgressModal')" class="text-left text-sm bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold py-2.5 px-3.5 rounded-xl border border-indigo-300">🔄 Nhập / Xuất Tiến Độ</button>
+                <button type="button" id="btn-add-home" onclick="homeSettingsGo('addToHomeScreen')" class="text-left text-sm bg-sky-50 hover:bg-sky-100 text-sky-800 font-semibold py-2.5 px-3.5 rounded-xl border border-sky-300">📲 Thêm vào MH chính</button>
+            </div>
+            <div class="flex flex-col gap-3">
+                <div class="rhm-tr-box">
+                    <div class="rhm-tr-title">📖 Từ điển thuật ngữ RHM</div>
+                    <div class="rhm-tr-row">
+                        <button type="button" class="rhm-tr-btn" onclick="rhmTrExport('dict','word')">⬇ Xuất Word</button>
+                        <button type="button" class="rhm-tr-btn" onclick="rhmTrExport('dict','json')">⬇ Xuất JSON</button>
+                    </div>
+                    <div class="rhm-tr-row">
+                        <button type="button" class="rhm-tr-btn" onclick="rhmTrPick('dict','word')">⬆ Nhập Word</button>
+                        <button type="button" class="rhm-tr-btn" onclick="rhmTrPick('dict','json')">⬆ Nhập JSON</button>
+                    </div>
+                </div>
+                <div class="rhm-tr-box">
+                    <div class="rhm-tr-title">📒 Sổ ghi chú RHM</div>
+                    <div class="rhm-tr-row">
+                        <button type="button" class="rhm-tr-btn" onclick="rhmTrExport('notes','word')">⬇ Xuất Word</button>
+                        <button type="button" class="rhm-tr-btn" onclick="rhmTrExport('notes','json')">⬇ Xuất JSON</button>
+                    </div>
+                    <div class="rhm-tr-row">
+                        <button type="button" class="rhm-tr-btn" onclick="rhmTrPick('notes','word')">⬆ Nhập Word</button>
+                        <button type="button" class="rhm-tr-btn" onclick="rhmTrPick('notes','json')">⬆ Nhập JSON</button>
+                    </div>
+                </div>
+            </div>
         </div>
+        <input type="file" id="rhm-tr-file" class="hidden">
     </div>
 </div>
-<style>
-/* ===== Hàng nút trang chủ: PC một hàng (Cài Đặt ngoài cùng bên phải), điện thoại lưới 2 cột ===== */
-.home-bar{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px}
-.home-bar>button{display:flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap}
-.home-bar{justify-content:flex-end}
-@media (max-width:640px){
-    .home-bar{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-    .home-bar>button{width:100%;min-height:44px;padding:8px 6px!important;font-size:13px!important;white-space:normal;line-height:1.25;margin:0!important}
-    .home-bar>.hb-set{margin-left:0}
-    .home-bar>.hb-dev{grid-column:1/-1}
-}
-/* ===== Lật trang kiểu "app khác" (tờ giấy xoay 3D 0.7s, đổi nội dung ở giữa) ===== */
-#dict-modal .rd-book,#note-modal .rd-book{perspective:none!important}
-#dict-modal .rd-book.flip,#note-modal .rd-book.flip{perspective:1800px!important}
-.bk3-leaf{position:absolute;top:0;bottom:0;width:50%;background:linear-gradient(90deg,#f6efdc,#fdf8ee);z-index:7;box-shadow:0 0 14px rgba(0,0,0,.25);backface-visibility:hidden;-webkit-backface-visibility:hidden;pointer-events:none;will-change:transform}
-.bk3-leaf.one{width:100%}
-.bk3-leaf.next{right:0;transform-origin:left center;animation:bk3fn .7s ease-in-out forwards}
-.bk3-leaf.prev{left:0;transform-origin:right center;animation:bk3fp .7s ease-in-out forwards}
-.bk3-leaf.one.next{right:auto;left:0}
-@keyframes bk3fn{0%{transform:rotateY(0)}100%{transform:rotateY(-180deg)}}
-@keyframes bk3fp{0%{transform:rotateY(0)}100%{transform:rotateY(180deg)}}
-/* ===== Căn lề chuẩn như sách thật: Top / Bottom / Outer (ngoài) / Inner (gáy) ===== */
-#dict-modal,#note-modal{--bm-t:58px;--bm-b:62px;--bm-o:30px;--bm-i:42px}
-@media (max-width:759px){#dict-modal,#note-modal{--bm-t:56px;--bm-b:60px;--bm-o:20px;--bm-i:20px}}
-#dict-modal .rd-pg.rd-L .rd-body,#note-modal .rd-pg.rd-L .rd-body{left:var(--bm-o);right:var(--bm-i);top:var(--bm-t);bottom:var(--bm-b)}
-#dict-modal .rd-pg.rd-R .rd-body,#note-modal .rd-pg.rd-R .rd-body{left:var(--bm-i);right:var(--bm-o);top:var(--bm-t);bottom:var(--bm-b)}
-#dict-modal .rd-book.one .rd-pg .rd-body,#note-modal .rd-book.one .rd-pg .rd-body{left:var(--bm-o);right:var(--bm-o)}
-#dict-modal .rd-pg .rd-hd,#note-modal .rd-pg .rd-hd{left:var(--bm-o);right:var(--bm-i)}
-#dict-modal .rd-book.one .rd-pg .rd-hd,#note-modal .rd-book.one .rd-pg .rd-hd{right:var(--bm-o)}
-#dict-modal .rd-pg .rd-ft,#note-modal .rd-pg .rd-ft{left:0;right:0;text-align:center;bottom:calc(var(--bm-b) / 2 - 9px)}
-/* ===== Sổ ghi chú: hiển thị đủ nội dung (tràn sang trang kế), dropcap theo môn học cách 1 dòng ===== */
-.nt-b,#note-modal .nt-b{display:block!important;-webkit-line-clamp:unset!important;line-clamp:unset!important;overflow:visible!important}
-#note-modal .nt-cap{font-size:calc(clamp(13px,min(1.4vw,2.5vh),22px) * var(--nt-fs,1));margin-bottom:1.5em}
-#note-modal .nt-mid{border-bottom:none!important}
-#note-modal .nt-tc{font-size:.78em;font-style:italic;color:#0f766e;opacity:.85;margin-bottom:2px}
-</style>
 <script>
 (function () {
     'use strict';
-    /* Lật trang: tạo tờ giấy, đổi nội dung ở 350ms (lúc tờ giấy nghiêng 90°), gỡ tờ giấy ở 720ms */
-    window.rhmFlip = function (book, dir, single, swap, done) {
-        var leaf = document.createElement('div');
-        leaf.className = 'bk3-leaf ' + (dir > 0 ? 'next' : 'prev') + (single ? ' one' : '');
-        book.classList.add('flip'); book.appendChild(leaf);
-        setTimeout(swap, 350);
-        setTimeout(function () { leaf.remove(); book.classList.remove('flip'); done(); }, 720);
-    };
-    /* Số trang hiển thị: điện thoại luôn 1 trang (kể cả xoay ngang hoặc bật "trang web cho máy tính"), PC/máy tính bảng lớn 2 trang */
-    window.rhmPer = function () {
-        var coarse = false, small = false;
-        try { coarse = matchMedia('(pointer:coarse)').matches; small = Math.min(screen.width, screen.height) < 820; } catch (e) {}
-        return (window.innerWidth < 760 || (coarse && small)) ? 1 : 2;
-    };
-    /* Từ điển / Sổ ghi chú mở trên hộp chat: chặn mọi chạm lọt xuống nền phía sau */
-    var IDS = ['dict-modal', 'note-modal'], held = [];
-    var shown = function (m) { return !!m && !m.classList.contains('hidden'); };
-    function isolate(on) {
-        if (!on) { held.forEach(function (s) { s.removeAttribute('inert'); }); held = []; return; }
-        if (held.length) return;
-        var m = IDS.map(function (i) { return document.getElementById(i); }).filter(shown)[0]; if (!m) return;
-        var n = m;
-        while (n && n !== document.body && n.parentElement) {
-            Array.prototype.forEach.call(n.parentElement.children, function (s) {
-                if (s === n || /^(SCRIPT|STYLE|LINK|META)$/.test(s.tagName) || s.hasAttribute('inert')) return;
-                if (s.id === 'custom-toast' || s.id === 'nt-selbtn' || (s.querySelector && s.querySelector('#ai-gate-input'))) return;
-                s.setAttribute('inert', ''); held.push(s);
+    var DK = 'quizApp_rhm_dict_v1', NK = 'quizApp_rhm_notes_v1', NM = 'quizApp_rhm_notes_meta_v1';
+    var cur = { kind: '', fmt: '' };
+    function $(id) { return document.getElementById(id); }
+    function say(m) { try { showToast(m); } catch (e) {} }
+    function getJ(k, d) { try { var v = JSON.parse(kv.getItem(k) || 'null'); return v == null ? d : v; } catch (e) { return d; } }
+    function setJ(k, v) { kv.setItem(k, JSON.stringify(v)); }
+    function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+    function nl(s) { return esc(s).replace(/\n/g, '<br>'); }
+    function isImg(s) { return typeof s === 'string' && /^data:image\//.test(s); }
+    function stamp() { return new Date().toISOString().slice(0, 10).replace(/-/g, ''); }
+    function fmtDate(ts) { try { return new Date(ts).toLocaleString('vi-VN'); } catch (e) { return ''; } }
+    function download(text, name, mime) {
+        var u = URL.createObjectURL(new Blob([text], { type: mime }));
+        var a = document.createElement('a'); a.href = u; a.download = name;
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(function () { URL.revokeObjectURL(u); }, 4000);
+    }
+    function letter(en) {
+        var c = String(en || '').trim().charAt(0).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
+        return /^[A-Z]$/.test(c) ? c : '#';
+    }
+    function sigOf(t, b) { return String(t || '') + '|' + String(b || '').slice(0, 80); }
+    function imgsHtml(list, w) {
+        return (list || []).filter(isImg).map(function (s) { return '<img src="' + s + '" style="max-width:' + w + 'pt">'; }).join('');
+    }
+    function updateCounts() {
+        var a = $('rhm-dict-count'); if (a) a.textContent = String(getJ(DK, []).length);
+        var b = $('rhm-note-count'); if (b) b.textContent = String(getJ(NK, []).length);
+    }
+
+    /* khung tài liệu Word: A4, Times New Roman, bảng có viền, tiêu đề màu tím */
+    function wrapDoc(title, body) {
+        return '\ufeff<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">'
+            + '<head><meta charset="utf-8"><title>' + esc(title) + '</title><style>'
+            + '@page{size:A4;margin:2cm}'
+            + 'body{font-family:"Times New Roman",Times,serif;font-size:12pt;color:#1f1d2b;line-height:1.35}'
+            + 'h1{font-family:Arial,sans-serif;text-align:center;color:#5b21b6;font-size:20pt;margin:0 0 4pt}'
+            + '.sub{text-align:center;color:#6b7280;font-size:10pt;margin:0 0 14pt}'
+            + 'h2.letter{font-family:Arial,sans-serif;color:#6d28d9;font-size:15pt;border-bottom:1.5pt solid #c4b5fd;padding-bottom:2pt;margin:16pt 0 6pt}'
+            + 'table{width:100%;border-collapse:collapse;margin-bottom:6pt}'
+            + 'th{background:#ede9fe;color:#5b21b6;font-family:Arial,sans-serif;font-size:10pt;text-align:left;padding:5pt 6pt;border:0.75pt solid #c4b5fd}'
+            + 'td{padding:4pt 6pt;border:0.75pt solid #e9d5ff;vertical-align:top;font-size:11.5pt}'
+            + 'td.en{font-weight:bold;color:#1c1830}'
+            + 'td.p{font-style:italic;color:#7c3aed}'
+            + 'img{margin:3pt 0;border:0.5pt solid #ddd6fe}'
+            + '</style></head><body>' + body + '</body></html>';
+    }
+    function dictWord(terms) {
+        var by = {}, order = [];
+        terms.slice().sort(function (a, b) { return String(a.en).localeCompare(String(b.en), 'en', { sensitivity: 'base' }); }).forEach(function (t) {
+            var L = letter(t.en); if (!by[L]) { by[L] = []; order.push(L); } by[L].push(t);
+        });
+        var body = '<h1>Từ điển thuật ngữ RHM</h1><p class="sub">Tổng ' + terms.length + ' thuật ngữ · Xuất ngày ' + fmtDate(Date.now()) + '</p>';
+        order.forEach(function (L) {
+            body += '<h2 class="letter">' + L + '</h2><table><thead><tr><th style="width:32%">Tiếng Anh</th><th style="width:12%">Từ loại</th><th>Tiếng Việt</th></tr></thead><tbody>';
+            by[L].forEach(function (t) {
+                body += '<tr><td class="en">' + esc(t.en) + '</td><td class="p">' + esc(t.p || '') + '</td><td>' + nl(t.vi) + imgsHtml(t.im, 140) + '</td></tr>';
             });
-            n = n.parentElement;
+            body += '</tbody></table>';
+        });
+        return wrapDoc('Từ điển thuật ngữ RHM', body);
+    }
+    function notesWord(notes) {
+        var groups = {}, order = [];
+        notes.slice().sort(function (a, b) { return (a.cat || '~').localeCompare(b.cat || '~', 'vi') || ((b.ts || 0) - (a.ts || 0)); }).forEach(function (n) {
+            var g = n.cat || 'Chưa phân mục'; if (!groups[g]) { groups[g] = []; order.push(g); } groups[g].push(n);
+        });
+        var body = '<h1>Sổ ghi chú RHM</h1><p class="sub">Tổng ' + notes.length + ' ghi chú · Xuất ngày ' + fmtDate(Date.now()) + '</p>';
+        order.forEach(function (g) {
+            body += '<h2 class="letter">' + esc(g) + '</h2><table><thead><tr><th style="width:24%">Tiêu đề</th><th style="width:12%">Phân mục</th><th>Nội dung</th><th style="width:15%">Ngày tạo</th></tr></thead><tbody>';
+            groups[g].forEach(function (n) {
+                var text = String(n.b || '').replace(/\[\[img:\d+\]\]/g, '').trim();
+                body += '<tr><td class="en">' + esc(n.t) + '</td><td>' + esc(n.cat || '') + '</td><td>' + nl(text) + imgsHtml(n.im, 300) + '</td><td>' + esc(fmtDate(n.ts)) + '</td></tr>';
+            });
+            body += '</tbody></table>';
+        });
+        return wrapDoc('Sổ ghi chú RHM', body);
+    }
+
+    /* xuất */
+    function exportDict(fmt) {
+        var terms = getJ(DK, []);
+        if (!terms.length) { say('Từ điển chưa có thuật ngữ nào'); return; }
+        if (fmt === 'json') download(JSON.stringify({ type: 'rhm-dict', version: 1, exported: Date.now(), terms: terms }, null, 2), 'tu-dien-rhm-' + stamp() + '.json', 'application/json');
+        else download(dictWord(terms), 'tu-dien-rhm-' + stamp() + '.doc', 'application/msword');
+        say('Đã xuất ' + terms.length + ' thuật ngữ');
+    }
+    function exportNotes(fmt) {
+        var notes = getJ(NK, []);
+        if (!notes.length) { say('Sổ ghi chú chưa có ghi chú nào'); return; }
+        var meta = getJ(NM, {}), cats = Array.isArray(meta.cats) ? meta.cats : [];
+        if (fmt === 'json') download(JSON.stringify({ type: 'rhm-notes', version: 1, exported: Date.now(), cats: cats, notes: notes }, null, 2), 'so-ghi-chu-rhm-' + stamp() + '.json', 'application/json');
+        else download(notesWord(notes), 'so-ghi-chu-rhm-' + stamp() + '.doc', 'application/msword');
+        say('Đã xuất ' + notes.length + ' ghi chú');
+    }
+    window.rhmTrExport = function (kind, fmt) { if (kind === 'dict') exportDict(fmt); else exportNotes(fmt); };
+
+    /* nhập */
+    function cellText(td) {
+        var c = td.cloneNode(true);
+        Array.prototype.forEach.call(c.querySelectorAll('br'), function (b) { b.parentNode.replaceChild(document.createTextNode('\n'), b); });
+        return c.textContent.replace(/\u00a0/g, ' ').replace(/[ \t]+\n/g, '\n').trim();
+    }
+    function cellImgs(td) {
+        return Array.prototype.map.call(td.querySelectorAll('img'), function (i) { return i.getAttribute('src') || ''; }).filter(isImg);
+    }
+    function tableRows(html, header) {
+        var doc = new DOMParser().parseFromString(html, 'text/html'), out = [];
+        Array.prototype.forEach.call(doc.querySelectorAll('table'), function (tb) {
+            var trs = tb.querySelectorAll('tr'); if (!trs.length) return;
+            var first = trs[0].querySelectorAll('th,td');
+            if (!first.length || cellText(first[0]) !== header) return;
+            for (var i = 1; i < trs.length; i++) {
+                var tds = trs[i].querySelectorAll('td,th');
+                if (tds.length) out.push(tds);
+            }
+        });
+        return out;
+    }
+    function fromWordDict(html) {
+        return tableRows(html, 'Tiếng Anh').map(function (tds) {
+            var v = tds[2] || tds[0];
+            return { en: cellText(tds[0]), p: cellText(tds[1] || tds[0]).toLowerCase().replace(/[^a-z, .]/g, '').slice(0, 16), vi: cellText(v), im: cellImgs(v) };
+        }).filter(function (x) { return x.en && x.vi; });
+    }
+    function fromWordNotes(html) {
+        return tableRows(html, 'Tiêu đề').map(function (tds) {
+            var b = tds[2] || tds[0];
+            return { t: cellText(tds[0]), cat: cellText(tds[1] || tds[0]), b: cellText(b), im: cellImgs(b), ts: Date.now() };
+        }).filter(function (x) { return x.t || x.b; });
+    }
+
+    /* so khớp nghĩa: bỏ dấu câu, khoảng trắng thừa, chữ hoa */
+    function normVi(s) {
+        return String(s || '').normalize('NFC').toLowerCase().replace(/[\s\u00a0]+/g, ' ').replace(/[.,;:!?()"'“”]/g, '').trim();
+    }
+    function hasSame(dict, en, vi) {
+        var e = String(en || '').trim().toLowerCase(), nv = normVi(vi);
+        return dict.some(function (t) { return String(t.en || '').trim().toLowerCase() === e && normVi(t.vi) === nv; });
+    }
+    function mergeDict(list) {
+        var dict = getJ(DK, []), added = 0;
+        list.forEach(function (x) {
+            if (!x || !x.en || !x.vi) return;
+            var en = String(x.en).trim(), p = String(x.p || '').trim().toLowerCase().slice(0, 16);
+            if (hasSame(dict, en, x.vi)) return;
+            dict.push({ en: en, vi: String(x.vi), p: p, im: (Array.isArray(x.im) ? x.im : []).filter(isImg).slice(0, 6), ts: x.ts || Date.now(), u: x.u ? 1 : 0, i: x.i ? String(x.i) : '', s: x.s ? 1 : 0, n: 1, f: x.f ? 1 : 0 });
+            added++;
+        });
+        setJ(DK, dict); updateCounts();
+        var skip = list.length - added;
+        say(added ? 'Đã nhập ' + added + ' mục mới' + (skip ? ' (bỏ qua ' + skip + ' mục trùng)' : '') : 'Không có mục mới: tất cả đã có trong từ điển');
+    }
+    function mergeNotes(list, cats) {
+        var notes = getJ(NK, []), meta = getJ(NM, {}), have = {}, ids = {}, added = 0;
+        notes.forEach(function (n) { have[sigOf(n.t, n.b)] = 1; if (n.id) ids[n.id] = 1; });
+        meta.cats = Array.isArray(meta.cats) ? meta.cats : [];
+        function addCat(c) {
+            c = String(c || '').replace(/\s+/g, ' ').trim().slice(0, 30);
+            if (c && meta.cats.indexOf(c) < 0) meta.cats.push(c);
+        }
+        (Array.isArray(cats) ? cats : []).forEach(addCat);
+        list.forEach(function (x) {
+            if (!x || !x.b) return;
+            if (x.id && ids[x.id]) return;
+            var t = String(x.t || 'Ghi chú').slice(0, 120), s = sigOf(t, x.b);
+            if (have[s]) return; have[s] = 1;
+            var cat = String(x.cat || '').replace(/\s+/g, ' ').trim().slice(0, 30);
+            addCat(cat);
+            notes.push({ id: 'n' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7), t: t, b: String(x.b), ts: x.ts || Date.now(), c: x.c || null, cat: cat, im: (Array.isArray(x.im) ? x.im : []).filter(isImg).slice(0, 6) });
+            added++;
+        });
+        setJ(NK, notes); setJ(NM, meta); updateCounts();
+        say(added ? 'Đã nhập ' + added + ' ghi chú mới (bỏ qua ' + (list.length - added) + ' trùng)' : 'Không có ghi chú mới để nhập');
+    }
+    function importJson(text) {
+        var obj;
+        try { obj = JSON.parse(String(text).replace(/^\uFEFF/, '')); } catch (e) { say('File JSON không hợp lệ'); return; }
+        if (cur.kind === 'dict') {
+            var a = Array.isArray(obj) ? obj : (obj && obj.type === 'rhm-dict' ? obj.terms : null);
+            if (!Array.isArray(a)) { say('File này không phải Từ điển RHM'); return; }
+            mergeDict(a);
+        } else {
+            var b = Array.isArray(obj) ? obj : (obj && obj.type === 'rhm-notes' ? obj.notes : null);
+            if (!Array.isArray(b)) { say('File này không phải Sổ ghi chú RHM'); return; }
+            mergeNotes(b, obj && obj.cats);
         }
     }
-    function initGuard() {
-        IDS.forEach(function (id) {
-            var m = document.getElementById(id); if (!m) return;
-            var was = shown(m);
-            new MutationObserver(function () {
-                var now = shown(m);
-                if (now && !was) { m._openAt = Date.now(); isolate(true); }
-                else if (!now && was && !IDS.some(function (i) { return shown(document.getElementById(i)); })) isolate(false);
-                was = now;
-            }).observe(m, { attributes: true, attributeFilter: ['class'] });
-            ['click', 'mousedown', 'mouseup', 'pointerdown', 'pointerup', 'touchstart', 'touchend'].forEach(function (ev) {
-                m.addEventListener(ev, function (e) {   /* vừa mở: bỏ qua cú chạm "ma" đang dở dang */
-                    if (Date.now() - (m._openAt || 0) < 450) { if (e.cancelable) e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation(); }
-                }, true);
-                m.addEventListener(ev, function (e) { e.stopPropagation(); });   /* không cho sự kiện nổi bọt ra nền */
-            });
-        });
+    function importHtml(html) {
+        if (cur.kind === 'dict') {
+            var a = fromWordDict(html);
+            if (!a.length) { say('Không tìm thấy bảng Từ điển RHM trong file'); return; }
+            mergeDict(a);
+        } else {
+            var b = fromWordNotes(html);
+            if (!b.length) { say('Không tìm thấy bảng Sổ ghi chú RHM trong file'); return; }
+            mergeNotes(b, null);
+        }
     }
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initGuard); else initGuard();
-    /* Cài đặt trang chủ */
-    window.openHomeSettings = function () {
-        var m = document.getElementById('home-settings-modal'); if (!m) return;
-        document.querySelectorAll('body > *').forEach(function (s) {
-            if (s === m || s.hasAttribute('inert') || /^(SCRIPT|STYLE|LINK|META)$/.test(s.tagName) || s.id === 'custom-toast') return;
-            s.setAttribute('inert', ''); s.setAttribute('data-hs-inert', '1');
-        });
-        m.classList.remove('hidden');
-    };
-    window.closeHomeSettings = function () {
-        var m = document.getElementById('home-settings-modal'); if (m) m.classList.add('hidden');
-        document.querySelectorAll('[data-hs-inert]').forEach(function (s) { s.removeAttribute('inert'); s.removeAttribute('data-hs-inert'); });
-    };
-    window.homeSettingsGo = function (fn) {
-        window.closeHomeSettings();
-        var MAP = { openSuggestQuestionModal: 'suggest-question-modal', openAppFeedbackModal: 'app-feedback-modal', openProgressModal: 'progress-modal' };
-        setTimeout(function () {
-            try { if (typeof window[fn] === 'function') window[fn](); } catch (e) { console.warn(e); }
-            var mm = MAP[fn] && document.getElementById(MAP[fn]);
-            if (!mm || mm.classList.contains('hidden')) return;
-            var mo = new MutationObserver(function () {
-                if (!mm.classList.contains('hidden')) return;
-                mo.disconnect();
-                setTimeout(function () { window.openHomeSettings(); }, 80);
-            });
-            mo.observe(mm, { attributes: true, attributeFilter: ['class'] });
-        }, 60);
-    };
-    (function () { var m = document.getElementById('home-settings-modal'); if (m) ['click', 'mousedown', 'mouseup', 'pointerdown', 'pointerup', 'touchstart', 'touchend'].forEach(function (ev) { m.addEventListener(ev, function (e) { e.stopPropagation(); }); }); })();
-
-    /* Cửa sổ khóa API đầy đủ: các thẻ nhà cung cấp của box chat được DI CHUYỂN sang cửa sổ này (không sao chép),
-       nên mọi nút (lưu, dán, xóa khóa, chọn nhà cung cấp, model) dùng đúng hàm gốc. Đóng cửa sổ thì trả thẻ về chỗ cũ. */
-    window.hsProvHome = null;
-    function hsMoveBack() {
-        var h = window.hsProvHome; if (!h) return;
-        var put = function (el, par, nx) { if (!el || !par) return; par.insertBefore(el, nx && nx.parentNode === par ? nx : null); };
-        put(h.lab, h.labParent, h.labNext); put(h.box, h.boxParent, h.boxNext);
-        window.hsProvHome = null;
+    function importFile(file) {
+        if (!file) return;
+        var name = String(file.name || '').toLowerCase();
+        var fail = function () { say('Không đọc được file'); };
+        if (cur.fmt === 'json' || /\.json$/.test(name)) { file.text().then(importJson).catch(fail); return; }
+        if (/\.docx$/.test(name)) {
+            if (!window.mammoth) { say('Chưa tải được bộ đọc Word (cần mạng)'); return; }
+            file.arrayBuffer().then(function (ab) { return window.mammoth.convertToHtml({ arrayBuffer: ab }); })
+                .then(function (r) { importHtml(r.value); }).catch(fail);
+            return;
+        }
+        file.text().then(importHtml).catch(fail);
     }
-    window.hsOpenKeys = function () {
-        var box = document.getElementById('ai-prov-cards'), au = document.getElementById('ai-auto-switch');
-        var lab = au ? au.closest('label') : null, host = document.getElementById('hs-prov-host'), m = document.getElementById('hs-keys-modal');
-        if (!box || !host || !m) return;
-        window.closeHomeSettings(); hsMoveBack();
-        window.hsProvHome = { box: box, boxParent: box.parentNode, boxNext: box.nextSibling, lab: lab, labParent: lab ? lab.parentNode : null, labNext: lab ? lab.nextSibling : null };
-        if (lab) host.appendChild(lab);
-        host.appendChild(box);
-        aiProvRender();
-        m.style.display = 'flex';
-        hsLock(m);
+    window.rhmTrPick = function (kind, fmt) {
+        cur.kind = kind; cur.fmt = fmt;
+        var f = $('rhm-tr-file');
+        f.accept = fmt === 'json' ? '.json,application/json' : '.docx,.doc,.html,.htm';
+        f.value = '';
+        f.click();
     };
-    window.hsCloseKeys = function () {
-        var m = document.getElementById('hs-keys-modal'); if (m) m.style.display = 'none';
-        hsMoveBack(); hsUnlock();
-        window.openHomeSettings();
-    };
-    window.hsLock = function (m) {
-        document.querySelectorAll('body > *').forEach(function (s) {
-            if (s === m || s.hasAttribute('inert') || /^(SCRIPT|STYLE|LINK|META)$/.test(s.tagName) || s.id === 'custom-toast') return;
-            s.setAttribute('inert', ''); s.setAttribute('data-hs-inert', '1');
-        });
-    };
-    window.hsUnlock = function () {
-        document.querySelectorAll('[data-hs-inert]').forEach(function (s) { s.removeAttribute('inert'); s.removeAttribute('data-hs-inert'); });
-    };
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { var k = document.getElementById('hs-keys-modal'); if (k && k.style.display !== 'none') window.hsCloseKeys(); } });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') window.closeHomeSettings(); });
+    $('rhm-tr-file').addEventListener('change', function (e) {
+        var f = e.target.files && e.target.files[0];
+        e.target.value = '';
+        importFile(f);
+    });
+    updateCounts();
 })();
 </script>
-
+<script>
+/* Mức suy luận Gemini nằm trong card Gemini (cả ở Cài đặt ngoài trang chủ lẫn khung chat) */
+function aiProvRender() {
+    aiProvRenderBase();
+    rhmGemLevelsInto();
+}
+function rhmGemLevelsInto() {
+    var box = document.getElementById('ai-prov-cards');
+    if (!box || !box.firstElementChild) return;
+    var card = box.firstElementChild;
+    if (card.querySelector('[data-gl]')) { rhmGemPaint(); return; }
+    var btns = [['low', 'Thấp'], ['medium', 'Trung bình'], ['high', 'Cao']].map(function (x) {
+        return '<button type="button" data-gl="' + x[0] + '" onclick="rhmGemSet(\'lv\',\'' + x[0] + '\')" class="border rounded-xl px-2 py-1.5 text-sm font-bold">' + x[1] + '</button>';
+    }).join('');
+    card.insertAdjacentHTML('beforeend', '<div class="mt-3 pt-2 border-t border-amber-200"><div class="text-xs font-bold text-gray-900">Mức suy luận Gemini</div><div class="mt-2 grid grid-cols-3 gap-2">' + btns + '</div><p class="mt-1.5 text-[11px] text-gray-500">Áp dụng cho mọi tính năng gọi Gemini: chat, dịch, giảng bài, trắc nghiệm, tìm hiểu sâu, mục lục.</p></div>');
+    rhmGemPaint();
+}
+</script>
 <style>
 html.rhm-modal-open, html.rhm-modal-open body { overflow: hidden !important; overscroll-behavior: none !important; }
 </style>
