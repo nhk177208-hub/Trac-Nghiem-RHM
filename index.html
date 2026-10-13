@@ -8415,7 +8415,7 @@
         let activeYtPlayers = {};
         let lastActivePlayerId = null;
 
-        function toggleMonHocSection() {
+        function toggleMonHocSection() { hsExclusive('monhoc'); return _toggleMonHocSection(); } function _toggleMonHocSection() {
             const container = document.getElementById('monhoc-section-container');
             const icon = document.getElementById('monhoc-toggle-icon');
             if (!container) return;
@@ -8424,7 +8424,7 @@
             if (icon) icon.textContent = isHidden ? '▲' : '▼';
         }
 
-        function toggleChuyenDeSection() {
+        function toggleChuyenDeSection() { hsExclusive('chuyende'); return _toggleChuyenDeSection(); } function _toggleChuyenDeSection() {
             const container = document.getElementById('chuyende-section-container');
             const icon = document.getElementById('chuyende-toggle-icon');
             if (!container) return;
@@ -17838,9 +17838,9 @@ window.isIOSDevice = function () {
         } catch (e) { return { k: '' }; }
     }
     function bubbleText(b) {
-        if (b._tr) { const r = b._tr; return (r.bi ? r.bi.map(p => (p.src || '') + '\n' + (p.vi || '')).join('\n\n') : String(r.t || '')).trim(); }
+        if (b._tr) { const r = b._tr; return (r.bi ? r.bi.map(p => (p.vi || '')).join('\n\n') : String(r.t || '')).trim(); }
         const hid = []; b.querySelectorAll('.' + BAR + ',.ai-ttsbar,.ai-actrow,.ai-refbar,.ai-liverefs,.ai-dr-refs,.ai-dr-note,.ai-quota-hint').forEach(x => { hid.push([x, x.style.display]); x.style.display = 'none'; });
-        let t = ''; try { t = (b.innerText || b.textContent || '').trim(); } catch (e) {}
+        let t = ''; const _hd = []; try { b.querySelectorAll('.ai-bi-h').forEach(x => { _hd.push([x, x.style.display]); x.style.display = 'none'; }); b.querySelectorAll('.ai-bi-c').forEach(c => { const h = c.querySelector(':scope > .ai-bi-h'); if (h && /ENG/.test(h.textContent)) { _hd.push([c, c.style.display]); c.style.display = 'none'; } }); t = (b.innerText || b.textContent || '').trim(); } catch (e) {} _hd.forEach(h => { h[0].style.display = h[1]; });
         hid.forEach(h => { h[0].style.display = h[1]; }); return t.replace(/\s*📒 Lưu (?:ghi chú|cả \d+ phần vừa dịch)/g, '').trim();
     }
     async function aiTitle(n) {
@@ -17861,7 +17861,7 @@ window.isIOSDevice = function () {
         if (isOpen()) repaginate(n.id);
     }
     function selIn(b) {
-        try { const s = getSelection(); if (!s || s.isCollapsed || !s.rangeCount) return ''; const r = s.getRangeAt(0); if (!b.contains(r.commonAncestorContainer)) return ''; const bar = b.querySelector(':scope > .' + BAR); if (bar && bar.contains(r.commonAncestorContainer)) return ''; return s.toString().trim(); } catch (e) { return ''; }
+        try { const s = getSelection(); if (!s || s.isCollapsed || !s.rangeCount) return ''; const r = s.getRangeAt(0); if (!b.contains(r.commonAncestorContainer)) return ''; const bar = b.querySelector(':scope > .' + BAR); if (bar && bar.contains(r.commonAncestorContainer)) return ''; return viSelText(r); } catch (e) { return ''; }
     }
     function ensureBars() {
         const box = $('ai-messages'); if (!box) return;
@@ -17887,7 +17887,7 @@ window.isIOSDevice = function () {
         const box = $('ai-messages'), s = getSelection(), el = selBtn();
         if (!box || !s || s.isCollapsed || !s.rangeCount) { el.style.display = 'none'; return; }
         const r = s.getRangeAt(0); let n = r.commonAncestorContainer; if (n.nodeType === 3) n = n.parentElement;
-        const b = n && n.closest ? n.closest('#ai-messages > .ai-bub') : null, t = s.toString().trim();
+        const b = n && n.closest ? n.closest('#ai-messages > .ai-bub') : null, t = viSelText(r);
         if (!b || t.length < 2 || n.closest('.' + BAR)) { el.style.display = 'none'; return; }
         const rc = r.getBoundingClientRect(); el._b = b; el._t = t; el.style.display = 'block';
         const w = el.offsetWidth || 110; let top = rc.top - 40; if (top < 8) top = rc.bottom + 10;
@@ -17956,6 +17956,20 @@ window.isIOSDevice = function () {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
 </script>
+<!-- ===== Cửa sổ khóa API đầy đủ (giống bảng trong box chat) ===== -->
+<div id="hs-keys-modal" style="display:none;z-index:100090" class="fixed inset-0 bg-black bg-opacity-60 items-center justify-center p-2 sm:p-4" onclick="if(event.target===this)hsCloseKeys()">
+    <div class="bg-amber-50 rounded-2xl shadow-2xl w-full max-w-2xl flex flex-col" style="max-height:92vh">
+        <div class="flex items-center justify-between gap-2 px-4 py-3 border-b border-amber-200 bg-white rounded-t-2xl">
+            <h3 class="text-base sm:text-lg font-black text-amber-900">🔑 Nhà cung cấp AI &amp; khóa API</h3>
+            <button type="button" onclick="hsCloseKeys()" class="shrink-0 w-9 h-9 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 font-black" title="Đóng">✕</button>
+        </div>
+        <div class="px-4 py-3 overflow-y-auto text-sm" style="overscroll-behavior:contain;-webkit-overflow-scrolling:touch">
+            <p class="text-xs text-amber-800 mb-2">Mặc định dùng <b>Gemini</b>. Khi Gemini hết lượt hoặc lỗi, app <b>tự chuyển</b> sang nhà cung cấp khác đã có khóa (nếu bật bên dưới). Bạn cũng có thể tự chọn nhà cung cấp chính bằng nút tròn.</p>
+            <div id="hs-prov-host" class="space-y-2"></div>
+            <p class="text-[11px] text-amber-700 mt-3">Lưu ý: nói trực tiếp 🎙️, xem video YouTube không có phụ đề và Tìm hiểu sâu có nguồn Google chỉ chạy với <b>Gemini</b>.</p>
+        </div>
+    </div>
+</div>
 <!-- ===== Cài đặt trang chủ (gộp Đề xuất câu hỏi, Góp ý, Khóa API, Nhập/Xuất tiến độ, Thêm vào MH chính) ===== -->
 <div id="home-settings-modal" class="fixed inset-0 bg-black bg-opacity-60 hidden flex items-center justify-center p-4 z-50" onclick="if(event.target===this)closeHomeSettings()">
     <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-4">
@@ -17966,7 +17980,7 @@ window.isIOSDevice = function () {
         <div class="flex flex-col gap-2">
             <button type="button" onclick="homeSettingsGo('openSuggestQuestionModal')" class="text-left text-sm bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold py-2.5 px-3.5 rounded-xl border border-blue-300">💡 Đề xuất câu hỏi</button>
             <button type="button" onclick="homeSettingsGo('openAppFeedbackModal')" class="text-left text-sm bg-teal-50 hover:bg-teal-100 text-teal-800 font-semibold py-2.5 px-3.5 rounded-xl border border-teal-300">📩 Góp ý / Liên hệ</button>
-            <button type="button" onclick="hsKeysToggle()" class="text-left text-sm bg-amber-50 hover:bg-amber-100 text-amber-800 font-semibold py-2.5 px-3.5 rounded-xl border border-amber-300 flex items-center justify-between">🔑 Cài đặt khóa API <span id="hs-keys-arrow">▼</span></button><div id="hs-keys" style="display:none" class="flex flex-col gap-2 rounded-xl border border-amber-200 bg-amber-50/60 p-2.5"></div>
+            <button type="button" onclick="hsOpenKeys()" class="text-left text-sm bg-amber-50 hover:bg-amber-100 text-amber-800 font-semibold py-2.5 px-3.5 rounded-xl border border-amber-300 flex items-center justify-between">🔑 Cài đặt khóa API <span>›</span></button>
             <button type="button" onclick="homeSettingsGo('openProgressModal')" class="text-left text-sm bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold py-2.5 px-3.5 rounded-xl border border-indigo-300">🔄 Nhập / Xuất Tiến Độ</button>
             <button type="button" id="btn-add-home" onclick="homeSettingsGo('addToHomeScreen')" class="text-left text-sm bg-sky-50 hover:bg-sky-100 text-sky-800 font-semibold py-2.5 px-3.5 rounded-xl border border-sky-300">📲 Thêm vào MH chính</button>
         </div>
@@ -18077,45 +18091,100 @@ window.isIOSDevice = function () {
     window.homeSettingsGo = function (fn) { window.closeHomeSettings(); setTimeout(function () { try { if (typeof window[fn] === 'function') window[fn](); } catch (e) { console.warn(e); } }, 60); };
     (function () { var m = document.getElementById('home-settings-modal'); if (m) ['click', 'mousedown', 'mouseup', 'pointerdown', 'pointerup', 'touchstart', 'touchend'].forEach(function (ev) { m.addEventListener(ev, function (e) { e.stopPropagation(); }); }); })();
 
-    /* Khóa API trong Cài Đặt: chỉ phần khóa (trạng thái, nhập / dán / xóa khóa), dùng lại đúng các hàm kiểm tra và lưu khóa của box chat */
-    window.hsKeysToggle = function () {
-        var b = document.getElementById('hs-keys'); if (!b) return;
-        var open = b.style.display === 'none'; b.style.display = open ? 'flex' : 'none';
-        var a = document.getElementById('hs-keys-arrow'); if (a) a.textContent = open ? '▲' : '▼';
-        if (open) window.hsKeysRender();
+    /* Cửa sổ khóa API đầy đủ: các thẻ nhà cung cấp của box chat được DI CHUYỂN sang cửa sổ này (không sao chép),
+       nên mọi nút (lưu, dán, xóa khóa, chọn nhà cung cấp, model) dùng đúng hàm gốc. Đóng cửa sổ thì trả thẻ về chỗ cũ. */
+    window.hsProvHome = null;
+    function hsMoveBack() {
+        var h = window.hsProvHome; if (!h) return;
+        var put = function (el, par, nx) { if (!el || !par) return; par.insertBefore(el, nx && nx.parentNode === par ? nx : null); };
+        put(h.lab, h.labParent, h.labNext); put(h.box, h.boxParent, h.boxNext);
+        window.hsProvHome = null;
+    }
+    window.hsOpenKeys = function () {
+        var box = document.getElementById('ai-prov-cards'), au = document.getElementById('ai-auto-switch');
+        var lab = au ? au.closest('label') : null, host = document.getElementById('hs-prov-host'), m = document.getElementById('hs-keys-modal');
+        if (!box || !host || !m) return;
+        window.closeHomeSettings(); hsMoveBack();
+        window.hsProvHome = { box: box, boxParent: box.parentNode, boxNext: box.nextSibling, lab: lab, labParent: lab ? lab.parentNode : null, labNext: lab ? lab.nextSibling : null };
+        if (lab) host.appendChild(lab);
+        host.appendChild(box);
+        aiProvRender();
+        m.style.display = 'flex';
+        hsLock(m);
     };
-    window.hsKeysRender = function () {
-        var box = document.getElementById('hs-keys'); if (!box) return;
-        box.innerHTML = AI_PROV_IDS.map(function (p) {
-            var c = AI_PROV[p], has = !!aiKeyOf(p);
-            var ph = has ? 'Nhập khóa mới để đổi...' : 'Dán khóa ' + c.name + '...';
-            return `<div class="rounded-xl bg-white border border-amber-200 p-2.5">`
-                + `<div class="flex items-center justify-between gap-2"><span class="font-bold text-gray-800 text-sm">${c.name}</span><span class="text-[11px] ${has ? 'text-emerald-700' : 'text-gray-400'}">${has ? '✅ Đã có khóa' : '⚪ Chưa có khóa'}</span></div>`
-                + `<div class="flex gap-2 mt-2"><input id="hs-pk-${p}" type="password" autocomplete="off" spellcheck="false" placeholder="${ph}" class="flex-1 min-w-0 p-2 border border-amber-300 rounded-xl text-xs outline-none"><button type="button" onclick="hsKeySave('${p}')" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-3 rounded-xl text-xs">Lưu</button></div>`
-                + `<div class="flex flex-wrap gap-3 mt-2 text-xs">${c.keyUrl ? `<a href="${c.keyUrl}" target="_blank" rel="noopener noreferrer" class="font-bold text-indigo-700 underline">Lấy khóa ${c.name}</a>` : ''}`
-                + `<button type="button" onclick="hsKeyPaste('${p}')" class="font-bold text-emerald-700 underline">Dán khóa đã sao chép</button>`
-                + (has ? `<button type="button" onclick="hsKeyClear('${p}')" class="font-bold text-red-600 underline">Xóa khóa</button>` : '') + `</div></div>`;
-        }).join('');
+    window.hsCloseKeys = function () {
+        var m = document.getElementById('hs-keys-modal'); if (m) m.style.display = 'none';
+        hsMoveBack(); hsUnlock();
     };
-    window.hsKeySave = async function (p) {
-        var el = document.getElementById('hs-pk-' + p), v = ((el && el.value) || '').trim();
-        if (!v) { showToast('Hãy dán khóa trước'); return; }
-        var bad = aiKeyProblem(p, v); if (bad) { showToast(bad); return; }
-        showToast('Đang kiểm tra khóa ' + AI_PROV[p].name + '...');
-        var r = await aiVerifyKey(p, v); if (!r.ok) { showToast('❌ Khóa không dùng được: ' + r.msg); return; }
-        var saved = aiKeySet(p, v); aiQuotaSet(false);
-        window.hsKeysRender();
-        showToast(saved ? '✅ Đã lưu khóa ' + AI_PROV[p].name : '✅ Đã dùng khóa (phiên này), trình duyệt không cho lưu lâu dài');
+    window.hsLock = function (m) {
+        document.querySelectorAll('body > *').forEach(function (s) {
+            if (s === m || s.hasAttribute('inert') || /^(SCRIPT|STYLE|LINK|META)$/.test(s.tagName) || s.id === 'custom-toast') return;
+            s.setAttribute('inert', ''); s.setAttribute('data-hs-inert', '1');
+        });
     };
-    window.hsKeyPaste = async function (p) {
-        var r = await aiReadClipboardKey(); if (r.err) { showToast(r.err); return; }
-        var el = document.getElementById('hs-pk-' + p); if (el) el.value = r.key;
-        window.hsKeySave(p);
+    window.hsUnlock = function () {
+        document.querySelectorAll('[data-hs-inert]').forEach(function (s) { s.removeAttribute('inert'); s.removeAttribute('data-hs-inert'); });
     };
-    window.hsKeyClear = function (p) { aiForgetKey(p); window.hsKeysRender(); showToast('Đã xóa khóa ' + AI_PROV[p].name); };
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { var k = document.getElementById('hs-keys-modal'); if (k && k.style.display !== 'none') window.hsCloseKeys(); } });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') window.closeHomeSettings(); });
 })();
 </script>
 
+<style>
+html.rhm-modal-open, html.rhm-modal-open body { overflow: hidden !important; overscroll-behavior: none !important; }
+</style>
+<script>
+/* ===== VÁ 2: khóa nền, chặn chạm xuyên xuống nền, ôn tập một mục xổ ra, chỉ lấy tiếng Việt khi lưu song ngữ cột ===== */
+(function () {
+    'use strict';
+    var IDS = ['home-settings-modal', 'hs-keys-modal', 'dict-modal', 'note-modal'];
+    var until = 0;
+    function isOpen(id) { var m = document.getElementById(id); return !!m && m.style.display !== 'none' && !m.classList.contains('hidden'); }
+    function anyOpen() { return IDS.some(isOpen); }
+    function sync() { document.documentElement.classList.toggle('rhm-modal-open', anyOpen()); }
+    IDS.forEach(function (id) {
+        var m = document.getElementById(id); if (!m) return;
+        var was = isOpen(id);
+        new MutationObserver(function () { var now = isOpen(id); if (was && !now) until = Date.now() + 400; was = now; sync(); })
+            .observe(m, { attributes: true, attributeFilter: ['class', 'style'] });
+    });
+    sync();
+    ['pointerdown', 'mousedown', 'mouseup', 'pointerup', 'touchstart', 'touchend', 'click'].forEach(function (ev) {
+        window.addEventListener(ev, function (e) {
+            var t = e.target;
+            var inside = !!(t && t.closest) && IDS.some(function (id) { var m = document.getElementById(id); return !!m && isOpen(id) && m.contains(t); });
+            if (inside) return;
+            if (anyOpen() || Date.now() < until) { if (e.cancelable) e.preventDefault(); e.stopPropagation(); }
+        }, true);
+    });
+})();
+function hsExclusive(which) {
+    var m = document.getElementById('monhoc-section-container'), c = document.getElementById('chuyende-section-container');
+    if (!m || !c) return;
+    var mi = document.getElementById('monhoc-toggle-icon'), ci = document.getElementById('chuyende-toggle-icon');
+    if (which === 'monhoc') { if (m.classList.contains('hidden')) { c.classList.add('hidden'); if (ci) ci.textContent = '▼'; } }
+    else { if (c.classList.contains('hidden')) { m.classList.add('hidden'); if (mi) mi.textContent = '▼'; } }
+}
+function viSelText(range) {
+    try {
+        const root = range.commonAncestorContainer.nodeType === 3 ? range.commonAncestorContainer.parentNode : range.commonAncestorContainer;
+        const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+        let out = '', prev = null, n;
+        while ((n = w.nextNode())) {
+            if (!range.intersectsNode(n)) continue;
+            const pe = n.parentElement; if (!pe) continue;
+            if (pe.closest('.ai-bi-h')) continue;
+            const c = pe.closest('.ai-bi-c'), h = c ? c.querySelector(':scope > .ai-bi-h') : null;
+            if (h && /ENG/.test(h.textContent)) continue;
+            const s0 = n === range.startContainer ? range.startOffset : 0, e0 = n === range.endContainer ? range.endOffset : n.data.length;
+            const t = n.data.slice(s0, e0); if (!t) continue;
+            const blk = pe.closest('p,li,div,h1,h2,h3,h4,h5,h6,pre,tr,td');
+            if (prev && blk !== prev && out && !/\n$/.test(out)) out += '\n';
+            out += t; prev = blk;
+        }
+        return out.trim();
+    } catch (e) { return String(range.toString()).trim(); }
+}
+</script>
 </body>
 </html>
