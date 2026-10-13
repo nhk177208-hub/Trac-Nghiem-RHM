@@ -18002,7 +18002,56 @@ function viSelText(range) {
     var html = docHead('Từ điển thuật ngữ RHM') + '<h1>Từ điển thuật ngữ RHM</h1>' +
       '<p class="sub">Tổng cộng ' + T.length + ' thuật ngữ · xuất ngày ' + new Date().toLocaleDateString('vi-VN') + '</p>' +
       '<table border="1" cellspacing="0" cellpadding="5" width="100%" style="border-collapse:collapse;border:1px solid #ddd6fe">' +
-      '<tr>' + th + 'Tiếng Anh</th>' + th + 'Từ loại</th>' + th + 'Tiếng Việt</th>' + th + 'Thông tin</th></tr>' + rows + '</table></body></html>';
+      '<tr>' + th + 'Tiếng Anh</th>' + th + 'Từ loại</th>' + th + 'Tiếng Việt</th>' + th + 'Thông tin</th></tr>' + rows + '</table><style>
+.rhm-trio{display:flex;justify-content:center;align-items:stretch;gap:14px;flex-wrap:wrap;max-width:98vw}
+.rhm-trio .hs-box{flex:none;width:300px;max-width:92vw}
+.rhm-trio .hs-hint{margin-top:auto}
+.hs-box[data-k=notes] .hs-imp{color:#fff}
+@media (max-width:1000px){
+  .rhm-trio{flex-direction:column;align-items:center}
+  .rhm-trio .hs-box{width:min(512px,92vw)}
+}
+</style>
+<script>
+(function () {
+  'use strict';
+  var io = window.rhmIO;
+  if (!io) return;
+  function mountTrio() {
+    var m = document.getElementById('progress-modal');
+    if (!m || m.getAttribute('data-trio')) return;
+    var box = m.firstElementChild; if (!box) return;
+    m.setAttribute('data-trio', '1');
+    box.style.flex = 'none';
+    box.style.width = 'min(512px,92vw)';
+    var trio = document.createElement('div');
+    trio.className = 'rhm-trio';
+    m.insertBefore(trio, box);
+    trio.appendChild(box);
+    trio.insertAdjacentHTML('beforeend', io.boxHTML('dict') + io.boxHTML('notes'));
+    trio.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-x]'); if (!b || b.tagName === 'INPUT') return;
+      var x = b.getAttribute('data-x');
+      if (x === 'dict-word') io.exportDictWord();
+      else if (x === 'dict-json') io.exportDictJSON();
+      else if (x === 'notes-word') io.exportNotesWord();
+      else if (x === 'notes-json') io.exportNotesJSON();
+    });
+    trio.addEventListener('change', function (e) {
+      var inp = e.target; if (!inp.matches || !inp.matches('input[data-x]')) return;
+      var f = inp.files && inp.files[0];
+      var k = inp.getAttribute('data-x').indexOf('dict') === 0 ? 'dict' : 'notes';
+      inp.value = '';
+      if (f) io.importFile(k, f);
+    });
+  }
+  var _opm = window.openProgressModal;
+  window.openProgressModal = function () {
+    try { mountTrio(); io.refresh(); } catch (e) { console.warn(e); }
+    return _opm.apply(this, arguments);
+  };
+})();
+</script></body></html>';
     saveBlob('\ufeff' + html, 'tu-dien-rhm_' + stamp() + '.doc', 'application/msword');
     toastM('Đã xuất Word từ điển');
   }
@@ -18257,9 +18306,10 @@ function viSelText(range) {
       inp.value = ''; if (f) importFile(k, f);
     });
   }
+    window.rhmIO = { exportDictWord: exportDictWord, exportDictJSON: exportDictJSON, exportNotesWord: exportNotesWord, exportNotesJSON: exportNotesJSON, importFile: importFile, boxHTML: boxHTML, refresh: refreshCounts };
   var _ohs = window.openHomeSettings;
   window.openHomeSettings = function () {
-    try { enhance(); refreshCounts(); } catch (e) { console.warn(e); }
+    try { } catch (e) { console.warn(e); }
     return _ohs.apply(this, arguments);
   };
 
