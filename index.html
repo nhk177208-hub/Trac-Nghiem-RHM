@@ -16324,6 +16324,18 @@ window.isIOSDevice = function () {
 #dict-modal .rd-sv{color:#f59e0b;margin-left:6px;font-size:.85em;vertical-align:middle}
 #dict-modal .rd-nwc{background:#fee2e2;color:#b91c1c;border:0;cursor:pointer;font-family:inherit}
 #dict-modal .rd-nwc:hover{background:#fecaca}
+#dict-modal .rd-nwv{background:#ede9fe;color:#5b21b6;border:0;cursor:pointer;font-family:inherit}
+#dict-modal .rd-nwv:hover{background:#ddd6fe}
+#dict-modal .rd-pop.newt{width:min(520px,94%)}
+#dict-modal .rd-nt{max-height:min(420px,52vh);overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y}
+#dict-modal .rd-nt table{width:100%;border-collapse:collapse;font-size:14px;color:#1f1d2b}
+#dict-modal .rd-nt th{position:sticky;top:0;background:#ede9fe;color:#5b21b6;text-align:left;padding:6px 8px;font-size:12px;font-weight:800}
+#dict-modal .rd-nt td{padding:6px 8px;border-top:1px solid #ede9fe;vertical-align:top;overflow-wrap:anywhere}
+#dict-modal .rd-nt tr[data-act]{cursor:pointer}
+#dict-modal .rd-nt tr[data-act]:hover td{background:#f5f3ff}
+#dict-modal .rd-nt td b{color:#5b21b6}
+#dict-modal .rd-nt td.p{color:#6b7280;white-space:nowrap;font-style:italic}
+@media (max-width:600px){#dict-modal .rd-nwl{display:none}}
 #dict-modal .rd-ab.sv.on{background:#fef3c7;color:#d97706}
 #dict-modal .rd-ab.sv.on svg{fill:currentColor}
 #dict-modal .rd-pos{font-weight:600;font-style:italic;color:#7c3aed;font-size:.78em;margin-left:5px;white-space:nowrap}
@@ -16459,8 +16471,8 @@ window.isIOSDevice = function () {
     function save() { sset(JSON.stringify(rd.terms.map(t => ({ en: t.en, vi: t.vi, p: t.p || '', im: t.im || [], ts: t.ts, u: t.u ? 1 : 0, i: t.i || '', s: t.s ? 1 : 0, n: t.n ? 1 : 0, f: t.f ? 1 : 0 })))); count(); }
     function count() { const e = $('rhm-dict-count'); if (e) e.textContent = String(rd.terms.length); }
     const nNew = () => rd.terms.filter(t => t.n).length;
-    const newChip = () => { const n = nNew(); return n ? '<button type="button" class="rd-bdg rd-nwc" data-act="clr-new" title="Bấm để bỏ hết dấu MỚI">' + n + ' mới ✕</button>' : ''; };
-    function refreshChip() { const n = nNew(); document.querySelectorAll('#dict-modal .rd-nwc').forEach(b => { if (n) b.textContent = n + ' mới ✕'; else b.remove(); }); }
+    const newChip = () => { const n = nNew(); return n ? '<button type="button" class="rd-bdg rd-nwc" data-act="clr-new" title="Bấm để bỏ hết dấu MỚI">' + n + ' mới ✕</button><button type="button" class="rd-bdg rd-nwv" data-act="new-view" title="Xem các thuật ngữ mới vừa thêm">👁<span class="rd-nwl"> Xem thuật ngữ mới</span></button>' : ''; };
+    function refreshChip() { const n = nNew(); document.querySelectorAll('#dict-modal .rd-nwc').forEach(b => { if (n) b.textContent = n + ' mới ✕'; else b.remove(); }); if (!n) document.querySelectorAll('#dict-modal .rd-nwv').forEach(b => b.remove()); if (rd.pop === 'newt') paintNewT(); }
     const SPK = '<button type="button" class="rd-spk" data-act="spk" title="Đọc to"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 6a9 9 0 0 1 0 12"/></svg></button>';
     const enHTML = t => SPK + esc(t.en) + (t.s ? '<span class="rd-sv" title="Đã lưu">★</span>' : '') + (t.n ? '<span class="rd-nw">MỚI</span>' : '');
     function clearNew() {
@@ -16478,6 +16490,15 @@ window.isIOSDevice = function () {
         });
         if (rd.pop === 'saved') paintSaved();
         toast(t.s ? '⭐ Đã lưu "' + t.en + '"' : 'Đã bỏ lưu "' + t.en + '"');
+    }
+    function paintNewT() {
+        const box = $('rd-nt'), n = $('rd-ntn'); if (!box) return;
+        const list = []; rd.terms.forEach((t, k) => { if (t.n) list.push(k); });
+        list.sort((a, b) => (rd.terms[b].ts || 0) - (rd.terms[a].ts || 0));
+        if (n) n.textContent = String(list.length);
+        box.innerHTML = list.length
+            ? '<table><thead><tr><th>Tiếng Anh</th><th>Từ loại</th><th>Tiếng Việt</th></tr></thead><tbody>' + list.map(k => { const t = rd.terms[k]; return '<tr data-act="hit" data-k="' + k + '"><td><b>' + esc(t.en) + '</b></td><td class="p">' + esc(t.p || '') + '</td><td>' + viHTML(t.vi) + '</td></tr>'; }).join('') + '</tbody></table>'
+            : '<div class="rd-hint">Không còn thuật ngữ mới nào.</div>';
     }
     function paintSaved() {
         const box = $('rd-res'), n = $('rd-svn'); if (!box) return;
@@ -16637,6 +16658,8 @@ window.isIOSDevice = function () {
             h = '<div class="rd-pt">ℹ️ ' + esc(t.en) + (t.p ? '<span class="rd-pos">(' + esc(t.p) + ')</span>' : '') + '</div><div class="rd-sub">' + viHTML(t.vi) + '</div><div id="rd-info" class="rd-info overflow-y-auto"></div><div class="rd-pb"><button type="button" class="rd-pbtn" data-act="info-redo">↻ Tạo lại</button><button type="button" class="rd-pbtn" data-act="cancel">Đóng</button></div>';
         } else if (mode === 'more') {
             h = '<div class="rd-pt">＋ Thêm từ liên quan</div><div class="rd-sub"><b>' + esc(t.en) + '</b> — ' + esc(viLine(t.vi)) + '</div><div id="rd-mt" class="rd-mt"><div class="rd-hint" style="padding:10px">⏳ AI đang gợi ý từ cùng bộ và từ loại…</div></div><div class="rd-pb" id="rd-mb"></div><div class="rd-hint">Tick chọn các từ muốn thêm. Từ mới thêm sẽ có dấu MỚI.</div>';
+        } else if (mode === 'newt') {
+            h = '<div class="rd-pt">🆕 Thuật ngữ mới (<span id="rd-ntn">0</span>)</div><div id="rd-nt" class="rd-nt"></div>';
         } else if (mode === 'saved') {
             h = '<div class="rd-pt">⭐ Từ đã lưu (<span id="rd-svn">0</span>)</div><div id="rd-res" class="overflow-y-auto"></div>';
         } else if (mode === 'search') {
@@ -16647,9 +16670,9 @@ window.isIOSDevice = function () {
         }
         p.innerHTML = h;
         p.classList.toggle('wide', mode === 'info' || mode === 'saved' || mode === 'row' || mode === 'more');
-        p.classList.toggle('more', mode === 'more'); p.classList.toggle('tall', mode === 'row' || mode === 'more');
+        p.classList.toggle('more', mode === 'more'); p.classList.toggle('newt', mode === 'newt'); p.classList.toggle('tall', mode === 'row' || mode === 'more');
         p.classList.remove('hidden'); paintRib();
-        if (mode === 'saved') paintSaved();
+        if (mode === 'saved') paintSaved(); if (mode === 'newt') paintNewT();
         if (mode === 'row') paintThumbs();
         if (mode === 'more') moreLoad(t);
         if (focus) setTimeout(() => { const f = $(focus); if (f) f.focus(); }, 30);
@@ -17127,7 +17150,7 @@ window.isIOSDevice = function () {
             case 'img-pick': { const f = $('rd-in-img'); if (f) f.click(); break; }
             case 'img-del': { const i = +el.dataset.i; if (rd.editIm && i >= 0) { rd.editIm.splice(i, 1); paintThumbs(); } break; }
             case 'sv-un': toggleSave(rd.terms[+el.dataset.k]); break;
-            case 'clr-new': clearNew(); break;
+            case 'clr-new': clearNew(); break; case 'new-view': togglePop('newt'); break;
             case 'qz-lang': qzLang(el.dataset.l); break;
             case 'spk': { const r0 = el.closest('.rd-row'); speakEn(r0 && rd.terms[+r0.dataset.k]); break; }
             case 'rv-close': rvClose(); break; case 'rv-opt': rvOpt(el); break; case 'rv-start': rvStart(); break; case 'rv-back': rvSetup(); break;
@@ -17600,7 +17623,7 @@ window.isIOSDevice = function () {
     }
     function pageHTML(i, pos) {
         const T = nt.pages.length, tot = Math.max(T, 1), showHd = pos === 'L' || nt.per === 1;
-        const hd = showHd ? '<div class="rd-hd"><span class="rd-ttl">Sổ ghi chú</span><span class="rd-bdg">Tổng ' + nt.notes.length + ' · trang ' + Math.min(i + 1, tot) + '/' + tot + '</span></div>' : '';
+        const hd = showHd ? '<div class="rd-hd"><span class="rd-ttl">Sổ ghi chú</span><span class="rd-bdg">Tổng ' + nt.notes.length + ' · trang ' + Math.min(i + 1, tot) + '/' + tot + '</span>' + (nt.edId ? '<div class="nt-ed-acts"><button type="button" class="nt-ed-btn" data-act="n-imgpick">🖼️<span class="nt-lbl"> Thêm ảnh</span></button><button type="button" class="nt-ed-btn pri" data-act="ed-save">Lưu</button><button type="button" class="nt-ed-btn" data-act="ed-cancel">Hủy</button><button type="button" class="nt-ed-btn dan" data-act="ed-del">Xóa</button></div>' : '') + '</div>' : '';
         if (T === 0) return i === 0 ? hd + '<div class="rd-body"><div class="rd-empty">Sổ ghi chú còn trống.<br>Trong hộp chat AI, bấm 📒 Lưu ghi chú ở cuối bong bóng (hoặc bôi đen một đoạn rồi bấm 📒 Lưu ghi chú) để lưu vào đây.</div></div>' : '<div class="rd-body"></div>';
         if (i < 0 || i >= T) return hd + '<div class="rd-body"></div>';
         return hd + '<div class="rd-body' + (nt.edId ? ' nt-scroll' : '') + '">' + nt.pages[i].map(itemHTML).join('') + '</div><div class="rd-ft">Trang ' + (i + 1) + '</div>';
@@ -17721,7 +17744,7 @@ window.isIOSDevice = function () {
     }
     function editorHTML() {return '<div class="nt-it nt-editing">'
             + '<div class="nt-ed-head"><input id="nt-ed-t" class="nt-ed-title" value="' + esc(nt.edT || '') + '" placeholder="Tiêu đề ghi chú" autocomplete="off">'
-            + '<div class="nt-ed-acts"><button type="button" class="nt-ed-btn" data-act="n-imgpick">🖼️ Thêm ảnh</button><button type="button" class="nt-ed-btn pri" data-act="ed-save">Lưu</button><button type="button" class="nt-ed-btn" data-act="ed-cancel">Hủy</button><button type="button" class="nt-ed-btn dan" data-act="ed-del">Xóa</button></div></div>'
+            + '</div>'
             + '<input id="nt-in-img" type="file" accept="image/*" multiple hidden>'
             + '<div class="nt-ed-cat">Phân mục: <input id="nt-ed-c" class="nt-ed-cin" list="nt-cat-list" value="' + esc(nt.edC || '') + '" placeholder="chọn hoặc gõ mới" autocomplete="off"></div>'
             + '<div id="nt-ed-body" class="nt-ed-body" contenteditable="true" spellcheck="false">' + bodyHTML(nt.edB, nt.edIm, true) + '</div>'
@@ -18117,7 +18140,7 @@ window.isIOSDevice = function () {
         <div class="flex flex-col gap-2">
             <button type="button" onclick="homeSettingsGo('openSuggestQuestionModal')" class="text-left text-sm bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold py-2.5 px-3.5 rounded-xl border border-blue-300">💡 Đề xuất câu hỏi</button>
             <button type="button" onclick="homeSettingsGo('openAppFeedbackModal')" class="text-left text-sm bg-teal-50 hover:bg-teal-100 text-teal-800 font-semibold py-2.5 px-3.5 rounded-xl border border-teal-300">📩 Góp ý / Liên hệ</button>
-            <button type="button" onclick="hsOpenKeys()" class="text-left text-sm bg-amber-50 hover:bg-amber-100 text-amber-800 font-semibold py-2.5 px-3.5 rounded-xl border border-amber-300 flex items-center justify-between">🔑 Cài đặt khóa API <span>›</span></button>
+            <button type="button" onclick="hsOpenKeys()" class="text-left text-sm bg-amber-50 hover:bg-amber-100 text-amber-800 font-semibold py-2.5 px-3.5 rounded-xl border border-amber-300 flex items-center justify-between">🔑 Cài đặt khóa API</button>
             <button type="button" onclick="homeSettingsGo('openProgressModal')" class="text-left text-sm bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold py-2.5 px-3.5 rounded-xl border border-indigo-300">🔄 Nhập / Xuất Tiến Độ</button>
             <button type="button" id="btn-add-home" onclick="homeSettingsGo('addToHomeScreen')" class="text-left text-sm bg-sky-50 hover:bg-sky-100 text-sky-800 font-semibold py-2.5 px-3.5 rounded-xl border border-sky-300">📲 Thêm vào MH chính</button>
         </div>
@@ -18225,7 +18248,21 @@ window.isIOSDevice = function () {
         var m = document.getElementById('home-settings-modal'); if (m) m.classList.add('hidden');
         document.querySelectorAll('[data-hs-inert]').forEach(function (s) { s.removeAttribute('inert'); s.removeAttribute('data-hs-inert'); });
     };
-    window.homeSettingsGo = function (fn) { window.closeHomeSettings(); setTimeout(function () { try { if (typeof window[fn] === 'function') window[fn](); } catch (e) { console.warn(e); } }, 60); };
+    window.homeSettingsGo = function (fn) {
+        window.closeHomeSettings();
+        var MAP = { openSuggestQuestionModal: 'suggest-question-modal', openAppFeedbackModal: 'app-feedback-modal', openProgressModal: 'progress-modal' };
+        setTimeout(function () {
+            try { if (typeof window[fn] === 'function') window[fn](); } catch (e) { console.warn(e); }
+            var mm = MAP[fn] && document.getElementById(MAP[fn]);
+            if (!mm || mm.classList.contains('hidden')) return;
+            var mo = new MutationObserver(function () {
+                if (!mm.classList.contains('hidden')) return;
+                mo.disconnect();
+                setTimeout(function () { window.openHomeSettings(); }, 80);
+            });
+            mo.observe(mm, { attributes: true, attributeFilter: ['class'] });
+        }, 60);
+    };
     (function () { var m = document.getElementById('home-settings-modal'); if (m) ['click', 'mousedown', 'mouseup', 'pointerdown', 'pointerup', 'touchstart', 'touchend'].forEach(function (ev) { m.addEventListener(ev, function (e) { e.stopPropagation(); }); }); })();
 
     /* Cửa sổ khóa API đầy đủ: các thẻ nhà cung cấp của box chat được DI CHUYỂN sang cửa sổ này (không sao chép),
@@ -18252,6 +18289,7 @@ window.isIOSDevice = function () {
     window.hsCloseKeys = function () {
         var m = document.getElementById('hs-keys-modal'); if (m) m.style.display = 'none';
         hsMoveBack(); hsUnlock();
+        window.openHomeSettings();
     };
     window.hsLock = function (m) {
         document.querySelectorAll('body > *').forEach(function (s) {
@@ -18347,6 +18385,9 @@ function viSelText(range) {
 #note-modal .nt-ed-head > .nt-ed-title { width: auto; flex: 1 1 180px; min-width: 0; margin-bottom: 0; }
 #note-modal .nt-ed-acts { display: flex; gap: 6px; flex-wrap: wrap; }
 #note-modal .nt-ed-acts .nt-ed-btn { padding: 5px 11px; }
+#note-modal .rd-hd .nt-ed-acts { margin-left: auto; flex: none; flex-wrap: nowrap; gap: 5px; }
+#note-modal .rd-hd .nt-ed-btn { white-space: nowrap; padding: 4px 10px; font-size: 12.5px; }
+@media (max-width: 600px) { #note-modal .rd-hd .nt-lbl { display: none; } #note-modal .rd-hd .nt-ed-btn { padding: 4px 8px; } }
 </style>
 <script>
 (function () {
