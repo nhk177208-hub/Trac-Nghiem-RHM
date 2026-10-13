@@ -12147,7 +12147,16 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
                         
                     </div>
                 </div>
-<p class="font-bold text-amber-900 mb-1">🔑 Nhà cung cấp AI &amp; khóa API</p>
+<div class="rounded-2xl bg-white border border-amber-200 p-3 mb-2">
+                    <div class="font-bold text-gray-900">Mức suy luận Gemini</div>
+                    <div class="mt-2 grid grid-cols-3 gap-2">
+                        <button type="button" data-gl="low" onclick="rhmGemSet('lv','low')" class="border rounded-xl px-2 py-2 text-sm font-bold">Thấp</button>
+                        <button type="button" data-gl="medium" onclick="rhmGemSet('lv','medium')" class="border rounded-xl px-2 py-2 text-sm font-bold">Trung bình</button>
+                        <button type="button" data-gl="high" onclick="rhmGemSet('lv','high')" class="border rounded-xl px-2 py-2 text-sm font-bold">Cao</button>
+                    </div>
+                    <p class="mt-2 text-[11px] text-gray-500">Áp dụng cho các lần gọi Gemini tiếp theo. Mức càng cao thì trả lời càng kỹ nhưng chậm hơn.</p>
+                </div>
+                <p class="font-bold text-amber-900 mb-1">🔑 Nhà cung cấp AI &amp; khóa API</p>
                 <p class="text-xs text-amber-800 mb-2">Mặc định dùng <b>Gemini</b>. Khi Gemini hết lượt hoặc lỗi, app <b>tự chuyển</b> sang nhà cung cấp khác đã có khóa (nếu bật bên dưới). Bạn cũng có thể tự chọn nhà cung cấp chính bằng nút tròn.</p>
                 <label class="flex items-center gap-2 text-xs font-bold text-amber-900 mb-2"><input id="ai-auto-switch" type="checkbox" onchange="aiAutoSet(this.checked)"> Tự chuyển nhà cung cấp khi hết lượt / lỗi</label>
                 <div id="ai-prov-cards" class="space-y-2"></div>
@@ -17762,7 +17771,6 @@ function moveEdActs() {
         var b = $('rhm-note-count'); if (b) b.textContent = String(getJ(NK, []).length);
     }
 
-    /* khung tài liệu Word: A4, Times New Roman, bảng có viền, tiêu đề màu tím */
     function wrapDoc(title, body) {
         return '\ufeff<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">'
             + '<head><meta charset="utf-8"><title>' + esc(title) + '</title><style>'
@@ -17811,7 +17819,6 @@ function moveEdActs() {
         return wrapDoc('Sổ ghi chú RHM', body);
     }
 
-    /* xuất */
     function exportDict(fmt) {
         var terms = getJ(DK, []);
         if (!terms.length) { say('Từ điển chưa có thuật ngữ nào'); return; }
@@ -17829,7 +17836,6 @@ function moveEdActs() {
     }
     window.rhmTrExport = function (kind, fmt) { if (kind === 'dict') exportDict(fmt); else exportNotes(fmt); };
 
-    /* nhập */
     function cellText(td) {
         var c = td.cloneNode(true);
         Array.prototype.forEach.call(c.querySelectorAll('br'), function (b) { b.parentNode.replaceChild(document.createTextNode('\n'), b); });
@@ -17864,7 +17870,6 @@ function moveEdActs() {
         }).filter(function (x) { return x.t || x.b; });
     }
 
-    /* so khớp nghĩa: bỏ dấu câu, khoảng trắng thừa, chữ hoa */
     function normVi(s) {
         return String(s || '').normalize('NFC').toLowerCase().replace(/[\s\u00a0]+/g, ' ').replace(/[.,;:!?()"'“”]/g, '').trim();
     }
@@ -17960,10 +17965,32 @@ function moveEdActs() {
 })();
 </script>
 <script>
-/* Mức suy luận Gemini nằm trong card Gemini (cả ở Cài đặt ngoài trang chủ lẫn khung chat) */
+/* Mức suy luận Gemini nằm trong card khóa Gemini (Cài đặt ngoài trang chủ và khung chat) */
 function aiProvRender() {
     aiProvRenderBase();
     rhmGemLevelsInto();
+}
+function rhmGemCfgLv() {
+    var c = { lv: 'low' };
+    try {
+        var s = JSON.parse(localStorage.getItem('gemini_cfg_v1') || 'null');
+        if (s && (s.lv === 'low' || s.lv === 'medium' || s.lv === 'high')) c.lv = s.lv;
+    } catch (e) {}
+    return c;
+}
+function rhmGemSet(k, v) {
+    var c = rhmGemCfgLv();
+    c[k] = v;
+    try { localStorage.setItem('gemini_cfg_v1', JSON.stringify(c)); } catch (e) {}
+    rhmGemPaint();
+}
+function rhmGemPaint() {
+    var c = rhmGemCfgLv();
+    document.querySelectorAll('[data-gl]').forEach(function (b) {
+        var on = b.getAttribute('data-gl') === c.lv;
+        b.classList.toggle('bg-indigo-600', on); b.classList.toggle('text-white', on); b.classList.toggle('border-indigo-600', on);
+        b.classList.toggle('bg-white', !on); b.classList.toggle('text-gray-700', !on); b.classList.toggle('border-gray-300', !on);
+    });
 }
 function rhmGemLevelsInto() {
     var box = document.getElementById('ai-prov-cards');
@@ -17976,6 +18003,16 @@ function rhmGemLevelsInto() {
     card.insertAdjacentHTML('beforeend', '<div class="mt-3 pt-2 border-t border-amber-200"><div class="text-xs font-bold text-gray-900">Mức suy luận Gemini</div><div class="mt-2 grid grid-cols-3 gap-2">' + btns + '</div><p class="mt-1.5 text-[11px] text-gray-500">Áp dụng cho mọi tính năng gọi Gemini: chat, dịch, giảng bài, trắc nghiệm, tìm hiểu sâu, mục lục.</p></div>');
     rhmGemPaint();
 }
+/* Gỡ khối Mức suy luận đặt riêng trong khung chat (đã chuyển vào card khóa Gemini) */
+(function () {
+    var panel = document.getElementById('ai-key-panel');
+    if (!panel) return;
+    Array.prototype.slice.call(panel.querySelectorAll('.font-bold')).forEach(function (el) {
+        if (/Mức suy luận Gemini/.test(el.textContent) && el.parentElement && el.parentElement.parentElement) {
+            el.parentElement.parentElement.removeChild(el.parentElement);
+        }
+    });
+})();
 </script>
 <style>
 html.rhm-modal-open, html.rhm-modal-open body { overflow: hidden !important; overscroll-behavior: none !important; }
