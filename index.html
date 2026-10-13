@@ -7540,8 +7540,8 @@
                 btn.innerHTML = `
                     <img src="${TOPIC_ICONS[n - 1] || 'images/img_037.webp'}" alt="${topicFullName(n)}" draggable="false" onerror="this.style.opacity=0.15" class="w-9 h-9 sm:w-20 sm:h-20 object-contain shrink-0 ${c > 0 ? '' : 'opacity-60'}">
                     <span class="flex flex-col items-center text-center min-w-0">
-                        <span class="font-bold text-[11px] sm:text-lg leading-tight ${c > 0 ? 'text-blue-800' : 'text-gray-500'}">${n === 37 ? 'Thi Thử' : 'Chủ đề ' + n}</span>
-                        <span class="text-[9px] sm:text-sm mt-0.5 ${c > 0 ? 'text-blue-600' : 'text-gray-400'}">(${c} bộ đề)</span>
+                        <span class="font-bold text-[11px] sm:text-lg leading-tight text-center w-full ${c > 0 ? 'text-blue-800' : 'text-gray-500'}" style="display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;line-height:1.25;min-height:calc(4 * 1.25em)">${n === 37 ? 'Thi Thử' : (TOPIC_FULL_NAMES[n - 1] || ('Chủ đề ' + n))}</span>
+                        
                     </span>`;
                 grid.appendChild(btn);
             }
@@ -8416,7 +8416,7 @@
         let activeYtPlayers = {};
         let lastActivePlayerId = null;
 
-        function toggleMonHocSection() { hsExclusive('monhoc'); return _toggleMonHocSection(); } function _toggleMonHocSection() {
+        function toggleMonHocSection() { hsExclusive('monhoc'); const r = _toggleMonHocSection(); rhmScrollBtns(); return r; } function _toggleMonHocSection() {
             const container = document.getElementById('monhoc-section-container');
             const icon = document.getElementById('monhoc-toggle-icon');
             if (!container) return;
@@ -8425,7 +8425,7 @@
             if (icon) icon.textContent = isHidden ? '▲' : '▼';
         }
 
-        function toggleChuyenDeSection() { hsExclusive('chuyende'); return _toggleChuyenDeSection(); } function _toggleChuyenDeSection() {
+        function toggleChuyenDeSection() { hsExclusive('chuyende'); const r = _toggleChuyenDeSection(); rhmScrollBtns(); return r; } function _toggleChuyenDeSection() {
             const container = document.getElementById('chuyende-section-container');
             const icon = document.getElementById('chuyende-toggle-icon');
             if (!container) return;
@@ -16471,7 +16471,7 @@ window.isIOSDevice = function () {
     function save() { sset(JSON.stringify(rd.terms.map(t => ({ en: t.en, vi: t.vi, p: t.p || '', im: t.im || [], ts: t.ts, u: t.u ? 1 : 0, i: t.i || '', s: t.s ? 1 : 0, n: t.n ? 1 : 0, f: t.f ? 1 : 0 })))); count(); }
     function count() { const e = $('rhm-dict-count'); if (e) e.textContent = String(rd.terms.length); }
     const nNew = () => rd.terms.filter(t => t.n).length;
-    const newChip = () => { const n = nNew(); return n ? '<button type="button" class="rd-bdg rd-nwc" data-act="clr-new" title="Bấm để bỏ hết dấu MỚI">' + n + ' mới ✕</button><button type="button" class="rd-bdg rd-nwv" data-act="new-view" title="Xem các thuật ngữ mới vừa thêm">👁<span class="rd-nwl"> Xem thuật ngữ mới</span></button>' : ''; };
+    const newChip = () => { const n = nNew(); return n ? '<button type="button" class="rd-bdg rd-nwv" data-act="new-view" title="Xem các thuật ngữ mới vừa thêm">👁<span class="rd-nwl"> Xem thuật ngữ mới</span></button>' : ''; };
     function refreshChip() { const n = nNew(); document.querySelectorAll('#dict-modal .rd-nwc').forEach(b => { if (n) b.textContent = n + ' mới ✕'; else b.remove(); }); if (!n) document.querySelectorAll('#dict-modal .rd-nwv').forEach(b => b.remove()); if (rd.pop === 'newt') paintNewT(); }
     const SPK = '<button type="button" class="rd-spk" data-act="spk" title="Đọc to"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 6a9 9 0 0 1 0 12"/></svg></button>';
     const enHTML = t => SPK + esc(t.en) + (t.s ? '<span class="rd-sv" title="Đã lưu">★</span>' : '') + (t.n ? '<span class="rd-nw">MỚI</span>' : '');
@@ -16492,7 +16492,7 @@ window.isIOSDevice = function () {
         toast(t.s ? '⭐ Đã lưu "' + t.en + '"' : 'Đã bỏ lưu "' + t.en + '"');
     }
     function paintNewT() {
-        const box = $('rd-nt'), n = $('rd-ntn'); if (!box) return;
+        const box = $('rd-nt'), n = $('rd-ntn'), slot = $('rd-nwslot'); if (!box) return; if (slot) slot.innerHTML = nNew() ? '<button type="button" class="rd-bdg rd-nwc" data-act="clr-new" title="Bấm để bỏ hết dấu MỚI">' + nNew() + ' mới ✕</button>' : '';
         const list = []; rd.terms.forEach((t, k) => { if (t.n) list.push(k); });
         list.sort((a, b) => (rd.terms[b].ts || 0) - (rd.terms[a].ts || 0));
         if (n) n.textContent = String(list.length);
@@ -16642,8 +16642,17 @@ window.isIOSDevice = function () {
     function paintRib() {
         ['add', 'search', 'saved', 'review', 'jump'].forEach(n => { const b = $('rd-rb-' + n); if (b) b.classList.toggle('on', n === 'review' ? !!rd.rv : rd.pop === n); });
     }
-    function closePop() { rd.pop = ''; rd.editT = null; rd.infoT = null; rd.more = null; rd.editIm = null; const p = $('rd-pop'); p.classList.add('hidden'); p.classList.remove('wide', 'more', 'tall'); paintRib(); }
-    function openPop(mode, t) {
+    function closePop() { rd.pop = ''; rd.editT = null; rd.infoT = null; rd.more = null; rd.editIm = null; const p = $('rd-pop'); p.classList.add('hidden'); p.classList.remove('wide', 'more', 'tall'); p.style.left = ''; p.style.top = ''; p.style.right = ''; paintRib(); }
+    function placeNewT() {
+    var p = $('rd-pop'), w = p && p.parentNode, b = document.querySelector('#dict-modal .rd-nwv');
+    if (!p || !w || !b) return;
+    var wr = w.getBoundingClientRect(), br = b.getBoundingClientRect(), pw = p.offsetWidth || 320;
+    var left = Math.max(8, Math.min(br.left - wr.left, wr.width - pw - 8));
+    p.style.right = 'auto';
+    p.style.left = left + 'px';
+    p.style.top = (br.bottom - wr.top + 8) + 'px';
+}
+function openPop(mode, t) {
         hideTip();
         rd.pop = mode; rd.editT = mode === 'row' ? t : null; rd.infoT = mode === 'info' ? t : null;
         rd.editIm = mode === 'row' ? cleanIm(t && t.im).slice() : null; rd.more = null;
@@ -16659,7 +16668,7 @@ window.isIOSDevice = function () {
         } else if (mode === 'more') {
             h = '<div class="rd-pt">＋ Thêm từ liên quan</div><div class="rd-sub"><b>' + esc(t.en) + '</b> — ' + esc(viLine(t.vi)) + '</div><div id="rd-mt" class="rd-mt"><div class="rd-hint" style="padding:10px">⏳ AI đang gợi ý từ cùng bộ và từ loại…</div></div><div class="rd-pb" id="rd-mb"></div><div class="rd-hint">Tick chọn các từ muốn thêm. Từ mới thêm sẽ có dấu MỚI.</div>';
         } else if (mode === 'newt') {
-            h = '<div class="rd-pt">🆕 Thuật ngữ mới (<span id="rd-ntn">0</span>)</div><div id="rd-nt" class="rd-nt"></div>';
+            h = '<div class="rd-pt" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="flex:1">🆕 Thuật ngữ mới (<span id="rd-ntn">0</span>)</span><span id="rd-nwslot"></span></div><div id="rd-nt" class="rd-nt"></div>';
         } else if (mode === 'saved') {
             h = '<div class="rd-pt">⭐ Từ đã lưu (<span id="rd-svn">0</span>)</div><div id="rd-res" class="overflow-y-auto"></div>';
         } else if (mode === 'search') {
@@ -16672,7 +16681,7 @@ window.isIOSDevice = function () {
         p.classList.toggle('wide', mode === 'info' || mode === 'saved' || mode === 'row' || mode === 'more');
         p.classList.toggle('more', mode === 'more'); p.classList.toggle('newt', mode === 'newt'); p.classList.toggle('tall', mode === 'row' || mode === 'more');
         p.classList.remove('hidden'); paintRib();
-        if (mode === 'saved') paintSaved(); if (mode === 'newt') paintNewT();
+        if (mode === 'saved') paintSaved(); if (mode === 'newt') { paintNewT(); placeNewT(); }
         if (mode === 'row') paintThumbs();
         if (mode === 'more') moreLoad(t);
         if (focus) setTimeout(() => { const f = $(focus); if (f) f.focus(); }, 30);
@@ -17467,7 +17476,9 @@ window.isIOSDevice = function () {
 #note-modal .qz-fb.ok{background:#dcfce7;color:#166534}
 #note-modal .qz-fb.bad{background:#fee2e2;color:#991b1b}
 #note-modal .qz-cv{font-weight:500;margin-top:4px;color:#374151}
-@media (prefers-reduced-motion:reduce){#note-modal .rd-nw{animation:none}}
+@media (prefers-reduced-motion:reduce){#note-modal .rd-nw{animation:none}}#note-modal .nt-ed-acts.nt-ed-acts-r { position: absolute; top: 14px; left: 16px; right: auto; z-index: 12; flex-wrap: nowrap; }
+#dict-modal .rd-nwv { background: #fee2e2; color: #b91c1c; }
+#dict-modal .rd-nwv:hover { background: #fecaca; }
 @media (max-width:759px){
  #note-modal .rd-wrap{--rd-h:calc(var(--rd-vh) - 8px - 62px - 50px);padding-top:62px;display:flex;flex-direction:column}
  #note-modal .rd-tabs.L,#note-modal .rd-tabs.R{display:none}
@@ -17659,7 +17670,12 @@ window.isIOSDevice = function () {
     }
     const pageOf = id => nt.pages.findIndex(pg => pg.some(it => it.n && it.n.id === id));
     function paintNav() { $('nt-prev').classList.toggle('dis', nt.cur <= 0); $('nt-next').classList.toggle('dis', nt.cur + nt.per >= nt.pages.length); }
-    function render() { $('nt-L').innerHTML = pageHTML(nt.cur, 'L'); $('nt-R').innerHTML = nt.per === 2 ? pageHTML(nt.cur + 1, 'R') : ''; paintNav(); }
+    function render() { $('nt-L').innerHTML = pageHTML(nt.cur, 'L'); $('nt-R').innerHTML = nt.per === 2 ? pageHTML(nt.cur + 1, 'R') : ''; moveEdActs(); paintNav(); }
+function moveEdActs() {
+    var a = $('nt-L').querySelector('.nt-ed-acts');
+    if (!a) return;
+    if (nt.per === 2) { a.classList.add('nt-ed-acts-r'); $('nt-R').insertBefore(a, $('nt-R').firstChild); }
+}
     function repaginate(id) { snapshotInline();
         if (!paginate()) return;
         let p = nt.cur; if (id) { const k = pageOf(id); if (k >= 0) p = k; }
@@ -18333,6 +18349,14 @@ html.rhm-modal-open, html.rhm-modal-open body { overflow: hidden !important; ove
         }, true);
     });
 })();
+function rhmScrollBtns() {
+    requestAnimationFrame(function () {
+        var b = document.getElementById('btn-toggle-monhoc');
+        if (!b) return;
+        var y = b.getBoundingClientRect().top + window.pageYOffset - 8;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+    });
+}
 function hsExclusive(which) {
     var m = document.getElementById('monhoc-section-container'), c = document.getElementById('chuyende-section-container');
     if (!m || !c) return;
