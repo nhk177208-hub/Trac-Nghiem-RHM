@@ -9133,6 +9133,8 @@ function bkPaintResult(bubble, res, label) {
     head.className = 'text-[11px] font-bold text-indigo-700 mb-1.5 bk-tr-head';
     head.textContent = label;
     bubble.appendChild(head);
+    const body = document.createElement('div');
+    body.className = 'ai-body';
     if (res.bi) {
         const wrap = document.createElement('div'); wrap.className = 'bk-bi'; wrap.insertAdjacentHTML('beforeend', '<div class="bk-bi-row bk-bi-hd"><div>Bản gốc</div><div>Tiếng Việt</div></div>');
         res.bi.forEach(p => {
@@ -9141,14 +9143,19 @@ function bkPaintResult(bubble, res, label) {
             const b = document.createElement('div'); b.className = 'bk-bi-vi'; b.textContent = p.vi;
             row.append(a, b); wrap.appendChild(row);
         });
-        bubble.appendChild(wrap);
+        body.appendChild(wrap);
     } else {
         res.t.split(/\n\s*\n/).forEach(par => {
             const p = document.createElement('p'); p.className = 'bk-p'; p.textContent = par.trim();
-            if (p.textContent) bubble.appendChild(p);
+            if (p.textContent) body.appendChild(p);
         });
     }
-
+    bubble.appendChild(body);
+    try {
+        const outStr = res.bi ? ('[[EN]]\n' + res.bi.map(p => p.src || '').join('\n\n') + '\n[[VI]]\n' + res.bi.map(p => p.vi || '').join('\n\n')) : String(res.t || '');
+        const sl = res.bi ? { vi: true, en: true } : { vi: !!aiLangCfg.vi, en: !!aiLangCfg.en && !aiLangCfg.vi };
+        aiAttachLangBar(bubble, outStr, sl, false);
+    } catch (e) {}
 }
 let bkLastTr = '', bkLectCtx = '';
 /* Giảng bài cho một bong bóng dịch: giảng bong bóng đó và các bong bóng liên quan ở dưới (cùng một lần dịch) */
@@ -9169,7 +9176,10 @@ async function bkLectureBubble(b) {
     out.appendChild(head);
     const t = bkUnesc(v && typeof v.t === 'string' ? v.t.trim() : '');
     if (!t) { out.appendChild(document.createTextNode('Chưa soạn được bài giảng, thử lại sau.')); return; }
-    t.split(/\n\s*\n/).forEach(par => { const p = document.createElement('p'); p.className = 'bk-p'; p.textContent = par.trim(); if (p.textContent) out.appendChild(p); });
+    const body = document.createElement('div'); body.className = 'ai-body';
+    t.split(/\n\s*\n/).forEach(par => { const p = document.createElement('p'); p.className = 'bk-p'; p.textContent = par.trim(); if (p.textContent) body.appendChild(p); });
+    out.appendChild(body);
+    try { aiAttachLangBar(out, t, { vi: true, en: false }, false); } catch (e) {}
     aiScrollToTop(out, true);
 }
 function bkLectureSys() {
@@ -12526,12 +12536,12 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         const lt = bubble._lt = bi ? { en: bi.en, vi: bi.vi } : { en: '', vi: '' };
         if (!bi) lt[(sendLang.en && !sendLang.vi) ? 'en' : 'vi'] = String(out);
         bubble._cur = bi ? 'both' : ((sendLang.en && !sendLang.vi) ? 'en' : 'vi');
+        if (bi && aiState.mode === 'quiz') bubble._cur = (sendLang && sendLang.en && !sendLang.vi) ? 'en' : 'vi';
         const row = aiActRow(bubble);
+        const oldBar = row.querySelector('.ai-langbar'); if (oldBar) oldBar.remove();
         const bar = document.createElement('span'); bar.className = 'ai-langbar inline-flex items-center rounded-full border border-indigo-300 overflow-hidden';
         const mk = (k, label) => { const b = document.createElement('button'); b.type = 'button'; b.dataset.k = k; b.textContent = label; b.className = 'text-[11px] font-extrabold px-2.5 py-0.5'; b.onclick = () => aiBubbleLang(bubble, k); bar.appendChild(b); };
-        const wb = document.createElement('button'); wb.type = 'button'; wb.className = 'ai-enwin-btn text-[11px] font-extrabold px-2 py-0.5 rounded-full border border-indigo-300 bg-white text-indigo-700 mr-1'; wb.textContent = '🇬🇧 Cửa sổ phụ'; wb.title = 'Bật/tắt cửa sổ phụ tiếng Anh'; wb.onclick = () => aiEnToggle(bubble);
-        
-        mk('vi', 'Vie'); mk('en', 'Eng'); if (bi) mk('both', 'Cột');
+        mk('vi', 'Vie'); mk('en', 'Eng'); if (bi && aiState.mode !== 'quiz') mk('both', 'Cột');
         row.insertBefore(bar, row.firstChild);
         aiLangBarPaint(bubble);
         if (enSide) aiEnSide(bubble, out);
@@ -12554,6 +12564,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             bubble._langBusy = false; if (btn) btn.textContent = old;
             if (!t) { showToast('Chưa dịch được, hãy thử lại'); return; }
             lt[to] = t;
+            try { if (typeof window.rhmDictHarvest === 'function' && lt.en && lt.vi) window.rhmDictHarvest(lt.en, [{ t: lt.vi }], { force: true }); } catch (e) {}
         }
         bubble._cur = k;
         body.innerHTML = k === 'both' ? aiFmt('[[EN]]\n' + lt.en + '\n[[VI]]\n' + lt.vi) : aiFmt(lt[k]);
@@ -13362,8 +13373,12 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     }
     function aiDrBtnLabel(btn, on) { btn.textContent = (on ? '📚 Ẩn' : '📚 Hiện') + ' tài liệu tham khảo (' + btn.dataset.count + ')'; }
     function aiDrRender(bubble, text, cr, reg) {
-        bubble.innerHTML = aiFmt(text).replace(/\[(\d{1,3})\]/g, '<sup class="ai-cite" data-n="$1">[$1]</sup>');
-        if (!cr.used.length) { const nt = document.createElement('div'); nt.className = 'ai-dr-note'; nt.textContent = 'ⓘ Google Search không trả về nguồn trích dẫn cho phần này, hãy tự đối chiếu.'; bubble.appendChild(nt); return; }
+        bubble.innerHTML = '<div class="ai-body">' + aiFmt(text).replace(/\[(\d{1,3})\]/g, '<sup class="ai-cite" data-n="$1">[$1]</sup>') + '</div>';
+        if (!cr.used.length) {
+            const nt = document.createElement('div'); nt.className = 'ai-dr-note'; nt.textContent = 'ⓘ Google Search không trả về nguồn trích dẫn cho phần này, hãy tự đối chiếu.'; bubble.appendChild(nt);
+            try { aiAttachLangBar(bubble, text, { vi: true, en: false }, false); } catch (e) {}
+            return;
+        }
         const bar = aiActRow(bubble);
         const btn = document.createElement('button'); btn.type = 'button'; btn.className = AI_REFBTN + ' ai-dr-btn'; btn.dataset.count = String(cr.used.length); aiDrBtnLabel(btn, false);
         const box = document.createElement('div'); box.className = 'ai-dr-refs';
@@ -13376,6 +13391,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         });
         btn.onclick = () => { const on = bubble.classList.toggle('show-drrefs'); aiDrBtnLabel(btn, on); };
         bar.insertBefore(btn, bar.firstChild); bubble.appendChild(box);
+        try { aiAttachLangBar(bubble, text, { vi: true, en: false }, false); } catch (e) {}
     }
     (function () {   // bấm vào số trích dẫn [n] -> mở danh sách tài liệu tham khảo và nháy dòng tương ứng
         const box = document.getElementById('ai-messages'); if (!box) return;
@@ -13934,6 +13950,22 @@ function aiEnsureQuickTts() {   // nút "Giảng bài" và "Đọc to" dính sá
                 lb.textContent = '🎓 Giảng bài'; lb.onclick = () => bkLectureBubble(b);
                 f.insertBefore(lb, f.firstChild);
             }
+            const rawTxt = (b.textContent || '').trim();
+            const isWait = rawTxt === '…' || (/^(⏳|🔬|🎓)\s*(Đang|Deep Research)/.test(rawTxt) && rawTxt.length < 180);
+            if (!isWait && !b._lt && !b.querySelector('.ai-langbar')) {
+                let body = b.querySelector(':scope > .ai-body');
+                if (!body) {
+                    body = document.createElement('div'); body.className = 'ai-body';
+                    Array.from(b.childNodes).forEach(n => {
+                        if (n.nodeType === 1 && n.matches('.ai-ttsbar,.bk-tr-head,.ai-actrow,.nt-savebar,.ai-quota-hint,.ai-dr-refs,.ai-dr-note,.ai-liverefs,.ai-imgwrap')) return;
+                        body.appendChild(n);
+                    });
+                    const tts = b.querySelector(':scope > .ai-ttsbar');
+                    if (tts) tts.after(body); else b.insertBefore(body, b.firstChild);
+                }
+                const plain = (body.innerText || body.textContent || '').trim();
+                if (plain) { try { aiAttachLangBar(b, plain, { vi: true, en: false }, false); } catch (e) {} }
+            }
         });
     }
     (function () {
@@ -14271,7 +14303,7 @@ function aiFetch(url, opts, ms) {
                 if (!L.mBub) { L.mTxt = ''; L.mBub = aiAddMsg('ai', '…'); aiScrollToTop(L.mBub); }
                 L.uBub = null; L.mTxt += sc.outputTranscription.text; L.mBub.innerHTML = aiFmt(L.mTxt);
             }
-            if (sc.turnComplete) { aiUsageBump('live-turn'); if (L.mBub && L.mTxt && L.mTxt.length > 120) aiAddLiveRefBar(L.mBub, L.mTxt); L.mBub = null; L.uBub = null; }
+            if (sc.turnComplete) { aiUsageBump('live-turn'); if (L.mBub && L.mTxt) { aiSetBody(L.mBub, L.mTxt); if (L.mTxt.length > 120) aiAddLiveRefBar(L.mBub, L.mTxt); try { aiAttachLangBar(L.mBub, L.mTxt, { vi: true, en: false }, false); } catch (e) {} } L.mBub = null; L.uBub = null; }
         };
         ws.onerror = () => {};
         ws.onclose = (ev) => {
@@ -16242,7 +16274,8 @@ function openPop(mode, t) {
         } else if (mode === 'row') {
             h = '<div class="rd-pt">✏️ Sửa thuật ngữ</div><input id="rd-in-en" class="rd-in" value="' + esc(t.en) + '" autocomplete="off">' + POSI(t.p) + '<textarea id="rd-in-vi" class="rd-in" rows="3" autocomplete="off">' + esc(t.vi) + '</textarea><div class="rd-imgrow"><button type="button" class="rd-pbtn" data-act="img-pick">🖼️ Thêm ảnh</button><span class="rd-hint" style="margin:0">hoặc dán ảnh từ clipboard (Ctrl+V)</span><input id="rd-in-img" type="file" accept="image/*" multiple hidden></div><div id="rd-thumbs" class="rd-thumbs"></div><div class="rd-pb"><button type="button" class="rd-pbtn pri" data-act="save">Lưu</button><button type="button" class="rd-pbtn dan" data-act="del">Xóa</button><button type="button" class="rd-pbtn" data-act="cancel">Hủy</button></div><div class="rd-hint">Mỗi nghĩa một dòng (Shift+Enter xuống dòng). Ảnh sẽ hiện trong khung thông tin của từ. Các lần dịch sau sẽ dùng đúng nghĩa bạn vừa sửa.</div>'; focus = 'rd-in-vi';
         } else if (mode === 'info') {
-            h = '<div class="rd-pt">ℹ️ ' + esc(t.en) + (t.p ? '<span class="rd-pos">(' + esc(t.p) + ')</span>' : '') + '</div><div class="rd-sub">' + viHTML(t.vi) + '</div><div id="rd-info" class="rd-info overflow-y-auto"></div><div class="rd-pb"><button type="button" class="rd-pbtn" data-act="info-redo">↻ Tạo lại</button><button type="button" class="rd-pbtn" data-act="cancel">Đóng</button></div>';
+            rd.infoLang = 'vi';
+            h = '<div class="rd-pt" style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap"><span>ℹ️ ' + esc(t.en) + (t.p ? '<span class="rd-pos">(' + esc(t.p) + ')</span>' : '') + '</span><span class="rd-inflg" style="display:inline-flex;border:1.5px solid #c4b5fd;border-radius:999px;overflow:hidden;font-size:12px"><button type="button" data-act="info-lang" data-l="vi" style="padding:2px 10px;font-weight:800;border:0;cursor:pointer;background:#6d28d9;color:#fff">Vie</button><button type="button" data-act="info-lang" data-l="en" style="padding:2px 10px;font-weight:800;border:0;cursor:pointer;background:#fff;color:#5b21b6">Eng</button></span></div><div class="rd-sub">' + viHTML(t.vi) + '</div><div id="rd-info" class="rd-info overflow-y-auto"></div><div class="rd-pb"><button type="button" class="rd-pbtn" data-act="info-redo">↻ Tạo lại</button><button type="button" class="rd-pbtn" data-act="cancel">Đóng</button></div>';
         } else if (mode === 'more') {
             h = '<div class="rd-pt">＋ Thêm từ liên quan</div><div class="rd-sub"><b>' + esc(t.en) + '</b> — ' + esc(viLine(t.vi)) + '</div><div id="rd-mt" class="rd-mt"><div class="rd-hint" style="padding:10px">⏳ AI đang gợi ý từ cùng bộ và từ loại…</div></div><div class="rd-pb" id="rd-mb"></div><div class="rd-hint">Tick chọn các từ muốn thêm. Từ mới thêm sẽ có dấu MỚI.</div>';
         } else if (mode === 'newt') {
@@ -16394,9 +16427,53 @@ function openPop(mode, t) {
         const im = cleanIm(t && t.im);
         return ps + (im.length ? '<div class="rd-imgs">' + im.map(s => '<img src="' + s + '" alt="">').join('') + '</div>' : '');
     }
+    function paintInfoLangBtns() {
+        const p = $('rd-pop'); if (!p) return;
+        const l = rd.infoLang || 'vi';
+        p.querySelectorAll('[data-act="info-lang"]').forEach(b => {
+            const on = b.dataset.l === l;
+            b.style.background = on ? '#6d28d9' : '#fff';
+            b.style.color = on ? '#fff' : '#5b21b6';
+        });
+    }
     function paintInfo(txt) {
         const box = $('rd-info'); if (!box) return;
         box.innerHTML = infoBody(rd.infoT, txt);
+        paintInfoLangBtns();
+    }
+    async function switchInfoLang(l) {
+        const t = rd.infoT; if (!t || rd.infoBusy) return;
+        if (l === 'vi') {
+            rd.infoLang = 'vi';
+            if (t.i) {
+                paintInfo(t.i);
+                if (t.ie) { try { if (typeof window.rhmDictHarvest === 'function') window.rhmDictHarvest(t.ie, [{ t: t.i }], { force: true }); } catch (e) {} }
+            } else await showInfo(t, true);
+            return;
+        }
+        if (l === 'en') {
+            if (t.ie) {
+                rd.infoLang = 'en'; paintInfo(t.ie);
+                if (t.i) { try { if (typeof window.rhmDictHarvest === 'function') window.rhmDictHarvest(t.ie, [{ t: t.i }], { force: true }); } catch (e) {} }
+                return;
+            }
+            if (!t.i) { toast('Chưa có nội dung tiếng Việt để dịch'); return; }
+            if (typeof aiTranslate !== 'function') { toast('Chưa có AI để dịch'); return; }
+            if (typeof aiAnyKey === 'function' && !aiAnyKey()) { if (typeof aiShowGate === 'function') aiShowGate(); return; }
+            rd.infoBusy = true;
+            const btn = document.querySelector('#rd-pop [data-act="info-lang"][data-l="en"]');
+            if (btn) btn.textContent = '…';
+            let enTxt = null;
+            try { enTxt = await aiTranslate(t.i, 'en'); } catch (e) {}
+            rd.infoBusy = false;
+            if (btn) btn.textContent = 'Eng';
+            if (rd.pop !== 'info' || rd.infoT !== t) return;
+            if (!enTxt) { toast('Chưa dịch được sang tiếng Anh, hãy thử lại'); return; }
+            t.ie = enTxt.replace(/\\n/g, '\n').replace(/\r\n/g, '\n').trim();
+            rd.infoLang = 'en';
+            paintInfo(t.ie);
+            try { if (typeof window.rhmDictHarvest === 'function') window.rhmDictHarvest(t.ie, [{ t: t.i }], { force: true }); } catch (e) {}
+        }
     }
     async function showInfo(t, force) {
         if (!t) return;
@@ -16405,6 +16482,7 @@ function openPop(mode, t) {
             if (typeof aiGeminiJson !== 'function') { toast('Chưa có AI để tạo thông tin'); return; }
             if (typeof aiAnyKey === 'function' && !aiAnyKey()) { if (typeof aiShowGate === 'function') aiShowGate(); return; }
         }
+        if (force) t.ie = '';
         openPop('info', t);
         if (cached) { paintInfo(t.i); return; }
         $('rd-info').textContent = '⏳ AI đang soạn thông tin…';
@@ -16730,6 +16808,7 @@ function openPop(mode, t) {
             case 'add': addTerm(); break; case 'save': saveRow(); break; case 'del': delTerm(rd.editT); break; case 'cancel': closePop(); break;
             case 'r-info': showInfo(rd.sel); break; case 'r-edit': if (rd.sel) openPop('row', rd.sel); break; case 'r-del': delTerm(rd.sel); break;
             case 'info-redo': showInfo(rd.infoT, true); break;
+            case 'info-lang': switchInfoLang(el.dataset.l); break;
             case 'r-star': toggleSave(rd.sel); break;
             case 'r-more': if (rd.sel) openPop('more', rd.sel); break;
             case 'more-tg': moreToggle(el); break; case 'more-all': moreAll(); break; case 'more-add': moreAdd(); break;
