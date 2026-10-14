@@ -20430,4 +20430,482 @@ html.rhm-dragging,html.rhm-dragging body{-webkit-user-select:none;user-select:no
 #dict-modal .fc.fc-exit-right { animation: fcExitRight 0.23s cubic-bezier(0.4, 0, 1, 1) forwards; }
 #dict-modal .fc.fc-enter-left { animation: fcEnterLeft 0.28s cubic-bezier(0, 0, 0.2, 1) forwards; }
 </style>
+<style id="rhm-patch-v2-ios-anim">
+:root {
+  --ios-spring: cubic-bezier(0.32, 0.72, 0, 1);
+  --ios-bounce: cubic-bezier(0.22, 1.12, 0.36, 1);
+  --ios-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 1. Keyframes chuẩn iOS cho Modal, Sheet, Popover và Accordion */
+@keyframes iosBackdropIn {
+  from { opacity: 0; backdrop-filter: blur(0px); -webkit-backdrop-filter: blur(0px); }
+  to   { opacity: 1; backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
+}
+@keyframes iosBackdropOut {
+  from { opacity: 1; backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
+  to   { opacity: 0; backdrop-filter: blur(0px); -webkit-backdrop-filter: blur(0px); }
+}
+@keyframes iosModalIn {
+  0%   { opacity: 0; transform: scale(0.92) translateY(18px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes iosModalOut {
+  0%   { opacity: 1; transform: scale(1) translateY(0); }
+  100% { opacity: 0; transform: scale(0.93) translateY(14px); }
+}
+@keyframes iosSheetUpIn {
+  0%   { opacity: 0.4; transform: translateY(100%); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes iosSheetDownOut {
+  0%   { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(100%); }
+}
+@keyframes iosSlideRightIn {
+  0%   { opacity: 0.3; transform: translateX(100%); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes iosSlideRightOut {
+  0%   { opacity: 1; transform: translateX(0); }
+  100% { opacity: 0; transform: translateX(100%); }
+}
+@keyframes iosPopCenterIn {
+  0%   { opacity: 0; transform: translate(-50%, -46%) scale(0.88); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+@keyframes iosPopCenterOut {
+  0%   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -46%) scale(0.9); }
+}
+@keyframes iosPopCornerIn {
+  0%   { opacity: 0; transform: translateY(-10px) scale(0.92); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes iosPopCornerOut {
+  0%   { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-8px) scale(0.94); }
+}
+@keyframes iosSubPanelIn {
+  0%   { opacity: 0; transform: translateY(18px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes iosSubPanelOut {
+  0%   { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(16px) scale(0.95); }
+}
+
+/* 2. Hiệu ứng đóng/mở cho tất cả các cửa sổ Modal (.fixed.inset-0) */
+.fixed.inset-0:not(#score-popup-container):not(#star-drop-popup):not(#streak-popup-modal):not(#emblem-congrat-popup) {
+  transition: opacity 0.28s var(--ios-spring);
+}
+.fixed.inset-0.ios-opening {
+  animation: iosBackdropIn 0.32s var(--ios-spring) forwards;
+}
+.fixed.inset-0.ios-closing {
+  display: flex !important;
+  pointer-events: none !important;
+  animation: iosBackdropOut 0.25s var(--ios-out) forwards;
+}
+.fixed.inset-0.ios-opening > div:not(.ai-en-panel):not(#bk-chat-grip):not(#ai-resize-grip),
+#dict-modal.ios-opening > .rd-wrap,
+#note-modal.ios-opening > .rd-wrap {
+  animation: iosModalIn 0.36s var(--ios-bounce) forwards;
+  will-change: transform, opacity;
+}
+.fixed.inset-0.ios-closing > div:not(.ai-en-panel):not(#bk-chat-grip):not(#ai-resize-grip),
+#dict-modal.ios-closing > .rd-wrap,
+#note-modal.ios-closing > .rd-wrap {
+  animation: iosModalOut 0.24s var(--ios-out) forwards;
+  will-change: transform, opacity;
+}
+
+/* 3. Cửa sổ Chat AI (#ai-tutor-modal): trượt từ dưới lên trên mobile, trượt ngang khi đọc sách/xem video */
+@media (max-width: 639px) {
+  #ai-tutor-modal:not(.ai-in-video).ios-opening > div:first-child {
+    animation: iosSheetUpIn 0.38s var(--ios-spring) forwards !important;
+  }
+  #ai-tutor-modal:not(.ai-in-video).ios-closing > div:first-child,
+  #ai-tutor-modal:not(.ai-in-video).ios-chat-hiding > div:first-child {
+    animation: iosSheetDownOut 0.28s var(--ios-out) forwards !important;
+  }
+}
+#ai-tutor-modal.ai-in-video.ios-opening > div:first-child,
+#ai-tutor-modal.ai-bk-panel.ios-opening > div:first-child {
+  animation: iosSlideRightIn 0.36s var(--ios-spring) forwards !important;
+}
+#ai-tutor-modal.ai-in-video.ios-closing > div:first-child,
+#ai-tutor-modal.ai-in-video.ios-chat-hiding > div:first-child,
+#ai-tutor-modal.ai-bk-panel.ios-closing > div:first-child,
+#ai-tutor-modal.ai-bk-panel.ios-chat-hiding > div:first-child {
+  animation: iosSlideRightOut 0.26s var(--ios-out) forwards !important;
+}
+#ai-tutor-modal.ios-chat-hiding {
+  display: flex !important;
+  pointer-events: none !important;
+  animation: iosBackdropOut 0.26s var(--ios-out) forwards;
+}
+#ai-tutor-modal.ios-chat-hiding > div:first-child {
+  display: flex !important;
+  animation: iosModalOut 0.25s var(--ios-out) forwards;
+}
+
+/* 4. Bảng cài đặt trong Chat AI (#ai-key-panel) & Cửa sổ phụ (#ai-en-panel) */
+#ai-key-panel.ios-opening {
+  animation: iosPopCornerIn 0.32s var(--ios-spring) forwards;
+  transform-origin: top center;
+}
+#ai-key-panel.ios-closing {
+  display: block !important;
+  pointer-events: none !important;
+  animation: iosPopCornerOut 0.22s var(--ios-out) forwards;
+}
+#ai-en-panel.ios-opening {
+  animation: iosModalIn 0.34s var(--ios-bounce) forwards;
+}
+#ai-en-panel.ios-closing {
+  display: flex !important;
+  pointer-events: none !important;
+  animation: iosModalOut 0.22s var(--ios-out) forwards;
+}
+
+/* 5. Hộp Ribbon (.rd-pop) & Khung Ôn tập (.rv) trong Từ điển / Sổ ghi chú */
+#dict-modal .rd-pop.ios-opening,
+#note-modal .rd-pop.ios-opening {
+  animation: iosPopCornerIn 0.32s var(--ios-bounce) forwards;
+}
+#dict-modal .rd-pop.ios-closing,
+#note-modal .rd-pop.ios-closing {
+  display: block !important;
+  pointer-events: none !important;
+  animation: iosPopCornerOut 0.22s var(--ios-out) forwards;
+}
+#dict-modal .rd-pop.rb-ctr.ios-opening,
+#dict-modal .rd-pop.info-ctr.ios-opening,
+#dict-modal .rd-pop.add-ctr.ios-opening,
+#note-modal .rd-pop.rb-ctr.ios-opening,
+#note-modal .rd-pop.nt-ctr.ios-opening {
+  animation: iosPopCenterIn 0.34s var(--ios-bounce) forwards !important;
+}
+#dict-modal .rd-pop.rb-ctr.ios-closing,
+#dict-modal .rd-pop.info-ctr.ios-closing,
+#dict-modal .rd-pop.add-ctr.ios-closing,
+#note-modal .rd-pop.rb-ctr.ios-closing,
+#note-modal .rd-pop.nt-ctr.ios-closing {
+  display: block !important;
+  pointer-events: none !important;
+  animation: iosPopCenterOut 0.22s var(--ios-out) forwards !important;
+}
+#dict-modal .rv.ios-opening,
+#note-modal .rv.ios-opening {
+  animation: iosBackdropIn 0.28s var(--ios-spring) forwards;
+}
+#dict-modal .rv.ios-opening > .rv-card,
+#note-modal .rv.ios-opening > .rv-card {
+  animation: iosModalIn 0.34s var(--ios-bounce) forwards;
+}
+#dict-modal .rv.ios-closing,
+#note-modal .rv.ios-closing {
+  display: flex !important;
+  pointer-events: none !important;
+  animation: iosBackdropOut 0.22s var(--ios-out) forwards;
+}
+#dict-modal .rv.ios-closing > .rv-card,
+#note-modal .rv.ios-closing > .rv-card {
+  animation: iosModalOut 0.22s var(--ios-out) forwards;
+}
+
+/* 6. Dòng thao tác (.rd-act) khi bấm chọn từ trong Từ điển / Sổ ghi chú */
+#dict-modal .rd-act, #note-modal .rd-act {
+  animation: iosSubPanelIn 0.24s var(--ios-bounce);
+}
+
+/* 7. Khung Video bài giảng xổ xuống / thu lên + Bảng cài đặt Sub + Sơ đồ tư duy + Popup âm lượng */
+.custom-yt-wrapper .custom-yt-subpanel {
+  transform-origin: bottom right;
+}
+.custom-yt-wrapper.sub-editing .custom-yt-subpanel {
+  animation: iosSubPanelIn 0.32s var(--ios-bounce) forwards;
+}
+.custom-yt-wrapper.sub-closing .custom-yt-subpanel {
+  display: block !important;
+  pointer-events: none !important;
+  animation: iosSubPanelOut 0.22s var(--ios-out) forwards;
+}
+.custom-yt-wrapper.sub-editing .custom-yt-subbackdrop {
+  animation: iosBackdropIn 0.26s var(--ios-spring) forwards;
+}
+.custom-yt-wrapper.sub-closing .custom-yt-subbackdrop {
+  display: block !important;
+  pointer-events: none !important;
+  animation: iosBackdropOut 0.22s var(--ios-out) forwards;
+}
+.custom-yt-wrapper.chap-open.chap-map .yt-chapmap {
+  animation: iosModalIn 0.34s var(--ios-spring) forwards;
+}
+.custom-yt-wrapper.chap-closing .yt-chapmap {
+  display: flex !important;
+  pointer-events: none !important;
+  animation: iosModalOut 0.24s var(--ios-out) forwards;
+}
+.yt-chapmap .cm-pop,
+.yt-focusdlg .fd,
+.yt-trial .tb {
+  animation: iosModalIn 0.3s var(--ios-bounce);
+}
+.yt-volpop {
+  transition: opacity 0.22s var(--ios-spring), transform 0.22s var(--ios-spring);
+}
+
+/* 8. Thanh Mục lục PDF (#bk-sec-panel) thu gọn / mở rộng mượt mà */
+#bk-sec-panel {
+  transition: width 0.34s var(--ios-spring), max-height 0.34s var(--ios-spring) !important;
+}
+#monhoc-toggle-icon, #chuyende-toggle-icon {
+  display: inline-block;
+  transition: transform 0.34s var(--ios-spring);
+}
+
+/* 9. Chuyển cảnh giữa các màn hình chính (Home / Quiz / Edit / Result) */
+#home-screen.ios-screen-in,
+#quiz-screen.ios-screen-in,
+#edit-screen.ios-screen-in,
+#result-screen.ios-screen-in {
+  animation: iosModalIn 0.34s var(--ios-spring);
+}
+
+/* 10. Khung xổ xuống / thu lên mượt mà (Accordion cho Môn học, Chuyên đề, Video wrapper, QR panel) */
+.ios-collapse-anim {
+  overflow: hidden !important;
+  transition: max-height 0.38s var(--ios-spring), opacity 0.3s var(--ios-spring), transform 0.36s var(--ios-spring) !important;
+  will-change: max-height, opacity, transform;
+}
+</style>
+
+<script id="rhm-patch-v2-ios-script">
+(function () {
+  'use strict';
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  /* --- A. Tự động gắn animation đóng/mở mượt cho tất cả Modal, Popup, Ribbon, Ôn tập --- */
+  var MODAL_SEL = [
+    '#monhoc-detail-modal', '#topic-modal', '#mock-exam-modal',
+    '#exam-modal', '#deep-modal', '#collection-modal',
+    '#progress-modal', '#suggest-question-modal', '#app-feedback-modal',
+    '#add-question-modal', '#report-error-modal', '#folder-modal',
+    '#navigator-modal', '#view-quiz-modal', '#bookmarked-modal',
+    '#blocked-modal', '#image-lightbox-modal', '#dev-password-modal',
+    '#dict-modal', '#note-modal', '#home-settings-modal',
+    '#bookshelf-modal', '#book-viewer', '#ai-key-gate',
+    '#pq-cam', '#pq-confirm', '#rd-pop', '#nt-pop', '#rd-rv', '#nt-rv',
+    '#ai-key-panel', '#ai-en-panel'
+  ].join(',');
+
+  function observeHiddenToggle(el, durOpen, durClose) {
+    if (!el || el._iosObs) return;
+    el._iosObs = true;
+    var wasHidden = el.classList.contains('hidden');
+    var timer = 0;
+    new MutationObserver(function () {
+      if (el._iosLock) return;
+      var isHidden = el.classList.contains('hidden');
+      if (isHidden === wasHidden) return;
+      wasHidden = isHidden;
+      clearTimeout(timer);
+      if (!isHidden) {
+        el.classList.remove('ios-closing');
+        el.classList.add('ios-opening');
+        timer = setTimeout(function () { el.classList.remove('ios-opening'); }, durOpen || 380);
+      } else {
+        el.classList.remove('ios-opening');
+        el.classList.add('ios-closing');
+        timer = setTimeout(function () { el.classList.remove('ios-closing'); }, durClose || 250);
+      }
+    }).observe(el, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  /* --- B. Hộp thoại dùng style.display (như #hs-keys-modal) --- */
+  function observeDisplayToggle(el) {
+    if (!el || el._iosDispObs) return;
+    el._iosDispObs = true;
+    var wasShown = el.style.display !== 'none' && el.style.display !== '';
+    var timer = 0;
+    new MutationObserver(function () {
+      if (el._iosDispLock) return;
+      var nowShown = el.style.display !== 'none' && el.style.display !== '';
+      if (nowShown === wasShown) return;
+      wasShown = nowShown;
+      clearTimeout(timer);
+      if (nowShown) {
+        el.classList.remove('ios-closing');
+        el.classList.add('ios-opening');
+        timer = setTimeout(function () { el.classList.remove('ios-opening'); }, 380);
+      } else {
+        el._iosDispLock = true;
+        el.style.display = 'flex';
+        el.classList.remove('ios-opening');
+        el.classList.add('ios-closing');
+        timer = setTimeout(function () {
+          el.classList.remove('ios-closing');
+          el.style.display = 'none';
+          wasShown = false;
+          setTimeout(function () { el._iosDispLock = false; }, 20);
+        }, 240);
+      }
+    }).observe(el, { attributes: true, attributeFilter: ['style'] });
+  }
+
+  /* --- C. Cửa sổ Chat AI (#ai-tutor-modal dùng cả .hidden và .ai-chat-off) --- */
+  function observeAiChatModal() {
+    var m = document.getElementById('ai-tutor-modal');
+    if (!m || m._iosChatObs) return;
+    m._iosChatObs = true;
+    var isVis = function () { return !m.classList.contains('hidden') && !m.classList.contains('ai-chat-off'); };
+    var wasVis = isVis(), timer = 0;
+    new MutationObserver(function () {
+      var nowVis = isVis();
+      if (nowVis === wasVis) return;
+      wasVis = nowVis;
+      clearTimeout(timer);
+      if (nowVis) {
+        m.classList.remove('ios-closing', 'ios-chat-hiding');
+        m.classList.add('ios-opening');
+        timer = setTimeout(function () { m.classList.remove('ios-opening'); }, 380);
+      } else {
+        m.classList.remove('ios-opening');
+        var cls = m.classList.contains('ai-chat-off') ? 'ios-chat-hiding' : 'ios-closing';
+        m.classList.add(cls);
+        timer = setTimeout(function () { m.classList.remove('ios-closing', 'ios-chat-hiding'); }, 270);
+      }
+    }).observe(m, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  /* --- D. Khung xổ xuống / thu lên mượt mà (Môn học, Chuyên đề, Video bài giảng, QR export/import, Resume panel) --- */
+  function observeAccordion(el, dur) {
+    if (!el || el._iosAccObs) return;
+    el._iosAccObs = true;
+    dur = dur || 360;
+    var wasHidden = el.classList.contains('hidden') || el.classList.contains('ws-off');
+    var timer = 0;
+    new MutationObserver(function () {
+      if (el._iosAccLock) return;
+      var hideCls = el.classList.contains('ws-off') ? 'ws-off' : 'hidden';
+      var isHidden = el.classList.contains('hidden') || el.classList.contains('ws-off');
+      if (isHidden === wasHidden) return;
+      wasHidden = isHidden;
+      clearTimeout(timer);
+      el._iosAccLock = true;
+      el.classList.add('ios-collapse-anim');
+      if (!isHidden) {
+        /* Xổ xuống (Expand) */
+        el.style.maxHeight = '0px';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(-8px)';
+        void el.offsetHeight;
+        var targetH = Math.max(el.scrollHeight + 32, 80);
+        el.style.maxHeight = targetH + 'px';
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+        timer = setTimeout(function () {
+          el.classList.remove('ios-collapse-anim');
+          el.style.maxHeight = '';
+          el.style.opacity = '';
+          el.style.transform = '';
+          el._iosAccLock = false;
+        }, dur);
+      } else {
+        /* Thu về (Collapse) — tạm bỏ class ẩn để thu chiều cao mượt rồi mới ẩn hẳn */
+        el.classList.remove(hideCls);
+        var curH = el.scrollHeight;
+        el.style.maxHeight = curH + 'px';
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+        void el.offsetHeight;
+        el.style.maxHeight = '0px';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(-8px)';
+        timer = setTimeout(function () {
+          el.classList.add(hideCls);
+          el.classList.remove('ios-collapse-anim');
+          el.style.maxHeight = '';
+          el.style.opacity = '';
+          el.style.transform = '';
+          wasHidden = true;
+          setTimeout(function () { el._iosAccLock = false; }, 20);
+        }, dur - 40);
+      }
+    }).observe(el, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  /* --- E. Bảng cài đặt Sub (.sub-editing) & Sơ đồ tư duy (.chap-open) trong khung Video --- */
+  function observeVideoWrapper(w) {
+    if (!w || w._iosVidObs) return;
+    w._iosVidObs = true;
+    var wasSub = w.classList.contains('sub-editing');
+    var wasChap = w.classList.contains('chap-open');
+    var tSub = 0, tChap = 0;
+    new MutationObserver(function () {
+      var nowSub = w.classList.contains('sub-editing');
+      if (nowSub !== wasSub) {
+        wasSub = nowSub;
+        clearTimeout(tSub);
+        if (!nowSub) {
+          w.classList.add('sub-closing');
+          tSub = setTimeout(function () { w.classList.remove('sub-closing'); }, 230);
+        } else {
+          w.classList.remove('sub-closing');
+        }
+      }
+      var nowChap = w.classList.contains('chap-open');
+      if (nowChap !== wasChap) {
+        wasChap = nowChap;
+        clearTimeout(tChap);
+        if (!nowChap) {
+          w.classList.add('chap-closing');
+          tChap = setTimeout(function () { w.classList.remove('chap-closing'); }, 240);
+        } else {
+          w.classList.remove('chap-closing');
+        }
+      }
+    }).observe(w, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  /* --- F. Chuyển màn hình chính (Home / Quiz / Edit / Result) --- */
+  function observeScreenSwitch(el) {
+    if (!el || el._iosScrObs) return;
+    el._iosScrObs = true;
+    var wasHidden = el.classList.contains('hidden');
+    new MutationObserver(function () {
+      var isHidden = el.classList.contains('hidden');
+      if (isHidden === wasHidden) return;
+      wasHidden = isHidden;
+      if (!isHidden) {
+        el.classList.remove('ios-screen-in');
+        void el.offsetWidth;
+        el.classList.add('ios-screen-in');
+      }
+    }).observe(el, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  function scanAll() {
+    document.querySelectorAll(MODAL_SEL).forEach(function (el) { observeHiddenToggle(el, 380, 250); });
+    observeDisplayToggle(document.getElementById('hs-keys-modal'));
+    observeAiChatModal();
+    ['monhoc-section-container', 'chuyende-section-container', 'pq-panel-export', 'pq-panel-import', 'topic-review-panel'].forEach(function (id) {
+      observeAccordion(document.getElementById(id), 360);
+    });
+    document.querySelectorAll('[id^="video-wrapper-"], .ws-resume').forEach(function (el) {
+      observeAccordion(el, 340);
+    });
+    document.querySelectorAll('.custom-yt-wrapper').forEach(observeVideoWrapper);
+    ['home-screen', 'quiz-screen', 'edit-screen', 'result-screen'].forEach(function (id) {
+      observeScreenSwitch(document.getElementById(id));
+    });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', scanAll);
+  else scanAll();
+  new MutationObserver(function () { scanAll(); }).observe(document.body, { childList: true, subtree: true });
+})();
+</script>
 </html>
