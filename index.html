@@ -13534,8 +13534,9 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         }
         items = items.slice(0, 3);
         if (items.length < 2) return { text: t, opts: [] };
+        const lead = '🧭 **Để tiếp tục tìm hiểu sâu hơn, gia sư gợi ý 3 hướng tiếp theo:**';
         const list = items.map((x, i) => (i + 1) + '. **' + x.title + '**' + (x.desc ? ': ' + x.desc : '')).join('\n');
-        return { text: t + '\n\n' + list + '\n\nBạn có thể bấm một hay nhiều nút 1, 2, 3 rồi bấm ✔ Xác nhận để mình giải thích các hướng đã chọn.', opts: items.map(x => x.title) };
+        return { text: t + '\n\n' + lead + '\n' + list + '\n\nBạn có thể bấm một hay nhiều nút 1, 2, 3 rồi bấm ✔ Xác nhận để gia sư giải thích các hướng đã chọn.', opts: items.map(x => x.title) };
     }
     function aiGuidedBar(bubble, opts) {   // nút 1, 2, 3 bật/tắt (chọn nhiều) + nút Xác nhận ngay bên cạnh
         if (!bubble || !opts || opts.length < 2) return;
@@ -13902,8 +13903,11 @@ async function bkQzStart(n, lvl) {
             const useText = d.srtState === 'ready' && (d.srtCues || []).length > 0;
             let tx = useText && window.ytTranscriptOf ? window.ytTranscriptOf(d, 0, 0) : '';
             if (tx.length > 120000) tx = tx.slice(0, 120000);
-            const sys = 'Bạn là giáo sư đầu ngành Răng Hàm Mặt ra đề thi. Dựa CHỈ vào nội dung bài giảng video được cung cấp, tạo đúng ' + n + ' câu hỏi trắc nghiệm 4 đáp án (chỉ 1 đáp án đúng), mức độ ' + lvlTxt + '. Viết bằng tiếng Việt. Chỉ trả về MỘT đối tượng JSON dạng {"questions":[{"q":"<câu hỏi>","o":["<A>","<B>","<C>","<D>"],"a":<chỉ số đáp án đúng 0-3>,"x":"<giải thích ngắn 1-3 câu>","t":<mốc thời gian tính bằng GIÂY (số nguyên) trong video nơi giảng nội dung của câu hỏi này>}]}. Các câu hỏi không trùng ý; đáp án đúng đặt ngẫu nhiên; ĐỘ DÀI 4 ĐÁP ÁN PHẢI GẦN BẰNG NHAU (chênh lệch không quá 15%); không dùng "tất cả đều đúng"; câu hỏi tự chứa đủ thông tin.';
-            const parts = useText ? [{ text: 'LỜI GIẢNG VIDEO (kèm mốc thời gian):\n' + tx }] : [{ fileData: { fileUri: 'https://www.youtube.com/watch?v=' + (d.videoId || (v && v.yt) || '') } }, { text: 'Hãy xem video bài giảng này và tạo câu hỏi kèm mốc giây "t" chính xác.' }];
+            let dur = 0; try { dur = Math.floor(d.player.getDuration() || 0); } catch (e) {}
+            if (!dur && (d.srtCues || []).length) dur = Math.ceil(d.srtCues[d.srtCues.length - 1].end || 0);
+            const durNote = dur > 0 ? ' (video dài ' + aiFmtTime(dur) + ', mốc "ts" TUYỆT ĐỐI KHÔNG vượt quá ' + aiFmtTime(dur) + ')' : '';
+            const sys = 'Bạn là giáo sư đầu ngành Răng Hàm Mặt ra đề thi. Dựa CHỈ vào nội dung bài giảng video được cung cấp, tạo đúng ' + n + ' câu hỏi trắc nghiệm 4 đáp án (chỉ 1 đáp án đúng), mức độ ' + lvlTxt + '. Viết bằng tiếng Việt. Chỉ trả về MỘT đối tượng JSON dạng {"questions":[{"q":"<câu hỏi>","o":["<A>","<B>","<C>","<D>"],"a":<chỉ số đáp án đúng 0-3>,"x":"<giải thích ngắn 1-3 câu>","ts":"<mốc thời gian dạng mm:ss hoặc h:mm:ss chép ĐÚNG từ mốc [mm:ss] trong lời giảng nơi có câu trả lời' + durNote + '>","kw":"<3-6 từ khóa đặc trưng nhất xuất hiện trong lời giảng tại đoạn đó>"}]}. Các câu hỏi không trùng ý; đáp án đúng đặt ngẫu nhiên; ĐỘ DÀI 4 ĐÁP ÁN PHẢI GẦN BẰNG NHAU (chênh lệch không quá 15%); không dùng "tất cả đều đúng"; câu hỏi tự chứa đủ thông tin.';
+            const parts = useText ? [{ text: 'LỜI GIẢNG VIDEO (kèm mốc thời gian [mm:ss]):\n' + tx }] : [{ fileData: { fileUri: 'https://www.youtube.com/watch?v=' + (d.videoId || (v && v.yt) || '') } }, { text: 'Hãy xem video bài giảng này và tạo câu hỏi kèm mốc thời gian "ts" dạng mm:ss chính xác' + durNote + '.' }];
             r = await window.bkQzCallAI(sys, parts);
         } else {
             const titles = bkSecs.filter(x => x.title).map(x => x.title).slice(0, 120);
@@ -13912,13 +13916,14 @@ async function bkQzStart(n, lvl) {
         }
         const qs = ((r && r.questions) || []).filter(q => q && q.q && Array.isArray(q.o) && q.o.length === 4 && typeof q.a === 'number' && q.a >= 0 && q.a < 4);
         if (!qs.length) { showToast('Chưa tạo được câu hỏi, hãy thử lại'); return; }
+        const vObj = isVid && aiState.video ? activeYtPlayers[aiState.video.playerId] : null;
         bkQz = {
             mode: isVid ? 'video' : 'book',
             pid: isVid && aiState.video ? aiState.video.playerId : '',
             items: qs.slice(0, n).map(q => {
                 const si = !isVid ? bkSecs.findIndex(x => x.title === q.sec) : -1;
-                const ts = isVid && q.t != null && isFinite(Number(q.t)) ? Math.max(0, Math.round(Number(q.t))) : null;
-                return { q: String(q.q), o: q.o.map(String), a: q.a, x: String(q.x || ''), si: si, ts: ts };
+                const ts = isVid ? bkQzResolveVideoSec(vObj, q.ts != null ? q.ts : q.t, q.kw, q.q, q.o[q.a], q.x) : null;
+                return { q: String(q.q), o: q.o.map(String), a: q.a, x: String(q.x || ''), kw: String(q.kw || ''), si: si, ts: ts };
             }),
             idx: 0, done: {}, ok: 0
         };
@@ -14011,25 +14016,82 @@ async function bkQzLocateAndGo(it) {
     bkApplyHlAll();
     await bkScrollToPos(loc.s); bkApplyHlAll(); setTimeout(bkApplyHlAll, 400); { const T = bkText; let a = loc.s, b = loc.e; for (let k = 0; k < 2; k++) { const p = T.lastIndexOf('. ', a - 2); if (p < 0 || a - p > 700) break; a = p + 2; } for (let k = 0; k < 2; k++) { const q = T.indexOf('. ', b); if (q < 0 || q - b > 700) break; b = q + 1; } const tx = T.slice(a, b).replace(/\s+/g, ' ').trim().slice(0, 1400); bkOpenAi(); bkRunTr(tx, ''); }
 }
+function bkQzParseTsVal(raw, dur) {
+    if (raw == null || raw === '') return null;
+    const s = String(raw).trim().replace(/^\[|\]$/g, '');
+    const m = s.match(/^(\d{1,2}):(\d{2})(?::(\d{2}))?$/);
+    if (m) {
+        const sec = m[3] != null ? (+m[1] * 3600 + +m[2] * 60 + +m[3]) : (+m[1] * 60 + +m[2]);
+        return (dur > 0 && sec > dur) ? null : sec;
+    }
+    const n = Number(s);
+    if (!isFinite(n) || n < 0) return null;
+    if (dur > 0 && n > dur) {
+        // Trường hợp AI ghép nhầm phút+giây thành số thập phân/số nguyên kiểu 3740 cho 37:40
+        const mm = Math.floor(n / 100), ss = Math.round(n % 100);
+        if (ss < 60 && (mm * 60 + ss) <= dur) return mm * 60 + ss;
+        return null;
+    }
+    return Math.round(n);
+}
+function bkQzMatchCueSec(d, kw, q, ans, exp) {
+    const cues = (d && d.srtCues) || [];
+    if (!cues.length) return null;
+    const norm = str => String(str || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[đĐ]/g, 'd').toLowerCase();
+    const stop = new Set(['trong','ngoai','nhung','khong','duoc','일','cua','cac','mot','nhu','khi','voi','cho','theo','hay','nao','la','va','hoac','ve','tai','점','benh','rang','ham','mat']);
+    const words = norm([kw || '', ans || '', q || '', exp || ''].join(' ')).split(/[^a-z0-9]+/).filter(w => w.length >= 3 && !stop.has(w));
+    if (!words.length) return null;
+    const uniq = [...new Set(words)];
+    let bestSec = null, bestScore = 0;
+    for (let i = 0; i < cues.length; i++) {
+        let winTxt = '';
+        for (let j = i; j < Math.min(cues.length, i + 5); j++) winTxt += ' ' + cues[j].text;
+        const h = norm(winTxt);
+        let sc = 0;
+        uniq.forEach((w, idx) => { if (h.includes(w)) sc += (idx < 4 ? 3 : 1); });
+        if (sc > bestScore) { bestScore = sc; bestSec = Math.floor(cues[i].start || 0); }
+    }
+    return bestScore >= 3 ? bestSec : null;
+}
+function bkQzResolveVideoSec(d, rawTs, kw, q, ans, exp) {
+    let dur = 0;
+    try { dur = Math.floor((d && d.player && d.player.getDuration && d.player.getDuration()) || 0); } catch (e) {}
+    if (!dur && d && (d.srtCues || []).length) dur = Math.ceil(d.srtCues[d.srtCues.length - 1].end || 0);
+    const parsed = bkQzParseTsVal(rawTs, dur);
+    const cueMatch = bkQzMatchCueSec(d, kw, q, ans, exp);
+    if (parsed != null && cueMatch != null) {
+        if (Math.abs(parsed - cueMatch) > 90) return cueMatch;
+        return parsed;
+    }
+    return parsed != null ? parsed : cueMatch;
+}
 async function bkQzVideoLocateAndGo(it) {
     const pid = (bkQz && bkQz.pid) || (aiState.video && aiState.video.playerId);
     const d = pid && activeYtPlayers[pid];
     if (!d || !d.player) { showToast('Không tìm thấy trình phát video'); return; }
-    let sec = (typeof it.ts === 'number' && isFinite(it.ts) && it.ts >= 0) ? it.ts : null;
+    let dur = 0; try { dur = Math.floor(d.player.getDuration() || 0); } catch (e) {}
+    if (!dur && (d.srtCues || []).length) dur = Math.ceil(d.srtCues[d.srtCues.length - 1].end || 0);
+    let sec = (typeof it.ts === 'number' && isFinite(it.ts) && it.ts >= 0 && (!dur || it.ts <= dur)) ? it.ts : null;
+    if (sec === null) sec = bkQzMatchCueSec(d, it.kw, it.q, it.o && it.o[it.a], it.x);
     if (sec === null && aiAnyKey()) {
         try {
             showToast('⏳ AI đang định vị mốc thời gian trong video…');
             const useText = d.srtState === 'ready' && (d.srtCues || []).length > 0;
             let tx = useText && window.ytTranscriptOf ? window.ytTranscriptOf(d, 0, 0) : '';
             if (tx.length > 100000) tx = tx.slice(0, 100000);
-            const sys = 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Hãy tìm đúng mốc thời gian (tính bằng GIÂY từ đầu video, số nguyên) nơi giảng nội dung trả lời cho câu hỏi và đáp án đúng dưới đây. Chỉ trả về MỘT đối tượng JSON {"t":<số giây>}, không viết gì khác.';
+            const durNote = dur > 0 ? ' (video dài ' + aiFmtTime(dur) + ', KHÔNG vượt quá ' + aiFmtTime(dur) + ')' : '';
+            const sys = 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Hãy tìm đúng mốc thời gian dạng "mm:ss" (hoặc "h:mm:ss") chép NGUYÊN VĂN từ mốc [mm:ss] trong lời giảng nơi giảng nội dung trả lời cho câu hỏi và đáp án đúng dưới đây' + durNote + '. Chỉ trả về MỘT đối tượng JSON {"ts":"<mm:ss>","kw":"<3-5 từ khóa trong câu giảng đó>"}, không viết gì khác.';
             const qTxt = 'CÂU HỎI: ' + it.q + '\nĐÁP ÁN ĐÚNG: ' + (it.o[it.a] || '') + '\nGIẢI THÍCH: ' + (it.x || '');
             const parts = useText ? [{ text: qTxt + '\n\nLỜI GIẢNG (kèm mốc [mm:ss]):\n' + tx }] : [{ fileData: { fileUri: 'https://www.youtube.com/watch?v=' + (d.videoId || (aiState.video && aiState.video.yt) || '') } }, { text: qTxt }];
             const r = await window.bkQzCallAI(sys, parts);
-            if (r && r.t != null && isFinite(Number(r.t))) { sec = Math.max(0, Math.round(Number(r.t))); it.ts = sec; }
+            if (r) {
+                sec = bkQzResolveVideoSec(d, r.ts != null ? r.ts : r.t, r.kw, it.q, it.o && it.o[it.a], it.x);
+                if (sec != null) it.ts = sec;
+            }
         } catch (e) {}
     }
     if (sec === null) { showToast('Không định vị được mốc thời gian của câu này trong video'); return; }
+    if (dur > 0 && sec > dur) sec = Math.max(0, dur - 5);
     try { d.player.seekTo(sec, true); d.player.playVideo(); } catch (e) {}
     showToast('⏩ Đã tua video tới mốc ' + aiFmtTime(sec));
     if (!aiModalEl.classList.contains('ai-in-video')) {
@@ -16195,15 +16257,143 @@ window.isIOSDevice = function () {
     const cleanIm = a => (Array.isArray(a) ? a : []).filter(x => typeof x === 'string' && /^data:image\//.test(x)).slice(0, 6);
     const tk = (en, p) => nk(en) + '|' + cleanPos(p);
 
+    // Tách phần gốc trước dấu ngoặc: "MTA (mineral trioxide aggregate)" -> head="mta", hasParen=true
+    function splitAbbr(en) {
+        const s = clean(en);
+        const m = s.match(/^([A-Za-z0-9\-/]+)\s*\(([^()]+)\)\s*$/);
+        if (m) return { raw: s, head: nk(m[1]), full: nk(m[2]), hasParen: true };
+        return { raw: s, head: nk(s), full: '', hasParen: false };
+    }
+    // Đổi danh từ số nhiều có quy tắc (thêm s/es/ies) về dạng số ít để so khớp chống trùng; giữ nguyên số nhiều bất quy tắc (teeth, bacteria, apices, बच्चों...)
+    const IRREG_PL = new Set(['teeth','feet','geese','mice','lice','men','women','children','oxen','bacteria','fungi','nuclei','stimuli','alveoli','calculi','radii','bronchi','cocci','bacilli','apices','indices','matrices','vertices','cortices','foramina','phenomena','criteria','ganglia','ostia','septa','sera','strata','data','media','papillae','fissurae','laminae','vertebrae','lacunae','cannulae','fossae','gingivae','mucosa','protozoa','metastases','analyses','diagnoses','prognoses','synopses','theses','crises','neuroses','thromboses','paresthesias','anastomoses']);
+    const SING_KEEP_S = new Set(['caries','herpes','diabetes','rabies','scabies','measles','mumps','rickets','syphilis','sepsis','necrosis','fibrosis','cirrhosis','halitosis','xerostomia','gingivitis','periodontitis','pulpitis','stomatitis','osteomyelitis','sinusitis','cellulitis','abscess','forceps','gutta','prosthesis','orthodontics','prosthodontics','endodontics','periodontics','pedodontics','kinetics','genetics','ethics','physics','statistics','lens','callus','plexus','sinus','fetus','status','virus','mucus','pus','calculus','focus','locus','tonus','bolus','nevus','fungus','nucleus','alveolus','stimulus','bacillus','coccus','bronchus','radius','ramus','condylus','meniscus','thrombus','embolus']);
+    function toSingularWord(w) {
+        const lw = w.toLowerCase();
+        if (lw.length <= 3 || IRREG_PL.has(lw) || SING_KEEP_S.has(lw)) return lw;
+        if (/(?:sis|tis|xis|lis|ris|mis|nis|pis|vis|gis|dis|us|ss|is|os)$/.test(lw)) return lw;
+        if (/[^aeiou]ies$/.test(lw) && lw.length > 4) return lw.slice(0, -3) + 'y';
+        if (/(?:ches|shes|xes|zes|sses)$/.test(lw)) return lw.slice(0, -2);
+        if (/s$/.test(lw) && !/(?:ss|us|is|os|as|es)$/.test(lw)) return lw.slice(0, -1);
+        if (/([b-df-hj-np-tv-z]e)s$/.test(lw) && !/(?:ches|shes|xes|zes|sses)$/.test(lw)) return lw.slice(0, -1);
+        return lw;
+    }
+    function stemEnPhrase(en) {
+        const sp = splitAbbr(en);
+        const base = sp.hasParen ? sp.head : sp.raw.toLowerCase();
+        const parts = base.split(/\s+/).filter(Boolean);
+        if (!parts.length) return '';
+        parts[parts.length - 1] = toSingularWord(parts[parts.length - 1]);
+        return parts.join(' ');
+    }
+    function isRegularPluralForm(en, p) {
+        const sp = splitAbbr(en);
+        if (sp.hasParen) return false;
+        const words = sp.raw.trim().split(/\s+/);
+        const last = words[words.length - 1] || '';
+        const lw = last.toLowerCase();
+        if (/^[A-Z0-9\-]+s$/.test(last) && last.length >= 3) return true; // VD: MTAs, CBCTs
+        if (IRREG_PL.has(lw) || SING_KEEP_S.has(lw)) return false;
+        const sing = toSingularWord(lw);
+        return sing !== lw && sing.length >= 2;
+    }
+    function stripTrailingPluralS(en) {
+        const s = clean(en);
+        if (/\([^()]+\)$/.test(s)) return s;
+        const words = s.split(/\s+/);
+        const last = words[words.length - 1] || '';
+        if (/^[A-Z0-9\-]+s$/.test(last) && last.length >= 3) {
+            words[words.length - 1] = last.slice(0, -1);
+            return words.join(' ');
+        }
+        const lw = last.toLowerCase();
+        if (IRREG_PL.has(lw) || SING_KEEP_S.has(lw)) return s;
+        const sing = toSingularWord(lw);
+        if (sing !== lw) {
+            words[words.length - 1] = /^[A-Z]/.test(last) ? sing.charAt(0).toUpperCase() + sing.slice(1) : sing;
+            return words.join(' ');
+        }
+        return s;
+    }
+    function dedupeAndMergeTerms(list) {
+        const out = [];
+        list.forEach(item => {
+            if (!item || !item.en || !item.vi || !letterOf(item.en)) return;
+            // Nếu là số nhiều có quy tắc (chỉ thêm s/es), tự đổi về dạng số ít chuẩn
+            let enFixed = item.en;
+            if (isRegularPluralForm(enFixed, item.p)) enFixed = stripTrailingPluralS(enFixed);
+            item.en = cap1(clean(enFixed));
+            const sp = splitAbbr(item.en);
+            const stem = stemEnPhrase(item.en);
+            const pos = cleanPos(item.p);
+            // Tìm xem trong danh sách đã có từ trùng gốc hoặc viết tắt trùng chưa
+            const exist = out.find(e => {
+                const esp = splitAbbr(e.en);
+                const eStem = stemEnPhrase(e.en);
+                const ePos = cleanPos(e.p);
+                // Trùng viết tắt (VD: "MTA" và "MTA (mineral trioxide aggregate)")
+                if (sp.head === esp.head && (sp.hasParen || esp.hasParen || pos === 'abbr' || ePos === 'abbr' || /^[A-Z0-9\-]{2,8}$/.test(sp.raw) || /^[A-Z0-9\-]{2,8}$/.test(esp.raw))) {
+                    return true;
+                }
+                // Trùng gốc từ (kể cả số ít/số nhiều s/es) và cùng từ loại (hoặc 1 trong 2 chưa có từ loại)
+                if (stem && stem === eStem && (!pos || !ePos || pos === ePos || (pos === 'n' && ePos === 'pl') || (pos === 'pl' && ePos === 'n'))) {
+                    return true;
+                }
+                return false;
+            });
+            if (!exist) {
+                out.push(item);
+                return;
+            }
+            // Gộp vào mục đã có:
+            // 1. Luôn ưu tiên tên tiếng Anh có mở ngoặc giải thích viết tắt (VD: "MTA (mineral trioxide aggregate)" thay cho "MTA")
+            const esp = splitAbbr(exist.en);
+            if (sp.hasParen && !esp.hasParen) exist.en = item.en;
+            else if (!sp.hasParen && !esp.hasParen && isRegularPluralForm(exist.en, exist.p) && !isRegularPluralForm(item.en, item.p)) exist.en = item.en;
+            // 2. Bổ sung từ loại nếu mục cũ chưa có
+            if (!exist.p && pos) exist.p = pos === 'pl' ? 'n' : pos;
+            else if (exist.p === 'pl') exist.p = 'n';
+            // 3. Gộp nghĩa tiếng Việt nếu thực sự khác biệt
+            const exFold = String(exist.vi).split('\n').map(x => fold(x).replace(/[^a-z0-9]+/g, ' ').trim());
+            String(item.vi).split('\n').forEach(line => {
+                const cl = capVi(clean(line));
+                const fl = fold(cl).replace(/[^a-z0-9]+/g, ' ').trim();
+                if (cl && fl && !exFold.some(ef => ef === fl || (ef.length > 3 && fl.length > 3 && (ef.includes(fl) || fl.includes(ef))))) {
+                    if (String(exist.vi).split('\n').length < 5) {
+                        exist.vi += '\n' + cl;
+                        exFold.push(fl);
+                    }
+                }
+            });
+            // 4. Giữ lại thông tin chi tiết, hình ảnh, dấu sao
+            if (!exist.i && item.i) exist.i = item.i;
+            if (!exist.ie && item.ie) exist.ie = item.ie;
+            if ((!exist.im || !exist.im.length) && item.im && item.im.length) exist.im = item.im;
+            if (item.s) exist.s = 1;
+            if (item.u) exist.u = 1;
+        });
+        return out;
+    }
+
     /* ---------- dữ liệu ---------- */
     function sget() { try { return typeof kv !== 'undefined' ? kv.getItem(KEY) : localStorage.getItem(KEY); } catch (e) { return null; } }
     function sset(v) { try { if (typeof kv !== 'undefined') kv.setItem(KEY, v); else localStorage.setItem(KEY, v); } catch (e) {} }
     function sortTerms() { rd.terms.sort((a, b) => a.en.localeCompare(b.en, 'en', { sensitivity: 'base' }) || a.en.localeCompare(b.en) || String(a.p || '').localeCompare(String(b.p || ''))); }
     function parse() {
         let a = []; try { a = JSON.parse(sget() || '[]'); } catch (e) {}
-        return (Array.isArray(a) ? a : []).filter(x => x && x.en && x.vi && letterOf(x.en)).map(x => ({ en: clean(x.en), vi: cleanVi(x.vi), p: cleanPos(x.p), im: cleanIm(x.im), ts: x.ts || 0, u: x.u ? 1 : 0, i: x.i ? String(x.i) : '', s: x.s ? 1 : 0, n: x.n ? 1 : 0, f: x.f ? 1 : 0 }));
+        const raw = (Array.isArray(a) ? a : []).filter(x => x && x.en && x.vi && letterOf(x.en)).map(x => ({ en: clean(x.en), vi: cleanVi(x.vi), p: cleanPos(x.p), im: cleanIm(x.im), ts: x.ts || 0, u: x.u ? 1 : 0, i: x.i ? String(x.i) : '', ie: x.ie ? String(x.ie) : '', s: x.s ? 1 : 0, n: x.n ? 1 : 0, f: x.f ? 1 : 0 }));
+        return dedupeAndMergeTerms(raw);
     }
-    function load() { rd.terms = parse(); sortTerms(); count(); }
+    function load() {
+        const beforeStr = sget() || '[]';
+        rd.terms = parse();
+        sortTerms();
+        count();
+        try {
+            const afterLen = rd.terms.length;
+            const beforeArr = JSON.parse(beforeStr);
+            if (Array.isArray(beforeArr) && beforeArr.length !== afterLen) save();
+        } catch (e) {}
+    }
     function save() { sset(JSON.stringify(rd.terms.map(t => ({ en: t.en, vi: t.vi, p: t.p || '', im: t.im || [], ts: t.ts, u: t.u ? 1 : 0, i: t.i || '', s: t.s ? 1 : 0, n: t.n ? 1 : 0, f: t.f ? 1 : 0 })))); count(); }
     function count() { const e = $('rhm-dict-count'); if (e) e.textContent = String(rd.terms.length); }
     const nNew = () => rd.terms.filter(t => t.n).length;
@@ -16257,7 +16447,9 @@ window.isIOSDevice = function () {
         const m = document.createElement('div'); m.className = 'rd-m'; m.style.width = W + 'px'; $('rd-L').appendChild(m);
         const pages = []; let cur = [], last = '';
         const flush = () => { if (cur.length) { pages.push(cur); cur = []; m.innerHTML = ''; } };
+        const fSet = rd.filterSet instanceof Set ? rd.filterSet : null;
         rd.terms.forEach((t, k) => {
+            if (fSet && !fSet.has(k)) return;
             const L = letterOf(t.en), group = [];
             if (L !== last) { group.push({ t: 'cap', L }); last = L; }
             group.push({ t: 'row', k });
@@ -16285,7 +16477,10 @@ window.isIOSDevice = function () {
     function pageHTML(i, pos) {
         const T = rd.pages.length, tot = Math.max(T, 1);
         const showHd = pos === 'L' || rd.per === 1;
-        const hd = showHd ? '<div class="rd-hd"><span class="rd-ttl">Từ điển thuật ngữ RHM</span><span class="rd-bdg">Tổng ' + rd.terms.length + ' · trang ' + Math.min(i + 1, tot) + '/' + tot + '</span>' + newChip() + '</div>' : '';
+        const fSet = rd.filterSet instanceof Set ? rd.filterSet : null;
+        const totalShown = fSet ? fSet.size : rd.terms.length;
+        const backFilterBtn = fSet ? '<button type="button" class="rd-bdg" data-act="clr-filter" style="background:#dc2626;color:#fff;border:0;cursor:pointer;font-weight:800" title="Bỏ lọc chủ đề, trở về toàn bộ từ điển">↩ Trở về (' + esc(rd.filterTopic || 'Tất cả') + ')</button>' : '';
+        const hd = showHd ? '<div class="rd-hd"><span class="rd-ttl">Từ điển thuật ngữ RHM</span><span class="rd-bdg">Tổng ' + totalShown + ' · trang ' + Math.min(i + 1, tot) + '/' + tot + '</span>' + backFilterBtn + newChip() + '</div>' : '';
         if (T === 0) {
             return i === 0 ? hd + '<div class="rd-body"><div class="rd-empty">Từ điển còn trống.<br>Khi đọc sách, bôi đen một đoạn rồi bấm 🌐 Dịch trong hộp chat — thuật ngữ RHM mới sẽ tự động được thêm vào đây. Bạn cũng có thể bấm ＋ để thêm tay.</div></div>' : '<div class="rd-body"></div>';
         }
@@ -16635,17 +16830,32 @@ function openPop(mode, t) {
         const hits = []; rd.terms.forEach((t, k) => { if (fold(t.en).includes(q) || fold(t.vi).includes(q)) hits.push(k); });
         box.innerHTML = hits.length ? hits.slice(0, 40).map(k => '<button type="button" class="rd-hit" data-act="hit" data-k="' + k + '"><b>' + esc(rd.terms[k].en) + '</b> — ' + esc(viLine(rd.terms[k].vi)) + '</button>').join('') : '<div class="rd-hint">Không tìm thấy.</div>';
     }
+    function clearTopicFilter() {
+        if (!rd.filterSet) return;
+        rd.filterSet = null;
+        rd.filterTopic = '';
+        rd.cur = 0;
+        repaginate(null);
+        toast('Đã trở về toàn bộ từ điển');
+    }
     async function doTopicSearch() {
-        const inp = $('rd-in-q'), box = $('rd-res'); if (!inp || !box) return;
+        const inp = $('rd-in-q'), box = $('rd-res'); if (!inp) return;
         const topic = inp.value.trim(); if (!topic) { toast('Hãy nhập chủ đề cần tìm'); return; }
-        if (!rd.terms.length) { box.innerHTML = '<div class="rd-hint">Từ điển chưa có thuật ngữ nào.</div>'; return; }
-        box.innerHTML = '<div class="rd-hint">⏳ AI đang tìm thuật ngữ theo chủ đề…</div>';
-        const picked = await rvPickTopic(topic, 60);
-        if (rd.pop !== 'search' || rd.sMode !== 'topic') return;
+        if (!rd.terms.length) { if (box) box.innerHTML = '<div class="rd-hint">Từ điển chưa có thuật ngữ nào.</div>'; return; }
+        if (box) box.innerHTML = '<div class="rd-hint">⏳ AI đang lọc thuật ngữ theo chủ đề "' + esc(topic) + '"…</div>';
+        const picked = await rvPickTopic(topic, 400);
         const hits = picked.map(t => rd.terms.indexOf(t)).filter(k => k >= 0);
-        box.innerHTML = hits.length
-            ? hits.map(k => '<button type="button" class="rd-hit" data-act="hit" data-k="' + k + '"><b>' + esc(rd.terms[k].en) + '</b> — ' + esc(viLine(rd.terms[k].vi)) + '</button>').join('')
-            : '<div class="rd-hint">Không tìm thấy thuật ngữ nào thuộc chủ đề này.</div>';
+        if (!hits.length) {
+            if (box && rd.pop === 'search') box.innerHTML = '<div class="rd-hint">Không tìm thấy thuật ngữ nào thuộc chủ đề "' + esc(topic) + '".</div>';
+            else toast('Không tìm thấy thuật ngữ nào thuộc chủ đề "' + topic + '"');
+            return;
+        }
+        rd.filterSet = new Set(hits);
+        rd.filterTopic = topic;
+        rd.cur = 0;
+        closePop();
+        repaginate(null);
+        toast('🔍 Đã lọc ' + hits.length + ' thuật ngữ thuộc chủ đề "' + topic + '"');
     }
     function addTerm() {
         const en = cap1(clean($('rd-in-en').value)), vi = cleanVi($('rd-in-vi').value), pe = $('rd-in-pos'), p = cleanPos(pe ? pe.value : '');
@@ -16859,9 +17069,20 @@ function openPop(mode, t) {
     function qzNav(r, done) {
         return '<div class="qz-nav"><button type="button" class="rd-pbtn" data-act="rv-prev"' + (r.i > 0 ? '' : ' disabled') + '>◀ Câu trước</button><button type="button" class="rd-pbtn pri" data-act="rv-next"' + (done ? '' : ' disabled') + '>' + (r.i + 1 >= r.items.length ? 'Xem kết quả ▶' : 'Câu tiếp ▶') + '</button></div>';
     }
+    async function qzEnsureCv(q) {
+        if (q.cv && q.cv.trim() && q.cv.trim().toLowerCase() !== (q.ctx || '').trim().toLowerCase()) return q.cv;
+        if (!q.ctx || !aiReady()) return q.cv || q.ctx;
+        const base = String(q.t.en).replace(/\s*\(.*\)\s*$/, '').trim();
+        const sys = 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Hãy dịch câu tiếng Anh sau sang tiếng Việt tự nhiên, chuẩn thuật ngữ RHM miền Nam, nhưng BẮT BUỘC GIỮ NGUYÊN cụm từ tiếng Anh "' + base + '" trong câu (tuyệt đối không dịch cụm từ "' + base + '" sang tiếng Việt). Chỉ trả về MỘT đối tượng JSON {"v":"<câu tiếng Việt giữ nguyên thuật ngữ tiếng Anh>"}, không thêm chữ nào khác.';
+        try {
+            const r = await aiGeminiJson(sys, q.ctx, 1000);
+            if (r && typeof r.v === 'string' && r.v.trim()) q.cv = r.v.trim();
+        } catch (e) {}
+        return q.cv || q.ctx;
+    }
     function qzPaint() {
         const r = rv.run, q = r.q, L = 'ABCD', h = r.res[r.i] || {}, vi = h.lang === 'vi', done = r.ans >= 0, right = r.ans === q.ans;
-        const shown = vi ? (q.cv || q.ctx) : q.ctx;
+        const shown = vi ? (q.cv || q._loadingCv || q.ctx) : q.ctx;
         const fullVi = qzFullVi(q);
         const extraInfo = q.info || String(q.t.i || '').split(/\n+/)[0] || '';
         $('rd-rv').innerHTML = '<div class="rv-card big qzc">' + rvHead('📝 Trắc nghiệm ngữ cảnh') + '<div class="qz-body">'
@@ -16875,35 +17096,43 @@ function openPop(mode, t) {
                 + '</div>' : '')
             + '</div>' + qzNav(r, done) + '</div>';
     }
+    let qzCfmYesCb = null;
     function qzShowVieConfirm(onYes) {
         const host = $('rd-rv'); if (!host) return;
         const old = document.getElementById('rd-vie-cfm'); if (old) old.remove();
+        qzCfmYesCb = onYes;
         const ov = document.createElement('div');
         ov.id = 'rd-vie-cfm';
-        ov.style.cssText = 'position:absolute;inset:0;z-index:60;background:rgba(15,23,42,.55);display:flex;align-items:center;justify-content:center;padding:16px;border-radius:12px';
+        ov.style.cssText = 'position:absolute;inset:0;z-index:80;background:rgba(15,23,42,.6);display:flex;align-items:center;justify-content:center;padding:16px;border-radius:12px';
         ov.innerHTML = '<div style="background:#fff;border:2px solid #6d28d9;border-radius:18px;max-width:420px;width:100%;padding:18px 20px;box-shadow:0 20px 50px rgba(0,0,0,.45);color:#1f1d2b">'
             + '<div style="font-weight:900;font-size:17px;color:#5b21b6;margin-bottom:8px">🌐 Chuyển ngữ cảnh sang Tiếng Việt?</div>'
             + '<p style="font-size:14px;line-height:1.5;color:#374151;margin:0 0 14px;text-align:justify">Chữ cần dịch vẫn giữ nguyên tiếng Anh để bạn tự suy nghĩ, và câu này sẽ <b>KHÔNG được tính điểm</b>. Bạn có muốn tiếp tục?</p>'
             + '<div style="display:flex;justify-content:flex-end;gap:8px">'
-            + '<button type="button" data-cfm="no" class="rd-pbtn">Huỷ</button>'
-            + '<button type="button" data-cfm="yes" class="rd-pbtn pri">Đồng ý</button>'
+            + '<button type="button" data-act="qz-cfm-no" class="rd-pbtn">Huỷ</button>'
+            + '<button type="button" data-act="qz-cfm-yes" class="rd-pbtn pri">Đồng ý</button>'
             + '</div></div>';
-        ov.addEventListener('click', e => {
-            e.stopPropagation();
-            const b = e.target.closest('[data-cfm]');
-            if (b) { const ok = b.dataset.cfm === 'yes'; ov.remove(); if (ok) onYes(); }
-            else if (e.target === ov) ov.remove();
-        });
         host.appendChild(ov);
+    }
+    async function qzApplyVie(r, h) {
+        h.lang = 'vi';
+        const q = r.q;
+        if (q && (!q.cv || !q.cv.trim() || q.cv.trim().toLowerCase() === (q.ctx || '').trim().toLowerCase())) {
+            q._loadingCv = '⏳ Đang dịch ngữ cảnh sang tiếng Việt…';
+            qzPaint();
+            await qzEnsureCv(q);
+            delete q._loadingCv;
+        }
+        if (rv.run === r) qzPaint();
     }
     function qzLang(l) {
         const r = rv.run, h = r && r.res[r.i]; if (!r || r.mode !== 'quiz' || !h) return;
         if (l === 'vi' && h.lang !== 'vi') {
             if (r.ans < 0 && !h.np) {
-                qzShowVieConfirm(() => { h.np = 1; h.lang = 'vi'; qzPaint(); });
+                qzShowVieConfirm(() => { h.np = 1; qzApplyVie(r, h); });
                 return;
             }
-            h.lang = 'vi';
+            qzApplyVie(r, h);
+            return;
         } else if (l === 'en') h.lang = 'en';
         qzPaint();
     }
@@ -17011,6 +17240,9 @@ function openPop(mode, t) {
             case 'sv-un': toggleSave(rd.terms[+el.dataset.k]); break;
             case 'clr-new': clearNew(); break; case 'new-view': togglePop('newt'); break;
             case 'qz-lang': qzLang(el.dataset.l); break;
+            case 'qz-cfm-yes': { const ov = document.getElementById('rd-vie-cfm'); if (ov) ov.remove(); const fn = qzCfmYesCb; qzCfmYesCb = null; if (fn) fn(); break; }
+            case 'qz-cfm-no': { const ov = document.getElementById('rd-vie-cfm'); if (ov) ov.remove(); qzCfmYesCb = null; break; }
+            case 'clr-filter': clearTopicFilter(); break;
             case 'rd-smode': setRdSMode(el.dataset.m); break;
             case 'spk': { const r0 = el.closest('.rd-row'); speakEn(r0 && rd.terms[+r0.dataset.k]); break; }
             case 'rv-close': rvClose(); break; case 'rv-opt': rvOpt(el); break; case 'rv-start': rvStart(); break; case 'rv-back': rvSetup(); break;
@@ -17082,8 +17314,25 @@ function openPop(mode, t) {
 
     /* ---------- tự thêm thuật ngữ mới sau mỗi lần dịch trong hộp chat đọc sách ---------- */
     function harvestSys() {
-        return 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Từ BẢN GỐC (tiếng Anh) và BẢN DỊCH tiếng Việt, hãy rút ra các THUẬT NGỮ CHUYÊN MÔN nha khoa/y khoa đáng đưa vào từ điển cho sinh viên RHM: danh từ hoặc cụm danh từ chuyên ngành (tên bệnh, kỹ thuật, vật liệu, dụng cụ, thuốc, cấu trúc giải phẫu, chỉ số, viết tắt chuyên ngành). KHÔNG lấy từ thông thường, tên riêng người hoặc tổ chức, số liệu. Ngoài danh từ, được lấy cả ĐỘNG TỪ, TÍNH TỪ và TRẠNG TỪ là thuật ngữ chuyên ngành (mã p tương ứng là v, adj, adv), ví dụ extract (v), apical (adj). Với danh từ có SỐ NHIỀU BẤT QUY TẮC (không chỉ thêm s hoặc es, ví dụ tooth thành teeth, bacterium thành bacteria), thêm MỘT mục riêng cho dạng số nhiều đó với p là n và vi mở đầu bằng số nhiều của, kèm nghĩa; dạng số nhiều thêm s hoặc es thì KHÔNG thêm. Mỗi thuật ngữ gồm \"en\" (dạng chuẩn tiếng Anh, viết thường trừ tên riêng và viết tắt; nếu là viết tắt thì ghi dạng \"CBCT (cone beam computed tomography)\") và \"vi\" (nghĩa tiếng Việt ngắn gọn, đúng cách gọi trong bản dịch, không giải thích dài). Mỗi mục có thêm \"p\" là mã từ loại ngắn (n, v, adj, adv, abbr); nếu cùng một từ có nhiều từ loại với nghĩa khác nhau thì trả về mỗi từ loại một mục riêng (cùng \"en\", khác \"p\"). Tối đa 30 thuật ngữ, ưu tiên thuật ngữ quan trọng. Nếu không có gì đáng lấy thì trả về mảng rỗng. Trả về MỘT đối tượng JSON hợp lệ: {\"terms\":[{\"en\":\"...\",\"p\":\"n\",\"vi\":\"...\"}]}; trong chuỗi dùng dấu nháy đơn thay cho dấu nháy kép. Không thêm chữ nào ngoài JSON.'
+        return 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Từ BẢN GỐC (tiếng Anh) và BẢN DỊCH tiếng Việt, hãy rút ra các THUẬT NGỮ CHUYÊN MÔN nha khoa/y khoa đáng đưa vào từ điển cho sinh viên RHM: danh từ hoặc cụm danh từ chuyên ngành (tên bệnh, kỹ thuật, vật liệu, dụng cụ, thuốc, cấu trúc giải phẫu, chỉ số, viết tắt chuyên ngành). KHÔNG lấy từ thông thường, tên riêng người hoặc tổ chức, số liệu. Ngoài danh từ, được lấy cả ĐỘNG TỪ, TÍNH TỪ và TRẠNG TỪ là thuật ngữ chuyên ngành (mã p tương ứng là v, adj, adv), ví dụ extract (v), apical (adj). QUY TẮC SỐ ÍT / SỐ NHIỀU: Mọi danh từ thông thường BẮT BUỘC đưa về DẠNG SỐ ÍT (ví dụ gặp "accessory canals" thì phải ghi "Accessory canal", TUYỆT ĐỐI KHÔNG thêm dạng số nhiều chỉ thêm -s/-es/-ies). CHỈ thêm mục số nhiều khi đó là SỐ NHIỀU BẤT QUY TẮC (ví dụ teeth, bacteria, apices, foramina). QUY TẮC TỪ VIẾT TẮT: Với mọi từ viết tắt (như MTA, CBCT, EDTA, NaOCl, GIC...), BẮT BUỘC luôn ghi kèm chữ viết đầy đủ trong ngoặc đơn theo mẫu "MTA (mineral trioxide aggregate)", TUYỆT ĐỐI KHÔNG trả về chữ viết tắt đứng một mình như "MTA". Không trả về các thuật ngữ đã có trong danh sách ĐÃ CÓ. Trả về MỘT đối tượng JSON hợp lệ: {\"terms\":[{\"en\":\"...\",\"p\":\"n\",\"vi\":\"...\"}]}; trong chuỗi dùng dấu nháy đơn thay cho dấu nháy kép. Không thêm chữ nào ngoài JSON.'
             + (typeof BK_TR_GLOSS !== 'undefined' ? BK_TR_GLOSS : '');
+    }
+    function findExistingTerm(en, p0) {
+        const sp = splitAbbr(en);
+        const stem = stemEnPhrase(en);
+        const pos = cleanPos(p0);
+        return rd.terms.find(t => {
+            const tsp = splitAbbr(t.en);
+            const tStem = stemEnPhrase(t.en);
+            const tPos = cleanPos(t.p);
+            if (sp.head === tsp.head && (sp.hasParen || tsp.hasParen || pos === 'abbr' || tPos === 'abbr' || /^[A-Z0-9\-]{2,8}$/.test(sp.raw) || /^[A-Z0-9\-]{2,8}$/.test(tsp.raw))) {
+                return true;
+            }
+            if (stem && stem === tStem && (!pos || !tPos || pos === tPos || (pos === 'n' && tPos === 'pl') || (pos === 'pl' && tPos === 'n'))) {
+                return true;
+            }
+            return false;
+        });
     }
     window.rhmDictHarvest = async function (src, results, opt) {
         opt = opt || {};
@@ -17091,25 +17340,38 @@ function openPop(mode, t) {
             if (!opt.force && typeof aiLangCfg !== 'undefined' && aiLangCfg && !aiLangCfg.vi) return;   // chỉ khi dịch sang tiếng Việt
             if (typeof aiGeminiJson !== 'function') return;
             const original = String(src || '').trim(); if (original.length < 20) return;
+            load();
             const vi = (results || []).map(r => r.bi ? r.bi.map(p => p.src + ' => ' + p.vi).join('\n') : (r.t || '')).join('\n\n');
-            const v = await aiGeminiJson(harvestSys(), 'BẢN GỐC:\n' + original.slice(0, 6000) + '\n\nBẢN DỊCH:\n' + vi.slice(0, 8000), 3000);
+            const existHint = rd.terms.slice(0, 600).map(t => t.en).join('; ');
+            const v = await aiGeminiJson(harvestSys(), 'BẢN GỐC:\n' + original.slice(0, 6000) + '\n\nBẢN DỊCH:\n' + vi.slice(0, 8000) + (existHint ? '\n\nCÁC THUẬT NGỮ ĐÃ CÓ TRONG TỪ ĐIỂN (không lấy trùng lại):\n' + existHint : ''), 3000);
             const list = v && Array.isArray(v.terms) ? v.terms : []; if (!list.length) return { added: 0, senses: 0, ok: !!v };
             load();
-            const have = new Set(rd.terms.map(t => tk(t.en, t.p))); let added = 0, senses = 0; const cands = [];
+            let added = 0, senses = 0, updated = 0; const cands = [];
             const gl = s => fold(s).replace(/[^a-z0-9]+/g, ' ').trim();
             const sameMean = (t, vv) => { const f = gl(vv); return !f || String(t.vi).split('\n').some(l => { const g = gl(l); return g === f || (g.length > 2 && f.length > 2 && (g.includes(f) || f.includes(g))); }); };
             const ctxOf = en => { const base = fold(en.replace(/\s*\(.*\)\s*$/, '')).trim(), i = base ? fold(original).indexOf(base) : -1, s = i < 0 ? 0 : i; return original.slice(Math.max(0, s - 160), s + 240).replace(/\s+/g, ' '); };
             const cand = (t, en, vv) => { if (!t || sameMean(t, vv) || cands.some(c => c.t === t && gl(c.vv) === gl(vv))) return; cands.push({ t, en, vv, ctx: ctxOf(en) }); };
             list.forEach(x => {
                 if (!x) return;
-                const en = cap1(clean(x.en)), vv = clean(x.vi);
+                let rawEn = clean(x.en);
+                let p0 = cleanPos(x.p);
+                // Nếu là số nhiều có quy tắc (thêm s/es), tự chuyển về số ít
+                if (isRegularPluralForm(rawEn, p0)) {
+                    rawEn = stripTrailingPluralS(rawEn);
+                    if (p0 === 'pl') p0 = 'n';
+                }
+                const en = cap1(rawEn), vv = clean(x.vi);
                 if (!en || !vv || en.length > 90 || vv.length > 180 || !letterOf(en)) return;
-                const p0 = cleanPos(x.p), ex = p0 ? rd.terms.find(t => !t.p && nk(t.en) === nk(en)) : null;
-                if (ex) { ex.p = p0; ex.f = 1; added++; cand(ex, en, vv); return; }
-                if (!p0) { const same = rd.terms.find(t => nk(t.en) === nk(en)); if (same) { cand(same, en, vv); return; } }
-                const k = tk(en, p0);
-                if (have.has(k)) { cand(rd.terms.find(t => tk(t.en, t.p) === k), en, vv); return; }
-                have.add(k); rd.terms.push({ en, vi: capVi(vv), p: p0, ts: Date.now(), n: 1, f: p0 ? 1 : 0 }); added++;
+                const ex = findExistingTerm(en, p0);
+                if (ex) {
+                    const spNew = splitAbbr(en), spOld = splitAbbr(ex.en);
+                    if (spNew.hasParen && !spOld.hasParen) { ex.en = en; updated++; }
+                    if (!ex.p && p0) { ex.p = p0; ex.f = 1; updated++; }
+                    cand(ex, ex.en, vv);
+                    return;
+                }
+                rd.terms.push({ en, vi: capVi(vv), p: p0, ts: Date.now(), n: 1, f: p0 ? 1 : 0 });
+                added++;
             });
             /* Từ đã có nhưng xuất hiện với nghĩa khác ở ngữ cảnh mới: kiểm tra lại kỹ rồi mới thêm nghĩa mới (không ghi đè nghĩa cũ) */
             if (cands.length) {
@@ -17123,7 +17385,7 @@ function openPop(mode, t) {
                     t.vi = String(t.vi) + '\n' + capVi(nv); t.n = 1; t.ts = Date.now(); senses++;
                 });
             }
-            if (!added && !senses) return { added: 0, senses: 0, ok: true };
+            if (!added && !senses && !updated) return { added: 0, senses: 0, ok: true };
             sortTerms(); save();
             if (isOpen() && !rd.lock) { const a = anchor(); repaginate(a); }
             if (!opt.quiet) toast('📖 ' + (added ? 'Đã thêm ' + added + ' thuật ngữ mới' : '') + (added && senses ? ' và ' : '') + (senses ? (added ? '' : 'Đã ') + 'thêm ' + senses + ' nghĩa mới' : '') + ' vào Từ điển RHM');
@@ -18872,11 +19134,12 @@ function viSelText(range) {
       #progress-modal .rhm-ui { max-height: 96vh !important; overflow: hidden !important; padding: 0 14px 12px !important; }
       #progress-modal .rhm-bar { padding: 8px 4px 6px !important; }
       #progress-modal .rhm-trio { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 10px !important; align-items: stretch !important; }
-      #progress-modal .rhm-col, #progress-modal .rhm-trio > div:first-child { padding: 12px 14px !important; max-height: calc(96vh - 48px) !important; overflow: hidden !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important; }
-      #progress-modal .rhm-trio > div:first-child > .mb-4 { margin-bottom: 6px !important; padding-bottom: 4px !important; }
-      #progress-modal .rhm-trio > div:first-child > .space-y-4 { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: space-between; gap: 6px !important; }
+      #progress-modal .rhm-col, #progress-modal .rhm-trio > div:first-child { padding: 12px 14px !important; max-height: calc(96vh - 48px) !important; overflow-y: auto !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important; }
+      #progress-modal .rhm-trio > div:first-child > .mb-4 { margin-bottom: 4px !important; padding-bottom: 4px !important; }
+      #progress-modal .rhm-trio > div:first-child > .space-y-4 { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: space-between; gap: 4px !important; }
       #progress-modal .rhm-trio > div:first-child > .space-y-4 > * { margin-top: 0 !important; }
-      #progress-modal #pq-box, #progress-modal .rhm-qa { width: min(34vh, 22vw, 230px) !important; height: min(34vh, 22vw, 230px) !important; min-height: 0 !important; padding: 6px !important; margin: 0 auto !important; }
+      #progress-modal #pq-panel-export:not(.hidden), #progress-modal #pq-panel-import:not(.hidden) { display: grid !important; margin-top: 4px !important; }
+      #progress-modal #pq-box, #progress-modal .rhm-qa { width: min(29vh, 20vw, 210px) !important; height: min(29vh, 20vw, 210px) !important; min-height: 0 !important; padding: 6px !important; margin: 0 auto !important; }
       #progress-modal #pq-box canvas, #progress-modal .rhm-qa canvas { width: 100% !important; height: 100% !important; max-width: 100% !important; max-height: 100% !important; object-fit: contain; }
       #progress-modal .rhm-spacer { display: none !important; }
       #progress-modal .rhm-r3 { margin-top: 6px !important; gap: 6px !important; }
@@ -18919,6 +19182,24 @@ function viSelText(range) {
     return Array.prototype.find.call(trio.children, function (c) {
       return !c.classList.contains('rhm-col') && !c.classList.contains('hs-box');
     });
+  }
+
+  const origPqToggle = window.pqTogglePanel;
+  if (typeof origPqToggle === 'function') {
+    window.pqTogglePanel = function (which) {
+      origPqToggle(which);
+      const ex = document.getElementById('pq-panel-export');
+      const im = document.getElementById('pq-panel-import');
+      const bEx = document.getElementById('pq-btn-export');
+      const bIm = document.getElementById('pq-btn-import');
+      if (bEx && ex) bEx.classList.toggle('ring-4', !ex.classList.contains('hidden'));
+      if (bIm && im) bIm.classList.toggle('ring-4', !im.classList.contains('hidden'));
+      const activePanel = which === 'import' ? im : ex;
+      if (activePanel && !activePanel.classList.contains('hidden')) {
+        try { activePanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } catch (e) {}
+      }
+      setTimeout(sync, 20);
+    };
   }
 
   /* Đồng bộ: 2 cột QR có cùng vị trí và kích thước với mã QR của Tiến Độ */
@@ -19493,7 +19774,12 @@ html.rhm-dragging,html.rhm-dragging body{-webkit-user-select:none;user-select:no
         var mode = pop.getAttribute('data-rbm') || '', act = b.getAttribute('data-rbf');
         if (act === 'close') { if (mode === 'newnote') { var cn = pop.querySelector('[data-act="cancel"]'); if (cn) cn.click(); } else closeRb(prefix, mode); return true; }
         if (prefix === 'rd-rb-') {
-            if (mode === 'search') { var h = pop.querySelector('#rd-res [data-act="hit"]'); if (h) h.click(); else closeRb(prefix, mode); }
+            if (mode === 'search') {
+                var qIn = pop.querySelector('#rd-in-q');
+                var isTopic = !!pop.querySelector('[data-act="rd-smode"][data-m="topic"].on');
+                if (isTopic && qIn && qIn.value.trim()) { qIn.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true })); }
+                else { var h = pop.querySelector('#rd-res [data-act="hit"]'); if (h) h.click(); else closeRb(prefix, mode); }
+            }
             else if (mode === 'jump') { var g = pop.querySelector('[data-act="gopage"]'); if (g) g.click(); }
             else if (mode === 'add') { var ad = pop.querySelector('[data-act="add"]'); if (ad) ad.click(); }
         } else {
