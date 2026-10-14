@@ -1457,8 +1457,11 @@
                     <button onclick="openQuestionNavigatorModal()" class="qt-nav text-blue-700 bg-blue-50 hover:bg-blue-100 py-1.5 px-3 rounded-full font-bold text-sm transition-colors border border-blue-200 flex items-center shadow-sm">
                         📋 Danh sách câu
                     </button>
+                    <div id="exam-q-timer-box" class="qt-timer hidden text-rose-600 font-bold items-center bg-rose-50 py-1.5 px-3 rounded-full border border-rose-200 text-sm" title="Thời gian suy nghĩ khuyến nghị cho câu này (72 giây)">
+                        ⏳ <span id="q-timer" class="ml-1.5 w-10 text-center">72s</span>
+                    </div>
                     <div class="qt-timer text-blue-600 font-bold flex items-center bg-blue-50 py-1.5 px-3 rounded-full border border-blue-200 text-sm">
-                        ⏱️ <span id="timer" class="ml-1.5 w-12 text-center">00:00</span>
+                        ⏱️ <span id="timer" class="ml-1.5 w-16 text-center">00:00</span>
                     </div>
                 </div>
             </div>
@@ -6889,6 +6892,7 @@
 
             currentQuizId = set.id;
             currentQuizName = `Thi thử: ${set.name}`;
+            isExamMode = true;
 
             if (resume) {
                 const session = getActiveSession(set.id);
@@ -6897,6 +6901,7 @@
                     questionStates = session.questionStates;
                     currentIndex = session.currentIndex;
                     timeElapsed = session.timeElapsed;
+                    qTimeLeft = typeof session.qTimeLeft === 'number' ? session.qTimeLeft : 72;
                     currentQuizName = session.currentQuizName || currentQuizName;
 
                     closeExamModal();
@@ -7444,6 +7449,22 @@ function renderSavedQuizzes() {
             return saved ? JSON.parse(saved) : null;
         }
 
+        let isExamMode = false;
+        let qTimeLeft = 72;
+        const EXAM_TOTAL_SEC = 180 * 60;
+
+        function checkIsExamQuiz() {
+            if (isExamMode) return true;
+            if (typeof currentQuizName === 'string' && /^Thi thử:/i.test(currentQuizName)) return true;
+            if (currentQuizId && typeof currentQuizId !== 'string') {
+                const s = (typeof getSavedExamSets === 'function' ? getSavedExamSets() : []).find(x => x.id === currentQuizId);
+                if (s) return true;
+                const q = getSavedQuizzes().find(x => x.id === currentQuizId);
+                if (q && q.isExam) return true;
+            }
+            return false;
+        }
+
         function saveActiveSession() {
             if (!currentQuizId) return;
             const sessionData = {
@@ -7453,7 +7474,9 @@ function renderSavedQuizzes() {
                 timeElapsed,
                 currentQuizName,
                 currentStreak,
-                isHopeStarActive
+                isHopeStarActive,
+                isExamMode,
+                qTimeLeft
             };
             kv.setItem(`quizAppActiveSession_${currentQuizId}`, JSON.stringify(sessionData));
         }
@@ -7471,6 +7494,7 @@ function renderSavedQuizzes() {
             if (!selectedQuiz) return;
 
             currentQuizId = selectedQuiz.id;
+            isExamMode = !!selectedQuiz.isExam;
 
             if (resume) {
                 const session = getActiveSession(id);
@@ -7537,8 +7561,10 @@ function renderSavedQuizzes() {
         function initQuiz() {
             currentIndex = 0;
             timeElapsed = 0;
+            qTimeLeft = 72;
             currentStreak = 0;
             isHopeStarActive = false;
+            isExamMode = /^Thi thử:/i.test(currentQuizName || '');
             lightboxDrawingsMap = {};
             
             questions = questions.map(q => shuffleQuestionOptions(q));
@@ -7585,11 +7611,48 @@ function renderSavedQuizzes() {
             return `${m}:${s}`;
         }
 
+        function renderTimersUI() {
+            const exam = checkIsExamQuiz();
+            const qBox = document.getElementById('exam-q-timer-box');
+            const qEl = document.getElementById('q-timer');
+            const tEl = document.getElementById('timer');
+            if (qBox) {
+                qBox.classList.toggle('hidden', !exam);
+                qBox.classList.toggle('flex', exam);
+            }
+            if (exam) {
+                if (qEl) {
+                    qEl.textContent = `${Math.max(0, qTimeLeft)}s`;
+                    qBox.classList.toggle('bg-red-100', qTimeLeft <= 10);
+                    qBox.classList.toggle('border-red-400', qTimeLeft <= 10);
+                }
+                const rem = Math.max(0, EXAM_TOTAL_SEC - timeElapsed);
+                if (tEl) tEl.textContent = formatTime(rem);
+            } else {
+                if (tEl) tEl.textContent = formatTime(timeElapsed);
+            }
+        }
+
         function startTimer() {
             clearInterval(timerInterval);
+            isExamMode = checkIsExamQuiz();
+            renderTimersUI();
             timerInterval = setInterval(() => {
                 timeElapsed++;
-                document.getElementById('timer').textContent = formatTime(timeElapsed);
+                if (isExamMode) {
+                    const st = questionStates && questionStates[currentIndex];
+                    const answered = st && (st.status === 'correct' || st.status === 'incorrect');
+                    if (!answered && qTimeLeft > 0) qTimeLeft--;
+                    renderTimersUI();
+                    if (timeElapsed >= EXAM_TOTAL_SEC) {
+                        clearInterval(timerInterval);
+                        showToast("⏰ Đã hết 180 phút làm bài thi thử!");
+                        showResult();
+                        return;
+                    }
+                } else {
+                    renderTimersUI();
+                }
                 saveActiveSession();
             }, 1000);
         }
@@ -7618,6 +7681,10 @@ function renderSavedQuizzes() {
             const q = questions[currentIndex];
             requestAnimationFrame(fitQuizPanels);
             const st = questionStates[currentIndex];
+            if (checkIsExamQuiz()) {
+                qTimeLeft = 72;
+                renderTimersUI();
+            }
 
             document.getElementById('current-q-num').textContent = currentIndex + 1;
             
@@ -9548,17 +9615,17 @@ function bkOpenAi() {
     if (aiState.qSig !== sig) {
         aiState.qSig = sig;
         const ctx = (bkText || '').slice(0, 30000);
-        const intro = 'Người học đang đọc chương "' + bkCur.title + '" của cuốn "' + (bkCur.book || '') + '" thuộc môn ' + subj + '. ' +
+        const intro = 'Bạn là giáo sư đầu ngành Răng Hàm Mặt có kiến thức uyên bác, nhưng khi xưng hô và trò chuyện với người học thì luôn nhận mình là gia sư Răng Hàm Mặt của bạn. Người học đang đọc chương "' + bkCur.title + '" của cuốn "' + (bkCur.book || '') + '" thuộc môn ' + subj + '. ' +
             (ctx ? 'Dưới đây là nội dung chữ trích từ PDF của chương (có thể thiếu hình và bảng):\n<<<\n' + ctx + '\n>>>\nHãy ưu tiên trả lời dựa trên nội dung này; nếu câu hỏi nằm ngoài chương thì dùng kiến thức chung và nói rõ là ngoài chương. ' : 'Chưa có nội dung chữ của chương, hãy trả lời dựa trên kiến thức chung về môn học và chủ đề. ') +
             'Luôn trả lời bằng tiếng Việt, ngắn gọn, dễ hiểu.';
         aiState.history = [
             { role: 'user', parts: [{ text: intro }] },
-            { role: 'model', parts: [{ text: 'Đã rõ. Mình sẵn sàng giải thích và trả lời câu hỏi về chương này.' }] }
+            { role: 'model', parts: [{ text: 'Đã rõ. Gia sư sẵn sàng giải thích và trả lời câu hỏi về chương này.' }] }
         ];
         document.getElementById('ai-title').textContent = '🤖 Hỏi AI về sách';
         bkRenderBar();
         document.getElementById('ai-messages').innerHTML = '';
-        aiAddMsg('ai', 'Chào bạn! Mình có thể giải thích, tóm tắt hoặc ra câu hỏi ôn về chương "' + bkCur.title + '". Bôi đen đoạn trong PDF rồi bấm 🌐 Dịch để dịch đoạn đó.');
+        aiAddMsg('ai', 'Chào bạn! Mình là gia sư Răng Hàm Mặt của bạn. Gia sư có thể giải thích, tóm tắt hoặc ra câu hỏi ôn về chương "' + bkCur.title + '". Bôi đen đoạn trong PDF rồi bấm 🌐 Dịch để dịch đoạn đó.');
         aiQuotaApply();
     }
     document.getElementById('ai-tutor-modal').classList.remove('hidden', 'ai-chat-off');
@@ -12632,13 +12699,13 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             closeAiTutor(); if (e.cancelable) e.preventDefault(); e.stopPropagation();
         } catch (er) {}
     }, true));
-    function aiHdrBtnPaint() {   // chỉ chế độ sách còn nút "Trắc nghiệm"; các chế độ khác dùng nút Từ điển / Ghi chú
+    function aiHdrBtnPaint() {   // hiện nút cửa sổ phụ "❓ Trắc nghiệm" cho cả chế độ sách (book) và video
         const l = document.getElementById('ai-enwin-lbl'), b = document.getElementById('ai-enwin-hbtn'); if (!l || !b) return;
-        const book = aiState.mode === 'book';
-        l.textContent = '❓ Trắc nghiệm'; b.title = 'Ẩn/hiện cửa sổ trắc nghiệm'; b.style.display = book ? '' : 'none';
+        const show = aiState.mode === 'book' || aiState.mode === 'video';
+        l.textContent = '❓ Trắc nghiệm'; b.title = 'Ẩn/hiện cửa sổ trắc nghiệm'; b.style.display = show ? '' : 'none';
     }
     function aiHdrSecBtn() {
-        if (aiState.mode === 'book') { bkQzToggle(); return; }
+        if (aiState.mode === 'book' || aiState.mode === 'video') { bkQzToggle(); return; }
         const p = document.getElementById('ai-en-panel');
         if (p && !p.classList.contains('hidden')) { aiEnPanelClose(); return; }
         try { if (!p.querySelector('.ai-en-ent')) aiEnClear(); } catch (e) {}
@@ -12659,8 +12726,8 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         setTimeout(() => { aiEnPanelPlace(); }, 0); aiEnPanelPlace(); aiEnPaintBtns(); return p;
     }
     function aiEnClear() {
-        const list = document.querySelector('#ai-en-panel .ai-en-body'); if (!list) return; try { if (aiState.mode === 'book' && bkQz && bkQz.items && bkQz.items.length) { bkQzTitle('📝 Trắc nghiệm'); bkQzRender(); return; } } catch (e) {}
-        list.innerHTML = '<div class="ai-en-empty">Chưa có đoạn nào. Bấm “🇬🇧 Cửa sổ phụ” dưới một bong bóng chat để xem bản tiếng Anh ở đây.</div>';
+        const list = document.querySelector('#ai-en-panel .ai-en-body'); if (!list) return; try { if ((aiState.mode === 'book' || aiState.mode === 'video') && bkQz && bkQz.items && bkQz.items.length) { bkQzTitle('📝 Trắc nghiệm'); bkQzRender(); return; } } catch (e) {}
+        list.innerHTML = '<div class="ai-en-empty">Chưa có câu hỏi trắc nghiệm. Bấm “📝 Trắc nghiệm” trong khung chat để tạo câu hỏi.</div>';
     }
     async function aiEnFill(ent, bubble, out) {
         const tx = ent.querySelector('.ai-en-t'); tx.textContent = '…';
@@ -12708,9 +12775,9 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     function aiSystemPromptBase() {
         if (aiState.guided) return aiGuidedPrompt();
         if (aiState.mode === 'video') {
-            return 'Bạn là gia sư Răng Hàm Mặt thân thiện, trả lời bằng tiếng Việt, rõ ràng, có cấu trúc, dễ hiểu. Bạn được cung cấp nội dung lời giảng của một video bài giảng, kèm mốc thời gian. Hãy trả lời như thể chính bạn đã xem và nghe video đó: nói "trong video", "ở phút mm:ss". TUYỆT ĐỐI không nhắc đến các từ "phụ đề", "transcript", "văn bản", "dữ liệu được cung cấp", cũng không nói rằng bạn đã đọc tài liệu nào. Khi người học yêu cầu tóm tắt: liệt kê theo thứ tự thời gian, MỖI DÒNG bắt đầu bằng mốc thời gian dạng [mm:ss] (hoặc [h:mm:ss] nếu quá 1 giờ) rồi đến nội dung của đoạn đó (súc tích, thường 1–2 câu mỗi mốc; nếu người học yêu cầu số câu cụ thể cho mỗi mục thì làm đúng số câu đó); luôn viết mốc đúng dạng [mm:ss] để người học bấm nhảy tới đoạn đó. Nội dung có thể có lỗi nhận dạng giọng nói nên hãy suy luận hợp lý và nói rõ khi không chắc chắn; không bịa nội dung ngoài video. Định dạng: KHÔNG dùng LaTeX hay ký hiệu $...$ (viết ký tự thường như →, ≥, µm, 2,5–3,0); không dùng tiêu đề bắt đầu bằng #; chỉ dùng **in đậm** và gạch đầu dòng "- ". Nếu có ảnh đính kèm, đó là ảnh người học gửi (thường là hình chụp màn hình video): hãy quan sát ảnh, kết hợp lời giảng quanh thời điểm đang xem để trả lời. Nếu yêu cầu có kèm một đoạn clip ngắn lấy từ video, đó là vài giây quanh đúng thời điểm người học đang dừng: hãy quan sát kỹ khung hình ở mốc đó (hình vẽ, sơ đồ, ảnh X-quang / lâm sàng, chữ trên slide...) rồi mô tả và giải thích; nếu không nhìn rõ thì nói rõ.\n\n' + aiVideoContext();
+            return 'Bạn đóng vai trò là giáo sư đầu ngành Răng Hàm Mặt có chuyên môn sâu rộng khi phân tích và cung cấp kiến thức, nhưng khi xưng hô và trò chuyện với người học thì luôn nhận mình là gia sư Răng Hàm Mặt thân thiện; trả lời bằng tiếng Việt, rõ ràng, có cấu trúc, dễ hiểu. Bạn được cung cấp nội dung lời giảng của một video bài giảng, kèm mốc thời gian. Hãy trả lời như thể chính bạn đã xem và nghe video đó: nói "trong video", "ở phút mm:ss". TUYỆT ĐỐI không nhắc đến các từ "phụ đề", "transcript", "văn bản", "dữ liệu được cung cấp", cũng không nói rằng bạn đã đọc tài liệu nào. Khi người học yêu cầu tóm tắt: liệt kê theo thứ tự thời gian, MỖI DÒNG bắt đầu bằng mốc thời gian dạng [mm:ss] (hoặc [h:mm:ss] nếu quá 1 giờ) rồi đến nội dung của đoạn đó (súc tích, thường 1–2 câu mỗi mốc; nếu người học yêu cầu số câu cụ thể cho mỗi mục thì làm đúng số câu đó); luôn viết mốc đúng dạng [mm:ss] để người học bấm nhảy tới đoạn đó. Nội dung có thể có lỗi nhận dạng giọng nói nên hãy suy luận hợp lý và nói rõ khi không chắc chắn; không bịa nội dung ngoài video. Định dạng: KHÔNG dùng LaTeX hay ký hiệu $...$ (viết ký tự thường như →, ≥, µm, 2,5–3,0); không dùng tiêu đề bắt đầu bằng #; chỉ dùng **in đậm** và gạch đầu dòng "- ". Nếu có ảnh đính kèm, đó là ảnh người học gửi (thường là hình chụp màn hình video): hãy quan sát ảnh, kết hợp lời giảng quanh thời điểm đang xem để trả lời. Nếu yêu cầu có kèm một đoạn clip ngắn lấy từ video, đó là vài giây quanh đúng thời điểm người học đang dừng: hãy quan sát kỹ khung hình ở mốc đó (hình vẽ, sơ đồ, ảnh X-quang / lâm sàng, chữ trên slide...) rồi mô tả và giải thích; nếu không nhìn rõ thì nói rõ.\n\n' + aiVideoContext();
         }
-        return 'Bạn là gia sư Răng Hàm Mặt thân thiện, trả lời bằng tiếng Việt, ' + (aiState.full ? 'rất đầy đủ, chi tiết, giải thích sâu, không giới hạn độ dài' : 'ngắn gọn') + ', chính xác, dễ hiểu. Chỉ giải thích dựa trên câu hỏi sau; nếu không chắc chắn hãy nói rõ, không bịa. Nhắc người học đối chiếu giáo trình khi cần. Định dạng: KHÔNG dùng LaTeX hay ký hiệu $...$ (viết ký tự thường như →, ≥, µm); không dùng tiêu đề bắt đầu bằng #; chỉ dùng **in đậm** và gạch đầu dòng "- ".\n\n' + aiBuildContext();
+        return 'Bạn đóng vai trò là giáo sư đầu ngành Răng Hàm Mặt có chuyên môn sâu rộng khi phân tích và cung cấp kiến thức, nhưng khi xưng hô và trò chuyện với người học thì luôn nhận mình là gia sư Răng Hàm Mặt thân thiện; trả lời bằng tiếng Việt, ' + (aiState.full ? 'rất đầy đủ, chi tiết, giải thích sâu, không giới hạn độ dài' : 'ngắn gọn') + ', chính xác, dễ hiểu. Chỉ giải thích dựa trên câu hỏi sau; nếu không chắc chắn hãy nói rõ, không bịa. Nhắc người học đối chiếu giáo trình khi cần. Định dạng: KHÔNG dùng LaTeX hay ký hiệu $...$ (viết ký tự thường như →, ≥, µm); không dùng tiêu đề bắt đầu bằng #; chỉ dùng **in đậm** và gạch đầu dòng "- ".\n\n' + aiBuildContext();
     }
     function aiTex(t) {
         const M = { rightarrow: '→', to: '→', Rightarrow: '⇒', leftarrow: '←', leftrightarrow: '↔', uparrow: '↑', downarrow: '↓', geq: '≥', ge: '≥', leq: '≤', le: '≤', neq: '≠', approx: '≈', sim: '~', times: '×', cdot: '·', pm: '±', mu: 'µ', alpha: 'α', beta: 'β', gamma: 'γ', delta: 'δ', Delta: 'Δ', theta: 'θ', lambda: 'λ', sigma: 'σ', pi: 'π', omega: 'Ω', degree: '°', circ: '°', infty: '∞', ldots: '…', dots: '…', quad: ' ', qquad: ' ', ',': ' ', ';': ' ', '%': '%', '_': '_', '&': '&', '$': '$', '#': '#' };
@@ -12773,7 +12840,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     function aiSetStatus(t) { document.getElementById('ai-live-status').textContent = t; }
 
     const AI_QUICK_QUIZ = [['Giải thích vì sao đáp án đúng là đúng.', '💡 Vì sao đúng?', 'bg-indigo-50 text-indigo-700 border-indigo-200'], ['', '🔬 Tìm hiểu sâu', 'bg-sky-50 text-sky-700 border-sky-200', 'deep'], ['Phân tích vì sao từng đáp án còn lại sai.', '🚫 Vì sao kia sai?', 'bg-rose-50 text-rose-700 border-rose-200'], ['Cho mình mẹo ghi nhớ và một ví dụ lâm sàng ngắn liên quan.', '🧠 Mẹo nhớ / ví dụ', 'bg-emerald-50 text-emerald-700 border-emerald-200'], ['', '🎓 Học có hướng dẫn', 'bg-violet-50 text-violet-700 border-violet-200', 'guided']];
-    const AI_QUICK_VIDEO = [['Hãy lập mục lục nội dung video theo mốc thời gian, từ đầu đến cuối, không bỏ sót đoạn chính nào. Mở đầu bằng 1–2 câu tổng quan. Sau đó trình bày mục lục PHÂN CẤP có đánh số như mục lục sách: mục lớn đánh số 1., 2., 3., …; mục con đánh số 1.1, 1.2, …, 2.1, 2.2, … (tối đa 2 cấp; tách mục con khi một mục lớn có nhiều ý rõ rệt). Mỗi mục một dòng, đúng dạng: <số thứ tự> [mm:ss] Tên mục — các ý chính của đoạn đó trong 3–4 câu đầy đủ ý (nêu lần lượt các ý chính nối tiếp nhau trong đoạn, giữ lại thuật ngữ, số liệu quan trọng; mục lớn lẫn mục con đều viết 3–4 câu). Mốc thời gian tăng dần theo thứ tự số. Không thêm phần kết luận hay ý cần nhớ ở cuối. Mục lục chỉ tóm lược nội dung video nên KHÔNG trích dẫn tài liệu, không gắn nguồn hay link.', '📑 Mục lục theo thời gian', 'bg-indigo-50 text-indigo-700 border-indigo-200', 'timeline'], ['Giải thích dễ hiểu đoạn mình đang xem.', '🎯 Giải thích đoạn đang xem', 'bg-rose-50 text-rose-700 border-rose-200', 'explain'], ['', '🖼️ Hỏi hình ảnh đang hiện', 'bg-amber-50 text-amber-700 border-amber-200', 'frame'], ['Liệt kê những ý quan trọng cần nhớ để đi thi.', '🧠 Ý cần nhớ / Trắc nghiệm', 'bg-emerald-50 text-emerald-700 border-emerald-200', 'keypoints'], ['', '🎓 Học có hướng dẫn', 'bg-violet-50 text-violet-700 border-violet-200', 'guided']];
+    const AI_QUICK_VIDEO = [['Hãy lập mục lục nội dung video theo mốc thời gian, từ đầu đến cuối, không bỏ sót đoạn chính nào. Mở đầu bằng 1–2 câu tổng quan. Sau đó trình bày mục lục PHÂN CẤP có đánh số như mục lục sách: mục lớn đánh số 1., 2., 3., …; mục con đánh số 1.1, 1.2, …, 2.1, 2.2, … (tối đa 2 cấp; tách mục con khi một mục lớn có nhiều ý rõ rệt). Mỗi mục một dòng, đúng dạng: <số thứ tự> [mm:ss] Tên mục — các ý chính của đoạn đó trong 3–4 câu đầy đủ ý (nêu lần lượt các ý chính nối tiếp nhau trong đoạn, giữ lại thuật ngữ, số liệu quan trọng; mục lớn lẫn mục con đều viết 3–4 câu). Mốc thời gian tăng dần theo thứ tự số. Không thêm phần kết luận hay ý cần nhớ ở cuối. Mục lục chỉ tóm lược nội dung video nên KHÔNG trích dẫn tài liệu, không gắn nguồn hay link.', '📑 Mục lục theo thời gian', 'bg-indigo-50 text-indigo-700 border-indigo-200', 'timeline'], ['Giải thích dễ hiểu đoạn mình đang xem.', '🎯 Giải thích đoạn đang xem', 'bg-rose-50 text-rose-700 border-rose-200', 'explain'], ['', '🖼️ Hỏi hình ảnh đang hiện', 'bg-amber-50 text-amber-700 border-amber-200', 'frame'], ['', '📝 Trắc nghiệm', 'bg-emerald-50 text-emerald-700 border-emerald-200', 'vidquiz'], ['', '🎓 Học có hướng dẫn', 'bg-violet-50 text-violet-700 border-violet-200', 'guided']];
     function aiRenderQuick(list) {
         aiState.guided = false;
         const box = document.getElementById('ai-quick'); box.innerHTML = '';
@@ -12796,7 +12863,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             document.getElementById('ai-title').textContent = '🤖 Hỏi AI về video này';
             aiRenderQuick(AI_QUICK_VIDEO); aiState.lastExplain = ''; aiState.pendingExplain = false;
             document.getElementById('ai-messages').innerHTML = '';
-            const _f1 = aiAddMsg('ai', 'Mình đã xem video "' + (info.title || 'video') + '". Bạn muốn mình lập mục lục theo mốc thời gian, giải thích đoạn đang xem, hỏi về hình ảnh đang hiện trên màn hình, hay hỏi điều gì khác? Bấm 🖼️ để gửi ảnh cho mình xem, hoặc 🎙️ để nói chuyện trực tiếp.'); aiQuotaApply();
+            const _f1 = aiAddMsg('ai', 'Chào bạn! Mình là gia sư Răng Hàm Mặt của bạn và đã xem video "' + (info.title || 'video') + '". Bạn muốn gia sư lập mục lục theo mốc thời gian, giải thích đoạn đang xem, hỏi về hình ảnh đang hiện trên màn hình, tạo trắc nghiệm, hay học có hướng dẫn? Bấm 🖼️ để gửi ảnh cho gia sư xem, hoặc 🎙️ để nói chuyện trực tiếp.'); aiQuotaApply();
         }
         aiPlaceModal(); aiScrollBottom();
     }
@@ -12814,7 +12881,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             document.getElementById('ai-title').textContent = '🤖 Hỏi AI về câu này';
             aiRenderQuick(AI_QUICK_QUIZ);
             document.getElementById('ai-messages').innerHTML = '';
-            const _f2 = aiAddMsg('ai', 'Chào bạn! Mình sẽ giúp giải thích câu vừa làm. Bấm gợi ý bên dưới, gõ câu hỏi, hoặc bấm 🎙️ để nói chuyện trực tiếp.'); aiQuotaApply();
+            const _f2 = aiAddMsg('ai', 'Chào bạn! Mình là gia sư Răng Hàm Mặt của bạn và sẽ giúp giải thích câu vừa làm. Bấm gợi ý bên dưới, gõ câu hỏi, hoặc bấm 🎙️ để nói chuyện trực tiếp.'); aiQuotaApply();
         }
         aiPlaceModal(); aiScrollBottom();
     }
@@ -12851,13 +12918,14 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         aiSend();
     }
     function aiQuick(t, id) { if (aiState.busy) { showToast('AI đang trả lời, hãy đợi một chút rồi bấm lại'); return; } if (!aiAnyKey()) { aiShowGate(); return; }
+        if (id === 'vidquiz') { bkQzChooser(); return; }
         if (id === 'deep' || id === 'guided') {
             if (aiState.live && aiState.live.ready) { showToast('Hãy tắt nói trực tiếp (🎙️) rồi thử lại'); return; }
             if (id === 'deep') aiDeepResearch('', '🔬 Tìm hiểu sâu (Deep Research Mini)'); else aiGuidedStart();
             return;
         }
         aiState.guided = false;
-        if (id === 'frame' && aiState.mode === 'video') { aiFrameAsk(); return; } aiState.fullNext = (aiState.mode === 'quiz'); aiState.pendingExplain = (id === 'explain' && aiState.mode === 'video'); aiState.timelineNext = (id === 'timeline' && aiState.mode === 'video'); aiState.keyNext = (id === 'keypoints' && aiState.mode === 'video'); document.getElementById('ai-input').value = t; aiSend(); }
+        if (id === 'frame' && aiState.mode === 'video') { aiFrameAsk(); return; } aiState.fullNext = (aiState.mode === 'quiz'); aiState.pendingExplain = (id === 'explain' && aiState.mode === 'video'); aiState.timelineNext = (id === 'timeline' && aiState.mode === 'video'); aiState.keyNext = false; document.getElementById('ai-input').value = t; aiSend(); }
     /* Video: nút "Tìm hiểu sâu hơn" chỉ hiện sau khi bấm "Giải thích đoạn đang xem", và đào sâu đúng nội dung vừa giải thích */
     function aiShowDeepBtn(bubble, txt) {
         const box = document.getElementById('ai-messages'); if (!box || !bubble) return;
@@ -13440,9 +13508,9 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
 
     /* ===================== HỌC TẬP CÓ HƯỚNG DẪN (Guided Learning, gợi mở kiểu Socrates) ===================== */
     const AI_GUIDED_RULES = [
-        'Bạn là Gia sư AI theo chế độ HỌC TẬP CÓ HƯỚNG DẪN (Guided Learning) của Gemini: dẫn người học khám phá một chủ đề TỪ TỪ, từng chặng nhỏ, bằng tiếng Việt thân thiện, chuyên ngành Răng Hàm Mặt. Định dạng: KHÔNG dùng LaTeX hay ký hiệu $...$; không dùng tiêu đề bắt đầu bằng #; chỉ dùng **in đậm** và gạch đầu dòng "- ".',
+        'Bạn đóng vai trò là giáo sư đầu ngành Răng Hàm Mặt về mặt chuyên môn dữ liệu, nhưng khi xưng hô với người học thì luôn nhận mình là gia sư Răng Hàm Mặt theo chế độ HỌC TẬP CÓ HƯỚNG DẪN (Guided Learning): dẫn người học khám phá chủ đề TỪ TỪ, từng chặng nhỏ, bằng tiếng Việt thân thiện. Định dạng: KHÔNG dùng LaTeX hay ký hiệu $...$; không dùng tiêu đề bắt đầu bằng #; chỉ dùng **in đậm** và gạch đầu dòng "- ".',
         'CÁCH LÀM:',
-        '1. LƯỢT ĐẦU (người học vừa bật chế độ này): xác định CHỦ ĐỀ CHÍNH của câu hỏi / đoạn video. Viết ĐÚNG MỘT đoạn văn tổng quan (khoảng 80–120 từ) về vấn đề đang được hỏi: nó là gì, vì sao quan trọng, các ý chính (chưa đi sâu chi tiết), rồi để người học chọn các hướng khám phá.',
+        '1. LƯỢT ĐẦU (người học vừa bật chế độ này): xác định CHỦ ĐỀ CHÍNH của câu hỏi / bài giảng video. MỞ ĐẦU bằng mục **🧠 Những ý quan trọng cần nhớ để đi thi** (liệt kê đầy đủ, súc tích các ý cốt lõi, mốc số liệu, tiêu chuẩn chẩn đoán / điều trị quan trọng nhất để đi thi). Tiếp theo, viết MỘT đoạn văn tổng quan ngắn (khoảng 60–100 từ) kết nối các ý đó thành bức tranh chung, rồi để người học chọn các hướng khám phá sâu hơn.',
         '2. KHI NGƯỜI HỌC CHỌN MỘT HOẶC NHIỀU HƯỚNG (tin nhắn dạng "Mình chọn hướng 1: ...; hướng 3: ..."): giải thích TẤT CẢ các hướng đã chọn trong cùng một câu trả lời, mỗi hướng một mục riêng bắt đầu bằng dòng **Hướng N: tiêu đề**, mỗi mục ngắn gọn dễ hiểu (khoảng 100–150 từ), có thể kèm ví dụ lâm sàng ngắn. Không giảng hướng người học không chọn. Nếu người học gõ câu hỏi riêng thì trả lời câu đó một chặng ngắn. Sau đó để người học chọn các hướng tiếp theo.',
         '3. BA HƯỚNG ĐỀ XUẤT mỗi lượt phải khác nhau, bám sát chủ đề chính, đi sâu dần hoặc mở rộng hợp lý, KHÔNG lặp lại hướng đã học. Sau vài chặng có thể có một hướng "ôn nhanh / tự kiểm tra".',
         '4. Đây là khám phá tự do: KHÔNG đặt câu trắc nghiệm đúng / sai, KHÔNG có đáp án đúng. Ba lựa chọn 1, 2, 3 chỉ là ba hướng đi tiếp.',
@@ -13793,7 +13861,13 @@ function bkQzNavPaint() {
     const okA = !!(bkQz.done[bkQz.idx] && bkQz.done[bkQz.idx].ok); const ans = !!bkQz.done[bkQz.idx]; nav.querySelector('[data-q="review"]').classList.toggle('hidden', !ans); nav.querySelector('[data-q="expl"]').classList.toggle('hidden', !ans); nav.querySelector('[data-q="review"]').disabled = false;
 }
 function bkQzChooser() {
-    if (!bkCur || !bkText || !bkText.trim()) { showToast('Hãy mở một chương sách trước'); return; }
+    const isVid = aiState.mode === 'video';
+    if (isVid) {
+        const v = aiState.video, d = v && activeYtPlayers[v.playerId];
+        if (!d) { showToast('Hãy mở một video bài giảng trước'); return; }
+    } else if (!bkCur || !bkText || !bkText.trim()) {
+        showToast('Hãy mở một chương sách trước'); return;
+    }
     if (aiState.busy) { showToast('AI đang trả lời, hãy đợi một chút rồi bấm lại'); return; }
     const box = document.getElementById('ai-messages'); if (!box) return;
     const old = document.getElementById('bk-qz-choose'); if (old) old.remove();
@@ -13814,20 +13888,44 @@ function bkQzChooser() {
 }
 async function bkQzStart(n, lvl) {
     if (!aiAnyKey()) { aiShowGate(); return; }
-    const titles = bkSecs.filter(x => x.title).map(x => x.title).slice(0, 120);
+    const isVid = aiState.mode === 'video';
     const lvlTxt = { easy: 'dễ (kiến thức nhận biết trực tiếp)', mid: 'vừa (hiểu và so sánh)', hard: 'khó (vận dụng, phân biệt tinh vi)' }[lvl];
-    const sys = 'Bạn là giảng viên ra đề Răng Hàm Mặt. Dựa CHỈ vào nội dung chương sách được cung cấp, tạo đúng ' + n + ' câu hỏi trắc nghiệm 4 đáp án (chỉ 1 đáp án đúng), mức độ ' + lvlTxt + '. Viết bằng tiếng Việt. Chỉ trả về MỘT đối tượng JSON dạng {"questions":[{"q":"<câu hỏi>","o":["<A>","<B>","<C>","<D>"],"a":<chỉ số đáp án đúng 0-3>,"x":"<giải thích ngắn 1-3 câu>","sec":"<tiêu đề mục liên quan nhất, chép đúng từ danh sách mục; để rỗng nếu không có>"}]}. Các câu hỏi không trùng ý; đáp án đúng đặt ngẫu nhiên; ĐỘ DÀI 4 ĐÁP ÁN PHẢI GẦN BẰNG NHAU: mỗi đáp án nhiễu dài ngang đáp án đúng (chênh lệch số ký tự không quá khoảng 15%), cùng văn phong, cùng cấu trúc ngữ pháp, cùng mức chi tiết; không để đáp án đúng ngắn hơn hoặc dài hơn rõ rệt so với các đáp án còn lại; không dùng "tất cả đều đúng". Danh sách mục của chương: ' + JSON.stringify(titles);
-    const box = document.getElementById('ai-messages');
-    bkQzTitle('📝 Trắc nghiệm'); aiEnPanelOpen(); const bd0 = document.querySelector('#ai-en-panel .ai-en-body'); if (bd0) bd0.innerHTML = '<div class="ai-en-empty">⏳ Đang soạn câu hỏi trắc nghiệm…</div>'; aiAddMsg('sys', '⏳ Đang soạn ' + n + ' câu trắc nghiệm (' + lvlTxt.split(' ')[0] + ')…');
+    bkQzTitle('📝 Trắc nghiệm'); aiEnPanelOpen();
+    const bd0 = document.querySelector('#ai-en-panel .ai-en-body');
+    if (bd0) bd0.innerHTML = '<div class="ai-en-empty">⏳ Đang soạn câu hỏi trắc nghiệm…</div>';
+    aiAddMsg('sys', '⏳ Đang soạn ' + n + ' câu trắc nghiệm (' + lvlTxt.split(' ')[0] + ')…');
     try {
-        const r = await window.bkQzCallAI(sys, [{ text: 'NỘI DUNG CHƯƠNG SÁCH:\n' + bkText.slice(0, 60000) }]);
+        let r = null;
+        if (isVid) {
+            const v = aiState.video, d = v && activeYtPlayers[v.playerId];
+            if (!d) { showToast('Hãy mở video trước'); return; }
+            const useText = d.srtState === 'ready' && (d.srtCues || []).length > 0;
+            let tx = useText && window.ytTranscriptOf ? window.ytTranscriptOf(d, 0, 0) : '';
+            if (tx.length > 120000) tx = tx.slice(0, 120000);
+            const sys = 'Bạn là giáo sư đầu ngành Răng Hàm Mặt ra đề thi. Dựa CHỈ vào nội dung bài giảng video được cung cấp, tạo đúng ' + n + ' câu hỏi trắc nghiệm 4 đáp án (chỉ 1 đáp án đúng), mức độ ' + lvlTxt + '. Viết bằng tiếng Việt. Chỉ trả về MỘT đối tượng JSON dạng {"questions":[{"q":"<câu hỏi>","o":["<A>","<B>","<C>","<D>"],"a":<chỉ số đáp án đúng 0-3>,"x":"<giải thích ngắn 1-3 câu>","t":<mốc thời gian tính bằng GIÂY (số nguyên) trong video nơi giảng nội dung của câu hỏi này>}]}. Các câu hỏi không trùng ý; đáp án đúng đặt ngẫu nhiên; ĐỘ DÀI 4 ĐÁP ÁN PHẢI GẦN BẰNG NHAU (chênh lệch không quá 15%); không dùng "tất cả đều đúng"; câu hỏi tự chứa đủ thông tin.';
+            const parts = useText ? [{ text: 'LỜI GIẢNG VIDEO (kèm mốc thời gian):\n' + tx }] : [{ fileData: { fileUri: 'https://www.youtube.com/watch?v=' + (d.videoId || (v && v.yt) || '') } }, { text: 'Hãy xem video bài giảng này và tạo câu hỏi kèm mốc giây "t" chính xác.' }];
+            r = await window.bkQzCallAI(sys, parts);
+        } else {
+            const titles = bkSecs.filter(x => x.title).map(x => x.title).slice(0, 120);
+            const sys = 'Bạn là giáo sư đầu ngành Răng Hàm Mặt ra đề thi. Dựa CHỈ vào nội dung chương sách được cung cấp, tạo đúng ' + n + ' câu hỏi trắc nghiệm 4 đáp án (chỉ 1 đáp án đúng), mức độ ' + lvlTxt + '. Viết bằng tiếng Việt. Chỉ trả về MỘT đối tượng JSON dạng {"questions":[{"q":"<câu hỏi>","o":["<A>","<B>","<C>","<D>"],"a":<chỉ số đáp án đúng 0-3>,"x":"<giải thích ngắn 1-3 câu>","sec":"<tiêu đề mục liên quan nhất, chép đúng từ danh sách mục; để rỗng nếu không có>"}]}. Các câu hỏi không trùng ý; đáp án đúng đặt ngẫu nhiên; ĐỘ DÀI 4 ĐÁP ÁN PHẢI GẦN BẰNG NHAU: mỗi đáp án nhiễu dài ngang đáp án đúng (chênh lệch số ký tự không quá khoảng 15%), cùng văn phong, cùng cấu trúc ngữ pháp, cùng mức chi tiết; không để đáp án đúng ngắn hơn hoặc dài hơn rõ rệt so với các đáp án còn lại; không dùng "tất cả đều đúng". Danh sách mục của chương: ' + JSON.stringify(titles);
+            r = await window.bkQzCallAI(sys, [{ text: 'NỘI DUNG CHƯƠNG SÁCH:\n' + bkText.slice(0, 60000) }]);
+        }
         const qs = ((r && r.questions) || []).filter(q => q && q.q && Array.isArray(q.o) && q.o.length === 4 && typeof q.a === 'number' && q.a >= 0 && q.a < 4);
         if (!qs.length) { showToast('Chưa tạo được câu hỏi, hãy thử lại'); return; }
-        bkQz = { items: qs.slice(0, n).map(q => { const si = bkSecs.findIndex(x => x.title === q.sec); return { q: String(q.q), o: q.o.map(String), a: q.a, x: String(q.x || ''), si: si }; }), idx: 0, done: {}, ok: 0 };
+        bkQz = {
+            mode: isVid ? 'video' : 'book',
+            pid: isVid && aiState.video ? aiState.video.playerId : '',
+            items: qs.slice(0, n).map(q => {
+                const si = !isVid ? bkSecs.findIndex(x => x.title === q.sec) : -1;
+                const ts = isVid && q.t != null && isFinite(Number(q.t)) ? Math.max(0, Math.round(Number(q.t))) : null;
+                return { q: String(q.q), o: q.o.map(String), a: q.a, x: String(q.x || ''), si: si, ts: ts };
+            }),
+            idx: 0, done: {}, ok: 0
+        };
         bkQzTitle('📝 Trắc nghiệm');
         const p = aiEnPanelOpen(); if (!p) return;
         bkQzRender();
-        aiAddMsg('ai', '📝 Đã tạo ' + bkQz.items.length + ' câu trắc nghiệm. Chọn đáp án ở cửa sổ phụ “Trắc nghiệm”; đáp án đúng được +20 điểm.');
+        aiAddMsg('ai', '📝 Gia sư đã tạo ' + bkQz.items.length + ' câu trắc nghiệm. Bạn chọn đáp án ở cửa sổ phụ “Trắc nghiệm” nhé; mỗi câu đúng được +20 điểm.');
     } catch (e) { showToast('Chưa tạo được câu hỏi: ' + ((e && (e.friendly || e.message)) || '')); }
 }
 function bkQzRender() {
@@ -13913,8 +14011,36 @@ async function bkQzLocateAndGo(it) {
     bkApplyHlAll();
     await bkScrollToPos(loc.s); bkApplyHlAll(); setTimeout(bkApplyHlAll, 400); { const T = bkText; let a = loc.s, b = loc.e; for (let k = 0; k < 2; k++) { const p = T.lastIndexOf('. ', a - 2); if (p < 0 || a - p > 700) break; a = p + 2; } for (let k = 0; k < 2; k++) { const q = T.indexOf('. ', b); if (q < 0 || q - b > 700) break; b = q + 1; } const tx = T.slice(a, b).replace(/\s+/g, ' ').trim().slice(0, 1400); bkOpenAi(); bkRunTr(tx, ''); }
 }
+async function bkQzVideoLocateAndGo(it) {
+    const pid = (bkQz && bkQz.pid) || (aiState.video && aiState.video.playerId);
+    const d = pid && activeYtPlayers[pid];
+    if (!d || !d.player) { showToast('Không tìm thấy trình phát video'); return; }
+    let sec = (typeof it.ts === 'number' && isFinite(it.ts) && it.ts >= 0) ? it.ts : null;
+    if (sec === null && aiAnyKey()) {
+        try {
+            showToast('⏳ AI đang định vị mốc thời gian trong video…');
+            const useText = d.srtState === 'ready' && (d.srtCues || []).length > 0;
+            let tx = useText && window.ytTranscriptOf ? window.ytTranscriptOf(d, 0, 0) : '';
+            if (tx.length > 100000) tx = tx.slice(0, 100000);
+            const sys = 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Hãy tìm đúng mốc thời gian (tính bằng GIÂY từ đầu video, số nguyên) nơi giảng nội dung trả lời cho câu hỏi và đáp án đúng dưới đây. Chỉ trả về MỘT đối tượng JSON {"t":<số giây>}, không viết gì khác.';
+            const qTxt = 'CÂU HỎI: ' + it.q + '\nĐÁP ÁN ĐÚNG: ' + (it.o[it.a] || '') + '\nGIẢI THÍCH: ' + (it.x || '');
+            const parts = useText ? [{ text: qTxt + '\n\nLỜI GIẢNG (kèm mốc [mm:ss]):\n' + tx }] : [{ fileData: { fileUri: 'https://www.youtube.com/watch?v=' + (d.videoId || (aiState.video && aiState.video.yt) || '') } }, { text: qTxt }];
+            const r = await window.bkQzCallAI(sys, parts);
+            if (r && r.t != null && isFinite(Number(r.t))) { sec = Math.max(0, Math.round(Number(r.t))); it.ts = sec; }
+        } catch (e) {}
+    }
+    if (sec === null) { showToast('Không định vị được mốc thời gian của câu này trong video'); return; }
+    try { d.player.seekTo(sec, true); d.player.playVideo(); } catch (e) {}
+    showToast('⏩ Đã tua video tới mốc ' + aiFmtTime(sec));
+    if (!aiModalEl.classList.contains('ai-in-video')) {
+        closeAiTutor();
+        const w = document.getElementById('custom-wrapper-' + pid);
+        if (w && w.scrollIntoView) w.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+}
 function bkQzReview() {
     const it = bkQz.items[bkQz.idx]; if (!it) return;
+    if (aiState.mode === 'video' || (bkQz && bkQz.mode === 'video')) { bkQzVideoLocateAndGo(it); return; }
     bkQzLocateAndGo(it);
 }
 function bkQzExplain() {
