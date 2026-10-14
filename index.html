@@ -16968,7 +16968,19 @@ function openPop(mode, t) {
     function delTerm(t) {
         if (!t) return;
         if (!confirm('Xóa thuật ngữ "' + t.en + '"?')) return;
-        const a = anchor(); rd.terms.splice(rd.terms.indexOf(t), 1); save(); closePop(); repaginate(a === t ? null : a);
+        const idx = rd.terms.indexOf(t);
+        const rowEl = document.querySelector('#dict-modal .rd-row[data-k="' + idx + '"]');
+        const finishDel = () => {
+            const a = anchor();
+            const curIdx = rd.terms.indexOf(t);
+            if (curIdx >= 0) rd.terms.splice(curIdx, 1);
+            save(); closePop(); repaginate(a === t ? null : a);
+            toast('🗑️ Đã xóa "' + t.en + '"');
+        };
+        if (rowEl) {
+            rowEl.classList.add('ios-row-deleting');
+            setTimeout(finishDel, 240);
+        } else finishDel();
     }
 
     /* ---------- ÔN TẬP: flashcard / trắc nghiệm có ngữ cảnh ---------- */
@@ -17663,7 +17675,7 @@ function openPop(mode, t) {
 #note-modal .rd-pg.rd-L{box-shadow:inset -28px 0 30px -24px rgba(60,40,10,.38)}
 #note-modal .rd-pg.rd-R{box-shadow:inset 28px 0 30px -24px rgba(60,40,10,.38)}
 #note-modal .rd-book.one .rd-pg{box-shadow:none}
-#note-modal .rd-book.one #rd-R,#note-modal .rd-book.one .rd-spine{display:none}
+#note-modal .rd-book.one #nt-R,#note-modal .rd-book.one .rd-spine{display:none!important}
 #note-modal .rd-spine{position:absolute;left:50%;top:0;bottom:0;width:46px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,rgba(70,45,10,.2) 44%,rgba(70,45,10,.34) 50%,rgba(70,45,10,.2) 56%,transparent);pointer-events:none;z-index:6}
 #note-modal .rd-hd{position:absolute;left:24px;right:16px;top:16px;display:flex;align-items:center;gap:10px;flex-wrap:nowrap;z-index:2}
 #note-modal .rd-ttl{font-size:clamp(14px,min(1.7vw,2.8vh),26px);font-weight:900;color:#115e59;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
@@ -18128,9 +18140,17 @@ function moveEdActs() {
     }
     function delInline() {
         const n = nt.ed; if (!n || !confirm('Xóa ghi chú "' + n.t + '"?')) return;
-        nt.notes = nt.notes.filter(x => x !== n);
-        closePop(); nt.edId = null; nt.ed = null; nt.edIm = null; nt.edB = ''; nt.edRange = null;
-        save(); repaginate(null);
+        const edEl = document.querySelector('#note-modal .nt-editing');
+        const finishDel = () => {
+            nt.notes = nt.notes.filter(x => x !== n);
+            closePop(); nt.edId = null; nt.ed = null; nt.edIm = null; nt.edB = ''; nt.edRange = null;
+            save(); repaginate(null);
+            toast('🗑️ Đã xóa ghi chú');
+        };
+        if (edEl) {
+            edEl.classList.add('ios-row-deleting');
+            setTimeout(finishDel, 240);
+        } else finishDel();
     }
     function openNewNote() {
         if (nt.lock) return; if (nt.edId) { toast('Lưu hoặc hủy ghi chú đang sửa trước'); return; }
@@ -18481,7 +18501,7 @@ function moveEdActs() {
             let sx = 0, sy = 0; const bk = $('nt-book');
             bk.addEventListener('touchstart', e => { const t = e.touches[0]; sx = t.clientX; sy = t.clientY; }, { passive: true });
             bk.addEventListener('touchend', e => { const t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy; if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5) step(dx < 0 ? 1 : -1); }, { passive: true });
-            let rt = 0; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (!isOpen() || nt.lock) return; nt.per = window.rhmPer(); $('nt-book').classList.toggle('one', nt.per === 1); $('nt-L').innerHTML = pageHTML(nt.cur, 'L'); repaginate(null); }, 160); });
+            let rt = 0; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (!isOpen() || nt.lock) return; nt.per = window.rhmPer(); $('nt-book').classList.toggle('one', nt.per === 1); if (nt.per === 1) $('nt-R').innerHTML = ''; $('nt-L').innerHTML = pageHTML(nt.cur, 'L'); repaginate(null); }, 160); });
         }
         const box = $('ai-messages');
         if (box) {
@@ -18579,9 +18599,13 @@ function moveEdActs() {
     };
     /* Số trang hiển thị: điện thoại luôn 1 trang (kể cả xoay ngang hoặc bật "trang web cho máy tính"), PC/máy tính bảng lớn 2 trang */
     window.rhmPer = function () {
-        var coarse = false, small = false;
-        try { coarse = matchMedia('(pointer:coarse)').matches; small = Math.min(screen.width, screen.height) < 820; } catch (e) {}
-        return (window.innerWidth < 760 || (coarse && small)) ? 1 : 2;
+        var coarse = false, small = false, portrait = false;
+        try {
+            coarse = matchMedia('(pointer:coarse)').matches;
+            small = Math.min(screen.width, screen.height) < 820;
+            portrait = matchMedia('(orientation: portrait)').matches || window.innerHeight > window.innerWidth;
+        } catch (e) {}
+        return (window.innerWidth < 760 || portrait || (coarse && small)) ? 1 : 2;
     };
     /* Từ điển / Sổ ghi chú mở trên hộp chat: chặn mọi chạm lọt xuống nền phía sau */
     var IDS = ['dict-modal', 'note-modal'], held = [];
@@ -20906,6 +20930,260 @@ html.rhm-dragging,html.rhm-dragging body{-webkit-user-select:none;user-select:no
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', scanAll);
   else scanAll();
   new MutationObserver(function () { scanAll(); }).observe(document.body, { childList: true, subtree: true });
+})();
+</script>
+<style id="rhm-patch-v3-ios-buttons">
+/* 1. Bảo đảm Sổ ghi chú trên mobile màn dọc luôn chỉ hiện 1 trang */
+@media (max-width: 759px), (orientation: portrait) {
+  #note-modal #nt-R,
+  #note-modal .rd-spine {
+    display: none !important;
+  }
+  #note-modal .rd-pg.rd-L {
+    box-shadow: none !important;
+  }
+  #note-modal .rd-pg.rd-L .rd-body,
+  #note-modal .rd-pg.rd-L .rd-hd {
+    left: var(--bm-o) !important;
+    right: var(--bm-o) !important;
+  }
+}
+
+/* 2. Keyframes đàn hồi iOS cho nút bấm, chọn đáp án, thêm/xóa mục */
+@keyframes iosBtnRelease {
+  0%   { transform: scale(0.93); }
+  55%  { transform: scale(1.035); }
+  100% { transform: scale(1); }
+}
+@keyframes iosOptCorrect {
+  0%   { transform: scale(0.96); }
+  45%  { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+@keyframes iosOptWrong {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-6px); }
+  40%      { transform: translateX(6px); }
+  60%      { transform: translateX(-4px); }
+  80%      { transform: translateX(4px); }
+}
+@keyframes iosRowDelete {
+  0%   { opacity: 1; transform: scale(1) translateX(0); max-height: 220px; }
+  100% { opacity: 0; transform: scale(0.92) translateX(-24px); max-height: 0; padding-top: 0; padding-bottom: 0; margin: 0; border-width: 0; }
+}
+@keyframes iosRowAdded {
+  0%   { opacity: 0; transform: scale(0.92) translateY(8px); background: #fde68a; }
+  45%  { opacity: 1; transform: scale(1.02) translateY(0); background: #fde68a; }
+  100% { opacity: 1; transform: scale(1) translateY(0); background: transparent; }
+}
+@keyframes iosFeedbackReveal {
+  0%   { opacity: 0; transform: translateY(10px) scale(0.97); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* 3. Áp dụng chuyển động nhấn & thả mượt mà như iPhone cho TẤT CẢ các nút bấm trong app */
+button,
+.btn,
+.option-btn,
+.qz-op,
+.bk-qz-opt,
+.yt-trial .to,
+.rd-pbtn,
+.rd-ab,
+.rd-tab,
+.rd-rb,
+.rd-nav,
+.rd-x,
+.rv-o,
+.rv-x,
+.ws-chip,
+.ws-btn,
+.pg-b,
+.nt-ed-btn,
+.nt-pen,
+.nt-i,
+.nt-sortb,
+.hs-b,
+.rhm-s,
+.rhm-bg,
+.rhm-x,
+.rd-hit,
+#topic-grid > button,
+#monhoc-grid > div,
+#phanmon-grid > div,
+#emblems-grid > div,
+.bk-book {
+  transition: transform 0.24s cubic-bezier(0.32, 0.72, 0, 1),
+              background-color 0.2s ease,
+              border-color 0.2s ease,
+              box-shadow 0.22s ease,
+              opacity 0.2s ease !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Trạng thái đang chạm / nhấn giữ (Press-in) */
+button:not(:disabled):active,
+.option-btn:not(:disabled):active,
+.qz-op:not(:disabled):active,
+.bk-qz-opt:not(:disabled):active,
+.yt-trial .to:not(:disabled):active,
+.rd-pbtn:not(:disabled):active,
+.rd-ab:not(:disabled):active,
+.rd-tab:not(:disabled):active,
+.rd-nav:not(:disabled):active,
+.rd-x:not(:disabled):active,
+.rv-o:not(:disabled):active,
+.rv-x:not(:disabled):active,
+.ws-chip:not(:disabled):active,
+.ws-btn:not(:disabled):active,
+.pg-b:not(:disabled):active,
+.nt-ed-btn:not(:disabled):active,
+.nt-pen:not(:disabled):active,
+.nt-i:not(:disabled):active,
+.nt-sortb:not(:disabled):active,
+.hs-b:active,
+.rhm-s:active,
+.rhm-bg:active,
+.rhm-x:active,
+.rd-hit:active,
+#topic-grid > button:active,
+#monhoc-grid > div:active,
+#phanmon-grid > div:active,
+#emblems-grid > div:active,
+.ios-pressed {
+  transform: scale(0.94) !important;
+  transition-duration: 0.08s !important;
+}
+
+/* Trạng thái vừa buông tay (Spring Release) */
+.ios-spring-release {
+  animation: iosBtnRelease 0.34s cubic-bezier(0.22, 1.2, 0.36, 1) forwards;
+}
+
+/* Nút ruy-băng (Ribbon) trong Từ điển & Sổ ghi chú */
+#dict-modal .rd-rb, #note-modal .rd-rb {
+  transition: transform 0.28s cubic-bezier(0.22, 1.2, 0.36, 1),
+              height 0.28s cubic-bezier(0.22, 1.2, 0.36, 1),
+              background-color 0.2s ease !important;
+}
+#dict-modal .rd-rb:active, #note-modal .rd-rb:active {
+  transform: translateY(5px) scale(0.95) !important;
+}
+
+/* Dòng từ điển & ghi chú khi chạm chọn */
+#dict-modal .rd-row, #note-modal .nt-it {
+  transition: background-color 0.22s ease, transform 0.24s cubic-bezier(0.32, 0.72, 0, 1), box-shadow 0.22s ease;
+}
+#dict-modal .rd-row:active, #note-modal .nt-it:not(.nt-editing):active {
+  transform: scale(0.988);
+}
+
+/* 4. Animation khi chọn đáp án Trắc nghiệm (Đúng = Nảy đàn hồi, Sai = Rung nhẹ kiểu iOS) */
+.option-btn.correct,
+#dict-modal .qz-op.ok,
+#note-modal .qz-op.ok,
+.bk-qz-opt.ok,
+.yt-trial .to.ok {
+  animation: iosOptCorrect 0.4s cubic-bezier(0.22, 1.25, 0.36, 1) forwards !important;
+}
+.option-btn.incorrect,
+#dict-modal .qz-op.bad,
+#note-modal .qz-op.bad,
+.bk-qz-opt.bad,
+.yt-trial .to.bad {
+  animation: iosOptWrong 0.42s cubic-bezier(0.36, 0.07, 0.19, 0.97) forwards !important;
+}
+
+/* Khung giải thích / phản hồi sau khi chọn đáp án */
+#feedback-box:not(.hidden),
+#dict-modal .qz-fb,
+#note-modal .qz-fb,
+.bk-qz-res {
+  animation: iosFeedbackReveal 0.32s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+/* 5. Animation khi Thêm từ / Sửa từ (.flash) và khi Xóa từ / Xóa ghi chú (.ios-row-deleting) */
+#dict-modal .rd-row.flash,
+#note-modal .rd-row.flash {
+  animation: iosRowAdded 1.6s cubic-bezier(0.22, 1.15, 0.36, 1) forwards !important;
+}
+.ios-row-deleting {
+  overflow: hidden !important;
+  pointer-events: none !important;
+  animation: iosRowDelete 0.24s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+}
+</style>
+
+<script id="rhm-patch-v3-ios-tactile">
+(function () {
+  'use strict';
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var INTERACTIVE_SEL = [
+    'button:not(:disabled)',
+    '.btn',
+    '.option-btn:not(:disabled)',
+    '.qz-op:not(:disabled)',
+    '.bk-qz-opt:not(:disabled)',
+    '.yt-trial .to:not(:disabled)',
+    '.rd-pbtn:not(:disabled)',
+    '.rd-ab:not(:disabled)',
+    '.rd-tab:not(:disabled)',
+    '.rd-nav:not(:disabled)',
+    '.rd-x:not(:disabled)',
+    '.rv-o:not(:disabled)',
+    '.rv-x:not(:disabled)',
+    '.ws-chip:not(:disabled)',
+    '.ws-btn:not(:disabled)',
+    '.pg-b:not(:disabled)',
+    '.nt-ed-btn:not(:disabled)',
+    '.nt-pen:not(:disabled)',
+    '.nt-i:not(:disabled)',
+    '.nt-sortb:not(:disabled)',
+    '.hs-b',
+    '.rhm-s',
+    '.rhm-bg',
+    '.rhm-x',
+    '.rd-hit',
+    '#topic-grid > button',
+    '#monhoc-grid > div',
+    '#phanmon-grid > div',
+    '#emblems-grid > div'
+  ].join(',');
+
+  var activeBtn = null;
+
+  document.addEventListener('pointerdown', function (e) {
+    var t = e.target && e.target.closest ? e.target.closest(INTERACTIVE_SEL) : null;
+    if (!t) return;
+    /* Không áp hiệu ứng co giãn nút cho các phần tử có transform translate(-50%, -50%) riêng */
+    if (t.classList.contains('custom-yt-bigplay')) return;
+    activeBtn = t;
+    t.classList.remove('ios-spring-release');
+    t.classList.add('ios-pressed');
+  }, { passive: true, capture: true });
+
+  function releaseBtn() {
+    if (!activeBtn) return;
+    var el = activeBtn;
+    activeBtn = null;
+    el.classList.remove('ios-pressed');
+    if (!el.isConnected || el.disabled) return;
+    el.classList.remove('ios-spring-release');
+    void el.offsetWidth;
+    el.classList.add('ios-spring-release');
+    clearTimeout(el._iosRelT);
+    el._iosRelT = setTimeout(function () {
+      el.classList.remove('ios-spring-release');
+    }, 360);
+  }
+
+  document.addEventListener('pointerup', releaseBtn, { passive: true, capture: true });
+  document.addEventListener('pointercancel', function () {
+    if (!activeBtn) return;
+    activeBtn.classList.remove('ios-pressed');
+    activeBtn = null;
+  }, { passive: true, capture: true });
 })();
 </script>
 </html>
