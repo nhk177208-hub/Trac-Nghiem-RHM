@@ -13510,14 +13510,22 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     const AI_GUIDED_RULES = [
         'Bạn đóng vai trò là giáo sư đầu ngành Răng Hàm Mặt về mặt chuyên môn dữ liệu, nhưng khi xưng hô với người học thì luôn nhận mình là gia sư Răng Hàm Mặt theo chế độ HỌC TẬP CÓ HƯỚNG DẪN (Guided Learning): dẫn người học khám phá chủ đề TỪ TỪ, từng chặng nhỏ, bằng tiếng Việt thân thiện. Định dạng: KHÔNG dùng LaTeX hay ký hiệu $...$; không dùng tiêu đề bắt đầu bằng #; chỉ dùng **in đậm** và gạch đầu dòng "- ".',
         'CÁCH LÀM:',
-        '1. LƯỢT ĐẦU (người học vừa bật chế độ này): xác định CHỦ ĐỀ CHÍNH của câu hỏi / bài giảng video. MỞ ĐẦU bằng mục **🧠 Những ý quan trọng cần nhớ để đi thi** (liệt kê đầy đủ, súc tích các ý cốt lõi, mốc số liệu, tiêu chuẩn chẩn đoán / điều trị quan trọng nhất để đi thi). Tiếp theo, viết MỘT đoạn văn tổng quan ngắn (khoảng 60–100 từ) kết nối các ý đó thành bức tranh chung, rồi để người học chọn các hướng khám phá sâu hơn.',
+        '1. LƯỢT ĐẦU (người học vừa bật chế độ này): xác định CHỦ ĐỀ CHÍNH của nội dung đang học. Trình bày theo đúng trình tự 3 phần kết nối mượt mà với nhau (TUYỆT ĐỐI KHÔNG chào 2 lần):',
+        '   - Phần mở đầu (ngay trên đầu bong bóng): Chào người học (xưng là gia sư Răng Hàm Mặt) và viết MỘT đoạn văn tổng quan ngắn gọn (khoảng 60–90 từ) giới thiệu bức tranh chung cùng tầm quan trọng lâm sàng của chủ đề này, dẫn dắt tự nhiên xuống phần ý chính.',
+        '   - Phần tiếp theo: Viết tiêu đề **🧠 Những ý quan trọng cần nhớ** (TUYỆT ĐỐI KHÔNG có chữ "để đi thi"), bên dưới liệt kê đầy đủ, súc tích bằng gạch đầu dòng các ý cốt lõi, cơ chế, mốc số liệu, tiêu chuẩn chẩn đoán / điều trị quan trọng nhất, rồi viết 1 câu chuyển ý mượt mà sang phần chọn hướng khám phá.',
         '2. KHI NGƯỜI HỌC CHỌN MỘT HOẶC NHIỀU HƯỚNG (tin nhắn dạng "Mình chọn hướng 1: ...; hướng 3: ..."): giải thích TẤT CẢ các hướng đã chọn trong cùng một câu trả lời, mỗi hướng một mục riêng bắt đầu bằng dòng **Hướng N: tiêu đề**, mỗi mục ngắn gọn dễ hiểu (khoảng 100–150 từ), có thể kèm ví dụ lâm sàng ngắn. Không giảng hướng người học không chọn. Nếu người học gõ câu hỏi riêng thì trả lời câu đó một chặng ngắn. Sau đó để người học chọn các hướng tiếp theo.',
         '3. BA HƯỚNG ĐỀ XUẤT mỗi lượt phải khác nhau, bám sát chủ đề chính, đi sâu dần hoặc mở rộng hợp lý, KHÔNG lặp lại hướng đã học. Sau vài chặng có thể có một hướng "ôn nhanh / tự kiểm tra".',
         '4. Đây là khám phá tự do: KHÔNG đặt câu trắc nghiệm đúng / sai, KHÔNG có đáp án đúng. Ba lựa chọn 1, 2, 3 chỉ là ba hướng đi tiếp.',
         '5. KHÔNG tự viết danh sách 1, 2, 3 và KHÔNG viết câu hỏi mời chọn ở cuối thân bài: hệ thống tự hiển thị từ thẻ bên dưới.',
         'THẺ BẮT BUỘC ở cuối MỖI lượt: thêm đúng MỘT dòng cuối cùng theo mẫu [[HUONG: Tiêu đề 1 :: mô tả 1 || Tiêu đề 2 :: mô tả 2 || Tiêu đề 3 :: mô tả 3]]. Tiêu đề tối đa 8 từ; mô tả đúng 1 câu, tối đa 25 từ, nói rõ hướng đó sẽ tìm hiểu gì. Không nhắc đến thẻ này.'
     ].join('\n');
+    function aiBookContext() {
+        const title = bkCur ? ((bkCur.book ? bkCur.book + ' · ' : '') + bkCur.title) : 'Sách chuyên ngành RHM';
+        const recent = (bkLastTr && bkLastTr.trim()) ? bkLastTr.trim().slice(0, 10000) : String(bkText || '').slice(0, 15000);
+        return 'Chương sách: ' + title + '\nNội dung đoạn sách vừa dịch / đang đọc:\n' + recent;
+    }
     function aiGuidedPrompt() {
+        if (aiState.mode === 'book') return AI_GUIDED_RULES + '\n\nNGỮ CẢNH (nội dung sách người học vừa dịch / đang đọc; "chủ đề chính" là kiến thức trọng tâm của đoạn này):\n' + aiBookContext();
         const vid = aiState.mode === 'video';
         return AI_GUIDED_RULES + '\n\n' + (vid ? 'NGỮ CẢNH (bài giảng video; "chủ đề chính" là nội dung đoạn người học đang xem):\n' : 'NGỮ CẢNH (câu hỏi trắc nghiệm người học vừa làm; "chủ đề chính" là kiến thức trọng tâm nằm sau câu hỏi, không chỉ riêng câu này):\n') + (vid ? aiVideoContext() : aiBuildContext());
     }
@@ -13570,8 +13578,46 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     }
     function aiGuidedStart() {
         aiState.guided = true; aiState.fullNext = false; aiState.showText = '🎓 Học tập có hướng dẫn';
-        document.getElementById('ai-input').value = aiState.mode === 'video' ? 'Hãy bắt đầu học tập có hướng dẫn về chủ đề chính của đoạn video mình đang xem.' : 'Hãy bắt đầu học tập có hướng dẫn về chủ đề chính của câu hỏi này.';
+        document.getElementById('ai-input').value = aiState.mode === 'book'
+            ? 'Hãy bắt đầu học tập có hướng dẫn dựa trên nội dung đoạn sách vừa dịch:\n\n' + (bkLastTr ? bkLastTr.slice(0, 8000) : String(bkText || '').slice(0, 8000))
+            : (aiState.mode === 'video' ? 'Hãy bắt đầu học tập có hướng dẫn về chủ đề chính của đoạn video mình đang xem.' : 'Hãy bắt đầu học tập có hướng dẫn về chủ đề chính của câu hỏi này.');
         aiSend();
+    }
+    function bkGetActiveTrText(fromBubble) {
+        if (fromBubble) {
+            const run = fromBubble.dataset && fromBubble.dataset.bkRun;
+            const group = [fromBubble]; let nx = fromBubble.nextElementSibling;
+            if (run) while (nx && nx.dataset && nx.dataset.bkRun === run) { group.push(nx); nx = nx.nextElementSibling; }
+            const s = group.map(g => g._tr ? (g._tr.bi ? g._tr.bi.map(p => p.src + '\n' + p.vi).join('\n') : g._tr.t) : '').filter(Boolean).join('\n\n');
+            if (s) { bkLastTr = s; return s; }
+        }
+        if (bkLastTr && bkLastTr.trim()) return bkLastTr.trim();
+        if (bkSecSel >= 0 && bkSecs[bkSecSel] && bkSecs[bkSecSel].text) return bkSecs[bkSecSel].text.slice(0, 8000);
+        return String(bkText || '').slice(0, 8000);
+    }
+    function bkExplainQuick() {
+        if (aiState.busy) { showToast('AI đang trả lời, hãy đợi một chút rồi bấm lại'); return; }
+        if (!aiAnyKey()) { aiShowGate(); return; }
+        const src = bkGetActiveTrText();
+        if (!src) { showToast('Hãy dịch một đoạn sách trước để giải thích'); return; }
+        aiState.guided = false;
+        aiState.showText = '🎯 Giải thích đoạn vừa dịch';
+        document.getElementById('ai-input').value = 'Hãy giải thích thật dễ hiểu, rõ ràng các ý chính, thuật ngữ chuyên môn, cơ chế và ý nghĩa lâm sàng của đoạn sách vừa dịch dưới đây:\n\n' + src.slice(0, 8000);
+        aiSend();
+    }
+    function bkDeepQuick() {
+        if (aiState.busy) { showToast('AI đang trả lời, hãy đợi một chút rồi bấm lại'); return; }
+        if (!aiAnyKey()) { aiShowGate(); return; }
+        const src = bkGetActiveTrText();
+        if (!src) { showToast('Hãy dịch một đoạn sách trước để tìm hiểu sâu'); return; }
+        aiDeepResearch('Nội dung đoạn sách vừa dịch trong chương "' + ((bkCur && bkCur.title) || '') + '":\n' + src.slice(0, 6000), '🔬 Tìm hiểu sâu (Deep Research Mini)');
+    }
+    function bkGuidedQuick(fromBubble) {
+        if (aiState.busy) { showToast('AI đang trả lời, hãy đợi một chút rồi bấm lại'); return; }
+        if (!aiAnyKey()) { aiShowGate(); return; }
+        const src = bkGetActiveTrText(fromBubble);
+        if (!src) { showToast('Hãy dịch một đoạn sách trước'); return; }
+        aiGuidedStart();
     }
 
     /* ---- Live (nói trực tiếp): link dẫn kiểm chứng, tạo khi người dùng bấm "Hiện link dẫn" (tốn 1 lượt gọi, nên không tự chạy) ---- */
@@ -14112,14 +14158,21 @@ function bkQzExplain() {
     const mm = document.getElementById('ai-tutor-modal'); if (mm && (mm.classList.contains('hidden') || mm.classList.contains('ai-chat-off'))) { mm.classList.remove('hidden', 'ai-chat-off'); try { aiPlaceModal(); } catch (e) {} } inp.value = 'Hãy giải thích kỹ hơn câu trắc nghiệm này: "' + it.q + '" Đáp án đúng là ' + String.fromCharCode(65 + it.a) + '. ' + it.o[it.a] + '. Giải thích vì sao đáp án đúng, vì sao các đáp án còn lại sai, và kiến thức nền liên quan trong chương.';
     aiSend();
 }
-function aiEnsureQuickTts() {   // nút "Giảng bài" và "Đọc to" dính sát mép phải của khu nút nhanh
+function aiEnsureQuickTts() {   // các nút nhanh ở boxchat reader: Giải thích, Tìm hiểu sâu, Học có hướng dẫn, Đọc to
         const box = document.getElementById('ai-quickrow') || document.getElementById('ai-quick'); if (!box) return;
+        const isBook = !!(aiState.mode === 'book' && bkCur);
+        let eb = document.getElementById('bk-exp-quick');
+        if (!eb) { eb = document.createElement('button'); eb.id = 'bk-exp-quick'; eb.type = 'button'; eb.className = 'shrink-0 whitespace-nowrap text-xs font-bold border rounded-full px-3 py-1.5 bg-rose-50 text-rose-700 border-rose-200 shadow-sm active:scale-95'; eb.textContent = '🎯 Giải thích'; eb.title = 'Giải thích dễ hiểu đoạn vừa dịch'; eb.onclick = bkExplainQuick; }
+        eb.classList.toggle('hidden', !isBook);
+        let db = document.getElementById('bk-deep-quick');
+        if (!db) { db = document.createElement('button'); db.id = 'bk-deep-quick'; db.type = 'button'; db.className = 'shrink-0 whitespace-nowrap text-xs font-bold border rounded-full px-3 py-1.5 bg-sky-50 text-sky-700 border-sky-200 shadow-sm active:scale-95'; db.textContent = '🔬 Tìm hiểu sâu'; db.title = 'Tìm hiểu sâu (Deep Research Mini) về đoạn vừa dịch'; db.onclick = bkDeepQuick; }
+        db.classList.toggle('hidden', !isBook);
         let lb = document.getElementById('bk-lect-quick');
-        if (!lb) { lb = document.createElement('button'); lb.id = 'bk-lect-quick'; lb.type = 'button'; lb.className = 'shrink-0 whitespace-nowrap text-xs font-bold border rounded-full px-3 py-1.5 bg-amber-50 text-amber-800 border-amber-300 shadow-sm active:scale-95'; lb.textContent = '🎓 Giảng bài'; lb.title = 'Gọi Gemini Live giảng phần vừa dịch'; lb.onclick = bkLectureQuick; }
-        lb.classList.toggle('hidden', !(aiState.mode === 'book' && bkLastTr));
+        if (!lb) { lb = document.createElement('button'); lb.id = 'bk-lect-quick'; lb.type = 'button'; lb.className = 'shrink-0 whitespace-nowrap text-xs font-bold border rounded-full px-3 py-1.5 bg-violet-50 text-violet-700 border-violet-200 shadow-sm active:scale-95'; lb.textContent = '🎓 Học có hướng dẫn'; lb.title = 'Học tập có hướng dẫn từ đoạn vừa dịch'; lb.onclick = () => bkGuidedQuick(); }
+        lb.classList.toggle('hidden', !isBook);
         let b = document.getElementById('ai-tts-quick');
         if (!b) { b = document.createElement('button'); b.id = 'ai-tts-quick'; b.type = 'button'; b.className = 'shrink-0 whitespace-nowrap text-xs font-bold border rounded-full px-3 py-1.5 bg-violet-50 text-violet-700 border-violet-200 shadow-sm active:scale-95'; b.onclick = aiTtsQuick; }
-        box.appendChild(lb); box.appendChild(b); aiTtsSync(); bkQzEnsureBtn();
+        box.appendChild(eb); box.appendChild(db); box.appendChild(lb); box.appendChild(b); aiTtsSync(); bkQzEnsureBtn();
     }
     function aiEnsureTtsBars() {
         const box = document.getElementById('ai-messages'); if (!box) return;
@@ -14132,10 +14185,10 @@ function aiEnsureQuickTts() {   // nút "Giảng bài" và "Đọc to" dính sá
                 btn.onclick = () => aiTtsToggle(b, btn); bar.appendChild(btn); b.insertAdjacentElement('afterbegin', bar);
                 f = bar;
             }
-            // Bong bóng dịch sách: thêm nút 🎓 Giảng bài ngay bên trái nút đọc to
+            // Bong bóng dịch sách: thay nút Giảng bài cũ bằng nút 🎓 Học có hướng dẫn ngay bên trái nút đọc to
             if (b._tr && !f.querySelector('.bk-lect-btn')) {
-                const lb = document.createElement('button'); lb.type = 'button'; lb.className = 'bk-lect-btn text-xs font-bold border rounded-full px-2.5 py-1 bg-amber-50 text-amber-800 border-amber-300 active:scale-95 mr-1.5';
-                lb.textContent = '🎓 Giảng bài'; lb.onclick = () => bkLectureBubble(b);
+                const lb = document.createElement('button'); lb.type = 'button'; lb.className = 'bk-lect-btn text-xs font-bold border rounded-full px-2.5 py-1 bg-violet-50 text-violet-700 border-violet-200 active:scale-95 mr-1.5';
+                lb.textContent = '🎓 Học có hướng dẫn'; lb.onclick = () => bkGuidedQuick(b);
                 f.insertBefore(lb, f.firstChild);
             }
             const rawTxt = (b.textContent || '').trim();
@@ -16400,7 +16453,7 @@ window.isIOSDevice = function () {
     const newChip = () => { const n = nNew(); return n ? '<button type="button" class="rd-bdg rd-nwv" data-act="new-view" title="Xem các thuật ngữ mới vừa thêm">👁<span class="rd-nwl"> Xem thuật ngữ mới</span></button>' : ''; };
     function refreshChip() { const n = nNew(); document.querySelectorAll('#dict-modal .rd-nwc').forEach(b => { if (n) b.textContent = n + ' mới ✕'; else b.remove(); }); if (!n) document.querySelectorAll('#dict-modal .rd-nwv').forEach(b => b.remove()); if (rd.pop === 'newt') paintNewT(); }
     const SPK = '<button type="button" class="rd-spk" data-act="spk" title="Đọc to"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 6a9 9 0 0 1 0 12"/></svg></button>';
-    const enHTML = t => SPK + esc(t.en) + (t.s ? '<span class="rd-sv" title="Đã lưu">★</span>' : '') + (t.n ? '<span class="rd-nw">MỚI</span>' : '');
+    const enHTML = t => SPK + '<span class="rd-entxt">' + esc(t.en) + (t.s ? '<span class="rd-sv" title="Đã lưu">★</span>' : '') + (t.n ? '<span class="rd-nw">MỚI</span>' : '') + '</span>';
     function clearNew() {
         let c = 0; rd.terms.forEach(t => { if (t.n) { t.n = 0; c++; } }); if (!c) return; save();
         document.querySelectorAll('#dict-modal .rd-row.isnew').forEach(r => r.classList.remove('isnew'));
@@ -16479,8 +16532,9 @@ window.isIOSDevice = function () {
         const showHd = pos === 'L' || rd.per === 1;
         const fSet = rd.filterSet instanceof Set ? rd.filterSet : null;
         const totalShown = fSet ? fSet.size : rd.terms.length;
-        const backFilterBtn = fSet ? '<button type="button" class="rd-bdg" data-act="clr-filter" style="background:#dc2626;color:#fff;border:0;cursor:pointer;font-weight:800" title="Bỏ lọc chủ đề, trở về toàn bộ từ điển">↩ Trở về (' + esc(rd.filterTopic || 'Tất cả') + ')</button>' : '';
-        const hd = showHd ? '<div class="rd-hd"><span class="rd-ttl">Từ điển thuật ngữ RHM</span><span class="rd-bdg">Tổng ' + totalShown + ' · trang ' + Math.min(i + 1, tot) + '/' + tot + '</span>' + backFilterBtn + newChip() + '</div>' : '';
+        const backFilterBtn = fSet ? '<button type="button" class="rd-bdg" data-act="clr-filter" style="background:#dc2626;color:#fff;border:0;cursor:pointer;font-weight:800" title="Bỏ lọc chủ đề, trở về toàn bộ từ điển">↩ Trở về</button>' : '';
+        const topicChip = (fSet && rd.filterTopic) ? '<div class="rd-subtopic-row"><span class="rd-subtopic-tag">🧭 Chủ đề: ' + esc(capVi(rd.filterTopic)) + '</span></div>' : '';
+        const hd = showHd ? '<div class="rd-hd' + (topicChip ? ' has-sub' : '') + '"><div class="rd-hd-top"><span class="rd-ttl">Từ điển thuật ngữ RHM</span><span class="rd-bdg">Tổng ' + totalShown + ' · trang ' + Math.min(i + 1, tot) + '/' + tot + '</span>' + backFilterBtn + newChip() + '</div>' + topicChip + '</div>' : '';
         if (T === 0) {
             return i === 0 ? hd + '<div class="rd-body"><div class="rd-empty">Từ điển còn trống.<br>Khi đọc sách, bôi đen một đoạn rồi bấm 🌐 Dịch trong hộp chat — thuật ngữ RHM mới sẽ tự động được thêm vào đây. Bạn cũng có thể bấm ＋ để thêm tay.</div></div>' : '<div class="rd-body"></div>';
         }
@@ -16851,12 +16905,13 @@ function openPop(mode, t) {
             return;
         }
         rd.filterSet = new Set(hits);
-        rd.filterTopic = topic;
+        rd.filterTopic = capVi(topic);
         rd.cur = 0;
         closePop();
         repaginate(null);
-        toast('🔍 Đã lọc ' + hits.length + ' thuật ngữ thuộc chủ đề "' + topic + '"');
+        toast('🔍 Đã lọc ' + hits.length + ' thuật ngữ thuộc chủ đề "' + rd.filterTopic + '"');
     }
+    window.rdTriggerTopicSearch = doTopicSearch;
     function addTerm() {
         const en = cap1(clean($('rd-in-en').value)), vi = cleanVi($('rd-in-vi').value), pe = $('rd-in-pos'), p = cleanPos(pe ? pe.value : '');
         if (!en || !vi) { toast('Hãy nhập đủ tiếng Anh và tiếng Việt'); return; }
@@ -17411,10 +17466,19 @@ function openPop(mode, t) {
 })();
 </script>
 <style>
-/* ===== Từ điển: cột từ loại, nút loa, khung info co giãn ===== */
-#dict-modal .rd-row{grid-template-columns:minmax(0,1fr) 11% minmax(0,1fr)}
+/* ===== Từ điển: cột từ loại nằm đúng giữa trang như dropcap, 2 cột Anh - Việt cân đối, chữ Anh xuống dòng thẳng lề ===== */
+#dict-modal .rd-row{grid-template-columns:minmax(0,1fr) 54px minmax(0,1fr);column-gap:10px;align-items:start}
 #dict-modal .rd-cap{padding-left:0;text-align:center}
-#dict-modal .rd-ps{font-style:italic;font-weight:600;color:#7c3aed;font-size:.88em;align-self:center;overflow-wrap:anywhere}
+#dict-modal .rd-en{display:flex;align-items:flex-start;padding-right:4px}
+#dict-modal .rd-en .rd-spk{flex:none;margin-top:.16em;margin-right:6px}
+#dict-modal .rd-en .rd-entxt{flex:1;min-width:0;overflow-wrap:anywhere}
+#dict-modal .rd-ps{font-style:italic;font-weight:600;color:#7c3aed;font-size:.82em;align-self:center;text-align:center;justify-self:center;width:100%;overflow-wrap:anywhere}
+#dict-modal .rd-vi{padding-left:4px}
+#dict-modal .rd-hd.has-sub,#note-modal .rd-hd.has-sub{flex-direction:column;align-items:flex-start;gap:3px;top:10px}
+#dict-modal .rd-hd-top,#note-modal .rd-hd-top{display:flex;align-items:center;gap:10px;flex-wrap: nowrap;width:100%;min-width:0}
+.rd-subtopic-row{display:flex;align-items:center}
+.rd-subtopic-tag{display:inline-flex;align-items:center;gap:4px;background:#ddd6fe;color:#4c1d95;border:1px solid #a78bfa;font-weight:800;font-size:12px;padding:2px 10px;border-radius:999px;line-height:1.25;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+#note-modal .rd-subtopic-tag{background:#99f6e4;color:#115e59;border-color:#2dd4bf}
 #dict-modal .rd-spk{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;padding:0;margin-right:4px;border:0;background:none;color:#5b21b6;opacity:.25;vertical-align:-3px;cursor:pointer}
 #dict-modal .rd-spk:hover{opacity:.85}
 #dict-modal .rd-spk svg{width:15px;height:15px}
@@ -17716,9 +17780,11 @@ function openPop(mode, t) {
     function addCat(c) { c = cleanCat(c); if (c && !nt.cats.includes(c)) { nt.cats.push(c); saveMeta(); } return c; }
     const quickTitle = b => { const l = String(b || '').split('\n').map(x => x.trim()).find(Boolean) || 'Ghi chú'; return l.length > 48 ? l.slice(0, 48) + '…' : l; };
 
+    const capFirst = s => { s = String(s || '').trim(); return s ? s.charAt(0).toLocaleUpperCase('vi') + s.slice(1) : ''; };
     /* ---------- danh sách theo kiểu sắp xếp ---------- */
     function items() {
-        const L = nt.notes.slice(), out = [];
+        const fIds = nt.filterIds instanceof Set ? nt.filterIds : null;
+        const L = (fIds ? nt.notes.filter(n => fIds.has(n.id)) : nt.notes).slice(), out = [];
         if (nt.sort === 'old') L.sort((a, b) => a.ts - b.ts);
         else if (nt.sort === 'ttl') L.sort((a, b) => String(a.t).localeCompare(String(b.t), 'vi'));
         else if (nt.sort === 'cat') L.sort((a, b) => (subjOf(a) ? 0 : 1) - (subjOf(b) ? 0 : 1) || catName(a).localeCompare(catName(b), 'vi') || b.ts - a.ts);
@@ -17751,7 +17817,12 @@ function openPop(mode, t) {
     }
     function pageHTML(i, pos) {
         const T = nt.pages.length, tot = Math.max(T, 1), showHd = pos === 'L' || nt.per === 1;
-        const hd = showHd ? '<div class="rd-hd"><span class="rd-ttl">Sổ ghi chú</span><span class="rd-bdg">Tổng ' + nt.notes.length + ' · trang ' + Math.min(i + 1, tot) + '/' + tot + '</span>' + (nt.edId ? '<div class="nt-ed-acts"><button type="button" class="nt-ed-btn" data-act="n-imgpick">🖼️<span class="nt-lbl"> Thêm ảnh</span></button><button type="button" class="nt-ed-btn pri" data-act="ed-save">Lưu</button><button type="button" class="nt-ed-btn" data-act="ed-cancel">Hủy</button><button type="button" class="nt-ed-btn dan" data-act="ed-del">Xóa</button></div>' : '') + '</div>' : '';
+        const fIds = nt.filterIds instanceof Set ? nt.filterIds : null;
+        const totalShown = fIds ? fIds.size : nt.notes.length;
+        const backBtn = fIds ? '<button type="button" class="rd-bdg" data-act="n-clrfilter" style="background:#dc2626;color:#fff;border:0;cursor:pointer;font-weight:800" title="Bỏ lọc chủ đề, trở về toàn bộ sổ ghi chú">↩ Trở về</button>' : '';
+        const topicChip = (fIds && nt.filterTopic) ? '<div class="rd-subtopic-row"><span class="rd-subtopic-tag">🧭 Chủ đề: ' + esc(capFirst(nt.filterTopic)) + '</span></div>' : '';
+        const edActs = nt.edId ? '<div class="nt-ed-acts"><button type="button" class="nt-ed-btn" data-act="n-imgpick">🖼️<span class="nt-lbl"> Thêm ảnh</span></button><button type="button" class="nt-ed-btn pri" data-act="ed-save">Lưu</button><button type="button" class="nt-ed-btn" data-act="ed-cancel">Hủy</button><button type="button" class="nt-ed-btn dan" data-act="ed-del">Xóa</button></div>' : '';
+        const hd = showHd ? '<div class="rd-hd' + (topicChip ? ' has-sub' : '') + '"><div class="rd-hd-top"><span class="rd-ttl">Sổ ghi chú</span><span class="rd-bdg">Tổng ' + totalShown + ' · trang ' + Math.min(i + 1, tot) + '/' + tot + '</span>' + backBtn + edActs + '</div>' + topicChip + '</div>' : '';
         if (T === 0) return i === 0 ? hd + '<div class="rd-body"><div class="rd-empty">Sổ ghi chú còn trống.<br>Trong hộp chat AI, bấm 📒 Lưu ghi chú ở cuối bong bóng (hoặc bôi đen một đoạn rồi bấm 📒 Lưu ghi chú) để lưu vào đây.</div></div>' : '<div class="rd-body"></div>';
         if (i < 0 || i >= T) return hd + '<div class="rd-body"></div>';
         return hd + '<div class="rd-body' + (nt.edId ? ' nt-scroll' : '') + '">' + nt.pages[i].map(itemHTML).join('') + '</div><div class="rd-ft">Trang ' + (i + 1) + '</div>';
@@ -17982,18 +18053,43 @@ function moveEdActs() {
     }
     const hitHTML = ns => ns.length ? ns.slice(0, 50).map(n => '<button type="button" class="rd-hit" data-act="n-hit" data-id="' + n.id + '"><b>' + esc(n.t) + '</b>' + (n.cat ? ' <span class="nt-chip">' + esc(n.cat) + '</span>' : '') + '</button>').join('') : '<div class="rd-hint">Không tìm thấy.</div>';
     function wordSearch() { const q = fold($('nt-in-q').value.trim()), box = $('nt-sres'); if (!box) return; box.innerHTML = q ? hitHTML(nt.notes.filter(n => fold(n.t + ' ' + n.cat + ' ' + n.b).includes(q))) : ''; }
-    async function topicSearch() {
-        const topic = $('nt-in-q').value.trim(), box = $('nt-sres'); if (!topic) return;
-        const kw = () => { const toks = fold(topic).split(/[^a-z0-9]+/).filter(x => x.length >= 2); return nt.notes.filter(n => { const f = fold(n.t + ' ' + n.cat + ' ' + n.b); return toks.some(x => f.includes(x)); }); };
-        if (!aiOk()) { box.innerHTML = '<div class="rd-hint">Chưa có AI — tìm theo từ khóa:</div>' + hitHTML(kw()); return; }
-        box.innerHTML = '<div class="rd-hint">⏳ AI đang chọn ghi chú theo chủ đề…</div>';
-        const lines = nt.notes.slice(0, 400).map((n, k) => k + '|' + (n.cat || '-') + '|' + n.t + '|' + n.b.replace(/\s+/g, ' ').slice(0, 120)).join('\n');
-        let v = null; try { v = await aiGeminiJson('Bạn là giáo sư đầu ngành Răng Hàm Mặt. Người dùng tìm ghi chú theo CHỦ ĐỀ. Từ danh sách ghi chú đánh số (dạng "số|phân mục|tiêu đề|trích dẫn"), hãy chọn các ghi chú thuộc hoặc liên quan trực tiếp đến chủ đề, xếp mức liên quan cao trước. Chỉ dùng số có trong danh sách. Trả về MỘT đối tượng JSON hợp lệ: {"ids":[số,...]} và không thêm chữ nào khác.', 'CHỦ ĐỀ: ' + topic + '\n\nGHI CHÚ:\n' + lines, 3000); } catch (e) {}
-        if (nt.pop !== 'search' || sMode !== 'topic') return;
-        const ids = v && Array.isArray(v.ids) ? v.ids : null, seen = new Set(), out = [];
-        (ids || []).forEach(x => { const k = parseInt(x, 10); if (k >= 0 && k < nt.notes.length && !seen.has(k)) { seen.add(k); out.push(nt.notes[k]); } });
-        box.innerHTML = out.length ? hitHTML(out) : (ids ? '<div class="rd-hint">Không có ghi chú nào thuộc chủ đề này.</div>' : '<div class="rd-hint">AI chưa phản hồi — tìm theo từ khóa:</div>' + hitHTML(kw()));
+    function clearNoteFilter() {
+        if (!nt.filterIds) return;
+        nt.filterIds = null;
+        nt.filterTopic = '';
+        nt.cur = 0;
+        repaginate(null);
+        toast('Đã trở về toàn bộ sổ ghi chú');
     }
+    async function topicSearch() {
+        const inp = $('nt-in-q'), box = $('nt-sres'); if (!inp) return;
+        const topic = inp.value.trim(); if (!topic) { toast('Hãy nhập chủ đề cần tìm'); return; }
+        if (!nt.notes.length) { if (box) box.innerHTML = '<div class="rd-hint">Sổ ghi chú chưa có ghi chú nào.</div>'; return; }
+        const kw = () => { const toks = fold(topic).split(/[^a-z0-9]+/).filter(x => x.length >= 2); return nt.notes.filter(n => { const f = fold(n.t + ' ' + n.cat + ' ' + n.b); return toks.some(x => f.includes(x)); }); };
+        let out = [];
+        if (aiOk()) {
+            if (box) box.innerHTML = '<div class="rd-hint">⏳ AI đang lọc ghi chú theo chủ đề "' + esc(topic) + '"…</div>';
+            const lines = nt.notes.slice(0, 400).map((n, k) => k + '|' + (n.cat || '-') + '|' + n.t + '|' + n.b.replace(/\s+/g, ' ').slice(0, 120)).join('\n');
+            let v = null; try { v = await aiGeminiJson('Bạn là giáo sư đầu ngành Răng Hàm Mặt. Người dùng tìm ghi chú theo CHỦ ĐỀ. Từ danh sách ghi chú đánh số (dạng "số|phân mục|tiêu đề|trích dẫn"), hãy chọn các ghi chú thuộc hoặc liên quan trực tiếp đến chủ đề, xếp mức liên quan cao trước. Chỉ dùng số có trong danh sách. Trả về MỘT đối tượng JSON hợp lệ: {"ids":[số,...]} và không thêm chữ nào khác.', 'CHỦ ĐỀ: ' + topic + '\n\nGHI CHÚ:\n' + lines, 3000); } catch (e) {}
+            const ids = v && Array.isArray(v.ids) ? v.ids : null, seen = new Set();
+            (ids || []).forEach(x => { const k = parseInt(x, 10); if (k >= 0 && k < nt.notes.length && !seen.has(k)) { seen.add(k); out.push(nt.notes[k]); } });
+            if (!ids) out = kw();
+        } else {
+            out = kw();
+        }
+        if (!out.length) {
+            if (box && nt.pop === 'search') box.innerHTML = '<div class="rd-hint">Không có ghi chú nào thuộc chủ đề "' + esc(topic) + '".</div>';
+            else toast('Không có ghi chú nào thuộc chủ đề "' + topic + '"');
+            return;
+        }
+        nt.filterIds = new Set(out.map(n => n.id));
+        nt.filterTopic = capFirst(topic);
+        nt.cur = 0;
+        closePop();
+        repaginate(null);
+        toast('🔍 Đã lọc ' + out.length + ' ghi chú thuộc chủ đề "' + nt.filterTopic + '"');
+    }
+    window.ntTriggerTopicSearch = topicSearch;
     function goNote(id) { closePop(); const k = pageOf(id); if (k >= 0) flipTo(nt.per === 2 ? k - k % 2 : k); }
     /* sắp xếp & cỡ chữ */
     function openSort() {
@@ -18211,6 +18307,7 @@ function moveEdActs() {
                     case 'n-save': saveEdit(); break; case 'n-del': delNote(); break; case 'cancel': closePop(); break; case 'n-hit': goNote(id); break;
                     case 'n-sort': nt.sort = a.dataset.s; saveMeta(); closePop(); repaginate(null); nt.cur = 0; render(); break;
                     case 's-mode': setSMode(a.dataset.m); break;
+                    case 'n-clrfilter': clearNoteFilter(); break;
                     case 'n-imgpick': { const f = $('nt-in-img'); if (f) f.click(); break; }
                     case 'n-imgdel': { const i = +a.dataset.i; if (nt.editIm && i >= 0) { nt.editIm.splice(i, 1); paintThumbs(); } break; }
                     case 'rv-close': rvClose(); break; case 'rv-opt': rvOpt(a); break; case 'rv-start': rvStart(); break; case 'rv-back': rvSetup(); break;
@@ -19775,19 +19872,17 @@ html.rhm-dragging,html.rhm-dragging body{-webkit-user-select:none;user-select:no
         if (act === 'close') { if (mode === 'newnote') { var cn = pop.querySelector('[data-act="cancel"]'); if (cn) cn.click(); } else closeRb(prefix, mode); return true; }
         if (prefix === 'rd-rb-') {
             if (mode === 'search') {
-                var qIn = pop.querySelector('#rd-in-q');
                 var isTopic = !!pop.querySelector('[data-act="rd-smode"][data-m="topic"].on');
-                if (isTopic && qIn && qIn.value.trim()) { qIn.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true })); }
+                if (isTopic && typeof window.rdTriggerTopicSearch === 'function') { window.rdTriggerTopicSearch(); }
                 else { var h = pop.querySelector('#rd-res [data-act="hit"]'); if (h) h.click(); else closeRb(prefix, mode); }
             }
             else if (mode === 'jump') { var g = pop.querySelector('[data-act="gopage"]'); if (g) g.click(); }
             else if (mode === 'add') { var ad = pop.querySelector('[data-act="add"]'); if (ad) ad.click(); }
         } else {
             if (mode === 'search') {
-                var n = pop.querySelector('#nt-sres [data-act="n-hit"]'), q = pop.querySelector('#nt-in-q');
-                if (n) n.click();
-                else if (q && q.value.trim() && pop.querySelector('[data-act="s-mode"][data-m="topic"].on')) q.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
-                else closeRb(prefix, mode);
+                var isTopicN = !!pop.querySelector('[data-act="s-mode"][data-m="topic"].on');
+                if (isTopicN && typeof window.ntTriggerTopicSearch === 'function') { window.ntTriggerTopicSearch(); }
+                else { var n = pop.querySelector('#nt-sres [data-act="n-hit"]'); if (n) n.click(); else closeRb(prefix, mode); }
             } else if (mode === 'newnote') { var sv = pop.querySelector('[data-act="n-save"]'); if (sv) sv.click(); }
             else closeRb(prefix, mode);
         }
