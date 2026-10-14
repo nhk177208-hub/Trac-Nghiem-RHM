@@ -12167,9 +12167,10 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         #ai-tutor-modal .ai-x-txt { display: none; }
         @media (orientation: portrait) {
             #ai-tutor-modal #ai-enwin-hbtn { display: none !important; }
-            #ai-tutor-modal #ai-close-btn { min-width: 64px; height: 40px; padding: 0 14px; border-radius: 9999px; background: #dc2626; color: #fff; font-size: 14px; font-weight: 800; }
-            #ai-tutor-modal #ai-close-btn .ai-x-ic { display: none; }
-            #ai-tutor-modal #ai-close-btn .ai-x-txt { display: inline; }
+            #ai-tutor-modal #ai-close-btn { width: 38px; min-width: 38px; height: 38px; min-height: 38px; padding: 0; border-radius: 12px; background: #f3f4f6; color: #4b5563; font-size: 20px; font-weight: 900; }
+            #ai-tutor-modal #ai-close-btn:hover { background: #e5e7eb; color: #1f2937; }
+            #ai-tutor-modal #ai-close-btn .ai-x-ic { display: inline; line-height: 1; }
+            #ai-tutor-modal #ai-close-btn .ai-x-txt { display: none !important; }
         }
         @media (max-width: 640px) {
             #ai-tutor-modal > div > div:first-child { padding-left: 10px; padding-right: 6px; }
@@ -21184,6 +21185,316 @@ button:not(:disabled):active,
     activeBtn.classList.remove('ios-pressed');
     activeBtn = null;
   }, { passive: true, capture: true });
+})();
+</script>
+<style id="rhm-patch-v4-ios-complete">
+/* 1. Đồng bộ kiểu dáng & animation nút X đóng Boxchat (#ai-close-btn) trên mọi màn hình */
+#ai-tutor-modal #ai-close-btn {
+  width: 38px !important;
+  min-width: 38px !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  padding: 0 !important;
+  border-radius: 12px !important;
+  background: #f3f4f6 !important;
+  color: #4b5563 !important;
+  font-size: 20px !important;
+  font-weight: 900 !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+  transition: transform 0.24s cubic-bezier(0.32, 0.72, 0, 1), background-color 0.2s ease, color 0.2s ease !important;
+}
+#ai-tutor-modal #ai-close-btn:hover {
+  background: #e5e7eb !important;
+  color: #111827 !important;
+}
+#ai-tutor-modal #ai-close-btn .ai-x-ic {
+  display: inline !important;
+  line-height: 1 !important;
+}
+#ai-tutor-modal #ai-close-btn .ai-x-txt {
+  display: none !important;
+}
+
+/* 2. Animation đàn hồi kiểu iOS khi ấn vào Sách trên kệ (.bk-book) */
+@keyframes iosBookRelease {
+  0%   { transform: translateY(-2px) scale(0.92); }
+  55%  { transform: translateY(-10px) scale(1.05); }
+  100% { transform: translateY(0) scale(1); }
+}
+.bk-book {
+  transition: transform 0.34s cubic-bezier(0.22, 1.2, 0.36, 1), filter 0.24s ease !important;
+  will-change: transform;
+}
+.bk-book .bk-frame {
+  transition: box-shadow 0.34s cubic-bezier(0.22, 1.2, 0.36, 1), transform 0.34s cubic-bezier(0.22, 1.2, 0.36, 1) !important;
+}
+.bk-book:active,
+.bk-book.ios-pressed {
+  transform: translateY(-2px) scale(0.92) !important;
+  filter: brightness(0.95);
+  transition-duration: 0.08s !important;
+}
+.bk-book:active .bk-frame,
+.bk-book.ios-pressed .bk-frame {
+  box-shadow: 0 4px 10px -2px rgba(0,0,0,0.38) !important;
+}
+.bk-book.ios-spring-release {
+  animation: iosBookRelease 0.42s cubic-bezier(0.22, 1.25, 0.36, 1) forwards !important;
+}
+
+/* 3. Nút Play lớn ở giữa màn hình video (.custom-yt-bigplay) có độ nảy riêng giữ nguyên tâm (-50%, -50%) */
+@keyframes iosBigPlayBounce {
+  0%   { transform: translate(-50%, -50%) scale(0.88); }
+  55%  { transform: translate(-50%, -50%) scale(1.08); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+.custom-yt-screen:not(.is-playing):active .custom-yt-bigplay {
+  transform: translate(-50%, -50%) scale(0.9) !important;
+  transition-duration: 0.08s !important;
+}
+
+/* 4. Animation cho các thành phần tương tác còn lại trên toàn bộ ứng dụng */
+.ai-ts,
+.ai-cite,
+.ai-gl-btn,
+.ai-gl-locbtn,
+.ai-langbar button,
+.nt-savebar button,
+#nt-selbtn,
+.yt-chapmap .cm-n.d1,
+.yt-chapmap .cm-n.d2,
+.yt-chapmap .cm-tg,
+.yt-journey .jr-c,
+#dict-modal .rd-tbl tr[data-act],
+#dict-modal .rd-nt tr[data-act],
+#dict-modal .rd-svr .rd-svx,
+#dict-modal .rd-thx,
+#note-modal .rd-thx,
+#dict-modal .rd-nwc,
+#dict-modal .rd-nwv,
+#dict-modal .rd-nwx,
+#dict-modal .fc,
+#note-modal .fc,
+.rhm-qr-zoom-hint,
+#pq-box,
+.rhm-qa,
+#app-cover-img,
+label.cursor-pointer,
+label.hs-b,
+label.rhm-bg,
+select,
+input[type="checkbox"],
+input[type="radio"],
+#question-image-container img,
+#feedback-explanation-images img,
+#view-quiz-list-container img,
+#bookmarked-list-container img,
+#blocked-list-container img,
+#review-container img,
+#dict-modal .rd-imgs img,
+#note-modal .rd-imgs img,
+#note-modal .nt-ths img {
+  transition: transform 0.24s cubic-bezier(0.32, 0.72, 0, 1),
+              background-color 0.2s ease,
+              box-shadow 0.22s ease,
+              opacity 0.2s ease !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ai-ts:active,
+.ai-cite:active,
+.ai-gl-btn:active,
+.ai-gl-locbtn:active,
+.ai-langbar button:active,
+.nt-savebar button:active,
+#nt-selbtn:active,
+.yt-chapmap .cm-n.d1:active,
+.yt-chapmap .cm-n.d2:active,
+.yt-chapmap .cm-tg:active,
+.yt-journey .jr-c:active,
+#dict-modal .rd-tbl tr[data-act]:active,
+#dict-modal .rd-nt tr[data-act]:active,
+#dict-modal .rd-svr .rd-svx:active,
+#dict-modal .rd-thx:active,
+#note-modal .rd-thx:active,
+#dict-modal .rd-nwc:active,
+#dict-modal .rd-nwv:active,
+#dict-modal .rd-nwx:active,
+.rhm-qr-zoom-hint:active,
+#pq-box:active,
+.rhm-qa:active,
+#app-cover-img:active,
+label.cursor-pointer:active,
+label.hs-b:active,
+label.rhm-bg:active,
+select:active,
+#question-image-container img:active,
+#feedback-explanation-images img:active,
+#view-quiz-list-container img:active,
+#bookmarked-list-container img:active,
+#blocked-list-container img:active,
+#review-container img:active,
+#dict-modal .rd-imgs img:active,
+#note-modal .rd-imgs img:active,
+#note-modal .nt-ths img:active {
+  transform: scale(0.94) !important;
+  transition-duration: 0.08s !important;
+}
+
+/* Thẻ Flashcard khi chạm nhẹ */
+#dict-modal .fc:active,
+#note-modal .fc:active {
+  transform: scale(0.975);
+  transition-duration: 0.08s !important;
+}
+
+/* Checkbox & Radio nảy nhẹ khi tích chọn */
+@keyframes iosCheckBounce {
+  0%   { transform: scale(0.82); }
+  55%  { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+input[type="checkbox"]:checked,
+input[type="radio"]:checked {
+  animation: iosCheckBounce 0.28s cubic-bezier(0.22, 1.25, 0.36, 1);
+}
+
+/* Con trượt Range Slider phóng nhẹ khi kéo như iOS */
+input[type="range"]::-webkit-slider-thumb {
+  transition: transform 0.22s cubic-bezier(0.22, 1.25, 0.36, 1), box-shadow 0.2s ease !important;
+}
+input[type="range"]:active::-webkit-slider-thumb {
+  transform: scale(1.28) !important;
+}
+
+/* Ô nhập liệu (input / textarea) êm mượt khi focus */
+input[type="text"],
+input[type="number"],
+input[type="password"],
+textarea {
+  transition: border-color 0.22s ease, box-shadow 0.22s cubic-bezier(0.32, 0.72, 0, 1), background-color 0.2s ease !important;
+}
+
+/* Bong bóng tin nhắn mới trong Chat AI (#ai-messages) & nút nổi #nt-selbtn */
+@keyframes iosBubblePop {
+  0%   { opacity: 0; transform: translateY(10px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+#ai-messages > div.ios-bub-in {
+  animation: iosBubblePop 0.3s cubic-bezier(0.22, 1.15, 0.36, 1) forwards;
+}
+#nt-selbtn {
+  animation: iosBubblePop 0.24s cubic-bezier(0.22, 1.2, 0.36, 1);
+}
+
+/* Toast thông báo mượt chuẩn iOS Dynamic Island / Banner */
+#custom-toast {
+  transition: transform 0.38s cubic-bezier(0.22, 1.18, 0.36, 1), opacity 0.28s ease !important;
+}
+</style>
+
+<script id="rhm-patch-v4-ios-extra">
+(function () {
+  'use strict';
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  /* 1. Mở rộng danh sách nhận diện tương tác chạm & nảy (Spring Release) cho sách và mọi phần tử còn sót */
+  var EXTRA_SEL = [
+    '.bk-book',
+    '.ai-ts',
+    '.ai-cite',
+    '.ai-gl-btn',
+    '.ai-gl-locbtn',
+    '.ai-langbar button',
+    '.nt-savebar button',
+    '#nt-selbtn',
+    '.yt-chapmap .cm-n.d1',
+    '.yt-chapmap .cm-n.d2',
+    '.yt-chapmap .cm-tg',
+    '.yt-journey .jr-c',
+    '#dict-modal .rd-tbl tr[data-act]',
+    '#dict-modal .rd-nt tr[data-act]',
+    '#dict-modal .rd-svr .rd-svx',
+    '#dict-modal .rd-thx',
+    '#note-modal .rd-thx',
+    '#dict-modal .rd-nwc',
+    '#dict-modal .rd-nwv',
+    '#dict-modal .rd-nwx',
+    '.rhm-qr-zoom-hint',
+    '#pq-box',
+    '.rhm-qa',
+    'label.cursor-pointer',
+    'label.hs-b',
+    'label.rhm-bg',
+    '#topic-quiz-list > div',
+    '#exam-list > div',
+    '#lessons-list > div'
+  ].join(',');
+
+  var curExtra = null;
+  document.addEventListener('pointerdown', function (e) {
+    /* Nếu đã là button thông thường thì script v3 đã xử lý, chỉ bắt thêm các phần tử mở rộng hoặc .bk-book */
+    var rawBtn = e.target && e.target.closest ? e.target.closest('button:not(.bk-book)') : null;
+    if (rawBtn) return;
+    var t = e.target && e.target.closest ? e.target.closest(EXTRA_SEL) : null;
+    if (!t) return;
+    curExtra = t;
+    t.classList.remove('ios-spring-release');
+    t.classList.add('ios-pressed');
+  }, { passive: true, capture: true });
+
+  function releaseExtra() {
+    if (!curExtra) return;
+    var el = curExtra;
+    curExtra = null;
+    el.classList.remove('ios-pressed');
+    if (!el.isConnected) return;
+    el.classList.remove('ios-spring-release');
+    void el.offsetWidth;
+    el.classList.add('ios-spring-release');
+    clearTimeout(el._iosExT);
+    el._iosExT = setTimeout(function () {
+      el.classList.remove('ios-spring-release');
+    }, 420);
+  }
+
+  document.addEventListener('pointerup', releaseExtra, { passive: true, capture: true });
+  document.addEventListener('pointercancel', function () {
+    if (!curExtra) return;
+    curExtra.classList.remove('ios-pressed');
+    curExtra = null;
+  }, { passive: true, capture: true });
+
+  /* 2. Tự động gắn hiệu ứng xuất hiện mượt cho mọi bong bóng chat mới trong #ai-messages */
+  function observeChatBubbles() {
+    var box = document.getElementById('ai-messages');
+    if (!box || box._iosBubObs) return;
+    box._iosBubObs = true;
+    new MutationObserver(function (muts) {
+      muts.forEach(function (m) {
+        Array.prototype.forEach.call(m.addedNodes || [], function (nd) {
+          if (nd && nd.nodeType === 1 && !nd.classList.contains('ios-bub-in')) {
+            nd.classList.add('ios-bub-in');
+          }
+        });
+      });
+    }).observe(box, { childList: true });
+  }
+
+  /* 3. Tự động gắn hiệu ứng cho hộp phóng to QR (#rhm-qr-zoom-modal) & màn hình quét QR (#rhm-qs-ov) khi được tạo động */
+  new MutationObserver(function (muts) {
+    muts.forEach(function (m) {
+      Array.prototype.forEach.call(m.addedNodes || [], function (nd) {
+        if (!nd || nd.nodeType !== 1) return;
+        if (nd.id === 'rhm-qr-zoom-modal' || nd.id === 'rhm-qs-ov' || nd.id === 'narr-guide-modal' || nd.id === 'add-home-guide' || nd.id === 'rd-vie-cfm') {
+          nd.classList.add('ios-opening');
+        }
+      });
+    });
+  }).observe(document.body, { childList: true });
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', observeChatBubbles);
+  else observeChatBubbles();
 })();
 </script>
 </html>
