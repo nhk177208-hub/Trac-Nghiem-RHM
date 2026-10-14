@@ -2288,13 +2288,16 @@
                 
                 // Ngăn chặn sự kiện wheel hoặc touchmove lan truyền ra document khi chạm đỉnh hoặc đáy
                 el.addEventListener('wheel', function(e) {
-                    const scrollable = e.target.closest('.overflow-y-auto, .overflow-auto, .rd-nt, .rd-mt, .rd-pop, .rd-info, .qz-body, .rv-card, .rd-tip');
-                    if (!scrollable) {
+                    let sc = e.target.closest('.rd-info, .rd-nt, .rd-mt, .qz-body, .rd-tip, .overflow-y-auto, .overflow-auto, .rd-pop, .rv-card');
+                    while (sc && el.contains(sc) && sc.scrollHeight <= sc.clientHeight + 1) {
+                        sc = sc.parentElement ? sc.parentElement.closest('.rd-info, .rd-nt, .rd-mt, .qz-body, .rd-tip, .overflow-y-auto, .overflow-auto, .rd-pop, .rv-card') : null;
+                    }
+                    if (!sc) {
                         e.preventDefault();
                         return;
                     }
-                    const atTop = scrollable.scrollTop === 0 && e.deltaY < 0;
-                    const atBottom = (scrollable.scrollHeight - scrollable.scrollTop <= scrollable.clientHeight + 1) && e.deltaY > 0;
+                    const atTop = sc.scrollTop <= 0 && e.deltaY < 0;
+                    const atBottom = (sc.scrollHeight - sc.scrollTop <= sc.clientHeight + 1) && e.deltaY > 0;
                     if (atTop || atBottom) {
                         e.preventDefault();
                     }
@@ -9885,7 +9888,8 @@ bkCloseAll();
                                         <div class="yt-volpop"><div class="vb"><span id="vol-label-${playerId}" class="yt-vp-label">100%</span><div class="vs"><input type="range" id="vol-${playerId}" min="0" max="200" step="1" value="100" class="custom-range-slider yt-vp-range" oninput="setYtVolume('${playerId}', this.value)"></div></div></div>
                                     </div>
 
-                                    <button onclick="toggleYtTheaterMode('${playerId}')" id="theater-btn-${playerId}" class="bg-purple-900/80 hover:bg-purple-800 border border-purple-500 font-bold px-2.5 py-1 rounded-lg text-xs flex items-center shadow-sm active:scale-95" title="Bật/Tắt Chế độ Rạp Chiếu Phim">${YT_THEATER_HTML_OFF}</button>
+                                    <button type="button" onclick="toggleYtLock('${playerId}')" id="lock-btn-${playerId}" class="yt-sq-btn bg-gray-800 hover:bg-gray-700 border border-gray-600 font-bold px-2.5 py-1 rounded-lg text-xs flex items-center shadow-sm active:scale-95" title="Khóa phím & hướng xoay (chỉ giữ Space và phím mũi tên Trái/Phải)"><span class="yt-ic">🔓</span></button>
+                                    <button onclick="toggleYtTheaterMode('${playerId}')" id="theater-btn-${playerId}" class="bg-gray-800 hover:bg-gray-700 border border-gray-600 font-bold px-2.5 py-1 rounded-lg text-xs flex items-center shadow-sm active:scale-95" title="Bật/Tắt Chế độ Rạp Chiếu Phim">${YT_THEATER_HTML_OFF}</button>
 
                                     <button onclick="toggleYtFullscreen('${playerId}')" class="bg-gray-700 hover:bg-gray-600 font-bold px-2.5 py-1 rounded-lg text-xs flex items-center active:scale-95" title="Xem Toàn Màn Hình"><span class="yt-ic">⛶</span><span class="yt-lbl"> Toàn màn hình</span></button>
                                 </div>
@@ -10817,7 +10821,7 @@ bkCloseAll();
             setTimeout(wake, 300);
         })();
 
-        const NARR_ON_CLASS = 'bg-emerald-600 border border-emerald-400 px-2.5 py-1 rounded-lg text-xs font-bold text-white';
+        const NARR_ON_CLASS = 'bg-blue-600 border border-blue-400 px-2.5 py-1 rounded-lg text-xs font-bold text-white yt-btn-active';
         function paintNarrButton(playerId) {
             const btn = document.getElementById(`narr-btn-${playerId}`); if (!btn) return;
             const d = activeYtPlayers[playerId], on = !!(d && d.narrOn);
@@ -11205,9 +11209,95 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             }
             else if (activeYtPlayers[playerId]) { showControlsDirectly(playerId); resetInactivityTimer(playerId); }
         }
-        // Bấm Esc để đóng bảng cài đặt
+        window.ytIsLocked = function (pid) {
+            if (pid && activeYtPlayers[pid]) return !!activeYtPlayers[pid].isLocked;
+            return Object.keys(activeYtPlayers).some(k => activeYtPlayers[k] && activeYtPlayers[k].isLocked);
+        };
+        function ytApplyOrientationLock(playerId, lockOn) {
+            const d = activeYtPlayers[playerId];
+            const w = document.getElementById('custom-wrapper-' + playerId);
+            if (!d || !w) return;
+            const so = window.screen && window.screen.orientation;
+            if (lockOn) {
+                const isLand = w.classList.contains('rot-land') || (window.innerWidth > window.innerHeight);
+                d.lockedOrient = isLand ? 'landscape' : 'portrait';
+                w.dataset.lockedOrient = d.lockedOrient;
+                if (so && typeof so.lock === 'function') {
+                    try { so.lock(d.lockedOrient).catch(() => {}); } catch (e) {}
+                }
+            } else {
+                const prevOrient = d.lockedOrient;
+                d.lockedOrient = '';
+                delete w.dataset.lockedOrient;
+                const fsEl = document.fullscreenElement || document.webkitFullscreenElement;
+                if (!(ytIsMobile() && (d.isTheater || fsEl === w))) {
+                    if (so && typeof so.unlock === 'function') {
+                        try { so.unlock(); } catch (e) {}
+                    }
+                }
+                if (prevOrient) syncYtLandscape(playerId, true);
+            }
+        }
+        window.toggleYtLock = function (playerId) {
+            const d = activeYtPlayers[playerId];
+            const w = document.getElementById('custom-wrapper-' + playerId);
+            const btn = document.getElementById('lock-btn-' + playerId);
+            if (!d || !w) return;
+            d.isLocked = !d.isLocked;
+            w.classList.toggle('yt-locked', d.isLocked);
+            if (btn) {
+                btn.classList.toggle('yt-btn-active', d.isLocked);
+                btn.innerHTML = d.isLocked ? '<span class="yt-ic">🔒</span>' : '<span class="yt-ic">🔓</span>';
+                btn.title = d.isLocked ? 'Đang khóa phím & hướng xoay (bấm lại để mở khóa)' : 'Khóa phím & hướng xoay (chỉ giữ Space và phím mũi tên Trái/Phải)';
+            }
+            ytApplyOrientationLock(playerId, d.isLocked);
+            if (d.isLocked) {
+                try { history.pushState({ ytLockGuard: playerId }, ''); } catch (e) {}
+                try { if (navigator.keyboard && navigator.keyboard.lock) navigator.keyboard.lock(); } catch (e) {}
+                showToast('🔒 Đã khóa phím & hướng xoay màn hình (chỉ giữ Space và ◀ ▶). Bấm lại 🔒 để mở khóa.');
+            } else {
+                try { if (navigator.keyboard && navigator.keyboard.unlock) navigator.keyboard.unlock(); } catch (e) {}
+                showToast('🔓 Đã mở khóa phím & hướng xoay.');
+            }
+            showControlsDirectly(playerId);
+            resetInactivityTimer(playerId);
+        };
+        // Khi đang bật khóa 🔒 trên PC: khóa TẤT CẢ các phím ngoại trừ Space (Play/Pause) và ArrowLeft / ArrowRight (tua lùi/tới)
+        function ytBlockKeyWhenLocked(e) {
+            if (!window.ytIsLocked()) return;
+            const isSpace = (e.code === 'Space' || e.key === ' ') && !e.ctrlKey && !e.altKey && !e.metaKey;
+            const isArrowLR = (e.key === 'ArrowLeft' || e.key === 'ArrowRight') && !e.ctrlKey && !e.altKey && !e.metaKey;
+            if (isSpace || isArrowLR) return;
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            if (e.type === 'keydown') {
+                const now = Date.now();
+                if (!window._ytLockToastT || now - window._ytLockToastT > 1800) {
+                    window._ytLockToastT = now;
+                    showToast('🔒 Đang khóa phím! Chỉ dùng được Space (Tạm dừng) và ◀ ▶ (Tua). Bấm 🔒 để mở khóa.');
+                }
+            }
+            return false;
+        }
+        window.addEventListener('keydown', ytBlockKeyWhenLocked, true);
+        window.addEventListener('keyup', ytBlockKeyWhenLocked, true);
+        window.addEventListener('keypress', ytBlockKeyWhenLocked, true);
+        // Giữ nguyên hướng xoay đã khóa nếu thiết bị di động cố xoay màn hình vật lý
+        window.addEventListener('orientationchange', function () {
+            Object.keys(activeYtPlayers).forEach(id => {
+                const d = activeYtPlayers[id];
+                if (d && d.isLocked && d.lockedOrient) {
+                    const so = window.screen && window.screen.orientation;
+                    if (so && typeof so.lock === 'function') {
+                        try { so.lock(d.lockedOrient).catch(() => {}); } catch (e) {}
+                    }
+                }
+            });
+        });
+        // Bấm Esc để đóng bảng cài đặt (khi không khóa)
         document.addEventListener('keydown', function (e) {
-            if (e.key !== 'Escape') return;
+            if (e.key !== 'Escape' || window.ytIsLocked()) return;
             const ed = document.querySelectorAll('.custom-yt-wrapper.sub-editing');
             if (ed.length) { ed.forEach(w => w.classList.remove('sub-editing')); return; }
             const tid = Object.keys(activeYtPlayers).find(k => activeYtPlayers[k] && activeYtPlayers[k].isTheater);
@@ -11249,6 +11339,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             wrapper.classList.toggle('theater-mode', data.isTheater);
             ytTheaterLockSync();
 
+            if (btn) btn.classList.toggle('yt-btn-active', !!data.isTheater);
             if (data.isTheater) {
                 if (btn) btn.innerHTML = YT_THEATER_HTML_ON;
                 showToast("Đã bật Chế độ Rạp chiếu phim!");
@@ -11469,6 +11560,11 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             const wrapper = document.getElementById(`custom-wrapper-${playerId}`);
             const data = activeYtPlayers[playerId];
             if (!wrapper || !data) return;
+            if (data.isLocked && data.lockedOrient) {
+                wrapper.classList.toggle('rot-land', data.lockedOrient === 'landscape' && window.innerHeight > window.innerWidth);
+                scheduleYtWatermarkLayout();
+                return;
+            }
             if (reset && wrapper.__ls) { wrapper.__ls = false; wrapper.classList.remove('rot-land'); }
             const fsEl = document.fullscreenElement || document.webkitFullscreenElement;
             const want = ytIsMobile() && (data.isTheater || fsEl === wrapper);
@@ -11723,10 +11819,13 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
                 } catch (e) {}
             }, 350);
         }
-        /* Âm lượng giọng lồng tiếng theo nút âm lượng của trình phát (0..1) */
-        function narrVolume() { return ytVolumeState.muted ? 0 : Math.max(0, Math.min(1, ytVolumeState.volume / 100)); }   /* trình duyệt giới hạn speechSynthesis ở 1.0 */
+        /* Âm lượng 0..200%: 100% = mức chuẩn (0.55), 200% = khuếch đại lên mức tối đa (1.0) để dải 100%->200% tăng rõ rệt */
+        function narrVolume() {
+            if (ytVolumeState.muted) return 0;
+            const v = Math.max(0, Math.min(200, ytVolumeState.volume));
+            return v <= 100 ? (v / 100) * 0.55 : 0.55 + ((v - 100) / 100) * 0.45;
+        }
 
-        /* Thiết bị cảm ứng: âm lượng do phím cứng/hệ thống của máy điều khiển; trình phát YouTube luôn giữ 100% để không bị nhân đôi giảm tiếng */
         function ytTouchSys() { try { return window.matchMedia('(hover: none) and (pointer: coarse)').matches; } catch (e) { return false; } }
 
         function applyYtVolume(playerId) {
@@ -11734,7 +11833,11 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             if (!d || !d.player) return;
             try {
                 if (typeof d.player.setVolume !== 'function') return;
-                const base = Math.min(100, ytVolumeState.volume); try { if (narr && narr.cur) narr.cur.volume = narrVolume(); } catch (e2) {} const vol = d.narrOn ? Math.round(base * narrCfg.orig / 100) : base;   // đang thuyết minh: hạ âm lượng video gốc
+                const v = Math.max(0, Math.min(200, ytVolumeState.volume));
+                // Với video gốc: 0..100% ánh xạ 0..70, từ 100..200% đẩy tiếp từ 70 lên 100 (khuếch đại thêm); khi lồng tiếng thì nhân với % âm gốc nhưng cho phép vượt ngưỡng khi kéo lên 200%
+                const ytBase = v <= 100 ? Math.round(v * 0.7) : Math.round(70 + (v - 100) * 0.3);
+                try { if (narr && narr.cur) narr.cur.volume = narrVolume(); } catch (e2) {}
+                const vol = d.narrOn ? Math.min(100, Math.round((v / 100) * narrCfg.orig)) : ytBase;
                 if (d._avVol !== vol) { d.player.setVolume(vol); d._avVol = vol; }
                 const _mu = !!ytVolumeState.muted; if (d._avMute !== _mu) { if (_mu) d.player.mute(); else d.player.unMute(); d._avMute = _mu; }
             } catch (e) {}
@@ -11891,9 +11994,18 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             try { showControlsDirectly(playerId); } catch (e) {}
         }
         window.addEventListener('popstate', function () {
+            const lockedId = Object.keys(activeYtPlayers).find(k => activeYtPlayers[k] && activeYtPlayers[k].isLocked);
+            if (lockedId) {
+                try { history.pushState({ ytLockGuard: lockedId }, ''); } catch (e) {}
+                showToast('🔒 Đang khóa nút Back! Bấm nút 🔒 để mở khóa.');
+                return;
+            }
             if (ytIgnorePop) { ytIgnorePop = false; return; }
             const id = Object.keys(activeYtPlayers).find(k => activeYtPlayers[k] && activeYtPlayers[k].isTheater);
             if (id) toggleYtTheaterMode(id, true);
+        });
+        window.addEventListener('beforeunload', function (e) {
+            if (window.ytIsLocked()) { e.preventDefault(); e.returnValue = ''; }
         });
         (function () {
             let fsId = null, fsAt = 0;
@@ -11903,7 +12015,6 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
                     const id = Object.keys(activeYtPlayers).find(k => document.getElementById('custom-wrapper-' + k) === fsEl);
                     if (id) {
                         fsId = id; fsAt = Date.now();
-                        // iPad: không phụ thuộc :fullscreen → ép bố cục rạp để UI luôn bung đúng theo video
                         fsEl.classList.add('yt-fs', 'theater-mode');
                         document.documentElement.classList.add('yt-lock'); ytZoomLock(true);
                         const d0 = activeYtPlayers[id]; if (d0) d0.fsTheater = !d0.isTheater;
@@ -11913,11 +12024,25 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
                     const id = fsId; fsId = null;
                     const d = activeYtPlayers[id];
                     const w0 = document.getElementById('custom-wrapper-' + id);
+                    if (d && d.isLocked) {
+                        // Đang bật khóa 🔒 mà trình duyệt ép thoát Fullscreen bằng Esc -> giữ nguyên ở chế độ rạp chiếu phim toàn màn hình
+                        if (!d.isTheater) {
+                            d.isTheater = true;
+                            if (w0) w0.classList.add('theater-mode');
+                            const tb = document.getElementById('theater-btn-' + id);
+                            if (tb) { tb.innerHTML = YT_THEATER_HTML_ON; tb.classList.add('yt-btn-active'); }
+                        }
+                        if (w0) w0.classList.remove('yt-fs');
+                        d.fsTheater = false;
+                        ytTheaterLockSync();
+                        showToast('🔒 Đang khóa! Đã giữ khung hình ở chế độ Rạp. Bấm 🔒 để mở khóa.');
+                        return;
+                    }
                     if (w0) { w0.classList.remove('yt-fs'); if (d && d.fsTheater && !d.isTheater) w0.classList.remove('theater-mode'); }
                     if (d) d.fsTheater = false;
                     ytTheaterLockSync();
                     const dropped = d && !(window.isIOSDevice && window.isIOSDevice()) && !d.fsUserExit && !d.isTheater && ytIsTablet() && ((Date.now() - fsAt) < 2500 || (Date.now() - (window.__ytLastRot || 0)) < 1500);
-                    if (dropped) { setTimeout(() => { if (activeYtPlayers[id] === d && !d.isTheater) toggleYtTheaterMode(id); }, 80); }   // iPad tự văng khỏi toàn màn hình → giữ khung video bằng chế độ rạp
+                    if (dropped) { setTimeout(() => { if (activeYtPlayers[id] === d && !d.isTheater) toggleYtTheaterMode(id); }, 80); }
                     else ytAfterExit(id);
                 }
             };
@@ -13475,13 +13600,14 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     ].join('\n');
     function aiBookContext() {
         const title = bkCur ? ((bkCur.book ? bkCur.book + ' · ' : '') + bkCur.title) : 'Sách chuyên ngành RHM';
-        const recent = (bkLastTr && bkLastTr.trim()) ? bkLastTr.trim().slice(0, 10000) : String(bkText || '').slice(0, 15000);
-        return 'Chương sách: ' + title + '\nNội dung đoạn sách vừa dịch / đang đọc:\n' + recent;
+        const fullChap = String(bkText || '').trim();
+        const body = fullChap ? fullChap.slice(0, 120000) : String(bkLastTr || '').slice(0, 20000);
+        return 'Chương sách: ' + title + '\nTOÀN BỘ NỘI DUNG CHƯƠNG SÁCH:\n' + body;
     }
     function aiGuidedPrompt() {
-        if (aiState.mode === 'book') return AI_GUIDED_RULES + '\n\nNGỮ CẢNH (nội dung sách người học vừa dịch / đang đọc; "chủ đề chính" là kiến thức trọng tâm của đoạn này):\n' + aiBookContext();
+        if (aiState.mode === 'book') return AI_GUIDED_RULES + '\n\nNGỮ CẢNH (TOÀN BỘ CHƯƠNG SÁCH người học đang đọc; hãy bao quát toàn bộ nội dung chương sách này):\n' + aiBookContext();
         const vid = aiState.mode === 'video';
-        return AI_GUIDED_RULES + '\n\n' + (vid ? 'NGỮ CẢNH (bài giảng video; "chủ đề chính" là nội dung đoạn người học đang xem):\n' : 'NGỮ CẢNH (câu hỏi trắc nghiệm người học vừa làm; "chủ đề chính" là kiến thức trọng tâm nằm sau câu hỏi, không chỉ riêng câu này):\n') + (vid ? aiVideoContext() : aiBuildContext());
+        return AI_GUIDED_RULES + '\n\n' + (vid ? 'NGỮ CẢNH (TOÀN BỘ BÀI GIẢNG VIDEO từ đầu đến cuối; hãy bao quát toàn bộ bài giảng video này):\n' : 'NGỮ CẢNH (TOÀN BỘ NỘI DUNG CÂU HỎI TRẮC NGHIỆM, CÁC ĐÁP ÁN VÀ LỜI GIẢI THÍCH; hãy bao quát toàn bộ kiến thức của câu hỏi này):\n') + (vid ? aiVideoContext() : aiBuildContext());
     }
     function aiGuidedParse(out) {
         let t = String(out || ''), items = [];
@@ -13565,8 +13691,8 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     function aiGuidedStart() {
         aiState.guided = true; aiState.fullNext = false; aiState.showText = '🎓 Học tập có hướng dẫn';
         document.getElementById('ai-input').value = aiState.mode === 'book'
-            ? 'Hãy bắt đầu học tập có hướng dẫn dựa trên nội dung đoạn sách vừa dịch:\n\n' + (bkLastTr ? bkLastTr.slice(0, 8000) : String(bkText || '').slice(0, 8000))
-            : (aiState.mode === 'video' ? 'Hãy bắt đầu học tập có hướng dẫn về chủ đề chính của đoạn video mình đang xem.' : 'Hãy bắt đầu học tập có hướng dẫn về chủ đề chính của câu hỏi này.');
+            ? 'Hãy bắt đầu học tập có hướng dẫn bao quát TOÀN BỘ chương sách đang đọc.'
+            : (aiState.mode === 'video' ? 'Hãy bắt đầu học tập có hướng dẫn bao quát TOÀN BỘ nội dung bài giảng video này từ đầu đến cuối.' : 'Hãy bắt đầu học tập có hướng dẫn bao quát TOÀN BỘ nội dung câu hỏi, các phương án và lời giải thích của câu này.');
         aiSend();
     }
     function bkGetActiveTrText(fromBubble) {
@@ -15257,7 +15383,7 @@ window.PGR = (function () {
             if (tip > 0) pts = [s, s, cw - tip, s, cw - s, h / 2, cw - tip, h - s, s, h - s, tip + s, h / 2];
             else pts = [s, s, cw - s, s, cw - s, h - s, s, h - s];
             html += '<div class="jr-c' + (on ? ' on' : '') + '" style="left:' + (k * g.p).toFixed(1) + 'px;width:' + cw.toFixed(1) + 'px;height:' + h + 'px">' +
-                '<svg width="' + cw.toFixed(1) + '" height="' + h + '"><polygon points="' + pts.join(' ') + '" fill="rgba(15,23,42,' + al.toFixed(2) + ')" stroke="' + (on ? '#4ade80' : 'rgba(255,255,255,0.42)') + '" stroke-width="' + (on ? 2.4 : 1.2) + '" stroke-linejoin="round"/></svg>' +
+                '<svg width="' + cw.toFixed(1) + '" height="' + h + '"><polygon points="' + pts.join(' ') + '" fill="rgba(15,23,42,' + al.toFixed(2) + ')" stroke="' + (on ? '#3b82f6' : 'rgba(255,255,255,0.42)') + '" stroke-width="' + (on ? 2.6 : 1.2) + '" stroke-linejoin="round"/></svg>' +
                 '<div class="jr-t" style="font-size:' + f + 'px;padding-left:' + (tip + 6) + 'px;padding-right:' + (tip + 2) + 'px"><b class="jr-n"></b><span class="jr-x"></span></div></div>';
         }
         host.style.height = h + 'px'; host.innerHTML = html; host._jrD = d; jrBindClick(host);
@@ -15504,7 +15630,7 @@ window.PGR = (function () {
         toast('🎁 Đã nhận 300 điểm cho video này'); paintClaims();
         return true;
     };
-    window.ytBackToList = function (pid) { var b = document.getElementById('vid-btn-' + pid), vid = b ? b.getAttribute('data-vid') : ''; var d = activeYtPlayers[pid]; try { if (d && d.isTheater) toggleYtTheaterMode(pid); } catch (e) {} try { if (document.fullscreenElement) document.exitFullscreen(); } catch (e) {} var w = document.getElementById('video-wrapper-' + pid); if (w && !w.classList.contains('hidden')) { toggleLessonVideo(pid, vid); } else { try { if (d && d.player) d.player.pauseVideo(); } catch (e) {} } if (b) b.scrollIntoView({ behavior: 'smooth', block: 'center' }); }; window.ytVideoBtn = function (pid, vid) {   // nút Video: nhận quà (nếu đủ điều kiện) rồi mở/ẩn video như bình thường
+    window.ytBackToList = function (pid) { if (window.ytIsLocked && window.ytIsLocked(pid)) { try { showToast('🔒 Đang khóa nút Back! Bấm nút 🔒 trên thanh điều khiển để mở khóa.'); } catch (e) {} return; } var b = document.getElementById('vid-btn-' + pid), vid = b ? b.getAttribute('data-vid') : ''; var d = activeYtPlayers[pid]; try { if (d && d.isTheater) toggleYtTheaterMode(pid); } catch (e) {} try { if (document.fullscreenElement) document.exitFullscreen(); } catch (e) {} var w = document.getElementById('video-wrapper-' + pid); if (w && !w.classList.contains('hidden')) { toggleLessonVideo(pid, vid); } else { try { if (d && d.player) d.player.pauseVideo(); } catch (e) {} } if (b) b.scrollIntoView({ behavior: 'smooth', block: 'center' }); }; window.ytVideoBtn = function (pid, vid) {   // nút Video: nhận quà (nếu đủ điều kiện) rồi mở/ẩn video như bình thường
         try { window.ytFocusClaim(pid); } catch (e) {}
         toggleLessonVideo(pid, vid);
     };
@@ -15677,9 +15803,15 @@ window.PGR = (function () {
         try { av = d.player.getAvailableQualityLevels() || []; } catch (e) {}
         if (av.length && av.indexOf(lv) < 0) { for (var i = LADDER.indexOf(lv); i < LADDER.length; i++) if (av.indexOf(LADDER[i]) >= 0) { lv = LADDER[i]; break; } }
         q.cur = lv; q.at = Date.now();
+        var cEl = $('controls-' + pid), wEl = $('custom-wrapper-' + pid);
+        var wasHid = !!(cEl && cEl.classList.contains('ui-hidden'));
         try { if (d.player.setPlaybackQualityRange) d.player.setPlaybackQualityRange(lv, lv); } catch (e) {}
         try { d.player.setPlaybackQuality(lv); } catch (e) {}
         if (q.mode === 'auto') { var s = qSel(pid); if (s && LADDER.indexOf(LADDER[q.cap]) >= 0) s.value = LADDER[q.cap]; }
+        if (wasHid && cEl && wEl) {
+            cEl.classList.add('ui-hidden');
+            wEl.classList.add('yt-ui-off', 'hide-cursor');
+        }
     }
     window.ytQualInit = function (pid) { var d = activeYtPlayers[pid]; if (!d || d.q) return; d.q = { mode: 'auto', cap: netCap(), stalls: [], at: 0 }; qApply(pid); };
     window.ytQualSet = function (pid, v) {
@@ -15703,7 +15835,14 @@ window.PGR = (function () {
         if (s === 1 && !q.first) { q.first = true; qApply(pid); }
         if (s === 3 && d.everPlayed && q.mode === 'auto') {
             var now = Date.now(); q.stalls = q.stalls.filter(function (t) { return now - t < 25000; }); q.stalls.push(now);
-            if (q.stalls.length >= 2 && q.cap < LADDER.length - 1) { q.cap++; q.stalls = []; qApply(pid); toast('Mạng yếu, tự hạ xuống ' + NAME[LADDER[q.cap]]); }
+            if (q.stalls.length >= 2 && q.cap < LADDER.length - 1) {
+                var cEl = $('controls-' + pid), wEl = $('custom-wrapper-' + pid), wasHid = !!(cEl && cEl.classList.contains('ui-hidden'));
+                q.cap++; q.stalls = []; qApply(pid);
+                if (wasHid && cEl && wEl) {
+                    setTimeout(function () { cEl.classList.add('ui-hidden'); wEl.classList.add('yt-ui-off', 'hide-cursor'); }, 20);
+                }
+                toast('Mạng yếu, tự hạ xuống ' + NAME[LADDER[q.cap]]);
+            }
         }
         if (s === 1 && !f.started) { f.started = true; if (isOn() && !d.chapters && !d.chapBusy && aiAnyKey()) window.ytChapEnsure(pid); }
     };
@@ -16292,9 +16431,18 @@ window.isIOSDevice = function () {
     const cleanVi = s => String(s || '').split(/\r?\n/).map(x => capVi(clean(x))).filter(Boolean).join('\n');
     const viLine = s => String(s || '').split('\n').map(x => capVi(x)).join(' / ');
     const viHTML = s => String(s || '').split('\n').map(x => esc(capVi(x))).join('<br>');
-    const cleanPos = s => String(s || '').toLowerCase().replace(/[^a-z, .]/g, '').replace(/\s+/g, ' ').trim().slice(0, 16);
+    const normalizePos = (s, en) => {
+        let p = String(s || '').toLowerCase().replace(/[^a-z, .]/g, '').replace(/\s+/g, ' ').trim().slice(0, 16);
+        if (!p) return '';
+        const lw = String(en || '').trim().split(/\s+/).pop().toLowerCase();
+        const isIrreg = typeof IRREG_PL !== 'undefined' && IRREG_PL.has(lw);
+        if (/^(?:n\s*,\s*sing|sing\s*,\s*n|sing|singular)$/.test(p)) return 'n';
+        if (/^(?:n\s*,\s*pl|pl\s*,\s*n|pl|plural)$/.test(p)) return isIrreg ? 'n, pl' : 'n';
+        return p;
+    };
+    const cleanPos = s => normalizePos(s, '');
     const cleanIm = a => (Array.isArray(a) ? a : []).filter(x => typeof x === 'string' && /^data:image\//.test(x)).slice(0, 6);
-    const tk = (en, p) => nk(en) + '|' + cleanPos(p);
+    const tk = (en, p) => stemEnPhrase(en) + '|' + normalizePos(p, en);
 
     // Tách phần gốc trước dấu ngoặc: "MTA (mineral trioxide aggregate)" -> head="mta", hasParen=true
     function splitAbbr(en) {
@@ -16357,13 +16505,17 @@ window.isIOSDevice = function () {
         const out = [];
         list.forEach(item => {
             if (!item || !item.en || !item.vi || !letterOf(item.en)) return;
-            // Nếu là số nhiều có quy tắc (chỉ thêm s/es), tự đổi về dạng số ít chuẩn
+            const wasPlural = isRegularPluralForm(item.en, item.p) || /(?:\bpl\b|plural)/i.test(String(item.p || ''));
             let enFixed = item.en;
             if (isRegularPluralForm(enFixed, item.p)) enFixed = stripTrailingPluralS(enFixed);
             item.en = cap1(clean(enFixed));
+            item.p = normalizePos(item.p, item.en);
+            if (wasPlural && !IRREG_PL.has(item.en.split(/\s+/).pop().toLowerCase())) {
+                item.vi = String(item.vi || '').split('\n').map(l => capVi(l.replace(/^(?:các|những)\s+/i, '').trim())).filter(Boolean).join('\n') || item.vi;
+            }
             const sp = splitAbbr(item.en);
             const stem = stemEnPhrase(item.en);
-            const pos = cleanPos(item.p);
+            const pos = item.p;
             // Tìm xem trong danh sách đã có từ trùng gốc hoặc viết tắt trùng chưa
             const exist = out.find(e => {
                 const esp = splitAbbr(e.en);
@@ -16731,13 +16883,21 @@ function openPop(mode, t) {
         }
         let v = null; try { v = await aiGeminiJson(moreSys(), 'Thuật ngữ: ' + t.en + '\nNghĩa tiếng Việt: ' + viLine(t.vi), 3000); } catch (e) {}
         if (rd.pop !== 'more' || !rd.more || rd.more.t !== t) return;
-        const seen = new Set([tk(t.en, t.p)]), items = [];
+        const seen = new Set([stemEnPhrase(t.en) + '|' + normalizePos(t.p, t.en)]), items = [];
         const take = (arr, g) => (Array.isArray(arr) ? arr : []).forEach(x => {
             if (!x) return;
-            const en = cap1(clean(x.en)), vi = cleanVi(String(x.vi || '').replace(/\\n/g, '\n'));
+            let rawEn = clean(x.en), rawPos = cleanPos(x.pos);
+            if (isRegularPluralForm(rawEn, rawPos)) {
+                if (g === 'form') return;
+                rawEn = stripTrailingPluralS(rawEn);
+            }
+            const en = cap1(rawEn), pNorm = normalizePos(rawPos, en);
+            let vi = cleanVi(String(x.vi || '').replace(/\\n/g, '\n'));
             if (!en || !vi || en.length > 90 || vi.length > 180 || !letterOf(en)) return;
-            const k = tk(en, x.pos); if (seen.has(k)) return; seen.add(k);
-            items.push({ en, vi, p: cleanPos(x.pos), form: g === 'form' ? clean(x.form).slice(0, 20) : '', g, have: rd.terms.some(y => tk(y.en, y.p) === k) });
+            const k = stemEnPhrase(en) + '|' + pNorm;
+            if (seen.has(k)) return; seen.add(k);
+            const already = !!findExistingTerm(en, pNorm);
+            items.push({ en, vi, p: pNorm, form: g === 'form' ? clean(x.form).slice(0, 20) : '', g, have: already });
         });
         take(v && v.same, 'same'); take(v && v.forms, 'form');
         rd.more.items = items; moreRender();
@@ -16769,16 +16929,20 @@ function openPop(mode, t) {
         const mo = rd.more; if (!mo) return;
         const cks = Array.from(document.querySelectorAll('#rd-mt .rd-ck:checked'));
         if (!cks.length) { toast('Hãy tick chọn ít nhất một từ'); return; }
-        const have = new Set(rd.terms.map(x => tk(x.en, x.p))), added = [];
+        const added = [];
         cks.forEach(c => {
-            const it = mo.items[+c.dataset.i]; if (!it || have.has(tk(it.en, it.p))) return;
-            have.add(tk(it.en, it.p));
-            const t = { en: it.en, vi: it.vi, p: it.p, ts: Date.now(), u: 0, i: '', n: 1, s: 0, im: [] };
+            const it = mo.items[+c.dataset.i]; if (!it) return;
+            let rawEn = clean(it.en);
+            if (isRegularPluralForm(rawEn, it.p)) rawEn = stripTrailingPluralS(rawEn);
+            const en = cap1(rawEn), pNorm = normalizePos(it.p, en);
+            if (findExistingTerm(en, pNorm)) return;
+            const t = { en, vi: it.vi, p: pNorm, ts: Date.now(), u: 0, i: '', n: 1, s: 0, im: [], f: pNorm ? 1 : 0 };
             rd.terms.push(t); added.push(t);
         });
         if (!added.length) { toast('Các từ này đã có trong từ điển'); return; }
+        rd.terms = dedupeAndMergeTerms(rd.terms);
         sortTerms(); save(); closePop(); repaginate(null); showTerm(added[0]);
-        toast('Đã thêm ' + added.length + ' từ mới vào từ điển');
+        toast('📖 Đã thêm ' + added.length + ' thuật ngữ mới vào Từ điển RHM');
     }
     /* Thông tin thuật ngữ do AI soạn (lưu lại để lần sau mở ngay) */
     function infoSys() {
@@ -19328,34 +19492,208 @@ function viSelText(range) {
     document.body.appendChild(ov);
   }
 
+  const patch7Style = document.createElement('style');
+  patch7Style.textContent = `
+    /* 1. Các nút icon điều khiển video: hình vuông đồng nhất, nền xám đen khi tắt, nền xanh lam (#2563eb) giống nút Aa khi bật */
+    .custom-yt-controls .yt-iconrow .yt-lbl { display: none !important; }
+    .custom-yt-controls .yt-iconrow > .yt-chapnav { padding: 0 !important; background: transparent !important; border: 0 !important; box-shadow: none !important; }
+    .custom-yt-controls .yt-iconrow > .yt-chapnav > button,
+    .custom-yt-controls .yt-iconrow > button:not([id^="play-btn-"]),
+    .custom-yt-controls .yt-iconrow > .yt-volbox {
+      width: var(--yt-h, 40px) !important;
+      min-width: var(--yt-h, 40px) !important;
+      height: var(--yt-h, 40px) !important;
+      padding: 0 !important;
+      border-radius: 0.65rem !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      background: #1f2937 !important;
+      border: 1.5px solid #4b5563 !important;
+      color: #e5e7eb !important;
+      box-shadow: none !important;
+    }
+    .custom-yt-controls .yt-iconrow > button:not([id^="play-btn-"]):hover,
+    .custom-yt-controls .yt-iconrow > .yt-chapnav > button:hover,
+    .custom-yt-controls .yt-iconrow > .yt-volbox:hover {
+      background: #374151 !important;
+    }
+    /* Trạng thái đang kích hoạt: màu xanh lam giống nút Aa (#2563eb) */
+    .custom-yt-controls .yt-iconrow > .yt-chapnav.yt-mm-trk > button,
+    .custom-yt-wrapper.chap-open .custom-yt-controls .yt-iconrow > .yt-chapnav > button,
+    .custom-yt-controls .yt-iconrow > .yt-focus-btn.on,
+    .custom-yt-controls .yt-iconrow > button.bg-blue-600,
+    .custom-yt-controls .yt-iconrow > button.yt-btn-active,
+    .custom-yt-wrapper.sub-editing .custom-yt-controls .yt-iconrow > button[onclick*="toggleSubPanel"],
+    .custom-yt-wrapper.theater-mode .custom-yt-controls .yt-iconrow > button[id^="theater-btn-"],
+    .custom-yt-wrapper.yt-fs .custom-yt-controls .yt-iconrow > button[onclick*="toggleYtFullscreen"] {
+      background: #2563eb !important;
+      border-color: #60a5fa !important;
+      color: #ffffff !important;
+      box-shadow: 0 0 10px rgba(37, 99, 235, 0.55) !important;
+    }
+    /* Nút Tracking & Notice trong Mindmap và nút mức câu hỏi (Ít / Vừa / Cao): khi tắt màu xám đen, khi bật màu xanh lam (#2563eb) */
+    .yt-chapmap .cm-bar .cm-fg button { background: #1f2937 !important; border-color: #4b5563 !important; color: #e5e7eb !important; }
+    .yt-chapmap .cm-bar .cm-fg button.on,
+    .yt-chapmap .cm-bar .cm-fg button[data-a$="-set"].on {
+      background: #2563eb !important;
+      border-color: #60a5fa !important;
+      color: #ffffff !important;
+    }
+    .yt-focusdlg .fl-b { background: #1f2937 !important; color: #e2e8f0 !important; }
+    .yt-focusdlg .fl-b.on { background: #2563eb !important; color: #ffffff !important; }
+    /* Viền mũi tên hành trình (Tracking) đang phát: bóng sáng xanh lam */
+    .yt-journey .jr-c.on svg { filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.95)) !important; }
+    /* Nút Back của video bị khóa khi đang bật 🔒 */
+    .custom-yt-wrapper.yt-locked .ytb-back { opacity: 0.25 !important; cursor: not-allowed !important; }
+    /* 2. Mindmap: chữ tiêu đề luôn nằm cùng hàng với số thứ tự (không bị rớt xuống dưới số như mục 8) và khi xuống dòng thì canh thẳng lề với chữ dòng trên */
+    .yt-chapmap .cm-n.d1, .yt-chapmap .cm-n.d2 {
+      display: grid !important;
+      grid-template-columns: auto minmax(0, 1fr) !important;
+      column-gap: 0.4rem !important;
+      row-gap: 0.25rem !important;
+      align-items: start !important;
+    }
+    .yt-chapmap .cm-no { grid-column: 1 !important; grid-row: 1 !important; line-height: 1.3 !important; }
+    .yt-chapmap .cm-tt { grid-column: 2 !important; grid-row: 1 !important; min-width: 0 !important; word-break: break-word !important; overflow-wrap: anywhere !important; line-height: 1.3 !important; }
+    .yt-chapmap .cm-tm { grid-column: 1 / -1 !important; grid-row: 2 !important; justify-self: start !important; }
+  `;
+  document.head.appendChild(patch7Style);
+
+  // Đồng bộ màu xanh lam cho nút 🤖 Hỏi AI trên thanh điều khiển video khi cửa sổ chat AI đang mở
+  setInterval(function () {
+    var aiOpen = !!(aiModalEl && !aiModalEl.classList.contains('hidden') && !aiModalEl.classList.contains('ai-chat-off') && aiState.mode === 'video' && aiState.video);
+    document.querySelectorAll('.custom-yt-controls button[onclick*="openVideoAi"]').forEach(function (b) {
+      var match = aiOpen && b.getAttribute('onclick').indexOf(aiState.video.playerId) >= 0;
+      b.classList.toggle('yt-btn-active', !!match);
+    });
+  }, 350);
+
+  // Sửa cuộn chuột (wheel) cho #rd-info (ngoài từ điển), .rd-info (trong Flashcard) và các khung cuộn trong #dict-modal
+  document.addEventListener('wheel', function (e) {
+    var dm = document.getElementById('dict-modal');
+    if (!dm || dm.classList.contains('hidden')) return;
+    var sc = e.target && e.target.closest ? e.target.closest('#dict-modal .rd-info, #dict-modal #rd-info, #dict-modal #rd-res, #dict-modal .rd-nt, #dict-modal .rd-mt, #dict-modal .qz-body, #dict-modal .rv-list, #dict-modal .rd-tip, #dict-modal .rd-pop') : null;
+    while (sc && dm.contains(sc) && sc.scrollHeight <= sc.clientHeight + 1) {
+      sc = sc.parentElement ? sc.parentElement.closest('#dict-modal .rd-info, #dict-modal #rd-info, #dict-modal #rd-res, #dict-modal .rd-nt, #dict-modal .rd-mt, #dict-modal .qz-body, #dict-modal .rv-list, #dict-modal .rd-tip, #dict-modal .rd-pop') : null;
+    }
+    if (!sc || sc.scrollHeight <= sc.clientHeight + 1) return;
+    e.preventDefault();
+    e.stopPropagation();
+    sc.scrollTop += e.deltaY;
+  }, { passive: false, capture: true });
+
+  // Luôn bật thông báo popup mỗi khi rhmDictHarvest hoặc mergeDict thêm từ mới
+  const _origHarvest = window.rhmDictHarvest;
+  if (typeof _origHarvest === 'function') {
+    window.rhmDictHarvest = async function (src, results, opt) {
+      const o = Object.assign({}, opt || {}, { quiet: false });
+      return await _origHarvest.call(this, src, results, o);
+    };
+  }
+  if (window.rhmIO && typeof window.rhmIO.mergeDict === 'function') {
+    const _origMergeDict = window.rhmIO.mergeDict;
+    window.rhmIO.mergeDict = function (list) {
+      const cleaned = (Array.isArray(list) ? list : []).map(x => {
+        if (!x) return x;
+        let en = String(x.en || '').trim();
+        let p = String(x.p || '').toLowerCase().trim();
+        if (/^[A-Za-z0-9\-\s]+s$/i.test(en) && !/\([^()]+\)$/.test(en) && !/(?:ss\vert{}us\vert{}is\vert{}os)$/i.test(en)) {
+          en = en.replace(/ies$/i, 'y').replace(/(?:ches|shes|xes|zes|sses)$/i, m => m.slice(0, -2)).replace(/s$/i, '');
+        }
+        if (/^(?:n\s*,\s*sing|n\s*,\s*pl|sing|pl|singular|plural)$/.test(p)) p = 'n';
+        return Object.assign({}, x, { en: en, p: p });
+      });
+      const r = _origMergeDict.call(this, cleaned);
+      if (r && r.add > 0) { try { showToast('📖 Đã thêm ' + r.add + ' thuật ngữ mới vào Từ điển RHM'); } catch (e) {} }
+      return r;
+    };
+  }
+
+  function openQrFullscreen(boxId, titleText, kind) {
+    var box = document.getElementById(boxId);
+    var sourceCanvas = box && box.querySelector('canvas');
+    if (!sourceCanvas || sourceCanvas.style.display === 'none') {
+      try { showToast('Mã QR đang được tạo hoặc chưa có dữ liệu'); } catch (e) {}
+      return;
+    }
+    var old = document.getElementById('rhm-qr-zoom-modal'); if (old) old.remove();
+    var ov = document.createElement('div');
+    ov.id = 'rhm-qr-zoom-modal';
+    ov.style.cssText = 'position:fixed;inset:0;z-index:100100;background:rgba(2,6,23,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;gap:12px;cursor:zoom-out';
+    var sz = Math.max(260, Math.min(window.innerWidth - 36, window.innerHeight - 150, 760));
+    var hasMulti = kind && Q && Q.st && Q.st[kind] && Q.st[kind].qrs && Q.st[kind].qrs.length > 1;
+    ov.innerHTML = '<div class="rqz-ttl" style="color:#fff;font-weight:900;font-size:17px;text-align:center">' + (titleText || 'Mã QR phóng to') + '</div>'
+      + '<div style="background:#fff;padding:14px;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;width:' + sz + 'px;height:' + sz + 'px"><canvas style="width:100%;height:100%;image-rendering:pixelated"></canvas></div>'
+      + (hasMulti ? '<div class="rqz-nav" style="display:flex;align-items:center;gap:12px"><button type="button" data-z="prev" style="padding:8px 18px;border-radius:10px;border:0;font-weight:800;cursor:pointer">‹ Mã trước</button><span class="rqz-info" style="color:#fff;font-weight:800;font-size:14px"></span><button type="button" data-z="next" style="padding:8px 18px;border-radius:10px;border:0;font-weight:800;cursor:pointer">Mã sau ›</button></div>' : '')
+      + '<div style="color:#cbd5e1;font-size:13px;font-weight:600;text-align:center">Đưa camera thiết bị khác vào quét · Bấm vùng tối xung quanh để đóng</div>';
+    function paintZoomCanvas() {
+      var curBox = document.getElementById(boxId);
+      var cv = curBox && curBox.querySelector('canvas');
+      if (!cv) return;
+      var dest = ov.querySelector('canvas');
+      dest.width = cv.width; dest.height = cv.height;
+      dest.getContext('2d').drawImage(cv, 0, 0);
+      if (hasMulti) {
+        var s = Q.st[kind];
+        var inf = ov.querySelector('.rqz-info');
+        if (inf) inf.textContent = 'Mã ' + (s.i + 1) + ' / ' + s.qrs.length + ' (' + s.qrs[s.i].n + ' mục)';
+        var bp = ov.querySelector('[data-z="prev"]'), bn = ov.querySelector('[data-z="next"]');
+        if (bp) bp.disabled = s.i <= 0;
+        if (bn) bn.disabled = s.i >= s.qrs.length - 1;
+      }
+    }
+    paintZoomCanvas();
+    ov.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var nb = e.target.closest && e.target.closest('[data-z]');
+      if (nb && hasMulti) {
+        var s = Q.st[kind];
+        if (nb.getAttribute('data-z') === 'prev' && s.i > 0) { s.i--; Q.show(kind); paintZoomCanvas(); }
+        else if (nb.getAttribute('data-z') === 'next' && s.i < s.qrs.length - 1) { s.i++; Q.show(kind); paintZoomCanvas(); }
+        return;
+      }
+      ov.remove();
+    });
+    document.body.appendChild(ov);
+  }
+
   function ensureQrZoomHints() {
     var m = document.getElementById('progress-modal'); if (!m) return;
+    if (!m._qrDelegated) {
+      m._qrDelegated = 1;
+      m.addEventListener('click', function (e) {
+        if (e.target && e.target.closest && e.target.closest('button, input, label, a')) return;
+        var pq = e.target.closest && e.target.closest('#pq-box');
+        if (pq) { openQrFullscreen('pq-box', 'Mã QR Tiến Độ Cá Nhân', ''); return; }
+        var qd = e.target.closest && e.target.closest('#rhm-qa-dict');
+        if (qd) { openQrFullscreen('rhm-qa-dict', 'Mã QR Từ Điển RHM', 'dict'); return; }
+        var qn = e.target.closest && e.target.closest('#rhm-qa-notes');
+        if (qn) { openQrFullscreen('rhm-qa-notes', 'Mã QR Sổ Ghi Chú RHM', 'notes'); return; }
+      });
+    }
     var pairs = [
-      [document.getElementById('pq-box'), 'Mã QR Tiến Độ Cá Nhân'],
-      [document.getElementById('rhm-qa-dict'), 'Mã QR Từ Điển RHM'],
-      [document.getElementById('rhm-qa-notes'), 'Mã QR Sổ Ghi Chú RHM']
+      ['pq-box', 'Mã QR Tiến Độ Cá Nhân', ''],
+      ['rhm-qa-dict', 'Mã QR Từ Điển RHM', 'dict'],
+      ['rhm-qa-notes', 'Mã QR Sổ Ghi Chú RHM', 'notes']
     ];
     pairs.forEach(function (pair) {
-      var box = pair[0], label = pair[1]; if (!box) return;
+      var box = document.getElementById(pair[0]); if (!box) return;
       box.title = 'Bấm vào để phóng to mã QR toàn màn hình';
-      if (!box._qrZoomBound) {
-        box._qrZoomBound = 1;
-        box.addEventListener('click', function (e) {
-          if (e.target && e.target.closest && e.target.closest('button')) return;
-          var cv = box.querySelector('canvas');
-          openQrFullscreen(cv, label);
-        });
-      }
       var next = box.nextElementSibling;
       if (!next || !next.classList || !next.classList.contains('rhm-qr-zoom-hint')) {
         var h = document.createElement('div');
         h.className = 'rhm-qr-zoom-hint';
         h.textContent = '🔍 Bấm vào mã QR để phóng to toàn màn hình';
-        h.onclick = function () { openQrFullscreen(box.querySelector('canvas'), label); };
+        h.onclick = function (ev) { ev.stopPropagation(); openQrFullscreen(pair[0], pair[1], pair[2]); };
         box.insertAdjacentElement('afterend', h);
       }
     });
   }
+  setInterval(function () {
+    var m = document.getElementById('progress-modal');
+    if (m && !m.classList.contains('hidden')) ensureQrZoomHints();
+  }, 400);
 
   /* Chỉ ẩn đoạn mô tả đầu tiên (.bg-indigo-50.p-4) và nút ✕ / Đóng của bảng Tiến Độ; TUYỆT ĐỐI KHÔNG đụng vào 3 nút con trong #pq-panel-import */
   function tidyProgress(box) {
@@ -19370,7 +19708,7 @@ function viSelText(range) {
       if (t === '✕') b.style.display = 'none';
       else if (t === 'Đóng') { var f = b.closest('.mt-4') || b; f.style.display = 'none'; }
     });
-    ensureQrZoomHints();
+    setTimeout(ensureQrZoomHints, 50);
   }
 
   /* Bọc trio trong khung chung có một nút ✕ */
