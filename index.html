@@ -22930,4 +22930,82 @@ body {
   50% { transform: translateY(2px); }
 }
 </style>
+<style id="rhm-patch-v16-ai-header-balance">
+/* Cân đối chiều cao, căn giữa và chuẩn hóa padding cho tất cả các nút trên thanh tiêu đề Boxchat AI ở mọi chế độ */
+#ai-tutor-modal > div > div:first-child {
+  display: flex !important;
+  align-items: center !important;
+  min-height: 52px !important;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
+#ai-tutor-modal > div > div:first-child > div:last-child {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex-wrap: nowrap !important;
+}
+#ai-tutor-modal #ai-enwin-hbtn,
+#ai-tutor-modal .ai-hb2,
+#ai-tutor-modal #ai-lang-box,
+#ai-tutor-modal #ai-settings-btn,
+#ai-tutor-modal #ai-back-btn,
+#ai-tutor-modal #ai-close-btn {
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  vertical-align: middle !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: 1 !important;
+}
+#ai-tutor-modal #ai-enwin-hbtn {
+  padding: 0 12px !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+}
+#ai-tutor-modal .ai-hb2 {
+  padding: 0 11px !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+}
+#ai-tutor-modal #ai-lang-box {
+  padding: 0 !important;
+  border-radius: 9999px !important;
+  overflow: hidden !important;
+  background: #fff !important;
+}
+#ai-tutor-modal #ai-lang-box button {
+  height: 100% !important;
+  padding: 0 10px !important;
+  font-size: 11.5px !important;
+  font-weight: 800 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 0 !important;
+  line-height: 1 !important;
+}
+#ai-tutor-modal #ai-settings-btn,
+#ai-tutor-modal #ai-back-btn {
+  padding: 0 14px !important;
+  font-size: 12.5px !important;
+  font-weight: 800 !important;
+}
+#ai-tutor-modal #ai-close-btn {
+  width: 38px !important;
+  min-width: 38px !important;
+  max-width: 38px !important;
+  padding: 0 !important;
+  font-size: 18px !important;
+  font-weight: 900 !important;
+  border-radius: 12px !important;
+}
+</style>
 </html>
