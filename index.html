@@ -2318,25 +2318,28 @@
             });
         });
 
-        // ===== HỆ THỐNG BẢO MẬT: CHỐNG F12, CHỐNG DEVTOOLS, CHỐNG TẢI & CHẶN CHUỘT PHẢI =====
+        // ===== HỆ THỐNG BẢO MẬT: CHỐNG F12, CHỐNG DEVTOOLS, CHỐNG TẢI & CHẶN CHUỘT PHẢI (TỰ TẮT KHI BẬT DEV MODE) =====
         window.addEventListener('keydown', function(e) {
-            // Chặn phím F12
-            if (e.key === 'F12' || e.keyCode === 123) {
-                e.preventDefault();
-                e.stopPropagation();
-                return false;
-            }
-            // Chặn Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C (Mở DevTools)
-            if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) {
-                e.preventDefault();
-                e.stopPropagation();
-                return false;
-            }
-            // Chặn Ctrl+U (Xem mã nguồn trang), Ctrl+S (Lưu/Tải trang)
-            if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S')) {
-                e.preventDefault();
-                e.stopPropagation();
-                return false;
+            const isDevMode = (typeof getDevMode === 'function' && getDevMode());
+            if (!isDevMode) {
+                // Chặn phím F12
+                if (e.key === 'F12' || e.keyCode === 123) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+                // Chặn Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C (Mở DevTools)
+                if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+                // Chặn Ctrl+U (Xem mã nguồn trang), Ctrl+S (Lưu/Tải trang)
+                if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
             }
 
             // HỆ THỐNG PHÍM TẮT ĐIỀU KHIỂN VIDEO (SPACE = PLAY/PAUSE, MŨI TÊN TRÁI = -10S, MŨI TÊN PHẢI = +10S)
@@ -2359,8 +2362,10 @@
             }
         }, true);
 
-        // Khóa chuột phải toàn bộ trang web
+        // Khóa chuột phải toàn bộ trang web (trừ khi đang ở Chế độ Nhà phát triển)
+        document.body.removeAttribute('oncontextmenu');
         document.addEventListener('contextmenu', function(e) {
+            if (typeof getDevMode === 'function' && getDevMode()) return true;
             e.preventDefault();
             return false;
         }, false);
@@ -8052,7 +8057,7 @@ function renderSavedQuizzes() {
 
         function iconTag(node, cls, alt, emoji) {
             const a = String(alt).replace(/"/g, '&quot;');
-            return `<img src="${node.icon}" data-base="${node.iconBase}" data-i="0" data-emoji="${emoji}" alt="${a}" class="${cls}" onerror="iconFallback(this)">`;
+            return `<img src="${node.icon}" draggable="false" data-base="${node.iconBase}" data-i="0" data-emoji="${emoji}" alt="${a}" class="${cls}" onerror="iconFallback(this)">`;
         }
 
         function buildMonHocFromPaths(entries) {
@@ -9745,8 +9750,13 @@ function bkOpenAi() {
         aiAddMsg('ai', 'Chào bạn! Mình là gia sư Răng Hàm Mặt của bạn. Gia sư có thể giải thích, tóm tắt hoặc ra câu hỏi ôn về chương "' + bkCur.title + '". Bôi đen đoạn trong PDF rồi bấm 🌐 Dịch để dịch đoạn đó.');
         aiQuotaApply();
     }
-    document.getElementById('ai-tutor-modal').classList.remove('hidden', 'ai-chat-off');
-    aiPlaceModal(); bkSyncSplit(); bkPaintTr(); aiScrollBottom();
+    const m = document.getElementById('ai-tutor-modal');
+    if (m) {
+        m.classList.remove('hidden', 'ai-chat-off', 'ios-chat-hiding', 'ios-closing', 'ai-settings-open');
+        const kp = document.getElementById('ai-key-panel');
+        if (kp) kp.classList.add('hidden');
+    }
+    aiPlaceModal(); bkSyncSplit(); bkPaintTr(); aiEnsureQuickTts(); aiScrollBottom();
 }
         async function openMonHocDetail(subject, parentSubject = null) {
             currentActiveMonHoc = subject;
@@ -13069,7 +13079,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         if (!aiAnyKey()) { aiShowGate(); return; }
         try { d.player.pauseVideo(); } catch (e) {}
         const sig = 'v|' + playerId + '|' + (info.title || '') + '|' + ytId;
-        document.getElementById('ai-tutor-modal').classList.remove('hidden', 'ai-chat-off');
+        document.getElementById('ai-tutor-modal').classList.remove('hidden', 'ai-chat-off', 'ios-chat-hiding', 'ios-closing', 'ai-settings-open');
         if (sig !== aiState.qSig || aiState.mode !== 'video') {
             aiStopLive(); aiState.qSig = sig; aiState.mode = 'video'; aiState.history = []; try { aiEnClear(); } catch (e) {}
             aiState.video = { playerId, title: info.title || '', snapshot: '', yt: ytId };
@@ -13088,7 +13098,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     function openAiTutor() {
         if (!aiAnyKey()) { aiShowGate(); return; }
         const sig = String(currentIndex) + '|' + aiStrip((questions[currentIndex] || {}).question).slice(0, 80);
-        document.getElementById('ai-tutor-modal').classList.remove('hidden', 'ai-chat-off');
+        document.getElementById('ai-tutor-modal').classList.remove('hidden', 'ai-chat-off', 'ios-chat-hiding', 'ios-closing', 'ai-settings-open');
         if (sig !== aiState.qSig || aiState.mode === 'video') {
             aiStopLive(); aiState.qSig = sig; aiState.history = []; aiState.mode = 'quiz'; try { aiEnClear(); } catch (e) {}
             document.getElementById('ai-title').textContent = '🤖 Hỏi AI về câu này';
@@ -13991,29 +14001,37 @@ function aiIsEnglishText(t) {
 }
 function aiEnVoice(pref) {
     let all = []; try { all = window.speechSynthesis.getVoices() || []; } catch (e) {}
-    const en = all.filter(v => /^en[-_]/i.test(v.lang || ''));
+    const badVoice = /multilingual|france|french|spain|spanish|espanol|français|francais|italiano|deutsch|portugu/i;
+    let en = all.filter(v => /^en[-_](?:US|GB|AU|CA|IE|NZ)$/i.test(String(v.lang || '').trim()) && !badVoice.test((v.name || '') + ' ' + (v.voiceURI || '')));
+    if (!en.length) en = all.filter(v => /^en(?:[-_]|$)/i.test(String(v.lang || '').trim()) && !/france|french|spain|spanish|espanol|français|francais/i.test((v.name || '') + ' ' + (v.voiceURI || '')));
     if (!en.length) return null;
     const wantMale = pref === 'm-deep';
-    const male = /guy|ryan|davis|george|james|david|mark|brian|eric|christopher|male|tony|liam|ryan/i;
-    const female = /aria|jenny|zira|samantha|ana|emma|michelle|sara|hazel|susan|katherine|female|jessa|natasha|libby|female/i;
+    const male = /guy|ryan|davis|george|james|david|mark|brian|eric|christopher|male|tony|liam|steffan|andrew|roger/i;
+    const female = /aria|jenny|zira|samantha|ana|emma|michelle|sara|hazel|susan|katherine|female|jessa|natasha|libby|ava|sonia/i;
     const score = v => {
-        const n = v.name || ''; let s = 0;
+        const n = (v.name || '') + ' ' + (v.voiceURI || ''); let s = 0;
         if (/natural|online|neural/i.test(n)) s += 4;
-        if (/en[-_]US/i.test(v.lang || '')) s += 2;
+        if (/^en[-_]US$/i.test(String(v.lang || '').trim())) s += 5;
+        else if (/^en[-_]GB$/i.test(String(v.lang || '').trim())) s += 3;
+        if (/multilingual/i.test(n)) s -= 15;
         if (wantMale) { if (male.test(n)) s += 8; if (female.test(n)) s -= 8; }
         else { if (female.test(n)) s += 8; if (male.test(n)) s -= 8; }
         return s;
     };
     return en.slice().sort((a, b) => score(b) - score(a))[0];
 }
-/* Tạo phát âm cho một đoạn: tiếng Anh → giọng Anh cùng giới; còn lại → giọng đã chọn */
+/* Tạo phát âm cho một đoạn: tiếng Anh → giọng Anh bản xứ cùng giới (khóa cứng lang en-US/en-GB để không bị đọc nhầm sang tiếng Pháp/Tây Ban Nha); còn lại → giọng Việt đã chọn */
 function aiUttFor(text, v) {
-    let enForce = false; if (typeof text === 'string' && text.charCodeAt(0) === 1) { enForce = true; text = text.slice(1); } const ut = new SpeechSynthesisUtterance(text);
+    let enForce = false; if (typeof text === 'string' && text.charCodeAt(0) === 1) { enForce = true; text = text.slice(1); }
+    const ut = new SpeechSynthesisUtterance(text);
     if (enForce || aiIsEnglishText(text)) {
         const ev = aiEnVoice(aiVoicePrefKey());
-        ut.lang = (ev && ev.lang) || 'en-US'; if (ev) ut.voice = ev;
+        const vLang = ev && /^en[-_](?:US|GB|AU|CA)$/i.test(String(ev.lang || '').trim()) ? String(ev.lang).replace('_', '-') : 'en-US';
+        ut.lang = vLang;
+        if (ev) ut.voice = ev;
     } else {
-        ut.lang = (v && v.lang) || 'vi-VN'; if (v) ut.voice = v;
+        ut.lang = 'vi-VN';
+        if (v) ut.voice = v;
     }
     return ut;
 }
@@ -17678,12 +17696,19 @@ function openPop(mode, t) {
             + '<div class="rd-pb" style="margin-top:12px">' + (r.wrong.length ? '<button type="button" class="rd-pbtn pri" data-act="rv-again">🔁 Ôn lại ' + r.wrong.length + ' từ</button>' : '') + '<button type="button" class="rd-pbtn" data-act="rv-back">⚙️ Chọn lại</button><button type="button" class="rd-pbtn" data-act="rv-close">Đóng</button></div></div>';
     }
     function rvAgain() { const r = rv.run; if (!r || !r.wrong.length) return; rvBegin(shuffle(r.wrong), r.mode); }
-    /* ---------- đọc to từ tiếng Anh (cùng giọng Anh với hộp chat) ---------- */
+    /* ---------- đọc to từ tiếng Anh (cùng giọng Anh bản xứ với hộp chat, chống đọc nhầm sang tiếng Pháp/Tây Ban Nha) ---------- */
     function enVoice() {
         let all = []; try { all = speechSynthesis.getVoices() || []; } catch (e) {}
-        const en = all.filter(v => /^en[-_]/i.test(v.lang || '')); if (!en.length) return null;
-        let v = null; try { if (typeof aiEnVoice === 'function') v = aiEnVoice(typeof aiVoicePrefKey === 'function' ? aiVoicePrefKey() : ''); } catch (e) {}
-        return (v && /^en[-_]/i.test(v.lang || '')) ? v : (en.find(x => /en[-_]US/i.test(x.lang)) || en[0]);
+        if (typeof aiEnVoice === 'function') {
+            try {
+                const v = aiEnVoice(typeof aiVoicePrefKey === 'function' ? aiVoicePrefKey() : '');
+                if (v) return v;
+            } catch (e) {}
+        }
+        const pureEn = all.filter(v => /^en[-_](?:US|GB|AU|CA|IE|NZ|IN)$/i.test(String(v.lang || '').trim()) && !/multilingual|france|french|spain|spanish|espanol|français|francais|italiano|deutsch|portugu/i.test((v.name || '') + ' ' + (v.voiceURI || '')));
+        if (pureEn.length) return pureEn.find(x => /^en[-_]US$/i.test(x.lang)) || pureEn[0];
+        const anyEn = all.filter(v => /^en(?:[-_]|$)/i.test(String(v.lang || '').trim()) && !/france|french|spain|spanish|espanol|français|francais/i.test((v.name || '') + ' ' + (v.voiceURI || '')));
+        return anyEn.find(x => /en[-_]US/i.test(x.lang)) || anyEn[0] || null;
     }
     function speakEn(t) {
         if (!t) return;
@@ -17691,9 +17716,13 @@ function openPop(mode, t) {
         const txt = String(t.en || '').replace(/[()]/g, ', ').replace(/\s+/g, ' ').trim(); if (!txt) return;
         const go = () => {
             const ev = enVoice();
-            if (!ev && !speakEn.warned) { speakEn.warned = 1; toast('Thiết bị chưa có giọng tiếng Anh — hãy cài giọng English trong cài đặt chuyển văn bản thành giọng nói'); }
+            if (!ev && !speakEn.warned) { speakEn.warned = 1; toast('Thiết bị chưa có giọng tiếng Anh — hãy cài giọng English (US) trong cài đặt chuyển văn bản thành giọng nói'); }
             try { speechSynthesis.cancel(); } catch (e) {}
-            const ut = new SpeechSynthesisUtterance(txt); ut.lang = ev ? ev.lang : 'en-US'; if (ev) ut.voice = ev;
+            const ut = new SpeechSynthesisUtterance(txt);
+            // Luôn khóa cứng lang về en-US (hoặc en-GB) để các giọng đọc trên trình duyệt không tự nhận diện nhầm từ gốc Latin/Pháp sang tiếng Pháp hay Tây Ban Nha
+            const vLang = ev && /^en[-_](?:US|GB|AU|CA)$/i.test(String(ev.lang || '').trim()) ? String(ev.lang).replace('_', '-') : 'en-US';
+            ut.lang = vLang;
+            if (ev) ut.voice = ev;
             if (typeof aiRateGet === 'function') ut.rate = aiRateGet();
             if (typeof aiVoicePitch === 'function') ut.pitch = aiVoicePitch();
             setTimeout(() => { try { speechSynthesis.speak(ut); } catch (e) {} }, 60);
@@ -21874,6 +21903,36 @@ body {
 }
 #ai-tutor-modal #ai-quickrow > #ai-tts-quick {
   margin-left: auto !important;
+}
+</style>
+<style id="rhm-patch-v7-styles">
+/* 1. Cho phép bấm kéo trực tiếp vào hình icon của môn học để đổi chỗ môn học (giống kệ sách) */
+#monhoc-grid [data-rdk],
+#monhoc-grid [data-rdk] * {
+  -webkit-user-drag: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -webkit-touch-callout: none !important;
+}
+#monhoc-grid [data-rdk] img {
+  pointer-events: none !important;
+}
+
+/* 2. Đảm bảo nút AI Chat trong Reader luôn nổi trên cùng và không bị lớp nào che khuất */
+#book-viewer #bk-ai-btn {
+  z-index: 100055 !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+#ai-tutor-modal:not(.hidden):not(.ai-chat-off) {
+  pointer-events: auto !important;
+}
+#ai-tutor-modal.ai-bk-panel:not(.hidden):not(.ai-chat-off) {
+  pointer-events: none !important;
+}
+#ai-tutor-modal.ai-bk-panel:not(.hidden):not(.ai-chat-off) > div {
+  pointer-events: auto !important;
+  display: flex !important;
 }
 </style>
 </html>
