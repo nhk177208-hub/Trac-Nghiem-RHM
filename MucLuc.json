@@ -8,7 +8,7 @@
     ],
     "quy_tac_thuat_ngu_tieng_viet_mien_nam": "Khi dịch trường `vi`, bắt buộc dùng chuẩn RHM miền Nam (ĐH Y Dược TP.HCM): nội nha (không nội tủy), trám răng / xoang trám (không hàn răng), trám bít ống tủy (không hàn bít), nướu (không lợi), vôi răng / lấy vôi răng (không cao răng), răng cối nhỏ / lớn (không răng hàm), chóp răng / quanh chóp (không cuống răng), mão răng (không chụp răng)."
   },
-  "version": 3,
+  "version": 5,
   "offline_rules": {
     "min_length": 3,
     "max_length": 110,
@@ -18,13 +18,26 @@
     "allow_run_in": false,
     "run_in_max_length": 60,
     "merge_offline_candidates": true,
-    "exclude_regex": "%|\\d{3,}|\\(\\d|et al|^combined$|^table\\b|^fig\\.|^figure\\b|^box\\b|^flowchart\\b|^clinical notes\\b|^step\\s+\\d|^references\\b|^summary\\b|^page\\b",
-    "include_regex": "^(?:[IVXLCDM]{1,4}\\.\\s+[A-Z]|Zone\\s+\\d+\\s*:|[A-Z][A-Za-z0-9\\s,–—-]+$)"
+    "exclude_regex": "\\d{3,}|^\\(\\d|et al|^combined$|^table\\b|^fig\\.|^figure\\b|^box\\b|^flowchart\\b|^clinical notes\\b|^step\\s+\\d|^references\\b|^summary\\b|^page\\b",
+    "include_regex": "^(?:[IVXLCDM]{1,4}\\.\\s+[A-Z]|Zone\\s+\\d+\\s*:|[A-Z][A-Za-z0-9\\s,–—-]+$)",
+    "include_font": [
+      "Frutiger-Black",
+      "Frutiger-LightItalic",
+      "Giovanni-BoldItalic"
+    ],
+    "min_size": 11.0,
+    "exclude_font": [
+      "Frutiger-Light",
+      "MeliorLTStd",
+      "Giovanni-Book",
+      "Giovanni-BookItalic"
+    ],
+    "column_aware": true
   },
   "ai_prompts": {
     "chunk_size": 40000,
     "chunk_overlap": 1500,
-    "outline_system_prompt": "Bạn là giáo sư đầu ngành Răng Hàm Mặt. Quét TOÀN BỘ đoạn văn bản chương sách được gửi và lập MỤC LỤC CHI TIẾT ĐA CẤP (hỗ trợ sâu từ 1 đến 10 cấp), theo đúng thứ tự xuất hiện từ đầu đến cuối đoạn. Phân cấp chính xác theo tư duy chuyên môn: lvl = 1 cho đại mục lớn; lvl = 2 cho mục chính (bao gồm các mục đánh số La Mã như 'I. Biofilm'); lvl = 3 cho tiểu mục; lvl = 4 đến 10 cho các mục chi tiết bên trong. Với mỗi mục trả về: \"src\" = tiêu đề GIỮ NGUYÊN NGUYÊN VĂN như in trong sách; \"vi\" = tên tiếng Việt ngắn gọn đúng thuật ngữ RHM miền Nam; \"lvl\" = số nguyên từ 1 đến 10. TUYỆT ĐỐI KHÔNG lập mục từ: Clinical Notes, Box, Table, Figure, Flowchart, Step 1/2/3, References, Summary, tên chương, tên tác giả, câu văn thường, hoặc các đoạn văn giải thích dài. Trả về MỘT đối tượng JSON: {\"sections\":[{\"src\":\"...\",\"vi\":\"...\",\"lvl\":1}]}; nếu không có tiêu đề nào, {\"sections\":[]}. Không thêm chữ nào ngoài JSON.",
+    "outline_system_prompt": "Bạn là giáo sư đầu ngành Răng Hàm Mặt. Bạn nhận danh sách ỨNG VIÊN TIÊU ĐỀ đã lấy theo đặc trưng font (kèm font, cỡ, trang, đoạn văn ngay sau). Hãy: (1) loại mục không phải tiêu đề (hộp Clinical Notes, chú thích hình, La Mã đứng riêng, tiêu đề chạy đầu trang); (2) giữ src nguyên văn như in; (3) gán lvl từ 1 đến 10 theo thứ bậc của nội dung; (4) vi = tên tiếng Việt ngắn theo thuật ngữ RHM miền Nam. Trả về MỘT đối tượng JSON {\"sections\":[{\"src\":\"...\",\"vi\":\"...\",\"lvl\":1}]}. Không thêm chữ nào ngoài JSON.",
     "sub_pass1_prompt": "Bạn là giáo sư đầu ngành Răng Hàm Mặt. Đoạn văn dưới đây thuộc mục \"{{TITLE}}\". Liệt kê đầy đủ các TIÊU ĐỀ MỤC CON đa cấp (lvl = 2 đến 10) nằm bên trong đoạn (KHÔNG liệt kê chính tiêu đề \"{{TITLE}}\", KHÔNG liệt kê Clinical Notes, Box, Table, Figure, Flowchart hay câu văn thường). Với mỗi mục trả về \"src\" = tiêu đề GIỮ NGUYÊN NGUYÊN VĂN như in, \"vi\" = tên tiếng Việt ngắn gọn đúng thuật ngữ RHM miền Nam, \"lvl\" = số nguyên từ 2 đến 10. Trả về MỘT đối tượng JSON: {\"sections\":[{\"src\":\"...\",\"vi\":\"...\",\"lvl\":2}]}. Không thêm chữ nào ngoài JSON.",
     "sub_pass2_prompt": "Bạn là giáo sư đầu ngành Răng Hàm Mặt, đang KIỂM TRA ĐỐI CHIẾU. Đối chiếu danh sách mục con dưới đây với đoạn văn của mục \"{{TITLE}}\". Mỗi mục phải là tiêu đề có thật, xuất hiện nguyên văn trong đoạn; xóa các mục là Clinical Notes, Box, Table, Figure, Flowchart hoặc câu văn thường; bổ sung tiêu đề con còn thiếu; \"lvl\" = số nguyên từ 2 đến 10. Trả về MỘT đối tượng JSON cùng định dạng: {\"sections\":[{\"src\":\"...\",\"vi\":\"...\",\"lvl\":2}]}. Không thêm chữ nào ngoài JSON."
   },
@@ -35,169 +48,857 @@
       "offline_rules": {
         "heading_font_ratio": 1.05,
         "allow_run_in": false,
-        "exclude_regex": "%|\\d{3,}|\\(\\d|et al|^combined$|^table\\b|^fig\\.|^figure\\b|^box\\b|^flowchart\\b|^clinical notes\\b|^step\\s+\\d|^references\\b|^summary\\b|^page\\b"
+        "exclude_regex": "\\d{3,}|^\\(\\d|et al|^combined$|^table\\b|^fig\\.|^figure\\b|^box\\b|^flowchart\\b|^clinical notes\\b|^step\\s+\\d|^references\\b|^summary\\b|^page\\b"
       },
       "chapters": {
         "Chapter 1": [
-          { "src": "Teeth and Supporting Tissues", "vi": "Răng và mô nâng đỡ", "lvl": 1 },
-          { "src": "Dentitions", "vi": "Bộ răng", "lvl": 2 },
-          { "src": "Classes of Human Teeth: Form and Function", "vi": "Các nhóm răng người: Hình thái và chức năng", "lvl": 2 },
-          { "src": "Incisors", "vi": "Răng cửa", "lvl": 3 },
-          { "src": "Canines", "vi": "Răng nanh", "lvl": 3 },
-          { "src": "Premolars", "vi": "Răng cối nhỏ", "lvl": 3 },
-          { "src": "Molars", "vi": "Răng cối lớn", "lvl": 3 },
-          { "src": "Structures of Teeth", "vi": "Cấu trúc của răng", "lvl": 1 },
-          { "src": "Enamel", "vi": "Men răng", "lvl": 2 },
-          { "src": "Chemical composition", "vi": "Thành phần hóa học của men răng", "lvl": 3 },
-          { "src": "Structure of enamel", "vi": "Cấu trúc men răng", "lvl": 3 },
-          { "src": "Apatite crystallites", "vi": "Tinh thể apatit", "lvl": 4 },
-          { "src": "Gnarled enamel", "vi": "Men răng xoắn", "lvl": 3 },
-          { "src": "Hunter-Schreger bands", "vi": "Dải Hunter-Schreger", "lvl": 3 },
-          { "src": "Enamel tufts", "vi": "Búi men", "lvl": 3 },
-          { "src": "Enamel lamellae", "vi": "Lá men", "lvl": 3 },
-          { "src": "Striae of Retzius", "vi": "Đường tăng trưởng Retzius", "lvl": 3 },
-          { "src": "Nasmyth's membrane or primary enamel cuticle", "vi": "Màng Nasmyth (màng biểu mô men nguyên phát)", "lvl": 3 },
-          { "src": "Prismless enamel", "vi": "Men răng không trụ", "lvl": 3 },
-          { "src": "Dentinoenamel junction", "vi": "Đường nối men – ngà (DEJ)", "lvl": 3 },
-          { "src": "Pit and fissure", "vi": "Hố và rãnh", "lvl": 3 },
-          { "src": "Enamel maturation", "vi": "Sự trưởng thành của men răng", "lvl": 3 },
-          { "src": "Translucency of enamel", "vi": "Độ trong mờ của men răng", "lvl": 3 },
-          { "src": "Pulp-Dentin Complex", "vi": "Phức hợp tủy – ngà", "lvl": 2 },
-          { "src": "Pulp", "vi": "Tủy răng", "lvl": 3 },
-          { "src": "Functions of pulp", "vi": "Chức năng của tủy răng", "lvl": 4 },
-          { "src": "Dentin", "vi": "Ngà răng", "lvl": 3 },
-          { "src": "Dentinogenesis", "vi": "Sự tạo ngà (Dentinogenesis)", "lvl": 4 },
-          { "src": "Predentin", "vi": "Tiền ngà", "lvl": 4 },
-          { "src": "Enamel spindles", "vi": "Thoi men", "lvl": 3 },
-          { "src": "Dentinal tubules", "vi": "Ống ngà", "lvl": 3 },
-          { "src": "Secondary dentin", "vi": "Ngà thứ phát", "lvl": 3 },
-          { "src": "Tertiary dentin", "vi": "Ngà thứ ba (ngà phản ứng / ngà sửa chữa)", "lvl": 3 },
-          { "src": "Sclerotic dentin", "vi": "Ngà xơ hóa", "lvl": 3 },
-          { "src": "Chemical composition of dentin", "vi": "Thành phần hóa học của ngà răng", "lvl": 3 },
-          { "src": "Physical properties", "vi": "Tính chất vật lý của ngà răng", "lvl": 3 },
-          { "src": "Dentin versus enamel", "vi": "Phân biệt ngà răng và men răng", "lvl": 3 },
-          { "src": "Hydrodynamic theory of dentinal sensitivity", "vi": "Thuyết thủy động học về sự nhạy cảm ngà", "lvl": 3 },
-          { "src": "Dentinal permeability", "vi": "Độ thấm của ngà răng", "lvl": 3 },
-          { "src": "Cementum", "vi": "Xê măng chân răng", "lvl": 2 },
-          { "src": "Types of cementum", "vi": "Các loại xê măng", "lvl": 3 },
-          { "src": "Physiology of Tooth Form", "vi": "Sinh lý học hình thái răng", "lvl": 1 },
-          { "src": "Function", "vi": "Chức năng của hình thái răng", "lvl": 2 },
-          { "src": "Contours", "vi": "Độ lồi mặt ngoài và mặt trong", "lvl": 2 },
-          { "src": "Proximal Contact Area", "vi": "Vùng tiếp xúc mặt bên", "lvl": 2 },
-          { "src": "Embrasures", "vi": "Khoảng tiếp cận (Embrasures)", "lvl": 2 },
-          { "src": "Periodontium", "vi": "Mô nha chu", "lvl": 1 },
-          { "src": "Gingival Unit", "vi": "Đơn vị nướu", "lvl": 2 },
-          { "src": "Free gingiva", "vi": "Nướu rời", "lvl": 3 },
-          { "src": "Attached gingiva", "vi": "Nướu dính", "lvl": 3 },
-          { "src": "Alveolar mucosa", "vi": "Niêm mạc xương ổ", "lvl": 3 },
-          { "src": "Attachment Apparatus", "vi": "Bộ phận bám dính", "lvl": 2 },
-          { "src": "Periodontal ligament", "vi": "Dây chằng nha chu", "lvl": 3 },
-          { "src": "Alveolar process", "vi": "Mỏm xương ổ răng", "lvl": 3 },
-          { "src": "Occlusion", "vi": "Khớp cắn", "lvl": 1 },
-          { "src": "Tooth Alignment and Dental Arches", "vi": "Sự sắp xếp răng và cung răng", "lvl": 2 },
-          { "src": "Central Groove (Fig. 1.32A)", "vi": "Rãnh trung tâm", "lvl": 3 },
-          { "src": "Fossae", "vi": "Hõm (Fossae)", "lvl": 3 },
-          { "src": "Facial Occlusal Line", "vi": "Đường khớp cắn ngoài", "lvl": 3 },
-          { "src": "Central Fossa Occlusal Line", "vi": "Đường khớp cắn hõm trung tâm", "lvl": 3 },
-          { "src": "Maximum Inter-cuspation", "vi": "Lồng múi tối đa (MI)", "lvl": 3 },
-          { "src": "Anteroposterior Interarch Relationships", "vi": "Tương quan hai hàm theo chiều trước – sau", "lvl": 2 },
-          { "src": "Interarch Tooth Relationships", "vi": "Tương quan răng giữa hai hàm", "lvl": 2 },
-          { "src": "Posterior Cusp Characteristics", "vi": "Đặc điểm múi răng sau", "lvl": 2 },
-          { "src": "Outer Incline Ridge", "vi": "Sườn ngoài của múi", "lvl": 3 },
-          { "src": "Inner Incline Ridge", "vi": "Sườn trong của múi (gờ tam giác)", "lvl": 3 },
-          { "src": "Mesial Cusp Ridges and Distal Cusp Ridges", "vi": "Gờ múi gần và gờ múi xa", "lvl": 3 },
-          { "src": "Functional Cusps", "vi": "Múi chịu (Múi chức năng)", "lvl": 2 },
-          { "src": "Nonfunctional Cusps", "vi": "Múi hướng dẫn (Múi không chức năng)", "lvl": 2 }
+          {
+            "src": "Teeth and Supporting Tissues",
+            "vi": "Răng và mô nâng đỡ",
+            "lvl": 1
+          },
+          {
+            "src": "Dentitions",
+            "vi": "Bộ răng",
+            "lvl": 2
+          },
+          {
+            "src": "Classes of Human Teeth: Form and Function",
+            "vi": "Các nhóm răng người: Hình thái và chức năng",
+            "lvl": 2
+          },
+          {
+            "src": "Incisors",
+            "vi": "Răng cửa",
+            "lvl": 3
+          },
+          {
+            "src": "Canines",
+            "vi": "Răng nanh",
+            "lvl": 3
+          },
+          {
+            "src": "Premolars",
+            "vi": "Răng cối nhỏ",
+            "lvl": 3
+          },
+          {
+            "src": "Molars",
+            "vi": "Răng cối lớn",
+            "lvl": 3
+          },
+          {
+            "src": "Structures of Teeth",
+            "vi": "Cấu trúc của răng",
+            "lvl": 1
+          },
+          {
+            "src": "Enamel",
+            "vi": "Men răng",
+            "lvl": 2
+          },
+          {
+            "src": "Chemical composition",
+            "vi": "Thành phần hóa học của men răng",
+            "lvl": 3
+          },
+          {
+            "src": "Structure of enamel",
+            "vi": "Cấu trúc men răng",
+            "lvl": 3
+          },
+          {
+            "src": "Apatite crystallites",
+            "vi": "Tinh thể apatit",
+            "lvl": 4
+          },
+          {
+            "src": "Gnarled enamel",
+            "vi": "Men răng xoắn",
+            "lvl": 3
+          },
+          {
+            "src": "Hunter-Schreger bands",
+            "vi": "Dải Hunter-Schreger",
+            "lvl": 3
+          },
+          {
+            "src": "Enamel tufts",
+            "vi": "Búi men",
+            "lvl": 3
+          },
+          {
+            "src": "Enamel lamellae",
+            "vi": "Lá men",
+            "lvl": 3
+          },
+          {
+            "src": "Striae of Retzius",
+            "vi": "Đường tăng trưởng Retzius",
+            "lvl": 3
+          },
+          {
+            "src": "Nasmyth's membrane or primary enamel cuticle",
+            "vi": "Màng Nasmyth (màng biểu mô men nguyên phát)",
+            "lvl": 3
+          },
+          {
+            "src": "Prismless enamel",
+            "vi": "Men răng không trụ",
+            "lvl": 3
+          },
+          {
+            "src": "Dentinoenamel junction",
+            "vi": "Đường nối men – ngà (DEJ)",
+            "lvl": 3
+          },
+          {
+            "src": "Pit and fissure",
+            "vi": "Hố và rãnh",
+            "lvl": 3
+          },
+          {
+            "src": "Enamel maturation",
+            "vi": "Sự trưởng thành của men răng",
+            "lvl": 3
+          },
+          {
+            "src": "Translucency of enamel",
+            "vi": "Độ trong mờ của men răng",
+            "lvl": 3
+          },
+          {
+            "src": "Pulp-Dentin Complex",
+            "vi": "Phức hợp tủy – ngà",
+            "lvl": 2
+          },
+          {
+            "src": "Pulp",
+            "vi": "Tủy răng",
+            "lvl": 3
+          },
+          {
+            "src": "Functions of pulp",
+            "vi": "Chức năng của tủy răng",
+            "lvl": 4
+          },
+          {
+            "src": "Dentin",
+            "vi": "Ngà răng",
+            "lvl": 3
+          },
+          {
+            "src": "Dentinogenesis",
+            "vi": "Sự tạo ngà (Dentinogenesis)",
+            "lvl": 4
+          },
+          {
+            "src": "Predentin",
+            "vi": "Tiền ngà",
+            "lvl": 4
+          },
+          {
+            "src": "Enamel spindles",
+            "vi": "Thoi men",
+            "lvl": 3
+          },
+          {
+            "src": "Dentinal tubules",
+            "vi": "Ống ngà",
+            "lvl": 3
+          },
+          {
+            "src": "Secondary dentin",
+            "vi": "Ngà thứ phát",
+            "lvl": 3
+          },
+          {
+            "src": "Tertiary dentin",
+            "vi": "Ngà thứ ba (ngà phản ứng / ngà sửa chữa)",
+            "lvl": 3
+          },
+          {
+            "src": "Sclerotic dentin",
+            "vi": "Ngà xơ hóa",
+            "lvl": 3
+          },
+          {
+            "src": "Chemical composition of dentin",
+            "vi": "Thành phần hóa học của ngà răng",
+            "lvl": 3
+          },
+          {
+            "src": "Physical properties",
+            "vi": "Tính chất vật lý của ngà răng",
+            "lvl": 3
+          },
+          {
+            "src": "Dentin versus enamel",
+            "vi": "Phân biệt ngà răng và men răng",
+            "lvl": 3
+          },
+          {
+            "src": "Hydrodynamic theory of dentinal sensitivity",
+            "vi": "Thuyết thủy động học về sự nhạy cảm ngà",
+            "lvl": 3
+          },
+          {
+            "src": "Dentinal permeability",
+            "vi": "Độ thấm của ngà răng",
+            "lvl": 3
+          },
+          {
+            "src": "Cementum",
+            "vi": "Xê măng chân răng",
+            "lvl": 2
+          },
+          {
+            "src": "Types of cementum",
+            "vi": "Các loại xê măng",
+            "lvl": 3
+          },
+          {
+            "src": "Physiology of Tooth Form",
+            "vi": "Sinh lý học hình thái răng",
+            "lvl": 1
+          },
+          {
+            "src": "Function",
+            "vi": "Chức năng của hình thái răng",
+            "lvl": 2
+          },
+          {
+            "src": "Contours",
+            "vi": "Độ lồi mặt ngoài và mặt trong",
+            "lvl": 2
+          },
+          {
+            "src": "Proximal Contact Area",
+            "vi": "Vùng tiếp xúc mặt bên",
+            "lvl": 2
+          },
+          {
+            "src": "Embrasures",
+            "vi": "Khoảng tiếp cận (Embrasures)",
+            "lvl": 2
+          },
+          {
+            "src": "Periodontium",
+            "vi": "Mô nha chu",
+            "lvl": 1
+          },
+          {
+            "src": "Gingival Unit",
+            "vi": "Đơn vị nướu",
+            "lvl": 2
+          },
+          {
+            "src": "Free gingiva",
+            "vi": "Nướu rời",
+            "lvl": 3
+          },
+          {
+            "src": "Attached gingiva",
+            "vi": "Nướu dính",
+            "lvl": 3
+          },
+          {
+            "src": "Alveolar mucosa",
+            "vi": "Niêm mạc xương ổ",
+            "lvl": 3
+          },
+          {
+            "src": "Attachment Apparatus",
+            "vi": "Bộ phận bám dính",
+            "lvl": 2
+          },
+          {
+            "src": "Periodontal ligament",
+            "vi": "Dây chằng nha chu",
+            "lvl": 3
+          },
+          {
+            "src": "Alveolar process",
+            "vi": "Mỏm xương ổ răng",
+            "lvl": 3
+          },
+          {
+            "src": "Occlusion",
+            "vi": "Khớp cắn",
+            "lvl": 1
+          },
+          {
+            "src": "Tooth Alignment and Dental Arches",
+            "vi": "Sự sắp xếp răng và cung răng",
+            "lvl": 2
+          },
+          {
+            "src": "Central Groove",
+            "vi": "Rãnh trung tâm",
+            "lvl": 3
+          },
+          {
+            "src": "Fossae",
+            "vi": "Hõm (Fossae)",
+            "lvl": 3
+          },
+          {
+            "src": "Facial Occlusal Line",
+            "vi": "Đường khớp cắn ngoài",
+            "lvl": 3
+          },
+          {
+            "src": "Central Fossa Occlusal Line",
+            "vi": "Đường khớp cắn hõm trung tâm",
+            "lvl": 3
+          },
+          {
+            "src": "Maximum Inter-cuspation",
+            "vi": "Lồng múi tối đa (MI)",
+            "lvl": 3
+          },
+          {
+            "src": "Anteroposterior Interarch Relationships",
+            "vi": "Tương quan hai hàm theo chiều trước – sau",
+            "lvl": 2
+          },
+          {
+            "src": "Interarch Tooth Relationships",
+            "vi": "Tương quan răng giữa hai hàm",
+            "lvl": 2
+          },
+          {
+            "src": "Posterior Cusp Characteristics",
+            "vi": "Đặc điểm múi răng sau",
+            "lvl": 2
+          },
+          {
+            "src": "Outer Incline Ridge",
+            "vi": "Sườn ngoài của múi",
+            "lvl": 3
+          },
+          {
+            "src": "Inner Incline Ridge",
+            "vi": "Sườn trong của múi (gờ tam giác)",
+            "lvl": 3
+          },
+          {
+            "src": "Mesial Cusp Ridges and Distal Cusp Ridges",
+            "vi": "Gờ múi gần và gờ múi xa",
+            "lvl": 3
+          },
+          {
+            "src": "Functional Cusps",
+            "vi": "Múi chịu (Múi chức năng)",
+            "lvl": 2
+          },
+          {
+            "src": "Nonfunctional Cusps",
+            "vi": "Múi hướng dẫn (Múi không chức năng)",
+            "lvl": 2
+          }
         ],
         "Chapter 2": [
-          { "src": "Definition", "vi": "Định nghĩa sâu răng", "lvl": 1 },
-          { "src": "Demineralization-Remineralization Balance", "vi": "Cân bằng Hủy khoáng – Tái khoáng", "lvl": 1 },
-          { "src": "Etiology of Dental Caries", "vi": "Bệnh căn của sâu răng", "lvl": 1 },
-          { "src": "I. Biofilm", "vi": "Mảng bám sinh học (Biofilm)", "lvl": 2 },
-          { "src": "II. Tooth Habitats for Cariogenic Biofilm", "vi": "Các vùng lưu giữ mảng bám gây sâu răng trên răng", "lvl": 2 },
-          { "src": "III. Diet and Caries", "vi": "Chế độ ăn và bệnh sâu răng", "lvl": 2 },
-          { "src": "IV. Saliva: Nature's Anticaries Agent", "vi": "Nước bọt: Tác nhân chống sâu răng tự nhiên", "lvl": 2 },
-          { "src": "Bacterial Clearance", "vi": "Sự làm sạch vi khuẩn", "lvl": 3 },
-          { "src": "Direct Antibacterial Activity", "vi": "Hoạt tính kháng khuẩn trực tiếp", "lvl": 3 },
-          { "src": "Buffer Capacity", "vi": "Khả năng đệm của nước bọt", "lvl": 3 },
-          { "src": "Remineralization", "vi": "Sự tái khoáng hóa", "lvl": 3 },
-          { "src": "Clinical Characteristics of the Caries Lesion", "vi": "Đặc điểm lâm sàng của sang thương sâu răng", "lvl": 1 },
-          { "src": "I. Pit and Fissure Caries", "vi": "Sâu răng hố và rãnh", "lvl": 2 },
-          { "src": "II. Smooth Surface Caries", "vi": "Sâu răng mặt láng", "lvl": 2 },
-          { "src": "III. Root Caries", "vi": "Sâu chân răng", "lvl": 2 },
-          { "src": "Enamel Caries", "vi": "Sâu men răng", "lvl": 1 },
-          { "src": "Non-cavitated Enamel Caries/White Spot Lesion/Initial Caries Lesion", "vi": "Sâu men chưa tạo lỗ / Sang thương đốm trắng", "lvl": 2 },
-          { "src": "Zones of Enamel Caries", "vi": "Các vùng mô học của sâu men", "lvl": 2 },
-          { "src": "Zone 1: Surface zone", "vi": "Vùng 1: Vùng bề mặt", "lvl": 3 },
-          { "src": "Zone 2: Body of lesion", "vi": "Vùng 2: Thân sang thương", "lvl": 3 },
-          { "src": "Zone 3: Dark zone", "vi": "Vùng 3: Vùng tối", "lvl": 3 },
-          { "src": "Zone 4: Translucent zone", "vi": "Vùng 4: Vùng trong suốt", "lvl": 3 },
-          { "src": "Caries Lesion Progression", "vi": "Sự tiến triển của sang thương sâu răng", "lvl": 2 },
-          { "src": "Cavitated Enamel Caries", "vi": "Sâu men đã tạo lỗ", "lvl": 2 },
-          { "src": "Dentin Caries Lesions", "vi": "Sang thương sâu ngà", "lvl": 1 },
-          { "src": "Progression of Caries in Dentin", "vi": "Sự tiến triển sâu răng trong ngà", "lvl": 2 },
-          { "src": "Clinical Symptoms", "vi": "Triệu chứng lâm sàng", "lvl": 2 },
-          { "src": "Dentinal Reaction to Caries", "vi": "Phản ứng của ngà đối với sâu răng", "lvl": 2 },
-          { "src": "I. Sclerotic dentin: Reaction to a long-term, low-level acid demineralization associated with a slowly advancing lesion", "vi": "Ngà xơ hóa: Phản ứng với hủy khoáng mức độ thấp kéo dài", "lvl": 3 },
-          { "src": "II. Reparative dentin: Reaction to a moderate-intensity attack", "vi": "Ngà sửa chữa: Phản ứng với kích thích cường độ trung bình", "lvl": 3 },
-          { "src": "III. Pulpal Necrosis: Reaction to severe, rapidly advancing caries characterized by very high acid levels", "vi": "Hoại tử tủy: Phản ứng với sâu răng tiến triển nhanh, nặng", "lvl": 3 },
-          { "src": "Zones of Dentin Caries Lesions", "vi": "Các vùng của sang thương sâu ngà", "lvl": 2 },
-          { "src": "Zone 1: Hard Dentin", "vi": "Vùng 1: Ngà cứng", "lvl": 3 },
-          { "src": "Zone 2: Firm dentin (formerly affected dentin)", "vi": "Vùng 2: Ngà dai (ngà ảnh hưởng)", "lvl": 3 },
-          { "src": "Zone 3: Soft dentin (formerly infected dentin)", "vi": "Vùng 3: Ngà mềm (ngà nhiễm khuẩn)", "lvl": 3 },
-          { "src": "Clinical Considerations", "vi": "Lưu ý lâm sàng khi nạo ngà sâu", "lvl": 3 },
-          { "src": "Inactive Caries Lesion/Arrested Caries", "vi": "Sang thương sâu răng ngừng tiến triển", "lvl": 2 },
-          { "src": "Rampant Caries", "vi": "Sâu răng lan nhanh (Sâu răng ồ ạt)", "lvl": 2 },
-          { "src": "Root Caries", "vi": "Bệnh học và kiểm soát sâu chân răng", "lvl": 2 },
-          { "src": "Etiology", "vi": "Nguyên nhân sâu chân răng", "lvl": 3 },
-          { "src": "Risk Factors", "vi": "Các yếu tố nguy cơ sâu chân răng", "lvl": 3 },
-          { "src": "Clinical Protocol", "vi": "Phác đồ lâm sàng dự phòng sâu chân răng", "lvl": 3 },
-          { "src": "Caries Risk Assessment and Management", "vi": "Đánh giá nguy cơ và Quản lý bệnh sâu răng", "lvl": 1 },
-          { "src": "Surgical versus Medical Model of Caries Management", "vi": "Mô hình ngoại khoa và mô hình nội khoa trong quản lý sâu răng", "lvl": 2 },
-          { "src": "Caries Management by Risk Assessment (CAMBRA)", "vi": "Quản lý sâu răng dựa trên đánh giá nguy cơ (CAMBRA)", "lvl": 2 },
-          { "src": "Definitions", "vi": "Các định nghĩa trong CAMBRA", "lvl": 3 },
-          { "src": "I. Identification of Risk Factors", "vi": "Xác định các yếu tố nguy cơ", "lvl": 3 },
-          { "src": "II. Identification of Risk Indicators", "vi": "Xác định các chỉ dấu nguy cơ", "lvl": 3 },
-          { "src": "III. Assessment of Caries Lesion Activity", "vi": "Đánh giá mức độ hoạt động của sang thương", "lvl": 3 },
-          { "src": "Primary Analysis", "vi": "Phân tích nguy cơ chính", "lvl": 2 },
-          { "src": "Dietary Analysis", "vi": "Phân tích chế độ ăn", "lvl": 3 },
-          { "src": "Dental clinical analysis (dental exam)", "vi": "Phân tích lâm sàng nha khoa", "lvl": 3 },
-          { "src": "Salivary analysis", "vi": "Phân tích nước bọt", "lvl": 3 },
-          { "src": "Supplemental Analysis", "vi": "Phân tích bổ sung", "lvl": 2 },
-          { "src": "Bacterial biofilm analysis", "vi": "Phân tích vi khuẩn mảng bám", "lvl": 3 },
-          { "src": "Classification of Patients According to Degree of Risk", "vi": "Phân loại người bệnh theo mức độ nguy cơ sâu răng", "lvl": 2 },
-          { "src": "Low Caries Risk", "vi": "Nguy cơ sâu răng thấp", "lvl": 3 },
-          { "src": "At Risk", "vi": "Có nguy cơ", "lvl": 3 },
-          { "src": "High Risk", "vi": "Nguy cơ sâu răng cao", "lvl": 3 },
-          { "src": "Caries Management and Protocols or Strategies for Prevention", "vi": "Quản lý sâu răng và Chiến lược dự phòng", "lvl": 1 },
-          { "src": "Clinical Considerations in Caries Prevention", "vi": "Các yếu tố lâm sàng trong dự phòng sâu răng", "lvl": 2 },
-          { "src": "I. General Health", "vi": "Sức khỏe tổng quát", "lvl": 3 },
-          { "src": "II. Diet", "vi": "Kiểm soát chế độ ăn", "lvl": 3 },
-          { "src": "III. Oral Hygiene", "vi": "Vệ sinh răng miệng", "lvl": 3 },
-          { "src": "IV. Fluorides", "vi": "Liệu pháp Fluoride", "lvl": 3 },
-          { "src": "Mechanism of Action", "vi": "Cơ chế tác dụng của Fluoride", "lvl": 4 },
-          { "src": "Fluoride Treatment Protocols", "vi": "Các phác đồ sử dụng Fluoride", "lvl": 4 },
-          { "src": "Public water supply fluoridation", "vi": "Fluoride hóa nước máy cộng đồng", "lvl": 4 },
-          { "src": "Professional application of fluoride", "vi": "Fluoride bôi tại ghế nha khoa", "lvl": 4 },
-          { "src": "Sodium fluoride varnish (5%)", "vi": "Véc-ni Sodium fluoride 5%", "lvl": 4 },
-          { "src": "Acidulated phosphate fluoride gel (1.23%)", "vi": "Gel APF 1,23%", "lvl": 4 },
-          { "src": "Stannous fluoride gel (8% F)", "vi": "Gel Stannous fluoride 8%", "lvl": 4 },
-          { "src": "Silver diamine fluoride (SDF 38%)", "vi": "Silver diamine fluoride (SDF 38%)", "lvl": 4 },
-          { "src": "Self-administered fluoride", "vi": "Fluoride tự sử dụng tại nhà", "lvl": 4 },
-          { "src": "Fluoride mouth rinses", "vi": "Nước súc miệng có Fluoride", "lvl": 4 },
-          { "src": "Fluoridated dentifrices", "vi": "Kem đánh răng có Fluoride", "lvl": 4 },
-          { "src": "V. Sealants (Pit-and-Fissure Sealants)", "vi": "Chất trám bít hố rãnh (Sealants)", "lvl": 3 },
-          { "src": "Concept", "vi": "Khái niệm trám bít hố rãnh", "lvl": 4 },
-          { "src": "Indications", "vi": "Chỉ định trám bít hố rãnh", "lvl": 4 },
-          { "src": "Clinical Technique", "vi": "Quy trình kỹ thuật lâm sàng trám bít hố rãnh", "lvl": 4 },
-          { "src": "Resin infiltrants", "vi": "Nhựa thẩm thấu (Resin infiltrants)", "lvl": 4 },
-          { "src": "VI. Saliva", "vi": "Kích thích và cải thiện lưu lượng nước bọt", "lvl": 3 },
-          { "src": "VII. Chemical Agents", "vi": "Các tác nhân hóa học kháng khuẩn", "lvl": 3 },
-          { "src": "Chlorhexidine", "vi": "Chlorhexidine (CHX)", "lvl": 4 },
-          { "src": "Xylitol", "vi": "Xylitol", "lvl": 4 },
-          { "src": "VIII. Calcium and Phosphate Compounds", "vi": "Hợp chất Calcium và Phosphate (CPP-ACP)", "lvl": 3 }
+          {
+            "src": "Definition",
+            "vi": "Định nghĩa sâu răng",
+            "lvl": 1
+          },
+          {
+            "src": "Demineralization-Remineralization Balance",
+            "vi": "Cân bằng Hủy khoáng – Tái khoáng",
+            "lvl": 1
+          },
+          {
+            "src": "Etiology of Dental Caries",
+            "vi": "Bệnh căn của sâu răng",
+            "lvl": 1
+          },
+          {
+            "src": "I. Biofilm",
+            "vi": "Mảng bám sinh học (Biofilm)",
+            "lvl": 2
+          },
+          {
+            "src": "II. Tooth Habitats for Cariogenic Biofilm",
+            "vi": "Các vùng lưu giữ mảng bám gây sâu răng trên răng",
+            "lvl": 2
+          },
+          {
+            "src": "III. Diet and Caries",
+            "vi": "Chế độ ăn và bệnh sâu răng",
+            "lvl": 2
+          },
+          {
+            "src": "IV. Saliva: Nature's Anticaries Agent",
+            "vi": "Nước bọt: Tác nhân chống sâu răng tự nhiên",
+            "lvl": 2
+          },
+          {
+            "src": "Bacterial Clearance",
+            "vi": "Sự làm sạch vi khuẩn",
+            "lvl": 3
+          },
+          {
+            "src": "Direct Antibacterial Activity",
+            "vi": "Hoạt tính kháng khuẩn trực tiếp",
+            "lvl": 3
+          },
+          {
+            "src": "Buffer Capacity",
+            "vi": "Khả năng đệm của nước bọt",
+            "lvl": 3
+          },
+          {
+            "src": "Remineralization",
+            "vi": "Sự tái khoáng hóa",
+            "lvl": 3
+          },
+          {
+            "src": "Clinical Characteristics of the Caries Lesion",
+            "vi": "Đặc điểm lâm sàng của sang thương sâu răng",
+            "lvl": 1
+          },
+          {
+            "src": "I. Pit and Fissure Caries",
+            "vi": "Sâu răng hố và rãnh",
+            "lvl": 2
+          },
+          {
+            "src": "II. Smooth Surface Caries",
+            "vi": "Sâu răng mặt láng",
+            "lvl": 2
+          },
+          {
+            "src": "III. Root Caries",
+            "vi": "Sâu chân răng",
+            "lvl": 2
+          },
+          {
+            "src": "Enamel Caries",
+            "vi": "Sâu men răng",
+            "lvl": 1
+          },
+          {
+            "src": "Non-cavitated Enamel Caries/White Spot Lesion/Initial Caries Lesion",
+            "vi": "Sâu men chưa tạo lỗ / Sang thương đốm trắng",
+            "lvl": 2
+          },
+          {
+            "src": "Zones of Enamel Caries",
+            "vi": "Các vùng mô học của sâu men",
+            "lvl": 2
+          },
+          {
+            "src": "Zone 1: Surface zone",
+            "vi": "Vùng 1: Vùng bề mặt",
+            "lvl": 3
+          },
+          {
+            "src": "Zone 2: Body of lesion",
+            "vi": "Vùng 2: Thân sang thương",
+            "lvl": 3
+          },
+          {
+            "src": "Zone 3: Dark zone",
+            "vi": "Vùng 3: Vùng tối",
+            "lvl": 3
+          },
+          {
+            "src": "Zone 4: Translucent zone",
+            "vi": "Vùng 4: Vùng trong suốt",
+            "lvl": 3
+          },
+          {
+            "src": "Caries Lesion Progression",
+            "vi": "Sự tiến triển của sang thương sâu răng",
+            "lvl": 2
+          },
+          {
+            "src": "Cavitated Enamel Caries",
+            "vi": "Sâu men đã tạo lỗ",
+            "lvl": 2
+          },
+          {
+            "src": "Dentin Caries Lesions",
+            "vi": "Sang thương sâu ngà",
+            "lvl": 1
+          },
+          {
+            "src": "Progression of Caries in Dentin",
+            "vi": "Sự tiến triển sâu răng trong ngà",
+            "lvl": 2
+          },
+          {
+            "src": "Clinical Symptoms",
+            "vi": "Triệu chứng lâm sàng",
+            "lvl": 2
+          },
+          {
+            "src": "Dentinal Reaction to Caries",
+            "vi": "Phản ứng của ngà đối với sâu răng",
+            "lvl": 2
+          },
+          {
+            "src": "I. Sclerotic dentin: Reaction to a long-term, low-level acid demineralization associated with a slowly advancing lesion",
+            "vi": "Ngà xơ hóa: Phản ứng với hủy khoáng mức độ thấp kéo dài",
+            "lvl": 3
+          },
+          {
+            "src": "II. Reparative dentin: Reaction to a moderate-intensity attack",
+            "vi": "Ngà sửa chữa: Phản ứng với kích thích cường độ trung bình",
+            "lvl": 3
+          },
+          {
+            "src": "III. Pulpal Necrosis: Reaction to severe, rapidly advancing caries characterized by very high acid levels",
+            "vi": "Hoại tử tủy: Phản ứng với sâu răng tiến triển nhanh, nặng",
+            "lvl": 3
+          },
+          {
+            "src": "Zones of Dentin Caries Lesions",
+            "vi": "Các vùng của sang thương sâu ngà",
+            "lvl": 2
+          },
+          {
+            "src": "Zone 1: Hard Dentin",
+            "vi": "Vùng 1: Ngà cứng",
+            "lvl": 3
+          },
+          {
+            "src": "Zone 2: Firm dentin (formerly affected dentin)",
+            "vi": "Vùng 2: Ngà dai (ngà ảnh hưởng)",
+            "lvl": 3
+          },
+          {
+            "src": "Zone 3: Soft dentin (formerly infected dentin)",
+            "vi": "Vùng 3: Ngà mềm (ngà nhiễm khuẩn)",
+            "lvl": 3
+          },
+          {
+            "src": "Clinical Considerations",
+            "vi": "Lưu ý lâm sàng khi nạo ngà sâu",
+            "lvl": 3
+          },
+          {
+            "src": "Inactive Caries Lesion/Arrested Caries",
+            "vi": "Sang thương sâu răng ngừng tiến triển",
+            "lvl": 2
+          },
+          {
+            "src": "Rampant Caries",
+            "vi": "Sâu răng lan nhanh (Sâu răng ồ ạt)",
+            "lvl": 2
+          },
+          {
+            "src": "Root Caries",
+            "vi": "Bệnh học và kiểm soát sâu chân răng",
+            "lvl": 2
+          },
+          {
+            "src": "Etiology",
+            "vi": "Nguyên nhân sâu chân răng",
+            "lvl": 3
+          },
+          {
+            "src": "Risk Factors",
+            "vi": "Các yếu tố nguy cơ sâu chân răng",
+            "lvl": 3
+          },
+          {
+            "src": "Clinical Protocol",
+            "vi": "Phác đồ lâm sàng dự phòng sâu chân răng",
+            "lvl": 3
+          },
+          {
+            "src": "Caries Risk Assessment and Management",
+            "vi": "Đánh giá nguy cơ và Quản lý bệnh sâu răng",
+            "lvl": 1
+          },
+          {
+            "src": "Surgical versus Medical Model of Caries Management",
+            "vi": "Mô hình ngoại khoa và mô hình nội khoa trong quản lý sâu răng",
+            "lvl": 2
+          },
+          {
+            "src": "Caries Management by Risk Assessment (CAMBRA)",
+            "vi": "Quản lý sâu răng dựa trên đánh giá nguy cơ (CAMBRA)",
+            "lvl": 2
+          },
+          {
+            "src": "Definitions",
+            "vi": "Các định nghĩa trong CAMBRA",
+            "lvl": 3
+          },
+          {
+            "src": "I. Identification of Risk Factors",
+            "vi": "Xác định các yếu tố nguy cơ",
+            "lvl": 3
+          },
+          {
+            "src": "II. Identification of Risk Indicators",
+            "vi": "Xác định các chỉ dấu nguy cơ",
+            "lvl": 3
+          },
+          {
+            "src": "III. Assessment of Caries Lesion Activity",
+            "vi": "Đánh giá mức độ hoạt động của sang thương",
+            "lvl": 3
+          },
+          {
+            "src": "Primary Analysis",
+            "vi": "Phân tích nguy cơ chính",
+            "lvl": 2
+          },
+          {
+            "src": "Dietary Analysis",
+            "vi": "Phân tích chế độ ăn",
+            "lvl": 3
+          },
+          {
+            "src": "Dental clinical analysis (dental exam)",
+            "vi": "Phân tích lâm sàng nha khoa",
+            "lvl": 3
+          },
+          {
+            "src": "Salivary analysis",
+            "vi": "Phân tích nước bọt",
+            "lvl": 3
+          },
+          {
+            "src": "Supplemental Analysis",
+            "vi": "Phân tích bổ sung",
+            "lvl": 2
+          },
+          {
+            "src": "Bacterial biofilm analysis",
+            "vi": "Phân tích vi khuẩn mảng bám",
+            "lvl": 3
+          },
+          {
+            "src": "Classification of Patients According to Degree of Risk",
+            "vi": "Phân loại người bệnh theo mức độ nguy cơ sâu răng",
+            "lvl": 2
+          },
+          {
+            "src": "Low Caries Risk",
+            "vi": "Nguy cơ sâu răng thấp",
+            "lvl": 3
+          },
+          {
+            "src": "At Risk",
+            "vi": "Có nguy cơ",
+            "lvl": 3
+          },
+          {
+            "src": "High Risk",
+            "vi": "Nguy cơ sâu răng cao",
+            "lvl": 3
+          },
+          {
+            "src": "Caries Management and Protocols or Strategies for Prevention",
+            "vi": "Quản lý sâu răng và Chiến lược dự phòng",
+            "lvl": 1
+          },
+          {
+            "src": "Clinical Considerations in Caries Prevention",
+            "vi": "Các yếu tố lâm sàng trong dự phòng sâu răng",
+            "lvl": 2
+          },
+          {
+            "src": "I. General Health",
+            "vi": "Sức khỏe tổng quát",
+            "lvl": 3
+          },
+          {
+            "src": "II. Diet",
+            "vi": "Kiểm soát chế độ ăn",
+            "lvl": 3
+          },
+          {
+            "src": "III. Oral Hygiene",
+            "vi": "Vệ sinh răng miệng",
+            "lvl": 3
+          },
+          {
+            "src": "IV. Fluorides",
+            "vi": "Liệu pháp Fluoride",
+            "lvl": 3
+          },
+          {
+            "src": "Mechanism of Action",
+            "vi": "Cơ chế tác dụng của Fluoride",
+            "lvl": 4
+          },
+          {
+            "src": "Fluoride Treatment Protocols",
+            "vi": "Các phác đồ sử dụng Fluoride",
+            "lvl": 4
+          },
+          {
+            "src": "Public water supply fluoridation",
+            "vi": "Fluoride hóa nước máy cộng đồng",
+            "lvl": 4
+          },
+          {
+            "src": "Professional application of fluoride",
+            "vi": "Fluoride bôi tại ghế nha khoa",
+            "lvl": 4
+          },
+          {
+            "src": "Sodium fluoride varnish (5%)",
+            "vi": "Véc-ni Sodium fluoride 5%",
+            "lvl": 4
+          },
+          {
+            "src": "Acidulated phosphate fluoride gel (1.23%)",
+            "vi": "Gel APF 1,23%",
+            "lvl": 4
+          },
+          {
+            "src": "Stannous fluoride gel (8% F)",
+            "vi": "Gel Stannous fluoride 8%",
+            "lvl": 4
+          },
+          {
+            "src": "Silver diamine fluoride (SDF 38%)",
+            "vi": "Silver diamine fluoride (SDF 38%)",
+            "lvl": 4
+          },
+          {
+            "src": "Self-administered fluoride",
+            "vi": "Fluoride tự sử dụng tại nhà",
+            "lvl": 4
+          },
+          {
+            "src": "Fluoride mouth rinses",
+            "vi": "Nước súc miệng có Fluoride",
+            "lvl": 4
+          },
+          {
+            "src": "Fluoridated dentifrices",
+            "vi": "Kem đánh răng có Fluoride",
+            "lvl": 4
+          },
+          {
+            "src": "V. Sealants (Pit-and-Fissure Sealants)",
+            "vi": "Chất trám bít hố rãnh (Sealants)",
+            "lvl": 3
+          },
+          {
+            "src": "Concept",
+            "vi": "Khái niệm trám bít hố rãnh",
+            "lvl": 4
+          },
+          {
+            "src": "Indications",
+            "vi": "Chỉ định trám bít hố rãnh",
+            "lvl": 4
+          },
+          {
+            "src": "Clinical Technique",
+            "vi": "Quy trình kỹ thuật lâm sàng trám bít hố rãnh",
+            "lvl": 4
+          },
+          {
+            "src": "Resin infiltrants",
+            "vi": "Nhựa thẩm thấu (Resin infiltrants)",
+            "lvl": 4
+          },
+          {
+            "src": "VI. Saliva",
+            "vi": "Kích thích và cải thiện lưu lượng nước bọt",
+            "lvl": 3
+          },
+          {
+            "src": "VII. Chemical Agents",
+            "vi": "Các tác nhân hóa học kháng khuẩn",
+            "lvl": 3
+          },
+          {
+            "src": "Chlorhexidine",
+            "vi": "Chlorhexidine (CHX)",
+            "lvl": 4
+          },
+          {
+            "src": "Xylitol",
+            "vi": "Xylitol",
+            "lvl": 4
+          },
+          {
+            "src": "VIII. Calcium and Phosphate Compounds",
+            "vi": "Hợp chất Calcium và Phosphate (CPP-ACP)",
+            "lvl": 3
+          }
         ]
       }
+    }
+  },
+  "_CAP_NHAN_DIEN_SACH_STURDEVANT": {
+    "nguyen_tac": "Không dùng danh sách tiêu đề cố định. Nhận diện theo đặc trưng font và cỡ chữ của chính PDF; chương và mục được xác định khi quét.",
+    "font_tieu_de_quan_sat": [
+      {
+        "font": "Frutiger-Black",
+        "size": 12.5,
+        "vai_tro": "tiêu đề mục (ứng viên lvl 1–2, phân cấp theo ngữ cảnh)"
+      },
+      {
+        "font": "Frutiger-LightItalic",
+        "size": 11.5,
+        "vai_tro": "tiêu đề mục (ứng viên lvl 2–3)"
+      },
+      {
+        "font": "Giovanni-BoldItalic",
+        "size": 11.5,
+        "vai_tro": "tiêu đề mục (ứng viên lvl 3–4)"
+      },
+      {
+        "font": "Frutiger-Bold",
+        "size": 8.0,
+        "vai_tro": "đánh dấu La Mã I./II./III. đứng trước tiêu đề, không phải tiêu đề"
+      },
+      {
+        "font": "Frutiger-Bold",
+        "size": 10.0,
+        "vai_tro": "hộp 'Clinical Notes', tiêu đề chương ở đầu trang, tên sách chạy đầu trang: loại"
+      },
+      {
+        "font": "Frutiger-Light",
+        "size": 9.0,
+        "vai_tro": "chú thích hình (Figure, Fig.): loại"
+      },
+      {
+        "font": "MeliorLTStd",
+        "size": 9.0,
+        "vai_tro": "thân văn bản: loại"
+      },
+      {
+        "font": "Giovanni-Book",
+        "size": 10.0,
+        "vai_tro": "thân văn bản (chương 1–2): loại"
+      }
+    ],
+    "quy_tac_offline": {
+      "chon_ung_vien": "Lấy dòng có font thuộc danh sách tiêu đề, cỡ >= 11, không nằm trong vùng hộp/chú thích, gom các dòng liền kề cùng font để thành một tiêu đề.",
+      "cot": "Xử lý từng cột riêng (trang có 2 cột).",
+      "loai_bo": [
+        "Clinical Notes",
+        "Box",
+        "Table",
+        "Figure",
+        "Fig.",
+        "Flowchart",
+        "Step",
+        "References",
+        "Summary",
+        "số trang",
+        "tên sách chạy đầu trang"
+      ],
+      "cap_do_tam_thoi": "Gán lvl theo cỡ và kiểu font, sau đó kiểm tra lại bằng thứ bậc trong văn bản (AI hoặc người rà soát)."
+    },
+    "quy_tac_online": {
+      "dau_vao": "Danh sách ứng viên offline kèm font, cỡ, trang, và đoạn văn ngay sau mỗi tiêu đề (khoảng 300 ký tự).",
+      "viec_can_lam": "Xác nhận đúng là tiêu đề, bỏ mục nhầm, gán lvl 1–10 theo thứ bậc văn bản, giữ src nguyên văn không số trang.",
+      "dau_ra": "JSON {sections:[{src,vi,lvl}]} như cũ."
     }
   }
 }
