@@ -9263,7 +9263,17 @@ let bkSecs = [], bkTrBusy = false;
 const BK_TR = {
     style: (() => { try { return localStorage.getItem('bk_tr_style') || 'natural'; } catch (e) { return 'natural'; } })()
 };
-const BK_TR_GLOSS = ' Thuật ngữ RHM theo chuẩn giảng dạy miền Nam Việt Nam: nướu (không dùng "lợi"), răng cối (không dùng "răng hàm"), răng cối nhỏ (tiền cối), răng cối lớn, răng khôn, răng nanh, răng cửa, men răng, ngà răng, tủy răng, buồng tủy, ống tủy, chóp chân răng, cổ răng, thân răng, xương ổ răng, mô nha chu, viêm nha chu, sâu răng, khớp thái dương hàm, cung hàm, khớp cắn, phục hình, cầu răng, mão răng, trụ implant. '
+const BK_TR_GLOSS = ' QUY TẮC THUẬT NGỮ NHA KHOA MIỀN NAM (BẮT BUỘC TUYỆT ĐỐI): Luôn dùng thuật ngữ Răng Hàm Mặt theo chuẩn giảng dạy miền Nam Việt Nam (ĐH Y Dược TP.HCM): '
+    + 'dùng "trám răng / miếng trám / xoang trám / vật liệu trám" (TUYỆT ĐỐI KHÔNG dùng "hàn răng / chất hàn / lỗ hàn"); '
+    + 'dùng "trám bít / trám bít ống tủy" cho obturation / root canal filling / sealing (TUYỆT ĐỐI KHÔNG dùng "hàn bít / hàn kín / hàn ống tủy"); '
+    + 'dùng "nướu / viêm nướu / túi nướu / rãnh nướu" (KHÔNG dùng "lợi / viêm lợi"); '
+    + 'dùng "vôi răng / cạo vôi răng / xử lý mặt gốc răng" (KHÔNG dùng "cao răng / lấy cao răng"); '
+    + 'dùng "răng cối / răng cối nhỏ (tiền cối) / răng cối lớn" (KHÔNG dùng "răng hàm / răng hàm nhỏ / răng hàm lớn"); '
+    + 'dùng "chóp răng / chóp chân răng / vùng quanh chóp / viêm quanh chóp" (KHÔNG dùng "cuống răng / quanh cuống / viêm quanh cuống"); '
+    + 'dùng "mão răng / cùi răng / cầu răng" (KHÔNG dùng "chụp răng / cùi chụp"); '
+    + 'dùng "dây chằng nha chu / mô nha chu / túi nha chu" (KHÔNG dùng "dây chằng quanh răng / vùng quanh răng"); '
+    + 'dùng "thắng môi / thắng lưỡi / thắng má" (KHÔNG dùng "phanh môi / phanh lưỡi"); '
+    + 'dùng "sửa soạn ống tủy / sửa soạn xoang trám / sửa soạn cùi răng", "bơm rửa ống tủy", "băng thuốc ống tủy", "lấy tủy buồng / lấy tủy toàn phần", "che tủy trực tiếp / gián tiếp", "đê cao su", "cây lèn ngang / lèn dọc", "côn chính / côn phụ / côn gutta-percha", "xi măng gắn / chất dán ngà (keo dán)". '
     + 'Khi gặp số răng theo hệ Mỹ (Universal, 1–32) thì đổi sang hệ FDI hai chữ số theo bảng: 1→18, 2→17, 3→16, 4→15, 5→14, 6→13, 7→12, 8→11, 9→21, 10→22, 11→23, 12→24, 13→25, 14→26, 15→27, 16→28, 17→38, 18→37, 19→36, 20→35, 21→34, 22→33, 23→32, 24→31, 25→41, 26→42, 27→43, 28→44, 29→45, 30→46, 31→47, 32→48. ';
 const BK_TR_SYS = {
     natural: 'Bạn là giáo sư đầu ngành Răng Hàm Mặt (RHM) đang dịch tài liệu cho sinh viên. Dịch sang tiếng Việt TỰ NHIÊN, DỄ HIỂU, mạch lạc như khi giảng bài. Được diễn đạt lại câu cho thuận tiếng Việt nhưng KHÔNG thêm, bớt hay suy diễn ý.' + BK_TR_GLOSS,
@@ -9379,7 +9389,7 @@ async function bkLectureBubble(b) {
     aiScrollToTop(out, true);
 }
 function bkLectureSys() {
-    return 'Bạn là giáo sư đầu ngành Răng Hàm Mặt đang giảng bài cho sinh viên. Dựa vào nội dung gốc và bản dịch dưới đây (mỗi dòng: câu gốc → bản dịch), hãy giảng bằng tiếng Việt: giải thích ý chính, thuật ngữ, cơ chế sinh lý bệnh, liên hệ lâm sàng ngắn gọn và các điểm cần nhớ. Không đọc lại nguyên văn từng câu. Trả về MỘT đối tượng JSON hợp lệ: {"t":"<bài giảng>"}; trong chuỗi dùng dấu nháy đơn. Không thêm chữ nào ngoài JSON.';
+    return 'Bạn là giáo sư đầu ngành Răng Hàm Mặt đang giảng bài cho sinh viên. Dựa vào nội dung gốc và bản dịch dưới đây (mỗi dòng: câu gốc → bản dịch), hãy giảng bằng tiếng Việt: giải thích ý chính, thuật ngữ, cơ chế sinh lý bệnh, liên hệ lâm sàng ngắn gọn và các điểm cần nhớ. Không đọc lại nguyên văn từng câu.' + BK_TR_GLOSS + ' Trả về MỘT đối tượng JSON hợp lệ: {"t":"<bài giảng>"}; trong chuỗi dùng dấu nháy đơn. Không thêm chữ nào ngoài JSON.';
 }
 /* Giảng bài bằng Gemini Live cho phần vừa dịch (nút ở thanh chat nhanh) */
 function bkLiveSys(text) {
@@ -9746,7 +9756,8 @@ function bkOpenAi() {
         const ctx = (bkText || '').slice(0, 30000);
         const intro = 'Bạn là giáo sư đầu ngành Răng Hàm Mặt có kiến thức uyên bác, nhưng khi xưng hô và trò chuyện với người học thì luôn nhận mình là gia sư Răng Hàm Mặt của bạn. Người học đang đọc chương "' + bkCur.title + '" của cuốn "' + (bkCur.book || '') + '" thuộc môn ' + subj + '. ' +
             (ctx ? 'Dưới đây là nội dung chữ trích từ PDF của chương (có thể thiếu hình và bảng):\n<<<\n' + ctx + '\n>>>\nHãy ưu tiên trả lời dựa trên nội dung này; nếu câu hỏi nằm ngoài chương thì dùng kiến thức chung và nói rõ là ngoài chương. ' : 'Chưa có nội dung chữ của chương, hãy trả lời dựa trên kiến thức chung về môn học và chủ đề. ') +
-            'Luôn trả lời bằng tiếng Việt, ngắn gọn, dễ hiểu.';
+            BK_TR_GLOSS + ((typeof window.rhmDictGlossary === 'function') ? window.rhmDictGlossary(ctx, true) : '') +
+            'Luôn trả lời bằng tiếng Việt chuẩn RHM miền Nam, ngắn gọn, dễ hiểu.';
         aiState.history = [
             { role: 'user', parts: [{ text: intro }] },
             { role: 'model', parts: [{ text: 'Đã rõ. Gia sư sẵn sàng giải thích và trả lời câu hỏi về chương này.' }] }
@@ -9823,10 +9834,19 @@ function bkOpenAi() {
 bkPrepare(subject);
             if (parentSubject) { const bkb = document.getElementById('bk-open-btn'); if (bkb) bkb.classList.add('hidden'); }
             const hasVideo = !!subject.videoPath;
-            lessonsContainer.classList.toggle('hidden', showSubs && !hasVideo);
+            const hideLessons = !!(showSubs && !hasVideo);
+            lessonsContainer.classList.toggle('hidden', hideLessons);
+            // Xóa mọi inline style hoặc class đóng bị kẹt do hiệu ứng chuyển cảnh để khung danh sách video luôn hiện rõ
+            [modal, phanMonContainer, lessonsContainer].forEach(el => {
+                if (!el) return;
+                el.classList.remove('ios-closing', 'ios-collapse-anim');
+                el.style.maxHeight = '';
+                el.style.opacity = '';
+                el.style.transform = '';
+            });
 
             modal.classList.remove('hidden');
-            if (!(showSubs && !hasVideo)) await loadAndRenderLessons(subject.videoPath);
+            if (!hideLessons) await loadAndRenderLessons(subject.videoPath);
         }
 
         function backToParentMonHoc() {
@@ -10260,19 +10280,26 @@ bkCloseAll();
             if (info.quiz && info.quiz.questions && info.quiz.questions.length) {
                 try { if (rvClaim(playerId)) return; } catch (e) {}
             }
+            const savedOrigin = { kind: 'monhoc', data: { subject: currentActiveMonHoc, parent: currentParentMonHoc }, t: Date.now() };
             const quiz = await loadLessonQuiz(info, false);
             paintReviewButton(playerId, quiz);
             if (!quiz || !quiz.questions || !quiz.questions.length) return;
             closeMonHocDetailModal();
+            NavHist.last = savedOrigin;
+            NavHist.quizOrigin = savedOrigin;
+            NavHist.capT = Date.now();
             startSavedQuiz(quiz.id, true);
         }
 
         async function editLessonQuiz(playerId) {
             const info = lessonQuizInfo[playerId];
             if (!info || info.busy) return;
+            const savedOrigin = { kind: 'monhoc', data: { subject: currentActiveMonHoc, parent: currentParentMonHoc }, t: Date.now() };
             let quiz = await loadLessonQuiz(info, false);
             if (!quiz) return;
             closeMonHocDetailModal();
+            NavHist.last = savedOrigin;
+            NavHist.editOrigin = savedOrigin;
             openEditScreen(quiz.id);
         }
 
@@ -13172,14 +13199,16 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     })();
     aiLangPaint();
     function aiSystemPrompt(live) {
-        return aiSystemPromptBase() + aiLangNote(live);
+        const recentTxt = (aiState.history || []).slice(-4).map(h => (h.parts || []).map(p => p.text || '').join(' ')).join(' ') + ' ' + (aiState.mode === 'book' ? (bkText || '').slice(0, 8000) : '');
+        const dictRule = (typeof window.rhmDictGlossary === 'function') ? window.rhmDictGlossary(recentTxt, true) : '';
+        return aiSystemPromptBase() + '\n\n' + BK_TR_GLOSS + dictRule + aiLangNote(live);
     }
     function aiSystemPromptBase() {
         if (aiState.guided) return aiGuidedPrompt();
         if (aiState.mode === 'video') {
-            return 'Bạn đóng vai trò là giáo sư đầu ngành Răng Hàm Mặt có chuyên môn sâu rộng khi phân tích và cung cấp kiến thức, nhưng khi xưng hô và trò chuyện với người học thì luôn nhận mình là gia sư Răng Hàm Mặt thân thiện; trả lời bằng tiếng Việt, rõ ràng, có cấu trúc, dễ hiểu. Bạn được cung cấp nội dung lời giảng của một video bài giảng, kèm mốc thời gian. Hãy trả lời như thể chính bạn đã xem và nghe video đó: nói "trong video", "ở phút mm:ss". TUYỆT ĐỐI không nhắc đến các từ "phụ đề", "transcript", "văn bản", "dữ liệu được cung cấp", cũng không nói rằng bạn đã đọc tài liệu nào. Khi người học yêu cầu tóm tắt: liệt kê theo thứ tự thời gian, MỖI DÒNG bắt đầu bằng mốc thời gian dạng [mm:ss] (hoặc [h:mm:ss] nếu quá 1 giờ) rồi đến nội dung của đoạn đó (súc tích, thường 1–2 câu mỗi mốc; nếu người học yêu cầu số câu cụ thể cho mỗi mục thì làm đúng số câu đó); luôn viết mốc đúng dạng [mm:ss] để người học bấm nhảy tới đoạn đó. Nội dung có thể có lỗi nhận dạng giọng nói nên hãy suy luận hợp lý và nói rõ khi không chắc chắn; không bịa nội dung ngoài video. Định dạng: KHÔNG dùng LaTeX hay ký hiệu $...$ (viết ký tự thường như →, ≥, µm, 2,5–3,0); không dùng tiêu đề bắt đầu bằng #; chỉ dùng **in đậm** và gạch đầu dòng "- ". Nếu có ảnh đính kèm, đó là ảnh người học gửi (thường là hình chụp màn hình video): hãy quan sát ảnh, kết hợp lời giảng quanh thời điểm đang xem để trả lời. Nếu yêu cầu có kèm một đoạn clip ngắn lấy từ video, đó là vài giây quanh đúng thời điểm người học đang dừng: hãy quan sát kỹ khung hình ở mốc đó (hình vẽ, sơ đồ, ảnh X-quang / lâm sàng, chữ trên slide...) rồi mô tả và giải thích; nếu không nhìn rõ thì nói rõ.\n\n' + aiVideoContext();
+            return 'Bạn đóng vai trò là giáo sư đầu ngành Răng Hàm Mặt có chuyên môn sâu rộng khi phân tích và cung cấp kiến thức, nhưng khi xưng hô và trò chuyện với người học thì luôn nhận mình là gia sư Răng Hàm Mặt thân thiện; trả lời bằng tiếng Việt chuẩn RHM miền Nam, rõ ràng, có cấu trúc, dễ hiểu. Bạn được cung cấp nội dung lời giảng của một video bài giảng, kèm mốc thời gian. Hãy trả lời như thể chính bạn đã xem và nghe video đó: nói "trong video", "ở phút mm:ss". TUYỆT ĐỐI không nhắc đến các từ "phụ đề", "transcript", "văn bản", "dữ liệu được cung cấp", cũng không nói rằng bạn đã đọc tài liệu nào. Khi người học yêu cầu tóm tắt: liệt kê theo thứ tự thời gian, MỖI DÒNG bắt đầu bằng mốc thời gian dạng [mm:ss] (hoặc [h:mm:ss] nếu quá 1 giờ) rồi đến nội dung của đoạn đó (súc tích, thường 1–2 câu mỗi mốc; nếu người học yêu cầu số câu cụ thể cho mỗi mục thì làm đúng số câu đó); luôn viết mốc đúng dạng [mm:ss] để người học bấm nhảy tới đoạn đó. Nội dung có thể có lỗi nhận dạng giọng nói nên hãy suy luận hợp lý và nói rõ khi không chắc chắn; không bịa nội dung ngoài video. Định dạng: KHÔNG dùng LaTeX hay ký hiệu $...$ (viết ký tự thường như →, ≥, µm, 2,5–3,0); không dùng tiêu đề bắt đầu bằng #; chỉ dùng **in đậm** và gạch đầu dòng "- ". Nếu có ảnh đính kèm, đó là ảnh người học gửi (thường là hình chụp màn hình video): hãy quan sát ảnh, kết hợp lời giảng quanh thời điểm đang xem để trả lời. Nếu yêu cầu có kèm một đoạn clip ngắn lấy từ video, đó là vài giây quanh đúng thời điểm người học đang dừng: hãy quan sát kỹ khung hình ở mốc đó (hình vẽ, sơ đồ, ảnh X-quang / lâm sàng, chữ trên slide...) rồi mô tả và giải thích; nếu không nhìn rõ thì nói rõ.\n\n' + aiVideoContext();
         }
-        return 'Bạn đóng vai trò là giáo sư đầu ngành Răng Hàm Mặt có chuyên môn sâu rộng khi phân tích và cung cấp kiến thức, nhưng khi xưng hô và trò chuyện với người học thì luôn nhận mình là gia sư Răng Hàm Mặt thân thiện; trả lời bằng tiếng Việt, ' + (aiState.full ? 'rất đầy đủ, chi tiết, giải thích sâu, không giới hạn độ dài' : 'ngắn gọn') + ', chính xác, dễ hiểu. Chỉ giải thích dựa trên câu hỏi sau; nếu không chắc chắn hãy nói rõ, không bịa. Nhắc người học đối chiếu giáo trình khi cần. Định dạng: KHÔNG dùng LaTeX hay ký hiệu $...$ (viết ký tự thường như →, ≥, µm); không dùng tiêu đề bắt đầu bằng #; chỉ dùng **in đậm** và gạch đầu dòng "- ".\n\n' + aiBuildContext();
+        return 'Bạn đóng vai trò là giáo sư đầu ngành Răng Hàm Mặt có chuyên môn sâu rộng khi phân tích và cung cấp kiến thức, nhưng khi xưng hô và trò chuyện với người học thì luôn nhận mình là gia sư Răng Hàm Mặt thân thiện; trả lời bằng tiếng Việt chuẩn RHM miền Nam, ' + (aiState.full ? 'rất đầy đủ, chi tiết, giải thích sâu, không giới hạn độ dài' : 'ngắn gọn') + ', chính xác, dễ hiểu. Chỉ giải thích dựa trên câu hỏi sau; nếu không chắc chắn hãy nói rõ, không bịa. Nhắc người học đối chiếu giáo trình khi cần. Định dạng: KHÔNG dùng LaTeX hay ký hiệu $...$ (viết ký tự thường như →, ≥, µm); không dùng tiêu đề bắt đầu bằng #; chỉ dùng **in đậm** và gạch đầu dòng "- ".\n\n' + aiBuildContext();
     }
     function aiTex(t) {
         const M = { rightarrow: '→', to: '→', Rightarrow: '⇒', leftarrow: '←', leftrightarrow: '↔', uparrow: '↑', downarrow: '↓', geq: '≥', ge: '≥', leq: '≤', le: '≤', neq: '≠', approx: '≈', sim: '~', times: '×', cdot: '·', pm: '±', mu: 'µ', alpha: 'α', beta: 'β', gamma: 'γ', delta: 'δ', Delta: 'Δ', theta: 'θ', lambda: 'λ', sigma: 'σ', pi: 'π', omega: 'Ω', degree: '°', circ: '°', infty: '∞', ldots: '…', dots: '…', quad: ' ', qquad: ' ', ',': ' ', ';': ' ', '%': '%', '_': '_', '&': '&', '$': '$', '#': '#' };
@@ -13769,7 +13798,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     /* ===================== DEEP RESEARCH MINI (gemini-flash-lite-latest · mức suy luận Cao) ===================== */
     const AI_DR_SYSTEM = [
         'Bạn đóng vai trò là giáo sư đầu ngành Răng Hàm Mặt có chuyên môn uyên bác, nhưng khi xưng hô với người học thì nhận mình là gia sư Răng Hàm Mặt. Bạn đang viết báo cáo nghiên cứu chuyên sâu (Deep Research Mini) bằng tiếng Việt.',
-        'PHONG CÁCH VIẾT (BẮT BUỘC): cực kỳ SÚC TÍCH, CÔ ĐỌNG, mật độ kiến thức chuyên môn cao; đi thẳng vào cơ chế bệnh sinh, giải phẫu, mô học, tiêu chuẩn chẩn đoán phân biệt, thông số / ngưỡng số liệu lâm sàng chuẩn và phác đồ xử trí. TUYỆT ĐỐI KHÔNG viết lời dẫn sáo rỗng, không lặp ý, không văn hoa dài dòng. Dùng thuật ngữ RHM chuẩn miền Nam Việt Nam (nướu, răng cối, xoang, chóp chân răng...).',
+        'PHONG CÁCH VIẾT (BẮT BUỘC): cực kỳ SÚC TÍCH, CÔ ĐỌNG, mật độ kiến thức chuyên môn cao; đi thẳng vào cơ chế bệnh sinh, giải phẫu, mô học, tiêu chuẩn chẩn đoán phân biệt, thông số / ngưỡng số liệu lâm sàng chuẩn và phác đồ xử trí. TUYỆT ĐỐI KHÔNG viết lời dẫn sáo rỗng, không lặp ý, không văn hoa dài dòng.' + BK_TR_GLOSS,
         'ĐỊNH DẠNG: KHÔNG dùng LaTeX hay ký hiệu $...$; không dùng tiêu đề bắt đầu bằng #; chỉ dùng **in đậm** và gạch đầu dòng "- ". Không tự bịa URL, DOI hay PMID.'
     ].join('\n');
     const AI_DR_PARTS = [
@@ -13846,9 +13875,10 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             const P = AI_DR_PARTS[i];
             const bubble = aiAddMsg('ai', '🔬 Deep Research Mini · ' + P.label + ': đang phân tích chuyên sâu (mức suy luận Cao)...'); lastBubble = bubble; if (!firstBubble) firstBubble = bubble; aiScrollToTop(bubble, true);
             const prevTxt = done.length ? '\n\nCÁC PHẦN ĐÃ VIẾT TRƯỚC (chỉ để nối mạch, tuyệt đối không lặp lại):\n' + done.map(t => t.slice(0, 900)).join('\n---\n') : '';
+            const dictRuleDr = (typeof window.rhmDictGlossary === 'function') ? window.rhmDictGlossary(ctx, true) : '';
             const prompt = topic + prevTxt + '\n\nNHIỆM VỤ LẦN NÀY — ' + P.label + ' của báo cáo (báo cáo gồm 3 phần, 5 mục):\n' + P.ask;
             try {
-                const r = await aiDrCall(AI_DR_SYSTEM, prompt, (t) => { bubble.innerHTML = aiFmt(t); });
+                const r = await aiDrCall(AI_DR_SYSTEM + '\n' + dictRuleDr, prompt, (t) => { bubble.innerHTML = aiFmt(t); });
                 const cr = aiDrInsertCites(r.raw, r.gm, reg);
                 aiDrRender(bubble, cr.text, cr, reg); done.push(cr.text);
                 if (aiQuotaOut()) aiQuotaSet(false);
@@ -14594,14 +14624,16 @@ async function bkAnalyzeCurrentPageImage() {
 
     bkOpenAi();
     const pageNum = bestPg.num;
-    const pageTxt = (bkPages[pageNum - 1] && bkText) ? bkText.slice(bkPages[pageNum - 1].gs, bkPages[pageNum - 1].ge).trim().slice(0, 2500) : '';
+    const pageTxt = (bkPages[pageNum - 1] && bkText) ? bkText.slice(bkPages[pageNum - 1].gs, bkPages[pageNum - 1].ge).trim().slice(0, 3500) : '';
+    const dictRules = (typeof window.rhmDictGlossary === 'function') ? window.rhmDictGlossary(pageTxt, true) : '';
     aiState.guided = false;
-    aiState.showText = '🖼️ Phân tích hình ảnh đang hiện (Trang ' + pageNum + ')';
+    aiState.showText = '🖼️ Phân tích ảnh màn hình (Trang ' + pageNum + ')';
     document.getElementById('ai-input').value =
         'Đây là ảnh chụp màn hình Trang ' + pageNum + ' của chương "' + (bkCur.title || '') + '" (sách "' + (bkCur.book || '') + '") mà mình đang đọc. ' +
         'Hãy quan sát kỹ toàn bộ hình ảnh minh họa, sơ đồ, phim X-quang, ảnh lâm sàng, biểu đồ hoặc bảng biểu có trên trang này, rồi mô tả và phân tích chi tiết: ' +
-        '(1) Đó là hình ảnh/sơ đồ/bảng gì; (2) Giải thích từng chi tiết, mũi tên, ký hiệu, chú thích hoặc thông số trên hình; (3) Ý nghĩa cơ chế bệnh sinh và ứng dụng lâm sàng của hình này trong bài học. ' +
-        'Nếu mình hỏi tiếp ở các câu sau thì hãy tiếp tục dựa trên bức ảnh trang ' + pageNum + ' này để trả lời.' +
+        '(1) Đó là hình ảnh/sơ đồ/bảng gì; (2) Giải thích từng chi tiết, mũi tên, ký hiệu, chú thích hoặc thông số trên hình; (3) Ý nghĩa cơ chế bệnh sinh và ứng dụng lâm sàng của hình này trong bài học.\n' +
+        BK_TR_GLOSS + dictRules +
+        '\nNếu mình hỏi tiếp ở các câu sau thì hãy tiếp tục dựa trên bức ảnh trang ' + pageNum + ' này để trả lời.' +
         (pageTxt ? '\n\n(Nội dung chữ trên trang ' + pageNum + ' để đối chiếu chú thích hình:\n' + pageTxt + ')' : '');
     aiSend(img);
 }
@@ -18166,14 +18198,15 @@ function openPop(mode, t) {
         } catch (e) { console.warn('[Từ điển RHM]', e); return null; }
     };
 
-    /* Đưa thuật ngữ trong Từ điển RHM vào lời nhắc dịch: ưu tiên bắt buộc dùng đúng các từ người dùng đã edit/thêm (t.u = 1) và đồng bộ với các từ đã có trong từ điển */
-    window.rhmDictGlossary = function (text) {
+    /* Đưa thuật ngữ trong Từ điển RHM vào lời nhắc dịch & phân tích: luôn ưu tiên tuyệt đối các từ người dùng đã edit/thêm (t.u = 1) kể cả khi phân tích hình ảnh */
+    window.rhmDictGlossary = function (text, includeEditedFallback) {
         try {
-            const f = fold(text); if (f.length < 2) return '';
+            const f = fold(text || '');
             const allTerms = (rd.terms && rd.terms.length) ? rd.terms : parse();
             if (!allTerms.length) return '';
             const userHits = [], autoHits = [];
             const matchInText = (enStr) => {
+                if (f.length < 2) return false;
                 const sp = splitAbbr(enStr);
                 const cands = [fold(sp.head)];
                 if (sp.hasParen && sp.full) cands.push(fold(sp.full));
@@ -18198,6 +18231,13 @@ function openPop(mode, t) {
                     if (autoHits.length < 60) autoHits.push(t);
                 }
             }
+            // Khi phân tích ảnh trang sách hoặc chat chung (chữ nằm trong ảnh nên text truyền vào có thể chưa chứa hết chữ trong hình): bổ sung thêm các từ do người dùng tự sửa gần nhất
+            if (includeEditedFallback && userHits.length < 45) {
+                allTerms.filter(t => t && t.u && t.en && t.vi && !userHits.includes(t))
+                    .sort((a, b) => (b.ts || 0) - (a.ts || 0))
+                    .slice(0, 45 - userHits.length)
+                    .forEach(t => userHits.push(t));
+            }
             if (!userHits.length && !autoHits.length) return '';
             const fmtList = arr => arr.map(t => {
                 const head = String(t.en).replace(/\s*\(.*\)\s*$/, '').trim();
@@ -18206,10 +18246,10 @@ function openPop(mode, t) {
             }).join('; ');
             let promptOut = '';
             if (userHits.length) {
-                promptOut += ' QUY TẮC TỪ ĐIỂN BẮT BUỘC (ƯU TIÊN TUYỆT ĐỐI): Người dùng đã trực tiếp chỉnh sửa/cập nhật các thuật ngữ sau trong Từ điển RHM; khi dịch BẮT BUỘC PHẢI SỬ DỤNG CHÍNH XÁC nghĩa tiếng Việt đã quy định dưới đây (nếu một từ có nhiều nghĩa ngăn cách bởi dấu "/" thì chọn đúng nghĩa phù hợp ngữ cảnh trong số đó, TUYỆT ĐỐI KHÔNG tự ý dịch sang từ khác): ' + fmtList(userHits) + '.';
+                promptOut += ' QUY TẮC TỪ ĐIỂN BẮT BUỘC (ƯU TIÊN TUYỆT ĐỐI): Người dùng đã trực tiếp chỉnh sửa/cập nhật các thuật ngữ sau trong Từ điển RHM; khi dịch hoặc giải thích BẮT BUỘC PHẢI SỬ DỤNG CHÍNH XÁC nghĩa tiếng Việt đã quy định dưới đây (nếu một từ có nhiều nghĩa ngăn cách bởi dấu "/" thì chọn đúng nghĩa phù hợp ngữ cảnh trong số đó, TUYỆT ĐỐI KHÔNG tự ý dịch sang từ khác): ' + fmtList(userHits) + '.';
             }
             if (autoHits.length) {
-                promptOut += ' Các thuật ngữ khác đã có trong Từ điển RHM của người dùng (hãy dùng thống nhất đúng các nghĩa này khi dịch để đồng bộ thuật ngữ): ' + fmtList(autoHits.slice(0, Math.max(15, 70 - userHits.length))) + '.';
+                promptOut += ' Các thuật ngữ khác đã có trong Từ điển RHM của người dùng (hãy dùng thống nhất đúng các nghĩa này để đồng bộ thuật ngữ): ' + fmtList(autoHits.slice(0, Math.max(15, 70 - userHits.length))) + '.';
             }
             return promptOut + ' ';
         } catch (e) { return ''; }
