@@ -1,14 +1,93 @@
 {
   "_AI_GUIDE_HUONG_DAN_CHO_AI_KHAC": {
-    "muc_dich": "File MucLuc.json này điều khiển cơ chế nhận diện Mục lục chương sách PDF đa cấp (hỗ trợ sâu đến 9-10 cấp: 1. -> 1.1 -> 1.1.1 -> 1.1.1.1...) cho ứng dụng Trắc Nghiệm RHM.",
-    "co_che_hoat_dong_cua_app": [
-      "1. QUÉT MỤC LỤC ĐA CẤP (bkExtract & bkAiOutline): Ứng dụng trích xuất toàn bộ chữ từ PDF theo thứ tự cột, loại bỏ hoàn toàn các đoạn văn bản dài, chú thích hình ảnh (Fig., Figure, Table, Box, Flowchart, Clinical Notes).",
-      "2. PHÂN CẤP ĐẾN 9-10 CẤP (`lvl` từ 1 đến 10): `lvl: 1` là đại mục lớn của chương; `lvl: 2` là mục chính; `lvl: 3` là tiểu mục; `lvl: 4` đến `lvl: 10` là các mục chi tiết bên trong.",
-      "3. QUY TẮC `src`: Chứa tiêu đề chuẩn xác bằng tiếng Anh, không kèm số trang."
+    "muc_dich": "MucLuc.json điều khiển cách app 'Trắc Nghiệm RHM' (index.html, phần Tủ sách/Book viewer, tiền tố hàm bk*) nhận diện MỤC LỤC ĐA CẤP (tối đa 10 cấp) của từng chương PDF. App tải file này từ cùng thư mục với index.html trên GitHub (fetch 'MucLuc.json?_=timestamp', không cache) mỗi lần mở chương, bấm 'Nhận diện mục lục' hoặc 'Quét lại'. Không có file hoặc file lỗi thì app dùng mặc định cứng BK_MUCLUC_DEFAULT.",
+    "cach_dung_cho_phien_moi_chi_can_json": [
+      "1. Đọc toàn bộ phần này trước. Mọi thứ cần biết về cách app chạy và cách chỉnh JSON đều nằm ở đây, không cần mã nguồn app.",
+      "2. Chỉ sửa các khóa nằm trong 'khoa_json_app_doc'. Khóa lạ KHÔNG có tác dụng (app bỏ qua). Phần ghi chú đặt trong khóa bắt đầu bằng dấu gạch dưới '_'.",
+      "3. Quy trình chỉnh nhận diện cho một sách: (a) xin người dùng ảnh chụp chỗ sai + tên sách + chương, (b) đối chiếu triệu chứng với bảng 'chan_doan_trieu_chung', (c) sửa preset của sách (presets.<TenSach>.offline_rules / custom_ai_hint), không sửa khối toàn cục nếu chỉ một sách bị, (d) tăng 'version', thêm dòng vào 'lich_su', (e) kiểm tra JSON hợp lệ và RegExp biên dịch được, (f) xuất file MucLuc.json để người dùng đặt cạnh index.html.",
+      "4. Nếu triệu chứng thuộc 'hanh_vi_cung_trong_app' thì JSON không sửa được: nói rõ với người dùng và đưa đoạn vá trong 'de_xuat_va_app' hoặc bổ sung prompt/custom_ai_hint để AI bù.",
+      "5. Muốn đo số liệu cho sách mới: dùng pdfplumber đọc font, cỡ chữ, khoảng cách dòng của vài trang rồi đối chiếu cách app quyết định ở 'quy_trinh_offline'. Không đoán số."
     ],
-    "quy_tac_thuat_ngu_tieng_viet_mien_nam": "Khi dịch trường `vi`, bắt buộc dùng chuẩn RHM miền Nam (ĐH Y Dược TP.HCM): nội nha (không nội tủy), trám răng / xoang trám (không hàn răng), trám bít ống tủy (không hàn bít), nướu (không lợi), vôi răng / lấy vôi răng (không cao răng), răng cối nhỏ / lớn (không răng hàm), chóp răng / quanh chóp (không cuống răng), mão răng (không chụp răng)."
+    "quy_trinh_app": {
+      "1_nap_chuong": "Mở chương: app tải PDF của chương (mỗi chương là một file PDF riêng) bằng PDF.js. bkText là toàn bộ chữ của chương, ghép từng trang theo thứ tự đọc.",
+      "2_bkExtract_offline": "Với mỗi trang: bỏ tiêu đề chạy đầu/cuối trang và số trang (chữ lặp lại ở >=30% số trang hoặc chỉ là số ở mép trên/dưới); bỏ chữ trong khung ảnh, hộp nền, bảng có kẻ, biểu đồ vẽ bằng nét (bkImageBoxes); bỏ chữ nhỏ hơn 0.85 lần cỡ thân bài; bỏ chú thích 'Table/Fig/Figure/Box/Hình/Bảng...' kèm các dòng liền sau (chú thích hình chỉ bỏ tối đa 3 dòng kế tiếp); bỏ khung 'CHAPTER OUTLINE', tiêu đề chương/tên tác giả ở trang 1. Thứ tự đọc: cột trái (trên xuống dưới) rồi cột phải rồi trang sau; cột chia tại giữa trang. Hình hay bảng cắt đoạn thì chữ vẫn nối theo thứ tự này, nên phần tiếp của đoạn bị cắt nằm ở cột/trang kế.",
+      "3_ung_vien_tieu_de": "Từ dòng chữ đã lọc, app dò 'ứng viên tiêu đề' (cands) bằng các luật trong offline_rules (xem khoa_json_app_doc). Nếu trang có chữ đậm: tiêu đề là dòng đậm toàn dòng, dóng lề trái cột, và hoặc nằm sát dưới một dòng chưa kết thúc câu, hoặc cách dòng trên đủ xa, hoặc cỡ chữ lớn hơn thân. Dòng đậm liên tiếp cùng cột cách nhau dưới 1.7 lần cỡ chữ được gộp thành MỘT tiêu đề (tiêu đề xuống dòng). Dòng khớp include_regex luôn được nhận. Dòng khớp exclude_regex hoặc ngoài khoảng min_length..max_length thì loại.",
+      "4_AI_online_bkDetectChapter": "Nếu preset của sách có 'chapters' cho chương này thì nạp thẳng và bỏ qua AI (trừ khi skip_ai_when_preset_exists=false). Nếu không: cắt bkText thành đoạn chunk_size ký tự (chồng chunk_overlap), gọi Gemini với outline_system_prompt + bảng thuật ngữ miền Nam (BK_TR_GLOSS) + thuật ngữ từ điển, kèm 'DÒNG NGẮN ĐỨNG RIÊNG' là các ứng viên offline (tối đa 4500 ký tự). AI trả {sections:[{src,vi,lvl}]}. Mỗi src phải tìm thấy NGUYÊN VĂN trong bkText, ở đầu dòng (bkLocateIn), nếu không bị bỏ. Kết quả gộp theo vị trí.",
+      "5_merge_offline": "Nếu merge_offline_candidates=true thì các ứng viên offline mà AI không chọn vẫn được thêm làm mục (lvl 1 nếu chữ lớn, ngược lại 2). Mặc định false: ứng viên chỉ là gợi ý cho AI.",
+      "6_quet_lai": "Nút 'Quét lại' (bkRescanSel) chạy 2 lượt cho một mục: sub_pass1_prompt liệt kê mục con (lvl từ 2), sub_pass2_prompt đối chiếu lại; chuỗi {{TITLE}} được thay bằng tiêu đề mục. Cấp mục con luôn lớn hơn cấp mục cha, tối đa 10.",
+      "7_vi": "Trường vi qua hàm rhmEnforceSouthernTerms (ép thuật ngữ RHM miền Nam) trước khi hiển thị."
+    },
+    "cach_json_hoat_dong": {
+      "thu_tu_uu_tien_offline_rules": "mặc định cứng trong app < offline_rules toàn cục < presets.<sách>.offline_rules (khóa nào có thì ghi đè).",
+      "thu_tu_uu_tien_ai_prompts": "mặc định cứng < ai_prompts toàn cục < presets.<sách>.ai_prompts. Sau đó presets.<sách>.custom_ai_hint được NỐI vào cuối cả 3 prompt dưới dạng ' QUY ĐỊNH RIÊNG TỪ MucLuc.json CHO SÁCH NÀY: <hint>.'. Cách an toàn nhất để thêm luật riêng cho sách là custom_ai_hint, giữ nguyên các prompt gốc.",
+      "chon_preset_theo_sach": "bkFindBookPreset so tên sách của app với tên khóa trong presets (bỏ dấu câu, chữ thường): khớp nếu tên này chứa tên kia, hoặc có từ >=4 ký tự trùng. Chỉ có một preset thì dùng preset đó cho mọi sách. Khóa preset bắt đầu bằng '_' bị bỏ qua. Vì vậy tên preset nên là một từ đặc trưng của sách (ví dụ 'Sturdevant').",
+      "chapters": "presets.<sách>.chapters = {'Chapter 2':[{src,vi,lvl}...]} là danh sách tiêu đề ghi sẵn cho chương (nhận chương theo tên hoặc số chương; có thể dò theo nội dung). Cách này là 'nhận diện cứng', hiện để trống theo yêu cầu người dùng; chỉ dùng cho chỗ đặc biệt app/AI làm không nổi.",
+      "dau_ra_lvl": "lvl là số nguyên 1..10; app tự ép vào khoảng này."
+    },
+    "khoa_json_app_doc": {
+      "offline_rules": {
+        "min_length": "độ dài tối thiểu của dòng tiêu đề (mặc định 3)",
+        "max_length": "độ dài tối đa của MỘT dòng tiêu đề (mặc định 110)",
+        "heading_font_ratio": "chữ lớn hơn cỡ thân bài ít nhất bấy nhiêu lần thì coi là 'chữ lớn' (mặc định 1.06)",
+        "gap_up_ratio": "khoảng cách tới dòng trên (tính bằng cỡ chữ) tối thiểu để dòng đậm đứng riêng là tiêu đề (mặc định 1.45). Chữ lớn dùng ngưỡng cứng 1.1.",
+        "flush_left_tolerance": "độ lệch tối đa so với lề trái cột (tính bằng cỡ chữ) để còn coi là sát lề (mặc định 0.5). Tăng khi tiêu đề thụt vào.",
+        "allow_run_in": "true: nhận tiêu đề chạy liền vào đoạn (chữ đậm đầu đoạn kết thúc bằng dấu chấm)",
+        "run_in_max_length": "độ dài tối đa của tiêu đề chạy liền (mặc định 60)",
+        "merge_offline_candidates": "true: thêm thẳng ứng viên offline vào mục lục kể cả AI không chọn",
+        "exclude_regex": "RegExp (không phân biệt hoa thường), dòng khớp thì loại khỏi ứng viên VÀ khỏi kết quả AI. Viết chuỗi JSON nên nhân đôi dấu gạch chéo ngược.",
+        "include_regex": "RegExp, dòng khớp (và không khớp exclude) luôn là ứng viên, không cần chữ đậm"
+      },
+      "ai_prompts": {
+        "chunk_size": "số ký tự mỗi đoạn gửi AI (mặc định 40000)",
+        "chunk_overlap": "số ký tự chồng giữa hai đoạn (mặc định 1500)",
+        "outline_system_prompt": "prompt quét cả chương",
+        "sub_pass1_prompt": "prompt lượt 1 của 'Quét lại', có {{TITLE}}",
+        "sub_pass2_prompt": "prompt lượt 2 của 'Quét lại', có {{TITLE}}"
+      },
+      "presets.<sách>": {
+        "offline_rules, ai_prompts": "cùng nghĩa như trên, ghi đè riêng cho sách",
+        "custom_ai_hint": "đoạn văn bản nối vào cả 3 prompt",
+        "skip_ai_when_preset_exists": "false: có chapters vẫn chạy AI để bổ sung (mặc định bỏ qua AI)",
+        "chapters": "xem cach_json_hoat_dong"
+      }
+    },
+    "hanh_vi_cung_trong_app_json_khong_sua_duoc": [
+      "Chú thích Figure/Fig./Table/Box chỉ được bỏ kèm tối đa 3 dòng kế tiếp (vòng for n0<3 và n1<3 trong bkExtract). Chú thích hình dài hơn 4 dòng thì các dòng sau lọt vào bkText như thân văn bản (xảy ra ở Figure 2.5, 2.7 của Sturdevant chương 2). Bù bằng custom_ai_hint hoặc vá app (xem de_xuat_va_app).",
+      "Nhãn trong ảnh chỉ bị bỏ khi nằm trong khung ảnh/biểu đồ do bkImageBoxes dò được (ảnh nhúng, hộp nền, cụm nét vẽ). Với khung loại r=2 hoặc r=3 (biểu đồ/bảng kẻ), chữ đậm hoặc dòng hơn 3 từ vẫn được giữ.",
+      "Chữ nhỏ hơn 0.85 lần cỡ thân bài (mode của trang) bị loại. Trang dày bảng làm mode cỡ chữ tụt xuống 8 thì chữ bảng 9 có thể qua được. Số La Mã đứng riêng cỡ 8 (như 'I.' nhỏ) cũng bị loại nếu thân bài cỡ 10.",
+      "Khi AI trả src không tìm thấy nguyên văn ở đầu dòng trong bkText thì mục bị bỏ. src chứa ký tự % bị bỏ cứng ở bkLocateIn (dòng '|| /%/.test(rawSrc)'), nên tiêu đề kiểu 'Sodium fluoride varnish (5%)' không vào được qua AI dù exclude_regex đã cho phép.",
+      "Ngưỡng cứng: gộp dòng đậm liên tiếp khi cách < 1.7 lần cỡ chữ; chữ lớn cần khoảng cách trên >= 1.1 lần cỡ chữ; chia cột tại giữa trang (x < 50% chiều rộng); lọc tiêu đề chạy đầu trang khi lặp >=30% số trang.",
+      "Danh sách ứng viên gửi AI cắt ở 4500 ký tự mỗi chunk."
+    ],
+    "chan_doan_trieu_chung": {
+      "tieu_de_bi_gop_thanh_mot": "Do luật gộp dòng đậm liên tiếp (<1.7 lần cỡ chữ) hoặc AI gộp. JSON chỉ chặn được phía AI qua custom_ai_hint ('mỗi tiêu đề một mục'). Muốn tắt hẳn phía offline phải vá app.",
+      "mat_tieu_de_thut_vao_le": "Tăng offline_rules.flush_left_tolerance.",
+      "mat_tieu_de_chu_nho_hoac_khong_dam": "Dùng include_regex cho mẫu tiêu đề đặc thù, hoặc giảm heading_font_ratio/gap_up_ratio.",
+      "thua_tieu_de_gia_cau_van_nhan_hinh_bang": "Thêm mẫu vào exclude_regex; tăng heading_font_ratio; viết rõ trong custom_ai_hint.",
+      "quet_trung_hinh_hoac_chu_thich_dai": "Xem hanh_vi_cung_trong_app (giới hạn 3 dòng). Bù custom_ai_hint hoặc vá app.",
+      "tieu_de_co_dau_ngoac_phan_tram_bi_mat": "exclude_regex không được chứa '%' hoặc '\\\\(\\\\d' không neo. Phía AI còn bị chặn cứng bởi % trong bkLocateIn, nên cần vá app hoặc dùng chapters.",
+      "doan_van_bi_hinh_cat_phan_tiep_o_trang_sau": "bkText đã theo thứ tự đọc nên phần tiếp nằm ở cột/trang kế. Dặn AI trong custom_ai_hint là phần tiếp thuộc thân văn bản chứ không phải tiêu đề mới."
+    },
+    "de_xuat_va_app": [
+      "Nới giới hạn 3 dòng của chú thích: trong bkExtract đổi hai vòng 'n0 < 3' và 'n1 < 3' thành 'n0 < 14' và 'n1 < 14' (chú thích Figure 2.5 dài khoảng 12 dòng), giữ điều kiện cùng cỡ chữ và sát nhau.",
+      "Cho phép dấu % qua AI: trong bkLocateIn bỏ đoạn '|| /%/.test(rawSrc)'.",
+      "Muốn không gộp tiêu đề đậm liên tiếp: thêm khóa offline_rules.merge_heading_lines (mặc định true) và kiểm tra khóa này ở biến 'mergeable' trong bkExtract."
+    ],
+    "so_lieu_do_cho_sturdevant": {
+      "nguon_do": "pdfplumber trên các trang 47-62 của bản PDF cả sách (chương 2); số liệu gần đúng, app dùng PDF từng chương nên cần đối chiếu lại nếu lệch.",
+      "than_bai": "Giovanni-Book 10pt (hộp/bảng 8-9pt Melior/Frutiger-Light).",
+      "tieu_de": "Frutiger-Black 12.5 (mục lớn, có cả số La Mã cùng dòng, ví dụ 'III. Diet and Caries'); Frutiger-Black/BoldItalic 11.5 (mục con, ví dụ 'Zone 1: Surface zone'); Giovanni-BoldItalic 10-11.5 (tiêu đề nhỏ như 'Enamel tufts'). Tất cả khớp /bold|black/ nên app coi là chữ đậm.",
+      "khoang_cach_tren": "13-56pt, đa số trên 1.1 lần cỡ chữ.",
+      "lech_le_trai": "Một số tiêu đề cách lề cột 20-24pt (khoảng 2 lần cỡ chữ). Vì vậy flush_left_tolerance của sách đặt 2.2; ứng viên chỉ là gợi ý cho AI nên dương tính giả rẻ hơn bỏ sót.",
+      "nhieu": "Hộp 'Clinical Notes' Frutiger-Bold 10 (loại bằng exclude_regex), chú thích hình Frutiger-Light 8-9, số La Mã đứng riêng 8pt ở mép."
+    },
+    "thuat_ngu_mien_nam": "Trường vi theo chuẩn RHM miền Nam (ĐH Y Dược TP.HCM): nội nha (không nội tủy), trám răng/xoang trám (không hàn răng), trám bít ống tủy (không hàn bít), nướu (không lợi), vôi răng/lấy vôi răng (không cao răng), răng cối nhỏ/lớn (không răng hàm), chóp răng/quanh chóp (không cuống răng), mão răng (không chụp răng). App đã tự ép các thuật ngữ này và nối bảng thuật ngữ vào prompt.",
+    "lich_su": [
+      "v1-v8: các phiên bản trước, có nhiều khóa tự đặt app không đọc (reading_order, stitch_interrupted_text, exclude_regions...), đã bỏ.",
+      "v9: viết lại theo mã nguồn app (index__2___1_.html): chỉ dùng khóa app đọc; bỏ danh sách tiêu đề ghi sẵn; sửa exclude_regex (bỏ '%' và '\\\\(\\\\d' không neo); thêm custom_ai_hint cho Sturdevant (tách tiêu đề, bỏ ảnh/bảng/biểu đồ/chú thích dài, nối đoạn bị hình cắt); thêm hướng dẫn cho phiên sau."
+    ]
   },
-  "version": 8,
+  "version": 9,
   "offline_rules": {
     "min_length": 3,
     "max_length": 110,
@@ -18,211 +97,33 @@
     "allow_run_in": false,
     "run_in_max_length": 60,
     "merge_offline_candidates": false,
-    "exclude_regex": "\\d{3,}|^\\(\\d|et al|^combined$|^table\\b|^fig\\.|^figure\\b|^box\\b|^flowchart\\b|^clinical notes\\b|^step\\s+\\d|^references\\b|^summary\\b|^page\\b|^chart\\b|^graph\\b|^diagram\\b|^image\\b|^photo\\b|^plate\\b|^\\(from\\b|^courtesy\\b",
-    "include_regex": "^(?:[IVXLCDM]{1,4}\\.\\s+[A-Z]|Zone\\s+\\d+\\s*:|[A-Z][A-Za-z0-9\\s,–—-]+$)",
-    "include_font": [
-      "Frutiger-Black",
-      "Frutiger-LightItalic",
-      "Giovanni-BoldItalic"
-    ],
-    "min_size": 11.0,
-    "exclude_font": [
-      "Frutiger-Light",
-      "MeliorLTStd",
-      "Giovanni-Book",
-      "Giovanni-BookItalic"
-    ],
-    "column_aware": true,
-    "max_level": 10,
-    "level_strategy": "rank_by_size_and_font",
-    "one_heading_per_block": true,
-    "heading_block_rules": {
-      "mot_tieu_de_mot_muc": true,
-      "ket_thuc_tieu_de_khi": [
-        "đổi font hoặc cỡ chữ",
-        "gặp dòng thân văn bản",
-        "đổi cột",
-        "khoảng cách dọc lớn hơn 1.4 lần chiều cao dòng"
-      ],
-      "chi_noi_dong_khi": "hai dòng liền nhau cùng font, cùng cỡ, khoảng cách dọc <= 1.4 lần chiều cao dòng, và dòng trên không kết thúc bằng thân văn bản xen giữa (tiêu đề xuống dòng)",
-      "khong_gop_tieu_de_anh_em": true
-    },
-    "exclude_regions": {
-      "anh": {
-        "bat": true,
-        "nguon": "ảnh nhúng (page.images). Chữ nằm trong khung ảnh (nhãn như '3 weeks', 'Palisades of cocci', 'Corn cobs') bị loại",
-        "le": 4
-      },
-      "bang": {
-        "bat": true,
-        "nhan_dien": "lưới đường kẻ/ô chữ nhật từ 2 hàng 2 cột trở lên, hoặc dòng bắt đầu bằng Table",
-        "le": 4
-      },
-      "bieu_do": {
-        "bat": true,
-        "nhan_dien": "cụm hình vẽ vector (đường cong, hình chữ nhật, mũi tên) kèm nhãn trục/chú giải",
-        "le": 6
-      },
-      "chu_thich_hinh": {
-        "bat": true,
-        "nhan_dien": "dòng bắt đầu Figure/Fig./Chart/Graph/Diagram và các dòng chú thích kèm nguồn (From..., Courtesy...)",
-        "bat_dau": "dòng bắt đầu Figure/Fig./Chart/Graph/Diagram/Table N.N",
-        "ket_thuc": "khi gặp khoảng trắng dọc lớn, đổi font sang tiêu đề/thân văn bản không phải font chú thích, hoặc hết dòng nguồn '(From …)'/'(Courtesy …)'",
-        "luu_y": "Chú thích hình có thể dài nhiều dòng, kể cả khi trình đọc tô sáng như thân văn bản (ví dụ Figure 2.5, Figure 2.7). Toàn bộ khối này, gồm cả dòng nguồn, là chú thích và bị loại khỏi nội dung chính"
-      }
-    },
-    "label_in_figure_filter": {
-      "bat": true,
-      "mo_ta": "Nhãn nằm trong vùng ảnh/biểu đồ (ví dụ 'Dentin', 'Dentinal part of lamella') luôn bị loại, kể cả khi viết như tiêu đề.",
-      "dieu_kien_phu": "dòng ngắn, cỡ chữ nhỏ hơn cỡ tiêu đề, hoặc nằm trong vùng loại"
-    },
-    "reading_order": {
-      "thu_tu": "cột trái từ trên xuống dưới, rồi cột phải từ trên xuống dưới, rồi mới sang trang kế",
-      "phat_hien_cot": "chia đôi theo giữa trang; khối rộng hơn 60% chiều rộng trang (chú thích hình, bảng, ảnh toàn trang) là khối toàn rộng",
-      "khoi_toan_rong": "tách trang thành các dải theo trục dọc: đọc hết cột trái và cột phải của dải trên, rồi đến khối toàn rộng, rồi dải dưới",
-      "khong_tron_dong_hai_cot": true
-    },
-    "stitch_interrupted_text": {
-      "bat": true,
-      "ly_do": "Hình, bảng hoặc hộp chèn vào làm đoạn văn bị cắt; phần tiếp có thể bị đẩy xuống cuối cột, sang cột phải hoặc sang trang sau",
-      "khoi_bo_qua_khi_noi": [
-        "hình/ảnh",
-        "chú thích hình",
-        "bảng",
-        "biểu đồ",
-        "hộp Clinical Notes/Box",
-        "số trang",
-        "tiêu đề chạy đầu trang"
-      ],
-      "dieu_kien_doan_chua_het": "khối thân văn bản kết thúc ở cuối cột/trang mà không có dấu câu kết thúc (. ? ! :), hoặc kết thúc bằng dấu gạch nối, hoặc kết thúc bằng từ nối",
-      "dieu_kien_doan_tiep": "khối thân văn bản đầu tiên ở cột/trang kế sau khi bỏ qua các khối trong danh sách trên, cùng font thân văn bản, bắt đầu bằng chữ thường hoặc tiếp ý",
-      "tim_trong": {
-        "so_cot_ke_tiep": 1,
-        "so_trang_toi_da": 3
-      },
-      "noi_tu_gach_noi": "bỏ dấu '-' cuối dòng và dán hai nửa từ (ví dụ 'bacte-' + 'ria' → 'bacteria')",
-      "khong_tao_tieu_de_moi": "Phần nối tiếp là thân văn bản, không bao giờ trở thành tiêu đề"
-    },
-    "heading_prefix_rules": {
-      "so_la_ma_tien_to": "Số La Mã (I., II., III. …) cùng đường cơ sở với chữ ngay sau là một phần của tiêu đề; src giữ số La Mã",
-      "tieu_de_trong_hop_nen": "Tiêu đề nằm trong hộp nền màu, xuống dòng trong cùng hộp là MỘT tiêu đề (ví dụ 'II. Tooth Habitats for Cariogenic Biofilm' hai dòng)",
-      "bo_tham_chieu_hinh": "Loại hậu tố tham chiếu hình khỏi src, ví dụ '(Fig. 2.9)', '(Figs. 2.5 and 2.6)'"
-    }
+    "exclude_regex": "%|\\d{3,}|\\(\\d|et al|^combined$|^table\\b|^fig\\.|^figure\\b|^box\\b|^flowchart\\b|^clinical notes\\b|^step\\s+\\d|^references\\b|^summary\\b|^page\\b",
+    "include_regex": "^(?:[IVXLCDM]{1,4}\\.\\s+[A-Z]|Zone\\s+\\d+\\s*:)"
   },
   "ai_prompts": {
     "chunk_size": 40000,
-    "chunk_overlap": 2500,
-    "outline_system_prompt": "Bạn là giáo sư đầu ngành Răng Hàm Mặt. Bạn nhận danh sách ỨNG VIÊN TIÊU ĐỀ đã lấy theo đặc trưng font (kèm font, cỡ, trang, đoạn văn ngay sau). Hãy: (1) loại mục không phải tiêu đề (hộp Clinical Notes, chú thích hình, La Mã đứng riêng, tiêu đề chạy đầu trang); (2) giữ src nguyên văn như in; (3) gán lvl từ 1 đến 10 (tối đa 10 cấp) theo thứ bậc của nội dung; (4) vi = tên tiếng Việt ngắn theo thuật ngữ RHM miền Nam. Trả về MỘT đối tượng JSON {\"sections\":[{\"src\":\"...\",\"vi\":\"...\",\"lvl\":1}]}. Mỗi tiêu đề là MỘT mục riêng; tuyệt đối KHÔNG gộp hai hay nhiều tiêu đề liền nhau thành một (ví dụ 'Hunter–Schreger bands', 'Enamel tufts', 'Enamel lamellae', 'Striae of Retzius' phải là 4 mục khác nhau). KHÔNG lập mục từ ảnh, bảng, biểu đồ, sơ đồ: bỏ qua nhãn trong hình, tiêu đề cột/hàng của bảng, trục và chú giải biểu đồ, chú thích 'Figure/Fig./Table/Chart' và dòng nguồn '(From ... Courtesy ...)'. LƯU Ý VỀ BỐ CỤC: văn bản được đưa theo thứ tự đọc (cột trái xuống hết, rồi cột phải). Hình, bảng, hộp có thể cắt giữa đoạn văn nên phần tiếp của đoạn có thể nằm ở cột sau hoặc trang sau, phía dưới các khối hình/chú thích. Hãy ghép phần tiếp về đúng đoạn bị cắt dựa trên ngữ nghĩa (câu dở dang, từ bị gạch nối, đoạn mở đầu bằng chữ thường), và coi đó là thân văn bản chứ KHÔNG phải tiêu đề. Khối chú thích hình, kể cả chú thích dài nhiều dòng và dòng nguồn '(From … Courtesy …)', không phải tiêu đề và không phải nội dung chính. Số La Mã đứng đầu tiêu đề thuộc về tiêu đề; bỏ hậu tố tham chiếu hình như '(Fig. 2.9)' khỏi src. Không thêm chữ nào ngoài JSON.",
-    "sub_pass1_prompt": "Bạn là giáo sư đầu ngành Răng Hàm Mặt. Đoạn văn dưới đây thuộc mục \"{{TITLE}}\". Liệt kê đầy đủ các TIÊU ĐỀ MỤC CON đa cấp (lvl = 2 đến 10 (tối đa 10 cấp)) nằm bên trong đoạn (KHÔNG liệt kê chính tiêu đề \"{{TITLE}}\", KHÔNG liệt kê Clinical Notes, Box, Table, Figure, Flowchart hay câu văn thường). Với mỗi mục trả về \"src\" = tiêu đề GIỮ NGUYÊN NGUYÊN VĂN như in, \"vi\" = tên tiếng Việt ngắn gọn đúng thuật ngữ RHM miền Nam, \"lvl\" = số nguyên từ 2 đến 10. Trả về MỘT đối tượng JSON: {\"sections\":[{\"src\":\"...\",\"vi\":\"...\",\"lvl\":2}]}. Mỗi tiêu đề là MỘT mục riêng; tuyệt đối KHÔNG gộp hai hay nhiều tiêu đề liền nhau thành một (ví dụ 'Hunter–Schreger bands', 'Enamel tufts', 'Enamel lamellae', 'Striae of Retzius' phải là 4 mục khác nhau). KHÔNG lập mục từ ảnh, bảng, biểu đồ, sơ đồ: bỏ qua nhãn trong hình, tiêu đề cột/hàng của bảng, trục và chú giải biểu đồ, chú thích 'Figure/Fig./Table/Chart' và dòng nguồn '(From ... Courtesy ...)'. LƯU Ý VỀ BỐ CỤC: văn bản được đưa theo thứ tự đọc (cột trái xuống hết, rồi cột phải). Hình, bảng, hộp có thể cắt giữa đoạn văn nên phần tiếp của đoạn có thể nằm ở cột sau hoặc trang sau, phía dưới các khối hình/chú thích. Hãy ghép phần tiếp về đúng đoạn bị cắt dựa trên ngữ nghĩa (câu dở dang, từ bị gạch nối, đoạn mở đầu bằng chữ thường), và coi đó là thân văn bản chứ KHÔNG phải tiêu đề. Khối chú thích hình, kể cả chú thích dài nhiều dòng và dòng nguồn '(From … Courtesy …)', không phải tiêu đề và không phải nội dung chính. Số La Mã đứng đầu tiêu đề thuộc về tiêu đề; bỏ hậu tố tham chiếu hình như '(Fig. 2.9)' khỏi src. Không thêm chữ nào ngoài JSON.",
-    "sub_pass2_prompt": "Bạn là giáo sư đầu ngành Răng Hàm Mặt, đang KIỂM TRA ĐỐI CHIẾU. Đối chiếu danh sách mục con dưới đây với đoạn văn của mục \"{{TITLE}}\". Mỗi mục phải là tiêu đề có thật, xuất hiện nguyên văn trong đoạn; xóa các mục là Clinical Notes, Box, Table, Figure, Flowchart hoặc câu văn thường; bổ sung tiêu đề con còn thiếu; \"lvl\" = số nguyên từ 2 đến 10. Trả về MỘT đối tượng JSON cùng định dạng: {\"sections\":[{\"src\":\"...\",\"vi\":\"...\",\"lvl\":2}]}. Mỗi tiêu đề là MỘT mục riêng; tuyệt đối KHÔNG gộp hai hay nhiều tiêu đề liền nhau thành một (ví dụ 'Hunter–Schreger bands', 'Enamel tufts', 'Enamel lamellae', 'Striae of Retzius' phải là 4 mục khác nhau). KHÔNG lập mục từ ảnh, bảng, biểu đồ, sơ đồ: bỏ qua nhãn trong hình, tiêu đề cột/hàng của bảng, trục và chú giải biểu đồ, chú thích 'Figure/Fig./Table/Chart' và dòng nguồn '(From ... Courtesy ...)'. LƯU Ý VỀ BỐ CỤC: văn bản được đưa theo thứ tự đọc (cột trái xuống hết, rồi cột phải). Hình, bảng, hộp có thể cắt giữa đoạn văn nên phần tiếp của đoạn có thể nằm ở cột sau hoặc trang sau, phía dưới các khối hình/chú thích. Hãy ghép phần tiếp về đúng đoạn bị cắt dựa trên ngữ nghĩa (câu dở dang, từ bị gạch nối, đoạn mở đầu bằng chữ thường), và coi đó là thân văn bản chứ KHÔNG phải tiêu đề. Khối chú thích hình, kể cả chú thích dài nhiều dòng và dòng nguồn '(From … Courtesy …)', không phải tiêu đề và không phải nội dung chính. Số La Mã đứng đầu tiêu đề thuộc về tiêu đề; bỏ hậu tố tham chiếu hình như '(Fig. 2.9)' khỏi src. Không thêm chữ nào ngoài JSON.",
-    "chunk_note": "Nối đoạn bị cắt trước khi chia chunk; chunk_overlap tăng để phần tiếp ở trang sau không bị tách khỏi đoạn gốc."
+    "chunk_overlap": 1500,
+    "outline_system_prompt": "Bạn là giáo sư đầu ngành Răng Hàm Mặt. Quét TOÀN BỘ đoạn văn bản chương sách được gửi và lập MỤC LỤC CHI TIẾT ĐA CẤP (hỗ trợ sâu từ 1 đến 10 cấp), theo đúng thứ tự xuất hiện từ đầu đến cuối đoạn. Phân cấp chính xác theo tư duy chuyên môn: lvl = 1 cho đại mục lớn; lvl = 2 cho mục chính (bao gồm các mục đánh số La Mã như \"I. Biofilm\"); lvl = 3 cho tiểu mục; lvl = 4 đến 10 cho các mục chi tiết bên trong. Với mỗi mục trả về: \"src\" = tiêu đề GIỮ NGUYÊN NGUYÊN VĂN như in trong sách; \"vi\" = tên tiếng Việt ngắn gọn đúng thuật ngữ RHM miền Nam; \"lvl\" = số nguyên từ 1 đến 10. TUYỆT ĐỐI KHÔNG lập mục từ: Clinical Notes, Box, Table, Figure, Flowchart, Step 1/2/3, References, Summary, tên chương, tên tác giả, câu văn thường, hoặc các đoạn văn giải thích dài. Trả về MỘT đối tượng JSON: {\"sections\":[{\"src\":\"...\",\"vi\":\"...\",\"lvl\":1}]}; nếu không có tiêu đề nào, {\"sections\":[]}. Không thêm chữ nào ngoài JSON.",
+    "sub_pass1_prompt": "Bạn là giáo sư đầu ngành Răng Hàm Mặt. Đoạn văn dưới đây thuộc mục \"{{TITLE}}\". Liệt kê đầy đủ các TIÊU ĐỀ MỤC CON đa cấp (lvl = 2 đến 10) nằm bên trong đoạn (KHÔNG liệt kê chính tiêu đề \"{{TITLE}}\", KHÔNG liệt kê Clinical Notes, Box, Table, Figure, Flowchart hay câu văn thường). Với mỗi mục trả về \"src\" = tiêu đề GIỮ NGUYÊN NGUYÊN VĂN như in, \"vi\" = tên tiếng Việt ngắn gọn đúng thuật ngữ RHM miền Nam, \"lvl\" = số nguyên từ 2 đến 10. Trả về MỘT đối tượng JSON: {\"sections\":[{\"src\":\"...\",\"vi\":\"...\",\"lvl\":2}]}. Không thêm chữ nào ngoài JSON.",
+    "sub_pass2_prompt": "Bạn là giáo sư đầu ngành Răng Hàm Mặt, đang KIỂM TRA ĐỐI CHIẾU. Đối chiếu danh sách mục con dưới đây với đoạn văn của mục \"{{TITLE}}\". Mỗi mục phải là tiêu đề có thật, xuất hiện nguyên văn trong đoạn; xóa các mục là Clinical Notes, Box, Table, Figure, Flowchart hoặc câu văn thường; bổ sung tiêu đề con còn thiếu; \"lvl\" = số nguyên từ 2 đến 10. Trả về MỘT đối tượng JSON cùng định dạng: {\"sections\":[{\"src\":\"...\",\"vi\":\"...\",\"lvl\":2}]}. Không thêm chữ nào ngoài JSON."
   },
   "presets": {
     "Sturdevant": {
-      "skip_ai_when_preset_exists": false,
-      "custom_ai_hint": "Sách Sturdevant's Art and Science of Operative Dentistry có hệ thống tiêu đề đa cấp rất chi tiết đến 9-10 cấp. Tuyệt đối bỏ qua các hộp 'Clinical Notes', 'Box', 'Table', 'Figure', 'Flowchart', 'Step', 'Summary', 'References'.",
+      "skip_ai_when_preset_exists": true,
       "offline_rules": {
-        "heading_font_ratio": 1.05,
+        "min_length": 3,
+        "max_length": 120,
+        "heading_font_ratio": 1.1,
+        "gap_up_ratio": 1.45,
+        "flush_left_tolerance": 2.2,
         "allow_run_in": false,
-        "exclude_regex": "\\d{3,}|^\\(\\d|et al|^combined$|^table\\b|^fig\\.|^figure\\b|^box\\b|^flowchart\\b|^clinical notes\\b|^step\\s+\\d|^references\\b|^summary\\b|^page\\b|^chart\\b|^graph\\b|^diagram\\b|^image\\b|^photo\\b|^plate\\b|^\\(from\\b|^courtesy\\b",
+        "run_in_max_length": 60,
         "merge_offline_candidates": false,
-        "one_heading_per_block": true,
-        "reading_order": {
-          "thu_tu": "cột trái từ trên xuống dưới, rồi cột phải từ trên xuống dưới, rồi mới sang trang kế",
-          "phat_hien_cot": "chia đôi theo giữa trang; khối rộng hơn 60% chiều rộng trang (chú thích hình, bảng, ảnh toàn trang) là khối toàn rộng",
-          "khoi_toan_rong": "tách trang thành các dải theo trục dọc: đọc hết cột trái và cột phải của dải trên, rồi đến khối toàn rộng, rồi dải dưới",
-          "khong_tron_dong_hai_cot": true
-        },
-        "stitch_interrupted_text": {
-          "bat": true,
-          "ly_do": "Hình, bảng hoặc hộp chèn vào làm đoạn văn bị cắt; phần tiếp có thể bị đẩy xuống cuối cột, sang cột phải hoặc sang trang sau",
-          "khoi_bo_qua_khi_noi": [
-            "hình/ảnh",
-            "chú thích hình",
-            "bảng",
-            "biểu đồ",
-            "hộp Clinical Notes/Box",
-            "số trang",
-            "tiêu đề chạy đầu trang"
-          ],
-          "dieu_kien_doan_chua_het": "khối thân văn bản kết thúc ở cuối cột/trang mà không có dấu câu kết thúc (. ? ! :), hoặc kết thúc bằng dấu gạch nối, hoặc kết thúc bằng từ nối",
-          "dieu_kien_doan_tiep": "khối thân văn bản đầu tiên ở cột/trang kế sau khi bỏ qua các khối trong danh sách trên, cùng font thân văn bản, bắt đầu bằng chữ thường hoặc tiếp ý",
-          "tim_trong": {
-            "so_cot_ke_tiep": 1,
-            "so_trang_toi_da": 3
-          },
-          "noi_tu_gach_noi": "bỏ dấu '-' cuối dòng và dán hai nửa từ (ví dụ 'bacte-' + 'ria' → 'bacteria')",
-          "khong_tao_tieu_de_moi": "Phần nối tiếp là thân văn bản, không bao giờ trở thành tiêu đề"
-        },
-        "heading_prefix_rules": {
-          "so_la_ma_tien_to": "Số La Mã (I., II., III. …) cùng đường cơ sở với chữ ngay sau là một phần của tiêu đề; src giữ số La Mã",
-          "tieu_de_trong_hop_nen": "Tiêu đề nằm trong hộp nền màu, xuống dòng trong cùng hộp là MỘT tiêu đề (ví dụ 'II. Tooth Habitats for Cariogenic Biofilm' hai dòng)",
-          "bo_tham_chieu_hinh": "Loại hậu tố tham chiếu hình khỏi src, ví dụ '(Fig. 2.9)', '(Figs. 2.5 and 2.6)'"
-        },
-        "exclude_regions": {
-          "anh": {
-            "bat": true,
-            "nguon": "ảnh nhúng (page.images). Chữ nằm trong khung ảnh (nhãn như '3 weeks', 'Palisades of cocci', 'Corn cobs') bị loại",
-            "le": 4
-          },
-          "bang": {
-            "bat": true,
-            "nhan_dien": "lưới đường kẻ/ô chữ nhật từ 2 hàng 2 cột trở lên, hoặc dòng bắt đầu bằng Table",
-            "le": 4
-          },
-          "bieu_do": {
-            "bat": true,
-            "nhan_dien": "cụm hình vẽ vector (đường cong, hình chữ nhật, mũi tên) kèm nhãn trục/chú giải",
-            "le": 6
-          },
-          "chu_thich_hinh": {
-            "bat": true,
-            "nhan_dien": "dòng bắt đầu Figure/Fig./Chart/Graph/Diagram và các dòng chú thích kèm nguồn (From..., Courtesy...)",
-            "bat_dau": "dòng bắt đầu Figure/Fig./Chart/Graph/Diagram/Table N.N",
-            "ket_thuc": "khi gặp khoảng trắng dọc lớn, đổi font sang tiêu đề/thân văn bản không phải font chú thích, hoặc hết dòng nguồn '(From …)'/'(Courtesy …)'",
-            "luu_y": "Chú thích hình có thể dài nhiều dòng, kể cả khi trình đọc tô sáng như thân văn bản (ví dụ Figure 2.5, Figure 2.7). Toàn bộ khối này, gồm cả dòng nguồn, là chú thích và bị loại khỏi nội dung chính"
-          }
-        }
+        "exclude_regex": "\\d{3,}|^\\(\\d|et al|^combined$|^table\\b|^fig\\.|^figure\\b|^box\\b|^flowchart\\b|^clinical notes\\b|^step\\s+\\d|^references\\b|^summary\\b|^page\\b",
+        "include_regex": "^(?:[IVXLCDM]{1,4}\\.\\s+[A-Z]|Zone\\s+\\d+\\s*:)"
       },
+      "custom_ai_hint": "Sách Sturdevant's Art and Science of Operative Dentistry. Tiêu đề phân mục in đậm hoặc đậm nghiêng, cỡ 11-12.5 trên thân bài cỡ 10; số La Mã đầu mục (I., II., III.) và nhãn như 'Zone 1:' thuộc tiêu đề nên giữ trong src. Mỗi tiêu đề là MỘT mục riêng, không gộp các tiêu đề liền nhau (ví dụ 'Hunter–Schreger bands', 'Enamel tufts', 'Enamel lamellae', 'Striae of Retzius' là 4 mục); chỉ tiêu đề xuống dòng thành 2 dòng mới là một mục. Bỏ hậu tố tham chiếu hình như '(Fig. 2.9)' khỏi src. KHÔNG lập mục từ ảnh, bảng, biểu đồ, sơ đồ: bỏ nhãn trong hình (ví dụ '3 weeks', 'Palisades of cocci'), tiêu đề cột và hàng của bảng, trục và chú giải biểu đồ, hộp Clinical Notes. Chú thích hình/bảng (bắt đầu 'Figure 2.5', 'Table 2.2'...) có thể dài hơn chục dòng và đôi khi lọt vào văn bản như câu thường, kết thúc bằng dòng nguồn '(From ... Courtesy ...)': coi cả khối là chú thích, không lấy tiêu đề từ đó. Văn bản đã xếp theo thứ tự đọc: cột trái hết rồi đến cột phải, rồi trang sau. Hình, bảng, hộp có thể cắt giữa đoạn nên phần tiếp của đoạn nằm ở cuối cột, cột phải hoặc trang sau, ngay sau các dòng chú thích; hãy ghép theo ngữ nghĩa (câu dở dang, từ bị gạch nối, đoạn mở đầu bằng chữ thường) và coi phần tiếp là thân văn bản, không lập mục mới từ đó",
       "chapters": {}
     }
-  },
-  "_CAP_NHAN_DIEN_SACH_STURDEVANT": {
-    "nguyen_tac": "Không ghi sẵn tiêu đề từng mục. Mọi mục được nhận diện từ PDF khi chạy (offline) và được AI xác nhận, gán cấp (online). Chỉ dùng quy tắc riêng cho những trường hợp đặc biệt được ghi rõ bên dưới.",
-    "phan_cap": {
-      "toi_da": 10,
-      "cach_gan": "Cỡ chữ và kiểu font được xếp hạng thành các nhóm tiêu đề, nhóm lớn nhất là lvl 1. Mỗi nhóm có một cấp riêng, tối đa 10. AI kiểm tra lại thứ bậc theo nội dung."
-    },
-    "dac_trung_font_quan_sat": [
-      {
-        "font": "Frutiger-Black",
-        "size": 12.5,
-        "vai_tro": "tiêu đề, ứng viên"
-      },
-      {
-        "font": "Frutiger-LightItalic",
-        "size": 11.5,
-        "vai_tro": "tiêu đề, ứng viên"
-      },
-      {
-        "font": "Giovanni-BoldItalic",
-        "size": 11.5,
-        "vai_tro": "tiêu đề, ứng viên"
-      },
-      {
-        "font": "Frutiger-Bold",
-        "size": 8.0,
-        "vai_tro": "số La Mã đứng riêng: không phải tiêu đề, dùng làm tín hiệu tiền tố"
-      },
-      {
-        "font": "Frutiger-Bold",
-        "size": 10.0,
-        "vai_tro": "Clinical Notes, tiêu đề chạy đầu trang: loại"
-      }
-    ],
-    "dac_biet": "Chỉ các mẫu đặc biệt của sách này được ghi tên ở đây: Clinical Notes, Box, Table, Figure, Flowchart, Step, References, Summary.",
-    "tach_tieu_de": "Mỗi tiêu đề độc lập: kết thúc khi gặp thân văn bản, đổi font/cỡ, đổi cột. Offline không gộp ứng viên (merge_offline_candidates = false); AI không gộp tiêu đề liền kề.",
-    "loai_anh_bang_bieu_do": "Loại theo vùng (ảnh, bảng, biểu đồ) và theo nhãn bên trong, ngoài loại theo regex; xem offline_rules.exclude_regions.",
-    "thu_tu_doc_va_noi_doan": "Đọc cột trái rồi cột phải; khối toàn rộng tách dải; đoạn bị hình/bảng cắt được nối lại (offline: stitch_interrupted_text, online: ghi chú bố cục trong prompt)."
   }
 }
