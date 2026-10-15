@@ -1260,29 +1260,28 @@
                 </div>
             </div>
 
-            <!-- 2 NÚT DÀN NGANG: ÔN TẬP THEO MÔN HỌC (TRÁI) & ÔN TẬP THEO CHUYÊN ĐỀ (PHẢI) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-6">
-                <button id="btn-toggle-monhoc" onclick="toggleMonHocSection()" class="bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 hover:from-blue-700 hover:to-indigo-700 text-white font-extrabold py-3.5 px-5 rounded-2xl shadow-md transition-all flex items-center justify-center gap-2.5 text-base border border-blue-400/30">
-                    <span class="text-xl">📚</span>
-                    <span>Ôn Tập Theo Môn Học</span>
-                    <span id="monhoc-toggle-icon" class="text-xs bg-white/20 px-2 py-0.5 rounded-full ml-1">▼</span>
-                </button>
-                <button id="btn-toggle-chuyende" onclick="toggleChuyenDeSection()" class="bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-700 hover:to-purple-700 text-white font-extrabold py-3.5 px-5 rounded-2xl shadow-md transition-all flex items-center justify-center gap-2.5 text-base border border-purple-400/30">
-                    <span class="text-xl">🦷</span>
-                    <span>Ôn Tập Theo Chuyên Đề</span>
-                    <span id="chuyende-toggle-icon" class="text-xs bg-white/20 px-2 py-0.5 rounded-full ml-1">▲</span>
-                </button>
+            <!-- HÀNG NÚT TIỆN ÍCH (nằm trên 2 nút ôn tập theo Môn học / Chuyên đề) -->
+            <div class="home-bar mb-5">
+                <button onclick="openCollectionModal()" class="hb-badge text-sm bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm">🏆 Bộ Sưu Tập Huy Hiệu</button>
+                <button onclick="openRhmDict()" class="text-sm bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm" title="Từ điển thuật ngữ RHM — tự thêm khi bạn dịch trong hộp chat đọc sách">📖 Từ Điển RHM <span id="rhm-dict-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
+                <button onclick="openRhmNote()" class="text-sm text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm" style="background:linear-gradient(90deg,#0d9488,#059669)" title="Sổ ghi chú — lưu từ các bong bóng chat AI">📒 Sổ Ghi Chú <span id="rhm-note-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
+                <button onclick="openBookmarkedModal()" class="text-sm bg-amber-50 hover:bg-amber-100 text-amber-700 font-semibold py-2.5 px-3 rounded-xl border border-amber-300 transition-colors">⭐ Đã lưu (<span id="total-bookmarked-count">0</span>)</button>
+                <button onclick="openBlockedModal()" class="text-sm bg-rose-50 hover:bg-rose-100 text-rose-700 font-semibold py-2.5 px-3 rounded-xl border border-rose-300 transition-colors">🚫 Đã chặn (<span id="total-blocked-count">0</span>)</button>
+                <button onclick="openHomeSettings()" class="hb-set text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2.5 px-4 rounded-xl border border-gray-300 shadow-sm transition-colors">⚙️ Cài Đặt</button>
             </div>
 
-            <!-- HÀNG NÚT TIỆN ÍCH (dưới 2 nút ôn tập theo Môn học / Chuyên đề) -->
-            <div class="home-bar mb-6">
-                <button onclick="openCollectionModal()" class="hb-badge text-sm bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-bold py-1.5 px-3.5 rounded-xl transition-all shadow-sm">🏆 Bộ Sưu Tập Huy Hiệu</button>
-                <button onclick="openRhmDict()" class="text-sm bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-bold py-1.5 px-3.5 rounded-xl transition-all shadow-sm" title="Từ điển thuật ngữ RHM — tự thêm khi bạn dịch trong hộp chat đọc sách">📖 Từ Điển RHM <span id="rhm-dict-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
-                <button onclick="openRhmNote()" class="text-sm text-white font-bold py-1.5 px-3.5 rounded-xl transition-all shadow-sm" style="background:linear-gradient(90deg,#0d9488,#059669)" title="Sổ ghi chú — lưu từ các bong bóng chat AI">📒 Sổ Ghi Chú <span id="rhm-note-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
-                <button onclick="openBookmarkedModal()" class="text-sm bg-amber-50 hover:bg-amber-100 text-amber-700 font-semibold py-1.5 px-3 rounded-xl border border-amber-300 transition-colors">⭐ Đã lưu (<span id="total-bookmarked-count">0</span>)</button>
-                <button onclick="openBlockedModal()" class="text-sm bg-rose-50 hover:bg-rose-100 text-rose-700 font-semibold py-1.5 px-3 rounded-xl border border-rose-300 transition-colors">🚫 Đã chặn (<span id="total-blocked-count">0</span>)</button>
-                
-                <button onclick="openHomeSettings()" class="hb-set text-sm bg-slate-700 hover:bg-slate-800 text-white font-bold py-1.5 px-4 rounded-xl shadow-sm transition-colors">⚙️ Cài Đặt</button>
+            <!-- 2 NÚT DÀN NGANG: ÔN TẬP THEO MÔN HỌC (TRÁI) & ÔN TẬP THEO CHUYÊN ĐỀ (PHẢI) — LUÔN CÙNG 1 HÀNG -->
+            <div class="grid grid-cols-2 gap-2.5 sm:gap-3.5 mb-6">
+                <button id="btn-toggle-monhoc" onclick="toggleMonHocSection()" class="bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 hover:from-blue-700 hover:to-indigo-700 text-white font-extrabold py-3 sm:py-3.5 px-2.5 sm:px-5 rounded-2xl shadow-md transition-all flex items-center justify-center gap-1.5 sm:gap-2.5 text-xs sm:text-base text-center leading-tight whitespace-normal border border-blue-400/30">
+                    <span class="text-base sm:text-xl shrink-0">📚</span>
+                    <span class="min-w-0 break-words">Ôn Tập Theo Môn Học</span>
+                    <span id="monhoc-toggle-icon" class="text-[10px] sm:text-xs bg-white/20 px-1.5 sm:px-2 py-0.5 rounded-full shrink-0">▼</span>
+                </button>
+                <button id="btn-toggle-chuyende" onclick="toggleChuyenDeSection()" class="bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-700 hover:to-purple-700 text-white font-extrabold py-3 sm:py-3.5 px-2.5 sm:px-5 rounded-2xl shadow-md transition-all flex items-center justify-center gap-1.5 sm:gap-2.5 text-xs sm:text-base text-center leading-tight whitespace-normal border border-purple-400/30">
+                    <span class="text-base sm:text-xl shrink-0">🦷</span>
+                    <span class="min-w-0 break-words">Ôn Tập Theo Chuyên Đề</span>
+                    <span id="chuyende-toggle-icon" class="text-[10px] sm:text-xs bg-white/20 px-1.5 sm:px-2 py-0.5 rounded-full shrink-0">▲</span>
+                </button>
             </div>
 
 
@@ -8309,17 +8308,33 @@ function bkDir(subject) {
     if (subject.videoPath) return subject.videoPath.split('/').slice(0, -1).join('/');
     return subject.path || '';
 }
+function bkCoverFallback(img) {
+    const exts = ['jpg', 'jpeg', 'webp', 'PNG', 'JPG', 'JPEG'];
+    const i = parseInt(img.dataset.ci || '0', 10);
+    if (img.dataset.cbase && i < exts.length) {
+        img.dataset.ci = String(i + 1);
+        img.src = img.dataset.cbase + '.' + exts[i];
+        return;
+    }
+    const parent = img.parentElement;
+    img.remove();
+    if (parent && !parent.querySelector('.bk-ph')) {
+        parent.insertAdjacentHTML('afterbegin', '<span class="bk-ph">📕</span>');
+    }
+}
 function bkBuildBookFromFiles(bookTitle, bookFolder, fileNames) {
     const fl = (Array.isArray(fileNames) ? fileNames : []).map(n => String(n).replace(/^.*\//, '')).filter(Boolean);
     const covName = fl.find(n => /^TrangBia\.png$/i.test(n)) || fl.find(n => /^TrangBia\.(jpe?g|webp|gif|bmp|svg)$/i.test(n));
     const chapters = fl.filter(n => /\.pdf$/i.test(n))
         .sort((a, b) => a.localeCompare(b, 'vi', { numeric: true, sensitivity: 'base' }))
         .map(n => ({ title: n.replace(/\.pdf$/i, ''), url: encPath(bookFolder + '/' + n), web: encPath(bookFolder + '/' + n) }));
+    const cbase = encPath(bookFolder + '/TrangBia');
     return {
         title: bookTitle,
         url: bookFolder,
         path: bookFolder,
-        cover: covName ? encPath(bookFolder + '/' + covName) : '',
+        cover: covName ? encPath(bookFolder + '/' + covName) : (cbase + '.png'),
+        coverBase: cbase,
         chapters: chapters
     };
 }
@@ -8497,7 +8512,11 @@ async function bkOpenBook(i) {
         if (bkBook === b) bkRenderShelf();
     }
 }
-function bkShelfBack() { bkBook = null; bkRenderShelf(); } function bkFrameHtml(src, cls) { return '<div class="bk-frame ' + (cls || '') + '">' + (src ? '<img src="' + bkEsc(src) + '" alt="" loading="lazy" onerror="this.remove()">' : '<span class="bk-ph">📕</span>') + '<span class="bk-spine"></span></div>'; } function bkShelfHtml(W, H) { var PL = 20, GAP = 20, ASP = 1.414, n = bkBooks.length, Wi = Math.max(200, (W || 0) - 32), Hi = Math.max(200, (H || 0) - 32), bh = 0, rows = 1, r, per = 1; for (r = 1; r <= Math.max(1, n); r++) { var hh = Math.min((Hi - r * (PL + GAP) + GAP) / r, Wi * ASP); var pr = Math.max(1, Math.floor(Wi / (hh / ASP + GAP))); if (pr * r >= n) { bh = hh; rows = r; break; } } if (!bh || bh < 120) bh = 120; var bw = Math.floor(bh / ASP); bh = bw * ASP; per = Math.max(1, Math.floor(Wi / (bw + GAP))); rows = Math.max(1, Math.ceil(n / per)); var h = '<div class="bk-spacer"></div>'; for (var rr = 0; rr < rows; rr++) { var cells = ''; for (var i = rr * per; i < Math.min(n, (rr + 1) * per); i++) { var b = bkBooks[i]; cells += '<div class="bk-cell" data-bi="' + i + '" style="width:' + bw + 'px;flex:0 0 ' + bw + 'px;margin-right:' + GAP + 'px;padding:0"><button type="button" class="bk-book" style="width:' + bw + 'px;max-width:none" onclick="bkOpenBook(' + i + ')" aria-label="' + bkEsc(b.title) + '">' + bkFrameHtml(b.cover, '') + '</button></div>'; } h += '<div class="bk-row"><div class="bk-books" style="height:' + bh + 'px">' + cells + '</div><div class="bk-plank"></div></div>'; } return '<div class="bk-shelf">' + h + '</div>'; }
+function bkShelfBack() { bkBook = null; bkRenderShelf(); }
+function bkFrameHtml(src, cls) {
+    const base = src ? String(src).replace(/\.(png|jpe?g|webp|gif|bmp|svg)$/i, '') : '';
+    return '<div class="bk-frame ' + (cls || '') + '">' + (src ? '<img src="' + bkEsc(src) + '" data-cbase="' + bkEsc(base) + '" data-ci="0" alt="" loading="lazy" onerror="bkCoverFallback(this)">' : '<span class="bk-ph">📕</span>') + '<span class="bk-spine"></span></div>';
+} function bkShelfHtml(W, H) { var PL = 20, GAP = 20, ASP = 1.414, n = bkBooks.length, Wi = Math.max(200, (W || 0) - 32), Hi = Math.max(200, (H || 0) - 32), bh = 0, rows = 1, r, per = 1; for (r = 1; r <= Math.max(1, n); r++) { var hh = Math.min((Hi - r * (PL + GAP) + GAP) / r, Wi * ASP); var pr = Math.max(1, Math.floor(Wi / (hh / ASP + GAP))); if (pr * r >= n) { bh = hh; rows = r; break; } } if (!bh || bh < 120) bh = 120; var bw = Math.floor(bh / ASP); bh = bw * ASP; per = Math.max(1, Math.floor(Wi / (bw + GAP))); rows = Math.max(1, Math.ceil(n / per)); var h = '<div class="bk-spacer"></div>'; for (var rr = 0; rr < rows; rr++) { var cells = ''; for (var i = rr * per; i < Math.min(n, (rr + 1) * per); i++) { var b = bkBooks[i]; cells += '<div class="bk-cell" data-bi="' + i + '" style="width:' + bw + 'px;flex:0 0 ' + bw + 'px;margin-right:' + GAP + 'px;padding:0"><button type="button" class="bk-book" style="width:' + bw + 'px;max-width:none" onclick="bkOpenBook(' + i + ')" aria-label="' + bkEsc(b.title) + '">' + bkFrameHtml(b.cover, '') + '</button></div>'; } h += '<div class="bk-row"><div class="bk-books" style="height:' + bh + 'px">' + cells + '</div><div class="bk-plank"></div></div>'; } return '<div class="bk-shelf">' + h + '</div>'; }
 function bkCloseShelf() { document.getElementById('bookshelf-modal').classList.add('hidden'); }
 /* ----- PDF.js: tải khi cần ----- */
 function bkPdfLib() {
@@ -14390,30 +14409,47 @@ async function bkAnalyzeCurrentPageImage() {
     aiSend(img);
 }
 
-function aiEnsureQuickTts() {   // các nút nhanh ở boxchat reader: Phân tích ảnh, Giải thích, Tìm hiểu sâu, Học có hướng dẫn, Đọc to
+function aiEnsureQuickTts() {   // Thứ tự nút nhanh ở boxchat reader từ trái qua: Chú thích, Phân tích ảnh màn hình, Tìm hiểu sâu, Trắc nghiệm, Tự học có hướng dẫn; nút Đọc to luôn canh lề phải
         const box = document.getElementById('ai-quickrow') || document.getElementById('ai-quick'); if (!box) return;
         const isBook = !!(aiState.mode === 'book' && bkCur);
+        let eb = document.getElementById('bk-exp-quick');
+        if (!eb) { eb = document.createElement('button'); eb.id = 'bk-exp-quick'; eb.type = 'button'; eb.className = 'shrink-0 whitespace-nowrap text-xs font-bold border rounded-full px-3 py-1.5 bg-rose-50 text-rose-700 border-rose-200 shadow-sm active:scale-95'; eb.onclick = bkExplainQuick; }
+        eb.textContent = '🎯 Chú thích'; eb.title = 'Chú thích và giải thích dễ hiểu đoạn vừa dịch';
+        eb.classList.toggle('hidden', !isBook);
+
         let ib = document.getElementById('bk-img-quick');
         if (!ib) {
             ib = document.createElement('button'); ib.id = 'bk-img-quick'; ib.type = 'button';
             ib.className = 'shrink-0 whitespace-nowrap text-xs font-bold border rounded-full px-3 py-1.5 bg-amber-50 text-amber-700 border-amber-300 shadow-sm active:scale-95';
-            ib.textContent = '🖼️ Phân tích ảnh đang hiện';
-            ib.title = 'Gửi trang sách đang hiện trên màn hình cho AI đọc và phân tích hình ảnh, sơ đồ, bảng biểu';
             ib.onclick = bkAnalyzeCurrentPageImage;
         }
+        ib.textContent = '🖼️ Phân tích ảnh màn hình';
+        ib.title = 'Gửi trang sách đang hiện trên màn hình cho AI đọc và phân tích hình ảnh, sơ đồ, bảng biểu';
         ib.classList.toggle('hidden', !isBook);
-        let eb = document.getElementById('bk-exp-quick');
-        if (!eb) { eb = document.createElement('button'); eb.id = 'bk-exp-quick'; eb.type = 'button'; eb.className = 'shrink-0 whitespace-nowrap text-xs font-bold border rounded-full px-3 py-1.5 bg-rose-50 text-rose-700 border-rose-200 shadow-sm active:scale-95'; eb.textContent = '🎯 Giải thích'; eb.title = 'Giải thích dễ hiểu đoạn vừa dịch'; eb.onclick = bkExplainQuick; }
-        eb.classList.toggle('hidden', !isBook);
+
         let db = document.getElementById('bk-deep-quick');
         if (!db) { db = document.createElement('button'); db.id = 'bk-deep-quick'; db.type = 'button'; db.className = 'shrink-0 whitespace-nowrap text-xs font-bold border rounded-full px-3 py-1.5 bg-sky-50 text-sky-700 border-sky-200 shadow-sm active:scale-95'; db.textContent = '🔬 Tìm hiểu sâu'; db.title = 'Tìm hiểu sâu (Deep Research Mini) về đoạn vừa dịch'; db.onclick = bkDeepQuick; }
         db.classList.toggle('hidden', !isBook);
+
+        bkQzEnsureBtn();
+        let qb = document.getElementById('bk-quiz-quick');
+
         let lb = document.getElementById('bk-lect-quick');
-        if (!lb) { lb = document.createElement('button'); lb.id = 'bk-lect-quick'; lb.type = 'button'; lb.className = 'shrink-0 whitespace-nowrap text-xs font-bold border rounded-full px-3 py-1.5 bg-violet-50 text-violet-700 border-violet-200 shadow-sm active:scale-95'; lb.textContent = '🎓 Học có hướng dẫn'; lb.title = 'Học tập có hướng dẫn từ đoạn vừa dịch'; lb.onclick = () => bkGuidedQuick(); }
+        if (!lb) { lb = document.createElement('button'); lb.id = 'bk-lect-quick'; lb.type = 'button'; lb.className = 'shrink-0 whitespace-nowrap text-xs font-bold border rounded-full px-3 py-1.5 bg-violet-50 text-violet-700 border-violet-200 shadow-sm active:scale-95'; lb.onclick = () => bkGuidedQuick(); }
+        lb.textContent = '🎓 Tự học có hướng dẫn'; lb.title = 'Tự học có hướng dẫn từ đoạn vừa dịch';
         lb.classList.toggle('hidden', !isBook);
+
         let b = document.getElementById('ai-tts-quick');
-        if (!b) { b = document.createElement('button'); b.id = 'ai-tts-quick'; b.type = 'button'; b.className = 'shrink-0 whitespace-nowrap text-xs font-bold border rounded-full px-3 py-1.5 bg-violet-50 text-violet-700 border-violet-200 shadow-sm active:scale-95'; b.onclick = aiTtsQuick; }
-        box.appendChild(ib); box.appendChild(eb); box.appendChild(db); box.appendChild(lb); box.appendChild(b); aiTtsSync(); bkQzEnsureBtn();
+        if (!b) { b = document.createElement('button'); b.id = 'ai-tts-quick'; b.type = 'button'; b.className = 'shrink-0 whitespace-nowrap text-xs font-bold border rounded-full px-3 py-1.5 bg-violet-50 text-violet-700 border-violet-200 shadow-sm active:scale-95 ml-auto'; b.onclick = aiTtsQuick; }
+
+        // Sắp xếp đúng thứ tự từ trái qua: Chú thích -> Phân tích ảnh màn hình -> Tìm hiểu sâu -> Trắc nghiệm -> Tự học có hướng dẫn | Đọc to (bên phải)
+        box.appendChild(eb);
+        box.appendChild(ib);
+        box.appendChild(db);
+        if (qb) box.appendChild(qb);
+        box.appendChild(lb);
+        box.appendChild(b);
+        aiTtsSync();
     }
     function aiEnsureTtsBars() {
         const box = document.getElementById('ai-messages'); if (!box) return;
@@ -16888,6 +16924,7 @@ window.isIOSDevice = function () {
         rd.sel = t; row.classList.add('sel');
         if (t.n) { t.n = 0; save(); row.classList.remove('isnew'); const nb = row.querySelector('.rd-nw'); if (nb) nb.remove(); refreshChip(); }
         row.insertAdjacentHTML('beforeend', '<div class="rd-act"><button type="button" class="rd-ab" data-act="r-info" title="Thông tin">' + IC.info + '</button><button type="button" class="rd-ab sv' + (t.s ? ' on' : '') + '" data-act="r-star" title="' + (t.s ? 'Bỏ lưu' : 'Lưu từ') + '">' + IC.star + '</button><button type="button" class="rd-ab" data-act="r-more" title="Thêm từ liên quan (cùng bộ, từ loại)">' + IC.plus + '</button><button type="button" class="rd-ab" data-act="r-edit" title="Sửa">' + IC.edit + '</button><button type="button" class="rd-ab dan" data-act="r-del" title="Xóa">' + IC.del + '</button></div>');
+        try { speakEn(t); } catch (e) {}
     }
 
     /* ---------- ruy-băng + hộp nhỏ (thêm, sửa, thông tin, tìm, đến trang) ---------- */
@@ -17319,7 +17356,30 @@ function openPop(mode, t) {
         return '<div class="rv-h"><span class="rv-t">' + title + '</span><span class="rv-pg">' + Math.min(r.i + 1, n) + '/' + n + (r.mode === 'quiz' ? ' · ✅ ' + r.ok + ' · +' + r.pts + 'đ' : '') + '</span><button type="button" class="rv-x" data-act="rv-back" title="Thoát về cài đặt">✕</button></div><div class="rv-bar"><i style="width:' + Math.round(r.i / n * 100) + '%"></i></div>';
     }
     /* --- flashcard --- */
-    function fcShow() { const r = rv.run; if (!r) return; if (r.i >= r.items.length) { rvEnd(); return; } r.flip = false; r.showInfo = false; r.infoLoading = false; fcPaint(); }
+    function speakVi(t) {
+        if (!t || !('speechSynthesis' in window)) return;
+        const txt = String(t.vi || '').split('\n').map(x => x.trim()).filter(Boolean).join(', ');
+        if (!txt) return;
+        const go = () => {
+            try { speechSynthesis.cancel(); } catch (e) {}
+            const ut = new SpeechSynthesisUtterance(txt);
+            let vv = null;
+            try { if (typeof aiVoicePick === 'function') vv = aiVoicePick(); } catch (e) {}
+            ut.lang = (vv && vv.lang) || 'vi-VN';
+            if (vv) ut.voice = vv;
+            if (typeof aiRateGet === 'function') ut.rate = aiRateGet();
+            if (typeof aiVoicePitch === 'function') ut.pitch = aiVoicePitch();
+            setTimeout(() => { try { speechSynthesis.speak(ut); } catch (e) {} }, 60);
+        };
+        let n = 0; const wait = () => { let l = []; try { l = speechSynthesis.getVoices() || []; } catch (e) {} if (l.length || n++ >= 10) go(); else setTimeout(wait, 100); }; wait();
+    }
+    function fcShow() {
+        const r = rv.run; if (!r) return;
+        if (r.i >= r.items.length) { rvEnd(); return; }
+        r.flip = false; r.showInfo = false; r.infoLoading = false;
+        fcPaint();
+        if (r.items[r.i]) { try { speakEn(r.items[r.i]); } catch (e) {} }
+    }
     function fcBindSwipe() {
         const box = $('rd-rv'); if (!box || box._fcSwipe) return;
         box._fcSwipe = 1;
@@ -17359,6 +17419,7 @@ function openPop(mode, t) {
                 r.i--;
                 r.flip = false; r.showInfo = false; r.infoLoading = false;
                 fcPaint();
+                if (r.items[r.i]) { try { speakEn(r.items[r.i]); } catch (e) {} }
             });
         } else {
             fcAnimateChange(1, () => {
@@ -17423,6 +17484,8 @@ function openPop(mode, t) {
             r.flip = !r.flip;
             r.flipAnim = true;
             fcPaint();
+            const curT = r.items[r.i];
+            if (curT) { try { if (r.flip) speakVi(curT); else speakEn(curT); } catch (e) {} }
         }, 150);
     }
     function fcMark(ok) {
@@ -21676,8 +21739,7 @@ textarea {
     'label.hs-b',
     'label.rhm-bg',
     '#topic-quiz-list > div',
-    '#exam-list > div',
-    '#lessons-list > div'
+    '#exam-list > div'
   ].join(',');
 
   var curExtra = null;
@@ -21746,4 +21808,72 @@ textarea {
   else observeChatBubbles();
 })();
 </script>
+<style id="rhm-patch-v6-styles">
+/* 1. Tắt hoàn toàn animation khi click vào Ảnh bìa, Ô video và giữ nguyên nền ứng dụng đứng im */
+#app-cover-img,
+#app-cover-img:active,
+#app-cover-container,
+#app-cover-container:active,
+#lessons-list > div,
+#lessons-list > div:active,
+#home-screen,
+#home-screen.ios-screen-in,
+body {
+  animation: none !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* 2. Dàn 6 nút tiện ích (.home-bar): trên PC / màn ngang tự giãn to vừa khít chiều ngang màn hình; trên mobile dọc giữ 2x3 */
+@media (min-width: 641px) {
+  .home-bar {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    width: 100% !important;
+    gap: 10px !important;
+    justify-content: space-between !important;
+  }
+  .home-bar > button {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    min-height: 46px !important;
+    padding: 10px 12px !important;
+    font-size: 14.5px !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+}
+@media (max-width: 640px) {
+  .home-bar {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+}
+
+/* 3. Canh lề trái cho dàn nút nhanh (#ai-quickrow) và luôn đẩy nút Đọc to (#ai-tts-quick) về sát lề phải ở MỌI chế độ boxchat (Sách, Video, Câu hỏi) */
+#ai-tutor-modal #ai-quickrow {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  gap: 6px !important;
+  text-align: left !important;
+}
+#ai-tutor-modal #ai-quickrow > #ai-quick {
+  display: contents !important;
+}
+#ai-tutor-modal #ai-quickrow > #ai-quick:empty {
+  display: none !important;
+}
+#ai-tutor-modal #ai-quickrow > button,
+#ai-tutor-modal #ai-quickrow #ai-quick > button {
+  flex: 0 0 auto !important;
+  width: auto !important;
+}
+#ai-tutor-modal #ai-quickrow > #ai-tts-quick {
+  margin-left: auto !important;
+}
+</style>
 </html>
