@@ -8609,7 +8609,7 @@ function bkShelfHtml(W, H) {
         }
         h += '<div class="bk-row"><div class="bk-books" style="height:' + bh + 'px;justify-content:space-evenly">' + cells + '</div><div class="bk-plank"></div></div>';
     }
-    setTimeout(function () { bkUpdateShelfMoreHint(document.getElementById('bookshelf-list')); }, 60);
+    var ind = document.getElementById('bk-shelf-more-ind'); if (ind) ind.remove();
     return '<div class="bk-shelf" style="justify-content:flex-start">' + h + '</div>';
 }
 function bkCloseShelf() { document.getElementById('bookshelf-modal').classList.add('hidden'); }
@@ -9644,18 +9644,16 @@ function bkEnsureSecGrip() {
     };
     g.addEventListener('pointerup', end); g.addEventListener('pointercancel', end);
 }
-/* Số thứ tự: đánh số phân cấp chuẩn (1., 1.1, 1.2, 1.2.1…). Mục mở đầu đánh số 0 */
+/* Số thứ tự hỗ trợ sâu đến 10 cấp (1. -> 1.1 -> 1.1.1 -> 1.1.1.1...) */
 function bkNumbers() {
-    const c = [0, 0, 0, 0, 0]; const out = [];
+    const c = new Array(12).fill(0); const out = [];
     bkSecs.forEach(s => {
         if (s.intro) { out.push('0.'); return; }
         if (s.manual && s.num) { out.push(s.num); return; }
-        let L = Math.max(1, Math.min(4, s.lvl || 1));
-        if (L > 1 && c[1] === 0) c[1] = 1;
-        if (L > 2 && c[2] === 0) c[2] = 1;
-        if (L > 3 && c[3] === 0) c[3] = 1;
+        let L = Math.max(1, Math.min(10, s.lvl || 1));
+        for (let k = 1; k < L; k++) { if (c[k] === 0) c[k] = 1; }
         c[L]++;
-        for (let k = L + 1; k < 5; k++) c[k] = 0;
+        for (let k = L + 1; k < c.length; k++) c[k] = 0;
         const numStr = c.slice(1, L + 1).join('.');
         out.push(L === 1 ? (numStr + '.') : numStr);
     });
@@ -9679,13 +9677,12 @@ function bkRenderSecList() {
     const nums = bkNumbers();
     list.innerHTML = bkSecs.map((s, i) => {
         const rawLabel = bkSecLang === 'en' ? (s.en || s.title) : s.title;
-        // Bỏ số La Mã hoặc số thứ tự trùng ở đầu nhãn khi đã có số phân cấp tự động 1., 1.1, 1.1.1
-        const cleanLabel = String(rawLabel || '').replace(/^(?:\d+(?:\.\d+)*[.)]?|[IVXLCDM]{1,5}\.)\s+/, '');
+        const cleanLabel = String(rawLabel || '').replace(/^(?:\d+(?:\.\d+)*[.)]?|[IVXLCDM]{1,5}\.?)\s+/, '');
         const num = nums[i] ? nums[i] + ' ' : '';
-        const lv = Math.max(1, Math.min(4, s.lvl || 1));
-        const ind = (lv - 1) * 0.75;
-        const clsLv = lv === 1 ? ' font-extrabold text-gray-900' : (lv === 2 ? ' font-semibold text-gray-800' : ' font-normal text-gray-600 text-xs');
-        return '<button type="button" onclick="bkSelSec(' + i + ')" style="margin-left:' + ind + 'rem;width:calc(100% - ' + ind + 'rem)" class="bk-sec-item text-left text-sm rounded-lg px-2.5 py-1.5 bg-white border border-gray-200 hover:bg-amber-50 break-words' + clsLv + (i === bkSecSel ? ' bk-sec-on' : '') + '">' + (s.manual ? '🔖 ' : '') + '<span class="text-indigo-700 font-bold">' + bkEsc(num) + '</span>' + bkEsc(cleanLabel) + '</button>';
+        const lv = Math.max(1, Math.min(10, s.lvl || 1));
+        const ind = (lv - 1) * 0.6;
+        const clsLv = lv === 1 ? ' font-extrabold text-gray-900 text-sm' : (lv === 2 ? ' font-semibold text-gray-800 text-sm' : (lv === 3 ? ' font-medium text-gray-700 text-xs' : ' font-normal text-gray-600 text-xs'));
+        return '<button type="button" onclick="bkSelSec(' + i + ')" style="margin-left:' + ind + 'rem;width:calc(100% - ' + ind + 'rem)" class="bk-sec-item text-left rounded-lg px-2 py-1 bg-white border border-gray-200 hover:bg-amber-50 break-words' + clsLv + (i === bkSecSel ? ' bk-sec-on' : '') + '">' + (s.manual ? '🔖 ' : '') + '<span class="text-indigo-700 font-bold">' + bkEsc(num) + '</span>' + bkEsc(cleanLabel) + '</button>';
     }).join('');
 }
 function bkSetSecLang(l) { bkSecLang = l; bkRenderSecList(); }
