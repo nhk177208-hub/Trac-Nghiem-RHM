@@ -1,42 +1,41 @@
 {
   "_AI_GUIDE_HUONG_DAN_CHO_AI_KHAC": {
-    "muc_dich": "File MucLuc.json này điều khiển toàn bộ cơ chế nhận diện và hiển thị Mục lục chương sách PDF (cả Offline lẫn AI Online) của ứng dụng Trắc Nghiệm RHM theo hệ thống đánh số phân cấp 1. -> 1.1 -> 1.1.1 -> 1.1.1.1.",
+    "muc_dich": "File MucLuc.json này điều khiển cơ chế nhận diện Mục lục chương sách PDF đa cấp (hỗ trợ sâu đến 9-10 cấp: 1. -> 1.1 -> 1.1.1 -> 1.1.1.1...) cho ứng dụng Trắc Nghiệm RHM.",
     "co_che_hoat_dong_cua_app": [
-      "1. TRÍCH XUẤT CHỮ TỪ PDF (bkExtract): Khi người dùng mở một file PDF chương sách (nằm trong MonHoc/<Tên môn>/Books/<Tên sách>/<Tên chương>.pdf), ứng dụng đọc từng trang theo thứ tự: Cột trái (từ trên xuống dưới) -> Cột phải (từ trên xuống dưới) -> Sang trang kế tiếp. Toàn bộ chữ của chương được nối thành chuỗi `bkText`.",
-      "2. ĐỊNH VỊ MỤC LỤC TRONG CHƯƠNG (bkLocateIn) & ĐÁNH SỐ TỰ ĐỘNG (bkNumbers): Mỗi mục gồm 3 trường: `src` (tiêu đề gốc bằng tiếng Anh chép NGUYÊN VĂN như in trong PDF), `vi` (tên mục dịch sang tiếng Việt chuẩn thuật ngữ RHM miền Nam), và `lvl` (cấp độ mục: 1 = đại mục lớn đánh số 1., 2., 3.; 2 = mục con đánh số 1.1, 1.2; 3 = tiểu mục đánh số 1.1.1, 1.1.2; 4 = mục chi tiết đánh số 1.1.1.1). Nếu trong `src` hoặc `vi` có sẵn số La Mã (I., II., III.), ứng dụng sẽ dùng `src` có số La Mã để định vị chính xác trong PDF nhưng khi hiển thị sẽ tự động thay bằng số phân cấp 1.1, 1.2 gọn đẹp.",
-      "3. QUY TẮC BẮT BUỘC ĐỐI VỚI TRƯỜNG `src`: Chuỗi `src` PHẢI xuất hiện nguyên văn ở đầu dòng trong thân bài của chương PDF, bắt đầu bằng chữ cái in hoa hoặc chữ số, và liệt kê theo đúng thứ tự xuất hiện từ đầu đến cuối chương."
+      "1. QUÉT MỤC LỤC ĐA CẤP (bkExtract & bkAiOutline): Ứng dụng trích xuất toàn bộ chữ từ PDF theo thứ tự cột, loại bỏ hoàn toàn các đoạn văn bản dài, chú thích hình ảnh (Fig., Figure, Table, Box, Flowchart, Clinical Notes).",
+      "2. PHÂN CẤP ĐẾN 9-10 CẤP (`lvl` từ 1 đến 10): `lvl: 1` là đại mục lớn của chương; `lvl: 2` là mục chính; `lvl: 3` là tiểu mục; `lvl: 4` đến `lvl: 10` là các mục chi tiết bên trong.",
+      "3. QUY TẮC `src`: Chứa tiêu đề chuẩn xác bằng tiếng Anh, không kèm số trang."
     ],
-    "quy_tac_thuat_ngu_tieng_viet_mien_nam": "Khi dịch trường `vi`, bắt buộc dùng thuật ngữ RHM miền Nam (ĐH Y Dược TP.HCM): nội nha (không dùng nội tủy), trám răng / miếng trám / xoang trám (không dùng hàn răng / lỗ hàn), trám bít ống tủy (không dùng hàn bít), nướu / viêm nướu (không dùng lợi), vôi răng / lấy vôi và xử lý mặt chân răng (không dùng cao răng / xử lý mặt gốc răng), răng cối nhỏ / răng cối lớn (không dùng răng hàm), chóp răng / vùng quanh chóp (không dùng cuống răng), mão răng (không dùng chụp răng), thắng môi/lưỡi (không dùng phanh môi/lưỡi)."
+    "quy_tac_thuat_ngu_tieng_viet_mien_nam": "Khi dịch trường `vi`, bắt buộc dùng chuẩn RHM miền Nam (ĐH Y Dược TP.HCM): nội nha (không nội tủy), trám răng / xoang trám (không hàn răng), trám bít ống tủy (không hàn bít), nướu (không lợi), vôi răng / lấy vôi răng (không cao răng), răng cối nhỏ / lớn (không răng hàm), chóp răng / quanh chóp (không cuống răng), mão răng (không chụp răng)."
   },
-  "version": 2,
+  "version": 3,
   "offline_rules": {
     "min_length": 3,
     "max_length": 110,
-    "heading_font_ratio": 1.08,
+    "heading_font_ratio": 1.06,
     "gap_up_ratio": 1.45,
     "flush_left_tolerance": 0.5,
-    "allow_run_in": true,
+    "allow_run_in": false,
     "run_in_max_length": 60,
     "merge_offline_candidates": true,
-    "exclude_regex": "%|\\d{3,}|\\(\\d|et al|^combined$|^table\\b|^fig\\.|^figure\\b|^box\\b|^flowchart\\b|^clinical notes\\b|^step\\s+\\d|^references\\b|^summary\\b",
-    "include_regex": "^(?:[IVXLCDM]{1,4}\\.\\s+[A-Z]|Zone\\s+\\d+\\s*:)"
+    "exclude_regex": "%|\\d{3,}|\\(\\d|et al|^combined$|^table\\b|^fig\\.|^figure\\b|^box\\b|^flowchart\\b|^clinical notes\\b|^step\\s+\\d|^references\\b|^summary\\b|^page\\b",
+    "include_regex": "^(?:[IVXLCDM]{1,4}\\.\\s+[A-Z]|Zone\\s+\\d+\\s*:|[A-Z][A-Za-z0-9\\s,–—-]+$)"
   },
   "ai_prompts": {
     "chunk_size": 40000,
     "chunk_overlap": 1500,
-    "outline_system_prompt": "Bạn là giáo sư đầu ngành Răng Hàm Mặt. Quét TOÀN BỘ đoạn văn bản chương sách được gửi và lập MỤC LỤC CHI TIẾT ĐA CẤP (để hệ thống đánh số 1. -> 1.1 -> 1.1.1 -> 1.1.1.1), theo đúng thứ tự xuất hiện từ đầu đến cuối đoạn. Phân cấp chính xác: lvl = 1 cho các đại mục lớn của chương; lvl = 2 cho các mục chính bên trong đại mục (bao gồm cả các mục đánh số La Mã như 'I. Biofilm', 'II. Smooth Surface Caries'); lvl = 3 cho các tiểu mục chuyên môn cụ thể (như 'Chemical composition', 'Structure of enamel', 'Zone 1: Surface zone', 'Incisors', 'Canines'); lvl = 4 cho các mục nhỏ bên trong tiểu mục (như từng loại vật liệu/thuốc cụ thể). Với mỗi mục trả về: \"src\" = tiêu đề GIỮ NGUYÊN NGUYÊN VĂN như in trong sách (kể cả số La Mã I., II. hoặc Zone 1: nếu có); \"vi\" = tên tiếng Việt ngắn gọn đúng thuật ngữ RHM miền Nam (không cần lặp lại số La Mã ở đầu \"vi\"); \"lvl\" = 1, 2, 3 hoặc 4. TUYỆT ĐỐI KHÔNG lập mục từ: Clinical Notes, Box, Table, Figure, Flowchart, Step 1/2/3, References, Summary, tên chương, tên tác giả, câu văn thường hoặc các dòng liệt kê ngắn trong đoạn. Trả về MỘT đối tượng JSON: {\"sections\":[{\"src\":\"...\",\"vi\":\"...\",\"lvl\":1}]}. Không thêm chữ nào ngoài JSON.",
-    "sub_pass1_prompt": "Bạn là giáo sư đầu ngành Răng Hàm Mặt. Đoạn văn dưới đây thuộc mục \"{{TITLE}}\". Liệt kê đầy đủ các TIÊU ĐỀ MỤC CON (lvl = 2, 3, 4) nằm bên trong đoạn (KHÔNG liệt kê chính tiêu đề \"{{TITLE}}\", KHÔNG liệt kê Clinical Notes, Box, Table, Figure, Flowchart hay câu văn thường). Với mỗi mục trả về \"src\" = tiêu đề GIỮ NGUYÊN NGUYÊN VĂN như in, \"vi\" = tên tiếng Việt ngắn gọn đúng thuật ngữ RHM miền Nam, \"lvl\" = 2, 3 hoặc 4. Trả về MỘT đối tượng JSON: {\"sections\":[{\"src\":\"...\",\"vi\":\"...\",\"lvl\":2}]}. Không thêm chữ nào ngoài JSON.",
-    "sub_pass2_prompt": "Bạn là giáo sư đầu ngành Răng Hàm Mặt, đang KIỂM TRA ĐỐI CHIẾU. Đối chiếu danh sách mục con dưới đây với đoạn văn của mục \"{{TITLE}}\". Mỗi mục phải là tiêu đề có thật, xuất hiện nguyên văn trong đoạn; xóa các mục là Clinical Notes, Box, Table, Figure, Flowchart hoặc câu văn thường; bổ sung tiêu đề con còn thiếu; \"lvl\" = 2, 3 hoặc 4. Trả về MỘT đối tượng JSON cùng định dạng: {\"sections\":[{\"src\":\"...\",\"vi\":\"...\",\"lvl\":2}]}. Không thêm chữ nào ngoài JSON."
+    "outline_system_prompt": "Bạn là giáo sư đầu ngành Răng Hàm Mặt. Quét TOÀN BỘ đoạn văn bản chương sách được gửi và lập MỤC LỤC CHI TIẾT ĐA CẤP (hỗ trợ sâu từ 1 đến 10 cấp), theo đúng thứ tự xuất hiện từ đầu đến cuối đoạn. Phân cấp chính xác theo tư duy chuyên môn: lvl = 1 cho đại mục lớn; lvl = 2 cho mục chính (bao gồm các mục đánh số La Mã như 'I. Biofilm'); lvl = 3 cho tiểu mục; lvl = 4 đến 10 cho các mục chi tiết bên trong. Với mỗi mục trả về: \"src\" = tiêu đề GIỮ NGUYÊN NGUYÊN VĂN như in trong sách; \"vi\" = tên tiếng Việt ngắn gọn đúng thuật ngữ RHM miền Nam; \"lvl\" = số nguyên từ 1 đến 10. TUYỆT ĐỐI KHÔNG lập mục từ: Clinical Notes, Box, Table, Figure, Flowchart, Step 1/2/3, References, Summary, tên chương, tên tác giả, câu văn thường, hoặc các đoạn văn giải thích dài. Trả về MỘT đối tượng JSON: {\"sections\":[{\"src\":\"...\",\"vi\":\"...\",\"lvl\":1}]}; nếu không có tiêu đề nào, {\"sections\":[]}. Không thêm chữ nào ngoài JSON.",
+    "sub_pass1_prompt": "Bạn là giáo sư đầu ngành Răng Hàm Mặt. Đoạn văn dưới đây thuộc mục \"{{TITLE}}\". Liệt kê đầy đủ các TIÊU ĐỀ MỤC CON đa cấp (lvl = 2 đến 10) nằm bên trong đoạn (KHÔNG liệt kê chính tiêu đề \"{{TITLE}}\", KHÔNG liệt kê Clinical Notes, Box, Table, Figure, Flowchart hay câu văn thường). Với mỗi mục trả về \"src\" = tiêu đề GIỮ NGUYÊN NGUYÊN VĂN như in, \"vi\" = tên tiếng Việt ngắn gọn đúng thuật ngữ RHM miền Nam, \"lvl\" = số nguyên từ 2 đến 10. Trả về MỘT đối tượng JSON: {\"sections\":[{\"src\":\"...\",\"vi\":\"...\",\"lvl\":2}]}. Không thêm chữ nào ngoài JSON.",
+    "sub_pass2_prompt": "Bạn là giáo sư đầu ngành Răng Hàm Mặt, đang KIỂM TRA ĐỐI CHIẾU. Đối chiếu danh sách mục con dưới đây với đoạn văn của mục \"{{TITLE}}\". Mỗi mục phải là tiêu đề có thật, xuất hiện nguyên văn trong đoạn; xóa các mục là Clinical Notes, Box, Table, Figure, Flowchart hoặc câu văn thường; bổ sung tiêu đề con còn thiếu; \"lvl\" = số nguyên từ 2 đến 10. Trả về MỘT đối tượng JSON cùng định dạng: {\"sections\":[{\"src\":\"...\",\"vi\":\"...\",\"lvl\":2}]}. Không thêm chữ nào ngoài JSON."
   },
   "presets": {
     "Sturdevant": {
       "skip_ai_when_preset_exists": true,
-      "custom_ai_hint": "Sách Sturdevant's Art and Science of Operative Dentistry chia 4 cấp tiêu đề rất rõ: Cấp 1 (lvl=1) là đại mục chữ lớn in đậm (VD: Teeth and Supporting Tissues, Structures of Teeth, Etiology of Dental Caries); Cấp 2 (lvl=2) là mục chính thuộc Cấp 1, thường in đậm cỡ vừa hoặc bắt đầu bằng số La Mã I., II., III. (VD: Enamel, Pulp-Dentin Complex, I. Biofilm, II. Smooth Surface Caries); Cấp 3 (lvl=3) là tiểu mục in đậm cỡ nhỏ hơn (VD: Chemical composition, Structure of enamel, Gnarled enamel, Zone 1: Surface zone); Cấp 4 (lvl=4) là mục chi tiết bên dưới Cấp 3 (VD: Sodium fluoride varnish (5%), Silver diamine fluoride (SDF 38%)). Tuyệt đối bỏ qua các hộp 'Clinical Notes', 'Box', 'Table', 'Figure', 'Flowchart', 'Step 1..6', 'Summary', 'References'.",
+      "custom_ai_hint": "Sách Sturdevant's Art and Science of Operative Dentistry có hệ thống tiêu đề đa cấp rất chi tiết đến 9-10 cấp. Tuyệt đối bỏ qua các hộp 'Clinical Notes', 'Box', 'Table', 'Figure', 'Flowchart', 'Step', 'Summary', 'References'.",
       "offline_rules": {
-        "heading_font_ratio": 1.06,
+        "heading_font_ratio": 1.05,
         "allow_run_in": false,
-        "exclude_regex": "%|\\d{3,}|\\(\\d|et al|^combined$|^table\\b|^fig\\.|^figure\\b|^box\\b|^flowchart\\b|^clinical notes\\b|^step\\s+\\d|^references\\b|^summary\\b",
-        "include_regex": "^(?:[IVXLCDM]{1,4}\\.\\s+[A-Z]|Zone\\s+\\d+\\s*:)"
+        "exclude_regex": "%|\\d{3,}|\\(\\d|et al|^combined$|^table\\b|^fig\\.|^figure\\b|^box\\b|^flowchart\\b|^clinical notes\\b|^step\\s+\\d|^references\\b|^summary\\b|^page\\b"
       },
       "chapters": {
         "Chapter 1": [
@@ -51,7 +50,7 @@
           { "src": "Enamel", "vi": "Men răng", "lvl": 2 },
           { "src": "Chemical composition", "vi": "Thành phần hóa học của men răng", "lvl": 3 },
           { "src": "Structure of enamel", "vi": "Cấu trúc men răng", "lvl": 3 },
-          { "src": "Apatite crystallites", "vi": "Tinh thể apatit", "lvl": 3 },
+          { "src": "Apatite crystallites", "vi": "Tinh thể apatit", "lvl": 4 },
           { "src": "Gnarled enamel", "vi": "Men răng xoắn", "lvl": 3 },
           { "src": "Hunter-Schreger bands", "vi": "Dải Hunter-Schreger", "lvl": 3 },
           { "src": "Enamel tufts", "vi": "Búi men", "lvl": 3 },
@@ -65,10 +64,10 @@
           { "src": "Translucency of enamel", "vi": "Độ trong mờ của men răng", "lvl": 3 },
           { "src": "Pulp-Dentin Complex", "vi": "Phức hợp tủy – ngà", "lvl": 2 },
           { "src": "Pulp", "vi": "Tủy răng", "lvl": 3 },
-          { "src": "Functions of pulp", "vi": "Chức năng của tủy răng", "lvl": 3 },
+          { "src": "Functions of pulp", "vi": "Chức năng của tủy răng", "lvl": 4 },
           { "src": "Dentin", "vi": "Ngà răng", "lvl": 3 },
-          { "src": "Dentinogenesis", "vi": "Sự tạo ngà (Dentinogenesis)", "lvl": 3 },
-          { "src": "Predentin", "vi": "Tiền ngà", "lvl": 3 },
+          { "src": "Dentinogenesis", "vi": "Sự tạo ngà (Dentinogenesis)", "lvl": 4 },
+          { "src": "Predentin", "vi": "Tiền ngà", "lvl": 4 },
           { "src": "Enamel spindles", "vi": "Thoi men", "lvl": 3 },
           { "src": "Dentinal tubules", "vi": "Ống ngà", "lvl": 3 },
           { "src": "Secondary dentin", "vi": "Ngà thứ phát", "lvl": 3 },
