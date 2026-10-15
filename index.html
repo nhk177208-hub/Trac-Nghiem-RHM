@@ -10041,10 +10041,23 @@ bkCloseAll();
             const m = String(lesson.title || '').match(/^\s*(\d+)/);
             const num = m ? parseInt(m[1], 10) : index + 1;
             const lvl = currentParentMonHoc ? 2 : 1;
-            const folder = currentActiveMonHoc && currentActiveMonHoc.path;
-            if (!folder) return;
-            const info = lessonQuizInfo[playerId] = { folder, lvl, num, title: String(lesson.title || '').replace(/^\s*\d+\s*[.\-:)]*\s*/, '') || String(lesson.title || ''), quiz: null };
-            loadLessonQuiz(info).then(q => paintReviewButton(playerId, q));
+            const folder = (lesson && lesson.srtFolder) || (currentActiveMonHoc && currentActiveMonHoc.path) || '';
+            const cleanTitle = String(lesson.title || '').replace(/^\s*\d+\s*[.\-:)]*\s*/, '') || String(lesson.title || 'Bài giảng');
+            const quizId = stableIdFromText('ai_lesson_quiz_v2|' + (lesson.videoId || folder + '|' + num + '|' + cleanTitle));
+            const existing = getSavedQuizzes().find(q => q.id === quizId && q.questions && q.questions.length > 0);
+            const info = lessonQuizInfo[playerId] = {
+                playerId,
+                folder,
+                lvl,
+                num,
+                videoId: lesson.videoId || '',
+                rawTitle: String(lesson.title || ''),
+                title: cleanTitle,
+                quizId,
+                quiz: existing || null,
+                busy: false
+            };
+            paintReviewButton(playerId, info.quiz);
         }
 
         /* Quà ôn tập: hoàn tất bài (trả lời hết, không bỏ qua) lần đầu nhận 10 điểm x số câu; số câu lấy kỷ lục cao nhất đã thấy; nhận xong nút trở lại bình thường */
@@ -10081,104 +10094,227 @@ bkCloseAll();
         function paintReviewButton(playerId, quiz) {
             const btn = document.getElementById(`review-btn-${playerId}`);
             if (!btn) return;
+            const info = lessonQuizInfo[playerId];
+            btn.disabled = !!(info && info.busy);
+            btn.classList.remove('opacity-50');
+            if (info && info.busy) {
+                btn.innerHTML = `⏳ AI đang tạo đề…`;
+                btn.title = 'AI đang phân tích bài giảng và tạo câu hỏi ôn tập';
+                return;
+            }
             if (quiz && quiz.questions && quiz.questions.length) {
-                btn.disabled = false;
-                btn.classList.remove('opacity-50');
                 const rv = rvInfo(quiz);
                 const full = !rv.claimed && rv.n > 0 && rv.m >= rv.n;
                 btn.dataset.st = full ? 'ready' : 'wait';
                 if (rv.claimed) {
-                    btn.innerHTML = `📝 Ôn tập<span class="cb-long"> bài này</span>`;
-                    btn.title = 'Làm trắc nghiệm của bài này';
+                    btn.innerHTML = `📝 Ôn tập<span class="cb-long"> bài này</span> <span class="vgift">${rv.n} câu</span>`;
+                    btn.title = `Làm trắc nghiệm AI của bài này (${rv.n} câu)`;
                 } else if (full) {
                     btn.innerHTML = `📝 Ôn tập<span class="cb-long"> bài này</span> <span class="vgift">🎁 ${rv.pts}</span>`;
                     btn.title = `Bấm để nhận ${rv.pts} điểm quà (đã làm đủ ${rv.n} câu)`;
                 } else {
-                    btn.innerHTML = `📝 Ôn tập<span class="cb-long"> bài này</span>` + (rv.m > 0 ? ` <span class="vgift">${rv.m}/${rv.n}</span>` : '');
+                    btn.innerHTML = `📝 Ôn tập<span class="cb-long"> bài này</span> <span class="vgift">${rv.m > 0 ? rv.m + '/' + rv.n : rv.n + ' câu'}</span>`;
                     btn.title = rv.m > 0 ? `Đã làm tối đa ${rv.m}/${rv.n} câu. Làm đủ ${rv.n} câu để nhận ${rv.pts} điểm quà` : `Làm đủ ${rv.n} câu để nhận ${rv.pts} điểm quà`;
                 }
             } else {
-                btn.classList.add('opacity-50');
+                btn.dataset.st = 'wait';
                 btn.innerHTML = '📝 Ôn tập<span class="cb-long"> bài này</span>';
-                btn.title = 'Bài này chưa có đề';
+                btn.title = 'AI sẽ tự động tạo đề ôn tập dựa trên các ý chính của bài giảng (tỷ lệ 15 câu / 60 phút)';
             }
         }
 
-        async function loadLessonQuiz(info) {
-            const file = `O${info.lvl}-${info.num}.json`;
-            const path = `${info.folder}/${file}`;
+        async function fetchLessonCuesForQuiz(info) {
+            const d = activeYtPlayers[info.playerId];
+            if (d && d.srtState === 'ready' && (d.srtCues || []).length) {
+                let dur = 0;
+                try { dur = (d.player && d.player.getDuration && d.player.getDuration()) || 0; } catch (e) {}
+                if (!dur) dur = d.srtCues[d.srtCues.length - 1].end || 0;
+                return { cues: d.srtCues, dur };
+            }
+            const base = info.folder ? info.folder + '/' : '';
+            const raw = String(info.rawTitle || info.title || '').trim();
+            const m = raw.match(/\d+/);
+            const nums = [];
+            if (m) { nums.push(m[0]); const un = String(parseInt(m[0], 10)); if (un !== m[0]) nums.push(un); }
+            for (const n of nums) {
+                const c = await fetchSrtCues(base + n + 'v.srt') || await fetchSrtCues(base + n + 'e.srt');
+                if (c && c.length) return { cues: c, dur: c[c.length - 1].end || 0 };
+            }
+            // Dự phòng tên file trùng tên bài
+            const c2 = await fetchSrtCues(base + raw + '.srt');
+            if (c2 && c2.length) return { cues: c2, dur: c2[c2.length - 1].end || 0 };
+            let dur = 0;
+            try { if (d && d.player && d.player.getDuration) dur = d.player.getDuration() || 0; } catch (e) {}
             try {
-                const r = await fetch(`${encPath(path)}?_=${Date.now()}`, { cache: 'no-store' });
-                if (!r.ok) return null;
-                const parsed = JSON.parse((await r.text()).replace(/^\uFEFF/, ''));
-                const items = normalizeJsonFolderData(parsed, file);
-                const questions = [].concat(...items.map(i => i.questions || []));
-                if (!questions.length) return null;
-                const base = file.replace(/\.json$/i, '');
-                const given = items[0].name && items[0].name !== base ? items[0].name : info.title;
-                const quiz = Object.assign({}, items[0], {
-                    id: stableIdFromText('lesson|' + path),
-                    name: given,
-                    folder: 'Bài học/' + info.folder.replace(/^MonHoc\//i, ''),
-                    questions, lessonQuiz: true, lessonFile: file, isExam: false
+                if (!dur && info.videoId) {
+                    const ws = JSON.parse(localStorage.getItem('ytWatchState') || '{}')[info.videoId];
+                    if (ws && ws.d > 0) dur = ws.d;
+                }
+            } catch (e) {}
+            return { cues: [], dur };
+        }
+
+        async function loadLessonQuiz(info, forceRegen) {
+            if (!info) return null;
+            if (!forceRegen && info.quiz && info.quiz.questions && info.quiz.questions.length) return info.quiz;
+            const saved = getSavedQuizzes().find(q => q.id === info.quizId && q.questions && q.questions.length > 0);
+            if (!forceRegen && saved) {
+                info.quiz = saved;
+                return saved;
+            }
+            if (!aiAnyKey()) { aiShowGate(); return null; }
+            if (info.busy) return null;
+            info.busy = true;
+            paintReviewButton(info.playerId, null);
+
+            try {
+                const { cues, dur } = await fetchLessonCuesForQuiz(info);
+                // Quy tắc số lượng câu: 15 câu cho 60 phút (3600 giây), tự cân đối theo độ dài video
+                const durSec = dur > 60 ? dur : (cues.length ? Math.max(600, cues[cues.length - 1].end || 1800) : 2400);
+                const targetCount = Math.max(5, Math.min(40, Math.round((durSec / 3600) * 15)));
+                const mins = Math.max(1, Math.round(durSec / 60));
+
+                showToast(`🤖 AI đang tạo ${targetCount} câu ôn tập (video ~${mins} phút)…`);
+
+                let transcript = '';
+                if (cues.length) {
+                    const slots = [];
+                    let cur = null;
+                    cues.forEach(c => {
+                        const sl = Math.floor(c.start / 25);
+                        if (!cur || cur.sl !== sl) { cur = { sl, txt: '' }; slots.push(cur); }
+                        cur.txt += (cur.txt ? ' ' : '') + String(c.text || '').replace(/\s*\n\s*/g, ' ');
+                    });
+                    transcript = slots.map(s => s.txt).join('\n');
+                    if (transcript.length > 140000) transcript = transcript.slice(0, 140000);
+                }
+
+                const sys = 'Bạn là giáo sư đầu ngành Răng Hàm Mặt ra đề thi. Dựa trên các Ý CHÍNH CẦN NHỚ của bài giảng "' + info.title + '" (thời lượng khoảng ' + mins + ' phút), hãy tạo đúng ' + targetCount + ' câu hỏi trắc nghiệm khách quan 4 lựa chọn (chỉ 1 đáp án đúng) bao phủ đều từ đầu đến cuối bài giảng. ' +
+                    'QUY TẮC BẮT BUỘC VỀ ĐÁP ÁN NHIỄU: Mỗi câu có 1 đáp án đúng và 3 đáp án nhiễu hợp lý nhưng chắc chắn sai. ĐỘ DÀI (số ký tự và số từ) của cả 4 đáp án A, B, C, D trong cùng một câu PHẢI TƯƠNG ĐƯƠNG NHAU (lệch nhau không quá 15%), cùng cấu trúc ngữ pháp và mức độ chi tiết để người học tuyệt đối không thể đoán mò đáp án đúng dựa vào độ dài. Vị trí đáp án đúng (0, 1, 2, 3) phân bố ngẫu nhiên; không dùng "Tất cả đều đúng/sai". Dùng thuật ngữ RHM chuẩn miền Nam Việt Nam. ' +
+                    'Chỉ trả về MỘT đối tượng JSON hợp lệ dạng {"questions":[{"q":"<nội dung câu hỏi>","o":["<nội dung lựa chọn A (không ghi chữ A.)>","<lựa chọn B>","<lựa chọn C>","<lựa chọn D>"],"a":<chỉ số đáp án đúng 0-3>,"x":"<giải thích chi tiết vì sao đáp án đúng và vì sao các phương án kia sai>"}]}, không viết gì khác ngoài JSON.';
+
+                const parts = transcript
+                    ? [{ text: 'NỘI DUNG BÀI GIẢNG "' + info.title + '":\n' + transcript }]
+                    : (info.videoId
+                        ? [{ fileData: { fileUri: 'https://www.youtube.com/watch?v=' + info.videoId } }, { text: 'Hãy xem video bài giảng "' + info.title + '" và tạo đúng ' + targetCount + ' câu hỏi trắc nghiệm theo các ý chính cần nhớ.' }]
+                        : [{ text: 'Chủ đề bài giảng Răng Hàm Mặt: "' + info.title + '". Hãy tạo đúng ' + targetCount + ' câu hỏi trắc nghiệm cốt lõi.' }]);
+
+                const res = await window.bkQzCallAI(sys, parts);
+                const rawQs = Array.isArray(res) ? res : ((res && res.questions) || []);
+                const LETTERS = ['A', 'B', 'C', 'D'];
+                const formattedQs = [];
+
+                rawQs.forEach(item => {
+                    if (!item || !item.q || !Array.isArray(item.o) || item.o.length !== 4) return;
+                    const ansIdx = Math.floor(Number(item.a));
+                    if (!(ansIdx >= 0 && ansIdx < 4)) return;
+                    const opts = item.o.map((optTxt, idx) => {
+                        const cleanOpt = String(optTxt || '').trim().replace(/^[A-Da-d][.\):\-]\s*/, '');
+                        return LETTERS[idx] + '. ' + cleanOpt;
+                    });
+                    if (opts.some(o => o.length <= 3)) return;
+                    formattedQs.push({
+                        question: String(item.q).trim(),
+                        options: opts,
+                        answerStr: LETTERS[ansIdx],
+                        explanation: String(item.x || '').trim(),
+                        images: [],
+                        explanationImages: [],
+                        isStarred: false,
+                        isHidden: false
+                    });
                 });
+
+                if (!formattedQs.length) {
+                    showToast('⚠️ AI chưa tạo được câu hỏi, vui lòng bấm lại lần nữa');
+                    return null;
+                }
+
+                const quiz = {
+                    id: info.quizId,
+                    name: info.title,
+                    folder: 'Bài học/' + String(info.folder || '').replace(/^MonHoc\//i, ''),
+                    questions: formattedQs,
+                    lessonQuiz: true,
+                    isExam: false,
+                    date: new Date().toLocaleDateString('vi-VN')
+                };
                 mergeImportedItems([quiz]);
                 info.quiz = quiz;
+                showToast(`✅ Đã tạo bộ đề "${info.title}" (${formattedQs.length} câu)!`);
                 return quiz;
-            } catch (e) { return null; }
+            } catch (e) {
+                if (e && e.badKey) {
+                    try { aiForgetKey(e.prov); aiShowGate('⚠️ Khóa API không hợp lệ hoặc đã bị thu hồi. Vui lòng dán khóa mới.', null, e.prov); } catch (er) {}
+                } else {
+                    showToast('⚠️ Không tạo được đề ôn tập: ' + ((e && (e.friendly || e.message)) || 'lỗi kết nối'));
+                }
+                return null;
+            } finally {
+                info.busy = false;
+                paintReviewButton(info.playerId, info.quiz);
+            }
         }
 
         async function startLessonReview(playerId) {
             const info = lessonQuizInfo[playerId];
-            if (!info) return;
-            const quiz = (await loadLessonQuiz(info)) || info.quiz;
+            if (!info || info.busy) return;
+            if (info.quiz && info.quiz.questions && info.quiz.questions.length) {
+                try { if (rvClaim(playerId)) return; } catch (e) {}
+            }
+            const quiz = await loadLessonQuiz(info, false);
             paintReviewButton(playerId, quiz);
-            try { if (rvClaim(playerId)) return; } catch (e) {}   // đủ câu: bấm nút để nhận quà, nhận xong nút trở lại bình thường
-            if (!quiz) { showToast(`Bài này chưa có đề (cần file O${info.lvl}-${info.num}.json cùng thư mục Video${info.lvl}.txt)`); return; }
+            if (!quiz || !quiz.questions || !quiz.questions.length) return;
             closeMonHocDetailModal();
             startSavedQuiz(quiz.id, true);
         }
 
         async function editLessonQuiz(playerId) {
             const info = lessonQuizInfo[playerId];
-            if (!info) return;
-            let quiz = (await loadLessonQuiz(info)) || info.quiz;
-            if (!quiz) {
-                if (!confirm(`Chưa có file O${info.lvl}-${info.num}.json. Tạo bộ đề trống cho bài này để soạn?`)) return;
-                const path = `${info.folder}/O${info.lvl}-${info.num}.json`;
-                quiz = { id: stableIdFromText('lesson|' + path), name: info.title, folder: 'Bài học/' + info.folder.replace(/^MonHoc\//i, ''), questions: [], lessonQuiz: true, lessonFile: `O${info.lvl}-${info.num}.json` };
-                mergeImportedItems([quiz]);
-                info.quiz = quiz;
-            }
+            if (!info || info.busy) return;
+            let quiz = await loadLessonQuiz(info, false);
+            if (!quiz) return;
             closeMonHocDetailModal();
             openEditScreen(quiz.id);
         }
 
-        function showFirstTimeEdgeVideoPopup() {
+        function hasEdgeNaturalVoices() {
+            try {
+                const v = (window.speechSynthesis && window.speechSynthesis.getVoices()) || [];
+                return v.some(x => /hoaimy/i.test(narrMsName(x))) && v.some(x => /namminh/i.test(narrMsName(x)));
+            } catch (e) { return false; }
+        }
+        function showFirstTimeEdgeVideoPopup(forceEdgeReloadReason) {
             try {
                 if (NARR_IS_APPLE) return; // iOS/macOS bỏ qua theo thiết kế
-                if (localStorage.getItem('rhm_edge_vid_notice_v1')) return;
-                localStorage.setItem('rhm_edge_vid_notice_v1', '1');
-
                 const isEdgeBrowser = NARR_UA_EDGE;
                 const isAndroidDev = NARR_IS_ANDROID;
                 let title = '', bodyHtml = '';
 
                 if (isAndroidDev && isEdgeBrowser) {
-                    // Đang mở bằng Edge Mobile trên Android -> nhắc bấm menu Đọc to trước để nạp HoaiMy & NamMinh
-                    title = '🎙️ Kích hoạt giọng đọc HoaiMy & NamMinh';
-                    bodyHtml = '<p style="margin:0 0 8px">Bạn đang dùng <b>Microsoft Edge trên điện thoại</b>. Để trình duyệt nạp sẵn 2 giọng đọc tự nhiên <b>HoaiMy (nữ)</b> và <b>NamMinh (nam)</b> cho tính năng lồng tiếng video, ở lần đầu tiên bạn hãy:</p>' +
+                    // Trên Edge Mobile: nếu đã có đủ 2 giọng HoaiMy & NamMinh thì không cần nhắc; nếu chưa có hoặc vừa bị mất sau khi bấm Home/đóng app thì hiện popup nhắc ngay
+                    if (hasEdgeNaturalVoices()) return;
+                    title = forceEdgeReloadReason
+                        ? '🎙️ Giọng HoaiMy & NamMinh cần nạp lại'
+                        : '🎙️ Kích hoạt giọng đọc HoaiMy & NamMinh';
+                    bodyHtml = (forceEdgeReloadReason
+                        ? '<p style="margin:0 0 8px">Do trình duyệt <b>Edge trên điện thoại</b> vừa thu nhỏ về màn hình chính hoặc khởi động lại nên 2 giọng <b>HoaiMy</b> và <b>NamMinh</b> đã bị giải phóng khỏi bộ nhớ. Để nạp lại, bạn hãy:</p>'
+                        : '<p style="margin:0 0 8px">Bạn đang dùng <b>Microsoft Edge trên điện thoại</b>. Để trình duyệt nạp sẵn 2 giọng đọc tự nhiên <b>HoaiMy (nữ)</b> và <b>NamMinh (nam)</b> cho tính năng lồng tiếng video, bạn hãy:</p>') +
                         '<ol style="margin:0 0 10px;padding-left:18px;list-style:decimal">' +
                         '<li>Bấm vào nút menu <b>⋯</b> (hoặc <b>☰</b>) của trình duyệt Edge.</li>' +
-                        '<li>Chọn <b>Đọc to (Read Aloud)</b> để trình duyệt bắt đầu đọc thử vài chữ rồi tắt đi.</li>' +
-                        '<li>Quay lại video, mở <b>⚙ Cài đặt sub &amp; lồng tiếng</b> để chọn giọng <b>HoaiMy</b> hoặc <b>NamMinh</b>.</li>' +
+                        '<li>Chọn <b>Đọc to (Read Aloud)</b> để trình duyệt đọc thử vài chữ rồi tắt đi.</li>' +
+                        '<li>Quay lại đây, mở <b>⚙ Cài đặt sub &amp; lồng tiếng</b> để dùng giọng <b>HoaiMy</b> hoặc <b>NamMinh</b>.</li>' +
                         '</ol>';
                 } else if (isAndroidDev && !isEdgeBrowser) {
+                    if (localStorage.getItem('rhm_edge_vid_notice_v1')) return;
+                    localStorage.setItem('rhm_edge_vid_notice_v1', '1');
                     // Đang mở bằng trình duyệt khác trên Android -> nhắc chuyển qua Edge Mobile
                     title = '💡 Gợi ý trình duyệt có giọng đọc hay hơn';
                     bodyHtml = '<p style="margin:0 0 8px">Để trải nghiệm tính năng <b>lồng tiếng video bài giảng</b> với 2 giọng đọc tiếng Việt tự nhiên <b>HoaiMy (nữ)</b> và <b>NamMinh (nam)</b>, bạn nên mở ứng dụng bằng trình duyệt <b>Microsoft Edge</b> trên điện thoại.</p>' +
                         '<p style="margin:0;font-size:12.5px;color:#4b5563"><i>Lưu ý: Sau khi mở bằng Edge Mobile, hãy bấm menu <b>⋯ → Đọc to</b> một lần để trình duyệt nạp 2 giọng đọc này.</i></p>';
                 } else if (!isAndroidDev && !isEdgeBrowser) {
+                    if (localStorage.getItem('rhm_edge_vid_notice_v1')) return;
+                    localStorage.setItem('rhm_edge_vid_notice_v1', '1');
                     // Đang mở bằng trình duyệt khác Edge trên PC -> nhắc chuyển qua Edge PC
                     title = '💡 Gợi ý mở bằng Microsoft Edge trên PC';
                     bodyHtml = '<p style="margin:0 0 8px">Bạn đang mở ứng dụng bằng trình duyệt không phải <b>Microsoft Edge</b>. Hãy chuyển sang mở bằng <b>Microsoft Edge</b> trên máy tính để có sẵn 2 giọng đọc lồng tiếng tự nhiên <b>HoaiMy (nữ)</b> và <b>NamMinh (nam)</b> cho các video bài giảng!</p>';
@@ -10207,6 +10343,28 @@ bkCloseAll();
                 document.body.appendChild(ov);
             } catch (e) {}
         }
+
+        (function () {
+            if (!NARR_IS_ANDROID || !NARR_UA_EDGE) return;
+            let wasHiddenAt = 0;
+            function checkVoicesAfterResume() {
+                setTimeout(() => {
+                    const anyVideoOpen = Object.keys(activeYtPlayers).some(pid => {
+                        const w = document.getElementById('video-wrapper-' + pid);
+                        return w && !w.classList.contains('hidden');
+                    });
+                    if (!anyVideoOpen) return;
+                    if (!hasEdgeNaturalVoices()) {
+                        showFirstTimeEdgeVideoPopup(true);
+                    }
+                }, 550);
+            }
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) wasHiddenAt = Date.now();
+                else if (wasHiddenAt && Date.now() - wasHiddenAt > 800) checkVoicesAfterResume();
+            });
+            window.addEventListener('pageshow', (e) => { if (e.persisted) checkVoicesAfterResume(); });
+        })();
 
         function toggleLessonVideo(playerId, videoId) { setTimeout(function () { try { window.ytPaintClaims(); } catch (e) {} }, 0);
             const wrapper = document.getElementById(`video-wrapper-${playerId}`);
@@ -13206,7 +13364,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             const d = activeYtPlayers[q.pid]; if (!d) { q.err = 'Video đã đóng'; return false; }
             const useText = d.srtState === 'ready' && (d.srtCues || []).length > 0;
             let tx = useText && window.ytTranscriptOf ? window.ytTranscriptOf(d, 0, 0) : ''; if (tx.length > 120000) tx = tx.slice(0, 120000);
-            const sys = 'Bạn là giảng viên ra đề. Dựa CHỈ vào nội dung bài giảng được cung cấp, tạo đúng 5 câu hỏi trắc nghiệm MỚI để người học ôn các ý quan trọng cần nhớ để đi thi. Chỉ trả về MỘT đối tượng JSON dạng {"questions":[{"q":"<câu hỏi>","o":["<đáp án A>","<đáp án B>","<đáp án C>","<đáp án D>"],"a":<chỉ số đáp án đúng 0-3>,"x":"<giải thích 1–3 câu: vì sao đáp án đúng là đúng và vì sao các đáp án còn lại sai, tối đa 350 ký tự>"}]}, không viết gì khác. Đúng 4 đáp án với 3 đáp án nhiễu hợp lý; vị trí đáp án đúng ngẫu nhiên; không dùng "tất cả đều đúng"; câu hỏi tự chứa đủ thông tin, không nói "trong video". Đa dạng độ khó, không lặp lại các câu đã hỏi.';
+            const sys = 'Bạn là giảng viên ra đề. Dựa CHỈ vào nội dung bài giảng được cung cấp, tạo đúng 5 câu hỏi trắc nghiệm MỚI để người học ôn các ý quan trọng cần nhớ để đi thi. Chỉ trả về MỘT đối tượng JSON dạng {"questions":[{"q":"<câu hỏi>","o":["<đáp án A>","<đáp án B>","<đáp án C>","<đáp án D>"],"a":<chỉ số đáp án đúng 0-3>,"x":"<giải thích 1–3 câu: vì sao đáp án đúng là đúng và vì sao các đáp án còn lại sai, tối đa 350 ký tự>"}]}, không viết gì khác. Đúng 4 đáp án với 3 đáp án nhiễu hợp lý; QUAN TRỌNG: cả 4 đáp án trong mỗi câu BẮT BUỘC phải có độ dài (số ký tự và số từ) tương đương nhau (lệch không quá 15%), cùng kiểu trình bày để không thể đoán đáp án đúng nhờ độ dài; vị trí đáp án đúng ngẫu nhiên; không dùng "tất cả đều đúng"; câu hỏi tự chứa đủ thông tin, không nói "trong video". Đa dạng độ khó, không lặp lại các câu đã hỏi.';
             const asked = q.asked.slice(-40).map(t => '- ' + t).join('\n');
             const txt = 'Ý CẦN NHỚ ĐÃ TÓM TẮT (ưu tiên khai thác):\n' + q.base + (asked ? '\n\nCÁC CÂU ĐÃ HỎI (không lặp lại):\n' + asked : '') + (useText ? '\n\nLỜI GIẢNG TOÀN BÀI:\n' + tx : '');
             const parts = useText ? [{ text: txt }] : [{ fileData: { fileUri: 'https://www.youtube.com/watch?v=' + (d.videoId || (aiState.video && aiState.video.yt) || '') } }, { text: txt }];
@@ -15236,7 +15394,7 @@ window.PGR = (function () {
             (before.length ? 'Các mục đã có ngay trước đoạn này (chỉ để nối mạch và tránh lặp, KHÔNG liệt kê lại): ' + before.join(' | ') + '. ' : '') +
             '"trials" là các Ý QUAN TRỌNG nhất người học cần nhớ, mỗi ý kèm 1 câu trắc nghiệm: {"s":<giây bắt đầu ý>,"e":<giây kết thúc ý>,"q":"<câu hỏi>","o":["<đáp án A>","<đáp án B>","<đáp án C>","<đáp án D>"],"a":<chỉ số đáp án đúng 0-3>,"x":"<giải thích ngắn tối đa 120 ký tự>","qe":"<bản dịch tiếng Anh của câu hỏi>","oe":["<A tiếng Anh>","<B tiếng Anh>","<C tiếng Anh>","<D tiếng Anh>"],"xe":"<giải thích bằng tiếng Anh>"}. Mỗi ý dài 8–90 giây, các ý cách nhau tối thiểu 90 giây, ' +
             (whole ? 'khoảng 1 ý mỗi 3–7 phút (tối thiểu 1, tối đa 15)' : 'tối thiểu 1, tối đa 3 ý trong đoạn này, s và e nằm trong đoạn này') +
-            '. Câu hỏi phải trả lời được chỉ bằng nội dung đoạn [s,e]; đúng 4 đáp án với 3 đáp án nhiễu hợp lý; vị trí đáp án đúng ngẫu nhiên; không dùng "tất cả đều đúng".';
+            '. Câu hỏi phải trả lời được chỉ bằng nội dung đoạn [s,e]; đúng 4 đáp án với 3 đáp án nhiễu hợp lý; QUAN TRỌNG: mỗi đáp án nhiễu (cả tiếng Việt lẫn tiếng Anh) BẮT BUỘC phải có độ dài (số ký tự và số từ) bằng hoặc sát với đáp án đúng (chênh lệch không quá 15%), cùng cấu trúc ngữ pháp và mức độ chi tiết để không thể đoán đáp án đúng dựa vào độ dài; vị trí đáp án đúng ngẫu nhiên; không dùng "tất cả đều đúng".';
     }
     function partsFor(d, st, win) {
         var whole = st.w === 1, a = win[0], b = win[1];
@@ -15844,7 +16002,7 @@ window.PGR = (function () {
         o.innerHTML = '<div class="fd"><div class="fh">🎯 Chế độ tập trung · <span style="color:' + (on ? '#86efac' : '#fca5a5') + '">' + (on ? 'Đang mở' : 'Đang tắt') + '</span></div>' +
             '<ul><li>AI chọn các <b>ý quan trọng</b> trong video.</li><li>Qua mỗi ý ~10 giây, video <b>dừng</b> và hiện 1 câu trắc nghiệm 4 đáp án.</li><li>Trả lời <b>sai</b>: tua lại đầu ý đó để nghe lại, đến khi đúng mới xem tiếp.</li><li>Mỗi câu đúng: <b>+50 điểm</b>.</li></ul>' +
             (k.length ? '<div class="fp">Đã qua ' + passed + '/' + k.length + ' thử thách của video này</div>' : '') +
-            '<div class="fl"><span>Mức câu hỏi tối đa mỗi 60 phút: Ít 5 · Vừa 10 · Cao 20</span><span class="fl-g"><button type="button" class="fl-b' + (focusLvl() === 'low' ? ' on' : '') + '" data-l="low">Ít</button><button type="button" class="fl-b' + (focusLvl() === 'mid' ? ' on' : '') + '" data-l="mid">Vừa</button><button type="button" class="fl-b' + (focusLvl() === 'high' ? ' on' : '') + '" data-l="high">Cao</button></span></div>' + '<div class="fb"><button type="button" class="fy">' + (on ? 'Tắt chế độ tập trung' : 'Bật chế độ tập trung') + '</button><button type="button" class="fn">Để sau</button></div></div>';
+            '<div class="fl"><span>Mức câu hỏi tối đa mỗi 60 phút: Ít 5 · Vừa 10 · Cao 20</span><span class="fl-g"><button type="button" class="fl-b' + (focusLvl() === 'low' ? ' on' : '') + '" data-l="low">Ít</button><button type="button" class="fl-b' + (focusLvl() === 'mid' ? ' on' : '') + '" data-l="mid">Vừa</button><button type="button" class="fl-b' + (focusLvl() === 'high' ? ' on' : '') + '" data-l="high">Cao</button></span></div>' + '<div class="fb"><button type="button" class="fn">Đóng</button><button type="button" class="fy' + (on ? ' is-on' : ' is-off') + '" style="' + (on ? 'background:#2563eb;border-color:#60a5fa;color:#fff' : 'background:#334155;border-color:#64748b;color:#e2e8f0') + '">' + (on ? '🎯 Đang Bật' : '⚪ Đang Tắt') + '</button></div></div>';
         o.querySelector('.fn').addEventListener('click', function () { closeDlg(pid); }); o.querySelectorAll('.fl-b').forEach(function (b) { b.addEventListener('click', function () { try { localStorage.setItem('ytfocus_lvl', b.getAttribute('data-l')); } catch (e) {} o.querySelectorAll('.fl-b').forEach(function (x) { x.classList.toggle('on', x === b); }); var kk = activeTrials(d), ff = F(pid), fp = o.querySelector('.fp'), pz = kk.filter(function (x) { return ff.rec.p.indexOf(x.id) >= 0; }).length; if (fp) fp.textContent = 'Đã qua ' + pz + '/' + kk.length + ' thử thách của video này'; }); });
         o.addEventListener('click', function (e) { if (e.target === o) closeDlg(pid); });
         o.querySelector('.fy').addEventListener('click', async function () {
@@ -16957,7 +17115,7 @@ window.isIOSDevice = function () {
     function paintRib() {
         ['add', 'search', 'saved', 'review', 'jump'].forEach(n => { const b = $('rd-rb-' + n); if (b) b.classList.toggle('on', n === 'review' ? !!rd.rv : rd.pop === n); });
     }
-    function closePop() { rd.pop = ''; rd.editT = null; rd.infoT = null; rd.more = null; rd.editIm = null; const p = $('rd-pop'); p.classList.add('hidden'); p.classList.remove('wide', 'more', 'tall', 'add-ctr'); p.style.left = ''; p.style.top = ''; p.style.right = ''; paintRib(); }
+    function closePop() { try { stopInfoSpeak(); } catch (e) {} rd.pop = ''; rd.editT = null; rd.infoT = null; rd.more = null; rd.editIm = null; const p = $('rd-pop'); p.classList.add('hidden'); p.classList.remove('wide', 'more', 'tall', 'add-ctr'); p.style.left = ''; p.style.top = ''; p.style.right = ''; paintRib(); }
     function placeNewT() {
     var p = $('rd-pop'), w = p && p.parentNode, b = document.querySelector('#dict-modal .rd-nwv');
     if (!p || !w || !b) return;
@@ -16980,7 +17138,7 @@ function openPop(mode, t) {
             h = '<div class="rd-pt">✏️ Sửa thuật ngữ</div><input id="rd-in-en" class="rd-in" value="' + esc(t.en) + '" autocomplete="off">' + POSI(t.p) + '<textarea id="rd-in-vi" class="rd-in" rows="3" autocomplete="off">' + esc(t.vi) + '</textarea><div class="rd-imgrow"><button type="button" class="rd-pbtn" data-act="img-pick">🖼️ Thêm ảnh</button><span class="rd-hint" style="margin:0">hoặc dán ảnh từ clipboard (Ctrl+V)</span><input id="rd-in-img" type="file" accept="image/*" multiple hidden></div><div id="rd-thumbs" class="rd-thumbs"></div><div class="rd-pb"><button type="button" class="rd-pbtn pri" data-act="save">Lưu</button><button type="button" class="rd-pbtn dan" data-act="del">Xóa</button><button type="button" class="rd-pbtn" data-act="cancel">Hủy</button></div><div class="rd-hint">Mỗi nghĩa một dòng (Shift+Enter xuống dòng). Ảnh sẽ hiện trong khung thông tin của từ. Các lần dịch sau sẽ dùng đúng nghĩa bạn vừa sửa.</div>'; focus = 'rd-in-vi';
         } else if (mode === 'info') {
             rd.infoLang = 'vi';
-            h = '<div class="rd-pt" style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap"><span>ℹ️ ' + esc(t.en) + (t.p ? '<span class="rd-pos">(' + esc(t.p) + ')</span>' : '') + '</span><span class="rd-inflg" style="display:inline-flex;border:1.5px solid #c4b5fd;border-radius:999px;overflow:hidden;font-size:12px"><button type="button" data-act="info-lang" data-l="vi" style="padding:2px 10px;font-weight:800;border:0;cursor:pointer;background:#6d28d9;color:#fff">Vie</button><button type="button" data-act="info-lang" data-l="en" style="padding:2px 10px;font-weight:800;border:0;cursor:pointer;background:#fff;color:#5b21b6">Eng</button></span></div><div class="rd-sub">' + viHTML(t.vi) + '</div><div id="rd-info" class="rd-info overflow-y-auto"></div><div class="rd-pb"><button type="button" class="rd-pbtn" data-act="info-redo">↻ Tạo lại</button><button type="button" class="rd-pbtn" data-act="cancel">Đóng</button></div>';
+            h = '<div class="rd-pt" style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap"><span>ℹ️ ' + esc(t.en) + (t.p ? '<span class="rd-pos">(' + esc(t.p) + ')</span>' : '') + '</span><span class="rd-inflg" style="display:inline-flex;border:1.5px solid #c4b5fd;border-radius:999px;overflow:hidden;font-size:12px"><button type="button" data-act="info-lang" data-l="vi" style="padding:2px 10px;font-weight:800;border:0;cursor:pointer;background:#6d28d9;color:#fff">Vie</button><button type="button" data-act="info-lang" data-l="en" style="padding:2px 10px;font-weight:800;border:0;cursor:pointer;background:#fff;color:#5b21b6">Eng</button></span></div><div class="rd-sub">' + viHTML(t.vi) + '</div><div id="rd-info" class="rd-info overflow-y-auto"></div><div class="rd-pb"><button type="button" class="rd-pbtn pri" id="rd-info-tts-btn" data-act="info-tts">🔊 Đọc to</button><button type="button" class="rd-pbtn" data-act="info-redo">↻ Tạo lại</button><button type="button" class="rd-pbtn" data-act="cancel">Đóng</button></div>';
         } else if (mode === 'more') {
             h = '<div class="rd-pt">＋ Thêm từ liên quan</div><div class="rd-sub"><b>' + esc(t.en) + '</b> — ' + esc(viLine(t.vi)) + '</div><div id="rd-mt" class="rd-mt"><div class="rd-hint" style="padding:10px">⏳ AI đang gợi ý từ cùng bộ và từ loại…</div></div><div class="rd-pb" id="rd-mb"></div><div class="rd-hint">Tick chọn các từ muốn thêm. Từ mới thêm sẽ có dấu MỚI.</div>';
         } else if (mode === 'newt') {
@@ -17483,7 +17641,7 @@ function openPop(mode, t) {
         const infoBtn = '<button type="button" class="rd-ab" data-act="fc-info" title="Xem / tạo thông tin chi tiết về thuật ngữ này" style="width:36px;height:36px;border-radius:999px;background:' + (r.showInfo ? '#6d28d9' : '#ede9fe') + ';color:' + (r.showInfo ? '#fff' : '#5b21b6') + ';border:1.5px solid #c4b5fd;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font:italic 900 16px/1 Georgia,serif">i</button>';
         const infoBox = r.flip && r.showInfo
             ? '<div class="rd-info" style="background:#faf5ff;border:1.5px solid #ddd6fe;border-radius:14px;padding:12px 14px;margin:0 0 10px;max-height:210px;overflow-y:auto;text-align:justify">'
-                + (r.infoLoading ? '<div style="color:#6b7280;font-weight:700;text-align:center">⏳ AI đang soạn thông tin thuật ngữ…</div>' : (infoBody(t, t.i) || '<div style="color:#6b7280">Chưa có thông tin.</div>'))
+                + (r.infoLoading ? '<div style="color:#6b7280;font-weight:700;text-align:center">⏳ AI đang soạn thông tin thuật ngữ…</div>' : ('<div style="display:flex;justify-content:flex-end;margin-bottom:6px"><button type="button" class="rd-pbtn pri" data-act="fc-info-tts" style="padding:4px 12px;font-size:12px">🔊 Đọc to</button></div>' + (infoBody(t, t.i) || '<div style="color:#6b7280">Chưa có thông tin.</div>')))
               + '</div>'
             : '';
         $('rd-rv').innerHTML = '<div class="rv-card big fc-modal-card">' + rvHead('🃏 Flashcard')
@@ -17718,6 +17876,50 @@ function openPop(mode, t) {
         const anyEn = all.filter(v => /^en(?:[-_]|$)/i.test(String(v.lang || '').trim()) && !/france|french|spain|spanish|espanol|français|francais/i.test((v.name || '') + ' ' + (v.voiceURI || '')));
         return anyEn.find(x => /en[-_]US/i.test(x.lang)) || anyEn[0] || null;
     }
+    let rdInfoSpeaking = false;
+    function stopInfoSpeak() {
+        rdInfoSpeaking = false;
+        try { if ('speechSynthesis' in window) speechSynthesis.cancel(); } catch (e) {}
+        document.querySelectorAll('#rd-info-tts-btn, [data-act="fc-info-tts"]').forEach(b => {
+            b.textContent = '🔊 Đọc to';
+        });
+    }
+    function speakInfoText(t, langMode, btnEl) {
+        if (!t) return;
+        if (!('speechSynthesis' in window)) { toast('Trình duyệt không hỗ trợ đọc to'); return; }
+        if (rdInfoSpeaking) { stopInfoSpeak(); return; }
+        const isEn = langMode === 'en' && !!t.ie;
+        const bodyTxt = isEn ? String(t.ie || '') : String(t.i || '');
+        if (!bodyTxt.trim()) { toast('Chưa có nội dung thông tin để đọc'); return; }
+        const fullTxt = (isEn ? (t.en + '. ') : (t.en + ', nghĩa là ' + viLine(t.vi) + '. ')) + bodyTxt.replace(/\s*\n+\s*/g, '. ');
+        rdInfoSpeaking = true;
+        if (btnEl) btnEl.textContent = '⏹️ Dừng đọc';
+        try { speechSynthesis.cancel(); } catch (e) {}
+        const sents = fullTxt.match(/[^.!?…]+[.!?…]*/g) || [fullTxt];
+        let idx = 0;
+        const nextSent = () => {
+            if (!rdInfoSpeaking || idx >= sents.length) { stopInfoSpeak(); return; }
+            const s = sents[idx++].trim();
+            if (!s) { nextSent(); return; }
+            const ut = new SpeechSynthesisUtterance(s);
+            if (isEn) {
+                const ev = enVoice();
+                ut.lang = (ev && /^en[-_](?:US|GB|AU|CA)$/i.test(String(ev.lang || '').trim())) ? String(ev.lang).replace('_', '-') : 'en-US';
+                if (ev) ut.voice = ev;
+            } else {
+                let vv = null;
+                try { if (typeof aiVoicePick === 'function') vv = aiVoicePick(); } catch (e) {}
+                ut.lang = 'vi-VN';
+                if (vv) ut.voice = vv;
+            }
+            if (typeof aiRateGet === 'function') ut.rate = aiRateGet();
+            if (typeof aiVoicePitch === 'function') ut.pitch = aiVoicePitch();
+            ut.onend = nextSent;
+            ut.onerror = () => stopInfoSpeak();
+            try { speechSynthesis.speak(ut); } catch (e) { stopInfoSpeak(); }
+        };
+        setTimeout(nextSent, 60);
+    }
     function speakEn(t) {
         if (!t) return;
         if (!('speechSynthesis' in window)) { toast('Trình duyệt không hỗ trợ đọc to'); return; }
@@ -17782,8 +17984,10 @@ function openPop(mode, t) {
             case 'rb-review': if (rd.rv) rvClose(); else rvOpen(); break;
             case 'add': addTerm(); break; case 'save': saveRow(); break; case 'del': delTerm(rd.editT); break; case 'cancel': closePop(); break;
             case 'r-info': showInfo(rd.sel); break; case 'r-edit': if (rd.sel) openPop('row', rd.sel); break; case 'r-del': delTerm(rd.sel); break;
-            case 'info-redo': showInfo(rd.infoT, true); break;
-            case 'info-lang': switchInfoLang(el.dataset.l); break;
+            case 'info-tts': speakInfoText(rd.infoT, rd.infoLang || 'vi', el); break;
+            case 'fc-info-tts': if (rv.run && rv.run.items[rv.run.i]) speakInfoText(rv.run.items[rv.run.i], 'vi', el); break;
+            case 'info-redo': stopInfoSpeak(); showInfo(rd.infoT, true); break;
+            case 'info-lang': stopInfoSpeak(); switchInfoLang(el.dataset.l); break;
             case 'r-star': toggleSave(rd.sel); break;
             case 'r-more': if (rd.sel) openPop('more', rd.sel); break;
             case 'more-tg': moreToggle(el); break; case 'more-all': moreAll(); break; case 'more-add': moreAdd(); break;
@@ -18333,8 +18537,9 @@ function openPop(mode, t) {
         if (nt.edId && n.id === nt.edId) return editorHTML();
         const a = it.a || 0, b = it.b == null ? n.b.length : it.b, first = it.first !== false, last = it.last !== false, sj = subjOf(n);
         const refIdx = new Set(((n.b || '').match(/\[\[img:\d+\]\]/g) || []).map(t => +t.slice(6, -2)));
+        const SPK_NT_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 6a9 9 0 0 1 0 12"/></svg>';
         const head = first
-            ? '<div class="nt-h"><b class="nt-t">' + esc(n.t || 'Ghi chú') + '</b><button type="button" class="nt-pen" data-act="n-edit" data-id="' + n.id + '" title="Sửa ghi chú">' + PEN_SVG + '</button><button type="button" class="nt-i" data-act="n-info" data-id="' + n.id + '" title="Vị trí và thời gian tạo">i</button></div>' + (nt.sort !== 'cat' && sj ? '<span class="nt-chip">' + esc(sj) + '</span>' : '')
+            ? '<div class="nt-h"><b class="nt-t">' + esc(n.t || 'Ghi chú') + '</b><button type="button" class="nt-pen" data-act="n-edit" data-id="' + n.id + '" title="Sửa ghi chú">' + PEN_SVG + '</button><button type="button" class="nt-spk" data-act="n-spk" data-id="' + n.id + '" title="Đọc to ghi chú này">' + SPK_NT_SVG + '</button><button type="button" class="nt-i" data-act="n-info" data-id="' + n.id + '" title="Vị trí và thời gian tạo">i</button></div>' + (nt.sort !== 'cat' && sj ? '<span class="nt-chip">' + esc(sj) + '</span>' : '')
             : '<div class="nt-tc">… ' + esc(n.t || 'Ghi chú') + ' (tiếp)</div>';
         const extra = last ? (n.im || []).filter((_, k) => !refIdx.has(k)) : [];
         return '<div class="nt-it' + (first ? '' : ' nt-cont') + (last ? '' : ' nt-mid') + '">' + head + '<div class="nt-b">' + bodyHTML(n.b.slice(a, b).trim(), n.im, false) + '</div>'
@@ -18424,9 +18629,47 @@ function moveEdActs() {
         else add('Vị trí', 'Không rõ');
         return L;
     }
+    let ntSpeakingId = '';
+    function stopNoteSpeak() {
+        ntSpeakingId = '';
+        try { if ('speechSynthesis' in window) speechSynthesis.cancel(); } catch (e) {}
+        document.querySelectorAll('#note-modal .nt-spk.on').forEach(b => b.classList.remove('on'));
+        const ib = document.getElementById('nt-info-tts-btn');
+        if (ib) ib.textContent = '🔊 Đọc to';
+    }
+    function speakNote(id, btnEl) {
+        const n = nt.notes.find(x => x.id === id);
+        if (!n) return;
+        if (!('speechSynthesis' in window)) { toast('Trình duyệt không hỗ trợ đọc to'); return; }
+        if (ntSpeakingId === id) { stopNoteSpeak(); return; }
+        stopNoteSpeak();
+        const cleanBody = String(n.b || '').replace(/\[\[img:\d+\]\]/g, ' ').replace(/\s+/g, ' ').trim();
+        const fullTxt = (n.t ? n.t + '. ' : '') + cleanBody;
+        if (!fullTxt.trim()) { toast('Ghi chú chưa có chữ để đọc'); return; }
+        ntSpeakingId = id;
+        document.querySelectorAll('#note-modal .nt-spk[data-id="' + id + '"]').forEach(b => b.classList.add('on'));
+        if (btnEl && btnEl.id === 'nt-info-tts-btn') btnEl.textContent = '⏹️ Dừng đọc';
+        const sents = fullTxt.match(/[^.!?…]+[.!?…]*/g) || [fullTxt];
+        let idx = 0;
+        const nextSent = () => {
+            if (ntSpeakingId !== id || idx >= sents.length) { stopNoteSpeak(); return; }
+            const s = sents[idx++].trim();
+            if (!s) { nextSent(); return; }
+            let vv = null;
+            try { if (typeof aiVoicePick === 'function') vv = aiVoicePick(); } catch (e) {}
+            const ut = typeof aiUttFor === 'function' ? aiUttFor(s, vv) : new SpeechSynthesisUtterance(s);
+            if (!ut.lang) ut.lang = 'vi-VN';
+            if (typeof aiRateGet === 'function') ut.rate = aiRateGet();
+            if (typeof aiVoicePitch === 'function') ut.pitch = aiVoicePitch();
+            ut.onend = nextSent;
+            ut.onerror = () => stopNoteSpeak();
+            try { speechSynthesis.speak(ut); } catch (e) { stopNoteSpeak(); }
+        };
+        setTimeout(nextSent, 60);
+    }
     function openInfo(id) {
         const n = nt.notes.find(x => x.id === id); if (!n) return;
-        openPop('<div class="rd-pt">ℹ️ ' + esc(n.t) + '</div>' + (n.cat ? '<div class="nt-ln"><b>Phân mục:</b> ' + esc(n.cat) + '</div>' : '') + ctxLines(n.c).map(r => '<div class="nt-ln"><b>' + esc(r[0]) + ':</b> ' + esc(r[1]) + '</div>').join('') + '<div class="nt-ln"><b>Tạo lúc:</b> ' + esc(fmt(n.ts)) + '</div><div class="rd-pb" style="margin-top:10px"><button type="button" class="rd-pbtn" data-act="cancel">Đóng</button></div>', 'wide', 'info');
+        openPop('<div class="rd-pt">ℹ️ ' + esc(n.t) + '</div>' + (n.cat ? '<div class="nt-ln"><b>Phân mục:</b> ' + esc(n.cat) + '</div>' : '') + ctxLines(n.c).map(r => '<div class="nt-ln"><b>' + esc(r[0]) + ':</b> ' + esc(r[1]) + '</div>').join('') + '<div class="nt-ln"><b>Tạo lúc:</b> ' + esc(fmt(n.ts)) + '</div><div class="rd-pb" style="margin-top:10px"><button type="button" class="rd-pbtn pri" id="nt-info-tts-btn" data-act="n-spk" data-id="' + n.id + '">' + (ntSpeakingId === n.id ? '⏹️ Dừng đọc' : '🔊 Đọc to') + '</button><button type="button" class="rd-pbtn" data-act="cancel">Đóng</button></div>', 'wide', 'info');
     }
     function paintThumbs() { const b = $('nt-thumbs'); if (b) b.innerHTML = (nt.editIm || []).map((s, i) => '<div class="rd-th"><img src="' + s + '" alt=""><button type="button" class="rd-thx" data-act="n-imgdel" data-i="' + i + '" title="Xóa ảnh">✕</button></div>').join(''); }
     const PEN_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>';
@@ -18652,7 +18895,7 @@ function moveEdActs() {
         $('note-modal').classList.remove('hidden'); closePop(); rvClose();
         requestAnimationFrame(() => requestAnimationFrame(() => repaginate(null)));
     };
-    window.closeRhmNote = function () { nt.edId = null; nt.isNew = false; closePop(); rvClose(); $('note-modal').classList.add('hidden'); };
+    window.closeRhmNote = function () { try { stopNoteSpeak(); } catch (e) {} nt.edId = null; nt.isNew = false; closePop(); rvClose(); $('note-modal').classList.add('hidden'); };
 
     /* ---------- ÔN TẬP GHI CHÚ: AI ra trắc nghiệm 4 đáp án (đáp án nhiễu dài bằng đáp án đúng) ---------- */
     const addPts = n => { try { if (typeof SecureStore !== 'undefined') { SecureStore.addPoints(n); if (typeof updateCollectionStatsUI === 'function') updateCollectionStatsUI(); } } catch (e) {} };
@@ -18845,7 +19088,7 @@ function moveEdActs() {
                     case 'close': window.closeRhmNote(); break; case 'prev': step(-1); break; case 'next': step(1); break;
                     case 'rb-search': openSearch(); break; case 'rb-new': openNewNote(); break; case 'ed-save': saveInline(); break; case 'ed-cancel': closeInline(); break; case 'ed-del': delInline(); break; case 'rb-sort': openSort(); break; case 'rb-aa': openAa(); break;
                     case 'rb-review': nt.rv ? rvClose() : rvSetup(); break;
-                    case 'n-edit': if (!nt.lock) openEdit(id); break; case 'n-info': openInfo(id); break;
+                    case 'n-edit': if (!nt.lock) openEdit(id); break; case 'n-info': openInfo(id); break; case 'n-spk': speakNote(id, a); break;
                     case 'n-save': saveEdit(); break; case 'n-del': delNote(); break; case 'cancel': closePop(); break; case 'n-hit': goNote(id); break;
                     case 'n-sort': nt.sort = a.dataset.s; saveMeta(); closePop(); repaginate(null); nt.cur = 0; render(); break;
                     case 's-mode': setSMode(a.dataset.m); break;
@@ -21974,6 +22217,31 @@ body {
 #ai-tutor-modal.ai-bk-panel:not(.hidden):not(.ai-chat-off) > div {
   pointer-events: auto !important;
   display: flex !important;
+}
+</style>
+<style id="rhm-patch-v9-styles">
+/* Nút Đọc to nằm kế bên nút info trong Sổ ghi chú */
+#note-modal .nt-spk {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid #0d9488;
+  color: #0f766e;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+#note-modal .nt-spk:hover {
+  background: #ccfbf1;
+}
+#note-modal .nt-spk.on {
+  background: #0f766e;
+  color: #ffffff;
+  border-color: #0f766e;
 }
 </style>
 </html>
