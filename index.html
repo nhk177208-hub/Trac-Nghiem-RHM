@@ -8507,7 +8507,10 @@ function bkRenderShelf() {
     const list = document.getElementById('bookshelf-list');
     const title = document.getElementById('bookshelf-title'), cnt = document.getElementById('bookshelf-count');
     const back = document.getElementById('bk-shelf-back'), hint = document.getElementById('bookshelf-hint');
+    const zWrap = document.getElementById('bk-shelf-zoom-wrap');
+    if (zWrap) zWrap.classList.toggle('hidden', !!bkBook);
     if (bkBook) {
+        bkUpdateShelfMoreHint(null);
         title.innerHTML = '<span class="inline-block mr-2 align-middle text-lg">📖</span>' + bkEsc(bkBook.title);
         back.classList.remove('hidden');
         hint.textContent = 'Bấm vào chương để đọc PDF';
@@ -8541,32 +8544,73 @@ function bkShelfBack() { bkBook = null; bkRenderShelf(); }
 function bkFrameHtml(src, cls) {
     const base = src ? String(src).replace(/\.(png|jpe?g|webp|gif|bmp|svg)$/i, '') : '';
     return '<div class="bk-frame ' + (cls || '') + '">' + (src ? '<img src="' + bkEsc(src) + '" data-cbase="' + bkEsc(base) + '" data-ci="0" alt="" loading="lazy" onerror="bkCoverFallback(this)">' : '<span class="bk-ph">📕</span>') + '<span class="bk-spine"></span></div>';
-} function bkShelfHtml(W, H) {
-    var PL = 20, GAP = 20, ASP = 1.414, n = bkBooks.length;
-    var Wi = Math.max(200, (W || 0) - 32), Hi = Math.max(200, (H || 0) - 32);
+} var bkShelfZoom = (function () {
+    try { var v = parseInt(localStorage.getItem('rhm_shelf_zoom') || '100', 10); return (v >= 60 && v <= 160) ? v : 100; } catch (e) { return 100; }
+})();
+function bkSetShelfZoom(val) {
+    bkShelfZoom = Math.max(60, Math.min(160, Math.round((parseInt(val, 10) || 100) / 5) * 5));
+    try { localStorage.setItem('rhm_shelf_zoom', String(bkShelfZoom)); } catch (e) {}
+    var sl = document.getElementById('bk-shelf-zoom'); if (sl && +sl.value !== bkShelfZoom) sl.value = bkShelfZoom;
+    var lb = document.getElementById('bk-shelf-zoom-val'); if (lb) lb.textContent = bkShelfZoom + '%';
+    if (!bkBook) bkRenderShelf();
+}
+function bkUpdateShelfMoreHint(listEl) {
+    var modalCard = document.querySelector('#bookshelf-modal > div');
+    if (!modalCard) return;
+    var ind = document.getElementById('bk-shelf-more-ind');
+    if (!listEl || bkBook) {
+        if (ind) ind.classList.add('hidden');
+        return;
+    }
+    if (!ind) {
+        ind = document.createElement('button');
+        ind.id = 'bk-shelf-more-ind';
+        ind.type = 'button';
+        ind.className = 'bk-more-ind hidden';
+        ind.innerHTML = '<span>⬇ Còn kệ sách bên dưới · Cuộn hoặc bấm để xem tiếp</span>';
+        ind.onclick = function () {
+            listEl.scrollBy({ top: Math.max(180, listEl.clientHeight * 0.65), behavior: 'smooth' });
+        };
+        listEl.parentElement.insertBefore(ind, listEl.nextSibling);
+    }
+    if (!listEl._bkScrollBound) {
+        listEl._bkScrollBound = 1;
+        listEl.addEventListener('scroll', function () { bkUpdateShelfMoreHint(listEl); }, { passive: true });
+    }
+    var hasMore = (listEl.scrollHeight - listEl.scrollTop - listEl.clientHeight) > 18;
+    ind.classList.toggle('hidden', !hasMore);
+}
+function bkShelfHtml(W, H) {
+    var sl = document.getElementById('bk-shelf-zoom'); if (sl) sl.value = bkShelfZoom;
+    var lb = document.getElementById('bk-shelf-zoom-val'); if (lb) lb.textContent = bkShelfZoom + '%';
+    var PL = 20, GAP = 22, ASP = 1.414, n = bkBooks.length;
+    var Wi = Math.max(200, (W || 0) - 36), Hi = Math.max(220, (H || 0) - 32);
     var isMobilePortrait = (window.innerWidth < 640 && window.innerHeight > window.innerWidth);
-    var maxPerRow = isMobilePortrait ? 2 : 4;
-    var per = Math.max(1, Math.min(n || 1, maxPerRow));
-    var rows = Math.max(1, Math.ceil((n || 1) / maxPerRow));
-    var maxBwByWidth = Math.floor((Wi - (per - 1) * GAP) / per);
-    var maxBhByHeight = Math.floor((Hi - rows * (PL + GAP) + GAP) / Math.min(rows, 2));
-    var bh = Math.min(maxBwByWidth * ASP, Math.max(160, maxBhByHeight));
-    if (!bh || bh < 130) bh = 130;
-    var bw = Math.min(maxBwByWidth, Math.floor(bh / ASP));
-    if (bw < 90) bw = Math.max(80, maxBwByWidth);
-    bh = Math.round(bw * ASP);
-    var h = '<div class="bk-spacer"></div>';
+    var hardMaxCols = isMobilePortrait ? 2 : 4;
+    var scale = bkShelfZoom / 100;
+
+    // Kích thước cơ sở của 1 cuốn sách ở mức 100%: vừa 4 cuốn trên PC (hoặc 2 cuốn trên mobile dọc)
+    var baseBw = Math.min(isMobilePortrait ? 155 : 195, Math.floor((Wi - (hardMaxCols - 1) * GAP) / hardMaxCols));
+    var bw = Math.max(76, Math.min(Wi - 16, Math.round(baseBw * scale)));
+    var bh = Math.round(bw * ASP);
+
+    // Số cuốn trên mỗi hàng kệ tự động giảm xuống khi phóng to (không bao giờ vượt quá hardMaxCols: 4 trên PC, 2 trên mobile dọc)
+    var perRow = Math.max(1, Math.min(hardMaxCols, Math.floor((Wi + GAP) / (bw + GAP))));
+    var rows = Math.max(1, Math.ceil((n || 1) / perRow));
+
+    var h = '';
     for (var rr = 0; rr < rows; rr++) {
         var cells = '';
-        var rowStart = rr * maxPerRow, rowEnd = Math.min(n, (rr + 1) * maxPerRow);
+        var rowStart = rr * perRow, rowEnd = Math.min(n, (rr + 1) * perRow);
         for (var i = rowStart; i < rowEnd; i++) {
             var b = bkBooks[i];
             var mr = (i < rowEnd - 1) ? GAP : 0;
-            cells += '<div class="bk-cell" data-bi="' + i + '" style="width:' + bw + 'px;flex:0 0 ' + bw + 'px;margin-right:' + mr + 'px;padding:0"><button type="button" class="bk-book" style="width:' + bw + 'px;max-width:none" onclick="bkOpenBook(' + i + ')" aria-label="' + bkEsc(b.title) + '">' + bkFrameHtml(b.cover, '') + '</button></div>';
+            cells += '<div class="bk-cell" data-bi="' + i + '" style="width:' + bw + 'px;flex:0 0 ' + bw + 'px;margin-right:' + mr + 'px;padding:0"><button type="button" class="bk-book" style="width:' + bw + 'px;max-width:none" onclick="bkOpenBook(' + i + ')" title="' + bkEsc(b.title) + '" aria-label="' + bkEsc(b.title) + '">' + bkFrameHtml(b.cover, '') + '</button></div>';
         }
         h += '<div class="bk-row"><div class="bk-books" style="height:' + bh + 'px;justify-content:space-evenly">' + cells + '</div><div class="bk-plank"></div></div>';
     }
-    return '<div class="bk-shelf">' + h + '</div>';
+    setTimeout(function () { bkUpdateShelfMoreHint(document.getElementById('bookshelf-list')); }, 60);
+    return '<div class="bk-shelf" style="justify-content:flex-start">' + h + '</div>';
 }
 function bkCloseShelf() { document.getElementById('bookshelf-modal').classList.add('hidden'); }
 /* ----- PDF.js: tải khi cần ----- */
@@ -9600,15 +9644,20 @@ function bkEnsureSecGrip() {
     };
     g.addEventListener('pointerup', end); g.addEventListener('pointercancel', end);
 }
-/* Số thứ tự: dùng số in trong sách nếu có; nếu không thì đánh số tự động theo cấp (1, 1.1, 1.2…). Mục giới thiệu không đánh số */
+/* Số thứ tự: đánh số phân cấp chuẩn (1., 1.1, 1.2, 1.2.1…). Mục mở đầu đánh số 0 */
 function bkNumbers() {
     const c = [0, 0, 0, 0, 0]; const out = [];
     bkSecs.forEach(s => {
-        if (s.intro) { out.push('0'); return; }
-        if (s.manual) { out.push(s.num || ''); return; }
-        const L = Math.max(1, Math.min(4, s.lvl || 1));
-        c[L]++; for (let k = L + 1; k < 5; k++) c[k] = 0;
-        out.push(s.num || c.slice(1, L + 1).join('.'));
+        if (s.intro) { out.push('0.'); return; }
+        if (s.manual && s.num) { out.push(s.num); return; }
+        let L = Math.max(1, Math.min(4, s.lvl || 1));
+        if (L > 1 && c[1] === 0) c[1] = 1;
+        if (L > 2 && c[2] === 0) c[2] = 1;
+        if (L > 3 && c[3] === 0) c[3] = 1;
+        c[L]++;
+        for (let k = L + 1; k < 5; k++) c[k] = 0;
+        const numStr = c.slice(1, L + 1).join('.');
+        out.push(L === 1 ? (numStr + '.') : numStr);
     });
     return out;
 }
@@ -9629,10 +9678,14 @@ function bkRenderSecList() {
     n.textContent = bkSecs.length + ' mục';
     const nums = bkNumbers();
     list.innerHTML = bkSecs.map((s, i) => {
-        const label = bkSecLang === 'en' ? (s.en || s.title) : s.title;
+        const rawLabel = bkSecLang === 'en' ? (s.en || s.title) : s.title;
+        // Bỏ số La Mã hoặc số thứ tự trùng ở đầu nhãn khi đã có số phân cấp tự động 1., 1.1, 1.1.1
+        const cleanLabel = String(rawLabel || '').replace(/^(?:\d+(?:\.\d+)*[.)]?|[IVXLCDM]{1,5}\.)\s+/, '');
         const num = nums[i] ? nums[i] + ' ' : '';
-        const ind = ((s.lvl || 1) - 1) * 0.9;
-        return '<button type="button" onclick="bkSelSec(' + i + ')" style="margin-left:' + ind + 'rem" class="bk-sec-item w-full text-left text-sm rounded-lg px-2.5 py-1.5 bg-white border border-gray-200 hover:bg-amber-50 break-words' + ((s.lvl || 1) > 1 ? ' text-gray-600' : ' font-bold') + (i === bkSecSel ? ' bk-sec-on' : '') + '">' + (s.manual ? '🔖 ' : '') + bkEsc(num + label) + '</button>';
+        const lv = Math.max(1, Math.min(4, s.lvl || 1));
+        const ind = (lv - 1) * 0.75;
+        const clsLv = lv === 1 ? ' font-extrabold text-gray-900' : (lv === 2 ? ' font-semibold text-gray-800' : ' font-normal text-gray-600 text-xs');
+        return '<button type="button" onclick="bkSelSec(' + i + ')" style="margin-left:' + ind + 'rem;width:calc(100% - ' + ind + 'rem)" class="bk-sec-item text-left text-sm rounded-lg px-2.5 py-1.5 bg-white border border-gray-200 hover:bg-amber-50 break-words' + clsLv + (i === bkSecSel ? ' bk-sec-on' : '') + '">' + (s.manual ? '🔖 ' : '') + '<span class="text-indigo-700 font-bold">' + bkEsc(num) + '</span>' + bkEsc(cleanLabel) + '</button>';
     }).join('');
 }
 function bkSetSecLang(l) { bkSecLang = l; bkRenderSecList(); }
@@ -12533,13 +12586,22 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     <!-- TỦ SÁCH: danh sách sách → chương (thư mục GitHub) -->
     <div id="bookshelf-modal" class="fixed inset-0 bg-black bg-opacity-60 hidden flex items-center justify-center p-3 sm:p-5 z-50 select-none">
         <div class="bg-white rounded-3xl max-w-[1200px] w-[96vw] p-5 sm:p-7 shadow-2xl flex flex-col h-[92vh] max-h-[94vh]">
-            <div class="flex justify-between items-start pb-3.5 border-b gap-2">
+            <div class="flex justify-between items-start pb-3.5 border-b gap-2 flex-wrap">
                 <div class="min-w-0 flex-1">
                     <button id="bk-shelf-back" type="button" onclick="bkShelfBack()" class="hidden mb-2 text-xs bg-amber-50 hover:bg-amber-100 text-amber-800 font-bold px-2.5 py-1 rounded-lg border border-amber-300">⬅ Các sách</button>
                     <h3 id="bookshelf-title" class="text-lg sm:text-xl font-black text-amber-900 break-words">📚 Tủ sách</h3>
                     <p class="text-xs text-gray-500 mt-1"><span id="bookshelf-hint">Bấm vào sách để xem các chương</span> · Tổng: <b id="bookshelf-count">0</b></p>
                 </div>
-                <button onclick="bkCloseShelf()" class="text-gray-400 hover:text-gray-700 font-black text-2xl px-2 shrink-0 leading-none">✕</button>
+                <div class="flex items-center gap-2 shrink-0 self-center">
+                    <div id="bk-shelf-zoom-wrap" class="flex items-center gap-1.5 bg-amber-50/90 border border-amber-200 rounded-xl px-2.5 py-1.5 shadow-sm" title="Kéo để phóng to / thu nhỏ sách trên kệ">
+                        <button type="button" onclick="bkSetShelfZoom(bkShelfZoom - 15)" class="w-6 h-6 rounded-lg bg-white hover:bg-amber-100 text-amber-900 font-black text-sm flex items-center justify-center border border-amber-200">−</button>
+                        <span class="text-[11px] font-bold text-amber-900 hidden sm:inline">Cỡ sách</span>
+                        <input id="bk-shelf-zoom" type="range" min="60" max="160" step="5" value="100" oninput="bkSetShelfZoom(this.value)" class="w-20 sm:w-28 accent-amber-600 cursor-pointer">
+                        <span id="bk-shelf-zoom-val" class="text-xs font-extrabold text-amber-800 w-10 text-right">100%</span>
+                        <button type="button" onclick="bkSetShelfZoom(bkShelfZoom + 15)" class="w-6 h-6 rounded-lg bg-white hover:bg-amber-100 text-amber-900 font-black text-sm flex items-center justify-center border border-amber-200">+</button>
+                    </div>
+                    <button onclick="bkCloseShelf()" class="text-gray-400 hover:text-gray-700 font-black text-2xl px-2 shrink-0 leading-none">✕</button>
+                </div>
             </div>
             <div id="bookshelf-list" class="overflow-y-auto flex-1 my-4 space-y-3 pr-1"></div>
             <div class="pt-3 border-t flex justify-between items-center text-xs text-gray-500 gap-3">
@@ -22823,6 +22885,52 @@ body {
   color: #111827 !important;
   border-radius: 4px;
   padding: 0 2px;
+}
+</style>
+<style id="rhm-patch-v15-shelf-styles">
+/* Thanh cuộn kệ sách luôn hiện rõ để biết vị trí đang ở 1/2 kệ trên hay kệ dưới */
+#bookshelf-list {
+  scrollbar-width: auto !important;
+  scrollbar-color: #b45309 #fde68a;
+  position: relative;
+}
+#bookshelf-list::-webkit-scrollbar {
+  width: 11px !important;
+  display: block !important;
+}
+#bookshelf-list::-webkit-scrollbar-track {
+  background: #fef3c7 !important;
+  border-radius: 999px !important;
+  border: 1px solid #fde68a;
+}
+#bookshelf-list::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #d97706, #92400e) !important;
+  border-radius: 999px !important;
+  border: 2px solid #fef3c7;
+}
+
+/* Băng báo hiệu bên dưới còn tầng kệ sách */
+.bk-more-ind {
+  width: 100%;
+  margin: -10px 0 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1.5px solid #f59e0b;
+  background: linear-gradient(90deg, #fffbeb, #fef3c7, #fffbeb);
+  color: #92400e;
+  font-size: 12.5px;
+  font-weight: 800;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 -8px 18px rgba(180, 83, 9, 0.14), 0 2px 6px rgba(0, 0, 0, 0.08);
+  animation: bkMorePulse 1.6s ease-in-out infinite;
+}
+.bk-more-ind:hover {
+  background: #fde68a;
+}
+@keyframes bkMorePulse {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(2px); }
 }
 </style>
 </html>
