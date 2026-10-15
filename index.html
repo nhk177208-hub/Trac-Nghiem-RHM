@@ -1260,19 +1260,6 @@
                 </div>
             </div>
 
-            <!-- 3 NÚT TÍNH NĂNG CHÍNH -->
-            <div class="flex items-stretch gap-3 mb-6">
-                <button onclick="openMockExamModal()" class="flex-1 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-sm text-base flex items-center justify-center">
-                    ⚡ Ôn Tập Nhanh
-                </button>
-                <button onclick="openDeepModal()" class="flex-1 bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-sm text-base flex items-center justify-center">
-                    🧠 Ôn Tập Chuyên Sâu
-                </button>
-                <button onclick="openExamModal()" class="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-sm text-base flex items-center justify-center">
-                    🎯 Thi Thử (Mock Exam)
-                </button>
-            </div>
-
             <!-- 2 NÚT DÀN NGANG: ÔN TẬP THEO MÔN HỌC (TRÁI) & ÔN TẬP THEO CHUYÊN ĐỀ (PHẢI) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-6">
                 <button id="btn-toggle-monhoc" onclick="toggleMonHocSection()" class="bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 hover:from-blue-700 hover:to-indigo-700 text-white font-extrabold py-3.5 px-5 rounded-2xl shadow-md transition-all flex items-center justify-center gap-2.5 text-base border border-blue-400/30">
@@ -1281,7 +1268,7 @@
                     <span id="monhoc-toggle-icon" class="text-xs bg-white/20 px-2 py-0.5 rounded-full ml-1">▼</span>
                 </button>
                 <button id="btn-toggle-chuyende" onclick="toggleChuyenDeSection()" class="bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-700 hover:to-purple-700 text-white font-extrabold py-3.5 px-5 rounded-2xl shadow-md transition-all flex items-center justify-center gap-2.5 text-base border border-purple-400/30">
-                    <span class="text-xl">📂</span>
+                    <span class="text-xl">🦷</span>
                     <span>Ôn Tập Theo Chuyên Đề</span>
                     <span id="chuyende-toggle-icon" class="text-xs bg-white/20 px-2 py-0.5 rounded-full ml-1">▲</span>
                 </button>
@@ -1325,9 +1312,21 @@
 
             <!-- KHU VỰC HIỂN THỊ 36 CHUYÊN ĐỀ (MẶC ĐỊNH MỞ) -->
             <div id="chuyende-section-container" class="mb-8">
+                <!-- 3 NÚT TÍNH NĂNG CHÍNH THUỘC ÔN TẬP THEO CHUYÊN ĐỀ -->
+                <div class="flex items-stretch gap-3 mb-5">
+                    <button onclick="openMockExamModal()" class="flex-1 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-sm text-base flex items-center justify-center text-center">
+                        ⚡ Ôn Tập Nhanh
+                    </button>
+                    <button onclick="openDeepModal()" class="flex-1 bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-sm text-base flex items-center justify-center text-center">
+                        🧠 Ôn Tập Chuyên Sâu
+                    </button>
+                    <button onclick="openExamModal()" class="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-sm text-base flex items-center justify-center text-center">
+                        🎯 Thi Thử (Mock Exam)
+                    </button>
+                </div>
                 <div class="flex justify-between items-center mb-4 flex-wrap gap-3">
                     <h2 class="text-xl font-bold text-gray-800 flex items-center">
-                        <span class="mr-2">📂</span> 36 Chuyên Đề Ôn Tập
+                        <span class="mr-2">🦷</span> 36 Chuyên Đề Ôn Tập
                     </h2>
                 </div>
 
@@ -7964,6 +7963,7 @@ function renderSavedQuizzes() {
         const ICON_PHANMON_FOLDER = 'IconPhanMon';
 
         let monHocStructure = [];
+        let monHocAllEntries = [];
         let currentActiveMonHoc = null;
         let currentParentMonHoc = null;
         let activeYtPlayers = {};
@@ -8094,7 +8094,7 @@ function renderSavedQuizzes() {
                         const rk = videoRank(seg[2], 1);
                         if (rk > sj.videoRank) { sj.videoRank = rk; sj.videoPath = e.path; }
                     }
-                    if (seg.length >= 3 && (e.dir || seg.length >= 4)) {
+                    if (seg.length >= 3 && nkey(seg[2]) !== 'books' && (e.dir || seg.length >= 4)) {
                         if (!sj.subs.has(seg[2])) sj.subs.set(seg[2], { name: seg[2], path: `${seg[0]}/${seg[1]}/${seg[2]}`, videoPath: null, videoRank: 0 });
                         if (seg.length === 4 && !e.dir) {
                             const sp = sj.subs.get(seg[2]);
@@ -8201,7 +8201,13 @@ function renderSavedQuizzes() {
                     out.push({ path: `${MONHOC_FOLDER}/${it.name}/${f.name}`, dir: f.dir });
                     if (f.dir) {
                         const l3 = await listDirHttp(`${MONHOC_FOLDER}/${encodeURIComponent(it.name)}/${encodeURIComponent(f.name)}/`);
-                        (l3 || []).forEach(g => { if (!g.dir) out.push({ path: `${MONHOC_FOLDER}/${it.name}/${f.name}/${g.name}`, dir: false }); });
+                        for (const g of (l3 || [])) {
+                            out.push({ path: `${MONHOC_FOLDER}/${it.name}/${f.name}/${g.name}`, dir: g.dir });
+                            if (g.dir && nkey(f.name) === 'books') {
+                                const l4 = await listDirHttp(`${MONHOC_FOLDER}/${encodeURIComponent(it.name)}/${encodeURIComponent(f.name)}/${encodeURIComponent(g.name)}/`);
+                                (l4 || []).forEach(h => { if (!h.dir) out.push({ path: `${MONHOC_FOLDER}/${it.name}/${f.name}/${g.name}/${h.name}`, dir: false }); });
+                            }
+                        }
                     }
                 }
             }
@@ -8244,6 +8250,7 @@ function renderSavedQuizzes() {
             for (const source of [fetchGithubEntries, fetchDirEntries]) {
                 const entries = await source();
                 if (entries && entries.length) {
+                    monHocAllEntries = entries;
                     result = buildMonHocFromPaths(entries);
                     if (result.length) break;
                 }
@@ -8302,14 +8309,98 @@ function bkDir(subject) {
     if (subject.videoPath) return subject.videoPath.split('/').slice(0, -1).join('/');
     return subject.path || '';
 }
+function bkBuildBookFromFiles(bookTitle, bookFolder, fileNames) {
+    const fl = (Array.isArray(fileNames) ? fileNames : []).map(n => String(n).replace(/^.*\//, '')).filter(Boolean);
+    const covName = fl.find(n => /^TrangBia\.png$/i.test(n)) || fl.find(n => /^TrangBia\.(jpe?g|webp|gif|bmp|svg)$/i.test(n));
+    const chapters = fl.filter(n => /\.pdf$/i.test(n))
+        .sort((a, b) => a.localeCompare(b, 'vi', { numeric: true, sensitivity: 'base' }))
+        .map(n => ({ title: n.replace(/\.pdf$/i, ''), url: encPath(bookFolder + '/' + n), web: encPath(bookFolder + '/' + n) }));
+    return {
+        title: bookTitle,
+        url: bookFolder,
+        path: bookFolder,
+        cover: covName ? encPath(bookFolder + '/' + covName) : '',
+        chapters: chapters
+    };
+}
 async function bkLoad(subject) {
     const dir = bkDir(subject);
     if (!dir) return [];
+    const booksPrefix = dir + '/Books/';
+    const normP = p => String(p || '').normalize('NFC');
+    const prefN = normP(booksPrefix).toLowerCase();
+
+    // 1. Lấy trực tiếp từ cây thư mục đã quét (GitHub git/trees hoặc HTTP directory)
+    if (Array.isArray(monHocAllEntries) && monHocAllEntries.length) {
+        const byBook = new Map();
+        for (const e of monHocAllEntries) {
+            const p = normP(e.path);
+            if (!p.toLowerCase().startsWith(prefN)) continue;
+            const rest = p.slice(booksPrefix.length).split('/').filter(Boolean);
+            if (!rest.length) continue;
+            const bName = rest[0];
+            if (!byBook.has(bName)) byBook.set(bName, []);
+            if (rest.length === 2 && !e.dir) byBook.get(bName).push(rest[1]);
+        }
+        if (byBook.size > 0) {
+            return [...byBook.keys()]
+                .sort((a, b) => a.localeCompare(b, 'vi', { numeric: true, sensitivity: 'base' }))
+                .map(bName => bkBuildBookFromFiles(bName, dir + '/Books/' + bName, byBook.get(bName)));
+        }
+    }
+
+    // 2. Thử đọc file chỉ mục tĩnh MonHoc/<Môn>/Books/index.json (nếu có)
     try {
-        const r = await fetch(encPath(dir) + '/Books.txt?_=' + Date.now(), { cache: 'no-store' });
-        if (!r.ok) return [];
-        return parseVideoTxt((await r.text()).replace(/^\uFEFF/, '')).filter(b => b.url);
-    } catch (e) { return []; }
+        const r = await fetch(encPath(dir + '/Books/index.json') + '?_=' + Date.now(), { cache: 'no-store' });
+        if (r.ok) {
+            const j = await r.json();
+            const list = [];
+            if (Array.isArray(j)) {
+                for (const item of j) {
+                    if (typeof item === 'string') list.push({ title: item, url: dir + '/Books/' + item, path: dir + '/Books/' + item });
+                    else if (item && item.name) list.push(bkBuildBookFromFiles(item.name, dir + '/Books/' + item.name, item.files || []));
+                }
+            } else if (j && typeof j === 'object') {
+                for (const [bName, files] of Object.entries(j)) {
+                    list.push(bkBuildBookFromFiles(bName, dir + '/Books/' + bName, files));
+                }
+            }
+            if (list.length) return list;
+        }
+    } catch (e) {}
+
+    // 3. Thử dò trực tiếp thư mục HTTP MonHoc/<Môn>/Books/
+    try {
+        const subDirs = await listDirHttp(encPath(dir + '/Books') + '/');
+        if (subDirs && subDirs.length) {
+            const books = [];
+            for (const d of subDirs) {
+                if (!d.dir) continue;
+                const bFolder = dir + '/Books/' + d.name;
+                const fList = await listDirHttp(encPath(bFolder) + '/');
+                const files = (fList || []).filter(x => !x.dir).map(x => x.name);
+                books.push(bkBuildBookFromFiles(d.name, bFolder, files));
+            }
+            if (books.length) return books.sort((a, b) => a.title.localeCompare(b.title, 'vi', { numeric: true, sensitivity: 'base' }));
+        }
+    } catch (e) {}
+
+    // 4. Dự phòng GitHub Contents API cho thư mục MonHoc/<Môn>/Books
+    if (/\.github\.io$/i.test(location.hostname)) {
+        try {
+            const owner = location.hostname.split('.')[0];
+            const repo = location.pathname.split('/').filter(Boolean)[0] || location.hostname;
+            const api = `https://api.github.com/repos/${owner}/${repo}/contents/${encPath(dir + '/Books')}`;
+            const r = await fetch(api, { headers: { Accept: 'application/vnd.github+json' }, cache: 'no-store' });
+            if (r.ok) {
+                const arr = await r.json();
+                const dirs = (Array.isArray(arr) ? arr : []).filter(x => x && x.type === 'dir');
+                return dirs.sort((a, b) => a.name.localeCompare(b.name, 'vi', { numeric: true, sensitivity: 'base' }))
+                    .map(d => ({ title: d.name, url: dir + '/Books/' + d.name, path: dir + '/Books/' + d.name }));
+            }
+        } catch (e) {}
+    }
+    return [];
 }
 function bkSetCount(n) { const a = document.getElementById('bk-count'); if (a) a.textContent = n; }
 function bkPrepare(subject) {
@@ -8323,30 +8414,34 @@ function bkPrepare(subject) {
         return list;
     });
 }
-/* ----- Link thư mục GitHub → chương (file PDF) + ảnh bìa (TrangBia.*) ----- */
-function bkGhParse(url) {
-    const m = String(url || '').trim().match(/github\.com\/([^\/\s]+)\/([^\/\s#?]+?)(?:\.git)?(?:\/(?:tree|blob)\/([^\/\s#?]+)(?:\/([^\s#?]*))?)?\/?(?:[?#].*)?$/i);
-    if (!m) return null;
-    let path = m[4] || '';
-    try { path = decodeURIComponent(path); } catch (e) {}
-    return { owner: m[1], repo: m[2], ref: m[3] || '', path: path.replace(/\/+$/, '') };
-}
 async function bkListFolder(b) {
-    const g = bkGhParse(b.url);
-    if (!g) throw new Error('Link không phải thư mục GitHub hợp lệ');
-    const segs = g.path ? g.path.split('/').map(encodeURIComponent).join('/') : '';
-    const api = 'https://api.github.com/repos/' + encodeURIComponent(g.owner) + '/' + encodeURIComponent(g.repo) + '/contents/' + segs + (g.ref ? '?ref=' + encodeURIComponent(g.ref) : '');
-    const r = await fetch(api, { headers: { Accept: 'application/vnd.github+json' }, cache: 'no-store' });
-    if (r.status === 403 || r.status === 429) throw new Error('GitHub đang giới hạn số lần truy cập, thử lại sau ít phút');
-    if (r.status === 404) throw new Error('Không tìm thấy thư mục GitHub này (kiểm tra link, repo cần để công khai)');
-    if (!r.ok) throw new Error('Không đọc được thư mục GitHub (lỗi ' + r.status + ')');
-    const arr = await r.json();
-    const fl = (Array.isArray(arr) ? arr : []).filter(f => f && f.type === 'file' && f.download_url);
-    const cov = fl.find(f => /^TrangBia\.png$/i.test(f.name)) || fl.find(f => /^TrangBia\.(jpe?g|webp|gif|bmp|svg)$/i.test(f.name));
-    const chapters = fl.filter(f => /\.pdf$/i.test(f.name))
-        .sort((a, b) => a.name.localeCompare(b.name, 'vi', { numeric: true, sensitivity: 'base' }))
-        .map(f => ({ title: f.name.replace(/\.pdf$/i, ''), url: f.download_url, web: f.html_url || f.download_url }));
-    return { chapters, cover: cov ? cov.download_url : '' };
+    if (b.chapters && b.cover !== undefined) return { chapters: b.chapters, cover: b.cover };
+    const bFolder = b.path || b.url || '';
+    if (!bFolder) throw new Error('Không tìm thấy đường dẫn thư mục sách');
+
+    // Thử dò qua HTTP directory
+    try {
+        const fList = await listDirHttp(encPath(bFolder) + '/');
+        if (fList && fList.length) {
+            const built = bkBuildBookFromFiles(b.title, bFolder, fList.filter(x => !x.dir).map(x => x.name));
+            return { chapters: built.chapters, cover: built.cover };
+        }
+    } catch (e) {}
+
+    // Thử dò qua GitHub Contents API nếu chạy trên github.io
+    if (/\.github\.io$/i.test(location.hostname)) {
+        const owner = location.hostname.split('.')[0];
+        const repo = location.pathname.split('/').filter(Boolean)[0] || location.hostname;
+        const api = `https://api.github.com/repos/${owner}/${repo}/contents/${encPath(bFolder)}`;
+        const r = await fetch(api, { headers: { Accept: 'application/vnd.github+json' }, cache: 'no-store' });
+        if (r.ok) {
+            const arr = await r.json();
+            const files = (Array.isArray(arr) ? arr : []).filter(f => f && f.type === 'file').map(f => f.name);
+            const built = bkBuildBookFromFiles(b.title, bFolder, files);
+            return { chapters: built.chapters, cover: built.cover };
+        }
+    }
+    return { chapters: b.chapters || [], cover: b.cover || '' };
 }
 async function bkLoadCovers() {
     bkBooks.forEach(b => {
@@ -8388,7 +8483,7 @@ function bkRenderShelf() {
     back.classList.add('hidden');
     hint.textContent = 'Bấm vào sách để xem các chương';
     cnt.textContent = bkBooks.length;
-    list.classList.remove('overflow-hidden'); list.classList.add('overflow-y-auto'); if (!window.bkRO && window.ResizeObserver) { window.bkRO = new ResizeObserver(function () { if (!document.getElementById('bookshelf-modal').classList.contains('hidden')) bkRenderShelf(); }); window.bkRO.observe(list); } list.innerHTML = bkShelfHtml(list.clientWidth, list.clientHeight) + (bkBooks.length ? '' : '<div class="p-6 text-center text-sm text-gray-400 italic">Chưa có sách. Hãy tạo file <b>Books.txt</b> trong thư mục môn học trên GitHub.</div>');
+    list.classList.remove('overflow-hidden'); list.classList.add('overflow-y-auto'); if (!window.bkRO && window.ResizeObserver) { window.bkRO = new ResizeObserver(function () { if (!document.getElementById('bookshelf-modal').classList.contains('hidden')) bkRenderShelf(); }); window.bkRO.observe(list); } list.innerHTML = bkShelfHtml(list.clientWidth, list.clientHeight) + (bkBooks.length ? '' : '<div class="p-6 text-center text-sm text-gray-400 italic">Chưa có sách. Hãy thêm thư mục sách vào <b>MonHoc/' + bkEsc(bkSubject ? bkSubject.name : '') + '/Books/</b>.</div>');
     try { window.rhmShelfBind && window.rhmShelfBind(list, { move: function (a, b) { const x = bkBooks.splice(a, 1)[0]; bkBooks.splice(b, 0, x); }, render: bkRenderShelf, save: function () { try { localStorage.setItem('rhm_order_books:' + (bkSubject ? bkSubject.name : ''), JSON.stringify(bkBooks.map(b => b.url))); } catch (e) {} } }); } catch (e) {}
 }
 async function bkOpenBook(i) {
@@ -10023,6 +10118,60 @@ bkCloseAll();
             openEditScreen(quiz.id);
         }
 
+        function showFirstTimeEdgeVideoPopup() {
+            try {
+                if (NARR_IS_APPLE) return; // iOS/macOS bỏ qua theo thiết kế
+                if (localStorage.getItem('rhm_edge_vid_notice_v1')) return;
+                localStorage.setItem('rhm_edge_vid_notice_v1', '1');
+
+                const isEdgeBrowser = NARR_UA_EDGE;
+                const isAndroidDev = NARR_IS_ANDROID;
+                let title = '', bodyHtml = '';
+
+                if (isAndroidDev && isEdgeBrowser) {
+                    // Đang mở bằng Edge Mobile trên Android -> nhắc bấm menu Đọc to trước để nạp HoaiMy & NamMinh
+                    title = '🎙️ Kích hoạt giọng đọc HoaiMy & NamMinh';
+                    bodyHtml = '<p style="margin:0 0 8px">Bạn đang dùng <b>Microsoft Edge trên điện thoại</b>. Để trình duyệt nạp sẵn 2 giọng đọc tự nhiên <b>HoaiMy (nữ)</b> và <b>NamMinh (nam)</b> cho tính năng lồng tiếng video, ở lần đầu tiên bạn hãy:</p>' +
+                        '<ol style="margin:0 0 10px;padding-left:18px;list-style:decimal">' +
+                        '<li>Bấm vào nút menu <b>⋯</b> (hoặc <b>☰</b>) của trình duyệt Edge.</li>' +
+                        '<li>Chọn <b>Đọc to (Read Aloud)</b> để trình duyệt bắt đầu đọc thử vài chữ rồi tắt đi.</li>' +
+                        '<li>Quay lại video, mở <b>⚙ Cài đặt sub &amp; lồng tiếng</b> để chọn giọng <b>HoaiMy</b> hoặc <b>NamMinh</b>.</li>' +
+                        '</ol>';
+                } else if (isAndroidDev && !isEdgeBrowser) {
+                    // Đang mở bằng trình duyệt khác trên Android -> nhắc chuyển qua Edge Mobile
+                    title = '💡 Gợi ý trình duyệt có giọng đọc hay hơn';
+                    bodyHtml = '<p style="margin:0 0 8px">Để trải nghiệm tính năng <b>lồng tiếng video bài giảng</b> với 2 giọng đọc tiếng Việt tự nhiên <b>HoaiMy (nữ)</b> và <b>NamMinh (nam)</b>, bạn nên mở ứng dụng bằng trình duyệt <b>Microsoft Edge</b> trên điện thoại.</p>' +
+                        '<p style="margin:0;font-size:12.5px;color:#4b5563"><i>Lưu ý: Sau khi mở bằng Edge Mobile, hãy bấm menu <b>⋯ → Đọc to</b> một lần để trình duyệt nạp 2 giọng đọc này.</i></p>';
+                } else if (!isAndroidDev && !isEdgeBrowser) {
+                    // Đang mở bằng trình duyệt khác Edge trên PC -> nhắc chuyển qua Edge PC
+                    title = '💡 Gợi ý mở bằng Microsoft Edge trên PC';
+                    bodyHtml = '<p style="margin:0 0 8px">Bạn đang mở ứng dụng bằng trình duyệt không phải <b>Microsoft Edge</b>. Hãy chuyển sang mở bằng <b>Microsoft Edge</b> trên máy tính để có sẵn 2 giọng đọc lồng tiếng tự nhiên <b>HoaiMy (nữ)</b> và <b>NamMinh (nam)</b> cho các video bài giảng!</p>';
+                } else {
+                    // Đang mở bằng Edge trên PC -> đã có sẵn HoaiMy & NamMinh, không cần nhắc
+                    return;
+                }
+
+                const old = document.getElementById('rhm-edge-first-popup');
+                if (old) old.remove();
+                const ov = document.createElement('div');
+                ov.id = 'rhm-edge-first-popup';
+                ov.style.cssText = 'position:fixed;inset:0;z-index:2147483640;background:rgba(15,23,42,.65);display:flex;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)';
+                ov.innerHTML = '<div style="background:#fff;color:#1f2937;border-radius:20px;max-width:440px;width:100%;padding:20px;box-shadow:0 25px 60px rgba(0,0,0,.45);border:2px solid #6366f1;font-size:14px;line-height:1.55">' +
+                    '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px">' +
+                    '<span style="font-weight:900;font-size:16px;color:#312e81">' + title + '</span>' +
+                    '<button type="button" data-close="1" style="width:32px;height:32px;border-radius:10px;border:0;background:#f3f4f6;color:#374151;font-weight:900;cursor:pointer">✕</button>' +
+                    '</div>' +
+                    bodyHtml +
+                    '<button type="button" data-close="1" style="margin-top:12px;width:100%;padding:10px;border-radius:12px;border:0;background:linear-gradient(90deg,#4f46e5,#6366f1);color:#fff;font-weight:800;font-size:14px;cursor:pointer">Đã hiểu</button>' +
+                    '</div>';
+                ov.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    if (e.target === ov || (e.target.closest && e.target.closest('[data-close]'))) ov.remove();
+                });
+                document.body.appendChild(ov);
+            } catch (e) {}
+        }
+
         function toggleLessonVideo(playerId, videoId) { setTimeout(function () { try { window.ytPaintClaims(); } catch (e) {} }, 0);
             const wrapper = document.getElementById(`video-wrapper-${playerId}`);
             const btnText = document.getElementById(`btn-text-${playerId}`);
@@ -10030,6 +10179,7 @@ bkCloseAll();
 
             const isHidden = wrapper.classList.contains('hidden');
             if (isHidden) {
+                showFirstTimeEdgeVideoPopup();
                 wrapper.classList.remove('hidden');
                 try { if (activeYtPlayers[playerId]) activeYtPlayers[playerId].hiddenUser = false; } catch (e) {} if (btnText) btnText.innerHTML = "Ẩn<span class=\"cb-long\"> video</span>";
                 lastActivePlayerId = playerId;
@@ -11249,6 +11399,29 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             const btn = document.getElementById(`theater-btn-${playerId}`);
             if (!wrapper || !data) return;
 
+            // Nếu đang ở chế độ Toàn màn hình mà bấm nút Rạp chiếu phim → thoát Toàn màn hình và chuyển sang Rạp chiếu phim
+            const fsEl = document.fullscreenElement || document.webkitFullscreenElement;
+            if (fsEl) {
+                data.fsUserExit = true;
+                data.isTheater = true;
+                data.fsTheater = false;
+                wrapper.classList.remove('yt-fs');
+                wrapper.classList.add('theater-mode');
+                if (btn) { btn.classList.add('yt-btn-active'); btn.innerHTML = YT_THEATER_HTML_ON; }
+                try {
+                    if (document.exitFullscreen) document.exitFullscreen();
+                    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+                } catch (e) {}
+                ytTheaterLockSync();
+                ytPushTheaterState(playerId);
+                showToast("Đã chuyển sang Chế độ Rạp chiếu phim!");
+                syncYtLandscape(playerId);
+                setTimeout(() => fitYtControls(document.getElementById(`controls-${playerId}`)), 50);
+                showControlsDirectly(playerId);
+                resetInactivityTimer(playerId);
+                return;
+            }
+
             data.isTheater = !data.isTheater;
             wrapper.classList.toggle('theater-mode', data.isTheater);
             ytTheaterLockSync();
@@ -11282,11 +11455,18 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             }
 
             const dd = activeYtPlayers[playerId];
+            const btnT = document.getElementById(`theater-btn-${playerId}`);
             if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                // Nếu đang bật Rạp chiếu phim mà bấm Toàn màn hình → tắt Rạp để chỉ dùng Toàn màn hình
+                if (dd && dd.isTheater) {
+                    dd.isTheater = false;
+                    if (btnT) { btnT.classList.remove('yt-btn-active'); btnT.innerHTML = YT_THEATER_HTML_OFF; }
+                    try { if (history.state && history.state.ytTheater) { ytIgnorePop = true; history.back(); } } catch (e) {}
+                }
                 if (dd) dd.fsUserExit = false;
                 if (wrapper.requestFullscreen) {
                     const pr = wrapper.requestFullscreen();
-                    if (pr && pr.catch) pr.catch(() => { const d2 = activeYtPlayers[playerId]; if (d2 && !d2.isTheater) toggleYtTheaterMode(playerId); });   // bị từ chối → rạp (không văng ra ngoài)
+                    if (pr && pr.catch) pr.catch(() => { const d2 = activeYtPlayers[playerId]; if (d2 && !d2.isTheater) toggleYtTheaterMode(playerId); });
                 } else if (wrapper.webkitRequestFullscreen) {
                     wrapper.webkitRequestFullscreen();
                 } else if (wrapper.msRequestFullscreen) {
@@ -13108,7 +13288,14 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             let gOpts = null; if (aiState.guided) { const g = aiGuidedParse(out); out = g.text; gOpts = g.opts; }
             if (aiQuotaOut()) aiQuotaSet(false);
             if (longTurn) turn.parts = [{ text: sendText }];
-            if (img) turn.parts = [{ text: sendText + ' (đã gửi kèm ảnh)' }];
+            if (img && img.b64) {
+                // Giữ ảnh ở lượt vừa gửi để người dùng hỏi tiếp các chi tiết trong ảnh; lược bớt ảnh ở các lượt quá cũ để tránh tràn dung lượng
+                aiState.history.forEach(h => {
+                    if (h !== turn && h.role === 'user' && Array.isArray(h.parts)) {
+                        h.parts = h.parts.filter(p => !(p.inlineData && p.inlineData.data));
+                    }
+                });
+            }
             if (fc) turn.parts = [{ text: sendText + ' (đã xem khung hình ở phút ' + aiFmtTime(fc.cur) + ')' }];
             aiState.history.push({ role: 'model', parts: [{ text: out }] });
             aiSetBody(bubble, out);
@@ -14158,9 +14345,63 @@ function bkQzExplain() {
     const mm = document.getElementById('ai-tutor-modal'); if (mm && (mm.classList.contains('hidden') || mm.classList.contains('ai-chat-off'))) { mm.classList.remove('hidden', 'ai-chat-off'); try { aiPlaceModal(); } catch (e) {} } inp.value = 'Hãy giải thích kỹ hơn câu trắc nghiệm này: "' + it.q + '" Đáp án đúng là ' + String.fromCharCode(65 + it.a) + '. ' + it.o[it.a] + '. Giải thích vì sao đáp án đúng, vì sao các đáp án còn lại sai, và kiến thức nền liên quan trong chương.';
     aiSend();
 }
-function aiEnsureQuickTts() {   // các nút nhanh ở boxchat reader: Giải thích, Tìm hiểu sâu, Học có hướng dẫn, Đọc to
+async function bkAnalyzeCurrentPageImage() {
+    if (aiState.busy) { showToast('AI đang trả lời, hãy đợi một chút rồi bấm lại'); return; }
+    if (!bkCur || !bkWrapEl || !bkVP || !bkVP.length) { showToast('Hãy mở một chương sách trước'); return; }
+    if (!aiAnyKey()) { aiShowGate(); return; }
+    if (aiState.live && aiState.live.ready) { showToast('Hãy tắt chế độ nói trực tiếp (🎙️) rồi bấm lại'); return; }
+
+    // Tìm trang sách PDF đang hiện rõ nhất ở giữa khung nhìn
+    const wr = bkWrapEl.getBoundingClientRect();
+    const midY = wr.top + wr.height / 2;
+    let bestPg = null, bestDist = Infinity;
+    for (const pg of bkVP) {
+        if (!pg.wrap) continue;
+        const r = pg.wrap.getBoundingClientRect();
+        const dist = (r.top <= midY && r.bottom >= midY) ? 0 : Math.min(Math.abs(r.top - midY), Math.abs(r.bottom - midY));
+        if (dist < bestDist) { bestDist = dist; bestPg = pg; }
+    }
+    if (!bestPg) { showToast('Không xác định được trang sách đang hiển thị'); return; }
+
+    // Đảm bảo trang đó đã được render lên canvas
+    if (bestPg.state !== 'done' || !bestPg.canvas || !bestPg.canvas.width) {
+        showToast('⏳ Đang chuẩn bị hình ảnh trang ' + bestPg.num + '…');
+        try { await bkRenderPage(bestPg); } catch (e) {}
+    }
+    if (!bestPg.canvas || !bestPg.canvas.width) {
+        showToast('Chưa chụp được trang sách, hãy cuộn nhẹ rồi thử lại');
+        return;
+    }
+
+    const img = aiCanvasToImg(bestPg.canvas, bestPg.canvas.width, bestPg.canvas.height);
+    if (!img || !img.b64) { showToast('Không trích xuất được hình ảnh trang sách'); return; }
+
+    bkOpenAi();
+    const pageNum = bestPg.num;
+    const pageTxt = (bkPages[pageNum - 1] && bkText) ? bkText.slice(bkPages[pageNum - 1].gs, bkPages[pageNum - 1].ge).trim().slice(0, 2500) : '';
+    aiState.guided = false;
+    aiState.showText = '🖼️ Phân tích hình ảnh đang hiện (Trang ' + pageNum + ')';
+    document.getElementById('ai-input').value =
+        'Đây là ảnh chụp màn hình Trang ' + pageNum + ' của chương "' + (bkCur.title || '') + '" (sách "' + (bkCur.book || '') + '") mà mình đang đọc. ' +
+        'Hãy quan sát kỹ toàn bộ hình ảnh minh họa, sơ đồ, phim X-quang, ảnh lâm sàng, biểu đồ hoặc bảng biểu có trên trang này, rồi mô tả và phân tích chi tiết: ' +
+        '(1) Đó là hình ảnh/sơ đồ/bảng gì; (2) Giải thích từng chi tiết, mũi tên, ký hiệu, chú thích hoặc thông số trên hình; (3) Ý nghĩa cơ chế bệnh sinh và ứng dụng lâm sàng của hình này trong bài học. ' +
+        'Nếu mình hỏi tiếp ở các câu sau thì hãy tiếp tục dựa trên bức ảnh trang ' + pageNum + ' này để trả lời.' +
+        (pageTxt ? '\n\n(Nội dung chữ trên trang ' + pageNum + ' để đối chiếu chú thích hình:\n' + pageTxt + ')' : '');
+    aiSend(img);
+}
+
+function aiEnsureQuickTts() {   // các nút nhanh ở boxchat reader: Phân tích ảnh, Giải thích, Tìm hiểu sâu, Học có hướng dẫn, Đọc to
         const box = document.getElementById('ai-quickrow') || document.getElementById('ai-quick'); if (!box) return;
         const isBook = !!(aiState.mode === 'book' && bkCur);
+        let ib = document.getElementById('bk-img-quick');
+        if (!ib) {
+            ib = document.createElement('button'); ib.id = 'bk-img-quick'; ib.type = 'button';
+            ib.className = 'shrink-0 whitespace-nowrap text-xs font-bold border rounded-full px-3 py-1.5 bg-amber-50 text-amber-700 border-amber-300 shadow-sm active:scale-95';
+            ib.textContent = '🖼️ Phân tích ảnh đang hiện';
+            ib.title = 'Gửi trang sách đang hiện trên màn hình cho AI đọc và phân tích hình ảnh, sơ đồ, bảng biểu';
+            ib.onclick = bkAnalyzeCurrentPageImage;
+        }
+        ib.classList.toggle('hidden', !isBook);
         let eb = document.getElementById('bk-exp-quick');
         if (!eb) { eb = document.createElement('button'); eb.id = 'bk-exp-quick'; eb.type = 'button'; eb.className = 'shrink-0 whitespace-nowrap text-xs font-bold border rounded-full px-3 py-1.5 bg-rose-50 text-rose-700 border-rose-200 shadow-sm active:scale-95'; eb.textContent = '🎯 Giải thích'; eb.title = 'Giải thích dễ hiểu đoạn vừa dịch'; eb.onclick = bkExplainQuick; }
         eb.classList.toggle('hidden', !isBook);
@@ -14172,7 +14413,7 @@ function aiEnsureQuickTts() {   // các nút nhanh ở boxchat reader: Giải th
         lb.classList.toggle('hidden', !isBook);
         let b = document.getElementById('ai-tts-quick');
         if (!b) { b = document.createElement('button'); b.id = 'ai-tts-quick'; b.type = 'button'; b.className = 'shrink-0 whitespace-nowrap text-xs font-bold border rounded-full px-3 py-1.5 bg-violet-50 text-violet-700 border-violet-200 shadow-sm active:scale-95'; b.onclick = aiTtsQuick; }
-        box.appendChild(eb); box.appendChild(db); box.appendChild(lb); box.appendChild(b); aiTtsSync(); bkQzEnsureBtn();
+        box.appendChild(ib); box.appendChild(eb); box.appendChild(db); box.appendChild(lb); box.appendChild(b); aiTtsSync(); bkQzEnsureBtn();
     }
     function aiEnsureTtsBars() {
         const box = document.getElementById('ai-messages'); if (!box) return;
@@ -16839,7 +17080,9 @@ function openPop(mode, t) {
     function infoBody(t, txt) {
         const ps = String(txt || '').split(/\n+/).map(x => x.trim()).filter(Boolean).map(x => '<p>' + esc(x) + '</p>').join('');
         const im = cleanIm(t && t.im);
-        return ps + (im.length ? '<div class="rd-imgs">' + im.map(s => '<img src="' + s + '" alt="">').join('') + '</div>' : '');
+        const qEn = t && t.en ? String(t.en).replace(/\s*\([^)]*\)\s*/g, ' ').trim() : '';
+        const ggLink = qEn ? '<a href="https://www.google.com/search?tbm=isch&q=' + encodeURIComponent(qEn + ' dentistry') + '" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="rd-gg-img-link" style="display:block;margin-top:8px;font-size:13px;font-weight:700;color:#2563eb;text-decoration:underline">🔎 Xem thêm ảnh "' + esc(t.en) + '" trên Google Hình ảnh</a>' : '';
+        return ps + (im.length ? '<div class="rd-imgs">' + im.map(s => '<img src="' + s + '" alt="">').join('') + '</div>' : '') + ggLink;
     }
     function paintInfoLangBtns() {
         const p = $('rd-pop'); if (!p) return;
@@ -18845,15 +19088,17 @@ function viSelText(range) {
 
   function exportDictWord() {
     var T = rdGet(DK); if (!T.length) { toastM('Từ điển đang trống'); return; }
+    var savedCnt = T.filter(function (t) { return !!t.s; }).length;
     var rows = T.map(function (t, k) {
-      return '<tr' + (k % 2 ? ' bgcolor="#faf5ff"' : '') + '><td style="font-weight:bold;color:#1c1830">' + esc(t.en) + '</td>' +
+      var star = t.s ? ' ★' : '';
+      return '<tr' + (k % 2 ? ' bgcolor="#faf5ff"' : '') + '><td style="font-weight:bold;color:#1c1830">' + esc(t.en) + (star ? '<span style="color:#d97706">' + star + '</span>' : '') + '</td>' +
         '<td style="font-style:italic;color:#7c3aed">' + esc(t.p || '') + '</td><td>' + viH(t.vi) + '</td>' +
-        '<td>' + (t.i ? viH(t.i) : '') + (imgH(t.im) ? '<div>' + imgH(t.im) + '</div>' : '') + '</td></tr>';
+        '<td style="text-align:center;color:#d97706;font-weight:bold">' + (t.s ? '★ Đã lưu' : '') + '</td></tr>';
     }).join('');
     var html = docHead('Từ điển thuật ngữ RHM') + '<h1>Từ điển thuật ngữ RHM</h1>' +
-      '<p class="sub">Tổng cộng ' + T.length + ' thuật ngữ · xuất ngày ' + new Date().toLocaleDateString('vi-VN') + '</p>' +
+      '<p class="sub">Tổng cộng ' + T.length + ' thuật ngữ (Đã lưu: ' + savedCnt + ' ★) · xuất ngày ' + new Date().toLocaleDateString('vi-VN') + '</p>' +
       '<table border="1" cellspacing="0" cellpadding="5" width="100%" style="border-collapse:collapse;border:1px solid #ddd6fe">' +
-      '<tr>' + th + 'Tiếng Anh</th>' + th + 'Từ loại</th>' + th + 'Tiếng Việt</th>' + th + 'Thông tin</th></tr>' + rows + '<\/table><\/body><\/html>';
+      '<tr>' + th + 'Tiếng Anh</th>' + th + 'Từ loại</th>' + th + 'Tiếng Việt</th>' + th + 'Đã lưu</th></tr>' + rows + '<\/table><\/body><\/html>';
     saveBlob('\ufeff' + html, 'tu-dien-rhm_' + stamp() + '.doc', 'application/msword');
     toastM('Đã xuất Word từ điển');
   }
@@ -18887,8 +19132,9 @@ function viSelText(range) {
   /* ---------- JSON ---------- */
   function exportDictJSON() {
     var T = rdGet(DK); if (!T.length) { toastM('Từ điển đang trống'); return; }
-    var out = { app: 'Trac Nghiem RHM', type: 'tu-dien-rhm', v: 1, count: T.length, terms: T.map(function (t) {
-      return { en: t.en, p: t.p || '', vi: t.vi, i: t.i || '', s: t.s ? 1 : 0, u: t.u ? 1 : 0, ts: t.ts || 0, im: imgsOK(t.im) };
+    var savedCnt = T.filter(function (t) { return !!t.s; }).length;
+    var out = { app: 'Trac Nghiem RHM', type: 'tu-dien-rhm', v: 2, count: T.length, savedCount: savedCnt, terms: T.map(function (t) {
+      return { en: t.en, p: t.p || '', vi: t.vi, s: t.s ? 1 : 0, saved: !!t.s };
     }) };
     saveBlob(JSON.stringify(out, null, 1), 'tu-dien-rhm_' + stamp() + '.json', 'application/json');
     toastM('Đã xuất JSON từ điển');
@@ -18925,18 +19171,21 @@ function viSelText(range) {
             if (/tieng anh|english/.test(h)) map.en = i;
             else if (/loai|pos/.test(h)) map.p = i;
             else if (/tieng viet|nghia|vietnam/.test(h)) map.vi = i;
-            else if (/thong tin|info|giai thich/.test(h)) map.i = i;
+            else if (/da luu|saved|luu|sao/.test(h)) map.s = i;
           });
           return;
         }
-        var m = map || { en: 0, p: 1, vi: 2, i: 3 };
+        var m = map || { en: 0, p: 1, vi: 2, s: 3 };
         var at = function (k) { return m[k] != null ? cells[m[k]] : null; };
-        var en = at('en') ? cellText(at('en')) : '', vi = at('vi') ? cellText(at('vi')) : '';
+        var rawEn = at('en') ? cellText(at('en')).replace(/\n/g, ' ').trim() : '';
+        var hasStarInEn = /★/.test(rawEn);
+        var en = rawEn.replace(/★/g, '').trim();
+        var vi = at('vi') ? cellText(at('vi')) : '';
         if (!en || !vi) return;
-        var im = [];
-        cells.forEach(function (c) { c.querySelectorAll('img').forEach(function (x) { var s = x.getAttribute('src') || ''; if (/^data:image\//.test(s)) im.push(s); }); });
-        out.push({ en: en.replace(/\n/g, ' '), p: at('p') ? cellText(at('p')).replace(/\n/g, ' ') : '', vi: vi,
-          i: at('i') ? cellText(at('i')) : '', s: 0, u: 1, ts: Date.now(), im: im.slice(0, 6) });
+        var sTxt = at('s') ? cellText(at('s')).trim() : '';
+        var isSaved = hasStarInEn || /★|đã lưu|da luu|1|true|yes/i.test(sTxt) ? 1 : 0;
+        out.push({ en: en, p: at('p') ? cellText(at('p')).replace(/\n/g, ' ') : '', vi: vi,
+          i: '', s: isSaved, u: 1, ts: Date.now(), im: [] });
       });
     });
     return out;
@@ -18944,8 +19193,8 @@ function viSelText(range) {
   function parseDictJSON(o) {
     var a = Array.isArray(o) ? o : (o.terms || []);
     return a.map(function (t) {
-      return { en: String(t.en || '').trim(), p: String(t.p || '').trim(), vi: String(t.vi || '').trim(), i: String(t.i || ''),
-        s: t.s ? 1 : 0, u: 1, ts: t.ts || Date.now(), im: imgsOK(t.im) };
+      return { en: String(t.en || '').replace(/★/g, '').trim(), p: String(t.p || '').trim(), vi: String(t.vi || '').trim(), i: '',
+        s: (t.s || t.saved) ? 1 : 0, u: 1, ts: t.ts || Date.now(), im: [] };
     }).filter(function (t) { return t.en && t.vi; });
   }
   function parseNotesJSON(o) {
@@ -19078,7 +19327,7 @@ function viSelText(range) {
       '<button type="button" class="hs-b" data-x="' + k + '-json">⬇ Xuất JSON</button></div>' +
       '<label class="hs-b hs-imp">⬆ Nhập từ Word hoặc JSON<input type="file" accept=".json,.docx,.doc,.html,.htm" data-x="' + k + '-imp" hidden></label>' +
       '<div class="hs-hint">' + (dict
-        ? 'Word: bảng có các cột Tiếng Anh, Từ loại, Tiếng Việt, Thông tin. JSON giữ đủ ảnh và trạng thái đã lưu.'
+        ? 'Chỉ xuất thuật ngữ (Tiếng Anh, Từ loại, Tiếng Việt) kèm đánh dấu từ đã lưu (★), không kèm ảnh và thông tin giải thích.'
         : 'Word: mỗi ghi chú là một tiêu đề (Heading 2), kèm dòng “Phân mục” và nội dung. JSON giữ đủ ảnh và phân mục.') +
       ' Nhập chỉ thêm mục mới, không xóa dữ liệu hiện có.</div></div>';
   }
@@ -19228,11 +19477,11 @@ function viSelText(range) {
   }
   function toastM(m) { try { showToast(m); } catch (e) {} }
 
-  /* ---------- dữ liệu đưa vào mã QR (bỏ ảnh, rút gọn trường) ---------- */
+  /* ---------- dữ liệu đưa vào mã QR (từ điển chỉ xuất thuật ngữ + dấu đã lưu, bỏ ảnh & thông tin) ---------- */
   function dictItems() {
     return rdArr(DK).map(function (t) {
       return { e: String(t.en || '').slice(0, 120), p: String(t.p || '').slice(0, 16), v: String(t.vi || '').slice(0, 300),
-        i: String(t.i || '').slice(0, 200), s: t.s ? 1 : 0 };
+        s: t.s ? 1 : 0 };
     }).filter(function (t) { return t.e && t.v; });
   }
   function notesItems() {
@@ -19285,7 +19534,7 @@ function viSelText(range) {
       '<span>Mã ' + (s.i + 1) + ' / ' + s.qrs.length + ' · ' + q.n + ' mục</span>' +
       '<button type="button" data-x="' + k + '-next"' + (s.i >= s.qrs.length - 1 ? ' disabled' : '') + '>Sau ›</button>';
     box.appendChild(nav);
-    if (stt) stt.textContent = 'Ảnh không đưa vào mã QR (dùng Word/JSON để giữ ảnh).';
+    if (stt) stt.textContent = k === 'dict' ? 'Xuất thuật ngữ kèm đánh dấu từ đã lưu (★).' : 'Ảnh không đưa vào mã QR (dùng Word/JSON để giữ ảnh).';
   }
   async function genQr(k) {
     var box = document.getElementById('rhm-qa-' + k);
@@ -19309,7 +19558,7 @@ function viSelText(range) {
     return '<div class="rhm-col rhm-' + k + '">' +
       '<div class="rhm-hd"><span class="rhm-ic">' + (d ? '📖' : '📒') + '</span><div><div class="rhm-tt">' +
       (d ? 'Từ điển thuật ngữ RHM' : 'Sổ ghi chú RHM') + '</div><div class="rhm-cn" id="hs-cnt-' + k + '"></div></div></div>' +
-      '<div class="rhm-hint">' + (d ? 'Word: bảng 4 cột. JSON giữ đủ ảnh và trạng thái đã lưu.' : 'Word: tiêu đề Heading 2 và dòng “Phân mục”. JSON giữ đủ ảnh và phân mục.') + '</div>' +
+      '<div class="rhm-hint">' + (d ? 'Chỉ xuất thuật ngữ kèm đánh dấu từ đã lưu (★).' : 'Word: tiêu đề Heading 2 và dòng “Phân mục”. JSON giữ đủ ảnh và phân mục.') + '</div>' +
       '<div class="rhm-qa" id="rhm-qa-' + k + '"></div>' +
       '<div class="rhm-r2"><button type="button" class="rhm-s" data-x="' + k + '-word">⬇ Xuất Word</button>' +
       '<button type="button" class="rhm-s" data-x="' + k + '-json">⬇ Xuất JSON</button></div>' +
@@ -19473,7 +19722,7 @@ function viSelText(range) {
     .custom-yt-controls .yt-iconrow > button.bg-blue-600,
     .custom-yt-controls .yt-iconrow > button.yt-btn-active,
     .custom-yt-wrapper.sub-editing .custom-yt-controls .yt-iconrow > button[onclick*="toggleSubPanel"],
-    .custom-yt-wrapper.theater-mode .custom-yt-controls .yt-iconrow > button[id^="theater-btn-"],
+    .custom-yt-wrapper.theater-mode:not(.yt-fs) .custom-yt-controls .yt-iconrow > button[id^="theater-btn-"],
     .custom-yt-wrapper.yt-fs .custom-yt-controls .yt-iconrow > button[onclick*="toggleYtFullscreen"] {
       background: #2563eb !important;
       border-color: #60a5fa !important;
@@ -19991,7 +20240,7 @@ html.rhm-dragging,html.rhm-dragging body{-webkit-user-select:none;user-select:no
       var r;
       if (k === 'dict') {
         var list = items.map(function (x) {
-          return { en: String(x.e || '').trim(), p: String(x.p || '').trim(), vi: String(x.v || '').trim(), i: String(x.i || ''), s: x.s ? 1 : 0, u: 1, ts: Date.now(), im: [] };
+          return { en: String(x.e || '').trim(), p: String(x.p || '').trim(), vi: String(x.v || '').trim(), i: '', s: x.s ? 1 : 0, u: 1, ts: Date.now(), im: [] };
         }).filter(function (t) { return t.en && t.vi; });
         if (!list.length) { toast('Không có thuật ngữ hợp lệ trong mã QR'); return; }
         r = IO.mergeDict(list);
