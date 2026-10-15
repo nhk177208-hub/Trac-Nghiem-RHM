@@ -14254,41 +14254,187 @@ function aiEnVoice(pref) {
 }
 /* Tạo phát âm cho một đoạn: tiếng Anh → giọng Anh bản xứ cùng giới (khóa cứng lang en-US/en-GB để không bị đọc nhầm sang tiếng Pháp/Tây Ban Nha); còn lại → giọng Việt đã chọn */
 function aiUttFor(text, v) {
-    let enForce = false; if (typeof text === 'string' && text.charCodeAt(0) === 1) { enForce = true; text = text.slice(1); }
-    const ut = new SpeechSynthesisUtterance(text);
-    if (enForce || aiIsEnglishText(text)) {
+    let enForce = false;
+    if (typeof text === 'string' && text.charCodeAt(0) === 1) {
+        enForce = true;
+        text = text.slice(1);
+    }
+    const cleanTxt = String(text || '').replace(/[()\[\]"]/g, ' ').replace(/\s+/g, ' ').trim();
+    const ut = new SpeechSynthesisUtterance(cleanTxt || text);
+    const isEn = enForce || aiIsEnglishText(cleanTxt);
+    ut._isEn = isEn;
+    if (isEn) {
         const ev = aiEnVoice(aiVoicePrefKey());
         const vLang = ev && /^en[-_](?:US|GB|AU|CA)$/i.test(String(ev.lang || '').trim()) ? String(ev.lang).replace('_', '-') : 'en-US';
         ut.lang = vLang;
         if (ev) ut.voice = ev;
     } else {
-        ut.lang = 'vi-VN';
+        ut.lang = (v && v.lang) || 'vi-VN';
         if (v) ut.voice = v;
     }
     return ut;
 }
-function aiIsEnWord(t) { var s = String(t || '').trim(); return s.length > 0 && /^[A-Za-z][A-Za-z\s'\-.,\/]*$/.test(s) && /[A-Za-z]{2,}/.test(s); } function aiLangPieces(arr) { var out = []; arr.forEach(function (p) { if (p.charCodeAt(0) === 1) { out.push(p); return; } var re = /\(([^()]*)\)/g, last = 0, m; while ((m = re.exec(p))) { var pre = p.slice(last, m.index); if (pre.trim()) out.push(pre); if (aiIsEnWord(m[1])) out.push('\u0001' + m[1].trim()); else out.push('(' + m[1] + ')'); last = m.index + m[0].length; } var rest = p.slice(last); if (rest.trim()) out.push(rest); }); return out; } function aiPlainSents(t) { var a = String(t || '').replace(/\[\[(EN|VI)\]\]/g, ' ').replace(/[*#_`>]/g, ' ').replace(/\s+/g, ' ').trim().match(/[^.!?…]+[.!?…]*/g) || []; return a.map(function (x) { return x.trim(); }).filter(function (x) { return /[\p{L}\p{N}]/u.test(x); }); } function aiTtsStartBi(bubble, btn) { if (!('speechSynthesis' in window)) { showToast('Trình duyệt không hỗ trợ đọc to'); return; } aiTtsStop(); var lt = bubble._lt || {}, en = aiPlainSents(lt.en), vi = aiPlainSents(lt.vi), seq = [], n = Math.max(en.length, vi.length); for (var i = 0; i < n; i++) { if (en[i]) seq.push('\u0001' + en[i]); if (vi[i]) seq.push(vi[i]); } var pieces = aiLangPieces(seq); if (!pieces.length) { showToast('Chưa có nội dung để đọc'); return; } var st = { bubble: bubble, btn: btn || null }; aiTts = st; aiTtsLabel(st.btn, true); aiTtsSync(); var v = aiVoicePick(), pi = 0; var speak = function () { if (aiTts !== st) return; if (pi >= pieces.length) { aiTtsStop(); return; } var ut = aiUttFor(pieces[pi++], v); ut.rate = aiRateGet(); ut.pitch = aiVoicePitch(); ut.onend = speak; ut.onerror = function (e) { if (aiTts === st && e.error !== 'canceled' && e.error !== 'interrupted') { aiTtsStop(); showToast('Không đọc được (thiết bị chưa có giọng đọc tiếng Việt?)'); } }; st.cur = ut; window.speechSynthesis.speak(ut); }; setTimeout(speak, 80); } function aiTtsStart(bubble, from, to, btn) {   // đọc cả bong bóng (from/to rỗng) hoặc chỉ đoạn [from, to)
-        if (!('speechSynthesis' in window)) { showToast('Trình duyệt không hỗ trợ đọc to'); return; }
-        aiTtsStop();
-        let runB = (bubble.dataset && bubble.dataset.bkRun) ? Array.from(document.querySelectorAll('#ai-messages .ai-bub')).filter(x => x.dataset && x.dataset.bkRun === bubble.dataset.bkRun) : [bubble]; if (runB.indexOf(bubble) < 0) runB = [bubble]; runB = runB.slice(runB.indexOf(bubble)); if (from == null) from = 0;
-        const units = []; runB.forEach(bb => { const fl = aiTtsMap(bb).flat; const f0 = bb === bubble ? from : 0, t0 = (bb === bubble && to != null) ? to : fl.length; aiTtsSentences(fl, f0, t0).forEach(u => { const t = aiTtsClean(fl.slice(u.s, u.e)); if (/[\p{L}\p{N}]/u.test(t)) units.push({ b: bb, s: u.s, e: u.e, t: t }); }); });
-        if (!units.length) { showToast('Chưa có nội dung để đọc'); return; }
-        const st = { bubble, btn: btn || null }; aiTts = st; aiTtsLabel(st.btn, true); aiTtsSync();
-        const v = aiVoicePick(); let ui = 0, pi = 0, pieces = [];
-        const speak = () => {
-            if (aiTts !== st) return;
-            if (pi >= pieces.length) {
-                if (ui >= units.length) { aiTtsStop(); return; }
-                const u = units[ui++]; aiTtsMark(u.b, u.s, u.e);
-                pieces = aiLangPieces(u.t.length > 220 ? (u.t.match(/.{1,200}(\s|$)/g) || [u.t]) : [u.t]); pi = 0;
-            }
-            const ut = aiUttFor(pieces[pi++], v); ut.rate = aiRateGet(); ut.pitch = aiVoicePitch();
-            ut.onend = speak;
-            ut.onerror = (e) => { if (aiTts === st && e.error !== 'canceled' && e.error !== 'interrupted') { aiTtsStop(); showToast('Không đọc được (thiết bị chưa có giọng đọc tiếng Việt?)'); } };
-            st.cur = ut; window.speechSynthesis.speak(ut);
-        };
-        setTimeout(speak, 80);
+const AI_VI_DIACRITIC_RE = /[ăâđêôơưạảấầẩẫậắằẳẵặẹẻẽếềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹáàãéèẽíìĩóòõúùũýỳỹ]/i;
+const AI_VI_NO_ACCENT_SET = new Set(['va','hoac','cua','trong','ngoai','nhung','khong','duoc','mot','nhu','khi','voi','cho','theo','hay','nao','la','ve','tai','rang','nuou','tuy','xuong','ham','mat','moi','luoi','chan','than','men','nga','chop','ong','buong','xoang','mang','day','chang','khop','can','viem','sau','nhiem','trung','benh','ly','dieu','tri','tram','bit','nho','cao','voi','mao','cau','phuc','hinh','chinh','nha','noi','chu','phau','thuat','lam','sang','chan','doan','trieu','chung','nguyen','nhan','co','che','ket','qua','muc','dich','yeu','to','nguy','co','bien','chung','chi','dinh','chong','buoc','quy','trinh','ky','thuat','vat','lieu','dung','cu','thuoc','lieu','luong','thoi','gian','ngay','tuan','thang','nam','phan','tram','tren','duoi','giua','truoc','sau','trai','phai','ben','canh','vung','khu','vuc','lop','mo','te','bao','mach','mau','than','kinh','tuyen','nuoc','bot']);
+
+function aiIsEnWord(t) {
+    const s = String(t || '').trim();
+    if (!s || AI_VI_DIACRITIC_RE.test(s)) return false;
+    const words = s.match(/[A-Za-z]+/g) || [];
+    if (!words.length) return false;
+    if (words.length === 1 && words[0].length === 1) return false;
+    if (words.every(w => AI_VI_NO_ACCENT_SET.has(w.toLowerCase()))) return false;
+    return words.some(w => w.length >= 2);
+}
+
+function aiSplitInlineEnTokens(segText) {
+    const s = String(segText || '');
+    if (!s.trim()) return [];
+    const tokens = s.match(/\S+|\s+/g) || [s];
+    const items = tokens.map(tok => {
+        if (/^\s+$/.test(tok)) return { tok, type: 'ws' };
+        const core = tok.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, '');
+        if (!core) return { tok, type: 'punct' };
+        if (AI_VI_DIACRITIC_RE.test(core)) return { tok, type: 'vi' };
+        const letters = core.replace(/[^A-Za-z]/g, '');
+        if (!letters) return { tok, type: 'num' };
+        const low = letters.toLowerCase();
+        if (AI_VI_NO_ACCENT_SET.has(low)) return { tok, type: 'vi' };
+        const isDefEn = (letters.length >= 2 && letters === letters.toUpperCase()) ||
+                        /[fjwz]/i.test(letters) ||
+                        /(?:tion|sion|ment|ness|ity|ology|itis|osis|oma|pathy|ectomy|otomy|plasty|scopy|gram|graph|blasts?|clasts?|cytes?|dont|pulp|apic|gingiv|periodont|endodont|orthodont|prosthodont|implant|amalgam|composite|resin|enamel|dentin|cementum|caries|scaling|planing|obturation|irrigation|rotary|sealer|gutta|percha|biofilm|plaque|calculus|forceps|elevator|curette|probe|flap|suture|biopsy|lesion|ulcer|cyst|tumor|fracture|condyle|maxill|mandib|occlus|incisor|canine|premolar|molar|fluorid|anesthe|analges|antibiotic|steroid|syndrome|clinical|therapy|treatment|diagnosis|symptom|chronic|acute|mesial|distal|buccal|lingual|palatal|labial|coronal|radicular|furcation|recession|mobility|socket|graft|membrane|abutment|veneer|inlay|onlay|crown|bridge|denture|bracket|aligner|retainer)/i.test(core) ||
+                        (typeof NARR_VI_SYL !== 'undefined' && !NARR_VI_SYL.test(low) && letters.length >= 3);
+        return { tok, type: isDefEn ? 'en' : 'amb' };
+    });
+
+    for (let pass = 0; pass < 2; pass++) {
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].type !== 'amb') continue;
+            let prevType = 'vi', nextType = 'vi';
+            for (let j = i - 1; j >= 0; j--) { if (items[j].type !== 'ws') { prevType = items[j].type; break; } }
+            for (let j = i + 1; j < items.length; j++) { if (items[j].type !== 'ws') { nextType = items[j].type; break; } }
+            if (prevType === 'en' || nextType === 'en') items[i].type = 'en';
+        }
     }
+
+    const res = [];
+    let curEn = null, buf = '';
+    const flush = () => {
+        if (buf.trim()) res.push((curEn ? '\u0001' : '') + buf.trim());
+        buf = '';
+    };
+    items.forEach(it => {
+        if (it.type === 'ws' || it.type === 'punct' || it.type === 'num') {
+            buf += it.tok;
+            return;
+        }
+        const wantEn = it.type === 'en';
+        if (curEn === null) curEn = wantEn;
+        else if (wantEn !== curEn) {
+            flush();
+            curEn = wantEn;
+        }
+        buf += it.tok;
+    });
+    flush();
+    return res;
+}
+
+function aiLangPieces(arr) {
+    var out = [];
+    (Array.isArray(arr) ? arr : [arr]).forEach(function (p) {
+        if (!p) return;
+        if (p.charCodeAt(0) === 1) { out.push(p); return; }
+        var re = /\(([^()]+)\)|\[([^\[\]]+)\]|"([^"\n]{2,120})"/g, last = 0, m;
+        while ((m = re.exec(p))) {
+            var pre = p.slice(last, m.index);
+            if (pre.trim()) aiSplitInlineEnTokens(pre).forEach(function (x) { out.push(x); });
+            var inner = (m[1] || m[2] || m[3] || '').trim();
+            if (aiIsEnWord(inner)) {
+                if (AI_VI_DIACRITIC_RE.test(inner)) {
+                    aiSplitInlineEnTokens(inner).forEach(function (x) { out.push(x); });
+                } else {
+                    out.push('\u0001' + inner);
+                }
+            } else if (inner) {
+                aiSplitInlineEnTokens(inner).forEach(function (x) { out.push(x); });
+            }
+            last = m.index + m[0].length;
+        }
+        var rest = p.slice(last);
+        if (rest.trim()) aiSplitInlineEnTokens(rest).forEach(function (x) { out.push(x); });
+    });
+    return out;
+} function aiPlainSents(t) { var a = String(t || '').replace(/\[\[(EN|VI)\]\]/g, ' ').replace(/[*#_`>]/g, ' ').replace(/\s+/g, ' ').trim().match(/[^.!?…]+[.!?…]*/g) || []; return a.map(function (x) { return x.trim(); }).filter(function (x) { return /[\p{L}\p{N}]/u.test(x); }); } function aiApplyUttRatePitch(ut) {
+    ut.rate = aiRateGet();
+    ut.pitch = ut._isEn ? 1.0 : aiVoicePitch();
+}
+
+function aiTtsStartBi(bubble, btn) {
+    if (!('speechSynthesis' in window)) { showToast('Trình duyệt không hỗ trợ đọc to'); return; }
+    aiTtsStop();
+    var lt = bubble._lt || {}, en = aiPlainSents(lt.en), vi = aiPlainSents(lt.vi), seq = [], n = Math.max(en.length, vi.length);
+    for (var i = 0; i < n; i++) {
+        if (en[i]) seq.push('\u0001' + en[i]);
+        if (vi[i]) seq.push(vi[i]);
+    }
+    var pieces = aiLangPieces(seq);
+    if (!pieces.length) { showToast('Chưa có nội dung để đọc'); return; }
+    var st = { bubble: bubble, btn: btn || null };
+    aiTts = st; aiTtsLabel(st.btn, true); aiTtsSync();
+    var v = aiVoicePick(), pi = 0;
+    var speak = function () {
+        if (aiTts !== st) return;
+        if (pi >= pieces.length) { aiTtsStop(); return; }
+        var ut = aiUttFor(pieces[pi++], v);
+        aiApplyUttRatePitch(ut);
+        ut.onend = speak;
+        ut.onerror = function (e) { if (aiTts === st && e.error !== 'canceled' && e.error !== 'interrupted') { aiTtsStop(); showToast('Không đọc được (thiết bị chưa có giọng đọc?)'); } };
+        st.cur = ut;
+        window.speechSynthesis.speak(ut);
+    };
+    setTimeout(speak, 80);
+}
+
+function aiTtsStart(bubble, from, to, btn) {   // đọc cả bong bóng (from/to rỗng) hoặc chỉ đoạn [from, to)
+    if (!('speechSynthesis' in window)) { showToast('Trình duyệt không hỗ trợ đọc to'); return; }
+    aiTtsStop();
+    let runB = (bubble.dataset && bubble.dataset.bkRun) ? Array.from(document.querySelectorAll('#ai-messages .ai-bub')).filter(x => x.dataset && x.dataset.bkRun === bubble.dataset.bkRun) : [bubble];
+    if (runB.indexOf(bubble) < 0) runB = [bubble];
+    runB = runB.slice(runB.indexOf(bubble));
+    if (from == null) from = 0;
+    const units = [];
+    runB.forEach(bb => {
+        const fl = aiTtsMap(bb).flat;
+        const f0 = bb === bubble ? from : 0, t0 = (bb === bubble && to != null) ? to : fl.length;
+        aiTtsSentences(fl, f0, t0).forEach(u => {
+            const t = aiTtsClean(fl.slice(u.s, u.e));
+            if (/[\p{L}\p{N}]/u.test(t)) units.push({ b: bb, s: u.s, e: u.e, t: t });
+        });
+    });
+    if (!units.length) { showToast('Chưa có nội dung để đọc'); return; }
+    const st = { bubble, btn: btn || null };
+    aiTts = st; aiTtsLabel(st.btn, true); aiTtsSync();
+    const v = aiVoicePick();
+    let ui = 0, pi = 0, pieces = [];
+    const speak = () => {
+        if (aiTts !== st) return;
+        if (pi >= pieces.length) {
+            if (ui >= units.length) { aiTtsStop(); return; }
+            const u = units[ui++];
+            aiTtsMark(u.b, u.s, u.e);
+            pieces = aiLangPieces(u.t.length > 220 ? (u.t.match(/.{1,200}(\s|$)/g) || [u.t]) : [u.t]);
+            pi = 0;
+        }
+        const ut = aiUttFor(pieces[pi++], v);
+        aiApplyUttRatePitch(ut);
+        ut.onend = speak;
+        ut.onerror = (e) => { if (aiTts === st && e.error !== 'canceled' && e.error !== 'interrupted') { aiTtsStop(); showToast('Không đọc được (thiết bị chưa có giọng đọc?)'); } };
+        st.cur = ut;
+        window.speechSynthesis.speak(ut);
+    };
+    setTimeout(speak, 80);
+}
     function aiTtsToggle(bubble, btn) {
         const si = aiTtsSelInfo(bubble); if (si) { aiTtsStartSel(si); return; }
         if (aiTts && aiTts.bubble === bubble) { aiTtsStop(); return; } if (bubble._lt && bubble._lt.en && bubble._lt.vi && bubble._cur === 'both') { aiTtsStartBi(bubble, btn); return; }
