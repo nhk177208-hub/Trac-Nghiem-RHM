@@ -1265,8 +1265,6 @@
                 <button onclick="openCollectionModal()" class="hb-badge text-sm bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm">🏆 Bộ Sưu Tập Huy Hiệu</button>
                 <button onclick="openRhmDict()" class="text-sm bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm" title="Từ điển thuật ngữ RHM — tự thêm khi bạn dịch trong hộp chat đọc sách">📖 Từ Điển RHM <span id="rhm-dict-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
                 <button onclick="openRhmNote()" class="text-sm text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm" style="background:linear-gradient(90deg,#0d9488,#059669)" title="Sổ ghi chú — lưu từ các bong bóng chat AI">📒 Sổ Ghi Chú <span id="rhm-note-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
-                <button onclick="openBookmarkedModal()" class="text-sm bg-amber-50 hover:bg-amber-100 text-amber-700 font-semibold py-2.5 px-3 rounded-xl border border-amber-300 transition-colors">⭐ Đã lưu (<span id="total-bookmarked-count">0</span>)</button>
-                <button onclick="openBlockedModal()" class="text-sm bg-rose-50 hover:bg-rose-100 text-rose-700 font-semibold py-2.5 px-3 rounded-xl border border-rose-300 transition-colors">🚫 Đã chặn (<span id="total-blocked-count">0</span>)</button>
                 <button onclick="openHomeSettings()" class="hb-set text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2.5 px-4 rounded-xl border border-gray-300 shadow-sm transition-colors">⚙️ Cài Đặt</button>
             </div>
 
@@ -1312,15 +1310,24 @@
             <!-- KHU VỰC HIỂN THỊ 36 CHUYÊN ĐỀ (MẶC ĐỊNH MỞ) -->
             <div id="chuyende-section-container" class="mb-8">
                 <!-- 3 NÚT TÍNH NĂNG CHÍNH THUỘC ÔN TẬP THEO CHUYÊN ĐỀ -->
-                <div class="flex items-stretch gap-3 mb-5">
-                    <button onclick="openMockExamModal()" class="flex-1 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-sm text-base flex items-center justify-center text-center">
+                <div class="flex items-stretch gap-2.5 sm:gap-3 mb-3">
+                    <button onclick="openMockExamModal()" class="flex-1 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-white font-bold py-3 px-3 sm:px-4 rounded-xl transition-all shadow-sm text-sm sm:text-base flex items-center justify-center text-center">
                         ⚡ Ôn Tập Nhanh
                     </button>
-                    <button onclick="openDeepModal()" class="flex-1 bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-sm text-base flex items-center justify-center text-center">
+                    <button onclick="openDeepModal()" class="flex-1 bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white font-bold py-3 px-3 sm:px-4 rounded-xl transition-all shadow-sm text-sm sm:text-base flex items-center justify-center text-center">
                         🧠 Ôn Tập Chuyên Sâu
                     </button>
-                    <button onclick="openExamModal()" class="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-sm text-base flex items-center justify-center text-center">
+                    <button onclick="openExamModal()" class="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-3 px-3 sm:px-4 rounded-xl transition-all shadow-sm text-sm sm:text-base flex items-center justify-center text-center">
                         🎯 Thi Thử (Mock Exam)
+                    </button>
+                </div>
+                <!-- 2 NÚT ĐÃ LƯU & ĐÃ CHẶN: DÀN NGANG 1 DÒNG BẰNG ĐỘ DÀI MÀN HÌNH NGANG KỂ CẢ TRÊN MOBILE DỌC -->
+                <div class="grid grid-cols-2 gap-2.5 sm:gap-3 w-full mb-5">
+                    <button onclick="openBookmarkedModal()" class="w-full flex items-center justify-center gap-1.5 text-sm sm:text-base bg-amber-50 hover:bg-amber-100 text-amber-700 font-bold py-2.5 px-3 rounded-xl border border-amber-300 shadow-sm transition-colors whitespace-nowrap">
+                        <span>⭐ Đã lưu (<span id="total-bookmarked-count">0</span>)</span>
+                    </button>
+                    <button onclick="openBlockedModal()" class="w-full flex items-center justify-center gap-1.5 text-sm sm:text-base bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold py-2.5 px-3 rounded-xl border border-rose-300 shadow-sm transition-colors whitespace-nowrap">
+                        <span>🚫 Đã chặn (<span id="total-blocked-count">0</span>)</span>
                     </button>
                 </div>
                 <div class="flex justify-between items-center mb-4 flex-wrap gap-3">
@@ -12805,9 +12812,10 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     /* ---------- DỊCH & ĐỔI NGÔN NGỮ TỪNG BONG BÓNG + CỬA SỔ PHỤ TIẾNG ANH ---------- */
     async function aiTranslate(text, to) {
         const src = String(text || '').replace(/\[\[(?:EN|VI)\]\]/g, '').trim(); if (!src) return null;
+        const gloss = (to !== 'en' && typeof window.rhmDictGlossary === 'function') ? window.rhmDictGlossary(src) : '';
         const sys = to === 'en'
             ? 'You are a professional medical translator. Translate the user text into natural, accurate English. Keep the exact structure, line breaks, markdown (**bold**, bullets), numbering and time stamps such as [mm:ss] unchanged. Return ONLY a JSON object {"t":"<translation>"}.'
-            : 'Bạn là biên dịch viên y khoa chuyên nghiệp. Dịch văn bản của người dùng sang tiếng Việt tự nhiên, chính xác (thuật ngữ chuyên môn dùng cách gọi thông dụng trong y khoa Việt Nam). Giữ nguyên cấu trúc, xuống dòng, markdown (**in đậm**, gạch đầu dòng), đánh số và mốc thời gian như [mm:ss]. Chỉ trả về MỘT đối tượng JSON {"t":"<bản dịch>"}.';
+            : 'Bạn là giáo sư đầu ngành Răng Hàm Mặt và biên dịch viên y khoa chuyên nghiệp. Dịch văn bản của người dùng sang tiếng Việt tự nhiên, chính xác theo chuẩn giảng dạy RHM miền Nam Việt Nam.' + gloss + ' Giữ nguyên cấu trúc, xuống dòng, markdown (**in đậm**, gạch đầu dòng), đánh số và mốc thời gian như [mm:ss]. Chỉ trả về MỘT đối tượng JSON {"t":"<bản dịch>"}.';
         try { const v = await aiGeminiJson(sys, src, 8000); return (v && typeof v.t === 'string' && v.t.trim()) ? v.t.trim() : null; } catch (e) { return null; }
     }
     function aiSetBody(bubble, out) {
@@ -17941,19 +17949,52 @@ function openPop(mode, t) {
         } catch (e) { console.warn('[Từ điển RHM]', e); return null; }
     };
 
-    /* Thuật ngữ do người dùng thêm/sửa tay: đưa vào lời nhắc dịch để các lần sau dịch đúng theo từ này */
+    /* Đưa thuật ngữ trong Từ điển RHM vào lời nhắc dịch: ưu tiên bắt buộc dùng đúng các từ người dùng đã edit/thêm (t.u = 1) và đồng bộ với các từ đã có trong từ điển */
     window.rhmDictGlossary = function (text) {
         try {
-            const f = fold(text); if (f.length < 3) return '';
-            const hit = [];
-            parse().forEach(t => {
-                if (!t.u || hit.length >= 40) return;
-                const base = fold(t.en.replace(/\s*\(.*\)\s*$/, '')).trim(); if (base.length < 3) return;
-                const re = new RegExp('(^|[^a-z0-9])' + base.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '($|[^a-z0-9])');
-                if (re.test(f)) hit.push(t);
-            });
-            if (!hit.length) return '';
-            return ' Các thuật ngữ người dùng đã chỉnh trong từ điển (chỉ để THAM KHẢO khi đúng ngữ cảnh; nếu trong đoạn này từ mang nghĩa khác thì dịch theo nghĩa đúng ngữ cảnh, KHÔNG ép theo từ điển): ' + hit.map(t => '"' + t.en + '" = "' + lowVi(String(t.vi).replace(/\n+/g, ' / ')) + '"').join('; ') + '. ';
+            const f = fold(text); if (f.length < 2) return '';
+            const allTerms = (rd.terms && rd.terms.length) ? rd.terms : parse();
+            if (!allTerms.length) return '';
+            const userHits = [], autoHits = [];
+            const matchInText = (enStr) => {
+                const sp = splitAbbr(enStr);
+                const cands = [fold(sp.head)];
+                if (sp.hasParen && sp.full) cands.push(fold(sp.full));
+                const stem = fold(stemEnPhrase(enStr));
+                if (stem && !cands.includes(stem)) cands.push(stem);
+                return cands.some(base => {
+                    if (!base || base.length < 2) return false;
+                    const pat = base.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    const stemY = pat.endsWith('y') && pat.length > 3 ? '|' + pat.slice(0, -1) + 'ies' : '';
+                    const re = new RegExp('(^|[^a-z0-9])(?:' + pat + '(?:s|es)?' + stemY + ')($|[^a-z0-9])', 'i');
+                    return re.test(f);
+                });
+            };
+            const sorted = allTerms.slice().sort((a, b) => b.en.length - a.en.length);
+            for (const t of sorted) {
+                if (!t || !t.en || !t.vi) continue;
+                if (userHits.length >= 60 && autoHits.length >= 60) break;
+                if (!matchInText(t.en)) continue;
+                if (t.u) {
+                    if (userHits.length < 60) userHits.push(t);
+                } else {
+                    if (autoHits.length < 60) autoHits.push(t);
+                }
+            }
+            if (!userHits.length && !autoHits.length) return '';
+            const fmtList = arr => arr.map(t => {
+                const head = String(t.en).replace(/\s*\(.*\)\s*$/, '').trim();
+                const label = head !== t.en ? head + ' (' + t.en + ')' : t.en;
+                return '"' + label + '" => "' + lowVi(String(t.vi).replace(/\n+/g, ' / ')) + '"';
+            }).join('; ');
+            let promptOut = '';
+            if (userHits.length) {
+                promptOut += ' QUY TẮC TỪ ĐIỂN BẮT BUỘC (ƯU TIÊN TUYỆT ĐỐI): Người dùng đã trực tiếp chỉnh sửa/cập nhật các thuật ngữ sau trong Từ điển RHM; khi dịch BẮT BUỘC PHẢI SỬ DỤNG CHÍNH XÁC nghĩa tiếng Việt đã quy định dưới đây (nếu một từ có nhiều nghĩa ngăn cách bởi dấu "/" thì chọn đúng nghĩa phù hợp ngữ cảnh trong số đó, TUYỆT ĐỐI KHÔNG tự ý dịch sang từ khác): ' + fmtList(userHits) + '.';
+            }
+            if (autoHits.length) {
+                promptOut += ' Các thuật ngữ khác đã có trong Từ điển RHM của người dùng (hãy dùng thống nhất đúng các nghĩa này khi dịch để đồng bộ thuật ngữ): ' + fmtList(autoHits.slice(0, Math.max(15, 70 - userHits.length))) + '.';
+            }
+            return promptOut + ' ';
         } catch (e) { return ''; }
     };
 })();
