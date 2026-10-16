@@ -9421,16 +9421,23 @@ function bkSelTextDom() {
 /* ---------- tô sáng phân mục đang chọn (hộp vàng đúng vị trí chữ) ---------- */
 async function bkApplyHl(pg) {
     const ex = bkPages[pg.num - 1];
-    if (!(bkHl && ex && ex.rg && ex.ge > bkHl.s && ex.gs < bkHl.e && pg.state === 'done')) { pg.hlL.textContent = ''; return; }
+    const activeSec = (bkSecSel >= 0 && bkSecs[bkSecSel]) ? bkSecs[bkSecSel] : null;
+    const spans = (activeSec && Array.isArray(activeSec.spans) && activeSec.spans.length)
+        ? activeSec.spans
+        : (bkHl ? [bkHl] : []);
+    if (!(spans.length && ex && ex.rg && spans.some(sp => ex.ge > sp.s && ex.gs < sp.e) && pg.state === 'done')) {
+        pg.hlL.textContent = '';
+        return;
+    }
     let data;
     try { data = await bkPageData(pg); } catch (e) { return; }
     pg.hlL.textContent = '';
-    if (pg.state !== 'done' || !bkHl) return;
+    if (pg.state !== 'done' || !spans.length) return;
     const s = bkScale, frag = document.createDocumentFragment();
     data.items.forEach(d => {
         if (d.ws) return;
         const r = ex.rg[d.idx];
-        if (!r || !(r.e > bkHl.s && r.s < bkHl.e)) return;
+        if (!r || !spans.some(sp => r.e > sp.s && r.s < sp.e)) return;
         const bx = bkHlBox(d, data, ex); if (!bx) return;
         const el = document.createElement('div');
         el.className = 'bk-hr';
@@ -9563,31 +9570,9 @@ function bkModeFh(items) {   // cỡ chữ phổ biến nhất của trang (là 
     const c = {}; items.forEach(it => { const k = Math.round(it.fh * 2) / 2; c[k] = (c[k] || 0) + (it.str || '').length; });
     let best = 10, n = -1; Object.keys(c).forEach(k => { if (c[k] > n) { n = c[k]; best = +k; } }); return best;
 }
-function bkReaderRules() {
-    const m = bkMenu;
-    const ch = bkChapterMenu();
-    const def = {
-        reading_order: 'col1_top_down_then_col2',
-        auto_two_column: true,
-        column_gutter_min_ratio: 0.018,
-        header_top_ratio: 0.92,
-        footer_bottom_ratio: 0.08,
-        repeated_hf_page_ratio: 0.3,
-        min_body_font_ratio: 0.85,
-        skip_graphics_boxes: true,
-        skip_captions: true,
-        caption_regex: '^(?:table|tbl\\.?|fig\\.?|figure|box|chart|graph|scheme|plate|hình|bảng|hộp|sơ đồ|biểu đồ|ảnh)\\s*\\d',
-        skip_footnotes: true,
-        skip_figure_labels: true,
-        dehyphenate_line_breaks: true
-    };
-    return Object.assign(def, (m && m.reader_rules) || {}, (ch && ch.reader_rules) || {});
-}
 function bkZone(it, pg) { return it.y > pg.h * 0.92 ? 'T' : (it.y < pg.h * 0.08 ? 'B' : ''); }
 async function bkExtract(doc, tok, onProg) {
     const raw = [];
-    const R = bkReaderRules();
-    bkTocBegin();   // MucLuc.html -> Menu.html: khởi tạo luật cho lần đọc chữ này
     for (let p = 1; p <= doc.numPages; p++) {
         if (tok !== bkViewTok) return null;
         const page = await doc.getPage(p);
@@ -9600,106 +9585,82 @@ async function bkExtract(doc, tok, onProg) {
             const t = it.transform;
             its.push({ idx, str: it.str, x: t[4], y: t[5], w: it.width || 0, fh: Math.hypot(t[2], t[3]) || 10, bd: bkIsBold(page, it.fontName) });
         });
-        const boxes = R.skip_graphics_boxes !== false ? await bkImageBoxes(page) : [];
+        const boxes = await bkImageBoxes(page);
         raw.push({ num: p, w: vp.width, h: vp.height, its, boxes });
         if (onProg && p % 5 === 0) onProg(p, doc.numPages);
     }
-    const topR = Number(R.header_top_ratio) || 0.92;
-    const botR = Number(R.footer_bottom_ratio) || 0.08;
-    const zoneOf = (it, pg) => it.y > pg.h * topR ? 'T' : (it.y < pg.h * botR ? 'B' : '');
-    const key = (pg, it) => { const z = zoneOf(it, pg); return z ? z + '|' + it.str.replace(/\d+/g, '#').replace(/\s+/g, ' ').trim().toLowerCase() : ''; };
+    const key = (pg, it) => { const z = bkZone(it, pg); return z ? z + '|' + it.str.replace(/\d+/g, '#').replace(/\s+/g, ' ').trim().toLowerCase() : ''; };
     const cnt = {};
     raw.forEach(pg => { const seen = {}; pg.its.forEach(it => { const k = key(pg, it); if (k && !seen[k]) { seen[k] = 1; cnt[k] = (cnt[k] || 0) + 1; } }); });
-    const thr = Math.max(2, Math.ceil(raw.length * (Number(R.repeated_hf_page_ratio) || 0.3)));
+    const thr = Math.max(2, Math.ceil(raw.length * 0.3));
     raw.forEach(pg => pg.its.forEach(it => {
-        const z = zoneOf(it, pg), k = key(pg, it);
+        const z = bkZone(it, pg), k = key(pg, it);
         it.hf = !!z && ((cnt[k] || 0) >= thr || /^\s*\d{1,4}\s*$/.test(it.str));
     }));
-    const capRe = new RegExp(R.caption_regex || '^(?:table|tbl\\.?|fig\\.?|figure|box|hình|bảng|hộp|sơ đồ|ảnh)\\s*\\d', 'i');
-    const minFhRatio = Number(R.min_body_font_ratio) || 0.85;
     const pages = []; let G = '';
+    const isCap = t => /^(table|tbl\.?|fig\.?|figure|box|chart|graph|scheme|diagram|plate|panel|outline|chapter\s+outline|contents|key\s+points|learning\s+objectives|hình|bảng|hộp|khung|biểu\s*đồ|sơ\s*đồ|ảnh|chú\s*thích|mục\s*lục)\b\s*(\d|[A-Z]|:|\.)?/i.test(t.trim());
     raw.forEach(pg => {
         const W = pg.w, body0 = pg.its.filter(it => !it.hf);
         const bodyFh = bkModeFh(body0);
         const excl = new Set();
-        const Lay = bkPageLayout(pg.num), hasCols = !!(Lay && Lay.hasCols);
-        if (Lay) pg.its.forEach(it => { it._cell = bkLayoutCell((it.x + (it.w || 0) / 2) / W, (pg.h - it.y) / pg.h, Lay); });
-        const cid = it => (hasCols && it._cell) ? it._cell.z * 16 + it._cell.c : (it.x < W * 0.5 ? 0 : 1);
-        if (Lay) body0.forEach(it => { if (!it._cell) excl.add(it); });
-        // Menu.html (qua MucLuc.html) quyết định mảnh chữ nào không đưa vào chữ chương
-        bkTocPageHook('excludeItems', { pg, body0, excl, bodyFh, cid, rules: R });
-        const isCap = t => capRe.test(String(t || '').trim());
-        // 1) chữ nằm trong khung ảnh (hình, ảnh chụp, sơ đồ, biểu đồ, bảng kẻ…)
-        if (R.skip_graphics_boxes !== false) {
-            (pg.boxes || []).forEach(b => body0.forEach(it => { if (it.x >= b.x0 - 2 && it.x <= b.x1 + 2 && it.y >= b.y0 - 2 && it.y <= b.y1 + 2) { const lw = (o0) => body0.filter(o => cid(o) === cid(o0) && Math.abs(o.y - o0.y) < 0.5 * o0.fh).reduce((n, o) => n + o.str.trim().split(/\s+/).filter(Boolean).length, 0); if (b.r === 1) { const s0 = it.str.trim(); if (it.bd || it.fh > bodyFh * 1.04 || (s0.length >= 3 && s0 === s0.toUpperCase() && /[A-Z]/.test(s0)) || lw(it) >= 2) return; }
-if ((b.r === 2 || b.r === 3) && (it.bd || lw(it) > 3)) return; excl.add(it); } }));
-        }
-        // 2) chữ cỡ nhỏ hơn thân bài (chú thích, chữ trong bảng, chú thích cuối bảng)
-        body0.forEach(it => { if (it.fh < minFhRatio * bodyFh) excl.add(it); });
-        body0.forEach(it => { if (!it.str.trim()) excl.add(it); });
-        if (R.skip_footnotes !== false) {
-            const fn = body0.filter(o => /^[*†‡]/.test(o.str.trim()) && o.y < pg.h * 0.4).sort((a, b) => b.y - a.y)[0];
+        const cid = it => (it.x + (it.w || 0) * 0.3 < W * 0.5 ? 0 : 1);
+
+        // 1) Khóa toàn bộ chữ nằm trong khung đồ họa, hình ảnh, bảng kẻ, hộp (box), ô, biểu đồ
+        (pg.boxes || []).forEach(b => body0.forEach(it => {
+            if (it.x >= b.x0 - 4 && it.x <= b.x1 + 4 && it.y >= b.y0 - 4 && it.y <= b.y1 + 4) {
+                excl.add(it);
+            }
+        }));
+        // 2) Khóa chữ cỡ nhỏ hơn thân bài (chú thích ảnh, footnote, chữ trong bảng/biểu đồ/ô)
+        body0.forEach(it => { if (it.fh < 0.86 * bodyFh || !it.str.trim()) excl.add(it); });
+        // 3) Khóa chú thích cuối trang (footnote bắt đầu bằng *, †, ‡)
+        {
+            const fn = body0.filter(o => /^[*†‡§]/.test(o.str.trim()) && o.y < pg.h * 0.42).sort((a, b) => b.y - a.y)[0];
             if (fn) body0.forEach(o => { if (o.y <= fn.y + 0.5 * fn.fh) excl.add(o); });
         }
-        if (R.skip_figure_labels !== false) {
-            const bkLbl = /^\(?[A-Ha-h]\)?(\s+\(?[A-Ha-h]\)?)*$/;
-            body0.forEach(it => { if (bkLbl.test(it.str.trim()) && body0.filter(o => o !== it && o.str.trim() && Math.abs(o.y - it.y) < 0.5 * it.fh).every(o => bkLbl.test(o.str.trim()))) excl.add(it); });
-        }
-        // 3) chú thích bảng / hình và các dòng liên quan
-        if (R.skip_captions !== false) {
-            body0.forEach(it => {
-                if (excl.has(it) || !isCap(it.str) || body0.some(o => o !== it && o.str.trim() && Math.abs(o.y - it.y) < 0.5 * it.fh && o.x < it.x - 1)) return;
-                excl.add(it);
-                body0.forEach(o => { if (!excl.has(o) && Math.abs(o.y - it.y) < 0.6 * it.fh && o.x > it.x && o.x - (it.x + it.w) < 0.25 * W) excl.add(o); });
-                { let cur0 = it; for (let n0 = 0; n0 < 3; n0++) { const nx0 = body0.filter(o => !excl.has(o) && o.y < cur0.y && cid(o) === cid(it) && Math.abs(o.fh - it.fh) < 0.6 && cur0.y - o.y <= 2.2 * cur0.fh).sort((a, b) => b.y - a.y)[0]; if (!nx0) break; excl.add(nx0); cur0 = nx0; } }
-                const side = cid(it);
-                if (!/^(table|tbl|bảng)/i.test(it.str.trim())) { const upL = body0.filter(o => !excl.has(o) && o.y > it.y && o.y - it.y < 0.6 * pg.h).sort((a, b) => a.y - b.y); for (const o of upL) { const wc = o.str.trim().split(/\s+/).length; if (o.bd || wc >= 12 || (/[.!?]$/.test(o.str.trim()) && wc >= 6)) break; excl.add(o); } }
-                if (/^(table|tbl|bảng)/i.test(it.str.trim())) {
-                    const below = body0.filter(o => o.y < it.y && cid(o) === side).sort((a, b) => b.y - a.y);
-                    let yStop = null, prevY = it.y;
-                    for (const o of below) {
-                        const isPara = below.filter(q => Math.abs(q.y - o.y) < 0.5 * o.fh).reduce((n, q) => n + q.str.trim().split(/\s+/).filter(Boolean).length, 0) >= 9 && o.fh >= 0.95 * bodyFh;
-                        if (isPara && prevY - o.y > 2.0 * o.fh) { yStop = o.y; break; }
-                        prevY = o.y;
-                    }
-                    body0.forEach(o => {
-                        if (o.y >= it.y || excl.has(o) || cid(o) !== side) return;
-                        if (yStop !== null && o.y > yStop) excl.add(o);
-                    });
-                } else {
-                    let cur = it;
-                    for (let n1 = 0; n1 < 3; n1++) {
-                        const nx = body0.filter(o => !excl.has(o) && o.y < cur.y && cid(o) === side && Math.abs(o.fh - it.fh) < 0.6 && cur.y - o.y <= 2.2 * cur.fh).sort((a, b) => b.y - a.y)[0];
-                        if (!nx) break;
-                        excl.add(nx); cur = nx;
-                    }
-                }
-            });
-        }
+        // 4) Khóa nhãn đơn lẻ trong hình/sơ đồ (A, B, C...)
+        const bkLbl = /^\(?[A-Ha-h]\)?(\s+\(?[A-Ha-h]\)?)*$/;
+        body0.forEach(it => {
+            if (bkLbl.test(it.str.trim()) && body0.filter(o => o !== it && o.str.trim() && Math.abs(o.y - it.y) < 0.5 * it.fh).every(o => bkLbl.test(o.str.trim()))) excl.add(it);
+        });
+        // 5) Khóa khối Outline đầu chương, chú thích hình, bảng, hộp, khung
+        body0.forEach(it => {
+            if (excl.has(it) || !isCap(it.str)) return;
+            if (body0.some(o => o !== it && o.str.trim() && Math.abs(o.y - it.y) < 0.5 * it.fh && o.x < it.x - 2)) return;
+            excl.add(it);
+            body0.forEach(o => { if (!excl.has(o) && Math.abs(o.y - it.y) < 0.6 * it.fh && o.x > it.x && o.x - (it.x + it.w) < 0.35 * W) excl.add(o); });
+            const side = cid(it);
+            let cur = it;
+            for (let n1 = 0; n1 < 8; n1++) {
+                const nx = body0.filter(o => !excl.has(o) && o.y < cur.y && cid(o) === side && Math.abs(o.fh - it.fh) < 0.8 && cur.y - o.y <= 2.3 * cur.fh).sort((a, b) => b.y - a.y)[0];
+                if (!nx) break;
+                const lineWords = body0.filter(q => Math.abs(q.y - nx.y) < 0.5 * nx.fh && cid(q) === side).reduce((n, q) => n + q.str.trim().split(/\s+/).filter(Boolean).length, 0);
+                if (lineWords >= 12 && nx.fh >= 0.96 * bodyFh && cur.y - nx.y > 1.6 * cur.fh) break;
+                excl.add(nx);
+                body0.forEach(q => { if (!excl.has(q) && Math.abs(q.y - nx.y) < 0.5 * nx.fh && cid(q) === side) excl.add(q); });
+                cur = nx;
+            }
+        });
+
         const body = body0.filter(it => !excl.has(it));
-        // Quy luật đọc: cột trái (đầu → cuối trang) → cột phải (đầu → cuối trang) → sang trang sau (cột trái)
+        // Đọc theo dạng cột: từ trên xuống dưới hết cột 1 (trái) rồi qua cột 2 (phải) từ trên xuống dưới
         const byYX = (a, b) => b.y - a.y || a.x - b.x;
-        let ord;
-        if (hasCols) ord = body.slice().sort((p, q) => (cid(p) - cid(q)) || byYX(p, q));
-        else if (R.reading_order === 'single_column_top_down') ord = body.slice().sort(byYX);
-        else ord = body.filter(it => it.x < W * 0.5).sort(byYX).concat(body.filter(it => it.x >= W * 0.5).sort(byYX));
-        { const o2 = bkTocPageHook('trimOrder', { pg, ord, cid, byYX, rules: R }); if (Array.isArray(o2)) ord = o2; }
-        const col = cid;
+        const ord = body.filter(it => cid(it) === 0).sort(byYX).concat(body.filter(it => cid(it) === 1).sort(byYX));
         const base = G.length; let txt = ''; let prev = null; const rg = {};
 
         ord.forEach(it => {
             if (prev) {
-                if (col(prev) !== col(it) || Math.abs(it.y - prev.y) > Math.max(it.fh, prev.fh) * 0.5) txt += '\n';
+                if (cid(prev) !== cid(it) || Math.abs(it.y - prev.y) > Math.max(it.fh, prev.fh) * 0.5) txt += '\n';
                 else if (it.x - (prev.x + prev.w) > prev.fh * 0.15) txt += ' ';
             }
             rg[it.idx] = { s: base + txt.length, e: base + txt.length + it.str.length };
             txt += it.str; prev = it;
         });
-        const cands = bkTocPageHook('detectCandidates', { pg, ord, cid, rg, bodyFh, rules: R }) || [];
-        pages.push({ num: pg.num, w: pg.w, h: pg.h, rg, gs: base, ge: base + txt.length, cands, bfh: bodyFh, lay: Lay });
+        pages.push({ num: pg.num, w: pg.w, h: pg.h, rg, gs: base, ge: base + txt.length, cands: [], bfh: bodyFh, lay: null });
         G += txt + '\n\n';
     });
     return { pages, text: G };
+}
 }
 /* ---------- dựng khung các trang (chưa vẽ) ---------- */
 async function bkBuildVP(tok) {
@@ -9750,9 +9711,7 @@ async function bkOpenChapter(i) {
         const doc = await L.getDocument({ data: buf }).promise;
         if (tok !== bkViewTok) { try { doc.destroy(); } catch (e) {} return; }
         bkDoc = doc;
-        await bkLoadMucLuc(false);   // MucLuc.html: nhận diện mềm (luật + code)
-        // Vá 5: không còn nạp MucLuc.html / Menu.html / Menu.txt
-        const first = await doc.getPage(1);
+                const first = await doc.getPage(1);
         if (tok !== bkViewTok) return;
         // mở ra vừa bề ngang khung đọc
         const avail = Math.max(240, bkWrapEl.clientWidth - 24);
@@ -9771,11 +9730,9 @@ async function bkOpenChapter(i) {
         const ex = await bkExtract(bkDoc, tok, (n, t) => bkSetStatus('⏳ Đang đọc chữ chương: trang ' + n + '/' + t));
         if (!ex || tok !== bkViewTok) return;
         bkPages = ex.pages; bkText = ex.text;
-        bkPages = ex.pages; bkText = ex.text;
-        bkSecs = bkMergeSecs(bkV5Load(c.url), bkLoadManual(c.url).filter(x => x.manual));
+                bkSecs = bkLoadManual(c.url);
         bkRelink(); bkRenderSecList(); bkUpdateSecBtn();
         bkApplyHlAll();
-        bkSetStatus(bkText.trim() ? '' : 'Chương này không có chữ (có thể là PDF scan), AI không đọc được nội dung.');
         bkSetStatus(bkText.trim() ? '' : 'Chương này không có chữ (có thể là PDF scan), AI không đọc được nội dung.');
     } catch (e) {
         console.error(e);
@@ -9803,11 +9760,11 @@ function bkQuickTr() {
 function bkLoadManual(url) {
     try {
         const a = JSON.parse(localStorage.getItem('bk_sec_' + url) || '[]');
-        return Array.isArray(a) ? a.map(x => ({ title: x.title, en: x.en || x.title, num: x.num || '', lvl: x.lvl || 1, s: x.s, manual: !!x.manual, intro: !!x.intro, e: 0, text: '' })) : [];
+        return Array.isArray(a) ? a.map(x => ({ title: x.title, en: x.en || x.title, num: x.num || '', lvl: x.lvl || 1, s: x.s, spans: Array.isArray(x.spans) ? x.spans : null, manual: !!x.manual, intro: !!x.intro, e: 0, text: '' })) : [];
     } catch (e) { return []; }
 }
 function bkSaveManual() {
-    try { localStorage.setItem('bk_sec_' + bkCur.url, JSON.stringify(bkSecs.map(x => ({ title: x.title, en: x.en, num: x.num || '', lvl: x.lvl || 1, s: x.s, manual: !!x.manual, intro: !!x.intro })))); } catch (e) {}
+    try { localStorage.setItem('bk_sec_' + bkCur.url, JSON.stringify(bkSecs.map(x => ({ title: x.title, en: x.en, num: x.num || '', lvl: x.lvl || 1, s: x.s, spans: x.spans || null, manual: !!x.manual, intro: !!x.intro })))); } catch (e) {}
 }
 function bkRelink() {   // sắp xếp theo vị trí, mỗi phân mục kéo dài tới đầu phân mục kế tiếp
     const a = bkSecs.slice().sort((x, y) => x.s - y.s);
@@ -10013,277 +9970,336 @@ async function bkRunTr(text, title) {
     }
 }
 let bkObs = null;
-window.encPath = p => p.split('/').map(encodeURIComponent).join('/');
-window.encPath = p => p.split('/').map(encodeURIComponent).join('/');
-let bkMenu = null;   // còn lại để bkReaderRules không lỗi; không còn đọc Menu.txt
-function bkChapterMenu() { return null; }
-/* ===== VÁ 6: AI gán từng DÒNG chữ vào phân mục (ảnh độ phân giải cao) + đánh số phân cấp tới 10 cấp ===== */
-const BK_V6_BATCH = 4;
-const BK_V6_WIDTH = 1600;
-let bkV6Busy = false;
-const BK_V6_CAP_RE = /^(?:figure|fig\.?|table|tbl\.?|box|chart|graph|scheme|plate|hình|bảng|hộp|biểu đồ|sơ đồ|biểu|ảnh)\s*\d/i;
-const BK_V6_SYS = [
-    'Bạn là giáo sư Răng Hàm Mặt chuyên phân tích cấu trúc sách giáo khoa. Bạn nhận ảnh chụp từng trang (bố cục 2 cột, có hình, bảng, khung chèn xen) và danh sách DÒNG chữ đánh số L<số>, lấy từ lớp chữ của PDF.',
-    'NHIỆM VỤ A — TIÊU ĐỀ (heads): liệt kê MỌI tiêu đề phân mục có trong các dòng gửi kèm. Tiêu đề là dòng mở đầu một phân mục: thường in đậm, cỡ lớn hơn thân bài, hoặc có số. Cấp lvl từ 1 đến 10: tiêu đề lớn nhất là 1, tiêu đề con nhỏ hơn hoặc thụt vào là cấp kế tiếp. Không tạo tiêu đề từ chú thích, tiêu đề hình/bảng, hoặc tiêu đề khung Outline.',
-    'NHIỆM VỤ B — GÁN DÒNG (ranges): mọi dòng nội dung chính (kể cả dòng tiêu đề) phải nằm trong một khoảng [from, to] gán sid của phân mục chứa nó. Các dòng liên tiếp cùng sid có thể gộp thành một khoảng. Số from và to là số dòng L thật trong danh sách.',
-    '- Dòng KHÔNG phải nội dung chính: gán sid = null. Gồm Outline/đề cương/tóm tắt dạng khung, hình ảnh, chú thích ảnh (ví dụ "Figure 14.13 ..."), chú thích, bảng, biểu, khung, hộp, ô, số trang, tiêu đề và chân trang lặp lại.',
-    '- Đoạn văn bị hình, bảng hay khung chèn ngang: các dòng văn của đoạn đó vẫn gán cùng một sid, kể cả khi bị ngắt bởi dòng không phải nội dung.',
-    '- Không bỏ sót đoạn văn chính: mỗi dòng phải được gán sid hoặc sid = null (chỉ khi đúng là nội dung loại trừ).',
-    '- sid: phân mục mới đặt "s1", "s2", ... theo thứ tự xuất hiện; phân mục đã có trong danh sách gửi kèm thì dùng lại đúng sid. Chữ đứng trước tiêu đề đầu tiên dùng sid "intro".',
-    '- num: số đánh sẵn trong sách nếu có (ví dụ "4.2.1"); không có thì để "".',
-    'Chỉ trả về MỘT đối tượng JSON, không kèm chữ nào khác, đúng dạng:',
-    '{"heads":[{"line":101,"sid":"s1","num":"","lvl":1,"title":"...","vi":"..."}],"ranges":[{"from":101,"to":115,"sid":"s1"},{"from":116,"to":118,"sid":null}]}',
-    'Trường "vi" là tên tiếng Việt chuẩn RHM miền Nam của tiêu đề.'
-].join('\n') + BK_TR_GLOSS;
-
-/* Chụp một trang PDF thành JPEG rộng ~1600px để AI đọc rõ chữ nhỏ và chú thích */
-async function bkV6RenderPage(doc, num) {
-    const page = await doc.getPage(num);
-    const vp1 = page.getViewport({ scale: 1 });
-    const scale = Math.max(1, Math.min(3, BK_V6_WIDTH / vp1.width));
-    const vp = page.getViewport({ scale: scale });
-    const cv = document.createElement('canvas');
-    cv.width = Math.round(vp.width); cv.height = Math.round(vp.height);
-    const ctx = cv.getContext('2d', { alpha: false });
-    ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, cv.width, cv.height);
-    await page.render({ canvasContext: ctx, viewport: vp }).promise;
-    const b64 = cv.toDataURL('image/jpeg', 0.85).split(',')[1];
-    cv.width = 0; cv.height = 0;
-    return b64;
-}
-
-/* Tách bkText thành các dòng đánh số L1, L2, ... (kèm vị trí ký tự và số trang) */
-function bkV6Lines() {
-    const T = bkText || ''; const out = []; let pos = 0;
-    T.split('\n').forEach(raw => {
-        const start = pos; pos += raw.length + 1;
-        const t = raw.trim();
-        if (!t) return;
-        const pg = (bkPages || []).find(p => start >= p.gs && start < p.ge) || (bkPages || [])[(bkPages || []).length - 1];
-        out.push({ id: out.length + 1, page: pg ? pg.num : 0, a: start + raw.indexOf(t), b: start + raw.length, text: t });
-    });
-    return out;
-}
-
-/* Ghép kết quả AI thành phân mục: gán dòng, điền dòng AI bỏ sót, ghép đoạn liền nhau, đánh số phân cấp */
-function bkV6Assemble(lines, heads, ranges) {
-    const byId = {}; lines.forEach(l => { byId[l.id] = l; });
-    const bySid = {}; const known = []; const lineSid = {};
-    const normSid = v => {
-        if (v === null || v === undefined) return null;
-        const s = String(v).trim();
-        return (s && s !== 'null') ? s : null;
-    };
-    const ensure = sid => {
-        if (!bySid[sid]) {
-            bySid[sid] = { sid: sid, num: '', lvl: 1, en: '', vi: '', intro: sid === 'intro' };
-            known.push(bySid[sid]);
-        }
-        return bySid[sid];
-    };
-    (heads || []).forEach(h => {
-        const sid = normSid(h.sid); if (!sid) return;
-        const sec = ensure(sid);
-        if (!sec.en && !sec.vi) {
-            sec.num = String(h.num || '').trim().replace(/\.$/, '');
-            sec.lvl = Math.max(1, Math.min(10, Number(h.lvl) || 1));
-            sec.en = String(h.title || '').trim();
-            sec.vi = String(h.vi || '').trim();
-        }
-        const ln = Number(h.line);
-        if (byId[ln] && lineSid[ln] === undefined) lineSid[ln] = sid;
-    });
-    (ranges || []).forEach(rg => {
-        const sid = normSid(rg.sid);
-        const from = Number(rg.from), to = Number(rg.to);
-        if (!(from <= to)) return;
-        if (sid) ensure(sid);
-        for (let id = from; id <= to; id++) {
-            if (byId[id] && lineSid[id] === undefined) lineSid[id] = sid;
-        }
-    });
-    /* Dòng AI không nhắc tới: bỏ qua nếu là chú thích/số trang, còn lại nối vào phân mục trước đó */
-    let cur = null;
-    lines.forEach(l => {
-        const v = lineSid[l.id];
-        if (v === undefined) {
-            if (BK_V6_CAP_RE.test(l.text) || /^\d{1,4}$/.test(l.text)) { lineSid[l.id] = null; return; }
-            if (!cur) { ensure('intro'); cur = 'intro'; }
-            lineSid[l.id] = cur;
-        } else if (v !== null) {
-            cur = v;
-        }
-    });
-    /* Gom các dòng liền nhau cùng sid thành đoạn [a, b] */
-    const segs = {};
-    let runSid = null, runA = 0, runB = 0;
-    const flush = () => { if (runSid) (segs[runSid] = segs[runSid] || []).push([runA, runB]); runSid = null; };
-    lines.forEach(l => {
-        const v = lineSid[l.id];
-        if (!v) { flush(); return; }
-        if (runSid === v) { runB = l.b; return; }
-        flush(); runSid = v; runA = l.a; runB = l.b;
-    });
-    flush();
-    /* Sắp theo vị trí trong chương; đánh số: số có sẵn giữ nguyên, còn lại tính theo cấp (tới 10 cấp) */
-    const ordered = known.filter(k => segs[k.sid] && segs[k.sid].length)
-        .map(k => ({ k: k, g: segs[k.sid], first: segs[k.sid][0][0] }))
-        .sort((x, y) => x.first - y.first);
-    const c = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    let prevL = 0; const out = [];
-    ordered.forEach(o => {
-        const k = o.k, g = o.g;
-        const title = k.vi || k.en || '(không rõ tên)';
-        if (k.intro) {
-            out.push({ title: title, en: k.en || 'Introduction', num: '', lvl: 1, s: g[0][0], anchorE: g[g.length - 1][1], e: g[g.length - 1][1], segs: g, fromList: true, manual: false, intro: true, text: '' });
-            return;
-        }
-        let L = Math.max(1, Math.min(10, k.lvl || 1));
-        if (L > prevL + 1) L = prevL + 1;
-        let num;
-        if (/^\d+(?:\.\d+)*$/.test(k.num || '')) {
-            const p = k.num.split('.').map(Number);
-            L = Math.max(1, Math.min(10, p.length));
-            for (let i = 1; i <= 10; i++) c[i] = i <= p.length ? p[i - 1] : 0;
-            num = k.num;
-        } else {
-            c[L]++;
-            for (let i = L + 1; i <= 10; i++) c[i] = 0;
-            num = c.slice(1, L + 1).join('.');
-        }
-        prevL = L;
-        out.push({ title: title, en: k.en || title, num: num, lvl: L, s: g[0][0], anchorE: g[g.length - 1][1], e: g[g.length - 1][1], segs: g, fromList: true, manual: false, intro: false, text: '' });
-    });
-    return out;
-}
-
-/* Gửi một lượt (vài trang ảnh + các dòng chữ của các trang đó) cho AI */
-async function bkV6ReadBatch(batch, imgs, bl, known, prevSid) {
-    const list = known.length ? known.map(k => '- sid "' + k.sid + '": ' + (k.num ? k.num + ' ' : '') + (k.en || k.vi || '')).join('\n') : '(chưa có)';
-    const textLines = bl.map(l => 'L' + l.id + ': ' + l.text).join('\n');
-    const txt = 'CÁC PHÂN MỤC ĐÃ GẶP (dùng lại đúng sid):\n' + list +
-        '\n\nCÁC TRANG TRONG LƯỢT NÀY: ' + batch.join(', ') + ' (ảnh đính kèm đúng thứ tự).' +
-        (prevSid ? '\nĐầu lượt có thể tiếp nối sid "' + prevSid + '".' : '') +
-        '\n\nDÒNG CHỮ (L<số>: nội dung):\n' + textLines;
-    const parts = [{ text: txt }];
-    batch.forEach((n, j) => {
-        parts.push({ text: 'Ảnh trang ' + n + ':' });
-        parts.push({ inlineData: { mimeType: 'image/jpeg', data: imgs[j] } });
-    });
-    const r = await window.bkQzCallAI(BK_V6_SYS, parts);
-    return (r && typeof r === 'object') ? r : null;
-}
-
-/* Chạy toàn chương theo lượt trang, rồi ghép kết quả */
-async function bkV6Analyze(tok, btn) {
-    const lines = bkV6Lines();
-    if (!lines.length) return [];
-    const pages = (bkPages || []).map(p => p.num);
-    const heads = [], ranges = [];
-    let prevSid = null;
-    for (let b = 0; b < pages.length; b += BK_V6_BATCH) {
-        if (tok !== bkViewTok) return null;
-        const batch = pages.slice(b, b + BK_V6_BATCH);
-        btn.textContent = '⏳ AI đọc trang ' + batch[0] + '–' + batch[batch.length - 1] + '/' + pages.length;
-        const bl = lines.filter(l => batch.indexOf(l.page) >= 0);
-        if (!bl.length) continue;
-        const inBatch = {}; bl.forEach(l => { inBatch[l.id] = true; });
-        const imgs = [];
-        for (const n of batch) imgs.push(await bkV6RenderPage(bkDoc, n));
-        const known = [];
-        heads.forEach(h => { const s = String(h.sid || ''); if (s && known.every(k => k.sid !== s)) known.push({ sid: s, num: h.num, en: h.title || h.vi }); });
-        let res = null;
-        try { res = await bkV6ReadBatch(batch, imgs, bl, known, prevSid); }
-        catch (e) { console.warn('[V6 layout]', e); }
-        if (!res) continue;   // lượt lỗi thì bỏ qua, các lượt khác vẫn dùng được
-        (Array.isArray(res.heads) ? res.heads : []).forEach(h => { if (h && inBatch[Number(h.line)]) heads.push(h); });
-        (Array.isArray(res.ranges) ? res.ranges : []).forEach(rg => {
-            if (!rg) return;
-            const from = Number(rg.from), to = Number(rg.to);
-            if (!(from <= to)) return;
-            ranges.push({ from: from, to: to, sid: rg.sid });
-            const sid = (rg.sid === null || rg.sid === undefined || String(rg.sid).trim() === 'null' || String(rg.sid).trim() === '') ? null : String(rg.sid).trim();
-            if (sid) prevSid = sid;
-        });
-    }
-    return bkV6Assemble(lines, heads, ranges);
-}
-
-/* Lưu / nạp kết quả phân tích từng chương (mở chương không gọi AI) */
-function bkV6Save(url, secs) {
-    try {
-        localStorage.setItem('bk_v6_' + url, JSON.stringify({
-            sig: bkText.length + '|' + bkPages.length,
-            secs: secs.map(x => ({ title: x.title, en: x.en, num: x.num, lvl: x.lvl, s: x.s, e: x.e, anchorE: x.anchorE, segs: x.segs, intro: x.intro }))
-        }));
-    } catch (e) {}
-}
-function bkV6Load(url) {
-    try {
-        const c = JSON.parse(localStorage.getItem('bk_v6_' + url) || 'null');
-        if (!c || c.sig !== (bkText.length + '|' + bkPages.length) || !Array.isArray(c.secs)) return [];
-        return c.secs.map(x => Object.assign({ fromList: true, manual: false, text: '' }, x));
-    } catch (e) { return []; }
-}
-/* Tên cũ giữ nguyên để lệnh mở chương đã có không cần sửa: đọc kết quả VÁ 6 */
-function bkV5Load(url) { return bkV6Load(url); }
-
-/* Nút 📑 / 🔄: AI đọc toàn chương và cập nhật danh sách mục */
-async function bkDetectChapter() {
-    if (!bkDoc) return;
-    if (!bkText.trim()) { showToast('Chương đang được đọc chữ (xem thanh trạng thái) hoặc không có chữ — thử lại sau giây lát'); return; }
-    if (!aiAnyKey()) { aiShowGate(); return; }
-    if (bkV6Busy) return;
-    bkV6Busy = true;
-    const btn = document.getElementById('bk-sec-btn'), list = document.getElementById('bk-sec-list');
-    const url = bkCur ? bkCur.url : '';
-    btn.disabled = true; btn.textContent = '⏳ AI đang đọc chương…';
-    list.innerHTML = '<p class="text-xs text-gray-500 p-1">🔍 AI đang đọc ảnh độ phân giải cao và gán từng dòng vào phân mục…</p>';
-    try {
-        const secs = await bkV6Analyze(bkViewTok, btn);
-        if (!secs) return;   // đã chuyển chương giữa chừng
-        if (!secs.length) { showToast('AI chưa nhận diện được phân mục nào trong chương này.'); return; }
-        bkV6Save(url, secs);
-        bkSecs = bkMergeSecs(secs, bkSecs.filter(x => x.manual));
-        bkRelink(); bkSaveManual();
-        bkSecSel = -1; bkHl = null; bkApplyHlAll(); bkRenderSecList();
-        document.getElementById('bk-sec-tr').classList.add('hidden');
-        showToast('✅ AI đã lập ' + secs.length + ' phân mục và ráp nội dung từng mục!');
-    } catch (e) {
-        console.error('[V6]', e);
-        showToast('Lỗi khi AI đọc chương: ' + ((e && e.message) || e));
-    } finally {
-        bkV6Busy = false;
-        btn.disabled = false; bkUpdateSecBtn();
-    }
-}
-
-/* Ghi đè bkRelink: ưu tiên các đoạn đã ráp (segs) để hiển thị và dịch đúng nội dung từng mục */
-bkRelink = function () {
-    const a = bkSecs.slice().sort((x, y) => (x.s - y.s) || ((x.lvl || 1) - (y.lvl || 1)));
-    bkSecs = a.filter((x, i) => i === 0 || x.s !== a[i - 1].s || x.num !== a[i - 1].num);
-    bkSecs.forEach((x, i) => {
-        if (x.fromList && x.anchorE && x.anchorE > x.s) x.e = Math.min(bkText.length, x.anchorE);
-        else x.e = i + 1 < bkSecs.length ? Math.max(x.s + 1, bkSecs[i + 1].s) : bkText.length;
-        x.text = (x.segs && x.segs.length)
-            ? x.segs.map(g => bkText.slice(g[0], g[1]).trim()).filter(Boolean).join('\n\n')
-            : bkText.slice(x.s, x.e).trim();
-    });
-};
-
-/* Các hook layout của bản cũ (MucLuc.html / Menu.html) nay không còn làm gì; giữ tên để không gãy lời gọi */
-function bkTocBegin() {}
-function bkTocPageHook() { return null; }
+/* ===== NHẬN DIỆN MỤC LỤC & RÁP ĐOẠN BẰNG AI VISION TOÀN CHƯƠNG (ĐÃ BỎ MucLuc.html & Menu.html) ===== */
 function bkPageLayout() { return null; }
-function bkLayoutCell() { return null; }
+function bkLayoutCell() { return { z: 0, c: 0 }; }
 function bkHlBox(d) { return { x: d.x, w: d.w }; }
 function bkOrderByLayout(items, W) { return bkOrderItems(items, W); }
-function bkTocSoft() { return null; }
-async function bkLoadMucLuc() { return null; }
+function bkApplyMenuSections() { return []; }
+
 function bkMergeSecs(x, y) {
-    const a = x.concat(y).sort((p, q) => (p.s - q.s) || ((p.lvl || 1) - (q.lvl || 1)));
-    return a.filter((p, i) => i === 0 || p.s !== a[i - 1].s || p.num !== a[i - 1].num);
+    const a = (x || []).concat(y || []).sort((p, q) => p.s - q.s);
+    return a.filter((p, i) => i === 0 || Math.abs(p.s - a[i - 1].s) > 5);
 }
+
+function bkUpdateSecBtn() {
+    var b = document.getElementById('bk-sec-btn');
+    if (!b) return;
+    b.disabled = false;
+    b.textContent = bkSecs.length ? '🔄 Phân tích lại mục lục' : '📑 Nhận diện mục lục';
+}
+
+/* Chụp từng trang PDF của toàn bộ chương, giảm kích thước (cạnh dài ~768px, JPEG nén nhẹ) đủ để AI đọc chuẩn bố cục 2 cột */
+async function bkCaptureChapterPages(doc, onProg) {
+    const shots = [];
+    const total = doc.numPages;
+    for (let p = 1; p <= total; p++) {
+        if (onProg) onProg(p, total);
+        const page = await doc.getPage(p);
+        const vp1 = page.getViewport({ scale: 1 });
+        const maxDim = 768;
+        const scale = Math.min(1.15, maxDim / Math.max(vp1.width, vp1.height, 1));
+        const vp = page.getViewport({ scale });
+        const cv = document.createElement('canvas');
+        cv.width = Math.max(1, Math.round(vp.width));
+        cv.height = Math.max(1, Math.round(vp.height));
+        const ctx = cv.getContext('2d', { alpha: false });
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, cv.width, cv.height);
+        await page.render({ canvasContext: ctx, viewport: vp, background: '#ffffff' }).promise;
+        const b64 = cv.toDataURL('image/jpeg', 0.62).split(',')[1];
+        shots.push({ page: p, b64 });
+        cv.width = 0; cv.height = 0;
+    }
+    return shots;
+}
+
+/* Tìm vị trí chính xác (index ký tự trong bkText) của một cụm từ neo hoặc tiêu đề trên trang chỉ định (hoặc các trang lân cận) */
+function bkFindAnchorInText(phrase, pageHint, fromPos) {
+    if (!phrase || !bkText) return -1;
+    const esc = w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const cleanWords = String(phrase).replace(/[^\p{L}\p{N}\s'-]/gu, ' ').trim().split(/\s+/).filter(Boolean);
+    if (!cleanWords.length) return -1;
+
+    const searchInWindow = (startOff, endOff) => {
+        const sub = bkText.slice(startOff, endOff);
+        for (const len of [Math.min(cleanWords.length, 10), Math.min(cleanWords.length, 6), Math.min(cleanWords.length, 4), Math.min(cleanWords.length, 3)]) {
+            if (len < 1) continue;
+            const pat = cleanWords.slice(0, len).map(esc).join('[\\s\\n\\r\\-–—.,;:()\\[\\]]+');
+            try {
+                const m = new RegExp(pat, 'i').exec(sub);
+                if (m) return startOff + m.index;
+            } catch (e) {}
+        }
+        return -1;
+    };
+
+    const minOff = typeof fromPos === 'number' && fromPos >= 0 ? fromPos : 0;
+    if (pageHint >= 1 && pageHint <= bkPages.length) {
+        const p0 = Math.max(0, pageHint - 2);
+        const p1 = Math.min(bkPages.length - 1, pageHint);
+        const wStart = Math.max(minOff, bkPages[p0].gs);
+        const wEnd = bkPages[p1].ge;
+        if (wEnd > wStart) {
+            const hit = searchInWindow(wStart, wEnd);
+            if (hit >= 0) return hit;
+        }
+    }
+    if (minOff > 0) {
+        const hitAfter = searchInWindow(minOff, bkText.length);
+        if (hitAfter >= 0) return hitAfter;
+    }
+    return searchInWindow(0, bkText.length);
+}
+
+/* Làm sạch và tự động ráp nối các câu/đoạn bị tách do hình ảnh, bảng biểu, khung chèn ngang giữa các cột hoặc qua nhiều trang */
+function bkStitchSectionText(rawSlices) {
+    const noiseLine = /^(?:table|tbl\.?|fig\.?|figure|box|chart|graph|scheme|diagram|outline|chapter\s+outline|contents|key\s+points|learning\s+objectives|hình|bảng|hộp|khung|biểu\s*đồ|sơ\s*đồ|ảnh|chú\s*thích|mục\s*lục)\b\s*(?:\d|[A-Z]|:|\.)/i;
+    const chunks = (Array.isArray(rawSlices) ? rawSlices : [rawSlices])
+        .map(s => String(s || '').trim())
+        .filter(Boolean);
+    let combined = chunks.join('\n');
+    const lines = combined.split(/\r?\n/).map(l => l.trim()).filter(l => l && !noiseLine.test(l));
+    let out = '';
+    for (let i = 0; i < lines.length; i++) {
+        const ln = lines[i];
+        if (!out) { out = ln; continue; }
+        // Từ bị gạch nối ngắt dòng ở cuối cột/trang
+        if (/[A-Za-z\u00C0-\u1EF9]-$/.test(out) && /^[a-z\u00E0-\u1EF9]/.test(ln)) {
+            out = out.slice(0, -1) + ln;
+        } else if (!/[.!?:;"”')\]›»]$/.test(out) && /^[a-z\u00E0-\u1EF9,;(\[]/.test(ln)) {
+            // Câu đang dở ở cuối cột/trang trước và nối tiếp bằng chữ thường ở đầu cột/trang sau (sau khi đã bỏ bảng/hình chèn giữa)
+            out += ' ' + ln;
+        } else if (!/[.!?:;"”')\]›»]$/.test(out) && ln.split(/\s+/).length >= 4) {
+            out += ' ' + ln;
+        } else {
+            out += '\n' + ln;
+        }
+    }
+    return out.replace(/[ \t]{2,}/g, ' ').trim();
+}
+
+/* Hậu xử lý & ráp nối toàn bộ các phân mục: hỗ trợ phân mục có nhiều dải (spans) bị ngắt xa nhau qua vài trang */
+function bkRelink() {
+    const a = bkSecs.slice().sort((x, y) => x.s - y.s);
+    bkSecs = a.filter((x, i) => i === 0 || x.s !== a[i - 1].s || x.en !== a[i - 1].en);
+    bkSecs.forEach((x, i) => {
+        const nextS = i + 1 < bkSecs.length ? bkSecs[i + 1].s : bkText.length;
+        x.e = Math.max(x.s, nextS);
+        if (Array.isArray(x.spans) && x.spans.length > 0) {
+            const validSpans = x.spans
+                .map(sp => ({ s: Math.max(0, Math.min(bkText.length, sp.s)), e: Math.max(0, Math.min(bkText.length, sp.e)) }))
+                .filter(sp => sp.e > sp.s);
+            if (validSpans.length) {
+                x.s = validSpans[0].s;
+                x.e = Math.max(validSpans[validSpans.length - 1].e, x.e);
+                const slices = validSpans.map(sp => bkText.slice(sp.s, sp.e));
+                x.text = bkStitchSectionText(slices);
+                return;
+            }
+        }
+        x.text = bkStitchSectionText([bkText.slice(x.s, x.e)]);
+    });
+}
+
+async function bkDetectChapter() {
+    if (!bkDoc) return;
+    if (!aiAnyKey()) { aiShowGate(); return; }
+    const btn = document.getElementById('bk-sec-btn'), list = document.getElementById('bk-sec-list');
+    btn.disabled = true;
+
+    try {
+        if (!bkText || !bkText.trim()) {
+            btn.textContent = '⏳ Đang đọc chữ chương…';
+            const ex = await bkExtract(bkDoc, bkViewTok, (n, t) => { btn.textContent = '⏳ Đọc chữ ' + n + '/' + t; });
+            if (ex) { bkPages = ex.pages; bkText = ex.text; }
+        }
+        if (!bkText || !bkText.trim()) {
+            showToast('Chương này không có lớp chữ để định vị mục lục.');
+            btn.disabled = false; bkUpdateSecBtn();
+            return;
+        }
+
+        // Bước 1: Chụp ảnh toàn bộ các trang trong chương (giảm kích thước tối ưu để AI nhìn bố cục)
+        const shots = await bkCaptureChapterPages(bkDoc, (p, tot) => {
+            btn.textContent = '📸 Chụp trang ' + p + '/' + tot + '…';
+            if (list) list.innerHTML = '<p class="text-xs text-gray-500 p-1">📸 Đang chụp màn hình trang ' + p + '/' + tot + ' (giảm dung lượng tối ưu cho AI)…</p>';
+        });
+
+        // Bước 2: Gửi ảnh các trang theo từng đợt (kèm văn bản đã xếp theo cột) để AI nhìn bố cục, lọc bỏ Outline/Bảng/Hình/Khung, phân cấp 1..10 và định vị các đoạn bị tách xa nhau
+        const BATCH_PAGES = 6;
+        const rawHeadings = [];
+        const rawStitches = [];
+        const totalBatches = Math.ceil(shots.length / BATCH_PAGES);
+        const glossRule = BK_TR_GLOSS + ((typeof window.rhmDictGlossary === 'function') ? window.rhmDictGlossary(bkText.slice(0, 12000), true) : '');
+
+        const sysPrompt = [
+            'Bạn là giáo sư đầu ngành Răng Hàm Mặt và chuyên gia phân tích bố cục sách y khoa.',
+            'Bạn được cung cấp ẢNH CHỤP MÀN HÌNH các trang liên tiếp của chương sách cùng VĂN BẢN trích xuất theo từng trang.',
+            'QUY TẮC ĐỌC BỐ CỤC & LỌC NHIỄU BẮT BUỘC:',
+            '1. Đọc строго theo dạng cột: từ trên xuống dưới hết Cột 1 (bên trái) rồi mới sang Cột 2 (bên phải) từ trên xuống dưới.',
+            '2. KHÓA TUYỆT ĐỐI (KHÔNG NHẬN DIỆN làm mục lục và KHÔNG lấy vào nội dung đoạn văn): Khung Outline / Chapter Outline / Mục lục đầu chương, Hình ảnh, Chú thích ảnh (Figure/Fig./Hình...), Chú thích cuối trang (Footnote), Bảng (Table/Bảng...), Biểu đồ (Chart/Graph/Sơ đồ...), Khung (Box/Hộp/Key Points/Clinical Box...), Ô tóm tắt.',
+            '3. PHÂN CẤP MỤC LỤC (TỐI ĐA 10 CẤP): Dựa vào kích thước chữ, độ đậm, màu sắc, vị trí và cấu trúc ngữ nghĩa trên ảnh chụp trang để xác định toàn bộ các tiêu đề mục chính và mục con trong trang. Gán cấp "lvl" là số nguyên từ 1 đến 10 (1 là mục lớn nhất trong chương, 2 là mục con của 1, 3 là mục con của 2..., tối đa đến cấp 10). Không lấy tên chương ở đầu trang 1 làm mục lục.',
+            '4. ĐỊNH VỊ & RÁP ĐOẠN BỊ TÁCH XA NHAU (LÊN ĐẾN VÀI TRANG): Nếu một đoạn văn đang viết ở cuối cột/trang mà bị Hình ảnh, Bảng biểu, Khung, Ô... chèn vào (thậm chí chiếm nguyên 1–3 trang tiếp theo) làm phần tiếp theo của đoạn văn bị đẩy sang cột khác hoặc trang sau, hãy ghi nhận vào mảng "stitches": nêu cụm từ cuối trước khi bị ngắt ("before_end", 5–10 từ nguyên văn tiếng Anh kèm trang "p1") và cụm từ đầu tiên khi đoạn văn đó tiếp tục ("after_start", 5–10 từ nguyên văn tiếng Anh kèm trang "p2") để hệ thống tự động cắt bỏ phần bảng/hình ở giữa và ráp liền mạch.',
+            '5. DỊCH TIÊU ĐỀ: Mỗi tiêu đề trả về "en" (nguyên văn tiêu đề gốc trong sách, bỏ số thứ tự đầu nếu có) và "vi" (bản dịch tiếng Việt chuẩn thuật ngữ RHM miền Nam).' + glossRule,
+            'Chỉ trả về MỘT đối tượng JSON hợp lệ theo mẫu:',
+            '{"headings":[{"p":<số trang>,"lvl":<1..10>,"en":"<tiêu đề gốc nguyên văn>","vi":"<tiêu đề tiếng Việt>","anchor":"<chép nguyên văn 5-12 từ đầu tiên của đoạn văn ngay dưới tiêu đề này để định vị chính xác>"}],"stitches":[{"p1":<trang trước>,"before_end":"<5-10 từ cuối trước khi bị hình/bảng cắt>","p2":<trang nối tiếp>,"after_start":"<5-10 từ đầu khi đoạn văn tiếp tục>"}]}'
+        ].join('\n');
+
+        for (let b = 0; b < totalBatches; b++) {
+            const slice = shots.slice(b * BATCH_PAGES, (b + 1) * BATCH_PAGES);
+            const pStart = slice[0].page, pEnd = slice[slice.length - 1].page;
+            btn.textContent = '🤖 AI phân tích ' + (b + 1) + '/' + totalBatches + ' (tr.' + pStart + '–' + pEnd + ')…';
+            if (list) list.innerHTML = '<p class="text-xs text-gray-500 p-1">🤖 AI đang nhìn ảnh bố cục trang ' + pStart + '–' + pEnd + ' (' + (b + 1) + '/' + totalBatches + ') để trích mục lục & ráp đoạn…</p>';
+
+            const parts = [];
+            let txtBundle = '';
+            slice.forEach(sh => {
+                parts.push({ inlineData: { mimeType: 'image/jpeg', data: sh.b64 } });
+                const pgObj = bkPages[sh.page - 1];
+                const pgTxt = pgObj ? bkText.slice(pgObj.gs, pgObj.ge).trim() : '';
+                txtBundle += '\n=== TRANG ' + sh.page + ' ===\n' + pgTxt.slice(0, 6500) + '\n';
+            });
+            parts.push({
+                text: 'Các ảnh trên lần lượt là Trang ' + slice.map(s => s.page).join(', ') + ' của chương "' + (bkCur ? bkCur.title : '') + '".\n' +
+                      'Hãy đối chiếu hình ảnh bố cục 2 cột với văn bản từng trang dưới đây để xác định chính xác các tiêu đề mục lục (phân cấp 1..10, bỏ qua Outline/Hình/Bảng/Khung/Ô/Chú thích) và các điểm ráp nối đoạn văn bị cắt ngang:\n' + txtBundle
+            });
+
+            try {
+                const res = await window.bkQzCallAI(sysPrompt, parts);
+                const hs = (res && Array.isArray(res.headings)) ? res.headings : (Array.isArray(res) ? res : []);
+                hs.forEach(h => {
+                    if (!h || (!h.en && !h.vi)) return;
+                    rawHeadings.push({
+                        p: parseInt(h.p, 10) || pStart,
+                        lvl: Math.max(1, Math.min(10, parseInt(h.lvl, 10) || 1)),
+                        en: String(h.en || h.vi || '').trim(),
+                        vi: String(h.vi || h.en || '').trim(),
+                        anchor: String(h.anchor || '').trim()
+                    });
+                });
+                const sts = (res && Array.isArray(res.stitches)) ? res.stitches : [];
+                sts.forEach(st => {
+                    if (st && st.before_end && st.after_start) rawStitches.push(st);
+                });
+            } catch (err) {
+                console.warn('[bkDetectChapter batch]', err);
+            }
+        }
+
+        // Bước 3: Nếu chương dài và chia nhiều đợt, chuẩn hóa lại phân cấp 1..10 toàn chương cho đồng nhất
+        if (rawHeadings.length > 1 && totalBatches > 1) {
+            try {
+                btn.textContent = '⏳ Đồng bộ phân cấp 1–10…';
+                const normSys = 'Bạn là chuyên gia cấu trúc sách y khoa. Dưới đây là danh sách các tiêu đề theo thứ tự xuất hiện trong chương. Hãy chuẩn hóa lại cấp độ "lvl" (số nguyên từ 1 đến tối đa 10) sao cho toàn chương có cây phân cấp hợp lý, liền mạch (không nhảy cóc cấp, ví dụ từ 1 xuống thẳng 4) và loại bỏ bất kỳ mục nào thực chất là Outline, Bảng (Table), Hình (Figure), Khung (Box/Key Points). Chỉ trả về JSON: {"items":[{"i":<chỉ số gốc>,"lvl":<1..10>,"vi":"<tiêu đề tiếng Việt chuẩn RHM miền Nam>"}]}';
+                const normIn = rawHeadings.map((h, idx) => idx + ' | p.' + h.p + ' | lv=' + h.lvl + ' | ' + h.en + ' => ' + h.vi).join('\n');
+                const normRes = await aiGeminiJson(normSys, normIn, 4000);
+                if (normRes && Array.isArray(normRes.items) && normRes.items.length) {
+                    const refined = [];
+                    normRes.items.forEach(it => {
+                        const orig = rawHeadings[parseInt(it.i, 10)];
+                        if (!orig) return;
+                        orig.lvl = Math.max(1, Math.min(10, parseInt(it.lvl, 10) || orig.lvl));
+                        if (it.vi && String(it.vi).trim()) orig.vi = String(it.vi).trim();
+                        refined.push(orig);
+                    });
+                    if (refined.length) {
+                        rawHeadings.length = 0;
+                        rawHeadings.push(...refined);
+                    }
+                }
+            } catch (e) {}
+        }
+
+        // Bước 4: Định vị vị trí ký tự chính xác của từng mục trong bkText
+        const noiseTitleRe = /^(?:chapter\s+outline|outline|table\s+of\s+contents|contents|learning\s+objectives|key\s+points|figure\s+\d|fig\.?\s*\d|table\s+\d|tbl\.?\s*\d|box\s+\d|hình\s+\d|bảng\s+\d|hộp\s+\d|khung\s+\d)/i;
+        const foundSecs = [];
+        let lastPos = 0;
+
+        rawHeadings.forEach(h => {
+            const cleanEn = h.en.replace(/^(?:\d+(?:\.\d+)*[.)]?|[IVXLCDM]{1,5}\.?)\s+/i, '').trim();
+            const cleanVi = ((typeof window.rhmEnforceSouthernTerms === 'function') ? window.rhmEnforceSouthernTerms(h.vi, cleanEn) : h.vi)
+                .replace(/^(?:\d+(?:\.\d+)*[.)]?|[IVXLCDM]{1,5}\.?)\s+/i, '').trim();
+            if (!cleanEn || noiseTitleRe.test(cleanEn) || noiseTitleRe.test(cleanVi)) return;
+
+            let pos = bkFindAnchorInText(cleanEn, h.p, lastPos);
+            if (pos < 0 && h.anchor) pos = bkFindAnchorInText(h.anchor, h.p, lastPos);
+            if (pos < 0) pos = bkFindAnchorInText(cleanEn, h.p, 0);
+            if (pos < 0 && h.p >= 1 && h.p <= bkPages.length) pos = Math.max(lastPos, bkPages[h.p - 1].gs);
+            if (pos < 0) return;
+
+            lastPos = Math.max(lastPos, pos);
+            foundSecs.push({
+                title: cleanVi || cleanEn,
+                en: cleanEn,
+                num: '',
+                lvl: Math.max(1, Math.min(10, h.lvl || 1)),
+                s: pos,
+                e: 0,
+                text: '',
+                manual: false,
+                intro: false
+            });
+        });
+
+        // Bước 5: Áp dụng các điểm nối đoạn (stitches) để loại bỏ vùng nhiễu xen giữa (nếu còn sót) và ráp các đoạn bị cắt qua nhiều trang
+        const cutRanges = [];
+        rawStitches.forEach(st => {
+            const p1Pos = bkFindAnchorInText(st.before_end, st.p1, 0);
+            if (p1Pos < 0) return;
+            const endBefore = p1Pos + String(st.before_end).length;
+            const p2Pos = bkFindAnchorInText(st.after_start, st.p2, endBefore);
+            if (p2Pos > endBefore && p2Pos - endBefore <= 25000) {
+                cutRanges.push({ gapStart: endBefore, gapEnd: p2Pos });
+            }
+        });
+
+        if (foundSecs.length) {
+            // Đảm bảo cấp độ không nhảy bậc đột ngột (ví dụ cấp 1 -> cấp 3 thì chỉnh thành cấp 2)
+            let prevLv = 1;
+            foundSecs.sort((a, b) => a.s - b.s).forEach((s, idx) => {
+                if (idx === 0) s.lvl = 1;
+                else if (s.lvl > prevLv + 1) s.lvl = prevLv + 1;
+                prevLv = s.lvl;
+            });
+
+            // Nếu có vùng bị ngắt giữa mục (cutRanges), tách mục đó thành các spans để chỉ highlight & ghép phần chữ thật
+            foundSecs.forEach((s, idx) => {
+                const secEnd = idx + 1 < foundSecs.length ? foundSecs[idx + 1].s : bkText.length;
+                const hits = cutRanges.filter(c => c.gapStart > s.s && c.gapEnd < secEnd).sort((a, b) => a.gapStart - b.gapStart);
+                if (hits.length) {
+                    const spans = [];
+                    let curS = s.s;
+                    hits.forEach(h => {
+                        if (h.gapStart > curS) spans.push({ s: curS, e: h.gapStart });
+                        curS = h.gapEnd;
+                    });
+                    if (secEnd > curS) spans.push({ s: curS, e: secEnd });
+                    if (spans.length) s.spans = spans;
+                }
+            });
+
+            bkSecs = bkMergeSecs(foundSecs, bkSecs.filter(x => x.manual));
+            bkRelink();
+            bkSaveManual();
+            bkSecSel = -1; bkHl = null;
+            bkApplyHlAll(); bkRenderSecList(); bkUpdateSecBtn();
+            document.getElementById('bk-sec-tr').classList.add('hidden');
+            showToast('✅ Đã phân tích ' + shots.length + ' trang & lập mục lục ' + bkSecs.length + ' mục!');
+        } else {
+            showToast('AI chưa tìm thấy tiêu đề mục lục nào trong chương này.');
+            bkRenderSecList();
+        }
+    } catch (e) {
+        console.error('[bkDetectChapter]', e);
+        showToast('Lỗi khi phân tích mục lục: ' + ((e && (e.friendly || e.message)) || e));
+    } finally {
+        btn.disabled = false;
+        bkUpdateSecBtn();
+    }
+}
+
+/* Kéo đổi độ rộng cột mục lục (giống khung chat) */
 function bkEnsureSecGrip() {
     const p = document.getElementById('bk-sec-panel'); if (!p || document.getElementById('bk-sec-grip')) return;
     try { const w = localStorage.getItem('bk_sec_w'); if (w) document.documentElement.style.setProperty('--bk-sec-w', w + 'px'); } catch (e) {}
@@ -10302,15 +10318,12 @@ function bkEnsureSecGrip() {
     };
     g.addEventListener('pointerup', end); g.addEventListener('pointercancel', end);
 }
+/* Số thứ tự hỗ trợ sâu đến 10 cấp (1. -> 1.1 -> 1.1.1 -> 1.1.1.1...) */
 function bkNumbers() {
     const c = new Array(12).fill(0); const out = [];
     bkSecs.forEach(s => {
         if (s.intro) { out.push('0.'); return; }
-        if (s.num) {
-            out.push(/[.]$/.test(s.num) ? s.num : (s.num + '.'));
-            return;
-        }
-        if (s.fromList) { out.push(''); return; }
+        if (s.manual && s.num) { out.push(s.num); return; }
         let L = Math.max(1, Math.min(10, s.lvl || 1));
         for (let k = 1; k < L; k++) { if (c[k] === 0) c[k] = 1; }
         c[L]++;
@@ -10331,15 +10344,13 @@ function bkRenderSecList() {
         b.classList.toggle('bg-white', !on); b.classList.toggle('text-gray-500', !on);
     });
     if (!bkSecs.length) {
-        list.innerHTML = '<p class="text-xs text-gray-500 p-1">' +
-            'Bấm “📑 Nhận diện mục lục” để AI đọc ảnh các trang và lập mục lục.' +
-            '</p>';
+        list.innerHTML = '<p class="text-xs text-gray-500 p-1">Bấm “📑 Nhận diện mục lục” để AI lập mục lục.</p>';
         n.textContent = ''; tr.classList.add('hidden'); return;
     }
     n.textContent = bkSecs.length + ' mục';
     const nums = bkNumbers();
     list.innerHTML = bkSecs.map((s, i) => {
-        const rawLabel = bkSecLang === 'en' ? (s.en || s.title) : (s.title || s.en);
+        const rawLabel = bkSecLang === 'en' ? (s.en || s.title) : s.title;
         const cleanLabel = String(rawLabel || '').replace(/^(?:\d+(?:\.\d+)*[.)]?|[IVXLCDM]{1,5}\.?)\s+/, '');
         const num = nums[i] ? nums[i] + ' ' : '';
         const lv = Math.max(1, Math.min(10, s.lvl || 1));
@@ -10347,12 +10358,6 @@ function bkRenderSecList() {
         const clsLv = lv === 1 ? ' font-extrabold text-gray-900 text-sm' : (lv === 2 ? ' font-semibold text-gray-800 text-sm' : (lv === 3 ? ' font-medium text-gray-700 text-xs' : ' font-normal text-gray-600 text-xs'));
         return '<button type="button" onclick="bkSelSec(' + i + ')" style="margin-left:' + ind + 'rem;width:calc(100% - ' + ind + 'rem)" class="bk-sec-item text-left rounded-lg px-2 py-1 bg-white border border-gray-200 hover:bg-amber-50 break-words' + clsLv + (i === bkSecSel ? ' bk-sec-on' : '') + '">' + (s.manual ? '🔖 ' : '') + '<span class="text-indigo-700 font-bold">' + bkEsc(num) + '</span>' + bkEsc(cleanLabel) + '</button>';
     }).join('');
-}
-function bkUpdateSecBtn() {
-    var b = document.getElementById('bk-sec-btn');
-    if (!b) return;
-    b.disabled = false;
-    b.textContent = bkSecs.length ? '🔄 Cập nhật mục lục' : '📑 Nhận diện mục lục';
 }
 function bkSetSecLang(l) { bkSecLang = l; bkRenderSecList(); }
 function bkToggleSec() {
