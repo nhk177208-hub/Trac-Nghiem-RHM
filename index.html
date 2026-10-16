@@ -10293,119 +10293,174 @@ function bkSnapToHeadingBefore(T, startPos, secTitle) {
 
 /* ----- Giải quyết danh sách mục lục và cặp điểm neo (Start Anchor -> End Anchor) từ Menu.txt ----- */
 let bkMenuViCache = {};
-try { bkMenuViCache = JSON.parse(localStorage.getItem('bk_menutxt_vi_v1') || '{}') || {}; } catch (e) {}
+try { bkMenuViCache = JSON.parse(localStorage.getItem('bk_menutxt_vi_v1') || '{}') || {}; } catch (e) {}/* ===== VÁ 4: đọc bố cục bằng ảnh cả chương + điểm neo đầu/cuối để ráp đoạn ===== */
+const BK_V4_BATCH = 6;
+let bkV4Busy = false;
+const BK_V4_SYS = [
+    'Bạn là giáo sư Răng Hàm Mặt chuyên đọc bố cục tài liệu. Bạn nhận ảnh chụp từng trang của MỘT chương (bố cục 2 cột) và danh sách phân mục có chỉ số sec.',
+    'NHIỆM VỤ: với mỗi trang, chia chữ trên trang thành các "run" (một đoạn chữ liên tục) theo THỨ TỰ ĐỌC, rồi gán mỗi run cho một phân mục.',
+    '- Thứ tự đọc: hết cột 1 từ trên xuống dưới rồi mới sang cột 2 từ trên xuống dưới. Tiêu đề rộng cả trang được đọc trước phần cột nằm dưới nó.',
+    '- KHÔNG gán cho phân mục (sec = null): Outline / đề cương, hình ảnh, chú thích ảnh, chú thích, bảng, biểu, khung, ô, hộp, số trang, tiêu đề và chân trang lặp lại.',
+    '- Nếu một đoạn văn bị hình, bảng, khung hay chú thích chèn ngang làm tách, các phần chữ của đoạn đó vẫn ghi cùng sec, kể cả khi đoạn tiếp tục ở trang sau (để ráp lại).',
+    '- Tiêu đề phân mục (ví dụ "4.2.1. Social deprivation") là run đầu của phân mục đó và mang đúng sec của nó.',
+    '- Với mỗi run: "first" = 6 đến 10 chữ ĐẦU của run, "last" = 6 đến 10 chữ CUỐI của run, chép NGUYÊN VĂN theo ảnh, không sửa, không dịch.',
+    '- Điểm neo đầu/cuối trong danh sách chỉ là gợi ý, có thể lệch do lỗi OCR; hãy dựa vào nội dung thực trên ảnh.',
+    'Chỉ trả về MỘT đối tượng JSON, không kèm chữ nào khác, đúng dạng:',
+    '{"vi":[{"i":0,"vi":"tên tiếng Việt"}],"pages":[{"page":3,"runs":[{"sec":0,"first":"...","last":"..."},{"sec":null,"first":"...","last":"..."}]}]}',
+    'Trường "vi" (dịch tên mọi phân mục sang tiếng Việt chuẩn RHM miền Nam) chỉ có ở lượt đầu; các lượt sau không cần.'
+].join('\n') + BK_TR_GLOSS;
+
+/* Chụp một trang PDF thành JPEG (rộng ~900px) để AI đọc bố cục */
+async function bkV4RenderPage(doc, num) {
+    const page = await doc.getPage(num);
+    const vp1 = page.getViewport({ scale: 1 });
+    const scale = Math.max(0.8, Math.min(1.6, 900 / vp1.width));
+    const vp = page.getViewport({ scale: scale });
+    const cv = document.createElement('canvas');
+    cv.width = Math.round(vp.width); cv.height = Math.round(vp.height);
+    const ctx = cv.getContext('2d', { alpha: false });
+    ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, cv.width, cv.height);
+    await page.render({ canvasContext: ctx, viewport: vp }).promise;
+    const b64 = cv.toDataURL('image/jpeg', 0.7).split(',')[1];
+    cv.width = 0; cv.height = 0;
+    return b64;
+}
+
+/* Gửi một lượt (vài trang ảnh) lên AI; trả về object JSON hoặc null */
+async function bkV4ReadBatch(chap, secList, batch, imgs, prevSec, withVi) {
+    const txt = 'CHƯƠNG: ' + (chap.en || chap.title || '') + '\nDANH SÁCH PHÂN MỤC (sec = chỉ số):\n' + secList +
+        '\nCác trang trong lượt này (ảnh đính kèm đúng thứ tự): ' + batch.join(', ') + '.' +
+        (prevSec !== null ? ' Đầu lượt này có thể tiếp nối phân mục sec = ' + prevSec + ' từ trang trước.' : '') +
+        (withVi ? ' Lượt này BẮT BUỘC có trường "vi" cho mọi phân mục.' : ' Lượt này không cần trường "vi".');
+    const parts = [{ text: txt }];
+    batch.forEach((n, j) => {
+        parts.push({ text: 'Ảnh trang ' + n + ':' });
+        parts.push({ inlineData: { mimeType: 'image/jpeg', data: imgs[j] } });
+    });
+    const r = await window.bkQzCallAI(BK_V4_SYS, parts);
+    return (r && typeof r === 'object') ? r : null;
+}
+
+/* Đọc bố cục cả chương bằng ảnh, rồi định vị từng run trong văn bản PDF; trả về map sec -> [[start,end], ...] */
+async function bkV4AiLayout(chap, items, T, N, tok, btn, cacheKey) {
+    const nums = (bkPages || []).map(p => p.num);
+    if (!nums.length || !bkDoc) return null;
+    const secList = items.map((it, i) => i + '. ' + (it.num ? it.num + ' ' : '') + it.en +
+        ' [điểm neo đầu: "' + (it.startAnchor || '') + '"; điểm neo cuối: "' + (it.endAnchor || '') + '"]').join('\n');
+    const runs = []; let prevSec = null; let viList = null;
+    for (let b = 0; b < nums.length; b += BK_V4_BATCH) {
+        if (tok !== bkViewTok) return null;
+        const batch = nums.slice(b, b + BK_V4_BATCH);
+        if (btn) btn.textContent = '⏳ AI đọc bố cục trang ' + batch[0] + '–' + batch[batch.length - 1] + '/' + nums.length;
+        const imgs = [];
+        for (const n of batch) imgs.push(await bkV4RenderPage(bkDoc, n));
+        let res = null;
+        try { res = await bkV4ReadBatch(chap, secList, batch, imgs, prevSec, b === 0); }
+        catch (e) { console.warn('[V4 layout]', e); }
+        if (!res) continue;   // lượt lỗi thì bỏ qua, các lượt khác vẫn dùng được
+        if (!viList && Array.isArray(res.vi)) viList = res.vi;
+        (Array.isArray(res.pages) ? res.pages : []).forEach(pg => {
+            (Array.isArray(pg.runs) ? pg.runs : []).forEach(r => {
+                if (!r) return;
+                const sec = (r.sec !== null && r.sec !== undefined && items[Number(r.sec)]) ? Number(r.sec) : null;
+                runs.push({ page: Number(pg.page), sec: sec, first: String(r.first || ''), last: String(r.last || '') });
+                if (sec !== null) prevSec = sec;
+            });
+        });
+    }
+    /* Tên mục lục tiếng Việt (chuẩn RHM miền Nam) */
+    if (viList) viList.forEach(v => {
+        const it = items[Number(v && v.i)];
+        if (!it || typeof v.vi !== 'string' || !v.vi.trim()) return;
+        let viClean = v.vi.trim().replace(/^\d+(?:\.\d+)*\.?\s*/, '');
+        if (typeof window.rhmEnforceSouthernTerms === 'function') viClean = window.rhmEnforceSouthernTerms(viClean, it.en);
+        it.title = viClean;
+        if (!bkMenuViCache[cacheKey]) bkMenuViCache[cacheKey] = {};
+        bkMenuViCache[cacheKey][it.num + '|' + it.en] = viClean;
+    });
+    /* Định vị: ưu tiên tìm trong đúng trang, nếu không thấy thì tìm tiếp từ vị trí đã đi qua */
+    const segs = {}; const cur = { pos: 0 };
+    runs.forEach(r => {
+        if (r.sec === null || !r.first) return;
+        const pg = bkPages.find(p => p.num === r.page);
+        let a = pg ? bkFindAnchorInText(T, N, r.first, false, pg.gs, pg.ge) : -1;
+        if (a < 0) a = bkFindAnchorInText(T, N, r.first, false, cur.pos, T.length);
+        if (a < 0) return;
+        let b = r.last ? bkFindAnchorInText(T, N, r.last, true, a + 1, Math.min(T.length, a + 30000)) : -1;
+        if (b <= a) b = Math.min(T.length, a + Math.max(1, r.first.length));
+        (segs[r.sec] = segs[r.sec] || []).push([a, b]);
+        cur.pos = Math.max(cur.pos, a);
+    });
+    return segs;
+}
 
 async function bkResolveMenuTxtSections(chapSpec, useAi) {
     if (!chapSpec || !Array.isArray(chapSpec.sections) || !chapSpec.sections.length) return [];
     const T = String(bkText || '');
     const rawSecs = chapSpec.sections;
     const cacheKey = (bkCur ? bkCur.url : '') + '|' + chapSpec.num;
-
     const items = rawSecs.map((s, idx) => {
         const cachedVi = (bkMenuViCache[cacheKey] && bkMenuViCache[cacheKey][s.num + '|' + s.en]) || s.vi || '';
         return {
-            idx: idx,
-            num: s.num || '',
-            lvl: s.lvl || 1,
-            en: s.en || s.title || '',
+            idx: idx, num: s.num || '', lvl: s.lvl || 1, en: s.en || s.title || '',
             title: cachedVi || s.en || s.title || '',
-            startAnchor: s.startAnchor || '',
-            endAnchor: s.endAnchor || '',
-            s: -1,
-            e: -1,
-            fromList: true
+            startAnchor: s.startAnchor || '', endAnchor: s.endAnchor || '',
+            s: -1, e: -1, fromList: true
         };
     });
-
     if (!T.trim()) return items;
-
     const N = bkBuildNormIndex(T);
 
-    // Bước 1: Định vị Điểm neo đầu (s) cho toàn bộ các phân mục theo thứ tự
+    /* Bước 1: điểm neo đầu theo Menu.txt (dự phòng bằng tên tiếng Anh) */
     let curMinPos = 0;
     for (let i = 0; i < items.length; i++) {
         const it = items[i];
         let pos = bkFindAnchorInText(T, N, it.startAnchor, false, curMinPos, T.length);
-        if (pos < 0 && curMinPos > 0) {
-            // Thử tìm lại trên toàn văn bản nếu thứ tự cột làm lệch nhẹ
-            pos = bkFindAnchorInText(T, N, it.startAnchor, false, 0, T.length);
-        }
-        if (pos < 0 && it.en) {
-            // Dự phòng tìm theo tên tiêu đề tiếng Anh của mục
-            pos = bkFindAnchorInText(T, N, it.en, false, curMinPos, T.length);
-        }
+        if (pos < 0 && curMinPos > 0) pos = bkFindAnchorInText(T, N, it.startAnchor, false, 0, T.length);
+        if (pos < 0 && it.en) pos = bkFindAnchorInText(T, N, it.en, false, curMinPos, T.length);
         if (pos >= 0) {
             pos = bkSnapToHeadingBefore(T, pos, it.en);
             it.s = pos;
             if (pos >= curMinPos) curMinPos = pos + 1;
         }
     }
-
-    // Bước 2: Định vị Điểm neo cuối (e) cho từng phân mục (tính từ it.s trở đi)
+    /* Bước 2: điểm neo cuối theo Menu.txt */
     for (let i = 0; i < items.length; i++) {
         const it = items[i];
         const minForEnd = it.s >= 0 ? it.s + 1 : 0;
-        let endPos = bkFindAnchorInText(T, N, it.endAnchor, true, minForEnd, T.length);
-        if (endPos > minForEnd) {
-            it.e = endPos;
-        }
+        const endPos = bkFindAnchorInText(T, N, it.endAnchor, true, minForEnd, T.length);
+        if (endPos > minForEnd) it.e = endPos;
     }
 
-    // Bước 3: Nếu bật useAi (khi mở chương hoặc bấm "📑 Nhận diện mục lục" / "🔄 Cập nhật mục lục") và có khóa AI:
-    // - Nhờ AI định vị các điểm neo chưa khớp được (nếu có)
-    // - Nhờ AI dịch tên các mục lục tiếng Anh trong Menu.txt sang tiếng Việt chuẩn RHM miền Nam
-    const missingStarts = items.filter(it => it.s < 0);
-    const missingVi = items.filter(it => !it.title || it.title === it.en);
-
-    if (useAi && aiAnyKey() && (missingStarts.length > 0 || missingVi.length > 0)) {
-        try {
-            const payloadItems = items.map(it => ({
-                i: it.idx,
-                num: it.num,
-                en: it.en,
-                needPos: it.s < 0 ? 1 : 0,
-                startAnchor: it.s < 0 ? it.startAnchor : undefined,
-                endAnchor: (it.e < 0 && it.s < 0) ? it.endAnchor : undefined
-            }));
-            const sys = 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Nhiệm vụ của bạn gồm:\n' +
-                '1) Dịch tất cả tiêu đề mục lục "en" trong danh sách sang tiếng Việt ("vi") ngắn gọn, chuẩn thuật ngữ Răng Hàm Mặt miền Nam Việt Nam.' + BK_TR_GLOSS + '\n' +
-                '2) Với những mục có needPos=1 (do lỗi OCR làm lệch chữ điểm neo), hãy tìm trong NỘI DUNG CHƯƠNG cụm 6–12 từ nguyên văn khớp với vị trí bắt đầu ("sRef") và kết thúc ("eRef") của mục đó.\n' +
-                'Chỉ trả về MỘT đối tượng JSON hợp lệ dạng {"items":[{"i":0,"vi":"<tiêu đề tiếng Việt>","sRef":"<cụm từ bắt đầu nguyên văn nếu needPos=1>","eRef":"<cụm từ kết thúc nguyên văn nếu needPos=1>"}]} và không viết gì khác.';
-            const user = 'DANH SÁCH MỤC LỤC TỪ MENU.TXT:\n' + JSON.stringify(payloadItems) +
-                (missingStarts.length ? '\n\nNỘI DUNG CHƯƠNG:\n' + T.slice(0, 55000) : '');
-            const aiRes = await aiGeminiJson(sys, user, 4096);
-            const arr = (aiRes && Array.isArray(aiRes.items)) ? aiRes.items : [];
-            if (!bkMenuViCache[cacheKey]) bkMenuViCache[cacheKey] = {};
-            arr.forEach(r => {
-                if (!r || typeof r.i !== 'number') return;
-                const it = items[r.i];
-                if (!it) return;
-                if (typeof r.vi === 'string' && r.vi.trim()) {
-                    let viClean = r.vi.trim().replace(/^\d+(?:\.\d+)*\.?\s*/, '');
-                    if (typeof window.rhmEnforceSouthernTerms === 'function') viClean = window.rhmEnforceSouthernTerms(viClean, it.en);
-                    it.title = viClean;
-                    bkMenuViCache[cacheKey][it.num + '|' + it.en] = viClean;
-                }
-                if (it.s < 0 && r.sRef) {
-                    const p = bkFindAnchorInText(T, N, r.sRef, false, 0, T.length);
-                    if (p >= 0) it.s = p;
-                }
-                if (it.e < 0 && r.eRef && it.s >= 0) {
-                    const pe = bkFindAnchorInText(T, N, r.eRef, true, it.s + 1, T.length);
-                    if (pe > it.s) it.e = pe;
-                }
-            });
-            try { localStorage.setItem('bk_menutxt_vi_v1', JSON.stringify(bkMenuViCache)); } catch (e) {}
-        } catch (e) { console.warn('[Menu.txt AI assist]', e); }
+    /* Bước 3: bố cục bằng ảnh (chỉ khi bấm nút phân tích); các lần sau dùng lại kết quả đã lưu */
+    const sig = T.length + '|' + items.length + '|' + items.map(it => it.en.length).join(',');
+    const ckey = 'bk_v4_seg_' + cacheKey;
+    let segMap = null;
+    if (useAi && aiAnyKey() && !bkV4Busy) {
+        bkV4Busy = true;
+        const tok = bkViewTok, btn = document.getElementById('bk-sec-btn');
+        try { segMap = await bkV4AiLayout(chapSpec, items, T, N, tok, btn, cacheKey); }
+        catch (e) { console.warn('[V4]', e); segMap = null; }
+        finally { bkV4Busy = false; }
+        if (segMap) { try { localStorage.setItem(ckey, JSON.stringify({ sig: sig, segs: segMap })); } catch (e) {} }
+    } else {
+        try { const c = JSON.parse(localStorage.getItem(ckey) || 'null'); if (c && c.sig === sig) segMap = c.segs; } catch (e) {}
     }
+    if (segMap) items.forEach(it => {
+        const g = segMap[it.idx];
+        if (!g || !g.length) return;
+        it.segs = g;
+        it.s = Math.min.apply(null, g.map(x => x[0]));
+        it.anchorE = Math.max.apply(null, g.map(x => x[1]));
+        it.e = it.anchorE;
+    });
 
-    // Bước 4: Đảm bảo mọi mục trong Menu.txt đều có vị trí s hợp lệ tăng dần
+    /* Bước 4: bảo đảm điểm bắt đầu tăng dần (mục có đoạn ráp thì giữ nguyên) */
     let lastValidS = 0;
     for (let i = 0; i < items.length; i++) {
+        if (items[i].segs) { lastValidS = Math.max(lastValidS, items[i].s); continue; }
         if (items[i].s < lastValidS) {
-            // Nội suy giữa mục trước và mục kế tiếp có vị trí hợp lệ
-            let nextValidS = T.length;
-            let steps = 1;
+            let nextValidS = T.length, steps = 1;
             for (let j = i + 1; j < items.length; j++) {
                 steps++;
                 if (items[j].s > lastValidS) { nextValidS = items[j].s; break; }
@@ -10415,63 +10470,47 @@ async function bkResolveMenuTxtSections(chapSpec, useAi) {
         lastValidS = items[i].s;
     }
 
-    // Bước 5: Xác định điểm kết thúc (e) chuẩn cho mỗi phân mục dựa theo End Anchor hoặc đầu mục kế tiếp
+    /* Bước 5: điểm kết thúc và nội dung từng phân mục */
     for (let i = 0; i < items.length; i++) {
         const it = items[i];
+        if (it.segs) { it.text = it.segs.map(g => T.slice(g[0], g[1]).trim()).filter(Boolean).join('\n\n'); continue; }
         const nextItemS = (i + 1 < items.length) ? items[i + 1].s : T.length;
-        // Tìm mục kế tiếp cùng cấp hoặc cấp cao hơn (không phải mục con của it)
         let nextPeerS = T.length;
         for (let j = i + 1; j < items.length; j++) {
             if (items[j].lvl <= it.lvl) { nextPeerS = items[j].s; break; }
         }
-        // Nếu mục cha có các mục con trực tiếp bên trong:
-        // - Nếu người dùng bấm vào mục cha, đoạn riêng của mục cha (anchorE) kéo từ Start Anchor đến End Anchor (hoặc đến hết các mục con của nó).
-        // - Để khi bấm từng mục không bị chồng chéo thừa sang chương khác, giữ cả anchorE (theo đúng End Anchor trong Menu.txt) lẫn e chuẩn.
         const hasChildren = (i + 1 < items.length && items[i + 1].lvl > it.lvl);
-        if (it.e > it.s) {
-            it.anchorE = Math.min(T.length, it.e);
-        } else {
-            it.anchorE = hasChildren ? nextPeerS : nextItemS;
-        }
-        // Đoạn nội dung của phân mục: tính từ Start Anchor (it.s) đến End Anchor (it.anchorE)
-        // Nếu mục cha có phần dẫn nhập riêng trước mục con đầu tiên và End Anchor của mục cha trỏ tới cuối đoạn dẫn nhập (nhỏ hơn hoặc bằng đầu mục con), dùng đúng it.anchorE; nếu End Anchor bao trùm cả các mục con thì dùng đúng it.anchorE theo Menu.txt
+        if (it.e > it.s) it.anchorE = Math.min(T.length, it.e);
+        else it.anchorE = hasChildren ? nextPeerS : nextItemS;
         it.e = Math.max(it.s + 1, it.anchorE);
         it.text = T.slice(it.s, it.e).trim();
     }
-
     return items;
-}
-
-/* Ghi đè bkRelink để tôn trọng tuyệt đối điểm neo đầu (s) và điểm neo cuối (anchorE / e) từ Menu.txt */
+}/* Ghi đè bkRelink để tôn trọng tuyệt đối điểm neo đầu (s) và điểm neo cuối (anchorE / e) từ Menu.txt *//* Ghi đè bkRelink: ưu tiên đoạn đã ráp (segs) để nội dung và dịch đúng các đoạn thuộc mục */
 bkRelink = function () {
     const a = bkSecs.slice().sort((x, y) => (x.s - y.s) || ((x.lvl || 1) - (y.lvl || 1)));
     bkSecs = a.filter((x, i) => i === 0 || x.s !== a[i - 1].s || x.num !== a[i - 1].num);
     bkSecs.forEach((x, i) => {
-        if (x.fromList && x.anchorE && x.anchorE > x.s) {
-            x.e = Math.min(bkText.length, x.anchorE);
-        } else {
-            x.e = i + 1 < bkSecs.length ? Math.max(x.s + 1, bkSecs[i + 1].s) : bkText.length;
-        }
-        x.text = bkText.slice(x.s, x.e).trim();
+        if (x.fromList && x.anchorE && x.anchorE > x.s) x.e = Math.min(bkText.length, x.anchorE);
+        else x.e = i + 1 < bkSecs.length ? Math.max(x.s + 1, bkSecs[i + 1].s) : bkText.length;
+        x.text = (x.segs && x.segs.length)
+            ? x.segs.map(g => bkText.slice(g[0], g[1]).trim()).filter(Boolean).join('\n\n')
+            : bkText.slice(x.s, x.e).trim();
     });
 };
 
+/* Mở chương: không gọi AI; chỉ dùng kết quả đã phân tích trước đó (nếu có) hoặc điểm neo Menu.txt */
 function bkApplyMenuSections() {
     const cm = bkChapterMenu();
-    // Nếu file Menu.txt không tồn tại hoặc không quy định chương này -> KHÔNG nhận diện mục lục
-    if (!cm || !Array.isArray(cm.sections) || !cm.sections.length) {
-        return [];
-    }
-    bkResolveMenuTxtSections(cm, aiAnyKey()).then(resolved => {
+    if (!cm || !Array.isArray(cm.sections) || !cm.sections.length) return [];
+    bkResolveMenuTxtSections(cm, false).then(resolved => {
         if (resolved && resolved.length && bkCur) {
             bkSecs = bkMergeSecs(resolved, bkSecs.filter(x => x.manual));
             bkRelink(); bkSaveManual(); bkRenderSecList(); bkUpdateSecBtn(); bkApplyHlAll();
         }
     }).catch(() => {});
     return [];
-}
-
-function bkMergeSecs(x, y) {
+}function bkMergeSecs(x, y) {
     const a = x.concat(y).sort((p, q) => (p.s - q.s) || ((p.lvl || 1) - (q.lvl || 1)));
     return a.filter((p, i) => i === 0 || p.s !== a[i - 1].s || p.num !== a[i - 1].num);
 }
