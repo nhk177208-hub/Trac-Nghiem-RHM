@@ -9486,47 +9486,7 @@ function bkUpdateSecBtn() {
     b.textContent = bkSecs.length ? '🔄 Cập nhật mục lục' : '📑 Nhận diện mục lục';
 }
 
-async function bkDetectChapter() {
-    if (!bkDoc) return;
-    if (!bkText.trim()) { showToast('Chương đang được đọc chữ (xem thanh trạng thái) hoặc không có chữ — thử lại sau giây lát'); return; }
-    const btn = document.getElementById('bk-sec-btn'), list = document.getElementById('bk-sec-list');
-    btn.disabled = true;
-    btn.textContent = '⏳ Đang đối chiếu Menu.html / MucLuc.html…';
-
-    await bkLoadMucLuc(true);
-    await bkLoadMenu(true);
-
-    try {
-        const ex = await bkExtract(bkDoc, bkViewTok);
-        if (ex) { bkPages = ex.pages; bkText = ex.text; }
-    } catch (e) {}
-
-    const S = bkTocSoft();
-    if (!S || typeof S.detect !== 'function') {
-        btn.disabled = false; bkUpdateSecBtn();
-        showToast('Chưa nạp được MucLuc.html nên chưa lập mục lục tự động được (vẫn đánh dấu phân mục bằng tay được)');
-        return;
-    }
-    let r = null;
-    try {
-        r = await S.detect(BK_TOC_HOST, (k, n) => {
-            btn.textContent = '⏳ Quét ' + k + '/' + n;
-            list.innerHTML = '<p class="text-xs text-gray-500 p-1">🔍 Đang nhận diện mục lục theo MucLuc.html: đoạn ' + k + '/' + n + '…</p>';
-        });
-    } catch (e) { bkTocErr('detect', e); }
-    finally { btn.disabled = false; bkUpdateSecBtn(); }
-    if (!r || r.gate) { bkRenderSecList(); return; }
-
-    const found = Array.isArray(r.secs) ? r.secs : [];
-    if (found.length) {
-        bkSecs = bkMergeSecs(found, bkSecs.filter(x => x.manual));
-        bkRelink();
-    }
-    bkSaveManual(); bkSecSel = -1; bkHl = null; bkApplyHlAll(); bkRenderSecList(); bkUpdateSecBtn();
-    document.getElementById('bk-sec-tr').classList.add('hidden');
-    if (r.message) showToast(r.message);
-}
-/* Kéo đổi độ rộng cột mục lục (giống khung chat) */
+async function bkDetectChapter() {async function bkAiDetectSections(onProg) { if (!bkText || !bkText.trim()) return []; if (!aiAnyKey()) { aiShowGate(); return null; } const T = bkText; const chunkSize = 26000, step = 25000; const chunks = []; for (let pos = 0; pos < T.length; pos += step) { chunks.push({ start: pos, text: T.slice(pos, pos + chunkSize) }); if (pos + chunkSize >= T.length) break; } const allFound = []; const escRe = w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); const locateHeading = (enStr, fromPos) => { const cleanEn = String(enStr || '').replace(/\s+/g, ' ').trim(); if (!cleanEn) return -1; const words = cleanEn.split(/\s+/).filter(Boolean); for (let wLen = Math.min(words.length, 8); wLen >= Math.min(2, words.length); wLen--) { const pat = words.slice(0, wLen).map(escRe).join('[\\s\\r\\n]+'); try { const re = new RegExp(pat, 'ig'); re.lastIndex = Math.max(0, fromPos - 300); const m = re.exec(T); if (m && m.index < fromPos + chunkSize + 500) return m.index; } catch (e) {} } return -1; }; const gloss = (typeof window.rhmDictGlossary === 'function') ? window.rhmDictGlossary(T.slice(0, 8000), true) : ''; const sys = 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Hãy trích xuất toàn bộ các TIÊU ĐỀ MỤC VÀ TIỂU MỤC (headings / subheadings) có thực trong đoạn văn bản chương sách PDF dưới đây theo đúng thứ tự xuất hiện. KHÔNG lấy chú thích hình (Figure), bảng (Table), hộp (Box) hay câu văn thông thường. Với mỗi tiêu đề, trả về: "en" (chép NGUYÊN VĂN tiêu đề gốc trong sách, giữ nguyên chữ hoa/thường để định vị), "vi" (dịch tiêu đề sang tiếng Việt chuẩn thuật ngữ RHM miền Nam, ngắn gọn, chính xác), "lvl" (cấp mục lục: 1 cho mục lớn/chính, 2 cho tiểu mục con, 3 cho mục nhỏ hơn). ' + BK_TR_GLOSS + gloss + ' Chỉ trả về MỘT đối tượng JSON hợp lệ: {"items":[{"en":"...","vi":"...","lvl":1}]}, không viết gì ngoài JSON.'; for (let i = 0; i < chunks.length; i++) { if (onProg) onProg(i + 1, chunks.length); const ch = chunks[i]; const v = await aiGeminiJson(sys, 'ĐOẠN VĂN BẢN CHƯƠNG SÁCH (Phần ' + (i + 1) + '/' + chunks.length + '):\n' + ch.text, 4096); const arr = (v && Array.isArray(v.items)) ? v.items : []; let lastPos = ch.start; arr.forEach(it => { if (!it || !it.en) return; const en = String(it.en).replace(/\s+/g, ' ').trim(); let vi = String(it.vi || en).replace(/\s+/g, ' ').trim(); if (typeof window.rhmEnforceSouthernTerms === 'function') vi = window.rhmEnforceSouthernTerms(vi, en); const pos = locateHeading(en, lastPos); if (pos >= 0) { lastPos = pos + en.length; const lvl = Math.max(1, Math.min(4, parseInt(it.lvl, 10) || 1)); allFound.push({ title: vi || en, en: en, num: '', lvl: lvl, s: pos, manual: false, intro: false, e: 0, text: '' }); } }); } allFound.sort((a, b) => a.s - b.s); const dedup = []; allFound.forEach(x => { if (!dedup.length || Math.abs(x.s - dedup[dedup.length - 1].s) > 18) dedup.push(x); }); if (dedup.length && dedup[0].s > 80) { dedup.unshift({ title: 'Mở đầu', en: 'Introduction', num: '0.', lvl: 1, s: 0, manual: false, intro: true, e: 0, text: '' }); } return dedup; } async function bkDetectChapter() { if (!bkDoc) return; if (!bkText.trim()) { showToast('Chương đang được đọc chữ (xem thanh trạng thái) hoặc không có chữ — thử lại sau giây lát'); return; } const btn = document.getElementById('bk-sec-btn'), list = document.getElementById('bk-sec-list'); const isRefresh = bkSecs.length > 0; btn.disabled = true; btn.textContent = '⏳ Đang quét lại mục lục…'; list.innerHTML = '<p class="text-xs text-indigo-600 font-semibold p-2">⏳ Đang đọc lại cấu trúc chương và cập nhật mục lục…</p>'; try { await bkLoadMucLuc(true); await bkLoadMenu(true); try { const ex = await bkExtract(bkDoc, bkViewTok); if (ex) { bkPages = ex.pages; bkText = ex.text; } } catch (e) {} const manualKeep = bkSecs.filter(x => x.manual); let found = []; const presetSecs = bkApplyMenuSections(); if (presetSecs && presetSecs.length && !isRefresh) { found = presetSecs; } const S = bkTocSoft(); if (!found.length && S && typeof S.detect === 'function') { try { const r = await S.detect(BK_TOC_HOST, (k, n) => { btn.textContent = '⏳ Quét ' + k + '/' + n; list.innerHTML = '<p class="text-xs text-gray-500 p-2">🔍 Đang nhận diện mục lục: đoạn ' + k + '/' + n + '…</p>'; }); if (r && r.gate) { bkRenderSecList(); return; } if (r && Array.isArray(r.secs) && r.secs.length) found = r.secs; } catch (e) { bkTocErr('detect', e); } } if (!found.length || isRefresh) { const aiSecs = await bkAiDetectSections((k, n) => { btn.textContent = '🤖 AI quét ' + k + '/' + n; list.innerHTML = '<p class="text-xs text-indigo-700 font-semibold p-2">🤖 AI đang phân tích và lập mục lục chương: phần ' + k + '/' + n + '…</p>'; }); if (aiSecs === null) { bkRenderSecList(); return; } if (aiSecs && aiSecs.length) found = aiSecs; } if (found.length) { bkSecs = bkMergeSecs(found, manualKeep); bkRelink(); bkSaveManual(); bkSecSel = -1; bkHl = null; bkApplyHlAll(); bkRenderSecList(); document.getElementById('bk-sec-tr').classList.add('hidden'); showToast('✅ Đã cập nhật mục lục: ' + bkSecs.length + ' mục'); } else { bkRenderSecList(); showToast('⚠️ Không tìm thấy tiêu đề mục lục mới trong chương này'); } } finally { btn.disabled = false; bkUpdateSecBtn(); } }/* Kéo đổi độ rộng cột mục lục (giống khung chat) */
 function bkEnsureSecGrip() {
     const p = document.getElementById('bk-sec-panel'); if (!p || document.getElementById('bk-sec-grip')) return;
     try { const w = localStorage.getItem('bk_sec_w'); if (w) document.documentElement.style.setProperty('--bk-sec-w', w + 'px'); } catch (e) {}
