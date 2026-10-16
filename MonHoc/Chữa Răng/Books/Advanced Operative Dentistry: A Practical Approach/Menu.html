@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head><meta charset="utf-8"><title>Menu sách — Nhận diện theo List.txt</title></head>
+<head><meta charset="utf-8"><title>Menu sách — Nhận List.txt trả về index.html</title></head>
 <body>
 <script>
-// Menu.html tự động lấy danh sách chương & mục lục đã phân tích từ List.txt trong cùng thư mục sách
 (function () {
-    const listData = TOC.listData || (TOC.listTxt ? TOC.parseListTxt(TOC.listTxt) : null);
+    // 1. Lấy dữ liệu List.txt đã được đọc từ cùng thư mục sách
+    const listData = TOC.listData || (TOC.listTxt && TOC.parseListTxt ? TOC.parseListTxt(TOC.listTxt) : null);
     const chapters = {};
 
     if (listData && Array.isArray(listData.chapters)) {
@@ -16,16 +16,16 @@
                 en: ch.en || ch.title,
                 sections: ch.sections
             };
-            chapters['Chương ' + ch.num] = entry;
             chapters[String(ch.num)] = entry;
+            chapters['Chương ' + ch.num] = entry;
             if (ch.title) chapters[ch.title] = entry;
             if (ch.en) chapters[ch.en] = entry;
         });
     }
 
+    // 2. Trả kết quả cấu hình sách + toàn bộ mục lục chương từ List.txt về cho index.html
     TOC.menu({
         book: 'Advanced Operative Dentistry: A Practical Approach',
-        // Quy tắc đọc PDF 2 cột chuẩn cho sách giáo khoa RHM
         reader_rules: {
             reading_order: 'col1_top_down_then_col2',
             auto_two_column: true,
@@ -36,7 +36,27 @@
             skip_footnotes: true,
             skip_figure_labels: true
         },
-        chapters: chapters
+        chapters: chapters,
+        resolveChapter: function (chapTitle) {
+            return TOC.matchChapter ? TOC.matchChapter(chapTitle) : null;
+        },
+        engine: {
+            hardSections: function (H) {
+                const cm = H.chapterMenu && H.chapterMenu();
+                if (!cm || !Array.isArray(cm.sections) || !cm.sections.length) return [];
+                H.matchListToText(cm.sections, false);
+                return [];
+            },
+            detect: async function (H) {
+                const cm = H.chapterMenu && H.chapterMenu();
+                if (!cm || !Array.isArray(cm.sections) || !cm.sections.length) return { secs: [] };
+                const secs = await H.matchListToText(cm.sections, true);
+                return {
+                    secs: secs,
+                    message: '✅ Menu.html đã nhận diện ' + secs.length + ' mục từ List.txt!'
+                };
+            }
+        }
     });
 })();
 </script>
