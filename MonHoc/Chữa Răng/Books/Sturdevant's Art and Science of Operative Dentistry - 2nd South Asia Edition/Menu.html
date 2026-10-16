@@ -17,12 +17,6 @@
 
   /* Tên file PDF của chương n (không cần .pdf). Sửa ở đây nếu file của bạn đặt tên khác. */
   const tenFile = n => 'Chuong ' + n;
-  /* Tên khác (tùy chọn) của file PDF chương — chương vẫn nhận nếu file mang tên này. Ví dụ theo tên hiện trên thanh tiêu đề sách. */
-  const tenKhac = {
-    5: '05. Chương 5 - Kiểm soát đau trong nha khoa phục hồi',
-    10: '10. Chương 10 - Nha chu ứng dụng trong nha khoa phục hồi',
-    27: '27. Chương 27 - Thông tin bổ sung về dụng cụ và trang thiết bị soạn xoang'
-  };
 
   /* Trang đầu – trang cuối của mỗi chương trong PDF gốc (751 trang). Dùng để suy ra trang chẵn/lẻ của bố cục cột. */
   const TRANG_PDF = {
@@ -1734,7 +1728,37 @@
   ];
 
   const chapters = {};
-  LIST.forEach(c => { chapters[tenFile(c.n)] = c.entry; if (tenKhac[c.n]) chapters[tenKhac[c.n]] = c.entry; });
+  LIST.forEach(c => { chapters[tenFile(c.n)] = c.entry; });
+
+  /* ===== Nhận diện chương theo SỐ CHƯƠNG (không dựa vào nguyên tên file) =====
+     Lấy số chương từ tên file / tiêu đề của chương đang đọc ("Chương 27", "27. ...", "Chuong 27").
+     Có số và có mục trong bảng này → dùng đúng mục của số đó. Không lấy được số → app tự tra như cũ. */
+  const BY_NO = {};
+  LIST.forEach(c => { BY_NO[c.n] = c.entry; });
+  function soChuong(H) {
+    const cur = H.chapter() || {};
+    const ten = [cur.name, cur.title, cur.file].filter(s => typeof s === 'string');
+    const all = ten.concat([cur.url, cur.path].filter(s => typeof s === 'string'));
+    for (const s of all) { const m = s.match(/(?:chương|chuong|chapter)\s*(\d{1,2})\b/i); if (m) return parseInt(m[1], 10); }
+    for (const s of ten) { const m = s.match(/^\s*(\d{1,2})\s*[.\-_ ]/); if (m) return parseInt(m[1], 10); }
+    return 0;
+  }
+  function shim(H) {
+    const n = soChuong(H);
+    if (!n || !BY_NO[n]) return H;
+    const H2 = Object.create(H);
+    H2.chapterMenu = () => BY_NO[n];
+    return H2;
+  }
+  const B = TOC.base || {};
+  const wrapH = f => function (H, ...rest) { return f(shim(H), ...rest); };
+  const wrapC = f => function (c) { return f(Object.assign({}, c, { H: shim(c.H) })); };
+  if (typeof TOC.override === 'function') {
+    const ov = {};
+    ['hardSections', 'detect', 'subSections', 'getRules', 'getPrompts'].forEach(k => { if (typeof B[k] === 'function') ov[k] = wrapH(B[k]); });
+    ['excludeItems', 'trimOrder', 'detectCandidates'].forEach(k => { if (typeof B[k] === 'function') ov[k] = wrapC(B[k]); });
+    if (Object.keys(ov).length) TOC.override(ov);
+  }
 
   TOC.menu({
     layout: { columns: COT.odd, top: TOP, bottom: BOTTOM },
