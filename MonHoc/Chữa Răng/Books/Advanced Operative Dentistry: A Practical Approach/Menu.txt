@@ -1,0 +1,339 @@
+================================================================================
+BẢNG PHÂN TÍCH MỤC LỤC CHI TIẾT & ĐIỂM NEO VĂN BẢN (CHƯƠNG 1 - 3)
+Quy chuẩn đọc: Theo thứ tự 2 cột (Cột 1 trên -> dưới, Cột 2 trên -> dưới).
+Loại trừ: Hình ảnh (Figure), Chú thích hình, Khung bảng (Table), Header/Footer, Outline tóm tắt đầu chương.
+================================================================================
+
+--------------------------------------------------------------------------------
+CHƯƠNG 1: MANAGEMENT OF DENTAL CARIES
+--------------------------------------------------------------------------------
+
+1. DENTAL CARIES THE DISEASE
+   - Điểm neo đầu (Start Anchor): "Dental caries is a disease that is common to all dentate individuals."
+   - Điểm neo cuối (End Anchor): "The patient has now entered the restorative cycle."
+
+2. THE RESTORATIVE CYCLE
+   - Điểm neo đầu (Start Anchor): "A significant proportion of a dentist's work time is spent replacing restorations..."
+   - Điểm neo cuối (End Anchor): "...increases the patient's risk to new caries, but also to periodontal disease if the margins are close to the gingival tissues."
+
+3. CARIES DETECTION AND DIAGNOSIS
+   - Điểm neo đầu (Start Anchor): "It is important when examining a patient for primary caries or caries adjacent to restorations that the teeth are examined clean."
+   - Điểm neo cuối (End Anchor): "...all this information is processed that a true diagnosis, prognosis and treatment plan can be made."
+
+4. CARIES RISK ASSESSMENT
+   - Điểm neo đầu (Start Anchor): "The patient seen in Figures 1.4 and 1.9 is a young patient who has received multiple restorations..."
+   - Điểm neo cuối (End Anchor): "...addressing the caries problem."
+
+   4.1. What is caries risk?
+        - Điểm neo đầu (Start Anchor): "Caries risk is a prediction as to whether a patient is likely to develop new caries in the future."
+        - Điểm neo cuối (End Anchor): "...required over a period of time before advanced operative techniques are considered."
+
+   4.2. Caries risk factors
+        - Điểm neo đầu (Start Anchor): "Caries prevalence, and hence risk, has been shown to be closely associated with social deprivation..."
+        - Điểm neo cuối (End Anchor): "...Figures 1.19 and 1.20 show what the Cariogram would look like for a low- and a high-risk patient, respectively."
+
+        4.2.1. Social deprivation
+               - Điểm neo đầu (Start Anchor): "Caries prevalence, and hence risk, has been shown to be closely associated with social deprivation in many countries."
+               - Điểm neo cuối (End Anchor): "...assessment of caries risk on an individual patient basis needs to be carried out prior to advanced operative procedures."
+
+        4.2.2. Past caries experience
+               - Điểm neo đầu (Start Anchor): "A strong predictor of future caries is previous caries experience."
+               - Điểm neo cuối (End Anchor): "...reassessment of caries risk over a period of 6-12 months before embarking on a more advanced phase of the treatment plan."
+
+        4.2.3. Oral hygiene
+               - Điểm neo đầu (Start Anchor): "The level of oral hygiene can be assessed in a number of ways."
+               - Điểm neo cuối (End Anchor): "...the use of super floss, also known as three-in-one floss, beneath bridge pontics and connectors."
+
+        4.2.4. Diet
+               - Điểm neo đầu (Start Anchor): "An association between dietary sugars and caries has long been established."
+               - Điểm neo cuối (End Anchor): "...they have the knowledge necessary to prevent their caries and may already be in the process of amending their diet."
+
+        4.2.5. Fluoride
+               - Điểm neo đầu (Start Anchor): "Topical fluoride is important in a caries preventive program and information on its use needs to be gathered in a caries risk assessment."
+               - Điểm neo cuối (End Anchor): "...formulations and fluoride content of mouthwashes may differ between countries."
+
+        4.2.6. Saliva
+               - Điểm neo đầu (Start Anchor): "Saliva is extremely important for oral health and function."
+               - Điểm neo cuối (End Anchor): "...Figures 1.19 and 1.20 show what the Cariogram would look like for a low- and a high-risk patient, respectively."
+
+               4.2.6.1. Saliva microbiology
+                        - Điểm neo đầu (Start Anchor): "Salivary tests for mutans streptococci and lactobacilli have been used for many years..."
+                        - Điểm neo cuối (End Anchor): "...Figures 1.19 and 1.20 show what the Cariogram would look like for a low- and a high-risk patient, respectively."
+
+5. SUMMARY AND PRINCIPLES OF TREATMENT PLANNING FOR A HIGH CARIES RISK PATIENT
+   - Điểm neo đầu (Start Anchor): "Early caries detection and caries risk assessment are important to target prevention..."
+   - Điểm neo cuối (End Anchor): "...If in any doubt as to the patient's caries risk status and compliance with preventive advice, a further period of monitoring would be advised."
+
+6. FURTHER READING
+   - Điểm neo đầu (Start Anchor): "Alian, A.Y., McNally, M.E., Fure, S., Birkhed, D., 2006..."
+   - Điểm neo cuối (End Anchor): "...Med. Oral Patol. Oral Cir. Bucal 12, E412-E418."
+
+
+--------------------------------------------------------------------------------
+CHƯƠNG 2: PERIODONTAL DISEASE
+--------------------------------------------------------------------------------
+
+1. THE NECESSARY ORDER OF THINGS
+   - Điểm neo đầu (Start Anchor): "There is no doubt that screening patients, diagnosing periodontal disease..."
+   - Điểm neo cuối (End Anchor): "...It would make no sense to begin building walls or choosing the lighting if the foundations were not sound."
+
+2. SUSCEPTIBILITY TO PERIODONTAL DISEASE
+   - Điểm neo đầu (Start Anchor): "It is clear from many studies that there is considerable variation in individual susceptibility to periodontal disease."
+   - Điểm neo cuối (End Anchor): "...recognition and control forms an essential part of periodontal management, particularly in patients with higher susceptibility."
+
+3. THE CONCEPT OF RISK
+   - Điểm neo đầu (Start Anchor): "It is known that the presence of risk factors will increase the chance that periodontal disease will occur."
+   - Điểm neo cuối (End Anchor): "Risk recognition begins at the stage of taking thorough histories from patients."
+
+4. TAKING HISTORIES FROM PATIENTS WITH PERIODONTAL DISEASE
+   - Điểm neo đầu (Start Anchor): "Taking thorough histories is an essential part of a patient's oral health care..."
+   - Điểm neo cuối (End Anchor): "...siblings or children of AgP patients should be regularly screened for the disease."
+
+   4.1. Medical history
+        - Điểm neo đầu (Start Anchor): "This serves three main functions: 1. It may explain, at least in part, the severity and extent..."
+        - Điểm neo cuối (End Anchor): "...there should be no reason not to proceed with complex restorative work if this was the desired outcome."
+
+   4.2. Dental history
+        - Điểm neo đầu (Start Anchor): "It is clear that patients who attend the dentist irregularly are not candidates for advanced restorative treatment plans."
+        - Điểm neo cuối (End Anchor): "Short recall times would also be needed for a substantial period after placement."
+
+   4.3. Social history
+        - Điểm neo đầu (Start Anchor): "There are three particular aspects of the social history that are relevant to periodontal disease."
+        - Điểm neo cuối (End Anchor): "...and although regarded as a risk factor, its single impact on dental care is difficult to determine."
+
+   4.4. Family history
+        - Điểm neo đầu (Start Anchor): "The genetic links associated with aggressive periodontitis (AgP) are much stronger than with chronic periodontitis."
+        - Điểm neo cuối (End Anchor): "It should also be noted that siblings or children of AgP patients should be regularly screened for the disease."
+
+5. ASSESSMENT OF PERIODONTAL DISEASE
+   - Điểm neo đầu (Start Anchor): "A clinical examination and where necessary sensitivity testing, will inform the clinician as to whether radiographic examination is required..."
+   - Điểm neo cuối (End Anchor): "...the number of periodontal disease episodes or the timing of these episodes."
+
+   5.1. The clinical assessment
+        - Điểm neo đầu (Start Anchor): "The BPE (Table 2.1) is a screening tool to enable practitioners to determine whether or not their patient has significant periodontal disease."
+        - Điểm neo cuối (End Anchor): "...establish whether a radiographic examination is required and, if so, which radiographs are appropriate."
+
+        5.1.1. The basic periodontal examination (BPE)
+               - Điểm neo đầu (Start Anchor): "The BPE (Table 2.1) is a screening tool to enable practitioners to determine whether or not their patient has significant periodontal disease."
+               - Điểm neo cuối (End Anchor): "...and the reader should be aware of these if the system is to be correctly applied and interpreted."
+
+        5.1.2. Clinical examination
+               - Điểm neo đầu (Start Anchor): "For all patients who have BPE codes 3, 4 or *, a full periodontal examination is required."
+               - Điểm neo cuối (End Anchor): "...establish whether a radiographic examination is required and, if so, which radiographs are appropriate."
+
+   5.2. The radiographic examination
+        - Điểm neo đầu (Start Anchor): "A radiographic examination, if required, is a useful adjunct to the clinical examination and not an alternative."
+        - Điểm neo cuối (End Anchor): "...the number of periodontal disease episodes or the timing of these episodes."
+
+        5.2.1. Which radiographs?
+               - Điểm neo đầu (Start Anchor): "There are published guidelines about which radiographs to use in particular situations..."
+               - Điểm neo cuối (End Anchor): "...only the appropriate and minimum number of radiographs should be taken."
+
+        5.2.2. The radiographic report
+               - Điểm neo đầu (Start Anchor): "Completing the radiographic report as soon as possible is an essential discipline if the diagnostic yield is to be maximized."
+               - Điểm neo cuối (End Anchor): "...the number of periodontal disease episodes or the timing of these episodes."
+
+6. MAKING A PERIODONTAL DIAGNOSIS
+   - Điểm neo đầu (Start Anchor): "A periodontal diagnosis should be formulated for all new patients..."
+   - Điểm neo cuối (End Anchor): "...oral metronidazole 400 mg plus oral amoxicillin 250 mg, both three times per day for 1 week."
+
+   6.1. Periodontal stability
+        - Điểm neo đầu (Start Anchor): "This is the diagnosis when two conditions are satisfied: (1) there is a lack of bleeding upon probing..."
+        - Điểm neo cuối (End Anchor): "...provided the stability is demonstrable over a period of time."
+
+   6.2. Gingivitis
+        - Điểm neo đầu (Start Anchor): "This is the diagnosis when there is bleeding on probing and there is no loss of attachment."
+        - Điểm neo cuối (End Anchor): "...as it is the precursor for periodontitis in susceptible patients which is irreversible."
+
+   6.3. Periodontitis
+        - Điểm neo đầu (Start Anchor): "This is the diagnosis when two conditions are satisfied: (1) there is bleeding on probing; and (2) there is loss of attachment."
+        - Điểm neo cuối (End Anchor): "...with localized severe chronic periodontitis affecting lower incisors and canines)."
+
+   6.4. Aggressive periodontitis
+        - Điểm neo đầu (Start Anchor): "It is worth making special mention of this particular form of periodontitis."
+        - Điểm neo cuối (End Anchor): "...oral metronidazole 400 mg plus oral amoxicillin 250 mg, both three times per day for 1 week."
+
+7. PERIODONTAL TREATMENT PLANNING
+   - Điểm neo đầu (Start Anchor): "Periodontal treatment planning is straightforward and the following section gives a logical outline for the clinician to follow."
+   - Điểm neo cuối (End Anchor): "Advanced operative procedures should not be undertaken until Phase 5 has been reached and maintained for an acceptable period."
+
+   7.1. The five phases of treatment planning
+        - Điểm neo đầu (Start Anchor): "It is useful to consider the complete treatment plan within this framework."
+        - Điểm neo cuối (End Anchor): "Advanced operative procedures should not be undertaken until Phase 5 has been reached and maintained for an acceptable period."
+
+        7.1.1. Phase 1 - Relief of pain and initial examination
+               - Điểm neo đầu (Start Anchor): "It is relatively unusual for periodontal disease to cause pain, but should this be the case..."
+               - Điểm neo cuối (End Anchor): "...so that a provisional diagnosis and treatment plan can be formulated."
+
+        7.1.2. Phase 2 - Cause-related therapy
+               - Điểm neo đầu (Start Anchor): "The primary purpose of this stage is essentially to control risks."
+               - Điểm neo cuối (End Anchor): "• Stabilization of caries if necessary."
+
+        7.1.3. Phase 3 - Re-examination
+               - Điểm neo đầu (Start Anchor): "This stage is absolutely essential and should be timed for a minimum of 6-8 weeks after the last RSI has taken place."
+               - Điểm neo cuối (End Anchor): "Patience is rewarded!"
+
+        7.1.4. Phase 4 - Definitive treatment
+               - Điểm neo đầu (Start Anchor): "This often includes re-root surface instrumentation of sites."
+               - Điểm neo cuối (End Anchor): "Only once stability has been achieved does the patient progress to Phase 5."
+
+        7.1.5. Phase 5 - Maintenance or SPT
+               - Điểm neo đầu (Start Anchor): "This is basically a recall system that patients only commence once periodontal stability has been achieved..."
+               - Điểm neo cuối (End Anchor): "Advanced operative procedures should not be undertaken until Phase 5 has been reached and maintained for an acceptable period."
+
+8. PERIODONTAL CONSIDERATIONS IN RELATION TO ADVANCED OPERATIVE DENTISTRY
+   - Điểm neo đầu (Start Anchor): "Should active periodontal disease recur during or after provision of advanced operative dentistry..."
+   - Điểm neo cuối (End Anchor): "If tooth mobility is related to reduced periodontal support and/or periradicular disease, occlusal adjustment will be ineffective."
+
+   8.1. Margin placement
+        - Điểm neo đầu (Start Anchor): "It is much easier to get good impressions and thus well-fitting fixed and/or removable prosthodontics if the periodontium is healthy."
+        - Điểm neo cuối (End Anchor): "It must be better to place restoration margins on visible labial surfaces just within the gingival crevice."
+
+   8.2. Temporary cover
+        - Điểm neo đầu (Start Anchor): "Well constructed temporary cover is important (see Chapter 14)."
+        - Điểm neo cuối (End Anchor): "In such cases the aesthetics of the final restorations may also be compromised."
+
+   8.3. Choice of advanced restorations
+        - Điểm neo đầu (Start Anchor): "In the past, it was often assumed that patients with a positive history of periodontal disease were unsuitable for advanced operative dentistry."
+        - Điểm neo cuối (End Anchor): "...provision of a removable prosthesis may simply compromise periodontal health."
+
+   8.4. Occlusion and the periodontium
+        - Điểm neo đầu (Start Anchor): "If the periodontium is stable, application of even abnormal occlusal forces may cause teeth to become mobile..."
+        - Điểm neo cuối (End Anchor): "If tooth mobility is related to reduced periodontal support and/or periradicular disease, occlusal adjustment will be ineffective."
+
+9. SUMMARY
+   - Điểm neo đầu (Start Anchor): "This chapter has highlighted the importance of establishing periodontal health prior to advanced operative dentistry."
+   - Điểm neo cuối (End Anchor): "...lays down the foundations for the restorations described in this textbook."
+
+10. FURTHER READING
+    - Điểm neo đầu (Start Anchor): "Croucher, R., 2005. Why and how to get patients to stop smoking..."
+    - Điểm neo cuối (End Anchor): "...J. Clin. Periodontol. 2, 126-135."
+
+
+--------------------------------------------------------------------------------
+CHƯƠNG 3: ENDODONTIC PROBLEMS IN ADVANCED OPERATIVE DENTISTRY
+--------------------------------------------------------------------------------
+
+1. ENDODONTIC HEALTH
+   - Điểm neo đầu (Start Anchor): "The health of the pulp and periradicular tissues is of paramount concern when undertaking operative and fixed prosthodontic procedures."
+   - Điểm neo cuối (End Anchor): "...prevent microbial elements reaching the dental pulp in such concentrations that irreversible damage occurs."
+
+2. GENERAL ANATOMICAL AND PHYSIOLOGICAL CONSIDERATIONS
+   - Điểm neo đầu (Start Anchor): "The dental pulp is encased within the hard tissue structure consisting of the enamel and dentine."
+   - Điểm neo cuối (End Anchor): "These tubules are known as dead tracts."
+
+   2.1. The dentine pulp complex
+        - Điểm neo đầu (Start Anchor): "The dental pulp is encased within the hard tissue structure consisting of the enamel and dentine."
+        - Điểm neo cuối (End Anchor): "Therefore, once tertiary dentine is exposed by tooth wear or caries there is a greater risk of subsequent pulp pathology."
+
+   2.2. Nerves in the pulp
+        - Điểm neo đầu (Start Anchor): "The principal elements of the dental pulp consist of stromal cells, fibroblasts, and an extensive network of nerves..."
+        - Điểm neo cuối (End Anchor): "Recently it has been shown that fibroblasts in the pulp may also release these peptides, particularly substance P."
+
+   2.3. Pulp vasculature
+        - Điểm neo đầu (Start Anchor): "The pulp shows a complex vascularity with a capillary bed adjacent to the odontoblast layer."
+        - Điểm neo cuối (End Anchor): "This demonstrates the complexity of the nerve distribution in the oral cavity."
+
+   2.4. Pulpal defence mechanisms
+        - Điểm neo đầu (Start Anchor): "The dental pulp is a complex structure that demonstrates various strategies to protect itself from injury."
+        - Điểm neo cuối (End Anchor): "These tubules are known as dead tracts."
+
+3. THE EFFECT OF RESTORATIVE PROCEDURES ON THE DENTAL PULP
+   - Điểm neo đầu (Start Anchor): "The effect that a restorative procedure has on the dental pulp is related to many factors."
+   - Điểm neo cuối (End Anchor): "...teeth that are well restored are less likely to have periradicular disease because there is an improved coronal seal."
+
+   3.1. Health of the pulp
+        - Điểm neo đầu (Start Anchor): "Clinically it is difficult to tell the health of the dental pulp, especially if there are no outward clinical signs and symptoms."
+        - Điểm neo cuối (End Anchor): "Nevertheless, the dental pulp may be injured during operative procedures on the tooth."
+
+   3.2. Preparation of the tooth
+        - Điểm neo đầu (Start Anchor): "The most common method of tooth preparation is using rotating instruments in either an airotor..."
+        - Điểm neo cuối (End Anchor): "...which may lead to subsequent irreversible damage to the pulp."
+
+   3.3. Frictional heat
+        - Điểm neo đầu (Start Anchor): "The heat generated during tooth preparation for a restoration may cause irreversible damage to the pulp."
+        - Điểm neo cuối (End Anchor): "It is important to check the handpiece to ensure the bur is running concentrically."
+
+   3.4. The effects of local anaesthetic
+        - Điểm neo đầu (Start Anchor): "The use of laser Doppler flowmetry has shown that the delivery of local anaesthetic containing adrenaline..."
+        - Điểm neo cuối (End Anchor): "...carried out on a tooth that has been anaesthetized in this way."
+
+   3.5. The effects of dental materials on the dental pulp
+        - Điểm neo đầu (Start Anchor): "Following tooth preparation for indirect restorations, a temporary restoration is placed to protect the prepared tooth structure..."
+        - Điểm neo cuối (End Anchor): "...Clinically, this reaction is probably not of consequence but it does add weight to the argument of the 'stressed pulp' condition."
+
+   3.6. Crown cementation
+        - Điểm neo đầu (Start Anchor): "An informative review by Lam and Wilson (1999) concluded that sealing of the dentinal tubules..."
+        - Điểm neo cuối (End Anchor): "Dentine bonding agents reduce dentinal fluid flow and therefore may prevent pulpal damage."
+
+   3.7. Marginal microleakage
+        - Điểm neo đầu (Start Anchor): "Achieving a marginal seal at the interface between the restoration and the tooth has long been regarded as an important goal..."
+        - Điểm neo cuối (End Anchor): "...teeth that are well restored are less likely to have periradicular disease because there is an improved coronal seal."
+
+4. DIAGNOSING THE STATE OF THE DENTAL PULP
+   - Điểm neo đầu (Start Anchor): "It is very difficult to diagnose the pathology of the dental pulp from diagnostic tests because direct inspection cannot be used."
+   - Điểm neo cuối (End Anchor): "...Spontaneous pain which usually prevents the patient from sleeping is associated with severe inflammation of the pulp and irreversible pulpitis."
+
+   4.1. Testing pulp sensitivity
+        - Điểm neo đầu (Start Anchor): "It is very difficult to diagnose the pathology of the dental pulp from diagnostic tests because direct inspection cannot be used."
+        - Điểm neo cuối (End Anchor): "...but no reliable product has been produced commercially for routine use in clinical practice."
+
+   4.2. Reliability of sensitivity testing
+        - Điểm neo đầu (Start Anchor): "Although it is impossible to find a diagnostic test that provides 100% reliability all of the time..."
+        - Điểm neo cuối (End Anchor): "For this reason it is best to test the contralateral tooth in addition to the tooth in question."
+
+   4.3. Tests using heat
+        - Điểm neo đầu (Start Anchor): "A gutta-percha stick is heated and placed on the surface of the tooth."
+        - Điểm neo cuối (End Anchor): "In general, the heat test is not reliable and should be used only in combination with other tests."
+
+   4.4. Tests using cold
+        - Điểm neo đầu (Start Anchor): "There are a number of ways cold can be applied to the tooth."
+        - Điểm neo cuối (End Anchor): "These sprays reduce the temperature to approximately -50°C."
+
+   4.5. Electrical testing
+        - Điểm neo đầu (Start Anchor): "Proprietary electrical pulp testers are available."
+        - Điểm neo cuối (End Anchor): "• Patients with a high pain threshold."
+
+        4.5.1. Clinical technique for electric pulp testing
+               - Điểm neo đầu (Start Anchor): "The purpose of the test should be explained to the patient."
+               - Điểm neo cuối (End Anchor): "• Patients with a high pain threshold."
+
+   4.6. The use of radiographs
+        - Điểm neo đầu (Start Anchor): "The routine radiological image taken for examining the periradicular tissues of a tooth is the intraoral periapical radiograph."
+        - Điểm neo cuối (End Anchor): "At this stage there are usually no symptoms and a chronic periradicular periodontitis is diagnosed."
+
+   4.7. Linking symptoms to pulpal status
+        - Điểm neo đầu (Start Anchor): "Symptoms of pain will also provide clues as to the state of the pulp but, unfortunately, these are not always reliable."
+        - Điểm neo cuối (End Anchor): "...Spontaneous pain which usually prevents the patient from sleeping is associated with severe inflammation of the pulp and irreversible pulpitis."
+
+        4.7.1. Sharp pain
+               - Điểm neo đầu (Start Anchor): "Sharp pain to cold stimuli that lasts only as long as the stimulus is present is linked to stimulation of Ad-fibres."
+               - Điểm neo cuối (End Anchor): "...in teeth with gingival recession such as treated periodontal disease."
+
+        4.7.2. Lingering pain
+               - Điểm neo đầu (Start Anchor): "Pain to hot stimuli, and occasionally cold, that lingers for minutes or hours after the stimulus is removed..."
+               - Điểm neo cuối (End Anchor): "Spontaneous pain which usually prevents the patient from sleeping is associated with severe inflammation of the pulp and irreversible pulpitis."
+
+5. TREATMENT FOR PULPAL INFLAMMATION
+   - Điểm neo đầu (Start Anchor): "It is clear that the pulp has good reparative powers if the assault on the tissue is neither too severe nor prolonged."
+   - Điểm neo cuối (End Anchor): "...or perhaps extracted if endodontics is not feasible, the tooth is unrestorable or is not strategic."
+
+6. ASSESSING TEETH WITH PULP AND PERIRADICULAR DISEASE
+   - Điểm neo đầu (Start Anchor): "Prior to treating irreversible pulpitis a clear indication of the quality of the remaining tooth structure must be made."
+   - Điểm neo cuối (End Anchor): "Further study of the longevity of restorations on root-filled teeth, applying these criteria, is required."
+
+7. RADIOGRAPHIC ASSESSMENT OF THE ROOT-FILLED TOOTH
+   - Điểm neo đầu (Start Anchor): "If a root-filled tooth is to be restored with an indirect restoration such as a crown..."
+   - Điểm neo cuối (End Anchor): "...or where non-surgical or surgical root canal treatment is being considered."
+
+8. SURVIVAL OF ROOT-CANAL TREATED CROWNED TEETH
+   - Điểm neo đầu (Start Anchor): "Patients may have concerns regarding the longevity of crowned teeth that have been root canal treated."
+   - Điểm neo cuối (End Anchor): "...reduce the severity of inflammation in the periradicular tissues should periradicular periodontitis develop."
+
+9. SUMMARY
+   - Điểm neo đầu (Start Anchor): "It is clear that every effort should be made to prevent damage to the dental pulp during operative procedures."
+   - Điểm neo cuối (End Anchor): "...protects both the remaining tooth structure and the root filling is essential."
+
+10. FURTHER READING
+    - Điểm neo đầu (Start Anchor): "Abbott, P.V., 2004. Assessing restored teeth with pulp and periapical diseases..."
+    - Điểm neo cuối (End Anchor): "...J. Dent. 35, 761-767."
