@@ -86,7 +86,7 @@
     },
     ai_prompts: {
       chunk_size: 40000, chunk_overlap: 1500,
-      outline_system_prompt: 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Quét đoạn văn bản chương sách và lập mục lục đa cấp (lvl 1 đến 10) theo đúng thứ tự xuất hiện. Mỗi mục: "src" = tiêu đề giữ nguyên nguyên văn, "vi" = tên tiếng Việt ngắn gọn, "lvl" = số nguyên 1 đến 10. Không lập mục từ hình, bảng, hộp chú thích hay câu văn thường. Trả về MỘT đối tượng JSON: {"sections":[{"src":"...","vi":"...","lvl":1}]}; nếu không có, {"sections":[]}. Không thêm chữ nào ngoài JSON.',
+      outline_system_prompt: 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Quét đoạn văn bản chương sách và lập mục lục đa cấp (lvl 1 đến 10) theo đúng thứ tự xuất hiện. Phân cấp: phần lớn nhất (chương, Tóm tắt, Tài liệu tham khảo) là lvl 1; mục con nằm dưới mục nào thì lvl lớn hơn đúng 1 so với mục đó; không nhảy cấp và không đặt mục lớn ở cấp con. Mỗi mục: "src" = tiêu đề giữ nguyên nguyên văn, "vi" = tên tiếng Việt ngắn gọn, "lvl" = số nguyên 1 đến 10. Không lập mục từ hình, bảng, hộp chú thích hay câu văn thường. Trả về MỘT đối tượng JSON: {"sections":[{"src":"...","vi":"...","lvl":1}]}; nếu không có, {"sections":[]}. Không thêm chữ nào ngoài JSON.',
       sub_pass1_prompt: 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Đoạn văn dưới đây thuộc mục "{{TITLE}}". Liệt kê các tiêu đề mục con (lvl 2 đến 10) nằm trong đoạn, không liệt kê chính "{{TITLE}}". Trả về MỘT đối tượng JSON: {"sections":[{"src":"...","vi":"...","lvl":2}]}. Không thêm chữ nào ngoài JSON.',
       sub_pass2_prompt: 'Bạn là giáo sư đầu ngành Răng Hàm Mặt, đang kiểm tra đối chiếu. Đối chiếu danh sách mục con với đoạn văn của mục "{{TITLE}}": mỗi mục phải là tiêu đề có thật, xuất hiện nguyên văn; xóa mục sai, bổ sung mục thiếu. Trả về MỘT đối tượng JSON cùng định dạng: {"sections":[{"src":"...","vi":"...","lvl":2}]}. Không thêm chữ nào ngoài JSON.'
     }
@@ -376,6 +376,10 @@
       found.sort((x, y) => x.s - y.s);
     }
     if (found.length && found[0].s > 0) found.unshift({ title: 'Mở đầu', en: 'Introduction', num: '', lvl: 1, s: 0, e: 0, text: '', intro: true });
+    /* Chuẩn hóa phân cấp: sắp theo vị trí trong chương; mỗi mục chỉ sâu hơn mục trên đúng 1 cấp (không nhảy cấp, không mồ côi) */
+    found.sort((x, y) => x.s - y.s);
+    let prevLvl = 0;
+    found.forEach(f => { f.lvl = Math.max(1, Math.min(10, parseInt(f.lvl, 10) || 1)); if (f.lvl > prevLvl + 1) f.lvl = prevLvl + 1; prevLvl = f.lvl; });
     const message = !found.length ? (fail ? 'AI chưa đọc được, thử lại sau' : 'Chưa nhận diện được mục lục.')
       : '📑 Đã lập mục lục (' + found.length + ' phân mục) theo quy định MucLuc.html';
     return { secs: found, message };
