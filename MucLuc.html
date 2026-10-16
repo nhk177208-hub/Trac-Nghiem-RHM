@@ -213,13 +213,14 @@
   function findAll(hay, needle) {
     const out = [];
     if (!hay || !needle) return out;
+    /* Gộp mọi lần khớp đúng chữ và không phân biệt hoa thường (tiêu đề viết HOA trong sách không bị bỏ qua vì có lần khớp khác) */
+    const seen = new Set();
     let i = -1;
-    while ((i = hay.indexOf(needle, i + 1)) >= 0) out.push(i);
-    if (out.length) return out;
+    while ((i = hay.indexOf(needle, i + 1)) >= 0) { out.push(i); seen.add(i); }
     const lowHay = hay.toLowerCase(), lowNeedle = needle.toLowerCase();
     i = -1;
-    while ((i = lowHay.indexOf(lowNeedle, i + 1)) >= 0) out.push(i);
-    if (out.length) return out;
+    while ((i = lowHay.indexOf(lowNeedle, i + 1)) >= 0) { if (!seen.has(i)) out.push(i); }
+    if (out.length) return out.sort((a, b) => a - b);
     const normChar = s => s.replace(/[^A-Za-z0-9\u00C0-\u1EF9]/g, '').toLowerCase();
     const sq = normChar(needle);
     if (sq.length < 4) return out;
@@ -258,22 +259,55 @@
     return [t0, t1, t2];
   }
 
+  /* Chỉ so khớp không dấu cách/khoảng trắng: trả về mọi vị trí bắt đầu của chuỗi trong hay */
+  function findNorm(hay, needle) {
+    const out = [];
+    const normChar = s => s.replace(/[^A-Za-z0-9À-ỹ]/g, '').toLowerCase();
+    const sq = normChar(needle);
+    if (!hay || sq.length < 4) return out;
+    const map = [], st = [];
+    for (let k = 0; k < hay.length; k++) {
+      const ch = hay[k];
+      if (/[A-Za-z0-9À-ỹ]/.test(ch)) { st.push(ch.toLowerCase()); map.push(k); }
+    }
+    const S = st.join('');
+    let j = -1;
+    while ((j = S.indexOf(sq, j + 1)) >= 0) out.push(map[j]);
+    return out;
+  }
+
   function locate(H, list, a, b, isPreset) {
     const T = H.text(), pages = H.pages(), out = [];
     let cur = a;
     const R = getRules(H);
     const exRe = R._excludeRe || null;
-    const isToc = i => { const le = T.indexOf('\n', i); const line = T.slice(i, le < 0 ? i + 160 : le); return /\.{3,}|…|\s\d{1,4}\s*$/.test(line); };
+    const isToc = i => { const le = T.indexOf('\n', i); const line = T.slice(i, le < 0 ? i + 160 : le); if (/\.{3,}|…/.test(line)) return true; if (!/\s\d{1,4}\s*$/.test(line)) return false; return /\s\d{2,4}\s*$/.test(line) || line.replace(/\s\d{1,4}\s*$/, '').trim().length >= 15; };
     list.forEach(o => {
       const rawSrc = String(o.src || '').trim();
       if (!rawSrc) return;
+      const endsLine = (i, needle) => {   // đầu dòng + kết thúc đúng tại cuối dòng (tiêu đề), không phải câu văn có chữ trùng
+        const sq = needle.replace(/[^A-Za-z0-9À-ỹ]/g, '').toLowerCase(), last = sq.slice(-1);
+        let e = i;
+        for (let k = 0; k < 3; k++) {
+          const nl = T.indexOf('\n', e); if (nl < 0) break;
+          const seg = T.slice(i, nl).replace(/\r$/, ''), n = seg.replace(/[^A-Za-z0-9À-ỹ]/g, '').toLowerCase();
+          if (n === sq) return seg.replace(/\s+$/, '').slice(-1).replace(/[^A-Za-z0-9À-ỹ]/g, '').toLowerCase() === last;
+          if (n.length > sq.length) return false;
+          e = nl + 1;
+        }
+        return false;
+      };
       if (!isPreset && exRe && exRe.test(rawSrc)) return;
       const body = rawSrc.replace(/^\s*(?:\d+(?:\.\d+)*|[IVXLCDM]{1,5}\.?)\s*/, '');
       if (!isPreset && R._startRe && !R._startRe.test(body)) return;
       let occ = findAll(T, rawSrc).filter(i => i >= cur && i < b && (isPreset || H.lineStart(T, i)));
+      if (occ.length) { const ls = occ.filter(i => H.lineStart(T, i)); if (ls.length) occ = ls; const le2 = occ.filter(i => endsLine(i, rawSrc)); if (le2.length) occ = le2; }   // ưu tiên chỗ đứng đầu dòng (tiêu đề) hơn chữ trùng giữa câu
       if (!occ.length && body.length >= 4 && body !== rawSrc) {
         occ = findAll(T, body).filter(i => i >= cur && i < b && H.lineStart(T, i));
       }
+      /* Tiêu đề bị xuống dòng trong sách: nếu các lần khớp đúng chữ đều nằm ngoài khoảng đang xét, thử so khớp không dấu cách trên toàn chương */
+      if (!occ.length) occ = findNorm(T, rawSrc).filter(i => i >= cur && i < b && (isPreset || H.lineStart(T, i)));
+      if (!occ.length && body.length >= 4 && body !== rawSrc) occ = findNorm(T, body).filter(i => i >= cur && i < b && H.lineStart(T, i));
       if (!occ.length && isPreset) {
         const strippedParen = rawSrc.replace(/\s*\([^)]*\)\s*$/, '').trim();
         if (strippedParen.length >= 4 && strippedParen !== rawSrc) {
@@ -297,7 +331,10 @@
       }
       if (!occ.length) return;
       const nt = occ.filter(i => !isToc(i));
-      const pick = nt.length ? nt[0] : occ[0];
+      let pick = nt.length ? nt[0] : occ[0];
+      /* Tiêu đề in hoa / xuống dòng có thể đứng TRƯỚC câu văn đúng chữ đầu tiên: nếu có lần khớp không dấu cách đứng đầu dòng (không phải dòng mục lục) sớm hơn, lấy lần đó */
+      const nmPick = findNorm(T, rawSrc).filter(i => i >= cur && i < pick && H.lineStart(T, i) && !isToc(i) && endsLine(i, rawSrc));
+      if (nmPick.length) pick = nmPick[0];
       const num = (rawSrc.match(/^\s*(\d+(?:\.\d+)*)/) || [])[1] || '';
       const lv = Math.max(1, Math.min(10, parseInt(o.lvl, 10) || 1));
       out.push({ title: o.vi, en: rawSrc, num: num, lvl: lv, s: pick, e: 0, text: '' });
