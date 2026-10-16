@@ -8684,86 +8684,41 @@ function bkSelSpan(node, off) {
     }
     return null;
 }
-function bkSpanAt(tl, first) {
-    const c = tl.children;
-    if (first) { for (let k = 0; k < c.length; k++) if (c[k]._bk != null) return c[k]; }
-    else { for (let k = c.length - 1; k >= 0; k--) if (c[k]._bk != null) return c[k]; }
-    return null;
-}
-function bkNextSpan(sp) {
-    const n = sp.nextElementSibling; if (n && n._bk != null) return n;
-    for (let i = sp._n; i < bkVP.length; i++) { const f = bkSpanAt(bkVP[i].tl, true); if (f) return f; }
-    return null;
-}
-function bkPrevSpan(sp) {
-    const n = sp.previousElementSibling; if (n && n._bk != null) return n;
-    for (let i = sp._n - 2; i >= 0; i--) { const l = bkSpanAt(bkVP[i].tl, false); if (l) return l; }
-    return null;
-}
-function bkBlockInfo(sp) {
-    const k = sp._bk; let first = sp, last = sp, p;
-    while ((p = first.previousElementSibling) && p._bk === k) first = p;
-    while ((p = last.nextElementSibling) && p._bk === k) last = p;
-    const wr = sp.parentNode.getBoundingClientRect(), spans = [];
-    let top = 1e9, bottom = -1e9;
-    for (let e = first; e && e._bk === k; e = e.nextElementSibling) {
-        spans.push(e); const g = e._g; if (!g) continue;
-        top = Math.min(top, wr.top + g.y - g.fh * 0.9); bottom = Math.max(bottom, wr.top + g.y + g.fh * 0.3);
-    }
-    return { k, first, last, spans, top, bottom, wr };
-}
-// được kéo sang khối kế tiếp chỉ khi khối đó nằm ngay phía dưới (hoặc phía trên) khối xuất phát — không bao giờ sang cột bên cạnh
-function bkChainOk(info, f, fwd) {
-    let cur = info;
-    for (let n = 0; n < 8; n++) {
-        const sp = fwd ? bkNextSpan(cur.last) : bkPrevSpan(cur.first);
-        if (!sp) return false;
-        const ni = bkBlockInfo(sp);
-        if (fwd ? ni.top < cur.bottom - 3 : ni.bottom > cur.top + 3) return false;
-        if (ni.k === f._bk) return true;
-        cur = ni;
-    }
-    return false;
-}
-function bkCaretAt(sp, end) { const n = sp.firstChild; return n ? { node: n, offset: end ? n.length : 0 } : null; }
-function bkClampCaret(info, fwd) {
-    const P = bkPtr;
-    if (P.touch || !P.down || Date.now() - P.t > 500) return fwd ? bkCaretAt(info.last, true) : bkCaretAt(info.first, false);
-    if (P.y > info.bottom) return bkCaretAt(info.last, true);
-    if (P.y < info.top) return bkCaretAt(info.first, false);
-    let best = null, bs = 1e18;
-    info.spans.forEach(e => {
-        const g = e._g; if (!g) return;
-        const l = info.wr.left + g.x, r = l + g.w, tp = info.wr.top + g.y - g.fh * 0.9, bt = info.wr.top + g.y + g.fh * 0.3;
-        const dy = P.y < tp ? tp - P.y : P.y > bt ? P.y - bt : 0, dx = P.x < l ? l - P.x : P.x > r ? P.x - r : 0;
-        const s = dy * 4 + dx; if (s < bs) { bs = s; best = { e, l, r, tp, bt }; }
-    });
-    if (!best) return null;
-    const n = best.e.firstChild; if (!n) return null;
-    if (P.x <= best.l) return { node: n, offset: 0 };
-    if (P.x >= best.r) return { node: n, offset: n.length };
-    const cy = (best.tp + best.bt) / 2;
-    try {
-        let c = null;
-        if (document.caretPositionFromPoint) { const q = document.caretPositionFromPoint(P.x, cy); if (q) c = { node: q.offsetNode, offset: q.offset }; }
-        else if (document.caretRangeFromPoint) { const q = document.caretRangeFromPoint(P.x, cy); if (q) c = { node: q.startContainer, offset: q.startOffset }; }
-        if (c && c.node === n) return c;
-    } catch (e) {}
-    return { node: n, offset: Math.round((P.x - best.l) / Math.max(1, best.r - best.l) * n.length) };
-}
 function bkFixSel() {
-    if (bkPtr.ctrl) return;
+    if (!bkWrapEl) return;
     const sel = document.getSelection();
-    if (!sel || !sel.rangeCount || sel.isCollapsed) return;
-    const a = bkSelSpan(sel.anchorNode, sel.anchorOffset), f = bkSelSpan(sel.focusNode, sel.focusOffset);
-    if (!a || !f || a._bk === f._bk) return;
-    const fwd = !!(a.compareDocumentPosition(f) & Node.DOCUMENT_POSITION_FOLLOWING);
-    const info = bkBlockInfo(a);
-    if (bkChainOk(info, f, fwd)) return;
-    const tg = bkClampCaret(info, fwd); if (!tg) return;
-    try { sel.setBaseAndExtent(sel.anchorNode, sel.anchorOffset, tg.node, tg.offset); } catch (e) {}
+    if (!sel || !sel.rangeCount || !sel.anchorNode || sel.isCollapsed) return;
+    const a = bkSelSpan(sel.anchorNode, sel.anchorOffset);
+    if (!a) return;
+    const role = a._role || 'body';
+    bkWrapEl.classList.toggle('bk-sel-body', role === 'body');
+    bkWrapEl.classList.toggle('bk-sel-float', role === 'float');
 }
-/* ---------- phóng to / thu nhỏ ---------- */
+document.addEventListener('pointerdown', e => {
+    if (!bkWrapEl) return;
+    const sp = e.target && e.target.closest ? e.target.closest('.bk-tl > span') : null;
+    const tl = e.target && e.target.closest ? e.target.closest('.bk-tl') : null;
+    if (sp) {
+        const r = sp._role || 'body';
+        bkWrapEl.classList.toggle('bk-sel-body', r === 'body');
+        bkWrapEl.classList.toggle('bk-sel-float', r === 'float');
+    } else if (tl) {
+        bkWrapEl.classList.add('bk-sel-body');
+        bkWrapEl.classList.remove('bk-sel-float');
+    }
+}, true);
+document.addEventListener('copy', e => {
+    if (!bkWrapEl) return;
+    const sel = document.getSelection();
+    if (!sel || sel.isCollapsed || !sel.rangeCount) return;
+    const an = sel.anchorNode ? (sel.anchorNode.nodeType === 1 ? sel.anchorNode : sel.anchorNode.parentNode) : null;
+    if (!an || !bkWrapEl.contains(an)) return;
+    const txt = bkSelText();
+    if (txt && e.clipboardData) {
+        e.clipboardData.setData('text/plain', txt);
+        e.preventDefault();
+    }
+});
 function bkUpdZoom() { const l = document.getElementById('bk-zoom-lbl'); if (l) l.textContent = Math.round(bkScale * 100) + '%'; }
 function bkZoomBy(d) { bkSetScale(Math.max(0.3, Math.min(4, bkScale + d * 0.2))); }
 function bkSetScale(s) {
@@ -8779,7 +8734,6 @@ function bkSizePage(pg) {
     pg.wrap.style.width = (pg.vp1.width * bkScale) + 'px';
     pg.wrap.style.height = (pg.vp1.height * bkScale) + 'px';
 }
-/* ---------- vẽ trang theo nhu cầu ---------- */
 function bkHoldsSel(pg) {
     const s = document.getSelection();
     return !!(s && s.rangeCount && !s.isCollapsed && s.getRangeAt(0).intersectsNode(pg.wrap));
@@ -8824,7 +8778,6 @@ async function bkRenderPage(pg) {
         const vp = pg.page.getViewport({ scale });
         const out = bkOutScale(vp);
         const cw = Math.max(1, Math.round(vp.width * out)), ch = Math.max(1, Math.round(vp.height * out));
-        // vẽ ra canvas mới rồi mới thay vào → không bị nháy trắng
         const cv = document.createElement('canvas');
         cv.className = 'bk-cv';
         cv.width = cw; cv.height = ch;
@@ -8849,7 +8802,6 @@ async function bkRenderPage(pg) {
         if (gen !== pg.gen) return;
         pg.task = null;
         if (e && e.name === 'RenderingCancelledException') { pg.state = 'idle'; return; }
-        console.error('Lỗi vẽ trang ' + pg.num, e);
         pg.state = 'error';
     }
 }
@@ -8860,11 +8812,17 @@ function bkRelease(pg) {
     pg.tl.textContent = ''; pg.hlL.textContent = ''; if (pg.qzL) pg.qzL.textContent = '';
     pg.state = 'idle';
 }
-/* ---------- dữ liệu chữ của trang (đơn vị: px ở tỉ lệ 1, đã sắp theo thứ tự đọc) ---------- */
 function bkPageData(pg) {
     if (pg.dataP) return pg.dataP;
     pg.dataP = (async () => {
         const U = window.pdfjsLib.Util, vp = pg.vp1;
+        let rawBoxes = [];
+        try { rawBoxes = await bkImageBoxes(pg.page); } catch (e) {}
+        const vpBoxes = rawBoxes.map(b => {
+            const p0 = U.applyTransform([b.x0, b.y0], vp.transform);
+            const p1 = U.applyTransform([b.x1, b.y1], vp.transform);
+            return { x0: Math.min(p0[0], p1[0]), x1: Math.max(p0[0], p1[0]), y0: Math.min(p0[1], p1[1]), y1: Math.max(p0[1], p1[1]), r: b.r || 0 };
+        });
         const tc = await pg.page.getTextContent();
         const items = [];
         tc.items.forEach((it, idx) => {
@@ -8875,102 +8833,186 @@ function bkPageData(pg) {
             const st = tc.styles[it.fontName] || {};
             let angle = Math.atan2(tx[1], tx[0]);
             if (st.vertical) angle += Math.PI / 2;
-            items.push({ idx, str: it.str, x: tx[4], y: tx[5], fh, w: it.width * vp.scale, angle, fam: st.fontFamily || 'sans-serif', ws: !it.str.trim() });
+            items.push({ idx, str: it.str, x: tx[4], y: tx[5], fh, w: (it.width || 0) * vp.scale, angle, fam: st.fontFamily || 'sans-serif', bd: bkIsBold(pg.page, it.fontName), ws: !it.str.trim() });
         });
-        const Lp = bkPageLayout(pg.num);   // layout từ Menu.html (nếu có cột) quyết định khối đọc / chọn chữ; không có thì app tự dò rãnh cột
-        return { W: vp.width, H: vp.height, items: (Lp && Lp.hasCols) ? bkOrderByLayout(items, vp.width, vp.height, Lp) : bkOrderItems(items, vp.width) };
+        const Lp = bkPageLayout(pg.num);
+        return { W: vp.width, H: vp.height, items: (Lp && Lp.hasCols) ? bkOrderByLayout(items, vp.width, vp.height, Lp) : bkOrderItems(items, vp.width, vp.height, vpBoxes) };
     })();
     pg.dataP.catch(() => { pg.dataP = null; });
     return pg.dataP;
 }
-// Sắp theo thứ tự đọc + chia KHỐI (blk): mỗi cột / dải chữ rộng là một khối riêng.
-// Bước 1: gom chữ thành các đoạn dòng (cắt ở khoảng trống ngang lớn) → chữ của hai cột không dính vào nhau.
-// Bước 2: tìm rãnh dọc giữa trang (chịu được vài đoạn lẻ vắt ngang); hai bên phải là cột chữ thật (đủ dòng, đủ rộng, trùng nhau theo chiều dọc).
-// Bước 3: đi từ trên xuống: dải chữ rộng (tiêu đề, hình...) là một khối; dải hai cột là khối cột trái rồi khối cột phải.
-function bkOrderItems(items, W) {
+const BK_CAP_RE = /^(?:fig(?:ure)?s?\.?|tables?|tbl\.?|box(?:es)?|charts?|diagrams?|schemes?|plates?|exhibits?|hình|bảng|hộp|biểu\s*đồ|sơ\s*đồ|ảnh|khung)\s*(?:\d+|[A-Z](?:[.\s:-]|$)|[IVX]+(?:[.\s:-]|$))/i;
+const BK_TBL_CAP_RE = /^(?:tables?|tbl\.?|box(?:es)?|charts?|bảng|hộp|khung|biểu\s*đồ)\s*(?:\d+|[A-Z](?:[.\s:-]|$)|[IVX]+(?:[.\s:-]|$))/i;
+function bkGroupVisualLines(hz) {
+    const sorted = hz.slice().map(d => ({ d, vc: d.y - d.fh * 0.35 })).sort((a, b) => a.vc - b.vc || a.d.x - b.d.x);
+    const lines = [];
+    sorted.forEach(({ d, vc }) => {
+        let best = null, bestDy = 1e9;
+        for (let i = lines.length - 1; i >= Math.max(0, lines.length - 6); i--) {
+            const ln = lines[i], tol = 0.58 * Math.max(d.fh, ln.fh), dy = Math.abs(d.y - ln.y);
+            if (dy <= tol && dy < bestDy) { best = ln; bestDy = dy; }
+        }
+        if (best) {
+            const w1 = best.chars || 1, w2 = Math.max(1, d.str.length);
+            if (d.fh >= best.fh * 0.8) { best.y = (best.y * w1 + d.y * w2) / (w1 + w2); best.fh = Math.max(best.fh, d.fh); best.chars = w1 + w2; }
+            best.its.push(d);
+        } else lines.push({ y: d.y, vc, fh: d.fh, chars: Math.max(1, d.str.length), its: [d] });
+    });
+    lines.sort((a, b) => a.y - b.y);
+    lines.forEach(ln => ln.its.sort((a, b) => a.x - b.x));
+    return lines;
+}
+function bkDetectGutter(lines, W) {
+    const bins = 200, bw = W / bins, occ = new Array(bins).fill(0);
+    let narrowCnt = 0;
+    lines.forEach(ln => {
+        if (ln.hf || ln.float) return;
+        let curX0 = null, curX1 = null, curFh = ln.fh;
+        const pushSeg = (x0, x1) => {
+            if (x1 - x0 > 0.58 * W || x1 - x0 < 0.08 * W) return;
+            narrowCnt++;
+            const a = Math.max(0, Math.floor(x0 / bw)), b = Math.min(bins - 1, Math.floor(x1 / bw));
+            for (let k = a; k <= b; k++) occ[k]++;
+        };
+        ln.its.forEach(d => {
+            if (curX0 === null) { curX0 = d.x; curX1 = d.x + d.w; curFh = d.fh; return; }
+            const gap = d.x - curX1, mid = (curX1 + d.x) / 2;
+            const inCenter = mid >= 0.33 * W && mid <= 0.67 * W;
+            const splitThr = inCenter ? Math.max(0.38 * Math.min(d.fh, curFh), 3.2) : 1.15 * Math.max(d.fh, curFh);
+            if (gap > splitThr) { pushSeg(curX0, curX1); curX0 = d.x; curX1 = d.x + d.w; curFh = d.fh; }
+            else { curX1 = Math.max(curX1, d.x + d.w); curFh = Math.max(curFh, d.fh); }
+        });
+        if (curX0 !== null) pushSeg(curX0, curX1);
+    });
+    if (narrowCnt < 6) return null;
+    const i0 = Math.floor(bins * 0.34), i1 = Math.ceil(bins * 0.66);
+    let minVal = 1e9;
+    for (let k = i0; k <= i1; k++) if (occ[k] < minVal) minVal = occ[k];
+    if (minVal > Math.max(2, Math.floor(narrowCnt * 0.05))) return null;
+    let bestRun = null, curRun = null;
+    const tol = minVal + Math.max(1, Math.floor(narrowCnt * 0.02));
+    for (let k = i0; k <= i1; k++) {
+        if (occ[k] <= tol) {
+            if (!curRun) curRun = { a: k, b: k }; else curRun.b = k;
+            if (!bestRun || (curRun.b - curRun.a) > (bestRun.b - bestRun.a)) bestRun = { a: curRun.a, b: curRun.b };
+        } else curRun = null;
+    }
+    if (!bestRun) return null;
+    const g0 = bestRun.a * bw, g1 = (bestRun.b + 1) * bw;
+    return { g0, g1, gc: (g0 + g1) / 2 };
+}
+function bkOrderItems(items, W, H, vpBoxes) {
+    H = H || (items.reduce((m, d) => Math.max(m, d.y || 0), 0) + 40) || 792;
+    vpBoxes = Array.isArray(vpBoxes) ? vpBoxes : [];
     const hz = [], other = [], wsp = [];
     items.forEach(d => {
-        if (!(Math.abs(Math.sin(d.angle)) < 0.05 && Math.cos(d.angle) > 0)) other.push(d);
+        if (!(Math.abs(Math.sin(d.angle || 0)) < 0.08 && Math.cos(d.angle || 0) > 0)) other.push(d);
         else if (d.ws) wsp.push(d);
         else hz.push(d);
     });
-    const lineSort = arr => {
-        arr = arr.slice().sort((a, b) => a.y - b.y);
-        const out = []; let g = [], gy = 0;
-        const flush = () => { g.sort((a, b) => a.x - b.x); out.push(...g); g = []; };
-        arr.forEach(d => {
-            if (g.length && Math.abs(d.y - gy) > 0.45 * Math.min(d.fh, g[0].fh)) flush();
-            if (!g.length) gy = d.y;
-            g.push(d);
-        });
-        flush();
-        return out;
-    };
-    let nb = 0;
-    const out = [];
-    const emit = arr => { if (!arr.length) return; const k = nb++; lineSort(arr).forEach(d => { d.blk = k; out.push(d); }); };
-    // 1) đoạn dòng
-    const lines = []; 
-    hz.slice().sort((a, b) => a.y - b.y).forEach(d => {
-        const ln = lines[lines.length - 1];
-        if (ln && Math.abs(d.y - ln.y) <= 0.45 * Math.min(d.fh, ln.its[0].fh)) ln.its.push(d); else lines.push({ y: d.y, its: [d] });
+    if (!hz.length) return items;
+    const bodyFh = bkModeFh(hz), totalChars = hz.reduce((n, d) => n + d.str.length, 0) || 1;
+    const validBoxes = vpBoxes.filter(b => {
+        const bw = b.x1 - b.x0, bh = b.y1 - b.y0;
+        if (bw < 25 || bh < 16 || (bw > 0.92 * W && bh > 0.88 * H)) return false;
+        let inChars = 0;
+        hz.forEach(d => { const cx = d.x + d.w / 2; if (cx >= b.x0 - 3 && cx <= b.x1 + 3 && d.y >= b.y0 - 3 && d.y <= b.y1 + 6) inChars += d.str.length; });
+        return inChars < totalChars * 0.62;
     });
+    const lines = bkGroupVisualLines(hz);
+    lines.forEach(ln => {
+        const txt = ln.its.map(i => i.str).join(' ').trim();
+        const isPageNum = /^\s*(?:page\s*|trang\s*)?\d{1,4}\s*$/i.test(txt);
+        if (ln.y < H * 0.062 || ln.y > H * 0.938 || ((ln.y < H * 0.088 || ln.y > H * 0.912) && (isPageNum || ln.fh < 0.91 * bodyFh))) ln.hf = true;
+    });
+    const gut = bkDetectGutter(lines, W);
     const segs = [];
     lines.forEach(ln => {
-        ln.its.sort((a, b) => a.x - b.x);
         let cur = null;
+        const flushSeg = () => {
+            if (!cur) return;
+            cur.w = cur.x1 - cur.x0; cur.cx = (cur.x0 + cur.x1) / 2;
+            cur.text = cur.its.map(i => i.str).join(' ').trim();
+            cur.role = ln.hf ? 'hf' : 'body';
+            segs.push(cur); cur = null;
+        };
         ln.its.forEach(d => {
-            if (cur && d.x - cur.x1 <= 1.2 * Math.max(d.fh, cur.fh)) { cur.its.push(d); cur.x1 = Math.max(cur.x1, d.x + d.w); cur.fh = Math.max(cur.fh, d.fh); }
-            else { cur = { its: [d], x0: d.x, x1: d.x + d.w, y: ln.y, fh: d.fh, full: false }; segs.push(cur); }
+            if (!cur) { cur = { its: [d], x0: d.x, x1: d.x + d.w, y: ln.y, fh: d.fh }; return; }
+            const gap = d.x - cur.x1;
+            const crossesGut = gut && cur.x1 <= gut.gc + 0.035 * W && d.x >= gut.gc - 0.035 * W && gap >= Math.max(0.28 * Math.min(d.fh, cur.fh), 2.5);
+            if (crossesGut || gap > 1.15 * Math.max(d.fh, cur.fh)) { flushSeg(); cur = { its: [d], x0: d.x, x1: d.x + d.w, y: ln.y, fh: d.fh }; }
+            else { cur.its.push(d); cur.x1 = Math.max(cur.x1, d.x + d.w); cur.fh = Math.max(cur.fh, d.fh); }
         });
+        flushSeg();
     });
-    // 2) rãnh dọc
-    let gut = null;
-    const narrow = segs.filter(s => s.x1 - s.x0 <= 0.62 * W);
-    if (narrow.length >= 12) {
-        const bins = 240, bw = W / bins, cnt = new Array(bins).fill(0);
-        narrow.forEach(s => {
-            const a = Math.max(0, Math.floor(s.x0 / bw)), b = Math.min(bins - 1, Math.floor(s.x1 / bw));
-            for (let k = a; k <= b; k++) cnt[k]++;
-        });
-        const tol = Math.max(1, Math.floor(narrow.length * 0.03));
-        let best = null, run = null;
-        for (let k = Math.floor(bins * 0.28); k <= Math.floor(bins * 0.72); k++) {
-            if (cnt[k] <= tol) {
-                if (!run) run = { a: k, b: k }; else run.b = k;
-                if (!best || run.b - run.a > best.b - best.a) best = { a: run.a, b: run.b };
-            } else run = null;
+    segs.forEach(s => {
+        if (s.role !== 'body') return;
+        for (let k = 0; k < validBoxes.length; k++) {
+            const b = validBoxes[k];
+            if (s.cx >= b.x0 - 4 && s.cx <= b.x1 + 4 && s.y >= b.y0 - 4 && s.y <= b.y1 + 6) { s.role = 'float'; s.fGrp = 100 + k; return; }
         }
-        if (best && (best.b - best.a + 1) * bw >= W * 0.018) {
-            const g0 = best.a * bw, g1 = (best.b + 1) * bw, gc = (g0 + g1) / 2;
-            segs.forEach(s => { s.full = s.x0 < g0 && s.x1 > g1; });
-            const L = segs.filter(s => !s.full && (s.x0 + s.x1) / 2 < gc), R = segs.filter(s => !s.full && (s.x0 + s.x1) / 2 >= gc);
-            const med = a => { const w = a.map(s => s.x1 - s.x0).sort((x, y) => x - y); return w.length ? w[w.length >> 1] : 0; };
-            const span = a => a.length ? [Math.min(...a.map(s => s.y)), Math.max(...a.map(s => s.y))] : [0, 0];
-            const [l0, l1] = span(L), [r0, r1] = span(R);
-            const ov = Math.min(l1, r1) - Math.max(l0, r0);
-            if (L.length >= 6 && R.length >= 6 && med(L) >= 0.2 * W && med(R) >= 0.2 * W && ov > 0.5 * Math.min(l1 - l0, r1 - r0)) gut = { gc };
+        if (s.fh < 0.83 * bodyFh) { s.role = 'float'; s.fGrp = 200; }
+    });
+    const byLineY = [];
+    segs.forEach(s => {
+        if (s.role === 'hf') return;
+        let g = byLineY.find(x => Math.abs(x.y - s.y) <= 0.45 * Math.max(x.fh, s.fh));
+        if (!g) { g = { y: s.y, fh: s.fh, list: [] }; byLineY.push(g); }
+        g.list.push(s);
+    });
+    byLineY.forEach(g => { if (g.list.length >= 3 && g.list.every(s => s.w < 0.36 * W)) g.list.forEach(s => { s.role = 'float'; s.fGrp = s.fGrp || 210; }); });
+    let capGrp = 300;
+    for (let i = 0; i < segs.length; i++) {
+        const s = segs[i];
+        if (s.role === 'hf' || !BK_CAP_RE.test(s.text)) continue;
+        const grp = ++capGrp, isTbl = BK_TBL_CAP_RE.test(s.text);
+        s.role = 'float'; s.fGrp = grp;
+        let lastY = s.y;
+        for (let j = i + 1; j < segs.length; j++) {
+            const nx = segs[j];
+            if (nx.role === 'hf') continue;
+            if (Math.min(s.x1 + 0.08 * W, nx.x1) - Math.max(s.x0 - 0.08 * W, nx.x0) <= 0) continue;
+            const dy = nx.y - lastY;
+            if (dy < -2) continue;
+            if (dy <= 1.85 * Math.max(s.fh, nx.fh) && (nx.fh <= s.fh + 0.35 || !/[.!?]$/.test(s.text))) { nx.role = 'float'; nx.fGrp = grp; lastY = nx.y; }
+            else if (isTbl && dy <= 2.6 * bodyFh && (nx.fh < 0.92 * bodyFh || nx.w < 0.28 * W)) { nx.role = 'float'; nx.fGrp = grp; lastY = nx.y; }
+            else break;
         }
     }
+    const bodySegs = segs.filter(s => s.role === 'body');
+    let isTwoCol = false, gc = 0.5 * W;
     if (gut) {
-        // 3) từ trên xuống: dải rộng liền nhau = 1 khối; dải hai cột = khối trái rồi khối phải
-        let band = [], full = [];
-        const flushBand = () => {
-            emit([].concat(...band.filter(s => (s.x0 + s.x1) / 2 < gut.gc).map(s => s.its)));
-            emit([].concat(...band.filter(s => (s.x0 + s.x1) / 2 >= gut.gc).map(s => s.its)));
-            band = [];
-        };
-        const flushFull = () => { emit([].concat(...full.map(s => s.its))); full = []; };
-        segs.slice().sort((a, b) => a.y - b.y).forEach(s => {
-            if (s.full) { if (band.length) flushBand(); full.push(s); }
-            else { if (full.length) flushFull(); band.push(s); }
+        gc = gut.gc;
+        const leftN = bodySegs.filter(s => s.cx < gc && s.x1 <= gc + 0.04 * W).length;
+        const rightN = bodySegs.filter(s => s.cx >= gc && s.x0 >= gc - 0.04 * W).length;
+        if ((leftN >= 3 && rightN >= 3) || (leftN >= 2 && rightN >= 2 && bodySegs.length <= 10)) isTwoCol = true;
+    }
+    const out = []; let lnCounter = 0;
+    const pushSegItems = (s, blk, role) => { const lnIdx = ++lnCounter; s.its.forEach(d => { d.blk = blk; d.role = role; d.ln = lnIdx; out.push(d); }); };
+    if (isTwoCol) {
+        const colSegs = bodySegs.filter(s => !(s.x0 < gc - 0.07 * W && s.x1 > gc + 0.07 * W));
+        const minColY = colSegs.length ? Math.min(...colSegs.map(s => s.y)) : 0;
+        const maxColY = colSegs.length ? Math.max(...colSegs.map(s => s.y)) : H;
+        const topSpan = [], leftCol = [], rightCol = [], botSpan = [];
+        bodySegs.forEach(s => {
+            if (s.x0 < gc - 0.07 * W && s.x1 > gc + 0.07 * W) {
+                if (s.y <= minColY + 6) topSpan.push(s);
+                else if (s.y >= maxColY - 6) botSpan.push(s);
+                else { s.role = 'float'; s.fGrp = 400; }
+            } else if (s.cx < gc) leftCol.push(s);
+            else rightCol.push(s);
         });
-        if (band.length) flushBand();
-        if (full.length) flushFull();
-    } else emit(hz);
-    other.forEach(d => { d.blk = nb; out.push(d); });
-    if (other.length) nb++;
-    wsp.forEach(d => { d.blk = -1; out.push(d); });
+        topSpan.sort((a, b) => a.y - b.y || a.x0 - b.x0).forEach(s => pushSegItems(s, 0, 'body'));
+        leftCol.sort((a, b) => a.y - b.y || a.x0 - b.x0).forEach(s => pushSegItems(s, 1, 'body'));
+        rightCol.sort((a, b) => a.y - b.y || a.x0 - b.x0).forEach(s => pushSegItems(s, 2, 'body'));
+        botSpan.sort((a, b) => a.y - b.y || a.x0 - b.x0).forEach(s => pushSegItems(s, 3, 'body'));
+    } else bodySegs.sort((a, b) => a.y - b.y || a.x0 - b.x0).forEach(s => pushSegItems(s, 1, 'body'));
+    const floatSegs = segs.filter(s => s.role === 'float').sort((a, b) => (a.fGrp || 0) - (b.fGrp || 0) || a.y - b.y || a.x0 - b.x0);
+    let fBlk = 10, lastGrp = null;
+    floatSegs.forEach(s => { if (s.fGrp !== lastGrp) { fBlk++; lastGrp = s.fGrp; } pushSegItems(s, fBlk, 'float'); });
+    segs.filter(s => s.role === 'hf').sort((a, b) => a.y - b.y || a.x0 - b.x0).forEach(s => pushSegItems(s, 900, 'hf'));
+    other.forEach(d => { d.blk = 950; d.role = 'float'; d.ln = ++lnCounter; out.push(d); });
+    wsp.forEach(d => { d.blk = -1; d.role = 'ws'; out.push(d); });
     return out;
 }
 /* ---------- lớp chữ trong suốt ---------- */
@@ -8983,7 +9025,7 @@ function bkFontBase(fam) {
     let r = 0.8;
     if (typeof m.fontBoundingBoxAscent === 'number' && m.fontBoundingBoxAscent + m.fontBoundingBoxDescent > 0) {
         const asc = m.fontBoundingBoxAscent / 100, desc = m.fontBoundingBoxDescent / 100;
-        r = (1 - (asc + desc)) / 2 + asc;   // vị trí baseline trong hộp dòng khi line-height = 1
+        r = (1 - (asc + desc)) / 2 + asc;
     }
     return (bkFm[fam] = r);
 }
@@ -8991,17 +9033,21 @@ function bkBuildTl(pg, data) {
     const s = bkScale, tl = pg.tl, ctx = bkMctx();
     tl.textContent = '';
     const frag = document.createDocumentFragment();
-    data.items.forEach(d => {
-        if (d.ws) return;
-        const fh = d.fh * s;
-        if (!(fh > 0.3)) return;
-        const fam = d.fam;
-        const off = bkFontBase(fam) * fh;
+    const vis = data.items.filter(d => !d.ws && d.fh * s > 0.3);
+    for (let i = 0; i < vis.length; i++) {
+        const d = vis[i], nx = vis[i + 1];
+        const fh = d.fh * s, fam = d.fam, off = bkFontBase(fam) * fh;
+        const sameLine = nx && nx.blk === d.blk && nx.ln === d.ln && Math.abs(nx.y - d.y) < 0.55 * Math.max(d.fh, nx.fh) && nx.x > d.x;
+        const rawGap = sameLine ? (nx.x - (d.x + d.w)) : 0;
+        const addSpace = sameLine && rawGap > 0.1 * d.fh && !/\s$/.test(d.str) && !/^\s/.test(nx.str);
+        const dispStr = addSpace ? (d.str + ' ') : d.str;
         ctx.font = fh.toFixed(2) + 'px ' + fam;
-        const w0 = ctx.measureText(d.str).width, target = d.w * s;
-        const sa = Math.sin(d.angle), ca = Math.cos(d.angle);
+        const w0 = ctx.measureText(dispStr).width;
+        const target = (addSpace ? Math.min(nx.x - d.x, d.w + Math.min(rawGap, 1.4 * d.fh)) : d.w) * s;
+        const sa = Math.sin(d.angle || 0), ca = Math.cos(d.angle || 0);
         const span = document.createElement('span');
-        span.textContent = d.str;
+        span.textContent = dispStr;
+        span.dataset.role = d.role || 'body';
         const st = span.style;
         st.left = (d.x * s + off * sa).toFixed(2) + 'px';
         st.top = (d.y * s - off * ca).toFixed(2) + 'px';
@@ -9013,34 +9059,36 @@ function bkBuildTl(pg, data) {
             if (Math.abs(sx - 1) > 0.005) tf += ' scaleX(' + sx.toFixed(4) + ')';
         }
         if (tf) st.transform = tf;
-        span._g = { x: d.x * s, y: d.y * s, fh, w: target, p: pg.num };
-        span._n = pg.num; span._i = d.idx; span._bk = pg.num * 1000 + (d.blk || 0);
+        span._rawLen = d.str.length;
+        span._g = { x: d.x * s, y: d.y * s, fh, w: d.w * s, p: pg.num, blk: d.blk || 0, ln: d.ln || 0, role: d.role || 'body' };
+        span._n = pg.num; span._i = d.idx; span._bk = pg.num * 1000 + (d.blk || 0); span._role = d.role || 'body';
         frag.appendChild(span);
-    });
+    }
     const end = document.createElement('div');
     end.className = 'bk-end';
     frag.appendChild(end);
     tl.appendChild(frag);
 }
-/* vị trí chữ (trong toàn bộ chữ chương) của một span — có sau khi đọc chữ nền xong */
 function bkSpanR(sp) {
     const ex = bkPages[(sp._n || 0) - 1];
     return ex && ex.rg ? ex.rg[sp._i] : null;
 }
-/* ---------- lấy chữ đã bôi đen (ghép đúng khoảng trắng / xuống dòng) ---------- */
 function bkJoinParts(parts) {
+    parts = parts.slice().sort((a, b) => (a.p - b.p) || ((a.blk || 0) - (b.blk || 0)) || ((a.ln || 0) - (b.ln || 0)) || (a.x - b.x));
     let out = '';
     parts.forEach((p, i) => {
         if (!i) { out = p.t; return; }
         const a = parts[i - 1], fh = Math.max(a.fh, p.fh);
         let sep = '';
-        if (a.p !== p.p) sep = '\n\n';
-        else if (Math.abs(p.y - a.y) < 0.5 * fh && p.x >= a.x - 1) {
+        if (a.p !== p.p || a.blk !== p.blk) {
+            if (/[A-Za-z\u00C0-\u1EF9]-$/.test(out) && /^[a-z\u00E0-\u1EF9]/.test(p.t)) { out = out.slice(0, -1); sep = ''; }
+            else sep = '\n';
+        } else if ((a.ln && p.ln && a.ln === p.ln) || (Math.abs(p.y - a.y) < 0.52 * fh && p.x >= a.x - 2)) {
             const gap = p.x - (a.x + a.w);
-            sep = (gap > 0.12 * a.fh && !/\s$/.test(out) && !/^\s/.test(p.t)) ? ' ' : '';
+            sep = (gap > 0.1 * a.fh && !/\s$/.test(out) && !/^\s/.test(p.t)) ? ' ' : '';
         } else {
             const dy = p.y - a.y;
-            if (dy < -0.5 * fh || dy > 1.9 * fh) sep = '\n';
+            if (dy > 1.85 * fh) sep = '\n';
             else if (/[A-Za-z\u00C0-\u1EF9]-$/.test(out) && /^[a-z\u00E0-\u1EF9]/.test(p.t)) { out = out.slice(0, -1); sep = ''; }
             else sep = /\s$/.test(out) ? '' : ' ';
         }
@@ -9051,22 +9099,27 @@ function bkJoinParts(parts) {
 function bkSelText() {
     const sel = document.getSelection();
     if (!sel || !sel.rangeCount || sel.isCollapsed) return '';
-    const range = sel.getRangeAt(0), parts = [];
+    const range = sel.getRangeAt(0);
+    const aSp = bkSelSpan(sel.anchorNode, sel.anchorOffset);
+    const targetRole = (aSp && aSp._role) ? aSp._role : 'body';
+    const rawParts = [];
     bkVP.forEach(pg => {
         if (pg.state !== 'done' || !range.intersectsNode(pg.tl)) return;
         pg.tl.querySelectorAll(':scope > span').forEach(span => {
             if (!range.intersectsNode(span)) return;
             const node = span.firstChild;
-            let t = span.textContent, a = 0, b = t.length;
-            if (node && node === range.startContainer) a = range.startOffset;
+            const rawLen = span._rawLen != null ? span._rawLen : span.textContent.length;
+            let t = span.textContent.slice(0, rawLen), a = 0, b = t.length;
+            if (node && node === range.startContainer) a = Math.min(b, range.startOffset);
             else if (span === range.startContainer) a = range.startOffset > 0 ? b : 0;
-            if (node && node === range.endContainer) b = range.endOffset;
+            if (node && node === range.endContainer) b = Math.min(b, range.endOffset);
             else if (span === range.endContainer) b = range.endOffset > 0 ? b : 0;
             t = t.slice(a, b);
-            if (t && span._g) parts.push({ t, ...span._g });
+            if (t && span._g) rawParts.push({ t, ...span._g });
         });
     });
-    return bkJoinParts(parts);
+    const filtered = rawParts.filter(p => p.role === targetRole);
+    return bkJoinParts(filtered.length ? filtered : rawParts);
 }
 /* ---------- tô sáng phân mục đang chọn (hộp vàng đúng vị trí chữ) ---------- */
 async function bkApplyHl(pg) {
@@ -9294,10 +9347,19 @@ async function bkExtract(doc, tok, onProg) {
         });
         const body = body0.filter(it => !excl.has(it));
         // Quy luật đọc: cột trái (đầu → cuối trang) → cột phải (đầu → cuối trang) → sang trang sau (cột trái)
-        const byYX = (a, b) => b.y - a.y || a.x - b.x;
-        let ord = hasCols ? body.slice().sort((p, q) => (cid(p) - cid(q)) || byYX(p, q)) : body.filter(it => it.x < W * 0.5).sort(byYX).concat(body.filter(it => it.x >= W * 0.5).sort(byYX));
-        { const o2 = bkTocPageHook('trimOrder', { pg, ord, cid, byYX }); if (Array.isArray(o2)) ord = o2; }   // MucLuc.html: bỏ khung mục lục in sẵn trong trang
-        const col = cid;   // đổi cột thì xuống dòng   // đổi cột thì xuống dòng
+                const byYX = (a, b) => (Math.abs(b.y - a.y) > 0.52 * Math.max(a.fh || 10, b.fh || 10) ? b.y - a.y : a.x - b.x);
+        let ord;
+        if (hasCols) {
+            ord = body.slice().sort((p, q) => (cid(p) - cid(q)) || byYX(p, q));
+            ord.forEach(it => { it._ecol = cid(it); });
+        } else {
+            const vpItems = body.map(it => ({ idx: it.idx, str: it.str, x: it.x, y: pg.h - it.y, w: it.w || 0, fh: it.fh || 10, bd: it.bd, angle: 0, ws: !it.str.trim(), _orig: it }));
+            const vpBoxes = (pg.boxes || []).map(b => ({ x0: b.x0, x1: b.x1, y0: pg.h - b.y1, y1: pg.h - b.y0, r: b.r || 0 }));
+            const sortedVp = bkOrderItems(vpItems, W, pg.h, vpBoxes).filter(d => d._orig && d.role !== 'hf');
+            ord = sortedVp.map(d => { d._orig._ecol = d.blk || 0; return d._orig; });
+        }
+        const col = it => (it._ecol != null ? it._ecol : cid(it));
+        { const o2 = bkTocPageHook('trimOrder', { pg, ord, cid: col, byYX }); if (Array.isArray(o2)) ord = o2; }
         const base = G.length; let txt = ''; let prev = null; const rg = {};
 
         ord.forEach(it => {
@@ -9383,6 +9445,16 @@ async function bkOpenChapter(i) {
         const ex = await bkExtract(bkDoc, tok, (n, t) => bkSetStatus('⏳ Đang đọc chữ chương: trang ' + n + '/' + t));
         if (!ex || tok !== bkViewTok) return;
         bkPages = ex.pages; bkText = ex.text;
+        try {
+            window.bkDumpText = function () {
+                const name = String((bkCur && bkCur.title) || 'chuong').replace(/[\\/:*?"<>|]+/g, '_') + '.txt';
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(new Blob([bkText || ''], { type: 'text/plain;charset=utf-8' }));
+                a.download = name; document.body.appendChild(a); a.click(); a.remove();
+                setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+                return 'đã xuất ' + name + ' (' + (bkText || '').length + ' ký tự)';
+            };
+        } catch (x) {}
         bkSecs = bkLoadManual(c.url);
         const presetSecs = bkApplyMenuSections();
         if (presetSecs.length) {
@@ -12914,7 +12986,11 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         .bk-qzhr { position: absolute; background: rgba(34, 197, 94, 0.38); border-radius: 3px; pointer-events: none; }
         .bk-hr { position: absolute; background: rgba(250, 204, 21, 0.65); border-radius: 2px; }
         .bk-tl { position: absolute; left: 0; top: 0; right: 0; bottom: 0; z-index: 2; overflow: hidden; line-height: 1; text-align: initial; -webkit-user-select: text; user-select: text; }
-        .bk-tl > span { position: absolute; margin: 0; padding: 0; line-height: 1; color: transparent; white-space: pre; cursor: text; transform-origin: 0 0; }
+        .bk-tl > span { position: absolute; margin: -2px 0 0 0; padding: 2px 0; line-height: 1.15; color: transparent; white-space: pre; cursor: text; transform-origin: 0 0; }
+        #bk-pdf-wrap.bk-sel-body .bk-tl > span[data-role="float"],
+        #bk-pdf-wrap.bk-sel-body .bk-tl > span[data-role="hf"] { pointer-events: none !important; -webkit-user-select: none !important; user-select: none !important; }
+        #bk-pdf-wrap.bk-sel-float .bk-tl > span[data-role="body"],
+        #bk-pdf-wrap.bk-sel-float .bk-tl > span[data-role="hf"] { pointer-events: none !important; -webkit-user-select: none !important; user-select: none !important; }
         .bk-tl .bk-end { display: block; position: absolute; left: 0; right: 0; top: 100%; bottom: 0; z-index: -1; cursor: default; -webkit-user-select: none; user-select: none; }
         .bk-tl.selecting .bk-end { top: 0; }
         .bk-tl ::selection { background: rgba(37, 99, 235, 0.3); }
