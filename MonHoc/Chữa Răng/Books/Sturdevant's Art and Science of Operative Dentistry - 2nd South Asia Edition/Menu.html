@@ -18,7 +18,10 @@
   /* Tên file PDF của chương n (không cần .pdf). Sửa ở đây nếu file của bạn đặt tên khác. */
   const tenFile = n => 'Chuong ' + n;
   /* Tên khác (tùy chọn) của file PDF chương — chương vẫn nhận nếu file mang tên này. Ví dụ theo tên hiện trên thanh tiêu đề sách. */
-  const tenKhac = { 5: '05. Chương 5 - Kiểm soát đau trong nha khoa phục hồi' };
+  const tenKhac = {
+    5: '05. Chương 5 - Kiểm soát đau trong nha khoa phục hồi',
+    10: '10. Chương 10 - Nha chu ứng dụng trong nha khoa phục hồi'
+  };
 
   /* Trang đầu – trang cuối của mỗi chương trong PDF gốc (751 trang). Dùng để suy ra trang chẵn/lẻ của bố cục cột. */
   const TRANG_PDF = {
