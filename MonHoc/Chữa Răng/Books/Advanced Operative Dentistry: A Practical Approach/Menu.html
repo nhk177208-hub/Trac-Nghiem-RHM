@@ -3,271 +3,853 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu.html — Advanced Operative Dentistry: A Practical Approach</title>
+    <title>Menu.html — Advanced Operative Dentistry (Phân Mục Đa Cấp 1–10)</title>
 </head>
 <body>
-    <p>Menu.html cho sách <b>Advanced Operative Dentistry: A Practical Approach</b>. File này nằm cùng thư mục với PDF của sách. Mở bằng trình duyệt không có chức năng gì, index.html sẽ tự nạp.</p>
-    <script>
-    (function (TOC) {
-        if (!TOC || typeof TOC.menu !== 'function') return;
+<script>
+(function (TOC) {
+    if (!TOC) return;
 
-        /* Tên file PDF của sách (phải khớp đúng tên file trong thư mục) */
-        const FILE = 'Advanced_Operative_Dentistry_-_libgen_li-compressed.pdf';
+    /* ============================================================================
+       PHẦN 1: QUY ĐỊNH CÁCH READER ĐỌC PDF, LUẬT TIÊU ĐỀ 10 CẤP & MỤC LỤC CHUẨN
+       ============================================================================ */
+    const BOOK_CONFIG = {
+        book_title: "Advanced Operative Dentistry: A Practical Approach",
+        version: 4,
 
-        /* Mỗi mục: lvl (1 = chương, 2 = mục con), page (số trang PDF, tính từ 1), title (tiếng Việt), en (tiếng Anh gốc, dùng để tìm vị trí trong chữ) */
-        const S = (lvl, page, vi, en) => ({ lvl: lvl, page: page, title: vi, en: en });
+        // 1.1. Bố cục 2 cột chuẩn (Đọc Cột 1 trái từ trên xuống hết -> Cột 2 phải từ trên xuống)
+        layout: {
+            top: 0.052,
+            bottom: 0.948,
+            columns: [
+                [0.035, 0.492],
+                [0.508, 0.965]
+            ],
+            skip: []
+        },
 
-        const SECTIONS = [
-            S(1, 8, 'Quản lý sâu răng', 'Management of dental caries'),
-            S(2, 8, 'Bệnh sâu răng', 'Dental Caries The Disease'),
-            S(2, 9, 'Chu trình phục hồi', 'The Restorative Cycle'),
-            S(2, 10, 'Phát hiện và chẩn đoán sâu răng', 'Caries Detection and Diagnosis'),
-            S(2, 12, 'Đánh giá nguy cơ sâu răng', 'Caries Risk Assessment'),
-            S(2, 20, 'Tóm tắt và nguyên tắc lập kế hoạch điều trị cho bệnh nhân nguy cơ sâu cao', 'Summary and Principles of Treatment Planning for a High Caries Risk Patient'),
-
-            S(1, 23, 'Bệnh nha chu', 'Periodontal disease'),
-            S(2, 23, 'Trình tự cần thiết', 'The Necessary Order of Things'),
-            S(2, 23, 'Tính nhạy cảm với bệnh nha chu', 'Susceptibility to Periodontal Disease'),
-            S(2, 24, 'Khái niệm về nguy cơ', 'The Concept of Risk'),
-            S(2, 24, 'Khai thác bệnh sử ở bệnh nhân nha chu', 'Taking Histories from Patients with Periodontal Disease'),
-            S(2, 25, 'Đánh giá bệnh nha chu', 'Assessment of Periodontal Disease'),
-            S(2, 32, 'Chẩn đoán bệnh nha chu', 'Making a Periodontal Diagnosis'),
-            S(2, 33, 'Lập kế hoạch điều trị nha chu', 'Periodontal Treatment Planning'),
-            S(2, 35, 'Nha chu liên quan đến nha khoa phục hồi nâng cao', 'Periodontal Considerations in Relation to Advanced Operative Dentistry'),
-            S(2, 37, 'Tóm tắt', 'Summary'),
-
-            S(1, 38, 'Vấn đề nội nha trong nha khoa phục hồi nâng cao', 'Endodontic problems in advanced operative dentistry'),
-            S(2, 38, 'Sức khỏe nội nha', 'Endodontic Health'),
-            S(2, 38, 'Các cân nhắc giải phẫu và sinh lý chung', 'General Anatomical and Physiological Considerations'),
-            S(2, 41, 'Ảnh hưởng của thủ thuật phục hồi lên tủy răng', 'The Effect of Restorative Procedures on the Dental Pulp'),
-            S(2, 43, 'Chẩn đoán tình trạng tủy răng', 'Diagnosing the State of the Dental Pulp'),
-            S(2, 46, 'Điều trị viêm tủy', 'Treatment for Pulpal Inflammation'),
-            S(2, 46, 'Đánh giá răng có bệnh tủy và quanh chóp', 'Assessing Teeth with Pulp and Periradicular Disease'),
-            S(2, 47, 'Đánh giá X quang răng đã trám ống tủy', 'Radiographic Assessment of the Root-Filled Tooth'),
-            S(2, 48, 'Tỷ lệ tồn tại của răng điều trị tủy có mão', 'Survival of Root-Canal Treated Crowned Teeth'),
-            S(2, 49, 'Tóm tắt', 'Summary'),
-
-            S(1, 50, 'Mòn răng', 'Tooth wear'),
-            S(2, 50, 'Giới thiệu', 'Introduction'),
-            S(2, 50, 'Định nghĩa', 'Definitions'),
-            S(2, 51, 'Biểu hiện lâm sàng', 'Clinical Appearance'),
-            S(2, 54, 'Căn nguyên', 'Aetiology'),
-            S(2, 55, 'Xử trí mòn răng', 'Management of Tooth Wear'),
-            S(2, 58, 'Tóm tắt', 'Summary'),
-
-            S(1, 60, 'Vấn đề thẩm mỹ', 'Aesthetic problems'),
-            S(2, 60, 'Nguyên nhân gây vấn đề thẩm mỹ', 'Causes of Aesthetic Problems'),
-            S(2, 67, 'Đánh giá trước điều trị', 'The Preoperative Assessment'),
-            S(2, 68, 'Tẩy trắng răng', 'Bleaching'),
-            S(2, 71, 'Mài mòn vi thể bằng acid', 'Acid Microabrasion'),
-            S(2, 72, 'Tóm tắt', 'Summary'),
-
-            S(1, 73, 'Khớp cắn', 'Occlusion'),
-            S(2, 73, 'Khớp cắn là gì?', 'What is Occlusion?'),
-            S(2, 73, 'Nghiến răng', 'Bruxism'),
-            S(2, 74, 'Rối loạn khớp thái dương hàm', 'Temporomandibular Disorders'),
-            S(2, 76, 'Thăm khám khớp cắn', 'Patient Examination'),
-            S(2, 80, 'Hai hướng tiếp cận xử trí khớp cắn', 'Two Approaches to Managing the Occlusion'),
-            S(2, 81, 'Khớp giả (articulator)', 'Articulators'),
-            S(2, 89, 'Tóm tắt', 'Summary'),
-
-            S(1, 90, 'Cùi răng', 'Cores'),
-            S(2, 90, 'Giới thiệu', 'Introduction'),
-            S(2, 90, 'Vật liệu', 'Materials'),
-            S(2, 93, 'Răng còn sống tủy', 'Vital Teeth'),
-            S(2, 96, 'Răng đã điều trị tủy', 'Endodontically Treated Teeth'),
-            S(2, 97, 'Răng cửa và răng một chân', 'Anterior and Single-Rooted Teeth'),
-            S(2, 103, 'Răng sau', 'Posterior Teeth'),
-            S(2, 104, 'Tóm tắt về đặt chốt và cùi', 'Summary for Placement of Post and Core Materials'),
-
-            S(1, 106, 'Mão vàng', 'Gold crowns'),
-            S(2, 106, 'Giới thiệu', 'Introduction'),
-            S(2, 106, 'Các cân nhắc chung', 'General Considerations'),
-            S(2, 108, 'Các bước mài răng cho mão vàng', 'Steps in Tooth Preparation for a Gold Crown'),
-            S(2, 115, 'Đặc điểm mài và thiết kế riêng của mão vàng 3/4', 'Preparation/Design Characteristics Specific to a Three-Quarter Gold Crown'),
-            S(2, 117, 'Các loại đúc khác', 'Other Castings'),
-            S(2, 117, 'Làm phục hình tạm', 'Making the Provisional Restoration'),
-            S(2, 117, 'Lấy dấu', 'Impression Taking'),
-            S(2, 117, 'Ghi nhận khớp cắn', 'Recording the Occlusion'),
-            S(2, 117, 'Tóm tắt', 'Summary'),
-
-            S(1, 119, 'Phục hình vàng: kim loại, chế tác và độ khít', 'Gold restorations: the metals, the manufacture and the fit'),
-            S(2, 119, 'Hợp kim vàng', 'Gold alloys'),
-            S(2, 119, 'Chế tác phục hình vàng', 'Fabrication of gold restorations'),
-            S(2, 123, 'Kiểm tra phục hình', 'Checking the restoration'),
-            S(2, 126, 'Gắn phục hình', 'Cementation of the restoration'),
-            S(2, 129, 'Giai đoạn duy trì', 'Supportive phase'),
-            S(2, 129, 'Tóm tắt', 'Summary'),
-
-            S(1, 130, 'Mão sứ kim loại', 'Metal-ceramic crowns'),
-            S(2, 130, 'Chỉ định mão sứ kim loại bao toàn bộ', 'Indications for Metal-Ceramic Full Coverage Crowns'),
-            S(2, 130, 'Mão sứ kim loại bao toàn bộ', 'Metal-Ceramic full Coverage Crowns'),
-            S(2, 133, 'Sự đồng thuận của bệnh nhân', 'Patient Consent'),
-            S(2, 134, 'Nguyên tắc chung khi mài răng', 'General Principles of Tooth Preparation'),
-            S(2, 135, 'Mão sứ kim loại bao toàn bộ răng sau', 'Posterior Metal-Ceramic full Coverage Crown'),
-            S(2, 138, 'Mão sứ kim loại bao toàn bộ răng trước', 'Anterior Metal-Ceramic full Coverage Crown'),
-            S(2, 140, 'Chỉ định gửi labo', 'Laboratory Prescription'),
-            S(2, 141, 'Tóm tắt', 'Summary'),
-
-            S(1, 142, 'Mão toàn sứ', 'All-ceramic crowns'),
-            S(2, 142, 'Giới thiệu', 'Introduction'),
-            S(2, 142, 'Mão sứ dạng áo (porcelain jacket)', 'The Porcelain Jacket Crown'),
-            S(2, 144, 'Giảm lượng mô răng mài cho mão toàn sứ', 'Decreasing Tooth Tissue Reduction for an All-Ceramic Crown'),
-            S(2, 145, 'Vật liệu sứ thủy tinh và quy trình chế tác mới', 'Development of Additional Glass Ceramic Materials and Processes by Which they Can be Manipulated'),
-            S(2, 148, 'CAD-CAM và sứ thủy tinh có độ bền cao hơn', 'The Use of Cad-Cam and Development of Glass Ceramic Materials with Significantly Increased Strength'),
-            S(2, 150, 'Gắn phục hình sứ', 'Cementation of Porcelain Restorations'),
-            S(2, 151, 'Tóm tắt', 'Summary'),
-
-            S(1, 152, 'Inlay, onlay và veneer', 'Inlays, onlays and veneers'),
-            S(2, 152, 'Giới thiệu', 'Introduction'),
-            S(2, 152, 'Inlay và onlay', 'Inlays and Onlays'),
-            S(2, 155, 'Mài răng cho inlay và onlay', 'Tooth Preparation for Inlays and Onlays'),
-            S(2, 156, 'Veneer sứ', 'Ceramic Veneers'),
-            S(2, 162, 'Veneer vàng', 'Gold Veneers'),
-            S(2, 163, 'Tóm tắt', 'Summary'),
-
-            S(1, 164, 'Vật liệu và kỹ thuật lấy dấu', 'Impression materials and techniques'),
-            S(2, 164, 'Giới thiệu', 'Introduction'),
-            S(2, 164, 'Vật liệu', 'The Materials'),
-            S(2, 170, 'Các cân nhắc chung với vật liệu lấy dấu đàn hồi', 'General Considerations for Elastomeric Impression Materials'),
-            S(2, 171, 'Quản lý nướu: đẩy nướu', 'Gingival Management - Retraction'),
-            S(2, 177, 'Khử khuẩn dấu lấy', 'Disinfection of the Impression'),
-            S(2, 177, 'Tóm tắt', 'Summary'),
-
-            S(1, 178, 'Phục hình tạm', 'Provisional restorations'),
-            S(2, 178, 'Giới thiệu', 'Introduction'),
-            S(2, 179, 'Đặc điểm của phục hình tạm', 'Characteristics of a Provisional Restoration'),
-            S(2, 180, 'Mão tạm đúc từ khuôn nhựa tự tạo', 'Custom-Formed Resin Replica Provisional Crowns'),
-            S(2, 184, 'Mão tạm đúc sẵn', 'Preformed Provisional Crowns'),
-            S(2, 186, 'Phục hình tạm thay răng mất', 'Provisional Replacement of Missing Teeth'),
-            S(2, 186, 'Lời khuyên trong giai đoạn phục hình tạm', 'Advice During the Provisional Stage'),
-            S(2, 187, 'Tóm tắt', 'Summary'),
-
-            S(1, 188, 'Đạt được thẩm mỹ đúng', 'Getting the appearance correct'),
-            S(2, 188, 'Giới thiệu', 'Introduction'),
-            S(2, 188, 'Ánh sáng', 'Light'),
-            S(2, 190, 'Giải phẫu người và thị giác màu', 'Human Anatomy and Colour Vision'),
-            S(2, 190, 'Mô tả màu sắc', 'Description of Colour'),
-            S(2, 191, 'Chọn màu răng', 'Tooth Shade Selection'),
-            S(2, 195, 'Thông tin thẩm mỹ bổ sung', 'Supplemental Aesthetic Information'),
-            S(2, 200, 'Tóm tắt', 'Summary'),
-
-            S(1, 201, 'Phục hình cố định và tháo lắp phức hợp', 'Complex multiple fixed and combined fixed and removable prosthodontics'),
-            S(2, 201, 'Chỉ định', 'Indications'),
-            S(2, 201, 'Phục hình kết hợp cố định và tháo lắp', 'Combined Fixed and Removable Prosthodontics'),
-            S(2, 205, 'Phục hình cố định nhiều đơn vị', 'Multiple Fixed Prostheses'),
-            S(2, 206, 'Xử trí mòn răng', 'Management of Tooth Wear'),
-            S(2, 213, 'Tóm tắt', 'Summary'),
-
-            S(1, 214, 'Khi nào và cách thay răng mất', 'When and how to replace missing teeth'),
-            S(2, 214, 'Có cần thay răng mất không?', 'Do we Need to Replace Missing Teeth?'),
-            S(2, 214, 'Khi nào nên thay răng mất?', 'When to Replace Missing Teeth?'),
-            S(2, 216, 'Thay răng mất bằng cách nào?', 'How to Replace Missing Teeth?'),
-            S(2, 225, 'Tóm tắt', 'Summary'),
-
-            S(1, 226, 'Cầu dán tối thiểu mài răng', 'Minimal preparation resin retained bridges'),
-            S(2, 226, 'Cầu dán là gì và khi nào dùng', 'What are Minimal Preparation Resin Retained Bridges and When are they Used?'),
-            S(2, 226, 'Lịch sử cầu dán', 'History of Resin-Bonded Bridges'),
-            S(2, 229, 'Nguyên tắc mài răng và thiết kế cầu: răng trước', 'Principles of Tooth Preparation and Bridge Design - Anterior Teeth'),
-            S(2, 233, 'Nguyên tắc mài răng và thiết kế cầu: răng sau', 'Principles of Tooth Preparation and Bridge Design - Posterior Teeth'),
-            S(2, 237, 'Tóm tắt', 'Summary'),
-
-            S(1, 238, 'Cầu răng thông thường', 'Conventional bridges'),
-            S(2, 238, 'Cầu răng thông thường hay cấy ghép implant?', 'Conventional Bridges or Implants?'),
-            S(2, 238, 'Thuật ngữ', 'Terminology'),
-            S(2, 239, 'Cầu răng thông thường và cầu dán', 'Conventional Versus Resin Retained Bridges'),
-            S(2, 240, 'Tối ưu thẩm mỹ', 'Optimizing Aesthetics'),
-            S(2, 240, 'Thiết kế cầu', 'Bridge Design'),
-            S(2, 245, 'Chuẩn bị răng cho cầu răng thông thường', 'Preparation for Conventional Bridges'),
-            S(2, 246, 'Thiết kế răng giả (pontic)', 'Pontic Design'),
-            S(2, 248, 'Nối cầu (connector)', 'The Connector'),
-            S(2, 248, 'Khớp cắn', 'The Occlusion'),
-            S(2, 248, 'Độ bền lâu dài của cầu răng thông thường', 'Longevity of Conventional Bridges'),
-            S(2, 249, 'Ví dụ thiết kế cầu và thay răng', 'Examples of Bridge Design and Replacing Teeth'),
-            S(2, 250, 'Chế tác cầu tại labo', 'Laboratory Construction of Bridges'),
-            S(2, 250, 'Tóm tắt', 'Summary'),
-
-            S(1, 251, 'Chỉ mục', 'Index')
-        ];
-
-        /* Tìm vị trí ký tự của tiêu đề trong chữ của sách.
-           Chỉ tìm trong đúng trang PDF đó (và trang kế tiếp, phòng khi tiêu đề nằm sát ngắt trang).
-           So khớp bỏ qua hoa/thường, khoảng trắng, dấu câu và dấu tiếng Việt, nên các lỗi tách chữ của PDF không ảnh hưởng.
-           Không thấy thì lấy đầu trang đó. */
-        function locate(H, page, needle) {
-            const T = H.text() || '', P = H.pages() || [];
-            const want = String(needle).normalize('NFKD').toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 28);
-            for (const pn of [page, page + 1]) {
-                const pg = P[pn - 1];
-                if (!pg) continue;
-                const keys = [], map = [];
-                for (let i = pg.gs; i < pg.ge; i++) {
-                    for (const ch of T[i].normalize('NFKD').toLowerCase()) {
-                        if (/[a-z0-9]/.test(ch)) { keys.push(ch); map.push(i); }
-                    }
-                }
-                const j = keys.join('').indexOf(want);
-                if (j >= 0) return map[j];
+        page_layouts: [
+            {
+                pages: "all",
+                top: 0.052,
+                bottom: 0.948,
+                columns: [
+                    [0.035, 0.492],
+                    [0.508, 0.965]
+                ]
             }
-            const first = P[page - 1];
-            return first ? first.gs : -1;
+        ],
+
+        // 1.2. Luật đọc PDF sạch cho Reader
+        reader_rules: {
+            reading_order: "col1_top_down_then_col2",
+            auto_two_column: true,
+            column_gutter_min_ratio: 0.015,
+            header_top_ratio: 0.935,
+            footer_bottom_ratio: 0.06,
+            repeated_hf_page_ratio: 0.25,
+            min_body_font_ratio: 0.85,
+
+            skip_graphics_boxes: true,
+            skip_captions: true,
+            caption_regex: "^(?:table|tbl\\.?|fig\\.?|figure|box|chart|graph|scheme|plate|hình|bảng|hộp|sơ đồ|biểu đồ|ảnh)\\s*\\d",
+            skip_footnotes: true,
+            skip_figure_labels: true,
+            dehyphenate_line_breaks: true,
+
+            skip_printed_outline_on_page1: true,
+            printed_outline_regex: "^(?:chapter\\s+contents|chapter\\s+outline|contents|outline|mục\\s+lục)\\b",
+
+            skip_text_regex: [
+                "^\\s*advanced\\s+operative\\s+dentistry\\s*:\\s*a\\s+practical\\s+approach\\s*$",
+                "^\\s*chapter\\s+\\d+\\s*[|1lI]*\\s*(?:management\\s+of\\s+dental\\s+caries|periodontal\\s+disease|endodontic\\s+problems\\s+in\\s+advanced\\s+operative\\s+dentistry)\\s*$",
+                "^\\s*(?:©\\s*)?2011\\s+elsevier\\s+ltd\\.?\\s*$",
+                "^\\s*\\(continued\\)\\s*$",
+                "^\\s*based\\s+on\\s+(?:hamp|miller)\\b",
+                "^\\s*table\\s+generated\\s+from\\b",
+                "^\\s*\\(reproduced\\s+with\\s+permission\\b",
+                "^\\s*\\(courtesy\\s+of\\b",
+                "^\\s*\\(from\\s+sweeney\\b"
+            ]
+        },
+
+        // 1.3. Luật nhận diện Tiêu Đề đa tầng (Hỗ trợ sâu từ cấp 1 đến cấp 10)
+        heading_rules: {
+            max_depth: 10,
+            min_chars: 3,
+            max_chars: 150,
+            max_words: 22,
+
+            level1_font_ratio: 1.20,
+            level2_font_ratio: 1.10,
+            level3_font_ratio: 1.01,
+            level4_font_ratio: 0.98,
+
+            // Nhận diện cả tiêu đề dòng riêng lẫn tiểu mục dẫn đầu đoạn (Run-in bold/italic subheadings)
+            numbered_heading_regex: "^(?:(Phase\\s+\\d+)\\s*[-–—:]?\\s*(.+)|(\\d+(?:\\.\\d+){0,9})[.)]?\\s+(.+))$",
+            colon_subheading_regex: "^([A-Z][A-Za-z0-9\\s\\-–—/(),''’]{2,65}):\\s*$",
+            forbidden_heading_regex: "^(?:table|tbl\\.?|fig\\.?|figure|box|chart|hình|bảng|hộp|sơ đồ|source:|note:|further\\s+reading|tài\\s+liệu\\s+tham\\s+khảo)\\b",
+            forbid_trailing_period: false,
+            stop_at_further_reading: true,
+            content_extraction_mode: "from_heading_to_next_heading_skip_media"
+        },
+
+        // 1.4. Cấu hình gọi AI bóc tách sâu (Deep Sub-heading Extraction) & AI Kiểm Duyệt Lần Cuối
+        ai_config: {
+            enable_ai_assist: true,
+            deep_expand_with_ai: true,       // Cho phép AI bóc tách thêm các tiểu mục con (cấp 4, 5, 6... 10) khi bấm Nhận diện / Cập nhật mục lục
+            always_final_verify_by_ai: true, // AI kiểm duyệt lần cuối toàn bộ cây mục lục
+            chunk_size_chars: 26000,
+            min_soft_sections_per_10_pages: 6
+        },
+
+        // 1.5. MỤC LỤC ĐA CẤP CHI TIẾT CHO 3 CHƯƠNG MẪU (Từ cấp 1 đến cấp 5-6 mặc định, AI có thể đào sâu tới cấp 10)
+        chapters: {
+            /* ====================================================================
+               CHƯƠNG 1: QUẢN LÝ SÂU RĂNG (MANAGEMENT OF DENTAL CARIES)
+               ==================================================================== */
+            "01. Chương 1 - Quản lý sâu răng": {
+                sections: [
+                    // Mục 1
+                    { lvl: 1, en: "DENTAL CARIES THE DISEASE", title: "Bệnh lý sâu răng", match: "DENTAL CARIES THE DISEASE" },
+                    { lvl: 2, en: "Biofilm and demineralization process", title: "Mảng bám sinh học và quá trình khử khoáng", match: "For dental caries to occur a bacterial biofilm" },
+                    { lvl: 2, en: "Remineralization of white spot lesions", title: "Sự tái khoáng hóa tổn thương đốm trắng", match: "It is often said that if an early white spot lesion" },
+                    { lvl: 2, en: "Failure of primary prevention", title: "Sự thất bại của dự phòng cấp một", match: "Primary prevention can fail for a number of reasons" },
+
+                    // Mục 2
+                    { lvl: 1, en: "THE RESTORATIVE CYCLE", title: "Chu kỳ phục hồi", match: "THE RESTORATIVE CYCLE" },
+                    { lvl: 2, en: "Secondary caries (Caries adjacent to a restoration - CAR)", title: "Sâu răng thứ phát (Sâu răng kế cận miếng trám - CAR)", match: "A significant proportion of a dentist" },
+                    { lvl: 2, en: "Marginal fit of indirect restorations", title: "Độ khít sát bờ của phục hồi gián tiếp", match: "Unlike directly placed restorations" },
+
+                    // Mục 3
+                    { lvl: 1, en: "CARIES DETECTION AND DIAGNOSIS", title: "Phát hiện và chẩn đoán sâu răng", match: "CARIES DETECTION AND DIAGNOSIS" },
+                    { lvl: 2, en: "Visual examination: clean, wet and dry teeth", title: "Khám quan sát bằng mắt: làm sạch răng, khám ướt và thổi khô", match: "It is important when examining a patient for primary" },
+                    { lvl: 3, en: "Light refraction in wet and dry enamel", title: "Hiện tượng khúc xạ ánh sáng ở men răng ướt và khô", match: "When light illuminates a sound tooth" },
+                    { lvl: 3, en: "International Caries Detection and Assessment System (ICDAS II)", title: "Hệ thống phát hiện và đánh giá sâu răng quốc tế (ICDAS II)", match: "The examination of clean teeth under both wet and dry" },
+                    { lvl: 2, en: "Caries detection devices and adjuncts", title: "Các thiết bị hỗ trợ phát hiện sâu răng", match: "A number of caries detection devices have been invented" },
+                    { lvl: 3, en: "Laser fluorescence devices (DIAGNOdent) and radiographs", title: "Thiết bị huỳnh quang laser (DIAGNOdent), X-quang và cây thăm", match: "When a restoration is placed their use is often complicated" },
+
+                    // Mục 4
+                    { lvl: 1, en: "CARIES RISK ASSESSMENT", title: "Đánh giá nguy cơ sâu răng", match: "CARIES RISK ASSESSMENT" },
+                    { lvl: 2, en: "What is caries risk?", title: "Nguy cơ sâu răng là gì?", match: "What is caries risk?" },
+                    { lvl: 2, en: "Caries risk factors", title: "Các yếu tố nguy cơ sâu răng", match: "Caries risk factors" },
+                    { lvl: 3, en: "Social deprivation", title: "Sự thiếu thốn xã hội", match: "Social deprivation" },
+                    { lvl: 4, en: "DEPCAT scores (Deprivation Categories)", title: "Chỉ số phân loại mức độ thiếu thốn (DEPCAT)", match: "Variables taken into consideration in deriving" },
+                    { lvl: 3, en: "Past caries experience", title: "Tiền sử sâu răng", match: "Past caries experience" },
+                    { lvl: 3, en: "Oral hygiene", title: "Vệ sinh răng miệng", match: "Oral hygiene" },
+                    { lvl: 4, en: "Silness and Löe plaque index", title: "Chỉ số mảng bám Silness và Löe", match: "Silness and L" },
+                    { lvl: 4, en: "Full mouth plaque scores and plaque chart", title: "Chỉ số mảng bám toàn miệng và sơ đồ mảng bám", match: "This is useful as a screening tool, but to assess" },
+                    { lvl: 4, en: "Oral hygiene instruction and interdental aids", title: "Hướng dẫn vệ sinh răng miệng và dụng cụ làm sạch kẽ răng", match: "Many patients with poor oral hygiene may not have" },
+                    { lvl: 4, en: "Hygiene for fixed and removable prostheses", title: "Vệ sinh đối với phục hình cố định và tháo lắp", match: "It also is important when providing patients with fixed" },
+                    { lvl: 3, en: "Diet", title: "Chế độ ăn uống", match: "Diet" },
+                    { lvl: 4, en: "Critical pH and Stephan curve", title: "Độ pH tới hạn và đường cong Stephan", match: "An association between dietary sugars and caries" },
+                    { lvl: 4, en: "Diet diary evaluation (3-day record)", title: "Đánh giá nhật ký ăn uống (ghi nhận 3 ngày)", match: "In a caries risk assessment the diet needs to be evaluated" },
+                    { lvl: 3, en: "Fluoride", title: "Fluoride", match: "Fluoride" },
+                    { lvl: 4, en: "Fluoride toothpaste and Duraphat varnish (22,600 ppm)", title: "Kem đánh răng chứa fluoride và vecni Duraphat (22.600 ppm)", match: "Topical fluoride is important in a caries preventive" },
+                    { lvl: 4, en: "High-dose prescription toothpastes and mouthwashes", title: "Kem đánh răng nồng độ fluoride cao (2800/5000 ppm) và nước súc miệng", match: "High dose fluoride toothpastes" },
+                    { lvl: 3, en: "Saliva", title: "Nước bọt", match: "Saliva" },
+                    { lvl: 4, en: "Xerostomia and causes of hyposalivation", title: "Chứng khô miệng và nguyên nhân giảm tiết nước bọt", match: "Saliva is extremely important for oral health" },
+                    { lvl: 4, en: "Unstimulated and stimulated salivary flow rates", title: "Lưu lượng nước bọt không kích thích và có kích thích", match: "Clinically, a dry mouth can be obvious" },
+                    { lvl: 4, en: "Management of dry mouth and pilocarpine", title: "Xử trí khô miệng, nước bọt nhân tạo và pilocarpine", match: "A patient with a dry mouth will want to take frequent" },
+                    { lvl: 4, en: "Saliva microbiology", title: "Vi sinh vật trong nước bọt", match: "Saliva microbiology" },
+                    { lvl: 5, en: "Mutans streptococci and lactobacilli chairside tests (CRT Bacteria)", title: "Xét nghiệm đếm khuẩn lạc Streptococcus mutans và Lactobacillus (CRT Bacteria)", match: "Figure 1.15 illustrates one such kit" },
+                    { lvl: 5, en: "Computer-based caries risk model (The Cariogram)", title: "Mô hình đánh giá nguy cơ sâu răng trên máy tính (Cariogram)", match: "The various caries risk factors described are subjectively" },
+
+                    // Mục 5
+                    { lvl: 1, en: "SUMMARY AND PRINCIPLES OF TREATMENT PLANNING FOR A HIGH CARIES RISK PATIENT", title: "Tóm tắt và nguyên tắc lập kế hoạch điều trị cho bệnh nhân có nguy cơ sâu răng cao", match: "SUMMARY AND PRINCIPLES OF TREATMENT PLANNING" },
+                    { lvl: 2, en: "Staged treatment plan for high caries risk patients", title: "Các giai đoạn trong kế hoạch điều trị bệnh nhân nguy cơ sâu răng cao", match: "Any emergency treatment should be provided first" }
+                ]
+            },
+
+            /* ====================================================================
+               CHƯƠNG 2: BỆNH NHA CHU (PERIODONTAL DISEASE)
+               ==================================================================== */
+            "02. Chương 2 - Bệnh nha chu": {
+                sections: [
+                    { lvl: 1, en: "THE NECESSARY ORDER OF THINGS", title: "Trình tự điều trị cần thiết", match: "THE NECESSARY ORDER OF THINGS" },
+                    { lvl: 1, en: "SUSCEPTIBILITY TO PERIODONTAL DISEASE", title: "Tính nhạy cảm với bệnh nha chu", match: "SUSCEPTIBILITY TO PERIODONTAL DISEASE" },
+                    { lvl: 2, en: "Determinants of individual susceptibility", title: "Ba yếu tố xác định tính nhạy cảm cá nhân", match: "Susceptibility of an individual patient is determined" },
+                    { lvl: 1, en: "THE CONCEPT OF RISK", title: "Khái niệm về nguy cơ", match: "THE CONCEPT OF RISK" },
+                    { lvl: 1, en: "TAKING HISTORIES FROM PATIENTS WITH PERIODONTAL DISEASE", title: "Khai thác bệnh sử ở bệnh nhân bệnh nha chu", match: "TAKING HISTORIES FROM PATIENTS" },
+                    { lvl: 2, en: "Medical history", title: "Bệnh sử y khoa", match: "Medical history" },
+                    { lvl: 2, en: "Dental history", title: "Tiền sử nha khoa", match: "Dental history" },
+                    { lvl: 3, en: "Plaque control regime used", title: "Chế độ kiểm soát mảng bám đang áp dụng", match: "Plaque control regime used." },
+                    { lvl: 3, en: "Wearing a removable appliance", title: "Việc mang khí cụ / hàm giả tháo lắp", match: "Wearing a removable appliance." },
+                    { lvl: 3, en: "A previous history of periodontal disease", title: "Tiền sử mắc bệnh nha chu trước đây", match: "A previous history of periodontal disease." },
+                    { lvl: 3, en: "A history of previous periodontal treatment", title: "Tiền sử điều trị nha chu trước đây", match: "A history of previous periodontal treatment." },
+                    { lvl: 2, en: "Social history", title: "Tiền sử xã hội", match: "Social history" },
+                    { lvl: 3, en: "Smoking and pack years calculation", title: "Hút thuốc lá và cách tính gói-năm (pack years)", match: "There are three particular aspects of the social history" },
+                    { lvl: 3, en: "Alcohol consumption and stress", title: "Tiêu thụ rượu bia và căng thẳng (stress)", match: "The other two factors that are thought to influence" },
+                    { lvl: 2, en: "Family history", title: "Tiền sử gia đình", match: "Family history" },
+
+                    { lvl: 1, en: "ASSESSMENT OF PERIODONTAL DISEASE", title: "Đánh giá bệnh nha chu", match: "ASSESSMENT OF PERIODONTAL" },
+                    { lvl: 2, en: "The clinical assessment", title: "Đánh giá lâm sàng", match: "The clinical assessment" },
+                    { lvl: 3, en: "The basic periodontal examination (BPE)", title: "Khám nha chu cơ bản (BPE)", match: "The basic periodontal examination (BPE)" },
+                    { lvl: 4, en: "WHO probes (WHO-E and WHO-C) and sextant coding", title: "Cây thăm dò WHO (WHO-E, WHO-C) và mã hóa theo lục phân", match: "The BPE can only be performed using a WHO probe" },
+                    { lvl: 3, en: "Clinical examination", title: "Khám lâm sàng chi tiết", match: "Clinical examination" },
+                    { lvl: 4, en: "Probing (pocket) depth", title: "Độ sâu túi nha chu khi thăm dò", match: "Probing (pocket) depth." },
+                    { lvl: 4, en: "Loss of attachment", title: "Mất bám dính (LOA)", match: "Loss of attachment." },
+                    { lvl: 4, en: "Lack of bleeding on probing (BOP)", title: "Không chảy máu khi thăm dò (BOP)", match: "Lack of bleeding on probing (BOP)" },
+                    { lvl: 4, en: "Furcation involvement and Hamp classification", title: "Sang thương vùng chẽ chân răng và phân loại Hamp", match: "Furcation involvement." },
+                    { lvl: 4, en: "Tooth mobility and Miller's index", title: "Độ lung lay răng và chỉ số Miller", match: "Tooth mobility." },
+                    { lvl: 4, en: "Assessment of plaque control", title: "Đánh giá kiểm soát mảng bám", match: "It will be noted that an assessment of plaque control" },
+                    { lvl: 2, en: "The radiographic examination", title: "Khám X-quang", match: "The radiographic examination" },
+                    { lvl: 3, en: "Which radiographs?", title: "Chọn loại phim X-quang nào?", match: "Which radiographs?" },
+                    { lvl: 3, en: "The radiographic report", title: "Đọc và ghi nhận kết quả X-quang", match: "The radiographic report" },
+
+                    { lvl: 1, en: "MAKING A PERIODONTAL DIAGNOSIS", title: "Thiết lập chẩn đoán nha chu", match: "MAKING A PERIODONTAL" },
+                    { lvl: 2, en: "Periodontal stability", title: "Sự ổn định nha chu", match: "Periodontal stability" },
+                    { lvl: 2, en: "Gingivitis", title: "Viêm nướu", match: "Gingivitis" },
+                    { lvl: 2, en: "Periodontitis", title: "Viêm nha chu", match: "Periodontitis" },
+                    { lvl: 2, en: "Aggressive periodontitis", title: "Viêm nha chu tấn công", match: "Aggressive periodontitis" },
+
+                    { lvl: 1, en: "PERIODONTAL TREATMENT PLANNING", title: "Lập kế hoạch điều trị nha chu", match: "PERIODONTAL TREATMENT" },
+                    { lvl: 2, en: "The five phases of treatment planning", title: "Năm giai đoạn trong lập kế hoạch điều trị", match: "The five phases of treatment" },
+                    { lvl: 3, en: "Phase 1 - Relief of pain and initial examination", title: "Giai đoạn 1 - Giảm đau và khám ban đầu", match: "Phase 1 - Relief of pain" },
+                    { lvl: 3, en: "Phase 2 - Cause-related therapy", title: "Giai đoạn 2 - Điều trị theo nguyên nhân", match: "Phase 2 - Cause-related therapy" },
+                    { lvl: 3, en: "Phase 3 - Re-examination", title: "Giai đoạn 3 - Tái khám đánh giá lại", match: "Phase 3 Re-examination" },
+                    { lvl: 4, en: "Clear treatment success", title: "Điều trị thành công rõ rệt", match: "Clear treatment success." },
+                    { lvl: 4, en: "Clear treatment failure and palliative care", title: "Điều trị thất bại và chăm sóc giảm nhẹ", match: "Clear treatment failure." },
+                    { lvl: 4, en: "Intermediate result", title: "Kết quả trung gian", match: "Intermediate result." },
+                    { lvl: 3, en: "Phase 4 - Definitive treatment", title: "Giai đoạn 4 - Điều trị dứt điểm", match: "Phase 4 - Definitive treatment" },
+                    { lvl: 3, en: "Phase 5 - Maintenance or SPT", title: "Giai đoạn 5 - Duy trì hay điều trị nha chu nâng đỡ (SPT)", match: "Phase 5- Maintenance or SPT" },
+
+                    { lvl: 1, en: "PERIODONTAL CONSIDERATIONS IN RELATION TO ADVANCED OPERATIVE DENTISTRY", title: "Các lưu ý nha chu liên quan đến nha khoa phục hồi nâng cao", match: "PERIODONTAL CONSIDERATIONS IN" },
+                    { lvl: 2, en: "Margin placement", title: "Vị trí đặt đường hoàn tất", match: "Margin placement" },
+                    { lvl: 2, en: "Temporary cover", title: "Phục hồi tạm", match: "Temporary cover" },
+                    { lvl: 2, en: "Choice of advanced restorations", title: "Lựa chọn phục hồi nâng cao", match: "Choice of advanced restorations" },
+                    { lvl: 2, en: "Occlusion and the periodontium", title: "Khớp cắn và mô nha chu", match: "Occlusion and the periodontium" },
+                    { lvl: 1, en: "SUMMARY", title: "Tóm tắt", match: "SUMMARY" }
+                ]
+            },
+
+            /* ====================================================================
+               CHƯƠNG 3: CÁC VẤN ĐỀ NỘI NHA TRONG NHA KHOA PHỤC HỒI NÂNG CAO
+               ==================================================================== */
+            "03. Chương 3 - Các vấn đề nội nha trong nha khoa phục hồi nâng cao": {
+                sections: [
+                    { lvl: 1, en: "ENDODONTIC HEALTH", title: "Sức khỏe nội nha", match: "ENDODONTIC HEALTH" },
+                    { lvl: 1, en: "GENERAL ANATOMICAL AND PHYSIOLOGICAL CONSIDERATIONS", title: "Các lưu ý chung về giải phẫu và sinh lý", match: "GENERAL ANATOMICAL AND" },
+                    { lvl: 2, en: "The dentine-pulp complex", title: "Phức hợp ngà - tủy", match: "The dentine pulp complex" },
+                    { lvl: 3, en: "Primary, secondary and tertiary dentine", title: "Ngà nguyên phát, thứ phát và thứ cấp (ngà phản ứng)", match: "Dentine is laid down throughout the life of the tooth" },
+                    { lvl: 2, en: "Nerves in the pulp", title: "Thần kinh trong tủy răng", match: "Nerves in the pulp" },
+                    { lvl: 3, en: "A-delta fibres, C-fibres and neurogenic inflammation", title: "Sợi A-delta, sợi C và phản ứng viêm do thần kinh", match: "The nerves of the pulp conduct pain sensation" },
+                    { lvl: 2, en: "Pulp vasculature", title: "Hệ mạch máu của tủy răng", match: "Pulp vasculature" },
+                    { lvl: 3, en: "Low compliance environment and pulpal blood flow", title: "Môi trường độ giãn nở thấp và lưu lượng máu tủy", match: "The dental pulp is often referred to as a low compliant" },
+                    { lvl: 2, en: "Pulpal defence mechanisms", title: "Cơ chế bảo vệ của tủy răng", match: "Pulpal defence mechanisms" },
+
+                    { lvl: 1, en: "THE EFFECT OF RESTORATIVE PROCEDURES ON THE DENTAL PULP", title: "Ảnh hưởng của các thủ thuật phục hồi lên tủy răng", match: "THE EFFECT OF RESTORATIVE" },
+                    { lvl: 2, en: "Health of the pulp (The stressed pulp)", title: "Tình trạng sức khỏe của tủy răng (Tủy bị căng thẳng)", match: "Health of the pulp" },
+                    { lvl: 2, en: "Preparation of the tooth", title: "Sửa soạn răng", match: "Preparation of the tooth" },
+                    { lvl: 3, en: "Frictional heat", title: "Nhiệt ma sát", match: "Frictional heat" },
+                    { lvl: 4, en: "Rotational speed on the bur", title: "Tốc độ quay của mũi khoan", match: "Rotational speed on the bur." },
+                    { lvl: 4, en: "Cooling the bur", title: "Làm mát mũi khoan", match: "Cooling the bur." },
+                    { lvl: 4, en: "Efficiency of the bur", title: "Hiệu suất cắt của mũi khoan", match: "Efficiency of the bur." },
+                    { lvl: 4, en: "Vibration", title: "Độ rung", match: "Vibration." },
+                    { lvl: 2, en: "The effects of local anaesthetic", title: "Ảnh hưởng của thuốc tê tại chỗ", match: "The effects of local anaesthetic" },
+                    { lvl: 2, en: "The effects of dental materials on the dental pulp", title: "Ảnh hưởng của vật liệu nha khoa lên tủy răng", match: "The effects of dental materials" },
+                    { lvl: 3, en: "Crown cementation", title: "Gắn mão răng", match: "Crown cementation" },
+                    { lvl: 3, en: "Marginal microleakage", title: "Vi kẽ bờ phục hồi", match: "Marginal microleakage" },
+                    { lvl: 4, en: "Pulpal survival under crowns vs bridge retainers", title: "Tỷ lệ sống của tủy dưới mão đơn lẻ so với răng trụ cầu", match: "Pulpal survival is linked to the type of restoration" },
+
+                    { lvl: 1, en: "DIAGNOSING THE STATE OF THE DENTAL PULP", title: "Chẩn đoán tình trạng tủy răng", match: "DIAGNOSING THE STATE OF THE" },
+                    { lvl: 2, en: "Testing pulp sensitivity", title: "Thử độ nhạy cảm của tủy (thử tủy)", match: "Testing pulp sensitivity" },
+                    { lvl: 3, en: "Reliability of sensitivity testing", title: "Độ tin cậy của các nghiệm pháp thử tủy", match: "Reliability of sensitivity testing" },
+                    { lvl: 3, en: "Tests using heat", title: "Thử nhiệt nóng", match: "Tests using heat" },
+                    { lvl: 3, en: "Tests using cold", title: "Thử nhiệt lạnh", match: "Tests using cold" },
+                    { lvl: 3, en: "Electrical testing", title: "Thử tủy bằng điện", match: "Electrical testing" },
+                    { lvl: 4, en: "Clinical technique for electric pulp testing", title: "Kỹ thuật lâm sàng khi thử tủy điện", match: "Clinical technique for electric pulp testing" },
+                    { lvl: 4, en: "False-positive responses", title: "Đáp ứng dương tính giả", match: "False-positive responses" },
+                    { lvl: 4, en: "False-negative responses", title: "Đáp ứng âm tính giả", match: "False-negative responses" },
+                    { lvl: 2, en: "The use of radiographs", title: "Sử dụng phim X-quang", match: "The use of radiographs" },
+                    { lvl: 2, en: "Linking symptoms to pulpal status", title: "Liên hệ triệu chứng với tình trạng tủy", match: "Linking symptoms to pulpal status" },
+                    { lvl: 3, en: "Sharp pain", title: "Đau nhói ngắn", match: "Sharp pain" },
+                    { lvl: 3, en: "Lingering pain", title: "Đau âm ỉ kéo dài", match: "Lingering pain" },
+
+                    { lvl: 1, en: "TREATMENT FOR PULPAL INFLAMMATION", title: "Điều trị viêm tủy", match: "TREATMENT FOR PULPAL" },
+                    { lvl: 1, en: "ASSESSING TEETH WITH PULP AND PERIRADICULAR DISEASE", title: "Đánh giá răng có bệnh lý tủy và vùng quanh chóp", match: "ASSESSING TEETH WITH PULP AND" },
+                    { lvl: 2, en: "Restorability index (Bandlish et al.)", title: "Chỉ số đánh giá khả năng phục hồi mô răng còn lại (Bandlish)", match: "It is important to ascertain the extent of the remaining" },
+
+                    { lvl: 1, en: "RADIOGRAPHIC ASSESSMENT OF THE ROOT-FILLED TOOTH", title: "Đánh giá X-quang răng đã điều trị nội nha", match: "RADIOGRAPHIC ASSESSMENT OF THE" },
+                    { lvl: 2, en: "Periapical radiographs vs Cone-beam CT (CBCT)", title: "Phim quanh chóp quy ước và Chụp cắt lớp vi tính chùm tia hình nón (CBCT)", match: "Periapical radiographs provide only a two-dimensional" },
+
+                    { lvl: 1, en: "SURVIVAL OF ROOT-CANAL TREATED CROWNED TEETH", title: "Tỷ lệ tồn tại của răng đã điều trị nội nha được bọc mão", match: "SURVIVAL OF ROOT-CANAL TREATED" },
+                    { lvl: 2, en: "Factors affecting failure of root-filled teeth", title: "Các yếu tố ảnh hưởng đến thất bại ở răng đã điều trị nội nha", match: "So how might a root-canal treated tooth fail" },
+                    { lvl: 3, en: "Structural integrity", title: "Sự toàn vẹn cấu trúc mô răng", match: "Structural integrity." },
+                    { lvl: 3, en: "Microcracks", title: "Các vết nứt vi thể", match: "Microcracks." },
+                    { lvl: 3, en: "Occlusal forces", title: "Lực nhai", match: "Occlusal forces." },
+                    { lvl: 3, en: "Chemical changes in the dentine", title: "Biến đổi hóa học trong mô ngà", match: "Chemical changes in the dentine." },
+                    { lvl: 3, en: "Irrigants", title: "Dung dịch bơm rửa ống tủy", match: "Irrigants." },
+                    { lvl: 3, en: "Microbial action on dentine", title: "Tác động của vi sinh vật lên mô ngà", match: "Microbial action on dentine." },
+                    { lvl: 3, en: "Microbial leakage", title: "Sự vi kẽ vi khuẩn từ phía thân răng", match: "Microbial leakage." },
+
+                    { lvl: 1, en: "SUMMARY", title: "Tóm tắt", match: "SUMMARY" }
+                ]
+            }
+        }
+    };
+
+    // Tạo bí danh tự động cho 3 chương mẫu
+    BOOK_CONFIG.chapters["Chapter 1"] = BOOK_CONFIG.chapters["Management of dental caries"] = BOOK_CONFIG.chapters["01. Chương 1 - Quản lý sâu răng"];
+    BOOK_CONFIG.chapters["Chapter 2"] = BOOK_CONFIG.chapters["Periodontal disease"] = BOOK_CONFIG.chapters["02. Chương 2 - Bệnh nha chu"];
+    BOOK_CONFIG.chapters["Chapter 3"] = BOOK_CONFIG.chapters["Endodontic problems in advanced operative dentistry"] = BOOK_CONFIG.chapters["03. Chương 3 - Các vấn đề nội nha trong nha khoa phục hồi nâng cao"];
+
+    /* ============================================================================
+       PHẦN 2: BỘ MÁY XỬ LÝ PDF, NHẬN DIỆN 10 CẤP & AI KIỂM DUYỆT LẦN CUỐI
+       ============================================================================ */
+    const RR = BOOK_CONFIG.reader_rules;
+    const HR = BOOK_CONFIG.heading_rules;
+    const AC = BOOK_CONFIG.ai_config;
+
+    let page1PrintedOutlineHints = [];
+
+    const cleanStr = s => String(s || '').replace(/\s+/g, ' ').trim();
+    const escRe = s => String(s || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+    function isAllCaps(s) {
+        const letters = String(s || '').replace(/[^A-Za-z\u00C0-\u1EF9]/g, '');
+        return letters.length >= 4 && letters === letters.toUpperCase() && letters !== letters.toLowerCase();
+    }
+
+    // 2.1. Khôi phục các tiêu đề cấp 1 bị bkImageBoxes đánh dấu nhầm (vì nằm trên thanh nền màu xanh của sách)
+    function excludeItems(ctx) {
+        const { pg, body0, excl, bodyFh } = ctx;
+        const H = pg.h;
+        const skipRes = (RR.skip_text_regex || []).map(r => { try { return new RegExp(r, 'i'); } catch (e) { return null; } }).filter(Boolean);
+
+        body0.forEach(it => {
+            const t = cleanStr(it.str);
+            if (skipRes.some(re => re.test(t))) {
+                excl.add(it);
+                return;
+            }
+            // Bảo vệ tiêu đề IN HOA hoặc in đậm của bài học khỏi bị xóa nhầm bởi hộp màu nền
+            if (isAllCaps(t) && t.length >= 5 && !/^CHAPTER\s+CONTENTS$/i.test(t) && !(pg.num === 1 && it.y > H * 0.75)) {
+                it._keepHeading = true;
+            }
+        });
+
+        // Trang 1: chỉ bỏ vùng Banner tên chương + tác giả ở 24% trên cùng của trang 1
+        if (pg.num === 1) {
+            body0.forEach(it => {
+                if (it.y > H * 0.76) excl.add(it);
+            });
+        }
+    }
+
+    // 2.2. Cắt bỏ khung CHAPTER CONTENTS ở Trang 1 và FURTHER READING ở cuối chương, đồng thời giữ lại mọi tiêu đề cấp 1
+    function trimOrder(ctx) {
+        const { pg, ord, cid, byYX } = ctx;
+        if (!Array.isArray(ord) || !ord.length) return ord;
+
+        // Cứu lại bất kỳ tiêu đề ALL CAPS nào trên trang bị bkImageBoxes loại nhầm
+        if (pg && Array.isArray(pg.its)) {
+            const existingSet = new Set(ord);
+            pg.its.forEach(it => {
+                if (!it || it.hf || existingSet.has(it)) return;
+                const t = cleanStr(it.str);
+                if (pg.num === 1 && it.y > pg.h * 0.76) return;
+                if (isAllCaps(t) && t.length >= 5 && !/^(?:CHAPTER\s+CONTENTS|FURTHER\s+READING|TABLE|FIGURE)$/i.test(t)) {
+                    ord.push(it);
+                }
+            });
+            ord.sort((p, q) => (cid(p) - cid(q)) || byYX(p, q));
         }
 
-        const engine = {
-            /* Mục lục cứng: lấy từ chapters[FILE].sections, gắn vị trí ký tự theo trang */
-            hardSections(H) {
-                if (!H || typeof H.text !== 'function' || !H.text()) return [];
-                const ch = typeof H.chapterMenu === 'function' ? H.chapterMenu() : null;
-                const list = ch && Array.isArray(ch.sections) ? ch.sections : [];
-                return list
-                    .map(x => ({
-                        title: x.title,
-                        en: x.en,
-                        num: '',
-                        lvl: x.lvl || 1,
-                        s: locate(H, x.page, x.en),
-                        manual: false,
-                        intro: false
-                    }))
-                    .filter(x => x.s >= 0);
-            },
-
-            /* Nút "Nhận diện mục lục": sách này đã có mục lục cứng đầy đủ từ bookmark PDF nên chỉ cần nạp lại */
-            async detect(H) {
-                const secs = engine.hardSections(H);
-                return {
-                    secs: secs,
-                    message: 'Menu.html: đã nạp ' + secs.length + ' mục lục cứng từ bookmark PDF'
-                };
-            }
-        };
-
-        TOC.menu({
-            book: 'Advanced Operative Dentistry: A Practical Approach',
-
-            /* Bố cục đọc: tọa độ là tỉ lệ 0..1 của trang, y tính từ mép trên.
-               top/bottom cắt phần tiêu đề chạy (running head "Chapter |n|" và "Advanced Operative Dentistry") và số trang ở chân.
-               Hai cột: trái khoảng 0.04-0.485, phải khoảng 0.485-0.96 (sách có hai kiểu lề, hai kiểu đều nằm trong khoảng này). */
-            layout: {
-                top: 0.072,
-                bottom: 0.945,
-                columns: [[0.04, 0.485], [0.485, 0.96]]
-            },
-
-            /* Trang đầu (Front matter, bản quyền, lời nói đầu) là một cột, để app tự dò */
-            page_layouts: [
-                { pages: '1-7', columns: [] }
-            ],
-
-            chapters: {
-                [FILE]: {
-                    sections: SECTIONS
+        if (RR.skip_printed_outline_on_page1 && pg.num === 1) {
+            page1PrintedOutlineHints = [];
+            let inOutline = false;
+            const out = [];
+            for (let i = 0; i < ord.length; i++) {
+                const it = ord[i];
+                const t = cleanStr(it.str);
+                if (!inOutline && /^CHAPTER\s+CONTENTS$/i.test(t)) {
+                    inOutline = true;
+                    continue;
                 }
-            },
+                if (inOutline) {
+                    if (isAllCaps(t) && t.length >= 6 && !/^CHAPTER\s+CONTENTS$/i.test(t)) {
+                        inOutline = false;
+                        out.push(it);
+                    } else if (!/^\d{1,3}$/.test(t) && t.length >= 3) {
+                        page1PrintedOutlineHints.push(t.replace(/\s+\d{1,3}$/, '').trim());
+                    }
+                    continue;
+                }
+                out.push(it);
+            }
+            return out;
+        }
 
-            engine: engine
+        if (HR.stop_at_further_reading) {
+            const out = [];
+            for (let i = 0; i < ord.length; i++) {
+                const it = ord[i];
+                const t = cleanStr(it.str);
+                if (/^FURTHER\s+READING$/i.test(t) && isAllCaps(t)) break;
+                out.push(it);
+            }
+            return out;
+        }
+
+        return ord;
+    }
+
+    // 2.3. Nhận diện Mềm trên từng trang (Hỗ trợ phân mục sâu từ cấp 1 đến cấp 10)
+    function detectCandidates(ctx) {
+        const { pg, ord, cid, rg, bodyFh } = ctx;
+        if (!Array.isArray(ord) || !ord.length) return [];
+
+        const lines = [];
+        ord.forEach(it => {
+            const r = rg[it.idx];
+            if (!r) return;
+            const prev = lines[lines.length - 1];
+            if (prev && prev.col === cid(it) && Math.abs(it.y - prev.y) <= 0.45 * Math.max(it.fh, prev.fh)) {
+                prev.text += (it.x - prev.x1 > 0.12 * prev.fh ? ' ' : '') + it.str;
+                prev.x1 = Math.max(prev.x1, it.x + (it.w || 0));
+                prev.fh = Math.max(prev.fh, it.fh);
+                prev.bd = prev.bd || !!it.bd;
+                prev.e = r.e;
+            } else {
+                lines.push({
+                    col: cid(it),
+                    x0: it.x,
+                    x1: it.x + (it.w || 0),
+                    y: it.y,
+                    fh: it.fh,
+                    bd: !!it.bd,
+                    text: it.str,
+                    s: r.s,
+                    e: r.e
+                });
+            }
         });
-    })(typeof TOC !== 'undefined' ? TOC : null);
-    </script>
+
+        // Nối tiêu đề bị ngắt làm 2-3 dòng liên tiếp
+        const merged = [];
+        for (let i = 0; i < lines.length; i++) {
+            const cur = Object.assign({}, lines[i]);
+            cur.text = cleanStr(cur.text);
+            while (i + 1 < lines.length) {
+                const nxt = lines[i + 1];
+                const nxtTxt = cleanStr(nxt.text);
+                const sameStyle = nxt.col === cur.col && Math.abs(nxt.fh - cur.fh) <= 0.55 && (cur.y - nxt.y) > 0 && (cur.y - nxt.y) <= 1.85 * cur.fh;
+                const bothCaps = isAllCaps(cur.text) && isAllCaps(nxtTxt);
+                const bothBoldHeading = cur.bd && nxt.bd && cur.fh >= (HR.level3_font_ratio || 1.01) * bodyFh && !/[.!?;:]$/.test(cur.text) && nxtTxt.split(/\s+/).length <= 8;
+                if (sameStyle && (bothCaps || bothBoldHeading)) {
+                    cur.text = cleanStr(cur.text + ' ' + nxtTxt);
+                    cur.e = nxt.e;
+                    i++;
+                } else {
+                    break;
+                }
+            }
+            merged.push(cur);
+        }
+
+        const forbidRe = new RegExp(HR.forbidden_heading_regex || '^(?:table|fig\\.?|figure|box|further\\s+reading)\\b', 'i');
+        const colonRe = new RegExp(HR.colon_subheading_regex || '^([A-Z][A-Za-z0-9\\s\\-–—/(),\'\'’]{2,65}):\\s*$');
+        const cands = [];
+
+        merged.forEach((ln, idx) => {
+            const t = ln.text;
+            if (!t || t.length < (HR.min_chars || 3) || t.length > (HR.max_chars || 150)) return;
+            const words = t.split(/\s+/).filter(Boolean);
+            if (words.length > (HR.max_words || 22)) return;
+            if (forbidRe.test(t)) return;
+            if (/^[\d\s.,%+-]+$/.test(t)) return;
+
+            const ratio = ln.fh / (bodyFh || 10);
+            const caps = isAllCaps(t);
+            const prevLn = idx > 0 && merged[idx - 1].col === ln.col ? merged[idx - 1] : null;
+            const nextLn = idx + 1 < merged.length && merged[idx + 1].col === ln.col ? merged[idx + 1] : null;
+            const gapAbove = prevLn ? (prevLn.y - ln.y) / ln.fh : 3;
+            const isolated = gapAbove >= 1.10 || !prevLn;
+
+            const inPage1Outline = page1PrintedOutlineHints.some(h => {
+                const a = h.toLowerCase().replace(/[^a-z0-9]+/g, '');
+                const b = t.toLowerCase().replace(/[^a-z0-9]+/g, '');
+                return a.length >= 4 && (a === b || a.includes(b) || b.includes(a));
+            });
+
+            let lvl = 0;
+            let cleanTitle = t.replace(/:\s*$/, '').trim();
+
+            if (caps && (ln.bd || ratio >= 1.05 || isolated)) {
+                lvl = 1;
+            } else if (/^Phase\s+\d+\b/i.test(t) && (ln.bd || isolated)) {
+                lvl = 3;
+            } else if (ratio >= (HR.level1_font_ratio || 1.20) && (ln.bd || isolated)) {
+                lvl = 2;
+            } else if (ratio >= (HR.level2_font_ratio || 1.10) && (ln.bd || inPage1Outline)) {
+                lvl = 2;
+            } else if ((ln.bd || inPage1Outline) && ratio >= (HR.level3_font_ratio || 1.01) && words.length <= 12 && isolated && !/\.\s*$/.test(t)) {
+                lvl = 3;
+            } else if (ln.bd && words.length <= 9 && isolated && nextLn && !nextLn.bd && !/\.\s*$/.test(t)) {
+                lvl = 4;
+            } else if (colonRe.test(t) && words.length <= 8 && isolated) {
+                // Nhận diện các tiểu mục dẫn đầu danh sách như "Silness and Löe plaque index:"
+                lvl = 4;
+            }
+
+            if (lvl > 0) {
+                cands.push({
+                    page: pg.num,
+                    s: ln.s,
+                    e: ln.e,
+                    fh: Math.round(ln.fh * 10) / 10,
+                    ratio: Math.round(ratio * 100) / 100,
+                    bd: ln.bd,
+                    caps: caps,
+                    num: '',
+                    lvl: lvl,
+                    en: cleanTitle,
+                    title: cleanTitle
+                });
+            }
+        });
+
+        return cands;
+    }
+
+    // 2.4. Định vị chính xác vị trí ký tự `s` của một tiêu đề trong văn bản chương `T`
+    // Nếu tiêu đề cấp 1 bị PDF.js tách hoặc nuốt mất dòng chữ tiêu đề, tự động định vị vào câu mở đầu của mục đó!
+    const FIRST_SENTENCE_FALLBACK = {
+        "DENTAL CARIES THE DISEASE": "Dental caries is a disease that is common to all dentate",
+        "THE RESTORATIVE CYCLE": "A significant proportion of a dentist",
+        "CARIES DETECTION AND DIAGNOSIS": "It is important when examining a patient for primary caries",
+        "CARIES RISK ASSESSMENT": "The patient seen in Figures 1.4 and 1.9 is a young patient",
+        "SUMMARY AND PRINCIPLES OF TREATMENT PLANNING": "Early caries detection and caries risk assessment are important",
+        "THE NECESSARY ORDER OF THINGS": "There is no doubt that screening patients, diagnosing periodontal",
+        "SUSCEPTIBILITY TO PERIODONTAL DISEASE": "It is clear from many studies that there is considerable variation",
+        "THE CONCEPT OF RISK": "It is known that the presence of risk factors will increase",
+        "TAKING HISTORIES FROM PATIENTS": "Taking thorough histories is an essential part of a patient",
+        "ASSESSMENT OF PERIODONTAL": "A clinical examination and where necessary sensitivity testing",
+        "MAKING A PERIODONTAL": "A periodontal diagnosis should be formulated for all new patients",
+        "PERIODONTAL TREATMENT": "Periodontal treatment planning is straightforward and the following",
+        "PERIODONTAL CONSIDERATIONS IN": "Should active periodontal disease recur during or after provision",
+        "ENDODONTIC HEALTH": "The health of the pulp and periradicular tissues is of paramount",
+        "GENERAL ANATOMICAL AND": "The dental pulp is encased within the hard tissue structure",
+        "THE EFFECT OF RESTORATIVE": "The effect that a restorative procedure has on the dental pulp",
+        "DIAGNOSING THE STATE OF THE": "It is very difficult to diagnose the pathology of the dental pulp",
+        "TREATMENT FOR PULPAL": "It is clear that the pulp has good reparative powers",
+        "ASSESSING TEETH WITH PULP AND": "Prior to treating irreversible pulpitis a clear indication",
+        "RADIOGRAPHIC ASSESSMENT OF THE": "If a root-filled tooth is to be restored with an indirect restoration",
+        "SURVIVAL OF ROOT-CANAL TREATED": "Patients may have concerns regarding the longevity of crowned teeth"
+    };
+
+    function locateHeadingOffset(H, T, item, minPos) {
+        if (!T) return -1;
+        if (typeof item.s === 'number' && item.s >= 0 && item.s < T.length) return item.s;
+
+        let searchFrom = Math.max(0, minPos || 0);
+        const targets = [item.match, item.en, item.title].map(cleanStr).filter(Boolean);
+        // Bổ sung câu đầu tiên của mục làm điểm neo dự phòng nếu tiêu đề nằm trong dải hộp màu bị PDF ẩn
+        targets.slice().forEach(k => {
+            if (FIRST_SENTENCE_FALLBACK[k]) targets.push(FIRST_SENTENCE_FALLBACK[k]);
+        });
+
+        for (const rawTarget of targets) {
+            const words = rawTarget.replace(/[-–—:.,?()]+/g, ' ').split(/\s+/).filter(Boolean);
+            if (!words.length) continue;
+            const pat = words.slice(0, 8).map(escRe).join('[\\s\\n\\-–—:.,?()]+');
+            const re = new RegExp(pat, 'ig');
+            re.lastIndex = searchFrom;
+            let m = re.exec(T);
+            if (m) return m.index;
+
+            re.lastIndex = 0;
+            m = re.exec(T);
+            if (m) return m.index;
+        }
+        return -1;
+    }
+
+    // 2.5. Nhận diện Cứng (Hỗ trợ 10 cấp)
+    function findHardChapterConfig(H) {
+        const direct = H && typeof H.chapterMenu === 'function' ? H.chapterMenu() : null;
+        if (direct && Array.isArray(direct.sections) && direct.sections.length) return direct;
+
+        const chap = (H && typeof H.chapter === 'function' && H.chapter()) || {};
+        const title = String(chap.title || '');
+        const mNum = title.match(/(?:chương|chapter|bài)\s*0*(\d+)/i) || title.match(/^\s*0*(\d+)\b/);
+        if (mNum) {
+            const num = parseInt(mNum[1], 10);
+            const aliasKey = 'Chapter ' + num;
+            if (BOOK_CONFIG.chapters[aliasKey]) return BOOK_CONFIG.chapters[aliasKey];
+        }
+        return null;
+    }
+
+    function hardSections(H) {
+        const T = H && typeof H.text === 'function' ? H.text() : '';
+        const ch = findHardChapterConfig(H);
+        if (!T || !ch || !Array.isArray(ch.sections) || !ch.sections.length) return [];
+
+        const out = [];
+        let lastPos = 0;
+        ch.sections.forEach(sec => {
+            if (!sec) return;
+            const pos = locateHeadingOffset(H, T, sec, lastPos);
+            if (pos >= 0) {
+                const en = cleanStr(sec.en || sec.title || '');
+                const vi = cleanStr(sec.title || sec.vi || en);
+                out.push({
+                    title: H && typeof H.fixVi === 'function' ? H.fixVi(vi, en) : vi,
+                    en: en,
+                    num: '', // Để bkNumbers() tự động đánh số 1. -> 1.1 -> 1.1.1 -> ... đến 10 cấp liền mạch
+                    lvl: Math.max(1, Math.min(10, parseInt(sec.lvl, 10) || 1)),
+                    s: pos,
+                    e: 0,
+                    text: '',
+                    hard: true
+                });
+                lastPos = pos + 1;
+            }
+        });
+        return out.sort((a, b) => a.s - b.s);
+    }
+
+    function buildSoftSections(H) {
+        const pages = (H && typeof H.pages === 'function' ? H.pages() : []) || [];
+        const all = [];
+        pages.forEach(pg => {
+            (pg.cands || []).forEach(c => {
+                if (!all.length || Math.abs(c.s - all[all.length - 1].s) >= 8) {
+                    all.push(Object.assign({}, c));
+                }
+            });
+        });
+        return all.sort((a, b) => a.s - b.s);
+    }
+
+    // 2.6. GỌI AI BÓC TÁCH SÂU ĐA TẦNG (LÊN ĐẾN 10 CẤP: lvl 1 -> 10)
+    async function analyzeHardPartsWithAI(H, T, baseSecs, onProg) {
+        const glossRule = (H && typeof H.glossRule === 'function' ? H.glossRule() : '') +
+                          (H && typeof H.glossary === 'function' ? H.glossary(T.slice(0, 12000)) : '');
+        const chunkSize = AC.chunk_size_chars || 26000;
+        const chunks = [];
+        for (let pos = 0; pos < T.length; pos += chunkSize) {
+            chunks.push({ start: pos, text: T.slice(pos, pos + chunkSize + 600) });
+        }
+
+        const aiFound = [];
+        for (let i = 0; i < chunks.length; i++) {
+            if (typeof onProg === 'function') onProg(i + 1, chunks.length);
+            const ck = chunks[i];
+            const localBase = baseSecs
+                .filter(c => c.s >= ck.start && c.s < ck.start + chunkSize)
+                .map(c => ({ en: c.en, vi: c.title, lvl: c.lvl }));
+
+            const sysPrompt =
+                'Bạn là giáo sư đầu ngành Răng Hàm Mặt đang lập mục lục CHI TIẾT ĐA CẤP (hỗ trợ từ cấp 1 đến cấp 10: 1 -> 1.1 -> 1.1.1 -> 1.1.1.1...) cho chương sách "Advanced Operative Dentistry: A Practical Approach".\n' +
+                'YÊU CẦU:\n' +
+                '1. Giữ đầy đủ các mục lớn cấp 1 (IN HOA), cấp 2, cấp 3 VÀ bóc tách sâu các tiểu mục con cấp 4, 5, 6... (như các chỉ số lâm sàng, các bước quy trình, các phân loại nhỏ, các yếu tố gạch đầu dòng có tiêu đề dẫn đầu câu, ví dụ "Silness and Löe plaque index", "DEPCAT scores", "Cariogram", v.v.).\n' +
+                '2. BỎ QUA chú thích hình ảnh (Figure 1.1...), bảng biểu (Table 1.1...) và mục FURTHER READING.\n' +
+                '3. Với mỗi mục, trả về: "match" (chép NGUYÊN VĂN 4–8 từ tiếng Anh đầu tiên của mục hoặc đoạn văn đó để định vị chính xác trong PDF), "en" (tên tiêu đề tiếng Anh gọn rõ), "vi" (tên tiêu đề dịch sang tiếng Việt chuẩn RHM miền Nam), "lvl" (cấp bậc từ 1 đến 10).\n' +
+                glossRule +
+                '\nChỉ trả về MỘT đối tượng JSON hợp lệ: {"sections":[{"match":"...","en":"...","vi":"...","lvl":1}]}';
+
+            const userPrompt =
+                'CÁC MỤC ĐÃ CÓ SẴN TRONG ĐOẠN NÀY:\n' + JSON.stringify(localBase) +
+                '\n\nVĂN BẢN CHƯƠNG (phần ' + (i + 1) + '/' + chunks.length + '):\n' + ck.text;
+
+            let res = null;
+            try { res = await H.ai(sysPrompt, userPrompt, 6500); } catch (e) {}
+            const list = (res && Array.isArray(res.sections)) ? res.sections : [];
+            let lastPos = ck.start;
+            list.forEach(it => {
+                if (!it || (!it.en && !it.match)) return;
+                const pos = locateHeadingOffset(H, T, { match: it.match || it.en, en: it.en }, lastPos);
+                if (pos >= 0) {
+                    const enClean = cleanStr(it.en || it.match);
+                    const viClean = cleanStr(it.vi || enClean);
+                    aiFound.push({
+                        en: enClean,
+                        title: H && typeof H.fixVi === 'function' ? H.fixVi(viClean, enClean) : viClean,
+                        num: '',
+                        lvl: Math.max(1, Math.min(10, parseInt(it.lvl, 10) || 1)),
+                        s: pos,
+                        e: 0,
+                        text: ''
+                    });
+                    lastPos = pos + 1;
+                }
+            });
+        }
+        return aiFound;
+    }
+
+    // 2.7. BƯỚC AI KIỂM DUYỆT LẦN CUỐI (FINAL AI VERIFICATION PASS — HỖ TRỢ 10 CẤP)
+    async function verifyMenuWithAI(H, T, draftSecs) {
+        if (!draftSecs || !draftSecs.length || !H || typeof H.hasAi !== 'function' || !H.hasAi()) {
+            return draftSecs;
+        }
+        const chapInfo = (typeof H.chapter === 'function' && H.chapter()) || {};
+        const glossRule = (H && typeof H.glossRule === 'function' ? H.glossRule() : '') +
+                          (H && typeof H.glossary === 'function' ? H.glossary(draftSecs.map(s => s.en).join(' ')) : '');
+
+        const payload = draftSecs.slice(0, 160).map((sec, idx) => ({
+            idx: idx,
+            en: sec.en || sec.title,
+            vi: sec.title || sec.en,
+            lvl: sec.lvl || 1,
+            hard: !!sec.hard,
+            preview: cleanStr(T.slice(sec.s, Math.min(T.length, sec.s + 140)))
+        }));
+
+        const sysPrompt =
+            'Bạn là Giáo sư Tổng biên tập sách giáo khoa Răng Hàm Mặt. Hãy KIỂM DUYỆT LẦN CUỐI (Final Verification) cây mục lục đa cấp (từ cấp 1 đến cấp 10) của chương "' + (chapInfo.title || '') + '".\n' +
+            '1. GIỮ LẠI (keep: true) toàn bộ các mục lớn (lvl=1) và tất cả các tiểu mục chuyên môn hợp lệ (lvl=2..10, đặc biệt các mục có hard: true).\n' +
+            '2. LOẠI BỎ (keep: false) các mục bị trùng lặp tại cùng một vị trí hoặc chú thích Figure/Table bị bắt nhầm.\n' +
+            '3. CHUẨN HÓA CẤP BẬC ("lvl" từ 1 đến 10): Đảm bảo cây phân cấp liền mạch, không bị nhảy cóc quá 1 cấp (ví dụ từ 1 xuống 2, từ 2 xuống 3, từ 3 xuống 4, từ 4 xuống 5...).\n' +
+            '4. CHUẨN HÓA TIẾNG VIỆT ("vi"): Dịch chuẩn xác sang thuật ngữ Răng Hàm Mặt miền Nam (nội nha, sửa soạn ống tủy, trám bít ống tủy, lấy vôi và xử lý mặt chân răng, nướu, viêm nướu, viêm nha chu, răng cối, chóp răng, vùng quanh chóp, mão răng, cầu răng, phức hợp ngà - tủy...).\n' +
+            glossRule +
+            '\nChỉ trả về MỘT đối tượng JSON hợp lệ: {"verified":[{"idx":0,"keep":true,"lvl":1,"vi":"...","en":"..."}]}';
+
+        let res = null;
+        try {
+            res = await H.ai(sysPrompt, JSON.stringify(payload), 8000);
+        } catch (e) {
+            return draftSecs;
+        }
+
+        const verifiedList = (res && Array.isArray(res.verified)) ? res.verified : null;
+        if (!verifiedList || !verifiedList.length) return draftSecs;
+
+        const byIdx = new Map();
+        verifiedList.forEach(v => {
+            if (v && Number.isInteger(v.idx)) byIdx.set(v.idx, v);
+        });
+
+        const finalSecs = [];
+        draftSecs.forEach((sec, idx) => {
+            const v = byIdx.get(idx);
+            if (!v) {
+                finalSecs.push(sec);
+                return;
+            }
+            if (v.keep === false && !sec.hard) return;
+            const enClean = cleanStr(v.en || sec.en || sec.title);
+            let viClean = cleanStr(v.vi || sec.title || enClean);
+            if (H && typeof H.fixVi === 'function') viClean = H.fixVi(viClean, enClean);
+
+            finalSecs.push(Object.assign({}, sec, {
+                en: enClean,
+                title: viClean,
+                num: '',
+                lvl: Math.max(1, Math.min(10, parseInt(v.lvl, 10) || sec.lvl || 1))
+            }));
+        });
+
+        return finalSecs.length ? finalSecs : draftSecs;
+    }
+
+    // 2.8. HÀM CHÍNH `detect(H, onProg)`
+    async function detect(H, onProg) {
+        const T = H && typeof H.text === 'function' ? H.text() : '';
+        if (!T || !T.trim()) {
+            return { secs: [], message: 'Chương này chưa có dữ liệu chữ để lập mục lục.' };
+        }
+
+        const hard = hardSections(H);
+        const soft = buildSoftSections(H);
+        let combined = H.mergeSecs ? H.mergeSecs(hard, soft) : hard.concat(soft).sort((a, b) => a.s - b.s);
+
+        // Khi người dùng bấm "📑 Nhận diện mục lục" / "🔄 Cập nhật mục lục":
+        // Cho phép AI bóc tách sâu thêm các tiểu mục con (cấp 4, 5, 6... 10) và kiểm duyệt lần cuối
+        if (AC.enable_ai_assist && AC.deep_expand_with_ai) {
+            if (!H.hasAi()) {
+                if (!hard.length) {
+                    H.showGate();
+                    return { gate: true, secs: combined };
+                }
+                return { secs: hard, message: '✅ Đã nạp mục lục đa cấp từ Menu.html (' + hard.length + ' mục)' };
+            }
+            const aiSecs = await analyzeHardPartsWithAI(H, T, combined, onProg);
+            if (aiSecs && aiSecs.length) {
+                // Giữ toàn bộ mục cứng (hard) và bổ sung các tiểu mục sâu do AI tìm thêm (cách nhau >= 25 ký tự)
+                const merged = hard.slice();
+                aiSecs.forEach(a => {
+                    if (!merged.some(m => Math.abs(m.s - a.s) < 25)) {
+                        merged.push(a);
+                    }
+                });
+                merged.sort((x, y) => x.s - y.s);
+                combined = merged;
+            }
+        }
+
+        // Bước AI kiểm duyệt lần cuối
+        if (AC.always_final_verify_by_ai && combined.length && H.hasAi()) {
+            if (typeof onProg === 'function') onProg(1, 1);
+            combined = await verifyMenuWithAI(H, T, combined);
+        }
+
+        return {
+            secs: combined,
+            message: '✅ Đã lập & kiểm duyệt mục lục chi tiết (' + combined.length + ' mục)'
+        };
+    }
+
+    // 2.9. Quét lại tiểu mục con bên trong 1 mục đang chọn (`subSections`) — hỗ trợ đào sâu tới cấp 10
+    async function subSections(H, opts) {
+        const { seg, title, lvl, start } = opts || {};
+        if (!seg || !H || !H.hasAi()) return [];
+        const glossRule = (H && typeof H.glossRule === 'function' ? H.glossRule() : '') +
+                          (H && typeof H.glossary === 'function' ? H.glossary(seg.slice(0, 8000)) : '');
+
+        const nextLvl = Math.min(10, (lvl || 1) + 1);
+        const sysPrompt =
+            'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Trong đoạn văn thuộc mục "' + (title || '') + '" (cấp ' + (lvl || 1) + '), hãy chia nhỏ và tìm tất cả các TIỂU MỤC CON (từ cấp ' + nextLvl + ' đến cấp 10) nằm bên trong đoạn này.\n' +
+            'Trả về "match" (4–8 từ tiếng Anh đầu tiên của tiểu mục trong văn bản), "en" (tên tiếng Anh), "vi" (tên tiếng Việt chuẩn RHM miền Nam), "lvl" (từ ' + nextLvl + ' đến 10).\n' +
+            glossRule +
+            '\nChỉ trả về MỘT đối tượng JSON: {"subs":[{"match":"...","en":"...","vi":"...","lvl":' + nextLvl + '}]}';
+
+        let res = null;
+        try { res = await H.ai(sysPrompt, seg, 4000); } catch (e) { return []; }
+        const list = (res && Array.isArray(res.subs)) ? res.subs : [];
+        const T = H.text();
+        const out = [];
+        let lastPos = start + 1;
+
+        list.forEach(it => {
+            if (!it || (!it.en && !it.match)) return;
+            const pos = locateHeadingOffset(H, T, { match: it.match || it.en, en: it.en }, lastPos);
+            if (pos > start) {
+                const enClean = cleanStr(it.en || it.match);
+                let viClean = cleanStr(it.vi || enClean);
+                if (H && typeof H.fixVi === 'function') viClean = H.fixVi(viClean, enClean);
+                out.push({
+                    en: enClean,
+                    title: viClean,
+                    num: '',
+                    lvl: Math.max(nextLvl, Math.min(10, parseInt(it.lvl, 10) || nextLvl)),
+                    s: pos,
+                    e: 0,
+                    text: ''
+                });
+                lastPos = pos + 1;
+            }
+        });
+        return out;
+    }
+
+    const ENGINE = {
+        begin: function () { page1PrintedOutlineHints = []; },
+        excludeItems: excludeItems,
+        trimOrder: trimOrder,
+        detectCandidates: detectCandidates,
+        hardSections: hardSections,
+        detect: detect,
+        subSections: subSections
+    };
+
+    BOOK_CONFIG.engine = ENGINE;
+    if (typeof TOC.menu === 'function') TOC.menu(BOOK_CONFIG);
+    if (typeof TOC.override === 'function') TOC.override(ENGINE);
+})(typeof TOC !== 'undefined' ? TOC : null);
+</script>
 </body>
 </html>
