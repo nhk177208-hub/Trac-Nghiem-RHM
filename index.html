@@ -9563,7 +9563,10 @@ function bkModeFh(items) {   // cỡ chữ phổ biến nhất của trang (là 
     const c = {}; items.forEach(it => { const k = Math.round(it.fh * 2) / 2; c[k] = (c[k] || 0) + (it.str || '').length; });
     let best = 10, n = -1; Object.keys(c).forEach(k => { if (c[k] > n) { n = c[k]; best = +k; } }); return best;
 }
-function bkReaderRules() {    const def = {
+function bkReaderRules() {
+    const m = bkMenu;
+    const ch = bkChapterMenu();
+    const def = {
         reading_order: 'col1_top_down_then_col2',
         auto_two_column: true,
         column_gutter_min_ratio: 0.018,
@@ -9578,8 +9581,9 @@ function bkReaderRules() {    const def = {
         skip_figure_labels: true,
         dehyphenate_line_breaks: true
     };
-    return def;
-}function bkZone(it, pg) { return it.y > pg.h * 0.92 ? 'T' : (it.y < pg.h * 0.08 ? 'B' : ''); }
+    return Object.assign(def, (m && m.reader_rules) || {}, (ch && ch.reader_rules) || {});
+}
+function bkZone(it, pg) { return it.y > pg.h * 0.92 ? 'T' : (it.y < pg.h * 0.08 ? 'B' : ''); }
 async function bkExtract(doc, tok, onProg) {
     const raw = [];
     const R = bkReaderRules();
@@ -9746,7 +9750,9 @@ async function bkOpenChapter(i) {
         const doc = await L.getDocument({ data: buf }).promise;
         if (tok !== bkViewTok) { try { doc.destroy(); } catch (e) {} return; }
         bkDoc = doc;
-        await bkLoadMucLuc(false);   // MucLuc.html: nhận diện mềm (luật + code)        // Vá 5: không còn nạp MucLuc.html / Menu.html / Menu.txt; mục lục lấy từ kết quả AI đã lưu của chươngconst first = await doc.getPage(1);
+        await bkLoadMucLuc(false);   // MucLuc.html: nhận diện mềm (luật + code)
+        // Vá 5: không còn nạp MucLuc.html / Menu.html / Menu.txt
+        const first = await doc.getPage(1);
         if (tok !== bkViewTok) return;
         // mở ra vừa bề ngang khung đọc
         const avail = Math.max(240, bkWrapEl.clientWidth - 24);
@@ -9764,9 +9770,13 @@ async function bkOpenChapter(i) {
     try {
         const ex = await bkExtract(bkDoc, tok, (n, t) => bkSetStatus('⏳ Đang đọc chữ chương: trang ' + n + '/' + t));
         if (!ex || tok !== bkViewTok) return;
-        bkPages = ex.pages; bkText = ex.text;        bkSecs = bkMergeSecs(bkV5Load(c.url), bkLoadManual(c.url).filter(x => x.manual));
+        bkPages = ex.pages; bkText = ex.text;
+        bkPages = ex.pages; bkText = ex.text;
+        bkSecs = bkMergeSecs(bkV5Load(c.url), bkLoadManual(c.url).filter(x => x.manual));
         bkRelink(); bkRenderSecList(); bkUpdateSecBtn();
-        bkApplyHlAll();bkSetStatus(bkText.trim() ? '' : 'Chương này không có chữ (có thể là PDF scan), AI không đọc được nội dung.');
+        bkApplyHlAll();
+        bkSetStatus(bkText.trim() ? '' : 'Chương này không có chữ (có thể là PDF scan), AI không đọc được nội dung.');
+        bkSetStatus(bkText.trim() ? '' : 'Chương này không có chữ (có thể là PDF scan), AI không đọc được nội dung.');
     } catch (e) {
         console.error(e);
         if (tok === bkViewTok) bkSetStatus('PDF đã mở nhưng chưa đọc được chữ để phân mục/dịch. ' + ((e && e.message) || ''));
@@ -10003,7 +10013,11 @@ async function bkRunTr(text, title) {
     }
 }
 let bkObs = null;
-window.encPath = p => p.split('/').map(encodeURIComponent).join('/');/* ===== VÁ 5: AI tự đọc ảnh các trang → lập mục lục + nội dung từng phân mục (không dùng Menu.txt) ===== */
+window.encPath = p => p.split('/').map(encodeURIComponent).join('/');
+window.encPath = p => p.split('/').map(encodeURIComponent).join('/');
+let bkMenu = null;   // còn lại để bkReaderRules (bản cũ) không lỗi; không còn đọc Menu.txt
+function bkChapterMenu() { return null; }
+/* ===== VÁ 5: AI tự đọc ảnh các trang → lập mục lục + nội dung từng phân mục (không dùng Menu.txt) ===== */
 const BK_V5_BATCH = 6;
 let bkV5Busy = false;
 const BK_V5_SYS = [
@@ -10343,7 +10357,8 @@ function bkUpdateSecBtn() {
     if (!b) return;
     b.disabled = false;
     b.textContent = bkSecs.length ? '🔄 Cập nhật mục lục' : '📑 Nhận diện mục lục';
-}function bkSetSecLang(l) { bkSecLang = l; bkRenderSecList(); }
+}
+function bkSetSecLang(l) { bkSecLang = l; bkRenderSecList(); }
 function bkToggleSec() {
     const p = document.getElementById('bk-sec-panel'); if (!p) return;
     p.classList.toggle('bk-col');
