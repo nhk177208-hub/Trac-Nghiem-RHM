@@ -10015,166 +10015,245 @@ async function bkRunTr(text, title) {
 let bkObs = null;
 window.encPath = p => p.split('/').map(encodeURIComponent).join('/');
 window.encPath = p => p.split('/').map(encodeURIComponent).join('/');
-let bkMenu = null;   // còn lại để bkReaderRules (bản cũ) không lỗi; không còn đọc Menu.txt
+let bkMenu = null;   // còn lại để bkReaderRules không lỗi; không còn đọc Menu.txt
 function bkChapterMenu() { return null; }
-/* ===== VÁ 5: AI tự đọc ảnh các trang → lập mục lục + nội dung từng phân mục (không dùng Menu.txt) ===== */
-const BK_V5_BATCH = 6;
-let bkV5Busy = false;
-const BK_V5_SYS = [
-    'Bạn là giáo sư Răng Hàm Mặt chuyên đọc tài liệu sách giáo khoa. Bạn nhận ảnh chụp từng trang của MỘT chương (bố cục 2 cột), theo đúng thứ tự trang.',
-    'NHIỆM VỤ 1 — LẬP MỤC LỤC: nhận diện mọi tiêu đề phân mục (có số như "1.", "4.2.1." hoặc tiêu đề in đậm/cỡ lớn), theo thứ tự xuất hiện.',
-    'NHIỆM VỤ 2 — ĐỌC NỘI DUNG: chia chữ của mỗi trang thành các "run" (đoạn chữ liên tục) theo THỨ TỰ ĐỌC: hết cột 1 từ trên xuống dưới rồi mới sang cột 2 từ trên xuống dưới. Tiêu đề rộng cả trang được đọc trước phần cột nằm dưới nó.',
-    '- BỎ QUA hoàn toàn (không đưa vào kết quả): Outline / đề cương, hình ảnh, chú thích ảnh, chú thích, bảng, biểu, khung, ô, hộp, số trang, tiêu đề và chân trang lặp lại, tiêu đề chương "CHƯƠNG ...".',
-    '- Nếu một đoạn văn bị hình, bảng, khung hay chú thích chèn ngang làm tách, các phần chữ của đoạn đó vẫn dùng cùng sid, kể cả khi đoạn tiếp tục ở trang sau (để ráp lại).',
-    '- Mỗi phân mục có một "sid" duy nhất: phân mục mới đặt sid "s1", "s2", ... theo thứ tự xuất hiện; nếu phân mục đã có trong danh sách gửi kèm thì dùng lại đúng sid đó. Chữ đứng trước mọi tiêu đề dùng sid "intro".',
-    '- Run tiêu đề: t = "h", kèm num (ví dụ "4.2.1", để "" nếu không có số), lvl (cấp: "1." là 1, "4.2.1." là 3), title (tên gốc), vi (tên tiếng Việt chuẩn RHM miền Nam).',
-    '- Run nội dung: t = "b". Mỗi run ghi "first" = 6 đến 10 chữ ĐẦU của run và "last" = 6 đến 10 chữ CUỐI của run, chép NGUYÊN VĂN theo ảnh, không sửa, không dịch.',
-    '- Chỉ liệt kê run có t = "h" hoặc t = "b" theo đúng thứ tự đọc.',
+/* ===== VÁ 6: AI gán từng DÒNG chữ vào phân mục (ảnh độ phân giải cao) + đánh số phân cấp tới 10 cấp ===== */
+const BK_V6_BATCH = 4;
+const BK_V6_WIDTH = 1600;
+let bkV6Busy = false;
+const BK_V6_CAP_RE = /^(?:figure|fig\.?|table|tbl\.?|box|chart|graph|scheme|plate|hình|bảng|hộp|biểu đồ|sơ đồ|biểu|ảnh)\s*\d/i;
+const BK_V6_SYS = [
+    'Bạn là giáo sư Răng Hàm Mặt chuyên phân tích cấu trúc sách giáo khoa. Bạn nhận ảnh chụp từng trang (bố cục 2 cột, có hình, bảng, khung chèn xen) và danh sách DÒNG chữ đánh số L<số>, lấy từ lớp chữ của PDF.',
+    'NHIỆM VỤ A — TIÊU ĐỀ (heads): liệt kê MỌI tiêu đề phân mục có trong các dòng gửi kèm. Tiêu đề là dòng mở đầu một phân mục: thường in đậm, cỡ lớn hơn thân bài, hoặc có số. Cấp lvl từ 1 đến 10: tiêu đề lớn nhất là 1, tiêu đề con nhỏ hơn hoặc thụt vào là cấp kế tiếp. Không tạo tiêu đề từ chú thích, tiêu đề hình/bảng, hoặc tiêu đề khung Outline.',
+    'NHIỆM VỤ B — GÁN DÒNG (ranges): mọi dòng nội dung chính (kể cả dòng tiêu đề) phải nằm trong một khoảng [from, to] gán sid của phân mục chứa nó. Các dòng liên tiếp cùng sid có thể gộp thành một khoảng. Số from và to là số dòng L thật trong danh sách.',
+    '- Dòng KHÔNG phải nội dung chính: gán sid = null. Gồm Outline/đề cương/tóm tắt dạng khung, hình ảnh, chú thích ảnh (ví dụ "Figure 14.13 ..."), chú thích, bảng, biểu, khung, hộp, ô, số trang, tiêu đề và chân trang lặp lại.',
+    '- Đoạn văn bị hình, bảng hay khung chèn ngang: các dòng văn của đoạn đó vẫn gán cùng một sid, kể cả khi bị ngắt bởi dòng không phải nội dung.',
+    '- Không bỏ sót đoạn văn chính: mỗi dòng phải được gán sid hoặc sid = null (chỉ khi đúng là nội dung loại trừ).',
+    '- sid: phân mục mới đặt "s1", "s2", ... theo thứ tự xuất hiện; phân mục đã có trong danh sách gửi kèm thì dùng lại đúng sid. Chữ đứng trước tiêu đề đầu tiên dùng sid "intro".',
+    '- num: số đánh sẵn trong sách nếu có (ví dụ "4.2.1"); không có thì để "".',
     'Chỉ trả về MỘT đối tượng JSON, không kèm chữ nào khác, đúng dạng:',
-    '{"pages":[{"page":3,"runs":[{"t":"h","sid":"s1","num":"4","lvl":1,"title":"...","vi":"...","first":"...","last":"..."},{"t":"b","sid":"s1","first":"...","last":"..."}]}]}'
+    '{"heads":[{"line":101,"sid":"s1","num":"","lvl":1,"title":"...","vi":"..."}],"ranges":[{"from":101,"to":115,"sid":"s1"},{"from":116,"to":118,"sid":null}]}',
+    'Trường "vi" là tên tiếng Việt chuẩn RHM miền Nam của tiêu đề.'
 ].join('\n') + BK_TR_GLOSS;
 
-/* Chụp một trang PDF thành JPEG rộng ~900px */
-async function bkV5RenderPage(doc, num) {
+/* Chụp một trang PDF thành JPEG rộng ~1600px để AI đọc rõ chữ nhỏ và chú thích */
+async function bkV6RenderPage(doc, num) {
     const page = await doc.getPage(num);
     const vp1 = page.getViewport({ scale: 1 });
-    const scale = Math.max(0.8, Math.min(1.6, 900 / vp1.width));
+    const scale = Math.max(1, Math.min(3, BK_V6_WIDTH / vp1.width));
     const vp = page.getViewport({ scale: scale });
     const cv = document.createElement('canvas');
     cv.width = Math.round(vp.width); cv.height = Math.round(vp.height);
     const ctx = cv.getContext('2d', { alpha: false });
     ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, cv.width, cv.height);
     await page.render({ canvasContext: ctx, viewport: vp }).promise;
-    const b64 = cv.toDataURL('image/jpeg', 0.7).split(',')[1];
+    const b64 = cv.toDataURL('image/jpeg', 0.85).split(',')[1];
     cv.width = 0; cv.height = 0;
     return b64;
 }
 
-/* Gửi một lượt vài trang ảnh cho AI; trả về object JSON hoặc null */
-async function bkV5ReadBatch(batch, imgs, known, prevSid) {
-    const list = known.length ? known.map(k => '- sid "' + k.sid + '": ' + (k.num ? k.num + ' ' : '') + k.en).join('\n') : '(chưa có)';
-    const txt = 'CÁC PHÂN MỤC ĐÃ GẶP (dùng lại đúng sid, không tạo sid trùng):\n' + list +
-        '\nCác trang trong lượt này (ảnh đính kèm đúng thứ tự): ' + batch.join(', ') + '.' +
-        (prevSid ? '\nĐầu lượt này có thể tiếp nối sid "' + prevSid + '" của trang trước.' : '');
+/* Tách bkText thành các dòng đánh số L1, L2, ... (kèm vị trí ký tự và số trang) */
+function bkV6Lines() {
+    const T = bkText || ''; const out = []; let pos = 0;
+    T.split('\n').forEach(raw => {
+        const start = pos; pos += raw.length + 1;
+        const t = raw.trim();
+        if (!t) return;
+        const pg = (bkPages || []).find(p => start >= p.gs && start < p.ge) || (bkPages || [])[(bkPages || []).length - 1];
+        out.push({ id: out.length + 1, page: pg ? pg.num : 0, a: start + raw.indexOf(t), b: start + raw.length, text: t });
+    });
+    return out;
+}
+
+/* Ghép kết quả AI thành phân mục: gán dòng, điền dòng AI bỏ sót, ghép đoạn liền nhau, đánh số phân cấp */
+function bkV6Assemble(lines, heads, ranges) {
+    const byId = {}; lines.forEach(l => { byId[l.id] = l; });
+    const bySid = {}; const known = []; const lineSid = {};
+    const normSid = v => {
+        if (v === null || v === undefined) return null;
+        const s = String(v).trim();
+        return (s && s !== 'null') ? s : null;
+    };
+    const ensure = sid => {
+        if (!bySid[sid]) {
+            bySid[sid] = { sid: sid, num: '', lvl: 1, en: '', vi: '', intro: sid === 'intro' };
+            known.push(bySid[sid]);
+        }
+        return bySid[sid];
+    };
+    (heads || []).forEach(h => {
+        const sid = normSid(h.sid); if (!sid) return;
+        const sec = ensure(sid);
+        if (!sec.en && !sec.vi) {
+            sec.num = String(h.num || '').trim().replace(/\.$/, '');
+            sec.lvl = Math.max(1, Math.min(10, Number(h.lvl) || 1));
+            sec.en = String(h.title || '').trim();
+            sec.vi = String(h.vi || '').trim();
+        }
+        const ln = Number(h.line);
+        if (byId[ln] && lineSid[ln] === undefined) lineSid[ln] = sid;
+    });
+    (ranges || []).forEach(rg => {
+        const sid = normSid(rg.sid);
+        const from = Number(rg.from), to = Number(rg.to);
+        if (!(from <= to)) return;
+        if (sid) ensure(sid);
+        for (let id = from; id <= to; id++) {
+            if (byId[id] && lineSid[id] === undefined) lineSid[id] = sid;
+        }
+    });
+    /* Dòng AI không nhắc tới: bỏ qua nếu là chú thích/số trang, còn lại nối vào phân mục trước đó */
+    let cur = null;
+    lines.forEach(l => {
+        const v = lineSid[l.id];
+        if (v === undefined) {
+            if (BK_V6_CAP_RE.test(l.text) || /^\d{1,4}$/.test(l.text)) { lineSid[l.id] = null; return; }
+            if (!cur) { ensure('intro'); cur = 'intro'; }
+            lineSid[l.id] = cur;
+        } else if (v !== null) {
+            cur = v;
+        }
+    });
+    /* Gom các dòng liền nhau cùng sid thành đoạn [a, b] */
+    const segs = {};
+    let runSid = null, runA = 0, runB = 0;
+    const flush = () => { if (runSid) (segs[runSid] = segs[runSid] || []).push([runA, runB]); runSid = null; };
+    lines.forEach(l => {
+        const v = lineSid[l.id];
+        if (!v) { flush(); return; }
+        if (runSid === v) { runB = l.b; return; }
+        flush(); runSid = v; runA = l.a; runB = l.b;
+    });
+    flush();
+    /* Sắp theo vị trí trong chương; đánh số: số có sẵn giữ nguyên, còn lại tính theo cấp (tới 10 cấp) */
+    const ordered = known.filter(k => segs[k.sid] && segs[k.sid].length)
+        .map(k => ({ k: k, g: segs[k.sid], first: segs[k.sid][0][0] }))
+        .sort((x, y) => x.first - y.first);
+    const c = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let prevL = 0; const out = [];
+    ordered.forEach(o => {
+        const k = o.k, g = o.g;
+        const title = k.vi || k.en || '(không rõ tên)';
+        if (k.intro) {
+            out.push({ title: title, en: k.en || 'Introduction', num: '', lvl: 1, s: g[0][0], anchorE: g[g.length - 1][1], e: g[g.length - 1][1], segs: g, fromList: true, manual: false, intro: true, text: '' });
+            return;
+        }
+        let L = Math.max(1, Math.min(10, k.lvl || 1));
+        if (L > prevL + 1) L = prevL + 1;
+        let num;
+        if (/^\d+(?:\.\d+)*$/.test(k.num || '')) {
+            const p = k.num.split('.').map(Number);
+            L = Math.max(1, Math.min(10, p.length));
+            for (let i = 1; i <= 10; i++) c[i] = i <= p.length ? p[i - 1] : 0;
+            num = k.num;
+        } else {
+            c[L]++;
+            for (let i = L + 1; i <= 10; i++) c[i] = 0;
+            num = c.slice(1, L + 1).join('.');
+        }
+        prevL = L;
+        out.push({ title: title, en: k.en || title, num: num, lvl: L, s: g[0][0], anchorE: g[g.length - 1][1], e: g[g.length - 1][1], segs: g, fromList: true, manual: false, intro: false, text: '' });
+    });
+    return out;
+}
+
+/* Gửi một lượt (vài trang ảnh + các dòng chữ của các trang đó) cho AI */
+async function bkV6ReadBatch(batch, imgs, bl, known, prevSid) {
+    const list = known.length ? known.map(k => '- sid "' + k.sid + '": ' + (k.num ? k.num + ' ' : '') + (k.en || k.vi || '')).join('\n') : '(chưa có)';
+    const textLines = bl.map(l => 'L' + l.id + ': ' + l.text).join('\n');
+    const txt = 'CÁC PHÂN MỤC ĐÃ GẶP (dùng lại đúng sid):\n' + list +
+        '\n\nCÁC TRANG TRONG LƯỢT NÀY: ' + batch.join(', ') + ' (ảnh đính kèm đúng thứ tự).' +
+        (prevSid ? '\nĐầu lượt có thể tiếp nối sid "' + prevSid + '".' : '') +
+        '\n\nDÒNG CHỮ (L<số>: nội dung):\n' + textLines;
     const parts = [{ text: txt }];
     batch.forEach((n, j) => {
         parts.push({ text: 'Ảnh trang ' + n + ':' });
         parts.push({ inlineData: { mimeType: 'image/jpeg', data: imgs[j] } });
     });
-    const r = await window.bkQzCallAI(BK_V5_SYS, parts);
+    const r = await window.bkQzCallAI(BK_V6_SYS, parts);
     return (r && typeof r === 'object') ? r : null;
 }
 
-/* Chạy toàn bộ chương: AI đọc từng lượt trang, gom mục lục và các run nội dung */
-async function bkV5Analyze(tok, btn) {
-    const nums = (bkPages || []).map(p => p.num);
-    const known = []; const bySid = {}; const runs = [];
+/* Chạy toàn chương theo lượt trang, rồi ghép kết quả */
+async function bkV6Analyze(tok, btn) {
+    const lines = bkV6Lines();
+    if (!lines.length) return [];
+    const pages = (bkPages || []).map(p => p.num);
+    const heads = [], ranges = [];
     let prevSid = null;
-    for (let b = 0; b < nums.length; b += BK_V5_BATCH) {
+    for (let b = 0; b < pages.length; b += BK_V6_BATCH) {
         if (tok !== bkViewTok) return null;
-        const batch = nums.slice(b, b + BK_V5_BATCH);
-        btn.textContent = '⏳ AI đọc trang ' + batch[0] + '–' + batch[batch.length - 1] + '/' + nums.length;
+        const batch = pages.slice(b, b + BK_V6_BATCH);
+        btn.textContent = '⏳ AI đọc trang ' + batch[0] + '–' + batch[batch.length - 1] + '/' + pages.length;
+        const bl = lines.filter(l => batch.indexOf(l.page) >= 0);
+        if (!bl.length) continue;
+        const inBatch = {}; bl.forEach(l => { inBatch[l.id] = true; });
         const imgs = [];
-        for (const n of batch) imgs.push(await bkV5RenderPage(bkDoc, n));
+        for (const n of batch) imgs.push(await bkV6RenderPage(bkDoc, n));
+        const known = [];
+        heads.forEach(h => { const s = String(h.sid || ''); if (s && known.every(k => k.sid !== s)) known.push({ sid: s, num: h.num, en: h.title || h.vi }); });
         let res = null;
-        try { res = await bkV5ReadBatch(batch, imgs, known, prevSid); }
-        catch (e) { console.warn('[V5 layout]', e); }
+        try { res = await bkV6ReadBatch(batch, imgs, bl, known, prevSid); }
+        catch (e) { console.warn('[V6 layout]', e); }
         if (!res) continue;   // lượt lỗi thì bỏ qua, các lượt khác vẫn dùng được
-        (Array.isArray(res.pages) ? res.pages : []).forEach(pg => {
-            (Array.isArray(pg.runs) ? pg.runs : []).forEach(r => {
-                if (!r || (r.t !== 'h' && r.t !== 'b')) return;
-                const sid = String(r.sid || '').trim();
-                if (!sid) return;
-                if (!bySid[sid]) {
-                    const num = String(r.num || '').trim().replace(/\.$/, '');
-                    const lvl = num ? num.split('.').length : (Number(r.lvl) || 1);
-                    let vi = String(r.vi || '').trim().replace(/^\d+(?:\.\d+)*\.?\s*/, '');
-                    const en = sid === 'intro' ? 'Introduction' : String(r.title || '').trim();
-                    if (sid === 'intro') vi = vi || 'Mở đầu';
-                    if (vi && typeof window.rhmEnforceSouthernTerms === 'function') vi = window.rhmEnforceSouthernTerms(vi, en);
-                    const sec = { sid: sid, num: num, lvl: Math.max(1, Math.min(10, lvl)), en: en, vi: vi, intro: sid === 'intro' };
-                    bySid[sid] = sec; known.push(sec);
-                }
-                runs.push({ page: Number(pg.page), sid: sid, first: String(r.first || ''), last: String(r.last || '') });
-                prevSid = sid;
-            });
+        (Array.isArray(res.heads) ? res.heads : []).forEach(h => { if (h && inBatch[Number(h.line)]) heads.push(h); });
+        (Array.isArray(res.ranges) ? res.ranges : []).forEach(rg => {
+            if (!rg) return;
+            const from = Number(rg.from), to = Number(rg.to);
+            if (!(from <= to)) return;
+            ranges.push({ from: from, to: to, sid: rg.sid });
+            const sid = (rg.sid === null || rg.sid === undefined || String(rg.sid).trim() === 'null' || String(rg.sid).trim() === '') ? null : String(rg.sid).trim();
+            if (sid) prevSid = sid;
         });
     }
-    if (!known.length) return [];
-    return bkV5Locate(known, runs, bkText);
+    return bkV6Assemble(lines, heads, ranges);
 }
 
-/* Định vị từng run trong văn bản PDF (ưu tiên đúng trang), rồi ghép các đoạn theo sid */
-function bkV5Locate(known, runs, T) {
-    const N = bkBuildNormIndex(T);
-    const segs = {}; const cur = { pos: 0 };
-    runs.forEach(r => {
-        if (!r.first) return;
-        const pg = bkPages.find(p => p.num === r.page);
-        let a = pg ? bkFindAnchorInText(T, N, r.first, false, pg.gs, pg.ge) : -1;
-        if (a < 0) a = bkFindAnchorInText(T, N, r.first, false, cur.pos, T.length);
-        if (a < 0) return;
-        let b = r.last ? bkFindAnchorInText(T, N, r.last, true, a + 1, Math.min(T.length, a + 30000)) : -1;
-        if (b <= a) b = Math.min(T.length, a + Math.max(1, r.first.length));
-        (segs[r.sid] = segs[r.sid] || []).push([a, b]);
-        cur.pos = Math.max(cur.pos, a);
-    });
-    const out = [];
-    known.forEach(k => {
-        const g = segs[k.sid];
-        if (!g || !g.length) return;
-        const s = Math.min.apply(null, g.map(x => x[0]));
-        const e = Math.max.apply(null, g.map(x => x[1]));
-        out.push({ title: k.vi || k.en, en: k.en, num: k.num, lvl: k.lvl, s: s, e: e, anchorE: e,
-            segs: g, fromList: true, manual: false, intro: !!k.intro, text: '' });
-    });
-    out.sort((x, y) => x.s - y.s);
-    return out;
-}
-
-/* Lưu / nạp kết quả phân tích của từng chương (không gọi lại AI khi mở chương) */
-function bkV5Save(url, secs) {
+/* Lưu / nạp kết quả phân tích từng chương (mở chương không gọi AI) */
+function bkV6Save(url, secs) {
     try {
-        localStorage.setItem('bk_v5_' + url, JSON.stringify({
+        localStorage.setItem('bk_v6_' + url, JSON.stringify({
             sig: bkText.length + '|' + bkPages.length,
             secs: secs.map(x => ({ title: x.title, en: x.en, num: x.num, lvl: x.lvl, s: x.s, e: x.e, anchorE: x.anchorE, segs: x.segs, intro: x.intro }))
         }));
     } catch (e) {}
 }
-function bkV5Load(url) {
+function bkV6Load(url) {
     try {
-        const c = JSON.parse(localStorage.getItem('bk_v5_' + url) || 'null');
+        const c = JSON.parse(localStorage.getItem('bk_v6_' + url) || 'null');
         if (!c || c.sig !== (bkText.length + '|' + bkPages.length) || !Array.isArray(c.secs)) return [];
         return c.secs.map(x => Object.assign({ fromList: true, manual: false, text: '' }, x));
     } catch (e) { return []; }
 }
+/* Tên cũ giữ nguyên để lệnh mở chương đã có không cần sửa: đọc kết quả VÁ 6 */
+function bkV5Load(url) { return bkV6Load(url); }
 
 /* Nút 📑 / 🔄: AI đọc toàn chương và cập nhật danh sách mục */
 async function bkDetectChapter() {
     if (!bkDoc) return;
     if (!bkText.trim()) { showToast('Chương đang được đọc chữ (xem thanh trạng thái) hoặc không có chữ — thử lại sau giây lát'); return; }
     if (!aiAnyKey()) { aiShowGate(); return; }
-    if (bkV5Busy) return;
-    bkV5Busy = true;
+    if (bkV6Busy) return;
+    bkV6Busy = true;
     const btn = document.getElementById('bk-sec-btn'), list = document.getElementById('bk-sec-list');
     const url = bkCur ? bkCur.url : '';
     btn.disabled = true; btn.textContent = '⏳ AI đang đọc chương…';
-    list.innerHTML = '<p class="text-xs text-gray-500 p-1">🔍 AI đang đọc ảnh các trang để lập mục lục và nội dung từng phân mục…</p>';
+    list.innerHTML = '<p class="text-xs text-gray-500 p-1">🔍 AI đang đọc ảnh độ phân giải cao và gán từng dòng vào phân mục…</p>';
     try {
-        const secs = await bkV5Analyze(bkViewTok, btn);
+        const secs = await bkV6Analyze(bkViewTok, btn);
         if (!secs) return;   // đã chuyển chương giữa chừng
         if (!secs.length) { showToast('AI chưa nhận diện được phân mục nào trong chương này.'); return; }
-        bkV5Save(url, secs);
+        bkV6Save(url, secs);
         bkSecs = bkMergeSecs(secs, bkSecs.filter(x => x.manual));
         bkRelink(); bkSaveManual();
         bkSecSel = -1; bkHl = null; bkApplyHlAll(); bkRenderSecList();
         document.getElementById('bk-sec-tr').classList.add('hidden');
         showToast('✅ AI đã lập ' + secs.length + ' phân mục và ráp nội dung từng mục!');
     } catch (e) {
-        console.error('[V5]', e);
+        console.error('[V6]', e);
         showToast('Lỗi khi AI đọc chương: ' + ((e && e.message) || e));
     } finally {
-        bkV5Busy = false;
+        bkV6Busy = false;
         btn.disabled = false; bkUpdateSecBtn();
     }
 }
@@ -10201,89 +10280,6 @@ function bkHlBox(d) { return { x: d.x, w: d.w }; }
 function bkOrderByLayout(items, W) { return bkOrderItems(items, W); }
 function bkTocSoft() { return null; }
 async function bkLoadMucLuc() { return null; }
-function bkCleanAnchorStr(s) {
-    let t = String(s || '').trim();
-    t = t.replace(/^["'“”‘’]+|["'“”‘’]+$/g, '').trim();
-    return t;
-}
-function bkBuildNormIndex(T) {
-    let norm = '';
-    const map = [];
-    let prevSpace = true;
-    const n = T.length;
-    for (let i = 0; i < n; i++) {
-        let ch = T[i];
-        // Nối từ bị gạch nối xuống dòng trong PDF
-        if (ch === '-' && i + 1 < n && T[i + 1] === '\n') {
-            i++;
-            while (i + 1 < n && /[ \t]/.test(T[i + 1])) i++;
-            continue;
-        }
-        const low = ch.toLowerCase();
-        if (/[a-z0-9\u00C0-\u1EF9]/.test(low)) {
-            norm += low;
-            map.push(i);
-            prevSpace = false;
-        } else if (!prevSpace) {
-            norm += ' ';
-            map.push(i);
-            prevSpace = true;
-        }
-    }
-    return { norm: norm.trimEnd(), map: map };
-}
-function bkNormSimple(s) {
-    return String(s || '')
-        .toLowerCase()
-        .replace(/-\s*\n\s*/g, '')
-        .replace(/[^a-z0-9\u00C0-\u1EF9]+/g, ' ')
-        .trim();
-}
-function bkFindAnchorInText(T, N, anchorStr, isEnd, minPos, maxPos) {
-    if (!anchorStr || !T) return -1;
-    const lo = Math.max(0, minPos || 0);
-    const hi = (maxPos && maxPos > lo) ? Math.min(T.length, maxPos) : T.length;
-
-    // Tách theo dấu "..." nếu điểm neo có rút gọn ở đầu/giữa/cuối
-    const rawClean = bkCleanAnchorStr(anchorStr).replace(/^[•*+\-–—]\s*/, '');
-    const parts = rawClean.split(/\.{2,}|…/).map(s => s.trim()).filter(s => s.length >= 3);
-    if (!parts.length) return -1;
-
-    const targetPart = isEnd ? parts[parts.length - 1] : parts[0];
-    const normTarget = bkNormSimple(targetPart);
-    if (!normTarget || normTarget.length < 3) return -1;
-
-    const words = normTarget.split(' ').filter(Boolean);
-    const tryQueries = [normTarget];
-    if (words.length >= 6) {
-        tryQueries.push(words.slice(0, 8).join(' '));
-        tryQueries.push(words.slice(-8).join(' '));
-    }
-    if (words.length >= 4) {
-        tryQueries.push(words.slice(0, 5).join(' '));
-        tryQueries.push(words.slice(-5).join(' '));
-    }
-
-    for (const q of tryQueries) {
-        if (q.length < 4) continue;
-        let searchFrom = 0;
-        while (searchFrom < N.norm.length) {
-            const idx = N.norm.indexOf(q, searchFrom);
-            if (idx < 0) break;
-            const origStart = N.map[idx] || 0;
-            const endNormIdx = Math.min(N.map.length - 1, idx + q.length - 1);
-            let origEnd = (N.map[endNormIdx] || origStart) + 1;
-            // Mở rộng origEnd tới hết dấu câu sát kề nếu là End Anchor
-            while (origEnd < T.length && /[.)"”'’!?;:]/.test(T[origEnd])) origEnd++;
-
-            if (origStart >= lo - 15 && origStart <= hi + 15) {
-                return isEnd ? origEnd : origStart;
-            }
-            searchFrom = idx + 1;
-        }
-    }
-    return -1;
-}
 function bkMergeSecs(x, y) {
     const a = x.concat(y).sort((p, q) => (p.s - q.s) || ((p.lvl || 1) - (q.lvl || 1)));
     return a.filter((p, i) => i === 0 || p.s !== a[i - 1].s || p.num !== a[i - 1].num);
