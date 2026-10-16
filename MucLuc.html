@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MucLuc.html — nhận diện mục lục (MỀM) cho Tủ Sách</title>
+<style>
+  body { font: 15px/1.55 system-ui, sans-serif; max-width: 860px; margin: 24px auto; padding: 0 16px; color: #1f2937; }
+  h1 { font-size: 22px; } h2 { font-size: 17px; margin-top: 28px; border-bottom: 1px solid #e5e7eb; padding-bottom: 4px; }
+  code, pre { background: #f3f4f6; border-radius: 6px; font-size: 13px; }
+  code { padding: 1px 5px; } pre { padding: 10px 12px; overflow-x: auto; }
+  td, th { border: 1px solid #e5e7eb; padding: 4px 8px; vertical-align: top; } table { border-collapse: collapse; }
+</style>
+</head>
+<body>
+
+<h1>MucLuc.html — nhận diện mục lục (MỀM)</h1>
+<p>File này nằm <b>cùng cấp với <code>index.html</code></b>. Mọi luật và mọi đoạn code lập mục lục chương sách đều nằm trong thẻ <code>&lt;script&gt;</code> ở cuối file này; <code>index.html</code> không còn chứa luật hay code lập mục lục nào, chỉ đọc file này (và <code>Menu.html</code> của từng sách) rồi gọi các hàm bên dưới. Sửa file → mở lại chương (hoặc bấm “🔄 Cập nhật mục lục”) là có hiệu lực, không cần sửa <code>index.html</code>.</p>
+
+<h2>1. Hai file, hai vai</h2>
+<table>
+<tr><th>File</th><th>Vị trí</th><th>Vai trò</th></tr>
+<tr><td><code>MucLuc.html</code> (file này)</td><td>cạnh <code>index.html</code></td><td>Nhận diện <b>mềm</b>, dùng chung mọi sách: luật dò tiêu đề offline, prompt AI, code xử lý, cách đọc <code>Menu.html</code>.</td></tr>
+<tr><td><code>Menu.html</code></td><td>trong thư mục từng sách</td><td>Nhận diện <b>cứng</b>, riêng sách đó: mục lục từng chương (<code>sections</code>), cách đọc PDF (cột, lề, vùng bỏ qua), và (nếu cần) ghi đè luật / code riêng cho sách.</td></tr>
+</table>
+<p>Ưu tiên khi lập mục lục một chương: có <code>sections</code> trong <code>Menu.html</code> → dùng đúng danh sách đó (không dò, không gọi AI), trừ khi chương có <code>ai_extend: true</code>. Không có → dùng luật mềm trong file này (dò offline + AI).</p>
+
+<h2>2. Nạp sách mới cho AI nhận diện</h2>
+<p>Chỉ cần sửa 1 trong 2 file: luật chung → sửa <code>RULES</code> trong file này; riêng một sách → tạo/sửa <code>Menu.html</code> trong thư mục sách đó (mẫu: file <code>Menu.html</code> đi kèm).</p>
+
+<h2>3. Hướng dẫn cho AI lập Menu.html</h2>
+<ol>
+<li>Mỗi chương là một khóa trong <code>chapters</code>, khóa là <b>tên file PDF của chương</b> (có hoặc không có <code>.pdf</code>; so khớp không phân biệt hoa thường/dấu câu). <code>chapters</code> cũng có thể là mảng <code>{file, ...}</code>.</li>
+<li><code>sections</code>: mảng theo đúng thứ tự xuất hiện trong chương. Mỗi mục: <code>src</code> = tiêu đề <b>nguyên văn tiếng Anh như in trong PDF</b> (app tìm chuỗi này trong chữ của PDF), <code>vi</code> = tên tiếng Việt, <code>lvl</code> = cấp 1–10 (1 = mục lớn nhất), <code>page</code> (tùy chọn) = số trang của file PDF chương (bắt đầu từ 1) để chọn đúng chỗ khi tiêu đề lặp nhiều lần.</li>
+<li>Không lập mục từ hình, bảng, hộp chú thích, câu văn thường. Không bịa tiêu đề; nếu <code>src</code> không khớp chữ trong PDF, app báo “x/y mục không khớp”.</li>
+<li>Tùy chọn mỗi chương: <code>mode: "soft"</code> (bỏ qua <code>sections</code>, dùng luật mềm), <code>ai_extend: true</code> (nạp <code>sections</code> rồi vẫn cho AI quét thêm), <code>intro: false</code> (không tự thêm mục “Mở đầu”), <code>offline_rules</code>, <code>ai_prompts</code>, <code>ai_hint</code> (ghi đè riêng cho chương).</li>
+<li>Cách đọc PDF (app dùng, không phải code mục lục): <code>layout</code> {<code>columns</code>: [[x0,x1],…], <code>zones</code>: [{y0,y1,columns}], <code>top</code>, <code>bottom</code>, <code>skip</code>: [[x0,y0,x1,y1],…]} — tọa độ là tỉ lệ 0..1 của trang, y tính từ mép trên; <code>page_layouts</code>: [{<code>pages</code>: "odd" | "even" | "3-9" | số | mảng, …layout}].</li>
+<li>Cấp sách (ngoài <code>chapters</code>) cũng có thể có <code>offline_rules</code>, <code>ai_prompts</code>, <code>ai_hint</code> để ghi đè luật chung cho cả sách.</li>
+</ol>
+
+<h2>4. Luật mềm (RULES.offline_rules)</h2>
+<table>
+<tr><th>Khóa</th><th>Ý nghĩa</th></tr>
+<tr><td><code>min_length</code>, <code>max_length</code></td><td>Độ dài tối thiểu / tối đa (ký tự) của một tiêu đề.</td></tr>
+<tr><td><code>heading_font_ratio</code></td><td>Cỡ chữ tiêu đề so với thân bài (khi sách không có chữ đậm).</td></tr>
+<tr><td><code>gap_up_ratio</code></td><td>Khoảng cách tới dòng trên (tính theo cỡ chữ) để coi là đầu mục.</td></tr>
+<tr><td><code>flush_left_tolerance</code></td><td>Độ lệch tối đa so với lề trái cột.</td></tr>
+<tr><td><code>allow_run_in</code>, <code>run_in_max_length</code></td><td>Cho phép tiêu đề đứng chung dòng với đoạn văn (chữ đậm đầu dòng kết thúc bằng dấu chấm).</td></tr>
+<tr><td><code>start_regex</code></td><td>Tiêu đề phải bắt đầu bằng ký tự khớp regex này.</td></tr>
+<tr><td><code>exclude_regex</code> / <code>include_regex</code></td><td>Loại bỏ / ép nhận một dòng là tiêu đề (không phân biệt hoa thường).</td></tr>
+<tr><td><code>skip_text_regex</code></td><td>Dòng khớp regex này bị bỏ khỏi chữ chương.</td></tr>
+<tr><td><code>outline_box_label_regex</code></td><td>Nhãn của khung mục lục in sẵn trong trang (các dòng ngắn ngay dưới nhãn bị bỏ).</td></tr>
+<tr><td><code>first_page_title_skip</code></td><td>Bỏ tiêu đề chương / tên tác giả ở trang 1.</td></tr>
+<tr><td><code>merge_offline_candidates</code></td><td>Sau khi AI quét, gộp thêm các tiêu đề dò offline mà AI bỏ sót.</td></tr>
+</table>
+
+<h2>5. Các hàm app sẽ gọi (viết trong script bên dưới)</h2>
+<table>
+<tr><th>Hàm</th><th>Khi nào</th></tr>
+<tr><td><code>begin(H)</code></td><td>Trước khi đọc chữ cả chương (xóa bộ nhớ đệm luật).</td></tr>
+<tr><td><code>excludeItems(c)</code></td><td>Mỗi trang: loại bớt các mảnh chữ không đưa vào chữ chương (<code>c.excl.add(item)</code>).</td></tr>
+<tr><td><code>trimOrder(c)</code></td><td>Mỗi trang: chỉnh danh sách chữ theo thứ tự đọc (trả về mảng mới).</td></tr>
+<tr><td><code>detectCandidates(c)</code></td><td>Mỗi trang: dò dòng nào là tiêu đề, trả về <code>[{s, t, fh}]</code>.</td></tr>
+<tr><td><code>hardSections(H)</code></td><td>Mở chương: nạp mục lục cứng từ <code>Menu.html</code>.</td></tr>
+<tr><td><code>detect(H, progress)</code></td><td>Bấm “📑 Nhận diện / 🔄 Cập nhật mục lục”.</td></tr>
+<tr><td><code>subSections(H, o)</code></td><td>Bấm “🔁 Quét lại” một mục.</td></tr>
+</table>
+<p><code>H</code> là cầu nối do app đưa vào: <code>H.text()</code>, <code>H.pages()</code>, <code>H.chapter()</code>, <code>H.menu()</code>, <code>H.chapterMenu()</code>, <code>H.menuSig()</code>, <code>H.ai(system, user, maxTokens)</code>, <code>H.hasAi()</code>, <code>H.showGate()</code>, <code>H.toast(msg)</code>, <code>H.glossary(text)</code>, <code>H.glossRule()</code>, <code>H.fixVi(vi, src)</code>, <code>H.lineStart(text, i)</code>, <code>H.mergeSecs(a, b)</code>.</p>
+
+<h2>6. Ghi đè code riêng cho một sách</h2>
+<p>Trong <code>Menu.html</code> có thể gọi <code>TOC.override({ detectCandidates(c) { … } })</code> để thay đúng hàm đó (và chỉ cho sách đó). Trong <code>Menu.html</code>, <code>TOC.base</code> là bộ hàm mặc định của file này nếu muốn gọi lại.</p>
+
+<script>
+(function (TOC) {
+  /* Mở trực tiếp bằng trình duyệt: chỉ xem hướng dẫn ở trên, không chạy code */
+  if (!TOC || typeof TOC.soft !== 'function') return;
+
+  /* ============================== 1. LUẬT & PROMPT ==============================
+     Dán nguyên nội dung MucLuc.json cũ (dạng { "offline_rules": {...}, "ai_prompts": {...} }) vào RULES là chạy được. */
+  const RULES = {
+    offline_rules: {
+      min_length: 3, max_length: 110, heading_font_ratio: 1.06, gap_up_ratio: 1.45, flush_left_tolerance: 0.5,
+      allow_run_in: false, run_in_max_length: 60, merge_offline_candidates: false,
+      start_regex: '^[A-Z0-9\\u00C0-\\u1EF9"“(]', first_page_title_skip: false
+      // exclude_regex: '', include_regex: '', skip_text_regex: '', outline_box_label_regex: ''
+    },
+    ai_prompts: {
+      chunk_size: 40000, chunk_overlap: 1500,
+      outline_system_prompt: 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Quét đoạn văn bản chương sách và lập mục lục đa cấp (lvl 1 đến 10) theo đúng thứ tự xuất hiện. Mỗi mục: "src" = tiêu đề giữ nguyên nguyên văn, "vi" = tên tiếng Việt ngắn gọn, "lvl" = số nguyên 1 đến 10. Không lập mục từ hình, bảng, hộp chú thích hay câu văn thường. Trả về MỘT đối tượng JSON: {"sections":[{"src":"...","vi":"...","lvl":1}]}; nếu không có, {"sections":[]}. Không thêm chữ nào ngoài JSON.',
+      sub_pass1_prompt: 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Đoạn văn dưới đây thuộc mục "{{TITLE}}". Liệt kê các tiêu đề mục con (lvl 2 đến 10) nằm trong đoạn, không liệt kê chính "{{TITLE}}". Trả về MỘT đối tượng JSON: {"sections":[{"src":"...","vi":"...","lvl":2}]}. Không thêm chữ nào ngoài JSON.',
+      sub_pass2_prompt: 'Bạn là giáo sư đầu ngành Răng Hàm Mặt, đang kiểm tra đối chiếu. Đối chiếu danh sách mục con với đoạn văn của mục "{{TITLE}}": mỗi mục phải là tiêu đề có thật, xuất hiện nguyên văn; xóa mục sai, bổ sung mục thiếu. Trả về MỘT đối tượng JSON cùng định dạng: {"sections":[{"src":"...","vi":"...","lvl":2}]}. Không thêm chữ nào ngoài JSON.'
+    }
+  };
+
+  /* Luật hiệu lực của chương đang đọc: RULES ← Menu.html (sách) ← Menu.html (chương), sau đè trước */
+  let _rk = '', _rv = null;
+  function getRules(H) {
+    const cur = H.chapter(), k = (cur ? cur.url : '') + '|' + H.menuSig();
+    if (_rv && _rk === k) return _rv;
+    const m = H.menu(), ch = H.chapterMenu();
+    const base = Object.assign({}, RULES.offline_rules, (m && m.offline_rules) || {}, (ch && ch.offline_rules) || {});
+    const re = (key, fl) => { try { return base[key] ? new RegExp(base[key], fl) : null; } catch (e) { console.warn('[MucLuc.html] regex sai ở ' + key, e); return null; } };
+    base._excludeRe = re('exclude_regex', 'i');
+    base._includeRe = re('include_regex', 'i');
+    base._startRe = re('start_regex', '');
+    base._skipRe = re('skip_text_regex', 'i');
+    base._outlineLabelRe = re('outline_box_label_regex', 'i');
+    _rk = k; _rv = base;
+    return base;
+  }
+  function getPrompts(H) {
+    const m = H.menu(), ch = H.chapterMenu();
+    const base = Object.assign({}, RULES.ai_prompts, (m && m.ai_prompts) || {}, (ch && ch.ai_prompts) || {});
+    const hint = [m && m.ai_hint, ch && ch.ai_hint].filter(h => typeof h === 'string' && h.trim()).map(h => h.trim()).join(' ');
+    if (hint) ['outline_system_prompt', 'sub_pass1_prompt', 'sub_pass2_prompt'].forEach(k => { base[k] += ' QUY ĐỊNH RIÊNG TỪ Menu.html CHO SÁCH NÀY: ' + hint; });
+    return base;
+  }
+
+  /* ============================== 2. XỬ LÝ TỪNG TRANG (dò tiêu đề offline) ============================== */
+  function isAuthorLine(t) {
+    const s = String(t || '').trim();
+    if (s.length < 8 || s.length > 120) return false;
+    const letters = s.replace(/[^A-Za-zÀ-ỹ]/g, ''); if (letters.length < 6) return false;
+    const up = letters.replace(/[^A-ZÀ-Ỹ]/g, '').length / letters.length;
+    return up > 0.7 && /\b(and|&)\b/i.test(s);
+  }
+
+  /* c = { H, pg:{num,w,h}, body0, excl:Set, bodyFh, cid } — thêm mảnh chữ vào excl để không đưa vào chữ chương */
+  function excludeItems(c) {
+    const R = getRules(c.H), pg = c.pg, body0 = c.body0, excl = c.excl, bodyFh = c.bodyFh;
+    // tiêu đề chương (chữ rất lớn ở nửa trên trang 1) và dòng tên tác giả không phải phân mục
+    if (R.first_page_title_skip && pg.num === 1) {
+      body0.forEach(it => { if (it.fh >= 2.0 * bodyFh && it.y > pg.h * 0.6) excl.add(it); });
+      body0.forEach(it => { const t = it.str.trim(); if (it.y > pg.h * 0.35 && t.length >= 4 && t.length <= 50 && /^[A-Z][A-Z .,'*-]+\*?$/.test(t) && t.split(/\s+/).length <= 5) excl.add(it); });
+      body0.forEach(it => { if (it.y > pg.h * 0.35 && isAuthorLine(body0.filter(o => Math.abs(o.y - it.y) < 0.5 * it.fh).map(o => o.str).join(' '))) body0.forEach(o => { if (Math.abs(o.y - it.y) < 0.5 * it.fh) excl.add(o); }); });
+    }
+    if (R._skipRe) body0.forEach(it => { if (R._skipRe.test(it.str.trim())) excl.add(it); });   // skip_text_regex
+  }
+
+  /* c = { H, pg, ord, cid, byYX } — khung mục lục in sẵn trong trang (outline_box_label_regex): bỏ các dòng ngắn đều nhau ngay dưới nhãn */
+  function trimOrder(c) {
+    const R = getRules(c.H); let ord = c.ord;
+    const lab = R._outlineLabelRe ? ord.find(it => R._outlineLabelRe.test(it.str.trim())) : null;
+    if (!lab) return ord;
+    const cid = c.cid, byYX = c.byYX;
+    const L2 = ord.filter(it => cid(it) === cid(lab) && it.y < lab.y).sort(byYX);
+    let prevY = lab.y, yb = Infinity;
+    for (const it of L2) {
+      const gap = prevY - it.y;
+      if (it.str.trim().length > 70 || gap > 1.9 * Math.max(it.fh, lab.fh)) break;
+      prevY = it.y; yb = it.y;
+    }
+    return ord.filter(it => !(it.y <= lab.y && it.y >= yb && it.str.trim().length <= 70));
+  }
+
+  /* c = { H, pg, ord, cid, rg, bodyFh } → [{ s: vị trí ký tự trong chữ chương, t: tiêu đề, fh: cỡ chữ }] */
+  function detectCandidates(c) {
+    const R = getRules(c.H), ord = c.ord, cid = c.cid, rg = c.rg, bodyFh = c.bodyFh;
+    const cands = [];
+    const minLen = R.min_length || 3, maxLen = R.max_length || 110;
+    const fhRatio = R.heading_font_ratio || 1.06;
+    const gapRatio = R.gap_up_ratio || 1.45;
+    const runInMax = R.run_in_max_length || 60;
+    const allowRunIn = R.allow_run_in === true;
+    const exRe = R._excludeRe || /$^/;
+    const inRe = R._includeRe || null;
+    const lines = []; let cur = null;
+    ord.forEach(it => { if (cur && Math.abs(it.y - cur.y) < 0.5 * it.fh && cid(it) === cur.left) cur.items.push(it); else { cur = { y: it.y, fh: it.fh, left: cid(it), items: [it] }; lines.push(cur); } });
+    const txtOf = ln => ln.items.map(q => q.str).join(' ').replace(/\s+/g, ' ').trim();
+    const boldLead = ln => { let s = ''; for (const q of ln.items) { if (!q.bd) break; s += q.str; } return s.replace(/\s+/g, ' ').trim(); };
+    const hasBold = lines.some(ln => ln.items.some(q => q.bd));
+    const colX = {};
+    lines.forEach(ln => { const k = ln.left; colX[k] = Math.min(colX[k] === undefined ? Infinity : colX[k], ln.items[0].x); });
+    const okTxt = t => t.length >= minLen && t.length <= maxLen && (!R._startRe || R._startRe.test(t)) && (/[A-Za-z\u00C0-\u1EF9]{3}/.test(t)) && !exRe.test(t);
+    const wholeB = lines.map(ln => !hasBold || (boldLead(ln).length >= txtOf(ln).length - 1 && boldLead(ln).length >= minLen));
+    const upIdx = lines.map((ln, k) => { for (let j = k - 1; j >= 0; j--) if (lines[j].left === ln.left) return j; return -1; });
+    const isH = lines.map((ln, k) => {
+      const t = txtOf(ln);
+      if (inRe && inRe.test(t) && t.length <= maxLen && !exRe.test(t)) return true;
+      if (!okTxt(t)) return false;
+      const side = ln.left;
+      const flushL = ln.items[0].x <= colX[side] + (R.flush_left_tolerance || 0.5) * ln.fh;
+      const j = upIdx[k], up = j >= 0 ? lines[j] : null;
+      const gapUp = up ? up.y - ln.y : 1e9;
+      const upEnds = !up || /[.!?:)"”]$/.test(txtOf(up));
+      if (hasBold) {
+        const lead = boldLead(ln);
+        if (lead.length < minLen) return false;
+        if (wholeB[k]) {
+          if (!flushL) return false;
+          if (j >= 0 && (wholeB[j] || !/[.!?:)"”]$/.test(txtOf(lines[j]))) && gapUp < 1.7 * ln.fh) return true;
+          const big = ln.fh >= fhRatio * bodyFh;
+          return gapUp >= gapRatio * ln.fh || (big && gapUp >= 1.1 * ln.fh);
+        }
+        return allowRunIn && /\.$/.test(lead) && lead.length <= runInMax && (upEnds || gapUp >= gapRatio * ln.fh);
+      }
+      return flushL && ln.fh >= fhRatio * bodyFh && gapUp >= 1.2 * ln.fh;
+    });
+    const runIn = lines.map((ln, k) => hasBold && isH[k] && !wholeB[k] ? boldLead(ln).replace(/\.$/, '').trim() : '');
+    let run = null;
+    const flush = () => { if (run && rg[run.first.idx]) cands.push({ s: rg[run.first.idx].s, t: run.text, fh: run.fh }); run = null; };
+    lines.forEach((ln, k) => {
+      if (runIn[k]) { flush(); if (rg[ln.items[0].idx]) cands.push({ s: rg[ln.items[0].idx].s, t: runIn[k], fh: ln.fh }); return; }
+      const mergeable = isH[k] && wholeB[k];
+      if (run && (!mergeable || ln.left !== run.left || (run.lastY - ln.y) >= 1.7 * ln.fh)) flush();
+      if (mergeable) { if (!run) run = { first: ln.items[0], left: ln.left, lastY: ln.y, text: txtOf(ln), fh: ln.fh }; else { run.text += ' ' + txtOf(ln); run.lastY = ln.y; } }
+    });
+    flush();
+    return cands;
+  }
+
+  /* ============================== 3. ĐỊNH VỊ TIÊU ĐỀ TRONG CHỮ CHƯƠNG ============================== */
+  function findAll(hay, needle) {
+    const out = [];
+    if (!hay || !needle) return out;
+    let i = -1;
+    while ((i = hay.indexOf(needle, i + 1)) >= 0) out.push(i);
+    if (out.length) return out;
+    const lowHay = hay.toLowerCase(), lowNeedle = needle.toLowerCase();
+    i = -1;
+    while ((i = lowHay.indexOf(lowNeedle, i + 1)) >= 0) out.push(i);
+    if (out.length) return out;
+    const normChar = s => s.replace(/[^A-Za-z0-9\u00C0-\u1EF9]/g, '').toLowerCase();
+    const sq = normChar(needle);
+    if (sq.length < 4) return out;
+    const map = [], st = [];
+    for (let k = 0; k < hay.length; k++) {
+      const ch = hay[k];
+      if (/[A-Za-z0-9\u00C0-\u1EF9]/.test(ch)) { st.push(ch.toLowerCase()); map.push(k); }
+    }
+    const S = st.join('');
+    let j = -1;
+    while ((j = S.indexOf(sq, j + 1)) >= 0) out.push(map[j]);
+    return out;
+  }
+
+  /* Như findAll nhưng trả về từng tầng khớp riêng: [chính xác, không phân biệt hoa thường, bỏ khoảng trắng/dấu câu] */
+  function findTiers(hay, needle) {
+    const t0 = [], t1 = [], t2 = [];
+    if (!hay || !needle) return [t0, t1, t2];
+    let i = -1;
+    while ((i = hay.indexOf(needle, i + 1)) >= 0) t0.push(i);
+    const lowHay = hay.toLowerCase(), lowNeedle = needle.toLowerCase();
+    i = -1;
+    while ((i = lowHay.indexOf(lowNeedle, i + 1)) >= 0) t1.push(i);
+    const normChar = s => s.replace(/[^A-Za-z0-9\u00C0-\u1EF9]/g, '').toLowerCase();
+    const sq = normChar(needle);
+    if (sq.length >= 4) {
+      const map = [], st = [];
+      for (let k = 0; k < hay.length; k++) {
+        const ch = hay[k];
+        if (/[A-Za-z0-9\u00C0-\u1EF9]/.test(ch)) { st.push(ch.toLowerCase()); map.push(k); }
+      }
+      const S = st.join('');
+      let j = -1;
+      while ((j = S.indexOf(sq, j + 1)) >= 0) t2.push(map[j]);
+    }
+    return [t0, t1, t2];
+  }
+
+  function locate(H, list, a, b, isPreset) {
+    const T = H.text(), pages = H.pages(), out = [];
+    let cur = a;
+    const R = getRules(H);
+    const exRe = R._excludeRe || null;
+    const isToc = i => { const le = T.indexOf('\n', i); const line = T.slice(i, le < 0 ? i + 160 : le); return /\.{3,}|…|\s\d{1,4}\s*$/.test(line); };
+    list.forEach(o => {
+      const rawSrc = String(o.src || '').trim();
+      if (!rawSrc) return;
+      if (!isPreset && exRe && exRe.test(rawSrc)) return;
+      const body = rawSrc.replace(/^\s*(?:\d+(?:\.\d+)*|[IVXLCDM]{1,5}\.?)\s*/, '');
+      if (!isPreset && R._startRe && !R._startRe.test(body)) return;
+      let occ = findAll(T, rawSrc).filter(i => i >= cur && i < b && (isPreset || H.lineStart(T, i)));
+      if (!occ.length && body.length >= 4 && body !== rawSrc) {
+        occ = findAll(T, body).filter(i => i >= cur && i < b && H.lineStart(T, i));
+      }
+      if (!occ.length && isPreset) {
+        const strippedParen = rawSrc.replace(/\s*\([^)]*\)\s*$/, '').trim();
+        if (strippedParen.length >= 4 && strippedParen !== rawSrc) {
+          occ = findAll(T, strippedParen).filter(i => i >= cur && i < b);
+        }
+      }
+      if (isPreset && o.page > 0 && pages[o.page - 1]) {   // Menu.html cho biết trang: tìm TRONG trang đó trước (tiêu đề xuống dòng / chữ lặp ở trang khác không làm lệch), ưu tiên chỗ đứng đầu dòng
+        const pr0 = pages[o.page - 1], sub = T.slice(pr0.gs, pr0.ge + 1);
+        const inPage = needle => {
+          const tiers = findTiers(sub, needle).map(arr => arr.map(i => i + pr0.gs).filter(i => i >= cur && i < b));
+          for (const t of tiers) { const ls = t.filter(i => H.lineStart(T, i)); if (ls.length) return ls; }
+          return tiers.find(t => t.length) || [];
+        };
+        let hp = inPage(rawSrc);
+        if (!hp.length && body.length >= 4 && body !== rawSrc) hp = inPage(body);
+        if (hp.length) occ = hp;
+      }
+      if (isPreset && o.page > 0 && pages[o.page - 1] && occ.length) {   // Menu.html cho biết mục nằm ở trang nào của file PDF
+        const pr = pages[o.page - 1], inP = occ.filter(i => i >= pr.gs && i <= pr.ge);
+        if (inP.length) occ = inP;
+      }
+      if (!occ.length) return;
+      const nt = occ.filter(i => !isToc(i));
+      const pick = nt.length ? nt[0] : occ[0];
+      const num = (rawSrc.match(/^\s*(\d+(?:\.\d+)*)/) || [])[1] || '';
+      const lv = Math.max(1, Math.min(10, parseInt(o.lvl, 10) || 1));
+      out.push({ title: o.vi, en: rawSrc, num: num, lvl: lv, s: pick, e: 0, text: '' });
+      cur = pick + 1;
+    });
+    return out;
+  }
+
+  /* ============================== 4. MỤC LỤC CỨNG (Menu.html) ============================== */
+  function hardSections(H) {
+    const T = H.text();
+    if (!T || !T.trim()) return [];
+    const ch = H.chapterMenu();
+    if (!ch || ch.mode === 'soft' || !Array.isArray(ch.sections) || !ch.sections.length) return [];
+    const normalized = ch.sections.map(s => ({
+      src: String(s.src || s.en || '').trim(),
+      vi: H.fixVi(String(s.vi || s.title || s.src || '').trim(), s.src || s.en || ''),
+      lvl: Math.max(1, Math.min(10, parseInt(s.lvl, 10) || 1)),
+      page: parseInt(s.page, 10) || 0,
+      preset: true
+    })).filter(s => s.src);
+    const located = locate(H, normalized, 0, T.length, true);
+    const miss = normalized.length - located.length;
+    if (miss > 0) { console.warn('[Menu.html] ' + miss + ' mục không khớp chữ trong PDF'); H.toast('Menu.html: ' + miss + '/' + normalized.length + ' mục không khớp chữ trong PDF — nhờ AI sửa lại src/page'); }
+    if (located.length && located[0].s > 0 && ch.intro !== false) {
+      located.unshift({ title: 'Mở đầu', en: 'Introduction', num: '', lvl: 1, s: 0, e: 0, text: '', intro: true });
+    }
+    return located;
+  }
+
+  /* ============================== 5. MỤC LỤC MỀM (dò offline + AI) ============================== */
+  async function aiOutline(H, body, hints) {
+    const P = getPrompts(H);
+    const gloss = H.glossary((hints || '') + '\n' + body.slice(0, 12000));
+    const sys = P.outline_system_prompt + H.glossRule() + gloss;
+    const user = 'ĐOẠN VĂN CẦN QUÉT:\n' + body + (hints ? '\n\nDÒNG NGẮN ĐỨNG RIÊNG (ứng viên tiêu đề dò từ PDF theo luật MucLuc.html; chỉ chọn những dòng thật sự là tiêu đề mục, đối chiếu với đoạn văn):\n' + hints : '') + (gloss ? '\n\n' + gloss : '');
+    const v = await H.ai(sys, user, 4000);
+    return (v && Array.isArray(v.sections) ? v.sections : [])
+      .map(s => ({ src: String(s.src || '').trim(), vi: H.fixVi(String(s.vi || s.src || '').trim(), s.src), lvl: Math.max(1, Math.min(10, parseInt(s.lvl, 10) || 1)) }))
+      .filter(s => s.src);
+  }
+
+  function hintsFor(H, a, b) {
+    const out = [];
+    H.pages().forEach(p => (p.cands || []).forEach(c => { if (c.s >= a && c.s < b) out.push(c.t); }));
+    return out.join('\n').slice(0, 4500);
+  }
+
+  /* Lập mục lục cả chương. progress(k, n) báo tiến độ.
+     Trả về { secs, message } hoặc { gate: true } khi chưa có khóa AI. App tự gộp với mục đánh dấu tay, lưu và vẽ lại. */
+  async function detect(H, progress) {
+    const T = H.text();
+    const preset = hardSections(H), ch = H.chapterMenu();
+    if (preset.length && !(ch && ch.ai_extend === true)) {   // có mục lục cứng trong Menu.html → dùng đúng danh sách đó, không dò, không gọi AI
+      return { secs: preset, message: '📑 Đã nạp ' + preset.length + ' phân mục (tối đa 10 cấp) từ Menu.html' };
+    }
+    if (!H.hasAi()) { H.showGate(); return { gate: true }; }
+    const P = getPrompts(H), R = getRules(H);
+    const CH = P.chunk_size || 40000, OV = P.chunk_overlap || 1500, L = T.length, n = Math.ceil(L / CH);
+    let found = preset.slice(), fail = 0;
+    for (let k = 0; k < n; k++) {
+      const a = k * CH, b = Math.min(L, a + CH + OV);
+      if (progress) progress(k + 1, n);
+      try { found = H.mergeSecs(found, locate(H, await aiOutline(H, T.slice(a, b), hintsFor(H, a, b)), a, b, false)); }
+      catch (e) { fail++; }
+    }
+    if (R.merge_offline_candidates === true) {
+      const fhRatio = R.heading_font_ratio || 1.08;
+      const exRe = R._excludeRe || null;
+      H.pages().forEach(p => (p.cands || []).forEach(c => {
+        if (exRe && exRe.test(c.t)) return;
+        if (!found.some(f => Math.abs(f.s - c.s) <= 5 || (c.s > f.s && c.s - f.s < 400 && c.t.split(' ').length <= 2))) {
+          found.push({ title: c.t, en: c.t, num: '', lvl: c.fh >= fhRatio * (p.bfh || 10) ? 1 : 2, s: c.s, e: 0, text: '' });
+        }
+      }));
+      found.sort((x, y) => x.s - y.s);
+    }
+    if (found.length && found[0].s > 0) found.unshift({ title: 'Mở đầu', en: 'Introduction', num: '', lvl: 1, s: 0, e: 0, text: '', intro: true });
+    const message = !found.length ? (fail ? 'AI chưa đọc được, thử lại sau' : 'Chưa nhận diện được mục lục.')
+      : '📑 Đã lập mục lục (' + found.length + ' phân mục) theo quy định MucLuc.html';
+    return { secs: found, message };
+  }
+
+  /* Quét lại một mục: 2 lượt (lập danh sách mục con → đối chiếu), tới 10 cấp.
+     o = { seg, title, lvl, start, endPos, progress(text) } → mảng mục con đã định vị */
+  async function aiSub(H, seg, title, pass, prev) {
+    const P = getPrompts(H);
+    const gloss = H.glossary(seg.slice(0, 10000));
+    const tpl = pass === 1 ? P.sub_pass1_prompt : P.sub_pass2_prompt;
+    const sys = String(tpl || '').replace(/\{\{TITLE\}\}/g, title) + H.glossRule() + gloss;
+    const body = pass === 1 ? seg : 'DANH SÁCH CẦN KIỂM TRA:\n' + JSON.stringify(prev.map(x => ({ src: x.src, vi: x.vi, lvl: x.lvl }))) + '\n\nĐOẠN VĂN:\n' + seg;
+    const v = await H.ai(sys, body, 4000);
+    return (v && Array.isArray(v.sections) ? v.sections : [])
+      .map(x => ({ src: String(x.src || '').trim(), vi: H.fixVi(String(x.vi || x.src || '').trim(), x.src), lvl: Math.max(2, Math.min(10, parseInt(x.lvl, 10) || 2)) }))
+      .filter(x => x.src);
+  }
+  async function subSections(H, o) {
+    if (o.progress) o.progress('⏳ Quét 1/2…');
+    const a = await aiSub(H, o.seg, o.title, 1, null);
+    if (o.progress) o.progress('⏳ Đối chiếu 2/2…');
+    const b = a.length ? await aiSub(H, o.seg, o.title, 2, a) : [];
+    const fin = b.length ? b : a;
+    fin.forEach(x => { x.lvl = Math.min(10, Math.max(o.lvl + 1, parseInt(x.lvl, 10) || (o.lvl + 1))); });
+    return locate(H, fin, o.start + 1, o.endPos, false);
+  }
+
+  /* ============================== ĐĂNG KÝ VỚI APP ============================== */
+  TOC.soft({
+    rules: RULES,
+    begin: function (H) { _rv = null; },
+    getRules, getPrompts,
+    excludeItems, trimOrder, detectCandidates,
+    hardSections, detect, subSections
+  });
+})(typeof TOC !== 'undefined' ? TOC : null);
+</script>
+</body>
+</html>
