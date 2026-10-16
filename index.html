@@ -10017,11 +10017,9 @@ async function bkRunTr(text, title) {
     }
 }
 let bkObs = null;
-/* ===== NHẬN DIỆN MỤC LỤC — GIAO TRỌN CHO 2 FILE HTML =====let bkSoft = null, bkSoftAt = 0, bkSoftWarned = false, bkTocErrWarned = false;
-let bkMenu = null, bkMenuFolder = '', bkMenuSig = '', bkMenuAt = 0, bkMenuVer = 0, bkMenuOver = null, bkLayCache = {};
-let bkMenuTxtRaw = '', bkMenuTxtParsed = null, bkMenuTxtDir = '', bkMenuTxtSig = '';
+/* ===== NHẬN DIỆN MỤC LỤC — GIAO TRỌN CHO 2 FILE HTML =====let bkTocListRaw = '', bkTocListParsed = null, bkTocListDir = '', bkTocListSig = '';
 
-/* Bỏ hoàn toàn MucLuc.html và Menu.html — chỉ dùng Menu.txt trong thư mục sách */
+/* Không dùng MucLuc.html và Menu.html nữa, chỉ dùng Menu.txt trong thư mục sách */
 async function bkLoadMucLuc() { return null; }
 function bkTocSoft() { return null; }
 function bkTocBegin() {}
@@ -10031,17 +10029,7 @@ function bkLayoutCell() { return null; }
 function bkHlBox(d) { return { x: d.x, w: d.w }; }
 function bkOrderByLayout(items, W) { return bkOrderItems(items, W); }
 
-function bkNormKey(s) {
-    return String(s || '')
-        .normalize('NFC')
-        .toLowerCase()
-        .replace(/\.pdf$/i, '')
-        .replace(/[’‘`]/g, "'")
-        .replace(/[^a-z0-9\u00C0-\u1EF9]+/g, ' ')
-        .trim();
-}
-
-/* ----- Phân tích cú pháp file Menu.txt (Chương, Phân mục đa cấp, Điểm neo đầu & Điểm neo cuối) ----- */
+/* ----- Phân tích cú pháp file Menu.txt (Chương, Phân mục, Điểm neo đầu/cuối) ----- */
 function bkCleanAnchorStr(s) {
     let t = String(s || '').trim();
     t = t.replace(/^["'“”‘’]+|["'“”‘’]+$/g, '').trim();
@@ -10062,7 +10050,6 @@ function bkParseMenuTxt(raw) {
         if (!trimmed) continue;
         if (/^[=\-]{4,}$/.test(trimmed)) continue;
 
-        // 1. Nhận diện dòng CHƯƠNG: VD "CHƯƠNG 1: MANAGEMENT OF DENTAL CARIES" hoặc "CHAPTER 2. PERIODONTAL DISEASE"
         const mChap = trimmed.match(/^(?:chương|chapter)\s+(\d+|[IVXLCDM]+)\s*[:.\-–—)]*\s*(.*)$/i);
         if (mChap && !/\(\s*chương\s+\d+\s*[-–]\s*\d+\s*\)/i.test(trimmed)) {
             const numRaw = mChap[1];
@@ -10083,21 +10070,18 @@ function bkParseMenuTxt(raw) {
 
         if (!curChap) continue;
 
-        // 2. Nhận diện Điểm neo đầu (Start Anchor)
         const mStart = trimmed.match(/^[-•*+]?\s*(?:điểm\s*neo\s*đầu\s*(?:\(\s*start\s*anchor\s*\))?|start\s*anchor)\s*:\s*(.+)$/i);
         if (mStart && curSec) {
             curSec.startAnchor = bkCleanAnchorStr(mStart[1]);
             continue;
         }
 
-        // 3. Nhận diện Điểm neo cuối (End Anchor)
         const mEnd = trimmed.match(/^[-•*+]?\s*(?:điểm\s*neo\s*cuối\s*(?:\(\s*end\s*anchor\s*\))?|end\s*anchor)\s*:\s*(.+)$/i);
         if (mEnd && curSec) {
             curSec.endAnchor = bkCleanAnchorStr(mEnd[1]);
             continue;
         }
 
-        // 4. Nhận diện dòng tiêu đề phân mục: VD "1. DENTAL CARIES THE DISEASE", "4.2.1. Social deprivation"
         const mSec = trimmed.match(/^(\d+(?:\.\d+)*)\.?\s+(.+)$/);
         if (mSec) {
             const code = mSec[1].replace(/\.$/, '');
@@ -10121,14 +10105,13 @@ function bkParseMenuTxt(raw) {
     return { raw: text, chapters: chapters, byNum: byNum };
 }
 
-/* ----- Tải file Menu.txt trong thư mục sách ----- */
 async function bkLoadMenu(force) {
     const folder = (bkBook && (bkBook.path || bkBook.url)) || '';
     if (!folder) {
-        bkMenu = null; bkMenuTxtRaw = ''; bkMenuTxtParsed = null; bkMenuTxtDir = ''; bkMenuTxtSig = '';
+        bkMenu = null; bkTocListRaw = ''; bkTocListParsed = null; bkTocListDir = ''; bkTocListSig = '';
         return null;
     }
-    if (!force && folder === bkMenuTxtDir && Date.now() - bkMenuAt < 10000) return bkMenu;
+    if (!force && folder === bkTocListDir && Date.now() - bkMenuAt < 10000) return bkMenu;
 
     let raw = '';
     for (const fname of ['Menu.txt', 'menu.txt', 'MENU.txt']) {
@@ -10144,7 +10127,7 @@ async function bkLoadMenu(force) {
         } catch (e) {}
     }
 
-    const changed = raw !== bkMenuTxtSig || folder !== bkMenuTxtDir;
+    const changed = raw !== bkTocListSig || folder !== bkTocListDir;
     if (changed) bkMenuVer++;
     bkMenuTxtRaw = raw;
     bkMenuTxtSig = raw;
@@ -10156,21 +10139,18 @@ async function bkLoadMenu(force) {
     return bkMenu;
 }
 
-/* ----- Đối chiếu chương PDF đang mở với chương quy định trong Menu.txt ----- */
 function bkMatchChapterInMenuTxt(chapTitle, parsedObj) {
     const P = parsedObj || bkMenuTxtParsed;
     if (!P || !Array.isArray(P.chapters) || !P.chapters.length || !chapTitle) return null;
     const rawTitle = String(chapTitle || '').replace(/\.pdf$/i, '').trim();
     const normT = bkNormKey(rawTitle);
 
-    // 1. Khớp theo số chương ở đầu tên file PDF (VD: "1. Management of dental caries", "02_Periodontal...")
     const mLead = rawTitle.match(/^\s*(?:chương|chapter|chap|ch|part|bài)?\s*0*(\d+)\b/i);
     if (mLead) {
         const n = parseInt(mLead[1], 10);
         if (P.byNum && P.byNum[String(n)]) return P.byNum[String(n)];
     }
 
-    // 2. Khớp theo tên tiêu đề chương trong Menu.txt
     for (const c of P.chapters) {
         const nc = bkNormKey(c.title);
         if (nc && nc.length >= 4 && (normT === nc || normT.includes(nc) || nc.includes(normT))) {
@@ -10185,7 +10165,6 @@ function bkChapterMenu() {
     return bkMatchChapterInMenuTxt(bkCur.title, bkMenuTxtParsed);
 }
 
-/* ----- Xây dựng bản đồ quy chiếu chữ chuẩn hóa -> vị trí ký tự thật trong bkText ----- */
 function bkBuildNormIndex(T) {
     let norm = '';
     const map = [];
@@ -10193,7 +10172,6 @@ function bkBuildNormIndex(T) {
     const n = T.length;
     for (let i = 0; i < n; i++) {
         let ch = T[i];
-        // Nối từ bị gạch nối xuống dòng trong PDF
         if (ch === '-' && i + 1 < n && T[i + 1] === '\n') {
             i++;
             while (i + 1 < n && /[ \t]/.test(T[i + 1])) i++;
@@ -10213,21 +10191,11 @@ function bkBuildNormIndex(T) {
     return { norm: norm.trimEnd(), map: map };
 }
 
-function bkNormSimple(s) {
-    return String(s || '')
-        .toLowerCase()
-        .replace(/-\s*\n\s*/g, '')
-        .replace(/[^a-z0-9\u00C0-\u1EF9]+/g, ' ')
-        .trim();
-}
-
-/* Tìm vị trí của một Anchor (Start hoặc End) trong văn bản chương T */
 function bkFindAnchorInText(T, N, anchorStr, isEnd, minPos, maxPos) {
     if (!anchorStr || !T) return -1;
     const lo = Math.max(0, minPos || 0);
     const hi = (maxPos && maxPos > lo) ? Math.min(T.length, maxPos) : T.length;
 
-    // Tách theo dấu "..." nếu điểm neo có rút gọn ở đầu/giữa/cuối
     const rawClean = bkCleanAnchorStr(anchorStr).replace(/^[•*+\-–—]\s*/, '');
     const parts = rawClean.split(/\.{2,}|…/).map(s => s.trim()).filter(s => s.length >= 3);
     if (!parts.length) return -1;
@@ -10256,7 +10224,6 @@ function bkFindAnchorInText(T, N, anchorStr, isEnd, minPos, maxPos) {
             const origStart = N.map[idx] || 0;
             const endNormIdx = Math.min(N.map.length - 1, idx + q.length - 1);
             let origEnd = (N.map[endNormIdx] || origStart) + 1;
-            // Mở rộng origEnd tới hết dấu câu sát kề nếu là End Anchor
             while (origEnd < T.length && /[.)"”'’!?;:]/.test(T[origEnd])) origEnd++;
 
             if (origStart >= lo - 15 && origStart <= hi + 15) {
@@ -10268,7 +10235,6 @@ function bkFindAnchorInText(T, N, anchorStr, isEnd, minPos, maxPos) {
     return -1;
 }
 
-/* Tìm vị trí dòng tiêu đề mục (VD: "4.2.1. Social deprivation") ngay phía trước Start Anchor để bao trọn cả dòng tiêu đề khi tô sáng */
 function bkSnapToHeadingBefore(T, startPos, secTitle) {
     if (startPos <= 0 || !secTitle) return startPos;
     const winStart = Math.max(0, startPos - 180);
@@ -10289,7 +10255,6 @@ function bkSnapToHeadingBefore(T, startPos, secTitle) {
     return startPos;
 }
 
-/* ----- Giải quyết danh sách mục lục và cặp điểm neo (Start Anchor -> End Anchor) từ Menu.txt ----- */
 let bkMenuViCache = {};
 try { bkMenuViCache = JSON.parse(localStorage.getItem('bk_menutxt_vi_v1') || '{}') || {}; } catch (e) {}
 
@@ -10319,17 +10284,14 @@ async function bkResolveMenuTxtSections(chapSpec, useAi) {
 
     const N = bkBuildNormIndex(T);
 
-    // Bước 1: Định vị Điểm neo đầu (s) cho toàn bộ các phân mục theo thứ tự
     let curMinPos = 0;
     for (let i = 0; i < items.length; i++) {
         const it = items[i];
         let pos = bkFindAnchorInText(T, N, it.startAnchor, false, curMinPos, T.length);
         if (pos < 0 && curMinPos > 0) {
-            // Thử tìm lại trên toàn văn bản nếu thứ tự cột làm lệch nhẹ
             pos = bkFindAnchorInText(T, N, it.startAnchor, false, 0, T.length);
         }
         if (pos < 0 && it.en) {
-            // Dự phòng tìm theo tên tiêu đề tiếng Anh của mục
             pos = bkFindAnchorInText(T, N, it.en, false, curMinPos, T.length);
         }
         if (pos >= 0) {
@@ -10339,7 +10301,6 @@ async function bkResolveMenuTxtSections(chapSpec, useAi) {
         }
     }
 
-    // Bước 2: Định vị Điểm neo cuối (e) cho từng phân mục (tính từ it.s trở đi)
     for (let i = 0; i < items.length; i++) {
         const it = items[i];
         const minForEnd = it.s >= 0 ? it.s + 1 : 0;
@@ -10349,13 +10310,7 @@ async function bkResolveMenuTxtSections(chapSpec, useAi) {
         }
     }
 
-    // Bước 3: Nếu bật useAi (khi mở chương hoặc bấm "📑 Nhận diện mục lục" / "🔄 Cập nhật mục lục") và có khóa AI:
-    // - Nhờ AI định vị các điểm neo chưa khớp được (nếu có)
-    // - Nhờ AI dịch tên các mục lục tiếng Anh trong Menu.txt sang tiếng Việt chuẩn RHM miền Nam
-    const missingStarts = items.filter(it => it.s < 0);
-    const missingVi = items.filter(it => !it.title || it.title === it.en);
-
-    if (useAi && aiAnyKey() && (missingStarts.length > 0 || missingVi.length > 0)) {
+    if (useAi && aiAnyKey()) {
         try {
             const payloadItems = items.map(it => ({
                 i: it.idx,
@@ -10366,11 +10321,10 @@ async function bkResolveMenuTxtSections(chapSpec, useAi) {
                 endAnchor: (it.e < 0 && it.s < 0) ? it.endAnchor : undefined
             }));
             const sys = 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Nhiệm vụ của bạn gồm:\n' +
-                '1) Dịch tất cả tiêu đề mục lục "en" trong danh sách sang tiếng Việt ("vi") ngắn gọn, chuẩn thuật ngữ Răng Hàm Mặt miền Nam Việt Nam.' + BK_TR_GLOSS + '\n' +
-                '2) Với những mục có needPos=1 (do lỗi OCR làm lệch chữ điểm neo), hãy tìm trong NỘI DUNG CHƯƠNG cụm 6–12 từ nguyên văn khớp với vị trí bắt đầu ("sRef") và kết thúc ("eRef") của mục đó.\n' +
-                'Chỉ trả về MỘT đối tượng JSON hợp lệ dạng {"items":[{"i":0,"vi":"<tiêu đề tiếng Việt>","sRef":"<cụm từ bắt đầu nguyên văn nếu needPos=1>","eRef":"<cụm từ kết thúc nguyên văn nếu needPos=1>"}]} và không viết gì khác.';
-            const user = 'DANH SÁCH MỤC LỤC TỪ MENU.TXT:\n' + JSON.stringify(payloadItems) +
-                (missingStarts.length ? '\n\nNỘI DUNG CHƯƠNG:\n' + T.slice(0, 55000) : '');
+                '1) Dịch tất cả tiêu đề mục lục "en" sang tiếng Việt ("vi") ngắn gọn, chuẩn thuật ngữ Răng Hàm Mặt miền Nam Việt Nam.' + BK_TR_GLOSS + '\n' +
+                '2) Với needPos=1, tìm cụm 6–12 từ nguyên văn khớp với vị trí bắt đầu ("sRef") và kết thúc ("eRef").\n' +
+                'Chỉ trả về MỘT đối tượng JSON hợp lệ dạng {"items":[{"i":0,"vi":"...","sRef":"...","eRef":"..."}]} và không viết gì thêm.';
+            const user = 'DANH SÁCH MỤC LỤC MENU.TXT:\n' + JSON.stringify(payloadItems) + '\n\nNỘI DUNG CHƯƠNG:\n' + T.slice(0, 55000);
             const aiRes = await aiGeminiJson(sys, user, 4096);
             const arr = (aiRes && Array.isArray(aiRes.items)) ? aiRes.items : [];
             if (!bkMenuViCache[cacheKey]) bkMenuViCache[cacheKey] = {};
@@ -10397,11 +10351,9 @@ async function bkResolveMenuTxtSections(chapSpec, useAi) {
         } catch (e) { console.warn('[Menu.txt AI assist]', e); }
     }
 
-    // Bước 4: Đảm bảo mọi mục trong Menu.txt đều có vị trí s hợp lệ tăng dần
     let lastValidS = 0;
     for (let i = 0; i < items.length; i++) {
         if (items[i].s < lastValidS) {
-            // Nội suy giữa mục trước và mục kế tiếp có vị trí hợp lệ
             let nextValidS = T.length;
             let steps = 1;
             for (let j = i + 1; j < items.length; j++) {
@@ -10413,26 +10365,19 @@ async function bkResolveMenuTxtSections(chapSpec, useAi) {
         lastValidS = items[i].s;
     }
 
-    // Bước 5: Xác định điểm kết thúc (e) chuẩn cho mỗi phân mục dựa theo End Anchor hoặc đầu mục kế tiếp
     for (let i = 0; i < items.length; i++) {
         const it = items[i];
         const nextItemS = (i + 1 < items.length) ? items[i + 1].s : T.length;
-        // Tìm mục kế tiếp cùng cấp hoặc cấp cao hơn (không phải mục con của it)
         let nextPeerS = T.length;
         for (let j = i + 1; j < items.length; j++) {
             if (items[j].lvl <= it.lvl) { nextPeerS = items[j].s; break; }
         }
-        // Nếu mục cha có các mục con trực tiếp bên trong:
-        // - Nếu người dùng bấm vào mục cha, đoạn riêng của mục cha (anchorE) kéo từ Start Anchor đến End Anchor (hoặc đến hết các mục con của nó).
-        // - Để khi bấm từng mục không bị chồng chéo thừa sang chương khác, giữ cả anchorE (theo đúng End Anchor trong Menu.txt) lẫn e chuẩn.
         const hasChildren = (i + 1 < items.length && items[i + 1].lvl > it.lvl);
         if (it.e > it.s) {
             it.anchorE = Math.min(T.length, it.e);
         } else {
             it.anchorE = hasChildren ? nextPeerS : nextItemS;
         }
-        // Đoạn nội dung của phân mục: tính từ Start Anchor (it.s) đến End Anchor (it.anchorE)
-        // Nếu mục cha có phần dẫn nhập riêng trước mục con đầu tiên và End Anchor của mục cha trỏ tới cuối đoạn dẫn nhập (nhỏ hơn hoặc bằng đầu mục con), dùng đúng it.anchorE; nếu End Anchor bao trùm cả các mục con thì dùng đúng it.anchorE theo Menu.txt
         it.e = Math.max(it.s + 1, it.anchorE);
         it.text = T.slice(it.s, it.e).trim();
     }
@@ -10440,7 +10385,6 @@ async function bkResolveMenuTxtSections(chapSpec, useAi) {
     return items;
 }
 
-/* Ghi đè bkRelink để tôn trọng tuyệt đối điểm neo đầu (s) và điểm neo cuối (anchorE / e) từ Menu.txt */
 bkRelink = function () {
     const a = bkSecs.slice().sort((x, y) => (x.s - y.s) || ((x.lvl || 1) - (y.lvl || 1)));
     bkSecs = a.filter((x, i) => i === 0 || x.s !== a[i - 1].s || x.num !== a[i - 1].num);
@@ -10456,10 +10400,7 @@ bkRelink = function () {
 
 function bkApplyMenuSections() {
     const cm = bkChapterMenu();
-    // Nếu file Menu.txt không tồn tại hoặc không quy định chương này -> KHÔNG nhận diện mục lục
-    if (!cm || !Array.isArray(cm.sections) || !cm.sections.length) {
-        return [];
-    }
+    if (!cm || !Array.isArray(cm.sections) || !cm.sections.length) return [];
     bkResolveMenuTxtSections(cm, aiAnyKey()).then(resolved => {
         if (resolved && resolved.length && bkCur) {
             bkSecs = bkMergeSecs(resolved, bkSecs.filter(x => x.manual));
@@ -10470,7 +10411,7 @@ function bkApplyMenuSections() {
 }
 
 function bkMergeSecs(x, y) {
-    const a = x.concat(y).sort((p, q) => (p.s - q.s) || ((p.lvl || 1) - (q.lvl || 1)));
+    const a = x.concat(y).sort((p, q) => (p.s - q.s) || ((p.lvl || 1) - (p.lvl || 1)));
     return a.filter((p, i) => i === 0 || p.s !== a[i - 1].s || p.num !== a[i - 1].num);
 }
 
@@ -10496,14 +10437,13 @@ async function bkDetectChapter() {
     } catch (e) {}
 
     const cm = bkChapterMenu();
-    // Nếu file Menu.txt không có hoặc không quy định chương này -> không nhận diện mục lục
     if (!cm || !Array.isArray(cm.sections) || !cm.sections.length) {
         bkSecs = [];
         try { if (bkCur && bkCur.url) localStorage.removeItem('bk_sec_' + bkCur.url); } catch (e) {}
         bkSecSel = -1; bkHl = null; bkApplyHlAll(); bkRenderSecList(); bkUpdateSecBtn();
         document.getElementById('bk-sec-tr').classList.add('hidden');
         btn.disabled = false; bkUpdateSecBtn();
-        showToast('Chương này chưa được quy định trong Menu.txt nên không nhận diện mục lục.');
+        showToast('Chương này không được quy định trong Menu.txt nên không nhận diện mục lục.');
         return;
     }
 
@@ -10525,7 +10465,6 @@ async function bkDetectChapter() {
     }
 }
 
-/* Kéo đổi độ rộng cột mục lục (giống khung chat) */
 function bkEnsureSecGrip() {
     const p = document.getElementById('bk-sec-panel'); if (!p || document.getElementById('bk-sec-grip')) return;
     try { const w = localStorage.getItem('bk_sec_w'); if (w) document.documentElement.style.setProperty('--bk-sec-w', w + 'px'); } catch (e) {}
@@ -10545,7 +10484,6 @@ function bkEnsureSecGrip() {
     g.addEventListener('pointerup', end); g.addEventListener('pointercancel', end);
 }
 
-/* Giữ nguyên mã số phân mục như trong Menu.txt (1., 4.1., 4.2.1., 4.2.6.1.) */
 function bkNumbers() {
     const c = new Array(12).fill(0); const out = [];
     bkSecs.forEach(s => {
