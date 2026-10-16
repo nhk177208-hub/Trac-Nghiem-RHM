@@ -1,0 +1,204 @@
+{
+ "_doc": {
+  "ten": "MucLuc.json — luật nhận diện MỀM + cẩm nang vận hành cho AI",
+  "vi_tri": "Đặt cùng thư mục với index.html (gốc web). App nạp lại mỗi khi mở chương, bấm 📑 Nhận diện mục lục hoặc 🔁 Quét lại (không lưu đệm quá 10 giây).",
+  "gui_cho_AI": "Nếu bạn là AI vừa nhận file này cùng file sách: đọc hết _doc và menu_json rồi mới làm. Nhiệm vụ BẮT BUỘC: trả về Menu.json cho sách. Chỉ khi luật chung (offline_rules, ai_prompts) không đủ cho sách này mới sửa MucLuc.json, và khi đó trả lại MucLuc.json đầy đủ.",
+  "hai_file": {
+   "MucLuc.json": "Luật chung cho MỌI sách. App chỉ đọc hai khóa: offline_rules (nhận diện mềm OFFLINE: app tự dò tiêu đề theo cỡ chữ, in đậm, khoảng cách dòng, không cần AI) và ai_prompts (nhận diện mềm ONLINE: lời nhắc gửi AI khi quét). Các khóa còn lại (_doc, menu_json) là tài liệu cho AI, app bỏ qua.",
+   "Menu.json": "Nằm trong thư mục từng sách: MonHoc/<Môn>/Books/<Sách>/Menu.json, cạnh các file PDF chương. Quy định (1) mục lục CỨNG của từng chương và (2) cách đọc PDF của sách đó: cột, lề trên/dưới, vùng bỏ qua. Cấu trúc đầy đủ ở khóa menu_json bên dưới."
+  },
+  "app_van_hanh": [
+   "1. Bấm vào một chương: app tải PDF, nạp MucLuc.json và Menu.json của sách (không có Menu.json thì chạy như bình thường, chỉ không có mục lục cứng và layout).",
+   "2. Layout trong Menu.json (layout, page_layouts) quyết định: chữ nào được đọc vào chữ chương (để dịch, tìm mục), thứ tự đọc cột nào trước, khối chọn chữ khi tô đen (kéo chuột không tràn sang cột khác), và hộp tô sáng phân mục (cắt trong đúng cột, không tô chữ ngoài cột hay vùng bỏ qua). Không có layout: app tự đoán, tạm chia đôi trang thành 2 cột.",
+   "3. Nếu chapters[tên file PDF chương] có sections và mode khác 'soft': app dùng ĐÚNG danh sách đó làm mục lục (tìm từng src trong chữ chương, dùng page để chọn đúng chỗ khi tiêu đề xuất hiện nhiều lần). Không dò, không gọi AI (trừ khi ai_extend = true). Mục nào không tìm thấy thì app báo 'N mục không khớp'.",
+   "4. Không có mục lục cứng cho chương: người dùng bấm 📑 Nhận diện mục lục. Bước OFFLINE: app dò các dòng giống tiêu đề theo offline_rules. Bước ONLINE: chia chương thành đoạn chunk_size ký tự, gửi AI cùng ai_prompts.outline_system_prompt và các dòng dò được làm gợi ý, rồi đối chiếu kết quả với chữ thật trong PDF.",
+   "5. 🔁 Quét lại một mục: dùng ai_prompts.sub_pass1_prompt (liệt kê mục con) rồi sub_pass2_prompt (kiểm tra đối chiếu); {{TITLE}} được thay bằng tên mục.",
+   "6. Mục do người dùng tự đánh dấu (🔖) luôn được giữ lại, không bị mục lục cứng hay quét lại ghi đè."
+  ],
+  "thu_tu_uu_tien": [
+   "Luật nhận diện (offline_rules, ai_prompts): MucLuc.json < Menu.json (khóa cùng tên ở mức sách) < Menu.json mức chương.",
+   "Layout: Menu.json layout (sách) < layout (chương) < page_layouts (sách) < page_layouts (chương). Khóa sau đè khóa trước; riêng skip thì CỘNG DỒN các tầng."
+  ],
+  "quy_trinh_cho_AI": [
+   "1. Xem một số trang đại diện của mỗi chương (trang đầu có tên chương và tác giả, trang chữ thường, trang có hình/bảng/hộp, trang cuối có tài liệu tham khảo). Nếu có công cụ (PyMuPDF/pdfplumber), đo tọa độ chữ thật: x0/chiều rộng trang, y/chiều cao trang, thay vì đoán bằng mắt.",
+   "2. Lập layout: số cột, biên từng cột, lề trên/dưới (loại tiêu đề chạy, số trang), vùng cần bỏ qua (hình, bảng, hộp ghi chú, khung mục lục in sẵn trong trang). Trang khác kiểu (trang đầu chương, trang một cột, trang bảng rộng) khai riêng trong page_layouts.",
+   "3. Lập sections cho từng chương: đúng thứ tự xuất hiện, src chép NGUYÊN VĂN như chữ in trong PDF, vi theo thuật ngữ Răng Hàm Mặt miền Nam, lvl 1 đến 10, page là số thứ tự trang trong file PDF chương (trang đầu = 1, KHÔNG phải số in trên giấy).",
+   "4. Nếu một luật chung gây sai cho sách này (ví dụ exclude_regex chặn nhầm tiêu đề thật): sửa riêng cho sách bằng offline_rules trong Menu.json. Chỉ sửa MucLuc.json khi lỗi đó đúng cho mọi sách.",
+   "5. Tự kiểm tra theo menu_json.kiem_tra rồi mới trả kết quả."
+  ],
+  "quy_tac_tra_ve": [
+   "Trả về Menu.json (bắt buộc) thành một khối JSON hợp lệ, KHÔNG có chú thích // hay /* */, không có dấu phẩy thừa, không thêm chữ ngoài JSON trong file.",
+   "Nếu có sửa MucLuc.json: trả thêm MucLuc.json ĐẦY ĐỦ (giữ nguyên mọi khóa không sửa) và nói ngắn gọn đã sửa khóa nào, vì sao.",
+   "Tên file chính xác: Menu.json và MucLuc.json (phân biệt hoa thường vì host trên GitHub)."
+  ],
+  "offline_rules_giai_thich": {
+   "min_length / max_length": "Độ dài chữ (ký tự) của một dòng tiêu đề hợp lệ.",
+   "heading_font_ratio": "Dòng tiêu đề không in đậm phải có cỡ chữ ≥ tỉ lệ này × cỡ chữ thân bài.",
+   "gap_up_ratio": "Tiêu đề in đậm cả dòng phải cách dòng trên ≥ tỉ lệ này × cỡ chữ (khoảng trắng phía trên).",
+   "flush_left_tolerance": "Dung sai canh lề trái của tiêu đề so với mép cột (đơn vị: cỡ chữ).",
+   "allow_run_in / run_in_max_length": "Cho phép tiêu đề in đậm đứng đầu đoạn rồi chữ thường chạy tiếp cùng dòng; run_in_max_length là độ dài tối đa của phần in đậm.",
+   "merge_offline_candidates": "true: ghép cả các dòng app dò được vào kết quả AI (mặc định false: chỉ dùng làm gợi ý cho AI).",
+   "exclude_regex": "Dòng khớp regex này KHÔNG bao giờ là tiêu đề (không phân biệt hoa thường).",
+   "include_regex": "Dòng khớp regex này LUÔN được xem là ứng viên tiêu đề (nếu không khớp exclude_regex).",
+   "start_regex": "Tiêu đề phải bắt đầu bằng ký tự khớp regex này (phân biệt hoa thường).",
+   "first_page_title_skip": "true: bỏ tên chương (chữ rất lớn), dòng tên tác giả viết hoa ở trang đầu chương khỏi chữ chương.",
+   "skip_text_regex": "Mảnh chữ khớp regex này bị bỏ khỏi chữ chương (vd tiêu đề chạy kiểu 'PART II • ...'). Để trống = tắt.",
+   "outline_box_label_regex": "Nhãn mở đầu một khung mục lục in sẵn trong trang (vd 'Chapter Outline'): các dòng ngắn ngay dưới nhãn bị bỏ khỏi chữ chương. Để trống = tắt."
+  },
+  "ai_prompts_giai_thich": {
+   "chunk_size / chunk_overlap": "Chia chữ chương thành từng đoạn chunk_size ký tự, chồng nhau chunk_overlap ký tự khi gửi AI.",
+   "outline_system_prompt": "Lời nhắc lập mục lục toàn chương. AI online phải trả về {\"sections\":[{\"src\":\"...\",\"vi\":\"...\",\"lvl\":1}]}.",
+   "sub_pass1_prompt / sub_pass2_prompt": "Quét lại mục con (lượt 1 liệt kê, lượt 2 đối chiếu). Dùng {{TITLE}} cho tên mục. Cùng định dạng trả về."
+  },
+  "thay_doi_v4": [
+   "offline_rules.exclude_regex: bỏ chặn rộng '%', '\\d{3,}', '\\(\\d' (chặn nhầm tiêu đề như 'Sodium fluoride varnish (5%)', 'First Generation(1965)', 'Lava Ultimate (3M)'); chỉ chặn dòng toàn số, dòng số bắt đầu bằng %, dòng bắt đầu bằng '(số'; '^box\\b' thành '^box\\s*\\d' (không chặn 'Box-Only Preparation'); bỏ '^step\\s+\\d'.",
+   "offline_rules.include_regex: thêm 'Step N: ...' là ứng viên tiêu đề.",
+   "ai_prompts: giữ 'Step N:' khi là tiêu đề thật, thêm quy tắc không nhảy cấp quá 1 bậc, nhận cấp theo kiểu đánh số, cho phép tiêu đề có ngoặc/%/năm/thương hiệu."
+  ]
+ },
+ "version": 4,
+ "offline_rules": {
+  "min_length": 3,
+  "max_length": 110,
+  "heading_font_ratio": 1.06,
+  "gap_up_ratio": 1.45,
+  "flush_left_tolerance": 0.5,
+  "allow_run_in": false,
+  "run_in_max_length": 60,
+  "merge_offline_candidates": false,
+  "exclude_regex": "et al|^combined$|^table\\b|^fig\\.|^figure\\b|^box\\s*\\d|^flowchart\\b|^clinical notes\\b|^references\\b|^summary\\b|^page\\b|^\\d{3,}\\s*$|^[\\d.,\\s]*%|^\\(\\d",
+  "include_regex": "^(?:[IVXLCDM]{1,4}\\.\\s+[A-Z]|Zone\\s+\\d+\\s*:|Step\\s+\\d+\\s*[:.]\\s*\\S)",
+  "start_regex": "^[A-Z0-9\\u00C0-\\u1EF9\"“(]",
+  "first_page_title_skip": true,
+  "skip_text_regex": "PART\\s+[IVXLC\\d]+\\s*[•·\\-–]|^\\d{1,4}\\s+PART\\b",
+  "outline_box_label_regex": "^chapter outline$"
+ },
+ "ai_prompts": {
+  "chunk_size": 40000,
+  "chunk_overlap": 1500,
+  "outline_system_prompt": "Bạn là giáo sư đầu ngành Răng Hàm Mặt. Quét TOÀN BỘ đoạn văn bản chương sách được gửi và lập MỤC LỤC CHI TIẾT ĐA CẤP (hỗ trợ sâu từ 1 đến 10 cấp), theo đúng thứ tự xuất hiện từ đầu đến cuối đoạn. Phân cấp chính xác theo tư duy chuyên môn: lvl = 1 cho đại mục lớn; lvl = 2 cho mục chính (bao gồm các mục đánh số La Mã như \"I. Biofilm\"); lvl = 3 cho tiểu mục; lvl = 4 đến 10 cho các mục chi tiết bên trong. Với mỗi mục trả về: \"src\" = tiêu đề GIỮ NGUYÊN NGUYÊN VĂN như in trong sách; \"vi\" = tên tiếng Việt ngắn gọn đúng thuật ngữ RHM miền Nam; \"lvl\" = số nguyên từ 1 đến 10. TUYỆT ĐỐI KHÔNG lập mục từ: Clinical Notes, Box, Table, Figure, Flowchart, các hộp quy trình/ví dụ dạng Step 1/2/3 nằm trong khung (nhưng GIỮ \\\"Step N: ...\\\" khi nó là tiêu đề mục thật của kỹ thuật, đứng riêng một dòng như một tiêu đề), References, Summary, tên chương, tên tác giả, câu văn thường, hoặc các đoạn văn giải thích dài. Trả về MỘT đối tượng JSON: {\"sections\":[{\"src\":\"...\",\"vi\":\"...\",\"lvl\":1}]}; nếu không có tiêu đề nào, {\"sections\":[]}. Quy tắc cấp: cấp của mục đứng sau không được lớn hơn cấp mục đứng trước quá 1 bậc; tiêu đề cùng kiểu (cùng cỡ chữ, cùng kiểu đánh số) phải cùng cấp; số La Mã (I., II.) và chữ cái (A., B.) là cấp con của tiêu đề đứng ngay trên. Tiêu đề có dấu ngoặc, số phần trăm, năm hoặc tên thương hiệu (ví dụ \\\"Fluoride varnish (5%)\\\", \\\"Lava Ultimate (3M)\\\") vẫn là tiêu đề hợp lệ. Không thêm chữ nào ngoài JSON.",
+  "sub_pass1_prompt": "Bạn là giáo sư đầu ngành Răng Hàm Mặt. Đoạn văn dưới đây thuộc mục \"{{TITLE}}\". Liệt kê đầy đủ các TIÊU ĐỀ MỤC CON đa cấp (lvl = 2 đến 10) nằm bên trong đoạn (KHÔNG liệt kê chính tiêu đề \"{{TITLE}}\", KHÔNG liệt kê Clinical Notes, Box, Table, Figure, Flowchart hay câu văn thường). Với mỗi mục trả về \"src\" = tiêu đề GIỮ NGUYÊN NGUYÊN VĂN như in, \"vi\" = tên tiếng Việt ngắn gọn đúng thuật ngữ RHM miền Nam, \"lvl\" = số nguyên từ 2 đến 10. Trả về MỘT đối tượng JSON: {\"sections\":[{\"src\":\"...\",\"vi\":\"...\",\"lvl\":2}]}. Giữ \\\"Step N: ...\\\" nếu là tiêu đề mục thật. Cấp mục sau không lớn hơn cấp mục trước quá 1 bậc. Tiêu đề có ngoặc, %, năm, tên thương hiệu vẫn hợp lệ. Không thêm chữ nào ngoài JSON.",
+  "sub_pass2_prompt": "Bạn là giáo sư đầu ngành Răng Hàm Mặt, đang KIỂM TRA ĐỐI CHIẾU. Đối chiếu danh sách mục con dưới đây với đoạn văn của mục \"{{TITLE}}\". Mỗi mục phải là tiêu đề có thật, xuất hiện nguyên văn trong đoạn; xóa các mục là Clinical Notes, Box, Table, Figure, Flowchart hoặc câu văn thường; bổ sung tiêu đề con còn thiếu; \"lvl\" = số nguyên từ 2 đến 10. Trả về MỘT đối tượng JSON cùng định dạng: {\"sections\":[{\"src\":\"...\",\"vi\":\"...\",\"lvl\":2}]}. Giữ \\\"Step N: ...\\\" nếu là tiêu đề mục thật. Cấp mục sau không lớn hơn cấp mục trước quá 1 bậc. Tiêu đề có ngoặc, %, năm, tên thương hiệu vẫn hợp lệ. Không thêm chữ nào ngoài JSON."
+ },
+ "menu_json": {
+  "vi_tri": "MonHoc/<Môn>/Books/<Tên sách>/Menu.json (cùng thư mục với các file PDF chương và TrangBia.png)",
+  "cau_truc": {
+   "book": "Chuỗi, tùy chọn: tên sách để người đọc biết.",
+   "layout": "Layout mặc định cho cả sách. Xem 'layout_khoa' bên dưới.",
+   "page_layouts": "Mảng layout riêng cho từng nhóm trang: mỗi phần tử là {pages, ...các khóa của layout}. pages: 1 | \"2-9,12\" | \"odd\" | \"even\" | \"all\" | \"5-end\". Số trang tính theo file PDF của chương (trang đầu = 1).",
+   "offline_rules": "Tùy chọn: ghi đè các khóa offline_rules của MucLuc.json cho riêng sách này.",
+   "ai_hint": "Tùy chọn: câu dặn thêm cho AI khi quét sách này (nối vào ai_prompts).",
+   "ai_prompts": "Tùy chọn: ghi đè ai_prompts cho riêng sách này (hiếm khi cần).",
+   "chapters": "Đối tượng: khóa là TÊN FILE PDF của chương (có hoặc không có .pdf, đúng chữ, không phân biệt hoa thường/dấu cách thừa). Giá trị xem 'chapters_khoa'."
+  },
+  "layout_khoa": {
+   "columns": "Mảng cột [[x0,x1],...], tỉ lệ 0..1 của chiều RỘNG trang, xếp từ trái sang phải = thứ tự đọc. Một phần tử = trang một cột. Chữ có tâm nằm ngoài mọi cột bị bỏ qua. Chừa lề thoáng 1–2% quanh chữ; rãnh giữa các cột phải nằm giữa khoảng trắng; nghi ngờ thì nới cột rộng hơn là thu hẹp.",
+   "top / bottom": "Tỉ lệ 0..1 CHIỀU CAO trang tính từ mép TRÊN. Chữ có dòng chữ nằm trên top hoặc dưới bottom (tiêu đề chạy, số trang, chân trang) bị bỏ qua.",
+   "skip": "Mảng hình chữ nhật [[x0,y0,x1,y1],...] (tỉ lệ 0..1, y từ mép trên): chữ trong các vùng này bị bỏ qua (hình, bảng, hộp ghi chú, khung mục lục in sẵn). Skip của các tầng được cộng dồn.",
+   "zones": "Chỉ dùng khi một trang gồm nhiều dải dọc khác kiểu (vd dải tên chương một cột rồi tới hai cột): mảng {y0,y1,columns}; dải không khai thì dùng columns mặc định của layout. Dải đọc từ trên xuống, trong mỗi dải đọc từng cột từ trái sang phải."
+  },
+  "chapters_khoa": {
+   "mode": "\"hard\" (mặc định khi có sections): dùng đúng sections. \"soft\": bỏ qua sections, dùng nhận diện mềm (offline + AI).",
+   "sections": "Mảng mục lục cứng theo thứ tự xuất hiện: {src, vi, lvl, page}. src = tiêu đề CHÉP NGUYÊN VĂN như in trong PDF (đúng chữ hoa/thường, dấu câu, số La Mã ở đầu nếu có); vi = tên tiếng Việt ngắn gọn; lvl = 1..10 (không nhảy cấp quá 1 bậc so với mục trước); page = số thứ tự trang trong file PDF chương nơi tiêu đề xuất hiện (khuyến nghị luôn ghi, nhất là khi tiêu đề lặp lại hoặc có trong mục lục in sẵn).",
+   "ai_extend": "true: sau khi nạp sections vẫn cho 📑 gọi AI quét thêm mục con. Mặc định false.",
+   "intro": "false: không tự thêm mục 'Mở đầu' cho phần chữ trước tiêu đề đầu tiên. Mặc định true.",
+   "layout / page_layouts / offline_rules / ai_hint / ai_prompts": "Cùng ý nghĩa như mức sách nhưng chỉ áp cho chương này và đè mức sách."
+  },
+  "kiem_tra": [
+   "JSON hợp lệ; mọi tọa độ trong 0..1; x0 < x1, y0 < y1; các cột không chồng lấn.",
+   "Mỗi tên chương trong chapters khớp một file PDF có thật trong thư mục sách.",
+   "Mỗi src xuất hiện nguyên văn trong chữ PDF ở đúng trang page; sections đúng thứ tự xuất hiện.",
+   "Không lập mục từ: Clinical Notes, Box, Table, Figure, Flowchart, References, Summary, tên tác giả, tên chương. 'Step N: ...' chỉ được lập mục khi là tiêu đề thật của kỹ thuật (đứng riêng một dòng như tiêu đề), không lập khi chỉ là mục liệt kê trong hộp.",
+   "Hộp tô sáng không được tràn: thử nghĩ một mục kéo dài qua nhiều cột, hộp chỉ phủ chữ trong cột, không phủ lề, rãnh giữa cột, hình, bảng."
+  ],
+  "mau": {
+   "book": "Tên sách (chỉ để người đọc biết, app không dùng)",
+   "layout": {
+    "columns": [
+     [
+      0.07,
+      0.49
+     ],
+     [
+      0.51,
+      0.93
+     ]
+    ],
+    "top": 0.06,
+    "bottom": 0.94,
+    "skip": []
+   },
+   "page_layouts": [
+    {
+     "pages": "1",
+     "zones": [
+      {
+       "y0": 0.0,
+       "y1": 0.32,
+       "columns": [
+        [
+         0.07,
+         0.93
+        ]
+       ]
+      }
+     ],
+     "skip": [
+      [
+       0.07,
+       0.1,
+       0.93,
+       0.32
+      ]
+     ]
+    },
+    {
+     "pages": "7-9",
+     "columns": [
+      [
+       0.07,
+       0.93
+      ]
+     ]
+    }
+   ],
+   "ai_hint": "Sách có hộp Clinical Notes màu xám: không lập mục từ các hộp đó.",
+   "chapters": {
+    "01. Tên chương": {
+     "mode": "hard",
+     "sections": [
+      {
+       "src": "I. Biofilm",
+       "vi": "Màng sinh học",
+       "lvl": 2,
+       "page": 2
+      },
+      {
+       "src": "Supragingival Plaque",
+       "vi": "Mảng bám trên nướu",
+       "lvl": 3,
+       "page": 3
+      },
+      {
+       "src": "II. Calculus",
+       "vi": "Vôi răng",
+       "lvl": 2,
+       "page": 5
+      }
+     ]
+    },
+    "02. Chương chỉ dùng nhận diện mềm": {
+     "mode": "soft",
+     "layout": {
+      "columns": [
+       [
+        0.08,
+        0.92
+       ]
+      ]
+     }
+    }
+   }
+  }
+ }
+}
