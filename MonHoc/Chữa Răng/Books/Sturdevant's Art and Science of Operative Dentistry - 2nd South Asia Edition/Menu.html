@@ -17,6 +17,8 @@
 
   /* Tên file PDF của chương n (không cần .pdf). Sửa ở đây nếu file của bạn đặt tên khác. */
   const tenFile = n => 'Chuong ' + n;
+  /* Tên khác (tùy chọn) của file PDF chương — chương vẫn nhận nếu file mang tên này. Ví dụ theo tên hiện trên thanh tiêu đề sách. */
+  const tenKhac = { 5: '05. Chương 5 - Kiểm soát đau trong nha khoa phục hồi' };
 
   /* Trang đầu – trang cuối của mỗi chương trong PDF gốc (751 trang). Dùng để suy ra trang chẵn/lẻ của bố cục cột. */
   const TRANG_PDF = {
@@ -1728,7 +1730,7 @@
   ];
 
   const chapters = {};
-  LIST.forEach(c => { chapters[tenFile(c.n)] = c.entry; });
+  LIST.forEach(c => { chapters[tenFile(c.n)] = c.entry; if (tenKhac[c.n]) chapters[tenKhac[c.n]] = c.entry; });
 
   TOC.menu({
     layout: { columns: COT.odd, top: TOP, bottom: BOTTOM },
