@@ -10067,16 +10067,17 @@ function bkTocSoft() {
     return Object.keys(merged).length ? merged : null;
 }
 
-/* Cầu nối app → MucLuc.html / Menu.html (đọc dữ liệu & dịch vụ của app; không chứa luật) */
-const BK_TOC_HOST = {
+/* Cầu nối app → MucLuc.html / Menu.html (đọc dữ liệu & dịch vụ của app; không chứa luật) */const BK_TOC_HOST = {
     text: () => bkText, pages: () => bkPages, chapter: () => bkCur,
     menu: () => bkMenu, chapterMenu: () => bkChapterMenu(), menuSig: () => bkMenuVer,
+    listTxt: () => bkListRaw, listChapters: () => bkListParsed, chapterList: () => bkChapterListSpec(),
     hasAi: () => aiAnyKey(), showGate: () => aiShowGate(), ai: (sys, user, maxTok) => aiGeminiJson(sys, user, maxTok),
     toast: m => { try { showToast(m); } catch (e) {} },
     glossRule: () => BK_TR_GLOSS,
     glossary: t => (typeof window.rhmDictGlossary === 'function') ? window.rhmDictGlossary(t, true) : '',
     fixVi: (v, src) => (typeof window.rhmEnforceSouthernTerms === 'function') ? window.rhmEnforceSouthernTerms(v, src) : v,
-    lineStart: (T, i) => bkLineStart(T, i), mergeSecs: (a, b) => bkMergeSecs(a, b)
+    lineStart: (T, i) => bkLineStart(T, i), mergeSecs: (a, b) => bkMergeSecs(a, b),
+    matchListToText: (items, useAi) => bkMatchListItemsToText(items, useAi)
 };
 function bkTocBegin() { const S = bkTocSoft(); if (S && typeof S.begin === 'function') { try { S.begin(BK_TOC_HOST); } catch (e) { bkTocErr('begin', e); } } }
 /* Gọi hàm xử lý từng trang của MucLuc.html; thiếu hàm hoặc lỗi → bỏ qua bước đó (không làm hỏng việc đọc chữ chương) */
@@ -10096,11 +10097,232 @@ function bkNormKey(s) {
         .trim();
 }
 
-/* ----- Menu.html của sách đang đọc (nằm cùng thư mục với các PDF chương): TOC.menu({...}) = dữ liệu, TOC.override({...}) = code riêng ----- */
+/* ----- Đọc & Phân tích List.txt / list.txt nằm trong thư mục sách ----- */
+let bkListRaw = '', bkListParsed = null, bkListFolder = '', bkListSig = '';
+
+function bkSplitTitleEnParen(str) {
+    const s = String(str || '').trim();
+    // Tách phần tiếng Anh ở ngoặc đơn cuối dòng nếu có: VD "Mão sứ kim loại (Metal–ceramic crowns)" hoặc "Cầu răng mài tối thiểu (dán) (Minimal preparation (resin retained) bridges)"
+    let depth = 0, endIdx = -1, startIdx = -1;
+    for (let i = s.length - 1; i >= 0; i--) {
+        const ch = s[i];
+        if (ch === ')') {
+            if (depth === 0) endIdx = i;
+            depth++;
+        } else if (ch === '(') {
+            depth--;
+            if (depth === 0) { startIdx = i; break; }
+        }
+    }
+    if (endIdx === s.length - 1 && startIdx > 0) {
+        const inside = s.slice(startIdx + 1, endIdx).trim();
+        const outside = s.slice(0, startIdx).trim();
+        const hasViDia = /[ăâđêôơưáàảãạấầẩẫậắằẳẵặéèẻẽẹếềểễệíìỉĩịóòỏõọốồổỗộớờởỡợúùủũụứừửữựýỳỷỹỵ]/i.test(inside);
+        if (outside && /[A-Za-z]{2,}/.test(inside) && !hasViDia) {
+            return { vi: outside, en: inside };
+        }
+    }
+    return { vi: s, en: '' };
+}
+
+function bkParseListTxt(raw) {
+    const text = String(raw || '').replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
+    const lines = text.split('\n');
+    const chapters = [];
+    const byNum = {};
+    let curChap = null;
+    let inNotes = false;
+    let introChapCounter = 0;
+
+    for (let i = 0; i < lines.length; i++) {
+        const rawLine = lines[i];
+        const trimmed = rawLine.trim();
+        if (!trimmed) continue;
+
+        // Dừng khi gặp đường kẻ '---' hoặc phần Ghi chú cuối file
+        if (/^-{3,}\s*$/.test(trimmed) || /^ghi\s*chú\s*:/i.test(trimmed)) {
+            inNotes = true;
+            continue;
+        }
+        if (inNotes) continue;
+
+        // Bỏ qua dòng tiêu đề đầu sách (MỤC LỤC, Chủ biên, tên sách) khi chưa vào chương nào
+        if (!curChap && (/^mục\s*lục$/i.test(trimmed) || /^chủ\s*biên\s*:/i.test(trimmed))) continue;
+
+        // 1. Nhận diện dòng CHƯƠNG <số>: VD "CHƯƠNG 1. Quản lý sâu răng (Management of dental caries)"
+        const mChap = trimmed.match(/^(?:chương|chapter)\s+(\d+|[IVXLCDM]+)\s*[.:\-–—)]*\s*(.*)$/i);
+        if (mChap) {
+            const numRaw = mChap[1];
+            const chapNum = /^\d+$/.test(numRaw) ? parseInt(numRaw, 10) : numRaw;
+            const rest = mChap[2].trim();
+            const sp = bkSplitTitleEnParen(rest);
+            curChap = {
+                num: chapNum,
+                key: 'chap_' + String(chapNum).toLowerCase(),
+                rawHeader: trimmed,
+                title: sp.vi || trimmed,
+                en: sp.en || sp.vi || trimmed,
+                sections: []
+            };
+            chapters.push(curChap);
+            byNum[String(chapNum)] = curChap;
+            continue;
+        }
+
+        // 2. Nhận diện các phần đặc biệt không đánh số chương (VD: "LỜI NÓI ĐẦU VÀ PHẦN MỞ ĐẦU", "CHỈ MỤC (Index)")
+        const indent = (rawLine.match(/^\s*/) || [''])[0].replace(/\t/g, '    ').length;
+        if (indent === 0) {
+            const isSpecialRoot = /^(?:lời\s+nói\s+đầu|phần\s+mở\s+đầu|mở\s+đầu|chỉ\s+mục|phụ\s+lục|preface|foreword|introduction|index|appendix)\b/i.test(trimmed)
+                || (trimmed === trimmed.toUpperCase() && /[A-ZÀ-Ỹ]/.test(trimmed) && trimmed.length >= 4);
+            if (isSpecialRoot) {
+                const sp = bkSplitTitleEnParen(trimmed);
+                const isIntro = /^(?:lời\s+nói\s+đầu|phần\s+mở\s+đầu|mở\s+đầu|preface|foreword)/i.test(trimmed);
+                const cNum = isIntro && !byNum['0'] ? 0 : ('s' + (++introChapCounter));
+                curChap = {
+                    num: cNum,
+                    key: 'special_' + introChapCounter,
+                    rawHeader: trimmed,
+                    title: sp.vi || trimmed,
+                    en: sp.en || sp.vi || trimmed,
+                    isIntro: isIntro,
+                    sections: []
+                };
+                chapters.push(curChap);
+                if (cNum === 0) byNum['0'] = curChap;
+                continue;
+            }
+            if (!curChap) continue;
+        }
+
+        if (!curChap) continue;
+
+        // 3. Nhận diện từng mục con bên trong chương
+        // Trường hợp có đánh số phân cấp: "1.1.", "1.4.2.6.1.", "2.5.1.1."
+        const mSec = trimmed.match(/^(\d+(?:\.\d+)+)\.?\s+(.+)$/);
+        if (mSec) {
+            const code = mSec[1];
+            const parts = code.split('.');
+            // Ví dụ: "1.1" -> 2 phần -> cấp 1; "1.4.1" -> 3 phần -> cấp 2; "1.4.2.1" -> 4 phần -> cấp 3
+            const lvl = Math.max(1, Math.min(10, parts.length - 1));
+            const titleBody = mSec[2].trim();
+            const sp = bkSplitTitleEnParen(titleBody);
+            curChap.sections.push({
+                num: code,
+                code: code,
+                lvl: lvl,
+                title: titleBody,
+                vi: sp.vi || titleBody,
+                en: sp.en || '',
+                indent: indent,
+                fromList: true
+            });
+        } else {
+            // Trường hợp mục không đánh số: "Tóm tắt", "Tài liệu đọc thêm", "Danh sách tác giả đóng góp"...
+            const sp = bkSplitTitleEnParen(trimmed);
+            let lvl = 1;
+            if (indent >= 6 && curChap.sections.length) {
+                if (indent <= 4) lvl = 1;
+                else if (indent <= 10) lvl = 2;
+                else if (indent <= 16) lvl = 3;
+                else lvl = 4;
+            }
+            curChap.sections.push({
+                num: '',
+                code: '',
+                lvl: lvl,
+                title: trimmed,
+                vi: sp.vi || trimmed,
+                en: sp.en || '',
+                indent: indent,
+                unnumbered: true,
+                fromList: true
+            });
+        }
+    }
+    return { raw: text, chapters: chapters, byNum: byNum };
+}
+
+async function bkLoadListTxt(folder, force) {
+    if (!folder) { bkListRaw = ''; bkListParsed = null; bkListFolder = ''; bkListSig = ''; return null; }
+    if (!force && folder === bkListFolder && bkListParsed) return bkListParsed;
+    let raw = '';
+    for (const fname of ['List.txt', 'list.txt', 'LIST.txt']) {
+        try {
+            const res = await fetch(encPath(folder + '/' + fname) + '?_=' + Date.now(), { cache: 'no-store' });
+            if (res.ok) {
+                const txt = (await res.text()).replace(/^\uFEFF/, '');
+                if (txt && txt.trim() && !/^<!DOCTYPE\s+html/i.test(txt.trim())) {
+                    raw = txt;
+                    break;
+                }
+            }
+        } catch (e) {}
+    }
+    const changed = raw !== bkListSig || folder !== bkListFolder;
+    if (changed) bkMenuVer++;
+    bkListRaw = raw;
+    bkListSig = raw;
+    bkListFolder = folder;
+    bkListParsed = raw ? bkParseListTxt(raw) : null;
+    return bkListParsed;
+}
+
+/* Tìm chương trong List.txt khớp với chương PDF đang mở */
+function bkMatchChapterInList(chapTitle, listObj) {
+    const L = listObj || bkListParsed;
+    if (!L || !Array.isArray(L.chapters) || !L.chapters.length || !chapTitle) return null;
+    const rawTitle = String(chapTitle || '').replace(/\.pdf$/i, '').trim();
+    const normT = bkNormKey(rawTitle);
+
+    // 1. Khớp theo số ở đầu tên file PDF (VD: "1. Management of dental caries", "01_...", "Chương 2...", "0. Preface")
+    const mLead = rawTitle.match(/^\s*(?:chương|chapter|chap|ch|part|bài)?\s*0*(\d+)\b/i);
+    if (mLead) {
+        const n = parseInt(mLead[1], 10);
+        if (L.byNum && L.byNum[String(n)]) return L.byNum[String(n)];
+    }
+
+    // 2. Nếu tên file PDF là Lời nói đầu / Mở đầu / Preface / Front matter
+    if (/^(?:0+\b|lời\s*nói\s*đầu|mở\s*đầu|preface|foreword|front\s*matter|intro)/i.test(rawTitle)) {
+        if (L.byNum && L.byNum['0']) return L.byNum['0'];
+        const introCh = L.chapters.find(c => c.isIntro);
+        if (introCh) return introCh;
+    }
+
+    // 3. Khớp theo tiêu đề tiếng Việt hoặc tiếng Anh của chương trong List.txt
+    for (const c of L.chapters) {
+        const nv = bkNormKey(c.title);
+        const ne = bkNormKey(c.en);
+        const nh = bkNormKey(c.rawHeader);
+        if ((nv && (normT === nv || normT.includes(nv) || nv.includes(normT))) ||
+            (ne && (normT === ne || normT.includes(ne) || ne.includes(normT))) ||
+            (nh && normT === nh)) {
+            return c;
+        }
+    }
+
+    // 4. Tìm số bất kỳ trong tên file nếu chỉ có 1 số chương duy nhất
+    const mAny = rawTitle.match(/\b0*(\d{1,2})\b/);
+    if (mAny) {
+        const n = parseInt(mAny[1], 10);
+        if (L.byNum && L.byNum[String(n)]) return L.byNum[String(n)];
+    }
+    return null;
+}
+
+function bkChapterListSpec() {
+    if (!bkCur || !bkListParsed) return null;
+    return bkMatchChapterInList(bkCur.title, bkListParsed);
+}
+
+/* ----- Menu.html của sách đang đọc (nằm cùng thư mục với các PDF chương) + tích hợp List.txt ----- */
 async function bkLoadMenu(force) {
     const folder = (bkBook && (bkBook.path || bkBook.url)) || '';
-    if (!folder) { bkMenu = null; bkMenuOver = null; bkLayCache = {}; return null; }
+    if (!folder) { bkMenu = null; bkMenuOver = null; bkLayCache = {}; bkListRaw = ''; bkListParsed = null; return null; }
     if (!force && folder === bkMenuFolder && Date.now() - bkMenuAt < 10000) return bkMenu;
+
+    // Luôn nạp List.txt / list.txt trước để Menu.html có thể truy cập và nhận diện mục lục cứng từ List.txt
+    const listData = await bkLoadListTxt(folder, force);
+
     let data = null, over = null, sig = '';
     try {
         const res = await fetch(encPath(folder + '/Menu.html') + '?_=' + Date.now(), { cache: 'no-store' });
@@ -10110,25 +10332,114 @@ async function bkLoadMenu(force) {
             bkTocRunHtml(html, 'Menu.html', {
                 menu: d => { data = d; },
                 override: o => { if (o && typeof o === 'object') over = Object.assign(over || {}, o); },
-                soft: () => {}, base: bkSoft
+                soft: () => {},
+                base: bkSoft,
+                listTxt: bkListRaw,
+                listData: listData,
+                parseListTxt: bkParseListTxt,
+                matchChapter: (title) => bkMatchChapterInList(title, listData)
             });
             if (data && (typeof data !== 'object' || Array.isArray(data))) { data = null; throw new Error('TOC.menu() cần một đối tượng { ... }'); }
         }
     } catch (e) { console.warn('[Menu.html] không nạp được:', e); try { showToast('Menu.html: ' + ((e && e.message) || e)); } catch (x) {} }
-    const changed = sig !== bkMenuSig || folder !== bkMenuFolder;
+
+    // Hợp nhất mục lục cứng từ List.txt vào bkMenu.chapters để Menu.html và trình đọc PDF dùng chung thống nhất
+    if (listData && Array.isArray(listData.chapters) && listData.chapters.length) {
+        if (!data || typeof data !== 'object') data = {};
+        if (!data.chapters || typeof data.chapters !== 'object' || Array.isArray(data.chapters)) {
+            const oldArr = Array.isArray(data.chapters) ? data.chapters : [];
+            const chapObj = {};
+            oldArr.forEach(c => { if (c && (c.file || c.name || c.title)) chapObj[c.file || c.name || c.title] = c; });
+            data.chapters = chapObj;
+        }
+        data.listChapters = listData.chapters;
+        listData.chapters.forEach(lc => {
+            const keys = [
+                String(lc.num),
+                'Chương ' + lc.num,
+                lc.title,
+                lc.en,
+                lc.num + '. ' + lc.title,
+                lc.en ? (lc.num + '. ' + lc.en) : ''
+            ].filter(Boolean);
+            const entry = {
+                num: lc.num,
+                title: lc.title,
+                en: lc.en || lc.title,
+                sections: lc.sections.map(s => ({
+                    num: s.num || '',
+                    code: s.code || '',
+                    lvl: s.lvl || 1,
+                    title: s.title,
+                    vi: s.vi || s.title,
+                    en: s.en || '',
+                    unnumbered: !!s.unnumbered,
+                    fromList: true
+                }))
+            };
+            keys.forEach(k => {
+                if (!data.chapters[k]) data.chapters[k] = Object.assign({}, entry);
+                else if (!Array.isArray(data.chapters[k].sections) || !data.chapters[k].sections.length) {
+                    data.chapters[k].sections = entry.sections.slice();
+                } else {
+                    data.chapters[k].listSections = entry.sections.slice();
+                }
+            });
+        });
+    }
+
+    const fullSig = sig + '||' + bkListSig;
+    const changed = fullSig !== bkMenuSig || folder !== bkMenuFolder;
     if (changed) bkMenuVer++;
-    bkMenu = data; bkMenuOver = over; bkMenuFolder = folder; bkMenuSig = sig; bkMenuAt = Date.now(); bkLayCache = {};
-    // Menu.html vừa đổi trong lúc đang đọc: vẽ lại để lớp chữ / khối chọn chữ theo layout mới
+    bkMenu = data; bkMenuOver = over; bkMenuFolder = folder; bkMenuSig = fullSig; bkMenuAt = Date.now(); bkLayCache = {};
+    // Menu.html / List.txt vừa đổi trong lúc đang đọc: vẽ lại để lớp chữ / khối chọn chữ theo layout mới
     if (changed && force && bkVP.length) { try { bkVP.forEach(pg => { pg.dataP = null; bkRelease(pg); }); bkRefresh(); } catch (e) {} }
     return data;
 }
-/* Mục của chương đang đọc trong Menu.html: chapters["tên file PDF"] (có hoặc không có .pdf), hoặc chapters là mảng {file, ...} */
+
+/* Mục của chương đang đọc trong Menu.html / List.txt */
 function bkChapterMenu() {
-    const m = bkMenu; if (!m || !m.chapters || !bkCur) return null;
-    const ch = m.chapters, nt = bkNormKey(bkCur.title);
-    if (Array.isArray(ch)) return ch.find(c => c && bkNormKey(c.file || c.name || c.title) === nt) || null;
-    if (typeof ch !== 'object') return null;
-    for (const k of Object.keys(ch)) { if (!/^_/.test(k) && bkNormKey(k) === nt) return ch[k]; }
+    if (!bkCur) return null;
+    const m = bkMenu;
+    const nt = bkNormKey(bkCur.title);
+    const listMatch = bkChapterListSpec();
+
+    if (m && m.chapters) {
+        const ch = m.chapters;
+        let found = null;
+        if (Array.isArray(ch)) {
+            found = ch.find(c => c && bkNormKey(c.file || c.name || c.title) === nt) || null;
+        } else if (typeof ch === 'object') {
+            for (const k of Object.keys(ch)) {
+                if (!/^_/.test(k) && bkNormKey(k) === nt) { found = ch[k]; break; }
+            }
+            if (!found && listMatch) {
+                const tryKeys = [String(listMatch.num), 'Chương ' + listMatch.num, listMatch.title, listMatch.en];
+                for (const tk of tryKeys) {
+                    if (tk && ch[tk]) { found = ch[tk]; break; }
+                }
+            }
+        }
+        if (found) {
+            if (listMatch && Array.isArray(listMatch.sections) && listMatch.sections.length) {
+                // Quy định cứng từ List.txt luôn được ưu tiên cho danh sách sections
+                found = Object.assign({}, found, {
+                    title: listMatch.title || found.title,
+                    en: listMatch.en || found.en,
+                    sections: listMatch.sections
+                });
+            }
+            return found;
+        }
+    }
+    if (listMatch) {
+        return {
+            num: listMatch.num,
+            title: listMatch.title,
+            en: listMatch.en || listMatch.title,
+            sections: listMatch.sections
+        };
+    }
     return null;
 }
 
@@ -10174,7 +10485,6 @@ function bkPageLayout(num) {
     if (key in bkLayCache) return bkLayCache[key];
     const ch = bkChapterMenu();
     let L = null;
-    // thứ tự chồng: layout sách → layout chương → page_layouts sách → page_layouts chương (sau đè trước; riêng skip thì cộng dồn)
     const take = o => {
         if (!o || typeof o !== 'object') return;
         L = L || {};
@@ -10184,7 +10494,6 @@ function bkPageLayout(num) {
     [m.page_layouts, ch && ch.page_layouts].forEach(a => (Array.isArray(a) ? a : []).forEach(pl => { if (pl && bkInPages(pl.pages, num)) take(pl); }));
     return (bkLayCache[key] = L ? bkNormLayout(L) : null);
 }
-/* Một điểm chữ (fx, fy là tỉ lệ 0..1, fy từ mép trên) thuộc ô nào: {z: dải, c: cột}; null = nằm ngoài lề / vùng bỏ qua / ngoài mọi cột */
 function bkLayoutCell(fx, fy, L) {
     fy = Math.max(0, Math.min(0.9999, fy));
     if (fy < L.top || fy > L.bottom) return null;
@@ -10196,7 +10505,6 @@ function bkLayoutCell(fx, fy, L) {
     for (let c = 0; c < cols.length; c++) if (fx >= cols[c][0] - 0.004 && fx <= cols[c][1] + 0.004) return { z: zi, c: c };
     return null;
 }
-/* Hộp tô sáng của một mảnh chữ: cắt trong đúng cột của nó, chữ ngoài cột / vùng bỏ qua thì không tô */
 function bkHlBox(d, data, ex) {
     let x0 = d.x, x1 = d.x + d.w;
     const L = ex && ex.lay;
@@ -10209,7 +10517,6 @@ function bkHlBox(d, data, ex) {
     }
     return { x: x0, w: x1 - x0 };
 }
-/* Thứ tự đọc + khối chọn chữ theo layout của Menu.html: mỗi (dải, cột) là một khối; chữ ngoài cột gom thành khối riêng ở cuối */
 function bkOrderByLayout(items, W, H, L) {
     const map = new Map(), rest = [], other = [], wsp = [], out = [];
     items.forEach(d => {
@@ -10237,30 +10544,253 @@ function bkOrderByLayout(items, W, H, L) {
     return out;
 }
 
-/* ----- Mục lục CỨNG của chương đang đọc: do MucLuc.html đọc từ chapters[...].sections trong Menu.html ----- */
+/* ----- Định vị các mục trong List.txt vào nội dung chữ của chương PDF ----- */
+const BK_LIST_COMMON_MAP = {
+    'tóm tắt': ['summary', 'conclusion', 'conclusions', 'key points', 'concluding remarks'],
+    'tài liệu đọc thêm': ['further reading', 'references', 'suggested reading', 'bibliography', 'recommended reading'],
+    'tài liệu tham khảo': ['references', 'bibliography', 'further reading'],
+    'giới thiệu': ['introduction', 'overview', 'background'],
+    'giới thiệu và định nghĩa': ['introduction and definitions', 'introduction', 'definitions'],
+    'lời nói đầu': ['preface', 'foreword'],
+    'lời cảm ơn': ['acknowledgements', 'acknowledgments'],
+    'danh sách tác giả đóng góp': ['contributors', 'list of contributors'],
+    'chỉ mục': ['index']
+};
+
+function bkExtractHeadingCandidatesFromText(T) {
+    const cands = [];
+    // 1. Lấy từ cands của các trang nếu Menu.html / MucLuc.html đã trích xuất
+    if (Array.isArray(bkPages)) {
+        bkPages.forEach(p => {
+            (p.cands || []).forEach(c => {
+                if (c && typeof c.s === 'number' && c.text) cands.push({ s: c.s, text: String(c.text).trim(), fh: c.fh || 12, bd: !!c.bd });
+            });
+        });
+    }
+    // 2. Quét thêm các dòng ngắn ở đầu dòng trong bkText (tiêu đề trong PDF thường là dòng riêng <= 120 ký tự)
+    const re = /(?:^|\n)([ \t]*[^\n]{2,120})(?=\n|$)/g;
+    let m;
+    while ((m = re.exec(T)) !== null) {
+        const rawLine = m[1].trim();
+        if (!rawLine || rawLine.length < 2 || rawLine.length > 110) continue;
+        if (/^[.,;:!?)}\]]/.test(rawLine)) continue;
+        // Bỏ qua các câu văn thông thường dài kết thúc bằng dấu chấm
+        const words = rawLine.split(/\s+/);
+        if (words.length > 15 || (/[.]$/.test(rawLine) && words.length > 7 && !/^\d+(?:\.\d+)+/.test(rawLine))) continue;
+        const pos = m.index + (m[0].startsWith('\n') ? 1 : 0);
+        cands.push({ s: pos, text: rawLine, fh: 11, bd: false });
+    }
+    cands.sort((a, b) => a.s - b.s);
+    const uniq = [];
+    cands.forEach(c => {
+        if (!uniq.length || Math.abs(c.s - uniq[uniq.length - 1].s) > 3) uniq.push(c);
+    });
+    return uniq;
+}
+
+async function bkMatchListItemsToText(rawItems, useAi) {
+    const T = String(bkText || '');
+    const items = (Array.isArray(rawItems) ? rawItems : []).map((it, idx) => ({
+        idx: idx,
+        num: it.num || it.code || '',
+        lvl: Math.max(1, Math.min(10, Number(it.lvl) || 1)),
+        title: String(it.vi || it.title || '').trim(),
+        en: String(it.en || '').trim(),
+        unnumbered: !!it.unnumbered,
+        s: typeof it.s === 'number' && it.s >= 0 ? it.s : -1
+    })).filter(it => it.title);
+
+    if (!items.length) return [];
+    if (!T.trim()) {
+        return items.map((it, idx) => ({
+            title: it.title, en: it.en || it.title, num: it.num, lvl: it.lvl, s: idx, e: idx + 1, text: '', fromList: true
+        }));
+    }
+
+    const cands = bkExtractHeadingCandidatesFromText(T);
+    const norm = s => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[đĐ]/g, 'd').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+
+    // Bước 1: Tìm khớp trực tiếp bằng mã số mục (VD "1.4.1"), từ tiếng Anh trong ngoặc, hoặc bảng thuật ngữ tiêu đề phổ biến
+    let lastPos = 0;
+    for (let i = 0; i < items.length; i++) {
+        const it = items[i];
+        if (it.s >= 0) { lastPos = it.s; continue; }
+
+        const nTitle = norm(it.title);
+        const nEn = norm(it.en);
+        const parenMatches = (it.title.match(/\(([^()]+)\)/g) || []).map(x => norm(x.slice(1, -1))).filter(x => x.length >= 3);
+        const commonAliases = BK_LIST_COMMON_MAP[nTitle] || [];
+        const searchTerms = [];
+        if (nEn && nEn.length >= 3) searchTerms.push(nEn);
+        parenMatches.forEach(p => { if (!searchTerms.includes(p)) searchTerms.push(p); });
+        commonAliases.forEach(a => { const na = norm(a); if (!searchTerms.includes(na)) searchTerms.push(na); });
+        if (nTitle && !/[ăâđêôơưáàảãạéèẻẽẹíìỉĩịóòỏõọúùủũụýỳỷỹỵ]/i.test(it.title)) {
+            searchTerms.push(nTitle);
+        }
+
+        // 1a. Nếu mục có đánh số (VD 1.4.2) và trong PDF có đánh số tương ứng ở đầu dòng
+        if (it.num) {
+            const escCode = it.num.replace(/\./g, '\\.');
+            const reCode = new RegExp('(?:^|\\n)\\s*' + escCode + '(?:\\.|\\b)\\s*([^\\n]{2,100})', 'g');
+            reCode.lastIndex = lastPos;
+            const mc = reCode.exec(T);
+            if (mc) {
+                it.s = mc.index + (mc[0].startsWith('\n') ? 1 : 0);
+                if (!it.en && mc[1]) it.en = mc[1].trim();
+                lastPos = it.s + 1;
+                continue;
+            }
+        }
+
+        // 1b. Tìm trong danh sách các dòng tiêu đề ứng viên (cands) từ vị trí lastPos trở đi
+        if (searchTerms.length) {
+            let bestCand = null, bestScore = 0;
+            for (const c of cands) {
+                if (c.s < lastPos) continue;
+                const nc = norm(c.text);
+                if (!nc) continue;
+                for (const st of searchTerms) {
+                    if (nc === st) { bestCand = c; bestScore = 100; break; }
+                    if (nc.startsWith(st) || st.startsWith(nc)) {
+                        const sc = 80 - Math.abs(nc.length - st.length);
+                        if (sc > bestScore) { bestScore = sc; bestCand = c; }
+                    } else {
+                        const stWords = st.split(' ').filter(w => w.length >= 3);
+                        if (stWords.length && stWords.every(w => nc.includes(w)) && nc.split(' ').length <= stWords.length + 5) {
+                            const sc = 65;
+                            if (sc > bestScore) { bestScore = sc; bestCand = c; }
+                        }
+                    }
+                }
+                if (bestScore >= 100) break;
+            }
+            if (bestCand && bestScore >= 60) {
+                it.s = bestCand.s;
+                if (!it.en) it.en = bestCand.text.replace(/^\d+(?:\.\d+)*\.?\s*/, '').trim();
+                lastPos = it.s + 1;
+            }
+        }
+    }
+
+    // Bước 2: Dùng AI (hoặc hàm định vị của Menu.html) để khớp chính xác các tiêu đề tiếng Việt trong List.txt với các dòng tiêu đề tiếng Anh trong PDF
+    const unresolved = items.filter(it => it.s < 0);
+    if (unresolved.length > 0 && useAi && aiAnyKey() && cands.length > 0) {
+        try {
+            const candLines = cands.slice(0, 350).map((c, idx) => idx + '|' + c.text).join('\n');
+            const targetLines = items.map((it, idx) => idx + '|' + (it.num ? it.num + ' ' : '') + it.title + (it.s >= 0 ? ' [đã khớp cand]' : '')).join('\n');
+            const sys = 'Bạn là chuyên gia đối chiếu mục lục sách Răng Hàm Mặt. Bạn được cung cấp:\n' +
+                '1) DANH SÁCH MỤC LỤC CHUẨN (từ file List.txt, bằng tiếng Việt, đánh số thứ tự i = 0, 1, 2...).\n' +
+                '2) DANH SÁCH DÒNG TIÊU ĐỀ ỨNG VIÊN trích từ file PDF của chương (thường bằng tiếng Anh, đánh số c = 0, 1, 2... theo đúng thứ tự xuất hiện trong sách).\n' +
+                'Nhiệm vụ: Với MỖI mục i trong danh sách mục lục chuẩn, hãy tìm chỉ số c của dòng tiêu đề ứng viên tương ứng trong PDF (c phải tăng dần theo i) và tên tiếng Anh gốc ("en") của mục đó.\n' +
+                'Chỉ trả về MỘT đối tượng JSON hợp lệ dạng {"m":[{"i":0,"c":2,"en":"..."},...]} và không viết gì thêm.';
+            const user = 'DANH SÁCH MỤC LỤC CHUẨN (List.txt):\n' + targetLines + '\n\nDÒNG TIÊU ĐỀ ỨNG VIÊN TRONG PDF:\n' + candLines;
+            const res = await aiGeminiJson(sys, user, 4096);
+            const matches = (res && Array.isArray(res.m)) ? res.m : [];
+            let minPos = 0;
+            matches.forEach(m => {
+                if (!m || typeof m.i !== 'number') return;
+                const it = items[m.i];
+                if (!it) return;
+                if (typeof m.en === 'string' && m.en.trim() && !it.en) it.en = m.en.trim();
+                const cand = cands[m.c];
+                if (cand && cand.s >= minPos) {
+                    it.s = cand.s;
+                    if (!it.en) it.en = cand.text;
+                    minPos = cand.s + 1;
+                }
+            });
+        } catch (e) { console.warn('[List.txt AI match]', e); }
+    }
+
+    // Bước 3: Bảo đảm thứ tự vị trí (s) luôn tăng dần nghiêm ngặt và nội suy vị trí cho mọi mục còn chưa khớp để HIỂN THỊ ĐẦY ĐỦ 100% MỤC TRONG LIST.TXT
+    const totalLen = Math.max(T.length, items.length + 10);
+    let prevValidPos = -1;
+    for (let i = 0; i < items.length; i++) {
+        if (items[i].s >= 0) {
+            if (items[i].s <= prevValidPos) items[i].s = -1;
+            else prevValidPos = items[i].s;
+        }
+    }
+
+    let i = 0;
+    while (i < items.length) {
+        if (items[i].s >= 0) { i++; continue; }
+        let j = i;
+        while (j < items.length && items[j].s < 0) j++;
+        const startBound = (i === 0) ? 0 : (items[i - 1].s + 1);
+        const endBound = (j < items.length) ? Math.max(startBound + (j - i), items[j].s - 1) : Math.max(startBound + (j - i), totalLen - 1);
+        const count = j - i;
+        for (let k = 0; k < count; k++) {
+            const frac = (i === 0 && k === 0) ? 0 : ((k + 1) / (count + 1));
+            let pos = Math.round(startBound + frac * (endBound - startBound));
+            // Đưa về đầu dòng gần nhất để khi cuộn hoặc tô sáng luôn khớp dòng chữ
+            if (pos > 0 && pos < T.length) {
+                const nl = T.indexOf('\n', pos);
+                if (nl > 0 && nl - pos < 160) pos = nl + 1;
+            }
+            const prevS = (i + k > 0) ? items[i + k - 1].s : -1;
+            items[i + k].s = Math.max(prevS + 1, Math.min(totalLen - 1, pos));
+        }
+        i = j;
+    }
+
+    return items.map(it => ({
+        title: it.title,
+        en: it.en || it.title,
+        num: it.num || '',
+        lvl: it.lvl || 1,
+        s: it.s,
+        e: 0,
+        text: '',
+        manual: false,
+        intro: false,
+        fromList: true
+    }));
+}
+
+/* ----- Mục lục CỨNG của chương đang đọc: ưu tiên đọc từ List.txt + Menu.html ----- */
 function bkApplyMenuSections() {
+    // 1. Kiểm tra mục lục chương từ List.txt / Menu.html
+    const cm = bkChapterMenu();
+    if (cm && Array.isArray(cm.sections) && cm.sections.length) {
+        // Cho phép Menu.html tuỳ biến cách ánh xạ thông qua TOC.override({ hardSections }) nếu có
+        const S = bkTocSoft();
+        if (S && typeof S.hardSections === 'function') {
+            try {
+                const custom = S.hardSections(BK_TOC_HOST);
+                if (Array.isArray(custom) && custom.length >= cm.sections.length) return custom;
+            } catch (e) { bkTocErr('hardSections', e); }
+        }
+        // Chạy định vị đồng bộ ban đầu (bản bất đồng bộ có AI hỗ trợ sẽ chạy khi bấm Nhận diện/Cập nhật mục lục hoặc ngay sau khi mở chương)
+        const syncSecs = [];
+        bkMatchListItemsToText(cm.sections, false).then(resolved => {
+            if (resolved && resolved.length && bkCur) {
+                bkSecs = bkMergeSecs(resolved, bkSecs.filter(x => x.manual));
+                bkRelink(); bkSaveManual(); bkRenderSecList(); bkUpdateSecBtn(); bkApplyHlAll();
+            }
+        }).catch(() => {});
+        return syncSecs;
+    }
     const S = bkTocSoft(); if (!S || typeof S.hardSections !== 'function') return [];
     try { return S.hardSections(BK_TOC_HOST) || []; } catch (e) { bkTocErr('hardSections', e); return []; }
 }
 
 function bkMergeSecs(x, y) {
     const a = x.concat(y).sort((p, q) => p.s - q.s);
-    return a.filter((p, i) => i === 0 || p.s !== a[i - 1].s);
-}
-
-function bkUpdateSecBtn() {
+    return a.filter((p, i) => i === 0 || p.s !== a[i - 1].s || p.fromList);
+}function bkUpdateSecBtn() {
     var b = document.getElementById('bk-sec-btn');
     if (!b) return;
     b.disabled = false;
     b.textContent = bkSecs.length ? '🔄 Cập nhật mục lục' : '📑 Nhận diện mục lục';
 }
 
-async function bkDetectChapter() {
+async function bkDetectChapter() {async function bkDetectChapter() {
     if (!bkDoc) return;
     if (!bkText.trim()) { showToast('Chương đang được đọc chữ (xem thanh trạng thái) hoặc không có chữ — thử lại sau giây lát'); return; }
     const btn = document.getElementById('bk-sec-btn'), list = document.getElementById('bk-sec-list');
     btn.disabled = true;
-    btn.textContent = '⏳ Đang đối chiếu Menu.html / MucLuc.html…';
+    btn.textContent = '⏳ Đang đối chiếu List.txt / Menu.html…';
 
     await bkLoadMucLuc(true);
     await bkLoadMenu(true);
@@ -10270,17 +10800,36 @@ async function bkDetectChapter() {
         if (ex) { bkPages = ex.pages; bkText = ex.text; }
     } catch (e) {}
 
+    // Ưu tiên 1: Nếu chương có mục lục quy định trong List.txt (hoặc Menu.html), nhận diện đầy đủ tất cả các mục theo List.txt
+    const cm = bkChapterMenu();
+    if (cm && Array.isArray(cm.sections) && cm.sections.length) {
+        try {
+            list.innerHTML = '<p class="text-xs text-gray-500 p-1">🔍 Đang đối chiếu ' + cm.sections.length + ' mục từ List.txt vào nội dung chương…</p>';
+            const matched = await bkMatchListItemsToText(cm.sections, true);
+            if (matched && matched.length) {
+                bkSecs = bkMergeSecs(matched, bkSecs.filter(x => x.manual));
+                bkRelink();
+                bkSaveManual(); bkSecSel = -1; bkHl = null; bkApplyHlAll(); bkRenderSecList(); bkUpdateSecBtn();
+                document.getElementById('bk-sec-tr').classList.add('hidden');
+                showToast('✅ Đã nhận diện đầy đủ ' + matched.length + ' mục từ List.txt!');
+                btn.disabled = false; bkUpdateSecBtn();
+                return;
+            }
+        } catch (e) { bkTocErr('listDetect', e); }
+    }
+
+    // Ưu tiên 2: Nếu sách chưa có List.txt thì dùng bộ nhận diện mềm của Menu.html / MucLuc.html
     const S = bkTocSoft();
     if (!S || typeof S.detect !== 'function') {
         btn.disabled = false; bkUpdateSecBtn();
-        showToast('Chưa nạp được MucLuc.html nên chưa lập mục lục tự động được (vẫn đánh dấu phân mục bằng tay được)');
+        showToast('Chưa tìm thấy chương trong List.txt / Menu.html');
         return;
     }
     let r = null;
     try {
         r = await S.detect(BK_TOC_HOST, (k, n) => {
             btn.textContent = '⏳ Quét ' + k + '/' + n;
-            list.innerHTML = '<p class="text-xs text-gray-500 p-1">🔍 Đang nhận diện mục lục theo MucLuc.html: đoạn ' + k + '/' + n + '…</p>';
+            list.innerHTML = '<p class="text-xs text-gray-500 p-1">🔍 Đang nhận diện mục lục: đoạn ' + k + '/' + n + '…</p>';
         });
     } catch (e) { bkTocErr('detect', e); }
     finally { btn.disabled = false; bkUpdateSecBtn(); }
@@ -10314,12 +10863,17 @@ function bkEnsureSecGrip() {
     };
     g.addEventListener('pointerup', end); g.addEventListener('pointercancel', end);
 }
-/* Số thứ tự hỗ trợ sâu đến 10 cấp (1. -> 1.1 -> 1.1.1 -> 1.1.1.1...) */
+/* Số thứ tự hỗ trợ sâu đến 10 cấp: giữ nguyên mã mục từ List.txt (VD: 1.1., 1.4.2.6.1.) hoặc để trống với các mục không đánh số (Tóm tắt, Tài liệu đọc thêm) */
 function bkNumbers() {
     const c = new Array(12).fill(0); const out = [];
     bkSecs.forEach(s => {
         if (s.intro) { out.push('0.'); return; }
-        if (s.manual && s.num) { out.push(s.num); return; }
+        if (s.fromList) {
+            if (!s.num) { out.push(''); return; }
+            out.push(/[.]$/.test(s.num) ? s.num : (s.num + '.'));
+            return;
+        }
+        if (s.num) { out.push(s.num); return; }
         let L = Math.max(1, Math.min(10, s.lvl || 1));
         for (let k = 1; k < L; k++) { if (c[k] === 0) c[k] = 1; }
         c[L]++;
@@ -10340,7 +10894,7 @@ function bkRenderSecList() {
         b.classList.toggle('bg-white', !on); b.classList.toggle('text-gray-500', !on);
     });
     if (!bkSecs.length) {
-        list.innerHTML = '<p class="text-xs text-gray-500 p-1">Bấm “📑 Nhận diện mục lục” để AI lập mục lục.</p>';
+        list.innerHTML = '<p class="text-xs text-gray-500 p-1">Bấm “📑 Nhận diện mục lục” để nạp mục lục từ List.txt / Menu.html.</p>';
         n.textContent = ''; tr.classList.add('hidden'); return;
     }
     n.textContent = bkSecs.length + ' mục';
@@ -10354,8 +10908,7 @@ function bkRenderSecList() {
         const clsLv = lv === 1 ? ' font-extrabold text-gray-900 text-sm' : (lv === 2 ? ' font-semibold text-gray-800 text-sm' : (lv === 3 ? ' font-medium text-gray-700 text-xs' : ' font-normal text-gray-600 text-xs'));
         return '<button type="button" onclick="bkSelSec(' + i + ')" style="margin-left:' + ind + 'rem;width:calc(100% - ' + ind + 'rem)" class="bk-sec-item text-left rounded-lg px-2 py-1 bg-white border border-gray-200 hover:bg-amber-50 break-words' + clsLv + (i === bkSecSel ? ' bk-sec-on' : '') + '">' + (s.manual ? '🔖 ' : '') + '<span class="text-indigo-700 font-bold">' + bkEsc(num) + '</span>' + bkEsc(cleanLabel) + '</button>';
     }).join('');
-}
-function bkSetSecLang(l) { bkSecLang = l; bkRenderSecList(); }
+}function bkSetSecLang(l) { bkSecLang = l; bkRenderSecList(); }
 function bkToggleSec() {
     const p = document.getElementById('bk-sec-panel'); if (!p) return;
     p.classList.toggle('bk-col');
