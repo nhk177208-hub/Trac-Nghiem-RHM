@@ -9631,7 +9631,8 @@ async function bkExtract(doc, tok, onProg) {
         const isCap = t => capRe.test(String(t || '').trim());
         // 1) chữ nằm trong khung ảnh (hình, ảnh chụp, sơ đồ, biểu đồ, bảng kẻ…)
         if (R.skip_graphics_boxes !== false) {
-            (pg.boxes || []).forEach(b => body0.forEach(it => { if (it.x >= b.x0 - 2 && it.x <= b.x1 + 2 && it.y >= b.y0 - 2 && it.y <= b.y1 + 2) { const lw = (o0) => body0.filter(o => cid(o) === cid(o0) && Math.abs(o.y - o0.y) < 0.5 * o0.fh).reduce((n, o) => n + o.str.trim().split(/\s+/).filter(Boolean).length, 0); if ((b.r === 2 || b.r === 3) && (it.bd || lw(it) > 3)) return; excl.add(it); } }));
+            (pg.boxes || []).forEach(b => body0.forEach(it => { if (it.x >= b.x0 - 2 && it.x <= b.x1 + 2 && it.y >= b.y0 - 2 && it.y <= b.y1 + 2) { const lw = (o0) => body0.filter(o => cid(o) === cid(o0) && Math.abs(o.y - o0.y) < 0.5 * o0.fh).reduce((n, o) => n + o.str.trim().split(/\s+/).filter(Boolean).length, 0); if (b.r === 1) { const s0 = it.str.trim(); if (it.bd || it.fh > bodyFh * 1.04 || (s0.length >= 3 && s0 === s0.toUpperCase() && /[A-Z]/.test(s0)) || lw(it) >= 2) return; }
+if ((b.r === 2 || b.r === 3) && (it.bd || lw(it) > 3)) return; excl.add(it); } }));
         }
         // 2) chữ cỡ nhỏ hơn thân bài (chú thích, chữ trong bảng, chú thích cuối bảng)
         body0.forEach(it => { if (it.fh < minFhRatio * bodyFh) excl.add(it); });
