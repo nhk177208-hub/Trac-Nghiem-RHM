@@ -56,6 +56,15 @@
             -webkit-overflow-scrolling: touch;
         }
 
+        /* v2 — làm to 50% các cửa sổ: khóa học, chủ đề, đã lưu, đã chặn, đề xuất câu hỏi, góp ý/liên hệ.
+           Dùng zoom 1.5 kèm giới hạn theo màn hình, giống các cửa sổ ôn tập đang có: không tràn khỏi màn hình */
+        #monhoc-detail-modal > div, #topic-modal > div, #bookmarked-modal > div, #blocked-modal > div,
+        #suggest-question-modal > div, #app-feedback-modal > div {
+            zoom: 1.5;
+            max-width: calc(95vw / 1.5);
+            max-height: calc(88vh / 1.5);
+            overflow-y: auto;
+        }
         .option-btn { transition: all 0.2s ease-in-out; }
         .option-btn:hover:not(:disabled) { transform: scale(1.01); }
         .correct { background-color: #22c55e !important; color: white !important; border-color: #22c55e !important; }
@@ -9313,7 +9322,7 @@ function bkPageData(pg) {
 // Bước 2: tìm rãnh dọc giữa các cột (2 hoặc 3 cột) CHỈ dựa trên các dòng chữ dài cỡ một cột → bảng, nhãn hình, tiêu đề, chú thích không làm hỏng việc dò rãnh;
 //         mỗi cột phải có đủ dòng chữ thật, đủ rộng và các cột trùng nhau theo chiều dọc.
 // Bước 3: bảng nhiều ô trải qua các cột và dải chữ rộng = một khối liền (kéo xuyên ô được); dải nhiều cột = lần lượt từng cột (trái → phải) → kéo trong cột này không băng sang cột kia.
-function bkOrderItems(items, W) {
+function bkOrderItems(items, W, forceGts) {
     const hz = [], other = [], wsp = [];
     items.forEach(d => {
         if (!(Math.abs(Math.sin(d.angle)) < 0.05 && Math.cos(d.angle) > 0)) other.push(d);
@@ -9388,6 +9397,7 @@ function bkOrderItems(items, W) {
         if (!pick) { const one = cand.filter(g => valid([g])).sort((x, y) => Math.abs(x.gc - W / 2) - Math.abs(y.gc - W / 2)); if (one.length) pick = [one[0]]; }
         if (pick) gts = pick;
     }
+    if (forceGts && forceGts.length) gts = forceGts;
     if (gts.length) {
         const colOf = s => { const m = (s.x0 + s.x1) / 2; let c = 0; while (c < gts.length && m >= gts[c].gc) c++; return c; };
         // 2b) BẢNG nhiều ô trải qua các cột: dòng có từ 3 mảnh trở lên (ít nhất 2 ô ngắn) nằm ở nhiều cột + các dòng nối tiếp thẳng hàng với cột ô.
@@ -9428,6 +9438,7 @@ function bkOrderItems(items, W) {
     other.forEach(d => { d.blk = nb; out.push(d); });
     if (other.length) nb++;
     wsp.forEach(d => { d.blk = -1; out.push(d); });
+    out.gts = gts;
     return out;
 }
 /* ---------- lớp chữ trong suốt ---------- */
@@ -10143,17 +10154,29 @@ function bkHlBox(d, data, ex) {
 }
 /* Thứ tự đọc + khối chọn chữ theo bố cục AI: mỗi (dải, cột) là một khối; chữ ngoài cột gom thành khối riêng ở cuối */
 function bkOrderByLayout(items, W, H, L) {
-    const map = new Map(), rest = [], other = [], wsp = [], out = [];
+    /* v2: dải do AI vẽ chỉ quyết định khối theo chiều dọc. Thứ tự trong mỗi dải do bkOrderItems quyết định, dùng gutter của cả trang,
+       nên cột trái đọc xong mới sang cột phải, chữ trong hộp không bị dồn xuống cuối, và bôi đen không còn bị sót */
+    const other = [], rest = [], wsp = [], out = [];
+    const zoneIdx = fy => { fy = Math.max(0, Math.min(0.9999, fy)); for (let i = 0; i < L.Z.length; i++) if (fy >= L.Z[i].y0 && fy < L.Z[i].y1) return i; return 0; };
+    const zones = new Map();
     items.forEach(d => {
         if (d.ws) { wsp.push(d); return; }
         if (!(Math.abs(Math.sin(d.angle)) < 0.05 && Math.cos(d.angle) > 0)) { other.push(d); return; }
-        const cell = bkLayoutCell((d.x + d.w / 2) / W, d.y / H, L);
-        if (!cell) { rest.push(d); return; }
-        const k = cell.z * 16 + cell.c;
-        if (!map.has(k)) map.set(k, []);
-        map.get(k).push(d);
+        const fy = d.y / H;
+        if (fy < L.top || fy > L.bottom) { rest.push(d); return; }
+        const k = zoneIdx(fy);
+        if (!zones.has(k)) zones.set(k, []);
+        zones.get(k).push(d);
     });
+    const pageGts = bkOrderItems(items, W).gts || [];
     let nb = 0;
+    [...zones.keys()].sort((a, b) => a - b).forEach(k => {
+        const sub = bkOrderItems(zones.get(k), W, pageGts);
+        let mx = -1;
+        sub.forEach(d => { if (d.blk > mx) mx = d.blk; });
+        sub.forEach(d => { d.blk = nb + d.blk; out.push(d); });
+        nb += mx + 1;
+    });
     const lineSort = arr => {
         arr = arr.slice().sort((a, b) => a.y - b.y);
         const res = []; let g = [], gy = 0;
@@ -10163,7 +10186,6 @@ function bkOrderByLayout(items, W, H, L) {
         return res;
     };
     const emit = arr => { if (!arr.length) return; const k = nb++; lineSort(arr).forEach(d => { d.blk = k; out.push(d); }); };
-    [...map.keys()].sort((a, b) => a - b).forEach(k => emit(map.get(k)));
     emit(rest); emit(other);
     wsp.forEach(d => { d.blk = -1; out.push(d); });
     return out;
