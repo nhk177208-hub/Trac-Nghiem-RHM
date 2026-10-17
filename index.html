@@ -10564,7 +10564,9 @@ function bkVisSystem() {
         + 'TIÊU ĐỀ LÀ TÊN NGẮN, KHÔNG PHẢI CÂU VĂN (RẤT QUAN TRỌNG): mỗi phần tử trong "headings" chỉ là TÊN của mục, TỐI ĐA 12 từ / 90 ký tự, viết hoa kiểu tiêu đề, KHÔNG có dấu chấm kết câu. TUYỆT ĐỐI KHÔNG lấy: câu văn hoặc đoạn văn trong thân bài, dòng đầu / dòng cuối của một đoạn, câu mở đầu hay câu kết luận, mảnh câu bị đứt (mở đầu bằng chữ thường, kết thúc bằng "of / and / to / the / with / in / for / by / that / which…" hoặc bằng dấu phẩy), câu có trích dẫn "(Fig. 17.30B)" / "(Hình 3.1)" trong đó. MỘT đoạn văn chỉ có thể chứa TỐI ĐA MỘT tiêu đề (tiêu đề in đậm mở đầu đoạn, hoặc tiêu đề đứng riêng trên đoạn); KHÔNG được biến nhiều câu trong cùng một đoạn thành nhiều mục. Nếu chữ không phải là tên mục thì đừng ghi vào "headings".\n'
         + 'BẮT ĐỦ MỌI TIÊU ĐỀ (TUYỆT ĐỐI KHÔNG BỎ SÓT): nhận cả tiêu đề CHỈ MỘT TỪ (vd "Hue", "Value", "Gloss", "Enamel"); tiêu đề in MÀU (cam, xanh…) dù không in đậm; tiêu đề có NỀN XÁM / thanh kẻ ngang chạy hết cột; tiêu đề phụ nhỏ. Với tiêu đề chạy cùng dòng với đoạn văn (vd "Hue enables the distinction…") CHỈ ghi phần tiêu đề (vd "Hue"), tuyệt đối không ghi cả câu. Nếu một mục có nhiều tiêu đề con thì phải liệt kê HẾT các tiêu đề con đó.\n'
         + 'KHÔNG NHẦM CHÚ THÍCH THÀNH TIÊU ĐỀ: chữ bắt đầu bằng "Figure / Fig. / Table / Tbl. / Box / Chart / Photo / Graph / Hình / Bảng / Biểu / Sơ đồ / Ảnh", mô tả hình dạng "(A) … (B) …", chữ nằm TRONG hình, nhãn trên hình, dòng nguồn / trích dẫn (http://…) là CHÚ THÍCH — KHÔNG đưa vào "headings" dù nó in đậm hay to hơn chữ thường, mà đưa vào "skip".\n'
-        + 'TIÊU ĐỀ KHÔNG BAO GIỜ NẰM TRONG "skip": nền xám, băng màu, khung kẻ hay hộp bao quanh một TIÊU ĐỀ chỉ là cách trình bày của tiêu đề đó — "skip" CHỈ dành cho hình, chú thích hình, bảng và khối chữ rời khỏi mạch văn (Box, sidebar, Clinical Notes…); TUYỆT ĐỐI không đưa tiêu đề mục vào "skip" và không bỏ sót nó trong "headings".\n\n'
+        + 'TIÊU ĐỀ KHÔNG BAO GIỜ NẰM TRONG "skip": nền xám, băng màu, khung kẻ hay hộp bao quanh một TIÊU ĐỀ chỉ là cách trình bày của tiêu đề đó — "skip" CHỈ dành cho hình, chú thích hình, bảng và khối chữ rời khỏi mạch văn (Box, sidebar, Clinical Notes…); TUYỆT ĐỐI không đưa tiêu đề mục vào "skip" và không bỏ sót nó trong "headings".\n'
+        + 'TRANG MỤC LỤC IN SẴN Ở ĐẦU CHƯƠNG (thường có tiêu đề "CHAPTER CONTENTS" / "Nội dung chương", mỗi dòng là "Tên mục … số trang"): đây là MỤC LỤC, KHÔNG phải tiêu đề mục — TUYỆT ĐỐI không đưa các dòng đó vào "headings" (chúng chỉ gây mục lục ảo và neo sai vị trí); hãy đưa cả khối mục lục in sẵn đó vào "skip" với kind "outline". Tiêu đề THẬT của chương là chữ in đậm / có nền ở phần nội dung, KHÔNG phải dòng có kèm số trang trong trang mục lục.\n'
+        + 'KHÔNG LẤY DẢI CHẠY ĐẦU / CHÂN TRANG: "Chapter 2 Periodontal disease", tên sách, số trang, chữ ở mép trên/dưới mỗi trang KHÔNG phải tiêu đề mục (dù nó in đậm và có nền) — bỏ qua hoàn toàn; tên chương chỉ xuất hiện một lần dưới dạng tiêu đề lớn ở đầu chương và cũng KHÔNG ghi vào "headings".\n\n'
         + 'PHÂN CẤP ("level" từ 1 đến 10): level 1 = mục lớn nhất trong chương (ngay dưới tên chương), level 2 = mục con của nó, v.v. Xác định cấp theo thứ bậc hình thức (cỡ chữ lớn → nhỏ, đậm → thường, số thứ tự lồng nhau); cùng kiểu trình bày thì cùng cấp xuyên suốt chương; cấp mới chỉ được lớn hơn cấp liền trước tối đa 1 (không nhảy cấp).\n\n'
         + 'TỌA ĐỘ: mọi box là [ymin, xmin, ymax, xmax] theo thang 0–1000 trên chính ảnh trang đó (0,0 là góc trên trái). Box tiêu đề phải ôm sát chữ của tiêu đề (gồm cả số thứ tự đầu dòng).\n'
         + 'BỐ CỤC: "zones" chia trang thành các dải liên tiếp từ trên xuống phủ kín 0–1000 theo chiều dọc; mỗi dải liệt kê các cột chữ [xmin, xmax] từ trái sang phải, mỗi cột phải phủ trọn bề ngang chữ của cột (kể cả phần thụt đầu dòng, số thứ tự). Trang một cột chỉ cần một dải một cột.\n'
@@ -10663,8 +10665,28 @@ function bkLooksProse(t) {
     if (words.length >= 6 && /\.\s+\S/.test(t)) return true;                      // nhiều câu trong một mục → đoạn văn
     return false;
 }
-/* Mục lục RÁC: chú thích hình/bảng hoặc câu văn bị cắt */
-function bkLooksBadHead(t) { return bkLooksCaption(t) || bkLooksProse(t); }
+/* Dòng chạy đầu / chân trang (running head) và các từ khung KHÔNG phải tiêu đề mục:
+   "Chapter 2 Periodontal disease", "CHAPTER CONTENTS", "Nội dung chương", số trang… */
+let bkRunSet = new Set();
+function bkIsRunHead(t) {
+    const n = bkNormStr(t);
+    if (!n) return true;
+    const plain = n.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\u0111/g, 'd');
+    if (/^(?:chapter|chuong|part|phan|unit|section|contents|chaptercontents|tableofcontents|noidung|noidungchuong|mucluc|index)$/.test(plain)) return true;
+    if (bkRunSet && bkRunSet.size) {
+        if (bkRunSet.has(n)) return true;
+        /* Tiêu đề ghép TOÀN BẰNG các mảnh chữ của dải chạy đầu/chân trang
+           (vd "Chapter" + "2" + "Periodontal disease") ⇒ không phải tiêu đề mục. */
+        let rest = n, hit = false;
+        for (const s of bkRunSet) {
+            if (s.length >= 3 && rest.indexOf(s) >= 0) { rest = rest.split(s).join(''); hit = true; }
+        }
+        if (hit && rest.length <= 3) return true;
+    }
+    return false;
+}
+/* Mục lục RÁC: chú thích hình/bảng, câu văn bị cắt, hoặc dòng chạy đầu/chân trang */
+function bkLooksBadHead(t) { return bkLooksCaption(t) || bkLooksProse(t) || bkIsRunHead(t); }
 /* Chuỗi có dáng một TIÊU ĐỀ mục thật (dùng khi app tự bù tiêu đề AI bỏ sót) */
 function bkLooksHeadingText(t) {
     t = String(t || '').replace(/\s+/g, ' ').trim();
@@ -26541,12 +26563,18 @@ body {
             var cnt = {};
             raw.forEach(function (pg) { var seen = {}; pg.its.forEach(function (it) { var k = key(pg, it); if (k && !seen[k]) { seen[k] = 1; cnt[k] = (cnt[k] || 0) + 1; } }); });
             var thr = Math.max(2, Math.ceil(raw.length * 0.3));
+            var runs = new Set();
             raw.forEach(function (pg) {
                 pg.its.forEach(function (it) {
                     var z = bkZone(it, pg), k = key(pg, it);
-                    it.hf = !!z && ((cnt[k] || 0) >= thr || /^\s*\d{1,4}\s*$/.test(it.str));
+                    var rep = !!z && (cnt[k] || 0) >= thr;
+                    it.hf = !!z && (rep || /^\s*\d{1,4}\s*$/.test(it.str));
+                    /* Ghi nhớ chữ của dải chạy đầu / chân trang để chặn "mục lục ảo" (vd "Chapter",
+                       "Periodontal disease") do AI trả về như một tiêu đề. */
+                    if (rep) { var n = bkNormStr(it.str); if (n.length >= 3) runs.add(n); }
                 });
             });
+            bkRunSet = runs;
             doc._hfDone = true;
         }
 
@@ -26585,33 +26613,41 @@ body {
                hộp nền (r=1) nuốt mất. Các dòng như vậy phải ĐƯỢC GIỮ trong chữ chương, nếu không thì
                mục lục thiếu tiêu đề và highlight của mục trước trùm luôn qua tiêu đề đó. */
             var keepIt = new Set();
+            var bandOf = new Map(), bandGid = 0;   // nhóm các DÒNG của CÙNG một tiêu đề nằm trong một băng/nền
             var lineHead = function (ins) {
                 if (!ins.length) return false;
-                var ys = {}, lines = 0, head = true;
-                ins.forEach(function (it) {
-                    var k = Math.round(it.y * 2);
-                    if (!ys[k]) { ys[k] = 1; lines++; }
-                    if (!(it.bd || it.fh >= bodyFh * 1.1)) head = false;
+                /* Gom theo DÒNG (y gần nhau) rồi kiểm tra: MỌI dòng đều đậm / to hơn thân bài, không phải
+                   hàng ô của bảng, và cả khối chữ có dáng một tiêu đề (tiêu đề có thể dài 1–3 dòng). */
+                var rows = [];
+                ins.slice().sort(function (a, b) { return b.y - a.y; }).forEach(function (it) {
+                    var r = rows[rows.length - 1];
+                    if (r && Math.abs(r.y - it.y) <= 0.6 * Math.max(it.fh, 1)) r.items.push(it);
+                    else rows.push({ y: it.y, items: [it] });
                 });
-                if (lines !== 1 || !head) return false;
-                /* Nhiều khoảng trống lớn giữa các mảnh chữ trên cùng một dòng ⇒ HÀNG Ô CỦA BẢNG,
-                   không phải tiêu đề (tiêu đề là một cụm chữ liền mạch). */
-                var xs = ins.slice().sort(function (a, b) { return a.x - b.x; }), gaps = 0;
-                for (var gi = 1; gi < xs.length; gi++) {
-                    if (xs[gi].x - (xs[gi - 1].x + (xs[gi - 1].w || 0)) > 1.4 * Math.max(xs[gi].fh, 1)) gaps++;
+                if (rows.length > 3) return false;                          // 4 dòng trở lên: hộp văn bản / sidebar
+                var txt = [];
+                for (var ri = 0; ri < rows.length; ri++) {
+                    var arr = rows[ri].items.slice().sort(function (a, b) { return a.x - b.x; });
+                    var gaps = 0, lineTxt = '';
+                    for (var ai = 0; ai < arr.length; ai++) {
+                        var it = arr[ai];
+                        if (!(it.bd || it.fh >= bodyFh * 1.1)) return false; // có chữ thường trong khối ⇒ không phải tiêu đề
+                        if (ai && it.x - (arr[ai - 1].x + (arr[ai - 1].w || 0)) > 1.4 * Math.max(it.fh, 1)) gaps++;
+                        lineTxt += (lineTxt ? ' ' : '') + it.str;
+                    }
+                    if (gaps >= 2) return false;                            // nhiều khoảng trống lớn ⇒ hàng ô của bảng
+                    txt.push(lineTxt.replace(/\s+/g, ' ').trim());
                 }
-                if (gaps >= 2) return false;
-                var s = ins.map(function (it) { return it.str; }).join(' ').replace(/\s+/g, ' ').trim();
-                return bkLooksHeadingText(s);
+                return bkLooksHeadingText(txt.join(' ').replace(/\s+/g, ' ').trim());
             };
             if (Lay && Lay.skip && Lay.skip.length) {
                 Lay.skip.forEach(function (sk) {
-                    if ((sk[2] - sk[0]) < 0.35 || (sk[3] - sk[1]) > 0.08) return;   // quá hẹp / quá cao: bảng, hộp nhiều dòng
+                    if ((sk[2] - sk[0]) < 0.35 || (sk[3] - sk[1]) > 0.1) return;   // quá hẹp / quá cao: bảng, hộp nhiều dòng
                     var ins = body0.filter(function (it) {
                         var fx = (it.x + (it.w || 0) / 2) / W, fy = topY(it) / H;
                         return fx >= sk[0] - 0.012 && fx <= sk[2] + 0.012 && fy >= sk[1] - 0.012 && fy <= sk[3] + 0.012;
                     });
-                    if (lineHead(ins)) ins.forEach(function (it) { keepIt.add(it); });
+                    if (lineHead(ins)) { bandGid++; ins.forEach(function (it) { keepIt.add(it); bandOf.set(it.idx, bandGid); }); }
                 });
             }
 
@@ -26630,7 +26666,7 @@ body {
                     var inTbl = (pg.boxes || []).some(function (o) {
                         return (o.r === 2 || o.r === 3) && o.x0 < b.x1 && b.x0 < o.x1 && o.y0 < b.y1 && b.y0 < o.y1;
                     });
-                    if (!inTbl && lineHead(ins0)) return;
+                    if (!inTbl && lineHead(ins0)) { bandGid++; ins0.forEach(function (it) { bandOf.set(it.idx, bandGid); }); return; }
                     ins0.forEach(function (it) { excl.add(it); });
                     return;
                 }
@@ -26659,6 +26695,63 @@ body {
                     }
                 }
             });
+
+            /* TRANG MỤC LỤC IN SẴN (ở đầu chương): chuỗi dòng "Tên mục … 24" với số trang TĂNG DẦN.
+               Đây là MỤC LỤC, không phải tiêu đề: nếu để nguyên thì vừa bị quét thành phân mục ảo,
+               vừa làm tiêu đề thật (trùng tên) bị neo sai vào trang mục lục → highlight băng qua đoạn khác. */
+            (function () {
+                var rows = [];
+                body0.forEach(function (it) {
+                    if (excl.has(it) || !it.str.trim()) return;
+                    var r = rows.filter(function (x) { return Math.abs(x.y - it.y) <= 0.6 * Math.max(it.fh, 1); })[0];
+                    if (r) r.items.push(it); else rows.push({ y: it.y, items: [it] });
+                });
+                var found = [];
+                rows.forEach(function (r) {
+                    var bits = r.items.slice().sort(function (a, b) { return a.x - b.x; })
+                        .map(function (x) { return x.str.replace(/\s+/g, ' ').trim(); }).filter(Boolean);
+                    var num = null, numAt = -1;
+                    for (var bi = bits.length - 1; bi >= 0; bi--) {
+                        if (/^\d{1,3}$/.test(bits[bi])) { num = +bits[bi]; numAt = bi; break; }
+                    }
+                    var title = (numAt >= 0 ? bits.slice(0, numAt) : bits).join(' ').replace(/\s+/g, ' ').trim();
+                    if (num === null) {   // số trang nằm ngay cuối dòng chữ, cách nhau bằng dấu chấm / gạch / khoảng trắng
+                        var m = /^(.*[A-Za-zÀ-ỹ\)\]])\s*[.\u00B7\u2026\-\s]{2,}(\d{1,3})$/.exec(title);
+                        if (!m) m = /^(.*[A-Za-zÀ-ỹ\)\]])\s+(\d{1,3})$/.exec(title);
+                        if (!m || m[1].trim().length < 12) return;
+                        title = m[1]; num = +m[2];
+                    }
+                    title = title.replace(/[.\u00B7\u2026\-]+$/, '').trim();
+                    if (title.length < 4 || title.length > 78) return;
+                    if (!/[A-Za-zÀ-ỹ]{3}/.test(title)) return;
+                    if (!(num >= 1 && num <= 999)) return;
+                    found.push({ y: r.y, num: num, items: r.items });
+                });
+                if (found.length < 6) return;                       // quá thưa ⇒ không phải mục lục in sẵn
+                found.sort(function (a, b) { return b.y - a.y; });   // theo dòng trên → dưới
+                var inc = 0;
+                for (var fi = 1; fi < found.length; fi++) if (found[fi].num >= found[fi - 1].num) inc++;
+                if (inc < Math.ceil((found.length - 1) * 0.7)) return;   // số trang phải tăng dần
+                var bolds = found.filter(function (f) {
+                    return f.items.some(function (x) { return x.bd || x.fh >= bodyFh * 1.02 || /^[A-ZÀ-Ỹ]/.test(x.str.trim()); });
+                }).length;
+                if (bolds < Math.ceil(found.length * 0.4)) return;
+                /* Bỏ TOÀN BỘ dòng trong dải mục lục (kể cả dòng không có số trang), chỉ trong cùng lề trái,
+                   để không ăn sang cột chữ khác nằm ngang hàng. */
+                var yMin = 1e9, yMax = -1e9, xMin = 1e9, xMax = -1e9;
+                found.forEach(function (f) {
+                    yMin = Math.min(yMin, f.y); yMax = Math.max(yMax, f.y);
+                    f.items.forEach(function (x) { xMin = Math.min(xMin, x.x); xMax = Math.max(xMax, x.x + (x.w || 0)); });
+                });
+                var lefts = {};
+                found.forEach(function (f) { f.items.forEach(function (x) { lefts[Math.round(x.x / 8)] = 1; }); });
+                body0.forEach(function (it) {
+                    if (excl.has(it) || !it.str.trim()) return;
+                    if (it.y < yMin - 0.8 * bodyFh || it.y > yMax + 0.8 * bodyFh) return;
+                    if (!lefts[Math.round(it.x / 8)] && it.x > xMin + 12) return;   // khác lề trái ⇒ cột chữ khác
+                    excl.add(it);
+                });
+            })();
 
             var isCap = function (t) { return /^(table|tbl\.?|fig\.?|figure|box|hình|bảng|hộp|sơ đồ|ảnh)\s*\d/i.test(t.trim()); };
             body0.forEach(function (it) { if (it.fh < 0.85 * bodyFh || !it.str.trim()) excl.add(it); });
@@ -26701,7 +26794,8 @@ body {
                    dòng không phải tiêu đề vẫn bị chặn bởi bkLooksHeadingText ở bước bù tiêu đề. */
                 if (allBold && lineStr.length >= 2 && lineStr.length <= 110 && !/[.;:]$/.test(lineStr) &&
                     (bigFh >= bodyFh * 1.08 || /^(?:[IVXLC]+\.|[A-Z]\.|\d+(?:\.\d+)*\.?)\s+\S/.test(lineStr) || /^[A-Z][A-Za-z0-9\s,\-–—()\/]+$/.test(lineStr)) &&
-                    !/^(clinical\s+notes?|table|fig\.?|figure|box)\b/i.test(lineStr)) {
+                    !/^(clinical\s+notes?|table|fig\.?|figure|box)\b/i.test(lineStr) &&
+                    !bkLooksCaption(lineStr) && !bkIsRunHead(lineStr)) {
                     headCands.push({ s: first._gs, e: last._ge, text: lineStr, fh: bigFh, x: first.x, y: first.y, blk: first.blk || 0 });
                 }
                 lineBuf = [];
@@ -26709,7 +26803,13 @@ body {
 
             seq.forEach(function (it) {
                 if (prev) {
-                    if ((prev.blk || 0) !== (it.blk || 0) || Math.abs(it.y - prev.y) > Math.max(it.fh, prev.fh) * 0.5) {
+                    var sameBand = bandOf.get(it.idx) && bandOf.get(it.idx) === bandOf.get(prev.idx);
+                    if (sameBand) {
+                        /* Hai DÒNG của CÙNG một tiêu đề (nằm trong cùng băng/nền) ⇒ nối liền một dòng,
+                           không xuống dòng, để chỉ thành MỘT mục lục. */
+                        var sameRow = Math.abs(it.y - prev.y) <= Math.max(it.fh, prev.fh) * 0.5;
+                        if (!sameRow || it.x - (prev.x + prev.w) > prev.fh * 0.15) txt += ' ';
+                    } else if ((prev.blk || 0) !== (it.blk || 0) || Math.abs(it.y - prev.y) > Math.max(it.fh, prev.fh) * 0.5) {
                         flushLineCand();
                         txt += '\n';
                     } else if (it.x - (prev.x + prev.w) > prev.fh * 0.15) {
@@ -26777,8 +26877,15 @@ body {
             var s;
             if (boxS !== null && pex === ex) s = hits.slice().sort(function (a, b) { return Math.abs(a - boxS) - Math.abs(b - boxS); })[0];
             else {
-                var ls = hits.find(function (x) { return bkLineStart(bkText, x); });
-                s = ls !== undefined ? ls : hits[0];
+                /* Ưu tiên khớp ở ĐẦU DÒNG (tiêu đề thật nằm đầu dòng), rồi mới tới đầu câu;
+                   khớp giữa câu chỉ là chữ thân bài trùng tên → KHÔNG neo mục lục vào đó. */
+                var atLine = hits.filter(function (x) { return /\n\s*$/.test(bkText.slice(Math.max(0, x - 8), x)); });
+                if (atLine.length) s = atLine[0];
+                else {
+                    var ls = hits.filter(function (x) { return bkLineStart(bkText, x); })[0];
+                    if (ls === undefined) return null;
+                    s = ls;
+                }
             }
             var pre = bkText.slice(Math.max(pex.gs, s - 14), s), m = /(?:^|\n)\s*((?:\d+(?:\.\d+)*|[IVXLC]+|[A-Za-z])[.)]?\s*)$/.exec(pre);
             if (m) s -= m[1].length;
