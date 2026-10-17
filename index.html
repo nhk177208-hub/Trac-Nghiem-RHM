@@ -21,13 +21,13 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Trắc Nghiệm RHM">
-    <title>Trắc Nghiệm RHM & Video Bài Giảng</title>
-    <meta property="og:title" content="Trắc Nghiệm RHM & Video Bài Giảng">
-    <meta property="og:description" content="Ôn tập theo môn học, chuyên đề, video bài giảng và thi thử trắc nghiệm dễ dàng.">
+    <title>Trắc Nghiệm RHM</title>
+    <meta property="og:title" content="Trắc Nghiệm RHM">
+    <meta property="og:description" content="Ôn tập theo môn học, chuyên đề và thi thử trắc nghiệm dễ dàng.">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Trắc Nghiệm RHM & Video Bài Giảng">
-    <meta property="twitter:description" content="Ôn tập theo môn học, chuyên đề, video bài giảng và thi thử trắc nghiệm dễ dàng.">
+    <meta property="twitter:description" content="Ôn tập theo môn học, chuyên đề và thi thử trắc nghiệm dễ dàng.">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.21/mammoth.browser.min.js"></script>
     <!-- Thư viện nhúng YouTube IFrame Player API -->
@@ -10817,7 +10817,7 @@ async function bkTocRun(tok, my) {   // chụp toàn bộ chương → gửi AI 
     const N = bkDoc.numPages, nums = [];
     for (let p = 1; p <= N; p++) nums.push(p);
     bkTocSay('Đang chụp toàn bộ ' + N + ' trang…');
-    const shots = await bkShotPages(nums, tok, (k, n) => bkTocSay('Đang chụp trang ' + k + '/' + n));
+    const shots = await bkShotPages(nums, tok, (k, n) => bkTocSay('Đang chuẩn bị ' + k + '/' + n));
     if (!shots || tok !== bkViewTok || my !== bkDeepTok) return false;
     const wins = bkPlanWin(shots);   // chia đợt ảnh (gối nhau 2 trang để ráp đoạn/mục nằm sát ranh đợt)
     for (let w = 0; w < wins.length; w++) {
