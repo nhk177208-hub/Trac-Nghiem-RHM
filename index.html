@@ -10485,6 +10485,14 @@ function bkNormMap(t) {
     for (let i = 0; i < t.length; i++) { const c = bkNormStr(t[i]); if (c) { n += c; for (let k = 0; k < c.length; k++) map.push(i); } }
     return { n, map };
 }
+/* Chỗ khớp tiêu đề phải bắt đầu và (với tiêu đề ngắn) kết thúc ở ranh giới từ: chuỗi đã bỏ khoảng trắng nên "References" từng khớp nhầm vào "reference shade tab" giữa đoạn */
+function bkHitOk(slice, pn, p, klen) {
+    const al = c => !!c && /[A-Za-z0-9\u00C0-\u1EF9]/.test(c);
+    const r0 = pn.map[p], r1 = pn.map[p + klen - 1];
+    if (r0 > 0 && al(slice.charAt(r0 - 1))) return false;
+    if (klen < 26 && al(slice.charAt(r1 + 1))) return false;
+    return true;
+}
 function bkPageOfPos(pos) { let ex = bkPages[0]; bkPages.forEach(p => { if (p.gs <= pos) ex = p; }); return ex ? ex.num : 1; }
 
 /* Chụp trang: vẽ ra canvas rồi nén JPEG, thu nhỏ theo số trang (nhiều trang → nhỏ hơn) nhưng vẫn đủ nét để AI đọc bố cục */
@@ -10616,9 +10624,9 @@ async function bkLocateHead(h) {
     }
     const search = (pex) => {
         if (!pex || key.length < 4) return null;
-        const pn = bkNormMap(bkText.slice(pex.gs, pex.ge)), hits = [];
+        const SLC = bkText.slice(pex.gs, pex.ge), pn = bkNormMap(SLC), hits = [];
         let p = pn.n.indexOf(key);
-        while (p >= 0 && hits.length < 30) { hits.push(pex.gs + pn.map[p]); p = pn.n.indexOf(key, p + 1); }
+        while (p >= 0 && hits.length < 30) { if (bkHitOk(SLC, pn, p, key.length)) hits.push(pex.gs + pn.map[p]); p = pn.n.indexOf(key, p + 1); }
         if (!hits.length) return null;
         let s;
         if (boxS !== null && pex === ex) s = hits.slice().sort((a, b) => Math.abs(a - boxS) - Math.abs(b - boxS))[0];
@@ -10717,7 +10725,7 @@ async function bkRebuildSecs(tok) {   // định vị lại mọi tiêu đề tr
         if (tok !== bkViewTok) return false;
         const h = bkHeads[i];
         let s = null; try { s = await bkLocateHead(h); } catch (e) { s = null; }
-        if (s !== null && s !== undefined) found.push({ title: bkFixVi(h.vi, h.en), en: h.en, num: '', lvl: h.lvl || 1, s: Math.max(0, s), manual: false, intro: false, e: 0, text: '' });
+        if (s !== null && s !== undefined) found.push({ title: bkFixVi(h.vi, h.en), en: h.en, num: '', lvl: h.lvl || 1, s: Math.max(0, s), manual: false, intro: false, e: 0, text: '', hd: h });
         if (i % 4 === 3) await bkYield();
     }
     const manual = bkSecs.filter(x => x.manual && x.s >= 0);
@@ -10772,8 +10780,9 @@ function bkScanSay(m) {   // tiến độ hiện ngay trên nút; chưa có mụ
 }
 /* AI chuẩn hóa cấp bậc cả chương: cùng kiểu số / cùng kiểu trình bày → cùng cấp, không nhảy cấp (các lô ảnh được đọc riêng nên cần bước này) */
 async function bkNormLevels(my, tok) {
-    if (bkHeads.length < 3) return false;
-    const rows = bkHeads.map((h, i) => ({ i: i, p: h.page, n: h.pn || '', f: h.fmt || '', t: String(h.en || '').slice(0, 90), l: h.lvl || 1 }));
+    const secs = bkSecs.filter(s => !s.manual && !s.intro && s.hd);   // bkSecs đã xếp theo vị trí chữ = đúng thứ tự đọc
+    if (secs.length < 3) return false;
+    const rows = secs.map((s, i) => ({ i: i, p: bkPageOfPos(s.s), n: s.hd.pn || '', f: s.hd.fmt || '', t: String(s.en || '').slice(0, 90), l: s.lvl || 1 }));
     const sys = 'Bạn là chuyên gia dàn trang sách giáo khoa. Dưới đây là danh sách tiêu đề của MỘT chương, theo thứ tự đọc, mỗi dòng: i = số thứ tự, p = trang, n = số thứ tự in sẵn, f = kiểu trình bày, t = chữ tiêu đề, l = cấp do AI gán tạm (có thể lệch giữa các đoạn của chương). '
         + 'Hãy gán lại CẤP (1 đến 10) nhất quán cho toàn chương: 1 = mục lớn nhất, 2 = mục con của nó, 3 = con của cấp 2 … tối đa 10. Căn cứ: số thứ tự lồng nhau (1. → 1.1 → 1.1.1; I. → A. → 1. → a) → i)), kiểu trình bày (lớn / đậm → nhỏ / thường / nghiêng), và ngữ nghĩa (mục con thuộc mục cha liền trước). '
         + 'Cùng kiểu số + cùng kiểu trình bày thì cùng cấp xuyên suốt; cấp mới chỉ lớn hơn cấp liền trước tối đa 1 (không nhảy cấp); dòng đầu tiên là cấp 1. KHÔNG thêm, bớt, đổi thứ tự hay sửa chữ. '
@@ -10784,10 +10793,51 @@ async function bkNormLevels(my, tok) {
     if (my !== bkDeepTok || tok !== bkViewTok) return false;
     const arr = Array.isArray(r && r.levels) ? r.levels : (Array.isArray(r) ? r : []);
     const map = new Map();
-    arr.forEach(x => { const i = parseInt(x && x.i, 10), l = parseInt(x && x.level, 10); if (i >= 0 && i < bkHeads.length && l >= 1 && l <= 10) map.set(i, l); });
-    if (map.size < bkHeads.length * 0.8) return false;   // AI trả thiếu → giữ cấp cũ
-    bkHeads.forEach((h, i) => { if (map.has(i)) h.lvl = map.get(i); });
+    arr.forEach(x => { const i = parseInt(x && x.i, 10), l = parseInt(x && x.level, 10); if (i >= 0 && i < secs.length && l >= 1 && l <= 10) map.set(i, l); });
+    if (map.size < secs.length * 0.8) return false;   // AI trả thiếu → giữ cấp cũ
+    secs.forEach((s, i) => { if (map.has(i)) s.hd.lvl = map.get(i); });
     return true;
+}
+/* Bước duyệt ứng viên: app tìm những dòng chữ đậm / lớn đứng riêng mà mục lục AI chưa có (ví dụ tiêu đề ngắn "Hue" bị bỏ sót); AI nhìn lại ảnh trang và chỉ nhận cái nào thật sự là tiêu đề.
+   Mục bị bỏ sót chính là nguyên nhân vùng tô sáng của mục trước "băng qua" tiêu đề. Dòng AI không nhận thì không cắt gì cả (không còn cắt theo đoán). */
+async function bkRecallPass(shots, my, tok) {
+    const secS = bkSecs.map(x => x.s), items = [];
+    bkPages.forEach((pg, pi) => {
+        const vp = bkVP[pi] && bkVP[pi].vp1; if (!vp || !Array.isArray(pg.headCands)) return;
+        pg.headCands.forEach(c => {
+            if (secS.some(s => Math.abs(s - c.s) <= 45)) return;
+            const key = bkNormStr(c.text).slice(0, 40);
+            if (bkHeads.some(h => h.page === pg.num && bkNormStr(h.en).slice(0, 40) === key)) return;
+            items.push({ page: pg.num, text: String(c.text).slice(0, 110), y: Math.round(c.y / vp.height * 1000), x: Math.round(c.x / vp.width * 1000) });
+        });
+    });
+    if (!items.length) return 0;
+    items.forEach((it, i) => { it.id = i + 1; });
+    const shotBy = new Map(shots.map(s => [s.num, s]));
+    const pages = [...new Set(items.map(it => it.page))].sort((a, b) => a - b).filter(n => shotBy.has(n));
+    const toc = bkSecs.filter(s => !s.intro).slice(0, 150).map(s => '  '.repeat(Math.max(0, (s.lvl || 1) - 1)) + s.en + ' [cấp ' + (s.lvl || 1) + ', tr.' + bkPageOfPos(s.s) + ']').join('\n');
+    const sys = 'Bạn là chuyên gia dàn trang sách giáo khoa. Bạn được cho ẢNH CÁC TRANG của một chương (nhãn "TRANG n" đứng trước ảnh), MỤC LỤC đã lập (kèm cấp bậc) và DANH SÁCH DÒNG ỨNG VIÊN: những dòng chữ đậm / lớn đứng riêng một dòng mà mục lục chưa có (mỗi dòng có id, trang, vị trí gần đúng [y, x] thang 0–1000 trên ảnh trang). '
+        + 'Với MỖI ứng viên, nhìn ảnh để quyết định nó có phải TIÊU ĐỀ MỤC của mạch văn chính hay không. CHỈ nhận khi đúng là tiêu đề mục: đứng riêng, cỡ chữ / đậm / màu / nền tô nổi bật hơn chữ thường và mở đầu một nội dung mới, kể cả tiêu đề rất ngắn như "Hue", "Value", "Chroma", "Ceramic Based". '
+        + 'KHÔNG nhận: đầu / chân trang, số trang, tên chương, chú thích hình / bảng, chữ trong hình / bảng / khung rời mạch văn, chữ in đậm giữa câu hoặc đầu ý gạch đầu dòng, tiêu đề cột bảng, tên người, mục tài liệu tham khảo, Outline, Learning objectives. '
+        + 'Mỗi mục nhận phải có "level" từ 1 đến 10 khớp cấp bậc của mục lục hiện có (cùng kiểu trình bày thì cùng cấp; mục con của mục đứng trước thì lớn hơn cấp cha đúng 1) và bản dịch "vi" đúng thuật ngữ. Chỉ trả JSON: {"accept":[{"id":n,"level":2,"vi":"..."}]}; không nhận cái nào thì {"accept":[]}.' + (typeof BK_TR_GLOSS === 'string' ? BK_TR_GLOSS : '');
+    let added = 0;
+    for (let g = 0; g < pages.length; g += 8) {
+        const gp = pages.slice(g, g + 8), set = new Set(gp), its = items.filter(it => set.has(it.page));
+        const parts = [{ text: 'Chương: ' + bkCur.title + '\n\nMỤC LỤC ĐÃ LẬP:\n' + toc + '\n\nỨNG VIÊN (id | trang | [y, x] | chữ):\n' + its.map(it => it.id + ' | ' + it.page + ' | [' + it.y + ', ' + it.x + '] | ' + it.text).join('\n') }];
+        gp.forEach(n => { parts.push({ text: 'TRANG ' + n }); parts.push({ inlineData: { mimeType: 'image/jpeg', data: shotBy.get(n).b64 } }); });
+        parts.push({ text: 'Hãy trả JSON đúng định dạng đã nêu.' });
+        let r = null;
+        try { r = await bkVisCall(sys, parts); } catch (e) { if (e && (e.badKey || e.quota)) throw e; r = null; }
+        if (my !== bkDeepTok || tok !== bkViewTok) return -1;
+        const acc = Array.isArray(r && r.accept) ? r.accept : (Array.isArray(r) ? r : []);
+        acc.forEach(a => {
+            const it = its.find(x => x.id === parseInt(a && a.id, 10)); if (!it) return;
+            if (bkHeads.some(h => h.page === it.page && bkNormStr(h.en).slice(0, 40) === bkNormStr(it.text).slice(0, 40))) return;
+            bkHeads.push({ page: it.page, box: null, en: it.text, vi: String((a && a.vi) || '').replace(/\s+/g, ' ').trim().slice(0, 200), pn: '', fmt: '', lvl: Math.max(1, Math.min(10, parseInt(a && a.level, 10) || 2)) });
+            added++;
+        });
+    }
+    return added;
 }
 async function bkDetectChapter() {
     if (!bkDoc) return;
@@ -10824,6 +10874,10 @@ async function bkDetectChapter() {
             await bkBreathe(500);
         }
         if (got) {
+            bkScanSay('Soát tiêu đề bị sót');
+            const add = await bkRecallPass(shots, my, tok);
+            if (add < 0) return;
+            if (add > 0) { bkHeadsSave(); if ((await bkRebuildSecs(tok)) !== true) return; }
             bkScanSay('Chuẩn hóa cấp mục lục');
             if (await bkNormLevels(my, tok)) { bkHeadsSave(); if ((await bkRebuildSecs(tok)) !== true) return; }
         }
@@ -25891,7 +25945,7 @@ body {
                 const lineStr = lineBuf.map(x => x.str).join(' ').replace(/\s+/g, ' ').trim();
                 const allBold = lineBuf.every(x => x.bd || x.fh >= bodyFh * 1.12);
                 const bigFh = Math.max(...lineBuf.map(x => x.fh));
-                if (allBold && lineStr.length >= 4 && lineStr.length <= 110 && !/[.;:]$/.test(lineStr) &&
+                if (allBold && lineStr.length >= 3 && lineStr.length <= 110 && !/[.;:]$/.test(lineStr) &&
                     (bigFh >= bodyFh * 1.08 || /^(?:[IVXLC]+\.|[A-Z]\.|\d+(?:\.\d+)*\.?)\s+\S/.test(lineStr) || /^[A-Z][A-Za-z0-9\s,\-–—()\/]+$/.test(lineStr)) &&
                     !/^(clinical\s+notes?|table|fig\.?|figure|box)\b/i.test(lineStr)) {
                     headCands.push({ s: first._gs, e: last._ge, text: lineStr, fh: bigFh, x: first.x, y: first.y, blk: first.blk || 0 });
@@ -25950,9 +26004,9 @@ body {
 
         const search = pex => {
             if (!pex || key.length < 4) return null;
-            const pn = bkNormMap(bkText.slice(pex.gs, pex.ge)), hits = [];
+            const SLC = bkText.slice(pex.gs, pex.ge), pn = bkNormMap(SLC), hits = [];
             let p = pn.n.indexOf(key);
-            while (p >= 0 && hits.length < 30) { hits.push(pex.gs + pn.map[p]); p = pn.n.indexOf(key, p + 1); }
+            while (p >= 0 && hits.length < 30) { if (bkHitOk(SLC, pn, p, key.length)) hits.push(pex.gs + pn.map[p]); p = pn.n.indexOf(key, p + 1); }
             if (!hits.length) return null;
             let s;
             if (boxS !== null && pex === ex) s = hits.slice().sort((a, b) => Math.abs(a - boxS) - Math.abs(b - boxS))[0];
@@ -25969,37 +26023,7 @@ body {
         return bkPages[h.page - 1] ? bkPages[h.page - 1].gs : null;
     };
 
-    // 1.4. Sửa bkRebuildSecs: tự động chặn biên mục lục tại bất kỳ tiêu đề in đậm nào trên trang mà AI bỏ sót,
-    // giúp highlight của một mục không bao giờ băng xuyên qua tiêu đề kế tiếp
-    const origRebuildSecs = window.bkRebuildSecs;
-    window.bkRebuildSecs = async function (tok) {
-        const ok = await origRebuildSecs(tok);
-        if (!ok || tok !== bkViewTok) return ok;
-        const allCands = [];
-        bkPages.forEach(p => { if (p && Array.isArray(p.headCands)) allCands.push(...p.headCands); });
-        if (allCands.length && bkSecs.length) {
-            const secStarts = bkSecs.map(s => s.s);
-            bkSecs.forEach((sec, idx) => {
-                const nextSecS = idx + 1 < bkSecs.length ? bkSecs[idx + 1].s : bkText.length;
-                let cutE = nextSecS;
-                for (const hc of allCands) {
-                    if (hc.s <= sec.s + 65 || hc.s >= cutE) continue;
-                    if (secStarts.some(st => Math.abs(st - hc.s) <= 45)) continue;
-                    if (/^(?:[IVXLC]+\.|[1-9]\d*(?:\.\d+)*\b|advantages?\b|disadvantages?\b)/i.test(hc.text) || hc.fh >= (bkPages[0] ? bkPages[0].bfh * 1.15 : 11.5)) {
-                        cutE = hc.s;
-                        break;
-                    }
-                }
-                sec.e = cutE;
-                sec.text = bkText.slice(sec.s, sec.e).trim();
-            });
-            if (bkSecSel >= 0 && bkSecs[bkSecSel]) {
-                bkHl = { s: bkSecs[bkSecSel].s, e: bkSecs[bkSecSel].e };
-                bkApplyHlAll();
-            }
-        }
-        return true;
-    };
+    // (đã bỏ: cắt biên mục tại dòng đậm tự đoán. Thay bằng bước AI duyệt ứng viên tiêu đề trong bkDetectChapter)
 
     /* =========================================================================
        PHẦN 2: GIẢM LAG TUYỆT ĐỐI KHI AI ĐANG QUÉT ĐỂ ĐỌC SÁCH MƯỢT MÀ
@@ -26403,7 +26427,7 @@ body {
                 var lineStr = lineBuf.map(function (x) { return x.str; }).join(' ').replace(/\s+/g, ' ').trim();
                 var allBold = lineBuf.every(function (x) { return x.bd || x.fh >= bodyFh * 1.12; });
                 var bigFh = Math.max.apply(null, lineBuf.map(function (x) { return x.fh; }));
-                if (allBold && lineStr.length >= 4 && lineStr.length <= 110 && !/[.;:]$/.test(lineStr) &&
+                if (allBold && lineStr.length >= 3 && lineStr.length <= 110 && !/[.;:]$/.test(lineStr) &&
                     (bigFh >= bodyFh * 1.08 || /^(?:[IVXLC]+\.|[A-Z]\.|\d+(?:\.\d+)*\.?)\s+\S/.test(lineStr) || /^[A-Z][A-Za-z0-9\s,\-–—()\/]+$/.test(lineStr)) &&
                     !/^(clinical\s+notes?|table|fig\.?|figure|box)\b/i.test(lineStr)) {
                     headCands.push({ s: first._gs, e: last._ge, text: lineStr, fh: bigFh, x: first.x, y: first.y, blk: first.blk || 0 });
@@ -26473,9 +26497,9 @@ body {
         var search = function (pex) {
             if (!pex || key.length < 4) return null;
             var slice = bkText.slice(pex.gs, pex.ge);
-            var pn = getCachedPageNorm(slice), hits = [];
+            var pn = getCachedPageNorm(slice), hits = [], SLC = slice;
             var p = pn.n.indexOf(key);
-            while (p >= 0 && hits.length < 30) { hits.push(pex.gs + pn.map[p]); p = pn.n.indexOf(key, p + 1); }
+            while (p >= 0 && hits.length < 30) { if (bkHitOk(SLC, pn, p, key.length)) hits.push(pex.gs + pn.map[p]); p = pn.n.indexOf(key, p + 1); }
             if (!hits.length) return null;
             var s;
             if (boxS !== null && pex === ex) s = hits.slice().sort(function (a, b) { return Math.abs(a - boxS) - Math.abs(b - boxS); })[0];
