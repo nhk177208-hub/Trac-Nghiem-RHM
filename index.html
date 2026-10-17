@@ -26011,6 +26011,445 @@ body {
     document.addEventListener('click', attachNbObs, true);
 })();
 </script>
+<script id="rhm-patch-lenh-va-2">
+(function () {
+    'use strict';
+
+    /* =========================================================================
+       PHẦN 1: SỬA NÚT "DỊCH" KHI BÔI ĐEN LÀM BIẾN MẤT NGAY HÀNG NÚT NỔI
+       ========================================================================= */
+
+    var suppressSelBarUntil = 0;
+
+    function clearAllSelectionsAndBars() {
+        suppressSelBarUntil = Date.now() + 750;
+        // Ẩn ngay lập tức tất cả các thanh nút nổi ở mọi chế độ
+        ['bk-selbar', 'qz-selbar', 'nt-selbar', 'nt-rbar', 'nt-selbtn', 'nt-seldict'].forEach(function (id) {
+            var el = document.getElementById(id);
+            if (el) el.style.display = 'none';
+        });
+        var bub = document.getElementById('bk-nbub');
+        if (bub) {
+            var acts = bub.querySelector('.nb-acts');
+            if (acts) acts.style.display = 'none';
+        }
+        // Xóa vùng bôi đen tùy chỉnh của PDF (bkSel) và Selection của trình duyệt
+        // để bộ hẹn giờ later() trong PDF reader không bật thanh nút hiện lại khi mở Boxchat
+        try { if (typeof bkSelClear === 'function') bkSelClear(); } catch (e) {}
+        try {
+            var s = window.getSelection ? window.getSelection() : null;
+            if (s && s.removeAllRanges) s.removeAllRanges();
+        } catch (e) {}
+    }
+
+    // Chặn thanh nút tự bật lại trong thời gian vừa bấm nút
+    var barObs = new MutationObserver(function (muts) {
+        if (Date.now() < suppressSelBarUntil) {
+            muts.forEach(function (m) {
+                var el = m.target;
+                if (el && el.style && el.style.display !== 'none') {
+                    el.style.display = 'none';
+                }
+            });
+        }
+    });
+
+    function watchSelectionBars() {
+        ['bk-selbar', 'qz-selbar', 'nt-selbar', 'nt-rbar', 'nt-selbtn', 'nt-seldict'].forEach(function (id) {
+            var el = document.getElementById(id);
+            if (el && !el._va2Watched) {
+                el._va2Watched = 1;
+                barObs.observe(el, { attributes: true, attributeFilter: ['style'] });
+            }
+        });
+    }
+    watchSelectionBars();
+
+    // Bọc lại bkQuickTr và aiQuick để khi nút Dịch gọi tới là giữ được chữ cần dịch rồi xóa sạch vùng bôi đen ngay
+    var origBkQuickTr = window.bkQuickTr;
+    if (typeof origBkQuickTr === 'function') {
+        window.bkQuickTr = function () {
+            var savedTxt = '';
+            try { savedTxt = (typeof bkSelText === 'function' ? bkSelText() : '') || bkPdfSel || ''; } catch (e) {}
+            clearAllSelectionsAndBars();
+            if (savedTxt) bkPdfSel = savedTxt;
+            return origBkQuickTr.apply(this, arguments);
+        };
+    }
+
+    // Bắt sự kiện click trên mọi nút trong các thanh bôi đen (kể cả nút Dịch, Từ điển, Highlight, Ghi chú...)
+    document.addEventListener('click', function (e) {
+        watchSelectionBars();
+        var btn = e.target && e.target.closest ? e.target.closest(
+            '#bk-selbar button, #qz-selbar button, #nt-selbar button, #nt-rbar button, #nt-selbtn, #nt-seldict, #bk-nbub .nb-acts button'
+        ) : null;
+        if (!btn) return;
+
+        // Nếu là nút Dịch hoặc Từ điển trong PDF reader, chốt lưu bkPdfSel trước khi xóa vùng chọn
+        if (btn.matches('#bk-selbar .b-tr, #bk-selbar .b-dc, #bk-nbub .nb-a-tr, #bk-nbub .nb-a-dc')) {
+            try {
+                var t = (typeof bkSelText === 'function' ? bkSelText() : '') || bkPdfSel || '';
+                if (t) bkPdfSel = t;
+            } catch (err) {}
+        }
+
+        // Sau khi handler gốc của nút vừa chạy xong (0ms), xóa sạch vùng chọn và khóa thanh nút
+        setTimeout(clearAllSelectionsAndBars, 0);
+    }, true);
+
+
+    /* =========================================================================
+       PHẦN 2: CHỐNG ĐƠ CỨNG TRÌNH DUYỆT KHI AI ĐANG QUÉT MỤC LỤC NGẦM
+       ========================================================================= */
+
+    // Nhường luồng chính thực sự (đợi 1 frame vẽ + 1 nhịp nghỉ) để cuộn trang và thao tác chuột không bao giờ bị khựng
+    function yieldFrame(ms) {
+        return new Promise(function (res) {
+            requestAnimationFrame(function () {
+                setTimeout(res, ms || 16);
+            });
+        });
+    }
+
+    // 2.1. Cache bảng chuẩn hóa chuỗi theo từng trang để không chạy lại Regex từng ký tự hàng chục lần
+    var normPageCache = new Map();
+    function getCachedPageNorm(pageSlice) {
+        var hit = normPageCache.get(pageSlice);
+        if (hit) return hit;
+        if (normPageCache.size > 150) normPageCache.clear();
+        var res = bkNormMap(pageSlice);
+        normPageCache.set(pageSlice, res);
+        return res;
+    }
+
+    // 2.2. Tối ưu bkShotPages: giảm độ phân giải ảnh chụp ngầm xuống 720px (nhẹ hơn 2.5 lần, AI vẫn đọc bố cục & tiêu đề cực rõ)
+    // và nghỉ giữa mỗi bước render để không khóa cứng Main Thread
+    window.bkShotPages = async function (nums, tok, onProg) {
+        var out = [], n = nums.length;
+        var target = 720;
+        for (var i = 0; i < n; i++) {
+            if (tok !== bkViewTok) return null;
+            await yieldFrame(25);
+            var page = await bkDoc.getPage(nums[i]);
+            var v1 = page.getViewport({ scale: 1 });
+            var vp = page.getViewport({ scale: target / Math.max(v1.width, v1.height) });
+            var cv = document.createElement('canvas');
+            cv.width = Math.max(1, Math.round(vp.width));
+            cv.height = Math.max(1, Math.round(vp.height));
+            await page.render({ canvasContext: cv.getContext('2d', { alpha: false }), viewport: vp, background: '#ffffff' }).promise;
+            await yieldFrame(20);
+            var blob = await new Promise(function (res) { cv.toBlob(res, 'image/jpeg', 0.5); });
+            var b64 = blob ? await bkBlobB64(blob) : cv.toDataURL('image/jpeg', 0.5).split(',')[1];
+            cv.width = 0; cv.height = 0;
+            out.push({ num: nums[i], b64: b64 });
+            if (onProg) onProg(i + 1, n);
+        }
+        return out;
+    };
+
+    // 2.3. Tối ưu bkExtract: Lưu đệm (cache) kết quả phân tích từng trang!
+    // Khi AI quét xong 2 trang mới, chỉ tính toán lại đúng 2 trang có layout thay đổi, các trang còn lại lấy ngay từ cache trong 0ms!
+    window.bkExtract = async function (doc, tok, onProg) {
+        var raw = [];
+        for (var p = 1; p <= doc.numPages; p++) {
+            if (tok !== bkViewTok) return null;
+            if (doc._rawC && doc._rawC[p]) { raw.push(doc._rawC[p]); continue; }
+            var page = await doc.getPage(p);
+            var vp = page.getViewport({ scale: 1 });
+            var tc = await page.getTextContent();
+            var its = [];
+            tc.items.forEach(function (it, idx) {
+                if (!it.str) return;
+                var t = it.transform;
+                its.push({ idx: idx, str: it.str, x: t[4], y: t[5], w: it.width || 0, fh: Math.hypot(t[2], t[3]) || 10, bd: bkIsBold(page, it.fontName) });
+            });
+            var boxes = []; try { boxes = await bkImageBoxes(page); } catch (e) { boxes = []; }
+            var rec = { num: p, w: vp.width, h: vp.height, its: its, boxes: boxes };
+            raw.push(rec); (doc._rawC = doc._rawC || {})[p] = rec;
+            if (onProg && p % 5 === 0) onProg(p, doc.numPages);
+            await yieldFrame(12);
+        }
+
+        if (!doc._hfDone) {
+            var key = function (pg, it) { var z = bkZone(it, pg); return z ? z + '|' + it.str.replace(/\d+/g, '#').replace(/\s+/g, ' ').trim().toLowerCase() : ''; };
+            var cnt = {};
+            raw.forEach(function (pg) { var seen = {}; pg.its.forEach(function (it) { var k = key(pg, it); if (k && !seen[k]) { seen[k] = 1; cnt[k] = (cnt[k] || 0) + 1; } }); });
+            var thr = Math.max(2, Math.ceil(raw.length * 0.3));
+            raw.forEach(function (pg) {
+                pg.its.forEach(function (it) {
+                    var z = bkZone(it, pg), k = key(pg, it);
+                    it.hf = !!z && ((cnt[k] || 0) >= thr || /^\s*\d{1,4}\s*$/.test(it.str));
+                });
+            });
+            doc._hfDone = true;
+        }
+
+        var pages = []; var G = '';
+        for (var pi = 0; pi < raw.length; pi++) {
+            if (tok !== bkViewTok) return null;
+            var pg = raw[pi];
+            var Lay = bkPageLayout(pg.num);
+            var laySig = Lay ? JSON.stringify(bkAiLay[pg.num] || '') : 'none';
+
+            // Nếu trang này đã xử lý với cùng bố cục Lay thì lấy ngay từ bộ nhớ đệm, KHÔNG chạy lại vòng lặp O(N^2)!
+            if (pg._extCache && pg._extCache.sig === laySig) {
+                var cached = pg._extCache;
+                var baseC = G.length;
+                var rgC = {};
+                var shift = baseC - cached.base0;
+                for (var idxKey in cached.rg0) {
+                    var r0 = cached.rg0[idxKey];
+                    rgC[idxKey] = { s: r0.s + shift, e: r0.e + shift };
+                }
+                var hcC = cached.headCands0.map(function (h) {
+                    return { s: h.s + shift, e: h.e + shift, text: h.text, fh: h.fh, x: h.x, y: h.y, blk: h.blk };
+                });
+                pages.push({ num: pg.num, w: pg.w, h: pg.h, rg: rgC, gs: baseC, ge: baseC + cached.txt.length, bfh: cached.bfh, lay: Lay, headCands: hcC });
+                G += cached.txt + '\n\n';
+                continue;
+            }
+
+            await yieldFrame(10);
+            var W = pg.w, H = pg.h, body0 = pg.its.filter(function (it) { return !it.hf; });
+            var bodyFh = bkModeFh(body0);
+            var excl = new Set();
+            var topY = function (it) { return H - it.y; };
+
+            if (Lay) {
+                body0.forEach(function (it) {
+                    var fx = (it.x + (it.w || 0) / 2) / W, fy = topY(it) / H;
+                    if (!bkLayoutCell(fx, fy, Lay)) excl.add(it);
+                });
+            }
+
+            (pg.boxes || []).forEach(function (b) {
+                body0.forEach(function (it) {
+                    if (it.x >= b.x0 - 2 && it.x <= b.x1 + 2 && it.y >= b.y0 - 2 && it.y <= b.y1 + 2) {
+                        if (b.r === 0 || b.r === 1) { excl.add(it); return; }
+                        var side = it.x < W * 0.5 ? 0 : 1;
+                        var lw = function (o0) { return body0.filter(function (o) { return (o.x < W * 0.5 ? 0 : 1) === side && Math.abs(o.y - o0.y) < 0.5 * o0.fh; }).reduce(function (n, o) { return n + o.str.trim().split(/\s+/).filter(Boolean).length; }, 0); };
+                        if ((b.r === 2 || b.r === 3) && (it.bd || lw(it) > 3)) return;
+                        excl.add(it);
+                    }
+                });
+            });
+
+            body0.forEach(function (it) {
+                if (/^(clinical\s+notes?|key\s+points?|clinical\s+pearls?)$/i.test(it.str.trim())) {
+                    excl.add(it);
+                    var colSide = it.x < W * 0.5 ? 0 : 1;
+                    var colItems = body0.filter(function (o) { return !excl.has(o) && (o.x < W * 0.5 ? 0 : 1) === colSide && o.y < it.y; }).sort(function (a, b) { return b.y - a.y; });
+                    var prevY = it.y;
+                    for (var ci = 0; ci < colItems.length; ci++) {
+                        var o = colItems[ci];
+                        if (prevY - o.y > 2.4 * Math.max(o.fh, bodyFh) || (o.bd && o.fh > bodyFh * 1.08)) break;
+                        excl.add(o);
+                        prevY = o.y;
+                    }
+                }
+            });
+
+            var isCap = function (t) { return /^(table|tbl\.?|fig\.?|figure|box|hình|bảng|hộp|sơ đồ|ảnh)\s*\d/i.test(t.trim()); };
+            body0.forEach(function (it) { if (it.fh < 0.85 * bodyFh || !it.str.trim()) excl.add(it); });
+            var fn = body0.filter(function (o) { return /^[*†‡]/.test(o.str.trim()) && o.y < H * 0.4; }).sort(function (a, b) { return b.y - a.y; })[0];
+            if (fn) body0.forEach(function (o) { if (o.y <= fn.y + 0.5 * fn.fh) excl.add(o); });
+            var bkLbl = /^\(?[A-Ha-h]\)?(\s+\(?[A-Ha-h]\)?)*$/;
+            body0.forEach(function (it) {
+                if (bkLbl.test(it.str.trim()) && body0.filter(function (o) { return o !== it && o.str.trim() && Math.abs(o.y - it.y) < 0.5 * it.fh; }).every(function (o) { return bkLbl.test(o.str.trim()); })) excl.add(it);
+            });
+
+            body0.forEach(function (it) {
+                if (excl.has(it) || !isCap(it.str) || body0.some(function (o) { return o !== it && o.str.trim() && Math.abs(o.y - it.y) < 0.5 * it.fh && o.x < it.x - 1; })) return;
+                excl.add(it);
+                var side = it.x < W * 0.5 ? 0 : 1;
+                body0.forEach(function (o) { if (!excl.has(o) && Math.abs(o.y - it.y) < 0.6 * it.fh && o.x > it.x && o.x - (it.x + it.w) < 0.25 * W) excl.add(o); });
+                var cur = it;
+                for (var n1 = 0; n1 < 3; n1++) {
+                    var nx = body0.filter(function (o) { return !excl.has(o) && o.y < cur.y && (o.x < W * 0.5 ? 0 : 1) === side && Math.abs(o.fh - it.fh) < 0.6 && cur.y - o.y <= 2.2 * cur.fh; }).sort(function (a, b) { return b.y - a.y; })[0];
+                    if (!nx) break;
+                    excl.add(nx); cur = nx;
+                }
+            });
+
+            var bodyTop = body0.filter(function (it) { return !excl.has(it); }).map(function (it) {
+                return { idx: it.idx, str: it.str, x: it.x, y: topY(it), w: it.w || 0, fh: it.fh, angle: 0, ws: false, bd: it.bd };
+            });
+            var ordered = (Lay && Lay.hasCols) ? bkOrderByLayout(bodyTop, W, H, Lay) : bkOrderItems(bodyTop, W);
+            var seq = ordered.filter(function (d) { return !d.ws; });
+
+            var base = G.length; var txt = ''; var prev = null; var rg = {};
+            var headCands = [];
+            var lineBuf = [];
+            var flushLineCand = function () {
+                if (!lineBuf.length) return;
+                var first = lineBuf[0], last = lineBuf[lineBuf.length - 1];
+                var lineStr = lineBuf.map(function (x) { return x.str; }).join(' ').replace(/\s+/g, ' ').trim();
+                var allBold = lineBuf.every(function (x) { return x.bd || x.fh >= bodyFh * 1.12; });
+                var bigFh = Math.max.apply(null, lineBuf.map(function (x) { return x.fh; }));
+                if (allBold && lineStr.length >= 4 && lineStr.length <= 110 && !/[.;:]$/.test(lineStr) &&
+                    (bigFh >= bodyFh * 1.08 || /^(?:[IVXLC]+\.|[A-Z]\.|\d+(?:\.\d+)*\.?)\s+\S/.test(lineStr) || /^[A-Z][A-Za-z0-9\s,\-–—()\/]+$/.test(lineStr)) &&
+                    !/^(clinical\s+notes?|table|fig\.?|figure|box)\b/i.test(lineStr)) {
+                    headCands.push({ s: first._gs, e: last._ge, text: lineStr, fh: bigFh, x: first.x, y: first.y, blk: first.blk || 0 });
+                }
+                lineBuf = [];
+            };
+
+            seq.forEach(function (it) {
+                if (prev) {
+                    if ((prev.blk || 0) !== (it.blk || 0) || Math.abs(it.y - prev.y) > Math.max(it.fh, prev.fh) * 0.5) {
+                        flushLineCand();
+                        txt += '\n';
+                    } else if (it.x - (prev.x + prev.w) > prev.fh * 0.15) {
+                        txt += ' ';
+                    }
+                }
+                var sPos = base + txt.length, ePos = sPos + it.str.length;
+                rg[it.idx] = { s: sPos, e: ePos };
+                it._gs = sPos; it._ge = ePos;
+                lineBuf.push(it);
+                txt += it.str; prev = it;
+            });
+            flushLineCand();
+
+            pg._extCache = { sig: laySig, base0: base, txt: txt, rg0: rg, bfh: bodyFh, headCands0: headCands };
+            pages.push({ num: pg.num, w: pg.w, h: pg.h, rg: rg, gs: base, ge: base + txt.length, bfh: bodyFh, lay: Lay, headCands: headCands });
+            G += txt + '\n\n';
+        }
+        return { pages: pages, text: G };
+    };
+
+    // 2.4. Tối ưu bkLocateHead: dùng getCachedPageNorm (không gọi bkNormMap lặp lại) và chỉ gọi bkPageData khi thực sự cần
+    window.bkLocateHead = async function (h) {
+        var ex = bkPages[h.page - 1], pg = bkVP[h.page - 1]; if (!ex || !pg) return null;
+        var pageSlice = bkText.slice(ex.gs, ex.ge);
+        // Nếu tiêu đề này đã định vị trên cùng nội dung trang thì trả về ngay lập tức (0ms)!
+        if (h._locSlice === pageSlice && typeof h._locRel === 'number') {
+            return ex.gs + h._locRel;
+        }
+        var stripNum = function (t) { return String(t || '').replace(/^\s*(?:(?:chapter|chương|section|mục|phần|part)\s+)?(?:\d+(?:\.\d+)*|[IVXLC]+|[A-Za-z])[.)]\s*/i, ''); };
+        var key = (bkNormStr(stripNum(h.en)).slice(0, 26)) || bkNormStr(h.en).slice(0, 26);
+        var boxS = null, boxTxt = '', data = pg.data || null;
+        if (!data && h.box) {
+            try { data = await bkPageData(pg); } catch (e) {}
+        }
+        if (data && h.box) {
+            var y0 = h.box[0] / 1000, x0 = h.box[1] / 1000, y1 = h.box[2] / 1000, x1 = h.box[3] / 1000;
+            var boxMidX = (x0 + x1) / 2;
+            var isSingleColBox = (x1 - x0) < 0.62;
+            var cand = data.items.filter(function (d) {
+                if (d.ws || !ex.rg[d.idx]) return false;
+                var cx = (d.x + d.w / 2) / data.W, cy = (d.y - d.fh * 0.3) / data.H;
+                if (isSingleColBox && Math.abs(cx - boxMidX) > 0.28) return false;
+                return cx >= x0 - 0.025 && cx <= x1 + 0.025 && cy >= y0 - 0.012 && cy <= y1 + 0.012;
+            }).sort(function (a, b) { return ex.rg[a.idx].s - ex.rg[b.idx].s; });
+            if (cand.length) {
+                boxS = ex.rg[cand[0].idx].s;
+                boxTxt = bkNormStr(cand.map(function (d) { return d.str; }).join(' '));
+            }
+        }
+        var verified = boxS !== null && key.length >= 3 && boxTxt.includes(key.slice(0, Math.min(10, key.length)));
+        if (verified) {
+            h._locSlice = pageSlice; h._locRel = boxS - ex.gs;
+            return boxS;
+        }
+
+        var search = function (pex) {
+            if (!pex || key.length < 4) return null;
+            var slice = bkText.slice(pex.gs, pex.ge);
+            var pn = getCachedPageNorm(slice), hits = [];
+            var p = pn.n.indexOf(key);
+            while (p >= 0 && hits.length < 30) { hits.push(pex.gs + pn.map[p]); p = pn.n.indexOf(key, p + 1); }
+            if (!hits.length) return null;
+            var s;
+            if (boxS !== null && pex === ex) s = hits.slice().sort(function (a, b) { return Math.abs(a - boxS) - Math.abs(b - boxS); })[0];
+            else {
+                var ls = hits.find(function (x) { return bkLineStart(bkText, x); });
+                s = ls !== undefined ? ls : hits[0];
+            }
+            var pre = bkText.slice(Math.max(pex.gs, s - 14), s), m = /(?:^|\n)\s*((?:\d+(?:\.\d+)*|[IVXLC]+|[A-Za-z])[.)]?\s*)$/.exec(pre);
+            if (m) s -= m[1].length;
+            return s;
+        };
+        var txtS = search(ex);
+        var finalS = null;
+        if (txtS !== null && (boxS === null || Math.abs(txtS - boxS) <= 260)) finalS = txtS;
+        else if (boxS !== null) finalS = boxS;
+        else if (txtS !== null) finalS = txtS;
+        if (finalS !== null) {
+            h._locSlice = pageSlice; h._locRel = finalS - ex.gs;
+            return finalS;
+        }
+        for (var di = 0, dns = [1, -1]; di < dns.length; di++) {
+            var s2 = search(bkPages[h.page - 1 + dns[di]]);
+            if (s2 !== null) return s2;
+        }
+        return bkPages[h.page - 1] ? bkPages[h.page - 1].gs : null;
+    };
+
+    // 2.5. Tối ưu bkReextract: chỉ cập nhật lại những trang thực sự vừa có layout mới từ AI, không duyệt lại các trang cũ
+    window.bkReextract = async function (tok, my) {
+        var oldT = bkText;
+        var keep = bkSecs.filter(function (x) { return x.manual; }).map(function (x) {
+            return {
+                x: x,
+                snip: bkNormStr(oldT.slice(x.s, x.s + 80)).slice(0, 28),
+                frac: oldT.length ? x.s / oldT.length : 0
+            };
+        });
+        for (var i = 0; i < bkVP.length; i++) {
+            if (tok !== bkViewTok || my !== bkDeepTok) return null;
+            var pg = bkVP[i];
+            if (!pg.data) { pg.dataP = null; continue; }
+            var laySig = bkAiLay[pg.num] ? JSON.stringify(bkAiLay[pg.num]) : 'none';
+            if (pg._reextSig === laySig) continue; // Trang không đổi layout -> bỏ qua ngay (0ms)
+            pg._reextSig = laySig;
+
+            await yieldFrame(12);
+            var d = pg.data, vp = pg.vp1, Lp = bkPageLayout(pg.num);
+            var ord = (Lp && Lp.hasCols) ? bkOrderByLayout(d.items, vp.width, vp.height, Lp) : bkOrderItems(d.items, vp.width);
+            var seq = ord.filter(function (x) { return !x.ws; }), blks = []; var cb = null;
+            seq.forEach(function (it, k) {
+                it.k = k; var b = it.blk || 0;
+                if (!cb || cb.b !== b) { cb = { b: b, k0: k, k1: k, top: 1e9, bottom: -1e9 }; blks.push(cb); }
+                cb.k1 = k;
+                cb.top = Math.min(cb.top, it.y - it.fh * BK_BOX_TOP);
+                cb.bottom = Math.max(cb.bottom, it.y + it.fh * BK_BOX_BOT);
+                it.bi = blks.length - 1;
+            });
+            pg.data = { W: vp.width, H: vp.height, items: ord, seq: seq, blks: blks };
+            pg.dataP = Promise.resolve(pg.data);
+            if (pg.state === 'done' && pg.tl) {
+                var byIdx = new Map();
+                seq.forEach(function (it) { byIdx.set(it.idx, it); });
+                pg.spk = [];
+                pg.tl.querySelectorAll(':scope > span').forEach(function (sp) {
+                    var it = byIdx.get(sp._i);
+                    if (it) {
+                        sp._k = it.k;
+                        sp._bk = pg.num * 1000 + (it.blk || 0);
+                        pg.spk[it.k] = sp;
+                    }
+                });
+            }
+        }
+        var ex = await bkExtract(bkDoc, tok);
+        if (!ex || tok !== bkViewTok || my !== bkDeepTok) return null;
+        bkPages = ex.pages; bkText = ex.text;
+        if (keep.length) {
+            await yieldFrame(12);
+            var nm = getCachedPageNorm(bkText);
+            keep.forEach(function (k) {
+                k.x.s = -1;
+                if (k.snip.length < 4) return;
+                var exp = k.frac * nm.n.length; var p = nm.n.indexOf(k.snip), best = -1, bd = Infinity;
+                while (p >= 0) { var d = Math.abs(p - exp); if (d < bd) { bd = d; best = p; } p = nm.n.indexOf(k.snip, p + 1); }
+                if (best >= 0) k.x.s = nm.map[best];
+            });
+        }
+        return true;
+    };
+})();
+</script>
 <style id="rhm-patch-v18-course-short">
 /* Điện thoại màn ngắn: thu gọn khung và từng bài để vẫn thấy ít nhất 5 bài cùng lúc */
 @media (max-width: 640px) and (max-height: 780px) {
