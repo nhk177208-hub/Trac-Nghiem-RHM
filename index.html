@@ -9758,9 +9758,9 @@ async function bkExtract(doc, tok, onProg) {
     const raw = [];
     for (let p = 1; p <= doc.numPages; p++) {
         if (tok !== bkViewTok) return null;
+        if (doc._rawC && doc._rawC[p]) { raw.push(doc._rawC[p]); continue; }   // trang này đã đọc: dùng lại chữ + ảnh
         const page = await doc.getPage(p);
         const vp = page.getViewport({ scale: 1 });
-        await page.getOperatorList();
         const tc = await page.getTextContent();
         const its = [];
         tc.items.forEach((it, idx) => {
@@ -9769,7 +9769,8 @@ async function bkExtract(doc, tok, onProg) {
             its.push({ idx, str: it.str, x: t[4], y: t[5], w: it.width || 0, fh: Math.hypot(t[2], t[3]) || 10, bd: bkIsBold(page, it.fontName) });
         });
         let boxes = []; try { boxes = await bkImageBoxes(page); } catch (e) { boxes = []; }
-        raw.push({ num: p, w: vp.width, h: vp.height, its, boxes });
+                const rec = { num: p, w: vp.width, h: vp.height, its, boxes };
+        raw.push(rec); (doc._rawC = doc._rawC || {})[p] = rec;
         if (onProg && p % 5 === 0) onProg(p, doc.numPages);
     }
     const key = (pg, it) => { const z = bkZone(it, pg); return z ? z + '|' + it.str.replace(/\d+/g, '#').replace(/\s+/g, ' ').trim().toLowerCase() : ''; };
@@ -9781,10 +9782,12 @@ async function bkExtract(doc, tok, onProg) {
         it.hf = !!z && ((cnt[k] || 0) >= thr || /^\s*\d{1,4}\s*$/.test(it.str));
     }));
     const pages = []; let G = '';
-    raw.forEach(pg => {
+    for (const pg of raw) {
+        await bkYield();
         const W = pg.w, body0 = pg.its.filter(it => !it.hf);
         const bodyFh = bkModeFh(body0);
         const excl = new Set();
+                pg.its.forEach(it => { it._cell = null; });
         const Lay = bkPageLayout(pg.num), hasCols = !!(Lay && Lay.hasCols);   // bố cục đọc do AI lập (nếu có)
         if (Lay) pg.its.forEach(it => { it._cell = bkLayoutCell((it.x + (it.w || 0) / 2) / W, (pg.h - it.y) / pg.h, Lay); });
         const cid = it => (hasCols && it._cell) ? it._cell.z * 16 + it._cell.c : (it.x < W * 0.5 ? 0 : 1);   // mã cột; không có layout → tạm chia đôi trang
@@ -9846,7 +9849,7 @@ async function bkExtract(doc, tok, onProg) {
         });
         pages.push({ num: pg.num, w: pg.w, h: pg.h, rg, gs: base, ge: base + txt.length, bfh: bodyFh, lay: Lay });
         G += txt + '\n\n';
-    });
+    }
     return { pages, text: G };
 }
 /* ---------- dựng khung các trang (chưa vẽ) ---------- */
@@ -9922,7 +9925,7 @@ async function bkOpenChapter(i) {
         bkPages = ex.pages; bkText = ex.text;
         bkSecs = bkLoadManual(c.url);
         bkRelink(); bkRenderSecList(); bkUpdateSecBtn();
-        if (bkHeadsLoad(c.url)) bkRebuildSecs(tok).then(ok => { if (ok && bkHT.some((_, i) => !bkDeep.done[i])) bkDeepStart(tok); }).catch(() => {});
+        if (bkHeadsLoad(c.url)) bkRebuildSecs(tok).then(ok => { if (ok) bkDeepStart(tok); }).catch(() => {});
         bkApplyHlAll();
         bkSetStatus(bkText.trim() ? '' : 'Chương này không có chữ (có thể là PDF scan), AI không đọc được nội dung.');
     } catch (e) {
@@ -10315,7 +10318,7 @@ function bkPageOfPos(pos) { let ex = bkPages[0]; bkPages.forEach(p => { if (p.gs
 /* Chụp trang: vẽ ra canvas rồi nén JPEG, thu nhỏ theo số trang (nhiều trang → nhỏ hơn) nhưng vẫn đủ nét để AI đọc bố cục */
 async function bkShotPages(nums, tok, onProg) {
     const out = [], n = nums.length;
-    const target = n <= 12 ? 1500 : (n <= 30 ? 1300 : (n <= 60 ? 1150 : 1000));   // cạnh dài (px)
+    const target = n <= 5 ? 1300 : (n <= 12 ? 1500 : (n <= 30 ? 1300 : (n <= 60 ? 1150 : 1000)));   // cạnh dài (px)
     for (let i = 0; i < n; i++) {
         if (tok !== bkViewTok) return null;
         const page = await bkDoc.getPage(nums[i]);
@@ -10324,10 +10327,13 @@ async function bkShotPages(nums, tok, onProg) {
         const cv = document.createElement('canvas');
         cv.width = Math.max(1, Math.round(vp.width)); cv.height = Math.max(1, Math.round(vp.height));
         await page.render({ canvasContext: cv.getContext('2d', { alpha: false }), viewport: vp, background: '#ffffff' }).promise;
-        const url = cv.toDataURL('image/jpeg', 0.6);
-        out.push({ num: nums[i], b64: url.slice(url.indexOf(',') + 1) });
+        // mã hóa JPEG bất đồng bộ (toBlob) thay cho toDataURL: không khóa luồng chính
+        const blob = await new Promise(res => cv.toBlob(res, 'image/jpeg', 0.6));
+        const b64 = blob ? await bkBlobB64(blob) : cv.toDataURL('image/jpeg', 0.6).split(',')[1];
         cv.width = 0; cv.height = 0;
+        out.push({ num: nums[i], b64: b64 });
         if (onProg) onProg(i + 1, n);
+        await bkYield();   // nhường luồng chính giữa các trang
     }
     return out;
 }
@@ -10474,23 +10480,26 @@ function bkTocFail(e) {
     showToast((e && (e.friendly || e.message)) ? String(e.friendly || e.message).slice(0, 220) : 'Chưa lập được mục lục, thử lại sau');
 }
 
-/* ===== NHẬN DIỆN MỤC LỤC THEO ĐỢT (v3) =====
-   Bước 1 (nhanh): AI chỉ tìm MỤC CẤP 1, đọc theo cụm 10 trang → hiện ngay mục lục cấp 1.
-   Bước 2 (chạy nền, trong lúc đọc): quét kỹ lần lượt TỪ TRÊN XUỐNG, mỗi lần một mục cấp 1, mỗi đợt 3 trang:
-   bố cục cột + các mục con. Lỗi cột của một mục chỉ ảnh hưởng đúng mục đó, không làm lộn cả chương.
-   Sau mỗi mục: đọc lại chữ chương (khi không đang bôi đen), định vị lại tiêu đề, lưu tiến độ theo chương. */
-let bkHT = [], bkKD = {}, bkDeep = { done: [] }, bkDeepTok = 0;   // bkHT: mục cấp 1 · bkKD[i]: mục con của mục thứ i · bkDeep.done[i]: đã quét kỹ chưa
-function bkHeadsLoad(url) {
-    bkHT = []; bkKD = {}; bkDeep = { done: [] };
+/* ===== NHẬN DIỆN MỤC LỤC (v4): cấp 1 nhanh → AI tự chia nhóm 3–5 trang → quét kỹ lần lượt từ trên xuống, chạy nền =====
+   Bước 1: AI chỉ tìm mục cấp 1 trên các cụm 10 trang → hiện ngay mục lục cấp 1.
+   Bước 2: phần còn lại được chia thành nhóm 3–5 trang; mỗi nhóm quét kỹ (bố cục cột + mục con), từ trên xuống.
+   Chống lag: nhóm chỉ chạy khi người dùng không cuộn; giữa các nhóm có khoảng nghỉ; ảnh mã hóa không chặn luồng chính;
+   chữ chương chỉ đọc lại sau mỗi 3 nhóm; vòng lặp dài luôn nhường luồng chính cho trình duyệt. */
+let bkHeads = [], bkScanTo = 0, bkMissed = [], bkDeepTok = 0, bkLastScrollAt = 0;
+document.addEventListener('scroll', () => { bkLastScrollAt = Date.now(); }, { capture: true, passive: true });
+const bkYield = () => new Promise(res => setTimeout(res, 0));   // nhường luồng chính cho trình duyệt vẽ và xử lý sự kiện
+function bkBreathe(ms) { return new Promise(res => setTimeout(res, ms)); }
+function bkHeadsLoad(url) {   // đọc tiến độ quét của chương (chỉ nhận định dạng v4)
+    bkHeads = []; bkScanTo = 0; bkMissed = [];
     try {
         const o = JSON.parse(localStorage.getItem('bk_hd_' + url) || 'null');
-        if (!o || !Array.isArray(o.ht)) return false;
-        bkHT = o.ht; bkKD = (o.kd && typeof o.kd === 'object') ? o.kd : {}; bkDeep = { done: Array.isArray(o.done) ? o.done : [] };
-        return bkHT.length > 0;
+        if (!o || o.v !== 4 || !Array.isArray(o.heads)) return false;
+        bkHeads = o.heads; bkScanTo = +o.scanTo || 0; bkMissed = Array.isArray(o.missed) ? o.missed : [];
+        return bkHeads.length > 0;
     } catch (e) { return false; }
 }
 function bkHeadsSave() {
-    try { if (bkCur) localStorage.setItem('bk_hd_' + bkCur.url, JSON.stringify({ v: 3, ht: bkHT, kd: bkKD, done: bkDeep.done })); } catch (e) {}
+    try { if (bkCur) localStorage.setItem('bk_hd_' + bkCur.url, JSON.stringify({ v: 4, heads: bkHeads, scanTo: bkScanTo, missed: bkMissed })); } catch (e) {}
 }
 function bkL1System() {
     return 'Bạn là chuyên gia đọc mục lục sách giáo khoa. Bạn được cho ẢNH CÁC TRANG của một chương sách (mỗi ảnh có nhãn "TRANG n" đứng ngay trước). '
@@ -10509,36 +10518,78 @@ async function bkL1Window(shots, title, nTot, prev) {
     parts.push({ text: 'Hãy trả JSON đúng định dạng đã nêu.' });
     return bkVisCall(bkL1System(), parts);
 }
-async function bkDeepWindow(shots, title, nTot, top) {
-    const intro = 'Chương: ' + title + ' (tổng ' + nTot + ' trang). Dưới đây là ảnh các trang ' + shots[0].num + '–' + shots[shots.length - 1].num + '.\n\n'
-        + 'ĐỢT NÀY CÓ HAI VIỆC: (1) BỐ CỤC: trả "pages" cho từng trang trong đợt, đúng quy tắc đã nêu. '
-        + '(2) MỤC CON: liệt kê các tiêu đề nằm BÊN TRONG mục "' + top.en + '" (không ghi lại chính nó, không ghi mục cùng cấp hay cấp trên). '
-        + '"level" tính TƯƠNG ĐỐI: 1 = con trực tiếp của mục này, 2 = cháu... Không có mục con thì "headings" là mảng rỗng.';
-    const parts = [{ text: intro }];
-    shots.forEach(s => { parts.push({ text: 'TRANG ' + s.num }); parts.push({ inlineData: { mimeType: 'image/jpeg', data: s.b64 } }); });
-    parts.push({ text: 'Hãy trả JSON đúng định dạng đã nêu.' });
-    return bkVisCall(bkVisSystem(), parts);
+async function bkDeepWindow(shots, title, nTot, prevHeads) {   // một nhóm 3–5 trang: bố cục + mục con (cấp tuyệt đối, theo mục đã biết)
+    return bkAiReadWindow(shots, title, nTot, prevHeads, null);
 }
-function bkDeepSay(i, c, n) {
-    const b = document.getElementById('bk-sec-btn');
-    if (b) b.textContent = '🔍 Quét kỹ mục ' + (i + 1) + '/' + bkHT.length + (n > 1 ? ' · đợt ' + (c + 1) + '/' + n : '');
+function bkDeepSay(a, b) {   // tiến độ quét kỹ hiện ngay trên nút mục lục
+    const btn = document.getElementById('bk-sec-btn');
+    if (btn) btn.textContent = '🔍 Quét kỹ trang ' + a + '–' + b + ' · ' + Math.round(100 * bkScanTo / Math.max(1, bkDoc.numPages)) + '%';
 }
-async function bkWaitIdle(my, tok) {   // tạm dừng khi đang bôi đen / kéo chuột (tối đa 30 giây) để không làm mất vùng chọn
-    for (let k = 0; k < 30 && my === bkDeepTok && tok === bkViewTok; k++) {
-        const s = window.getSelection ? window.getSelection() : null;
-        const busy = !!bkDrag || !!(bkPtr && bkPtr.down) || !!(s && !s.isCollapsed && bkWrapEl && s.anchorNode && bkWrapEl.contains(s.anchorNode));
+function bkMakeGroups(from, N) {   // chia các trang còn lại thành nhóm đều nhau, mỗi nhóm 3–5 trang
+    const n = N - from + 1; if (n <= 0) return [];
+    const k = Math.ceil(n / 5), out = []; let a = from;
+    for (let i = 0; i < k; i++) { const size = Math.floor(n / k) + (i < n % k ? 1 : 0); out.push([a, a + size - 1]); a += size; }
+    return out;
+}
+function bkBlobB64(blob) {   // ảnh → base64 bất đồng bộ (không chặn luồng chính)
+    return new Promise((res, rej) => {
+        const fr = new FileReader();
+        fr.onload = () => { const s = String(fr.result || ''); res(s.slice(s.indexOf(',') + 1)); };
+        fr.onerror = rej;
+        fr.readAsDataURL(blob);
+    });
+}
+async function bkWaitQuiet(my, tok, quietMs, maxMs, withSel) {   // chờ người dùng ngừng cuộn (và bôi đen nếu withSel) rồi mới làm việc nặng
+    const t0 = Date.now();
+    while (my === bkDeepTok && tok === bkViewTok && Date.now() - t0 < maxMs) {
+        const s = withSel && window.getSelection ? window.getSelection() : null;
+        const busy = (Date.now() - bkLastScrollAt < quietMs) || !!bkDrag || !!(bkPtr && bkPtr.down)
+            || !!(s && !s.isCollapsed && bkWrapEl && s.anchorNode && bkWrapEl.contains(s.anchorNode));
         if (!busy) return;
-        await new Promise(res => setTimeout(res, 1000));
+        await bkBreathe(300);
     }
 }
-async function bkReextract(tok, my) {   // đọc lại chữ chương theo bố cục mới; giữ các mục tự đánh dấu (định vị lại theo đoạn chữ)
-    await bkWaitIdle(my, tok);
+function bkDeepCollect(r, a, b, lay) {   // gom kết quả một nhóm: bố cục các trang trong nhóm + tiêu đề mới (bỏ tiêu đề đã có)
+    const N = bkDoc ? bkDoc.numPages : 0;
+    const pgs = Array.isArray(r.pages) ? r.pages : [];
+    pgs.forEach(p => { const n = parseInt(p && p.page, 10); if (n >= a && n <= b && n >= 1 && n <= N) lay[n] = bkAiToLayout(p); });
+    const hs = Array.isArray(r.headings) ? r.headings : [];
+    const out = [];
+    hs.forEach(h => {
+        const n = parseInt(h && h.page, 10), en = String((h && (h.text || h.en || h.title)) || '').replace(/\s+/g, ' ').trim();
+        if (!(n >= a && n <= b) || !en) return;
+        const key = bkNormStr(en).slice(0, 40);
+        if (!key) return;
+        if (bkHeads.some(x => x.page === n && bkNormStr(x.en).slice(0, 40) === key)) return;
+        if (out.some(x => x.page === n && bkNormStr(x.en).slice(0, 40) === key)) return;
+        const box = Array.isArray(h.box) && h.box.length >= 4 ? h.box.slice(0, 4).map(Number) : null;
+        out.push({ page: n, box: (box && box.every(isFinite)) ? box : null, en: en.slice(0, 200), vi: String(h.vi || '').replace(/\s+/g, ' ').trim().slice(0, 200), lvl: Math.max(1, Math.min(10, parseInt(h.level, 10) || 2)) });
+    });
+    return out;
+}
+async function bkDeepGroup(a, b, my, tok) {   // true = xong · false = AI lỗi · null = đã dừng
+    const N = bkDoc.numPages, nums = [];
+    for (let p = a; p <= b; p++) nums.push(p);
+    const shots = await bkShotPages(nums, tok, null);
+    if (!shots || my !== bkDeepTok || tok !== bkViewTok) return null;
+    const prev = bkHeads.filter(h => h.page < a).sort((x, y) => x.page - y.page);
+    let r = null;
+    try { r = await bkDeepWindow(shots, bkCur.title, N, prev); }
+    catch (e) { if (e && (e.badKey || e.quota)) throw e; }
     if (my !== bkDeepTok || tok !== bkViewTok) return null;
+    if (!r || typeof r !== 'object') return false;
+    const lay = {};
+    const added = bkDeepCollect(r, a, b, lay);
+    bkAiLay = Object.assign({}, bkAiLay, lay); bkLayCache = {}; bkLaySave();
+    bkHeads = bkHeads.concat(added);
+    return true;
+}
+async function bkReextract(tok, my) {   // đọc lại chữ chương theo bố cục mới; giữ mục tự đánh dấu (định vị lại theo đoạn chữ)
     const oldT = bkText;
     const keep = bkSecs.filter(x => x.manual).map(x => ({ x: x, snip: bkNormStr(oldT.slice(x.s, x.s + 80)).slice(0, 28), frac: oldT.length ? x.s / oldT.length : 0 }));
     bkVP.forEach(pg => { pg.dataP = null; bkRelease(pg); });
     const ex = await bkExtract(bkDoc, tok);
-    if (!ex || tok !== bkViewTok) return null;
+    if (!ex || tok !== bkViewTok || my !== bkDeepTok) return null;
     bkPages = ex.pages; bkText = ex.text;
     bkRefresh();
     const nm = bkNormMap(bkText);
@@ -10551,26 +10602,14 @@ async function bkReextract(tok, my) {   // đọc lại chữ chương theo bố
     });
     return true;
 }
-async function bkRebuildSecs(tok) {   // định vị lại mọi tiêu đề trong chữ hiện tại rồi dựng lại danh sách mục
-    const tops = [];
-    for (let i = 0; i < bkHT.length; i++) {
-        if (tok !== bkViewTok) return false;
-        let s = null; try { s = await bkLocateHead(bkHT[i]); } catch (e) { s = null; }
-        tops.push(s === null || s === undefined ? null : Math.max(0, s));
-    }
+async function bkRebuildSecs(tok) {   // định vị lại mọi tiêu đề trong chữ hiện tại rồi dựng lại danh sách (có nhường luồng chính)
     const found = [];
-    for (let i = 0; i < bkHT.length; i++) {
-        if (tops[i] === null) continue;
-        let nxt = Infinity;
-        for (let j = i + 1; j < bkHT.length; j++) if (tops[j] !== null) { nxt = tops[j]; break; }
-        found.push({ title: bkFixVi(bkHT[i].vi, bkHT[i].en), en: bkHT[i].en, num: '', lvl: 1, s: tops[i], manual: false, intro: false, e: 0, text: '' });
-        const kids = Array.isArray(bkKD[i]) ? bkKD[i] : [];
-        for (const h of kids) {
-            if (tok !== bkViewTok) return false;
-            let s = null; try { s = await bkLocateHead(h); } catch (e) { s = null; }
-            if (s === null || s === undefined || s <= tops[i] || s >= nxt) continue;
-            found.push({ title: bkFixVi(h.vi, h.en), en: h.en, num: '', lvl: h.lvl || 2, s: Math.max(0, s), manual: false, intro: false, e: 0, text: '' });
-        }
+    for (let i = 0; i < bkHeads.length; i++) {
+        if (tok !== bkViewTok) return false;
+        const h = bkHeads[i];
+        let s = null; try { s = await bkLocateHead(h); } catch (e) { s = null; }
+        if (s !== null && s !== undefined) found.push({ title: bkFixVi(h.vi, h.en), en: h.en, num: '', lvl: h.lvl || 1, s: Math.max(0, s), manual: false, intro: false, e: 0, text: '' });
+        if (i % 4 === 3) await bkYield();
     }
     const manual = bkSecs.filter(x => x.manual && x.s >= 0);
     const all = found.concat(manual).sort((a, b) => (a.s - b.s) || ((a.manual ? 0 : 1) - (b.manual ? 0 : 1)))
@@ -10583,60 +10622,48 @@ async function bkRebuildSecs(tok) {   // định vị lại mọi tiêu đề tr
     bkSecSel = keepEn ? bkSecs.findIndex(x => (x.en || '') === keepEn) : -1;
     bkHl = bkSecSel >= 0 ? { s: bkSecs[bkSecSel].s, e: bkSecs[bkSecSel].e } : null;
     bkSaveManual(); bkHeadsSave();
-    bkApplyHlAll(); bkRenderSecList(); bkUpdateSecBtn();
+    bkApplyHlAll(); bkRenderSecList();
     return true;
 }
-async function bkDeepSection(i, my, tok) {   // true = xong · false = lỗi, sẽ thử lại lần sau · null = đã dừng (đổi chương / bắt đầu lại)
-    const top = bkHT[i], N = bkDoc.numPages, nxt = bkHT[i + 1];
-    const p0 = top.page, p1 = Math.max(p0, nxt ? nxt.page : N);
-    const nums = []; for (let p = p0; p <= p1; p++) nums.push(p);
-    const chunks = []; for (let k = 0; k < nums.length; k += 3) chunks.push(nums.slice(k, k + 3));
-    const kids = [], lay = {};
-    let lastPg = p0 - 1, failed = false;
-    for (let c = 0; c < chunks.length; c++) {
-        if (my !== bkDeepTok || tok !== bkViewTok) return null;
-        bkDeepSay(i, c, chunks.length);
-        const shots = await bkShotPages(chunks[c], tok, null);
-        if (!shots || my !== bkDeepTok) return null;
-        let r = null;
-        for (let at = 0; at < 2 && !r; at++) {
-            try { r = await bkDeepWindow(shots, bkCur.title, N, top); } catch (e) { if (e && (e.badKey || e.quota)) throw e; }
-            if (my !== bkDeepTok || tok !== bkViewTok) return null;
-            if (r && typeof r !== 'object') r = null;
-        }
-        if (!r) { failed = true; continue; }
-        bkAiCollect(r, lastPg, kids, lay, top.lvl);
-        lastPg = chunks[c][chunks[c].length - 1];
-    }
+async function bkApplyScan(tok, my) {   // áp kết quả nhóm vào chữ chương + mục lục, chỉ khi người dùng không cuộn
+    await bkWaitQuiet(my, tok, 1200, 15000, true);
     if (my !== bkDeepTok || tok !== bkViewTok) return null;
-    bkAiLay = Object.assign({}, bkAiLay, lay); bkLayCache = {}; bkLaySave();
-    bkKD[i] = kids;
-    const ok = await bkReextract(tok, my);
-    if (ok !== true) return null;
-    await bkRebuildSecs(tok);
-    return !failed;
+    if ((await bkReextract(tok, my)) !== true) return null;
+    return (await bkRebuildSecs(tok)) === true ? true : null;
 }
-async function bkDeepStart(tok) {   // chạy nền: quét kỹ lần lượt từ trên xuống, bỏ qua mục đã xong
-    if (!bkHT.length) return;
+async function bkDeepStart(tok) {   // chạy nền: nhóm 3–5 trang, lần lượt từ trên xuống; chỉ làm khi còn trang chưa quét
+    if (!bkHeads.length || !bkDoc) return;
     const my = ++bkDeepTok;
-    for (let i = 0; i < bkHT.length; i++) {
-        if (my !== bkDeepTok || tok !== bkViewTok) return;
-        if (bkDeep.done[i]) continue;
-        await bkWaitIdle(my, tok);
-        if (my !== bkDeepTok || tok !== bkViewTok) return;
-        let ok = false;
-        try { ok = await bkDeepSection(i, my, tok); }
-        catch (e) { if (e && (e.badKey || e.quota)) { bkTocFail(e); return; } ok = false; }
-        if (ok === null) return;
-        bkDeep.done[i] = !!ok;
-        bkHeadsSave();
-    }
-    if (my === bkDeepTok && tok === bkViewTok) {
-        const left = bkHT.filter((_, i) => !bkDeep.done[i]).length;
-        showToast(left ? 'Còn ' + left + ' mục chưa quét kỹ — bấm “🔄 Cập nhật mục lục” để thử lại' : 'Đã quét kỹ xong mọi mục cấp 1');
+    let dirty = 0, did = 0;
+    try {
+        while (my === bkDeepTok && tok === bkViewTok && bkScanTo < bkDoc.numPages) {
+            const g = bkMakeGroups(bkScanTo + 1, bkDoc.numPages)[0];
+            await bkWaitQuiet(my, tok, 700, 45000, false);
+            if (my !== bkDeepTok || tok !== bkViewTok) return;
+            bkDeepSay(g[0], g[1]);
+            let ok = false;
+            for (let at = 0; at < 2 && !ok; at++) {
+                try { ok = await bkDeepGroup(g[0], g[1], my, tok); }
+                catch (e) { if (e && (e.badKey || e.quota)) throw e; ok = false; }
+                if (ok === null) return;
+                if (!ok) await bkBreathe(2500);
+            }
+            if (!ok) bkMissed.push([g[0], g[1]]);
+            bkScanTo = g[1]; did++; dirty++;
+            bkHeadsSave();
+            if (dirty >= 3 || bkScanTo >= bkDoc.numPages) {
+                if ((await bkApplyScan(tok, my)) !== true) return;
+                dirty = 0;
+            }
+            await bkBreathe(1200);
+        }
+    } catch (e) { bkTocFail(e); return; }
+    if (my === bkDeepTok && tok === bkViewTok && did) {
+        bkUpdateSecBtn();
+        showToast(bkMissed.length ? 'Quét kỹ xong, còn ' + bkMissed.length + ' nhóm trang chưa đọc được — bấm “🔄 Cập nhật mục lục” để thử lại' : 'Đã quét kỹ xong toàn bộ chương');
     }
 }
-async function bkDetectChapter() {   // bước 1: AI chỉ lập mục cấp 1 (nhanh); bước 2 quét kỹ chạy nền
+async function bkDetectChapter() {   // bước 1: AI chỉ lập mục cấp 1 (nhanh); bước 2: quét kỹ chạy nền theo nhóm 3–5 trang
     if (!bkDoc) return;
     if (!bkText.trim()) { showToast('Chương đang được đọc chữ (xem thanh trạng thái) hoặc không có chữ — thử lại sau giây lát'); return; }
     if (!aiAnyKey()) { aiShowGate(); return; }
@@ -10664,15 +10691,16 @@ async function bkDetectChapter() {   // bước 1: AI chỉ lập mục cấp 1 
             const hs = Array.isArray(r.headings) ? r.headings : (Array.isArray(r) ? r : []);
             bkAiCollect({ headings: hs.filter(h => (parseInt(h && h.level, 10) || 1) <= 1) }, lastPg, heads, {}, 0);
             lastPg = wins[w][1];
+            await bkYield();
         }
         if (!heads.length) { showToast('AI chưa tìm được mục cấp 1, thử lại sau'); return; }
         heads.forEach(h => { h.lvl = 1; });
-        bkAiLay = {}; bkLayCache = {}; bkLaySave();   // bỏ bố cục AI của lần quét trước; quét kỹ sẽ dựng lại từng mục
-        bkHT = heads; bkKD = {}; bkDeep = { done: heads.map(() => false) };
+        bkAiLay = {}; bkLayCache = {}; bkLaySave();   // bỏ bố cục AI của lần quét trước; quét kỹ sẽ dựng lại theo nhóm
+        bkHeads = heads; bkScanTo = 0; bkMissed = [];
         bkHeadsSave();
         if (!(await bkRebuildSecs(tok))) return;
         bkDeepStart(tok);
-        showToast('Đã lập mục cấp 1: ' + heads.length + ' mục' + (failed ? ' (' + failed + ' đợt AI lỗi)' : '') + '. Đang quét kỹ lần lượt khi bạn đọc…');
+        showToast('Đã lập mục cấp 1: ' + heads.length + ' mục' + (failed ? ' (' + failed + ' đợt AI lỗi)' : '') + '. AI sẽ tự quét kỹ từng nhóm 3–5 trang khi bạn đọc.');
     } catch (e) { bkTocFail(e); }
     finally { btn.disabled = false; bkUpdateSecBtn(); bkRenderSecList(); }
 }
