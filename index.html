@@ -9232,10 +9232,11 @@ function bkPageData(pg) {
     pg.dataP.catch(() => { pg.dataP = null; });
     return pg.dataP;
 }
-// Sắp theo thứ tự đọc + chia KHỐI (blk): mỗi cột / dải chữ rộng là một khối riêng.
-// Bước 1: gom chữ thành các đoạn dòng (cắt ở khoảng trống ngang lớn) → chữ của hai cột không dính vào nhau.
-// Bước 2: tìm rãnh dọc giữa trang (chịu được vài đoạn lẻ vắt ngang); hai bên phải là cột chữ thật (đủ dòng, đủ rộng, trùng nhau theo chiều dọc).
-// Bước 3: đi từ trên xuống: dải chữ rộng (tiêu đề, hình...) là một khối; dải hai cột là khối cột trái rồi khối cột phải.
+// Sắp theo thứ tự đọc + chia KHỐI (blk): mỗi cột / dải chữ rộng / bảng là một khối riêng.
+// Bước 1: gom chữ thành các đoạn dòng (cắt ở khoảng trống ngang lớn) → chữ của các cột không dính vào nhau.
+// Bước 2: tìm rãnh dọc giữa các cột (2 hoặc 3 cột) CHỈ dựa trên các dòng chữ dài cỡ một cột → bảng, nhãn hình, tiêu đề, chú thích không làm hỏng việc dò rãnh;
+//         mỗi cột phải có đủ dòng chữ thật, đủ rộng và các cột trùng nhau theo chiều dọc.
+// Bước 3: bảng nhiều ô trải qua các cột và dải chữ rộng = một khối liền (kéo xuyên ô được); dải nhiều cột = lần lượt từng cột (trái → phải) → kéo trong cột này không băng sang cột kia.
 function bkOrderItems(items, W) {
     const hz = [], other = [], wsp = [];
     items.forEach(d => {
@@ -9258,8 +9259,8 @@ function bkOrderItems(items, W) {
     let nb = 0;
     const out = [];
     const emit = arr => { if (!arr.length) return; const k = nb++; lineSort(arr).forEach(d => { d.blk = k; out.push(d); }); };
-    // 1) đoạn dòng
-    const lines = []; 
+    // 1) đoạn dòng (cắt ở khoảng trống ngang lớn) → chữ của hai cột không dính vào nhau
+    const lines = [];
     hz.slice().sort((a, b) => a.y - b.y).forEach(d => {
         const ln = lines[lines.length - 1];
         if (ln && Math.abs(d.y - ln.y) <= 0.45 * Math.min(d.fh, ln.its[0].fh)) ln.its.push(d); else lines.push({ y: d.y, its: [d] });
@@ -9267,48 +9268,79 @@ function bkOrderItems(items, W) {
     const segs = [];
     lines.forEach(ln => {
         ln.its.sort((a, b) => a.x - b.x);
+        ln.sg = [];
         let cur = null;
         ln.its.forEach(d => {
             if (cur && d.x - cur.x1 <= 1.2 * Math.max(d.fh, cur.fh)) { cur.its.push(d); cur.x1 = Math.max(cur.x1, d.x + d.w); cur.fh = Math.max(cur.fh, d.fh); }
-            else { cur = { its: [d], x0: d.x, x1: d.x + d.w, y: ln.y, fh: d.fh, full: false }; segs.push(cur); }
+            else { cur = { its: [d], x0: d.x, x1: d.x + d.w, y: ln.y, fh: d.fh, full: false, ln: ln }; segs.push(cur); ln.sg.push(cur); }
         });
     });
-    // 2) rãnh dọc
-    let gut = null;
-    const narrow = segs.filter(s => s.x1 - s.x0 <= 0.62 * W);
-    if (narrow.length >= 12) {
+    // 2) rãnh dọc giữa các cột (2 hoặc 3 cột): chỉ xét các dòng chữ dài cỡ một cột (bỏ ô bảng ngắn / nhãn hình) và chịu được vài dòng vắt ngang (tiêu đề, chú thích, chân bảng)
+    const MINW = 0.18 * W;
+    const txt = segs.filter(s => s.x1 - s.x0 >= MINW && s.x1 - s.x0 <= 0.52 * W);
+    const med = a => { const w = a.map(s => s.x1 - s.x0).sort((x, y) => x - y); return w.length ? w[w.length >> 1] : 0; };
+    const span = a => a.length ? [Math.min(...a.map(s => s.y)), Math.max(...a.map(s => s.y))] : [0, 0];
+    let gts = [];
+    if (txt.length >= 10) {
         const bins = 240, bw = W / bins, cnt = new Array(bins).fill(0);
-        narrow.forEach(s => {
+        txt.forEach(s => {
             const a = Math.max(0, Math.floor(s.x0 / bw)), b = Math.min(bins - 1, Math.floor(s.x1 / bw));
             for (let k = a; k <= b; k++) cnt[k]++;
         });
-        const tol = Math.max(1, Math.floor(narrow.length * 0.03));
-        let best = null, run = null;
-        for (let k = Math.floor(bins * 0.28); k <= Math.floor(bins * 0.72); k++) {
-            if (cnt[k] <= tol) {
-                if (!run) run = { a: k, b: k }; else run.b = k;
-                if (!best || run.b - run.a > best.b - best.a) best = { a: run.a, b: run.b };
-            } else run = null;
+        const tol = Math.max(2, Math.floor(txt.length * 0.08));
+        const runs = []; let run = null;
+        for (let k = Math.floor(bins * 0.15); k <= Math.floor(bins * 0.85); k++) {
+            if (cnt[k] <= tol) { if (!run) { run = { a: k, b: k }; runs.push(run); } else run.b = k; } else run = null;
         }
-        if (best && (best.b - best.a + 1) * bw >= W * 0.018) {
-            const g0 = best.a * bw, g1 = (best.b + 1) * bw, gc = (g0 + g1) / 2;
-            segs.forEach(s => { s.full = s.x0 < g0 && s.x1 > g1; });
-            const L = segs.filter(s => !s.full && (s.x0 + s.x1) / 2 < gc), R = segs.filter(s => !s.full && (s.x0 + s.x1) / 2 >= gc);
-            const med = a => { const w = a.map(s => s.x1 - s.x0).sort((x, y) => x - y); return w.length ? w[w.length >> 1] : 0; };
-            const span = a => a.length ? [Math.min(...a.map(s => s.y)), Math.max(...a.map(s => s.y))] : [0, 0];
-            const [l0, l1] = span(L), [r0, r1] = span(R);
-            const ov = Math.min(l1, r1) - Math.max(l0, r0);
-            if (L.length >= 6 && R.length >= 6 && med(L) >= 0.2 * W && med(R) >= 0.2 * W && ov > 0.5 * Math.min(l1 - l0, r1 - r0)) gut = { gc };
-        }
-    }
-    if (gut) {
-        // 3) từ trên xuống: dải rộng liền nhau = 1 khối; dải hai cột = khối trái rồi khối phải
-        let band = [], full = [];
-        const flushBand = () => {
-            emit([].concat(...band.filter(s => (s.x0 + s.x1) / 2 < gut.gc).map(s => s.its)));
-            emit([].concat(...band.filter(s => (s.x0 + s.x1) / 2 >= gut.gc).map(s => s.its)));
-            band = [];
+        const cand = runs.filter(r => (r.b - r.a + 1) * bw >= W * 0.012).map(r => ({ g0: r.a * bw, g1: (r.b + 1) * bw, gc: (r.a + r.b + 1) * bw / 2, w: r.b - r.a + 1 }));
+        // một cấu hình rãnh hợp lệ khi mỗi cột có đủ dòng chữ thật, đủ rộng và các cột trùng nhau theo chiều dọc
+        const valid = G => {
+            const n = G.length + 1, cols = []; for (let c = 0; c < n; c++) cols.push([]);
+            const colOf = s => { const m = (s.x0 + s.x1) / 2; let c = 0; while (c < G.length && m >= G[c].gc) c++; return c; };
+            txt.forEach(s => { if (G.some(g => s.x0 < g.g0 && s.x1 > g.g1)) return; cols[colOf(s)].push(s); });
+            for (let c = 0; c < n; c++) {
+                if (cols[c].length < (n > 2 ? 5 : 6) || med(cols[c]) < (n > 2 ? 0.16 : 0.2) * W) return false;
+                if (c) { const [a0, a1] = span(cols[c - 1]), [b0, b1] = span(cols[c]); if (Math.min(a1, b1) - Math.max(a0, b0) <= 0.5 * Math.min(a1 - a0, b1 - b0)) return false; }
+            }
+            return true;
         };
+        let pick = null;
+        for (let i = 0; i < cand.length && !pick; i++) for (let j = i + 1; j < cand.length && !pick; j++) {
+            const G = [cand[i], cand[j]].sort((x, y) => x.gc - y.gc);
+            if (G[1].g0 - G[0].g1 > 0.16 * W && valid(G)) pick = G;
+        }
+        if (!pick) { const one = cand.filter(g => valid([g])).sort((x, y) => Math.abs(x.gc - W / 2) - Math.abs(y.gc - W / 2)); if (one.length) pick = [one[0]]; }
+        if (pick) gts = pick;
+    }
+    if (gts.length) {
+        const colOf = s => { const m = (s.x0 + s.x1) / 2; let c = 0; while (c < gts.length && m >= gts[c].gc) c++; return c; };
+        // 2b) BẢNG nhiều ô trải qua các cột: dòng có từ 3 mảnh trở lên (ít nhất 2 ô ngắn) nằm ở nhiều cột + các dòng nối tiếp thẳng hàng với cột ô.
+        //     Vùng này là một khối liền (đọc theo hàng; kéo xuyên ô / xuyên cột được).
+        const tbA = [];
+        lines.forEach(ln => {
+            ln.tbl = false;
+            const sh = ln.sg.filter(s => s.x1 - s.x0 < MINW);   // ô ngắn; chữ cột dài không tính → chữ cột bên cạnh một bảng nhỏ không bị kéo vào bảng
+            if (sh.length >= 4) {
+                const per = {}; sh.forEach(s => { const c = colOf(s); per[c] = (per[c] || 0) + 1; });
+                if (Object.keys(per).filter(c => per[c] >= 2).length >= 2) { ln.tbl = true; sh.forEach(s => tbA.push(s.x0)); }   // hàng bảng: ≥2 ô ngắn ở mỗi bên của ít nhất 2 cột
+            }
+        });
+        if (tbA.length) {
+            const nearA = x => tbA.some(a => Math.abs(a - x) <= 4);
+            for (let it = 0, ch = true; ch && it < 8; it++) {
+                ch = false;
+                for (let i = 0; i < lines.length; i++) {
+                    const ln = lines[i]; if (ln.tbl) continue;
+                    if (!ln.sg.every(s => s.x1 - s.x0 <= 0.34 * W && nearA(s.x0))) continue;
+                    const fhm = Math.max.apply(null, ln.sg.map(s => s.fh)), close = o => !!o && o.tbl && Math.abs(o.y - ln.y) <= 2.3 * fhm;
+                    if (close(lines[i - 1]) || close(lines[i + 1])) { ln.tbl = true; ln.sg.forEach(s => tbA.push(s.x0)); ch = true; }
+                }
+            }
+        }
+        segs.forEach(s => { s.full = !!s.ln.tbl || gts.some(g => s.x0 < g.g0 && s.x1 > g.g1); });
+        // 3) từ trên xuống: dải rộng / bảng liền nhau = 1 khối; dải nhiều cột = lần lượt khối từng cột (trái → phải)
+        let band = [], full = [];
+        const flushBand = () => { for (let c = 0; c <= gts.length; c++) emit([].concat(...band.filter(s => colOf(s) === c).map(s => s.its))); band = []; };
         const flushFull = () => { emit([].concat(...full.map(s => s.its))); full = []; };
         segs.slice().sort((a, b) => a.y - b.y).forEach(s => {
             if (s.full) { if (band.length) flushBand(); full.push(s); }
@@ -11392,6 +11424,8 @@ bkCloseAll();
                 if (data && ctrlEl && !ctrlEl.classList.contains('ui-hidden')) {
                     resetInactivityTimer(playerId);
                 }
+            } else if (event.data === YT.PlayerState.PAUSED && data && data.qSilent && Date.now() < data.qSilent && !data.userPaused) {
+                // YouTube tạm dừng thoáng qua lúc tự đổi chất lượng do mạng: giữ nguyên giao diện, không hiện thanh điều khiển / nút phát
             } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
                 playBtn.innerHTML = YT_PLAY_HTML;
                 if (data && data.hideControlsTimer) {
@@ -13887,7 +13921,6 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         mk('vi', 'Vie'); mk('en', 'Eng');
         row.insertBefore(bar, row.firstChild);
         aiLangBarPaint(bubble);
-        if (bi) { try { aiBubbleLang(bubble, 'vi'); } catch (e) {} }   // không còn chế độ cột: bản song ngữ cũ hiện bản Việt
     }
     function aiLangBarPaint(bubble) {
         const bar = bubble.querySelector('.ai-langbar'); if (!bar) return;
@@ -14120,7 +14153,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     function aiSetStatus(t) { document.getElementById('ai-live-status').textContent = t; }
 
     const AI_QUICK_QUIZ = [['Giải thích vì sao đáp án đúng là đúng.', '💡 Vì sao đúng?', 'bg-indigo-50 text-indigo-700 border-indigo-200'], ['', '🔬 Tìm hiểu sâu', 'bg-sky-50 text-sky-700 border-sky-200', 'deep'], ['Phân tích vì sao từng đáp án còn lại sai.', '🚫 Vì sao kia sai?', 'bg-rose-50 text-rose-700 border-rose-200'], ['Cho mình mẹo ghi nhớ và một ví dụ lâm sàng ngắn liên quan.', '🧠 Mẹo nhớ / ví dụ', 'bg-emerald-50 text-emerald-700 border-emerald-200'], ['', '🎓 Học Tập có hướng dẫn', 'bg-violet-50 text-violet-700 border-violet-200', 'guided']];
-    const AI_QUICK_VIDEO = [['Hãy lập mục lục nội dung video theo mốc thời gian, từ đầu đến cuối, không bỏ sót đoạn chính nào. Mở đầu bằng 1–2 câu tổng quan. Sau đó trình bày mục lục PHÂN CẤP có đánh số như mục lục sách: mục lớn đánh số 1., 2., 3., …; mục con đánh số 1.1, 1.2, …, 2.1, 2.2, … (tối đa 2 cấp; tách mục con khi một mục lớn có nhiều ý rõ rệt). Mỗi mục một dòng, đúng dạng: <số thứ tự> [mm:ss] Tên mục — các ý chính của đoạn đó trong 3–4 câu đầy đủ ý (nêu lần lượt các ý chính nối tiếp nhau trong đoạn, giữ lại thuật ngữ, số liệu quan trọng; mục lớn lẫn mục con đều viết 3–4 câu). Mốc thời gian tăng dần theo thứ tự số. Không thêm phần kết luận hay ý cần nhớ ở cuối. Mục lục chỉ tóm lược nội dung video nên KHÔNG trích dẫn tài liệu, không gắn nguồn hay link.', '📑 Mục lục theo thời gian', 'bg-indigo-50 text-indigo-700 border-indigo-200', 'timeline'], ['Giải thích dễ hiểu đoạn mình đang xem.', '🎯 Giải thích đoạn đang xem', 'bg-rose-50 text-rose-700 border-rose-200', 'explain'], ['', '🖼️ Hỏi hình ảnh đang hiện', 'bg-amber-50 text-amber-700 border-amber-200', 'frame'], ['', '📝 Trắc nghiệm', 'bg-emerald-50 text-emerald-700 border-emerald-200', 'vidquiz'], ['', '🎓 Học Tập có hướng dẫn', 'bg-violet-50 text-violet-700 border-violet-200', 'guided']];
+    const AI_QUICK_VIDEO = [['Hãy lập mục lục nội dung video theo mốc thời gian, từ đầu đến cuối, không bỏ sót đoạn chính nào. Mở đầu bằng 1–2 câu tổng quan. Sau đó trình bày mục lục PHÂN CẤP có đánh số như mục lục sách: mục lớn đánh số 1., 2., 3., …; mục con đánh số 1.1, 1.2, …, 2.1, 2.2, … (tối đa 2 cấp; tách mục con khi một mục lớn có nhiều ý rõ rệt). Mỗi mục một dòng, đúng dạng: <số thứ tự> [mm:ss] Tên mục — các ý chính của đoạn đó trong 3–4 câu đầy đủ ý (nêu lần lượt các ý chính nối tiếp nhau trong đoạn, giữ lại thuật ngữ, số liệu quan trọng; mục lớn lẫn mục con đều viết 3–4 câu). Mốc thời gian tăng dần theo thứ tự số. Không thêm phần kết luận hay ý cần nhớ ở cuối. Mục lục chỉ tóm lược nội dung video nên KHÔNG trích dẫn tài liệu, không gắn nguồn hay link.', '📑 Mục lục theo thời gian', 'bg-indigo-50 text-indigo-700 border-indigo-200', 'timeline'], ['Giải thích dễ hiểu đoạn mình đang xem.', '🎯 Giải thích đoạn đang xem', 'bg-rose-50 text-rose-700 border-rose-200', 'explain'], ['', '🖼️ Hỏi hình ảnh đang hiện', 'bg-amber-50 text-amber-700 border-amber-200', 'frame'], ['', '🔬 Tìm hiểu sâu', 'bg-sky-50 text-sky-700 border-sky-200', 'deep'], ['', '📝 Trắc nghiệm', 'bg-emerald-50 text-emerald-700 border-emerald-200', 'vidquiz'], ['', '🎓 Học Tập có hướng dẫn', 'bg-violet-50 text-violet-700 border-violet-200', 'guided']];
     function aiRenderQuick(list) {
         aiState.guided = false;
         const box = document.getElementById('ai-quick'); box.innerHTML = '';
@@ -14201,7 +14234,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         if (id === 'vidquiz') { bkQzChooser(); return; }
         if (id === 'deep' || id === 'guided') {
             if (aiState.live && aiState.live.ready) { showToast('Hãy tắt nói trực tiếp (🎙️) rồi thử lại'); return; }
-            if (id === 'deep') aiDeepResearch('', '🔬 Tìm hiểu sâu (Deep Research Mini)'); else aiGuidedStart();
+            if (id === 'deep') aiDeepResearch(aiState.mode === 'video' ? aiVideoContext() : '', '🔬 Tìm hiểu sâu (Deep Research Mini)'); else aiGuidedStart();
             return;
         }
         aiState.guided = false;
@@ -17235,15 +17268,21 @@ window.PGR = (function () {
             if (wEl) wEl.classList.add('yt-ui-off', 'hide-cursor');
         };
         applyHid();
-        [16, 60, 180, 400].forEach(function (ms) { setTimeout(applyHid, ms); });
+        [16, 60, 180, 400, 900, 1600, 2600, 4200].forEach(function (ms) { setTimeout(applyHid, ms); });
+    }
+    function autoQualNote(pid, dir) {   // tự đổi chất lượng do mạng: chỉ báo bằng toast, không để thanh điều khiển / biểu tượng nào hiện lên
+        var d = activeYtPlayers[pid], q = d && d.q; if (!d) return;
+        d.qSilent = Date.now() + 6000;
+        var n = (q && (NAME[q.cur] || q.cur)) || '';
+        toast((dir === 'up' ? '📶 Mạng ổn định — đã nâng chất lượng lên ' : '📉 Mạng yếu — đã hạ chất lượng xuống ') + n);
     }
     function qualTick(pid, now) {
         var d = activeYtPlayers[pid], q = d && d.q; if (!q || q.mode !== 'auto') return;
         var c = navigator.connection || {};
         if (q.cap > netCap() && now - q.at > 90000 && !q.stalls.some(function (t) { return now - t < 90000; }) && (c.downlink == null || c.downlink >= 5)) {
             var cEl = $('controls-' + pid), wasHid = !!(cEl && cEl.classList.contains('ui-hidden'));
-            q.cap--; qApply(pid);
-            keepUiHiddenAfterAutoQual(pid, wasHid);
+            q.cap--; if (d) d.qSilent = Date.now() + 6000; qApply(pid);
+            keepUiHiddenAfterAutoQual(pid, wasHid); autoQualNote(pid, 'up');
         }
     }
     window.ytFocusState = function (pid, s) {
@@ -17255,15 +17294,15 @@ window.PGR = (function () {
         var q = d.q; if (!q) return;
         if (s === 1 && !q.first) {
             var cEl0 = $('controls-' + pid), wasHid0 = !!(cEl0 && cEl0.classList.contains('ui-hidden'));
-            q.first = true; qApply(pid);
+            q.first = true; d.qSilent = Date.now() + 6000; qApply(pid);
             keepUiHiddenAfterAutoQual(pid, wasHid0);
         }
         if (s === 3 && d.everPlayed && q.mode === 'auto') {
             var now = Date.now(); q.stalls = q.stalls.filter(function (t) { return now - t < 25000; }); q.stalls.push(now);
             if (q.stalls.length >= 2 && q.cap < LADDER.length - 1) {
                 var cEl = $('controls-' + pid), wasHid = !!(cEl && cEl.classList.contains('ui-hidden'));
-                q.cap++; q.stalls = []; qApply(pid);
-                keepUiHiddenAfterAutoQual(pid, wasHid);
+                q.cap++; q.stalls = []; d.qSilent = Date.now() + 6000; qApply(pid);
+                keepUiHiddenAfterAutoQual(pid, wasHid); autoQualNote(pid, 'down');
             }
         }
         if (s === 1 && !f.started) { f.started = true; if (isOn() && !d.chapters && !d.chapBusy && aiAnyKey()) window.ytChapEnsure(pid); }
