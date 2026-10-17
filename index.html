@@ -10077,7 +10077,7 @@ async function bkOpenChapter(i) {
         bkPages = ex.pages; bkText = ex.text;
         bkSecs = bkLoadManual(c.url);
         bkRelink(); bkRenderSecList(); bkUpdateSecBtn();
-        if (bkHeadsLoad(c.url)) bkRebuildSecs(tok).then(ok => { if (ok) bkDeepStart(tok); }).catch(() => {});
+        if (bkHeadsLoad(c.url)) bkRebuildSecs(tok).catch(() => {});
         bkApplyHlAll();
         bkSetStatus(bkText.trim() ? '' : 'Chương này không có chữ (có thể là PDF scan), AI không đọc được nội dung.');
     } catch (e) {
@@ -10500,12 +10500,12 @@ async function bkShotPages(nums, tok, onProg) {
     }
     return out;
 }
-/* Chia các trang thành đợt gửi AI (tối đa 40 trang / ~13 MB mỗi đợt), gối nhau 2 trang để ráp đoạn / mục nằm sát ranh đợt */
+/* Chia các trang thành đợt gửi AI (tối đa 20 trang / ~12 MB mỗi đợt), gối nhau 2 trang để ráp đoạn / mục nằm sát ranh đợt */
 function bkPlanWin(shots) {
     const W = []; let i = 0;
     while (i < shots.length) {
         let j = i, bytes = 0;
-        while (j < shots.length && j - i < 40 && (j === i || bytes + shots[j].b64.length < 13e6)) { bytes += shots[j].b64.length; j++; }
+        while (j < shots.length && j - i < 20 && (j === i || bytes + shots[j].b64.length < 12e6)) { bytes += shots[j].b64.length; j++; }
         W.push([i, j]);
         if (j >= shots.length) break;
         i = Math.max(i + 1, j - 2);
@@ -10513,20 +10513,18 @@ function bkPlanWin(shots) {
     return W;
 }
 function bkVisSystem() {
-    return 'Bạn là chuyên gia dàn trang sách giáo khoa. Bạn được cho ẢNH CÁC TRANG của một chương sách (mỗi ảnh có nhãn "TRANG n" đứng ngay trước). Hãy (1) lập MỤC LỤC PHÂN CẤP của chương, (2) mô tả BỐ CỤC CỘT của từng trang, (3) đánh dấu các VÙNG KHÔNG THUỘC DÒNG VĂN BẢN CHÍNH. Chỉ trả về JSON, không thêm chữ nào khác.\n\n'
+    return 'Bạn là chuyên gia dàn trang sách giáo khoa. Bạn được cho ẢNH CÁC TRANG của một chương sách (mỗi ảnh có nhãn "TRANG n" đứng ngay trước; ảnh đã thu nhỏ nhưng đủ rõ để đọc bố cục và tiêu đề). Hãy (1) lập MỤC LỤC PHÂN CẤP, CÓ THỨ BẬC của chương, (2) mô tả BỐ CỤC CỘT của từng trang, (3) đánh dấu các VÙNG KHÔNG THUỘC DÒNG VĂN BẢN CHÍNH. Chỉ trả về JSON, không thêm chữ nào khác.\n\n'
         + 'CÁCH ĐỌC: mỗi trang đọc theo cột, từ trên xuống dưới; hết cột 1 sang cột 2 (rồi cột 3 nếu có), từ trên xuống dưới; hết trang thì sang trang kế. Dải chữ rộng cả trang (tiêu đề lớn, đoạn trải ngang) là một dải riêng; nửa trên và nửa dưới của một trang có thể có số cột khác nhau.\n\n'
         + 'KHÔNG ĐỌC NGANG: hai cột là hai mạch văn riêng. Một dòng ở cột trái KHÔNG nối với dòng cùng độ cao ở cột phải, dù hai dòng thẳng hàng; không gộp chữ của hai cột thành một cột hay một dải. Trang 2 cột thì mỗi dải ghi đủ hai cột riêng, mỗi cột phủ trọn chữ của cột đó.\n'
-        + 'GHÉP ĐOẠN THEO CỘT: đoạn chỉ nối từ cuối cột trái sang đầu cột phải khi câu ở cuối cột trái còn dở (chưa có dấu chấm kết câu) và đầu cột phải là phần tiếp của đúng câu đó; nếu không thì là hai đoạn riêng, không ghép.\n'
-        + 'ĐẾM CỘT TRƯỚC KHI VẼ: nhìn khoảng trắng dọc chạy suốt chiều cao khối chữ giữa các cột. Nếu có khoảng trắng như vậy thì trang có nhiều cột: vẽ đúng số cột đó trong MỖI dải, cột trái và cột phải không bao giờ gộp thành một [xmin,xmax]. Tiêu đề, hình, bảng hay đoạn trải ngang cả trang nằm trong dải riêng và có thể chỉ có một cột.\n'
-        + 'BOX TIÊU ĐỀ: box chỉ ôm chữ của tiêu đề trong đúng cột của tiêu đề đó, không kéo sang cột bên cạnh; mỗi tiêu đề chỉ ghi một lần.\n'
-        + 'KHÔNG ĐƯỢC NHẬN DIỆN LÀ MỤC LỤC, và phải đưa vào "skip": Outline / Learning objectives / mục lục in sẵn của chương, hình ảnh, ảnh chụp, sơ đồ, chữ nằm trong hình, chú thích ảnh / hình (Figure, Fig., Hình), chú thích, bảng và tiêu đề bảng (Table, Bảng), biểu đồ, khung / hộp / ô rời khỏi mạch văn (Box, sidebar, Clinical Pearl, Key Points...), ghi chú lề, đầu trang, chân trang, số trang, tên tác giả.\n\n'
-        + 'GHÉP ĐOẠN: nếu một đoạn văn bị hình / bảng / khung chèn làm tách, phần đầu và phần sau của đoạn đó vẫn là MỘT mạch văn liên tục dù cách nhau vài trang. Vì vậy phần chèn phải nằm trong "skip" để không chen vào mạch văn; mỗi tiêu đề chỉ ghi MỘT lần, tại nơi nó bắt đầu.\n\n'
+        + 'ĐẾM CỘT TRƯỚC KHI VẼ: nhìn khoảng trắng dọc chạy suốt chiều cao khối chữ giữa các cột. Nếu có khoảng trắng như vậy thì trang có nhiều cột: vẽ đúng số cột đó trong MỖI dải, cột trái và cột phải không bao giờ gộp thành một [xmin,xmax]. Tiêu đề, hình, bảng hay đoạn trải ngang cả trang nằm trong dải riêng và có thể chỉ có một cột.\n\n'
+        + 'KHÔNG ĐƯỢC NHẬN DIỆN LÀ MỤC LỤC, và phải đưa vào "skip": Outline / Learning objectives / mục lục in sẵn của chương, hình ảnh, ảnh chụp, sơ đồ, chữ nằm trong hình, chú thích ảnh / hình (Figure, Fig., Hình), chú thích, bảng và tiêu đề bảng (Table, Bảng), biểu đồ, khung / hộp / ô rời khỏi mạch văn (Box, sidebar, Clinical Pearl, Key Points...), ghi chú lề, đầu trang, chân trang, số trang, tên tác giả. Tiêu đề nằm BÊN TRONG các vùng này cũng không phải mục của chương.\n'
+        + 'GHÉP ĐOẠN: nếu một đoạn văn bị hình / bảng / khung chèn làm tách, phần đầu và phần sau của đoạn đó vẫn là MỘT mạch văn liên tục, kể cả khi hai phần cách nhau vài trang. Hãy tự dò: câu còn dở ở cuối cột / cuối trang thì phần tiếp theo là chữ chính kế tiếp trong mạch văn (bỏ qua mọi vùng skip nằm giữa), nên phần chèn phải nằm trong "skip" ở MỌI trang chứa nó (hộp hay bảng kéo dài nhiều trang thì skip ở từng trang). Hai cột chỉ nối nhau khi câu cuối cột trái chưa kết thúc và đầu cột phải là phần tiếp của đúng câu đó. Mỗi tiêu đề chỉ ghi MỘT lần, tại nơi nó bắt đầu.\n\n'
         + 'TIÊU ĐỀ MỤC: chỉ là tiêu đề của mục nội dung nằm trong mạch văn chính, nhận biết qua cỡ chữ, in đậm / nghiêng / màu, viết hoa, khoảng cách trên-dưới và kiểu đánh số (1., 1.1, 1.1.1, A., a), i), (1)...). Tiêu đề in đậm đầu đoạn rồi chữ chạy tiếp cùng dòng vẫn nhận (box chỉ ôm phần in đậm). KHÔNG ghi tên chương (tiêu đề lớn ở trang đầu) và đầu / chân trang.\n'
-        + 'PHÂN CẤP ("level" từ 1 đến 10): level 1 = mục lớn nhất trong chương (ngay dưới tên chương), level 2 = mục con của nó, v.v. Xác định cấp theo thứ bậc hình thức (cỡ chữ lớn → nhỏ, đậm → thường, số thứ tự lồng nhau); cùng kiểu trình bày thì cùng cấp xuyên suốt chương; cấp mới chỉ được lớn hơn cấp liền trước tối đa 1 (không nhảy cấp).\n\n'
-        + 'TỌA ĐỘ: mọi box là [ymin, xmin, ymax, xmax] theo thang 0–1000 trên chính ảnh trang đó (0,0 là góc trên trái). Box tiêu đề phải ôm sát chữ của tiêu đề (gồm cả số thứ tự đầu dòng).\n'
+        + 'PHÂN CẤP VÀ ĐÁNH SỐ ("level" từ 1 đến 10): level 1 = mục lớn nhất trong chương (ngay dưới tên chương), level 2 = mục con của level 1, level 3 = mục con của level 2, … tối đa level 10; ứng dụng sẽ tự đánh số 1. / 1.1 / 1.1.1 … theo level, vì vậy level phải đúng thứ bậc. Xác định cấp theo thứ bậc hình thức: cỡ chữ lớn → nhỏ, đậm → thường → nghiêng, VIẾT HOA → viết thường, thụt lề, và kiểu đánh số lồng nhau (1. → 1.1 → 1.1.1 → 1.1.1.1; hoặc I. → A. → 1. → a) → i) → (1)). Ghi đúng số thứ tự in sẵn vào "num" (nguyên văn, ví dụ "2.3.1", "B.", "a)"; không có thì để chuỗi rỗng) và mô tả kiểu trình bày vào "fmt" (ví dụ "đậm lớn", "đậm cỡ thường, riêng dòng", "đậm nghiêng đầu đoạn"). Cùng kiểu trình bày (cùng fmt) thì cùng level xuyên suốt chương; kiểu trình bày nhỏ / nhẹ hơn thì level lớn hơn. Cấp mới chỉ được lớn hơn cấp liền trước tối đa 1 (không nhảy cấp). Nếu có "Mục lục đã lập ở các trang trước" thì giữ nhất quán cấp bậc với nó, không ghi lại các mục đó.\n\n'
+        + 'TỌA ĐỘ: mọi box là [ymin, xmin, ymax, xmax] theo thang 0–1000 trên chính ảnh trang đó (0,0 là góc trên trái). Box tiêu đề phải ôm sát chữ của tiêu đề (gồm cả số thứ tự đầu dòng) và chỉ nằm trong đúng cột của tiêu đề đó.\n'
         + 'BỐ CỤC: "zones" chia trang thành các dải liên tiếp từ trên xuống phủ kín 0–1000 theo chiều dọc; mỗi dải liệt kê các cột chữ [xmin, xmax] từ trái sang phải, mỗi cột phải phủ trọn bề ngang chữ của cột (kể cả phần thụt đầu dòng, số thứ tự). Trang một cột chỉ cần một dải một cột.\n\n'
-        + 'ĐỊNH DẠNG TRẢ VỀ: {"pages":[{"page":n,"zones":[{"y":[ymin,ymax],"cols":[[xmin,xmax]]}],"skip":[{"box":[ymin,xmin,ymax,xmax],"kind":"figure|caption|table|box|outline|other"}]}],"headings":[{"page":n,"box":[ymin,xmin,ymax,xmax],"text":"nguyên văn tiêu đề, bỏ số thứ tự in sẵn","level":1,"vi":"bản dịch tiếng Việt của tiêu đề"}]}\n'
-        + 'Mảng "headings" sắp theo thứ tự đọc. Bản dịch "vi" phải đúng thuật ngữ chuyên ngành.' + (typeof BK_TR_GLOSS === 'string' ? BK_TR_GLOSS : '');
+        + 'ĐỊNH DẠNG TRẢ VỀ: {"pages":[{"page":n,"zones":[{"y":[ymin,ymax],"cols":[[xmin,xmax]]}],"skip":[{"box":[ymin,xmin,ymax,xmax],"kind":"figure|caption|table|box|outline|other"}]}],"headings":[{"page":n,"box":[ymin,xmin,ymax,xmax],"text":"nguyên văn tiêu đề, bỏ số thứ tự in sẵn","num":"số thứ tự in sẵn hoặc rỗng","fmt":"kiểu trình bày","level":1,"vi":"bản dịch tiếng Việt của tiêu đề"}]}\n'
+        + 'Phải có phần tử "pages" cho MỌI trang được gửi. Mảng "headings" sắp theo thứ tự đọc. Bản dịch "vi" phải đúng thuật ngữ chuyên ngành.' + (typeof BK_TR_GLOSS === 'string' ? BK_TR_GLOSS : '');
 }
 /* Gọi Gemini với ảnh (JSON). Lỗi khóa / hết lượt ném ra để aiRun chuyển nhà cung cấp khác */
 async function bkVisGemini(system, parts) {
@@ -10565,7 +10563,7 @@ async function bkVisCall(system, parts) { return aiJsonCall(system, parts, bkVis
 async function bkAiReadWindow(shots, title, nTot, prevHeads, sub) {
     let intro = 'Chương: ' + title + ' (tổng ' + nTot + ' trang). Dưới đây là ảnh các trang ' + shots[0].num + '–' + shots[shots.length - 1].num + '.';
     if (sub) intro += '\n\nCHỈ NHIỆM VỤ NÀY: liệt kê các MỤC CON nằm bên trong mục "' + sub.title + '" (đã biết, đừng ghi lại chính nó, cũng đừng ghi mục cùng cấp hay cấp trên). "level" tính TƯƠNG ĐỐI: 1 = con trực tiếp của mục này, 2 = cháu... Chỉ cần mảng "headings"; "pages" trả mảng rỗng.';
-    else if (prevHeads.length) intro += '\n\nMục lục đã lập ở các trang trước (giữ nhất quán cấp bậc, không ghi lại):\n' + prevHeads.slice(-25).map(h => '  '.repeat(h.lvl - 1) + h.en + ' [cấp ' + h.lvl + ', tr.' + h.page + ']').join('\n');
+    else if (prevHeads.length) intro += '\n\nMục lục đã lập ở các trang trước (giữ nhất quán cấp bậc, không ghi lại):\n' + prevHeads.slice(-40).map(h => '  '.repeat(Math.max(0, (h.lvl || 1) - 1)) + h.en + ' [cấp ' + (h.lvl || 1) + ', tr.' + h.page + ']').join('\n');
     const parts = [{ text: intro }];
     shots.forEach(s => { parts.push({ text: 'TRANG ' + s.num }); parts.push({ inlineData: { mimeType: 'image/jpeg', data: s.b64 } }); });
     parts.push({ text: 'Hãy trả JSON đúng định dạng đã nêu.' });
@@ -10583,7 +10581,7 @@ function bkAiCollect(r, lastPg, heads, lay, relBase) {
         const box = Array.isArray(h.box) && h.box.length >= 4 ? h.box.slice(0, 4).map(Number) : null;
         const prev = heads[heads.length - 1];
         if (prev && prev.page === n && bkNormStr(prev.en) === bkNormStr(en)) return;
-        heads.push({ page: n, box: (box && box.every(isFinite)) ? box : null, en: en.slice(0, 200), vi: String(h.vi || '').replace(/\s+/g, ' ').trim().slice(0, 200), lvl: Math.max(1, Math.min(10, (parseInt(h.level, 10) || 1) + (relBase || 0))) });
+        heads.push({ page: n, box: (box && box.every(isFinite)) ? box : null, en: en.slice(0, 200), vi: String(h.vi || '').replace(/\s+/g, ' ').trim().slice(0, 200), pn: String(h.num || '').trim().slice(0, 20), fmt: String(h.fmt || '').trim().slice(0, 60), lvl: Math.max(1, Math.min(10, (parseInt(h.level, 10) || 1) + (relBase || 0))) });
     });
 }
 function bkFixVi(vi, en) {
@@ -10652,51 +10650,21 @@ function bkTocFail(e) {
    Bước 2: phần còn lại được chia thành nhóm 3–5 trang; mỗi nhóm quét kỹ (bố cục cột + mục con), từ trên xuống.
    Chống lag: nhóm chỉ chạy khi người dùng không cuộn; giữa các nhóm có khoảng nghỉ; ảnh mã hóa không chặn luồng chính;
    chữ chương chỉ đọc lại sau mỗi 3 nhóm; vòng lặp dài luôn nhường luồng chính cho trình duyệt. */
-let bkHeads = [], bkScanTo = 0, bkMissed = [], bkDeepTok = 0, bkLastScrollAt = 0, bkDeepBusy = 0;
+let bkHeads = [], bkDeepTok = 0, bkLastScrollAt = 0, bkDeepBusy = 0;   // bkDeepTok = mã lượt quét hiện hành (lượt mới làm lượt cũ tự dừng)
 document.addEventListener('scroll', () => { bkLastScrollAt = Date.now(); }, { capture: true, passive: true });
 const bkYield = () => new Promise(res => setTimeout(res, 0));   // nhường luồng chính cho trình duyệt vẽ và xử lý sự kiện
 function bkBreathe(ms) { return new Promise(res => setTimeout(res, ms)); }
-function bkHeadsLoad(url) {   // đọc tiến độ quét của chương (chỉ nhận định dạng v4)
-    bkHeads = []; bkScanTo = 0; bkMissed = [];
+function bkHeadsLoad(url) {   // đọc danh sách tiêu đề AI đã lập cho chương (định dạng v4 / v5 đều dùng được)
+    bkHeads = [];
     try {
         const o = JSON.parse(localStorage.getItem('bk_hd_' + url) || 'null');
-        if (!o || o.v !== 4 || !Array.isArray(o.heads)) return false;
-        bkHeads = o.heads; bkScanTo = +o.scanTo || 0; bkMissed = Array.isArray(o.missed) ? o.missed : [];
+        if (!o || (o.v !== 4 && o.v !== 5) || !Array.isArray(o.heads)) return false;
+        bkHeads = o.heads;
         return bkHeads.length > 0;
     } catch (e) { return false; }
 }
 function bkHeadsSave() {
-    try { if (bkCur) localStorage.setItem('bk_hd_' + bkCur.url, JSON.stringify({ v: 4, heads: bkHeads, scanTo: bkScanTo, missed: bkMissed })); } catch (e) {}
-}
-function bkL1System() {
-    return 'Bạn là chuyên gia đọc mục lục sách giáo khoa. Bạn được cho ẢNH CÁC TRANG của một chương sách (mỗi ảnh có nhãn "TRANG n" đứng ngay trước). '
-        + 'Chỉ tìm MỤC CẤP 1 của chương: các tiêu đề lớn nhất trong mạch văn chính (cỡ chữ lớn hoặc đậm nổi bật, thường đánh số kiểu 1., 2. hoặc A., B.). '
-        + 'KHÔNG ghi mục con, tên chương, hình, bảng, khung, chú thích, Outline, Learning objectives, đầu trang, chân trang. Chỉ trả về JSON, không thêm chữ nào khác.\n\n'
-        + 'CÁCH ĐỌC: mỗi trang đọc theo cột, từ trên xuống dưới; hết cột 1 sang cột 2, rồi sang trang kế.\n\n'
-        + 'TỌA ĐỘ: box là [ymin, xmin, ymax, xmax] theo thang 0–1000 trên chính ảnh trang đó (0,0 là góc trên trái). Box phải ôm sát chữ của tiêu đề.\n\n'
-        + 'ĐỊNH DẠNG TRẢ VỀ: {"headings":[{"page":n,"box":[ymin,xmin,ymax,xmax],"text":"nguyên văn tiêu đề, bỏ số thứ tự in sẵn","level":1,"vi":"bản dịch tiếng Việt của tiêu đề"}]}\n'
-        + 'Mảng "headings" sắp theo thứ tự đọc. Bản dịch "vi" phải đúng thuật ngữ chuyên ngành.' + (typeof BK_TR_GLOSS === 'string' ? BK_TR_GLOSS : '');
-}
-async function bkL1Window(shots, title, nTot, prev) {
-    let intro = 'Chương: ' + title + ' (tổng ' + nTot + ' trang). Dưới đây là ảnh các trang ' + shots[0].num + '–' + shots[shots.length - 1].num + '. Chỉ tìm mục cấp 1.';
-    if (prev.length) intro += '\n\nMục cấp 1 đã tìm ở các trang trước (đừng ghi lại):\n' + prev.slice(-20).map(h => '- ' + h.en + ' [tr.' + h.page + ']').join('\n');
-    const parts = [{ text: intro }];
-    shots.forEach(s => { parts.push({ text: 'TRANG ' + s.num }); parts.push({ inlineData: { mimeType: 'image/jpeg', data: s.b64 } }); });
-    parts.push({ text: 'Hãy trả JSON đúng định dạng đã nêu.' });
-    return bkVisCall(bkL1System(), parts);
-}
-async function bkDeepWindow(shots, title, nTot, prevHeads) {   // một nhóm 3–5 trang: bố cục + mục con (cấp tuyệt đối, theo mục đã biết)
-    return bkAiReadWindow(shots, title, nTot, prevHeads, null);
-}
-function bkDeepSay(a, b) {   // tiến độ quét kỹ hiện ngay trên nút mục lục
-    const btn = document.getElementById('bk-sec-btn');
-    if (btn) btn.textContent = '🔍 Quét kỹ trang ' + a + '–' + b + ' · ' + Math.round(100 * bkScanTo / Math.max(1, bkDoc.numPages)) + '%';
-}
-function bkMakeGroups(from, N) {   // chia các trang còn lại thành nhóm đều nhau, mỗi nhóm 3–5 trang
-    const n = N - from + 1; if (n <= 0) return [];
-    const k = Math.ceil(n / 5), out = []; let a = from;
-    for (let i = 0; i < k; i++) { const size = Math.floor(n / k) + (i < n % k ? 1 : 0); out.push([a, a + size - 1]); a += size; }
-    return out;
+    try { if (bkCur) localStorage.setItem('bk_hd_' + bkCur.url, JSON.stringify({ v: 5, heads: bkHeads })); } catch (e) {}
 }
 function bkBlobB64(blob) {   // ảnh → base64 bất đồng bộ (không chặn luồng chính)
     return new Promise((res, rej) => {
@@ -10715,41 +10683,6 @@ async function bkWaitQuiet(my, tok, quietMs, maxMs, withSel) {   // chờ ngư�
         if (!busy) return;
         await bkBreathe(300);
     }
-}
-function bkDeepCollect(r, a, b, lay) {   // gom kết quả một nhóm: bố cục các trang trong nhóm + tiêu đề mới (bỏ tiêu đề đã có)
-    const N = bkDoc ? bkDoc.numPages : 0;
-    const pgs = Array.isArray(r.pages) ? r.pages : [];
-    pgs.forEach(p => { const n = parseInt(p && p.page, 10); if (n >= a && n <= b && n >= 1 && n <= N) lay[n] = bkAiToLayout(p); });
-    const hs = Array.isArray(r.headings) ? r.headings : [];
-    const out = [];
-    hs.forEach(h => {
-        const n = parseInt(h && h.page, 10), en = String((h && (h.text || h.en || h.title)) || '').replace(/\s+/g, ' ').trim();
-        if (!(n >= a && n <= b) || !en) return;
-        const key = bkNormStr(en).slice(0, 40);
-        if (!key) return;
-        if (bkHeads.some(x => x.page === n && bkNormStr(x.en).slice(0, 40) === key)) return;
-        if (out.some(x => x.page === n && bkNormStr(x.en).slice(0, 40) === key)) return;
-        const box = Array.isArray(h.box) && h.box.length >= 4 ? h.box.slice(0, 4).map(Number) : null;
-        out.push({ page: n, box: (box && box.every(isFinite)) ? box : null, en: en.slice(0, 200), vi: String(h.vi || '').replace(/\s+/g, ' ').trim().slice(0, 200), lvl: Math.max(1, Math.min(10, parseInt(h.level, 10) || 2)) });
-    });
-    return out;
-}
-async function bkDeepGroup(a, b, my, tok) {   // true = xong · false = AI lỗi · null = đã dừng
-    const N = bkDoc.numPages, nums = [];
-    for (let p = a; p <= b; p++) nums.push(p);
-    const shots = await bkShotPages(nums, tok, null);
-    if (!shots || my !== bkDeepTok || tok !== bkViewTok) return null;
-    const prev = bkHeads.filter(h => h.page < a).sort((x, y) => x.page - y.page);
-    let r = null;
-    try { r = await bkDeepWindow(shots, bkCur.title, N, prev); }
-    catch (e) { if (e && (e.badKey || e.quota)) throw e; }
-    if (my !== bkDeepTok || tok !== bkViewTok) return null;
-    if (!r || typeof r !== 'object') return false;
-    const lay = {};
-    const added = bkDeepCollect(r, a, b, lay);
-    bkAiLay = Object.assign({}, bkAiLay, lay); bkLayCache = {}; bkLaySave();
-    bkHeads = bkHeads.concat(added);
-    return true;
 }
 async function bkReextract(tok, my) {   // đọc lại chữ chương theo bố cục mới; giữ mục tự đánh dấu (định vị lại theo đoạn chữ)
     const oldT = bkText;
@@ -10798,66 +10731,103 @@ async function bkApplyScan(tok, my) {   // áp kết quả nhóm vào chữ chư
     if ((await bkReextract(tok, my)) !== true) return null;
     return (await bkRebuildSecs(tok)) === true ? true : null;
 }
-async function bkDeepStart(tok) {    // Quét ngầm: mỗi lượt AI chỉ đọc 2 trang, từ trang 1 trở đi (trang đầu được phân tích kỹ trước).
-    // Sau mỗi lượt danh sách mục lục được dựng lại ngay, nên mục lục hiện dần chứ không chờ cả chương.
-    // Chữ chương đọc lại theo bố cục mới sau lượt 1 và cứ 2 lượt một lần (tránh giật khi đang đọc).
-    if (!bkDoc) return;
-    const my = ++bkDeepTok, N = bkDoc.numPages;
-    let did = 0;
-    bkDeepBusy = tok;
-    try {
-        while (my === bkDeepTok && tok === bkViewTok && bkScanTo < N) {
-            const a = bkScanTo + 1, b = Math.min(N, a + 1);
-            await bkWaitQuiet(my, tok, 700, 45000, false);
-            if (my !== bkDeepTok || tok !== bkViewTok) return;
-            bkDeepSay(a, b);
-            let ok = false;
-            for (let at = 0; at < 2 && !ok; at++) {
-                try { ok = await bkDeepGroup(a, b, my, tok); }
-                catch (e) { if (e && (e.badKey || e.quota)) throw e; ok = false; }
-                if (ok === null) return;
-                if (!ok) await bkBreathe(2500);
-            }
-            if (!ok) bkMissed.push([a, b]);
-            bkScanTo = b; did++;
-            bkHeadsSave();
-            if (did === 1 || did % 2 === 0 || bkScanTo >= N) { if ((await bkApplyScan(tok, my)) !== true) return; }
-            else if ((await bkRebuildSecs(tok)) !== true) return;
-            await bkBreathe(600);
-        }
-        const retry = bkMissed.splice(0);   // các cụm AI lỗi: thử lại một lần ở cuối
-        for (let i = 0; i < retry.length; i++) {
-            if (my !== bkDeepTok || tok !== bkViewTok) return;
-            const g = retry[i];
-            bkDeepSay(g[0], g[1]);
-            let ok = false;
-            try { ok = await bkDeepGroup(g[0], g[1], my, tok); }
-            catch (e) { if (e && (e.badKey || e.quota)) throw e; ok = false; }
-            if (ok === null) return;
-            if (!ok) bkMissed.push(g);
-        }
-        if (retry.length) { bkHeadsSave(); if ((await bkApplyScan(tok, my)) !== true) return; }
-    } catch (e) { bkTocFail(e); return; }
-    finally { if (my === bkDeepTok) bkDeepBusy = 0; }
-    if (my === bkDeepTok && tok === bkViewTok) {
-        bkUpdateSecBtn();   // luôn trả nhãn nút về bình thường, kể cả khi chỉ thử lại cụm lỗi
-        if (did) showToast(bkMissed.length ? 'Đã quét xong, còn ' + bkMissed.length + ' cụm trang AI chưa đọc được — bấm “🔄 Cập nhật mục lục” để thử lại' : 'Đã quét xong toàn bộ chương');
+/* ===== NHẬN DIỆN MỤC LỤC (v5): chụp TOÀN BỘ chương một lượt → gửi AI đọc theo cột → mục lục nhiều cấp (tối đa 10) =====
+   Bấm nút: app vẽ mọi trang của chương ra ảnh, thu nhỏ vừa đủ để AI còn đọc đúng bố cục, rồi gửi theo từng lô 20 trang (gối 2 trang).
+   AI đọc từng cột từ trên xuống, hết cột 1 sang cột 2, bỏ qua Outline / hình / chú thích / bảng / khung / ô, nên đoạn văn bị chèn tách
+   (kể cả cách nhau vài trang) vẫn ráp liền khi app đọc lại chữ chương. Cuối cùng AI chuẩn hóa cấp bậc cả chương một lần để các lô khớp nhau;
+   danh sách bên trái tự đánh số 1. / 1.1 / 1.1.1 … theo cấp. */
+async function bkShotChapter(nums, tok, onProg) {   // chụp cả chương: cạnh dài tùy số trang, đủ nét để AI định vị đúng chữ
+    const out = [], n = nums.length;
+    const target = n <= 25 ? 1200 : (n <= 60 ? 1050 : (n <= 120 ? 950 : 850));
+    for (let i = 0; i < n; i++) {
+        if (tok !== bkViewTok) return null;
+        const page = await bkDoc.getPage(nums[i]);
+        const v1 = page.getViewport({ scale: 1 });
+        const vp = page.getViewport({ scale: target / Math.max(v1.width, v1.height) });
+        const cv = document.createElement('canvas');
+        cv.width = Math.max(1, Math.round(vp.width)); cv.height = Math.max(1, Math.round(vp.height));
+        await page.render({ canvasContext: cv.getContext('2d', { alpha: false }), viewport: vp, background: '#ffffff' }).promise;
+        const blob = await new Promise(res => cv.toBlob(res, 'image/jpeg', 0.6));
+        const b64 = blob ? await bkBlobB64(blob) : cv.toDataURL('image/jpeg', 0.6).split(',')[1];
+        cv.width = 0; cv.height = 0;
+        out.push({ num: nums[i], b64: b64 });
+        if (onProg) onProg(i + 1, n);
+        await bkYield();   // nhường luồng chính giữa các trang
     }
-}async function bkDetectChapter() {    if (!bkDoc) return;
+    return out;
+}
+function bkScanSay(m) {   // tiến độ hiện ngay trên nút; chưa có mục lục thì ghi thêm vào danh sách
+    const btn = document.getElementById('bk-sec-btn'), list = document.getElementById('bk-sec-list');
+    if (btn) btn.textContent = '⏳ ' + m;
+    if (list && !bkSecs.length) list.innerHTML = '<p class="text-xs text-gray-500 p-1">🔍 ' + bkEsc(m) + '</p>';
+}
+/* AI chuẩn hóa cấp bậc cả chương: cùng kiểu số / cùng kiểu trình bày → cùng cấp, không nhảy cấp (các lô ảnh được đọc riêng nên cần bước này) */
+async function bkNormLevels(my, tok) {
+    if (bkHeads.length < 3) return false;
+    const rows = bkHeads.map((h, i) => ({ i: i, p: h.page, n: h.pn || '', f: h.fmt || '', t: String(h.en || '').slice(0, 90), l: h.lvl || 1 }));
+    const sys = 'Bạn là chuyên gia dàn trang sách giáo khoa. Dưới đây là danh sách tiêu đề của MỘT chương, theo thứ tự đọc, mỗi dòng: i = số thứ tự, p = trang, n = số thứ tự in sẵn, f = kiểu trình bày, t = chữ tiêu đề, l = cấp do AI gán tạm (có thể lệch giữa các đoạn của chương). '
+        + 'Hãy gán lại CẤP (1 đến 10) nhất quán cho toàn chương: 1 = mục lớn nhất, 2 = mục con của nó, 3 = con của cấp 2 … tối đa 10. Căn cứ: số thứ tự lồng nhau (1. → 1.1 → 1.1.1; I. → A. → 1. → a) → i)), kiểu trình bày (lớn / đậm → nhỏ / thường / nghiêng), và ngữ nghĩa (mục con thuộc mục cha liền trước). '
+        + 'Cùng kiểu số + cùng kiểu trình bày thì cùng cấp xuyên suốt; cấp mới chỉ lớn hơn cấp liền trước tối đa 1 (không nhảy cấp); dòng đầu tiên là cấp 1. KHÔNG thêm, bớt, đổi thứ tự hay sửa chữ. '
+        + 'Chỉ trả JSON: {"levels":[{"i":0,"level":1}]} đủ mọi i.';
+    let r = null;
+    try { r = await bkVisCall(sys, [{ text: JSON.stringify(rows) }]); }
+    catch (e) { if (e && (e.badKey || e.quota)) throw e; return false; }
+    if (my !== bkDeepTok || tok !== bkViewTok) return false;
+    const arr = Array.isArray(r && r.levels) ? r.levels : (Array.isArray(r) ? r : []);
+    const map = new Map();
+    arr.forEach(x => { const i = parseInt(x && x.i, 10), l = parseInt(x && x.level, 10); if (i >= 0 && i < bkHeads.length && l >= 1 && l <= 10) map.set(i, l); });
+    if (map.size < bkHeads.length * 0.8) return false;   // AI trả thiếu → giữ cấp cũ
+    bkHeads.forEach((h, i) => { if (map.has(i)) h.lvl = map.get(i); });
+    return true;
+}
+async function bkDetectChapter() {
+    if (!bkDoc) return;
     if (!bkText.trim()) { showToast('Chương đang được đọc chữ (xem thanh trạng thái) hoặc không có chữ — thử lại sau giây lát'); return; }
     if (!aiAnyKey()) { aiShowGate(); return; }
     const tok = bkViewTok;
-    if (bkDeepBusy === tok) { showToast('AI đang quét ngầm, mục lục sẽ hiện dần bên trái — bạn cứ đọc tiếp'); return; }
-    // đã quét đủ nhưng còn cụm AI lỗi → chỉ thử lại các cụm đó; còn lại → quét lại từ trang 1 (mục tự đánh dấu được giữ)
-    if (!(bkScanTo >= bkDoc.numPages && bkMissed.length)) {
-        bkHeads = []; bkScanTo = 0; bkMissed = [];
-        bkAiLay = {}; bkLayCache = {}; bkLaySave();
-        bkHeadsSave();
-        if (!(await bkRebuildSecs(tok))) return;
+    if (bkDeepBusy === tok) { showToast('AI đang đọc chương, mục lục sẽ hiện dần bên trái — bạn cứ đọc tiếp'); return; }
+    const my = ++bkDeepTok, N = bkDoc.numPages;
+    bkDeepBusy = tok;
+    const heads = [], lay = Object.assign({}, bkAiLay), failed = [];
+    let lastPg = 0, got = 0;
+    try {
+        const nums = []; for (let p = 1; p <= N; p++) nums.push(p);
+        bkScanSay('Chụp chương 0/' + N);
+        const shots = await bkShotChapter(nums, tok, (k, n) => { if (my === bkDeepTok) bkScanSay('Chụp chương ' + k + '/' + n); });
+        if (!shots || my !== bkDeepTok || tok !== bkViewTok) return;
+        const wins = bkPlanWin(shots);
+        bkHeads = []; bkHeadsSave();
+        for (let w = 0; w < wins.length; w++) {
+            const part = shots.slice(wins[w][0], wins[w][1]);
+            bkScanSay('AI đọc trang ' + part[0].num + '–' + part[part.length - 1].num + ' (' + (w + 1) + '/' + wins.length + ')');
+            let r = null;
+            for (let at = 0; at < 2 && !r; at++) {
+                try { r = await bkAiReadWindow(part, bkCur.title, N, heads.map(h => ({ en: h.en, lvl: h.lvl, page: h.page })), null); }
+                catch (e) { if (e && (e.badKey || e.quota)) throw e; r = null; }
+                if (my !== bkDeepTok || tok !== bkViewTok) return;
+                if (!r && at === 0) await bkBreathe(2500);
+            }
+            if (!r) { failed.push([part[0].num, part[part.length - 1].num]); continue; }
+            bkAiCollect(r, lastPg, heads, lay, 0);
+            lastPg = part[part.length - 1].num; got++;
+            bkHeads = heads.slice(); bkAiLay = Object.assign({}, lay); bkLayCache = {}; bkLaySave(); bkHeadsSave();
+            if ((await bkApplyScan(tok, my)) !== true) return;   // đọc lại chữ chương theo bố cục mới rồi dựng mục lục (hiện dần)
+            await bkBreathe(500);
+        }
+        if (got) {
+            bkScanSay('Chuẩn hóa cấp mục lục');
+            if (await bkNormLevels(my, tok)) { bkHeadsSave(); if ((await bkRebuildSecs(tok)) !== true) return; }
+        }
+    } catch (e) { bkTocFail(e); return; }
+    finally { if (my === bkDeepTok) bkDeepBusy = 0; }
+    if (my === bkDeepTok && tok === bkViewTok) {
+        bkUpdateSecBtn();
+        if (!got) showToast('AI chưa đọc được chương, bấm “📑 Nhận diện mục lục” để thử lại');
+        else if (failed.length) showToast('Xong, nhưng AI chưa đọc được trang ' + failed.map(g => g[0] + '–' + g[1]).join(', ') + ' — bấm “🔄 Cập nhật mục lục” để quét lại');
+        else showToast('Đã lập mục lục: ' + bkSecs.length + ' mục');
     }
-    showToast('AI đọc 2 trang mỗi lượt, bắt đầu từ trang 1. Mục lục bên trái sẽ hiện dần.');
-    bkDeepStart(tok);
-}/* Kéo đổi độ rộng cột mục lục (giống khung chat) */
+}
+/* Kéo đổi độ rộng cột mục lục (giống khung chat) */
 function bkEnsureSecGrip() {
     const p = document.getElementById('bk-sec-panel'); if (!p || document.getElementById('bk-sec-grip')) return;
     try { const w = localStorage.getItem('bk_sec_w'); if (w) document.documentElement.style.setProperty('--bk-sec-w', w + 'px'); } catch (e) {}
@@ -10972,6 +10942,25 @@ function bkSelPos() {
     const title = bkSelText().replace(/\s+/g, ' ').slice(0, 160);
     if (!title) return null;
     return { pos: r.s + (node.nodeType === 3 ? rg.startOffset : 0), title: title };
+}
+/* Đánh dấu phân mục thủ công: tô đen tiêu đề trong PDF rồi bấm nút → thêm vào mục lục đúng vị trí (cùng cấp với mục đứng trước nó) */
+function bkMarkSec() {
+    if (!bkText) { showToast('Chương chưa tải xong'); return; }
+    const sp = bkSelPos();
+    if (!sp) { showToast('Hãy tô đen tiêu đề phân mục trong PDF rồi bấm “🔖 Đánh dấu phân mục”'); return; }
+    let sec = bkSecs.find(x => Math.abs(x.s - sp.pos) <= 3);
+    if (sec) sec.manual = true;   // đã có mục đúng chỗ này → giữ lại làm mục tự đánh dấu, không thêm trùng
+    else {
+        const prev = bkSecs.filter(x => x.s < sp.pos).sort((a, b) => b.s - a.s)[0];
+        const title = sp.title.replace(/^(?:\d+(?:\.\d+)*[.)]?|[IVXLCDM]{1,5}\.)\s+/, '').trim() || sp.title;
+        sec = { title: title, en: title, num: '', lvl: prev ? Math.max(1, Math.min(10, prev.lvl || 1)) : 1, s: sp.pos, manual: true, intro: false, e: 0, text: '' };
+        bkSecs.push(sec);
+    }
+    bkRelink(); bkSaveManual();
+    const idx = bkSecs.indexOf(sec);
+    bkRenderSecList();
+    if (idx >= 0) bkSelSec(idx);
+    showToast('Đã đánh dấu phân mục');
 }
 /* Quét lại một mục: chụp các trang mà mục đó trải qua, AI tìm mục con (cấp tương đối) rồi định vị vào chữ chương (bố cục giữ nguyên) */
 async function bkRescanSel() {
@@ -13880,6 +13869,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
                 <span id="bk-zoom-lbl" class="text-xs font-bold w-11 text-center">100%</span>
                 <button type="button" onclick="bkZoomBy(1)" class="font-black text-base px-2 py-0.5 hover:bg-white/20 rounded" title="Phóng to">+</button>
             </div>
+            <button id="bk-mark-btn" type="button" onmousedown="event.preventDefault()" onclick="bkMarkSec()" title="Tô đen tiêu đề trong PDF rồi bấm để thêm vào mục lục" class="shrink-0 text-xs sm:text-sm font-bold bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-1.5 rounded-lg active:scale-95 transition-all">🔖<span class="hidden sm:inline"> Đánh dấu phân mục</span></button>
             <button id="bk-sec-btn" type="button" onclick="bkDetectChapter()" class="shrink-0 text-xs sm:text-sm font-bold bg-amber-500 hover:bg-amber-600 text-white px-3 py-1.5 rounded-lg active:scale-95 transition-all">📑 Nhận diện mục lục</button>
             <button type="button" onclick="bkCloseAll()" class="text-white text-2xl font-black px-2 leading-none shrink-0">✕</button>
         </div>
@@ -25030,7 +25020,7 @@ textarea {
 
     /* 1. (đã chuyển vào lõi: bkFocusAt mới giữ vùng chọn trong cột, sang cột khác khi kéo qua đáy/đỉnh cột hoặc giữ Ctrl) */
 
-    /* 2. AI đọc chương: đợt lỗi thì chia đôi và thử lại (không bỏ cả đợt); đợt lớn tách mỗi lần 12 trang */
+    /* 2. AI đọc chương: đợt lỗi thì chia đôi và thử lại (không bỏ cả đợt); đợt lớn tách mỗi lần 20 trang */
     var readOrig = bkAiReadWindow;
     window.bkAiReadWindow = async function (shots, title, nTot, prevHeads, sub) {
         if (!shots || !shots.length) return null;
@@ -25053,11 +25043,11 @@ textarea {
             return { pages: [].concat(a ? a.pages : [], b ? b.pages : []), headings: [].concat(a ? a.headings : [], b ? b.headings : []) };
         };
         var out = { pages: [], headings: [] }, any = false;
-        for (var i = 0; i < shots.length; i += 12) {
+        for (var i = 0; i < shots.length; i += 20) {
             var ctx = (prevHeads || []).concat(out.headings.map(function (h) {
                 return { en: String(h.text || h.en || ''), lvl: h.level || h.lvl || 1, page: +h.page };
             }));
-            var res = await safe(shots.slice(i, i + 12), ctx);
+            var res = await safe(shots.slice(i, i + 20), ctx);
             if (tok !== bkViewTok) return null;
             if (res) { any = true; out.pages = out.pages.concat(res.pages); out.headings = out.headings.concat(res.headings); }
         }
