@@ -10422,7 +10422,7 @@ async function bkLocateHead(h) {
             .sort((a, b) => (((a.y / data.H) - yb) + 0.5 * Math.abs((a.x / data.W) - xc)) - (((b.y / data.H) - yb) + 0.5 * Math.abs((b.x / data.W) - xc)));
         if (below.length) return ex.rg[below[0].idx].s;
     }
-    return bkPages[h.page] ? bkPages[h.page].gs : null;
+    return bkPages[h.page - 1] ? bkPages[h.page - 1].gs : null;
 }
 function bkTocSay(m) {
     const btn = document.getElementById('bk-sec-btn'), list = document.getElementById('bk-sec-list');
@@ -10642,7 +10642,7 @@ async function bkRescanSel() {
     }
     const after = bkSecs.filter(x => x.s > start && x.lvl <= lvl).map(x => x.s);
     const endPos = after.length ? Math.min(...after) : bkText.length;
-    const p0 = bkPageOfPos(start), p1 = Math.min(bkDoc.numPages, Math.max(p0, bkPageOfPos(Math.max(start, endPos - 1))), p0 + 29);
+    const p0 = bkPageOfPos(start), p1 = Math.min(bkDoc.numPages, Math.max(p0, bkPageOfPos(Math.max(start, endPos - 1))), p0 + 400);
     const nums = []; for (let p = p0; p <= p1; p++) nums.push(p);
     let kids = [];
     if (btn) { btn.disabled = true; btn.textContent = '⏳ Đang chuẩn bị…'; }
@@ -21426,7 +21426,7 @@ html.rhm-modal-open, html.rhm-modal-open body { overflow: hidden !important; ove
     ['pointerdown', 'mousedown', 'mouseup', 'pointerup', 'touchstart', 'touchend', 'click'].forEach(function (ev) {
         window.addEventListener(ev, function (e) {
             var t = e.target;
-            var inside = !!(t && t.closest) && IDS.some(function (id) { var m = document.getElementById(id); return !!m && isOpen(id) && m.contains(t); });
+            var inside = !!(t && t.closest && t.closest('#rhm-confirm')) || !!(t && t.closest) && IDS.some(function (id) { var m = document.getElementById(id); return !!m && isOpen(id) && m.contains(t); });
             if (inside) return;
             if (anyOpen() || Date.now() < until) { if (e.cancelable) e.preventDefault(); e.stopPropagation(); }
         }, true);
@@ -24507,7 +24507,211 @@ textarea {
 }
 </style>
 
-<script id="rhm-patch-v4-ios-extra">
+<script id="rhm-va1-js">
+(function () {
+    'use strict';
+
+    /* 1. Kéo chọn chữ: kéo qua đáy cột thì tự sang cột kế tiếp, không cần Ctrl */
+    function blkX(ad, bi) {
+        var b = ad.blks[bi], l = 1e9, r = -1e9;
+        for (var k = b.k0; k <= b.k1; k++) {
+            var d = ad.seq[k];
+            if (d.x < l) l = d.x;
+            if (d.x + d.w > r) r = d.x + d.w;
+        }
+        return { l: l, r: r };
+    }
+    window.bkFocusAt = function (cx, cy, anc, free) {
+        var pg = bkPageNear(cy); if (!pg) return null;
+        var data = pg.data;
+        if (!data) { bkPageData(pg).then(function () { if (bkDrag) bkDragMove(); }).catch(function () {}); return null; }
+        if (!data.seq.length) return null;
+        var r = pg.wrap.getBoundingClientRect(), s = bkScale;
+        var X = (cx - r.left) / s, Y = (cy - r.top) / s;
+        var h = bkHit(data, X, Y); if (!h) return null;
+        var pos = bkMkPos(pg, h.d, h.o);
+        if (free || !anc) return pos;
+        if (pos.p !== anc.p) return pos;
+        var ap = bkVP[anc.p - 1], ad = ap && ap.data; if (!ad) return pos;
+        var blk = ad.blks[anc.bi]; if (!blk) return pos;
+        var below = Y > blk.bottom, above = Y < blk.top;
+        if (pos.bi === anc.bi) {
+            if (below && ad.blks[anc.bi + 1]) return { p: anc.p, k: ad.blks[anc.bi + 1].k0, o: 0, bi: anc.bi + 1 };
+            if (above && anc.bi > 0) { var pk = ad.blks[anc.bi - 1].k1; return { p: anc.p, k: pk, o: ad.seq[pk].str.length, bi: anc.bi - 1 }; }
+            return pos;
+        }
+        if (bkChainOk(anc, pos)) return pos;
+        var bx = blkX(ad, anc.bi);
+        if (pos.bi > anc.bi && (below || X > bx.r)) return pos;
+        if (pos.bi < anc.bi && (above || X < bx.l)) return pos;
+        if (below) return bkEndOf(ap, blk);
+        if (above) return bkStartOf(ap, blk);
+        var hh = bkHit(ad, X, Y, blk.k0, blk.k1);
+        return hh ? bkMkPos(ap, hh.d, hh.o) : pos;
+    };
+
+    /* 2. AI đọc chương: đợt lỗi thì chia đôi và thử lại (không bỏ cả đợt); đợt lớn tách mỗi lần 12 trang */
+    var readOrig = bkAiReadWindow;
+    window.bkAiReadWindow = async function (shots, title, nTot, prevHeads, sub) {
+        if (!shots || !shots.length) return null;
+        var tok = bkViewTok;
+        var norm = function (r) {
+            return Array.isArray(r) ? { pages: [], headings: r } : { pages: (r && r.pages) || [], headings: (r && r.headings) || [] };
+        };
+        var safe = async function (part, ctx) {
+            var r = null;
+            for (var at = 0; at < 2 && !r; at++) {
+                try { r = await readOrig(part, title, nTot, ctx, sub); }
+                catch (e) { if (e && (e.badKey || e.quota)) throw e; r = null; }
+                if (tok !== bkViewTok) return null;
+            }
+            if (r) return norm(r);
+            if (part.length <= 2) return null;
+            var m = Math.ceil(part.length / 2);
+            var a = await safe(part.slice(0, m), ctx), b = await safe(part.slice(m), ctx);
+            if (!a && !b) return null;
+            return { pages: [].concat(a ? a.pages : [], b ? b.pages : []), headings: [].concat(a ? a.headings : [], b ? b.headings : []) };
+        };
+        var out = { pages: [], headings: [] }, any = false;
+        for (var i = 0; i < shots.length; i += 12) {
+            var ctx = (prevHeads || []).concat(out.headings.map(function (h) {
+                return { en: String(h.text || h.en || ''), lvl: h.level || h.lvl || 1, page: +h.page };
+            }));
+            var res = await safe(shots.slice(i, i + 12), ctx);
+            if (tok !== bkViewTok) return null;
+            if (res) { any = true; out.pages = out.pages.concat(res.pages); out.headings = out.headings.concat(res.headings); }
+        }
+        return any ? out : null;
+    };
+
+    /* 3. Highlight vàng: vẽ theo đúng ký tự và hình học như bôi đen (có xử lý chữ xoay) */
+    function hlEl(b, s) {
+        var el = document.createElement('div');
+        el.className = 'bk-hr';
+        if (!b.rot) {
+            el.style.cssText = 'left:' + (b.x0 * s - 1).toFixed(1) + 'px;top:' + (b.top * s - 1).toFixed(1) + 'px;width:' + ((b.x1 - b.x0) * s + 2).toFixed(1) + 'px;height:' + ((b.bot - b.top) * s + 2).toFixed(1) + 'px';
+        } else {
+            var d = b.d, sa = Math.sin(d.angle), ca = Math.cos(d.angle), v0 = -0.88 * d.fh;
+            var ox = d.x + b.u0 * ca - v0 * sa, oy = d.y + b.u0 * sa + v0 * ca;
+            el.style.cssText = 'left:' + (ox * s).toFixed(1) + 'px;top:' + (oy * s).toFixed(1) + 'px;width:' + ((b.u1 - b.u0) * s).toFixed(1) + 'px;height:' + (1.15 * d.fh * s).toFixed(1) + 'px;transform-origin:0 0;transform:rotate(' + d.angle.toFixed(5) + 'rad)';
+        }
+        return el;
+    }
+    function hlMerge(parts) {
+        var out = [];
+        parts.forEach(function (p) {
+            var d = p.d, cu = out[out.length - 1];
+            if (Math.abs(d.angle) > 0.01) { out.push({ rot: true, d: d, u0: p.u0, u1: p.u1 }); return; }
+            if (cu && !cu.rot && cu.bi === d.bi && Math.abs(cu.y - d.y) <= 0.45 * Math.min(cu.fh, d.fh) &&
+                d.x + p.u0 - cu.x1 <= 2.2 * Math.max(cu.fh, d.fh) && d.x + p.u0 >= cu.x0 - 1) {
+                cu.x1 = Math.max(cu.x1, d.x + p.u1);
+                cu.top = Math.min(cu.top, d.y - 0.88 * d.fh);
+                cu.bot = Math.max(cu.bot, d.y + 0.27 * d.fh);
+                cu.fh = Math.max(cu.fh, d.fh);
+            } else {
+                out.push({ rot: false, bi: d.bi, y: d.y, fh: d.fh, x0: d.x + p.u0, x1: d.x + p.u1, top: d.y - 0.88 * d.fh, bot: d.y + 0.27 * d.fh });
+            }
+        });
+        return out;
+    }
+    window.bkApplyHl = async function (pg) {
+        var ex = bkPages[pg.num - 1];
+        if (!(bkHl && ex && ex.rg && ex.ge > bkHl.s && ex.gs < bkHl.e && pg.state === 'done')) { pg.hlL.textContent = ''; return; }
+        var data;
+        try { data = await bkPageData(pg); } catch (e) { return; }
+        pg.hlL.textContent = '';
+        if (pg.state !== 'done' || !bkHl) return;
+        var hl = bkHl, s = bkScale, parts = [];
+        data.seq.forEach(function (d) {
+            var rg = ex.rg[d.idx];
+            if (!rg || !(rg.e > hl.s && rg.s < hl.e)) return;
+            var a = Math.max(0, hl.s - rg.s), b = Math.min(d.str.length, hl.e - rg.s);
+            if (b <= a) return;
+            var cx = bkCx(d), u0 = a <= 0 ? 0 : cx[a], u1 = b >= d.str.length ? d.w : cx[b];
+            if (u1 > u0) parts.push({ d: d, u0: u0, u1: u1 });
+        });
+        var frag = document.createDocumentFragment();
+        hlMerge(parts).forEach(function (bd) { frag.appendChild(hlEl(bd, s)); });
+        pg.hlL.appendChild(frag);
+    };
+
+    /* 4. Bối cảnh chat sách nằm trong system prompt (không bị cắt sau 11 lượt hội thoại) */
+    var spbOrig = aiSystemPromptBase;
+    window.aiSystemPromptBase = function () {
+        if (!aiState.guided && aiState.mode === 'book') {
+            var t = bkCur ? ((bkCur.book ? bkCur.book + ' · ' : '') + bkCur.title) : 'sách RHM';
+            return 'Bạn đóng vai trò giáo sư đầu ngành Răng Hàm Mặt; khi trò chuyện với người học thì xưng là gia sư Răng Hàm Mặt. ' +
+                'Người học đang đọc "' + t + '". Trả lời tiếng Việt chuẩn RHM miền Nam, rõ ràng, có cấu trúc, ' +
+                (aiState.full ? 'đầy đủ, chi tiết. ' : 'súc tích. ') +
+                'QUY TẮC: (1) Ưu tiên dựa trên NỘI DUNG CHƯƠNG bên dưới, không bịa số liệu; nếu chương không nói đến, nói rõ và ghi chú là kiến thức ngoài chương. ' +
+                '(2) Nếu người học gửi ảnh chụp trang sách, đọc chữ trong ảnh, mô tả hình, bảng, sơ đồ, ký hiệu và giải thích. ' +
+                '(3) Bám sát đoạn người học đang hỏi.\n\nNỘI DUNG CHƯƠNG:\n-----\n' + String(bkText || '').slice(0, 30000) + '\n-----';
+        }
+        return spbOrig();
+    };
+
+    /* 5. Mở khung chat sách: không chèn đoạn giới thiệu dài vào lịch sử nữa */
+    window.bkOpenAi = function () {
+        if (!bkCur) return;
+        if (!aiAnyKey()) { aiShowGate(); return; }
+        var sig = 'book|' + (bkCur.book || '') + '|' + bkCur.title;
+        aiStopLive();
+        aiState.mode = 'book'; aiState.video = null; aiState.noVideo = false;
+        if (aiState.qSig !== sig) {
+            aiState.qSig = sig; aiState.history = [];
+            document.getElementById('ai-title').textContent = '🤖 Hỏi AI về sách';
+            bkRenderBar();
+            document.getElementById('ai-messages').innerHTML = '';
+            aiAddMsg('ai', 'Chào bạn! Mình là gia sư Răng Hàm Mặt. Hãy hỏi về chương "' + bkCur.title + '". Bôi đen đoạn trong sách rồi bấm 🌐 Dịch; bấm 🖼️ Phân tích ảnh màn hình để gửi trang đang xem.');
+            aiQuotaApply();
+        }
+        var m = document.getElementById('ai-tutor-modal');
+        if (m) {
+            m.classList.remove('hidden', 'ai-chat-off', 'ios-chat-hiding', 'ios-closing', 'ai-settings-open');
+            var kp = document.getElementById('ai-key-panel'); if (kp) kp.classList.add('hidden');
+        }
+        aiPlaceModal(); bkSyncSplit(); bkPaintTr(); aiEnsureQuickTts(); aiScrollBottom();
+    };
+
+    /* 6. Chụp trang đang xem: chọn trang chiếm nhiều diện tích nhất, ảnh nét hơn, prompt gọn */
+    window.bkAnalyzeCurrentPageImage = async function () {
+        if (aiState.busy) { showToast('AI đang trả lời, hãy đợi rồi bấm lại'); return; }
+        if (!bkCur || !bkWrapEl || !bkVP || !bkVP.length) { showToast('Hãy mở một chương sách trước'); return; }
+        if (!aiAnyKey()) { aiShowGate(); return; }
+        if (aiState.live && aiState.live.ready) { showToast('Hãy tắt nói trực tiếp (🎙️) rồi bấm lại'); return; }
+        var wr = bkWrapEl.getBoundingClientRect(), best = null, area = 0;
+        bkVP.forEach(function (pg) {
+            if (!pg.wrap) return;
+            var r = pg.wrap.getBoundingClientRect();
+            var w = Math.max(0, Math.min(r.right, wr.right) - Math.max(r.left, wr.left));
+            var h = Math.max(0, Math.min(r.bottom, wr.bottom) - Math.max(r.top, wr.top));
+            if (w * h > area) { area = w * h; best = pg; }
+        });
+        if (!best) { showToast('Không xác định được trang đang hiển thị'); return; }
+        if (best.state !== 'done' || !best.canvas || !best.canvas.width) {
+            showToast('⏳ Đang chuẩn bị trang ' + best.num + '…');
+            try { await bkRenderPage(best); } catch (e) {}
+        }
+        if (!best.canvas || !best.canvas.width) { showToast('Chưa chụp được trang, hãy thử lại'); return; }
+        var c = best.canvas, k = Math.min(1, 1600 / Math.max(c.width, c.height));
+        var cv = document.createElement('canvas');
+        cv.width = Math.round(c.width * k); cv.height = Math.round(c.height * k);
+        var g = cv.getContext('2d');
+        g.fillStyle = '#fff'; g.fillRect(0, 0, cv.width, cv.height);
+        g.drawImage(c, 0, 0, cv.width, cv.height);
+        var b64 = cv.toDataURL('image/jpeg', 0.85).split(',')[1];
+        cv.width = 0; cv.height = 0;
+        bkOpenAi();
+        aiState.guided = false;
+        aiState.showText = '🖼️ Phân tích ảnh trang ' + best.num;
+        document.getElementById('ai-input').value = 'Ảnh là trang ' + best.num + ' của chương "' + bkCur.title + '" đang mở trên màn hình. Hãy: (1) tóm tắt các ý chính của trang; (2) mô tả mọi hình, bảng, sơ đồ, chú thích và ký hiệu, giải thích ý nghĩa từng phần; (3) giải thích thuật ngữ khó. Chỉ dựa vào những gì thấy trong ảnh; phần nào mờ hoặc không đọc được thì nói rõ.';
+        aiSend({ b64: b64 });
+    };
+    /* nút đã tạo trước khi bản vá tải: gán lại để trỏ tới hàm mới */
+    var ib = document.getElementById('bk-img-quick');
+    if (ib) ib.onclick = window.bkAnalyzeCurrentPageImage;
+})();
+</script><script id="rhm-patch-v4-ios-extra">
 (function () {
   'use strict';
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -24611,7 +24815,11 @@ textarea {
   else observeChatBubbles();
 })();
 </script>
-<style id="rhm-patch-v6-styles">
+<style id="rhm-va1-css">
+#note-modal .nt-it, #note-modal .nt-it:active, #note-modal .nt-it.ios-pressed, #note-modal .nt-it.ios-spring-release, #note-modal .nt-it:not(.nt-editing):active { transform: none !important; animation: none !important; transition: none !important; }
+.nt-qnote:active, .nt-qnote.ios-pressed, .nt-qnote.ios-spring-release { transform: none !important; animation: none !important; }
+.bk-nb.ios-spring-release, .bk-nb.ios-pressed, .bk-nb:active { animation: none !important; transform: translate(-50%, -50%) !important; transition: none !important; }
+</style><style id="rhm-patch-v6-styles">
 /* 1. Tắt hoàn toàn animation khi click vào Ảnh bìa, Ô video và giữ nguyên nền ứng dụng đứng im */
 #app-cover-img,
 #app-cover-img:active,
