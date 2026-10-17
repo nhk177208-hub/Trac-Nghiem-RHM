@@ -8874,7 +8874,7 @@ function bkBlockInfo(sp) {
     return { k, first, last, spans, top, bottom, wr };
 }
 // được kéo sang khối kế tiếp chỉ khi khối đó nằm ngay phía dưới (hoặc phía trên) khối xuất phát — không bao giờ sang cột bên cạnh
-function bkChainOk(info, f, fwd) {
+function bkChainOkSp(info, f, fwd) {
     let cur = info;
     for (let n = 0; n < 8; n++) {
         const sp = fwd ? bkNextSpan(cur.last) : bkPrevSpan(cur.first);
@@ -8912,18 +8912,6 @@ function bkClampCaret(info, fwd) {
     } catch (e) {}
     return { node: n, offset: Math.round((P.x - best.l) / Math.max(1, best.r - best.l) * n.length) };
 }
-function bkFixSel() {
-    if (bkPtr.ctrl || !bkPtr.touch) return;
-    const sel = document.getSelection();
-    if (!sel || !sel.rangeCount || sel.isCollapsed) return;
-    const a = bkSelSpan(sel.anchorNode, sel.anchorOffset), f = bkSelSpan(sel.focusNode, sel.focusOffset);
-    if (!a || !f || a._bk === f._bk) return;
-    const fwd = !!(a.compareDocumentPosition(f) & Node.DOCUMENT_POSITION_FOLLOWING);
-    const info = bkBlockInfo(a);
-    if (bkChainOk(info, f, fwd)) return;
-    const tg = bkClampCaret(info, fwd); if (!tg) return;
-    try { sel.setBaseAndExtent(sel.anchorNode, sel.anchorOffset, tg.node, tg.offset); } catch (e) {}
-}
 /* ===================================================================
    CHỌN CHỮ KIỂU TRÌNH ĐỌC PDF CỦA TRÌNH DUYỆT
    - Chuột (và bút) được xử lý trực tiếp: vị trí con trỏ → ký tự gần nhất theo HÌNH HỌC của chữ trong PDF,
@@ -8937,7 +8925,6 @@ function bkFixSel() {
    =================================================================== */
 const BK_BOX_TOP = 0.9, BK_BOX_BOT = 0.28;
 function bkCmp(a, b) { return (a.p - b.p) || (a.k - b.k) || (a.o - b.o); }
-function bkSelRange() { if (!bkSel) return null; return bkCmp(bkSel.a, bkSel.f) <= 0 ? { lo: bkSel.a, hi: bkSel.f } : { lo: bkSel.f, hi: bkSel.a }; }
 function bkSamePos(a, b) { return !!a && !!b && a.p === b.p && a.k === b.k && a.o === b.o; }
 function bkMkPos(pg, d, o) { return { p: pg.num, k: d.k, o: o, bi: d.bi }; }
 /* vị trí x (đơn vị px ở tỉ lệ 1, dọc theo dòng chữ) của từng ranh giới ký tự trong một mảnh chữ */
@@ -9016,24 +9003,6 @@ function bkChainOk(A, B) {
 function bkEndOf(pg, blk) { const d = pg.data.seq[blk.k1]; return { p: pg.num, k: d.k, o: d.str.length, bi: d.bi }; }
 function bkStartOf(pg, blk) { const d = pg.data.seq[blk.k0]; return { p: pg.num, k: d.k, o: 0, bi: d.bi }; }
 /* vị trí ký tự tại điểm trỏ chuột; anc = điểm bắt đầu kéo (để giữ trong cột), free = chọn xuyên cột */
-function bkFocusAt(cx, cy, anc, free) {
-    const pg = bkPageNear(cy); if (!pg) return null;
-    const data = pg.data;
-    if (!data) { bkPageData(pg).then(() => { if (bkDrag) bkDragMove(); }).catch(() => {}); return null; }
-    if (!data.seq.length) return null;
-    const r = pg.wrap.getBoundingClientRect(), s = bkScale, X = (cx - r.left) / s, Y = (cy - r.top) / s;
-    const h = bkHit(data, X, Y); if (!h) return null;
-    const pos = bkMkPos(pg, h.d, h.o);
-    if (free || !anc) return pos;
-    if (pos.p !== anc.p) return pos;   // kéo sang trang khác: chọn liền theo thứ tự đọc (như trình đọc PDF của trình duyệt)
-    if (pos.bi === anc.bi) return pos;
-    if (bkChainOk(anc, pos)) return pos;
-    const ap = bkVP[anc.p - 1], ad = ap && ap.data; if (!ad) return pos;
-    const blk = ad.blks[anc.bi]; if (!blk) return pos;
-    if (Y > blk.bottom) return bkEndOf(ap, blk);
-    if (Y < blk.top) return bkStartOf(ap, blk);
-    const hh = bkHit(ad, X, Y, blk.k0, blk.k1); return hh ? bkMkPos(ap, hh.d, hh.o) : pos;
-}
 /* ---------- nhấp đúp / nhấp 3 lần ---------- */
 function bkLineRange(pg, k) {
     const seq = pg.data.seq, d0 = seq[k];
@@ -9122,45 +9091,6 @@ function bkAutoScroll() {
 /* ---------- vẽ vùng chọn ---------- */
 function bkSelSchedule() { if (bkSelRaf) return; bkSelRaf = requestAnimationFrame(() => { bkSelRaf = 0; bkSelPaintAll(); bkSelMirror(); }); }
 function bkSelPaintAll() { bkVP.forEach(bkSelDraw); }
-function bkSelDraw(pg) {
-    if (!pg || !pg.selL) return;
-    const R = bkSelRange();
-    if (!R || pg.num < R.lo.p || pg.num > R.hi.p || pg.state !== 'done' || !pg.data) { if (pg._ss) { pg.selL.textContent = ''; pg._ss = ''; } return; }
-    const seq = pg.data.seq; if (!seq.length) return;
-    const first = pg.num === R.lo.p, last = pg.num === R.hi.p;
-    const k0 = first ? R.lo.k : 0, k1 = last ? R.hi.k : seq.length - 1;
-    const sig = k0 + ':' + (first ? R.lo.o : 0) + ':' + k1 + ':' + (last ? R.hi.o : -1) + ':' + bkScale;
-    if (pg._ss === sig) return; pg._ss = sig;
-    const s = bkScale, bands = [];
-    for (let k = k0; k <= k1; k++) {
-        const d = seq[k]; if (!d) continue;
-        const a = (first && k === R.lo.k) ? R.lo.o : 0, b = (last && k === R.hi.k) ? R.hi.o : d.str.length;
-        if (b <= a) continue;
-        const cx = bkCx(d), u0 = a <= 0 ? 0 : cx[a], u1 = b >= d.str.length ? d.w : cx[b];
-        if (!(u1 > u0)) continue;
-        const rot = Math.abs(d.angle) > 0.01, cur = bands[bands.length - 1];
-        if (!rot && cur && !cur.rot && cur.bi === d.bi && Math.abs(cur.y - d.y) <= 0.45 * Math.min(cur.fh, d.fh) && d.x + u0 - cur.x1 <= 2.2 * Math.max(cur.fh, d.fh) && d.x + u0 >= cur.x0 - 1) {
-            cur.x1 = Math.max(cur.x1, d.x + u1); cur.top = Math.min(cur.top, d.y - 0.88 * d.fh); cur.bot = Math.max(cur.bot, d.y + 0.27 * d.fh); cur.fh = Math.max(cur.fh, d.fh);
-        } else if (rot) {
-            bands.push({ rot: true, d: d, u0: u0, u1: u1 });
-        } else {
-            bands.push({ rot: false, bi: d.bi, y: d.y, fh: d.fh, x0: d.x + u0, x1: d.x + u1, top: d.y - 0.88 * d.fh, bot: d.y + 0.27 * d.fh });
-        }
-    }
-    const frag = document.createDocumentFragment();
-    bands.forEach(b => {
-        const el = document.createElement('div'); el.className = 'bk-sr';
-        if (!b.rot) {
-            el.style.cssText = 'left:' + (b.x0 * s - 0.5).toFixed(1) + 'px;top:' + (b.top * s).toFixed(1) + 'px;width:' + ((b.x1 - b.x0) * s + 1).toFixed(1) + 'px;height:' + ((b.bot - b.top) * s).toFixed(1) + 'px';
-        } else {
-            const d = b.d, sa = Math.sin(d.angle), ca = Math.cos(d.angle), v0 = -0.88 * d.fh;
-            const ox = d.x + b.u0 * ca - v0 * sa, oy = d.y + b.u0 * sa + v0 * ca;
-            el.style.cssText = 'left:' + (ox * s).toFixed(1) + 'px;top:' + (oy * s).toFixed(1) + 'px;width:' + ((b.u1 - b.u0) * s).toFixed(1) + 'px;height:' + (1.15 * d.fh * s).toFixed(1) + 'px;transform-origin:0 0;transform:rotate(' + d.angle.toFixed(5) + 'rad)';
-        }
-        frag.appendChild(el);
-    });
-    pg.selL.textContent = ''; pg.selL.appendChild(frag);
-}
 /* đồng bộ vùng chọn sang vùng chọn gốc của trình duyệt (để Ctrl+C, menu chuột phải, các chức năng khác vẫn dùng được) */
 function bkSpanOf(pos) { const pg = bkVP[pos.p - 1], sp = pg && pg.spk && pg.spk[pos.k]; return sp && sp.firstChild ? sp : null; }
 function bkSelMirror() {
@@ -9170,20 +9100,6 @@ function bkSelMirror() {
     try { const s = document.getSelection(); if (s) s.setBaseAndExtent(sa.firstChild, bkSel.a.o, sf.firstChild, bkSel.f.o); } catch (e) {}
 }
 /* ---------- chữ của vùng chọn ---------- */
-function bkSelPartsSync(R) {
-    const parts = [];
-    for (let p = R.lo.p; p <= R.hi.p; p++) {
-        const pg = bkVP[p - 1]; if (!pg) continue;
-        if (!pg.data) return null;
-        const seq = pg.data.seq, k0 = p === R.lo.p ? R.lo.k : 0, k1 = p === R.hi.p ? R.hi.k : seq.length - 1;
-        for (let k = k0; k <= k1; k++) {
-            const d = seq[k]; if (!d) continue;
-            const a = (p === R.lo.p && k === R.lo.k) ? R.lo.o : 0, b = (p === R.hi.p && k === R.hi.k) ? R.hi.o : d.str.length;
-            const t = d.str.slice(a, b); if (t) parts.push({ t: t, x: d.x, y: d.y, w: d.w, fh: d.fh, p: p });
-        }
-    }
-    return parts;
-}
 async function bkSelCompute() {
     const sel = bkSel, R = bkSelRange(); if (!sel || !R) return '';
     for (let p = R.lo.p; p <= R.hi.p; p++) { const pg = bkVP[p - 1]; if (pg && !pg.data) { try { await bkPageData(pg); } catch (e) {} } }
@@ -9381,6 +9297,7 @@ function bkPageData(pg) {
             d.bi = blks.length - 1;
         });
         const res = { W: vp.width, H: vp.height, items: ord, seq: seq, blks: blks };
+        bkAssignCols(res, vp.width, items, Lp);   // v6: cột + thứ tự dọc cho chọn chữ (không phụ thuộc thứ tự đọc đoán)
         pg.data = res;
         return res;
     })();
@@ -9511,6 +9428,237 @@ function bkOrderItems(items, W, forceGts) {
     out.gts = gts;
     return out;
 }
+/* ===================================================================
+   CHỌN CHỮ THEO CỘT (v6) — thay cho cách chọn "một đoạn liên tục theo thứ tự đã đoán"
+   Nguyên nhân lỗi cũ: chữ bị sắp lại theo heuristic (rãnh cột / dải / vùng AI) rồi vùng chọn = mọi mảnh chữ
+   nằm giữa 2 vị trí trong danh sách đó → hễ thứ tự đoán sai là chữ cột bên cạnh lọt vào vùng bôi.
+   Cách mới: mỗi mảnh chữ có `col` (cột; -1 = dòng vắt ngang cả trang; -2 = chữ xoay) và `yi` (thứ tự trên→dưới).
+   Vùng chọn chỉ phụ thuộc 2 điểm (neo, đầu kéo):
+     • cùng cột  → mọi chữ CỦA CỘT ĐÓ nằm giữa 2 điểm theo chiều dọc (chữ cột khác không bao giờ lọt vào)
+     • khác cột → phần còn lại của cột trước + (các cột giữa) + phần đầu cột sau, tới điểm kéo
+   Kéo chuột chỉ sang cột bên cạnh khi con trỏ đã vượt đáy (hoặc đỉnh) cột đang chọn, hoặc giữ Ctrl/⌘.
+   =================================================================== */
+function bkFallbackGutter(items, W, Lp) {
+    const hz = items.filter(d => !d.ws && d.w > 0 && Math.abs(Math.sin(d.angle)) < 0.05 && Math.cos(d.angle) > 0);
+    if (hz.length >= 14) {
+        const bins = 300, bw = W / bins, cnt = new Int32Array(bins);
+        hz.forEach(d => { const a = Math.max(0, Math.floor(d.x / bw)), b = Math.min(bins - 1, Math.floor((d.x + d.w) / bw)); for (let k = a; k <= b; k++) cnt[k]++; });
+        const tol = Math.max(1, Math.floor(hz.length * 0.03));
+        let best = null, run = null;
+        for (let k = Math.floor(bins * 0.28); k <= Math.floor(bins * 0.72); k++) {
+            if (cnt[k] <= tol) { if (!run) run = { a: k, b: k }; else run.b = k; if (!best || (run.b - run.a) > (best.b - best.a)) best = { a: run.a, b: run.b }; }
+            else run = null;
+        }
+        if (best && (best.b - best.a + 1) * bw >= W * 0.012) {
+            const g0 = best.a * bw, g1 = (best.b + 1) * bw;
+            const L = hz.filter(d => d.x + d.w <= g0 + 2), R = hz.filter(d => d.x >= g1 - 2);
+            const ext = a => a.length ? [Math.min.apply(null, a.map(d => d.y)), Math.max.apply(null, a.map(d => d.y))] : [0, 0];
+            const eL = ext(L), eR = ext(R);
+            if (L.length >= 6 && R.length >= 6 && Math.min(eL[1], eR[1]) - Math.max(eL[0], eR[0]) > 0.4 * Math.min(eL[1] - eL[0], eR[1] - eR[0]))
+                return [{ g0: g0, g1: g1, gc: (g0 + g1) / 2 }];
+        }
+    }
+    try {   // dự phòng cuối: cột do AI vẽ (nếu đã nhận diện mục lục chương)
+        if (Lp && Lp.Z) for (const z of Lp.Z) {
+            const cs = z.cols; if (cs && cs.length >= 2) {
+                const g0 = cs[0][1] * W, g1 = cs[1][0] * W; if (g1 > g0) return [{ g0: g0, g1: g1, gc: (g0 + g1) / 2 }];
+            }
+        }
+    } catch (e) {}
+    return [];
+}
+function bkPageGutters(items, W, Lp) {
+    let g = [];
+    try { g = (bkOrderItems(items.map(d => Object.assign({}, d)), W).gts) || []; } catch (e) { g = []; }
+    return (g && g.length) ? g : bkFallbackGutter(items, W, Lp);
+}
+/* gán cột (col), thứ tự dọc (yi), đỉnh/đáy từng cột cho dữ liệu trang */
+function bkAssignCols(data, W, items, Lp) {
+    const seq = data.seq, hzs = [];
+    seq.forEach(d => { if (Math.abs(Math.sin(d.angle)) < 0.05 && Math.cos(d.angle) > 0) hzs.push(d); else { d.col = -2; d.yi = -1; } });
+    const gts = bkPageGutters(items, W, Lp);
+    const sorted = hzs.slice().sort((a, b) => a.y - b.y), lines = [];
+    sorted.forEach(d => {
+        const ln = lines[lines.length - 1];
+        if (ln && Math.abs(d.y - ln.gy) <= 0.45 * Math.min(d.fh, ln.fh0)) ln.its.push(d); else lines.push({ gy: d.y, fh0: d.fh, its: [d] });
+    });
+    const ys = [];
+    lines.forEach(ln => {
+        ln.its.sort((a, b) => a.x - b.x);
+        let cur = null; const segs = [];
+        ln.its.forEach(d => {
+            if (cur && d.x - cur.x1 <= 1.0 * Math.max(d.fh, cur.fh)) { cur.its.push(d); cur.x1 = Math.max(cur.x1, d.x + d.w); cur.fh = Math.max(cur.fh, d.fh); }
+            else { cur = { its: [d], x0: d.x, x1: d.x + d.w, fh: d.fh }; segs.push(cur); }
+        });
+        segs.forEach(s => {
+            let c = -1;
+            if (!gts.some(g => s.x0 < g.g0 - 4 && s.x1 > g.g1 + 4)) { const m = (s.x0 + s.x1) / 2; c = 0; while (c < gts.length && m >= gts[c].gc) c++; }
+            s.its.forEach(d => { d.col = c; });
+        });
+        ln.its.forEach(d => { d.yi = ys.length; ys.push(d); });
+        ln.segs = segs;
+    });
+    data.gts = gts; data.ys = ys; data.byCol = []; data.colBotYi = []; data.colY = [];
+    for (let c = 0; c <= gts.length; c++) {
+        const list = ys.filter(d => d.col === c); data.byCol[c] = list;
+        data.colBotYi[c] = list.length ? list[list.length - 1].yi : -1;
+        let top = 1e9, bot = -1e9;
+        list.forEach(d => { top = Math.min(top, d.y - d.fh * 0.9); });
+        // đáy cột = dòng chữ thân bài cuối cùng (bỏ số trang / chân trang lẻ loi nằm xa bên dưới)
+        const ls = []; list.forEach(d => { const l = ls[ls.length - 1]; if (l && Math.abs(d.y - l.y) <= 0.45 * Math.min(d.fh, l.fh)) { l.x1 = Math.max(l.x1, d.x + d.w); l.x0 = Math.min(l.x0, d.x); } else ls.push({ y: d.y, fh: d.fh, x0: d.x, x1: d.x + d.w }); });
+        while (ls.length > 2) { const l = ls[ls.length - 1], p = ls[ls.length - 2]; if (l.x1 - l.x0 < 0.12 * W && l.y - p.y > 2.5 * l.fh) ls.pop(); else break; }
+        ls.forEach(l => { bot = Math.max(bot, l.y + l.fh * 0.3); });
+        data.colY[c] = { top: top, bot: bot };
+    }
+}
+/* thứ tự 2 đầu của vùng chọn theo dòng chảy cột; null = dùng cách cũ (theo thứ tự chữ) */
+function bkFlowOrder(data, A, B) {
+    if (!data || !data.ys || A.p !== B.p) return null;
+    const seq = data.seq, dA = seq[A.k], dB = seq[B.k];
+    if (!dA || !dB || dA.col === undefined || dB.col === undefined || dA.col < -1 || dB.col < -1) return null;
+    const s = bkCmp(A, B) <= 0 ? [A, B] : [B, A], dl = seq[s[1].k];
+    if (s[0].k === 0 && s[0].o === 0 && s[1].k === seq.length - 1 && s[1].o >= dl.str.length) return null;   // chọn tất cả
+    if (dA.col >= 0 && dB.col >= 0 && dA.col !== dB.col) return dA.col < dB.col ? { lo: A, hi: B, cross: true } : { lo: B, hi: A, cross: true };
+    const before = (dA.yi !== dB.yi) ? dA.yi < dB.yi : A.o <= B.o;
+    return before ? { lo: A, hi: B, cross: false } : { lo: B, hi: A, cross: false };
+}
+/* danh sách {d, a, b} (mảnh chữ, từ ký tự a đến b) của vùng chọn nằm trong một trang, theo đúng thứ tự đọc */
+function bkFlowItems(data, A, B) {
+    const ord = bkFlowOrder(data, A, B); if (!ord) return null;
+    const lo = ord.lo, hi = ord.hi, seq = data.seq, ys = data.ys, dl = seq[lo.k], dh = seq[hi.k], out = [];
+    const emit = t => { const a = t === dl ? lo.o : 0, b = t === dh ? hi.o : t.str.length; if (b > a) out.push({ d: t, a: a, b: b }); };
+    if (!ord.cross) {
+        const c = dl.col >= 0 ? dl.col : (dh.col >= 0 ? dh.col : -1);
+        for (let i = dl.yi; i <= dh.yi; i++) { const t = ys[i]; if (c >= 0 && t.col !== c && t.col !== -1) continue; emit(t); }
+    } else {
+        const cL = dl.col, cH = dh.col, bottom = data.colBotYi[cL];
+        for (let i = dl.yi; i < ys.length; i++) { const t = ys[i]; if (t.col === cL || (t.col === -1 && i < bottom)) emit(t); }
+        for (let c = cL + 1; c < cH; c++) (data.byCol[c] || []).forEach(emit);
+        for (let i = 0; i <= dh.yi; i++) { const t = ys[i]; if (t.col === cH) emit(t); }
+    }
+    return out;
+}
+function bkBandsOfList(list) {
+    const bands = [];
+    list.forEach(it => {
+        const d = it.d, a = it.a, b = it.b; if (b <= a) return;
+        const cx = bkCx(d), u0 = a <= 0 ? 0 : cx[a], u1 = b >= d.str.length ? d.w : cx[b];
+        if (!(u1 > u0)) return;
+        const rot = Math.abs(d.angle) > 0.01, cur = bands[bands.length - 1];
+        if (!rot && cur && !cur.rot && cur.col === d.col && Math.abs(cur.y - d.y) <= 0.45 * Math.min(cur.fh, d.fh) && d.x + u0 - cur.x1 <= 2.2 * Math.max(cur.fh, d.fh) && d.x + u0 >= cur.x0 - 1) {
+            cur.x1 = Math.max(cur.x1, d.x + u1); cur.top = Math.min(cur.top, d.y - 0.88 * d.fh); cur.bot = Math.max(cur.bot, d.y + 0.27 * d.fh); cur.fh = Math.max(cur.fh, d.fh);
+        } else if (rot) bands.push({ rot: true, d: d, u0: u0, u1: u1 });
+        else bands.push({ rot: false, col: d.col, bi: d.bi, y: d.y, fh: d.fh, x0: d.x + u0, x1: d.x + u1, top: d.y - 0.88 * d.fh, bot: d.y + 0.27 * d.fh });
+    });
+    return bands;
+}
+/* các mảnh chữ đã chọn thuộc một trang (vùng chọn có thể trải nhiều trang) */
+function bkSelPageList(pg, R) {
+    const seq = pg.data.seq;
+    if (R.lo.p === R.hi.p) { const fl = bkFlowItems(pg.data, R.lo, R.hi); if (fl) return fl; }
+    const first = pg.num === R.lo.p, last = pg.num === R.hi.p, k0 = first ? R.lo.k : 0, k1 = last ? R.hi.k : seq.length - 1, out = [];
+    for (let k = k0; k <= k1; k++) {
+        const d = seq[k]; if (!d) continue;
+        const a = (first && k === R.lo.k) ? R.lo.o : 0, b = (last && k === R.hi.k) ? R.hi.o : d.str.length;
+        if (b > a) out.push({ d: d, a: a, b: b });
+    }
+    return out;
+}
+/* điểm gần nhất theo hình học, chỉ xét các mảnh chữ thoả ok(d) */
+function bkHitF(data, X, Y, ok) {
+    const seq = data.seq, n = seq.length; if (!n) return null;
+    const U = new Float64Array(n), V = new Float64Array(n); let dmin = 1e18;
+    for (let k = 0; k < n; k++) {
+        const d = seq[k]; if (!ok(d)) { V[k] = 1e18; continue; }
+        const dx = X - d.x, dy = Y - d.y; let u = dx, v = dy;
+        if (d.angle) { const c = Math.cos(d.angle), s = Math.sin(d.angle); u = dx * c + dy * s; v = -dx * s + dy * c; }
+        U[k] = u;
+        const v0 = -BK_BOX_TOP * d.fh, v1 = BK_BOX_BOT * d.fh, vc = (v0 + v1) / 2;
+        const dv = (v >= v0 && v <= v1) ? Math.abs(v - vc) * 0.25 : Math.abs(v - vc);
+        V[k] = dv; if (dv < dmin) dmin = dv;
+    }
+    let best = null, bs = 1e18;
+    for (let k = 0; k < n; k++) {
+        const d = seq[k], dv = V[k]; if (dv >= 1e17 || dv > dmin + 0.35 * d.fh) continue;
+        const u = U[k], ou = u < 0 ? -u : u > d.w ? u - d.w : 0, sc = ou + dv * 0.001;
+        if (sc < bs) { bs = sc; best = { d: d, u: u }; }
+    }
+    return best ? { d: best.d, o: bkCaret(best.d, best.u) } : null;
+}
+/* điểm kéo: giữ trong cột của điểm neo; chỉ sang cột khác khi con trỏ vượt đáy / đỉnh cột (hoặc giữ Ctrl) */
+function bkFocusPick(data, pg, X, Y, anc, free) {
+    const h = bkHit(data, X, Y); if (!h) return null;
+    const pos = bkMkPos(pg, h.d, h.o);
+    if (free || !anc || pos.p !== anc.p) return pos;
+    const dA = data.seq[anc.k], dH = h.d;
+    if (!dA || !data.ys || dA.col === undefined || dA.col < 0 || dH.col === undefined || dH.col < 0 || dA.col === dH.col) return pos;
+    const cy = data.colY[dA.col], fwd = dH.col > dA.col;
+    if (cy && (fwd ? Y > cy.bot : Y < cy.top)) return pos;
+    const hh = bkHitF(data, X, Y, d => d.col === dA.col || d.col === -1);
+    return hh ? bkMkPos(pg, hh.d, hh.o) : pos;
+}
+function bkFocusAt(cx, cy, anc, free) {
+    const pg = bkPageNear(cy); if (!pg) return null;
+    const data = pg.data;
+    if (!data) { bkPageData(pg).then(() => { if (bkDrag) bkDragMove(); }).catch(() => {}); return null; }
+    if (!data.seq.length) return null;
+    const r = pg.wrap.getBoundingClientRect(), s = bkScale;
+    return bkFocusPick(data, pg, (cx - r.left) / s, (cy - r.top) / s, anc, free);
+}
+function bkSelRange() {
+    if (!bkSel) return null;
+    const A = bkSel.a, F = bkSel.f;
+    if (A.p === F.p) { const pg = bkVP[A.p - 1], o = pg && pg.data ? bkFlowOrder(pg.data, A, F) : null; if (o) return { lo: o.lo, hi: o.hi }; }
+    return bkCmp(A, F) <= 0 ? { lo: A, hi: F } : { lo: F, hi: A };
+}
+function bkSelDraw(pg) {
+    if (!pg || !pg.selL) return;
+    const R = bkSelRange();
+    if (!R || pg.num < R.lo.p || pg.num > R.hi.p || pg.state !== 'done' || !pg.data) { if (pg._ss) { pg.selL.textContent = ''; pg._ss = ''; } return; }
+    if (!pg.data.seq.length) return;
+    const first = pg.num === R.lo.p, last = pg.num === R.hi.p;
+    const sig = (R.lo.p === R.hi.p ? 'f:' : 'm:') + (first ? R.lo.k + ':' + R.lo.o : '-') + ':' + (last ? R.hi.k + ':' + R.hi.o : '-') + ':' + bkScale + ':' + (pg.data.ys ? pg.data.ys.length : 0);
+    if (pg._ss === sig) return; pg._ss = sig;
+    const s = bkScale, bands = bkBandsOfList(bkSelPageList(pg, R)), frag = document.createDocumentFragment();
+    bands.forEach(b => {
+        const el = document.createElement('div'); el.className = 'bk-sr';
+        if (!b.rot) {
+            el.style.cssText = 'left:' + (b.x0 * s - 0.5).toFixed(1) + 'px;top:' + (b.top * s).toFixed(1) + 'px;width:' + ((b.x1 - b.x0) * s + 1).toFixed(1) + 'px;height:' + ((b.bot - b.top) * s).toFixed(1) + 'px';
+        } else {
+            const d = b.d, sa = Math.sin(d.angle), ca = Math.cos(d.angle), v0 = -0.88 * d.fh;
+            const ox = d.x + b.u0 * ca - v0 * sa, oy = d.y + b.u0 * sa + v0 * ca;
+            el.style.cssText = 'left:' + (ox * s).toFixed(1) + 'px;top:' + (oy * s).toFixed(1) + 'px;width:' + ((b.u1 - b.u0) * s).toFixed(1) + 'px;height:' + (1.15 * d.fh * s).toFixed(1) + 'px;transform-origin:0 0;transform:rotate(' + d.angle.toFixed(5) + 'rad)';
+        }
+        frag.appendChild(el);
+    });
+    pg.selL.textContent = ''; pg.selL.appendChild(frag);
+}
+function bkSelPartsSync(R) {
+    const parts = [];
+    for (let p = R.lo.p; p <= R.hi.p; p++) {
+        const pg = bkVP[p - 1]; if (!pg) continue;
+        if (!pg.data) return null;
+        bkSelPageList(pg, R).forEach(it => { const d = it.d, t = d.str.slice(it.a, it.b); if (t) parts.push({ t: t, x: d.x, y: d.y, w: d.w, fh: d.fh, p: p }); });
+    }
+    return parts;
+}
+/* cảm ứng: trình duyệt tự chọn chữ → kẹp đầu kéo vào cột của điểm neo (cùng quy tắc với chuột) */
+function bkFixSel() {
+    if (bkPtr.ctrl || !bkPtr.touch) return;
+    const sel = document.getSelection();
+    if (!sel || !sel.rangeCount || sel.isCollapsed) return;
+    const a = bkSelSpan(sel.anchorNode, sel.anchorOffset), f = bkSelSpan(sel.focusNode, sel.focusOffset);
+    if (!a || !f || a._k == null || f._k == null || a._n !== f._n) return;
+    const pg = bkVP[a._n - 1], data = pg && pg.data; if (!data || !data.ys) return;
+    const dA = data.seq[a._k], dF = data.seq[f._k];
+    if (!dA || !dF || !(dA.col >= 0 && dF.col >= 0) || dA.col === dF.col) return;
+    const fwd = dF.col > dA.col, r = pg.wrap.getBoundingClientRect(), Y = (bkPtr.y - r.top) / bkScale, cy = data.colY[dA.col];
+    if (cy && (fwd ? Y > cy.bot : Y < cy.top)) return;
+    const list = data.byCol[dA.col], tg = list && list.length ? (fwd ? list[list.length - 1] : list[0]) : null; if (!tg) return;
+    const sp = pg.spk && pg.spk[tg.k]; if (!sp || !sp.firstChild) return;
+    try { sel.setBaseAndExtent(sel.anchorNode, sel.anchorOffset, sp.firstChild, fwd ? tg.str.length : 0); } catch (e) {}
+}
+
 /* ---------- lớp chữ trong suốt ---------- */
 function bkMctx() { return bkMc || (bkMc = document.createElement('canvas').getContext('2d')); }
 function bkFontBase(fam) {
@@ -9579,7 +9727,11 @@ function bkJoinParts(parts) {
             sep = (gap > 0.12 * a.fh && !/\s$/.test(out) && !/^\s/.test(p.t)) ? ' ' : '';
         } else {
             const dy = p.y - a.y;
-            if (dy < -0.5 * fh || dy > 1.9 * fh) sep = '\n';
+            if (dy < -0.5 * fh && p.x - a.x > 3 * fh) {   // sang cột kế: câu đang dở thì nối tiếp, hết câu thì xuống dòng
+                if (/[A-Za-z\u00C0-\u1EF9]-$/.test(out) && /^[a-z\u00E0-\u1EF9]/.test(p.t)) { out = out.slice(0, -1); sep = ''; }
+                else sep = /[.!?:;)\]]\s*$/.test(out) ? '\n' : ' ';
+            }
+            else if (dy < -0.5 * fh || dy > 1.9 * fh) sep = '\n';
             else if (/[A-Za-z\u00C0-\u1EF9]-$/.test(out) && /^[a-z\u00E0-\u1EF9]/.test(p.t)) { out = out.slice(0, -1); sep = ''; }
             else sep = /\s$/.test(out) ? '' : ' ';
         }
@@ -23279,6 +23431,10 @@ html.rhm-dragging,html.rhm-dragging body{-webkit-user-select:none;user-select:no
     function bandsOf(pg, an) {
         var seq = pg.data.seq; if (!seq.length) return [];
         var lo = an.a, hi = an.b, first = pg.num === lo.p, last = pg.num === hi.p;
+        if (first && last && window.bkFlowItems) {
+            var kf0 = kOf(pg, lo.i), kf1 = kOf(pg, hi.i);
+            if (kf0 >= 0 && kf1 >= 0) { var fl = bkFlowItems(pg.data, { p: pg.num, k: kf0, o: lo.o }, { p: pg.num, k: kf1, o: hi.o }); if (fl) return bkBandsOfList(fl); }
+        }
         var k0 = 0, o0 = 0, k1 = seq.length - 1, o1 = -1;
         if (first) { k0 = kOf(pg, lo.i); if (k0 < 0) return []; o0 = lo.o; }
         if (last) { k1 = kOf(pg, hi.i); if (k1 < 0) return []; o1 = hi.o; }
@@ -24872,45 +25028,7 @@ textarea {
 (function () {
     'use strict';
 
-    /* 1. Kéo chọn chữ: kéo qua đáy cột thì tự sang cột kế tiếp, không cần Ctrl */
-    function blkX(ad, bi) {
-        var b = ad.blks[bi], l = 1e9, r = -1e9;
-        for (var k = b.k0; k <= b.k1; k++) {
-            var d = ad.seq[k];
-            if (d.x < l) l = d.x;
-            if (d.x + d.w > r) r = d.x + d.w;
-        }
-        return { l: l, r: r };
-    }
-    window.bkFocusAt = function (cx, cy, anc, free) {
-        var pg = bkPageNear(cy); if (!pg) return null;
-        var data = pg.data;
-        if (!data) { bkPageData(pg).then(function () { if (bkDrag) bkDragMove(); }).catch(function () {}); return null; }
-        if (!data.seq.length) return null;
-        var r = pg.wrap.getBoundingClientRect(), s = bkScale;
-        var X = (cx - r.left) / s, Y = (cy - r.top) / s;
-        var h = bkHit(data, X, Y); if (!h) return null;
-        var pos = bkMkPos(pg, h.d, h.o);
-        if (free || !anc) return pos;
-        if (pos.p !== anc.p) return pos;
-        var ap = bkVP[anc.p - 1], ad = ap && ap.data; if (!ad) return pos;
-        var blk = ad.blks[anc.bi]; if (!blk) return pos;
-        var below = Y > blk.bottom, above = Y < blk.top;
-        if (pos.bi === anc.bi) {
-            if (below && ad.blks[anc.bi + 1] && ad.blks[anc.bi + 1].top >= blk.bottom - 3) return { p: anc.p, k: ad.blks[anc.bi + 1].k0, o: 0, bi: anc.bi + 1 };
-            if (above && anc.bi > 0 && ad.blks[anc.bi - 1].bottom <= blk.top + 3) { var pk = ad.blks[anc.bi - 1].k1; return { p: anc.p, k: pk, o: ad.seq[pk].str.length, bi: anc.bi - 1 }; }
-            return pos;
-        }
-        if (bkChainOk(anc, pos)) return pos;
-        var bx = blkX(ad, anc.bi);
-        var pbk = ad.blks[pos.bi], sameCol = !!pbk && (pbk.top >= blk.bottom - 3 || pbk.bottom <= blk.top + 3);
-        if (sameCol && pos.bi > anc.bi && (below || X > bx.r)) return pos;
-        if (sameCol && pos.bi < anc.bi && (above || X < bx.l)) return pos;
-        if (below) return bkEndOf(ap, blk);
-        if (above) return bkStartOf(ap, blk);
-        var hh = bkHit(ad, X, Y, blk.k0, blk.k1);
-        return hh ? bkMkPos(ap, hh.d, hh.o) : pos;
-    };
+    /* 1. (đã chuyển vào lõi: bkFocusAt mới giữ vùng chọn trong cột, sang cột khác khi kéo qua đáy/đỉnh cột hoặc giữ Ctrl) */
 
     /* 2. AI đọc chương: đợt lỗi thì chia đôi và thử lại (không bỏ cả đợt); đợt lớn tách mỗi lần 12 trang */
     var readOrig = bkAiReadWindow;
