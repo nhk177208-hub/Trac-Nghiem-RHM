@@ -10801,8 +10801,8 @@ async function bkDetectChapter() {
     let lastPg = 0, got = 0;
     try {
         const nums = []; for (let p = 1; p <= N; p++) nums.push(p);
-        bkScanSay('Chụp chương 0/' + N);
-        const shots = await bkShotChapter(nums, tok, (k, n) => { if (my === bkDeepTok) bkScanSay('Chụp chương ' + k + '/' + n); });
+        bkScanSay('Chuẩn bị chương 0/' + N);
+        const shots = await bkShotChapter(nums, tok, (k, n) => { if (my === bkDeepTok) bkScanSay('Chuẩn bị chương ' + k + '/' + n); });
         if (!shots || my !== bkDeepTok || tok !== bkViewTok) return;
         const wins = bkPlanWin(shots);
         bkHeads = []; bkHeadsSave();
