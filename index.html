@@ -9750,7 +9750,7 @@ function bkQuickTr() {
     if (bkSel && bkSel._txt == null && !bkSel._tried) { bkSel._tried = true; bkSelCompute().then(() => bkQuickTr()); return; }
     const live = bkSelText();
     const src = live || bkPdfSel;
-    if (!src) { showToast('Hãy tô đen đoạn cần dịch trong PDF rồi bấm ⚡ Dịch nhanh'); return; }
+    if (!src) { showToast('Hãy tô đen đoạn cần dịch trong PDF rồi bấm Dịch'); return; }
     if (!aiAnyKey()) { aiShowGate(); return; }
     bkPdfSel = '';
     bkOpenAi();
@@ -10279,8 +10279,8 @@ async function bkDetectChapter() {
     btn.disabled = true;
     try {
         const N = bkDoc.numPages, nums = []; for (let i = 1; i <= N; i++) nums.push(i);
-        bkTocSay('Chụp các trang chương…');
-        const shots = await bkShotPages(nums, tok, (k, n) => { if (k % 3 === 0 || k === n) bkTocSay('Chụp trang ' + k + '/' + n); });
+        bkTocSay('Đang chuẩn bị các trang chương…');
+        const shots = await bkShotPages(nums, tok, (k, n) => { if (k % 3 === 0 || k === n) bkTocSay('Đang xử lý trang ' + k + '/' + n); });
         if (!shots) return;
         const wins = bkPlanWin(shots), heads = [], lay = {};
         let lastPg = 0, failed = 0;
@@ -10481,9 +10481,9 @@ async function bkRescanSel() {
     const p0 = bkPageOfPos(start), p1 = Math.min(bkDoc.numPages, Math.max(p0, bkPageOfPos(Math.max(start, endPos - 1))), p0 + 29);
     const nums = []; for (let p = p0; p <= p1; p++) nums.push(p);
     let kids = [];
-    if (btn) { btn.disabled = true; btn.textContent = '⏳ Chụp trang…'; }
+    if (btn) { btn.disabled = true; btn.textContent = '⏳ Đang chuẩn bị…'; }
     try {
-        const shots = await bkShotPages(nums, tok, (k, n) => { if (btn) btn.textContent = '⏳ Chụp ' + k + '/' + n; });
+        const shots = await bkShotPages(nums, tok, (k, n) => { if (btn) btn.textContent = '⏳ Đang xử lý ' + k + '/' + n; });
         if (!shots) return;
         if (btn) btn.textContent = '⏳ AI đọc…';
         let r = null;
@@ -13342,7 +13342,6 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
                 <span id="bk-zoom-lbl" class="text-xs font-bold w-11 text-center">100%</span>
                 <button type="button" onclick="bkZoomBy(1)" class="font-black text-base px-2 py-0.5 hover:bg-white/20 rounded" title="Phóng to">+</button>
             </div>
-            <button id="bk-mark-btn" type="button" onclick="bkQuickTr()" class="shrink-0 text-xs sm:text-sm font-bold bg-white/15 hover:bg-white/25 text-white px-3 py-1.5 rounded-lg active:scale-95 transition-all" title="Mở box chat và dịch đoạn đang tô đen trong PDF">⚡ Dịch nhanh</button>
             <button id="bk-sec-btn" type="button" onclick="bkDetectChapter()" class="shrink-0 text-xs sm:text-sm font-bold bg-amber-500 hover:bg-amber-600 text-white px-3 py-1.5 rounded-lg active:scale-95 transition-all">📑 Nhận diện mục lục</button>
             <button type="button" onclick="bkCloseAll()" class="text-white text-2xl font-black px-2 leading-none shrink-0">✕</button>
         </div>
@@ -13885,10 +13884,10 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         const oldBar = row.querySelector('.ai-langbar'); if (oldBar) oldBar.remove();
         const bar = document.createElement('span'); bar.className = 'ai-langbar inline-flex items-center rounded-full border border-indigo-300 overflow-hidden';
         const mk = (k, label) => { const b = document.createElement('button'); b.type = 'button'; b.dataset.k = k; b.textContent = label; b.className = 'text-[11px] font-extrabold px-2.5 py-0.5'; b.onclick = () => aiBubbleLang(bubble, k); bar.appendChild(b); };
-        mk('vi', 'Vie'); mk('en', 'Eng'); if (bi && aiState.mode !== 'quiz') mk('both', 'Cột');
+        mk('vi', 'Vie'); mk('en', 'Eng');
         row.insertBefore(bar, row.firstChild);
         aiLangBarPaint(bubble);
-        if (enSide) aiEnSide(bubble, out);
+        if (bi) { try { aiBubbleLang(bubble, 'vi'); } catch (e) {} }   // không còn chế độ cột: bản song ngữ cũ hiện bản Việt
     }
     function aiLangBarPaint(bubble) {
         const bar = bubble.querySelector('.ai-langbar'); if (!bar) return;
@@ -13984,6 +13983,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     }
     function aiHdrSecBtn() {
         if (aiState.mode === 'book' || aiState.mode === 'video') { bkQzToggle(); return; }
+        return;   // đã bỏ cửa sổ phụ dịch Eng
         const p = document.getElementById('ai-en-panel');
         if (p && !p.classList.contains('hidden')) { aiEnPanelClose(); return; }
         try { if (!p.querySelector('.ai-en-ent')) aiEnClear(); } catch (e) {}
@@ -14119,8 +14119,8 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     }
     function aiSetStatus(t) { document.getElementById('ai-live-status').textContent = t; }
 
-    const AI_QUICK_QUIZ = [['Giải thích vì sao đáp án đúng là đúng.', '💡 Vì sao đúng?', 'bg-indigo-50 text-indigo-700 border-indigo-200'], ['', '🔬 Tìm hiểu sâu', 'bg-sky-50 text-sky-700 border-sky-200', 'deep'], ['Phân tích vì sao từng đáp án còn lại sai.', '🚫 Vì sao kia sai?', 'bg-rose-50 text-rose-700 border-rose-200'], ['Cho mình mẹo ghi nhớ và một ví dụ lâm sàng ngắn liên quan.', '🧠 Mẹo nhớ / ví dụ', 'bg-emerald-50 text-emerald-700 border-emerald-200'], ['', '🎓 Học có hướng dẫn', 'bg-violet-50 text-violet-700 border-violet-200', 'guided']];
-    const AI_QUICK_VIDEO = [['Hãy lập mục lục nội dung video theo mốc thời gian, từ đầu đến cuối, không bỏ sót đoạn chính nào. Mở đầu bằng 1–2 câu tổng quan. Sau đó trình bày mục lục PHÂN CẤP có đánh số như mục lục sách: mục lớn đánh số 1., 2., 3., …; mục con đánh số 1.1, 1.2, …, 2.1, 2.2, … (tối đa 2 cấp; tách mục con khi một mục lớn có nhiều ý rõ rệt). Mỗi mục một dòng, đúng dạng: <số thứ tự> [mm:ss] Tên mục — các ý chính của đoạn đó trong 3–4 câu đầy đủ ý (nêu lần lượt các ý chính nối tiếp nhau trong đoạn, giữ lại thuật ngữ, số liệu quan trọng; mục lớn lẫn mục con đều viết 3–4 câu). Mốc thời gian tăng dần theo thứ tự số. Không thêm phần kết luận hay ý cần nhớ ở cuối. Mục lục chỉ tóm lược nội dung video nên KHÔNG trích dẫn tài liệu, không gắn nguồn hay link.', '📑 Mục lục theo thời gian', 'bg-indigo-50 text-indigo-700 border-indigo-200', 'timeline'], ['Giải thích dễ hiểu đoạn mình đang xem.', '🎯 Giải thích đoạn đang xem', 'bg-rose-50 text-rose-700 border-rose-200', 'explain'], ['', '🖼️ Hỏi hình ảnh đang hiện', 'bg-amber-50 text-amber-700 border-amber-200', 'frame'], ['', '📝 Trắc nghiệm', 'bg-emerald-50 text-emerald-700 border-emerald-200', 'vidquiz'], ['', '🎓 Học có hướng dẫn', 'bg-violet-50 text-violet-700 border-violet-200', 'guided']];
+    const AI_QUICK_QUIZ = [['Giải thích vì sao đáp án đúng là đúng.', '💡 Vì sao đúng?', 'bg-indigo-50 text-indigo-700 border-indigo-200'], ['', '🔬 Tìm hiểu sâu', 'bg-sky-50 text-sky-700 border-sky-200', 'deep'], ['Phân tích vì sao từng đáp án còn lại sai.', '🚫 Vì sao kia sai?', 'bg-rose-50 text-rose-700 border-rose-200'], ['Cho mình mẹo ghi nhớ và một ví dụ lâm sàng ngắn liên quan.', '🧠 Mẹo nhớ / ví dụ', 'bg-emerald-50 text-emerald-700 border-emerald-200'], ['', '🎓 Học Tập có hướng dẫn', 'bg-violet-50 text-violet-700 border-violet-200', 'guided']];
+    const AI_QUICK_VIDEO = [['Hãy lập mục lục nội dung video theo mốc thời gian, từ đầu đến cuối, không bỏ sót đoạn chính nào. Mở đầu bằng 1–2 câu tổng quan. Sau đó trình bày mục lục PHÂN CẤP có đánh số như mục lục sách: mục lớn đánh số 1., 2., 3., …; mục con đánh số 1.1, 1.2, …, 2.1, 2.2, … (tối đa 2 cấp; tách mục con khi một mục lớn có nhiều ý rõ rệt). Mỗi mục một dòng, đúng dạng: <số thứ tự> [mm:ss] Tên mục — các ý chính của đoạn đó trong 3–4 câu đầy đủ ý (nêu lần lượt các ý chính nối tiếp nhau trong đoạn, giữ lại thuật ngữ, số liệu quan trọng; mục lớn lẫn mục con đều viết 3–4 câu). Mốc thời gian tăng dần theo thứ tự số. Không thêm phần kết luận hay ý cần nhớ ở cuối. Mục lục chỉ tóm lược nội dung video nên KHÔNG trích dẫn tài liệu, không gắn nguồn hay link.', '📑 Mục lục theo thời gian', 'bg-indigo-50 text-indigo-700 border-indigo-200', 'timeline'], ['Giải thích dễ hiểu đoạn mình đang xem.', '🎯 Giải thích đoạn đang xem', 'bg-rose-50 text-rose-700 border-rose-200', 'explain'], ['', '🖼️ Hỏi hình ảnh đang hiện', 'bg-amber-50 text-amber-700 border-amber-200', 'frame'], ['', '📝 Trắc nghiệm', 'bg-emerald-50 text-emerald-700 border-emerald-200', 'vidquiz'], ['', '🎓 Học Tập có hướng dẫn', 'bg-violet-50 text-violet-700 border-violet-200', 'guided']];
     function aiRenderQuick(list) {
         aiState.guided = false;
         const box = document.getElementById('ai-quick'); box.innerHTML = '';
@@ -14754,7 +14754,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         '1. LƯỢT ĐẦU (người học vừa bật chế độ này): xác định CHỦ ĐỀ CHÍNH của nội dung đang học. Trình bày theo đúng trình tự 3 phần kết nối mượt mà với nhau (TUYỆT ĐỐI KHÔNG chào 2 lần):',
         '   - Phần mở đầu (ngay trên đầu bong bóng): Chào người học (xưng là gia sư Răng Hàm Mặt) và viết MỘT đoạn văn tổng quan ngắn gọn (khoảng 60–90 từ) giới thiệu bức tranh chung cùng tầm quan trọng lâm sàng của chủ đề này, dẫn dắt tự nhiên xuống phần ý chính.',
         '   - Phần tiếp theo: Viết tiêu đề **🧠 Những ý quan trọng cần nhớ** (TUYỆT ĐỐI KHÔNG có chữ "để đi thi"), bên dưới liệt kê đầy đủ, súc tích bằng gạch đầu dòng các ý cốt lõi, cơ chế, mốc số liệu, tiêu chuẩn chẩn đoán / điều trị quan trọng nhất, rồi viết 1 câu chuyển ý mượt mà sang phần chọn hướng khám phá.',
-        '2. KHI NGƯỜI HỌC CHỌN MỘT HOẶC NHIỀU HƯỚNG (tin nhắn dạng "Mình chọn hướng 1: ...; hướng 3: ..."): giải thích TẤT CẢ các hướng đã chọn trong cùng một câu trả lời, mỗi hướng một mục riêng bắt đầu bằng dòng **Hướng N: tiêu đề**, mỗi mục ngắn gọn dễ hiểu (khoảng 100–150 từ), có thể kèm ví dụ lâm sàng ngắn. Không giảng hướng người học không chọn. Nếu người học gõ câu hỏi riêng thì trả lời câu đó một chặng ngắn. Sau đó để người học chọn các hướng tiếp theo.',
+        '2. KHI NGƯỜI HỌC CHỌN MỘT HOẶC NHIỀU HƯỚNG (tin nhắn dạng "Mình chọn hướng 1: ...; hướng 3: ..."): giải thích TẤT CẢ các hướng đã chọn trong cùng một câu trả lời, mỗi hướng một mục riêng bắt đầu bằng dòng **Hướng N: tiêu đề** (kể cả khi người học chỉ chọn MỘT hướng thì vẫn BẮT BUỘC có dòng **Hướng N: tiêu đề** như vậy), mỗi mục ngắn gọn dễ hiểu (khoảng 100–150 từ), có thể kèm ví dụ lâm sàng ngắn. Không giảng hướng người học không chọn. Nếu người học gõ câu hỏi riêng thì trả lời câu đó một chặng ngắn. Sau đó để người học chọn các hướng tiếp theo.',
         '3. BA HƯỚNG ĐỀ XUẤT mỗi lượt phải khác nhau, bám sát chủ đề chính, đi sâu dần hoặc mở rộng hợp lý, KHÔNG lặp lại hướng đã học. Sau vài chặng có thể có một hướng "ôn nhanh / tự kiểm tra".',
         '4. Đây là khám phá tự do: KHÔNG đặt câu trắc nghiệm đúng / sai, KHÔNG có đáp án đúng. Ba lựa chọn 1, 2, 3 chỉ là ba hướng đi tiếp.',
         '5. KHÔNG tự viết danh sách 1, 2, 3 và KHÔNG viết câu hỏi mời chọn ở cuối thân bài: hệ thống tự hiển thị từ thẻ bên dưới.',
@@ -14820,7 +14820,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         const body = bubble.querySelector('.ai-body') || bubble;
         body.querySelectorAll('b').forEach(b => {
             const txt = (b.textContent || '').trim();
-            if (!/^Hướng\s*\d+\s*:/i.test(txt)) return;
+            if (!/^Hướng\s*\d+\s*[:：.\-–—]/i.test(txt)) return;
             if (b.nextElementSibling && b.nextElementSibling.classList.contains('ai-gl-locbtn')) return;
             const btn = document.createElement('button');
             btn.type = 'button';
@@ -14831,7 +14831,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
                 e.stopPropagation();
                 let secTxt = '';
                 let n = b.nextSibling;
-                while (n && !(n.nodeType === 1 && n.tagName === 'B' && /^Hướng\s*\d+\s*:/i.test((n.textContent || '').trim()))) {
+                while (n && !(n.nodeType === 1 && n.tagName === 'B' && /^Hướng\s*\d+\s*[:：.\-–—]/i.test((n.textContent || '').trim()))) {
                     secTxt += (n.textContent || '') + ' ';
                     n = n.nextSibling;
                 }
@@ -14848,10 +14848,29 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         document.getElementById('ai-input').value = txt;
         const before = aiState.history.length;
         await aiSend();
+        try { aiGuidedEnsureLoc(list); } catch (e) {}
         return aiState.history.length > before;
     }
+    function aiGuidedEnsureLoc(list) {   // chọn 1, 2 hay 3 hướng đều phải có nút 📍 Xem lại (chỉ sách / video)
+        if (aiState.mode !== 'book' && aiState.mode !== 'video') return;
+        const box = document.getElementById('ai-messages'); if (!box) return;
+        const bs = Array.prototype.slice.call(box.querySelectorAll(':scope > .ai-bub')), bub = bs[bs.length - 1];
+        if (!bub || bub.querySelector('.ai-gl-locbtn')) return;
+        const body = bub.querySelector('.ai-body') || bub, plain = (body.textContent || '').trim();
+        if (!plain || plain.length < 40) return;
+        const row = document.createElement('div'); row.className = 'flex flex-wrap gap-1.5 mb-1.5';
+        list.forEach(x => {
+            const btn = document.createElement('button'); btn.type = 'button';
+            btn.className = 'ai-gl-locbtn inline-flex items-center gap-1 text-xs font-extrabold px-2.5 py-0.5 rounded-full border border-indigo-300 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 active:scale-95';
+            btn.textContent = '📍 Xem lại' + (list.length > 1 ? ' hướng ' + x.n : '');
+            btn.title = aiState.mode === 'video' ? 'Định vị và tua video tới đoạn giảng hướng này' : 'Định vị, tô sáng xanh lá và dịch đoạn sách của hướng này';
+            btn.onclick = (e) => { e.stopPropagation(); aiGuidedLocate(x.text, plain.slice(0, 600)); };
+            row.appendChild(btn);
+        });
+        body.insertBefore(row, body.firstChild);
+    }
     function aiGuidedStart() {
-        aiState.guided = true; aiState.fullNext = false; aiState.showText = '🎓 Học tập có hướng dẫn';
+        aiState.guided = true; aiState.fullNext = false; aiState.showText = '🎓 Học Tập có hướng dẫn';
         document.getElementById('ai-input').value = aiState.mode === 'book'
             ? 'Hãy bắt đầu học tập có hướng dẫn bao quát TOÀN BỘ chương sách đang đọc.'
             : (aiState.mode === 'video' ? 'Hãy bắt đầu học tập có hướng dẫn bao quát TOÀN BỘ nội dung bài giảng video này từ đầu đến cuối.' : 'Hãy bắt đầu học tập có hướng dẫn bao quát TOÀN BỘ nội dung câu hỏi, các phương án và lời giải thích của câu này.');
@@ -15373,7 +15392,7 @@ async function bkQzStart(n, lvl) {
     const lvlTxt = { easy: 'dễ (kiến thức nhận biết trực tiếp)', mid: 'vừa (hiểu và so sánh)', hard: 'khó (vận dụng, phân biệt tinh vi)' }[lvl];
     bkQzTitle('📝 Trắc nghiệm'); aiEnPanelOpen();
     const bd0 = document.querySelector('#ai-en-panel .ai-en-body');
-    if (bd0) bd0.innerHTML = '<div class="ai-en-empty">⏳ Đang soạn câu hỏi trắc nghiệm…</div>';
+    if (bd0) bd0.innerHTML = '<div class="ai-en-empty">⏳ Đang soạn ' + n + ' câu hỏi trắc nghiệm…</div>';
     aiAddMsg('sys', '⏳ Đang soạn ' + n + ' câu trắc nghiệm (' + lvlTxt.split(' ')[0] + ')…');
     try {
         let r = null;
@@ -15639,7 +15658,7 @@ async function bkAnalyzeCurrentPageImage() {
     aiSend(img);
 }
 
-function aiEnsureQuickTts() {   // Thứ tự nút nhanh ở boxchat reader từ trái qua: Chú thích, Phân tích ảnh màn hình, Tìm hiểu sâu, Trắc nghiệm, Tự học có hướng dẫn; nút Đọc to luôn canh lề phải
+function aiEnsureQuickTts() {   // Thứ tự nút nhanh ở boxchat reader từ trái qua: Chú thích, Phân tích ảnh màn hình, Tìm hiểu sâu, Trắc nghiệm, Học Tập có hướng dẫn; nút Đọc to luôn canh lề phải
         const box = document.getElementById('ai-quickrow') || document.getElementById('ai-quick'); if (!box) return;
         const isBook = !!(aiState.mode === 'book' && bkCur);
         let eb = document.getElementById('bk-exp-quick');
@@ -15666,13 +15685,13 @@ function aiEnsureQuickTts() {   // Thứ tự nút nhanh ở boxchat reader từ
 
         let lb = document.getElementById('bk-lect-quick');
         if (!lb) { lb = document.createElement('button'); lb.id = 'bk-lect-quick'; lb.type = 'button'; lb.className = 'shrink-0 whitespace-nowrap text-xs font-bold border rounded-full px-3 py-1.5 bg-violet-50 text-violet-700 border-violet-200 shadow-sm active:scale-95'; lb.onclick = () => bkGuidedQuick(); }
-        lb.textContent = '🎓 Tự học có hướng dẫn'; lb.title = 'Tự học có hướng dẫn từ đoạn vừa dịch';
+        lb.textContent = '🎓 Học Tập có hướng dẫn'; lb.title = 'Học Tập có hướng dẫn từ đoạn vừa dịch';
         lb.classList.toggle('hidden', !isBook);
 
         let b = document.getElementById('ai-tts-quick');
         if (!b) { b = document.createElement('button'); b.id = 'ai-tts-quick'; b.type = 'button'; b.className = 'shrink-0 whitespace-nowrap text-xs font-bold border rounded-full px-3 py-1.5 bg-violet-50 text-violet-700 border-violet-200 shadow-sm active:scale-95 ml-auto'; b.onclick = aiTtsQuick; }
 
-        // Sắp xếp đúng thứ tự từ trái qua: Chú thích -> Phân tích ảnh màn hình -> Tìm hiểu sâu -> Trắc nghiệm -> Tự học có hướng dẫn | Đọc to (bên phải)
+        // Sắp xếp đúng thứ tự từ trái qua: Chú thích -> Phân tích ảnh màn hình -> Tìm hiểu sâu -> Trắc nghiệm -> Học Tập có hướng dẫn | Đọc to (bên phải)
         box.appendChild(eb);
         box.appendChild(ib);
         box.appendChild(db);
@@ -15691,12 +15710,6 @@ function aiEnsureQuickTts() {   // Thứ tự nút nhanh ở boxchat reader từ
                 aiTtsLabel(btn, !!(aiTts && aiTts.bubble === b)); if (aiTts && aiTts.bubble === b) aiTts.btn = btn;
                 btn.onclick = () => aiTtsToggle(b, btn); bar.appendChild(btn); b.insertAdjacentElement('afterbegin', bar);
                 f = bar;
-            }
-            // Bong bóng dịch sách: thay nút Giảng bài cũ bằng nút 🎓 Học có hướng dẫn ngay bên trái nút đọc to
-            if (b._tr && !f.querySelector('.bk-lect-btn')) {
-                const lb = document.createElement('button'); lb.type = 'button'; lb.className = 'bk-lect-btn text-xs font-bold border rounded-full px-2.5 py-1 bg-violet-50 text-violet-700 border-violet-200 active:scale-95 mr-1.5';
-                lb.textContent = '🎓 Học có hướng dẫn'; lb.onclick = () => bkGuidedQuick(b);
-                f.insertBefore(lb, f.firstChild);
             }
             const rawTxt = (b.textContent || '').trim();
             const isWait = rawTxt === '…' || (/^(⏳|🔬|🎓)\s*(Đang|Deep Research)/.test(rawTxt) && rawTxt.length < 180);
@@ -18182,7 +18195,7 @@ window.isIOSDevice = function () {
     function paintRib() {
         ['add', 'search', 'saved', 'review', 'jump'].forEach(n => { const b = $('rd-rb-' + n); if (b) b.classList.toggle('on', n === 'review' ? !!rd.rv : rd.pop === n); });
     }
-    function closePop() { try { stopInfoSpeak(); } catch (e) {} rd.pop = ''; rd.editT = null; rd.infoT = null; rd.more = null; rd.editIm = null; const p = $('rd-pop'); p.classList.add('hidden'); p.classList.remove('wide', 'more', 'tall', 'add-ctr'); p.style.left = ''; p.style.top = ''; p.style.right = ''; paintRib(); }
+    function closePop() { try { stopInfoSpeak(); } catch (e) {} rd.pop = ''; rd.editT = null; rd.infoT = null; rd.more = null; rd.editIm = null; const p = $('rd-pop'); p.classList.add('hidden'); p.classList.remove('wide', 'more', 'tall', 'add-ctr', 'mid-ctr', 'mid-row'); p.style.left = ''; p.style.top = ''; p.style.right = ''; paintRib(); }
     function placeNewT() {
     var p = $('rd-pop'), w = p && p.parentNode, b = document.querySelector('#dict-modal .rd-nwv');
     if (!p || !w || !b) return;
@@ -18202,7 +18215,7 @@ function openPop(mode, t) {
         if (mode === 'add') {
             h = '<div class="rd-pt">＋ Thêm thuật ngữ mới</div><input id="rd-in-en" class="rd-in" placeholder="Thuật ngữ tiếng Anh" autocomplete="off">' + POSI('') + '<textarea id="rd-in-vi" class="rd-in" rows="2" placeholder="Nghĩa tiếng Việt (nhiều nghĩa: Shift+Enter để xuống dòng)" autocomplete="off"></textarea><div class="rd-pb"><button type="button" class="rd-pbtn pri" data-act="add">＋ Thêm</button></div><div class="rd-hint">Bấm vào một dòng trong sách để xem thông tin, sửa, lưu ⭐, thêm từ liên quan ＋ hoặc xóa.</div>'; focus = 'rd-in-en';
         } else if (mode === 'row') {
-            h = '<div class="rd-pt">✏️ Sửa thuật ngữ</div><input id="rd-in-en" class="rd-in" value="' + esc(t.en) + '" autocomplete="off">' + POSI(t.p) + '<textarea id="rd-in-vi" class="rd-in" rows="3" autocomplete="off">' + esc(t.vi) + '</textarea><div class="rd-imgrow"><button type="button" class="rd-pbtn" data-act="img-pick">🖼️ Thêm ảnh</button><span class="rd-hint" style="margin:0">hoặc dán ảnh từ clipboard (Ctrl+V)</span><input id="rd-in-img" type="file" accept="image/*" multiple hidden></div><div id="rd-thumbs" class="rd-thumbs"></div><div class="rd-pb"><button type="button" class="rd-pbtn pri" data-act="save">Lưu</button><button type="button" class="rd-pbtn dan" data-act="del">Xóa</button><button type="button" class="rd-pbtn" data-act="cancel">Hủy</button></div><div class="rd-hint">Mỗi nghĩa một dòng (Shift+Enter xuống dòng). Ảnh sẽ hiện trong khung thông tin của từ. Các lần dịch sau sẽ dùng đúng nghĩa bạn vừa sửa.</div>'; focus = 'rd-in-vi';
+            h = '<div class="rd-pt">✏️ Sửa thuật ngữ</div><input id="rd-in-en" class="rd-in" value="' + esc(t.en) + '" autocomplete="off">' + POSI(t.p) + '<textarea id="rd-in-vi" class="rd-in" rows="3" autocomplete="off">' + esc(t.vi) + '</textarea><div class="rd-pb"><button type="button" class="rd-pbtn pri" data-act="save">Lưu</button><button type="button" class="rd-pbtn dan" data-act="del">Xóa</button><button type="button" class="rd-pbtn" data-act="cancel">Hủy</button></div><div class="rd-hint">Mỗi nghĩa một dòng (Shift+Enter xuống dòng). Các lần dịch sau sẽ dùng đúng nghĩa bạn vừa sửa.</div>'; focus = 'rd-in-vi';
         } else if (mode === 'info') {
             rd.infoLang = 'vi';
             h = '<div class="rd-pt" style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap"><span>ℹ️ ' + esc(t.en) + (t.p ? '<span class="rd-pos">(' + esc(t.p) + ')</span>' : '') + '</span><span class="rd-inflg" style="display:inline-flex;border:1.5px solid #c4b5fd;border-radius:999px;overflow:hidden;font-size:12px"><button type="button" data-act="info-lang" data-l="vi" style="padding:2px 10px;font-weight:800;border:0;cursor:pointer;background:#6d28d9;color:#fff">Vie</button><button type="button" data-act="info-lang" data-l="en" style="padding:2px 10px;font-weight:800;border:0;cursor:pointer;background:#fff;color:#5b21b6">Eng</button></span></div><div class="rd-sub">' + viHTML(t.vi) + '</div><div id="rd-info" class="rd-info overflow-y-auto"></div><div class="rd-pb"><button type="button" class="rd-pbtn pri" id="rd-info-tts-btn" data-act="info-tts">🔊 Đọc to</button><button type="button" class="rd-pbtn" data-act="info-redo">↻ Tạo lại</button><button type="button" class="rd-pbtn" data-act="cancel">Đóng</button></div>';
@@ -18221,7 +18234,7 @@ function openPop(mode, t) {
         }
         p.innerHTML = h;
         p.classList.toggle('wide', mode === 'info' || mode === 'saved' || mode === 'row' || mode === 'more');
-        p.classList.toggle('info-ctr', mode === 'info'); p.classList.toggle('add-ctr', mode === 'add'); p.classList.toggle('more', mode === 'more'); p.classList.toggle('newt', mode === 'newt'); p.classList.toggle('tall', mode === 'row' || mode === 'more');
+        p.classList.toggle('info-ctr', mode === 'info'); p.classList.toggle('mid-ctr', mode === 'row' || mode === 'more'); p.classList.toggle('mid-row', mode === 'row'); p.classList.toggle('add-ctr', mode === 'add'); p.classList.toggle('more', mode === 'more'); p.classList.toggle('newt', mode === 'newt'); p.classList.toggle('tall', mode === 'row' || mode === 'more');
         p.classList.remove('hidden'); paintRib();
         if (mode === 'saved') paintSaved(); if (mode === 'newt') { paintNewT(); placeNewT(); }
         if (mode === 'row') paintThumbs();
@@ -18269,6 +18282,7 @@ function openPop(mode, t) {
         box.innerHTML = (rd.editIm || []).map((s, i) => '<div class="rd-th"><img src="' + s + '" alt=""><button type="button" class="rd-thx" data-act="img-del" data-i="' + i + '" title="Xóa ảnh">✕</button></div>').join('');
     }
     async function addImages(files) {
+        return;   // đã bỏ nút thêm ảnh khi sửa thuật ngữ
         if (rd.pop !== 'row' || !rd.editIm) return;
         let skipped = 0;
         for (const f of files) {
@@ -18517,7 +18531,7 @@ function openPop(mode, t) {
     }
 
     /* ---------- ÔN TẬP: flashcard / trắc nghiệm có ngữ cảnh ---------- */
-    const rv = { src: 'saved', cnt: '10', mode: 'flash', topic: '', n: '', run: null, busy: false };
+    const rv = { src: 'saved', cnt: '10', mode: 'flash', lvl: 'mid', topic: '', n: '', run: null, busy: false };
     const BATCH = 6;
     function addPts(n) { try { if (typeof SecureStore !== 'undefined') { SecureStore.addPoints(n); if (typeof updateCollectionStatsUI === 'function') updateCollectionStatsUI(); } } catch (e) {} }
     const aiReady = () => typeof aiGeminiJson === 'function' && (typeof aiAnyKey !== 'function' || aiAnyKey());
@@ -18535,6 +18549,7 @@ function openPop(mode, t) {
             + '<div class="rv-sec">Số lượng từ</div><div class="rv-g">' + rvOptBtn('cnt', '10', '10') + rvOptBtn('cnt', '20', '20') + rvOptBtn('cnt', '30', '30') + rvOptBtn('cnt', 'all', 'Tất cả') + rvOptBtn('cnt', 'custom', 'Tùy chọn') + '</div>'
             + '<input id="rv-n" class="rd-in" style="margin-top:8px" type="number" min="1" inputmode="numeric" placeholder="Nhập số từ cần ôn" value="' + esc(rv.n) + '">'
             + '<div class="rv-sec">Chế độ</div><div class="rv-g">' + rvOptBtn('mode', 'flash', '🃏 Flashcard') + rvOptBtn('mode', 'quiz', '📝 Trắc nghiệm ngữ cảnh') + '</div>'
+            + '<div id="rv-lvlw"><div class="rv-sec">Độ khó (đáp án gây nhiễu)</div><div class="rv-g">' + rvOptBtn('lvl', 'easy', '🙂 Dễ') + rvOptBtn('lvl', 'mid', '😐 Vừa') + rvOptBtn('lvl', 'hard', '😤 Khó') + '</div><div id="rv-lh" class="rd-hint"></div></div>'
             + '<div id="rv-mh" class="rd-hint"></div>'
             + '<div class="rd-pb" style="margin-top:12px"><button type="button" class="rd-pbtn pri" data-act="rv-start">▶ Bắt đầu</button></div><div id="rv-st" class="rd-hint"></div></div>';
         rvSync();
@@ -18544,7 +18559,9 @@ function openPop(mode, t) {
         if (tp) tp.classList.toggle('rv-hid', rv.src !== 'topic');
         if (th) th.classList.toggle('rv-hid', rv.src !== 'topic');
         if (nn) nn.classList.toggle('rv-hid', rv.cnt !== 'custom');
-        if (mh) mh.textContent = rv.mode === 'quiz' ? 'AI cho một câu ngữ cảnh có chứa từ, bạn chọn nghĩa đúng trong 4 đáp án. Trả lời đúng +5đ.' : 'Lật thẻ để xem nghĩa, rồi tự đánh giá đã nhớ hay chưa nhớ.';
+        if (mh) mh.textContent = rv.mode === 'quiz' ? 'AI cho một câu ngữ cảnh có chỗ trống __________, bạn chọn 1 trong 4 từ tiếng Anh để điền vào. Trả lời đúng +5đ.' : 'Lật thẻ để xem nghĩa, rồi tự đánh giá đã nhớ hay chưa nhớ.';
+        const lw = $('rv-lvlw'), lh = $('rv-lh'); if (lw) lw.classList.toggle('rv-hid', rv.mode !== 'quiz');
+        if (lh) lh.textContent = rv.lvl === 'easy' ? 'Dễ: 3 từ gây nhiễu không liên quan nhiều đến câu.' : (rv.lvl === 'hard' ? 'Khó: 3 từ gây nhiễu cùng chủ đề và cùng từ loại.' : 'Vừa: một nửa từ gây nhiễu cùng chủ đề / từ loại, nửa còn lại ít liên quan.');
     }
     function rvOpt(el) {
         const g = el.dataset.g; rv[g] = el.dataset.v;
@@ -18600,7 +18617,7 @@ function openPop(mode, t) {
         rvBegin(shuffle(pool).slice(0, Number.isFinite(N) ? N : pool.length), rv.mode);
     }
     function rvBegin(items, mode) {
-        rv.run = { items, mode, i: 0, ok: 0, pts: 0, wrong: [], cache: {}, res: {}, ans: -1, flip: false, q: null };
+        rv.run = { items, mode, lvl: rv.lvl || 'mid', i: 0, ok: 0, pts: 0, wrong: [], cache: {}, res: {}, ans: -1, flip: false, q: null };
         if (mode === 'flash') fcShow(); else qzShow();
     }
     function rvHead(title) {
@@ -18751,34 +18768,46 @@ function openPop(mode, t) {
         fcAnimateChange(1, () => { r.i++; fcShow(); });
     }
     /* --- trắc nghiệm có ngữ cảnh --- */
-    function qzSys() {
-        return 'Bạn là giáo sư đầu ngành Răng Hàm Mặt, ra đề trắc nghiệm từ vựng chuyên ngành có ngữ cảnh. Với MỖI thuật ngữ được cho (dạng "id | thuật ngữ tiếng Anh | nghĩa tiếng Việt đúng | độ dài đáp án đúng"), hãy tạo: '
-            + '(1) "c": MỘT câu tiếng Anh học thuật/lâm sàng giàu thông tin chuyên môn (20–35 từ), nêu rõ đặc điểm giải phẫu, cơ chế bệnh sinh, triệu chứng, chỉ định hoặc ứng dụng lâm sàng thực tế liên quan trực tiếp đến thuật ngữ đó (KHÔNG đặt câu chung chung vô thưởng vô phạt), chứa NGUYÊN VĂN thuật ngữ tiếng Anh đó (nếu thuật ngữ dạng "ABC (đầy đủ)" thì chỉ dùng phần ABC), đủ ngữ cảnh chuyên môn để suy ra nghĩa nhưng KHÔNG nêu nghĩa tiếng Việt trong câu này; '
-            + '(2) "v": bản dịch tiếng Việt của câu "c" để gợi ý khi chưa trả lời, trong đó GIỮ NGUYÊN thuật ngữ tiếng Anh gốc trong câu (không dịch thuật ngữ đó); '
-            + '(3) "vf": bản dịch tiếng Việt HOÀN CHỈNH của toàn bộ câu hỏi ngữ cảnh "c", trong đó DỊCH LUÔN cả thuật ngữ sang nghĩa tiếng Việt đúng; '
+    function qzSys(lvl) {
+        const lv = lvl === 'easy'
+            ? 'MỨC DỄ: 3 đáp án nhiễu là những từ KHÔNG liên quan nhiều đến chủ đề của câu (khác lĩnh vực hoặc khác từ loại), người học hiểu ngữ cảnh là loại được ngay. '
+            : (lvl === 'hard'
+                ? 'MỨC KHÓ: 3 đáp án nhiễu phải CÙNG chủ đề và CÙNG từ loại với đáp án đúng (thuật ngữ gần nghĩa, dễ nhầm trong cùng lĩnh vực), nhưng điền vào chỗ trống thì chắc chắn sai về chuyên môn. '
+                : 'MỨC VỪA: khoảng một nửa đáp án nhiễu cùng chủ đề / từ loại với đáp án đúng (gây nhiễu) và nửa còn lại không liên quan nhiều (cụ thể 2 từ cùng chủ đề + 1 từ ít liên quan). ');
+        return 'Bạn là giáo sư đầu ngành Răng Hàm Mặt, ra đề trắc nghiệm ĐIỀN TỪ có ngữ cảnh. Với MỖI thuật ngữ được cho (dạng "id | thuật ngữ tiếng Anh | nghĩa tiếng Việt đúng"), hãy tạo: '
+            + '(1) "c": MỘT câu tiếng Anh học thuật/lâm sàng giàu thông tin chuyên môn (20–35 từ), nêu rõ đặc điểm giải phẫu, cơ chế bệnh sinh, triệu chứng, chỉ định hoặc ứng dụng lâm sàng thực tế liên quan trực tiếp đến thuật ngữ đó (KHÔNG đặt câu chung chung), chứa NGUYÊN VĂN thuật ngữ tiếng Anh đó đúng một lần, đúng dạng được cho, không thêm đuôi s/ed/ing dính vào (nếu thuật ngữ dạng "ABC (đầy đủ)" thì chỉ dùng phần ABC). Hệ thống sẽ thay thuật ngữ bằng chỗ trống nên câu phải đủ ngữ cảnh để suy ra từ cần điền nhưng KHÔNG nêu nghĩa tiếng Việt và không dùng từ đồng nghĩa lộ đáp án; '
+            + '(2) "v": bản dịch tiếng Việt của câu "c" trong đó GIỮ NGUYÊN thuật ngữ tiếng Anh gốc (không dịch thuật ngữ đó); '
+            + '(3) "vf": bản dịch tiếng Việt HOÀN CHỈNH của toàn bộ câu "c", trong đó DỊCH LUÔN cả thuật ngữ sang nghĩa tiếng Việt đúng; '
             + '(4) "info": 3–4 câu tiếng Việt ngắn gọn, súc tích cung cấp thêm kiến thức chuyên môn cốt lõi về thuật ngữ đó (định nghĩa, cơ chế, đặc điểm hoặc lưu ý lâm sàng RHM); '
-            + '(5) "w": mảng ĐÚNG 3 đáp án nhiễu bằng tiếng Việt: nghe hợp lý, cùng lĩnh vực, dễ nhầm với nghĩa đúng nhưng chắc chắn SAI, không đồng nghĩa với đáp án đúng và khác nhau đôi một. QUAN TRỌNG: mỗi đáp án nhiễu phải có độ dài (số ký tự) và số từ bằng hoặc sát đáp án đúng (lệch tối đa 2 ký tự), cùng cách viết hoa chữ đầu và cùng kiểu trình bày để không thể đoán đáp án đúng nhờ độ dài hay hình thức. Dùng cách gọi theo chuẩn giảng dạy miền Nam Việt Nam. '
-            + 'Trả về MỘT đối tượng JSON hợp lệ: {"q":[{"id":<số>,"c":"...","v":"...","vf":"...","info":"...","w":["...","...","..."]}]}; trong chuỗi dùng dấu nháy đơn thay cho dấu nháy kép; không thêm chữ nào ngoài JSON.';
+            + '(5) "w": mảng ĐÚNG 3 đáp án nhiễu là từ / thuật ngữ TIẾNG ANH, khác nhau đôi một, khác đáp án đúng, điền vào chỗ trống thì chắc chắn SAI về chuyên môn (không được đồng nghĩa hay cũng đúng), viết cùng dạng (số ít / nguyên mẫu) và cùng kiểu viết hoa với đáp án đúng. ' + lv
+            + 'Dùng cách gọi theo chuẩn giảng dạy miền Nam Việt Nam cho phần tiếng Việt. Trả về MỘT đối tượng JSON hợp lệ: {"q":[{"id":<số>,"c":"...","v":"...","vf":"...","info":"...","w":["...","...","..."]}]}; trong chuỗi dùng dấu nháy đơn thay cho dấu nháy kép; không thêm chữ nào ngoài JSON.';
     }
     const qv = t => capVi(String(t.vi || '').split('\n')[0]);
-    const qzTol = a => Math.max(2, Math.ceil(a.length * 0.1));
+    const qe = t => clean(String(t.en || '')).replace(/\s*\(.*\)\s*$/, '').trim();
+    const qzLc = x => /^[A-Z][a-z]/.test(String(x)) ? String(x).charAt(0).toLowerCase() + String(x).slice(1) : String(x);
+    const QZ_BLANK = '__________';
+    function qzBlankOf(base, txt) {   // thay thuật ngữ trong câu bằng chỗ trống liền nhau
+        txt = String(txt || ''); if (!base || !txt) return txt;
+        try { return txt.replace(new RegExp('(^|[^A-Za-z])' + reEsc(base) + '[a-z]{0,3}(?![A-Za-z])', 'gi'), '$1' + QZ_BLANK); } catch (e) { return txt; }
+    }
     function qzGoodW(a, w) {
         const seen = new Set([nk(a)]), out = [];
-        (Array.isArray(w) ? w : []).forEach(x => { x = capVi(clean(x)); if (!x || seen.has(nk(x))) return; seen.add(nk(x)); out.push(x); });
+        (Array.isArray(w) ? w : []).forEach(x => { x = qzLc(clean(String(x || '').replace(/\s*\(.*\)\s*$/, ''))); if (!x || x.length > 60 || !/[A-Za-z]/.test(x) || seen.has(nk(x))) return; seen.add(nk(x)); out.push(x); });
         return out;
     }
     async function qzBuild(run, b) {
+        const lvl = run.lvl || 'mid';
         const arr = run.items.slice(b * BATCH, b * BATCH + BATCH);
         const res = arr.map(t => ({ t, ctx: '', cv: '', vf: '', info: '', w: [] }));
         const ask = async (idxs, retry) => {
-            const lines = idxs.map(i => i + ' | ' + res[i].t.en + ' | ' + qv(res[i].t) + ' | ' + qv(res[i].t).length + ' ký tự').join('\n');
+            const lines = idxs.map(i => i + ' | ' + qe(res[i].t) + ' | ' + qv(res[i].t)).join('\n');
             let v = null;
-            try { v = await aiGeminiJson(qzSys(), (retry ? 'LẦN TRƯỚC các đáp án nhiễu bị lệch độ dài hoặc trùng; hãy viết lại cho đúng độ dài.\n' : '') + lines, 5000); } catch (e) {}
+            try { v = await aiGeminiJson(qzSys(lvl), (retry ? 'LẦN TRƯỚC câu thiếu thuật ngữ nguyên văn hoặc đáp án nhiễu chưa đủ 3 từ tiếng Anh khác nhau; hãy viết lại đúng.\n' : '') + lines, 5000); } catch (e) {}
             const q = v && Array.isArray(v.q) ? v.q : [];
             q.forEach(x => {
                 const i = parseInt(x && x.id, 10); if (!(i >= 0 && i < res.length) || idxs.indexOf(i) < 0) return;
-                const r0 = res[i], a = qv(r0.t);
-                if (typeof x.c === 'string' && x.c.trim()) {
+                const r0 = res[i], a = qzLc(qe(r0.t));
+                if (typeof x.c === 'string' && x.c.trim() && qzBlankOf(qe(r0.t), x.c) !== x.c) {
                     r0.ctx = x.c.trim();
                     r0.cv = typeof x.v === 'string' ? x.v.trim() : '';
                     r0.vf = typeof x.vf === 'string' ? x.vf.trim() : '';
@@ -18788,16 +18817,21 @@ function openPop(mode, t) {
             });
         };
         await ask(res.map((_, i) => i), false);
-        const bad = res.map((_, i) => i).filter(i => { const a = qv(res[i].t); return res[i].w.filter(x => Math.abs(x.length - a.length) <= qzTol(a)).length < 3; });
+        const bad = res.map((_, i) => i).filter(i => !res[i].ctx || res[i].w.length < 3);
         if (bad.length) await ask(bad, true);
         return res.map(r0 => {
-            const a = qv(r0.t);
-            let w = r0.w.slice().sort((x, y) => Math.abs(x.length - a.length) - Math.abs(y.length - a.length)).slice(0, 3);
+            if (!r0.ctx) return null;   // không tạo được câu có chứa thuật ngữ → bỏ qua câu này
+            const a = qzLc(qe(r0.t));
+            let w = r0.w.slice(0, 3);
             if (w.length < 3) {
                 const seen = new Set([nk(a)].concat(w.map(nk)));
-                const pool = shuffle(rd.terms.filter(x => x !== r0.t)).map(x => qv(x)).filter(x => x && !seen.has(nk(x)));
-                pool.sort((p, q) => Math.abs(p.length - a.length) - Math.abs(q.length - a.length));
-                for (const x of pool) { if (w.length >= 3) break; if (!seen.has(nk(x))) { seen.add(nk(x)); w.push(x); } }
+                const others = shuffle(rd.terms.filter(x => x !== r0.t));
+                const sameP = others.filter(x => (x.p || '') === (r0.t.p || '')), diffP = others.filter(x => (x.p || '') !== (r0.t.p || ''));
+                let order;
+                if (lvl === 'hard') order = sameP.concat(diffP);
+                else if (lvl === 'easy') order = diffP.concat(sameP);
+                else { order = []; const m = Math.max(sameP.length, diffP.length); for (let k = 0; k < m; k++) { if (sameP[k]) order.push(sameP[k]); if (diffP[k]) order.push(diffP[k]); } }
+                for (const x of order) { if (w.length >= 3) break; const e = qzLc(qe(x)); if (e && !seen.has(nk(e))) { seen.add(nk(e)); w.push(e); } }
             }
             const opts = shuffle([a].concat(w));
             return { t: r0.t, ctx: r0.ctx, cv: r0.cv, vf: r0.vf, info: r0.info, opts, ans: opts.indexOf(a) };
@@ -18812,7 +18846,8 @@ function openPop(mode, t) {
         const r = rv.run; if (!r) return;
         if (r.i >= r.items.length) { rvEnd(); return; }
         const idx = r.i;
-        $('rd-rv').innerHTML = '<div class="rv-card big qzc">' + rvHead('📝 Trắc nghiệm ngữ cảnh') + '<div class="qz-body"><div class="rv-load">⏳ AI đang soạn câu hỏi…</div></div>' + qzNav(r, false) + '</div>';
+        const nTot = r.items.length, bs = Math.floor(idx / BATCH) * BATCH + 1, be = Math.min(nTot, bs + BATCH - 1);
+        $('rd-rv').innerHTML = '<div class="rv-card big qzc">' + rvHead('📝 Trắc nghiệm ngữ cảnh') + '<div class="qz-body"><div class="rv-load">⏳ AI đang soạn câu ' + (be > bs ? bs + '–' + be : bs) + '/' + nTot + '…</div></div>' + qzNav(r, false) + '</div>';
         const q = await qzGet(idx);
         if (rv.run !== r || r.i !== idx) return;
         if (!q) { r.i++; qzShow(); return; }
@@ -18823,6 +18858,11 @@ function openPop(mode, t) {
         const base = String(q.t.en).replace(/\s*\(.*\)\s*$/, '').trim();
         let h = esc(txt || ''); if (!h) return '';
         try { h = h.replace(new RegExp(reEsc(esc(base)), 'i'), m => '<b>' + m + '</b>'); } catch (e) {}
+        return h;
+    }
+    function qzFillHL(base, txt) {   // sau khi trả lời: hiện từ đúng (tô xanh) vào chỗ trống
+        let h = esc(txt || ''); if (!h) return '';
+        try { h = h.replace(new RegExp('(^|[^A-Za-z])(' + reEsc(esc(base)) + '[a-z]{0,3})(?![A-Za-z])', 'gi'), '$1<b style="background:#dcfce7;color:#166534">$2</b>'); } catch (e) {}
         return h;
     }
     function qzFullVi(q) {
@@ -18850,13 +18890,13 @@ function openPop(mode, t) {
     }
     function qzPaint() {
         const r = rv.run, q = r.q, L = 'ABCD', h = r.res[r.i] || {}, vi = h.lang === 'vi', done = r.ans >= 0, right = r.ans === q.ans;
-        const shown = vi ? (q.cv || q._loadingCv || q.ctx) : q.ctx;
+        const shown = vi ? (q.cv || q._loadingCv || q.ctx) : q.ctx, baseT = qe(q.t);
         const fullVi = qzFullVi(q);
         const extraInfo = q.info || String(q.t.i || '').split(/\n+/)[0] || '';
         $('rd-rv').innerHTML = '<div class="rv-card big qzc">' + rvHead('📝 Trắc nghiệm ngữ cảnh') + '<div class="qz-body">'
             + '<div class="qz-lg"><span>Ngữ cảnh:</span><button type="button" class="' + (vi ? '' : 'on') + '" data-act="qz-lang" data-l="en">Eng</button><button type="button" class="' + (vi ? 'on' : '') + '" data-act="qz-lang" data-l="vi">Vie</button>' + (h.np ? '<span style="color:#b45309">· câu này không tính điểm</span>' : '') + '</div>'
-            + (shown ? '<div class="qz-ctx">' + qzHL(q, shown) + '</div>' : '<div class="qz-ctx qz-nc">(Không tạo được ngữ cảnh cho từ này)</div>')
-            + '<div class="qz-q">Trong ngữ cảnh này, <b>' + esc(q.t.en) + '</b> có nghĩa là:</div>'
+            + (shown ? '<div class="qz-ctx">' + (done ? qzFillHL(baseT, shown) : esc(qzBlankOf(baseT, shown))) + '</div>' : '<div class="qz-ctx qz-nc">(Không tạo được ngữ cảnh cho từ này)</div>')
+            + '<div class="qz-q">Chọn từ tiếng Anh thích hợp điền vào chỗ trống <b style="background:none;color:inherit">' + QZ_BLANK + '</b>:</div>'
             + '<div class="qz-ops">' + q.opts.map((o, i) => '<button type="button" class="qz-op' + (done ? (i === q.ans ? ' ok' : (i === r.ans ? ' bad' : '')) : '') + '" data-act="rv-ans" data-v="' + i + '"' + (done ? ' disabled' : '') + '><span class="qz-l">' + L.charAt(i) + '</span><span>' + esc(o) + '</span></button>').join('') + '</div>'
             + (done ? '<div class="qz-fb ' + (right ? 'ok' : 'bad') + '"><div>' + (right ? '✅ Chính xác!' + (h.np ? ' (không tính điểm)' : ' +5đ') : '❌ Chưa đúng — đáp án đúng: ' + esc(q.opts[q.ans])) + '</div>'
                 + (fullVi ? '<div class="qz-cv" style="margin-top:6px;text-align:justify"><b>Dịch câu hỏi:</b> ' + esc(fullVi) + '</div>' : '')
@@ -18875,7 +18915,7 @@ function openPop(mode, t) {
         ov.style.cssText = 'position:absolute;inset:0;z-index:80;background:rgba(15,23,42,.6);display:flex;align-items:center;justify-content:center;padding:16px;border-radius:12px';
         ov.innerHTML = '<div style="background:#fff;border:2px solid #6d28d9;border-radius:18px;max-width:420px;width:100%;padding:18px 20px;box-shadow:0 20px 50px rgba(0,0,0,.45);color:#1f1d2b">'
             + '<div style="font-weight:900;font-size:17px;color:#5b21b6;margin-bottom:8px">🌐 Chuyển ngữ cảnh sang Tiếng Việt?</div>'
-            + '<p style="font-size:14px;line-height:1.5;color:#374151;margin:0 0 14px;text-align:justify">Chữ cần dịch vẫn giữ nguyên tiếng Anh để bạn tự suy nghĩ, và câu này sẽ <b>KHÔNG được tính điểm</b>. Bạn có muốn tiếp tục?</p>'
+            + '<p style="font-size:14px;line-height:1.5;color:#374151;margin:0 0 14px;text-align:justify">Chỗ trống vẫn giữ nguyên để bạn tự suy nghĩ, và câu này sẽ <b>KHÔNG được tính điểm</b>. Bạn có muốn tiếp tục?</p>'
             + '<div style="display:flex;justify-content:flex-end;gap:8px">'
             + '<button type="button" data-act="qz-cfm-no" class="rd-pbtn">Huỷ</button>'
             + '<button type="button" data-act="qz-cfm-yes" class="rd-pbtn pri">Đồng ý</button>'
@@ -19257,6 +19297,34 @@ function openPop(mode, t) {
         } catch (e) { console.warn('[Từ điển RHM]', e); return null; }
     };
 
+
+    /* Thêm nhanh MỘT từ / thuật ngữ (bôi đen trong sách hoặc bong bóng chat): AI cho dạng gốc, từ loại, nghĩa RHM miền Nam */
+    window.rhmDictAddWord = async function (word, ctx) {
+        try {
+            const raw = clean(String(word || '').replace(/^[\s"'“”‘’(\[]+|[\s"'“”‘’)\].,;:!?]+$/g, ''));
+            if (!raw || !letterOf(raw)) { toast('Chỉ thêm được từ / thuật ngữ tiếng Anh'); return null; }
+            if (raw.length > 90) { toast('Đoạn quá dài, hãy bôi đen một từ hoặc cụm từ ngắn'); return null; }
+            if (typeof aiAnyKey === 'function' && !aiAnyKey()) { if (typeof aiShowGate === 'function') aiShowGate(); return null; }
+            load();
+            toast('⏳ Đang tra “' + raw + '”…');
+            const sys = 'Bạn là giáo sư đầu ngành Răng Hàm Mặt. Người học bôi đen một từ hoặc thuật ngữ tiếng Anh để thêm vào từ điển RHM. Trả về MỘT đối tượng JSON {\"en\":\"<dạng gốc: danh từ số ít, động từ nguyên mẫu; giữ nguyên chữ viết tắt>\",\"p\":\"<từ loại: n, v, adj, adv, pl, sing, abbr…>\",\"vi\":\"<nghĩa tiếng Việt ngắn gọn, đúng chuyên ngành RHM nếu là thuật ngữ; nếu từ có nhiều nghĩa thường gặp trong ngữ cảnh thì tối đa 3 nghĩa, mỗi nghĩa một dòng, ngăn bằng ký tự xuống dòng>\"}. Nếu không phải từ tiếng Anh hợp lệ thì trả {\"en\":\"\"}.'
+                + (typeof BK_TR_GLOSS !== 'undefined' ? BK_TR_GLOSS : '');
+            const v = await aiGeminiJson(sys, 'TỪ / THUẬT NGỮ: ' + raw + (ctx ? '\n\nNGỮ CẢNH: ' + String(ctx).slice(0, 600) : ''), 800);
+            if (!v || typeof v !== 'object') { toast('Chưa tra được từ này, hãy thử lại'); return null; }
+            let en = clean(v.en), p0 = cleanPos(v.p), vv = String(v.vi || '').split(/\n|\\n/).map(clean).filter(Boolean).slice(0, 3).join('\n');
+            if (!en || !vv || !letterOf(en)) { toast('Không thêm được “' + raw + '”'); return null; }
+            if (isRegularPluralForm(en, p0)) { en = stripTrailingPluralS(en); if (p0 === 'pl') p0 = 'n'; }
+            en = cap1(en); load();
+            const ex = findExistingTerm(en, p0);
+            if (ex) { toast('📖 “' + ex.en + '” đã có trong Từ điển RHM'); return { exists: true, term: ex }; }
+            const t = { en: en, vi: capVi(vv), p: p0, ts: Date.now(), n: 1, f: p0 ? 1 : 0 };
+            rd.terms.push(t); sortTerms(); save();
+            if (isOpen() && !rd.lock) { const a = anchor(); repaginate(a); }
+            toast('📖 Đã thêm “' + en + '” vào Từ điển RHM');
+            return { added: true, term: t };
+        } catch (e) { console.warn('[Từ điển RHM]', e); toast('Chưa thêm được từ, hãy thử lại'); return null; }
+    };
+
     /* Đưa thuật ngữ trong Từ điển RHM vào lời nhắc dịch & phân tích: luôn đọc dữ liệu mới nhất (parse()) để nhận ngay từ vừa edit mà không bị kẹt cache cũ */
     window.rhmDictGlossary = function (text, includeEditedFallback) {
         try {
@@ -19427,7 +19495,7 @@ function openPop(mode, t) {
 .nt-savebar{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;text-align:left}
 .nt-savebar button{font-size:12px;font-weight:700;border:1px solid #99f6e4;background:#f0fdfa;color:#0f766e;border-radius:999px;padding:3px 10px}
 .nt-savebar button:active{transform:scale(.96)}
-#nt-selbtn{position:fixed;z-index:100060;border:0;border-radius:999px;padding:7px 14px;background:#0f766e;color:#fff;font:700 13px system-ui,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer}
+#nt-selbtn,#nt-seldict{position:fixed;z-index:100060;border:0;border-radius:999px;padding:7px 14px;background:#0f766e;color:#fff;font:700 13px system-ui,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer}
 /* ===== TỪ ĐIỂN RHM (sách mở hai trang) ===== */
 #note-modal{padding:4px!important;--rd-vh:100vh}
 @supports (height:100dvh){#note-modal{--rd-vh:100dvh}}
@@ -20261,13 +20329,13 @@ function moveEdActs() {
         N = Math.min(N, 100);
         let ctx = '', budget = 14000; shuffle(pool).forEach(n => { const s = '### ' + n.t + (n.cat ? ' [' + n.cat + ']' : '') + '\n' + n.b.slice(0, 900) + '\n\n'; if (budget - s.length > 0) { ctx += s; budget -= s.length; } });
         rv.run = { N, topic, ctx: 'GHI CHÚ:\n' + ctx, asked: [], cache: {}, i: 0, ok: 0, pts: 0, wrong: [], res: {}, q: null, ans: -1 };
-        rv.busy = true; say('⏳ AI đang soạn câu hỏi…'); await qShow(); rv.busy = false;
+        rv.busy = true; say('⏳ AI đang soạn câu 1–' + Math.min(N, BATCH) + '/' + N + '…'); await qShow(); rv.busy = false;
     }
     const rvHead = t => { const r = rv.run; return '<div class="rv-h"><span class="rv-t">' + t + '</span><span class="rv-pg">' + Math.min(r.i + 1, r.N) + '/' + r.N + ' · ✅ ' + r.ok + ' · +' + r.pts + 'đ</span><button type="button" class="rv-x" data-act="rv-back" title="Thoát về cài đặt">✕</button></div><div class="rv-bar"><i style="width:' + Math.round(r.i / r.N * 100) + '%"></i></div>'; };
     const qNav = (r, done) => '<div class="qz-nav"><button type="button" class="rd-pbtn" data-act="rv-prev"' + (r.i > 0 ? '' : ' disabled') + '>◀ Câu trước</button><button type="button" class="rd-pbtn pri" data-act="rv-next"' + (done ? '' : ' disabled') + '>' + (r.i + 1 >= r.N ? 'Xem kết quả ▶' : 'Câu tiếp ▶') + '</button></div>';
     async function qShow() {
         const r = rv.run; if (!r) return; if (r.i >= r.N) { qEnd(); return; }
-        const idx = r.i; $('nt-rv').innerHTML = '<div class="rv-card big qzc">' + rvHead('📝 Trắc nghiệm ghi chú') + '<div class="qz-body"><div class="rv-load">⏳ AI đang soạn câu hỏi…</div></div>' + qNav(r, false) + '</div>';
+        const idx = r.i, bs0 = Math.floor(idx / BATCH) * BATCH + 1, be0 = Math.min(r.N, bs0 + BATCH - 1); $('nt-rv').innerHTML = '<div class="rv-card big qzc">' + rvHead('📝 Trắc nghiệm ghi chú') + '<div class="qz-body"><div class="rv-load">⏳ AI đang soạn câu ' + (be0 > bs0 ? bs0 + '–' + be0 : bs0) + '/' + r.N + '…</div></div>' + qNav(r, false) + '</div>';
         const q = await qGet(idx); if (rv.run !== r || r.i !== idx) return;
         if (!q) { if (idx === 0) { $('nt-rv').innerHTML = '<div class="rv-card"><div class="rv-h"><span class="rv-t">Chưa tạo được câu hỏi</span><button type="button" class="rv-x" data-act="rv-back">✕</button></div><div class="rv-sub">AI chưa phản hồi, hãy thử lại.</div></div>'; return; } r.N = idx; qEnd(); return; }
         r.q = q; r.ans = -1; r.res[idx] = { q, ans: -1 }; qPaint();
@@ -20342,6 +20410,14 @@ function moveEdActs() {
         nt.notes.push(n); save(); toast('📒 Đã lưu vào Sổ ghi chú'); aiTitle(n);
         if (isOpen()) repaginate(n.id);
     }
+
+    window.rhmNoteSaveText = function (text, ctx) {
+        const body = String(text || '').trim().slice(0, 20000);
+        if (!body) { toast('Chưa có nội dung để lưu'); return; }
+        const n = { id: 'n' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), t: quickTitle(body), b: body, ts: Date.now(), c: ctx || ctxNow(null), cat: '', im: [] };
+        nt.notes.push(n); save(); toast('📒 Đã lưu vào Sổ ghi chú'); aiTitle(n);
+        if (isOpen()) repaginate(n.id);
+    };
     function selIn(b) {
         try { const s = getSelection(); if (!s || s.isCollapsed || !s.rangeCount) return ''; const r = s.getRangeAt(0); if (!b.contains(r.commonAncestorContainer)) return ''; const bar = b.querySelector(':scope > .' + BAR); if (bar && bar.contains(r.commonAncestorContainer)) return ''; return viSelText(r); } catch (e) { return ''; }
     }
@@ -20374,15 +20450,30 @@ function moveEdActs() {
         sb.addEventListener('click', () => { const b = sb._b, t = sb._t; sb.style.display = 'none'; try { getSelection().removeAllRanges(); } catch (e) {} if (b && t) saveFrom([b], t); });
         document.body.appendChild(sb); return sb;
     }
+    let sd = null;
+    function dictBtn() {
+        if (sd) return sd; sd = document.createElement('button'); sd.type = 'button'; sd.id = 'nt-seldict'; sd.textContent = '📖 Thêm từ điển'; sd.style.display = 'none';
+        sd.addEventListener('mousedown', e => e.preventDefault());
+        sd.addEventListener('click', () => { const w = sd._w, c = sd._c; sd.style.display = 'none'; if (sb) sb.style.display = 'none'; try { getSelection().removeAllRanges(); } catch (e) {} if (w && window.rhmDictAddWord) window.rhmDictAddWord(w, c); });
+        document.body.appendChild(sd); return sd;
+    }
+    function enWordOf(t) {
+        const w = String(t || '').trim().replace(/^[\s"'“”‘’(\[]+|[\s"'“”‘’)\].,;:!?]+$/g, '');
+        return /^[A-Za-z][A-Za-z'’\-]{1,39}$/.test(w) ? w : '';
+    }
     function selCheck() {
-        const box = $('ai-messages'), s = getSelection(), el = selBtn();
+        const box = $('ai-messages'), s = getSelection(), el = selBtn(), de = dictBtn();
+        de.style.display = 'none';
         if (!box || !s || s.isCollapsed || !s.rangeCount) { el.style.display = 'none'; return; }
         const r = s.getRangeAt(0); let n = r.commonAncestorContainer; if (n.nodeType === 3) n = n.parentElement;
         const b = n && n.closest ? n.closest('#ai-messages > .ai-bub') : null, t = viSelText(r);
         if (!b || t.length < 2 || n.closest('.' + BAR)) { el.style.display = 'none'; return; }
         const rc = r.getBoundingClientRect(); el._b = b; el._t = t; el.style.display = 'block';
-        const w = el.offsetWidth || 110; let top = rc.top - 40; if (top < 8) top = rc.bottom + 10;
-        el.style.top = top + 'px'; el.style.left = Math.max(8, Math.min(innerWidth - w - 8, rc.left + rc.width / 2 - w / 2)) + 'px';
+        const ew = enWordOf(t); if (ew) { de._w = ew; de._c = (b.textContent || '').slice(0, 600); de.style.display = 'block'; }
+        const w = el.offsetWidth || 110, dw = ew ? (de.offsetWidth || 120) + 6 : 0; let top = rc.top - 40; if (top < 8) top = rc.bottom + 10;
+        const tot = w + dw, L = Math.max(8, Math.min(innerWidth - tot - 8, rc.left + rc.width / 2 - tot / 2));
+        if (ew) { de.style.top = top + 'px'; de.style.left = L + 'px'; }
+        el.style.top = top + 'px'; el.style.left = (L + dw) + 'px';
     }
 
     function init() {
@@ -20546,7 +20637,7 @@ function moveEdActs() {
         while (n && n !== document.body && n.parentElement) {
             Array.prototype.forEach.call(n.parentElement.children, function (s) {
                 if (s === n || /^(SCRIPT|STYLE|LINK|META)$/.test(s.tagName) || s.hasAttribute('inert')) return;
-                if (s.id === 'custom-toast' || s.id === 'nt-selbtn' || (s.querySelector && s.querySelector('#ai-gate-input'))) return;
+                if (s.id === 'custom-toast' || s.id === 'nt-selbtn' || s.id === 'nt-seldict' || s.id === 'bk-selbar' || (s.querySelector && s.querySelector('#ai-gate-input'))) return;
                 s.setAttribute('inert', ''); held.push(s);
             });
             n = n.parentElement;
@@ -21732,6 +21823,8 @@ html.rhm-dragging,html.rhm-dragging body{-webkit-user-select:none;user-select:no
 #dict-modal .rd-pop.add-ctr .rd-in,#note-modal .rd-pop.nt-ctr .rd-in{font-size:22px;padding:12px 15px;margin-bottom:12px;border-radius:15px}
 #dict-modal .rd-pop.add-ctr .rd-pbtn,#note-modal .rd-pop.nt-ctr .rd-pbtn{font-size:21px;padding:12px 21px;border-radius:15px}
 #dict-modal .rd-pop.add-ctr .rd-hint,#note-modal .rd-pop.nt-ctr .rd-hint{font-size:18px;margin-top:12px}
+#dict-modal .rd-pop.mid-ctr{top:50%!important;left:50%!important;right:auto!important;bottom:auto!important;transform:translate(-50%,-50%)!important;max-height:88%!important;overflow-y:auto;overscroll-behavior:contain;box-sizing:border-box}
+#dict-modal .rd-pop.mid-ctr.mid-row{width:min(560px,94%)!important}
 #note-modal .rd-pop.nt-ctr textarea.rd-in{min-height:200px}
 /* ===== Quét mã QR (từ điển / ghi chú) ===== */
 .rhm-bg.rhm-scan{width:100%;box-sizing:border-box;min-height:52px;flex-direction:row;gap:8px;margin-top:10px}
@@ -22057,6 +22150,61 @@ html.rhm-dragging,html.rhm-dragging body{-webkit-user-select:none;user-select:no
     } catch (e) { console.warn('[mm-dict]', e); }
     finally { busy[pid] = 0; }
   };
+})();
+</script>
+
+<script>
+/* Popup khi bôi đen trong sách: 🌐 Dịch · 📖 Thêm từ điển (từ RHM) · 📒 Lưu ghi chú */
+(function () {
+    let bar = null, tmr = 0, cur = '';
+    const css = document.createElement('style');
+    css.textContent = '#bk-selbar{position:fixed;z-index:100060;display:none;gap:6px;align-items:center}#bk-selbar button{border:0;border-radius:999px;padding:7px 13px;color:#fff;font:700 13px system-ui,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer;white-space:nowrap}#bk-selbar button:active{transform:scale(.95)}#bk-selbar .b-tr{background:#4f46e5}#bk-selbar .b-dc{background:#0369a1}#bk-selbar .b-nt{background:#0f766e}';
+    document.head.appendChild(css);
+    function mk() {
+        if (bar) return bar;
+        bar = document.createElement('div'); bar.id = 'bk-selbar';
+        bar.innerHTML = '<button type="button" class="b-tr">🌐 Dịch</button><button type="button" class="b-dc">📖 Thêm từ điển</button><button type="button" class="b-nt">📒 Lưu ghi chú</button>';
+        ['mousedown', 'touchstart', 'pointerdown'].forEach(ev => bar.addEventListener(ev, e => { e.stopPropagation(); if (e.type !== 'touchstart' && e.type !== 'pointerdown') e.preventDefault(); }, { passive: false }));
+        bar.querySelector('.b-tr').addEventListener('click', () => { const t = cur; hide(); if (!t) return; try { bkPdfSel = t; } catch (e) {} bkQuickTr(); });
+        bar.querySelector('.b-dc').addEventListener('click', () => {
+            const t = cur; hide(); if (!t) return;
+            const w = t.replace(/\s+/g, ' ').trim();
+            if (window.rhmDictAddWord) window.rhmDictAddWord(w, (typeof bkCur !== 'undefined' && bkCur && bkCur.title) ? ('Sách RHM, chương: ' + bkCur.title) : '');
+        });
+        bar.querySelector('.b-nt').addEventListener('click', () => {
+            const t = cur; hide(); if (!t) return;
+            let ctx = null;
+            try { if (typeof bkCur !== 'undefined' && bkCur) ctx = { k: 'book', subj: (typeof bkSubject !== 'undefined' && bkSubject) ? bkSubject.name : '', book: bkCur.book || '', chap: bkCur.title || '', page: window.ntBookPage ? window.ntBookPage() : '' }; } catch (e) {}
+            if (window.rhmNoteSaveText) window.rhmNoteSaveText(t, ctx);
+        });
+        document.body.appendChild(bar); return bar;
+    }
+    function hide() { if (bar) bar.style.display = 'none'; cur = ''; }
+    function check() {
+        try {
+            if (typeof bkInViewer !== 'function' || !bkInViewer()) { hide(); return; }
+            if ((typeof bkDrag !== 'undefined' && bkDrag) || (typeof bkPtr !== 'undefined' && bkPtr.down)) return;
+            const t = (typeof bkSelText === 'function' ? bkSelText() : '').trim();
+            if (t.length < 2) { hide(); return; }
+            const el = mk(); cur = t;
+            let rc = null;
+            const s = document.getSelection();
+            if (s && s.rangeCount && !s.isCollapsed) { const r = s.getRangeAt(0).getBoundingClientRect(); if (r && (r.width || r.height) && typeof bkWrapEl !== 'undefined' && bkWrapEl && bkWrapEl.contains(s.getRangeAt(0).commonAncestorContainer)) rc = r; }
+            if (!rc) { const x = bkPtr.x || innerWidth / 2, y = bkPtr.y || innerHeight / 2; rc = { left: x, right: x, top: y, bottom: y, width: 0, height: 0 }; }
+            el.style.display = 'flex';
+            const w = el.offsetWidth || 300; let top = rc.top - 44; if (top < 8) top = rc.bottom + 12;
+            top = Math.min(innerHeight - 48, top);
+            el.style.top = top + 'px'; el.style.left = Math.max(8, Math.min(innerWidth - w - 8, rc.left + rc.width / 2 - w / 2)) + 'px';
+        } catch (e) {}
+    }
+    function later(ms) { clearTimeout(tmr); tmr = setTimeout(check, ms); }
+    document.addEventListener('selectionchange', () => later(380));
+    document.addEventListener('mouseup', () => later(160), true);
+    document.addEventListener('pointerup', () => later(260), true);
+    document.addEventListener('touchend', () => later(420), true);
+    document.addEventListener('mousedown', e => { if (bar && !bar.contains(e.target)) hide(); }, true);
+    document.addEventListener('keyup', () => later(300), true);
+    document.addEventListener('scroll', () => { if (bar && bar.style.display !== 'none') later(120); }, true);
 })();
 </script>
 </body>
@@ -22556,6 +22704,7 @@ html.rhm-dragging,html.rhm-dragging body{-webkit-user-select:none;user-select:no
 #dict-modal .rd-pop.rb-ctr.ios-opening,
 #dict-modal .rd-pop.info-ctr.ios-opening,
 #dict-modal .rd-pop.add-ctr.ios-opening,
+#dict-modal .rd-pop.mid-ctr.ios-opening,
 #note-modal .rd-pop.rb-ctr.ios-opening,
 #note-modal .rd-pop.nt-ctr.ios-opening {
   animation: iosPopCenterIn 0.34s var(--ios-bounce) forwards !important;
@@ -22563,6 +22712,7 @@ html.rhm-dragging,html.rhm-dragging body{-webkit-user-select:none;user-select:no
 #dict-modal .rd-pop.rb-ctr.ios-closing,
 #dict-modal .rd-pop.info-ctr.ios-closing,
 #dict-modal .rd-pop.add-ctr.ios-closing,
+#dict-modal .rd-pop.mid-ctr.ios-closing,
 #note-modal .rd-pop.rb-ctr.ios-closing,
 #note-modal .rd-pop.nt-ctr.ios-closing {
   display: block !important;
@@ -23209,6 +23359,7 @@ button:not(:disabled):active,
 .ai-langbar button,
 .nt-savebar button,
 #nt-selbtn,
+#nt-seldict,
 .yt-chapmap .cm-n.d1,
 .yt-chapmap .cm-n.d2,
 .yt-chapmap .cm-tg,
@@ -23256,6 +23407,7 @@ input[type="radio"],
 .ai-langbar button:active,
 .nt-savebar button:active,
 #nt-selbtn:active,
+#nt-seldict:active,
 .yt-chapmap .cm-n.d1:active,
 .yt-chapmap .cm-n.d2:active,
 .yt-chapmap .cm-tg:active,
@@ -23356,6 +23508,7 @@ textarea {
     '.ai-langbar button',
     '.nt-savebar button',
     '#nt-selbtn',
+    '#nt-seldict',
     '.yt-chapmap .cm-n.d1',
     '.yt-chapmap .cm-n.d2',
     '.yt-chapmap .cm-tg',
