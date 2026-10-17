@@ -67,6 +67,22 @@
         }
         .option-btn { transition: all 0.2s ease-in-out; }
         .option-btn:hover:not(:disabled) { transform: scale(1.01); }
+/* v3 — ảnh xuất hiện mượt: nhỏ ở giữa rồi phóng dần lên kích thước thật, không bật hiện đột ngột.
+   backwards: sau khi xong không ghi đè transform của ảnh (lightbox phóng to / kéo vẫn hoạt động) */
+@keyframes rhmImgGrow { from { opacity: 0; transform: scale(.55); } to { opacity: 1; transform: scale(1); } }
+img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.2,1) backwards; }
+@media (prefers-reduced-motion: reduce) { img { animation: none; } }
+/* v3 — nền phía sau giữ mờ suốt lúc cửa sổ đang mở (trước đây chỉ mờ trong ~0,3 giây hoạt ảnh rồi tắt) */
+#subject-choice-modal:not(.hidden), #monhoc-detail-modal:not(.hidden), #topic-modal:not(.hidden), #mock-exam-modal:not(.hidden),
+#exam-modal:not(.hidden), #deep-modal:not(.hidden), #collection-modal:not(.hidden), #progress-modal:not(.hidden),
+#suggest-question-modal:not(.hidden), #app-feedback-modal:not(.hidden), #add-question-modal:not(.hidden),
+#report-error-modal:not(.hidden), #folder-modal:not(.hidden), #navigator-modal:not(.hidden), #view-quiz-modal:not(.hidden),
+#bookmarked-modal:not(.hidden), #blocked-modal:not(.hidden), #storage-modal:not(.hidden), #image-lightbox-modal:not(.hidden),
+#dev-password-modal:not(.hidden), #dict-modal:not(.hidden), #note-modal:not(.hidden), #home-settings-modal:not(.hidden),
+#bookshelf-modal:not(.hidden), #ai-key-gate:not(.hidden) {
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+}
         .correct { background-color: #22c55e !important; color: white !important; border-color: #22c55e !important; }
         .incorrect { background-color: #ef4444 !important; color: white !important; border-color: #ef4444 !important; }
         ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -8702,19 +8718,35 @@ function bkCloseShelf() { document.getElementById('bookshelf-modal').classList.a
 /* ----- PDF.js: tải khi cần ----- */
 function bkPdfLib() {
     if (window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
-    if (!bkPdfLibP) bkPdfLibP = new Promise((res, rej) => {
+    if (!bkPdfLibP) bkPdfLibP = (async () => {
+        /* v3: PDF.js 5.4.530 (module ES, một file, không phụ thuộc gì khác). Không nạp được thì quay về 3.11.174 như trước */
+        try {
+            const base = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@5.4.530/build/';
+            const mod = await import(base + 'pdf.min.mjs');
+            const L = window.pdfjsLib || mod;
+            L.GlobalWorkerOptions.workerSrc = base + 'pdf.worker.min.mjs';
+            window.pdfjsLib = L;
+            return L;
+        } catch (e) {
+            console.warn('[PDF.js] không nạp được 5.4.530, dùng bản dự phòng 3.11.174', e);
+            return bkPdfLibLegacy();
+        }
+    })().catch(e => { bkPdfLibP = null; throw e; });
+    return bkPdfLibP;
+}
+function bkPdfLibLegacy() {
+    return new Promise((res, rej) => {
         const s = document.createElement('script');
         s.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
         s.onload = () => {
             const L = window.pdfjsLib;
-            if (!L) { bkPdfLibP = null; rej(new Error('Không khởi tạo được trình đọc PDF')); return; }
+            if (!L) { rej(new Error('Không khởi tạo được trình đọc PDF')); return; }
             L.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
             res(L);
         };
-        s.onerror = () => { bkPdfLibP = null; rej(new Error('Không tải được trình đọc PDF')); };
+        s.onerror = () => rej(new Error('Không tải được trình đọc PDF'));
         document.head.appendChild(s);
     });
-    return bkPdfLibP;
 }
 /* ===================================================================
    TRÌNH ĐỌC PDF (viết lại theo Tủ Sách RHM)
@@ -21184,6 +21216,53 @@ function hsExclusive(which) {
     if (which === 'monhoc') { if (m.classList.contains('hidden')) { c.classList.add('hidden'); if (ci) ci.textContent = '▼'; } }
     else { if (c.classList.contains('hidden')) { m.classList.add('hidden'); if (mi) mi.textContent = '▼'; } }
 }
+function rhmVisibleH() {
+    var h = window.innerHeight || document.documentElement.clientHeight;
+    var de = document.documentElement.clientHeight;
+    if (de && de < h) h = de;
+    var vv = window.visualViewport;
+    if (vv && vv.height && vv.height < h) h = vv.height;
+    return h;
+}
+function rhmScrollBtns() {
+    var m = document.getElementById('monhoc-section-container');
+    var c = document.getElementById('chuyende-section-container');
+    var anyOpen = (m && !m.classList.contains('hidden')) || (c && !c.classList.contains('hidden'));
+    var home = document.getElementById('home-screen');
+    if (home) {
+        home.style.minHeight = anyOpen ? 'calc(100vh + 120px)' : '';
+    }
+    var b = document.getElementById('btn-toggle-monhoc');
+    if (!b) return;
+    /* v3: thu gọn → canh cạnh dưới của 2 nút sát đáy vùng nhìn thấy, chừa MARGIN để không bị cắt nửa nút;
+       xa đáy quá thì đi lên đầu trang như cũ. Vị trí tuyệt đối của cạnh dưới được chốt một lần, các lần cuộn sau dùng lại. */
+    var SNAP_FRAC = 0.4, MARGIN = 16;
+    var docBottom = null;
+    if (!anyOpen) {
+        var b2 = document.getElementById('btn-toggle-chuyende');
+        var vis = rhmVisibleH();
+        var curY = window.pageYOffset || document.documentElement.scrollTop || 0;
+        var rb = Math.max(b.getBoundingClientRect().bottom, b2 ? b2.getBoundingClientRect().bottom : 0);
+        var gap = vis - rb;
+        var db = rb + curY;
+        if (Math.abs(gap) <= SNAP_FRAC * vis && db - (vis - MARGIN) >= 0) docBottom = db;
+    }
+    var doScroll = function () {
+        if (docBottom !== null) {
+            window.scrollTo({ top: Math.max(0, docBottom - (rhmVisibleH() - MARGIN)), behavior: 'smooth' });
+            return;
+        }
+        if (!anyOpen) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+        }
+        var y = b.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || 0) - 10;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+    };
+    requestAnimationFrame(doScroll);
+    setTimeout(doScroll, 120);
+    setTimeout(doScroll, 380);
+}
 function viSelText(range) {
     try {
         const root = range.commonAncestorContainer.nodeType === 3 ? range.commonAncestorContainer.parentNode : range.commonAncestorContainer;
@@ -22628,6 +22707,8 @@ html.rhm-dragging,html.rhm-dragging body{-webkit-user-select:none;user-select:no
     }
     function selRangeNow() {
         try {
+            var s0 = document.getSelection();
+            if (s0 && s0.anchorNode) { var ae = s0.anchorNode.nodeType === 3 ? s0.anchorNode.parentElement : s0.anchorNode; if (ae && ae.closest && ae.closest('#ai-tutor-modal')) return null; }   // v3: tô đen trong khung chat AI không hiện thanh Dịch / Ghi chú / Highlight
             if (typeof bkSel !== 'undefined' && bkSel) return bkSelRange();
             var s = document.getSelection(); if (!s || !s.rangeCount || s.isCollapsed) return null;
             var pa = bkNodePos(s.anchorNode, s.anchorOffset), pf = bkNodePos(s.focusNode, s.focusOffset);
