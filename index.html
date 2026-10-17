@@ -26,7 +26,7 @@
     <meta property="og:description" content="Ôn tập theo môn học, chuyên đề và thi thử trắc nghiệm dễ dàng.">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Trắc Nghiệm RHM">
+    <meta name="twitter:title" content="Trắc Nghiệm RHM & Video Bài Giảng">
     <meta property="twitter:description" content="Ôn tập theo môn học, chuyên đề và thi thử trắc nghiệm dễ dàng.">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.21/mammoth.browser.min.js"></script>
@@ -10558,9 +10558,9 @@ function bkVisSystem() {
         + 'GHÉP ĐOẠN THEO CỘT: đoạn chỉ nối từ cuối cột trái sang đầu cột phải khi câu ở cuối cột trái còn dở (chưa có dấu chấm kết câu) và đầu cột phải là phần tiếp của đúng câu đó; nếu không thì là hai đoạn riêng, không ghép.\n'
         + 'ĐẾM CỘT TRƯỚC KHI VẼ: nhìn khoảng trắng dọc chạy suốt chiều cao khối chữ giữa các cột. Nếu có khoảng trắng như vậy thì trang có nhiều cột: vẽ đúng số cột đó trong MỖI dải, cột trái và cột phải không bao giờ gộp thành một [xmin,xmax]. Tiêu đề, hình, bảng hay đoạn trải ngang cả trang nằm trong dải riêng và có thể chỉ có một cột.\n'
         + 'BOX TIÊU ĐỀ: box chỉ ôm chữ của tiêu đề trong đúng cột của tiêu đề đó, không kéo sang cột bên cạnh; mỗi tiêu đề chỉ ghi một lần.\n'
-        + 'KHÔNG ĐƯỢC NHẬN DIỆN LÀ MỤC LỤC, và phải đưa vào "skip": Outline / Learning objectives / mục lục in sẵn của chương, hình ảnh, ảnh chụp, sơ đồ, chữ nằm trong hình, chú thích ảnh / hình (Figure, Fig., Hình), chú thích, bảng và tiêu đề bảng (Table, Bảng), biểu đồ, khung / hộp / ô rời khỏi mạch văn (Box, sidebar, Clinical Pearl, Key Points...), ghi chú lề, đầu trang, chân trang, số trang, tên tác giả.\n\n'
+        + 'KHÔNG ĐƯỢC NHẬN DIỆN LÀ MỤC LỤC, và phải đưa vào "skip": Outline / Learning objectives / mục lục in sẵn của chương, hình ảnh, ảnh chụp, sơ đồ, chữ nằm trong hình, chú thích ảnh / hình (Figure, Fig., Hình), chú thích, bảng và tiêu đề bảng (Table, Bảng), biểu đồ, khung / hộp / ô rời khỏi mạch văn (Box, sidebar, Clinical Pearl, Key Points...), ghi chú lề, đầu trang, chân trang, số trang, tên tác giả. BẢNG: ghi TOÀN BỘ vùng bảng vào "skip" — gồm tiêu đề bảng, hàng tiêu đề cột và MỌI ô / số liệu trong bảng (mỗi ô là một box skip riêng nếu bảng bị chia); tuyệt đối KHÔNG lấy chữ trong bảng (tên cột, số liệu, nhãn ô) làm mục lục. Chú thích ảnh / bảng (Figure…, Table…) cũng phải nằm trong "skip".\n\n'
         + 'GHÉP ĐOẠN: nếu một đoạn văn bị hình / bảng / khung chèn làm tách, phần đầu và phần sau của đoạn đó vẫn là MỘT mạch văn liên tục dù cách nhau vài trang. Vì vậy phần chèn phải nằm trong "skip" để không chen vào mạch văn; mỗi tiêu đề chỉ ghi MỘT lần, tại nơi nó bắt đầu.\n\n'
-        + 'TIÊU ĐỀ MỤC: chỉ là tiêu đề của mục nội dung nằm trong mạch văn chính, nhận biết qua cỡ chữ, in đậm / nghiêng / màu, viết hoa, khoảng cách trên-dưới và kiểu đánh số (1., 1.1, 1.1.1, A., a), i), (1)...). Tiêu đề in đậm đầu đoạn rồi chữ chạy tiếp cùng dòng vẫn nhận (box chỉ ôm phần in đậm). KHÔNG ghi tên chương (tiêu đề lớn ở trang đầu) và đầu / chân trang.\n'
+        + 'TIÊU ĐỀ MỤC: chỉ là tiêu đề của mục nội dung nằm trong mạch văn chính, nhận biết qua cỡ chữ, in đậm / nghiêng / màu, viết hoa, khoảng cách trên-dưới và kiểu đánh số (1., 1.1, 1.1.1, A., a), i), (1)...). Tiêu đề in đậm đầu đoạn rồi chữ chạy tiếp cùng dòng vẫn nhận (box chỉ ôm phần in đậm). KHÔNG ghi tên chương (tiêu đề lớn ở trang đầu) và đầu / chân trang. TIÊU ĐỀ DÀI XUỐNG DÒNG: một tiêu đề dài 2–3 dòng (cùng cỡ chữ, cùng lề, dòng dưới là phần tiếp của câu) là MỘT mục DUY NHẤT — ghi MỘT lần trong "headings", "text" gồm TRỌN các dòng của tiêu đề đó, "box" ôm HẾT các dòng; TUYỆT ĐỐI không tách mỗi dòng của cùng một tiêu đề thành một mục riêng.\n'
         + 'BẮT ĐỦ MỌI TIÊU ĐỀ (TUYỆT ĐỐI KHÔNG BỎ SÓT): nhận cả tiêu đề CHỈ MỘT TỪ (vd "Hue", "Value", "Gloss", "Enamel"); tiêu đề in MÀU (cam, xanh…) dù không in đậm; tiêu đề có NỀN XÁM / thanh kẻ ngang chạy hết cột; tiêu đề phụ nhỏ. Với tiêu đề chạy cùng dòng với đoạn văn (vd "Hue enables the distinction…") CHỈ ghi phần tiêu đề (vd "Hue"), tuyệt đối không ghi cả câu. Nếu một mục có nhiều tiêu đề con thì phải liệt kê HẾT các tiêu đề con đó.\n'
         + 'KHÔNG NHẦM CHÚ THÍCH THÀNH TIÊU ĐỀ: chữ bắt đầu bằng "Figure / Fig. / Table / Tbl. / Box / Chart / Photo / Graph / Hình / Bảng / Biểu / Sơ đồ / Ảnh", mô tả hình dạng "(A) … (B) …", chữ nằm TRONG hình, nhãn trên hình, dòng nguồn / trích dẫn (http://…) là CHÚ THÍCH — KHÔNG đưa vào "headings" dù nó in đậm hay to hơn chữ thường, mà đưa vào "skip".\n\n'
         + 'PHÂN CẤP ("level" từ 1 đến 10): level 1 = mục lớn nhất trong chương (ngay dưới tên chương), level 2 = mục con của nó, v.v. Xác định cấp theo thứ bậc hình thức (cỡ chữ lớn → nhỏ, đậm → thường, số thứ tự lồng nhau); cùng kiểu trình bày thì cùng cấp xuyên suốt chương; cấp mới chỉ được lớn hơn cấp liền trước tối đa 1 (không nhảy cấp).\n\n'
@@ -10617,10 +10617,16 @@ async function bkAiReadWindow(shots, title, nTot, prevHeads, sub) {
 function bkLooksCaption(t) {
     t = String(t || '').replace(/\s+/g, ' ').trim();
     if (t.length < 2) return true;
+    /* Mọi dòng MỞ ĐẦU bằng Figure / Fig. / Table / Tbl. / Box / Chart / Photo / Graph … đều là nhãn của hình hay bảng. */
+    if (/^(?:fig(?:ure|ures|s)?|fig|tbl|tables?|boxes?|charts?|photos?|graphs?|diagrams?|plates?)\b/i.test(t)) return true;
+    /* Nhãn hình / bảng tiếng Việt: phải có dấu ":" hoặc "." ngay sau (để không nhầm "Hình thể răng", "Biểu hiện lâm sàng", "Ảnh hưởng…") */
+    if (/^(?:hình|bảng|biểu\s*đồ|sơ\s*đồ|ảnh|chú\s*thích)\s*[:.]/i.test(t)) return true;
     if (/^(fig(?:ure)?s?|tbl|table|box|chart|photo|graph|diagram|plate|hình|bảng|biểu|sơ\s*đồ|ảnh|chú\s*thích)\s*\.?\s*\d/i.test(t)) return true;
     if (/^(fig(?:ure)?s?|tbl|table|box|chart|photo|graph|diagram|plate|hình|bảng|biểu|sơ\s*đồ|ảnh|chú\s*thích)\s*[.:]?\s*$/i.test(t)) return true;
     if (/\b(fig(?:ure)?|tbl|table|box)\s*\.?\s*\d/i.test(t)) return true;
     if (/^\(?[A-Fa-f]\)?[.)]\s/.test(t) && t.length < 80) return true;
+    /* Dòng nguồn / trích dẫn in dưới hình, bảng: "Adapted from …", "Source: …", "Data from … (2006)" */
+    if (t.length < 140 && /\b(?:adapted|reproduced|source|data)\s*(?:from|:)\b/i.test(t)) return true;
     return false;
 }
 /* Gom kết quả một đợt; chỉ nhận trang sau trang đã nhận ở đợt trước (phần gối nhau bỏ qua) */
@@ -10785,22 +10791,142 @@ function bkRecoverHeads() {
     bkPages.forEach(p => {
         if (!p || !Array.isArray(p.headCands)) return;
         const bfh = p.bfh || 11;
+        const L = bkPageLayout(p.num);   // vùng "skip" AI đánh dấu cho trang: bảng, hình, khung, chú thích → không phải mục lục
+        const inSkip = hc => {
+            if (!L || !L.skip || !L.skip.length) return false;
+            const fx = (hc.x + 10) / p.w, fy = (p.h - hc.y) / p.h;
+            return L.skip.some(s => fx >= s[0] - 0.012 && fx <= s[2] + 0.012 && fy >= s[1] - 0.012 && fy <= s[3] + 0.012);
+        };
+        let last = null;   // dòng tiêu đề vừa nhận trên trang này (để nối các dòng của CÙNG một tiêu đề dài)
         p.headCands.forEach(hc => {
             const t = String(hc.text || '').replace(/\s+/g, ' ').trim();
             if (t.length < 3 || t.length > 90 || bkLooksCaption(t)) return;
             const isBig = hc.fh >= bfh * 1.08, isNum = /^(?:[IVXLC]+\.|[A-Z]\.|\d+(?:\.\d+)*\.?)\s+\S/.test(t);
             if (!isBig && !isNum) return;
+            if (inSkip(hc)) return;   // chữ nằm trong bảng / hình / chú thích: TUYỆT ĐỐI không thành mục lục
+            // Box ước lượng của dòng tiêu đề (thang 0–1000, y từ mép trên) để các bước sau biết vị trí hình học
+            const bw = Math.min(0.98, Math.max(0.12, (0.52 * hc.fh * t.length) / p.w));
+            const bx = [Math.max(0, (p.h - hc.y - 0.85 * hc.fh) / p.h * 1000), hc.x / p.w * 1000,
+                Math.min(1000, (p.h - hc.y + 0.25 * hc.fh) / p.h * 1000), Math.min(1000, hc.x / p.w * 1000 + bw * 1000)];
+            // Dòng dưới của CÙNG một tiêu đề (cùng lề, cùng cỡ chữ, sát trên, bắt đầu bằng chữ nối) → nối vào mục trước,
+            // KHÔNG tạo mục mới (tránh một tiêu đề 2–3 dòng bị tách thành 2–3 mục).
+            if (last && last.added && !/[.:;!?]$/.test(last.t) && bkHeadCont(t) &&
+                Math.abs(hc.x - last.x) <= 0.07 * p.w && Math.abs(hc.fh - last.fh) <= 0.3 * last.fh &&
+                (last.y - hc.y) > 0.5 * hc.fh && (last.y - hc.y) < 2.2 * hc.fh) {
+                last.head.en = (last.head.en + ' ' + t).replace(/\s+/g, ' ').trim();
+                const ob = bkHeadRect(last.head);
+                if (ob) last.head.box = [Math.min(ob.y0, bx[0]), Math.min(ob.x0, bx[1]), Math.max(ob.y1, bx[2]), Math.max(ob.x1, bx[3])];
+                last.t = t; last.y = hc.y; last.x = Math.min(last.x, hc.x);
+                seen.add(bkNormStr(last.head.en).slice(0, 40));
+                return;
+            }
             const key = bkNormStr(t).slice(0, 40);
             if (!key || key.length < 3 || seen.has(key)) return;
             const page = pageOf(hc.s); if (!page) return;
             seen.add(key);
             const mm = t.match(/^\d+(?:\.\d+)*/);
             const depth = mm ? mm[0].split('.').length : (isBig ? 2 : 3);
-            bkHeads.push({ page: page, box: null, en: t, vi: '', lvl: Math.max(1, Math.min(10, depth)), recover: true, snip: bkNormStr(bkText.slice(hc.s, hc.s + 60)).slice(0, 40) });
+            const head = { page: page, box: bx, en: t, vi: '', lvl: Math.max(1, Math.min(10, depth)), recover: true, snip: bkNormStr(bkText.slice(hc.s, hc.s + 60)).slice(0, 40) };
+            bkHeads.push(head);
+            last = { added: true, t: t, x: hc.x, y: hc.y, fh: hc.fh, head: head };
             added++;
         });
     });
     return added;
+}
+/* ===== LÀM SẠCH DANH SÁCH TIÊU ĐỀ trước khi định vị vào chữ chương =====
+   (1) bỏ mục nằm trong vùng AI đánh dấu "skip" (bảng, hình, khung, chú thích) và mục đọc ra từ chú thích;
+   (2) bỏ mảnh vụn — mục chỉ là MỘT PHẦN chữ của tiêu đề khác cùng trang (tiêu đề dài bị tách thành nhiều mục);
+   (3) gộp các dòng của CÙNG một tiêu đề nằm sát nhau (cùng lề, cùng cỡ chữ) thành MỘT mục.
+   Nhờ vậy mục lục không còn mục lấy từ bảng / chú thích ảnh và một tiêu đề không bị tách thành 2–3 mục. */
+function bkHeadRect(h) {
+    const b = h && h.box;
+    if (!Array.isArray(b) || b.length < 4) return null;
+    const y0 = +b[0], x0 = +b[1], y1 = +b[2], x1 = +b[3];
+    if (![y0, x0, y1, x1].every(isFinite) || y1 <= y0 || x1 <= x0) return null;
+    return { y0: y0, x0: x0, y1: y1, x1: x1 };
+}
+function bkHeadNorm(h) { return bkNormStr((h && h.en) || ''); }
+/* Dòng dưới có phải phần tiếp của cùng một tiêu đề? (bắt đầu bằng chữ nối / chữ thường, không mở mục mới) */
+function bkHeadCont(t) {
+    t = String(t || '').trim();
+    if (!t) return false;
+    if (/^(?:\d+(?:\.\d+)*|[IVXLC]{1,5})[.)]\s/.test(t)) return false;   // mở đầu một mục đánh số mới ("1.2 ", "IV. ")
+    if (/^[A-Z][.)]\s/.test(t)) return false;                            // "A. ", "b) " — mục mới, không phải dòng nối
+    if (/^(?:of|and|or|for|the|a|an|in|on|at|to|with|from|by|as|its|their|this|that|these|those|which|who|using|use|without|between|during|after|before|through|into|over|under|when|where|how|why|is|are|be)\b/i.test(t)) return true;
+    return /^[a-zà-ỹ]/.test(t);   // chữ thường: chắc chắn là phần tiếp của câu tiêu đề
+}
+function bkHeadStacked(a, b) {   // a = mục trên, b = mục dưới: hai box nằm sát nhau theo chiều dọc, cùng cột
+    const ra = bkHeadRect(a), rb = bkHeadRect(b);
+    if (!ra || !rb) return false;
+    const ha = ra.y1 - ra.y0, hb = rb.y1 - rb.y0, gap = rb.y0 - ra.y1;
+    if (gap < -0.3 * Math.min(ha, hb) || gap > Math.max(6, 0.7 * Math.min(ha, hb))) return false;   // phải dính sát theo chiều dọc
+    const ov = Math.min(ra.x1, rb.x1) - Math.max(ra.x0, rb.x0);
+    if (ov <= 0.35 * Math.min(ra.x1 - ra.x0, rb.x1 - rb.x0)) return false;                            // phải cùng cột
+    const ca = (ra.x0 + ra.x1) / 2, cb = (rb.x0 + rb.x1) / 2;
+    if (Math.abs(ra.x0 - rb.x0) > 60 && Math.abs(ca - cb) > 60) return false;                          // phải cùng lề (hoặc cùng tâm)
+    return true;
+}
+function bkHeadJoin(a, b) {   // nối mục b vào mục a (a giữ nguyên vị trí, box mở rộng ôm cả b)
+    const ra = bkHeadRect(a), rb = bkHeadRect(b);
+    if (ra && rb) a.box = [Math.min(ra.y0, rb.y0), Math.min(ra.x0, rb.x0), Math.max(ra.y1, rb.y1), Math.max(ra.x1, rb.x1)];
+    else if (rb && !ra) a.box = b.box;
+    a.en = ((a.en || '') + ' ' + (b.en || '')).replace(/\s+/g, ' ').trim().slice(0, 200);
+    const bv = String(b.vi || '').trim();
+    if (bv) a.vi = (((a.vi || '').trim()) ? a.vi.trim() + ' ' : '') + bv;
+    a.lvl = Math.min(a.lvl || 1, b.lvl || 1);
+}
+function bkHeadsClean() {
+    if (!Array.isArray(bkHeads) || !bkHeads.length) return 0;
+    const before = bkHeads.length;
+    const y0 = h => { const r = bkHeadRect(h); return r ? r.y0 : 1e9; };
+    let list = bkHeads.slice().sort((a, b) => (a.page - b.page) || (y0(a) - y0(b)));
+    // (1) bỏ mục nằm TRONG vùng "skip" của AI (bảng, hình, khung, mục lục in sẵn) và mục có dạng chú thích ảnh / bảng
+    list = list.filter(h => {
+        if (bkLooksCaption(h.en)) return false;
+        const r = bkHeadRect(h), L = bkPageLayout(h.page);
+        if (!r || !L || !L.skip || !L.skip.length) return true;
+        const cx = (r.x0 + r.x1) / 2000, cy = (r.y0 + r.y1) / 2000;
+        return !L.skip.some(s => cx >= s[0] - 0.012 && cx <= s[2] + 0.012 && cy >= s[1] - 0.012 && cy <= s[3] + 0.012);
+    });
+    // (2a) trùng chữ trên cùng một trang: giữ mục do AI đọc (có bản dịch), bỏ mục bù thêm
+    const byKey = new Map();
+    list.forEach(h => { const k = h.page + '|' + bkHeadNorm(h); if (!byKey.has(k)) byKey.set(k, []); byKey.get(k).push(h); });
+    const drop = new Set();
+    byKey.forEach(g => {
+        if (g.length < 2) return;
+        const keep = g.find(h => !h.recover) || g[0];
+        g.forEach(h => { if (h !== keep) drop.add(list.indexOf(h)); });
+    });
+    // (2b) bỏ mảnh vụn: chữ của mục này nằm gọn trong chữ của một tiêu đề khác cùng trang
+    for (let i = 0; i < list.length; i++) {
+        if (drop.has(i)) continue;
+        const hi = list[i], ni = bkHeadNorm(hi), ri = bkHeadRect(hi);
+        if (ni.length < 4 || !ri) continue;
+        for (let j = 0; j < list.length; j++) {
+            if (i === j) continue;
+            const hj = list[j], nj = bkHeadNorm(hj), rj = bkHeadRect(hj);
+            if (!rj || hj.page !== hi.page) continue;
+            if (nj.length <= ni.length || nj.indexOf(ni) < 0) continue;   // mục này phải là MỘT PHẦN chữ của mục kia
+            const hh = rj.y1 - rj.y0;
+            const insideY = ri.y0 >= rj.y0 - 4 && ri.y1 <= rj.y1 + 4;                                  // box nằm gọn trong box mục kia
+            const justBelow = hi.recover && !hj.recover &&                                               // mục bù thêm ngay dưới mục AI: các dòng sau của cùng tiêu đề
+                ri.y0 >= rj.y1 - 0.3 * hh && ri.y0 <= rj.y1 + 3.5 * Math.max(hh, 1);
+            const ov = Math.min(ri.x1, rj.x1) - Math.max(ri.x0, rj.x0);
+            if (ov <= 0) continue;
+            if (insideY || justBelow) { drop.add(i); break; }
+        }
+    }
+    list = list.filter((h, i) => !drop.has(i));
+    // (3) gộp các dòng sát nhau của CÙNG một tiêu đề thành MỘT mục
+    const out = [];
+    list.forEach(h => {
+        const p = out[out.length - 1];
+        if (p && p.page === h.page && !/[.:;!?]$/.test(String(p.en || '').trim()) && bkHeadStacked(p, h) && bkHeadCont(h.en)) bkHeadJoin(p, h);
+        else out.push(h);
+    });
+    bkHeads = out;
+    return before - out.length;
 }
 /* Dịch (best-effort) tên các tiêu đề vừa bổ sung sang tiếng Việt; lỗi thì giữ nguyên tiếng Anh */
 async function bkRecoverTranslate() {
@@ -26031,6 +26157,9 @@ body {
     // giúp highlight của một mục không bao giờ băng xuyên qua tiêu đề kế tiếp
     const origRebuildSecs = window.bkRebuildSecs;
     window.bkRebuildSecs = async function (tok) {
+        // 1.5. Dọn danh sách tiêu đề TRƯỚC khi định vị vào chữ chương: bỏ mục lấy từ bảng / chú thích ảnh,
+        // bỏ mảnh vụn và gộp các dòng của cùng một tiêu đề dài lại thành MỘT mục.
+        try { bkHeadsClean(); } catch (e) {}
         const ok = await origRebuildSecs(tok);
         if (!ok || tok !== bkViewTok) return ok;
         const allCands = [];
