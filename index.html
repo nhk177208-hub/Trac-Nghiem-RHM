@@ -18607,9 +18607,34 @@ function openPop(mode, t) {
         t.en = en; t.vi = vi; t.p = cleanPos(pe ? pe.value : t.p); t.im = cleanIm(rd.editIm); t.u = 1; t.ts = Date.now(); sortTerms(); save(); closePop(); repaginate(t); showTerm(t);
         toast('✅ Đã lưu "' + en + '" — sẽ áp dụng ngay cho mọi bản dịch tiếp theo');
     }
+    /* Popup xác nhận của app (thay confirm() của trình duyệt): Hủy bên trái, OK bên phải */
+    function appConfirm(msg, cb) {
+        var ov = document.getElementById('rhm-confirm');
+        if (!ov) {
+            ov = document.createElement('div');
+            ov.id = 'rhm-confirm';
+            ov.style.cssText = 'position:fixed;inset:0;z-index:100300;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.55)';
+            ov.innerHTML = '<div style="background:#fff;color:#1f2937;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.35);width:min(360px,100%);padding:18px 18px 14px;font-family:system-ui,sans-serif"><div id="rhm-cf-msg" style="font-size:15px;font-weight:600;line-height:1.5;margin-bottom:18px;word-break:break-word"></div><div style="display:flex;justify-content:space-between;gap:10px"><button type="button" id="rhm-cf-no" style="border:0;border-radius:999px;padding:9px 18px;font:800 14px system-ui,sans-serif;background:#e5e7eb;color:#374151;cursor:pointer">Hủy</button><button type="button" id="rhm-cf-ok" style="border:0;border-radius:999px;padding:9px 22px;font:800 14px system-ui,sans-serif;background:#1f2937;color:#fff;cursor:pointer">OK</button></div></div>';
+            document.body.appendChild(ov);
+            ['click', 'mousedown', 'pointerdown', 'touchstart'].forEach(function (ev) { ov.addEventListener(ev, function (e) { e.stopPropagation(); }); });
+        }
+        var no = ov.querySelector('#rhm-cf-no'), ok = ov.querySelector('#rhm-cf-ok');
+        ov.querySelector('#rhm-cf-msg').textContent = msg;
+        function kd(e) { if (e.key === 'Escape') { e.preventDefault(); done(false); } else if (e.key === 'Enter') { e.preventDefault(); done(true); } }
+        function done(v) { ov.style.display = 'none'; document.removeEventListener('keydown', kd, true); if (cb) cb(v); }
+        no.onclick = function () { done(false); };
+        ok.onclick = function () { done(true); };
+        ov.onclick = function (e) { if (e.target === ov) done(false); };
+        document.addEventListener('keydown', kd, true);
+        ov.style.display = 'flex';
+        setTimeout(function () { try { ok.focus(); } catch (e) {} }, 30);
+    }
+    window.appConfirm = appConfirm;
     function delTerm(t) {
         if (!t) return;
-        if (!confirm('Xóa thuật ngữ "' + t.en + '"?')) return;
+        appConfirm('Xóa thuật ngữ "' + t.en + '"?', function (ok) { if (ok) delTermGo(t); });
+    }
+    function delTermGo(t) {
         const idx = rd.terms.indexOf(t);
         const rowEl = document.querySelector('#dict-modal .rd-row[data-k="' + idx + '"]');
         const finishDel = () => {
@@ -20138,9 +20163,19 @@ function moveEdActs() {
         };
         setTimeout(nextPiece, 60);
     }
+    window.rhmInfFs = function (v) {
+        v = Math.max(12, Math.min(28, +v || 16));
+        document.querySelectorAll('.nt-infbody').forEach(function (e) { e.style.fontSize = v + 'px'; });
+        var l = document.getElementById('nt-inf-v'); if (l) l.textContent = v;
+        try { localStorage.setItem('rhm_info_fs', String(v)); } catch (e) {}
+    };
+    function infSlider() {   // thanh kéo cỡ chữ của cửa sổ ℹ️ (nhớ lại lần dùng trước)
+        var v = 16; try { v = +localStorage.getItem('rhm_info_fs') || 16; } catch (e) {}
+        return '<div style="display:flex;align-items:center;gap:8px;margin:6px 0 8px;font-size:13px;color:#0f766e"><span style="font-weight:800">Aa</span><input type="range" min="12" max="28" step="1" value="' + v + '" style="flex:1;accent-color:#0f766e;touch-action:none" oninput="rhmInfFs(this.value)"><span id="nt-inf-v" style="min-width:26px;text-align:right">' + v + '</span></div><div class="nt-infbody" style="font-size:' + v + 'px">';
+    }
     function openInfo(id) {
         const n = nt.notes.find(x => x.id === id); if (!n) return;
-        openPop('<div class="rd-pt">ℹ️ ' + esc(n.t) + '</div>' + (n.cat ? '<div class="nt-ln"><b>Phân mục:</b> ' + esc(n.cat) + '</div>' : '') + ctxLines(n.c).map(r => '<div class="nt-ln"><b>' + esc(r[0]) + ':</b> ' + esc(r[1]) + '</div>').join('') + '<div class="nt-ln"><b>Tạo lúc:</b> ' + esc(fmt(n.ts)) + '</div><div class="rd-pb" style="margin-top:10px"><button type="button" class="rd-pbtn" data-act="cancel">Đóng</button></div>', 'wide', 'info');
+        openPop('<div class="rd-pt">ℹ️ ' + esc(n.t) + '</div>' + infSlider() + (n.cat ? '<div class="nt-ln"><b>Phân mục:</b> ' + esc(n.cat) + '</div>' : '') + ctxLines(n.c).map(r => '<div class="nt-ln"><b>' + esc(r[0]) + ':</b> ' + esc(r[1]) + '</div>').join('') + '<div class="nt-ln"><b>Tạo lúc:</b> ' + esc(fmt(n.ts)) + '</div></div><div class="rd-pb" style="margin-top:10px"><button type="button" class="rd-pbtn" data-act="cancel">Đóng</button></div>', 'wide', 'info');
     }
     function paintThumbs() { const b = $('nt-thumbs'); if (b) b.innerHTML = (nt.editIm || []).map((s, i) => '<div class="rd-th"><img src="' + s + '" alt=""><button type="button" class="rd-thx" data-act="n-imgdel" data-i="' + i + '" title="Xóa ảnh">✕</button></div>').join(''); }
     const PEN_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>';
@@ -20636,7 +20671,7 @@ function moveEdActs() {
 </script>
 <!-- ===== Cửa sổ khóa API đầy đủ (giống bảng trong box chat) ===== -->
 <div id="hs-keys-modal" style="display:none;z-index:100090" class="fixed inset-0 bg-black bg-opacity-60 items-center justify-center p-2 sm:p-4" onclick="if(event.target===this)hsCloseKeys()">
-    <div class="bg-amber-50 rounded-2xl shadow-2xl w-full max-w-2xl flex flex-col" style="max-height:92vh">
+    <div class="bg-amber-50 rounded-2xl shadow-2xl w-full flex flex-col" style="width:min(672px,calc(96vw / 1.5));max-height:calc(92vh / 1.5);zoom:1.5">
         <div class="flex items-center justify-between gap-2 px-4 py-3 border-b border-amber-200 bg-white rounded-t-2xl">
             <h3 class="text-base sm:text-lg font-black text-amber-900">🔑 Nhà cung cấp AI &amp; khóa API</h3>
             <button type="button" onclick="hsCloseKeys()" class="shrink-0 w-9 h-9 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 font-black" title="Đóng">✕</button>
@@ -20650,7 +20685,7 @@ function moveEdActs() {
 </div>
 <!-- ===== Cài đặt trang chủ (gộp Đề xuất câu hỏi, Góp ý, Khóa API, Nhập/Xuất tiến độ, Thêm vào MH chính) ===== -->
 <div id="home-settings-modal" class="fixed inset-0 bg-black bg-opacity-60 hidden flex items-center justify-center p-4 z-50" onclick="if(event.target===this)closeHomeSettings()">
-    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-4">
+    <div class="bg-white rounded-2xl shadow-2xl p-4" style="width:max-content;min-width:240px;max-width:92vw">
         <div class="flex items-center justify-between mb-3">
             <h3 class="text-lg font-black text-gray-800">⚙️ Cài Đặt</h3>
             <button type="button" onclick="closeHomeSettings()" class="w-9 h-9 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 font-black">✕</button>
@@ -20660,6 +20695,7 @@ function moveEdActs() {
             <button type="button" onclick="homeSettingsGo('openAppFeedbackModal')" class="text-left text-sm bg-teal-50 hover:bg-teal-100 text-teal-800 font-semibold py-2.5 px-3.5 rounded-xl border border-teal-300">📩 Góp ý / Liên hệ</button>
             <button type="button" onclick="hsOpenKeys()" class="text-left text-sm bg-amber-50 hover:bg-amber-100 text-amber-800 font-semibold py-2.5 px-3.5 rounded-xl border border-amber-300 flex items-center justify-between">🔑 Cài đặt khóa API</button>
             <button type="button" onclick="homeSettingsGo('openProgressModal')" class="text-left text-sm bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold py-2.5 px-3.5 rounded-xl border border-indigo-300">🔄 Nhập / Xuất Tiến Độ</button>
+            <button type="button" id="btn-rhm-fs" onclick="homeSettingsGo('rhmToggleFs')" class="text-left text-sm bg-slate-50 hover:bg-slate-100 text-slate-800 font-semibold py-2.5 px-3.5 rounded-xl border border-slate-300">⛶ Toàn màn hình</button>
             <button type="button" id="btn-add-home" onclick="homeSettingsGo('addToHomeScreen')" class="text-left text-sm bg-sky-50 hover:bg-sky-100 text-sky-800 font-semibold py-2.5 px-3.5 rounded-xl border border-sky-300">📲 Thêm vào MH chính</button>
         </div>
     </div>
@@ -20770,6 +20806,23 @@ function moveEdActs() {
         var m = document.getElementById('home-settings-modal'); if (m) m.classList.add('hidden');
         document.querySelectorAll('[data-hs-inert]').forEach(function (s) { s.removeAttribute('inert'); s.removeAttribute('data-hs-inert'); });
     };
+    /* Toàn màn hình (kiểu F11 của app): nút trong Cài Đặt; đang toàn màn hình thì nhãn đổi thành "Thoát toàn màn hình" và thoát có popup xác nhận */
+    (function () {
+        var fsOn = function () { return !!(document.fullscreenElement || document.webkitFullscreenElement); };
+        function label() { var b = document.getElementById('btn-rhm-fs'); if (b) b.textContent = fsOn() ? '🗗 Thoát toàn màn hình' : '⛶ Toàn màn hình'; }
+        function exitFs() { try { var p = document.exitFullscreen ? document.exitFullscreen() : (document.webkitExitFullscreen && document.webkitExitFullscreen()); if (p && p.catch) p.catch(function () {}); } catch (e) {} }
+        window.rhmToggleFs = function () {
+            if (fsOn()) { window.appConfirm('Thoát toàn màn hình?', function (ok) { if (ok) exitFs(); }); return; }
+            var el = document.documentElement;
+            var p = el.requestFullscreen ? el.requestFullscreen() : (el.webkitRequestFullscreen && el.webkitRequestFullscreen());
+            if (p && p.catch) p.catch(function () { if (typeof showToast === 'function') showToast('Trình duyệt này không cho bật toàn màn hình'); });
+        };
+        document.addEventListener('fullscreenchange', label);
+        document.addEventListener('webkitfullscreenchange', label);
+        var hm = document.getElementById('home-settings-modal');
+        if (hm) new MutationObserver(label).observe(hm, { attributes: true, attributeFilter: ['class'] });
+        label();
+    })();
     window.homeSettingsGo = function (fn) {
         window.closeHomeSettings();
         var MAP = { openSuggestQuestionModal: 'suggest-question-modal', openAppFeedbackModal: 'app-feedback-modal', openProgressModal: 'progress-modal' };
@@ -22491,9 +22544,13 @@ html.rhm-dragging,html.rhm-dragging body{-webkit-user-select:none;user-select:no
     function mkBub() {
         if (bub) return bub;
         bub = document.createElement('div'); bub.id = 'bk-nbub';
-        bub.innerHTML = '<div class="nb-hd"><span>📝 Ghi chú nhanh</span></div><div class="nb-q"></div><textarea class="nb-ta" rows="4" placeholder="Viết ghi chú cho đoạn này…"></textarea><div class="nb-ft"><button type="button" class="nb-cl">Đóng</button><button type="button" class="nb-ok">💾 Lưu</button></div>';
+        bub.innerHTML = '<div class="nb-hd"><span>📝 Ghi chú nhanh</span></div><style>#bk-nbub .nb-acts{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}#bk-nbub .nb-acts button{border:0;border-radius:999px;padding:4px 10px;font:700 12px system-ui,sans-serif;color:#fff;cursor:pointer;white-space:nowrap}#bk-nbub .nb-a-tr{background:#4f46e5}#bk-nbub .nb-a-dc{background:#0369a1}#bk-nbub .nb-a-hl{background:#d97706}#bk-nbub .nb-a-nt{background:#0f766e}</style><div class="nb-acts"><button type="button" class="nb-a-tr">🌐 Dịch</button><button type="button" class="nb-a-dc">📖 Từ điển</button><button type="button" class="nb-a-hl">🖍 Highlight</button><button type="button" class="nb-a-nt">📝 Ghi chú</button></div><div class="nb-q"></div><textarea class="nb-ta" rows="4" placeholder="Viết ghi chú cho đoạn này…"></textarea><div class="nb-ft"><button type="button" class="nb-cl">Đóng</button><button type="button" class="nb-ok">💾 Lưu</button></div>';
         ['mousedown', 'touchstart', 'pointerdown', 'mouseup', 'pointerup', 'touchend', 'click'].forEach(function (ev) { bub.addEventListener(ev, function (e) { e.stopPropagation(); }); });
         bub.querySelector('.nb-cl').addEventListener('click', function () { closeBub(false); });
+        bub.querySelector('.nb-a-tr').addEventListener('click', function () { var an = bub._an, t = an ? (an.text || '') : ''; if (!t) return; closeBub(true); try { bkPdfSel = t; } catch (e) {} bkQuickTr(); });
+        bub.querySelector('.nb-a-dc').addEventListener('click', function () { var an = bub._an, t = an ? (an.text || '') : ''; if (!t || !window.rhmDictAddWord) return; window.rhmDictAddWord(t.replace(/\s+/g, ' ').trim(), (typeof bkCur !== 'undefined' && bkCur && bkCur.title) ? ('Sách RHM, chương: ' + bkCur.title) : ''); });
+        bub.querySelector('.nb-a-hl').addEventListener('click', function () { var an = bub._an; if (!an) return; an.hl = an.hl ? 0 : 1; persist(); redraw(); paintBub(an); toast(an.hl ? '🖍 Đã highlight' : '🧽 Đã xóa highlight'); });
+        bub.querySelector('.nb-a-nt').addEventListener('click', function () { try { bub.querySelector('.nb-ta').focus(); } catch (e) {} });
         bub.querySelector('.nb-ok').addEventListener('click', function () { finishBub(bub.querySelector('.nb-ta').value.trim(), true); });
         bub.querySelector('.nb-ta').addEventListener('keydown', function (e) {
             e.stopPropagation();
@@ -22503,10 +22560,16 @@ html.rhm-dragging,html.rhm-dragging body{-webkit-user-select:none;user-select:no
     }
     function openBub(an) {
         var b = mkBub(); bub._an = an;
-        var q = String(an.text || ''); b.querySelector('.nb-q').textContent = q.length > 140 ? q.slice(0, 140) + '…' : q;
+        paintBub(an); var q = String(an.text || ''); b.querySelector('.nb-q').textContent = q.length > 140 ? q.slice(0, 140) + '…' : q;
         var ta = b.querySelector('.nb-ta'); ta.value = an.note || '';
         b.style.display = 'block'; placeBub();
         setTimeout(function () { try { ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length); } catch (e) {} }, 30);
+    }
+    function paintBub(an) {   // Từ điển chỉ hiện khi đoạn chọn thêm được; nhãn Highlight theo trạng thái
+        if (!bub) return;
+        var a = an || bub._an || {};
+        bub.querySelector('.nb-a-dc').style.display = canDict(a.text || '') ? '' : 'none';
+        bub.querySelector('.nb-a-hl').textContent = a.hl ? '🧽 Xóa highlight' : '🖍 Highlight';
     }
     function placeBub() {
         if (!bubOpen()) return;
