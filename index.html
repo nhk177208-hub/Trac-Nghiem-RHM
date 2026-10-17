@@ -10243,9 +10243,20 @@ function bkOrderByLayout(items, W, H, L) {
         zones.get(k).push(d);
     });
     const pageGts = bkOrderItems(items, W).gts || [];
+    // dải do AI vẽ có từ 2 cột: rãnh giữa các cột lấy đúng theo AI → mỗi cột là một khối, không đọc ngang qua cột
+    const zoneGts = z => {
+        const cs = z && z.cols;
+        if (!cs || cs.length < 2) return null;
+        const g = [];
+        for (let c = 0; c + 1 < cs.length; c++) {
+            const g0 = cs[c][1] * W, g1 = Math.max(cs[c + 1][0] * W, g0);
+            g.push({ g0: g0, g1: g1, gc: (g0 + g1) / 2 });
+        }
+        return g;
+    };
     let nb = 0;
     [...zones.keys()].sort((a, b) => a - b).forEach(k => {
-        const sub = bkOrderItems(zones.get(k), W, pageGts);
+        const sub = bkOrderItems(zones.get(k), W, zoneGts(L.Z[k]) || pageGts);
         let mx = -1;
         sub.forEach(d => { if (d.blk > mx) mx = d.blk; });
         sub.forEach(d => { d.blk = nb + d.blk; out.push(d); });
@@ -10352,6 +10363,8 @@ function bkPlanWin(shots) {
 function bkVisSystem() {
     return 'Bạn là chuyên gia dàn trang sách giáo khoa. Bạn được cho ẢNH CÁC TRANG của một chương sách (mỗi ảnh có nhãn "TRANG n" đứng ngay trước). Hãy (1) lập MỤC LỤC PHÂN CẤP của chương, (2) mô tả BỐ CỤC CỘT của từng trang, (3) đánh dấu các VÙNG KHÔNG THUỘC DÒNG VĂN BẢN CHÍNH. Chỉ trả về JSON, không thêm chữ nào khác.\n\n'
         + 'CÁCH ĐỌC: mỗi trang đọc theo cột, từ trên xuống dưới; hết cột 1 sang cột 2 (rồi cột 3 nếu có), từ trên xuống dưới; hết trang thì sang trang kế. Dải chữ rộng cả trang (tiêu đề lớn, đoạn trải ngang) là một dải riêng; nửa trên và nửa dưới của một trang có thể có số cột khác nhau.\n\n'
+        + 'KHÔNG ĐỌC NGANG: hai cột là hai mạch văn riêng. Một dòng ở cột trái KHÔNG nối với dòng cùng độ cao ở cột phải, dù hai dòng thẳng hàng; không gộp chữ của hai cột thành một cột hay một dải. Trang 2 cột thì mỗi dải ghi đủ hai cột riêng, mỗi cột phủ trọn chữ của cột đó.\n'
+        + 'GHÉP ĐOẠN THEO CỘT: đoạn chỉ nối từ cuối cột trái sang đầu cột phải khi câu ở cuối cột trái còn dở (chưa có dấu chấm kết câu) và đầu cột phải là phần tiếp của đúng câu đó; nếu không thì là hai đoạn riêng, không ghép.\n'
         + 'KHÔNG ĐƯỢC NHẬN DIỆN LÀ MỤC LỤC, và phải đưa vào "skip": Outline / Learning objectives / mục lục in sẵn của chương, hình ảnh, ảnh chụp, sơ đồ, chữ nằm trong hình, chú thích ảnh / hình (Figure, Fig., Hình), chú thích, bảng và tiêu đề bảng (Table, Bảng), biểu đồ, khung / hộp / ô rời khỏi mạch văn (Box, sidebar, Clinical Pearl, Key Points...), ghi chú lề, đầu trang, chân trang, số trang, tên tác giả.\n\n'
         + 'GHÉP ĐOẠN: nếu một đoạn văn bị hình / bảng / khung chèn làm tách, phần đầu và phần sau của đoạn đó vẫn là MỘT mạch văn liên tục dù cách nhau vài trang. Vì vậy phần chèn phải nằm trong "skip" để không chen vào mạch văn; mỗi tiêu đề chỉ ghi MỘT lần, tại nơi nó bắt đầu.\n\n'
         + 'TIÊU ĐỀ MỤC: chỉ là tiêu đề của mục nội dung nằm trong mạch văn chính, nhận biết qua cỡ chữ, in đậm / nghiêng / màu, viết hoa, khoảng cách trên-dưới và kiểu đánh số (1., 1.1, 1.1.1, A., a), i), (1)...). Tiêu đề in đậm đầu đoạn rồi chữ chạy tiếp cùng dòng vẫn nhận (box chỉ ôm phần in đậm). KHÔNG ghi tên chương (tiêu đề lớn ở trang đầu) và đầu / chân trang.\n'
@@ -19147,7 +19160,7 @@ function openPop(mode, t) {
     }
     function dmkHTML(t) { var m = { easy: '🟢', medium: '🟡', hard: '🔴' }[t.d]; return m ? '<span class="rd-dmk" title="Đã đánh dấu mức độ">' + m + '</span>' : ''; }
     function dkBtns(t) {
-        var L = [['easy', '🟢 Dễ'], ['medium', '🟡 Vừa'], ['hard', '🔴 Khó']];
+        var L = [['hard', '🔴 Khó'], ['medium', '🟡 Vừa'], ['easy', '🟢 Dễ']];
         return L.map(function (x) {
             return '<button type="button" class="rd-pbtn dk-b' + (t.d === x[0] ? ' dk-on' : '') + '" data-act="dk-set" data-l="' + x[0] + '">' + x[1] + '</button>';
         }).join('');
@@ -19156,8 +19169,9 @@ function openPop(mode, t) {
         var r = rv.run, t = r && r.items[r.i];
         if (!t) return;
         t.d = (t.d === l) ? '' : l;
-        save(); repaginate(anchor()); fcPaint();
+        save(); repaginate(anchor()); if (!t.d) fcPaint();
         toast(t.d ? 'Đã đánh dấu: ' + ({ easy: 'Dễ', medium: 'Vừa', hard: 'Khó' })[t.d] : 'Đã bỏ đánh dấu mức độ');
+if (t.d) fcStep(1);
     }
     function fcPaint() {
         fcBindSwipe();
@@ -19177,7 +19191,7 @@ function openPop(mode, t) {
                 ? '<div class="fc back' + animCls + '" data-act="rv-flip" role="button" tabindex="0"><span class="fc-lab">Nghĩa tiếng Việt</span><span class="fc-vi">' + viHTML(t.vi) + '</span><div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px;flex-wrap:wrap"><span class="fc-sm" style="font-weight:700;color:#4b5563">' + esc(t.en) + '</span>' + spkBtn + infoBtn + '</div></div>'
                   + infoBox
                   + '</div>'
-                  + '<div class="fc-foot"><div class="fc-mark-row"><button type="button" class="rd-pbtn dan" data-act="rv-no">😕 Chưa nhớ</button>' + dkBtns(t) + '<button type="button" class="rd-pbtn pri" data-act="rv-yes">✅ Đã nhớ</button></div><div class="fc-nav-row"><button type="button" class="rd-pbtn" data-act="fc-prev"' + (r.i <= 0 ? ' disabled' : '') + '>◀ Câu trước</button><button type="button" class="rd-pbtn" data-act="fc-next">Câu tiếp ▶</button></div></div>'
+                  + '<div class="fc-foot"><div class="fc-mark-row"><button type="button" class="rd-pbtn" data-act="fc-prev"' + (r.i <= 0 ? ' disabled' : '') + '>◀ Câu trước</button>' + dkBtns(t) + '<button type="button" class="rd-pbtn" data-act="fc-next">Câu tiếp ▶</button></div></div>'
                 : '<div class="fc' + animCls + '" data-act="rv-flip" role="button" tabindex="0"><span class="fc-lab">Tiếng Anh · chạm để lật thẻ (vuốt ngang để chuyển câu)</span><div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap"><span class="fc-en">' + esc(t.en) + '</span>' + spkBtn + '</div></div>'
                   + '</div>'
                   + '<div class="fc-foot"><div class="rd-hint fc-hint-line">Chạm thẻ để lật · Vuốt qua lại để chuyển thẻ</div><div class="fc-nav-row"><button type="button" class="rd-pbtn" data-act="fc-prev"' + (r.i <= 0 ? ' disabled' : '') + '>◀ Câu trước</button><button type="button" class="rd-pbtn" data-act="fc-next">Câu tiếp ▶</button></div></div>')
@@ -24853,6 +24867,7 @@ textarea {
 #dict-modal .dk-b { font-size: 13px; padding: 8px 4px; border: 1.5px solid #c4b5fd; background: #faf5ff; color: #5b21b6; font-weight: 800; cursor: pointer; }
 #dict-modal .dk-b.dk-on { background: #6d28d9; color: #fff; border-color: #6d28d9; }
 #dict-modal .rd-dmk { float: right; margin-left: 8px; font-size: .92em; line-height: 1.2; }
+#dict-modal .fc-foot .fc-mark-row > .rd-pbtn { min-width: 0 !important; white-space: normal !important; line-height: 1.2 !important; padding-left: 4px !important; padding-right: 4px !important; }
 </style>
 <style id="rhm-va2-note">
 #nt-rbar .rr-un { background: #b45309; }
@@ -24886,14 +24901,15 @@ textarea {
         var blk = ad.blks[anc.bi]; if (!blk) return pos;
         var below = Y > blk.bottom, above = Y < blk.top;
         if (pos.bi === anc.bi) {
-            if (below && ad.blks[anc.bi + 1]) return { p: anc.p, k: ad.blks[anc.bi + 1].k0, o: 0, bi: anc.bi + 1 };
-            if (above && anc.bi > 0) { var pk = ad.blks[anc.bi - 1].k1; return { p: anc.p, k: pk, o: ad.seq[pk].str.length, bi: anc.bi - 1 }; }
+            if (below && ad.blks[anc.bi + 1] && ad.blks[anc.bi + 1].top >= blk.bottom - 3) return { p: anc.p, k: ad.blks[anc.bi + 1].k0, o: 0, bi: anc.bi + 1 };
+            if (above && anc.bi > 0 && ad.blks[anc.bi - 1].bottom <= blk.top + 3) { var pk = ad.blks[anc.bi - 1].k1; return { p: anc.p, k: pk, o: ad.seq[pk].str.length, bi: anc.bi - 1 }; }
             return pos;
         }
         if (bkChainOk(anc, pos)) return pos;
         var bx = blkX(ad, anc.bi);
-        if (pos.bi > anc.bi && (below || X > bx.r)) return pos;
-        if (pos.bi < anc.bi && (above || X < bx.l)) return pos;
+        var pbk = ad.blks[pos.bi], sameCol = !!pbk && (pbk.top >= blk.bottom - 3 || pbk.bottom <= blk.top + 3);
+        if (sameCol && pos.bi > anc.bi && (below || X > bx.r)) return pos;
+        if (sameCol && pos.bi < anc.bi && (above || X < bx.l)) return pos;
         if (below) return bkEndOf(ap, blk);
         if (above) return bkStartOf(ap, blk);
         var hh = bkHit(ad, X, Y, blk.k0, blk.k1);
@@ -24995,7 +25011,7 @@ textarea {
                 (aiState.full ? 'đầy đủ, chi tiết. ' : 'súc tích. ') +
                 'QUY TẮC: (1) Ưu tiên dựa trên NỘI DUNG CHƯƠNG bên dưới, không bịa số liệu; nếu chương không nói đến, nói rõ và ghi chú là kiến thức ngoài chương. ' +
                 '(2) Nếu người học gửi ảnh chụp trang sách, đọc chữ trong ảnh, mô tả hình, bảng, sơ đồ, ký hiệu và giải thích. ' +
-                '(3) Bám sát đoạn người học đang hỏi.\n\nNỘI DUNG CHƯƠNG:\n-----\n' + String(bkText || '').slice(0, 30000) + '\n-----';
+                '(3) Bám sát đoạn người học đang hỏi. (4) Trang sách 2 cột: đọc hết cột trái rồi mới sang cột phải, không ghép chữ băng ngang qua hai cột; đoạn nào ráp với đoạn nào phải theo mạch câu trong từng cột.\n\nNỘI DUNG CHƯƠNG:\n-----\n' + String(bkText || '').slice(0, 30000) + '\n-----';
         }
         return spbOrig();
     };
@@ -25054,7 +25070,7 @@ textarea {
         bkOpenAi();
         aiState.guided = false;
         aiState.showText = '🖼️ Phân tích ảnh trang ' + best.num;
-        document.getElementById('ai-input').value = 'Ảnh là trang ' + best.num + ' của chương "' + bkCur.title + '" đang mở trên màn hình. Hãy: (1) tóm tắt các ý chính của trang; (2) mô tả mọi hình, bảng, sơ đồ, chú thích và ký hiệu, giải thích ý nghĩa từng phần; (3) giải thích thuật ngữ khó. Chỉ dựa vào những gì thấy trong ảnh; phần nào mờ hoặc không đọc được thì nói rõ.';
+        document.getElementById('ai-input').value = 'Ảnh là trang ' + best.num + ' của chương "' + bkCur.title + '" đang mở trên màn hình. Hãy: (1) tóm tắt các ý chính của trang; (2) mô tả mọi hình, bảng, sơ đồ, chú thích và ký hiệu, giải thích ý nghĩa từng phần; (3) giải thích thuật ngữ khó. Chỉ dựa vào những gì thấy trong ảnh; phần nào mờ hoặc không đọc được thì nói rõ. Trang 2 cột: đọc hết cột trái (từ trên xuống dưới) rồi mới sang cột phải; KHÔNG ghép dòng cột trái với dòng cùng độ cao ở cột phải. Chỉ nối đoạn từ cuối cột trái sang đầu cột phải khi câu ở cuối cột trái còn dở, và khi đó ghi rõ đoạn nào ráp với đoạn nào.';
         aiSend({ b64: b64 });
     };
     /* nút đã tạo trước khi bản vá tải: gán lại để trỏ tới hàm mới */
