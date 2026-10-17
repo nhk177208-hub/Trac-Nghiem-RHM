@@ -1300,7 +1300,7 @@
                 </div>
 
                 <!-- LƯỚI MÔN HỌC: NGANG 6 CỘT, TỰ ĐỘNG CÂN ĐỐI THEO SỐ LƯỢNG MÔN -->
-                <div id="monhoc-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 sm:gap-3.5">
+                <div id="monhoc-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
                     <div class="col-span-full py-8 text-center text-sm text-gray-500 italic">
                         Đang quét dữ liệu môn học từ thư mục MonHoc...
                     </div>
@@ -1310,19 +1310,19 @@
             <!-- KHU VỰC HIỂN THỊ 36 CHUYÊN ĐỀ (MẶC ĐỊNH ĐÓNG, BẤM MỚI XỔ RA) -->
             <div id="chuyende-section-container" class="hidden mb-8">
                 <!-- 3 NÚT TÍNH NĂNG CHÍNH THUỘC ÔN TẬP THEO CHUYÊN ĐỀ -->
-                <div class="flex items-stretch gap-2.5 sm:gap-3 mb-3">
+                <div id="qb-row1" class="grid grid-cols-2 gap-2.5 sm:gap-3 mb-3">
                     <button onclick="openMockExamModal()" class="flex-1 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-white font-bold py-3 px-3 sm:px-4 rounded-xl transition-all shadow-sm text-sm sm:text-base flex items-center justify-center text-center">
                         ⚡ Ôn Tập Nhanh
                     </button>
                     <button onclick="openDeepModal()" class="flex-1 bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white font-bold py-3 px-3 sm:px-4 rounded-xl transition-all shadow-sm text-sm sm:text-base flex items-center justify-center text-center">
                         🧠 Ôn Tập Chuyên Sâu
                     </button>
-                    <button onclick="openExamModal()" class="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-3 px-3 sm:px-4 rounded-xl transition-all shadow-sm text-sm sm:text-base flex items-center justify-center text-center">
+                    <button id="btn-thi-thu" onclick="openExamModal()" class="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-3 px-3 sm:px-4 rounded-xl transition-all shadow-sm text-sm sm:text-base flex items-center justify-center text-center">
                         🎯 Thi Thử (Mock Exam)
                     </button>
                 </div>
                 <!-- 2 NÚT ĐÃ LƯU & ĐÃ CHẶN: DÀN NGANG 1 DÒNG BẰNG ĐỘ DÀI MÀN HÌNH NGANG KỂ CẢ TRÊN MOBILE DỌC -->
-                <div class="grid grid-cols-2 gap-2.5 sm:gap-3 w-full mb-5">
+                <div id="qb-row3" class="grid grid-cols-2 gap-2.5 sm:gap-3 w-full mb-5">
                     <button onclick="openBookmarkedModal()" class="w-full flex items-center justify-center gap-1.5 text-sm sm:text-base bg-amber-50 hover:bg-amber-100 text-amber-700 font-bold py-2.5 px-3 rounded-xl border border-amber-300 shadow-sm transition-colors whitespace-nowrap">
                         <span>⭐ Đã lưu (<span id="total-bookmarked-count">0</span>)</span>
                     </button>
@@ -1441,12 +1441,11 @@
                         <span id="hope-star-count-badge" class="bg-amber-200 text-amber-900 px-2 py-0.2 rounded-full text-xs font-black">0</span>
                     </button>
 
-                    <button onclick="highlightSelectedText()" class="qt-half text-yellow-800 bg-yellow-50 hover:bg-yellow-100 py-1.5 px-3 rounded-full font-bold text-sm transition-colors border border-yellow-300 flex items-center shadow-sm" title="Highlight vùng văn bản đang bôi đen">
-                        🖍️ Highlight
-                    </button>
-                    <button onclick="clearHighlightCurrent()" class="qt-half text-gray-700 bg-gray-50 hover:bg-gray-100 py-1.5 px-3 rounded-full font-bold text-sm transition-colors border border-gray-300 flex items-center shadow-sm" title="Xóa highlight câu này">
-                        🧹 Xóa Highlight
-                    </button>
+                    <div class="qt-half flex items-center gap-2 bg-white text-gray-700 py-1.5 px-3 rounded-full font-bold text-sm border border-gray-300 shadow-sm" title="Kéo để đổi cỡ chữ câu hỏi và đáp án">
+                        <span>Aa</span>
+                        <input id="qz-fs" type="range" min="80" max="200" step="5" value="100" oninput="qzSetFs(this.value)" class="w-24 sm:w-36 accent-indigo-600" style="touch-action:none">
+                        <span id="qz-fs-v" class="w-12 text-right">100%</span>
+                    </div>
                 </div>
                 
                 <div class="qt-right flex items-center space-x-2 flex-wrap gap-y-2">
@@ -1887,7 +1886,7 @@
 
     <!-- MODAL ÔN TẬP NHANH (MOCK EXAM) -->
     <div id="mock-exam-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center p-4 z-50">
-        <div class="bg-white rounded-2xl max-w-lg w-[95vw] p-5 shadow-2xl flex flex-col max-h-[85vh]">
+        <div class="bg-white rounded-2xl p-5 shadow-2xl flex flex-col" style="width:min(512px,calc(95vw / 1.5));max-height:calc(85vh / 1.5);zoom:1.5">
             <div class="flex justify-between items-center mb-4 pb-2 border-b">
                 <h3 class="text-lg font-bold text-amber-600 flex items-center">⚡ Cấu Hình Ôn Tập Nhanh</h3>
                 <button onclick="closeMockExamModal()" class="text-gray-500 hover:text-gray-700 font-bold text-lg">✕</button>
@@ -1930,7 +1929,7 @@
 
     <!-- MODAL THI THỬ -->
     <div id="exam-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center p-4 z-50">
-        <div class="bg-white rounded-2xl max-w-lg w-[95vw] p-5 shadow-2xl flex flex-col max-h-[85vh]">
+        <div class="bg-white rounded-2xl p-5 shadow-2xl flex flex-col" style="width:min(512px,calc(95vw / 1.5));max-height:calc(85vh / 1.5);zoom:1.5">
             <div class="flex justify-between items-center mb-4 pb-2 border-b">
                 <h3 class="text-lg font-bold text-indigo-600 flex items-center">🎯 Thi Thử (Mock Exam)</h3>
                 <button onclick="closeExamModal()" class="text-gray-500 hover:text-gray-700 font-bold text-lg">✕</button>
@@ -1989,7 +1988,7 @@
 
     <!-- MODAL ÔN TẬP CHUYÊN SÂU -->
     <div id="deep-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center p-4 z-50">
-        <div class="bg-white rounded-2xl max-w-5xl w-[95vw] p-6 shadow-2xl flex flex-col max-h-[88vh]">
+        <div class="bg-white rounded-2xl p-6 shadow-2xl flex flex-col" style="width:min(1024px,calc(95vw / 1.5));max-height:calc(88vh / 1.5);zoom:1.5">
             <div class="flex justify-between items-center mb-4 pb-2 border-b">
                 <h3 class="text-lg font-bold text-teal-700 flex items-center">🧠 Cấu Hình Ôn Tập Chuyên Sâu</h3>
                 <button onclick="closeDeepModal()" class="text-gray-500 hover:text-gray-700 font-bold text-lg">✕</button>
@@ -2256,13 +2255,13 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mt-5">
                 <button id="sc-shelf-btn" type="button" onclick="scOpenShelf()" class="flex flex-col items-center justify-center gap-1.5 rounded-3xl border-2 border-amber-400 bg-gradient-to-b from-amber-50 to-amber-200 hover:from-amber-100 hover:to-amber-300 text-amber-900 shadow-lg px-4 py-7 sm:py-10 active:scale-95 transition-all">
                     <span class="text-5xl leading-none">📚</span>
-                    <span class="text-xl font-black">Kệ Sách</span>
-                    <span class="text-xs font-bold text-amber-800/80">Sách &amp; tài liệu PDF · <span id="bk-count" class="bg-amber-600 text-white rounded-full px-2 text-xs leading-5">…</span></span>
+                    <span class="text-xl font-black inline-flex items-center justify-center gap-2 flex-wrap">Kệ Sách <span id="bk-count" class="bg-amber-600 text-white rounded-full px-2.5 text-sm font-black leading-6">…</span></span>
+                    
                 </button>
                 <button id="sc-course-btn" type="button" onclick="scOpenCourse()" class="flex flex-col items-center justify-center gap-1.5 rounded-3xl border-2 border-blue-400 bg-gradient-to-b from-sky-50 to-blue-200 hover:from-sky-100 hover:to-blue-300 text-blue-900 shadow-lg px-4 py-7 sm:py-10 active:scale-95 transition-all">
                     <span class="text-5xl leading-none">🎬</span>
-                    <span class="text-xl font-black">Khóa Học</span>
-                    <span id="sc-course-sub" class="text-xs font-bold text-blue-800/80">Video bài giảng</span>
+                    <span class="text-xl font-black inline-flex items-center justify-center gap-2 flex-wrap">Khóa Học <span id="sc-course-sub" class="bg-blue-600 text-white rounded-full px-2.5 text-sm font-black leading-6">0</span></span>
+                    
                 </button>
             </div>
         </div>
@@ -5743,53 +5742,102 @@
             }
         }
 
-        function highlightSelectedText() {
-            const selection = window.getSelection();
-            if (!selection.rangeCount || selection.isCollapsed) {
-                showToast("Vui lòng bôi đen đoạn văn bản cần highlight!");
-                return;
+        /* ===== Tô đen trong trắc nghiệm: chỉ còn Highlight / Xóa highlight (giống trình đọc sách); cỡ chữ kéo thả ===== */
+        (function () {
+            const qzCss = document.createElement('style');
+            qzCss.textContent = '#question-text,#options-container{zoom:var(--qz-fs,1)}'
+                + '#question-text mark,#options-container mark{background:#fde68a;color:inherit;border-radius:4px;padding:0 2px}'
+                + '#qz-selbar{position:fixed;z-index:100060;display:none;gap:6px;align-items:center;justify-content:center;max-width:calc(100vw - 16px)}'
+                + '#qz-selbar button{border:0;border-radius:999px;padding:7px 12px;color:#fff;font:700 13px system-ui,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer;white-space:nowrap}'
+                + '#qz-selbar .q-hl{background:#d97706}';
+            document.head.appendChild(qzCss);
+            let qzBar = null, qzMark = null;
+            function qzIn(node) {
+                const el = node ? (node.nodeType === 1 ? node : node.parentElement) : null;
+                if (!el) return null;
+                const q = document.getElementById('question-text'), o = document.getElementById('options-container');
+                if (q && q.contains(el)) return q;
+                if (o && o.contains(el)) return o;
+                return null;
             }
-            const range = selection.getRangeAt(0);
-            const qTextEl = document.getElementById('question-text');
-            const optionsContainer = document.getElementById('options-container');
-
-            let targetEl = null;
-            if (qTextEl.contains(range.commonAncestorContainer)) {
-                targetEl = qTextEl;
-            } else if (optionsContainer.contains(range.commonAncestorContainer)) {
-                targetEl = range.commonAncestorContainer.nodeType === 3 ? range.commonAncestorContainer.parentElement.closest('button') : range.commonAncestorContainer.closest('button');
+            function qzEnsure() {
+                if (qzBar) return qzBar;
+                qzBar = document.createElement('div'); qzBar.id = 'qz-selbar';
+                qzBar.innerHTML = '<button type="button" class="q-hl">🖍 Highlight</button>';
+                qzBar.addEventListener('mousedown', function (e) { e.preventDefault(); });
+                qzBar.addEventListener('touchstart', function (e) { e.stopPropagation(); }, { passive: true });
+                qzBar.querySelector('.q-hl').onclick = function () { qzToggle(); };
+                document.body.appendChild(qzBar);
+                return qzBar;
             }
-
-            if (!targetEl) {
-                showToast("Vui lòng chọn văn bản bên trong câu hỏi hoặc các đáp án!");
-                return;
+            function qzHide() { if (qzBar) qzBar.style.display = 'none'; qzMark = null; }
+            function qzPaint(hlOn) { qzEnsure().querySelector('.q-hl').textContent = hlOn ? '🧽 Xóa highlight' : '🖍 Highlight'; }
+            function qzRect(r, el) {
+                if (r && typeof r.getBoundingClientRect === 'function') return r.getBoundingClientRect();
+                return el && el.getBoundingClientRect ? el.getBoundingClientRect() : { top: 0, bottom: 0, left: 0, right: 0, width: 0, height: 0 };
             }
-
-            try {
-                const span = document.createElement('mark');
-                span.className = 'bg-yellow-200 text-yellow-900 rounded px-1 font-inherit';
-                const contents = range.extractContents();
-                span.appendChild(contents);
-                range.insertNode(span);
-                selection.removeAllRanges();
-
-                if (targetEl === qTextEl) {
-                    questionStates[currentIndex].customQuestionHtml = qTextEl.innerHTML;
-                } else {
-                    questionStates[currentIndex].customOptionsHtml = optionsContainer.innerHTML;
+            function qzPlace(rc) {
+                const b = qzEnsure(); b.style.display = 'flex';
+                const w = b.offsetWidth || 150, top = rc.top - b.offsetHeight - 8;
+                b.style.top = Math.max(8, Math.min(innerHeight - b.offsetHeight - 8, top < 8 ? rc.bottom + 12 : top)) + 'px';
+                b.style.left = Math.max(8, Math.min(innerWidth - w - 8, rc.left + rc.width / 2 - w / 2)) + 'px';
+            }
+            function qzUnwrap(m) { const p = m.parentNode; if (!p) return; while (m.firstChild) p.insertBefore(m.firstChild, m); p.removeChild(m); p.normalize(); }
+            function qzSave(c) {   // lưu vào trạng thái câu hỏi để lần sau mở lại vẫn còn highlight
+                if (!c || typeof questionStates === 'undefined' || !questionStates[currentIndex]) return;
+                if (c.id === 'question-text') questionStates[currentIndex].customQuestionHtml = c.innerHTML;
+                else questionStates[currentIndex].customOptionsHtml = c.innerHTML;
+            }
+            function qzToggle() {
+                const s = window.getSelection();
+                if (qzMark) { const c = qzIn(qzMark); qzUnwrap(qzMark); qzSave(c); showToast('🧽 Đã xóa highlight'); qzHide(); return; }
+                if (!s || !s.rangeCount || s.isCollapsed) { qzHide(); return; }
+                const r = s.getRangeAt(0), n = r.commonAncestorContainer, el = n.nodeType === 1 ? n : n.parentElement;
+                const c = qzIn(n);
+                const ex = el && el.closest ? el.closest('#question-text mark, #options-container mark') : null;
+                if (ex) { qzUnwrap(ex); showToast('🧽 Đã xóa highlight'); }
+                else {
+                    const m = document.createElement('mark'); m.className = 'qz-hl';
+                    try { r.surroundContents(m); }
+                    catch (e) {
+                        try { m.appendChild(r.extractContents()); r.insertNode(m); }
+                        catch (e2) { showToast('Không thể highlight vùng chọn này. Hãy bôi đen gọn trong một dòng.'); qzHide(); return; }
+                    }
+                    showToast('🖍 Đã highlight phần văn bản được chọn!');
                 }
-                showToast("Đã highlight phần văn bản được chọn!");
-            } catch (err) {
-                showToast("Không thể highlight vùng chọn này. Hãy bôi đen gọn trong một dòng.");
+                s.removeAllRanges(); qzSave(c); qzHide();
             }
-        }
-
-        function clearHighlightCurrent() {
-            questionStates[currentIndex].customQuestionHtml = null;
-            questionStates[currentIndex].customOptionsHtml = null;
-            loadQuestion();
-            showToast("Đã xóa highlight câu này!");
-        }
+            function qzCheck() {
+                const s = window.getSelection();
+                if (!s || !s.rangeCount || s.isCollapsed) { if (!qzMark) qzHide(); return; }
+                const t = s.toString().trim();
+                if (!qzIn(s.anchorNode) || !qzIn(s.focusNode) || t.length < 2) { qzHide(); return; }
+                qzMark = null;
+                const r = s.getRangeAt(0), n = r.commonAncestorContainer, el = n.nodeType === 1 ? n : n.parentElement;
+                const inM = !!(el && el.closest && el.closest('#question-text mark, #options-container mark'));
+                qzPaint(inM);
+                qzPlace(qzRect(r, el));
+            }
+            document.addEventListener('mouseup', function () { setTimeout(qzCheck, 30); });
+            document.addEventListener('keyup', function () { setTimeout(qzCheck, 30); });
+            document.addEventListener('touchend', function () { setTimeout(qzCheck, 80); }, { passive: true });
+            document.addEventListener('click', function (e) {   // bấm vào chữ đã highlight: chỉ hiện nút Xóa highlight, không chọn đáp án
+                const t = e.target;
+                if (!t || !t.closest) return;
+                const m = t.closest('#question-text mark, #options-container mark');
+                if (m) { e.preventDefault(); e.stopPropagation(); qzMark = m; qzPaint(true); qzPlace(m.getBoundingClientRect()); return; }
+                if (qzBar && qzBar.style.display !== 'none' && !t.closest('#qz-selbar')) qzHide();
+            }, true);
+            window.qzSetFs = function (v) {   // kéo để đổi cỡ chữ câu hỏi và đáp án, nhớ lại lần sau
+                v = Math.max(80, Math.min(200, +v || 100));
+                document.documentElement.style.setProperty('--qz-fs', (v / 100).toFixed(2));
+                const r = document.getElementById('qz-fs'); if (r && +r.value !== v) r.value = v;
+                const l = document.getElementById('qz-fs-v'); if (l) l.textContent = v + '%';
+                try { localStorage.setItem('qz_fs', String(v)); } catch (e) {}
+            };
+            let qzFs0 = 100; try { qzFs0 = +localStorage.getItem('qz_fs') || 100; } catch (e) {}
+            window.qzSetFs(qzFs0);
+        })();
 
         function openQuestionNavigatorModal() {
             const grid = document.getElementById('navigator-grid');
@@ -8336,12 +8384,12 @@ function renderSavedQuizzes() {
                     ? `📂 ${subject.subFolders.length} phân môn${subject.hasVideoTxt ? ' · 🎬' : ''}`
                     : '🎬 Bài giảng Video';
                 card.innerHTML = `
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 mb-2 rounded-xl overflow-hidden bg-blue-50 p-1.5 flex items-center justify-center border border-blue-100 group-hover:scale-105 transition-transform">
+                    <div class="w-20 h-20 sm:w-24 sm:h-24 mb-3 rounded-2xl overflow-hidden bg-blue-50 p-1.5 flex items-center justify-center border border-blue-100 group-hover:scale-105 transition-transform">
                         ${iconTag(subject, 'max-w-full max-h-full object-contain', subject.name, '📚')}
                     </div>
                     <div class="w-full">
-                        <div class="font-extrabold text-xs sm:text-sm text-gray-800 group-hover:text-blue-700 line-clamp-2 leading-tight"></div>
-                        <div class="text-[10px] sm:text-xs text-gray-400 mt-1">${info}</div>
+                        <div class="font-extrabold text-sm sm:text-lg text-gray-800 group-hover:text-blue-700 line-clamp-2 leading-tight"></div>
+                        <div class="text-xs sm:text-sm text-gray-500 mt-1">${info}</div>
                     </div>
                 `;
                 card.querySelector('.line-clamp-2').textContent = subject.name;
@@ -10673,7 +10721,7 @@ function bkOpenAi() {
             iconEl.dataset.base = subject.iconBase || ''; iconEl.dataset.i = '0'; iconEl.dataset.emoji = '📚';
             iconEl.onerror = function () { iconFallback(this); };
             iconEl.src = subject.icon;
-            document.getElementById('sc-course-sub').textContent = subject.hasPhanMon ? ('Gồm ' + subject.subFolders.length + ' phân môn' + (subject.hasVideoTxt ? ' · video bài giảng' : '')) : 'Video bài giảng';
+            const scb = document.getElementById('sc-course-sub'); if (scb) { scb.textContent = subject.hasPhanMon ? String(subject.subFolders.length) : ''; scb.style.display = subject.hasPhanMon ? '' : 'none'; }
             const sb = document.getElementById('sc-shelf-btn'); if (sb) sb.classList.remove('opacity-60');
             bkPrepare(subject);
             bkReady.then(list => { if (scSubject === subject && sb && !(list && list.length)) sb.classList.add('opacity-60'); });
@@ -10726,14 +10774,17 @@ function bkOpenAi() {
             if (showSubs) {
                 phanMonContainer.classList.remove('hidden');
                 phanMonGrid.innerHTML = '';
+                window.rhmApplyOrder && window.rhmApplyOrder(subject.subFolders, 'rhm_order_phan:' + subject.name, s => s.name);
                 subject.subFolders.forEach(sub => {
                     const pmBtn = document.createElement('div');
+                    pmBtn.setAttribute('data-rdk', sub.name);
                     pmBtn.onclick = () => openMonHocDetail(sub, subject);
                     pmBtn.className = 'bg-purple-50 hover:bg-purple-100 border border-purple-200 p-3 rounded-xl cursor-pointer flex items-center gap-2.5 transition-all active:scale-95 shadow-sm';
                     pmBtn.innerHTML = `${iconTag(sub, 'w-9 h-9 object-contain rounded-lg shrink-0', sub.name, '📖')}<span class="min-w-0 flex-1 text-sm font-bold text-purple-900 break-words leading-snug"></span>`;
                     pmBtn.querySelector('span').textContent = sub.name;
                     phanMonGrid.appendChild(pmBtn);
                 });
+                try { window.rhmDragPhan && window.rhmDragPhan(phanMonGrid, subject); } catch (e) {}
             } else {
                 phanMonContainer.classList.add('hidden');
             }
@@ -13648,8 +13699,8 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
 
             <div id="ai-quickrow" class="px-4 pt-2 flex items-start gap-2 bg-white border-t">
             <div id="ai-quick" class="flex-1 min-w-0 flex gap-2 overflow-x-auto whitespace-nowrap">
-                <button onclick="aiQuick('Giải thích vì sao đáp án đúng là đúng.')" class="shrink-0 text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 rounded-full px-3 py-1.5">💡 Vì sao đáp án đúng?</button>
-                <button onclick="aiQuick('Phân tích vì sao từng đáp án còn lại sai.')" class="shrink-0 text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 rounded-full px-3 py-1.5">🚫 Vì sao các đáp án kia sai?</button>
+                <button onclick="aiQuick('Giải thích vì sao đáp án đúng là đúng.')" class="shrink-0 text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 rounded-full px-3 py-1.5">💡 Giải thích câu đúng</button>
+                <button onclick="aiQuick('Phân tích vì sao từng đáp án còn lại sai.')" class="shrink-0 text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 rounded-full px-3 py-1.5">🚫 Giải thích câu sai</button>
                 <button onclick="aiQuick('Cho mình mẹo ghi nhớ và một ví dụ lâm sàng ngắn liên quan.')" class="shrink-0 text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full px-3 py-1.5">🧠 Mẹo nhớ / ví dụ</button>
             </div>
             </div>
@@ -14208,8 +14259,8 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     }
     function aiSetStatus(t) { document.getElementById('ai-live-status').textContent = t; }
 
-    const AI_QUICK_QUIZ = [['Giải thích vì sao đáp án đúng là đúng.', '💡 Vì sao đúng?', 'bg-indigo-50 text-indigo-700 border-indigo-200'], ['', '🔬 Tìm hiểu sâu', 'bg-sky-50 text-sky-700 border-sky-200', 'deep'], ['Phân tích vì sao từng đáp án còn lại sai.', '🚫 Vì sao kia sai?', 'bg-rose-50 text-rose-700 border-rose-200'], ['Cho mình mẹo ghi nhớ và một ví dụ lâm sàng ngắn liên quan.', '🧠 Mẹo nhớ / ví dụ', 'bg-emerald-50 text-emerald-700 border-emerald-200'], ['', '🎓 Học Tập có hướng dẫn', 'bg-violet-50 text-violet-700 border-violet-200', 'guided']];
-    const AI_QUICK_VIDEO = [['Hãy lập mục lục nội dung video theo mốc thời gian, từ đầu đến cuối, không bỏ sót đoạn chính nào. Mở đầu bằng 1–2 câu tổng quan. Sau đó trình bày mục lục PHÂN CẤP có đánh số như mục lục sách: mục lớn đánh số 1., 2., 3., …; mục con đánh số 1.1, 1.2, …, 2.1, 2.2, … (tối đa 2 cấp; tách mục con khi một mục lớn có nhiều ý rõ rệt). Mỗi mục một dòng, đúng dạng: <số thứ tự> [mm:ss] Tên mục — các ý chính của đoạn đó trong 3–4 câu đầy đủ ý (nêu lần lượt các ý chính nối tiếp nhau trong đoạn, giữ lại thuật ngữ, số liệu quan trọng; mục lớn lẫn mục con đều viết 3–4 câu). Mốc thời gian tăng dần theo thứ tự số. Không thêm phần kết luận hay ý cần nhớ ở cuối. Mục lục chỉ tóm lược nội dung video nên KHÔNG trích dẫn tài liệu, không gắn nguồn hay link.', '📑 Mục lục theo thời gian', 'bg-indigo-50 text-indigo-700 border-indigo-200', 'timeline'], ['Giải thích dễ hiểu đoạn mình đang xem.', '🎯 Giải thích đoạn đang xem', 'bg-rose-50 text-rose-700 border-rose-200', 'explain'], ['', '🖼️ Hỏi hình ảnh đang hiện', 'bg-amber-50 text-amber-700 border-amber-200', 'frame'], ['', '🔬 Tìm hiểu sâu', 'bg-sky-50 text-sky-700 border-sky-200', 'deep'], ['', '📝 Trắc nghiệm', 'bg-emerald-50 text-emerald-700 border-emerald-200', 'vidquiz'], ['', '🎓 Học Tập có hướng dẫn', 'bg-violet-50 text-violet-700 border-violet-200', 'guided']];
+    const AI_QUICK_QUIZ = [['Giải thích vì sao đáp án đúng là đúng.', '💡 Giải thích câu đúng', 'bg-indigo-50 text-indigo-700 border-indigo-200'], ['Phân tích vì sao từng đáp án còn lại sai.', '🚫 Giải thích câu sai', 'bg-rose-50 text-rose-700 border-rose-200'], ['', '🔬 Tìm hiểu sâu', 'bg-sky-50 text-sky-700 border-sky-200', 'deep'], ['Cho mình mẹo ghi nhớ và một ví dụ lâm sàng ngắn liên quan.', '🧠 Mẹo nhớ / ví dụ', 'bg-emerald-50 text-emerald-700 border-emerald-200'], ['', '🎓 Học Tập có hướng dẫn', 'bg-violet-50 text-violet-700 border-violet-200', 'guided']];
+    const AI_QUICK_VIDEO = [['Hãy lập mục lục nội dung video theo mốc thời gian, từ đầu đến cuối, không bỏ sót đoạn chính nào. Mở đầu bằng 1–2 câu tổng quan. Sau đó trình bày mục lục PHÂN CẤP có đánh số như mục lục sách: mục lớn đánh số 1., 2., 3., …; mục con đánh số 1.1, 1.2, …, 2.1, 2.2, … (tối đa 2 cấp; tách mục con khi một mục lớn có nhiều ý rõ rệt). Mỗi mục một dòng, đúng dạng: <số thứ tự> [mm:ss] Tên mục — các ý chính của đoạn đó trong 3–4 câu đầy đủ ý (nêu lần lượt các ý chính nối tiếp nhau trong đoạn, giữ lại thuật ngữ, số liệu quan trọng; mục lớn lẫn mục con đều viết 3–4 câu). Mốc thời gian tăng dần theo thứ tự số. Không thêm phần kết luận hay ý cần nhớ ở cuối. Mục lục chỉ tóm lược nội dung video nên KHÔNG trích dẫn tài liệu, không gắn nguồn hay link.', '📑 Mục lục theo thời gian', 'bg-indigo-50 text-indigo-700 border-indigo-200', 'timeline'], ['Giải thích dễ hiểu đoạn mình đang xem.', '🎯 Giải thích đoạn đang xem', 'bg-rose-50 text-rose-700 border-rose-200', 'explain'], ['', '🖼️ Hỏi hình ảnh đang hiện', 'bg-amber-50 text-amber-700 border-amber-200', 'frame'], ['', '📝 Trắc nghiệm', 'bg-emerald-50 text-emerald-700 border-emerald-200', 'vidquiz'], ['', '🎓 Học Tập có hướng dẫn', 'bg-violet-50 text-violet-700 border-violet-200', 'guided']];
     function aiRenderQuick(list) {
         aiState.guided = false;
         const box = document.getElementById('ai-quick'); box.innerHTML = '';
@@ -14984,7 +15035,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         if (!src) { showToast('Hãy dịch một đoạn sách trước để chú thích / giải thích'); return; }
         const gloss = (typeof window.rhmDictGlossary === 'function') ? window.rhmDictGlossary(src, true) : '';
         aiState.guided = false;
-        aiState.showText = '🎯 Chú thích đoạn vừa dịch';
+        aiState.showText = '🎯 Giải thích đoạn vừa dịch';
         document.getElementById('ai-input').value = 'Hãy chú thích và giải thích thật dễ hiểu, rõ ràng các ý chính, thuật ngữ chuyên môn, cơ chế và ý nghĩa lâm sàng của đoạn sách vừa dịch dưới đây:\n\n' + src.slice(0, 8000) + '\n\n' + BK_TR_GLOSS + gloss;
         aiSend();
     }
@@ -15752,7 +15803,7 @@ function aiEnsureQuickTts() {   // Thứ tự nút nhanh ở boxchat reader từ
         const isBook = !!(aiState.mode === 'book' && bkCur);
         let eb = document.getElementById('bk-exp-quick');
         if (!eb) { eb = document.createElement('button'); eb.id = 'bk-exp-quick'; eb.type = 'button'; eb.className = 'shrink-0 whitespace-nowrap text-xs font-bold border rounded-full px-3 py-1.5 bg-rose-50 text-rose-700 border-rose-200 shadow-sm active:scale-95'; eb.onclick = bkExplainQuick; }
-        eb.textContent = '🎯 Chú thích'; eb.title = 'Chú thích và giải thích dễ hiểu đoạn vừa dịch';
+        eb.textContent = '🎯 Giải thích'; eb.title = 'Giải thích dễ hiểu đoạn vừa dịch';
         eb.classList.toggle('hidden', !isBook);
 
         let ib = document.getElementById('bk-img-quick');
@@ -20183,7 +20234,7 @@ function moveEdActs() {
         return String(s || '').split(/(\[\[img:\d+\]\])/).map(function (p) {
             const m = p.match(/^\[\[img:(\d+)\]\]$/);
             if (m) { const k = +m[1]; if (!im || !im[k]) return ''; return '<img class="nt-ed-img" src="' + im[k] + '" alt=""' + (ed ? ' data-k="' + k + '" contenteditable="false"' : '') + '>'; }
-            return esc(p);
+            return esc(p).replace(/\u0001/g, '<mark class="nt-hl">').replace(/\u0002/g, '</mark>').replace(/\u0003([^\u0004]*)\u0004/g, function (m, q) { return '<span class="nt-qnote" contenteditable="false" data-qn="' + q + '" title="' + q + '">📝</span>'; }).replace(/\u0003[^\u0004]*$/, '').replace(/^[^\u0003]*\u0004/, '').replace(/[\u0001\u0002]/g, '');
         }).join('');
     }
     function serialBody(root) {
@@ -20194,6 +20245,8 @@ function moveEdActs() {
                 if (c.nodeType !== 1) return;
                 const tg = c.tagName;
                 if (tg === 'IMG') { const k = c.getAttribute('data-k'); if (k !== null) s += '[[img:' + k + ']]'; }
+                else if (tg === 'MARK') { s += '\u0001'; walk(c); s += '\u0002'; }
+                else if (tg === 'SPAN' && c.classList && c.classList.contains('nt-qnote')) { const q = c.getAttribute('data-qn') || ''; if (q) s += '\u0003' + q + '\u0004'; }
                 else if (tg === 'BR') s += '\n';
                 else { if ((tg === 'DIV' || tg === 'P') && s && !/\n$/.test(s)) s += '\n'; walk(c); }
             });
@@ -20259,7 +20312,7 @@ function moveEdActs() {
         const comp = compactImgs(raw, nt.edIm || []);
         if (!comp.b.trim() && !comp.im.length) { toast('Nội dung ghi chú không được để trống'); return; }
         if (t !== n.t) n.tu = 1; if (c !== n.cat) n.cu = 1;
-        n.t = t || quickTitle(comp.b.replace(/\[\[img:\d+\]\]/g, '').trim() || 'Ảnh');
+        n.t = t || quickTitle(comp.b.replace(/\u0003[^\u0004]*\u0004/g, '').replace(/[\u0001\u0002]/g, '').replace(/\[\[img:\d+\]\]/g, '').trim() || 'Ảnh');
         n.b = comp.b; n.cat = c; n.im = comp.im;
         closePop(); nt.edId = null; nt.ed = null; nt.edIm = null; nt.edB = ''; nt.edRange = null;
         save(); repaginate(n.id); toast('Đã lưu ghi chú');
@@ -20285,6 +20338,167 @@ function moveEdActs() {
         nt.isNew = true; nt.ed = n; nt.editIm = [];
         paintThumbs();
     }
+    /* ===== Tô đen trong Sổ ghi chú (giống trình đọc sách): Dịch · Thêm từ điển · Ghi chú nhanh (bong bóng như từ điển) · Highlight ===== */
+    (function () {
+        const ncss = document.createElement('style');
+        ncss.textContent = '#nt-selbar{position:fixed;z-index:100060;display:none;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:calc(100vw - 16px)}'
+            + '#nt-selbar button{border:0;border-radius:999px;padding:7px 12px;color:#fff;font:700 13px system-ui,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer;white-space:nowrap}'
+            + '#nt-selbar .n-tr{background:#4f46e5}#nt-selbar .n-dc{background:#0369a1}#nt-selbar .n-nt{background:#0f766e}#nt-selbar .n-hl{background:#d97706}'
+            + '#note-modal mark.nt-hl{background:#fde68a;color:inherit;border-radius:3px;padding:0 1px}'
+            + '#note-modal .nt-qnote{display:inline-block;margin:0 2px;padding:0 3px;font-size:.9em;border-radius:6px;background:#ccfbf1;cursor:pointer;user-select:none;-webkit-user-select:none}'
+            + '#nt-nbub{position:fixed;z-index:100065;display:none;width:min(340px,calc(100vw - 16px));box-sizing:border-box;background:#fff;border:2px solid #0d9488;border-radius:14px;padding:11px 13px;box-shadow:0 14px 34px rgba(0,0,0,.38);font-family:system-ui,sans-serif;-webkit-user-select:text;user-select:text}'
+            + '#nt-nbub .nb-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;font-weight:800;font-size:14px;color:#115e59;margin-bottom:6px}'
+            + '#nt-nbub .nb-x{border:0;background:transparent;font-size:16px;font-weight:900;color:#6b7280;cursor:pointer;padding:0 4px;line-height:1}'
+            + '#nt-nbub .nb-q{font-size:12px;line-height:1.4;color:#475569;background:#f0fdfa;border-left:3px solid #2dd4bf;border-radius:6px;padding:4px 8px;margin-bottom:8px;max-height:56px;overflow:hidden;font-style:italic}'
+            + '#nt-nbub textarea{width:100%;box-sizing:border-box;min-height:84px;max-height:240px;resize:vertical;border:1.5px solid #99f6e4;border-radius:10px;padding:8px 10px;font:14px/1.5 system-ui,sans-serif;color:#1f1d2b;outline:none;-webkit-user-select:text;user-select:text}'
+            + '#nt-nbub textarea:focus{border-color:#0d9488}'
+            + '#nt-nbub .nb-ft{display:flex;justify-content:space-between;gap:8px;margin-top:8px}'
+            + '#nt-nbub .nb-ft button{border:0;border-radius:999px;padding:7px 14px;font:800 13px system-ui,sans-serif;cursor:pointer}'
+            + '#nt-nbub .nb-cl{background:#e5e7eb;color:#374151}#nt-nbub .nb-ok{background:#0f766e;color:#fff}#nt-nbub .nb-del{background:#fee2e2;color:#b91c1c}';
+        document.head.appendChild(ncss);
+        let nBar = null, nTxt = '', nb = null, nbSpan = null, nbMark = null, nbNew = false;
+        function nEnsure() {
+            if (nBar) return nBar;
+            nBar = document.createElement('div'); nBar.id = 'nt-selbar';
+            nBar.innerHTML = '<button type="button" class="n-tr">🌐 Dịch</button><button type="button" class="n-dc">📖 Thêm từ điển</button><button type="button" class="n-nt">📝 Ghi chú nhanh</button><button type="button" class="n-hl">🖍 Highlight</button>';
+            nBar.addEventListener('mousedown', function (e) { e.preventDefault(); });
+            nBar.addEventListener('click', function (e) { e.stopPropagation(); });
+            nBar.querySelector('.n-tr').onclick = function () { const t = nTxt; nHide(); if (t) aiQuick('Dịch sang tiếng Việt, giữ nguyên thuật ngữ chuyên môn, rồi giải thích ngắn gọn đoạn sau:\n"' + t + '"'); };
+            nBar.querySelector('.n-dc').onclick = function () { const t = nTxt; nHide(); if (t && window.rhmDictAddWord) window.rhmDictAddWord(t.replace(/\s+/g, ' ').trim(), 'Sổ ghi chú RHM'); };
+            nBar.querySelector('.n-nt').onclick = function () { nNewNote(); };
+            nBar.querySelector('.n-hl').onclick = function () { nToggle(); };
+            document.body.appendChild(nBar);
+            return nBar;
+        }
+        function nHide() { if (nBar) nBar.style.display = 'none'; nTxt = ''; }
+        function nRect(r, el) {
+            if (r && typeof r.getBoundingClientRect === 'function') return r.getBoundingClientRect();
+            return el && el.getBoundingClientRect ? el.getBoundingClientRect() : { top: 0, bottom: 0, left: 0, right: 0, width: 0, height: 0 };
+        }
+        function nUnwrap(m) { const p = m.parentNode; if (!p) return; while (m.firstChild) p.insertBefore(m.firstChild, m); p.removeChild(m); p.normalize(); }
+        function nCheck() {
+            const body = document.getElementById('nt-ed-body'), s = window.getSelection();
+            if (!body || !s || !s.rangeCount || s.isCollapsed || !body.contains(s.anchorNode) || !body.contains(s.focusNode)) { nHide(); return; }
+            const t = s.toString().trim();
+            if (t.length < 2) { nHide(); return; }
+            nTxt = t;
+            const r = s.getRangeAt(0), n = r.commonAncestorContainer, el = n.nodeType === 1 ? n : n.parentElement;
+            const b = nEnsure();
+            b.querySelector('.n-hl').textContent = (el && el.closest && el.closest('mark.nt-hl')) ? '🧽 Xóa highlight' : '🖍 Highlight';
+            b.style.display = 'flex';
+            const rc = nRect(r, el), w = b.offsetWidth || 320, top = rc.top - b.offsetHeight - 8;
+            b.style.top = Math.max(8, Math.min(innerHeight - b.offsetHeight - 8, top < 8 ? rc.bottom + 12 : top)) + 'px';
+            b.style.left = Math.max(8, Math.min(innerWidth - w - 8, rc.left + rc.width / 2 - w / 2)) + 'px';
+        }
+        function nToggle() {
+            const s = window.getSelection();
+            if (!s || !s.rangeCount || s.isCollapsed) { nHide(); return; }
+            const r = s.getRangeAt(0), n = r.commonAncestorContainer, el = n.nodeType === 1 ? n : n.parentElement;
+            const ex = el && el.closest ? el.closest('mark.nt-hl') : null;
+            if (ex) { nUnwrap(ex); toast('🧽 Đã xóa highlight'); }
+            else {
+                const m = document.createElement('mark'); m.className = 'nt-hl';
+                try { r.surroundContents(m); }
+                catch (e) {
+                    try { m.appendChild(r.extractContents()); r.insertNode(m); }
+                    catch (e2) { toast('Không thể highlight vùng chọn này. Hãy bôi đen gọn trong một đoạn.'); nHide(); return; }
+                }
+                toast('🖍 Đã highlight');
+            }
+            s.removeAllRanges(); nHide(); snapshotInline();
+        }
+        /* ----- Ghi chú nhanh: bong bóng nổi cạnh đoạn đã tô (giống bong bóng ghi chú của từ điển / trình đọc).
+                 Ghi chú nằm ngay trong nội dung ghi chú dưới dạng biểu tượng 📝, không tạo ghi chú mới ----- */
+        function nbEnsure() {
+            if (nb) return nb;
+            nb = document.createElement('div'); nb.id = 'nt-nbub';
+            nb.innerHTML = '<div class="nb-hd"><span>📝 Ghi chú nhanh</span><button type="button" class="nb-x">✕</button></div><div class="nb-q"></div><textarea rows="4" placeholder="Viết ghi chú cho đoạn này…"></textarea><div class="nb-ft"><button type="button" class="nb-cl">Đóng</button><button type="button" class="nb-del">Xóa</button><button type="button" class="nb-ok">💾 Lưu</button></div>';
+            ['mousedown', 'pointerdown', 'touchstart', 'click'].forEach(function (ev) { nb.addEventListener(ev, function (e) { e.stopPropagation(); }); });
+            nb.querySelector('.nb-cl').onclick = function () { nbCancel(); };
+            nb.querySelector('.nb-x').onclick = function () { nbCancel(); };
+            nb.querySelector('.nb-ok').onclick = function () { nbSave(); };
+            nb.querySelector('.nb-del').onclick = function () { nbDelete(); };
+            nb.querySelector('textarea').addEventListener('keydown', function (e) {
+                e.stopPropagation();
+                if (e.key === 'Escape') { e.preventDefault(); nbCancel(); }
+                else if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); nbSave(); }
+            });
+            document.body.appendChild(nb);
+            return nb;
+        }
+        function nbShown() { return !!nb && nb.style.display === 'block'; }
+        function nbPlace(el) {
+            const b = nbEnsure(), rc = el.getBoundingClientRect(), w = b.offsetWidth || 320, h = b.offsetHeight || 200;
+            let left = rc.left + rc.width / 2 - w / 2, top = rc.top - h - 10;
+            if (top < 8) top = rc.bottom + 10;
+            b.style.left = Math.max(8, Math.min(innerWidth - w - 8, left)) + 'px';
+            b.style.top = Math.max(8, Math.min(innerHeight - h - 8, top)) + 'px';
+        }
+        function nbOpen(sp, quote, isNew) {
+            const b = nbEnsure();
+            nbSpan = sp; nbNew = !!isNew;
+            b.querySelector('.nb-q').textContent = quote.length > 140 ? quote.slice(0, 140) + '…' : quote;
+            const ta = b.querySelector('textarea');
+            ta.value = isNew ? '' : (sp.getAttribute('data-qn') || '');
+            b.querySelector('.nb-del').style.display = isNew ? 'none' : '';
+            b.style.display = 'block'; nbPlace(sp);
+            setTimeout(function () { try { ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length); } catch (e) {} }, 30);
+        }
+        function nbClose() { if (nb) nb.style.display = 'none'; nbSpan = null; nbMark = null; nbNew = false; }
+        function nbRemoveSpan() { if (nbSpan && nbSpan.parentNode) nbSpan.parentNode.removeChild(nbSpan); }
+        function nbUndo() { nbRemoveSpan(); if (nbMark && nbMark.parentNode) nUnwrap(nbMark); }
+        function nbSave() {
+            if (!nbSpan) { nbClose(); return; }
+            const v = nb.querySelector('textarea').value.trim();
+            if (!v) {
+                if (nbNew) { nbUndo(); toast('Đã hủy ghi chú nhanh'); }
+                else { nbRemoveSpan(); toast('🗑 Đã xóa ghi chú nhanh'); }
+            } else {
+                nbSpan.setAttribute('data-qn', v); nbSpan.title = v;
+                toast('📝 Đã lưu ghi chú nhanh');
+            }
+            nbClose(); snapshotInline();
+        }
+        function nbCancel() { if (nbNew) nbUndo(); nbClose(); snapshotInline(); }
+        function nbDelete() { nbRemoveSpan(); nbClose(); snapshotInline(); toast('🗑 Đã xóa ghi chú nhanh'); }
+        function nNewNote() {
+            if (nbShown()) nbSave();
+            const s = window.getSelection(), body = document.getElementById('nt-ed-body');
+            if (!body || !s || !s.rangeCount || s.isCollapsed || !body.contains(s.anchorNode)) { nHide(); return; }
+            const quote = nTxt || s.toString().trim();
+            const r = s.getRangeAt(0);
+            const m = document.createElement('mark'); m.className = 'nt-hl';
+            try { r.surroundContents(m); }
+            catch (e) {
+                try { m.appendChild(r.extractContents()); r.insertNode(m); }
+                catch (e2) { toast('Không thể ghi chú vùng chọn này. Hãy bôi đen gọn trong một đoạn.'); nHide(); return; }
+            }
+            const sp = document.createElement('span'); sp.className = 'nt-qnote'; sp.setAttribute('contenteditable', 'false'); sp.textContent = '📝';
+            m.parentNode.insertBefore(sp, m.nextSibling);
+            s.removeAllRanges(); nHide();
+            nbMark = m;
+            nbOpen(sp, quote, true);
+        }
+        document.addEventListener('mousedown', function (e) {   // bấm ra ngoài bong bóng: lưu rồi đóng (như trình đọc)
+            if (!nbShown() || nb.contains(e.target)) return;
+            if (e.target && e.target.closest && e.target.closest('#nt-selbar')) return;
+            nbSave();
+        }, true);
+        document.addEventListener('click', function (e) {   // bấm vào biểu tượng 📝 của ghi chú đang soạn: mở bong bóng để sửa
+            const t = e.target;
+            if (!t || !t.closest) return;
+            const sp = t.closest('#nt-ed-body .nt-qnote');
+            if (!sp) return;
+            e.preventDefault(); e.stopPropagation();
+            let p = sp.previousSibling;
+            while (p && p.nodeType === 3 && !p.textContent.trim()) p = p.previousSibling;
+            nbMark = null;
+            nbOpen(sp, p && p.nodeName === 'MARK' ? p.textContent : '', false);
+        }, true);
+        document.addEventListener('mouseup', function () { setTimeout(nCheck, 30); });
+        document.addEventListener('keyup', function () { setTimeout(nCheck, 30); });
+        document.addEventListener('touchend', function () { setTimeout(nCheck, 80); }, { passive: true });
+    })();
     function openEdit(id) { startInline(id); }
     document.addEventListener('selectionchange', function () { if (nt.edId) rememberRange(); });
     document.addEventListener('input', function (e) { if (nt.edId && e.target && e.target.closest && e.target.closest('.nt-editing')) snapshotInline(); });
@@ -20711,6 +20925,17 @@ function moveEdActs() {
     .home-bar>.hb-set{margin-left:0}
     .home-bar>.hb-dev{grid-column:1/-1}
 }
+/* ===== v2 (vá 2): hàng nút trang chủ 2x2, nút Ôn tập to vừa màn hình ===== */
+.home-bar{display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px!important;width:100%}
+.home-bar>button{width:100%!important;min-height:56px;font-size:16px!important;padding:12px 10px!important;white-space:normal!important;margin:0!important;line-height:1.25}
+.home-bar>.hb-set{margin-left:0!important}
+#btn-toggle-monhoc,#btn-toggle-chuyende{width:100%!important;min-height:66px;font-size:19px!important;border-radius:18px!important}
+#btn-toggle-monhoc>span:first-child,#btn-toggle-chuyende>span:first-child{font-size:30px!important}
+#btn-toggle-monhoc>span:nth-child(2),#btn-toggle-chuyende>span:nth-child(2){font-size:19px!important;font-weight:900}
+#qb-row1>button,#btn-thi-thu,#qb-row3>button{width:100%!important;min-height:60px;font-size:17px!important;justify-content:center;white-space:normal!important}
+#btn-thi-thu{grid-column:1/-1}
+#qb-row3>button{font-size:16px!important}
+#phanmon-grid [data-rdk],#phanmon-grid [data-rdk] *{-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none!important}
 /* ===== Lật trang kiểu "app khác" (tờ giấy xoay 3D 0.7s, đổi nội dung ở giữa) ===== */
 #dict-modal .rd-book,#note-modal .rd-book{perspective:none!important}
 #dict-modal .rd-book.flip,#note-modal .rd-book.flip{perspective:1800px!important}
@@ -22096,6 +22321,26 @@ html.rhm-dragging,html.rhm-dragging body{-webkit-user-select:none;user-select:no
         var keys = Array.prototype.map.call(grid.querySelectorAll('[data-rdk]'), function (c) { return c.getAttribute('data-rdk'); });
         lsSet(KEY, keys);
         window.rhmApplyOrder(arr, KEY, function (s) { return s.name; });
+      }
+    });
+  };
+
+  /* --- Khóa học: kéo thả sắp xếp phân môn, lưu thứ tự theo từng môn --- */
+  window.rhmDragPhan = function (grid, subject) {
+    var KEY = 'rhm_order_phan:' + subject.name;
+    attach(grid, '[data-rdk]', {
+      start: function (it) { it.classList.add('rhm-dragsrc'); },
+      move: function (it, x, y) {
+        var el = document.elementFromPoint(x, y), over = el && el.closest && el.closest('#phanmon-grid [data-rdk]');
+        if (!over || over === it) return;
+        var after = (it.compareDocumentPosition(over) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0;
+        over.parentNode.insertBefore(it, after ? over.nextSibling : over);
+      },
+      end: function (it) {
+        it.classList.remove('rhm-dragsrc');
+        var keys = Array.prototype.map.call(grid.querySelectorAll('[data-rdk]'), function (c) { return c.getAttribute('data-rdk'); });
+        lsSet(KEY, keys);
+        window.rhmApplyOrder(subject.subFolders, KEY, function (s) { return s.name; });
       }
     });
   };
