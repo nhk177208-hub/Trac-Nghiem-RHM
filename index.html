@@ -10561,6 +10561,8 @@ function bkVisSystem() {
         + 'KHÔNG ĐƯỢC NHẬN DIỆN LÀ MỤC LỤC, và phải đưa vào "skip": Outline / Learning objectives / mục lục in sẵn của chương, hình ảnh, ảnh chụp, sơ đồ, chữ nằm trong hình, chú thích ảnh / hình (Figure, Fig., Hình), chú thích, bảng và tiêu đề bảng (Table, Bảng), biểu đồ, khung / hộp / ô rời khỏi mạch văn (Box, sidebar, Clinical Pearl, Key Points...), ghi chú lề, đầu trang, chân trang, số trang, tên tác giả.\n\n'
         + 'GHÉP ĐOẠN: nếu một đoạn văn bị hình / bảng / khung chèn làm tách, phần đầu và phần sau của đoạn đó vẫn là MỘT mạch văn liên tục dù cách nhau vài trang. Vì vậy phần chèn phải nằm trong "skip" để không chen vào mạch văn; mỗi tiêu đề chỉ ghi MỘT lần, tại nơi nó bắt đầu.\n\n'
         + 'TIÊU ĐỀ MỤC: chỉ là tiêu đề của mục nội dung nằm trong mạch văn chính, nhận biết qua cỡ chữ, in đậm / nghiêng / màu, viết hoa, khoảng cách trên-dưới và kiểu đánh số (1., 1.1, 1.1.1, A., a), i), (1)...). Tiêu đề in đậm đầu đoạn rồi chữ chạy tiếp cùng dòng vẫn nhận (box chỉ ôm phần in đậm). KHÔNG ghi tên chương (tiêu đề lớn ở trang đầu) và đầu / chân trang.\n'
+        + 'BẮT ĐỦ MỌI TIÊU ĐỀ (TUYỆT ĐỐI KHÔNG BỎ SÓT): nhận cả tiêu đề CHỈ MỘT TỪ (vd "Hue", "Value", "Gloss", "Enamel"); tiêu đề in MÀU (cam, xanh…) dù không in đậm; tiêu đề có NỀN XÁM / thanh kẻ ngang chạy hết cột; tiêu đề phụ nhỏ. Với tiêu đề chạy cùng dòng với đoạn văn (vd "Hue enables the distinction…") CHỈ ghi phần tiêu đề (vd "Hue"), tuyệt đối không ghi cả câu. Nếu một mục có nhiều tiêu đề con thì phải liệt kê HẾT các tiêu đề con đó.\n'
+        + 'KHÔNG NHẦM CHÚ THÍCH THÀNH TIÊU ĐỀ: chữ bắt đầu bằng "Figure / Fig. / Table / Tbl. / Box / Chart / Photo / Graph / Hình / Bảng / Biểu / Sơ đồ / Ảnh", mô tả hình dạng "(A) … (B) …", chữ nằm TRONG hình, nhãn trên hình, dòng nguồn / trích dẫn (http://…) là CHÚ THÍCH — KHÔNG đưa vào "headings" dù nó in đậm hay to hơn chữ thường, mà đưa vào "skip".\n\n'
         + 'PHÂN CẤP ("level" từ 1 đến 10): level 1 = mục lớn nhất trong chương (ngay dưới tên chương), level 2 = mục con của nó, v.v. Xác định cấp theo thứ bậc hình thức (cỡ chữ lớn → nhỏ, đậm → thường, số thứ tự lồng nhau); cùng kiểu trình bày thì cùng cấp xuyên suốt chương; cấp mới chỉ được lớn hơn cấp liền trước tối đa 1 (không nhảy cấp).\n\n'
         + 'TỌA ĐỘ: mọi box là [ymin, xmin, ymax, xmax] theo thang 0–1000 trên chính ảnh trang đó (0,0 là góc trên trái). Box tiêu đề phải ôm sát chữ của tiêu đề (gồm cả số thứ tự đầu dòng).\n'
         + 'BỐ CỤC: "zones" chia trang thành các dải liên tiếp từ trên xuống phủ kín 0–1000 theo chiều dọc; mỗi dải liệt kê các cột chữ [xmin, xmax] từ trái sang phải, mỗi cột phải phủ trọn bề ngang chữ của cột (kể cả phần thụt đầu dòng, số thứ tự). Trang một cột chỉ cần một dải một cột.\n'
@@ -10611,6 +10613,16 @@ async function bkAiReadWindow(shots, title, nTot, prevHeads, sub) {
     parts.push({ text: 'Hãy trả JSON đúng định dạng đã nêu.' });
     return bkVisCall(bkVisSystem(), parts);
 }
+/* Nhận diện chú thích hình/bảng để KHÔNG đưa vào mục lục (dù AI hay lọc chữ trả về) */
+function bkLooksCaption(t) {
+    t = String(t || '').replace(/\s+/g, ' ').trim();
+    if (t.length < 2) return true;
+    if (/^(fig(?:ure)?s?|tbl|table|box|chart|photo|graph|diagram|plate|hình|bảng|biểu|sơ\s*đồ|ảnh|chú\s*thích)\s*\.?\s*\d/i.test(t)) return true;
+    if (/^(fig(?:ure)?s?|tbl|table|box|chart|photo|graph|diagram|plate|hình|bảng|biểu|sơ\s*đồ|ảnh|chú\s*thích)\s*[.:]?\s*$/i.test(t)) return true;
+    if (/\b(fig(?:ure)?|tbl|table|box)\s*\.?\s*\d/i.test(t)) return true;
+    if (/^\(?[A-Fa-f]\)?[.)]\s/.test(t) && t.length < 80) return true;
+    return false;
+}
 /* Gom kết quả một đợt; chỉ nhận trang sau trang đã nhận ở đợt trước (phần gối nhau bỏ qua) */
 function bkAiCollect(r, lastPg, heads, lay, relBase) {
     const pgs = Array.isArray(r && r.pages) ? r.pages : [];
@@ -10619,7 +10631,7 @@ function bkAiCollect(r, lastPg, heads, lay, relBase) {
     pgs.forEach(p => { const n = parseInt(p && p.page, 10); if (n > lastPg && n >= 1 && n <= N) lay[n] = bkAiToLayout(p); });
     hs.forEach(h => {
         const n = parseInt(h && h.page, 10), en = String((h && (h.text || h.en || h.title)) || '').replace(/\s+/g, ' ').trim();
-        if (!(n > lastPg) || n > N || !en) return;
+        if (!(n > lastPg) || n > N || !en || bkLooksCaption(en)) return;
         const box = Array.isArray(h.box) && h.box.length >= 4 ? h.box.slice(0, 4).map(Number) : null;
         const prev = heads[heads.length - 1];
         if (prev && prev.page === n && bkNormStr(prev.en) === bkNormStr(en)) return;
@@ -10762,6 +10774,45 @@ async function bkRebuildSecs(tok) {   // định vị lại mọi tiêu đề tr
     return true;
 }
 /* (đã bỏ: áp kết quả theo từng nhóm trong lúc quét ngầm) */
+/* Bổ sung các tiêu đề in đậm / cỡ lớn mà AI bỏ sót, dựa vào chính chữ trong PDF (bkPages[].headCands).
+   Giúp mục lục không thiếu mục và một mục không "nuốt" tiêu đề con của nó. */
+function bkRecoverHeads() {
+    if (!bkPages || !bkPages.length || !bkHeads.length) return 0;
+    const seen = new Set();
+    bkHeads.forEach(h => { const k = bkNormStr(h.en).slice(0, 40); if (k) seen.add(k); });
+    const pageOf = s => { for (let i = 0; i < bkPages.length; i++) { const p = bkPages[i]; if (p && s >= p.gs && s < p.ge) return i + 1; } return 0; };
+    let added = 0;
+    bkPages.forEach(p => {
+        if (!p || !Array.isArray(p.headCands)) return;
+        const bfh = p.bfh || 11;
+        p.headCands.forEach(hc => {
+            const t = String(hc.text || '').replace(/\s+/g, ' ').trim();
+            if (t.length < 3 || t.length > 90 || bkLooksCaption(t)) return;
+            const isBig = hc.fh >= bfh * 1.08, isNum = /^(?:[IVXLC]+\.|[A-Z]\.|\d+(?:\.\d+)*\.?)\s+\S/.test(t);
+            if (!isBig && !isNum) return;
+            const key = bkNormStr(t).slice(0, 40);
+            if (!key || key.length < 3 || seen.has(key)) return;
+            const page = pageOf(hc.s); if (!page) return;
+            seen.add(key);
+            const mm = t.match(/^\d+(?:\.\d+)*/);
+            const depth = mm ? mm[0].split('.').length : (isBig ? 2 : 3);
+            bkHeads.push({ page: page, box: null, en: t, vi: '', lvl: Math.max(1, Math.min(10, depth)), recover: true, snip: bkNormStr(bkText.slice(hc.s, hc.s + 60)).slice(0, 40) });
+            added++;
+        });
+    });
+    return added;
+}
+/* Dịch (best-effort) tên các tiêu đề vừa bổ sung sang tiếng Việt; lỗi thì giữ nguyên tiếng Anh */
+async function bkRecoverTranslate() {
+    const pend = bkHeads.filter(h => h.recover && !h.vi);
+    if (!pend.length) return;
+    try {
+        const sys = 'Dịch tiêu đề sách nha khoa sang tiếng Việt, đúng thuật ngữ chuyên ngành, ngắn gọn. Trả về DUY NHẤT một mảng JSON các chuỗi bản dịch theo đúng thứ tự đầu vào, không thêm chữ nào khác.' + (typeof BK_TR_GLOSS === 'string' ? BK_TR_GLOSS : '');
+        const r = await bkVisCall(sys, [{ text: JSON.stringify(pend.map(h => h.en)) }]);
+        const arr = Array.isArray(r) ? r : (r && Array.isArray(r.vi) ? r.vi : (r && Array.isArray(r.translations) ? r.translations : null));
+        if (arr) pend.forEach((h, i) => { if (typeof arr[i] === 'string' && arr[i].trim()) h.vi = arr[i].replace(/\s+/g, ' ').trim().slice(0, 200); });
+    } catch (e) {}
+}
 async function bkTocRun(tok, my) {   // chụp toàn bộ chương → gửi AI theo đợt ảnh → gom bố cục + mục lục → ráp chữ
     const N = bkDoc.numPages, nums = [];
     for (let p = 1; p <= N; p++) nums.push(p);
@@ -10787,6 +10838,10 @@ async function bkTocRun(tok, my) {   // chụp toàn bộ chương → gửi AI 
     }
     bkTocSay('Đang ráp đoạn bị tách & định vị mục lục…');
     if ((await bkReextract(tok, my)) !== true) return false;
+    if (tok !== bkViewTok || my !== bkDeepTok) return false;
+    bkRecoverHeads();                                   // bù các tiêu đề in đậm/cỡ lớn mà AI bỏ sót
+    try { await bkRecoverTranslate(); } catch (e) {}
+    bkHeadsSave();
     if ((await bkRebuildSecs(tok)) !== true) return false;
     return true;
 }
@@ -10801,7 +10856,7 @@ function bkTocCollect(r, heads, lay) {
     heads.forEach(h => { seen[h.page + '|' + bkNormStr(h.en).slice(0, 40)] = 1; });
     (Array.isArray(r && r.headings) ? r.headings : []).forEach(h => {
         const n = parseInt(h && h.page, 10), en = String((h && (h.text || h.en || h.title)) || '').replace(/\s+/g, ' ').trim();
-        if (!(n >= 1 && n <= N) || !en) return;
+        if (!(n >= 1 && n <= N) || !en || bkLooksCaption(en)) return;
         const key = n + '|' + bkNormStr(en).slice(0, 40); if (seen[key]) return; seen[key] = 1;
         const box = Array.isArray(h.box) && h.box.length >= 4 ? h.box.slice(0, 4).map(Number) : null;
         heads.push({ page: n, box: (box && box.every(isFinite)) ? box : null, en: en.slice(0, 200), vi: String(h.vi || '').replace(/\s+/g, ' ').trim().slice(0, 200), lvl: Math.max(1, Math.min(10, parseInt(h.level, 10) || 1)) });
@@ -26448,6 +26503,7 @@ body {
         }
         var stripNum = function (t) { return String(t || '').replace(/^\s*(?:(?:chapter|chương|section|mục|phần|part)\s+)?(?:\d+(?:\.\d+)*|[IVXLC]+|[A-Za-z])[.)]\s*/i, ''); };
         var key = (bkNormStr(stripNum(h.en)).slice(0, 26)) || bkNormStr(h.en).slice(0, 26);
+        var skey = (key.length >= 4 || !h.snip) ? key : String(h.snip).slice(0, 26);   // tiêu đề ngắn (vd "Hue"): dò theo đoạn chữ đi kèm
         var boxS = null, boxTxt = '', data = pg.data || null;
         if (!data && h.box) {
             try { data = await bkPageData(pg); } catch (e) {}
@@ -26474,11 +26530,11 @@ body {
         }
 
         var search = function (pex) {
-            if (!pex || key.length < 4) return null;
+            if (!pex || skey.length < 4) return null;
             var slice = bkText.slice(pex.gs, pex.ge);
             var pn = getCachedPageNorm(slice), hits = [];
-            var p = pn.n.indexOf(key);
-            while (p >= 0 && hits.length < 30) { hits.push(pex.gs + pn.map[p]); p = pn.n.indexOf(key, p + 1); }
+            var p = pn.n.indexOf(skey);
+            while (p >= 0 && hits.length < 30) { hits.push(pex.gs + pn.map[p]); p = pn.n.indexOf(skey, p + 1); }
             if (!hits.length) return null;
             var s;
             if (boxS !== null && pex === ex) s = hits.slice().sort(function (a, b) { return Math.abs(a - boxS) - Math.abs(b - boxS); })[0];
