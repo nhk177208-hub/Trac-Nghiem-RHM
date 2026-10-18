@@ -27118,7 +27118,7 @@ body {
 .hf-spot-tip{position:fixed;z-index:100301;max-width:min(340px,92vw);display:flex;gap:8px;align-items:flex-start;background:#111827;color:#fff;border-radius:12px;padding:9px 10px 9px 12px;font-size:13px;font-weight:700;line-height:1.4;box-shadow:0 12px 30px rgba(0,0,0,.45);animation:hfPop .18s ease}
 .hf-spot-tip.hf-tour-tip{display:block;max-width:min(370px,92vw);padding:12px 14px;font-weight:500}
 .hf-tour-tip .tt{font-weight:900;font-size:14.5px;margin-bottom:5px}
-.hf-tour-tip .td{font-size:13px;line-height:1.55;color:#e5e7eb}
+.hf-tour-tip .td{font-size:13px;line-height:1.55;color:#e5e7eb;white-space:pre-line}
 .hf-spot-tip.hf-tour-tip{pointer-events:none;max-width:min(370px,calc(100vw - 124px))}
 .hf-tour-bar{position:fixed;left:0;right:0;bottom:0;height:0;z-index:100302;pointer-events:none}
 .hf-tour-bar .cnt{position:fixed;left:50%;transform:translateX(-50%);bottom:max(22px,calc(env(safe-area-inset-bottom) + 8px));color:#fff;font-weight:800;font-size:12px;background:rgba(17,24,39,.78);border-radius:9999px;padding:4px 11px}
@@ -27129,6 +27129,9 @@ body {
 .hf-tb-arrow:active{filter:brightness(.88)}
 .hf-tb-arrow[disabled]{opacity:.3;cursor:default}
 .hf-spot-hit.tour{cursor:default;touch-action:none}
+#hf-demo-selbar{position:fixed;z-index:100250;display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:calc(100vw - 16px);pointer-events:none}
+#hf-demo-selbar button{border:0;border-radius:999px;padding:7px 12px;color:#fff;font:700 13px system-ui,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.35);white-space:nowrap}
+#hf-demo-selbar .b-tr{background:#4f46e5}#hf-demo-selbar .b-dc{background:#0369a1}#hf-demo-selbar .b-nt{background:#0f766e}#hf-demo-selbar .b-hl{background:#d97706}#hf-demo-selbar .b-un{background:#b45309}
 /* Bước mở đầu: to, giữa màn hình, nền tối hơn */
 .hf-spot-box.big{box-shadow:0 0 0 9999px rgba(2,6,23,.86),0 0 0 3px rgba(255,255,255,.95),0 0 26px 9px rgba(99,102,241,.85)}
 .hf-spot-tip.hf-tour-tip.hf-tour-big{max-width:min(640px,calc(100vw - 116px));padding:22px 26px;border-radius:18px}
@@ -27375,7 +27378,7 @@ body {
             'KHI ĐỌC SÁCH: xem 2 trang như sách thật, phóng to, dịch, tra Từ điển, và mở 🤖 AI Chat để hỏi về sách.',
             '',
             'TÍNH NĂNG AI ("Hỏi AI") cần khóa API: mặc định Gemini (miễn phí), có thể thêm OpenRouter để dự phòng — nhập ở ⚙️ Cài đặt → 🔑 Cài đặt khóa API.',
-            'NÚT TRỢ LÝ AI NỔI: bấm vào sẽ hiện bánh xe 4 nút — ⏻ Tắt Trợ lý (cuối cùng, có xác nhận; mở lại ở ⚙️ Cài Đặt → 🤖 Trợ lý AI), ℹ️ Thông tin (giới thiệu lần lượt các nút trên màn hình chính), 🎙️ Chat live (nói chuyện bằng giọng nói), 💬 Chat (nhắn tin).',
+            'NÚT TRỢ LÝ AI NỔI: bấm vào sẽ hiện bánh xe 4 nút — ⏻ Tắt Trợ lý (cuối cùng, có xác nhận; mở lại ở ⚙️ Cài Đặt → 🤖 Trợ lý AI), ℹ️ Thông tin (giới thiệu lần lượt các nút trên màn hình chính; nếu đang xổ khu Ôn Tập Theo Môn Học / Chủ Đề thì giới thiệu nội dung bên trong khu đó), 🎙️ Chat live (nói chuyện bằng giọng nói), 💬 Chat (nhắn tin).',
             'Trợ lý AI (bạn) có 3 khả năng: (1) hỏi–đáp kiến thức về cách dùng app; (2) chiếu sáng và chỉ tận nơi một nút / bảng trên màn hình; (3) thực hiện thay người dùng một số thao tác.'
         ].join('\n');
     }
@@ -27802,7 +27805,7 @@ body {
 
     /* ------------------- giới thiệu lần lượt các nút trên màn hình chính ------------------- */
     var TOUR = [
-        { big: true, sel: '#home-fab', t: '🤖 Nút Trợ lý AI', d: 'Chào bạn 👋 Mình là Trợ lý AI của app — chính là nút này!\n\nBấm vào sẽ hiện 4 nút:\nℹ️ Thông tin — phần giới thiệu bạn đang xem, bấm lại bất cứ lúc nào ở màn hình chính.\n🎙️ Chat live — nói chuyện bằng giọng nói.\n💬 Chat — nhắn tin hỏi cách dùng app, chỉ tận nơi từng nút hoặc làm thay bạn vài thao tác.\n⏻ Tắt — ẩn Trợ lý AI (có hỏi lại cho chắc, và chỉ cách mở lại).\n\nKéo nút để đổi vị trí. Bật / tắt Trợ lý AI ở ⚙️ Cài Đặt → 🤖 Trợ lý AI.\n\nBấm mũi tên › để mình giới thiệu tiếp các nút trên màn hình chính nhé!' },
+        { big: true, sel: '#home-fab', t: '🤖 Nút Trợ lý AI', d: 'Chào bạn 👋 Mình là Trợ lý AI của app — chính là nút này!\n\nBấm vào sẽ hiện 4 nút:\nℹ️ Thông tin — phần giới thiệu bạn đang xem, bấm lại bất cứ lúc nào ở màn hình chính.\n🎙️ Chat live — nói chuyện bằng giọng nói.\n💬 Chat — nhắn tin hỏi cách dùng app, chỉ tận nơi từng nút hoặc làm thay bạn vài thao tác.\n⏻ Tắt — ẩn Trợ lý AI (có hỏi lại cho chắc, và chỉ cách mở lại).\n\nKéo nút để đổi vị trí. Bật / tắt Trợ lý AI ở ⚙️ Cài Đặt → 🤖 Trợ lý AI.\n\nChạm vào màn hình (hoặc bấm mũi tên ›) để mình giới thiệu tiếp các nút trên màn hình chính nhé!' },
         { key: 'bo-suu-tap', t: '🏆 Bộ Sưu Tập Huy Hiệu', d: 'Nơi lưu lại các huy hiệu bạn đạt được trong quá trình học và làm bài. Ôn đều đặn sẽ mở khóa thêm huy hiệu. Con số trên nút là số huy hiệu bạn đã có. Lần đầu bạn mở cửa sổ này, mình sẽ hướng dẫn ngay tại chỗ; muốn xem lại thì bấm nút ℹ️ của Trợ lý AI khi cửa sổ đang mở.' },
         { ctx: 'collection', sel: '#collection-modal h3', t: '🏆 Cửa sổ Bộ Sưu Tập', d: 'Đây là kho huy hiệu của bạn. Bạn có thể chọn một hoặc nhiều huy hiệu yêu thích để chúng nổi lên khi bạn đạt chuỗi trả lời đúng (Streak).' },
         { ctx: 'collection', sel: function () { var e = $id('collection-user-points'); return e && e.parentElement && e.parentElement.parentElement; }, t: '💰 Điểm Tích Lũy', d: 'Số điểm bạn kiếm được khi học và làm bài. Điểm này dùng để đổi lấy huy hiệu mới.' },
@@ -27840,9 +27843,11 @@ body {
         { ctx: 'settings', sel: '#btn-rhm-fs', t: '⛶ Toàn màn hình', d: 'Bật chế độ toàn màn hình để tập trung học. Khi đang bật, nút này đổi thành Thoát toàn màn hình.' },
         { ctx: 'settings', sel: '#btn-add-home', t: '📲 Thêm vào MH chính', d: 'Thêm app ra màn hình chính của điện thoại hoặc máy tính để mở nhanh như một ứng dụng.' },
 
-        { ctx: 'subject', sel: function () { var i = $id('sc-icon'); return i && i.parentElement; }, t: '📚 Cửa sổ chọn nội dung môn học', d: 'Mỗi môn học có hai nơi để vào: Tủ sách (Kệ Sách) và Khóa Học. Cửa sổ này cho bạn chọn một trong hai. Muốn xem lại phần này: bấm Trợ lý AI → ℹ️ khi cửa sổ đang mở.' },
-        { ctx: 'subject', sel: '#sc-shelf-btn', t: '📚 Kệ Sách (Tủ sách)', d: 'Tủ sách giáo trình của môn này. Mở sách, chọn chương rồi đọc ngay trong app; con số là số cuốn sách hiện có. Nút mờ nghĩa là môn này chưa có sách.' },
-        { ctx: 'subject', sel: '#sc-course-btn', t: '🎬 Khóa Học', d: 'Các khóa học và video bài giảng của môn này, kèm luyện câu hỏi theo môn. Nếu môn chia thành nhiều phân môn, con số là số khóa học bên trong.' },
+        { ctx: 'monhoc', sel: function () { var g = $id('monhoc-grid'); return g; }, t: '📚 Chọn môn học', d: 'Mỗi ô là một môn học. Bấm vào một ô để chọn môn đó — một cửa sổ phụ sẽ hiện ra cho bạn chọn vào Kệ Sách (Tủ sách) hoặc Khóa Học của môn. Muốn xem lại phần này: bấm Trợ lý AI → ℹ️ khi khu Môn Học đang xổ ra.' },
+        { ctx: 'monhoc', sel: function () { return document.querySelector('#monhoc-grid [data-rdk]') || $id('monhoc-grid'); }, t: '↕️ Kéo thả để đổi vị trí', d: 'Muốn sắp xếp lại thứ tự các môn: nắm giữ một ô rồi kéo tới vị trí mong muốn và thả ra. Trên điện thoại: chạm giữ khoảng nửa giây rồi kéo; trên máy tính: nhấn chuột vào ô rồi kéo. Thứ tự mới được lưu lại cho lần sau.' },
+        { ctx: 'subject', sel: function () { var i = $id('sc-icon'); return i && i.parentElement; }, t: '📚 Cửa sổ phụ: Kệ Sách & Khóa Học', d: 'Khi bấm vào một môn, cửa sổ phụ này hiện ra (mình đang mở thử một môn để minh họa). Mỗi môn có hai “cửa” để vào: Kệ Sách (Tủ sách) và Khóa Học. Muốn xem lại: bấm Trợ lý AI → ℹ️ khi cửa sổ đang mở.' },
+        { ctx: 'subject', sel: '#sc-shelf-btn', t: '📚 Kệ Sách (Tủ sách)', d: 'Tủ sách giáo trình của môn này. Mở sách, chọn chương rồi đọc ngay trong app; con số là số cuốn sách hiện có. Nút mờ nghĩa là môn này chưa có sách. Lần đầu bạn bấm vào nút này, mình sẽ giới thiệu bên trong ngay tại chỗ.' },
+        { ctx: 'subject', sel: '#sc-course-btn', t: '🎬 Khóa Học', d: 'Các khóa học và video bài giảng của môn này, kèm luyện câu hỏi theo môn. Nếu môn chia thành nhiều phân môn, con số là số khóa học bên trong. Lần đầu bạn bấm vào nút này, mình sẽ giới thiệu bên trong ngay tại chỗ.' },
 
         { ctx: 'shelf', sel: '#bookshelf-title', t: '📚 Cửa sổ Tủ sách', d: 'Đây là kệ sách của môn bạn vừa chọn. Bấm vào một cuốn để xem các chương, rồi bấm một chương để đọc. Muốn xem lại phần này: bấm Trợ lý AI → ℹ️ khi cửa sổ đang mở.' },
         { ctx: 'shelf', sel: '#bk-shelf-zoom-wrap', t: '🔎 Cỡ sách', d: 'Kéo thanh trượt hoặc bấm − / + để phóng to, thu nhỏ các cuốn sách trên kệ cho vừa mắt.' },
@@ -27854,6 +27859,12 @@ body {
         { ctx: 'viewer', sel: '#bk-sec-btn', t: '📑 Nhận diện mục lục', d: 'Nhờ AI tự tìm các phân mục của chương và dựng mục lục cho bạn.' },
         { ctx: 'viewer', sel: '#bk-sec-mark', t: '🔖 Đánh dấu phân mục', d: 'Tự thêm mục lục thủ công: bôi đen tiêu đề trong PDF rồi bấm nút này.' },
         { ctx: 'viewer', sel: '#bk-pdf-wrap', t: '📄 Trang sách', d: 'Cuộn để đọc. Bạn có thể bôi đen chữ để tô sáng, ghi chú hoặc dịch thuật ngữ; thuật ngữ mới sẽ được lưu vào Từ Điển RHM.' },
+        { ctx: 'viewer', demo: true, sel: function () { return demoBar(); }, t: '✨ Thanh nút khi bôi đen chữ', d: 'Bôi đen (kéo chọn) một đoạn chữ trong trang sách, một thanh nút nhỏ sẽ nổi lên ngay trên đoạn đó. Đây là thanh mẫu để minh họa — mình giới thiệu từng nút nhé. Chạm vào chữ đã được tô sáng cũng làm thanh này hiện lại.' },
+        { ctx: 'viewer', demo: true, sel: function () { return demoBtn('b-tr'); }, t: '🌐 Dịch', d: 'Dịch đoạn vừa bôi đen ngay trong khung AI Chat của sách; bạn có thể hỏi tiếp về đoạn đó.' },
+        { ctx: 'viewer', demo: true, sel: function () { return demoBtn('b-dc'); }, t: '📖 Thêm từ điển', d: 'Lưu từ hoặc cụm từ tiếng Anh vừa bôi đen vào Từ Điển RHM. Nút này chỉ hiện khi đoạn chọn là một từ / cụm từ tiếng Anh ngắn.' },
+        { ctx: 'viewer', demo: true, sel: function () { return demoBtn('b-nt'); }, t: '📝 Ghi chú nhanh', d: 'Gắn một ghi chú nhỏ vào đoạn vừa bôi đen. Đoạn có ghi chú sẽ có biểu tượng 📝 bên cạnh; bấm vào đó để xem, sửa hoặc xóa (lúc đó nút này đổi thành 🗑 Xóa ghi chú nhanh).' },
+        { ctx: 'viewer', demo: true, sel: function () { return demoBtn('b-hl'); }, t: '🖍 Highlight', d: 'Tô sáng đoạn vừa bôi đen để dễ tìm lại khi ôn.' },
+        { ctx: 'viewer', demo: true, sel: function () { return demoBtn('b-un'); }, t: '🧽 Xóa highlight', d: 'Chỉ hiện khi vùng bạn chọn (hoặc đoạn bạn chạm vào) đang có highlight; bấm để bỏ tô sáng phần đó.' },
         { ctx: 'viewer', sel: '#bk-ai-btn', t: '🤖 AI Chat', d: 'Mở khung chat với gia sư AI về chương đang đọc: hỏi bài, tóm tắt, giải thích chỗ chưa hiểu.' },
 
         { ctx: 'course', sel: '#monhoc-modal-title', t: '🎬 Cửa sổ Khóa Học', d: 'Đây là khu khóa học của môn bạn vừa chọn, gồm các phân môn (nếu có) và video bài giảng. Muốn xem lại phần này: bấm Trợ lý AI → ℹ️ khi cửa sổ đang mở.' },
@@ -27890,9 +27901,9 @@ body {
         { ctx: 'topic', sel: '#topic-review-panel', t: '⚡ Ôn tập chủ đề', d: 'Chọn các bộ đề, nhập số câu rồi bấm Bắt đầu ôn tập để ôn riêng chủ đề này. Có nút chọn tất cả, bỏ chọn và chọn ngẫu nhiên.' },
         { ctx: 'topic', sel: '#topic-quiz-list', t: '📚 Danh sách bộ đề', d: 'Các bộ đề thuộc chủ đề này. Bấm vào một bộ đề để làm bài.' },
 
-        { key: 'mon-hoc', t: '📚 Ôn Tập Theo Môn Học', d: 'Bấm để xổ ra danh sách các môn học kèm video bài giảng. Chọn một môn để vào Tủ sách hoặc Khóa Học của môn đó. Lần đầu bấm vào một môn, mình sẽ hướng dẫn ngay tại chỗ.' },
+        { key: 'mon-hoc', t: '📚 Ôn Tập Theo Môn Học', d: 'Bấm để xổ ra danh sách các môn học kèm video bài giảng. Lần đầu bấm vào nút này, mình sẽ hướng dẫn cách chọn môn, kéo thả đổi vị trí và 2 nút Kệ Sách / Khóa Học; lần đầu bấm vào Kệ Sách hoặc Khóa Học, mình sẽ giới thiệu bên trong. Khi khu này đang xổ ra, bấm ℹ️ của Trợ lý AI để xem lại.' },
         { key: 'chuyen-de', t: '🦷 Ôn Tập Theo Chủ Đề', d: 'Bấm để xổ ra khu ôn tập theo chủ đề, gồm các công cụ ôn nhanh, chuyên sâu, thi thử và 36 chủ đề. Lần đầu bấm vào nút này, mình sẽ giới thiệu các nút bên trong ngay tại chỗ; mỗi nút bên trong cũng có hướng dẫn riêng lần đầu bạn mở.' },
-        { ctx: 'section', key: 'on-nhanh', t: '⚡ Ôn Tập Nhanh', d: 'Khu Ôn Tập Theo Chủ Đề vừa mở ra. Nút này tạo nhanh một lượt ôn gọn nhẹ: chọn phạm vi và số câu rồi làm ngay. Lần đầu bấm vào mỗi nút, mình sẽ hướng dẫn thêm bên trong. Muốn xem lại phần này: bấm Trợ lý AI → ℹ️ ở màn hình chính.' },
+        { ctx: 'section', key: 'on-nhanh', t: '⚡ Ôn Tập Nhanh', d: 'Khu Ôn Tập Theo Chủ Đề vừa mở ra. Nút này tạo nhanh một lượt ôn gọn nhẹ: chọn phạm vi và số câu rồi làm ngay. Lần đầu bấm vào mỗi nút, mình sẽ hướng dẫn thêm bên trong. Muốn xem lại phần này: bấm Trợ lý AI → ℹ️ khi khu Ôn Tập Theo Chủ Đề đang xổ ra.' },
         { ctx: 'section', key: 'chuyen-sau', t: '🧠 Ôn Tập Chuyên Sâu', d: 'Lượt ôn đào sâu hơn, giúp bạn tập trung vào những phần còn yếu thay vì làm đại trà.' },
         { ctx: 'section', key: 'thi-thu', t: '🎯 Thi Thử (Mock Exam)', d: 'Làm một đề thi thử có tính giờ như thi thật để đánh giá năng lực của bạn. Bạn cũng có thể tạo đề thi riêng.' },
         { ctx: 'section', key: 'da-luu', t: '⭐ Đã lưu', d: 'Danh sách những câu hỏi bạn đã đánh dấu sao khi làm bài, để quay lại ôn riêng những câu quan trọng. Con số trong ngoặc là số câu đã lưu.' },
@@ -27905,7 +27916,19 @@ body {
             open: function (t) { var b = $id('chuyende-section-container'); if (b && b.classList.contains('hidden')) { openSection('chuyende'); t.opened = true; } },
             close: function (t) { if (t.opened) { var b = $id('chuyende-section-container'); if (b && !b.classList.contains('hidden')) { try { window.toggleChuyenDeSection(); } catch (e) {} } t.opened = false; } }
         },
-        subject: { wait: 350, open: function () { var m = $id('subject-choice-modal'); if (m && m.classList.contains('hidden') && typeof scSubject !== 'undefined' && scSubject) { try { window.openSubjectChoice(scSubject); } catch (e) {} } }, close: function () {} },
+        monhoc: { wait: 150, open: function () { openSection('monhoc'); }, close: function () {} },
+        subject: {
+            wait: 350,
+            open: function (t) {
+                var m = $id('subject-choice-modal');
+                if (m && m.classList.contains('hidden')) {
+                    var sj = null;
+                    try { sj = (typeof scSubject !== 'undefined' && scSubject) || ((typeof monHocStructure !== 'undefined' && monHocStructure && monHocStructure.length) ? monHocStructure[0] : null); } catch (e) {}
+                    if (sj) { try { window.openSubjectChoice(sj); if (t) t.subjOpened = true; } catch (e) {} }
+                }
+            },
+            close: function (t) { if (t && t.subjOpened) { try { window.closeSubjectChoice(); } catch (e) {} t.subjOpened = false; } }
+        },
         shelf: { wait: 1500, open: function () { try { window.scOpenShelf(); } catch (e) {} }, close: function () { try { window.bkCloseShelf(); } catch (e) {} } },
         course: { wait: 1600, open: function () { try { window.scOpenCourse(); } catch (e) {} }, close: function () { try { window.closeMonHocDetailModal(); } catch (e) {} } },
         collection: { wait: 450, open: function () { window.openCollectionModal(); }, close: function () { window.closeCollectionModal(); } },
@@ -27926,12 +27949,11 @@ body {
     }
     /* thứ tự = ưu tiên (cửa sổ nằm trên cùng xếp trước) */
     var WIN_CTX = ['viewer', 'shelf', 'course', 'subject', 'quick', 'deep', 'mock', 'saved', 'blocked', 'topic', 'collection', 'dict', 'note', 'settings'];
-    var CHAIN = ['subject', 'shelf', 'course'];
-    var WIN_ID = { viewer: 'book-viewer', shelf: 'bookshelf-modal', course: 'monhoc-detail-modal', subject: 'subject-choice-modal', quick: 'mock-exam-modal', deep: 'deep-modal', mock: 'exam-modal', saved: 'bookmarked-modal', blocked: 'blocked-modal', topic: 'topic-modal', section: 'chuyende-section-container', collection: 'collection-modal', dict: 'dict-modal', note: 'note-modal', settings: 'home-settings-modal' };
+    var WIN_ID = { monhoc: 'monhoc-section-container', viewer: 'book-viewer', shelf: 'bookshelf-modal', course: 'monhoc-detail-modal', subject: 'subject-choice-modal', quick: 'mock-exam-modal', deep: 'deep-modal', mock: 'exam-modal', saved: 'bookmarked-modal', blocked: 'blocked-modal', topic: 'topic-modal', section: 'chuyende-section-container', collection: 'collection-modal', dict: 'dict-modal', note: 'note-modal', settings: 'home-settings-modal' };
     function activeWin() { for (var i = 0; i < WIN_CTX.length; i++) { if (shown(WIN_ID[WIN_CTX[i]])) return WIN_CTX[i]; } return null; }
     function beginTour(mode, c) {
         closePop(); closeWheel(true); clearSpot(true);
-        var steps = TOUR.filter(function (st) { return mode === 'win' ? st.ctx === c : mode === 'chain' ? CHAIN.indexOf(st.ctx) >= 0 : !st.ctx; });
+        var steps = TOUR.filter(function (st) { return mode === 'win' ? st.ctx === c : mode === 'multi' ? (c || []).indexOf(st.ctx) >= 0 : !st.ctx; });
         var box = $id('chuyende-section-container');
         tour = { i: -1, tok: 0, busy: false, ctx: null, opened: false, mode: mode, steps: steps, wasOpen: !!(box && !box.classList.contains('hidden')) };
         cancelSink(); unsinkFab();
@@ -27940,22 +27962,27 @@ body {
     /* Info: đang mở cửa sổ nào thì giới thiệu cửa sổ đó, không thì giới thiệu màn hình chính */
     function startTour() {
         var w = activeWin();
-        if (w === 'subject') { beginTour('chain'); return; }
         if (w) { beginTour('win', w); return; }
         if (!tourHomeOk()) { toast('Cửa sổ này chưa có phần giới thiệu — hãy quay về màn hình chính hoặc mở Bộ Sưu Tập / Từ Điển / Sổ Ghi Chú / Cài Đặt / một môn học'); return; }
+        /* khu Ôn Tập Theo Môn Học / Chủ Đề đang xổ ra → giới thiệu nội dung bên trong; chỉ khi cả 2 đều đóng mới giới thiệu màn hình chính */
+        var mOpen = shown('monhoc-section-container'), cOpen = shown('chuyende-section-container');
+        if (mOpen && cOpen) { beginTour('multi', ['monhoc', 'subject', 'section']); return; }
+        if (mOpen) { beginTour('multi', ['monhoc', 'subject']); return; }
+        if (cOpen) { beginTour('win', 'section'); return; }
         beginTour('home');
     }
     /* lần đầu mở mỗi cửa sổ thì tự giới thiệu ngay tại chỗ */
     var seenMem = {}, suppressUntil = 0;
-    function winSeen(c) { try { return localStorage.getItem('hf_tour_seen_' + c) === '1'; } catch (e) { return !!seenMem[c]; } }
-    function winMark(c) { seenMem[c] = 1; try { localStorage.setItem('hf_tour_seen_' + c, '1'); } catch (e) {} }
+    /* shelf / course: khoá mới để người đã xem luồng nối cũ vẫn được giới thiệu bên trong lần đầu bấm vào */
+    function seenKey(c) { return (c === 'shelf' || c === 'course') ? 'hf_tour_seen2_' + c : 'hf_tour_seen_' + c; }
+    function winSeen(c) { try { return localStorage.getItem(seenKey(c)) === '1'; } catch (e) { return !!seenMem[c]; } }
+    function winMark(c) { seenMem[c] = 1; try { localStorage.setItem(seenKey(c), '1'); } catch (e) {} }
     function autoWinTour(c) {
         if (!fabOn || tour || winSeen(c) || Date.now() < suppressUntil) return;
         setTimeout(function () {
             if (tour || winSeen(c) || !shown(WIN_ID[c])) return;
             winMark(c);
-            if (c === 'subject') { winMark('shelf'); winMark('course'); }
-            if (c === 'subject') beginTour('chain'); else beginTour('win', c);
+            if (c === 'monhoc') beginTour('multi', ['monhoc', 'subject']); else beginTour('win', c);
         }, 800);
     }
     function hookOpen(fn, c) {
@@ -27963,12 +27990,17 @@ body {
         var w = function () { var r = o.apply(this, arguments); try { autoWinTour(c); } catch (e) {} return r; };
         w.__hfTour = 1; window[fn] = w;
     }
+    function hookMonHoc() {
+        var o = window.toggleMonHocSection; if (typeof o !== 'function' || o.__hfTour) return;
+        var w = function () { var r = o.apply(this, arguments); try { var b = $id('monhoc-section-container'); if (b && !b.classList.contains('hidden')) autoWinTour('monhoc'); } catch (e) {} return r; };
+        w.__hfTour = 1; window.toggleMonHocSection = w;
+    }
     function hookSection() {
         var o = window.toggleChuyenDeSection; if (typeof o !== 'function' || o.__hfTour) return;
         var w = function () { var r = o.apply(this, arguments); try { var b = $id('chuyende-section-container'); if (b && !b.classList.contains('hidden')) autoWinTour('section'); } catch (e) {} return r; };
         w.__hfTour = 1; window.toggleChuyenDeSection = w;
     }
-    hookOpen('openCollectionModal', 'collection'); hookOpen('openRhmDict', 'dict'); hookOpen('openRhmNote', 'note'); hookOpen('openHomeSettings', 'settings'); hookOpen('openSubjectChoice', 'subject'); hookOpen('bkOpenShelf', 'shelf'); hookOpen('openMonHocDetail', 'course'); hookOpen('bkOpenChapter', 'viewer'); hookOpen('openMockExamModal', 'quick'); hookOpen('openDeepModal', 'deep'); hookOpen('openExamModal', 'mock'); hookOpen('openBookmarkedModal', 'saved'); hookOpen('openBlockedModal', 'blocked'); hookOpen('openTopicModal', 'topic'); hookSection();
+    hookOpen('openCollectionModal', 'collection'); hookOpen('openRhmDict', 'dict'); hookOpen('openRhmNote', 'note'); hookOpen('openHomeSettings', 'settings'); hookOpen('bkOpenShelf', 'shelf'); hookOpen('openMonHocDetail', 'course'); hookOpen('bkOpenChapter', 'viewer'); hookOpen('openMockExamModal', 'quick'); hookOpen('openDeepModal', 'deep'); hookOpen('openExamModal', 'mock'); hookOpen('openBookmarkedModal', 'saved'); hookOpen('openBlockedModal', 'blocked'); hookOpen('openTopicModal', 'topic'); hookSection(); hookMonHoc();
 
     /* lần đầu vào app: chạy luôn phần giới thiệu màn hình chính (bước đầu là nút Trợ lý AI, toàn màn hình) */
     var INTRO_KEY = 'home_fab_intro_v2', introMem = false;
@@ -28010,6 +28042,7 @@ body {
             if (idx >= tour.steps.length) { finishTour(); return; }
             if (idx < 0) { idx = Math.max(0, from); d = 1; }
             var st = tour.steps[idx];
+            if (!st.demo) removeDemoBar();
             tourSetCtx(st.ctx, function () {
                 if (!tour || tok !== tour.tok) return;
                 var n = tourNode(st);
@@ -28028,15 +28061,29 @@ body {
     function finishTour() {
         var t = tour; tour = null;
         clearSpot(true);
+        removeDemoBar();
         if (t && t.mode !== 'win') {
             var cur = t.ctx;
             if (cur && CTXS[cur]) { try { CTXS[cur].close(t); } catch (e) {} }
-            if (cur !== 'chuyende' && t.opened) { try { CTXS.chuyende.close(t); } catch (e) {} }
-            if (t.opened && !t.wasOpen) { try { CTXS.chuyende.close(t); } catch (e) {} }
-            if (t.mode === 'chain') { try { CTXS.subject.open(); } catch (e) {} }
         }
         scheduleSink(2500);
     }
+    /* thanh nút mẫu (minh hoạ các nút hiện lên khi bôi đen trong trình đọc sách) */
+    function demoBar() {
+        var b = $id('hf-demo-selbar');
+        if (!b) {
+            b = document.createElement('div'); b.id = 'hf-demo-selbar';
+            b.innerHTML = '<button type="button" class="b-tr">🌐 Dịch</button><button type="button" class="b-dc">📖 Thêm từ điển</button><button type="button" class="b-nt">📝 Ghi chú nhanh</button><button type="button" class="b-hl">🖍 Highlight</button><button type="button" class="b-un">🧽 Xóa highlight</button>';
+            document.body.appendChild(b);
+            var w = $id('bk-pdf-wrap'), r = w ? w.getBoundingClientRect() : { left: 0, top: 0, width: window.innerWidth, height: window.innerHeight };
+            var bw = b.offsetWidth || 300, bh = b.offsetHeight || 34;
+            b.style.left = Math.max(8, Math.min(window.innerWidth - bw - 8, r.left + r.width / 2 - bw / 2)) + 'px';
+            b.style.top = Math.max(8, Math.min(window.innerHeight - bh - 8, r.top + r.height * 0.4)) + 'px';
+        }
+        return b;
+    }
+    function demoBtn(cls) { var b = demoBar(); return b ? b.querySelector('.' + cls) : null; }
+    function removeDemoBar() { var b = $id('hf-demo-selbar'); if (b && b.parentNode) b.parentNode.removeChild(b); }
     window.homeFabClose = function () { closePop(); };
     window.homeFabQuickKey = function () { closePop(); try { window.hsOpenKeys(); } catch (e) { toast('Mở ⚙️ Cài đặt → 🔑 Cài đặt khóa API'); } };
     /* API nhỏ cho các phần khác của app (và để kiểm thử): mở/đóng, hỏi, làm thay, chỉ tận nơi */
@@ -28155,7 +28202,7 @@ body {
             tip.className += ' hf-tour-tip' + (st.big ? ' hf-tour-big' : '');
             if (st.big) box.className += ' big';
             var tt = document.createElement('div'); tt.className = 'tt'; tt.textContent = st.t;
-            var td = document.createElement('div'); td.className = 'td'; td.textContent = st.d;
+            var td = document.createElement('div'); td.className = 'td'; td.textContent = st.d + ((tour.i === 0 && !st.big) ? '\n\n👆 Chạm vào màn hình để sang bước tiếp theo. Quay lại: bấm mũi tên ‹ hoặc vuốt sang trái.' : '');
             tip.appendChild(tt); tip.appendChild(td);
             bar = document.createElement('div'); bar.className = 'hf-tour-bar';
             var cn = document.createElement('span'); cn.className = 'cnt'; cn.textContent = (tour.i + 1) + ' / ' + tour.steps.length;
@@ -28169,7 +28216,7 @@ body {
             var nx = document.createElement('button'); nx.type = 'button'; nx.className = 'hf-tb-arrow next'; nx.innerHTML = AR_R; nx.setAttribute('aria-label', 'Tiếp theo'); nx.title = 'Tiếp theo';
             nx.onclick = function (ev) { try { ev.stopPropagation(); } catch (e) {} tourGo(1); };
             bar.appendChild(cn); bar.appendChild(sk); bar.appendChild(pv); bar.appendChild(nx);
-            /* chạm nửa phải = tiếp theo, nửa trái = trang trước; vuốt trái = tiếp, vuốt phải = trước */
+            /* chạm bất kỳ đâu (cả nửa trái) = tiếp theo; quay lại chỉ bằng nút mũi tên ‹ hoặc vuốt sang trái (vuốt phải = tiếp) */
             hit.className += ' tour';
             var gx = null, gy = null;
             hit.addEventListener('pointerdown', function (e) { gx = e.clientX; gy = e.clientY; try { hit.setPointerCapture(e.pointerId); } catch (er) {} });
@@ -28177,8 +28224,8 @@ body {
             hit.addEventListener('pointerup', function (e) {
                 if (gx == null) return;
                 var dx = e.clientX - gx, dy = e.clientY - gy; gx = null;
-                if (Math.abs(dx) >= 40 && Math.abs(dx) > Math.abs(dy) * 1.2) tourGo(dx < 0 ? 1 : -1);
-                else if (Math.abs(dx) < 12 && Math.abs(dy) < 12) tourGo(e.clientX >= window.innerWidth / 2 ? 1 : -1);
+                if (Math.abs(dx) >= 40 && Math.abs(dx) > Math.abs(dy) * 1.2) tourGo(dx < 0 ? -1 : 1);
+                else if (Math.abs(dx) < 12 && Math.abs(dy) < 12) tourGo(1);
             });
         } else {
             var tx = document.createElement('span'); tx.textContent = '👉 ' + note;
@@ -28311,7 +28358,7 @@ body {
     function init() {
         applyFabState(); updSend(); setStatus('Trợ lý đang sẵn sàng');
         bindFab();
-        hookOpen('openCollectionModal', 'collection'); hookOpen('openRhmDict', 'dict'); hookOpen('openRhmNote', 'note'); hookOpen('openHomeSettings', 'settings'); hookOpen('openSubjectChoice', 'subject'); hookOpen('bkOpenShelf', 'shelf'); hookOpen('openMonHocDetail', 'course'); hookOpen('bkOpenChapter', 'viewer'); hookOpen('openMockExamModal', 'quick'); hookOpen('openDeepModal', 'deep'); hookOpen('openExamModal', 'mock'); hookOpen('openBookmarkedModal', 'saved'); hookOpen('openBlockedModal', 'blocked'); hookOpen('openTopicModal', 'topic'); hookSection();
+        hookOpen('openCollectionModal', 'collection'); hookOpen('openRhmDict', 'dict'); hookOpen('openRhmNote', 'note'); hookOpen('openHomeSettings', 'settings'); hookOpen('bkOpenShelf', 'shelf'); hookOpen('openMonHocDetail', 'course'); hookOpen('bkOpenChapter', 'viewer'); hookOpen('openMockExamModal', 'quick'); hookOpen('openDeepModal', 'deep'); hookOpen('openExamModal', 'mock'); hookOpen('openBookmarkedModal', 'saved'); hookOpen('openBlockedModal', 'blocked'); hookOpen('openTopicModal', 'topic'); hookSection(); hookMonHoc();
         /* các cửa sổ (Từ điển, Sổ ghi chú, Cài đặt…) đặt "inert" lên mọi thứ phía sau → luôn gỡ ra để nút AI vẫn bấm được */
         ['home-fab', 'home-fab-pop', 'hf-wheel'].forEach(function (id) {
             var n = $id(id); if (!n) return;
