@@ -27672,6 +27672,7 @@ body {
         w.setAttribute('aria-hidden', 'false');
         for (var i = 0; i < btns.length; i++) {
             var b = btns[i], px = clampNum(pts[i].x, m + half, Math.max(m + half, viewW() - m - half)), py = pts[i].y + shift;
+            try { b.getAnimations().forEach(function (an) { an.cancel(); }); } catch (e) {}
             b.style.transition = 'none';
             b.style.left = Math.round(px - half) + 'px'; b.style.top = Math.round(py - half) + 'px';
             b.style.transform = 'none'; b.style.opacity = '1';
@@ -27692,7 +27693,7 @@ body {
         if (!wheelOn) return;
         wheelOn = false;
         var w = $id('hf-wheel'), tok = ++wheelTok;
-        function hide() { if (tok !== wheelTok) return; if (w) { w.classList.add('hidden'); w.setAttribute('aria-hidden', 'true'); } }
+        function hide() { if (tok !== wheelTok) return; if (w) { w.classList.add('hidden'); w.setAttribute('aria-hidden', 'true'); try { w.querySelectorAll('.hf-wb').forEach(function (b) { b.getAnimations().forEach(function (an) { an.cancel(); }); }); } catch (e) {} } }
         if (w && quiet !== true && w.animate) {
             var g = fabXY(), cx = g.x + g.s / 2, cy = g.y + g.s / 2;
             w.querySelectorAll('.hf-wb').forEach(function (b, i) {
