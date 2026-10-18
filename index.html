@@ -11016,7 +11016,7 @@ async function bkRecoverTranslate() {
 async function bkTocRun(tok, my) {   // chụp toàn bộ chương → gửi AI theo đợt ảnh → gom bố cục + mục lục → ráp chữ
     const N = bkDoc.numPages, nums = [];
     for (let p = 1; p <= N; p++) nums.push(p);
-    bkTocSay('Đang chụp toàn bộ ' + N + ' trang…');
+    bkTocSay('Đang chuẩn bị ' + N + ' trang…');
     const shots = await bkShotPages(nums, tok, (k, n) => bkTocSay('Đang chuẩn bị ' + k + '/' + n));
     if (!shots || tok !== bkViewTok || my !== bkDeepTok) return false;
     const wins = bkPlanWin(shots);   // chia đợt ảnh (gối nhau 2 trang để ráp đoạn/mục nằm sát ranh đợt)
@@ -11024,7 +11024,7 @@ async function bkTocRun(tok, my) {   // chụp toàn bộ chương → gửi AI 
         if (tok !== bkViewTok || my !== bkDeepTok) return false;
         const part = shots.slice(wins[w][0], wins[w][1]);
         if (!part.length) continue;
-        bkTocSay('AI đọc bố cục & mục lục: trang ' + part[0].num + '–' + part[part.length - 1].num + ' (' + (w + 1) + '/' + wins.length + ')');
+        bkTocSay('AI phân tích: trang ' + part[0].num + '–' + part[part.length - 1].num + ' (' + (w + 1) + '/' + wins.length + ')');
         let r = null;
         try { r = await bkAiReadWindow(part, bkCur.title, N, bkHeads, null); }
         catch (e) { if (e && (e.badKey || e.quota)) throw e; r = null; }
@@ -11036,7 +11036,7 @@ async function bkTocRun(tok, my) {   // chụp toàn bộ chương → gửi AI 
             bkLaySave(); bkHeadsSave();
         }
     }
-    bkTocSay('Đang ráp đoạn bị tách & định vị mục lục…');
+    bkTocSay('Đang chuẩn bị mục lục…');
     if ((await bkReextract(tok, my)) !== true) return false;
     if (tok !== bkViewTok || my !== bkDeepTok) return false;
     bkRecoverHeads();                                   // bù các tiêu đề in đậm/cỡ lớn mà AI bỏ sót
@@ -11071,13 +11071,13 @@ async function bkDetectChapter() {   // Bấm "Nhận diện mục lục": chụ
     const my = ++bkDeepTok; bkDeepBusy = tok;
     bkHeads = []; bkAiLay = {}; bkLayCache = {}; bkLaySave(); bkHeadsSave();   // quét lại từ đầu (mục tự đánh dấu được giữ)
     if (!(await bkRebuildSecs(tok))) { if (my === bkDeepTok) bkDeepBusy = 0; return; }
-    showToast('Đang chụp toàn bộ chương rồi gửi AI đọc (đọc theo cột, ráp lại đoạn bị tách)…');
+    showToast('Đang chuẩn bị…');
     try { await bkTocRun(tok, my); }
     catch (e) { bkTocFail(e); return; }
     finally { if (my === bkDeepTok) bkDeepBusy = 0; }
     if (my === bkDeepTok && tok === bkViewTok) {
         bkUpdateSecBtn();
-        showToast(bkSecs.length ? ('Đã lập mục lục: ' + bkSecs.length + ' mục, phân cấp tối đa 10 cấp, đánh số sẵn') : 'AI chưa nhận ra mục nào trong chương, thử lại sau');
+        showToast(bkSecs.length ? ('Đã lập mục lục: ' + bkSecs.length + ' mục') : 'AI chưa nhận ra mục nào trong chương, thử lại sau');
     }
 }/* Kéo đổi độ rộng cột mục lục (giống khung chat) */
 function bkEnsureSecGrip() {
