@@ -895,6 +895,16 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
         .yt-focusdlg .fb { display: flex; gap: 0.4rem; margin-top: 0.4rem; } .yt-focusdlg .fl { display: flex; align-items: center; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.4rem; font-size: 12px; color: #bfdbfe; font-weight: 700; } .yt-focusdlg .fl-g { display: inline-flex; border: 1px solid #64748b; border-radius: 0.5rem; overflow: hidden; } .yt-focusdlg .fl-b { background: #1e293b; color: #e2e8f0; padding: 0.2rem 0.6rem; font-weight: 800; border: 0; } .yt-focusdlg .fl-b.on { background: #16a34a; color: #fff; }
         .yt-focusdlg .fb button { flex: 1; padding: 0.4rem 0.5rem; border-radius: 0.55rem; font-weight: 800; font-size: 12.5px; border: 1px solid #475569; background: #1e293b; color: #e2e8f0; }
         .yt-focusdlg .fb .fy { background: #2563eb; border-color: #60a5fa; color: #fff; }
+        /* v25-1-12: cửa sổ Chế độ tập trung to hơn 50% */
+        .yt-focusdlg .fd { width: min(570px, 100%); padding: 1.05rem 1.275rem; border-radius: 1.2rem; font-size: 18.75px; }
+        .yt-focusdlg .fh { font-size: 21px; margin-bottom: 0.45rem; }
+        .yt-focusdlg ul { margin: 0 0 0.45rem 1.5rem; }
+        .yt-focusdlg .fp { margin-bottom: 0.45rem; }
+        .yt-focusdlg .fb { gap: 0.6rem; margin-top: 0.6rem; }
+        .yt-focusdlg .fl { gap: 0.5rem; margin-top: 0.6rem; font-size: 18px; }
+        .yt-focusdlg .fl-g { border-radius: 0.75rem; }
+        .yt-focusdlg .fl-b { padding: 0.3rem 0.9rem; font-size: 18px; }
+        .yt-focusdlg .fb button { padding: 0.6rem 0.75rem; border-radius: 0.8rem; font-size: 18.75px; }
 
         /* ===== QUÀ GẮN TRỰC TIẾP TRÊN NÚT VIDEO / ÔN TẬP + TRẮC NGHIỆM TRONG CHAT AI ===== */
         .vgift { display: inline-flex; align-items: center; gap: 2px; margin-left: 4px; padding: 0 6px; border-radius: 9999px; background: rgba(255,255,255,.28); color: #fff; font-weight: 800; font-size: 11px; line-height: 1.6; white-space: nowrap; }
@@ -27875,13 +27885,13 @@ body {
         { ctx: 'video', sel: vs('.ytb-back'), t: '⬅ Quay lại danh sách', d: 'Đóng video và quay về danh sách bài giảng.' },
         { ctx: 'video', sel: vs('.yt-seek'), t: '⏱ Thanh tua', d: 'Kéo hoặc bấm vào thanh để tua tới đoạn bất kỳ của video. Bên cạnh là thời gian hiện tại / tổng thời lượng.' },
         { ctx: 'video', sel: vs('button[onclick^="toggleYtPlay"]'), t: '▶ Phát / Tạm dừng', d: 'Bấm để phát hoặc dừng video. Phím tắt trên máy tính: Space.' },
-        { ctx: 'video', sel: vs('button[onclick^="ytChapToggle"]'), t: '🧠 Sơ đồ tư duy (AI)', d: 'AI đọc bài giảng và lập mục lục / sơ đồ tư duy theo từng phân mục (cần khóa API AI), giúp bạn xem tổng quan và nhảy nhanh tới phần mình cần.' },
+        { ctx: 'video', sel: vs('button[onclick^="ytChapToggle"]'), t: '🧠 Sơ đồ tư duy (AI)', d: 'AI đọc bài giảng và lập mục lục / sơ đồ tư duy theo từng phân mục (cần khóa API AI), giúp bạn xem tổng quan và nhảy nhanh tới phần mình cần. Mở sơ đồ ra rồi bấm Trợ lý AI → ℹ️ để xem giới thiệu chi tiết từng phần trong sơ đồ.' },
         { ctx: 'video', sel: vs('button[onclick^="ytFocusDialog"]'), t: '🎯 Chế độ tập trung', d: 'Khi bật, AI chọn các ý quan trọng; qua mỗi ý video sẽ dừng và hiện một câu trắc nghiệm 4 đáp án. Trả lời sai thì video tua lại đầu ý đó để bạn nghe lại. Bấm nút để xem giải thích và bật / tắt.' },
-        { ctx: 'video', sel: vs('button[onclick^="openVideoAi"]'), t: '🤖 Hỏi AI về video', d: 'Mở khung chat với gia sư AI đã xem video: lập mục lục theo mốc thời gian, giải thích đoạn đang xem, hỏi về hình ảnh đang hiện, làm trắc nghiệm hoặc học có hướng dẫn.' },
+        { ctx: 'video', sel: vs('button[onclick^="openVideoAi"]'), t: '🤖 Hỏi AI về video', d: 'Mở khung chat với gia sư AI đã xem video: lập mục lục theo mốc thời gian, giải thích đoạn đang xem, hỏi về hình ảnh đang hiện, làm trắc nghiệm (có cửa sổ phụ Trắc nghiệm bên cạnh) hoặc học có hướng dẫn. Mở khung chat ra rồi bấm Trợ lý AI → ℹ️ để xem giới thiệu chi tiết từng nút.' },
         { ctx: 'video', sel: vs('select.yt-quality'), t: '🖥 Chất lượng hình', d: 'Chọn độ phân giải của video. Chất lượng cao cho hình nét hơn nhưng tốn mạng hơn.' },
         { ctx: 'video', sel: vs('select[title="Tốc độ phát"]'), t: '⚡ Tốc độ phát', d: 'Xem nhanh hơn hoặc chậm hơn tốc độ bình thường.' },
         { ctx: 'video', sel: vs('button[onclick^="toggleYtCaptions"]'), t: '💬 Bật / Tắt phụ đề', d: 'Hiện hoặc ẩn phụ đề trên video (phụ đề .srt, tiếng Việt và / hoặc tiếng Anh).' },
-        { ctx: 'video', sel: vs('button[onclick*="toggleSubPanel"][onclick*="true"]'), t: '⚙ Cài đặt phụ đề & lồng tiếng', d: 'Mở bảng chỉnh cỡ chữ, độ rộng, độ cao, ngôn ngữ phụ đề, cũng như giọng, độ trầm, tốc độ của lồng tiếng.' },
+        { ctx: 'video', sel: vs('button[onclick*="toggleSubPanel"][onclick*="true"]'), t: '⚙ Cài đặt phụ đề & lồng tiếng', d: 'Mở bảng chỉnh cỡ chữ, độ rộng, độ cao, ngôn ngữ phụ đề, cũng như giọng, độ trầm, tốc độ của lồng tiếng. Mở bảng ra rồi bấm Trợ lý AI → ℹ️ để xem giới thiệu chi tiết từng mục.' },
         { ctx: 'video', sel: vs('button[onclick^="toggleNarration"]'), t: '🗣 Lồng tiếng', d: 'Bật / tắt lồng tiếng: máy đọc phụ đề tiếng Việt bằng giọng Việt trong lúc video chạy.' },
         { ctx: 'video', sel: vs('.yt-volbox'), t: '🔊 Âm lượng', d: 'Bấm biểu tượng loa để tắt / bật tiếng, kéo thanh âm lượng để chỉnh (có thể tăng tới 200%).' },
         { ctx: 'video', sel: vs('button[onclick^="toggleYtTheaterMode"]'), t: '🎬 Rạp chiếu phim', d: 'Phóng video lớn trong app, nền tối để tập trung. Bấm lần nữa để thoát.' },
@@ -27969,25 +27979,189 @@ body {
     function vs(sel) { return function () { vidKeep(); return vidQ(sel); }; }
     function winShown(c) { return c === 'video' ? !!vidPid() : shown(WIN_ID[c]); }
 
+    /* ===== GIỚI THIỆU CHI TIẾT: Sơ đồ tư duy · Chat AI (+ cửa sổ phụ Trắc nghiệm) · Cài đặt phụ đề & lồng tiếng =====
+       Chạy ở lần đầu bấm mỗi nút, hoặc bấm Trợ lý AI → ℹ️ khi cửa sổ đó đang mở. (Chế độ tập trung: mở lên không giới thiệu.) */
+    function vwrap() { var p = vidPid(); return p ? $id('custom-wrapper-' + p) : null; }
+    function vdKey() { try { return typeof aiAnyKey === 'function' && !!aiAnyKey(); } catch (e) { return false; } }
+    function mapIsOpen() { var w = vwrap(); return !!(w && w.classList.contains('chap-open')); }
+    function mapHasData() { var p = vidPid(), d = p && activeYtPlayers[p]; return !!(d && d.chapters && d.chapters.length); }
+    function mapReady() { return mapIsOpen() || (!vdKey() && !mapHasData()); }
+    function aiVisible() { var m = $id('ai-tutor-modal'); return !!(m && !m.classList.contains('hidden') && !m.classList.contains('ai-chat-off')); }
+    function aiVidMode() { try { return typeof aiState !== 'undefined' && aiState.mode === 'video'; } catch (e) { return false; } }
+    function qzIsOpen() { var p = $id('ai-en-panel'); return !!(p && !p.classList.contains('hidden') && isShown(p)); }
+    /* mở / đóng cửa sổ phụ Trắc nghiệm cho bước giới thiệu; chỉ tự đóng lại nếu chính phần giới thiệu đã mở nó */
+    function qzEnsure(on) {
+        var t = tour; if (!t) return;
+        if (on) {
+            if (qzIsOpen()) return;
+            try { bkQzToggle(); } catch (e) {}
+            t.qzOwn = true;
+            if (!t.qzUndo) { t.qzUndo = true; t.undo.push(function () { if (t.qzOwn && qzIsOpen()) { try { aiEnPanelClose(); } catch (e) {} } }); }
+        } else if (t.qzOwn && qzIsOpen()) { try { aiEnPanelClose(); } catch (e) {} t.qzOwn = false; }
+    }
+    /* đang mở cửa sổ nào của video thì ℹ️ giới thiệu chi tiết cửa sổ đó */
+    function vidDetailKey() {
+        if (!vidPid()) return null;
+        if (aiVisible() && aiVidMode()) return 'ai';
+        var w = vwrap(), sp = w && w.querySelector('.custom-yt-subpanel');
+        if (w && w.classList.contains('sub-editing') && sp && isShown(sp)) return 'sub';
+        if (w && w.classList.contains('chap-open')) return 'map';
+        return null;
+    }
+    /* một khung bao quanh nhiều nút / hàng liền nhau */
+    function vdUnion(fn) {
+        return function () {
+            vidKeep();
+            var ns = fn(); if (!ns || !ns.length) return null;
+            var l = 1e9, t = 1e9, r = -1e9, b = -1e9;
+            for (var i = 0; i < ns.length; i++) {
+                if (!ns[i] || !isShown(ns[i])) return null;
+                var q = ns[i].getBoundingClientRect(); l = Math.min(l, q.left); t = Math.min(t, q.top); r = Math.max(r, q.right); b = Math.max(b, q.bottom);
+            }
+            var p = $id('hf-union-proxy');
+            if (!p) { p = document.createElement('div'); p.id = 'hf-union-proxy'; p.style.cssText = 'position:fixed;pointer-events:none;visibility:hidden;z-index:-1'; document.body.appendChild(p); }
+            p.style.left = l + 'px'; p.style.top = t + 'px'; p.style.width = (r - l) + 'px'; p.style.height = (b - t) + 'px';
+            return p;
+        };
+    }
+    function vsg(id) { return function () { vidKeep(); return $id(id); }; }                        // phần tử toàn trang theo id
+    function vsr(sel) { return function () { vidKeep(); var e = vidQ(sel); return e ? (e.closest('.sp-row') || e) : null; }; }   // cả hàng trong bảng cài đặt sub
+    function vdRow(sel) { var e = vidQ(sel); return e ? (e.closest('.sp-row') || e) : null; }
+    function mapBar() { return vidQ('.yt-chapmap .cm-bar'); }
+    function mapBtn(a) { return function () { vidKeep(); var b = mapBar(); return b ? b.querySelector('button[data-a="' + a + '"]') : null; }; }
+    function mapGrp(i) { return function () { vidKeep(); var b = mapBar(); return b ? b.querySelectorAll('.cm-fg')[i] || null : null; }; }
+    function aiQb(ch) {
+        return function () {
+            vidKeep(); var box = $id('ai-quick'); if (!box) return null;
+            var bs = box.querySelectorAll('button');
+            for (var i = 0; i < bs.length; i++) { if (bs[i].textContent.indexOf(ch) >= 0 && isShown(bs[i])) return bs[i]; }
+            return null;
+        };
+    }
+    /* bước có thể kèm pre (làm gì đó trước khi chỉ), until (chờ điều kiện, tối đa max ms), wait (chờ thêm) */
+    function stepPrep(st, tok, cb) {
+        if (!st.pre && !st.until) { cb(); return; }
+        try { if (st.pre) st.pre(); } catch (e) {}
+        var t0 = Date.now(), mx = st.max || 0;
+        (function poll() {
+            if (!tour || tok !== tour.tok) return;
+            var ok = true; try { ok = st.until ? !!st.until() : true; } catch (e) {}
+            if (ok || Date.now() - t0 >= mx) { setTimeout(function () { if (!tour || tok !== tour.tok) return; cb(); }, st.wait || 0); return; }
+            setTimeout(poll, 300);
+        })();
+    }
+    function mapStep(sel, t, d) { return { vid: true, sel: sel, t: t, d: d, until: mapReady, max: 25000, wait: 300 }; }
+    function qzStep(sel, t, d) { return { vid: true, sel: sel, t: t, d: d, pre: function () { qzEnsure(true); }, wait: 500 }; }
+    function noqzStep(sel, t, d) { return { vid: true, sel: sel, t: t, d: d, pre: function () { qzEnsure(false); }, wait: 200 }; }
+    function aiStep(sel, t, d) { return { vid: true, sel: sel, t: t, d: d }; }
+
+    var VDETAIL = {
+        /* ---------- 🧠 Sơ đồ tư duy ---------- */
+        map: function () {
+            return [
+                { vid: true, sel: vs('button[onclick^="ytChapToggle"]'), t: '🧠 Sơ đồ tư duy (AI)',
+                  d: 'AI đọc phụ đề bài giảng rồi chia thành các phần lớn (1, 2, 3…) và phần con (1.1, 1.2…) theo mốc thời gian, vẽ thành sơ đồ nhánh để bạn nắm cả bài chỉ trong một cái nhìn. Cần khóa API AI; lần đầu có thể mất vài giây đến vài chục giây, những lần sau mở lại ngay. Bấm nút lần nữa (hoặc phím Esc) để đóng sơ đồ. Giờ mình đi qua từng phần của sơ đồ nhé.' },
+                mapStep(vs('.yt-chapmap .cm-view'), '🗺 Khung sơ đồ',
+                  'Gốc là tên bài giảng, nhánh cấp 1 là các phần lớn, nhánh cấp 2 là các phần con. Kéo bằng một ngón để di chuyển, chụm hai ngón để phóng to / thu nhỏ. Nếu AI còn đang bổ sung chi tiết cho các đoạn chưa đủ, sơ đồ sẽ tự vẽ thêm dần theo thời gian.'),
+                mapStep(function () { vidKeep(); return vidQ('.yt-chapmap .cm-n[data-i]'); }, '⏱ Ô của một phần',
+                  'Mỗi ô gồm số thứ tự, tên phần và mốc giờ ⏱. Bấm vào ô để video nhảy tới đúng đoạn đó và phát luôn (sơ đồ tự đóng lại). Rê chuột lên ô để xem tóm tắt ngắn của phần ấy.'),
+                mapStep(function () { vidKeep(); return vidQ('.yt-chapmap .cm-tg'); }, '➕ / ➖ Xổ và thu nhánh',
+                  'Nút tròn nhỏ ở mỗi phần lớn: “−” thu các phần con lại, “+số” xổ chúng ra. Dùng để sơ đồ gọn lại khi bài giảng dài.'),
+                mapStep(vdUnion(function () { var b = mapBar(); return b ? [b.querySelector('.cm-ttl'), b.querySelector('.cm-zoom')] : null; }), '📊 Tiêu đề, tiến độ và mức phóng',
+                  'Bên phải tên cửa sổ là tiến độ khi AI đang “bổ sung” thêm phần cho những đoạn còn thiếu (ví dụ: đang bổ sung 3/5). Ô % kế bên cho biết sơ đồ đang phóng to bao nhiêu.'),
+                mapStep(function () { vidKeep(); var b = mapBar(); return b ? b.querySelector('.cm-lg') : null; }, 'Eng / Vie · Ngôn ngữ tên phần',
+                  'Đổi tên các phần trong sơ đồ sang tiếng Anh (Eng) hoặc tiếng Việt (Vie). Lần đầu chọn Eng, AI cần dịch tên các phần nên hơi chờ một chút.'),
+                mapStep(mapGrp(0), '🧭 Tracking · Thanh hành trình',
+                  'Bật / tắt “thanh hành trình” hiện trên đầu video khi bạn đóng sơ đồ, cho biết đang xem tới phần nào của bài. Nút ⚙ bên cạnh chỉnh độ cao, độ rộng ô, độ hẹp mũi nhọn, cỡ chữ và độ trong suốt, có hình xem trước ngay bên dưới.'),
+                mapStep(mapGrp(1), '🔔 Notice · Báo khi sang phần mới',
+                  'Bật / tắt thông báo hiện giữa video mỗi khi bài giảng sang một phần mới. Nút ⚙ bên cạnh chỉnh cỡ chữ, độ rộng khung, thời gian hiện, và có tạm dừng video khi hiện thông báo hay không.'),
+                mapStep(mapBtn('regen'), '↻ Chia lại',
+                  'Nhờ AI chia lại các phần và vẽ lại sơ đồ từ đầu. Dùng khi bạn thấy cách chia chưa hợp lý (việc này dùng thêm một lượt AI).'),
+                mapStep(vdUnion(function () { var b = mapBar(); return b ? [b.querySelector('button[data-a="out"]'), b.querySelector('button[data-a="in"]')] : null; }), '− ＋ Thu nhỏ / Phóng to',
+                  'Mỗi lần bấm thu nhỏ hoặc phóng to sơ đồ khoảng 25%; mức hiện tại hiện ở ô % trên thanh.'),
+                mapStep(vdUnion(function () { var b = mapBar(); return b ? [b.querySelector('button[data-a="fit"]'), b.querySelector('button[data-a="now"]')] : null; }), '⤢ Vừa khung · 🎯 Tới mục đang phát',
+                  '⤢ thu phóng để thấy trọn cả sơ đồ trong khung. 🎯 đưa sơ đồ về đúng phần video đang phát để bạn biết mình đang ở đâu.'),
+                mapStep(vdUnion(function () { var b = mapBar(); return b ? [b.querySelector('button[data-a="all"]'), b.querySelector('button[data-a="none"]')] : null; }), '⊞ Mở hết · ⊟ Thu hết',
+                  'Xổ ra hoặc thu lại tất cả các nhánh con cùng một lúc.'),
+                mapStep(mapBtn('x'), '✕ Đóng',
+                  'Đóng sơ đồ và quay lại video. Muốn xem lại phần giới thiệu này: mở sơ đồ rồi bấm Trợ lý AI → ℹ️.')
+            ];
+        },
+        /* ---------- 🤖 Chat với AI (+ cửa sổ phụ Trắc nghiệm) ---------- */
+        ai: function () {
+            return [
+                aiStep(vsg('ai-title'), '🤖 Khung chat gia sư AI',
+                  'Gia sư AI đã “xem” bài giảng này (qua phụ đề, hoặc xem trực tiếp video nếu chưa có phụ đề) nên bạn hỏi gì về bài cũng được. Khung chat nằm ngay trên video, video tự tạm dừng khi bạn mở. Mình giới thiệu từng nút từ trên xuống nhé.'),
+                aiStep(vsg('ai-enwin-hbtn'), '❓ Trắc nghiệm · Cửa sổ phụ',
+                  'Bấm để ẩn / hiện cửa sổ phụ Trắc nghiệm nằm cạnh khung chat. Mình mở nó ra ngay bây giờ để bạn xem.'),
+                qzStep(vsg('ai-en-panel'), '📝 Cửa sổ phụ Trắc nghiệm',
+                  'Nơi làm trắc nghiệm về bài giảng. Cách tạo: bấm nút 📝 Trắc nghiệm trong khung chat → chọn số câu (5 / 10 / 15 / 20 hoặc tự điền) và độ khó (Dễ / Vừa / Khó) → ▶ Bắt đầu. AI soạn câu hỏi 4 đáp án dựa trên lời giảng, mỗi câu gắn với một mốc thời gian trong video.'),
+                qzStep(function () { vidKeep(); return document.querySelector('#ai-en-panel .ai-en-body'); }, '✅ Làm từng câu',
+                  'Mỗi lần hiện một câu. Chọn đáp án để biết ngay đúng hay sai kèm giải thích ngắn; mỗi câu đúng được +20 điểm. Dòng đầu thẻ cho biết bạn đang ở câu mấy và đã đúng bao nhiêu câu.'),
+                qzStep(vsg('bk-quiz-nav'), '⬅ ➡ Chuyển câu & công cụ',
+                  '⬅ ➡ chuyển giữa các câu. Sau khi trả lời một câu còn có 📍 Xem lại — tua video tới đoạn lời giảng chứa đáp án — và Giải thích — gửi câu hỏi sang khung chat để AI giải thích kỹ vì sao đáp án đúng, các đáp án kia sai.'),
+                noqzStep(vsg('ai-dict-hbtn'), '📖 Từ điển',
+                  'Mở Từ điển RHM của bạn ngay trong lúc học để tra hoặc lưu thuật ngữ.'),
+                noqzStep(vsg('ai-note-hbtn'), '📒 Ghi chú',
+                  'Mở Sổ ghi chú để xem và lưu ghi chú, nhất là nội dung từ các bong bóng chat AI.'),
+                aiStep(vsg('ai-lang-box'), 'Vie / Eng · Ngôn ngữ trả lời',
+                  'Chọn gia sư trả lời bằng tiếng Việt (Vie), tiếng Anh (Eng), hoặc bật cả hai để xem song ngữ.'),
+                aiStep(vsg('ai-settings-btn'), '⚙️ Cài đặt AI',
+                  'Quản lý khóa API AI và các thiết lập của gia sư. Bấm “Quay lại” để về khung chat.'),
+                aiStep(vsg('ai-messages'), '💬 Khung hội thoại',
+                  'Câu trả lời của gia sư hiện ở đây và luôn tự cuộn xuống cuối. Kéo lên để xem lại các câu trước.'),
+                aiStep(aiQb('📑'), '📑 Mục lục theo thời gian',
+                  'AI lập mục lục phân cấp theo mốc thời gian (1, 1.1, 1.2, 2…), mỗi mục tóm tắt 3–4 câu — hợp để nắm cấu trúc cả bài trước khi xem.'),
+                aiStep(aiQb('🎯'), '🎯 Giải thích đoạn đang xem',
+                  'Giải thích dễ hiểu đoạn bạn đang xem, theo đúng thời điểm video đang dừng.'),
+                aiStep(aiQb('🖼'), '🖼️ Hỏi hình ảnh đang hiện',
+                  'AI nhìn khung hình đang hiện trên video (slide, hình minh họa, sơ đồ…) để giải thích; bạn gõ thêm câu hỏi nếu muốn hỏi riêng về hình đó.'),
+                aiStep(aiQb('📝'), '📝 Trắc nghiệm',
+                  'Mở bảng chọn số câu và độ khó để tạo trắc nghiệm; các câu hỏi hiện trong cửa sổ phụ Trắc nghiệm vừa giới thiệu.'),
+                aiStep(aiQb('🎓'), '🎓 Học Tập có hướng dẫn',
+                  'Gia sư dẫn dắt bạn học từng phần của bài theo kiểu gợi mở (hỏi – đáp), để bạn tự suy nghĩ thay vì nhận đáp án ngay.'),
+                aiStep(vsg('ai-mic-btn'), '🎙️ Nói chuyện trực tiếp',
+                  'Nói chuyện bằng giọng nói với gia sư. Bấm lần nữa (⏹️) để dừng.'),
+                aiStep(vsg('ai-img-btn'), '🖼️ Gửi ảnh',
+                  'Gửi một hình ảnh (ảnh chụp màn hình, hình trong sách…) cho gia sư xem rồi hỏi về hình đó.'),
+                aiStep(vdUnion(function () { return [$id('ai-input'), $id('ai-send-btn')]; }), '⌨️ Ô nhập & ➤ Gửi',
+                  'Gõ câu hỏi tự do rồi bấm ➤ (hoặc Enter) để gửi; Shift + Enter để xuống dòng.'),
+                aiStep(vsg('ai-close-btn'), '✕ Đóng',
+                  'Đóng khung chat và quay về video. Muốn xem lại phần giới thiệu này: mở khung chat rồi bấm Trợ lý AI → ℹ️.')
+            ];
+        },
+        /* ---------- ⚙ Cài đặt phụ đề & lồng tiếng ---------- */
+        sub: function () {
+            return [
+                { vid: true, sel: vs('.custom-yt-subpanel'), t: '⚙ Cài đặt phụ đề & lồng tiếng',
+                  d: 'Bảng gồm hai cột: bên trái chỉnh phụ đề, bên phải chỉnh lồng tiếng (máy đọc phụ đề tiếng Việt khi video chạy). Thay đổi áp dụng ngay, bạn vừa chỉnh vừa xem được. Mình đi qua từng mục nhé.' },
+                { vid: true, sel: vsr('.sub-scale-range'), t: '🔠 Cỡ chữ', d: 'Cỡ chữ của phụ đề, từ 50% đến 300%.' },
+                { vid: true, sel: vsr('.sub-width-range'), t: '↔ Độ rộng', d: 'Độ rộng tối đa của dòng phụ đề so với bề ngang video (30–100%). Hẹp hơn thì phụ đề xuống dòng sớm hơn.' },
+                { vid: true, sel: vsr('.sub-vib-range'), t: '↕ Độ cao', d: 'Khoảng cách từ phụ đề tới mép dưới video (0–40%). Tăng lên để nâng phụ đề cao hơn, tránh bị thanh điều khiển che.' },
+                { vid: true, sel: vsr('.sub-lang-vi'), t: '🌐 Ngôn ngữ', d: 'Chọn hiện phụ đề tiếng Việt, English, hoặc tích cả hai để xem song ngữ.' },
+                { vid: true, sel: vsr('.sub-brk-1'), t: '↩ Tự ngắt', d: 'Mỗi câu phụ đề được tự ngắt thành tối đa 1 hoặc 2 dòng cho vừa độ rộng đã chọn.' },
+                { vid: true, sel: vsr('.sub-merge-check'), t: '🧩 Tự gom sub · Mặc định', d: 'Gom các dòng phụ đề ngắn liền nhau thành một câu dài hơn cho dễ đọc (vẫn vừa số dòng đã chọn). Nút Mặc định đưa toàn bộ phần Phụ đề về như ban đầu.' },
+                { vid: true, sel: vsr('.narr-voice-select'), t: '🗣 Giọng', d: 'Chọn giọng đọc tiếng Việt (giọng Edge hoặc giọng có sẵn của máy). Từ tiếng Anh và chữ viết tắt cũng được đọc bằng chính giọng này.' },
+                { vid: true, sel: vdUnion(function () { return [vdRow('.narr-pitch-range'), vdRow('.narr-rate-range')]; }), t: '🎚 Độ trầm · Tốc độ', d: 'Độ trầm của giọng (0–100%) và tốc độ đọc (từ 0.5x đến 2.5x).' },
+                { vid: true, sel: vsr('.narr-orig-range'), t: '🔈 Âm gốc', d: 'Âm lượng tiếng gốc của video khi đang lồng tiếng. Mặc định 0% là chỉ nghe giọng lồng tiếng; tăng lên nếu muốn nghe lẫn tiếng gốc.' },
+                { vid: true, sel: vsr('.narr-sync-video'), t: '⏱ Đồng bộ', d: 'Cách khớp giọng đọc với video. “Cân đối tốc độ video”: video tự chậm / nhanh theo độ dài câu thuyết minh. “Cân đối tốc độ giọng đọc”: giọng đọc tự nhanh hơn để đọc trọn câu trong mốc thời gian của phụ đề. Dòng “Video đang chạy” cho biết tốc độ video hiện tại.' },
+                { vid: true, sel: function () { vidKeep(); var b = vidQ('.custom-yt-subpanel button[onclick^="narrGuideOpen"]'); return b ? (b.closest('.sp-row') || b) : null; }, t: '❓ Hướng dẫn giọng đọc', d: 'Mở bài hướng dẫn chi tiết về cách chọn và dùng giọng đọc.' },
+                { vid: true, sel: vdUnion(function () { var a = vidQ('.custom-yt-subpanel button[onclick^="narrTest"]'), b = vidQ('.custom-yt-subpanel .sp-done'); return [a, b]; }), t: '▶ Nghe thử · ✅ Xong', d: '“Nghe thử” đọc một câu mẫu để kiểm tra giọng. “Xong” đóng bảng và quay lại xem video. Muốn xem lại phần giới thiệu này: mở bảng rồi bấm Trợ lý AI → ℹ️.' }
+            ];
+        }
+    };
+
     /* ---- bấm vào một nút trong giao diện video: lần đầu mỗi nút hiện giới thiệu ngay tại chỗ ---- */
     var VBTNS = [
-        { k: 'chap', ev: 'click', q: 'button[onclick^="ytChapToggle"]', wait: 1100, steps: [
-            { vid: true, sel: vs('button[onclick^="ytChapToggle"]'), t: '🧠 Sơ đồ tư duy (AI)', d: 'AI lập mục lục / sơ đồ tư duy cho bài giảng này (cần khóa API AI và có thể mất vài giây). Dùng để xem tổng quan và nhảy nhanh tới phần cần xem. Bấm nút lần nữa để đóng.' }] },
-        { k: 'focus', ev: 'click', q: 'button[onclick^="ytFocusDialog"]', wait: 500, steps: [
-            { vid: true, sel: vs('.yt-focusdlg .fd'), t: '🎯 Chế độ tập trung', d: 'Đây là cửa sổ giải thích và bật / tắt chế độ tập trung: AI chọn ý quan trọng, qua mỗi ý video dừng và hiện câu trắc nghiệm; trả lời sai thì tua lại ý đó. Bạn cũng chọn được mức số câu hỏi tối đa (Ít / Vừa / Cao) ở đây.' }] },
-        { k: 'ai', ev: 'click', q: 'button[onclick^="openVideoAi"]', wait: 900, steps: [
-            { vid: true, sel: function () { var m = $id('ai-tutor-modal'); return (m && isShown(m)) ? ($id('ai-title') || m) : null; }, t: '🤖 Hỏi AI về video', d: 'Khung chat với gia sư AI về video đang xem. Dùng các nút gợi ý để lập mục lục theo thời gian, giải thích đoạn đang xem, hỏi về hình ảnh đang hiện, làm trắc nghiệm hoặc học có hướng dẫn; hoặc tự gõ câu hỏi.' }] },
+        { k: 'chap', key: 'vb2-chap', ev: 'click', q: 'button[onclick^="ytChapToggle"]', wait: 1100, cond: function () { return mapIsOpen() || vdKey(); }, steps: function () { return VDETAIL.map(); } },
+        { k: 'ai', key: 'vb2-ai', ev: 'click', q: 'button[onclick^="openVideoAi"]', wait: 900, cond: function () { return aiVisible() && aiVidMode(); }, steps: function () { return VDETAIL.ai(); } },
         { k: 'quality', ev: 'change', q: 'select.yt-quality', wait: 500, steps: [
             { vid: true, sel: vs('select.yt-quality'), t: '🖥 Chất lượng hình', d: 'Bạn vừa đổi chất lượng video. Chất lượng cao cho hình nét hơn nhưng tốn mạng hơn; mạng yếu thì chọn thấp hơn cho đỡ giật.' }] },
         { k: 'speed', ev: 'change', q: 'select[title="Tốc độ phát"]', wait: 500, steps: [
             { vid: true, sel: vs('select[title="Tốc độ phát"]'), t: '⚡ Tốc độ phát', d: 'Bạn vừa đổi tốc độ phát. Chọn lại 1x để xem với tốc độ bình thường.' }] },
         { k: 'cc', ev: 'click', q: 'button[onclick^="toggleYtCaptions"]', wait: 500, steps: [
             { vid: true, sel: vs('button[onclick^="toggleYtCaptions"]'), t: '💬 Phụ đề', d: 'Nút này bật / tắt phụ đề trên video. Muốn chỉnh cỡ chữ, vị trí hay ngôn ngữ phụ đề, bấm nút ⚙ bên cạnh.' }] },
-        { k: 'sub', ev: 'click', q: 'button[onclick*="toggleSubPanel"][onclick*="true"]', wait: 600, steps: [
-            { vid: true, sel: vs('.custom-yt-subpanel'), t: '⚙ Cài đặt phụ đề & lồng tiếng', d: 'Bảng này gồm hai cột: bên trái chỉnh phụ đề, bên phải chỉnh lồng tiếng. Mình giới thiệu từng cột nhé.' },
-            { vid: true, sel: vs('.custom-yt-subpanel .sp-grid > .sp-col:nth-child(1)'), t: '💬 Cột Phụ đề', d: 'Chỉnh cỡ chữ, độ rộng, độ cao của phụ đề; chọn hiện tiếng Việt và / hoặc tiếng Anh; chọn tự ngắt 1 hay 2 dòng; bật tự gom sub. Nút Mặc định trả mọi thứ về ban đầu.' },
-            { vid: true, sel: vs('.custom-yt-subpanel .sp-grid > .sp-col:nth-child(2)'), t: '🗣 Cột Lồng tiếng', d: 'Chọn giọng đọc, độ trầm, tốc độ, âm lượng âm gốc và cách đồng bộ với video. Bấm ❓ Hướng dẫn giọng đọc để xem chi tiết, hoặc Nghe thử để kiểm tra giọng.' },
-            { vid: true, sel: vs('.custom-yt-subpanel .sp-done'), t: '✅ Xong', d: 'Bấm để đóng bảng cài đặt và quay lại xem video.' }] },
+        { k: 'sub', key: 'vb2-sub', ev: 'click', q: 'button[onclick*="toggleSubPanel"][onclick*="true"]', wait: 600, cond: function () { var w = vwrap(); return !!(w && w.classList.contains('sub-editing')); }, steps: function () { return VDETAIL.sub(); } },
         { k: 'narr', ev: 'click', q: 'button[onclick^="toggleNarration"]', wait: 500, steps: [
             { vid: true, sel: vs('button[onclick^="toggleNarration"]'), t: '🗣 Lồng tiếng', d: 'Nút này bật / tắt lồng tiếng: máy đọc phụ đề tiếng Việt bằng giọng Việt khi video chạy. Chỉnh giọng và tốc độ ở nút ⚙ Cài đặt phụ đề & lồng tiếng.' }] },
         { k: 'vol', ev: 'click', q: 'button[onclick^="ytVolBtn"]', wait: 500, steps: [
@@ -28005,10 +28179,17 @@ body {
         for (var i = 0; i < VBTNS.length; i++) {
             var v = VBTNS[i];
             if (v.ev !== e.type || !el.matches(v.q)) continue;
-            var key = 'vb-' + v.k;
+            var key = v.key || ('vb-' + v.k);
             if (winSeen(key)) return;
-            winMark(key);
-            setTimeout(function (vv) { return function () { if (!tour && vidPid()) beginTour('steps', vv.steps); }; }(v), v.wait);
+            if (!v.cond) winMark(key);
+            setTimeout(function (vv, kk) {
+                return function () {
+                    if (tour || !vidPid()) return;
+                    if (vv.cond && (winSeen(kk) || !vv.cond())) return;   // chưa mở được (vd. chưa có khóa API) → để lần sau
+                    winMark(kk);
+                    beginTour('steps', typeof vv.steps === 'function' ? vv.steps() : vv.steps);
+                };
+            }(v, key), v.wait);
             return;
         }
     }
@@ -28041,12 +28222,14 @@ body {
         var steps = TOUR.filter(function (st) { return mode === 'win' ? st.ctx === c : mode === 'multi' ? (c || []).indexOf(st.ctx) >= 0 : !st.ctx; });
         if (mode === 'steps') steps = c || [];
         var box = $id('chuyende-section-container');
-        tour = { i: -1, tok: 0, busy: false, ctx: null, opened: false, mode: mode, steps: steps, wasOpen: !!(box && !box.classList.contains('hidden')) };
+        tour = { i: -1, tok: 0, busy: false, ctx: null, opened: false, mode: mode, steps: steps, undo: [], wasOpen: !!(box && !box.classList.contains('hidden')) };
         cancelSink(); unsinkFab();
         tourGo(1);
     }
     /* Info: đang mở cửa sổ nào thì giới thiệu cửa sổ đó, không thì giới thiệu màn hình chính */
     function startTour() {
+        var dk = vidDetailKey();
+        if (dk && VDETAIL[dk]) { beginTour('steps', VDETAIL[dk]()); return; }
         var w = activeWin();
         if (w) { beginTour('win', w); return; }
         if (!tourHomeOk()) { toast('Cửa sổ này chưa có phần giới thiệu — hãy quay về màn hình chính hoặc mở Bộ Sưu Tập / Từ Điển / Sổ Ghi Chú / Cài Đặt / một môn học'); return; }
@@ -28131,15 +28314,17 @@ body {
             if (!st.demo) removeDemoBar();
             tourSetCtx(st.ctx, function () {
                 if (!tour || tok !== tour.tok) return;
-                var n = tourNode(st);
-                if (!n || !isShown(n)) { show(idx + d, d); return; }
-                tour.i = idx;
-                try { n.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
-                setTimeout(function () {
-                    if (!tour || tok !== tour.tok) return;
-                    tour.busy = false;
-                    drawSpot(n, st.t, st);
-                }, 400);
+                stepPrep(st, tok, function () {
+                    var n = tourNode(st);
+                    if (!n || !isShown(n)) { show(idx + d, d); return; }
+                    tour.i = idx;
+                    try { n.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+                    setTimeout(function () {
+                        if (!tour || tok !== tour.tok) return;
+                        tour.busy = false;
+                        drawSpot(n, st.t, st);
+                    }, 400);
+                });
             });
         }
         show(i, dir);
@@ -28148,6 +28333,8 @@ body {
         var t = tour; tour = null;
         clearSpot(true);
         removeDemoBar();
+        try { var up = $id('hf-union-proxy'); if (up && up.parentNode) up.parentNode.removeChild(up); } catch (e) {}
+        if (t && t.undo) { t.undo.forEach(function (fn) { try { fn(); } catch (e) {} }); }
         if (t && t.mode !== 'win') {
             var cur = t.ctx;
             if (cur && CTXS[cur]) { try { CTXS[cur].close(t); } catch (e) {} }
