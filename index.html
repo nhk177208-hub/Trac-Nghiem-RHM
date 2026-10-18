@@ -5785,7 +5785,7 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
         /* ===== Tô đen trong trắc nghiệm: chỉ còn Highlight / Xóa highlight (giống trình đọc sách); cỡ chữ kéo thả ===== */
         (function () {
             const qzCss = document.createElement('style');
-            qzCss.textContent = '#question-text,#options-container{zoom:var(--qz-fs,1)}'
+            qzCss.textContent = '#question-text,#options-container,#feedback-box{zoom:var(--qz-fs,1)}'
                 + '#question-text mark,#options-container mark{background:#fde68a;color:inherit;border-radius:4px;padding:0 2px}'
                 + '#qz-selbar{position:fixed;z-index:100060;display:none;gap:6px;align-items:center;justify-content:center;max-width:calc(100vw - 16px)}'
                 + '#qz-selbar button{border:0;border-radius:999px;padding:7px 12px;color:#fff;font:700 13px system-ui,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer;white-space:nowrap}'
@@ -27076,7 +27076,7 @@ body {
 /* ---------- Khung chat nhỏ ---------- */
 #home-fab-pop{
   position:fixed;right:16px;bottom:86px;z-index:100201;
-  width:min(382px,calc(100vw - 24px));height:min(72vh,570px);
+  width:min(573px,calc(100vw - 24px));height:min(calc(100vh - 110px),855px);
   background:#fff;border:1px solid #e5e7eb;border-radius:20px;
   box-shadow:0 22px 55px rgba(15,23,42,.36);
   display:flex;flex-direction:column;overflow:hidden;
@@ -27118,7 +27118,7 @@ body {
 .hf-status{font-size:10.5px;color:#9ca3af;text-align:center;padding:0 10px 7px;background:#fff}
 @media (max-width:640px){
   #home-fab{right:12px;bottom:12px;width:54px;height:54px;font-size:24px}
-  #home-fab-pop{right:8px;left:8px;bottom:74px;width:auto;height:min(74vh,600px)}
+  #home-fab-pop{right:8px;left:8px;bottom:74px;width:auto;height:min(calc(100vh - 90px),855px)}
 }
 
 /* ---------- Bánh xe 4 nút (Thông tin · Chat live · Chat · Tắt) ---------- */
@@ -27146,11 +27146,11 @@ body {
 #hf-spot-wrap{position:fixed;inset:0;z-index:100300}
 #hf-spot-wrap .hf-spot-hit{position:absolute;inset:0;cursor:pointer}
 .hf-spot-box{position:fixed;border-radius:14px;pointer-events:none;box-shadow:0 0 0 9999px rgba(2,6,23,.6),0 0 0 3px rgba(255,255,255,.95),0 0 22px 7px rgba(99,102,241,.8);transition:all .18s ease}
-.hf-spot-tip{position:fixed;z-index:100301;max-width:min(340px,92vw);display:flex;gap:8px;align-items:flex-start;background:#111827;color:#fff;border-radius:12px;padding:9px 10px 9px 12px;font-size:13px;font-weight:700;line-height:1.4;box-shadow:0 12px 30px rgba(0,0,0,.45);animation:hfPop .18s ease}
-.hf-spot-tip.hf-tour-tip{display:block;max-width:min(370px,92vw);padding:12px 14px;font-weight:500}
-.hf-tour-tip .tt{font-weight:900;font-size:14.5px;margin-bottom:5px}
-.hf-tour-tip .td{font-size:13px;line-height:1.55;color:#e5e7eb;white-space:pre-line}
-.hf-spot-tip.hf-tour-tip{pointer-events:none;max-width:min(370px,calc(100vw - 124px))}
+.hf-spot-tip{position:fixed;z-index:100301;max-width:min(620px,92vw);display:flex;gap:10px;align-items:flex-start;background:#111827;color:#fff;border-radius:14px;padding:14px 16px;font-size:26px;font-weight:700;line-height:1.45;text-align:justify;text-justify:inter-word;box-shadow:0 12px 30px rgba(0,0,0,.45);animation:hfPop .18s ease}
+.hf-spot-tip.hf-tour-tip{display:block;max-width:min(620px,92vw);padding:16px 18px;font-weight:500}
+.hf-tour-tip .tt{font-weight:900;font-size:29px;margin-bottom:8px}
+.hf-tour-tip .td{font-size:26px;line-height:1.6;color:#e5e7eb;white-space:pre-line;text-align:justify;text-justify:inter-word}
+.hf-spot-tip.hf-tour-tip{pointer-events:none;max-width:min(640px,calc(100vw - 124px))}
 .hf-tour-bar{position:fixed;left:0;right:0;bottom:0;height:0;z-index:100302;pointer-events:none}
 .hf-tour-bar .cnt{position:fixed;left:50%;transform:translateX(-50%);bottom:max(22px,calc(env(safe-area-inset-bottom) + 8px));color:#fff;font-weight:800;font-size:12px;background:rgba(17,24,39,.78);border-radius:9999px;padding:4px 11px}
 .hf-tb-skip{position:fixed;right:12px;bottom:max(14px,env(safe-area-inset-bottom));pointer-events:auto;border:0;border-radius:9999px;padding:11px 20px;font-weight:800;font-size:14px;cursor:pointer;background:#fff;color:#374151;box-shadow:0 8px 22px rgba(0,0,0,.4)}
@@ -27165,9 +27165,9 @@ body {
 #hf-demo-selbar .b-tr{background:#4f46e5}#hf-demo-selbar .b-dc{background:#0369a1}#hf-demo-selbar .b-nt{background:#0f766e}#hf-demo-selbar .b-hl{background:#d97706}#hf-demo-selbar .b-un{background:#b45309}
 /* Bước mở đầu: to, giữa màn hình, nền tối hơn */
 .hf-spot-box.big{box-shadow:0 0 0 9999px rgba(2,6,23,.86),0 0 0 3px rgba(255,255,255,.95),0 0 26px 9px rgba(99,102,241,.85)}
-.hf-spot-tip.hf-tour-tip.hf-tour-big{max-width:min(640px,calc(100vw - 116px));padding:22px 26px;border-radius:18px}
-.hf-tour-big .tt{font-size:clamp(19px,3.2vw,26px);margin-bottom:10px}
-.hf-tour-big .td{font-size:clamp(14.5px,2.2vw,18px);line-height:1.65;white-space:pre-line}
+.hf-spot-tip.hf-tour-tip.hf-tour-big{max-width:min(1000px,calc(100vw - 116px));padding:28px 32px;border-radius:18px}
+.hf-tour-big .tt{font-size:clamp(38px,6.4vw,52px);margin-bottom:14px}
+.hf-tour-big .td{font-size:clamp(29px,4.4vw,36px);line-height:1.7;white-space:pre-line;text-align:justify;text-justify:inter-word}
 /* Cửa sổ chọn Kệ Sách / Khóa Học: to hơn 60%, vẫn nằm gọn trong màn hình */
 #subject-choice-modal > div{zoom:1.6;max-width:calc(95vw / 1.6)!important;max-height:calc(92vh / 1.6);overflow-y:auto}
 /* Cài Đặt ở màn hình ngang: tách làm 2 cột nút */
@@ -27179,7 +27179,15 @@ body {
   #home-settings-modal .flex.flex-col.gap-2{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px!important}
   #home-settings-modal .flex.flex-col.gap-2 > button{font-size:clamp(13px,3.1vh,20px)!important;padding:clamp(8px,2vh,15px) 12px!important;border-radius:16px!important;min-width:0}
 }
-.hf-spot-tip .hf-spot-x{flex:none;width:22px;height:22px;border:0;border-radius:9999px;background:rgba(255,255,255,.18);color:#fff;font-weight:900;font-size:12px;cursor:pointer;line-height:1}
+.hf-spot-tip .hf-spot-x{flex:none;width:34px;height:34px;border:0;border-radius:9999px;background:rgba(255,255,255,.18);color:#fff;font-weight:900;font-size:20px;cursor:pointer;line-height:1}
+
+/* ===== v6 — Giới thiệu nút nào thì nút đó phóng to 50% (có animation phóng lớn rồi thu nhỏ lại) ===== */
+.hf-spot-zoom{transform:scale(1.5)!important;transform-origin:50% 50%}
+.hf-spot-zoom,.hf-spot-zoom-off{transition:transform .34s cubic-bezier(.2,.9,.2,1.28)}
+@media (prefers-reduced-motion:reduce){.hf-spot-zoom,.hf-spot-zoom-off{transition:none}}
+/* ===== v6 — Cỡ chữ của mọi nút tự co giãn theo bề rộng màn hình người dùng (vừa màn hình) ===== */
+:root{--btn-fs:clamp(14px,calc(9px + .5vw),20px)}
+:where(button,input[type=button],input[type=submit],input[type=reset]):where(:not(#home-fab):not(.hf-wb):not(.hf-tb-arrow):not(.hf-tb-skip)){font-size:var(--btn-fs)!important}
 </style>
 
 <button id="home-fab" type="button" class="hidden" aria-label="Trợ lý AI" title="Trợ lý AI — kéo để di chuyển, bấm để mở menu" onclick="homeFabToggle()">
@@ -28933,10 +28941,25 @@ body {
         if (spot) {
             try { if (spot._onScroll) window.removeEventListener('scroll', spot._onScroll, true); } catch (e) {}
             try { if (spot._onResize) window.removeEventListener('resize', spot._onResize); } catch (e) {}
+            try {
+                var zn = spot.zoomNode;
+                if (zn && zn.classList) {
+                    zn.classList.remove('hf-spot-zoom'); zn.classList.add('hf-spot-zoom-off');
+                    setTimeout(function () { try { zn.classList.remove('hf-spot-zoom-off'); } catch (e) {} }, 420);
+                }
+            } catch (e) {}
             if (spot.wrap && spot.wrap.parentNode) spot.wrap.parentNode.removeChild(spot.wrap);
         }
         spot = null;
         if (internal !== true && tour) finishTour();
+    }
+    function hfZoomable(n) {
+        if (!n || n.nodeType !== 1) return false;
+        var t = n.tagName;
+        if (t === 'BUTTON' || t === 'A') return true;
+        try { if (n.getAttribute && n.getAttribute('role') === 'button') return true; } catch (e) {}
+        try { if (n.classList && (n.classList.contains('option-btn') || n.classList.contains('bk-book'))) return true; } catch (e) {}
+        return false;
     }
     function targetOf(key) {
         var def = ACTS[key]; if (!def) return null;
@@ -28996,7 +29019,9 @@ body {
         var fsEl = document.fullscreenElement || document.webkitFullscreenElement;
         (fsEl && fsEl.appendChild ? fsEl : document.body).appendChild(wrap);
         new MutationObserver(function () { if (wrap.hasAttribute('inert')) wrap.removeAttribute('inert'); }).observe(wrap, { attributes: true, attributeFilter: ['inert'] });
-        spot = { wrap: wrap, box: box, tip: tip, node: node, bar: bar, big: !!(st && st.big), keep: !!(st && st.vid) };
+        var zn = null;
+        if (hfZoomable(node)) { try { node.classList.remove('hf-spot-zoom-off'); node.classList.add('hf-spot-zoom'); zn = node; } catch (e) { zn = null; } }
+        spot = { wrap: wrap, box: box, tip: tip, node: node, bar: bar, big: !!(st && st.big), keep: !!(st && st.vid), zoomNode: zn };
         placeSpot();
         spot._onScroll = placeSpot; spot._onResize = placeSpot;
         window.addEventListener('scroll', placeSpot, true);
