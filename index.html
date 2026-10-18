@@ -21945,6 +21945,7 @@ function moveEdActs() {
         </div>
         <div class="flex flex-col gap-2">
             <button type="button" id="hs-homefab-btn" onclick="hsToggleHomeFab(event)" aria-pressed="true" title="Bật/tắt Trợ lý AI — hỗ trợ dùng app: giải đáp cách dùng, chỉ tận nơi từng nút, và làm thay bạn một số thao tác" class="text-left text-sm bg-rose-50 hover:bg-rose-100 text-rose-800 font-semibold py-2.5 px-3.5 rounded-xl border border-rose-300 flex items-center justify-between">🤖 Trợ lý AI <span id="hs-homefab-state" class="text-xs font-black text-emerald-600">Đang bật</span></button>
+            <button type="button" id="hs-guide-btn" onclick="hsOpenGuideInfo(event)" aria-pressed="true" title="Hướng dẫn sử dụng app — xem luồng giới thiệu và bật/tắt việc tự động chạy hướng dẫn lần đầu" class="text-left text-sm bg-sky-50 hover:bg-sky-100 text-sky-800 font-semibold py-2.5 px-3.5 rounded-xl border border-sky-300 flex items-center justify-between">📖 Hướng dẫn sử dụng app <span id="hs-guide-state" class="text-xs font-black text-emerald-600">Đang bật</span></button>
             <button type="button" onclick="homeSettingsGo('openSuggestQuestionModal')" class="text-left text-sm bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold py-2.5 px-3.5 rounded-xl border border-blue-300">💡 Đề xuất câu hỏi</button>
             <button type="button" onclick="homeSettingsGo('openAppFeedbackModal')" class="text-left text-sm bg-teal-50 hover:bg-teal-100 text-teal-800 font-semibold py-2.5 px-3.5 rounded-xl border border-teal-300">📩 Góp ý / Liên hệ</button>
             <button type="button" onclick="hsOpenKeys()" class="text-left text-sm bg-amber-50 hover:bg-amber-100 text-amber-800 font-semibold py-2.5 px-3.5 rounded-xl border border-amber-300 flex items-center justify-between">🔑 Cài đặt khóa API</button>
@@ -21952,6 +21953,27 @@ function moveEdActs() {
             <button type="button" id="btn-rhm-fs" onclick="homeSettingsGo('rhmToggleFs')" class="text-left text-sm bg-slate-50 hover:bg-slate-100 text-slate-800 font-semibold py-2.5 px-3.5 rounded-xl border border-slate-300">⛶ Toàn màn hình</button>
             <button type="button" id="btn-add-home" onclick="homeSettingsGo('addToHomeScreen')" class="text-left text-sm bg-sky-50 hover:bg-sky-100 text-sky-800 font-semibold py-2.5 px-3.5 rounded-xl border border-sky-300">📲 Thêm vào MH chính</button>
         </div>
+    </div>
+</div>
+<!-- ===== Cửa sổ phụ: giới thiệu luồng Hướng dẫn sử dụng app ===== -->
+<div id="hs-guide-modal" class="fixed inset-0 bg-black bg-opacity-70 hidden flex items-center justify-center p-4" style="z-index:100500" onclick="if(event.target===this)hsCloseGuideInfo()">
+    <div class="bg-white rounded-2xl shadow-2xl p-5" style="width:min(620px,94vw);max-height:88vh;overflow-y:auto">
+        <div class="flex items-center justify-between mb-3">
+            <h3 class="text-lg font-black text-gray-800">📖 Hướng dẫn sử dụng app</h3>
+            <button type="button" onclick="hsCloseGuideInfo()" class="w-9 h-9 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 font-black">✕</button>
+        </div>
+        <p class="text-sm text-gray-700 leading-relaxed mb-3">App có sẵn <b>luồng hướng dẫn sử dụng</b> — Trợ lý AI sẽ chỉ từng nút ngay trên màn hình, theo đúng thứ tự: <b>2 nút Ôn Tập Theo Môn Học / Chủ Đề → nút 🤖 Trợ lý AI → các tính năng khác</b>.</p>
+        <div class="rounded-xl bg-indigo-50 border border-indigo-200 p-3 mb-3 text-sm text-indigo-900 leading-relaxed">
+            <b>Cách kích hoạt:</b> bấm nút <b>🤖 Trợ lý AI</b> rồi chọn <b>ℹ️ Thông tin</b> ở bất cứ màn hình nào — luồng hướng dẫn <b>luôn chạy</b>, kể cả khi mục này đang tắt.
+        </div>
+        <div class="flex items-center justify-between rounded-xl bg-sky-50 border border-sky-300 p-3 mb-3 gap-3">
+            <div class="min-w-0">
+                <div class="font-bold text-sky-900 text-sm">Tự động chạy hướng dẫn lần đầu mở app</div>
+                <div class="text-xs text-sky-700 mt-0.5">Tắt thì app không tự mở hướng dẫn; bạn vẫn bấm ℹ️ để xem bất cứ lúc nào.</div>
+            </div>
+            <button type="button" id="hs-guide-toggle" onclick="hsGuideToggle(event)" aria-pressed="true" class="shrink-0 text-xs font-black px-4 py-2 rounded-full border">Đang bật</button>
+        </div>
+        <button type="button" onclick="hsGuideStart()" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-3 px-4 rounded-xl shadow-sm">▶ Bắt đầu hướng dẫn ngay</button>
     </div>
 </div>
 <style>
@@ -27188,6 +27210,14 @@ body {
 /* ===== v6 — Cỡ chữ của mọi nút tự co giãn theo bề rộng màn hình người dùng (vừa màn hình) ===== */
 :root{--btn-fs:clamp(14px,calc(9px + .5vw),20px)}
 :where(button,input[type=button],input[type=submit],input[type=reset]):where(:not(#home-fab):not(.hf-wb):not(.hf-tb-arrow):not(.hf-tb-skip)){font-size:var(--btn-fs)!important}
+/* ===== v7 — bước hỏi "Có/Không" trong luồng hướng dẫn ===== */
+.hf-spot-tip.hf-tour-ask{pointer-events:auto}
+.hf-ask-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.hf-ask-row button{flex:1 1 150px;border:0;border-radius:9999px;padding:14px 16px;font-weight:900;cursor:pointer;font-family:inherit;font-size:22px!important}
+.hf-ask-yes{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;box-shadow:0 10px 22px rgba(79,70,229,.5)}
+.hf-ask-no{background:rgba(255,255,255,.16);color:#e5e7eb}
+.hf-ask-no:hover{background:rgba(255,255,255,.28)}
+.hf-ask-yes:hover{filter:brightness(1.08)}
 </style>
 
 <button id="home-fab" type="button" class="hidden" aria-label="Trợ lý AI" title="Trợ lý AI — kéo để di chuyển, bấm để mở menu" onclick="homeFabToggle()">
@@ -27284,7 +27314,7 @@ body {
         'report-error-modal': 'Báo lỗi câu hỏi', 'folder-modal': 'Thư mục', 'navigator-modal': 'Danh sách câu hỏi',
         'view-quiz-modal': 'Xem bộ đề', 'bookmarked-modal': 'Câu hỏi đã lưu', 'blocked-modal': 'Câu hỏi đã chặn',
         'storage-modal': 'Dung lượng lưu trữ', 'dict-modal': 'Từ điển RHM', 'note-modal': 'Sổ ghi chú',
-        'bookshelf-modal': 'Tủ sách', 'home-settings-modal': 'Cài đặt', 'hs-keys-modal': 'Cài đặt khóa API',
+        'bookshelf-modal': 'Tủ sách', 'home-settings-modal': 'Cài đặt', 'hs-keys-modal': 'Cài đặt khóa API', 'hs-guide-modal': 'Hướng dẫn sử dụng app',
         'ai-tutor-modal': 'Hỏi AI', 'ai-key-gate': 'Kích hoạt Hỏi AI', 'image-lightbox-modal': 'Xem ảnh'
     };
     function contextNow() {
@@ -27319,7 +27349,7 @@ body {
             'exam-create-modal', 'deep-modal', 'collection-modal', 'progress-modal', 'suggest-question-modal',
             'app-feedback-modal', 'add-question-modal', 'report-error-modal', 'folder-modal', 'navigator-modal',
             'view-quiz-modal', 'bookmarked-modal', 'blocked-modal', 'storage-modal', 'image-lightbox-modal',
-            'dev-password-modal', 'dict-modal', 'note-modal', 'bookshelf-modal'];
+            'dev-password-modal', 'dict-modal', 'note-modal', 'bookshelf-modal', 'hs-guide-modal'];
         IDS.forEach(function (id) { var m = $id(id); if (m) m.classList.add('hidden'); });
         var k = $id('hs-keys-modal'); if (k) k.style.display = 'none';
         try { if (typeof window.closeHomeSettings === 'function') window.closeHomeSettings(); } catch (e) {}
@@ -27343,6 +27373,7 @@ body {
         },
         'mon-hoc': { label: 'mở Ôn Tập Theo Môn Học', sel: '#btn-toggle-monhoc', run: function () { openSection('monhoc'); } },
         'chuyen-de': { label: 'mở Ôn Tập Theo Chủ Đề', sel: '#btn-toggle-chuyende', run: function () { openSection('chuyende'); } },
+        'huong-dan': { label: 'mở Hướng dẫn sử dụng app', sel: '#hs-guide-btn', open: function () { window.openHomeSettings(); }, run: function () { window.hsOpenGuideInfo(); } },
         'on-nhanh': { label: 'mở Ôn Tập Nhanh', sel: '#qb-row1 button[onclick="openMockExamModal()"]', open: function () { openSection('chuyende'); }, run: function () { window.openMockExamModal(); } },
         'chuyen-sau': { label: 'mở Ôn Tập Chuyên Sâu', sel: '#qb-row1 button[onclick="openDeepModal()"]', open: function () { openSection('chuyende'); }, run: function () { window.openDeepModal(); } },
         'thi-thu': { label: 'mở Thi Thử (Mock Exam)', sel: '#btn-thi-thu', open: function () { openSection('chuyende'); }, run: function () { window.openExamModal(); } },
@@ -27372,6 +27403,7 @@ body {
     alias(['trang-chu', 'trangchu', 'home', 'trang-nha'], 'trang-chu');
     alias(['cai-dat', 'caidat', 'setting', 'settings', 'cai-dat-app'], 'cai-dat');
     alias(['home-ao', 'homeao', 'nut-home-ao', 'home-fab', 'homefab', 'tro-ly', 'tro-ly-home-ao'], 'home-ao');
+    alias(['huong-dan', 'huongdan', 'guide', 'huong-dan-su-dung', 'hd-app', 'tro-giup'], 'huong-dan');
     alias(['mon-hoc', 'monhoc', 'on-tap-mon-hoc', 'on-tap-theo-mon-hoc'], 'mon-hoc');
     alias(['chuyen-de', 'chuyende', 'chude', 'on-tap-chu-de', 'on-tap-theo-chu-de'], 'chuyen-de');
     alias(['on-nhanh', 'onnhanh', 'on-tap-nhanh'], 'on-nhanh');
@@ -27844,7 +27876,10 @@ body {
 
     /* ------------------- giới thiệu lần lượt các nút trên màn hình chính ------------------- */
     var TOUR = [
+        { key: 'mon-hoc', t: '📚 Ôn Tập Theo Môn Học', d: 'Bấm để xổ ra danh sách các môn học kèm video bài giảng. Lần đầu bấm vào nút này, mình sẽ hướng dẫn cách chọn môn, kéo thả đổi vị trí và 2 nút Kệ Sách / Khóa Học; lần đầu bấm vào Kệ Sách hoặc Khóa Học, mình sẽ giới thiệu bên trong. Khi khu này đang xổ ra, bấm ℹ️ của Trợ lý AI để xem lại.' },
+        { key: 'chuyen-de', t: '🦷 Ôn Tập Theo Chủ Đề', d: 'Bấm để xổ ra khu ôn tập theo chủ đề, gồm các công cụ ôn nhanh, chuyên sâu, thi thử và 36 chủ đề. Lần đầu bấm vào nút này, mình sẽ giới thiệu các nút bên trong ngay tại chỗ; mỗi nút bên trong cũng có hướng dẫn riêng lần đầu bạn mở.' },
         { big: true, sel: '#home-fab', t: '🤖 Nút Trợ lý AI', d: 'Chào bạn 👋 Mình là Trợ lý AI của app — chính là nút này!\n\nBấm vào sẽ hiện 4 nút:\nℹ️ Thông tin — phần giới thiệu bạn đang xem, bấm lại bất cứ lúc nào ở màn hình chính.\n🎙️ Chat live — nói chuyện bằng giọng nói.\n💬 Chat — nhắn tin hỏi cách dùng app, chỉ tận nơi từng nút hoặc làm thay bạn vài thao tác.\n⏻ Tắt — ẩn Trợ lý AI (có hỏi lại cho chắc, và chỉ cách mở lại).\n\nKéo nút để đổi vị trí. Bật / tắt Trợ lý AI ở ⚙️ Cài Đặt → 🤖 Trợ lý AI.\n\nChạm vào màn hình (hoặc bấm mũi tên ›) để mình giới thiệu tiếp các nút trên màn hình chính nhé!' },
+        { ask: true, big: true, sel: '#home-fab', t: '🧭 Giới thiệu các tính năng của app?', d: 'Bạn có muốn mình giới thiệu các tính năng của app trước khi sử dụng không?\n\nChọn “Có” để mình dẫn bạn đi qua từng nút và tính năng chính. Chọn “Để sau” thì app vẫn dùng được ngay; lúc nào cần, bạn bấm nút 🤖 rồi chọn nút ℹ️ để mình giới thiệu lại.' },
         { key: 'bo-suu-tap', t: '🏆 Bộ Sưu Tập Huy Hiệu', d: 'Nơi lưu lại các huy hiệu bạn đạt được trong quá trình học và làm bài. Ôn đều đặn sẽ mở khóa thêm huy hiệu. Con số trên nút là số huy hiệu bạn đã có. Lần đầu bạn mở cửa sổ này, mình sẽ hướng dẫn ngay tại chỗ; muốn xem lại thì bấm nút ℹ️ của Trợ lý AI khi cửa sổ đang mở.' },
         { ctx: 'collection', sel: '#collection-modal h3', t: '🏆 Cửa sổ Bộ Sưu Tập', d: 'Đây là kho huy hiệu của bạn. Bạn có thể chọn một hoặc nhiều huy hiệu yêu thích để chúng nổi lên khi bạn đạt chuỗi trả lời đúng (Streak).' },
         { ctx: 'collection', sel: function () { var e = $id('collection-user-points'); return e && e.parentElement && e.parentElement.parentElement; }, t: '💰 Điểm Tích Lũy', d: 'Số điểm bạn kiếm được khi học và làm bài. Điểm này dùng để đổi lấy huy hiệu mới.' },
@@ -27875,6 +27910,7 @@ body {
         { key: 'cai-dat', t: '⚙️ Cài Đặt', d: 'Nơi chỉnh các thiết lập của app, trong đó có mục 🤖 Trợ lý AI để bật hoặc tắt mình. Lần đầu bạn mở cửa sổ này, mình sẽ hướng dẫn ngay tại chỗ; muốn xem lại thì bấm nút ℹ️ của Trợ lý AI khi cửa sổ đang mở.' },
         { ctx: 'settings', sel: '#home-settings-modal h3', t: '⚙️ Cửa sổ Cài Đặt', d: 'Tổng hợp các thiết lập của app. Mình giới thiệu lần lượt từng mục bên dưới nhé.' },
         { ctx: 'settings', sel: '#hs-homefab-btn', t: '🤖 Trợ lý AI', d: 'Bật hoặc tắt nút Trợ lý AI nổi trên màn hình. Bên cạnh nút có hiển thị trạng thái Đang bật / Đang tắt.' },
+        { ctx: 'settings', sel: '#hs-guide-btn', t: '📖 Hướng dẫn sử dụng app', d: 'Bấm để mở cửa sổ giới thiệu luồng hướng dẫn: bật / tắt việc tự động chạy hướng dẫn lần đầu, và cách kích hoạt lại bất cứ lúc nào bằng nút ℹ️ của Trợ lý AI. Luồng hướng dẫn luôn chạy khi bấm ℹ️, kể cả khi mục này đang tắt.' },
         { ctx: 'settings', sel: '#home-settings-modal button[onclick="homeSettingsGo(\'openSuggestQuestionModal\')"]', t: '💡 Đề xuất câu hỏi', d: 'Bạn có câu hỏi hay muốn đóng góp? Gửi đề xuất ở đây để đưa vào bộ đề.' },
         { ctx: 'settings', sel: '#home-settings-modal button[onclick="homeSettingsGo(\'openAppFeedbackModal\')"]', t: '📩 Góp ý / Liên hệ', d: 'Gửi góp ý, báo lỗi hoặc liên hệ với người làm app.' },
         { ctx: 'settings', sel: '#home-settings-modal button[onclick="hsOpenKeys()"]', t: '🔑 Cài đặt khóa API', d: 'Nhập khóa API để dùng các tính năng AI (Hỏi AI, dịch, Trợ lý AI…). Mặc định dùng Gemini miễn phí, có thể thêm nhà cung cấp dự phòng.' },
@@ -27955,8 +27991,6 @@ body {
         { ctx: 'topic', sel: '#topic-review-panel', t: '⚡ Ôn tập chủ đề', d: 'Chọn các bộ đề, nhập số câu rồi bấm Bắt đầu ôn tập để ôn riêng chủ đề này. Có nút chọn tất cả, bỏ chọn và chọn ngẫu nhiên.' },
         { ctx: 'topic', sel: '#topic-quiz-list', t: '📚 Danh sách bộ đề', d: 'Các bộ đề thuộc chủ đề này. Bấm vào một bộ đề để làm bài.' },
 
-        { key: 'mon-hoc', t: '📚 Ôn Tập Theo Môn Học', d: 'Bấm để xổ ra danh sách các môn học kèm video bài giảng. Lần đầu bấm vào nút này, mình sẽ hướng dẫn cách chọn môn, kéo thả đổi vị trí và 2 nút Kệ Sách / Khóa Học; lần đầu bấm vào Kệ Sách hoặc Khóa Học, mình sẽ giới thiệu bên trong. Khi khu này đang xổ ra, bấm ℹ️ của Trợ lý AI để xem lại.' },
-        { key: 'chuyen-de', t: '🦷 Ôn Tập Theo Chủ Đề', d: 'Bấm để xổ ra khu ôn tập theo chủ đề, gồm các công cụ ôn nhanh, chuyên sâu, thi thử và 36 chủ đề. Lần đầu bấm vào nút này, mình sẽ giới thiệu các nút bên trong ngay tại chỗ; mỗi nút bên trong cũng có hướng dẫn riêng lần đầu bạn mở.' },
         { ctx: 'section', key: 'on-nhanh', t: '⚡ Ôn Tập Nhanh', d: 'Khu Ôn Tập Theo Chủ Đề vừa mở ra. Nút này tạo nhanh một lượt ôn gọn nhẹ: chọn phạm vi và số câu rồi làm ngay. Lần đầu bấm vào mỗi nút, mình sẽ hướng dẫn thêm bên trong. Muốn xem lại phần này: bấm Trợ lý AI → ℹ️ khi khu Ôn Tập Theo Chủ Đề đang xổ ra.' },
         { ctx: 'section', key: 'chuyen-sau', t: '🧠 Ôn Tập Chuyên Sâu', d: 'Lượt ôn đào sâu hơn, giúp bạn tập trung vào những phần còn yếu thay vì làm đại trà.' },
         { ctx: 'section', key: 'thi-thu', t: '🎯 Thi Thử (Mock Exam)', d: 'Làm một đề thi thử có tính giờ như thi thật để đánh giá năng lực của bạn. Bạn cũng có thể tạo đề thi riêng.' },
@@ -28667,7 +28701,7 @@ body {
     function beginTour(mode, c) {
         closePop(); closeWheel(true); clearSpot(true);
         var steps = TOUR.filter(function (st) { return mode === 'win' ? st.ctx === c : mode === 'multi' ? (c || []).indexOf(st.ctx) >= 0 : !st.ctx; });
-        if (mode === 'steps') steps = c || [];
+        if (mode === 'steps') steps = c || []; else steps = steps.filter(function (st) { return !(st.ask && !askOk); });
         var box = $id('chuyende-section-container');
         tour = { i: -1, tok: 0, busy: false, ctx: null, opened: false, mode: mode, steps: steps, undo: [], wasOpen: !!(box && !box.classList.contains('hidden')) };
         cancelSink(); unsinkFab();
@@ -28676,6 +28710,7 @@ body {
     }
     /* Info: đang mở cửa sổ nào thì giới thiệu cửa sổ đó, không thì giới thiệu màn hình chính */
     function startTour() {
+        askOk = false;   // bấm ℹ️ thủ công: không hỏi lại "có muốn giới thiệu không"
         if (winShown('aiset')) { beginTour('win', 'aiset'); return; }   // bảng ⚙️ Cài đặt của khung chat AI (dùng chung 3 khung) đang mở
         var dn0 = null; try { dn0 = dnTop(); } catch (e) {}   // Từ điển / Sổ ghi chú nằm trên cùng: chỉ giới thiệu popup đang mở (hoặc cả cửa sổ nếu không có popup)
         if (typeof dn0 === 'string') { beginTour('win', dn0); return; }
@@ -28755,9 +28790,11 @@ body {
     function introDone() { try { return localStorage.getItem(INTRO_KEY) === '1'; } catch (e) { return introMem; } }
     function runIntro() {
         if (!fabOn || tour) return true;
+        if (!guideOn()) return true;
         if (introDone()) return true;
         if (!tourHomeOk()) return false;
         introMem = true; try { localStorage.setItem(INTRO_KEY, '1'); } catch (e) {}
+        askOk = true;   // luồng tự động lần đầu: có hỏi "muốn giới thiệu tính năng app không?"
         beginTour('home');
         return true;
     }
@@ -28894,6 +28931,46 @@ body {
         toast(fabOn ? '🤖 Đã bật Trợ lý AI' : '🤖 Đã tắt Trợ lý AI');
     };
 
+    /* ---------- Hướng dẫn sử dụng app: trạng thái + cửa sổ phụ (trong ⚙️ Cài Đặt) ---------- */
+    var askOk = false;                 // bước hỏi "Có/Không" chỉ xuất hiện trong luồng tự động lần đầu
+    var GUIDE_KEY = 'hf_guide_on', guideMem = true;
+    try { guideMem = localStorage.getItem(GUIDE_KEY) !== '0'; } catch (e) {}
+    function guideOn() { return !!guideMem; }
+    function setGuideOn(v) { guideMem = !!v; try { localStorage.setItem(GUIDE_KEY, guideMem ? '1' : '0'); } catch (e) {} try { paintGuideState(); } catch (e) {} }
+    function paintGuideState() {
+        var on = guideOn();
+        var s = $id('hs-guide-state');
+        if (s) { s.textContent = on ? 'Đang bật' : 'Đang tắt'; s.style.color = on ? '#059669' : '#9ca3af'; }
+        var b = $id('hs-guide-btn'); if (b) b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        var t = $id('hs-guide-toggle');
+        if (t) {
+            t.textContent = on ? 'Đang bật' : 'Đang tắt';
+            t.setAttribute('aria-pressed', on ? 'true' : 'false');
+            t.style.background = on ? '#dcfce7' : '#e5e7eb';
+            t.style.color = on ? '#065f46' : '#6b7280';
+            t.style.borderColor = on ? '#86efac' : '#d1d5db';
+        }
+    }
+    window.hsGuideToggle = function (ev) {
+        try { if (ev && ev.stopPropagation) ev.stopPropagation(); } catch (e) {}
+        setGuideOn(!guideOn());
+        toast(guideOn() ? '📖 Đã bật hướng dẫn sử dụng app' : '📖 Đã tắt tự động chạy hướng dẫn');
+    };
+    window.hsOpenGuideInfo = function (ev) {
+        try { if (ev && ev.stopPropagation) ev.stopPropagation(); } catch (e) {}
+        var m = $id('hs-guide-modal'); if (!m) return;
+        paintGuideState();
+        m.classList.remove('hidden'); m.removeAttribute('inert');
+        try { new MutationObserver(function () { if (m.hasAttribute('inert')) m.removeAttribute('inert'); }).observe(m, { attributes: true, attributeFilter: ['inert'] }); } catch (e) {}
+    };
+    window.hsCloseGuideInfo = function () { var m = $id('hs-guide-modal'); if (m) m.classList.add('hidden'); };
+    window.hsGuideStart = function () {
+        window.hsCloseGuideInfo();
+        try { window.closeHomeSettings && window.closeHomeSettings(); } catch (e) {}
+        setTimeout(function () { try { window.homeFab && window.homeFab.tour(); } catch (e) {} }, 180);
+    };
+    window.homeFabGuide = { on: guideOn, set: setGuideOn, paint: paintGuideState };
+
     /* --------------------------- thẻ điều khiển --------------------------- */
     function parseActs(raw) {
         var acts = [];
@@ -28981,11 +29058,21 @@ body {
         var tip = document.createElement('div'); tip.className = 'hf-spot-tip';
         var bar = null;
         if (st) {
-            tip.className += ' hf-tour-tip' + (st.big ? ' hf-tour-big' : '');
-            if (st.big) box.className += ' big';
+            tip.className += ' hf-tour-tip' + (st.big ? ' hf-tour-big' : '') + (st.ask ? ' hf-tour-ask' : '');
+            if (st.big || st.ask) box.className += ' big';
             var tt = document.createElement('div'); tt.className = 'tt'; tt.textContent = st.t;
             var td = document.createElement('div'); td.className = 'td'; td.textContent = st.d + ((tour.i === 0 && !st.big) ? '\n\n👆 Chạm vào màn hình để sang bước tiếp theo. Vuốt sang trái để tiếp, vuốt sang phải hoặc bấm mũi tên ‹ để quay lại.' : '');
             tip.appendChild(tt); tip.appendChild(td);
+            if (st.ask) {
+                var arow = document.createElement('div'); arow.className = 'hf-ask-row';
+                var ano = document.createElement('button'); ano.type = 'button'; ano.className = 'hf-ask-no'; ano.textContent = '🙅 Để sau';
+                var ayes = document.createElement('button'); ayes.type = 'button'; ayes.className = 'hf-ask-yes'; ayes.textContent = '✅ Có, giới thiệu cho mình';
+                arow.appendChild(ano); arow.appendChild(ayes); tip.appendChild(arow);
+                ayes.onclick = function (ev) { try { ev.stopPropagation(); } catch (e) {} tourGo(1); };
+                ano.onclick = function (ev) { try { ev.stopPropagation(); } catch (e) {} setGuideOn(false); finishTour(); };
+                tip.addEventListener('pointerdown', function (e) { try { e.stopPropagation(); } catch (er) {} });
+                tip.addEventListener('pointerup', function (e) { try { e.stopPropagation(); } catch (er) {} });
+            }
             bar = document.createElement('div'); bar.className = 'hf-tour-bar';
             var cn = document.createElement('span'); cn.className = 'cnt'; cn.textContent = (tour.i + 1) + ' / ' + tour.steps.length;
             var sk = document.createElement('button'); sk.type = 'button'; sk.className = 'hf-tb-skip'; sk.textContent = 'Bỏ qua';
@@ -29000,6 +29087,7 @@ body {
             bar.appendChild(cn); bar.appendChild(sk); bar.appendChild(pv); bar.appendChild(nx);
             /* chạm bất kỳ đâu (cả nửa trái) = tiếp theo; vuốt trái = tiếp, vuốt phải = quay lại */
             hit.className += ' tour';
+            if (!st.ask) {
             var gx = null, gy = null;
             hit.addEventListener('pointerdown', function (e) { gx = e.clientX; gy = e.clientY; try { hit.setPointerCapture(e.pointerId); } catch (er) {} });
             hit.addEventListener('pointercancel', function () { gx = null; });
@@ -29009,6 +29097,7 @@ body {
                 if (Math.abs(dx) >= 40 && Math.abs(dx) > Math.abs(dy) * 1.2) tourGo(dx < 0 ? 1 : -1);
                 else if (Math.abs(dx) < 12 && Math.abs(dy) < 12) tourGo(1);
             });
+            }
         } else {
             var tx = document.createElement('span'); tx.textContent = '👉 ' + note;
             var x = document.createElement('button'); x.type = 'button'; x.className = 'hf-spot-x'; x.textContent = '✕';
@@ -29158,6 +29247,7 @@ body {
     /* ------------------------------ khởi động ------------------------------ */
     function init() {
         applyFabState(); updSend(); setStatus('Trợ lý đang sẵn sàng');
+        try { paintGuideState(); } catch (e) {}
         bindFab();
         hookOpen('openCollectionModal', 'collection'); hookOpen('openRhmDict', 'dict'); hookOpen('openRhmNote', 'note'); hookOpen('openHomeSettings', 'settings'); hookOpen('bkOpenShelf', 'shelf'); hookOpen('openMonHocDetail', 'course'); hookOpen('bkOpenChapter', 'viewer'); hookOpen('openMockExamModal', 'quick'); hookOpen('openDeepModal', 'deep'); hookOpen('openExamModal', 'mock'); hookOpen('openBookmarkedModal', 'saved'); hookOpen('openBlockedModal', 'blocked'); hookOpen('openTopicModal', 'topic'); hookSection(); hookMonHoc();
         /* các cửa sổ (Từ điển, Sổ ghi chú, Cài đặt…) đặt "inert" lên mọi thứ phía sau → luôn gỡ ra để nút AI vẫn bấm được */
