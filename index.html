@@ -21228,7 +21228,7 @@ function moveEdActs() {
     };
     function infSlider() {   // thanh kéo cỡ chữ của cửa sổ ℹ️ (nhớ lại lần dùng trước)
         var v = 16; try { v = +localStorage.getItem('rhm_info_fs') || 16; } catch (e) {}
-        return '<div style="display:flex;align-items:center;gap:8px;margin:6px 0 8px;font-size:13px;color:#0f766e"><span style="font-weight:800">Aa</span><input type="range" min="12" max="28" step="1" value="' + v + '" style="flex:1;accent-color:#0f766e;touch-action:none" oninput="rhmInfFs(this.value)"><span id="nt-inf-v" style="min-width:26px;text-align:right">' + v + '</span></div><div class="nt-infbody" style="font-size:' + v + 'px">';
+        return '<div class="nt-infbody" style="font-size:' + v + 'px">';   // đã bỏ thanh kéo cỡ chữ Aa
     }
     function openInfo(id) {
         const n = nt.notes.find(x => x.id === id); if (!n) return;
@@ -28454,6 +28454,60 @@ body {
             winMark('qb-rdchat'); beginTour('steps', RDCHAT_STEPS);
         }, 1000);
     }, true);
+    /* ---- Từ điển / Sổ ghi chú: (a) lần đầu có từ / ghi chú để thao tác → giới thiệu các nút trên từng mục; (b) lần đầu bấm mỗi nút ribbon → giới thiệu riêng ---- */
+    function dnVis(ids) { return function () { for (var i = 0; i < ids.length; i++) { var e = $id(ids[i]); if (isShown(e)) return e; } return null; }; }
+    var DN_ROW_STEPS = [
+        { sel: qbQ('#dict-modal .rd-act'), t: '🛠 Các nút thao tác trên từ', d: 'Bấm vào một thuật ngữ trong sách là hiện thanh nút này ngay cạnh dòng đó (và máy đọc to từ tiếng Anh). Mình giới thiệu từng nút nhé.' },
+        { sel: qbQ('#dict-modal .rd-act [data-act="r-info"]'), t: 'ⓘ Thông tin', d: 'Xem thông tin chi tiết của thuật ngữ: nghĩa, từ loại, giải thích do AI soạn, có thể nghe đọc.' },
+        { sel: qbQ('#dict-modal .rd-act [data-act="r-star"]'), t: '☆ Lưu từ', d: 'Đánh dấu sao để lưu thuật ngữ quan trọng; xem riêng các từ này bằng nút ⭐ Từ đã lưu ở ruy-băng. Bấm lại để bỏ lưu.' },
+        { sel: qbQ('#dict-modal .rd-act [data-act="r-more"]'), t: '＋ Thêm từ liên quan', d: 'Thêm nhanh các từ liên quan (cùng bộ, cùng từ loại) với thuật ngữ này vào từ điển.' },
+        { sel: qbQ('#dict-modal .rd-act [data-act="r-edit"]'), t: '✏️ Sửa', d: 'Sửa thuật ngữ, từ loại, nghĩa tiếng Việt và ảnh. Các lần dịch sau sẽ dùng đúng nghĩa bạn vừa sửa.' },
+        { sel: qbQ('#dict-modal .rd-act [data-act="r-del"]'), t: '🗑 Xóa', d: 'Xóa thuật ngữ khỏi từ điển của bạn.' }
+    ];
+    var NT_ROW_STEPS = [
+        { sel: qbQ('#note-modal .nt-pen'), t: '✏️ Sửa ghi chú', d: 'Sửa nội dung, tiêu đề, phân mục và ảnh của ghi chú này ngay tại chỗ.' },
+        { sel: qbQ('#note-modal .nt-spk'), t: '🔊 Đọc to', d: 'Máy đọc to ghi chú này; bấm lại để dừng.' },
+        { sel: qbQ('#note-modal .nt-i'), t: 'ℹ️ Thông tin', d: 'Xem vị trí (nguồn) và thời gian tạo của ghi chú.' }
+    ];
+    var DNBTNS = [
+        { m: 'dict-modal', k: 'd-add', q: '#rd-rb-add', wait: 450, cond: function () { return shown('rd-pop'); }, steps: [
+            { sel: dnVis(['rd-pop']), t: '➕ Thêm thuật ngữ mới', d: 'Tự thêm một thuật ngữ vào từ điển: nhập từ tiếng Anh, từ loại (n, v, adj…) và nghĩa tiếng Việt.' },
+            { sel: qbQ('#rd-pop .rd-pbtn.pri'), t: '＋ Thêm', d: 'Bấm để lưu thuật ngữ. Từ vừa thêm có huy hiệu MỚI; bấm vào dòng của nó trong sách để thao tác tiếp.' }] },
+        { m: 'dict-modal', k: 'd-search', q: '#rd-rb-search', wait: 450, cond: function () { return shown('rd-pop'); }, steps: [
+            { sel: dnVis(['rd-pop']), t: '🔍 Tìm thuật ngữ', d: 'Gõ để tìm trong toàn bộ từ điển; kết quả hiện ngay bên dưới, bấm một kết quả để nhảy tới trang chứa thuật ngữ đó.' }] },
+        { m: 'dict-modal', k: 'd-review', q: '#rd-rb-review', wait: 600, cond: function () { return shown('rd-rv') || shown('rd-pop'); }, steps: [
+            { sel: dnVis(['rd-rv', 'rd-pop']), t: '🗂️ Ôn tập bằng thẻ ghi nhớ', d: 'Ôn thuật ngữ bằng flashcard: chọn nguồn từ (tất cả hoặc từ đã lưu) và cách ôn, rồi lật thẻ để nhớ lâu hơn. Bấm lại nút này để thoát.' }] },
+        { m: 'note-modal', k: 'n-new', q: '#nt-rb-new', wait: 450, cond: function () { return shown('nt-pop'); }, steps: [
+            { sel: dnVis(['nt-pop']), t: '➕ Tạo ghi chú mới', d: 'Viết ghi chú của riêng bạn: đặt tiêu đề, chọn hoặc gõ phân mục, rồi nhập nội dung.' },
+            { sel: qbQ('#nt-in-c'), t: '🗂 Phân mục', d: 'Gom ghi chú theo chủ đề: chọn phân mục có sẵn hoặc gõ tên mới.' },
+            { sel: qbQ('#nt-pop [data-act="n-save"]'), t: '💾 Lưu', d: 'Lưu ghi chú vào sổ. Sau đó bạn sẽ thấy các nút ✏️ 🔊 ℹ️ trên ghi chú.' }] },
+        { m: 'note-modal', k: 'n-search', q: '#nt-rb-search', wait: 450, cond: function () { return shown('nt-pop'); }, steps: [
+            { sel: dnVis(['nt-pop']), t: '🔍 Tìm ghi chú', d: 'Gõ từ khóa để tìm lại ghi chú; bấm một kết quả để mở ghi chú đó.' }] },
+        { m: 'note-modal', k: 'n-review', q: '#nt-rb-review', wait: 600, cond: function () { return shown('nt-rv') || shown('nt-pop'); }, steps: [
+            { sel: dnVis(['nt-rv', 'nt-pop']), t: '🗂️ Ôn tập ghi chú', d: 'Ôn lại các ghi chú bằng thẻ ghi nhớ để nhớ lâu hơn. Bấm lại nút này để thoát.' }] }
+    ];
+    document.addEventListener('click', function (e) {
+        if (!fabOn || tour || Date.now() < suppressUntil) return;
+        var t = e.target; if (!t || !t.closest || t.closest('#hf-spot-wrap')) return;
+        for (var i = 0; i < DNBTNS.length; i++) {
+            var v = DNBTNS[i], el = t.closest(v.q);
+            if (!el || !el.closest('#' + v.m)) continue;
+            var key = 'dn-' + v.k; if (winSeen(key)) return;
+            setTimeout(function (vv, kk) { return function () {
+                if (tour || winSeen(kk) || !shown(vv.m) || (vv.cond && !vv.cond())) return;
+                winMark(kk); beginTour('steps', vv.steps);
+            }; }(v, key), v.wait);
+            return;
+        }
+    }, true);
+    /* lần đầu có từ (chọn một thuật ngữ → hiện thanh nút) hoặc có ghi chú (hiện ✏️ 🔊 ℹ️) → giới thiệu các nút đó */
+    setInterval(function () {
+        try {
+            if (!fabOn || tour || Date.now() < suppressUntil) return;
+            if (!winSeen('dn-rowacts') && shown('dict-modal') && document.querySelector('#dict-modal .rd-act')) { winMark('dn-rowacts'); beginTour('steps', DN_ROW_STEPS); return; }
+            if (!winSeen('dn-ntacts') && shown('note-modal') && document.querySelector('#note-modal .nt-pen')) { winMark('dn-ntacts'); beginTour('steps', NT_ROW_STEPS); }
+        } catch (e) {}
+    }, 1500);
     function tourHomeOk() {
         if (!shown('home-screen')) return false;
         for (var k in MODAL_NAMES) { if (shown(k)) return false; }
