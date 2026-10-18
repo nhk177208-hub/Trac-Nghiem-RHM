@@ -557,8 +557,10 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
             transform: scale(1.25);
         }
 
-        /* ===== APPLE · chế độ cửa sổ: chỉ còn nút Phát (góc trái) và Toàn màn hình (góc phải); Mac có thêm Rạp chiếu phim ===== */
-        html.is-apple .custom-yt-wrapper:not(.theater-mode):not(.yt-fs):not(:fullscreen) .yt-iconrow > :not([onclick^="toggleYtPlay"]):not([onclick^="toggleYtFullscreen"]):not([onclick^="toggleYtTheaterMode"]):not(.yt-spacer) { display: none !important; }
+        /* ===== Chế độ cửa sổ (MỌI thiết bị): chỉ còn nút Phát (góc trái) + Rạp chiếu phim + Toàn màn hình (góc phải).
+           Trên điện thoại ẩn luôn Rạp chiếu phim → chỉ còn Phát + Toàn màn hình. ===== */
+        html .custom-yt-wrapper:not(.theater-mode):not(.yt-fs):not(:fullscreen) .yt-iconrow > :not([onclick^="toggleYtPlay"]):not([onclick^="toggleYtFullscreen"]):not([onclick^="toggleYtTheaterMode"]):not(.yt-spacer) { display: none !important; }
+        html.is-yt-mobile .custom-yt-wrapper:not(.theater-mode):not(.yt-fs):not(:fullscreen) .yt-iconrow > [onclick^="toggleYtTheaterMode"],
         html.is-apple-touch .custom-yt-wrapper:not(.theater-mode):not(.yt-fs):not(:fullscreen) .yt-iconrow > [onclick^="toggleYtTheaterMode"] { display: none !important; }
         html.is-apple .custom-yt-wrapper:not(.theater-mode):not(.yt-fs):not(:fullscreen) .yt-iconrow { overflow: visible; }
 
@@ -13499,6 +13501,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
                 const c = document.documentElement.classList;
                 if (ytIsApple()) c.add('is-apple');
                 if (ytIsAppleTouch()) c.add('is-apple-touch');
+                if (ytIsMobile()) c.add('is-yt-mobile');   // điện thoại: cửa sổ video chỉ còn Phát + Toàn màn hình
             } catch (e) {}
         })();
         // chỉ ĐIỆN THOẠI mới dùng cơ chế xoay ngang giả (rot-land)
@@ -27387,6 +27390,8 @@ body {
 .hf-spot-tip.hf-tour-tip.hf-tour-xl{max-width:min(1180px,max(320px,calc(100vw - 120px)));padding:24px 26px}
 .hf-tour-tip.hf-tour-xl .tt{font-size:clamp(27px,min(5.85vw,6.9vh),57px)}
 .hf-tour-tip.hf-tour-xl .td{font-size:clamp(24px,min(5.25vw,6.3vh),50px)}
+/* thẻ giới thiệu gọn: không rộng quá ~50% màn hình (dùng cho cửa sổ Ôn Tập Nhanh) */
+.hf-spot-tip.hf-tour-tip.hf-tour-half{max-width:min(830px,max(260px,50vw))}
 /* dàn nút 2 góc: nhóm trái (Đóng, Gợi ý lại / Hủy) — nhóm phải (Thêm đã chọn, Chọn tất cả / Lưu) */
 .rd-pbg{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap}
 .rd-pbg-r{margin-left:auto}
@@ -28101,7 +28106,6 @@ body {
         { ctx: 'viewer', sel: '#bk-sec-btn', t: '📑 Nhận diện mục lục', d: 'Nhờ AI tự tìm các phân mục của chương và dựng mục lục cho bạn.' },
         { ctx: 'viewer', sel: '#bk-sec-mark', t: '🔖 Đánh dấu phân mục', d: 'Tự thêm mục lục thủ công: bôi đen tiêu đề trong PDF rồi bấm nút này.' },
         { ctx: 'viewer', sel: '#bk-pdf-wrap', xl: true, t: '📄 Trang sách', d: 'Cuộn để đọc. Bạn có thể bôi đen chữ để tô sáng, ghi chú hoặc dịch thuật ngữ; thuật ngữ mới sẽ được lưu vào Từ Điển RHM.' },
-        { ctx: 'viewer', demo: true, sel: function () { return demoBar(); }, t: '✨ Thanh nút khi bôi đen chữ', d: 'Bôi đen (kéo chọn) một đoạn chữ trong trang sách, một thanh nút nhỏ sẽ nổi lên ngay trên đoạn đó. Thanh này gộp các việc hay dùng: 🌐 Dịch — dịch đoạn đó ngay trong khung AI Chat của sách rồi hỏi tiếp; 📖 Thêm từ điển — lưu từ/cụm từ tiếng Anh vào Từ Điển RHM (chỉ hiện khi đoạn chọn là từ ngắn); 📝 Ghi chú nhanh — gắn ghi chú vào đoạn đó (đoạn có ghi chú sẽ hiện biểu tượng 📝 bên cạnh để xem/sửa/xóa); 🖍 Highlight — tô sáng để dễ tìm lại khi ôn; 🧽 Xóa highlight — bỏ tô sáng (chỉ hiện khi đoạn đang có highlight). Đây là thanh mẫu để minh họa — chạm vào chữ đã được tô sáng cũng làm thanh này hiện lại.' },
         { ctx: 'viewer', sel: '#bk-ai-btn', t: '🤖 AI Chat', d: 'Mở khung chat với gia sư AI về chương đang đọc: hỏi bài, tóm tắt, giải thích chỗ chưa hiểu.' },
 
         { ctx: 'course', sel: '#monhoc-modal-title', t: '🎬 Cửa sổ Khóa Học', d: 'Đây là khu khóa học của môn bạn vừa chọn, gồm các phân môn (nếu có) và video bài giảng. Muốn xem lại phần này: bấm Trợ lý AI → ℹ️ khi cửa sổ đang mở.' },
@@ -28110,23 +28114,20 @@ body {
         { ctx: 'course', sel: function () { return document.querySelector('#lessons-container button.vid-btn') || document.querySelector('#lessons-container [onclick^="ytVideoBtn"]') || document.querySelector('[onclick^="ytVideoBtn"]'); }, t: '▶️ Xem bài giảng', d: 'Bấm để mở trình phát riêng của app và xem bài giảng này: có chế độ rạp chiếu phim, toàn màn hình, tăng/giảm tốc độ và tua.' },
         { ctx: 'course', sel: function () { return document.querySelector('#lessons-container button[id^="review-btn-"]') || document.querySelector('#lessons-container [onclick^="startLessonReview"]') || document.querySelector('[onclick^="startLessonReview"]'); }, t: '🎓 Ôn tập bài này', d: 'Bấm để AI ra câu hỏi trắc nghiệm cho riêng bài giảng này, giúp nhớ ngay nội dung vừa học (đúng được + điểm).' },
 
-        { ctx: 'video', sel: vs('button[onclick^="ytChapToggle"]'), t: '🧠 Sơ đồ tư duy (AI)', d: 'AI đọc bài giảng và lập mục lục / sơ đồ tư duy theo từng phân mục (cần khóa API AI), giúp bạn xem tổng quan và nhảy nhanh tới phần mình cần. Mở sơ đồ ra rồi bấm Trợ lý AI → ℹ️ để xem giới thiệu chi tiết từng phần trong sơ đồ.' },
-        { ctx: 'video', sel: vs('button[onclick^="ytFocusDialog"]'), t: '🎯 Chế độ tập trung', d: 'Khi bật, AI chọn các ý quan trọng; qua mỗi ý video sẽ dừng và hiện một câu trắc nghiệm 4 đáp án. Trả lời sai thì video tua lại đầu ý đó để bạn nghe lại. Bấm nút để xem giải thích và bật / tắt.' },
-        { ctx: 'video', sel: vs('button[onclick^="openVideoAi"]'), t: '🤖 Hỏi AI về video', d: 'Mở khung chat với gia sư AI đã xem video: lập mục lục theo mốc thời gian, giải thích đoạn đang xem, hỏi về hình ảnh đang hiện, làm trắc nghiệm (có cửa sổ phụ Trắc nghiệm bên cạnh) hoặc học có hướng dẫn. Mở khung chat ra rồi bấm Trợ lý AI → ℹ️ để xem giới thiệu chi tiết từng nút.' },
-        { ctx: 'video', sel: vs('select.yt-quality'), t: '🖥 Chất lượng hình', d: 'Chọn độ phân giải của video. Chất lượng cao cho hình nét hơn nhưng tốn mạng hơn.' },
-        { ctx: 'video', sel: vs('select[title="Tốc độ phát"]'), t: '⚡ Tốc độ phát', d: 'Xem nhanh hơn hoặc chậm hơn tốc độ bình thường.' },
+        { ctx: 'video', low: true, sel: vs('button[onclick^="ytChapToggle"]'), t: '🧠 Sơ đồ tư duy (AI)', d: 'AI đọc bài giảng và lập mục lục / sơ đồ tư duy theo từng phân mục (cần khóa API AI), giúp bạn xem tổng quan và nhảy nhanh tới phần mình cần. Mở sơ đồ ra rồi bấm Trợ lý AI → ℹ️ để xem giới thiệu chi tiết từng phần trong sơ đồ.' },
+        { ctx: 'video', low: true, sel: vs('button[onclick^="ytFocusDialog"]'), t: '🎯 Chế độ tập trung', d: 'Khi bật, AI chọn các ý quan trọng; qua mỗi ý video sẽ dừng và hiện một câu trắc nghiệm 4 đáp án. Trả lời sai thì video tua lại đầu ý đó để bạn nghe lại. Bấm nút để xem giải thích và bật / tắt.' },
+        { ctx: 'video', low: true, sel: vs('button[onclick^="openVideoAi"]'), t: '🤖 Hỏi AI về video', d: 'Mở khung chat với gia sư AI đã xem video: lập mục lục theo mốc thời gian, giải thích đoạn đang xem, hỏi về hình ảnh đang hiện, làm trắc nghiệm (có cửa sổ phụ Trắc nghiệm bên cạnh) hoặc học có hướng dẫn. Mở khung chat ra rồi bấm Trợ lý AI → ℹ️ để xem giới thiệu chi tiết từng nút.' },
         { ctx: 'video', sel: vs('button[onclick^="toggleYtCaptions"]'), t: '💬 Bật / Tắt phụ đề', d: 'Hiện hoặc ẩn phụ đề trên video (phụ đề .srt, tiếng Việt và / hoặc tiếng Anh).' },
         { ctx: 'video', sel: vs('button[onclick*="toggleSubPanel"][onclick*="true"]'), t: '⚙ Cài đặt phụ đề & lồng tiếng', d: 'Mở bảng chỉnh cỡ chữ, độ rộng, độ cao, ngôn ngữ phụ đề, cũng như giọng, độ trầm, tốc độ của lồng tiếng. Mở bảng ra rồi bấm Trợ lý AI → ℹ️ để xem giới thiệu chi tiết từng mục.' },
         { ctx: 'video', sel: vs('button[onclick^="toggleNarration"]'), t: '🗣 Lồng tiếng', d: 'Bật / tắt lồng tiếng: máy đọc phụ đề tiếng Việt bằng giọng Việt trong lúc video chạy.' },
         { ctx: 'video', sel: vs('button[onclick^="toggleYtTheaterMode"]'), t: '🎬 Rạp chiếu phim', d: 'Phóng video lớn trong app, nền tối để tập trung. Bấm lần nữa để thoát.' },
         { ctx: 'video', sel: vs('button[onclick^="toggleYtFullscreen"]'), t: '⛶ Toàn màn hình', d: 'Xem video toàn màn hình. Bấm lại hoặc thoát toàn màn hình để quay về.' },
 
-        { ctx: 'quick', sel: '#mock-exam-modal h3', t: '⚡ Cửa sổ Ôn Tập Nhanh', d: 'Tạo một lượt ôn gọn: chọn chủ đề, chọn số câu rồi bắt đầu. Muốn xem lại phần này: bấm Trợ lý AI → ℹ️ khi cửa sổ đang mở.' },
-        { ctx: 'quick', sel: function () { var b = document.querySelector('#mock-exam-modal button[onclick="mockTopicSelectAll(true)"]'); return b && b.parentElement.parentElement; }, t: '1️⃣ Chọn chủ đề', d: 'Bấm các ô số (1–36) bên dưới để chọn từng chủ đề. Dùng Chọn tất cả hoặc Bỏ chọn tất cả để chọn nhanh.' },
-        { ctx: 'quick', sel: '#mock-topic-grid', t: '🔢 Các ô chủ đề', d: 'Ô sáng là chủ đề đang được chọn. Dòng bên dưới cho biết tổng số câu có sẵn của các chủ đề bạn chọn.' },
-        { ctx: 'quick', sel: function () { var i = $id('mock-num-questions'); return i && i.parentElement; }, t: '2️⃣ Số câu hỏi', d: 'Bấm một số có sẵn (10, 15, 20…) hoặc tự gõ số câu bạn muốn ôn.' },
-        { ctx: 'quick', sel: '#mock-exam-modal button[onclick="mockQuickPick()"]', t: '⚡ Chọn nhanh', d: 'Không muốn tự chọn? Bấm để app chọn ngẫu nhiên vài chủ đề giúp bạn.' },
-        { ctx: 'quick', sel: '#mock-exam-modal button[onclick="startMockExam()"]', t: '🚀 Bắt đầu bài mới', d: 'Bắt đầu làm bài với các chủ đề và số câu bạn đã chọn.' },
+        { ctx: 'quick', half: true, sel: '#mock-exam-modal h3', t: '⚡ Cửa sổ Ôn Tập Nhanh', d: 'Tạo một lượt ôn gọn: chọn chủ đề, chọn số câu rồi bắt đầu. Muốn xem lại phần này: bấm Trợ lý AI → ℹ️ khi cửa sổ đang mở.' },
+        { ctx: 'quick', half: true, sel: function () { var b = document.querySelector('#mock-exam-modal button[onclick="mockTopicSelectAll(true)"]'); return b && b.parentElement.parentElement; }, t: '1️⃣ Chọn chủ đề', d: 'Bấm các ô số (1–36) bên dưới để chọn từng chủ đề. Dùng Chọn tất cả hoặc Bỏ chọn tất cả để chọn nhanh.' },
+        { ctx: 'quick', half: true, sel: '#mock-topic-grid', t: '🔢 Các ô chủ đề', d: 'Ô sáng là chủ đề đang được chọn. Dòng bên dưới cho biết tổng số câu có sẵn của các chủ đề bạn chọn.' },
+        { ctx: 'quick', half: true, sel: function () { var i = $id('mock-num-questions'); return i && i.parentElement; }, t: '2️⃣ Số câu hỏi', d: 'Bấm một số có sẵn (10, 15, 20…) hoặc tự gõ số câu bạn muốn ôn.' },
+        { ctx: 'quick', half: true, sel: '#mock-exam-modal button[onclick="mockQuickPick()"]', t: '⚡ Chọn nhanh', d: 'Không muốn tự chọn? Bấm để app chọn ngẫu nhiên vài chủ đề giúp bạn.' },
 
         { ctx: 'deep', sel: '#deep-modal h3', t: '🧠 Cửa sổ Ôn Tập Chuyên Sâu', d: 'Lượt ôn đào sâu, cho bạn chọn cả chủ đề lẫn độ khó. Muốn xem lại phần này: bấm Trợ lý AI → ℹ️ khi cửa sổ đang mở.' },
         { ctx: 'deep', sel: '#deep-tree', t: '1️⃣ Chọn chủ đề & bộ đề', d: 'Tích chọn các chủ đề hoặc bộ đề muốn ôn. Phía trên có Chọn tất cả, Bỏ chọn tất cả và 🎲 Chọn ngẫu nhiên.' },
@@ -28168,6 +28169,29 @@ body {
     function qscNoModal() { for (var k in MODAL_NAMES) { if (shown(k)) return false; } return true; }
     function aksNode(sel) { return function () { return document.querySelector(sel); }; }
     function aksBlk(sel) { return function () { var e = document.querySelector(sel); return e ? (e.closest('.rounded-2xl') || e) : null; }; }
+    /* Thẻ “🧠 Mức suy luận Gemini” nằm ở CUỐI phần xổ “Đổi khóa / cài đặt” của thẻ khóa Gemini
+       (thẻ này dùng .rounded-xl nên aksBlk sẽ nhảy lên khối .rounded-2xl rất to) → trỏ đúng thẻ đó. */
+    function glBlk() {
+        var b = document.querySelector('#ai-key-panel [data-gl]');
+        return b ? (b.closest('div.rounded-xl') || b.closest('details') || b) : null;
+    }
+    /* Mở sẵn phần khóa Gemini ra (nhớ trạng thái để đóng lại khi hết hướng dẫn) để cuộn xuống thấy mục Mức suy luận */
+    function glPrep() {
+        var b = document.querySelector('#ai-key-panel [data-gl]');
+        var det = b ? b.closest('details') : null;
+        if (det && !det.open) {
+            var t = tour;
+            if (t && !t.glOpen) {
+                t.glOpen = true;
+                var pn = document.getElementById('ai-key-panel'), sv = pn ? pn.scrollTop : 0;
+                t.undo.push(function () { try { det.open = false; } catch (e) {} try { if (pn) pn.scrollTop = sv; } catch (e) {} });
+            }
+            det.open = true;
+        }
+        /* cuộn xuống ngay tới thẻ này (cuộn mượt không ăn trong bảng cài đặt) để thẻ hiện ra đúng giữa bảng */
+        var blk = b ? (b.closest('div.rounded-xl') || b) : null;
+        if (blk && blk.scrollIntoView) { try { blk.scrollIntoView({ behavior: 'auto', block: 'center' }); } catch (e) {} }
+    }
 
     /* --- (1) Cài đặt khung chat AI --- */
     var AKS_STEPS = [
@@ -28179,7 +28203,7 @@ body {
           d: 'Có 4 mức: Ngắn gọn (~350 token), Vừa (~900), Chi tiết (~2.000) và Đầy đủ (không giới hạn thêm). Ngắn thì trả lời nhanh và đỡ tốn lượt; chọn Chi tiết / Đầy đủ khi cần giải thích kỹ.' },
         { sel: function () { var b = document.querySelector('#ai-key-panel [data-bk-st]'); return b ? (b.closest('.border-t') || b.parentElement) : null; }, t: '📖 Giọng văn khi dịch sách',
           d: 'Áp dụng khi bạn dịch đoạn chữ trong trình đọc sách. “Tự nhiên (dễ hiểu)” dịch thoáng, đọc xuôi tai; “Bám sát (sát văn gốc)” giữ sát câu chữ của bản gốc.' },
-        { sel: aksBlk('#ai-key-panel [data-gl]'), t: '🧠 Mức suy luận Gemini',
+        { sel: glBlk, pre: glPrep, wait: 260, t: '🧠 Mức suy luận Gemini',
           d: 'Thấp · Trung bình · Cao là mức “suy nghĩ” của Gemini trước khi trả lời. Mức càng cao thì trả lời càng kỹ nhưng càng chậm. Áp dụng cho các lần gọi Gemini tiếp theo.' },
         { sel: '#ai-prov-cards > div:nth-child(1) summary', t: '🔑 Lấy khóa & nhập khóa',
           d: 'Bấm dòng này để mở hướng dẫn từng bước: lấy khóa miễn phí, rồi dán vào ô bên dưới (có sẵn nút 📋 Dán khóa đã sao chép & lưu). Đã có khóa thì mục này đổi thành “Đổi khóa / cài đặt”, kèm ô đổi model nếu nhà cung cấp ngừng model cũ.' }
@@ -28377,7 +28401,7 @@ body {
     function mapStep(sel, t, d) { return { vid: true, sel: sel, t: t, d: d, until: mapReady, max: 25000, wait: 300 }; }
     function qzStep(sel, t, d) { return { vid: true, sel: sel, t: t, d: d, pre: function () { qzEnsure(true); }, wait: 500 }; }
     function noqzStep(sel, t, d) { return { vid: true, sel: sel, t: t, d: d, pre: function () { qzEnsure(false); }, wait: 200 }; }
-    function aiStep(sel, t, d) { return { vid: true, sel: sel, t: t, d: d }; }
+    function aiStep(sel, t, d, opt) { return { vid: true, sel: sel, t: t, d: d, low: !!(opt && opt.low), mid: !!(opt && opt.mid) }; }
 
     var VDETAIL = {
         /* ---------- 🧠 Sơ đồ tư duy ---------- */
@@ -28406,31 +28430,25 @@ body {
                   'Bấm để ẩn / hiện cửa sổ phụ Trắc nghiệm nằm cạnh khung chat. Mình mở nó ra ngay bây giờ để bạn xem.'),
                 qzStep(vsg('ai-en-panel'), '📝 Cửa sổ phụ Trắc nghiệm',
                   'Nơi làm trắc nghiệm về bài giảng. Cách tạo: bấm nút 📝 Trắc nghiệm trong khung chat → chọn số câu (5 / 10 / 15 / 20 hoặc tự điền) và độ khó (Dễ / Vừa / Khó) → ▶ Bắt đầu. AI soạn câu hỏi 4 đáp án dựa trên lời giảng, mỗi câu gắn với một mốc thời gian trong video.'),
-                qzStep(function () { vidKeep(); return document.querySelector('#ai-en-panel .ai-en-body'); }, '✅ Làm từng câu',
-                  'Mỗi lần hiện một câu. Chọn đáp án để biết ngay đúng hay sai kèm giải thích ngắn; mỗi câu đúng được +20 điểm. Dòng đầu thẻ cho biết bạn đang ở câu mấy và đã đúng bao nhiêu câu.'),
                 ...qzNavSteps(),
-                noqzStep(vsg('ai-dict-hbtn'), '📖 Từ điển',
-                  'Mở Từ điển RHM của bạn ngay trong lúc học để tra hoặc lưu thuật ngữ.'),
-                noqzStep(vsg('ai-note-hbtn'), '📒 Ghi chú',
-                  'Mở Sổ ghi chú để xem và lưu ghi chú, nhất là nội dung từ các bong bóng chat AI.'),
-                aiStep(vsg('ai-lang-box'), 'Vie / Eng · Ngôn ngữ trả lời',
+                noqzStep(vsg('ai-lang-box'), 'Vie / Eng · Ngôn ngữ trả lời',
                   'Chọn gia sư trả lời bằng tiếng Việt (Vie), tiếng Anh (Eng), hoặc bật cả hai để xem song ngữ.'),
                 aiStep(vsg('ai-settings-btn'), '⚙️ Cài đặt AI',
-                  'Mở bảng cài đặt chung của khung chat AI (cỡ chữ, giọng đọc, độ dài câu trả lời, mức suy luận, khóa API). Lần đầu bấm vào, mình sẽ giới thiệu từng mục ngay tại chỗ; muốn xem lại: mở ⚙️ rồi bấm Trợ lý AI → ℹ️. Bấm “Quay lại” để về khung chat.'),
+                  'Mở bảng cài đặt chung của khung chat AI (cỡ chữ, giọng đọc, độ dài câu trả lời, mức suy luận, khóa API). Lần đầu bấm vào, mình sẽ giới thiệu từng mục ngay tại chỗ; muốn xem lại: mở ⚙️ rồi bấm Trợ lý AI → ℹ️. Bấm “Quay lại” để về khung chat.', { low: true }),
                 aiStep(aiQb('📑'), '📑 Mục lục theo thời gian',
-                  'AI lập mục lục phân cấp theo mốc thời gian (1, 1.1, 1.2, 2…), mỗi mục tóm tắt 3–4 câu — hợp để nắm cấu trúc cả bài trước khi xem.'),
+                  'AI lập mục lục phân cấp theo mốc thời gian (1, 1.1, 1.2, 2…), mỗi mục tóm tắt 3–4 câu — hợp để nắm cấu trúc cả bài trước khi xem.', { mid: true }),
                 aiStep(aiQb('🎯'), '🎯 Giải thích đoạn đang xem',
-                  'Giải thích dễ hiểu đoạn bạn đang xem, theo đúng thời điểm video đang dừng.'),
+                  'Giải thích dễ hiểu đoạn bạn đang xem, theo đúng thời điểm video đang dừng.', { mid: true }),
                 aiStep(aiQb('🖼'), '🖼️ Hỏi hình ảnh đang hiện',
-                  'AI nhìn khung hình đang hiện trên video (slide, hình minh họa, sơ đồ…) để giải thích; bạn gõ thêm câu hỏi nếu muốn hỏi riêng về hình đó.'),
+                  'AI nhìn khung hình đang hiện trên video (slide, hình minh họa, sơ đồ…) để giải thích; bạn gõ thêm câu hỏi nếu muốn hỏi riêng về hình đó.', { mid: true }),
                 aiStep(aiQb('📝'), '📝 Trắc nghiệm',
-                  'Mở bảng chọn số câu và độ khó để tạo trắc nghiệm; các câu hỏi hiện trong cửa sổ phụ Trắc nghiệm vừa giới thiệu.'),
+                  'Mở bảng chọn số câu và độ khó để tạo trắc nghiệm; các câu hỏi hiện trong cửa sổ phụ Trắc nghiệm vừa giới thiệu.', { mid: true }),
                 aiStep(aiQb('🎓'), '🎓 Học Tập có hướng dẫn',
-                  'Gia sư dẫn dắt bạn học từng phần của bài theo kiểu gợi mở (hỏi – đáp), để bạn tự suy nghĩ thay vì nhận đáp án ngay.'),
+                  'Gia sư dẫn dắt bạn học từng phần của bài theo kiểu gợi mở (hỏi – đáp), để bạn tự suy nghĩ thay vì nhận đáp án ngay.', { mid: true }),
                 aiStep(vsg('ai-mic-btn'), '🎙️ Nói chuyện trực tiếp',
-                  'Nói chuyện bằng giọng nói với gia sư. Bấm lần nữa (⏹️) để dừng.'),
+                  'Nói chuyện bằng giọng nói với gia sư. Bấm lần nữa (⏹️) để dừng.', { mid: true }),
                 aiStep(vsg('ai-img-btn'), '🖼️ Gửi ảnh',
-                  'Gửi một hình ảnh (ảnh chụp màn hình, hình trong sách…) cho gia sư xem rồi hỏi về hình đó.')
+                  'Gửi một hình ảnh (ảnh chụp màn hình, hình trong sách…) cho gia sư xem rồi hỏi về hình đó.', { mid: true })
             ];
         },
         /* ---------- ⚙ Cài đặt phụ đề & lồng tiếng ---------- */
@@ -28458,10 +28476,6 @@ body {
     var VBTNS = [
         { k: 'chap', key: 'vb2-chap', ev: 'click', q: 'button[onclick^="ytChapToggle"]', wait: 1100, cond: function () { return mapIsOpen() || vdKey(); }, steps: function () { return VDETAIL.map(); } },
         { k: 'ai', key: 'vb2-ai', ev: 'click', q: 'button[onclick^="openVideoAi"]', wait: 900, cond: function () { return aiVisible() && aiVidMode(); }, steps: function () { return VDETAIL.ai(); } },
-        { k: 'quality', ev: 'change', q: 'select.yt-quality', wait: 500, steps: [
-            { vid: true, sel: vs('select.yt-quality'), t: '🖥 Chất lượng hình', d: 'Bạn vừa đổi chất lượng video. Chất lượng cao cho hình nét hơn nhưng tốn mạng hơn; mạng yếu thì chọn thấp hơn cho đỡ giật.' }] },
-        { k: 'speed', ev: 'change', q: 'select[title="Tốc độ phát"]', wait: 500, steps: [
-            { vid: true, sel: vs('select[title="Tốc độ phát"]'), t: '⚡ Tốc độ phát', d: 'Bạn vừa đổi tốc độ phát. Chọn lại 1x để xem với tốc độ bình thường.' }] },
         { k: 'cc', ev: 'click', q: 'button[onclick^="toggleYtCaptions"]', wait: 500, steps: [
             { vid: true, sel: vs('button[onclick^="toggleYtCaptions"]'), t: '💬 Phụ đề', d: 'Nút này bật / tắt phụ đề trên video. Muốn chỉnh cỡ chữ, vị trí hay ngôn ngữ phụ đề, bấm nút ⚙ bên cạnh.' }] },
         { k: 'sub', key: 'vb2-sub', ev: 'click', q: 'button[onclick*="toggleSubPanel"][onclick*="true"]', wait: 600, cond: function () { var w = vwrap(); return !!(w && w.classList.contains('sub-editing')); }, steps: function () { return VDETAIL.sub(); } },
@@ -28695,12 +28709,8 @@ body {
                 'Bấm để ẩn / hiện cửa sổ phụ Trắc nghiệm nằm cạnh khung chat. Mình mở nó ra ngay bây giờ để bạn xem.'),
             qzStep(vsg('ai-en-panel'), '📝 Cửa sổ phụ Trắc nghiệm',
                 'Nơi làm trắc nghiệm về chương đang đọc. Cách tạo: bấm nút 📝 Trắc nghiệm trong khung chat → chọn số câu và độ khó → ▶ Bắt đầu. AI soạn câu hỏi 4 đáp án dựa trên nội dung chương; mỗi câu đúng được +20 điểm.'),
-            qzStep(function () { vidKeep(); return document.querySelector('#ai-en-panel .ai-en-body'); }, '✅ Làm từng câu',
-                'Mỗi lần hiện một câu. Chọn đáp án để biết ngay đúng hay sai kèm giải thích ngắn. Dòng đầu thẻ cho biết bạn đang ở câu mấy và đã đúng bao nhiêu câu.'),
             ...qzNavSteps(),
-            noqzStep(vsg('ai-dict-hbtn'), '📖 Từ điển', 'Mở Từ điển RHM của bạn ngay trong lúc đọc để tra hoặc lưu thuật ngữ.'),
-            noqzStep(vsg('ai-note-hbtn'), '📒 Ghi chú', 'Mở Sổ ghi chú để xem và lưu ghi chú, nhất là nội dung từ các bong bóng chat AI.'),
-            aiStep(vsg('ai-lang-box'), 'Vie / Eng · Ngôn ngữ trả lời', 'Chọn gia sư trả lời bằng tiếng Việt (Vie), tiếng Anh (Eng), hoặc bật cả hai để xem song ngữ.'),
+            noqzStep(vsg('ai-lang-box'), 'Vie / Eng · Ngôn ngữ trả lời', 'Chọn gia sư trả lời bằng tiếng Việt (Vie), tiếng Anh (Eng), hoặc bật cả hai để xem song ngữ.'),
             aiStep(vsg('ai-settings-btn'), '⚙️ Cài đặt AI', 'Chỉnh cỡ chữ, giọng đọc, độ dài câu trả lời, mức suy luận và khóa API của khung chat. Lần đầu bấm vào, mình sẽ giới thiệu kỹ từng mục.'),
             aiStep(vsg('bk-exp-quick'), '🎯 Giải thích', 'Giải thích dễ hiểu đoạn bạn vừa bôi đen / dịch trong chương, dựa trên nội dung của chương đang đọc.'),
             aiStep(vsg('bk-img-quick'), '🖼️ Phân tích ảnh màn hình', 'Gửi trang sách đang hiện trên màn hình cho gia sư AI đọc và phân tích hình ảnh, sơ đồ, bảng biểu có trong trang đó.'),
@@ -28751,8 +28761,6 @@ body {
             qzStep(vsg('ai-en-panel'), '📝 Cửa sổ phụ Trắc nghiệm',
                 vid ? 'Nơi làm trắc nghiệm về bài giảng: bấm 📝 Trắc nghiệm trong khung chat → chọn số câu, độ khó → ▶ Bắt đầu. Mỗi câu gắn với một mốc thời gian trong video; mỗi câu đúng +20 điểm.'
                     : 'Nơi làm trắc nghiệm về chương đang đọc: bấm 📝 Trắc nghiệm trong khung chat → chọn số câu, độ khó → ▶ Bắt đầu. Mỗi câu đúng +20 điểm.'),
-            qzStep(function () { vidKeep(); return document.querySelector('#ai-en-panel .ai-en-body'); }, '✅ Làm từng câu',
-                'Mỗi lần hiện một câu. Chọn đáp án để biết ngay đúng hay sai kèm giải thích ngắn. Dòng đầu thẻ cho biết bạn đang ở câu mấy và đã đúng bao nhiêu câu.')
         ].concat(qzNavSteps());
     }
     function subWinSteps() {
@@ -28916,6 +28924,9 @@ body {
                     if (!n || !isShown(n)) { show(idx + d, d); return; }
                     tour.i = idx;
                     try { n.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+                    /* cuộn mượt có thể không ăn trong một số khung (vd. bảng ⚙️ Cài đặt) → ép cuộn thẳng tới đúng chỗ
+                       trước khi vẽ thẻ giới thiệu, kẻo thẻ chỉ sai vị trí */
+                    setTimeout(function () { try { if (tour && tok === tour.tok) n.scrollIntoView({ block: 'center' }); } catch (e) {} }, 320);
                     setTimeout(function () {
                         if (!tour || tok !== tour.tok) return;
                         tour.busy = false;
@@ -29139,7 +29150,7 @@ body {
         var tip = document.createElement('div'); tip.className = 'hf-spot-tip';
         var bar = null;
         if (st) {
-            tip.className += ' hf-tour-tip' + (st.big ? ' hf-tour-big' : '') + (st.ask ? ' hf-tour-ask' : '') + (st.xl ? ' hf-tour-xl' : '');
+            tip.className += ' hf-tour-tip' + (st.big ? ' hf-tour-big' : '') + (st.ask ? ' hf-tour-ask' : '') + (st.xl ? ' hf-tour-xl' : '') + (st.half ? ' hf-tour-half' : '');
             if (st.big || st.ask) box.className += ' big';
             var tt = document.createElement('div'); tt.className = 'tt'; tt.textContent = st.t;
             var td = document.createElement('div'); td.className = 'td'; td.textContent = st.d;
@@ -29206,7 +29217,7 @@ body {
             var tooBig = !!(nr && (nr.width > window.innerWidth * 0.6 || nr.height > window.innerHeight * 0.4));
             if (!tooBig) { try { node.classList.remove('hf-spot-zoom-off'); node.classList.add('hf-spot-zoom'); zn = node; } catch (e) { zn = null; } }
         }
-        spot = { wrap: wrap, box: box, tip: tip, node: node, bar: bar, big: !!(st && st.big), keep: !!(st && st.vid), zoomNode: zn };
+        spot = { wrap: wrap, box: box, tip: tip, node: node, bar: bar, big: !!(st && st.big), keep: !!(st && st.vid), zoomNode: zn, low: !!(st && st.low), mid: !!(st && st.mid) };
         /* đặt lại vị trí ngay khi thẻ đổi kích thước (chữ/font/ảnh tải xong) */
         try {
             if (window.ResizeObserver) {
@@ -29262,8 +29273,52 @@ body {
             rect((vw - tw) / 2, (bottomLimit - th) / 2),   // giữa vùng dùng được
             rect(8, 8), rect(vw - tw - 8, 8),              // góc trên trái / phải
             rect(8, bottomLimit - th), rect(vw - tw - 8, bottomLimit - th),   // góc dưới trái / phải
-            rect((vw - tw) / 2, 8), rect((vw - tw) / 2, bottomLimit - th)     // mép trên / mép dưới
+            rect((vw - tw) / 2, 8), rect((vw - tw) / 2, bottomLimit - th),     // mép trên / mép dưới
+            rect((vw - tw) / 2, (window.innerHeight - th) / 2)   // chính giữa màn hình (cho bước có cờ `mid`)
         ];
+    }
+    /* Bước giới thiệu có cờ `low`: chỉ xét các vị trí nằm ở NỬA DƯỚI màn hình (giống thẻ giới thiệu
+       của "Chất lượng hình"), thay vì nhảy lên mép trên cho khỏi đè nút. Danh sách sắp xếp thấp trước. */
+    function hfLowCands(list, th, bottomLimit) {
+        var lim = Math.max(8, (bottomLimit - th) * 0.32), low = [];
+        for (var i = 0; i < list.length; i++) if (list[i].top >= lim) low.push(list[i]);
+        low.sort(function (a, b) { return b.top - a.top; });
+        return low;
+    }
+    /* Chọn vị trí NẰM THẤP NHẤT mà không đè lên nút đang giới thiệu (các nút khác không xét tới,
+       để thẻ luôn nằm ở nửa dưới màn hình giống thẻ giới thiệu của "Chất lượng hình"). */
+    function hfPickLowest(cands, boxSafe) {
+        var best = null;
+        for (var i = 0; i < cands.length; i++) {
+            var rc = cands[i];
+            if (hfOverlap(rc, boxSafe) > 0) continue;
+            if (!best || rc.top > best.top) best = { left: rc.left, top: rc.top };
+        }
+        return best;
+    }
+    /* Chọn vị trí gần TRUNG TÂM MÀN HÌNH nhất (theo chiều dọc) mà không đè nút đang giới thiệu. */
+    function hfPickMid(cands, boxSafe, th) {
+        var want = Math.max(8, (window.innerHeight - th) / 2), best = null, bd = 1e9;
+        for (var i = 0; i < cands.length; i++) {
+            var rc = cands[i];
+            if (hfOverlap(rc, boxSafe) > 0) continue;
+            var d = Math.abs(rc.top - want);
+            if (d < bd) { bd = d; best = { left: rc.left, top: rc.top }; }
+        }
+        return best;
+    }
+    /* Chọn vị trí né được nhiều nút nhất trong danh sách ứng viên (0 = không đè nút nào). */
+    function hfPickCand(cands, others, boxSafe) {
+        var pick = null;
+        for (var i = 0; i < cands.length; i++) {
+            var rc = cands[i];
+            if (hfOverlap(rc, boxSafe) > 0) continue;      // không đè lên chính nút đang giới thiệu
+            var score = 0, area = 0;
+            for (var k = 0; k < others.length; k++) { var ar = hfOverlap(rc, others[k]); if (ar > 0) { score++; area += ar; } }
+            if (!pick || score < pick.score || (score === pick.score && area < pick.area)) pick = { left: rc.left, top: rc.top, score: score, area: area };
+            if (pick && pick.score === 0) break;           // đã né được hết các nút
+        }
+        return pick;
     }
     function placeSpot() {
         if (!spot) return;
@@ -29319,15 +29374,10 @@ body {
         var best = null;
         for (var si = 0; si < scales.length; si++) {
             var sc = scales[si], tw = base.w * sc, th = base.h * sc;
-            var cands = hfSpotCands(r, tw, th, vw, bottomLimit, spot.bar ? 56 : 8), pick = null;
-            for (var i = 0; i < cands.length; i++) {
-                var rc = cands[i];
-                if (hfOverlap(rc, boxSafe) > 0) continue;      // không đè lên chính nút đang giới thiệu
-                var score = 0, area = 0;
-                for (var k = 0; k < others.length; k++) { var ar = hfOverlap(rc, others[k]); if (ar > 0) { score++; area += ar; } }
-                if (!pick || score < pick.score || (score === pick.score && area < pick.area)) pick = { left: rc.left, top: rc.top, score: score, area: area };
-                if (pick && pick.score === 0) break;           // đã né được hết các nút
-            }
+            var candsAll = hfSpotCands(r, tw, th, vw, bottomLimit, spot.bar ? 56 : 8), cands = candsAll, isLow = false;
+            if (spot.low) { var lw = hfLowCands(candsAll, th, bottomLimit); if (lw.length) { cands = lw; isLow = true; } }
+            var pick = isLow ? hfPickLowest(cands, boxSafe) : (spot.mid ? hfPickMid(candsAll, boxSafe, th) : hfPickCand(cands, others, boxSafe));
+            if (!pick) pick = hfPickCand(candsAll, others, boxSafe);
             if (!pick) continue;
             pick.scale = sc;
             best = pick;
@@ -29335,7 +29385,7 @@ body {
         }
         var bestScale = best ? best.scale : 0.58;
         if (!best) {   // nút chiếm gần hết màn hình: thu nhỏ tối đa, đặt ở mép trên
-            best = { left: Math.max(8, Math.round((vw - base.w * bestScale) / 2)), top: 8 };
+            best = { left: Math.max(8, Math.round((vw - base.w * bestScale) / 2)), top: spot.low ? Math.max(8, bottomLimit - base.h * bestScale) : 8 };
         }
         spot.tipScale = bestScale;
         if (bestScale < 1) { sp.transformOrigin = 'top left'; sp.transform = 'scale(' + bestScale + ')'; }
@@ -29345,14 +29395,10 @@ body {
             var fr = spot.tip.getBoundingClientRect();
             var fSafe = { left: fr.left - 2, top: fr.top - 2, width: fr.width + 4, height: fr.height + 4 };
             if (hfOverlap(fSafe, boxSafe) > 0) {
-                var cd2 = hfSpotCands(r, fr.width, fr.height, vw, bottomLimit, spot.bar ? 56 : 8), b2 = null;
-                for (var j = 0; j < cd2.length; j++) {
-                    var rj = cd2[j];
-                    if (hfOverlap(rj, boxSafe) > 0) continue;
-                    var s2 = 0, a2 = 0;
-                    for (var m = 0; m < others.length; m++) { var oj = hfOverlap(rj, others[m]); if (oj > 0) { s2++; a2 += oj; } }
-                    if (!b2 || s2 < b2.score || (s2 === b2.score && a2 < b2.area)) b2 = { left: rj.left, top: rj.top, score: s2, area: a2 };
-                }
+                var cdAll = hfSpotCands(r, fr.width, fr.height, vw, bottomLimit, spot.bar ? 56 : 8), cd2 = cdAll, isLow2 = false;
+                if (spot.low) { var lw2 = hfLowCands(cdAll, fr.height, bottomLimit); if (lw2.length) { cd2 = lw2; isLow2 = true; } }
+                var b2 = isLow2 ? hfPickLowest(cd2, boxSafe) : (spot.mid ? hfPickMid(cdAll, boxSafe, fr.height) : hfPickCand(cd2, others, boxSafe));
+                if (!b2) b2 = hfPickCand(cdAll, others, boxSafe);
                 if (b2) { sp.top = b2.top + 'px'; sp.left = b2.left + 'px'; }
             }
         } catch (e) {}
