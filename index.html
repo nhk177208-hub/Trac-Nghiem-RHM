@@ -22057,12 +22057,717 @@ function moveEdActs() {
             <button type="button" onclick="homeSettingsGo('openSuggestQuestionModal')" class="text-left text-sm bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold py-2.5 px-3.5 rounded-xl border border-blue-300">💡 Đề xuất câu hỏi</button>
             <button type="button" onclick="homeSettingsGo('openAppFeedbackModal')" class="text-left text-sm bg-teal-50 hover:bg-teal-100 text-teal-800 font-semibold py-2.5 px-3.5 rounded-xl border border-teal-300">📩 Góp ý / Liên hệ</button>
             <button type="button" onclick="hsOpenKeys()" class="text-left text-sm bg-amber-50 hover:bg-amber-100 text-amber-800 font-semibold py-2.5 px-3.5 rounded-xl border border-amber-300 flex items-center justify-between">🔑 Cài đặt khóa API</button>
+            <button type="button" id="hs-sync-btn" onclick="rhmSyncOpen(event)" title="Đăng nhập Google để tự động đồng bộ tiến độ lên Google Drive và dùng chung giữa các thiết bị" class="text-left text-sm bg-cyan-50 hover:bg-cyan-100 text-cyan-800 font-semibold py-2.5 px-3.5 rounded-xl border border-cyan-300 flex items-center justify-between gap-3">☁️ Đồng bộ dữ liệu <span id="hs-sync-state" class="text-xs font-black text-gray-500">Chưa đăng nhập</span></button>
             <button type="button" onclick="homeSettingsGo('openProgressModal')" class="text-left text-sm bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold py-2.5 px-3.5 rounded-xl border border-indigo-300">🔄 Nhập / Xuất Tiến Độ</button>
             <button type="button" id="btn-rhm-fs" onclick="homeSettingsGo('rhmToggleFs')" class="text-left text-sm bg-slate-50 hover:bg-slate-100 text-slate-800 font-semibold py-2.5 px-3.5 rounded-xl border border-slate-300">⛶ Toàn màn hình</button>
             <button type="button" id="btn-add-home" onclick="homeSettingsGo('addToHomeScreen')" class="text-left text-sm bg-sky-50 hover:bg-sky-100 text-sky-800 font-semibold py-2.5 px-3.5 rounded-xl border border-sky-300">📲 Thêm vào MH chính</button>
         </div>
     </div>
 </div>
+<!-- ===== ĐỒNG BỘ GOOGLE DRIVE (rhm-sync v1) — giao diện ===== -->
+<div id="rhm-sync-modal" style="display:none;z-index:100090" class="fixed inset-0 bg-black bg-opacity-60 items-center justify-center p-2 sm:p-4" onclick="if(event.target===this)rhmSyncClose()">
+    <div class="bg-white rounded-2xl shadow-2xl p-5" style="width:min(620px,calc(94vw / 1.5));max-height:calc(88vh / 1.5);overflow-y:auto;zoom:1.5;overscroll-behavior:contain">
+        <div class="flex items-center justify-between mb-3">
+            <h3 class="text-lg font-black text-gray-800">☁️ Đồng bộ dữ liệu</h3>
+            <button type="button" onclick="rhmSyncClose()" class="w-9 h-9 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 font-black" title="Đóng">✕</button>
+        </div>
+        <div class="rounded-xl bg-sky-50 border border-sky-200 p-3 mb-3">
+            <div id="rs-acc" class="font-bold text-sky-900 text-sm break-all">Chưa đăng nhập</div>
+            <div id="rs-status" class="text-xs text-sky-700 mt-1 leading-relaxed">Đăng nhập Google để lưu tiến độ lên Google Drive của bạn và dùng chung giữa các thiết bị.</div>
+        </div>
+        <button type="button" id="rs-login" onclick="rhmSyncLoginToggle()" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-3 px-4 rounded-xl shadow-sm">🔐 Đăng nhập Google</button>
+        <button type="button" id="rs-logout" onclick="rhmSyncLogout()" class="hidden w-full mt-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2.5 px-4 rounded-xl border border-gray-300 text-sm">🚪 Hủy đăng nhập</button>
+        <div id="rs-toggle-row" class="flex items-center justify-between rounded-xl bg-sky-50 border border-sky-300 p-3 mt-3 gap-3" style="opacity:.5">
+            <div class="min-w-0">
+                <div class="font-bold text-sky-900 text-sm">Tự động đồng bộ ngầm</div>
+                <div class="text-xs text-sky-700 mt-0.5">Tự gửi / nhận thay đổi sau vài giây, khi chuyển tab, khi có mạng trở lại.</div>
+            </div>
+            <button type="button" id="rs-toggle" onclick="rhmSyncToggle()" aria-pressed="false" class="shrink-0 text-xs font-black px-4 py-2 rounded-full border">Đang tắt</button>
+        </div>
+        <button type="button" id="rs-now" onclick="rhmSyncNow()" class="hidden w-full mt-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold py-2.5 px-4 rounded-xl border border-emerald-300 text-sm">🔄 Đồng bộ ngay</button>
+        <button type="button" id="rs-undo" onclick="rhmSyncUndo()" class="hidden w-full mt-2 bg-amber-50 hover:bg-amber-100 text-amber-800 font-bold py-2.5 px-4 rounded-xl border border-amber-300 text-sm">↩️ Hoàn tác lần nhận dữ liệu gần nhất</button>
+        <p class="text-[11px] text-gray-500 mt-3 leading-relaxed">Được đồng bộ: điểm, sao, huy hiệu, thư mục, câu đã lưu / chặn, độ khó, kỷ lục bộ đề, tiến độ video, sổ ghi chú, từ điển, ghi chú &amp; highlight sách. <b>Không</b> đồng bộ khóa API. Dữ liệu nằm trong thư mục ẩn của app trên Google Drive (không lẫn với file của bạn); app chỉ truy cập được thư mục đó.</p>
+    </div>
+</div>
+<script>
+/* ===== ĐỒNG BỘ GOOGLE DRIVE (rhm-sync v1) =====
+   - Dữ liệu gốc vẫn nằm trong IndexedDB của app; module này chỉ đọc / ghi qua kv, SecureStore và localStorage hiện có.
+   - Mỗi "bản ghi" (1 ghi chú, 1 câu đã lưu, 1 video…) có băm nội dung + mốc thời gian + deviceId. Hàng đợi chờ gửi chính là
+     "bản ghi có băm khác bản đã đồng bộ lần cuối" nên không mất khi tắt đột ngột; chỉ xác nhận sau khi Drive trả về thành công.
+   - Gộp theo từng bản ghi (mới nhất thắng; điểm/sao lấy lớn nhất; kỷ lục lấy tỉ lệ cao nhất), có tombstone cho bản ghi đã xóa.
+   - Trước khi ghi đọc lại headRevisionId; nếu đã đổi thì đọc + gộp lại. Nén gzip khi > 2KB. Retry + backoff khi lỗi mạng / 429 / 5xx. */
+(function () {
+    'use strict';
+    var CLIENT_ID = '654992875088-2af0hnrcbhmv4s9demhtgepnf1m68eqn.apps.googleusercontent.com';
+    var SCOPE_APPDATA = 'https://www.googleapis.com/auth/drive.appdata';
+    var SCOPE = SCOPE_APPDATA + ' https://www.googleapis.com/auth/userinfo.email';
+    var DEBOUNCE = 4000, MAXWAIT = 30000, POLL = 90000, FULL_EVERY = 3600000, TOMB_TTL = 60 * 86400000, GZ_MIN = 2048;
+    var DRIVE = 'https://www.googleapis.com/drive/v3/files', UPLOAD = 'https://www.googleapis.com/upload/drive/v3/files';
+
+    var $ = function (id) { return document.getElementById(id); };
+    var toast = function (m) { try { showToast(m); } catch (e) {} };
+    var sleep = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+    function mkErr(kind, detail, status) { var e = new Error(kind + (detail ? ': ' + detail : '')); e.kind = kind; e.detail = detail; e.status = status; return e; }
+
+    /* ---------- kho meta riêng (IndexedDB 'rhmSyncDB') ---------- */
+    var mdb = null;
+    function mOpen() {
+        return new Promise(function (res) {
+            try {
+                var r = indexedDB.open('rhmSyncDB', 1);
+                r.onupgradeneeded = function () { r.result.createObjectStore('m'); };
+                r.onsuccess = function () { res(r.result); };
+                r.onerror = r.onblocked = function () { res(null); };
+            } catch (e) { res(null); }
+        });
+    }
+    function mGet(k) {
+        return new Promise(function (res) {
+            if (!mdb) { try { res(JSON.parse(localStorage.getItem('rhmSync:' + k) || 'null')); } catch (e) { res(null); } return; }
+            try { var q = mdb.transaction('m', 'readonly').objectStore('m').get(k); q.onsuccess = function () { res(q.result === undefined ? null : q.result); }; q.onerror = function () { res(null); }; }
+            catch (e) { res(null); }
+        });
+    }
+    function mSet(k, v) {
+        return new Promise(function (res) {
+            if (!mdb) { try { if (v === null) localStorage.removeItem('rhmSync:' + k); else localStorage.setItem('rhmSync:' + k, JSON.stringify(v)); } catch (e) {} res(); return; }
+            try {
+                var tx = mdb.transaction('m', 'readwrite'), st = tx.objectStore('m');
+                if (v === null) st.delete(k); else st.put(v, k);
+                tx.oncomplete = function () { res(); }; tx.onerror = tx.onabort = function () { res(); };
+            } catch (e) { res(); }
+        });
+    }
+
+    var cfg = { enabled: false, email: '', tok: null, deviceId: '', lastSync: 0 };
+    var ui = { phase: 'idle', msg: '' };
+    var gamReady = false, applying = false, running = false, again = false, forceNext = false, flushNext = false;
+    var tDeb = 0, tMax = 0, failCount = 0, loginBusy = false, started = false, hasBackup = false, lastFull = 0;
+    var lastRun = {}, staleTomb = {}, reloadAsked = false, dirtySet = {};
+    function saveCfg() { return mSet('cfg', cfg); }
+
+    /* ---------- băm nội dung ---------- */
+    function stable(v) {
+        if (v === null || typeof v !== 'object') return JSON.stringify(v);
+        if (Array.isArray(v)) return '[' + v.map(stable).join(',') + ']';
+        return '{' + Object.keys(v).sort().map(function (k) { return JSON.stringify(k) + ':' + stable(v[k]); }).join(',') + '}';
+    }
+    function h53(s) {
+        var h1 = 0xdeadbeef, h2 = 0x41c6ce57;
+        for (var i = 0; i < s.length; i++) { var c = s.charCodeAt(i); h1 = Math.imul(h1 ^ c, 2654435761); h2 = Math.imul(h2 ^ c, 1597334677); }
+        h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+        h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+        return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(36);
+    }
+    function hv(v) { return h53(stable(v)); }
+
+    /* ---------- truy cập dữ liệu của app ---------- */
+    function kget(k) { try { return (typeof kv !== 'undefined') ? kv.getItem(k) : localStorage.getItem(k); } catch (e) { return null; } }
+    function kset(k, s) { try { if (typeof kv !== 'undefined') kv.setItem(k, s); else localStorage.setItem(k, s); } catch (e) {} }
+    function kjson(k, def) { try { var s = kget(k); if (!s) return def; var v = JSON.parse(s); return v == null ? def : v; } catch (e) { return def; } }
+    function arr(k) { var v = kjson(k, []); return Array.isArray(v) ? v : []; }
+    function obj(k) { var v = kjson(k, {}); return (v && typeof v === 'object' && !Array.isArray(v)) ? v : {}; }
+    function lobj(k) { try { var s = localStorage.getItem(k); if (!s) return {}; var v = JSON.parse(s); return (v && typeof v === 'object' && !Array.isArray(v)) ? v : {}; } catch (e) { return {}; } }
+    function lput(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+    function cq(q) { try { if (typeof getCleanQuestionText === 'function') return String(getCleanQuestionText(q && q.question) || ''); } catch (e) {} return String((q && q.question) || '').trim(); }
+    function nkTerm(en) { return String(en || '').normalize('NFKC').replace(/\s+/g, ' ').trim().toLowerCase().replace(/[.,;:]+$/, ''); }
+    function split(id) { var i = id.indexOf(':'); return i < 0 ? [id, ''] : [id.slice(0, i), id.slice(i + 1)]; }
+    function idxBy(a, fn, k) { for (var i = 0; i < a.length; i++) if (fn(a[i]) === k) return i; return -1; }
+
+    /* ---------- các "miền" dữ liệu (mỗi miền = 1 file trên Drive) ---------- */
+    var A_PROG = {
+        id: 'progress', file: 'rhm_progress.json', minGap: 0,
+        deletable: function (id) { return !(id === 'pts' || id === 'st' || id === 'es' || id.indexOf('qr:') === 0); },
+        merge: function (id, a, b) {
+            if (id === 'pts' || id === 'st') return Math.max(+a || 0, +b || 0);
+            if (id.indexOf('qr:') === 0) { var ra = a && a.t > 0 ? a.s / a.t : -1, rb = b && b.t > 0 ? b.s / b.t : -1; return rb > ra ? b : a; }
+            return undefined;
+        },
+        read: function () {
+            var m = new Map();
+            try { if (gamReady && typeof SecureStore !== 'undefined') { m.set('pts', { v: SecureStore.getPoints() }); m.set('st', { v: SecureStore.getStars() }); } } catch (e) {}
+            arr('quizApp_unlocked_emblems').forEach(function (x) { if (x != null) m.set('eu:' + x, { v: 1 }); });
+            m.set('es', { v: arr('quizApp_selected_emblems') });
+            arr('quizAppCustomFolders').forEach(function (x) { if (typeof x === 'string' && x) m.set('fd:' + x, { v: 1 }); });
+            var df = obj('quizAppQuestionDifficulty'); Object.keys(df).forEach(function (k) { if (df[k]) m.set('df:' + k, { v: df[k] }); });
+            arr('quizAppBookmarked').forEach(function (x) { var k = cq(x); if (k) m.set('bm:' + k, { v: x }); });
+            arr('quizAppBlockedQuestions').forEach(function (x) { var k = cq(x); if (k) m.set('bk:' + k, { v: x }); });
+            try { getSavedQuizzes().forEach(function (q) { var r = q && q.bestResult; if (r && r.total > 0 && q.name) m.set('qr:' + q.name, { v: { s: r.score, t: r.total, d: r.date || '' } }); }); } catch (e) {}
+            return m;
+        },
+        apply: function (ups, dels) {
+            var ok = new Set(), D = {};
+            var eu = arr('quizApp_unlocked_emblems'), fd = arr('quizAppCustomFolders'), df = obj('quizAppQuestionDifficulty'), bm = arr('quizAppBookmarked'), bk = arr('quizAppBlockedQuestions'), quizzes = null;
+            ups.forEach(function (p) {
+                var id = p[0], v = p[1], s = split(id), g = s[0], r = s[1];
+                if (g === 'pts') { SecureStore.setPoints(v); ok.add(id); }
+                else if (g === 'st') { SecureStore.setStars(v); ok.add(id); }
+                else if (g === 'es') { kset('quizApp_selected_emblems', JSON.stringify(Array.isArray(v) ? v : [])); ok.add(id); }
+                else if (g === 'eu') { var n = /^\d+$/.test(r) ? +r : r; if (eu.indexOf(n) < 0 && eu.indexOf(r) < 0) eu.push(n); D.eu = 1; ok.add(id); }
+                else if (g === 'fd') { if (fd.indexOf(r) < 0) fd.push(r); D.fd = 1; ok.add(id); }
+                else if (g === 'df') { df[r] = v; D.df = 1; ok.add(id); }
+                else if (g === 'bm' || g === 'bk') { var a = g === 'bm' ? bm : bk, i = idxBy(a, cq, r); if (i < 0) a.push(v); else a[i] = v; D[g] = 1; ok.add(id); }
+                else if (g === 'qr') {
+                    if (!quizzes) quizzes = getSavedQuizzes();
+                    var q = quizzes.filter(function (x) { return x && x.name === r; })[0];
+                    if (q && v) { q.bestResult = { score: v.s, total: v.t, date: v.d }; D.qr = 1; ok.add(id); }
+                }
+            });
+            dels.forEach(function (id) {
+                var s = split(id), g = s[0], r = s[1];
+                if (g === 'eu') { var j = eu.indexOf(/^\d+$/.test(r) ? +r : r); if (j >= 0) { eu.splice(j, 1); D.eu = 1; } ok.add(id); }
+                else if (g === 'fd') { var j2 = fd.indexOf(r); if (j2 >= 0) { fd.splice(j2, 1); D.fd = 1; } ok.add(id); }
+                else if (g === 'df') { delete df[r]; D.df = 1; ok.add(id); }
+                else if (g === 'bm' || g === 'bk') { var a2 = g === 'bm' ? bm : bk, i2 = idxBy(a2, cq, r); if (i2 >= 0) { a2.splice(i2, 1); D[g] = 1; } ok.add(id); }
+            });
+            if (D.eu) kset('quizApp_unlocked_emblems', JSON.stringify(eu));
+            if (D.fd) kset('quizAppCustomFolders', JSON.stringify(fd));
+            if (D.df) kset('quizAppQuestionDifficulty', JSON.stringify(df));
+            if (D.bm) kset('quizAppBookmarked', JSON.stringify(bm));
+            if (D.bk) kset('quizAppBlockedQuestions', JSON.stringify(bk));
+            if (D.qr) kset('quizAppSavedQuizzes', JSON.stringify(quizzes));
+            return ok;
+        },
+        refresh: function () {
+            ['loadEmblemStorageData', 'updateHopeStarUI', 'updateBookmarkBadgeCount', 'updateBlockedBadgeCount', 'renderSavedQuizzes'].forEach(function (fn) { try { if (typeof window[fn] === 'function') window[fn](); } catch (e) {} });
+        }
+    };
+
+    var A_VIDEO = {
+        id: 'video', file: 'rhm_video.json', minGap: 60000,
+        deletable: function () { return true; },
+        read: function () {
+            var m = new Map(), w = lobj('ytWatchState'), r = lobj('ytResumePos');
+            Object.keys(w).forEach(function (id) { var x = w[id]; if (x && typeof x === 'object') m.set('vw:' + id, { v: x, t: +x.u || 0 }); });
+            Object.keys(r).forEach(function (id) { var x = r[id]; if (x && typeof x === 'object') m.set('vr:' + id, { v: x, t: +x.u || 0 }); });
+            try {
+                for (var i = 0; i < localStorage.length; i++) {
+                    var k = localStorage.key(i);
+                    if (k && k.indexOf('ytfocus_v1:') === 0) { try { var o = JSON.parse(localStorage.getItem(k)); if (o && typeof o === 'object') m.set('vf:' + k.slice(11), { v: o, t: +o.u || 0 }); } catch (e) {} }
+                }
+            } catch (e) {}
+            return m;
+        },
+        apply: function (ups, dels) {
+            var ok = new Set(), w = lobj('ytWatchState'), r = lobj('ytResumePos'), dw = 0, dr = 0;
+            ups.forEach(function (p) {
+                var s = split(p[0]), g = s[0], id = s[1];
+                if (g === 'vw') { w[id] = p[1]; dw = 1; ok.add(p[0]); }
+                else if (g === 'vr') { r[id] = p[1]; dr = 1; ok.add(p[0]); }
+                else if (g === 'vf') { try { localStorage.setItem('ytfocus_v1:' + id, JSON.stringify(p[1])); ok.add(p[0]); } catch (e) {} }
+            });
+            dels.forEach(function (x) {
+                var s = split(x), g = s[0], id = s[1];
+                if (g === 'vw') { delete w[id]; dw = 1; } else if (g === 'vr') { delete r[id]; dr = 1; }
+                else if (g === 'vf') { try { localStorage.removeItem('ytfocus_v1:' + id); } catch (e) {} }
+                ok.add(x);
+            });
+            if (dw) lput('ytWatchState', w);
+            if (dr) lput('ytResumePos', r);
+            return ok;
+        },
+        refresh: function () {}
+    };
+
+    var NK = 'quizApp_rhm_notes_v1', NMK = 'quizApp_rhm_notes_meta_v1';
+    var A_NOTES = {
+        id: 'notes', file: 'rhm_notes.json', minGap: 0, reload: true, modal: 'note-modal',
+        deletable: function (id) { return id.indexOf('n:') === 0; },
+        read: function () {
+            var m = new Map();
+            arr(NK).forEach(function (x) { if (x && x.id) m.set('n:' + x.id, { v: x }); });
+            var mt = kget(NMK); if (mt) { try { m.set('nm', { v: JSON.parse(mt) }); } catch (e) {} }
+            return m;
+        },
+        apply: function (ups, dels) {
+            var ok = new Set(), a = arr(NK), dirty = 0;
+            var by = function (x) { return x && x.id; };
+            ups.forEach(function (p) {
+                if (p[0] === 'nm') { kset(NMK, JSON.stringify(p[1])); ok.add('nm'); return; }
+                var id = p[0].slice(2), i = idxBy(a, by, id); if (i < 0) a.push(p[1]); else a[i] = p[1]; dirty = 1; ok.add(p[0]);
+            });
+            dels.forEach(function (x) { var i = idxBy(a, by, x.slice(2)); if (i >= 0) { a.splice(i, 1); dirty = 1; } ok.add(x); });
+            if (dirty) kset(NK, JSON.stringify(a));
+            return ok;
+        }
+    };
+
+    var DK = 'quizApp_rhm_dict_v1', DMK = 'quizApp_rhm_dict_meta_v1';
+    var A_DICT = {
+        id: 'dict', file: 'rhm_dict.json', minGap: 0, reload: true, modal: 'dict-modal',
+        deletable: function (id) { return id.indexOf('d:') === 0; },
+        read: function () {
+            var m = new Map();
+            arr(DK).forEach(function (x) { var k = nkTerm(x && x.en); if (k) m.set('d:' + k, { v: x }); });
+            var mt = kget(DMK); if (mt) { try { m.set('dm', { v: JSON.parse(mt) }); } catch (e) {} }
+            return m;
+        },
+        apply: function (ups, dels) {
+            var ok = new Set(), a = arr(DK), dirty = 0;
+            var by = function (x) { return nkTerm(x && x.en); };
+            ups.forEach(function (p) {
+                if (p[0] === 'dm') { kset(DMK, JSON.stringify(p[1])); ok.add('dm'); return; }
+                var i = idxBy(a, by, p[0].slice(2)); if (i < 0) a.push(p[1]); else a[i] = p[1]; dirty = 1; ok.add(p[0]);
+            });
+            dels.forEach(function (x) { var i = idxBy(a, by, x.slice(2)); if (i >= 0) { a.splice(i, 1); dirty = 1; } ok.add(x); });
+            if (dirty) kset(DK, JSON.stringify(a));
+            return ok;
+        }
+    };
+
+    var AK = 'quizApp_bk_ann_v1';
+    var A_ANN = {
+        id: 'ann', file: 'rhm_ann.json', minGap: 0, reload: true,
+        deletable: function () { return true; },
+        read: function () {
+            var m = new Map(), s = obj(AK);
+            Object.keys(s).forEach(function (ck) { (Array.isArray(s[ck]) ? s[ck] : []).forEach(function (x) { if (x && x.id) m.set('a:' + ck + '\u0001' + x.id, { v: x }); }); });
+            return m;
+        },
+        apply: function (ups, dels) {
+            var ok = new Set(), s = obj(AK), dirty = 0;
+            var by = function (x) { return x && x.id; };
+            function parse(id) { var b = id.slice(2), i = b.lastIndexOf('\u0001'); return [b.slice(0, i), b.slice(i + 1)]; }
+            ups.forEach(function (p) { var q = parse(p[0]); if (!Array.isArray(s[q[0]])) s[q[0]] = []; var i = idxBy(s[q[0]], by, q[1]); if (i < 0) s[q[0]].push(p[1]); else s[q[0]][i] = p[1]; dirty = 1; ok.add(p[0]); });
+            dels.forEach(function (x) { var q = parse(x), L = s[q[0]]; if (Array.isArray(L)) { var i = idxBy(L, by, q[1]); if (i >= 0) { L.splice(i, 1); dirty = 1; if (!L.length) delete s[q[0]]; } } ok.add(x); });
+            if (dirty) kset(AK, JSON.stringify(s));
+            return ok;
+        }
+    };
+    var DOMAINS = [A_PROG, A_VIDEO, A_NOTES, A_DICT, A_ANN];
+
+    /* ---------- quyết định cho từng bản ghi ---------- */
+    function decide(ad, id, L, R, m, now) {
+        var Lh = L ? hv(L.v) : null, Rlive = !!R && !R.x, Rh = Rlive ? hv(R.v) : null;
+        if (L && Rlive) {
+            if (Lh === Rh) return { a: 'same' };
+            var lc = !m || m.h !== Lh, rc = !m || m.rt !== R.t;
+            if (!lc && !rc) return { a: 'same' };
+            if (!lc) return { a: 'pull' };
+            if (!rc) return { a: 'push', t: L.t || now };
+            if (ad.merge) {
+                var mv = ad.merge(id, L.v, R.v);
+                if (mv !== undefined) { var mh = hv(mv); if (mh === Rh) return { a: 'pull' }; if (mh === Lh) return { a: 'push', t: now }; return { a: 'merge', v: mv, t: now }; }
+            }
+            var lt = (m && m.h !== Lh) ? (L.t || now) : (L.t || 0);
+            return lt > R.t ? { a: 'push', t: lt } : { a: 'pull' };
+        }
+        if (L && !Rlive) {
+            if (R && R.x && m && m.h === Lh) return { a: 'del' };
+            return { a: 'push', t: L.t || now };
+        }
+        if (!L && Rlive) {
+            if (m && m.h === null && m.rt === R.t) return { a: 'none' };   // đã hoàn tác cục bộ: giữ nguyên cho tới khi có thay đổi mới
+            if (m && m.h && ad.deletable(id)) return staleTomb[ad.id] ? { a: 'none' } : { a: 'tomb', t: now };
+            return { a: 'pull' };
+        }
+        return { a: 'clean' };
+    }
+    function hasLocalChanges(ad, local, meta) {
+        var ch = false;
+        local.forEach(function (o, id) { if (ch) return; var m = meta.recs[id]; if (!m || m.h !== hv(o.v)) ch = true; });
+        if (ch) return true;
+        return Object.keys(meta.recs).some(function (id) { var m = meta.recs[id]; return m && m.h && !local.has(id) && ad.deletable(id); });
+    }
+
+    /* ---------- gzip ---------- */
+    async function gzip(str) { var s = new Blob([str]).stream().pipeThrough(new CompressionStream('gzip')); return new Uint8Array(await new Response(s).arrayBuffer()); }
+    async function gunzip(u8) { var s = new Blob([u8]).stream().pipeThrough(new DecompressionStream('gzip')); return await new Response(s).text(); }
+
+    /* ---------- Google đăng nhập (GIS token) ---------- */
+    function loadGis() {
+        return new Promise(function (res, rej) {
+            if (window.google && google.accounts && google.accounts.oauth2) return res();
+            var ex = document.getElementById('rhm-gis'); if (ex) ex.remove();
+            var s = document.createElement('script'); s.id = 'rhm-gis'; s.src = 'https://accounts.google.com/gsi/client'; s.async = true;
+            s.onload = function () { res(); }; s.onerror = function () { rej(mkErr('gis', 'Không tải được thư viện đăng nhập Google (kiểm tra mạng)')); };
+            document.head.appendChild(s);
+        });
+    }
+    async function requestToken(opts) {
+        if (location.protocol === 'file:') throw mkErr('gis', 'Cần mở app qua https:// hoặc localhost (không dùng file://) để đăng nhập Google');
+        await loadGis();
+        return new Promise(function (res, rej) {
+            var tc = google.accounts.oauth2.initTokenClient({
+                client_id: CLIENT_ID, scope: SCOPE,
+                callback: function (r) {
+                    if (r && r.access_token) {
+                        try { if (!google.accounts.oauth2.hasGrantedAllScopes(r, SCOPE_APPDATA)) return rej(mkErr('scope', 'Bạn chưa cấp quyền lưu dữ liệu app trên Google Drive')); } catch (e) {}
+                        res(r);
+                    } else rej(mkErr('auth', r && (r.error_description || r.error)));
+                },
+                error_callback: function (e) { rej(mkErr('auth', e && e.type)); }
+            });
+            tc.requestAccessToken(opts || {});
+        });
+    }
+    function tokenOk() { return !!(cfg.tok && cfg.tok.access && Date.now() < cfg.tok.exp - 120000); }
+    async function ensureToken() {
+        if (tokenOk()) return;
+        try {
+            var r = await requestToken({ prompt: 'none', hint: cfg.email });
+            cfg.tok = { access: r.access_token, exp: Date.now() + (+r.expires_in || 3600) * 1000 }; await saveCfg();
+        } catch (e) { throw mkErr('auth', e.detail || e.message); }
+    }
+
+    /* ---------- Drive (có retry + backoff) ---------- */
+    async function gfetch(url, opts) {
+        opts = opts || {};
+        var delay = 1000, retried401 = false;
+        for (var i = 0; ; i++) {
+            if (typeof navigator !== 'undefined' && navigator.onLine === false) throw mkErr('offline');
+            var r;
+            try { r = await fetch(url, Object.assign({}, opts, { headers: Object.assign({}, opts.headers, { Authorization: 'Bearer ' + (cfg.tok && cfg.tok.access) }) })); }
+            catch (e) { if (i >= 4) throw mkErr('network', e && e.message); await sleep(delay + Math.random() * 400); delay *= 2; continue; }
+            if (r.ok) return r;
+            if (r.status === 401 && !retried401) { retried401 = true; cfg.tok = null; try { await ensureToken(); } catch (e) { throw mkErr('auth', e.detail); } continue; }
+            var body = ''; try { body = await r.text(); } catch (e) {}
+            var rate = r.status === 429 || r.status >= 500 || (r.status === 403 && /rateLimit|backendError/i.test(body));
+            if (rate && i < 4) { await sleep(delay + Math.random() * 400); delay *= 2; continue; }
+            if (r.status === 401) throw mkErr('auth', 'unauthorized', 401);
+            throw mkErr('http', body.slice(0, 300), r.status);
+        }
+    }
+    function revOf(f) { return f ? String(f.headRevisionId || f.version || f.md5Checksum || '') : null; }
+    async function listFiles() {
+        var r = await gfetch(DRIVE + '?spaces=appDataFolder&pageSize=100&fields=' + encodeURIComponent('files(id,name,version,headRevisionId,md5Checksum)'));
+        var j = await r.json(), by = {};
+        (j.files || []).forEach(function (f) { if (!by[f.name] || f.id < by[f.name].id) by[f.name] = f; });   // trùng tên (2 máy cùng tạo): chọn id nhỏ nhất, mọi máy đều chọn giống nhau
+        return by;
+    }
+    async function readFile(f) {
+        var r = await gfetch(DRIVE + '/' + f.id + '?alt=media'), u = new Uint8Array(await r.arrayBuffer()), txt;
+        if (u[0] === 0x1f && u[1] === 0x8b) { if (typeof DecompressionStream === 'undefined') throw mkErr('nogzip', 'Trình duyệt này không giải nén được dữ liệu từ Drive'); txt = await gunzip(u); }
+        else txt = new TextDecoder().decode(u);
+        var d = JSON.parse(txt); if (!d || typeof d !== 'object' || !d.recs) d = { v: 1, recs: {} };
+        return d;
+    }
+    async function writeFile(name, f, doc) {
+        var json = JSON.stringify(doc), body = null, mime = 'application/json';
+        if (json.length > GZ_MIN && typeof CompressionStream !== 'undefined') { try { body = await gzip(json); mime = 'application/gzip'; } catch (e) { body = null; } }
+        if (!body) body = new Blob([json], { type: 'application/json' });
+        var F = 'id,version,headRevisionId,md5Checksum', r;
+        if (f) r = await gfetch(UPLOAD + '/' + f.id + '?uploadType=media&fields=' + F, { method: 'PATCH', headers: { 'Content-Type': mime }, body: body });
+        else {
+            var b = 'rhm' + Math.random().toString(36).slice(2);
+            var parts = ['--' + b + '\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n' + JSON.stringify({ name: name, parents: ['appDataFolder'] }) + '\r\n--' + b + '\r\nContent-Type: ' + mime + '\r\n\r\n', body, '\r\n--' + b + '--'];
+            r = await gfetch(UPLOAD + '?uploadType=multipart&fields=' + F, { method: 'POST', headers: { 'Content-Type': 'multipart/related; boundary=' + b }, body: new Blob(parts) });
+        }
+        var j = await r.json(); j.name = name; return j;
+    }
+
+    /* ---------- đồng bộ 1 miền ---------- */
+    async function syncDomain(ad, files, ctx, force) {
+        var meta = (await mGet('m:' + ad.id)) || { recs: {}, rev: null, fileId: null };
+        var f = files[ad.file] || null;
+        var local = ad.read();
+        if (!force && f && revOf(f) === meta.rev && !hasLocalChanges(ad, local, meta)) return;
+        if (!f && local.size === 0) return;
+        if (!force && !f && meta.rev === null && !hasLocalChanges(ad, local, meta)) return;
+        var res = null;
+        for (var att = 0; att < 4; att++) {
+            var doc = f ? await readFile(f) : { v: 1, recs: {} };
+            var recs = doc.recs || {}, now = Date.now(), plan = {}, ids = new Set();
+            local.forEach(function (o, id) { ids.add(id); });
+            Object.keys(recs).forEach(function (id) { ids.add(id); });
+            Object.keys(meta.recs).forEach(function (id) { ids.add(id); });
+            var newRecs = Object.assign({}, recs), push = 0, pulls = [], dels = [];
+            ids.forEach(function (id) {
+                var d = decide(ad, id, local.get(id), recs[id], meta.recs[id], now); plan[id] = d;
+                if (d.a === 'push') { newRecs[id] = { v: local.get(id).v, t: d.t, d: cfg.deviceId }; push++; }
+                else if (d.a === 'tomb') { newRecs[id] = { x: 1, t: d.t, d: cfg.deviceId }; push++; }
+                else if (d.a === 'merge') { newRecs[id] = { v: d.v, t: d.t, d: cfg.deviceId }; push++; pulls.push([id, d.v]); }
+                else if (d.a === 'pull') pulls.push([id, recs[id].v]);
+                else if (d.a === 'del') dels.push(id);
+            });
+            Object.keys(newRecs).forEach(function (id) { var r = newRecs[id]; if (r && r.x && now - r.t > TOMB_TTL) { delete newRecs[id]; push++; } });
+            var newRev = f ? revOf(f) : null, nf = f;
+            if (push) {
+                var cur = (await listFiles())[ad.file] || null;   // đọc lại headRevisionId ngay trước khi ghi
+                if (revOf(cur) !== revOf(f)) { f = cur; files[ad.file] = cur; if (!cur) delete files[ad.file]; continue; }
+                var up = await writeFile(ad.file, f, { v: 1, recs: newRecs, ts: now, dev: cfg.deviceId });
+                nf = { id: up.id, name: ad.file, version: up.version, headRevisionId: up.headRevisionId, md5Checksum: up.md5Checksum };
+                newRev = revOf(nf); files[ad.file] = nf; ctx.pushed += push;
+            }
+            res = { plan: plan, recs: recs, newRecs: newRecs, pulls: pulls, dels: dels, newRev: newRev, nf: nf };
+            break;
+        }
+        if (!res) throw mkErr('conflict', 'Dữ liệu trên Drive đang được thiết bị khác ghi liên tục, sẽ thử lại sau');
+
+        /* áp dụng thay đổi nhận về vào máy (bỏ qua bản ghi vừa bị sửa trong lúc đang đồng bộ, và hoãn nếu cửa sổ liên quan đang mở) */
+        var cur2 = ad.read(), skip = new Set();
+        var blocked = ad.modal && $(ad.modal) && !$(ad.modal).classList.contains('hidden');
+        res.pulls.forEach(function (p) { var a = local.get(p[0]), b = cur2.get(p[0]); if ((a ? hv(a.v) : null) !== (b ? hv(b.v) : null) || blocked) skip.add(p[0]); });
+        res.dels.forEach(function (id) { var a = local.get(id), b = cur2.get(id); if ((a ? hv(a.v) : null) !== (b ? hv(b.v) : null) || blocked) skip.add(id); });
+        var ups = res.pulls.filter(function (p) { return !skip.has(p[0]); }), dl = res.dels.filter(function (id) { return !skip.has(id); }), okSet = new Set();
+        if (ups.length || dl.length) {
+            (ctx.backup[ad.id] = ctx.backup[ad.id] || []);
+            ups.forEach(function (p) { var o = cur2.get(p[0]); ctx.backup[ad.id].push({ id: p[0], old: o ? o.v : null }); });
+            dl.forEach(function (id) { var o = cur2.get(id); ctx.backup[ad.id].push({ id: id, old: o ? o.v : null }); });
+            applying = true;
+            try { okSet = ad.apply(ups, dl) || new Set(); } finally { applying = false; }
+            if (okSet.size) { ctx.pulled += okSet.size; (ctx.changed[ad.id] = true); }
+        }
+        var after = ad.read();
+        Object.keys(res.plan).forEach(function (id) {
+            var d = res.plan[id], R = res.recs[id], N = res.newRecs[id], o = after.get(id), m = meta.recs[id];
+            if (d.a === 'same') meta.recs[id] = { h: hv(local.get(id).v), rt: R.t };
+            else if (d.a === 'push') meta.recs[id] = { h: hv(local.get(id).v), rt: N.t };
+            else if (d.a === 'tomb') meta.recs[id] = { h: null, rt: N.t };
+            else if (d.a === 'merge' || d.a === 'pull') { if (skip.has(id) || !okSet.has(id)) { if (d.a === 'merge' && N) { /* đã đẩy giá trị gộp lên Drive; chờ vòng sau để áp vào máy */ } } else meta.recs[id] = { h: o ? hv(o.v) : null, rt: (N || R).t }; }
+            else if (d.a === 'del') { if (okSet.has(id)) meta.recs[id] = { h: null, rt: R.t }; }
+            else if (d.a === 'clean') { if (!local.has(id)) { if (R && R.x) meta.recs[id] = { h: null, rt: R.t }; else if (m) delete meta.recs[id]; } }
+        });
+        meta.rev = res.newRev; meta.fileId = res.nf ? res.nf.id : null;
+        await mSet('m:' + ad.id, meta);
+    }
+
+    /* ---------- điều phối ---------- */
+    function setPhase(p, msg) { ui.phase = p; ui.msg = msg || ''; paint(); }
+    function fmtTime(t) { try { var d = new Date(t); return d.toLocaleTimeString('vi-VN') + ' ' + d.toLocaleDateString('vi-VN'); } catch (e) { return ''; } }
+    function paint() {
+        var acc = $('rs-acc'), st = $('rs-status'), lb = $('rs-login'), lo = $('rs-logout'), tg = $('rs-toggle'), row = $('rs-toggle-row'), now = $('rs-now'), un = $('rs-undo'), hs = $('hs-sync-state');
+        var logged = !!cfg.email, need = ui.phase === 'need-login';
+        var txt = 'Chưa đăng nhập', stateTxt = 'Chưa đăng nhập', color = '#6b7280';
+        if (logged) {
+            if (ui.phase === 'syncing') { txt = '⏳ Đang đồng bộ…'; stateTxt = 'Đang đồng bộ…'; color = '#0369a1'; }
+            else if (need) { txt = '🔒 Phiên đăng nhập đã hết hạn. Bấm “Đăng nhập lại” để tiếp tục đồng bộ (dữ liệu trên máy vẫn an toàn).'; stateTxt = 'Cần đăng nhập lại'; color = '#b45309'; }
+            else if (ui.phase === 'offline') { txt = '📡 Đang offline, sẽ tự đồng bộ khi có mạng.'; stateTxt = 'Offline'; color = '#b45309'; }
+            else if (ui.phase === 'error') { txt = '⚠️ ' + ui.msg + ' (sẽ tự thử lại)'; stateTxt = 'Lỗi, sẽ thử lại'; color = '#b91c1c'; }
+            else if (!cfg.enabled) { txt = '⏸ Đồng bộ ngầm đang tắt.' + (cfg.lastSync ? ' Lần cuối: ' + fmtTime(cfg.lastSync) : ''); stateTxt = 'Đang tắt'; color = '#6b7280'; }
+            else if (cfg.lastSync) { txt = '✅ Đã đồng bộ lúc ' + fmtTime(cfg.lastSync); stateTxt = 'Đã đồng bộ'; color = '#059669'; }
+            else { txt = 'Đang chờ đồng bộ lần đầu…'; stateTxt = 'Đang bật'; color = '#059669'; }
+        }
+        if (ui.msg && ui.phase === 'info') txt = ui.msg;
+        if (acc) acc.textContent = logged ? '👤 ' + cfg.email : 'Chưa đăng nhập';
+        if (st) st.textContent = logged ? txt : (loginBusy ? 'Đang mở cửa sổ đăng nhập Google…' : (ui.phase === 'error' && ui.msg ? '⚠️ ' + ui.msg : 'Đăng nhập Google để lưu tiến độ lên Google Drive của bạn và dùng chung giữa các thiết bị.'));
+        if (lb) { lb.textContent = loginBusy ? '⏳ Đang đăng nhập…' : (!logged ? '🔐 Đăng nhập Google' : (need ? '🔐 Đăng nhập lại' : '🚪 Hủy đăng nhập')); lb.disabled = loginBusy; }
+        if (lo) lo.classList.toggle('hidden', !(logged && need));
+        if (row) row.style.opacity = logged ? '1' : '.5';
+        if (tg) {
+            tg.disabled = !logged; tg.setAttribute('aria-pressed', cfg.enabled ? 'true' : 'false'); tg.textContent = cfg.enabled ? 'Đang bật' : 'Đang tắt';
+            tg.style.background = cfg.enabled ? '#dcfce7' : '#e5e7eb'; tg.style.color = cfg.enabled ? '#065f46' : '#6b7280'; tg.style.borderColor = cfg.enabled ? '#86efac' : '#d1d5db';
+        }
+        if (now) now.classList.toggle('hidden', !(logged && !need));
+        if (un) un.classList.toggle('hidden', !(logged && hasBackup));
+        if (hs) { hs.textContent = stateTxt; hs.style.color = color; }
+    }
+    function errText(e) {
+        if (!e) return 'Lỗi không rõ';
+        if (e.kind === 'http') {
+            if (/accessNotConfigured|has not been used|is disabled/i.test(e.detail || '')) return 'Chưa bật Google Drive API cho dự án Google Cloud này';
+            if (e.status === 403) return 'Google từ chối quyền truy cập Drive (403)';
+            if (e.status === 404) return 'Không tìm thấy dữ liệu trên Drive (404)';
+            return 'Drive báo lỗi ' + e.status;
+        }
+        if (e.kind === 'network') return 'Mất kết nối mạng';
+        return e.detail || e.message || 'Lỗi không rõ';
+    }
+    function schedule(ms) { clearTimeout(tDeb); tDeb = setTimeout(function () { clearTimeout(tMax); tMax = 0; runSync(false, false, true); }, ms); }
+    function dirty(dom) {
+        if (applying || !cfg.enabled || !cfg.email || !started) return;
+        dirtySet[dom || '*'] = 1;
+        schedule(DEBOUNCE);
+        if (!tMax) tMax = setTimeout(function () { tMax = 0; clearTimeout(tDeb); runSync(false, false, true); }, MAXWAIT);
+    }
+    function domOf(k, ls) {
+        if (ls) return 'video';
+        if (/^quizApp_rhm_notes/.test(k)) return 'notes';
+        if (/^quizApp_rhm_dict/.test(k)) return 'dict';
+        if (k === 'quizApp_bk_ann_v1') return 'ann';
+        return 'progress';
+    }
+    async function runSync(force, flush, dirtyOnly) {
+        if (!cfg.enabled || !cfg.email || !gamReady) return;
+        if (running) { again = true; forceNext = forceNext || !!force; flushNext = flushNext || !!flush; return; }
+        if (ui.phase === 'need-login' && !tokenOk()) return;
+        if (!force && Date.now() - lastFull > FULL_EVERY) force = true;
+        var todo = DOMAINS.filter(function (ad) { return !dirtyOnly || force || dirtySet[ad.id] || dirtySet['*']; });
+        if (dirtyOnly && !force) {
+            var wait = 0;
+            todo = todo.filter(function (ad) {
+                var left = ad.minGap ? ad.minGap - (Date.now() - (lastRun[ad.id] || 0)) : 0;
+                if (!flush && left > 0) { wait = Math.max(wait, left); return false; }
+                return true;
+            });
+            if (wait) { dirtySet.__wait = 1; clearTimeout(tDeb); tDeb = setTimeout(function () { runSync(false, false, true); }, wait + 200); }
+        }
+        if (!todo.length) return;
+        var mine = {}; todo.forEach(function (ad) { mine[ad.id] = 1; });
+        Object.keys(mine).forEach(function (id) { delete dirtySet[id]; }); delete dirtySet['*'];
+        running = true; var ctx = { backup: {}, changed: {}, pushed: 0, pulled: 0 };
+        setPhase('syncing');
+        try {
+            await ensureToken();
+            var files = await listFiles();
+            for (var i = 0; i < todo.length; i++) {
+                var ad = todo[i];
+                if (!force && !flush && !dirtyOnly && ad.minGap && Date.now() - (lastRun[ad.id] || 0) < ad.minGap) continue;
+                await syncDomain(ad, files, ctx, force); lastRun[ad.id] = Date.now();
+            }
+            if (force) lastFull = Date.now();
+            cfg.lastSync = Date.now(); failCount = 0; await saveCfg();
+            if (Object.keys(ctx.backup).length) { await mSet('backup', { t: Date.now(), d: ctx.backup }); hasBackup = true; }
+            setPhase('ok');
+            afterApply(ctx);
+        } catch (e) { Object.keys(mine).forEach(function (id) { dirtySet[id] = 1; }); handleErr(e); }
+        finally {
+            running = false;
+            if (again) { var f2 = forceNext, fl = flushNext; again = false; forceNext = false; flushNext = false; setTimeout(function () { runSync(f2, fl); }, 1500); }
+        }
+    }
+    function handleErr(e) {
+        console.warn('[rhm-sync]', e);
+        if (e.kind === 'offline' || e.kind === 'network') { setPhase('offline'); return; }
+        if (e.kind === 'auth' || e.kind === 'scope') { setPhase('need-login'); return; }
+        failCount++; setPhase('error', errText(e));
+        var wait = Math.min(300000, 10000 * Math.pow(2, Math.min(failCount - 1, 5)));
+        clearTimeout(tDeb); tDeb = setTimeout(function () { runSync(false); }, wait);
+    }
+    function afterApply(ctx) {
+        var ch = Object.keys(ctx.changed); if (!ch.length) return;
+        DOMAINS.forEach(function (ad) { if (ctx.changed[ad.id] && ad.refresh) { try { ad.refresh(); } catch (e) {} } });
+        toast('☁️ Đã nhận dữ liệu mới từ Google Drive');
+        var needReload = DOMAINS.filter(function (ad) { return ad.reload && ctx.changed[ad.id]; });
+        if (needReload.length && !reloadAsked && typeof window.appConfirm === 'function') {
+            reloadAsked = true; needReload.forEach(function (ad) { staleTomb[ad.id] = true; });
+            setTimeout(function () {
+                window.appConfirm('Đã nhận sổ ghi chú / từ điển / highlight mới từ thiết bị khác. Tải lại trang để hiển thị đầy đủ?', function (ok) {
+                    if (ok) location.reload(); else { reloadAsked = false; }
+                });
+            }, 600);
+        }
+    }
+
+    /* ---------- thao tác từ giao diện ---------- */
+    async function afterLogin(r) {
+        cfg.tok = { access: r.access_token, exp: Date.now() + (+r.expires_in || 3600) * 1000 };
+        var email = '';
+        try { var u = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', { headers: { Authorization: 'Bearer ' + r.access_token } }); email = (await u.json()).email || ''; } catch (e) {}
+        if (!email) email = 'Tài khoản Google';
+        if (cfg.email && cfg.email !== email) await resetMeta();   // đổi tài khoản: bỏ trạng thái đồng bộ cũ
+        cfg.email = email; cfg.enabled = true; await saveCfg();
+        ui.phase = 'idle'; paint();
+        runSync(true);
+    }
+    async function resetMeta() { for (var i = 0; i < DOMAINS.length; i++) await mSet('m:' + DOMAINS[i].id, null); cfg.lastSync = 0; lastFull = 0; }
+    window.rhmSyncLoginToggle = async function () {
+        if (loginBusy) return;
+        if (cfg.email && ui.phase !== 'need-login') { window.rhmSyncLogout(); return; }
+        loginBusy = true; paint();
+        try { var r = await requestToken({ prompt: cfg.email ? '' : 'select_account', hint: cfg.email || undefined }); loginBusy = false; await afterLogin(r); }
+        catch (e) {
+            loginBusy = false;
+            var m = e.kind === 'auth' ? (e.detail === 'popup_failed_to_open' ? 'Trình duyệt chặn cửa sổ đăng nhập, hãy cho phép popup rồi thử lại' : e.detail === 'popup_closed' ? 'Bạn đã đóng cửa sổ đăng nhập' : 'Đăng nhập không thành công' + (e.detail ? ' (' + e.detail + ')' : '')) : errText(e);
+            ui.phase = cfg.email ? 'need-login' : 'error'; ui.msg = m; paint(); toast('❌ ' + m);
+        }
+    };
+    window.rhmSyncLogout = function () {
+        var go = function () {
+            var t = cfg.tok && cfg.tok.access;
+            try { if (t) fetch('https://oauth2.googleapis.com/revoke', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'token=' + encodeURIComponent(t), keepalive: true }).catch(function () {}); } catch (e) {}
+            clearTimeout(tDeb); clearTimeout(tMax); tMax = 0;
+            cfg.tok = null; cfg.email = ''; cfg.enabled = false;
+            resetMeta().then(function () { return saveCfg(); }).then(function () { ui.phase = 'idle'; ui.msg = ''; paint(); toast('Đã hủy đăng nhập. Dữ liệu trên máy vẫn được giữ nguyên.'); });
+        };
+        if (typeof window.appConfirm === 'function') window.appConfirm('Hủy đăng nhập Google? Dữ liệu trên máy vẫn giữ nguyên, chỉ ngừng đồng bộ.', function (ok) { if (ok) go(); }); else go();
+    };
+    window.rhmSyncToggle = async function () {
+        if (!cfg.email) return;
+        cfg.enabled = !cfg.enabled; await saveCfg();
+        if (cfg.enabled) { ui.phase = 'idle'; paint(); runSync(true); } else { clearTimeout(tDeb); clearTimeout(tMax); tMax = 0; paint(); }
+    };
+    window.rhmSyncNow = function () { if (!cfg.email) return; if (!cfg.enabled) { cfg.enabled = true; saveCfg(); } runSync(true); };
+    window.rhmSyncUndo = async function () {
+        var b = await mGet('backup'); if (!b || !b.d) { hasBackup = false; paint(); return; }
+        var go = async function () {
+            applying = true;
+            try {
+                for (var i = 0; i < DOMAINS.length; i++) {
+                    var ad = DOMAINS[i], L = b.d[ad.id]; if (!L || !L.length) continue;
+                    var ups = L.filter(function (x) { return x.old !== null; }).map(function (x) { return [x.id, x.old]; });
+                    var dl = L.filter(function (x) { return x.old === null; }).map(function (x) { return x.id; });
+                    ad.apply(ups, dl);
+                    /* ghi nhận giá trị đã hoàn tác là "đã xử lý": không đẩy lên Drive, không bị kéo lại cho tới khi có thay đổi mới thật sự */
+                    var meta = await mGet('m:' + ad.id), after = ad.read();
+                    if (meta) { L.forEach(function (x) { var o = after.get(x.id), m = meta.recs[x.id]; if (m) m.h = o ? hv(o.v) : null; }); await mSet('m:' + ad.id, meta); }
+                    if (ad.refresh) ad.refresh();
+                }
+            } finally { applying = false; }
+            await mSet('backup', null); hasBackup = false; paint(); toast('↩️ Đã hoàn tác trên máy này. Các thiết bị khác không bị ảnh hưởng.');
+        };
+        if (typeof window.appConfirm === 'function') window.appConfirm('Hoàn tác lần nhận dữ liệu gần nhất? Các mục vừa nhận từ Google Drive sẽ quay về giá trị cũ trên máy này. Các thiết bị khác không bị ảnh hưởng.', function (ok) { if (ok) go(); }); else go();
+    };
+    window.rhmSyncOpen = function (ev) {
+        try { if (ev && ev.stopPropagation) ev.stopPropagation(); } catch (e) {}
+        var m = $('rhm-sync-modal'); if (!m) return;
+        try { window.closeHomeSettings && window.closeHomeSettings(); } catch (e) {}
+        paint(); m.style.display = 'flex';
+        try { window.hsLock && window.hsLock(m); } catch (e) {}
+        loadGis().catch(function () {});   // tải sẵn để bấm đăng nhập không bị chặn popup
+    };
+    window.rhmSyncClose = function () {
+        var m = $('rhm-sync-modal'); if (m) m.style.display = 'none';
+        try { window.hsUnlock && window.hsUnlock(); } catch (e) {}
+        try { window.openHomeSettings && window.openHomeSettings(); } catch (e) {}
+    };
+    (function () {
+        var m = $('rhm-sync-modal'); if (!m) return;
+        ['click', 'mousedown', 'mouseup', 'pointerdown', 'pointerup', 'touchstart', 'touchend'].forEach(function (ev) { m.addEventListener(ev, function (e) { e.stopPropagation(); }); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && m.style.display !== 'none') { e.stopImmediatePropagation(); window.rhmSyncClose(); } }, true);
+    })();
+
+    /* ---------- móc vào lưu trữ của app để biết khi nào có thay đổi ---------- */
+    var KEYRE = /^(quizApp_sec_[ps]_v2|quizApp_(unlocked|selected)_emblems|quizApp(Bookmarked|BlockedQuestions|QuestionDifficulty|CustomFolders|SavedQuizzes)|quizApp_rhm_(notes|dict)(_meta)?_v1|quizApp_bk_ann_v1)$/;
+    var LSRE = /^(ytWatchState|ytResumePos|ytfocus_v1:)/;
+    function hookStorage() {
+        try {
+            if (typeof kv !== 'undefined' && !kv.__rs) {
+                var si = kv.setItem.bind(kv), ri = kv.removeItem.bind(kv);
+                kv.setItem = function (k, v) { var r = si(k, v); try { if (KEYRE.test(String(k))) dirty(domOf(String(k))); } catch (e) {} return r; };
+                kv.removeItem = function (k) { var r = ri(k); try { if (KEYRE.test(String(k))) dirty(domOf(String(k))); } catch (e) {} return r; };
+                kv.__rs = 1;
+            }
+        } catch (e) {}
+        try {
+            var ls = Storage.prototype.setItem, lr = Storage.prototype.removeItem;
+            Storage.prototype.setItem = function (k) { var r = ls.apply(this, arguments); try { if (this === window.localStorage && LSRE.test(String(k))) dirty('video'); } catch (e) {} return r; };
+            Storage.prototype.removeItem = function (k) { var r = lr.apply(this, arguments); try { if (this === window.localStorage && LSRE.test(String(k))) dirty('video'); } catch (e) {} return r; };
+        } catch (e) {}
+    }
+
+    /* ---------- khởi động ---------- */
+    function start() {
+        if (started) return; started = true;
+        if (cfg.enabled && cfg.email) setTimeout(function () { runSync(true); }, 5000);   // chờ app nạp xong bộ đề rồi mới đồng bộ lần đầu
+        setInterval(function () { if (cfg.enabled && cfg.email && !document.hidden && navigator.onLine !== false && !running && ui.phase !== 'need-login') runSync(false); }, POLL);
+        document.addEventListener('visibilitychange', function () {
+            if (!cfg.enabled || !cfg.email) return;
+            if (document.hidden) { clearTimeout(tDeb); runSync(false, true, true); } else runSync(false);
+        });
+        window.addEventListener('pagehide', function () { if (cfg.enabled && cfg.email) runSync(false, true); });
+        window.addEventListener('online', function () { if (cfg.enabled && cfg.email) { failCount = 0; runSync(false); } });
+    }
+    var cfgReady = (async function () {
+        mdb = await mOpen();
+        var c = await mGet('cfg'); if (c) cfg = Object.assign(cfg, c);
+        if (!cfg.deviceId) { cfg.deviceId = 'd' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4); await saveCfg(); }
+        var b = await mGet('backup'); hasBackup = !!(b && b.d);
+        paint();
+    })();
+    hookStorage();
+    (function () {
+        var og = window.initGamification;
+        if (typeof og === 'function' && !og.__rs) {
+            var wrapped = function () { var r = og.apply(this, arguments); gamReady = true; cfgReady.then(start); return r; };
+            wrapped.__rs = 1; window.initGamification = wrapped;
+        } else { gamReady = true; cfgReady.then(start); }
+        setTimeout(function () { if (!gamReady && typeof kv !== 'undefined' && kget('__migrated_from_localstorage_v1') === '1') { gamReady = true; cfgReady.then(start); } }, 20000);
+    })();
+    window.rhmSync = { run: function (f) { return runSync(!!f); }, cfg: cfg, paint: paint, _decide: decide, _hv: hv, _domains: DOMAINS };
+})();
+</script>
+
 <!-- ===== Cửa sổ phụ: giới thiệu luồng Hướng dẫn sử dụng app ===== -->
 <div id="hs-guide-modal" class="fixed inset-0 bg-black bg-opacity-70 hidden flex items-center justify-center p-4" style="z-index:100500" onclick="if(event.target===this)hsCloseGuideInfo()">
     <div class="bg-white rounded-2xl shadow-2xl p-5" style="width:min(620px,calc(94vw / 1.5));max-height:calc(88vh / 1.5);overflow-y:auto;zoom:1.5">
