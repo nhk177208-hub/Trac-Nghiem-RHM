@@ -16171,7 +16171,7 @@ function bkQzEnsureBtn() {
     let nav = document.getElementById('bk-quiz-nav'); const pnl = document.getElementById('ai-en-panel'); if (nav && pnl && nav.parentElement !== pnl) pnl.appendChild(nav);
     if (!nav) {
         nav = document.createElement('div'); nav.id = 'bk-quiz-nav'; nav.className = 'hidden';
-        nav.innerHTML = '<button type="button" data-q="prev">⬅</button><span class="bk-qz-mid"><button type="button" data-q="review">📍 Xem lại</button><button type="button" data-q="expl">Giải thích</button></span><button type="button" data-q="next">➡</button>';
+        nav.innerHTML = '<button type="button" data-q="prev">⬅</button><span class="bk-qz-mid"><button type="button" data-q="review">📍 Xem lại</button><button type="button" data-q="expl">💡 Giải thích</button></span><button type="button" data-q="next">➡</button>';
         nav.addEventListener('click', e => {
             const t = e.target.closest('button[data-q]'); if (!t) return; const k = t.dataset.q;
             if (k === 'prev') bkQzMove(-1); else if (k === 'next') bkQzMove(1); else if (k === 'review') bkQzReview(); else bkQzExplain();
@@ -28269,8 +28269,7 @@ body {
                   'Nơi làm trắc nghiệm về bài giảng. Cách tạo: bấm nút 📝 Trắc nghiệm trong khung chat → chọn số câu (5 / 10 / 15 / 20 hoặc tự điền) và độ khó (Dễ / Vừa / Khó) → ▶ Bắt đầu. AI soạn câu hỏi 4 đáp án dựa trên lời giảng, mỗi câu gắn với một mốc thời gian trong video.'),
                 qzStep(function () { vidKeep(); return document.querySelector('#ai-en-panel .ai-en-body'); }, '✅ Làm từng câu',
                   'Mỗi lần hiện một câu. Chọn đáp án để biết ngay đúng hay sai kèm giải thích ngắn; mỗi câu đúng được +20 điểm. Dòng đầu thẻ cho biết bạn đang ở câu mấy và đã đúng bao nhiêu câu.'),
-                qzStep(vsg('bk-quiz-nav'), '⬅ ➡ Chuyển câu & công cụ',
-                  '⬅ ➡ chuyển giữa các câu. Sau khi trả lời một câu còn có 📍 Xem lại — tua video tới đoạn lời giảng chứa đáp án — và Giải thích — gửi câu hỏi sang khung chat để AI giải thích kỹ vì sao đáp án đúng, các đáp án kia sai.'),
+                ...qzNavSteps(),
                 noqzStep(vsg('ai-dict-hbtn'), '📖 Từ điển',
                   'Mở Từ điển RHM của bạn ngay trong lúc học để tra hoặc lưu thuật ngữ.'),
                 noqzStep(vsg('ai-note-hbtn'), '📒 Ghi chú',
@@ -28434,24 +28433,13 @@ body {
     }
     document.addEventListener('click', qbHandle, true);
     /* ---- chế độ đọc sách: lần đầu bấm 🤖 AI Chat → giới thiệu khung chat của sách ---- */
-    var RDCHAT_STEPS = [
-        { sel: qbQ('#ai-title'), t: '🤖 Khung chat AI của sách', d: 'Gia sư AI đã “đọc” toàn bộ chương bạn đang mở: hỏi bài, tóm tắt, giải thích chỗ chưa hiểu, hỏi ví dụ lâm sàng… AI trả lời dựa trên nội dung chương.' },
-        { sel: qbQ('#ai-enwin-hbtn'), t: '❓ Trắc nghiệm · Cửa sổ phụ', d: 'Ẩn / hiện cửa sổ phụ Trắc nghiệm: AI tạo câu hỏi ôn tập từ chương đang đọc, hiện ngay cạnh khung chat để bạn làm và đối chiếu.' },
-        { sel: qbQ('#ai-dict-hbtn'), t: '📖 Từ điển RHM', d: 'Mở nhanh Từ Điển RHM để tra hoặc xem lại các thuật ngữ đã lưu khi đọc sách.' },
-        { sel: qbQ('#ai-lang-box'), t: '🌐 Vie / Eng', d: 'Chọn ngôn ngữ trả lời: Vie, Eng, hoặc bật cả hai để xem song ngữ.' },
-        { sel: qbQ('#ai-settings-btn'), t: '⚙️ Cài đặt AI', d: 'Chỉnh cỡ chữ, giọng đọc, độ dài câu trả lời, mức suy luận và khóa API; bảng cài đặt dùng chung cho cả 3 khung chat AI.' },
-        { sel: qbQ('#ai-quickrow'), t: '⚡ Câu hỏi nhanh', d: 'Các nút hỏi nhanh theo chương (tóm tắt, giải thích, ý chính…). Bấm một nút là AI trả lời luôn, khỏi gõ.' },
-        { sel: qbQ('#ai-input'), t: '⌨️ Ô nhập câu hỏi', d: 'Gõ câu hỏi riêng của bạn về chương đang đọc, rồi bấm ➤ để gửi.' },
-        { sel: qbQ('#ai-send-btn'), t: '➤ Gửi', d: 'Gửi câu hỏi cho AI.' },
-        { sel: qbQ('#ai-close-btn'), t: '✕ Đóng khung chat', d: 'Đóng khung chat và quay lại trang sách. Mở lại bằng nút 🤖 AI Chat bất cứ lúc nào.' }
-    ];
     document.addEventListener('click', function (e) {
         if (!fabOn || tour || Date.now() < suppressUntil) return;
         var t = e.target; if (!t || !t.closest || t.closest('#hf-spot-wrap') || !t.closest('#bk-ai-btn')) return;
         if (winSeen('qb-rdchat')) return;
         setTimeout(function () {
             if (tour || winSeen('qb-rdchat') || !aiVisible() || (typeof aiState !== 'undefined' && aiState.mode !== 'book')) return;
-            winMark('qb-rdchat'); beginTour('steps', RDCHAT_STEPS);
+            winMark('qb-rdchat'); beginTour('steps', rdChatSteps());
         }, 1000);
     }, true);
     /* ---- Từ điển / Sổ ghi chú: (a) lần đầu có từ / ghi chú để thao tác → giới thiệu các nút trên từng mục; (b) lần đầu bấm mỗi nút ribbon → giới thiệu riêng ---- */
@@ -28508,6 +28496,72 @@ body {
             if (!winSeen('dn-ntacts') && shown('note-modal') && document.querySelector('#note-modal .nt-pen')) { winMark('dn-ntacts'); beginTour('steps', NT_ROW_STEPS); }
         } catch (e) {}
     }, 1500);
+    /* ---- cửa sổ phụ Trắc nghiệm (dùng cho cả chat video và chat reader): thanh chuyển câu + 📍 Xem lại + 💡 Giải thích ---- */
+    function qzNavDemo() {   // hiện thanh chuyển câu và 2 nút Xem lại / Giải thích dù chưa trả lời (minh họa), xong trả lại nguyên trạng
+        return function () {
+            var t = tour, nav = $id('bk-quiz-nav'); if (!t || !nav) return;
+            if (!t.qzNavDemo) { t.qzNavDemo = true; t.undo.push(function () { try { bkQzNavPaint(); } catch (e) {} }); }
+            nav.classList.remove('hidden');
+            var bs = nav.querySelectorAll('[data-q="review"],[data-q="expl"]'); for (var i = 0; i < bs.length; i++) bs[i].classList.remove('hidden');
+        };
+    }
+    function qzNavStep(sel, t, d) { var dm = qzNavDemo(); return { vid: true, sel: sel, t: t, d: d, pre: function () { qzEnsure(true); dm(); }, wait: 500 }; }
+    function qzNavBtn(k) { return function () { vidKeep(); return document.querySelector('#bk-quiz-nav [data-q="' + k + '"]'); }; }
+    function qzNavSteps() {
+        var vid = aiVidMode();
+        return [
+            qzNavStep(vsg('bk-quiz-nav'), '⬅ ➡ Chuyển câu',
+                '⬅ ➡ chuyển giữa các câu của bộ trắc nghiệm. Hai nút ở giữa chỉ hiện sau khi bạn trả lời xong một câu (mình đang hiện minh họa).'),
+            qzNavStep(qzNavBtn('review'), '📍 Xem lại',
+                vid ? 'Tua video tới đúng đoạn lời giảng chứa đáp án của câu này để bạn xem lại kiến thức ngay tại nguồn. Chỉ hiện sau khi trả lời câu đó.'
+                    : 'Nhảy tới đúng đoạn trong chương sách chứa đáp án của câu này và tô sáng đoạn đó để bạn đọc lại ngay tại nguồn. Chỉ hiện sau khi trả lời câu đó.'),
+            qzNavStep(qzNavBtn('expl'), '💡 Giải thích',
+                'Gửi câu hỏi vừa làm sang khung chat để gia sư AI giải thích kỹ vì sao đáp án đúng và vì sao các đáp án còn lại sai. Chỉ hiện sau khi trả lời câu đó.')
+        ];
+    }
+    /* ---- giới thiệu khung chat AI ở chế độ đọc sách (reader) ---- */
+    function rdChatSteps() {
+        return [
+            aiStep(vsg('ai-title'), '🤖 Khung chat AI của sách',
+                'Gia sư AI đã “đọc” toàn bộ chương bạn đang mở: hỏi bài, tóm tắt, giải thích chỗ chưa hiểu, hỏi ví dụ lâm sàng… AI trả lời dựa trên nội dung chương. Mình giới thiệu từng nút nhé.'),
+            aiStep(vsg('ai-enwin-hbtn'), '❓ Trắc nghiệm · Cửa sổ phụ',
+                'Bấm để ẩn / hiện cửa sổ phụ Trắc nghiệm nằm cạnh khung chat. Mình mở nó ra ngay bây giờ để bạn xem.'),
+            qzStep(vsg('ai-en-panel'), '📝 Cửa sổ phụ Trắc nghiệm',
+                'Nơi làm trắc nghiệm về chương đang đọc. Cách tạo: bấm nút 📝 Trắc nghiệm trong khung chat → chọn số câu và độ khó → ▶ Bắt đầu. AI soạn câu hỏi 4 đáp án dựa trên nội dung chương; mỗi câu đúng được +20 điểm.'),
+            qzStep(function () { vidKeep(); return document.querySelector('#ai-en-panel .ai-en-body'); }, '✅ Làm từng câu',
+                'Mỗi lần hiện một câu. Chọn đáp án để biết ngay đúng hay sai kèm giải thích ngắn. Dòng đầu thẻ cho biết bạn đang ở câu mấy và đã đúng bao nhiêu câu.'),
+            ...qzNavSteps(),
+            noqzStep(vsg('ai-dict-hbtn'), '📖 Từ điển', 'Mở Từ điển RHM của bạn ngay trong lúc đọc để tra hoặc lưu thuật ngữ.'),
+            noqzStep(vsg('ai-note-hbtn'), '📒 Ghi chú', 'Mở Sổ ghi chú để xem và lưu ghi chú, nhất là nội dung từ các bong bóng chat AI.'),
+            aiStep(vsg('ai-lang-box'), 'Vie / Eng · Ngôn ngữ trả lời', 'Chọn gia sư trả lời bằng tiếng Việt (Vie), tiếng Anh (Eng), hoặc bật cả hai để xem song ngữ.'),
+            aiStep(vsg('ai-settings-btn'), '⚙️ Cài đặt AI', 'Chỉnh cỡ chữ, giọng đọc, độ dài câu trả lời, mức suy luận và khóa API của khung chat. Lần đầu bấm vào, mình sẽ giới thiệu kỹ từng mục.'),
+            aiStep(vsg('ai-messages'), '💬 Khung hội thoại', 'Câu trả lời của gia sư hiện ở đây và tự cuộn xuống cuối. Kéo lên để xem lại các câu trước.'),
+            aiStep(vsg('ai-quickrow'), '⚡ Câu hỏi nhanh', 'Các nút hỏi nhanh theo chương (tóm tắt, giải thích, mục lục…). Bấm một nút là AI trả lời luôn, khỏi gõ.'),
+            aiStep(vsg('bk-quiz-quick'), '📝 Trắc nghiệm', 'Mở bảng chọn số câu và độ khó để tạo trắc nghiệm; các câu hỏi hiện trong cửa sổ phụ Trắc nghiệm vừa giới thiệu.'),
+            aiStep(vsg('ai-mic-btn'), '🎙️ Nói chuyện trực tiếp', 'Nói chuyện bằng giọng nói với gia sư. Bấm lần nữa (⏹️) để dừng.'),
+            aiStep(vsg('ai-img-btn'), '🖼️ Gửi ảnh', 'Gửi một hình ảnh (ảnh chụp màn hình, hình trong sách…) cho gia sư xem rồi hỏi về hình đó.'),
+            aiStep(vdUnion(function () { return [$id('ai-input'), $id('ai-send-btn')]; }), '⌨️ Ô nhập & ➤ Gửi', 'Gõ câu hỏi tự do rồi bấm ➤ (hoặc Enter) để gửi; Shift + Enter để xuống dòng.'),
+            aiStep(vsg('ai-close-btn'), '✕ Đóng', 'Đóng khung chat và quay lại trang sách. Muốn xem lại phần giới thiệu này: mở khung chat rồi bấm Trợ lý AI → ℹ️.')
+        ];
+    }
+    /* ---- ℹ️ mặc định: đang mở cửa sổ con / khung chat nào thì giới thiệu đúng cái đó ---- */
+    function ptxt(id) { var e = document.querySelector('#' + id + ' .rd-pt'); return e ? (e.textContent || '') : ''; }
+    function subWinSteps(dnOnly) {
+        if (shown('dict-modal')) {
+            if (shown('rd-rv')) return DNBTNS[2].steps;
+            if (shown('rd-pop')) { var a = ptxt('rd-pop'); if (a.indexOf('Thêm') >= 0) return DNBTNS[0].steps; if (a.indexOf('Tìm') >= 0) return DNBTNS[1].steps; }
+            if (document.querySelector('#dict-modal .rd-act')) return DN_ROW_STEPS;
+        }
+        if (shown('note-modal')) {
+            if (shown('nt-rv')) return DNBTNS[5].steps;
+            if (shown('nt-pop')) { var b = ptxt('nt-pop'); if (b.indexOf('Ghi chú mới') >= 0) return DNBTNS[3].steps; if (b.indexOf('Tìm') >= 0) return DNBTNS[4].steps; }
+        }
+        if (dnOnly) return null;
+        if (aiVisible() && !aiVidMode()) return (typeof aiState !== 'undefined' && aiState.mode === 'book') ? rdChatSteps() : QBTNS[2].steps;
+        if (shown('report-error-modal')) return QBTNS[0].steps;
+        if (shown('navigator-modal')) return QBTNS[1].steps;
+        return null;
+    }
     function tourHomeOk() {
         if (!shown('home-screen')) return false;
         for (var k in MODAL_NAMES) { if (shown(k)) return false; }
@@ -28536,8 +28590,12 @@ body {
     /* Info: đang mở cửa sổ nào thì giới thiệu cửa sổ đó, không thì giới thiệu màn hình chính */
     function startTour() {
         if (winShown('aiset')) { beginTour('win', 'aiset'); return; }   // bảng ⚙️ Cài đặt của khung chat AI (dùng chung 3 khung) đang mở
+        var dn0 = null; try { dn0 = subWinSteps(true); } catch (e) {}   // popup / ôn tập của Từ điển & Sổ ghi chú đang mở trên cùng → giới thiệu đúng cái đó
+        if (dn0) { beginTour('steps', dn0); return; }
         var dk = vidDetailKey();
         if (dk && VDETAIL[dk]) { beginTour('steps', VDETAIL[dk]()); return; }
+        var sw = null; try { sw = subWinSteps(); } catch (e) {}
+        if (sw) { beginTour('steps', sw); try { if (qscIsExam() && tour && shown('quiz-screen')) qscPause(tour); } catch (e) {} return; }
         var w = activeWin();
         if (w) { beginTour('win', w); return; }
         if (!tourHomeOk()) { toast('Cửa sổ này chưa có phần giới thiệu — hãy quay về màn hình chính hoặc mở Bộ Sưu Tập / Từ Điển / Sổ Ghi Chú / Cài Đặt / một môn học'); return; }
