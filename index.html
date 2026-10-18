@@ -1547,9 +1547,9 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
                                 ⬅️ Câu trước
                             </button>
                             <div id="difficulty-group" class="flex items-stretch gap-1" title="Gắn thẻ độ khó cho câu này">
-                                <button type="button" data-level="easy" onclick="setCurrentDifficulty('easy')" class="eq-btn flex-1 rounded-xl border font-bold text-xs sm:text-sm transition-colors flex items-center justify-center"><span class="hidden sm:inline mr-0.5">🟢</span>Dễ</button>
-                                <button type="button" data-level="medium" onclick="setCurrentDifficulty('medium')" class="eq-btn flex-1 rounded-xl border font-bold text-xs sm:text-sm transition-colors flex items-center justify-center"><span class="hidden sm:inline mr-0.5">🟡</span>Vừa</button>
                                 <button type="button" data-level="hard" onclick="setCurrentDifficulty('hard')" class="eq-btn flex-1 rounded-xl border font-bold text-xs sm:text-sm transition-colors flex items-center justify-center"><span class="hidden sm:inline mr-0.5">🔴</span>Khó</button>
+                                <button type="button" data-level="medium" onclick="setCurrentDifficulty('medium')" class="eq-btn flex-1 rounded-xl border font-bold text-xs sm:text-sm transition-colors flex items-center justify-center"><span class="hidden sm:inline mr-0.5">🟡</span>Vừa</button>
+                                <button type="button" data-level="easy" onclick="setCurrentDifficulty('easy')" class="eq-btn flex-1 rounded-xl border font-bold text-xs sm:text-sm transition-colors flex items-center justify-center"><span class="hidden sm:inline mr-0.5">🟢</span>Dễ</button>
                             </div>
                             <button id="next-btn" onclick="nextQuestion()" class="eq-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-1 rounded-xl transition-colors shadow-sm text-sm sm:text-base flex items-center justify-center truncate">
                                 Câu tiếp theo ➡️
@@ -27906,13 +27906,13 @@ body {
 
         { ctx: 'deep', sel: '#deep-modal h3', t: '🧠 Cửa sổ Ôn Tập Chuyên Sâu', d: 'Lượt ôn đào sâu, cho bạn chọn cả chủ đề lẫn độ khó. Muốn xem lại phần này: bấm Trợ lý AI → ℹ️ khi cửa sổ đang mở.' },
         { ctx: 'deep', sel: '#deep-tree', t: '1️⃣ Chọn chủ đề & bộ đề', d: 'Tích chọn các chủ đề hoặc bộ đề muốn ôn. Phía trên có Chọn tất cả, Bỏ chọn tất cả và 🎲 Chọn ngẫu nhiên.' },
-        { ctx: 'deep', sel: function () { var i = $id('deep-pct-easy'); return i && i.parentElement.parentElement; }, t: '2️⃣ Tỉ lệ độ khó', d: 'Chia phần trăm câu Dễ, Vừa, Khó trong lượt ôn. Tổng nên bằng 100%.' },
+        { ctx: 'deep', sel: function () { var i = $id('deep-pct-easy'); return i && i.parentElement.parentElement; }, t: '2️⃣ Tỉ lệ độ khó', d: 'Chia phần trăm câu Khó, Vừa, Dễ trong lượt ôn, dựa trên thẻ độ khó bạn tự gắn bằng 3 nút Khó · Vừa · Dễ sau mỗi câu trả lời lúc làm bài (câu chưa gắn thẻ xếp vào nhóm “Khác”). Tổng nên bằng 100%. Ví dụ dồn nhiều % vào Khó để ôn đúng chỗ yếu.' },
         { ctx: 'deep', sel: '#deep-num-questions', t: '3️⃣ Số câu hỏi', d: 'Nhập tổng số câu muốn ôn. Hệ thống tự bù nếu một mức độ khó không đủ câu.' },
         { ctx: 'deep', sel: '#deep-modal button[onclick="startDeepReview()"]', t: '🚀 Bắt đầu', d: 'Bắt đầu làm bài theo cấu hình bạn vừa chọn.' },
 
         { ctx: 'mock', sel: '#exam-modal h3', t: '🎯 Cửa sổ Thi Thử', d: 'Làm đề thi thử tính giờ như thi thật. Muốn xem lại phần này: bấm Trợ lý AI → ℹ️ khi cửa sổ đang mở.' },
         { ctx: 'mock', sel: '#exam-list', t: '📋 Danh sách đề thi', d: 'Mỗi dòng là một đề thi. Chọn một đề để bắt đầu làm bài, hoặc tiếp tục đề đang làm dở.' },
-        { ctx: 'mock', sel: '#btn-start-exam-main', t: '🚀 Bắt đầu thi', d: 'Bấm sau khi chọn đề để vào làm bài.' },
+        { ctx: 'mock', sel: '#btn-start-exam-main', t: '🚀 Bắt đầu thi', d: 'Bấm sau khi chọn đề để vào làm bài. Đồng hồ sẽ đếm ngược 180 phút; lần đầu vào làm bài, mình sẽ giới thiệu giao diện thi thử, kể cả hai đồng hồ đếm ngược.' },
 
         { ctx: 'saved', sel: '#bookmarked-modal h3', t: '⭐ Câu hỏi đã lưu', d: 'Nơi gom những câu bạn đã đánh dấu sao khi làm bài; con số là số câu đã lưu. Muốn xem lại phần này: bấm Trợ lý AI → ℹ️ khi cửa sổ đang mở.' },
         { ctx: 'saved', sel: '#bookmarked-list-container', t: '📄 Danh sách câu đã lưu', d: 'Xem lại từng câu đã lưu cùng đáp án. Có thể bỏ lưu những câu không cần nữa.' },
@@ -27936,6 +27936,145 @@ body {
         { ctx: 'section', sel: '#topic-grid', t: '🦷 36 Chủ Đề Ôn Tập', d: 'Mỗi ô là một chủ đề Răng Hàm Mặt. Bấm vào một ô để mở chủ đề đó; lần đầu mình sẽ hướng dẫn ngay trong cửa sổ chủ đề (chỉ hướng dẫn một chủ đề mẫu, các chủ đề còn lại dùng giống hệt).' }
     ];
     TOUR.forEach(function (st) { if (st.ctx === 'video') st.vid = true; });
+
+    /* ===== GIỚI THIỆU MỚI =====
+       (1) ctx 'aiset'   : Cài đặt khung chat AI — DÙNG CHUNG cho 3 khung chat (Trắc nghiệm · Video · Đọc sách); tự chạy 1 lần duy nhất ở lần đầu
+                           mở bảng cài đặt trong bất kỳ khung nào; bấm Trợ lý AI → ℹ️ khi bảng đang mở để xem lại.
+       (2) ctx 'qscreen' : Giao diện làm bài trắc nghiệm (gồm các nút Khó · Vừa · Dễ dùng cho Ôn Tập Chuyên Sâu).
+       (3) ctx 'escreen' : Giao diện làm bài Thi Thử — giống (2) nhưng thêm phần giải thích hai đồng hồ đếm ngược. */
+    function qscIsExam() { try { return typeof checkIsExamQuiz === 'function' && !!checkIsExamQuiz(); } catch (e) { return false; } }
+    function qscNoModal() { for (var k in MODAL_NAMES) { if (shown(k)) return false; } return true; }
+    function aksNode(sel) { return function () { return document.querySelector(sel); }; }
+    function aksBlk(sel) { return function () { var e = document.querySelector(sel); return e ? (e.closest('.rounded-2xl') || e) : null; }; }
+
+    /* --- (1) Cài đặt khung chat AI --- */
+    var AKS_STEPS = [
+        { sel: '#ai-title', t: '⚙️ Cài đặt khung chat AI',
+          d: 'Bảng cài đặt này DÙNG CHUNG cho cả 3 khung chat AI: 📝 Trắc nghiệm (hỏi AI về câu hỏi), 🎬 Video (hỏi AI về bài giảng) và 📖 Đọc sách (AI Chat của trình đọc). Chỉnh ở khung nào cũng áp dụng cho cả ba. Mình giới thiệu từng mục từ trên xuống nhé.' },
+        { sel: aksBlk('#ai-zoom-range'), t: '🔠 Cỡ chữ khung chat',
+          d: 'Phóng to / thu nhỏ chữ trong khung chat, từ 50% đến 300%. Kéo thanh trượt, bấm A− / A+ để chỉnh từng nấc, hoặc bấm 100% để về mặc định.' },
+        { sel: aksBlk('#ai-voice-select'), t: '🗣 Giọng đọc · Độ trầm · Tốc độ',
+          d: 'Chọn giọng máy dùng khi bấm 🔊 Đọc to câu trả lời của gia sư. ▶ Nghe thử để kiểm tra ngay; Độ trầm chỉnh cao – thấp của giọng; Tốc độ đọc từ 0.5x đến 2x (bấm 1x để về bình thường).' },
+        { sel: aksNode('#ai-len-btns'), t: '📏 Độ dài câu trả lời',
+          d: 'Có 4 mức: Ngắn gọn (~350 token), Vừa (~900), Chi tiết (~2.000) và Đầy đủ (không giới hạn thêm). Ngắn thì trả lời nhanh và đỡ tốn lượt; chọn Chi tiết / Đầy đủ khi cần giải thích kỹ.' },
+        { sel: function () { var b = document.querySelector('#ai-key-panel [data-bk-st]'); return b ? (b.closest('.border-t') || b.parentElement) : null; }, t: '📖 Giọng văn khi dịch sách',
+          d: 'Áp dụng khi bạn dịch đoạn chữ trong trình đọc sách. “Tự nhiên (dễ hiểu)” dịch thoáng, đọc xuôi tai; “Bám sát (sát văn gốc)” giữ sát câu chữ của bản gốc.' },
+        { sel: aksBlk('#ai-key-panel [data-gl]'), t: '🧠 Mức suy luận Gemini',
+          d: 'Thấp · Trung bình · Cao là mức “suy nghĩ” của Gemini trước khi trả lời. Mức càng cao thì trả lời càng kỹ nhưng càng chậm. Áp dụng cho các lần gọi Gemini tiếp theo.' },
+        { sel: function () { var h = document.querySelector('#ai-key-panel > p'); return h ? (h.nextElementSibling || h) : null; }, t: '🔑 Nhà cung cấp AI & khóa API',
+          d: 'Gemini là nhà cung cấp mặc định. Khi Gemini hết lượt hoặc lỗi, app có thể tự chuyển sang nhà cung cấp khác đã có khóa, hoặc bạn tự chọn nhà cung cấp chính. Khóa chỉ được lưu trên trình duyệt của bạn.' },
+        { sel: function () { var c = $id('ai-auto-switch'); return c ? (c.closest('label') || c) : null; }, t: '🔁 Tự chuyển nhà cung cấp',
+          d: 'Tích chọn để app tự đổi sang nhà cung cấp dự phòng khi nhà cung cấp chính hết lượt hoặc báo lỗi. Bỏ tích thì app chỉ dùng nhà cung cấp chính.' },
+        { sel: '#ai-prov-cards > div:nth-child(1) > div:first-child', t: '♊ Thẻ Gemini (mặc định)',
+          d: 'Mỗi nhà cung cấp có một thẻ riêng. Nút tròn bên trái để chọn làm nhà cung cấp chính; bên phải cho biết ✅ đã có khóa hay ⚪ chưa có khóa. Gemini đầy đủ tính năng nhất: chat, xem video, nói trực tiếp 🎙️ và Tìm hiểu sâu có nguồn Google.' },
+        { sel: '#ai-prov-cards > div:nth-child(1) summary', t: '🔑 Lấy khóa & nhập khóa',
+          d: 'Bấm dòng này để mở hướng dẫn từng bước: lấy khóa miễn phí, rồi dán vào ô bên dưới (có sẵn nút 📋 Dán khóa đã sao chép & lưu). Đã có khóa thì mục này đổi thành “Đổi khóa / cài đặt”, kèm ô đổi model nếu nhà cung cấp ngừng model cũ.' },
+        { sel: '#ai-prov-cards > div:nth-child(2) > div:first-child', t: '🔀 Thẻ nhà cung cấp dự phòng',
+          d: 'Nhà cung cấp thứ hai (OpenRouter) dùng làm dự phòng khi Gemini hết lượt. Hạn mức miễn phí khá thấp và không có nói trực tiếp hay xem video YouTube, nhưng đủ để chat khi cần.' },
+        { sel: aksNode('#ai-back-btn'), t: '↩ Quay lại',
+          d: 'Thoát bảng cài đặt và về khung chat. Muốn xem lại phần giới thiệu này: mở ⚙️ Cài đặt trong bất kỳ khung chat AI nào, rồi bấm Trợ lý AI → ℹ️.' }
+    ];
+    AKS_STEPS.forEach(function (st) { st.ctx = 'aiset'; TOUR.push(st); });
+
+    /* --- hỗ trợ cho giới thiệu giao diện làm bài: hiện tạm hàng nút / khung giải thích minh họa rồi trả lại nguyên trạng --- */
+    function qscRow(which) {   // 'un' = hàng nút khi chưa trả lời · 'an' = hàng nút sau khi trả lời
+        return function () {
+            var t = tour; if (!t) return;
+            var u = $id('unanswered-actions'), a = $id('answered-actions'); if (!u || !a) return;
+            if (!t.qscRows) {
+                t.qscRows = { uh: u.classList.contains('hidden'), ah: a.classList.contains('hidden') };
+                t.undo.push(function () { var u2 = $id('unanswered-actions'), a2 = $id('answered-actions'); if (u2) u2.classList.toggle('hidden', t.qscRows.uh); if (a2) a2.classList.toggle('hidden', t.qscRows.ah); });
+            }
+            u.classList.toggle('hidden', which !== 'un');
+            a.classList.toggle('hidden', which !== 'an');
+        };
+    }
+    var QSC_FB_IDS = ['feedback-title', 'feedback-correct-ans', 'feedback-explanation'];
+    function qscFbRestore(t) {
+        var sv = t && t.qscFb; if (!sv) return; t.qscFb = null;
+        var b = $id('feedback-box'); if (!b) return;
+        b.className = sv.cls;
+        QSC_FB_IDS.forEach(function (id, i) { var e = $id(id); if (e) { e.innerHTML = sv.html[i]; e.className = sv.ecls[i]; } });
+    }
+    function qscFb(on) {   // on = true: hiện khung giải thích minh họa (chỉ khi câu hiện tại chưa trả lời) · false: trả lại ngay
+        return function () {
+            var t = tour; if (!t) return;
+            if (!on) { qscFbRestore(t); return; }
+            var b = $id('feedback-box'); if (!b || t.qscFb || !b.classList.contains('hidden')) return;
+            t.qscFb = { cls: b.className, html: [], ecls: [] };
+            QSC_FB_IDS.forEach(function (id) { var e = $id(id); t.qscFb.html.push(e ? e.innerHTML : ''); t.qscFb.ecls.push(e ? e.className : ''); });
+            if (!t.qscFbUndo) { t.qscFbUndo = true; t.undo.push(function () { qscFbRestore(t); }); }
+            b.classList.remove('hidden', 'bg-green-100', 'border-green-500', 'text-green-800', 'bg-red-100', 'border-red-500', 'text-red-800');
+            b.classList.add('bg-indigo-50', 'border-indigo-400', 'text-indigo-900');
+            var ti = $id('feedback-title'), ca = $id('feedback-correct-ans'), ex = $id('feedback-explanation');
+            if (ti) ti.textContent = '✅ / ❌ (minh họa) Kết quả hiện ở đây';
+            if (ca) ca.textContent = 'Đáp án đúng là: …';
+            if (ex) { ex.classList.remove('hidden'); ex.textContent = 'Giải thích: phần giải thích của câu hỏi sẽ hiện ở đây.'; }
+        };
+    }
+    /* đồng hồ làm bài tạm dừng trong lúc xem giới thiệu (đặc biệt quan trọng với thi thử), xem xong chạy tiếp */
+    function qscPause(t) {
+        try { if (typeof timerInterval !== 'undefined' && timerInterval) { clearInterval(timerInterval); t.qscPaused = true; } } catch (e) {}
+        t.undo.push(function () { try { if (t.qscPaused && shown('quiz-screen') && typeof startTimer === 'function') startTimer(); } catch (e) {} });
+    }
+    function qscQ(sel) { return '#quiz-screen ' + sel; }
+
+    /* --- (2)(3) Giao diện làm bài trắc nghiệm / thi thử --- */
+    function qscSteps(ex) {
+        var S = [];
+        S.push({ sel: '#current-quiz-title', t: ex ? '🎯 Màn hình làm bài thi thử' : '📝 Màn hình làm bài trắc nghiệm',
+            d: ex ? 'Giao diện thi thử giống bài trắc nghiệm thường nhưng có thêm hai đồng hồ ĐẾM NGƯỢC (mình giải thích kỹ ở các bước sau). Tên đề thi hiện ở góc phải phía trên; mỗi lần chỉ hiện một câu kèm 4 đáp án. Trong lúc xem giới thiệu, đồng hồ tạm dừng. Mình đi qua từng phần từ trên xuống nhé.'
+                  : 'Tên bộ đề đang làm hiện ở góc phải phía trên. Mỗi lần chỉ hiện một câu hỏi kèm 4 đáp án; chọn xong là biết ngay đúng hay sai. Mình đi qua từng nút từ trên xuống dưới nhé.' });
+        S.push({ sel: function () { var b = document.querySelector(qscQ('button[onclick="confirmBackToHome()"]')); return b ? b.parentElement : null; }, t: '⬅️ Quay lại · 🔄 Làm lại',
+            d: '⬅️ Quay lại: lưu tiến độ làm bài rồi thoát ra, lần sau vào lại có thể làm tiếp. 🔄 Làm lại: làm lại từ câu đầu tiên và đặt lại toàn bộ tiến độ hiện tại (app sẽ hỏi xác nhận trước).' });
+        S.push({ sel: qscQ('.qt-count'), t: '🔢 Số câu',
+            d: 'Cho biết bạn đang ở câu thứ mấy trên tổng số câu của bài. Thanh xanh mỏng bên dưới dài ra dần theo tiến độ của bạn.' });
+        S.push({ sel: '#hope-star-btn', t: '⭐ Ngôi Sao Hy Vọng',
+            d: 'Bấm TRƯỚC khi chọn đáp án: nếu trả lời đúng câu này, bạn được nhân 10 số điểm. Con số trên nút là số ngôi sao đang có (hết sao thì không bật được; trả lời đúng có cơ hội nhận thêm). Bấm lần nữa để hủy khi chưa trả lời.' });
+        S.push({ sel: function () { var r = $id('qz-fs'); return r ? r.parentElement : null; }, t: 'Aa — Cỡ chữ',
+            d: 'Kéo thanh trượt để đổi cỡ chữ của câu hỏi và các đáp án (80% – 200%) cho dễ đọc.' });
+        S.push({ sel: '#report-error-btn', t: '⚠️ Cập nhật TLTK / Góp ý / Báo lỗi',
+            d: 'Thấy câu hỏi hoặc đáp án chưa đúng, muốn bổ sung tài liệu tham khảo hay góp ý? Bấm để gửi cho người làm app.' });
+        S.push({ sel: '#bookmark-quiz-btn', t: '🔖 Lưu câu',
+            d: 'Lưu câu đang làm vào danh sách ⭐ Đã lưu để ôn riêng sau này (nút ⭐ Đã lưu ở khu Ôn Tập Theo Chủ Đề). Bấm lần nữa để bỏ lưu.' });
+        S.push({ sel: '#block-quiz-btn', t: '🚫 Chặn câu',
+            d: 'Chặn câu này để nó không xuất hiện trong các lần làm bài sau (ví dụ câu bị lỗi hoặc quá lạc đề). Muốn bỏ chặn: vào 🚫 Đã chặn ở khu Ôn Tập Theo Chủ Đề.' });
+        S.push({ sel: qscQ('button[onclick="openQuestionNavigatorModal()"]'), t: '📋 Danh sách câu',
+            d: 'Mở bảng tất cả các câu của bài: ô xanh lá là câu đã đúng, đỏ là đã sai, vàng là câu bỏ qua, xám là chưa làm; câu có 🚩 là câu đã đánh cờ. Bấm một ô để nhảy tới câu đó.' });
+        if (ex) {
+            S.push({ sel: '#exam-q-timer-box', t: '⏳ Đồng hồ ĐẾM NGƯỢC từng câu (72 giây)',
+                d: 'Gợi ý thời gian suy nghĩ cho MỖI câu: 72 giây, đếm ngược từ lúc câu hiện ra và dừng khi bạn chọn đáp án. Còn 10 giây trở xuống ô chuyển đỏ để nhắc bạn. Hết 72 giây câu vẫn không bị khóa, nhưng nên chốt đáp án để kịp giờ cả bài. Sang câu mới thì đặt lại 72 giây.' });
+            S.push({ sel: function () { var t = $id('timer'); return t ? t.parentElement : null; }, t: '⏱️ Đồng hồ ĐẾM NGƯỢC cả bài (180 phút)',
+                d: 'Khác với bài ôn thường (đếm lên), ở thi thử đồng hồ này đếm ngược từ 180:00 xuống 00:00 — tổng thời gian của cả bài thi. Hết giờ, bài thi tự kết thúc và hiện kết quả. Bấm ⬅️ Quay lại thì thời gian còn lại được lưu để làm tiếp.' });
+        } else {
+            S.push({ sel: function () { var t = $id('timer'); return t ? t.parentElement : null; }, t: '⏱️ Đồng hồ làm bài',
+                d: 'Cho biết bạn đã làm bài được bao lâu (đếm lên). Bấm ⬅️ Quay lại thì tiến độ và thời gian được lưu để làm tiếp lần sau. Trong lúc xem giới thiệu này, đồng hồ tạm dừng.' });
+        }
+        S.push({ sel: '#question-panel-wrapper', t: '📖 Khung câu hỏi',
+            d: 'Nội dung câu hỏi hiện ở đây (bên trái trên máy tính, phía trên trên điện thoại). Câu dài thì cuộn trong khung; nếu có ảnh minh họa, bấm vào ảnh để phóng to.' });
+        S.push({ sel: '#options-container', t: '✅ Các đáp án',
+            d: 'Bấm một đáp án để chọn. Kết quả hiện ngay: đáp án đúng tô xanh, nếu chọn sai thì đáp án bạn chọn tô đỏ; sau đó các đáp án khóa lại.' });
+        S.push({ sel: '#feedback-box', pre: qscFb(true), wait: 150, t: '💡 Khung giải thích',
+            d: 'Sau khi chọn đáp án, khung này hiện đúng / sai, đáp án đúng và phần giải thích (kèm hình, đường link nếu có). Bây giờ khung đang hiện nội dung minh họa.' });
+        S.push({ sel: '#ask-ai-btn', pre: qscFb(true), wait: 150, t: '🤖 Hỏi AI giải thích câu này',
+            d: 'Mở khung chat gia sư AI về đúng câu đang làm: giải thích vì sao đáp án đúng, phân tích từng đáp án sai, tìm hiểu sâu, mẹo nhớ hoặc học có hướng dẫn. Lần đầu mở khung chat, mình sẽ giới thiệu thêm phần ⚙️ Cài đặt AI.' });
+        S.push({ sel: '#unanswered-actions', pre: function () { qscFb(false)(); qscRow('un')(); }, wait: 150, t: '⬅️ Câu trước · 🚩 Đánh cờ · ⏭️ Bỏ qua',
+            d: 'Hàng nút dưới cùng khi CHƯA chọn đáp án. ⬅️ Câu trước: quay lại câu trước đó. 🚩 Đánh cờ: cắm cờ để nhớ quay lại câu còn phân vân (cờ hiện trong 📋 Danh sách câu). ⏭️ Bỏ qua: sang câu kế mà không trả lời; câu bỏ qua tô vàng và làm ngắt chuỗi trả lời đúng (Streak).' });
+        S.push({ sel: '#difficulty-group', pre: qscRow('an'), wait: 150, t: '🎚 Gắn thẻ độ khó: Khó · Vừa · Dễ',
+            d: 'Sau khi trả lời xong, hàng nút dưới cùng đổi thành hàng này (mình đang hiện minh họa). Ở giữa là 3 nút để bạn tự gắn thẻ độ khó cho câu vừa làm theo cảm nhận của mình. Bấm lại đúng nút đang sáng để bỏ thẻ. Thẻ được nhớ theo từng câu hỏi.' });
+        S.push({ sel: '#difficulty-group button[data-level="hard"]', pre: qscRow('an'), wait: 100, t: '🔴 Khó',
+            d: 'Gắn cho câu bạn làm sai hoặc thấy rất khó nhớ — nhóm nên ôn đi ôn lại nhiều nhất.' });
+        S.push({ sel: '#difficulty-group button[data-level="medium"]', pre: qscRow('an'), wait: 100, t: '🟡 Vừa',
+            d: 'Gắn cho câu mức trung bình: biết khá chắc nhưng thỉnh thoảng vẫn phân vân.' });
+        S.push({ sel: '#difficulty-group button[data-level="easy"]', pre: qscRow('an'), wait: 100, t: '🟢 Dễ',
+            d: 'Gắn cho câu bạn nắm vững rồi. Khi ôn chuyên sâu, bạn có thể giảm tỉ lệ nhóm này để khỏi mất thời gian.' });
+        S.push({ sel: '#difficulty-group', pre: qscRow('an'), wait: 100, t: '🧠 Dùng thẻ để ôn tập chuyên sâu',
+            d: 'Ba thẻ này là nguyên liệu của 🧠 Ôn Tập Chuyên Sâu (khu Ôn Tập Theo Chủ Đề). Ở đó bạn chọn bộ đề, đặt tỉ lệ % câu Khó · Vừa · Dễ (tổng 100%) và số câu; app rút đúng các câu bạn đã gắn thẻ — ví dụ dồn 70% vào câu Khó để ôn đúng chỗ yếu. Câu chưa gắn thẻ xếp vào nhóm “Khác”, dùng để bù khi thiếu câu. Gắn thẻ càng nhiều, ôn chuyên sâu càng chính xác.' });
+        S.push({ sel: '#next-btn', pre: qscRow('an'), wait: 100, t: '➡️ Câu tiếp theo',
+            d: 'Sang câu kế tiếp sau khi trả lời xong; ở câu cuối cùng, nút này kết thúc bài và hiện kết quả để bạn xem lại bài làm. Muốn xem lại phần giới thiệu này: bấm Trợ lý AI → ℹ️ khi đang làm bài.' });
+        return S;
+    }
+    [false, true].forEach(function (ex) { qscSteps(ex).forEach(function (st) { st.ctx = ex ? 'escreen' : 'qscreen'; TOUR.push(st); }); });
     var CTXS = {
         chuyende: {
             wait: 360,
@@ -27977,7 +28116,12 @@ body {
     function vidQ(sel) { var p = vidPid(), w = p ? $id('custom-wrapper-' + p) : null; return w ? w.querySelector(sel) : null; }
     function vidKeep() { var p = vidPid(); if (p) { try { showControlsDirectly(p); } catch (e) {} try { resetInactivityTimer(p); } catch (e) {} } }
     function vs(sel) { return function () { vidKeep(); return vidQ(sel); }; }
-    function winShown(c) { return c === 'video' ? !!vidPid() : shown(WIN_ID[c]); }
+    function winShown(c) {
+        if (c === 'video') return !!vidPid();
+        if (c === 'aiset') return aiVisible() && shown('ai-key-panel');
+        if (c === 'qscreen' || c === 'escreen') { if (!shown('quiz-screen') || !qscNoModal()) return false; return qscIsExam() === (c === 'escreen'); }
+        return shown(WIN_ID[c]);
+    }
 
     /* ===== GIỚI THIỆU CHI TIẾT: Sơ đồ tư duy · Chat AI (+ cửa sổ phụ Trắc nghiệm) · Cài đặt phụ đề & lồng tiếng =====
        Chạy ở lần đầu bấm mỗi nút, hoặc bấm Trợ lý AI → ℹ️ khi cửa sổ đó đang mở. (Chế độ tập trung: mở lên không giới thiệu.) */
@@ -28107,7 +28251,7 @@ body {
                 aiStep(vsg('ai-lang-box'), 'Vie / Eng · Ngôn ngữ trả lời',
                   'Chọn gia sư trả lời bằng tiếng Việt (Vie), tiếng Anh (Eng), hoặc bật cả hai để xem song ngữ.'),
                 aiStep(vsg('ai-settings-btn'), '⚙️ Cài đặt AI',
-                  'Quản lý khóa API AI và các thiết lập của gia sư. Bấm “Quay lại” để về khung chat.'),
+                  'Mở bảng cài đặt chung của khung chat AI (cỡ chữ, giọng đọc, độ dài câu trả lời, mức suy luận, khóa API). Lần đầu bấm vào, mình sẽ giới thiệu từng mục ngay tại chỗ; muốn xem lại: mở ⚙️ rồi bấm Trợ lý AI → ℹ️. Bấm “Quay lại” để về khung chat.'),
                 aiStep(vsg('ai-messages'), '💬 Khung hội thoại',
                   'Câu trả lời của gia sư hiện ở đây và luôn tự cuộn xuống cuối. Kéo lên để xem lại các câu trước.'),
                 aiStep(aiQb('📑'), '📑 Mục lục theo thời gian',
@@ -28226,8 +28370,8 @@ body {
         } catch (e) { return null; }
     }
     /* thứ tự = ưu tiên (cửa sổ nằm trên cùng xếp trước) */
-    var WIN_CTX = ['video', 'viewer', 'shelf', 'course', 'subject', 'quick', 'deep', 'mock', 'saved', 'blocked', 'topic', 'collection', 'dict', 'note', 'settings'];
-    var WIN_ID = { video: '', monhoc: 'monhoc-section-container', viewer: 'book-viewer', shelf: 'bookshelf-modal', course: 'monhoc-detail-modal', subject: 'subject-choice-modal', quick: 'mock-exam-modal', deep: 'deep-modal', mock: 'exam-modal', saved: 'bookmarked-modal', blocked: 'blocked-modal', topic: 'topic-modal', section: 'chuyende-section-container', collection: 'collection-modal', dict: 'dict-modal', note: 'note-modal', settings: 'home-settings-modal' };
+    var WIN_CTX = ['aiset', 'video', 'viewer', 'shelf', 'course', 'subject', 'quick', 'deep', 'mock', 'saved', 'blocked', 'topic', 'collection', 'dict', 'note', 'settings', 'qscreen', 'escreen'];
+    var WIN_ID = { video: '', monhoc: 'monhoc-section-container', viewer: 'book-viewer', shelf: 'bookshelf-modal', course: 'monhoc-detail-modal', subject: 'subject-choice-modal', quick: 'mock-exam-modal', deep: 'deep-modal', mock: 'exam-modal', saved: 'bookmarked-modal', blocked: 'blocked-modal', topic: 'topic-modal', section: 'chuyende-section-container', collection: 'collection-modal', dict: 'dict-modal', note: 'note-modal', settings: 'home-settings-modal', aiset: 'ai-key-panel', qscreen: 'quiz-screen', escreen: 'quiz-screen' };
     function activeWin() { for (var i = 0; i < WIN_CTX.length; i++) { if (winShown(WIN_CTX[i])) return WIN_CTX[i]; } return null; }
     function beginTour(mode, c) {
         closePop(); closeWheel(true); clearSpot(true);
@@ -28236,10 +28380,12 @@ body {
         var box = $id('chuyende-section-container');
         tour = { i: -1, tok: 0, busy: false, ctx: null, opened: false, mode: mode, steps: steps, undo: [], wasOpen: !!(box && !box.classList.contains('hidden')) };
         cancelSink(); unsinkFab();
+        if (mode === 'win' && (c === 'qscreen' || c === 'escreen')) { try { qscPause(tour); } catch (e) {} }
         tourGo(1);
     }
     /* Info: đang mở cửa sổ nào thì giới thiệu cửa sổ đó, không thì giới thiệu màn hình chính */
     function startTour() {
+        if (winShown('aiset')) { beginTour('win', 'aiset'); return; }   // bảng ⚙️ Cài đặt của khung chat AI (dùng chung 3 khung) đang mở
         var dk = vidDetailKey();
         if (dk && VDETAIL[dk]) { beginTour('steps', VDETAIL[dk]()); return; }
         var w = activeWin();
@@ -28284,6 +28430,28 @@ body {
         w.__hfTour = 1; window.toggleChuyenDeSection = w;
     }
     hookOpen('openCollectionModal', 'collection'); hookOpen('openRhmDict', 'dict'); hookOpen('openRhmNote', 'note'); hookOpen('openHomeSettings', 'settings'); hookOpen('bkOpenShelf', 'shelf'); hookOpen('openMonHocDetail', 'course'); hookOpen('bkOpenChapter', 'viewer'); hookOpen('openMockExamModal', 'quick'); hookOpen('openDeepModal', 'deep'); hookOpen('openExamModal', 'mock'); hookOpen('openBookmarkedModal', 'saved'); hookOpen('openBlockedModal', 'blocked'); hookOpen('openTopicModal', 'topic'); hookSection(); hookMonHoc();
+    /* lần đầu mở bảng ⚙️ Cài đặt của BẤT KỲ khung chat AI nào (Trắc nghiệm / Video / Đọc sách) → giới thiệu 1 lần; lần đầu vào giao diện làm bài / thi thử → giới thiệu */
+    function qscWatch() {
+        var kp = $id('ai-key-panel');
+        if (kp) {
+            var kwas = !kp.classList.contains('hidden');
+            new MutationObserver(function () {
+                var now = !kp.classList.contains('hidden');
+                if (now && !kwas) { try { autoWinTour('aiset'); } catch (e) {} }
+                kwas = now;
+            }).observe(kp, { attributes: true, attributeFilter: ['class'] });
+        }
+        var qs = $id('quiz-screen');
+        if (qs) {
+            var qwas = !qs.classList.contains('hidden');
+            new MutationObserver(function () {
+                var now = !qs.classList.contains('hidden');
+                if (now && !qwas) { try { autoWinTour(qscIsExam() ? 'escreen' : 'qscreen'); } catch (e) {} }
+                qwas = now;
+            }).observe(qs, { attributes: true, attributeFilter: ['class'] });
+        }
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', qscWatch); else qscWatch();
 
     /* lần đầu vào app: chạy luôn phần giới thiệu màn hình chính (bước đầu là nút Trợ lý AI, toàn màn hình) */
     var INTRO_KEY = 'home_fab_intro_v2', introMem = false;
