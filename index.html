@@ -28433,6 +28433,27 @@ body {
         }
     }
     document.addEventListener('click', qbHandle, true);
+    /* ---- chế độ đọc sách: lần đầu bấm 🤖 AI Chat → giới thiệu khung chat của sách ---- */
+    var RDCHAT_STEPS = [
+        { sel: qbQ('#ai-title'), t: '🤖 Khung chat AI của sách', d: 'Gia sư AI đã “đọc” toàn bộ chương bạn đang mở: hỏi bài, tóm tắt, giải thích chỗ chưa hiểu, hỏi ví dụ lâm sàng… AI trả lời dựa trên nội dung chương.' },
+        { sel: qbQ('#ai-enwin-hbtn'), t: '❓ Trắc nghiệm · Cửa sổ phụ', d: 'Ẩn / hiện cửa sổ phụ Trắc nghiệm: AI tạo câu hỏi ôn tập từ chương đang đọc, hiện ngay cạnh khung chat để bạn làm và đối chiếu.' },
+        { sel: qbQ('#ai-dict-hbtn'), t: '📖 Từ điển RHM', d: 'Mở nhanh Từ Điển RHM để tra hoặc xem lại các thuật ngữ đã lưu khi đọc sách.' },
+        { sel: qbQ('#ai-lang-box'), t: '🌐 Vie / Eng', d: 'Chọn ngôn ngữ trả lời: Vie, Eng, hoặc bật cả hai để xem song ngữ.' },
+        { sel: qbQ('#ai-settings-btn'), t: '⚙️ Cài đặt AI', d: 'Chỉnh cỡ chữ, giọng đọc, độ dài câu trả lời, mức suy luận và khóa API; bảng cài đặt dùng chung cho cả 3 khung chat AI.' },
+        { sel: qbQ('#ai-quickrow'), t: '⚡ Câu hỏi nhanh', d: 'Các nút hỏi nhanh theo chương (tóm tắt, giải thích, ý chính…). Bấm một nút là AI trả lời luôn, khỏi gõ.' },
+        { sel: qbQ('#ai-input'), t: '⌨️ Ô nhập câu hỏi', d: 'Gõ câu hỏi riêng của bạn về chương đang đọc, rồi bấm ➤ để gửi.' },
+        { sel: qbQ('#ai-send-btn'), t: '➤ Gửi', d: 'Gửi câu hỏi cho AI.' },
+        { sel: qbQ('#ai-close-btn'), t: '✕ Đóng khung chat', d: 'Đóng khung chat và quay lại trang sách. Mở lại bằng nút 🤖 AI Chat bất cứ lúc nào.' }
+    ];
+    document.addEventListener('click', function (e) {
+        if (!fabOn || tour || Date.now() < suppressUntil) return;
+        var t = e.target; if (!t || !t.closest || t.closest('#hf-spot-wrap') || !t.closest('#bk-ai-btn')) return;
+        if (winSeen('qb-rdchat')) return;
+        setTimeout(function () {
+            if (tour || winSeen('qb-rdchat') || !aiVisible() || (typeof aiState !== 'undefined' && aiState.mode !== 'book')) return;
+            winMark('qb-rdchat'); beginTour('steps', RDCHAT_STEPS);
+        }, 1000);
+    }, true);
     function tourHomeOk() {
         if (!shown('home-screen')) return false;
         for (var k in MODAL_NAMES) { if (shown(k)) return false; }
