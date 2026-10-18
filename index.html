@@ -1330,7 +1330,6 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
                         <h2 class="text-xl font-black text-blue-900 flex items-center gap-2">
                             <span>📚</span> Danh Sách Môn Học & Video Bài Giảng
                         </h2>
-                        <p class="text-xs text-blue-700 mt-0.5">Đã tự động cập nhật nội dung mới nhất</p>
                     </div>
                     <div class="flex items-center gap-2">
                         <button onclick="scanGithubMonHocStructure(true)" class="hidden text-xs bg-white hover:bg-blue-100 text-blue-700 font-bold py-1.5 px-3 rounded-xl border border-blue-300 transition-colors shadow-sm flex items-center gap-1" title="Quét lại cấu trúc môn học">
@@ -1608,7 +1607,7 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
                 <button type="button" class="rd-rb" id="rd-rb-search" data-act="rb-search" title="Tìm thuật ngữ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
                 <button type="button" class="rd-rb" id="rd-rb-saved" data-act="rb-saved" title="Từ đã lưu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M12 2.6l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.4 6 20.7l1.3-6.6L2.4 9.5l6.7-.8z"/></svg></button>
                 <button type="button" class="rd-rb" id="rd-rb-aa" data-act="rb-aa" title="Cỡ chữ từ điển"><span style="font:800 13px/1 system-ui,sans-serif">Aa</span></button>
-                <button type="button" class="rd-rb" id="rd-rb-review" data-act="rb-review" title="Ôn tập"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="14" height="14" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v12"/></svg></button>
+                <button type="button" class="rd-rb" id="rd-rb-review" data-act="rb-review" title="Ôn tập từ vựng"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="14" height="14" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v12"/></svg></button>
                 <button type="button" class="rd-rb" id="rd-rb-jump" data-act="rb-jump" title="Đến trang"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 5v14l8-7zM12 5v14l8-7z"/></svg></button>
             </div>
             <div id="rd-tabM" class="rd-tabs M"></div>
@@ -8483,16 +8482,14 @@ function renderSavedQuizzes() {
                 card.setAttribute('data-rdk', subject.name);
                 card.onclick = () => openSubjectChoice(subject);
                 card.className = 'group bg-white hover:bg-blue-50/80 p-3 sm:p-4 rounded-2xl border border-blue-200 hover:border-blue-400 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col items-center justify-between text-center select-none active:scale-95';
-                const info = subject.hasPhanMon
-                    ? `📂 ${subject.subFolders.length} phân môn${subject.hasVideoTxt ? ' · 🎬' : ''}`
-                    : '🎬 Bài giảng Video';
+                const info = subject.hasPhanMon ? (subject.hasVideoTxt ? '🎬' : '') : '🎬 Bài giảng Video';
                 card.innerHTML = `
                     <div class="w-20 h-20 sm:w-24 sm:h-24 mb-3 rounded-2xl overflow-hidden bg-blue-50 p-1.5 flex items-center justify-center border border-blue-100 group-hover:scale-105 transition-transform">
                         ${iconTag(subject, 'max-w-full max-h-full object-contain', subject.name, '📚')}
                     </div>
                     <div class="w-full">
                         <div class="font-extrabold text-sm sm:text-lg text-gray-800 group-hover:text-blue-700 line-clamp-2 leading-tight"></div>
-                        <div class="text-xs sm:text-sm text-gray-500 mt-1">${info}</div>
+                        ${info ? '<div class="text-xs sm:text-sm text-gray-500 mt-1">' + info + '</div>' : ''}
                     </div>
                 `;
                 card.querySelector('.line-clamp-2').textContent = subject.name;
@@ -18976,11 +18973,29 @@ window.isIOSDevice = function () {
         if (i < 0 || i >= T) return hd + '<div class="rd-body"></div>';
         return hd + '<div class="rd-body">' + rd.pages[i].map(itemHTML).join('') + '</div><div class="rd-ft">Trang ' + (i + 1) + '</div>';
     }
+    /* Tiêu đề dài xuống dòng → đẩy nội dung trang xuống theo chiều cao thật của tiêu đề (không đè lên chữ) */
+    function fitHd() {
+        ['rd-L', 'rd-R'].forEach(function (id) {
+            const pg = $(id); if (!pg) return;
+            const hd = pg.querySelector('.rd-hd'), bd = pg.querySelector('.rd-body');
+            if (!hd || !bd) return;
+            const pr = pg.getBoundingClientRect(), hr = hd.getBoundingClientRect();
+            const need = Math.round(hr.bottom - pr.top) + 6;
+            bd.style.top = Math.max(58, need) + 'px';
+        });
+    }
+    /* trang được vẽ lại (lật trang, đổi cỡ chữ, xoay màn hình…) thì căn lại ngay */
+    if (window.MutationObserver) {
+        ['rd-L', 'rd-R'].forEach(function (id) {
+            const pg = $(id); if (!pg) return;
+            new MutationObserver(function () { fitHd(); }).observe(pg, { childList: true });
+        });
+    }
     function render() {
         rd.sel = null;
         $('rd-L').innerHTML = pageHTML(rd.cur, 'L');
         if (rd.per === 2) $('rd-R').innerHTML = pageHTML(rd.cur + 1, 'R');
-        paintTabs(); paintNav();
+        paintTabs(); paintNav(); fitHd();
     }
     function paintNav() {
         const T = rd.pages.length;
@@ -19083,7 +19098,7 @@ function openPop(mode, t) {
         if (mode === 'add') {
             h = '<div class="rd-pt">＋ Thêm thuật ngữ mới</div><input id="rd-in-en" class="rd-in" placeholder="Thuật ngữ tiếng Anh" autocomplete="off">' + POSI('') + '<textarea id="rd-in-vi" class="rd-in" rows="2" placeholder="Nghĩa tiếng Việt (nhiều nghĩa: Shift+Enter để xuống dòng)" autocomplete="off"></textarea><div class="rd-pb"><button type="button" class="rd-pbtn pri" data-act="add">＋ Thêm</button></div><div class="rd-hint">Bấm vào một dòng trong sách để xem thông tin, sửa, lưu ⭐, thêm từ liên quan ＋ hoặc xóa.</div>'; focus = 'rd-in-en';
         } else if (mode === 'row') {
-            h = '<div class="rd-pt">✏️ Sửa thuật ngữ</div><input id="rd-in-en" class="rd-in" value="' + esc(t.en) + '" autocomplete="off">' + POSI(t.p) + '<textarea id="rd-in-vi" class="rd-in" rows="3" autocomplete="off">' + esc(t.vi) + '</textarea><div class="rd-dkrow" style="display:flex;gap:6px;margin:6px 0">' + edDkBtns(rd.editD) + '</div><div class="rd-pb"><button type="button" class="rd-pbtn pri" data-act="save">Lưu</button><button type="button" class="rd-pbtn dan" data-act="del">Xóa</button><button type="button" class="rd-pbtn" data-act="cancel">Hủy</button></div><div class="rd-hint">Mỗi nghĩa một dòng (Shift+Enter xuống dòng). Các lần dịch sau sẽ dùng đúng nghĩa bạn vừa sửa.</div>'; focus = 'rd-in-vi';
+            h = '<div class="rd-pt">✏️ Sửa thuật ngữ</div><input id="rd-in-en" class="rd-in" value="' + esc(t.en) + '" autocomplete="off">' + POSI(t.p) + '<textarea id="rd-in-vi" class="rd-in" rows="3" autocomplete="off">' + esc(t.vi) + '</textarea><div class="rd-dkrow" style="display:flex;gap:6px;margin:6px 0">' + edDkBtns(rd.editD) + '</div><div class="rd-pb"><span class="rd-pbg"><button type="button" class="rd-pbtn" data-act="cancel">Hủy</button></span><span class="rd-pbg rd-pbg-r"><button type="button" class="rd-pbtn pri" data-act="save">Lưu</button></span></div><div class="rd-hint">Mỗi nghĩa một dòng (Shift+Enter xuống dòng). Các lần dịch sau sẽ dùng đúng nghĩa bạn vừa sửa.</div>'; focus = 'rd-in-vi';
         } else if (mode === 'info') {
             rd.infoLang = 'vi';
             h = '<div class="rd-pt" style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap"><span>ℹ️ ' + esc(t.en) + (t.p ? '<span class="rd-pos">(' + esc(t.p) + ')</span>' : '') + '</span><span style="display:inline-flex;align-items:center;gap:6px;margin-left:auto;flex-wrap:nowrap"><span class="rd-inflg" style="display:inline-flex;border:1.5px solid #c4b5fd;border-radius:999px;overflow:hidden;font-size:12px"><button type="button" data-act="info-lang" data-l="vi" style="padding:2px 10px;font-weight:800;border:0;cursor:pointer;background:#6d28d9;color:#fff">Vie</button><button type="button" data-act="info-lang" data-l="en" style="padding:2px 10px;font-weight:800;border:0;cursor:pointer;background:#fff;color:#5b21b6">Eng</button></span><button type="button" class="rd-pbtn pri rd-info-spk" id="rd-info-tts-btn" data-act="info-tts">🔊 Đọc to</button></span></div><div class="rd-sub">' + viHTML(t.vi) + '</div><div id="rd-info" class="rd-info overflow-y-auto"></div><div class="rd-pb rd-info-foot"><button type="button" class="rd-pbtn" data-act="cancel">Đóng</button><button type="button" class="rd-pbtn" data-act="info-redo">↻ Tạo lại</button></div>';
@@ -19105,7 +19120,14 @@ function openPop(mode, t) {
         p.innerHTML = h;
         p.classList.toggle('wide', mode === 'info' || mode === 'saved' || mode === 'row' || mode === 'more');
         p.classList.toggle('info-ctr', mode === 'info'); p.classList.toggle('mid-ctr', mode === 'row' || mode === 'more'); p.classList.toggle('mid-row', mode === 'row'); p.classList.toggle('add-ctr', mode === 'add'); p.classList.toggle('more', mode === 'more'); p.classList.toggle('newt', mode === 'newt'); p.classList.toggle('tall', mode === 'row' || mode === 'more');
-        p.classList.remove('hidden'); paintRib();
+        p.classList.remove('hidden');
+        /* chạy lại animation mở mượt (cùng kiểu khung Ôn tập) mỗi lần mở, kể cả khi đổi giữa các hộp ribbon */
+        p.classList.remove('ios-opening', 'ios-closing');
+        void p.offsetWidth;
+        p.classList.add('ios-opening');
+        clearTimeout(rd._iosT);
+        rd._iosT = setTimeout(function () { p.classList.remove('ios-opening'); }, 420);
+        paintRib();
         if (mode === 'saved') paintSaved(); if (mode === 'newt') { paintNewT(); placeNewT(); }
         if (mode === 'row') paintThumbs();
         if (mode === 'more') moreLoad(t);
@@ -19213,7 +19235,7 @@ function openPop(mode, t) {
             };
             box.innerHTML = '<div class="rd-mcols"><div>' + mk('same') + '</div><div>' + mk('form') + '</div></div>';
         }
-        if (bt) bt.innerHTML = '<button type="button" class="rd-pbtn" data-act="more-all">☑ Chọn tất cả</button><button type="button" class="rd-pbtn pri" id="rd-madd" data-act="more-add">＋ Thêm đã chọn</button><button type="button" class="rd-pbtn" data-act="more-redo">↻ Gợi ý lại</button><button type="button" class="rd-pbtn" data-act="cancel">Đóng</button>';
+        if (bt) bt.innerHTML = '<span class="rd-pbg"><button type="button" class="rd-pbtn" data-act="cancel">Đóng</button><button type="button" class="rd-pbtn" data-act="more-redo">↻ Gợi ý lại</button></span><span class="rd-pbg rd-pbg-r"><button type="button" class="rd-pbtn pri" id="rd-madd" data-act="more-add">＋ Thêm đã chọn</button><button type="button" class="rd-pbtn" data-act="more-all">☑ Chọn tất cả</button></span>';
         moreCount();
     }
     function moreCount() {
@@ -19445,7 +19467,7 @@ function openPop(mode, t) {
         rv.run = null; rv.busy = false; rd.rv = 1;
         const ns = rd.terms.filter(t => t.s).length, o = $('rd-rv'); o.classList.remove('hidden');
         o.innerHTML = '<div class="rv-card">'
-            + '<div class="rv-h"><span class="rv-t">🎓 Ôn tập từ điển</span><button type="button" class="rv-x" data-act="rv-close" title="Đóng">✕</button></div>'
+            + '<div class="rv-h"><span class="rv-t">🎓 Ôn tập từ vựng</span><button type="button" class="rv-x" data-act="rv-close" title="Đóng">✕</button></div>'
             + '<div class="rv-sec">Nguồn từ ôn tập</div><div class="rv-g">' + rvOptBtn('src', 'saved', '⭐ Từ đã lưu (' + ns + ')') + rvOptBtn('src', 'topic', '🧭 Theo chủ đề') + rvOptBtn('src', 'lvl', '🎚 Theo mức độ') + rvOptBtn('src', 'random', '🎲 Ngẫu nhiên') + '</div>'
             + '<input id="rv-topic" class="rd-in" style="margin-top:8px" placeholder="Nhập chủ đề, vd: nội nha, implant, nhổ răng…" autocomplete="off" value="' + esc(rv.topic) + '">'
             + '<div id="rv-th" class="rd-hint">AI sẽ tự chọn các từ trong từ điển phù hợp với chủ đề.</div>' + '<div id="rv-lvlp" class="rv-hid" style="margin-top:8px;border:1.5px solid #ddd6fe;border-radius:12px;padding:10px"><div class="rv-sec" style="margin-top:0">Tỉ lệ mức độ (%)</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center"><label style="font-weight:800;color:#15803d">🟢 Dễ<input id="rv-p-easy" class="rd-in" type="number" min="0" max="100" value="30" style="text-align:center"></label><label style="font-weight:800;color:#b45309">🟡 Vừa<input id="rv-p-medium" class="rd-in" type="number" min="0" max="100" value="50" style="text-align:center"></label><label style="font-weight:800;color:#b91c1c">🔴 Khó<input id="rv-p-hard" class="rd-in" type="number" min="0" max="100" value="20" style="text-align:center"></label></div><div class="rd-hint">Tổng phải bằng 100%. Từ thiếu ở mức nào sẽ được bù từ mức khác.</div></div>'
@@ -21994,7 +22016,7 @@ function moveEdActs() {
 </div>
 <!-- ===== Cửa sổ phụ: giới thiệu luồng Hướng dẫn sử dụng app ===== -->
 <div id="hs-guide-modal" class="fixed inset-0 bg-black bg-opacity-70 hidden flex items-center justify-center p-4" style="z-index:100500" onclick="if(event.target===this)hsCloseGuideInfo()">
-    <div class="bg-white rounded-2xl shadow-2xl p-5" style="width:min(620px,94vw);max-height:88vh;overflow-y:auto">
+    <div class="bg-white rounded-2xl shadow-2xl p-5" style="width:min(620px,calc(94vw / 1.5));max-height:calc(88vh / 1.5);overflow-y:auto;zoom:1.5">
         <div class="flex items-center justify-between mb-3">
             <h3 class="text-lg font-black text-gray-800">📖 Hướng dẫn sử dụng app</h3>
             <button type="button" onclick="hsCloseGuideInfo()" class="w-9 h-9 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 font-black">✕</button>
@@ -27287,6 +27309,38 @@ body {
 /* ===== v11 — thanh công cụ làm bài: dồn nhóm Đồng hồ + ⚙️ Cài đặt ra lề phải ===== */
 .qt-bar > #exam-q-timer-box{margin-left:auto}
 .qt-bar > #exam-q-timer-box.hidden + .qt-timer{margin-left:auto}
+/* ===== v12 — (1) tiêu đề từ điển xuống dòng khi tràn; (2) hộp ribbon mở/đóng mượt như khung Ôn tập; (3) thẻ giới thiệu to hơn 50% ===== */
+/* (1) Tiêu đề "Từ điển thuật ngữ RHM": hết chỗ thì xuống dòng, không cắt bằng "…" */
+#dict-modal .rd-ttl{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.15;overflow-wrap:anywhere;min-width:0}
+#dict-modal .rd-hd{align-items:flex-start}
+#dict-modal .rd-hd-top{flex-wrap:wrap;row-gap:4px;align-items:flex-start}
+#dict-modal .rd-hd .rd-bdg{align-self:center;margin-bottom:2px}
+/* (2) Hộp ribbon (.rd-pop): mở/đóng cùng kiểu chuyển động với khung Ôn tập (.rv-card) */
+@keyframes rdPopIn{0%{opacity:0;transform:scale(.92) translateY(18px)}100%{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes rdPopOut{0%{opacity:1;transform:scale(1) translateY(0)}100%{opacity:0;transform:scale(.94) translateY(12px)}}
+@keyframes rdPopCtrIn{0%{opacity:0;transform:translate(-50%,-50%) scale(.92) translateY(18px)}100%{opacity:1;transform:translate(-50%,-50%) scale(1) translateY(0)}}
+@keyframes rdPopCtrOut{0%{opacity:1;transform:translate(-50%,-50%) scale(1) translateY(0)}100%{opacity:0;transform:translate(-50%,-50%) scale(.94) translateY(12px)}}
+#dict-modal .rd-pop.ios-opening,#note-modal .rd-pop.ios-opening{animation:rdPopIn .34s var(--ios-bounce) forwards!important}
+#dict-modal .rd-pop.ios-closing,#note-modal .rd-pop.ios-closing{display:block!important;pointer-events:none!important;animation:rdPopOut .22s var(--ios-out) forwards!important}
+#dict-modal .rd-pop.rb-ctr.ios-opening,#dict-modal .rd-pop.info-ctr.ios-opening,#dict-modal .rd-pop.add-ctr.ios-opening,#dict-modal .rd-pop.mid-ctr.ios-opening,#note-modal .rd-pop.rb-ctr.ios-opening,#note-modal .rd-pop.nt-ctr.ios-opening{animation:rdPopCtrIn .34s var(--ios-bounce) forwards!important}
+#dict-modal .rd-pop.rb-ctr.ios-closing,#dict-modal .rd-pop.info-ctr.ios-closing,#dict-modal .rd-pop.add-ctr.ios-closing,#dict-modal .rd-pop.mid-ctr.ios-closing,#note-modal .rd-pop.rb-ctr.ios-closing,#note-modal .rd-pop.nt-ctr.ios-closing{display:block!important;pointer-events:none!important;animation:rdPopCtrOut .22s var(--ios-out) forwards!important}
+/* (3) Thẻ giới thiệu (tour) to hơn 50% — dùng cho bước giới thiệu "➕ Thêm thuật ngữ mới" */
+.hf-spot-tip.hf-tour-tip.hf-tour-xl{max-width:min(960px,max(300px,calc(100vw - 120px)));padding:22px 24px;border-radius:18px}
+.hf-tour-tip.hf-tour-xl .tt{font-size:clamp(22px,min(4.5vw,5.4vh),43px)}
+.hf-tour-tip.hf-tour-xl .td{font-size:clamp(19px,min(4vw,4.9vh),39px)}
+/* ===== v13 — (1) mọi thẻ giới thiệu to hơn ~30% (scale theo màn hình); (2) thẻ "Thêm từ liên quan" & "Sửa thuật ngữ" to hơn 50%; (3) dàn nút 2 góc của các hộp ribbon ===== */
+.hf-spot-tip.hf-tour-tip{max-width:min(830px,max(300px,calc(100vw - 96px)))}
+.hf-tour-tip .tt{font-size:clamp(18px,min(3.9vw,4.6vh),38px)}
+.hf-tour-tip .td{font-size:clamp(16px,min(3.5vw,4.2vh),33px)}
+.hf-spot-tip.hf-tour-tip.hf-tour-big{max-width:min(1180px,max(300px,calc(100vw - 24px)))}
+.hf-tour-big .tt{font-size:clamp(23px,min(5.2vw,6vh),66px)}
+.hf-tour-big .td{font-size:clamp(18px,min(3.9vw,4.6vh),46px)}
+.hf-spot-tip.hf-tour-tip.hf-tour-xl{max-width:min(1180px,max(320px,calc(100vw - 120px)));padding:24px 26px}
+.hf-tour-tip.hf-tour-xl .tt{font-size:clamp(27px,min(5.85vw,6.9vh),57px)}
+.hf-tour-tip.hf-tour-xl .td{font-size:clamp(24px,min(5.25vw,6.3vh),50px)}
+/* dàn nút 2 góc: nhóm trái (Đóng, Gợi ý lại / Hủy) — nhóm phải (Thêm đã chọn, Chọn tất cả / Lưu) */
+.rd-pbg{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap}
+.rd-pbg-r{margin-left:auto}
 </style>
 
 <button id="home-fab" type="button" class="hidden" aria-label="Trợ lý AI" title="Trợ lý AI — kéo để di chuyển, bấm để mở menu" onclick="homeFabToggle()">
@@ -27949,11 +28003,11 @@ body {
         { key: 'mon-hoc', t: '📚 Ôn Tập Theo Môn Học', d: 'Bấm để xổ ra danh sách các môn học kèm video bài giảng. Lần đầu bấm vào nút này, mình sẽ hướng dẫn cách chọn môn, kéo thả đổi vị trí và 2 nút Kệ Sách / Khóa Học; lần đầu bấm vào Kệ Sách hoặc Khóa Học, mình sẽ giới thiệu bên trong. Khi khu này đang xổ ra, bấm ℹ️ của Trợ lý AI để xem lại.' },
         { key: 'chuyen-de', t: '🦷 Ôn Tập Theo Chủ Đề', d: 'Bấm để xổ ra khu ôn tập theo chủ đề, gồm các công cụ ôn nhanh, chuyên sâu, thi thử và 36 chủ đề. Lần đầu bấm vào nút này, mình sẽ giới thiệu các nút bên trong ngay tại chỗ; mỗi nút bên trong cũng có hướng dẫn riêng lần đầu bạn mở.' },
         { key: 'bo-suu-tap', t: '🏆 Bộ Sưu Tập Huy Hiệu', d: 'Nơi lưu lại các huy hiệu bạn đạt được trong quá trình học và làm bài. Ôn đều đặn sẽ mở khóa thêm huy hiệu. Con số trên nút là số huy hiệu bạn đã có. Lần đầu bạn mở cửa sổ này, mình sẽ hướng dẫn ngay tại chỗ; muốn xem lại thì bấm nút ℹ️ của Trợ lý AI khi cửa sổ đang mở.' },
-        { ctx: 'collection', sel: '#collection-modal h3', t: '🏆 Cửa sổ Bộ Sưu Tập', d: 'Đây là kho huy hiệu của bạn. Bạn có thể chọn một hoặc nhiều huy hiệu yêu thích để chúng nổi lên khi bạn đạt chuỗi trả lời đúng (Streak).' },
+        { ctx: 'collection', sel: '#collection-modal h3', xl: true, t: '🏆 Cửa sổ Bộ Sưu Tập', d: 'Đây là kho huy hiệu của bạn. Bạn có thể chọn một hoặc nhiều huy hiệu yêu thích để chúng nổi lên khi bạn đạt chuỗi trả lời đúng (Streak).' },
         { ctx: 'collection', sel: function () { var e = $id('collection-user-points'); return e && e.parentElement && e.parentElement.parentElement; }, t: '💰 Điểm Tích Lũy', d: 'Số điểm bạn kiếm được khi học và làm bài. Điểm này dùng để đổi lấy huy hiệu mới.' },
         { ctx: 'collection', sel: function () { var e = $id('collection-stats-text'); return e && e.parentElement && e.parentElement.parentElement; }, t: '🎖️ Tiến Độ Thu Thập', d: 'Cho biết bạn đã mở khóa bao nhiêu huy hiệu trên tổng số huy hiệu hiện có.' },
         { ctx: 'collection', sel: 'button[onclick="buyRandomEmblemWithPoints()"]', t: '🎲 Đổi huy hiệu ngẫu nhiên', d: 'Dùng 1.000 điểm tích lũy để đổi lấy một huy hiệu ngẫu nhiên chưa có. Nút chỉ dùng được khi bạn đủ điểm.' },
-        { ctx: 'collection', sel: '#emblems-grid', t: '🖼️ Danh sách huy hiệu', d: 'Mỗi ô là một huy hiệu. Ô còn khóa 🔒 là huy hiệu chưa mở. Bấm vào huy hiệu đã có để chọn làm huy hiệu yêu thích.' },
+        { ctx: 'collection', sel: '#emblems-grid', xl: true, t: '🖼️ Danh sách huy hiệu', d: 'Mỗi ô là một huy hiệu. Ô còn khóa 🔒 là huy hiệu chưa mở. Bấm vào huy hiệu đã có để chọn làm huy hiệu yêu thích.' },
         { ctx: 'collection', sel: '#collection-modal .mt-4.pt-3.border-t', t: '💡 Mẹo nhận huy hiệu', d: 'Mỗi khi trả lời đúng một câu hỏi, bạn có 1% cơ hội nhận được huy hiệu. Nút Đóng ở bên phải để thoát cửa sổ này.' },
 
         { key: 'tu-dien', t: '📖 Từ Điển RHM', d: 'Cuốn từ điển thuật ngữ chuyên ngành Răng Hàm Mặt của riêng bạn. Con số trên nút là số thuật ngữ đã lưu. Lần đầu bạn mở cửa sổ này, mình sẽ hướng dẫn ngay tại chỗ; muốn xem lại thì bấm nút ℹ️ của Trợ lý AI khi cửa sổ đang mở.' },
@@ -27961,11 +28015,8 @@ body {
         { ctx: 'dict', sel: '#rd-rb-add', t: '➕ Thêm thuật ngữ mới', d: 'Tự nhập thêm một thuật ngữ vào từ điển, kèm nghĩa mà bạn muốn.' },
         { ctx: 'dict', sel: '#rd-rb-search', t: '🔍 Tìm thuật ngữ', d: 'Gõ để tìm nhanh một thuật ngữ trong toàn bộ từ điển.' },
         { ctx: 'dict', sel: '#rd-rb-saved', t: '⭐ Từ đã lưu', d: 'Xem riêng những thuật ngữ bạn đã đánh dấu sao, để ôn lại những từ quan trọng.' },
-        { ctx: 'dict', sel: '#rd-rb-aa', t: 'Aa — Cỡ chữ từ điển', d: 'Kéo để tăng hoặc giảm cỡ chữ trong từ điển: áp dụng cho cả cuốn sách, thẻ thông tin thuật ngữ, danh sách thuật ngữ mới, flashcard và phần trắc nghiệm ngữ cảnh. Cỡ chữ được ghi nhớ cho lần sau.' },
-        { ctx: 'dict', sel: '#rd-rb-review', t: '🗂️ Ôn tập', d: 'Ôn thuật ngữ bằng thẻ ghi nhớ (flashcard) để nhớ lâu hơn.' },
-        { ctx: 'dict', sel: '#rd-rb-jump', t: '⏩ Đến trang', d: 'Nhảy nhanh tới một trang bất kỳ của từ điển.' },
+        { ctx: 'dict', sel: '#rd-rb-review', t: '🗂️ Ôn tập từ vựng', d: 'Ôn thuật ngữ bằng thẻ ghi nhớ (flashcard) để nhớ lâu hơn. Trong bảng thiết lập còn có 📝 Trắc nghiệm ngữ cảnh: AI cho một câu có chỗ trống, bạn chọn 1 trong 4 từ tiếng Anh để điền.' },
         { ctx: 'dict', sel: '#rd-tabL', t: '🔤 Thẻ chữ cái A–Z', d: 'Các thẻ ở hai bên mép sách giúp bạn nhảy thẳng tới các thuật ngữ bắt đầu bằng chữ cái đó.' },
-        { ctx: 'dict', sel: '#rd-next', t: '➡️ Lật trang', d: 'Bấm mũi tên để lật sang trang sau hoặc trở lại trang trước. Bấm vào một thuật ngữ trong trang để xem thông tin, sửa, xóa hoặc đánh dấu sao.' },
 
         { key: 'so-ghi-chu', t: '📒 Sổ Ghi Chú', d: 'Nơi lưu các ghi chú của bạn, nhất là nội dung từ các bong bóng chat AI. Con số trên nút là số ghi chú đã có. Lần đầu bạn mở cửa sổ này, mình sẽ hướng dẫn ngay tại chỗ; muốn xem lại thì bấm nút ℹ️ của Trợ lý AI khi cửa sổ đang mở.' },
         { ctx: 'note', sel: function () { return document.querySelector('#note-modal .rd-ttl') || document.querySelector('#note-modal .rd-wrap'); }, t: '📒 Cửa sổ Sổ Ghi Chú', d: 'Sổ ghi chú cũng hiển thị như một cuốn sách hai trang, nơi bạn đọc lại và quản lý toàn bộ ghi chú của mình.' },
@@ -27974,7 +28025,6 @@ body {
         { ctx: 'note', sel: '#nt-rb-sort', t: '↕️ Sắp xếp ghi chú', d: 'Đổi cách sắp xếp danh sách ghi chú, ví dụ theo thời gian.' },
         { ctx: 'note', sel: '#nt-rb-aa', t: 'Aa — Cỡ chữ', d: 'Tăng hoặc giảm cỡ chữ của ghi chú cho dễ đọc.' },
         { ctx: 'note', sel: '#nt-rb-review', t: '🗂️ Ôn tập ghi chú', d: 'Ôn lại các ghi chú đã lưu để ghi nhớ lâu hơn.' },
-        { ctx: 'note', sel: '#nt-next', t: '➡️ Lật trang', d: 'Bấm mũi tên để lật sang trang sau hoặc trở lại trang trước của sổ ghi chú.' },
 
         { key: 'cai-dat', t: '⚙️ Cài Đặt', d: 'Nơi chỉnh các thiết lập của app, trong đó có mục 🤖 Trợ lý AI để bật hoặc tắt mình. Lần đầu bạn mở cửa sổ này, mình sẽ hướng dẫn ngay tại chỗ; muốn xem lại thì bấm nút ℹ️ của Trợ lý AI khi cửa sổ đang mở.' },
         { ctx: 'settings', sel: '#home-settings-modal h3', t: '⚙️ Cửa sổ Cài Đặt', d: 'Tổng hợp các thiết lập của app. Mình giới thiệu lần lượt từng mục bên dưới nhé.' },
@@ -27995,30 +28045,22 @@ body {
 
         { ctx: 'shelf', sel: '#bookshelf-title', t: '📚 Cửa sổ Tủ sách', d: 'Đây là kệ sách của môn bạn vừa chọn. Bấm vào một cuốn để xem các chương, rồi bấm một chương để đọc. Muốn xem lại phần này: bấm Trợ lý AI → ℹ️ khi cửa sổ đang mở.' },
         { ctx: 'shelf', sel: '#bk-shelf-zoom-wrap', t: '🔎 Cỡ sách', d: 'Kéo thanh trượt hoặc bấm − / + để phóng to, thu nhỏ các cuốn sách trên kệ cho vừa mắt.' },
-        { ctx: 'shelf', sel: '#bookshelf-list', t: '📖 Kệ sách', d: 'Mỗi cuốn là một quyển sách của môn. Bấm vào để xem danh sách chương (nút ⬅ Các sách ở góc trái giúp quay lại kệ). Muốn đổi vị trí sách: nắm giữ một cuốn rồi kéo tới chỗ khác trên kệ.' },
-        { ctx: 'shelf', sel: '#bookshelf-modal button[onclick="bkCloseShelf()"]', t: '✕ Đóng Tủ sách', d: 'Bấm để đóng kệ sách và quay lại.' },
+        { ctx: 'shelf', sel: '#bookshelf-list', xl: true, t: '📖 Kệ sách', d: 'Mỗi cuốn là một quyển sách của môn. Bấm vào để xem danh sách chương (nút ⬅ Các sách ở góc trái giúp quay lại kệ). Muốn đổi vị trí sách: nắm giữ một cuốn rồi kéo tới chỗ khác trên kệ.' },
 
         { ctx: 'viewer', sel: '#bk-v-title', t: '📖 Cửa sổ đọc sách', d: 'Đây là trình đọc PDF của chương bạn đang mở; tên chương hiện ở thanh trên cùng. Nút ⬅ Chương bên trái để quay lại danh sách chương. Muốn xem lại phần này: bấm Trợ lý AI → ℹ️ khi đang đọc.' },
         { ctx: 'viewer', sel: '#bk-sec-panel', t: '📑 Mục lục', d: 'Danh sách các phân mục của chương. Bấm một mục để nhảy tới đó, đổi Vie / Eng để xem tên tiếng Việt hoặc tiếng Anh. Bấm ◀ để thu gọn cột này.' },
         { ctx: 'viewer', sel: '#bk-sec-btn', t: '📑 Nhận diện mục lục', d: 'Nhờ AI tự tìm các phân mục của chương và dựng mục lục cho bạn.' },
         { ctx: 'viewer', sel: '#bk-sec-mark', t: '🔖 Đánh dấu phân mục', d: 'Tự thêm mục lục thủ công: bôi đen tiêu đề trong PDF rồi bấm nút này.' },
-        { ctx: 'viewer', sel: '#bk-pdf-wrap', t: '📄 Trang sách', d: 'Cuộn để đọc. Bạn có thể bôi đen chữ để tô sáng, ghi chú hoặc dịch thuật ngữ; thuật ngữ mới sẽ được lưu vào Từ Điển RHM.' },
-        { ctx: 'viewer', demo: true, sel: function () { return demoBar(); }, t: '✨ Thanh nút khi bôi đen chữ', d: 'Bôi đen (kéo chọn) một đoạn chữ trong trang sách, một thanh nút nhỏ sẽ nổi lên ngay trên đoạn đó. Đây là thanh mẫu để minh họa — mình giới thiệu từng nút nhé. Chạm vào chữ đã được tô sáng cũng làm thanh này hiện lại.' },
-        { ctx: 'viewer', demo: true, sel: function () { return demoBtn('b-tr'); }, t: '🌐 Dịch', d: 'Dịch đoạn vừa bôi đen ngay trong khung AI Chat của sách; bạn có thể hỏi tiếp về đoạn đó.' },
-        { ctx: 'viewer', demo: true, sel: function () { return demoBtn('b-dc'); }, t: '📖 Thêm từ điển', d: 'Lưu từ hoặc cụm từ tiếng Anh vừa bôi đen vào Từ Điển RHM. Nút này chỉ hiện khi đoạn chọn là một từ / cụm từ tiếng Anh ngắn.' },
-        { ctx: 'viewer', demo: true, sel: function () { return demoBtn('b-nt'); }, t: '📝 Ghi chú nhanh', d: 'Gắn một ghi chú nhỏ vào đoạn vừa bôi đen. Đoạn có ghi chú sẽ có biểu tượng 📝 bên cạnh; bấm vào đó để xem, sửa hoặc xóa (lúc đó nút này đổi thành 🗑 Xóa ghi chú nhanh).' },
-        { ctx: 'viewer', demo: true, sel: function () { return demoBtn('b-hl'); }, t: '🖍 Highlight', d: 'Tô sáng đoạn vừa bôi đen để dễ tìm lại khi ôn.' },
-        { ctx: 'viewer', demo: true, sel: function () { return demoBtn('b-un'); }, t: '🧽 Xóa highlight', d: 'Chỉ hiện khi vùng bạn chọn (hoặc đoạn bạn chạm vào) đang có highlight; bấm để bỏ tô sáng phần đó.' },
+        { ctx: 'viewer', sel: '#bk-pdf-wrap', xl: true, t: '📄 Trang sách', d: 'Cuộn để đọc. Bạn có thể bôi đen chữ để tô sáng, ghi chú hoặc dịch thuật ngữ; thuật ngữ mới sẽ được lưu vào Từ Điển RHM.' },
+        { ctx: 'viewer', demo: true, sel: function () { return demoBar(); }, t: '✨ Thanh nút khi bôi đen chữ', d: 'Bôi đen (kéo chọn) một đoạn chữ trong trang sách, một thanh nút nhỏ sẽ nổi lên ngay trên đoạn đó. Thanh này gộp các việc hay dùng: 🌐 Dịch — dịch đoạn đó ngay trong khung AI Chat của sách rồi hỏi tiếp; 📖 Thêm từ điển — lưu từ/cụm từ tiếng Anh vào Từ Điển RHM (chỉ hiện khi đoạn chọn là từ ngắn); 📝 Ghi chú nhanh — gắn ghi chú vào đoạn đó (đoạn có ghi chú sẽ hiện biểu tượng 📝 bên cạnh để xem/sửa/xóa); 🖍 Highlight — tô sáng để dễ tìm lại khi ôn; 🧽 Xóa highlight — bỏ tô sáng (chỉ hiện khi đoạn đang có highlight). Đây là thanh mẫu để minh họa — chạm vào chữ đã được tô sáng cũng làm thanh này hiện lại.' },
         { ctx: 'viewer', sel: '#bk-ai-btn', t: '🤖 AI Chat', d: 'Mở khung chat với gia sư AI về chương đang đọc: hỏi bài, tóm tắt, giải thích chỗ chưa hiểu.' },
 
         { ctx: 'course', sel: '#monhoc-modal-title', t: '🎬 Cửa sổ Khóa Học', d: 'Đây là khu khóa học của môn bạn vừa chọn, gồm các phân môn (nếu có) và video bài giảng. Muốn xem lại phần này: bấm Trợ lý AI → ℹ️ khi cửa sổ đang mở.' },
         { ctx: 'course', sel: '#phanmon-container', t: '📂 Các khóa học', d: 'Nếu môn chia thành nhiều phân môn, bấm vào một ô để xem video của phân môn đó. Muốn đổi vị trí: nắm giữ một ô rồi kéo tới chỗ khác.' },
-        { ctx: 'course', sel: '#lessons-container', t: '🎬 Danh sách video bài giảng', d: 'Mỗi dòng là một bài giảng. Bấm vào để xem bằng trình phát riêng của app, có chế độ rạp chiếu phim và toàn màn hình. Con số góc phải là số bài học.' },
-        { ctx: 'course', sel: '#monhoc-detail-modal button[onclick="closeMonHocDetailModal()"]', t: '✕ Đóng', d: 'Bấm để đóng cửa sổ khóa học và quay lại.' },
+        { ctx: 'course', sel: '#lessons-container', xl: true, t: '🎬 Danh sách video bài giảng', d: 'Mỗi dòng là một bài giảng. Bấm vào để xem bằng trình phát riêng của app, có chế độ rạp chiếu phim và toàn màn hình. Con số góc phải là số bài học.' },
+        { ctx: 'course', sel: function () { return document.querySelector('#lessons-container button.vid-btn') || document.querySelector('#lessons-container [onclick^="ytVideoBtn"]') || document.querySelector('[onclick^="ytVideoBtn"]'); }, t: '▶️ Xem bài giảng', d: 'Bấm để mở trình phát riêng của app và xem bài giảng này: có chế độ rạp chiếu phim, toàn màn hình, tăng/giảm tốc độ và tua.' },
+        { ctx: 'course', sel: function () { return document.querySelector('#lessons-container button[id^="review-btn-"]') || document.querySelector('#lessons-container [onclick^="startLessonReview"]') || document.querySelector('[onclick^="startLessonReview"]'); }, t: '🎓 Ôn tập bài này', d: 'Bấm để AI ra câu hỏi trắc nghiệm cho riêng bài giảng này, giúp nhớ ngay nội dung vừa học (đúng được + điểm).' },
 
-        { ctx: 'video', sel: vs('.ytb-back'), t: '⬅ Quay lại danh sách', d: 'Đóng video và quay về danh sách bài giảng.' },
-        { ctx: 'video', sel: vs('.yt-seek'), t: '⏱ Thanh tua', d: 'Kéo hoặc bấm vào thanh để tua tới đoạn bất kỳ của video. Bên cạnh là thời gian hiện tại / tổng thời lượng.' },
-        { ctx: 'video', sel: vs('button[onclick^="toggleYtPlay"]'), t: '▶ Phát / Tạm dừng', d: 'Bấm để phát hoặc dừng video. Phím tắt trên máy tính: Space.' },
         { ctx: 'video', sel: vs('button[onclick^="ytChapToggle"]'), t: '🧠 Sơ đồ tư duy (AI)', d: 'AI đọc bài giảng và lập mục lục / sơ đồ tư duy theo từng phân mục (cần khóa API AI), giúp bạn xem tổng quan và nhảy nhanh tới phần mình cần. Mở sơ đồ ra rồi bấm Trợ lý AI → ℹ️ để xem giới thiệu chi tiết từng phần trong sơ đồ.' },
         { ctx: 'video', sel: vs('button[onclick^="ytFocusDialog"]'), t: '🎯 Chế độ tập trung', d: 'Khi bật, AI chọn các ý quan trọng; qua mỗi ý video sẽ dừng và hiện một câu trắc nghiệm 4 đáp án. Trả lời sai thì video tua lại đầu ý đó để bạn nghe lại. Bấm nút để xem giải thích và bật / tắt.' },
         { ctx: 'video', sel: vs('button[onclick^="openVideoAi"]'), t: '🤖 Hỏi AI về video', d: 'Mở khung chat với gia sư AI đã xem video: lập mục lục theo mốc thời gian, giải thích đoạn đang xem, hỏi về hình ảnh đang hiện, làm trắc nghiệm (có cửa sổ phụ Trắc nghiệm bên cạnh) hoặc học có hướng dẫn. Mở khung chat ra rồi bấm Trợ lý AI → ℹ️ để xem giới thiệu chi tiết từng nút.' },
@@ -28027,7 +28069,6 @@ body {
         { ctx: 'video', sel: vs('button[onclick^="toggleYtCaptions"]'), t: '💬 Bật / Tắt phụ đề', d: 'Hiện hoặc ẩn phụ đề trên video (phụ đề .srt, tiếng Việt và / hoặc tiếng Anh).' },
         { ctx: 'video', sel: vs('button[onclick*="toggleSubPanel"][onclick*="true"]'), t: '⚙ Cài đặt phụ đề & lồng tiếng', d: 'Mở bảng chỉnh cỡ chữ, độ rộng, độ cao, ngôn ngữ phụ đề, cũng như giọng, độ trầm, tốc độ của lồng tiếng. Mở bảng ra rồi bấm Trợ lý AI → ℹ️ để xem giới thiệu chi tiết từng mục.' },
         { ctx: 'video', sel: vs('button[onclick^="toggleNarration"]'), t: '🗣 Lồng tiếng', d: 'Bật / tắt lồng tiếng: máy đọc phụ đề tiếng Việt bằng giọng Việt trong lúc video chạy.' },
-        { ctx: 'video', sel: vs('.yt-volbox'), t: '🔊 Âm lượng', d: 'Bấm biểu tượng loa để tắt / bật tiếng, kéo thanh âm lượng để chỉnh (có thể tăng tới 200%).' },
         { ctx: 'video', sel: vs('button[onclick^="toggleYtTheaterMode"]'), t: '🎬 Rạp chiếu phim', d: 'Phóng video lớn trong app, nền tối để tập trung. Bấm lần nữa để thoát.' },
         { ctx: 'video', sel: vs('button[onclick^="toggleYtFullscreen"]'), t: '⛶ Toàn màn hình', d: 'Xem video toàn màn hình. Bấm lại hoặc thoát toàn màn hình để quay về.' },
 
@@ -28083,8 +28124,6 @@ body {
     var AKS_STEPS = [
         { sel: '#ai-title', t: '⚙️ Cài đặt khung chat AI',
           d: 'Bảng cài đặt này DÙNG CHUNG cho cả 3 khung chat AI: 📝 Trắc nghiệm (hỏi AI về câu hỏi), 🎬 Video (hỏi AI về bài giảng) và 📖 Đọc sách (AI Chat của trình đọc). Chỉnh ở khung nào cũng áp dụng cho cả ba. Mình giới thiệu từng mục từ trên xuống nhé.' },
-        { sel: aksBlk('#ai-zoom-range'), t: '🔠 Cỡ chữ khung chat',
-          d: 'Phóng to / thu nhỏ chữ trong khung chat, từ 50% đến 300%. Kéo thanh trượt, bấm A− / A+ để chỉnh từng nấc, hoặc bấm 100% để về mặc định.' },
         { sel: aksBlk('#ai-voice-select'), t: '🗣 Giọng đọc · Độ trầm · Tốc độ',
           d: 'Chọn giọng máy dùng khi bấm 🔊 Đọc to câu trả lời của gia sư. ▶ Nghe thử để kiểm tra ngay; Độ trầm chỉnh cao – thấp của giọng; Tốc độ đọc từ 0.5x đến 2x (bấm 1x để về bình thường).' },
         { sel: aksNode('#ai-len-btns'), t: '📏 Độ dài câu trả lời',
@@ -28093,18 +28132,8 @@ body {
           d: 'Áp dụng khi bạn dịch đoạn chữ trong trình đọc sách. “Tự nhiên (dễ hiểu)” dịch thoáng, đọc xuôi tai; “Bám sát (sát văn gốc)” giữ sát câu chữ của bản gốc.' },
         { sel: aksBlk('#ai-key-panel [data-gl]'), t: '🧠 Mức suy luận Gemini',
           d: 'Thấp · Trung bình · Cao là mức “suy nghĩ” của Gemini trước khi trả lời. Mức càng cao thì trả lời càng kỹ nhưng càng chậm. Áp dụng cho các lần gọi Gemini tiếp theo.' },
-        { sel: function () { var h = document.querySelector('#ai-key-panel > p'); return h ? (h.nextElementSibling || h) : null; }, t: '🔑 Nhà cung cấp AI & khóa API',
-          d: 'Gemini là nhà cung cấp mặc định. Khi Gemini hết lượt hoặc lỗi, app có thể tự chuyển sang nhà cung cấp khác đã có khóa, hoặc bạn tự chọn nhà cung cấp chính. Khóa chỉ được lưu trên trình duyệt của bạn.' },
-        { sel: function () { var c = $id('ai-auto-switch'); return c ? (c.closest('label') || c) : null; }, t: '🔁 Tự chuyển nhà cung cấp',
-          d: 'Tích chọn để app tự đổi sang nhà cung cấp dự phòng khi nhà cung cấp chính hết lượt hoặc báo lỗi. Bỏ tích thì app chỉ dùng nhà cung cấp chính.' },
-        { sel: '#ai-prov-cards > div:nth-child(1) > div:first-child', t: '♊ Thẻ Gemini (mặc định)',
-          d: 'Mỗi nhà cung cấp có một thẻ riêng. Nút tròn bên trái để chọn làm nhà cung cấp chính; bên phải cho biết ✅ đã có khóa hay ⚪ chưa có khóa. Gemini đầy đủ tính năng nhất: chat, xem video, nói trực tiếp 🎙️ và Tìm hiểu sâu có nguồn Google.' },
         { sel: '#ai-prov-cards > div:nth-child(1) summary', t: '🔑 Lấy khóa & nhập khóa',
-          d: 'Bấm dòng này để mở hướng dẫn từng bước: lấy khóa miễn phí, rồi dán vào ô bên dưới (có sẵn nút 📋 Dán khóa đã sao chép & lưu). Đã có khóa thì mục này đổi thành “Đổi khóa / cài đặt”, kèm ô đổi model nếu nhà cung cấp ngừng model cũ.' },
-        { sel: '#ai-prov-cards > div:nth-child(2) > div:first-child', t: '🔀 Thẻ nhà cung cấp dự phòng',
-          d: 'Nhà cung cấp thứ hai (OpenRouter) dùng làm dự phòng khi Gemini hết lượt. Hạn mức miễn phí khá thấp và không có nói trực tiếp hay xem video YouTube, nhưng đủ để chat khi cần.' },
-        { sel: aksNode('#ai-back-btn'), t: '↩ Quay lại',
-          d: 'Thoát bảng cài đặt và về khung chat. Muốn xem lại phần giới thiệu này: mở ⚙️ Cài đặt trong bất kỳ khung chat AI nào, rồi bấm Trợ lý AI → ℹ️.' }
+          d: 'Bấm dòng này để mở hướng dẫn từng bước: lấy khóa miễn phí, rồi dán vào ô bên dưới (có sẵn nút 📋 Dán khóa đã sao chép & lưu). Đã có khóa thì mục này đổi thành “Đổi khóa / cài đặt”, kèm ô đổi model nếu nhà cung cấp ngừng model cũ.' }
     ];
     AKS_STEPS.forEach(function (st) { st.ctx = 'aiset'; TOUR.push(st); });
 
@@ -28307,30 +28336,16 @@ body {
             return [
                 { vid: true, sel: vs('button[onclick^="ytChapToggle"]'), t: '🧠 Sơ đồ tư duy (AI)',
                   d: 'AI đọc phụ đề bài giảng rồi chia thành các phần lớn (1, 2, 3…) và phần con (1.1, 1.2…) theo mốc thời gian, vẽ thành sơ đồ nhánh để bạn nắm cả bài chỉ trong một cái nhìn. Cần khóa API AI; lần đầu có thể mất vài giây đến vài chục giây, những lần sau mở lại ngay. Bấm nút lần nữa (hoặc phím Esc) để đóng sơ đồ. Giờ mình đi qua từng phần của sơ đồ nhé.' },
-                mapStep(vs('.yt-chapmap .cm-view'), '🗺 Khung sơ đồ',
-                  'Gốc là tên bài giảng, nhánh cấp 1 là các phần lớn, nhánh cấp 2 là các phần con. Kéo bằng một ngón để di chuyển, chụm hai ngón để phóng to / thu nhỏ. Nếu AI còn đang bổ sung chi tiết cho các đoạn chưa đủ, sơ đồ sẽ tự vẽ thêm dần theo thời gian.'),
-                mapStep(function () { vidKeep(); return vidQ('.yt-chapmap .cm-n[data-i]'); }, '⏱ Ô của một phần',
-                  'Mỗi ô gồm số thứ tự, tên phần và mốc giờ ⏱. Bấm vào ô để video nhảy tới đúng đoạn đó và phát luôn (sơ đồ tự đóng lại). Rê chuột lên ô để xem tóm tắt ngắn của phần ấy.'),
                 mapStep(function () { vidKeep(); return vidQ('.yt-chapmap .cm-tg'); }, '➕ / ➖ Xổ và thu nhánh',
                   'Nút tròn nhỏ ở mỗi phần lớn: “−” thu các phần con lại, “+số” xổ chúng ra. Dùng để sơ đồ gọn lại khi bài giảng dài.'),
-                mapStep(vdUnion(function () { var b = mapBar(); return b ? [b.querySelector('.cm-ttl'), b.querySelector('.cm-zoom')] : null; }), '📊 Tiêu đề, tiến độ và mức phóng',
-                  'Bên phải tên cửa sổ là tiến độ khi AI đang “bổ sung” thêm phần cho những đoạn còn thiếu (ví dụ: đang bổ sung 3/5). Ô % kế bên cho biết sơ đồ đang phóng to bao nhiêu.'),
-                mapStep(function () { vidKeep(); var b = mapBar(); return b ? b.querySelector('.cm-lg') : null; }, 'Eng / Vie · Ngôn ngữ tên phần',
-                  'Đổi tên các phần trong sơ đồ sang tiếng Anh (Eng) hoặc tiếng Việt (Vie). Lần đầu chọn Eng, AI cần dịch tên các phần nên hơi chờ một chút.'),
                 mapStep(mapGrp(0), '🧭 Tracking · Thanh hành trình',
                   'Bật / tắt “thanh hành trình” hiện trên đầu video khi bạn đóng sơ đồ, cho biết đang xem tới phần nào của bài. Nút ⚙ bên cạnh chỉnh độ cao, độ rộng ô, độ hẹp mũi nhọn, cỡ chữ và độ trong suốt, có hình xem trước ngay bên dưới.'),
                 mapStep(mapGrp(1), '🔔 Notice · Báo khi sang phần mới',
                   'Bật / tắt thông báo hiện giữa video mỗi khi bài giảng sang một phần mới. Nút ⚙ bên cạnh chỉnh cỡ chữ, độ rộng khung, thời gian hiện, và có tạm dừng video khi hiện thông báo hay không.'),
-                mapStep(mapBtn('regen'), '↻ Chia lại',
-                  'Nhờ AI chia lại các phần và vẽ lại sơ đồ từ đầu. Dùng khi bạn thấy cách chia chưa hợp lý (việc này dùng thêm một lượt AI).'),
-                mapStep(vdUnion(function () { var b = mapBar(); return b ? [b.querySelector('button[data-a="out"]'), b.querySelector('button[data-a="in"]')] : null; }), '− ＋ Thu nhỏ / Phóng to',
-                  'Mỗi lần bấm thu nhỏ hoặc phóng to sơ đồ khoảng 25%; mức hiện tại hiện ở ô % trên thanh.'),
                 mapStep(vdUnion(function () { var b = mapBar(); return b ? [b.querySelector('button[data-a="fit"]'), b.querySelector('button[data-a="now"]')] : null; }), '⤢ Vừa khung · 🎯 Tới mục đang phát',
                   '⤢ thu phóng để thấy trọn cả sơ đồ trong khung. 🎯 đưa sơ đồ về đúng phần video đang phát để bạn biết mình đang ở đâu.'),
                 mapStep(vdUnion(function () { var b = mapBar(); return b ? [b.querySelector('button[data-a="all"]'), b.querySelector('button[data-a="none"]')] : null; }), '⊞ Mở hết · ⊟ Thu hết',
-                  'Xổ ra hoặc thu lại tất cả các nhánh con cùng một lúc.'),
-                mapStep(mapBtn('x'), '✕ Đóng',
-                  'Đóng sơ đồ và quay lại video. Muốn xem lại phần giới thiệu này: mở sơ đồ rồi bấm Trợ lý AI → ℹ️.')
+                  'Xổ ra hoặc thu lại tất cả các nhánh con cùng một lúc.')
             ];
         },
         /* ---------- 🤖 Chat với AI (+ cửa sổ phụ Trắc nghiệm) ---------- */
@@ -28353,8 +28368,6 @@ body {
                   'Chọn gia sư trả lời bằng tiếng Việt (Vie), tiếng Anh (Eng), hoặc bật cả hai để xem song ngữ.'),
                 aiStep(vsg('ai-settings-btn'), '⚙️ Cài đặt AI',
                   'Mở bảng cài đặt chung của khung chat AI (cỡ chữ, giọng đọc, độ dài câu trả lời, mức suy luận, khóa API). Lần đầu bấm vào, mình sẽ giới thiệu từng mục ngay tại chỗ; muốn xem lại: mở ⚙️ rồi bấm Trợ lý AI → ℹ️. Bấm “Quay lại” để về khung chat.'),
-                aiStep(vsg('ai-messages'), '💬 Khung hội thoại',
-                  'Câu trả lời của gia sư hiện ở đây và luôn tự cuộn xuống cuối. Kéo lên để xem lại các câu trước.'),
                 aiStep(aiQb('📑'), '📑 Mục lục theo thời gian',
                   'AI lập mục lục phân cấp theo mốc thời gian (1, 1.1, 1.2, 2…), mỗi mục tóm tắt 3–4 câu — hợp để nắm cấu trúc cả bài trước khi xem.'),
                 aiStep(aiQb('🎯'), '🎯 Giải thích đoạn đang xem',
@@ -28368,11 +28381,7 @@ body {
                 aiStep(vsg('ai-mic-btn'), '🎙️ Nói chuyện trực tiếp',
                   'Nói chuyện bằng giọng nói với gia sư. Bấm lần nữa (⏹️) để dừng.'),
                 aiStep(vsg('ai-img-btn'), '🖼️ Gửi ảnh',
-                  'Gửi một hình ảnh (ảnh chụp màn hình, hình trong sách…) cho gia sư xem rồi hỏi về hình đó.'),
-                aiStep(vdUnion(function () { return [$id('ai-input'), $id('ai-send-btn')]; }), '⌨️ Ô nhập & ➤ Gửi',
-                  'Gõ câu hỏi tự do rồi bấm ➤ (hoặc Enter) để gửi; Shift + Enter để xuống dòng.'),
-                aiStep(vsg('ai-close-btn'), '✕ Đóng',
-                  'Đóng khung chat và quay về video. Muốn xem lại phần giới thiệu này: mở khung chat rồi bấm Trợ lý AI → ℹ️.')
+                  'Gửi một hình ảnh (ảnh chụp màn hình, hình trong sách…) cho gia sư xem rồi hỏi về hình đó.')
             ];
         },
         /* ---------- ⚙ Cài đặt phụ đề & lồng tiếng ---------- */
@@ -28409,8 +28418,6 @@ body {
         { k: 'sub', key: 'vb2-sub', ev: 'click', q: 'button[onclick*="toggleSubPanel"][onclick*="true"]', wait: 600, cond: function () { var w = vwrap(); return !!(w && w.classList.contains('sub-editing')); }, steps: function () { return VDETAIL.sub(); } },
         { k: 'narr', ev: 'click', q: 'button[onclick^="toggleNarration"]', wait: 500, steps: [
             { vid: true, sel: vs('button[onclick^="toggleNarration"]'), t: '🗣 Lồng tiếng', d: 'Nút này bật / tắt lồng tiếng: máy đọc phụ đề tiếng Việt bằng giọng Việt khi video chạy. Chỉnh giọng và tốc độ ở nút ⚙ Cài đặt phụ đề & lồng tiếng.' }] },
-        { k: 'vol', ev: 'click', q: 'button[onclick^="ytVolBtn"]', wait: 500, steps: [
-            { vid: true, sel: vs('.yt-volbox'), t: '🔊 Âm lượng', d: 'Bấm biểu tượng loa để tắt / bật tiếng; kéo thanh âm lượng để chỉnh, có thể tăng tới 200%.' }] },
         { k: 'theater', ev: 'click', q: 'button[onclick^="toggleYtTheaterMode"]', wait: 900, steps: [
             { vid: true, sel: vs('button[onclick^="toggleYtTheaterMode"]'), t: '🎬 Rạp chiếu phim', d: 'Chế độ phóng video lớn trong app với nền tối để tập trung. Bấm lại nút này để thoát.' }] },
         { k: 'fs', ev: 'click', q: 'button[onclick^="toggleYtFullscreen"]', wait: 1000, steps: [
@@ -28480,10 +28487,11 @@ body {
             { sel: qbQ('#ai-title'), t: '🤖 Hỏi AI về câu này', d: 'Khung chat với gia sư AI về đúng câu bạn đang làm: giải thích vì sao đáp án đúng, phân tích từng đáp án sai, mẹo nhớ, học có hướng dẫn…' },
             { sel: qbQ('#ai-lang-box'), t: '🌐 Vie / Eng', d: 'Chọn ngôn ngữ trả lời: Vie, Eng, hoặc bật cả hai để xem song ngữ.' },
             { sel: qbQ('#ai-settings-btn'), t: '⚙️ Cài đặt AI', d: 'Chỉnh cỡ chữ, giọng đọc, độ dài câu trả lời, mức suy luận và khóa API của khung chat. Lần đầu bấm vào, mình sẽ giới thiệu kỹ hơn.' },
-            { sel: qbQ('#ai-quickrow'), t: '⚡ Câu hỏi nhanh', d: 'Các nút gợi ý hỏi nhanh (giải thích đáp án đúng, phân tích đáp án sai, mẹo nhớ…). Bấm một nút là AI trả lời luôn, khỏi gõ.' },
-            { sel: qbQ('#ai-input'), t: '⌨️ Ô nhập câu hỏi', d: 'Gõ câu hỏi riêng của bạn về câu đang làm rồi bấm ➤ để gửi.' },
-            { sel: qbQ('#ai-send-btn'), t: '➤ Gửi', d: 'Gửi câu hỏi cho AI.' },
-            { sel: qbQ('#ai-close-btn'), t: '✕ Đóng khung chat', d: 'Đóng khung chat và quay lại câu hỏi. Mở lại bằng nút 🤖 Hỏi AI bất cứ lúc nào.' }] }
+            { sel: aiQb('💡'), t: '💡 Giải thích câu đúng', d: 'Nhờ gia sư giải thích vì sao đáp án đúng là đúng, dựa trên đúng câu bạn đang làm.' },
+            { sel: aiQb('🚫'), t: '🚫 Giải thích câu sai', d: 'Phân tích vì sao từng đáp án còn lại sai (nhất là đáp án bạn đã chọn) để bạn hiểu bản chất chứ không chỉ nhớ đáp án.' },
+            { sel: aiQb('🔬'), t: '🔬 Tìm hiểu sâu', d: 'Tìm hiểu sâu (Deep Research Mini) về kiến thức của câu này: AI tra cứu thêm nguồn ngoài rồi trả lời kèm trích dẫn.' },
+            { sel: aiQb('🧠'), t: '🧠 Mẹo nhớ / ví dụ', d: 'Gia sư cho mẹo ghi nhớ và một ví dụ lâm sàng ngắn liên quan tới câu này.' },
+            { sel: aiQb('🎓'), t: '🎓 Học Tập có hướng dẫn', d: 'Học có hướng dẫn: gia sư dẫn dắt bạn từng bước theo kiểu gợi mở (hỏi – đáp) để tự suy ra đáp án thay vì đọc đáp án ngay.' }] }
     ];
     function qbHandle(e) {
         if (!fabOn || tour || Date.now() < suppressUntil) return;
@@ -28531,22 +28539,20 @@ body {
         { sel: qbQ('#note-modal .nt-pen'), t: '✏️ Sửa ghi chú', d: 'Sửa nội dung, tiêu đề, phân mục và ảnh của ghi chú này ngay tại chỗ.' },
         { sel: qbQ('#note-modal .nt-spk'), t: '🔊 Đọc to', d: 'Máy đọc to ghi chú này; bấm lại để dừng.' },
         { sel: qbQ('#note-modal .nt-i'), t: 'ℹ️ Thông tin', d: 'Xem vị trí (nguồn) và thời gian tạo của ghi chú.' },
-        { demo: true, sel: function () { return demoQzBar('#note-modal .nt-b'); }, t: '✨ Bôi đen chữ trong ghi chú', d: 'Bôi đen (kéo chọn) một đoạn chữ trong ghi chú, thanh nút nhỏ sẽ nổi lên ngay trên đoạn đó. Đây là thanh mẫu để minh họa.' },
-        { demo: true, sel: function () { return demoQzBtn('b-hl', '#note-modal .nt-b'); }, t: '🖍 Highlight', d: 'Tô sáng đoạn chữ vừa bôi đen để dễ tìm lại khi ôn. Phần tô sáng được lưu cùng ghi chú.' },
-        { demo: true, sel: function () { return demoQzBtn('b-un', '#note-modal .nt-b'); }, t: '🧽 Xóa highlight', d: 'Chỉ hiện khi vùng bạn chọn (hoặc đoạn bạn chạm vào) đang có highlight; bấm để bỏ tô sáng phần đó, phần highlight ngoài vùng chọn vẫn giữ nguyên.' }
+        { demo: true, sel: function () { return demoQzBar('#note-modal .nt-b'); }, t: '✨ Bôi đen chữ trong ghi chú', d: 'Bôi đen (kéo chọn) một đoạn chữ trong ghi chú, thanh nút nhỏ sẽ nổi lên ngay trên đoạn đó. Thanh này gộp 2 nút: 🖍 Highlight — tô sáng đoạn vừa bôi đen cho dễ tìm lại khi ôn, phần tô sáng được lưu cùng ghi chú; 🧽 Xóa highlight — chỉ hiện khi vùng bạn chọn (hoặc đoạn chữ bạn chạm vào) đang có highlight, bấm để bỏ tô sáng phần đó (highlight nằm ngoài vùng chọn vẫn giữ nguyên). Đây là thanh mẫu để minh họa.' }
     ];
     function qbNth(q, n) { return function () { return document.querySelectorAll(q)[n] || null; }; }
     var DNBTNS = [
         { m: 'dict-modal', k: 'd-add', q: '#rd-rb-add', wait: 450, cond: function () { return shown('rd-pop'); }, steps: [
-            { sel: dnVis(['rd-pop']), t: '➕ Thêm thuật ngữ mới', d: 'Tự thêm một thuật ngữ vào từ điển: nhập từ tiếng Anh, từ loại (n, v, adj…) và nghĩa tiếng Việt.' },
-            { sel: qbQ('#rd-pop .rd-pbtn.pri'), t: '＋ Thêm', d: 'Bấm để lưu thuật ngữ. Từ vừa thêm có huy hiệu MỚI; bấm vào dòng của nó trong sách để thao tác tiếp.' }] },
+            { sel: dnVis(['rd-pop']), xl: true, t: '➕ Thêm thuật ngữ mới', d: 'Tự thêm một thuật ngữ vào từ điển: nhập từ tiếng Anh, từ loại (n, v, adj…) và nghĩa tiếng Việt.' },
+            { sel: qbQ('#rd-pop .rd-pbtn.pri'), xl: true, t: '＋ Thêm', d: 'Bấm để lưu thuật ngữ. Từ vừa thêm có huy hiệu MỚI; bấm vào dòng của nó trong sách để thao tác tiếp.' }] },
         { m: 'dict-modal', k: 'd-search', q: '#rd-rb-search', wait: 450, cond: function () { return shown('rd-pop'); }, steps: [
             { sel: dnVis(['rd-pop']), t: '🔍 Tìm thuật ngữ', d: 'Tìm nhanh trong toàn bộ từ điển. Có hai cách tìm, chọn ở hai nút ngay bên dưới.' },
             { sel: qbQ('#rd-pop .nt-tabs'), t: '🔀 Theo từ · Theo chủ đề (AI)', d: 'Theo từ: gõ tiếng Anh hoặc tiếng Việt, kết quả hiện ngay khi gõ. Theo chủ đề (AI): nhập một chủ đề rồi Enter, AI chọn ra các thuật ngữ thuộc chủ đề đó.' },
             { sel: qbQ('#rd-pop [data-m="topic"]'), t: '🤖 Tìm với AI', d: 'Nhập chủ đề như “nội nha”, “nha chu”, “phục hình”… rồi Enter: AI lọc các thuật ngữ trong từ điển liên quan đến chủ đề, kể cả khi từ khóa không xuất hiện trong chính thuật ngữ. Cần khóa API AI (⚙️ Cài đặt).' },
             { sel: qbQ('#rd-in-q'), t: '⌨️ Ô nhập', d: 'Gõ từ khóa (Theo từ) hoặc chủ đề (Theo chủ đề AI) vào đây. Kết quả hiện bên dưới; bấm một kết quả để nhảy tới thuật ngữ đó.' }] },
         { m: 'dict-modal', k: 'd-review', q: '#rd-rb-review', wait: 600, cond: function () { return shown('rd-rv'); }, steps: [
-            { sel: qbQ('#rd-rv .rv-card'), t: '🎓 Ôn tập từ điển', d: 'Ôn lại thuật ngữ trong từ điển theo cách bạn chọn. Mình đi qua từng phần của bảng thiết lập, từ trên xuống.' },
+            { sel: qbQ('#rd-rv .rv-card'), t: '🎓 Ôn tập từ vựng', d: 'Ôn lại thuật ngữ trong từ điển theo cách bạn chọn: 🃏 Flashcard (lật thẻ) hoặc 📝 Trắc nghiệm ngữ cảnh do AI ra đề. Mình đi qua từng phần của bảng thiết lập, từ trên xuống.' },
             { sel: qbNth('#rd-rv .rv-g', 0), t: '📚 Nguồn từ ôn tập', d: '⭐ Từ đã lưu: chỉ ôn các từ bạn đã gắn sao. 🧭 Theo chủ đề: nhập chủ đề, AI chọn các từ liên quan. 🎚 Theo mức độ: đặt tỉ lệ % từ Dễ / Vừa / Khó (theo thẻ bạn gắn). 🎲 Ngẫu nhiên: rút ngẫu nhiên trong toàn bộ từ điển.' },
             { sel: qbQ('#rv-topic'), t: '🧭 Nhập chủ đề', d: 'Hiện khi chọn nguồn “Theo chủ đề”: gõ chủ đề (nội nha, implant, nhổ răng…), AI sẽ chọn các từ trong từ điển phù hợp.' },
             { sel: qbQ('#rv-lvlp'), t: '🎚 Tỉ lệ mức độ (%)', d: 'Hiện khi chọn “Theo mức độ”: đặt tỉ lệ từ Dễ · Vừa · Khó trong bài ôn (tổng 100%), ví dụ dồn nhiều vào từ Khó để ôn chỗ yếu.' },
@@ -28567,33 +28573,24 @@ body {
             { sel: qbQ('#rd-pop [data-act="info-redo"]'), t: '↻ Tạo lại', d: 'Nhờ AI soạn lại phần giải thích khi bạn thấy chưa ưng ý.' },
             { sel: qbQ('#rd-pop .rd-info-foot [data-act="cancel"]'), t: '✕ Đóng', d: 'Đóng cửa sổ thông tin.' }] },
         { m: 'dict-modal', k: 'd-more', q: '#dict-modal .rd-act [data-act="r-more"]', wait: 700, cond: function () { return shown('rd-pop'); }, steps: [
-            { sel: dnVis(['rd-pop']), t: '＋ Thêm từ liên quan', d: 'AI gợi ý các thuật ngữ cùng bộ / cùng từ loại với từ bạn đang chọn để bạn mở rộng vốn từ nhanh.' },
-            { sel: qbQ('#rd-mt'), t: '☑️ Danh sách gợi ý', d: 'Tick chọn những từ muốn thêm. Từ nào đã có trong từ điển thì không bị thêm trùng.' },
-            { sel: qbQ('#rd-mb'), t: '＋ Thêm các từ đã chọn', d: 'Bấm để thêm các từ đã tick vào từ điển; từ mới thêm có dấu MỚI.' }] },
+            { sel: dnVis(['rd-pop']), xl: true, t: '＋ Thêm từ liên quan', d: 'AI gợi ý các thuật ngữ cùng bộ / cùng từ loại với từ bạn đang chọn để bạn mở rộng vốn từ nhanh.' },
+            { sel: qbQ('#rd-mt'), xl: true, t: '☑️ Danh sách gợi ý', d: 'Tick chọn những từ muốn thêm. Từ nào đã có trong từ điển thì không bị thêm trùng.' },
+            { sel: qbQ('#rd-mb'), xl: true, t: '＋ Thêm các từ đã chọn', d: 'Bấm để thêm các từ đã tick vào từ điển; từ mới thêm có dấu MỚI. Góc trái là Đóng và ↻ Gợi ý lại; góc phải là ＋ Thêm đã chọn và ☑ Chọn tất cả.' }] },
         { m: 'dict-modal', k: 'd-edit', q: '#dict-modal .rd-act [data-act="r-edit"]', wait: 450, cond: function () { return shown('rd-pop'); }, steps: [
-            { sel: dnVis(['rd-pop']), t: '✏️ Sửa thuật ngữ', d: 'Chỉnh lại thuật ngữ cho đúng ý bạn. Các lần dịch sau sẽ dùng đúng nghĩa bạn vừa sửa.' },
-            { sel: qbQ('#rd-in-en'), t: '🔤 Thuật ngữ tiếng Anh', d: 'Sửa chính tả hoặc cách viết của thuật ngữ.' },
-            { sel: qbQ('#rd-in-pos'), t: '🏷 Từ loại', d: 'Từ loại: n, v, adj, adv, pl, sing…' },
-            { sel: qbQ('#rd-in-vi'), t: '🇻🇳 Nghĩa tiếng Việt', d: 'Mỗi nghĩa một dòng (Shift+Enter để xuống dòng).' },
-            { sel: qbQ('#rd-pop .rd-dkrow'), t: '🎚 Mức độ', d: 'Gắn mức độ cho từ (Dễ / Vừa / Khó); dùng khi ôn tập theo mức độ.' },
-            { sel: qbQ('#rd-pop [data-act="save"]'), t: '💾 Lưu', d: 'Lưu các thay đổi.' },
-            { sel: qbQ('#rd-pop [data-act="del"]'), t: '🗑 Xóa', d: 'Xóa thuật ngữ khỏi từ điển.' }] },
+            { sel: dnVis(['rd-pop']), xl: true, t: '✏️ Sửa thuật ngữ', d: 'Chỉnh lại thuật ngữ cho đúng ý bạn. Các lần dịch sau sẽ dùng đúng nghĩa bạn vừa sửa.' },
+            { sel: qbQ('#rd-in-en'), xl: true, t: '🔤 Thuật ngữ tiếng Anh', d: 'Sửa chính tả hoặc cách viết của thuật ngữ.' },
+            { sel: qbQ('#rd-in-pos'), xl: true, t: '🏷 Từ loại', d: 'Từ loại: n, v, adj, adv, pl, sing…' },
+            { sel: qbQ('#rd-in-vi'), xl: true, t: '🇻🇳 Nghĩa tiếng Việt', d: 'Mỗi nghĩa một dòng (Shift+Enter để xuống dòng).' },
+            { sel: qbQ('#rd-pop .rd-dkrow'), xl: true, t: '🎚 Mức độ', d: 'Gắn mức độ cho từ (Dễ / Vừa / Khó); dùng khi ôn tập theo mức độ. Nút Hủy ở góc trái, nút Lưu ở góc phải.' }] },
         { m: 'note-modal', k: 'n-new', q: '#nt-rb-new', wait: 450, cond: function () { return shown('nt-pop'); }, steps: [
             { sel: dnVis(['nt-pop']), t: '➕ Tạo ghi chú mới', d: 'Viết ghi chú của riêng bạn: đặt tiêu đề, chọn hoặc gõ phân mục, rồi nhập nội dung.' },
             { sel: qbQ('#nt-in-c'), t: '🗂 Phân mục', d: 'Gom ghi chú theo chủ đề: chọn phân mục có sẵn hoặc gõ tên mới.' },
             { sel: qbQ('#nt-pop [data-act="n-save"]'), t: '💾 Lưu', d: 'Lưu ghi chú vào sổ. Sau đó bạn sẽ thấy các nút ✏️ 🔊 ℹ️ trên ghi chú.' }] },
         { m: 'note-modal', k: 'n-search', q: '#nt-rb-search', wait: 450, cond: function () { return shown('nt-pop'); }, steps: [
-            { sel: dnVis(['nt-pop']), t: '🔍 Tìm ghi chú', d: 'Tìm lại ghi chú đã viết. Có hai cách tìm, chọn ở hai nút bên dưới.' },
-            { sel: qbQ('#nt-pop .nt-tabs'), t: '🔀 Theo từ · Theo chủ đề (AI)', d: 'Theo từ: gõ từ khóa, kết quả hiện ngay. Theo chủ đề (AI): nhập một chủ đề rồi Enter, AI chọn ra các ghi chú thuộc chủ đề đó.' },
-            { sel: qbQ('#nt-pop [data-m="topic"]'), t: '🤖 Tìm với AI', d: 'Nhập chủ đề (nội nha, phục hình…) rồi Enter: AI lọc các ghi chú liên quan, kể cả khi từ khóa không xuất hiện nguyên văn. Cần khóa API AI.' },
-            { sel: qbQ('#nt-in-q'), t: '⌨️ Ô nhập', d: 'Gõ từ khóa hoặc chủ đề; bấm một kết quả để mở ghi chú đó.' }] },
-        { m: 'note-modal', k: 'n-review', q: '#nt-rb-review', wait: 600, cond: function () { return shown('nt-rv'); }, steps: [
-            { sel: qbQ('#nt-rv .rv-card'), t: '🎓 Ôn tập ghi chú', d: 'AI ra câu trắc nghiệm 4 đáp án dựa trên chính các ghi chú của bạn. Mình đi qua từng phần nhé.' },
-            { sel: qbNth('#nt-rv .rv-g', 0), t: '📚 Chủ đề trắc nghiệm', d: 'Tất cả ghi chú: ra đề phủ đều toàn bộ sổ. Tùy chọn chủ đề: chỉ ra đề về một chủ đề bạn nhập.' },
-            { sel: qbQ('#nt-rv #rv-topic'), t: '🧭 Nhập chủ đề', d: 'Hiện khi chọn “Tùy chọn chủ đề”: gõ chủ đề (nội nha, phục hình…), AI ra đề dựa trên các ghi chú liên quan.' },
-            { sel: qbNth('#nt-rv .rv-g', 1), t: '🔢 Số câu', d: '10, 20, 30 câu, tất cả (mỗi ghi chú một câu, tối đa 50) hoặc “Tùy chọn” để tự nhập.' },
-            { sel: qbQ('#nt-rv [data-act="rv-start"]'), t: '▶ Bắt đầu', d: 'Bắt đầu làm bài. Mỗi câu đúng được +5 điểm.' },
-            { sel: qbQ('#nt-rv .rv-x'), t: '✕ Đóng', d: 'Đóng bảng ôn tập và quay lại sổ ghi chú.' }] }
+            { sel: dnVis(['nt-pop']), t: '🔍 Tìm ghi chú', d: 'Tìm lại ghi chú đã viết. Có hai cách tìm: 🔎 Theo từ và 🤖 Theo chủ đề (AI) — mình giới thiệu hai nút đó ngay sau đây.' },
+            { sel: qbQ('#nt-pop [data-m="word"]'), xl: true, t: '🔎 Theo từ', d: 'Gõ từ khóa (trong tiêu đề, phân mục hoặc nội dung) — kết quả hiện ngay khi gõ.' },
+            { sel: qbQ('#nt-pop [data-m="topic"]'), xl: true, t: '🤖 Theo chủ đề (AI)', d: 'Nhập một chủ đề (nội nha, phục hình…) rồi Enter: AI chọn ra các ghi chú thuộc chủ đề đó, kể cả khi từ khóa không xuất hiện nguyên văn. Cần khóa API AI.' }] },
+        /* (đã bỏ phần giới thiệu bảng “Ôn tập trắc nghiệm ghi chú” theo yêu cầu) */
     ];
     function dnSteps(k) { for (var i = 0; i < DNBTNS.length; i++) { if (DNBTNS[i].k === k) return DNBTNS[i].steps; } return null; }
     var NT_INFO_STEPS = [{ sel: dnVis(['nt-pop']), t: 'ℹ️ Thông tin ghi chú', d: 'Cho biết phân mục, vị trí (nguồn) và thời gian tạo của ghi chú.' }];
@@ -28633,8 +28630,6 @@ body {
     function qzNavSteps() {
         var vid = aiVidMode();
         return [
-            qzNavStep(vsg('bk-quiz-nav'), '⬅ ➡ Chuyển câu',
-                '⬅ ➡ chuyển giữa các câu của bộ trắc nghiệm. Hai nút ở giữa chỉ hiện sau khi bạn trả lời xong một câu (mình đang hiện minh họa).'),
             qzNavStep(qzNavBtn('review'), '📍 Xem lại',
                 vid ? 'Tua video tới đúng đoạn lời giảng chứa đáp án của câu này để bạn xem lại kiến thức ngay tại nguồn. Chỉ hiện sau khi trả lời câu đó.'
                     : 'Nhảy tới đúng đoạn trong chương sách chứa đáp án của câu này và tô sáng đoạn đó để bạn đọc lại ngay tại nguồn. Chỉ hiện sau khi trả lời câu đó.'),
@@ -28658,13 +28653,13 @@ body {
             noqzStep(vsg('ai-note-hbtn'), '📒 Ghi chú', 'Mở Sổ ghi chú để xem và lưu ghi chú, nhất là nội dung từ các bong bóng chat AI.'),
             aiStep(vsg('ai-lang-box'), 'Vie / Eng · Ngôn ngữ trả lời', 'Chọn gia sư trả lời bằng tiếng Việt (Vie), tiếng Anh (Eng), hoặc bật cả hai để xem song ngữ.'),
             aiStep(vsg('ai-settings-btn'), '⚙️ Cài đặt AI', 'Chỉnh cỡ chữ, giọng đọc, độ dài câu trả lời, mức suy luận và khóa API của khung chat. Lần đầu bấm vào, mình sẽ giới thiệu kỹ từng mục.'),
-            aiStep(vsg('ai-messages'), '💬 Khung hội thoại', 'Câu trả lời của gia sư hiện ở đây và tự cuộn xuống cuối. Kéo lên để xem lại các câu trước.'),
-            aiStep(vsg('ai-quickrow'), '⚡ Câu hỏi nhanh', 'Các nút hỏi nhanh theo chương (tóm tắt, giải thích, mục lục…). Bấm một nút là AI trả lời luôn, khỏi gõ.'),
+            aiStep(vsg('bk-exp-quick'), '🎯 Giải thích', 'Giải thích dễ hiểu đoạn bạn vừa bôi đen / dịch trong chương, dựa trên nội dung của chương đang đọc.'),
+            aiStep(vsg('bk-img-quick'), '🖼️ Phân tích ảnh màn hình', 'Gửi trang sách đang hiện trên màn hình cho gia sư AI đọc và phân tích hình ảnh, sơ đồ, bảng biểu có trong trang đó.'),
+            aiStep(vsg('bk-deep-quick'), '🔬 Tìm hiểu sâu', 'Tìm hiểu sâu (Deep Research Mini) về đoạn vừa dịch: AI tra cứu thêm nguồn ngoài rồi trả lời kèm trích dẫn.'),
             aiStep(vsg('bk-quiz-quick'), '📝 Trắc nghiệm', 'Mở bảng chọn số câu và độ khó để tạo trắc nghiệm; các câu hỏi hiện trong cửa sổ phụ Trắc nghiệm vừa giới thiệu.'),
+            aiStep(vsg('bk-lect-quick'), '🎓 Học Tập có hướng dẫn', 'Gia sư dẫn dắt bạn học từng phần của chương theo kiểu gợi mở (hỏi – đáp) từ đoạn vừa dịch, để bạn tự suy nghĩ thay vì nhận đáp án ngay.'),
             aiStep(vsg('ai-mic-btn'), '🎙️ Nói chuyện trực tiếp', 'Nói chuyện bằng giọng nói với gia sư. Bấm lần nữa (⏹️) để dừng.'),
-            aiStep(vsg('ai-img-btn'), '🖼️ Gửi ảnh', 'Gửi một hình ảnh (ảnh chụp màn hình, hình trong sách…) cho gia sư xem rồi hỏi về hình đó.'),
-            aiStep(vdUnion(function () { return [$id('ai-input'), $id('ai-send-btn')]; }), '⌨️ Ô nhập & ➤ Gửi', 'Gõ câu hỏi tự do rồi bấm ➤ (hoặc Enter) để gửi; Shift + Enter để xuống dòng.'),
-            aiStep(vsg('ai-close-btn'), '✕ Đóng', 'Đóng khung chat và quay lại trang sách. Muốn xem lại phần giới thiệu này: mở khung chat rồi bấm Trợ lý AI → ℹ️.')
+            aiStep(vsg('ai-img-btn'), '🖼️ Gửi ảnh', 'Gửi một hình ảnh (ảnh chụp màn hình, hình trong sách…) cho gia sư xem rồi hỏi về hình đó.')
         ];
     }
     /* ---- ℹ️ mặc định: đang mở cửa sổ con / khung chat nào thì giới thiệu đúng cái đó ---- */
@@ -28682,16 +28677,20 @@ body {
                 if (a.indexOf('ℹ') >= 0) return dnSteps('d-info');
                 if (a.indexOf('Thuật ngữ mới') >= 0) return dnSteps('d-new');
             }
+            /* dàn nút thao tác trên từ đang nổi (ⓘ ☆ ＋ ✏️ 🗑) → giới thiệu chính dàn nút này như lần đầu, không giới thiệu nền từ điển */
+            if (document.querySelector('#dict-modal .rd-act')) return DN_ROW_STEPS;
             return 'dict';
         }
         if (shown('note-modal')) {
-            if (shown('nt-rv')) return dnSteps('n-review');
+            if (shown('nt-rv')) return dnSteps('n-review') || 'note';   // bảng Ôn tập ghi chú: không còn phần giới thiệu riêng
             if (shown('nt-pop')) {
                 var b = ptxt('nt-pop');
                 if (b.indexOf('Ghi chú') >= 0 && (b.indexOf('mới') >= 0 || b.indexOf('✏') >= 0)) return dnSteps('n-new');
                 if (b.indexOf('Tìm') >= 0) return dnSteps('n-search');
                 if (b.indexOf('ℹ') >= 0) return NT_INFO_STEPS;
             }
+            /* dàn nút trên ghi chú (✏️ 🔊 ℹ️) đang nổi → giới thiệu chính dàn nút này */
+            if (document.querySelector('#note-modal .nt-pen')) return NT_ROW_STEPS;
             return 'note';
         }
         return null;
@@ -29091,10 +29090,10 @@ body {
         var tip = document.createElement('div'); tip.className = 'hf-spot-tip';
         var bar = null;
         if (st) {
-            tip.className += ' hf-tour-tip' + (st.big ? ' hf-tour-big' : '') + (st.ask ? ' hf-tour-ask' : '');
+            tip.className += ' hf-tour-tip' + (st.big ? ' hf-tour-big' : '') + (st.ask ? ' hf-tour-ask' : '') + (st.xl ? ' hf-tour-xl' : '');
             if (st.big || st.ask) box.className += ' big';
             var tt = document.createElement('div'); tt.className = 'tt'; tt.textContent = st.t;
-            var td = document.createElement('div'); td.className = 'td'; td.textContent = st.d + ((tour.i === 0 && !st.big) ? '\n\n👆 Chạm vào màn hình để sang bước tiếp theo. Vuốt sang trái để tiếp, vuốt sang phải hoặc bấm mũi tên ‹ để quay lại.' : '');
+            var td = document.createElement('div'); td.className = 'td'; td.textContent = st.d;
             tip.appendChild(tt); tip.appendChild(td);
             if (st.ask) {
                 var arow = document.createElement('div'); arow.className = 'hf-ask-row';
