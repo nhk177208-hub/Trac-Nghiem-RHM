@@ -19068,10 +19068,10 @@ window.isIOSDevice = function () {
     var p = $('rd-pop'), w = p && p.parentNode, b = document.querySelector('#dict-modal .rd-nwv');
     if (!p || !w || !b) return;
     var wr = w.getBoundingClientRect(), br = b.getBoundingClientRect(), pw = p.offsetWidth || 320;
-    var left = Math.max(8, Math.min(br.left - wr.left, wr.width - pw - 8));
+    var left = Math.max(8, Math.round((wr.width - pw) / 2));   // canh giữa cửa sổ theo chiều ngang
     p.style.right = 'auto';
     p.style.left = left + 'px';
-    p.style.top = (br.bottom - wr.top + 8) + 'px';
+    p.style.top = (br.bottom - wr.top + 8) + 'px';            // giữ nguyên vị trí dọc: ngay dưới nút "Xem thuật ngữ mới"
 }
 function openPop(mode, t) {
         hideTip();
@@ -27252,6 +27252,7 @@ body {
 /* ===== v7 — bước hỏi "Có/Không" trong luồng hướng dẫn ===== */
 .hf-spot-tip.hf-tour-ask{pointer-events:auto}
 .hf-ask-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.hf-spot-tip .hf-ask-row{position:sticky;bottom:0;z-index:2;background:#111827;padding-bottom:2px;box-shadow:0 -10px 14px rgba(17,24,39,.9)}
 .hf-ask-row button{flex:1 1 150px;border:0;border-radius:9999px;padding:14px 16px;font-weight:900;cursor:pointer;font-family:inherit;font-size:22px!important}
 .hf-ask-yes{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;box-shadow:0 10px 22px rgba(79,70,229,.5)}
 .hf-ask-no{background:rgba(255,255,255,.16);color:#e5e7eb}
@@ -27944,8 +27945,7 @@ body {
 
     /* ------------------- giới thiệu lần lượt các nút trên màn hình chính ------------------- */
     var TOUR = [
-        { big: true, sel: '#home-fab', t: '🤖 Nút Trợ lý AI', d: 'Chào bạn 👋 Mình là Trợ lý AI của app — chính là nút này!\n\nBấm vào sẽ hiện 4 nút:\nℹ️ Thông tin — phần giới thiệu bạn đang xem, bấm lại bất cứ lúc nào ở màn hình chính.\n🎙️ Chat live — nói chuyện bằng giọng nói.\n💬 Chat — nhắn tin hỏi cách dùng app, chỉ tận nơi từng nút hoặc làm thay bạn vài thao tác.\n⏻ Tắt — ẩn Trợ lý AI (có hỏi lại cho chắc, và chỉ cách mở lại).\n\nKéo nút để đổi vị trí. Bật / tắt Trợ lý AI ở ⚙️ Cài Đặt → 🤖 Trợ lý AI.\n\nChạm vào màn hình (hoặc bấm mũi tên ›) để mình giới thiệu tiếp các nút trên màn hình chính nhé!' },
-        { ask: true, big: true, sel: '#home-fab', t: '🧭 Giới thiệu các tính năng của app?', d: 'Bạn có muốn mình giới thiệu các tính năng của app trước khi sử dụng không?\n\nChọn “Có” để mình dẫn bạn đi qua từng nút và tính năng chính. Chọn “Để sau” thì app vẫn dùng được ngay; lúc nào cần, bạn bấm nút 🤖 rồi chọn nút ℹ️ để mình giới thiệu lại.' },
+        { ask: true, big: true, sel: '#home-fab', t: '🤖 Nút Trợ lý AI', d: 'Chào bạn 👋 Mình là Trợ lý AI của app — chính là nút này!\n\nBấm vào sẽ hiện 4 nút:\nℹ️ Thông tin — phần giới thiệu bạn đang xem, bấm lại bất cứ lúc nào ở màn hình chính.\n🎙️ Chat live — nói chuyện bằng giọng nói.\n💬 Chat — nhắn tin hỏi cách dùng app, chỉ tận nơi từng nút hoặc làm thay bạn vài thao tác.\n⏻ Tắt — ẩn Trợ lý AI (có hỏi lại cho chắc, và chỉ cách mở lại).\n\nKéo nút để đổi vị trí. Bật / tắt Trợ lý AI ở ⚙️ Cài Đặt → 🤖 Trợ lý AI.\n\nBạn có muốn mình giới thiệu các nút và tính năng trên màn hình chính không?\nChọn “✅ Có, giới thiệu cho mình” để bắt đầu, hoặc “🙅 Để sau” — lúc nào cần, bạn bấm nút 🤖 rồi chọn ℹ️ để mình giới thiệu lại.' },
         { key: 'mon-hoc', t: '📚 Ôn Tập Theo Môn Học', d: 'Bấm để xổ ra danh sách các môn học kèm video bài giảng. Lần đầu bấm vào nút này, mình sẽ hướng dẫn cách chọn môn, kéo thả đổi vị trí và 2 nút Kệ Sách / Khóa Học; lần đầu bấm vào Kệ Sách hoặc Khóa Học, mình sẽ giới thiệu bên trong. Khi khu này đang xổ ra, bấm ℹ️ của Trợ lý AI để xem lại.' },
         { key: 'chuyen-de', t: '🦷 Ôn Tập Theo Chủ Đề', d: 'Bấm để xổ ra khu ôn tập theo chủ đề, gồm các công cụ ôn nhanh, chuyên sâu, thi thử và 36 chủ đề. Lần đầu bấm vào nút này, mình sẽ giới thiệu các nút bên trong ngay tại chỗ; mỗi nút bên trong cũng có hướng dẫn riêng lần đầu bạn mở.' },
         { key: 'bo-suu-tap', t: '🏆 Bộ Sưu Tập Huy Hiệu', d: 'Nơi lưu lại các huy hiệu bạn đạt được trong quá trình học và làm bài. Ôn đều đặn sẽ mở khóa thêm huy hiệu. Con số trên nút là số huy hiệu bạn đã có. Lần đầu bạn mở cửa sổ này, mình sẽ hướng dẫn ngay tại chỗ; muốn xem lại thì bấm nút ℹ️ của Trợ lý AI khi cửa sổ đang mở.' },
@@ -28734,7 +28734,7 @@ body {
     function beginTour(mode, c) {
         closePop(); closeWheel(true); clearSpot(true);
         var steps = TOUR.filter(function (st) { return mode === 'win' ? st.ctx === c : mode === 'multi' ? (c || []).indexOf(st.ctx) >= 0 : !st.ctx; });
-        if (mode === 'steps') steps = c || []; else steps = steps.filter(function (st) { return !(st.ask && !askOk); });
+        if (mode === 'steps') steps = c || [];
         var box = $id('chuyende-section-container');
         tour = { i: -1, tok: 0, busy: false, ctx: null, opened: false, mode: mode, steps: steps, undo: [], wasOpen: !!(box && !box.classList.contains('hidden')) };
         cancelSink(); unsinkFab();
@@ -28743,7 +28743,6 @@ body {
     }
     /* Info: đang mở cửa sổ nào thì giới thiệu cửa sổ đó, không thì giới thiệu màn hình chính */
     function startTour() {
-        askOk = false;   // bấm ℹ️ thủ công: không hỏi lại "có muốn giới thiệu không"
         if (winShown('aiset')) { beginTour('win', 'aiset'); return; }   // bảng ⚙️ Cài đặt của khung chat AI (dùng chung 3 khung) đang mở
         var dn0 = null; try { dn0 = dnTop(); } catch (e) {}   // Từ điển / Sổ ghi chú nằm trên cùng: chỉ giới thiệu popup đang mở (hoặc cả cửa sổ nếu không có popup)
         if (typeof dn0 === 'string') { beginTour('win', dn0); return; }
@@ -28829,7 +28828,6 @@ body {
         if (introDone()) return true;
         if (!tourHomeOk()) return false;
         introMem = true; try { localStorage.setItem(INTRO_KEY, '1'); } catch (e) {}
-        askOk = true;   // luồng tự động lần đầu: có hỏi "muốn giới thiệu tính năng app không?"
         beginTour('home');
         return true;
     }
@@ -28967,7 +28965,6 @@ body {
     };
 
     /* ---------- Hướng dẫn sử dụng app: trạng thái + cửa sổ phụ (trong ⚙️ Cài Đặt) ---------- */
-    var askOk = false;                 // bước hỏi "Có/Không" chỉ xuất hiện trong luồng tự động lần đầu
     var GUIDE_KEY = 'hf_guide_on', guideMem = true;
     try { guideMem = localStorage.getItem(GUIDE_KEY) !== '0'; } catch (e) {}
     function guideOn() { return !!guideMem; }
@@ -29105,7 +29102,7 @@ body {
                 var ayes = document.createElement('button'); ayes.type = 'button'; ayes.className = 'hf-ask-yes'; ayes.textContent = '✅ Có, giới thiệu cho mình';
                 arow.appendChild(ano); arow.appendChild(ayes); tip.appendChild(arow);
                 ayes.onclick = function (ev) { try { ev.stopPropagation(); } catch (e) {} tourGo(1); };
-                ano.onclick = function (ev) { try { ev.stopPropagation(); } catch (e) {} setGuideOn(false); finishTour(); };
+                ano.onclick = function (ev) { try { ev.stopPropagation(); } catch (e) {} finishTour(); };
                 tip.addEventListener('pointerdown', function (e) { try { e.stopPropagation(); } catch (er) {} });
                 tip.addEventListener('pointerup', function (e) { try { e.stopPropagation(); } catch (er) {} });
             }
@@ -29231,9 +29228,26 @@ body {
         s.top = (r.top - pad) + 'px'; s.left = (r.left - pad) + 'px';
         s.width = (r.width + pad * 2) + 'px'; s.height = (r.height + pad * 2) + 'px';
         var sp = spot.tip.style, vw = window.innerWidth, vh = window.innerHeight;
-        if (sp.transform) sp.transform = '';           // đo lại kích thước thật (bỏ phần thu nhỏ của lần trước)
-        var mr0 = spot.tip.getBoundingClientRect();
         var resB = spot.bar ? 74 : 0, bottomLimit = vh - 8 - resB;
+        if (sp.transform) sp.transform = '';           // đo lại kích thước thật (bỏ phần thu nhỏ của lần trước)
+        /* thẻ cao hơn chỗ trống thì cho CUỘN bên trong (chữ vẫn to, dễ đọc) thay vì thu nhỏ cả thẻ xuống mức khó đọc */
+        try { sp.maxHeight = Math.max(140, Math.round(bottomLimit - 8)) + 'px'; } catch (eMH) {}
+        /* Thẻ là position:fixed + width:auto nên bề rộng bị co giãn theo chính vị trí left ⇒ khoá bề rộng theo
+           nội dung trước khi đo, để kích thước thẻ không thay đổi lúc đặt sang chỗ khác (gốc của việc thẻ đè lên nút). */
+        var mr0 = null;
+        try {
+            sp.width = 'max-content';
+            var raw = spot.tip.getBoundingClientRect();
+            var bsz = 'border-box'; try { bsz = getComputedStyle(spot.tip).boxSizing; } catch (e2) {}
+            if (bsz === 'border-box') { sp.width = raw.width + 'px'; }
+            else {
+                var cs2 = getComputedStyle(spot.tip);
+                var ex2 = (parseFloat(cs2.paddingLeft) || 0) + (parseFloat(cs2.paddingRight) || 0) + (parseFloat(cs2.borderLeftWidth) || 0) + (parseFloat(cs2.borderRightWidth) || 0);
+                sp.width = Math.max(0, raw.width - ex2) + 'px';
+            }
+            mr0 = spot.tip.getBoundingClientRect();
+        } catch (e3) { try { sp.width = ''; } catch (e4) {} mr0 = null; }
+        if (!mr0) mr0 = spot.tip.getBoundingClientRect();
         var boxRect = { left: r.left - pad, top: r.top - pad, width: r.width + pad * 2, height: r.height + pad * 2 };
         /* chừa thêm 2px an toàn: thẻ giới thiệu tuyệt đối không chạm vào nút đang giới thiệu */
         var boxSafe = { left: boxRect.left - 2, top: boxRect.top - 2, width: boxRect.width + 4, height: boxRect.height + 4 };
@@ -29254,8 +29268,8 @@ body {
             }
             if (!pick) continue;
             pick.scale = sc;
-            if (!best || pick.score < best.score) best = pick; // giữ vị trí ít đè nút nhất, ưu tiên cỡ to
-            if (best.score === 0) break;                       // né sạch các nút -> dùng luôn
+            best = pick;
+            break;   // cỡ TO NHẤT mà vẫn né được nút đang giới thiệu -> dùng luôn, không thu nhỏ chữ nữa
         }
         var bestScale = best ? best.scale : 0.58;
         if (!best) {   // nút chiếm gần hết màn hình: thu nhỏ tối đa, đặt ở mép trên
@@ -29264,6 +29278,22 @@ body {
         spot.tipScale = bestScale;
         if (bestScale < 1) { sp.transformOrigin = 'top left'; sp.transform = 'scale(' + bestScale + ')'; }
         sp.top = best.top + 'px'; sp.left = best.left + 'px';
+        /* chốt hạ: đo lại thẻ THẬT sau khi đặt — nếu kích thước thật lệch làm thẻ chạm nút thì chọn lại vị trí khác */
+        try {
+            var fr = spot.tip.getBoundingClientRect();
+            var fSafe = { left: fr.left - 2, top: fr.top - 2, width: fr.width + 4, height: fr.height + 4 };
+            if (hfOverlap(fSafe, boxSafe) > 0) {
+                var cd2 = hfSpotCands(r, fr.width, fr.height, vw, bottomLimit, spot.bar ? 56 : 8), b2 = null;
+                for (var j = 0; j < cd2.length; j++) {
+                    var rj = cd2[j];
+                    if (hfOverlap(rj, boxSafe) > 0) continue;
+                    var s2 = 0, a2 = 0;
+                    for (var m = 0; m < others.length; m++) { var oj = hfOverlap(rj, others[m]); if (oj > 0) { s2++; a2 += oj; } }
+                    if (!b2 || s2 < b2.score || (s2 === b2.score && a2 < b2.area)) b2 = { left: rj.left, top: rj.top, score: s2, area: a2 };
+                }
+                if (b2) { sp.top = b2.top + 'px'; sp.left = b2.left + 'px'; }
+            }
+        } catch (e) {}
     }
 
     function applyAct(a) {
