@@ -557,6 +557,11 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
             transform: scale(1.25);
         }
 
+        /* ===== APPLE · chế độ cửa sổ: chỉ còn nút Phát (góc trái) và Toàn màn hình (góc phải); Mac có thêm Rạp chiếu phim ===== */
+        html.is-apple .custom-yt-wrapper:not(.theater-mode):not(.yt-fs):not(:fullscreen) .yt-iconrow > :not([onclick^="toggleYtPlay"]):not([onclick^="toggleYtFullscreen"]):not([onclick^="toggleYtTheaterMode"]):not(.yt-spacer) { display: none !important; }
+        html.is-apple-touch .custom-yt-wrapper:not(.theater-mode):not(.yt-fs):not(:fullscreen) .yt-iconrow > [onclick^="toggleYtTheaterMode"] { display: none !important; }
+        html.is-apple .custom-yt-wrapper:not(.theater-mode):not(.yt-fs):not(:fullscreen) .yt-iconrow { overflow: visible; }
+
         /* RẠP CHIẾU PHIM & TOÀN MÀN HÌNH */
         .custom-yt-wrapper.theater-mode {
             position: fixed !important;
@@ -13460,6 +13465,20 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
                     && Math.min(window.screen.width, window.screen.height) > 600;
             } catch (e) { return false; }
         }
+        // Thiết bị Apple (iPhone / iPad / Mac): mở video KHÔNG tự bung rạp / toàn màn hình; ở chế độ cửa sổ chỉ có nút Phát (trái) + Toàn màn hình (phải), Mac thêm nút Rạp chiếu phim
+        function ytIsApple() {
+            try { return /iPhone|iPad|iPod|Macintosh|Mac OS X/.test(navigator.userAgent || '') || navigator.platform === 'MacIntel'; } catch (e) { return false; }
+        }
+        function ytIsAppleTouch() {   // iPhone / iPad / iPadOS giả lập Mac: không có nút Rạp chiếu phim
+            try { return /iPhone|iPad|iPod/.test(navigator.userAgent || '') || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); } catch (e) { return false; }
+        }
+        (function () {
+            try {
+                const c = document.documentElement.classList;
+                if (ytIsApple()) c.add('is-apple');
+                if (ytIsAppleTouch()) c.add('is-apple-touch');
+            } catch (e) {}
+        })();
         // chỉ ĐIỆN THOẠI mới dùng cơ chế xoay ngang giả (rot-land)
         function ytIsMobile() {
             try {
@@ -14194,6 +14213,8 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         #ai-tutor-modal #ai-close-btn { position: relative; z-index: 5; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
         #ai-tutor-modal > div > div:first-child > div:last-child { flex-shrink: 0; }
         #ai-tutor-modal .ai-x-txt { display: none; }
+        /* chế độ trắc nghiệm: không có nút "❓ Trắc nghiệm" trên thanh tiêu đề (chỉ dùng cho khung chat sách / video) */
+        #ai-tutor-modal #ai-enwin-hbtn.ai-enwin-off { display: none !important; }
         @media (orientation: portrait) {
             #ai-tutor-modal #ai-enwin-hbtn { display: none !important; }
             #ai-tutor-modal #ai-close-btn { width: 38px; min-width: 38px; height: 38px; min-height: 38px; padding: 0; border-radius: 12px; background: #f3f4f6; color: #4b5563; font-size: 20px; font-weight: 900; }
@@ -14252,7 +14273,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
                     <p id="ai-live-status" class="text-xs text-gray-500 truncate">Chat hoặc nói trực tiếp (Gemini)</p>
                 </div>
                 <div class="flex items-center gap-1 shrink-0">
-                    <button id="ai-enwin-hbtn" type="button" onclick="aiHdrSecBtn()" class="text-xs font-extrabold px-2.5 py-1.5 rounded-full border border-indigo-300 bg-white text-indigo-700 shrink-0 mr-1" title="Ẩn/hiện cửa sổ trắc nghiệm"><span id="ai-enwin-lbl">❓ Trắc nghiệm</span></button><button id="ai-dict-hbtn" type="button" onclick="openRhmDict()" class="ai-hb2 mr-1" title="Mở Từ điển RHM">📖<span class="hb-t"> Từ điển</span></button><button id="ai-note-hbtn" type="button" onclick="openRhmNote()" class="ai-hb2 mr-1" title="Mở Sổ ghi chú">📒<span class="hb-t"> Ghi chú</span></button>
+                    <button id="ai-enwin-hbtn" type="button" onclick="aiHdrSecBtn()" class="ai-enwin-off text-xs font-extrabold px-2.5 py-1.5 rounded-full border border-indigo-300 bg-white text-indigo-700 shrink-0 mr-1" title="Ẩn/hiện cửa sổ trắc nghiệm"><span id="ai-enwin-lbl">❓ Trắc nghiệm</span></button><button id="ai-dict-hbtn" type="button" onclick="openRhmDict()" class="ai-hb2 mr-1" title="Mở Từ điển RHM">📖<span class="hb-t"> Từ điển</span></button><button id="ai-note-hbtn" type="button" onclick="openRhmNote()" class="ai-hb2 mr-1" title="Mở Sổ ghi chú">📒<span class="hb-t"> Ghi chú</span></button>
                     <div id="ai-lang-box" class="flex items-center rounded-full border border-indigo-300 overflow-hidden shrink-0 mr-1" title="Ngôn ngữ chat (chọn cả hai = song ngữ)">
                         <button id="ai-lang-vie" type="button" onclick="aiLangToggle('vi')" class="text-xs font-extrabold px-2.5 py-1.5 bg-indigo-600 text-white">Vie</button>
                         <button id="ai-lang-eng" type="button" onclick="aiLangToggle('en')" class="text-xs font-extrabold px-2.5 py-1.5 bg-white text-gray-500">Eng</button>
@@ -14756,7 +14777,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     function aiHdrBtnPaint() {   // hiện nút cửa sổ phụ "❓ Trắc nghiệm" cho cả chế độ sách (book) và video
         const l = document.getElementById('ai-enwin-lbl'), b = document.getElementById('ai-enwin-hbtn'); if (!l || !b) return;
         const show = aiState.mode === 'book' || aiState.mode === 'video';
-        l.textContent = '❓ Trắc nghiệm'; b.title = 'Ẩn/hiện cửa sổ trắc nghiệm'; b.style.display = show ? '' : 'none';
+        l.textContent = '❓ Trắc nghiệm'; b.title = 'Ẩn/hiện cửa sổ trắc nghiệm'; b.style.display = show ? '' : 'none'; b.classList.toggle('ai-enwin-off', !show);
     }
     function aiHdrSecBtn() {
         if (aiState.mode === 'book' || aiState.mode === 'video') { bkQzToggle(); return; }
@@ -17995,7 +18016,7 @@ window.PGR = (function () {
     /* ---- mở video: mobile → toàn màn hình, PC → chế độ rạp chiếu phim ---- */
     window.ytAutoEnter = function (pid) {
         var d = activeYtPlayers[pid]; if (!d || d.autoDone) return; d.autoDone = true;
-        if (window.isIOSDevice && window.isIOSDevice()) return;   // iOS/iPadOS: không tự bung, người dùng tự bật rạp/toàn màn hình
+        if ((window.isIOSDevice && window.isIOSDevice()) || (typeof ytIsApple === 'function' && ytIsApple())) return;   // Apple (iPhone/iPad/Mac): không tự bung, người dùng tự bấm Toàn màn hình (Mac: hoặc Rạp)
         var w = $('custom-wrapper-' + pid); if (!w) return;
         var isFs = function () { return !!(document.fullscreenElement || document.webkitFullscreenElement); };
         if (d.isTheater || isFs()) return;
@@ -28052,6 +28073,12 @@ body {
         }
         S.push({ sel: '#question-panel-wrapper', t: '📖 Khung câu hỏi',
             d: 'Nội dung câu hỏi hiện ở đây (bên trái trên máy tính, phía trên trên điện thoại). Câu dài thì cuộn trong khung; nếu có ảnh minh họa, bấm vào ảnh để phóng to.' });
+        S.push({ demo: true, sel: function () { return demoQzBar(); }, t: '✨ Bôi đen chữ để Highlight',
+            d: 'Bôi đen (kéo chọn) một đoạn chữ trong câu hỏi hoặc trong các đáp án, một thanh nút nhỏ sẽ nổi lên ngay trên đoạn đó. Đây là thanh mẫu để minh họa — mình giải thích từng nút ngay sau đây.' });
+        S.push({ demo: true, sel: function () { return demoQzBtn('b-hl'); }, t: '🖍 Highlight',
+            d: 'Tô sáng đoạn chữ vừa bôi đen để dễ nhìn lại khi ôn. Phần tô sáng được lưu theo từng câu, lần sau mở lại câu này vẫn còn.' });
+        S.push({ demo: true, sel: function () { return demoQzBtn('b-un'); }, t: '🧽 Xóa highlight',
+            d: 'Chỉ hiện khi vùng bạn chọn (hoặc đoạn chữ bạn chạm vào) đang có highlight; bấm để bỏ tô sáng phần đó. Phần highlight nằm ngoài vùng chọn vẫn được giữ nguyên.' });
         S.push({ sel: '#options-container', t: '✅ Các đáp án',
             d: 'Bấm một đáp án để chọn. Kết quả hiện ngay: đáp án đúng tô xanh, nếu chọn sai thì đáp án bạn chọn tô đỏ; sau đó các đáp án khóa lại.' });
         S.push({ sel: '#feedback-box', pre: qscFb(true), wait: 150, t: '💡 Khung giải thích',
@@ -28358,6 +28385,54 @@ body {
             try { autoWinTour('video'); } catch (er) {}
         }, 1200);
     }, true);
+    /* ---- giao diện làm bài: lần đầu bấm mỗi nút [⚠️ Cập nhật TLTK / Góp ý / Báo lỗi · 📋 Danh sách câu · 🤖 Hỏi AI] → giới thiệu ngay cửa sổ vừa mở ---- */
+    function qbQ(q) { return function () { return document.querySelector(q); }; }
+    function qbParent(q) { return function () { var e = document.querySelector(q); return e ? (e.closest('div') || e) : null; }; }
+    var QBTNS = [
+        { k: 'report', q: '#report-error-btn', wait: 450, cond: function () { return shown('report-error-modal'); }, steps: [
+            { sel: qbQ('#report-error-modal h3'), t: '⚠️ Cập Nhật TLTK / Góp Ý / Báo Lỗi', d: 'Cửa sổ gửi phản hồi về ĐÚNG câu hỏi đang làm tới người làm app. Cả ba phần bên dưới đều là tuỳ chọn — bạn chỉ cần điền phần mình muốn.' },
+            { sel: qbParent('#report-reflink'), t: '📎 Cập nhật tài liệu tham khảo', d: 'Có tài liệu hay hơn để đối chiếu đáp án? Dán link (Google Drive, PDF, bài viết…) vào đây.' },
+            { sel: qbParent('#report-suggestion'), t: '💡 Góp ý câu hỏi', d: 'Viết góp ý của bạn về câu hỏi: đề nghị sửa đáp án, bổ sung giải thích, diễn đạt lại cho rõ…' },
+            { sel: qbParent('#report-position-group'), t: '⚠️ Báo lỗi — vị trí lỗi', d: 'Chọn chỗ bị lỗi (câu hỏi, đáp án nào, phần giải thích…). Bấm lại một lựa chọn để bỏ chọn.' },
+            { sel: qbParent('#report-tag-group'), t: '🏷 Chọn nhanh loại lỗi', d: 'Chọn nhanh loại lỗi gặp phải (sai đáp án, sai chính tả, thiếu ảnh…) cho người duyệt dễ xử lý.' },
+            { sel: qbParent('#report-description'), t: '📝 Mô tả chi tiết', d: 'Mô tả thêm về lỗi, có thể dán kèm link ảnh chụp màn hình (Google Drive, Imgur…) để người duyệt kiểm tra nhanh hơn.' },
+            { sel: qbQ('#report-error-modal button[onclick="submitReportError()"]'), t: '📧 Gửi', d: 'Gửi phản hồi đi. Muốn thôi thì bấm Hủy (hoặc ✕ ở góc trên) để đóng cửa sổ và quay lại làm bài.' }] },
+        { k: 'navigator', q: 'button[onclick="openQuestionNavigatorModal()"]', wait: 450, cond: function () { return shown('navigator-modal'); }, steps: [
+            { sel: qbQ('#navigator-modal h3'), t: '📋 Danh Sách Câu Hỏi', d: 'Bảng tất cả các câu của bài đang làm, để bạn nhìn tổng thể tiến độ và nhảy nhanh tới câu bất kỳ.' },
+            { sel: qbQ('#navigator-modal .bg-gray-50'), t: '🎨 Chú thích màu', d: 'Xanh lá: đã đúng · Đỏ: đã sai · Vàng: bỏ qua · Xám: chưa làm · 🚩: câu bạn đã đánh cờ để quay lại sau.' },
+            { sel: qbQ('#navigator-grid'), t: '🔢 Các ô câu hỏi', d: 'Mỗi ô là một câu; ô có viền xanh là câu hiện tại. Bấm một ô để nhảy thẳng tới câu đó.' },
+            { sel: qbQ('#navigator-modal button[onclick="closeQuestionNavigatorModal()"].bg-blue-600'), t: '✕ Đóng', d: 'Đóng bảng và quay lại làm bài.' }] },
+        { k: 'askai', q: '#ask-ai-btn', wait: 1000, cond: function () { return aiVisible() && !aiVidMode() && (typeof aiState === 'undefined' || aiState.mode === 'quiz'); }, steps: [
+            { sel: qbQ('#ai-title'), t: '🤖 Hỏi AI về câu này', d: 'Khung chat với gia sư AI về đúng câu bạn đang làm: giải thích vì sao đáp án đúng, phân tích từng đáp án sai, mẹo nhớ, học có hướng dẫn…' },
+            { sel: qbQ('#ai-lang-box'), t: '🌐 Vie / Eng', d: 'Chọn ngôn ngữ trả lời: Vie, Eng, hoặc bật cả hai để xem song ngữ.' },
+            { sel: qbQ('#ai-settings-btn'), t: '⚙️ Cài đặt AI', d: 'Chỉnh cỡ chữ, giọng đọc, độ dài câu trả lời, mức suy luận và khóa API của khung chat. Lần đầu bấm vào, mình sẽ giới thiệu kỹ hơn.' },
+            { sel: qbQ('#ai-quickrow'), t: '⚡ Câu hỏi nhanh', d: 'Các nút gợi ý hỏi nhanh (giải thích đáp án đúng, phân tích đáp án sai, mẹo nhớ…). Bấm một nút là AI trả lời luôn, khỏi gõ.' },
+            { sel: qbQ('#ai-input'), t: '⌨️ Ô nhập câu hỏi', d: 'Gõ câu hỏi riêng của bạn về câu đang làm rồi bấm ➤ để gửi.' },
+            { sel: qbQ('#ai-send-btn'), t: '➤ Gửi', d: 'Gửi câu hỏi cho AI.' },
+            { sel: qbQ('#ai-close-btn'), t: '✕ Đóng khung chat', d: 'Đóng khung chat và quay lại câu hỏi. Mở lại bằng nút 🤖 Hỏi AI bất cứ lúc nào.' }] }
+    ];
+    function qbHandle(e) {
+        if (!fabOn || tour || Date.now() < suppressUntil) return;
+        var t = e.target; if (!t || !t.closest || t.closest('#hf-spot-wrap')) return;
+        if (!shown('quiz-screen')) return;
+        for (var i = 0; i < QBTNS.length; i++) {
+            var v = QBTNS[i], el = t.closest(v.q);
+            if (!el || !el.closest('#quiz-screen')) continue;
+            var key = 'qb-' + v.k;
+            if (winSeen(key)) return;
+            setTimeout(function (vv, kk) {
+                return function () {
+                    if (tour || winSeen(kk) || !shown('quiz-screen') || (vv.cond && !vv.cond())) return;
+                    winMark(kk);
+                    var steps = vv.steps.filter(function (st) { return true; });
+                    beginTour('steps', steps);
+                    try { if (qscIsExam() && tour) qscPause(tour); } catch (er) {}
+                };
+            }(v, key), v.wait);
+            return;
+        }
+    }
+    document.addEventListener('click', qbHandle, true);
     function tourHomeOk() {
         if (!shown('home-screen')) return false;
         for (var k in MODAL_NAMES) { if (shown(k)) return false; }
@@ -28538,6 +28613,21 @@ body {
         return b;
     }
     function demoBtn(cls) { var b = demoBar(); return b ? b.querySelector('.' + cls) : null; }
+    /* thanh nút mẫu của giao diện làm bài: chỉ có 🖍 Highlight / 🧽 Xóa highlight */
+    function demoQzBar() {
+        var b = $id('hf-demo-selbar');
+        if (b && !b.querySelector('.b-tr')) return b;
+        if (b && b.parentNode) b.parentNode.removeChild(b);
+        b = document.createElement('div'); b.id = 'hf-demo-selbar';
+        b.innerHTML = '<button type="button" class="b-hl">🖍 Highlight</button><button type="button" class="b-un">🧽 Xóa highlight</button>';
+        document.body.appendChild(b);
+        var q = $id('question-text') || $id('question-panel-wrapper'), r = q ? q.getBoundingClientRect() : { left: 0, top: 0, width: window.innerWidth, height: window.innerHeight };
+        var bw = b.offsetWidth || 220, bh = b.offsetHeight || 34;
+        b.style.left = Math.max(8, Math.min(window.innerWidth - bw - 8, r.left + r.width / 2 - bw / 2)) + 'px';
+        b.style.top = Math.max(8, Math.min(window.innerHeight - bh - 8, r.top + Math.min(r.height * 0.35, 120))) + 'px';
+        return b;
+    }
+    function demoQzBtn(cls) { var b = demoQzBar(); return b ? b.querySelector('.' + cls) : null; }
     function removeDemoBar() { var b = $id('hf-demo-selbar'); if (b && b.parentNode) b.parentNode.removeChild(b); }
     window.homeFabClose = function () { closePop(); };
     window.homeFabQuickKey = function () { closePop(); try { window.hsOpenKeys(); } catch (e) { toast('Mở ⚙️ Cài đặt → 🔑 Cài đặt khóa API'); } };
