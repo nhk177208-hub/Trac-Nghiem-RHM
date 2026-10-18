@@ -27374,7 +27374,7 @@ body {
             '- ⚙️ Cài Đặt gồm: 🏠 Trợ lý AI (bật/tắt trợ lý này), 💡 Đề xuất câu hỏi, 📩 Góp ý/Liên hệ, 🔑 Cài đặt khóa API, 🔄 Nhập/Xuất Tiến Độ, ⛶ Toàn màn hình, 📲 Thêm vào MH chính.',
             '',
             'KHI LÀM BÀI TRẮC NGHIỆM: chọn đáp án, đáp án đúng/sai được tô màu, đọc phần giải thích, đánh dấu sao, mở danh sách câu để điều hướng, báo lỗi câu hỏi, và bấm 🤖 Hỏi AI giải thích câu này.',
-            'KHI XEM VIDEO BÀI GIẢNG: có thanh điều khiển riêng (tua, tốc độ, chất lượng, phụ đề .srt, lồng tiếng, rạp chiếu phim / toàn màn hình) và nút 🤖 Hỏi AI về video.',
+            'KHI XEM VIDEO BÀI GIẢNG (lần đầu mở video và lần đầu bấm mỗi nút điều khiển đều có phần giới thiệu; bấm ℹ️ khi đang xem video để xem lại): có thanh điều khiển riêng (tua, tốc độ, chất lượng, phụ đề .srt, lồng tiếng, rạp chiếu phim / toàn màn hình) và nút 🤖 Hỏi AI về video.',
             'KHI ĐỌC SÁCH: xem 2 trang như sách thật, phóng to, dịch, tra Từ điển, và mở 🤖 AI Chat để hỏi về sách.',
             '',
             'TÍNH NĂNG AI ("Hỏi AI") cần khóa API: mặc định Gemini (miễn phí), có thể thêm OpenRouter để dự phòng — nhập ở ⚙️ Cài đặt → 🔑 Cài đặt khóa API.',
@@ -27872,6 +27872,21 @@ body {
         { ctx: 'course', sel: '#lessons-container', t: '🎬 Danh sách video bài giảng', d: 'Mỗi dòng là một bài giảng. Bấm vào để xem bằng trình phát riêng của app, có chế độ rạp chiếu phim và toàn màn hình. Con số góc phải là số bài học.' },
         { ctx: 'course', sel: '#monhoc-detail-modal button[onclick="closeMonHocDetailModal()"]', t: '✕ Đóng', d: 'Bấm để đóng cửa sổ khóa học và quay lại.' },
 
+        { ctx: 'video', sel: vs('.ytb-back'), t: '⬅ Quay lại danh sách', d: 'Đóng video và quay về danh sách bài giảng.' },
+        { ctx: 'video', sel: vs('.yt-seek'), t: '⏱ Thanh tua', d: 'Kéo hoặc bấm vào thanh để tua tới đoạn bất kỳ của video. Bên cạnh là thời gian hiện tại / tổng thời lượng.' },
+        { ctx: 'video', sel: vs('button[onclick^="toggleYtPlay"]'), t: '▶ Phát / Tạm dừng', d: 'Bấm để phát hoặc dừng video. Phím tắt trên máy tính: Space.' },
+        { ctx: 'video', sel: vs('button[onclick^="ytChapToggle"]'), t: '🧠 Sơ đồ tư duy (AI)', d: 'AI đọc bài giảng và lập mục lục / sơ đồ tư duy theo từng phân mục (cần khóa API AI), giúp bạn xem tổng quan và nhảy nhanh tới phần mình cần.' },
+        { ctx: 'video', sel: vs('button[onclick^="ytFocusDialog"]'), t: '🎯 Chế độ tập trung', d: 'Khi bật, AI chọn các ý quan trọng; qua mỗi ý video sẽ dừng và hiện một câu trắc nghiệm 4 đáp án. Trả lời sai thì video tua lại đầu ý đó để bạn nghe lại. Bấm nút để xem giải thích và bật / tắt.' },
+        { ctx: 'video', sel: vs('button[onclick^="openVideoAi"]'), t: '🤖 Hỏi AI về video', d: 'Mở khung chat với gia sư AI đã xem video: lập mục lục theo mốc thời gian, giải thích đoạn đang xem, hỏi về hình ảnh đang hiện, làm trắc nghiệm hoặc học có hướng dẫn.' },
+        { ctx: 'video', sel: vs('select.yt-quality'), t: '🖥 Chất lượng hình', d: 'Chọn độ phân giải của video. Chất lượng cao cho hình nét hơn nhưng tốn mạng hơn.' },
+        { ctx: 'video', sel: vs('select[title="Tốc độ phát"]'), t: '⚡ Tốc độ phát', d: 'Xem nhanh hơn hoặc chậm hơn tốc độ bình thường.' },
+        { ctx: 'video', sel: vs('button[onclick^="toggleYtCaptions"]'), t: '💬 Bật / Tắt phụ đề', d: 'Hiện hoặc ẩn phụ đề trên video (phụ đề .srt, tiếng Việt và / hoặc tiếng Anh).' },
+        { ctx: 'video', sel: vs('button[onclick*="toggleSubPanel"][onclick*="true"]'), t: '⚙ Cài đặt phụ đề & lồng tiếng', d: 'Mở bảng chỉnh cỡ chữ, độ rộng, độ cao, ngôn ngữ phụ đề, cũng như giọng, độ trầm, tốc độ của lồng tiếng.' },
+        { ctx: 'video', sel: vs('button[onclick^="toggleNarration"]'), t: '🗣 Lồng tiếng', d: 'Bật / tắt lồng tiếng: máy đọc phụ đề tiếng Việt bằng giọng Việt trong lúc video chạy.' },
+        { ctx: 'video', sel: vs('.yt-volbox'), t: '🔊 Âm lượng', d: 'Bấm biểu tượng loa để tắt / bật tiếng, kéo thanh âm lượng để chỉnh (có thể tăng tới 200%).' },
+        { ctx: 'video', sel: vs('button[onclick^="toggleYtTheaterMode"]'), t: '🎬 Rạp chiếu phim', d: 'Phóng video lớn trong app, nền tối để tập trung. Bấm lần nữa để thoát.' },
+        { ctx: 'video', sel: vs('button[onclick^="toggleYtFullscreen"]'), t: '⛶ Toàn màn hình', d: 'Xem video toàn màn hình. Bấm lại hoặc thoát toàn màn hình để quay về.' },
+
         { ctx: 'quick', sel: '#mock-exam-modal h3', t: '⚡ Cửa sổ Ôn Tập Nhanh', d: 'Tạo một lượt ôn gọn: chọn chủ đề, chọn số câu rồi bắt đầu. Muốn xem lại phần này: bấm Trợ lý AI → ℹ️ khi cửa sổ đang mở.' },
         { ctx: 'quick', sel: function () { var b = document.querySelector('#mock-exam-modal button[onclick="mockTopicSelectAll(true)"]'); return b && b.parentElement.parentElement; }, t: '1️⃣ Chọn chủ đề', d: 'Bấm các ô số (1–36) bên dưới để chọn từng chủ đề. Dùng Chọn tất cả hoặc Bỏ chọn tất cả để chọn nhanh.' },
         { ctx: 'quick', sel: '#mock-topic-grid', t: '🔢 Các ô chủ đề', d: 'Ô sáng là chủ đề đang được chọn. Dòng bên dưới cho biết tổng số câu có sẵn của các chủ đề bạn chọn.' },
@@ -27910,6 +27925,7 @@ body {
         { ctx: 'section', key: 'da-chan', t: '🚫 Đã chặn', d: 'Những câu hỏi bạn đã chặn nên sẽ không xuất hiện khi làm bài. Vào đây nếu muốn bỏ chặn câu nào đó.' },
         { ctx: 'section', sel: '#topic-grid', t: '🦷 36 Chủ Đề Ôn Tập', d: 'Mỗi ô là một chủ đề Răng Hàm Mặt. Bấm vào một ô để mở chủ đề đó; lần đầu mình sẽ hướng dẫn ngay trong cửa sổ chủ đề (chỉ hướng dẫn một chủ đề mẫu, các chủ đề còn lại dùng giống hệt).' }
     ];
+    TOUR.forEach(function (st) { if (st.ctx === 'video') st.vid = true; });
     var CTXS = {
         chuyende: {
             wait: 360,
@@ -27936,6 +27952,75 @@ body {
         note: { wait: 750, open: function () { window.openRhmNote(); }, close: function () { window.closeRhmNote(); } },
         settings: { wait: 450, open: function () { window.openHomeSettings(); }, close: function () { window.closeHomeSettings(); } }
     };
+    /* ---------------- giao diện xem video ---------------- */
+    function vidPid() {
+        try {
+            var ws = document.querySelectorAll('.custom-yt-wrapper');
+            for (var i = 0; i < ws.length; i++) {
+                var w = ws[i]; if (!isShown(w)) continue;
+                var id = (w.id || '').replace('custom-wrapper-', '');
+                if (id && typeof activeYtPlayers !== 'undefined' && activeYtPlayers && activeYtPlayers[id]) return id;
+            }
+        } catch (e) {}
+        return null;
+    }
+    function vidQ(sel) { var p = vidPid(), w = p ? $id('custom-wrapper-' + p) : null; return w ? w.querySelector(sel) : null; }
+    function vidKeep() { var p = vidPid(); if (p) { try { showControlsDirectly(p); } catch (e) {} try { resetInactivityTimer(p); } catch (e) {} } }
+    function vs(sel) { return function () { vidKeep(); return vidQ(sel); }; }
+    function winShown(c) { return c === 'video' ? !!vidPid() : shown(WIN_ID[c]); }
+
+    /* ---- bấm vào một nút trong giao diện video: lần đầu mỗi nút hiện giới thiệu ngay tại chỗ ---- */
+    var VBTNS = [
+        { k: 'chap', ev: 'click', q: 'button[onclick^="ytChapToggle"]', wait: 1100, steps: [
+            { vid: true, sel: vs('button[onclick^="ytChapToggle"]'), t: '🧠 Sơ đồ tư duy (AI)', d: 'AI lập mục lục / sơ đồ tư duy cho bài giảng này (cần khóa API AI và có thể mất vài giây). Dùng để xem tổng quan và nhảy nhanh tới phần cần xem. Bấm nút lần nữa để đóng.' }] },
+        { k: 'focus', ev: 'click', q: 'button[onclick^="ytFocusDialog"]', wait: 500, steps: [
+            { vid: true, sel: vs('.yt-focusdlg .fd'), t: '🎯 Chế độ tập trung', d: 'Đây là cửa sổ giải thích và bật / tắt chế độ tập trung: AI chọn ý quan trọng, qua mỗi ý video dừng và hiện câu trắc nghiệm; trả lời sai thì tua lại ý đó. Bạn cũng chọn được mức số câu hỏi tối đa (Ít / Vừa / Cao) ở đây.' }] },
+        { k: 'ai', ev: 'click', q: 'button[onclick^="openVideoAi"]', wait: 900, steps: [
+            { vid: true, sel: function () { var m = $id('ai-tutor-modal'); return (m && isShown(m)) ? ($id('ai-title') || m) : null; }, t: '🤖 Hỏi AI về video', d: 'Khung chat với gia sư AI về video đang xem. Dùng các nút gợi ý để lập mục lục theo thời gian, giải thích đoạn đang xem, hỏi về hình ảnh đang hiện, làm trắc nghiệm hoặc học có hướng dẫn; hoặc tự gõ câu hỏi.' }] },
+        { k: 'quality', ev: 'change', q: 'select.yt-quality', wait: 500, steps: [
+            { vid: true, sel: vs('select.yt-quality'), t: '🖥 Chất lượng hình', d: 'Bạn vừa đổi chất lượng video. Chất lượng cao cho hình nét hơn nhưng tốn mạng hơn; mạng yếu thì chọn thấp hơn cho đỡ giật.' }] },
+        { k: 'speed', ev: 'change', q: 'select[title="Tốc độ phát"]', wait: 500, steps: [
+            { vid: true, sel: vs('select[title="Tốc độ phát"]'), t: '⚡ Tốc độ phát', d: 'Bạn vừa đổi tốc độ phát. Chọn lại 1x để xem với tốc độ bình thường.' }] },
+        { k: 'cc', ev: 'click', q: 'button[onclick^="toggleYtCaptions"]', wait: 500, steps: [
+            { vid: true, sel: vs('button[onclick^="toggleYtCaptions"]'), t: '💬 Phụ đề', d: 'Nút này bật / tắt phụ đề trên video. Muốn chỉnh cỡ chữ, vị trí hay ngôn ngữ phụ đề, bấm nút ⚙ bên cạnh.' }] },
+        { k: 'sub', ev: 'click', q: 'button[onclick*="toggleSubPanel"][onclick*="true"]', wait: 600, steps: [
+            { vid: true, sel: vs('.custom-yt-subpanel'), t: '⚙ Cài đặt phụ đề & lồng tiếng', d: 'Bảng này gồm hai cột: bên trái chỉnh phụ đề, bên phải chỉnh lồng tiếng. Mình giới thiệu từng cột nhé.' },
+            { vid: true, sel: vs('.custom-yt-subpanel .sp-grid > .sp-col:nth-child(1)'), t: '💬 Cột Phụ đề', d: 'Chỉnh cỡ chữ, độ rộng, độ cao của phụ đề; chọn hiện tiếng Việt và / hoặc tiếng Anh; chọn tự ngắt 1 hay 2 dòng; bật tự gom sub. Nút Mặc định trả mọi thứ về ban đầu.' },
+            { vid: true, sel: vs('.custom-yt-subpanel .sp-grid > .sp-col:nth-child(2)'), t: '🗣 Cột Lồng tiếng', d: 'Chọn giọng đọc, độ trầm, tốc độ, âm lượng âm gốc và cách đồng bộ với video. Bấm ❓ Hướng dẫn giọng đọc để xem chi tiết, hoặc Nghe thử để kiểm tra giọng.' },
+            { vid: true, sel: vs('.custom-yt-subpanel .sp-done'), t: '✅ Xong', d: 'Bấm để đóng bảng cài đặt và quay lại xem video.' }] },
+        { k: 'narr', ev: 'click', q: 'button[onclick^="toggleNarration"]', wait: 500, steps: [
+            { vid: true, sel: vs('button[onclick^="toggleNarration"]'), t: '🗣 Lồng tiếng', d: 'Nút này bật / tắt lồng tiếng: máy đọc phụ đề tiếng Việt bằng giọng Việt khi video chạy. Chỉnh giọng và tốc độ ở nút ⚙ Cài đặt phụ đề & lồng tiếng.' }] },
+        { k: 'vol', ev: 'click', q: 'button[onclick^="ytVolBtn"]', wait: 500, steps: [
+            { vid: true, sel: vs('.yt-volbox'), t: '🔊 Âm lượng', d: 'Bấm biểu tượng loa để tắt / bật tiếng; kéo thanh âm lượng để chỉnh, có thể tăng tới 200%.' }] },
+        { k: 'theater', ev: 'click', q: 'button[onclick^="toggleYtTheaterMode"]', wait: 900, steps: [
+            { vid: true, sel: vs('button[onclick^="toggleYtTheaterMode"]'), t: '🎬 Rạp chiếu phim', d: 'Chế độ phóng video lớn trong app với nền tối để tập trung. Bấm lại nút này để thoát.' }] },
+        { k: 'fs', ev: 'click', q: 'button[onclick^="toggleYtFullscreen"]', wait: 1000, steps: [
+            { vid: true, sel: vs('button[onclick^="toggleYtFullscreen"]'), t: '⛶ Toàn màn hình', d: 'Đang xem toàn màn hình. Bấm lại nút này (hoặc nút thoát của trình duyệt) để quay về.' }] }
+    ];
+    function vbHandle(e) {
+        if (!fabOn || tour || Date.now() < suppressUntil) return;
+        var t = e.target; if (!t || !t.closest || t.closest('#hf-spot-wrap')) return;
+        if (!t.closest('.custom-yt-controls')) return;
+        var el = t.closest('button,select'); if (!el) return;
+        for (var i = 0; i < VBTNS.length; i++) {
+            var v = VBTNS[i];
+            if (v.ev !== e.type || !el.matches(v.q)) continue;
+            var key = 'vb-' + v.k;
+            if (winSeen(key)) return;
+            winMark(key);
+            setTimeout(function (vv) { return function () { if (!tour && vidPid()) beginTour('steps', vv.steps); }; }(v), v.wait);
+            return;
+        }
+    }
+    document.addEventListener('click', vbHandle, true);
+    document.addEventListener('change', vbHandle, true);
+    /* mở video lần đầu → tự giới thiệu các nút của giao diện xem video */
+    var lastVid = null;
+    setInterval(function () {
+        var p = vidPid();
+        if (p && !lastVid) { try { autoWinTour('video'); } catch (e) {} }
+        lastVid = p;
+    }, 1000);
     function tourHomeOk() {
         if (!shown('home-screen')) return false;
         for (var k in MODAL_NAMES) { if (shown(k)) return false; }
@@ -27948,12 +28033,13 @@ body {
         } catch (e) { return null; }
     }
     /* thứ tự = ưu tiên (cửa sổ nằm trên cùng xếp trước) */
-    var WIN_CTX = ['viewer', 'shelf', 'course', 'subject', 'quick', 'deep', 'mock', 'saved', 'blocked', 'topic', 'collection', 'dict', 'note', 'settings'];
-    var WIN_ID = { monhoc: 'monhoc-section-container', viewer: 'book-viewer', shelf: 'bookshelf-modal', course: 'monhoc-detail-modal', subject: 'subject-choice-modal', quick: 'mock-exam-modal', deep: 'deep-modal', mock: 'exam-modal', saved: 'bookmarked-modal', blocked: 'blocked-modal', topic: 'topic-modal', section: 'chuyende-section-container', collection: 'collection-modal', dict: 'dict-modal', note: 'note-modal', settings: 'home-settings-modal' };
-    function activeWin() { for (var i = 0; i < WIN_CTX.length; i++) { if (shown(WIN_ID[WIN_CTX[i]])) return WIN_CTX[i]; } return null; }
+    var WIN_CTX = ['video', 'viewer', 'shelf', 'course', 'subject', 'quick', 'deep', 'mock', 'saved', 'blocked', 'topic', 'collection', 'dict', 'note', 'settings'];
+    var WIN_ID = { video: '', monhoc: 'monhoc-section-container', viewer: 'book-viewer', shelf: 'bookshelf-modal', course: 'monhoc-detail-modal', subject: 'subject-choice-modal', quick: 'mock-exam-modal', deep: 'deep-modal', mock: 'exam-modal', saved: 'bookmarked-modal', blocked: 'blocked-modal', topic: 'topic-modal', section: 'chuyende-section-container', collection: 'collection-modal', dict: 'dict-modal', note: 'note-modal', settings: 'home-settings-modal' };
+    function activeWin() { for (var i = 0; i < WIN_CTX.length; i++) { if (winShown(WIN_CTX[i])) return WIN_CTX[i]; } return null; }
     function beginTour(mode, c) {
         closePop(); closeWheel(true); clearSpot(true);
         var steps = TOUR.filter(function (st) { return mode === 'win' ? st.ctx === c : mode === 'multi' ? (c || []).indexOf(st.ctx) >= 0 : !st.ctx; });
+        if (mode === 'steps') steps = c || [];
         var box = $id('chuyende-section-container');
         tour = { i: -1, tok: 0, busy: false, ctx: null, opened: false, mode: mode, steps: steps, wasOpen: !!(box && !box.classList.contains('hidden')) };
         cancelSink(); unsinkFab();
@@ -27980,10 +28066,10 @@ body {
     function autoWinTour(c) {
         if (!fabOn || tour || winSeen(c) || Date.now() < suppressUntil) return;
         setTimeout(function () {
-            if (tour || winSeen(c) || !shown(WIN_ID[c])) return;
+            if (tour || winSeen(c) || !winShown(c)) return;
             winMark(c);
             if (c === 'monhoc') beginTour('multi', ['monhoc', 'subject']); else beginTour('win', c);
-        }, 800);
+        }, c === 'video' ? 1500 : 800);
     }
     function hookOpen(fn, c) {
         var o = window[fn]; if (typeof o !== 'function' || o.__hfTour) return;
@@ -28202,7 +28288,7 @@ body {
             tip.className += ' hf-tour-tip' + (st.big ? ' hf-tour-big' : '');
             if (st.big) box.className += ' big';
             var tt = document.createElement('div'); tt.className = 'tt'; tt.textContent = st.t;
-            var td = document.createElement('div'); td.className = 'td'; td.textContent = st.d + ((tour.i === 0 && !st.big) ? '\n\n👆 Chạm vào màn hình để sang bước tiếp theo. Quay lại: bấm mũi tên ‹ hoặc vuốt sang trái.' : '');
+            var td = document.createElement('div'); td.className = 'td'; td.textContent = st.d + ((tour.i === 0 && !st.big) ? '\n\n👆 Chạm vào màn hình để sang bước tiếp theo. Vuốt sang trái để tiếp, vuốt sang phải hoặc bấm mũi tên ‹ để quay lại.' : '');
             tip.appendChild(tt); tip.appendChild(td);
             bar = document.createElement('div'); bar.className = 'hf-tour-bar';
             var cn = document.createElement('span'); cn.className = 'cnt'; cn.textContent = (tour.i + 1) + ' / ' + tour.steps.length;
@@ -28216,7 +28302,7 @@ body {
             var nx = document.createElement('button'); nx.type = 'button'; nx.className = 'hf-tb-arrow next'; nx.innerHTML = AR_R; nx.setAttribute('aria-label', 'Tiếp theo'); nx.title = 'Tiếp theo';
             nx.onclick = function (ev) { try { ev.stopPropagation(); } catch (e) {} tourGo(1); };
             bar.appendChild(cn); bar.appendChild(sk); bar.appendChild(pv); bar.appendChild(nx);
-            /* chạm bất kỳ đâu (cả nửa trái) = tiếp theo; quay lại chỉ bằng nút mũi tên ‹ hoặc vuốt sang trái (vuốt phải = tiếp) */
+            /* chạm bất kỳ đâu (cả nửa trái) = tiếp theo; vuốt trái = tiếp, vuốt phải = quay lại */
             hit.className += ' tour';
             var gx = null, gy = null;
             hit.addEventListener('pointerdown', function (e) { gx = e.clientX; gy = e.clientY; try { hit.setPointerCapture(e.pointerId); } catch (er) {} });
@@ -28224,7 +28310,7 @@ body {
             hit.addEventListener('pointerup', function (e) {
                 if (gx == null) return;
                 var dx = e.clientX - gx, dy = e.clientY - gy; gx = null;
-                if (Math.abs(dx) >= 40 && Math.abs(dx) > Math.abs(dy) * 1.2) tourGo(dx < 0 ? -1 : 1);
+                if (Math.abs(dx) >= 40 && Math.abs(dx) > Math.abs(dy) * 1.2) tourGo(dx < 0 ? 1 : -1);
                 else if (Math.abs(dx) < 12 && Math.abs(dy) < 12) tourGo(1);
             });
         } else {
@@ -28234,9 +28320,10 @@ body {
             tip.appendChild(tx); tip.appendChild(x);
         }
         wrap.appendChild(hit); wrap.appendChild(box); wrap.appendChild(tip); if (bar) wrap.appendChild(bar);
-        document.body.appendChild(wrap);
+        var fsEl = document.fullscreenElement || document.webkitFullscreenElement;
+        (fsEl && fsEl.appendChild ? fsEl : document.body).appendChild(wrap);
         new MutationObserver(function () { if (wrap.hasAttribute('inert')) wrap.removeAttribute('inert'); }).observe(wrap, { attributes: true, attributeFilter: ['inert'] });
-        spot = { wrap: wrap, box: box, tip: tip, node: node, bar: bar, big: !!(st && st.big) };
+        spot = { wrap: wrap, box: box, tip: tip, node: node, bar: bar, big: !!(st && st.big), keep: !!(st && st.vid) };
         placeSpot();
         spot._onScroll = placeSpot; spot._onResize = placeSpot;
         window.addEventListener('scroll', placeSpot, true);
@@ -28245,6 +28332,7 @@ body {
     }
     function placeSpot() {
         if (!spot) return;
+        if (spot.keep) vidKeep();
         var n = spot.node;
         if (!document.body.contains(n) || !isShown(n)) { if (tour) tourGo(1); else clearSpot(); return; }
         var r = n.getBoundingClientRect();
