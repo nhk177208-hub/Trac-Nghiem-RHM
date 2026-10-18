@@ -1480,20 +1480,20 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
                     <span id="hope-star-count-badge" class="bg-amber-200 text-amber-900 px-2 py-0.2 rounded-full text-xs font-black">0</span>
                 </button>
 
-                <!-- NÚT CÀI ĐẶT (gộp: Aa cỡ chữ · Cập nhật TLTK/Góp ý/Báo lỗi · Lưu câu · Chặn câu) -->
-                <button id="qz-set-btn" type="button" onclick="qzOpenSettings(event)" class="qt-half py-1.5 px-3 rounded-full font-bold text-sm bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-300 shadow-sm flex items-center gap-1.5 whitespace-nowrap" title="Cài đặt câu hỏi: cỡ chữ, cập nhật TLTK, lưu / chặn câu">
-                    ⚙️ Cài đặt
-                </button>
-
                 <button onclick="openQuestionNavigatorModal()" class="qt-nav text-blue-700 bg-blue-50 hover:bg-blue-100 py-1.5 px-3 rounded-full font-bold text-sm transition-colors border border-blue-200 flex items-center shadow-sm whitespace-nowrap">
                     📋 Danh sách câu
                 </button>
                 <div id="exam-q-timer-box" class="qt-timer ml-auto hidden text-rose-600 font-bold items-center bg-rose-50 py-1.5 px-3 rounded-full border border-rose-200 text-sm whitespace-nowrap" title="Thời gian suy nghĩ khuyến nghị cho câu này (72 giây)">
                     ⏳ <span id="q-timer" class="ml-1.5 w-10 text-center">72s</span>
                 </div>
-                <div class="qt-timer ml-auto text-blue-600 font-bold flex items-center bg-blue-50 py-1.5 px-3 rounded-full border border-blue-200 text-sm whitespace-nowrap">
+                <div class="qt-timer text-blue-600 font-bold flex items-center bg-blue-50 py-1.5 px-3 rounded-full border border-blue-200 text-sm whitespace-nowrap">
                     ⏱️ <span id="timer" class="ml-1.5 w-16 text-center">00:00</span>
                 </div>
+
+                <!-- NÚT CÀI ĐẶT (gộp: Aa cỡ chữ · Cập nhật TLTK/Góp ý/Báo lỗi · Lưu câu · Chặn câu) — nằm ngoài cùng bên phải thanh công cụ -->
+                <button id="qz-set-btn" type="button" onclick="qzOpenSettings(event)" class="qt-half shrink-0 py-1.5 px-3 rounded-full font-bold text-sm bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-300 shadow-sm flex items-center gap-1.5 whitespace-nowrap" title="Cài đặt câu hỏi: cỡ chữ, cập nhật TLTK, lưu / chặn câu">
+                    ⚙️ Cài đặt
+                </button>
             </div>
 
             <!-- CỬA SỔ CÀI ĐẶT CÂU HỎI (Aa · Cập nhật TLTK/Góp ý/Báo lỗi · Lưu câu · Chặn câu) -->
@@ -27257,6 +27257,9 @@ body {
 .hf-ask-no{background:rgba(255,255,255,.16);color:#e5e7eb}
 .hf-ask-no:hover{background:rgba(255,255,255,.28)}
 .hf-ask-yes:hover{filter:brightness(1.08)}
+/* ===== v10 — thẻ giới thiệu chỉ mờ dần (bỏ animation "nảy") để đo/toạ độ luôn chính xác ===== */
+.hf-spot-tip{animation-name:hfPopFade!important}
+@keyframes hfPopFade{from{opacity:0}to{opacity:1}}
 /* ===== v8 — nút Aa cỡ chữ từ điển + cửa sổ thuật ngữ mới to hơn 50% ===== */
 #dict-modal{--rd-fs:1}
 #dict-modal .nt-aa{width:100%;height:36px;accent-color:#6d28d9}
@@ -27280,6 +27283,9 @@ body {
 #dict-modal .rv-card .rd-in{font-size:calc(19px * var(--rd-fs,1))}
 #dict-modal .rv-card .rd-pb.rb-row .rd-pbtn{font-size:calc(19px * var(--rd-fs,1))}
 #dict-modal .rd-pop.info-ctr .rd-info p{font-size:calc(14px * var(--rd-fs,1))}
+/* ===== v11 — thanh công cụ làm bài: dồn nhóm Đồng hồ + ⚙️ Cài đặt ra lề phải ===== */
+.qt-bar > #exam-q-timer-box{margin-left:auto}
+.qt-bar > #exam-q-timer-box.hidden + .qt-timer{margin-left:auto}
 </style>
 
 <button id="home-fab" type="button" class="hidden" aria-label="Trợ lý AI" title="Trợ lý AI — kéo để di chuyển, bấm để mở menu" onclick="homeFabToggle()">
@@ -28149,18 +28155,10 @@ body {
     function qscSteps(ex) {
         var S = [];
         S.push({ sel: '#current-quiz-title', t: ex ? '🎯 Màn hình làm bài thi thử' : '📝 Màn hình làm bài trắc nghiệm',
-            d: ex ? 'Giao diện thi thử giống bài trắc nghiệm thường nhưng có thêm hai đồng hồ ĐẾM NGƯỢC (mình giải thích kỹ ở các bước sau). Tên đề thi hiện ở góc phải phía trên; mỗi lần chỉ hiện một câu kèm 4 đáp án. Trong lúc xem giới thiệu, đồng hồ tạm dừng. Mình đi qua từng phần từ trên xuống nhé.'
-                  : 'Tên bộ đề đang làm hiện ở góc phải phía trên. Mỗi lần chỉ hiện một câu hỏi kèm 4 đáp án; chọn xong là biết ngay đúng hay sai. Mình đi qua từng nút từ trên xuống dưới nhé.' });
-        S.push({ sel: function () { var b = document.querySelector(qscQ('button[onclick="confirmBackToHome()"]')); return b ? b.parentElement : null; }, t: '⬅️ Quay lại · 🔄 Làm lại',
-            d: '⬅️ Quay lại: lưu tiến độ làm bài rồi thoát ra, lần sau vào lại có thể làm tiếp. 🔄 Làm lại: làm lại từ câu đầu tiên và đặt lại toàn bộ tiến độ hiện tại (app sẽ hỏi xác nhận trước).' });
-        S.push({ sel: qscQ('.qt-count'), t: '🔢 Số câu',
-            d: 'Cho biết bạn đang ở câu thứ mấy trên tổng số câu của bài. Thanh xanh mỏng bên dưới dài ra dần theo tiến độ của bạn.' });
+            d: ex ? 'Giao diện thi thử giống bài trắc nghiệm thường nhưng có thêm hai đồng hồ ĐẾM NGƯỢC (mình giải thích kỹ ở các bước sau). Tên đề thi hiện ở góc phải phía trên; mỗi lần chỉ hiện một câu kèm 4 đáp án. Trong lúc xem giới thiệu, đồng hồ tạm dừng. Mình đi qua từng phần theo đúng thứ tự trên thanh công cụ, từ trái sang phải, nhé.'
+                  : 'Tên bộ đề đang làm hiện ở góc phải phía trên. Mỗi lần chỉ hiện một câu hỏi kèm 4 đáp án; chọn xong là biết ngay đúng hay sai. Mình đi qua từng nút theo đúng thứ tự trên thanh công cụ, từ trái sang phải, nhé.' });
         S.push({ sel: '#hope-star-btn', t: '⭐ Ngôi Sao Hy Vọng',
             d: 'Bấm TRƯỚC khi chọn đáp án: nếu trả lời đúng câu này, bạn được nhân 10 số điểm. Con số trên nút là số ngôi sao đang có (hết sao thì không bật được; trả lời đúng có cơ hội nhận thêm). Bấm lần nữa để hủy khi chưa trả lời.' });
-        S.push({ sel: '#qz-set-btn', t: '⚙️ Cài đặt câu hỏi',
-            d: 'Mình gom các tiện ích của câu hỏi vào một chỗ cho gọn: kéo thanh Aa để đổi cỡ chữ câu hỏi, đáp án và phần giải thích (80% – 200%); ⚠️ Cập nhật TLTK / Góp ý / Báo lỗi để báo lỗi hoặc bổ sung tài liệu; 🔖 Lưu câu để đưa câu này vào danh sách ⭐ Đã lưu (bấm lần nữa để bỏ lưu); 🚫 Chặn câu để câu này không hiện lại ở các lần làm sau (muốn bỏ chặn: vào 🚫 Đã chặn ở khu Ôn Tập Theo Chủ Đề).' });
-        S.push({ sel: qscQ('button[onclick="openQuestionNavigatorModal()"]'), t: '📋 Danh sách câu',
-            d: 'Mở bảng tất cả các câu của bài: ô xanh lá là câu đã đúng, đỏ là đã sai, vàng là câu bỏ qua, xám là chưa làm; câu có 🚩 là câu đã đánh cờ. Bấm một ô để nhảy tới câu đó.' });
         if (ex) {
             S.push({ sel: '#exam-q-timer-box', t: '⏳ Đồng hồ ĐẾM NGƯỢC từng câu (72 giây)',
                 d: 'Gợi ý thời gian suy nghĩ cho MỖI câu: 72 giây, đếm ngược từ lúc câu hiện ra và dừng khi bạn chọn đáp án. Còn 10 giây trở xuống ô chuyển đỏ để nhắc bạn. Hết 72 giây câu vẫn không bị khóa, nhưng nên chốt đáp án để kịp giờ cả bài. Sang câu mới thì đặt lại 72 giây.' });
@@ -28170,16 +28168,12 @@ body {
             S.push({ sel: function () { var t = $id('timer'); return t ? t.parentElement : null; }, t: '⏱️ Đồng hồ làm bài',
                 d: 'Cho biết bạn đã làm bài được bao lâu (đếm lên). Bấm ⬅️ Quay lại thì tiến độ và thời gian được lưu để làm tiếp lần sau. Trong lúc xem giới thiệu này, đồng hồ tạm dừng.' });
         }
+        S.push({ sel: '#qz-set-btn', t: '⚙️ Cài đặt câu hỏi',
+            d: 'Nút nằm ngoài cùng bên phải thanh công cụ. Mình gom các tiện ích của câu hỏi vào một chỗ cho gọn: kéo thanh Aa để đổi cỡ chữ câu hỏi, đáp án và phần giải thích (80% – 200%); ⚠️ Cập nhật TLTK / Góp ý / Báo lỗi để báo lỗi hoặc bổ sung tài liệu; 🔖 Lưu câu để đưa câu này vào danh sách ⭐ Đã lưu (bấm lần nữa để bỏ lưu); 🚫 Chặn câu để câu này không hiện lại ở các lần làm sau (muốn bỏ chặn: vào 🚫 Đã chặn ở khu Ôn Tập Theo Chủ Đề).' });
         S.push({ demo: true, sel: function () { return demoQzBar(); }, t: '✨ Bôi đen chữ để Highlight',
-            d: 'Bôi đen (kéo chọn) một đoạn chữ trong câu hỏi hoặc trong các đáp án, một thanh nút nhỏ sẽ nổi lên ngay trên đoạn đó. Đây là thanh mẫu để minh họa — mình giải thích từng nút ngay sau đây.' });
-        S.push({ demo: true, sel: function () { return demoQzBtn('b-hl'); }, t: '🖍 Highlight',
-            d: 'Tô sáng đoạn chữ vừa bôi đen để dễ nhìn lại khi ôn. Phần tô sáng được lưu theo từng câu, lần sau mở lại câu này vẫn còn.' });
-        S.push({ demo: true, sel: function () { return demoQzBtn('b-un'); }, t: '🧽 Xóa highlight',
-            d: 'Chỉ hiện khi vùng bạn chọn (hoặc đoạn chữ bạn chạm vào) đang có highlight; bấm để bỏ tô sáng phần đó. Phần highlight nằm ngoài vùng chọn vẫn được giữ nguyên.' });
-        S.push({ sel: '#feedback-box', pre: qscFb(true), wait: 150, t: '💡 Khung giải thích',
-            d: 'Sau khi chọn đáp án, khung này hiện đúng / sai, đáp án đúng và phần giải thích (kèm hình, đường link nếu có). Bây giờ khung đang hiện nội dung minh họa.' });
+            d: 'Bôi đen (kéo chọn) một đoạn chữ trong câu hỏi hoặc trong các đáp án, một thanh nút nhỏ sẽ nổi lên ngay trên đoạn đó. Thanh này có 2 nút: 🖍 Highlight để tô sáng đoạn chữ vừa bôi đen cho dễ nhìn lại khi ôn — phần tô sáng được lưu theo từng câu nên lần sau mở lại câu này vẫn còn; 🧽 Xóa highlight chỉ hiện khi vùng bạn chọn (hoặc đoạn chữ bạn chạm vào) đang có highlight, bấm để bỏ tô sáng phần đó — phần highlight nằm ngoài vùng chọn vẫn được giữ nguyên.' });
         S.push({ sel: '#ask-ai-btn', pre: qscFb(true), wait: 150, t: '🤖 Hỏi AI giải thích câu này',
-            d: 'Mở khung chat gia sư AI về đúng câu đang làm: giải thích vì sao đáp án đúng, phân tích từng đáp án sai, tìm hiểu sâu, mẹo nhớ hoặc học có hướng dẫn. Lần đầu mở khung chat, mình sẽ giới thiệu thêm phần ⚙️ Cài đặt AI.' });
+            d: 'Nút nằm trong khung giải thích: sau khi chọn đáp án, khung đó tự hiện đúng / sai, đáp án đúng và phần giải thích (kèm hình, đường link nếu có) — ở đây mình đang mở nội dung minh họa cho bạn xem. Bấm nút để mở khung chat gia sư AI về đúng câu đang làm: giải thích vì sao đáp án đúng, phân tích từng đáp án sai, tìm hiểu sâu, mẹo nhớ hoặc học có hướng dẫn. Lần đầu mở khung chat, mình sẽ giới thiệu thêm phần ⚙️ Cài đặt AI.' });
         return S;
     }
     [false, true].forEach(function (ex) { qscSteps(ex).forEach(function (st) { st.ctx = ex ? 'escreen' : 'qscreen'; TOUR.push(st); }); });
@@ -29059,6 +29053,7 @@ body {
         if (spot) {
             try { if (spot._onScroll) window.removeEventListener('scroll', spot._onScroll, true); } catch (e) {}
             try { if (spot._onResize) window.removeEventListener('resize', spot._onResize); } catch (e) {}
+            try { if (spot._ro) spot._ro.disconnect(); } catch (e) {}
             try {
                 var zn = spot.zoomNode;
                 if (zn && zn.classList) {
@@ -29167,6 +29162,17 @@ body {
             if (!tooBig) { try { node.classList.remove('hf-spot-zoom-off'); node.classList.add('hf-spot-zoom'); zn = node; } catch (e) { zn = null; } }
         }
         spot = { wrap: wrap, box: box, tip: tip, node: node, bar: bar, big: !!(st && st.big), keep: !!(st && st.vid), zoomNode: zn };
+        /* đặt lại vị trí ngay khi thẻ đổi kích thước (chữ/font/ảnh tải xong) */
+        try {
+            if (window.ResizeObserver) {
+                spot._ro = new ResizeObserver(function () {
+                    if (!spot || spot._roPend) return;
+                    spot._roPend = true;
+                    setTimeout(function () { if (spot) { spot._roPend = false; try { placeSpot(); } catch (e) {} } }, 0);
+                });
+                spot._ro.observe(tip);
+            }
+        } catch (e) {}
         placeSpot();
         spot._onScroll = placeSpot; spot._onResize = placeSpot;
         window.addEventListener('scroll', placeSpot, true);
@@ -29195,9 +29201,11 @@ body {
         }
         return out;
     }
-    function hfSpotCands(r, tw, th, vw, bottomLimit) {
+    function hfSpotCands(r, tw, th, vw, bottomLimit, mgx) {
         var gap = 14;
-        var clampL = function (x) { return Math.max(8, Math.min(vw - tw - 8, Math.round(x))); };
+        var lo = Math.max(8, mgx || 8), hi = vw - tw - lo;
+        if (hi < lo) { lo = 8; hi = Math.max(8, vw - tw - 8); }   // thẻ quá rộng: bỏ khoản chừa cho mũi tên
+        var clampL = function (x) { return Math.max(lo, Math.min(hi, Math.round(x))); };
         var clampT = function (y) { return Math.max(8, Math.min(bottomLimit - th, Math.round(y))); };
         var rect = function (x, y) { return { left: clampL(x), top: clampT(y), width: tw, height: th }; };
         var cx = r.left + r.width / 2 - tw / 2, cy = r.top + r.height / 2 - th / 2;
@@ -29223,37 +29231,38 @@ body {
         s.top = (r.top - pad) + 'px'; s.left = (r.left - pad) + 'px';
         s.width = (r.width + pad * 2) + 'px'; s.height = (r.height + pad * 2) + 'px';
         var sp = spot.tip.style, vw = window.innerWidth, vh = window.innerHeight;
+        if (sp.transform) sp.transform = '';           // đo lại kích thước thật (bỏ phần thu nhỏ của lần trước)
+        var mr0 = spot.tip.getBoundingClientRect();
         var resB = spot.bar ? 74 : 0, bottomLimit = vh - 8 - resB;
         var boxRect = { left: r.left - pad, top: r.top - pad, width: r.width + pad * 2, height: r.height + pad * 2 };
+        /* chừa thêm 2px an toàn: thẻ giới thiệu tuyệt đối không chạm vào nút đang giới thiệu */
+        var boxSafe = { left: boxRect.left - 2, top: boxRect.top - 2, width: boxRect.width + 4, height: boxRect.height + 4 };
         var others = hfWrapBoxes(spot.node);
-        var base = { w: spot.tip.offsetWidth || 260, h: spot.tip.offsetHeight || 56 };
+        var base = { w: mr0.width || 260, h: mr0.height || 56 };
         /* thử lần lượt các vị trí quanh nút; nếu nút quá to thì thu nhỏ thẻ để né */
-        var scales = [1, 0.84, 0.7, 0.58, 0.48], best = null, firstPick = null;
+        var scales = [1, 0.84, 0.7, 0.58, 0.48], best = null;
         for (var si = 0; si < scales.length; si++) {
             var sc = scales[si], tw = base.w * sc, th = base.h * sc;
-            var cands = hfSpotCands(r, tw, th, vw, bottomLimit), pick = null;
+            var cands = hfSpotCands(r, tw, th, vw, bottomLimit, spot.bar ? 56 : 8), pick = null;
             for (var i = 0; i < cands.length; i++) {
                 var rc = cands[i];
-                if (hfOverlap(rc, boxRect) > 0) continue;      // không đè lên chính nút đang giới thiệu
+                if (hfOverlap(rc, boxSafe) > 0) continue;      // không đè lên chính nút đang giới thiệu
                 var score = 0, area = 0;
                 for (var k = 0; k < others.length; k++) { var ar = hfOverlap(rc, others[k]); if (ar > 0) { score++; area += ar; } }
                 if (!pick || score < pick.score || (score === pick.score && area < pick.area)) pick = { left: rc.left, top: rc.top, score: score, area: area };
                 if (pick && pick.score === 0) break;           // đã né được hết các nút
             }
-            if (pick) {
-                pick.scale = sc;
-                if (!firstPick) firstPick = pick;              // cỡ to nhất vẫn né được nút đang giới thiệu
-                if (pick.score === 0) { best = pick; break; }  // né sạch các nút -> dùng vị trí này
-            }
+            if (!pick) continue;
+            pick.scale = sc;
+            if (!best || pick.score < best.score) best = pick; // giữ vị trí ít đè nút nhất, ưu tiên cỡ to
+            if (best.score === 0) break;                       // né sạch các nút -> dùng luôn
         }
-        if (!best) best = firstPick;
         var bestScale = best ? best.scale : 0.58;
         if (!best) {   // nút chiếm gần hết màn hình: thu nhỏ tối đa, đặt ở mép trên
             best = { left: Math.max(8, Math.round((vw - base.w * bestScale) / 2)), top: 8 };
         }
         spot.tipScale = bestScale;
-        if (bestScale < 1) { sp.transformOrigin = 'top left'; sp.transform = 'scale(' + bestScale + ')'; sp.animation = 'none'; }
-        else { sp.transformOrigin = ''; sp.transform = ''; sp.animation = ''; }
+        if (bestScale < 1) { sp.transformOrigin = 'top left'; sp.transform = 'scale(' + bestScale + ')'; }
         sp.top = best.top + 'px'; sp.left = best.left + 'px';
     }
 
