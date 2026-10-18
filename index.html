@@ -34,7 +34,7 @@
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         html { font-size: 100%; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-        @media (min-width: 768px) { html { font-size: 75%; } }
+        @media (min-width: 768px) { html { font-size: clamp(12.4px, calc(11.8px + 0.12vw), 14.4px); } }
 
         /* KHẮC PHỤC LỖI CUỘN Ở CỬA SỔ NHỎ LÀM TRÔI NỀN APP CHÍNH */
         body.modal-open {
@@ -1469,43 +1469,56 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
                 <h2 id="current-quiz-title" class="text-base font-bold text-blue-600 uppercase flex-1 text-right ml-4 leading-snug break-words"></h2>
             </div>
 
-            <div class="qt-bar flex justify-between items-center mb-3 flex-wrap gap-3">
-                <div class="qt-left flex items-center space-x-2.5 flex-wrap gap-y-2">
-                    <div class="qt-count text-gray-600 font-bold bg-gray-100 py-1.5 px-3 rounded-full text-sm border border-gray-300">
-                        Câu <span id="current-q-num">1</span> / <span id="total-q-num">10</span>
-                    </div>
-
-                    <!-- NÚT ĐẶT NGÔI SAO HY VỌNG -->
-                    <button id="hope-star-btn" onclick="toggleHopeStar()" class="qt-wide relative flex items-center gap-1.5 py-1.5 px-3.5 rounded-full font-bold text-sm border border-amber-300 bg-amber-50 hover:bg-amber-100 text-amber-900 transition-all shadow-sm" title="Kích hoạt nhân 10 số điểm cho câu này nếu trả lời đúng">
-                        <span>⭐ Đặt Ngôi Sao Hy Vọng</span>
-                        <span id="hope-star-count-badge" class="bg-amber-200 text-amber-900 px-2 py-0.2 rounded-full text-xs font-black">0</span>
-                    </button>
-
-                    <div class="qt-half flex items-center gap-2 bg-white text-gray-700 py-1.5 px-3 rounded-full font-bold text-sm border border-gray-300 shadow-sm" title="Kéo để đổi cỡ chữ câu hỏi và đáp án">
-                        <span>Aa</span>
-                        <input id="qz-fs" type="range" min="80" max="200" step="5" value="100" oninput="qzSetFs(this.value)" class="w-24 sm:w-36 accent-indigo-600" style="touch-action:none">
-                        <span id="qz-fs-v" class="w-12 text-right">100%</span>
-                    </div>
+            <div class="qt-bar flex items-center mb-3 gap-2 flex-nowrap overflow-x-auto">
+                <div class="qt-count text-gray-600 font-bold bg-gray-100 py-1.5 px-3 rounded-full text-sm border border-gray-300 whitespace-nowrap">
+                    Câu <span id="current-q-num">1</span> / <span id="total-q-num">10</span>
                 </div>
-                
-                <div class="qt-right flex items-center space-x-2 flex-wrap gap-y-2">
-                    <button id="report-error-btn" onclick="openReportErrorModal()" class="qt-report text-red-800 bg-red-50 hover:bg-red-100 py-1.5 px-3 rounded-full font-bold text-sm transition-colors border border-red-300 flex items-center shadow-sm">
-                        ⚠️ Cập nhật TLTK / Góp ý / Báo lỗi
-                    </button>
-                    <button id="bookmark-quiz-btn" onclick="toggleBookmarkCurrent()" class="qt-half text-amber-700 bg-amber-50 hover:bg-amber-100 py-1.5 px-3 rounded-full font-bold text-sm transition-colors border border-amber-300 flex items-center shadow-sm">
-                        <span id="bookmark-icon" class="mr-1.5">🔖</span> <span id="bookmark-text">Lưu câu</span>
-                    </button>
-                    <button id="block-quiz-btn" onclick="toggleBlockCurrent()" class="qt-half text-rose-700 bg-rose-50 hover:bg-rose-100 py-1.5 px-3 rounded-full font-bold text-sm transition-colors border border-rose-300 flex items-center shadow-sm">
-                        <span id="block-icon" class="mr-1.5">🚫</span> <span id="block-text">Chặn câu</span>
-                    </button>
-                    <button onclick="openQuestionNavigatorModal()" class="qt-nav text-blue-700 bg-blue-50 hover:bg-blue-100 py-1.5 px-3 rounded-full font-bold text-sm transition-colors border border-blue-200 flex items-center shadow-sm">
-                        📋 Danh sách câu
-                    </button>
-                    <div id="exam-q-timer-box" class="qt-timer hidden text-rose-600 font-bold items-center bg-rose-50 py-1.5 px-3 rounded-full border border-rose-200 text-sm" title="Thời gian suy nghĩ khuyến nghị cho câu này (72 giây)">
-                        ⏳ <span id="q-timer" class="ml-1.5 w-10 text-center">72s</span>
+
+                <!-- NÚT ĐẶT NGÔI SAO HY VỌNG -->
+                <button id="hope-star-btn" onclick="toggleHopeStar()" class="qt-wide relative flex items-center gap-1.5 py-1.5 px-3.5 rounded-full font-bold text-sm border border-amber-300 bg-amber-50 hover:bg-amber-100 text-amber-900 transition-all shadow-sm whitespace-nowrap" title="Kích hoạt nhân 10 số điểm cho câu này nếu trả lời đúng">
+                    <span>⭐ Đặt Ngôi Sao Hy Vọng</span>
+                    <span id="hope-star-count-badge" class="bg-amber-200 text-amber-900 px-2 py-0.2 rounded-full text-xs font-black">0</span>
+                </button>
+
+                <!-- NÚT CÀI ĐẶT (gộp: Aa cỡ chữ · Cập nhật TLTK/Góp ý/Báo lỗi · Lưu câu · Chặn câu) -->
+                <button id="qz-set-btn" type="button" onclick="qzOpenSettings(event)" class="qt-half py-1.5 px-3 rounded-full font-bold text-sm bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-300 shadow-sm flex items-center gap-1.5 whitespace-nowrap" title="Cài đặt câu hỏi: cỡ chữ, cập nhật TLTK, lưu / chặn câu">
+                    ⚙️ Cài đặt
+                </button>
+
+                <button onclick="openQuestionNavigatorModal()" class="qt-nav text-blue-700 bg-blue-50 hover:bg-blue-100 py-1.5 px-3 rounded-full font-bold text-sm transition-colors border border-blue-200 flex items-center shadow-sm whitespace-nowrap">
+                    📋 Danh sách câu
+                </button>
+                <div id="exam-q-timer-box" class="qt-timer ml-auto hidden text-rose-600 font-bold items-center bg-rose-50 py-1.5 px-3 rounded-full border border-rose-200 text-sm whitespace-nowrap" title="Thời gian suy nghĩ khuyến nghị cho câu này (72 giây)">
+                    ⏳ <span id="q-timer" class="ml-1.5 w-10 text-center">72s</span>
+                </div>
+                <div class="qt-timer ml-auto text-blue-600 font-bold flex items-center bg-blue-50 py-1.5 px-3 rounded-full border border-blue-200 text-sm whitespace-nowrap">
+                    ⏱️ <span id="timer" class="ml-1.5 w-16 text-center">00:00</span>
+                </div>
+            </div>
+
+            <!-- CỬA SỔ CÀI ĐẶT CÂU HỎI (Aa · Cập nhật TLTK/Góp ý/Báo lỗi · Lưu câu · Chặn câu) -->
+            <div id="qz-settings-pop" class="hidden">
+                <div class="qz-set-bk" onclick="qzCloseSettings()"></div>
+                <div class="qz-set-card" role="dialog" aria-label="Cài đặt câu hỏi">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-base font-black text-gray-800">⚙️ Cài đặt câu hỏi</h3>
+                        <button type="button" onclick="qzCloseSettings()" class="w-9 h-9 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 font-black">✕</button>
                     </div>
-                    <div class="qt-timer text-blue-600 font-bold flex items-center bg-blue-50 py-1.5 px-3 rounded-full border border-blue-200 text-sm">
-                        ⏱️ <span id="timer" class="ml-1.5 w-16 text-center">00:00</span>
+                    <div class="flex flex-col gap-2.5">
+                        <div class="flex items-center gap-2 bg-white text-gray-700 py-2 px-3 rounded-xl font-bold text-sm border border-gray-300 shadow-sm" title="Kéo để đổi cỡ chữ câu hỏi, đáp án và phần giải thích">
+                            <span>Aa</span>
+                            <input id="qz-fs" type="range" min="80" max="200" step="5" value="100" oninput="qzSetFs(this.value)" class="flex-1 accent-indigo-600" style="touch-action:none">
+                            <span id="qz-fs-v" class="w-12 text-right">100%</span>
+                        </div>
+                        <button id="report-error-btn" onclick="qzCloseSettings(); openReportErrorModal()" class="text-left text-red-800 bg-red-50 hover:bg-red-100 py-2 px-3 rounded-xl font-bold text-sm transition-colors border border-red-300">
+                            ⚠️ Cập nhật TLTK / Góp ý / Báo lỗi
+                        </button>
+                        <button id="bookmark-quiz-btn" onclick="toggleBookmarkCurrent()" class="text-left text-amber-700 bg-amber-50 hover:bg-amber-100 py-2 px-3 rounded-xl font-bold text-sm transition-colors border border-amber-300">
+                            <span id="bookmark-icon" class="mr-1.5">🔖</span><span id="bookmark-text">Lưu câu</span>
+                        </button>
+                        <button id="block-quiz-btn" onclick="toggleBlockCurrent()" class="text-left text-rose-700 bg-rose-50 hover:bg-rose-100 py-2 px-3 rounded-xl font-bold text-sm transition-colors border border-rose-300">
+                            <span id="block-icon" class="mr-1.5">🚫</span><span id="block-text">Chặn câu</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1525,7 +1538,7 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
                 <div id="answers-panel-wrapper" class="quiz-fit-panel lg:col-span-5 flex flex-col justify-between h-auto lg:h-[calc(100vh-175px)]">
                     <div class="space-y-2.5 overflow-y-auto pr-1 flex-1 pb-2">
                         <div id="options-container" class="space-y-2"></div>
-                        <div id="feedback-box" class="hidden p-3 rounded-xl border-l-4 overflow-hidden break-words text-sm space-y-1.5">
+                        <div id="feedback-box" class="hidden p-3 rounded-xl border-l-4 overflow-hidden break-words text-sm sm:text-base space-y-1.5">
                             <h4 id="feedback-title" class="font-bold text-base mb-1"></h4>
                             <p id="feedback-correct-ans" class="font-medium mb-1"></p>
                             <p id="feedback-explanation" class="italic break-words text-justify"></p>
@@ -1594,6 +1607,7 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
                 <button type="button" class="rd-rb" id="rd-rb-add" data-act="rb-add" title="Thêm thuật ngữ mới"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
                 <button type="button" class="rd-rb" id="rd-rb-search" data-act="rb-search" title="Tìm thuật ngữ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
                 <button type="button" class="rd-rb" id="rd-rb-saved" data-act="rb-saved" title="Từ đã lưu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M12 2.6l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.4 6 20.7l1.3-6.6L2.4 9.5l6.7-.8z"/></svg></button>
+                <button type="button" class="rd-rb" id="rd-rb-aa" data-act="rb-aa" title="Cỡ chữ từ điển"><span style="font:800 13px/1 system-ui,sans-serif">Aa</span></button>
                 <button type="button" class="rd-rb" id="rd-rb-review" data-act="rb-review" title="Ôn tập"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="14" height="14" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v12"/></svg></button>
                 <button type="button" class="rd-rb" id="rd-rb-jump" data-act="rb-jump" title="Đến trang"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 5v14l8-7zM12 5v14l8-7z"/></svg></button>
             </div>
@@ -1672,8 +1686,8 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
                     </div>
                 </div>
 
-                <div class="flex items-center gap-2">
-                    <button onclick="buyRandomEmblemWithPoints()" class="bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-bold py-2.5 px-4 rounded-xl text-xs sm:text-sm shadow transition-all flex items-center gap-1.5 active:scale-95">
+                <div class="flex items-center gap-2 ml-auto min-w-0">
+                    <button onclick="buyRandomEmblemWithPoints()" class="bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-bold py-2.5 px-4 rounded-xl text-xs sm:text-sm shadow transition-all flex items-center gap-1.5 active:scale-95 max-w-full whitespace-normal text-left leading-snug">
                         🎲 Đổi huy hiệu ngẫu nhiên (1.000 điểm)
                     </button>
                 </div>
@@ -5915,6 +5929,17 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
             };
             let qzFs0 = 100; try { qzFs0 = +localStorage.getItem('qz_fs') || 100; } catch (e) {}
             window.qzSetFs(qzFs0);
+        })();
+        /* mở / đóng cửa sổ ⚙️ Cài đặt câu hỏi (gom Aa · Cập nhật TLTK · Lưu câu · Chặn câu) */
+        window.qzOpenSettings = function () { var p = document.getElementById('qz-settings-pop'); if (p) p.classList.remove('hidden'); };
+        window.qzCloseSettings = function () { var p = document.getElementById('qz-settings-pop'); if (p) p.classList.add('hidden'); };
+        /* ẩn cửa sổ ⚙️ Cài đặt câu hỏi mỗi khi rời màn hình trắc nghiệm (tránh tự mở lại khi vào bài khác) */
+        (function () {
+            var qs = document.getElementById('quiz-screen');
+            if (!qs || !window.MutationObserver) return;
+            new MutationObserver(function () {
+                if (qs.classList.contains('hidden')) { var p = document.getElementById('qz-settings-pop'); if (p) p.classList.add('hidden'); }
+            }).observe(qs, { attributes: true, attributeFilter: ['class'] });
         })();
 
         function openQuestionNavigatorModal() {
@@ -18669,7 +18694,7 @@ window.isIOSDevice = function () {
 (function () {
     'use strict';
     const KEY = 'quizApp_rhm_dict_v1', AZ = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const rd = { terms: [], pages: [], termPage: new Map(), letterPage: {}, cur: 0, per: 2, lock: false, pop: '', editT: null, infoT: null, sel: null };
+    const rd = { terms: [], pages: [], termPage: new Map(), letterPage: {}, cur: 0, per: 2, lock: false, pop: '', editT: null, infoT: null, sel: null, fs: 1 };
     const $ = id => document.getElementById(id);
     const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     const clean = s => String(s || '').normalize('NFKC').replace(/\\n|\\t/g, ' ').replace(/\s+/g, ' ').trim();
@@ -18848,6 +18873,16 @@ window.isIOSDevice = function () {
         } catch (e) {}
     }
     function save() { sset(JSON.stringify(rd.terms.map(t => ({ en: t.en, vi: t.vi, p: t.p || '', im: t.im || [], ts: t.ts, u: t.u ? 1 : 0, i: t.i || '', s: t.s ? 1 : 0, n: t.n ? 1 : 0, f: t.f ? 1 : 0, d: t.d || '', ie: t.ie || '' })))); count(); }
+    /* ---------- cỡ chữ từ điển (nút Aa trên ruy-băng) ---------- */
+    const DKEY = 'quizApp_rhm_dict_meta_v1';
+    function fmget(k) { try { return typeof kv !== 'undefined' ? kv.getItem(k) : localStorage.getItem(k); } catch (e) { return null; } }
+    function fmset(k, v) { try { if (typeof kv !== 'undefined') kv.setItem(k, v); else localStorage.setItem(k, v); } catch (e) {} }
+    function applyFs() { const m = $('dict-modal'); if (m) m.style.setProperty('--rd-fs', String(rd.fs || 1)); }
+    function loadFs() { try { const m = JSON.parse(fmget(DKEY) || '{}') || {}; if (m.fs >= 0.7 && m.fs <= 2) rd.fs = +m.fs; } catch (e) {} applyFs(); }
+    function saveFs() { fmset(DKEY, JSON.stringify({ fs: rd.fs })); }
+    function openAa() { if (rd.pop === 'aa') { closePop(); return; } openPop('aa'); }
+    let rdAaT = 0;
+    function setRdFs(v) { rd.fs = Math.max(0.7, Math.min(2, v / 100)); applyFs(); const l = $('rd-aa-v'); if (l) l.textContent = Math.round(rd.fs * 100) + '%'; saveFs(); clearTimeout(rdAaT); rdAaT = setTimeout(() => repaginate(null), 120); }
     function count() { const e = $('rhm-dict-count'); if (e) e.textContent = String(rd.terms.length); }
     const nNew = () => rd.terms.filter(t => t.n).length;
     const newChip = () => { const n = nNew(); return n ? '<button type="button" class="rd-bdg rd-nwv" data-act="new-view" title="Xem các thuật ngữ mới vừa thêm">👁<span class="rd-nwl"> Xem thuật ngữ mới</span></button>' : ''; };
@@ -19026,7 +19061,7 @@ window.isIOSDevice = function () {
 
     /* ---------- ruy-băng + hộp nhỏ (thêm, sửa, thông tin, tìm, đến trang) ---------- */
     function paintRib() {
-        ['add', 'search', 'saved', 'review', 'jump'].forEach(n => { const b = $('rd-rb-' + n); if (b) b.classList.toggle('on', n === 'review' ? !!rd.rv : rd.pop === n); });
+        ['add', 'search', 'saved', 'review', 'jump', 'aa'].forEach(n => { const b = $('rd-rb-' + n); if (b) b.classList.toggle('on', n === 'review' ? !!rd.rv : rd.pop === n); });
     }
     function closePop() { try { stopInfoSpeak(); } catch (e) {} rd.pop = ''; rd.editT = null; rd.infoT = null; rd.more = null; rd.editIm = null; const p = $('rd-pop'); p.classList.add('hidden'); p.classList.remove('wide', 'more', 'tall', 'add-ctr', 'mid-ctr', 'mid-row'); p.style.left = ''; p.style.top = ''; p.style.right = ''; paintRib(); }
     function placeNewT() {
@@ -19064,6 +19099,8 @@ function openPop(mode, t) {
         } else if (mode === 'jump') {
             const T = Math.max(rd.pages.length, 1);
             h = '<div class="rd-pt">⏩ Đến trang</div><input id="rd-in-p" class="rd-in" type="number" min="1" max="' + T + '" placeholder="1 – ' + T + '" inputmode="numeric"><div class="rd-pb"><button type="button" class="rd-pbtn pri" data-act="gopage">Đi</button></div>'; focus = 'rd-in-p';
+        } else if (mode === 'aa') {
+            h = '<div class="rd-pt">Aa Cỡ chữ từ điển: <span id="rd-aa-v">' + Math.round((rd.fs || 1) * 100) + '%</span></div><input id="rd-aa" class="nt-aa" type="range" min="70" max="200" step="5" value="' + Math.round((rd.fs || 1) * 100) + '"><div class="rd-hint">Kéo để tăng / giảm cỡ chữ trong từ điển (sách, thẻ thông tin, thuật ngữ mới, flashcard, trắc nghiệm ngữ cảnh).</div>';
         }
         p.innerHTML = h;
         p.classList.toggle('wide', mode === 'info' || mode === 'saved' || mode === 'row' || mode === 'more');
@@ -20079,7 +20116,7 @@ if (t.d) fcStep(1);
 
     /* ---------- mở / đóng ---------- */
     window.openRhmDict = function () {
-        load(); rd.per = window.rhmPer(); rd.cur = 0; rd.lock = false;
+        load(); loadFs(); rd.per = window.rhmPer(); rd.cur = 0; rd.lock = false;
         $('rd-book').classList.toggle('one', rd.per === 1);
         if (!$('rd-tabL').children.length) buildTabs();
         rd.pages = []; $('rd-L').innerHTML = pageHTML(0, 'L'); $('rd-R').innerHTML = '';
@@ -20094,7 +20131,7 @@ if (t.d) fcStep(1);
         switch (a) {
             case 'close': window.closeRhmDict(); break;
             case 'prev': step(-1); break; case 'next': step(1); break;
-            case 'rb-add': togglePop('add'); break; case 'rb-search': togglePop('search'); break; case 'rb-saved': togglePop('saved'); break; case 'rb-jump': togglePop('jump'); break;
+            case 'rb-add': togglePop('add'); break; case 'rb-search': togglePop('search'); break; case 'rb-saved': togglePop('saved'); break; case 'rb-jump': togglePop('jump'); break; case 'rb-aa': openAa(); break;
             case 'rb-review': if (rd.rv) rvClose(); else rvOpen(); break;
             case 'add': addTerm(); break; case 'save': saveRow(); break; case 'ed-dk': edDkSet(el.dataset.l); break; case 'del': delTerm(rd.editT); break; case 'cancel': closePop(); break;
             case 'r-info': showInfo(rd.sel); break; case 'r-edit': if (rd.sel) openPop('row', rd.sel); break; case 'r-del': delTerm(rd.sel); break;
@@ -20134,7 +20171,7 @@ if (t.d) fcStep(1);
             const tab = e.target.closest('.rd-tab'); if (tab) { gotoLetter(tab.dataset.l); return; }
             const row = e.target.closest('.rd-row'); if (row && !rd.lock) selectRow(row); else if (!e.target.closest('.rd-pop')) clearSel();
         });
-        m.addEventListener('input', e => { if (e.target.id === 'rd-in-q') doSearch(); });
+        m.addEventListener('input', e => { if (e.target.id === 'rd-in-q') doSearch(); else if (e.target.id === 'rd-aa') setRdFs(+e.target.value); });
         m.addEventListener('change', e => {
             const x = e.target;
             if (x && x.id === 'rd-in-img') { const fs = Array.from(x.files || []); x.value = ''; addImages(fs); }
@@ -22084,13 +22121,14 @@ function moveEdActs() {
     window.openHomeSettings = function () {
         var m = document.getElementById('home-settings-modal'); if (!m) return;
         document.querySelectorAll('body > *').forEach(function (s) {
-            if (s === m || s.hasAttribute('inert') || /^(SCRIPT|STYLE|LINK|META)$/.test(s.tagName) || s.id === 'custom-toast') return;
+            if (s === m || s.id === 'hs-guide-modal' || s.hasAttribute('inert') || /^(SCRIPT|STYLE|LINK|META)$/.test(s.tagName) || s.id === 'custom-toast') return;
             s.setAttribute('inert', ''); s.setAttribute('data-hs-inert', '1');
         });
         m.classList.remove('hidden');
     };
     window.closeHomeSettings = function () {
         var m = document.getElementById('home-settings-modal'); if (m) m.classList.add('hidden');
+        var g = document.getElementById('hs-guide-modal'); if (g) g.classList.add('hidden');
         document.querySelectorAll('[data-hs-inert]').forEach(function (s) { s.removeAttribute('inert'); s.removeAttribute('data-hs-inert'); });
     };
     /* Toàn màn hình (kiểu F11 của app): nút trong Cài Đặt; đang toàn màn hình thì nhãn đổi thành "Thoát toàn màn hình" và thoát có popup xác nhận */
@@ -22162,6 +22200,7 @@ function moveEdActs() {
     window.hsUnlock = function () {
         document.querySelectorAll('[data-hs-inert]').forEach(function (s) { s.removeAttribute('inert'); s.removeAttribute('data-hs-inert'); });
     };
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { var g = document.getElementById('hs-guide-modal'); if (g && !g.classList.contains('hidden')) { window.hsCloseGuideInfo(); e.stopImmediatePropagation(); } } }, true);
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { var k = document.getElementById('hs-keys-modal'); if (k && k.style.display !== 'none') window.hsCloseKeys(); } });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') window.closeHomeSettings(); });
 })();
@@ -22174,7 +22213,7 @@ html.rhm-modal-open, html.rhm-modal-open body { overflow: hidden !important; ove
 /* ===== VÁ 2: khóa nền, chặn chạm xuyên xuống nền, ôn tập một mục xổ ra, chỉ lấy tiếng Việt khi lưu song ngữ cột ===== */
 (function () {
     'use strict';
-    var IDS = ['home-settings-modal', 'hs-keys-modal', 'dict-modal', 'note-modal'];
+    var IDS = ['home-settings-modal', 'hs-keys-modal', 'hs-guide-modal', 'dict-modal', 'note-modal'];
     var until = 0;
     function isOpen(id) { var m = document.getElementById(id); return !!m && m.style.display !== 'none' && !m.classList.contains('hidden'); }
     function anyOpen() { return IDS.some(isOpen); }
@@ -27170,9 +27209,9 @@ body {
 .hf-spot-box{position:fixed;border-radius:14px;pointer-events:none;box-shadow:0 0 0 9999px rgba(2,6,23,.6),0 0 0 3px rgba(255,255,255,.95),0 0 22px 7px rgba(99,102,241,.8);transition:all .18s ease}
 .hf-spot-tip{position:fixed;z-index:100301;max-width:min(620px,92vw);display:flex;gap:10px;align-items:flex-start;background:#111827;color:#fff;border-radius:14px;padding:14px 16px;font-size:26px;font-weight:700;line-height:1.45;text-align:justify;text-justify:inter-word;box-shadow:0 12px 30px rgba(0,0,0,.45);animation:hfPop .18s ease}
 .hf-spot-tip.hf-tour-tip{display:block;max-width:min(620px,92vw);padding:16px 18px;font-weight:500}
-.hf-tour-tip .tt{font-weight:900;font-size:29px;margin-bottom:8px}
-.hf-tour-tip .td{font-size:26px;line-height:1.6;color:#e5e7eb;white-space:pre-line;text-align:justify;text-justify:inter-word}
-.hf-spot-tip.hf-tour-tip{pointer-events:none;max-width:min(640px,calc(100vw - 124px))}
+.hf-tour-tip .tt{font-weight:900;font-size:clamp(15px,min(3vw,3.6vh),29px);margin-bottom:8px}
+.hf-tour-tip .td{font-size:clamp(13px,min(2.7vw,3.3vh),26px);line-height:1.5;color:#e5e7eb;white-space:pre-line;text-align:justify;text-justify:inter-word}
+.hf-spot-tip.hf-tour-tip{pointer-events:auto;max-width:min(640px,max(280px,calc(100vw - 96px)));max-height:calc(100vh - 20px);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;user-select:none;-webkit-user-select:none}
 .hf-tour-bar{position:fixed;left:0;right:0;bottom:0;height:0;z-index:100302;pointer-events:none}
 .hf-tour-bar .cnt{position:fixed;left:50%;transform:translateX(-50%);bottom:max(22px,calc(env(safe-area-inset-bottom) + 8px));color:#fff;font-weight:800;font-size:12px;background:rgba(17,24,39,.78);border-radius:9999px;padding:4px 11px}
 .hf-tb-skip{position:fixed;right:12px;bottom:max(14px,env(safe-area-inset-bottom));pointer-events:auto;border:0;border-radius:9999px;padding:11px 20px;font-weight:800;font-size:14px;cursor:pointer;background:#fff;color:#374151;box-shadow:0 8px 22px rgba(0,0,0,.4)}
@@ -27187,9 +27226,9 @@ body {
 #hf-demo-selbar .b-tr{background:#4f46e5}#hf-demo-selbar .b-dc{background:#0369a1}#hf-demo-selbar .b-nt{background:#0f766e}#hf-demo-selbar .b-hl{background:#d97706}#hf-demo-selbar .b-un{background:#b45309}
 /* Bước mở đầu: to, giữa màn hình, nền tối hơn */
 .hf-spot-box.big{box-shadow:0 0 0 9999px rgba(2,6,23,.86),0 0 0 3px rgba(255,255,255,.95),0 0 26px 9px rgba(99,102,241,.85)}
-.hf-spot-tip.hf-tour-tip.hf-tour-big{max-width:min(1000px,calc(100vw - 116px));padding:28px 32px;border-radius:18px}
-.hf-tour-big .tt{font-size:clamp(38px,6.4vw,52px);margin-bottom:14px}
-.hf-tour-big .td{font-size:clamp(29px,4.4vw,36px);line-height:1.7;white-space:pre-line;text-align:justify;text-justify:inter-word}
+.hf-spot-tip.hf-tour-tip.hf-tour-big{max-width:min(1000px,max(280px,calc(100vw - 24px)));padding:20px 24px;border-radius:18px;max-height:calc(100vh - 16px);overflow:auto}
+.hf-tour-big .tt{font-size:clamp(18px,min(4vw,4.6vh),52px);margin-bottom:12px}
+.hf-tour-big .td{font-size:clamp(14px,min(3vw,3.5vh),36px);line-height:1.55;white-space:pre-line;text-align:justify;text-justify:inter-word}
 /* Cửa sổ chọn Kệ Sách / Khóa Học: to hơn 60%, vẫn nằm gọn trong màn hình */
 #subject-choice-modal > div{zoom:1.6;max-width:calc(95vw / 1.6)!important;max-height:calc(92vh / 1.6);overflow-y:auto}
 /* Cài Đặt ở màn hình ngang: tách làm 2 cột nút */
@@ -27218,6 +27257,29 @@ body {
 .hf-ask-no{background:rgba(255,255,255,.16);color:#e5e7eb}
 .hf-ask-no:hover{background:rgba(255,255,255,.28)}
 .hf-ask-yes:hover{filter:brightness(1.08)}
+/* ===== v8 — nút Aa cỡ chữ từ điển + cửa sổ thuật ngữ mới to hơn 50% ===== */
+#dict-modal{--rd-fs:1}
+#dict-modal .nt-aa{width:100%;height:36px;accent-color:#6d28d9}
+#dict-modal .rd-row{font-size:calc(clamp(13px,min(1.45vw,2.6vh),24px) * var(--rd-fs,1))}
+#dict-modal .rd-info p{font-size:calc(14px * var(--rd-fs,1))}
+#dict-modal .rd-bdg{font-size:calc(clamp(10px,.95vw,13px) * var(--rd-fs,1))}
+#dict-modal .rd-pop{font-size:calc(14px * var(--rd-fs,1))}
+#dict-modal .rd-pop .rd-in,#dict-modal .rd-pop textarea.rd-in{font-size:calc(14px * var(--rd-fs,1))}
+#dict-modal .rd-pop.newt{width:min(780px,96%)}
+#dict-modal .rd-pop.newt .rd-nt,#dict-modal .rd-pop.newt .rd-nt td,#dict-modal .rd-pop.newt .rd-nt th{font-size:calc(14.5px * var(--rd-fs,1))}
+#dict-modal .rv-card{font-size:calc(15px * var(--rd-fs,1))}
+#dict-modal .qz-ctx{font-size:calc(clamp(15px,2.2vw,19px) * var(--rd-fs,1))}
+#dict-modal .rd-pg{overflow-wrap:anywhere}
+/* ===== v9 — nút ⚙️ Cài đặt câu hỏi (gộp Aa · Cập nhật TLTK · Lưu câu · Chặn câu) ===== */
+#qz-settings-pop{position:fixed;inset:0;z-index:100150;display:flex;align-items:center;justify-content:center;padding:16px}
+#qz-settings-pop.hidden{display:none!important}
+#qz-settings-pop .qz-set-bk{position:absolute;inset:0;background:rgba(2,6,23,.55)}
+#qz-settings-pop .qz-set-card{position:relative;background:#fff;border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.45);width:min(420px,94vw);max-height:86vh;overflow-y:auto;padding:16px}
+#dict-modal .rv-card .rv-t{font-size:calc(24px * var(--rd-fs,1))}
+#dict-modal .rv-card .rv-o{font-size:calc(17px * var(--rd-fs,1))}
+#dict-modal .rv-card .rd-in{font-size:calc(19px * var(--rd-fs,1))}
+#dict-modal .rv-card .rd-pb.rb-row .rd-pbtn{font-size:calc(19px * var(--rd-fs,1))}
+#dict-modal .rd-pop.info-ctr .rd-info p{font-size:calc(14px * var(--rd-fs,1))}
 </style>
 
 <button id="home-fab" type="button" class="hidden" aria-label="Trợ lý AI" title="Trợ lý AI — kéo để di chuyển, bấm để mở menu" onclick="homeFabToggle()">
@@ -27349,7 +27411,7 @@ body {
             'exam-create-modal', 'deep-modal', 'collection-modal', 'progress-modal', 'suggest-question-modal',
             'app-feedback-modal', 'add-question-modal', 'report-error-modal', 'folder-modal', 'navigator-modal',
             'view-quiz-modal', 'bookmarked-modal', 'blocked-modal', 'storage-modal', 'image-lightbox-modal',
-            'dev-password-modal', 'dict-modal', 'note-modal', 'bookshelf-modal', 'hs-guide-modal'];
+            'dev-password-modal', 'dict-modal', 'note-modal', 'bookshelf-modal', 'hs-guide-modal', 'qz-settings-pop'];
         IDS.forEach(function (id) { var m = $id(id); if (m) m.classList.add('hidden'); });
         var k = $id('hs-keys-modal'); if (k) k.style.display = 'none';
         try { if (typeof window.closeHomeSettings === 'function') window.closeHomeSettings(); } catch (e) {}
@@ -27876,10 +27938,10 @@ body {
 
     /* ------------------- giới thiệu lần lượt các nút trên màn hình chính ------------------- */
     var TOUR = [
-        { key: 'mon-hoc', t: '📚 Ôn Tập Theo Môn Học', d: 'Bấm để xổ ra danh sách các môn học kèm video bài giảng. Lần đầu bấm vào nút này, mình sẽ hướng dẫn cách chọn môn, kéo thả đổi vị trí và 2 nút Kệ Sách / Khóa Học; lần đầu bấm vào Kệ Sách hoặc Khóa Học, mình sẽ giới thiệu bên trong. Khi khu này đang xổ ra, bấm ℹ️ của Trợ lý AI để xem lại.' },
-        { key: 'chuyen-de', t: '🦷 Ôn Tập Theo Chủ Đề', d: 'Bấm để xổ ra khu ôn tập theo chủ đề, gồm các công cụ ôn nhanh, chuyên sâu, thi thử và 36 chủ đề. Lần đầu bấm vào nút này, mình sẽ giới thiệu các nút bên trong ngay tại chỗ; mỗi nút bên trong cũng có hướng dẫn riêng lần đầu bạn mở.' },
         { big: true, sel: '#home-fab', t: '🤖 Nút Trợ lý AI', d: 'Chào bạn 👋 Mình là Trợ lý AI của app — chính là nút này!\n\nBấm vào sẽ hiện 4 nút:\nℹ️ Thông tin — phần giới thiệu bạn đang xem, bấm lại bất cứ lúc nào ở màn hình chính.\n🎙️ Chat live — nói chuyện bằng giọng nói.\n💬 Chat — nhắn tin hỏi cách dùng app, chỉ tận nơi từng nút hoặc làm thay bạn vài thao tác.\n⏻ Tắt — ẩn Trợ lý AI (có hỏi lại cho chắc, và chỉ cách mở lại).\n\nKéo nút để đổi vị trí. Bật / tắt Trợ lý AI ở ⚙️ Cài Đặt → 🤖 Trợ lý AI.\n\nChạm vào màn hình (hoặc bấm mũi tên ›) để mình giới thiệu tiếp các nút trên màn hình chính nhé!' },
         { ask: true, big: true, sel: '#home-fab', t: '🧭 Giới thiệu các tính năng của app?', d: 'Bạn có muốn mình giới thiệu các tính năng của app trước khi sử dụng không?\n\nChọn “Có” để mình dẫn bạn đi qua từng nút và tính năng chính. Chọn “Để sau” thì app vẫn dùng được ngay; lúc nào cần, bạn bấm nút 🤖 rồi chọn nút ℹ️ để mình giới thiệu lại.' },
+        { key: 'mon-hoc', t: '📚 Ôn Tập Theo Môn Học', d: 'Bấm để xổ ra danh sách các môn học kèm video bài giảng. Lần đầu bấm vào nút này, mình sẽ hướng dẫn cách chọn môn, kéo thả đổi vị trí và 2 nút Kệ Sách / Khóa Học; lần đầu bấm vào Kệ Sách hoặc Khóa Học, mình sẽ giới thiệu bên trong. Khi khu này đang xổ ra, bấm ℹ️ của Trợ lý AI để xem lại.' },
+        { key: 'chuyen-de', t: '🦷 Ôn Tập Theo Chủ Đề', d: 'Bấm để xổ ra khu ôn tập theo chủ đề, gồm các công cụ ôn nhanh, chuyên sâu, thi thử và 36 chủ đề. Lần đầu bấm vào nút này, mình sẽ giới thiệu các nút bên trong ngay tại chỗ; mỗi nút bên trong cũng có hướng dẫn riêng lần đầu bạn mở.' },
         { key: 'bo-suu-tap', t: '🏆 Bộ Sưu Tập Huy Hiệu', d: 'Nơi lưu lại các huy hiệu bạn đạt được trong quá trình học và làm bài. Ôn đều đặn sẽ mở khóa thêm huy hiệu. Con số trên nút là số huy hiệu bạn đã có. Lần đầu bạn mở cửa sổ này, mình sẽ hướng dẫn ngay tại chỗ; muốn xem lại thì bấm nút ℹ️ của Trợ lý AI khi cửa sổ đang mở.' },
         { ctx: 'collection', sel: '#collection-modal h3', t: '🏆 Cửa sổ Bộ Sưu Tập', d: 'Đây là kho huy hiệu của bạn. Bạn có thể chọn một hoặc nhiều huy hiệu yêu thích để chúng nổi lên khi bạn đạt chuỗi trả lời đúng (Streak).' },
         { ctx: 'collection', sel: function () { var e = $id('collection-user-points'); return e && e.parentElement && e.parentElement.parentElement; }, t: '💰 Điểm Tích Lũy', d: 'Số điểm bạn kiếm được khi học và làm bài. Điểm này dùng để đổi lấy huy hiệu mới.' },
@@ -27893,6 +27955,7 @@ body {
         { ctx: 'dict', sel: '#rd-rb-add', t: '➕ Thêm thuật ngữ mới', d: 'Tự nhập thêm một thuật ngữ vào từ điển, kèm nghĩa mà bạn muốn.' },
         { ctx: 'dict', sel: '#rd-rb-search', t: '🔍 Tìm thuật ngữ', d: 'Gõ để tìm nhanh một thuật ngữ trong toàn bộ từ điển.' },
         { ctx: 'dict', sel: '#rd-rb-saved', t: '⭐ Từ đã lưu', d: 'Xem riêng những thuật ngữ bạn đã đánh dấu sao, để ôn lại những từ quan trọng.' },
+        { ctx: 'dict', sel: '#rd-rb-aa', t: 'Aa — Cỡ chữ từ điển', d: 'Kéo để tăng hoặc giảm cỡ chữ trong từ điển: áp dụng cho cả cuốn sách, thẻ thông tin thuật ngữ, danh sách thuật ngữ mới, flashcard và phần trắc nghiệm ngữ cảnh. Cỡ chữ được ghi nhớ cho lần sau.' },
         { ctx: 'dict', sel: '#rd-rb-review', t: '🗂️ Ôn tập', d: 'Ôn thuật ngữ bằng thẻ ghi nhớ (flashcard) để nhớ lâu hơn.' },
         { ctx: 'dict', sel: '#rd-rb-jump', t: '⏩ Đến trang', d: 'Nhảy nhanh tới một trang bất kỳ của từ điển.' },
         { ctx: 'dict', sel: '#rd-tabL', t: '🔤 Thẻ chữ cái A–Z', d: 'Các thẻ ở hai bên mép sách giúp bạn nhảy thẳng tới các thuật ngữ bắt đầu bằng chữ cái đó.' },
@@ -28094,14 +28157,8 @@ body {
             d: 'Cho biết bạn đang ở câu thứ mấy trên tổng số câu của bài. Thanh xanh mỏng bên dưới dài ra dần theo tiến độ của bạn.' });
         S.push({ sel: '#hope-star-btn', t: '⭐ Ngôi Sao Hy Vọng',
             d: 'Bấm TRƯỚC khi chọn đáp án: nếu trả lời đúng câu này, bạn được nhân 10 số điểm. Con số trên nút là số ngôi sao đang có (hết sao thì không bật được; trả lời đúng có cơ hội nhận thêm). Bấm lần nữa để hủy khi chưa trả lời.' });
-        S.push({ sel: function () { var r = $id('qz-fs'); return r ? r.parentElement : null; }, t: 'Aa — Cỡ chữ',
-            d: 'Kéo thanh trượt để đổi cỡ chữ của câu hỏi và các đáp án (80% – 200%) cho dễ đọc.' });
-        S.push({ sel: '#report-error-btn', t: '⚠️ Cập nhật TLTK / Góp ý / Báo lỗi',
-            d: 'Thấy câu hỏi hoặc đáp án chưa đúng, muốn bổ sung tài liệu tham khảo hay góp ý? Bấm để gửi cho người làm app.' });
-        S.push({ sel: '#bookmark-quiz-btn', t: '🔖 Lưu câu',
-            d: 'Lưu câu đang làm vào danh sách ⭐ Đã lưu để ôn riêng sau này (nút ⭐ Đã lưu ở khu Ôn Tập Theo Chủ Đề). Bấm lần nữa để bỏ lưu.' });
-        S.push({ sel: '#block-quiz-btn', t: '🚫 Chặn câu',
-            d: 'Chặn câu này để nó không xuất hiện trong các lần làm bài sau (ví dụ câu bị lỗi hoặc quá lạc đề). Muốn bỏ chặn: vào 🚫 Đã chặn ở khu Ôn Tập Theo Chủ Đề.' });
+        S.push({ sel: '#qz-set-btn', t: '⚙️ Cài đặt câu hỏi',
+            d: 'Mình gom các tiện ích của câu hỏi vào một chỗ cho gọn: kéo thanh Aa để đổi cỡ chữ câu hỏi, đáp án và phần giải thích (80% – 200%); ⚠️ Cập nhật TLTK / Góp ý / Báo lỗi để báo lỗi hoặc bổ sung tài liệu; 🔖 Lưu câu để đưa câu này vào danh sách ⭐ Đã lưu (bấm lần nữa để bỏ lưu); 🚫 Chặn câu để câu này không hiện lại ở các lần làm sau (muốn bỏ chặn: vào 🚫 Đã chặn ở khu Ôn Tập Theo Chủ Đề).' });
         S.push({ sel: qscQ('button[onclick="openQuestionNavigatorModal()"]'), t: '📋 Danh sách câu',
             d: 'Mở bảng tất cả các câu của bài: ô xanh lá là câu đã đúng, đỏ là đã sai, vàng là câu bỏ qua, xám là chưa làm; câu có 🚩 là câu đã đánh cờ. Bấm một ô để nhảy tới câu đó.' });
         if (ex) {
@@ -28113,34 +28170,16 @@ body {
             S.push({ sel: function () { var t = $id('timer'); return t ? t.parentElement : null; }, t: '⏱️ Đồng hồ làm bài',
                 d: 'Cho biết bạn đã làm bài được bao lâu (đếm lên). Bấm ⬅️ Quay lại thì tiến độ và thời gian được lưu để làm tiếp lần sau. Trong lúc xem giới thiệu này, đồng hồ tạm dừng.' });
         }
-        S.push({ sel: '#question-panel-wrapper', t: '📖 Khung câu hỏi',
-            d: 'Nội dung câu hỏi hiện ở đây (bên trái trên máy tính, phía trên trên điện thoại). Câu dài thì cuộn trong khung; nếu có ảnh minh họa, bấm vào ảnh để phóng to.' });
         S.push({ demo: true, sel: function () { return demoQzBar(); }, t: '✨ Bôi đen chữ để Highlight',
             d: 'Bôi đen (kéo chọn) một đoạn chữ trong câu hỏi hoặc trong các đáp án, một thanh nút nhỏ sẽ nổi lên ngay trên đoạn đó. Đây là thanh mẫu để minh họa — mình giải thích từng nút ngay sau đây.' });
         S.push({ demo: true, sel: function () { return demoQzBtn('b-hl'); }, t: '🖍 Highlight',
             d: 'Tô sáng đoạn chữ vừa bôi đen để dễ nhìn lại khi ôn. Phần tô sáng được lưu theo từng câu, lần sau mở lại câu này vẫn còn.' });
         S.push({ demo: true, sel: function () { return demoQzBtn('b-un'); }, t: '🧽 Xóa highlight',
             d: 'Chỉ hiện khi vùng bạn chọn (hoặc đoạn chữ bạn chạm vào) đang có highlight; bấm để bỏ tô sáng phần đó. Phần highlight nằm ngoài vùng chọn vẫn được giữ nguyên.' });
-        S.push({ sel: '#options-container', t: '✅ Các đáp án',
-            d: 'Bấm một đáp án để chọn. Kết quả hiện ngay: đáp án đúng tô xanh, nếu chọn sai thì đáp án bạn chọn tô đỏ; sau đó các đáp án khóa lại.' });
         S.push({ sel: '#feedback-box', pre: qscFb(true), wait: 150, t: '💡 Khung giải thích',
             d: 'Sau khi chọn đáp án, khung này hiện đúng / sai, đáp án đúng và phần giải thích (kèm hình, đường link nếu có). Bây giờ khung đang hiện nội dung minh họa.' });
         S.push({ sel: '#ask-ai-btn', pre: qscFb(true), wait: 150, t: '🤖 Hỏi AI giải thích câu này',
             d: 'Mở khung chat gia sư AI về đúng câu đang làm: giải thích vì sao đáp án đúng, phân tích từng đáp án sai, tìm hiểu sâu, mẹo nhớ hoặc học có hướng dẫn. Lần đầu mở khung chat, mình sẽ giới thiệu thêm phần ⚙️ Cài đặt AI.' });
-        S.push({ sel: '#unanswered-actions', pre: function () { qscFb(false)(); qscRow('un')(); }, wait: 150, t: '⬅️ Câu trước · 🚩 Đánh cờ · ⏭️ Bỏ qua',
-            d: 'Hàng nút dưới cùng khi CHƯA chọn đáp án. ⬅️ Câu trước: quay lại câu trước đó. 🚩 Đánh cờ: cắm cờ để nhớ quay lại câu còn phân vân (cờ hiện trong 📋 Danh sách câu). ⏭️ Bỏ qua: sang câu kế mà không trả lời; câu bỏ qua tô vàng và làm ngắt chuỗi trả lời đúng (Streak).' });
-        S.push({ sel: '#difficulty-group', pre: qscRow('an'), wait: 150, t: '🎚 Gắn thẻ độ khó: Khó · Vừa · Dễ',
-            d: 'Sau khi trả lời xong, hàng nút dưới cùng đổi thành hàng này (mình đang hiện minh họa). Ở giữa là 3 nút để bạn tự gắn thẻ độ khó cho câu vừa làm theo cảm nhận của mình. Bấm lại đúng nút đang sáng để bỏ thẻ. Thẻ được nhớ theo từng câu hỏi.' });
-        S.push({ sel: '#difficulty-group button[data-level="hard"]', pre: qscRow('an'), wait: 100, t: '🔴 Khó',
-            d: 'Gắn cho câu bạn làm sai hoặc thấy rất khó nhớ — nhóm nên ôn đi ôn lại nhiều nhất.' });
-        S.push({ sel: '#difficulty-group button[data-level="medium"]', pre: qscRow('an'), wait: 100, t: '🟡 Vừa',
-            d: 'Gắn cho câu mức trung bình: biết khá chắc nhưng thỉnh thoảng vẫn phân vân.' });
-        S.push({ sel: '#difficulty-group button[data-level="easy"]', pre: qscRow('an'), wait: 100, t: '🟢 Dễ',
-            d: 'Gắn cho câu bạn nắm vững rồi. Khi ôn chuyên sâu, bạn có thể giảm tỉ lệ nhóm này để khỏi mất thời gian.' });
-        S.push({ sel: '#difficulty-group', pre: qscRow('an'), wait: 100, t: '🧠 Dùng thẻ để ôn tập chuyên sâu',
-            d: 'Ba thẻ này là nguyên liệu của 🧠 Ôn Tập Chuyên Sâu (khu Ôn Tập Theo Chủ Đề). Ở đó bạn chọn bộ đề, đặt tỉ lệ % câu Khó · Vừa · Dễ (tổng 100%) và số câu; app rút đúng các câu bạn đã gắn thẻ — ví dụ dồn 70% vào câu Khó để ôn đúng chỗ yếu. Câu chưa gắn thẻ xếp vào nhóm “Khác”, dùng để bù khi thiếu câu. Gắn thẻ càng nhiều, ôn chuyên sâu càng chính xác.' });
-        S.push({ sel: '#next-btn', pre: qscRow('an'), wait: 100, t: '➡️ Câu tiếp theo',
-            d: 'Sang câu kế tiếp sau khi trả lời xong; ở câu cuối cùng, nút này kết thúc bài và hiện kết quả để bạn xem lại bài làm. Muốn xem lại phần giới thiệu này: bấm Trợ lý AI → ℹ️ khi đang làm bài.' });
         return S;
     }
     [false, true].forEach(function (ex) { qscSteps(ex).forEach(function (st) { st.ctx = ex ? 'escreen' : 'qscreen'; TOUR.push(st); }); });
@@ -28722,6 +28761,8 @@ body {
         if (sw) { beginTour('steps', sw); try { if (qscIsExam() && tour && shown('quiz-screen')) qscPause(tour); } catch (e) {} return; }
         var w = activeWin();
         if (w) { beginTour('win', w); return; }
+        /* màn hình trắc nghiệm luôn mở được phần giới thiệu, kể cả khi cửa sổ phụ (⚙️ Cài đặt câu hỏi…) đang mở */
+        if (shown('quiz-screen')) { beginTour('win', qscIsExam() ? 'escreen' : 'qscreen'); return; }
         if (!tourHomeOk()) { toast('Cửa sổ này chưa có phần giới thiệu — hãy quay về màn hình chính hoặc mở Bộ Sưu Tập / Từ Điển / Sổ Ghi Chú / Cài Đặt / một môn học'); return; }
         /* khu Ôn Tập Theo Môn Học / Chủ Đề đang xổ ra → giới thiệu nội dung bên trong; chỉ khi cả 2 đều đóng mới giới thiệu màn hình chính */
         var mOpen = shown('monhoc-section-container'), cOpen = shown('chuyende-section-container');
@@ -28960,8 +29001,8 @@ body {
         try { if (ev && ev.stopPropagation) ev.stopPropagation(); } catch (e) {}
         var m = $id('hs-guide-modal'); if (!m) return;
         paintGuideState();
-        m.classList.remove('hidden'); m.removeAttribute('inert');
-        try { new MutationObserver(function () { if (m.hasAttribute('inert')) m.removeAttribute('inert'); }).observe(m, { attributes: true, attributeFilter: ['inert'] }); } catch (e) {}
+        m.removeAttribute('inert');
+        m.classList.remove('hidden');
     };
     window.hsCloseGuideInfo = function () { var m = $id('hs-guide-modal'); if (m) m.classList.add('hidden'); };
     window.hsGuideStart = function () {
@@ -29098,6 +29139,17 @@ body {
                 else if (Math.abs(dx) < 12 && Math.abs(dy) < 12) tourGo(1);
             });
             }
+            /* thẻ giới thiệu: chạm (không kéo) để sang bước; kéo dọc để cuộn khi chữ dài */
+            var tpx = null, tpy = null;
+            tip.addEventListener('pointerdown', function (e) { tpx = e.clientX; tpy = e.clientY; });
+            tip.addEventListener('pointercancel', function () { tpx = null; });
+            tip.addEventListener('pointerup', function (e) {
+                if (tpx == null) return;
+                var tdx = e.clientX - tpx, tdy = e.clientY - tpy; tpx = null;
+                if (st.ask) return;
+                if (Math.abs(tdx) >= 40 && Math.abs(tdx) > Math.abs(tdy) * 1.2) tourGo(tdx < 0 ? 1 : -1);
+                else if (Math.abs(tdx) < 12 && Math.abs(tdy) < 12) tourGo(1);
+            });
         } else {
             var tx = document.createElement('span'); tx.textContent = '👉 ' + note;
             var x = document.createElement('button'); x.type = 'button'; x.className = 'hf-spot-x'; x.textContent = '✕';
@@ -29109,13 +29161,56 @@ body {
         (fsEl && fsEl.appendChild ? fsEl : document.body).appendChild(wrap);
         new MutationObserver(function () { if (wrap.hasAttribute('inert')) wrap.removeAttribute('inert'); }).observe(wrap, { attributes: true, attributeFilter: ['inert'] });
         var zn = null;
-        if (hfZoomable(node)) { try { node.classList.remove('hf-spot-zoom-off'); node.classList.add('hf-spot-zoom'); zn = node; } catch (e) { zn = null; } }
+        if (hfZoomable(node)) {                       /* nút đã quá to thì không phóng to thêm để còn chỗ đặt thẻ giới thiệu */
+            var nr = null; try { nr = node.getBoundingClientRect(); } catch (e) {}
+            var tooBig = !!(nr && (nr.width > window.innerWidth * 0.6 || nr.height > window.innerHeight * 0.4));
+            if (!tooBig) { try { node.classList.remove('hf-spot-zoom-off'); node.classList.add('hf-spot-zoom'); zn = node; } catch (e) { zn = null; } }
+        }
         spot = { wrap: wrap, box: box, tip: tip, node: node, bar: bar, big: !!(st && st.big), keep: !!(st && st.vid), zoomNode: zn };
         placeSpot();
         spot._onScroll = placeSpot; spot._onResize = placeSpot;
         window.addEventListener('scroll', placeSpot, true);
         window.addEventListener('resize', placeSpot);
         spotTimer = setInterval(placeSpot, 300);
+    }
+    /* --- chọn chỗ đặt thẻ giới thiệu sao cho KHÔNG đè lên nút --- */
+    function hfOverlap(a, b) {
+        var x = Math.min(a.left + a.width, b.left + b.width) - Math.max(a.left, b.left);
+        var y = Math.min(a.top + a.height, b.top + b.height) - Math.max(a.top, b.top);
+        return (x <= 0 || y <= 0) ? 0 : x * y;
+    }
+    function hfWrapBoxes(exclude) {
+        var out = [], els;
+        try { els = document.querySelectorAll('button,a,[role="button"]'); } catch (e) { return out; }
+        for (var i = 0; i < els.length && i < 900; i++) {
+            var e = els[i];
+            if (e === exclude) continue;
+            try { if (e.closest && e.closest('#hf-spot-wrap')) continue; } catch (er) {}
+            if (!isShown(e)) continue;
+            var b = e.getBoundingClientRect();
+            if (b.width < 2 || b.height < 2) continue;
+            if (b.bottom < 0 || b.top > window.innerHeight || b.right < 0 || b.left > window.innerWidth) continue;
+            out.push(b);
+            if (out.length >= 220) break;
+        }
+        return out;
+    }
+    function hfSpotCands(r, tw, th, vw, bottomLimit) {
+        var gap = 14;
+        var clampL = function (x) { return Math.max(8, Math.min(vw - tw - 8, Math.round(x))); };
+        var clampT = function (y) { return Math.max(8, Math.min(bottomLimit - th, Math.round(y))); };
+        var rect = function (x, y) { return { left: clampL(x), top: clampT(y), width: tw, height: th }; };
+        var cx = r.left + r.width / 2 - tw / 2, cy = r.top + r.height / 2 - th / 2;
+        return [
+            rect(cx, r.top - gap - th),                    // ngay trên nút
+            rect(cx, r.bottom + gap),                      // ngay dưới nút
+            rect(r.right + gap, cy),                       // bên phải nút
+            rect(r.left - gap - tw, cy),                   // bên trái nút
+            rect((vw - tw) / 2, (bottomLimit - th) / 2),   // giữa vùng dùng được
+            rect(8, 8), rect(vw - tw - 8, 8),              // góc trên trái / phải
+            rect(8, bottomLimit - th), rect(vw - tw - 8, bottomLimit - th),   // góc dưới trái / phải
+            rect((vw - tw) / 2, 8), rect((vw - tw) / 2, bottomLimit - th)     // mép trên / mép dưới
+        ];
     }
     function placeSpot() {
         if (!spot) return;
@@ -29127,15 +29222,39 @@ body {
         var pad = 6, s = spot.box.style;
         s.top = (r.top - pad) + 'px'; s.left = (r.left - pad) + 'px';
         s.width = (r.width + pad * 2) + 'px'; s.height = (r.height + pad * 2) + 'px';
-        var tw = spot.tip.offsetWidth || 260, th = spot.tip.offsetHeight || 56, sp = spot.tip.style;
-        var top = r.top - th - 12; if (top < 8) top = r.bottom + 12;
-        var resB = spot.bar ? 74 : 0;
-        if (spot.big) top = Math.round((window.innerHeight - resB - th) / 2);
-        if (top + th > window.innerHeight - 8 - resB) top = Math.max(8, window.innerHeight - th - 8 - resB);
-        var mgx = spot.bar ? 62 : 8;
-        var left = Math.max(mgx, Math.min(window.innerWidth - tw - mgx, r.left + r.width / 2 - tw / 2));
-        if (spot.big) left = Math.max(8, Math.round((window.innerWidth - tw) / 2));
-        sp.top = top + 'px'; sp.left = left + 'px';
+        var sp = spot.tip.style, vw = window.innerWidth, vh = window.innerHeight;
+        var resB = spot.bar ? 74 : 0, bottomLimit = vh - 8 - resB;
+        var boxRect = { left: r.left - pad, top: r.top - pad, width: r.width + pad * 2, height: r.height + pad * 2 };
+        var others = hfWrapBoxes(spot.node);
+        var base = { w: spot.tip.offsetWidth || 260, h: spot.tip.offsetHeight || 56 };
+        /* thử lần lượt các vị trí quanh nút; nếu nút quá to thì thu nhỏ thẻ để né */
+        var scales = [1, 0.84, 0.7, 0.58, 0.48], best = null, firstPick = null;
+        for (var si = 0; si < scales.length; si++) {
+            var sc = scales[si], tw = base.w * sc, th = base.h * sc;
+            var cands = hfSpotCands(r, tw, th, vw, bottomLimit), pick = null;
+            for (var i = 0; i < cands.length; i++) {
+                var rc = cands[i];
+                if (hfOverlap(rc, boxRect) > 0) continue;      // không đè lên chính nút đang giới thiệu
+                var score = 0, area = 0;
+                for (var k = 0; k < others.length; k++) { var ar = hfOverlap(rc, others[k]); if (ar > 0) { score++; area += ar; } }
+                if (!pick || score < pick.score || (score === pick.score && area < pick.area)) pick = { left: rc.left, top: rc.top, score: score, area: area };
+                if (pick && pick.score === 0) break;           // đã né được hết các nút
+            }
+            if (pick) {
+                pick.scale = sc;
+                if (!firstPick) firstPick = pick;              // cỡ to nhất vẫn né được nút đang giới thiệu
+                if (pick.score === 0) { best = pick; break; }  // né sạch các nút -> dùng vị trí này
+            }
+        }
+        if (!best) best = firstPick;
+        var bestScale = best ? best.scale : 0.58;
+        if (!best) {   // nút chiếm gần hết màn hình: thu nhỏ tối đa, đặt ở mép trên
+            best = { left: Math.max(8, Math.round((vw - base.w * bestScale) / 2)), top: 8 };
+        }
+        spot.tipScale = bestScale;
+        if (bestScale < 1) { sp.transformOrigin = 'top left'; sp.transform = 'scale(' + bestScale + ')'; sp.animation = 'none'; }
+        else { sp.transformOrigin = ''; sp.transform = ''; sp.animation = ''; }
+        sp.top = best.top + 'px'; sp.left = best.left + 'px';
     }
 
     function applyAct(a) {
