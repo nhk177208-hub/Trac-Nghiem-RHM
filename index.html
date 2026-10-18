@@ -27110,11 +27110,25 @@ body {
 .hf-spot-tip.hf-tour-tip{display:block;max-width:min(370px,92vw);padding:12px 14px;font-weight:500}
 .hf-tour-tip .tt{font-weight:900;font-size:14.5px;margin-bottom:5px}
 .hf-tour-tip .td{font-size:13px;line-height:1.55;color:#e5e7eb}
-.hf-tour-bar{position:fixed;left:12px;right:12px;bottom:max(14px,env(safe-area-inset-bottom));z-index:100302;display:flex;align-items:center;justify-content:space-between;gap:8px;pointer-events:none}
-.hf-tour-bar button{pointer-events:auto;border:0;border-radius:9999px;padding:11px 20px;font-weight:800;font-size:14px;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.4)}
-.hf-tb-skip{background:#fff;color:#374151}
-.hf-tb-next{background:linear-gradient(90deg,#6366f1,#a855f7);color:#fff}
-.hf-tour-bar .cnt{color:#fff;font-weight:800;font-size:12px;background:rgba(17,24,39,.75);border-radius:9999px;padding:4px 10px}
+.hf-spot-tip.hf-tour-tip{pointer-events:none;max-width:min(370px,calc(100vw - 124px))}
+.hf-tour-bar{position:fixed;left:0;right:0;bottom:0;height:0;z-index:100302;pointer-events:none}
+.hf-tour-bar .cnt{position:fixed;left:50%;transform:translateX(-50%);bottom:max(22px,calc(env(safe-area-inset-bottom) + 8px));color:#fff;font-weight:800;font-size:12px;background:rgba(17,24,39,.78);border-radius:9999px;padding:4px 11px}
+.hf-tb-skip{position:fixed;right:12px;bottom:max(14px,env(safe-area-inset-bottom));pointer-events:auto;border:0;border-radius:9999px;padding:11px 20px;font-weight:800;font-size:14px;cursor:pointer;background:#fff;color:#374151;box-shadow:0 8px 22px rgba(0,0,0,.4)}
+.hf-tb-arrow{position:fixed;top:50%;margin-top:-26px;width:46px;height:52px;pointer-events:auto;border:0;border-radius:9999px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;background:rgba(79,70,229,.92);box-shadow:0 8px 22px rgba(0,0,0,.4),0 0 0 2px rgba(255,255,255,.85);-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.hf-tb-arrow.prev{left:8px}
+.hf-tb-arrow.next{right:8px}
+.hf-tb-arrow:active{filter:brightness(.88)}
+.hf-tb-arrow[disabled]{opacity:.3;cursor:default}
+.hf-spot-hit.tour{cursor:default;touch-action:none}
+/* Cài Đặt ở màn hình ngang: tách làm 2 cột nút */
+@media (orientation:landscape){
+  #home-settings-modal > div{width:min(780px,96vw)!important;max-width:min(780px,96vw)!important;max-height:96vh;overflow-y:auto;padding:16px 18px!important}
+  #home-settings-modal > div > .flex.items-center.justify-between{margin-bottom:10px!important}
+  #home-settings-modal h3{font-size:clamp(18px,4.2vh,27px)!important}
+  #home-settings-modal button[onclick="closeHomeSettings()"]{width:clamp(34px,8vh,48px)!important;height:clamp(34px,8vh,48px)!important;font-size:18px!important}
+  #home-settings-modal .flex.flex-col.gap-2{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px!important}
+  #home-settings-modal .flex.flex-col.gap-2 > button{font-size:clamp(13px,3.1vh,20px)!important;padding:clamp(8px,2vh,15px) 12px!important;border-radius:16px!important;min-width:0}
+}
 .hf-spot-tip .hf-spot-x{flex:none;width:22px;height:22px;border:0;border-radius:9999px;background:rgba(255,255,255,.18);color:#fff;font-weight:900;font-size:12px;cursor:pointer;line-height:1}
 </style>
 
@@ -27714,66 +27728,126 @@ body {
 
     /* ------------------- giới thiệu lần lượt các nút trên màn hình chính ------------------- */
     var TOUR = [
-        { key: 'bo-suu-tap', t: '🏆 Bộ Sưu Tập Huy Hiệu', d: 'Nơi lưu lại các huy hiệu bạn đạt được trong quá trình học và làm bài. Ôn đều đặn sẽ mở khóa thêm huy hiệu — mở ra xem để biết mình đã tiến bộ đến đâu.' },
-        { key: 'tu-dien', t: '📖 Từ Điển RHM', d: 'Tra nhanh thuật ngữ chuyên ngành Răng Hàm Mặt (Anh – Việt) mà không cần rời app. Khi đọc sách hoặc làm bài, bạn cũng có thể tra từ ngay tại chỗ.' },
-        { key: 'so-ghi-chu', t: '📒 Sổ Ghi Chú', d: 'Nơi tập hợp những nội dung bạn đã lưu lại, nhất là từ các bong bóng chat AI. Dùng để ôn lại các giải thích hay mà không phải hỏi lại từ đầu.' },
-        { key: 'cai-dat', t: '⚙️ Cài Đặt', d: 'Gồm: bật/tắt Trợ lý AI, Đề xuất câu hỏi, Góp ý / Liên hệ, Cài đặt khóa API (cần để dùng các tính năng AI), Nhập / Xuất Tiến Độ để sao lưu hoặc chuyển sang máy khác, Toàn màn hình và Thêm vào màn hình chính.' },
+        { key: 'bo-suu-tap', t: '🏆 Bộ Sưu Tập Huy Hiệu', d: 'Nơi lưu lại các huy hiệu bạn đạt được trong quá trình học và làm bài. Ôn đều đặn sẽ mở khóa thêm huy hiệu. Con số trên nút là số huy hiệu bạn đã có. Mình mở cửa sổ này ra xem nhé.' },
+        { ctx: 'collection', sel: '#collection-modal h3', t: '🏆 Cửa sổ Bộ Sưu Tập', d: 'Đây là kho huy hiệu của bạn. Bạn có thể chọn một hoặc nhiều huy hiệu yêu thích để chúng nổi lên khi bạn đạt chuỗi trả lời đúng (Streak).' },
+        { ctx: 'collection', sel: function () { var e = $id('collection-user-points'); return e && e.parentElement && e.parentElement.parentElement; }, t: '💰 Điểm Tích Lũy', d: 'Số điểm bạn kiếm được khi học và làm bài. Điểm này dùng để đổi lấy huy hiệu mới.' },
+        { ctx: 'collection', sel: function () { var e = $id('collection-stats-text'); return e && e.parentElement && e.parentElement.parentElement; }, t: '🎖️ Tiến Độ Thu Thập', d: 'Cho biết bạn đã mở khóa bao nhiêu huy hiệu trên tổng số huy hiệu hiện có.' },
+        { ctx: 'collection', sel: 'button[onclick="buyRandomEmblemWithPoints()"]', t: '🎲 Đổi huy hiệu ngẫu nhiên', d: 'Dùng 1.000 điểm tích lũy để đổi lấy một huy hiệu ngẫu nhiên chưa có. Nút chỉ dùng được khi bạn đủ điểm.' },
+        { ctx: 'collection', sel: '#emblems-grid', t: '🖼️ Danh sách huy hiệu', d: 'Mỗi ô là một huy hiệu. Ô còn khóa 🔒 là huy hiệu chưa mở. Bấm vào huy hiệu đã có để chọn làm huy hiệu yêu thích.' },
+        { ctx: 'collection', sel: '#collection-modal .mt-4.pt-3.border-t', t: '💡 Mẹo nhận huy hiệu', d: 'Mỗi khi trả lời đúng một câu hỏi, bạn có 1% cơ hội nhận được huy hiệu. Nút Đóng ở bên phải để thoát cửa sổ này.' },
+
+        { key: 'tu-dien', t: '📖 Từ Điển RHM', d: 'Cuốn từ điển thuật ngữ chuyên ngành Răng Hàm Mặt của riêng bạn. Con số trên nút là số thuật ngữ đã lưu. Mình mở ra xem nhé.' },
+        { ctx: 'dict', sel: '#dict-modal .rd-wrap', t: '📖 Cửa sổ Từ Điển', d: 'Từ điển hiển thị như một cuốn sách hai trang. Khi đọc sách, bôi đen một đoạn rồi bấm Dịch trong hộp chat, thuật ngữ mới sẽ tự động được thêm vào đây.' },
+        { ctx: 'dict', sel: '#rd-rb-add', t: '➕ Thêm thuật ngữ mới', d: 'Tự nhập thêm một thuật ngữ vào từ điển, kèm nghĩa mà bạn muốn.' },
+        { ctx: 'dict', sel: '#rd-rb-search', t: '🔍 Tìm thuật ngữ', d: 'Gõ để tìm nhanh một thuật ngữ trong toàn bộ từ điển.' },
+        { ctx: 'dict', sel: '#rd-rb-saved', t: '⭐ Từ đã lưu', d: 'Xem riêng những thuật ngữ bạn đã đánh dấu sao, để ôn lại những từ quan trọng.' },
+        { ctx: 'dict', sel: '#rd-rb-review', t: '🗂️ Ôn tập', d: 'Ôn thuật ngữ bằng thẻ ghi nhớ (flashcard) để nhớ lâu hơn.' },
+        { ctx: 'dict', sel: '#rd-rb-jump', t: '⏩ Đến trang', d: 'Nhảy nhanh tới một trang bất kỳ của từ điển.' },
+        { ctx: 'dict', sel: '#rd-tabL', t: '🔤 Thẻ chữ cái A–Z', d: 'Các thẻ ở hai bên mép sách giúp bạn nhảy thẳng tới các thuật ngữ bắt đầu bằng chữ cái đó.' },
+        { ctx: 'dict', sel: '#rd-next', t: '➡️ Lật trang', d: 'Bấm mũi tên để lật sang trang sau hoặc trở lại trang trước. Bấm vào một thuật ngữ trong trang để xem thông tin, sửa, xóa hoặc đánh dấu sao.' },
+
+        { key: 'so-ghi-chu', t: '📒 Sổ Ghi Chú', d: 'Nơi lưu các ghi chú của bạn, nhất là nội dung từ các bong bóng chat AI. Con số trên nút là số ghi chú đã có. Mình mở ra xem nhé.' },
+        { ctx: 'note', sel: '#note-modal .rd-wrap', t: '📒 Cửa sổ Sổ Ghi Chú', d: 'Sổ ghi chú cũng hiển thị như một cuốn sách hai trang, nơi bạn đọc lại và quản lý toàn bộ ghi chú của mình.' },
+        { ctx: 'note', sel: '#nt-rb-new', t: '➕ Tạo ghi chú mới', d: 'Viết một ghi chú mới của riêng bạn.' },
+        { ctx: 'note', sel: '#nt-rb-search', t: '🔍 Tìm ghi chú', d: 'Gõ từ khóa để tìm lại ghi chú cần xem.' },
+        { ctx: 'note', sel: '#nt-rb-sort', t: '↕️ Sắp xếp ghi chú', d: 'Đổi cách sắp xếp danh sách ghi chú, ví dụ theo thời gian.' },
+        { ctx: 'note', sel: '#nt-rb-aa', t: 'Aa — Cỡ chữ', d: 'Tăng hoặc giảm cỡ chữ của ghi chú cho dễ đọc.' },
+        { ctx: 'note', sel: '#nt-rb-review', t: '🗂️ Ôn tập ghi chú', d: 'Ôn lại các ghi chú đã lưu để ghi nhớ lâu hơn.' },
+        { ctx: 'note', sel: '#nt-next', t: '➡️ Lật trang', d: 'Bấm mũi tên để lật sang trang sau hoặc trở lại trang trước của sổ ghi chú.' },
+
+        { key: 'cai-dat', t: '⚙️ Cài Đặt', d: 'Nơi chỉnh các thiết lập của app. Mình mở ra giới thiệu từng mục nhé.' },
+        { ctx: 'settings', sel: '#hs-homefab-btn', t: '🤖 Trợ lý AI', d: 'Bật hoặc tắt nút Trợ lý AI nổi trên màn hình. Bên cạnh nút có hiển thị trạng thái Đang bật / Đang tắt.' },
+        { ctx: 'settings', sel: '#home-settings-modal button[onclick="homeSettingsGo(\'openSuggestQuestionModal\')"]', t: '💡 Đề xuất câu hỏi', d: 'Bạn có câu hỏi hay muốn đóng góp? Gửi đề xuất ở đây để đưa vào bộ đề.' },
+        { ctx: 'settings', sel: '#home-settings-modal button[onclick="homeSettingsGo(\'openAppFeedbackModal\')"]', t: '📩 Góp ý / Liên hệ', d: 'Gửi góp ý, báo lỗi hoặc liên hệ với người làm app.' },
+        { ctx: 'settings', sel: '#home-settings-modal button[onclick="hsOpenKeys()"]', t: '🔑 Cài đặt khóa API', d: 'Nhập khóa API để dùng các tính năng AI (Hỏi AI, dịch, Trợ lý AI…). Mặc định dùng Gemini miễn phí, có thể thêm nhà cung cấp dự phòng.' },
+        { ctx: 'settings', sel: '#home-settings-modal button[onclick="homeSettingsGo(\'openProgressModal\')"]', t: '🔄 Nhập / Xuất Tiến Độ', d: 'Sao lưu toàn bộ tiến độ học của bạn (điểm, huy hiệu, câu đã lưu…) hoặc chuyển sang máy khác bằng mã QR.' },
+        { ctx: 'settings', sel: '#btn-rhm-fs', t: '⛶ Toàn màn hình', d: 'Bật chế độ toàn màn hình để tập trung học. Khi đang bật, nút này đổi thành Thoát toàn màn hình.' },
+        { ctx: 'settings', sel: '#btn-add-home', t: '📲 Thêm vào MH chính', d: 'Thêm app ra màn hình chính của điện thoại hoặc máy tính để mở nhanh như một ứng dụng.' },
+
         { key: 'mon-hoc', t: '📚 Ôn Tập Theo Môn Học', d: 'Bấm để xổ ra danh sách các môn học kèm video bài giảng. Chọn một môn để xem bài giảng và luyện câu hỏi theo đúng môn đó.' },
         { key: 'chuyen-de', t: '🦷 Ôn Tập Theo Chủ Đề', d: 'Bấm để xổ ra khu ôn tập theo chủ đề, gồm các công cụ ôn nhanh, chuyên sâu, thi thử và 36 chủ đề. Các nút bên trong sẽ được giới thiệu ngay sau đây.' },
-        { key: 'on-nhanh', open: 'chuyende', t: '⚡ Ôn Tập Nhanh', d: 'Tạo nhanh một lượt ôn gọn nhẹ: chọn phạm vi và số câu rồi làm ngay. Hợp khi bạn chỉ có ít thời gian.' },
-        { key: 'chuyen-sau', open: 'chuyende', t: '🧠 Ôn Tập Chuyên Sâu', d: 'Lượt ôn đào sâu hơn, giúp bạn tập trung vào những phần còn yếu thay vì làm đại trà.' },
-        { key: 'thi-thu', open: 'chuyende', t: '🎯 Thi Thử (Mock Exam)', d: 'Làm một đề thi thử có tính giờ như thi thật để đánh giá năng lực của bạn. Bạn cũng có thể tạo đề thi riêng.' },
-        { key: 'da-luu', open: 'chuyende', t: '⭐ Đã lưu', d: 'Danh sách những câu hỏi bạn đã đánh dấu sao khi làm bài, để quay lại ôn riêng những câu quan trọng. Con số trong ngoặc là số câu đã lưu.' },
-        { key: 'da-chan', open: 'chuyende', t: '🚫 Đã chặn', d: 'Những câu hỏi bạn đã chặn nên sẽ không xuất hiện khi làm bài. Vào đây nếu muốn bỏ chặn câu nào đó.' },
-        { sel: '#topic-grid', open: 'chuyende', t: '🦷 36 Chủ Đề Ôn Tập', d: 'Mỗi ô là một chủ đề Răng Hàm Mặt. Bấm vào một ô để bắt đầu luyện các câu hỏi thuộc chủ đề đó.' },
+        { ctx: 'chuyende', key: 'on-nhanh', t: '⚡ Ôn Tập Nhanh', d: 'Tạo nhanh một lượt ôn gọn nhẹ: chọn phạm vi và số câu rồi làm ngay. Hợp khi bạn chỉ có ít thời gian.' },
+        { ctx: 'chuyende', key: 'chuyen-sau', t: '🧠 Ôn Tập Chuyên Sâu', d: 'Lượt ôn đào sâu hơn, giúp bạn tập trung vào những phần còn yếu thay vì làm đại trà.' },
+        { ctx: 'chuyende', key: 'thi-thu', t: '🎯 Thi Thử (Mock Exam)', d: 'Làm một đề thi thử có tính giờ như thi thật để đánh giá năng lực của bạn. Bạn cũng có thể tạo đề thi riêng.' },
+        { ctx: 'chuyende', key: 'da-luu', t: '⭐ Đã lưu', d: 'Danh sách những câu hỏi bạn đã đánh dấu sao khi làm bài, để quay lại ôn riêng những câu quan trọng. Con số trong ngoặc là số câu đã lưu.' },
+        { ctx: 'chuyende', key: 'da-chan', t: '🚫 Đã chặn', d: 'Những câu hỏi bạn đã chặn nên sẽ không xuất hiện khi làm bài. Vào đây nếu muốn bỏ chặn câu nào đó.' },
+        { ctx: 'chuyende', sel: '#topic-grid', t: '🦷 36 Chủ Đề Ôn Tập', d: 'Mỗi ô là một chủ đề Răng Hàm Mặt. Bấm vào một ô để bắt đầu luyện các câu hỏi thuộc chủ đề đó.' },
         { sel: '#home-fab', t: '🤖 Nút Trợ lý AI', d: 'Chính là nút này! Bấm vào sẽ hiện 3 nút: ℹ️ Thông tin (phần giới thiệu bạn đang xem), 🎙️ Chat live (nói chuyện bằng giọng nói) và 💬 Chat (nhắn tin hỏi cách dùng app). Kéo nút để đổi vị trí.' }
     ];
+    var CTXS = {
+        chuyende: {
+            wait: 360,
+            open: function (t) { var b = $id('chuyende-section-container'); if (b && b.classList.contains('hidden')) { openSection('chuyende'); t.opened = true; } },
+            close: function (t) { if (t.opened) { var b = $id('chuyende-section-container'); if (b && !b.classList.contains('hidden')) { try { window.toggleChuyenDeSection(); } catch (e) {} } t.opened = false; } }
+        },
+        collection: { wait: 450, open: function () { window.openCollectionModal(); }, close: function () { window.closeCollectionModal(); } },
+        dict: { wait: 750, open: function () { window.openRhmDict(); }, close: function () { window.closeRhmDict(); } },
+        note: { wait: 750, open: function () { window.openRhmNote(); }, close: function () { window.closeRhmNote(); } },
+        settings: { wait: 450, open: function () { window.openHomeSettings(); }, close: function () { window.closeHomeSettings(); } }
+    };
     function tourHomeOk() {
         if (!shown('home-screen')) return false;
         for (var k in MODAL_NAMES) { if (shown(k)) return false; }
         return true;
     }
     function tourNode(st) {
-        try { return st.sel ? document.querySelector(st.sel) : targetOf(st.key); } catch (e) { return null; }
+        try {
+            if (typeof st.sel === 'function') return st.sel();
+            return st.sel ? document.querySelector(st.sel) : targetOf(st.key);
+        } catch (e) { return null; }
     }
     function startTour() {
         if (!tourHomeOk()) { toast('Phần giới thiệu hiện chỉ dùng được ở màn hình chính — hãy đóng các cửa sổ đang mở rồi thử lại nhé'); return; }
         closePop(); closeWheel(true); clearSpot(true);
         var box = $id('chuyende-section-container');
-        tour = { i: -1, tok: 0, opened: false, wasOpen: !!(box && !box.classList.contains('hidden')) };
+        tour = { i: -1, tok: 0, busy: false, ctx: null, opened: false, wasOpen: !!(box && !box.classList.contains('hidden')) };
         cancelSink(); unsinkFab();
-        tourNext();
+        tourGo(1);
     }
-    function tourNext() {
-        if (!tour) return;
-        var i = tour.i + 1, tok = ++tour.tok;
+    /* đổi "ngữ cảnh" (cửa sổ / vùng đang mở) cho đúng bước cần chỉ rồi mới chạy tiếp */
+    function tourSetCtx(c, cb) {
+        var cur = tour.ctx || null; c = c || null;
+        if (c === cur) { cb(); return; }
+        if (cur && CTXS[cur]) { try { CTXS[cur].close(tour); } catch (e) {} }
+        tour.ctx = c;
+        if (c && CTXS[c]) { try { CTXS[c].open(tour); } catch (e) {} setTimeout(cb, CTXS[c].wait); }
+        else setTimeout(cb, cur ? 220 : 0);
+    }
+    function tourGo(dir) {
+        if (!tour || tour.busy) return;
+        var from = tour.i, i = from + dir;
+        if (i < 0) return;                                   // đang ở bước đầu
+        if (i >= TOUR.length) { finishTour(); return; }
+        var tok = ++tour.tok; tour.busy = true;
         clearSpot(true);
-        function step() {
+        function show(idx, d) {
             if (!tour || tok !== tour.tok) return;
-            if (i >= TOUR.length) { finishTour(); return; }
-            var st = TOUR[i];
-            if (st.open === 'chuyende') {
-                var b = $id('chuyende-section-container');
-                if (b && b.classList.contains('hidden')) { openSection('chuyende'); tour.opened = true; setTimeout(go, 340); return; }
-            }
-            go();
+            if (idx >= TOUR.length) { finishTour(); return; }
+            if (idx < 0) { idx = Math.max(0, from); d = 1; }
+            var st = TOUR[idx];
+            tourSetCtx(st.ctx, function () {
+                if (!tour || tok !== tour.tok) return;
+                var n = tourNode(st);
+                if (!n || !isShown(n)) { show(idx + d, d); return; }
+                tour.i = idx;
+                try { n.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+                setTimeout(function () {
+                    if (!tour || tok !== tour.tok) return;
+                    tour.busy = false;
+                    drawSpot(n, st.t, st);
+                }, 400);
+            });
         }
-        function go() {
-            if (!tour || tok !== tour.tok) return;
-            var st = TOUR[i], n = tourNode(st);
-            if (!n || !isShown(n)) { i++; step(); return; }
-            tour.i = i;
-            try { n.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
-            setTimeout(function () { if (tour && tok === tour.tok) drawSpot(n, st.t, st); }, 420);
-        }
-        step();
+        show(i, dir);
     }
     function finishTour() {
         var t = tour; tour = null;
         clearSpot(true);
-        if (t && t.opened && !t.wasOpen) {
-            var b = $id('chuyende-section-container');
-            if (b && !b.classList.contains('hidden')) { try { window.toggleChuyenDeSection(); } catch (e) {} }
+        if (t) {
+            var cur = t.ctx;
+            if (cur && CTXS[cur]) { try { CTXS[cur].close(t); } catch (e) {} }
+            if (cur !== 'chuyende' && t.opened) { try { CTXS.chuyende.close(t); } catch (e) {} }
+            if (t.opened && !t.wasOpen) { try { CTXS.chuyende.close(t); } catch (e) {} }
         }
         scheduleSink(2500);
     }
@@ -27887,7 +27961,7 @@ body {
         if (!node || !document.body.contains(node)) return;
         var wrap = document.createElement('div'); wrap.id = 'hf-spot-wrap';
         var hit = document.createElement('div'); hit.className = 'hf-spot-hit';
-        if (!st) hit.onclick = function () { clearSpot(); }; else hit.style.cursor = 'default';
+        if (!st) hit.onclick = function () { clearSpot(); };
         var box = document.createElement('div'); box.className = 'hf-spot-box';
         var tip = document.createElement('div'); tip.className = 'hf-spot-tip';
         var bar = null;
@@ -27897,13 +27971,28 @@ body {
             var td = document.createElement('div'); td.className = 'td'; td.textContent = st.d;
             tip.appendChild(tt); tip.appendChild(td);
             bar = document.createElement('div'); bar.className = 'hf-tour-bar';
+            var cn = document.createElement('span'); cn.className = 'cnt'; cn.textContent = (tour.i + 1) + ' / ' + TOUR.length;
             var sk = document.createElement('button'); sk.type = 'button'; sk.className = 'hf-tb-skip'; sk.textContent = 'Bỏ qua';
             sk.onclick = function (ev) { try { ev.stopPropagation(); } catch (e) {} finishTour(); };
-            var cn = document.createElement('span'); cn.className = 'cnt'; cn.textContent = (tour.i + 1) + ' / ' + TOUR.length;
-            var nx = document.createElement('button'); nx.type = 'button'; nx.className = 'hf-tb-next';
-            nx.textContent = (tour.i >= TOUR.length - 1) ? 'Xong ✓' : 'Tiếp theo ›';
-            nx.onclick = function (ev) { try { ev.stopPropagation(); } catch (e) {} tourNext(); };
-            bar.appendChild(sk); bar.appendChild(cn); bar.appendChild(nx);
+            var AR_R = '<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>';
+            var AR_L = '<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';
+            var pv = document.createElement('button'); pv.type = 'button'; pv.className = 'hf-tb-arrow prev'; pv.innerHTML = AR_L; pv.setAttribute('aria-label', 'Trang trước'); pv.title = 'Trang trước';
+            if (tour.i <= 0) pv.disabled = true;
+            pv.onclick = function (ev) { try { ev.stopPropagation(); } catch (e) {} tourGo(-1); };
+            var nx = document.createElement('button'); nx.type = 'button'; nx.className = 'hf-tb-arrow next'; nx.innerHTML = AR_R; nx.setAttribute('aria-label', 'Tiếp theo'); nx.title = 'Tiếp theo';
+            nx.onclick = function (ev) { try { ev.stopPropagation(); } catch (e) {} tourGo(1); };
+            bar.appendChild(cn); bar.appendChild(sk); bar.appendChild(pv); bar.appendChild(nx);
+            /* chạm nửa phải = tiếp theo, nửa trái = trang trước; vuốt trái = tiếp, vuốt phải = trước */
+            hit.className += ' tour';
+            var gx = null, gy = null;
+            hit.addEventListener('pointerdown', function (e) { gx = e.clientX; gy = e.clientY; try { hit.setPointerCapture(e.pointerId); } catch (er) {} });
+            hit.addEventListener('pointercancel', function () { gx = null; });
+            hit.addEventListener('pointerup', function (e) {
+                if (gx == null) return;
+                var dx = e.clientX - gx, dy = e.clientY - gy; gx = null;
+                if (Math.abs(dx) >= 40 && Math.abs(dx) > Math.abs(dy) * 1.2) tourGo(dx < 0 ? 1 : -1);
+                else if (Math.abs(dx) < 12 && Math.abs(dy) < 12) tourGo(e.clientX >= window.innerWidth / 2 ? 1 : -1);
+            });
         } else {
             var tx = document.createElement('span'); tx.textContent = '👉 ' + note;
             var x = document.createElement('button'); x.type = 'button'; x.className = 'hf-spot-x'; x.textContent = '✕';
@@ -27922,9 +28011,9 @@ body {
     function placeSpot() {
         if (!spot) return;
         var n = spot.node;
-        if (!document.body.contains(n) || !isShown(n)) { if (tour) tourNext(); else clearSpot(); return; }
+        if (!document.body.contains(n) || !isShown(n)) { if (tour) tourGo(1); else clearSpot(); return; }
         var r = n.getBoundingClientRect();
-        if (!r.width && !r.height) { if (tour) tourNext(); else clearSpot(); return; }
+        if (!r.width && !r.height) { if (tour) tourGo(1); else clearSpot(); return; }
         var pad = 6, s = spot.box.style;
         s.top = (r.top - pad) + 'px'; s.left = (r.left - pad) + 'px';
         s.width = (r.width + pad * 2) + 'px'; s.height = (r.height + pad * 2) + 'px';
@@ -27932,7 +28021,8 @@ body {
         var top = r.top - th - 12; if (top < 8) top = r.bottom + 12;
         var resB = spot.bar ? 74 : 0;
         if (top + th > window.innerHeight - 8 - resB) top = Math.max(8, window.innerHeight - th - 8 - resB);
-        var left = Math.max(8, Math.min(window.innerWidth - tw - 8, r.left + r.width / 2 - tw / 2));
+        var mgx = spot.bar ? 62 : 8;
+        var left = Math.max(mgx, Math.min(window.innerWidth - tw - mgx, r.left + r.width / 2 - tw / 2));
         sp.top = top + 'px'; sp.left = left + 'px';
     }
 
@@ -28061,6 +28151,7 @@ body {
             closePop();
         });
         document.addEventListener('keydown', function (e) {
+            if (tour && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) { e.preventDefault(); e.stopPropagation(); tourGo(e.key === 'ArrowRight' ? 1 : -1); return; }
             if (e.key !== 'Escape') return;
             if (tour) { finishTour(); return; }
             if (spot) { clearSpot(); return; }
