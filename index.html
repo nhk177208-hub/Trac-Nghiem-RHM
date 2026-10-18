@@ -18966,7 +18966,13 @@ window.isIOSDevice = function () {
         const totalShown = fSet ? fSet.size : rd.terms.length;
         const backFilterBtn = fSet ? '<button type="button" class="rd-bdg" data-act="clr-filter" style="background:#dc2626;color:#fff;border:0;cursor:pointer;font-weight:800" title="Bỏ lọc chủ đề, trở về toàn bộ từ điển">↩ Trở về</button>' : '';
         const topicChip = (fSet && rd.filterTopic) ? '<div class="rd-subtopic-row"><span class="rd-subtopic-tag">🧭 Chủ đề: ' + esc(capVi(rd.filterTopic)) + '</span></div>' : '';
-        const hd = showHd ? '<div class="rd-hd' + (topicChip ? ' has-sub' : '') + '"><div class="rd-hd-top"><span class="rd-ttl">Từ điển thuật ngữ RHM</span><span class="rd-bdg">Tổng ' + totalShown + ' · trang ' + Math.min(i + 1, tot) + '/' + tot + '</span>' + backFilterBtn + newChip() + '</div>' + topicChip + '</div>' : '';
+        const chip = newChip();
+        /* Sách 2 trang: nút "Xem thuật ngữ mới" nằm ở TRANG 2 (trang phải), canh lề trái bằng với chữ.
+           Chế độ 1 trang thì giữ ở trang đang xem để không mất nút. */
+        const chipLeft = (rd.per === 2) ? '' : chip;
+        const hd = showHd
+            ? '<div class="rd-hd' + (topicChip ? ' has-sub' : '') + '"><div class="rd-hd-top"><span class="rd-ttl">Từ điển thuật ngữ RHM</span><span class="rd-bdg">Tổng ' + totalShown + ' · trang ' + Math.min(i + 1, tot) + '/' + tot + '</span>' + backFilterBtn + chipLeft + '</div>' + topicChip + '</div>'
+            : ((rd.per === 2 && pos === 'R' && chip) ? '<div class="rd-hd rd-hd-chip"><div class="rd-hd-top">' + chip + '</div></div>' : '');
         if (T === 0) {
             return i === 0 ? hd + '<div class="rd-body"><div class="rd-empty">Từ điển còn trống.<br>Khi đọc sách, bôi đen một đoạn rồi bấm 🌐 Dịch trong hộp chat — thuật ngữ RHM mới sẽ tự động được thêm vào đây. Bạn cũng có thể bấm ＋ để thêm tay.</div></div>' : '<div class="rd-body"></div>';
         }
@@ -19078,7 +19084,23 @@ window.isIOSDevice = function () {
     function paintRib() {
         ['add', 'search', 'saved', 'review', 'jump', 'aa'].forEach(n => { const b = $('rd-rb-' + n); if (b) b.classList.toggle('on', n === 'review' ? !!rd.rv : rd.pop === n); });
     }
-    function closePop() { try { stopInfoSpeak(); } catch (e) {} rd.pop = ''; rd.editT = null; rd.infoT = null; rd.more = null; rd.editIm = null; const p = $('rd-pop'); p.classList.add('hidden'); p.classList.remove('wide', 'more', 'tall', 'add-ctr', 'mid-ctr', 'mid-row'); p.style.left = ''; p.style.top = ''; p.style.right = ''; paintRib(); }
+    function closePop() {
+        try { stopInfoSpeak(); } catch (e) {}
+        rd.pop = ''; rd.editT = null; rd.infoT = null; rd.more = null; rd.editIm = null;
+        const p = $('rd-pop'); if (!p) return;
+        p.classList.add('hidden');
+        /* Giữ nguyên vị trí/khung (wide/tall/mid-ctr/add-ctr/info-ctr…) trong lúc chạy animation đóng,
+           để thẻ đóng ngay tại chỗ giống nút Ôn tập & Aa — không "chớp" về sát bên dưới nút rồi mới đóng.
+           Dọn dẹp sau khi animation kết thúc (hoặc ở lần mở kế tiếp). */
+        const tok = (rd._popTok = (rd._popTok || 0) + 1);
+        clearTimeout(rd._popClrT);
+        rd._popClrT = setTimeout(function () {
+            if (rd._popTok !== tok || !p.classList.contains('hidden')) return;
+            p.classList.remove('wide', 'more', 'tall', 'info-ctr', 'add-ctr', 'mid-ctr', 'mid-row');
+            p.style.left = ''; p.style.top = ''; p.style.right = '';
+        }, 300);
+        paintRib();
+    }
     function placeNewT() {
     var p = $('rd-pop'), w = p && p.parentNode, b = document.querySelector('#dict-modal .rd-nwv');
     if (!p || !w || !b) return;
@@ -19093,6 +19115,8 @@ function openPop(mode, t) {
         rd.pop = mode; rd.editD = mode === 'row' ? (t.d || '') : ''; rd.editT = mode === 'row' ? t : null; rd.infoT = mode === 'info' ? t : null;
         rd.editIm = mode === 'row' ? cleanIm(t && t.im).slice() : null; rd.more = null;
         const p = $('rd-pop'); let h = '', focus = '';
+        p.style.left = ''; p.style.top = ''; p.style.right = '';   // xoá vị trí cũ trước khi mở kiểu mới
+        rd._popTok = (rd._popTok || 0) + 1;                        // huỷ việc dọn dẹp đang chờ của lần đóng trước
         const POSL = '<datalist id="rd-pos-list"><option value="n"><option value="v"><option value="adj"><option value="adv"><option value="pl"><option value="sing"><option value="n, pl"><option value="abbr"></datalist>';
         const POSI = v => '<input id="rd-in-pos" class="rd-in" list="rd-pos-list" placeholder="Từ loại: n, v, adj, adv, pl, sing…" value="' + esc(v || '') + '" autocomplete="off">' + POSL;
         if (mode === 'add') {
@@ -19235,7 +19259,7 @@ function openPop(mode, t) {
             };
             box.innerHTML = '<div class="rd-mcols"><div>' + mk('same') + '</div><div>' + mk('form') + '</div></div>';
         }
-        if (bt) bt.innerHTML = '<span class="rd-pbg"><button type="button" class="rd-pbtn" data-act="cancel">Đóng</button><button type="button" class="rd-pbtn" data-act="more-redo">↻ Gợi ý lại</button></span><span class="rd-pbg rd-pbg-r"><button type="button" class="rd-pbtn pri" id="rd-madd" data-act="more-add">＋ Thêm đã chọn</button><button type="button" class="rd-pbtn" data-act="more-all">☑ Chọn tất cả</button></span>';
+        if (bt) bt.innerHTML = '<span class="rd-pbg"><button type="button" class="rd-pbtn" data-act="cancel">Đóng</button><button type="button" class="rd-pbtn" data-act="more-redo">↻ Gợi ý lại</button></span><span class="rd-pbg rd-pbg-r"><button type="button" class="rd-pbtn" data-act="more-all">☑ Chọn tất cả</button><button type="button" class="rd-pbtn pri" id="rd-madd" data-act="more-add">＋ Thêm đã chọn</button></span>';
         moreCount();
     }
     function moreCount() {
@@ -20907,8 +20931,30 @@ function moveEdActs() {
     function step(d) { if (nt.edId) { toast('Lưu hoặc hủy ghi chú đang sửa trước'); return; } const p = nt.cur + d * nt.per; if (p < 0 || p >= nt.pages.length) return; flipTo(p); }
 
     /* ---------- hộp nhỏ ---------- */
-    function closePop() { nt.pop = ''; nt.ed = null; nt.editIm = null; const p = $('nt-pop'); if (p) p.classList.add('hidden'), p.classList.remove('wide', 'tall', 'nt-ctr'); ['search', 'sort', 'aa'].forEach(k => { const b = $('nt-rb-' + k); if (b) b.classList.remove('on'); }); const r = $('nt-rb-review'); if (r) r.classList.toggle('on', !!nt.rv); }
-    function openPop(html, cls, mode) { closePop(); const p = $('nt-pop'); p.innerHTML = html; (cls || '').split(' ').filter(Boolean).forEach(c => p.classList.add(c)); p.classList.remove('hidden'); nt.pop = mode; const b = $('nt-rb-' + mode); if (b) b.classList.add('on'); return p; }
+    function closePop() {
+        nt.pop = ''; nt.ed = null; nt.editIm = null;
+        const p = $('nt-pop');
+        if (p) {
+            p.classList.add('hidden');
+            /* giữ nguyên khung/vị trí cho tới khi animation đóng chạy xong để thẻ không "nhảy" về dưới nút */
+            const tok = (nt._popTok = (nt._popTok || 0) + 1);
+            clearTimeout(nt._popClrT);
+            nt._popClrT = setTimeout(function () {
+                if (nt._popTok !== tok || !p.classList.contains('hidden')) return;
+                p.classList.remove('wide', 'tall', 'nt-ctr');
+            }, 300);
+        }
+        ['search', 'sort', 'aa'].forEach(k => { const b = $('nt-rb-' + k); if (b) b.classList.remove('on'); }); const r = $('nt-rb-review'); if (r) r.classList.toggle('on', !!nt.rv);
+    }
+    function openPop(html, cls, mode) {
+        closePop();
+        const p = $('nt-pop'); if (!p) return;
+        nt._popTok = (nt._popTok || 0) + 1;                 // huỷ dọn dẹp đang chờ của lần đóng trước
+        p.classList.remove('wide', 'tall', 'nt-ctr');       // bỏ khung của kiểu trước để mở đúng kiểu mới
+        p.innerHTML = html; (cls || '').split(' ').filter(Boolean).forEach(c => p.classList.add(c));
+        p.classList.remove('hidden'); nt.pop = mode;
+        const b = $('nt-rb-' + mode); if (b) b.classList.add('on'); return p;
+    }
     function ctxLines(c) {
         c = c || {}; const L = [], add = (k, v) => { if (v !== undefined && v !== null && String(v).trim() !== '') L.push([k, String(v)]); };
         if (c.k === 'book') { add('Loại', 'Sách'); add('Môn', c.subj); add('Tên sách', c.book); add('Chương', c.chap); add('Trang', c.page); }
@@ -22075,6 +22121,8 @@ function moveEdActs() {
 #dict-modal .rd-book.one .rd-pg .rd-body,#note-modal .rd-book.one .rd-pg .rd-body{left:var(--bm-o);right:var(--bm-o)}
 #dict-modal .rd-pg .rd-hd,#note-modal .rd-pg .rd-hd{left:var(--bm-o);right:var(--bm-i)}
 #dict-modal .rd-book.one .rd-pg .rd-hd,#note-modal .rd-book.one .rd-pg .rd-hd{right:var(--bm-o)}
+/* Nút "Xem thuật ngữ mới" ở TRANG 2: canh lề trái bằng với chữ của trang phải */
+#dict-modal .rd-pg.rd-R .rd-hd.rd-hd-chip{left:var(--bm-i);right:var(--bm-o)}
 #dict-modal .rd-pg .rd-ft,#note-modal .rd-pg .rd-ft{left:0;right:0;text-align:center;bottom:calc(var(--bm-b) / 2 - 9px)}
 /* ===== Sổ ghi chú: hiển thị đủ nội dung (tràn sang trang kế), dropcap theo môn học cách 1 dòng ===== */
 .nt-b,#note-modal .nt-b{display:block!important;-webkit-line-clamp:unset!important;line-clamp:unset!important;overflow:visible!important}
@@ -24235,8 +24283,8 @@ html.rhm-dragging,html.rhm-dragging body{-webkit-user-select:none;user-select:no
         return f;
     }
     function syncPop(p, modeOf, okModes) {
-        var hidden = p.classList.contains('hidden');
-        var mode = hidden ? '' : modeOf(p);
+        if (p.classList.contains('hidden')) return;   // đang đóng (giữ nguyên vị trí cho animation) → không tháo khung/khoá canh giữa
+        var mode = modeOf(p);
         var f = null; for (var i = 0; i < p.children.length; i++) if (p.children[i].classList.contains('rb-ftr')) f = p.children[i];
         if (!mode) { if (p.classList.contains('rb-ctr')) p.classList.remove('rb-ctr'); if (p.hasAttribute('data-rbm')) p.removeAttribute('data-rbm'); if (f) f.remove(); return; }
         if (!p.classList.contains('rb-ctr')) p.classList.add('rb-ctr');
@@ -27226,15 +27274,16 @@ body {
 .hf-wb svg{display:block}
 
 /* ---------- Chiếu sáng / chỉ tận nơi ---------- */
-#hf-spot-wrap{position:fixed;inset:0;z-index:100300}
+/* Thấp hơn nút Trợ lý AI (#home-fab z-index 100200) để nút luôn bấm được khi đang chạy hướng dẫn / chỉ tận nơi */
+#hf-spot-wrap{position:fixed;inset:0;z-index:100190}
 #hf-spot-wrap .hf-spot-hit{position:absolute;inset:0;cursor:pointer}
 .hf-spot-box{position:fixed;border-radius:14px;pointer-events:none;box-shadow:0 0 0 9999px rgba(2,6,23,.6),0 0 0 3px rgba(255,255,255,.95),0 0 22px 7px rgba(99,102,241,.8);transition:all .18s ease}
-.hf-spot-tip{position:fixed;z-index:100301;max-width:min(620px,92vw);display:flex;gap:10px;align-items:flex-start;background:#111827;color:#fff;border-radius:14px;padding:14px 16px;font-size:26px;font-weight:700;line-height:1.45;text-align:justify;text-justify:inter-word;box-shadow:0 12px 30px rgba(0,0,0,.45);animation:hfPop .18s ease}
+.hf-spot-tip{position:fixed;z-index:100191;max-width:min(620px,92vw);display:flex;gap:10px;align-items:flex-start;background:#111827;color:#fff;border-radius:14px;padding:14px 16px;font-size:26px;font-weight:700;line-height:1.45;text-align:justify;text-justify:inter-word;box-shadow:0 12px 30px rgba(0,0,0,.45);animation:hfPop .18s ease}
 .hf-spot-tip.hf-tour-tip{display:block;max-width:min(620px,92vw);padding:16px 18px;font-weight:500}
 .hf-tour-tip .tt{font-weight:900;font-size:clamp(15px,min(3vw,3.6vh),29px);margin-bottom:8px}
 .hf-tour-tip .td{font-size:clamp(13px,min(2.7vw,3.3vh),26px);line-height:1.5;color:#e5e7eb;white-space:pre-line;text-align:justify;text-justify:inter-word}
 .hf-spot-tip.hf-tour-tip{pointer-events:auto;max-width:min(640px,max(280px,calc(100vw - 96px)));max-height:calc(100vh - 20px);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;user-select:none;-webkit-user-select:none}
-.hf-tour-bar{position:fixed;left:0;right:0;bottom:0;height:0;z-index:100302;pointer-events:none}
+.hf-tour-bar{position:fixed;left:0;right:0;bottom:0;height:0;z-index:100192;pointer-events:none}
 .hf-tour-bar .cnt{position:fixed;left:50%;transform:translateX(-50%);bottom:max(22px,calc(env(safe-area-inset-bottom) + 8px));color:#fff;font-weight:800;font-size:12px;background:rgba(17,24,39,.78);border-radius:9999px;padding:4px 11px}
 .hf-tb-skip{position:fixed;right:12px;bottom:max(14px,env(safe-area-inset-bottom));pointer-events:auto;border:0;border-radius:9999px;padding:11px 20px;font-weight:800;font-size:14px;cursor:pointer;background:#fff;color:#374151;box-shadow:0 8px 22px rgba(0,0,0,.4)}
 .hf-tb-arrow{position:fixed;top:50%;margin-top:-26px;width:46px;height:52px;pointer-events:auto;border:0;border-radius:9999px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;background:rgba(79,70,229,.92);box-shadow:0 8px 22px rgba(0,0,0,.4),0 0 0 2px rgba(255,255,255,.85);-webkit-tap-highlight-color:transparent;touch-action:manipulation}
@@ -27821,7 +27870,7 @@ body {
     }
     window.homeFabToggle = function () {
         if (Date.now() < skipClick) return;      // vừa kéo xong thì không coi là bấm
-        if (tour) return;
+        /* Không chặn khi đang chạy hướng dẫn: nút Trợ lý AI luôn dùng được (kể cả ở mọi cửa sổ phụ) */
         var p = $id('home-fab-pop'); if (!p) return;
         if (!p.classList.contains('hidden')) { closePop(); return; }
         if (wheelOn) closeWheel(); else openWheel();
@@ -28575,7 +28624,7 @@ body {
         { m: 'dict-modal', k: 'd-more', q: '#dict-modal .rd-act [data-act="r-more"]', wait: 700, cond: function () { return shown('rd-pop'); }, steps: [
             { sel: dnVis(['rd-pop']), xl: true, t: '＋ Thêm từ liên quan', d: 'AI gợi ý các thuật ngữ cùng bộ / cùng từ loại với từ bạn đang chọn để bạn mở rộng vốn từ nhanh.' },
             { sel: qbQ('#rd-mt'), xl: true, t: '☑️ Danh sách gợi ý', d: 'Tick chọn những từ muốn thêm. Từ nào đã có trong từ điển thì không bị thêm trùng.' },
-            { sel: qbQ('#rd-mb'), xl: true, t: '＋ Thêm các từ đã chọn', d: 'Bấm để thêm các từ đã tick vào từ điển; từ mới thêm có dấu MỚI. Góc trái là Đóng và ↻ Gợi ý lại; góc phải là ＋ Thêm đã chọn và ☑ Chọn tất cả.' }] },
+            { sel: qbQ('#rd-mb'), xl: true, t: '＋ Thêm các từ đã chọn', d: 'Bấm để thêm các từ đã tick vào từ điển; từ mới thêm có dấu MỚI. Góc trái là Đóng và ↻ Gợi ý lại; góc phải là ☑ Chọn tất cả và ＋ Thêm đã chọn.' }] },
         { m: 'dict-modal', k: 'd-edit', q: '#dict-modal .rd-act [data-act="r-edit"]', wait: 450, cond: function () { return shown('rd-pop'); }, steps: [
             { sel: dnVis(['rd-pop']), xl: true, t: '✏️ Sửa thuật ngữ', d: 'Chỉnh lại thuật ngữ cho đúng ý bạn. Các lần dịch sau sẽ dùng đúng nghĩa bạn vừa sửa.' },
             { sel: qbQ('#rd-in-en'), xl: true, t: '🔤 Thuật ngữ tiếng Anh', d: 'Sửa chính tả hoặc cách viết của thuật ngữ.' },
@@ -29229,8 +29278,9 @@ body {
         var sp = spot.tip.style, vw = window.innerWidth, vh = window.innerHeight;
         var resB = spot.bar ? 74 : 0, bottomLimit = vh - 8 - resB;
         if (sp.transform) sp.transform = '';           // đo lại kích thước thật (bỏ phần thu nhỏ của lần trước)
-        /* thẻ cao hơn chỗ trống thì cho CUỘN bên trong (chữ vẫn to, dễ đọc) thay vì thu nhỏ cả thẻ xuống mức khó đọc */
-        try { sp.maxHeight = Math.max(140, Math.round(bottomLimit - 8)) + 'px'; } catch (eMH) {}
+        /* tạm bỏ giới hạn chiều cao để đo chiều cao TỰ NHIÊN của thẻ; sẽ quyết định thu nhỏ hay cho cuộn ở dưới */
+        var availH = Math.max(140, Math.round(bottomLimit - 8));
+        try { sp.maxHeight = 'none'; } catch (eMH) {}
         /* Thẻ là position:fixed + width:auto nên bề rộng bị co giãn theo chính vị trí left ⇒ khoá bề rộng theo
            nội dung trước khi đo, để kích thước thẻ không thay đổi lúc đặt sang chỗ khác (gốc của việc thẻ đè lên nút). */
         var mr0 = null;
@@ -29252,8 +29302,21 @@ body {
         var boxSafe = { left: boxRect.left - 2, top: boxRect.top - 2, width: boxRect.width + 4, height: boxRect.height + 4 };
         var others = hfWrapBoxes(spot.node);
         var base = { w: mr0.width || 260, h: mr0.height || 56 };
+        /* Nếu thẻ cao hơn vùng hiển thị: THU NHỎ (scale) để vừa trọn giữa cạnh trên và dưới màn hình,
+           miễn chữ còn đủ to để đọc — như vậy không cần cuộn. Quá thấp mới cho cuộn để giữ chữ dễ đọc. */
+        var fitH = base.h > 0 ? ((bottomLimit - 8) / base.h) : 1;
+        var noScroll = fitH >= 0.48;
+        try { sp.maxHeight = noScroll ? 'none' : availH + 'px'; } catch (eMH2) {}
         /* thử lần lượt các vị trí quanh nút; nếu nút quá to thì thu nhỏ thẻ để né */
-        var scales = [1, 0.84, 0.7, 0.58, 0.48], best = null;
+        var capS = noScroll ? Math.min(1, fitH) : 1;
+        var steps = [1, 0.88, 0.78, 0.7, 0.62, 0.55, 0.48], scales = [];
+        for (var si0 = 0; si0 < steps.length; si0++) {
+            var sv = Math.min(capS, steps[si0]);
+            if (sv < 0.48) break;
+            if (!scales.length || scales[scales.length - 1] - sv > 0.02) scales.push(sv);
+        }
+        if (!scales.length) scales = [0.48];
+        var best = null;
         for (var si = 0; si < scales.length; si++) {
             var sc = scales[si], tw = base.w * sc, th = base.h * sc;
             var cands = hfSpotCands(r, tw, th, vw, bottomLimit, spot.bar ? 56 : 8), pick = null;
