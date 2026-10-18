@@ -15784,7 +15784,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
     }
     function aiVoiceSet(v) { try { if (v) localStorage.setItem('ai_tts_voice', v); else localStorage.removeItem('ai_tts_voice'); } catch (e) {} aiVoiceTest(); }
     try { if ('speechSynthesis' in window) window.speechSynthesis.addEventListener('voiceschanged', aiVoiceRender); } catch (e) {}
-    const AI_TTS_SKIP = '.bk-tr-head,.bk-bi-hd,.ai-actrow,.ai-ttsbar,.ai-refbar,.ai-imgwrap,.ai-liverefs,.ai-dr-refs,.ai-dr-note,.ai-cite,.nt-savebar,img,script,style';
+    const AI_TTS_SKIP = '.bk-tr-head,.bk-bi-hd,.ai-bi-h,.ai-actrow,.ai-ttsbar,.ai-refbar,.ai-imgwrap,.ai-liverefs,.ai-dr-refs,.ai-dr-note,.ai-cite,.nt-savebar,img,script,style';
     function aiTtsMap(root) {   // gom chữ của bong bóng (bỏ nút, link dẫn, ảnh) thành 1 chuỗi + bảng vị trí từng text node
         let flat = ''; const segs = [];
         (function walk(n) {
@@ -15821,17 +15821,34 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
         if (!a || !b) return null;
         const r = document.createRange(); try { r.setStart(a.n, a.o); r.setEnd(b.n, b.o); } catch (x) { return null; } return r;
     }
-    function aiTtsMark(bubble, s0, e0) {   // tô sáng câu đang đọc (CSS Highlight API; máy cũ thì bọc <span>)
-        aiTtsHlClear();
-        const { segs } = aiTtsMap(bubble), r = aiTtsRange(segs, s0, e0); if (!r) return;
+    function aiTtsScrollBox(node) {   // khung cuộn gần nhất chứa đoạn đang đọc (khung chat, chế độ chia đôi, video, hộp phụ...)
+        let el = node && (node.nodeType === 1 ? node : node.parentElement);
+        while (el && el !== document.body && el !== document.documentElement) {
+            let oy = ''; try { oy = getComputedStyle(el).overflowY; } catch (x) {}
+            if (/(auto|scroll)/.test(oy) && el.scrollHeight > el.clientHeight + 2) return el;
+            el = el.parentElement;
+        }
+        return document.getElementById('ai-messages');
+    }
+    function aiTtsReveal(r) {   // đoạn đang đọc ra ngoài vùng nhìn thấy thì cuộn tới
         let rect = null; try { rect = r.getBoundingClientRect(); } catch (x) {}
+        if (!rect || !(rect.width || rect.height)) return;
+        const box = aiTtsScrollBox(r.startContainer); if (!box) return;
+        const br = box.getBoundingClientRect();
+        if (rect.top < br.top + 4 || rect.bottom > br.bottom - 4) box.scrollBy({ top: rect.top - br.top - br.height / 3, behavior: 'smooth' });
+    }
+    function aiTtsPaint(r, segs) {   // tô sáng vùng r (CSS Highlight API; máy cũ thì bọc <span>)
+        aiTtsReveal(r);
         if (window.Highlight && window.CSS && CSS.highlights) { try { CSS.highlights.set('ai-tts', new Highlight(r)); } catch (x) {} }
         else {
             const hits = segs.filter(g => r.intersectsNode(g.node)).map(g => ({ g, a: g.node === r.startContainer ? r.startOffset : 0, b: g.node === r.endContainer ? r.endOffset : g.node.nodeValue.length })).filter(h => h.b > h.a);
             hits.forEach(h => { let nd = h.g.node; if (h.b < nd.nodeValue.length) nd.splitText(h.b); if (h.a > 0) nd = nd.splitText(h.a); const sp = document.createElement('span'); sp.className = 'ai-tts-hl'; nd.parentNode.insertBefore(sp, nd); sp.appendChild(nd); });
         }
-        const box = document.getElementById('ai-messages');   // câu đang đọc ra ngoài vùng nhìn thấy thì cuộn tới
-        if (box && rect && (rect.width || rect.height)) { const br = box.getBoundingClientRect(); if (rect.top < br.top + 4 || rect.bottom > br.bottom - 4) box.scrollBy({ top: rect.top - br.top - br.height / 3, behavior: 'smooth' }); }
+    }
+    function aiTtsMark(root, s0, e0) {   // root = cả bong bóng hoặc 1 ô/cột/đoạn trong bong bóng; s0,e0 tính theo chữ của root
+        aiTtsHlClear();
+        const { segs } = aiTtsMap(root), r = aiTtsRange(segs, s0, e0); if (!r) return;
+        aiTtsPaint(r, segs);
     }
     /* Đọc to trong khung chat: đoạn tiếng Anh đọc bằng giọng Anh bản xứ (nam nếu chọn NamMinh, còn lại dùng giọng nữ) */
 function aiIsEnglishText(t) {
@@ -15988,30 +16005,28 @@ function aiLangPieces(arr) {
     ut.pitch = ut._isEn ? 1.0 : aiVoicePitch();
 }
 
-function aiTtsStartBi(bubble, btn) {
-    if (!('speechSynthesis' in window)) { showToast('Trình duyệt không hỗ trợ đọc to'); return; }
-    aiTtsStop();
-    var lt = bubble._lt || {}, en = aiPlainSents(lt.en), vi = aiPlainSents(lt.vi), seq = [], n = Math.max(en.length, vi.length);
-    for (var i = 0; i < n; i++) {
-        if (en[i]) seq.push('\u0001' + en[i]);
-        if (vi[i]) seq.push(vi[i]);
+function aiTtsStartBi(bubble, btn) { aiTtsStart(bubble, null, null, btn); }   // song ngữ (cột/hàng) chạy chung aiTtsStart để tô sáng + cuộn theo từng đoạn
+
+/* Các khối đọc của 1 bong bóng song ngữ dạng cột, theo thứ tự Anh rồi Việt, mỗi khối là 1 đoạn/ô để tô sáng:
+   - bảng dịch PDF (.bk-bi-row: cột Bản gốc | Tiếng Việt): đọc từng hàng, ô gốc rồi ô Việt;
+   - hai cột ENG | VIE của chat (.ai-bi): ghép từng dòng (nếu hai cột bằng số dòng) hoặc từng câu, Anh rồi Việt. */
+function aiTtsBiUnits(bb) {
+    const out = [], ok = (t) => /[\p{L}\p{N}]/u.test(t);
+    const cell = (root, en) => { const f = aiTtsMap(root).flat, t = aiTtsClean(f); if (ok(t)) out.push({ b: bb, root: root, s: 0, e: f.length, t: t, en: en }); };
+    const rows = bb.querySelectorAll('.bk-bi-row:not(.bk-bi-hd)');
+    if (rows.length) {
+        rows.forEach(r => { const a = r.querySelector('.bk-bi-src'), v = r.querySelector('.bk-bi-vi'); if (a) cell(a, true); if (v) cell(v, false); });
+        return out;
     }
-    var pieces = aiLangPieces(seq);
-    if (!pieces.length) { showToast('Chưa có nội dung để đọc'); return; }
-    var st = { bubble: bubble, btn: btn || null };
-    aiTts = st; aiTtsLabel(st.btn, true); aiTtsSync();
-    var v = aiVoicePick(), pi = 0;
-    var speak = function () {
-        if (aiTts !== st) return;
-        if (pi >= pieces.length) { aiTtsStop(); return; }
-        var ut = aiUttFor(pieces[pi++], v);
-        aiApplyUttRatePitch(ut);
-        ut.onend = speak;
-        ut.onerror = function (e) { if (aiTts === st && e.error !== 'canceled' && e.error !== 'interrupted') { aiTtsStop(); showToast('Không đọc được (thiết bị chưa có giọng đọc?)'); } };
-        st.cur = ut;
-        window.speechSynthesis.speak(ut);
-    };
-    setTimeout(speak, 80);
+    const cols = bb.querySelectorAll('.ai-bi > .ai-bi-c');
+    if (cols.length !== 2) return null;
+    const lines = (c, en) => { const f = aiTtsMap(c).flat, arr = [], re = /[^\n]+/g; let m; while ((m = re.exec(f))) { const t = aiTtsClean(m[0]); if (ok(t)) arr.push({ b: bb, root: c, s: m.index, e: m.index + m[0].length, t: t, en: en }); } return arr; };
+    const sents = (c, en) => { const f = aiTtsMap(c).flat; return aiTtsSentences(f, 0, f.length).map(u => ({ b: bb, root: c, s: u.s, e: u.e, t: aiTtsClean(f.slice(u.s, u.e)), en: en })).filter(u => ok(u.t)); };
+    let E = lines(cols[0], true), V = lines(cols[1], false);
+    if (E.length !== V.length) { E = sents(cols[0], true); V = sents(cols[1], false); }
+    const n = Math.max(E.length, V.length);
+    for (let i = 0; i < n; i++) { if (E[i]) out.push(E[i]); if (V[i]) out.push(V[i]); }
+    return out;
 }
 
 function aiTtsStart(bubble, from, to, btn) {   // đọc cả bong bóng (from/to rỗng) hoặc chỉ đoạn [from, to)
@@ -16023,11 +16038,23 @@ function aiTtsStart(bubble, from, to, btn) {   // đọc cả bong bóng (from/t
     if (from == null) from = 0;
     const units = [];
     runB.forEach(bb => {
+        const first = bb === bubble, bi = aiTtsBiUnits(bb);
+        if (bi) {   // song ngữ dạng cột: khối nào chứa/ở sau vùng bôi đen thì đọc từ đó
+            let list = bi;
+            if (first && from > 0) {
+                const segs = aiTtsMap(bb).segs;
+                const abs = (u) => { const g = segs.find(x => u.root.contains(x.node)); return g ? g.start + u.s : -1; };
+                const k = bi.findIndex(u => { const a0 = abs(u); return a0 >= 0 && a0 + (u.e - u.s) > from; });
+                list = k >= 0 ? bi.slice(k) : [];
+            }
+            list.forEach(u => units.push(u));
+            return;
+        }
         const fl = aiTtsMap(bb).flat;
-        const f0 = bb === bubble ? from : 0, t0 = (bb === bubble && to != null) ? to : fl.length;
+        const f0 = first ? from : 0, t0 = (first && to != null) ? to : fl.length;
         aiTtsSentences(fl, f0, t0).forEach(u => {
             const t = aiTtsClean(fl.slice(u.s, u.e));
-            if (/[\p{L}\p{N}]/u.test(t)) units.push({ b: bb, s: u.s, e: u.e, t: t });
+            if (/[\p{L}\p{N}]/u.test(t)) units.push({ b: bb, root: bb, s: u.s, e: u.e, t: t, en: false });
         });
     });
     if (!units.length) { showToast('Chưa có nội dung để đọc'); return; }
@@ -16040,9 +16067,11 @@ function aiTtsStart(bubble, from, to, btn) {   // đọc cả bong bóng (from/t
         if (pi >= pieces.length) {
             if (ui >= units.length) { aiTtsStop(); return; }
             const u = units[ui++];
-            aiTtsMark(u.b, u.s, u.e);
-            pieces = aiLangPieces(u.t.length > 220 ? (u.t.match(/.{1,200}(\s|$)/g) || [u.t]) : [u.t]);
+            aiTtsMark(u.root || u.b, u.s, u.e);
+            const chunks = u.t.length > 220 ? (u.t.match(/.{1,200}(\s|$)/g) || [u.t]) : [u.t];
+            pieces = u.en ? chunks.map(c => '\u0001' + c.trim()).filter(c => c.length > 1) : aiLangPieces(chunks);
             pi = 0;
+            if (!pieces.length) { speak(); return; }
         }
         const ut = aiUttFor(pieces[pi++], v);
         aiApplyUttRatePitch(ut);
@@ -16055,7 +16084,7 @@ function aiTtsStart(bubble, from, to, btn) {   // đọc cả bong bóng (from/t
 }
     function aiTtsToggle(bubble, btn) {
         const si = aiTtsSelInfo(bubble); if (si) { aiTtsStartSel(si); return; }
-        if (aiTts && aiTts.bubble === bubble) { aiTtsStop(); return; } if (bubble._lt && bubble._lt.en && bubble._lt.vi && bubble._cur === 'both') { aiTtsStartBi(bubble, btn); return; }
+        if (aiTts && aiTts.bubble === bubble) { aiTtsStop(); return; }
         aiTtsStart(bubble, null, null, btn);
     }
     function aiTtsBubbleBtn(b) { return b ? b.querySelector(':scope > .ai-ttsbar button') : null; }
@@ -16092,7 +16121,7 @@ function aiTtsStart(bubble, from, to, btn) {   // đọc cả bong bóng (from/t
         const bs = box.querySelectorAll(':scope > .ai-bub'); let b = null;
         for (let i = bs.length - 1; i >= 0; i--) { if (aiTtsMap(bs[i]).flat.replace(/[….\s]/g, '')) { b = bs[i]; break; } }
         if (!b) { showToast('Chưa có nội dung để đọc'); return; }
-        if (b._lt && b._lt.en && b._lt.vi && b._cur === 'both') aiTtsStartBi(b, aiTtsBubbleBtn(b)); else aiTtsStart(b, null, null, aiTtsBubbleBtn(b));
+        aiTtsStart(b, null, null, aiTtsBubbleBtn(b));
     }
     /* ===== TRẮC NGHIỆM TƯƠNG TÁC TRONG CHAT ĐỌC SÁCH ===== */
 var bkQzHl = null;
@@ -21884,7 +21913,7 @@ function moveEdActs() {
             <button type="button" onclick="closeHomeSettings()" class="w-9 h-9 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 font-black">✕</button>
         </div>
         <div class="flex flex-col gap-2">
-            <button type="button" id="hs-homefab-btn" onclick="hsToggleHomeFab(event)" aria-pressed="true" title="Bật/tắt nút Home ảo — trợ lý AI hỗ trợ dùng app: giải đáp cách dùng, chỉ tận nơi từng nút, và làm thay bạn một số thao tác" class="text-left text-sm bg-rose-50 hover:bg-rose-100 text-rose-800 font-semibold py-2.5 px-3.5 rounded-xl border border-rose-300 flex items-center justify-between">🤖 Nút Home ảo (AI hỗ trợ) <span id="hs-homefab-state" class="text-xs font-black text-emerald-600">Đang bật</span></button>
+            <button type="button" id="hs-homefab-btn" onclick="hsToggleHomeFab(event)" aria-pressed="true" title="Bật/tắt Trợ lý AI — hỗ trợ dùng app: giải đáp cách dùng, chỉ tận nơi từng nút, và làm thay bạn một số thao tác" class="text-left text-sm bg-rose-50 hover:bg-rose-100 text-rose-800 font-semibold py-2.5 px-3.5 rounded-xl border border-rose-300 flex items-center justify-between">🤖 Trợ lý AI <span id="hs-homefab-state" class="text-xs font-black text-emerald-600">Đang bật</span></button>
             <button type="button" onclick="homeSettingsGo('openSuggestQuestionModal')" class="text-left text-sm bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold py-2.5 px-3.5 rounded-xl border border-blue-300">💡 Đề xuất câu hỏi</button>
             <button type="button" onclick="homeSettingsGo('openAppFeedbackModal')" class="text-left text-sm bg-teal-50 hover:bg-teal-100 text-teal-800 font-semibold py-2.5 px-3.5 rounded-xl border border-teal-300">📩 Góp ý / Liên hệ</button>
             <button type="button" onclick="hsOpenKeys()" class="text-left text-sm bg-amber-50 hover:bg-amber-100 text-amber-800 font-semibold py-2.5 px-3.5 rounded-xl border border-amber-300 flex items-center justify-between">🔑 Cài đặt khóa API</button>
@@ -22108,8 +22137,8 @@ html.rhm-modal-open, html.rhm-modal-open body { overflow: hidden !important; ove
         window.addEventListener(ev, function (e) {
             var t = e.target;
             var inside = !!(t && t.closest && t.closest('#rhm-confirm')) || !!(t && t.closest) && IDS.some(function (id) { var m = document.getElementById(id); return !!m && isOpen(id) && m.contains(t); });
-            /* nút Home ảo (và khung chat của nó) luôn dùng được, kể cả khi đang mở cửa sổ cài đặt */
-            if (!inside && t && t.closest && (t.closest('#home-fab') || t.closest('#home-fab-pop') || t.closest('#hf-spot-wrap'))) inside = true;
+            /* nút Trợ lý AI (và khung chat của nó) luôn dùng được, kể cả khi đang mở cửa sổ cài đặt */
+            if (!inside && t && t.closest && (t.closest('#home-fab') || t.closest('#home-fab-pop') || t.closest('#hf-wheel') || t.closest('#hf-spot-wrap'))) inside = true;
             if (inside) return;
             if (anyOpen() || Date.now() < until) { if (e.cancelable) e.preventDefault(); e.stopPropagation(); }
         }, true);
@@ -26988,14 +27017,14 @@ body {
 </style>
 
 <!-- ============================================================================
-     NÚT HOME ẢO — TRỢ LÝ AI HỖ TRỢ NGƯỜI DÙNG
-     Bật/tắt tại: ⚙️ Cài Đặt → 🤖 Nút Home ảo (AI hỗ trợ)  (mục đầu tiên)
-     Kéo thả để di chuyển, thả ra tự bám mép và "ẩn chìm" như nút Home ảo của iPhone.
+     TRỢ LÝ AI — NÚT NỔI HỖ TRỢ NGƯỜI DÙNG
+     Bật/tắt tại: ⚙️ Cài Đặt → 🤖 Trợ lý AI  (mục đầu tiên)
+     Kéo thả để di chuyển, thả ra tự bám mép và "ẩn chìm".
      ============================================================================ -->
 <style id="rhm-home-fab-styles">
-/* ---------- Nút tròn nổi (kéo được, tự ẩn chìm như nút Home ảo của iPhone) ---------- */
+/* ---------- Nút tròn nổi (kéo được, tự ẩn chìm ở mép màn hình) ---------- */
 #home-fab{
-  position:fixed;right:16px;bottom:16px;z-index:40;
+  position:fixed;right:16px;bottom:16px;z-index:100200;
   width:58px;height:58px;padding:0;border:0;border-radius:9999px;cursor:grab;
   background:linear-gradient(135deg,#6366f1,#a855f7 55%,#ec4899);
   box-shadow:0 10px 24px rgba(99,102,241,.45),0 4px 10px rgba(0,0,0,.22);
@@ -27015,7 +27044,7 @@ body {
 
 /* ---------- Khung chat nhỏ ---------- */
 #home-fab-pop{
-  position:fixed;right:16px;bottom:86px;z-index:41;
+  position:fixed;right:16px;bottom:86px;z-index:100201;
   width:min(382px,calc(100vw - 24px));height:min(72vh,570px);
   background:#fff;border:1px solid #e5e7eb;border-radius:20px;
   box-shadow:0 22px 55px rgba(15,23,42,.36);
@@ -27061,22 +27090,48 @@ body {
   #home-fab-pop{right:8px;left:8px;bottom:74px;width:auto;height:min(74vh,600px)}
 }
 
+/* ---------- Bánh xe 3 nút (Thông tin · Chat live · Chat) ---------- */
+#hf-wheel{position:fixed;inset:0;z-index:100199;pointer-events:none}
+#hf-wheel.hidden{display:none!important}
+.hf-wb{position:absolute;width:46px;height:46px;padding:0;border:0;border-radius:9999px;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;pointer-events:auto;box-shadow:0 8px 20px rgba(15,23,42,.35),0 0 0 3px rgba(255,255,255,.92);transition:transform .28s cubic-bezier(.2,.9,.3,1.25),opacity .2s ease,filter .15s ease;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.hf-wb:hover{filter:brightness(1.1)}
+.hf-wb:active{filter:brightness(.9)}
+.hf-wb.info{background:linear-gradient(135deg,#0ea5e9,#2563eb)}
+.hf-wb.live{background:linear-gradient(135deg,#6366f1,#8b5cf6)}
+.hf-wb.chat{background:linear-gradient(135deg,#a855f7,#ec4899)}
+.hf-wb.live.on{background:linear-gradient(135deg,#ef4444,#dc2626);animation:hfMic 1s infinite alternate}
+.hf-wb svg{display:block}
+
 /* ---------- Chiếu sáng / chỉ tận nơi ---------- */
 #hf-spot-wrap{position:fixed;inset:0;z-index:100300}
 #hf-spot-wrap .hf-spot-hit{position:absolute;inset:0;cursor:pointer}
 .hf-spot-box{position:fixed;border-radius:14px;pointer-events:none;box-shadow:0 0 0 9999px rgba(2,6,23,.6),0 0 0 3px rgba(255,255,255,.95),0 0 22px 7px rgba(99,102,241,.8);transition:all .18s ease}
 .hf-spot-tip{position:fixed;z-index:100301;max-width:min(340px,92vw);display:flex;gap:8px;align-items:flex-start;background:#111827;color:#fff;border-radius:12px;padding:9px 10px 9px 12px;font-size:13px;font-weight:700;line-height:1.4;box-shadow:0 12px 30px rgba(0,0,0,.45);animation:hfPop .18s ease}
+.hf-spot-tip.hf-tour-tip{display:block;max-width:min(370px,92vw);padding:12px 14px;font-weight:500}
+.hf-tour-tip .tt{font-weight:900;font-size:14.5px;margin-bottom:5px}
+.hf-tour-tip .td{font-size:13px;line-height:1.55;color:#e5e7eb}
+.hf-tour-bar{position:fixed;left:12px;right:12px;bottom:max(14px,env(safe-area-inset-bottom));z-index:100302;display:flex;align-items:center;justify-content:space-between;gap:8px;pointer-events:none}
+.hf-tour-bar button{pointer-events:auto;border:0;border-radius:9999px;padding:11px 20px;font-weight:800;font-size:14px;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.4)}
+.hf-tb-skip{background:#fff;color:#374151}
+.hf-tb-next{background:linear-gradient(90deg,#6366f1,#a855f7);color:#fff}
+.hf-tour-bar .cnt{color:#fff;font-weight:800;font-size:12px;background:rgba(17,24,39,.75);border-radius:9999px;padding:4px 10px}
 .hf-spot-tip .hf-spot-x{flex:none;width:22px;height:22px;border:0;border-radius:9999px;background:rgba(255,255,255,.18);color:#fff;font-weight:900;font-size:12px;cursor:pointer;line-height:1}
 </style>
 
-<button id="home-fab" type="button" class="hidden" aria-label="Trợ lý Home ảo (AI)" title="Trợ lý Home ảo — kéo để di chuyển, bấm để hỏi AI" onclick="homeFabToggle()">
+<button id="home-fab" type="button" class="hidden" aria-label="Trợ lý AI" title="Trợ lý AI — kéo để di chuyển, bấm để mở menu" onclick="homeFabToggle()">
     <span>🤖</span><span class="hf-spark">✨</span>
 </button>
 
-<div id="home-fab-pop" class="hidden" role="dialog" aria-label="Trợ lý Home ảo">
+<div id="hf-wheel" class="hidden" aria-hidden="true">
+    <button type="button" class="hf-wb info" title="Thông tin — giới thiệu các nút trên màn hình" aria-label="Thông tin" onclick="hfWheel('info')"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.3" r=".7" fill="currentColor"/></svg></button>
+    <button type="button" class="hf-wb live" title="Chat live — nói chuyện bằng giọng nói" aria-label="Chat live" onclick="hfWheel('live')"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><line x1="12" y1="18" x2="12" y2="21.5"/></svg></button>
+    <button type="button" class="hf-wb chat" title="Chat — nhắn tin với Trợ lý AI" aria-label="Chat" onclick="hfWheel('chat')"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5h16a1 1 0 0 1 1 1v10.5a1 1 0 0 1-1 1H10.2L5.5 21v-4H4a1 1 0 0 1-1-1V5.5a1 1 0 0 1 1-1z"/><circle cx="8" cy="10.8" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="10.8" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="10.8" r="1" fill="currentColor" stroke="none"/></svg></button>
+</div>
+
+<div id="home-fab-pop" class="hidden" role="dialog" aria-label="Trợ lý AI">
     <div class="hf-head">
         <button type="button" class="hf-hbtn" onclick="homeFabQuickKey()" title="Nhập khóa API AI">🔑</button>
-        <div class="hf-ttl">🤖 Trợ lý Home ảo<small>Hỏi–đáp · chỉ tận nơi · làm thay thao tác</small></div>
+        <div class="hf-ttl">🤖 Trợ lý AI<small>Hỏi–đáp · chỉ tận nơi · làm thay thao tác</small></div>
         <button type="button" class="hf-hbtn" onclick="homeFabClose()" aria-label="Đóng" title="Đóng">✕</button>
     </div>
     <div id="hf-msgs"></div>
@@ -27099,7 +27154,7 @@ body {
 
 <script id="rhm-home-fab-script">
 /* ============================================================================
-   TRỢ LÝ HOME ẢO — 3 khả năng:
+   TRỢ LÝ AI — 3 khả năng:
    1) Hỏi–đáp về cách dùng app (Q&A / support bot)
    2) Chỉ dẫn trực quan theo ngữ cảnh (contextual guided tour) — [[CHI:khoá|chú thích]]
    3) Thực hiện thao tác thay người dùng (agentic) — [[HD:khoá]]
@@ -27116,8 +27171,9 @@ body {
     var busy = false, greeted = false;
     var spot = null, spotTimer = null;
     var recog = null, recogOn = false;
+    var wheelOn = false, tour = null, live = false, speaking = false, lrec = null;
 
-    /* --- kéo thả + tự thu vào mép (ẩn chìm) như nút Home ảo của iPhone --- */
+    /* --- kéo thả + tự thu vào mép (ẩn chìm) --- */
     var POS_KEY = 'home_fab_pos';
     var fabGeo = { side: 'right', y: null };
     try {
@@ -27209,7 +27265,7 @@ body {
         },
         'cai-dat': { label: 'mở bảng Cài đặt', sel: 'button[onclick="openHomeSettings()"]', run: function () { window.openHomeSettings(); } },
         'home-ao': {
-            label: 'bật / tắt nút Home ảo', sel: '#hs-homefab-btn', open: function () { window.openHomeSettings(); },
+            label: 'bật / tắt Trợ lý AI', sel: '#hs-homefab-btn', open: function () { window.openHomeSettings(); },
             run: function () { window.hsToggleHomeFab(); }
         },
         'mon-hoc': { label: 'mở Ôn Tập Theo Môn Học', sel: '#btn-toggle-monhoc', run: function () { openSection('monhoc'); } },
@@ -27281,14 +27337,15 @@ body {
             '- Hàng nút tiện ích: 🏆 Bộ Sưu Tập Huy Hiệu · 📖 Từ Điển RHM · 📒 Sổ Ghi Chú · ⚙️ Cài Đặt.',
             '- Hai nút lớn: 📚 Ôn Tập Theo Môn Học (mở danh sách môn + video bài giảng) và 🦷 Ôn Tập Theo Chủ Đề.',
             '- Trong Ôn Tập Theo Chủ Đề: ⚡ Ôn Tập Nhanh, 🧠 Ôn Tập Chuyên Sâu, 🎯 Thi Thử (Mock Exam), ⭐ Đã lưu, 🚫 Đã chặn và 36 chủ đề.',
-            '- ⚙️ Cài Đặt gồm: 🏠 Nút Home ảo (bật/tắt trợ lý này), 💡 Đề xuất câu hỏi, 📩 Góp ý/Liên hệ, 🔑 Cài đặt khóa API, 🔄 Nhập/Xuất Tiến Độ, ⛶ Toàn màn hình, 📲 Thêm vào MH chính.',
+            '- ⚙️ Cài Đặt gồm: 🏠 Trợ lý AI (bật/tắt trợ lý này), 💡 Đề xuất câu hỏi, 📩 Góp ý/Liên hệ, 🔑 Cài đặt khóa API, 🔄 Nhập/Xuất Tiến Độ, ⛶ Toàn màn hình, 📲 Thêm vào MH chính.',
             '',
             'KHI LÀM BÀI TRẮC NGHIỆM: chọn đáp án, đáp án đúng/sai được tô màu, đọc phần giải thích, đánh dấu sao, mở danh sách câu để điều hướng, báo lỗi câu hỏi, và bấm 🤖 Hỏi AI giải thích câu này.',
             'KHI XEM VIDEO BÀI GIẢNG: có thanh điều khiển riêng (tua, tốc độ, chất lượng, phụ đề .srt, lồng tiếng, rạp chiếu phim / toàn màn hình) và nút 🤖 Hỏi AI về video.',
             'KHI ĐỌC SÁCH: xem 2 trang như sách thật, phóng to, dịch, tra Từ điển, và mở 🤖 AI Chat để hỏi về sách.',
             '',
             'TÍNH NĂNG AI ("Hỏi AI") cần khóa API: mặc định Gemini (miễn phí), có thể thêm OpenRouter để dự phòng — nhập ở ⚙️ Cài đặt → 🔑 Cài đặt khóa API.',
-            'Nút Home ảo (bạn) có 3 khả năng: (1) hỏi–đáp kiến thức về cách dùng app; (2) chiếu sáng và chỉ tận nơi một nút / bảng trên màn hình; (3) thực hiện thay người dùng một số thao tác.'
+            'NÚT TRỢ LÝ AI NỔI: bấm vào sẽ hiện bánh xe 3 nút — ℹ️ Thông tin (giới thiệu lần lượt các nút trên màn hình chính), 🎙️ Chat live (nói chuyện bằng giọng nói), 💬 Chat (nhắn tin).',
+            'Trợ lý AI (bạn) có 3 khả năng: (1) hỏi–đáp kiến thức về cách dùng app; (2) chiếu sáng và chỉ tận nơi một nút / bảng trên màn hình; (3) thực hiện thay người dùng một số thao tác.'
         ].join('\n');
     }
     function actListForPrompt() {
@@ -27298,7 +27355,7 @@ body {
     }
     function systemPrompt() {
         return [
-            'Bạn là "Trợ lý Home ảo" của app "Trắc Nghiệm RHM" (webapp ôn tập trắc nghiệm Răng Hàm Mặt). Bạn giúp người dùng HIỂU và DÙNG app — không phải để giảng kiến thức y khoa.',
+            'Bạn là "Trợ lý AI" của app "Trắc Nghiệm RHM" (webapp ôn tập trắc nghiệm Răng Hàm Mặt). Bạn giúp người dùng HIỂU và DÙNG app — không phải để giảng kiến thức y khoa.',
             '',
             knowledge(),
             '',
@@ -27391,7 +27448,7 @@ body {
         f.classList.toggle('hf-sunk', sunk);
     }
     function sinkFab() {
-        if (!fabOn || dragging || sunk || popOpen() || !fabEl()) return;
+        if (!fabOn || dragging || sunk || popOpen() || wheelOn || tour || !fabEl()) return;
         sunk = true; applyFabGeo();
     }
     function unsinkFab() {
@@ -27444,7 +27501,7 @@ body {
             if (!dragging) return;
             var dx = e.clientX - dragStart.x, dy = e.clientY - dragStart.y;
             if (!dragMoved && (Math.abs(dx) + Math.abs(dy)) < 7) return;
-            if (!dragMoved) { dragMoved = true; closePop(); }
+            if (!dragMoved) { dragMoved = true; closePop(); closeWheel(); }
             var s = fabSize(), m = fabMargin();
             var nx = clampNum(e.clientX - dragOff.x, m, Math.max(m, viewW() - s - m));
             var ny = clampNum(e.clientY - dragOff.y, m, Math.max(m, viewH() - s - m));
@@ -27516,10 +27573,12 @@ body {
         var p = $id('home-fab-pop'); if (p) p.classList.add('hidden');
         var f = $id('home-fab'); if (f) f.classList.remove('hf-open');
         if (recogOn) stopMic();
+        if (live) liveStop();
         scheduleSink(2000);
     }
     function openPop() {
         var p = $id('home-fab-pop'); if (!p) return;
+        closeWheel(true);
         cancelSink(); unsinkFab();
         p.classList.remove('hidden');
         var f = $id('home-fab'); if (f) f.classList.add('hf-open');
@@ -27530,13 +27589,194 @@ body {
         var box = $id('hf-msgs'); if (box) box.scrollTop = box.scrollHeight;
     }
     function greet() {
-        addAi('Xin chào 👋 Mình là **Trợ lý Home ảo**. Mình có thể:\n- Giải đáp cách dùng app (nút nào làm gì, làm sao để…)\n- Chỉ tận nơi từng nút trên màn hình\n- Làm thay bạn vài thao tác (mở **Cài đặt**, bật **toàn màn hình**, mở ôn tập…)\n\nBạn cứ hỏi, hoặc bấm một gợi ý bên dưới nhé!');
+        addAi('Xin chào 👋 Mình là **Trợ lý AI**. Mình có thể:\n- Giải đáp cách dùng app (nút nào làm gì, làm sao để…)\n- Chỉ tận nơi từng nút trên màn hình\n- Làm thay bạn vài thao tác (mở **Cài đặt**, bật **toàn màn hình**, mở ôn tập…)\n\nBạn cứ hỏi, hoặc bấm một gợi ý bên dưới nhé!');
     }
     window.homeFabToggle = function () {
         if (Date.now() < skipClick) return;      // vừa kéo xong thì không coi là bấm
+        if (tour) return;
         var p = $id('home-fab-pop'); if (!p) return;
-        if (p.classList.contains('hidden')) openPop(); else closePop();
+        if (!p.classList.contains('hidden')) { closePop(); return; }
+        if (wheelOn) closeWheel(); else openWheel();
     };
+
+    /* ------------------- bánh xe 3 nút: Thông tin · Chat live · Chat ------------------- */
+    function openWheel() {
+        var w = $id('hf-wheel'); if (!w || wheelOn || !fabOn) return;
+        cancelSink(); unsinkFab();
+        var g = fabXY(), cx = g.x + g.s / 2, cy = g.y + g.s / 2;
+        var R = Math.round(g.s * 1.5), half = 23, m = 8;
+        var angles = fabGeo.side === 'left' ? [55, 0, -55] : [125, 180, 235];   // trên cùng = Thông tin, giữa = Live, dưới = Chat
+        var pts = angles.map(function (a) { var r = a * Math.PI / 180; return { x: cx + R * Math.cos(r), y: cy - R * Math.sin(r) }; });
+        var minY = Math.min.apply(null, pts.map(function (q) { return q.y; })) - half;
+        var maxY = Math.max.apply(null, pts.map(function (q) { return q.y; })) + half;
+        var shift = 0;
+        if (minY < m) shift = m - minY; else if (maxY > viewH() - m) shift = viewH() - m - maxY;
+        var btns = w.querySelectorAll('.hf-wb');
+        w.classList.remove('hidden');
+        w.setAttribute('aria-hidden', 'false');
+        for (var i = 0; i < btns.length; i++) {
+            var b = btns[i], px = clampNum(pts[i].x, m + half, Math.max(m + half, viewW() - m - half)), py = pts[i].y + shift;
+            b.style.transition = 'none';
+            b.style.left = Math.round(px - half) + 'px'; b.style.top = Math.round(py - half) + 'px';
+            b.style.transform = 'translate(' + Math.round(cx - px) + 'px,' + Math.round(cy - py) + 'px) scale(.25)';
+            b.style.opacity = '0';
+            b.classList.toggle('on', b.classList.contains('live') && live);
+        }
+        void w.offsetWidth;
+        for (var j = 0; j < btns.length; j++) {
+            (function (bb, k) {
+                bb.style.transition = 'transform .28s cubic-bezier(.2,.9,.3,1.25) ' + (k * 45) + 'ms, opacity .2s ease ' + (k * 45) + 'ms';
+                bb.style.transform = 'none'; bb.style.opacity = '1';
+            })(btns[j], j);
+        }
+        wheelOn = true;
+        var f = fabEl(); if (f) f.classList.add('hf-open');
+    }
+    function closeWheel(quiet) {
+        if (!wheelOn) return;
+        wheelOn = false;
+        var w = $id('hf-wheel'); if (w) { w.classList.add('hidden'); w.setAttribute('aria-hidden', 'true'); }
+        if (!popOpen()) { var f = fabEl(); if (f) f.classList.remove('hf-open'); }
+        if (quiet !== true && !popOpen()) scheduleSink(2500);
+    }
+    window.hfWheel = function (k) {
+        closeWheel(true);
+        if (k === 'chat') openPop();
+        else if (k === 'live') { if (live) liveStop(); else liveStart(); scheduleSink(3000); }
+        else if (k === 'info') startTour();
+    };
+
+    /* ------------------- chat live: nói → AI trả lời bằng giọng ------------------- */
+    function speakVi(text, done) {
+        var fin = false;
+        function end() { if (fin) return; fin = true; speaking = false; if (done) done(); }
+        try {
+            if (!('speechSynthesis' in window)) { end(); return; }
+            var ss = window.speechSynthesis; ss.cancel();
+            var plain = String(text || '').replace(/\*\*|`/g, '').replace(/^\s*[-*\u2022]\s+/gm, '')
+                .replace(/[\u{1F300}-\u{1FAFF}\u2600-\u27BF\uFE0F]/gu, '').replace(/\s+/g, ' ').trim().slice(0, 900);
+            if (!plain) { end(); return; }
+            var u = new SpeechSynthesisUtterance(plain); u.lang = 'vi-VN';
+            var vs = ss.getVoices() || [], v = null;
+            for (var i = 0; i < vs.length; i++) { if (/^vi/i.test(vs[i].lang)) { v = vs[i]; break; } }
+            if (v) u.voice = v;
+            u.onend = end; u.onerror = end;
+            speaking = true; ss.speak(u);
+            setTimeout(end, 45000);
+        } catch (e) { end(); }
+    }
+    function liveListen() {
+        if (!live || busy || speaking || lrec) return;
+        var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SR) { liveStop(); return; }
+        try {
+            var r = new SR(); lrec = r;
+            r.lang = 'vi-VN'; r.interimResults = false; r.continuous = false; r.maxAlternatives = 1;
+            r.onresult = function (ev) {
+                var t = '';
+                for (var i = 0; i < ev.results.length; i++) t += ev.results[i][0].transcript;
+                t = t.trim(); if (t) send(t);
+            };
+            r.onerror = function (ev) {
+                if (ev && (ev.error === 'not-allowed' || ev.error === 'service-not-allowed')) { toast('Chưa được cấp quyền micro'); liveStop(); }
+            };
+            r.onend = function () {
+                if (lrec === r) lrec = null;
+                if (live && !busy && !speaking) setTimeout(liveListen, 250);
+            };
+            r.start();
+            setStatus('🎙️ Đang nghe… bạn cứ nói');
+        } catch (e) { lrec = null; liveStop(); toast('Thiết bị / trình duyệt không hỗ trợ nhập bằng giọng nói'); }
+    }
+    function liveStart() {
+        var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SR) { toast('Trình duyệt này chưa hỗ trợ nhận giọng nói (hãy thử Chrome / Edge / Safari)'); return; }
+        openPop();
+        if (!aiAnyKey()) {
+            addSys('🔑 Cần khóa API AI mới dùng được chat live. Hãy dán khóa Gemini (miễn phí) để bắt đầu.');
+            try { aiShowGate('🤖 Trợ lý AI cần khóa API AI. Hãy dán khóa Gemini (miễn phí) để bắt đầu.'); } catch (e) {}
+            return;
+        }
+        live = true;
+        var mb = $id('hf-mic'); if (mb) { mb.style.display = 'flex'; mb.classList.add('hf-mic-on'); }
+        addSys('🎙️ Chat live đang bật: cứ nói tự nhiên, mình sẽ nghe và trả lời bằng giọng nói. Bấm 🎙️ để tắt.');
+        try { var pr = new SpeechSynthesisUtterance(' '); pr.volume = 0; window.speechSynthesis.speak(pr); } catch (e) {}
+        liveListen();
+    }
+    function liveStop() {
+        live = false;
+        try { if (lrec) { var r = lrec; lrec = null; r.onend = null; r.abort(); } } catch (e) {}
+        try { window.speechSynthesis.cancel(); } catch (e) {}
+        speaking = false;
+        var mb = $id('hf-mic'); if (mb) mb.classList.remove('hf-mic-on');
+        setStatus('Trợ lý đang sẵn sàng');
+    }
+
+    /* ------------------- giới thiệu lần lượt các nút trên màn hình chính ------------------- */
+    var TOUR = [
+        { key: 'bo-suu-tap', t: '🏆 Bộ Sưu Tập Huy Hiệu', d: 'Nơi lưu lại các huy hiệu bạn đạt được trong quá trình học và làm bài. Ôn đều đặn sẽ mở khóa thêm huy hiệu — mở ra xem để biết mình đã tiến bộ đến đâu.' },
+        { key: 'tu-dien', t: '📖 Từ Điển RHM', d: 'Tra nhanh thuật ngữ chuyên ngành Răng Hàm Mặt (Anh – Việt) mà không cần rời app. Khi đọc sách hoặc làm bài, bạn cũng có thể tra từ ngay tại chỗ.' },
+        { key: 'so-ghi-chu', t: '📒 Sổ Ghi Chú', d: 'Nơi tập hợp những nội dung bạn đã lưu lại, nhất là từ các bong bóng chat AI. Dùng để ôn lại các giải thích hay mà không phải hỏi lại từ đầu.' },
+        { key: 'cai-dat', t: '⚙️ Cài Đặt', d: 'Gồm: bật/tắt Trợ lý AI, Đề xuất câu hỏi, Góp ý / Liên hệ, Cài đặt khóa API (cần để dùng các tính năng AI), Nhập / Xuất Tiến Độ để sao lưu hoặc chuyển sang máy khác, Toàn màn hình và Thêm vào màn hình chính.' },
+        { key: 'mon-hoc', t: '📚 Ôn Tập Theo Môn Học', d: 'Bấm để xổ ra danh sách các môn học kèm video bài giảng. Chọn một môn để xem bài giảng và luyện câu hỏi theo đúng môn đó.' },
+        { key: 'chuyen-de', t: '🦷 Ôn Tập Theo Chủ Đề', d: 'Bấm để xổ ra khu ôn tập theo chủ đề, gồm các công cụ ôn nhanh, chuyên sâu, thi thử và 36 chủ đề. Các nút bên trong sẽ được giới thiệu ngay sau đây.' },
+        { key: 'on-nhanh', open: 'chuyende', t: '⚡ Ôn Tập Nhanh', d: 'Tạo nhanh một lượt ôn gọn nhẹ: chọn phạm vi và số câu rồi làm ngay. Hợp khi bạn chỉ có ít thời gian.' },
+        { key: 'chuyen-sau', open: 'chuyende', t: '🧠 Ôn Tập Chuyên Sâu', d: 'Lượt ôn đào sâu hơn, giúp bạn tập trung vào những phần còn yếu thay vì làm đại trà.' },
+        { key: 'thi-thu', open: 'chuyende', t: '🎯 Thi Thử (Mock Exam)', d: 'Làm một đề thi thử có tính giờ như thi thật để đánh giá năng lực của bạn. Bạn cũng có thể tạo đề thi riêng.' },
+        { key: 'da-luu', open: 'chuyende', t: '⭐ Đã lưu', d: 'Danh sách những câu hỏi bạn đã đánh dấu sao khi làm bài, để quay lại ôn riêng những câu quan trọng. Con số trong ngoặc là số câu đã lưu.' },
+        { key: 'da-chan', open: 'chuyende', t: '🚫 Đã chặn', d: 'Những câu hỏi bạn đã chặn nên sẽ không xuất hiện khi làm bài. Vào đây nếu muốn bỏ chặn câu nào đó.' },
+        { sel: '#topic-grid', open: 'chuyende', t: '🦷 36 Chủ Đề Ôn Tập', d: 'Mỗi ô là một chủ đề Răng Hàm Mặt. Bấm vào một ô để bắt đầu luyện các câu hỏi thuộc chủ đề đó.' },
+        { sel: '#home-fab', t: '🤖 Nút Trợ lý AI', d: 'Chính là nút này! Bấm vào sẽ hiện 3 nút: ℹ️ Thông tin (phần giới thiệu bạn đang xem), 🎙️ Chat live (nói chuyện bằng giọng nói) và 💬 Chat (nhắn tin hỏi cách dùng app). Kéo nút để đổi vị trí.' }
+    ];
+    function tourHomeOk() {
+        if (!shown('home-screen')) return false;
+        for (var k in MODAL_NAMES) { if (shown(k)) return false; }
+        return true;
+    }
+    function tourNode(st) {
+        try { return st.sel ? document.querySelector(st.sel) : targetOf(st.key); } catch (e) { return null; }
+    }
+    function startTour() {
+        if (!tourHomeOk()) { toast('Phần giới thiệu hiện chỉ dùng được ở màn hình chính — hãy đóng các cửa sổ đang mở rồi thử lại nhé'); return; }
+        closePop(); closeWheel(true); clearSpot(true);
+        var box = $id('chuyende-section-container');
+        tour = { i: -1, tok: 0, opened: false, wasOpen: !!(box && !box.classList.contains('hidden')) };
+        cancelSink(); unsinkFab();
+        tourNext();
+    }
+    function tourNext() {
+        if (!tour) return;
+        var i = tour.i + 1, tok = ++tour.tok;
+        clearSpot(true);
+        function step() {
+            if (!tour || tok !== tour.tok) return;
+            if (i >= TOUR.length) { finishTour(); return; }
+            var st = TOUR[i];
+            if (st.open === 'chuyende') {
+                var b = $id('chuyende-section-container');
+                if (b && b.classList.contains('hidden')) { openSection('chuyende'); tour.opened = true; setTimeout(go, 340); return; }
+            }
+            go();
+        }
+        function go() {
+            if (!tour || tok !== tour.tok) return;
+            var st = TOUR[i], n = tourNode(st);
+            if (!n || !isShown(n)) { i++; step(); return; }
+            tour.i = i;
+            try { n.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+            setTimeout(function () { if (tour && tok === tour.tok) drawSpot(n, st.t, st); }, 420);
+        }
+        step();
+    }
+    function finishTour() {
+        var t = tour; tour = null;
+        clearSpot(true);
+        if (t && t.opened && !t.wasOpen) {
+            var b = $id('chuyende-section-container');
+            if (b && !b.classList.contains('hidden')) { try { window.toggleChuyenDeSection(); } catch (e) {} }
+        }
+        scheduleSink(2500);
+    }
     window.homeFabClose = function () { closePop(); };
     window.homeFabQuickKey = function () { closePop(); try { window.hsOpenKeys(); } catch (e) { toast('Mở ⚙️ Cài đặt → 🔑 Cài đặt khóa API'); } };
     /* API nhỏ cho các phần khác của app (và để kiểm thử): mở/đóng, hỏi, làm thay, chỉ tận nơi */
@@ -27544,6 +27784,9 @@ body {
         open: openPop,
         close: closePop,
         toggle: function () { window.homeFabToggle(); },
+        wheel: openWheel,
+        tour: startTour,
+        live: function () { if (live) liveStop(); else liveStart(); },
         ask: function (t) { openPop(); send(t); },
         run: function (key, note) { applyAct({ kind: 'HD', key: String(key || ''), arg: String(note || '') }); },
         show: function (key, note) { applyAct({ kind: 'CHI', key: String(key || ''), arg: String(note || '') }); },
@@ -27563,7 +27806,7 @@ body {
 
     function applyFabState() {
         var f = $id('home-fab'); if (f) f.classList.toggle('hidden', !fabOn);
-        if (!fabOn) { cancelSink(); sunk = false; closePop(); }
+        if (!fabOn) { cancelSink(); sunk = false; closePop(); closeWheel(true); if (tour) finishTour(); }
         else { applyFabGeo(); scheduleSink(3500); }
         var st = $id('hs-homefab-state');
         if (st) { st.textContent = fabOn ? 'Đang bật' : 'Đang tắt'; st.style.color = fabOn ? '#059669' : '#9ca3af'; }
@@ -27574,7 +27817,7 @@ body {
         fabOn = !fabOn;
         try { localStorage.setItem(LS_KEY, fabOn ? '1' : '0'); } catch (e) {}
         applyFabState();
-        toast(fabOn ? '🤖 Đã bật nút Home ảo' : '🤖 Đã tắt nút Home ảo');
+        toast(fabOn ? '🤖 Đã bật Trợ lý AI' : '🤖 Đã tắt Trợ lý AI');
     };
 
     /* --------------------------- thẻ điều khiển --------------------------- */
@@ -27619,7 +27862,7 @@ body {
     }
 
     /* --------------------------- chiếu sáng mục tiêu --------------------------- */
-    function clearSpot() {
+    function clearSpot(internal) {
         if (spotTimer) { clearInterval(spotTimer); spotTimer = null; }
         if (spot) {
             try { if (spot._onScroll) window.removeEventListener('scroll', spot._onScroll, true); } catch (e) {}
@@ -27627,6 +27870,7 @@ body {
             if (spot.wrap && spot.wrap.parentNode) spot.wrap.parentNode.removeChild(spot.wrap);
         }
         spot = null;
+        if (internal !== true && tour) finishTour();
     }
     function targetOf(key) {
         var def = ACTS[key]; if (!def) return null;
@@ -27639,19 +27883,36 @@ body {
         try { node.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
         setTimeout(function () { drawSpot(node, note || def.label); }, 320);
     }
-    function drawSpot(node, note) {
+    function drawSpot(node, note, st) {
         if (!node || !document.body.contains(node)) return;
         var wrap = document.createElement('div'); wrap.id = 'hf-spot-wrap';
-        var hit = document.createElement('div'); hit.className = 'hf-spot-hit'; hit.onclick = clearSpot;
+        var hit = document.createElement('div'); hit.className = 'hf-spot-hit';
+        if (!st) hit.onclick = function () { clearSpot(); }; else hit.style.cursor = 'default';
         var box = document.createElement('div'); box.className = 'hf-spot-box';
         var tip = document.createElement('div'); tip.className = 'hf-spot-tip';
-        var tx = document.createElement('span'); tx.textContent = '👉 ' + note;
-        var x = document.createElement('button'); x.type = 'button'; x.className = 'hf-spot-x'; x.textContent = '✕';
-        x.onclick = function (ev) { try { ev.stopPropagation(); } catch (e) {} clearSpot(); };
-        tip.appendChild(tx); tip.appendChild(x);
-        wrap.appendChild(hit); wrap.appendChild(box); wrap.appendChild(tip);
+        var bar = null;
+        if (st) {
+            tip.className += ' hf-tour-tip';
+            var tt = document.createElement('div'); tt.className = 'tt'; tt.textContent = st.t;
+            var td = document.createElement('div'); td.className = 'td'; td.textContent = st.d;
+            tip.appendChild(tt); tip.appendChild(td);
+            bar = document.createElement('div'); bar.className = 'hf-tour-bar';
+            var sk = document.createElement('button'); sk.type = 'button'; sk.className = 'hf-tb-skip'; sk.textContent = 'Bỏ qua';
+            sk.onclick = function (ev) { try { ev.stopPropagation(); } catch (e) {} finishTour(); };
+            var cn = document.createElement('span'); cn.className = 'cnt'; cn.textContent = (tour.i + 1) + ' / ' + TOUR.length;
+            var nx = document.createElement('button'); nx.type = 'button'; nx.className = 'hf-tb-next';
+            nx.textContent = (tour.i >= TOUR.length - 1) ? 'Xong ✓' : 'Tiếp theo ›';
+            nx.onclick = function (ev) { try { ev.stopPropagation(); } catch (e) {} tourNext(); };
+            bar.appendChild(sk); bar.appendChild(cn); bar.appendChild(nx);
+        } else {
+            var tx = document.createElement('span'); tx.textContent = '👉 ' + note;
+            var x = document.createElement('button'); x.type = 'button'; x.className = 'hf-spot-x'; x.textContent = '✕';
+            x.onclick = function (ev) { try { ev.stopPropagation(); } catch (e) {} clearSpot(); };
+            tip.appendChild(tx); tip.appendChild(x);
+        }
+        wrap.appendChild(hit); wrap.appendChild(box); wrap.appendChild(tip); if (bar) wrap.appendChild(bar);
         document.body.appendChild(wrap);
-        spot = { wrap: wrap, box: box, tip: tip, node: node };
+        spot = { wrap: wrap, box: box, tip: tip, node: node, bar: bar };
         placeSpot();
         spot._onScroll = placeSpot; spot._onResize = placeSpot;
         window.addEventListener('scroll', placeSpot, true);
@@ -27661,15 +27922,16 @@ body {
     function placeSpot() {
         if (!spot) return;
         var n = spot.node;
-        if (!document.body.contains(n) || !isShown(n)) { clearSpot(); return; }
+        if (!document.body.contains(n) || !isShown(n)) { if (tour) tourNext(); else clearSpot(); return; }
         var r = n.getBoundingClientRect();
-        if (!r.width && !r.height) { clearSpot(); return; }
+        if (!r.width && !r.height) { if (tour) tourNext(); else clearSpot(); return; }
         var pad = 6, s = spot.box.style;
         s.top = (r.top - pad) + 'px'; s.left = (r.left - pad) + 'px';
         s.width = (r.width + pad * 2) + 'px'; s.height = (r.height + pad * 2) + 'px';
         var tw = spot.tip.offsetWidth || 260, th = spot.tip.offsetHeight || 56, sp = spot.tip.style;
         var top = r.top - th - 12; if (top < 8) top = r.bottom + 12;
-        if (top + th > window.innerHeight - 8) top = Math.max(8, window.innerHeight - th - 8);
+        var resB = spot.bar ? 74 : 0;
+        if (top + th > window.innerHeight - 8 - resB) top = Math.max(8, window.innerHeight - th - 8 - resB);
         var left = Math.max(8, Math.min(window.innerWidth - tw - 8, r.left + r.width / 2 - tw / 2));
         sp.top = top + 'px'; sp.left = left + 'px';
     }
@@ -27702,7 +27964,7 @@ body {
         if (!aiAnyKey()) {
             addUser(text);
             addSys('🔑 Cần khóa API AI mới dùng được trợ lý. Mình mở bảng nhập khóa cho bạn nhé — hoặc vào ⚙️ Cài đặt → 🔑 Cài đặt khóa API.');
-            try { aiShowGate('🏠 Trợ lý Home ảo cần khóa API AI. Hãy dán khóa Gemini (miễn phí) để bắt đầu.'); } catch (e) {}
+            try { aiShowGate('🤖 Trợ lý AI cần khóa API AI. Hãy dán khóa Gemini (miễn phí) để bắt đầu.'); } catch (e) {}
             return;
         }
         busy = true; updSend();
@@ -27719,6 +27981,7 @@ body {
                 .replace(/\n{3,}/g, '\n\n').trim();
             if (!acts.length) { var g = guessIntent(text); if (g) acts.push({ kind: 'HD', key: g, arg: '' }); }
             addAi(clean || '(Mình chưa rõ ý, bạn nói lại giúp mình nhé.)');
+            if (live) speakVi(clean, function () { if (live) liveListen(); });
             chat.push({ role: 'model', parts: [{ text: String(raw || '') }] });
             if (chat.length > 14) chat = chat.slice(-14);
             applyActs(acts);
@@ -27726,7 +27989,8 @@ body {
             if (typing) typing.remove();
             addSys('⚠️ ' + ((e && e.friendly) ? e.friendly : 'Không gọi được AI. Hãy kiểm tra mạng hoặc khóa API trong ⚙️ Cài đặt.'));
         }).then(function () {
-            busy = false; updSend(); setStatus('Trợ lý đang sẵn sàng');
+            busy = false; updSend(); setStatus(live ? '🎙️ Chat live đang bật' : 'Trợ lý đang sẵn sàng');
+            if (live && !speaking && !lrec) liveListen();
         });
     }
 
@@ -27750,10 +28014,10 @@ body {
     }
     function stopMic() { try { if (recog) recog.stop(); } catch (e) {} recogOn = false; var b = $id('hf-mic'); if (b) b.classList.remove('hf-mic-on'); }
 
-    /* --------------------- giữ nút Home ảo luôn bấm được --------------------- */
+    /* --------------------- giữ nút Trợ lý AI luôn bấm được --------------------- */
     (function keepFabInteractive() {
         function revive() {
-            ['home-fab', 'home-fab-pop', 'hf-spot-wrap'].forEach(function (id) { var n = $id(id); if (n) n.removeAttribute('inert'); });
+            ['home-fab', 'home-fab-pop', 'hf-spot-wrap', 'hf-wheel'].forEach(function (id) { var n = $id(id); if (n) n.removeAttribute('inert'); });
         }
         ['openHomeSettings', 'hsLock'].forEach(function (fn) {
             var orig = window[fn]; if (typeof orig !== 'function') return;
@@ -27771,13 +28035,13 @@ body {
             setTimeout(function () { applyFabGeo(); if (popOpen()) placePop(); }, ms);
         });
         window.addEventListener('load', function () { applyFabGeo(); if (popOpen()) placePop(); });
-        window.addEventListener('resize', function () { applyFabGeo(); if (popOpen()) placePop(); });
+        window.addEventListener('resize', function () { applyFabGeo(); if (popOpen()) placePop(); if (wheelOn) { closeWheel(true); } });
         window.addEventListener('orientationchange', function () {
             setTimeout(function () { applyFabGeo(); if (popOpen()) placePop(); }, 250);
         });
         var SR = window.SpeechRecognition || window.webkitSpeechRecognition, mic = $id('hf-mic');
         if (mic) {
-            if (SR) { mic.style.display = 'flex'; mic.onclick = function () { recogOn ? stopMic() : startMic(); }; }
+            if (SR) { mic.style.display = 'flex'; mic.onclick = function () { if (live) { liveStop(); return; } recogOn ? stopMic() : startMic(); }; }
             else mic.style.display = 'none';
         }
         var ta = $id('hf-input');
@@ -27787,6 +28051,8 @@ body {
         }
         // đóng khung chat khi bấm ra ngoài
         document.addEventListener('pointerdown', function (e) {
+            var t0 = e.target;
+            if (wheelOn && !(t0 && t0.closest && (t0.closest('#hf-wheel') || t0.closest('#home-fab')))) closeWheel();
             var p = $id('home-fab-pop'); if (!p || p.classList.contains('hidden')) return;
             var t = e.target;
             if (p.contains(t)) return;
@@ -27796,11 +28062,261 @@ body {
         });
         document.addEventListener('keydown', function (e) {
             if (e.key !== 'Escape') return;
+            if (tour) { finishTour(); return; }
             if (spot) { clearSpot(); return; }
+            if (wheelOn) { closeWheel(); return; }
             var p = $id('home-fab-pop'); if (p && !p.classList.contains('hidden')) closePop();
         });
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
+</script>
+<script id="rhm-toc-reconcile">
+/* ============================================================================
+   ĐỐI CHIẾU ẢNH TRANG + CHỮ ĐÃ TRÍCH ĐỂ SỬA MỤC LỤC (lớp sửa cuối cùng)
+   1) Tiêu đề dài 2–3 dòng bị tách thành 2 mục nhỏ  → gộp lại (so theo CHỮ chương, không phụ thuộc box AI).
+   2) Đoạn dài bị bỏ sót tiêu đề (cả đoạn bị nuốt vào mục trước) → sau khi AI lập mục lục, chạy thêm một lượt
+      "đối chiếu": gửi lại ẢNH trang + danh sách DÒNG CHỮ thật trích từ PDF (kèm đậm / cỡ chữ) để AI chọn
+      đúng dòng là tiêu đề bị sót (chọn theo id dòng nên vị trí luôn khớp chữ, không bịa).
+   3) Không tự cắt một mục liên tục thành 2 mục nhỏ: hết cắt theo dòng in đậm bất kỳ; mục máy tự thêm mà AI
+      xác nhận không phải tiêu đề thì bỏ.
+   ============================================================================ */
+(function () {
+    'use strict';
+    if (window.__rhmTocReconcile) return; window.__rhmTocReconcile = 1;
+    const N = (t) => bkNormStr(t);
+    const NUM_PRE = /^\s*(?:\d+(?:\.\d+)*[.)]?|[IVXLC]{1,5}[.)]|[A-Za-z][.)])\s+/;
+    const stripNum = (t) => String(t || '').replace(NUM_PRE, '');
+    const tailStop = (t) => { t = String(t || '').trim(); return /[,\-–—]$/.test(t) || BK_TAIL_STOP.test(t); };
+    const auditKey = () => 'bk_audit_' + (bkCur ? bkCur.url : '');
+    const isAudited = () => { try { return localStorage.getItem(auditKey()) === '1'; } catch (e) { return false; } };
+    const setAudited = (v) => { try { if (v) localStorage.setItem(auditKey(), '1'); else localStorage.removeItem(auditKey()); } catch (e) {} };
+
+    /* ---------- A. Dọn mảnh vụn của tiêu đề: so vị trí theo TÂM dòng, không còn bắt box khít từng đơn vị ---------- */
+    const prevClean = window.bkHeadsClean;
+    window.bkHeadsClean = function () {
+        try {
+            if (Array.isArray(bkHeads) && bkHeads.length > 1) {
+                const drop = new Set();
+                for (let i = 0; i < bkHeads.length; i++) {
+                    const hi = bkHeads[i], ni = N(hi.en), ri = bkHeadRect(hi);
+                    if (ni.length < 4 || !ri) continue;
+                    for (let j = 0; j < bkHeads.length; j++) {
+                        if (i === j || drop.has(j)) continue;
+                        const hj = bkHeads[j], nj = N(hj.en), rj = bkHeadRect(hj);
+                        if (!rj || hj.page !== hi.page || nj.length <= ni.length || nj.indexOf(ni) < 0) continue;
+                        const cy = (ri.y0 + ri.y1) / 2, cx = (ri.x0 + ri.x1) / 2;
+                        if (cy >= rj.y0 - 6 && cy <= rj.y1 + 6 && cx >= rj.x0 - 20 && cx <= rj.x1 + 20) { drop.add(i); break; }
+                    }
+                }
+                if (drop.size) bkHeads = bkHeads.filter((h, i) => !drop.has(i));
+            }
+        } catch (e) {}
+        return prevClean ? prevClean.apply(this, arguments) : 0;
+    };
+
+    /* ---------- B. Định vị tiêu đề do bước đối chiếu thêm: dùng thẳng vị trí chữ đã chọn ---------- */
+    const prevLocate = window.bkLocateHead;
+    window.bkLocateHead = async function (h) {
+        try {
+            if (h && typeof h.pos === 'number' && h.pos >= 0 && bkText) {
+                const seg = N(bkText.slice(h.pos, h.pos + 90)), key = N(h.en).slice(0, 14);
+                if (key.length >= 3 && seg.indexOf(key) === 0) return h.pos;
+            }
+        } catch (e) {}
+        return prevLocate.apply(this, arguments);
+    };
+
+    /* ---------- C. Sau khi dựng danh sách mục: gộp tiêu đề bị tách; bỏ cắt mục theo dòng in đậm ---------- */
+    function relevel() {
+        let prev = 0;
+        bkSecs.forEach(x => {
+            if (x.manual || x.intro) { prev = Math.max(1, Math.min(10, x.lvl || 1)); return; }
+            x.lvl = Math.max(1, Math.min(10, Math.min(x.lvl || 1, prev + 1))); prev = x.lvl;
+        });
+    }
+    function fixSplitTitles() {
+        if (!Array.isArray(bkSecs) || bkSecs.length < 2 || !bkText) return 0;
+        let n = 0, i = 0;
+        while (i + 1 < bkSecs.length) {
+            const A = bkSecs[i], B = bkSecs[i + 1];
+            if (A.manual || B.manual || A.intro || B.intro) { i++; continue; }
+            const nA = N(stripNum(A.en || A.title)), nB = N(stripNum(B.en || B.title));
+            const nGap = N(stripNum(bkText.slice(A.s, B.s)));
+            let merge = false;
+            if (nB.length >= 3 && nA.length > nB.length && nA.indexOf(nB) >= 0 && nGap.length < nA.length - 2) {
+                merge = true;                                    // B nằm TRONG chữ tiêu đề của A (dòng sau của cùng một tiêu đề)
+            } else if (nGap.length <= nA.length + 3 && tailStop(A.en) && !NUM_PRE.test(String(B.en || '') + ' ') && String(B.en || '').length <= 70) {
+                A.en = (A.en + ' ' + B.en).replace(/\s+/g, ' ').trim();   // A bị cắt dở câu (…of the Pin in) → B là phần tiếp
+                if (B.title && N(A.title).indexOf(N(B.title)) < 0) A.title = (A.title + ' ' + B.title).replace(/\s+/g, ' ').trim();
+                merge = true;
+            }
+            if (merge) { A.e = B.e; A.text = bkText.slice(A.s, A.e).trim(); bkSecs.splice(i + 1, 1); n++; continue; }
+            i++;
+        }
+        if (n) relevel();
+        return n;
+    }
+    const prevRebuild = window.bkRebuildSecs;
+    window.bkRebuildSecs = async function (tok) {
+        const ok = await prevRebuild.apply(this, arguments);
+        if (ok !== true || tok !== bkViewTok) return ok;
+        try {
+            let ch = 0;
+            if (isAudited()) {   // đã đối chiếu ảnh + chữ: mục kéo dài tới đầu mục kế, không cắt giữa chừng
+                bkSecs.forEach((x, i) => {
+                    const e = i + 1 < bkSecs.length ? bkSecs[i + 1].s : bkText.length;
+                    if (x.e !== e) { x.e = e; x.text = bkText.slice(x.s, x.e).trim(); ch++; }
+                });
+            }
+            const keepEn = bkSecs[bkSecSel] ? (bkSecs[bkSecSel].en || '') : '';
+            ch += fixSplitTitles();
+            if (ch) {
+                bkSecSel = keepEn ? bkSecs.findIndex(x => (x.en || '') === keepEn) : -1;
+                bkHl = bkSecSel >= 0 ? { s: bkSecs[bkSecSel].s, e: bkSecs[bkSecSel].e } : null;
+                bkApplyHlAll(); bkRenderSecList();
+            }
+        } catch (e) { console.warn('[Mục lục] gộp tiêu đề:', e); }
+        return ok;
+    };
+
+    /* ---------- D. Lượt ĐỐI CHIẾU ẢNH + CHỮ ---------- */
+    const shotCache = {};
+    const prevShots = window.bkShotPages;
+    window.bkShotPages = async function (nums, tok, onProg) {
+        const r = await prevShots.apply(this, arguments);
+        if (r) r.forEach(s => { shotCache[s.num] = s; });
+        return r;
+    };
+    const WIN = 6, LONG = 1800;
+    function auditSystem() {
+        return 'Bạn là chuyên gia dàn trang sách giáo khoa. NHIỆM VỤ: ĐỐI CHIẾU ẢNH TRANG với CHỮ ĐÃ TRÍCH từ PDF để tìm TIÊU ĐỀ MỤC BỊ BỎ SÓT trong mục lục, và loại các mục máy thêm nhầm. Chỉ trả về JSON.\n\n'
+            + 'BẠN ĐƯỢC CHO: (1) ảnh các trang (nhãn "TRANG n" đứng trước ảnh); (2) MỤC LỤC HIỆN CÓ: mỗi mục có id Hk, cấp, trang, tên và độ dài thân mục (ký tự); mục có dấu ⚠ là mục RẤT DÀI, rất dễ đã nuốt tiêu đề con / mục mới nằm bên trong; mục có [máy] là do máy tự thêm theo cỡ chữ, chưa được xác nhận bằng ảnh; (3) DÒNG ỨNG VIÊN: các dòng chữ ngắn đã trích từ PDF, mỗi dòng có id Lk, trang, kiểu chữ (B = in đậm hoặc chữ lớn; ×1.2 = cỡ chữ so với chữ thân; dòng nghiêng / in màu không có ký hiệu riêng, hãy nhìn ảnh) và nội dung chính xác.\n\n'
+            + 'CÁCH LÀM: nhìn ẢNH để xác định dòng nào thật sự là tiêu đề, rồi chọn đúng dòng đó theo id Lk trong DÒNG ỨNG VIÊN (TUYỆT ĐỐI không tự viết chữ tiêu đề, không dùng id không có trong danh sách). Đối chiếu kiểu chữ ở danh sách với những gì thấy trên ảnh để chắc chắn. Đặc biệt kiểm tra kỹ các mục ⚠ và các chỗ có một khối chữ dài mà không có tiêu đề nào ở đầu (vd tiêu đề nghiêng / in màu / chữ lớn đứng riêng một dòng giữa trang hay ở đầu cột).\n\n'
+            + 'MỘT TIÊU ĐỀ THẬT: đứng RIÊNG một dòng (hoặc 2–3 dòng cùng cỡ chữ) ở đầu một khối nội dung mới, được trình bày khác chữ thân (cỡ lớn hơn, đậm, nghiêng, màu, nền, kẻ ngang, viết hoa kiểu tiêu đề) và ngay sau nó là nội dung của chủ đề mới. Tiêu đề dài 2–3 dòng: "id" là dòng đầu, "lines" là số dòng của tiêu đề đó (1 nếu chỉ một dòng); các dòng sau được lấy liền ngay dưới dòng đầu.\n\n'
+            + 'KHÔNG ĐƯỢC THÊM: chú thích hình / bảng (Figure, Table, Box, Hình, Bảng…), nhãn ô hay chữ nằm trong hình / bảng / khung (Clinical Note, Key Points…), dòng chạy đầu / chân trang, mục lục in sẵn, mục của một danh sách (I. II. III., a) b), gạch đầu dòng), một dòng của đoạn văn, nhãn in đậm đầu một câu, dòng thứ 2 / 3 của một tiêu đề đã có trong mục lục, và chữ trùng với mục đã có. KHÔNG CHIA NHỎ NỘI DUNG LIÊN TỤC: chỉ thêm khi ảnh cho thấy rõ một tiêu đề mới mở đầu một chủ đề mới; chỉ là xuống dòng, đổi cột, đổi trang, hay một ý tiếp nối thì KHÔNG thêm. Có nghi ngờ thì KHÔNG thêm.\n\n'
+            + '"level": cùng thang với mục lục hiện có (1 = lớn nhất); tiêu đề thêm vào phải đặt đúng cấp so với mục đứng trước nó (vd nằm trong một mục cấp 2 thì thường là cấp 3), không nhảy cấp. "vi": bản dịch tiếng Việt của tiêu đề, đúng thuật ngữ chuyên ngành.\n'
+            + '"remove": mảng id Hk của các mục [máy] mà qua ảnh thấy KHÔNG phải tiêu đề (dòng của đoạn văn, nhãn ô, mục danh sách, dòng sau của một tiêu đề dài đã có mục riêng…). Không được đưa mục không có dấu [máy] vào "remove".\n\n'
+            + 'ĐỊNH DẠNG: {"add":[{"id":12,"lines":1,"level":2,"vi":"..."}],"remove":[3]}. Không có gì cần sửa thì trả {"add":[],"remove":[]}.' + (typeof BK_TR_GLOSS === 'string' ? BK_TR_GLOSS : '');
+    }
+    async function buildLines(tok, my) {   // dòng chữ của từng trang + số liệu kiểu chữ (đậm, cỡ chữ, lề)
+        const pagesLines = {}, Ntot = bkDoc.numPages;
+        for (let pn = 1; pn <= Ntot; pn++) {
+            if (tok !== bkViewTok || my !== bkDeepTok) return null;
+            const ex = bkPages[pn - 1], pg = bkVP[pn - 1]; if (!ex || !pg) { pagesLines[pn] = []; continue; }
+            let data = null; try { data = await bkPageData(pg); } catch (e) {}
+            const L = bkPageLayout(pn), bfh = ex.bfh || 11, hcs = Array.isArray(ex.headCands) ? ex.headCands : [];
+            const items = data ? data.items.filter(d => !d.ws && ex.rg[d.idx]).map(d => ({ d: d, s: ex.rg[d.idx].s })).sort((a, b) => a.s - b.s) : [];
+            const inSkip = (d) => {
+                if (!L || !L.skip || !L.skip.length || !data) return false;
+                const cx = (d.x + (d.w || 0) / 2) / data.W, cy = (d.y - d.fh * 0.3) / data.H;
+                return L.skip.some(s => cx >= s[0] - 0.012 && cx <= s[2] + 0.012 && cy >= s[1] - 0.012 && cy <= s[3] + 0.012);
+            };
+            const txt = bkText.slice(ex.gs, ex.ge), arr = []; let off = 0, ip = 0;
+            txt.split('\n').forEach(ln => {
+                const ls = ex.gs + off + (ln.length - ln.replace(/^\s+/, '').length), le = ex.gs + off + ln.length; off += ln.length + 1;
+                const t = ln.replace(/\s+/g, ' ').trim(); if (!t) return;
+                while (ip < items.length && items[ip].s < ls - 1) ip++;
+                const its = []; for (let k = ip; k < items.length && items[k].s < le; k++) its.push(items[k].d);
+                const fh = its.length ? Math.max.apply(null, its.map(d => d.fh)) : bfh;
+                arr.push({ s: ls, e: le, t: t, r: fh / bfh, bd: hcs.some(h => Math.abs(h.s - ls) <= 2), x: its.length ? its[0].x / (data ? data.W : 1) : 0, skip: its.length ? its.some(inSkip) : false });
+            });
+            pagesLines[pn] = arr;
+        }
+        return pagesLines;
+    }
+    function isCandidate(l) {
+        const t = l.t;
+        if (l.skip || t.length < 2 || t.length > 110) return false;
+        if (/[.;,]$/.test(t) && !/^\s*(?:\d+(?:\.\d+)*|[IVXLC]+)[.)]?\s+\S+/.test(t)) return false;
+        if (!/[A-Za-zÀ-ỹ]{2}/.test(t)) return false;
+        if (bkLooksCaption(t) || bkIsRunHead(t) || bkLooksProse(t)) return false;
+        if (/^[a-zà-ỹ]/.test(t) && !/^(?:pH\b|e\.max\b|in\s+vitro\b|in\s+vivo\b)/i.test(t)) return false;
+        return true;
+    }
+    async function auditHeads(tok, my) {
+        if (!bkDoc || !bkPages || !bkPages.length || !bkText || !bkSecs.length) return 0;
+        const Ntot = bkDoc.numPages;
+        bkTocSay('Đối chiếu ảnh + chữ: đọc chữ từng trang…');
+        const PL = await buildLines(tok, my); if (!PL) return -1;
+        const heads0 = bkSecs.filter(x => !x.intro).map((x, i) => ({ id: i, sec: x, page: bkPageOfPos(x.s), len: x.e - x.s, machine: false }));
+        const machineKeys = new Set(bkHeads.filter(h => h.recover).map(h => N(h.en)));
+        heads0.forEach(h => { h.machine = machineKeys.has(N(h.sec.en)); });
+        const isHeadStart = (s) => bkSecs.some(x => !x.intro && Math.abs(x.s - s) <= 8);
+        let added = 0, removed = 0, lineId = 0;
+        for (let a = 1; a <= Ntot; a += WIN) {
+            if (tok !== bkViewTok || my !== bkDeepTok) return -1;
+            const b = Math.min(Ntot, a + WIN - 1), cand = [], byId = {};
+            for (let pn = a; pn <= b; pn++) {
+                (PL[pn] || []).forEach((l, k) => {
+                    if (!isCandidate(l) || isHeadStart(l.s)) return;
+                    const c = { id: ++lineId, page: pn, k: k, l: l }; cand.push(c); byId[c.id] = c;
+                });
+            }
+            const hs = heads0.filter(h => h.page >= a && h.page <= b);
+            if (!cand.length && !hs.some(h => h.machine)) continue;
+            bkTocSay('Đối chiếu ảnh + chữ: trang ' + a + '–' + b);
+            const need = []; for (let pn = a; pn <= b; pn++) if (!shotCache[pn]) need.push(pn);
+            if (need.length) { const got = await window.bkShotPages(need, tok, null); if (!got) return -1; }
+            const parts = [];
+            const prevH = heads0.filter(h => h.page < a).slice(-3);
+            const lst = prevH.concat(hs).map(h => 'H' + h.id + ' [cấp ' + h.sec.lvl + ', tr.' + h.page + '] ' + (h.sec.en || h.sec.title) + (h.len > LONG ? ' ⚠ (dài ' + h.len + ' ký tự)' : '') + (h.machine ? ' [máy]' : ''));
+            const lines = cand.slice(0, 450).map(c => 'L' + c.id + ' [tr.' + c.page + (c.l.bd ? ', B' : '') + ', ×' + c.l.r.toFixed(2) + '] ' + c.l.t);
+            parts.push({ text: 'Chương: ' + (bkCur ? bkCur.title : '') + ' (tổng ' + Ntot + ' trang). Ảnh các trang ' + a + '–' + b + '.\n\nMỤC LỤC HIỆN CÓ (các mục bắt đầu ở các trang này, kèm 3 mục trước đó để biết cấp):\n' + (lst.join('\n') || '(chưa có mục nào)') + '\n\nDÒNG ỨNG VIÊN (chữ trích từ PDF):\n' + (lines.join('\n') || '(không có)') });
+            for (let pn = a; pn <= b; pn++) { const sh = shotCache[pn]; if (sh) { parts.push({ text: 'TRANG ' + pn }); parts.push({ inlineData: { mimeType: 'image/jpeg', data: sh.b64 } }); } }
+            parts.push({ text: 'Hãy trả JSON đúng định dạng.' });
+            let r = null;
+            try { r = await bkVisCall(auditSystem(), parts); } catch (e) { if (e && (e.badKey || e.quota)) throw e; r = null; }
+            if (tok !== bkViewTok || my !== bkDeepTok) return -1;
+            if (!r) continue;
+            const idOf = (v) => parseInt(String(v == null ? '' : v).replace(/\D/g, ''), 10);
+            (Array.isArray(r.remove) ? r.remove : []).forEach(v => {
+                const h = heads0.find(x => x.id === idOf(v)); if (!h || !h.machine) return;
+                const k = N(h.sec.en), before = bkHeads.length;
+                bkHeads = bkHeads.filter(x => !(x.recover && N(x.en) === k));
+                if (bkHeads.length < before) removed++;
+            });
+            const addedLines = new Set();
+            (Array.isArray(r.add) ? r.add : []).forEach(it => {
+                const c = byId[idOf(it && it.id)]; if (!c) return;
+                const pl = PL[c.page], l = c.l;
+                let en = l.t;
+                const nl = Math.max(1, Math.min(3, parseInt(it.lines, 10) || 1));
+                for (let q = 1; q < nl; q++) {   // các dòng sau của CÙNG tiêu đề: liền dưới, cùng cỡ chữ / kiểu chữ / lề, chưa kết câu
+                    const nx = pl[c.k + q - 1 + 1], pr = pl[c.k + q - 1];
+                    if (!nx || nx.skip || /[.:;!?]$/.test(pr.t) || Math.abs(nx.r - l.r) > 0.1 || nx.bd !== l.bd || Math.abs(nx.x - l.x) > 0.06 || nx.t.length > 80) break;
+                    en += ' ' + nx.t;
+                }
+                en = en.replace(/\s+/g, ' ').trim();
+                if (en.length > 140 || (bkLooksBadHead(en) && !/\?$/.test(en))) return;
+                if (bkHeads.some(h => h.page === c.page && N(h.en) === N(en))) return;
+                // dòng này là dòng sau của một tiêu đề vừa liền trên (cùng cỡ chữ / kiểu chữ / lề) → không tách thành mục riêng
+                const pv = pl[c.k - 1];
+                if (pv && (isHeadStart(pv.s) || addedLines.has(pv.s)) && !/[.:;!?]$/.test(pv.t) && Math.abs(pv.r - l.r) <= 0.08 && pv.bd === l.bd && Math.abs(pv.x - l.x) <= 0.04) return;
+                const vi = String(it.vi || '').replace(/\s+/g, ' ').trim().slice(0, 200);
+                bkHeads.push({ page: c.page, box: null, en: en.slice(0, 200), vi: vi, lvl: Math.max(1, Math.min(10, parseInt(it.level, 10) || 3)), recover: !vi, audit: true, pos: l.s });
+                addedLines.add(l.s); added++;
+            });
+        }
+        if (added || removed) { try { await bkRecoverTranslate(); } catch (e) {} bkHeadsSave(); }
+        return added + removed;
+    }
+    const prevRun = window.bkTocRun;
+    window.bkTocRun = async function (tok, my) {
+        setAudited(false);
+        const ok = await prevRun.apply(this, arguments);
+        if (ok !== true) return ok;
+        let n = 0;
+        try { n = await auditHeads(tok, my); }
+        catch (e) { if (e && (e.badKey || e.quota)) throw e; console.warn('[Mục lục] đối chiếu ảnh + chữ lỗi:', e); n = -1; }
+        for (const k in shotCache) delete shotCache[k];
+        if (n < 0) return (tok === bkViewTok && my === bkDeepTok) ? true : false;
+        setAudited(true);
+        bkTocSay('Đang chuẩn bị mục lục…');
+        if ((await bkRebuildSecs(tok)) !== true) return false;
+        return true;
+    };
+})();
+
 </script>
 </html>
