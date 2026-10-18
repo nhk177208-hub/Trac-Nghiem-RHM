@@ -28181,10 +28181,11 @@ body {
             if (v.ev !== e.type || !el.matches(v.q)) continue;
             var key = v.key || ('vb-' + v.k);
             if (winSeen(key)) return;
+            if (!vidBig()) return;   // chế độ thường: không giới thiệu (chưa đánh dấu đã xem)
             if (!v.cond) winMark(key);
             setTimeout(function (vv, kk) {
                 return function () {
-                    if (tour || !vidPid()) return;
+                    if (tour || !vidPid() || !vidBig()) return;
                     if (vv.cond && (winSeen(kk) || !vv.cond())) return;   // chưa mở được (vd. chưa có khóa API) → để lần sau
                     winMark(kk);
                     beginTour('steps', typeof vv.steps === 'function' ? vv.steps() : vv.steps);
@@ -28196,12 +28197,23 @@ body {
     document.addEventListener('click', vbHandle, true);
     document.addEventListener('change', vbHandle, true);
     /* mở video lần đầu → tự giới thiệu các nút của giao diện xem video */
-    var lastVid = null;
-    setInterval(function () {
-        var p = vidPid();
-        if (p && !lastVid) { try { autoWinTour('video'); } catch (e) {} }
-        lastVid = p;
-    }, 1000);
+    function vidBig() {   // đang ở rạp chiếu phim hoặc toàn màn hình?
+        var w = vwrap(); if (!w) return false;
+        var fs = document.fullscreenElement || document.webkitFullscreenElement;
+        return fs === w || w.classList.contains('theater-mode');
+    }
+    /* luồng giới thiệu giao diện video: chỉ chạy khi người dùng bấm nút Play lúc đang ở rạp chiếu phim / toàn màn hình
+       (chế độ thường thì không; vào lại rạp / toàn màn hình rồi bấm Play sẽ chạy) */
+    document.addEventListener('click', function (e) {
+        var b = e.target && e.target.closest && e.target.closest('button[onclick^="toggleYtPlay"]'); if (!b) return;
+        if (!fabOn || tour || winSeen('video') || Date.now() < suppressUntil) return;
+        setTimeout(function () {
+            if (tour || winSeen('video') || !vidPid() || !vidBig()) return;
+            var d = activeYtPlayers[vidPid()], st = -9; try { st = d.player.getPlayerState(); } catch (er) {}
+            if (st !== 1 && st !== 3) return;   // chỉ khi vừa bấm phát (không phải tạm dừng)
+            try { autoWinTour('video'); } catch (er) {}
+        }, 1200);
+    }, true);
     function tourHomeOk() {
         if (!shown('home-screen')) return false;
         for (var k in MODAL_NAMES) { if (shown(k)) return false; }
@@ -28248,8 +28260,10 @@ body {
     function winMark(c) { seenMem[c] = 1; try { localStorage.setItem(seenKey(c), '1'); } catch (e) {} }
     function autoWinTour(c) {
         if (!fabOn || tour || winSeen(c) || Date.now() < suppressUntil) return;
+        if (c === 'video' && !vidBig()) return;
         setTimeout(function () {
             if (tour || winSeen(c) || !winShown(c)) return;
+            if (c === 'video' && !vidBig()) return;
             winMark(c);
             if (c === 'monhoc') beginTour('multi', ['monhoc', 'subject']); else beginTour('win', c);
         }, c === 'video' ? 1500 : 800);
@@ -28627,6 +28641,21 @@ body {
             window[fn] = function () { var r = orig.apply(this, arguments); try { revive(); } catch (e) {} return r; };
         });
         window.homeFabRevive = revive;
+    })();
+
+    /* --------------------- toàn màn hình (Android, iPad): chỉ phần tử đang toàn màn hình mới hiển thị → đưa nút Trợ lý AI, khung menu và vòng tròn vào đó --------------------- */
+    (function fabFullscreenHost() {
+        var IDS = ['home-fab', 'home-fab-pop', 'hf-wheel'];
+        function move() {
+            var f = document.fullscreenElement || document.webkitFullscreenElement || null;
+            var h = (f && f !== document.documentElement && f !== document.body && f.appendChild) ? f : document.body;
+            IDS.forEach(function (id) { var n = $id(id); if (n && n.parentNode !== h) h.appendChild(n); });
+            try { applyFabGeo(true); if (popOpen()) placePop(); } catch (e) {}
+        }
+        ['fullscreenchange', 'webkitfullscreenchange'].forEach(function (n) {
+            document.addEventListener(n, function () { move(); setTimeout(move, 300); });
+        });
+        window.homeFabHostSync = move;
     })();
 
     /* ------------------------------ khởi động ------------------------------ */
