@@ -28455,25 +28455,73 @@ body {
     var NT_ROW_STEPS = [
         { sel: qbQ('#note-modal .nt-pen'), t: '✏️ Sửa ghi chú', d: 'Sửa nội dung, tiêu đề, phân mục và ảnh của ghi chú này ngay tại chỗ.' },
         { sel: qbQ('#note-modal .nt-spk'), t: '🔊 Đọc to', d: 'Máy đọc to ghi chú này; bấm lại để dừng.' },
-        { sel: qbQ('#note-modal .nt-i'), t: 'ℹ️ Thông tin', d: 'Xem vị trí (nguồn) và thời gian tạo của ghi chú.' }
+        { sel: qbQ('#note-modal .nt-i'), t: 'ℹ️ Thông tin', d: 'Xem vị trí (nguồn) và thời gian tạo của ghi chú.' },
+        { demo: true, sel: function () { return demoQzBar('#note-modal .nt-b'); }, t: '✨ Bôi đen chữ trong ghi chú', d: 'Bôi đen (kéo chọn) một đoạn chữ trong ghi chú, thanh nút nhỏ sẽ nổi lên ngay trên đoạn đó. Đây là thanh mẫu để minh họa.' },
+        { demo: true, sel: function () { return demoQzBtn('b-hl', '#note-modal .nt-b'); }, t: '🖍 Highlight', d: 'Tô sáng đoạn chữ vừa bôi đen để dễ tìm lại khi ôn. Phần tô sáng được lưu cùng ghi chú.' },
+        { demo: true, sel: function () { return demoQzBtn('b-un', '#note-modal .nt-b'); }, t: '🧽 Xóa highlight', d: 'Chỉ hiện khi vùng bạn chọn (hoặc đoạn bạn chạm vào) đang có highlight; bấm để bỏ tô sáng phần đó, phần highlight ngoài vùng chọn vẫn giữ nguyên.' }
     ];
+    function qbNth(q, n) { return function () { return document.querySelectorAll(q)[n] || null; }; }
     var DNBTNS = [
         { m: 'dict-modal', k: 'd-add', q: '#rd-rb-add', wait: 450, cond: function () { return shown('rd-pop'); }, steps: [
             { sel: dnVis(['rd-pop']), t: '➕ Thêm thuật ngữ mới', d: 'Tự thêm một thuật ngữ vào từ điển: nhập từ tiếng Anh, từ loại (n, v, adj…) và nghĩa tiếng Việt.' },
             { sel: qbQ('#rd-pop .rd-pbtn.pri'), t: '＋ Thêm', d: 'Bấm để lưu thuật ngữ. Từ vừa thêm có huy hiệu MỚI; bấm vào dòng của nó trong sách để thao tác tiếp.' }] },
         { m: 'dict-modal', k: 'd-search', q: '#rd-rb-search', wait: 450, cond: function () { return shown('rd-pop'); }, steps: [
-            { sel: dnVis(['rd-pop']), t: '🔍 Tìm thuật ngữ', d: 'Gõ để tìm trong toàn bộ từ điển; kết quả hiện ngay bên dưới, bấm một kết quả để nhảy tới trang chứa thuật ngữ đó.' }] },
-        { m: 'dict-modal', k: 'd-review', q: '#rd-rb-review', wait: 600, cond: function () { return shown('rd-rv') || shown('rd-pop'); }, steps: [
-            { sel: dnVis(['rd-rv', 'rd-pop']), t: '🗂️ Ôn tập bằng thẻ ghi nhớ', d: 'Ôn thuật ngữ bằng flashcard: chọn nguồn từ (tất cả hoặc từ đã lưu) và cách ôn, rồi lật thẻ để nhớ lâu hơn. Bấm lại nút này để thoát.' }] },
+            { sel: dnVis(['rd-pop']), t: '🔍 Tìm thuật ngữ', d: 'Tìm nhanh trong toàn bộ từ điển. Có hai cách tìm, chọn ở hai nút ngay bên dưới.' },
+            { sel: qbQ('#rd-pop .nt-tabs'), t: '🔀 Theo từ · Theo chủ đề (AI)', d: 'Theo từ: gõ tiếng Anh hoặc tiếng Việt, kết quả hiện ngay khi gõ. Theo chủ đề (AI): nhập một chủ đề rồi Enter, AI chọn ra các thuật ngữ thuộc chủ đề đó.' },
+            { sel: qbQ('#rd-pop [data-m="topic"]'), t: '🤖 Tìm với AI', d: 'Nhập chủ đề như “nội nha”, “nha chu”, “phục hình”… rồi Enter: AI lọc các thuật ngữ trong từ điển liên quan đến chủ đề, kể cả khi từ khóa không xuất hiện trong chính thuật ngữ. Cần khóa API AI (⚙️ Cài đặt).' },
+            { sel: qbQ('#rd-in-q'), t: '⌨️ Ô nhập', d: 'Gõ từ khóa (Theo từ) hoặc chủ đề (Theo chủ đề AI) vào đây. Kết quả hiện bên dưới; bấm một kết quả để nhảy tới thuật ngữ đó.' }] },
+        { m: 'dict-modal', k: 'd-review', q: '#rd-rb-review', wait: 600, cond: function () { return shown('rd-rv'); }, steps: [
+            { sel: qbQ('#rd-rv .rv-card'), t: '🎓 Ôn tập từ điển', d: 'Ôn lại thuật ngữ trong từ điển theo cách bạn chọn. Mình đi qua từng phần của bảng thiết lập, từ trên xuống.' },
+            { sel: qbNth('#rd-rv .rv-g', 0), t: '📚 Nguồn từ ôn tập', d: '⭐ Từ đã lưu: chỉ ôn các từ bạn đã gắn sao. 🧭 Theo chủ đề: nhập chủ đề, AI chọn các từ liên quan. 🎚 Theo mức độ: đặt tỉ lệ % từ Dễ / Vừa / Khó (theo thẻ bạn gắn). 🎲 Ngẫu nhiên: rút ngẫu nhiên trong toàn bộ từ điển.' },
+            { sel: qbQ('#rv-topic'), t: '🧭 Nhập chủ đề', d: 'Hiện khi chọn nguồn “Theo chủ đề”: gõ chủ đề (nội nha, implant, nhổ răng…), AI sẽ chọn các từ trong từ điển phù hợp.' },
+            { sel: qbQ('#rv-lvlp'), t: '🎚 Tỉ lệ mức độ (%)', d: 'Hiện khi chọn “Theo mức độ”: đặt tỉ lệ từ Dễ · Vừa · Khó trong bài ôn (tổng 100%), ví dụ dồn nhiều vào từ Khó để ôn chỗ yếu.' },
+            { sel: qbNth('#rd-rv .rv-g', 1), t: '🔢 Số lượng từ', d: 'Chọn ôn 10, 20, 30 từ, tất cả, hoặc “Tùy chọn” để tự nhập số từ.' },
+            { sel: qbNth('#rd-rv .rv-g', 2), t: '🎮 Chế độ ôn', d: '🃏 Flashcard: lật thẻ để xem nghĩa rồi tự đánh giá đã nhớ hay chưa nhớ. 📝 Trắc nghiệm ngữ cảnh: AI cho một câu có chỗ trống, bạn chọn 1 trong 4 từ tiếng Anh để điền; trả lời đúng +5 điểm.' },
+            { sel: qbQ('#rv-lvlw'), t: '😤 Độ khó đáp án nhiễu', d: 'Chỉ có ở chế độ trắc nghiệm: Dễ — 3 từ gây nhiễu ít liên quan; Vừa — một nửa cùng chủ đề / từ loại; Khó — cả 3 từ gây nhiễu cùng chủ đề và cùng từ loại.' },
+            { sel: qbQ('#rd-rv [data-act="rv-start"]'), t: '▶ Bắt đầu', d: 'Bắt đầu phiên ôn theo thiết lập vừa chọn. Trong lúc ôn có thể thoát bất cứ lúc nào.' },
+            { sel: qbQ('#rd-rv .rv-x'), t: '✕ Đóng', d: 'Đóng bảng ôn tập và quay lại từ điển (bấm lại nút 🗂️ trên ruy-băng cũng được).' }] },
+        { m: 'dict-modal', k: 'd-new', q: '[data-act="new-view"]', wait: 450, cond: function () { return shown('rd-pop'); }, steps: [
+            { sel: dnVis(['rd-pop']), t: '🆕 Thuật ngữ mới', d: 'Danh sách các thuật ngữ mới vừa được thêm vào từ điển (từ bạn tự thêm, từ AI gợi ý hoặc lưu khi đọc sách). Chúng có huy hiệu MỚI cho tới khi bạn xem.' },
+            { sel: qbQ('#rd-nt'), t: '📋 Danh sách thuật ngữ mới', d: 'Bấm một thuật ngữ để nhảy tới vị trí của nó trong sách từ điển.' },
+            { sel: qbQ('#rd-nwslot'), t: '✕ Xóa dấu MỚI', d: 'Bỏ dấu “mới” của tất cả các thuật ngữ khi bạn đã xem xong.' }] },
+        { m: 'dict-modal', k: 'd-info', q: '#dict-modal .rd-act [data-act="r-info"]', wait: 700, cond: function () { return shown('rd-pop'); }, steps: [
+            { sel: dnVis(['rd-pop']), t: 'ℹ️ Thông tin thuật ngữ', d: 'Nghĩa tiếng Việt ở phía trên; bên dưới là phần giải thích chi tiết do AI soạn (cách dùng, ví dụ…). Cần khóa API AI; lần đầu mất vài giây rồi được lưu lại.' },
+            { sel: qbQ('#rd-pop .rd-inflg'), t: 'Vie / Eng', d: 'Đổi ngôn ngữ phần giải thích giữa tiếng Việt và tiếng Anh.' },
+            { sel: qbQ('#rd-info-tts-btn'), t: '🔊 Đọc to', d: 'Máy đọc to phần giải thích; bấm lại để dừng.' },
+            { sel: qbQ('#rd-info'), t: '🧠 Nội dung giải thích', d: 'Phần giải thích của AI. Kéo lên xuống để đọc hết.' },
+            { sel: qbQ('#rd-pop [data-act="info-redo"]'), t: '↻ Tạo lại', d: 'Nhờ AI soạn lại phần giải thích khi bạn thấy chưa ưng ý.' },
+            { sel: qbQ('#rd-pop .rd-info-foot [data-act="cancel"]'), t: '✕ Đóng', d: 'Đóng cửa sổ thông tin.' }] },
+        { m: 'dict-modal', k: 'd-more', q: '#dict-modal .rd-act [data-act="r-more"]', wait: 700, cond: function () { return shown('rd-pop'); }, steps: [
+            { sel: dnVis(['rd-pop']), t: '＋ Thêm từ liên quan', d: 'AI gợi ý các thuật ngữ cùng bộ / cùng từ loại với từ bạn đang chọn để bạn mở rộng vốn từ nhanh.' },
+            { sel: qbQ('#rd-mt'), t: '☑️ Danh sách gợi ý', d: 'Tick chọn những từ muốn thêm. Từ nào đã có trong từ điển thì không bị thêm trùng.' },
+            { sel: qbQ('#rd-mb'), t: '＋ Thêm các từ đã chọn', d: 'Bấm để thêm các từ đã tick vào từ điển; từ mới thêm có dấu MỚI.' }] },
+        { m: 'dict-modal', k: 'd-edit', q: '#dict-modal .rd-act [data-act="r-edit"]', wait: 450, cond: function () { return shown('rd-pop'); }, steps: [
+            { sel: dnVis(['rd-pop']), t: '✏️ Sửa thuật ngữ', d: 'Chỉnh lại thuật ngữ cho đúng ý bạn. Các lần dịch sau sẽ dùng đúng nghĩa bạn vừa sửa.' },
+            { sel: qbQ('#rd-in-en'), t: '🔤 Thuật ngữ tiếng Anh', d: 'Sửa chính tả hoặc cách viết của thuật ngữ.' },
+            { sel: qbQ('#rd-in-pos'), t: '🏷 Từ loại', d: 'Từ loại: n, v, adj, adv, pl, sing…' },
+            { sel: qbQ('#rd-in-vi'), t: '🇻🇳 Nghĩa tiếng Việt', d: 'Mỗi nghĩa một dòng (Shift+Enter để xuống dòng).' },
+            { sel: qbQ('#rd-pop .rd-dkrow'), t: '🎚 Mức độ', d: 'Gắn mức độ cho từ (Dễ / Vừa / Khó); dùng khi ôn tập theo mức độ.' },
+            { sel: qbQ('#rd-pop [data-act="save"]'), t: '💾 Lưu', d: 'Lưu các thay đổi.' },
+            { sel: qbQ('#rd-pop [data-act="del"]'), t: '🗑 Xóa', d: 'Xóa thuật ngữ khỏi từ điển.' }] },
         { m: 'note-modal', k: 'n-new', q: '#nt-rb-new', wait: 450, cond: function () { return shown('nt-pop'); }, steps: [
             { sel: dnVis(['nt-pop']), t: '➕ Tạo ghi chú mới', d: 'Viết ghi chú của riêng bạn: đặt tiêu đề, chọn hoặc gõ phân mục, rồi nhập nội dung.' },
             { sel: qbQ('#nt-in-c'), t: '🗂 Phân mục', d: 'Gom ghi chú theo chủ đề: chọn phân mục có sẵn hoặc gõ tên mới.' },
             { sel: qbQ('#nt-pop [data-act="n-save"]'), t: '💾 Lưu', d: 'Lưu ghi chú vào sổ. Sau đó bạn sẽ thấy các nút ✏️ 🔊 ℹ️ trên ghi chú.' }] },
         { m: 'note-modal', k: 'n-search', q: '#nt-rb-search', wait: 450, cond: function () { return shown('nt-pop'); }, steps: [
-            { sel: dnVis(['nt-pop']), t: '🔍 Tìm ghi chú', d: 'Gõ từ khóa để tìm lại ghi chú; bấm một kết quả để mở ghi chú đó.' }] },
-        { m: 'note-modal', k: 'n-review', q: '#nt-rb-review', wait: 600, cond: function () { return shown('nt-rv') || shown('nt-pop'); }, steps: [
-            { sel: dnVis(['nt-rv', 'nt-pop']), t: '🗂️ Ôn tập ghi chú', d: 'Ôn lại các ghi chú bằng thẻ ghi nhớ để nhớ lâu hơn. Bấm lại nút này để thoát.' }] }
+            { sel: dnVis(['nt-pop']), t: '🔍 Tìm ghi chú', d: 'Tìm lại ghi chú đã viết. Có hai cách tìm, chọn ở hai nút bên dưới.' },
+            { sel: qbQ('#nt-pop .nt-tabs'), t: '🔀 Theo từ · Theo chủ đề (AI)', d: 'Theo từ: gõ từ khóa, kết quả hiện ngay. Theo chủ đề (AI): nhập một chủ đề rồi Enter, AI chọn ra các ghi chú thuộc chủ đề đó.' },
+            { sel: qbQ('#nt-pop [data-m="topic"]'), t: '🤖 Tìm với AI', d: 'Nhập chủ đề (nội nha, phục hình…) rồi Enter: AI lọc các ghi chú liên quan, kể cả khi từ khóa không xuất hiện nguyên văn. Cần khóa API AI.' },
+            { sel: qbQ('#nt-in-q'), t: '⌨️ Ô nhập', d: 'Gõ từ khóa hoặc chủ đề; bấm một kết quả để mở ghi chú đó.' }] },
+        { m: 'note-modal', k: 'n-review', q: '#nt-rb-review', wait: 600, cond: function () { return shown('nt-rv'); }, steps: [
+            { sel: qbQ('#nt-rv .rv-card'), t: '🎓 Ôn tập ghi chú', d: 'AI ra câu trắc nghiệm 4 đáp án dựa trên chính các ghi chú của bạn. Mình đi qua từng phần nhé.' },
+            { sel: qbNth('#nt-rv .rv-g', 0), t: '📚 Chủ đề trắc nghiệm', d: 'Tất cả ghi chú: ra đề phủ đều toàn bộ sổ. Tùy chọn chủ đề: chỉ ra đề về một chủ đề bạn nhập.' },
+            { sel: qbQ('#nt-rv #rv-topic'), t: '🧭 Nhập chủ đề', d: 'Hiện khi chọn “Tùy chọn chủ đề”: gõ chủ đề (nội nha, phục hình…), AI ra đề dựa trên các ghi chú liên quan.' },
+            { sel: qbNth('#nt-rv .rv-g', 1), t: '🔢 Số câu', d: '10, 20, 30 câu, tất cả (mỗi ghi chú một câu, tối đa 50) hoặc “Tùy chọn” để tự nhập.' },
+            { sel: qbQ('#nt-rv [data-act="rv-start"]'), t: '▶ Bắt đầu', d: 'Bắt đầu làm bài. Mỗi câu đúng được +5 điểm.' },
+            { sel: qbQ('#nt-rv .rv-x'), t: '✕ Đóng', d: 'Đóng bảng ôn tập và quay lại sổ ghi chú.' }] }
     ];
+    function dnSteps(k) { for (var i = 0; i < DNBTNS.length; i++) { if (DNBTNS[i].k === k) return DNBTNS[i].steps; } return null; }
+    var NT_INFO_STEPS = [{ sel: dnVis(['nt-pop']), t: 'ℹ️ Thông tin ghi chú', d: 'Cho biết phân mục, vị trí (nguồn) và thời gian tạo của ghi chú.' }];
     document.addEventListener('click', function (e) {
         if (!fabOn || tour || Date.now() < suppressUntil) return;
         var t = e.target; if (!t || !t.closest || t.closest('#hf-spot-wrap')) return;
@@ -28546,18 +28594,49 @@ body {
     }
     /* ---- ℹ️ mặc định: đang mở cửa sổ con / khung chat nào thì giới thiệu đúng cái đó ---- */
     function ptxt(id) { var e = document.querySelector('#' + id + ' .rd-pt'); return e ? (e.textContent || '') : ''; }
-    function subWinSteps(dnOnly) {
+    /* Từ điển / Sổ ghi chú nằm trên cùng: popup / ôn tập đang mở → giới thiệu đúng popup đó; không có popup → giới thiệu cả cửa sổ (trả về tên cửa sổ) */
+    function dnTop() {
         if (shown('dict-modal')) {
-            if (shown('rd-rv')) return DNBTNS[2].steps;
-            if (shown('rd-pop')) { var a = ptxt('rd-pop'); if (a.indexOf('Thêm') >= 0) return DNBTNS[0].steps; if (a.indexOf('Tìm') >= 0) return DNBTNS[1].steps; }
-            if (document.querySelector('#dict-modal .rd-act')) return DN_ROW_STEPS;
+            if (shown('rd-rv')) return dnSteps('d-review');
+            if (shown('rd-pop')) {
+                var a = ptxt('rd-pop');
+                if (a.indexOf('Thêm từ liên quan') >= 0) return dnSteps('d-more');
+                if (a.indexOf('Thêm thuật ngữ') >= 0) return dnSteps('d-add');
+                if (a.indexOf('Tìm') >= 0) return dnSteps('d-search');
+                if (a.indexOf('Sửa') >= 0) return dnSteps('d-edit');
+                if (a.indexOf('ℹ') >= 0) return dnSteps('d-info');
+                if (a.indexOf('Thuật ngữ mới') >= 0) return dnSteps('d-new');
+            }
+            return 'dict';
         }
         if (shown('note-modal')) {
-            if (shown('nt-rv')) return DNBTNS[5].steps;
-            if (shown('nt-pop')) { var b = ptxt('nt-pop'); if (b.indexOf('Ghi chú mới') >= 0) return DNBTNS[3].steps; if (b.indexOf('Tìm') >= 0) return DNBTNS[4].steps; }
+            if (shown('nt-rv')) return dnSteps('n-review');
+            if (shown('nt-pop')) {
+                var b = ptxt('nt-pop');
+                if (b.indexOf('Ghi chú') >= 0 && (b.indexOf('mới') >= 0 || b.indexOf('✏') >= 0)) return dnSteps('n-new');
+                if (b.indexOf('Tìm') >= 0) return dnSteps('n-search');
+                if (b.indexOf('ℹ') >= 0) return NT_INFO_STEPS;
+            }
+            return 'note';
         }
-        if (dnOnly) return null;
-        if (aiVisible() && !aiVidMode()) return (typeof aiState !== 'undefined' && aiState.mode === 'book') ? rdChatSteps() : QBTNS[2].steps;
+        return null;
+    }
+    /* cửa sổ phụ Trắc nghiệm của khung chat (reader / video) đang mở → chỉ giới thiệu cửa sổ phụ này */
+    function qzSubSteps() {
+        var vid = aiVidMode();
+        return [
+            qzStep(vsg('ai-en-panel'), '📝 Cửa sổ phụ Trắc nghiệm',
+                vid ? 'Nơi làm trắc nghiệm về bài giảng: bấm 📝 Trắc nghiệm trong khung chat → chọn số câu, độ khó → ▶ Bắt đầu. Mỗi câu gắn với một mốc thời gian trong video; mỗi câu đúng +20 điểm.'
+                    : 'Nơi làm trắc nghiệm về chương đang đọc: bấm 📝 Trắc nghiệm trong khung chat → chọn số câu, độ khó → ▶ Bắt đầu. Mỗi câu đúng +20 điểm.'),
+            qzStep(function () { vidKeep(); return document.querySelector('#ai-en-panel .ai-en-body'); }, '✅ Làm từng câu',
+                'Mỗi lần hiện một câu. Chọn đáp án để biết ngay đúng hay sai kèm giải thích ngắn. Dòng đầu thẻ cho biết bạn đang ở câu mấy và đã đúng bao nhiêu câu.')
+        ].concat(qzNavSteps());
+    }
+    function subWinSteps() {
+        if (aiVisible() && !aiVidMode()) {
+            if (qzIsOpen() && typeof aiState !== 'undefined' && aiState.mode === 'book') return qzSubSteps();
+            return (typeof aiState !== 'undefined' && aiState.mode === 'book') ? rdChatSteps() : QBTNS[2].steps;
+        }
         if (shown('report-error-modal')) return QBTNS[0].steps;
         if (shown('navigator-modal')) return QBTNS[1].steps;
         return null;
@@ -28590,9 +28669,11 @@ body {
     /* Info: đang mở cửa sổ nào thì giới thiệu cửa sổ đó, không thì giới thiệu màn hình chính */
     function startTour() {
         if (winShown('aiset')) { beginTour('win', 'aiset'); return; }   // bảng ⚙️ Cài đặt của khung chat AI (dùng chung 3 khung) đang mở
-        var dn0 = null; try { dn0 = subWinSteps(true); } catch (e) {}   // popup / ôn tập của Từ điển & Sổ ghi chú đang mở trên cùng → giới thiệu đúng cái đó
+        var dn0 = null; try { dn0 = dnTop(); } catch (e) {}   // Từ điển / Sổ ghi chú nằm trên cùng: chỉ giới thiệu popup đang mở (hoặc cả cửa sổ nếu không có popup)
+        if (typeof dn0 === 'string') { beginTour('win', dn0); return; }
         if (dn0) { beginTour('steps', dn0); return; }
         var dk = vidDetailKey();
+        if (dk === 'ai' && qzIsOpen()) { beginTour('steps', qzSubSteps()); return; }   // cửa sổ phụ Trắc nghiệm đang mở → chỉ giới thiệu cửa sổ phụ
         if (dk && VDETAIL[dk]) { beginTour('steps', VDETAIL[dk]()); return; }
         var sw = null; try { sw = subWinSteps(); } catch (e) {}
         if (sw) { beginTour('steps', sw); try { if (qscIsExam() && tour && shown('quiz-screen')) qscPause(tour); } catch (e) {} return; }
@@ -28747,20 +28828,20 @@ body {
     }
     function demoBtn(cls) { var b = demoBar(); return b ? b.querySelector('.' + cls) : null; }
     /* thanh nút mẫu của giao diện làm bài: chỉ có 🖍 Highlight / 🧽 Xóa highlight */
-    function demoQzBar() {
+    function demoQzBar(anchor) {
         var b = $id('hf-demo-selbar');
         if (b && !b.querySelector('.b-tr')) return b;
         if (b && b.parentNode) b.parentNode.removeChild(b);
         b = document.createElement('div'); b.id = 'hf-demo-selbar';
         b.innerHTML = '<button type="button" class="b-hl">🖍 Highlight</button><button type="button" class="b-un">🧽 Xóa highlight</button>';
         document.body.appendChild(b);
-        var q = $id('question-text') || $id('question-panel-wrapper'), r = q ? q.getBoundingClientRect() : { left: 0, top: 0, width: window.innerWidth, height: window.innerHeight };
+        var q = (anchor && document.querySelector(anchor)) || $id('question-text') || $id('question-panel-wrapper'), r = q ? q.getBoundingClientRect() : { left: 0, top: 0, width: window.innerWidth, height: window.innerHeight };
         var bw = b.offsetWidth || 220, bh = b.offsetHeight || 34;
         b.style.left = Math.max(8, Math.min(window.innerWidth - bw - 8, r.left + r.width / 2 - bw / 2)) + 'px';
         b.style.top = Math.max(8, Math.min(window.innerHeight - bh - 8, r.top + Math.min(r.height * 0.35, 120))) + 'px';
         return b;
     }
-    function demoQzBtn(cls) { var b = demoQzBar(); return b ? b.querySelector('.' + cls) : null; }
+    function demoQzBtn(cls, anchor) { var b = demoQzBar(anchor); return b ? b.querySelector('.' + cls) : null; }
     function removeDemoBar() { var b = $id('hf-demo-selbar'); if (b && b.parentNode) b.parentNode.removeChild(b); }
     window.homeFabClose = function () { closePop(); };
     window.homeFabQuickKey = function () { closePop(); try { window.hsOpenKeys(); } catch (e) { toast('Mở ⚙️ Cài đặt → 🔑 Cài đặt khóa API'); } };
