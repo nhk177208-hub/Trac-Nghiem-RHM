@@ -14229,7 +14229,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             </div>
             <p id="ai-gate-msg" class="text-xs mt-2 min-h-[1rem] text-gray-500"></p>
             <p class="text-[11px] text-gray-400 mt-1">🔒 Khóa chỉ lưu trên trình duyệt của bạn, không gửi về máy chủ của app. Tính năng dùng hạn mức miễn phí của chính bạn. Xóa dữ liệu trình duyệt hoặc đổi thiết bị thì cần dán lại. Có thể thêm nhiều nhà cung cấp trong ⚙️ Cài đặt của khung Hỏi AI.</p>
-            <button onclick="aiGateClose()" class="mt-2 w-full text-left text-xs text-gray-400 hover:text-gray-600 py-1">Để sau</button>
+            <button onclick="aiGateClose()" class="mt-3 w-full bg-gray-100 hover:bg-gray-200 text-gray-800 border-2 border-gray-400 font-extrabold py-2.5 rounded-xl text-sm shadow-sm flex items-center justify-center gap-1.5 active:scale-95 transition-all">↩ Để sau</button>
         </div>
     </div>
 
@@ -21884,6 +21884,7 @@ function moveEdActs() {
             <button type="button" onclick="closeHomeSettings()" class="w-9 h-9 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 font-black">✕</button>
         </div>
         <div class="flex flex-col gap-2">
+            <button type="button" id="hs-homefab-btn" onclick="hsToggleHomeFab(event)" aria-pressed="true" title="Bật/tắt nút Home ảo — trợ lý AI hỗ trợ dùng app: giải đáp cách dùng, chỉ tận nơi từng nút, và làm thay bạn một số thao tác" class="text-left text-sm bg-rose-50 hover:bg-rose-100 text-rose-800 font-semibold py-2.5 px-3.5 rounded-xl border border-rose-300 flex items-center justify-between">🤖 Nút Home ảo (AI hỗ trợ) <span id="hs-homefab-state" class="text-xs font-black text-emerald-600">Đang bật</span></button>
             <button type="button" onclick="homeSettingsGo('openSuggestQuestionModal')" class="text-left text-sm bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold py-2.5 px-3.5 rounded-xl border border-blue-300">💡 Đề xuất câu hỏi</button>
             <button type="button" onclick="homeSettingsGo('openAppFeedbackModal')" class="text-left text-sm bg-teal-50 hover:bg-teal-100 text-teal-800 font-semibold py-2.5 px-3.5 rounded-xl border border-teal-300">📩 Góp ý / Liên hệ</button>
             <button type="button" onclick="hsOpenKeys()" class="text-left text-sm bg-amber-50 hover:bg-amber-100 text-amber-800 font-semibold py-2.5 px-3.5 rounded-xl border border-amber-300 flex items-center justify-between">🔑 Cài đặt khóa API</button>
@@ -22107,6 +22108,8 @@ html.rhm-modal-open, html.rhm-modal-open body { overflow: hidden !important; ove
         window.addEventListener(ev, function (e) {
             var t = e.target;
             var inside = !!(t && t.closest && t.closest('#rhm-confirm')) || !!(t && t.closest) && IDS.some(function (id) { var m = document.getElementById(id); return !!m && isOpen(id) && m.contains(t); });
+            /* nút Home ảo (và khung chat của nó) luôn dùng được, kể cả khi đang mở cửa sổ cài đặt */
+            if (!inside && t && t.closest && (t.closest('#home-fab') || t.closest('#home-fab-pop') || t.closest('#hf-spot-wrap'))) inside = true;
             if (inside) return;
             if (anyOpen() || Date.now() < until) { if (e.cancelable) e.preventDefault(); e.stopPropagation(); }
         }, true);
@@ -26983,4 +26986,821 @@ body {
   #lessons-list .lc-acts button { font-size: 11.5px !important; padding-top: .3rem !important; padding-bottom: .3rem !important; }
 }
 </style>
+
+<!-- ============================================================================
+     NÚT HOME ẢO — TRỢ LÝ AI HỖ TRỢ NGƯỜI DÙNG
+     Bật/tắt tại: ⚙️ Cài Đặt → 🤖 Nút Home ảo (AI hỗ trợ)  (mục đầu tiên)
+     Kéo thả để di chuyển, thả ra tự bám mép và "ẩn chìm" như nút Home ảo của iPhone.
+     ============================================================================ -->
+<style id="rhm-home-fab-styles">
+/* ---------- Nút tròn nổi (kéo được, tự ẩn chìm như nút Home ảo của iPhone) ---------- */
+#home-fab{
+  position:fixed;right:16px;bottom:16px;z-index:40;
+  width:58px;height:58px;padding:0;border:0;border-radius:9999px;cursor:grab;
+  background:linear-gradient(135deg,#6366f1,#a855f7 55%,#ec4899);
+  box-shadow:0 10px 24px rgba(99,102,241,.45),0 4px 10px rgba(0,0,0,.22);
+  display:flex;align-items:center;justify-content:center;color:#fff;font-size:27px;line-height:1;
+  touch-action:none;-webkit-user-select:none;user-select:none;
+  transition:transform .28s cubic-bezier(.2,.9,.3,1),opacity .28s ease,left .28s cubic-bezier(.2,.9,.3,1),top .28s cubic-bezier(.2,.9,.3,1),background .2s ease,box-shadow .2s ease,filter .15s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+#home-fab.hidden{display:none!important}
+#home-fab:hover{filter:brightness(1.1)}
+#home-fab:active{filter:brightness(.9)}
+#home-fab.hf-drag{cursor:grabbing;filter:brightness(1.06);box-shadow:0 18px 38px rgba(99,102,241,.6),0 6px 14px rgba(0,0,0,.3)}
+#home-fab.hf-sunk{box-shadow:0 3px 10px rgba(0,0,0,.25);filter:saturate(.85)}
+#home-fab.hf-open{background:linear-gradient(135deg,#475569,#1e293b)}
+#home-fab .hf-spark{position:absolute;top:1px;right:2px;font-size:14px;animation:hfSpark 1.9s ease-in-out infinite;pointer-events:none}
+@keyframes hfSpark{0%,100%{opacity:.45;transform:scale(.9)}50%{opacity:1;transform:scale(1.18)}}
+
+/* ---------- Khung chat nhỏ ---------- */
+#home-fab-pop{
+  position:fixed;right:16px;bottom:86px;z-index:41;
+  width:min(382px,calc(100vw - 24px));height:min(72vh,570px);
+  background:#fff;border:1px solid #e5e7eb;border-radius:20px;
+  box-shadow:0 22px 55px rgba(15,23,42,.36);
+  display:flex;flex-direction:column;overflow:hidden;
+  animation:hfPop .22s cubic-bezier(.2,.9,.3,1);
+}
+#home-fab-pop.hidden{display:none!important}
+@keyframes hfPop{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:none}}
+.hf-head{display:flex;align-items:center;gap:8px;padding:11px 12px;background:linear-gradient(90deg,#eef2ff,#faf5ff);border-bottom:1px solid #e5e7eb}
+.hf-head .hf-ttl{flex:1;min-width:0;font-weight:900;color:#4338ca;font-size:14.5px;line-height:1.25}
+.hf-head .hf-ttl small{display:block;font-weight:600;color:#6b7280;font-size:11px}
+.hf-hbtn{flex:none;width:32px;height:32px;border:0;border-radius:10px;background:#fff;color:#4b5563;font-size:15px;font-weight:800;cursor:pointer;box-shadow:inset 0 0 0 1px #e5e7eb}
+.hf-hbtn:hover{background:#f3f4f6}
+#hf-msgs{flex:1;overflow-y:auto;padding:12px;background:#f8fafc;display:flex;flex-direction:column;gap:8px;font-size:13.5px;line-height:1.55;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;text-align:left}
+.hf-bub{max-width:90%;border-radius:16px;padding:8px 11px;word-break:break-word}
+.hf-bub.me{align-self:flex-end;background:#4f46e5;color:#fff;border-bottom-right-radius:5px}
+.hf-bub.ai{align-self:flex-start;background:#fff;color:#111827;border:1px solid #e5e7eb;border-bottom-left-radius:5px}
+.hf-bub code{background:rgba(0,0,0,.07);border-radius:4px;padding:0 3px}
+.hf-h{font-weight:800}
+.hf-li{padding-left:2px}
+.hf-gap{height:5px}
+.hf-sys{align-self:center;text-align:center;font-size:11.5px;color:#4b5563;background:#eef2ff;border:1px solid #e0e7ff;border-radius:9999px;padding:3px 11px;max-width:96%}
+.hf-typing{display:flex;gap:4px;align-items:center;padding:10px 12px}
+.hf-typing span{width:6px;height:6px;border-radius:50%;background:#a5b4fc;animation:hfDot 1s infinite}
+.hf-typing span:nth-child(2){animation-delay:.15s}
+.hf-typing span:nth-child(3){animation-delay:.3s}
+@keyframes hfDot{0%,100%{opacity:.35;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+.hf-quick{display:flex;gap:6px;overflow-x:auto;padding:8px 10px 2px;background:#fff;border-top:1px solid #f1f5f9;scrollbar-width:none}
+.hf-quick::-webkit-scrollbar{display:none}
+.hf-quick button{flex:none;font-size:11.5px;font-weight:800;color:#4338ca;background:#eef2ff;border:1px solid #c7d2fe;border-radius:9999px;padding:5px 10px;cursor:pointer;white-space:nowrap}
+.hf-quick button:hover{background:#e0e7ff}
+.hf-inputrow{display:flex;align-items:flex-end;gap:6px;padding:8px 10px;background:#fff}
+.hf-inputrow textarea{flex:1;min-width:0;resize:none;border:1px solid #d1d5db;border-radius:14px;padding:9px 11px;font-size:13.5px;line-height:1.35;outline:none;max-height:120px;font-family:inherit}
+.hf-inputrow textarea:focus{border-color:#818cf8;box-shadow:0 0 0 3px rgba(129,140,248,.25)}
+.hf-inputrow button{flex:none;width:42px;height:42px;border:0;border-radius:9999px;background:#7c3aed;color:#fff;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.hf-inputrow button:disabled{opacity:.55;cursor:default}
+#hf-mic{background:#4f46e5;display:none}
+#hf-mic.hf-mic-on{background:#dc2626;animation:hfMic 1s infinite alternate}
+@keyframes hfMic{from{box-shadow:0 0 0 0 rgba(220,38,38,.6)}to{box-shadow:0 0 0 8px rgba(220,38,38,0)}}
+.hf-status{font-size:10.5px;color:#9ca3af;text-align:center;padding:0 10px 7px;background:#fff}
+@media (max-width:640px){
+  #home-fab{right:12px;bottom:12px;width:54px;height:54px;font-size:24px}
+  #home-fab-pop{right:8px;left:8px;bottom:74px;width:auto;height:min(74vh,600px)}
+}
+
+/* ---------- Chiếu sáng / chỉ tận nơi ---------- */
+#hf-spot-wrap{position:fixed;inset:0;z-index:100300}
+#hf-spot-wrap .hf-spot-hit{position:absolute;inset:0;cursor:pointer}
+.hf-spot-box{position:fixed;border-radius:14px;pointer-events:none;box-shadow:0 0 0 9999px rgba(2,6,23,.6),0 0 0 3px rgba(255,255,255,.95),0 0 22px 7px rgba(99,102,241,.8);transition:all .18s ease}
+.hf-spot-tip{position:fixed;z-index:100301;max-width:min(340px,92vw);display:flex;gap:8px;align-items:flex-start;background:#111827;color:#fff;border-radius:12px;padding:9px 10px 9px 12px;font-size:13px;font-weight:700;line-height:1.4;box-shadow:0 12px 30px rgba(0,0,0,.45);animation:hfPop .18s ease}
+.hf-spot-tip .hf-spot-x{flex:none;width:22px;height:22px;border:0;border-radius:9999px;background:rgba(255,255,255,.18);color:#fff;font-weight:900;font-size:12px;cursor:pointer;line-height:1}
+</style>
+
+<button id="home-fab" type="button" class="hidden" aria-label="Trợ lý Home ảo (AI)" title="Trợ lý Home ảo — kéo để di chuyển, bấm để hỏi AI" onclick="homeFabToggle()">
+    <span>🤖</span><span class="hf-spark">✨</span>
+</button>
+
+<div id="home-fab-pop" class="hidden" role="dialog" aria-label="Trợ lý Home ảo">
+    <div class="hf-head">
+        <button type="button" class="hf-hbtn" onclick="homeFabQuickKey()" title="Nhập khóa API AI">🔑</button>
+        <div class="hf-ttl">🤖 Trợ lý Home ảo<small>Hỏi–đáp · chỉ tận nơi · làm thay thao tác</small></div>
+        <button type="button" class="hf-hbtn" onclick="homeFabClose()" aria-label="Đóng" title="Đóng">✕</button>
+    </div>
+    <div id="hf-msgs"></div>
+    <div class="hf-quick" id="hf-quick">
+        <button type="button" onclick="hfQuick('App này có những tính năng gì?')">App có gì?</button>
+        <button type="button" onclick="hfQuick('Mở Cài đặt giúp mình')">Mở Cài đặt</button>
+        <button type="button" onclick="hfQuick('Chỉ cho mình nút Thi Thử ở đâu')">Chỉ nút Thi Thử</button>
+        <button type="button" onclick="hfQuick('Bật toàn màn hình giúp mình')">Bật toàn màn hình</button>
+        <button type="button" onclick="hfQuick('Làm sao nhập hoặc xuất tiến độ học tập?')">Nhập/Xuất tiến độ</button>
+        <button type="button" onclick="hfQuick('Nút Hỏi AI trong app dùng để làm gì?')">Hỏi AI là gì?</button>
+        <button type="button" onclick="hfQuick('Đóng hết các cửa sổ đang mở giúp mình')">Đóng hết cửa sổ</button>
+    </div>
+    <div class="hf-inputrow">
+        <button type="button" id="hf-mic" title="Nhập bằng giọng nói">🎙️</button>
+        <textarea id="hf-input" rows="1" placeholder="Hỏi về cách dùng app, hoặc nhờ làm thay…"></textarea>
+        <button type="button" id="hf-send" onclick="hfSend()" title="Gửi" aria-label="Gửi">➤</button>
+    </div>
+    <div class="hf-status" id="hf-status">Trợ lý đang sẵn sàng</div>
+</div>
+
+<script id="rhm-home-fab-script">
+/* ============================================================================
+   TRỢ LÝ HOME ẢO — 3 khả năng:
+   1) Hỏi–đáp về cách dùng app (Q&A / support bot)
+   2) Chỉ dẫn trực quan theo ngữ cảnh (contextual guided tour) — [[CHI:khoá|chú thích]]
+   3) Thực hiện thao tác thay người dùng (agentic) — [[HD:khoá]]
+   Dùng chung khóa API & cơ chế dự phòng nhà cung cấp với khung "Hỏi AI" của app.
+   ============================================================================ */
+(function () {
+    'use strict';
+
+    var LS_KEY = 'home_fab_enabled';
+    var fabOn = true;
+    try { fabOn = localStorage.getItem(LS_KEY) !== '0'; } catch (e) {}
+
+    var chat = [];            // lịch sử hội thoại gửi cho AI
+    var busy = false, greeted = false;
+    var spot = null, spotTimer = null;
+    var recog = null, recogOn = false;
+
+    /* --- kéo thả + tự thu vào mép (ẩn chìm) như nút Home ảo của iPhone --- */
+    var POS_KEY = 'home_fab_pos';
+    var fabGeo = { side: 'right', y: null };
+    try {
+        var _p = JSON.parse(localStorage.getItem(POS_KEY) || 'null');
+        if (_p && typeof _p === 'object') {
+            fabGeo.side = _p.side === 'left' ? 'left' : 'right';
+            fabGeo.y = (typeof _p.y === 'number' && isFinite(_p.y)) ? _p.y : null;
+        }
+    } catch (e) {}
+    var sunk = false, sinkTimer = null, dragging = false, dragMoved = false, skipClick = 0;
+    var dragOff = { x: 0, y: 0 }, dragStart = { x: 0, y: 0 };
+
+    /* ------------------------------ tiện ích ------------------------------ */
+    function $id(i) { return document.getElementById(i); }
+    function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+    function toast(m) { try { if (typeof showToast === 'function') showToast(m); } catch (e) {} }
+    function deacc(s) { return String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\u0111/g, 'd').replace(/\u0110/g, 'D'); }
+    function isShown(n) { if (!n) return false; if (n.classList.contains('hidden')) return false; try { return n.getClientRects().length > 0; } catch (e) { return true; } }
+    function shown(id) { return isShown($id(id)); }
+    function visibleOne(ids) { for (var i = 0; i < ids.length; i++) { var n = $id(ids[i]); if (isShown(n)) return n; } return null; }
+
+    /* --------------------------- ngữ cảnh màn hình --------------------------- */
+    var SCREENS = [
+        ['quiz-screen', 'Đang làm bài trắc nghiệm'],
+        ['result-screen', 'Đang xem kết quả bài làm'],
+        ['edit-screen', 'Đang ở màn hình quản trị / sửa đề'],
+        ['book-viewer', 'Đang đọc sách / xem tài liệu'],
+        ['home-screen', 'Trang chủ']
+    ];
+    var MODAL_NAMES = {
+        'subject-choice-modal': 'Chọn môn học', 'monhoc-detail-modal': 'Chi tiết môn học', 'topic-modal': 'Chủ đề',
+        'mock-exam-modal': 'Ôn tập nhanh', 'exam-modal': 'Thi thử', 'exam-create-modal': 'Tạo đề thi',
+        'deep-modal': 'Ôn tập chuyên sâu', 'collection-modal': 'Bộ sưu tập huy hiệu', 'progress-modal': 'Nhập/Xuất tiến độ',
+        'suggest-question-modal': 'Đề xuất câu hỏi', 'app-feedback-modal': 'Góp ý/Liên hệ', 'add-question-modal': 'Thêm câu hỏi',
+        'report-error-modal': 'Báo lỗi câu hỏi', 'folder-modal': 'Thư mục', 'navigator-modal': 'Danh sách câu hỏi',
+        'view-quiz-modal': 'Xem bộ đề', 'bookmarked-modal': 'Câu hỏi đã lưu', 'blocked-modal': 'Câu hỏi đã chặn',
+        'storage-modal': 'Dung lượng lưu trữ', 'dict-modal': 'Từ điển RHM', 'note-modal': 'Sổ ghi chú',
+        'bookshelf-modal': 'Tủ sách', 'home-settings-modal': 'Cài đặt', 'hs-keys-modal': 'Cài đặt khóa API',
+        'ai-tutor-modal': 'Hỏi AI', 'ai-key-gate': 'Kích hoạt Hỏi AI', 'image-lightbox-modal': 'Xem ảnh'
+    };
+    function contextNow() {
+        var out = [], i;
+        var screen = 'Trang chủ';
+        for (i = 0; i < SCREENS.length; i++) { if (shown(SCREENS[i][0])) { screen = SCREENS[i][1]; break; } }
+        out.push('- Màn hình: ' + screen);
+        var open = [];
+        for (var k in MODAL_NAMES) { if (shown(k)) open.push(MODAL_NAMES[k]); }
+        out.push('- Cửa sổ đang mở: ' + (open.length ? open.join(', ') : 'không có'));
+        try {
+            if (shown('quiz-screen') && typeof questions !== 'undefined' && questions && questions[currentIndex]) {
+                var q = questions[currentIndex];
+                var txt = String(q.question || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 170);
+                out.push('- Câu hỏi đang làm (câu ' + (currentIndex + 1) + '/' + questions.length + '): ' + txt);
+            }
+        } catch (e) {}
+        try {
+            if (typeof aiState !== 'undefined' && aiState && aiState.mode === 'video' && aiState.video && aiState.video.title) out.push('- Video đang mở: ' + aiState.video.title);
+        } catch (e) {}
+        return out.join('\n');
+    }
+
+    /* --------------------------- hành động (agentic) --------------------------- */
+    function openSection(which) {
+        var box = $id(which === 'monhoc' ? 'monhoc-section-container' : 'chuyende-section-container');
+        if (box && !box.classList.contains('hidden')) return;
+        try { (which === 'monhoc' ? window.toggleMonHocSection : window.toggleChuyenDeSection)(); } catch (e) {}
+    }
+    function closeAllModals() {
+        var IDS = ['subject-choice-modal', 'monhoc-detail-modal', 'topic-modal', 'mock-exam-modal', 'exam-modal',
+            'exam-create-modal', 'deep-modal', 'collection-modal', 'progress-modal', 'suggest-question-modal',
+            'app-feedback-modal', 'add-question-modal', 'report-error-modal', 'folder-modal', 'navigator-modal',
+            'view-quiz-modal', 'bookmarked-modal', 'blocked-modal', 'storage-modal', 'image-lightbox-modal',
+            'dev-password-modal', 'dict-modal', 'note-modal', 'bookshelf-modal'];
+        IDS.forEach(function (id) { var m = $id(id); if (m) m.classList.add('hidden'); });
+        var k = $id('hs-keys-modal'); if (k) k.style.display = 'none';
+        try { if (typeof window.closeHomeSettings === 'function') window.closeHomeSettings(); } catch (e) {}
+        try { if (typeof window.closeAiTutor === 'function') window.closeAiTutor(); } catch (e) {}
+        clearSpot();
+    }
+
+    var ACTS = {
+        'trang-chu': {
+            label: 'về đầu trang chủ', sel: '#home-screen',
+            run: function () {
+                closeAllModals();
+                var h = $id('home-screen');
+                if (h) h.scrollIntoView({ behavior: 'smooth', block: 'start' }); else window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        },
+        'cai-dat': { label: 'mở bảng Cài đặt', sel: 'button[onclick="openHomeSettings()"]', run: function () { window.openHomeSettings(); } },
+        'home-ao': {
+            label: 'bật / tắt nút Home ảo', sel: '#hs-homefab-btn', open: function () { window.openHomeSettings(); },
+            run: function () { window.hsToggleHomeFab(); }
+        },
+        'mon-hoc': { label: 'mở Ôn Tập Theo Môn Học', sel: '#btn-toggle-monhoc', run: function () { openSection('monhoc'); } },
+        'chuyen-de': { label: 'mở Ôn Tập Theo Chủ Đề', sel: '#btn-toggle-chuyende', run: function () { openSection('chuyende'); } },
+        'on-nhanh': { label: 'mở Ôn Tập Nhanh', sel: '#qb-row1 button[onclick="openMockExamModal()"]', open: function () { openSection('chuyende'); }, run: function () { window.openMockExamModal(); } },
+        'chuyen-sau': { label: 'mở Ôn Tập Chuyên Sâu', sel: '#qb-row1 button[onclick="openDeepModal()"]', open: function () { openSection('chuyende'); }, run: function () { window.openDeepModal(); } },
+        'thi-thu': { label: 'mở Thi Thử (Mock Exam)', sel: '#btn-thi-thu', open: function () { openSection('chuyende'); }, run: function () { window.openExamModal(); } },
+        'da-luu': { label: 'mở danh sách Đã lưu', sel: '#qb-row3 button[onclick="openBookmarkedModal()"]', open: function () { openSection('chuyende'); }, run: function () { window.openBookmarkedModal(); } },
+        'da-chan': { label: 'mở danh sách Đã chặn', sel: '#qb-row3 button[onclick="openBlockedModal()"]', open: function () { openSection('chuyende'); }, run: function () { window.openBlockedModal(); } },
+        'bo-suu-tap': { label: 'mở Bộ Sưu Tập Huy Hiệu', sel: 'button[onclick="openCollectionModal()"]', run: function () { window.openCollectionModal(); } },
+        'tu-dien': { label: 'mở Từ Điển RHM', sel: 'button[onclick="openRhmDict()"]', run: function () { window.openRhmDict(); } },
+        'so-ghi-chu': { label: 'mở Sổ Ghi Chú', sel: 'button[onclick="openRhmNote()"]', run: function () { window.openRhmNote(); } },
+        'de-xuat': { label: 'mở Đề xuất câu hỏi', sel: 'button[onclick="homeSettingsGo(\'openSuggestQuestionModal\')"]', open: function () { window.openHomeSettings(); }, run: function () { window.homeSettingsGo('openSuggestQuestionModal'); } },
+        'gop-y': { label: 'mở Góp ý / Liên hệ', sel: 'button[onclick="homeSettingsGo(\'openAppFeedbackModal\')"]', open: function () { window.openHomeSettings(); }, run: function () { window.homeSettingsGo('openAppFeedbackModal'); } },
+        'khoa-api': { label: 'mở Cài đặt khóa API', sel: 'button[onclick="hsOpenKeys()"]', open: function () { window.openHomeSettings(); }, run: function () { window.hsOpenKeys(); } },
+        'tien-do': { label: 'mở Nhập / Xuất tiến độ', sel: 'button[onclick="homeSettingsGo(\'openProgressModal\')"]', open: function () { window.openHomeSettings(); }, run: function () { window.homeSettingsGo('openProgressModal'); } },
+        'toan-man-hinh': {
+            label: 'bật / tắt toàn màn hình', sel: '#btn-rhm-fs', open: function () { window.openHomeSettings(); },
+            run: function () { try { window.closeHomeSettings(); } catch (e) {} setTimeout(function () { window.rhmToggleFs(); }, 80); }
+        },
+        'them-mh-chinh': { label: 'thêm app vào màn hình chính', sel: '#btn-add-home', open: function () { window.openHomeSettings(); }, run: function () { window.homeSettingsGo('addToHomeScreen'); } },
+        'hoi-ai': {
+            label: 'mở khung Hỏi AI', sel: function () { return visibleOne(['ask-ai-btn', 'bk-ai-btn']); },
+            run: function () { try { window.openAiTutor(); } catch (e) { toast('Hãy mở một câu hỏi rồi thử lại nhé'); } }
+        },
+        'dong-cua-so': { label: 'đóng các cửa sổ đang mở', sel: null, run: function () { closeAllModals(); toast('🧹 Đã đóng các cửa sổ đang mở'); } }
+    };
+
+    var ALIAS = {};
+    function alias(list, key) { list.forEach(function (a) { ALIAS[a] = key; }); }
+    alias(['trang-chu', 'trangchu', 'home', 'trang-nha'], 'trang-chu');
+    alias(['cai-dat', 'caidat', 'setting', 'settings', 'cai-dat-app'], 'cai-dat');
+    alias(['home-ao', 'homeao', 'nut-home-ao', 'home-fab', 'homefab', 'tro-ly', 'tro-ly-home-ao'], 'home-ao');
+    alias(['mon-hoc', 'monhoc', 'on-tap-mon-hoc', 'on-tap-theo-mon-hoc'], 'mon-hoc');
+    alias(['chuyen-de', 'chuyende', 'chude', 'on-tap-chu-de', 'on-tap-theo-chu-de'], 'chuyen-de');
+    alias(['on-nhanh', 'onnhanh', 'on-tap-nhanh'], 'on-nhanh');
+    alias(['chuyen-sau', 'chuyensau', 'on-tap-chuyen-sau'], 'chuyen-sau');
+    alias(['thi-thu', 'thithu', 'mock-exam', 'mockexam', 'thi'], 'thi-thu');
+    alias(['da-luu', 'daluu', 'bookmark', 'bookmarked'], 'da-luu');
+    alias(['da-chan', 'dachan', 'blocked'], 'da-chan');
+    alias(['bo-suu-tap', 'bosuutap', 'huy-hieu', 'huyhieu', 'badge', 'badges'], 'bo-suu-tap');
+    alias(['tu-dien', 'tudien', 'dictionary'], 'tu-dien');
+    alias(['so-ghi-chu', 'soghicu', 'ghi-chu', 'ghichu', 'note'], 'so-ghi-chu');
+    alias(['de-xuat', 'dexuat', 'de-xuat-cau-hoi'], 'de-xuat');
+    alias(['gop-y', 'gopy', 'lien-he', 'lienhe', 'feedback'], 'gop-y');
+    alias(['khoa-api', 'khoaapi', 'api', 'api-key', 'apikey', 'key'], 'khoa-api');
+    alias(['tien-do', 'tiendo', 'progress'], 'tien-do');
+    alias(['toan-man-hinh', 'toanmanhinh', 'fullscreen', 'full-screen', 'full'], 'toan-man-hinh');
+    alias(['them-mh-chinh', 'themmhchinh', 'them-vao-mh-chinh', 'add-to-home', 'add-to-home-screen'], 'them-mh-chinh');
+    alias(['hoi-ai', 'hoiai', 'ai'], 'hoi-ai');
+    alias(['dong-cua-so', 'dongcuaso', 'dong', 'close'], 'dong-cua-so');
+
+    function resolveKey(k) {
+        var n = deacc(k).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+        if (ACTS[n]) return n;
+        if (ALIAS[n]) return ALIAS[n];
+        var flat = n.replace(/-/g, '');
+        if (ALIAS[flat]) return ALIAS[flat];
+        if (ACTS[flat]) return flat;
+        return n;
+    }
+
+    /* --------------------------- kiến thức về app --------------------------- */
+    function knowledge() {
+        return [
+            'APP: "Trắc Nghiệm RHM" — webapp ôn tập trắc nghiệm Răng Hàm Mặt kèm video bài giảng, chạy trên trình duyệt (điện thoại & máy tính). Mọi dữ liệu (bộ đề, tiến độ, ghi chú) lưu trên máy người dùng.',
+            '',
+            'TRANG CHỦ có:',
+            '- Hàng nút tiện ích: 🏆 Bộ Sưu Tập Huy Hiệu · 📖 Từ Điển RHM · 📒 Sổ Ghi Chú · ⚙️ Cài Đặt.',
+            '- Hai nút lớn: 📚 Ôn Tập Theo Môn Học (mở danh sách môn + video bài giảng) và 🦷 Ôn Tập Theo Chủ Đề.',
+            '- Trong Ôn Tập Theo Chủ Đề: ⚡ Ôn Tập Nhanh, 🧠 Ôn Tập Chuyên Sâu, 🎯 Thi Thử (Mock Exam), ⭐ Đã lưu, 🚫 Đã chặn và 36 chủ đề.',
+            '- ⚙️ Cài Đặt gồm: 🏠 Nút Home ảo (bật/tắt trợ lý này), 💡 Đề xuất câu hỏi, 📩 Góp ý/Liên hệ, 🔑 Cài đặt khóa API, 🔄 Nhập/Xuất Tiến Độ, ⛶ Toàn màn hình, 📲 Thêm vào MH chính.',
+            '',
+            'KHI LÀM BÀI TRẮC NGHIỆM: chọn đáp án, đáp án đúng/sai được tô màu, đọc phần giải thích, đánh dấu sao, mở danh sách câu để điều hướng, báo lỗi câu hỏi, và bấm 🤖 Hỏi AI giải thích câu này.',
+            'KHI XEM VIDEO BÀI GIẢNG: có thanh điều khiển riêng (tua, tốc độ, chất lượng, phụ đề .srt, lồng tiếng, rạp chiếu phim / toàn màn hình) và nút 🤖 Hỏi AI về video.',
+            'KHI ĐỌC SÁCH: xem 2 trang như sách thật, phóng to, dịch, tra Từ điển, và mở 🤖 AI Chat để hỏi về sách.',
+            '',
+            'TÍNH NĂNG AI ("Hỏi AI") cần khóa API: mặc định Gemini (miễn phí), có thể thêm OpenRouter để dự phòng — nhập ở ⚙️ Cài đặt → 🔑 Cài đặt khóa API.',
+            'Nút Home ảo (bạn) có 3 khả năng: (1) hỏi–đáp kiến thức về cách dùng app; (2) chiếu sáng và chỉ tận nơi một nút / bảng trên màn hình; (3) thực hiện thay người dùng một số thao tác.'
+        ].join('\n');
+    }
+    function actListForPrompt() {
+        var lines = [];
+        for (var k in ACTS) lines.push('- ' + k + ' = ' + ACTS[k].label + (ACTS[k].open ? ' (tự mở bảng chứa nó)' : ''));
+        return lines.join('\n');
+    }
+    function systemPrompt() {
+        return [
+            'Bạn là "Trợ lý Home ảo" của app "Trắc Nghiệm RHM" (webapp ôn tập trắc nghiệm Răng Hàm Mặt). Bạn giúp người dùng HIỂU và DÙNG app — không phải để giảng kiến thức y khoa.',
+            '',
+            knowledge(),
+            '',
+            'CÁCH TRẢ LỜI: tiếng Việt, thân thiện, xưng "mình" và gọi người dùng là "bạn". Ngắn gọn (thường 2–6 dòng), dùng gạch đầu dòng khi liệt kê, **in đậm** cho tên nút. Nếu câu hỏi mơ hồ thì hỏi lại đúng 1 câu. Nếu người dùng hỏi kiến thức chuyên môn ngoài phạm vi app, hãy nói mình chỉ hỗ trợ sử dụng app và hướng họ dùng nút 🤖 Hỏi AI ở đúng chỗ (câu hỏi / video / sách).',
+            '',
+            'BẠN CÓ THỂ ĐIỀU KHIỂN GIAO DIỆN. Khi phù hợp, hãy chèn các thẻ sau vào CUỐI câu trả lời, mỗi thẻ một dòng riêng. TUYỆT ĐỐI không giải thích cú pháp cho người dùng, không nhắc tới từ "thẻ" hay "cú pháp":',
+            '  [[CHI:khoá|Chú thích ngắn gọn]]  → chiếu sáng và chỉ chính xác vào mục đó trên màn hình.',
+            '  [[HD:khoá]]                      → thực hiện thao tác đó ngay cho người dùng.',
+            'Chỉ được dùng đúng các khoá sau (không bịa khoá khác):',
+            actListForPrompt(),
+            '',
+            'Ví dụ người dùng nói "Bật toàn màn hình giúp mình" → trả lời ngắn rồi thêm dòng: [[HD:toan-man-hinh]]',
+            'Ví dụ người dùng hỏi "Nút Thi Thử ở đâu?" → mô tả ngắn rồi thêm dòng: [[CHI:thi-thu|Bấm vào đây để thi thử]]',
+            '',
+            'NGỮ CẢNH HIỆN TẠI CỦA NGƯỜI DÙNG (dùng để trả lời đúng chỗ, đúng lúc):',
+            contextNow()
+        ].join('\n');
+    }
+
+    /* ------------------------------ gọi AI ------------------------------ */
+    async function geminiText(contents, onStatus) {
+        var body = { systemInstruction: { parts: [{ text: systemPrompt() }] }, contents: contents, generationConfig: { maxOutputTokens: 2048, temperature: 0.5 } };
+        await aiGeminiModelsRefresh();
+        var models = [GEMINI_CHAT_MODEL].concat(GEMINI_FALLBACK_MODELS).filter(function (m, i, a) { return a.indexOf(m) === i; });
+        var last = null;
+        for (var mi = 0; mi < models.length; mi++) {
+            for (var attempt = 0; attempt < 2; attempt++) {
+                if (attempt > 0) { if (onStatus) onStatus('⏳ AI đang bận, thử lại…'); await aiSleep(1000); }
+                try {
+                    var res = await aiFetch('https://generativelanguage.googleapis.com/v1beta/models/' + models[mi] + ':generateContent', {
+                        method: 'POST', headers: { 'Content-Type': 'application/json', 'X-goog-api-key': aiState.key }, body: JSON.stringify(body)
+                    });
+                    if (!res.ok) {
+                        var em = new Error('HTTP ' + res.status); em.status = res.status; em.prov = 'gemini';
+                        if (res.status === 401 || res.status === 403) { em.badKey = true; em.friendly = 'Khóa Gemini không dùng được, đã bị bỏ.'; throw em; }
+                        if (res.status === 429) { em.quota = true; em.friendly = 'Gemini hết lượt miễn phí lúc này.'; }
+                        last = em; continue;
+                    }
+                    var d = await res.json();
+                    var parts = (((d.candidates || [])[0] || {}).content || {}).parts || [];
+                    var txt = parts.filter(function (x) { return x.text && !x.thought; }).map(function (x) { return x.text; }).join('').trim();
+                    if (txt) return txt;
+                    last = new Error('empty'); last.status = 503; last.prov = 'gemini';
+                } catch (e) { if (e.badKey) throw e; last = e; }
+            }
+        }
+        var er = last || new Error('Gemini không phản hồi');
+        er.prov = 'gemini'; if (!er.status) er.status = 503;
+        if (!er.friendly) er.friendly = 'Gemini tạm thời không trả lời được, hãy thử lại sau ít giây.';
+        throw er;
+    }
+    function ask(contents, onStatus) {
+        return aiRun(function (p) {
+            if (p === 'gemini') return geminiText(contents, onStatus);
+            return aiAltCall(p, { system: systemPrompt(), contents: contents, maxTokens: 2048, temperature: 0.5, onStatus: onStatus }).then(function (r) { return r.text; });
+        }, { onStatus: onStatus });
+    }
+
+    /* ---------------- kéo thả · bám mép · tự ẩn chìm (AssistiveTouch) ---------------- */
+    var SINK_MS = 2600;   // sau bao lâu không dùng thì thu vào mép
+    function fabEl() { return $id('home-fab'); }
+    function fabMargin() { return window.innerWidth <= 640 ? 12 : 16; }
+    function fabSize() { var f = fabEl(); var w = f && f.offsetWidth; return w || (window.innerWidth <= 640 ? 54 : 58); }
+    function clampNum(v, a, b) { return v < a ? a : (v > b ? b : v); }
+    /* khung nhìn thật (không tính thanh cuộn) để nút không bị trượt xuống dưới thanh cuộn */
+    function viewW() { return (document.documentElement && document.documentElement.clientWidth) || window.innerWidth; }
+    function viewH() { return (document.documentElement && document.documentElement.clientHeight) || window.innerHeight; }
+    function clampY(y) { var m = fabMargin(); return clampNum(y, m, Math.max(m, viewH() - fabSize() - m)); }
+    function popOpen() { var p = $id('home-fab-pop'); return !!(p && !p.classList.contains('hidden')); }
+    function fabXY() {
+        var s = fabSize(), m = fabMargin();
+        return {
+            x: fabGeo.side === 'left' ? m : (viewW() - s - m),
+            y: clampY(fabGeo.y == null ? (viewH() - s - m) : fabGeo.y),
+            s: s
+        };
+    }
+    function saveFabPos() { try { localStorage.setItem(POS_KEY, JSON.stringify({ side: fabGeo.side, y: Math.round(fabGeo.y) })); } catch (e) {} }
+    function applyFabGeo(noAnim) {
+        var f = fabEl(); if (!f) return;
+        var g = fabXY();
+        f.style.transition = noAnim ? 'none' : '';
+        f.style.left = Math.round(g.x) + 'px';
+        f.style.top = Math.round(g.y) + 'px';
+        f.style.right = 'auto';
+        f.style.bottom = 'auto';
+        var tx = Math.round(fabMargin() + g.s * 0.42);   // chỉ còn ~58% nút nằm trong màn hình khi "ẩn chìm"
+        f.style.transform = sunk ? 'translateX(' + (fabGeo.side === 'left' ? -tx : tx) + 'px)' : 'none';
+        f.style.opacity = sunk ? '.65' : '1';
+        f.classList.toggle('hf-sunk', sunk);
+    }
+    function sinkFab() {
+        if (!fabOn || dragging || sunk || popOpen() || !fabEl()) return;
+        sunk = true; applyFabGeo();
+    }
+    function unsinkFab() {
+        if (!sunk) return;
+        sunk = false; applyFabGeo();
+    }
+    function scheduleSink(ms) {
+        clearTimeout(sinkTimer);
+        sinkTimer = setTimeout(sinkFab, ms || SINK_MS);
+    }
+    function cancelSink() { clearTimeout(sinkTimer); }
+    /* khung chat bám theo vị trí nút: bên trái thì canh trái, bên phải thì canh phải */
+    function placePop() {
+        var p = $id('home-fab-pop');
+        if (!p || p.classList.contains('hidden')) return;
+        if (window.innerWidth <= 640) { p.style.left = ''; p.style.right = ''; p.style.top = ''; p.style.bottom = ''; p.style.maxHeight = ''; return; }
+        p.style.maxHeight = '';                 // đo chiều cao "tự nhiên" (tránh tự đo lại phần đã bị giới hạn)
+        var pw = p.offsetWidth, ph = p.offsetHeight, mg = 12, g = fabXY();
+        var left = fabGeo.side === 'left' ? g.x : (g.x + g.s - pw);
+        left = clampNum(left, mg, Math.max(mg, viewW() - pw - mg));
+        var below = g.y + g.s + 10, above = g.y - 10;
+        var roomBelow = viewH() - mg - below, roomAbove = above - mg;
+        var useBelow, room;
+        if (roomBelow >= ph) { useBelow = true; room = roomBelow; }
+        else if (roomAbove >= ph) { useBelow = false; room = roomAbove; }
+        else if (roomBelow >= roomAbove) { useBelow = true; room = roomBelow; }
+        else { useBelow = false; room = roomAbove; }
+        var h = Math.min(ph, Math.max(150, room));
+        p.style.maxHeight = (h < ph) ? Math.round(h) + 'px' : '';
+        var top = useBelow ? below : (above - h);
+        top = Math.max(mg, Math.min(top, viewH() - mg - h));
+        p.style.left = Math.round(left) + 'px';
+        p.style.top = Math.round(top) + 'px';
+        p.style.right = 'auto';
+        p.style.bottom = 'auto';
+    }
+    function bindFab() {
+        var f = fabEl(); if (!f || f.__hfDrag) return; f.__hfDrag = true;
+        f.addEventListener('pointerdown', function (e) {
+            if (e.pointerType === 'mouse' && e.button !== 0) return;
+            dragging = true; dragMoved = false;
+            var r = f.getBoundingClientRect();
+            dragOff.x = e.clientX - r.left; dragOff.y = e.clientY - r.top;
+            dragStart.x = e.clientX; dragStart.y = e.clientY;
+            cancelSink(); unsinkFab();
+            f.classList.add('hf-drag');
+            try { f.setPointerCapture(e.pointerId); } catch (er) {}
+        });
+        f.addEventListener('pointermove', function (e) {
+            if (!dragging) return;
+            var dx = e.clientX - dragStart.x, dy = e.clientY - dragStart.y;
+            if (!dragMoved && (Math.abs(dx) + Math.abs(dy)) < 7) return;
+            if (!dragMoved) { dragMoved = true; closePop(); }
+            var s = fabSize(), m = fabMargin();
+            var nx = clampNum(e.clientX - dragOff.x, m, Math.max(m, viewW() - s - m));
+            var ny = clampNum(e.clientY - dragOff.y, m, Math.max(m, viewH() - s - m));
+            f.style.transition = 'none';
+            f.style.left = Math.round(nx) + 'px'; f.style.top = Math.round(ny) + 'px';
+            f.style.right = 'auto'; f.style.bottom = 'auto';
+            f.style.transform = 'none'; f.style.opacity = '1';
+            if (e.cancelable) e.preventDefault();
+        });
+        function endDrag(e) {
+            if (!dragging) return;
+            dragging = false;
+            var el = fabEl(); if (el) el.classList.remove('hf-drag');
+            if (e && e.type === 'pointercancel') { dragMoved = false; return; }   // bị huỷ giữa chừng: coi như không bấm
+            if (!dragMoved) {
+                if (sunk) unsinkFab();
+                window.homeFabToggle();             // xử lý ngay tại đây: nút đang "ẩn chìm" sẽ trượt ra nên sự kiện click có thể không tới nút
+                skipClick = Date.now() + 500;       // rồi chặn cú click "tự sinh" ngay sau pointerup
+                return;
+            }
+            dragMoved = false;
+            var r = el.getBoundingClientRect();
+            fabGeo.side = (r.left + r.width / 2) < viewW() / 2 ? 'left' : 'right';
+            fabGeo.y = r.top;
+            saveFabPos();
+            sunk = false;
+            applyFabGeo();
+            skipClick = Date.now() + 450;   // chặn cú click sinh ra sau khi kéo
+            scheduleSink();
+        }
+        f.addEventListener('pointerup', endDrag);
+        f.addEventListener('pointercancel', endDrag);
+        f.addEventListener('pointerenter', function (e) {
+            if (e.pointerType !== 'mouse') return;
+            cancelSink(); unsinkFab();
+        });
+        f.addEventListener('pointerleave', function (e) {
+            if (e.pointerType !== 'mouse' || dragging || popOpen()) return;
+            scheduleSink(900);
+        });
+    }
+
+    /* --------------------------- giao diện chat --------------------------- */
+    function fmt(t) {
+        var s = esc(String(t == null ? '' : t));
+        s = s.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`([^`]+)`/g, '<code>$1</code>');
+        return s.split('\n').map(function (ln) {
+            var m;
+            if ((m = ln.match(/^\s*#{1,6}\s+(.*)$/))) return '<div class="hf-h">' + m[1] + '</div>';
+            if ((m = ln.match(/^\s*[-*\u2022]\s+(.*)$/))) return '<div class="hf-li">\u2022 ' + m[1] + '</div>';
+            if ((m = ln.match(/^\s*(\d+)[.)]\s+(.*)$/))) return '<div class="hf-li">' + m[1] + '. ' + m[2] + '</div>';
+            if (!ln.trim()) return '<div class="hf-gap"></div>';
+            return '<div>' + ln + '</div>';
+        }).join('');
+    }
+    function addBub(cls, html) {
+        var box = $id('hf-msgs'); if (!box) return null;
+        var d = document.createElement('div'); d.className = cls; d.innerHTML = html;
+        box.appendChild(d); box.scrollTop = box.scrollHeight; return d;
+    }
+    function addAi(t) { return addBub('hf-bub ai', fmt(t)); }
+    function addUser(t) { return addBub('hf-bub me', esc(t)); }
+    function addSys(t) { return addBub('hf-sys', t); }
+    function addTyping() { return addBub('hf-bub ai hf-typing', '<span></span><span></span><span></span>'); }
+    function updSend() { var b = $id('hf-send'); if (b) b.disabled = busy; }
+    function setStatus(t) { var s = $id('hf-status'); if (s) s.textContent = t; }
+
+    function closePop() {
+        var p = $id('home-fab-pop'); if (p) p.classList.add('hidden');
+        var f = $id('home-fab'); if (f) f.classList.remove('hf-open');
+        if (recogOn) stopMic();
+        scheduleSink(2000);
+    }
+    function openPop() {
+        var p = $id('home-fab-pop'); if (!p) return;
+        cancelSink(); unsinkFab();
+        p.classList.remove('hidden');
+        var f = $id('home-fab'); if (f) f.classList.add('hf-open');
+        placePop();
+        requestAnimationFrame(placePop);
+        if (!greeted) { greeted = true; greet(); }
+        try { if (window.matchMedia('(min-width: 768px)').matches) { var t = $id('hf-input'); if (t) t.focus(); } } catch (e) {}
+        var box = $id('hf-msgs'); if (box) box.scrollTop = box.scrollHeight;
+    }
+    function greet() {
+        addAi('Xin chào 👋 Mình là **Trợ lý Home ảo**. Mình có thể:\n- Giải đáp cách dùng app (nút nào làm gì, làm sao để…)\n- Chỉ tận nơi từng nút trên màn hình\n- Làm thay bạn vài thao tác (mở **Cài đặt**, bật **toàn màn hình**, mở ôn tập…)\n\nBạn cứ hỏi, hoặc bấm một gợi ý bên dưới nhé!');
+    }
+    window.homeFabToggle = function () {
+        if (Date.now() < skipClick) return;      // vừa kéo xong thì không coi là bấm
+        var p = $id('home-fab-pop'); if (!p) return;
+        if (p.classList.contains('hidden')) openPop(); else closePop();
+    };
+    window.homeFabClose = function () { closePop(); };
+    window.homeFabQuickKey = function () { closePop(); try { window.hsOpenKeys(); } catch (e) { toast('Mở ⚙️ Cài đặt → 🔑 Cài đặt khóa API'); } };
+    /* API nhỏ cho các phần khác của app (và để kiểm thử): mở/đóng, hỏi, làm thay, chỉ tận nơi */
+    window.homeFab = {
+        open: openPop,
+        close: closePop,
+        toggle: function () { window.homeFabToggle(); },
+        ask: function (t) { openPop(); send(t); },
+        run: function (key, note) { applyAct({ kind: 'HD', key: String(key || ''), arg: String(note || '') }); },
+        show: function (key, note) { applyAct({ kind: 'CHI', key: String(key || ''), arg: String(note || '') }); },
+        keys: function () { return Object.keys(ACTS); },
+        enabled: function () { return fabOn; },
+        sink: function () { sinkFab(); },
+        unsink: function () { unsinkFab(); },
+        pos: function () { return { side: fabGeo.side, y: fabGeo.y, sunk: sunk }; },
+        move: function (side, y) {
+            fabGeo.side = side === 'left' ? 'left' : 'right';
+            if (typeof y === 'number' && isFinite(y)) fabGeo.y = y;
+            saveFabPos(); sunk = false; applyFabGeo();
+        }
+    };
+    window.hfSend = function () { send(); };
+    window.hfQuick = function (t) { send(t); };
+
+    function applyFabState() {
+        var f = $id('home-fab'); if (f) f.classList.toggle('hidden', !fabOn);
+        if (!fabOn) { cancelSink(); sunk = false; closePop(); }
+        else { applyFabGeo(); scheduleSink(3500); }
+        var st = $id('hs-homefab-state');
+        if (st) { st.textContent = fabOn ? 'Đang bật' : 'Đang tắt'; st.style.color = fabOn ? '#059669' : '#9ca3af'; }
+        var b = $id('hs-homefab-btn'); if (b) b.setAttribute('aria-pressed', fabOn ? 'true' : 'false');
+    }
+    window.hsToggleHomeFab = function (ev) {
+        try { if (ev && ev.stopPropagation) ev.stopPropagation(); } catch (e) {}
+        fabOn = !fabOn;
+        try { localStorage.setItem(LS_KEY, fabOn ? '1' : '0'); } catch (e) {}
+        applyFabState();
+        toast(fabOn ? '🤖 Đã bật nút Home ảo' : '🤖 Đã tắt nút Home ảo');
+    };
+
+    /* --------------------------- thẻ điều khiển --------------------------- */
+    function parseActs(raw) {
+        var acts = [];
+        String(raw || '').replace(/\[\[\s*(HD|CHI|CHỈ\s*DẪN|CHỈ|HƯỚNG\s*DẪN)\s*:\s*([^|\]]+)(?:\|([^\]]*))?\]\]/gi, function (m, kind, key, arg) {
+            acts.push({ kind: /^\s*HD/i.test(kind) ? 'HD' : 'CHI', key: String(key || '').trim(), arg: String(arg || '').trim() });
+            return '';
+        });
+        if (!acts.length) {   // dự phòng: chấp nhận cả dạng không có [[ ]]
+            String(raw || '').replace(/(?:^|\n)\s*(?:HD|CHI|CHỈ|HƯỚNG DẪN)\s*:\s*([^\n]+)/gi, function (m, rest) {
+                var i = rest.indexOf('|');
+                acts.push({ kind: /^\s*HD/i.test(m) ? 'HD' : 'CHI', key: (i < 0 ? rest : rest.slice(0, i)).trim(), arg: (i < 0 ? '' : rest.slice(i + 1)).trim() });
+                return '';
+            });
+        }
+        return acts;
+    }
+    function guessIntent(t) {
+        var s = deacc(String(t || '')).toLowerCase();
+        if (!/(mo|bat|tat|chuyen|ve|giup|hay|cho toi|xuat|nhap|hien|lam|dua|quay lai|dong)/.test(s)) return null;
+        if (/toan man hinh|full ?screen/.test(s)) return 'toan-man-hinh';
+        if (/khoa api|api key|\bapi\b/.test(s)) return 'khoa-api';
+        if (/cai dat/.test(s)) return 'cai-dat';
+        if (/thi thu|mock exam/.test(s)) return 'thi-thu';
+        if (/on tap nhanh/.test(s)) return 'on-nhanh';
+        if (/chuyen sau/.test(s)) return 'chuyen-sau';
+        if (/tien do/.test(s)) return 'tien-do';
+        if (/gop y|lien he/.test(s)) return 'gop-y';
+        if (/de xuat/.test(s)) return 'de-xuat';
+        if (/man hinh chinh|them vao mh/.test(s)) return 'them-mh-chinh';
+        if (/mon hoc/.test(s)) return 'mon-hoc';
+        if (/chu de/.test(s)) return 'chuyen-de';
+        if (/tu dien/.test(s)) return 'tu-dien';
+        if (/ghi chu/.test(s)) return 'so-ghi-chu';
+        if (/huy hieu|bo suu tap/.test(s)) return 'bo-suu-tap';
+        if (/da luu/.test(s)) return 'da-luu';
+        if (/da chan/.test(s)) return 'da-chan';
+        if (/trang chu|ve nha/.test(s)) return 'trang-chu';
+        if (/dong (het )?(cua so|het)/.test(s)) return 'dong-cua-so';
+        return null;
+    }
+
+    /* --------------------------- chiếu sáng mục tiêu --------------------------- */
+    function clearSpot() {
+        if (spotTimer) { clearInterval(spotTimer); spotTimer = null; }
+        if (spot) {
+            try { if (spot._onScroll) window.removeEventListener('scroll', spot._onScroll, true); } catch (e) {}
+            try { if (spot._onResize) window.removeEventListener('resize', spot._onResize); } catch (e) {}
+            if (spot.wrap && spot.wrap.parentNode) spot.wrap.parentNode.removeChild(spot.wrap);
+        }
+        spot = null;
+    }
+    function targetOf(key) {
+        var def = ACTS[key]; if (!def) return null;
+        try { return (typeof def.sel === 'function') ? def.sel() : (def.sel ? document.querySelector(def.sel) : null); } catch (e) { return null; }
+    }
+    function spotlight(key, note) {
+        var def = ACTS[key], node = targetOf(key);
+        if (!node) { toast('Không tìm thấy mục này trên màn hình'); return; }
+        clearSpot();
+        try { node.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+        setTimeout(function () { drawSpot(node, note || def.label); }, 320);
+    }
+    function drawSpot(node, note) {
+        if (!node || !document.body.contains(node)) return;
+        var wrap = document.createElement('div'); wrap.id = 'hf-spot-wrap';
+        var hit = document.createElement('div'); hit.className = 'hf-spot-hit'; hit.onclick = clearSpot;
+        var box = document.createElement('div'); box.className = 'hf-spot-box';
+        var tip = document.createElement('div'); tip.className = 'hf-spot-tip';
+        var tx = document.createElement('span'); tx.textContent = '👉 ' + note;
+        var x = document.createElement('button'); x.type = 'button'; x.className = 'hf-spot-x'; x.textContent = '✕';
+        x.onclick = function (ev) { try { ev.stopPropagation(); } catch (e) {} clearSpot(); };
+        tip.appendChild(tx); tip.appendChild(x);
+        wrap.appendChild(hit); wrap.appendChild(box); wrap.appendChild(tip);
+        document.body.appendChild(wrap);
+        spot = { wrap: wrap, box: box, tip: tip, node: node };
+        placeSpot();
+        spot._onScroll = placeSpot; spot._onResize = placeSpot;
+        window.addEventListener('scroll', placeSpot, true);
+        window.addEventListener('resize', placeSpot);
+        spotTimer = setInterval(placeSpot, 300);
+    }
+    function placeSpot() {
+        if (!spot) return;
+        var n = spot.node;
+        if (!document.body.contains(n) || !isShown(n)) { clearSpot(); return; }
+        var r = n.getBoundingClientRect();
+        if (!r.width && !r.height) { clearSpot(); return; }
+        var pad = 6, s = spot.box.style;
+        s.top = (r.top - pad) + 'px'; s.left = (r.left - pad) + 'px';
+        s.width = (r.width + pad * 2) + 'px'; s.height = (r.height + pad * 2) + 'px';
+        var tw = spot.tip.offsetWidth || 260, th = spot.tip.offsetHeight || 56, sp = spot.tip.style;
+        var top = r.top - th - 12; if (top < 8) top = r.bottom + 12;
+        if (top + th > window.innerHeight - 8) top = Math.max(8, window.innerHeight - th - 8);
+        var left = Math.max(8, Math.min(window.innerWidth - tw - 8, r.left + r.width / 2 - tw / 2));
+        sp.top = top + 'px'; sp.left = left + 'px';
+    }
+
+    function applyAct(a) {
+        var key = resolveKey(a.key), def = ACTS[key];
+        if (!def) { addSys('ℹ️ Mình chưa hỗ trợ mục “' + esc(a.key) + '”.'); return; }
+        if (a.kind === 'CHI') {
+            if (def.open) { closePop(); try { def.open(); } catch (e) {} setTimeout(function () { spotlight(key, a.arg); }, 380); }
+            else spotlight(key, a.arg);
+            return;
+        }
+        if (def.open) { try { def.open(); } catch (e) {} }
+        setTimeout(function () { try { if (def.run) def.run(); } catch (e) { console.warn('home-fab act', e); } }, def.open ? 280 : 80);
+        addSys('⚙️ Đã ' + esc(a.arg || def.label));
+        setTimeout(closePop, def.open ? 460 : 170);
+    }
+    function applyActs(acts) {
+        if (!acts || !acts.length) return;
+        acts.slice(0, 3).forEach(function (a, i) { setTimeout(function () { applyAct(a); }, i * 460); });
+    }
+
+    /* ------------------------------ gửi tin ------------------------------ */
+    function send(preset) {
+        if (busy) { toast('Đang trả lời, bạn đợi chút nhé'); return; }
+        var inp = $id('hf-input');
+        var text = String(preset != null ? preset : (inp ? inp.value : '')).trim();
+        if (!text) return;
+        if (inp) { inp.value = ''; inp.style.height = ''; }
+        if (!aiAnyKey()) {
+            addUser(text);
+            addSys('🔑 Cần khóa API AI mới dùng được trợ lý. Mình mở bảng nhập khóa cho bạn nhé — hoặc vào ⚙️ Cài đặt → 🔑 Cài đặt khóa API.');
+            try { aiShowGate('🏠 Trợ lý Home ảo cần khóa API AI. Hãy dán khóa Gemini (miễn phí) để bắt đầu.'); } catch (e) {}
+            return;
+        }
+        busy = true; updSend();
+        addUser(text);
+        chat.push({ role: 'user', parts: [{ text: text }] });
+        var typing = addTyping();
+        setStatus('Đang trả lời…');
+        ask(chat.slice(-12), function (s) { setStatus(s); }).then(function (raw) {
+            if (typing) typing.remove();
+            var acts = parseActs(raw);
+            var clean = String(raw || '')
+                .replace(/\[\[[^\]]*\]\]/g, '')
+                .replace(/(?:^|\n)\s*(?:HD|CHI|CHỈ|HƯỚNG DẪN)\s*:[^\n]*/gi, '')
+                .replace(/\n{3,}/g, '\n\n').trim();
+            if (!acts.length) { var g = guessIntent(text); if (g) acts.push({ kind: 'HD', key: g, arg: '' }); }
+            addAi(clean || '(Mình chưa rõ ý, bạn nói lại giúp mình nhé.)');
+            chat.push({ role: 'model', parts: [{ text: String(raw || '') }] });
+            if (chat.length > 14) chat = chat.slice(-14);
+            applyActs(acts);
+        }).catch(function (e) {
+            if (typing) typing.remove();
+            addSys('⚠️ ' + ((e && e.friendly) ? e.friendly : 'Không gọi được AI. Hãy kiểm tra mạng hoặc khóa API trong ⚙️ Cài đặt.'));
+        }).then(function () {
+            busy = false; updSend(); setStatus('Trợ lý đang sẵn sàng');
+        });
+    }
+
+    /* ------------------------------ mic ------------------------------ */
+    function startMic() {
+        var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SR) return;
+        try {
+            recog = new SR(); recog.lang = 'vi-VN'; recog.interimResults = false; recog.maxAlternatives = 1;
+            recog.onresult = function (ev) {
+                var t = '';
+                for (var i = 0; i < ev.results.length; i++) t += ev.results[i][0].transcript;
+                var inp = $id('hf-input'); if (inp) inp.value = (inp.value ? inp.value + ' ' : '') + t.trim();
+                send();
+            };
+            recog.onerror = function () { toast('Không nghe được, bạn thử lại nhé'); };
+            recog.onend = function () { recogOn = false; var b = $id('hf-mic'); if (b) b.classList.remove('hf-mic-on'); };
+            recog.start(); recogOn = true;
+            var b = $id('hf-mic'); if (b) b.classList.add('hf-mic-on');
+        } catch (e) { toast('Thiết bị / trình duyệt không hỗ trợ nhập bằng giọng nói'); }
+    }
+    function stopMic() { try { if (recog) recog.stop(); } catch (e) {} recogOn = false; var b = $id('hf-mic'); if (b) b.classList.remove('hf-mic-on'); }
+
+    /* --------------------- giữ nút Home ảo luôn bấm được --------------------- */
+    (function keepFabInteractive() {
+        function revive() {
+            ['home-fab', 'home-fab-pop', 'hf-spot-wrap'].forEach(function (id) { var n = $id(id); if (n) n.removeAttribute('inert'); });
+        }
+        ['openHomeSettings', 'hsLock'].forEach(function (fn) {
+            var orig = window[fn]; if (typeof orig !== 'function') return;
+            window[fn] = function () { var r = orig.apply(this, arguments); try { revive(); } catch (e) {} return r; };
+        });
+        window.homeFabRevive = revive;
+    })();
+
+    /* ------------------------------ khởi động ------------------------------ */
+    function init() {
+        applyFabState(); updSend(); setStatus('Trợ lý đang sẵn sàng');
+        bindFab();
+        // canh lại vị trí sau khi trang ổn định (thanh cuộn có thể xuất hiện làm khung nhìn hẹp lại)
+        [300, 1200, 2500].forEach(function (ms) {
+            setTimeout(function () { applyFabGeo(); if (popOpen()) placePop(); }, ms);
+        });
+        window.addEventListener('load', function () { applyFabGeo(); if (popOpen()) placePop(); });
+        window.addEventListener('resize', function () { applyFabGeo(); if (popOpen()) placePop(); });
+        window.addEventListener('orientationchange', function () {
+            setTimeout(function () { applyFabGeo(); if (popOpen()) placePop(); }, 250);
+        });
+        var SR = window.SpeechRecognition || window.webkitSpeechRecognition, mic = $id('hf-mic');
+        if (mic) {
+            if (SR) { mic.style.display = 'flex'; mic.onclick = function () { recogOn ? stopMic() : startMic(); }; }
+            else mic.style.display = 'none';
+        }
+        var ta = $id('hf-input');
+        if (ta) {
+            ta.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } });
+            ta.addEventListener('input', function () { ta.style.height = ''; ta.style.height = Math.min(120, ta.scrollHeight) + 'px'; });
+        }
+        // đóng khung chat khi bấm ra ngoài
+        document.addEventListener('pointerdown', function (e) {
+            var p = $id('home-fab-pop'); if (!p || p.classList.contains('hidden')) return;
+            var t = e.target;
+            if (p.contains(t)) return;
+            var f = $id('home-fab'); if (f && f.contains(t)) return;
+            if (t && t.closest && t.closest('#hf-spot-wrap')) return;
+            closePop();
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key !== 'Escape') return;
+            if (spot) { clearSpot(); return; }
+            var p = $id('home-fab-pop'); if (p && !p.classList.contains('hidden')) closePop();
+        });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
 </html>
