@@ -1234,6 +1234,14 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
     </style>
 
 
+<style id="rhm-pg-inline">
+.bm-foot .pg-bar.pg-inline.pg-inline{margin:0!important;flex:1 1 0;min-width:0;padding:.15rem .35rem;font-size:11px;gap:.2rem .35rem;border-radius:.6rem;justify-content:center}
+.bm-foot .pg-inline .pg-b,.bm-foot .pg-inline .pg-sel,.bm-foot .pg-inline .pg-in{height:1.6rem;font-size:11px}
+.bm-foot .pg-inline .pg-b{padding:0 .35rem;min-width:0}
+.bm-foot .pg-inline .pg-in{width:2.1rem}
+.bm-foot .pg-inline .pg-info{display:none}
+@media (max-width:640px){.bm-foot .pg-bar.pg-inline.pg-inline{order:-1;flex:1 1 100%}}
+</style>
 </head>
 <body class="bg-gray-100 min-h-screen font-sans text-gray-800" onload="initApp()" oncontextmenu="return false;">
 
@@ -2132,11 +2140,11 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
                 <button onclick="closeBookmarkedModal()" class="text-gray-500 hover:text-gray-700 font-bold text-lg">✕</button>
             </div>
             <div id="bookmarked-list-container" class="overflow-y-auto space-y-4 flex-1 pr-2 text-sm"></div>
-            <div class="mt-4 pt-3 border-t flex justify-between items-center gap-2 flex-wrap">
-                <button onclick="closeBookmarkedModal()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-5 rounded-xl text-sm shadow-sm transition-colors">Đóng</button>
-                <div class="flex items-center gap-2 flex-wrap justify-end">
-                <button onclick="startBookmarkedQuiz()" class="bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2 px-4 rounded-xl text-sm shadow-sm transition-colors flex items-center">⭐ Ôn tập câu đã lưu</button>
-                <button id="bm-resume-btn" type="button" onclick="resumeBookmarkedQuiz()" class="hidden bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold py-2 px-4 rounded-xl text-sm shadow-sm transition-colors">▶️ Tiếp tục</button>
+            <div class="bm-foot mt-3 pt-2 border-t flex items-center gap-2 flex-wrap">
+                <button onclick="closeBookmarkedModal()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-1.5 px-3 rounded-lg text-xs shadow-sm transition-colors">Đóng</button>
+                <div class="flex items-center gap-1.5 flex-wrap justify-end ml-auto">
+                <button onclick="startBookmarkedQuiz()" class="bg-amber-600 hover:bg-amber-700 text-white font-semibold py-1.5 px-3 rounded-lg text-xs shadow-sm transition-colors flex items-center">⭐ Ôn tập câu đã lưu</button>
+                <button id="bm-resume-btn" type="button" onclick="resumeBookmarkedQuiz()" class="hidden bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold py-1.5 px-3 rounded-lg text-xs shadow-sm transition-colors">▶️ Tiếp tục</button>
                 </div>
             </div>
         </div>
@@ -2150,8 +2158,8 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
                 <button onclick="closeBlockedModal()" class="text-gray-500 hover:text-gray-700 font-bold text-lg">✕</button>
             </div>
             <div id="blocked-list-container" class="overflow-y-auto space-y-4 flex-1 pr-2 text-sm"></div>
-            <div class="mt-4 pt-3 border-t flex justify-start">
-                <button onclick="closeBlockedModal()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-5 rounded-xl text-sm shadow-sm transition-colors">Đóng</button>
+            <div class="bm-foot mt-3 pt-2 border-t flex items-center gap-2 flex-wrap">
+                <button onclick="closeBlockedModal()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-1.5 px-3 rounded-lg text-xs shadow-sm transition-colors">Đóng</button>
             </div>
         </div>
     </div>
@@ -16643,6 +16651,10 @@ window.PGR = (function () {
             setPage(st, Math.floor(first / st.size) + 1, true);
         });
         st.box.insertAdjacentElement('afterend', bar);
+        if (st.box.id === 'bookmarked-list-container' || st.box.id === 'blocked-list-container') {   // gộp thanh số trang vào hàng nút cuối cửa sổ
+            var ft = st.box.parentElement && st.box.parentElement.querySelector('.bm-foot');
+            if (ft) { bar.classList.add('pg-inline'); ft.insertBefore(bar, ft.children[1] || null); }
+        }
     }
 
     function attach(box, opts) {
@@ -27754,30 +27766,17 @@ body {
         { ctx: 'deep', sel: '#deep-tree', t: '1️⃣ Chọn chủ đề & bộ đề', d: 'Tích chọn các chủ đề hoặc bộ đề muốn ôn. Phía trên có Chọn tất cả, Bỏ chọn tất cả và 🎲 Chọn ngẫu nhiên.' },
         { ctx: 'deep', sel: function () { var i = $id('deep-pct-easy'); return i && i.parentElement.parentElement; }, t: '2️⃣ Tỉ lệ độ khó', d: 'Chia phần trăm câu Khó, Vừa, Dễ trong lượt ôn, dựa trên thẻ độ khó bạn tự gắn bằng 3 nút Khó · Vừa · Dễ sau mỗi câu trả lời lúc làm bài (câu chưa gắn thẻ xếp vào nhóm “Khác”). Tổng nên bằng 100%. Ví dụ dồn nhiều % vào Khó để ôn đúng chỗ yếu.' },
         { ctx: 'deep', sel: '#deep-num-questions', t: '3️⃣ Số câu hỏi', d: 'Nhập tổng số câu muốn ôn. Hệ thống tự bù nếu một mức độ khó không đủ câu.' },
-        { ctx: 'deep', sel: '#deep-modal button[onclick="startDeepReview()"]', t: '🚀 Bắt đầu', d: 'Bắt đầu làm bài theo cấu hình bạn vừa chọn.' },
 
         { ctx: 'mock', sel: '#exam-modal h3', t: '🎯 Cửa sổ Thi Thử', d: 'Làm đề thi thử tính giờ như thi thật. Muốn xem lại phần này: bấm Trợ lý ứng dụng → ℹ️ khi cửa sổ đang mở.' },
         { ctx: 'mock', sel: '#exam-list', t: '📋 Danh sách đề thi', d: 'Mỗi dòng là một đề thi. Chọn một đề để bắt đầu làm bài, hoặc tiếp tục đề đang làm dở.' },
-        { ctx: 'mock', sel: '#btn-start-exam-main', t: '🚀 Bắt đầu thi', d: 'Bấm sau khi chọn đề để vào làm bài. Đồng hồ sẽ đếm ngược 180 phút; lần đầu vào làm bài, mình sẽ giới thiệu giao diện thi thử, kể cả hai đồng hồ đếm ngược.' },
 
-        { ctx: 'saved', sel: '#bookmarked-modal h3', t: '⭐ Câu hỏi đã lưu', d: 'Nơi gom những câu bạn đã đánh dấu sao khi làm bài; con số là số câu đã lưu. Muốn xem lại phần này: bấm Trợ lý ứng dụng → ℹ️ khi cửa sổ đang mở.' },
-        { ctx: 'saved', sel: '#bookmarked-list-container', t: '📄 Danh sách câu đã lưu', d: 'Xem lại từng câu đã lưu cùng đáp án. Có thể bỏ lưu những câu không cần nữa.' },
-        { ctx: 'saved', sel: '#bookmarked-modal button[onclick="startBookmarkedQuiz()"]', t: '⭐ Ôn tập câu đã lưu', d: 'Làm lại toàn bộ các câu đã lưu như một bài ôn riêng.' },
 
-        { ctx: 'blocked', sel: '#blocked-modal h3', t: '🚫 Câu hỏi đã chặn', d: 'Những câu bạn đã chặn sẽ không xuất hiện khi làm bài; con số là số câu đang bị chặn. Muốn xem lại phần này: bấm Trợ lý ứng dụng → ℹ️ khi cửa sổ đang mở.' },
-        { ctx: 'blocked', sel: '#blocked-list-container', t: '📄 Danh sách câu đã chặn', d: 'Xem các câu đã chặn. Vào đây nếu muốn bỏ chặn câu nào đó.' },
 
-        { ctx: 'topic', sel: '#topic-modal-title', t: '🦷 Cửa sổ chủ đề', d: 'Đây là một chủ đề mẫu: mọi chủ đề trong 36 chủ đề đều có cửa sổ giống hệt thế này. Muốn xem lại phần này: bấm Trợ lý ứng dụng → ℹ️ khi cửa sổ đang mở.' },
-        { ctx: 'topic', sel: '#topic-sort-select', t: '↕️ Sắp xếp', d: 'Đổi cách sắp xếp danh sách bộ đề: mới nhất, cũ nhất, theo tên hoặc nhiều câu nhất.' },
-        { ctx: 'topic', sel: '#topic-review-panel', t: '⚡ Ôn tập chủ đề', d: 'Chọn các bộ đề, nhập số câu rồi bấm Bắt đầu ôn tập để ôn riêng chủ đề này. Có nút chọn tất cả, bỏ chọn và chọn ngẫu nhiên.' },
-        { ctx: 'topic', sel: '#topic-quiz-list', t: '📚 Danh sách bộ đề', d: 'Các bộ đề thuộc chủ đề này. Bấm vào một bộ đề để làm bài.' },
 
         { ctx: 'section', key: 'on-nhanh', t: '⚡ Ôn Tập Nhanh', d: 'Khu Ôn Tập Theo Chủ Đề vừa mở ra. Nút này tạo nhanh một lượt ôn gọn nhẹ: chọn phạm vi và số câu rồi làm ngay. Lần đầu bấm vào mỗi nút, mình sẽ hướng dẫn thêm bên trong. Muốn xem lại phần này: bấm Trợ lý ứng dụng → ℹ️ khi khu Ôn Tập Theo Chủ Đề đang xổ ra.' },
         { ctx: 'section', key: 'chuyen-sau', t: '🧠 Ôn Tập Chuyên Sâu', d: 'Lượt ôn đào sâu hơn, giúp bạn tập trung vào những phần còn yếu thay vì làm đại trà.' },
         { ctx: 'section', key: 'thi-thu', t: '🎯 Thi Thử (Mock Exam)', d: 'Làm một đề thi thử có tính giờ như thi thật để đánh giá năng lực của bạn. Bạn cũng có thể tạo đề thi riêng.' },
-        { ctx: 'section', key: 'da-luu', t: '⭐ Đã lưu', d: 'Danh sách những câu hỏi bạn đã đánh dấu sao khi làm bài, để quay lại ôn riêng những câu quan trọng. Con số trong ngoặc là số câu đã lưu.' },
-        { ctx: 'section', key: 'da-chan', t: '🚫 Đã chặn', d: 'Những câu hỏi bạn đã chặn nên sẽ không xuất hiện khi làm bài. Vào đây nếu muốn bỏ chặn câu nào đó.' },
-        { ctx: 'section', sel: '#topic-grid', t: '🦷 36 Chủ Đề Ôn Tập', d: 'Mỗi ô là một chủ đề Răng Hàm Mặt. Bấm vào một ô để mở chủ đề đó; lần đầu mình sẽ hướng dẫn ngay trong cửa sổ chủ đề (chỉ hướng dẫn một chủ đề mẫu, các chủ đề còn lại dùng giống hệt).' }
+        { ctx: 'section', sel: '#topic-grid', t: '🦷 36 Chủ Đề Ôn Tập', d: 'Mỗi ô là một chủ đề Răng Hàm Mặt. Bấm vào một ô để mở chủ đề đó.' }
     ];
     TOUR.forEach(function (st) { if (st.ctx === 'video') st.vid = true; });
 
@@ -27796,22 +27795,28 @@ body {
         var b = document.querySelector('#ai-key-panel [data-gl]');
         return b ? (b.closest('div.rounded-xl') || b.closest('details') || b) : null;
     }
-    /* Mở sẵn phần khóa Gemini ra (nhớ trạng thái để đóng lại khi hết hướng dẫn) để cuộn xuống thấy mục Mức suy luận */
-    function glPrep() {
-        var b = document.querySelector('#ai-key-panel [data-gl]');
-        var det = b ? b.closest('details') : null;
-        if (det && !det.open) {
-            var t = tour;
-            if (t && !t.glOpen) {
-                t.glOpen = true;
-                var pn = document.getElementById('ai-key-panel'), sv = pn ? pn.scrollTop : 0;
-                t.undo.push(function () { try { det.open = false; } catch (e) {} try { if (pn) pn.scrollTop = sv; } catch (e) {} });
-            }
-            det.open = true;
-        }
-        /* cuộn xuống ngay tới thẻ này (cuộn mượt không ăn trong bảng cài đặt) để thẻ hiện ra đúng giữa bảng */
+    /* Mở sẵn phần khóa Gemini ra (nhớ trạng thái để đóng lại khi hết hướng dẫn) rồi cuộn xuống thấy mục Mức suy luận */
+    function glDet() { var b = document.querySelector('#ai-key-panel [data-gl]'); return b ? b.closest('details') : null; }
+    function glScroll() {
+        var b = document.querySelector('#ai-key-panel [data-gl]'), d = glDet();
+        if (d && !d.open) d.open = true;
         var blk = b ? (b.closest('div.rounded-xl') || b) : null;
         if (blk && blk.scrollIntoView) { try { blk.scrollIntoView({ behavior: 'auto', block: 'center' }); } catch (e) {} }
+    }
+    function glReady() { var b = document.querySelector('#ai-key-panel [data-gl]'), d = glDet(); return !!(b && (!d || d.open)); }
+    function glPrep() {
+        var det = glDet(), t = tour;
+        if (det && !det.open) {
+            if (t && !t.glOpen) {
+                t.glOpen = true;
+                var pn = document.getElementById('ai-key-panel'), sv = pn ? pn.scrollTop : 0, pv = null;
+                try { if (typeof aiState !== 'undefined') pv = aiState.provOpen; } catch (e) {}
+                t.undo.push(function () { try { var d0 = glDet(); if (d0) d0.open = false; } catch (e) {} try { if (typeof aiState !== 'undefined') aiState.provOpen = pv; } catch (e) {} try { if (pn) pn.scrollTop = sv; } catch (e) {} });
+            }
+            try { if (typeof aiState !== 'undefined') aiState.provOpen = 'gemini'; } catch (e) {}   // giữ mở kể cả khi danh sách nhà cung cấp vẽ lại
+            det.open = true;
+        }
+        glScroll(); setTimeout(glScroll, 120); setTimeout(glScroll, 320);
     }
 
     /* --- (1) Cài đặt khung chat AI --- */
@@ -27824,7 +27829,7 @@ body {
           d: 'Có 4 mức: Ngắn gọn (~350 token), Vừa (~900), Chi tiết (~2.000) và Đầy đủ (không giới hạn thêm). Ngắn thì trả lời nhanh và đỡ tốn lượt; chọn Chi tiết / Đầy đủ khi cần giải thích kỹ.' },
         { sel: function () { var b = document.querySelector('#ai-key-panel [data-bk-st]'); return b ? (b.closest('.border-t') || b.parentElement) : null; }, t: '📖 Giọng văn khi dịch sách',
           d: 'Áp dụng khi bạn dịch đoạn chữ trong trình đọc sách. “Tự nhiên (dễ hiểu)” dịch thoáng, đọc xuôi tai; “Bám sát (sát văn gốc)” giữ sát câu chữ của bản gốc.' },
-        { sel: glBlk, pre: glPrep, wait: 260, t: '🧠 Mức suy luận Gemini',
+        { sel: glBlk, pre: glPrep, until: glReady, max: 1500, wait: 550, t: '🧠 Mức suy luận Gemini',
           d: 'Thấp · Trung bình · Cao là mức “suy nghĩ” của Gemini trước khi trả lời. Mức càng cao thì trả lời càng kỹ nhưng càng chậm. Áp dụng cho các lần gọi Gemini tiếp theo.' },
         { sel: '#ai-prov-cards > div:nth-child(1) summary', t: '🔑 Lấy khóa & nhập khóa',
           d: 'Bấm dòng này để mở hướng dẫn từng bước: lấy khóa miễn phí, rồi dán vào ô bên dưới (có sẵn nút 📋 Dán khóa đã sao chép & lưu). Đã có khóa thì mục này đổi thành “Đổi khóa / cài đặt”, kèm ô đổi model nếu nhà cung cấp ngừng model cũ.' }
@@ -28228,13 +28233,13 @@ body {
     function qbNth(q, n) { return function () { return document.querySelectorAll(q)[n] || null; }; }
     var DNBTNS = [
         { m: 'dict-modal', k: 'd-add', q: '#rd-rb-add', wait: 450, cond: function () { return shown('rd-pop'); }, steps: [
-            { sel: dnVis(['rd-pop']), xl: true, t: '➕ Thêm thuật ngữ mới', d: 'Tự thêm một thuật ngữ vào từ điển: nhập từ tiếng Anh, từ loại (n, v, adj…) và nghĩa tiếng Việt.' },
-            { sel: qbQ('#rd-pop .rd-pbtn.pri'), xl: true, t: '＋ Thêm', d: 'Bấm để lưu thuật ngữ. Từ vừa thêm có huy hiệu MỚI; bấm vào dòng của nó trong sách để thao tác tiếp.' }] },
+            { mid: true, sel: dnVis(['rd-pop']), xl: true, t: '➕ Thêm thuật ngữ mới', d: 'Tự thêm một thuật ngữ vào từ điển: nhập từ tiếng Anh, từ loại (n, v, adj…) và nghĩa tiếng Việt.' },
+            { mid: true, sel: qbQ('#rd-pop .rd-pbtn.pri'), xl: true, t: '＋ Thêm', d: 'Bấm để lưu thuật ngữ. Từ vừa thêm có huy hiệu MỚI; bấm vào dòng của nó trong sách để thao tác tiếp.' }] },
         { m: 'dict-modal', k: 'd-search', q: '#rd-rb-search', wait: 450, cond: function () { return shown('rd-pop'); }, steps: [
-            { sel: dnVis(['rd-pop']), t: '🔍 Tìm thuật ngữ', d: 'Tìm nhanh trong toàn bộ từ điển. Có hai cách tìm, chọn ở hai nút ngay bên dưới.' },
-            { sel: qbQ('#rd-pop .nt-tabs'), t: '🔀 Theo từ · Theo chủ đề (AI)', d: 'Theo từ: gõ tiếng Anh hoặc tiếng Việt, kết quả hiện ngay khi gõ. Theo chủ đề (AI): nhập một chủ đề rồi Enter, AI chọn ra các thuật ngữ thuộc chủ đề đó.' },
-            { sel: qbQ('#rd-pop [data-m="topic"]'), t: '🤖 Tìm với AI', d: 'Nhập chủ đề như “nội nha”, “nha chu”, “phục hình”… rồi Enter: AI lọc các thuật ngữ trong từ điển liên quan đến chủ đề, kể cả khi từ khóa không xuất hiện trong chính thuật ngữ. Cần khóa API AI (⚙️ Cài đặt).' },
-            { sel: qbQ('#rd-in-q'), t: '⌨️ Ô nhập', d: 'Gõ từ khóa (Theo từ) hoặc chủ đề (Theo chủ đề AI) vào đây. Kết quả hiện bên dưới; bấm một kết quả để nhảy tới thuật ngữ đó.' }] },
+            { mid: true, sel: dnVis(['rd-pop']), t: '🔍 Tìm thuật ngữ', d: 'Tìm nhanh trong toàn bộ từ điển. Có hai cách tìm, chọn ở hai nút ngay bên dưới.' },
+            { mid: true, sel: qbQ('#rd-pop .nt-tabs'), t: '🔀 Theo từ · Theo chủ đề (AI)', d: 'Theo từ: gõ tiếng Anh hoặc tiếng Việt, kết quả hiện ngay khi gõ. Theo chủ đề (AI): nhập một chủ đề rồi Enter, AI chọn ra các thuật ngữ thuộc chủ đề đó.' },
+            { mid: true, sel: qbQ('#rd-pop [data-m="topic"]'), t: '🤖 Tìm với AI', d: 'Nhập chủ đề như “nội nha”, “nha chu”, “phục hình”… rồi Enter: AI lọc các thuật ngữ trong từ điển liên quan đến chủ đề, kể cả khi từ khóa không xuất hiện trong chính thuật ngữ. Cần khóa API AI (⚙️ Cài đặt).' },
+            { mid: true, sel: qbQ('#rd-in-q'), t: '⌨️ Ô nhập', d: 'Gõ từ khóa (Theo từ) hoặc chủ đề (Theo chủ đề AI) vào đây. Kết quả hiện bên dưới; bấm một kết quả để nhảy tới thuật ngữ đó.' }] },
         { m: 'dict-modal', k: 'd-review', q: '#rd-rb-review', wait: 600, cond: function () { return shown('rd-rv'); }, steps: [
             { sel: qbQ('#rd-rv .rv-card'), t: '🎓 Ôn tập từ vựng', d: 'Ôn lại thuật ngữ trong từ điển theo cách bạn chọn: 🃏 Flashcard (lật thẻ) hoặc 📝 Trắc nghiệm ngữ cảnh do AI ra đề. Mình đi qua từng phần của bảng thiết lập, từ trên xuống.' },
             { sel: qbNth('#rd-rv .rv-g', 0), t: '📚 Nguồn từ ôn tập', d: '⭐ Từ đã lưu: chỉ ôn các từ bạn đã gắn sao. 🧭 Theo chủ đề: nhập chủ đề, AI chọn các từ liên quan. 🎚 Theo mức độ: đặt tỉ lệ % từ Dễ / Vừa / Khó (theo thẻ bạn gắn). 🎲 Ngẫu nhiên: rút ngẫu nhiên trong toàn bộ từ điển.' },
@@ -28242,9 +28247,7 @@ body {
             { sel: qbQ('#rv-lvlp'), t: '🎚 Tỉ lệ mức độ (%)', d: 'Hiện khi chọn “Theo mức độ”: đặt tỉ lệ từ Dễ · Vừa · Khó trong bài ôn (tổng 100%), ví dụ dồn nhiều vào từ Khó để ôn chỗ yếu.' },
             { sel: qbNth('#rd-rv .rv-g', 1), t: '🔢 Số lượng từ', d: 'Chọn ôn 10, 20, 30 từ, tất cả, hoặc “Tùy chọn” để tự nhập số từ.' },
             { sel: qbNth('#rd-rv .rv-g', 2), t: '🎮 Chế độ ôn', d: '🃏 Flashcard: lật thẻ để xem nghĩa rồi tự đánh giá đã nhớ hay chưa nhớ. 📝 Trắc nghiệm ngữ cảnh: AI cho một câu có chỗ trống, bạn chọn 1 trong 4 từ tiếng Anh để điền; trả lời đúng +5 điểm.' },
-            { sel: qbQ('#rv-lvlw'), t: '😤 Độ khó đáp án nhiễu', d: 'Chỉ có ở chế độ trắc nghiệm: Dễ — 3 từ gây nhiễu ít liên quan; Vừa — một nửa cùng chủ đề / từ loại; Khó — cả 3 từ gây nhiễu cùng chủ đề và cùng từ loại.' },
-            { sel: qbQ('#rd-rv [data-act="rv-start"]'), t: '▶ Bắt đầu', d: 'Bắt đầu phiên ôn theo thiết lập vừa chọn. Trong lúc ôn có thể thoát bất cứ lúc nào.' },
-            { sel: qbQ('#rd-rv .rv-x'), t: '✕ Đóng', d: 'Đóng bảng ôn tập và quay lại từ điển (bấm lại nút 🗂️ trên ruy-băng cũng được).' }] },
+            { sel: qbQ('#rv-lvlw'), t: '😤 Độ khó đáp án nhiễu', d: 'Chỉ có ở chế độ trắc nghiệm: Dễ — 3 từ gây nhiễu ít liên quan; Vừa — một nửa cùng chủ đề / từ loại; Khó — cả 3 từ gây nhiễu cùng chủ đề và cùng từ loại.' }] },
         { m: 'dict-modal', k: 'd-new', q: '[data-act="new-view"]', wait: 450, cond: function () { return shown('rd-pop'); }, steps: [
             { sel: dnVis(['rd-pop']), t: '🆕 Thuật ngữ mới', d: 'Danh sách các thuật ngữ mới vừa được thêm vào từ điển (từ bạn tự thêm, từ AI gợi ý hoặc lưu khi đọc sách). Chúng có huy hiệu MỚI cho tới khi bạn xem.' },
             { sel: qbQ('#rd-nt'), t: '📋 Danh sách thuật ngữ mới', d: 'Bấm một thuật ngữ để nhảy tới vị trí của nó trong sách từ điển.' },
@@ -28405,7 +28408,7 @@ body {
         } catch (e) { return null; }
     }
     /* thứ tự = ưu tiên (cửa sổ nằm trên cùng xếp trước) */
-    var WIN_CTX = ['aiset', 'video', 'viewer', 'shelf', 'course', 'subject', 'quick', 'deep', 'mock', 'saved', 'blocked', 'topic', 'collection', 'dict', 'note', 'settings', 'qscreen', 'escreen'];
+    var WIN_CTX = ['aiset', 'video', 'viewer', 'shelf', 'course', 'subject', 'quick', 'deep', 'mock', 'collection', 'dict', 'note', 'settings', 'qscreen', 'escreen'];
     var WIN_ID = { video: '', monhoc: 'monhoc-section-container', viewer: 'book-viewer', shelf: 'bookshelf-modal', course: 'monhoc-detail-modal', subject: 'subject-choice-modal', quick: 'mock-exam-modal', deep: 'deep-modal', mock: 'exam-modal', saved: 'bookmarked-modal', blocked: 'blocked-modal', topic: 'topic-modal', section: 'chuyende-section-container', collection: 'collection-modal', dict: 'dict-modal', note: 'note-modal', settings: 'home-settings-modal', aiset: 'ai-key-panel', qscreen: 'quiz-screen', escreen: 'quiz-screen' };
     function activeWin() { for (var i = 0; i < WIN_CTX.length; i++) { if (winShown(WIN_CTX[i])) return WIN_CTX[i]; } return null; }
     function beginTour(mode, c) {
@@ -28448,6 +28451,7 @@ body {
     function winSeen(c) { try { return localStorage.getItem(seenKey(c)) === '1'; } catch (e) { return !!seenMem[c]; } }
     function winMark(c) { seenMem[c] = 1; try { localStorage.setItem(seenKey(c), '1'); } catch (e) {} }
     function autoWinTour(c) {
+        if (c === 'saved' || c === 'blocked' || c === 'topic') return;   // đã bỏ phần giới thiệu các cửa sổ này
         if (!fabOn || tour || winSeen(c) || Date.now() < suppressUntil) return;
         if (c === 'video' && !vidBig()) return;
         setTimeout(function () {
