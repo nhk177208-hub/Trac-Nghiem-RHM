@@ -29587,11 +29587,12 @@ body {
         if (tn.length < 30 && h._ntn) keys.push((tn + h._ntn).slice(0, 44));   // tiêu đề trơ trọi: ghép chữ đầu của mục kế tiếp
         keys.push(tn.slice(0, 44));
         if (tn.length > 26) keys.push(tn.slice(0, 26));
-        for (const key of keys) {
-            if (key.length < 3) continue;
-            let p = locKey(key, P.page, minN, key.length < 22);
-            if (p < 0 && key.length < 22) p = locKey(key, P.page, minN, false);
-            if (p >= 0) return p;
+        for (let pass = 0; pass < 2; pass++) {   // lượt 1: chỉ nhận chỗ khớp ở đầu dòng (đúng là tiêu đề); lượt 2: cho phép giữa đoạn
+            for (const key of keys) {
+                if (key.length < 3) continue;
+                const p = locKey(key, P.page, minN, pass === 0);
+                if (p >= 0) return p;
+            }
         }
         return -1;
     }
@@ -29649,9 +29650,19 @@ body {
                     let from, to;
                     if (cursor >= 0) { from = lb2(mm, cursor); to = from + 3000; }
                     else { from = lb2(mm, Math.max(minN, pageNormRange(P.page - 1)[0])); to = lb2(mm, pageNormRange(P.page + 1)[1]); }
-                    const q = nn.indexOf(k2, from);
+                    let q = nn.indexOf(k2, from);
                     if (q < 0 || q >= to) continue;
-                    return [mm[q], mm[q + k2.length - 1] + 1];
+                    if (cursor < 0) {   // chưa có điểm neo: ưu tiên chỗ khớp ở ĐẦU DÒNG (tiêu đề) hơn chỗ trùng chữ giữa đoạn
+                        let q2 = q;
+                        while (q2 >= 0 && q2 < to && !bkLineStart(bkText, g.map[mm[q2]])) q2 = nn.indexOf(k2, q2 + 1);
+                        if (q2 >= 0 && q2 < to) q = q2;
+                    }
+                    let a = mm[q], b = mm[q + k2.length - 1] + 1;
+                    const dropped = (ch) => v === 2 ? (ch >= '0' && ch <= '9') : /[0-9fts]/.test(ch);
+                    // chữ bị bỏ nằm liền sát mép trong cùng một từ (vd "F" của "Five", "s" của "Steps") vẫn thuộc đoạn khớp
+                    while (a > 0 && dropped(g.n[a - 1]) && g.map[a] - g.map[a - 1] === 1) a--;
+                    while (b < g.n.length && dropped(g.n[b]) && g.map[b] - g.map[b - 1] === 1) b++;
+                    return [a, b];
                 }
                 return null;
             };
@@ -29662,7 +29673,7 @@ body {
                     q = g.n.indexOf(k, Math.max(0, cursor));
                     if (q >= 0 && q - cursor > (depth ? 900 : 2500)) q = -1;
                     if (q < 0 && depth === 0) q = findNear(k, cursor, ci0 === 0 ? P.page : 0, 8000);
-                } else if (depth === 0) q = locKey(k, P.page, minN, false);
+                } else if (depth === 0) { q = locKey(k, P.page, minN, true); if (q < 0) q = locKey(k, P.page, minN, false); }   // đầu đoạn: ưu tiên chỗ khớp ở đầu dòng
                 if (q >= 0) e = q + k.length;
                 else { const r2 = find2(k); if (r2) { q = r2[0]; e = r2[1]; } }
                 if (q >= 0) { nr.push([q, e]); matched += k.length; note(off, q, e - q); if (startN < 0) startN = q; cursor = e; return; }
