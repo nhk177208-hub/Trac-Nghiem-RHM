@@ -29664,13 +29664,15 @@ body {
                 const lead = fo, tail = P.tn.length - le;
                 const pg = bkPages[Math.max(0, Math.min(NP, pageOfN(fa)) - 1)];
                 if (lead > 0 && lead <= 260) {
-                    const lim = Math.max(pg ? nIdxOfRaw(pg.gs) : 0, prevEnd);
+                    let lim = Math.max(pg ? nIdxOfRaw(pg.gs) : 0, prevEnd);
+                    lim = Math.max(lim, nIdxOfRaw(bkText.lastIndexOf('\n', Math.max(0, g.map[fa] - 1)) + 1));   // không lùi qua đầu dòng (tránh lấn sang tiêu đề / khối trước)
                     const ns = Math.max(lim, fa - Math.ceil(lead * 1.25) - 2);
                     if (ns < fa) { nr.push([ns, fa]); if (pi === 0 || startN < 0 || ns < startN) { if (pi === 0) startN = ns; } }
                 }
                 if (tail > 0 && tail <= 260) {
                     const pg2 = bkPages[Math.max(0, Math.min(NP, pageOfN(Math.max(0, lb - 1))) - 1)];
-                    const lim = pg2 ? nIdxOfRaw(pg2.ge) : g.n.length;
+                    let lim = pg2 ? nIdxOfRaw(pg2.ge) : g.n.length;
+                    { let le2 = bkText.indexOf('\n', g.map[Math.max(0, lb - 1)]); if (le2 < 0) le2 = bkText.length; lim = Math.min(lim, nIdxOfRaw(le2)); }   // không kéo qua cuối dòng (tránh tràn sang tiêu đề mục kế / bảng)
                     const ne = Math.min(lim, g.n.length, lb + Math.ceil(tail * 1.25) + 2);
                     if (ne > lb) { nr.push([lb, ne]); cursor = Math.max(cursor, ne); }
                 }
@@ -29808,6 +29810,11 @@ body {
             if (rg && rg.length) {
                 let mx = 0; rg.forEach(r => { if (r[1] > mx) mx = r[1]; });
                 try { rg = bkSnapRg(rg); } catch (e) {}
+                {   // vùng tô không bao giờ vượt qua tiêu đề của mục kế tiếp cùng cấp / cấp cao hơn
+                    let B = Infinity;
+                    for (let j = i + 1; j < bkSecs.length; j++) { if ((bkSecs[j].lvl || 1) <= (x.lvl || 1)) { B = bkSecs[j].s; break; } }
+                    if (B < Infinity) { const c = rg.map(r => [r[0], Math.min(r[1], B)]).filter(r => r[1] > r[0]); if (c.length) rg = c; }
+                }
                 mx = 0; rg.forEach(r => { if (r[1] > mx) mx = r[1]; });
                 x.rg = rg; x.e = mx;
                 x.text = rg.map(r => bkText.slice(r[0], r[1]).trim()).filter(Boolean).join('\n');
@@ -29861,4 +29868,3 @@ body {
 
 </script>
 </html>
-
