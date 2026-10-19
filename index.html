@@ -29599,6 +29599,36 @@ body {
         if (m[0].charAt(0) !== '\n' && from > 0) return s0;
         return s0 - m[1].length;
     }
+    /* [fix 5] Mép đoạn nối tiếp (ngắt cột / sang trang / sau hình-bảng): đoạn nối luôn mở ở ĐẦU DÒNG và đoạn đứng trước nó luôn khép ở CUỐI DÒNG.
+       Nếu AI chép lệch vài chữ ở mép (vd "marginal", "For temporary" ở đầu cột 2, hoặc mấy chữ cuối cột 1) thì phần đó bị rơi khỏi vùng tô.
+       → kéo đầu đoạn nối tiếp lùi về đầu dòng, kéo cuối đoạn (nếu còn đoạn sau) tới cuối dòng, chỉ khi phần hụt ngắn (<= 80 ký tự, cùng một dòng, có chữ thật). */
+    const SNAP_ALNUM = /[0-9A-Za-z\u00C0-\u1EF9]/;
+    function snapRg(rg) {
+        if (!Array.isArray(rg) || rg.length < 2 || !bkText) return rg;
+        const T = bkText, len = T.length, MAXG = 80;
+        rg.sort((a, b) => a[0] - b[0]);
+        for (let i = 0; i < rg.length; i++) {
+            const r = rg[i];
+            if (i > 0 && r[0] > 0) {
+                const ls = T.lastIndexOf('\n', r[0] - 1) + 1;
+                if (ls < r[0] && r[0] - ls <= MAXG && SNAP_ALNUM.test(T.slice(ls, r[0]))) r[0] = ls;
+            }
+            if (i < rg.length - 1 && r[1] < len) {
+                let le = T.indexOf('\n', r[1]); if (le < 0) le = len;
+                if (le > r[1] && le - r[1] <= MAXG && SNAP_ALNUM.test(T.slice(r[1], le))) r[1] = le;
+            }
+        }
+        rg.sort((a, b) => a[0] - b[0]);
+        const out = [];
+        rg.forEach(r => {
+            const l = out[out.length - 1];
+            if (l && r[0] <= l[1]) { if (r[1] > l[1]) l[1] = r[1]; }
+            else if (l && !SNAP_ALNUM.test(T.slice(l[1], r[0]))) l[1] = Math.max(l[1], r[1]);
+            else out.push([r[0], r[1]]);
+        });
+        rg.length = 0; out.forEach(r => rg.push(r));
+        return rg;
+    }
     function alignHead(h, minRaw) {
         const g = gnorm();
         if (!g.n || !bkPages.length) return false;
@@ -29703,6 +29733,7 @@ body {
             else rg.push([r[0], r[1]]);
         });
         rg.forEach(r => { while (r[1] < len && /[.,;:!?)\]"”'’]/.test(bkText[r[1]])) r[1]++; });   // lấy luôn dấu câu liền sau chữ cuối
+        snapRg(rg);   // [fix 5] không rơi chữ ở mép cột / mép trang
         const startRaw = g.map[startN];
         const s0 = backUpPrefix(startRaw);
         h.pos = s0; h.cov = Math.round(cov * 100) / 100;
@@ -29769,27 +29800,6 @@ body {
     }
     window.bkHlFor = bkHlFor;
 
-    /* Mép vùng tô hay bị cụt giữa dòng ở chỗ đổi cột (cuối cột 1 / đầu cột 2): AI chép lệch vài chữ đầu-cuối dòng.
-       → nếu đầu đoạn nằm giữa dòng và phần dòng phía trước ngắn (chưa kết câu) thì lùi về đầu dòng;
-         nếu cuối đoạn nằm giữa dòng và phần dòng phía sau ngắn (chưa kết câu) thì kéo tới hết dòng. */
-    function bkSnapRg(rg) {
-        const T = bkText, L = T.length, MAXP = 60;
-        return rg.map(r => {
-            let a = r[0], b = r[1];
-            if (a > 0 && a < L && T[a - 1] !== '\n') {
-                const ls = T.lastIndexOf('\n', a - 1) + 1, pre = T.slice(ls, a);
-                if (pre.trim() && pre.length <= MAXP && !/[.!?:;]["”')\]]?\s*$/.test(pre)) a = ls;
-            }
-            if (b > 0 && b < L && T[b] !== '\n' && !/[.!?]["”')\]]?$/.test(T.slice(Math.max(0, b - 2), b))) {
-                let le = T.indexOf('\n', b); if (le < 0) le = L;
-                const post = T.slice(b, le);
-                if (post.trim() && post.length <= MAXP) b = le;
-            }
-            return [a, b];
-        });
-    }
-    window.bkSnapRg = bkSnapRg;
-
     /* Sắp xếp theo vị trí; mỗi mục có đoạn tô riêng (rg) lấy chữ đúng các đoạn đó; mục kiểu cũ thì kéo dài tới đầu mục kế */
     window.bkRelink = function () {
         const a = bkSecs.slice().sort((x, y) => x.s - y.s);
@@ -29800,6 +29810,7 @@ body {
             let rg = null;
             if (hd && Array.isArray(hd.rg) && hd.rg.length && hd.tl === bkText.length) {
                 rg = hd.rg.map(r => [r[0], r[1]]).filter(r => r[1] > r[0]);
+                snapRg(rg);   // [fix 5] mục lập từ trước cũng được vá, không cần lập lại mục lục
                 if (rg.length && hd.open) {   // mục còn chạy sang cửa sổ sau mà AI không trả tiếp → kéo tới đầu mục kế
                     let mx = 0; rg.forEach(r => { if (r[1] > mx) mx = r[1]; });
                     if (nextS > mx) rg.push([mx, nextS]);
@@ -29807,8 +29818,6 @@ body {
             }
             if (rg && rg.length) {
                 let mx = 0; rg.forEach(r => { if (r[1] > mx) mx = r[1]; });
-                try { rg = bkSnapRg(rg); } catch (e) {}
-                mx = 0; rg.forEach(r => { if (r[1] > mx) mx = r[1]; });
                 x.rg = rg; x.e = mx;
                 x.text = rg.map(r => bkText.slice(r[0], r[1]).trim()).filter(Boolean).join('\n');
             } else {
