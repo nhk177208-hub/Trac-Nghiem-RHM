@@ -29193,14 +29193,12 @@ body {
         if (!seq || seq.length < 4) return out;
         const G = gts || [];
         const colOf = d => { const m = d.x + d.w / 2; let c = 0; while (c < G.length && m >= G[c].gc) c++; return c; };
-        // gom thành dòng theo đường cơ sở
         const rows = [];
         seq.slice().sort((a, b) => a.y - b.y).forEach(d => {
             const r = rows[rows.length - 1];
             if (r && Math.abs(d.y - r.y) <= 0.45 * Math.min(d.fh, r.fh)) { r.it.push(d); r.fh = Math.max(r.fh, d.fh); }
             else rows.push({ y: d.y, fh: d.fh, it: [d] });
         });
-        // tách mỗi dòng thành các đoạn (ô) theo từng cột trang
         const segsOf = r => {
             const byc = {};
             r.it.forEach(d => { const c = colOf(d); (byc[c] = byc[c] || []).push(d); });
@@ -29210,77 +29208,69 @@ body {
                 let cur = null; const sg = [];
                 its.forEach(d => {
                     if (cur && d.x - cur.x1 <= 0.85 * Math.max(d.fh, cur.fh)) { cur.its.push(d); cur.x1 = Math.max(cur.x1, d.x + d.w); }
-                    else { cur = { x0: d.x, x1: d.x + d.w, its: [d] }; sg.push(cur); }
+                    else { cur = { x0: d.x, x1: d.x + d.w, its: [d], fh: d.fh }; sg.push(cur); }
                 });
                 o[c] = sg;
             }
             return o;
         };
-        const txtOf = x => Array.isArray(x) ? x.map(txtOf).join(' ') : (x && x.its ? x.its.map(i => i.str).join(' ') : (x && x.str != null ? String(x.str) : ''));
+        rows.forEach(r => { r.segs = segsOf(r); });
+        const txtOf = x => Array.isArray(x) ? x.map(txtOf).join(' ') : (x && x.its ? x.its.map(i => i.str).join('') : (x && x.str != null ? String(x.str) : ''));
         const isMarker = s => {
             const t = txtOf(s).replace(/\s+/g, ' ').trim();
             if (!t) return true;
-            if (/^[•●○▪■◦·*–—-]+$/.test(t)) return true;   // gạch đầu dòng
-            if (t.length <= 8 && /^[\d\s,;.\-–—a-z]+$/i.test(t) && /\d/.test(t)) return true;   // số chú thích / số trang: "289a", "272,292"
-            if (/^\(?[a-zA-Z0-9]{1,3}[.)]?\)?$/.test(t)) return true;   // "1.", "a)", "IV", "A"
+            if (/^[•●○▪■◦·*–—-]+$/.test(t)) return true;
+            if (t.length <= 8 && /^[\d\s,;.\-–—a-z]+$/i.test(t) && /\d/.test(t)) return true;
+            if (/^\(?[a-zA-Z0-9]{1,3}[.)]?\)?$/.test(t)) return true;
             return false;
         };
-        rows.forEach(r => { r.segs = segsOf(r); });
-        // (1) bảng có nhãn: đánh dấu tới khi gặp lại một dòng thân bài rộng
+        const isCell = s => {
+            const t = txtOf(s).trim();
+            if (t.length < 2 || t.length > 110) return false;
+            return !isMarker(s);
+        };
+        const isParaSeg = s => txtOf(s).trim().length > 110;
         for (let i = 0; i < rows.length; i++) {
-            const sg = rows[i].segs;
-            for (const c in sg) {
-                if (!/^(?:table|tbl|bảng|bang)\s*\.?\s*[0-9IVXivx]/i.test(txtOf(sg[c]).trim())) continue;
-                // xác nhận phía dưới thật sự có cấu trúc bảng (≥2 dòng nhiều ô) — tránh câu văn mở đầu bằng "Table 12.1 ..."
-                let multi = 0;
-                for (let j = i + 1; j < rows.length && j < i + 80; j++) {
-                    const r = rows[j];
-                    if (r.y - rows[j - 1].y > 2.8 * Math.max(r.fh, rows[j - 1].fh)) break;
-                    const ss = r.segs[c] || [];
-                    const isPara = ss.length === 1 && (ss[0].x1 - ss[0].x0) >= 0.3 * W && txtOf(ss[0]).trim().length >= 40;
-                    if (isPara) break;
-                    const cells = ss.filter(s => !isMarker(s) && txtOf(s).trim().length >= 2);
-                    if (cells.length >= 2) multi++;
-                }
-                if (multi < 2) continue;
-                for (let j = i; j < rows.length; j++) {
-                    const r = rows[j];
-                    if (j > i) {
-                        if (r.y - rows[j - 1].y > 2.8 * Math.max(r.fh, rows[j - 1].fh)) break;
-                        const ss = r.segs[c] || [];
-                        const isPara = ss.length === 1 && (ss[0].x1 - ss[0].x0) >= 0.3 * W && txtOf(ss[0]).trim().length >= 40;
-                        if (isPara) break;
+            const r = rows[i];
+            let found = false;
+            for (const c in r.segs) {
+                for (const sg of r.segs[c]) {
+                    const t = txtOf(sg).trim();
+                    if (!/^(?:table|tbl|bảng|bang)\s*\.?\s*[0-9IVXivx]/i.test(t)) continue;
+                    let tableRowCount = 0;
+                    for (let j = i + 1; j < rows.length && j < i + 100; j++) {
+                        const rj = rows[j];
+                        if (rj.y - rows[j - 1].y > 3.0 * Math.max(rj.fh, rows[j - 1].fh)) break;
+                        let cellCount = 0, paraCount = 0;
+                        for (const cc in rj.segs) {
+                            rj.segs[cc].forEach(s => {
+                                if (isCell(s)) cellCount++;
+                                else if (isParaSeg(s)) paraCount++;
+                            });
+                        }
+                        if (cellCount >= 2 && paraCount === 0) tableRowCount++;
                     }
-                    r.it.forEach(d => { if (colOf(d) === +c) out.add(d.idx); });
+                    if (tableRowCount < 2) continue;
+                    let endRow = rows.length;
+                    for (let j = i + 1; j < rows.length; j++) {
+                        const rj = rows[j];
+                        if (rj.y - rows[j - 1].y > 3.0 * Math.max(rj.fh, rows[j - 1].fh)) { endRow = j; break; }
+                        let isBody = false;
+                        for (const cc in rj.segs) {
+                            if (rj.segs[cc].length === 1) {
+                                const sw = rj.segs[cc][0].x1 - rj.segs[cc][0].x0;
+                                if (sw >= 0.45 * W && txtOf(rj.segs[cc][0]).trim().length >= 80) { isBody = true; break; }
+                            }
+                        }
+                        if (isBody) { endRow = j; break; }
+                    }
+                    for (let j = i; j < endRow; j++) rows[j].it.forEach(d => out.add(d.idx));
+                    found = true;
+                    break;
                 }
+                if (found) break;
             }
-        }
-        // (2) [sửa] KHÔNG dò bảng "không có nhãn" bằng hình học nữa: dễ nhầm khung hình / danh sách nhiều cột
-        //     thành bảng và làm mất chữ thân bài. Chỉ loại bảng có nhãn Table/Tbl/Bảng rõ ràng.
-        //     (Bảng không nhãn hiếm; AI đã được dặn bỏ bảng, phần còn lại do phần trừ chú thích lo.)
-        const GEO_FALLBACK = false;
-        if (GEO_FALLBACK) {
-        const nc = G.length + 1;
-        for (let c = 0; c < nc; c++) {
-            const cand = [];
-            rows.forEach((r, i) => {
-                const sg = (r.segs[c] || []).filter(s => (s.x1 - s.x0) > 3 && (s.x1 - s.x0) <= 0.55 * W && txtOf(s).trim().length <= 52 && !isMarker(s));
-                if (sg.length >= 2) cand.push({ i: i, sg: sg });
-            });
-            let run = [];
-            const flush = () => {
-                if (run.length >= 4) {
-                    const xs = []; run.forEach(r => r.sg.forEach(s => xs.push(s.x0)));
-                    xs.sort((a, b) => a - b);
-                    const grp = []; xs.forEach(x => { const g = grp[grp.length - 1]; if (g && x - g[g.length - 1] <= 4) g.push(x); else grp.push([x]); });
-                    const strong = grp.filter(g => g.length >= Math.max(3, Math.ceil(run.length * 0.6)));
-                    if (strong.length >= 2) run.forEach(r => rows[r.i].it.forEach(d => { if (colOf(d) === c) out.add(d.idx); }));
-                }
-                run = [];
-            };
-            cand.forEach(x => { if (run.length && x.i - run[run.length - 1].i > 3) flush(); run.push(x); });
-            flush();
-        }
+            if (found) break;
         }
         return out;
     }
@@ -29867,10 +29857,10 @@ body {
             });
             let left = 0; segs.forEach(s => { left += s[1] - s[0]; });
             /* Phần chữ thân thật sự nằm trong khoảng hở (sau khi bỏ bảng / chú thích / rác) mới được nối.
-               - AI có báo ngắt: cho tối đa ~900 chữ (cột / trang), ~600 chữ (bị bảng chen).
-               - AI không báo ngắt: chỉ nối khi hở rất ít (≤64 chữ) — đúng kiểu "đứt" vài chữ ở mép cột. */
-            if (!known && left > 64) continue;
-            if (left > (cont === 'gap' ? 600 : 900)) continue;
+               - AI có báo ngắt: cho tối đa ~1400 chữ (cột / trang), ~1200 chữ (bị bảng chen).
+               - AI không báo ngắt: chỉ nối khi hở rất ít (≤400 chữ) — đúng kiểu "đứt" vài chữ ở mép cột. */
+            if (!known && left > 400) continue;
+            if (left > (cont === 'gap' ? 1200 : 1400)) continue;
             segs.forEach(s => { if (s[1] > s[0]) nr.push(s); });
         }
         if (!nr.length) return false;
