@@ -29582,17 +29582,37 @@ body {
         }
         return best;
     }
-    function findFirst(h, P, minN) {   // đầu mục: tiêu đề + chữ liền sau (tránh nhầm với dòng trùng tên trong outline / thân bài)
-        const tn = P.tn, keys = [];
+    let ffEnd = -1;   // điểm cuối (chỉ số chuẩn hóa) của đầu mục vừa tìm được bởi findFirst
+    const STRIP3 = /[0-9fts]/g;
+    /* Đầu mục = chỗ khớp TIÊU ĐỀ. Gom MỌI chỗ khớp (so khớp bỏ f/t/s nên chịu được chữ ghép Th/ff/fi/fl và chữ 's' mất ở font tiêu đề),
+       rồi chấm điểm: (1) chữ đứng ngay sau chỗ khớp phải giống chữ AI chép tiếp theo (loại caption / dòng trùng tên), (2) nằm ở đầu dòng. */
+    function findFirst(h, P, minN) {
+        ffEnd = -1;
+        const g = gnorm(), tn = P.tn, keys = [];
         if (tn.length < 30 && h._ntn) keys.push((tn + h._ntn).slice(0, 44));   // tiêu đề trơ trọi: ghép chữ đầu của mục kế tiếp
         keys.push(tn.slice(0, 44));
         if (tn.length > 26) keys.push(tn.slice(0, 26));
-        for (let pass = 0; pass < 2; pass++) {   // lượt 1: chỉ nhận chỗ khớp ở đầu dòng (đúng là tiêu đề); lượt 2: cho phép giữa đoạn
-            for (const key of keys) {
-                if (key.length < 3) continue;
-                const p = locKey(key, P.page, minN, pass === 0);
-                if (p >= 0) return p;
+        const fullRaw = (h.parts || []).map(x => bkNormStr(x.text)).join('');
+        const full = fullRaw.replace(STRIP3, '');
+        if (fullRaw.length > tn.length) keys.unshift(fullRaw.slice(0, Math.min(44, Math.max(tn.length + 14, 24))));   // tiêu đề + chữ ngay sau: tránh nhầm với chỗ trùng tên
+        const lb = (arr, v) => { let l = 0, hh = arr.length; while (l < hh) { const m = (l + hh) >> 1; if (arr[m] < v) l = m + 1; else hh = m; } return l; };
+        const lo = Math.max(minN, pageNormRange(P.page - 1)[0]), hi = pageNormRange(P.page + 1)[1];
+        for (const key of keys) {
+            const k3 = key.replace(STRIP3, ''); if (k3.length < 6) continue;
+            let best = -1, bestSc = -1, bestEnd = -1;
+            let q = g.n3.indexOf(k3, lb(g.m3, lo));
+            while (q >= 0 && g.m3[q] < hi) {
+                let a = g.m3[q], b = g.m3[q + k3.length - 1] + 1;
+                while (a > 0 && STRIP3.test(g.n[a - 1]) && g.map[a] - g.map[a - 1] === 1) { a--; STRIP3.lastIndex = 0; }
+                STRIP3.lastIndex = 0;
+                while (b < g.n.length && /[0-9fts]/.test(g.n[b]) && g.map[b] - g.map[b - 1] === 1) b++;
+                let m = 0; const L = Math.min(full.length, 80);
+                while (m < L && g.n3[q + m] === full[m]) m++;   // chữ AI chép tiếp theo có đúng là chữ đứng sau chỗ khớp?
+                const sc = m + (bkLineStart(bkText, g.map[a]) ? 25 : 0);
+                if (sc > bestSc) { bestSc = sc; best = a; bestEnd = b; }
+                q = g.n3.indexOf(k3, q + 1);
             }
+            if (best >= 0) { ffEnd = bestEnd; return best; }
         }
         return -1;
     }
@@ -29688,7 +29708,7 @@ body {
                 else if (cursor < 0) a = locKey(key, P.page, minN, false);
                 else a = findNear(key, cursor, ci === 0 ? P.page : 0, ci === 0 ? 30000 : 8000);
                 if (a < 0) { salv(key, 0, chunks[ci][0]); continue; }
-                const b = a + key.length;
+                const b = (pi === 0 && ci === 0 && ffEnd > a) ? ffEnd : a + key.length;
                 if (prev && a >= prev.b) {   // lấp chỗ trống do đoạn ở giữa không khớp (AI chép sai vài chữ)
                     const gap = a - prev.b, skip = ci - prev.ci - 1;
                     if ((skip === 0 && gap <= 6) || (skip > 0 && gap <= skip * CL * 1.6 + 30)) nr.push([prev.b, a]);
@@ -29744,7 +29764,8 @@ body {
             else if (l && !/[0-9A-Za-z\u00C0-\u1EF9]/.test(bkText.slice(l[1], r[0]))) l[1] = r[1];
             else rg.push([r[0], r[1]]);
         });
-        rg.forEach(r => { while (r[1] < len && /[.,;:!?)\]"”'’]/.test(bkText[r[1]])) r[1]++; });   // lấy luôn dấu câu liền sau chữ cuối
+        rg.forEach(r => { while (r[1] < len && /[.,;:!?)\]"”'’\uFEFF\u200B\u00AD]/.test(bkText[r[1]])) r[1]++; });   // lấy luôn dấu câu / ký tự giữ chỗ vô hình (chữ ghép PDF bị mất, vd 's' cuối tiêu đề) liền sau chữ cuối
+        rg.forEach(r => { while (r[0] > 0 && /[\uFEFF\u200B\u00AD]/.test(bkText[r[0] - 1])) r[0]--; });
         const startRaw = g.map[startN];
         const s0 = backUpPrefix(startRaw);
         h.pos = s0; h.cov = Math.round(cov * 100) / 100;
