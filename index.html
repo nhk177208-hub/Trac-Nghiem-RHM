@@ -1245,7 +1245,7 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
 
     <style id="rhm-topbar-css">
         /* ===== TOP BAR (kiểu GitHub) ===== */
-        .rhm-tbwrap{position:sticky;top:0;z-index:40;background:#f3f4f6}
+        .rhm-tbwrap{position:fixed;top:0;left:0;right:0;z-index:40;background:#f3f4f6}
         .rhm-tbin{max-width:99%;margin:0 auto;padding:8px 8px 0;box-sizing:border-box}
         @media (min-width:640px){.rhm-tbin{padding:8px 12px 0}}
         .rhm-tb{display:flex;align-items:center;gap:12px;height:56px;padding:0 12px;box-sizing:border-box;
@@ -1292,7 +1292,10 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
         /* nền liền mạch: topbar hòa chung nền trang */
         html,body.bg-gray-100{background-color:#f6f8fa!important}
         .rhm-tbwrap{background:#f6f8fa!important}
-        .rhm-tb{background:transparent!important;border:0!important;border-radius:0!important}
+        .rhm-tb{background:transparent!important;border:0!important;border-radius:0!important;padding:0!important}
+        /* khoảng đệm bằng đúng chiều cao topbar (topbar cố định nên không chiếm chỗ trong luồng trang) */
+.rhm-tbspacer{height:64px;width:100%;pointer-events:none}
+        @media (max-width:639px){.rhm-tbspacer{height:60px}}
         /* ===== SIDEBAR (kiểu GitHub) ===== */
         .rhm-sb-back{position:fixed;inset:0;z-index:100140;background:rgba(27,31,36,.5);opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}
         .rhm-sb-back.open{opacity:1;visibility:visible}
@@ -1303,13 +1306,16 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
         .rhm-sb.open{transform:none;visibility:visible}
         .rhm-sb.noanim,.rhm-sb-back.noanim{transition:none!important}
         .rhm-sb-head{display:flex;align-items:center;justify-content:space-between;padding:12px 12px 4px 16px;flex:0 0 auto}
-        .rhm-sb-head b{font-size:15px;font-weight:700;color:#59636e}
+        .rhm-sb-brand{display:flex;align-items:center;gap:10px;min-width:0}
+        .rhm-sb-head b{font-size:17px;font-weight:800;color:#1f2328;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
         .rhm-sb-x{width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:8px;background:transparent;color:#59636e;cursor:pointer;font-size:20px;line-height:1}
         .rhm-sb-x:hover{background:#eaeef2}
         .rhm-sb-body{flex:1 1 auto;overflow-y:auto;padding:4px 12px 12px;display:flex;flex-direction:column;gap:10px;-webkit-overflow-scrolling:touch}
-        .rhm-sb-home{display:flex;align-items:center;gap:12px;width:100%;min-height:52px;padding:8px 10px;border:0;border-radius:12px;background:transparent;
-            font:inherit;font-size:16px;font-weight:700;color:#1f2328;cursor:pointer;text-align:left}
-        .rhm-sb-home:hover{background:#eaeef2}
+        .rhm-sb-home{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;padding:12px 14px;border:0;border-radius:12px;
+            background:linear-gradient(90deg,#2563eb,#0ea5e9);font:inherit;font-size:16px;font-weight:700;line-height:1.25;color:#fff;cursor:pointer;
+            box-shadow:0 1px 2px rgba(0,0,0,.12);transition:filter .15s}
+        .rhm-sb-home:hover{filter:brightness(.92)}
+        .rhm-sb-home:active{filter:brightness(.85)}
         .rhm-sb-logo{width:36px;height:36px;border-radius:10px;object-fit:cover;background:#fff;border:1px solid rgba(31,35,40,.12);flex:0 0 auto;display:block}
         .rhm-sb-nav{display:flex;flex-direction:column;gap:10px}
         .rhm-sb-nav>button.rhm-sb-item{width:100%;min-height:52px;display:flex!important;align-items:center;justify-content:center;gap:8px;
@@ -1322,9 +1328,9 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
         .rhm-bye button{padding:12px 22px;border:0;border-radius:12px;background:#0969da;color:#fff;font:inherit;font-weight:700;font-size:16px;cursor:pointer}
         html.yt-lock .rhm-sb,html.yt-lock .rhm-sb-back{display:none!important}
         /* ẨN top bar khi ở chế độ nhà hát (rạp) hoặc video toàn màn hình */
-        html.yt-lock .rhm-tbwrap,
-        html:has(.custom-yt-wrapper.theater-mode) .rhm-tbwrap,
-        html:has(.custom-yt-wrapper.yt-fs) .rhm-tbwrap{display:none !important}
+        html.yt-lock .rhm-tbwrap,html.yt-lock .rhm-tbspacer,
+        html:has(.custom-yt-wrapper.theater-mode) .rhm-tbwrap,html:has(.custom-yt-wrapper.theater-mode) .rhm-tbspacer,
+        html:has(.custom-yt-wrapper.yt-fs) .rhm-tbwrap,html:has(.custom-yt-wrapper.yt-fs) .rhm-tbspacer{display:none !important}
     </style>
 </head>
 <body class="bg-gray-100 min-h-screen font-sans text-gray-800" onload="initApp()" oncontextmenu="return false;">
@@ -1494,16 +1500,17 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
     };
 })();
 </script>
+<div class="rhm-tbspacer" id="rhmTbSpacer" aria-hidden="true"></div>
 <!-- ===== SIDEBAR ===== -->
 <div class="rhm-sb-back" id="rhmSbBack"></div>
 <aside class="rhm-sb" id="rhmSb" aria-hidden="true" aria-label="Menu">
-    <div class="rhm-sb-head"><b>Menu</b><button type="button" class="rhm-sb-x" id="rhmSbX" aria-label="Đóng menu" title="Đóng">&#10005;</button></div>
+    <div class="rhm-sb-head"><span class="rhm-sb-brand"><img class="rhm-sb-logo" data-rhm-logo alt="" draggable="false"><b>Trắc Nghiệm RHM</b></span><button type="button" class="rhm-sb-x" id="rhmSbX" aria-label="Đóng menu" title="Đóng">&#10005;</button></div>
     <div class="rhm-sb-body">
-        <button type="button" class="rhm-sb-home" id="rhmSbHome"><img class="rhm-sb-logo" data-rhm-logo alt="" draggable="false"><span>Trang chủ</span></button>
+        <button type="button" class="rhm-sb-home" id="rhmSbHome" title="Về trang chủ"><span aria-hidden="true">🏠</span><span>Về Trang Chủ</span></button>
         <div class="rhm-sb-nav" id="rhmSbNav">
-        <button onclick="openCollectionModal()" class="rhm-sb-item hb-badge text-sm bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm">🏆 Bộ Sưu Tập Huy Hiệu <span id="home-emblem-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
-        <button onclick="openRhmDict()" class="rhm-sb-item text-sm bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm" title="Từ điển thuật ngữ RHM — tự thêm khi bạn dịch trong hộp chat đọc sách">📖 Từ Điển RHM <span id="rhm-dict-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
-        <button onclick="openRhmNote()" class="rhm-sb-item text-sm text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm" style="background:linear-gradient(90deg,#0d9488,#059669)" title="Sổ ghi chú — lưu từ các bong bóng chat AI">📒 Sổ Ghi Chú <span id="rhm-note-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
+        <button onclick="openCollectionModal()" class="rhm-sb-item hb-badge text-sm bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm">🏆 Bộ Sưu Tập <span id="home-emblem-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
+        <button onclick="openRhmDict()" class="rhm-sb-item text-sm bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm" title="Từ điển thuật ngữ RHM — tự thêm khi bạn dịch trong hộp chat đọc sách">📖 Từ Điển <span id="rhm-dict-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
+        <button onclick="openRhmNote()" class="rhm-sb-item text-sm text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm" style="background:linear-gradient(90deg,#0d9488,#059669)" title="Ghi chú — lưu từ các bong bóng chat AI">📝 Ghi Chú <span id="rhm-note-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
         <button onclick="openHomeSettings()" class="rhm-sb-item hb-set text-sm bg-gradient-to-r from-slate-500 via-gray-500 to-zinc-600 hover:from-slate-600 hover:via-gray-600 hover:to-zinc-700 text-white font-bold py-2.5 px-4 rounded-xl border border-slate-400/40 shadow-sm transition-all">⚙️ Cài Đặt</button>
         </div>
     </div>
@@ -13851,7 +13858,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
                     <p id="ai-live-status" class="text-xs text-gray-500 truncate">Chat hoặc nói trực tiếp (Gemini)</p>
                 </div>
                 <div class="flex items-center gap-1 shrink-0">
-                    <button id="ai-enwin-hbtn" type="button" onclick="aiHdrSecBtn()" class="ai-enwin-off text-xs font-extrabold px-2.5 py-1.5 rounded-full border border-indigo-300 bg-white text-indigo-700 shrink-0 mr-1" title="Ẩn/hiện cửa sổ trắc nghiệm"><span id="ai-enwin-lbl">❓ Trắc nghiệm</span></button><button id="ai-dict-hbtn" type="button" onclick="openRhmDict()" class="ai-hb2 mr-1" title="Mở Từ điển RHM">📖<span class="hb-t"> Từ điển</span></button><button id="ai-note-hbtn" type="button" onclick="openRhmNote()" class="ai-hb2 mr-1" title="Mở Sổ ghi chú">📒<span class="hb-t"> Ghi chú</span></button>
+                    <button id="ai-enwin-hbtn" type="button" onclick="aiHdrSecBtn()" class="ai-enwin-off text-xs font-extrabold px-2.5 py-1.5 rounded-full border border-indigo-300 bg-white text-indigo-700 shrink-0 mr-1" title="Ẩn/hiện cửa sổ trắc nghiệm"><span id="ai-enwin-lbl">❓ Trắc nghiệm</span></button><button id="ai-dict-hbtn" type="button" onclick="openRhmDict()" class="ai-hb2 mr-1" title="Mở Từ điển RHM">📖<span class="hb-t"> Từ điển</span></button><button id="ai-note-hbtn" type="button" onclick="openRhmNote()" class="ai-hb2 mr-1" title="Mở Ghi chú">📝<span class="hb-t"> Ghi chú</span></button>
                     <div id="ai-lang-box" class="flex items-center rounded-full border border-indigo-300 overflow-hidden shrink-0 mr-1" title="Ngôn ngữ chat (chọn cả hai = song ngữ)">
                         <button id="ai-lang-vie" type="button" onclick="aiLangToggle('vi')" class="text-xs font-extrabold px-2.5 py-1.5 bg-indigo-600 text-white">Vie</button>
                         <button id="ai-lang-eng" type="button" onclick="aiLangToggle('en')" class="text-xs font-extrabold px-2.5 py-1.5 bg-white text-gray-500">Eng</button>
@@ -20167,7 +20174,7 @@ if (t.d) fcStep(1);
 #dict-modal .rd-spk svg{width:15px;height:15px}
 #dict-modal .rd-tip{pointer-events:auto;max-height:none;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y}
 #dict-modal .rd-tip .rd-imgs img{max-height:200px}
-/* ===== Sổ ghi chú ===== */
+/* ===== Ghi chú ===== */
 .nt-it{padding:10px 6px;border-bottom:1px dashed rgba(40,90,80,.35);cursor:pointer;font-size:clamp(13px,min(1.4vw,2.5vh),22px);line-height:1.35}
 .nt-it:hover{background:rgba(15,118,110,.08)}
 .nt-h{display:flex;align-items:center;gap:8px}
@@ -20377,7 +20384,7 @@ if (t.d) fcStep(1);
 #ai-dict-hbtn{background:#f5f3ff;color:#6d28d9;border-color:#c4b5fd}
 #ai-note-hbtn{background:#f0fdfa;color:#0f766e;border-color:#5eead4}
 @media (max-width:640px){.ai-hb2 .hb-t{display:none}.ai-hb2{padding:6px 8px}}
-/* ===== Sổ ghi chú v2 ===== */
+/* ===== Ghi chú v2 ===== */
 #note-modal .nt-cap{display:flex;align-items:baseline;gap:10px;padding:6px 0 4px;border-bottom:2px solid rgba(15,118,110,.35)}
 #note-modal .nt-dc{font-family:Georgia,'Times New Roman',serif;font-weight:900;color:#0f766e;font-size:clamp(30px,min(3.9vw,6vh),58px);line-height:1}
 #note-modal .nt-cn{font-weight:800;color:#115e59;font-size:clamp(13px,1.5vw,20px)}
@@ -20503,11 +20510,11 @@ if (t.d) fcStep(1);
         const T = nt.pages.length, tot = Math.max(T, 1), showHd = pos === 'L' || nt.per === 1;
         const fIds = nt.filterIds instanceof Set ? nt.filterIds : null;
         const totalShown = fIds ? fIds.size : nt.notes.length;
-        const backBtn = fIds ? '<button type="button" class="rd-bdg" data-act="n-clrfilter" style="background:#dc2626;color:#fff;border:0;cursor:pointer;font-weight:800" title="Bỏ lọc chủ đề, trở về toàn bộ sổ ghi chú">↩ Trở về</button>' : '';
+        const backBtn = fIds ? '<button type="button" class="rd-bdg" data-act="n-clrfilter" style="background:#dc2626;color:#fff;border:0;cursor:pointer;font-weight:800" title="Bỏ lọc chủ đề, trở về toàn bộ ghi chú">↩ Trở về</button>' : '';
         const topicChip = (fIds && nt.filterTopic) ? '<div class="rd-subtopic-row"><span class="rd-subtopic-tag">🧭 Chủ đề: ' + esc(capFirst(nt.filterTopic)) + '</span></div>' : '';
         const edActs = nt.edId ? '<div class="nt-ed-acts"><button type="button" class="nt-ed-btn" data-act="n-imgpick">🖼️<span class="nt-lbl"> Thêm ảnh</span></button><button type="button" class="nt-ed-btn pri" data-act="ed-save">Lưu</button><button type="button" class="nt-ed-btn" data-act="ed-cancel">Hủy</button><button type="button" class="nt-ed-btn dan" data-act="ed-del">Xóa</button></div>' : '';
-        const hd = showHd ? '<div class="rd-hd' + (topicChip ? ' has-sub' : '') + '"><div class="rd-hd-top"><span class="rd-ttl">Sổ ghi chú</span><span class="rd-bdg">Tổng ' + totalShown + ' · trang ' + Math.min(i + 1, tot) + '/' + tot + '</span>' + backBtn + edActs + '</div>' + topicChip + '</div>' : '';
-        if (T === 0) return i === 0 ? hd + '<div class="rd-body"><div class="rd-empty">Sổ ghi chú còn trống.<br>Trong hộp chat AI, bấm 📒 Lưu ghi chú ở cuối bong bóng (hoặc bôi đen một đoạn rồi bấm 📒 Lưu ghi chú) để lưu vào đây.</div></div>' : '<div class="rd-body"></div>';
+        const hd = showHd ? '<div class="rd-hd' + (topicChip ? ' has-sub' : '') + '"><div class="rd-hd-top"><span class="rd-ttl">Ghi chú</span><span class="rd-bdg">Tổng ' + totalShown + ' · trang ' + Math.min(i + 1, tot) + '/' + tot + '</span>' + backBtn + edActs + '</div>' + topicChip + '</div>' : '';
+        if (T === 0) return i === 0 ? hd + '<div class="rd-body"><div class="rd-empty">Ghi chú còn trống.<br>Trong hộp chat AI, bấm 📝 Lưu ghi chú ở cuối bong bóng (hoặc bôi đen một đoạn rồi bấm 📝 Lưu ghi chú) để lưu vào đây.</div></div>' : '<div class="rd-body"></div>';
         if (i < 0 || i >= T) return hd + '<div class="rd-body"></div>';
         return hd + '<div class="rd-body' + (nt.edId ? ' nt-scroll' : '') + '">' + nt.pages[i].map(itemHTML).join('') + '</div><div class="rd-ft">Trang ' + (i + 1) + '</div>';
     }
@@ -20629,7 +20636,7 @@ function moveEdActs() {
         });
         return { flat, segs };
     }
-    /* ===== Sổ ghi chú · chế độ đọc (không cần bấm Sửa): bôi đen → 🌐 Dịch · 📖 Thêm từ điển · 📝 Ghi chú nhanh · 🖍 Highlight, lưu thẳng vào ghi chú ===== */
+    /* ===== Ghi chú · chế độ đọc (không cần bấm Sửa): bôi đen → 🌐 Dịch · 📖 Thêm từ điển · 📝 Ghi chú nhanh · 🖍 Highlight, lưu thẳng vào ghi chú ===== */
     let nrdBar = null, nrdQ = null, nrdCtx = null, nrdQMode = null;
     function nrdMap(pi) {   // vị trí ký tự hiển thị trên trang → vị trí trong chuỗi ghi chú (n.b)
         const seg = pi.n.b.slice(pi.a, pi.b == null ? pi.n.b.length : pi.b);
@@ -20822,7 +20829,7 @@ function moveEdActs() {
         if (!nrdQMode || !nrdQ || nrdQ.contains(e.target)) return;
         nrdQSave();
     }, true);
-    document.addEventListener('click', function (e) {   // bấm vào 📝 trong sổ ghi chú: mở bong bóng để xem / sửa / xóa
+    document.addEventListener('click', function (e) {   // bấm vào 📝 trong ghi chú: mở bong bóng để xem / sửa / xóa
         const t = e.target, sp = t && t.closest ? t.closest('#nt-book .nt-qnote') : null;
         if (!sp || nt.edId) return;
         const bA = sp.closest('.nt-b'), it = bA ? nrdItem(bA) : null;
@@ -21082,7 +21089,7 @@ function moveEdActs() {
         nt.isNew = true; nt.ed = n; nt.editIm = [];
         paintThumbs();
     }
-    /* ===== Tô đen trong Sổ ghi chú (giống trình đọc sách): Dịch · Thêm từ điển · Ghi chú nhanh (bong bóng như từ điển) · Highlight ===== */
+    /* ===== Tô đen trong Ghi chú (giống trình đọc sách): Dịch · Thêm từ điển · Ghi chú nhanh (bong bóng như từ điển) · Highlight ===== */
     (function () {
         const ncss = document.createElement('style');
         ncss.textContent = '#nt-selbar{position:fixed;z-index:100060;display:none;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:calc(100vw - 16px)}'
@@ -21108,7 +21115,7 @@ function moveEdActs() {
             nBar.addEventListener('mousedown', function (e) { e.preventDefault(); });
             nBar.addEventListener('click', function (e) { e.stopPropagation(); });
             nBar.querySelector('.n-tr').onclick = function () { const t = nTxt; nHide(); if (t) aiQuick('Dịch sang tiếng Việt, giữ nguyên thuật ngữ chuyên môn, rồi giải thích ngắn gọn đoạn sau:\n"' + t + '"'); };
-            nBar.querySelector('.n-dc').onclick = function () { const t = nTxt; nHide(); if (t && window.rhmDictAddWord) window.rhmDictAddWord(t.replace(/\s+/g, ' ').trim(), 'Sổ ghi chú RHM'); };
+            nBar.querySelector('.n-dc').onclick = function () { const t = nTxt; nHide(); if (t && window.rhmDictAddWord) window.rhmDictAddWord(t.replace(/\s+/g, ' ').trim(), 'Ghi chú RHM'); };
             nBar.querySelector('.n-nt').onclick = function () { nNewNote(); };
             nBar.querySelector('.n-hl').onclick = function () { nToggle(); };
             nBar.querySelector('.n-un').onclick = function () { nDelHl(); };
@@ -21341,12 +21348,12 @@ function moveEdActs() {
         nt.filterTopic = '';
         nt.cur = 0;
         repaginate(null);
-        toast('Đã trở về toàn bộ sổ ghi chú');
+        toast('Đã trở về toàn bộ ghi chú');
     }
     async function topicSearch() {
         const inp = $('nt-in-q'), box = $('nt-sres'); if (!inp) return;
         const topic = inp.value.trim(); if (!topic) { toast('Hãy nhập chủ đề cần tìm'); return; }
-        if (!nt.notes.length) { if (box) box.innerHTML = '<div class="rd-hint">Sổ ghi chú chưa có ghi chú nào.</div>'; return; }
+        if (!nt.notes.length) { if (box) box.innerHTML = '<div class="rd-hint">Ghi chú chưa có ghi chú nào.</div>'; return; }
         const kw = () => { const toks = fold(topic).split(/[^a-z0-9]+/).filter(x => x.length >= 2); return nt.notes.filter(n => { const f = fold(n.t + ' ' + n.cat + ' ' + n.b); return toks.some(x => f.includes(x)); }); };
         let out = [];
         if (aiOk()) {
@@ -21442,7 +21449,7 @@ function moveEdActs() {
     async function rvStart() {
         if (rv.busy) return; const st = $('rv-st'), say = m => { if (st) st.textContent = m; };
         const tp = $('rv-topic'), nn = $('rv-n'); rv.topic = tp ? tp.value.trim() : ''; rv.n = nn ? nn.value : '';
-        if (!nt.notes.length) { toast('Sổ ghi chú còn trống'); return; }
+        if (!nt.notes.length) { toast('Ghi chú còn trống'); return; }
         if (!aiOk()) { if (typeof aiShowGate === 'function' && typeof aiAnyKey === 'function' && !aiAnyKey()) aiShowGate(); else toast('Chưa có AI để tạo câu hỏi'); return; }
         const topic = rv.src === 'topic' ? rv.topic : ''; if (rv.src === 'topic' && !topic) { toast('Hãy nhập chủ đề cần ôn'); return; }
         const pool = topic ? topicNotes(topic) : nt.notes; let N;
@@ -21512,7 +21519,7 @@ function moveEdActs() {
         if (b._tr) { const r = b._tr; return (r.bi ? r.bi.map(p => (p.vi || '')).join('\n\n') : String(r.t || '')).trim(); }
         const hid = []; b.querySelectorAll('.' + BAR + ',.ai-ttsbar,.ai-actrow,.ai-refbar,.ai-liverefs,.ai-dr-refs,.ai-dr-note,.ai-quota-hint,.ai-imgwrap').forEach(x => { hid.push([x, x.style.display]); x.style.display = 'none'; });
         let t = ''; const _hd = []; try { b.querySelectorAll('.ai-bi-h').forEach(x => { _hd.push([x, x.style.display]); x.style.display = 'none'; }); b.querySelectorAll('.ai-bi-c').forEach(c => { const h = c.querySelector(':scope > .ai-bi-h'); if (h && /ENG/.test(h.textContent)) { _hd.push([c, c.style.display]); c.style.display = 'none'; } }); t = (b.innerText || b.textContent || '').trim(); } catch (e) {} _hd.forEach(h => { h[0].style.display = h[1]; });
-        hid.forEach(h => { h[0].style.display = h[1]; }); return t.replace(/\s*📒 Lưu (?:ghi chú|cả \d+ phần vừa dịch)/g, '').trim();
+        hid.forEach(h => { h[0].style.display = h[1]; }); return t.replace(/\s*(?:📒|📝) Lưu (?:ghi chú|cả \d+ phần vừa dịch)/g, '').trim();
     }
     async function aiTitle(n) {
         try {
@@ -21528,7 +21535,7 @@ function moveEdActs() {
         const body = (sel || bubs.map(bubbleText).filter(Boolean).join('\n\n')).slice(0, 20000);
         if (!body) { toast('Chưa có nội dung để lưu'); return; }
         const n = { id: 'n' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), t: quickTitle(body), b: body, ts: Date.now(), c: ctxNow(bubs[0]), cat: '', im: [] };
-        nt.notes.push(n); save(); toast('📒 Đã lưu vào Sổ ghi chú'); aiTitle(n);
+        nt.notes.push(n); save(); toast('📝 Đã lưu vào Ghi chú'); aiTitle(n);
         if (isOpen()) repaginate(n.id);
     }
 
@@ -21536,7 +21543,7 @@ function moveEdActs() {
         const body = String(text || '').trim().slice(0, 20000);
         if (!body) { toast('Chưa có nội dung để lưu'); return; }
         const n = { id: 'n' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), t: quickTitle(body), b: body, ts: Date.now(), c: ctx || ctxNow(null), cat: '', im: [] };
-        nt.notes.push(n); save(); toast('📒 Đã lưu vào Sổ ghi chú'); aiTitle(n);
+        nt.notes.push(n); save(); toast('📝 Đã lưu vào Ghi chú'); aiTitle(n);
         if (isOpen()) repaginate(n.id);
     };
     function selIn(b) {
@@ -21559,14 +21566,14 @@ function moveEdActs() {
             }
             if (bar.dataset.run !== want) {
                 bar.dataset.run = want;
-                bar.innerHTML = '<button type="button" data-nt="one">📒 Lưu ghi chú</button>' + (want ? '<button type="button" data-nt="run">📒 Lưu cả ' + want + ' phần vừa dịch</button>' : '');
+                bar.innerHTML = '<button type="button" data-nt="one">📝 Lưu ghi chú</button>' + (want ? '<button type="button" data-nt="run">📝 Lưu cả ' + want + ' phần vừa dịch</button>' : '');
             }
             if (bar.parentElement !== actRow || actRow.lastElementChild !== bar) actRow.appendChild(bar);
         });
     }
     let sb = null, selT = 0;
     function selBtn() {
-        if (sb) return sb; sb = document.createElement('button'); sb.type = 'button'; sb.id = 'nt-selbtn'; sb.textContent = '📒 Lưu ghi chú'; sb.style.display = 'none';
+        if (sb) return sb; sb = document.createElement('button'); sb.type = 'button'; sb.id = 'nt-selbtn'; sb.textContent = '📝 Lưu ghi chú'; sb.style.display = 'none';
         sb.addEventListener('mousedown', e => e.preventDefault());
         sb.addEventListener('click', () => { const b = sb._b, t = sb._t; sb.style.display = 'none'; try { getSelection().removeAllRanges(); } catch (e) {} if (b && t) saveFrom([b], t); });
         document.body.appendChild(sb); return sb;
@@ -21715,7 +21722,7 @@ function moveEdActs() {
         </div>
         <button type="button" id="rs-now" onclick="rhmSyncNow()" class="hidden w-full mt-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold py-2.5 px-4 rounded-xl border border-emerald-300 text-sm">🔄 Đồng bộ ngay</button>
         <button type="button" id="rs-undo" onclick="rhmSyncUndo()" class="hidden w-full mt-2 bg-amber-50 hover:bg-amber-100 text-amber-800 font-bold py-2.5 px-4 rounded-xl border border-amber-300 text-sm">↩️ Hoàn tác lần nhận dữ liệu gần nhất</button>
-        <p class="text-[11px] text-gray-500 mt-3 leading-relaxed">Được đồng bộ: điểm, sao, huy hiệu, thư mục, câu đã lưu / chặn, độ khó, kỷ lục bộ đề, tiến độ video, sổ ghi chú, từ điển, ghi chú &amp; highlight sách. Cả <b>khóa API</b> (Gemini, OpenRouter) cũng tự đồng bộ khi bạn đăng nhập, nên máy mới không phải dán lại khóa (nút “Xóa khóa” chỉ xóa trên máy đang dùng). Dữ liệu nằm trong thư mục ẩn của app trên Google Drive (không lẫn với file của bạn); app chỉ truy cập được thư mục đó.</p>
+        <p class="text-[11px] text-gray-500 mt-3 leading-relaxed">Được đồng bộ: điểm, sao, huy hiệu, thư mục, câu đã lưu / chặn, độ khó, kỷ lục bộ đề, tiến độ video, ghi chú, từ điển, ghi chú &amp; highlight sách. Cả <b>khóa API</b> (Gemini, OpenRouter) cũng tự đồng bộ khi bạn đăng nhập, nên máy mới không phải dán lại khóa (nút “Xóa khóa” chỉ xóa trên máy đang dùng). Dữ liệu nằm trong thư mục ẩn của app trên Google Drive (không lẫn với file của bạn); app chỉ truy cập được thư mục đó.</p>
     </div>
 </div>
 <script>
@@ -22360,7 +22367,7 @@ var DOMAINS = [A_PROG, A_VIDEO, A_NOTES, A_DICT, A_ANN, A_KEYS];
         if (needReload.length && !reloadAsked && typeof window.appConfirm === 'function') {
             reloadAsked = true; needReload.forEach(function (ad) { staleTomb[ad.id] = true; });
             setTimeout(function () {
-                window.appConfirm('Đã nhận sổ ghi chú / từ điển / highlight mới từ thiết bị khác. Tải lại trang để hiển thị đầy đủ?', function (ok) {
+                window.appConfirm('Đã nhận ghi chú / từ điển / highlight mới từ thiết bị khác. Tải lại trang để hiển thị đầy đủ?', function (ok) {
                     if (ok) location.reload(); else { reloadAsked = false; }
                 });
             }, 600);
@@ -22564,7 +22571,7 @@ var DOMAINS = [A_PROG, A_VIDEO, A_NOTES, A_DICT, A_ANN, A_KEYS];
 /* Nút "Xem thuật ngữ mới" ở TRANG 2: canh lề trái bằng với chữ của trang phải */
 #dict-modal .rd-pg.rd-R .rd-hd.rd-hd-chip{left:var(--bm-i);right:var(--bm-o)}
 #dict-modal .rd-pg .rd-ft,#note-modal .rd-pg .rd-ft{left:0;right:0;text-align:center;bottom:calc(var(--bm-b) / 2 - 9px)}
-/* ===== Sổ ghi chú: hiển thị đủ nội dung (tràn sang trang kế), dropcap theo môn học cách 1 dòng ===== */
+/* ===== Ghi chú: hiển thị đủ nội dung (tràn sang trang kế), dropcap theo môn học cách 1 dòng ===== */
 .nt-b,#note-modal .nt-b{display:block!important;-webkit-line-clamp:unset!important;line-clamp:unset!important;overflow:visible!important}
 #note-modal .nt-cap{font-size:calc(clamp(13px,min(1.4vw,2.5vh),22px) * var(--nt-fs,1));margin-bottom:1.5em}
 #note-modal .nt-mid{border-bottom:none!important}
@@ -22591,7 +22598,7 @@ var DOMAINS = [A_PROG, A_VIDEO, A_NOTES, A_DICT, A_ANN, A_KEYS];
         } catch (e) {}
         return (window.innerWidth < 760 || portrait || (coarse && small)) ? 1 : 2;
     };
-    /* Từ điển / Sổ ghi chú mở trên hộp chat: chặn mọi chạm lọt xuống nền phía sau */
+    /* Từ điển / Ghi chú mở trên hộp chat: chặn mọi chạm lọt xuống nền phía sau */
     var IDS = ['dict-modal', 'note-modal'], held = [];
     var shown = function (m) { return !!m && !m.classList.contains('hidden'); };
     function isolate(on) {
@@ -22920,15 +22927,15 @@ function viSelText(range) {
     return out.join('');
   }
   function exportNotesWord() {
-    var N = rdGet(NK); if (!N.length) { toastM('Sổ ghi chú đang trống'); return; }
+    var N = rdGet(NK); if (!N.length) { toastM('Ghi chú đang trống'); return; }
     var body = N.slice().sort(function (a, b) { return (a.cat || '').localeCompare(b.cat || '', 'vi') || (b.ts || 0) - (a.ts || 0); }).map(function (n) {
       return '<h2>' + esc(n.t || 'Ghi chú') + '</h2><p class="meta">Phân mục: ' + esc(n.cat || 'Chưa phân mục') +
         ' | Tạo lúc: ' + esc(new Date(n.ts || 0).toLocaleString('vi-VN')) + '</p>' + bodyHtml(n.b, n.im);
     }).join('');
-    var html = docHead('Sổ ghi chú RHM') + '<h1>Sổ ghi chú RHM</h1><p class="sub">Tổng cộng ' + N.length +
+    var html = docHead('Ghi chú RHM') + '<h1>Ghi chú RHM</h1><p class="sub">Tổng cộng ' + N.length +
       ' ghi chú · xuất ngày ' + new Date().toLocaleDateString('vi-VN') + '</p>' + body + '<\/body><\/html>';
     saveBlob('\ufeff' + html, 'so-ghi-chu-rhm_' + stamp() + '.doc', 'application/msword');
-    toastM('Đã xuất Word sổ ghi chú');
+    toastM('Đã xuất Word ghi chú');
   }
 
   /* ---------- JSON ---------- */
@@ -22942,13 +22949,13 @@ function viSelText(range) {
     toastM('Đã xuất JSON từ điển');
   }
   function exportNotesJSON() {
-    var N = rdGet(NK); if (!N.length) { toastM('Sổ ghi chú đang trống'); return; }
+    var N = rdGet(NK); if (!N.length) { toastM('Ghi chú đang trống'); return; }
     var M = metaGet();
     var out = { app: 'Trac Nghiem RHM', type: 'so-ghi-chu-rhm', v: 1, count: N.length, cats: M.cats || [], notes: N.map(function (n) {
       return { id: n.id, t: n.t, b: n.b, ts: n.ts || 0, c: n.c || null, cat: n.cat || '', im: imgsOK(n.im), tu: n.tu ? 1 : 0, cu: n.cu ? 1 : 0 };
     }) };
     saveBlob(JSON.stringify(out, null, 1), 'so-ghi-chu-rhm_' + stamp() + '.json', 'application/json');
-    toastM('Đã xuất JSON sổ ghi chú');
+    toastM('Đã xuất JSON ghi chú');
   }
 
   /* ---------- Đọc file nhập ---------- */
@@ -24355,7 +24362,7 @@ html.rhm-dragging,html.rhm-dragging body{-webkit-user-select:none;user-select:no
   animation: iosModalOut 0.22s var(--ios-out) forwards;
 }
 
-/* 5. Hộp Ribbon (.rd-pop) & Khung Ôn tập (.rv) trong Từ điển / Sổ ghi chú */
+/* 5. Hộp Ribbon (.rd-pop) & Khung Ôn tập (.rv) trong Từ điển / Ghi chú */
 #dict-modal .rd-pop.ios-opening,
 #note-modal .rd-pop.ios-opening {
   animation: iosPopCornerIn 0.32s var(--ios-bounce) forwards;
@@ -24403,7 +24410,7 @@ html.rhm-dragging,html.rhm-dragging body{-webkit-user-select:none;user-select:no
   animation: iosModalOut 0.22s var(--ios-out) forwards;
 }
 
-/* 6. Dòng thao tác (.rd-act) khi bấm chọn từ trong Từ điển / Sổ ghi chú */
+/* 6. Dòng thao tác (.rd-act) khi bấm chọn từ trong Từ điển / Ghi chú */
 #dict-modal .rd-act, #note-modal .rd-act {
   animation: iosSubPanelIn 0.24s var(--ios-bounce);
 }
@@ -24697,7 +24704,7 @@ html.rhm-dragging,html.rhm-dragging body{-webkit-user-select:none;user-select:no
 })();
 </script>
 <style id="rhm-patch-v3-ios-buttons">
-/* 1. Bảo đảm Sổ ghi chú trên mobile màn dọc luôn chỉ hiện 1 trang */
+/* 1. Bảo đảm Ghi chú trên mobile màn dọc luôn chỉ hiện 1 trang */
 @media (max-width: 759px), (orientation: portrait) {
   #note-modal #nt-R,
   #note-modal .rd-spine {
@@ -24816,7 +24823,7 @@ button:not(:disabled):active,
   animation: iosBtnRelease 0.34s cubic-bezier(0.22, 1.2, 0.36, 1) forwards;
 }
 
-/* Nút ruy-băng (Ribbon) trong Từ điển & Sổ ghi chú */
+/* Nút ruy-băng (Ribbon) trong Từ điển & Ghi chú */
 #dict-modal .rd-rb, #note-modal .rd-rb {
   transition: transform 0.28s cubic-bezier(0.22, 1.2, 0.36, 1),
               height 0.28s cubic-bezier(0.22, 1.2, 0.36, 1),
@@ -25512,7 +25519,7 @@ body {
 }
 </style>
 <style id="rhm-patch-v9-styles">
-/* Nút Đọc to nằm kế bên nút info trong Sổ ghi chú */
+/* Nút Đọc to nằm kế bên nút info trong Ghi chú */
 #note-modal .nt-spk {
   flex: none;
   width: 24px;
@@ -25571,7 +25578,7 @@ body {
   line-height: 1.3 !important;
 }
 
-/* 2. Highlight câu đang đọc trong Sổ ghi chú (#note-modal) */
+/* 2. Highlight câu đang đọc trong Ghi chú (#note-modal) */
 #note-modal .ai-tts-hl {
   background-color: #fde047 !important;
   color: #111827 !important;
@@ -25735,7 +25742,7 @@ body {
   #lessons-list .vid-btn, #lessons-list [id^="review-btn-"] { font-size: 12px !important; padding-top: .35rem !important; padding-bottom: .35rem !important; }
 }
 
-/* 3. Sổ ghi chú (chế độ đọc): thanh nút khi bôi đen và bong bóng ghi chú nhanh */
+/* 3. Ghi chú (chế độ đọc): thanh nút khi bôi đen và bong bóng ghi chú nhanh */
 #nt-rbar { position: fixed; z-index: 100060; display: none; gap: 6px; align-items: center; flex-wrap: wrap; justify-content: center; max-width: calc(100vw - 16px); }
 #nt-rbar button { border: 0; border-radius: 999px; padding: 7px 12px; color: #fff; font: 700 13px system-ui, sans-serif; box-shadow: 0 6px 18px rgba(0,0,0,.35); cursor: pointer; white-space: nowrap; }
 #nt-rbar .rr-tr { background: #4f46e5; }
@@ -27035,7 +27042,7 @@ body {
         'suggest-question-modal': 'Đề xuất câu hỏi', 'app-feedback-modal': 'Góp ý/Liên hệ', 'add-question-modal': 'Thêm câu hỏi',
         'report-error-modal': 'Báo lỗi câu hỏi', 'folder-modal': 'Thư mục', 'navigator-modal': 'Danh sách câu hỏi',
         'view-quiz-modal': 'Xem bộ đề', 'bookmarked-modal': 'Câu hỏi đã lưu', 'blocked-modal': 'Câu hỏi đã chặn',
-        'storage-modal': 'Dung lượng lưu trữ', 'dict-modal': 'Từ điển RHM', 'note-modal': 'Sổ ghi chú',
+        'storage-modal': 'Dung lượng lưu trữ', 'dict-modal': 'Từ điển RHM', 'note-modal': 'Ghi chú',
         'bookshelf-modal': 'Tủ sách', 'home-settings-modal': 'Cài đặt', 'hs-keys-modal': 'Cài đặt khóa API', 'hs-guide-modal': 'Hướng dẫn sử dụng app',
         'ai-tutor-modal': 'Hỏi AI', 'ai-key-gate': 'Kích hoạt Hỏi AI', 'image-lightbox-modal': 'Xem ảnh', 'rhm-sync-modal': 'Đồng bộ dữ liệu'
     };
@@ -27088,7 +27095,7 @@ body {
     }
 
     /* ---- hàm dựng nhanh các “nút làm thay” ---- */
-    function winBtn(label, winId, openFn, btnSel) {   // nút nằm trong một cửa sổ (Từ điển / Sổ ghi chú…): mở cửa sổ rồi bấm nút
+    function winBtn(label, winId, openFn, btnSel) {   // nút nằm trong một cửa sổ (Từ điển / Ghi chú…): mở cửa sổ rồi bấm nút
         function node() { var n = document.querySelector(btnSel); return (n && isShown(n)) ? n : null; }
         return {
             label: label, sel: node, ow: 520,
@@ -27135,9 +27142,9 @@ body {
         'thi-thu': { label: 'mở Thi Thử (Mock Exam)', flow: 'home', hold: 'exam-modal', sel: '#btn-thi-thu', open: function () { openSection('chuyende'); }, run: function () { window.openExamModal(); } },
         'da-luu': { label: 'mở danh sách Đã lưu', flow: 'home', hold: 'bookmarked-modal', sel: '#qb-row3 button[onclick="openBookmarkedModal()"]', open: function () { openSection('chuyende'); }, run: function () { window.openBookmarkedModal(); } },
         'da-chan': { label: 'mở danh sách Đã chặn', flow: 'home', hold: 'blocked-modal', sel: '#qb-row3 button[onclick="openBlockedModal()"]', open: function () { openSection('chuyende'); }, run: function () { window.openBlockedModal(); } },
-        'bo-suu-tap': { label: 'mở Bộ Sưu Tập Huy Hiệu', sel: 'button[onclick="openCollectionModal()"]', open: function () { window.rhmSbOpen && window.rhmSbOpen(); }, ow: 450, run: function () { window.rhmSbClose && window.rhmSbClose(true); window.openCollectionModal(); } },
-        'tu-dien': { label: 'mở Từ Điển RHM', sel: 'button[onclick="openRhmDict()"]', open: function () { window.rhmSbOpen && window.rhmSbOpen(); }, ow: 450, run: function () { window.rhmSbClose && window.rhmSbClose(true); window.openRhmDict(); } },
-        'so-ghi-chu': { label: 'mở Sổ Ghi Chú', sel: 'button[onclick="openRhmNote()"]', open: function () { window.rhmSbOpen && window.rhmSbOpen(); }, ow: 450, run: function () { window.rhmSbClose && window.rhmSbClose(true); window.openRhmNote(); } },
+        'bo-suu-tap': { label: 'mở Bộ Sưu Tập', sel: 'button[onclick="openCollectionModal()"]', open: function () { window.rhmSbOpen && window.rhmSbOpen(); }, ow: 450, run: function () { window.rhmSbClose && window.rhmSbClose(true); window.openCollectionModal(); } },
+        'tu-dien': { label: 'mở Từ Điển', sel: 'button[onclick="openRhmDict()"]', open: function () { window.rhmSbOpen && window.rhmSbOpen(); }, ow: 450, run: function () { window.rhmSbClose && window.rhmSbClose(true); window.openRhmDict(); } },
+        'so-ghi-chu': { label: 'mở Ghi Chú', sel: 'button[onclick="openRhmNote()"]', open: function () { window.rhmSbOpen && window.rhmSbOpen(); }, ow: 450, run: function () { window.rhmSbClose && window.rhmSbClose(true); window.openRhmNote(); } },
         'de-xuat': { label: 'mở Đề xuất câu hỏi', sel: 'button[onclick="homeSettingsGo(\'openSuggestQuestionModal\')"]', open: function () { window.openHomeSettings(); }, run: function () { window.homeSettingsGo('openSuggestQuestionModal'); } },
         'gop-y': { label: 'mở Góp ý / Liên hệ', sel: 'button[onclick="homeSettingsGo(\'openAppFeedbackModal\')"]', open: function () { window.openHomeSettings(); }, run: function () { window.homeSettingsGo('openAppFeedbackModal'); } },
         'khoa-api': { label: 'mở Cài đặt khóa API', sel: 'button[onclick="hsOpenKeys()"]', open: function () { window.openHomeSettings(); }, run: function () { window.hsOpenKeys(); } },
@@ -27167,8 +27174,8 @@ body {
         'tu-dien-tim': winBtn('tìm thuật ngữ trong Từ Điển', 'dict-modal', function () { window.openRhmDict(); }, '#rd-rb-search'),
         'tu-dien-da-luu': winBtn('xem các thuật ngữ đã đánh sao trong Từ Điển', 'dict-modal', function () { window.openRhmDict(); }, '#rd-rb-saved'),
         'tu-dien-on-tap': winBtn('mở Ôn tập từ vựng của Từ Điển', 'dict-modal', function () { window.openRhmDict(); }, '#rd-rb-review'),
-        'ghi-chu-moi': winBtn('tạo ghi chú mới trong Sổ Ghi Chú', 'note-modal', function () { window.openRhmNote(); }, '#nt-rb-new'),
-        'ghi-chu-tim': winBtn('tìm ghi chú trong Sổ Ghi Chú', 'note-modal', function () { window.openRhmNote(); }, '#nt-rb-search'),
+        'ghi-chu-moi': winBtn('tạo ghi chú mới trong Ghi Chú', 'note-modal', function () { window.openRhmNote(); }, '#nt-rb-new'),
+        'ghi-chu-tim': winBtn('tìm ghi chú trong Ghi Chú', 'note-modal', function () { window.openRhmNote(); }, '#nt-rb-search'),
         'ghi-chu-sap-xep': winBtn('đổi cách sắp xếp ghi chú', 'note-modal', function () { window.openRhmNote(); }, '#nt-rb-sort'),
         'ghi-chu-on-tap': winBtn('mở Ôn tập ghi chú', 'note-modal', function () { window.openRhmNote(); }, '#nt-rb-review'),
         'sach-ai-chat': ctxBtn('mở AI Chat của chương sách đang đọc', readerOn, NEED_BOOK, function () { return $id('bk-ai-btn'); }),
@@ -27248,7 +27255,7 @@ body {
             'APP: "Trắc Nghiệm RHM" — webapp ôn tập trắc nghiệm Răng Hàm Mặt kèm video bài giảng, chạy trên trình duyệt (điện thoại & máy tính). Mọi dữ liệu (bộ đề, tiến độ, ghi chú) lưu trên máy người dùng.',
             '',
             'TRANG CHỦ có:',
-            '- Hàng nút tiện ích: 🏆 Bộ Sưu Tập Huy Hiệu · 📖 Từ Điển RHM · 📒 Sổ Ghi Chú · ⚙️ Cài Đặt.',
+            '- Hàng nút tiện ích: 🏆 Bộ Sưu Tập · 📖 Từ Điển · 📝 Ghi Chú · ⚙️ Cài Đặt.',
             '- Hai nút lớn: 📚 Ôn Tập Theo Môn Học (mở danh sách môn + video bài giảng) và 🦷 Ôn Tập Theo Chủ Đề.',
             '- Trong Ôn Tập Theo Chủ Đề: ⚡ Ôn Tập Nhanh, 🧠 Ôn Tập Chuyên Sâu, 🎯 Thi Thử (Mock Exam), ⭐ Đã lưu, 🚫 Đã chặn và 36 chủ đề.',
             '- ⚙️ Cài Đặt gồm: 🏠 Trợ lý ứng dụng (bật/tắt trợ lý này), 💡 Đề xuất câu hỏi, 📩 Góp ý/Liên hệ, 🔑 Cài đặt khóa API, ☁️ Đồng bộ dữ liệu (đăng nhập Google để tự đồng bộ tiến độ, từ điển, ghi chú, khóa API… lên Google Drive và dùng chung giữa các thiết bị), 📖 Hướng dẫn sử dụng app, ⛶ Toàn màn hình, 📲 Thêm vào MH chính.',
@@ -27716,7 +27723,7 @@ body {
         { ask: true, big: true, sel: '#home-fab', t: '🤖 Nút Trợ lý ứng dụng', d: 'Chào bạn 👋 Mình là Trợ lý ứng dụng của app — chính là nút này!\n\nBấm vào sẽ hiện 4 nút:\nℹ️ Thông tin — phần giới thiệu bạn đang xem, bấm lại bất cứ lúc nào ở màn hình chính.\n🎙️ Chat live — nói chuyện bằng giọng nói.\n💬 Chat — nhắn tin hỏi chi tiết từng tính năng / nút của app, chỉ tận nơi hoặc làm thay bạn thao tác của từng nút (nút ở trang chủ mà bạn đang ở cửa sổ khác thì mình đưa bạn về trang chủ, làm xong rồi trả bạn về chỗ cũ).\n⛶ Toàn màn hình — bật / tắt chế độ toàn màn hình của app.\n\nKéo nút để đổi vị trí. Bật / tắt Trợ lý ứng dụng ở ⚙️ Cài Đặt → 🤖 Trợ lý ứng dụng.\n\nBạn có muốn mình giới thiệu các nút và tính năng trên màn hình chính không?\nChọn “✅ Có, giới thiệu cho mình” để bắt đầu, hoặc “🙅 Để sau” — lúc nào cần, bạn bấm nút 🤖 rồi chọn ℹ️ để mình giới thiệu lại.' },
         { key: 'mon-hoc', t: '📚 Ôn Tập Theo Môn Học', d: 'Bấm để xổ ra danh sách các môn học kèm video bài giảng. Lần đầu bấm vào nút này, mình sẽ hướng dẫn cách chọn môn, kéo thả đổi vị trí và 2 nút Kệ Sách / Khóa Học; lần đầu bấm vào Kệ Sách hoặc Khóa Học, mình sẽ giới thiệu bên trong. Khi khu này đang xổ ra, bấm ℹ️ của Trợ lý ứng dụng để xem lại.' },
         { key: 'chuyen-de', t: '🦷 Ôn Tập Theo Chủ Đề', d: 'Bấm để xổ ra khu ôn tập theo chủ đề, gồm các công cụ ôn nhanh, chuyên sâu, thi thử và 36 chủ đề. Lần đầu bấm vào nút này, mình sẽ giới thiệu các nút bên trong ngay tại chỗ; mỗi nút bên trong cũng có hướng dẫn riêng lần đầu bạn mở.' },
-        { key: 'bo-suu-tap', t: '🏆 Bộ Sưu Tập Huy Hiệu', d: 'Nơi lưu lại các huy hiệu bạn đạt được trong quá trình học và làm bài. Ôn đều đặn sẽ mở khóa thêm huy hiệu. Con số trên nút là số huy hiệu bạn đã có. Lần đầu bạn mở cửa sổ này, mình sẽ hướng dẫn ngay tại chỗ; muốn xem lại thì bấm nút ℹ️ của Trợ lý ứng dụng khi cửa sổ đang mở.' },
+        { key: 'bo-suu-tap', t: '🏆 Bộ Sưu Tập', d: 'Nơi lưu lại các huy hiệu bạn đạt được trong quá trình học và làm bài. Ôn đều đặn sẽ mở khóa thêm huy hiệu. Con số trên nút là số huy hiệu bạn đã có. Lần đầu bạn mở cửa sổ này, mình sẽ hướng dẫn ngay tại chỗ; muốn xem lại thì bấm nút ℹ️ của Trợ lý ứng dụng khi cửa sổ đang mở.' },
         { ctx: 'collection', sel: '#collection-modal h3', xl: true, t: '🏆 Cửa sổ Bộ Sưu Tập', d: 'Đây là kho huy hiệu của bạn. Bạn có thể chọn một hoặc nhiều huy hiệu yêu thích để chúng nổi lên khi bạn đạt chuỗi trả lời đúng (Streak).' },
         { ctx: 'collection', sel: function () { var e = $id('collection-user-points'); return e && e.parentElement && e.parentElement.parentElement; }, t: '💰 Điểm Tích Lũy', d: 'Số điểm bạn kiếm được khi học và làm bài. Điểm này dùng để đổi lấy huy hiệu mới.' },
         { ctx: 'collection', sel: function () { var e = $id('collection-stats-text'); return e && e.parentElement && e.parentElement.parentElement; }, t: '🎖️ Tiến Độ Thu Thập', d: 'Cho biết bạn đã mở khóa bao nhiêu huy hiệu trên tổng số huy hiệu hiện có.' },
@@ -27724,7 +27731,7 @@ body {
         { ctx: 'collection', sel: '#emblems-grid', xl: true, t: '🖼️ Danh sách huy hiệu', d: 'Mỗi ô là một huy hiệu. Ô còn khóa 🔒 là huy hiệu chưa mở. Bấm vào huy hiệu đã có để chọn làm huy hiệu yêu thích.' },
         { ctx: 'collection', sel: '#collection-modal .mt-4.pt-3.border-t', t: '💡 Mẹo nhận huy hiệu', d: 'Mỗi khi trả lời đúng một câu hỏi, bạn có 1% cơ hội nhận được huy hiệu. Nút Đóng ở bên phải để thoát cửa sổ này.' },
 
-        { key: 'tu-dien', t: '📖 Từ Điển RHM', d: 'Cuốn từ điển thuật ngữ chuyên ngành Răng Hàm Mặt của riêng bạn. Con số trên nút là số thuật ngữ đã lưu. Lần đầu bạn mở cửa sổ này, mình sẽ hướng dẫn ngay tại chỗ; muốn xem lại thì bấm nút ℹ️ của Trợ lý ứng dụng khi cửa sổ đang mở.' },
+        { key: 'tu-dien', t: '📖 Từ Điển', d: 'Cuốn từ điển thuật ngữ chuyên ngành Răng Hàm Mặt của riêng bạn. Con số trên nút là số thuật ngữ đã lưu. Lần đầu bạn mở cửa sổ này, mình sẽ hướng dẫn ngay tại chỗ; muốn xem lại thì bấm nút ℹ️ của Trợ lý ứng dụng khi cửa sổ đang mở.' },
         { ctx: 'dict', sel: function () { return document.querySelector('#dict-modal .rd-ttl') || document.querySelector('#dict-modal .rd-wrap'); }, t: '📖 Cửa sổ Từ Điển', d: 'Từ điển hiển thị như một cuốn sách hai trang. Khi đọc sách, bôi đen một đoạn rồi bấm Dịch trong hộp chat, thuật ngữ mới sẽ tự động được thêm vào đây.' },
         { ctx: 'dict', sel: '#rd-rb-add', t: '➕ Thêm thuật ngữ mới', d: 'Tự nhập thêm một thuật ngữ vào từ điển, kèm nghĩa mà bạn muốn.' },
         { ctx: 'dict', sel: '#rd-rb-search', t: '🔍 Tìm thuật ngữ', d: 'Gõ để tìm nhanh một thuật ngữ trong toàn bộ từ điển.' },
@@ -27732,8 +27739,8 @@ body {
         { ctx: 'dict', sel: '#rd-rb-review', t: '🗂️ Ôn tập từ vựng', d: 'Ôn thuật ngữ bằng thẻ ghi nhớ (flashcard) để nhớ lâu hơn. Trong bảng thiết lập còn có 📝 Trắc nghiệm ngữ cảnh: AI cho một câu có chỗ trống, bạn chọn 1 trong 4 từ tiếng Anh để điền.' },
         { ctx: 'dict', sel: '#rd-tabL', t: '🔤 Thẻ chữ cái A–Z', d: 'Các thẻ ở hai bên mép sách giúp bạn nhảy thẳng tới các thuật ngữ bắt đầu bằng chữ cái đó.' },
 
-        { key: 'so-ghi-chu', t: '📒 Sổ Ghi Chú', d: 'Nơi lưu các ghi chú của bạn, nhất là nội dung từ các bong bóng chat AI. Con số trên nút là số ghi chú đã có. Lần đầu bạn mở cửa sổ này, mình sẽ hướng dẫn ngay tại chỗ; muốn xem lại thì bấm nút ℹ️ của Trợ lý ứng dụng khi cửa sổ đang mở.' },
-        { ctx: 'note', sel: function () { return document.querySelector('#note-modal .rd-ttl') || document.querySelector('#note-modal .rd-wrap'); }, t: '📒 Cửa sổ Sổ Ghi Chú', d: 'Sổ ghi chú cũng hiển thị như một cuốn sách hai trang, nơi bạn đọc lại và quản lý toàn bộ ghi chú của mình.' },
+        { key: 'so-ghi-chu', t: '📝 Ghi Chú', d: 'Nơi lưu các ghi chú của bạn, nhất là nội dung từ các bong bóng chat AI. Con số trên nút là số ghi chú đã có. Lần đầu bạn mở cửa sổ này, mình sẽ hướng dẫn ngay tại chỗ; muốn xem lại thì bấm nút ℹ️ của Trợ lý ứng dụng khi cửa sổ đang mở.' },
+        { ctx: 'note', sel: function () { return document.querySelector('#note-modal .rd-ttl') || document.querySelector('#note-modal .rd-wrap'); }, t: '📝 Cửa sổ Ghi Chú', d: 'Ghi chú cũng hiển thị như một cuốn sách hai trang, nơi bạn đọc lại và quản lý toàn bộ ghi chú của mình.' },
         { ctx: 'note', sel: '#nt-rb-new', t: '➕ Tạo ghi chú mới', d: 'Viết một ghi chú mới của riêng bạn.' },
         { ctx: 'note', sel: '#nt-rb-search', t: '🔍 Tìm ghi chú', d: 'Gõ từ khóa để tìm lại ghi chú cần xem.' },
         { ctx: 'note', sel: '#nt-rb-sort', t: '↕️ Sắp xếp ghi chú', d: 'Đổi cách sắp xếp danh sách ghi chú, ví dụ theo thời gian.' },
@@ -27747,7 +27754,7 @@ body {
         { ctx: 'settings', sel: '#home-settings-modal button[onclick="homeSettingsGo(\'openSuggestQuestionModal\')"]', t: '💡 Đề xuất câu hỏi', d: 'Bạn có câu hỏi hay muốn đóng góp? Gửi đề xuất ở đây để đưa vào bộ đề.' },
         { ctx: 'settings', sel: '#home-settings-modal button[onclick="homeSettingsGo(\'openAppFeedbackModal\')"]', t: '📩 Góp ý / Liên hệ', d: 'Gửi góp ý, báo lỗi hoặc liên hệ với người làm app.' },
         { ctx: 'settings', sel: '#home-settings-modal button[onclick="hsOpenKeys()"]', t: '🔑 Cài đặt khóa API', d: 'Nhập khóa API để dùng các tính năng AI (Hỏi AI, dịch, Trợ lý ứng dụng…). Mặc định dùng Gemini miễn phí, có thể thêm nhà cung cấp dự phòng.' },
-        { ctx: 'settings', sel: '#hs-sync-btn', t: '☁️ Đồng bộ dữ liệu', d: 'Đăng nhập Google để app tự lưu tiến độ lên Google Drive của bạn (một thư mục ẩn của app, không lẫn với file của bạn) và dùng chung giữa nhiều thiết bị. Bên cạnh nút hiện trạng thái: Chưa đăng nhập, Đã đồng bộ, Offline… Bấm vào để đăng nhập, bật / tắt tự động đồng bộ ngầm, bấm “Đồng bộ ngay” hoặc hoàn tác lần nhận dữ liệu gần nhất. Điểm, sao, huy hiệu, từ điển, sổ ghi chú, tiến độ video và cả khóa API đều được đồng bộ, nên máy mới không phải dán lại khóa.' },
+        { ctx: 'settings', sel: '#hs-sync-btn', t: '☁️ Đồng bộ dữ liệu', d: 'Đăng nhập Google để app tự lưu tiến độ lên Google Drive của bạn (một thư mục ẩn của app, không lẫn với file của bạn) và dùng chung giữa nhiều thiết bị. Bên cạnh nút hiện trạng thái: Chưa đăng nhập, Đã đồng bộ, Offline… Bấm vào để đăng nhập, bật / tắt tự động đồng bộ ngầm, bấm “Đồng bộ ngay” hoặc hoàn tác lần nhận dữ liệu gần nhất. Điểm, sao, huy hiệu, từ điển, ghi chú, tiến độ video và cả khóa API đều được đồng bộ, nên máy mới không phải dán lại khóa.' },
         { ctx: 'settings', sel: '#btn-rhm-fs', t: '⛶ Toàn màn hình', d: 'Bật chế độ toàn màn hình để tập trung học. Khi đang bật, nút này đổi thành Thoát toàn màn hình.' },
         { ctx: 'settings', sel: '#btn-add-home', t: '📲 Thêm vào MH chính', d: 'Thêm app ra màn hình chính của điện thoại hoặc máy tính để mở nhanh như một ứng dụng.' },
 
@@ -28241,7 +28248,7 @@ body {
             winMark('qb-rdchat'); beginTour('steps', rdChatSteps());
         }, 1000);
     }, true);
-    /* ---- Từ điển / Sổ ghi chú: (a) lần đầu có từ / ghi chú để thao tác → giới thiệu các nút trên từng mục; (b) lần đầu bấm mỗi nút ribbon → giới thiệu riêng ---- */
+    /* ---- Từ điển / Ghi chú: (a) lần đầu có từ / ghi chú để thao tác → giới thiệu các nút trên từng mục; (b) lần đầu bấm mỗi nút ribbon → giới thiệu riêng ---- */
     function dnVis(ids) { return function () { for (var i = 0; i < ids.length; i++) { var e = $id(ids[i]); if (isShown(e)) return e; } return null; }; }
     var DN_ROW_STEPS = [
         { sel: qbQ('#dict-modal .rd-act'), t: '🛠 Các nút thao tác trên từ', d: 'Bấm vào một thuật ngữ trong sách là hiện thanh nút này ngay cạnh dòng đó (và máy đọc to từ tiếng Anh). Mình giới thiệu từng nút nhé.' },
@@ -28374,7 +28381,7 @@ body {
     }
     /* ---- ℹ️ mặc định: đang mở cửa sổ con / khung chat nào thì giới thiệu đúng cái đó ---- */
     function ptxt(id) { var e = document.querySelector('#' + id + ' .rd-pt'); return e ? (e.textContent || '') : ''; }
-    /* Từ điển / Sổ ghi chú nằm trên cùng: popup / ôn tập đang mở → giới thiệu đúng popup đó; không có popup → giới thiệu cả cửa sổ (trả về tên cửa sổ) */
+    /* Từ điển / Ghi chú nằm trên cùng: popup / ôn tập đang mở → giới thiệu đúng popup đó; không có popup → giới thiệu cả cửa sổ (trả về tên cửa sổ) */
     function dnTop() {
         if (shown('dict-modal')) {
             if (shown('rd-rv')) return dnSteps('d-review');
@@ -28452,7 +28459,7 @@ body {
     /* Info: đang mở cửa sổ nào thì giới thiệu cửa sổ đó, không thì giới thiệu màn hình chính */
     function startTour() {
         if (winShown('aiset')) { beginTour('win', 'aiset'); return; }   // bảng ⚙️ Cài đặt của khung chat AI (dùng chung 3 khung) đang mở
-        var dn0 = null; try { dn0 = dnTop(); } catch (e) {}   // Từ điển / Sổ ghi chú nằm trên cùng: chỉ giới thiệu popup đang mở (hoặc cả cửa sổ nếu không có popup)
+        var dn0 = null; try { dn0 = dnTop(); } catch (e) {}   // Từ điển / Ghi chú nằm trên cùng: chỉ giới thiệu popup đang mở (hoặc cả cửa sổ nếu không có popup)
         if (typeof dn0 === 'string') { beginTour('win', dn0); return; }
         if (dn0) { beginTour('steps', dn0); return; }
         var dk = vidDetailKey();
@@ -28464,7 +28471,7 @@ body {
         if (w) { beginTour('win', w); return; }
         /* màn hình trắc nghiệm luôn mở được phần giới thiệu, kể cả khi cửa sổ phụ (⚙️ Cài đặt câu hỏi…) đang mở */
         if (shown('quiz-screen')) { beginTour('win', qscIsExam() ? 'escreen' : 'qscreen'); return; }
-        if (!tourHomeOk()) { toast('Cửa sổ này chưa có phần giới thiệu — hãy quay về màn hình chính hoặc mở Bộ Sưu Tập / Từ Điển / Sổ Ghi Chú / Cài Đặt / một môn học'); return; }
+        if (!tourHomeOk()) { toast('Cửa sổ này chưa có phần giới thiệu — hãy quay về màn hình chính hoặc mở Bộ Sưu Tập / Từ Điển / Ghi Chú / Cài Đặt / một môn học'); return; }
         /* khu Ôn Tập Theo Môn Học / Chủ Đề đang xổ ra → giới thiệu nội dung bên trong; chỉ khi cả 2 đều đóng mới giới thiệu màn hình chính */
         var mOpen = shown('monhoc-section-container'), cOpen = shown('chuyende-section-container');
         if (mOpen && cOpen) { beginTour('multi', ['monhoc', 'subject', 'section']); return; }
@@ -29063,7 +29070,7 @@ body {
     }
 
     /* ================= LUỒNG CỬA SỔ =================
-       - Mục mở chồng lên được ở chỗ người dùng đang đứng (Từ điển, Sổ ghi chú, Cài đặt, Đồng bộ, nút của video / sách…) → mở luôn, giữ nguyên cửa sổ cũ.
+       - Mục mở chồng lên được ở chỗ người dùng đang đứng (Từ điển, Ghi chú, Cài đặt, Đồng bộ, nút của video / sách…) → mở luôn, giữ nguyên cửa sổ cũ.
        - Mục chỉ có ở trang chủ (Ôn nhanh, Thi thử, chủ đề…) mà người dùng đang ở cửa sổ khác (bài làm, sách, video, cửa sổ phụ)
          → lưu chỗ đang đứng → về trang chủ → mở đúng luồng nút đó → xong việc thì quay lại đúng cửa sổ cũ. */
     var FLOW_WINS = [
@@ -29307,7 +29314,7 @@ body {
             paintFsBtn();
         })();
         hookOpen('openCollectionModal', 'collection'); hookOpen('openRhmDict', 'dict'); hookOpen('openRhmNote', 'note'); hookOpen('openHomeSettings', 'settings'); hookOpen('bkOpenShelf', 'shelf'); hookOpen('openMonHocDetail', 'course'); hookOpen('bkOpenChapter', 'viewer'); hookOpen('openMockExamModal', 'quick'); hookOpen('openDeepModal', 'deep'); hookOpen('openExamModal', 'mock'); hookOpen('openBookmarkedModal', 'saved'); hookOpen('openBlockedModal', 'blocked'); hookOpen('openTopicModal', 'topic'); hookSection(); hookMonHoc();
-        /* các cửa sổ (Từ điển, Sổ ghi chú, Cài đặt…) đặt "inert" lên mọi thứ phía sau → luôn gỡ ra để nút AI vẫn bấm được */
+        /* các cửa sổ (Từ điển, Ghi chú, Cài đặt…) đặt "inert" lên mọi thứ phía sau → luôn gỡ ra để nút AI vẫn bấm được */
         ['home-fab', 'home-fab-pop', 'hf-wheel'].forEach(function (id) {
             var n = $id(id); if (!n) return;
             n.removeAttribute('inert');
