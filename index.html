@@ -2,21 +2,6 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <!-- Chống cache: yêu cầu trình duyệt/CDN không lưu cache trang này -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <script>
-        (function () {
-            var url = new URL(window.location.href);
-            if (!url.searchParams.has('_cb')) {
-                url.searchParams.set('_cb', Date.now().toString());
-                window.location.replace(url.toString());
-            }
-        })();
-    
-        
-</script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
     /* Logo nhúng sẵn (PNG 250x250 đã nén, base64) — không tải từ file/GitHub nữa */
@@ -1310,7 +1295,7 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
         .rhm-sb-head b{font-size:17px;font-weight:800;color:#1f2328;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
         .rhm-sb-x{width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:8px;background:transparent;color:#59636e;cursor:pointer;font-size:20px;line-height:1}
         .rhm-sb-x:hover{background:#eaeef2}
-        .rhm-sb-body{flex:1 1 auto;overflow-y:auto;padding:12px;display:grid;grid-template-rows:repeat(5,minmax(52px,1fr));gap:10px;-webkit-overflow-scrolling:touch}
+        .rhm-sb-body{flex:1 1 auto;overflow-y:auto;padding:12px;display:grid;grid-template-rows:repeat(6,minmax(52px,1fr));gap:10px;-webkit-overflow-scrolling:touch}
         .rhm-sb-home{display:flex;align-items:center;justify-content:flex-start;gap:12px;width:100%;padding:0 16px;border:0;border-radius:12px;
             background:linear-gradient(90deg,#2563eb,#0ea5e9);font:inherit;font-size:20px;font-weight:700;line-height:1.25;color:#fff;cursor:pointer;
             box-shadow:0 1px 2px rgba(0,0,0,.12);transition:filter .15s}
@@ -1326,6 +1311,15 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
 .rhm-sb-item>span.bg-white\/25{font-size:14px!important;padding:2px 10px!important;line-height:1.2}
 .rhm-sb-home>span[aria-hidden="true"]{font-size:24px;line-height:1}
         .rhm-sb-exit:hover{background:#ffebe9;border-color:#ff8182}
+        /* cỡ chữ chung cho mọi nút sidebar — co giãn theo chiều rộng/cao màn hình (PC & mobile dọc) */
+        .rhm-sb{--sbfs:clamp(15px,min(4.8vw,2.6vh),20px)}
+        .rhm-sb-home,.rhm-sb-nav>button.rhm-sb-item,.rhm-sb-exit{font-size:var(--sbfs)!important;font-weight:700!important;line-height:1.2!important;gap:.6em!important}
+        .rhm-sb-home>span[aria-hidden="true"],.rhm-sb-exit>span[aria-hidden="true"]{font-size:1em!important;line-height:1}
+        .rhm-sb-item>span.bg-white\/25{font-size:.75em!important;padding:.1em .6em!important;margin-left:auto}
+        .rhm-sb-nav>button.rhm-sb-item{padding:0 .8em!important}
+        .rhm-sb-home{padding:0 .8em!important}
+        .rhm-sb-exit{min-height:clamp(44px,6vh,52px);justify-content:flex-start!important;padding:0 .8em!important;margin-left:0}
+        .rhm-sb-body{padding:10px;gap:clamp(6px,1.2vh,10px);grid-template-rows:repeat(6,minmax(clamp(44px,6.4vh,56px),1fr))}
         .rhm-bye{position:fixed;inset:0;z-index:100300;background:#f6f8fa;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:24px;font-family:inherit;color:#1f2328}
         .rhm-bye button{padding:12px 22px;border:0;border-radius:12px;background:#0969da;color:#fff;font:inherit;font-weight:700;font-size:16px;cursor:pointer}
         html.yt-lock .rhm-sb,html.yt-lock .rhm-sb-back{display:none!important}
@@ -1334,6 +1328,214 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
         html:has(.custom-yt-wrapper.theater-mode) .rhm-tbwrap,html:has(.custom-yt-wrapper.theater-mode) .rhm-tbspacer,
         html:has(.custom-yt-wrapper.yt-fs) .rhm-tbwrap,html:has(.custom-yt-wrapper.yt-fs) .rhm-tbspacer{display:none !important}
     </style>
+<script>
+/* ===== 🔄 Cập Nhật App: đồng bộ repo GitHub → IndexedDB (lần đầu tải tất cả, sau đó chỉ file mới/đổi/xóa) ===== */
+(function () {
+    var RHM_GH_REPO = '';   /* chỉ cần điền "owner/repo" nếu không chạy trên *.github.io */
+    var origFetch = window.fetch.bind(window);
+    var running = false, cancelled = false;
+
+    /* ---------- xác định repo + thư mục gốc ---------- */
+    function ghInfo() {
+        var owner, repo, base;
+        if (RHM_GH_REPO && RHM_GH_REPO.indexOf('/') > 0) {
+            var p = RHM_GH_REPO.split('/'); owner = p[0]; repo = p[1];
+            base = /\.github\.io$/i.test(location.hostname) && location.hostname.split('.')[0] === owner && repo.toLowerCase() === location.hostname.toLowerCase() ? '/' : (/\.github\.io$/i.test(location.hostname) ? '/' + repo + '/' : '/');
+        } else if (/\.github\.io$/i.test(location.hostname)) {
+            owner = location.hostname.split('.')[0];
+            var seg = location.pathname.split('/').filter(Boolean)[0] || '';
+            if (!seg || seg.indexOf('.') >= 0) { repo = location.hostname; base = '/'; }
+            else { repo = seg; base = '/' + seg + '/'; }
+        } else return null;
+        return { owner: owner, repo: repo, base: base };
+    }
+    var GH = ghInfo();
+    var APP_FILE = (location.pathname.split('/').pop() || 'index.html');
+
+    /* ---------- IndexedDB ---------- */
+    var dbP = null;
+    function db() {
+        if (dbP) return dbP;
+        dbP = new Promise(function (res, rej) {
+            try {
+                var q = indexedDB.open('rhmAppSync', 1);
+                q.onupgradeneeded = function () { var d = q.result; d.createObjectStore('files', { keyPath: 'path' }); d.createObjectStore('meta', { keyPath: 'k' }); };
+                q.onsuccess = function () { res(q.result); };
+                q.onerror = function () { rej(q.error); };
+            } catch (e) { rej(e); }
+        });
+        return dbP;
+    }
+    function tx(store, mode, fn) {
+        return db().then(function (d) {
+            return new Promise(function (res, rej) {
+                var t = d.transaction(store, mode), s = t.objectStore(store), r = fn(s);
+                t.oncomplete = function () { res(r && r.result); };
+                t.onerror = t.onabort = function () { rej(t.error); };
+            });
+        });
+    }
+    function getMeta(k) { return tx('meta', 'readonly', function (s) { return s.get(k); }).then(function (r) { return r ? r.v : null; }); }
+    function setMeta(k, v) { return tx('meta', 'readwrite', function (s) { return s.put({ k: k, v: v }); }); }
+    function putFile(rec) { return tx('files', 'readwrite', function (s) { return s.put(rec); }); }
+    function delFile(path) { return tx('files', 'readwrite', function (s) { return s.delete(path); }); }
+    function getFile(path) { return tx('files', 'readonly', function (s) { return s.get(path); }); }
+
+    /* ---------- phục vụ file đã đồng bộ cho fetch() của app (ưu tiên bản trong máy) ---------- */
+    var cached = null;   /* Set các đường dẫn có trong kho */
+    var ready = (GH ? db().then(function () { return getMeta('index'); }).then(function (idx) {
+        cached = new Set(Object.keys(idx || {}).filter(function (p) { return p !== APP_FILE && (idx[p] || {}).stored; }));
+    }).catch(function () { cached = null; }) : Promise.resolve());
+    window.fetch = function (input, init) {
+        try {
+            var method = ((init && init.method) || (input && input.method) || 'GET').toUpperCase();
+            if (!GH || method !== 'GET') return origFetch(input, init);
+            var u = new URL(typeof input === 'string' ? input : (input && input.url) || String(input), location.href);
+            if (u.origin !== location.origin || u.pathname.indexOf(GH.base) !== 0) return origFetch(input, init);
+            var rel; try { rel = decodeURIComponent(u.pathname.slice(GH.base.length)); } catch (e) { return origFetch(input, init); }
+            return ready.then(function () {
+                if (!cached || !cached.has(rel)) return origFetch(input, init);
+                return getFile(rel).then(function (rec) {
+                    if (!rec || !rec.blob) return origFetch(input, init);
+                    return new Response(rec.blob, { status: 200, headers: { 'Content-Type': rec.type || 'application/octet-stream' } });
+                });
+            }).catch(function () { return origFetch(input, init); });
+        } catch (e) { return origFetch(input, init); }
+    };
+
+    /* ---------- popup tiến trình ---------- */
+    function fmt(b) { return b >= 1048576 ? (b / 1048576).toFixed(1) + ' MB' : b >= 1024 ? Math.round(b / 1024) + ' KB' : b + ' B'; }
+    var ui = null;
+    function buildUI() {
+        if (!document.getElementById('rhmUpStyle')) {
+            var st = document.createElement('style'); st.id = 'rhmUpStyle';
+            st.textContent = '#rhmUp{position:fixed;inset:0;z-index:100400;display:flex;align-items:center;justify-content:center;background:rgba(27,31,36,.55);padding:16px;box-sizing:border-box}' +
+                '#rhmUp .c{width:min(420px,100%);background:#fff;color:#1f2328;border-radius:18px;box-shadow:0 12px 40px rgba(0,0,0,.35);padding:20px 20px 16px;text-align:center;font-family:inherit}' +
+                '#rhmUp h3{margin:0 0 4px;font-size:19px;font-weight:800}#rhmUp .s{font-size:14px;color:#59636e;min-height:20px;margin-bottom:12px}' +
+                '#rhmUp .bar{height:12px;border-radius:99px;background:#eaeef2;overflow:hidden}#rhmUp .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#0969da,#2da44e);transition:width .15s}' +
+                '#rhmUp .n{display:flex;justify-content:space-between;font-size:13px;color:#59636e;margin:6px 0 4px}' +
+                '#rhmUp .f{font-size:12px;color:#8c959f;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-height:16px;margin-bottom:12px}' +
+                '#rhmUp .chips{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}' +
+                '#rhmUp .chips span{font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:#f6f8fa;border:1px solid #d0d7de}' +
+                '#rhmUp .btns{display:flex;gap:8px;justify-content:center}#rhmUp button{padding:10px 18px;border:0;border-radius:12px;font:inherit;font-weight:700;font-size:15px;cursor:pointer}' +
+                '#rhmUp .p{background:#0969da;color:#fff}#rhmUp .g{background:#eaeef2;color:#1f2328}';
+            document.head.appendChild(st);
+        }
+        var o = document.createElement('div'); o.id = 'rhmUp';
+        o.innerHTML = '<div class="c" role="dialog" aria-modal="true" aria-label="Cập nhật app"><h3>🔄 Cập nhật app</h3><div class="s"></div><div class="bar"><i></i></div>' +
+            '<div class="n"><span class="a"></span><span class="b"></span></div><div class="f"></div>' +
+            '<div class="chips"><span class="k1">🆕 0</span><span class="k2">♻️ 0</span><span class="k3">🗑 0</span><span class="k4">⚠️ 0</span></div><div class="btns"></div></div>';
+        document.body.appendChild(o);
+        ui = { o: o, s: o.querySelector('.s'), bar: o.querySelector('.bar i'), a: o.querySelector('.a'), b: o.querySelector('.b'), f: o.querySelector('.f'),
+               k: [o.querySelector('.k1'), o.querySelector('.k2'), o.querySelector('.k3'), o.querySelector('.k4')], btns: o.querySelector('.btns') };
+    }
+    function setBtns(list) {
+        ui.btns.innerHTML = '';
+        list.forEach(function (x) { var b = document.createElement('button'); b.className = x.c; b.textContent = x.t; b.onclick = x.fn; ui.btns.appendChild(b); });
+    }
+    function closeUI() { if (ui && ui.o.parentNode) ui.o.parentNode.removeChild(ui.o); ui = null; }
+    function chips(c) { if (!ui) return; ui.k[0].textContent = '🆕 ' + c.add + ' mới'; ui.k[1].textContent = '♻️ ' + c.upd + ' cập nhật'; ui.k[2].textContent = '🗑 ' + c.del + ' xóa'; ui.k[3].textContent = '⚠️ ' + c.err + ' lỗi'; }
+
+    /* ---------- đồng bộ ---------- */
+    function inList(p) {   /* bỏ file/thư mục ẩn (.git, .github...) */
+        return !p.split('/').some(function (s) { return s.charAt(0) === '.'; });
+    }
+    async function dl(path, sha, tries) {
+        var url = location.origin + GH.base + path.split('/').map(encodeURIComponent).join('/') + '?_=' + sha.slice(0, 10);
+        for (var i = 0; i <= tries; i++) {
+            try {
+                var r = await origFetch(url, { cache: 'no-store' });
+                if (!r.ok) throw new Error('HTTP ' + r.status);
+                return { blob: await r.blob(), type: r.headers.get('content-type') || '' };
+            } catch (e) { if (i === tries) throw e; await new Promise(function (z) { setTimeout(z, 500 * (i + 1)); }); }
+        }
+    }
+    async function sync() {
+        var cnt = { add: 0, upd: 0, del: 0, err: 0 };
+        ui.s.textContent = 'Đang lấy danh sách file trên GitHub…';
+        var r = await origFetch('https://api.github.com/repos/' + GH.owner + '/' + GH.repo + '/git/trees/HEAD?recursive=1', { headers: { Accept: 'application/vnd.github+json' }, cache: 'no-store' });
+        if (r.status === 403 || r.status === 429) throw new Error('GitHub tạm giới hạn lượt truy cập, thử lại sau ít phút');
+        if (!r.ok) throw new Error('Không đọc được repo (HTTP ' + r.status + ')');
+        var tree = await r.json();
+        var entries = (tree.tree || []).filter(function (e) { return e.type === 'blob' && inList(e.path); });
+        var old = await getMeta('index'), first = !old; old = old || {};
+        var todo = [], seen = {};
+        entries.forEach(function (e) {
+            seen[e.path] = 1;
+            var o = old[e.path];
+            if (!o || o.sha !== e.sha || (!o.stored && e.path !== APP_FILE)) todo.push({ path: e.path, sha: e.sha, size: e.size || 0, isNew: !o });
+        });
+        var removed = Object.keys(old).filter(function (p) { return !seen[p]; });
+        var appChanged = todo.some(function (t) { return t.path === APP_FILE; });
+        var work = todo.filter(function (t) { return t.path !== APP_FILE; });
+        var total = work.reduce(function (a, t) { return a + t.size; }, 0), done = 0, doneBytes = 0;
+        ui.s.textContent = first ? 'Lần đầu: đang tải toàn bộ file về máy…' : (work.length || removed.length || appChanged ? 'Đang tải các thay đổi…' : 'Đang kiểm tra…');
+        ui.a.textContent = '0 / ' + work.length + ' file'; ui.b.textContent = '0 / ' + fmt(total);
+        var idx = Object.assign({}, old), q = work.slice(), saveT = Date.now();
+        async function worker() {
+            while (q.length && !cancelled) {
+                var t = q.shift();
+                if (ui) ui.f.textContent = t.path;
+                try {
+                    var d = await dl(t.path, t.sha, 2);
+                    await putFile({ path: t.path, sha: t.sha, blob: d.blob, type: d.type });
+                    idx[t.path] = { sha: t.sha, stored: true };
+                    t.isNew ? cnt.add++ : cnt.upd++;
+                } catch (e) { cnt.err++; console.warn('[CapNhat]', t.path, e); }
+                done++; doneBytes += t.size;
+                if (ui) {
+                    ui.bar.style.width = (total ? Math.min(100, doneBytes / total * 100) : (work.length ? done / work.length * 100 : 100)) + '%';
+                    ui.a.textContent = done + ' / ' + work.length + ' file'; ui.b.textContent = fmt(Math.min(doneBytes, total)) + ' / ' + fmt(total); chips(cnt);
+                }
+                if (Date.now() - saveT > 4000) { saveT = Date.now(); try { await setMeta('index', idx); } catch (e) {} }   /* lưu tạm để lần sau tiếp tục nếu bị ngắt */
+            }
+        }
+        await Promise.all([worker(), worker(), worker(), worker(), worker(), worker()]);
+        if (!cancelled) {
+            for (var i = 0; i < removed.length; i++) { try { await delFile(removed[i]); } catch (e) {} delete idx[removed[i]]; cnt.del++; }
+            if (appChanged) idx[APP_FILE] = { sha: (entries.filter(function (e) { return e.path === APP_FILE; })[0] || {}).sha, stored: false };
+        }
+        await setMeta('index', idx); await setMeta('last', Date.now());
+        cached = new Set(Object.keys(idx).filter(function (p) { return p !== APP_FILE && idx[p].stored; }));
+        chips(cnt);
+        return { cnt: cnt, appChanged: appChanged, first: first, truncated: !!tree.truncated, total: work.length, cancelled: cancelled };
+    }
+
+    window.rhmUpdateApp = async function () {
+        if (running) return;
+        if (!GH) { try { showToast('Chưa xác định được repo GitHub (chỉ cần điền RHM_GH_REPO = "owner/repo").'); } catch (e) {} return; }
+        if (location.protocol === 'file:') { try { showToast('Đang chạy file offline — cần mở app qua GitHub Pages để cập nhật.'); } catch (e) {} return; }
+        running = true; cancelled = false;
+        closeUI(); buildUI();
+        setBtns([{ c: 'g', t: 'Hủy', fn: function () { cancelled = true; ui && (ui.s.textContent = 'Đang hủy…'); } }]);
+        try {
+            var res = await sync();
+            if (ui) ui.bar.style.width = '100%';
+            var msg = res.cancelled ? 'Đã hủy — phần đã tải vẫn được giữ, lần sau sẽ tiếp tục.'
+                : res.cnt.err ? 'Xong, nhưng ' + res.cnt.err + ' file lỗi (sẽ thử lại lần sau).'
+                : (res.total || res.cnt.del || res.appChanged) ? '✅ Cập nhật xong!' : '✅ Mọi thứ đã là bản mới nhất.';
+            if (res.truncated) msg += ' (Repo quá lớn, danh sách bị cắt bớt.)';
+            if (ui) { ui.s.textContent = msg; ui.f.textContent = ''; }
+            if (res.appChanged && !res.cancelled) {
+                setBtns([{ c: 'g', t: 'Để sau', fn: closeUI }, { c: 'p', t: 'Tải lại app', fn: function () { var u = new URL(location.href); u.searchParams.set('_', Date.now()); location.replace(u.toString()); } }]);
+                if (ui) ui.s.textContent += ' Có bản app mới — tải lại để dùng.';
+            } else {
+                setBtns([{ c: 'p', t: 'Đóng', fn: closeUI }]);
+                if (!res.cancelled) {   /* làm mới giao diện theo dữ liệu vừa cập nhật */
+                    try { if (typeof chuDeFileIndexMap !== 'undefined') chuDeFileIndexMap = null; } catch (e) {}
+                    try { if (typeof scanGithubMonHocStructure === 'function') await scanGithubMonHocStructure(false); } catch (e) {}
+                    try { if (typeof autoImportFromFolder === 'function') await autoImportFromFolder(false); } catch (e) {}
+                    try { if (typeof autoImportJsonFolder === 'function') await autoImportJsonFolder(); } catch (e) {}
+                }
+            }
+        } catch (e) {
+            console.error('[CapNhatApp]', e);
+            if (ui) { ui.s.textContent = '❌ ' + ((e && e.message) || 'Cập nhật thất bại'); setBtns([{ c: 'p', t: 'Đóng', fn: closeUI }, { c: 'g', t: 'Thử lại', fn: function () { running = false; window.rhmUpdateApp(); } }]); }
+        }
+        running = false;
+    };
+})();
+</script>
 </head>
 <body class="bg-gray-100 min-h-screen font-sans text-gray-800" onload="initApp()" oncontextmenu="return false;">
 
@@ -1514,9 +1716,10 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
         <button onclick="openRhmDict()" class="rhm-sb-item text-sm bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm" title="Từ điển thuật ngữ RHM — tự thêm khi bạn dịch trong hộp chat đọc sách">📖 Từ Điển <span id="rhm-dict-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
         <button onclick="openRhmNote()" class="rhm-sb-item text-sm text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm" style="background:linear-gradient(90deg,#0d9488,#059669)" title="Ghi chú — lưu từ các bong bóng chat AI">📝 Ghi Chú <span id="rhm-note-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
         <button onclick="openHomeSettings()" class="rhm-sb-item hb-set text-sm bg-gradient-to-r from-slate-500 via-gray-500 to-zinc-600 hover:from-slate-600 hover:via-gray-600 hover:to-zinc-700 text-white font-bold py-2.5 px-4 rounded-xl border border-slate-400/40 shadow-sm transition-all">⚙️ Cài Đặt</button>
+        <button type="button" id="rhmUpdateAppBtn" onclick="rhmUpdateApp()" class="rhm-sb-item text-sm text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm" style="background:linear-gradient(90deg,#0969da,#2da44e)" title="Tải lại app và dữ liệu mới nhất từ GitHub">🔄 Cập Nhật App</button>
         </div>
     </div>
-    <div class="rhm-sb-foot"><button type="button" class="rhm-sb-exit" id="rhmSbExit">⏻ Thoát</button></div>
+    <div class="rhm-sb-foot"><button type="button" class="rhm-sb-exit" id="rhmSbExit"><span aria-hidden="true">🚪</span><span>Thoát</span></button></div>
 </aside>
 <script>
 (function () {
