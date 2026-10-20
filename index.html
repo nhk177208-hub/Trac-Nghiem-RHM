@@ -29253,8 +29253,8 @@ body {
                         if (l && (l.blk || 0) === (d.blk || 0) && Math.abs(d.y - l.y) <= 0.5 * Math.max(d.fh, l.fh)) { l.it.push(d); l.fh = Math.max(l.fh, d.fh); }
                         else lines.push({ blk: d.blk || 0, y: d.y, fh: d.fh, it: [d] });
                     });
-                    const CAPRE = /^[\u2022\u25CF\u00B7\s]*(?:fig(?:ure)?s?\.?|tables?|tbl\.?|box|chart|plate|photo(?:graph)?|graph|scheme|h\u00ECnh|\u1EA3nh|b\u1EA3ng|bi\u1EC3u \u0111\u1ED3|s\u01A1 \u0111\u1ED3)\s*[0-9IVXivx]+(?:[.\-\u2013][0-9A-Za-z]+)*/i;
-                    const CAPLAB = /^[\u2022\u25CF\u00B7\s]*(?:fig(?:ure)?s?\.?|tables?|tbl\.?|box|chart|plate|photo(?:graph)?|graph|scheme|h\u00ECnh|\u1EA3nh|b\u1EA3ng|bi\u1EC3u \u0111\u1ED3|s\u01A1 \u0111\u1ED3)\s*[0-9IVXivx]+(?:[.\-\u2013][0-9A-Za-z]+)*\.?$/i;
+                    const CAPRE = /^(?:fig(?:ure)?s?\.?|tables?|tbl\.?|box|chart|plate|photo(?:graph)?|graph|scheme|h\u00ECnh|\u1EA3nh|b\u1EA3ng|bi\u1EC3u \u0111\u1ED3|s\u01A1 \u0111\u1ED3)\s*[0-9IVXivx]+(?:[.\-\u2013][0-9A-Za-z]+)*/i;
+                    const CAPLAB = /^(?:fig(?:ure)?s?\.?|tables?|tbl\.?|box|chart|plate|photo(?:graph)?|graph|scheme|h\u00ECnh|\u1EA3nh|b\u1EA3ng|bi\u1EC3u \u0111\u1ED3|s\u01A1 \u0111\u1ED3)\s*[0-9IVXivx]+(?:[.\-\u2013][0-9A-Za-z]+)*\.?$/i;
                     const bfhP = pg.bfh || bfhAll;
                     for (let i = 0; i < lines.length; i++) {
                         const ln = lines[i]; ln.it.sort((x, y) => x.x - y.x);
@@ -29317,31 +29317,42 @@ body {
     /* 3. Lời nhắc cho AI: trả NGUYÊN VĂN chữ của từng phân mục (không còn start / end) */
     window.bkPdfSystem = function (sub) {
         const L = [
-            `Bạn là chuyên gia dàn trang sách giáo khoa. Bạn được cho FILE PDF của một chương sách (hoặc một phần của chương). Hãy chia phần VĂN BẢN CHÍNH thành các PHÂN MỤC theo tiêu đề (tối đa 10 cấp) và trả về NGUYÊN VĂN chữ của từng phân mục, để app tự đối chiếu rồi đánh dấu (tô sáng) đúng phần chữ đó trong PDF. Chỉ trả về JSON, không thêm chữ nào khác.`,
+            `Bạn là chuyên gia dàn trang sách giáo khoa. Bạn được cho FILE PDF của một chương sách (hoặc một phần của chương). Hãy chia phần VĂN BẢN CHÍNH thành các PHÂN MỤC theo tiêu đề (tối đa 10 cấp). Với mỗi phân mục, trả TÊN MỤC riêng và NỘI DUNG mục thành các KHỐI có GẮN THẺ (loại khối, trang, cột, chỗ ngắt cột / ngắt trang), để app tự ghép tên mục với nội dung rồi tô sáng đúng chữ trong PDF. Chỉ trả về JSON, không thêm chữ nào khác.`,
             ``,
-            `ĐỊNH DẠNG: {"lead":[{"page":n,"text":"..."}],"sections":[{"title":"...","level":1,"vi":"...","parts":[{"page":n,"text":"..."},{"page":n,"cont":"col","text":"..."}]}],"done":true}`,
-            `- "title": tiêu đề mục, chép đúng chữ in, BỎ số thứ tự / ký hiệu đầu dòng in sẵn (1.2, A., •). Tiêu đề dài 2–3 dòng (cùng cỡ chữ, cùng lề) là MỘT mục: ghi trọn các dòng.`,
+            `ĐỊNH DẠNG: {"lead":[KHỐI,...],"sections":[{"title":"...","vi":"...","level":1,"page":n,"blocks":[KHỐI,...]}],"done":true}`,
+            `KHỐI = {"page":n,"col":c,"type":"body","cont":"","end":"","text":"..."}`,
+            ``,
+            `TÊN MỤC (tách riêng khỏi nội dung):`,
+            `- "title": tên mục, chép đúng chữ in, BỎ số thứ tự / ký hiệu đầu dòng in sẵn (1.2, A., •). Tiêu đề dài 2–3 dòng (cùng cỡ chữ, cùng lề) là MỘT mục: ghi trọn các dòng. Tên mục KHÔNG lặp lại trong "blocks" (app tự ghép tên mục với khối đầu tiên khi tô; kể cả khi tiêu đề và chữ thân bài chạy tiếp cùng một dòng).`,
             `- "level": 1 đến 10. level 1 = mục lớn nhất trong chương (ngay dưới tên chương), level 2 = con của nó, v.v. Cùng kiểu trình bày thì cùng cấp xuyên suốt chương; cấp mới chỉ lớn hơn cấp liền trước tối đa 1 (không nhảy cấp).`,
             `- "vi": bản dịch tiếng Việt của tiêu đề, đúng thuật ngữ chuyên ngành.`,
-            `- "parts": các đoạn chữ NGUYÊN VĂN của mục, theo thứ tự đọc. Đây là phần quan trọng nhất:`,
-            `   + Part ĐẦU TIÊN PHẢI BẮT ĐẦU bằng chính chữ tiêu đề của mục (đúng như in; được bỏ số thứ tự / ký hiệu đầu dòng), rồi tới chữ thân bài liền sau tiêu đề.`,
-            `   + Mỗi part là MỘT ĐOẠN CHỮ LIÊN TỤC trong PDF. Khi chữ của mục bị NGẮT — chuyển sang cột bên cạnh, sang trang kế, hoặc bị chèn hình / bảng / biểu đồ / khung / chú thích giữa chừng — thì KẾT THÚC part đang chép và MỞ PART MỚI đúng chỗ chữ tiếp tục. Ở part mới ghi "page" = số trang (trong file) nơi part đó bắt đầu và "cont" = "col" (ngắt sang cột khác), "page" (ngắt sang trang khác) hoặc "gap" (bị chèn hình / bảng / khung rồi chữ mới chạy tiếp). Part đầu không cần "cont".`,
-            `   + "text" CHÉP NGUYÊN VĂN từng chữ như in trong PDF: KHÔNG dịch, KHÔNG tóm tắt, KHÔNG sửa lỗi, KHÔNG thêm, KHÔNG bớt, KHÔNG đổi thứ tự câu; giữ cả ký hiệu đầu dòng của danh sách. Các dòng bị xuống hàng trong cùng một đoạn văn thì nối thành một dòng (từ bị gạch nối cuối dòng thì ráp lại); đoạn văn khác nhau trong cùng part cách nhau bằng "\\n". "page" là SỐ THỨ TỰ trang trong file PDF đính kèm (trang đầu của file là 1), KHÔNG phải số in trên giấy.`,
-            `   + Mỗi mục chỉ chứa chữ thuộc TRỰC TIẾP mục đó: từ tiêu đề của nó cho tới ngay trước tiêu đề kế tiếp (bất kỳ cấp nào). Chữ của mục con thuộc về mục con, KHÔNG lặp lại ở mục cha. Mục chỉ có tiêu đề rồi tới ngay tiêu đề con thì "parts" chỉ có một part là chính tiêu đề đó.`,
-            `- "lead": nếu file BẮT ĐẦU bằng chữ thân bài chưa có tiêu đề riêng (phần tiếp của mục đã mở ở trang / phần trước, hoặc đoạn mở đầu của chương nằm trước tiêu đề đầu tiên) thì chép nguyên văn vào "lead" (cùng quy tắc như "parts", gồm các phần tử {"page","text"}). Không có thì "lead":[].`,
+            `- "page": SỐ THỨ TỰ trang trong file PDF đính kèm (trang đầu của file là 1, KHÔNG phải số in trên giấy) nơi tiêu đề nằm.`,
             ``,
-            `TUYỆT ĐỐI KHÔNG CHÉP và KHÔNG LẤY LÀM TIÊU ĐỀ: (1) OUTLINE / mục lục in sẵn ở đầu bài ("Chapter contents", "Outline", "Learning objectives", "Nội dung chương", "Mục tiêu"; mỗi dòng "Tên mục … số trang"); (2) hình ảnh, ảnh chụp, sơ đồ, BIỂU ĐỒ (chart, graph) và chữ nằm trong hình; (3) chú thích hình (Figure, Fig., Hình, Ảnh), mô tả ô "(A) … (B) …"; (4) BẢNG và tiêu đề bảng (Table, Bảng) cùng MỌI tên cột / hàng / ô / số liệu trong bảng; (5) khung / hộp rời khỏi mạch văn (Box, sidebar, Clinical Pearl, Key Points…), ghi chú lề; (6) dòng nguồn / trích dẫn (Adapted from…, Source…, http://…); (7) đầu trang, chân trang, số trang, tên chương in lặp, tên tác giả; (8) tên chương (tiêu đề lớn ở trang đầu). Chữ mở đầu bằng Figure / Fig. / Table / Box / Chart / Hình / Bảng / Biểu đồ / Sơ đồ / Ảnh là chú thích — bỏ qua dù in đậm hay cỡ to. Chỉ bỏ chữ nằm BÊN TRONG hình / bảng / khung; chữ thân bài đứng cạnh hoặc chạy tiếp sau chúng vẫn phải chép.`,
+            `NỘI DUNG MỤC = "blocks": liệt kê theo THỨ TỰ ĐỌC (hết cột trái rồi mới sang cột phải; hết trang rồi mới sang trang sau) MỌI khối nằm từ sau tiêu đề của mục cho tới ngay trước tiêu đề kế tiếp (bất kỳ cấp nào), KỂ CẢ khối không phải chữ thân bài — mỗi khối phải gắn thẻ "type":`,
+            `   + CHỮ CẦN TÔ: "body" = đoạn văn thân bài; "list" = các dòng gạch đầu dòng / đánh số của một danh sách (mỗi dòng cách nhau "\\n", giữ cả ký hiệu đầu dòng).`,
+            `   + KHÔNG TÔ (chỉ gắn thẻ để app biết là có khối này ở đó): "figure" = hình ảnh / ảnh chụp / sơ đồ; "chart" = biểu đồ; "table" = bảng (cả tiêu đề bảng và mọi ô / hàng / cột); "caption" = chú thích hình / bảng (Figure, Fig., Table, Hình, Bảng, mô tả (A) (B)…); "box" = khung / hộp rời khỏi mạch văn (Box, sidebar, Clinical Pearl, Key Points…); "source" = dòng nguồn / trích dẫn (Adapted from…, Source…, http://…); "outline" = mục lục / mục tiêu in sẵn ở đầu bài; "marginnote" = ghi chú lề; "header" = đầu trang / tên chương hoặc tên sách in lặp; "footer" = chân trang; "pagenum" = số trang.`,
+            `   + "text": với "body" / "list" CHÉP NGUYÊN VĂN từng chữ như in trong PDF: KHÔNG dịch, KHÔNG tóm tắt, KHÔNG sửa lỗi, KHÔNG thêm, KHÔNG bớt, KHÔNG đổi thứ tự câu. Các dòng xuống hàng trong cùng một đoạn văn thì nối thành một dòng (từ bị gạch nối cuối dòng thì ráp lại). Với các loại KHÔNG TÔ chỉ ghi 3–8 chữ đầu của khối (hoặc "" nếu không có chữ), TUYỆT ĐỐI không chép cả bảng / hình / chú thích.`,
+            `   + "col": số thứ tự cột nơi khối BẮT ĐẦU (1 = cột trái, 2 = cột kế…); 0 nếu khối rộng suốt bề ngang trang.`,
+            `   + "page": số thứ tự trang trong file nơi khối bắt đầu.`,
+            `   + "cont" = khối này nối với khối CHỮ (body / list) đứng ngay trước nó trong cùng mục như thế nào: "" = liền mạch (đoạn kế tiếp / dòng kế tiếp cùng cột, cùng trang); "col" = khối bắt đầu ở ĐẦU CỘT KẾ TIẾP, nối thẳng câu bị ngắt ở đáy cột trước; "page" = khối bắt đầu ở ĐẦU TRANG KẾ TIẾP, nối thẳng câu bị ngắt ở cuối trang trước; "gap" = chữ chạy tiếp sau một khối KHÔNG TÔ (hình / bảng / biểu đồ / khung…) chen giữa trong cùng cột. Khối đầu tiên của mục để "".`,
+            `   + "end" = khối này KẾT THÚC như thế nào: "" = kết thúc tự nhiên (hết đoạn, hoặc hết mục); "col" = bị cắt ở ĐÁY CỘT, câu còn chạy tiếp sang cột kế; "page" = bị cắt ở CUỐI TRANG, câu còn chạy tiếp sang trang kế; "gap" = bị hình / bảng / khung chen vào, chữ chạy tiếp sau đó. Phải nhất quán: khối có "end":"col" thì khối chữ liền sau nó có "cont":"col" (tương tự "page", "gap").`,
+            `   + Một khối chữ là MỘT ĐOẠN LIÊN TỤC trong PDF; chỗ chữ bị ngắt (đáy cột, cuối trang) thì kết thúc khối đang chép (đặt "end") và MỞ KHỐI MỚI đúng chỗ chữ tiếp tục (đặt "cont"). Đoạn văn khác nhau liền mạch trong cùng cột có thể là các khối riêng với "cont":"".`,
+            `   + Mỗi mục chỉ chứa khối thuộc TRỰC TIẾP mục đó: từ sau tiêu đề của nó cho tới ngay trước tiêu đề kế tiếp (bất kỳ cấp nào). Chữ của mục con thuộc về mục con, KHÔNG lặp lại ở mục cha. Mục chỉ có tiêu đề rồi tới ngay tiêu đề con thì "blocks" là [].`,
+            `   + Khối "header" / "footer" / "pagenum" chỉ cần gắn thẻ ở chỗ chúng xuất hiện giữa mục (ví dụ lúc mục chạy sang trang mới); không cần ghi ở mọi trang.`,
+            `- "lead": nếu file BẮT ĐẦU bằng chữ thân bài chưa có tiêu đề riêng (phần tiếp của mục đã mở ở trang / phần trước, hoặc đoạn mở đầu chương nằm trước tiêu đề đầu tiên) thì ghi các khối đó vào "lead" (cùng quy tắc và cùng thẻ như "blocks"). Không có thì "lead":[].`,
+            ``,
+            `TUYỆT ĐỐI KHÔNG LẤY LÀM TIÊU ĐỀ MỤC: (1) OUTLINE / mục lục in sẵn ở đầu bài ("Chapter contents", "Outline", "Learning objectives", "Nội dung chương", "Mục tiêu"; mỗi dòng "Tên mục … số trang"); (2) chữ nằm trong hình / biểu đồ; (3) chú thích hình / bảng (Figure, Fig., Table, Box, Chart, Hình, Bảng, Biểu đồ, Sơ đồ, Ảnh — dù in đậm hay cỡ to); (4) tên cột / hàng / ô trong bảng; (5) tiêu đề của khung rời mạch văn; (6) dòng nguồn; (7) đầu trang, chân trang, số trang, tên chương in lặp, tên tác giả; (8) tên chương (tiêu đề lớn ở trang đầu). Những thứ này nếu nằm giữa nội dung một mục thì chỉ gắn thẻ đúng "type" của chúng như trên. Chữ thân bài đứng cạnh hoặc chạy tiếp sau chúng vẫn thuộc mục và vẫn phải chép thành khối "body" / "list".`,
             ``,
             `DANH SÁCH / GẠCH ĐẦU DÒNG — thuộc MỤC HIỆN TẠI hay là MỤC MỚI:`,
-            `- Dòng có ký hiệu đầu dòng (•, ●, ○, ▪, -, –, *, a), b), i), (1), 1)…) là MỘT PHẦN CỦA MỤC HIỆN TẠI: chép nguyên văn, kèm ký hiệu, vào "parts" của mục hiện tại; KHÔNG tách thành mục mới. Danh sách lồng nhau (gạch con) cũng vậy. Câu dẫn của danh sách ("như sau:", "gồm:") cùng thuộc mục chứa danh sách.`,
+            `- Dòng có ký hiệu đầu dòng (•, ●, ○, ▪, -, –, *, a), b), i), (1), 1)…) là MỘT PHẦN CỦA MỤC HIỆN TẠI: chép nguyên văn, kèm ký hiệu, thành khối "list" của mục hiện tại; KHÔNG tách thành mục mới. Danh sách lồng nhau (gạch con) cũng vậy. Câu dẫn của danh sách ("như sau:", "gồm:") cùng thuộc mục chứa danh sách.`,
             `- Chỉ coi một dòng có ký hiệu / số thứ tự là TIÊU ĐỀ MỤC MỚI khi đủ CẢ BA điều kiện: (a) đứng riêng một dòng, ngắn, là tên gọi chứ không phải câu; (b) trình bày giống tiêu đề — cỡ chữ lớn hơn thân bài, hoặc in đậm / in hoa / in màu / nền xám, có khoảng trống trên dưới — đúng kiểu các tiêu đề cùng cấp khác trong chương; (c) phía dưới là đoạn văn (hoặc nhóm đoạn) giải thích riêng cho chính tên gọi đó, KHÔNG phải dòng kế tiếp của cùng một danh sách.`,
             `- Ví dụ: "• Hue: the dominant colour…" (tên in đậm rồi chữ chạy tiếp cùng dòng, nằm giữa danh sách các dòng cùng kiểu) là MỤC DANH SÁCH → thuộc mục hiện tại. "3.2 Hue" đứng riêng, in đậm, bên dưới là cả đoạn giải thích → MỤC MỚI. Danh sách đánh số 1) 2) 3) liệt kê các bước / ý trong một đoạn → thuộc mục hiện tại.`,
-            `- Tiêu đề "in đậm đầu đoạn rồi chữ chạy tiếp cùng dòng" (run-in heading, KHÔNG có ký hiệu danh sách) mà cả chương dùng kiểu đó cho các mục cùng cấp thì là mục mới: "title" chỉ ghi phần tiêu đề, part đầu gồm tiêu đề + chữ chạy tiếp.`,
+            `- Tiêu đề "in đậm đầu đoạn rồi chữ chạy tiếp cùng dòng" (run-in heading, KHÔNG có ký hiệu danh sách) mà cả chương dùng kiểu đó cho các mục cùng cấp thì là mục mới: "title" chỉ ghi phần tiêu đề, khối đầu gồm chữ chạy tiếp.`,
             `- Đã coi một kiểu ký hiệu là tiêu đề thì dùng nhất quán xuyên chương. Khi phân vân: coi là danh sách của mục hiện tại (không tạo mục mới).`,
             ``,
             `BẮT ĐỦ MỌI TIÊU ĐỀ MỤC thật, không bỏ sót: kể cả tiêu đề CHỈ MỘT TỪ ("Hue", "Value"), tiêu đề in MÀU dù không đậm, tiêu đề có nền xám, tiêu đề phụ nhỏ; mục có nhiều tiêu đề con thì liệt kê HẾT. Tiêu đề là TÊN MỤC chứ không phải câu văn: thường ngắn (sách đặt tiêu đề dài thì tới khoảng 20 từ); không lấy câu / đoạn văn trong thân bài, mảnh câu bị đứt, câu có trích dẫn "(Fig. 17.30B)". Mỗi tiêu đề chỉ ghi một lần. Duyệt từ trang đầu đến trang cuối của file, KHÔNG bỏ trang nào.`,
             ``,
-            `GIỚI HẠN MỖI LẦN TRẢ (trả từng đợt nếu dài): mỗi lần trả tối đa khoảng 4000 từ chữ nguyên văn (cộng dồn mọi "parts"). Nếu file còn mục chưa trả hết thì DỪNG Ở CUỐI MỘT MỤC (không cắt ngang một mục) và đặt "done": false; app sẽ gọi lại, nói rõ mục cuối cùng đã trả, khi đó trả TIẾP từ mục liền sau, không lặp lại mục đã trả. Trả hết file thì "done": true.`
+            `GIỚI HẠN MỖI LẦN TRẢ (trả từng đợt nếu dài): mỗi lần trả tối đa khoảng 4000 từ chữ nguyên văn (cộng dồn mọi khối "body" / "list"). Nếu file còn mục chưa trả hết thì DỪNG Ở CUỐI MỘT MỤC (không cắt ngang một mục) và đặt "done": false; app sẽ gọi lại, nói rõ mục cuối cùng đã trả, khi đó trả TIẾP từ mục liền sau, không lặp lại mục đã trả. Trả hết file thì "done": true.`
         ];
         if (sub) L.push(``, `CHẾ ĐỘ MỤC CON: chỉ liệt kê các mục con nằm bên trong mục được nêu ở đầu yêu cầu (không ghi lại chính mục đó, mục cùng cấp hay cấp trên); "level" tính tương đối như yêu cầu nêu; chữ của mục cha nằm trước mục con đầu tiên KHÔNG trả; "lead" luôn là [].`);
         return L.join('\n') + (typeof BK_TR_GLOSS === 'string' ? BK_TR_GLOSS : '');
@@ -29444,10 +29455,32 @@ body {
         const hs = Array.isArray(r && r.sections) ? r.sections : (Array.isArray(r && r.headings) ? r.headings : (Array.isArray(r) ? r : []));
         const clean = t => String(t || '').replace(/[ \t\u00A0]+/g, ' ').replace(/ ?\n ?/g, '\n').trim();
         const pageOf = (p, dflt) => { const v = parseInt(p, 10); return Math.max(1, Math.min(N || 1, v ? v + base : dflt)); };
-        const mkParts = (arr, dflt) => (Array.isArray(arr) ? arr : []).map(p => {
-            const text = clean(typeof p === 'string' ? p : (p && (p.text || p.t)));
-            return text ? { page: pageOf(p && p.page, dflt), cont: String((p && p.cont) || ''), text: text } : null;
-        }).filter(Boolean);
+        /* Khối có thẻ (định dạng mới) hoặc part cũ {page,cont,text}. Khối KHÔNG TÔ (hình / bảng / biểu đồ / chú thích / khung / đầu-chân trang…) không thành part,
+           chỉ để lại dấu "gap" cho khối chữ liền sau. Khối chữ liền mạch (cont rỗng) được gộp vào khối trước. cont / end được giữ để app biết mép ngắt cột / trang. */
+        const CONT_OK = { col: 1, page: 1, gap: 1 };
+        const GAP_TYPES = { figure: 1, chart: 1, table: 1, caption: 1, box: 1, source: 1, outline: 1 };
+        const TEXT_TYPES = { body: 1, list: 1, note: 1, text: 1, paragraph: 1, bullet: 1, para: 1 };
+        const tagOf = v => { v = String(v || '').toLowerCase().trim(); return CONT_OK[v] ? v : ''; };
+        const mkParts = (arr, dflt) => {
+            const out = []; let gapPending = false;
+            (Array.isArray(arr) ? arr : []).forEach(p => {
+                const isStr = typeof p === 'string';
+                const type = isStr ? 'body' : String((p && p.type) || '').toLowerCase().trim();
+                const tagged = !isStr && !!type;
+                if (tagged && !TEXT_TYPES[type]) { if (GAP_TYPES[type]) gapPending = true; return; }   // khối không tô
+                const text = clean(isStr ? p : (p && (p.text || p.t)));
+                if (!text) return;
+                let cont = isStr ? '' : tagOf(p.cont), end = isStr ? '' : tagOf(p.end);
+                const prev = out[out.length - 1];
+                if (!cont && gapPending) cont = 'gap';
+                if (!cont && prev && prev.end) cont = prev.end;           // thẻ end của khối trước ⇒ khối này là chỗ nối
+                gapPending = false;
+                if (prev && cont && !prev.end) prev.end = cont;           // thẻ cont của khối này ⇒ khối trước kết thúc ở chỗ ngắt
+                if (tagged && prev && !cont && !prev.end) { prev.text += '\n' + text; if (end) prev.end = end; return; }
+                out.push({ page: pageOf(p && p.page, dflt), cont: cont, end: end, col: isStr ? 0 : (parseInt(p && p.col, 10) || 0), text: text });
+            });
+            return out;
+        };
         const anchors = (h) => {
             const P = h.parts; if (!P || !P.length) return;
             h.start = P[0].text.replace(/\s+/g, ' ').slice(0, 110);
@@ -29462,12 +29495,12 @@ body {
         hs.forEach(h => {
             const en = clean(h && (h.title || h.text || h.en)).replace(/\s+/g, ' ');
             if (!en) return;
-            let parts = mkParts(h.parts || h.segments, base + 1);
-            const pg = parts.length ? parts[0].page : pageOf(h.page, base + 1);
+            let parts = mkParts(h.blocks || h.parts || h.segments, base + 1);
+            const pg = (h.page && h.blocks) ? pageOf(h.page, base + 1) : (parts.length ? parts[0].page : pageOf(h.page, base + 1));
             if (!(pg >= 1 && pg <= N) || (lo && pg < lo) || (hi && pg > hi)) return;
-            if (!parts.length) parts = [{ page: pg, cont: '', text: en }];
+            if (!parts.length) parts = [{ page: pg, cont: '', end: '', col: 0, text: en }];
             const k0 = bkNormStr(en).slice(0, 12);
-            if (k0.length >= 3 && bkNormStr(parts[0].text).indexOf(k0) !== 0 && bkNormStr(parts[0].text).slice(0, 40).indexOf(k0) < 0) parts[0] = { page: parts[0].page, cont: '', text: en + ' ' + parts[0].text };   // part đầu phải mở bằng tiêu đề
+            if (k0.length >= 3 && bkNormStr(parts[0].text).indexOf(k0) !== 0 && bkNormStr(parts[0].text).slice(0, 40).indexOf(k0) < 0) { if (parts[0].cont) parts.unshift({ page: pg, cont: '', end: parts[0].cont, col: 0, text: en }); else parts[0] = Object.assign({}, parts[0], { text: en + ' ' + parts[0].text }); }   // tên mục + khối đầu: app tự ghép (tên mục tách riêng ở AI); nếu khối đầu ở cột / trang khác thì tên mục là part riêng
             const hd = { page: pg, box: null, en: en.slice(0, 240), vi: clean(h.vi).replace(/\s+/g, ' ').slice(0, 240),
                 lvl: Math.max(1, Math.min(10, (parseInt(h.level, 10) || 1) + (rel || 0))), parts: parts, open: false };
             anchors(hd);
@@ -29479,7 +29512,7 @@ body {
             const tot = lead.reduce((a, p) => a + bkNormStr(p.text).length, 0);
             if (n0 > 0) {                                   // gắn vào mục cuối của phần trước
                 const prev = heads[n0 - 1];
-                prev.parts = (prev.parts || []).concat(lead.map(p => ({ page: p.page, cont: p.cont || 'page', text: p.text })));
+                prev.parts = (prev.parts || []).concat(lead.map((p, i) => ({ page: p.page, cont: p.cont || (i === 0 ? 'page' : ''), end: p.end || '', col: p.col || 0, text: p.text })));
                 anchors(prev);
                 prev.open = !nAdded;                        // cửa sổ này không có tiêu đề nào → mục vẫn còn chạy tiếp
             } else if (tot >= 60) {                         // đầu chương: đoạn mở đầu trước tiêu đề đầu tiên
@@ -29538,10 +29571,7 @@ body {
             const m = bkNormMap(bkText);
             let n2 = ''; const m2 = [];   // bản chỉ-chữ (bỏ chữ số): số chú thích trên "theory³", ".17,18" không còn làm hỏng việc so khớp
             for (let i = 0; i < m.n.length; i++) { const c = m.n.charCodeAt(i); if (c < 48 || c > 57) { n2 += m.n[i]; m2.push(i); } }
-            /* bản n3: bỏ thêm f, t, s — PDF mất chữ khi dùng ligature (Th, ff, fi, fl) hoặc mất 's' ở font tiêu đề, trong khi AI đọc đúng chữ */
-            let n3 = ''; const m3 = [];
-            for (let i = 0; i < m.n.length; i++) { const ch = m.n[i]; if (!/[0-9fts]/.test(ch)) { n3 += ch; m3.push(i); } }
-            GN = { t: bkText, n: m.n, map: m.map, n2: n2, m2: m2, n3: n3, m3: m3 };
+            GN = { t: bkText, n: m.n, map: m.map, n2: n2, m2: m2 };
         }
         return GN;
     }
@@ -29582,37 +29612,16 @@ body {
         }
         return best;
     }
-    let ffEnd = -1;   // điểm cuối (chỉ số chuẩn hóa) của đầu mục vừa tìm được bởi findFirst
-    const STRIP3 = /[0-9fts]/g;
-    /* Đầu mục = chỗ khớp TIÊU ĐỀ. Gom MỌI chỗ khớp (so khớp bỏ f/t/s nên chịu được chữ ghép Th/ff/fi/fl và chữ 's' mất ở font tiêu đề),
-       rồi chấm điểm: (1) chữ đứng ngay sau chỗ khớp phải giống chữ AI chép tiếp theo (loại caption / dòng trùng tên), (2) nằm ở đầu dòng. */
-    function findFirst(h, P, minN) {
-        ffEnd = -1;
-        const g = gnorm(), tn = P.tn, keys = [];
+    function findFirst(h, P, minN) {   // đầu mục: tiêu đề + chữ liền sau (tránh nhầm với dòng trùng tên trong outline / thân bài)
+        const tn = P.tn, keys = [];
         if (tn.length < 30 && h._ntn) keys.push((tn + h._ntn).slice(0, 44));   // tiêu đề trơ trọi: ghép chữ đầu của mục kế tiếp
         keys.push(tn.slice(0, 44));
         if (tn.length > 26) keys.push(tn.slice(0, 26));
-        const fullRaw = (h.parts || []).map(x => bkNormStr(x.text)).join('');
-        const full = fullRaw.replace(STRIP3, '');
-        if (fullRaw.length > tn.length) keys.unshift(fullRaw.slice(0, Math.min(44, Math.max(tn.length + 14, 24))));   // tiêu đề + chữ ngay sau: tránh nhầm với chỗ trùng tên
-        const lb = (arr, v) => { let l = 0, hh = arr.length; while (l < hh) { const m = (l + hh) >> 1; if (arr[m] < v) l = m + 1; else hh = m; } return l; };
-        const lo = Math.max(minN, pageNormRange(P.page - 1)[0]), hi = pageNormRange(P.page + 1)[1];
         for (const key of keys) {
-            const k3 = key.replace(STRIP3, ''); if (k3.length < 6) continue;
-            let best = -1, bestSc = -1, bestEnd = -1;
-            let q = g.n3.indexOf(k3, lb(g.m3, lo));
-            while (q >= 0 && g.m3[q] < hi) {
-                let a = g.m3[q], b = g.m3[q + k3.length - 1] + 1;
-                while (a > 0 && STRIP3.test(g.n[a - 1]) && g.map[a] - g.map[a - 1] === 1) { a--; STRIP3.lastIndex = 0; }
-                STRIP3.lastIndex = 0;
-                while (b < g.n.length && /[0-9fts]/.test(g.n[b]) && g.map[b] - g.map[b - 1] === 1) b++;
-                let m = 0; const L = Math.min(full.length, 80);
-                while (m < L && g.n3[q + m] === full[m]) m++;   // chữ AI chép tiếp theo có đúng là chữ đứng sau chỗ khớp?
-                const sc = m + (bkLineStart(bkText, g.map[a]) ? 25 : 0);
-                if (sc > bestSc) { bestSc = sc; best = a; bestEnd = b; }
-                q = g.n3.indexOf(k3, q + 1);
-            }
-            if (best >= 0) { ffEnd = bestEnd; return best; }
+            if (key.length < 3) continue;
+            let p = locKey(key, P.page, minN, key.length < 22);
+            if (p < 0 && key.length < 22) p = locKey(key, P.page, minN, false);
+            if (p >= 0) return p;
         }
         return -1;
     }
@@ -29623,35 +29632,45 @@ body {
         if (m[0].charAt(0) !== '\n' && from > 0) return s0;
         return s0 - m[1].length;
     }
-    /* căn chỉ số chuẩn hóa về đầu dòng (mode 0) / cuối dòng (mode 1) GẦN NHẤT trong chữ chương */
-    function snapNIdx(ni, mode) {
-        const g = gnorm(); if (ni <= 0 || ni >= g.map.length) return ni;
-        const raw = g.map[ni], T = bkText;
-        const ls = T.lastIndexOf('\n', raw - 1) + 1; let le = T.indexOf('\n', raw); if (le < 0) le = T.length;
-        if (raw - ls <= 1 || le - raw <= 1) return ni;
-        const toStart = raw - ls, toEnd = le - raw;
-        if (toStart <= toEnd) return nIdxOfRaw(ls);
-        return nIdxOfRaw(le);
-    }
-    /* chỉ số chuẩn hóa của đầu tiêu đề kế tiếp (trên các trang quanh vị trí này); Infinity nếu không có */
-    function nextHeadN(ni) {
-        const g = gnorm(); if (ni >= g.map.length) return Infinity;
-        const raw = g.map[Math.max(0, ni - 1)]; let best = Infinity;
-        const pn = Math.max(1, Math.min(bkPages.length, pageOfN(ni)));
-        for (let q = pn - 1; q <= pn + 1; q++) {
-            const pg = bkPages[q - 1]; if (!pg || !pg.headCands) continue;
-            pg.headCands.forEach(hc => { if (hc.s > raw + 2 && hc.s < best) best = hc.s; });
+    /* [fix 5] Mép đoạn nối tiếp (ngắt cột / sang trang / sau hình-bảng): đoạn nối luôn mở ở ĐẦU DÒNG và đoạn đứng trước nó luôn khép ở CUỐI DÒNG.
+       Nếu AI chép lệch vài chữ ở mép (vd "marginal", "For temporary" ở đầu cột 2, hoặc mấy chữ cuối cột 1) thì phần đó bị rơi khỏi vùng tô.
+       → kéo đầu đoạn nối tiếp lùi về đầu dòng, kéo cuối đoạn (nếu còn đoạn sau) tới cuối dòng, chỉ khi phần hụt ngắn (<= 80 ký tự, cùng một dòng, có chữ thật). */
+    const SNAP_ALNUM = /[0-9A-Za-z\u00C0-\u1EF9]/;
+    function snapRg(rg) {
+        if (!Array.isArray(rg) || rg.length < 2 || !bkText) return rg;
+        const T = bkText, len = T.length, MAXG = 80;
+        rg.sort((a, b) => a[0] - b[0]);
+        for (let i = 0; i < rg.length; i++) {
+            const r = rg[i];
+            if (i > 0 && r[0] > 0) {
+                const ls = T.lastIndexOf('\n', r[0] - 1) + 1;
+                if (ls < r[0] && r[0] - ls <= MAXG && SNAP_ALNUM.test(T.slice(ls, r[0]))) r[0] = ls;
+            }
+            if (i < rg.length - 1 && r[1] < len) {
+                let le = T.indexOf('\n', r[1]); if (le < 0) le = len;
+                if (le > r[1] && le - r[1] <= MAXG && SNAP_ALNUM.test(T.slice(r[1], le))) r[1] = le;
+            }
         }
-        return best === Infinity ? Infinity : nIdxOfRaw(best);
+        rg.sort((a, b) => a[0] - b[0]);
+        const out = [];
+        rg.forEach(r => {
+            const l = out[out.length - 1];
+            if (l && r[0] <= l[1]) { if (r[1] > l[1]) l[1] = r[1]; }
+            else if (l && !SNAP_ALNUM.test(T.slice(l[1], r[0]))) l[1] = Math.max(l[1], r[1]);
+            else out.push([r[0], r[1]]);
+        });
+        rg.length = 0; out.forEach(r => rg.push(r));
+        return rg;
     }
     function alignHead(h, minRaw) {
         const g = gnorm();
         if (!g.n || !bkPages.length) return false;
         const NP = bkPages.length;
-        const parts = (h.parts || []).map(p => ({ page: Math.max(1, Math.min(NP, p.page || h.page || 1)), tn: bkNormStr(p.text) })).filter(p => p.tn.length >= 2);
+        const parts = (h.parts || []).map(p => ({ page: Math.max(1, Math.min(NP, p.page || h.page || 1)), tn: bkNormStr(p.text), cont: p.cont || '', end: p.end || '' })).filter(p => p.tn.length >= 2);
         if (!parts.length) return false;
         const minN = nIdxOfRaw(minRaw || 0);
         const nr = [];   // đoạn đã khớp (chỉ số chuẩn hóa) [a, b)
+        const pspans = [];   // mép từng part (chỉ số chuẩn hóa) + thẻ ngắt cột / trang
         let matched = 0, total = 0, startN = -1, cursor = -1;
         let prevEnd = 0;
         for (let pi = 0; pi < parts.length; pi++) {
@@ -29663,28 +29682,14 @@ body {
             let fo = Infinity, fa = -1, le = -1, lb = -1;   // mép đoạn khớp: vị trí chữ AI (fo..le) ↔ vị trí trong chữ chương (fa..lb)
             const note = (off, a0, len) => { if (off < fo) { fo = off; fa = a0; } if (off + len > le) { le = off + len; lb = a0 + len; } };
             const lb2 = (arr, v) => { let l = 0, h = arr.length; while (l < h) { const m = (l + h) >> 1; if (arr[m] < v) l = m + 1; else h = m; } return l; };
-            const find2 = (k) => {   // khớp bản bỏ chữ số, rồi bản bỏ thêm f/t/s → [a, b) trong chỉ số chuẩn hóa gốc, hoặc null
-                for (let v = 2; v <= 3; v++) {
-                    const k2 = k.replace(v === 2 ? /[0-9]/g : /[0-9fts]/g, ''); if (k2.length < (v === 2 ? 10 : 12)) continue;
-                    const nn = v === 2 ? g.n2 : g.n3, mm = v === 2 ? g.m2 : g.m3;
-                    let from, to;
-                    if (cursor >= 0) { from = lb2(mm, cursor); to = from + 3000; }
-                    else { from = lb2(mm, Math.max(minN, pageNormRange(P.page - 1)[0])); to = lb2(mm, pageNormRange(P.page + 1)[1]); }
-                    let q = nn.indexOf(k2, from);
-                    if (q < 0 || q >= to) continue;
-                    if (cursor < 0) {   // chưa có điểm neo: ưu tiên chỗ khớp ở ĐẦU DÒNG (tiêu đề) hơn chỗ trùng chữ giữa đoạn
-                        let q2 = q;
-                        while (q2 >= 0 && q2 < to && !bkLineStart(bkText, g.map[mm[q2]])) q2 = nn.indexOf(k2, q2 + 1);
-                        if (q2 >= 0 && q2 < to) q = q2;
-                    }
-                    let a = mm[q], b = mm[q + k2.length - 1] + 1;
-                    const dropped = (ch) => v === 2 ? (ch >= '0' && ch <= '9') : /[0-9fts]/.test(ch);
-                    // chữ bị bỏ nằm liền sát mép trong cùng một từ (vd "F" của "Five", "s" của "Steps") vẫn thuộc đoạn khớp
-                    while (a > 0 && dropped(g.n[a - 1]) && g.map[a] - g.map[a - 1] === 1) a--;
-                    while (b < g.n.length && dropped(g.n[b]) && g.map[b] - g.map[b - 1] === 1) b++;
-                    return [a, b];
-                }
-                return null;
+            const find2 = (k) => {   // tìm bản chỉ-chữ của k (bỏ chữ số) → [a, b) trong chỉ số chuẩn hóa gốc, hoặc null
+                const k2 = k.replace(/[0-9]/g, ''); if (k2.length < 10) return null;
+                let from, to;
+                if (cursor >= 0) { from = lb2(g.m2, cursor); to = from + 3000; }
+                else { from = lb2(g.m2, Math.max(minN, pageNormRange(P.page - 1)[0])); to = lb2(g.m2, pageNormRange(P.page + 1)[1]); }
+                const q = g.n2.indexOf(k2, from);
+                if (q < 0 || q >= to) return null;
+                return [g.m2[q], g.m2[q + k2.length - 1] + 1];
             };
             const salv = (k, depth, off) => {
                 if (k.length < 10) return;
@@ -29693,7 +29698,7 @@ body {
                     q = g.n.indexOf(k, Math.max(0, cursor));
                     if (q >= 0 && q - cursor > (depth ? 900 : 2500)) q = -1;
                     if (q < 0 && depth === 0) q = findNear(k, cursor, ci0 === 0 ? P.page : 0, 8000);
-                } else if (depth === 0) { q = locKey(k, P.page, minN, true); if (q < 0) q = locKey(k, P.page, minN, false); }   // đầu đoạn: ưu tiên chỗ khớp ở đầu dòng
+                } else if (depth === 0) q = locKey(k, P.page, minN, false);
                 if (q >= 0) e = q + k.length;
                 else { const r2 = find2(k); if (r2) { q = r2[0]; e = r2[1]; } }
                 if (q >= 0) { nr.push([q, e]); matched += k.length; note(off, q, e - q); if (startN < 0) startN = q; cursor = e; return; }
@@ -29708,7 +29713,7 @@ body {
                 else if (cursor < 0) a = locKey(key, P.page, minN, false);
                 else a = findNear(key, cursor, ci === 0 ? P.page : 0, ci === 0 ? 30000 : 8000);
                 if (a < 0) { salv(key, 0, chunks[ci][0]); continue; }
-                const b = (pi === 0 && ci === 0 && ffEnd > a) ? ffEnd : a + key.length;
+                const b = a + key.length;
                 if (prev && a >= prev.b) {   // lấp chỗ trống do đoạn ở giữa không khớp (AI chép sai vài chữ)
                     const gap = a - prev.b, skip = ci - prev.ci - 1;
                     if ((skip === 0 && gap <= 6) || (skip > 0 && gap <= skip * CL * 1.6 + 30)) nr.push([prev.b, a]);
@@ -29724,16 +29729,13 @@ body {
                 const pg = bkPages[Math.max(0, Math.min(NP, pageOfN(fa)) - 1)];
                 if (lead > 0 && lead <= 260) {
                     const lim = Math.max(pg ? nIdxOfRaw(pg.gs) : 0, prevEnd);
-                    let ns = Math.max(lim, fa - lead);   // đúng số chữ AI còn thiếu (không nhân thêm → không lấn sang mục trước)
-                    ns = Math.max(lim, snapNIdx(ns, 0));
+                    const ns = Math.max(lim, fa - Math.ceil(lead * 1.25) - 2);
                     if (ns < fa) { nr.push([ns, fa]); if (pi === 0 || startN < 0 || ns < startN) { if (pi === 0) startN = ns; } }
                 }
                 if (tail > 0 && tail <= 260) {
                     const pg2 = bkPages[Math.max(0, Math.min(NP, pageOfN(Math.max(0, lb - 1))) - 1)];
-                    let lim = pg2 ? nIdxOfRaw(pg2.ge) : g.n.length;
-                    lim = Math.min(lim, nextHeadN(lb));   // không kéo qua tiêu đề của mục khác
-                    let ne = Math.min(lim, g.n.length, lb + tail);
-                    ne = Math.min(lim, snapNIdx(ne, 1));
+                    const lim = pg2 ? nIdxOfRaw(pg2.ge) : g.n.length;
+                    const ne = Math.min(lim, g.n.length, lb + Math.ceil(tail * 1.25) + 2);
                     if (ne > lb) { nr.push([lb, ne]); cursor = Math.max(cursor, ne); }
                 }
                 prevEnd = Math.max(prevEnd, lb);
@@ -29753,6 +29755,7 @@ body {
                     }
                 }
             }
+            { const mm = nr.slice(nr0); if (mm.length) { let lo2 = Infinity, hi2 = 0; mm.forEach(r => { if (r[0] < lo2) lo2 = r[0]; if (r[1] > hi2) hi2 = r[1]; }); pspans.push({ lo: lo2, hi: hi2, cont: P.cont, end: P.end || (parts[pi + 1] ? parts[pi + 1].cont : '') }); } }
         }
         if (!nr.length) return false;
         const cov = matched / Math.max(1, total), len = bkText.length;
@@ -29764,8 +29767,17 @@ body {
             else if (l && !/[0-9A-Za-z\u00C0-\u1EF9]/.test(bkText.slice(l[1], r[0]))) l[1] = r[1];
             else rg.push([r[0], r[1]]);
         });
-        rg.forEach(r => { while (r[1] < len && /[.,;:!?)\]"”'’\uFEFF\u200B\u00AD]/.test(bkText[r[1]])) r[1]++; });   // lấy luôn dấu câu / ký tự giữ chỗ vô hình (chữ ghép PDF bị mất, vd 's' cuối tiêu đề) liền sau chữ cuối
-        rg.forEach(r => { while (r[0] > 0 && /[\uFEFF\u200B\u00AD]/.test(bkText[r[0] - 1])) r[0]--; });
+        rg.forEach(r => { while (r[1] < len && /[.,;:!?)\]"”'’]/.test(bkText[r[1]])) r[1]++; });   // lấy luôn dấu câu liền sau chữ cuối
+        /* [fix 6] Theo THẺ của AI: part có cont (col / page / gap) mở ở ĐẦU DÒNG → kéo đầu part lùi về đầu dòng; part có end (col / page / gap) khép ở CUỐI DÒNG → kéo cuối part tới cuối dòng.
+           Nhờ vậy chữ đầu cột kế / chữ cuối cột trước không bị rơi dù AI chép lệch vài chữ ở mép. */
+        try {
+            pspans.forEach(ps => {
+                const lo = g.map[ps.lo], hi = g.map[Math.max(ps.lo, ps.hi - 1)] + 1;
+                if (ps.cont && lo > 0) { const ls = bkText.lastIndexOf('\n', lo - 1) + 1; if (ls < lo && lo - ls <= 120) rg.push([ls, lo]); }
+                if (ps.end && hi < len) { let le = bkText.indexOf('\n', hi); if (le < 0) le = len; if (le > hi && le - hi <= 120) rg.push([hi, le]); }
+            });
+        } catch (e) { console.warn('[Mục lục] vá mép part:', e); }
+        snapRg(rg);   // [fix 5] không rơi chữ ở mép cột / mép trang
         const startRaw = g.map[startN];
         const s0 = backUpPrefix(startRaw);
         h.pos = s0; h.cov = Math.round(cov * 100) / 100;
@@ -29832,27 +29844,6 @@ body {
     }
     window.bkHlFor = bkHlFor;
 
-    /* Mép vùng tô hay bị cụt giữa dòng ở chỗ đổi cột (cuối cột 1 / đầu cột 2): AI chép lệch vài chữ đầu-cuối dòng.
-       → nếu đầu đoạn nằm giữa dòng và phần dòng phía trước ngắn (chưa kết câu) thì lùi về đầu dòng;
-         nếu cuối đoạn nằm giữa dòng và phần dòng phía sau ngắn (chưa kết câu) thì kéo tới hết dòng. */
-    function bkSnapRg(rg) {
-        const T = bkText, L = T.length, MAXP = 60;
-        return rg.map(r => {
-            let a = r[0], b = r[1];
-            if (a > 0 && a < L && T[a - 1] !== '\n') {
-                const ls = T.lastIndexOf('\n', a - 1) + 1, pre = T.slice(ls, a);
-                if (pre.trim() && pre.length <= MAXP && !/[.!?:;]["”')\]]?\s*$/.test(pre)) a = ls;
-            }
-            if (b > 0 && b < L && T[b] !== '\n' && !/[.!?]["”')\]]?$/.test(T.slice(Math.max(0, b - 2), b))) {
-                let le = T.indexOf('\n', b); if (le < 0) le = L;
-                const post = T.slice(b, le);
-                if (post.trim() && post.length <= MAXP) b = le;
-            }
-            return [a, b];
-        });
-    }
-    window.bkSnapRg = bkSnapRg;
-
     /* Sắp xếp theo vị trí; mỗi mục có đoạn tô riêng (rg) lấy chữ đúng các đoạn đó; mục kiểu cũ thì kéo dài tới đầu mục kế */
     window.bkRelink = function () {
         const a = bkSecs.slice().sort((x, y) => x.s - y.s);
@@ -29863,6 +29854,7 @@ body {
             let rg = null;
             if (hd && Array.isArray(hd.rg) && hd.rg.length && hd.tl === bkText.length) {
                 rg = hd.rg.map(r => [r[0], r[1]]).filter(r => r[1] > r[0]);
+                snapRg(rg);   // [fix 5] mục lập từ trước cũng được vá, không cần lập lại mục lục
                 if (rg.length && hd.open) {   // mục còn chạy sang cửa sổ sau mà AI không trả tiếp → kéo tới đầu mục kế
                     let mx = 0; rg.forEach(r => { if (r[1] > mx) mx = r[1]; });
                     if (nextS > mx) rg.push([mx, nextS]);
@@ -29870,13 +29862,6 @@ body {
             }
             if (rg && rg.length) {
                 let mx = 0; rg.forEach(r => { if (r[1] > mx) mx = r[1]; });
-                try { rg = bkSnapRg(rg); } catch (e) {}
-                {   // vùng tô không bao giờ vượt qua tiêu đề của mục kế tiếp cùng cấp / cấp cao hơn
-                    let B = Infinity;
-                    for (let j = i + 1; j < bkSecs.length; j++) { if ((bkSecs[j].lvl || 1) <= (x.lvl || 1)) { B = bkSecs[j].s; break; } }
-                    if (B < Infinity) { const c = rg.map(r => [r[0], Math.min(r[1], B)]).filter(r => r[1] > r[0]); if (c.length) rg = c; }
-                }
-                mx = 0; rg.forEach(r => { if (r[1] > mx) mx = r[1]; });
                 x.rg = rg; x.e = mx;
                 x.text = rg.map(r => bkText.slice(r[0], r[1]).trim()).filter(Boolean).join('\n');
             } else {
