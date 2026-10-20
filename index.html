@@ -1289,6 +1289,38 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
         @media (max-width:639px){
             .rhm-tb.search-open .rhm-tb-avatar,.rhm-tb.search-open .rhm-tb-name{display:none}
         }
+        /* nền liền mạch: topbar hòa chung nền trang */
+        html,body.bg-gray-100{background-color:#f6f8fa!important}
+        .rhm-tbwrap{background:#f6f8fa!important}
+        .rhm-tb{background:transparent!important;border:0!important;border-radius:0!important}
+        /* ===== SIDEBAR (kiểu GitHub) ===== */
+        .rhm-sb-back{position:fixed;inset:0;z-index:100140;background:rgba(27,31,36,.5);opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}
+        .rhm-sb-back.open{opacity:1;visibility:visible}
+        .rhm-sb{position:fixed;top:0;left:0;bottom:0;z-index:100150;width:min(320px,86vw);display:flex;flex-direction:column;box-sizing:border-box;
+            background:#fff;color:#1f2328;box-shadow:0 8px 24px rgba(66,74,83,.3);border-radius:0 14px 14px 0;
+            transform:translateX(-102%);visibility:hidden;transition:transform .22s ease,visibility .22s;
+            padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px);overflow:hidden}
+        .rhm-sb.open{transform:none;visibility:visible}
+        .rhm-sb.noanim,.rhm-sb-back.noanim{transition:none!important}
+        .rhm-sb-head{display:flex;align-items:center;justify-content:space-between;padding:12px 12px 4px 16px;flex:0 0 auto}
+        .rhm-sb-head b{font-size:15px;font-weight:700;color:#59636e}
+        .rhm-sb-x{width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:8px;background:transparent;color:#59636e;cursor:pointer;font-size:20px;line-height:1}
+        .rhm-sb-x:hover{background:#eaeef2}
+        .rhm-sb-body{flex:1 1 auto;overflow-y:auto;padding:4px 12px 12px;display:flex;flex-direction:column;gap:10px;-webkit-overflow-scrolling:touch}
+        .rhm-sb-home{display:flex;align-items:center;gap:12px;width:100%;min-height:52px;padding:8px 10px;border:0;border-radius:12px;background:transparent;
+            font:inherit;font-size:16px;font-weight:700;color:#1f2328;cursor:pointer;text-align:left}
+        .rhm-sb-home:hover{background:#eaeef2}
+        .rhm-sb-logo{width:36px;height:36px;border-radius:10px;object-fit:cover;background:#fff;border:1px solid rgba(31,35,40,.12);flex:0 0 auto;display:block}
+        .rhm-sb-nav{display:flex;flex-direction:column;gap:10px}
+        .rhm-sb-nav>button.rhm-sb-item{width:100%;min-height:52px;display:flex!important;align-items:center;justify-content:center;gap:8px;
+            font-size:16px!important;padding:12px 14px!important;border-radius:12px!important;margin:0!important;white-space:normal;line-height:1.25}
+        .rhm-sb-foot{flex:0 0 auto;padding:10px 12px 12px;border-top:1px solid #d8dee4}
+        .rhm-sb-exit{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:50px;border:1px solid #d0d7de;border-radius:12px;background:#fff;
+            font:inherit;font-size:16px;font-weight:700;color:#cf222e;cursor:pointer}
+        .rhm-sb-exit:hover{background:#ffebe9;border-color:#ff8182}
+        .rhm-bye{position:fixed;inset:0;z-index:100300;background:#f6f8fa;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:24px;font-family:inherit;color:#1f2328}
+        .rhm-bye button{padding:12px 22px;border:0;border-radius:12px;background:#0969da;color:#fff;font:inherit;font-weight:700;font-size:16px;cursor:pointer}
+        html.yt-lock .rhm-sb,html.yt-lock .rhm-sb-back{display:none!important}
         /* ẨN top bar khi ở chế độ nhà hát (rạp) hoặc video toàn màn hình */
         html.yt-lock .rhm-tbwrap,
         html:has(.custom-yt-wrapper.theater-mode) .rhm-tbwrap,
@@ -1403,7 +1435,7 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
     function emit(name, detail) { try { document.dispatchEvent(new CustomEvent(name, { detail: detail })); } catch (e) {} }
 
     /* ----- Menu ----- */
-    menuBtn.addEventListener('click', function () { emit('rhm:topbar-menu', {}); });
+    menuBtn.addEventListener('click', function () { emit('rhm:topbar-menu', {}); if (window.rhmSbToggle) window.rhmSbToggle(); });
 
     /* ----- Toàn màn hình ----- */
     function fsEl() { return document.fullscreenElement || document.webkitFullscreenElement || null; }
@@ -1462,6 +1494,93 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
     };
 })();
 </script>
+<!-- ===== SIDEBAR ===== -->
+<div class="rhm-sb-back" id="rhmSbBack"></div>
+<aside class="rhm-sb" id="rhmSb" aria-hidden="true" aria-label="Menu">
+    <div class="rhm-sb-head"><b>Menu</b><button type="button" class="rhm-sb-x" id="rhmSbX" aria-label="Đóng menu" title="Đóng">&#10005;</button></div>
+    <div class="rhm-sb-body">
+        <button type="button" class="rhm-sb-home" id="rhmSbHome"><img class="rhm-sb-logo" data-rhm-logo alt="" draggable="false"><span>Trang chủ</span></button>
+        <div class="rhm-sb-nav" id="rhmSbNav">
+        <button onclick="openCollectionModal()" class="rhm-sb-item hb-badge text-sm bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm">🏆 Bộ Sưu Tập Huy Hiệu <span id="home-emblem-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
+        <button onclick="openRhmDict()" class="rhm-sb-item text-sm bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm" title="Từ điển thuật ngữ RHM — tự thêm khi bạn dịch trong hộp chat đọc sách">📖 Từ Điển RHM <span id="rhm-dict-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
+        <button onclick="openRhmNote()" class="rhm-sb-item text-sm text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm" style="background:linear-gradient(90deg,#0d9488,#059669)" title="Sổ ghi chú — lưu từ các bong bóng chat AI">📒 Sổ Ghi Chú <span id="rhm-note-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
+        <button onclick="openHomeSettings()" class="rhm-sb-item hb-set text-sm bg-gradient-to-r from-slate-500 via-gray-500 to-zinc-600 hover:from-slate-600 hover:via-gray-600 hover:to-zinc-700 text-white font-bold py-2.5 px-4 rounded-xl border border-slate-400/40 shadow-sm transition-all">⚙️ Cài Đặt</button>
+        </div>
+    </div>
+    <div class="rhm-sb-foot"><button type="button" class="rhm-sb-exit" id="rhmSbExit">⏻ Thoát ứng dụng</button></div>
+</aside>
+<script>
+(function () {
+    var sb = document.getElementById('rhmSb'), back = document.getElementById('rhmSbBack');
+    if (!sb || !back) return;
+    var logo = sb.querySelector('.rhm-sb-logo');
+    if (logo && window.RHM_LOGO_URL && !logo.getAttribute('src')) logo.src = window.RHM_LOGO_URL;
+    function isOpen() { return sb.classList.contains('open'); }
+    function set(on, instant) {
+        on = !!on;
+        if (on === isOpen()) return;
+        if (instant) { sb.classList.add('noanim'); back.classList.add('noanim'); }
+        sb.classList.toggle('open', on); back.classList.toggle('open', on);
+        sb.setAttribute('aria-hidden', on ? 'false' : 'true');
+        if (instant) setTimeout(function () { sb.classList.remove('noanim'); back.classList.remove('noanim'); }, 60);
+    }
+    window.rhmSbOpen = function (instant) { set(true, instant); };
+    window.rhmSbClose = function (instant) { set(false, instant); };
+    window.rhmSbToggle = function (on, instant) { set(on === undefined ? !isOpen() : on, instant); };
+    back.addEventListener('click', function () { set(false); });
+    document.getElementById('rhmSbX').addEventListener('click', function () { set(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && isOpen()) { e.stopPropagation(); set(false); } }, true);
+    /* bấm 1 trong 4 nút: đóng sidebar rồi để onclick gốc chạy */
+    document.getElementById('rhmSbNav').addEventListener('click', function (e) { if (e.target.closest('button')) set(false); }, true);
+
+    /* ----- Trang chủ: về màn hình chính từ bất cứ cửa sổ nào ----- */
+    function vis(id) { var n = document.getElementById(id); return !!(n && !n.classList.contains('hidden') && n.getClientRects().length); }
+    function goHomeFallback() {
+        try { if (vis('quiz-screen') && typeof saveActiveSession === 'function') saveActiveSession(); } catch (e) {}
+        try { if ((vis('quiz-screen') || vis('edit-screen') || vis('result-screen')) && typeof returnToHome === 'function') returnToHome(); } catch (e) {}
+        try { if (vis('book-viewer') && typeof bkCloseAll === 'function') bkCloseAll(); } catch (e) {}
+        try { if (typeof closeAiTutor === 'function') closeAiTutor(); } catch (e) {}
+        try { if (vis('dict-modal') && window.closeRhmDict) window.closeRhmDict(); } catch (e) {}
+        try { if (vis('note-modal') && window.closeRhmNote) window.closeRhmNote(); } catch (e) {}
+        try { if (vis('monhoc-detail-modal') && typeof closeMonHocDetailModal === 'function') closeMonHocDetailModal(); } catch (e) {}
+        ['subject-choice-modal','topic-modal','mock-exam-modal','exam-modal','exam-create-modal','deep-modal','collection-modal','suggest-question-modal',
+         'app-feedback-modal','add-question-modal','report-error-modal','folder-modal','navigator-modal','view-quiz-modal','bookmarked-modal','blocked-modal',
+         'storage-modal','image-lightbox-modal','bookshelf-modal','hs-guide-modal'].forEach(function (id) { var m = document.getElementById(id); if (m) m.classList.add('hidden'); });
+        try { if (window.closeHomeSettings) window.closeHomeSettings(); } catch (e) {}
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    document.getElementById('rhmSbHome').addEventListener('click', function () {
+        set(false);
+        setTimeout(function () {
+            if (typeof window.rhmGoHomeFlow === 'function') { try { window.rhmGoHomeFlow(); return; } catch (e) {} }
+            goHomeFallback();
+        }, 120);
+    });
+
+    /* ----- Thoát ứng dụng ----- */
+    function showBye() {
+        if (document.getElementById('rhmBye')) return;
+        var d = document.createElement('div'); d.className = 'rhm-bye'; d.id = 'rhmBye';
+        d.innerHTML = '<img class="rhm-sb-logo" style="width:72px;height:72px;border-radius:18px" alt=""><div style="font-size:20px;font-weight:800">Đã thoát ứng dụng</div><div style="color:#59636e">Bạn có thể đóng tab / cửa sổ này.</div><button type="button">Mở lại</button>';
+        var im = d.querySelector('img'); if (window.RHM_LOGO_URL) im.src = window.RHM_LOGO_URL;
+        d.querySelector('button').onclick = function () { location.reload(); };
+        document.body.appendChild(d);
+    }
+    function doExit() {
+        try { if (vis('quiz-screen') && typeof saveActiveSession === 'function') saveActiveSession(); } catch (e) {}
+        try { var ex = document.exitFullscreen || document.webkitExitFullscreen; if ((document.fullscreenElement || document.webkitFullscreenElement) && ex) ex.call(document); } catch (e) {}
+        try { var cap = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.App; if (cap && cap.exitApp) { cap.exitApp(); return; } } catch (e) {}
+        try { if (navigator.app && navigator.app.exitApp) { navigator.app.exitApp(); return; } } catch (e) {}
+        try { window.open('', '_self'); window.close(); } catch (e) {}
+        setTimeout(showBye, 250);
+    }
+    document.getElementById('rhmSbExit').addEventListener('click', function () {
+        set(false);
+        if (typeof window.appConfirm === 'function') window.appConfirm('Thoát ứng dụng?', function (ok) { if (ok) doExit(); });
+        else if (confirm('Thoát ứng dụng?')) doExit();
+    });
+})();
+</script>
     <div class="w-full max-w-[99%] mx-auto pt-3 md:pt-2 px-2 sm:px-3 pb-16 md:pb-2">
         
         <!-- HOME SCREEN -->
@@ -1474,13 +1593,6 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
                 </div>
             </div>
 
-            <!-- HÀNG NÚT TIỆN ÍCH (nằm trên 2 nút ôn tập theo Môn học / Chủ đề) -->
-            <div class="home-bar mb-5">
-                <button onclick="openCollectionModal()" class="hb-badge text-sm bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm">🏆 Bộ Sưu Tập Huy Hiệu <span id="home-emblem-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
-                <button onclick="openRhmDict()" class="text-sm bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm" title="Từ điển thuật ngữ RHM — tự thêm khi bạn dịch trong hộp chat đọc sách">📖 Từ Điển RHM <span id="rhm-dict-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
-                <button onclick="openRhmNote()" class="text-sm text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm" style="background:linear-gradient(90deg,#0d9488,#059669)" title="Sổ ghi chú — lưu từ các bong bóng chat AI">📒 Sổ Ghi Chú <span id="rhm-note-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
-                <button onclick="openHomeSettings()" class="hb-set text-sm bg-gradient-to-r from-slate-500 via-gray-500 to-zinc-600 hover:from-slate-600 hover:via-gray-600 hover:to-zinc-700 text-white font-bold py-2.5 px-4 rounded-xl border border-slate-400/40 shadow-sm transition-all">⚙️ Cài Đặt</button>
-            </div>
 
             <!-- 2 NÚT DÀN NGANG: ÔN TẬP THEO MÔN HỌC (TRÁI) & ÔN TẬP THEO CHỦ ĐỀ (PHẢI) — LUÔN CÙNG 1 HÀNG -->
             <div class="grid grid-cols-2 gap-2.5 sm:gap-3.5 mb-6">
@@ -27010,7 +27122,7 @@ body {
                 if (h) h.scrollIntoView({ behavior: 'smooth', block: 'start' }); else window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         },
-        'cai-dat': { label: 'mở bảng Cài đặt', sel: 'button[onclick="openHomeSettings()"]', run: function () { window.openHomeSettings(); } },
+        'cai-dat': { label: 'mở bảng Cài đặt', sel: 'button[onclick="openHomeSettings()"]', open: function () { window.rhmSbOpen && window.rhmSbOpen(); }, ow: 450, run: function () { window.rhmSbClose && window.rhmSbClose(true); window.openHomeSettings(); } },
         'home-ao': {
             label: 'bật / tắt Trợ lý ứng dụng', sel: '#hs-homefab-btn', open: function () { window.openHomeSettings(); },
             run: function () { window.hsToggleHomeFab(); }
@@ -27023,9 +27135,9 @@ body {
         'thi-thu': { label: 'mở Thi Thử (Mock Exam)', flow: 'home', hold: 'exam-modal', sel: '#btn-thi-thu', open: function () { openSection('chuyende'); }, run: function () { window.openExamModal(); } },
         'da-luu': { label: 'mở danh sách Đã lưu', flow: 'home', hold: 'bookmarked-modal', sel: '#qb-row3 button[onclick="openBookmarkedModal()"]', open: function () { openSection('chuyende'); }, run: function () { window.openBookmarkedModal(); } },
         'da-chan': { label: 'mở danh sách Đã chặn', flow: 'home', hold: 'blocked-modal', sel: '#qb-row3 button[onclick="openBlockedModal()"]', open: function () { openSection('chuyende'); }, run: function () { window.openBlockedModal(); } },
-        'bo-suu-tap': { label: 'mở Bộ Sưu Tập Huy Hiệu', sel: 'button[onclick="openCollectionModal()"]', run: function () { window.openCollectionModal(); } },
-        'tu-dien': { label: 'mở Từ Điển RHM', sel: 'button[onclick="openRhmDict()"]', run: function () { window.openRhmDict(); } },
-        'so-ghi-chu': { label: 'mở Sổ Ghi Chú', sel: 'button[onclick="openRhmNote()"]', run: function () { window.openRhmNote(); } },
+        'bo-suu-tap': { label: 'mở Bộ Sưu Tập Huy Hiệu', sel: 'button[onclick="openCollectionModal()"]', open: function () { window.rhmSbOpen && window.rhmSbOpen(); }, ow: 450, run: function () { window.rhmSbClose && window.rhmSbClose(true); window.openCollectionModal(); } },
+        'tu-dien': { label: 'mở Từ Điển RHM', sel: 'button[onclick="openRhmDict()"]', open: function () { window.rhmSbOpen && window.rhmSbOpen(); }, ow: 450, run: function () { window.rhmSbClose && window.rhmSbClose(true); window.openRhmDict(); } },
+        'so-ghi-chu': { label: 'mở Sổ Ghi Chú', sel: 'button[onclick="openRhmNote()"]', open: function () { window.rhmSbOpen && window.rhmSbOpen(); }, ow: 450, run: function () { window.rhmSbClose && window.rhmSbClose(true); window.openRhmNote(); } },
         'de-xuat': { label: 'mở Đề xuất câu hỏi', sel: 'button[onclick="homeSettingsGo(\'openSuggestQuestionModal\')"]', open: function () { window.openHomeSettings(); }, run: function () { window.homeSettingsGo('openSuggestQuestionModal'); } },
         'gop-y': { label: 'mở Góp ý / Liên hệ', sel: 'button[onclick="homeSettingsGo(\'openAppFeedbackModal\')"]', open: function () { window.openHomeSettings(); }, run: function () { window.homeSettingsGo('openAppFeedbackModal'); } },
         'khoa-api': { label: 'mở Cài đặt khóa API', sel: 'button[onclick="hsOpenKeys()"]', open: function () { window.openHomeSettings(); }, run: function () { window.hsOpenKeys(); } },
@@ -27841,10 +27953,10 @@ body {
         },
         shelf: { wait: 1500, open: function () { try { window.scOpenShelf(); } catch (e) {} }, close: function () { try { window.bkCloseShelf(); } catch (e) {} } },
         course: { wait: 1600, open: function () { try { window.scOpenCourse(); } catch (e) {} }, close: function () { try { window.closeMonHocDetailModal(); } catch (e) {} } },
-        collection: { wait: 450, open: function () { window.openCollectionModal(); }, close: function () { window.closeCollectionModal(); } },
-        dict: { wait: 750, open: function () { window.openRhmDict(); }, close: function () { window.closeRhmDict(); } },
-        note: { wait: 750, open: function () { window.openRhmNote(); }, close: function () { window.closeRhmNote(); } },
-        settings: { wait: 450, open: function () { window.openHomeSettings(); }, close: function () { window.closeHomeSettings(); } }
+        collection: { wait: 450, open: function () { window.rhmSbClose && window.rhmSbClose(true); window.openCollectionModal(); }, close: function () { window.closeCollectionModal(); } },
+        dict: { wait: 750, open: function () { window.rhmSbClose && window.rhmSbClose(true); window.openRhmDict(); }, close: function () { window.closeRhmDict(); } },
+        note: { wait: 750, open: function () { window.rhmSbClose && window.rhmSbClose(true); window.openRhmNote(); }, close: function () { window.closeRhmNote(); } },
+        settings: { wait: 450, open: function () { window.rhmSbClose && window.rhmSbClose(true); window.openHomeSettings(); }, close: function () { window.closeHomeSettings(); } }
     };
     /* ---------------- giao diện xem video ---------------- */
     function vidPid() {
@@ -28317,6 +28429,7 @@ body {
         return true;
     }
     function tourNode(st) {
+        try { if (window.rhmSbToggle) window.rhmSbToggle(['bo-suu-tap', 'tu-dien', 'so-ghi-chu', 'cai-dat'].indexOf(st.key) >= 0 && !st.sel, true); } catch (e) {}
         try {
             if (typeof st.sel === 'function') return st.sel();
             return st.sel ? document.querySelector(st.sel) : targetOf(st.key);
@@ -29068,6 +29181,7 @@ body {
             }, def.open ? wait : 80);
         });
     }
+    window.rhmGoHomeFlow = function () { var snap = flowCapture(); flowLeave(snap, function () { closeAllModals(); window.scrollTo({ top: 0, behavior: 'smooth' }); }); };
     function applyAct(a) { applyActs([a]); }
     function applyActs(acts) {
         if (!acts || !acts.length) return;
