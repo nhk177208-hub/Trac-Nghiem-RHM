@@ -1293,15 +1293,6 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
         html,body.bg-gray-100{background-color:#f6f8fa!important}
         .rhm-tbwrap{background:#f6f8fa!important}
         .rhm-tb{background:transparent!important;border:0!important;border-radius:0!important}
-        /* canh lề nút topbar ngang viền card trắng bên dưới */
-        .rhm-tb{padding-left:0!important;padding-right:0!important}
-        #rhmTbMenu{border:0!important;background:transparent!important;padding:0!important;width:40px;height:40px;overflow:hidden;border-radius:10px}
-        #rhmTbMenu:hover,#rhmTbMenu:active{background:transparent!important;filter:brightness(.95)}
-        #rhmTbMenu .rhm-tb-logo{width:100%;height:100%;object-fit:cover;border-radius:10px;display:block}
-        @media (max-width:639px){#rhmTbMenu{width:36px;height:36px}}
-        #rhmTbAvatar{display:none!important}
-        .rhm-sb-hico{width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;color:#59636e}
-        .rhm-sb-hico svg{width:26px;height:26px;fill:currentColor}
         /* ===== SIDEBAR (kiểu GitHub) ===== */
         .rhm-sb-back{position:fixed;inset:0;z-index:100140;background:rgba(27,31,36,.5);opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}
         .rhm-sb-back.open{opacity:1;visibility:visible}
@@ -1407,7 +1398,7 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
     <div class="rhm-tb" id="rhmTb">
       <div class="rhm-tb-left">
         <button type="button" class="rhm-tb-btn" id="rhmTbMenu" aria-label="Menu" title="Menu">
-          <img class="rhm-tb-logo" data-rhm-logo alt="Menu" draggable="false">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 2.75A.75.75 0 0 1 1.75 2h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 2.75Zm0 5A.75.75 0 0 1 1.75 7h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 7.75ZM1.75 12h12.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5Z"/></svg>
         </button>
         <img class="rhm-tb-avatar" id="rhmTbAvatar" data-rhm-logo alt="Avatar" draggable="false">
         <span class="rhm-tb-name" id="rhmTbName">Trắc Nghiệm RHM</span>
@@ -1508,7 +1499,7 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
 <aside class="rhm-sb" id="rhmSb" aria-hidden="true" aria-label="Menu">
     <div class="rhm-sb-head"><b>Menu</b><button type="button" class="rhm-sb-x" id="rhmSbX" aria-label="Đóng menu" title="Đóng">&#10005;</button></div>
     <div class="rhm-sb-body">
-        <button type="button" class="rhm-sb-home" id="rhmSbHome"><span class="rhm-sb-hico"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M7.906.855a1.75 1.75 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.38v7.02A1.75 1.75 0 0 1 14.25 15h-3.5a.75.75 0 0 1-.75-.75V9H8v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 2 13.455V6.435c0-.545.242-1.048.657-1.38Zm1.25.98a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.2v7.02c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.5h1.75a.25.25 0 0 0 .25-.25V6.435a.25.25 0 0 0-.094-.2Z"/></svg></span><span>Về trang chủ</span></button>
+        <button type="button" class="rhm-sb-home" id="rhmSbHome"><img class="rhm-sb-logo" data-rhm-logo alt="" draggable="false"><span>Trang chủ</span></button>
         <div class="rhm-sb-nav" id="rhmSbNav">
         <button onclick="openCollectionModal()" class="rhm-sb-item hb-badge text-sm bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm">🏆 Bộ Sưu Tập Huy Hiệu <span id="home-emblem-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
         <button onclick="openRhmDict()" class="rhm-sb-item text-sm bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm" title="Từ điển thuật ngữ RHM — tự thêm khi bạn dịch trong hộp chat đọc sách">📖 Từ Điển RHM <span id="rhm-dict-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
