@@ -1242,6 +1242,58 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
 .bm-foot .pg-inline .pg-info{display:none}
 @media (max-width:640px){.bm-foot .pg-bar.pg-inline.pg-inline{order:-1;flex:1 1 100%}}
 </style>
+
+    <style id="rhm-topbar-css">
+        /* ===== TOP BAR (kiểu GitHub) ===== */
+        .rhm-tbwrap{position:sticky;top:0;z-index:40;background:#f3f4f6}
+        .rhm-tbin{max-width:99%;margin:0 auto;padding:8px 8px 0;box-sizing:border-box}
+        @media (min-width:640px){.rhm-tbin{padding:8px 12px 0}}
+        .rhm-tb{display:flex;align-items:center;gap:12px;height:56px;padding:0 12px;box-sizing:border-box;
+            background:#f6f8fa;border:1px solid #d0d7de;border-radius:14px 14px 0 0;
+            color:#1f2328;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+        @media (max-width:639px){.rhm-tb{height:52px;padding:0 8px;gap:8px}}
+        .rhm-tb-left{display:flex;align-items:center;gap:12px;min-width:0;flex:0 1 auto}
+        @media (max-width:639px){.rhm-tb-left{gap:8px}}
+        .rhm-tb-right{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex:1 1 0;min-width:0}
+        .rhm-tb-btn{width:40px;height:40px;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+            border:1px solid #d0d7de;border-radius:8px;background:transparent;color:#59636e;cursor:pointer;padding:0;
+            transition:background .15s,border-color .15s}
+        .rhm-tb-btn:hover{background:#eaeef2}
+        .rhm-tb-btn:active{background:#dde3ea}
+        .rhm-tb-btn svg{width:18px;height:18px;fill:currentColor;display:block}
+        @media (max-width:639px){.rhm-tb-btn{width:36px;height:36px}}
+        .rhm-tb-avatar{width:40px;height:40px;flex:0 0 auto;border-radius:50%;object-fit:cover;background:#fff;
+            border:1px solid rgba(31,35,40,.15);display:block}
+        @media (max-width:639px){.rhm-tb-avatar{width:34px;height:34px}}
+        .rhm-tb-name{font-size:16px;font-weight:600;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+        /* nút toàn màn hình: đổi icon theo trạng thái */
+        .rhm-tb-btn .ic-fs-off{display:none}
+        .rhm-tb-btn.is-fs .ic-fs-on{display:none}
+        .rhm-tb-btn.is-fs .ic-fs-off{display:block}
+        /* ô tìm kiếm: thu = nút kính lúp; mở = bung sang TRÁI, kính lúp nằm đầu bên trái */
+        .rhm-tb-search{display:flex;align-items:center;height:40px;width:40px;flex:0 0 auto;box-sizing:border-box;
+            border:1px solid #d0d7de;border-radius:8px;background:transparent;overflow:hidden;
+            transition:width .25s ease,background .15s,border-color .15s,box-shadow .15s}
+        @media (max-width:639px){.rhm-tb-search{height:36px;width:36px}}
+        .rhm-tb-search:hover{background:#eaeef2}
+        .rhm-tb-search.open{width:min(360px,100%);background:#fff;border-color:#0969da;box-shadow:0 0 0 3px rgba(9,105,218,.15)}
+        .rhm-tb-search .rhm-tb-sbtn{width:38px;height:100%;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+            border:0;background:transparent;color:#59636e;cursor:pointer;padding:0}
+        @media (max-width:639px){.rhm-tb-search .rhm-tb-sbtn{width:34px}}
+        .rhm-tb-search .rhm-tb-sbtn svg{width:18px;height:18px;fill:currentColor}
+        .rhm-tb-search input{flex:1 1 auto;min-width:0;height:100%;border:0;outline:0;background:transparent;
+            font:inherit;font-size:16px;color:#1f2328;padding:0 10px 0 0;opacity:0;pointer-events:none;
+            transition:opacity .15s .08s;-webkit-appearance:none;appearance:none}
+        .rhm-tb-search.open input{opacity:1;pointer-events:auto}
+        .rhm-tb-search input::placeholder{color:#8c959f}
+        @media (max-width:639px){
+            .rhm-tb.search-open .rhm-tb-avatar,.rhm-tb.search-open .rhm-tb-name{display:none}
+        }
+        /* ẨN top bar khi ở chế độ nhà hát (rạp) hoặc video toàn màn hình */
+        html.yt-lock .rhm-tbwrap,
+        html:has(.custom-yt-wrapper.theater-mode) .rhm-tbwrap,
+        html:has(.custom-yt-wrapper.yt-fs) .rhm-tbwrap{display:none !important}
+    </style>
 </head>
 <body class="bg-gray-100 min-h-screen font-sans text-gray-800" onload="initApp()" oncontextmenu="return false;">
 
@@ -1307,6 +1359,109 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
         </div>
     </div>
 </div>
+
+<!-- ===== TOP BAR ===== -->
+<div class="rhm-tbwrap" id="rhmTbWrap">
+  <div class="rhm-tbin">
+    <div class="rhm-tb" id="rhmTb">
+      <div class="rhm-tb-left">
+        <button type="button" class="rhm-tb-btn" id="rhmTbMenu" aria-label="Menu" title="Menu">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 2.75A.75.75 0 0 1 1.75 2h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 2.75Zm0 5A.75.75 0 0 1 1.75 7h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 7.75ZM1.75 12h12.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5Z"/></svg>
+        </button>
+        <img class="rhm-tb-avatar" id="rhmTbAvatar" data-rhm-logo alt="Avatar" draggable="false">
+        <span class="rhm-tb-name" id="rhmTbName">Trắc Nghiệm RHM</span>
+      </div>
+      <div class="rhm-tb-right">
+        <div class="rhm-tb-search" id="rhmTbSearch">
+          <button type="button" class="rhm-tb-sbtn" id="rhmTbSearchBtn" aria-label="Tìm kiếm" title="Tìm kiếm">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z"/></svg>
+          </button>
+          <input type="text" id="rhmTbSearchInput" placeholder="Tìm kiếm trong ứng dụng" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" tabindex="-1">
+        </div>
+        <button type="button" class="rhm-tb-btn" id="rhmTbFs" aria-label="Toàn màn hình" title="Toàn màn hình">
+          <svg class="ic-fs-on" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.75 10a.75.75 0 0 1 .75.75v2.5c0 .138.112.25.25.25h2.5a.75.75 0 0 1 0 1.5h-2.5A1.75 1.75 0 0 1 1 13.25v-2.5a.75.75 0 0 1 .75-.75Zm12.5 0a.75.75 0 0 1 .75.75v2.5A1.75 1.75 0 0 1 13.25 15h-2.5a.75.75 0 0 1 0-1.5h2.5a.25.25 0 0 0 .25-.25v-2.5a.75.75 0 0 1 .75-.75ZM2.75 2.5a.25.25 0 0 0-.25.25v2.5a.75.75 0 0 1-1.5 0v-2.5C1 1.784 1.784 1 2.75 1h2.5a.75.75 0 0 1 0 1.5ZM10 1.75a.75.75 0 0 1 .75-.75h2.5c.966 0 1.75.784 1.75 1.75v2.5a.75.75 0 0 1-1.5 0v-2.5a.25.25 0 0 0-.25-.25h-2.5a.75.75 0 0 1-.75-.75Z"/></svg>
+          <svg class="ic-fs-off" viewBox="0 0 16 16" aria-hidden="true"><path d="M5.75 1a.75.75 0 0 1 .75.75v3.5A1.75 1.75 0 0 1 4.75 7h-3.5a.75.75 0 0 1 0-1.5h3.5a.25.25 0 0 0 .25-.25v-3.5A.75.75 0 0 1 5.75 1Zm4.5 0a.75.75 0 0 1 .75.75v3.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 9.5 5.25v-3.5a.75.75 0 0 1 .75-.75ZM1 10.25a.75.75 0 0 1 .75-.75h3A1.75 1.75 0 0 1 6.5 11.25v3.5a.75.75 0 0 1-1.5 0v-3.5a.25.25 0 0 0-.25-.25h-3a.75.75 0 0 1-.75-.75Zm8.5 1A1.75 1.75 0 0 1 11.25 9.5h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v3.5a.75.75 0 0 1-1.5 0v-3.5Z"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+    var bar = document.getElementById('rhmTb');
+    var box = document.getElementById('rhmTbSearch');
+    var sBtn = document.getElementById('rhmTbSearchBtn');
+    var input = document.getElementById('rhmTbSearchInput');
+    var fsBtn = document.getElementById('rhmTbFs');
+    var menuBtn = document.getElementById('rhmTbMenu');
+    var av = document.getElementById('rhmTbAvatar');
+    if (!bar || !box || !input) return;
+
+    /* Avatar: mặc định dùng logo nhúng sẵn của app */
+    if (window.RHM_LOGO_URL && !av.getAttribute('src')) av.src = window.RHM_LOGO_URL;
+
+    function emit(name, detail) { try { document.dispatchEvent(new CustomEvent(name, { detail: detail })); } catch (e) {} }
+
+    /* ----- Menu ----- */
+    menuBtn.addEventListener('click', function () { emit('rhm:topbar-menu', {}); });
+
+    /* ----- Toàn màn hình ----- */
+    function fsEl() { return document.fullscreenElement || document.webkitFullscreenElement || null; }
+    var canFs = !!(document.fullscreenEnabled || document.webkitFullscreenEnabled);
+    if (!canFs) fsBtn.style.display = 'none';   // vd. iPhone Safari không hỗ trợ
+    fsBtn.addEventListener('click', function () {
+        try {
+            if (fsEl()) {
+                var ex = document.exitFullscreen || document.webkitExitFullscreen;
+                var p1 = ex.call(document); if (p1 && p1.catch) p1.catch(function () {});
+            } else {
+                var d = document.documentElement, rq = d.requestFullscreen || d.webkitRequestFullscreen;
+                var p2 = rq.call(d); if (p2 && p2.catch) p2.catch(function () {});
+            }
+        } catch (e) {}
+    });
+    function syncFs() {
+        var on = !!fsEl();
+        fsBtn.classList.toggle('is-fs', on);
+        fsBtn.title = fsBtn.ariaLabel = on ? 'Thoát toàn màn hình' : 'Toàn màn hình';
+    }
+    document.addEventListener('fullscreenchange', syncFs);
+    document.addEventListener('webkitfullscreenchange', syncFs);
+
+    /* ----- Tìm kiếm ----- */
+    function isOpen() { return box.classList.contains('open'); }
+    function openSearch() {
+        box.classList.add('open'); bar.classList.add('search-open');
+        input.tabIndex = 0;
+        setTimeout(function () { input.focus(); }, 120);
+    }
+    function closeSearch(clear) {
+        box.classList.remove('open'); bar.classList.remove('search-open');
+        input.tabIndex = -1; input.blur();
+        if (clear && input.value) { input.value = ''; emit('rhm:topbar-search', { query: '', final: true }); }
+    }
+    sBtn.addEventListener('click', function () {
+        if (!isOpen()) openSearch();
+        else if (!input.value.trim()) closeSearch(false);
+        else emit('rhm:topbar-search', { query: input.value.trim(), final: true });
+    });
+    input.addEventListener('input', function () { emit('rhm:topbar-search', { query: input.value, final: false }); });
+    input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { emit('rhm:topbar-search', { query: input.value.trim(), final: true }); }
+        else if (e.key === 'Escape') { closeSearch(true); }
+    });
+    document.addEventListener('pointerdown', function (e) {
+        if (isOpen() && !input.value.trim() && !box.contains(e.target)) closeSearch(false);
+    });
+
+    /* API nhỏ để gắn tính năng sau */
+    window.RHMTopbar = {
+        openSearch: openSearch, closeSearch: closeSearch,
+        setTitle: function (s) { var n = document.getElementById('rhmTbName'); if (n) n.textContent = s; },
+        setAvatar: function (u) { av.src = u; }
+    };
+})();
+</script>
     <div class="w-full max-w-[99%] mx-auto pt-3 md:pt-2 px-2 sm:px-3 pb-16 md:pb-2">
         
         <!-- HOME SCREEN -->
@@ -13253,7 +13408,7 @@ function narrBuildUtts(text, r, ur) {   // mỗi câu đọc liền bằng 1 gi�
             let fsId = null, fsAt = 0;
             const onFs = () => {
                 const fsEl = document.fullscreenElement || document.webkitFullscreenElement;
-                if (fsEl) {
+                if (fsEl && fsEl !== document.documentElement) {
                     const id = Object.keys(activeYtPlayers).find(k => document.getElementById('custom-wrapper-' + k) === fsEl);
                     if (id) {
                         fsId = id; fsAt = Date.now();
