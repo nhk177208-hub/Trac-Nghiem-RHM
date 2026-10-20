@@ -998,6 +998,7 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
 
         /* ===== PHÂN TRANG CHUNG CHO CÁC CỬA SỔ CON (từ 10 mục trở lên) ===== */
         .pg-hide { display: none !important; }
+        .lz-p { min-height: 140px; }
         .pg-off { display: none !important; }
         .pg-first { margin-top: 0 !important; }
         .pg-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.4rem 0.7rem; margin-top: 0.7rem; padding: 0.45rem 0.55rem; border: 1px solid #e5e7eb; border-radius: 0.75rem; background: #f9fafb; color: #374151; font-size: 12px; flex: none; -webkit-user-select: none; user-select: none; touch-action: manipulation; }
@@ -1395,27 +1396,137 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
     function delFile(path) { return tx('files', 'readwrite', function (s) { return s.delete(path); }); }
     function getFile(path) { return tx('files', 'readonly', function (s) { return s.get(path); }); }
 
-    /* ---------- phục vụ file đã đồng bộ cho fetch() của app (ưu tiên bản trong máy) ---------- */
-    var cached = null;   /* Set các đường dẫn có trong kho */
-    var ready = (GH ? db().then(function () { return getMeta('index'); }).then(function (idx) {
-        cached = new Set(Object.keys(idx || {}).filter(function (p) { return p !== APP_FILE && (idx[p] || {}).stored; }));
-    }).catch(function () { cached = null; }) : Promise.resolve());
+    /* ---------- phục vụ file đã đồng bộ cho fetch()/img/script của app (ưu tiên bản trong máy) ---------- */
+    var cached = null;      /* Set các đường dẫn có trong kho */
+    var cachedMap = null;   /* khóa chuẩn hóa (NFC + chữ thường) → đường dẫn thật (tên tiếng Việt NFC/NFD không còn lệch) */
+    var idxMem = null;      /* bản sao index trong RAM */
+    var blobUrls = {};
+    function nk(p) { try { return String(p).normalize('NFC').toLowerCase(); } catch (e) { return String(p).toLowerCase(); } }
+    function setCached(idx) {
+        idxMem = idx || {};
+        cached = new Set(); cachedMap = new Map();
+        Object.keys(idxMem).forEach(function (p) {
+            if (p !== APP_FILE && (idxMem[p] || {}).stored) { cached.add(p); cachedMap.set(nk(p), p); }
+        });
+        Object.keys(blobUrls).forEach(function (k) { try { URL.revokeObjectURL(blobUrls[k]); } catch (e) {} });
+        blobUrls = {};
+    }
+    var ready = (GH ? db().then(function () { return getMeta('index'); }).then(function (idx) { setCached(idx); }).catch(function () { cached = null; cachedMap = null; }) : Promise.resolve());
+    function relOf(u) {   /* URL → đường dẫn tương đối trong repo (hoặc null nếu không phải file của app) */
+        if (!GH) return null;
+        if (u.origin !== location.origin || u.pathname.indexOf(GH.base) !== 0) return null;
+        try { return decodeURIComponent(u.pathname.slice(GH.base.length)); } catch (e) { return null; }
+    }
+    function jsonRes(o) { return new Response(JSON.stringify(o), { status: 200, headers: { 'Content-Type': 'application/json' } }); }
+    function localPaths() { return cached ? Array.from(cached) : []; }
+    /* liệt kê con trực tiếp của một thư mục từ kho local; null nếu thư mục không có gì */
+    function localChildren(dir) {
+        var pre = dir ? nk(dir).replace(/\/+$/, '') + '/' : '', seen = {}, out = [];
+        localPaths().forEach(function (p) {
+            if (nk(p).indexOf(pre) !== 0) return;
+            var rest = p.slice(pre.length).split('/'), name = rest[0];
+            if (!name) return;
+            var isDir = rest.length > 1, k = (isDir ? 'd:' : 'f:') + nk(name);
+            if (seen[k]) return; seen[k] = 1;
+            var full = (dir ? p.slice(0, pre.length) : '') + name;
+            out.push({ name: name, path: full, type: isDir ? 'dir' : 'file', sha: (idxMem[p] || {}).sha || '', size: 0 });
+        });
+        return out.length ? out : null;
+    }
+    function localTree() {
+        var seen = {}, tree = [];
+        localPaths().forEach(function (p) {
+            var segs = p.split('/');
+            for (var i = 1; i < segs.length; i++) { var d = segs.slice(0, i).join('/'); if (!seen[d]) { seen[d] = 1; tree.push({ path: d, type: 'tree', sha: '' }); } }
+            tree.push({ path: p, type: 'blob', sha: (idxMem[p] || {}).sha || '', size: 0 });
+        });
+        return tree;
+    }
+    function answerLocal(u) {   /* trả lời thay GitHub API / thư mục HTTP bằng dữ liệu đã tải về; null = để mạng xử lý */
+        if (!cached || !cached.size) return null;
+        if (u.hostname === 'api.github.com') {
+            var m = u.pathname.match(/^\/repos\/([^\/]+)\/([^\/]+)\/(git\/trees|contents)(?:\/(.*))?$/);
+            if (!m || m[1].toLowerCase() !== GH.owner.toLowerCase() || m[2].toLowerCase() !== GH.repo.toLowerCase()) return null;
+            if (m[3] === 'git/trees') return jsonRes({ sha: 'local', tree: localTree(), truncated: false });
+            var dir = ''; try { dir = decodeURIComponent(m[4] || ''); } catch (e) {}
+            var ch = localChildren(dir);
+            return ch ? jsonRes(ch) : null;
+        }
+        var rel = relOf(u);
+        if (rel === null || !/\/$/.test(u.pathname) || rel === '') return null;   /* chỉ xử lý URL thư mục, không đụng trang chính */
+        var kids = localChildren(rel.replace(/\/+$/, ''));
+        if (!kids) return null;
+        var html = '<!doctype html><html><body><ul>' + kids.map(function (k) {
+            var h = encodeURIComponent(k.name) + (k.type === 'dir' ? '/' : '');
+            return '<li><a href="' + h + '">' + k.name.replace(/[&<>"]/g, '') + (k.type === 'dir' ? '/' : '') + '</a></li>';
+        }).join('') + '</ul></body></html>';
+        return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+    }
     window.fetch = function (input, init) {
         try {
             var method = ((init && init.method) || (input && input.method) || 'GET').toUpperCase();
             if (!GH || method !== 'GET') return origFetch(input, init);
             var u = new URL(typeof input === 'string' ? input : (input && input.url) || String(input), location.href);
-            if (u.origin !== location.origin || u.pathname.indexOf(GH.base) !== 0) return origFetch(input, init);
-            var rel; try { rel = decodeURIComponent(u.pathname.slice(GH.base.length)); } catch (e) { return origFetch(input, init); }
+            var isApi = u.hostname === 'api.github.com';
+            if (!isApi && (u.origin !== location.origin || u.pathname.indexOf(GH.base) !== 0)) return origFetch(input, init);
             return ready.then(function () {
-                if (!cached || !cached.has(rel)) return origFetch(input, init);
-                return getFile(rel).then(function (rec) {
+                var loc = answerLocal(u);
+                if (loc) return loc;
+                if (isApi) return origFetch(input, init);
+                var rel = relOf(u), real = rel !== null && cachedMap ? cachedMap.get(nk(rel)) : null;
+                if (!real) return origFetch(input, init);
+                return getFile(real).then(function (rec) {
                     if (!rec || !rec.blob) return origFetch(input, init);
                     return new Response(rec.blob, { status: 200, headers: { 'Content-Type': rec.type || 'application/octet-stream' } });
                 });
             }).catch(function () { return origFetch(input, init); });
         } catch (e) { return origFetch(input, init); }
     };
+
+    /* ảnh / script không đi qua fetch() → đổi sang blob URL lấy từ kho local */
+    function localBlobUrl(v) {
+        if (!GH || !cachedMap || typeof v !== 'string' || /^(blob:|data:|javascript:)/i.test(v)) return Promise.resolve(null);
+        var u; try { u = new URL(v, location.href); } catch (e) { return Promise.resolve(null); }
+        var rel = relOf(u), real = rel !== null ? cachedMap.get(nk(rel)) : null;
+        if (!real) return Promise.resolve(null);
+        if (blobUrls[real]) return Promise.resolve(blobUrls[real]);
+        return getFile(real).then(function (rec) {
+            if (!rec || !rec.blob) return null;
+            return (blobUrls[real] = URL.createObjectURL(rec.type && !rec.blob.type ? rec.blob.slice(0, rec.blob.size, rec.type) : rec.blob));
+        }).catch(function () { return null; });
+    }
+    function patchSrc(proto) {
+        var d = Object.getOwnPropertyDescriptor(proto, 'src');
+        if (!d || !d.set) return;
+        Object.defineProperty(proto, 'src', {
+            configurable: true, enumerable: d.enumerable, get: d.get,
+            set: function (v) {
+                var el = this;
+                if (!GH || !cachedMap || typeof v !== 'string') return d.set.call(el, v);
+                var tok = el.__rhmTok = (el.__rhmTok || 0) + 1;
+                localBlobUrl(v).then(function (b) { if (el.__rhmTok === tok) d.set.call(el, b || v); }, function () { d.set.call(el, v); });
+            }
+        });
+    }
+    try { patchSrc(HTMLImageElement.prototype); patchSrc(HTMLScriptElement.prototype); } catch (e) {}
+    function swapNode(n) {
+        if (!n || n.nodeType !== 1) return;
+        var list = (n.tagName === 'IMG' ? [n] : []).concat(n.querySelectorAll ? Array.prototype.slice.call(n.querySelectorAll('img[src]')) : []);
+        list.forEach(function (im) {
+            var v = im.getAttribute('src');
+            if (!v || /^(blob:|data:)/i.test(v) || im.__rhmDone === v) return;
+            im.__rhmDone = v;
+            localBlobUrl(v).then(function (b) { if (b && im.getAttribute('src') === v) { im.__rhmDone = b; im.setAttribute('src', b); } });
+        });
+    }
+    try {
+        new MutationObserver(function (ms) {
+            ms.forEach(function (m) {
+                if (m.type === 'attributes') swapNode(m.target);
+                else m.addedNodes.forEach(swapNode);
+            });
+        }).observe(document, { childList: true, subtree: true, attributes: true, attributeFilter: ['src'] });
+    } catch (e) {}
 
     /* ---------- popup tiến trình ---------- */
     function fmt(b) { return b >= 1048576 ? (b / 1048576).toFixed(1) + ' MB' : b >= 1024 ? Math.round(b / 1024) + ' KB' : b + ' B'; }
@@ -1515,7 +1626,7 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
             if (appChanged) idx[APP_FILE] = { sha: (entries.filter(function (e) { return e.path === APP_FILE; })[0] || {}).sha, stored: false };
         }
         await setMeta('index', idx); await setMeta('last', Date.now());
-        cached = new Set(Object.keys(idx).filter(function (p) { return p !== APP_FILE && idx[p].stored; }));
+        setCached(idx);
         chips(cnt);
         return { cnt: cnt, appChanged: appChanged, first: first, truncated: !!tree.truncated, total: work.length, cancelled: cancelled };
     }
@@ -3557,6 +3668,7 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
                 return;
             }
 
+            const frag = document.createDocumentFragment();
             availableEmblemIds.forEach(id => {
                 const isUnlocked = userUnlockedEmblems.includes(id);
                 const isSelected = userSelectedEmblems.includes(id);
@@ -3577,7 +3689,7 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
 
                 card.innerHTML = `
                     <div class="w-full aspect-square flex items-center justify-center p-2 mb-1.5 relative">
-                        <img src="${EMBLEM_FOLDER}/e_${id}.png" alt="Huy hiệu #${id}" class="max-w-full max-h-full object-contain ${isUnlocked ? 'filter drop-shadow' : 'filter grayscale contrast-50 blur-[3px]'}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'48\\' height=\\'48\\' fill=\\'%2394a3b8\\'><text x=\\'50%\\' y=\\'55%\\' dominant-baseline=\\'middle\\' text-anchor=\\'middle\\' font-size=\\'24\\'>🎖️</text></svg>'">
+                        <img loading="lazy" decoding="async" src="${EMBLEM_FOLDER}/e_${id}.png" alt="Huy hiệu #${id}" class="max-w-full max-h-full object-contain ${isUnlocked ? 'filter drop-shadow' : 'filter grayscale contrast-50 blur-[3px]'}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'48\\' height=\\'48\\' fill=\\'%2394a3b8\\'><text x=\\'50%\\' y=\\'55%\\' dominant-baseline=\\'middle\\' text-anchor=\\'middle\\' font-size=\\'24\\'>🎖️</text></svg>'">
                         ${!isUnlocked ? '<span class="absolute text-xl">🔒</span>' : ''}
                         ${isSelected ? '<span class="absolute top-0 right-0 bg-amber-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold shadow">✓</span>' : ''}
                     </div>
@@ -3593,8 +3705,9 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
                     card.onclick = () => toggleSelectEmblem(id);
                 }
 
-                grid.appendChild(card);
+                frag.appendChild(card);
             });
+            grid.appendChild(frag);
         }
 
         // Chọn / Bỏ chọn huy hiệu ưa thích để hiển thị khi đạt Streak
@@ -4428,9 +4541,19 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
             if (badge) badge.textContent = list.length;
         }
 
+        let _blkRaw = null, _blkSet = null;
+        function getBlockedKeySet() {   // cache theo nội dung lưu trữ: chỉ parse lại khi danh sách chặn thật sự đổi
+            const raw = kv.getItem('quizAppBlockedQuestions') || '';
+            if (raw !== _blkRaw) {
+                _blkRaw = raw;
+                _blkSet = new Set((raw ? JSON.parse(raw) : []).map(b => getCleanQuestionText(b.question)));
+            }
+            return _blkSet;
+        }
         function filterBlockedQuestions(qList) {
-            const blocked = getBlockedQuestions();
-            return (qList || []).filter(q => !q.isHidden && !blocked.some(b => getCleanQuestionText(b.question) === getCleanQuestionText(q.question)));
+            const blocked = getBlockedKeySet();
+            if (blocked.size === 0) return (qList || []).filter(q => !q.isHidden);
+            return (qList || []).filter(q => !q.isHidden && !blocked.has(getCleanQuestionText(q.question)));
         }
 
         function toggleBlockCurrent() {
@@ -4752,48 +4875,52 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
                 container.innerHTML = '<p class="text-gray-500 italic text-center py-8">Chưa có câu hỏi nào bị chặn.</p>';
             } else {
                 container.innerHTML = '';
+                const frag = document.createDocumentFragment();
                 blocked.forEach((item, idx) => {
-                    let imgsHtml = '';
-                    if (item.images && item.images.length > 0) {
-                        imgsHtml = '<div class="flex flex-wrap gap-2 my-2">';
-                        item.images.forEach(img => {
-                            imgsHtml += `<img src="${img}" onclick="openLightbox('${img}')" class="cursor-pointer hover:opacity-90" style="max-height: 120px; border-radius: 6px; border: 1px solid #ddd;" />`;
-                        });
-                        imgsHtml += '</div>';
-                    }
-
-                    let expImgsHtml = '';
-                    if (item.explanationImages && item.explanationImages.length > 0) {
-                        expImgsHtml = '<div class="flex flex-wrap gap-2 my-2">';
-                        item.explanationImages.forEach(img => {
-                            expImgsHtml += `<img src="${img}" onclick="openLightbox('${img}')" class="cursor-pointer hover:opacity-90" style="max-height: 100px; border-radius: 6px; border: 1px solid #ddd;" />`;
-                        });
-                        expImgsHtml += '</div>';
-                    }
-
-                    let optionsHtml = '<ul class="text-sm space-y-1.5 my-2 bg-white p-3 rounded-xl border">';
-                    item.options.forEach(opt => {
-                        const isCorrectOpt = opt.charAt(0).toUpperCase() === item.answerStr;
-                        optionsHtml += `<li class="${isCorrectOpt ? 'font-bold text-green-600' : 'text-gray-700'}">${mathFmt(opt)}</li>`;
-                    });
-                    optionsHtml += '</ul>';
-
                     const div = document.createElement('div');
                     div.className = 'bg-rose-50/60 border border-rose-200 p-4 rounded-xl relative';
-                    div.innerHTML = `
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-xs font-bold text-rose-800 bg-rose-100 px-2.5 py-1 rounded">Nguồn: ${item.quizName || 'Không rõ'}</span>
-                            <button onclick="removeBlocked(${idx})" class="text-emerald-600 hover:text-emerald-800 text-sm font-bold flex items-center">🔓 Bỏ chặn</button>
-                        </div>
-                        <p class="font-bold text-gray-800 mb-1">Câu: ${mathFmt(getCleanQuestionText(item.question))}</p>
-                        ${imgsHtml}
-                        ${optionsHtml}
-                        <p class="text-sm font-semibold text-green-700">Đáp án đúng: ${item.answerStr}</p>
-                        ${item.explanation ? `<p class="text-xs text-gray-600 italic mt-1 text-justify">Giải thích: ${formatExplanationWithLinks(item.explanation)}</p>` : ''}
-                        ${expImgsHtml}
-                    `;
-                    container.appendChild(div);
+                    lzItem(div, () => {
+                        let imgsHtml = '';
+                        if (item.images && item.images.length > 0) {
+                            imgsHtml = '<div class="flex flex-wrap gap-2 my-2">';
+                            item.images.forEach(img => {
+                                imgsHtml += `<img src="${img}" onclick="openLightbox('${img}')" class="cursor-pointer hover:opacity-90" style="max-height: 120px; border-radius: 6px; border: 1px solid #ddd;" />`;
+                            });
+                            imgsHtml += '</div>';
+                        }
+    
+                        let expImgsHtml = '';
+                        if (item.explanationImages && item.explanationImages.length > 0) {
+                            expImgsHtml = '<div class="flex flex-wrap gap-2 my-2">';
+                            item.explanationImages.forEach(img => {
+                                expImgsHtml += `<img src="${img}" onclick="openLightbox('${img}')" class="cursor-pointer hover:opacity-90" style="max-height: 100px; border-radius: 6px; border: 1px solid #ddd;" />`;
+                            });
+                            expImgsHtml += '</div>';
+                        }
+    
+                        let optionsHtml = '<ul class="text-sm space-y-1.5 my-2 bg-white p-3 rounded-xl border">';
+                        item.options.forEach(opt => {
+                            const isCorrectOpt = opt.charAt(0).toUpperCase() === item.answerStr;
+                            optionsHtml += `<li class="${isCorrectOpt ? 'font-bold text-green-600' : 'text-gray-700'}">${mathFmt(opt)}</li>`;
+                        });
+                        optionsHtml += '</ul>';
+    
+                        return `
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-xs font-bold text-rose-800 bg-rose-100 px-2.5 py-1 rounded">Nguồn: ${item.quizName || 'Không rõ'}</span>
+                                <button onclick="removeBlocked(${idx})" class="text-emerald-600 hover:text-emerald-800 text-sm font-bold flex items-center">🔓 Bỏ chặn</button>
+                            </div>
+                            <p class="font-bold text-gray-800 mb-1">Câu: ${mathFmt(getCleanQuestionText(item.question))}</p>
+                            ${imgsHtml}
+                            ${optionsHtml}
+                            <p class="text-sm font-semibold text-green-700">Đáp án đúng: ${item.answerStr}</p>
+                            ${item.explanation ? `<p class="text-xs text-gray-600 italic mt-1 text-justify">Giải thích: ${formatExplanationWithLinks(item.explanation)}</p>` : ''}
+                            ${expImgsHtml}
+                        `;
+                    });
+                    frag.appendChild(div);
                 });
+                container.appendChild(frag); lzSettle(container);
             }
             document.getElementById('blocked-modal').classList.remove('hidden');
         }
@@ -5090,48 +5217,52 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
                 container.innerHTML = '<p class="text-gray-500 italic text-center py-8">Chưa có câu hỏi nào được lưu.</p>';
             } else {
                 container.innerHTML = '';
+                const frag = document.createDocumentFragment();
                 bookmarks.forEach((item, idx) => {
-                    let imgsHtml = '';
-                    if (item.images && item.images.length > 0) {
-                        imgsHtml = '<div class="flex flex-wrap gap-2.5 my-2">';
-                        item.images.forEach(img => {
-                            imgsHtml += `<img src="${img}" onclick="openLightbox('${img}')" class="cursor-pointer hover:opacity-90" style="max-height: 120px; border-radius: 6px; border: 1px solid #ddd;" />`;
-                        });
-                        imgsHtml += '</div>';
-                    }
-
-                    let expImgsHtml = '';
-                    if (item.explanationImages && item.explanationImages.length > 0) {
-                        expImgsHtml = '<div class="flex flex-wrap gap-2 my-2">';
-                        item.explanationImages.forEach(img => {
-                            expImgsHtml += `<img src="${img}" onclick="openLightbox('${img}')" class="cursor-pointer hover:opacity-90" style="max-height: 100px; border-radius: 6px; border: 1px solid #ddd;" />`;
-                        });
-                        expImgsHtml += '</div>';
-                    }
-
-                    let optionsHtml = '<ul class="text-sm space-y-1.5 my-2 bg-white p-3 rounded-xl border">';
-                    item.options.forEach(opt => {
-                        const isCorrectOpt = opt.charAt(0).toUpperCase() === item.answerStr;
-                        optionsHtml += `<li class="${isCorrectOpt ? 'font-bold text-green-600' : 'text-gray-700'}">${mathFmt(opt)}</li>`;
-                    });
-                    optionsHtml += '</ul>';
-
                     const div = document.createElement('div');
                     div.className = 'bg-amber-50/60 border border-amber-200 p-4 rounded-xl relative';
-                    div.innerHTML = `
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-xs font-bold text-amber-800 bg-amber-100 px-2.5 py-1 rounded">Đề: ${item.quizName || 'Không rõ'}</span>
-                            <button onclick="removeBookmark(${idx})" class="text-red-500 hover:text-red-700 text-sm font-bold">🗑️ Xóa</button>
-                        </div>
-                        <p class="font-bold text-gray-800 mb-1">Câu: ${mathFmt(getCleanQuestionText(item.question))}</p>
-                        ${imgsHtml}
-                        ${optionsHtml}
-                        <p class="text-sm font-semibold text-green-700">Đáp án đúng: ${item.answerStr}</p>
-                        ${item.explanation ? `<p class="text-xs text-gray-600 italic mt-1 text-justify">Giải thích: ${formatExplanationWithLinks(item.explanation)}</p>` : ''}
-                        ${expImgsHtml}
-                    `;
-                    container.appendChild(div);
+                    lzItem(div, () => {
+                        let imgsHtml = '';
+                        if (item.images && item.images.length > 0) {
+                            imgsHtml = '<div class="flex flex-wrap gap-2.5 my-2">';
+                            item.images.forEach(img => {
+                                imgsHtml += `<img src="${img}" onclick="openLightbox('${img}')" class="cursor-pointer hover:opacity-90" style="max-height: 120px; border-radius: 6px; border: 1px solid #ddd;" />`;
+                            });
+                            imgsHtml += '</div>';
+                        }
+    
+                        let expImgsHtml = '';
+                        if (item.explanationImages && item.explanationImages.length > 0) {
+                            expImgsHtml = '<div class="flex flex-wrap gap-2 my-2">';
+                            item.explanationImages.forEach(img => {
+                                expImgsHtml += `<img src="${img}" onclick="openLightbox('${img}')" class="cursor-pointer hover:opacity-90" style="max-height: 100px; border-radius: 6px; border: 1px solid #ddd;" />`;
+                            });
+                            expImgsHtml += '</div>';
+                        }
+    
+                        let optionsHtml = '<ul class="text-sm space-y-1.5 my-2 bg-white p-3 rounded-xl border">';
+                        item.options.forEach(opt => {
+                            const isCorrectOpt = opt.charAt(0).toUpperCase() === item.answerStr;
+                            optionsHtml += `<li class="${isCorrectOpt ? 'font-bold text-green-600' : 'text-gray-700'}">${mathFmt(opt)}</li>`;
+                        });
+                        optionsHtml += '</ul>';
+    
+                        return `
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-xs font-bold text-amber-800 bg-amber-100 px-2.5 py-1 rounded">Đề: ${item.quizName || 'Không rõ'}</span>
+                                <button onclick="removeBookmark(${idx})" class="text-red-500 hover:text-red-700 text-sm font-bold">🗑️ Xóa</button>
+                            </div>
+                            <p class="font-bold text-gray-800 mb-1">Câu: ${mathFmt(getCleanQuestionText(item.question))}</p>
+                            ${imgsHtml}
+                            ${optionsHtml}
+                            <p class="text-sm font-semibold text-green-700">Đáp án đúng: ${item.answerStr}</p>
+                            ${item.explanation ? `<p class="text-xs text-gray-600 italic mt-1 text-justify">Giải thích: ${formatExplanationWithLinks(item.explanation)}</p>` : ''}
+                            ${expImgsHtml}
+                        `;
+                    });
+                    frag.appendChild(div);
                 });
+                container.appendChild(frag); lzSettle(container);
             }
             document.getElementById('bookmarked-modal').classList.remove('hidden');
         }
@@ -6083,35 +6214,39 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
             const container = document.getElementById('view-quiz-list-container');
             container.innerHTML = '';
 
+            const frag = document.createDocumentFragment();
             validQuestions.forEach((q, idx) => {
-                let imgsHtml = '';
-                if (q.images && q.images.length > 0) {
-                    imgsHtml = '<div class="flex flex-wrap gap-2.5 my-2">' + buildImageThumbsHtml(q.images, 120) + '</div>';
-                }
-
-                let expImgsHtml = '';
-                if (q.explanationImages && q.explanationImages.length > 0) {
-                    expImgsHtml = '<div class="flex flex-wrap gap-2 my-2">' + buildImageThumbsHtml(q.explanationImages, 100) + '</div>';
-                }
-
-                let optionsHtml = '<ul class="text-sm space-y-1.5 my-2 bg-white p-3 rounded-xl border border-gray-200">';
-                q.options.forEach(opt => {
-                    optionsHtml += `<li class="text-gray-700 p-1 text-justify break-words">${mathFmt(opt)}</li>`;
-                });
-                optionsHtml += '</ul>';
-
                 const div = document.createElement('div');
                 div.className = 'bg-gray-50 border border-gray-200 p-4 rounded-xl';
-                div.innerHTML = `
-                    <p class="font-bold text-gray-800 mb-1.5 text-justify break-words">Câu ${idx + 1}: ${mathFmt(getCleanQuestionText(q.question))}</p>
-                    ${imgsHtml}
-                    ${optionsHtml}
-                    <p class="text-sm font-semibold text-green-700 mt-2">Đáp án đúng: <span class="bg-green-100 px-2 py-0.5 rounded">${q.answerStr}</span></p>
-                    ${q.explanation ? `<p class="text-xs text-gray-600 italic mt-1.5 bg-blue-50 p-2.5 rounded-xl border border-blue-100 text-justify break-words">Giải thích: ${formatExplanationWithLinks(q.explanation)}</p>` : ''}
-                    ${expImgsHtml}
-                `;
-                container.appendChild(div);
+                lzItem(div, () => {
+                    let imgsHtml = '';
+                    if (q.images && q.images.length > 0) {
+                        imgsHtml = '<div class="flex flex-wrap gap-2.5 my-2">' + buildImageThumbsHtml(q.images, 120) + '</div>';
+                    }
+    
+                    let expImgsHtml = '';
+                    if (q.explanationImages && q.explanationImages.length > 0) {
+                        expImgsHtml = '<div class="flex flex-wrap gap-2 my-2">' + buildImageThumbsHtml(q.explanationImages, 100) + '</div>';
+                    }
+    
+                    let optionsHtml = '<ul class="text-sm space-y-1.5 my-2 bg-white p-3 rounded-xl border border-gray-200">';
+                    q.options.forEach(opt => {
+                        optionsHtml += `<li class="text-gray-700 p-1 text-justify break-words">${mathFmt(opt)}</li>`;
+                    });
+                    optionsHtml += '</ul>';
+    
+                    return `
+                        <p class="font-bold text-gray-800 mb-1.5 text-justify break-words">Câu ${idx + 1}: ${mathFmt(getCleanQuestionText(q.question))}</p>
+                        ${imgsHtml}
+                        ${optionsHtml}
+                        <p class="text-sm font-semibold text-green-700 mt-2">Đáp án đúng: <span class="bg-green-100 px-2 py-0.5 rounded">${q.answerStr}</span></p>
+                        ${q.explanation ? `<p class="text-xs text-gray-600 italic mt-1.5 bg-blue-50 p-2.5 rounded-xl border border-blue-100 text-justify break-words">Giải thích: ${formatExplanationWithLinks(q.explanation)}</p>` : ''}
+                        ${expImgsHtml}
+                    `;
+                });
+                frag.appendChild(div);
             });
+            container.appendChild(frag); lzSettle(container);
 
             document.getElementById('view-quiz-modal').classList.remove('hidden');
         }
@@ -11359,41 +11494,10 @@ bkCloseAll();
         const YT_THEATER_HTML_OFF = '<span class="yt-ic">🎬</span><span class="yt-lbl"> Rạp chiếu phim</span>';
         const YT_THEATER_HTML_ON = '<span class="yt-ic">🎬</span><span class="yt-lbl"> Thu nhỏ rạp</span>';
 
-        function renderLessonsList(lessons) {
-            const container = document.getElementById('lessons-list');
-            container.innerHTML = '';
-
-            if (lessons.length === 0) {
-                container.innerHTML = '<div class="p-6 text-center text-sm text-gray-400 italic">Chưa có bài học nào</div>';
-                return;
-            }
-
-            lessons.forEach((lesson, index) => {
-                const playerId = `yt-player-${Date.now()}-${index}`;
-                const card = document.createElement('div');
-                card.className = 'bg-gray-50 border border-gray-200 rounded-2xl p-3.5 sm:p-4 space-y-3 transition-colors';
-                
-                card.innerHTML = `
-                    <div class="flex items-center flex-wrap gap-x-3 gap-y-2">
-                        <div class="font-bold text-sm sm:text-base text-gray-800 break-words min-w-0" style="flex:1 1 auto;">
-                            ${lesson.title}
-                        </div>
-                        <div class="lc-acts flex items-center gap-2 justify-end ml-auto" style="flex:0 0 auto; max-width:100%;">
-                            <button type="button" onclick="editLessonQuiz('${playerId}')" class="dev-only bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 font-bold py-1.5 px-3 rounded-xl text-xs sm:text-sm shadow-sm transition-all active:scale-95" title="Sửa đề của bài này (chỉ Dev)">✏️ Edit đề</button>
-                            <button type="button" id="review-btn-${playerId}" onclick="startLessonReview('${playerId}')" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-1.5 px-3.5 rounded-xl text-xs sm:text-sm shadow-sm transition-all active:scale-95" title="Làm trắc nghiệm của bài này">📝 Ôn tập bài này</button>
-                            ${lesson.videoId ? `
-                                <button id="vid-btn-${playerId}" data-vid="${lesson.videoId}" data-st="wait" onclick="ytVideoBtn('${playerId}', '${lesson.videoId}')" class="vid-btn bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white font-bold py-1.5 px-3.5 rounded-xl text-xs sm:text-sm shadow-sm transition-all flex items-center gap-1.5 active:scale-95">
-                                    <span>🎬</span>
-                                    <span id="btn-text-${playerId}">Video<span class="cb-long"> bài giảng</span></span>
-                                    <span id="gift-${playerId}" class="vgift" style="display:none">🎁 300</span>
-                                </button>
-                            ` : `
-                                <span class="text-xs text-gray-400 bg-gray-200 px-2.5 py-1 rounded-lg">Chưa có link video</span>
-                            `}
-                        </div>
-                    </div>
-
-                    <div id="video-wrapper-${playerId}" class="hidden pt-2">
+        /* Khung trình phát (thanh điều khiển + bảng sub + bảng lồng tiếng ~100 phần tử) CHỈ được dựng khi bấm "Video" lần đầu của từng bài
+           → danh sách bài giảng chỉ còn tiêu đề + 2 nút / bài, hết giật dù có hàng trăm bài. */
+        function buildLessonPlayerHtml(playerId) {
+            return `
                         <div id="custom-wrapper-${playerId}" class="custom-yt-wrapper pre-play shadow-2xl relative" oncontextmenu="return false;"><button type="button" class="ytb-back" onclick="ytBackToList('${playerId}')" title="Quay lại danh sách video" aria-label="Quay lại danh sách video"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
                             <div class="custom-yt-stage">
                                 <div class="custom-yt-screen">
@@ -11510,12 +11614,59 @@ bkCloseAll();
                                 </div>
                             </div>
                         </div>
+            `;
+        }
+        function ensureLessonPlayer(playerId) {
+            const w = document.getElementById('video-wrapper-' + playerId);
+            if (!w || w.dataset.hyd === '1') return;
+            w.dataset.hyd = '1';
+            w.innerHTML = buildLessonPlayerHtml(playerId);
+            try { applySubCfg(); } catch (e) {}   // đồng bộ thanh trượt / giọng đọc cho khung vừa dựng
+        }
+
+        function renderLessonsList(lessons) {
+            const container = document.getElementById('lessons-list');
+            container.innerHTML = '';
+
+            if (lessons.length === 0) {
+                container.innerHTML = '<div class="p-6 text-center text-sm text-gray-400 italic">Chưa có bài học nào</div>';
+                return;
+            }
+
+            const frag = document.createDocumentFragment();   // gom 1 lần rồi chèn, tránh reflow từng thẻ
+            lessons.forEach((lesson, index) => {
+                const playerId = `yt-player-${Date.now()}-${index}`;
+                const card = document.createElement('div');
+                card.className = 'bg-gray-50 border border-gray-200 rounded-2xl p-3.5 sm:p-4 space-y-3 transition-colors';
+                
+                card.innerHTML = `
+                    <div class="flex items-center flex-wrap gap-x-3 gap-y-2">
+                        <div class="font-bold text-sm sm:text-base text-gray-800 break-words min-w-0" style="flex:1 1 auto;">
+                            ${lesson.title}
+                        </div>
+                        <div class="lc-acts flex items-center gap-2 justify-end ml-auto" style="flex:0 0 auto; max-width:100%;">
+                            <button type="button" onclick="editLessonQuiz('${playerId}')" class="dev-only bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 font-bold py-1.5 px-3 rounded-xl text-xs sm:text-sm shadow-sm transition-all active:scale-95" title="Sửa đề của bài này (chỉ Dev)">✏️ Edit đề</button>
+                            <button type="button" id="review-btn-${playerId}" onclick="startLessonReview('${playerId}')" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-1.5 px-3.5 rounded-xl text-xs sm:text-sm shadow-sm transition-all active:scale-95" title="Làm trắc nghiệm của bài này">📝 Ôn tập bài này</button>
+                            ${lesson.videoId ? `
+                                <button id="vid-btn-${playerId}" data-vid="${lesson.videoId}" data-st="wait" onclick="ytVideoBtn('${playerId}', '${lesson.videoId}')" class="vid-btn bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white font-bold py-1.5 px-3.5 rounded-xl text-xs sm:text-sm shadow-sm transition-all flex items-center gap-1.5 active:scale-95">
+                                    <span>🎬</span>
+                                    <span id="btn-text-${playerId}">Video<span class="cb-long"> bài giảng</span></span>
+                                    <span id="gift-${playerId}" class="vgift" style="display:none">🎁 300</span>
+                                </button>
+                            ` : `
+                                <span class="text-xs text-gray-400 bg-gray-200 px-2.5 py-1 rounded-lg">Chưa có link video</span>
+                            `}
+                        </div>
+                    </div>
+
+                    <div id="video-wrapper-${playerId}" class="hidden pt-2">
                     </div>
                 `;
-                container.appendChild(card);
+                frag.appendChild(card);
                 lessonSrtInfo[playerId] = { folder: lesson.srtFolder || '', title: lesson.title };
                 registerLessonQuiz(playerId, lesson, index);
             });
+            container.appendChild(frag);
             applySubCfg();
             try { if (window.ytPaintClaims) window.ytPaintClaims(); } catch (e) {}
         }
@@ -11881,6 +12032,7 @@ bkCloseAll();
                 wrapper.classList.remove('hidden');
                 try { if (activeYtPlayers[playerId]) activeYtPlayers[playerId].hiddenUser = false; } catch (e) {} if (btnText) btnText.innerHTML = "Ẩn<span class=\"cb-long\"> video</span>";
                 lastActivePlayerId = playerId;
+                ensureLessonPlayer(playerId);   // dựng khung trình phát lần đầu
                 initCustomYtPlayer(playerId, videoId);
                 const scrollToVideo = () => {
                     const el = document.getElementById(`custom-wrapper-${playerId}`) || wrapper;
@@ -16842,6 +16994,16 @@ setInterval(function () { document.querySelectorAll('input.yt-seek').forEach(win
     g.addEventListener('pointerup', end); g.addEventListener('pointercancel', end);
 })();
 
+/* ---------- (3b) DỰNG NỘI DUNG THEO TRANG: thẻ chỉ là khung rỗng, nội dung nặng được dựng khi trang chứa nó hiện ra ---------- */
+window.lzItem = function (el, fn) { el._lz = fn; el.classList.add('lz-p'); return el; };
+window.lzFill = function (el) { var f = el && el._lz; if (!f) return; el._lz = null; el.classList.remove('lz-p'); try { el.innerHTML = f(); } catch (e) { console.error(e); } };
+window.lzSettle = function (box) {   // list không có thanh phân trang → dựng hết (dự phòng)
+    setTimeout(function () {
+        if (window.PGR && PGR.has && PGR.has(box)) return;
+        Array.prototype.forEach.call(box.querySelectorAll(':scope > .lz-p'), window.lzFill);
+    }, 400);
+};
+
 /* ---------- (4) PHÂN TRANG CHUNG ---------- */
 window.PGR = (function () {
     var MIN_ITEMS = 10, SIZES = [10, 20, 30], LS = 'pg_size_v1';
@@ -16885,7 +17047,7 @@ window.PGR = (function () {
         var act = n >= MIN_ITEMS;
         st.active = act;
         if (!act) {
-            items.forEach(function (el) { el.classList.remove('pg-hide', 'pg-first'); });
+            items.forEach(function (el) { el.classList.remove('pg-hide', 'pg-first'); window.lzFill(el); });
             st.bar.classList.add('pg-off'); st.page = 1; st.auto = true; return;
         }
         var pages = pagesOf(st, n);
@@ -16901,6 +17063,7 @@ window.PGR = (function () {
             var hide = i < a || i >= b;
             el.classList.toggle('pg-hide', hide);
             el.classList.toggle('pg-first', i === a);
+            if (!hide) window.lzFill(el);
         });
         var q = st.bar;
         q.classList.remove('pg-off');
@@ -16996,7 +17159,8 @@ window.PGR = (function () {
         attach: attach,
         refresh: function (box) { var st = reg.get(box); if (st) apply(st, false); },
         gotoItem: function (box, i) { var st = reg.get(box); if (st && st.active) setPage(st, Math.floor(i / st.size) + 1, false); },
-        state: function (box) { return reg.get(box); }
+        state: function (box) { return reg.get(box); },
+        has: function (box) { return reg.has(box); }
     };
 })();
 
