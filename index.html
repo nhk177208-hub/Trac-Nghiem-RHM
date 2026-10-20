@@ -1319,13 +1319,20 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
         .rhm-sb-nav>button.rhm-sb-item{padding:0 .8em!important}
         .rhm-sb-home{padding:0 .8em!important}
         .rhm-sb-exit{margin-left:0}
-        .rhm-sb{--sbh:clamp(44px,calc((100vh - 130px)/8),84px)}
-        .rhm-sb-body{padding:0 10px;gap:clamp(6px,1.2vh,10px);grid-template-rows:none!important;grid-auto-rows:var(--sbh);align-content:start}
+        /* 8 khoảng bằng nhau lấp đầy chiều cao: tiêu đề + 6 nút + Thoát (khoảng cách giữa các khoảng cũng đều) */
+        .rhm-sb{--sbw:min(360px,88vw);--sbg:clamp(8px,1.6vh,14px);--sbp:clamp(8px,1.6vh,14px);width:var(--sbw);
+            --sbh:max(48px,calc((100vh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px) - 2*var(--sbp) - 7*var(--sbg))/8));
+            --sbfs:clamp(16px,min(calc(var(--sbh)*.36),calc(var(--sbw)*.075)),30px);
+            padding-top:calc(env(safe-area-inset-top,0px) + var(--sbp))!important;padding-bottom:calc(env(safe-area-inset-bottom,0px) + var(--sbp))!important;overflow-y:auto!important}
+        @supports (height:100dvh){.rhm-sb{--sbh:max(48px,calc((100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px) - 2*var(--sbp) - 7*var(--sbg))/8))}}
+        .rhm-sb-body{flex:0 0 auto!important;overflow:visible!important;padding:0 10px!important;gap:var(--sbg)!important;display:grid;grid-template-rows:none!important;grid-auto-rows:var(--sbh);align-content:start;margin-top:var(--sbg)}
         .rhm-sb-home,.rhm-sb-nav>button.rhm-sb-item{height:var(--sbh);min-height:0!important}
-        .rhm-sb-head{height:var(--sbh);padding:0 8px 0 16px!important;box-sizing:border-box}
-        .rhm-sb-head b{font-size:var(--sbfs)!important}
-        .rhm-sb-logo{width:calc(var(--sbh)*.62)!important;height:calc(var(--sbh)*.62)!important;max-width:44px;max-height:44px}
-        .rhm-sb-foot{padding:10px 10px!important}
+        .rhm-sb-head{height:var(--sbh);padding:0 10px 0 16px!important;box-sizing:border-box;flex:0 0 auto}
+        .rhm-sb-head b{font-size:calc(var(--sbfs)*.82)!important}
+        .rhm-sb-brand{gap:.6em}
+        .rhm-sb-logo{width:calc(var(--sbh)*.7)!important;height:calc(var(--sbh)*.7)!important;max-width:64px!important;max-height:64px!important}
+        .rhm-sb-x{width:calc(var(--sbh)*.55);height:calc(var(--sbh)*.55);max-width:48px;max-height:48px;font-size:calc(var(--sbfs)*1.1)}
+        .rhm-sb-foot{padding:0 10px!important;margin-top:var(--sbg)!important;border-top:0!important;flex:0 0 auto}
         .rhm-sb-exit{height:var(--sbh);min-height:0!important;justify-content:center!important;padding:0 .8em!important}
         .rhm-bye{position:fixed;inset:0;z-index:100300;background:#f6f8fa;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:24px;font-family:inherit;color:#1f2328}
         .rhm-bye button{padding:12px 22px;border:0;border-radius:12px;background:#0969da;color:#fff;font:inherit;font-weight:700;font-size:16px;cursor:pointer}
@@ -1420,8 +1427,8 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
                 '#rhmUp .c{width:min(420px,100%);background:#fff;color:#1f2328;border-radius:18px;box-shadow:0 12px 40px rgba(0,0,0,.35);padding:20px 20px 16px;text-align:center;font-family:inherit}' +
                 '#rhmUp h3{margin:0 0 4px;font-size:19px;font-weight:800}#rhmUp .s{font-size:14px;color:#59636e;min-height:20px;margin-bottom:12px}' +
                 '#rhmUp .bar{height:12px;border-radius:99px;background:#eaeef2;overflow:hidden}#rhmUp .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#0969da,#2da44e);transition:width .15s}' +
-                '#rhmUp .n{display:flex;justify-content:space-between;font-size:13px;color:#59636e;margin:6px 0 4px}' +
-                '#rhmUp .f{font-size:12px;color:#8c959f;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-height:16px;margin-bottom:12px}' +
+                '#rhmUp .n{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;color:#59636e;margin:6px 0 12px}' +
+                '#rhmUp .f{display:none}#rhmUp .n .a{font-size:20px;font-weight:800;color:#1f2328}' +
                 '#rhmUp .chips{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}' +
                 '#rhmUp .chips span{font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:#f6f8fa;border:1px solid #d0d7de}' +
                 '#rhmUp .btns{display:flex;gap:8px;justify-content:center}#rhmUp button{padding:10px 18px;border:0;border-radius:12px;font:inherit;font-weight:700;font-size:15px;cursor:pointer}' +
@@ -1477,12 +1484,11 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
         var work = todo.filter(function (t) { return t.path !== APP_FILE; });
         var total = work.reduce(function (a, t) { return a + t.size; }, 0), done = 0, doneBytes = 0;
         ui.s.textContent = first ? 'Lần đầu: đang tải toàn bộ file về máy…' : (work.length || removed.length || appChanged ? 'Đang tải các thay đổi…' : 'Đang kiểm tra…');
-        ui.a.textContent = '0 / ' + work.length + ' file'; ui.b.textContent = '0 / ' + fmt(total);
+        ui.a.textContent = '0%'; ui.b.textContent = '0 / ' + fmt(total);
         var idx = Object.assign({}, old), q = work.slice(), saveT = Date.now();
         async function worker() {
             while (q.length && !cancelled) {
                 var t = q.shift();
-                if (ui) ui.f.textContent = t.path;
                 try {
                     var d = await dl(t.path, t.sha, 2);
                     await putFile({ path: t.path, sha: t.sha, blob: d.blob, type: d.type });
@@ -1492,7 +1498,7 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
                 done++; doneBytes += t.size;
                 if (ui) {
                     ui.bar.style.width = (total ? Math.min(100, doneBytes / total * 100) : (work.length ? done / work.length * 100 : 100)) + '%';
-                    ui.a.textContent = done + ' / ' + work.length + ' file'; ui.b.textContent = fmt(Math.min(doneBytes, total)) + ' / ' + fmt(total); chips(cnt);
+                    ui.a.textContent = Math.round(total ? Math.min(100, doneBytes / total * 100) : (work.length ? done / work.length * 100 : 100)) + '%'; ui.b.textContent = fmt(Math.min(doneBytes, total)) + ' / ' + fmt(total); chips(cnt);
                 }
                 if (Date.now() - saveT > 4000) { saveT = Date.now(); try { await setMeta('index', idx); } catch (e) {} }   /* lưu tạm để lần sau tiếp tục nếu bị ngắt */
             }
@@ -1517,7 +1523,7 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
         setBtns([{ c: 'g', t: 'Hủy', fn: function () { cancelled = true; ui && (ui.s.textContent = 'Đang hủy…'); } }]);
         try {
             var res = await sync();
-            if (ui) ui.bar.style.width = '100%';
+            if (ui) { ui.bar.style.width = '100%'; if (!res.cancelled) ui.a.textContent = '100%'; }
             var msg = res.cancelled ? 'Đã hủy — phần đã tải vẫn được giữ, lần sau sẽ tiếp tục.'
                 : res.cnt.err ? 'Xong, nhưng ' + res.cnt.err + ' file lỗi (sẽ thử lại lần sau).'
                 : (res.total || res.cnt.del || res.appChanged) ? '✅ Cập nhật xong!' : '✅ Mọi thứ đã là bản mới nhất.';
@@ -1658,14 +1664,33 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
     function fsEl() { return document.fullscreenElement || document.webkitFullscreenElement || null; }
     var canFs = !!(document.fullscreenEnabled || document.webkitFullscreenEnabled);
     if (!canFs) fsBtn.style.display = 'none';   // vd. iPhone Safari không hỗ trợ
+    /* Tự bật toàn màn hình mỗi lần vào app; chỉ thoát được bằng nút này (khóa Esc / F11) */
+    var userExit = false;
+    function lockKeys() { try { if (navigator.keyboard && navigator.keyboard.lock) navigator.keyboard.lock(['Escape', 'F11']).catch(function () {}); } catch (e) {} }
+    function autoEnter() {
+        if (userExit || !canFs || fsEl()) return;
+        try {
+            var d = document.documentElement, rq = d.requestFullscreen || d.webkitRequestFullscreen;
+            var p = rq.call(d); if (p && p.then) p.then(lockKeys, function () {}); else lockKeys();
+        } catch (e) {}
+    }
+    window.rhmFsLock = { enter: function () { userExit = false; autoEnter(); }, active: function () { return !!fsEl(); }, allowExit: function () { userExit = true; } };
+    if (canFs) {
+        autoEnter();   /* thử ngay khi tải (trình duyệt thường chỉ cho khi có thao tác) */
+        ['pointerdown', 'mousedown', 'click', 'touchend', 'keydown'].forEach(function (ev) { document.addEventListener(ev, function (e) { if (ev === 'keydown' && (e.key === 'Escape' || e.key === 'F11')) return; autoEnter(); }, true); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'F11' && !userExit) { e.preventDefault(); e.stopPropagation(); autoEnter(); } }, true);
+        ['fullscreenchange', 'webkitfullscreenchange'].forEach(function (n) { document.addEventListener(n, function () { if (fsEl()) lockKeys(); else if (!userExit) setTimeout(autoEnter, 0); }); });
+        document.addEventListener('visibilitychange', function () { if (!document.hidden) autoEnter(); });
+    }
     fsBtn.addEventListener('click', function () {
         try {
             if (fsEl()) {
+                userExit = true;
+                try { if (navigator.keyboard && navigator.keyboard.unlock) navigator.keyboard.unlock(); } catch (e) {}
                 var ex = document.exitFullscreen || document.webkitExitFullscreen;
                 var p1 = ex.call(document); if (p1 && p1.catch) p1.catch(function () {});
             } else {
-                var d = document.documentElement, rq = d.requestFullscreen || d.webkitRequestFullscreen;
-                var p2 = rq.call(d); if (p2 && p2.catch) p2.catch(function () {});
+                userExit = false; autoEnter();
             }
         } catch (e) {}
     });
@@ -1787,7 +1812,7 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
     }
     function doExit() {
         try { if (vis('quiz-screen') && typeof saveActiveSession === 'function') saveActiveSession(); } catch (e) {}
-        try { var ex = document.exitFullscreen || document.webkitExitFullscreen; if ((document.fullscreenElement || document.webkitFullscreenElement) && ex) ex.call(document); } catch (e) {}
+        try { if (window.rhmFsLock) window.rhmFsLock.allowExit(); var ex = document.exitFullscreen || document.webkitExitFullscreen; if ((document.fullscreenElement || document.webkitFullscreenElement) && ex) ex.call(document); } catch (e) {}
         try { var cap = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.App; if (cap && cap.exitApp) { cap.exitApp(); return; } } catch (e) {}
         try { if (navigator.app && navigator.app.exitApp) { navigator.app.exitApp(); return; } } catch (e) {}
         try { window.open('', '_self'); window.close(); } catch (e) {}
@@ -22863,10 +22888,11 @@ var DOMAINS = [A_PROG, A_VIDEO, A_NOTES, A_DICT, A_ANN, A_KEYS];
     /* Toàn màn hình (kiểu F11 của app): nút trong Cài Đặt; đang toàn màn hình thì nhãn đổi thành "Thoát toàn màn hình" và thoát có popup xác nhận */
     (function () {
         var fsOn = function () { return !!(document.fullscreenElement || document.webkitFullscreenElement); };
-        function label() { var b = document.getElementById('btn-rhm-fs'); if (b) b.textContent = fsOn() ? '🗗 Thoát toàn màn hình' : '⛶ Toàn màn hình'; }
+        function label() { var b = document.getElementById('btn-rhm-fs'); if (b) b.textContent = fsOn() ? '✅ Đang toàn màn hình' : '⛶ Toàn màn hình'; }
         function exitFs() { try { var p = document.exitFullscreen ? document.exitFullscreen() : (document.webkitExitFullscreen && document.webkitExitFullscreen()); if (p && p.catch) p.catch(function () {}); } catch (e) {} }
         window.rhmToggleFs = function () {
-            if (fsOn()) { window.appConfirm('Thoát toàn màn hình?', function (ok) { if (ok) exitFs(); }); return; }
+            if (fsOn()) { if (typeof showToast === 'function') showToast('Chỉ thoát toàn màn hình bằng nút ở góc phải thanh trên cùng'); return; }
+            if (window.rhmFsLock) { window.rhmFsLock.enter(); return; }
             var el = document.documentElement;
             var p = el.requestFullscreen ? el.requestFullscreen() : (el.webkitRequestFullscreen && el.webkitRequestFullscreen());
             if (p && p.catch) p.catch(function () { if (typeof showToast === 'function') showToast('Trình duyệt này không cho bật toàn màn hình'); });
