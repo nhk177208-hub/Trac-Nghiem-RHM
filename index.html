@@ -1901,9 +1901,9 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
   --sb-gap: calc(var(--sbfs, 20px) * 0.4);
   --sb-pl: 12px;
 }
-.rhm-sb-body { padding: 0 6px !important; }
-.rhm-sb-head { padding: 0 10px 0 calc(6px + var(--sb-pl)) !important; }
-.rhm-sb-foot { padding: 0 6px !important; }
+.rhm-sb-body { padding: 0 var(--sbg) !important; }
+.rhm-sb-head { padding: 0 var(--sbg) 0 calc(var(--sbg) + var(--sb-pl)) !important; }
+.rhm-sb-foot { padding: 0 var(--sbg) !important; }
 .rhm-sb-brand { gap: var(--sb-gap) !important; }
 .rhm-sb-logo {
   width: var(--sb-ico) !important;
