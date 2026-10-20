@@ -1892,19 +1892,63 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
 <div class="rhm-tbspacer" id="rhmTbSpacer" aria-hidden="true"></div>
 <!-- ===== SIDEBAR ===== -->
 <div class="rhm-sb-back" id="rhmSbBack"></div>
+<style id="rhm-sidebar-align-v1">
+/* VÁ 1 — Mọi icon trên một hàng dọc, mọi chữ trên một hàng dọc.
+   Kích thước icon tự giãn theo cỡ chữ sidebar (--sbfs) nên vẫn khớp khi
+   sidebar đổi cỡ chữ theo màn hình. Nút Thoát căn trái (trước đây căn giữa). */
+.rhm-sb {
+  --sb-ico: calc(var(--sbfs, 20px) * 1.3);
+  --sb-gap: calc(var(--sbfs, 20px) * 0.4);
+  --sb-pl: 12px;
+}
+.rhm-sb-body { padding: 0 6px !important; }
+.rhm-sb-head { padding: 0 10px 0 calc(6px + var(--sb-pl)) !important; }
+.rhm-sb-foot { padding: 0 6px !important; }
+.rhm-sb-brand { gap: var(--sb-gap) !important; }
+.rhm-sb-logo {
+  width: var(--sb-ico) !important;
+  height: var(--sb-ico) !important;
+  max-width: var(--sb-ico) !important;
+  max-height: var(--sb-ico) !important;
+  flex: 0 0 var(--sb-ico) !important;
+}
+.rhm-sb-home,
+.rhm-sb-nav > button.rhm-sb-item,
+.rhm-sb-exit {
+  padding: 0 var(--sb-pl) !important;
+  gap: var(--sb-gap) !important;
+  justify-content: flex-start !important;
+  text-align: left !important;
+  display: flex !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+}
+.rhm-sb-ico {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: var(--sb-ico) !important;
+  min-width: var(--sb-ico) !important;
+  max-width: var(--sb-ico) !important;
+  flex: 0 0 var(--sb-ico) !important;
+  line-height: 1 !important;
+  text-align: center !important;
+}
+.rhm-sb-item > span.bg-white\/25 { margin-left: auto !important; }
+</style>
 <aside class="rhm-sb" id="rhmSb" aria-hidden="true" aria-label="Menu">
     <div class="rhm-sb-head"><span class="rhm-sb-brand"><img class="rhm-sb-logo" data-rhm-logo alt="" draggable="false"><b>Trắc Nghiệm RHM</b></span><button type="button" class="rhm-sb-x" id="rhmSbX" aria-label="Đóng menu" title="Đóng">&#10005;</button></div>
     <div class="rhm-sb-body">
-        <button type="button" class="rhm-sb-home" id="rhmSbHome" title="Về trang chủ"><span aria-hidden="true">🏠</span><span>Về Trang Chủ</span></button>
+        <button type="button" class="rhm-sb-home" id="rhmSbHome" title="Về trang chủ"><span class="rhm-sb-ico" aria-hidden="true">🏠</span><span>Về Trang Chủ</span></button>
         <div class="rhm-sb-nav" id="rhmSbNav">
-        <button onclick="openCollectionModal()" class="rhm-sb-item hb-badge text-sm bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm">🏆 Bộ Sưu Tập <span id="home-emblem-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
-        <button onclick="openRhmDict()" class="rhm-sb-item text-sm bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm" title="Từ điển thuật ngữ RHM — tự thêm khi bạn dịch trong hộp chat đọc sách">📖 Từ Điển <span id="rhm-dict-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
-        <button onclick="openRhmNote()" class="rhm-sb-item text-sm text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm" style="background:linear-gradient(90deg,#0d9488,#059669)" title="Ghi chú — lưu từ các bong bóng chat AI">📝 Ghi Chú <span id="rhm-note-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
-        <button type="button" id="rhmUpdateAppBtn" onclick="rhmUpdateApp()" class="rhm-sb-item text-sm text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm" style="background:linear-gradient(90deg,#0969da,#2da44e)" title="Tải lại app và dữ liệu mới nhất">🔄 Cập Nhật App <span id="rhm-update-count" class="bg-white/25 px-2 rounded-full text-xs font-black" aria-label="Số bản cập nhật mới">0</span></button>
-        <button onclick="openHomeSettings()" class="rhm-sb-item hb-set text-sm bg-gradient-to-r from-slate-500 via-gray-500 to-zinc-600 hover:from-slate-600 hover:via-gray-600 hover:to-zinc-700 text-white font-bold py-2.5 px-4 rounded-xl border border-slate-400/40 shadow-sm transition-all">⚙️ Cài Đặt</button>
+        <button onclick="openCollectionModal()" class="rhm-sb-item hb-badge text-sm bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm"><span class="rhm-sb-ico" aria-hidden="true">🏆</span>Bộ Sưu Tập<span id="home-emblem-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
+        <button onclick="openRhmDict()" class="rhm-sb-item text-sm bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm" title="Từ điển thuật ngữ RHM — tự thêm khi bạn dịch trong hộp chat đọc sách"><span class="rhm-sb-ico" aria-hidden="true">📖</span>Từ Điển<span id="rhm-dict-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
+        <button onclick="openRhmNote()" class="rhm-sb-item text-sm text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm" style="background:linear-gradient(90deg,#0d9488,#059669)" title="Ghi chú — lưu từ các bong bóng chat AI"><span class="rhm-sb-ico" aria-hidden="true">📝</span>Ghi Chú<span id="rhm-note-count" class="bg-white/25 px-2 rounded-full text-xs font-black">0</span></button>
+        <button type="button" id="rhmUpdateAppBtn" onclick="rhmUpdateApp()" class="rhm-sb-item text-sm text-white font-bold py-2.5 px-3.5 rounded-xl transition-all shadow-sm" style="background:linear-gradient(90deg,#0969da,#2da44e)" title="Tải lại app và dữ liệu mới nhất"><span class="rhm-sb-ico" aria-hidden="true">🔄</span>Cập Nhật<span id="rhm-update-count" class="bg-white/25 px-2 rounded-full text-xs font-black" aria-label="Số bản cập nhật mới">0</span></button>
+        <button onclick="openHomeSettings()" class="rhm-sb-item hb-set text-sm bg-gradient-to-r from-slate-500 via-gray-500 to-zinc-600 hover:from-slate-600 hover:via-gray-600 hover:to-zinc-700 text-white font-bold py-2.5 px-4 rounded-xl border border-slate-400/40 shadow-sm transition-all"><span class="rhm-sb-ico" aria-hidden="true">⚙️</span>Cài Đặt</button>
         </div>
     </div>
-    <div class="rhm-sb-foot"><button type="button" class="rhm-sb-exit" id="rhmSbExit"><span aria-hidden="true">🚪</span><span>Thoát</span></button></div>
+    <div class="rhm-sb-foot"><button type="button" class="rhm-sb-exit" id="rhmSbExit"><span class="rhm-sb-ico" aria-hidden="true">🚪</span><span>Thoát Ứng Dụng</span></button></div>
 </aside>
 <script>
 (function () {
