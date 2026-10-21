@@ -2252,6 +2252,39 @@ Mục cuối cùng đã lập là "`+lastH.en+'" [cấp '+lastH.lvl+']. Nếu fi
   }
 }
 </style>
+<style id="rhm-rib-landscape-v3">
+@media (orientation: landscape) {
+  /* 1. Điều chỉnh vị trí thanh ribbon: lùi vào trong cách mép sách 1 gap, hạ xuống 50% */
+  #dict-modal .rd-rib, #note-modal .rd-rib {
+    right: calc(44px + var(--rbu) * 0.17) !important;
+    top: calc(var(--rbu) * 0.35) !important;
+    gap: calc(var(--rbu) * 0.17) !important;
+  }
+  
+  /* 2. Tăng kích thước nút 30% */
+  #dict-modal .rd-rb, #note-modal .rd-rb {
+    width: calc(var(--rbu) * 0.936) !important;   /* 0.72 * 1.3 */
+    height: calc(var(--rbu) * 1.3) !important;    /* 1.0 * 1.3 */
+    padding-top: calc(var(--rbu) * 0.26) !important;
+  }
+  
+  /* Kích thước khi hover / active */
+  #dict-modal .rd-rb.on, #note-modal .rd-rb.on {
+    height: calc(var(--rbu) * 1.56) !important;   /* 1.2 * 1.3 */
+  }
+  
+  /* Icon to lên tương ứng */
+  #dict-modal .rd-rb svg, #note-modal .rd-rb svg {
+    width: calc(var(--rbu) * 0.4355) !important;  /* 0.335 * 1.3 */
+    height: calc(var(--rbu) * 0.4355) !important;
+  }
+  
+  /* Chữ Aa to lên tương ứng */
+  #dict-modal .rd-rb span, #note-modal .rd-rb span {
+    font-size: calc(var(--rbu) * 0.364) !important; /* 0.28 * 1.3 */
+  }
+}
+</style>
 <script id="rhm-greet-v1">
 (function(){
   var KE="rhm_user_email",KN="rhm_display_name";
