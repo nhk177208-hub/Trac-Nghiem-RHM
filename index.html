@@ -2353,7 +2353,118 @@ Mục cuối cùng đã lập là "`+lastH.en+'" [cấp '+lastH.lvl+']. Nếu fi
   #rhm-pf .pf-head{padding:18px 22px 14px!important}
   #rhm-pf .pf-bars{height:clamp(90px,13vh,140px)!important}
 }
-</style><script id="rhm-profile-script">
+</style><script id="rhm-profile-script"><style id="rhm-profile-fit-css">
+#rhm-pf-back{
+  padding:5vh 16px!important;
+  padding:max(5dvh, env(safe-area-inset-top,0px)) 16px max(5dvh, env(safe-area-inset-bottom,0px))!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+}
+#rhm-pf{
+  margin-block:auto!important;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+}
+</style>
+<script id="rhm-profile-fit-script">
+(function(){
+"use strict";
+if(window.__rhmProfileFitV3)return;
+window.__rhmProfileFitV3=1;
+var rafT=0,lastOpen=!1;
+function vh(){return (window.visualViewport&&window.visualViewport.height)||window.innerHeight||document.documentElement.clientHeight||0}
+function vw(){return (window.visualViewport&&window.visualViewport.width)||window.innerWidth||document.documentElement.clientWidth||0}
+function isOpen(){var b=document.getElementById("rhm-pf-back");return !!(b&&b.classList.contains("open"))}
+function fit(){
+  var card=document.getElementById("rhm-pf");
+  if(!card)return;
+  var back=card.parentNode;
+  if(!back||!back.classList.contains("open"))return;
+  var W=vw(),H=vh();
+  if(W<40||H<40)return;
+  var availW=Math.max(280,W-32);
+  var availH=Math.max(260,H*0.9);
+  /* tạm mở khoá để đo chiều cao tự nhiên */
+  card.style.setProperty("max-height","none","important");
+  card.style.setProperty("overflow-y","visible","important");
+  card.style.setProperty("zoom","1","important");
+  card.style.setProperty("width","1150px","important");
+  var naturalH=card.scrollHeight||1;
+  if(W<950){
+    /* màn hẹp / mobile: full width, cho phép cuộn dọc, không zoom */
+    card.style.setProperty("zoom","1","important");
+    card.style.setProperty("width","100%","important");
+    card.style.setProperty("max-width","none","important");
+    card.style.setProperty("max-height",availH+"px","important");
+    card.style.setProperty("overflow-y","auto","important");
+    return;
+  }
+  /* desktop / tablet rộng: scale để fit cả 2 chiều */
+  var W0=1150;
+  var zW=availW/W0;
+  var zH=availH/naturalH;
+  var z=Math.min(1.55,Math.min(zW,zH));
+  var MIN_Z=0.72;
+  var needScroll=z<MIN_Z;
+  if(needScroll)z=MIN_Z;
+  card.style.setProperty("zoom",String(z),"important");
+  card.style.setProperty("width",W0+"px","important");
+  card.style.setProperty("max-width","none","important");
+  if(needScroll){
+    card.style.setProperty("max-height",(availH/z)+"px","important");
+    card.style.setProperty("overflow-y","auto","important");
+  }else{
+    card.style.setProperty("max-height","none","important");
+    card.style.setProperty("overflow-y","visible","important");
+  }
+}
+function schedule(){if(rafT)return;rafT=requestAnimationFrame(function(){rafT=0;fit()})}
+function isInPf(node){while(node&&node.nodeType===1){if(node.id==="rhm-pf"||node.id==="rhm-pf-back")return !0;node=node.parentElement}return !1}
+function watch(){
+  new MutationObserver(function(muts){
+    for(var i=0;i<muts.length;i++){
+      var m=muts[i];
+      if(isInPf(m.target)){if(isOpen())schedule();return}
+      var ad=m.addedNodes;
+      if(ad){
+        for(var j=0;j<ad.length;j++){
+          var nd=ad[j];
+          if(nd&&nd.nodeType===1){
+            if(nd.id==="rhm-pf"||nd.id==="rhm-pf-back"||isInPf(nd)){if(isOpen())schedule();return}
+            var inner=nd.querySelector&&(nd.querySelector("#rhm-pf")||nd.querySelector("#rhm-pf-back"));
+            if(inner){if(isOpen())schedule();return}
+          }
+        }
+      }
+    }
+  }).observe(document.body,{childList:!0,subtree:!0,characterData:!0});
+}
+/* resize / xoay / visualViewport (bàn phím ảo) */
+window.addEventListener("resize",function(){if(isOpen())schedule()});
+window.addEventListener("orientationchange",function(){setTimeout(function(){if(isOpen())fit()},220)});
+if(window.visualViewport){
+  try{window.visualViewport.addEventListener("resize",function(){if(isOpen())schedule()})}catch(e){}
+  try{window.visualViewport.addEventListener("scroll",function(){if(isOpen())schedule()})}catch(e){}
+}
+["fullscreenchange","webkitfullscreenchange"].forEach(function(n){
+  document.addEventListener(n,function(){setTimeout(function(){if(isOpen())fit()},80)});
+});
+/* theo dõi trạng thái mở/đóng nếu MutationObserver bỏ lỡ lần đầu */
+setInterval(function(){
+  var o=isOpen();
+  if(o&&!lastOpen){
+    fit();
+    setTimeout(fit,60);
+    setTimeout(fit,240);
+    setTimeout(fit,520);
+  }
+  lastOpen=o;
+},400);
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",watch);
+else watch();
+window.rhmProfileFit=fit;
+})();
+</script>
 (function(){
 "use strict";
 var KEY="rhm_profile_v1",COST=1000,READ_SECS=300,P=null,loaded=!1,ready=!1,open=!1;
