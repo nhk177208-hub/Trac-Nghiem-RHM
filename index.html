@@ -2210,14 +2210,13 @@ Mục cuối cùng đã lập là "`+lastH.en+'" [cấp '+lastH.lvl+']. Nếu fi
 `)}else{let e=nextS;const ae=typeof bkAiEnd=="function"?bkAiEnd(x,e):0;ae&&(e=ae),x.rg=null,x.e=e,x.text=bkText.slice(x.s,x.e).trim()}})},window.bkHeadsSave=function(){try{if(!bkCur)return;const heads=bkHeads.map(h=>({page:h.page,box:null,en:h.en,vi:h.vi,lvl:h.lvl,start:h.start||"",end:h.end||"",rg:h.rg||null,tl:h.tl||0,pos:typeof h.pos=="number"?h.pos:void 0,open:!!h.open,intro:!!h.intro}));localStorage.setItem("bk_hd_"+bkCur.url,JSON.stringify({v:6,heads}))}catch{}},window.bkRebuildSecs=async function(tok){const found=[];let minPos=0;try{gnorm()}catch{}for(let i=0;i<bkHeads.length;i++){if(tok!==bkViewTok)return!1;const h=bkHeads[i],nx=bkHeads[i+1];h._ntn=nx&&Array.isArray(nx.parts)&&nx.parts[0]?bkNormStr(nx.parts[0].text).slice(0,24):"";let s=null;try{s=await bkLocateHead(h,minPos)}catch{s=null}delete h._ntn,s!=null&&(found.push({title:bkFixVi(h.vi,h.en),en:h.en,num:"",lvl:h.lvl||1,s:Math.max(0,s),manual:!1,intro:!!h.intro,e:0,text:"",hd:h}),minPos=Math.max(0,s)+1),i%4===3&&await bkYield()}const manual=bkSecs.filter(x=>x.manual&&x.s>=0),all=found.concat(manual).sort((a,b)=>a.s-b.s||(a.manual?0:1)-(b.manual?0:1)).filter((x,i,a)=>i===0||x.s!==a[i-1].s);let prev=0;all.forEach(x=>{if(x.manual){prev=Math.max(1,Math.min(10,x.lvl||1));return}x.lvl=Math.max(1,Math.min(10,Math.min(x.lvl,prev+1))),prev=x.lvl});const keepEn=bkSecs[bkSecSel]&&bkSecs[bkSecSel].en||"";return bkSecs=all,bkRelink(),bkSecSel=keepEn?bkSecs.findIndex(x=>(x.en||"")===keepEn):-1,bkHl=bkSecSel>=0?bkHlFor(bkSecs[bkSecSel]):null,bkSaveManual(),bkHeadsSave(),bkApplyHlAll(),bkRenderSecList(),!0}})();
 </script>
 <style id="rhm-rib-scale-v1">
-#dict-modal,#note-modal{--rbu:calc(var(--rd-vh) * .0043)}
+#dict-modal,#note-modal{--rbu:calc(var(--rd-vh) * .0426)}
 #dict-modal .rd-x,#note-modal .rd-x{width:calc(var(--rbu)*1.35);height:calc(var(--rbu)*.87);font-size:calc(var(--rbu)*.48)}
-#dict-modal .rd-rib,#note-modal .rd-rib{right:calc(var(--rbu)*1.57);top:calc(var(--rbu)*.48);gap:calc(var(--rbu)*.17)}
+#dict-modal .rd-rib,#note-modal .rd-rib{right:calc(var(--rbu)*1.57);top:calc(var(--rbu)*.1);gap:calc(var(--rbu)*.17)}
 #dict-modal .rd-rb,#note-modal .rd-rb{width:calc(var(--rbu)*.72);height:var(--rbu);padding-top:calc(var(--rbu)*.2)}
 #dict-modal .rd-rb svg,#note-modal .rd-rb svg{width:calc(var(--rbu)*.335);height:calc(var(--rbu)*.335)}
 #dict-modal .rd-rb span,#note-modal .rd-rb span{font-size:calc(var(--rbu)*.28)!important}
 #dict-modal .rd-rb.on,#note-modal .rd-rb.on{height:calc(var(--rbu)*1.2)}
-#dict-modal .rd-wrap,#note-modal .rd-wrap{padding-top:calc(var(--rbu)*1.09);--rd-h:calc(var(--rd-vh) * .97 - 4px - var(--rbu)*1.09)}
-@media(max-width:759px){#dict-modal .rd-wrap,#note-modal .rd-wrap{padding-top:calc(var(--rbu)*1.35);--rd-h:calc(var(--rd-vh) * .97 - 4px - var(--rbu)*1.35 - var(--rbu)*1.09)}}
+#dict-modal .rd-wrap,#note-modal .rd-wrap{padding-top:calc(var(--rbu)*1.1);--rd-h:calc(var(--rd-vh) * .97 - 4px - var(--rbu)*1.1)}
 </style>
 </html>
