@@ -2268,7 +2268,7 @@ Mục cuối cùng đã lập là "`+lastH.en+'" [cấp '+lastH.lvl+']. Nếu fi
 #rhm-pf-back{z-index:100100}
 #rhm-pk-back{z-index:100200}
 #rhm-pf-back.open,#rhm-pk-back.open{display:flex}
-#rhm-pf{background:#fff;color:#1f2328;width:min(560px,100%);max-height:92vh;overflow-y:auto;border-radius:22px;box-shadow:0 24px 60px rgba(0,0,0,.35);box-sizing:border-box;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+#rhm-pf{background:#fff;color:#1f2328;width:min(96vw,1150px);max-height:92vh;overflow-y:auto;border-radius:22px;box-shadow:0 24px 60px rgba(0,0,0,.35);box-sizing:border-box;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 #rhm-pk{background:#fff;color:#1f2328;width:min(520px,100%);max-height:86vh;display:flex;flex-direction:column;border-radius:22px;box-shadow:0 24px 60px rgba(0,0,0,.4);overflow:hidden}
 #rhm-pf *,#rhm-pk *{box-sizing:border-box}
 .pf-head{position:relative;padding:22px 20px 16px;background:linear-gradient(135deg,#eef2ff,#fdf4ff 55%,#fff7ed);border-radius:22px 22px 0 0;display:flex;gap:16px;align-items:center}
@@ -2335,7 +2335,25 @@ Mục cuối cùng đã lập là "`+lastH.en+'" [cấp '+lastH.lvl+']. Nếu fi
   .pf-emgrid{grid-template-columns:repeat(auto-fill,minmax(clamp(72px,7vw,120px),1fr));gap:clamp(8px,.9vw,14px)}
 }
 </style>
-<script id="rhm-profile-script">
+<style id="rhm-profile-v2-css">
+.pf-st b{white-space:nowrap}
+.pf-bars .pf-bar i{background:#22c55e}
+@media (min-width:800px){
+  #rhm-pf{
+    --pf-z:max(0.62,min(calc((100vw - 40px)/1150),calc((100vh - 40px)/700),1.55));
+    zoom:var(--pf-z);
+    width:1150px!important;
+    max-width:none!important;
+    max-height:92vh;
+    max-height:calc((100vh - 40px)/var(--pf-z))!important;
+    overflow-y:auto!important;
+  }
+  #rhm-pf .pf-grid{grid-template-columns:repeat(4,1fr)!important}
+  #rhm-pf .pf-sec{padding:14px 22px 4px!important}
+  #rhm-pf .pf-head{padding:18px 22px 14px!important}
+  #rhm-pf .pf-bars{height:clamp(90px,13vh,140px)!important}
+}
+</style><script id="rhm-profile-script">
 (function(){
 "use strict";
 var KEY="rhm_profile_v1",COST=1000,READ_SECS=300,P=null,loaded=!1,ready=!1,open=!1;
@@ -2376,16 +2394,16 @@ if(av){
 }
 if(nm){nm.addEventListener("click",openProfile)}
 /* ---- ghi thống kê ---- */
-function day(){var k=today();return P.days[k]||(P.days[k]={a:0,c:0,s:0})}
-function onAnswer(ok){
+function day(){var k=today();return P.days[k]||(P.days[k]={a:0,c:0,s:0,pts:0})}
+function onAnswer(ok,earnedPts){
   if(!ensure())return;
-  P.a++;ok&&P.c++;var d=day();d.a++;ok&&d.c++;
+  P.a++;ok&&P.c++;var d=day();d.a++;ok&&d.c++;if(earnedPts>0)d.pts=(d.pts||0)+earnedPts;
   try{if(typeof currentStreak<"u"&&currentStreak>P.best)P.best=currentStreak}catch(e){}
   save()
 }
 function wrap(name,ok){
   var f=window[name];if(typeof f!=="function"||f.__pf)return;
-  var w=function(){var r=f.apply(this,arguments);try{onAnswer(ok)}catch(e){}return r};
+  var w=function(){var before=0;try{before=SecureStore.getPoints()}catch(e){}var r=f.apply(this,arguments);var after=before;try{after=SecureStore.getPoints()}catch(e){}try{onAnswer(ok,Math.max(0,after-before))}catch(e){}return r};
   w.__pf=1;window[name]=w
 }
 wrap("handleCorrectAnswerGamification",!0);wrap("handleIncorrectAnswerGamification",!1);
@@ -2486,19 +2504,19 @@ function renderProfile(){
   [["💰",fmtNum(S.points),"Điểm tích lũy"],["⭐",fmtNum(S.stars),"Ngôi sao hy vọng"],["🎖️",S.own+" / "+S.total,"Huy hiệu"],
    ["✍️",fmtNum(p.a),"Câu đã trả lời"],["🎯",rate==null?"—":rate+"%","Tỉ lệ đúng"],["🔥",fmtNum(Math.max(p.best,streakNow())),"Chuỗi đúng dài nhất"],
    ["⚡",fmtNum(streakNow()),"Chuỗi đúng hiện tại"],["📅",fmtNum(S.dayN),"Ngày đã học"],["⏱️",fmtTime(p.secs),"Thời gian dùng app"],
-   ["🎬",fmtNum(S.vid),"Video bài giảng đã xem"],["📖",fmtNum(S.ch),"Chương sách đã đọc"],["🔤",fmtNum(S.voc),"Từ vựng đã học (đã đánh dấu mức độ)"]
+   ["🎬",fmtNum(S.vid),"Video đã xem"],["📖",fmtNum(S.ch),"Chương sách đã đọc"],["🔤",fmtNum(S.voc),"Từ vựng đã học"]
   ].forEach(function(r){gr.appendChild(el("div","pf-st",'<b>'+r[0]+" "+esc(r[1])+"</b><span>"+esc(r[2])+"</span>"))});
   sec.appendChild(gr);card.appendChild(sec);
   /* biểu đồ 14 ngày */
-  var sec2=el("div","pf-sec");sec2.appendChild(el("h4",null,'<span>14 ngày gần nhất</span><span style="text-transform:none;letter-spacing:0;font-weight:600;color:#9ca3af"><span style="color:#16a34a">■</span> đúng &nbsp;<span style="color:#f87171">■</span> sai</span>'));
+  var sec2=el("div","pf-sec");sec2.appendChild(el("h4",null,'<span>14 ngày gần nhất</span><span style="text-transform:none;letter-spacing:0;font-weight:600;color:#9ca3af"><span style="color:#16a34a">■</span> điểm</span>'));
   var days=[],i,mx=1,now=new Date();
-  for(i=13;i>=0;i--){var d=new Date(now.getFullYear(),now.getMonth(),now.getDate()-i),k=today(d),v=p.days[k]||{a:0,c:0};days.push({k:k,a:v.a,c:v.c,d:d});mx=Math.max(mx,v.a)}
+  for(i=13;i>=0;i--){var d=new Date(now.getFullYear(),now.getMonth(),now.getDate()-i),k=today(d),v=p.days[k]||{a:0,c:0,pts:0};days.push({k:k,pts:v.pts||0,a:v.a,c:v.c,d:d});mx=Math.max(mx,v.pts||0)}
   var bars=el("div","pf-bars");
   days.forEach(function(o,ix){
-    var b=el("div","pf-bar"+(ix===13?" today":"")),h=o.a?Math.max(6,Math.round(o.a/mx*100)):0;
-    b.title=o.d.getDate()+"/"+(o.d.getMonth()+1)+": "+o.a+" câu ("+o.c+" đúng)";
-    var bi=el("i");bi.style.height=h+"%";if(!o.a)bi.style.background="#e5e7eb",bi.style.height="3px";
-    else{var u=el("u");u.style.height=Math.round(o.c/o.a*100)+"%";bi.appendChild(u)}
+    var b=el("div","pf-bar"+(ix===13?" today":"")),h=o.pts?Math.max(6,Math.round(o.pts/mx*100)):0;
+    b.title=o.d.getDate()+"/"+(o.d.getMonth()+1)+": "+fmtNum(o.pts)+" điểm";
+    var bi=el("i");bi.style.height=h+"%";if(!o.pts)bi.style.background="#e5e7eb",bi.style.height="3px";
+    else{}
     b.appendChild(bi);bars.appendChild(b)
   });
   sec2.appendChild(bars);
