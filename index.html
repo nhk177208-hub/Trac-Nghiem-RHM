@@ -2280,7 +2280,7 @@ Mục cuối cùng đã lập là "`+lastH.en+'" [cấp '+lastH.lvl+']. Nếu fi
 .pf-name-row{display:flex;gap:8px;align-items:center}
 .pf-name-row input{flex:1;min-width:0;font:inherit;font-size:16px;font-weight:700;padding:7px 10px;border:1px solid #d0d7de;border-radius:10px;background:#fff;color:#1f2328}
 .pf-name-row input:focus{outline:2px solid #6366f1;border-color:transparent}
-.pf-cost{flex:0 0 auto;font-size:13px;font-weight:800;color:#92400e;background:#fef3c7;border:1px solid #fcd34d;border-radius:10px;padding:8px 11px;white-space:nowrap;user-select:none}
+.pf-cost{cursor:pointer;font-family:inherit;flex:0 0 auto;font-size:13px;font-weight:800;color:#92400e;background:#fef3c7;border:1px solid #fcd34d;border-radius:10px;padding:8px 11px;white-space:nowrap}.pf-cost:hover{background:#fde68a}
 .pf-btn{font:inherit;font-size:14px;font-weight:700;border:1px solid #d0d7de;background:#fff;color:#374151;border-radius:10px;padding:8px 16px;cursor:pointer;white-space:nowrap}
 .pf-btn:hover{background:#f3f4f6}
 .pf-btn.pri{background:#4f46e5;border-color:#4f46e5;color:#fff}
@@ -2477,8 +2477,8 @@ function renderProfile(){
   who.appendChild(el("small",null,"Tên hiển thị"));
   var row=el("div","pf-name-row"),inp=el("input");inp.type="text";inp.maxLength=40;inp.placeholder="Tên hiển thị";inp.value=nameVal;inp.setAttribute("aria-label","Tên hiển thị");
   inp.addEventListener("input",function(){draftName=inp.value});
-  inp.addEventListener("keydown",function(e){e.key==="Enter"&&commit()});
-  var cost=el("span","pf-cost","💰 "+fmtNum(COST)+" điểm");cost.title="Lưu thay đổi thông tin người dùng sẽ trừ "+fmtNum(COST)+" điểm";
+  inp.addEventListener("keydown",function(e){e.key==="Enter"&&payName()});
+  var cost=el("button","pf-cost","💰 "+fmtNum(COST)+" điểm");cost.type="button";cost.title="Bấm để lưu tên mới và trừ "+fmtNum(COST)+" điểm";cost.onclick=payName;
   row.appendChild(inp);row.appendChild(cost);who.appendChild(row);head.appendChild(who);card.appendChild(head);
   /* chỉ số */
   var sec=el("div","pf-sec");sec.appendChild(el("h4",null,"Chỉ số của bạn"));
@@ -2507,31 +2507,32 @@ function renderProfile(){
   /* thanh dưới: Đóng (trái) – Lưu (phải) */
   var foot=el("div","pf-foot");
   var cl=el("button","pf-btn","Đóng");cl.type="button";cl.onclick=closeProfile;
-  var sv=el("button","pf-btn pri","Lưu");sv.type="button";sv.onclick=commit;sv.title="Trừ "+fmtNum(COST)+" điểm khi lưu thành công";
+  var sv=el("button","pf-btn pri","Lưu");sv.type="button";sv.onclick=commit;sv.title="Lưu ảnh đại diện (miễn phí)";
   foot.appendChild(cl);foot.appendChild(sv);card.appendChild(foot)
 }
-/* Lưu cửa sổ thông tin: trừ 1.000 điểm chỉ khi lưu thành công */
-function commit(){
+/* Đổi tên: bấm nút 1.000 điểm -> trừ điểm ngay khi lưu tên thành công */
+function curDisplayName(){return String(safe(function(){return window.rhmGetDisplayName()},"")||"").trim()}
+function typedName(){var inp=card&&card.querySelector(".pf-name-row input");return(inp?inp.value:(draftName!=null?draftName:curDisplayName())).trim().slice(0,40)}
+function payName(){
   if(!ensure())return;
-  var inp=card&&card.querySelector(".pf-name-row input");
-  var curName=safe(function(){return window.rhmGetDisplayName()},"");
-  var newName=(inp?inp.value:(draftName!=null?draftName:curName)).trim().slice(0,40);
-  var nameChanged=newName!==String(curName||"").trim();
-  var avChanged=stagedAvatar!==undefined&&stagedAvatar!==validAvatar();
-  if(!nameChanged&&!avChanged){toast("Chưa có thay đổi nào để lưu");return}
+  var nn=typedName();
+  if(nn===curDisplayName()){toast("Tên chưa thay đổi");return}
   var pts=safe(function(){return SecureStore.getPoints()},0);
-  if(pts<COST){toast("Bạn cần "+fmtNum(COST)+" điểm để lưu (hiện có "+fmtNum(pts)+" điểm)");return}
+  if(pts<COST){toast("Bạn cần "+fmtNum(COST)+" điểm để đổi tên (hiện có "+fmtNum(pts)+" điểm)");return}
   var spent=!1;
   try{spent=SecureStore.spendPoints(COST)}catch(e){}
-  if(!spent){toast("Không lưu được, bạn chưa bị trừ điểm");return}
-  try{
-    if(avChanged){P.avatar=stagedAvatar}
-    if(nameChanged&&window.rhmSetDisplayName)window.rhmSetDisplayName(newName);
-    save()
-  }catch(e){}
+  if(!spent){toast("Không đổi được tên, bạn chưa bị trừ điểm");return}
+  try{window.rhmSetDisplayName&&window.rhmSetDisplayName(nn)}catch(e){}
+  draftName=null;
   try{typeof updateCollectionStatsUI==="function"&&updateCollectionStatsUI()}catch(e){}
-  renderAvatar();
-  toast("✅ Đã lưu thông tin (−"+fmtNum(COST)+" điểm)");
+  toast("✅ Đã đổi tên (−"+fmtNum(COST)+" điểm)");
+  open&&renderProfile()
+}
+/* Lưu: chỉ lưu ảnh đại diện (miễn phí) */
+function commit(){
+  if(!ensure())return;
+  if(typedName()!==curDisplayName()){toast("Tên mới chưa được lưu — bấm nút “"+fmtNum(COST)+" điểm” để đổi tên");return}
+  if(stagedAvatar!==undefined&&stagedAvatar!==validAvatar()){P.avatar=stagedAvatar;save();renderAvatar();toast("✅ Đã lưu ảnh đại diện")}
   closeProfile()
 }
 /* ---- cửa sổ phụ chọn huy hiệu ---- */
