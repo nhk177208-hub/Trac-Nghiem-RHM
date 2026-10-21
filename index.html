@@ -1947,6 +1947,35 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
 }
 .rhm-sb-item > span.bg-white\/25 { margin-left: auto !important; }
 </style>
+<style id="rhm-sidebar-pastel-v1">
+/* Nút sidebar đồng phong cách nút Cài đặt: nền nhạt, viền màu, chữ đậm vừa. Giữ nguyên kích thước/độ co giãn cũ. */
+.rhm-sb .rhm-sb-home,
+.rhm-sb .rhm-sb-nav > button.rhm-sb-item,
+.rhm-sb .rhm-sb-exit {
+  --c-bg: #f8fafc; --c-hv: #f1f5f9; --c-bd: #cbd5e1; --c-tx: #1e293b;
+  background: var(--c-bg) !important; color: var(--c-tx) !important;
+  border: 1px solid var(--c-bd) !important; border-radius: 12px !important;
+  box-shadow: none !important; font-weight: 600 !important; filter: none !important;
+  transition: background-color .15s ease !important;
+}
+.rhm-sb .rhm-sb-home:hover,
+.rhm-sb .rhm-sb-nav > button.rhm-sb-item:hover,
+.rhm-sb .rhm-sb-exit:hover { background: var(--c-hv) !important; filter: none !important; }
+.rhm-sb .rhm-sb-home:active,
+.rhm-sb .rhm-sb-nav > button.rhm-sb-item:active,
+.rhm-sb .rhm-sb-exit:active { background: var(--c-hv) !important; filter: none !important; }
+.rhm-sb .rhm-sb-home { --c-bg: #f0f9ff; --c-hv: #e0f2fe; --c-bd: #7dd3fc; --c-tx: #075985; }
+.rhm-sb .rhm-sb-nav > button[onclick="openCollectionModal()"] { --c-bg: #fffbeb; --c-hv: #fef3c7; --c-bd: #fcd34d; --c-tx: #92400e; }
+.rhm-sb .rhm-sb-nav > button[onclick="openRhmDict()"] { --c-bg: #f5f3ff; --c-hv: #ede9fe; --c-bd: #c4b5fd; --c-tx: #5b21b6; }
+.rhm-sb .rhm-sb-nav > button[onclick="openRhmNote()"] { --c-bg: #f0fdfa; --c-hv: #ccfbf1; --c-bd: #5eead4; --c-tx: #115e59; }
+.rhm-sb .rhm-sb-nav > button#rhmUpdateAppBtn { --c-bg: #ecfdf5; --c-hv: #d1fae5; --c-bd: #6ee7b7; --c-tx: #065f46; }
+.rhm-sb .rhm-sb-nav > button[onclick="openHomeSettings()"] { --c-bg: #f8fafc; --c-hv: #f1f5f9; --c-bd: #cbd5e1; --c-tx: #1e293b; }
+.rhm-sb .rhm-sb-exit { --c-bg: #fff1f2; --c-hv: #ffe4e6; --c-bd: #fda4af; --c-tx: #9f1239; }
+/* Ô đếm (số bộ sưu tập, từ điển, ghi chú, cập nhật): trước là trắng mờ trên nền đậm, giờ là nhãn nhạt cùng tông */
+.rhm-sb .rhm-sb-item > span.bg-white\/25 {
+  background: var(--c-hv) !important; color: var(--c-tx) !important; border: 1px solid var(--c-bd) !important; font-weight: 700 !important;
+}
+</style>
 <aside class="rhm-sb" id="rhmSb" aria-hidden="true" aria-label="Menu">
     <div class="rhm-sb-head"><span class="rhm-sb-brand"><img class="rhm-sb-logo" data-rhm-logo alt="" draggable="false"><b>Trắc Nghiệm RHM</b></span><button type="button" class="rhm-sb-x" id="rhmSbX" aria-label="Đóng menu" title="Đóng">&#10005;</button></div>
     <div class="rhm-sb-body">
@@ -2045,6 +2074,48 @@ img { transform-origin: 50% 50%; animation: rhmImgGrow .38s cubic-bezier(.2,.8,.
                 </div>
             </div>
 
+
+            <!-- 4 NÚT TRANG CHỦ: màn ngang 2x2, màn dọc điện thoại 1x4 (tự co giãn theo màn hình) -->
+            <style id="rhm-hub-css">
+                #rhm-hub { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(8px, 1.6vw, 20px); margin-bottom: clamp(16px, 2.4vw, 28px); }
+                #rhm-hub .rhm-hub-btn {
+                    --c-bg: #eff6ff; --c-hv: #dbeafe; --c-bd: #93c5fd; --c-tx: #1d4ed8;
+                    display: flex; align-items: center; justify-content: flex-start; gap: clamp(10px, 1.6vw, 22px);
+                    min-height: clamp(64px, 10vw, 140px); padding: clamp(10px, 1.6vw, 24px) clamp(14px, 2.2vw, 32px);
+                    background: var(--c-bg); color: var(--c-tx); border: 1px solid var(--c-bd); border-radius: clamp(12px, 1.6vw, 22px);
+                    font-weight: 600; text-align: left; cursor: pointer; font-size: clamp(15px, 2.3vw, 30px); line-height: 1.2;
+                    transition: background-color .15s ease, transform .15s ease; -webkit-tap-highlight-color: transparent; user-select: none;
+                }
+                #rhm-hub .rhm-hub-btn:hover { background: var(--c-hv); }
+                #rhm-hub .rhm-hub-btn:active { transform: scale(.98); }
+                #rhm-hub .rhm-hub-ico { font-size: clamp(22px, 3.6vw, 48px); line-height: 1; flex: 0 0 auto; }
+                #rhm-hub .rhm-hub-txt { min-width: 0; overflow-wrap: anywhere; }
+                #rhm-hub .rhm-hub-quiz  { --c-bg: #eff6ff; --c-hv: #dbeafe; --c-bd: #93c5fd; --c-tx: #1d4ed8; }
+                #rhm-hub .rhm-hub-video { --c-bg: #fff1f2; --c-hv: #ffe4e6; --c-bd: #fda4af; --c-tx: #9f1239; }
+                #rhm-hub .rhm-hub-docs  { --c-bg: #fffbeb; --c-hv: #fef3c7; --c-bd: #fcd34d; --c-tx: #92400e; }
+                #rhm-hub .rhm-hub-eng   { --c-bg: #f0fdfa; --c-hv: #ccfbf1; --c-bd: #5eead4; --c-tx: #115e59; }
+                /* Màn dọc điện thoại: 1 cột x 4 hàng, nút to theo chiều rộng màn hình */
+                @media (orientation: portrait) and (max-width: 767px) {
+                    #rhm-hub { grid-template-columns: minmax(0, 1fr); gap: clamp(10px, 3vw, 18px); }
+                    #rhm-hub .rhm-hub-btn { min-height: clamp(64px, 18vw, 110px); font-size: clamp(17px, 5.4vw, 28px); border-radius: clamp(12px, 3.4vw, 20px); gap: clamp(10px, 3vw, 16px); padding: 0 clamp(14px, 4vw, 24px); }
+                    #rhm-hub .rhm-hub-ico { font-size: clamp(26px, 8vw, 42px); }
+                }
+            </style>
+            <div id="rhm-hub">
+                <button type="button" class="rhm-hub-btn rhm-hub-quiz" data-hub="quiz" onclick="rhmHubClick('quiz')"><span class="rhm-hub-ico">📝</span><span class="rhm-hub-txt">Làm Trắc Nghiệm</span></button>
+                <button type="button" class="rhm-hub-btn rhm-hub-video" data-hub="video" onclick="rhmHubClick('video')"><span class="rhm-hub-ico">🎬</span><span class="rhm-hub-txt">Video Bài Giảng</span></button>
+                <button type="button" class="rhm-hub-btn rhm-hub-docs" data-hub="docs" onclick="rhmHubClick('docs')"><span class="rhm-hub-ico">📚</span><span class="rhm-hub-txt">Kho Tài Liệu</span></button>
+                <button type="button" class="rhm-hub-btn rhm-hub-eng" data-hub="english" onclick="rhmHubClick('english')"><span class="rhm-hub-ico">🌍</span><span class="rhm-hub-txt">Học Tiếng Anh</span></button>
+            </div>
+            <script>
+                /* Chưa gắn chức năng: gán sau bằng window.RHM_HUB_HANDLERS.quiz = function () { ... } (quiz | video | docs | english) */
+                window.RHM_HUB_HANDLERS = window.RHM_HUB_HANDLERS || {};
+                function rhmHubClick(key) {
+                    var h = window.RHM_HUB_HANDLERS[key];
+                    if (typeof h === 'function') return h();
+                    try { showToast('Tính năng đang được cập nhật'); } catch (e) {}
+                }
+            </script>
 
             <!-- 2 NÚT DÀN NGANG: ÔN TẬP THEO MÔN HỌC (TRÁI) & ÔN TẬP THEO CHỦ ĐỀ (PHẢI) — LUÔN CÙNG 1 HÀNG -->
             <div class="grid grid-cols-2 gap-2.5 sm:gap-3.5 mb-6">
