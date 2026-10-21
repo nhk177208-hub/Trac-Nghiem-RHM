@@ -2555,7 +2555,7 @@ function renderProfile(){
   var row=el("div","pf-name-row"),inp=el("input");inp.type="text";inp.maxLength=40;inp.placeholder="Tên hiển thị";inp.value=nameVal;inp.setAttribute("aria-label","Tên hiển thị");
   inp.addEventListener("input",function(){draftName=inp.value});
   inp.addEventListener("keydown",function(e){e.key==="Enter"&&payName()});
-  var cost=el("button","pf-cost","Đổi tên(" 💰 "+"+fmtNum(COST)+" điểm)");cost.type="button";cost.title="Bấm để lưu tên mới và trừ "+fmtNum(COST)+" điểm";cost.onclick=payName;
+  var cost=el("button","pf-cost","Đổi tên 💰 ("+fmtNum(COST)+" điểm)");cost.type="button";cost.title="Bấm để lưu tên mới và trừ "+fmtNum(COST)+" điểm";cost.onclick=payName;
   row.appendChild(inp);row.appendChild(cost);who.appendChild(row);head.appendChild(who);card.appendChild(head);
   /* chỉ số */
   var sec=el("div","pf-sec");sec.appendChild(el("h4",null,"Chỉ số của bạn"));
