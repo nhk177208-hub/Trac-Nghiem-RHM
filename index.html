@@ -2220,4 +2220,9 @@ Mục cuối cùng đã lập là "`+lastH.en+'" [cấp '+lastH.lvl+']. Nếu fi
 #dict-modal,#note-modal{padding-top:0!important}
 #dict-modal .rd-wrap,#note-modal .rd-wrap{padding-top:calc(var(--rbu)*.5);--rd-h:calc(var(--rd-vh) * .97 - var(--rbu)*.5)}
 </style>
+<style id="rhm-top-gap-v1">
+#dict-modal,#note-modal{--topgap:calc(var(--rd-vh) * .06);align-items:flex-start!important;padding-top:calc(var(--topgap) - var(--rbu)*.5)!important}
+@media(max-width:759px) and (orientation:portrait){#dict-modal,#note-modal{--topgap:calc(var(--rd-vh) * .10)}}
+#dict-modal .rd-wrap,#note-modal .rd-wrap{height:calc(var(--rd-vh) * .97 - var(--topgap) + var(--rbu)*.5)!important;--rd-h:calc(var(--rd-vh) * .97 - var(--topgap))!important}
+</style>
 </html>
