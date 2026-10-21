@@ -2353,7 +2353,7 @@ Mục cuối cùng đã lập là "`+lastH.en+'" [cấp '+lastH.lvl+']. Nếu fi
   #rhm-pf .pf-head{padding:18px 22px 14px!important}
   #rhm-pf .pf-bars{height:clamp(90px,13vh,140px)!important}
 }
-</style><script id="rhm-profile-script"><style id="rhm-profile-fit-css">
+</style><style id="rhm-profile-fit-css">
 #rhm-pf-back{
   padding:5vh 16px!important;
   padding:max(5dvh, env(safe-area-inset-top,0px)) 16px max(5dvh, env(safe-area-inset-bottom,0px))!important;
@@ -2384,14 +2384,12 @@ function fit(){
   if(W<40||H<40)return;
   var availW=Math.max(280,W-32);
   var availH=Math.max(260,H*0.9);
-  /* tạm mở khoá để đo chiều cao tự nhiên */
   card.style.setProperty("max-height","none","important");
   card.style.setProperty("overflow-y","visible","important");
   card.style.setProperty("zoom","1","important");
   card.style.setProperty("width","1150px","important");
   var naturalH=card.scrollHeight||1;
   if(W<950){
-    /* màn hẹp / mobile: full width, cho phép cuộn dọc, không zoom */
     card.style.setProperty("zoom","1","important");
     card.style.setProperty("width","100%","important");
     card.style.setProperty("max-width","none","important");
@@ -2399,7 +2397,6 @@ function fit(){
     card.style.setProperty("overflow-y","auto","important");
     return;
   }
-  /* desktop / tablet rộng: scale để fit cả 2 chiều */
   var W0=1150;
   var zW=availW/W0;
   var zH=availH/naturalH;
@@ -2437,9 +2434,8 @@ function watch(){
         }
       }
     }
-  }).observe(document.body,{childList:!0,subtree:!0,characterData:!0});
+  }).observe(document.body,{childList:!0,subtree:!0});
 }
-/* resize / xoay / visualViewport (bàn phím ảo) */
 window.addEventListener("resize",function(){if(isOpen())schedule()});
 window.addEventListener("orientationchange",function(){setTimeout(function(){if(isOpen())fit()},220)});
 if(window.visualViewport){
@@ -2449,15 +2445,9 @@ if(window.visualViewport){
 ["fullscreenchange","webkitfullscreenchange"].forEach(function(n){
   document.addEventListener(n,function(){setTimeout(function(){if(isOpen())fit()},80)});
 });
-/* theo dõi trạng thái mở/đóng nếu MutationObserver bỏ lỡ lần đầu */
 setInterval(function(){
   var o=isOpen();
-  if(o&&!lastOpen){
-    fit();
-    setTimeout(fit,60);
-    setTimeout(fit,240);
-    setTimeout(fit,520);
-  }
+  if(o&&!lastOpen){fit();setTimeout(fit,60);setTimeout(fit,240);setTimeout(fit,520)}
   lastOpen=o;
 },400);
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",watch);
@@ -2465,6 +2455,7 @@ else watch();
 window.rhmProfileFit=fit;
 })();
 </script>
+<script id="rhm-profile-script">
 (function(){
 "use strict";
 var KEY="rhm_profile_v1",COST=1000,READ_SECS=300,P=null,loaded=!1,ready=!1,open=!1;
