@@ -153,7 +153,7 @@
     <div class="rhmd-back" id="rhmdBack"></div>
     <aside class="rhmd-sb" id="rhmdSb" aria-hidden="true">
       <div class="rhmd-sb-hd"><span>Thư viện</span><button type="button" class="rhmd-btn on" id="rhmdSbClose" aria-label="Đóng sidebar" title="Đóng sidebar"><svg class="ic-closed" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9 4.5v15" stroke="currentColor" stroke-width="1.8"/></svg><svg class="ic-open" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9 4.5v15" stroke="currentColor" stroke-width="1.8"/><rect x="4.4" y="5.4" width="3.7" height="13.2" rx="1.4" fill="currentColor" opacity=".35"/></svg></button></div>
-      <div class="rhmd-tabs"><button type="button" class="rhmd-tab on" data-t="books">📕 Sách</button><button type="button" class="rhmd-tab off" data-t="docs" aria-disabled="true">📄 Tài Liệu</button><button type="button" class="rhmd-tab on" data-t="video" hidden>🎬 Bài Giảng</button></div>
+      <div class="rhmd-tabs"><button type="button" class="rhmd-tab on" data-t="books">📕 Sách</button><button type="button" class="rhmd-tab off" data-t="docs" aria-disabled="true">📄 Tài Liệu</button><button type="button" class="rhmd-tab on" data-t="video" hidden>🎬 Bài Giảng</button><button type="button" class="rhmd-tab on" data-t="quiz-on" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4.5" width="14" height="16" rx="2.5"/><path d="M9 3.5h6v3H9z"/><path d="M8.8 12.4l2 2 3.6-3.8"/><path d="M9 17.5h6"/></svg><span>Ôn Tập</span></button><button type="button" class="rhmd-tab" data-t="quiz-thi" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13.5" r="7"/><path d="M12 13.5V9.8"/><path d="M12 6.5V4M9.8 3.5h4.4"/><path d="M18.3 7.4l1.4-1.4"/></svg><span>Thi Thử</span></button></div>
       <div class="rhmd-sb-in" id="rhmdSbList"></div>
     </aside>
     <main class="rhmd-main" id="rhmdMain"></main>
@@ -2190,7 +2190,7 @@ body.rhmd-on #home-fab,body.rhmd-on #home-fab-pop{display:none!important}
 #rhm-docs.rhmd-vid .rhmd-lth{position:relative;flex:0 0 112px;width:112px;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#f1f5f9;display:block}
 #rhm-docs.rhmd-vid .rhmd-lth img{width:100%;height:100%;object-fit:cover;display:block}
 #rhm-docs.rhmd-vid .rhmd-lt{flex:1 1 auto;min-width:0;display:block}
-.rhmd-tab[hidden]{display:none}
+.rhmd-tab[hidden]{display:none}.rhmd-tab[data-t^="quiz"]{display:inline-flex;align-items:center;justify-content:center;gap:6px}.rhmd-tab[data-t^="quiz"] svg{width:16px;height:16px;flex:0 0 auto}.rhmd-ph svg{width:44px;height:44px;color:#59636e}.rhmd-list .rhmd-ph svg{width:24px;height:24px}.rhmd-ph img{width:64%;height:64%;object-fit:contain}
 </style>
 <script id="rhm-docs-script">(function(){
 "use strict";
@@ -2226,7 +2226,8 @@ function collect(){
   return Array.from(byBook.values());
 }
 /* ===== Chế độ Bài Giảng (dùng chung giao diện với Tài Liệu) ===== */
-function PH(){return mode==="video"?"🎬":"📕"}
+var qTab="on",SW_SVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13.5" r="7"/><path d="M12 13.5V9.8"/><path d="M12 6.5V4M9.8 3.5h4.4"/><path d="M18.3 7.4l1.4-1.4"/></svg>';
+function PH(b){if(mode==="video")return"🎬";if(mode==="quiz"){if(qTab==="thi")return SW_SVG;var n=b&&+b.iconIdx;try{if(n>=1&&n<=36&&typeof TOPIC_ICONS!="undefined")return'<img src="'+esc(TOPIC_ICONS[n-1])+'" alt="">'}catch(e){}return"📝"}return"📕"}
 function vMeta(b){var a=[];b.subject&&a.push(b.subject);b.n!=null&&a.push(b.n>0?b.n+" bài giảng":"Chưa có bài giảng");return a.join(" · ")}
 function vSearch(b){return mode!=="video"?"":" "+(b.mon||"")+" "+(b.chapters||[]).map(function(c){return c.title}).join(" ")}
 function vRec(node,parent,top){
@@ -2313,12 +2314,12 @@ function vPlay(b,k){
   }).catch(function(){});
 }
 function applyMode(){
-  var vm=mode==="video";
+  var vm=mode==="video",qm=mode==="quiz";var qs=qTab==="thi"?"Thi Thử":"Ôn Tập";
   root.classList.toggle("rhmd-vid",vm);
-  root.setAttribute("aria-label",vm?"Bài giảng":"Tài liệu");
-  var l=document.getElementById("rhmdTbLbl");if(l)l.textContent=vm?"🎬 Bài Giảng":"📚 Tài Liệu";
-  qIn.placeholder=vm?"Tìm bài giảng":"Tìm tài liệu";
-  Array.prototype.forEach.call(sb.querySelectorAll(".rhmd-tab"),function(t){t.hidden=vm?t.dataset.t!=="video":t.dataset.t==="video"});
+  root.setAttribute("aria-label",vm?"Bài giảng":qm?"Trắc nghiệm":"Tài liệu");
+  var l=document.getElementById("rhmdTbLbl");if(l)l.textContent=vm?"🎬 Bài Giảng":qm?"📝 Trắc Nghiệm":"📚 Tài Liệu";
+  qIn.placeholder=vm?"Tìm bài giảng":qm?(qTab==="thi"?"Tìm bộ đề thi thử":"Tìm bộ đề ôn tập"):"Tìm tài liệu";
+  Array.prototype.forEach.call(sb.querySelectorAll(".rhmd-tab"),function(t){var d=t.dataset.t;t.hidden=vm?d!=="video":qm?d.indexOf("quiz")!==0:(d==="video"||d.indexOf("quiz")===0);if(d.indexOf("quiz")===0){var on=d==="quiz-"+(qTab==="thi"?"thi":"on");t.classList.toggle("on",on);t.classList.toggle("off",!on)}});
 }
 /* Bắt đầu làm trắc nghiệm / sửa đề từ video: tạm ẩn màn hình thư viện, quay lại thì hiện lại */
 var away=!1;
@@ -2343,9 +2344,9 @@ function applyFilter(){var k=fold(q).trim(),pool=subj?books.filter(function(b){r
 var LS_M="rhm_docs_meta_v1",meta={},metaBusy=!1;
 try{meta=JSON.parse(localStorage.getItem(LS_M)||"{}")||{}}catch(e){meta={}}
 function mkey(b){return b.folder||b.path}
-function metaText(b){if(mode==="video")return vMeta(b);var m=meta[mkey(b)];if(!m)return"";var a=[];m.a&&a.push(m.a);m.y&&a.push(m.y);return a.join(" · ")}
+function metaText(b){if(mode==="video")return vMeta(b);if(mode==="quiz")return"";var m=meta[mkey(b)];if(!m)return"";var a=[];m.a&&a.push(m.a);m.y&&a.push(m.y);return a.join(" · ")}
 function paintMeta(){Array.prototype.forEach.call(main.querySelectorAll(".rhmd-sub"),function(el){var b=books.find(function(x){return mkey(x)===el.dataset.f});el.textContent=b?metaText(b):""})}
-function fetchMeta(first){if(mode==="video")return;
+function fetchMeta(first){if(mode==="video"||mode==="quiz")return;
   if(first&&first.folder===void 0&&first.path===void 0)first=null;
   if(metaBusy||!first&&view!=="list"||typeof aiGeminiJson!="function"||typeof aiAnyKey=="function"&&!aiAnyKey())return;
   var todo=books.filter(function(b){return!meta[mkey(b)]&&b!==first});if(first&&!meta[mkey(first)])todo.unshift(first);todo=todo.slice(0,15);if(!todo.length)return;
@@ -2367,10 +2368,10 @@ function renderSb(){
   sbList.innerHTML=h;
 }
 sbList.addEventListener("click",function(e){var c=e.target.closest(".rhmd-subj");if(!c)return;subj=c.dataset.m;render();if(window.innerWidth<=700)setSb(!1)});
-Array.prototype.forEach.call(sb.querySelectorAll(".rhmd-tab"),function(t){t.addEventListener("click",function(){if(t.dataset.t==="docs")try{showToast("Mục Tài Liệu chưa mở")}catch(e){}})});
+Array.prototype.forEach.call(sb.querySelectorAll(".rhmd-tab"),function(t){t.addEventListener("click",function(){if(t.dataset.t==="quiz-on"||t.dataset.t==="quiz-thi"){var n=t.dataset.t==="quiz-thi"?"thi":"on";if(n!==qTab){qTab=n;subj="";q="";qIn.value="";qX.hidden=!0;applyMode();load();paintV()}return}if(t.dataset.t==="docs")try{showToast("Mục Tài Liệu chưa mở")}catch(e){}})});
 
 function cardHtml(b,i){
-  var cov=b.cover?'<img src="'+esc(b.cover)+'" data-cbase="'+esc(b.coverBase||"")+'" data-ci="0" alt="" loading="lazy" onerror="rhmdCovErr(this)">':'<span class="rhmd-ph">'+PH()+'</span>';
+  var cov=b.cover?'<img src="'+esc(b.cover)+'" data-cbase="'+esc(b.coverBase||"")+'" data-ci="0" alt="" loading="lazy" onerror="rhmdCovErr(this)">':'<span class="rhmd-ph">'+PH(b)+'</span>';
   return '<button type="button" class="rhmd-card" data-i="'+i+'"><span class="rhmd-cov">'+cov+'</span><span class="rhmd-txt"><span class="rhmd-name">'+esc(b.title)+'</span><span class="rhmd-sub" data-f="'+esc(b.folder||b.path)+'">'+esc(metaText(b))+'</span></span></button>';
 }
 window.rhmdCovErr=function(img){
@@ -2380,8 +2381,8 @@ window.rhmdCovErr=function(img){
 };
 function render(){
   applyFilter();cnt.textContent=shown.length;renderSb();
-  if(!books.length){main.innerHTML='<div class="rhmd-msg">'+(mode==="video"?"Chưa có bài giảng nào trong thư mục MonHoc.":"Chưa có sách nào trong thư mục Books.")+'</div>';return}
-  if(!shown.length){main.innerHTML='<div class="rhmd-msg">'+(mode==="video"?"Không tìm thấy bài giảng phù hợp.":"Không tìm thấy tài liệu phù hợp.")+'</div>';return}
+  if(!books.length){main.innerHTML='<div class="rhmd-msg">'+(mode==="video"?"Chưa có bài giảng nào trong thư mục MonHoc.":mode==="quiz"?(qTab==="thi"?"Chưa có bộ đề thi thử nào.":"Chưa có bộ đề ôn tập nào."):"Chưa có sách nào trong thư mục Books.")+'</div>';return}
+  if(!shown.length){main.innerHTML='<div class="rhmd-msg">'+(mode==="video"?"Không tìm thấy bài giảng phù hợp.":mode==="quiz"?"Không tìm thấy bộ đề phù hợp.":"Không tìm thấy tài liệu phù hợp.")+'</div>';return}
   main.innerHTML='<div class="'+(view==="list"?"rhmd-list":"rhmd-grid")+'">'+shown.map(cardHtml).join("")+"</div>";fetchMeta();
 }
 var LS_P="rhm_pos_v1",pos={},posOk="",posT=0,posHooked=!1;
@@ -2471,6 +2472,7 @@ function fetchDates(tok){
 function load(){
   var tok=++loadTok;
   if(mode==="video"){vLoad(tok);return}
+  if(mode==="quiz"){books=[];shown=[];render();return}
   main.innerHTML='<div class="rhmd-msg">⏳ Đang tải danh sách sách...</div>';
   var p=Promise.resolve();
   if(!(typeof monHocAllEntries!="undefined"&&monHocAllEntries&&monHocAllEntries.length)&&typeof scanGithubMonHocStructure=="function")p=scanGithubMonHocStructure(!1).catch(function(){});
@@ -2489,7 +2491,7 @@ var qT=0;qIn.addEventListener("input",function(){qX.hidden=!qIn.value;clearTimeo
 qX.addEventListener("click",function(){qIn.value="";q="";qX.hidden=!0;render();qIn.focus()});
 tbBack&&tbBack.addEventListener("click",function(){if(document.body.classList.contains("rhmr-on")){try{bkBackToShelf()}catch(e){}return}curBook?closeDetail():window.rhmDocsClose()});
 window.rhmDocsOpen=function(m){
-  m=m==="video"?"video":"docs";
+  m=m==="video"?"video":m==="quiz"?"quiz":"docs";
   if(!root.classList.contains("hidden"))return;
   try{window.rhmSbClose&&window.rhmSbClose(!0)}catch(e){}
   if(m!==mode){mode=m;subj="";q="";qIn.value="";qX.hidden=!0;books=[];shown=[]}
@@ -2505,6 +2507,7 @@ window.rhmDocsClose=function(){
 window.RHM_HUB_HANDLERS=window.RHM_HUB_HANDLERS||{};
 window.RHM_HUB_HANDLERS.docs=function(){window.rhmDocsOpen("docs")};
 window.RHM_HUB_HANDLERS.video=function(){window.rhmDocsOpen("video")};
+window.RHM_HUB_HANDLERS.quiz=function(){window.rhmDocsOpen("quiz")};
 var sbHome=document.getElementById("rhmSbHome");
 sbHome&&sbHome.addEventListener("click",function(){window.rhmDocsClose()},!0);
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&sb.classList.contains("open")&&!root.classList.contains("hidden"))setSb(!1)});
