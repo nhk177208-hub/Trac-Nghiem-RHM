@@ -2190,7 +2190,7 @@ body.rhmd-on #home-fab,body.rhmd-on #home-fab-pop{display:none!important}
 #rhm-docs.rhmd-vid .rhmd-lth{position:relative;flex:0 0 112px;width:112px;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#f1f5f9;display:block}
 #rhm-docs.rhmd-vid .rhmd-lth img{width:100%;height:100%;object-fit:cover;display:block}
 #rhm-docs.rhmd-vid .rhmd-lt{flex:1 1 auto;min-width:0;display:block}
-.rhmd-tab[hidden]{display:none}.rhmd-tab[data-t^="quiz"]{display:inline-flex;align-items:center;justify-content:center;gap:6px}.rhmd-tab[data-t^="quiz"] svg{width:16px;height:16px;flex:0 0 auto}.rhmd-ph svg{width:44px;height:44px;color:#59636e}.rhmd-list .rhmd-ph svg{width:24px;height:24px}.rhmd-ph img{width:64%;height:64%;object-fit:contain}
+.rhmd-tab[hidden]{display:none}.rhmd-tab[data-t^="quiz"]{display:inline-flex;align-items:center;justify-content:center;gap:6px}.rhmd-tab[data-t^="quiz"] svg{width:16px;height:16px;flex:0 0 auto}.rhmd-ph svg{width:44px;height:44px;color:#59636e}.rhmd-list .rhmd-ph svg{width:24px;height:24px}.rhmd-ph img{width:64%;height:64%;object-fit:contain}.rhmd-subj .tn{flex:1 1 auto;min-width:0;display:flex;align-items:center;gap:8px}.rhmd-subj .tn img{width:24px;height:24px;object-fit:contain;flex:0 0 auto}.rhmd-subj .tn span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 </style>
 <script id="rhm-docs-script">(function(){
 "use strict";
@@ -2344,7 +2344,7 @@ function applyFilter(){var k=fold(q).trim(),pool=subj?books.filter(function(b){r
 var LS_M="rhm_docs_meta_v1",meta={},metaBusy=!1;
 try{meta=JSON.parse(localStorage.getItem(LS_M)||"{}")||{}}catch(e){meta={}}
 function mkey(b){return b.folder||b.path}
-function metaText(b){if(mode==="video")return vMeta(b);if(mode==="quiz")return"";var m=meta[mkey(b)];if(!m)return"";var a=[];m.a&&a.push(m.a);m.y&&a.push(m.y);return a.join(" · ")}
+function metaText(b){if(mode==="video")return vMeta(b);if(mode==="quiz")return b.meta||"";var m=meta[mkey(b)];if(!m)return"";var a=[];m.a&&a.push(m.a);m.y&&a.push(m.y);return a.join(" · ")}
 function paintMeta(){Array.prototype.forEach.call(main.querySelectorAll(".rhmd-sub"),function(el){var b=books.find(function(x){return mkey(x)===el.dataset.f});el.textContent=b?metaText(b):""})}
 function fetchMeta(first){if(mode==="video"||mode==="quiz")return;
   if(first&&first.folder===void 0&&first.path===void 0)first=null;
@@ -2359,7 +2359,19 @@ function fetchMeta(first){if(mode==="video"||mode==="quiz")return;
   }).catch(function(){}).then(function(){metaBusy=!1;if(tok===loadTok&&!root.classList.contains("hidden")){paintMeta();paintDetail();q&&render();okk&&fetchMeta()}});
 }
 var sbList=document.getElementById("rhmdSbList");
+function renderSbQuiz(){
+  var cnts={},h='<button type="button" class="rhmd-subj'+(subj?"":" on")+'" data-m=""><span class="tn"><span>Tất cả</span></span><b>'+books.length+'</b></button>';
+  books.forEach(function(b){cnts[b.mon]=(cnts[b.mon]||0)+1});
+  if(qTab==="on"){
+    for(var n=1;n<=36;n++){
+      var nm=n+". "+((typeof TOPIC_FULL_NAMES!="undefined"&&TOPIC_FULL_NAMES[n-1])||"Chủ đề "+n),ic=(typeof TOPIC_ICONS!="undefined"&&TOPIC_ICONS[n-1])||"";
+      h+='<button type="button" class="rhmd-subj'+(subj===String(n)?" on":"")+'" data-m="'+n+'" title="'+esc(nm)+'"><span class="tn">'+(ic?'<img src="'+esc(ic)+'" alt="" loading="lazy" onerror="this.style.opacity=.15">':"")+'<span>'+esc(nm)+'</span></span><b>'+(cnts[String(n)]||0)+'</b></button>';
+    }
+  }
+  sbList.innerHTML=h;
+}
 function renderSb(){
+  if(mode==="quiz"){renderSbQuiz();return}
   var cnts={},names=[];books.forEach(function(b){var m=b.mon||"Khác";if(!(m in cnts)){cnts[m]=0;names.push(m)}cnts[m]++});
   names.sort(cmp);
   if(subj&&!(subj in cnts)&&!books.some(function(b){return b.mon===subj}))subj="";
@@ -2367,7 +2379,7 @@ function renderSb(){
   names.forEach(function(n){var v=n;h+='<button type="button" class="rhmd-subj'+(subj===v?" on":"")+'" data-m="'+esc(v)+'">'+esc(n)+'<b>'+cnts[n]+'</b></button>'});
   sbList.innerHTML=h;
 }
-sbList.addEventListener("click",function(e){var c=e.target.closest(".rhmd-subj");if(!c)return;subj=c.dataset.m;render();if(window.innerWidth<=700)setSb(!1)});
+sbList.addEventListener("click",function(e){var c=e.target.closest(".rhmd-subj");if(!c)return;subj=c.dataset.m;render();if(mode==="quiz"&&qTab==="on"&&subj&&typeof loadChuDeTopicImmediately=="function"){var tk=loadTok;Promise.resolve(loadChuDeTopicImmediately(+subj)).catch(function(){}).then(function(){qRefresh(tk)})}if(window.innerWidth<=700)setSb(!1)});
 Array.prototype.forEach.call(sb.querySelectorAll(".rhmd-tab"),function(t){t.addEventListener("click",function(){if(t.dataset.t==="quiz-on"||t.dataset.t==="quiz-thi"){var n=t.dataset.t==="quiz-thi"?"thi":"on";if(n!==qTab){qTab=n;subj="";q="";qIn.value="";qX.hidden=!0;applyMode();load();paintV()}return}if(t.dataset.t==="docs")try{showToast("Mục Tài Liệu chưa mở")}catch(e){}})});
 
 function cardHtml(b,i){
@@ -2437,7 +2449,7 @@ function closeDetail(){curBook=null;dt.hidden=!0;dt.innerHTML="";document.body.c
 window.rhmdOnBack=function(){if(root.classList.contains("hidden")||!curBook)return!1;paintDetail();return!0};
 main.addEventListener("click",function(e){
   var c=e.target.closest(".rhmd-card");if(!c)return;
-  var b=shown[+c.dataset.i];b&&openDetail(b);
+  var b=shown[+c.dataset.i];if(mode==="quiz"){b&&(function(){try{showToast("Chức năng làm bài sẽ được cập nhật")}catch(e){}})();return}b&&openDetail(b);
 });
 function ghInfo(){
   if(!/\.github\.io$/i.test(location.hostname))return null;
@@ -2469,10 +2481,43 @@ function fetchDates(tok){
   }
   next();
 }
+function qMeta(q){var n=(q.questions||[]).length,a=[n+" câu"],r=q.bestResult;if(r&&r.total>0)a.push("🏆 "+r.score+"/"+r.total);return a.join(" · ")}
+function collectQuiz(){
+  var out=[];
+  try{
+    if(qTab==="thi"){
+      (typeof getSavedExamSets=="function"?getSavedExamSets():[]).forEach(function(x){out.push({title:x.name,mon:"",subject:"",folder:"exam:"+x.id,path:"exam:"+x.id,date:+x.id||0,cover:"",coverBase:"",iconIdx:0,meta:qMeta(x),ref:x})});
+    }else{
+      (typeof getRegularQuizzes=="function"?getRegularQuizzes():[]).forEach(function(x){var t=getQuizTopic(x);if(t>=1&&t<=36)out.push({title:x.name,mon:String(t),subject:"",folder:"quiz:"+x.id,path:"quiz:"+x.id,date:+x.id||0,cover:"",coverBase:"",iconIdx:t,meta:qMeta(x),ref:x})});
+    }
+  }catch(e){}
+  return out;
+}
+function qRefresh(tok){if(tok!==loadTok||mode!=="quiz")return;books=collectQuiz();sortBooks();render()}
+function qLoad(tok){
+  books=collectQuiz();sortBooks();
+  if(books.length)render();else main.innerHTML='<div class="rhmd-msg">⏳ Đang tải danh sách bộ đề...</div>';
+  if(qTab==="thi"){
+    Promise.resolve(typeof rhmLoadExamFolder=="function"?rhmLoadExamFolder(!1):0).catch(function(){}).then(function(){qRefresh(tok)});
+    return;
+  }
+  if(typeof loadChuDeTopicImmediately!="function"){qRefresh(tok);return}
+  var todo=[],i;if(subj)todo.push(+subj);
+  for(i=1;i<=36;i++)if(i!==+subj)todo.push(i);
+  var active=0,rt=0;
+  function soon(){clearTimeout(rt);rt=setTimeout(function(){qRefresh(tok)},250)}
+  function next(){
+    if(tok!==loadTok)return;
+    while(active<3&&todo.length){
+      (function(n){active++;Promise.resolve(loadChuDeTopicImmediately(n)).catch(function(){}).then(function(){active--;soon();if(!todo.length&&!active){clearTimeout(rt);qRefresh(tok)}else next()})})(todo.shift());
+    }
+  }
+  next();
+}
 function load(){
   var tok=++loadTok;
   if(mode==="video"){vLoad(tok);return}
-  if(mode==="quiz"){books=[];shown=[];render();return}
+  if(mode==="quiz"){qLoad(tok);return}
   main.innerHTML='<div class="rhmd-msg">⏳ Đang tải danh sách sách...</div>';
   var p=Promise.resolve();
   if(!(typeof monHocAllEntries!="undefined"&&monHocAllEntries&&monHocAllEntries.length)&&typeof scanGithubMonHocStructure=="function")p=scanGithubMonHocStructure(!1).catch(function(){});
