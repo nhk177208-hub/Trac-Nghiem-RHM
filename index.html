@@ -4126,10 +4126,10 @@ html body #note-modal .rd-pg.rd-R{box-shadow:inset 26px 0 28px -24px rgba(27,31,
 html body #note-modal .rv-card,html body #note-modal .rd-tip,html body #note-modal .rd-pop{border-color:#d0d7de!important}
 html body #note-modal .rd-in{border-color:#d0d7de}
 html body #note-modal .rd-in:focus{border-color:#54aeff;box-shadow:0 0 0 3px #54aeff33}
-/* VA1: icon nút menu tính theo chiều cao nút */
-#rhm-hub .rhm-hub-btn{container-type:size}
+ /* VA1: icon nút menu co theo chiều cao thật của nút (desktop >= 768px) */
 @media(min-width:768px){
-  #rhm-hub .rhm-hub-ico{width:min(60cqh,28cqw);height:min(60cqh,28cqw);border-radius:min(22cqh,9cqw)}
+  #rhm-hub .rhm-hub-btn{container-type:size;padding-top:0;padding-bottom:0}
+  #rhm-hub .rhm-hub-ico{width:min(calc(var(--rhm-ico) * 1.2),70cqh);height:min(calc(var(--rhm-ico) * 1.2),70cqh)}
 }
 </style>
 </html>
