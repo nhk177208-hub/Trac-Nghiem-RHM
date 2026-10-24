@@ -4482,4 +4482,42 @@ function tick(){var d=dtEl();if(!d||d.hidden){auto=!1;return}if(auto||!inVid()||
 function start(){var d=dtEl();if(!d){setTimeout(start,500);return}new MutationObserver(tick).observe(d,{childList:!0,attributes:!0,attributeFilter:["hidden"]});tick()}
 start();
 })();</script>
+<style id="rhm-patch-topbar-zoom">
+:root{--rhm-tbbtn:40px}
+@media(max-width:639px){:root{--rhm-tbbtn:36px}}
+/* 2 nút ngoài cùng bên phải (chat + toàn màn hình) canh sát lề phải topbar */
+html body.rhmr-on #rhmTb .rhm-tb-right{margin-left:auto}
+/* Nút ở sidebar luôn to bằng nút topbar */
+html body #book-viewer #rhmrSbHd .rhmr-ib,
+html body #book-viewer #rhmrSbHd #rhmrSbClose,
+html body .rhmd-sb .rhmd-sb-hd .rhmd-btn{width:var(--rhm-tbbtn)!important;height:var(--rhm-tbbtn)!important;min-width:var(--rhm-tbbtn)!important}
+html body #book-viewer #rhmrSbHd .bk-sec-lang{height:var(--rhm-tbbtn)!important}
+html body #book-viewer #rhmrSbHd .bk-sec-lang button{font-size:13px!important}
+html body #book-viewer #rhmrSbHd #rhmrSbClose svg,html body .rhmd-sb .rhmd-sb-hd .rhmd-btn svg{width:22px!important;height:22px!important}
+html body #book-viewer #rhmrSbHd .rhmr-ib svg{width:20px!important;height:20px!important}
+@media(max-width:639px){html body #book-viewer #rhmrSbHd #rhmrSbClose svg,html body .rhmd-sb .rhmd-sb-hd .rhmd-btn svg{width:20px!important;height:20px!important}html body #book-viewer #rhmrSbHd .rhmr-ib svg{width:18px!important;height:18px!important}}
+/* Thanh zoom (chỉ PC, chỉ khi đang đọc sách) */
+.rhmr-zoom{display:none;align-items:center;gap:8px;height:var(--rhm-tbbtn);padding:0 10px;box-sizing:border-box;border:1px solid #d0d7de;border-radius:8px;color:#59636e;flex:0 0 auto}
+.rhmr-zoom input{width:120px;margin:0;accent-color:#0969da;cursor:pointer}
+.rhmr-zoom span{min-width:38px;text-align:right;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+@media(min-width:900px) and (hover:hover){
+  body.rhmr-on .rhmr-zoom{display:flex}
+  html body.rhmr-on #rhmTb #rhmTbRead{width:calc(100% - 600px)}
+}
+</style>
+<script id="rhm-patch-topbar-zoom-js">(function(){
+function init(){
+  var right=document.querySelector("#rhmTb .rhm-tb-right"),chat=document.getElementById("rhmrChatBtn");
+  if(!right||document.getElementById("rhmrZoom"))return;
+  var box=document.createElement("div");box.className="rhmr-zoom";box.id="rhmrZoom";box.title="Thu phóng trang sách";
+  box.innerHTML='<input type="range" min="30" max="400" step="10" value="100" aria-label="Thu phóng"><span>100%</span>';
+  right.insertBefore(box,chat||right.lastElementChild);
+  var inp=box.querySelector("input"),lb=box.querySelector("span"),drag=!1;
+  inp.addEventListener("input",function(){drag=!0;lb.textContent=inp.value+"%";try{bkSetScale(+inp.value/100)}catch(e){}});
+  inp.addEventListener("change",function(){drag=!1});
+  ["pointerup","pointercancel","blur"].forEach(function(n){inp.addEventListener(n,function(){drag=!1})});
+  setInterval(function(){if(drag||!document.body.classList.contains("rhmr-on"))return;try{var v=Math.round(bkScale*100);if(+inp.value!==v){inp.value=v;lb.textContent=v+"%"}}catch(e){}},400);
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+})();</script>
 </html>
