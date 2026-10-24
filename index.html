@@ -4738,4 +4738,102 @@ body #quiz-screen .qt-bar>.qt-nav .mi{width:20px;height:20px;margin:0}
   try{new MutationObserver(setH).observe(document.body,{attributes:true,attributeFilter:["class"]})}catch(e){}
 })();
 </script>
+
+<style id="rhm-quiz-v3">
+/* ===== v3: mobile màn dọc - cụm nút Câu trước / Cờ / Khó-Vừa-Dễ / Câu tiếp luôn sát đáy màn hình, không trôi khi cuộn ===== */
+@media(max-width:640px) and (orientation:portrait){
+  body.rhm-quiz-on #quiz-screen #answers-panel-wrapper>div:last-child{position:fixed!important;left:0;right:0;bottom:0;z-index:36;height:auto!important;margin:0!important;padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px))!important;background:#fff;border-top:1px solid #d0d7de!important;box-sizing:border-box}
+  body.rhm-quiz-on #quiz-screen #unanswered-actions,body.rhm-quiz-on #quiz-screen #answered-actions{height:var(--btn,36px)!important}
+  body.rhm-quiz-on #quiz-screen{padding-bottom:calc(var(--btn,36px) + 28px + env(safe-area-inset-bottom,0px))!important}
+  /* nút chat nổi không đè lên cụm nút điều hướng */
+  body.rhm-quiz-on #home-fab{translate:0 -64px}
+}
+</style>
+<script id="rhm-quiz-v3-js">
+(function(){
+  /* Tính lại chiều cao 2 khung câu hỏi/đáp án (PC) để đáy luôn chạm đáy màn hình.
+     Bản cũ chỉ tính 1 lần lúc loadQuestion, dễ sai khi: vừa mở màn hình trắc nghiệm,
+     trang đang bị cuộn, font/topbar chưa ổn định, thanh cuộn xuất hiện làm các nút xuống dòng. */
+  var root=document.documentElement,pend=[];
+  function pf(v){return parseFloat(v)||0}
+  /* tổng khoảng trống nằm dưới đáy khung tới hết trang: padding/margin/viền của mọi phần tử cha
+     và các khối còn lại nằm sau (spacer, footer...) — để đáy khung đúng sát đáy màn hình */
+  function belowSpace(panel,card){
+    var sum=0,grid=panel.parentElement;
+    if(grid&&grid!==card)sum+=pf(getComputedStyle(grid).marginBottom)+pf(getComputedStyle(grid).paddingBottom);
+    var cs=getComputedStyle(card);sum+=pf(cs.paddingBottom)+pf(cs.borderBottomWidth);
+    var el=card;
+    while(el&&el!==document.body&&el!==root){
+      var st=getComputedStyle(el);sum+=pf(st.marginBottom);
+      for(var sib=el.nextElementSibling;sib;sib=sib.nextElementSibling){
+        var ss=getComputedStyle(sib);
+        if(ss.display==="none"||ss.position==="fixed"||ss.position==="absolute")continue;
+        sum+=sib.getBoundingClientRect().height+pf(ss.marginTop)+pf(ss.marginBottom);
+      }
+      var par=el.parentElement;
+      if(par&&par!==document.body){var ps=getComputedStyle(par);sum+=pf(ps.paddingBottom)+pf(ps.borderBottomWidth)}
+      el=par;
+    }
+    var bs=getComputedStyle(document.body);sum+=pf(bs.paddingBottom)+pf(bs.marginBottom)+pf(bs.borderBottomWidth);
+    sum+=pf(getComputedStyle(root).paddingBottom);
+    return sum;
+  }
+  function fit(){
+    var panel=document.getElementById("question-panel-wrapper"),card=document.getElementById("quiz-screen");
+    if(!panel||!card||card.classList.contains("hidden"))return;
+    if(window.innerWidth<1024){root.style.removeProperty("--quiz-panel-h");return}
+    var below=belowSpace(panel,card);
+    var top=panel.getBoundingClientRect().top+(window.pageYOffset||0); /* tọa độ tài liệu, không phụ thuộc đang cuộn */
+    var h=Math.floor(window.innerHeight-top-below);
+    h=Math.max(220,h);
+    root.style.setProperty("--quiz-panel-h",h+"px");
+    /* tự hiệu chỉnh: nếu trang vẫn dài hơn màn hình (còn phần tử nào đó nằm dưới) thì thu bớt đúng phần dư */
+    var over=root.scrollHeight-window.innerHeight;
+    if(over>0&&over<160)root.style.setProperty("--quiz-panel-h",Math.max(220,h-over)+"px");
+  }
+  var poll=null;
+  function fitSoon(){
+    pend.forEach(clearTimeout);pend=[];
+    clearInterval(poll);
+    fit();
+    requestAnimationFrame(function(){fit();requestAnimationFrame(fit)});
+    /* theo dõi ~2 giây đầu vì bố cục (topbar, font, hiệu ứng chuyển) còn dịch chuyển */
+    var n=0;poll=setInterval(function(){fit();if(++n>=20)clearInterval(poll)},100);
+  }
+  window.fitQuizPanels=fitSoon;
+  window.addEventListener("resize",fitSoon);
+  window.addEventListener("orientationchange",fitSoon);
+  window.addEventListener("load",fitSoon);
+  try{document.fonts&&document.fonts.ready&&document.fonts.ready.then(fitSoon)}catch(e){}
+  function init(){
+    var qs=document.getElementById("quiz-screen");if(!qs)return;
+    var wasHidden=qs.classList.contains("hidden");
+    try{new MutationObserver(function(){
+      var hid=qs.classList.contains("hidden");
+      if(wasHidden&&!hid){
+        /* vừa mở màn hình trắc nghiệm: về đầu trang (PC) rồi đo lại */
+        if(window.innerWidth>=1024&&(window.pageYOffset||0)>0)window.scrollTo({top:0,left:0,behavior:"instant"});
+        fitSoon();
+      }
+      wasHidden=hid;
+    }).observe(qs,{attributes:true,attributeFilter:["class"]})}catch(e){}
+    /* các phần phía trên khung đổi kích thước (topbar, hàng nút) thì đo lại */
+    try{
+      var ro=new ResizeObserver(function(){fit()});
+      [document.querySelector(".rhm-tbwrap"),qs.firstElementChild,qs.querySelector(".qt-bar")].forEach(function(n){n&&ro.observe(n)});
+    }catch(e){}
+    if(!wasHidden)fitSoon();
+  }
+  document.readyState==="loading"?document.addEventListener("DOMContentLoaded",init):init();
+})();
+</script>
+
+<style id="rhm-quiz-v4">
+/* hàng topbar: x/n và đồng hồ tổng cùng màu xám với các nút khác (đồng hồ 72s màu xanh giữ nguyên) */
+body.rhm-quiz-on .rhmq-r>.qt-count,body.rhm-quiz-on .rhmq-r>.qt-timer:not(#exam-q-timer-box){background:transparent!important}
+body.rhm-quiz-on .rhmq-r>.qt-count:hover,body.rhm-quiz-on .rhmq-r>.qt-timer:not(#exam-q-timer-box):hover{background:#eaeef2!important}
+/* hàng dưới: ngôi sao hy vọng và Danh sách câu thành nền trắng như các nút bên cạnh */
+body #quiz-screen .qt-bar>#hope-star-btn:not(.hope-star-active),body #quiz-screen .qt-bar>.qt-nav{background:#fff!important}
+body #quiz-screen .qt-bar>#hope-star-btn:not(.hope-star-active):hover,body #quiz-screen .qt-bar>.qt-nav:hover{background:var(--acs,#ddf4ff)!important}
+</style>
 </html>
