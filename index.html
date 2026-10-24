@@ -4417,4 +4417,53 @@ document.addEventListener("keydown",function(e){
 },!0);
 })();
 </script>
+<style id="rhm-patch-player-dark-btn">
+/* ===== Trình phát: chỉ còn 1 cửa sổ (ẩn danh sách video khi đang phát) ===== */
+html body .rhmd-dt.playing .rhmd-dl{display:none!important}
+html body .rhmd-dt.playing .rhmd-stage{flex:1 1 auto;width:100%;min-width:0}
+/* ===== Nút điều khiển: nền đen, icon trắng; nút đang bật nền xanh ===== */
+html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>button,
+html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>select,
+html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>div{background:#0b0d10!important;background-image:none!important;border:1px solid #2f353d!important;color:#fff!important;box-shadow:none!important;border-radius:8px!important}
+html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>button:hover,
+html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>div:hover{background:#1a1e24!important;border-color:#454c56!important}
+html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>button *,
+html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>div button,
+html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>div button *{color:#fff!important}
+html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>button .yt-ic svg,
+html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>div .yt-ic svg{stroke:currentColor}
+html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>select,
+html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>div select{color:#fff!important;background:transparent!important}
+html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>select{background:#0b0d10!important}
+html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow .yt-speed-label{color:#d0d7de!important}
+html body .custom-yt-controls option,html body .custom-yt-subpanel option{background:#0b0d10!important;color:#fff!important}
+html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>button[id^=play-btn-]{background:#0b0d10!important;border-color:#2f353d!important;color:#fff!important}
+html body .custom-yt-controls #mute-btn,html body .custom-yt-controls [id^=mute-btn-]{filter:none!important}
+html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>button[class*="bg-blue-600"]:not([id^=play-btn-]),
+html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>button.yt-btn-active:not([id^=play-btn-]),
+html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>button.yt-focus-btn.on,
+html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>div.yt-mm-trk,
+html body html body html body .custom-yt-wrapper.sub-editing .custom-yt-controls .yt-iconrow>button[onclick*="toggleSubPan"],
+html body html body html body .custom-yt-wrapper.yt-fs .custom-yt-controls .yt-iconrow>button[onclick*="toggleYtFullscreen"],
+html body html body html body .custom-yt-wrapper:fullscreen .custom-yt-controls .yt-iconrow>button[onclick*="toggleYtFullscreen"]{background:#2563eb!important;border-color:#60a5fa!important;color:#fff!important}
+html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>button[class*="bg-blue-600"]:not([id^=play-btn-]) *,
+html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>button.yt-btn-active:not([id^=play-btn-]) *,
+html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>button.yt-focus-btn.on *,
+html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>div.yt-mm-trk *,
+html body html body html body .custom-yt-wrapper.sub-editing .custom-yt-controls .yt-iconrow>button[onclick*="toggleSubPan"] *,
+html body html body html body .custom-yt-wrapper.yt-fs .custom-yt-controls .yt-iconrow>button[onclick*="toggleYtFullscreen"] *,
+html body html body html body .custom-yt-wrapper:fullscreen .custom-yt-controls .yt-iconrow>button[onclick*="toggleYtFullscreen"] *{color:#fff!important}
+</style>
+<script id="rhm-patch-player-back">(function(){
+/* Đang phát: nút quay lại trên topbar đưa về danh sách bài giảng (không văng ra ngoài) */
+document.addEventListener("click",function(e){
+  var t=e.target&&e.target.closest&&e.target.closest("#rhmTbBack");if(!t)return;
+  var dt=document.getElementById("rhmdDt");
+  if(!dt||dt.hidden||!dt.classList.contains("playing"))return;
+  if(document.fullscreenElement||document.webkitFullscreenElement||dt.querySelector(".theater-mode"))return;
+  e.stopImmediatePropagation();e.preventDefault();
+  try{window.rhmVClose&&window.rhmVClose()}catch(_){}
+  try{window.rhmdOnBack&&window.rhmdOnBack()}catch(_){}
+},!0);
+})();</script>
 </html>
