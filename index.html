@@ -5912,29 +5912,23 @@ html body #note-modal .nt-qnote{background:#ddf4ff}
 </style>
 <style id="rhm-ocr-css">
 .rhm-ocr-badge{position:absolute;top:8px;right:8px;z-index:6;pointer-events:none;background:rgba(17,24,39,.8);color:#fff;font:600 12px/1.2 system-ui,-apple-system,sans-serif;padding:5px 10px;border-radius:999px;box-shadow:0 1px 6px #0004}
-#rhm-ocr-bar{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:45;display:none;gap:8px}
-#rhm-ocr-chip,#rhm-ocr-all{border:0;cursor:pointer;background:rgba(17,24,39,.85);color:#fff;font:700 12px/1 system-ui,-apple-system,sans-serif;padding:8px 13px;border-radius:999px;box-shadow:0 2px 10px #0006;-webkit-tap-highlight-color:transparent;white-space:nowrap}
-#rhm-ocr-chip.off{background:rgba(107,114,128,.92)}
-#rhm-ocr-all{background:rgba(79,70,229,.92)}
-#rhm-ocr-all:disabled{opacity:.7}
+#rhmTbOcr.busy{animation:rhmrPulse 1s ease-in-out infinite;color:#0969da}
 </style>
 <script id="rhm-ocr-scan">(function(){
 "use strict";
-/* OCR tiếng Anh cho trang PDF scan trong Reader (Tesseract.js, chạy ngay trên máy).
-   Trang nào PDF không có lớp chữ -> nhận diện -> đưa chữ vào đúng lớp chữ sẵn có của Reader,
-   nên bôi đen / copy / dịch / tra từ điển hoạt động y như PDF thường. */
+/* OCR tiếng Anh cho PDF scan trong Reader (Tesseract.js, chạy ngay trên máy).
+   Chỉ chạy khi người dùng bấm nút OCR trên thanh trên cùng. Chữ nhận diện được đưa vào đúng lớp chữ
+   sẵn có của Reader nên bôi đen / copy / dịch / tra từ điển / mục lục / AI dùng như PDF thường.
+   Trang đã OCR được lưu cache (IndexedDB) và tự có lại khi mở lại chương. */
 if(window.__rhmOcrScan)return;
 if(typeof window.bkPageData!=="function"){console.warn("[OCR] không thấy bkPageData, bỏ qua");return}
 window.__rhmOcrScan=1;
 var TESS_VER="5.1.1",
     TESS_JS="https://cdn.jsdelivr.net/npm/tesseract.js@"+TESS_VER+"/dist/tesseract.min.js",
     LANG_PATH="https://cdn.jsdelivr.net/npm/@tesseract.js-data/eng@1.0.0/4.0.0_best_int",
-    LS_OFF="rhm_ocr_off",CACHE_V="v1",
-    MIN_NATIVE=25,OCR_W=2200,MAX_PIX=12e6,MIN_WORD_CONF=35,MIN_LINE_CONF=45;
-var orig=window.bkPageData,queue=[],running=false,libP=null,workerP=null,idleT=0,curPg=null,
-    scanTok=-1,chip=null,failUntil=0,failToast=0;
+    CACHE_V="v1",MIN_NATIVE=25,OCR_W=2200,MAX_PIX=12e6,MIN_WORD_CONF=35,MIN_LINE_CONF=45;
+var orig=window.bkPageData,libP=null,workerP=null,idleT=0,curPg=null,btn=null,chBusy=false,chCancel=false;
 
-function on(){try{return localStorage.getItem(LS_OFF)!=="1"}catch(e){return true}}
 function toast(m){try{showToast(m)}catch(e){}}
 function sleep(ms){return new Promise(function(r){setTimeout(r,ms)})}
 
@@ -5993,44 +5987,14 @@ function patch(pg){
     return pg._ocrTc?r.then(function(tc){return merge(tc,pg._ocrTc)}):r;
   };
 }
-
-/* ---- giao diện nhỏ: nhãn tiến độ trên trang + nút bật/tắt ---- */
 function badge(pg,txt){
   var el=pg._ocrB;
   if(!txt){if(el&&el.parentNode)el.parentNode.removeChild(el);pg._ocrB=null;return}
   if(!el){el=document.createElement("div");el.className="rhm-ocr-badge";pg.wrap.appendChild(el);pg._ocrB=el}
   el.textContent=txt;
 }
-function barSync(){
-  var v=document.getElementById("book-viewer");if(!v)return;
-  if(!chip){
-    chip=document.createElement("div");chip.id="rhm-ocr-bar";
-    var b1=document.createElement("button");b1.type="button";b1.id="rhm-ocr-chip";b1.addEventListener("click",toggle);
-    var b2=document.createElement("button");b2.type="button";b2.id="rhm-ocr-all";b2.addEventListener("click",chapterOcr);
-    chip.appendChild(b1);chip.appendChild(b2);v.appendChild(chip);
-  }
-  var any=typeof bkVP!=="undefined"&&bkVP&&bkVP.length>0;
-  chip.style.display=any?"flex":"none";
-  var t=chip.firstChild,al=chip.lastChild;
-  t.textContent=on()?"🔍 OCR tiếng Anh: Bật":"🔍 OCR tiếng Anh: Tắt";
-  t.classList.toggle("off",!on());
-  al.textContent=chBusy?"⏳ Đang OCR chương…":"📄 OCR cả chương";
-  al.disabled=chBusy;
-}
-var chipSync=barSync;
-function toggle(){
-  try{on()?localStorage.setItem(LS_OFF,"1"):localStorage.removeItem(LS_OFF)}catch(e){}
-  if(!on()){
-    queue.forEach(function(pg){pg._ocr=null;badge(pg,null)});queue=[];
-    toast("Đã tắt OCR (trang đã nhận diện vẫn giữ nguyên)");
-  }else{
-    toast("Đã bật OCR tiếng Anh cho trang scan");
-    (bkVP||[]).forEach(function(pg){if(pg.state==="done"&&!pg._ocr&&pg.data)maybe(pg,pg.data)});
-  }
-  chipSync();
-}
 
-/* ---- bộ nhớ đệm IndexedDB: nhận diện 1 lần, lần sau mở lại là có ngay ---- */
+/* ---- bộ nhớ đệm IndexedDB ---- */
 function idb(){return new Promise(function(res,rej){
   try{var r=indexedDB.open("rhm_ocr_v1",1);
     r.onupgradeneeded=function(){r.result.createObjectStore("p")};
@@ -6071,11 +6035,8 @@ function getWorker(){
     return w;
   })().catch(function(e){workerP=null;throw e}));
 }
-function idleStop(){
-  clearTimeout(idleT);
-  idleT=setTimeout(function(){var p=workerP;workerP=null;
-    p&&p.then(function(w){return w.terminate()}).catch(function(){})},60000);
-}
+function dropWorker(){var p=workerP;workerP=null;p&&p.then(function(w){return w.terminate()}).catch(function(){})}
+function idleStop(){clearTimeout(idleT);idleT=setTimeout(dropWorker,60000)}
 async function renderForOcr(pg){
   var v1=pg.vp1,s=Math.min(OCR_W/v1.width,Math.sqrt(MAX_PIX/(v1.width*v1.height)),4);
   s=Math.max(s,1);
@@ -6083,26 +6044,6 @@ async function renderForOcr(pg){
   cv.width=Math.max(1,Math.round(vp.width));cv.height=Math.max(1,Math.round(vp.height));
   await pg.page.render({canvasContext:cv.getContext("2d",{alpha:false}),viewport:vp,background:"#ffffff"}).promise;
   return {cv:cv,s:cv.width/v1.width};
-}
-
-/* ---- hàng đợi: mỗi lần 1 trang, ưu tiên trang gần giữa màn hình ---- */
-function alive(pg){
-  return pg._ocrTok===bkViewTok&&bkVP.indexOf(pg)>=0&&pg.state!=="idle"&&on();
-}
-function pickNearest(){
-  var mr=bkWrapEl?bkWrapEl.getBoundingClientRect():null,c=mr?mr.top+mr.height/2:0,best=0,bd=1e18;
-  queue.forEach(function(pg,i){var r=pg.wrap.getBoundingClientRect(),d=Math.abs((r.top+r.bottom)/2-c);if(d<bd){bd=d;best=i}});
-  return queue.splice(best,1)[0];
-}
-async function pump(){
-  if(running)return;running=true;
-  try{
-    for(;;){
-      queue=queue.filter(function(pg){if(pg._ocr!=="q")return false;var ok=alive(pg);if(!ok){pg._ocr=null;badge(pg,null)}return ok});
-      if(!queue.length)break;
-      await runOne(pickNearest());
-    }
-  }finally{running=false;idleStop()}
 }
 async function ocrItems(pg,tok){
   var key=cacheKey(pg),items=await cacheGet(key);
@@ -6116,24 +6057,6 @@ async function ocrItems(pg,tok){
   items=convert(res.data,r.s,MIN_WORD_CONF,MIN_LINE_CONF);
   cacheSet(key,items);
   return items;
-}
-async function runOne(pg){
-  pg._ocr="run";curPg=pg;badge(pg,"🔍 Đang nhận diện chữ…");
-  var tok=pg._ocrTok,items=null;
-  try{
-    items=await ocrItems(pg,tok);
-  }catch(e){
-    curPg=null;badge(pg,null);
-    if(e===0){pg._ocr=null;return}
-    pg._ocr=null;failUntil=Date.now()+30000;
-    console.warn("[OCR]",e);
-    if(Date.now()-failToast>30000){failToast=Date.now();toast("OCR lỗi: "+((e&&e.message)||e)+" — sẽ thử lại sau")}
-    try{var p=workerP;workerP=null;p&&p.then(function(w){return w.terminate()}).catch(function(){})}catch(x){}
-    return;
-  }
-  curPg=null;
-  try{await finish(pg,items)}catch(e){console.warn("[OCR] finish",e);pg._ocr="no"}
-  badge(pg,null);
 }
 async function finish(pg,items){
   if(pg._ocrTok!==bkViewTok||bkVP.indexOf(pg)<0)return;
@@ -6156,66 +6079,81 @@ async function finish(pg,items){
     try{bkSelDraw(pg)}catch(e){}
   }
 }
-
-
-/* ---- OCR cả chương: nhận diện mọi trang scan rồi đọc lại chữ cả chương (để mục lục / AI / dịch thấy chữ) ---- */
-var chBusy=false;
 function nativeLen(d){var n=0;d.seq.forEach(function(it){n+=String(it.str).replace(/\s+/g,"").length});return n}
+
+/* ---- nút OCR cả chương ---- */
+function setBusy(b){chBusy=b;if(btn){btn.classList.toggle("busy",b);
+  var t=b?"Đang OCR chương — bấm để dừng":"OCR cả chương (tiếng Anh)";btn.title=t;btn.setAttribute("aria-label",t)}}
 async function chapterOcr(){
-  if(chBusy||!bkVP.length)return;
-  if(!on()){toast("OCR đang tắt — bấm nút “OCR tiếng Anh” để bật lại");return}
-  chBusy=true;barSync();
-  var tok=bkViewTok,doc=bkDoc,n=bkVP.length,did=0;
-  while(running)await sleep(200);
-  running=true;
+  if(chBusy){chCancel=true;toast("Đang dừng OCR…");return}
+  if(typeof bkVP==="undefined"||!bkVP.length)return;
+  chCancel=false;setBusy(true);
+  var tok=bkViewTok,doc=bkDoc,n=bkVP.length,did=0,fresh=0;
   try{
-    for(var i=0;i<n;i++){
+    for(var i=0;i<n&&!chCancel;i++){
       if(tok!==bkViewTok)return;
       var pg=bkVP[i];
       bkSetStatus("🔍 OCR chương: trang "+(i+1)+"/"+n+(did?" ("+did+" trang scan)":""));
       patch(pg);pg._ocrTok=tok;
       var d=await orig(pg);
-      if(pg._ocr==="done"||pg._ocr==="no")continue;
-      if(nativeLen(d)>=MIN_NATIVE){pg._ocr="no";continue}
-      pg._ocr="run";curPg=pg;badge(pg,"🔍 Đang nhận diện chữ…");
+      if(pg._ocr==="done")continue;
+      if(nativeLen(d)>=MIN_NATIVE)continue;
+      curPg=pg;badge(pg,"🔍 Đang nhận diện chữ…");
       try{var items=await ocrItems(pg,tok);curPg=null;await finish(pg,items);did++}
-      catch(e){curPg=null;pg._ocr=null;throw e}
-      finally{badge(pg,null)}
+      finally{curPg=null;badge(pg,null)}
     }
     if(tok!==bkViewTok)return;
-    bkSetStatus("⏳ Đang đọc lại chữ cả chương…");
-    doc._rawC={};
-    var ex=await bkExtract(doc,tok,function(a,t){bkSetStatus("⏳ Đang đọc lại chữ chương: trang "+a+"/"+t)});
-    if(!ex||tok!==bkViewTok)return;
-    bkPages=ex.pages;bkText=ex.text;bkSecs=bkLoadManual(bkCur.url);
-    bkRelink();bkRenderSecList();bkUpdateSecBtn();
-    bkHeadsLoad(bkCur.url)&&bkRebuildSecs(tok).catch(function(){});
-    bkApplyHlAll();
-    bkSetStatus(bkText.trim()?"":"Chương này không nhận diện được chữ nào.");
-    toast(did?"Đã OCR "+did+" trang scan — mục lục, AI và dịch đã đọc được chữ chương":"Chương này không có trang scan cần OCR");
+    if(did||pg_anyDone()){
+      bkSetStatus("⏳ Đang đọc lại chữ cả chương…");
+      doc._rawC={};
+      var ex=await bkExtract(doc,tok,function(a,t){bkSetStatus("⏳ Đang đọc lại chữ chương: trang "+a+"/"+t)});
+      if(!ex||tok!==bkViewTok)return;
+      bkPages=ex.pages;bkText=ex.text;bkSecs=bkLoadManual(bkCur.url);
+      bkRelink();bkRenderSecList();bkUpdateSecBtn();
+      bkHeadsLoad(bkCur.url)&&bkRebuildSecs(tok).catch(function(){});
+      bkApplyHlAll();
+      bkSetStatus(bkText.trim()?"":"Chương này không nhận diện được chữ nào.");
+      toast(chCancel?"Đã dừng OCR — giữ lại "+did+" trang đã nhận diện":did?"Đã OCR "+did+" trang scan — mục lục, AI và dịch đã đọc được chữ chương":"Chương đã được OCR trước đó — đã đọc lại chữ cả chương");
+    }else{
+      bkSetStatus("");
+      toast(chCancel?"Đã dừng OCR":"Chương này không có trang scan cần OCR");
+    }
   }catch(e){
-    if(e!==0){console.warn("[OCR chương]",e);bkSetStatus("");toast("OCR chương lỗi: "+((e&&e.message)||e));failUntil=Date.now()+30000}
-  }finally{running=false;chBusy=false;barSync();idleStop();pump()}
+    if(e!==0){console.warn("[OCR chương]",e);bkSetStatus("");toast("OCR chương lỗi: "+((e&&e.message)||e));dropWorker()}
+  }finally{setBusy(false);chCancel=false;idleStop()}
 }
+function pg_anyDone(){return bkVP.some(function(p){return p._ocr==="done"})}
 
-/* trang có (gần) không có chữ gốc -> xếp hàng OCR */
-function maybe(pg,d){
-  if(pg._ocr||!d||!d.seq||!on()||Date.now()<failUntil)return;
-  var n=0;d.seq.forEach(function(it){n+=String(it.str).replace(/\s+/g,"").length});
-  if(n>=MIN_NATIVE){pg._ocr="no";return}
-  pg._ocr="q";pg._ocrTok=bkViewTok;queue.push(pg);
-  badge(pg,"⏳ Chờ nhận diện chữ…");
-  scanTok=bkViewTok;chipSync();pump();
+function mkBtn(){
+  var sb=document.getElementById("rhmrSbBtn");
+  if(!sb||!sb.parentNode||document.getElementById("rhmTbOcr"))return!!sb;
+  btn=document.createElement("button");btn.type="button";btn.id="rhmTbOcr";btn.className="rhm-tb-btn rhmr-tbbtn";
+  btn.title="OCR cả chương (tiếng Anh)";btn.setAttribute("aria-label","OCR cả chương (tiếng Anh)");
+  btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8V6.5A2.5 2.5 0 0 1 6.5 4H8"/><path d="M16 4h1.5A2.5 2.5 0 0 1 20 6.5V8"/><path d="M20 16v1.5a2.5 2.5 0 0 1-2.5 2.5H16"/><path d="M8 20H6.5A2.5 2.5 0 0 1 4 17.5V16"/><path d="M8 9.5h8M8 12h8M8 14.5h5"/></svg>';
+  btn.addEventListener("click",chapterOcr);
+  sb.parentNode.insertBefore(btn,sb.nextSibling);
+  return true;
+}
+function init(){if(!mkBtn())setTimeout(init,400)}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+
+/* trang đã từng OCR (có cache) -> tự có lại chữ, không cần bấm nút */
+async function fromCache(pg,d){
+  if(pg._ocr||pg._ocrChk||!d||!d.seq||nativeLen(d)>=MIN_NATIVE)return;
+  pg._ocrChk=true;
+  var tok=bkViewTok,items=await cacheGet(cacheKey(pg));
+  if(!items||!items.length||tok!==bkViewTok||pg._ocr)return;
+  pg._ocrTok=tok;
+  try{await finish(pg,items)}catch(e){console.warn("[OCR] cache",e)}
 }
 
 window.bkPageData=function(pg){
   patch(pg);
   var p=orig(pg);
-  p.then(function(d){maybe(pg,d)},function(){});
-  try{barSync()}catch(e){}
+  p.then(function(d){fromCache(pg,d)},function(){});
   return p;
 };
-window.rhmOcr={chapter:chapterOcr,enable:function(){if(!on())toggle()},disable:function(){if(on())toggle()},isOn:on,_convert:convert};
+window.rhmOcr={chapter:chapterOcr,_convert:convert};
 })();</script>
 
 </html>
