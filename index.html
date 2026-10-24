@@ -2799,6 +2799,246 @@ html body #note-modal#note-modal .nt-ed-acts .nt-ed-btn.dan{color:#cf222e}
 html body #note-modal#note-modal .rd-hd-top{flex-wrap:wrap;row-gap:6px}
 html body #note-modal#note-modal .nt-ed-acts.nt-ed-acts-r{position:relative;top:auto;left:auto;right:auto;margin:14px 0 8px var(--bm-i,14px);width:max-content;max-width:calc(100% - 20px)}
 </style>
+<style id="rhm-chat-sync-video">
+/* Đồng bộ giao diện boxchat reader sang boxchat trong video (rạp / toàn màn hình) */
+/* 1. Nút Aa (cỡ chữ khung chat) phải phóng to chữ — ghi đè font-size cố định của giao diện v2 */
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-messages{font-size:calc(14px * var(--ai-zoom,1))!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-messages>div.text-center{font-size:calc(12px * var(--ai-zoom,1))!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-input{font-size:calc(14px * var(--ai-zoom,1))!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video .ai-quota-hint{font-size:calc(12.5px * var(--ai-zoom,1))!important}
+/* thêm điểm nhấn xanh cho boxchat (cùng bảng màu chế độ trắc nghiệm: #0969da / #ddf4ff / #54aeff) */
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video>div:not(#ai-en-panel)>div:first-child{background:linear-gradient(180deg,#f5faff 0%,#ebf5ff 100%)!important;border-bottom:1px solid #b6dcff!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-title{color:#0969da!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video .ai-hd-ic{background:#0969da!important;color:#fff!important;box-shadow:0 2px 6px #0969da40}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-live-status{color:#4b7bb0!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-enwin-hbtn,html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-settings-btn{background:#fff!important;border-color:#b6dcff!important;color:#0969da!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-settings-btn:hover,html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-enwin-hbtn:hover{background:#ddf4ff!important;border-color:#0969da!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-close-btn{border-color:#b6dcff!important;background:#fff!important;color:#59636e!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-close-btn:hover{background:#ddf4ff!important;border-color:#0969da!important;color:#0969da!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-lang-box,html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video .ai-langbar{border-color:#b6dcff!important;background:#ebf5ff!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-lang-box button,html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video .ai-langbar button{color:#4b7bb0!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-messages{background:linear-gradient(180deg,#f8fbff 0%,#fff 220px)!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-messages>div.bg-white{border-color:#d6e8fb!important;border-left:3px solid #54aeff!important;box-shadow:0 1px 3px #0969da14!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-messages>div.bg-indigo-600{background:linear-gradient(135deg,#1f83f0,#0969da)!important;box-shadow:0 2px 6px #0969da33}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-messages>div.text-center{background:#ddf4ff!important;border-color:#b6dcff!important;color:#0969da!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-messages .ai-body b,html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-messages .ai-bub b{color:#0a58b0!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-messages .rhm-ei{color:#0969da!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-messages>div.bg-indigo-600 .rhm-ei{color:#fff!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-messages code{background:#ddf4ff;color:#0a58b0}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video .ai-actrow button,html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video .ai-ttsbar button{background:#f5faff!important;border-color:#b6dcff!important;color:#0a58b0!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video .ai-actrow button:hover,html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video .ai-ttsbar button:hover{background:#ddf4ff!important;border-color:#0969da!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video .ai-actrow button .rhm-ei,html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video .ai-ttsbar button .rhm-ei{color:#0969da!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-quickrow{background:#f5faff!important;border-top:1px solid #b6dcff!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-quickrow button{background:#fff!important;border-color:#b6dcff!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-quickrow button .rhm-ei{color:#0969da!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-quickrow button:hover{background:#ddf4ff!important;border-color:#0969da!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video>div:not(#ai-en-panel)>div:last-child{border-color:#b6dcff!important;background:#fff!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video>div:not(#ai-en-panel)>div:last-child:focus-within{border-color:#0969da!important;box-shadow:0 0 0 3px #0969da26!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-mic-btn,html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-img-btn{color:#0969da!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-mic-btn:hover,html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-img-btn:hover{background:#ddf4ff!important;color:#0969da!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-send-btn{background:linear-gradient(135deg,#1f83f0,#0969da)!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel{background:#f5faff!important;border-bottom-color:#b6dcff!important}
+hover mới xanh */
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-enwin-hbtn,html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-settings-btn{border-color:#d0d7de!important;color:#59636e!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-enwin-hbtn:hover,html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-settings-btn:hover{border-color:#0969da!important;color:#0969da!important;background:#ddf4ff!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-close-btn{border-color:#d0d7de!important;color:#59636e!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-close-btn:hover{border-color:#0969da!important;color:#0969da!important;background:#ddf4ff!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-lang-box,html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video .ai-langbar{border-color:#d0d7de!important;background:#f1f5f9!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-lang-box button,html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video .ai-langbar button{color:#59636e!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-lang-box button.bg-indigo-600,html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video .ai-langbar button.bg-indigo-600{color:#0969da!important;background:#fff!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-messages .rhm-ei{color:#59636e!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-messages>div.bg-indigo-600 .rhm-ei{color:#fff!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video .ai-actrow button,html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video .ai-ttsbar button{background:#fff!important;border-color:#d0d7de!important;color:#1f2328!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video .ai-actrow button .rhm-ei,html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video .ai-ttsbar button .rhm-ei{color:#59636e!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video .ai-actrow button:hover,html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video .ai-ttsbar button:hover{background:#ddf4ff!important;border-color:#0969da!important;color:#0969da!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video .ai-actrow button:hover .rhm-ei,html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video .ai-ttsbar button:hover .rhm-ei{color:#0969da!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-quickrow button{border-color:#d0d7de!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-quickrow button .rhm-ei{color:#59636e!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-quickrow button:hover{background:#ddf4ff!important;border-color:#0969da!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-quickrow button:hover .rhm-ei{color:#0969da!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-mic-btn,html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-img-btn{color:#59636e!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-mic-btn:hover,html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-img-btn:hover{background:#ddf4ff!important;color:#0969da!important}
+/* bỏ viền xanh bên trái bong bóng */
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-messages>div.bg-white{border:1px solid #d0d7de!important;box-shadow:0 1px 0 rgba(27,31,36,.04)!important}
+/* nền khu nhập chat = nền hàng quick */
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video>div:not(#ai-en-panel){background:#f5faff!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video>div:not(#ai-en-panel)>div:last-child{background:#fff!important}
+/* cài đặt: nền xám như topbar */
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel{background:#f6f8fa!important}
+/* nút quay lại (cài đặt boxchat reader) = cỡ các nút khác */
+html body #ai-tutor-modal#ai-tutor-modal#ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-back-btn{width:var(--rhm-tbbtn)!important;min-width:var(--rhm-tbbtn)!important;max-width:var(--rhm-tbbtn)!important;height:var(--rhm-tbbtn)!important;min-height:var(--rhm-tbbtn)!important;max-height:var(--rhm-tbbtn)!important}
+/* ===== Box chat AI trong phần đọc sách — thiết kế lại v2 (tối giản, icon SVG) ===== */
+html body #ai-tutor-modal.ai-in-video.ai-in-video{--cx-line:#d0d7de;--cx-line2:#e6eaef;--cx-soft:#f6f8fa;--cx-tx:#1f2328;--cx-mut:#59636e;--cx-acc:#0969da;--cx-accbg:#ddf4ff;--cx-hov:#eaeef2;--cx-danger:#cf222e}
+/* khung ngoài */
+html body #ai-tutor-modal.ai-in-video.ai-in-video>div:not(#ai-en-panel){background:#fff!important;border:1px solid var(--cx-line)!important;box-shadow:none!important;color:var(--cx-tx)}
+/* header */
+html body #ai-tutor-modal.ai-in-video.ai-in-video>div:not(#ai-en-panel){container-type:inline-size;container-name:aichat}
+@container aichat (max-width:470px){html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-back-btn{width:34px!important;padding:0!important}html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-back-btn>span:not(.ai-ic){display:none}}
+html body #ai-tutor-modal.ai-in-video.ai-in-video>div:not(#ai-en-panel)>div:first-child{height:56px!important;min-height:56px!important;max-height:56px!important;padding:0 10px 0 14px!important;background:#fff!important;border-bottom:1px solid var(--cx-line)!important;gap:8px!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video .ai-hd-l{display:flex;align-items:center;gap:10px;min-width:0;flex:1 1 auto}
+html body #ai-tutor-modal.ai-in-video.ai-in-video .ai-hd-ic{display:inline-flex!important;align-items:center;justify-content:center;width:34px;height:34px;flex:none;border-radius:10px;background:var(--cx-accbg);color:var(--cx-acc)}
+html body #ai-tutor-modal.ai-in-video.ai-in-video .ai-hd-ic svg{width:19px;height:19px;display:block}
+html body #ai-tutor-modal.ai-in-video.ai-in-video .ai-hd-t{min-width:0}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-title{font-size:14.5px!important;font-weight:800!important;color:var(--cx-tx)!important;line-height:1.25!important;max-width:none!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-live-status{font-size:12px!important;color:var(--cx-mut)!important;line-height:1.25!important;margin-top:1px}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-enwin-hbtn,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-settings-btn,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-back-btn{height:34px!important;min-height:34px!important;max-height:34px!important;padding:0 11px!important;border:1px solid var(--cx-line)!important;border-radius:10px!important;background:#fff!important;background-image:none!important;color:var(--cx-tx)!important;font-size:12.5px!important;font-weight:700!important;box-shadow:none!important;gap:6px!important;transition:background .15s,border-color .15s,color .15s!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-enwin-hbtn:hover,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-settings-btn:hover,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-back-btn:hover{background:var(--cx-hov)!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-enwin-hbtn:active,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-settings-btn:active,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-back-btn:active{background:#dde3ea!important;transform:none!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-settings-btn{width:34px!important;padding:0!important;--tw-ring-shadow:0 0 #0000!important;--tw-ring-color:transparent!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-settings-btn #ai-settings-lbl{display:none}
+html body #ai-tutor-modal.ai-in-video.ai-in-video.ai-settings-open #ai-settings-btn{display:none!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-back-btn{color:var(--cx-acc)!important;border-color:var(--cx-acc)!important;background:var(--cx-accbg)!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video .ai-ic{display:inline-flex;align-items:center;justify-content:center;color:var(--cx-mut)}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-back-btn .ai-ic{color:var(--cx-acc)}
+html body #ai-tutor-modal.ai-in-video.ai-in-video .ai-ic svg{width:17px;height:17px;display:block}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-lang-box{height:34px!important;min-height:34px!important;max-height:34px!important;border:1px solid var(--cx-line)!important;border-radius:10px!important;background:var(--cx-soft)!important;padding:2px!important;gap:2px}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-lang-box button{height:100%!important;padding:0 10px!important;border-radius:7px!important;font-size:12.5px!important;font-weight:700!important;background:transparent!important;color:var(--cx-mut)!important;transition:background .15s,color .15s}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-lang-box button.bg-indigo-600{background:#fff!important;color:var(--cx-acc)!important;box-shadow:0 1px 2px rgba(27,31,36,.12)!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-close-btn{width:34px!important;min-width:34px!important;max-width:34px!important;height:34px!important;min-height:34px!important;max-height:34px!important;padding:0!important;border:1px solid transparent!important;border-radius:10px!important;background:transparent!important;color:var(--cx-mut)!important;font-size:0!important;box-shadow:none!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-close-btn:hover{background:var(--cx-hov)!important;color:var(--cx-tx)!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-close-btn .ai-x-ic{display:inline-flex!important;align-items:center;justify-content:center}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-close-btn .ai-x-ic svg{width:19px;height:19px;display:block}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-close-btn .ai-x-txt{display:none!important}
+/* tin nhắn */
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-messages{background:#fff!important;padding:16px 14px!important;gap:12px!important;font-size:14px!important;scroll-behavior:smooth}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-messages>div.bg-white{background:#fff!important;border:1px solid var(--cx-line)!important;color:var(--cx-tx)!important;border-radius:14px 14px 14px 4px!important;margin-right:0!important;max-width:94%!important;padding:11px 14px!important;line-height:1.65!important;box-shadow:0 1px 0 rgba(27,31,36,.04)!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-messages>div.bg-indigo-600{background:var(--cx-acc)!important;color:#fff!important;border-radius:14px 14px 4px 14px!important;margin-left:auto!important;margin-right:0!important;max-width:86%!important;padding:9px 13px!important;line-height:1.55!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-messages>div.text-center{align-self:center;width:fit-content!important;max-width:92%;padding:4px 12px;border-radius:999px;background:var(--cx-soft);border:1px solid var(--cx-line2);color:var(--cx-mut)!important;font-size:12px!important;line-height:1.5}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-messages .ai-body b,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-messages .ai-bub b{font-weight:700;color:#0b2a4a}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-messages .rhm-ei{color:var(--cx-mut)}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-messages>div.bg-indigo-600 .rhm-ei{color:#fff}
+html body #ai-tutor-modal.ai-in-video.ai-in-video .ai-quota-hint{margin-top:8px;padding:9px 11px;border:1px solid #f1d98c;background:#fff8e1;border-radius:10px;color:#6a5100;font-size:12.5px;line-height:1.55}
+html body #ai-tutor-modal.ai-in-video.ai-in-video .ai-quota-hint .rhm-ei{color:#9a6700}
+html body #ai-tutor-modal.ai-in-video.ai-in-video .ai-langbar{display:inline-flex;gap:2px;padding:2px;border:1px solid var(--cx-line)!important;border-radius:10px!important;overflow:hidden;background:var(--cx-soft)}
+html body #ai-tutor-modal.ai-in-video.ai-in-video .ai-langbar button{border:0!important;border-radius:7px!important;padding:4px 10px!important;background:transparent!important;color:var(--cx-mut)!important;font-size:12.5px!important;font-weight:700!important;box-shadow:none!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video .ai-langbar button.bg-indigo-600{background:#fff!important;color:var(--cx-acc)!important;box-shadow:0 1px 2px rgba(27,31,36,.12)!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video .ai-actrow button,html body #ai-tutor-modal.ai-in-video.ai-in-video .ai-ttsbar button{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:5px 11px!important;border:1px solid var(--cx-line)!important;border-radius:9px!important;background:#fff!important;color:var(--cx-tx)!important;box-shadow:none!important;font-size:12.5px!important;font-weight:700!important;transition:background .15s,border-color .15s}
+html body #ai-tutor-modal.ai-in-video.ai-in-video .ai-actrow button:hover,html body #ai-tutor-modal.ai-in-video.ai-in-video .ai-ttsbar button:hover{background:var(--cx-hov)!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video .ai-actrow button .rhm-ei,html body #ai-tutor-modal.ai-in-video.ai-in-video .ai-ttsbar button .rhm-ei{color:var(--cx-mut)}
+/* gợi ý nhanh */
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-quickrow{background:#fff!important;border-top:1px solid var(--cx-line2)!important;padding:10px 14px 2px!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-quick{scrollbar-width:none;gap:8px!important;padding-bottom:2px}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-quick::-webkit-scrollbar{display:none}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-quickrow button{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px!important;border:1px solid var(--cx-line)!important;border-radius:999px!important;background:#fff!important;color:var(--cx-tx)!important;box-shadow:none!important;font-size:12.5px!important;font-weight:600!important;transition:background .15s,border-color .15s,color .15s}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-quickrow button .rhm-ei{color:var(--cx-mut);width:1.15em;height:1.15em;margin:0;transition:color .15s}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-quickrow button:hover{background:var(--cx-soft)!important;border-color:#afb8c1!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-quickrow button:hover .rhm-ei{color:var(--cx-acc)}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-quickrow button:active{background:var(--cx-hov)!important}
+/* ô nhập */
+html body #ai-tutor-modal.ai-in-video.ai-in-video>div:not(#ai-en-panel)>div:last-child{display:flex!important;align-items:flex-end!important;gap:2px!important;margin:10px 12px max(12px,env(safe-area-inset-bottom))!important;padding:5px!important;background:#fff!important;border:1px solid var(--cx-line)!important;border-radius:14px!important;transition:border-color .15s,box-shadow .15s}
+html body #ai-tutor-modal.ai-in-video.ai-in-video>div:not(#ai-en-panel)>div:last-child:focus-within{border-color:var(--cx-acc)!important;box-shadow:0 0 0 3px #0969da22}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-mic-btn,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-img-btn{width:36px!important;height:36px!important;min-width:36px!important;flex:none;border-radius:10px!important;background:transparent!important;border:0!important;color:var(--cx-mut)!important;box-shadow:none!important;font-size:0!important;display:inline-flex!important;align-items:center;justify-content:center;transition:background .15s,color .15s!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-mic-btn:hover,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-img-btn:hover{background:var(--cx-hov)!important;color:var(--cx-tx)!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-mic-btn svg,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-img-btn svg,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-send-btn svg{width:20px;height:20px;display:block}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-mic-btn.bg-red-600{background:#ffebe9!important;color:var(--cx-danger)!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-send-btn{width:36px!important;height:36px!important;min-width:36px!important;flex:none;border-radius:10px!important;background:var(--cx-acc)!important;border:0!important;color:#fff!important;box-shadow:none!important;font-size:0!important;display:inline-flex!important;align-items:center;justify-content:center;transition:background .15s,transform .1s!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-send-btn:hover{background:#0860ca!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-send-btn:active{transform:scale(.94)}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-input{flex:1 1 auto;min-height:36px;padding:8px 8px!important;border:0!important;border-radius:0!important;background:transparent!important;font-size:14px!important;line-height:1.5;box-shadow:none!important;outline:0!important;--tw-ring-shadow:0 0 #0000!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-input:focus{outline:0!important;box-shadow:none!important;border:0!important}
+/* menu cài đặt */
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel{background:var(--cx-soft)!important;border:0!important;border-bottom:1px solid var(--cx-line)!important;padding:12px!important;color:var(--cx-tx)}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel>div,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel #ai-prov-cards>div{background:#fff!important;border:1px solid var(--cx-line)!important;border-radius:12px!important;padding:12px!important;box-shadow:none!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel #ai-prov-cards>div.border-indigo-400{border-color:var(--cx-acc)!important;background:#f5faff!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel .font-bold.text-gray-900,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel .font-bold.text-amber-900{font-size:13px;font-weight:700;color:var(--cx-tx)!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel>p.font-bold{display:flex;align-items:center;gap:6px;margin:14px 2px 6px!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel .text-amber-900,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel .text-amber-800,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel .text-amber-700,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel .text-gray-500,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel .text-gray-400{color:var(--cx-mut)!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel .text-indigo-700,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel .text-indigo-600{color:var(--cx-acc)!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel .text-emerald-700{color:#1a7f37!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel .text-red-600{color:var(--cx-danger)!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel button.rounded-full,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel button[onclick*="Zoom"],html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel button[onclick*="Rate"],html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel button[onclick*="aiSetZoom"]{background:var(--cx-soft)!important;border:1px solid var(--cx-line)!important;border-radius:9px!important;color:var(--cx-tx)!important;font-weight:700!important;box-shadow:none!important;transition:background .15s}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel button.rounded-full:hover{background:var(--cx-hov)!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel button[onclick="aiVoiceTest()"]{display:inline-flex;align-items:center;gap:5px;background:var(--cx-accbg)!important;border-color:#54aeff66!important;color:var(--cx-acc)!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel input[type=range]{accent-color:var(--cx-acc);height:20px}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel input[type=checkbox],html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel input[type=radio]{accent-color:var(--cx-acc)}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel select,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel input[type=text],html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel input[type=password]{border:1px solid var(--cx-line)!important;border-radius:10px!important;background:#fff!important;color:var(--cx-tx)!important;box-shadow:none!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel select:focus,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel input[type=text]:focus,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel input[type=password]:focus{outline:0!important;border-color:var(--cx-acc)!important;box-shadow:0 0 0 3px #0969da22!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel .ai-len-btn,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel [data-bk-st],html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel [data-gl]{background:#fff!important;border:1px solid var(--cx-line)!important;border-radius:10px!important;color:var(--cx-tx)!important;box-shadow:none!important;transition:background .15s,border-color .15s,color .15s}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel .ai-len-btn:hover,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel [data-bk-st]:hover,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel [data-gl]:hover{background:var(--cx-soft)!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel .ai-len-btn.bg-indigo-600,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel [data-bk-st].bg-indigo-600,html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel [data-gl].bg-indigo-600{background:var(--cx-accbg)!important;border-color:var(--cx-acc)!important;color:var(--cx-acc)!important;box-shadow:0 0 0 1px var(--cx-acc) inset!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel .border-t{border-color:var(--cx-line2)!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel button.bg-amber-600{background:var(--cx-acc)!important;color:#fff!important;border-radius:10px!important;font-weight:700!important;box-shadow:none!important;min-height:34px}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel button.bg-amber-600:hover{background:#0860ca!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel a.bg-gradient-to-r{display:flex;align-items:center;justify-content:center;gap:6px;background:var(--cx-acc)!important;background-image:none!important;color:#fff!important;border-radius:10px!important;box-shadow:none!important;font-weight:700!important;text-decoration:none}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel button.bg-emerald-50{display:flex;align-items:center;justify-content:center;gap:6px;background:#fff!important;border:1px solid var(--cx-line)!important;border-radius:10px!important;color:var(--cx-tx)!important;font-weight:700!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel button.bg-emerald-50:hover{background:var(--cx-soft)!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel summary{color:var(--cx-acc)!important}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel .rhm-ei{color:var(--cx-mut)}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel .text-emerald-700 .rhm-ei{color:#1a7f37}
+html body #ai-tutor-modal.ai-in-video.ai-in-video #ai-key-panel a.bg-gradient-to-r .rhm-ei{color:#fff}
+html body #ai-tutor-modal#ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-back-btn{width:34px!important;min-width:34px!important;max-width:34px!important;height:34px!important;min-height:34px!important;max-height:34px!important}
+
+/* khung chat trong video: viền trái như panel reader, giữ bo góc riêng của video */
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video>div:not(#ai-en-panel){border-width:0 0 0 1px!important;box-shadow:none!important}
+/* màn hình thấp (điện thoại xoay ngang): thu gọn chiều cao để còn chỗ cho tin nhắn */
+@media (max-height:480px){
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video>div:not(#ai-en-panel)>div:first-child{height:44px!important;min-height:44px!important;max-height:44px!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-quickrow{padding-top:6px!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video>div:not(#ai-en-panel)>div:last-child{margin:6px 10px max(8px,env(safe-area-inset-bottom))!important}
+html body #ai-tutor-modal#ai-tutor-modal.ai-in-video.ai-in-video #ai-messages{padding:10px 12px!important}
+}
+</style>
+<script id="rhm-active-points">(function(){
+  var KEY="rhm_act10_v1",STEP=600,PTS=50,IDLE=180000;
+  var sec=0,lastAct=Date.now(),ready=false,dirty=0;
+  try{sec=Math.max(0,Math.min(STEP-1,parseInt(localStorage.getItem(KEY),10)||0))}catch(e){}
+  setTimeout(function(){ready=true},6000);
+  ["pointerdown","keydown","wheel","touchstart","scroll","mousemove"].forEach(function(ev){
+    window.addEventListener(ev,function(){lastAct=Date.now()},{passive:true,capture:true});
+  });
+  function save(){try{localStorage.setItem(KEY,String(sec))}catch(e){}dirty=0}
+  function videoPlaying(){
+    try{
+      if(typeof YT==="undefined"||!YT.PlayerState||typeof activeYtPlayers==="undefined")return false;
+      for(var id in activeYtPlayers){
+        var d=activeYtPlayers[id];
+        if(d&&d.player&&typeof d.player.getPlayerState==="function"&&d.player.getPlayerState()===YT.PlayerState.PLAYING)return true;
+      }
+    }catch(e){}
+    return false;
+  }
+  function reading(){
+    if(document.hidden)return false;
+    var v=document.getElementById("book-viewer");
+    return !!v&&!v.classList.contains("hidden")&&Date.now()-lastAct<IDLE;
+  }
+  function toast(){
+    var host=document.fullscreenElement||document.webkitFullscreenElement||document.body;
+    if(!document.getElementById("rhm-pt-style")){
+      var st=document.createElement("style");st.id="rhm-pt-style";
+      st.textContent="#rhm-pt-toast{position:fixed;top:max(16px,env(safe-area-inset-top));left:50%;z-index:2147483600;display:flex;align-items:center;gap:8px;padding:8px 14px 8px 11px;background:#fff;color:#1f2328;border:1px solid #d0d7de;border-radius:999px;box-shadow:0 6px 20px rgba(27,31,36,.12);font:600 13px/1.2 system-ui,-apple-system,'Segoe UI',sans-serif;white-space:nowrap;pointer-events:none;opacity:0;transform:translate(-50%,-10px);transition:opacity .25s ease,transform .25s ease}#rhm-pt-toast.on{opacity:1;transform:translate(-50%,0)}#rhm-pt-toast svg{width:16px;height:16px;flex:none;color:#0969da}#rhm-pt-toast b{color:#0969da;font-weight:800}#rhm-pt-toast span{color:#59636e;font-weight:500}";
+      document.head.appendChild(st);
+    }
+    var t=document.getElementById("rhm-pt-toast");
+    if(t&&t.parentNode)t.parentNode.removeChild(t);
+    t=document.createElement("div");t.id="rhm-pt-toast";
+    t.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><b>+'+PTS+' điểm</b><span>10 phút học tập</span>';
+    host.appendChild(t);
+    void t.offsetWidth;t.classList.add("on");
+    clearTimeout(toast._h);
+    toast._h=setTimeout(function(){t.classList.remove("on");setTimeout(function(){t.parentNode&&t.parentNode.removeChild(t)},300)},3200);
+  }
+  function award(){
+    try{
+      if(typeof SecureStore==="undefined")return false;
+      SecureStore.addPoints(PTS);
+      try{updateCollectionStatsUI()}catch(e){}
+      toast();
+      return true;
+    }catch(e){return false}
+  }
+  setInterval(function(){
+    if(!ready)return;
+    if(!(videoPlaying()||reading()))return;
+    sec++;dirty++;
+    if(sec>=STEP){
+      if(award())sec-=STEP;else sec=STEP-1;
+      save();
+    }else if(dirty>=10)save();
+  },1000);
+  window.addEventListener("pagehide",save);
+  document.addEventListener("visibilitychange",function(){if(document.hidden)save()});
+})();</script>
 </body>
 <style>#note-modal .rd-book,#note-modal .rd-pg{background:#fdf8ec}#note-modal .rd-body.nt-scroll{overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;-webkit-overflow-scrolling:touch}#note-modal .rd-pop.tall{max-height:calc(100% - 96px);overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y}#note-modal .nt-pen{flex:none;width:26px;height:26px;border:0;border-radius:8px;background:transparent;color:#0f766e;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0}#note-modal .nt-pen:hover{background:#ccfbf1}#note-modal .nt-pen svg{width:16px;height:16px}#note-modal .nt-editing{border:2px solid #5eead4;border-radius:12px;padding:10px 12px;background:#fffef8}#note-modal .nt-ed-title{width:100%;font:800 clamp(15px,1.8vw,22px)/1.3 Georgia,serif;color:#115e59;border:0;border-bottom:1.5px dashed #5eead4;background:transparent;outline:none;padding:4px 0;margin-bottom:6px}#note-modal .nt-ed-cat{font-size:13px;color:#0f766e;margin-bottom:6px;display:flex;align-items:center;gap:6px}#note-modal .nt-ed-cin{border:1px solid #99f6e4;border-radius:8px;padding:3px 8px;outline:none;flex:1;min-width:0;background:#fff}#note-modal .nt-ed-body{min-height:120px;white-space:pre-wrap;overflow-wrap:anywhere;outline:none;font-size:calc(clamp(13px,min(1.4vw,2.5vh),22px) * var(--nt-fs, 1));line-height:1.5;color:#1f1d2b;padding:4px 2px}#note-modal .nt-ed-bar{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:8px}#note-modal .nt-ed-btn{border:1px solid #99f6e4;background:#f0fdfa;color:#0f766e;border-radius:999px;padding:5px 14px;font-weight:800;font-size:13px}#note-modal .nt-ed-btn.pri{background:#0f766e;color:#fff;border-color:#0f766e}#note-modal .nt-ed-btn.dan{background:#fee2e2;color:#b91c1c;border-color:#fecaca}#note-modal img.nt-ed-img{display:block;max-width:100%;max-height:240px;object-fit:contain;margin:6px 0;border-radius:8px;border:1px solid #99f6e4;user-select:none}
 </style>
