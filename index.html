@@ -4422,37 +4422,41 @@ document.addEventListener("keydown",function(e){
 /* ===== Bỏ cửa sổ danh sách chương (header + Xem tiếp); vào thẳng trình phát ===== */
 html body #rhm-docs.rhmd-vid .rhmd-dt .rhmd-dh{display:none!important}
 /* ===== Nút điều khiển: nền đen, icon trắng; nút đang bật nền xanh ===== */
-html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>button,
-html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>select,
-html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>div{background:#0b0d10!important;background-image:none!important;border:1px solid #2f353d!important;color:#fff!important;box-shadow:none!important;border-radius:8px!important}
-html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>button:hover,
-html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>div:hover{background:#1a1e24!important;border-color:#454c56!important}
-html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>button *,
-html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>div button,
-html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>div button *{color:#fff!important}
-html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>button .yt-ic svg,
-html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>div .yt-ic svg{stroke:currentColor}
-html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>select,
-html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>div select{color:#fff!important;background:transparent!important}
-html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>select{background:#0b0d10!important}
-html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow .yt-speed-label{color:#d0d7de!important}
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>button,
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>select,
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>div{background:#0b0d10!important;background-image:none!important;border:1px solid #2f353d!important;color:#fff!important;box-shadow:none!important;border-radius:8px!important}
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>button:hover,
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>div:hover{background:#1a1e24!important;border-color:#454c56!important}
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>button *,
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>div button,
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>div button *{color:#fff!important}
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>button .yt-ic svg,
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>div .yt-ic svg{stroke:currentColor}
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>select,
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>div select{color:#fff!important;background:transparent!important}
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>select{background:#0b0d10!important}
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow .yt-speed-label{color:#d0d7de!important}
 html body .custom-yt-controls option,html body .custom-yt-subpanel option{background:#0b0d10!important;color:#fff!important}
-html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>button[id^=play-btn-]{background:#0b0d10!important;border-color:#2f353d!important;color:#fff!important}
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>button[id^=play-btn-]{background:#0b0d10!important;border-color:#2f353d!important;color:#fff!important}
 html body .custom-yt-controls #mute-btn,html body .custom-yt-controls [id^=mute-btn-]{filter:none!important}
-html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>button[class*="bg-blue-600"]:not([id^=play-btn-]),
-html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>button.yt-btn-active:not([id^=play-btn-]),
-html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>button.yt-focus-btn.on,
-html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>div.yt-mm-trk,
-html body html body html body .custom-yt-wrapper.sub-editing .custom-yt-controls .yt-iconrow>button[onclick*="toggleSubPan"],
-html body html body html body .custom-yt-wrapper.yt-fs .custom-yt-controls .yt-iconrow>button[onclick*="toggleYtFullscreen"],
-html body html body html body .custom-yt-wrapper:fullscreen .custom-yt-controls .yt-iconrow>button[onclick*="toggleYtFullscreen"]{background:#2563eb!important;border-color:#60a5fa!important;color:#fff!important}
-html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>button[class*="bg-blue-600"]:not([id^=play-btn-]) *,
-html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>button.yt-btn-active:not([id^=play-btn-]) *,
-html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>button.yt-focus-btn.on *,
-html body html body html body .custom-yt-wrapper .custom-yt-controls .yt-iconrow>div.yt-mm-trk *,
-html body html body html body .custom-yt-wrapper.sub-editing .custom-yt-controls .yt-iconrow>button[onclick*="toggleSubPan"] *,
-html body html body html body .custom-yt-wrapper.yt-fs .custom-yt-controls .yt-iconrow>button[onclick*="toggleYtFullscreen"] *,
-html body html body html body .custom-yt-wrapper:fullscreen .custom-yt-controls .yt-iconrow>button[onclick*="toggleYtFullscreen"] *{color:#fff!important}
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>button[class*="bg-blue-600"]:not([id^=play-btn-]),
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>button.yt-btn-active:not([id^=play-btn-]),
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>button.yt-focus-btn.on,
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>div.yt-mm-trk,
+html body .custom-yt-wrapper.sub-editing .custom-yt-controls .yt-iconrow>button[onclick*="toggleSubPan"],
+html body .custom-yt-wrapper.yt-fs .custom-yt-controls .yt-iconrow>button[onclick*="toggleYtFullscreen"],
+html body .custom-yt-wrapper:fullscreen .custom-yt-controls .yt-iconrow>button[onclick*="toggleYtFullscreen"]{background:#2563eb!important;border-color:#60a5fa!important;color:#fff!important}
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>button[class*="bg-blue-600"]:not([id^=play-btn-]) *,
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>button.yt-btn-active:not([id^=play-btn-]) *,
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>button.yt-focus-btn.on *,
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>div.yt-mm-trk *,
+html body .custom-yt-wrapper.sub-editing .custom-yt-controls .yt-iconrow>button[onclick*="toggleSubPan"] *,
+html body .custom-yt-wrapper.yt-fs .custom-yt-controls .yt-iconrow>button[onclick*="toggleYtFullscreen"] *,
+html body .custom-yt-wrapper:fullscreen .custom-yt-controls .yt-iconrow>button[onclick*="toggleYtFullscreen"] *{color:#fff!important}
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>.yt-chapnav>button,
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>.yt-volbox>button{background:transparent!important;border:0!important;color:#fff!important;box-shadow:none!important}
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>.yt-chapnav>button *,
+html body .custom-yt-wrapper.custom-yt-wrapper .custom-yt-controls .yt-iconrow>.yt-volbox>button *{color:#fff!important}
 </style>
 <style id="rhm-patch-player-back-btn">
 /* Hiện lại nút quay lại góc trái trình phát */
