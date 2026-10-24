@@ -324,7 +324,7 @@
                     <svg class="mi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l2.5 5.1 5.6.8-4 4 1 5.6L12 17l-5 2.5 1-5.6-4-4 5.6-.8z"/></svg><span>Đặt Ngôi Sao Hy Vọng</span>
                     <span id="hope-star-count-badge" class="bg-amber-200 text-amber-900 px-2 py-0.2 rounded-full text-xs font-black">0</span>
                 </button>
-<div class="qz-tools"><div class="qz-aa"><button id="qz-aa-btn" type="button" title="Cỡ chữ" onclick="qzAaToggle(event)">Aa</button><div id="qz-aa-pop" class="hidden"><input id="qz-fs" type="range" min="80" max="200" step="5" value="100" oninput="qzSetFs(this.value)" style="touch-action:none"><span id="qz-fs-v">100%</span></div></div><button id="bookmark-quiz-btn" type="button" title="Lưu câu" onclick="toggleBookmarkCurrent()"><svg class="mi" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5h10v15l-5-3.5-5 3.5z"/></svg><span id="bookmark-icon"></span><span id="bookmark-text"></span></button><button id="block-quiz-btn" type="button" title="Chặn câu" onclick="toggleBlockCurrent()"><svg class="mi" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M6 6l12 12"/></svg><span id="block-icon"></span><span id="block-text"></span></button><button id="report-error-btn" type="button" title="Cập nhật TLTK / Góp ý / Báo lỗi" onclick="openReportErrorModal()"><svg class="mi" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v5M12 16h.01"/></svg></button></div>
+<div class="qz-tools"><div class="qz-aa"><button id="qz-aa-btn" type="button" title="Cỡ chữ" onclick="qzAaToggle(event)">Aa</button><div id="qz-aa-pop" class="hidden"><input id="qz-fs" type="range" min="80" max="200" step="5" value="100" oninput="qzSetFs(this.value)" style="touch-action:none"><span id="qz-fs-v">100%</span></div></div><button id="bookmark-quiz-btn" type="button" title="Lưu câu" onclick="toggleBookmarkCurrent()"><svg class="mi" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5h10v15l-5-3.5-5 3.5z"/></svg><span id="bookmark-icon"></span><span id="bookmark-text"></span></button><button id="block-quiz-btn" type="button" title="Chặn câu" onclick="confirmBlockCurrent()"><svg class="mi" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M6 6l12 12"/></svg><span id="block-icon"></span><span id="block-text"></span></button><button id="report-error-btn" type="button" title="Cập nhật TLTK / Góp ý / Báo lỗi" onclick="openReportErrorModal()"><svg class="mi" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v5M12 16h.01"/></svg></button></div>
                 
                 <div id="exam-q-timer-box" class="qt-timer ml-auto hidden text-rose-600 font-bold items-center bg-rose-50 py-1.5 px-3 rounded-full border border-rose-200 text-sm whitespace-nowrap" title="Thời gian suy nghĩ khuyến nghị cho câu này (72 giây)">
                     <svg class="mi" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="7.5"/><path d="M12 9.5V13l2.5 1.5"/><path d="M9.5 3.5h5"/></svg><span id="q-timer" class="ml-1.5 w-10 text-center">72s</span>
@@ -333,8 +333,8 @@
                     <svg class="mi" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="7.5"/><path d="M12 9.5V13l2.5 1.5"/><path d="M9.5 3.5h5"/></svg><span id="timer" class="ml-1.5 w-16 text-center">00:00</span>
                 </div>
                 
-            <button onclick="openQuestionNavigatorModal()" class="qt-nav text-blue-700 bg-blue-50 hover:bg-blue-100 py-1.5 px-3 rounded-full font-bold text-sm transition-colors border border-blue-200 flex items-center shadow-sm whitespace-nowrap">
-                    <svg class="mi" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6.5h10M9 12h10M9 17.5h10"/><path d="M5 6.5h.01M5 12h.01M5 17.5h.01"/></svg> Danh sách câu
+            <button onclick="openQuestionNavigatorModal()" title="Danh sách câu" aria-label="Danh sách câu" class="qt-nav text-blue-700 bg-blue-50 hover:bg-blue-100 py-1.5 px-3 rounded-full font-bold text-sm transition-colors border border-blue-200 flex items-center shadow-sm whitespace-nowrap">
+                    <svg class="mi" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6.5h10M9 12h10M9 17.5h10"/><path d="M5 6.5h.01M5 12h.01M5 17.5h.01"/></svg>
                 </button>
             </div>
             <div class="qz-prog w-full bg-gray-200 rounded-full h-2 mb-4">
@@ -4650,7 +4650,7 @@ body.rhm-quiz-on .rhm-tb-btn:hover,body.rhm-quiz-on .rhmq-btn:hover{background:#
 .rhmq-r>.qt-count,.rhmq-r>.qt-timer{height:40px!important;min-height:40px!important;margin:0!important;padding:0 12px!important;box-sizing:border-box;align-items:center;justify-content:center;gap:6px;border-radius:8px!important;border:1px solid #d0d7de!important;background:#fff!important;color:#59636e!important;font-size:13px!important;font-weight:700!important;white-space:nowrap}
 .rhmq-r>.qt-timer:not(.hidden){display:inline-flex!important}
 .rhmq-r>.qt-timer.hidden{display:none!important}
-.rhmq-r>.qt-count{display:inline-flex!important;background:#ddf4ff!important;border-color:#b6d4fb!important;color:#0550ae!important}
+.rhmq-r>.qt-count{display:inline-flex!important}
 .rhmq-r>#exam-q-timer-box:not(.hidden):not(.bg-red-100){background:#ddf4ff!important;border-color:#b6d4fb!important;color:#0550ae!important}
 .rhmq-r>#exam-q-timer-box.bg-red-100{background:#ffebe9!important;border-color:#ff8182!important;color:#cf222e!important}
 .rhmq-r .mi{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
@@ -4675,4 +4675,67 @@ body.rhm-quiz-on .rhm-tb-btn:hover,body.rhm-quiz-on .rhmq-btn:hover{background:#
 
 <script>window.qzAaToggle=function(e){e&&e.stopPropagation();var p=document.getElementById("qz-aa-pop");p&&p.classList.toggle("hidden")};document.addEventListener("click",function(e){var p=document.getElementById("qz-aa-pop");p&&!p.classList.contains("hidden")&&!e.target.closest(".qz-aa")&&p.classList.add("hidden")});</script>
 <script>window.rhmQuizStart=function(b){var x=b&&b.ref;if(!x)return;try{var ss=getActiveSession(x.id),res=!!(ss&&ss.questions&&ss.questions.length&&ss.currentIndex>0&&ss.currentIndex<ss.questions.length);if(/^exam:/.test(b.path||"")){examSelectedId=x.id;startExam(res)}else startSavedQuiz(x.id,!0,res)}catch(e){try{showToast("Không mở được bộ đề này")}catch{}}};</script>
+
+<style id="rhm-quiz-topbar-v2">
+/* ===== v2: hàng nút dưới topbar canh phải, đổi thứ tự, Danh sách câu chỉ còn icon ===== */
+body #quiz-screen .qt-bar{justify-content:flex-end!important}
+body #quiz-screen .qt-bar #hope-star-btn{order:1}
+body #quiz-screen .qt-bar #bookmark-quiz-btn{order:2}
+body #quiz-screen .qt-bar #block-quiz-btn{order:3}
+body #quiz-screen .qt-bar #report-error-btn{order:4}
+body #quiz-screen .qt-bar .qz-aa{order:5}
+body #quiz-screen .qt-bar>.qt-nav{order:6;width:var(--btn)!important;min-width:var(--btn)!important;padding:0!important;justify-content:center;gap:0!important;font-size:0!important}
+body #quiz-screen .qt-bar>.qt-nav .mi{width:20px;height:20px;margin:0}
+
+/* ===== v2: tối ưu mobile màn dọc ===== */
+@media(max-width:640px) and (orientation:portrait){
+  /* không hiện tên bộ đề */
+  .rhmq-c,#current-quiz-title{display:none!important}
+  /* topbar: dàn đều các nút trên 1 hàng */
+  body.rhm-quiz-on .rhm-tb{gap:4px!important}
+  body.rhm-quiz-on .rhm-tb-left,body.rhm-quiz-on .rhm-tb-right,body.rhm-quiz-on .rhmq-l,body.rhm-quiz-on .rhmq-r{display:contents!important}
+  body.rhm-quiz-on #rhmTbBack,body.rhm-quiz-on #rhmTbMenu,body.rhm-quiz-on #rhmTbFs,body.rhm-quiz-on .rhmq-l .rhmq-btn,
+  body.rhm-quiz-on .rhmq-r>.qt-count,body.rhm-quiz-on .rhmq-r>.qt-timer{flex:1 1 auto!important;width:auto!important;min-width:0!important;max-width:none!important;margin:0!important}
+  body.rhm-quiz-on .rhmq-r>.qt-count,body.rhm-quiz-on .rhmq-r>.qt-timer{padding:0 4px!important;font-size:12px!important;gap:3px!important}
+  body.rhm-quiz-on .rhmq-r .mi{width:14px;height:14px;flex:0 0 auto}
+  body.rhm-quiz-on .rhmq-r #timer,body.rhm-quiz-on .rhmq-r #q-timer{width:auto!important;margin-left:0!important;font-variant-numeric:tabular-nums}
+  /* hàng nút dưới topbar: dàn đều + ghim dưới topbar khi cuộn */
+  body.rhm-quiz-on #quiz-screen .qt-bar{position:sticky;top:var(--rhm-tbh,60px);z-index:35;background:#fff;flex-wrap:nowrap!important;justify-content:space-between!important;gap:6px!important;margin:-6px -12px 8px!important;padding:6px 12px!important;border-bottom:1px solid #eaeef2}
+  body.rhm-quiz-on #quiz-screen .qt-bar #bookmark-quiz-btn,body.rhm-quiz-on #quiz-screen .qt-bar #block-quiz-btn,body.rhm-quiz-on #quiz-screen .qt-bar #report-error-btn,
+  body.rhm-quiz-on #quiz-screen .qt-bar>.qt-nav,body.rhm-quiz-on #quiz-screen .qt-bar .qz-aa{flex:1 1 0!important;width:auto!important;min-width:0!important}
+  body.rhm-quiz-on #quiz-screen .qt-bar #hope-star-btn{flex:1.3 1 0!important;width:auto!important;min-width:0!important;padding:0 4px!important;gap:4px!important;justify-content:center}
+  body.rhm-quiz-on #quiz-screen .qt-bar #hope-star-btn #hope-star-count-badge{padding:0 5px!important;font-size:11px!important}
+  body.rhm-quiz-on #quiz-screen .qt-bar .qz-aa{display:flex}
+  body.rhm-quiz-on #quiz-screen .qt-bar .qz-aa>button{width:100%!important;min-width:0!important}
+  body.rhm-quiz-on #quiz-screen #qz-aa-pop{left:auto!important;right:0!important;transform:none!important}
+}
+</style>
+<script id="rhm-quiz-topbar-v2-js">
+(function(){
+  /* hộp thoại xác nhận khi chặn câu (bỏ chặn thì không cần hỏi) */
+  window.confirmBlockCurrent=function(){
+    try{
+      var q=questions[currentIndex];
+      if(!q)return;
+      var key=getCleanQuestionText(q.question);
+      var isBlocked=getBlockedQuestions().some(function(it){return getCleanQuestionText(it.question)===key});
+      if(isBlocked){toggleBlockCurrent();return}
+      var msg="Chặn câu hỏi này? Câu sẽ bị loại khỏi bài làm hiện tại và các bài sau (có thể bỏ chặn trong mục Câu hỏi đã chặn).";
+      if(typeof window.appConfirm==="function")window.appConfirm(msg,function(ok){if(ok)toggleBlockCurrent()});
+      else if(confirm(msg))toggleBlockCurrent();
+    }catch(e){try{toggleBlockCurrent()}catch(x){}}
+  };
+  /* đo chiều cao topbar để ghim hàng nút ngay dưới nó */
+  function setH(){
+    var w=document.querySelector(".rhm-tbwrap");if(!w)return;
+    var h=Math.round(w.getBoundingClientRect().height);
+    if(h>0)document.documentElement.style.setProperty("--rhm-tbh",h+"px");
+  }
+  window.addEventListener("resize",setH);
+  window.addEventListener("orientationchange",setH);
+  document.addEventListener("DOMContentLoaded",setH);
+  setTimeout(setH,300);
+  try{new MutationObserver(setH).observe(document.body,{attributes:true,attributeFilter:["class"]})}catch(e){}
+})();
+</script>
 </html>
