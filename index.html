@@ -93,6 +93,7 @@
         <button type="button" class="rhm-tb-btn rhmr-tbbtn" id="rhmrSbBtn" style="display:none" aria-label="Mục lục" aria-expanded="false" title="Mục lục"><svg class="ic-closed" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9 4.5v15" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5.2 8.5h2M5.2 11h2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg class="ic-open" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9 4.5v15" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="4.4" y="5.4" width="3.7" height="13.2" rx="1.4" fill="currentColor" opacity=".35"/></svg></button>
         <span class="rhm-tb-avatar" id="rhmTbAvatar" role="button" tabindex="0" title="Thông tin người dùng"></span>
         <span class="rhm-tb-name" id="rhmTbName">Xin chào, bạn</span>
+        <button type="button" id="rhmTbLogin" title="Đăng nhập Google để đồng bộ tiến độ" aria-label="Đăng nhập"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4.5h4.5a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H14"/><path d="M10 8l4 4-4 4"/><path d="M14 12H4"/></svg><span>Đăng nhập</span></button>
         <span class="rhm-tb-name" id="rhmTbDocs" style="display:none"><span id="rhmdTbLbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10.5 5 8 4.5 4.5 4.5v13c3.5 0 6 .5 7.5 2 1.5-1.5 4-2 7.5-2v-13c-3.5 0-6 .5-7.5 2z"/><path d="M12 6.5v13"/></svg>Tài Liệu</span> <span id="rhmdCount" class="rhmd-count">0</span></span>
         <span class="rhm-tb-name" id="rhmTbBook" style="display:none;max-width:calc(100vw - 250px)"></span>
       </div>
@@ -2774,10 +2775,18 @@ Mục cuối cùng đã lập là "`+lastH.en+'" [cấp '+lastH.lvl+']. Nếu fi
   function nameNow(){return custom()||(email&&email!=="Tài khoản Google"?mailName(email):"")}
   function render(){
     var el=document.getElementById("rhmTbName");if(!el)return;
-    var n=nameNow(),t=n?"Xin chào, "+n:"Xin chào, bạn";
-    if(el.textContent!==t)el.textContent=t;
+    var n=nameNow(),p=part(),t=p+", "+(n||"bạn");
+    /* chỉ ghi đè khi đang là câu chào (tránh đè tiêu đề do chỗ khác đặt) */
+    if(!el.textContent||GREET_RE.test(el.textContent)){if(el.textContent!==t)el.textContent=t}
     el.title=t;
+    try{document.body.classList.toggle("rhm-logged-out",!email)}catch(e){}
   }
+  var GREET_RE=/^(Xin chào|Chào buổi|Khuya rồi)/;
+  function partOf(h){return h>=5&&h<11?"Chào buổi sáng":h>=11&&h<13?"Chào buổi trưa":h>=13&&h<18?"Chào buổi chiều":h>=18&&h<22?"Chào buổi tối":"Khuya rồi"}
+  function part(){return partOf(new Date().getHours())}
+  window.rhmGreetPart=partOf;
+  setInterval(function(){render()},60000);
+  document.addEventListener("visibilitychange",function(){document.hidden||render()});
   window.rhmGreetSync=function(e){e=e||"";if(e!==email){email=e;put(KE,e)}render()};
   window.rhmGetDisplayName=function(){return nameNow()};
   window.rhmSetDisplayName=function(n){
@@ -2881,10 +2890,11 @@ function validAvatar(){
   if(u.length&&u.indexOf(P.avatar)<0)return null;
   return P.avatar
 }
+var BLANK_AV="data:image/svg+xml;utf8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><rect width="40" height="40" fill="#f6f8fa"/><g fill="none" stroke="#8c959f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="16" r="5.4"/><path d="M9.5 33c1.3-5.9 5.5-9 10.5-9s9.2 3.1 10.5 9"/></g></svg>');
 function paint(el,id,cls){
   if(!el)return;
   if(id!=null){el.style.backgroundImage='url("'+emblemUrl(id)+'")';el.style.backgroundSize="78%";el.classList&&cls&&el.classList.add("emb")}
-  else{var u=window.RHM_LOGO_URL;el.style.backgroundImage=u?'url("'+String(u).replace(/"/g,"%22")+'")':"";el.style.backgroundSize="cover";el.classList&&cls&&el.classList.remove("emb")}
+  else{el.style.backgroundImage='url("'+BLANK_AV+'")';el.style.backgroundSize="cover";el.classList&&cls&&el.classList.remove("emb")}
 }
 function renderAvatar(){paint(av,validAvatar(),!1)}
 if(av){
@@ -4836,4 +4846,79 @@ body.rhm-quiz-on .rhmq-r>.qt-count:hover,body.rhm-quiz-on .rhmq-r>.qt-timer:not(
 body #quiz-screen .qt-bar>#hope-star-btn:not(.hope-star-active),body #quiz-screen .qt-bar>.qt-nav{background:#fff!important}
 body #quiz-screen .qt-bar>#hope-star-btn:not(.hope-star-active):hover,body #quiz-screen .qt-bar>.qt-nav:hover{background:var(--acs,#ddf4ff)!important}
 </style>
+
+<style id="rhm-topbar-v5">
+/* chữ chào / Trắc nghiệm / Tài liệu / Bài giảng to hơn nhưng vẫn vừa topbar */
+#rhmTbName,#rhmTbDocs{font-size:20px!important;font-weight:700}
+#rhmdTbLbl svg{width:22px;height:22px}
+#rhmdCount{height:24px;min-width:24px;padding:0 8px;margin-left:8px;font-size:14px}
+@media(max-width:639px){#rhmTbName{max-width:calc(100vw - 232px)}#rhmTbName,#rhmTbDocs{font-size:18px!important}#rhmdTbLbl svg{width:20px;height:20px}#rhmdCount{height:22px;min-width:22px;font-size:13px;margin-left:6px}}
+/* chưa đăng nhập: nút Đăng nhập thay cho avatar + tên */
+#rhmTbLogin{display:none;align-items:center;justify-content:center;gap:8px;flex:0 0 auto;height:40px;padding:0 14px;box-sizing:border-box;border:1px solid #d0d7de;border-radius:8px;background:transparent;color:#1f2328;font:700 15px/1 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;white-space:nowrap;cursor:pointer;transition:background .15s,border-color .15s}
+#rhmTbLogin svg{width:18px;height:18px;flex:0 0 auto;color:#59636e}
+body.rhm-logged-out #rhmTbAvatar,body.rhm-logged-out #rhmTbName{display:none!important}
+body.rhm-logged-out #rhmTbLogin{display:inline-flex}
+body.rhm-quiz-on #rhmTbLogin,body.rhmd-on #rhmTbLogin,body.rhmr-on #rhmTbLogin{display:none!important}
+@media(max-width:639px){#rhmTbLogin{height:36px;padding:0 10px;font-size:14px;gap:6px}.rhm-tb.search-open #rhmTbLogin{display:none}}
+/* hover xanh cho nút topbar (nền xanh nhạt + viền xanh) ở mọi màn hình */
+.rhm-tb-btn:hover,#rhmTbLogin:hover,.rhm-tb-search:not(.open):hover{background:#ddf4ff!important;border-color:#0969da!important}
+.rhm-tb-btn:active,#rhmTbLogin:active{background:#c8e9ff!important}
+</style>
+<script id="rhm-topbar-v5-js">
+(function(){
+  var lg=document.getElementById("rhmTbLogin");
+  if(lg)lg.addEventListener("click",function(e){
+    e.preventDefault();
+    try{typeof window.rhmSyncLoginToggle==="function"?window.rhmSyncLoginToggle():(typeof rhmSyncOpen==="function"&&rhmSyncOpen(e))}catch(x){}
+  });
+
+  /* ===== hover xanh cho mọi nút "trung tính" trong app (nền trong suốt/trắng/xám nhạt, chữ tối) =====
+     Nút có màu riêng (xanh đậm, gradient, chữ trắng, nền pastel...) giữ nguyên để không mất độ tương phản. */
+  if(!window.matchMedia||!matchMedia("(hover:hover)").matches)return;
+  var HV_BG="#ddf4ff",HV_BORDER="#0969da",cur=null,saved=null;
+  function rgba(c){var m=/rgba?\(([^)]+)\)/.exec(c||"");if(!m)return null;var p=m[1].split(/[ ,\/]+/).filter(Boolean).map(parseFloat);return{r:p[0],g:p[1],b:p[2],a:p.length>3?p[3]:1}}
+  function hsl(c){var r=c.r/255,g=c.g/255,b=c.b/255,mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2,d=mx-mn,s=d===0?0:d/(1-Math.abs(2*l-1));return{s:s,l:l}}
+  function neutral(el){
+    var cs=getComputedStyle(el);
+    if(cs.backgroundImage&&cs.backgroundImage!=="none")return false;
+    var bg=rgba(cs.backgroundColor),fg=rgba(cs.color);
+    if(!bg||!fg)return false;
+    if(hsl(fg).l>0.6&&fg.a>0.3)return false;                 /* chữ sáng => nền tối/đậm */
+    if(bg.a<0.05)return true;                                   /* trong suốt */
+    var h=hsl(bg);
+    return h.l>0.86&&(h.s<0.2||bg.a<0.3);                       /* trắng / xám rất nhạt */
+  }
+  function clear(){
+    if(!cur)return;
+    try{["background-color","border-color"].forEach(function(p){cur.style.removeProperty(p);if(saved&&saved[p])cur.style.setProperty(p,saved[p].v,saved[p].pr)})}catch(e){}
+    cur=null;saved=null;
+  }
+  function target(t){
+    var el=t&&t.closest&&t.closest('button,[role="button"],summary,.rhm-tb-sbtn');
+    if(!el||el.disabled||el.hasAttribute("data-no-hv")||el.closest("[data-no-hv]"))return null;
+    if(el.matches(".option-btn,.option-btn *")||el.closest(".option-btn"))return null;
+    if(el.id==="rhmTbAvatar")return null;
+    return el;
+  }
+  document.addEventListener("mouseover",function(e){
+    var el=target(e.target);
+    if(el===cur)return;
+    clear();
+    if(!el||!neutral(el))return;
+    saved={};
+    ["background-color","border-color"].forEach(function(p){var v=el.style.getPropertyValue(p);saved[p]=v?{v:v,pr:el.style.getPropertyPriority(p)}:null});
+    el.style.setProperty("background-color",HV_BG,"important");
+    var cs=getComputedStyle(el);
+    if(parseFloat(cs.borderTopWidth)>0&&cs.borderTopStyle!=="none")el.style.setProperty("border-color",HV_BORDER,"important");
+    cur=el;
+  },true);
+  document.addEventListener("mouseout",function(e){
+    if(!cur)return;
+    var to=e.relatedTarget;
+    if(!to||!cur.contains(to))clear();
+  },true);
+  window.addEventListener("blur",clear);
+  document.addEventListener("scroll",function(){cur&&!cur.matches(":hover")&&clear()},true);
+})();
+</script>
 </html>
