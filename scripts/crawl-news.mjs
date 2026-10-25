@@ -8,9 +8,9 @@ import { pathToFileURL } from 'node:url';
 
 const OUT = 'TinTuc/news.json';
 const ART_DIR = 'TinTuc/a';
-const PER_RUN = 10;       // quoc te: tong so tin moi moi lan
-const NEWS_N = 6;         //   - trong do tin tu bao/website
-const RESEARCH_N = 4;     //   - va bai nghien cuu (PubMed + tap chi)
+const PER_RUN = 20;       // quoc te: tong so tin moi moi lan
+const NEWS_N = 12;        //   - trong do tin tu bao/website
+const RESEARCH_N = 8;     //   - va bai nghien cuu (PubMed + tap chi)
 const VN_N = 5;           // trong nuoc: toi da 5 tin moi moi lan
 const KEEP = 1500;        // so tin giu lai trong news.json
 const ART_KEEP = 400;     // chi giu noi dung bai cua 400 tin moi nhat
@@ -46,6 +46,8 @@ const GUIDE_SOURCES = [
   { name: 'Dental Update',          region: 'intl', kind: 'news', group: G.NEWS, site: 'https://www.dental-update.co.uk/' },
   { name: 'DentistryIQ',            region: 'intl', kind: 'news', group: G.NEWS, site: 'https://www.dentistryiq.com/' },
   { name: 'Dentaltown',             region: 'intl', kind: 'news', group: G.NEWS, site: 'https://www.dentaltown.com/' },
+  { name: 'Dentistry Today',        region: 'intl', kind: 'news', group: G.NEWS, feed: 'https://www.dentistrytoday.com/feed/', site: 'https://www.dentistrytoday.com/' },
+  { name: 'Dentistry.co.uk',        region: 'intl', kind: 'news', group: G.NEWS, feed: 'https://dentistry.co.uk/feed/', site: 'https://dentistry.co.uk/' },
   // ===== QUOC TE - muc 2: hiep hoi / to chuc =====
   { name: 'ADA News',               region: 'intl', kind: 'news', group: G.ASSOC, feed: 'https://adanews.ada.org/feed/', site: 'https://adanews.ada.org/' },
   { name: 'FDI World Dental Federation', region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.fdiworlddental.org/news' },
@@ -62,6 +64,11 @@ const GUIDE_SOURCES = [
   { name: 'EFP',                    region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.efp.org/news/' },
   { name: 'AAP (Periodontology)',   region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.perio.org/' },
   { name: 'AAE',                    region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.aae.org/' },
+  { name: 'APDF / APRO',           region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://apdfapro.org/' },
+  { name: 'ICP (Prosthodontists)',  region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://icp-org.com/' },
+  { name: 'EOS (Orthodontic Society)', region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.eoseurope.org/' },
+  // NIDCR (NIH): vien nghien cuu nha khoa nha nuoc My -> nhom Co quan quan ly
+  { name: 'NIDCR (NIH)',            region: 'intl', kind: 'news', group: G.GOV, feed: 'https://www.nidcr.nih.gov/news-events/news/rss.xml', site: 'https://www.nidcr.nih.gov/news-events/nidcr-news' },
   // ===== QUOC TE - muc 1: co so du lieu (PubMed lay rieng o duoi) =====
   { name: 'Cochrane Oral Health',   region: 'intl', kind: 'journal', group: G.DB, site: 'https://oralhealth.cochrane.org/' },
   // ===== QUOC TE - muc 3: tap chi khoa hoc (RSS muc luc moi nhat) =====
@@ -73,11 +80,32 @@ const GUIDE_SOURCES = [
   { name: 'J Endodontics (JOE)',    region: 'intl', kind: 'journal', group: G.JOURNAL, feed: 'https://www.jendodon.com/current.rss' },
   { name: 'J Prosthet Dent (JPD)',  region: 'intl', kind: 'journal', group: G.JOURNAL, feed: 'https://www.thejpd.org/current.rss' },
   { name: 'Int J Oral Maxillofac Surg', region: 'intl', kind: 'journal', group: G.JOURNAL, feed: 'https://www.ijoms.com/current.rss' },
+  { name: 'British Dental Journal', region: 'intl', kind: 'journal', group: G.JOURNAL, feed: 'https://www.nature.com/bdj.rss', site: 'https://www.nature.com/bdj/' },
+  // --- ScienceDirect (Elsevier): RSS theo tung tap chi, URL = rss.sciencedirect.com/publication/science/<ISSN khong gach> ---
+  { name: 'J Dent (ScienceDirect)',        region: 'intl', kind: 'journal', group: G.JOURNAL, feed: 'https://rss.sciencedirect.com/publication/science/03005712' },
+  { name: 'Dental Materials (ScienceDirect)', region: 'intl', kind: 'journal', group: G.JOURNAL, feed: 'https://rss.sciencedirect.com/publication/science/01095641' },
+  { name: 'Arch Oral Biol (ScienceDirect)', region: 'intl', kind: 'journal', group: G.JOURNAL, feed: 'https://rss.sciencedirect.com/publication/science/00039969' },
+  { name: 'J Oral Maxillofac Surg (ScienceDirect)', region: 'intl', kind: 'journal', group: G.JOURNAL, feed: 'https://rss.sciencedirect.com/publication/science/02782391' },
+  // --- Wiley Online Library: feed theo eISSN (bo dau gach) ---
+  { name: 'J Periodontol (Wiley)',         region: 'intl', kind: 'journal', group: G.JOURNAL, feed: 'https://onlinelibrary.wiley.com/feed/19433670/most-recent' },
+  { name: 'Int Endod J (Wiley)',           region: 'intl', kind: 'journal', group: G.JOURNAL, feed: 'https://onlinelibrary.wiley.com/feed/13652591/most-recent' },
+  { name: 'Periodontology 2000 (Wiley)',   region: 'intl', kind: 'journal', group: G.JOURNAL, feed: 'https://onlinelibrary.wiley.com/feed/16000757/most-recent' },
+  { name: 'Clin Implant Dent Relat Res (Wiley)', region: 'intl', kind: 'journal', group: G.JOURNAL, feed: 'https://onlinelibrary.wiley.com/feed/17088208/most-recent' },
+  { name: 'J Oral Rehabil (Wiley)',        region: 'intl', kind: 'journal', group: G.JOURNAL, feed: 'https://onlinelibrary.wiley.com/feed/13652842/most-recent' },
+  { name: 'Community Dent Oral Epidemiol (Wiley)', region: 'intl', kind: 'journal', group: G.JOURNAL, feed: 'https://onlinelibrary.wiley.com/feed/16000528/most-recent' },
+  // --- SpringerLink: RSS ket qua tim kiem moi nhat ---
+  { name: 'SpringerLink (dentistry)',      region: 'intl', kind: 'journal', group: G.DB, feed: 'https://link.springer.com/search.rss?query=dentistry&sortOrder=newestFirst' },
+  { name: 'SpringerLink (dental implant)', region: 'intl', kind: 'journal', group: G.DB, feed: 'https://link.springer.com/search.rss?query=%22dental+implant%22&sortOrder=newestFirst' },
+  { name: 'SpringerLink (orthodontics)',   region: 'intl', kind: 'journal', group: G.DB, feed: 'https://link.springer.com/search.rss?query=orthodontics&sortOrder=newestFirst' },
+  // ResearchGate: tam an (GitHub Actions bi chan 403). Bo comment neu co proxy.
+  // { name: 'ResearchGate',                  region: 'intl', kind: 'journal', group: G.DB, site: 'https://www.researchgate.net/topic/Dentistry', filter: EN_CMF },
+  { name: 'Int J Oral Maxillofac Implants (IJOMI)', region: 'intl', kind: 'journal', group: G.JOURNAL, site: 'https://www.quintessence-publishing.com/usa/en/journal/the-international-journal-of-oral-maxillofacial-implants' },
   // ===== QUOC TE - muc 5: trien lam / dai hoi =====
   { name: 'IDS Cologne',            region: 'intl', kind: 'news', group: G.EVENT, site: 'https://www.english.ids-cologne.de/' },
   { name: 'GNYDM',                  region: 'intl', kind: 'news', group: G.EVENT, site: 'https://www.gnydm.com/' },
   { name: 'AEEDC Dubai',            region: 'intl', kind: 'news', group: G.EVENT, site: 'https://www.aeedc.com/' },
   { name: 'EuroPerio',              region: 'intl', kind: 'news', group: G.EVENT, site: 'https://www.efp.org/europerio/' },
+  { name: 'Chicago Midwinter Meeting', region: 'intl', kind: 'news', group: G.EVENT, site: 'https://www.cds.org/' },
 
   // ===== VIET NAM - muc 1: co quan quan ly nha nuoc =====
   { name: 'Bộ Y tế',                region: 'vn', kind: 'news', group: G.GOV, site: 'https://moh.gov.vn/', filter: VN_DENTAL },
@@ -92,11 +120,22 @@ const GUIDE_SOURCES = [
   // ===== VIET NAM - muc 3: hoi chuyen khoa =====
   { name: 'Hội RHM Việt Nam (VOSA)', region: 'vn', kind: 'news', group: G.VASSOC, site: 'https://vosa.org.vn/' },
   { name: 'Hội RHM TP.HCM (HOSA)',  region: 'vn', kind: 'news', group: G.VASSOC, site: 'https://hoiranghammat.vn/' },
+  { name: 'HSDI (Cấy ghép Nha khoa TP.HCM)', region: 'vn', kind: 'news', group: G.VASSOC, site: 'https://implanthcm.com/' },
+  // ===== VIET NAM - hoi nghi / trien lam (VIDEC do VOSA to chuc) =====
+  { name: 'VIDEC',                  region: 'vn', kind: 'news', group: G.EVENT, site: 'https://videc.vn/' },
+  { name: 'HIDEC',                  region: 'vn', kind: 'news', group: G.EVENT, site: 'https://hidec.vn/' },
+  { name: 'HAIDEC',                 region: 'vn', kind: 'news', group: G.EVENT, site: 'https://haidec.vn/' },
   // ===== VIET NAM - muc 4: truong dai hoc y duoc =====
   { name: 'Viện Đào tạo RHM - ĐH Y Hà Nội', region: 'vn', kind: 'news', group: G.UNI, site: 'https://sod.hmu.edu.vn/' },
   { name: 'ĐH Y Dược Huế',          region: 'vn', kind: 'news', group: G.UNI, site: 'https://huemed-univ.edu.vn/', filter: VN_DENTAL },
   { name: 'ĐH Y Dược Cần Thơ',      region: 'vn', kind: 'news', group: G.UNI, site: 'https://ctump.edu.vn/', filter: VN_DENTAL },
   { name: 'ĐH Y khoa Phạm Ngọc Thạch', region: 'vn', kind: 'news', group: G.UNI, site: 'https://pnt.edu.vn/', filter: VN_DENTAL },
+  { name: 'Khoa RHM - ĐH Y Dược TP.HCM', region: 'vn', kind: 'news', group: G.UNI, site: 'https://dent.ump.edu.vn/', filter: VN_DENTAL },
+  { name: 'ĐH Y Dược Hải Phòng',    region: 'vn', kind: 'news', group: G.UNI, site: 'https://hpmu.edu.vn/', filter: VN_DENTAL },
+  { name: 'ĐH Y Dược Thái Bình',    region: 'vn', kind: 'news', group: G.UNI, site: 'https://tbump.edu.vn/', filter: VN_DENTAL },
+  { name: 'Khoa Y Dược - ĐH Đà Nẵng', region: 'vn', kind: 'news', group: G.UNI, site: 'https://smp.udn.vn/', filter: VN_DENTAL },
+  { name: 'ĐH Quốc tế Hồng Bàng',   region: 'vn', kind: 'news', group: G.UNI, site: 'https://hiu.vn/', filter: VN_DENTAL },
+  { name: 'ĐH Nguyễn Tất Thành',    region: 'vn', kind: 'news', group: G.UNI, site: 'https://ntt.edu.vn/', filter: VN_DENTAL },
   // ===== VIET NAM - muc 5: benh vien tuyen dau =====
   { name: 'BV RHM Trung ương TP.HCM', region: 'vn', kind: 'news', group: G.HOSP, site: 'https://benhvienranghammat.vn/' },
   { name: 'BV RHM Trung ương Hà Nội', region: 'vn', kind: 'news', group: G.HOSP, site: 'https://nhos.org.vn/' },
@@ -105,12 +144,8 @@ const GUIDE_SOURCES = [
 
 // Ngoai huong dan: mac dinh TAT. Bat bang bien moi truong NEWS_EXTRA=1 neu muon them bao lon / tong hop.
 const EXTRA_SOURCES = [
-  { name: 'Dentistry Today',        region: 'intl', kind: 'news', group: 'Khác', feed: 'https://www.dentistrytoday.com/feed/' },
-  { name: 'Dentistry.co.uk',        region: 'intl', kind: 'news', group: 'Khác', feed: 'https://dentistry.co.uk/feed/' },
   { name: 'ScienceDaily',           region: 'intl', kind: 'news', group: 'Khác', feed: 'https://www.sciencedaily.com/rss/health_medicine/dentistry.xml' },
   { name: 'Medical Xpress',         region: 'intl', kind: 'news', group: 'Khác', feed: 'https://medicalxpress.com/rss-feed/dentistry-news/' },
-  { name: 'NIDCR (NIH)',            region: 'intl', kind: 'news', group: 'Khác', feed: 'https://www.nidcr.nih.gov/news-events/news/rss.xml' },
-  { name: 'British Dental Journal', region: 'intl', kind: 'journal', group: 'Khác', feed: 'https://www.nature.com/bdj.rss' },
   { name: 'VnExpress',              region: 'vn', kind: 'news', group: 'Khác', feed: 'https://vnexpress.net/rss/suc-khoe.rss', filter: VN_DENTAL },
   { name: 'Tuổi Trẻ',               region: 'vn', kind: 'news', group: 'Khác', feed: 'https://tuoitre.vn/rss/suc-khoe.rss', filter: VN_DENTAL },
   { name: 'Thanh Niên',             region: 'vn', kind: 'news', group: 'Khác', feed: 'https://thanhnien.vn/rss/suc-khoe.rss', filter: VN_DENTAL },
