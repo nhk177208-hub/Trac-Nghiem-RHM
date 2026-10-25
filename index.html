@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
-<script id="rhm-fresh">(function(){var B="20261025025703";window.RHM_BUILD=B;
+<script id="rhm-fresh">(function(){var B="20261025151500";window.RHM_BUILD=B;
 /* Chống kẹt bản cũ: so mã bản với file thật trên máy chủ (bỏ qua cache); lệch thì xoá Service Worker + Cache Storage rồi tải lại 1 lần. */
 function wipe(){var a=[];try{if(navigator.serviceWorker)a.push(navigator.serviceWorker.getRegistrations().then(function(r){return Promise.all(r.map(function(x){return x.unregister()}))}))}catch(e){}
 try{if(window.caches)a.push(caches.keys().then(function(k){return Promise.all(k.map(function(n){return caches.delete(n)}))}))}catch(e){}return Promise.all(a).catch(function(){})}
@@ -13,7 +13,7 @@ var m=/RHM_BUILD_ID="(\d+)"/.exec(t.slice(0,60000)),srv=m&&m[1];
 if(!srv||srv===B){sessionStorage.removeItem("rhm_fresh_try");return}
 if(sessionStorage.getItem("rhm_fresh_try")===srv)return;
 sessionStorage.setItem("rhm_fresh_try",srv);wipe().then(go)}).catch(function(){})}catch(e){}
-})();var RHM_BUILD_ID="20261025025703";</script>
+})();var RHM_BUILD_ID="20261025151500";</script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -5940,7 +5940,7 @@ window.__rhmOcrScan=1;
 var TESS_VER="5.1.1",
     TESS_JS="https://cdn.jsdelivr.net/npm/tesseract.js@"+TESS_VER+"/dist/tesseract.min.js",
     LANG_PATH="https://cdn.jsdelivr.net/npm/@tesseract.js-data/eng@1.0.0/4.0.0_best_int",
-    CACHE_V="v5",MIN_NATIVE=25,OCR_W=((navigator.deviceMemory&&navigator.deviceMemory<=4)||/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent||""))?1500:1900,MAX_PIX=12e6,MIN_WORD_CONF=35,MIN_LINE_CONF=45;
+    CACHE_V="v6",CACHE_OLD="v5",MIN_NATIVE=25,OCR_W=((navigator.deviceMemory&&navigator.deviceMemory<=4)||/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent||""))?1500:1900,MAX_PIX=12e6,MIN_WORD_CONF=35,MIN_LINE_CONF=45;
 var orig=window.bkPageData,libP=null,workerP=null,idleT=0,curPg=null,btn=null,chBusy=false,chCancel=false;
 
 var quiet=false;
@@ -5976,7 +5976,9 @@ function roComps(m,gw,gh,r){
 function roAnalyze(img){
   var W=img.width,H=img.height,d=img.data,C=Math.max(10,Math.round(W/140)),gw=Math.ceil(W/C),gh=Math.ceil(H/C),n=gw*gh,
       cnt=new Uint32Array(n),mid=new Uint32Array(n),sat=new Uint32Array(n),drk=new Uint32Array(n),wht=new Uint32Array(n),
-      wr=new Float64Array(n),wg=new Float64Array(n),wb=new Float64Array(n),x,y,i,c;
+      wr=new Float64Array(n),wg=new Float64Array(n),wb=new Float64Array(n),x,y,i,c,
+      BN=[new Uint32Array(n),new Uint32Array(n),new Uint32Array(n)],BR=[new Float64Array(n),new Float64Array(n),new Float64Array(n)],
+      BG=[new Float64Array(n),new Float64Array(n),new Float64Array(n)],BB=[new Float64Array(n),new Float64Array(n),new Float64Array(n)];
   /* đọc theo dải 256 dòng để không giữ cả ảnh 27MB trong bộ nhớ (máy yếu / điện thoại dễ làm trắng/đen trang) */
   for(var by=0;by<H;by+=256){
     var hh=Math.min(256,H-by),bd=img.getBand?img.getBand(by,hh):null,dd=bd||d;
@@ -5985,16 +5987,26 @@ function roAnalyze(img){
         i=(ro+x)<<2;var r=dd[i],g=dd[i+1],b=dd[i+2],l=.299*r+.587*g+.114*b,
             mx=r>g?(r>b?r:b):(g>b?g:b),mn=r<g?(r<b?r:b):(g<b?g:b);
         c=cy+((x/C)|0);cnt[c]++;
-        if(l<45)drk[c]++;else if(l<=205)mid[c]++;else{wht[c]++;wr[c]+=r;wg[c]+=g;wb[c]+=b}
+        if(l<45)drk[c]++;else if(l<=205)mid[c]++;else{wht[c]++;wr[c]+=r;wg[c]+=g;wb[c]+=b;var kq=l>=240?2:l>=225?1:0;BN[kq][c]++;BR[kq][c]+=r;BG[kq][c]+=g;BB[kq][c]+=b}
         if(mx-mn>55)sat[c]++;
       }}
+  }
+  /* màu NỀN từng ô = trung bình nhóm điểm SÁNG NHẤT của ô (>=10% số điểm). Viền khử răng cưa của chữ dày là điểm xám nhạt,
+     nếu tính chung với nền giấy thì màu nền bị lệch ~8-12 đơn vị và cả cột chữ bị nhận nhầm là "khung nền màu" (bị loại khỏi tô sáng). */
+  var cr=new Float64Array(n),cg=new Float64Array(n),cb=new Float64Array(n);
+  for(c=0;c<n;c++){
+    if(!wht[c])continue;
+    var need=Math.max(4,.1*cnt[c]),kk=-1;
+    if(BN[2][c]>=need)kk=2;else if(BN[1][c]>=need)kk=1;else if(BN[0][c]>=need)kk=0;
+    if(kk<0){cr[c]=wr[c]/wht[c];cg[c]=wg[c]/wht[c];cb[c]=wb[c]/wht[c]}
+    else{cr[c]=BR[kk][c]/BN[kk][c];cg[c]=BG[kk][c]/BN[kk][c];cb[c]=BB[kk][c]/BN[kk][c]}
   }
   /* màu giấy = màu nền (các điểm sáng) ở rìa trang, nơi thường không có khung màu */
   var pr=[],pg2=[],pb=[],gx,gy;
   for(c=0;c<n;c++){gx=c%gw;gy=(c/gw)|0;
     if(wht[c]<.5*cnt[c]||(gx>=.04*gw&&gx<.96*gw&&gy>=.03*gh&&gy<.97*gh))continue;
-    pr.push(wr[c]/wht[c]);pg2.push(wg[c]/wht[c]);pb.push(wb[c]/wht[c])}
-  if(pr.length<8){pr=[];pg2=[];pb=[];for(c=0;c<n;c++)if(wht[c]>=.6*cnt[c]){pr.push(wr[c]/wht[c]);pg2.push(wg[c]/wht[c]);pb.push(wb[c]/wht[c])}}
+    pr.push(cr[c]);pg2.push(cg[c]);pb.push(cb[c])}
+  if(pr.length<8){pr=[];pg2=[];pb=[];for(c=0;c<n;c++)if(wht[c]>=.6*cnt[c]){pr.push(cr[c]);pg2.push(cg[c]);pb.push(cb[c])}}
   var paper=pr.length?[pct(pr,.5),pct(pg2,.5),pct(pb,.5)]:[255,255,255];
   var photo=new Uint8Array(n),tint=new Uint8Array(n);
   for(c=0;c<n;c++){
@@ -6002,7 +6014,7 @@ function roAnalyze(img){
     var f=cnt[c];
     if(sat[c]/f>=.3||(wht[c]/f<.22&&mid[c]/f>=.5)||drk[c]/f>=.5){photo[c]=1;continue}
     if(wht[c]/f>=.35){
-      var dv=Math.max(Math.abs(wr[c]/wht[c]-paper[0]),Math.abs(wg[c]/wht[c]-paper[1]),Math.abs(wb[c]/wht[c]-paper[2]));
+      var dv=Math.max(Math.abs(cr[c]-paper[0]),Math.abs(cg[c]-paper[1]),Math.abs(cb[c]-paper[2]));
       if(dv>=10)tint[c]=1;
     }
   }
@@ -6186,6 +6198,48 @@ function cacheGet(k){return idb().then(function(db){return new Promise(function(
 function cacheSet(k,v){return idb().then(function(db){return new Promise(function(res){
   var tx=db.transaction("p","readwrite");tx.objectStore("p").put(v,k);tx.oncomplete=tx.onerror=function(){res()}})}).catch(function(){})}
 
+/* ---- chuyển bộ nhớ đệm OCR bản cũ (v5) sang v6 mà KHÔNG phải OCR lại ----
+   Bản v5 từng gắn nhầm nhãn "box" (khung nền màu) cho cả cột chữ thân bài -> cột đó không được tô sáng.
+   Với trang có nhãn "box", dựng lại ảnh trang, phân tích khung màu bằng bản đã sửa rồi chỉ giữ nhãn "box" ở chữ nằm trong khung màu thật. */
+//#retint-begin
+function reTint(items,tints,s){
+  var idx=new Map,per={};
+  items.forEach(function(o){
+    if(o.k!=="box")return;
+    var cx=(o.x+o.w/2)*s,cy=(o.y-.3*o.fh)*s,ti=roInRect({x0:cx,y0:cy,x1:cx,y1:cy},tints,0);
+    idx.set(o,ti);
+    if(ti>=0){var key=Math.round(o.y/Math.max(1,.8*o.fh));(per[ti]=per[ti]||{})[key]=1}
+  });
+  return items.map(function(o){
+    if(o.k!=="box")return o;
+    var ti=idx.get(o);
+    if(ti>=0&&Object.keys(per[ti]).length>=3)return o;
+    var c={},k;for(k in o)if(k!=="k")c[k]=o[k];
+    return c;
+  });
+}
+//#retint-end
+function cacheKeyV(pg,v){return v+cacheKey(pg).slice(CACHE_V.length)}
+var MIG={};
+async function migrateItems(pg,old){
+  if(!old.some(function(o){return o.k==="box"}))return old;
+  var r=await renderForOcr(pg),info=null;
+  try{var cx=r.cv.getContext("2d"),cvw=r.cv.width,cvh=r.cv.height;
+    info=roAnalyze({width:cvw,height:cvh,getBand:function(y,h){return cx.getImageData(0,y,cvw,h).data}})}
+  finally{r.cv.width=0}
+  return reTint(old,info.tints,r.s);
+}
+/* đọc cache của trang: có bản v6 thì dùng; chỉ có bản v5 thì sửa nhãn rồi lưu sang v6 */
+async function cacheLoad(pg){
+  var items=await cacheGet(cacheKey(pg));
+  if(items)return items;
+  var old=await cacheGet(cacheKeyV(pg,CACHE_OLD));
+  if(!old||!old.length)return null;
+  var k=cacheKey(pg),p=MIG[k];
+  if(!p)p=MIG[k]=migrateItems(pg,old).then(function(it){cacheSet(k,it);return it},function(e){console.warn("[OCR] chuyển cache cũ lỗi",e);return old}).then(function(r){delete MIG[k];return r});
+  return p;
+}
+
 /* ---- Tesseract ---- */
 function loadLib(){
   if(window.Tesseract)return Promise.resolve(window.Tesseract);
@@ -6223,7 +6277,7 @@ async function renderForOcr(pg){
   return {cv:cv,s:cv.width/v1.width};
 }
 async function ocrItems(pg,tok){
-  var key=cacheKey(pg),items=await cacheGet(key);
+  var key=cacheKey(pg),items=await cacheLoad(pg);
   if(items)return items;
   var w=await getWorker();
   if(tok!==bkViewTok)throw 0;
@@ -6276,7 +6330,7 @@ async function onBtn(){
   if(chBusy)return chapterOcr();
   if(hasOcr()||(btn&&btn.classList.contains("redo"))){
     for(var i=0;i<bkVP.length;i++){var pg=bkVP[i];
-      try{await cacheDel(cacheKey(pg))}catch(e){}
+      try{await cacheDel(cacheKey(pg));await cacheDel(cacheKeyV(pg,CACHE_OLD))}catch(e){}
       pg._ocr=null;pg._ocrTc=null;pg._ocrRaw=null;pg._ocrChk=true;   /* _ocrChk: không tự nạp lại từ cache */
     }
   }
@@ -6341,7 +6395,7 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 async function fromCache(pg,d){
   if(pg._ocr||pg._ocrChk||!d||!d.seq||nativeLen(d)>=MIN_NATIVE)return;
   pg._ocrChk=true;
-  var tok=bkViewTok,items=await cacheGet(cacheKey(pg));
+  var tok=bkViewTok,items=await cacheLoad(pg);
   if(!items||!items.length||tok!==bkViewTok||pg._ocr)return;
   pg._ocrTok=tok;
   try{await finish(pg,items)}catch(e){console.warn("[OCR] cache",e)}
@@ -6363,12 +6417,12 @@ async function autoRestore(doc,tok){
       var pg=bkVP[i];patch(pg);
       var d=await orig(pg);
       if(pg._ocr==="done"||nativeLen(d)>=MIN_NATIVE)continue;
-      if(!(await cacheGet(cacheKey(pg))))return;   /* còn trang chưa OCR: để người dùng tự bấm nút */
+      if(!(await cacheLoad(pg)))return;   /* còn trang chưa OCR: để người dùng tự bấm nút */
     }
     await chapterOcr(true);
   }catch(e){console.warn("[OCR] tự dựng lại từ cache",e)}
 }
-window.rhmOcrVer=5;try{console.info("[OCR] bản vá chế độ sách scan v5 đã nạp")}catch(e){}
+window.rhmOcrVer=6;try{console.info("[OCR] bản vá chế độ sách scan v6 đã nạp")}catch(e){}
 window.rhmOcr={dump:function(n){var p=bkVP&&bkVP[n-1];return p&&p._ocrRaw},chapter:chapterOcr,auto:autoRestore,_convert:convert,_analyze:roAnalyze};
 })();</script>
 <script id="rhm-ocr-mode">(function(){
