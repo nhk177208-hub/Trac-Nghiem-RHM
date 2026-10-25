@@ -281,11 +281,7 @@ html body #ai-tutor-modal .bk-qz-choose button.bk-qz-go:hover{background:#0860ca
 .rhmn-t{font-size:15px;font-weight:700;line-height:1.3}.rhmn-au{font-size:12px;color:#57606a;font-style:italic}
 .rhmn-s{font-size:13px;color:#57606a;line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .rhmd-grid .rhmn-card{flex-direction:column}.rhmd-grid .rhmn-img{flex:none;width:100%}
-.rhmn-upd{font-size:12px;color:#6b7280;margin:0 0 8px}.rhmn-warn{color:#9a6700;background:#fff8c5;border-radius:8px;padding:6px 10px}
-.rhmn-pri{background:#0969da;color:#fff;border-color:#0969da}.rhmn-pri:hover{background:#0858b8}
-.rhmn-more{display:block;margin:16px auto;border:1px solid #d0d7de;background:#fff;color:#0969da;border-radius:10px;padding:10px 18px;font-size:14px;font-weight:700;cursor:pointer}.rhmn-more:hover{background:#f6f8fa}
-.rhmn-sbh{flex:0 0 auto;font-size:11px;font-weight:800;color:#6b7280;margin:8px 4px 0;text-transform:uppercase;letter-spacing:.04em}
-.rhmn-cr{margin-top:6px;font-size:12px;color:#8b949e;line-height:1.5}
+.rhmn-upd{font-size:12px;color:#6b7280;margin:0 0 8px}
 </style>
 <style id="rhm-hub-fit-css">#rhm-hub{width:100%;max-width:100%;box-sizing:border-box}#rhm-hub .rhm-hub-btn{min-width:0;max-width:100%;box-sizing:border-box;overflow:hidden}#rhm-hub .rhm-hub-txt{flex:1 1 auto;min-width:0}</style>
 <script id="rhm-hub-fit">(function(){function fit(){var hub=document.getElementById('rhm-hub');if(!hub||!hub.clientHeight)return;var cs=getComputedStyle(hub);var rows=(cs.gridTemplateRows||'').split(' ').filter(Boolean).length;if(rows!==2){hub.style.removeProperty('--rhm-fs');hub.style.removeProperty('--rhm-ico');hub.querySelectorAll('.rhm-hub-btn').forEach(function(b){b.style.removeProperty('padding')});return}var gap=parseFloat(cs.rowGap)||0;var row=(hub.clientHeight-gap)/2;if(row<20)return;var fs=Math.max(11,Math.min(46,row*.25,hub.clientWidth*.0252));var ico=Math.max(15,Math.min(70,fs*1.5));hub.style.setProperty('--rhm-fs',fs.toFixed(1)+'px');hub.style.setProperty('--rhm-ico',ico.toFixed(1)+'px');var pv=Math.max(2,row*.1),ph=ico*.55;hub.querySelectorAll('.rhm-hub-btn').forEach(function(b){b.style.padding=pv.toFixed(1)+'px '+ph.toFixed(1)+'px'})}function init(){fit();var hub=document.getElementById('rhm-hub');if(hub&&window.ResizeObserver)new ResizeObserver(fit).observe(hub);window.addEventListener('resize',fit);document.addEventListener('fullscreenchange',function(){setTimeout(fit,60)});setTimeout(fit,300);setTimeout(fit,1200)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init()})();</script>
@@ -2519,40 +2515,38 @@ window.rhmdCovErr=function(img){
   var p=img.parentElement;img.remove();p&&!p.querySelector(".rhmd-ph")&&p.insertAdjacentHTML("afterbegin",'<span class="rhmd-ph">'+PH()+'</span>');
 };
 /* ===== TIN TỨC: đọc TinTuc/news.json do GitHub Actions crawl ===== */
-var newsItems=[],newsErr="",newsLoaded=!1,newsUpd=0,nTab="intl",newsPaused=[],nLim=30,nSig="";
+var newsItems=[],newsErr="",newsLoaded=!1,newsUpd=0,nTab="intl";
 function newsFmt(iso){try{var d=new Date(iso),df=(Date.now()-d)/36e5;if(df<1)return"Vừa xong";if(df<24)return Math.floor(df)+" giờ trước";if(df<24*7)return Math.floor(df/24)+" ngày trước";return d.toLocaleDateString("vi-VN")}catch(e){return""}}
 function newsLoad(tok){
   newsRender();
   fetch("TinTuc/news.json?_="+Math.floor(Date.now()/6e5),{cache:"no-store"}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){
-    if(tok!==loadTok)return;newsItems=Array.isArray(j.items)?j.items:[];newsUpd=j.updated||0;newsPaused=Array.isArray(j.paused)?j.paused:[];newsErr="";newsLoaded=!0;render();
+    if(tok!==loadTok)return;newsItems=Array.isArray(j.items)?j.items:[];newsUpd=j.updated||0;newsErr="";newsLoaded=!0;render();
   }).catch(function(){if(tok!==loadTok)return;newsErr="Không tải được tin tức. Hãy thử lại sau.";newsLoaded=!0;render()});
 }
 function newsReg(){return newsItems.filter(function(i){return(i.region||"intl")===nTab})}
-function newsPool(){return newsReg().filter(function(i){return!subj||(subj==="__research"?i.type==="research":subj==="__news"?i.type!=="research":subj.indexOf("__g:")===0?i.group===subj.slice(4):i.source===subj)})}
+function newsPool(){return newsReg().filter(function(i){return!subj||(subj==="__research"?i.type==="research":subj==="__news"?i.type!=="research":i.source===subj)})}
 function newsSb(){
-  var reg=newsReg(),n=reg.length,r=reg.filter(function(i){return i.type==="research"}).length,cn={},names=[],gc={},gn=[];
-  reg.forEach(function(i){if(i.group){if(!(i.group in gc)){gc[i.group]=0;gn.push(i.group)}gc[i.group]++}if(i.type==="research")return;if(!(i.source in cn)){cn[i.source]=0;names.push(i.source)}cn[i.source]++});
-  var B=function(m,label,c){return'<button type="button" class="rhmd-subj'+(subj===m?" on":"")+'" data-m="'+esc(m)+'">'+esc(label)+"<b>"+c+"</b></button>"};
+  var reg=newsReg(),n=reg.length,r=reg.filter(function(i){return i.type==="research"}).length,cn={},names=[];
+  reg.forEach(function(i){if(i.type==="research")return;if(!(i.source in cn)){cn[i.source]=0;names.push(i.source)}cn[i.source]++});
   var h='<button type="button" class="rhmd-subj'+(subj?"":" on")+'" data-m="">Tất cả<b>'+n+'</b></button>';
-  h+='<div class="rhmn-sbh">Loại</div>'+B("__news","Tin tức",n-r)+B("__research","Nghiên cứu",r);
-  if(gn.length>1){h+='<div class="rhmn-sbh">Nhóm nguồn</div>';gn.sort().forEach(function(g){h+=B("__g:"+g,g,gc[g])})}
-  if(names.length){h+='<div class="rhmn-sbh">Nguồn</div>';names.sort().forEach(function(m){h+=B(m,m,cn[m])})}
+  if(nTab==="intl"){h+='<button type="button" class="rhmd-subj'+(subj==="__news"?" on":"")+'" data-m="__news">Tin tức<b>'+(n-r)+'</b></button>';
+  h+='<button type="button" class="rhmd-subj'+(subj==="__research"?" on":"")+'" data-m="__research">Nghiên cứu (PubMed)<b>'+r+'</b></button>'}
+  names.sort().forEach(function(m){h+='<button type="button" class="rhmd-subj'+(subj===m?" on":"")+'" data-m="'+esc(m)+'">'+esc(m)+"<b>"+cn[m]+"</b></button>"});
   sbList.innerHTML=h;
 }
 function newsRender(){
   if(nRdId){nRdPaint();return}
   var k=fold(q).trim(),pool=newsPool();
-  shown=k?pool.filter(function(i){return fold(i.title+" "+(i.summary||"")+" "+i.source+" "+(i.authors||"")+" "+(i.group||"")).indexOf(k)>=0}):pool;
-  var sig=nTab+"|"+subj+"|"+k;if(sig!==nSig){nSig=sig;nLim=30}
+  shown=k?pool.filter(function(i){return fold(i.title+" "+(i.summary||"")+" "+i.source).indexOf(k)>=0}):pool;
   cnt.textContent=shown.length;renderSb();
   if(!newsLoaded){main.innerHTML='<div class="rhmd-msg">⏳ Đang tải tin tức...</div>';return}
   if(newsErr){main.innerHTML='<div class="rhmd-msg">'+esc(newsErr)+"</div>";return}
   if(!newsReg().length){main.innerHTML='<div class="rhmd-msg">Chưa có tin tức nào. Bấm nút ↻ để lấy tin ngay.</div>';return}
   if(!shown.length){main.innerHTML='<div class="rhmd-msg">Không tìm thấy tin phù hợp.</div>';return}
-  main.innerHTML=(newsUpd?'<div class="rhmn-upd">Cập nhật '+esc(newsFmt(newsUpd))+" · "+newsReg().length+' tin</div>':"")+(newsPaused.length?'<div class="rhmn-upd rhmn-warn">⚠ Tạm không cập nhật: '+esc(newsPaused.slice(0,4).join(", ")+(newsPaused.length>4?" và "+(newsPaused.length-4)+" nguồn khác":""))+"</div>":"")+'<div class="'+(view==="list"?"rhmd-list":"rhmd-grid")+' rhmn-wrap">'+shown.slice(0,nLim).map(function(i){
+  main.innerHTML=(newsUpd?'<div class="rhmn-upd">Cập nhật '+esc(newsFmt(newsUpd))+" · "+newsReg().length+' tin</div>':"")+'<div class="'+(view==="list"?"rhmd-list":"rhmd-grid")+' rhmn-wrap">'+shown.map(function(i){
     var res=i.type==="research";
     return'<a class="rhmn-card'+(res?" rhmn-res":"")+'" data-id="'+esc(i.id)+'" href="'+esc(i.url)+'" target="_blank" rel="noopener noreferrer">'+(i.image?'<span class="rhmn-img"><img loading="lazy" referrerpolicy="no-referrer" src="'+esc(i.image)+'" alt="" onerror="this.parentNode.remove()"></span>':"")+
-    '<span class="rhmn-body"><span class="rhmn-meta"><b>'+(res?"🔬 ":"")+esc(i.source)+"</b> · "+esc(newsFmt(i.date))+'</span><span class="rhmn-t">'+esc(i.title)+"</span>"+(res&&i.authors?'<span class="rhmn-au">'+esc(i.authors)+"</span>":"")+(i.summary?'<span class="rhmn-s">'+esc(i.summary)+"</span>":"")+"</span></a>"}).join("")+"</div>"+(shown.length>nLim?'<button type="button" class="rhmn-more">Hiện thêm ('+(shown.length-nLim)+' tin còn lại)</button>':"");
+    '<span class="rhmn-body"><span class="rhmn-meta"><b>'+(res?"🔬 ":"")+esc(i.source)+"</b> · "+esc(newsFmt(i.date))+'</span><span class="rhmn-t">'+esc(i.title)+"</span>"+(res&&i.authors?'<span class="rhmn-au">'+esc(i.authors)+"</span>":"")+(i.summary?'<span class="rhmn-s">'+esc(i.summary)+"</span>":"")+"</span></a>"}).join("")+"</div>";
 }
 /* ===== Trình đọc tin ngay trong app (kiểu MSN): bài đã trích sẵn ở TinTuc/a/<id>.json ===== */
 var nRdId=null,nRdMode="app",nArt={},nRdScroll=0,nLoad={};
@@ -2595,7 +2589,7 @@ function nRdPaint(){
   cnt.textContent="";
   var res=it.type==="research",a=nArt[it.id],h='<div class="rhmn-rd"><div class="rhmn-rdbar"><button type="button" class="rhmn-rdb" data-a="back">← Danh sách</button>'+
    '<span class="rhmn-seg"><button type="button" data-a="app" class="'+(nRdMode==="app"?"on":"")+'">Đọc trong app</button><button type="button" data-a="web" class="'+(nRdMode==="web"?"on":"")+'">Trang gốc</button></span>'+
-   '<a class="rhmn-rdb rhmn-pri" href="'+esc(it.url)+'" target="_blank" rel="noopener noreferrer">Đọc bài gốc ↗</a></div>';
+   '<a class="rhmn-rdb" href="'+esc(it.url)+'" target="_blank" rel="noopener noreferrer">Mở bài gốc ↗</a></div>';
   if(nRdMode==="web"){
     var wb=nWorkerBase();
     h+='<div class="rhmn-hint">'+(wb?"Trang gốc được tải qua Worker (đã bỏ script nên có thể mất một số tính năng). Nếu khung trống, dùng “Đọc trong app”.":"Một số website chặn hiển thị trong app. Nếu khung bên dưới trống, hãy dùng “Đọc trong app” hoặc “Mở bài gốc ↗”.")+'</div><iframe class="rhmn-if" src="'+esc(wb?wb+"/page?url="+encodeURIComponent(it.url):it.url)+'" '+(wb?'sandbox="allow-popups allow-popups-to-escape-sandbox"':'sandbox="allow-scripts allow-same-origin allow-popups allow-forms"')+' referrerpolicy="no-referrer" loading="lazy"></iframe></div>';
@@ -2612,12 +2606,11 @@ function nRdPaint(){
     if(it.image)h+='<img class="rhmn-hero" referrerpolicy="no-referrer" src="'+esc(it.image)+'" alt="" onerror="this.remove()">';
     h+='<div class="rhmn-body"><p>'+esc(it.summary||"Chưa có nội dung. Hãy mở bài gốc để đọc.")+'</p></div><div class="rhmn-hint">Chưa lưu được toàn văn bài này. Bấm “Trang gốc” hoặc “Mở bài gốc ↗”.</div>';
   }
-  h+='<div class="rhmn-src">Nguồn: <a href="'+esc(it.url)+'" target="_blank" rel="noopener noreferrer">'+esc(it.source)+"</a>"+(it.group?" · "+esc(it.group):"")+' · <a href="'+esc(it.url)+'" target="_blank" rel="noopener noreferrer">Đọc bài gốc ↗</a><div class="rhmn-cr">Bản quyền nội dung thuộc về '+esc(String(it.source).split(" · ")[0])+". Bản hiển thị trong app chỉ phục vụ học tập cá nhân; hãy mở bài gốc để có bản đầy đủ và chính xác nhất.</div></div></article></div>";
+  h+='<div class="rhmn-src">Nguồn: <a href="'+esc(it.url)+'" target="_blank" rel="noopener noreferrer">'+esc(it.source)+"</a></div></article></div>";
   main.innerHTML=h;
 }
 main.addEventListener("click",function(e){
   if(mode!=="news")return;
-  var mb=e.target.closest(".rhmn-more");if(mb){nLim+=30;newsRender();return}
   var c=e.target.closest(".rhmn-card");
   if(c&&!e.ctrlKey&&!e.metaKey&&!e.shiftKey&&e.button===0){e.preventDefault();nRdOpen(c.dataset.id);return}
   var b=e.target.closest(".rhmn-rd [data-a]");if(!b)return;
@@ -2664,7 +2657,7 @@ async function newsRefresh(){
     if(!cr.ok){fail("Không đọc được news.json ("+cr.status+")");return}
     var j=await cr.json(),old={};newsItems.forEach(function(i){old[i.id]=1});
     var add=(j.items||[]).filter(function(i){return!old[i.id]}).length;
-    newsItems=j.items||[];newsUpd=j.updated||0;newsPaused=Array.isArray(j.paused)?j.paused:[];newsErr="";newsLoaded=!0;render();
+    newsItems=j.items||[];newsUpd=j.updated||0;newsErr="";newsLoaded=!0;render();
     nrfToast(add?"✅ Có "+add+" tin mới":"✅ Xong, chưa có tin nào mới")
   }catch(e){fail("Lỗi mạng: "+(e&&e.message||e))}
   finally{nrfBusy=!1;btn&&btn.classList.remove("rhmn-spin")}
@@ -4047,7 +4040,7 @@ back.addEventListener("click",function(e){if(Date.now()-(window.rhmrOpenT||0)<50
 var secList=$("bk-sec-list");
 secList&&secList.addEventListener("click",function(e){window.innerWidth<=700&&e.target.closest("button")&&!v.classList.contains("rhmr-editing")&&setTimeout(function(){setSb(!1)},150)});
 function chTitle(){var t="";try{if(typeof bkCur!=="undefined"&&bkCur&&bkCur.title)t=String(bkCur.title)}catch(e){}if(!t){t=title.textContent||"";var i=t.indexOf(" \u00b7 ");if(i>=0)t=t.slice(i+3)}return t.trim()}
-function setTbTitle(){var t=chTitle();tbRead.textContent=t;tbRead.title=t}
+function setTbTitle(){/* topbar hiện số trang x/n (rhm-audiobook), không hiện tên chương */tbRead.title="Trang "+(tbRead.textContent||"");window.rhmrPageInd&&window.rhmrPageInd()}
 function isVis(){return!v.classList.contains("hidden")}
 var lastVis=null;
 function sync(){
@@ -6719,6 +6712,7 @@ function norm(s){return typeof bkNormStr==="function"?bkNormStr(s):String(s||"")
 function syncBtn(){
   var b=document.getElementById("rhmTbOcr");
   if(b)b.style.display=window.__rhmScan?"":"none";
+  document.body.classList.toggle("rhmr-scan",!!window.__rhmScan);   /* OCR chỉ hiện ở sách scan; sách thường hiện nút Audiobook */
 }
 /* lấy mẫu tối đa 8 trang rải đều; trang nào gần như không có chữ gốc (không tính chữ OCR) thì tính là trang scan */
 async function detectScan(doc){
@@ -7447,6 +7441,473 @@ window.rhmZones={
 };
 window.rhmZonesVer=1;
 try{console.info("[Trang ảo] bản vá ngắt cột giữa trang cho sách scan đã nạp")}catch(e){}
+})();
+</script>
+
+<style id="rhm-audiobook-css">
+/* OCR chỉ hiện khi sách scan; Audiobook chỉ hiện ở sách PDF thường */
+body.rhmr-on:not(.rhmr-scan) #rhmTbOcr{display:none!important}
+body.rhmr-on.rhmr-scan #rhmTbAudio{display:none!important}
+body.rhmr-scan #bk-selbar .b-ab{display:none!important}
+#rhmTbAudio.on{color:#0969da;background:#ddf4ff}
+body #bk-selbar .b-ab{color:#1f2328!important}
+/* topbar: số trang x/n */
+body.rhmr-on #rhmTb #rhmTbRead{font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.02em;white-space:nowrap}
+/* sidebar: tên sách → tên chương → mục lục */
+#rhmrSbInfo{flex:0 0 auto;padding:10px 14px 8px;background:#fff;border-bottom:1px solid #eaeef2}
+#rhmrSbInfo .sbi-lb{font:700 10.5px/1.2 system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#8c959f;margin-top:7px}
+#rhmrSbInfo .sbi-lb:first-child{margin-top:0}
+#rhmrSbInfo .sbi-book{font:700 14px/1.3 system-ui,sans-serif;color:#1f2328;margin-top:2px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;line-clamp:3;overflow:hidden;word-break:break-word}
+#rhmrSbInfo .sbi-chap{font:600 13.5px/1.35 system-ui,sans-serif;color:#0969da;margin-top:2px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;line-clamp:4;overflow:hidden;word-break:break-word}
+#rhmrSbInfo .sbi-toc{margin-top:10px;padding-top:8px;border-top:1px dashed #d0d7de}
+/* tô sáng câu đang đọc (cùng màu với boxchat) */
+.rhm-abl{position:absolute;inset:0;z-index:1;pointer-events:none;mix-blend-mode:multiply}
+.rhm-abl div{position:absolute;background:#fde047;border-radius:3px}
+/* thanh điều khiển Audiobook */
+#rhmAbBar{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:58;display:none;align-items:center;gap:2px;padding:5px 6px;background:#fff;border:1px solid #d0d7de;border-radius:999px;box-shadow:0 6px 20px #0003;max-width:calc(100vw - 16px);box-sizing:border-box}
+#rhmAbBar button{width:38px;height:38px;flex:0 0 auto;border:0;border-radius:50%;background:transparent;color:#1f2328;display:inline-flex;align-items:center;justify-content:center;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#rhmAbBar button:hover{background:#eaeef2}
+#rhmAbBar button svg{width:20px;height:20px;display:block}
+#rhmAbBar .pp{background:#0969da;color:#fff}
+#rhmAbBar .pp:hover{background:#0860c4}
+#rhmAbBar .pp .i-play{display:none}
+#rhmAbBar.paused .pp .i-pause{display:none}
+#rhmAbBar.paused .pp .i-play{display:block}
+#rhmAbSt{font:600 12px system-ui,sans-serif;color:#59636e;min-width:0;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 8px}
+@media(max-width:700px){#rhmAbBar{bottom:76px}#rhmAbSt{max-width:110px}}
+</style>
+<script id="rhm-audiobook">(function(){
+"use strict";
+/* ============================================================================
+   AUDIOBOOK + thanh trên (x/n) + sidebar (sách → chương → mục lục) + sửa bong bóng tô đen trên mobile
+   - Audiobook (chỉ sách PDF thường): đọc từ trên xuống bằng tiếng Việt. AI dịch ẩn (cùng bộ dịch + thuật ngữ + từ điển của boxchat),
+     dịch dần từng cụm câu, TTS trình duyệt đọc từng câu, câu nào đang đọc thì tô sáng trên PDF như boxchat.
+   - Bong bóng tô đen có thêm nút "Đọc sách": đọc audiobook từ đoạn đang tô đen trở xuống.
+   ========================================================================== */
+if(window.__rhmAudiobook)return;window.__rhmAudiobook=1;
+var $=function(i){return document.getElementById(i)};
+var viewer=$("book-viewer"),wrap=$("bk-pdf-wrap"),tbRead=$("rhmTbRead");
+if(!viewer||!wrap)return;
+function toast(m){try{showToast(m)}catch(e){}}
+function inReader(){return document.body.classList.contains("rhmr-on")}
+
+/* ---------------------------------------------------------------- 1. số trang hiện tại x/n trên topbar */
+var lastInd="",indRaf=0;
+function curPage(){
+  if(typeof bkVP==="undefined"||!bkVP.length)return 0;
+  var wr=wrap.getBoundingClientRect(),probe=wr.top+Math.min(wr.height*.3,260),lo=0,hi=bkVP.length-1,ans=0;
+  while(lo<=hi){var m=(lo+hi)>>1;
+    if(bkVP[m].wrap.getBoundingClientRect().top<=probe){ans=m;lo=m+1}else hi=m-1}
+  return ans+1;
+}
+function updInd(){
+  indRaf=0;
+  if(!tbRead||!inReader())return;
+  var n=typeof bkVP!=="undefined"?bkVP.length:0,t=n?curPage()+"/"+n:"";
+  if(t!==lastInd){lastInd=t;tbRead.textContent=t;tbRead.title="Trang "+t}
+}
+function reqInd(){if(!indRaf)indRaf=requestAnimationFrame(updInd)}
+window.rhmrPageInd=function(){lastInd="";reqInd()};
+wrap.addEventListener("scroll",reqInd,{passive:true});
+window.addEventListener("resize",reqInd);
+setInterval(function(){inReader()&&reqInd()},700);
+
+/* ---------------------------------------------------------------- 2. sidebar: tên sách → tên chương → mục lục */
+function mkInfo(){
+  var list=$("bk-sec-list");
+  if(!list||$("rhmrSbInfo"))return;
+  var d=document.createElement("div");d.id="rhmrSbInfo";
+  d.innerHTML='<div class="sbi-lb">Sách</div><div class="sbi-book" id="rhmrSbBook"></div>'+
+    '<div class="sbi-lb">Chương đang mở</div><div class="sbi-chap" id="rhmrSbChap"></div>'+
+    '<div class="sbi-lb sbi-toc">Mục lục</div>';
+  list.parentNode.insertBefore(d,list);
+}
+function updInfo(){
+  mkInfo();
+  var b="",c="";
+  try{if(typeof bkCur!=="undefined"&&bkCur){b=bkCur.book||"";c=bkCur.title||""}}catch(e){}
+  var eb=$("rhmrSbBook"),ec=$("rhmrSbChap");
+  if(eb&&eb.textContent!==b){eb.textContent=b;eb.title=b}
+  if(ec&&ec.textContent!==c){ec.textContent=c;ec.title=c}
+}
+updInfo();
+
+/* ---------------------------------------------------------------- 3. nút Audiobook trên topbar */
+var HP='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3.5" y="14" width="4" height="6.5" rx="1.6"/><rect x="16.5" y="14" width="4" height="6.5" rx="1.6"/></svg>';
+var tbBtn=null;
+function mkTbBtn(){
+  var sb=$("rhmrSbBtn");
+  if(!sb||!sb.parentNode)return false;
+  if($("rhmTbAudio")){tbBtn=$("rhmTbAudio");return true}
+  tbBtn=document.createElement("button");tbBtn.type="button";tbBtn.id="rhmTbAudio";tbBtn.className="rhm-tb-btn rhmr-tbbtn";
+  tbBtn.title="Audiobook: đọc sách bằng tiếng Việt";tbBtn.setAttribute("aria-label","Audiobook");
+  tbBtn.innerHTML=HP;
+  tbBtn.addEventListener("click",function(){AB.on?stop():start(-1)});
+  sb.parentNode.insertBefore(tbBtn,sb.nextSibling);
+  return true;
+}
+(function tryMk(){if(!mkTbBtn())setTimeout(tryMk,300)})();
+function paintBtn(){
+  if(!tbBtn)return;
+  tbBtn.classList.toggle("on",!!AB.on);
+  var t=AB.on?"Dừng Audiobook":"Audiobook: đọc sách bằng tiếng Việt";
+  tbBtn.title=t;tbBtn.setAttribute("aria-label",t);
+}
+
+/* ---------------------------------------------------------------- 4. tách câu từ bkText */
+var ABBR=/(?:^|[\s(\[])(?:fig|figs|et al|e\.g|i\.e|vs|dr|mr|mrs|ms|prof|no|nos|approx|ca|cf|resp|eq|eqs|ref|refs|vol|pp|st|inc|ltd|viz|spp|sp|min|max|ie|eg|sec|ch|ed|eds|al)\.$/i;
+function plain(t){
+  return String(t).replace(/([A-Za-zÀ-ỹ])-\n\s*(?=[a-zà-ỹ])/g,"$1").replace(/\s*\n\s*/g," ").replace(/[ \t ]+/g," ").trim();
+}
+function splitSents(t){
+  var out=[],n=t.length,s0=-1,i,c;
+  function push(a,b){
+    while(a<b&&/\s/.test(t[a]))a++;
+    while(b>a&&/\s/.test(t[b-1]))b--;
+    if(b<=a)return;
+    var p=plain(t.slice(a,b));
+    if(!/[A-Za-zÀ-ỹ]{2,}/.test(p))return;     /* bỏ chuỗi toàn số / ký hiệu */
+    out.push({s:a,e:b,t:p});
+  }
+  for(i=0;i<n;i++){
+    c=t[i];
+    if(s0<0){if(/\s/.test(c))continue;s0=i}
+    if(c==="."||c==="!"||c==="?"||c==="…"){
+      if(c==="."&&/\d/.test(t[i+1]||""))continue;       /* 3.5 */
+      var j=i+1;while(j<n&&/["”’')\]]/.test(t[j]))j++;
+      if(j<n&&!/\s/.test(t[j]))continue;
+      var k=j;while(k<n&&/\s/.test(t[k]))k++;
+      var nx=t[k]||"",head=t.slice(Math.max(s0,i-14),i+1),end=false;
+      if(k>=n)end=true;
+      else if(/[A-ZÀ-Ỹ"“‘(\[•]/.test(nx)||/\d/.test(nx)&&c!==".")end=!(c==="."&&(ABBR.test(head)||/(?:^|\s)[A-Z]\.$/.test(head)));
+      else if(c==="!"||c==="?")end=false;
+      if(end){push(s0,j);s0=-1;i=j-1}
+    }else if(c==="\n"){
+      var seg=t.slice(s0,i).trim();
+      if(seg){
+        var w=seg.split(/\s+/).length,kk=i+1;while(kk<n&&/[ \t]/.test(t[kk]))kk++;
+        if(w<=10&&!/[.!?:;,)…-]$/.test(seg)&&/[A-ZÀ-Ỹ]/.test(t[kk]||"")){push(s0,i);s0=-1}
+      }
+    }
+  }
+  if(s0>=0)push(s0,n);
+  return out;
+}
+
+/* ---------------------------------------------------------------- 5. dịch ẩn (bộ dịch + thuật ngữ + từ điển của boxchat) */
+async function trChunk(texts){
+  var n=texts.length,joined=texts.join(" "),gloss="";
+  try{if(typeof window.rhmDictGlossary==="function")gloss=window.rhmDictGlossary(joined,true)||""}catch(e){}
+  var style="natural";try{if(typeof BK_TR!=="undefined"&&BK_TR.style)style=BK_TR.style}catch(e){}
+  var base="Bạn là giáo sư đầu ngành Răng Hàm Mặt đang dịch tài liệu cho sinh viên. Dịch sang tiếng Việt tự nhiên, dễ hiểu.";
+  try{if(typeof BK_TR_SYS!=="undefined")base=BK_TR_SYS[style]||BK_TR_SYS.natural}catch(e){}
+  try{if(typeof BK_TR_GLOSS!=="undefined")base+=" "+BK_TR_GLOSS}catch(e){}
+  var sys=base+" "+gloss+' Bản dịch sẽ được ĐỌC TO bằng giọng đọc nên phải trôi chảy, dễ nghe. Dưới đây là '+n+' câu đánh số [1]..['+n+'] liền nhau trong cùng một đoạn. Trả về MỘT đối tượng JSON hợp lệ {"v":[...]} gồm ĐÚNG '+n+' chuỗi, chuỗi thứ i là bản dịch của câu [i]. Nếu câu [i] chỉ là phần nối tiếp của câu trước (bị ngắt do chuyển cột / trang) thì gộp bản dịch vào chuỗi của câu trước và để chuỗi thứ i là "". Câu nào chỉ là số trang, tên hình / bảng hoặc ký hiệu vô nghĩa thì để chuỗi rỗng. Bỏ các trích dẫn kiểu (Tên tác giả, năm) hay [12]. Viết ký hiệu thành lời khi cần (%, ±, °, <, >, µm). Giữ nguyên tên riêng và từ viết tắt tiếng Anh. Trong chuỗi dùng dấu nháy đơn thay cho dấu nháy kép và không viết chuỗi "\\n". Không thêm chữ nào ngoài JSON.';
+  var user=texts.map(function(t,i){return"["+(i+1)+"] "+t}).join("\n")+(gloss?"\nLƯU Ý BẮT BUỘC KHI DỊCH CÁC CÂU TRÊN:"+gloss:"");
+  var v=await aiGeminiJson(sys,user,8e3);
+  var arr=v&&Array.isArray(v.v)?v.v:null;
+  if(!arr)throw new Error("AI không trả về bản dịch");
+  var un=function(s){try{return bkUnesc(s)}catch(e){return s}};
+  var out=[];
+  for(var m=0;m<n;m++){
+    var s=typeof arr[m]==="string"?un(arr[m]).trim():"";
+    try{if(s&&typeof window.rhmEnforceSouthernTerms==="function")s=window.rhmEnforceSouthernTerms(s,texts[m])||s}catch(e){}
+    out.push(s);
+  }
+  return out;
+}
+
+/* ---------------------------------------------------------------- 6. trạng thái + engine */
+var AB={on:false,paused:false,tok:0,sess:0,src:null,sents:[],vi:{},pend:{},fail:{},idx:0,cur:null,vt:0,hl:null,hlScale:0};
+function sentIdxAt(pos){            /* câu đầu tiên có điểm cuối > pos */
+  var a=AB.sents,lo=0,hi=a.length-1,ans=a.length;
+  while(lo<=hi){var m=(lo+hi)>>1;if(a[m].e>pos){ans=m;hi=m-1}else lo=m+1}
+  return ans;
+}
+function ensureTrans(i){
+  if(AB.vi[i]!==undefined)return Promise.resolve();
+  if(AB.pend[i])return AB.pend[i];
+  var n=AB.sents.length,j=i,chars=0,idxs=[],sess=AB.sess;
+  while(j<n&&idxs.length<8&&AB.vi[j]===undefined&&!AB.pend[j]){
+    var L=AB.sents[j].t.length;
+    if(idxs.length&&chars+L>900)break;
+    idxs.push(j);chars+=L;j++;
+  }
+  var p=trChunk(idxs.map(function(k){return AB.sents[k].t})).then(function(arr){
+    if(AB.sess!==sess)return;
+    idxs.forEach(function(k,m){AB.vi[k]=arr[m]||""});
+  }).catch(function(e){
+    console.warn("[Audiobook] dịch lỗi",e);
+    if(AB.sess!==sess)return;
+    idxs.forEach(function(k){AB.vi[k]=null});
+  }).then(function(){idxs.forEach(function(k){delete AB.pend[k]})});
+  idxs.forEach(function(k){AB.pend[k]=p});
+  return p;
+}
+function prefetch(i){
+  var n=AB.sents.length;
+  for(var j=i;j<Math.min(n,i+6);j++)if(AB.vi[j]===undefined&&!AB.pend[j])ensureTrans(j);
+}
+
+/* TTS: dùng đúng bộ giọng / tốc độ / chuyển giọng Anh–Việt của boxchat */
+function speakText(text,tok){
+  return new Promise(function(res){
+    if(!window.speechSynthesis){res("ext");return}
+    var v=null;try{if(typeof aiVoicePick==="function")v=aiVoicePick()}catch(e){}
+    var chunks=text.length>220?(text.match(/.{1,200}(\s|$)/g)||[text]):[text],pieces=chunks;
+    try{if(typeof aiLangPieces==="function")pieces=aiLangPieces(chunks)}catch(e){}
+    pieces=pieces.filter(function(x){return x&&String(x).replace(/\u0001/g,"").trim()});
+    var pi=0;
+    (function next(){
+      if(tok!==AB.tok){res("cancel");return}
+      if(pi>=pieces.length){res("ok");return}
+      var piece=pieces[pi++],ut;
+      try{ut=typeof aiUttFor==="function"?aiUttFor(piece,v):new SpeechSynthesisUtterance(String(piece))}catch(e){ut=new SpeechSynthesisUtterance(String(piece))}
+      try{if(typeof aiApplyUttRatePitch==="function")aiApplyUttRatePitch(ut);else{ut.lang=ut.lang||"vi-VN"}}catch(e){}
+      ut.onend=next;
+      ut.onerror=function(e){
+        if(tok!==AB.tok){res("cancel");return}
+        if(e&&(e.error==="canceled"||e.error==="interrupted"))res("ext");     /* bị chỗ khác (boxchat…) ngắt */
+        else next();
+      };
+      try{window.speechSynthesis.speak(ut)}catch(e){res("ext")}
+    })();
+  });
+}
+
+async function run(tok){
+  while(AB.on&&tok===AB.tok){
+    try{if(typeof bkViewTok!=="undefined"&&bkViewTok!==AB.vt){stop();return}}catch(e){}
+    var i=AB.idx,n=AB.sents.length;
+    if(i>=n){toast("Đã đọc hết chương");stop();return}
+    prefetch(i);
+    var st=AB.vi[i];
+    if(st===undefined||st===null){
+      if(st===null){
+        if(AB.fail[i]){AB.vi[i]="";toast("Không dịch được một đoạn, đã bỏ qua");AB.idx=i+1;continue}
+        AB.fail[i]=1;delete AB.vi[i];
+      }
+      setStatus("⏳ Đang dịch…");
+      try{await ensureTrans(i)}catch(e){}
+      if(tok!==AB.tok)return;
+      continue;
+    }
+    if(!st){AB.idx=i+1;continue}
+    var e=i;while(e+1<n&&AB.vi[e+1]==="")e++;
+    AB.cur={s:i,e:e};
+    setStatus("Câu "+(i+1)+"/"+n);
+    drawHl(AB.sents[i].s,AB.sents[e].e,false);
+    var r=await speakText(st,tok);
+    if(tok!==AB.tok)return;
+    if(r==="ext"){stop(true);return}
+    AB.idx=e+1;
+  }
+}
+function play(from){
+  AB.tok++;AB.paused=false;AB.idx=Math.max(0,from);AB.cur=null;
+  try{window.speechSynthesis.cancel()}catch(e){}
+  paintBar();
+  var tok=AB.tok;
+  setTimeout(function(){if(tok===AB.tok&&AB.on)run(tok)},90);
+}
+function pause(){
+  if(!AB.on||AB.paused)return;
+  AB.paused=true;AB.tok++;
+  if(AB.cur)AB.idx=AB.cur.s;
+  try{window.speechSynthesis.cancel()}catch(e){}
+  setStatus("⏸ Đã tạm dừng");paintBar();
+}
+function resume(){if(AB.on&&AB.paused)play(AB.idx)}
+function stop(){
+  AB.on=false;AB.paused=false;AB.tok++;AB.cur=null;
+  try{window.speechSynthesis.cancel()}catch(e){}
+  clearHl();hideBar();paintBtn();
+}
+
+async function start(pos){
+  if(window.__rhmScan){toast("Audiobook tạm thời chỉ dùng cho sách PDF thường (chưa hỗ trợ sách scan)");return}
+  if(!("speechSynthesis" in window)){toast("Trình duyệt không hỗ trợ đọc to");return}
+  if(typeof bkText==="undefined"||!bkText||!bkText.trim()||typeof bkPages==="undefined"||!bkPages.length){toast("Chương đang đọc chữ, bạn thử lại sau giây lát");return}
+  try{if(typeof aiAnyKey==="function"&&!aiAnyKey()){typeof aiShowGate==="function"&&aiShowGate();return}}catch(e){}
+  try{typeof aiTtsStop==="function"&&aiTtsStop()}catch(e){}
+  stop(true);
+  if(AB.src!==bkText){
+    AB.src=bkText;AB.sess++;AB.sents=splitSents(bkText);AB.vi={};AB.pend={};AB.fail={};
+  }
+  if(!AB.sents.length){toast("Chương này không có chữ để đọc");return}
+  if(pos==null||pos<0){
+    var cp=curPage(),ex=bkPages[cp-1];
+    pos=ex&&typeof ex.gs==="number"?ex.gs:0;
+  }
+  var idx=Math.min(sentIdxAt(pos),AB.sents.length-1);
+  AB.on=true;AB.vt=typeof bkViewTok!=="undefined"?bkViewTok:0;
+  showBar();paintBtn();
+  play(idx);
+}
+
+/* ---------------------------------------------------------------- 7. tô sáng câu đang đọc trên PDF */
+var hlSeq=0;
+function clearHl(){
+  hlSeq++;AB.hl=null;
+  try{if(typeof bkVP!=="undefined")bkVP.forEach(function(pg){if(pg.abL&&pg.abL.firstChild)pg.abL.textContent=""})}catch(e){}
+}
+function layerOf(pg){
+  if(pg.abL&&pg.abL.parentNode===pg.wrap)return pg.abL;
+  var L=document.createElement("div");L.className="rhm-abl";
+  pg.wrap.insertBefore(L,pg.tl||null);pg.abL=L;return L;
+}
+async function drawHl(s,e,keepPos){
+  var my=++hlSeq;
+  try{
+    if(typeof bkVP==="undefined"||typeof bkPages==="undefined")return;
+    bkVP.forEach(function(pg){if(pg.abL&&pg.abL.firstChild)pg.abL.textContent=""});
+    AB.hl={s:s,e:e};AB.hlScale=typeof bkScale!=="undefined"?bkScale:0;
+    var first=null;
+    for(var p=0;p<bkPages.length;p++){
+      var ex=bkPages[p],pg=bkVP[p];
+      if(!ex||!pg||ex.ge<=s||ex.gs>=e)continue;
+      var data=pg.data;
+      if(!data){try{data=await window.bkPageData(pg)}catch(x){data=null}}
+      if(my!==hlSeq)return;
+      data=pg.data||data;
+      if(!data||!data.seq||!ex.rg)continue;
+      if(pg._abMapD!==data){var mp=new Map;data.seq.forEach(function(d,k){mp.set(d.idx,k)});pg._abMap=mp;pg._abMapD=data}
+      var list=[];
+      for(var key in ex.rg){
+        var r=ex.rg[key];
+        if(r.e<=s||r.s>=e)continue;
+        var k=pg._abMap.get(+key);
+        if(k==null)continue;
+        var d=data.seq[k],a=Math.max(s,r.s)-r.s,b=Math.min(e,r.e)-r.s;
+        if(b>a)list.push({d:d,a:a,b:b,k:k});
+      }
+      if(!list.length)continue;
+      list.sort(function(x,y){return x.k-y.k});
+      var bands=bkBandsOfList(list),sc=bkScale,L=layerOf(pg),frag=document.createDocumentFragment();
+      bands.forEach(function(bd){
+        var el=document.createElement("div");
+        if(!bd.rot)el.style.cssText="left:"+(bd.x0*sc-1).toFixed(1)+"px;top:"+(bd.top*sc-1).toFixed(1)+"px;width:"+((bd.x1-bd.x0)*sc+2).toFixed(1)+"px;height:"+((bd.bot-bd.top)*sc+2).toFixed(1)+"px";
+        else{
+          var dd=bd.d,sa=Math.sin(dd.angle),ca=Math.cos(dd.angle),v0=-.88*dd.fh,ox=dd.x+bd.u0*ca-v0*sa,oy=dd.y+bd.u0*sa+v0*ca;
+          el.style.cssText="left:"+(ox*sc).toFixed(1)+"px;top:"+(oy*sc).toFixed(1)+"px;width:"+((bd.u1-bd.u0)*sc).toFixed(1)+"px;height:"+(1.15*dd.fh*sc).toFixed(1)+"px;transform-origin:0 0;transform:rotate("+dd.angle.toFixed(5)+"rad)";
+        }
+        frag.appendChild(el);if(!first)first=el;
+      });
+      L.textContent="";L.appendChild(frag);
+    }
+    if(first&&!keepPos)reveal(first);
+  }catch(err){console.warn("[Audiobook] tô sáng lỗi",err)}
+}
+function reveal(el){
+  try{
+    var r=el.getBoundingClientRect(),wr=wrap.getBoundingClientRect();
+    if(r.top<wr.top+70||r.bottom>wr.bottom-110)wrap.scrollBy({top:r.top-wr.top-wr.height*.3,behavior:"smooth"});
+  }catch(e){}
+}
+setInterval(function(){      /* đổi zoom → vẽ lại đúng vị trí */
+  if(AB.on&&AB.hl&&typeof bkScale!=="undefined"&&bkScale!==AB.hlScale)drawHl(AB.hl.s,AB.hl.e,true);
+},500);
+
+/* ---------------------------------------------------------------- 8. thanh điều khiển nổi */
+var bar=null;
+function mkBar(){
+  if(bar)return bar;
+  bar=document.createElement("div");bar.id="rhmAbBar";bar.setAttribute("role","group");bar.setAttribute("aria-label","Audiobook");
+  var ic={
+    prev:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6zM20 5v14L9.5 12z"/></svg>',
+    next:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM4 5v14l10.5-7z"/></svg>',
+    pp:'<svg class="i-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12-7.5z"/></svg>',
+    stop:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>'
+  };
+  bar.innerHTML='<button type="button" data-a="prev" title="Câu trước" aria-label="Câu trước">'+ic.prev+'</button>'+
+    '<button type="button" data-a="pp" class="pp" title="Tạm dừng / tiếp tục" aria-label="Tạm dừng hoặc tiếp tục">'+ic.pp+'</button>'+
+    '<button type="button" data-a="next" title="Câu sau" aria-label="Câu sau">'+ic.next+'</button>'+
+    '<span id="rhmAbSt" aria-live="polite"></span>'+
+    '<button type="button" data-a="stop" title="Dừng Audiobook" aria-label="Dừng Audiobook">'+ic.stop+'</button>';
+  bar.addEventListener("click",function(e){
+    var b=e.target.closest&&e.target.closest("button");if(!b)return;
+    var a=b.dataset.a;
+    if(a==="stop")stop();
+    else if(a==="pp")AB.paused?resume():pause();
+    else if(a==="next")play(((AB.cur?AB.cur.e:AB.idx))+1);
+    else if(a==="prev"){
+      var j=(AB.cur?AB.cur.s:AB.idx)-1;
+      while(j>0&&AB.vi[j]==="")j--;
+      play(Math.max(0,j));
+    }
+  });
+  ["pointerdown","mousedown","touchstart"].forEach(function(ev){bar.addEventListener(ev,function(e){e.stopPropagation()},{passive:true})});
+  viewer.appendChild(bar);
+  return bar;
+}
+function showBar(){mkBar().style.display="flex";paintBar()}
+function hideBar(){if(bar)bar.style.display="none"}
+function paintBar(){if(bar)bar.classList.toggle("paused",!!AB.paused)}
+function setStatus(t){var s=$("rhmAbSt");if(s&&s.textContent!==t)s.textContent=t}
+
+/* ---------------------------------------------------------------- 9. nút "Đọc sách" trên bong bóng tô đen */
+function selPos(){
+  try{var p=bkSelPos();if(p&&typeof p.pos==="number")return p.pos}catch(e){}
+  return -1;
+}
+function addSelBtn(b){
+  if(!b||b.querySelector(".b-ab"))return;
+  var x=document.createElement("button");x.type="button";x.className="b-ab";
+  x.innerHTML='<span class="sb-in">'+HP+'Đọc sách</span>';
+  var tr=b.querySelector(".b-tr");
+  tr&&tr.nextSibling?b.insertBefore(x,tr.nextSibling):b.appendChild(x);
+  x.addEventListener("click",function(){
+    var pos=selPos();
+    if(pos<0)toast("Không xác định được vị trí đoạn chọn, sẽ đọc từ trang đang xem");
+    start(pos);
+  });
+}
+function scanBar(){addSelBtn($("bk-selbar"))}
+new MutationObserver(scanBar).observe(document.body,{childList:true,subtree:true});
+scanBar();
+
+/* ---------------------------------------------------------------- 10. sửa: bong bóng tô đen không biến mất khi chạm chỗ khác (mobile) */
+var tp=null;
+document.addEventListener("pointerdown",function(e){
+  if(e.pointerType!=="touch"||!inReader()){tp=null;return}
+  var t=e.target;
+  if(t&&t.closest&&t.closest("#bk-selbar,#bk-nbub,#rhmAbBar")){tp=null;return}
+  tp={x:e.clientX,y:e.clientY,t:Date.now(),id:e.pointerId};
+},true);
+document.addEventListener("pointerup",function(e){
+  if(!tp||e.pointerId!==tp.id)return;
+  var dt=Date.now()-tp.t,mv=Math.hypot(e.clientX-tp.x,e.clientY-tp.y);tp=null;
+  if(dt>450||mv>12)return;                      /* chỉ xử lý cú chạm, không phải nhấn giữ / kéo chọn */
+  setTimeout(dismissSel,100);
+},true);
+document.addEventListener("pointercancel",function(){tp=null},true);
+function dismissSel(){
+  var sel=document.getSelection();
+  if(sel&&sel.rangeCount&&!sel.isCollapsed)return;   /* vẫn còn vùng chọn gốc (chạm lên chính chữ đang chọn) → để trình duyệt xử lý */
+  var had=false;
+  try{if(typeof bkSel!=="undefined"&&bkSel){bkSelClear();had=true}}catch(x){}
+  try{bkPdfSel=""}catch(x){}
+  var b=$("bk-selbar");
+  if(b&&b.style.display!=="none"){b.style.display="none";had=true}
+  if(had){try{sel&&sel.removeAllRanges()}catch(x){}}
+}
+
+/* ---------------------------------------------------------------- 11. đồng bộ khi đổi chương / đóng trình đọc */
+var lastHidden=viewer.classList.contains("hidden");
+new MutationObserver(function(){
+  var h=viewer.classList.contains("hidden");
+  if(h!==lastHidden){lastHidden=h;if(h)stop(true);else{updInfo();window.rhmrPageInd()}}
+}).observe(viewer,{attributes:true,attributeFilter:["class"]});
+var titleEl=$("bk-v-title");
+if(titleEl)new MutationObserver(function(){
+  AB.on&&stop(true);
+  document.body.classList.remove("rhmr-scan");       /* chương mới: chờ nhận diện lại sách scan */
+  updInfo();window.rhmrPageInd();
+}).observe(titleEl,{childList:true,characterData:true,subtree:true});
+var pg0=$("bk-pdf-pages");
+if(pg0)new MutationObserver(reqInd).observe(pg0,{childList:true});
+window.rhmAudiobook={start:start,stop:stop,pause:pause,resume:resume,state:AB,_split:splitSents};
+try{console.info("[Audiobook] đã nạp")}catch(e){}
 })();
 </script>
 
