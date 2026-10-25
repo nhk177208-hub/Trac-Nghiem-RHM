@@ -6684,7 +6684,7 @@ function locAnchored(h,minRaw,E){
     else rg.push([r[0],r[1]]);
   });
   rg.forEach(function(r){while(r[1]<T.length&&/[.,;:!?)\]"”'’]/.test(T[r[1]]))r[1]++});
-  rg.forEach(function(r){var k=0,x;while(k++<3&&(x=colBridge(r[1],E,n,map,ntn))){r[1]=x;h._col=(h._col||0)+1;while(r[1]<T.length&&/[.,;:!?)\]"”'’]/.test(T[r[1]]))r[1]++}});
+  rg.forEach(function(r){var k=0,x;while(k++<3&&!window.__rhmNoColBridge&&(x=(function(){try{return colBridge(r[1],E,n,map,ntn)}catch(e){console.warn("[OCR] colBridge",e);return 0}})())){r[1]=x;h._col=(h._col||0)+1;while(r[1]<T.length&&/[.,;:!?)\]"”'’]/.test(T[r[1]]))r[1]++}});
   var s0=backPrefix(T,startRaw),cov=total?Math.round(matched/total*100)/100:1;
   h.pos=s0;h.cov=cov;
   try{console.debug("[OCR mục lục]",h.en,"cov",cov,rg.map(function(r){var t=T.slice(r[0],r[1]);return t.slice(0,25)+" … "+t.slice(-25)}))}catch(e){}
