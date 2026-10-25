@@ -281,7 +281,11 @@ html body #ai-tutor-modal .bk-qz-choose button.bk-qz-go:hover{background:#0860ca
 .rhmn-t{font-size:15px;font-weight:700;line-height:1.3}.rhmn-au{font-size:12px;color:#57606a;font-style:italic}
 .rhmn-s{font-size:13px;color:#57606a;line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .rhmd-grid .rhmn-card{flex-direction:column}.rhmd-grid .rhmn-img{flex:none;width:100%}
-.rhmn-upd{font-size:12px;color:#6b7280;margin:0 0 8px}
+.rhmn-upd{font-size:12px;color:#6b7280;margin:0 0 8px}.rhmn-warn{color:#9a6700;background:#fff8c5;border-radius:8px;padding:6px 10px}
+.rhmn-pri{background:#0969da;color:#fff;border-color:#0969da}.rhmn-pri:hover{background:#0858b8}
+.rhmn-more{display:block;margin:16px auto;border:1px solid #d0d7de;background:#fff;color:#0969da;border-radius:10px;padding:10px 18px;font-size:14px;font-weight:700;cursor:pointer}.rhmn-more:hover{background:#f6f8fa}
+.rhmn-sbh{flex:0 0 auto;font-size:11px;font-weight:800;color:#6b7280;margin:8px 4px 0;text-transform:uppercase;letter-spacing:.04em}
+.rhmn-cr{margin-top:6px;font-size:12px;color:#8b949e;line-height:1.5}
 </style>
 <style id="rhm-hub-fit-css">#rhm-hub{width:100%;max-width:100%;box-sizing:border-box}#rhm-hub .rhm-hub-btn{min-width:0;max-width:100%;box-sizing:border-box;overflow:hidden}#rhm-hub .rhm-hub-txt{flex:1 1 auto;min-width:0}</style>
 <script id="rhm-hub-fit">(function(){function fit(){var hub=document.getElementById('rhm-hub');if(!hub||!hub.clientHeight)return;var cs=getComputedStyle(hub);var rows=(cs.gridTemplateRows||'').split(' ').filter(Boolean).length;if(rows!==2){hub.style.removeProperty('--rhm-fs');hub.style.removeProperty('--rhm-ico');hub.querySelectorAll('.rhm-hub-btn').forEach(function(b){b.style.removeProperty('padding')});return}var gap=parseFloat(cs.rowGap)||0;var row=(hub.clientHeight-gap)/2;if(row<20)return;var fs=Math.max(11,Math.min(46,row*.25,hub.clientWidth*.0252));var ico=Math.max(15,Math.min(70,fs*1.5));hub.style.setProperty('--rhm-fs',fs.toFixed(1)+'px');hub.style.setProperty('--rhm-ico',ico.toFixed(1)+'px');var pv=Math.max(2,row*.1),ph=ico*.55;hub.querySelectorAll('.rhm-hub-btn').forEach(function(b){b.style.padding=pv.toFixed(1)+'px '+ph.toFixed(1)+'px'})}function init(){fit();var hub=document.getElementById('rhm-hub');if(hub&&window.ResizeObserver)new ResizeObserver(fit).observe(hub);window.addEventListener('resize',fit);document.addEventListener('fullscreenchange',function(){setTimeout(fit,60)});setTimeout(fit,300);setTimeout(fit,1200)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init()})();</script>
@@ -2515,38 +2519,40 @@ window.rhmdCovErr=function(img){
   var p=img.parentElement;img.remove();p&&!p.querySelector(".rhmd-ph")&&p.insertAdjacentHTML("afterbegin",'<span class="rhmd-ph">'+PH()+'</span>');
 };
 /* ===== TIN TỨC: đọc TinTuc/news.json do GitHub Actions crawl ===== */
-var newsItems=[],newsErr="",newsLoaded=!1,newsUpd=0,nTab="intl";
+var newsItems=[],newsErr="",newsLoaded=!1,newsUpd=0,nTab="intl",newsPaused=[],nLim=30,nSig="";
 function newsFmt(iso){try{var d=new Date(iso),df=(Date.now()-d)/36e5;if(df<1)return"Vừa xong";if(df<24)return Math.floor(df)+" giờ trước";if(df<24*7)return Math.floor(df/24)+" ngày trước";return d.toLocaleDateString("vi-VN")}catch(e){return""}}
 function newsLoad(tok){
   newsRender();
   fetch("TinTuc/news.json?_="+Math.floor(Date.now()/6e5),{cache:"no-store"}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){
-    if(tok!==loadTok)return;newsItems=Array.isArray(j.items)?j.items:[];newsUpd=j.updated||0;newsErr="";newsLoaded=!0;render();
+    if(tok!==loadTok)return;newsItems=Array.isArray(j.items)?j.items:[];newsUpd=j.updated||0;newsPaused=Array.isArray(j.paused)?j.paused:[];newsErr="";newsLoaded=!0;render();
   }).catch(function(){if(tok!==loadTok)return;newsErr="Không tải được tin tức. Hãy thử lại sau.";newsLoaded=!0;render()});
 }
 function newsReg(){return newsItems.filter(function(i){return(i.region||"intl")===nTab})}
-function newsPool(){return newsReg().filter(function(i){return!subj||(subj==="__research"?i.type==="research":subj==="__news"?i.type!=="research":i.source===subj)})}
+function newsPool(){return newsReg().filter(function(i){return!subj||(subj==="__research"?i.type==="research":subj==="__news"?i.type!=="research":subj.indexOf("__g:")===0?i.group===subj.slice(4):i.source===subj)})}
 function newsSb(){
-  var reg=newsReg(),n=reg.length,r=reg.filter(function(i){return i.type==="research"}).length,cn={},names=[];
-  reg.forEach(function(i){if(i.type==="research")return;if(!(i.source in cn)){cn[i.source]=0;names.push(i.source)}cn[i.source]++});
+  var reg=newsReg(),n=reg.length,r=reg.filter(function(i){return i.type==="research"}).length,cn={},names=[],gc={},gn=[];
+  reg.forEach(function(i){if(i.group){if(!(i.group in gc)){gc[i.group]=0;gn.push(i.group)}gc[i.group]++}if(i.type==="research")return;if(!(i.source in cn)){cn[i.source]=0;names.push(i.source)}cn[i.source]++});
+  var B=function(m,label,c){return'<button type="button" class="rhmd-subj'+(subj===m?" on":"")+'" data-m="'+esc(m)+'">'+esc(label)+"<b>"+c+"</b></button>"};
   var h='<button type="button" class="rhmd-subj'+(subj?"":" on")+'" data-m="">Tất cả<b>'+n+'</b></button>';
-  if(nTab==="intl"){h+='<button type="button" class="rhmd-subj'+(subj==="__news"?" on":"")+'" data-m="__news">Tin tức<b>'+(n-r)+'</b></button>';
-  h+='<button type="button" class="rhmd-subj'+(subj==="__research"?" on":"")+'" data-m="__research">Nghiên cứu (PubMed)<b>'+r+'</b></button>'}
-  names.sort().forEach(function(m){h+='<button type="button" class="rhmd-subj'+(subj===m?" on":"")+'" data-m="'+esc(m)+'">'+esc(m)+"<b>"+cn[m]+"</b></button>"});
+  h+='<div class="rhmn-sbh">Loại</div>'+B("__news","Tin tức",n-r)+B("__research","Nghiên cứu",r);
+  if(gn.length>1){h+='<div class="rhmn-sbh">Nhóm nguồn</div>';gn.sort().forEach(function(g){h+=B("__g:"+g,g,gc[g])})}
+  if(names.length){h+='<div class="rhmn-sbh">Nguồn</div>';names.sort().forEach(function(m){h+=B(m,m,cn[m])})}
   sbList.innerHTML=h;
 }
 function newsRender(){
   if(nRdId){nRdPaint();return}
   var k=fold(q).trim(),pool=newsPool();
-  shown=k?pool.filter(function(i){return fold(i.title+" "+(i.summary||"")+" "+i.source).indexOf(k)>=0}):pool;
+  shown=k?pool.filter(function(i){return fold(i.title+" "+(i.summary||"")+" "+i.source+" "+(i.authors||"")+" "+(i.group||"")).indexOf(k)>=0}):pool;
+  var sig=nTab+"|"+subj+"|"+k;if(sig!==nSig){nSig=sig;nLim=30}
   cnt.textContent=shown.length;renderSb();
   if(!newsLoaded){main.innerHTML='<div class="rhmd-msg">⏳ Đang tải tin tức...</div>';return}
   if(newsErr){main.innerHTML='<div class="rhmd-msg">'+esc(newsErr)+"</div>";return}
   if(!newsReg().length){main.innerHTML='<div class="rhmd-msg">Chưa có tin tức nào. Bấm nút ↻ để lấy tin ngay.</div>';return}
   if(!shown.length){main.innerHTML='<div class="rhmd-msg">Không tìm thấy tin phù hợp.</div>';return}
-  main.innerHTML=(newsUpd?'<div class="rhmn-upd">Cập nhật '+esc(newsFmt(newsUpd))+" · "+newsReg().length+' tin</div>':"")+'<div class="'+(view==="list"?"rhmd-list":"rhmd-grid")+' rhmn-wrap">'+shown.map(function(i){
+  main.innerHTML=(newsUpd?'<div class="rhmn-upd">Cập nhật '+esc(newsFmt(newsUpd))+" · "+newsReg().length+' tin</div>':"")+(newsPaused.length?'<div class="rhmn-upd rhmn-warn">⚠ Tạm không cập nhật: '+esc(newsPaused.slice(0,4).join(", ")+(newsPaused.length>4?" và "+(newsPaused.length-4)+" nguồn khác":""))+"</div>":"")+'<div class="'+(view==="list"?"rhmd-list":"rhmd-grid")+' rhmn-wrap">'+shown.slice(0,nLim).map(function(i){
     var res=i.type==="research";
     return'<a class="rhmn-card'+(res?" rhmn-res":"")+'" data-id="'+esc(i.id)+'" href="'+esc(i.url)+'" target="_blank" rel="noopener noreferrer">'+(i.image?'<span class="rhmn-img"><img loading="lazy" referrerpolicy="no-referrer" src="'+esc(i.image)+'" alt="" onerror="this.parentNode.remove()"></span>':"")+
-    '<span class="rhmn-body"><span class="rhmn-meta"><b>'+(res?"🔬 ":"")+esc(i.source)+"</b> · "+esc(newsFmt(i.date))+'</span><span class="rhmn-t">'+esc(i.title)+"</span>"+(res&&i.authors?'<span class="rhmn-au">'+esc(i.authors)+"</span>":"")+(i.summary?'<span class="rhmn-s">'+esc(i.summary)+"</span>":"")+"</span></a>"}).join("")+"</div>";
+    '<span class="rhmn-body"><span class="rhmn-meta"><b>'+(res?"🔬 ":"")+esc(i.source)+"</b> · "+esc(newsFmt(i.date))+'</span><span class="rhmn-t">'+esc(i.title)+"</span>"+(res&&i.authors?'<span class="rhmn-au">'+esc(i.authors)+"</span>":"")+(i.summary?'<span class="rhmn-s">'+esc(i.summary)+"</span>":"")+"</span></a>"}).join("")+"</div>"+(shown.length>nLim?'<button type="button" class="rhmn-more">Hiện thêm ('+(shown.length-nLim)+' tin còn lại)</button>':"");
 }
 /* ===== Trình đọc tin ngay trong app (kiểu MSN): bài đã trích sẵn ở TinTuc/a/<id>.json ===== */
 var nRdId=null,nRdMode="app",nArt={},nRdScroll=0,nLoad={};
@@ -2589,7 +2595,7 @@ function nRdPaint(){
   cnt.textContent="";
   var res=it.type==="research",a=nArt[it.id],h='<div class="rhmn-rd"><div class="rhmn-rdbar"><button type="button" class="rhmn-rdb" data-a="back">← Danh sách</button>'+
    '<span class="rhmn-seg"><button type="button" data-a="app" class="'+(nRdMode==="app"?"on":"")+'">Đọc trong app</button><button type="button" data-a="web" class="'+(nRdMode==="web"?"on":"")+'">Trang gốc</button></span>'+
-   '<a class="rhmn-rdb" href="'+esc(it.url)+'" target="_blank" rel="noopener noreferrer">Mở bài gốc ↗</a></div>';
+   '<a class="rhmn-rdb rhmn-pri" href="'+esc(it.url)+'" target="_blank" rel="noopener noreferrer">Đọc bài gốc ↗</a></div>';
   if(nRdMode==="web"){
     var wb=nWorkerBase();
     h+='<div class="rhmn-hint">'+(wb?"Trang gốc được tải qua Worker (đã bỏ script nên có thể mất một số tính năng). Nếu khung trống, dùng “Đọc trong app”.":"Một số website chặn hiển thị trong app. Nếu khung bên dưới trống, hãy dùng “Đọc trong app” hoặc “Mở bài gốc ↗”.")+'</div><iframe class="rhmn-if" src="'+esc(wb?wb+"/page?url="+encodeURIComponent(it.url):it.url)+'" '+(wb?'sandbox="allow-popups allow-popups-to-escape-sandbox"':'sandbox="allow-scripts allow-same-origin allow-popups allow-forms"')+' referrerpolicy="no-referrer" loading="lazy"></iframe></div>';
@@ -2606,11 +2612,12 @@ function nRdPaint(){
     if(it.image)h+='<img class="rhmn-hero" referrerpolicy="no-referrer" src="'+esc(it.image)+'" alt="" onerror="this.remove()">';
     h+='<div class="rhmn-body"><p>'+esc(it.summary||"Chưa có nội dung. Hãy mở bài gốc để đọc.")+'</p></div><div class="rhmn-hint">Chưa lưu được toàn văn bài này. Bấm “Trang gốc” hoặc “Mở bài gốc ↗”.</div>';
   }
-  h+='<div class="rhmn-src">Nguồn: <a href="'+esc(it.url)+'" target="_blank" rel="noopener noreferrer">'+esc(it.source)+"</a></div></article></div>";
+  h+='<div class="rhmn-src">Nguồn: <a href="'+esc(it.url)+'" target="_blank" rel="noopener noreferrer">'+esc(it.source)+"</a>"+(it.group?" · "+esc(it.group):"")+' · <a href="'+esc(it.url)+'" target="_blank" rel="noopener noreferrer">Đọc bài gốc ↗</a><div class="rhmn-cr">Bản quyền nội dung thuộc về '+esc(String(it.source).split(" · ")[0])+". Bản hiển thị trong app chỉ phục vụ học tập cá nhân; hãy mở bài gốc để có bản đầy đủ và chính xác nhất.</div></div></article></div>";
   main.innerHTML=h;
 }
 main.addEventListener("click",function(e){
   if(mode!=="news")return;
+  var mb=e.target.closest(".rhmn-more");if(mb){nLim+=30;newsRender();return}
   var c=e.target.closest(".rhmn-card");
   if(c&&!e.ctrlKey&&!e.metaKey&&!e.shiftKey&&e.button===0){e.preventDefault();nRdOpen(c.dataset.id);return}
   var b=e.target.closest(".rhmn-rd [data-a]");if(!b)return;
@@ -2657,7 +2664,7 @@ async function newsRefresh(){
     if(!cr.ok){fail("Không đọc được news.json ("+cr.status+")");return}
     var j=await cr.json(),old={};newsItems.forEach(function(i){old[i.id]=1});
     var add=(j.items||[]).filter(function(i){return!old[i.id]}).length;
-    newsItems=j.items||[];newsUpd=j.updated||0;newsErr="";newsLoaded=!0;render();
+    newsItems=j.items||[];newsUpd=j.updated||0;newsPaused=Array.isArray(j.paused)?j.paused:[];newsErr="";newsLoaded=!0;render();
     nrfToast(add?"✅ Có "+add+" tin mới":"✅ Xong, chưa có tin nào mới")
   }catch(e){fail("Lỗi mạng: "+(e&&e.message||e))}
   finally{nrfBusy=!1;btn&&btn.classList.remove("rhmn-spin")}
