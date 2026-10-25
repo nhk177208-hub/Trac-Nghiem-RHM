@@ -5926,7 +5926,7 @@ window.__rhmOcrScan=1;
 var TESS_VER="5.1.1",
     TESS_JS="https://cdn.jsdelivr.net/npm/tesseract.js@"+TESS_VER+"/dist/tesseract.min.js",
     LANG_PATH="https://cdn.jsdelivr.net/npm/@tesseract.js-data/eng@1.0.0/4.0.0_best_int",
-    CACHE_V="v4",MIN_NATIVE=25,OCR_W=((navigator.deviceMemory&&navigator.deviceMemory<=4)||/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent||""))?1500:1900,MAX_PIX=12e6,MIN_WORD_CONF=35,MIN_LINE_CONF=45;
+    CACHE_V="v5",MIN_NATIVE=25,OCR_W=((navigator.deviceMemory&&navigator.deviceMemory<=4)||/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent||""))?1500:1900,MAX_PIX=12e6,MIN_WORD_CONF=35,MIN_LINE_CONF=45;
 var orig=window.bkPageData,libP=null,workerP=null,idleT=0,curPg=null,btn=null,chBusy=false,chCancel=false;
 
 var quiet=false;
@@ -6011,10 +6011,12 @@ function roInRect(b,R,pad){
   return -1;
 }
 /* dòng rác do OCR đọc nhầm hoa văn / ảnh: nhiều mảnh 1-2 ký tự, ít chữ cái */
-function roJunk(ws){
-  var t=ws.map(function(w){return w.text.trim()}),chars=t.join("").length,letters=(t.join("").match(/[A-Za-zÀ-ỹ]/g)||[]).length;
+function roJunk(ws,mean){
+  var t=ws.map(function(w){return w.text.trim()}),all=t.join(""),chars=all.length,
+      an=(all.match(/[A-Za-zÀ-ỹ0-9]/g)||[]).length;
   if(!chars)return true;
-  if(letters/chars<.55&&chars>=4)return true;
+  if(mean>=75)return false;            /* dòng đọc chắc chắn (kể cả dòng nhiều số / ký hiệu) thì giữ */
+  if(an/chars<.5&&chars>=4)return true;
   if(t.length>=3){
     var avg=chars/t.length,real=t.filter(function(w){return /[A-Za-zÀ-ỹ]{3,}/.test(w)}).length;
     if(avg<2.4)return true;
@@ -6049,7 +6051,7 @@ function convert(data,s,minW,minL,info){
     var mean=0;ws.forEach(function(w){mean+=w.confidence});mean/=ws.length;
     if(mean<minL)return;
     if(!ws.some(function(w){return /[A-Za-z0-9]/.test(w.text)}))return;
-    if(roJunk(ws))return;
+    if(roJunk(ws,mean))return;
     var bl=L.baseline&&L.baseline.has_baseline&&L.baseline.x1>L.baseline.x0?L.baseline:null,
         lh=L.bbox.y1-L.bbox.y0;
     var by=function(xc){return bl?bl.y0+(bl.y1-bl.y0)*(xc-bl.x0)/(bl.x1-bl.x0):L.bbox.y1-.2*lh};
@@ -6069,7 +6071,7 @@ function convert(data,s,minW,minL,info){
   recs.forEach(function(r){
     var cy=(r.bb.y0+r.bb.y1)/2,edge=Hp&&(cy<.14*Hp||cy>.88*Hp);
     if(edge&&RO_PN.test(r.text))r.k="pn";
-    else if(RO_CAP.test(r.text)||(/CAPTION/.test(r.bt)&&bfh&&r.fh<=1.12*bfh))r.k="cap";
+    else if(RO_CAP.test(r.text))r.k="cap";
     else if(/TABLE/.test(r.bt))r.k="tbl";
     else if(roInRect(r.bb,figs,6)>=0)r.k="fig";
     else if(r.ti>=0&&tcount[r.ti]>=3)r.k="box";
@@ -6352,7 +6354,7 @@ async function autoRestore(doc,tok){
     await chapterOcr(true);
   }catch(e){console.warn("[OCR] tự dựng lại từ cache",e)}
 }
-window.rhmOcrVer=4;try{console.info("[OCR] bản vá chế độ sách scan v4 đã nạp")}catch(e){}
+window.rhmOcrVer=5;try{console.info("[OCR] bản vá chế độ sách scan v5 đã nạp")}catch(e){}
 window.rhmOcr={dump:function(n){var p=bkVP&&bkVP[n-1];return p&&p._ocrRaw},chapter:chapterOcr,auto:autoRestore,_convert:convert,_analyze:roAnalyze};
 })();</script>
 <script id="rhm-ocr-mode">(function(){
@@ -6451,34 +6453,17 @@ window.rhmOcrKinds=function(pg,its,junk){
 
 /* ---------------------------------------------------------------- prompt AI cho sách scan */
 var pSys=window.bkPdfSystem;
-var OCR_HEAD=[
-"Bạn là chuyên gia dàn trang sách giáo khoa. Bạn được cho FILE PDF của một chương sách (hoặc một phần của chương). ĐÂY LÀ SÁCH SCAN: mỗi trang là ẢNH CHỤP trang giấy (có thể mờ, nghiêng nhẹ, chữ nhỏ, nền màu, hai cột), không có lớp chữ sẵn. Hãy ĐỌC ẢNH và chia phần VĂN BẢN CHÍNH thành các PHÂN MỤC theo tiêu đề (tối đa 10 cấp). Với mỗi phân mục chỉ trả TÊN MỤC và hai MỐC ĐẦU / CUỐI của từng đoạn chữ liên tục (KHÔNG chép cả nội dung): app sẽ tự dò hai mốc đó trong chữ OCR của máy rồi tô sáng toàn bộ chữ nằm giữa. Chỉ trả về JSON, không thêm chữ nào khác.",
+var SCAN_NOTE=["",
 "",
-'ĐỊNH DẠNG: {"lead":[{"page":n,"start":"...","end":"..."}],"sections":[{"title":"...","page":n,"level":1,"vi":"...","parts":[{"page":n,"start":"...","end":"..."},{"page":n,"cont":"col","start":"...","end":"..."}]}],"done":true}',
-'- "title": tiêu đề mục, chép đúng chữ in trong ảnh, BỎ số thứ tự / ký hiệu in sẵn (1.2, A., •). Số thứ tự nằm trong ô vuông / ô tròn / hình màu cạnh tiêu đề (ví dụ ô xanh ghi "1", "2") là số của tiêu đề: bỏ khỏi "title", và đó không phải chữ thân bài. Tiêu đề dài 2–3 dòng (cùng cỡ chữ, cùng lề) là MỘT mục: ghi trọn các dòng.',
-'- "page": số thứ tự trang trong file PDF đính kèm (trang đầu của file = 1), KHÔNG phải số in trên giấy. "level": 1 = mục lớn nhất trong chương (ngay dưới tên chương), 2 = con của nó…; cùng kiểu trình bày thì cùng cấp xuyên suốt; cấp mới chỉ lớn hơn cấp liền trước tối đa 1. "vi": bản dịch tiếng Việt của tiêu đề, đúng thuật ngữ chuyên ngành.',
-'- "parts": mỗi phần tử là MỘT ĐOẠN CHỮ LIÊN TỤC của mục, theo thứ tự đọc. "start" = khoảng 8–12 từ ĐẦU của đoạn, "end" = khoảng 8–12 từ CUỐI của đoạn, chép ĐÚNG TỪNG CHỮ như in trong ảnh (không dịch, không sửa, không tóm tắt). Đoạn rất ngắn (dưới ~15 từ) thì chép trọn đoạn vào "start" và để "end" là "". Từ bị gạch nối ngắt dòng thì ráp lại. BỎ chỉ số trích dẫn / chú thích nhỏ (số mũ như "1)", "2,3)", "[4]") khỏi "start" và "end". Chọn mốc ở chỗ chữ rõ, không chọn chỗ bị nhòe.',
-'   + Part ĐẦU bắt đầu từ chữ thân bài NGAY SAU tiêu đề (không gồm tiêu đề). Tiêu đề in đậm đầu đoạn rồi chữ chạy tiếp cùng dòng: "title" chỉ là phần tiêu đề, part đầu là phần chữ chạy tiếp.',
-'   + Khi chữ của mục bị NGẮT — sang cột bên cạnh, sang trang kế, hoặc bị chèn hình / bảng / khung / chú thích giữa chừng — thì KẾT THÚC part đang ghi (mốc "end" là chữ cuối trước chỗ ngắt) và MỞ PART MỚI đúng chỗ chữ tiếp tục, ghi "page" = trang nơi part mới bắt đầu và "cont" = "col" (sang cột khác), "page" (sang trang khác) hoặc "gap" (bị chèn hình / bảng / khung rồi chữ chạy tiếp). Part đầu không cần "cont".',
-'   + SÁCH HAI CỘT: đọc hết cột TRÁI từ trên xuống dưới rồi mới sang cột PHẢI; một mục có thể bắt đầu ở cột trái, tiếp tục ở cột phải rồi sang trang sau — mỗi chỗ ngắt là một part.',
-'   + Mỗi mục chỉ chứa chữ thuộc TRỰC TIẾP mục đó: từ tiêu đề tới ngay trước tiêu đề kế tiếp (bất kỳ cấp nào). Chữ của mục con thuộc mục con, KHÔNG lặp lại ở mục cha. Mục chỉ có tiêu đề rồi tới ngay tiêu đề con thì "parts" là [].',
-'- "lead": nếu file BẮT ĐẦU bằng chữ thân bài chưa có tiêu đề riêng (phần tiếp của mục đã mở ở trang / phần trước, hoặc đoạn mở đầu nằm trước tiêu đề đầu tiên) thì ghi mốc vào "lead" (cùng quy tắc như "parts", phần tử {"page","start","end"}). Không có thì "lead":[].',
-"",
-"RIÊNG VỚI ẢNH SCAN:",
-'- Trang MỞ CHƯƠNG (chỉ có tên chương cỡ lớn trên nền màu / hình trang trí) không có mục nào: bỏ qua.',
-'- Dải ĐẦU TRANG (thường nền màu nhạt) ghi tên chương hoặc tên sách và hay ĐỔI theo trang chẵn / lẻ (trang chẵn ghi nhãn kiểu "CHAPTER 1", trang lẻ ghi tên chương). Số trang, chân trang cũng vậy. Tất cả đều BỎ QUA dù cỡ chữ lớn hay in đậm.',
-'- Tiêu đề thường là: ô số + dòng chữ đậm, cỡ lớn hơn thân bài, có khoảng trắng phía trên; có thể in nghiêng, in màu hoặc nằm trên nền xám. Chữ nhỏ / mờ trên ảnh scan vẫn phải bắt đủ tiêu đề, không bỏ sót mục lớn.',
-'- Khung nền màu (sidebar, hộp ghi chú), danh sách bên trong khung, chữ nằm trên ảnh chụp / slide / sơ đồ / nhãn mũi tên, chú thích dạng "Fig 1-2", "Fig1-6" đều không phải thân bài: bỏ qua, và KẾT THÚC part trước chỗ chúng chen vào.',
-""].join("\n");
-var OCR_LIMIT='GIỚI HẠN MỖI LẦN TRẢ (trả từng đợt nếu dài): mỗi lần trả tối đa khoảng 60 mục. Nếu file còn mục chưa trả hết thì DỪNG Ở CUỐI MỘT MỤC (không cắt ngang một mục) và đặt "done": false; app sẽ gọi lại, nói rõ mục cuối cùng đã trả, khi đó trả TIẾP từ mục liền sau, không lặp lại mục đã trả. Trả hết file thì "done": true.';
+"LƯU Ý RIÊNG VỚI SÁCH SCAN (mỗi trang là ẢNH CHỤP trang giấy, có thể mờ, nghiêng nhẹ, chữ nhỏ, hai cột):",
+'- Vẫn chép NGUYÊN VĂN như in trong ảnh. BỎ chỉ số trích dẫn nhỏ dạng số mũ (như "1)", "2,3)", "[4]") và các số / ký hiệu thừa do mờ ảnh. Từ bị gạch nối ngắt dòng thì ráp lại.',
+'- Sách hai cột: đọc hết cột TRÁI từ trên xuống dưới rồi mới sang cột PHẢI; chỗ ngắt cột / trang là chỗ mở part mới.',
+'- Trang MỞ CHƯƠNG (chỉ có tên chương cỡ lớn trên nền màu) không có mục nào. Dải ĐẦU TRANG (thường nền màu nhạt) ghi tên chương / tên sách và ĐỔI theo trang chẵn / lẻ; số trang, chân trang cũng vậy: tất cả BỎ QUA dù cỡ chữ lớn hay in đậm.',
+'- Số thứ tự đặt trong ô vuông / ô tròn màu cạnh tiêu đề (ví dụ ô xanh ghi "1", "2") là số của tiêu đề: bỏ khỏi "title", không phải chữ thân bài. Tiêu đề có thể in nghiêng, in màu hoặc cỡ chữ chỉ hơi lớn hơn thân bài; chữ nhỏ / mờ vẫn phải bắt đủ tiêu đề, không bỏ sót mục lớn.',
+'- Khung nền màu (sidebar, hộp ghi chú), danh sách bên trong khung, chữ nằm trên ảnh chụp / slide / sơ đồ, chú thích dạng "Fig 1-2", "Fig1-6" đều không phải thân bài: bỏ qua và KẾT THÚC part trước chỗ chúng chen vào.'].join("\n");
 function ocrSystem(sub){
-  var base=pSys.apply(window,arguments);
-  var a=base.indexOf("TUYỆT ĐỐI KHÔNG CHÉP"),b=base.indexOf("GIỚI HẠN MỖI LẦN TRẢ");
-  if(a<0||b<a)return base;            /* prompt gốc đã đổi cấu trúc -> dùng prompt gốc cho an toàn */
-  var tail;
-  if(sub){var c=base.indexOf("CHẾ ĐỘ MỤC CON");tail=OCR_LIMIT+(c>=0?"\n\n"+base.slice(c):"")}
-  else tail=OCR_LIMIT+(typeof BK_TR_GLOSS==="string"?BK_TR_GLOSS:"");
-  return OCR_HEAD+base.slice(a,b)+tail;
+  /* giữ nguyên cách AI trả nguyên văn như chế độ thường; chỉ thêm lưu ý riêng cho ảnh scan */
+  return pSys.apply(window,arguments)+SCAN_NOTE;
 }
 if(typeof pSys==="function")window.bkPdfSystem=function(sub){
   return window.__rhmScan?ocrSystem.apply(this,arguments):pSys.apply(this,arguments);
@@ -6618,11 +6603,11 @@ function locAnchored(h,minRaw,E){
     var pt=parts[pi],sp=splitAnch(pt.text),A=norm(sp.a),B=norm(sp.b),pg=pt.page||h.page||1;
     if(A.length<2)continue;
     total+=A.length+(B.length&&B!==A?B.length:0);
-    var ms=findW(A,pg,cursor);
+    var ms=findW(A,pg,cursor)||(A.length>50?findW(A.slice(0,45),pg,cursor):null);
     if(!ms)continue;
     var me=ms,eN=ms.e;
     if(B.length>=2&&B!==A){
-      var after=Math.max(ms.e,ms.s+1),end=pr(pg)[1],end2=pr(pg+1)[1],Bs=[B,B.slice(-Math.max(14,Math.round(B.length*.6)))],r2=null;
+      var after=Math.max(ms.e,ms.s+1),end=pr(pg)[1],end2=pr(pg+1)[1],Bs=[B,B.slice(-Math.max(14,Math.round(B.length*.6))),B.length>40?B.slice(-30):B],r2=null;
       for(var bi=0;bi<Bs.length&&!r2;bi++)r2=find(Bs[bi],n,after,Math.max(after,end))||find(Bs[bi],n,after,Math.max(after,end2));
       if(r2){eN=r2.e;matched+=B.length-r2.d}
       else{
