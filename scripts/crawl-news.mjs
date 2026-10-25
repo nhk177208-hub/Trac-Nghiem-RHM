@@ -303,8 +303,8 @@ export function extractArticle(page, base) {
   const title = og('og:title') || ld.headline || strip(tag(page, 'title'));
   const image = abs(og('og:image') || og('twitter:image') || ld.image || '', base);
   const desc = og('og:description') || og('description');
-  const dateStr = og('article:published_time') || og('og:published_time') || og('datePublished') || ld.date || (page.match(/"datePublished"\s*:\s*"([^"]+)"/) || [])[1] || attr(page.match(/<time\b[^>]*>/i)?.[0] || '', 'time', 'datetime');
-  const ts = Date.parse(dateStr || '');
+  const dateStr = og('article:published_time') || og('og:published_time') || og('datePublished') || og('pubdate') || og('DC.date.issued') || (page.match(/itemprop=["']datePublished["'][^>]*content=["']([^"']+)["']/i) || [])[1] || ld.date || (page.match(/"datePublished"\s*:\s*"([^"]+)"/) || [])[1] || attr(page.match(/<time\b[^>]*>/i)?.[0] || '', 'time', 'datetime');
+  let ts = Date.parse(dateStr || '');
   const byline = og('author') || og('article:author') || ld.author || '';
   const cm = page.match(/<link\b[^>]*rel=["']canonical["'][^>]*>/i); const ch = cm ? attr(cm[0], 'link', 'href') : '';
   const canonical = cleanUrl(ch ? abs(ch, base) : (ld.url ? abs(ld.url, base) : ''));
@@ -312,6 +312,15 @@ export function extractArticle(page, base) {
   let region = '';
   for (const t of ['article', 'main']) { const ms = [...h.matchAll(new RegExp('<' + t + '\\b[^>]*>([\\s\\S]*?)</' + t + '>', 'gi'))].map(x => x[1]); if (ms.length) { region = ms.sort((a, b) => b.length - a.length)[0]; if (strip(region).length > 400) break; } }
   if (strip(region).length < 400) region = h;
+  if (isNaN(ts)) {   // trang kieu Viet Nam: ngay dang la chu thuong ("Ngay dang: 19/10/2026"), khong co the meta
+    const DATE = /(\d{1,2})[\/\-.](\d{1,2})[\/\-.](20\d{2})/;
+    const loose = /(?:ngày\s+đăng|đăng\s+ngày|đăng\s+lúc|ngày\s+xuất\s+bản|cập\s+nhật|ngày)\s*[:\-]?\s*(?:[^\d]{0,25})?(\d{1,2})[\/\-.](\d{1,2})[\/\-.](20\d{2})/i;
+    const strict = /(?:ngày\s+đăng|đăng\s+ngày|đăng\s+lúc|ngày\s+xuất\s+bản)\s*[:\-]?\s*(?:[^\d]{0,25})?(\d{1,2})[\/\-.](\d{1,2})[\/\-.](20\d{2})/i;
+    const top = strip(region).slice(0, 2500);
+    // trong khoi bai viet: cho phep cue long; ngoai khoi bai (tieu de/nav): CHI nhan cue ro rang de khong nhan nham ngay hien tai cua trang
+    const m = top.match(loose) || top.slice(0, 300).match(DATE) || strip(h).slice(0, 12000).match(strict);
+    if (m) { const d = +m[1], mo = +m[2], y = +m[3]; if (d >= 1 && d <= 31 && mo >= 1 && mo <= 12) ts = Date.UTC(y, mo - 1, d, 5); }
+  }
   // gom cac doan <p> gan nhau thanh cum, chon cum co nhieu chu nhat
   const ps = [...region.matchAll(/<p\b[^>]*>[\s\S]*?<\/p>/gi)].map(x => ({ i: x.index, e: x.index + x[0].length, len: strip(x[0]).length }));
   let best = null, cur = null;
@@ -471,24 +480,26 @@ async function collect(s, log, ctx) {
 }
 
 /* ---------- bai quet link: mo trang kiem tra that, khong dung thi bo ---------- */
-async function enrichScraped(items, s, isKnown, minTs) {
+async function enrichScraped(items, s, isKnown, minTs, log = () => {}) {
   const todo = items.filter(i => i._scraped && !isKnown(i)).slice(0, SCRAPE_PER_SITE);
-  const ok = [];
+  const ok = []; const drop = { loi: 0, trung: 0, 'khong-ngay': 0, cu: 0, ngan: 0, loc: 0 };
   await pool(todo, 3, async it => {
-    const page = extractArticle(await get(it.url, 'text/html,*/*'), it.url);
+    let page; try { page = extractArticle(await get(it.url, 'text/html,*/*'), it.url); } catch (e) { drop.loi++; return; }
     if (page.canonical && page.canonical !== it.url) {      // dung dia chi chinh thuc cua trang de loc trung chinh xac
       try { const a = new URL(page.canonical), b = new URL(it.url);
-        if (a.hostname === b.hostname && a.pathname.length >= 8) { it.url = page.canonical; it.id = 'n' + sha(it.url); if (isKnown(it)) return; } } catch {}
+        if (a.hostname === b.hostname && a.pathname.length >= 8) { it.url = page.canonical; it.id = 'n' + sha(it.url); if (isKnown(it)) { drop.trung++; return; } } } catch {}
     }
-    if (!page.ts || page.ts < minTs || page.ts > Date.now() + 864e5) return;        // khong co ngay xuat ban that / qua cu -> bo
+    if (!page.ts) { drop['khong-ngay']++; return; }                                 // khong co ngay xuat ban that -> bo
+    if (page.ts < minTs || page.ts > Date.now() + 864e5) { drop.cu++; return; }     // qua cu / ngay vo ly -> bo
     const title = trunc((page.title || '').replace(/\s*[|–-]\s*[^|–-]{3,40}$/, ''), 220);
-    if (title.length < 15 || page.textLen < 250) return;                            // khong phai bai viet
-    if (s.filter && !s.filter.test((title + ' ' + (page.desc || '') + ' ' + strip(page.html).slice(0, 1500)).normalize('NFC'))) return;
+    if (title.length < 15 || page.textLen < 250) { drop.ngan++; return; }           // khong phai bai viet
+    if (s.filter && !s.filter.test((title + ' ' + (page.desc || '') + ' ' + strip(page.html).slice(0, 1500)).normalize('NFC'))) { drop.loc++; return; }
     it.title = title; it.date = new Date(page.ts).toISOString();
     it.summary = trunc(page.desc || strip(page.html), 420);
     if (page.image) it.image = page.image;
     it._art = page; ok.push(it);
   });
+  log(`     ${s.name}: mo ${todo.length} link -> nhan ${ok.length}; bo: ` + Object.entries(drop).filter(([, v]) => v).map(([k, v]) => k + ' ' + v).join(', '));
   return ok;
 }
 
@@ -554,7 +565,7 @@ async function main() {
     try {
       let { items, via } = await collect(s, log, ctx);
       const scraped = items.length > 0 && items.every(i => i._scraped);
-      if (scraped) items = await enrichScraped(items, s, i => have.has(i.id) || haveUrl.has(i.url), minTs);
+      if (scraped) items = await enrichScraped(items, s, i => have.has(i.id) || haveUrl.has(i.url), minTs, log);
       else if (s.filter) items = items.filter(i => s.filter.test((i.title + ' ' + i.summary).normalize('NFC')));
       const fresh = items.filter(i => !have.has(i.id) && !haveUrl.has(i.url) && !haveTitle.has(normT(i.title)) && !(i.doi && haveDoi.has(normD(i.doi))) && Date.parse(i.date) >= minTs && Date.parse(i.date) <= Date.now() + 864e5);
       log(`OK   [${s.region}] ${s.name} (${via || 'khong co bai'}): ${items.length} bai${s.filter ? ' sau loc' : ''}, ${fresh.length} moi`);
