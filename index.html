@@ -5926,7 +5926,7 @@ window.__rhmOcrScan=1;
 var TESS_VER="5.1.1",
     TESS_JS="https://cdn.jsdelivr.net/npm/tesseract.js@"+TESS_VER+"/dist/tesseract.min.js",
     LANG_PATH="https://cdn.jsdelivr.net/npm/@tesseract.js-data/eng@1.0.0/4.0.0_best_int",
-    CACHE_V="v3",MIN_NATIVE=25,OCR_W=2200,MAX_PIX=12e6,MIN_WORD_CONF=35,MIN_LINE_CONF=45;
+    CACHE_V="v4",MIN_NATIVE=25,OCR_W=((navigator.deviceMemory&&navigator.deviceMemory<=4)||/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent||""))?1500:1900,MAX_PIX=12e6,MIN_WORD_CONF=35,MIN_LINE_CONF=45;
 var orig=window.bkPageData,libP=null,workerP=null,idleT=0,curPg=null,btn=null,chBusy=false,chCancel=false;
 
 var quiet=false;
@@ -5963,14 +5963,18 @@ function roAnalyze(img){
   var W=img.width,H=img.height,d=img.data,C=Math.max(10,Math.round(W/140)),gw=Math.ceil(W/C),gh=Math.ceil(H/C),n=gw*gh,
       cnt=new Uint32Array(n),mid=new Uint32Array(n),sat=new Uint32Array(n),drk=new Uint32Array(n),wht=new Uint32Array(n),
       wr=new Float64Array(n),wg=new Float64Array(n),wb=new Float64Array(n),x,y,i,c;
-  for(y=0;y<H;y+=2){var cy=((y/C)|0)*gw,ro=y*W;
-    for(x=0;x<W;x+=2){
-      i=(ro+x)<<2;var r=d[i],g=d[i+1],b=d[i+2],l=.299*r+.587*g+.114*b,
-          mx=r>g?(r>b?r:b):(g>b?g:b),mn=r<g?(r<b?r:b):(g<b?g:b);
-      c=cy+((x/C)|0);cnt[c]++;
-      if(l<45)drk[c]++;else if(l<=205)mid[c]++;else{wht[c]++;wr[c]+=r;wg[c]+=g;wb[c]+=b}
-      if(mx-mn>55)sat[c]++;
-    }}
+  /* đọc theo dải 256 dòng để không giữ cả ảnh 27MB trong bộ nhớ (máy yếu / điện thoại dễ làm trắng/đen trang) */
+  for(var by=0;by<H;by+=256){
+    var hh=Math.min(256,H-by),bd=img.getBand?img.getBand(by,hh):null,dd=bd||d;
+    for(y=0;y<hh;y+=2){var gy=by+y,cy=((gy/C)|0)*gw,ro=(bd?y:gy)*W;
+      for(x=0;x<W;x+=2){
+        i=(ro+x)<<2;var r=dd[i],g=dd[i+1],b=dd[i+2],l=.299*r+.587*g+.114*b,
+            mx=r>g?(r>b?r:b):(g>b?g:b),mn=r<g?(r<b?r:b):(g<b?g:b);
+        c=cy+((x/C)|0);cnt[c]++;
+        if(l<45)drk[c]++;else if(l<=205)mid[c]++;else{wht[c]++;wr[c]+=r;wg[c]+=g;wb[c]+=b}
+        if(mx-mn>55)sat[c]++;
+      }}
+  }
   /* màu giấy = màu nền (các điểm sáng) ở rìa trang, nơi thường không có khung màu */
   var pr=[],pg2=[],pb=[],gx,gy;
   for(c=0;c<n;c++){gx=c%gw;gy=(c/gw)|0;
@@ -6113,6 +6117,7 @@ function convert(data,s,minW,minL,info){
         y:+(r.by((w.bbox.x0+w.bbox.x1)/2)/s).toFixed(2),
         fh:+(asc/s).toFixed(2),
         w:+((w.bbox.x1-w.bbox.x0)/s).toFixed(2)};
+      o.cf=Math.round(w.confidence);
       if(r.k)o.k=r.k;
       if(r.hd)o.hd=1;
       out.push(o);
@@ -6209,7 +6214,7 @@ async function ocrItems(pg,tok){
   var r=await renderForOcr(pg);
   if(tok!==bkViewTok){r.cv.width=0;throw 0}
   var info=null;
-  try{var cx=r.cv.getContext("2d");info=roAnalyze(cx.getImageData(0,0,r.cv.width,r.cv.height));r.info=info}catch(e){console.warn("[OCR] phân tích ảnh lỗi",e)}
+  try{var cx=r.cv.getContext("2d"),cvw=r.cv.width,cvh=r.cv.height;info=roAnalyze({width:cvw,height:cvh,getBand:function(y,h){return cx.getImageData(0,y,cvw,h).data}});r.info=info}catch(e){console.warn("[OCR] phân tích ảnh lỗi",e)}
   var res=await w.recognize(r.cv,{},{text:false,blocks:true,hocr:false,tsv:false});
   r.cv.width=0;
   items=convert(res.data,r.s,MIN_WORD_CONF,MIN_LINE_CONF,info);
@@ -6347,7 +6352,8 @@ async function autoRestore(doc,tok){
     await chapterOcr(true);
   }catch(e){console.warn("[OCR] tự dựng lại từ cache",e)}
 }
-window.rhmOcr={chapter:chapterOcr,auto:autoRestore,_convert:convert,_analyze:roAnalyze};
+window.rhmOcrVer=4;try{console.info("[OCR] bản vá chế độ sách scan v4 đã nạp")}catch(e){}
+window.rhmOcr={dump:function(n){var p=bkVP&&bkVP[n-1];return p&&p._ocrRaw},chapter:chapterOcr,auto:autoRestore,_convert:convert,_analyze:roAnalyze};
 })();</script>
 <script id="rhm-ocr-mode">(function(){
 "use strict";
