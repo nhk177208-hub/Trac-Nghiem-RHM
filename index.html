@@ -5940,8 +5940,8 @@ window.__rhmOcrScan=1;
 var TESS_VER="5.1.1",
     TESS_JS="https://cdn.jsdelivr.net/npm/tesseract.js@"+TESS_VER+"/dist/tesseract.min.js",
     LANG_PATH="https://cdn.jsdelivr.net/npm/@tesseract.js-data/eng@1.0.0/4.0.0_best_int",
-    CACHE_V="v7",MIN_NATIVE=25,OCR_W=((navigator.deviceMemory&&navigator.deviceMemory<=4)||/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent||""))?1700:2400,MAX_PIX=12e6,MIN_WORD_CONF=30,MIN_LINE_CONF=38;
-var orig=window.bkPageData,libP=null,workerP=null,idleT=0,curPg=null,btn=null,chBusy=false,chCancel=false;
+    CACHE_V="v10",MIN_NATIVE=25,OCR_W=((navigator.deviceMemory&&navigator.deviceMemory<=4)||/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent||""))?1700:2400,MAX_PIX=12e6,MIN_WORD_CONF=30,MIN_LINE_CONF=38,GAP_RERUN=.012;
+var orig=window.bkPageData,libP=null,workerP=null,idleT=0,curPg=null,btn=null,chBusy=false,chCancel=false,pass2=false;
 
 var quiet=false;
 function toast(m){if(quiet)return;try{showToast(m)}catch(e){}}
@@ -6155,6 +6155,84 @@ function convert(data,s,minW,minL,info){
   });
   return out;
 }
+
+/* ---- v10: lượt OCR bổ sung + gộp từ còn thiếu ---- */
+function wbox(o){return {x0:o.x,x1:o.x+o.w,y0:o.y-o.fh*.8,y1:o.y+o.fh*.2}}
+function wIa(a,b){var x0=Math.max(a.x0,b.x0),x1=Math.min(a.x1,b.x1),y0=Math.max(a.y0,b.y0),y1=Math.min(a.y1,b.y1);return(x1>x0&&y1>y0)?(x1-x0)*(y1-y0):0}
+function wAr(a){return Math.max(1e-6,(a.x1-a.x0)*(a.y1-a.y0))}
+function wAln(t){return String(t||"").toLowerCase().replace(/[^a-z0-9à-ỹ]+/g,"")}
+/* base = từ lượt 1 (PSM 3), extra = từ lượt 2 (đọc lại cả trang theo kiểu khác). Trả về danh sách đã gộp.
+   - từ lượt 2 nằm ở chỗ lượt 1 bỏ sót hẳn -> thêm vào
+   - lượt 1 chỉ đọc được mảnh vụn của từ (vd "sl" thay vì "should", "imp!"+"ression") mà lượt 2 đọc nguyên từ -> thay mảnh bằng từ nguyên
+   - còn lại giữ nguyên lượt 1 (có phân loại khối chữ đáng tin hơn) */
+function mergeExtra(base,extra){
+  var out=base.slice(),added=0,fixed=0;
+  extra.slice().sort(function(a,b){return a.y-b.y||a.x-b.x}).forEach(function(W){
+    if(W.k==="fig"||W.k==="pn")return;
+    var t=String(W.str||"").trim(),al=wAln(t),cf=W.cf||0;
+    if(!al)return;
+    if(cf<55)return;
+    if(al.length<2&&!(cf>=85&&/^[aAI]$/.test(t)))return;
+    var bw=wbox(W),aw=wAr(bw),ov=[],cov=0;
+    out.forEach(function(b,i){var bb=wbox(b),ia=wIa(bw,bb);if(ia>0&&ia/Math.min(aw,wAr(bb))>.35){ov.push(i);cov+=ia}});
+    cov/=aw;
+    if(!ov.length){out.push(W);added++;return}
+    var real=ov.map(function(i){return out[i]}).sort(function(a,b){return a.x-b.x});
+    var inside=real.every(function(b){var bb=wbox(b);return wIa(bw,bb)/wAr(bb)>=.6});
+    var minCf=Math.min.apply(null,real.map(function(b){return b.cf==null?100:b.cf})),maxCf=Math.max.apply(null,real.map(function(b){return b.cf==null?0:b.cf}));
+    var sameLine=real.every(function(b){return Math.abs(b.y-real[0].y)<=.5*Math.min(b.fh,real[0].fh)});
+    var concat=wAln(real.map(function(b){return b.str}).join(""));
+    var replace=false;
+    if(cov>=.7){
+      /* đã phủ đủ chỗ: chỉ thay khi lượt 1 đọc vỡ chữ (nhiều mảnh / độ tin cậy thấp) mà lượt 2 đọc nguyên từ chắc chắn */
+      var cut=real.length===1&&al.length>concat.length&&(al.slice(-concat.length)===concat||al.slice(0,concat.length)===concat);   /* mảnh bị cụt đầu/đuôi: "he" thay vì "the" */
+      if(al!==concat&&cf>=75&&inside&&sameLine&&(minCf<65||real.length>=2||cut)&&Math.abs(al.length-concat.length)<=Math.max(3,al.length*.5)&&(real.length>=2||al.indexOf(concat)>=0||concat.indexOf(al)>=0||minCf<55))replace=true;
+    }else{
+      if(inside&&cf>=maxCf-5&&sameLine)replace=true;
+    }
+    if(replace){
+      var drop=new Set(ov),keepK=real[0].k||W.k,hd=real.some(function(b){return b.hd});
+      out=out.filter(function(b,i){return!drop.has(i)});
+      var N=Object.assign({},W);if(keepK)N.k=keepK;else delete N.k;if(hd||W.hd)N.hd=1;
+      out.push(N);fixed++;
+    }
+  });
+  out.__added=added;out.__fixed=fixed;
+  return out;
+}
+/* ước lượng phần "mực" của trang chưa nằm trong ô của từ nào (ngoài vùng ảnh chụp) -> cao nghĩa là lượt 1 bỏ sót nhiều chữ.
+   img = {data|getBand, width, height} ở độ phân giải ảnh OCR; items toạ độ trang (scale 1), s = tỉ lệ ảnh/trang. */
+function inkGap(img,items,s,info){
+  var W=img.width,H=img.height,st=Math.max(1,Math.round(W/1000)),gw=Math.ceil(W/st),gh=Math.ceil(H/st),
+      cov=new Uint8Array(gw*gh),fg=new Uint8Array(gw*gh),x,y,i,k;
+  (items||[]).forEach(function(o){
+    var x0=Math.floor((o.x*s-4)/st),x1=Math.ceil(((o.x+o.w)*s+4)/st),y0=Math.floor(((o.y-o.fh*.95)*s-3)/st),y1=Math.ceil(((o.y+o.fh*.3)*s+3)/st);
+    x0=Math.max(0,x0);y0=Math.max(0,y0);x1=Math.min(gw-1,x1);y1=Math.min(gh-1,y1);
+    for(y=y0;y<=y1;y++)for(x=x0;x<=x1;x++)cov[y*gw+x]=1;
+  });
+  ((info&&info.figs)||[]).forEach(function(r){
+    var x0=Math.max(0,Math.floor(r.x0/st)),x1=Math.min(gw-1,Math.ceil(r.x1/st)),y0=Math.max(0,Math.floor(r.y0/st)),y1=Math.min(gh-1,Math.ceil(r.y1/st));
+    for(y=y0;y<=y1;y++)for(x=x0;x<=x1;x++)fg[y*gw+x]=1;
+  });
+  var tot=0,unc=0,rowStep=256-(256%st||0)||st;
+  for(var by=0;by<H;by+=256){
+    var hh=Math.min(256,H-by),bd=img.getBand?img.getBand(by,hh):null,dd=bd||img.data;
+    for(y=0;y<hh;y++){
+      var gy=by+y;if(gy%st)continue;
+      var ro=(bd?y:gy)*W,cy=(gy/st)|0;
+      for(x=0;x<W;x+=st){
+        i=(ro+x)<<2;var r=dd[i],g=dd[i+1],b=dd[i+2],l=.299*r+.587*g+.114*b,mx=Math.max(r,g,b),mn=Math.min(r,g,b);
+        if(l<130&&mx-mn<=60){
+          k=cy*gw+((x/st)|0);
+          if(fg[k])continue;
+          tot++;if(!cov[k])unc++;
+        }
+      }
+    }
+  }
+  return tot>200?unc/tot:0;
+}
+
 //#convert-end
 
 /* từ OCR -> item giống getTextContent của PDF.js (đi qua đúng đường xử lý của Reader) */
@@ -6213,7 +6291,7 @@ function loadLib(){
 function logger(m){
   if(!curPg||!m||typeof m.progress!=="number")return;
   var st=String(m.status||""),p=Math.round(m.progress*100);
-  if(/recogniz/i.test(st))badge(curPg,"🔍 Đang nhận diện chữ… "+p+"%");
+  if(/recogniz/i.test(st))badge(curPg,(pass2?"🔍 Đang đọc bổ sung chữ còn thiếu… ":"🔍 Đang nhận diện chữ… ")+p+"%");
   else if(/load|initiali/i.test(st))badge(curPg,"⏳ Đang tải bộ nhận diện chữ… "+p+"%");
 }
 function getWorker(){
@@ -6246,8 +6324,27 @@ async function ocrItems(pg,tok){
   var info=null;
   try{var cx=r.cv.getContext("2d"),cvw=r.cv.width,cvh=r.cv.height;info=roAnalyze({width:cvw,height:cvh,getBand:function(y,h){return cx.getImageData(0,y,cvw,h).data}});r.info=info}catch(e){console.warn("[OCR] phân tích ảnh lỗi",e)}
   var res=await w.recognize(r.cv,{},{text:false,blocks:true,hocr:false,tsv:false});
-  r.cv.width=0;
   items=convert(res.data,r.s,MIN_WORD_CONF,MIN_LINE_CONF,info);
+  /* v10: Tesseract (PSM 3) hay xếp nhầm một phần thân bài vào "khối ảnh / cột phụ" nên BỎ HẲN cả từ
+     (vd "overextend", "Monophase", "should", "paying careful attention"), hoặc chỉ đọc được mảnh vụn ("sl", "imp!" + "ression").
+     Ở chỗ đó lớp chữ bị lủng nên tô sáng / bôi đen / dịch mất chữ. Nay: đo phần mực chưa nằm trong ô từ nào;
+     nếu nhiều thì đọc lại cả trang kiểu "một khối chữ liền" (PSM 6) rồi chỉ bổ sung / vá những từ lượt 1 thiếu hoặc đọc vỡ. */
+  try{
+    var gap=1,cx2=r.cv.getContext("2d"),cw2=r.cv.width,ch2=r.cv.height;
+    try{gap=inkGap({width:cw2,height:ch2,getBand:function(y,h){return cx2.getImageData(0,y,cw2,h).data}},items,r.s,info)}catch(eg){console.warn("[OCR] đo chữ sót lỗi, đọc bổ sung luôn",eg)}
+    if(gap>GAP_RERUN&&tok===bkViewTok){
+      pass2=true;
+      try{
+        await w.setParameters({tessedit_pageseg_mode:"6"});
+        var res2=await w.recognize(r.cv,{},{text:false,blocks:true,hocr:false,tsv:false});
+        var ex2=convert(res2.data,r.s,MIN_WORD_CONF,MIN_LINE_CONF,info),mg=mergeExtra(items,ex2);
+        try{console.info("[OCR] trang "+pg.num+": mực chưa phủ "+(gap*100).toFixed(1)+"% -> đọc bổ sung: +"+mg.__added+" từ, vá "+mg.__fixed+" từ")}catch(el){}
+        items=mg;
+      }catch(e2){console.warn("[OCR] lượt đọc bổ sung lỗi (giữ kết quả lượt 1)",e2)}
+      finally{pass2=false;try{await w.setParameters({tessedit_pageseg_mode:"3"})}catch(e3){}}
+    }
+  }catch(e4){console.warn("[OCR] đọc bổ sung bỏ qua",e4)}
+  r.cv.width=0;
   cacheSet(key,items);
   return items;
 }
@@ -6413,8 +6510,8 @@ async function autoRestore(doc,tok){
     await chapterOcr(true);
   }catch(e){console.warn("[OCR] tự dựng lại từ cache",e)}
 }
-window.rhmOcrVer=7;try{console.info("[OCR] bản vá chế độ sách scan v7 đã nạp")}catch(e){}
-window.rhmOcr={dump:function(n){var p=bkVP&&bkVP[n-1];return p&&p._ocrRaw},chapter:chapterOcr,auto:autoRestore,_convert:convert,_analyze:roAnalyze};
+window.rhmOcrVer=10;try{console.info("[OCR] bản vá chế độ sách scan v10 đã nạp (đọc bổ sung chữ bị sót)")}catch(e){}
+window.rhmOcr={dump:function(n){var p=bkVP&&bkVP[n-1];return p&&p._ocrRaw},chapter:chapterOcr,auto:autoRestore,_convert:convert,_analyze:roAnalyze,_merge:mergeExtra,_gap:inkGap};
 })();</script>
 <script id="rhm-ocr-mode">(function(){
 "use strict";
