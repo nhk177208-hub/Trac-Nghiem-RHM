@@ -5940,7 +5940,7 @@ window.__rhmOcrScan=1;
 var TESS_VER="5.1.1",
     TESS_JS="https://cdn.jsdelivr.net/npm/tesseract.js@"+TESS_VER+"/dist/tesseract.min.js",
     LANG_PATH="https://cdn.jsdelivr.net/npm/@tesseract.js-data/eng@1.0.0/4.0.0_best_int",
-    CACHE_V="v10",MIN_NATIVE=25,OCR_W=((navigator.deviceMemory&&navigator.deviceMemory<=4)||/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent||""))?1700:2400,MAX_PIX=12e6,MIN_WORD_CONF=30,MIN_LINE_CONF=38,GAP_RERUN=.012;
+    CACHE_V="v12",MIN_NATIVE=25,OCR_W=((navigator.deviceMemory&&navigator.deviceMemory<=4)||/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent||""))?1700:2400,MAX_PIX=12e6,MIN_WORD_CONF=30,MIN_LINE_CONF=38,GAP_RERUN=.012;
 var orig=window.bkPageData,libP=null,workerP=null,idleT=0,curPg=null,btn=null,chBusy=false,chCancel=false,pass2=false;
 
 var quiet=false;
@@ -6047,7 +6047,7 @@ function convert(data,s,minW,minL,info){
     data.blocks.forEach(function(b,bidx){
       var bt=String(b&&b.blocktype||"");
       if(/IMAGE/.test(bt)&&b.bbox)imgR.push({x0:b.bbox.x0,y0:b.bbox.y0,x1:b.bbox.x1,y1:b.bbox.y1});
-      (b.paragraphs||[]).forEach(function(p){(p.lines||[]).forEach(function(L){L._bt=bt;L._bi=bidx;raw.push(L)})});
+      (b.paragraphs||[]).forEach(function(p,pidx){(p.lines||[]).forEach(function(L){L._bt=bt;L._bi=bidx;L._pi=pidx;raw.push(L)})});
     });
   }else raw=data&&data.lines||[];
   var recs=[];
@@ -6075,7 +6075,7 @@ function convert(data,s,minW,minL,info){
     if(!asc.length)return;
     var fh=pct(asc,.75)/.74;
     if(!(fh>3))return;
-    recs.push({lm:lm,bi:L._bi,ws:ws,fh:fh,by:by,bb:{x0:L.bbox.x0,y0:L.bbox.y0,x1:L.bbox.x1,y1:L.bbox.y1},bt:L._bt||"",
+    recs.push({lm:lm,bi:L._bi,pi:L._pi,ws:ws,fh:fh,by:by,bb:{x0:L.bbox.x0,y0:L.bbox.y0,x1:L.bbox.x1,y1:L.bbox.y1},bt:L._bt||"",
       text:ws.map(function(w){return w.text.trim()}).join(" "),k:"",hd:0});
   });
   /* cỡ chữ thân bài = cỡ chữ chiếm nhiều ký tự nhất */
@@ -6108,12 +6108,20 @@ function convert(data,s,minW,minL,info){
       if(wc>=5&&avg>=3.2&&r.lm>=(r.k==="fig"?70:65)&&/[A-Za-z]{3,}/.test(r.text))r.k="";
     }
   });
-  /* chú thích nhiều dòng: dòng ngay dưới dòng chú thích, cùng cỡ chữ, cùng cột */
+  /* chú thích nhiều dòng: dòng ngay dưới dòng chú thích, cùng cỡ chữ, cùng cột.
+     v12: chuỗi chú thích dừng ở ranh giới đoạn của Tesseract. Trước đây convert() vứt mất
+     thông tin đoạn khi trải phẳng các dòng, nên bước lan này chỉ còn hình học (cùng cỡ chữ,
+     cùng cột, khoảng cách dòng) để nhận biết — mà sách này chú thích và thân bài cùng cỡ
+     chữ, cùng cột, cùng khoảng dòng, nên đoạn thân bài ngay sau chú thích (vd đoạn
+     "The principle..." sau chú thích Fig 6-23) bị gắn cờ cap, rồi rhmOcrKinds đưa vào
+     pg.cap/nohl và bkApplyHl bỏ qua khi tô. Giữ nguyên mọi điều kiện hình học, chỉ thêm
+     một điều kiện duy nhất: không lan sang đoạn khác. */
   var byY=recs.slice().sort(function(a,b){return a.bb.y0-b.bb.y0});
   for(var pass=0;pass<3;pass++)byY.forEach(function(r){
     if(r.k)return;
     byY.some(function(c){
       if(c.k!=="cap"||c===r)return false;
+      if(c.pi!=null&&r.pi!=null&&(c.pi!==r.pi||c.bi!==r.bi))return false;
       var gap=r.bb.y0-c.bb.y1;
       if(gap>=-.3*c.fh&&gap<=1.1*c.fh&&Math.abs(r.fh-c.fh)<=.16*c.fh&&r.bb.x0<c.bb.x1+4&&r.bb.x1>c.bb.x0-4&&r.bb.x1-r.bb.x0<=1.15*(c.bb.x1-c.bb.x0)+.05*Wp){r.k="cap";return true}
       return false;
@@ -6510,7 +6518,7 @@ async function autoRestore(doc,tok){
     await chapterOcr(true);
   }catch(e){console.warn("[OCR] tự dựng lại từ cache",e)}
 }
-window.rhmOcrVer=10;try{console.info("[OCR] bản vá chế độ sách scan v10 đã nạp (đọc bổ sung chữ bị sót)")}catch(e){}
+window.rhmOcrVer=12;try{console.info("[OCR] bản vá chế độ sách scan v12 đã nạp (chú thích không lan sang đoạn thân bài)")}catch(e){}
 window.rhmOcr={dump:function(n){var p=bkVP&&bkVP[n-1];return p&&p._ocrRaw},chapter:chapterOcr,auto:autoRestore,_convert:convert,_analyze:roAnalyze,_merge:mergeExtra,_gap:inkGap};
 })();</script>
 <script id="rhm-ocr-mode">(function(){
