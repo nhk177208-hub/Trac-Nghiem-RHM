@@ -234,6 +234,7 @@ html body #ai-tutor-modal .bk-qz-choose button.bk-qz-go:hover{background:#0860ca
     </button>
     <div class="rhmd-find"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z"/></svg><input type="text" id="rhmdQ" placeholder="Tìm tài liệu" autocomplete="off" spellcheck="false" enterkeyhint="search"><button type="button" id="rhmdQx" aria-label="Xóa" hidden>✕</button></div>
     <div class="rhmd-sortw"><button type="button" class="rhmd-btn" id="rhmdSort" aria-label="Sắp xếp" title="Sắp xếp" aria-haspopup="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16M7 20l-3.5-3.5M7 20l3.5-3.5M17 20V4M17 4l-3.5 3.5M17 4l3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="rhmd-menu" id="rhmdMenu" hidden><button type="button" data-s="recent">Vừa xem</button><button type="button" data-s="new">Mới nhất</button><button type="button" data-s="old">Cũ nhất</button><button type="button" data-s="az">Tên A → Z</button><button type="button" data-s="za">Tên Z → A</button></div></div>
+    <button type="button" class="rhmd-btn" id="rhmdNewsRf" aria-label="Lấy tin mới ngay" title="Lấy tin mới ngay (chạy GitHub Actions)" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5A8 8 0 0 0 5.6 7M4 4v3.6h3.6M4 12.5A8 8 0 0 0 18.4 17M20 20v-3.6h-3.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <div class="rhmd-seg" role="group" aria-label="Kiểu hiển thị">
       <button type="button" class="rhmd-btn rhmd-v" data-v="list" aria-label="Danh sách" title="List"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5h16M4 12h16M4 17.5h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
       <button type="button" class="rhmd-btn rhmd-v" data-v="grid" aria-label="Lưới" title="Grid"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
@@ -243,7 +244,7 @@ html body #ai-tutor-modal .bk-qz-choose button.bk-qz-go:hover{background:#0860ca
   <div class="rhmd-body">
     <div class="rhmd-back" id="rhmdBack"></div>
     <aside class="rhmd-sb" id="rhmdSb" aria-hidden="true">
-      <div class="rhmd-sb-hd"><div class="rhmd-tabs"><button type="button" class="rhmd-tab on" data-t="books" title="Sách" aria-label="Sách"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10.5 5 8 4.5 4.5 4.5v13c3.5 0 6 .5 7.5 2 1.5-1.5 4-2 7.5-2v-13c-3.5 0-6 .5-7.5 2z"/><path d="M12 6.5v13"/></svg></button><button type="button" class="rhmd-tab off" data-t="docs" aria-disabled="true" title="Tài Liệu" aria-label="Tài Liệu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h8.5L19 8v12.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 20.5v-15.5A1.5 1.5 0 0 1 6.5 3.5z"/><path d="M14.5 3.5V8H19"/><path d="M8.5 12.5h7M8.5 16h7"/></svg></button><button type="button" class="rhmd-tab on" data-t="video" title="Bài Giảng" aria-label="Bài Giảng" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="3"/><path d="M10.5 9.5v5l4.2-2.5z"/></svg></button><button type="button" class="rhmd-tab" data-t="vid-en" title="Tiếng Anh" aria-label="Tiếng Anh" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="3"/><text x="12" y="12" dominant-baseline="central" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.6" font-weight="800" letter-spacing=".4" fill="currentColor" stroke="none">EN</text></svg></button><button type="button" class="rhmd-tab" data-t="vid-khac" title="Ngôn ngữ khác" aria-label="Ngôn ngữ khác" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c2.4 2.4 3.6 5.2 3.6 8.5s-1.2 6.1-3.6 8.5c-2.4-2.4-3.6-5.2-3.6-8.5S9.6 5.9 12 3.5z"/></svg></button><button type="button" class="rhmd-tab on" data-t="quiz-on" title="Ôn Tập" aria-label="Ôn Tập" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4.5" width="14" height="16" rx="2.5"/><path d="M9 3.5h6v3H9z"/><path d="M8.8 12.4l2 2 3.6-3.8"/><path d="M9 17.5h6"/></svg></button><button type="button" class="rhmd-tab" data-t="quiz-thi" title="Thi Thử" aria-label="Thi Thử" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13.5" r="7"/><path d="M12 13.5V9.8"/><path d="M12 6.5V4M9.8 3.5h4.4"/><path d="M18.3 7.4l1.4-1.4"/></svg></button></div><button type="button" class="rhmd-btn on" id="rhmdSbClose" aria-label="Đóng sidebar" title="Đóng sidebar"><svg class="ic-closed" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9 4.5v15" stroke="currentColor" stroke-width="1.8"/></svg><svg class="ic-open" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9 4.5v15" stroke="currentColor" stroke-width="1.8"/><rect x="4.4" y="5.4" width="3.7" height="13.2" rx="1.4" fill="currentColor" opacity=".35"/></svg></button></div>
+      <div class="rhmd-sb-hd"><div class="rhmd-tabs"><button type="button" class="rhmd-tab on" data-t="books" title="Sách" aria-label="Sách"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10.5 5 8 4.5 4.5 4.5v13c3.5 0 6 .5 7.5 2 1.5-1.5 4-2 7.5-2v-13c-3.5 0-6 .5-7.5 2z"/><path d="M12 6.5v13"/></svg></button><button type="button" class="rhmd-tab off" data-t="docs" aria-disabled="true" title="Tài Liệu" aria-label="Tài Liệu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h8.5L19 8v12.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 20.5v-15.5A1.5 1.5 0 0 1 6.5 3.5z"/><path d="M14.5 3.5V8H19"/><path d="M8.5 12.5h7M8.5 16h7"/></svg></button><button type="button" class="rhmd-tab on" data-t="video" title="Bài Giảng" aria-label="Bài Giảng" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="3"/><path d="M10.5 9.5v5l4.2-2.5z"/></svg></button><button type="button" class="rhmd-tab" data-t="vid-en" title="Tiếng Anh" aria-label="Tiếng Anh" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="3"/><text x="12" y="12" dominant-baseline="central" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.6" font-weight="800" letter-spacing=".4" fill="currentColor" stroke="none">EN</text></svg></button><button type="button" class="rhmd-tab" data-t="vid-khac" title="Ngôn ngữ khác" aria-label="Ngôn ngữ khác" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c2.4 2.4 3.6 5.2 3.6 8.5s-1.2 6.1-3.6 8.5c-2.4-2.4-3.6-5.2-3.6-8.5S9.6 5.9 12 3.5z"/></svg></button><button type="button" class="rhmd-tab on" data-t="news-intl" title="Quốc tế" aria-label="Quốc tế" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c2.4 2.4 3.6 5.2 3.6 8.5s-1.2 6.1-3.6 8.5c-2.4-2.4-3.6-5.2-3.6-8.5S9.6 5.9 12 3.5z"/></svg></button><button type="button" class="rhmd-tab" data-t="news-vn" title="Trong nước" aria-label="Trong nước" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="3"/><text x="12" y="12" dominant-baseline="central" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.6" font-weight="800" letter-spacing=".4" fill="currentColor" stroke="none">VN</text></svg></button><button type="button" class="rhmd-tab on" data-t="quiz-on" title="Ôn Tập" aria-label="Ôn Tập" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4.5" width="14" height="16" rx="2.5"/><path d="M9 3.5h6v3H9z"/><path d="M8.8 12.4l2 2 3.6-3.8"/><path d="M9 17.5h6"/></svg></button><button type="button" class="rhmd-tab" data-t="quiz-thi" title="Thi Thử" aria-label="Thi Thử" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13.5" r="7"/><path d="M12 13.5V9.8"/><path d="M12 6.5V4M9.8 3.5h4.4"/><path d="M18.3 7.4l1.4-1.4"/></svg></button></div><button type="button" class="rhmd-btn on" id="rhmdSbClose" aria-label="Đóng sidebar" title="Đóng sidebar"><svg class="ic-closed" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9 4.5v15" stroke="currentColor" stroke-width="1.8"/></svg><svg class="ic-open" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9 4.5v15" stroke="currentColor" stroke-width="1.8"/><rect x="4.4" y="5.4" width="3.7" height="13.2" rx="1.4" fill="currentColor" opacity=".35"/></svg></button></div>
       
       <div class="rhmd-sb-in" id="rhmdSbList"></div>
     </aside>
@@ -258,13 +259,27 @@ html body #ai-tutor-modal .bk-qz-choose button.bk-qz-go:hover{background:#0860ca
                 </div>
             </div>
             <style id="rhm-hub-css">#rhm-hub{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.6vw;margin-bottom:2.4vw;--rhm-fs: 2.3vw;--rhm-ico: 3.6vw;--btn-fs: var(--rhm-fs)}#rhm-hub .rhm-hub-btn{display:flex;align-items:center;justify-content:flex-start;gap:calc(var(--rhm-ico) * .38);min-height:10vw;padding:1.6vw 2.2vw;background:#fff;color:#1f2328;border:1px solid #d0d7de;border-radius:calc(var(--rhm-ico) * .3);font-weight:700;text-align:left;cursor:pointer;font-size:var(--rhm-fs);line-height:1.2;box-shadow:none;transition:background-color .15s ease,border-color .15s ease,transform .15s ease;-webkit-tap-highlight-color:transparent;user-select:none}#rhm-hub .rhm-hub-btn:hover{background:#f6f8fa;border-color:#afb8c1}#rhm-hub .rhm-hub-btn:active{background:#eaeef2;transform:scale(.985)}#rhm-hub .rhm-hub-btn:focus-visible{outline:0;border-color:#0969da;box-shadow:0 0 0 3px #0969da26}#rhm-hub .rhm-hub-ico{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:calc(var(--rhm-ico) * 1.2);height:calc(var(--rhm-ico) * 1.2);border:1px solid #d0d7de;border-radius:calc(var(--rhm-ico) * .26);background:#f6f8fa;color:#59636e;transition:color .15s,border-color .15s,background-color .15s}#rhm-hub .rhm-hub-ico svg{width:56%;height:56%;display:block}#rhm-hub .rhm-hub-btn:hover .rhm-hub-ico{color:#0969da;border-color:#0969da;background:#ddf4ff}#rhm-hub .rhm-hub-txt{min-width:0;overflow-wrap:anywhere;text-align:left}#rhm-hub .rhm-hub-btn::after{content:"";flex:0 0 auto;margin-left:auto;width:calc(var(--rhm-fs) * .38);height:calc(var(--rhm-fs) * .38);border-right:2px solid #8c959f;border-top:2px solid #8c959f;transform:rotate(45deg);margin-right:calc(var(--rhm-fs) * .2);transition:border-color .15s,transform .15s}#rhm-hub .rhm-hub-btn:hover::after{border-color:#0969da;transform:translateX(2px) rotate(45deg)}@media(orientation:portrait)and (max-width:767px){#rhm-hub{grid-template-columns:minmax(0,1fr);gap:3vw;--rhm-fs: 5vw;--rhm-ico: 8vw}#rhm-hub .rhm-hub-btn{min-height:17vw;border-radius:3vw;gap:3.4vw;padding:0 3.6vw}#rhm-hub .rhm-hub-ico{border-radius:2.2vw}}@media(orientation:landscape){:root{--rhm-g: max(10px, 2.2vh)}#home-screen{padding:0!important;margin-bottom:0!important}#rhm-top{display:flex;flex-direction:column;gap:var(--rhm-g);box-sizing:border-box;height:calc(100dvh - 70px);padding:var(--rhm-g)}#rhm-cover-wrap{flex:none;width:100%;margin:0!important}#app-cover-container{width:100%!important;max-width:none!important;height:auto!important;aspect-ratio:10 / 3!important;margin:0!important}#app-cover-img{object-fit:cover!important}#rhm-hub{flex:1 1 0;min-height:calc(2 * 48px + var(--rhm-g));height:auto;margin:0!important;grid-template-rows:minmax(0,1fr) minmax(0,1fr);gap:var(--rhm-g);--rhm-fs: min(6.8vh, 2.4vw);--rhm-ico: min(9vh, 3.6vw)}#rhm-hub .rhm-hub-btn{min-height:0;height:100%}}
-</style><style id="rhm-hub-fit-css">#rhm-hub{width:100%;max-width:100%;box-sizing:border-box}#rhm-hub .rhm-hub-btn{min-width:0;max-width:100%;box-sizing:border-box;overflow:hidden}#rhm-hub .rhm-hub-txt{flex:1 1 auto;min-width:0}</style>
+</style><style id="rhm-news-css">
+.rhmd-btn[hidden]{display:none!important}@keyframes rhmnspin{to{transform:rotate(360deg)}}.rhmn-spin svg{animation:rhmnspin .9s linear infinite}.rhmn-spin{pointer-events:none;opacity:.7}
+.rhmn-wrap{gap:12px}.rhmd-grid.rhmn-wrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.rhmn-card{display:flex;gap:12px;background:#fff;border:1px solid #d0d7de;border-radius:14px;padding:12px;color:#1f2328;text-decoration:none;text-align:left;transition:box-shadow .15s,transform .1s;-webkit-tap-highlight-color:transparent}
+.rhmn-card:hover{box-shadow:0 4px 14px #0001}.rhmn-card:active{transform:scale(.99)}
+.rhmn-res{border-left:4px solid #0969da}
+.rhmn-img{flex:0 0 112px;width:112px;aspect-ratio:16/10;border-radius:8px;overflow:hidden;background:#f3f4f6}.rhmn-img img{width:100%;height:100%;object-fit:cover;display:block}
+.rhmn-body{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1 1 auto}
+.rhmn-meta{font-size:12px;color:#6b7280}.rhmn-meta b{color:#0969da;font-weight:700}
+.rhmn-t{font-size:15px;font-weight:700;line-height:1.3}.rhmn-au{font-size:12px;color:#57606a;font-style:italic}
+.rhmn-s{font-size:13px;color:#57606a;line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.rhmd-grid .rhmn-card{flex-direction:column}.rhmd-grid .rhmn-img{flex:none;width:100%}
+.rhmn-upd{font-size:12px;color:#6b7280;margin:0 0 8px}
+</style>
+<style id="rhm-hub-fit-css">#rhm-hub{width:100%;max-width:100%;box-sizing:border-box}#rhm-hub .rhm-hub-btn{min-width:0;max-width:100%;box-sizing:border-box;overflow:hidden}#rhm-hub .rhm-hub-txt{flex:1 1 auto;min-width:0}</style>
 <script id="rhm-hub-fit">(function(){function fit(){var hub=document.getElementById('rhm-hub');if(!hub||!hub.clientHeight)return;var cs=getComputedStyle(hub);var rows=(cs.gridTemplateRows||'').split(' ').filter(Boolean).length;if(rows!==2){hub.style.removeProperty('--rhm-fs');hub.style.removeProperty('--rhm-ico');hub.querySelectorAll('.rhm-hub-btn').forEach(function(b){b.style.removeProperty('padding')});return}var gap=parseFloat(cs.rowGap)||0;var row=(hub.clientHeight-gap)/2;if(row<20)return;var fs=Math.max(11,Math.min(46,row*.25,hub.clientWidth*.0252));var ico=Math.max(15,Math.min(70,fs*1.5));hub.style.setProperty('--rhm-fs',fs.toFixed(1)+'px');hub.style.setProperty('--rhm-ico',ico.toFixed(1)+'px');var pv=Math.max(2,row*.1),ph=ico*.55;hub.querySelectorAll('.rhm-hub-btn').forEach(function(b){b.style.padding=pv.toFixed(1)+'px '+ph.toFixed(1)+'px'})}function init(){fit();var hub=document.getElementById('rhm-hub');if(hub&&window.ResizeObserver)new ResizeObserver(fit).observe(hub);window.addEventListener('resize',fit);document.addEventListener('fullscreenchange',function(){setTimeout(fit,60)});setTimeout(fit,300);setTimeout(fit,1200)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init()})();</script>
             <div id="rhm-hub">
                 <button type="button" class="rhm-hub-btn rhm-hub-quiz" data-hub="quiz" onclick="rhmHubClick('quiz')"><span class="rhm-hub-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4.5" width="14" height="16" rx="2.5"/><path d="M9 3.5h6v3H9z"/><path d="M8.8 12.4l2 2 3.6-3.8"/><path d="M9 17.5h6"/></svg></span><span class="rhm-hub-txt">Trắc Nghiệm</span></button>
                 <button type="button" class="rhm-hub-btn rhm-hub-video" data-hub="video" onclick="rhmHubClick('video')"><span class="rhm-hub-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="3"/><path d="M10.5 9.5v5l4.2-2.5z"/></svg></span><span class="rhm-hub-txt">Bài Giảng</span></button>
                 <button type="button" class="rhm-hub-btn rhm-hub-docs" data-hub="docs" onclick="rhmHubClick('docs')"><span class="rhm-hub-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10.5 5 8 4.5 4.5 4.5v13c3.5 0 6 .5 7.5 2 1.5-1.5 4-2 7.5-2v-13c-3.5 0-6 .5-7.5 2z"/><path d="M12 6.5v13"/></svg></span><span class="rhm-hub-txt">Tài Liệu</span></button>
-                <button type="button" class="rhm-hub-btn rhm-hub-eng" data-hub="english" onclick="rhmHubClick('english')"><span class="rhm-hub-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c2.4 2.4 3.6 5.2 3.6 8.5s-1.2 6.1-3.6 8.5c-2.4-2.4-3.6-5.2-3.6-8.5S9.6 5.9 12 3.5z"/></svg></span><span class="rhm-hub-txt">Học Tiếng Anh</span></button>
+                <button type="button" class="rhm-hub-btn rhm-hub-news" data-hub="news" onclick="rhmHubClick('news')"><span class="rhm-hub-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.5h11.5a1.5 1.5 0 0 1 1.5 1.5v13.5H6.5A1.5 1.5 0 0 1 5 18z"/><path d="M18 9.5h1.5A1.5 1.5 0 0 1 21 11v7a1.5 1.5 0 0 1-1.5 1.5H18"/><path d="M8.5 8h6"/><path d="M8.5 11.5h6M8.5 15h6"/></svg></span><span class="rhm-hub-txt">Tin Tức</span></button>
             </div>
             </div>
             <script>window.RHM_HUB_HANDLERS=window.RHM_HUB_HANDLERS||{};function rhmHubClick(key){var h=window.RHM_HUB_HANDLERS[key];if(typeof h=="function")return h();try{showToast("Tính năng đang được cập nhật")}catch{}}
@@ -2324,7 +2339,7 @@ function collect(){
   return Array.from(byBook.values());
 }
 /* ===== Chế độ Bài Giảng (dùng chung giao diện với Tài Liệu) ===== */
-var qTab="on",vTab="en",ICO_BOOK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10.5 5 8 4.5 4.5 4.5v13c3.5 0 6 .5 7.5 2 1.5-1.5 4-2 7.5-2v-13c-3.5 0-6 .5-7.5 2z"/><path d="M12 6.5v13"/></svg>',ICO_PLAY='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="3"/><path d="M10.5 9.5v5l4.2-2.5z"/></svg>',ICO_QUIZ='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4.5" width="14" height="16" rx="2.5"/><path d="M9 3.5h6v3H9z"/><path d="M8.8 12.4l2 2 3.6-3.8"/><path d="M9 17.5h6"/></svg>',SW_SVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13.5" r="7"/><path d="M12 13.5V9.8"/><path d="M12 6.5V4M9.8 3.5h4.4"/><path d="M18.3 7.4l1.4-1.4"/></svg>';
+var qTab="on",vTab="en",ICO_NEWS='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.5h11.5a1.5 1.5 0 0 1 1.5 1.5v13.5H6.5A1.5 1.5 0 0 1 5 18z"/><path d="M18 9.5h1.5A1.5 1.5 0 0 1 21 11v7a1.5 1.5 0 0 1-1.5 1.5H18"/><path d="M8.5 8h6"/><path d="M8.5 11.5h6M8.5 15h6"/></svg>',ICO_BOOK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10.5 5 8 4.5 4.5 4.5v13c3.5 0 6 .5 7.5 2 1.5-1.5 4-2 7.5-2v-13c-3.5 0-6 .5-7.5 2z"/><path d="M12 6.5v13"/></svg>',ICO_PLAY='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="3"/><path d="M10.5 9.5v5l4.2-2.5z"/></svg>',ICO_QUIZ='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4.5" width="14" height="16" rx="2.5"/><path d="M9 3.5h6v3H9z"/><path d="M8.8 12.4l2 2 3.6-3.8"/><path d="M9 17.5h6"/></svg>',SW_SVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13.5" r="7"/><path d="M12 13.5V9.8"/><path d="M12 6.5V4M9.8 3.5h4.4"/><path d="M18.3 7.4l1.4-1.4"/></svg>';
 function PH(b){if(mode==="video")return ICO_PLAY;if(mode==="quiz"){if(qTab==="thi")return SW_SVG;var n=b&&+b.iconIdx;try{if(n>=1&&n<=36&&typeof TOPIC_ICONS!="undefined")return'<img src="'+esc(TOPIC_ICONS[n-1])+'" alt="">'}catch(e){}return"📝"}return"📕"}
 function vMeta(b){var a=[];b.subject&&a.push(b.subject);b.n!=null&&a.push(b.n>0?b.n+" bài giảng":"Chưa có bài giảng");return a.join(" · ")}
 function vSearch(b){return mode!=="video"?"":" "+(b.mon||"")+" "+(b.chapters||[]).map(function(c){return c.title}).join(" ")}
@@ -2399,12 +2414,12 @@ function vRow(c,k,isLast){
   return'<button type="button" class="rhmd-ch'+(isLast?" last":"")+'" data-k="'+k+'"><span class="rhmd-lth">'+(c.thumb?'<img src="'+esc(c.thumb)+'" alt="" loading="lazy" onerror="this.remove()">':"")+'</span><span class="rhmd-lt">'+esc(c.title)+(sub?'<span class="rhmd-sub">'+esc(sub)+"</span>":"")+"</span></button>";
 }
 function vPlay(b,k){window.rhmVPlay(b,k)} function applyMode(){
-  var vm=mode==="video",qm=mode==="quiz";var qs=qTab==="thi"?"Thi Thử":"Ôn Tập";
-  root.classList.toggle("rhmd-vid",vm);
-  root.setAttribute("aria-label",vm?"Bài giảng":qm?"Trắc nghiệm":"Tài liệu");
-  var l=document.getElementById("rhmdTbLbl");if(l)l.innerHTML=vm?ICO_PLAY+"Bài Giảng":qm?ICO_QUIZ+"Trắc Nghiệm":ICO_BOOK+"Tài Liệu";
-  qIn.placeholder=vm?"Tìm bài giảng":qm?(qTab==="thi"?"Tìm bộ đề thi thử":"Tìm bộ đề ôn tập"):"Tìm tài liệu";
-  Array.prototype.forEach.call(sb.querySelectorAll(".rhmd-tab"),function(t){var d=t.dataset.t;t.hidden=vm?(d!=="vid-en"&&d!=="vid-khac"):qm?d.indexOf("quiz")!==0:(d==="video"||d.indexOf("vid-")===0||d.indexOf("quiz")===0);if(d.indexOf("quiz")===0){var on=d==="quiz-"+(qTab==="thi"?"thi":"on");t.classList.toggle("on",on);t.classList.toggle("off",!on)}if(d.indexOf("vid-")===0){var von=d==="vid-"+vTab;t.classList.toggle("on",von);t.classList.toggle("off",!von)}});
+  var vm=mode==="video",qm=mode==="quiz",nm=mode==="news";var qs=qTab==="thi"?"Thi Thử":"Ôn Tập";
+  root.classList.toggle("rhmd-vid",vm);var _rf=document.getElementById("rhmdNewsRf");if(_rf)_rf.hidden=!nm;
+  root.setAttribute("aria-label",vm?"Bài giảng":qm?"Trắc nghiệm":nm?"Tin tức":"Tài liệu");
+  var l=document.getElementById("rhmdTbLbl");if(l)l.innerHTML=vm?ICO_PLAY+"Bài Giảng":qm?ICO_QUIZ+"Trắc Nghiệm":nm?ICO_NEWS+"Tin Tức":ICO_BOOK+"Tài Liệu";
+  qIn.placeholder=vm?"Tìm bài giảng":nm?"Tìm tin tức":qm?(qTab==="thi"?"Tìm bộ đề thi thử":"Tìm bộ đề ôn tập"):"Tìm tài liệu";
+  Array.prototype.forEach.call(sb.querySelectorAll(".rhmd-tab"),function(t){var d=t.dataset.t;if(d.indexOf("news-")===0){var non=d==="news-"+nTab;t.classList.toggle("on",non);t.classList.toggle("off",!non)}t.hidden=nm?d.indexOf("news-")!==0:vm?(d!=="vid-en"&&d!=="vid-khac"):qm?d.indexOf("quiz")!==0:(d==="video"||d.indexOf("vid-")===0||d.indexOf("quiz")===0||d.indexOf("news-")===0);if(d.indexOf("quiz")===0){var on=d==="quiz-"+(qTab==="thi"?"thi":"on");t.classList.toggle("on",on);t.classList.toggle("off",!on)}if(d.indexOf("vid-")===0){var von=d==="vid-"+vTab;t.classList.toggle("on",von);t.classList.toggle("off",!von)}});
 }
 /* Bắt đầu làm trắc nghiệm / sửa đề từ video: tạm ẩn màn hình thư viện, quay lại thì hiện lại */
 var away=!1;
@@ -2468,6 +2483,7 @@ function renderSbQuiz(){
   sbList.innerHTML=h;
 }
 function renderSb(){
+  if(mode==="news"){newsSb();return}
   if(mode==="quiz"){renderSbQuiz();return}
   var pool=mode==="video"?books.filter(function(b){return b.lang===vTab}):books,cnts={},names=[];pool.forEach(function(b){var m=b.mon||"Khác";if(!(m in cnts)){cnts[m]=0;names.push(m)}cnts[m]++});
   names.sort(cmp);
@@ -2477,7 +2493,7 @@ function renderSb(){
   sbList.innerHTML=h;
 }
 sbList.addEventListener("click",function(e){var c=e.target.closest(".rhmd-subj");if(!c)return;subj=c.dataset.m;render();if(mode==="quiz"&&qTab==="on"&&subj&&typeof loadChuDeTopicImmediately=="function"){var tk=loadTok;Promise.resolve(loadChuDeTopicImmediately(+subj)).catch(function(){}).then(function(){qRefresh(tk)})}if(window.innerWidth<=700)setSb(!1)});
-Array.prototype.forEach.call(sb.querySelectorAll(".rhmd-tab"),function(t){t.addEventListener("click",function(){if(t.dataset.t==="quiz-on"||t.dataset.t==="quiz-thi"){var n=t.dataset.t==="quiz-thi"?"thi":"on";if(n!==qTab){qTab=n;subj="";q="";qIn.value="";qX.hidden=!0;applyMode();load();paintV()}return}if(t.dataset.t==="vid-en"||t.dataset.t==="vid-khac"){var vn=t.dataset.t==="vid-khac"?"khac":"en";if(vn!==vTab){vTab=vn;subj="";q="";qIn.value="";qX.hidden=!0;applyMode();render()}return}if(t.dataset.t==="docs")try{showToast("Mục Tài Liệu chưa mở")}catch(e){}})});
+Array.prototype.forEach.call(sb.querySelectorAll(".rhmd-tab"),function(t){t.addEventListener("click",function(){if(t.dataset.t==="quiz-on"||t.dataset.t==="quiz-thi"){var n=t.dataset.t==="quiz-thi"?"thi":"on";if(n!==qTab){qTab=n;subj="";q="";qIn.value="";qX.hidden=!0;applyMode();load();paintV()}return}if(t.dataset.t==="vid-en"||t.dataset.t==="vid-khac"){var vn=t.dataset.t==="vid-khac"?"khac":"en";if(vn!==vTab){vTab=vn;subj="";q="";qIn.value="";qX.hidden=!0;applyMode();render()}return}if(t.dataset.t==="news-intl"||t.dataset.t==="news-vn"){var nn=t.dataset.t==="news-vn"?"vn":"intl";if(nn!==nTab){nTab=nn;subj="";q="";qIn.value="";qX.hidden=!0;applyMode();render()}return}if(t.dataset.t==="docs")try{showToast("Mục Tài Liệu chưa mở")}catch(e){}})});
 
 function cardHtml(b,i){
   var cov=b.cover?'<img src="'+esc(b.cover)+'" data-cbase="'+esc(b.coverBase||"")+'" data-ci="0" alt="" loading="lazy" onerror="rhmdCovErr(this)">':'<span class="rhmd-ph">'+PH(b)+'</span>';
@@ -2488,9 +2504,85 @@ window.rhmdCovErr=function(img){
   if(img.dataset.cbase&&i<exts.length){img.dataset.ci=String(i+1);img.src=img.dataset.cbase+"."+exts[i];return}
   var p=img.parentElement;img.remove();p&&!p.querySelector(".rhmd-ph")&&p.insertAdjacentHTML("afterbegin",'<span class="rhmd-ph">'+PH()+'</span>');
 };
+/* ===== TIN TỨC: đọc TinTuc/news.json do GitHub Actions crawl ===== */
+var newsItems=[],newsErr="",newsLoaded=!1,newsUpd=0,nTab="intl";
+function newsFmt(iso){try{var d=new Date(iso),df=(Date.now()-d)/36e5;if(df<1)return"Vừa xong";if(df<24)return Math.floor(df)+" giờ trước";if(df<24*7)return Math.floor(df/24)+" ngày trước";return d.toLocaleDateString("vi-VN")}catch(e){return""}}
+function newsLoad(tok){
+  newsRender();
+  fetch("TinTuc/news.json?_="+Math.floor(Date.now()/6e5),{cache:"no-store"}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){
+    if(tok!==loadTok)return;newsItems=Array.isArray(j.items)?j.items:[];newsUpd=j.updated||0;newsErr="";newsLoaded=!0;render();
+  }).catch(function(){if(tok!==loadTok)return;newsErr="Không tải được tin tức. Hãy thử lại sau.";newsLoaded=!0;render()});
+}
+function newsReg(){return newsItems.filter(function(i){return(i.region||"intl")===nTab})}
+function newsPool(){return newsReg().filter(function(i){return!subj||(subj==="__research"?i.type==="research":subj==="__news"?i.type!=="research":i.source===subj)})}
+function newsSb(){
+  var reg=newsReg(),n=reg.length,r=reg.filter(function(i){return i.type==="research"}).length,cn={},names=[];
+  reg.forEach(function(i){if(i.type==="research")return;if(!(i.source in cn)){cn[i.source]=0;names.push(i.source)}cn[i.source]++});
+  var h='<button type="button" class="rhmd-subj'+(subj?"":" on")+'" data-m="">Tất cả<b>'+n+'</b></button>';
+  if(nTab==="intl"){h+='<button type="button" class="rhmd-subj'+(subj==="__news"?" on":"")+'" data-m="__news">Tin tức<b>'+(n-r)+'</b></button>';
+  h+='<button type="button" class="rhmd-subj'+(subj==="__research"?" on":"")+'" data-m="__research">Nghiên cứu (PubMed)<b>'+r+'</b></button>'}
+  names.sort().forEach(function(m){h+='<button type="button" class="rhmd-subj'+(subj===m?" on":"")+'" data-m="'+esc(m)+'">'+esc(m)+"<b>"+cn[m]+"</b></button>"});
+  sbList.innerHTML=h;
+}
+function newsRender(){
+  var k=fold(q).trim(),pool=newsPool();
+  shown=k?pool.filter(function(i){return fold(i.title+" "+(i.summary||"")+" "+i.source).indexOf(k)>=0}):pool;
+  cnt.textContent=shown.length;renderSb();
+  if(!newsLoaded){main.innerHTML='<div class="rhmd-msg">⏳ Đang tải tin tức...</div>';return}
+  if(newsErr){main.innerHTML='<div class="rhmd-msg">'+esc(newsErr)+"</div>";return}
+  if(!newsReg().length){main.innerHTML='<div class="rhmd-msg">Chưa có tin tức nào. Bấm nút ↻ để lấy tin ngay.</div>';return}
+  if(!shown.length){main.innerHTML='<div class="rhmd-msg">Không tìm thấy tin phù hợp.</div>';return}
+  main.innerHTML=(newsUpd?'<div class="rhmn-upd">Cập nhật '+esc(newsFmt(newsUpd))+" · "+newsReg().length+' tin</div>':"")+'<div class="'+(view==="list"?"rhmd-list":"rhmd-grid")+' rhmn-wrap">'+shown.map(function(i){
+    var res=i.type==="research";
+    return'<a class="rhmn-card'+(res?" rhmn-res":"")+'" href="'+esc(i.url)+'" target="_blank" rel="noopener noreferrer">'+(i.image?'<span class="rhmn-img"><img loading="lazy" referrerpolicy="no-referrer" src="'+esc(i.image)+'" alt="" onerror="this.parentNode.remove()"></span>':"")+
+    '<span class="rhmn-body"><span class="rhmn-meta"><b>'+(res?"🔬 ":"")+esc(i.source)+"</b> · "+esc(newsFmt(i.date))+'</span><span class="rhmn-t">'+esc(i.title)+"</span>"+(res&&i.authors?'<span class="rhmn-au">'+esc(i.authors)+"</span>":"")+(i.summary?'<span class="rhmn-s">'+esc(i.summary)+"</span>":"")+"</span></a>"}).join("")+"</div>";
+}
+/* Nút ↻ (dành cho dev): kích hoạt workflow crawl-news.yml qua GitHub API rồi nạp lại tin ngay khi chạy xong */
+var NRF_K="rhm_news_gh_v1",nrfBusy=!1;
+function nrfCfg(){try{return JSON.parse(localStorage.getItem(NRF_K)||"null")||{}}catch(e){return{}}}
+function nrfSave(c){try{localStorage.setItem(NRF_K,JSON.stringify(c))}catch(e){}}
+function nrfToast(m){try{showToast(m)}catch(e){}}
+function nrfSleep(ms){return new Promise(function(r){setTimeout(r,ms)})}
+async function newsRefresh(){
+  if(nrfBusy)return;
+  var c=nrfCfg(),gh=null;try{gh=ghInfo()}catch(e){}
+  if(!c.repo){var d=gh?gh.owner+"/"+gh.repo:"";var r=prompt("Repo GitHub chứa workflow crawl (dạng owner/repo):",d);if(!r)return;c.repo=r.trim()}
+  if(!c.token){var t=prompt("Dán GitHub token (fine-grained, repo này, quyền Actions: Read and write + Contents: Read). Chỉ lưu trong trình duyệt này:");if(!t)return;c.token=t.trim()}
+  nrfSave(c);
+  var btn=document.getElementById("rhmdNewsRf"),H={Authorization:"Bearer "+c.token,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"},API="https://api.github.com/repos/"+c.repo;
+  nrfBusy=!0;btn&&btn.classList.add("rhmn-spin");
+  function fail(m,reset){nrfToast("❌ "+m);if(reset){delete c.token;nrfSave(c)}}
+  try{
+    var rr=await fetch(API,{headers:H});
+    if(rr.status===401||rr.status===403||rr.status===404){fail("Token/repo không hợp lệ ("+rr.status+"), bấm lại để nhập lại",!0);return}
+    var branch=(await rr.json()).default_branch||"main",t0=Date.now();
+    var dr=await fetch(API+"/actions/workflows/crawl-news.yml/dispatches",{method:"POST",headers:H,body:JSON.stringify({ref:branch})});
+    if(dr.status!==204){fail(dr.status===404?"Không thấy workflow crawl-news.yml trên nhánh "+branch:"Không chạy được workflow ("+dr.status+"): cần quyền Actions: Read and write",dr.status===401||dr.status===403);return}
+    nrfToast("⏳ Đã gửi lệnh crawl, đang chờ GitHub chạy...");
+    var done=!1,concl="";
+    for(var k=0;k<60&&!done;k++){
+      await nrfSleep(k<2?5e3:4e3);
+      var lr=await fetch(API+"/actions/workflows/crawl-news.yml/runs?event=workflow_dispatch&per_page=5&_="+Date.now(),{headers:H});
+      if(!lr.ok)continue;
+      var run=((await lr.json()).workflow_runs||[]).filter(function(x){return Date.parse(x.created_at)>=t0-3e4})[0];
+      if(run&&run.status==="completed"){done=!0;concl=run.conclusion}
+    }
+    if(!done){fail("Quá thời gian chờ, kiểm tra tab Actions");return}
+    if(concl!=="success"){fail("Workflow chạy lỗi ("+concl+"), xem log ở tab Actions");return}
+    var cr=await fetch(API+"/contents/TinTuc/news.json?ref="+encodeURIComponent(branch)+"&_="+Date.now(),{headers:Object.assign({},H,{Accept:"application/vnd.github.raw+json"})});
+    if(!cr.ok){fail("Không đọc được news.json ("+cr.status+")");return}
+    var j=await cr.json(),old={};newsItems.forEach(function(i){old[i.id]=1});
+    var add=(j.items||[]).filter(function(i){return!old[i.id]}).length;
+    newsItems=j.items||[];newsUpd=j.updated||0;newsErr="";newsLoaded=!0;render();
+    nrfToast(add?"✅ Có "+add+" tin mới":"✅ Xong, chưa có tin nào mới")
+  }catch(e){fail("Lỗi mạng: "+(e&&e.message||e))}
+  finally{nrfBusy=!1;btn&&btn.classList.remove("rhmn-spin")}
+}
+(function(){var b=document.getElementById("rhmdNewsRf");b&&b.addEventListener("click",newsRefresh);b&&b.addEventListener("contextmenu",function(e){e.preventDefault();if(confirm("Xóa token/repo đã lưu cho nút ↻?")){try{localStorage.removeItem(NRF_K)}catch(x){}}})})();
 function render(){
+  if(mode==="news"){newsRender();return}
   applyFilter();cnt.textContent=shown.length;renderSb();
-  if(!books.length){main.innerHTML='<div class="rhmd-msg">'+(mode==="video"?"Chưa có bài giảng nào trong thư mục MonHoc.":mode==="quiz"?(qTab==="thi"?"Chưa có bộ đề thi thử nào.":"Chưa có bộ đề ôn tập nào."):"Chưa có sách nào trong thư mục Books.")+'</div>';return}
+  if(!books.length){main.innerHTML='<div class="rhmd-msg">'+(mode==="news"?"Chưa có tin tức nào.":mode==="video"?"Chưa có bài giảng nào trong thư mục MonHoc.":mode==="quiz"?(qTab==="thi"?"Chưa có bộ đề thi thử nào.":"Chưa có bộ đề ôn tập nào."):"Chưa có sách nào trong thư mục Books.")+'</div>';return}
   if(!shown.length){main.innerHTML='<div class="rhmd-msg">'+(mode==="video"?"Không tìm thấy bài giảng phù hợp.":mode==="quiz"?"Không tìm thấy bộ đề phù hợp.":"Không tìm thấy tài liệu phù hợp.")+'</div>';return}
   lvB=lastViewedBook();main.innerHTML='<div class="'+(view==="list"?"rhmd-list":"rhmd-grid")+'">'+shown.map(cardHtml).join("")+"</div>";fetchMeta();
 }
@@ -2617,6 +2709,7 @@ function load(){
   var tok=++loadTok;
   if(mode==="video"){vLoad(tok);return}
   if(mode==="quiz"){qLoad(tok);return}
+  if(mode==="news"){newsLoad(tok);return}
   main.innerHTML='<div class="rhmd-msg">⏳ Đang tải danh sách sách...</div>';
   var p=Promise.resolve();
   if(!(typeof monHocAllEntries!="undefined"&&monHocAllEntries&&monHocAllEntries.length)&&typeof scanGithubMonHocStructure=="function")p=scanGithubMonHocStructure(!1).catch(function(){});
@@ -2635,7 +2728,7 @@ var qT=0;qIn.addEventListener("input",function(){qX.hidden=!qIn.value;clearTimeo
 qX.addEventListener("click",function(){qIn.value="";q="";qX.hidden=!0;render();qIn.focus()});
 tbBack&&tbBack.addEventListener("click",function(){if(document.body.classList.contains("rhmr-on")){try{bkBackToShelf()}catch(e){}return}curBook?(closeDetail(),repaintList()):window.rhmDocsClose()});
 window.rhmDocsOpen=function(m){
-  m=m==="video"?"video":m==="quiz"?"quiz":"docs";
+  m=m==="video"?"video":m==="quiz"?"quiz":m==="news"?"news":"docs";
   if(!root.classList.contains("hidden"))return;
   try{window.rhmSbClose&&window.rhmSbClose(!0)}catch(e){}
   if(m!==mode){mode=m;subj="";q="";qIn.value="";qX.hidden=!0;books=[];shown=[]}
@@ -2652,6 +2745,7 @@ window.RHM_HUB_HANDLERS=window.RHM_HUB_HANDLERS||{};
 window.RHM_HUB_HANDLERS.docs=function(){window.rhmDocsOpen("docs")};
 window.RHM_HUB_HANDLERS.video=function(){window.rhmDocsOpen("video")};
 window.RHM_HUB_HANDLERS.quiz=function(){window.rhmDocsOpen("quiz")};
+window.RHM_HUB_HANDLERS.news=function(){window.rhmDocsOpen("news")};
 var sbHome=document.getElementById("rhmSbHome");
 sbHome&&sbHome.addEventListener("click",function(){window.rhmDocsClose()},!0);
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&sb.classList.contains("open")&&!root.classList.contains("hidden"))setSb(!1)});
@@ -5940,7 +6034,7 @@ window.__rhmOcrScan=1;
 var TESS_VER="5.1.1",
     TESS_JS="https://cdn.jsdelivr.net/npm/tesseract.js@"+TESS_VER+"/dist/tesseract.min.js",
     LANG_PATH="https://cdn.jsdelivr.net/npm/@tesseract.js-data/eng@1.0.0/4.0.0_best_int",
-    CACHE_V="v12",MIN_NATIVE=25,OCR_W=((navigator.deviceMemory&&navigator.deviceMemory<=4)||/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent||""))?1700:2400,MAX_PIX=12e6,MIN_WORD_CONF=30,MIN_LINE_CONF=38,GAP_RERUN=.012;
+    CACHE_V="v10",MIN_NATIVE=25,OCR_W=((navigator.deviceMemory&&navigator.deviceMemory<=4)||/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent||""))?1700:2400,MAX_PIX=12e6,MIN_WORD_CONF=30,MIN_LINE_CONF=38,GAP_RERUN=.012;
 var orig=window.bkPageData,libP=null,workerP=null,idleT=0,curPg=null,btn=null,chBusy=false,chCancel=false,pass2=false;
 
 var quiet=false;
@@ -6047,7 +6141,7 @@ function convert(data,s,minW,minL,info){
     data.blocks.forEach(function(b,bidx){
       var bt=String(b&&b.blocktype||"");
       if(/IMAGE/.test(bt)&&b.bbox)imgR.push({x0:b.bbox.x0,y0:b.bbox.y0,x1:b.bbox.x1,y1:b.bbox.y1});
-      (b.paragraphs||[]).forEach(function(p,pidx){(p.lines||[]).forEach(function(L){L._bt=bt;L._bi=bidx;L._pi=pidx;raw.push(L)})});
+      (b.paragraphs||[]).forEach(function(p){(p.lines||[]).forEach(function(L){L._bt=bt;L._bi=bidx;raw.push(L)})});
     });
   }else raw=data&&data.lines||[];
   var recs=[];
@@ -6075,7 +6169,7 @@ function convert(data,s,minW,minL,info){
     if(!asc.length)return;
     var fh=pct(asc,.75)/.74;
     if(!(fh>3))return;
-    recs.push({lm:lm,bi:L._bi,pi:L._pi,ws:ws,fh:fh,by:by,bb:{x0:L.bbox.x0,y0:L.bbox.y0,x1:L.bbox.x1,y1:L.bbox.y1},bt:L._bt||"",
+    recs.push({lm:lm,bi:L._bi,ws:ws,fh:fh,by:by,bb:{x0:L.bbox.x0,y0:L.bbox.y0,x1:L.bbox.x1,y1:L.bbox.y1},bt:L._bt||"",
       text:ws.map(function(w){return w.text.trim()}).join(" "),k:"",hd:0});
   });
   /* cỡ chữ thân bài = cỡ chữ chiếm nhiều ký tự nhất */
@@ -6108,20 +6202,12 @@ function convert(data,s,minW,minL,info){
       if(wc>=5&&avg>=3.2&&r.lm>=(r.k==="fig"?70:65)&&/[A-Za-z]{3,}/.test(r.text))r.k="";
     }
   });
-  /* chú thích nhiều dòng: dòng ngay dưới dòng chú thích, cùng cỡ chữ, cùng cột.
-     v12: chuỗi chú thích dừng ở ranh giới đoạn của Tesseract. Trước đây convert() vứt mất
-     thông tin đoạn khi trải phẳng các dòng, nên bước lan này chỉ còn hình học (cùng cỡ chữ,
-     cùng cột, khoảng cách dòng) để nhận biết — mà sách này chú thích và thân bài cùng cỡ
-     chữ, cùng cột, cùng khoảng dòng, nên đoạn thân bài ngay sau chú thích (vd đoạn
-     "The principle..." sau chú thích Fig 6-23) bị gắn cờ cap, rồi rhmOcrKinds đưa vào
-     pg.cap/nohl và bkApplyHl bỏ qua khi tô. Giữ nguyên mọi điều kiện hình học, chỉ thêm
-     một điều kiện duy nhất: không lan sang đoạn khác. */
+  /* chú thích nhiều dòng: dòng ngay dưới dòng chú thích, cùng cỡ chữ, cùng cột */
   var byY=recs.slice().sort(function(a,b){return a.bb.y0-b.bb.y0});
   for(var pass=0;pass<3;pass++)byY.forEach(function(r){
     if(r.k)return;
     byY.some(function(c){
       if(c.k!=="cap"||c===r)return false;
-      if(c.pi!=null&&r.pi!=null&&(c.pi!==r.pi||c.bi!==r.bi))return false;
       var gap=r.bb.y0-c.bb.y1;
       if(gap>=-.3*c.fh&&gap<=1.1*c.fh&&Math.abs(r.fh-c.fh)<=.16*c.fh&&r.bb.x0<c.bb.x1+4&&r.bb.x1>c.bb.x0-4&&r.bb.x1-r.bb.x0<=1.15*(c.bb.x1-c.bb.x0)+.05*Wp){r.k="cap";return true}
       return false;
@@ -6518,7 +6604,7 @@ async function autoRestore(doc,tok){
     await chapterOcr(true);
   }catch(e){console.warn("[OCR] tự dựng lại từ cache",e)}
 }
-window.rhmOcrVer=12;try{console.info("[OCR] bản vá chế độ sách scan v12 đã nạp (chú thích không lan sang đoạn thân bài)")}catch(e){}
+window.rhmOcrVer=10;try{console.info("[OCR] bản vá chế độ sách scan v10 đã nạp (đọc bổ sung chữ bị sót)")}catch(e){}
 window.rhmOcr={dump:function(n){var p=bkVP&&bkVP[n-1];return p&&p._ocrRaw},chapter:chapterOcr,auto:autoRestore,_convert:convert,_analyze:roAnalyze,_merge:mergeExtra,_gap:inkGap};
 })();</script>
 <script id="rhm-ocr-mode">(function(){
