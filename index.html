@@ -3343,7 +3343,7 @@ Mục cuối cùng đã lập là "`+lastH.en+'" [cấp '+lastH.lvl+']. Nếu fi
 `,a-1)+1,pre=T.slice(ls,a);pre.trim()&&pre.length<=MAXP&&!/[.!?:;]["”')\]]?\s*$/.test(pre)&&(a=ls)}if(b>0&&b<L&&T[b]!==`
 `&&!/[.!?]["”')\]]?$/.test(T.slice(Math.max(0,b-2),b))){let le=T.indexOf(`
 `,b);le<0&&(le=L);const post=T.slice(b,le);post.trim()&&post.length<=MAXP&&(b=le)}return[a,b]})}window.bkSnapRg=bkSnapRg,window.bkRelink=function(){const a=bkSecs.slice().sort((x,y)=>x.s-y.s);bkSecs=a.filter((x,i)=>i===0||x.s!==a[i-1].s),bkSecs.forEach((x,i)=>{const nextS=i+1<bkSecs.length?bkSecs[i+1].s:bkText.length,hd=x.manual?null:x.hd;let rg=null;if(hd&&Array.isArray(hd.rg)&&hd.rg.length&&hd.tl===bkText.length&&(rg=hd.rg.map(r=>[r[0],r[1]]).filter(r=>r[1]>r[0]),rg.length&&hd.open)){let mx=0;rg.forEach(r=>{r[1]>mx&&(mx=r[1])}),nextS>mx&&rg.push([mx,nextS])}if(rg&&rg.length){let mx=0;rg.forEach(r=>{r[1]>mx&&(mx=r[1])});try{rg=bkSnapRg(rg)}catch{}{let B=1/0;for(let j=i+1;j<bkSecs.length;j++)if((bkSecs[j].lvl||1)<=(x.lvl||1)){B=bkSecs[j].s;break}if(B<1/0){const c=rg.map(r=>[r[0],Math.min(r[1],B)]).filter(r=>r[1]>r[0]);c.length&&(rg=c)}}mx=0,rg.forEach(r=>{r[1]>mx&&(mx=r[1])}),x.rg=rg,x.e=mx,x.text=rg.map(r=>bkText.slice(r[0],r[1]).trim()).filter(Boolean).join(`
-`)}else{let e=nextS;const ae=typeof bkAiEnd=="function"?bkAiEnd(x,e):0;ae&&(e=ae),x.rg=null,x.e=e,x.text=bkText.slice(x.s,x.e).trim()}})},window.bkHeadsSave=function(){try{if(!bkCur)return;const heads=bkHeads.map(h=>({page:h.page,box:null,en:h.en,vi:h.vi,lvl:h.lvl,start:h.start||"",end:h.end||"",rg:h.rg||null,tl:h.tl||0,pos:typeof h.pos=="number"?h.pos:void 0,open:!!h.open,intro:!!h.intro}));localStorage.setItem("bk_hd_"+bkCur.url,JSON.stringify({v:6,heads}))}catch{}},window.bkRebuildSecs=async function(tok){const found=[];let minPos=0;try{gnorm()}catch{}for(let i=0;i<bkHeads.length;i++){if(tok!==bkViewTok)return!1;const h=bkHeads[i],nx=bkHeads[i+1];h._ntn=nx&&Array.isArray(nx.parts)&&nx.parts[0]?bkNormStr(nx.parts[0].text).slice(0,24):"";let s=null;try{s=await bkLocateHead(h,minPos)}catch{s=null}delete h._ntn,s!=null&&(found.push({title:bkFixVi(h.vi,h.en),en:h.en,num:"",lvl:h.lvl||1,s:Math.max(0,s),manual:!1,intro:!!h.intro,e:0,text:"",hd:h}),minPos=Math.max(0,s)+1),i%4===3&&await bkYield()}const manual=bkSecs.filter(x=>x.manual&&x.s>=0),all=found.concat(manual).sort((a,b)=>a.s-b.s||(a.manual?0:1)-(b.manual?0:1)).filter((x,i,a)=>i===0||x.s!==a[i-1].s);let prev=0;all.forEach(x=>{if(x.manual){prev=Math.max(1,Math.min(10,x.lvl||1));return}x.lvl=Math.max(1,Math.min(10,Math.min(x.lvl,prev+1))),prev=x.lvl});const keepEn=bkSecs[bkSecSel]&&bkSecs[bkSecSel].en||"";return bkSecs=all,bkRelink(),bkSecSel=keepEn?bkSecs.findIndex(x=>(x.en||"")===keepEn):-1,bkHl=bkSecSel>=0?bkHlFor(bkSecs[bkSecSel]):null,bkSaveManual(),bkHeadsSave(),bkApplyHlAll(),bkRenderSecList(),!0}})();
+`)}else{let e=nextS;const ae=typeof bkAiEnd=="function"?bkAiEnd(x,e):0;ae&&(e=ae),x.rg=null,x.e=e,x.text=bkText.slice(x.s,x.e).trim()}})},window.bkHeadsSave=function(){try{if(!bkCur)return;const heads=bkHeads.map(h=>({page:h.page,box:null,en:h.en,vi:h.vi,lvl:h.lvl,start:h.start||"",end:h.end||"",rg:h.rg||null,tl:h.tl||0,ap:h.ap||null,pos:typeof h.pos=="number"?h.pos:void 0,open:!!h.open,intro:!!h.intro}));localStorage.setItem("bk_hd_"+bkCur.url,JSON.stringify({v:6,heads}))}catch{}},window.bkRebuildSecs=async function(tok){const found=[];let minPos=0;try{gnorm()}catch{}for(let i=0;i<bkHeads.length;i++){if(tok!==bkViewTok)return!1;const h=bkHeads[i],nx=bkHeads[i+1];h._ntn=nx&&Array.isArray(nx.parts)&&nx.parts[0]?bkNormStr(nx.parts[0].text).slice(0,24):"";let s=null;try{s=await bkLocateHead(h,minPos)}catch{s=null}delete h._ntn,s!=null&&(found.push({title:bkFixVi(h.vi,h.en),en:h.en,num:"",lvl:h.lvl||1,s:Math.max(0,s),manual:!1,intro:!!h.intro,e:0,text:"",hd:h}),minPos=Math.max(0,s)+1),i%4===3&&await bkYield()}const manual=bkSecs.filter(x=>x.manual&&x.s>=0),all=found.concat(manual).sort((a,b)=>a.s-b.s||(a.manual?0:1)-(b.manual?0:1)).filter((x,i,a)=>i===0||x.s!==a[i-1].s);let prev=0;all.forEach(x=>{if(x.manual){prev=Math.max(1,Math.min(10,x.lvl||1));return}x.lvl=Math.max(1,Math.min(10,Math.min(x.lvl,prev+1))),prev=x.lvl});const keepEn=bkSecs[bkSecSel]&&bkSecs[bkSecSel].en||"";return bkSecs=all,bkRelink(),bkSecSel=keepEn?bkSecs.findIndex(x=>(x.en||"")===keepEn):-1,bkHl=bkSecSel>=0?bkHlFor(bkSecs[bkSecSel]):null,bkSaveManual(),bkHeadsSave(),bkApplyHlAll(),bkRenderSecList(),!0}})();
 </script>
 <style id="rhm-rib-scale-v1">
 #dict-modal,#note-modal{--xbu:calc(var(--rd-vh) * .0426);--rbu:calc(var(--rd-vh) * .0639)}
@@ -6708,16 +6708,35 @@ function locTitle(h,minRaw,E){
   if(!r)return null;
   return backPrefix(T,map[r.s]);
 }
+/* lưu gọn các mốc đầu/cuối của từng đoạn (h.ap) cùng mục lục, để khi chữ OCR đổi (OCR lại, đổi máy / trình duyệt)
+   vẫn dò lại được vùng tô mà không phải nhờ AI quét lại mục lục */
+function packAp(parts){
+  return parts.map(function(p){
+    var t=String(p&&p.text||"").replace(/\s+/g," ").trim(),sp=splitAnch(t),o={page:p.page,text:sp.b&&norm(sp.b)!==norm(sp.a)?sp.a+SEP+sp.b:sp.a};
+    if(p.tag)o.tag=p.tag;if(p.cont)o.cont=p.cont;return o;
+  });
+}
 window.bkLocateHead=(function(prev){
   return async function(h,minPos){
     if(window.__rhmScan&&h&&typeof bkText==="string"&&bkText&&typeof bkPages!=="undefined"&&bkPages.length){
       try{
         var E={text:bkText,pages:bkPages};
         if(Array.isArray(h.parts)&&h.parts.length){
+          try{h.ap=packAp(h.parts)}catch(e){}
           var ok=locAnchored(h,minPos||0,E);
           delete h.parts;
           if(ok&&typeof h.pos==="number")return h.pos;
         }else if(!(Array.isArray(h.rg)&&h.rg.length&&h.tl===bkText.length)){
+          if(Array.isArray(h.ap)&&h.ap.length){
+            if(!h._ntn&&typeof bkHeads!=="undefined"){
+              var ix=bkHeads.indexOf(h),nx=ix>=0&&bkHeads[ix+1],src=nx&&((nx.parts&&nx.parts[0])||(nx.ap&&nx.ap[0]));
+              if(src)h._ntn=norm(src.text).slice(0,24);
+            }
+            h.parts=h.ap.map(function(x){return{page:x.page,cont:x.cont,tag:x.tag,text:x.text}});
+            var ok2=locAnchored(h,minPos||0,E);
+            delete h.parts;
+            if(ok2&&typeof h.pos==="number")return h.pos;
+          }
           var p=locTitle(h,minPos||0,E);
           if(p!==null){h.pos=p;return p}
         }
