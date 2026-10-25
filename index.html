@@ -2549,7 +2549,16 @@ function newsRender(){
     '<span class="rhmn-body"><span class="rhmn-meta"><b>'+(res?"🔬 ":"")+esc(i.source)+"</b> · "+esc(newsFmt(i.date))+'</span><span class="rhmn-t">'+esc(i.title)+"</span>"+(res&&i.authors?'<span class="rhmn-au">'+esc(i.authors)+"</span>":"")+(i.summary?'<span class="rhmn-s">'+esc(i.summary)+"</span>":"")+"</span></a>"}).join("")+"</div>";
 }
 /* ===== Trình đọc tin ngay trong app (kiểu MSN): bài đã trích sẵn ở TinTuc/a/<id>.json ===== */
-var nRdId=null,nRdMode="app",nArt={},nRdScroll=0;
+var nRdId=null,nRdMode="app",nArt={},nRdScroll=0,nLoad={};
+/* Cloudflare Worker đọc báo: dán URL worker vào đây (vd https://rhm-news.ten-ban.workers.dev) hoặc đặt localStorage "rhm_news_worker" */
+var NEWS_WORKER_URL="https://rhm-news.tracnghiem-rhm.workers.dev";
+function nWorkerBase(){var u="";try{u=window.RHM_NEWS_WORKER||localStorage.getItem("rhm_news_worker")||NEWS_WORKER_URL||""}catch(e){u=NEWS_WORKER_URL||""}u=String(u).trim().replace(/\/+$/,"");return/^https:\/\//i.test(u)?u:""}
+window.rhmSetNewsWorker=function(u){try{u?localStorage.setItem("rhm_news_worker",String(u).trim()):localStorage.removeItem("rhm_news_worker")}catch(e){}nArt={};nrfToast&&nrfToast(u?"Đã đặt Worker đọc báo":"Đã xoá Worker đọc báo")};
+function nWorkerArt(it){
+  var base=nWorkerBase();if(!base||!it||!it.url)return Promise.resolve(null);
+  var ctl=typeof AbortController=="function"?new AbortController:null,tm=ctl?setTimeout(function(){ctl.abort()},25e3):0;
+  return fetch(base+"/article?url="+encodeURIComponent(it.url),ctl?{signal:ctl.signal}:{}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(a){return a&&a.html?a:null}).catch(function(){return null}).then(function(a){tm&&clearTimeout(tm);return a});
+}
 function nFile(id){return String(id).replace(/[^a-z0-9_-]/gi,"_")}
 function nSan(html){
   var OK={P:1,BR:1,H2:1,H3:1,H4:1,UL:1,OL:1,LI:1,BLOCKQUOTE:1,STRONG:1,B:1,EM:1,I:1,U:1,A:1,IMG:1,FIGURE:1,FIGCAPTION:1,TABLE:1,THEAD:1,TBODY:1,TR:1,TD:1,TH:1,SUP:1,SUB:1};
@@ -2569,8 +2578,9 @@ function nRdOpen(id){
   nRdScroll=window.pageYOffset||0;nRdId=id;nRdMode="app";
   var it=nRdItem();if(!it){nRdId=null;return}
   newsRender();try{window.scrollTo(0,0)}catch(e){}
-  if(it.body&&!(id in nArt)){
-    fetch("TinTuc/a/"+nFile(id)+".json",{cache:"force-cache"}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(a){nArt[id]=a}).catch(function(){nArt[id]=null}).then(function(){nRdId===id&&nRdPaint()});
+  if(!(id in nArt)&&(it.body||nWorkerBase())){
+    nLoad[id]=1;
+    (it.body?fetch("TinTuc/a/"+nFile(id)+".json",{cache:"force-cache"}).then(function(r){if(!r.ok)throw 0;return r.json()}):Promise.reject()).catch(function(){return nWorkerArt(it)}).then(function(a){nArt[id]=a||null}).catch(function(){nArt[id]=null}).then(function(){delete nLoad[id];nRdId===id&&nRdPaint()});
   }
 }
 function nRdClose(){if(!nRdId)return;nRdId=null;newsRender();try{window.scrollTo(0,nRdScroll)}catch(e){}}
@@ -2581,12 +2591,13 @@ function nRdPaint(){
    '<span class="rhmn-seg"><button type="button" data-a="app" class="'+(nRdMode==="app"?"on":"")+'">Đọc trong app</button><button type="button" data-a="web" class="'+(nRdMode==="web"?"on":"")+'">Trang gốc</button></span>'+
    '<a class="rhmn-rdb" href="'+esc(it.url)+'" target="_blank" rel="noopener noreferrer">Mở bài gốc ↗</a></div>';
   if(nRdMode==="web"){
-    h+='<div class="rhmn-hint">Một số website chặn hiển thị trong app. Nếu khung bên dưới trống, hãy dùng “Đọc trong app” hoặc “Mở bài gốc ↗”.</div><iframe class="rhmn-if" src="'+esc(it.url)+'" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" referrerpolicy="no-referrer" loading="lazy"></iframe></div>';
+    var wb=nWorkerBase();
+    h+='<div class="rhmn-hint">'+(wb?"Trang gốc được tải qua Worker (đã bỏ script nên có thể mất một số tính năng). Nếu khung trống, dùng “Đọc trong app”.":"Một số website chặn hiển thị trong app. Nếu khung bên dưới trống, hãy dùng “Đọc trong app” hoặc “Mở bài gốc ↗”.")+'</div><iframe class="rhmn-if" src="'+esc(wb?wb+"/page?url="+encodeURIComponent(it.url):it.url)+'" '+(wb?'sandbox="allow-popups allow-popups-to-escape-sandbox"':'sandbox="allow-scripts allow-same-origin allow-popups allow-forms"')+' referrerpolicy="no-referrer" loading="lazy"></iframe></div>';
     main.innerHTML=h;return;
   }
   h+='<article class="rhmn-art"><div class="rhmn-meta"><b>'+(res?"🔬 ":"")+esc(it.source)+"</b> · "+esc(newsFmt(it.date))+'</div><h2 class="rhmn-h">'+esc(it.title)+"</h2>";
   var by=(a&&a.byline)||it.authors||"";by&&(h+='<div class="rhmn-au">'+esc(by)+"</div>");
-  if(it.body&&!(it.id in nArt))h+='<div class="rhmd-msg">⏳ Đang tải bài...</div>';
+  if(nLoad[it.id])h+='<div class="rhmd-msg">⏳ Đang tải bài...</div>';
   else if(a&&a.html){
     var body=nSan(a.html);if(a.image&&body.indexOf(a.image)<0)h+='<img class="rhmn-hero" referrerpolicy="no-referrer" src="'+esc(a.image)+'" alt="" onerror="this.remove()">';
     h+='<div class="rhmn-body">'+body+"</div>";
