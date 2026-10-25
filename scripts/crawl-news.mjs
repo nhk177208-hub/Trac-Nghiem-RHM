@@ -17,6 +17,7 @@ const VN_N = 10;           // trong nuoc: toi da 10 tin moi moi lan
 const VN_AGE_DAYS = 30;   // trong nuoc: chi lay bai trong 1 thang gan nhat
 const KEEP = 5000;        // so tin giu lai trong news.json
 const ART_KEEP = 2000;     // chi giu noi dung bai cua 400 tin moi nhat
+const BACKFILL_DAYS = +(process.env.NEWS_BACKFILL_DAYS || 365); // nguon uu tien 1: thieu bai thi duoc lay bai cu hon (toi da ngan nay)
 const MAX_AGE_DAYS = +(process.env.NEWS_MAX_AGE_DAYS || 30);
 const SCRAPE_PER_SITE = 60;
 const FULLTEXT = process.env.NEWS_FULLTEXT !== '0'; // dat NEWS_FULLTEXT=0 de chi luu tom tat, khong luu toan van
@@ -25,12 +26,14 @@ const UA = process.env.NEWS_UA || 'Mozilla/5.0 (compatible; RHM-DentalNewsBot/1.
 const VN_DENTAL = new RegExp('(?<![\\p{L}])(?:răng|nha khoa|nha sĩ|nha sỹ|nha chu|nội nha|chỉnh nha|hàm mặt|RHM|niềng|implant|cắm ghép|cấy ghép (?:implant|răng)|nướu|viêm lợi|xương hàm|khớp thái dương hàm|hàm giả|mắc cài|veneer|khoang miệng|nhiệt miệng|ung thư (?:vòm )?miệng|dental|dentist|orthodont|odontolog|maxillofacial|periodont|endodont)', 'iu');   // lien quan nha khoa/RHM
 const EN_CMF = new RegExp('(?<![\\p{L}])(?:dental|dentist|dentition|tooth|teeth|periodont|orthodont|endodont|prosthodont|pedodont|implantolog|gingiv|caries|denture|malocclusion|orthognathic|maxillofacial|craniofacial|cleft (?:lip|palate)|mandib|maxill|temporomandibular|oral (?:health|hygiene|cancer|cavity|surgery|medicine|microbio|mucos|rehabilitation|biology|squamous)|jaw|pulpitis|bruxism|halitosis|aligner|mouthwash)', 'iu');   // lien quan nha khoa/ham mat (quoc te)
 
-const JUNK_VN = /(thư mời (báo giá|chào giá|thầu)|mời thầu|báo giá|chọn nhà thầu|lựa chọn nhà thầu|kết quả lựa chọn|đấu thầu|mua sắm|danh sách (thí sinh|trúng tuyển|học viên|sinh viên)|lịch (thi|học|khai giảng)|thông báo (nghỉ|tuyển sinh|tuyển dụng|điểm|lịch|về việc|v\/v)|quyết định (về|số)|công văn|biểu mẫu|đăng ký (xét tuyển|học)|tuyển (sinh|dụng))/i;
+const JUNK_VN = /(mời chào giá|chào giá|yêu cầu báo giá|cung cấp hàng hóa|nhu cầu (mua|tìm đơn vị)|thư mời (báo giá|chào giá|thầu)|mời thầu|báo giá|chọn nhà thầu|lựa chọn nhà thầu|kết quả lựa chọn|đấu thầu|mua sắm|danh sách (thí sinh|trúng tuyển|học viên|sinh viên)|lịch (thi|học|khai giảng)|thông báo (nghỉ|tuyển sinh|tuyển dụng|điểm|lịch|về việc|v\/v)|quyết định (về|số)|công văn|biểu mẫu|đăng ký (xét tuyển|học)|tuyển (sinh|dụng))/i;
 const JUNK_TITLE = /^\s*(erratum|corrigendum|correction|retraction|editorial board|cover|front cover|issue information|table of contents|in this issue|announcement|publisher'?s note|masthead|thông báo tuyển dụng|tuyển dụng)\b/i;
 const hits = (re, t) => (t.match(new RegExp(re.source, 'giu')) || []).length;
 // lien quan = tieu de co tu khoa, hoac noi dung co >= need lan (nguon tong hop thi need = 2)
 // "bai bao dang hoang": tieu de >= 4 tu, khong phai ten muc/thong bao hanh chinh/mua sam
-export const isArticleTitle = t => { t = String(t || '').trim(); return t.split(/\s+/).length >= 4 && !JUNK_TITLE.test(t) && !JUNK_VN.test(t); };
+// tin chinh sach/di tru/phap ly khong phai tin chuyen mon nha khoa
+const OFFTOPIC_EN = /\b(visa|h-?1b|immigra\w*|tariffs?|congress\w*|senate|legislat\w*|lobby\w*|election|executive order|proposed rule|lawsuit|antitrust|union(ize|izing)?)\b/i;
+export const isArticleTitle = t => { t = String(t || '').trim(); return t.split(/\s+/).length >= 4 && !JUNK_TITLE.test(t) && !JUNK_VN.test(t) && !OFFTOPIC_EN.test(t); };
 export function isRelevant(re, title, text, need = 1) {
   title = String(title || '').normalize('NFC'); text = String(text || '').normalize('NFC');
   return hits(re, title) > 0 || hits(re, text) >= need;
@@ -498,6 +501,7 @@ async function enrichScraped(items, s, isKnown, minTs) {
 }
 
 /* ---------- lay noi dung bai de doc trong app ---------- */
+const stripBoiler = h => String(h || '').replace(/<p>\s*The post\b[\s\S]*?appeared first on[\s\S]*?<\/p>/gi, '');
 async function buildArticle(it, s) {
   const base = { id: it.id, url: it.url, title: it.title, source: it.source, date: it.date };
   if (it._abs) {                                     // PubMed: abstract co cau truc
@@ -505,11 +509,11 @@ async function buildArticle(it, s) {
     return { ...base, byline: it.authors || '', image: '', html, kind: 'abstract' };
   }
   if (it.type === 'research' && !it._scraped) {      // tap chi: RSS thuong chi co abstract
-    const h = it._html ? sanitize(it._html, it.url) : '';
+    const h = it._html ? stripBoiler(sanitize(it._html, it.url)) : '';
     return { ...base, byline: '', image: it.image || '', html: h || (it._full ? '<p>' + esc(it._full) + '</p>' : ''), kind: 'abstract' };
   }
   if (!FULLTEXT || s?.noBody) return null;
-  let html = it._html ? sanitize(it._html, it.url) : '';
+  let html = it._html ? stripBoiler(sanitize(it._html, it.url)) : '';
   let page = null;
   if (it._art) { page = it._art; if (page.textLen > strip(html).length) html = page.html; }
   else if (strip(html).length < 600 || it._scraped) {
@@ -546,7 +550,8 @@ async function main() {
   const haveTitle = new Set(db.items.map(i => normT(i.title)));
   const minTsFor = s => Date.now() - (s.region === 'vn' ? VN_AGE_DAYS : MAX_AGE_DAYS) * 864e5;
   let okCount = 0; const bySrc = new Map(SOURCES.map(s => [s.name, s]));
-  const pools = { news: [], research: [], vn: [] };
+  const pools = { news: [], research: [], vn: [] }; const old = { news: [], research: [], vn: [] };
+  const backTs = Date.now() - BACKFILL_DAYS * 864e5;
 
   // LUU Y: bai bi loc bo KHONG bi ghi nho (chi bai da chon moi vao db) -> lan crawl sau van duoc xet lai (trong MAX_AGE_DAYS / VN_AGE_DAYS)
   await pool(SOURCES, 6, async s => {
@@ -554,11 +559,17 @@ async function main() {
     try {
       let { items, via } = await collect(s, log);
       const scraped = items.length > 0 && items.every(i => i._scraped);
-      if (scraped) items = await enrichScraped(items, s, i => have.has(i.id) || haveUrl.has(i.url), minTsFor(s));
+      if (scraped) items = await enrichScraped(items, s, i => have.has(i.id) || haveUrl.has(i.url), s.p === 1 ? backTs : minTsFor(s));
       else items = items.filter(i => isArticleTitle(i.title) && isRelevant(reFor(s), i.title, i._full || i.summary, needFor(s)));
-      const fresh = items.filter(i => !have.has(i.id) && !haveUrl.has(i.url) && !haveTitle.has(normT(i.title)) && Date.parse(i.date) >= minTsFor(s));
-      log(`OK   [${s.region}] ${s.name} (${via || 'khong co bai'}): ${items.length} bai sau loc, ${fresh.length} moi`);
-      (s.region === 'vn' ? pools.vn : (fresh.length && fresh[0].type === 'research' ? pools.research : pools.news)).push(...fresh.map(i => ({ ...i, _s: s.name, _p: s.p })));
+      const isNew = i => !have.has(i.id) && !haveUrl.has(i.url) && !haveTitle.has(normT(i.title));
+      const byDate = (x, y) => Date.parse(y.date) - Date.parse(x.date);
+      const freshAll = items.filter(i => isNew(i) && Date.parse(i.date) >= minTsFor(s)).sort(byDate);
+      const fresh = freshAll.slice(0, 1);          // moi nguon chi lay 1 bai / lan crawl; lan sau se lay bai ke tiep
+      const older = s.p === 1 ? items.filter(i => isNew(i) && Date.parse(i.date) < minTsFor(s) && Date.parse(i.date) >= backTs).sort(byDate).slice(0, 1) : [];   // nguon hay: du phong bai cu hon
+      log(`OK   [${s.region}] ${s.name} (${via || 'khong co bai'}): ${items.length} bai sau loc, ${freshAll.length} moi${older.length && !fresh.length ? ', co bai cu du phong' : ''}`);
+      const bucket = x => s.region === 'vn' ? x.vn : (s.kind === 'journal' ? x.research : x.news);
+      bucket(pools).push(...fresh.map(i => ({ ...i, _s: s.name, _p: s.p })));
+      bucket(old).push(...older.map(i => ({ ...i, _s: s.name, _p: s.p })));
       okCount++;
     } catch (e) { log(`LOI  [${s.region}] ${s.name}: ${e.message}`); }
   });
@@ -568,6 +579,10 @@ async function main() {
 
   const dedupe = arr => { const seen = new Set(), st = new Set(); return arr.filter(i => { const k = normT(i.title); if (seen.has(i.url) || (k && st.has(k))) return false; seen.add(i.url); st.add(k); return true; }); };
   pools.news = dedupe(pools.news); pools.research = dedupe(pools.research); pools.vn = dedupe(pools.vn);
+  // thieu bai moi -> bu bang bai cu hon cua cac nguon uu tien 1 (moi nguon 1 bai), khong trung bai moi
+  const taken = new Set([...pools.news, ...pools.research, ...pools.vn].map(i => i.url));
+  const topUp = (pool, quota) => { const need = quota - pool.length; if (need <= 0) return; const cand = dedupe(old[pool === pools.vn ? 'vn' : pool === pools.research ? 'research' : 'news']).filter(i => !taken.has(i.url)); const add = pickNews(cand, need); add.forEach(i => taken.add(i.url)); pool.push(...add); if (add.length) log(`Bu ${add.length} bai cu tu nguon uu tien 1`); };
+  topUp(pools.news, NEWS_N); topUp(pools.research, RESEARCH_N); topUp(pools.vn, VN_N);
   let pickedN = pickTiered(pools.news.slice(), NEWS_N), pickedR = pickTiered(pools.research.slice(), RESEARCH_N);
   let short = PER_RUN - pickedN.length - pickedR.length;       // thieu o ben nao thi lay bu tu ben kia
   if (short > 0) {
