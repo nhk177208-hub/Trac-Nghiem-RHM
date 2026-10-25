@@ -6610,7 +6610,8 @@ function colBridge(pos,E,n,map,ntn){
   for(i=0;i<ex.cb.length;i++)if(ex.cb[i]>=pos){c=ex.cb[i];break}
   if(c<0)return 0;
   var gap=T.slice(pos,c);
-  if(gap.length>14||/[A-Za-zÀ-ỹ]/.test(gap))return 0;             /* chưa tới cuối cột */
+  /* chưa tới cuối cột? cho phép còn sót tối đa ~40 ký tự (nửa dòng cuối) miễn không có chỗ kết câu trong đó */
+  if(gap.length>40||/[.!?…]["”')\]\d]*\s/.test(gap+" ")&&/[A-Za-zÀ-ỹ]/.test(gap.replace(/[.!?…]["”')\]\d\s]*$/,"")))return 0;
   var head=T.slice(Math.max(0,pos-200),c).replace(/[\s \d\[\]()"”'’]+$/,""),
       bkEnd=ex.ge,bk=ex.bk||[];
   for(i=0;i<bk.length;i++)if(bk[i]>c){bkEnd=bk[i];break}
@@ -6619,11 +6620,14 @@ function colBridge(pos,E,n,map,ntn){
   if(/[.!?…]$/.test(head)&&!/^[\s\d\[\]()]*[a-zà-ỹ]/.test(cont))return 0;   /* câu đã trọn và cột kế mở đầu mới: để AI quyết */
   var endRaw=Math.min(bkEnd,c+BR_MAX);
   if(ntn){
-    var q=find(ntn,n,lb(map,c),lb(map,bkEnd));
+    /* dò tiêu đề mục kế trong cột kế: chặt hơn dò thường (≤12% sai) và phải đứng đầu dòng, tránh khớp nhầm giữa đoạn văn */
+    var lo2=lb(map,c),hi2=lb(map,bkEnd),q=ntn.length>=9?sellers(ntn,n,lo2,hi2,Math.floor(ntn.length*.12)):find(ntn,n,lo2,hi2);
     if(q){
-      var qs=map[q.s];
-      if(qs-c<=3)return 0;                                          /* tiêu đề mục kế nằm ngay đầu cột kế: mục đã hết */
-      endRaw=Math.min(endRaw,backPrefix(T,qs));
+      var qs=backPrefix(T,map[q.s]);
+      if(qs<=c||T.charAt(qs-1)==="\n"){
+        if(qs-c<=3)return 0;                                        /* tiêu đề mục kế nằm ngay đầu cột kế: mục đã hết */
+        endRaw=Math.min(endRaw,qs);
+      }
     }
   }
   while(endRaw>c&&/\s/.test(T[endRaw-1]))endRaw--;
