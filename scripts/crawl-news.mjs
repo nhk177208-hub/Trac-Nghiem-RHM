@@ -177,12 +177,14 @@ const PUBMED_TERM =
 
 /* ---------- tien ich ---------- */
 const ENT = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', rsquo: '’', lsquo: '‘', rdquo: '”', ldquo: '“', ndash: '–', mdash: '—', hellip: '…' };
+'nbsp iexcl cent pound curren yen brvbar sect uml copy ordf laquo not shy reg macr deg plusmn sup2 sup3 acute micro para middot cedil sup1 ordm raquo frac14 frac12 frac34 iquest Agrave Aacute Acirc Atilde Auml Aring AElig Ccedil Egrave Eacute Ecirc Euml Igrave Iacute Icirc Iuml ETH Ntilde Ograve Oacute Ocirc Otilde Ouml times Oslash Ugrave Uacute Ucirc Uuml Yacute THORN szlig agrave aacute acirc atilde auml aring aelig ccedil egrave eacute ecirc euml igrave iacute icirc iuml eth ntilde ograve oacute ocirc otilde ouml divide oslash ugrave uacute ucirc uuml yacute thorn yuml'.split(' ').forEach((n, i) => { ENT[n] = String.fromCharCode(160 + i); });
+Object.assign(ENT, { nbsp: ' ', Abreve: 'Ă', abreve: 'ă', Dstrok: 'Đ', dstrok: 'đ', bull: '•', trade: '™', euro: '€' });
 const decode = s => s.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (m, e) => {
   if (e[0] === '#') { const n = e[1].toLowerCase() === 'x' ? parseInt(e.slice(2), 16) : parseInt(e.slice(1), 10); try { return String.fromCodePoint(n); } catch { return m; } }
-  return ENT[e.toLowerCase()] ?? m;
+  return ENT[e] ?? ENT[e.toLowerCase()] ?? m;
 });
 const unCdata = s => s.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1');
-const strip = s => decode(unCdata(s).replace(/<[^>]*>/g, ' ')).replace(/\s+/g, ' ').trim();
+const strip = s => { let t = unCdata(s); for (let k = 0; k < 3; k++) { const u = decode(t.replace(/<[^>]*>/g, ' ')); if (u === t) break; t = u; } return t.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim(); };
 const trunc = (s, n) => s.length > n ? s.slice(0, n).replace(/\s+\S*$/, '') + '…' : s;
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const tag = (x, name) => { const m = x.match(new RegExp('<' + name + '(?:\\s[^>]*)?>([\\s\\S]*?)</' + name + '>', 'i')); return m ? m[1] : ''; };
@@ -311,7 +313,8 @@ export function parseFeed(xml, source, opt = {}) {
     const dRaw = strip(tag(b, 'pubDate') || tag(b, 'published') || tag(b, 'updated') || tag(b, 'dc:date') || tag(b, 'prism:publicationDate'));
     const ts = Date.parse(dRaw);
     const rawBody = tag(b, 'content:encoded') || tag(b, 'description') || tag(b, 'summary') || tag(b, 'content');
-    const summary = strip(rawBody).replace(/\s*(The post|Read more|Continue reading).*$/i, '');
+    let summary = strip(rawBody).replace(/\s*(The post|Read more|Continue reading).*$/i, '');
+    if (summary.slice(0, 30).toLowerCase() === title.slice(0, 30).toLowerCase()) summary = '';   // mo ta chi lap lai tieu de (Google News)
     let image = attr(b, 'media:content', 'url') || attr(b, 'media:thumbnail', 'url');
     if (!image) { const e = b.match(/<enclosure\b[^>]*>/i); if (e && /image/i.test(e[0])) image = attr(e[0], 'enclosure', 'url'); }
     if (!image) { const m = decode(unCdata(rawBody)).match(/<img[^>]+src=["']([^"']+)["']/i); if (m) image = m[1]; }
@@ -487,6 +490,13 @@ async function main() {
   const log = m => console.log(m);
   let db = { updated: 0, items: [] };
   try { db = JSON.parse(fs.readFileSync(OUT, 'utf8')); } catch {}
+  let fixed = 0;
+  for (const i of db.items) {
+    const t = strip(i.title || ''), m = strip(i.summary || '');
+    const m2 = m.slice(0, 30).toLowerCase() === t.slice(0, 30).toLowerCase() ? '' : m;
+    if (t !== i.title || m2 !== (i.summary || '')) { i.title = t; i.summary = m2; fixed++; }
+  }
+  if (fixed) log(`Da sua loi entity/HTML cho ${fixed} tin cu`);
   const have = new Set(db.items.map(i => i.id)); const haveUrl = new Set(db.items.map(i => i.url));
   const normT = x => String(x || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim().slice(0, 80);
   const haveTitle = new Set(db.items.map(i => normT(i.title)));
@@ -534,7 +544,11 @@ async function main() {
 
   const now = Date.now();
   const clean = picked.map(i => { const o = { ...i }; delete o._html; delete o._full; delete o._abs; delete o._s; delete o._scraped; delete o._art; o.crawled = now; return o; });
-  if (!clean.length) { log('Khong co tin moi, khong ghi file.'); return; }
+  if (!clean.length) {
+    if (fixed) { fs.writeFileSync(OUT, JSON.stringify(db, null, 1) + '\n'); log('Khong co tin moi, chi ghi lai tin cu da sua.'); }
+    else log('Khong co tin moi, khong ghi file.');
+    return;
+  }
   db.items = [...clean, ...db.items].sort((a, b) => b.date.localeCompare(a.date)).slice(0, KEEP);
   db.updated = now;
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
