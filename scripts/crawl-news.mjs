@@ -34,8 +34,8 @@ const reFor = s => s.filter || (s.region === 'vn' ? VN_DENTAL : EN_CMF);
 
 /* ---------------------------------------------------------------------------
  QUY TAC CRAWL (theo 2 file huong dan: nha_khoa_quoc_te.md + nha_khoa_viet_nam.md)
-  1. CHI lay tu cac nguon co ten trong file huong dan (GUIDE_SOURCES). Nguon ngoai huong dan
-     (bao lon, Google News, ScienceDaily...) nam o EXTRA_SOURCES va chi chay khi dat NEWS_EXTRA=1.
+  1. CHI lay tu cac nguon uy tin co ten trong file huong dan (GUIDE_SOURCES). Khong co nguon du phong/bao lon/Google News.
+     Moi nguon co do uu tien prio 1 (cao) / 2 / 3 (thap): khi bi gioi han so bai, nguon prio cao (so nho) duoc chon truoc.
   2. Moi nguon thuoc 1 nhom (group) dung theo muc trong file huong dan.
   3. Nguon khong co RSS -> quet link, NHUNG moi bai phai duoc mo ra kiem tra:
        - co ngay xuat ban that trong trang (khong co ngay -> bo, khong tu gan "hom nay"),
@@ -152,20 +152,17 @@ const GUIDE_SOURCES = [
   { name: 'BV RHM TP.HCM',          region: 'vn', kind: 'news', group: G.HOSP, site: 'https://bvranghammat.com/' },
 ];
 
-// Ngoai huong dan: mac dinh TAT. Bat bang bien moi truong NEWS_EXTRA=1 neu muon them bao lon / tong hop.
-const EXTRA_SOURCES = [
-  { name: 'ScienceDaily',           region: 'intl', kind: 'news', group: 'Khác', feed: 'https://www.sciencedaily.com/rss/health_medicine/dentistry.xml' },
-  { name: 'Medical Xpress',         region: 'intl', kind: 'news', group: 'Khác', feed: 'https://medicalxpress.com/rss-feed/dentistry-news/' },
-  { name: 'VnExpress',              region: 'vn', kind: 'news', group: 'Khác', feed: 'https://vnexpress.net/rss/suc-khoe.rss', filter: VN_DENTAL },
-  { name: 'Tuổi Trẻ',               region: 'vn', kind: 'news', group: 'Khác', feed: 'https://tuoitre.vn/rss/suc-khoe.rss', filter: VN_DENTAL },
-  { name: 'Thanh Niên',             region: 'vn', kind: 'news', group: 'Khác', feed: 'https://thanhnien.vn/rss/suc-khoe.rss', filter: VN_DENTAL },
-  { name: 'Dân trí',                region: 'vn', kind: 'news', group: 'Khác', feed: 'https://dantri.com.vn/rss/suc-khoe.rss', filter: VN_DENTAL },
-  { name: 'VietNamNet',             region: 'vn', kind: 'news', group: 'Khác', feed: 'https://vietnamnet.vn/rss/suc-khoe.rss', filter: VN_DENTAL },
-  { name: 'Sức khỏe & Đời sống',    region: 'vn', kind: 'news', group: 'Khác', feed: 'https://suckhoedoisong.vn/rss/home.rss', filter: VN_DENTAL },
-  { name: 'Google News VN', region: 'vn', kind: 'news', group: 'Khác', itemSource: true, noBody: true,
-    feed: 'https://news.google.com/rss/search?q=' + encodeURIComponent('nha khoa OR "răng hàm mặt" OR "nha sĩ" when:7d') + '&hl=vi&gl=VN&ceid=VN:vi' },
-];
-export const SOURCES = process.env.NEWS_EXTRA !== '0' ? [...GUIDE_SOURCES, ...EXTRA_SOURCES] : GUIDE_SOURCES;
+/* Do uu tien nguon (prio): 1 = cao (co quan quan ly, hiep hoi lon, tap chi hang dau, benh vien/truong dau nganh),
+   2 = trung binh, 3 = thap (bao thuong mai/cong dong, trien lam quoc te). Nguon prio cao (so nho) duoc chon truoc khi gioi han so bai. */
+const P1 = ['ADA News', 'FDI World Dental Federation', 'IADR', 'ITI', 'EAO', 'AAO (Orthodontists)', 'IAOMS', 'AAOMS', 'EFP', 'AAP (Periodontology)', 'AAE', 'NIDCR (NIH)', 'Cochrane Oral Health',
+  'J Dent Res (JDR)', 'JADA', 'British Dental Journal', 'J Clin Periodontol', 'J Endodontics (JOE)', 'Int J Oral Maxillofac Surg', 'J Prosthet Dent (JPD)', 'AJODO', 'Clin Oral Implants Res',
+  'J Dent (ScienceDirect)', 'Dental Materials (ScienceDirect)', 'J Periodontol (Wiley)', 'Int Endod J (Wiley)', 'J Oral Maxillofac Surg (ScienceDirect)',
+  'Bộ Y tế', 'Cục Quản lý KCB', 'BV RHM Trung ương TP.HCM', 'BV RHM Trung ương Hà Nội', 'Viện Đào tạo RHM - ĐH Y Hà Nội', 'Khoa RHM - ĐH Y Dược TP.HCM',
+  'Hội RHM Việt Nam (VOSA)', 'Hội RHM TP.HCM (HOSA)', 'Tạp chí Răng Hàm Mặt VN'];
+const P3 = ['Dentaltown', 'DentistryIQ', 'IDS Cologne', 'GNYDM', 'AEEDC Dubai', 'EuroPerio', 'Chicago Midwinter Meeting'];
+for (const n of [...P1, ...P3]) if (!GUIDE_SOURCES.some(x => x.name === n)) console.error('CANH BAO: khong co nguon "' + n + '" de gan do uu tien');
+GUIDE_SOURCES.forEach(x => { x.p = P1.includes(x.name) ? 1 : P3.includes(x.name) ? 3 : 2; });
+export const SOURCES = GUIDE_SOURCES;
 
 const PUBMED_TERM =
   '(("Dentistry"[MeSH Terms] OR "Dental Implants"[MeSH Terms] OR "Periodontal Diseases"[MeSH Terms] OR ' +
@@ -408,9 +405,21 @@ export function pickNews(cands, n, prio) {       // xen ke giua cac nguon cho da
   const gk = i => /^PubMed/.test(i.source) ? 'PubMed' : i.source;
   cands.sort((a, b) => b.date.localeCompare(a.date)).forEach(i => { const k = gk(i); if (!by.has(k)) by.set(k, []); by.get(k).push(i); });
   const out = []; const lists = [...by.values()];
-  if (prio) lists.sort((a, b) => (prio.get(a[0].source) || 0) - (prio.get(b[0].source) || 0));
+  lists.sort((a, b) => ((a[0]._p || 2) - (b[0]._p || 2)) || (prio ? (prio.get(a[0].source) || 0) - (prio.get(b[0].source) || 0) : 0));
   while (out.length < n && lists.some(l => l.length)) for (const l of lists) { if (l.length && out.length < n) out.push(l.shift()); }
   return out;
+}
+
+/* chia theo ty le do uu tien: muc 1 ~70%, muc 2 ~25%, muc 3 toi da 1-2 bai. Muc nao thieu bai thi bu cho muc cao truoc; muc 3 khong duoc bu them. */
+export function pickTiered(cands, n, prio) {
+  if (!isFinite(n)) return pickNews(cands, n, prio);
+  const by = { 1: [], 2: [], 3: [] }; cands.forEach(i => by[i._p || 2].push(i));
+  const q3 = Math.min(2, Math.max(1, Math.round(n * 0.1))), q1 = Math.round(n * 0.7), q2 = Math.max(0, n - q1 - q3);
+  let o1 = pickNews(by[1].slice(), q1, prio), o2 = pickNews(by[2].slice(), q2, prio); const o3 = pickNews(by[3].slice(), q3, prio);
+  let left = n - o1.length - o2.length - o3.length;
+  if (left > 0) { const x = pickNews(by[1].filter(i => !o1.includes(i)), left, prio); o1 = o1.concat(x); left -= x.length; }
+  if (left > 0) o2 = o2.concat(pickNews(by[2].filter(i => !o2.includes(i)), left, prio));
+  return [...o1, ...o2, ...o3];
 }
 
 /* ---------- thu thap tu 1 nguon ---------- */
@@ -496,7 +505,9 @@ async function main() {
     const m2 = m.slice(0, 30).toLowerCase() === t.slice(0, 30).toLowerCase() ? '' : m;
     if (t !== i.title || m2 !== (i.summary || '')) { i.title = t; i.summary = m2; fixed++; }
   }
-  if (fixed) log(`Da sua loi entity/HTML cho ${fixed} tin cu`);
+  const n0 = db.items.length; db.items = db.items.filter(i => i.group !== 'Khác'); const dropped = n0 - db.items.length; fixed += dropped;
+  if (dropped) log(`Da go ${dropped} tin cu tu nguon du phong`);
+  if (fixed) log(`Da sua/lam sach tin cu: ${fixed}`);
   const have = new Set(db.items.map(i => i.id)); const haveUrl = new Set(db.items.map(i => i.url));
   const normT = x => String(x || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim().slice(0, 80);
   const haveTitle = new Set(db.items.map(i => normT(i.title)));
@@ -512,26 +523,26 @@ async function main() {
       else items = items.filter(i => !JUNK_TITLE.test(i.title) && isRelevant(reFor(s), i.title, i._full || i.summary, s.filter ? 2 : 1));
       const fresh = items.filter(i => !have.has(i.id) && !haveUrl.has(i.url) && !haveTitle.has(normT(i.title)) && Date.parse(i.date) >= minTsFor(s));
       log(`OK   [${s.region}] ${s.name} (${via || 'khong co bai'}): ${items.length} bai sau loc, ${fresh.length} moi`);
-      (s.region === 'vn' ? pools.vn : (fresh.length && fresh[0].type === 'research' ? pools.research : pools.news)).push(...fresh.map(i => ({ ...i, _s: s.name })));
+      (s.region === 'vn' ? pools.vn : (fresh.length && fresh[0].type === 'research' ? pools.research : pools.news)).push(...fresh.map(i => ({ ...i, _s: s.name, _p: s.p })));
       okCount++;
     } catch (e) { log(`LOI  [${s.region}] ${s.name}: ${e.message}`); }
   });
   let pub = [];
   try { pub = (await fetchPubmed(log)).filter(i => !have.has(i.id) && !JUNK_TITLE.test(i.title) && isRelevant(EN_CMF, i.title, (i._abs || []).map(x => x.text).join(' '), 1)); okCount++; } catch (e) { log(`LOI  PubMed: ${e.message}`); }
-  pools.research.push(...pub);
+  pools.research.push(...pub.map(i => ({ ...i, _p: 1 })));
 
   const dedupe = arr => { const seen = new Set(), st = new Set(); return arr.filter(i => { const k = normT(i.title); if (seen.has(i.url) || (k && st.has(k))) return false; seen.add(i.url); st.add(k); return true; }); };
   pools.news = dedupe(pools.news); pools.research = dedupe(pools.research); pools.vn = dedupe(pools.vn);
-  let pickedN = pickNews(pools.news.slice(), NEWS_N), pickedR = pickNews(pools.research.slice(), RESEARCH_N);
+  let pickedN = pickTiered(pools.news.slice(), NEWS_N), pickedR = pickTiered(pools.research.slice(), RESEARCH_N);
   let short = PER_RUN - pickedN.length - pickedR.length;       // thieu o ben nao thi lay bu tu ben kia
   if (short > 0) {
-    const restR = pickNews(pools.research.filter(i => !pickedR.includes(i)), short); pickedR = pickedR.concat(restR); short -= restR.length;
-    if (short > 0) pickedN = pickedN.concat(pickNews(pools.news.filter(i => !pickedN.includes(i)), short));
+    const restR = pickNews(pools.research.filter(i => !pickedR.includes(i) && i._p !== 3), short); pickedR = pickedR.concat(restR); short -= restR.length;
+    if (short > 0) pickedN = pickedN.concat(pickNews(pools.news.filter(i => !pickedN.includes(i) && i._p !== 3), short));
   }
   const cnt = new Map(); db.items.forEach(i => cnt.set(i.source, (cnt.get(i.source) || 0) + 1));
-  const pickedV = pickNews(pools.vn.slice(), VN_N, cnt);
+  const pickedV = pickTiered(pools.vn.slice(), VN_N, cnt);
   const picked = [...pickedN, ...pickedR, ...pickedV];
-  log(`Chon ${picked.length} tin moi (${pickedN.length} tin, ${pickedR.length} nghien cuu, ${pickedV.length} trong nuoc)`);
+  log(`Chon ${picked.length} tin moi (${pickedN.length} tin, ${pickedR.length} nghien cuu, ${pickedV.length} trong nuoc) | muc1: ${picked.filter(i => i._p === 1).length}, muc2: ${picked.filter(i => (i._p || 2) === 2).length}, muc3: ${picked.filter(i => i._p === 3).length}`);
   if (!okCount) { console.error('Tat ca nguon deu loi'); process.exit(1); }
 
   // lay noi dung bai (che do doc trong app)
@@ -543,7 +554,7 @@ async function main() {
   log(`Co noi dung doc trong app: ${picked.filter(i => i.body).length}/${picked.length}`);
 
   const now = Date.now();
-  const clean = picked.map(i => { const o = { ...i }; delete o._html; delete o._full; delete o._abs; delete o._s; delete o._scraped; delete o._art; o.crawled = now; return o; });
+  const clean = picked.map(i => { const o = { ...i }; delete o._html; delete o._full; delete o._abs; delete o._s; delete o._p; o.prio = i._p || 2; delete o._scraped; delete o._art; o.crawled = now; return o; });
   if (!clean.length) {
     if (fixed) { fs.writeFileSync(OUT, JSON.stringify(db, null, 1) + '\n'); log('Khong co tin moi, chi ghi lai tin cu da sua.'); }
     else log('Khong co tin moi, khong ghi file.');
