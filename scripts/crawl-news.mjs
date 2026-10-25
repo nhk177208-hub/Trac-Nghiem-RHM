@@ -27,14 +27,28 @@ const VN_DENTAL = new RegExp('(?<![\\p{L}])(?:răng|nha khoa|nha sĩ|nha sỹ|nh
 const EN_CMF = new RegExp('(?<![\\p{L}])(?:dental|dentist|dentition|tooth|teeth|periodont|orthodont|endodont|prosthodont|pedodont|implantolog|gingiv|caries|denture|malocclusion|orthognathic|maxillofacial|craniofacial|cleft (?:lip|palate)|mandib|maxill|temporomandibular|oral (?:health|hygiene|cancer|cavity|surgery|medicine|microbio|mucos|rehabilitation|biology|squamous)|jaw|pulpitis|bruxism|halitosis|aligner|mouthwash)', 'iu');   // lien quan nha khoa/ham mat (quoc te)
 
 const SECTION_VN = /^\s*(hợp tác (đối ngoại|quốc tế|trong nước)|tin tức( (và|&) sự kiện| sự kiện)?|sự kiện|hoạt động( chuyên môn)?|đào tạo|nghiên cứu( khoa học)?|thông tin|giới thiệu|liên hệ|tuyển sinh|văn bản|thông báo|tin (hội|trường|viện|bệnh viện)|chuyên môn|dịch vụ|bảng giá|tài liệu|thư viện)\s*$/i;
-const JUNK_VN = /(chức năng,? nhiệm vụ|cơ cấu tổ chức|sơ đồ tổ chức|lịch sử (hình thành|phát triển)|ban lãnh đạo|quy chế|mời chào giá|chào giá|yêu cầu báo giá|cung cấp hàng hóa|nhu cầu (mua|tìm đơn vị)|thư mời (báo giá|chào giá|thầu)|mời thầu|báo giá|chọn nhà thầu|lựa chọn nhà thầu|kết quả lựa chọn|đấu thầu|mua sắm|danh sách (thí sinh|trúng tuyển|học viên|sinh viên)|lịch (thi|học|khai giảng)|thông báo (nghỉ|tuyển sinh|tuyển dụng|điểm|lịch|về việc|v\/v)|quyết định (về|số)|công văn|biểu mẫu|đăng ký (xét tuyển|học)|tuyển (sinh|dụng))/i;
+const PROFILE_TITLE = /^\s*(?:(?:GS|PGS|TS|ThS|BSCKI{1,2}|BSNT|CKI{1,2}|BS|DS|KTV|CN)\.?\s*)+(?:\p{Lu}\p{Ll}*\s*){2,4}$/u;   // "TS. BS. Lê Hồng Vân" = trang ho so ca nhan, khong phai bai
+const JUNK_VN = /(chức năng,? nhiệm vụ|cơ cấu tổ chức|sơ đồ tổ chức|lịch sử (hình thành|phát triển)|ban lãnh đạo|lãnh đạo (các )?(đơn vị|khoa|phòng|bộ môn)|quy trình (xuất bản|phản biện|nộp bài|đăng bài)|hướng dẫn (tác giả|nộp bài)|dành cho (tác giả|người đọc|phản biện)|quy chế|mời chào giá|chào giá|yêu cầu báo giá|cung cấp hàng hóa|nhu cầu (mua|tìm đơn vị)|thư mời (báo giá|chào giá|thầu)|mời thầu|báo giá|chọn nhà thầu|lựa chọn nhà thầu|kết quả lựa chọn|đấu thầu|mua sắm|danh sách (thí sinh|trúng tuyển|học viên|sinh viên)|lịch (thi|học|khai giảng)|thông báo (nghỉ|tuyển sinh|tuyển dụng|điểm|lịch|về việc|v\/v)|quyết định (về|số)|công văn|biểu mẫu|đăng ký (xét tuyển|học)|tuyển (sinh|dụng))/i;
 const JUNK_TITLE = /^\s*(erratum|corrigendum|correction|retraction|editorial board|cover|front cover|issue information|table of contents|in this issue|announcement|publisher'?s note|masthead|thông báo tuyển dụng|tuyển dụng)\b/i;
 const hits = (re, t) => (t.match(new RegExp(re.source, 'giu')) || []).length;
 // lien quan = tieu de co tu khoa, hoac noi dung co >= need lan (nguon tong hop thi need = 2)
 // "bai bao dang hoang": tieu de >= 4 tu, khong phai ten muc/thong bao hanh chinh/mua sam
 // tin chinh sach/di tru/phap ly khong phai tin chuyen mon nha khoa
 const OFFTOPIC_EN = /\b(visa|h-?1b|immigra\w*|tariffs?|congress\w*|senate|legislat\w*|lobby\w*|election|executive order|proposed rule|lawsuit|antitrust|union(ize|izing)?)\b/i;
-export const isArticleTitle = t => { t = String(t || '').trim(); return t.split(/\s+/).length >= 4 && !JUNK_TITLE.test(t) && !SECTION_VN.test(t) && !JUNK_VN.test(t) && !OFFTOPIC_EN.test(t); };
+export const isArticleTitle = t => { t = String(t || '').trim(); return t.split(/\s+/).length >= 4 && !JUNK_TITLE.test(t) && !SECTION_VN.test(t) && !JUNK_VN.test(t) && !PROFILE_TITLE.test(t) && !OFFTOPIC_EN.test(t); };
+// ngon ngu: chi nhan tieng Viet va tieng Anh. Loai chu khong phai Latin (Trung/Nhat/Han/Nga/Thai/A Rap...) va cac thu tieng Latin khac (Phap/TBN/Bo/Duc/Y/Indonesia) khi nhan dien chac chan
+const NONLATIN = /[\u0400-\u04FF\u0590-\u06FF\u0900-\u0DFF\u0E00-\u0EFF\u1100-\u11FF\u3040-\u30FF\u3400-\u9FFF\uAC00-\uD7AF]/gu;
+const W = x => new Set(x.split(' '));
+const EN_W = W('the of and to is are was were with for that this from by which has have been its as at or not their these an be it on can may also between'), VI_W = W('và của là các có trong cho được một những với này tại khi không đã để từ về theo người cũng như đến'),
+  OT_W = W('le la les des une est dans pour avec sur qui aux el los las una del para por que como este esta der die das und ist mit von für nicht ein eine zu den dem os uma não com em dos das da il che per della nel sono yang dan untuk dengan dari pada ini itu adalah');
+export function langOk(text) {
+  const t = String(text || '').normalize('NFC').slice(0, 2500);
+  const letters = (t.match(/\p{L}/gu) || []).length; if (letters < 30) return true;
+  if ((t.match(NONLATIN) || []).length / letters > 0.3) return false;
+  const toks = t.toLowerCase().match(/\p{L}+/gu) || []; if (toks.length < 8) return true;
+  let en = 0, vi = 0, ot = 0; for (const w of toks) { if (EN_W.has(w)) en++; else if (VI_W.has(w)) vi++; else if (OT_W.has(w)) ot++; }
+  return !(ot / toks.length >= 0.08 && ot > en && ot > vi);
+}
 export function isRelevant(re, title, text, need = 1) {
   title = String(title || '').normalize('NFC'); text = String(text || '').normalize('NFC');
   return hits(re, title) > 0 || hits(re, text) >= need;
@@ -338,6 +352,13 @@ export function extractArticle(page, base) {
     const head = txt.slice(0, 250).match(/\b\d{1,2}[\/.-]\d{1,2}[\/.-]20\d{2}\b/);
     ts = lab ? textDate(lab[2]) : NaN;
     if (isNaN(ts) && head) ts = textDate(head[0]);
+    if (isNaN(ts)) {   // noi long hon truoc day: meta ngay sua doi, ngay trong URL, ngay (moi dinh dang) trong 700 ky tu dau bai
+      const modStr = og('article:modified_time') || og('og:updated_time') || og('og:modified_time') || og('dateModified') || (page.match(/"dateModified"\s*:\s*"([^"]+)"/) || [])[1] || '';
+      const modTs = Date.parse(modStr);
+      const um = String(base || '').match(/\/(20\d{2})[\/-](\d{1,2})(?:[\/-](\d{1,2}))?(?=[\/\-_.]|$)/) || String(base || '').match(/[\/-](20\d{2})(\d{2})(\d{2})(?=[\/\-_.]|$)/);
+      const urlTs = um && +um[2] >= 1 && +um[2] <= 12 ? Date.UTC(+um[1], +um[2] - 1, +(um[3] || 1), 12) : NaN;
+      ts = !isNaN(modTs) ? modTs : !isNaN(urlTs) ? urlTs : textDate(txt.slice(0, 700));
+    }
   }
   const ogType = (og('og:type') || '').toLowerCase(); const pubMeta = !!(og('article:published_time') || og('og:published_time') || og('datePublished') || (page.match(/"datePublished"\s*:/) || [])[0]);
   return { title, image: image2, desc, ogType, pubMeta, realLen, metaDate: !isNaN(metaTs), ts: isNaN(ts) ? 0 : ts, byline, html: body, textLen: strip(body).length };
@@ -502,15 +523,16 @@ async function enrichScraped(items, s, isKnown, minTs) {
   const ok = [];
   await pool(todo, 3, async it => {
     const page = extractArticle(await get(it.url, 'text/html,*/*', s), it.url);
-    if (page.ts && page.ts < minTs) return;                                          // co ngay nhung qua cu -> bo; khong co ngay thi van giu (lay ngay crawl)
+    if (!page.ts || page.ts < minTs) return;                                         // khong tim duoc ngay (da tim rong: meta, modified, URL, 700 ky tu dau bai) hoac qua cu -> bo
     if (!page.metaDate && page.ts > Date.now() + 864e5) return;                      // ngay doan tu text ma o tuong lai -> bo
     const title = trunc((page.title || '').replace(/\s*[|–-]\s*[^|–-]{3,40}$/, ''), 220);
     if (title.length < 8 || page.textLen < 100) return;                            // khong phai bai viet
     if (page.realLen < 300) return;                                                // khong co than bai that (trang muc/landing chi co mo ta) -> bo
     if (page.ogType === 'website' && !page.pubMeta) return;                        // trang chu/trang muc, khong phai bai
     if (!isArticleTitle(title)) return;                                            // ten muc ("Grantee News"), thong bao hanh chinh, mua sam...
+    if (!langOk(title + ' ' + (page.desc || '') + ' ' + strip(page.html).slice(0, 1500))) return;   // khong phai tieng Viet/Anh
     if (JUNK_TITLE.test(title) || !isRelevant(reFor(s), title, (page.desc || '') + ' ' + strip(page.html).slice(0, 2500), needFor(s))) return;   // phai lien quan nha khoa/RHM
-    it.title = title; it.date = new Date(page.ts || Date.now()).toISOString();
+    it.title = title; it.date = new Date(page.ts).toISOString();
     it.summary = trunc(page.desc || strip(page.html), 420);
     if (page.image) it.image = page.image;
     it._art = page; ok.push(it);
@@ -561,7 +583,7 @@ async function main() {
     const m2 = m.slice(0, 30).toLowerCase() === t.slice(0, 30).toLowerCase() ? '' : m;
     if (t !== i.title || m2 !== (i.summary || '')) { i.title = t; i.summary = m2; fixed++; }
   }
-  const n0 = db.items.length; db.items = db.items.filter(i => i.group !== 'Khác' && (i.type === 'research' || isArticleTitle(i.title) || (i.region === 'vn' && !JUNK_TITLE.test(i.title) && !JUNK_VN.test(i.title) && !OFFTOPIC_EN.test(i.title)))); const dropped = n0 - db.items.length; fixed += dropped;
+  const n0 = db.items.length; db.items = db.items.filter(i => i.group !== 'Khác' && langOk((i.title || '') + ' ' + (i.summary || '')) && (i.type === 'research' || isArticleTitle(i.title) || (i.region === 'vn' && !JUNK_TITLE.test(i.title) && !JUNK_VN.test(i.title) && !OFFTOPIC_EN.test(i.title)))); const dropped = n0 - db.items.length; fixed += dropped;
   if (dropped) log(`Da go ${dropped} tin cu tu nguon du phong`);
   if (fixed) log(`Da sua/lam sach tin cu: ${fixed}`);
   const have = new Set(db.items.map(i => i.id)); const haveUrl = new Set(db.items.map(i => i.url));
@@ -579,7 +601,7 @@ async function main() {
       let { items, via } = await collect(s, log);
       const scraped = items.length > 0 && items.every(i => i._scraped);
       if (scraped) items = await enrichScraped(items, s, i => have.has(i.id) || haveUrl.has(i.url), s.p === 1 ? backTs : minTsFor(s));
-      else items = items.filter(i => isArticleTitle(i.title) && isRelevant(reFor(s), i.title, i._full || i.summary, needFor(s)));
+      else items = items.filter(i => isArticleTitle(i.title) && langOk(i.title + ' ' + (i._full || i.summary || '')) && isRelevant(reFor(s), i.title, i._full || i.summary, needFor(s)));
       const isNew = i => !have.has(i.id) && !haveUrl.has(i.url) && !haveTitle.has(normT(i.title));
       const byDate = (x, y) => Date.parse(y.date) - Date.parse(x.date);
       const freshAll = items.filter(i => isNew(i) && Date.parse(i.date) >= minTsFor(s)).sort(byDate);
