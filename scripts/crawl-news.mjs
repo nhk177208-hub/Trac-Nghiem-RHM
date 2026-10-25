@@ -27,6 +27,7 @@ const VN_DENTAL = new RegExp('(?<![\\p{L}])(?:răng|nha khoa|nha sĩ|nha sỹ|nh
 const EN_CMF = new RegExp('(?<![\\p{L}])(?:dental|dentist|dentition|tooth|teeth|periodont|orthodont|endodont|prosthodont|pedodont|implantolog|gingiv|caries|denture|malocclusion|orthognathic|maxillofacial|craniofacial|cleft (?:lip|palate)|mandib|maxill|temporomandibular|oral (?:health|hygiene|cancer|cavity|surgery|medicine|microbio|mucos|rehabilitation|biology|squamous)|jaw|pulpitis|bruxism|halitosis|aligner|mouthwash)', 'iu');   // lien quan nha khoa/ham mat (quoc te)
 
 const SECTION_VN = /^\s*(hợp tác (đối ngoại|quốc tế|trong nước)|tin tức( (và|&) sự kiện| sự kiện)?|sự kiện|hoạt động( chuyên môn)?|đào tạo|nghiên cứu( khoa học)?|thông tin|giới thiệu|liên hệ|tuyển sinh|văn bản|thông báo|tin (hội|trường|viện|bệnh viện)|chuyên môn|dịch vụ|bảng giá|tài liệu|thư viện)\s*$/i;
+const LISTING_TITLE = /(\b(category|categories|archives?|tag|tags)\s*$|^\s*(category|categories|archives?|tag|chuyên mục|danh mục|lưu trữ)\s*[:\-–|]\s*|\bpage \d+\s*$)/i;   // "Business of Dentistry Category" = trang danh sach, khong phai bai
 const PROFILE_TITLE = /^\s*(?:(?:GS|PGS|TS|ThS|BSCKI{1,2}|BSNT|CKI{1,2}|BS|DS|KTV|CN)\.?\s*)+(?:\p{Lu}\p{Ll}*\s*){2,4}$/u;   // "TS. BS. Lê Hồng Vân" = trang ho so ca nhan, khong phai bai
 const JUNK_VN = /(chức năng,? nhiệm vụ|cơ cấu tổ chức|sơ đồ tổ chức|lịch sử (hình thành|phát triển)|ban lãnh đạo|lãnh đạo (các )?(đơn vị|khoa|phòng|bộ môn)|quy trình (xuất bản|phản biện|nộp bài|đăng bài)|hướng dẫn (tác giả|nộp bài)|dành cho (tác giả|người đọc|phản biện)|quy chế|mời chào giá|chào giá|yêu cầu báo giá|cung cấp hàng hóa|nhu cầu (mua|tìm đơn vị)|thư mời (báo giá|chào giá|thầu)|mời thầu|báo giá|chọn nhà thầu|lựa chọn nhà thầu|kết quả lựa chọn|đấu thầu|mua sắm|danh sách (thí sinh|trúng tuyển|học viên|sinh viên)|lịch (thi|học|khai giảng)|thông báo (nghỉ|tuyển sinh|tuyển dụng|điểm|lịch|về việc|v\/v)|quyết định (về|số)|công văn|biểu mẫu|đăng ký (xét tuyển|học)|tuyển (sinh|dụng))/i;
 const JUNK_TITLE = /^\s*(erratum|corrigendum|correction|retraction|editorial board|cover|front cover|issue information|table of contents|in this issue|announcement|publisher'?s note|masthead|thông báo tuyển dụng|tuyển dụng)\b/i;
@@ -35,7 +36,7 @@ const hits = (re, t) => (t.match(new RegExp(re.source, 'giu')) || []).length;
 // "bai bao dang hoang": tieu de >= 4 tu, khong phai ten muc/thong bao hanh chinh/mua sam
 // tin chinh sach/di tru/phap ly khong phai tin chuyen mon nha khoa
 const OFFTOPIC_EN = /\b(visa|h-?1b|immigra\w*|tariffs?|congress\w*|senate|legislat\w*|lobby\w*|election|executive order|proposed rule|lawsuit|antitrust|union(ize|izing)?)\b/i;
-export const isArticleTitle = t => { t = String(t || '').trim(); return t.split(/\s+/).length >= 4 && !JUNK_TITLE.test(t) && !SECTION_VN.test(t) && !JUNK_VN.test(t) && !PROFILE_TITLE.test(t) && !OFFTOPIC_EN.test(t); };
+export const isArticleTitle = t => { t = String(t || '').trim(); return t.split(/\s+/).length >= 4 && !JUNK_TITLE.test(t) && !SECTION_VN.test(t) && !JUNK_VN.test(t) && !PROFILE_TITLE.test(t) && !LISTING_TITLE.test(t) && !OFFTOPIC_EN.test(t); };
 // ngon ngu: chi nhan tieng Viet va tieng Anh. Loai chu khong phai Latin (Trung/Nhat/Han/Nga/Thai/A Rap...) va cac thu tieng Latin khac (Phap/TBN/Bo/Duc/Y/Indonesia) khi nhan dien chac chan
 const NONLATIN = /[\u0400-\u04FF\u0590-\u06FF\u0900-\u0DFF\u0E00-\u0EFF\u1100-\u11FF\u3040-\u30FF\u3400-\u9FFF\uAC00-\uD7AF]/gu;
 const W = x => new Set(x.split(' '));
@@ -361,7 +362,13 @@ export function extractArticle(page, base) {
     }
   }
   const ogType = (og('og:type') || '').toLowerCase(); const pubMeta = !!(og('article:published_time') || og('og:published_time') || og('datePublished') || (page.match(/"datePublished"\s*:/) || [])[0]);
-  return { title, image: image2, desc, ogType, pubMeta, realLen, metaDate: !isNaN(metaTs), ts: isNaN(ts) ? 0 : ts, byline, html: body, textLen: strip(body).length };
+  // trang danh sach/chuyen muc (nhieu tieu de bai co link, nhieu ngay, than bai toan link) co ngay nhung khong phai 1 bai
+  const anchorLen = x => [...String(x).matchAll(/<a\b[^>]*>([\s\S]*?)<\/a>/gi)].reduce((n, m) => n + strip(m[1]).length, 0);
+  const headLinks = [...region.matchAll(/<h[1-4]\b[^>]*>(?:(?!<\/h[1-4]>)[\s\S])*?<a\b/gi)].length;
+  const nDates = (strip(region).match(/\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+\d{1,2},?\s+20\d{2}\b|\b\d{1,2}\s*[\/.-]\s*\d{1,2}\s*[\/.-]\s*20\d{2}\b/gi) || []).length;
+  const bodyLinkRatio = realLen ? anchorLen(body) / realLen : 0;
+  const listing = headLinks >= 4 || (headLinks >= 2 && nDates >= 5) || bodyLinkRatio > 0.4;
+  return { title, listing, image: image2, desc, ogType, pubMeta, realLen, metaDate: !isNaN(metaTs), ts: isNaN(ts) ? 0 : ts, byline, html: body, textLen: strip(body).length };
 }
 
 /* ---------- RSS / Atom ---------- */
@@ -527,6 +534,7 @@ async function enrichScraped(items, s, isKnown, minTs) {
     if (!page.metaDate && page.ts > Date.now() + 864e5) return;                      // ngay doan tu text ma o tuong lai -> bo
     const title = trunc((page.title || '').replace(/\s*[|–-]\s*[^|–-]{3,40}$/, ''), 220);
     if (title.length < 8 || page.textLen < 100) return;                            // khong phai bai viet
+    if (page.listing) return;                                                        // trang danh sach/chuyen muc (Category, Archive...) -> bo
     if (page.realLen < 300) return;                                                // khong co than bai that (trang muc/landing chi co mo ta) -> bo
     if (page.ogType === 'website' && !page.pubMeta) return;                        // trang chu/trang muc, khong phai bai
     if (!isArticleTitle(title)) return;                                            // ten muc ("Grantee News"), thong bao hanh chinh, mua sam...
