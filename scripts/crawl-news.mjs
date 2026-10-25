@@ -212,6 +212,9 @@ async function get1(url, accept = '*/*') {
     const buf = Buffer.from(await r.arrayBuffer());
     let cs = ((r.headers.get('content-type') || '').match(/charset=([\w-]+)/i) || [])[1] || (buf.subarray(0, 2048).toString('latin1').match(/<meta[^>]+charset=["']?([\w-]+)/i) || [])[1] || 'utf-8';
     try { return new TextDecoder(cs).decode(buf); } catch { return buf.toString('utf8'); }
+  } catch (e) {
+    const c = e.cause; if (c) e.message += ' [' + (c.code || c.name || '') + (c.message && c.message !== e.message ? ' ' + c.message : '') + ']';
+    throw e;
   } finally { clearTimeout(t); }
 }
 async function pool(items, n, fn) { const q = items.slice(); await Promise.all(Array.from({ length: Math.min(n, q.length) }, async () => { while (q.length) { const it = q.shift(); try { await fn(it); } catch (e) { if (process.env.NEWS_DEBUG) console.log('  ! ' + (e.message || e)); } } })); }
