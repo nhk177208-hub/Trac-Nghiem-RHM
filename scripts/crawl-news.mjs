@@ -26,14 +26,15 @@ const UA = process.env.NEWS_UA || 'Mozilla/5.0 (compatible; RHM-DentalNewsBot/1.
 const VN_DENTAL = new RegExp('(?<![\\p{L}])(?:răng|nha khoa|nha sĩ|nha sỹ|nha chu|nội nha|chỉnh nha|hàm mặt|RHM|niềng|implant|cắm ghép|cấy ghép (?:implant|răng)|nướu|viêm lợi|xương hàm|khớp thái dương hàm|hàm giả|mắc cài|veneer|khoang miệng|nhiệt miệng|ung thư (?:vòm )?miệng|dental|dentist|orthodont|odontolog|maxillofacial|periodont|endodont)', 'iu');   // lien quan nha khoa/RHM
 const EN_CMF = new RegExp('(?<![\\p{L}])(?:dental|dentist|dentition|tooth|teeth|periodont|orthodont|endodont|prosthodont|pedodont|implantolog|gingiv|caries|denture|malocclusion|orthognathic|maxillofacial|craniofacial|cleft (?:lip|palate)|mandib|maxill|temporomandibular|oral (?:health|hygiene|cancer|cavity|surgery|medicine|microbio|mucos|rehabilitation|biology|squamous)|jaw|pulpitis|bruxism|halitosis|aligner|mouthwash)', 'iu');   // lien quan nha khoa/ham mat (quoc te)
 
-const JUNK_VN = /(mời chào giá|chào giá|yêu cầu báo giá|cung cấp hàng hóa|nhu cầu (mua|tìm đơn vị)|thư mời (báo giá|chào giá|thầu)|mời thầu|báo giá|chọn nhà thầu|lựa chọn nhà thầu|kết quả lựa chọn|đấu thầu|mua sắm|danh sách (thí sinh|trúng tuyển|học viên|sinh viên)|lịch (thi|học|khai giảng)|thông báo (nghỉ|tuyển sinh|tuyển dụng|điểm|lịch|về việc|v\/v)|quyết định (về|số)|công văn|biểu mẫu|đăng ký (xét tuyển|học)|tuyển (sinh|dụng))/i;
+const SECTION_VN = /^\s*(hợp tác (đối ngoại|quốc tế|trong nước)|tin tức( (và|&) sự kiện| sự kiện)?|sự kiện|hoạt động( chuyên môn)?|đào tạo|nghiên cứu( khoa học)?|thông tin|giới thiệu|liên hệ|tuyển sinh|văn bản|thông báo|tin (hội|trường|viện|bệnh viện)|chuyên môn|dịch vụ|bảng giá|tài liệu|thư viện)\s*$/i;
+const JUNK_VN = /(chức năng,? nhiệm vụ|cơ cấu tổ chức|sơ đồ tổ chức|lịch sử (hình thành|phát triển)|ban giám đốc|ban lãnh đạo|quy chế|mời chào giá|chào giá|yêu cầu báo giá|cung cấp hàng hóa|nhu cầu (mua|tìm đơn vị)|thư mời (báo giá|chào giá|thầu)|mời thầu|báo giá|chọn nhà thầu|lựa chọn nhà thầu|kết quả lựa chọn|đấu thầu|mua sắm|danh sách (thí sinh|trúng tuyển|học viên|sinh viên)|lịch (thi|học|khai giảng)|thông báo (nghỉ|tuyển sinh|tuyển dụng|điểm|lịch|về việc|v\/v)|quyết định (về|số)|công văn|biểu mẫu|đăng ký (xét tuyển|học)|tuyển (sinh|dụng))/i;
 const JUNK_TITLE = /^\s*(erratum|corrigendum|correction|retraction|editorial board|cover|front cover|issue information|table of contents|in this issue|announcement|publisher'?s note|masthead|thông báo tuyển dụng|tuyển dụng)\b/i;
 const hits = (re, t) => (t.match(new RegExp(re.source, 'giu')) || []).length;
 // lien quan = tieu de co tu khoa, hoac noi dung co >= need lan (nguon tong hop thi need = 2)
 // "bai bao dang hoang": tieu de >= 4 tu, khong phai ten muc/thong bao hanh chinh/mua sam
 // tin chinh sach/di tru/phap ly khong phai tin chuyen mon nha khoa
 const OFFTOPIC_EN = /\b(visa|h-?1b|immigra\w*|tariffs?|congress\w*|senate|legislat\w*|lobby\w*|election|executive order|proposed rule|lawsuit|antitrust|union(ize|izing)?)\b/i;
-export const isArticleTitle = t => { t = String(t || '').trim(); return t.split(/\s+/).length >= 4 && !JUNK_TITLE.test(t) && !JUNK_VN.test(t) && !OFFTOPIC_EN.test(t); };
+export const isArticleTitle = t => { t = String(t || '').trim(); return t.split(/\s+/).length >= 4 && !JUNK_TITLE.test(t) && !SECTION_VN.test(t) && !JUNK_VN.test(t) && !OFFTOPIC_EN.test(t); };
 export function isRelevant(re, title, text, need = 1) {
   title = String(title || '').normalize('NFC'); text = String(text || '').normalize('NFC');
   return hits(re, title) > 0 || hits(re, text) >= need;
@@ -253,6 +254,7 @@ async function pool(items, n, fn) { const q = items.slice(); await Promise.all(A
 const OK_TAGS = new Set(['p', 'br', 'h2', 'h3', 'h4', 'ul', 'ol', 'li', 'blockquote', 'strong', 'b', 'em', 'i', 'u', 'a', 'img', 'figure', 'figcaption', 'table', 'thead', 'tbody', 'tr', 'td', 'th', 'sup', 'sub']);
 const VOID = new Set(['br', 'img']);
 const BAD_IMG = /logo|icon|avatar|pixel|spacer|blank|1x1|sprite|emoji|badge|share|button|loading|placeholder/i;
+const badImg = u => BAD_IMG.test(String(u).split(/[?#]/)[0].split('/').pop());   // chi xet ten file, khong xet ca duong dan (tranh loai nham anh bai that)
 export function sanitize(html, base) {
   html = html.replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style|noscript|svg|iframe|object|embed|form|button|select|textarea|template)\b[\s\S]*?<\/\1\s*>/gi, '');
   const out = []; const stack = []; const re = /<(\/?)([a-zA-Z][a-zA-Z0-9]*)\b([^>]*)>|([^<]+)|</g; let m;
@@ -271,7 +273,7 @@ export function sanitize(html, base) {
       const raw = '<img ' + m[3] + '>';
       let src = attr(raw, 'img', 'data-src') || attr(raw, 'img', 'data-lazy-src') || attr(raw, 'img', 'data-original') || attr(raw, 'img', 'src');
       if (!src) { const ss = attr(raw, 'img', 'srcset') || attr(raw, 'img', 'data-srcset'); if (ss) src = ss.split(',').pop().trim().split(/\s+/)[0]; }
-      src = abs(src, base); if (!/^https?:/i.test(src) || BAD_IMG.test(src)) continue;
+      src = abs(src, base); if (!/^https?:/i.test(src) || badImg(src)) continue;
       out.push('<img src="' + esc(src) + '" alt="' + esc(attr(raw, 'img', 'alt')) + '" loading="lazy">'); continue;
     }
     out.push('<' + t + '>'); if (!VOID.has(t)) stack.push(t);
@@ -298,7 +300,8 @@ export function extractArticle(page, base) {
   let h = page.replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style|noscript|svg|iframe|nav|footer|aside)\b[\s\S]*?<\/\1\s*>/gi, '');
   const metaOf = (re) => { const m = page.match(re); return m ? decode(m[1]).trim() : ''; };
   const og = n => metaOf(new RegExp('<meta[^>]+(?:property|name)=["\']' + n + '["\'][^>]*content=["\']([^"\']*)["\']', 'i')) || metaOf(new RegExp('<meta[^>]+content=["\']([^"\']*)["\'][^>]*(?:property|name)=["\']' + n + '["\']', 'i'));
-  const title = og('og:title') || strip(tag(page, 'title'));
+  let title = og('og:title') || strip(tag(page, 'title'));
+  if (SECTION_VN.test(title) || (title.split(/\s+/).length < 4)) { const h1 = strip(tag(h, 'h1')); if (h1 && !SECTION_VN.test(h1) && h1.split(/\s+/).length >= 4) title = h1; }
   const image = abs(og('og:image') || og('twitter:image'), base);
   const desc = og('og:description') || og('description');
   const dateStr = og('article:published_time') || og('og:published_time') || og('datePublished') || (page.match(/"datePublished"\s*:\s*"([^"]+)"/) || [])[1] || attr(page.match(/<time\b[^>]*>/i)?.[0] || '', 'time', 'datetime');
@@ -312,17 +315,32 @@ export function extractArticle(page, base) {
   const ps = [...region.matchAll(/<p\b[^>]*>[\s\S]*?<\/p>/gi)].map(x => ({ i: x.index, e: x.index + x[0].length, len: strip(x[0]).length }));
   let best = null, cur = null;
   for (const p of ps) {
-    if (cur && p.i - cur.e < 1800) { cur.e = p.e; cur.len += p.len; } else { cur = { i: p.i, e: p.e, len: p.len }; if (!best) best = cur; }
+    if (cur && p.i - cur.e < 3500) { cur.e = p.e; cur.len += p.len; } else { cur = { i: p.i, e: p.e, len: p.len }; if (!best) best = cur; }
     if (!best || cur.len > best.len) best = cur;
   }
-  let raw = best && best.len >= 60 ? region.slice(best.i, best.e) : '';
+  let rs = best ? best.i : 0;   // lay them anh/hinh dung ngay truoc doan van dau (anh mo bai thuong nam ngoai the <p>)
+  if (best) { const before = region.slice(Math.max(0, best.i - 2500), best.i); const k = before.search(/<(figure|picture|img)\b/i); if (k >= 0) rs = Math.max(0, best.i - 2500) + k; }
+  let raw = best && best.len >= 60 ? region.slice(rs, best.e) : '';
   for (let k = 0; k < 6; k++) { const m = raw.match(/^\s*<p\b[^>]*>[\s\S]*?<\/p>/i); if (m && strip(m[0]).length < 50) raw = raw.slice(m[0].length); else break; }
   let body = raw ? sanitize(raw, base) : '';
-  const realLen = strip(body).length;                       // do dai doan van that (chua tinh mo ta du phong)
+  const realLen = strip(body).length;
+  let image2 = image; if (!image2 || badImg(image2)) { const m1 = body.match(/<img src="([^"]+)"/); image2 = m1 ? decode(m1[1]) : ''; }                       // do dai doan van that (chua tinh mo ta du phong)
   if (!body && desc) body = '<p>' + esc(desc) + '</p>';
-  if (isNaN(ts)) ts = textDate(strip(region).slice(0, 4000));
+  // tieu de la ten muc ("Hợp tác đối ngoại") hoac < 4 tu ma khong co h1 dung: KHONG bo bai, tu dat tieu de tu h2 / mo ta / cau dau cua bai
+  if (SECTION_VN.test(title) || title.split(/\s+/).length < 4) {
+    const firstSentence = x => { x = String(x || '').replace(/\s+/g, ' ').trim(); const m = x.match(/^(.{20,}?[.!?:])(\s|$)/); return trunc(m ? m[1].replace(/[.:]$/, '') : x, 110); };
+    const cand = [strip(tag(region, 'h2')), firstSentence(desc), firstSentence(strip(body))].find(c => c && c.split(/\s+/).length >= 4 && !SECTION_VN.test(c));
+    if (cand) title = (SECTION_VN.test(title) ? title.trim() + ' – ' : '') + cand;
+  }
+  if (isNaN(ts)) {   // khong co ngay trong meta: chi nhan ngay co nhan "Ngay dang..." hoac ngay dang so dd/mm/yyyy o ngay dau bai; khong lay ngay nam giua than bai (trang gioi thieu, quyet dinh...)
+    const txt = strip(region).slice(0, 4000);
+    const lab = txt.match(/(ngày đăng|đăng ngày|ngày xuất bản|đăng lúc|ngày cập nhật|cập nhật|posted|published|date)\s*[:\-–]?\s*([^]{0,40})/i);
+    const head = txt.slice(0, 250).match(/\b\d{1,2}[\/.-]\d{1,2}[\/.-]20\d{2}\b/);
+    ts = lab ? textDate(lab[2]) : NaN;
+    if (isNaN(ts) && head) ts = textDate(head[0]);
+  }
   const ogType = (og('og:type') || '').toLowerCase(); const pubMeta = !!(og('article:published_time') || og('og:published_time') || og('datePublished') || (page.match(/"datePublished"\s*:/) || [])[0]);
-  return { title, image, desc, ogType, pubMeta, realLen, metaDate: !isNaN(metaTs), ts: isNaN(ts) ? 0 : ts, byline, html: body, textLen: strip(body).length };
+  return { title, image: image2, desc, ogType, pubMeta, realLen, metaDate: !isNaN(metaTs), ts: isNaN(ts) ? 0 : ts, byline, html: body, textLen: strip(body).length };
 }
 
 /* ---------- RSS / Atom ---------- */
@@ -529,6 +547,7 @@ async function buildArticle(it, s) {
     if (!it.image && page.image) it.image = page.image;
   }
   if (strip(html).length < 150) return null;
+  if (!/<img\b/i.test(html) && it.image && !badImg(it.image)) html = '<figure><img src="' + esc(it.image) + '" alt="" loading="lazy"></figure>' + html;   // bai co anh ma than bai khong giu duoc -> chen anh dai dien len dau
   return { ...base, title: it.title, date: it.date, byline: page?.byline || '', image: it.image || '', html, kind: 'full' };
 }
 
@@ -542,7 +561,7 @@ async function main() {
     const m2 = m.slice(0, 30).toLowerCase() === t.slice(0, 30).toLowerCase() ? '' : m;
     if (t !== i.title || m2 !== (i.summary || '')) { i.title = t; i.summary = m2; fixed++; }
   }
-  const n0 = db.items.length; db.items = db.items.filter(i => i.group !== 'Khác' && (i.type === 'research' || isArticleTitle(i.title))); const dropped = n0 - db.items.length; fixed += dropped;
+  const n0 = db.items.length; db.items = db.items.filter(i => i.group !== 'Khác' && (i.type === 'research' || isArticleTitle(i.title) || (i.region === 'vn' && !JUNK_TITLE.test(i.title) && !JUNK_VN.test(i.title) && !OFFTOPIC_EN.test(i.title)))); const dropped = n0 - db.items.length; fixed += dropped;
   if (dropped) log(`Da go ${dropped} tin cu tu nguon du phong`);
   if (fixed) log(`Da sua/lam sach tin cu: ${fixed}`);
   const have = new Set(db.items.map(i => i.id)); const haveUrl = new Set(db.items.map(i => i.url));
