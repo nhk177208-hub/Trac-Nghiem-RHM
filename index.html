@@ -7605,6 +7605,33 @@ function splitSents(t){
   return out;
 }
 
+/* Văn bản cho Audiobook = chữ gốc của PDF theo thứ tự đọc, GỒM cả chú thích hình và bảng biểu
+   (bkText của app đã loại các phần này nên không dùng trực tiếp). Chỉ bỏ đầu / chân trang, số trang và nhãn A/B/C trong hình. */
+function buildAudio(){
+  var doc=typeof bkDoc!=="undefined"?bkDoc:null,raw=doc&&doc._rawC,n=bkPages.length,p;
+  if(!raw)return{text:bkText,pages:bkPages};
+  for(p=1;p<=n;p++)if(!raw[p])return{text:bkText,pages:bkPages};
+  var G="",pages=[],lbl=/^\(?[A-Ha-h]\)?(\s+\(?[A-Ha-h]\)?)*$/;
+  for(p=1;p<=n;p++){
+    var pg=raw[p],W=pg.w;
+    var its=pg.its.filter(function(it){var t=it.str.trim();return!it.hf&&t&&!lbl.test(t)});
+    var col=function(it){return it.x<W*.5?0:1},by=function(a,b){return b.y-a.y||a.x-b.x};
+    var ord=its.filter(function(i){return col(i)===0}).sort(by).concat(its.filter(function(i){return col(i)===1}).sort(by));
+    var base=G.length,txt="",prev=null,rg={};
+    ord.forEach(function(it){
+      if(prev){
+        if(col(prev)!==col(it)||Math.abs(it.y-prev.y)>Math.max(it.fh,prev.fh)*.5)txt+="\n";
+        else if(it.x-(prev.x+prev.w)>prev.fh*.15)txt+=" ";
+      }
+      rg[it.idx]={s:base+txt.length,e:base+txt.length+it.str.length};
+      txt+=it.str;prev=it;
+    });
+    pages.push({gs:base,ge:base+txt.length,rg:rg});
+    G+=txt+"\n";
+  }
+  return{text:G,pages:pages};
+}
+
 /* ---------------------------------------------------------------- 5. dịch ẩn (bộ dịch + thuật ngữ + từ điển của boxchat) */
 async function trChunk(texts){
   var n=texts.length,joined=texts.join(" "),gloss="";
@@ -7613,7 +7640,7 @@ async function trChunk(texts){
   var base="Bạn là giáo sư đầu ngành Răng Hàm Mặt đang dịch tài liệu cho sinh viên. Dịch sang tiếng Việt tự nhiên, dễ hiểu.";
   try{if(typeof BK_TR_SYS!=="undefined")base=BK_TR_SYS[style]||BK_TR_SYS.natural}catch(e){}
   try{if(typeof BK_TR_GLOSS!=="undefined")base+=" "+BK_TR_GLOSS}catch(e){}
-  var sys=base+" "+gloss+' Bản dịch sẽ được ĐỌC TO bằng giọng đọc nên phải trôi chảy, dễ nghe. Dưới đây là '+n+' câu đánh số [1]..['+n+'] liền nhau trong cùng một đoạn. Trả về MỘT đối tượng JSON hợp lệ {"v":[...]} gồm ĐÚNG '+n+' chuỗi, chuỗi thứ i là bản dịch của câu [i]. Nếu câu [i] chỉ là phần nối tiếp của câu trước (bị ngắt do chuyển cột / trang) thì gộp bản dịch vào chuỗi của câu trước và để chuỗi thứ i là "". Câu nào chỉ là số trang, tên hình / bảng hoặc ký hiệu vô nghĩa thì để chuỗi rỗng. Bỏ các trích dẫn kiểu (Tên tác giả, năm) hay [12]. Viết ký hiệu thành lời khi cần (%, ±, °, <, >, µm). Giữ nguyên tên riêng và từ viết tắt tiếng Anh. Trong chuỗi dùng dấu nháy đơn thay cho dấu nháy kép và không viết chuỗi "\\n". Không thêm chữ nào ngoài JSON.';
+  var sys=base+" "+gloss+' Bản dịch sẽ được ĐỌC TO bằng giọng đọc nên phải trôi chảy, dễ nghe. Dưới đây là '+n+' câu đánh số [1]..['+n+'] liền nhau trong cùng một đoạn. Trả về MỘT đối tượng JSON hợp lệ {"v":[...]} gồm ĐÚNG '+n+' chuỗi, chuỗi thứ i là bản dịch của câu [i]. Nếu câu [i] chỉ là phần nối tiếp của câu trước (bị ngắt do chuyển cột / trang) thì gộp bản dịch vào chuỗi của câu trước và để chuỗi thứ i là "". Chú thích hình, tên bảng và nội dung bảng vẫn dịch bình thường để đọc; chỉ câu nào là số trang hoặc ký hiệu vô nghĩa thì để chuỗi rỗng. Bỏ các trích dẫn kiểu (Tên tác giả, năm) hay [12]. Viết ký hiệu thành lời khi cần (%, ±, °, <, >, µm). Giữ nguyên tên riêng và từ viết tắt tiếng Anh. Trong chuỗi dùng dấu nháy đơn thay cho dấu nháy kép và không viết chuỗi "\\n". Không thêm chữ nào ngoài JSON.';
   var user=texts.map(function(t,i){return"["+(i+1)+"] "+t}).join("\n")+(gloss?"\nLƯU Ý BẮT BUỘC KHI DỊCH CÁC CÂU TRÊN:"+gloss:"");
   var v=await aiGeminiJson(sys,user,8e3);
   var arr=v&&Array.isArray(v.v)?v.v:null;
@@ -7629,7 +7656,7 @@ async function trChunk(texts){
 }
 
 /* ---------------------------------------------------------------- 6. trạng thái + engine */
-var AB={on:false,paused:false,tok:0,sess:0,src:null,sents:[],vi:{},pend:{},fail:{},idx:0,cur:null,vt:0,hl:null,hlScale:0};
+var AB={on:false,paused:false,tok:0,sess:0,src:null,sents:[],pages:[],vi:{},pend:{},fail:{},idx:0,cur:null,vt:0,hl:null,hlScale:0};
 function sentIdxAt(pos){            /* câu đầu tiên có điểm cuối > pos */
   var a=AB.sents,lo=0,hi=a.length-1,ans=a.length;
   while(lo<=hi){var m=(lo+hi)>>1;if(a[m].e>pos){ans=m;hi=m-1}else lo=m+1}
@@ -7749,7 +7776,7 @@ function stop(){
   clearHl();hideBar();paintBtn();
 }
 
-async function start(pos){
+async function start(pos,sp){
   if(window.__rhmScan){toast("Audiobook tạm thời chỉ dùng cho sách PDF thường (chưa hỗ trợ sách scan)");return}
   if(!("speechSynthesis" in window)){toast("Trình duyệt không hỗ trợ đọc to");return}
   if(typeof bkText==="undefined"||!bkText||!bkText.trim()||typeof bkPages==="undefined"||!bkPages.length){toast("Chương đang đọc chữ, bạn thử lại sau giây lát");return}
@@ -7757,11 +7784,15 @@ async function start(pos){
   try{typeof aiTtsStop==="function"&&aiTtsStop()}catch(e){}
   stop(true);
   if(AB.src!==bkText){
-    AB.src=bkText;AB.sess++;AB.sents=splitSents(bkText);AB.vi={};AB.pend={};AB.fail={};
+    AB.src=bkText;AB.sess++;var au=buildAudio();AB.pages=au.pages;AB.sents=splitSents(au.text);AB.vi={};AB.pend={};AB.fail={};
   }
   if(!AB.sents.length){toast("Chương này không có chữ để đọc");return}
+  if(sp){
+    var sx=AB.pages[sp.p-1],sr=sx&&sx.rg?sx.rg[sp.idx]:null;
+    if(sr)pos=sr.s+sp.o;
+  }
   if(pos==null||pos<0){
-    var cp=curPage(),ex=bkPages[cp-1];
+    var cp=curPage(),ex=AB.pages[cp-1];
     pos=ex&&typeof ex.gs==="number"?ex.gs:0;
   }
   var idx=Math.min(sentIdxAt(pos),AB.sents.length-1);
@@ -7784,12 +7815,12 @@ function layerOf(pg){
 async function drawHl(s,e,keepPos){
   var my=++hlSeq;
   try{
-    if(typeof bkVP==="undefined"||typeof bkPages==="undefined")return;
+    if(typeof bkVP==="undefined"||!AB.pages.length)return;
     bkVP.forEach(function(pg){if(pg.abL&&pg.abL.firstChild)pg.abL.textContent=""});
     AB.hl={s:s,e:e};AB.hlScale=typeof bkScale!=="undefined"?bkScale:0;
     var first=null;
-    for(var p=0;p<bkPages.length;p++){
-      var ex=bkPages[p],pg=bkVP[p];
+    for(var p=0;p<AB.pages.length;p++){
+      var ex=AB.pages[p],pg=bkVP[p];
       if(!ex||!pg||ex.ge<=s||ex.gs>=e)continue;
       var data=pg.data;
       if(!data){try{data=await window.bkPageData(pg)}catch(x){data=null}}
@@ -7874,9 +7905,12 @@ function setStatus(t){
 }
 
 /* ---------------------------------------------------------------- 9. nút "Đọc sách" trên bong bóng tô đen */
-function selPos(){
-  try{var p=bkSelPos();if(p&&typeof p.pos==="number")return p.pos}catch(e){}
-  return -1;
+function selSpec(){          /* vị trí đầu vùng tô đen: trang + chỉ số chữ + offset */
+  try{
+    var R=bkSelRange();
+    if(R){var pg=bkVP[R.lo.p-1],d=pg&&pg.data&&pg.data.seq[R.lo.k];if(d)return{p:R.lo.p,idx:d.idx,o:R.lo.o}}
+  }catch(e){}
+  return null;
 }
 function addSelBtn(b){
   if(!b||b.querySelector(".b-ab"))return;
@@ -7885,9 +7919,9 @@ function addSelBtn(b){
   var tr=b.querySelector(".b-tr");
   tr&&tr.nextSibling?b.insertBefore(x,tr.nextSibling):b.appendChild(x);
   x.addEventListener("click",function(){
-    var pos=selPos();
-    if(pos<0)toast("Không xác định được vị trí đoạn chọn, sẽ đọc từ trang đang xem");
-    start(pos);
+    var sp=selSpec();
+    if(!sp)toast("Không xác định được vị trí đoạn chọn, sẽ đọc từ trang đang xem");
+    start(-1,sp);
   });
 }
 function scanBar(){addSelBtn($("bk-selbar"))}
