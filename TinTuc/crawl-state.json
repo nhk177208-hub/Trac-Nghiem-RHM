@@ -1,0 +1,619 @@
+{
+ "http": {
+  "https://www.dental-tribune.com/feed/": {
+   "etag": "",
+   "lm": "Sun, 25 Oct 2026 10:01:41 GMT"
+  },
+  "https://www.iadr.org/news": {
+   "etag": "\"1792746289\"",
+   "lm": "Fri, 23 Oct 2026 09:04:49 GMT"
+  },
+  "https://adee.org/": {
+   "etag": "",
+   "lm": "Sun, 25 Oct 2026 13:46:52 GMT"
+  },
+  "https://adee.org/rss.xml": {
+   "etag": "\"1792938086-1\"",
+   "lm": "Sun, 25 Oct 2026 14:21:26 GMT"
+  },
+  "https://www.iti.org/": {
+   "etag": "",
+   "lm": "Sun, 25 Oct 2026 05:33:11 GMT"
+  },
+  "https://www.iti.org/feed/": {
+   "etag": "",
+   "lm": "Fri, 23 Oct 2026 10:17:19 GMT"
+  },
+  "https://www.eao.org/": {
+   "etag": "\"513-1792774935;br\"",
+   "lm": ""
+  },
+  "https://eao.org/feed/": {
+   "etag": "\"b05c3380a1245fd9f9f627476b372f26\"",
+   "lm": "Fri, 23 Oct 2026 16:59:16 GMT"
+  },
+  "https://www.wfo.org/": {
+   "etag": "",
+   "lm": "Fri, 23 Oct 2026 03:24:21 GMT"
+  },
+  "https://www.wfo.org/feed/": {
+   "etag": "W/\"0ce16cff53b088f6b3fc64aadcd60214\"",
+   "lm": "Wed, 07 Oct 2026 10:59:27 GMT"
+  },
+  "https://www.perio.org/feed/": {
+   "etag": "W/\"e325b57ee3e9d393aaf40556495a9462\"",
+   "lm": "Sun, 25 Oct 2026 14:31:30 GMT"
+  },
+  "https://icp-org.com/": {
+   "etag": "",
+   "lm": "Sun, 25 Oct 2026 08:58:31 GMT"
+  },
+  "https://icp-org.com/feed/": {
+   "etag": "W/\"d7566ddcd0b1013d831ef8c3bb358a0f\"",
+   "lm": "Wed, 14 Oct 2026 01:09:46 GMT"
+  },
+  "https://oralhealth.cochrane.org/": {
+   "etag": "\"1792001141-gzip\"",
+   "lm": "Wed, 14 Oct 2026 18:05:41 GMT"
+  },
+  "https://eoseurope.org/feed/": {
+   "etag": "W/\"8d9c98a41bac2f74bf5131a8928388e5\"",
+   "lm": "Wed, 21 Oct 2026 08:53:59 GMT"
+  },
+  "https://rss.sciencedirect.com/publication/science/03005712": {
+   "etag": "W/\"571d9575a342f20e762bbf14447e1a17\"",
+   "lm": "Sun, 25 Oct 2026 09:09:01 GMT"
+  },
+  "https://rss.sciencedirect.com/publication/science/01095641": {
+   "etag": "W/\"f1ef69c22ac4e581b4b96c7d6a23fd91\"",
+   "lm": "Sun, 25 Oct 2026 09:09:52 GMT"
+  },
+  "https://rss.sciencedirect.com/publication/science/00039969": {
+   "etag": "\"a4c1c67afa8ab61f5b6f92aa835be2b2\"",
+   "lm": "Sat, 24 Oct 2026 09:09:58 GMT"
+  },
+  "https://rss.sciencedirect.com/publication/science/02782391": {
+   "etag": "W/\"f4ef063111b8061ff4ba2ce1bde90985\"",
+   "lm": "Sun, 25 Oct 2026 09:10:18 GMT"
+  },
+  "https://aeedc.com/feed/": {
+   "etag": "W/\"42cad87548c280d3303b754011525004\"",
+   "lm": "Fri, 23 Oct 2026 04:18:55 GMT"
+  },
+  "https://implanthcm.com/": {
+   "etag": "\"6ad857f7-2b9\"",
+   "lm": "Wed, 21 Oct 2026 06:13:11 GMT"
+  },
+  "https://hpmu.edu.vn/": {
+   "etag": "",
+   "lm": "Sat, 24 Oct 2026 13:39:26 GMT"
+  },
+  "https://hpmu.edu.vn/hpmu/news/rss/": {
+   "etag": "",
+   "lm": "Fri, 23 Oct 2026 09:41:01 GMT"
+  },
+  "https://tbump.edu.vn/": {
+   "etag": "",
+   "lm": "Sat, 24 Oct 2026 14:39:27 GMT"
+  },
+  "https://tbump.edu.vn/rss/": {
+   "etag": "",
+   "lm": "Sun, 25 Oct 2026 13:47:21 GMT"
+  },
+  "https://hiu.vn/": {
+   "etag": "",
+   "lm": "Sat, 24 Oct 2026 09:13:45 GMT"
+  },
+  "https://ntt.edu.vn/feed/": {
+   "etag": "W/\"f372f5a79ccad72224e0b501685d215d\"",
+   "lm": "Thu, 22 Oct 2026 10:46:15 GMT"
+  },
+  "https://bvranghammat.com/feed/": {
+   "etag": "\"7db3b66dc9ec82eebe1121fc7cca0c9a\"",
+   "lm": "Wed, 21 Oct 2026 02:07:54 GMT"
+  }
+ },
+ "src": {
+  "Dental Update": {
+   "fails": 1,
+   "lastErr": "HTTP 403"
+  },
+  "Dental Tribune": {
+   "fails": 0,
+   "lastOk": 1792939125754,
+   "lastRun": 1792939125754,
+   "firstSeen": 1792939125754
+  },
+  "Dentistry Today": {
+   "fails": 0,
+   "lastOk": 1792939125777,
+   "lastRun": 1792939125777,
+   "firstSeen": 1792939125777,
+   "lastNew": 1792939125777
+  },
+  "Dentistry.co.uk": {
+   "fails": 0,
+   "lastOk": 1792939126113,
+   "lastRun": 1792939126113,
+   "firstSeen": 1792939126113,
+   "lastNew": 1792939126113
+  },
+  "FDI World Dental Federation": {
+   "fails": 1,
+   "lastErr": "HTTP 404"
+  },
+  "IADR": {
+   "fails": 0,
+   "lastOk": 1792939126389,
+   "lastRun": 1792939126389,
+   "firstSeen": 1792939126389
+  },
+  "DentistryIQ": {
+   "fails": 0,
+   "lastOk": 1792939126821,
+   "lastRun": 1792939126821,
+   "firstSeen": 1792939126821,
+   "lastNew": 1792939126821
+  },
+  "ADEE": {
+   "fails": 0,
+   "lastOk": 1792939128006,
+   "lastRun": 1792939128006,
+   "firstSeen": 1792939128006
+  },
+  "ITI": {
+   "fails": 0,
+   "lastOk": 1792939128263,
+   "lastRun": 1792939128263,
+   "firstSeen": 1792939128263
+  },
+  "Academy of Osseointegration": {
+   "fails": 1,
+   "lastErr": "HTTP 403"
+  },
+  "WFO (Orthodontists)": {
+   "fails": 0,
+   "lastOk": 1792939129806,
+   "lastRun": 1792939129806,
+   "firstSeen": 1792939129806,
+   "lastNew": 1792939129806
+  },
+  "AAO (Orthodontists)": {
+   "fails": 0,
+   "lastOk": 1792939130369,
+   "lastRun": 1792939130369,
+   "firstSeen": 1792939130369
+  },
+  "AAOMS": {
+   "fails": 0,
+   "lastOk": 1792939130903,
+   "lastRun": 1792939130903,
+   "firstSeen": 1792939130903,
+   "lastNew": 1792939130903
+  },
+  "IAOMS": {
+   "fails": 0,
+   "lastOk": 1792939131820,
+   "lastRun": 1792939131820,
+   "firstSeen": 1792939131820
+  },
+  "EFP": {
+   "fails": 1,
+   "lastErr": "HTTP 404"
+  },
+  "Inside Dentistry": {
+   "fails": 0,
+   "lastOk": 1792939134768,
+   "lastRun": 1792939134768,
+   "firstSeen": 1792939134768
+  },
+  "AAE": {
+   "fails": 1,
+   "lastErr": "HTTP 403"
+  },
+  "AO Foundation (CMF)": {
+   "fails": 0,
+   "lastOk": 1792939135199,
+   "lastRun": 1792939135199,
+   "firstSeen": 1792939135199
+  },
+  "AAP (Periodontology)": {
+   "fails": 0,
+   "lastOk": 1792939135312,
+   "lastRun": 1792939135312,
+   "firstSeen": 1792939135312
+  },
+  "Dentaltown": {
+   "fails": 0,
+   "lastOk": 1792939136364,
+   "lastRun": 1792939136364,
+   "firstSeen": 1792939136364,
+   "lastNew": 1792939136364
+  },
+  "ICP (Prosthodontists)": {
+   "fails": 0,
+   "lastOk": 1792939137165,
+   "lastRun": 1792939137165,
+   "firstSeen": 1792939137165
+  },
+  "EOS (Orthodontic Society)": {
+   "fails": 0,
+   "lastOk": 1792939139169,
+   "lastRun": 1792939139169,
+   "firstSeen": 1792939139169
+  },
+  "J Dent Res (JDR)": {
+   "fails": 0,
+   "lastOk": 1792939139238,
+   "lastRun": 1792939139238,
+   "firstSeen": 1792939139238,
+   "lastNew": 1792939139238
+  },
+  "ADA News": {
+   "fails": 0,
+   "lastOk": 1792939139397,
+   "lastRun": 1792939139397,
+   "firstSeen": 1792939139397,
+   "lastNew": 1792939139397
+  },
+  "Clin Oral Implants Res": {
+   "fails": 0,
+   "lastOk": 1792939139519,
+   "lastRun": 1792939139519,
+   "firstSeen": 1792939139519,
+   "lastNew": 1792939139519
+  },
+  "JADA": {
+   "fails": 0,
+   "lastOk": 1792939139603,
+   "lastRun": 1792939139603,
+   "firstSeen": 1792939139603,
+   "lastNew": 1792939139603
+  },
+  "AJODO": {
+   "fails": 0,
+   "lastOk": 1792939139800,
+   "lastRun": 1792939139800,
+   "firstSeen": 1792939139800,
+   "lastNew": 1792939139800
+  },
+  "J Endodontics (JOE)": {
+   "fails": 0,
+   "lastOk": 1792939140066,
+   "lastRun": 1792939140066,
+   "firstSeen": 1792939140066,
+   "lastNew": 1792939140066
+  },
+  "APDF / APRO": {
+   "fails": 1,
+   "lastErr": "fetch failed"
+  },
+  "J Prosthet Dent (JPD)": {
+   "fails": 0,
+   "lastOk": 1792939140586,
+   "lastRun": 1792939140586,
+   "firstSeen": 1792939140586,
+   "lastNew": 1792939140586
+  },
+  "EAO": {
+   "fails": 0,
+   "lastOk": 1792939140603,
+   "lastRun": 1792939140603,
+   "firstSeen": 1792939140603
+  },
+  "J Dent (ScienceDirect)": {
+   "fails": 0,
+   "lastOk": 1792939140662,
+   "lastRun": 1792939140662,
+   "firstSeen": 1792939140662
+  },
+  "British Dental Journal": {
+   "fails": 0,
+   "lastOk": 1792939140666,
+   "lastRun": 1792939140666,
+   "firstSeen": 1792939140666,
+   "lastNew": 1792939140666
+  },
+  "Int J Oral Maxillofac Surg": {
+   "fails": 0,
+   "lastOk": 1792939140944,
+   "lastRun": 1792939140944,
+   "firstSeen": 1792939140944,
+   "lastNew": 1792939140944
+  },
+  "J Clin Periodontol": {
+   "fails": 0,
+   "lastOk": 1792939141159,
+   "lastRun": 1792939141159,
+   "firstSeen": 1792939141159,
+   "lastNew": 1792939141159
+  },
+  "Dental Materials (ScienceDirect)": {
+   "fails": 0,
+   "lastOk": 1792939142128,
+   "lastRun": 1792939142128,
+   "firstSeen": 1792939142128
+  },
+  "NIDCR (NIH)": {
+   "fails": 0,
+   "lastOk": 1792939142168,
+   "lastRun": 1792939142168,
+   "firstSeen": 1792939142168
+  },
+  "J Periodontol (Wiley)": {
+   "fails": 0,
+   "lastOk": 1792939142529,
+   "lastRun": 1792939142529,
+   "firstSeen": 1792939142529,
+   "lastNew": 1792939142529
+  },
+  "Arch Oral Biol (ScienceDirect)": {
+   "fails": 0,
+   "lastOk": 1792939143623,
+   "lastRun": 1792939143623,
+   "firstSeen": 1792939143623
+  },
+  "Int Endod J (Wiley)": {
+   "fails": 0,
+   "lastOk": 1792939144323,
+   "lastRun": 1792939144323,
+   "firstSeen": 1792939144323,
+   "lastNew": 1792939144323
+  },
+  "Cochrane Oral Health": {
+   "fails": 0,
+   "lastOk": 1792939144753,
+   "lastRun": 1792939144753,
+   "firstSeen": 1792939144753
+  },
+  "J Oral Maxillofac Surg (ScienceDirect)": {
+   "fails": 0,
+   "lastOk": 1792939145126,
+   "lastRun": 1792939145126,
+   "firstSeen": 1792939145126
+  },
+  "Periodontology 2000 (Wiley)": {
+   "fails": 0,
+   "lastOk": 1792939145442,
+   "lastRun": 1792939145442,
+   "firstSeen": 1792939145442,
+   "lastNew": 1792939145442
+  },
+  "SpringerLink (dentistry)": {
+   "fails": 0,
+   "lastOk": 1792939145707,
+   "lastRun": 1792939145707,
+   "firstSeen": 1792939145707,
+   "lastNew": 1792939145707
+  },
+  "Int J Oral Maxillofac Implants (IJOMI)": {
+   "fails": 1,
+   "lastErr": "fetch failed"
+  },
+  "IDS Cologne": {
+   "fails": 0,
+   "lastOk": 1792939146823,
+   "lastRun": 1792939146823,
+   "firstSeen": 1792939146823
+  },
+  "GNYDM": {
+   "fails": 0,
+   "lastOk": 1792939146993,
+   "lastRun": 1792939146993,
+   "firstSeen": 1792939146993
+  },
+  "Clin Implant Dent Relat Res (Wiley)": {
+   "fails": 0,
+   "lastOk": 1792939147008,
+   "lastRun": 1792939147008,
+   "firstSeen": 1792939147008,
+   "lastNew": 1792939147008
+  },
+  "SpringerLink (dental implant)": {
+   "fails": 0,
+   "lastOk": 1792939147216,
+   "lastRun": 1792939147216,
+   "firstSeen": 1792939147216,
+   "lastNew": 1792939147216
+  },
+  "AEEDC Dubai": {
+   "fails": 0,
+   "lastOk": 1792939148135,
+   "lastRun": 1792939148135,
+   "firstSeen": 1792939148135
+  },
+  "J Oral Rehabil (Wiley)": {
+   "fails": 0,
+   "lastOk": 1792939148559,
+   "lastRun": 1792939148559,
+   "firstSeen": 1792939148559,
+   "lastNew": 1792939148559
+  },
+  "EuroPerio": {
+   "fails": 0,
+   "lastOk": 1792939148646,
+   "lastRun": 1792939148646,
+   "firstSeen": 1792939148646,
+   "lastNew": 1792939148646
+  },
+  "SpringerLink (orthodontics)": {
+   "fails": 0,
+   "lastOk": 1792939148665,
+   "lastRun": 1792939148665,
+   "firstSeen": 1792939148665,
+   "lastNew": 1792939148665
+  },
+  "Chicago Midwinter Meeting": {
+   "fails": 0,
+   "lastOk": 1792939148751,
+   "lastRun": 1792939148751,
+   "firstSeen": 1792939148751,
+   "lastNew": 1792939148751
+  },
+  "Sở Y tế Hà Nội": {
+   "fails": 1,
+   "lastErr": "fetch failed"
+  },
+  "Sở Y tế TP.HCM": {
+   "fails": 0,
+   "lastOk": 1792939149835,
+   "lastRun": 1792939149835,
+   "firstSeen": 1792939149835
+  },
+  "Community Dent Oral Epidemiol (Wiley)": {
+   "fails": 0,
+   "lastOk": 1792939150022,
+   "lastRun": 1792939150022,
+   "firstSeen": 1792939150022,
+   "lastNew": 1792939150022
+  },
+  "Sở Y tế Đà Nẵng": {
+   "fails": 1,
+   "lastErr": "fetch failed"
+  },
+  "Tạp chí Nghiên cứu Y học": {
+   "fails": 1,
+   "lastErr": "fetch failed"
+  },
+  "Tạp chí Y học TP.HCM": {
+   "fails": 0,
+   "lastOk": 1792939151818,
+   "lastRun": 1792939151818,
+   "firstSeen": 1792939151818
+  },
+  "Tạp chí Răng Hàm Mặt VN": {
+   "fails": 0,
+   "lastOk": 1792939151953,
+   "lastRun": 1792939151953,
+   "firstSeen": 1792939151953
+  },
+  "Tạp chí Y Dược Huế": {
+   "fails": 0,
+   "lastOk": 1792939153812,
+   "lastRun": 1792939153812,
+   "firstSeen": 1792939153812
+  },
+  "Hội RHM TP.HCM (HOSA)": {
+   "fails": 1,
+   "lastErr": "fetch failed"
+  },
+  "HSDI (Cấy ghép Nha khoa TP.HCM)": {
+   "fails": 0,
+   "lastOk": 1792939154864,
+   "lastRun": 1792939154864,
+   "firstSeen": 1792939154864
+  },
+  "Tạp chí Y Dược học Cần Thơ": {
+   "fails": 0,
+   "lastOk": 1792939154948,
+   "lastRun": 1792939154948,
+   "firstSeen": 1792939154948
+  },
+  "Bộ Y tế": {
+   "fails": 1,
+   "lastErr": "fetch failed"
+  },
+  "HAIDEC": {
+   "fails": 1,
+   "lastErr": "fetch failed"
+  },
+  "Viện Đào tạo RHM - ĐH Y Hà Nội": {
+   "fails": 1,
+   "lastErr": "fetch failed"
+  },
+  "Tạp chí Y học Việt Nam": {
+   "fails": 0,
+   "lastOk": 1792939159778,
+   "lastRun": 1792939159778,
+   "firstSeen": 1792939159778
+  },
+  "ĐH Y Dược Cần Thơ": {
+   "fails": 1,
+   "lastErr": "fetch failed"
+  },
+  "Cục Quản lý KCB": {
+   "fails": 0,
+   "lastOk": 1792939161250,
+   "lastRun": 1792939161250,
+   "firstSeen": 1792939161250
+  },
+  "VIDEC": {
+   "fails": 1,
+   "lastErr": "HTTP 503"
+  },
+  "HIDEC": {
+   "fails": 1,
+   "lastErr": "fetch failed"
+  },
+  "Khoa RHM - ĐH Y Dược TP.HCM": {
+   "fails": 0,
+   "lastOk": 1792939166181,
+   "lastRun": 1792939166181,
+   "firstSeen": 1792939166181
+  },
+  "ĐH Y Dược Huế": {
+   "fails": 0,
+   "lastOk": 1792939167179,
+   "lastRun": 1792939167179,
+   "firstSeen": 1792939167179
+  },
+  "ĐH Y Dược Hải Phòng": {
+   "fails": 0,
+   "lastOk": 1792939167716,
+   "lastRun": 1792939167716,
+   "firstSeen": 1792939167716,
+   "lastNew": 1792939167716
+  },
+  "ĐH Y Dược Thái Bình": {
+   "fails": 0,
+   "lastOk": 1792939167958,
+   "lastRun": 1792939167958,
+   "firstSeen": 1792939167958
+  },
+  "Hội RHM Việt Nam (VOSA)": {
+   "fails": 0,
+   "lastOk": 1792939169040,
+   "lastRun": 1792939169040,
+   "firstSeen": 1792939169040
+  },
+  "ĐH Quốc tế Hồng Bàng": {
+   "fails": 0,
+   "lastOk": 1792939169229,
+   "lastRun": 1792939169229,
+   "firstSeen": 1792939169229
+  },
+  "BV RHM Trung ương Hà Nội": {
+   "fails": 1,
+   "lastErr": "fetch failed"
+  },
+  "BV RHM Trung ương TP.HCM": {
+   "fails": 1,
+   "lastErr": "fetch failed"
+  },
+  "ĐH Nguyễn Tất Thành": {
+   "fails": 0,
+   "lastOk": 1792939170120,
+   "lastRun": 1792939170120,
+   "firstSeen": 1792939170120
+  },
+  "BV RHM TP.HCM": {
+   "fails": 0,
+   "lastOk": 1792939171838,
+   "lastRun": 1792939171838,
+   "firstSeen": 1792939171838,
+   "lastNew": 1792939171838
+  },
+  "ĐH Y khoa Phạm Ngọc Thạch": {
+   "fails": 0,
+   "lastOk": 1792939173567,
+   "lastRun": 1792939173567,
+   "firstSeen": 1792939173567
+  },
+  "Khoa Y Dược - ĐH Đà Nẵng": {
+   "fails": 0,
+   "lastOk": 1792939179943,
+   "lastRun": 1792939179943,
+   "firstSeen": 1792939179943
+  }
+ }
+}
