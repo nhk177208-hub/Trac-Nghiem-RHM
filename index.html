@@ -6746,7 +6746,46 @@ window.bkLocateHead=(function(prev){
   };
 })(window.bkLocateHead);
 
-window.__rhmOcrModeApi={detectScan:detectScan,locAnchored:locAnchored,colBridge:colBridge,locTitle:locTitle,find:find,sellers:sellers,ocrSystem:ocrSystem,lev:lev,fuzzyRows:window.rhmFuzzyRows,splitAnch:splitAnch};
+/* ---- băng qua ngắt cột theo VỊ TRÍ MỤC KẾ (không phụ thuộc AI / chữ dang dở) ----
+   Đoạn tô của mục kết thúc đúng ở cuối một cột, mà mục kế tiếp chỉ bắt đầu SAU đầu cột kế
+   => phần chữ ở cột kế (tới hết khối, hoặc tới trước mục kế) vẫn thuộc mục này: tô tiếp. */
+function colEndTo(pos,E,limit){
+  var T=E.text,ex=E.pages[pageIdxAt(E,Math.max(0,pos-1))];
+  if(!ex||!ex.cb||!ex.cb.length||pos>ex.ge)return 0;
+  var c=-1,i;
+  for(i=0;i<ex.cb.length;i++)if(ex.cb[i]>=pos){c=ex.cb[i];break}
+  if(c<0||c>=limit)return 0;
+  var gap=T.slice(pos,c);
+  if(gap.length>40||/[.!?…]["”')\]\d]*\s/.test(gap+" ")&&/[A-Za-zÀ-ỹ]/.test(gap.replace(/[.!?…]["”')\]\d\s]*$/,"")))return 0;
+  var bkEnd=ex.ge,bk=ex.bk||[];
+  for(i=0;i<bk.length;i++)if(bk[i]>c){bkEnd=bk[i];break}
+  var end=Math.min(bkEnd,limit,c+BR_MAX);
+  if(T.slice(c,end).replace(/[^A-Za-zÀ-ỹ]/g,"").length<3)return 0;
+  while(end>c&&/\s/.test(T[end-1]))end--;
+  return end>c?end:0;
+}
+function bridgeSecs(){
+  try{
+    if(!window.__rhmScan||window.__rhmNoColBridge||typeof bkSecs==="undefined"||typeof bkPages==="undefined"||!bkPages.length||typeof bkText!=="string"||!bkText)return;
+    var E={text:bkText,pages:bkPages};
+    bkSecs.forEach(function(x,i){
+      if(x.manual||x.mk||!Array.isArray(x.rg)||!x.rg.length)return;
+      var nextS=i+1<bkSecs.length?bkSecs[i+1].s:bkText.length,ch=false;
+      x.rg.forEach(function(r){
+        for(var k=0;k<3;k++){var e2=colEndTo(r[1],E,nextS);if(!e2)break;r[1]=e2;ch=true}
+      });
+      if(ch){
+        var mx=0;x.rg.forEach(function(r){r[1]>mx&&(mx=r[1])});
+        x.e=mx;x.text=x.rg.map(function(r){return bkText.slice(r[0],r[1]).trim()}).filter(Boolean).join("\n");
+      }
+    });
+  }catch(e){console.warn("[OCR] bridgeSecs",e)}
+}
+(function(rl){
+  if(typeof rl!=="function")return;
+  window.bkRelink=function(){var r=rl.apply(this,arguments);bridgeSecs();return r};
+})(window.bkRelink);
+window.__rhmOcrModeApi={detectScan:detectScan,locAnchored:locAnchored,colBridge:colBridge,colEndTo:colEndTo,bridgeSecs:bridgeSecs,locTitle:locTitle,find:find,sellers:sellers,ocrSystem:ocrSystem,lev:lev,fuzzyRows:window.rhmFuzzyRows,splitAnch:splitAnch};
 syncBtn();
 })();
 </script>
