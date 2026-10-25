@@ -6354,7 +6354,7 @@ async function autoRestore(doc,tok){
     await chapterOcr(true);
   }catch(e){console.warn("[OCR] tự dựng lại từ cache",e)}
 }
-window.rhmOcrVer=5;try{console.info("[OCR] bản vá chế độ sách scan v5 đã nạp")}catch(e){}
+window.rhmOcrVer=6;try{console.info("[OCR] bản vá chế độ sách scan v6 đã nạp")}catch(e){}
 window.rhmOcr={dump:function(n){var p=bkVP&&bkVP[n-1];return p&&p._ocrRaw},chapter:chapterOcr,auto:autoRestore,_convert:convert,_analyze:roAnalyze};
 })();</script>
 <script id="rhm-ocr-mode">(function(){
@@ -6639,6 +6639,9 @@ function locAnchored(h,minRaw,E){
   var s0=backPrefix(T,startRaw),cov=total?Math.round(matched/total*100)/100:1;
   h.pos=s0;h.cov=cov;
   try{console.debug("[OCR mục lục]",h.en,"cov",cov,rg.map(function(r){var t=T.slice(r[0],r[1]);return t.slice(0,25)+" … "+t.slice(-25)}))}catch(e){}
+  /* Sách scan: chỉ dùng AI để biết VỊ TRÍ tiêu đề. Phần tô của mục = từ tiêu đề tới tiêu đề kế (theo thứ tự đọc của chữ OCR),
+     các dòng chú thích / chữ trong ảnh / khung / đầu-chân trang đã bị gắn cờ nên không bị tô. Cách này không bị kẹt ở chỗ ngắt cột / trang. */
+  if(window.__rhmHeadOnly!==false){h.rg=null;h.tl=0;return true}
   if(cov<.3&&total>=120){h.rg=null;h.tl=0;return true}
   rg.forEach(function(r){if(startRaw>=r[0]&&startRaw<r[1]&&s0<r[0])r[0]=s0});
   h.rg=rg;h.tl=T.length;
