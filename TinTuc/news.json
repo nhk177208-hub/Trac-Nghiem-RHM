@@ -1,6 +1,45 @@
 {
- "updated": 1792931784884,
+ "updated": 1792932170474,
  "items": [
+  {
+   "id": "nb1798de7bd40",
+   "type": "research",
+   "region": "intl",
+   "title": "Response to critique of review of water fluoridation",
+   "url": "https://oralhealth.cochrane.org/news/response-critique-review-water-fluoridation",
+   "source": "Cochrane Oral Health",
+   "date": "2026-10-25T12:42:34.729Z",
+   "summary": "",
+   "image": "https://oralhealth.cochrane.org/sites/oralhealth.cochrane.org/files/uploads/water-from-a-tap.jpg",
+   "body": 1,
+   "crawled": 1792932170474
+  },
+  {
+   "id": "ncc4d5726f9ab",
+   "type": "news",
+   "region": "intl",
+   "title": "Dentaltown",
+   "url": "https://www.dentaltown.com/classifieds/manage",
+   "source": "Dentaltown",
+   "date": "2026-10-25T12:42:33.337Z",
+   "summary": "Dentaltown is an interactive healthcare community working to connect dentists to their peers, dental service providers and manufacturers. Dentaltown has the most comprehensive online dental collection of dental forums, clinical cases, continuing education (CE) courses, magazine articles, webinars, webcasts, videos, and podcasts.",
+   "image": "https://prod.cdn.dentaltown.com/images/dentaltown/magimages/1026/8978e428c5e447a1bdd10d33bbca2a53.jpg",
+   "body": 1,
+   "crawled": 1792932170474
+  },
+  {
+   "id": "n42a77a89a748",
+   "type": "news",
+   "region": "intl",
+   "title": "5 Reasons to Buy: Fusion™ Dentures",
+   "url": "https://www.insidedentistry.net/2026/10/fusiondentures/",
+   "source": "Inside Dentistry",
+   "date": "2026-10-25T12:42:33.283Z",
+   "summary": "",
+   "image": "https://res.cloudinary.com/broadcastmed/image/fetch/f_jpg,q_auto,c_fill,g_faces:center,h_225,w_400/https://www.insidedentistry.net/media/1frfvsc0/1026-801-5-reasons-to-buy-dandy_product.jpg",
+   "body": 1,
+   "crawled": 1792932170474
+  },
   {
    "id": "n343c04aa6a74",
    "type": "research",
@@ -52,6 +91,51 @@
    "image": "https://res.cloudinary.com/broadcastmed/image/fetch/f_jpg,q_auto,c_fill,g_faces:center,h_225,w_400/https://www.insidedentistry.net/media/qsvg22e2/1026-702-why-i-invested-edgeendo-edgepiezo.jpg",
    "body": 1,
    "crawled": 1792931784884
+  },
+  {
+   "id": "pmid:42925785",
+   "type": "research",
+   "region": "intl",
+   "title": "Growth-related considerations for dental implant placement in growing patients with craniofacial deformities: A narrative review.",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/42925785/",
+   "source": "PubMed · Journal of cranio-maxillo-facial surgery : official publication of the European Association for Cranio-Maxillo-Facial Surgery",
+   "date": "2026-10-25T12:00:00.000Z",
+   "authors": "Antoniades K, Kyriakou N, Kyriakidou E",
+   "doi": "10.1016/j.jcms.2026.109931",
+   "summary": "Osseointegrated dental implants behave as ankylosed units and cannot undergo compensatory eruption during craniofacial growth, creating distinct biological challenges when placement is considered in growing patients, particularly those with craniofacial deformities. This narrative review synthesizes and critically appraises current evidence on implant timing and growth-related risks in this population, with emphasis on biological growth patterns, deformity-specific considerations, and skeletal maturity-based timing frameworks. A literature search through December 2024 was conducted using PubMed/MEDLINE, supplemented by citation tracking; approximately 410 records were screened, 78 assessed…",
+   "image": "",
+   "body": 1,
+   "crawled": 1792932170474
+  },
+  {
+   "id": "pmid:42925422",
+   "type": "research",
+   "region": "intl",
+   "title": "The Potential Role of Postbiotics in Periodontitis Treatment and Preventive Dentistry.",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/42925422/",
+   "source": "PubMed · Current microbiology",
+   "date": "2026-10-25T12:00:00.000Z",
+   "authors": "Rostami M, Roudsari MB, Abasi M, et al.",
+   "doi": "10.1007/s00284-026-05179-4",
+   "summary": "Postbiotics, the bioactive molecules of probiotics and inactive microbial cells, have emerged as promising supplementary method in dental health treatment, specifically targeting disorders such as periodontitis. The definition, mechanisms of action and therapeutic potential of postbiotics in periodontitis are discussed in detail in this review. The capacity of postbiotics to control pathogenic bacteria development, increase immune responses and restore microbial balance, demonstrates the many roles of postbiotics in antimicrobial activity and anti-inflammatory effects in controlling the oral microbiome. Importantly, postbiotics have potential advantages over live probiotics such as greater…",
+   "image": "",
+   "body": 1,
+   "crawled": 1792932170474
+  },
+  {
+   "id": "pmid:42925272",
+   "type": "research",
+   "region": "intl",
+   "title": "Autologous Conditioned Serum Improves Early Wound Healing Scores of Postextraction Dental Wound in Dogs.",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/42925272/",
+   "source": "PubMed · Journal of veterinary dentistry",
+   "date": "2026-10-25T12:00:00.000Z",
+   "authors": "Šakarnytė L, Matsuzaki I, Troillet J, et al.",
+   "doi": "10.1177/08987564261496813",
+   "summary": "This retrospective study evaluated the potential role of autologous conditioned serum (ACS) as an adjunctive therapy to improve postextraction dental wound healing in dogs. Clinical records of 40 dogs that underwent tooth extraction were included in the analysis. Data from 20 dogs that had received ACS applied to the extraction site following suturing were compared with those from 20 dogs that received the standard treatment. Healing outcomes were assessed from follow-up notes at days 3, 7 and 14, using the Early Wound Healing Score (EHS) to evaluate haemostasis, inflammation, and wound margin closure. Analysis revealed that dogs treated with ACS demonstrated significantly higher EHS…",
+   "image": "",
+   "body": 1,
+   "crawled": 1792932170474
   },
   {
    "id": "pmid:42926005",
@@ -191,6 +275,18 @@
    "crawled": 1792920435638
   },
   {
+   "id": "nd86c0b87f2ad",
+   "type": "news",
+   "region": "vn",
+   "title": "Phát hiện gần 12.000 loài virus chưa từng được ghi nhận dưới đáy Thái Bình Dương, giới khoa học lo ngại một điều",
+   "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxPcVdiU3BmX2FvZmQ0ekI5WjJjT2R2RUVNaXk0S3ltWE92MDVGUkhOQWFKSklldTFJQ01EWHFDbVZZcUktNU9yZVRUdHB5endGaHdyUHFUV3lEOE9DWDhUeHJUZTgwRFJHMEQxZncxVDNiemV0MHVtN2lCSHo4bk9rNHBzcDg5WkZIUmpaNEZ1NWtVT1NMZkNJNm40YjV2QkJQZGduOWZIbmFtQXM5c2dvNmV4TmVnMVNueXg0cGxWUTAxMnEzR0RsRzB0NHFXcDgxRW9peHZDMThDN1gyUDNvaF82WQ?oc=5",
+   "source": "CafeF",
+   "date": "2026-10-25T06:33:00.000Z",
+   "summary": "<a href=\"https://news.google.com/rss/articles/CBMi4wFBVV95cUxPcVdiU3BmX2FvZmQ0ekI5WjJjT2R2RUVNaXk0S3ltWE92MDVGUkhOQWFKSklldTFJQ01EWHFDbVZZcUktNU9yZVRUdHB5endGaHdyUHFUV3lEOE9DWDhUeHJUZTgwRFJHMEQxZncxVDNiemV0MHVtN2lCSHo4bk9rNHBzcDg5WkZIUmpaNEZ1NWtVT1NMZkNJNm40YjV2QkJQZGduOWZIbmFtQXM5c2dvNmV4TmVnMVNueXg0cGxWUTAxMnEzR0RsRzB0NHFXcDgxRW9peHZDMThDN1gyUDNvaF82WQ?oc=5\" target=\"_blank\">Phát hiện gần 12.000 loài virus chưa…",
+   "image": "",
+   "crawled": 1792932170474
+  },
+  {
    "id": "ne031ef56ff42",
    "type": "news",
    "region": "vn",
@@ -251,6 +347,43 @@
    "crawled": 1792931784884
   },
   {
+   "id": "nbb2ff58ff26c",
+   "type": "news",
+   "region": "vn",
+   "title": "Phát huy nền tảng khoa học cơ bản để làm chủ công nghệ chiến lược",
+   "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPZUM4Snl6UV9YSGdsUU94V3htV0J1a0w1LXMwcU1yZFd3Q3lLa2xiNFpiSjJTN0pIVGo1b241OXdsRnVyTGIxZnNxSWpfY1pqVmVLaDVudkpod2NTMkkyLWg2azk4cEFCYUNxMHp0OXZ5cXlleGVYdXdFNDR5dzlKb25MXzRGTHREOENLSk05RHpQWUh1bkdOY2NXNXR2VXFoaEl3dXI4Nk92T0U0UXlCLXdB?oc=5",
+   "source": "chinhsachcuocsong.vnanet.vn",
+   "date": "2026-10-25T04:02:00.000Z",
+   "summary": "<a href=\"https://news.google.com/rss/articles/CBMisgFBVV95cUxPZUM4Snl6UV9YSGdsUU94V3htV0J1a0w1LXMwcU1yZFd3Q3lLa2xiNFpiSjJTN0pIVGo1b241OXdsRnVyTGIxZnNxSWpfY1pqVmVLaDVudkpod2NTMkkyLWg2azk4cEFCYUNxMHp0OXZ5cXlleGVYdXdFNDR5dzlKb25MXzRGTHREOENLSk05RHpQWUh1bkdOY2NXNXR2VXFoaEl3dXI4Nk92T0U0UXlCLXdB?oc=5\" target=\"_blank\">Phát huy nền tảng khoa học cơ bản để làm chủ công nghệ chiến lược</a>&nbsp;&nbsp;<font…",
+   "image": "",
+   "crawled": 1792932170474
+  },
+  {
+   "id": "nb4fefbd36404",
+   "type": "news",
+   "region": "vn",
+   "title": "Bé trai co giật, tím tái sau một ngày sốt cao",
+   "url": "https://vnexpress.net/be-trai-co-giat-tim-tai-sau-mot-ngay-sot-cao-5136377.html",
+   "source": "VnExpress",
+   "date": "2026-10-25T02:00:00.000Z",
+   "summary": "Sốt cao rồi co giật, tím tái, Thành Nhân, 17 tháng tuổi, được sơ cứu tại VNVC Bình Minh, Vĩnh Long trước khi chuyển viện, chẩn đoán tay chân miệng.",
+   "image": "https://vcdn1-suckhoe.vnecdn.net/2026/10/24/1023-1792818422-9801-1792818452.png?w=1200&h=0&q=100&dpr=1&fit=crop&s=c6E7i5n41N30MEDLohvS6Q",
+   "body": 1,
+   "crawled": 1792932170474
+  },
+  {
+   "id": "n51c1a59aaf56",
+   "type": "news",
+   "region": "vn",
+   "title": "Giới khoa học phát triển hợp chất điều trị Alzheimer, bất ngờ vì nó đã có sẵn trong máu",
+   "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPV2VreVEzVlVyQ3lUZndoY2FkSkE5ZWNMaU9TRlRUcC1TWVBValVtRk4tM2dTb2JmaHV6bmNIb1RCVGF4Q205Z3B6X2ZQNHFWV0dDSUlaQTU0ZE4wcF84UkUxaFlDc0xULUtpNnRiblFDWnczaHlHU3REVmNfQWNWd1czUDlneVNLTnFKWFNYRGhzVXpidV8zbE9oN0t4dEQ0S2hWVF9WRGJqUjd2aThhajVSamFZM0thSW5TWWxLZGY?oc=5",
+   "source": "Phunumoi.net.vn",
+   "date": "2026-10-25T01:13:00.000Z",
+   "summary": "<a href=\"https://news.google.com/rss/articles/CBMiwAFBVV95cUxPV2VreVEzVlVyQ3lUZndoY2FkSkE5ZWNMaU9TRlRUcC1TWVBValVtRk4tM2dTb2JmaHV6bmNIb1RCVGF4Q205Z3B6X2ZQNHFWV0dDSUlaQTU0ZE4wcF84UkUxaFlDc0xULUtpNnRiblFDWnczaHlHU3REVmNfQWNWd1czUDlneVNLTnFKWFNYRGhzVXpidV8zbE9oN0t4dEQ0S2hWVF9WRGJqUjd2aThhajVSamFZM0thSW5TWWxLZGY?oc=5\" target=\"_blank\">Giới khoa học phát triển hợp chất điều trị Alzheimer, bất ngờ vì nó đã có sẵn trong…",
+   "image": "",
+   "crawled": 1792932170474
+  },
+  {
    "id": "n619c6ff92722",
    "type": "news",
    "region": "intl",
@@ -275,6 +408,19 @@
    "crawled": 1792920435638
   },
   {
+   "id": "n7c70fb2b79ce",
+   "type": "news",
+   "region": "intl",
+   "title": "What More Than 150,000 Phone Calls Taught Us About Running a Dental Practice",
+   "url": "https://www.dentistrytoday.com/what-more-than-150000-phone-calls-taught-us-about-running-a-dental-practice/",
+   "source": "Dentistry Today",
+   "date": "2026-10-23T14:41:48.000Z",
+   "summary": "Written by: Nate Jeal, DMD Most dentists have a good sense of what’s happening in their practice. They feel like the phones are being answered, that new patients are coming in, and that the schedule is full enough. But feeling and knowing are different things. After analyzing more than 150,000 inbound calls across hundreds of dental practices, I can tell you that the gap between what practice owners believe is…",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/10/shutterstock_2643868061.jpg",
+   "body": 1,
+   "crawled": 1792932170474
+  },
+  {
    "id": "na8356cca49e4",
    "type": "news",
    "region": "intl",
@@ -297,6 +443,19 @@
    "summary": "Lara Brewood-Green explains the HR responsibilities dental employers have around menopause at work and how they can support their teams. What legal responsibilities do dental practices have around menopause at work? Menopause itself isn’t currently a protected characteristic under the Equality Act 2010, but employees experiencing menopausal or perimenopausal symptoms might be protected under existing…",
    "image": "",
    "crawled": 1792920435638
+  },
+  {
+   "id": "nb67e5c14ab3e",
+   "type": "news",
+   "region": "intl",
+   "title": "Autumn Budget 2026: everything dentists need to know",
+   "url": "https://dentistry.co.uk/2026/10/23/autumn-budget-2026-everything-dentists-need-to-know/",
+   "source": "Dentistry.co.uk",
+   "date": "2026-10-23T09:58:21.000Z",
+   "summary": "The UK government is set to announce the Autumn Budget for 2026 on 28 October – Iain Stevenson considers what dentists should expect and what they should brace themselves for . The rumour mill has been uncharacteristically quiet in the run-up to this year’s budget. Early signals that capital gains tax could be equalised with income tax now appear to have been quashed, which is good news for dentists planning to sell…",
+   "image": "",
+   "body": 1,
+   "crawled": 1792932170474
   },
   {
    "id": "n362e6abe9703",
@@ -336,6 +495,19 @@
    "crawled": 1792920435638
   },
   {
+   "id": "ne2f0d05471d6",
+   "type": "news",
+   "region": "intl",
+   "title": "HHS awards $51M to expand dental care for children with neurodevelopmental disorders",
+   "url": "https://adanews.ada.org/ada-news/2026/october/hhs-awards-51m-to-expand-dental-care-for-children-with-neurodevelopmental-disorders/",
+   "source": "ADA News",
+   "date": "2026-10-16T00:00:00.000Z",
+   "summary": "HHS announced $51 million in funding to 28 health centers to improve access to dental care for children with neurodevelopmental disorders,",
+   "image": "https://adanews.useast01.umbraco.io/media/icvly3st/pediatric-dental-care.jpg?width=1110&height=700",
+   "body": 1,
+   "crawled": 1792932170474
+  },
+  {
    "id": "n7fd2b2ee03d2",
    "type": "news",
    "region": "vn",
@@ -362,6 +534,19 @@
    "crawled": 1792931784884
   },
   {
+   "id": "nb5fe2db42494",
+   "type": "news",
+   "region": "intl",
+   "title": "Uncovering the Health Benefits of Orthodontists",
+   "url": "https://aaoinfo.org/blog/healthy-you-in-2022/",
+   "source": "AAO (Orthodontists)",
+   "date": "2022-01-04T17:06:16.000Z",
+   "summary": "Uncovering the Health Benefits of Orthodontists. A custom smile created just for you by an AAO orthodontist.",
+   "image": "https://aaoinfo.org/wp-content/uploads/2022/01/Adult-Ortho-Image.png",
+   "body": 1,
+   "crawled": 1792932170474
+  },
+  {
    "id": "nee39d8311b26",
    "type": "news",
    "region": "intl",
@@ -373,6 +558,19 @@
    "image": "https://www.perio.org/for-patients/gum-disease-information/comprehensive-periodontal-evaluation/",
    "body": 1,
    "crawled": 1792931784884
+  },
+  {
+   "id": "n4dd3a56d6804",
+   "type": "news",
+   "region": "vn",
+   "title": "Đoàn Hội Răng Hàm Mặt Việt Nam tham quan, gặp mặt và trao đổi với lãnh đạo Bệnh viện Răng Hàm Mặt, Đại học Quốc gia Seoul tại Seoul, Hàn Quốc",
+   "url": "https://vosa.org.vn/doan-hoi-rang-ham-mat-viet-nam-tham-quan-gap-mat-va-trao-doi-voi-lanh-dao-benh-vien-rang-ham-mat-dai-hoc-quoc-gia-seoul-tai-seoul-han-quoc",
+   "source": "Hội RHM Việt Nam (VOSA)",
+   "date": "1970-01-01T08:00:16.000Z",
+   "summary": "",
+   "image": "https://vosa.org.vn/static/media/seoul%201.jpg",
+   "body": 1,
+   "crawled": 1792932170474
   },
   {
    "id": "n31f0db0d0559",
