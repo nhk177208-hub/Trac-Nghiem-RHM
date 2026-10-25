@@ -6354,7 +6354,7 @@ async function autoRestore(doc,tok){
     await chapterOcr(true);
   }catch(e){console.warn("[OCR] tự dựng lại từ cache",e)}
 }
-window.rhmOcrVer=6;try{console.info("[OCR] bản vá chế độ sách scan v6 đã nạp")}catch(e){}
+window.rhmOcrVer=5;try{console.info("[OCR] bản vá chế độ sách scan v5 đã nạp")}catch(e){}
 window.rhmOcr={dump:function(n){var p=bkVP&&bkVP[n-1];return p&&p._ocrRaw},chapter:chapterOcr,auto:autoRestore,_convert:convert,_analyze:roAnalyze};
 })();</script>
 <script id="rhm-ocr-mode">(function(){
@@ -6581,6 +6581,50 @@ function splitAnch(t){
   if(n.length>150)return{a:t.slice(0,Math.min(t.length,90)),b:t.slice(-90)};
   return{a:t,b:""};
 }
+/* ---- chọn đúng chỗ của tiêu đề NGẮN (vd "Value", "Hue"): từ này còn xuất hiện nhiều lần trong thân bài, nếu lấy lần đầu
+   gặp thì mục bị định vị sai (quá sớm, thường nằm giữa cột 1) và mục liền trước bị cắt vùng tô ngay tại đó -> không tô qua cột 2.
+   Ưu tiên: nằm ở đầu dòng (cho phép số thứ tự đứng trước) > cuối dòng > có đoạn thân bài của mục đi liền ngay sau. ---- */
+var LS_PRE=/^[ \t]*(?:[•●○▪■◦·*–—-][ \t]*)?(?:(?:\d+(?:\.\d+)*[.)]?|[IVXLC]{1,5}[.)]|[A-Za-z][.)])[ \t]*)?$/;
+function rawLineStart(T,r){
+  if(r<=0)return true;
+  var ls=T.lastIndexOf("\n",r-1)+1;
+  return LS_PRE.test(T.slice(ls,r));
+}
+function rawLineEnd(T,r){
+  var k=r;
+  while(k<T.length&&/[ \t.,:;)\]"”'’]/.test(T[k]))k++;
+  return k>=T.length||T[k]==="\n";
+}
+function exactAll(P,n,lo,hi){
+  var out=[],q=n.indexOf(P,lo);
+  while(q>=0&&q+P.length<=hi&&out.length<60){out.push(q);q=n.indexOf(P,q+1)}
+  return out;
+}
+/* W = các cửa sổ [lo,hi) trong chuỗi chuẩn hoá n (thử lần lượt); nextA = mốc đầu thân bài ngay sau tiêu đề (đã chuẩn hoá) */
+function findTitle(P,n,map,T,W,nextA){
+  var firstBest=null;
+  for(var wi=0;wi<W.length;wi++){
+    var lo=W[wi][0],hi=W[wi][1];
+    if(!(hi>lo))continue;
+    var c=exactAll(P,n,lo,hi);
+    if(!c.length)continue;
+    var best=null;
+    for(var ci=0;ci<c.length;ci++){
+      var q=c[ci],r0=map[q],r1=map[q+P.length-1]+1,sc=0;
+      if(rawLineStart(T,r0))sc+=4;
+      if(rawLineEnd(T,r1))sc+=2;
+      if(nextA&&nextA.length>=6){
+        var k=n.indexOf(nextA.slice(0,Math.min(24,nextA.length)),q+P.length);
+        if(k>=0&&k-(q+P.length)<=320)sc+=3;
+      }
+      sc-=Math.min(1,(q-lo)/Math.max(1,hi-lo))*.5;   /* hoà điểm: ưu tiên gần đầu cửa sổ */
+      if(!best||sc>best.sc)best={s:q,e:q+P.length,d:0,sc:sc};
+    }
+    if(best.sc>=4)return best;          /* đã có ứng viên đúng kiểu một dòng tiêu đề */
+    if(!firstBest)firstBest=best;
+  }
+  return firstBest;
+}
 /* Dò các mốc của một mục -> h.rg (đoạn chữ cần tô), h.pos (vị trí tiêu đề). E = {text, pages:[{gs,ge}]} */
 function locAnchored(h,minRaw,E){
   var T=E.text,M=prep(E),n=M.n,map=M.map,NP=E.pages.length;
@@ -6603,7 +6647,17 @@ function locAnchored(h,minRaw,E){
     var pt=parts[pi],sp=splitAnch(pt.text),A=norm(sp.a),B=norm(sp.b),pg=pt.page||h.page||1;
     if(A.length<2)continue;
     total+=A.length+(B.length&&B!==A?B.length:0);
-    var ms=findW(A,pg,cursor)||(A.length>50?findW(A.slice(0,45),pg,cursor):null);
+    var ms=null;
+    if(pt.tag==="head"||A.length<24){
+      var np0=parts[pi+1],nextA0=np0?norm(splitAnch(np0.text).a):"";
+      ms=findTitle(A,n,map,T,wins(pg,cursor),nextA0);
+    }
+    ms=ms||findW(A,pg,cursor)||(A.length>50?findW(A.slice(0,45),pg,cursor):null);
+    if(!ms&&(pt.cont==="col"||pt.cont==="page")&&rgN.length&&B.length>=6&&B!==A){
+      /* không thấy mốc đầu nhưng đoạn này NỐI TIẾP đoạn trước (sang cột / trang kế): nếu thấy mốc cuối thì tô từ ngay sau đoạn trước tới mốc cuối */
+      var rb=find(B,n,cursor,Math.max(cursor,pr(pg)[1]))||find(B,n,cursor,Math.max(cursor,pr(pg+1)[1]));
+      if(rb)ms={s:cursor,e:cursor,d:A.length};
+    }
     if(!ms)continue;
     var me=ms,eN=ms.e;
     if(B.length>=2&&B!==A){
@@ -6613,6 +6667,12 @@ function locAnchored(h,minRaw,E){
       else{
         /* không thấy mốc cuối: dừng ở đầu mục kế (dò gần đúng) hoặc cuối trang; tối đa ~500 ký tự, KHÔNG đoán xa */
         var stop=Math.min(Math.max(after,end),after+500);
+        var npx=parts[pi+1];
+        if(npx&&(npx.cont==="col"||npx.cont==="page")){
+          /* phần kế tiếp là cột / trang kế -> đoạn này chạy hết cột: dừng ngay trước chỗ phần kế tiếp bắt đầu (không chặn ở 500 ký tự) */
+          var A2=norm(splitAnch(npx.text).a);
+          if(A2.length>=2){var m2=findW(A2,npx.page||pg,after);if(m2&&m2.s>after)stop=m2.s}
+        }
         if(ntn){var q=find(ntn,n,after,Math.max(after,end2));if(q&&q.s<stop)stop=q.s}
         eN=Math.max(ms.e,stop);
         h._weak=1;
@@ -6639,9 +6699,6 @@ function locAnchored(h,minRaw,E){
   var s0=backPrefix(T,startRaw),cov=total?Math.round(matched/total*100)/100:1;
   h.pos=s0;h.cov=cov;
   try{console.debug("[OCR mục lục]",h.en,"cov",cov,rg.map(function(r){var t=T.slice(r[0],r[1]);return t.slice(0,25)+" … "+t.slice(-25)}))}catch(e){}
-  /* Sách scan: chỉ dùng AI để biết VỊ TRÍ tiêu đề. Phần tô của mục = từ tiêu đề tới tiêu đề kế (theo thứ tự đọc của chữ OCR),
-     các dòng chú thích / chữ trong ảnh / khung / đầu-chân trang đã bị gắn cờ nên không bị tô. Cách này không bị kẹt ở chỗ ngắt cột / trang. */
-  if(window.__rhmHeadOnly!==false){h.rg=null;h.tl=0;return true}
   if(cov<.3&&total>=120){h.rg=null;h.tl=0;return true}
   rg.forEach(function(r){if(startRaw>=r[0]&&startRaw<r[1]&&s0<r[0])r[0]=s0});
   h.rg=rg;h.tl=T.length;
@@ -6654,7 +6711,7 @@ function locTitle(h,minRaw,E){
   if(t.length<3||!n||!NP)return null;
   var pg=Math.max(1,Math.min(NP,h.page||1)),minN=lb(map,minRaw||0),
       a=lb(map,E.pages[Math.max(0,pg-2)].gs),b=lb(map,E.pages[Math.min(NP-1,pg)].ge);
-  var r=find(t,n,Math.max(minN,a),b);
+  var r=findTitle(t,n,map,T,[[Math.max(minN,a),b]],"")||find(t,n,Math.max(minN,a),b);
   if(!r)return null;
   return backPrefix(T,map[r.s]);
 }
@@ -6677,7 +6734,7 @@ window.bkLocateHead=(function(prev){
   };
 })(window.bkLocateHead);
 
-window.__rhmOcrModeApi={detectScan:detectScan,locAnchored:locAnchored,locTitle:locTitle,find:find,sellers:sellers,ocrSystem:ocrSystem,lev:lev,fuzzyRows:window.rhmFuzzyRows,splitAnch:splitAnch};
+window.__rhmOcrModeApi={findTitle:findTitle,detectScan:detectScan,locAnchored:locAnchored,locTitle:locTitle,find:find,sellers:sellers,ocrSystem:ocrSystem,lev:lev,fuzzyRows:window.rhmFuzzyRows,splitAnch:splitAnch};
 syncBtn();
 })();
 </script>
