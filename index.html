@@ -5940,7 +5940,7 @@ window.__rhmOcrScan=1;
 var TESS_VER="5.1.1",
     TESS_JS="https://cdn.jsdelivr.net/npm/tesseract.js@"+TESS_VER+"/dist/tesseract.min.js",
     LANG_PATH="https://cdn.jsdelivr.net/npm/@tesseract.js-data/eng@1.0.0/4.0.0_best_int",
-    CACHE_V="v6",MIN_NATIVE=25,OCR_W=((navigator.deviceMemory&&navigator.deviceMemory<=4)||/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent||""))?1700:2400,MAX_PIX=12e6,MIN_WORD_CONF=30,MIN_LINE_CONF=38;
+    CACHE_V="v7",MIN_NATIVE=25,OCR_W=((navigator.deviceMemory&&navigator.deviceMemory<=4)||/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent||""))?1700:2400,MAX_PIX=12e6,MIN_WORD_CONF=30,MIN_LINE_CONF=38;
 var orig=window.bkPageData,libP=null,workerP=null,idleT=0,curPg=null,btn=null,chBusy=false,chCancel=false;
 
 var quiet=false;
@@ -6044,10 +6044,10 @@ function roJunk(ws,mean){
 function convert(data,s,minW,minL,info){
   var out=[],raw=[],imgR=[],Wp=(info&&info.W)||0,Hp=(info&&info.H)||0;
   if(data&&data.blocks&&data.blocks.length){
-    data.blocks.forEach(function(b){
+    data.blocks.forEach(function(b,bidx){
       var bt=String(b&&b.blocktype||"");
       if(/IMAGE/.test(bt)&&b.bbox)imgR.push({x0:b.bbox.x0,y0:b.bbox.y0,x1:b.bbox.x1,y1:b.bbox.y1});
-      (b.paragraphs||[]).forEach(function(p){(p.lines||[]).forEach(function(L){L._bt=bt;raw.push(L)})});
+      (b.paragraphs||[]).forEach(function(p){(p.lines||[]).forEach(function(L){L._bt=bt;L._bi=bidx;raw.push(L)})});
     });
   }else raw=data&&data.lines||[];
   var recs=[];
@@ -6075,7 +6075,7 @@ function convert(data,s,minW,minL,info){
     if(!asc.length)return;
     var fh=pct(asc,.75)/.74;
     if(!(fh>3))return;
-    recs.push({ws:ws,fh:fh,by:by,bb:{x0:L.bbox.x0,y0:L.bbox.y0,x1:L.bbox.x1,y1:L.bbox.y1},bt:L._bt||"",
+    recs.push({lm:lm,bi:L._bi,ws:ws,fh:fh,by:by,bb:{x0:L.bbox.x0,y0:L.bbox.y0,x1:L.bbox.x1,y1:L.bbox.y1},bt:L._bt||"",
       text:ws.map(function(w){return w.text.trim()}).join(" "),k:"",hd:0});
   });
   /* cỡ chữ thân bài = cỡ chữ chiếm nhiều ký tự nhất */
@@ -6096,6 +6096,18 @@ function convert(data,s,minW,minL,info){
   var totC=0,flC=0;
   recs.forEach(function(r){totC+=r.text.length;if(r.k==="fig"||r.k==="box")flC+=r.text.length});
   if(recs.length>25&&totC&&flC>.85*totC)recs.forEach(function(r){if(r.k==="fig"||r.k==="box")r.k=""});
+  /* v9: Tesseract hay gán nhầm khối chữ thân bài (nhãn màu + mũi tên + 2 cột, tiêu đề trên dải màu) là BẢNG / ẢNH / KHUNG
+     -> cả đoạn bị loại khỏi lớp chữ nên tô sáng chỉ còn vài dòng lẻ. Khối "bảng" mà ít số thì không phải bảng;
+     dòng giống văn xuôi (>=5 từ, đọc chắc) thì luôn là thân bài. */
+  var tbS={};
+  recs.forEach(function(r){if(/TABLE/.test(r.bt)){var o=tbS[r.bi]||(tbS[r.bi]={w:0,n:0});r.ws.forEach(function(w){o.w++;if(/\d/.test(w.text))o.n++})}});
+  recs.forEach(function(r){
+    if(r.k==="tbl"){var o=tbS[r.bi];if(o&&o.w>=6&&o.n/o.w<.25)r.k=""}
+    if(r.k==="tbl"||r.k==="fig"||r.k==="box"){
+      var wc=r.ws.length,avg=r.text.replace(/\s+/g,"").length/Math.max(1,wc);
+      if(wc>=5&&avg>=3.2&&r.lm>=(r.k==="fig"?70:65)&&/[A-Za-z]{3,}/.test(r.text))r.k="";
+    }
+  });
   /* chú thích nhiều dòng: dòng ngay dưới dòng chú thích, cùng cỡ chữ, cùng cột */
   var byY=recs.slice().sort(function(a,b){return a.bb.y0-b.bb.y0});
   for(var pass=0;pass<3;pass++)byY.forEach(function(r){
