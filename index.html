@@ -2635,11 +2635,13 @@ async function newsRefresh(){
   nrfBusy=!0;btn&&btn.classList.add("rhmn-spin");
   function fail(m,reset){nrfToast("❌ "+m);if(reset){delete c.token;if(reset===2)delete c.repo;nrfSave(c)}}
   try{
-    var rr=await fetch(API,{headers:H});
-    if(rr.status===401||rr.status===403||rr.status===404){fail(rr.status===401?"Token sai hoặc đã hết hạn (401), bấm ↻ để nhập lại":"Không truy cập được repo \""+c.repo+"\" ("+rr.status+"): kiểm tra tên repo và token đã được cấp quyền repo này chưa, rồi bấm ↻ nhập lại",rr.status===404?2:1);return}
-    var branch=(await rr.json()).default_branch||"main",t0=Date.now();
+    var rr=await fetch(API,{headers:H}),branch="main",t0=Date.now();
+    if(rr.status===401){var m401="";try{m401=(await rr.json()).message||""}catch(e){}fail("Token sai, thiếu ký tự hoặc hết hạn (401"+(m401?": "+m401:"")+"). Tạo/copy lại token rồi bấm ↻",1);return}
+    if(rr.ok){try{branch=(await rr.json()).default_branch||"main"}catch(e){}}
+    else{var em="";try{em=(await rr.json()).message||""}catch(e){}console.warn("[news ↻] GET repo",rr.status,em)}
     var dr=await fetch(API+"/actions/workflows/crawl-news.yml/dispatches",{method:"POST",headers:H,body:JSON.stringify({ref:branch})});
-    if(dr.status!==204){fail(dr.status===404?"Không thấy workflow crawl-news.yml trên nhánh "+branch:"Không chạy được workflow ("+dr.status+"): cần quyền Actions: Read and write",dr.status===401||dr.status===403);return}
+    if(dr.status!==204){var dm="";try{dm=(await dr.json()).message||""}catch(e){}
+      fail("GitHub trả "+dr.status+(dm?" – "+dm:"")+" (repo \""+c.repo+"\", nhánh "+branch+"). "+(dr.status===404?"Kiểm tra: tên repo, file .github/workflows/crawl-news.yml có tồn tại, token thuộc đúng tài khoản chủ repo và đã bấm Update":dr.status===403?"Token thiếu quyền Actions: Read and write":"Xem lại token"),dr.status===401||dr.status===403||dr.status===404?(dr.status===404?2:1):0);return}
     nrfToast("⏳ Đã gửi lệnh crawl, đang chờ GitHub chạy...");
     var done=!1,concl="";
     for(var k=0;k<60&&!done;k++){
