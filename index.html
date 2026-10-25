@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
+<script id="rhm-fresh">(function(){var B="20261025025703";window.RHM_BUILD=B;
+/* Chống kẹt bản cũ: so mã bản với file thật trên máy chủ (bỏ qua cache); lệch thì xoá Service Worker + Cache Storage rồi tải lại 1 lần. */
+function wipe(){var a=[];try{if(navigator.serviceWorker)a.push(navigator.serviceWorker.getRegistrations().then(function(r){return Promise.all(r.map(function(x){return x.unregister()}))}))}catch(e){}
+try{if(window.caches)a.push(caches.keys().then(function(k){return Promise.all(k.map(function(n){return caches.delete(n)}))}))}catch(e){}return Promise.all(a).catch(function(){})}
+function go(){var u=new URL(location.href);u.searchParams.set("_v",String(Date.now()));location.replace(u.href)}
+try{if(location.protocol==="file:")return;
+fetch(location.pathname+"?_chk="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
+var m=/RHM_BUILD_ID="(\d+)"/.exec(t.slice(0,60000)),srv=m&&m[1];
+if(!srv||srv===B){sessionStorage.removeItem("rhm_fresh_try");return}
+if(sessionStorage.getItem("rhm_fresh_try")===srv)return;
+sessionStorage.setItem("rhm_fresh_try",srv);wipe().then(go)}).catch(function(){})}catch(e){}
+})();var RHM_BUILD_ID="20261025025703";</script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>(function(){try{window.name==="rhm-silent-auth"&&window.parent!==window&&/(^#|&)(access_token|error)=/.test(location.hash||"")&&(window.parent.postMessage({rhmSilentAuth:location.hash},location.origin),window.stop())}catch{}})();
