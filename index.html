@@ -7453,28 +7453,29 @@ body.rhmr-scan #bk-selbar .b-ab{display:none!important}
 body #bk-selbar .b-ab{color:#1f2328!important}
 /* topbar: số trang x/n */
 body.rhmr-on #rhmTb #rhmTbRead{font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.02em;white-space:nowrap}
-/* sidebar: tên sách → tên chương → mục lục */
-#rhmrSbInfo{flex:0 0 auto;padding:10px 14px 8px;background:#fff;border-bottom:1px solid #eaeef2}
-#rhmrSbInfo .sbi-lb{font:700 10.5px/1.2 system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#8c959f;margin-top:7px}
-#rhmrSbInfo .sbi-lb:first-child{margin-top:0}
-#rhmrSbInfo .sbi-book{font:700 14px/1.3 system-ui,sans-serif;color:#1f2328;margin-top:2px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;line-clamp:3;overflow:hidden;word-break:break-word}
-#rhmrSbInfo .sbi-chap{font:600 13.5px/1.35 system-ui,sans-serif;color:#0969da;margin-top:2px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;line-clamp:4;overflow:hidden;word-break:break-word}
-#rhmrSbInfo .sbi-toc{margin-top:10px;padding-top:8px;border-top:1px dashed #d0d7de}
+/* sidebar: tên sách + tên chương nằm đầu vùng cuộn của mục lục */
+#rhmrSbInfo{padding:2px 4px 10px;margin-bottom:6px;border-bottom:1px solid #eaeef2}
+#rhmrSbInfo .sbi-book{font:700 14px/1.3 system-ui,sans-serif;color:#1f2328;word-break:break-word}
+#rhmrSbInfo .sbi-chap{font:600 13.5px/1.35 system-ui,sans-serif;color:#0969da;margin-top:3px;word-break:break-word}
 /* tô sáng câu đang đọc (cùng màu với boxchat) */
 .rhm-abl{position:absolute;inset:0;z-index:1;pointer-events:none;mix-blend-mode:multiply}
 .rhm-abl div{position:absolute;background:#fde047;border-radius:3px}
-/* thanh điều khiển Audiobook */
-#rhmAbBar{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:58;display:none;align-items:center;gap:2px;padding:5px 6px;background:#fff;border:1px solid #d0d7de;border-radius:999px;box-shadow:0 6px 20px #0003;max-width:calc(100vw - 16px);box-sizing:border-box}
-#rhmAbBar button{width:38px;height:38px;flex:0 0 auto;border:0;border-radius:50%;background:transparent;color:#1f2328;display:inline-flex;align-items:center;justify-content:center;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+/* thanh điều khiển Audiobook: nằm giữa topbar */
+body.rhmr-on #rhmTb{position:relative}
+body.rhmr-on #rhmTb #rhmTbRead{display:none!important}
+#rhmAbBar{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:6;display:none;align-items:center;gap:2px;padding:2px 4px;background:#fff;border:1px solid #d0d7de;border-radius:999px;box-sizing:border-box}
+#rhmAbBar button{width:34px;height:34px;flex:0 0 auto;border:0;border-radius:50%;background:transparent;color:#1f2328;display:inline-flex;align-items:center;justify-content:center;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
 #rhmAbBar button:hover{background:#eaeef2}
-#rhmAbBar button svg{width:20px;height:20px;display:block}
+#rhmAbBar button svg{width:18px;height:18px;display:block}
 #rhmAbBar .pp{background:#0969da;color:#fff}
 #rhmAbBar .pp:hover{background:#0860c4}
 #rhmAbBar .pp .i-play{display:none}
 #rhmAbBar.paused .pp .i-pause{display:none}
 #rhmAbBar.paused .pp .i-play{display:block}
-#rhmAbSt{font:600 12px system-ui,sans-serif;color:#59636e;min-width:0;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 8px}
-@media(max-width:700px){#rhmAbBar{bottom:76px}#rhmAbSt{max-width:110px}}
+@media(max-width:480px){#rhmAbBar button{width:30px;height:30px}#rhmAbBar button svg{width:16px;height:16px}#rhmAbBar{gap:0;padding:2px 3px}}
+/* số trang x/n / trạng thái: toast sát cạnh dưới, canh giữa */
+#rhmPgPill{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:58;padding:6px 14px;border-radius:999px;background:rgba(17,24,39,.85);color:#fff;font:700 13px/1.2 system-ui,sans-serif;font-variant-numeric:tabular-nums;pointer-events:none;opacity:0;transition:opacity .2s;white-space:nowrap}
+#rhmPgPill.show{opacity:1}
 </style>
 <script id="rhm-audiobook">(function(){
 "use strict";
@@ -7492,7 +7493,16 @@ function toast(m){try{showToast(m)}catch(e){}}
 function inReader(){return document.body.classList.contains("rhmr-on")}
 
 /* ---------------------------------------------------------------- 1. số trang hiện tại x/n trên topbar */
-var lastInd="",indRaf=0;
+var lastInd="",indRaf=0,fromScroll=false,pill=null,pillT=0;
+function mkPill(){
+  if(pill)return pill;
+  pill=document.createElement("div");pill.id="rhmPgPill";viewer.appendChild(pill);return pill;
+}
+function showPill(t,ms,key){
+  var p=mkPill();p.textContent=t;p.dataset.k=key||"";p.classList.add("show");
+  clearTimeout(pillT);pillT=setTimeout(function(){p.classList.remove("show")},ms||1100);
+}
+function hidePill(key){if(pill&&pill.dataset.k===key){clearTimeout(pillT);pill.classList.remove("show")}}
 function curPage(){
   if(typeof bkVP==="undefined"||!bkVP.length)return 0;
   var wr=wrap.getBoundingClientRect(),probe=wr.top+Math.min(wr.height*.3,260),lo=0,hi=bkVP.length-1,ans=0;
@@ -7502,25 +7512,25 @@ function curPage(){
 }
 function updInd(){
   indRaf=0;
-  if(!tbRead||!inReader())return;
+  var fs=fromScroll;fromScroll=false;
+  if(!inReader())return;
   var n=typeof bkVP!=="undefined"?bkVP.length:0,t=n?curPage()+"/"+n:"";
-  if(t!==lastInd){lastInd=t;tbRead.textContent=t;tbRead.title="Trang "+t}
+  lastInd=t;
+  if(fs&&t)showPill(t,1100,"pg");      /* số trang x/n chỉ hiện thoáng qua khi cuộn */
 }
 function reqInd(){if(!indRaf)indRaf=requestAnimationFrame(updInd)}
 window.rhmrPageInd=function(){lastInd="";reqInd()};
-wrap.addEventListener("scroll",reqInd,{passive:true});
+wrap.addEventListener("scroll",function(){fromScroll=true;reqInd()},{passive:true});
 window.addEventListener("resize",reqInd);
 setInterval(function(){inReader()&&reqInd()},700);
 
 /* ---------------------------------------------------------------- 2. sidebar: tên sách → tên chương → mục lục */
 function mkInfo(){
   var list=$("bk-sec-list");
-  if(!list||$("rhmrSbInfo"))return;
-  var d=document.createElement("div");d.id="rhmrSbInfo";
-  d.innerHTML='<div class="sbi-lb">Sách</div><div class="sbi-book" id="rhmrSbBook"></div>'+
-    '<div class="sbi-lb">Chương đang mở</div><div class="sbi-chap" id="rhmrSbChap"></div>'+
-    '<div class="sbi-lb sbi-toc">Mục lục</div>';
-  list.parentNode.insertBefore(d,list);
+  if(!list)return;
+  var d=$("rhmrSbInfo");
+  if(!d){d=document.createElement("div");d.id="rhmrSbInfo";d.innerHTML='<div class="sbi-book" id="rhmrSbBook"></div><div class="sbi-chap" id="rhmrSbChap"></div>'}
+  if(list.firstChild!==d)list.insertBefore(d,list.firstChild);   /* nằm trong vùng cuộn của mục lục */
 }
 function updInfo(){
   mkInfo();
@@ -7531,6 +7541,7 @@ function updInfo(){
   if(ec&&ec.textContent!==c){ec.textContent=c;ec.title=c}
 }
 updInfo();
+(function(){var l=$("bk-sec-list");l&&new MutationObserver(function(){var d=$("rhmrSbInfo");if(d&&l.firstChild!==d)mkInfo()}).observe(l,{childList:true})})();
 
 /* ---------------------------------------------------------------- 3. nút Audiobook trên topbar */
 var HP='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3.5" y="14" width="4" height="6.5" rx="1.6"/><rect x="16.5" y="14" width="4" height="6.5" rx="1.6"/></svg>';
@@ -7636,6 +7647,7 @@ function ensureTrans(i){
   var p=trChunk(idxs.map(function(k){return AB.sents[k].t})).then(function(arr){
     if(AB.sess!==sess)return;
     idxs.forEach(function(k,m){AB.vi[k]=arr[m]||""});
+    addChat(idxs,arr);
   }).catch(function(e){
     console.warn("[Audiobook] dịch lỗi",e);
     if(AB.sess!==sess)return;
@@ -7643,6 +7655,19 @@ function ensureTrans(i){
   }).then(function(){idxs.forEach(function(k){delete AB.pend[k]})});
   idxs.forEach(function(k){AB.pend[k]=p});
   return p;
+}
+/* ghi bản dịch vào boxchat (đang ẩn); chỉ giữ 6 đoạn Audiobook gần nhất */
+function addChat(idxs,arr){
+  try{
+    if(typeof aiAddMsg!=="function"||typeof bkPaintResult!=="function")return;
+    var pairs=[];
+    idxs.forEach(function(k,m){if(arr[m])pairs.push({src:AB.sents[k].t,vi:arr[m]})});
+    if(!pairs.length)return;
+    var b=aiAddMsg("ai","");b.dataset.rhmAb="1";
+    bkPaintResult(b,{bi:pairs},"Audiobook · câu "+(idxs[0]+1)+"–"+(idxs[idxs.length-1]+1));
+    var all=document.querySelectorAll('#ai-messages > .ai-bub[data-rhm-ab="1"]');
+    for(var q=0;q<all.length-6;q++)all[q].remove();
+  }catch(e){console.warn("[Audiobook] ghi boxchat lỗi",e)}
 }
 function prefetch(i){
   var n=AB.sents.length;
@@ -7822,7 +7847,6 @@ function mkBar(){
   bar.innerHTML='<button type="button" data-a="prev" title="Câu trước" aria-label="Câu trước">'+ic.prev+'</button>'+
     '<button type="button" data-a="pp" class="pp" title="Tạm dừng / tiếp tục" aria-label="Tạm dừng hoặc tiếp tục">'+ic.pp+'</button>'+
     '<button type="button" data-a="next" title="Câu sau" aria-label="Câu sau">'+ic.next+'</button>'+
-    '<span id="rhmAbSt" aria-live="polite"></span>'+
     '<button type="button" data-a="stop" title="Dừng Audiobook" aria-label="Dừng Audiobook">'+ic.stop+'</button>';
   bar.addEventListener("click",function(e){
     var b=e.target.closest&&e.target.closest("button");if(!b)return;
@@ -7837,13 +7861,17 @@ function mkBar(){
     }
   });
   ["pointerdown","mousedown","touchstart"].forEach(function(ev){bar.addEventListener(ev,function(e){e.stopPropagation()},{passive:true})});
-  viewer.appendChild(bar);
+  (document.getElementById("rhmTb")||viewer).appendChild(bar);
   return bar;
 }
 function showBar(){mkBar().style.display="flex";paintBar()}
 function hideBar(){if(bar)bar.style.display="none"}
 function paintBar(){if(bar)bar.classList.toggle("paused",!!AB.paused)}
-function setStatus(t){var s=$("rhmAbSt");if(s&&s.textContent!==t)s.textContent=t}
+function setStatus(t){
+  if(bar)bar.title=t;
+  if(/^⏳/.test(t))showPill(t,60000,"tr");else hidePill("tr");
+  if(/^⏸/.test(t))showPill(t,1500,"ps");
+}
 
 /* ---------------------------------------------------------------- 9. nút "Đọc sách" trên bong bóng tô đen */
 function selPos(){
