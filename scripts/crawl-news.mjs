@@ -8,20 +8,29 @@ import { pathToFileURL } from 'node:url';
 
 const OUT = 'TinTuc/news.json';
 const ART_DIR = 'TinTuc/a';
-const PER_RUN = Infinity;       // quoc te: tong so tin moi moi lan
-const NEWS_N = Infinity;        //   - trong do tin tu bao/website
-const RESEARCH_N = Infinity;     //   - va bai nghien cuu (PubMed + tap chi)
+const PER_RUN = 20;       // quoc te: tong so tin moi moi lan
+const NEWS_N = 12;        //   - trong do tin tu bao/website
+const RESEARCH_N = 8;     //   - va bai nghien cuu (PubMed + tap chi)
 const VN_N = 10;           // trong nuoc: toi da 10 tin moi moi lan
 const VN_AGE_DAYS = 30;   // trong nuoc: chi lay bai trong 1 thang gan nhat
 const KEEP = 5000;        // so tin giu lai trong news.json
 const ART_KEEP = 2000;     // chi giu noi dung bai cua 400 tin moi nhat
-const MAX_AGE_DAYS = +(process.env.NEWS_MAX_AGE_DAYS || 365);
+const MAX_AGE_DAYS = +(process.env.NEWS_MAX_AGE_DAYS || 30);
 const SCRAPE_PER_SITE = 60;
 const FULLTEXT = process.env.NEWS_FULLTEXT !== '0'; // dat NEWS_FULLTEXT=0 de chi luu tom tat, khong luu toan van
 const UA = process.env.NEWS_UA || 'Mozilla/5.0 (compatible; RHM-DentalNewsBot/1.0; +https://github.com)';
 
-const VN_DENTAL = /răng|nha khoa|nha sĩ|nha sỹ|nha chu|nội nha|chỉnh nha|hàm mặt|răng hàm mặt|RHM|niềng|implant|cấy ghép|cắm ghép|nướu|lợi|viêm lợi|tủy|miệng|nhiệt miệng|bọc sứ|phục hình|trám|nhổ|tiểu phẫu|xương hàm|phẫu thuật hàm|thái dương hàm|khớp cắn|hàm giả|mắc cài|veneer|tẩy trắng|dental|dentist|orthodont|odontolog|maxillofacial/i;
-const EN_CMF = /maxillofacial|craniofacial|\bcmf\b|mandib|maxill|jaw|dental|dentist|\boral\b|cleft/i;   // nguon phau thuat tong quat: chi lay bai lien quan ham mat
+const VN_DENTAL = new RegExp('(?<![\\p{L}])(?:răng|nha khoa|nha sĩ|nha sỹ|nha chu|nội nha|chỉnh nha|hàm mặt|RHM|niềng|implant|cắm ghép|cấy ghép (?:implant|răng)|nướu|viêm lợi|xương hàm|khớp thái dương hàm|hàm giả|mắc cài|veneer|khoang miệng|nhiệt miệng|ung thư (?:vòm )?miệng|dental|dentist|orthodont|odontolog|maxillofacial|periodont|endodont)', 'iu');   // lien quan nha khoa/RHM
+const EN_CMF = new RegExp('(?<![\\p{L}])(?:dental|dentist|dentition|tooth|teeth|periodont|orthodont|endodont|prosthodont|pedodont|implantolog|gingiv|caries|denture|malocclusion|orthognathic|maxillofacial|craniofacial|cleft (?:lip|palate)|mandib|maxill|temporomandibular|oral (?:health|hygiene|cancer|cavity|surgery|medicine|microbio|mucos|rehabilitation|biology|squamous)|jaw|pulpitis|bruxism|halitosis|aligner|mouthwash)', 'iu');   // lien quan nha khoa/ham mat (quoc te)
+
+const JUNK_TITLE = /^\s*(erratum|corrigendum|correction|retraction|editorial board|cover|front cover|issue information|table of contents|in this issue|announcement|publisher'?s note|masthead|thông báo tuyển dụng|tuyển dụng)\b/i;
+const hits = (re, t) => (t.match(new RegExp(re.source, 'giu')) || []).length;
+// lien quan = tieu de co tu khoa, hoac noi dung co >= need lan (nguon tong hop thi need = 2)
+export function isRelevant(re, title, text, need = 1) {
+  title = String(title || '').normalize('NFC'); text = String(text || '').normalize('NFC');
+  return hits(re, title) > 0 || hits(re, text) >= need;
+}
+const reFor = s => s.filter || (s.region === 'vn' ? VN_DENTAL : EN_CMF);
 
 /* ---------------------------------------------------------------------------
  QUY TAC CRAWL (theo 2 file huong dan: nha_khoa_quoc_te.md + nha_khoa_viet_nam.md)
@@ -378,7 +387,7 @@ export function parsePubmed(xml) {
 async function fetchPubmed(log) {
   const key = process.env.NCBI_API_KEY ? '&api_key=' + process.env.NCBI_API_KEY : '';
   const base = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/';
-  const s = await get(base + 'esearch.fcgi?db=pubmed&retmode=json&retmax=300&sort=pub_date&datetype=edat&reldate=45&tool=rhm-news&term=' + encodeURIComponent(PUBMED_TERM) + key);
+  const s = await get(base + 'esearch.fcgi?db=pubmed&retmode=json&retmax=300&sort=pub_date&datetype=edat&reldate=' + MAX_AGE_DAYS + '&tool=rhm-news&term=' + encodeURIComponent(PUBMED_TERM) + key);
   const ids = JSON.parse(s).esearchresult?.idlist || [];
   if (!ids.length) return [];
   const items = [];
@@ -390,7 +399,8 @@ async function fetchPubmed(log) {
 /* ---------- chon tin ---------- */
 export function pickNews(cands, n, prio) {       // xen ke giua cac nguon cho da dang; prio: Map nguon -> so bai da luu (it bai hon thi duoc xet truoc)
   const by = new Map();
-  cands.sort((a, b) => b.date.localeCompare(a.date)).forEach(i => { if (!by.has(i.source)) by.set(i.source, []); by.get(i.source).push(i); });
+  const gk = i => /^PubMed/.test(i.source) ? 'PubMed' : i.source;
+  cands.sort((a, b) => b.date.localeCompare(a.date)).forEach(i => { const k = gk(i); if (!by.has(k)) by.set(k, []); by.get(k).push(i); });
   const out = []; const lists = [...by.values()];
   if (prio) lists.sort((a, b) => (prio.get(a[0].source) || 0) - (prio.get(b[0].source) || 0));
   while (out.length < n && lists.some(l => l.length)) for (const l of lists) { if (l.length && out.length < n) out.push(l.shift()); }
@@ -426,12 +436,11 @@ async function enrichScraped(items, s, isKnown, minTs) {
   const ok = [];
   await pool(todo, 3, async it => {
     const page = extractArticle(await get(it.url, 'text/html,*/*'), it.url);
-    if (!page.metaDate && !articleLike(new URL(it.url))) return;                    // ngay chi doan tu text / khong co ngay: chi nhan link giong bai viet
-    if (!page.ts) page.ts = Date.now();
-    if (page.ts < minTs) return;
+    if (!page.ts || page.ts < minTs) return;                                         // khong co ngay that -> bo
+    if (!page.metaDate && page.ts > Date.now() + 864e5) return;                      // ngay doan tu text ma o tuong lai -> bo
     const title = trunc((page.title || '').replace(/\s*[|–-]\s*[^|–-]{3,40}$/, ''), 220);
     if (title.length < 8 || page.textLen < 100) return;                            // khong phai bai viet
-    if (s.filter && !s.filter.test((title + ' ' + (page.desc || '') + ' ' + strip(page.html).slice(0, 4000)).normalize('NFC'))) return;
+    if (JUNK_TITLE.test(title) || !isRelevant(reFor(s), title, (page.desc || '') + ' ' + strip(page.html).slice(0, 2500), s.filter ? 2 : 1)) return;   // phai lien quan nha khoa/RHM
     it.title = title; it.date = new Date(page.ts).toISOString();
     it.summary = trunc(page.desc || strip(page.html), 420);
     if (page.image) it.image = page.image;
@@ -487,15 +496,15 @@ async function main() {
       let { items, via } = await collect(s, log);
       const scraped = items.length > 0 && items.every(i => i._scraped);
       if (scraped) items = await enrichScraped(items, s, i => have.has(i.id) || haveUrl.has(i.url), minTsFor(s));
-      else if (s.filter) items = items.filter(i => s.filter.test((i.title + ' ' + i.summary).normalize('NFC')));
+      else items = items.filter(i => !JUNK_TITLE.test(i.title) && isRelevant(reFor(s), i.title, i._full || i.summary, s.filter ? 2 : 1));
       const fresh = items.filter(i => !have.has(i.id) && !haveUrl.has(i.url) && !haveTitle.has(normT(i.title)) && Date.parse(i.date) >= minTsFor(s));
-      log(`OK   [${s.region}] ${s.name} (${via || 'khong co bai'}): ${items.length} bai${s.filter ? ' sau loc' : ''}, ${fresh.length} moi`);
+      log(`OK   [${s.region}] ${s.name} (${via || 'khong co bai'}): ${items.length} bai sau loc, ${fresh.length} moi`);
       (s.region === 'vn' ? pools.vn : (fresh.length && fresh[0].type === 'research' ? pools.research : pools.news)).push(...fresh.map(i => ({ ...i, _s: s.name })));
       okCount++;
     } catch (e) { log(`LOI  [${s.region}] ${s.name}: ${e.message}`); }
   });
   let pub = [];
-  try { pub = (await fetchPubmed(log)).filter(i => !have.has(i.id)); okCount++; } catch (e) { log(`LOI  PubMed: ${e.message}`); }
+  try { pub = (await fetchPubmed(log)).filter(i => !have.has(i.id) && !JUNK_TITLE.test(i.title) && isRelevant(EN_CMF, i.title, (i._abs || []).map(x => x.text).join(' '), 1)); okCount++; } catch (e) { log(`LOI  PubMed: ${e.message}`); }
   pools.research.push(...pub);
 
   const dedupe = arr => { const seen = new Set(), st = new Set(); return arr.filter(i => { const k = normT(i.title); if (seen.has(i.url) || (k && st.has(k))) return false; seen.add(i.url); st.add(k); return true; }); };
