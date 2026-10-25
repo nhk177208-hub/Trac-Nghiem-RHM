@@ -17,6 +17,10 @@ const ART_KEEP = 400;     // chi giu noi dung bai cua 400 tin moi nhat
 const MAX_AGE_DAYS = 30;
 const SCRAPE_PER_SITE = 8;
 const FULLTEXT = process.env.NEWS_FULLTEXT !== '0'; // dat NEWS_FULLTEXT=0 de chi luu tom tat, khong luu toan van
+const STATE = 'TinTuc/crawl-state.json'; // nho "trang nao co gi moi" + nguon nao hay loi (giua cac lan chay)
+const SCHEMA = 2;         // doi so nay khi doi cach luu du lieu (vd chuan hoa URL) -> tu xoa du lieu cu 1 lan
+const FAIL_PAUSE = 5;     // loi lien tiep tung nay lan -> tam nghi nguon do
+const PAUSE_DAYS = 3;     // ... trong tung nay ngay
 const UA = 'Mozilla/5.0 (compatible; RHM-DentalNewsBot/1.0; +https://github.com)';
 
 const VN_DENTAL = /răng|nha khoa|nha sĩ|nha sỹ|hàm mặt|niềng|implant|nướu|nha chu|sâu răng|tủy răng|cắm ghép|miệng/i;
@@ -64,11 +68,11 @@ const GUIDE_SOURCES = [
   { name: 'EFP',                    region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.efp.org/news/' },
   { name: 'AAP (Periodontology)',   region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.perio.org/' },
   { name: 'AAE',                    region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.aae.org/' },
-  { name: 'APDF / APRO',           region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://apdfapro.org/' },
+  { name: 'APDF / APRO',           region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://asiapacificdf.com/' },
   { name: 'ICP (Prosthodontists)',  region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://icp-org.com/' },
   { name: 'EOS (Orthodontic Society)', region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.eoseurope.org/' },
   // NIDCR (NIH): vien nghien cuu nha khoa nha nuoc My -> nhom Co quan quan ly
-  { name: 'NIDCR (NIH)',            region: 'intl', kind: 'news', group: G.GOV, feed: 'https://www.nidcr.nih.gov/news-events/news/rss.xml', site: 'https://www.nidcr.nih.gov/news-events/nidcr-news' },
+  { name: 'NIDCR (NIH)',            region: 'intl', kind: 'news', group: G.GOV, feed: 'https://public.govdelivery.com/topics/USNIHNIDCR_4/feed.rss', site: 'https://www.nidcr.nih.gov/news-events/nidcr-news' },
   // ===== QUOC TE - muc 1: co so du lieu (PubMed lay rieng o duoi) =====
   { name: 'Cochrane Oral Health',   region: 'intl', kind: 'journal', group: G.DB, site: 'https://oralhealth.cochrane.org/' },
   // ===== QUOC TE - muc 3: tap chi khoa hoc (RSS muc luc moi nhat) =====
@@ -110,6 +114,9 @@ const GUIDE_SOURCES = [
   // ===== VIET NAM - muc 1: co quan quan ly nha nuoc =====
   { name: 'Bộ Y tế',                region: 'vn', kind: 'news', group: G.GOV, site: 'https://moh.gov.vn/', filter: VN_DENTAL },
   { name: 'Cục Quản lý KCB',        region: 'vn', kind: 'news', group: G.GOV, site: 'https://kcb.vn/', filter: VN_DENTAL },
+  { name: 'Sở Y tế TP.HCM',         region: 'vn', kind: 'news', group: G.GOV, site: 'https://soyte.hochiminhcity.gov.vn/', filter: VN_DENTAL },
+  { name: 'Sở Y tế Hà Nội',         region: 'vn', kind: 'news', group: G.GOV, site: 'https://syt.hanoi.gov.vn/', filter: VN_DENTAL },
+  { name: 'Sở Y tế Đà Nẵng',        region: 'vn', kind: 'news', group: G.GOV, site: 'https://syt.danang.gov.vn/', filter: VN_DENTAL },
   // ===== VIET NAM - muc 2: tap chi hoc thuat =====
   { name: 'Tạp chí Răng Hàm Mặt VN', region: 'vn', kind: 'journal', group: G.VJOURNAL, site: 'https://vdj.vn/' },
   { name: 'Tạp chí Y học Việt Nam', region: 'vn', kind: 'journal', group: G.VJOURNAL, site: 'https://tapchiyhocvietnam.vn/', filter: VN_DENTAL },
@@ -155,7 +162,27 @@ const EXTRA_SOURCES = [
   { name: 'Google News VN', region: 'vn', kind: 'news', group: 'Khác', itemSource: true, noBody: true,
     feed: 'https://news.google.com/rss/search?q=' + encodeURIComponent('nha khoa OR "răng hàm mặt" OR "nha sĩ" when:7d') + '&hl=vi&gl=VN&ceid=VN:vi' },
 ];
-export const SOURCES = process.env.NEWS_EXTRA === '1' ? [...GUIDE_SOURCES, ...EXTRA_SOURCES] : GUIDE_SOURCES;
+/* ---------- BANG UU TIEN + TAN SUAT (sua o day, khong phai sua tung nguon) ----------
+ priority: high = uu tien khi chon tin; medium = mac dinh; low = su kien / it cap nhat / de loi
+ frequency: daily = lan chay nao cung quet (mac dinh); weekly = ~1 lan/tuan
+ Nguon CHI co site (khong co feed) ma 4 tuan khong co bai moi -> tu ha xuong low (xem main) */
+const PRIO_HIGH = new Set(['Dental Tribune', 'Dentistry Today', 'Dentistry.co.uk', 'ADA News', 'FDI World Dental Federation', 'IADR', 'EFP', 'AAP (Periodontology)', 'AAE',
+  'NIDCR (NIH)', 'Cochrane Oral Health', 'J Dent Res (JDR)', 'JADA', 'Clin Oral Implants Res', 'AJODO', 'J Clin Periodontol', 'J Endodontics (JOE)', 'J Prosthet Dent (JPD)',
+  'Int J Oral Maxillofac Surg', 'British Dental Journal', 'J Dent (ScienceDirect)', 'Dental Materials (ScienceDirect)', 'J Oral Maxillofac Surg (ScienceDirect)', 'J Periodontol (Wiley)',
+  'Int Endod J (Wiley)', 'Periodontology 2000 (Wiley)', 'Clin Implant Dent Relat Res (Wiley)', 'SpringerLink (dental implant)', 'SpringerLink (orthodontics)', 'Int J Oral Maxillofac Implants (IJOMI)',
+  'Bộ Y tế', 'Cục Quản lý KCB', 'Sở Y tế TP.HCM', 'Tạp chí Răng Hàm Mặt VN', 'Tạp chí Y học Việt Nam', 'Tạp chí Y học TP.HCM', 'Hội RHM Việt Nam (VOSA)', 'Hội RHM TP.HCM (HOSA)',
+  'Khoa RHM - ĐH Y Dược TP.HCM', 'BV RHM Trung ương TP.HCM', 'BV RHM Trung ương Hà Nội', 'BV RHM TP.HCM']);
+const PRIO_LOW = new Set(['ICP (Prosthodontists)', 'EOS (Orthodontic Society)', 'IDS Cologne', 'GNYDM', 'AEEDC Dubai', 'Chicago Midwinter Meeting', 'VIDEC', 'HIDEC', 'HAIDEC',
+  'ĐH Y Dược Hải Phòng', 'ĐH Y Dược Thái Bình', 'Khoa Y Dược - ĐH Đà Nẵng', 'ĐH Quốc tế Hồng Bàng', 'ĐH Nguyễn Tất Thành', 'Google News VN']);
+const WEEKLY = new Set(['ADEE', 'ITI', 'EAO', 'Academy of Osseointegration', 'WFO (Orthodontists)', 'AAO (Orthodontists)', 'IAOMS', 'AAOMS', 'AO Foundation (CMF)', 'APDF / APRO',
+  'ICP (Prosthodontists)', 'EOS (Orthodontic Society)', 'Cochrane Oral Health', 'IDS Cologne', 'GNYDM', 'AEEDC Dubai', 'EuroPerio', 'Chicago Midwinter Meeting', 'VIDEC', 'HIDEC', 'HAIDEC',
+  'Tạp chí Nghiên cứu Y học', 'Tạp chí Y Dược học Cần Thơ', 'Tạp chí Y Dược Huế', 'HSDI (Cấy ghép Nha khoa TP.HCM)', 'Viện Đào tạo RHM - ĐH Y Hà Nội', 'ĐH Y Dược Huế', 'ĐH Y Dược Cần Thơ',
+  'ĐH Y khoa Phạm Ngọc Thạch', 'ĐH Y Dược Hải Phòng', 'ĐH Y Dược Thái Bình', 'Khoa Y Dược - ĐH Đà Nẵng', 'ĐH Quốc tế Hồng Bàng', 'ĐH Nguyễn Tất Thành', 'Sở Y tế Đà Nẵng']);
+const WEEK_MS = 6 * 864e5;            // "weekly" = cach lan quet thanh cong truoc >= 6 ngay
+const DEMOTE_MS = 28 * 864e5;         // nguon chi co site, 4 tuan khong bai moi -> low
+export const SOURCES = (process.env.NEWS_EXTRA === '1' ? [...GUIDE_SOURCES, ...EXTRA_SOURCES] : GUIDE_SOURCES)
+  .map(s => ({ ...s, priority: PRIO_HIGH.has(s.name) ? 'high' : PRIO_LOW.has(s.name) ? 'low' : 'medium', frequency: WEEKLY.has(s.name) ? 'weekly' : 'daily' }));
+const RANK = { high: 0, medium: 1, low: 2 };
 
 const PUBMED_TERM =
   '(("Dentistry"[MeSH Terms] OR "Dental Implants"[MeSH Terms] OR "Periodontal Diseases"[MeSH Terms] OR ' +
@@ -182,19 +209,38 @@ const fname = id => id.replace(/[^a-z0-9_-]/gi, '_');
 const abs = (u, base) => { try { return new URL(decode(u).trim(), base).toString(); } catch { return ''; } };
 
 function cleanUrl(u) {
-  try { const x = new URL(u.trim()); [...x.searchParams.keys()].forEach(k => /^(utm_|fbclid|gclid|mc_|ref$)/i.test(k) && x.searchParams.delete(k)); x.hash = ''; return x.toString(); }
+  try { const x = new URL(u.trim()); [...x.searchParams.keys()].forEach(k => /^(utm_|fbclid|gclid|mc_|ref$)/i.test(k) && x.searchParams.delete(k)); x.hash = ''; x.hostname = x.hostname.replace(/^www\./i, ''); if (x.pathname.length > 1) x.pathname = x.pathname.replace(/\/+$/, '') || '/'; return x.toString(); }
   catch { return ''; }
 }
 
-async function get(url, accept = '*/*') {
-  const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 25000);
-  try {
-    const r = await fetch(url, { headers: { 'User-Agent': UA, Accept: accept, 'Accept-Language': 'vi,en;q=0.8' }, signal: ctl.signal, redirect: 'follow' });
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    const buf = Buffer.from(await r.arrayBuffer());
-    let cs = ((r.headers.get('content-type') || '').match(/charset=([\w-]+)/i) || [])[1] || (buf.subarray(0, 2048).toString('latin1').match(/<meta[^>]+charset=["']?([\w-]+)/i) || [])[1] || 'utf-8';
-    try { return new TextDecoder(cs).decode(buf); } catch { return buf.toString('utf8'); }
-  } finally { clearTimeout(t); }
+const HOST_GAP = 1500;   // toi thieu 1.5s giua cac request cung host
+const hostNext = new Map();
+async function throttle(url) {
+  let h; try { h = new URL(url).host; } catch { return; }
+  const now = Date.now(), at = Math.max(now, hostNext.get(h) || 0);
+  hostNext.set(h, at + HOST_GAP);
+  if (at > now) await new Promise(r => setTimeout(r, at - now));
+}
+async function get(url, accept = '*/*', opt = {}) {
+  for (let attempt = 0; ; attempt++) {
+    await throttle(url);
+    const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 25000);
+    try {
+      const headers = { 'User-Agent': UA, Accept: accept, 'Accept-Language': 'vi,en;q=0.8' };
+      if (opt.cond?.etag) headers['If-None-Match'] = opt.cond.etag;
+      if (opt.cond?.lm) headers['If-Modified-Since'] = opt.cond.lm;
+      const r = await fetch(url, { headers, signal: ctl.signal, redirect: 'follow' });
+      if (r.status === 304) { const e = new Error('khong doi (304)'); e.nm = true; throw e; }
+      if (opt.out) { opt.out.etag = r.headers.get('etag') || ''; opt.out.lm = r.headers.get('last-modified') || ''; }
+      if (!r.ok) { const e = new Error('HTTP ' + r.status); e.retry = r.status === 429 || r.status >= 500; throw e; }
+      const buf = Buffer.from(await r.arrayBuffer());
+      let cs = ((r.headers.get('content-type') || '').match(/charset=([\w-]+)/i) || [])[1] || (buf.subarray(0, 2048).toString('latin1').match(/<meta[^>]+charset=["']?([\w-]+)/i) || [])[1] || 'utf-8';
+      try { return new TextDecoder(cs).decode(buf); } catch { return buf.toString('utf8'); }
+    } catch (e) {
+      if (attempt < 2 && (e.retry || e.name === 'AbortError')) { await new Promise(r => setTimeout(r, 2000 * (attempt + 1))); continue; }   // thu lai toi da 2 lan, nghi tang dan
+      throw e;
+    } finally { clearTimeout(t); }
+  }
 }
 async function pool(items, n, fn) { const q = items.slice(); await Promise.all(Array.from({ length: Math.min(n, q.length) }, async () => { while (q.length) { const it = q.shift(); try { await fn(it); } catch {} } })); }
 
@@ -229,17 +275,39 @@ export function sanitize(html, base) {
   return out.join('').replace(/<(p|li|h[2-4]|a|strong|b|em|i|blockquote)>\s*<\/\1>/g, '').replace(/\s{3,}/g, ' ').trim();
 }
 
+/* ---------- JSON-LD (the ghi chu an cho may doc: tieu de, ngay dang, tac gia, anh) ---------- */
+function ldInfo(page) {
+  const out = {};
+  for (const m of page.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
+    let j; try { j = JSON.parse(unCdata(m[1]).trim()); } catch { continue; }
+    const nodes = []; const walk = n => { if (Array.isArray(n)) n.forEach(walk); else if (n && typeof n === 'object') { nodes.push(n); if (n['@graph']) walk(n['@graph']); } };
+    walk(j);
+    for (const n of nodes) {
+      if (!/Article|Posting|Report/i.test([].concat(n['@type'] || []).join(' '))) continue;
+      out.date ||= n.datePublished || n.dateCreated || '';
+      out.headline ||= typeof n.headline === 'string' ? n.headline : '';
+      const im = Array.isArray(n.image) ? n.image[0] : n.image; out.image ||= typeof im === 'string' ? im : (im && im.url) || '';
+      const au = Array.isArray(n.author) ? n.author[0] : n.author; out.author ||= typeof au === 'string' ? au : (au && au.name) || '';
+      const me = n.mainEntityOfPage; out.url ||= typeof me === 'string' ? me : (me && (me['@id'] || me.url)) || '';
+    }
+  }
+  return out;
+}
+
 /* ---------- trich noi dung bai bao tu HTML trang (heuristic, khong can thu vien) ---------- */
 export function extractArticle(page, base) {
   let h = page.replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style|noscript|svg|iframe|form|nav|header|footer|aside)\b[\s\S]*?<\/\1\s*>/gi, '');
   const metaOf = (re) => { const m = page.match(re); return m ? decode(m[1]).trim() : ''; };
   const og = n => metaOf(new RegExp('<meta[^>]+(?:property|name)=["\']' + n + '["\'][^>]*content=["\']([^"\']*)["\']', 'i')) || metaOf(new RegExp('<meta[^>]+content=["\']([^"\']*)["\'][^>]*(?:property|name)=["\']' + n + '["\']', 'i'));
-  const title = og('og:title') || strip(tag(page, 'title'));
-  const image = abs(og('og:image') || og('twitter:image'), base);
+  const ld = ldInfo(page);
+  const title = og('og:title') || ld.headline || strip(tag(page, 'title'));
+  const image = abs(og('og:image') || og('twitter:image') || ld.image || '', base);
   const desc = og('og:description') || og('description');
-  const dateStr = og('article:published_time') || og('og:published_time') || og('datePublished') || (page.match(/"datePublished"\s*:\s*"([^"]+)"/) || [])[1] || attr(page.match(/<time\b[^>]*>/i)?.[0] || '', 'time', 'datetime');
+  const dateStr = og('article:published_time') || og('og:published_time') || og('datePublished') || ld.date || (page.match(/"datePublished"\s*:\s*"([^"]+)"/) || [])[1] || attr(page.match(/<time\b[^>]*>/i)?.[0] || '', 'time', 'datetime');
   const ts = Date.parse(dateStr || '');
-  const byline = og('author') || og('article:author');
+  const byline = og('author') || og('article:author') || ld.author || '';
+  const cm = page.match(/<link\b[^>]*rel=["']canonical["'][^>]*>/i); const ch = cm ? attr(cm[0], 'link', 'href') : '';
+  const canonical = cleanUrl(ch ? abs(ch, base) : (ld.url ? abs(ld.url, base) : ''));
   // vung uu tien: <article> lon nhat, neu khong thi <main>, neu khong thi toan trang
   let region = '';
   for (const t of ['article', 'main']) { const ms = [...h.matchAll(new RegExp('<' + t + '\\b[^>]*>([\\s\\S]*?)</' + t + '>', 'gi'))].map(x => x[1]); if (ms.length) { region = ms.sort((a, b) => b.length - a.length)[0]; if (strip(region).length > 400) break; } }
@@ -254,7 +322,7 @@ export function extractArticle(page, base) {
   let raw = best && best.len >= 200 ? region.slice(best.i, best.e) : '';
   for (let k = 0; k < 6; k++) { const m = raw.match(/^\s*<p\b[^>]*>[\s\S]*?<\/p>/i); if (m && strip(m[0]).length < 50) raw = raw.slice(m[0].length); else break; }
   const body = raw ? sanitize(raw, base) : '';
-  return { title, image, desc, ts: isNaN(ts) ? 0 : ts, byline, html: body, textLen: strip(body).length };
+  return { title, image, desc, canonical, ts: isNaN(ts) ? 0 : ts, byline, html: body, textLen: strip(body).length };
 }
 
 /* ---------- RSS / Atom ---------- */
@@ -280,7 +348,10 @@ export function parseFeed(xml, source, opt = {}) {
     if (!image) { const e = b.match(/<enclosure\b[^>]*>/i); if (e && /image/i.test(e[0])) image = attr(e[0], 'enclosure', 'url'); }
     if (!image) { const m = decode(unCdata(rawBody)).match(/<img[^>]+src=["']([^"']+)["']/i); if (m) image = m[1]; }
     if (!title || !link || !ts) continue;
+    const doiM = (strip(tag(b, 'prism:doi')) + ' ' + strip(tag(b, 'dc:identifier')) + ' ' + link + ' ' + strip(tag(b, 'guid'))).match(/10\.\d{4,9}\/[^\s"<>?#]+/i);
+    const doi = doiM ? doiM[0].toLowerCase().replace(/[.,;]+$/, '') : '';
     out.push({
+      ...(doi ? { doi } : {}),
       id: 'n' + sha(link), type: opt.kind === 'journal' ? 'research' : 'news', region: opt.region || 'intl', group: opt.group || '', title: trunc(title, 220), url: link, source: srcName,
       date: new Date(ts).toISOString(), summary: trunc(summary, 420), image: /^https?:/i.test(image) ? image : '',
       _html: decode(unCdata(tag(b, 'content:encoded'))), _full: summary,
@@ -364,21 +435,28 @@ async function fetchPubmed(log) {
 export function pickNews(cands, n) {            // xen ke giua cac nguon cho da dang
   const by = new Map();
   cands.sort((a, b) => b.date.localeCompare(a.date)).forEach(i => { if (!by.has(i.source)) by.set(i.source, []); by.get(i.source).push(i); });
-  const out = []; const lists = [...by.values()];
+  const out = []; const lists = [...by.values()].sort((a, b) => (a[0]._p ?? 1) - (b[0]._p ?? 1) || b[0].date.localeCompare(a[0].date));   // nguon uu tien cao di truoc
   while (out.length < n && lists.some(l => l.length)) for (const l of lists) { if (l.length && out.length < n) out.push(l.shift()); }
   return out;
 }
 
 /* ---------- thu thap tu 1 nguon ---------- */
-async function collect(s, log) {
-  let feed = s.feed, siteHtml = '';
-  let xml = '';
-  if (feed) { try { xml = await get(feed, 'application/rss+xml,application/atom+xml,application/xml,text/xml,*/*'); } catch (e) { if (!s.site) throw e; log(`     ${s.name}: feed loi (${e.message}), thu tu dong tim...`); feed = ''; } }
-  if (!xml && s.site) {
-    siteHtml = await get(s.site, 'text/html,*/*');
-    feed = discoverFeed(siteHtml, s.site);
-    if (feed) { try { xml = await get(feed); } catch { xml = ''; } }
-  }
+async function collect(s, log, ctx) {
+  // lay trang; neu server noi "khong doi" (304) thi bo qua nguon nay lan nay
+  const fetchC = async (url, accept) => {
+    const out = {}; const t = await get(url, accept, { cond: ctx?.state.http[url], out });
+    if (ctx && (out.etag || out.lm)) (ctx.pending[s.name] ||= []).push([url, { etag: out.etag, lm: out.lm }]);
+    return t;
+  };
+  let feed = s.feed, siteHtml = '', xml = '';
+  try {
+    if (feed) { try { xml = await fetchC(feed, 'application/rss+xml,application/atom+xml,application/xml,text/xml,*/*'); } catch (e) { if (e.nm || !s.site) throw e; log(`     ${s.name}: feed loi (${e.message}), thu tu dong tim...`); feed = ''; } }
+    if (!xml && s.site) {
+      siteHtml = await fetchC(s.site, 'text/html,*/*');
+      feed = discoverFeed(siteHtml, s.site);
+      if (feed) { try { xml = await fetchC(feed); } catch (e) { if (e.nm) throw e; xml = ''; } }
+    }
+  } catch (e) { if (e.nm) return { items: [], via: 'khong doi', nm: true }; throw e; }
   let items = xml ? parseFeed(xml, s.name, s) : [];
   let via = xml ? 'rss' : '';
   if (!items.length && s.site) {   // khong co RSS dung duoc -> quet link tren trang
@@ -398,6 +476,10 @@ async function enrichScraped(items, s, isKnown, minTs) {
   const ok = [];
   await pool(todo, 3, async it => {
     const page = extractArticle(await get(it.url, 'text/html,*/*'), it.url);
+    if (page.canonical && page.canonical !== it.url) {      // dung dia chi chinh thuc cua trang de loc trung chinh xac
+      try { const a = new URL(page.canonical), b = new URL(it.url);
+        if (a.hostname === b.hostname && a.pathname.length >= 8) { it.url = page.canonical; it.id = 'n' + sha(it.url); if (isKnown(it)) return; } } catch {}
+    }
     if (!page.ts || page.ts < minTs || page.ts > Date.now() + 864e5) return;        // khong co ngay xuat ban that / qua cu -> bo
     const title = trunc((page.title || '').replace(/\s*[|–-]\s*[^|–-]{3,40}$/, ''), 220);
     if (title.length < 15 || page.textLen < 250) return;                            // khong phai bai viet
@@ -445,6 +527,19 @@ async function main() {
   const log = m => console.log(m);
   let db = { updated: 0, items: [] };
   try { db = JSON.parse(fs.readFileSync(OUT, 'utf8')); } catch {}
+  if (db.v !== SCHEMA) {                 // doi cach luu -> bat dau lai tu dau (xoa tin va noi dung bai cu)
+    if (db.items?.length) log(`Doi cach luu (v${SCHEMA}): xoa ${db.items.length} tin cu`);
+    db = { v: SCHEMA, updated: 0, items: [] };
+    try { for (const f of fs.readdirSync(ART_DIR)) fs.unlinkSync(path.join(ART_DIR, f)); } catch {}
+    fs.mkdirSync(path.dirname(OUT), { recursive: true }); fs.writeFileSync(OUT, JSON.stringify(db, null, 1) + '\n');
+  }
+  let st = { http: {}, src: {} };
+  try { st = JSON.parse(fs.readFileSync(STATE, 'utf8')); } catch {}
+  st.http ||= {}; st.src ||= {};
+  const ctx = { state: st, pending: {} };
+  const nowTs = () => Date.now();
+  const normD = d => String(d || '').toLowerCase().trim();
+  const haveDoi = new Set(db.items.map(i => normD(i.doi)).filter(Boolean));
   const have = new Set(db.items.map(i => i.id)); const haveUrl = new Set(db.items.map(i => i.url));
   const normT = x => String(x || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim().slice(0, 80);
   const haveTitle = new Set(db.items.map(i => normT(i.title)));
@@ -453,22 +548,34 @@ async function main() {
   const pools = { news: [], research: [], vn: [] };
 
   await pool(SOURCES, 6, async s => {
+    const h = st.src[s.name];
+    if (h?.pausedUntil > Date.now()) { log(`NGHI [${s.region}] ${s.name}: tam nghi den ${new Date(h.pausedUntil).toISOString().slice(0, 10)} (loi ${h.fails} lan lien tiep)`); return; }
+    if (s.frequency === 'weekly' && h?.lastRun > Date.now() - WEEK_MS) return;       // nguon hang tuan: chua den ky quet
     try {
-      let { items, via } = await collect(s, log);
+      let { items, via } = await collect(s, log, ctx);
       const scraped = items.length > 0 && items.every(i => i._scraped);
       if (scraped) items = await enrichScraped(items, s, i => have.has(i.id) || haveUrl.has(i.url), minTs);
       else if (s.filter) items = items.filter(i => s.filter.test((i.title + ' ' + i.summary).normalize('NFC')));
-      const fresh = items.filter(i => !have.has(i.id) && !haveUrl.has(i.url) && !haveTitle.has(normT(i.title)) && Date.parse(i.date) >= minTs && Date.parse(i.date) <= Date.now() + 864e5);
+      const fresh = items.filter(i => !have.has(i.id) && !haveUrl.has(i.url) && !haveTitle.has(normT(i.title)) && !(i.doi && haveDoi.has(normD(i.doi))) && Date.parse(i.date) >= minTs && Date.parse(i.date) <= Date.now() + 864e5);
       log(`OK   [${s.region}] ${s.name} (${via || 'khong co bai'}): ${items.length} bai${s.filter ? ' sau loc' : ''}, ${fresh.length} moi`);
-      (s.region === 'vn' ? pools.vn : (fresh.length && fresh[0].type === 'research' ? pools.research : pools.news)).push(...fresh.map(i => ({ ...i, _s: s.name })));
+      let pr = s.priority;                                                          // nguon chi co site, 4 tuan khong bai moi -> ha xuong low
+      if (!s.feed && pr !== 'low' && nowTs() - (h?.lastNew || h?.firstSeen || nowTs()) > DEMOTE_MS) { pr = 'low'; log(`     ${s.name}: 4 tuan khong bai moi -> ha uu tien xuong low`); }
+      (s.region === 'vn' ? pools.vn : (fresh.length && fresh[0].type === 'research' ? pools.research : pools.news)).push(...fresh.map(i => ({ ...i, _s: s.name, _p: RANK[pr] })));
       okCount++;
-    } catch (e) { log(`LOI  [${s.region}] ${s.name}: ${e.message}`); }
+      const nowT = Date.now(), old = st.src[s.name] || {};
+      st.src[s.name] = { ...old, fails: 0, lastOk: nowT, lastRun: nowT, firstSeen: old.firstSeen || nowT, ...(fresh.length ? { lastNew: nowT } : {}) };
+      delete st.src[s.name].lastErr; delete st.src[s.name].pausedUntil;
+    } catch (e) {
+      const f = (st.src[s.name]?.fails || 0) + 1;
+      st.src[s.name] = { ...st.src[s.name], fails: f, lastErr: e.message, ...(f >= FAIL_PAUSE ? { pausedUntil: Date.now() + PAUSE_DAYS * 864e5 } : {}) };
+      log(`LOI  [${s.region}] ${s.name}: ${e.message}${f >= FAIL_PAUSE ? ` -> tam nghi ${PAUSE_DAYS} ngay` : ` (lan ${f})`}`);
+    }
   });
   let pub = [];
-  try { pub = (await fetchPubmed(log)).filter(i => !have.has(i.id)); okCount++; } catch (e) { log(`LOI  PubMed: ${e.message}`); }
-  pools.research.push(...pub);
+  try { pub = (await fetchPubmed(log)).filter(i => !have.has(i.id) && !haveDoi.has(normD(i.doi))); okCount++; } catch (e) { log(`LOI  PubMed: ${e.message}`); }
+  pools.research.unshift(...pub);       // PubMed dung dau -> neu trung DOI voi RSS tap chi thi giu ban PubMed (co abstract day du)
 
-  const dedupe = arr => { const seen = new Set(), st = new Set(); return arr.filter(i => { const k = normT(i.title); if (seen.has(i.url) || (k && st.has(k))) return false; seen.add(i.url); st.add(k); return true; }); };
+  const dedupe = arr => { const seen = new Set(), ts = new Set(), ds = new Set(); return arr.filter(i => { const k = normT(i.title), d = normD(i.doi); if (seen.has(i.url) || (k && ts.has(k)) || (d && ds.has(d))) return false; seen.add(i.url); ts.add(k); if (d) ds.add(d); return true; }); };
   pools.news = dedupe(pools.news); pools.research = dedupe(pools.research); pools.vn = dedupe(pools.vn);
   let pickedN = pickNews(pools.news.slice(), NEWS_N), pickedR = pickNews(pools.research.slice(), RESEARCH_N);
   let short = PER_RUN - pickedN.length - pickedR.length;       // thieu o ben nao thi lay bu tu ben kia
@@ -481,6 +588,12 @@ async function main() {
   log(`Chon ${picked.length} tin moi (${pickedN.length} tin, ${pickedR.length} nghien cuu, ${pickedV.length} trong nuoc)`);
   if (!okCount) { console.error('Tat ca nguon deu loi'); process.exit(1); }
 
+  // ghi nho "trang nay khong doi" CHI cho nguon da lay het tin moi (tin moi chua duoc chon thi lan sau van phai doc lai)
+  const leftover = new Set([...pools.news, ...pools.research, ...pools.vn].filter(i => !picked.includes(i)).map(i => i._s).filter(Boolean));
+  for (const [name, arr] of Object.entries(ctx.pending)) if (!leftover.has(name)) for (const [u, v] of arr) st.http[u] = v;
+  fs.mkdirSync(path.dirname(STATE), { recursive: true });
+  fs.writeFileSync(STATE, JSON.stringify(st, null, 1) + '\n');
+
   // lay noi dung bai (che do doc trong app)
   fs.mkdirSync(ART_DIR, { recursive: true });
   await pool(picked, 4, async it => {
@@ -490,10 +603,11 @@ async function main() {
   log(`Co noi dung doc trong app: ${picked.filter(i => i.body).length}/${picked.length}`);
 
   const now = Date.now();
-  const clean = picked.map(i => { const o = { ...i }; delete o._html; delete o._full; delete o._abs; delete o._s; delete o._scraped; delete o._art; o.crawled = now; return o; });
+  const clean = picked.map(i => { const o = { ...i }; delete o._html; delete o._full; delete o._abs; delete o._s; delete o._p; delete o._scraped; delete o._art; o.crawled = now; return o; });
   if (!clean.length) { log('Khong co tin moi, khong ghi file.'); return; }
   db.items = [...clean, ...db.items].sort((a, b) => b.date.localeCompare(a.date)).slice(0, KEEP);
-  db.updated = now;
+  db.updated = now; db.v = SCHEMA;
+  db.paused = Object.entries(st.src).filter(([, v]) => v.pausedUntil > now).map(([n]) => n);   // app co the hien "Nguon X tam khong cap nhat"
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
   fs.writeFileSync(OUT, JSON.stringify(db, null, 1) + '\n');
 
