@@ -6971,6 +6971,65 @@ function crosses(ln,gts,W){
     return free<.6*gw;
   });
 }
+/* v11: TIÊU ĐỀ NẰM TRONG BOX BĂNG NGANG 2 CỘT.
+   Chữ tiêu đề trong box thường căn trái / căn phải / ngắn nên KHÔNG vượt khe giữa 2 cột -> crosses() trượt,
+   tiêu đề bị coi là chữ của cột và gộp vào vùng cột kề nó => không ngắt trang ảo.
+   Nhận diện bằng hình học (OCR không cho biết đường viền box), chỉ áp cho dòng PHẢI giống tiêu đề:
+   (C) chữ tiêu đề đè lên khe giữa (kể cả tiêu đề rất ngắn, căn giữa);
+   (A) tiêu đề đứng ngay trên đoạn chữ chạy ngang 2 cột (thân box);
+   (B) hàng tiêu đề trống hoàn toàn ở các cột còn lại, và ngay dưới nó các cột cùng bắt đầu lại (box 2 cột).
+   Tắt được bằng window.__rhmBoxHead=false. */
+function colOf(x,gts){var c=0;while(c<gts.length&&x>=gts[c].gc)c++;return c}
+function lnText(ln){return ln.segs.map(function(s){return s.t}).join(" ").replace(/\s+/g," ").trim()}
+function headLike(ln,bfh,W,loose){
+  var t=lnText(ln);
+  if(t.length<2||t.length>140)return false;
+  var letters=t.replace(/[^A-Za-zÀ-ỹ]/g,"");
+  if(letters.length<2)return false;                          /* chỉ số / ký hiệu (ô số thứ tự) không phải tiêu đề */
+  if(t.split(" ").length>16||ln.x1-ln.x0>.8*W)return false;
+  if(/[.,;]$/.test(t))return false;                          /* tiêu đề không kết thúc như một câu */
+  if(ln.fh>=1.12*bfh)return true;
+  if(loose&&ln.fh>=.98*bfh&&t.split(" ").length<=10){
+    var caps=letters.length>=3&&letters===letters.toUpperCase();
+    var num=/^(?:\d{1,2}|[IVXL]{1,5})\s*[.)\-:]\s*\S/.test(t);
+    return caps||num;
+  }
+  return false;
+}
+function boxHead(lines,i,gts,bfh,W,hz){
+  var ln=lines[i];
+  if(!gts||!gts.length||!headLike(ln,bfh,W,true))return false;
+  var strict=ln.fh>=1.12*bfh;
+  /* (C) chữ tiêu đề đè lên khe giữa: chữ của cột không bao giờ nằm trên khe */
+  if(strict&&gts.some(function(g){return ln.its.some(function(d){return d.x<g.gc-1&&d.x+d.w>g.gc+1})}))return true;
+  /* các seg của dòng phải cùng một cột */
+  var cols={};ln.segs.forEach(function(s){cols[colOf((s.x0+s.x1)/2,gts)]=1});
+  var ck=Object.keys(cols);if(ck.length!==1)return false;
+  var c=+ck[0];
+  /* bỏ qua các dòng xuống hàng của chính tiêu đề này */
+  var last=ln,j=i+1;
+  while(j<lines.length){
+    var q=lines[j];
+    if(q.segs.length&&q.segs.every(function(s){return colOf((s.x0+s.x1)/2,gts)===c})&&
+       q.y-last.y<=2.0*last.fh&&Math.abs(q.fh-ln.fh)<=.12*ln.fh&&Math.abs(q.x0-ln.x0)<=3*ln.fh&&q.x1-q.x0<=.6*W&&headLike(q,bfh,W,true)){last=q;j++}
+    else break;
+  }
+  var nx=lines[j];
+  if(!nx||nx.y-last.y>3.6*Math.max(ln.fh,bfh))return false;
+  /* (A) ngay dưới là chữ chạy ngang 2 cột = thân của box */
+  if(crosses(nx,gts,W))return true;
+  /* (B) cần hàng tiêu đề trống ở các cột khác ... */
+  var band=.8*Math.max(ln.fh,bfh),own=ln.its;
+  var alone=!hz.some(function(d){
+    if(own.indexOf(d)>=0||Math.abs(d.y-ln.y)>band)return false;
+    return colOf(d.x+d.w/2,gts)!==c;
+  });
+  if(!alone)return false;
+  /* ... và ngay dưới tiêu đề các cột cùng bắt đầu lại, thẳng hàng (box 2 cột) */
+  var cc={};
+  nx.segs.forEach(function(s){if(s.x1-s.x0>=.08*W)cc[colOf((s.x0+s.x1)/2,gts)]=1});
+  return !!cc[c]&&Object.keys(cc).length>=2;
+}
 function isTableLine(ln,gts,W){
   var sh=ln.segs.filter(function(s){return s.x1-s.x0<.15*W});
   if(sh.length<4)return false;
@@ -7005,6 +7064,7 @@ function zoneOrder(items,W,forceGts){
     ln.full=false;ln.cut=false;ln.head=false;
     if(crosses(ln,gts,W)){ln.full=true;ln.head=ln.fh>=1.08*bfh}
     else if(isTableLine(ln,gts,W))ln.full=true;
+    else if(window.__rhmBoxHead!==false&&boxHead(lines,i,gts,bfh,W,hz)){ln.full=true;ln.head=true;ln.boxHead=true}
     if(!ln.full&&prevHead){
       /* dòng xuống hàng của tiêu đề: cùng cỡ chữ, sát dòng trên, thẳng lề trái, ngắn */
       var p=prevHead;
