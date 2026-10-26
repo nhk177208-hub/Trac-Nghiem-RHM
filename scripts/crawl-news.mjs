@@ -292,7 +292,11 @@ async function pool(items, n, fn) { const q = items.slice(); await Promise.all(A
 const OK_TAGS = new Set(['p', 'br', 'h2', 'h3', 'h4', 'ul', 'ol', 'li', 'blockquote', 'strong', 'b', 'em', 'i', 'u', 'a', 'img', 'figure', 'figcaption', 'table', 'thead', 'tbody', 'tr', 'td', 'th', 'sup', 'sub', 'video', 'source', 'picture', 'iframe']);
 const VOID = new Set(['br', 'img', 'source']);
 const BAD_IMG = /logo|icon|avatar|pixel|spacer|blank|1x1|sprite|emoji|badge|share|button|loading|placeholder/i;
-const badImg = u => BAD_IMG.test(String(u).split(/[?#]/)[0].split('/').pop());   // chi xet ten file, khong xet ca duong dan (tranh loai nham anh bai that)
+const badImg = u => BAD_IMG.test(String(u).split(/[?#]/)[0].split('/').pop());
+const isLogoImg = u => { const t = String(u || ''); const fn = t.split(/[?#]/)[0].split('/').pop(); return /logo|banner/i.test(fn) && !/flag|language|vietnamese|english|french|favicon/i.test(fn) && !/\/languages?\//i.test(t); };   // logo trang (logo/banner), khong phai icon co/ngon ngu
+const logoBg = (source, logoUrl) => { const BRAND = { 'Inside Dentistry': '#a6192e', 'Dentistry Today': '#000000' }; if (BRAND[source]) return BRAND[source]; return /white/i.test(String(logoUrl || '')) ? '#1f2937' : '#ffffff'; };   // mau nen trang goc ghep voi logo (Inside Dentistry: do, Dentistry Today: den, logo trang khac: xam dam, logo toi: trang)
+const isSiteIcon = u => { const t = String(u || ''); const fn = t.split(/[?#]/)[0].split('/').pop(); return /flag|language|vietnamese|english|french|favicon/i.test(fn) || /\/languages?\//i.test(t); };
+const badCover = u => { const t = String(u || ''); const fn = t.split(/[?#]/)[0].split('/').pop(); return BAD_IMG.test(fn) || /flag|language|vietnamese|english|french|favicon|banner/i.test(fn) || /\/languages?\//i.test(t); };   // anh bia: bo qua them co ngon ngu / flag / banner cua trang (vi du pnt.edu.vn/.../languages/vietnamese.png)   // chi xet ten file, khong xet ca duong dan (tranh loai nham anh bai that)
 export function sanitize(html, base) {
   let lastPicSrcset = '';
   html = html.replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style|noscript|svg|object|embed|form|button|select|textarea|template)\b[\s\S]*?<\/\1\s*>/gi, '');
@@ -385,8 +389,8 @@ export function extractArticle(page, base) {
     if (cur && p.i - cur.e < 3500) { cur.e = p.e; cur.len += p.len; } else { cur = { i: p.i, e: p.e, len: p.len }; if (!best) best = cur; }
     if (!best || cur.len > best.len) best = cur;
   }
-  let rs = best ? best.i : 0;   // lay them anh/hinh dung ngay truoc doan van dau (anh mo bai thuong nam ngoai the <p>)
-  if (best) { const before = region.slice(Math.max(0, best.i - 2500), best.i); const k = before.search(/<(figure|picture|img|video|iframe)\b/i); if (k >= 0) rs = Math.max(0, best.i - 2500) + k; }
+  let rs = best ? best.i : 0;   // lay them anh mo bai ngay truoc doan van dau: quet tu gan den xa, bo qua icon/co cua trang
+  if (best) { const before = region.slice(Math.max(0, best.i - 2500), best.i); const imgs = [...before.matchAll(/<img\b[^>]*>/gi)]; for (let ii = imgs.length - 1; ii >= 0; ii--) { const tagI = imgs[ii][0]; let u = attr(tagI, 'img', 'data-src') || attr(tagI, 'img', 'data-lazy-src') || attr(tagI, 'img', 'src'); if (!u) { const ss = attr(tagI, 'img', 'srcset') || attr(tagI, 'img', 'data-srcset'); if (ss) u = pickLargestSrcsetUrl(ss); } u = u ? abs(u, base) : ''; if (u && /^https?:/i.test(u) && !badCover(u)) { rs = Math.max(0, best.i - 2500) + imgs[ii].index; break; } } }
   let raw = best && best.len >= 60 ? region.slice(rs, best.e) : '';
   for (let k = 0; k < 6; k++) { const m = raw.match(/^\s*<p\b[^>]*>[\s\S]*?<\/p>/i); if (m && strip(m[0]).length < 50) raw = raw.slice(m[0].length); else break; }
   let body = raw ? sanitize(raw, base) : '';
@@ -403,10 +407,24 @@ export function extractArticle(page, base) {
       body += clean; srcs.forEach(x => haveSrc.add(x)); added++;
     }
   }
+  // Trang kieu NukeViet (HPMU): noi dung chinh khong nam trong <p> ma la text node / <br> / <div>, nen cum <p> chi con chan trang.
+  // Neu body tu cum <p> qua ngan, quet lai theo doan text (bat ke the bao) de lay cum van ban dai nhat.
+  if (strip(body).length < 500) {
+    const segs = [...region.matchAll(/>([^<]{20,})</g)].map(x => ({ i: x.index + 1, e: x.index + x[0].length - 1, len: strip(x[1]).length })).filter(x => x.len >= 20);
+    let b2 = null, c2 = null;
+    for (const p of segs) { if (c2 && p.i - c2.e < 3500) { c2.e = p.e; c2.len += p.len; } else { c2 = { i: p.i, e: p.e, len: p.len }; if (!b2) b2 = c2; } if (!b2 || c2.len > b2.len) b2 = c2; }
+    if (b2 && b2.len > strip(body).length) {
+      let rs2 = b2.i;
+      const before2 = region.slice(Math.max(0, b2.i - 2500), b2.i); const imgs2 = [...before2.matchAll(/<img\b[^>]*>/gi)];
+      for (let ii = imgs2.length - 1; ii >= 0; ii--) { const tagI = imgs2[ii][0]; let u = attr(tagI, 'img', 'data-src') || attr(tagI, 'img', 'data-lazy-src') || attr(tagI, 'img', 'src'); if (!u) { const ss = attr(tagI, 'img', 'srcset') || attr(tagI, 'img', 'data-srcset'); if (ss) u = pickLargestSrcsetUrl(ss); } u = u ? abs(u, base) : ''; if (u && /^https?:/i.test(u) && !badCover(u)) { rs2 = Math.max(0, b2.i - 2500) + imgs2[ii].index; break; } }
+      const raw2 = region.slice(rs2, b2.e); const body2 = sanitize(raw2, base);
+      if (strip(body2).length > strip(body).length) body = body2;
+    }
+  }
   const realLen = strip(body).length;
-  let image2 = image; if (!image2 || badImg(image2)) { const m1 = body.match(/<img src="([^"]+)"/); image2 = m1 ? decode(m1[1]) : ''; }                       // do dai doan van that (chua tinh mo ta du phong)
+  let image2 = image; if (!image2 || badCover(image2)) { image2 = ''; for (const m1 of body.matchAll(/<img src="([^"]+)"/g)) { const cand = decode(m1[1]); if (cand && !badCover(cand)) { image2 = cand; break; } } }                       // do dai doan van that (chua tinh mo ta du phong)
   if (!image2) {   // anh nam ngoai cum doan van chinh / ngoai vung article-main (anh dai dien o header, gallery): quet toan vung bai roi toan trang, bo qua logo/icon
-    const scanImg = htmlSrc => { for (const im of String(htmlSrc || '').matchAll(/<img\b[^>]*>/gi)) { const tagI = im[0]; let u = attr(tagI, 'img', 'data-src') || attr(tagI, 'img', 'data-lazy-src') || attr(tagI, 'img', 'src'); if (!u) { const ss = attr(tagI, 'img', 'srcset') || attr(tagI, 'img', 'data-srcset'); if (ss) u = pickLargestSrcsetUrl(ss); } u = u ? abs(u, base) : ''; if (u && /^https?:/i.test(u) && !badImg(u)) return u; } return ''; };
+    const scanImg = htmlSrc => { for (const im of String(htmlSrc || '').matchAll(/<img\b[^>]*>/gi)) { const tagI = im[0]; let u = attr(tagI, 'img', 'data-src') || attr(tagI, 'img', 'data-lazy-src') || attr(tagI, 'img', 'src'); if (!u) { const ss = attr(tagI, 'img', 'srcset') || attr(tagI, 'img', 'data-srcset'); if (ss) u = pickLargestSrcsetUrl(ss); } u = u ? abs(u, base) : ''; if (u && /^https?:/i.test(u) && !badCover(u)) return u; } return ''; };
     image2 = scanImg(region) || scanImg(page);
   }
   let video = '', videoPoster = '';
@@ -414,7 +432,7 @@ export function extractArticle(page, base) {
   if (vBlock) { videoPoster = (vBlock[0].match(/\bposter=["']([^"']+)["']/i) || [])[1] || ''; video = (vBlock[0].match(/\bsrc=["']([^"']+)["']/i) || [])[1] || ''; }
   if (!video) { const f = body.match(/<iframe[^>]*\bsrc=["']([^"']+)["']/i); if (f) video = decode(f[1]); }
   if (!videoPoster && video) { const y = ytId(video); if (y) videoPoster = 'https://i.ytimg.com/vi/' + y + '/hqdefault.jpg'; }
-  if (!image2 && videoPoster && !badImg(videoPoster)) image2 = videoPoster;
+  if (!image2 && videoPoster && !badCover(videoPoster)) image2 = videoPoster;
   if (!body && desc) body = '<p>' + esc(desc) + '</p>';
   // tieu de la ten muc ("Hợp tác đối ngoại") hoac < 4 tu ma khong co h1 dung: KHONG bo bai, tu dat tieu de tu h2 / mo ta / cau dau cua bai
   if (SECTION_VN.test(title) || title.split(/\s+/).length < 4) {
@@ -443,7 +461,8 @@ export function extractArticle(page, base) {
   const nDates = (strip(region).match(/\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+\d{1,2},?\s+20\d{2}\b|\b\d{1,2}\s*[\/.-]\s*\d{1,2}\s*[\/.-]\s*20\d{2}\b/gi) || []).length;
   const bodyLinkRatio = realLen ? anchorLen(body) / realLen : 0;
   const listing = (realLen < 600 && (headLinks >= 4 || (headLinks >= 2 && nDates >= 5))) || bodyLinkRatio > 0.4;   // bai dai that (>= 600 ky tu) khong bi coi la trang danh sach chi vi sidebar/menu nhieu link
-  return { title, listing, image: image2, desc, ogType, pubMeta, realLen, metaDate: !isNaN(metaTs), ts: isNaN(ts) ? 0 : ts, byline, html: body, textLen: strip(body).length, video, videoPoster };
+  let logo = ''; if (isLogoImg(image)) logo = image; if (!logo) { const scanLogo = htmlSrc => { for (const im of String(htmlSrc || '').matchAll(/<img\b[^>]*>/gi)) { const tagI = im[0]; let u = attr(tagI, 'img', 'data-src') || attr(tagI, 'img', 'data-lazy-src') || attr(tagI, 'img', 'src'); if (!u) { const ss = attr(tagI, 'img', 'srcset') || attr(tagI, 'img', 'data-srcset'); if (ss) u = pickLargestSrcsetUrl(ss); } u = u ? abs(u, base) : ''; if (u && isLogoImg(u)) return u; } return ''; }; logo = scanLogo(region) || scanLogo(page); }
+  return { title, listing, image: image2, logo, desc, ogType, pubMeta, realLen, metaDate: !isNaN(metaTs), ts: isNaN(ts) ? 0 : ts, byline, html: body, textLen: strip(body).length, video, videoPoster };
 }
 
 /* ---------- RSS / Atom ---------- */
@@ -640,6 +659,7 @@ async function enrichScraped(items, s, isKnown, minTs) {
     it.title = title; it.date = new Date(page.ts).toISOString();
     it.summary = trunc(page.desc || strip(page.html), 420);
     if (page.image) it.image = page.image;
+    if (!it.image && page.logo) { it.image = page.logo; it.imageKind = 'logo'; it.imageBg = logoBg(it.source, page.logo); }
     if (page.video) it.video = page.video;
     if (page.videoPoster) it.videoPoster = page.videoPoster;
     if (!it.image && page.videoPoster) it.image = page.videoPoster;
@@ -676,7 +696,8 @@ async function buildArticle(it, s) {
       if (page.title && page.title.length >= 15) it.title = trunc(page.title.replace(/\s*[|–-]\s*[^|–-]{3,40}$/, ''), 220);
       if (page.desc && !it.summary) it.summary = trunc(page.desc, 420);
     }
-    if (page.image && !badImg(page.image)) it.image = page.image;   // anh dai dien that (og:image), thay vi anh Figure dau tien trong bai
+    if (page.image && !badCover(page.image)) it.image = page.image;   // anh dai dien that (og:image), thay vi anh Figure dau tien trong bai; co/icon/banner cua trang khong duoc ghi de
+    if (!it.image && page.logo) { it.image = page.logo; it.imageKind = 'logo'; it.imageBg = logoBg(it.source, page.logo); }   // tin khong co anh that: lay logo trang lam anh list (da xac nhan voi nguoi dung)
     if (page.video && !it.video) it.video = page.video;
     if (page.videoPoster && !it.videoPoster) it.videoPoster = page.videoPoster;
     if (!it.image && page.videoPoster) it.image = page.videoPoster;
@@ -687,7 +708,8 @@ async function buildArticle(it, s) {
   }
   if (strip(html).length < 150) return null;
   if (!/<img\b/i.test(html) && it.image && !badImg(it.image)) html = '<figure><img src="' + esc(it.image) + '" alt="" loading="lazy"></figure>' + html;   // bai co anh ma than bai khong giu duoc -> chen anh dai dien len dau
-  return { ...base, title: it.title, date: it.date, byline: page?.byline || '', image: it.image || '', html, kind: 'full' };
+  if (it.image && page && page.logo && it.image === page.logo) { it.imageKind = 'logo'; it.imageBg = logoBg(it.source, page.logo); } else if (it.imageKind === 'logo' && !(page && page.logo && it.image === page.logo)) { it.imageKind = ''; it.imageBg = ''; }
+  return { ...base, title: it.title, date: it.date, byline: page?.byline || '', image: it.image || '', imageKind: it.imageKind || '', imageBg: it.imageBg || '', html, kind: 'full' };
 }
 
 async function main() {
@@ -788,7 +810,7 @@ async function main() {
     await pool(oldArts, 4, async it => {
       try {
         const art = await buildArticle({ ...it, _html: '', _scraped: false }, bySrc.get(it.source) || {});
-        if (art && strip(art.html).length >= 150) { fs.writeFileSync(path.join(ART_DIR, fname(it.id) + '.json'), JSON.stringify(art)); if (art.image && (!it.image || it.image === it.url || !/\.(jpg|jpeg|png|webp|gif|avif)(\?|#|$)/i.test(it.image))) it.image = art.image; rebuilt++; }
+        if (art && strip(art.html).length >= 150) { fs.writeFileSync(path.join(ART_DIR, fname(it.id) + '.json'), JSON.stringify(art)); if (art.imageKind === 'logo') { it.imageKind = 'logo'; it.imageBg = art.imageBg || ''; if (!it.image) it.image = art.image; } if (art.image && (!it.image || it.image === it.url || !/\.(jpg|jpeg|png|webp|gif|avif)(\?|#|$)/i.test(it.image))) { it.image = art.image; it.imageKind = art.imageKind || ''; it.imageBg = art.imageBg || ''; } rebuilt++; }
       } catch {}
     });
     log(`Crawl lai noi dung: ${rebuilt}/${oldArts.length} bai cu`);
