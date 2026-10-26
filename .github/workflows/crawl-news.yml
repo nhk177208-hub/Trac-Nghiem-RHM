@@ -2,8 +2,9 @@ name: Crawl dental news
 
 on:
   schedule:
-    # 4 lần/ngày (UTC) = 07:17, 13:17, 19:17, 01:17 giờ Việt Nam
-    - cron: '17 0,6,12,18 * * *'
+    # 4 lần/ngày (UTC) = 06:07, 12:07, 18:07, 00:07 giờ Việt Nam (UTC+7)
+    # Đặt phút 07 thay vì 00 để tránh giờ cao điểm của GitHub (đỡ bị trễ/bỏ lượt)
+    - cron: '7 23,5,11,17 * * *'
   workflow_dispatch:
 
 permissions:
