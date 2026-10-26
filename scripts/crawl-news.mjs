@@ -118,7 +118,7 @@ const GUIDE_SOURCES = [
   { name: 'EFP',                    region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.efp.org/news-events/news/' },
   { name: 'AAP (Periodontology)', region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.perio.org/about-aap/newsroom/', ua: 'browser' },
   { name: 'AAE',                    region: 'intl', kind: 'news', group: G.ASSOC, feed: 'https://newsroom.aae.org/feed/', site: 'https://newsroom.aae.org/' },
-  { name: 'APDF / APRO', region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://apdcvietnam2026.com/en/news/', ua: 'browser', slow: true },
+  { name: 'APDF / APRO', region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://apdcvietnam2026.com/en/news/', ua: 'browser', slow: true, off: 'ten mien apdcvietnam2026.com bi ECONNREFUSED 127.0.0.1 (DNS tro ve loopback); bat lai khi tim duoc ten mien dung' },
   { name: 'ICP (Prosthodontists)',  region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://icp-org.com/' },
   { name: 'EOS (Orthodontic Society)', region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.eoseurope.org/' },
   // NIDCR (NIH): vien nghien cuu nha khoa nha nuoc My -> nhom Co quan quan ly
@@ -165,12 +165,12 @@ const GUIDE_SOURCES = [
   { name: 'Bộ Y tế', region: 'vn', kind: 'news', group: G.GOV, site: 'https://moh.gov.vn/tin-lien-quan', filter: VN_DENTAL, ua: 'browser', slow: true, insecure: true },
   { name: 'Cục Quản lý KCB',        region: 'vn', kind: 'news', group: G.GOV, site: 'https://kcb.vn/', filter: VN_DENTAL },
   // ===== VIET NAM - muc 2: tap chi hoc thuat =====
-  { name: 'Tạp chí Răng Hàm Mặt VN', region: 'vn', kind: 'journal', group: G.VJOURNAL, site: 'https://vjol.info.vn/index.php/tcranghammat/issue/current', insecure: true },
+  { name: 'Tạp chí Răng Hàm Mặt VN', region: 'vn', kind: 'journal', group: G.VJOURNAL, feed: 'https://vjol.info.vn/tcranghammat/gateway/plugin/WebFeedGatewayPlugin/rss2', site: 'https://vjol.info.vn/index.php/tcranghammat/issue/current', insecure: true },
   { name: 'Tạp chí Y học Việt Nam', region: 'vn', kind: 'journal', group: G.VJOURNAL, feed: 'https://tapchiyhocvietnam.vn/index.php/vmj/gateway/plugin/WebFeedGatewayPlugin/rss2', site: 'https://tapchiyhocvietnam.vn/', filter: VN_DENTAL },
   { name: 'Tạp chí Y học TP.HCM', region: 'vn', kind: 'journal', group: G.VJOURNAL, feed: 'https://ojs.tapchiyhoctphcm.vn/index.php/hcjmm/gateway/plugin/WebFeedGatewayPlugin/rss2', site: 'https://ojs.tapchiyhoctphcm.vn/index.php/hcjmm/issue/current', filter: VN_DENTAL, insecure: true },
   { name: 'Tạp chí Nghiên cứu Y học', region: 'vn', kind: 'journal', group: G.VJOURNAL, feed: 'https://tapchinghiencuuyhoc.vn/index.php/tcncyh/gateway/plugin/WebFeedGatewayPlugin/rss2', site: 'https://tapchinghiencuuyhoc.vn/', filter: VN_DENTAL },
   { name: 'Tạp chí Y Dược học Cần Thơ', region: 'vn', kind: 'journal', group: G.VJOURNAL, site: 'https://tapchi.ctump.edu.vn/', filter: VN_DENTAL },
-  { name: 'Tạp chí Y Dược Huế', region: 'vn', kind: 'journal', group: G.VJOURNAL, feed: 'https://huejmp.vn/index.php/jmp/gateway/plugin/WebFeedGatewayPlugin/rss2', site: 'https://huejmp.vn/', filter: VN_DENTAL },
+  { name: 'Tạp chí Y Dược Huế', region: 'vn', kind: 'journal', group: G.VJOURNAL, feed: 'https://vjol.info.vn/jmp/gateway/plugin/WebFeedGatewayPlugin/rss2', site: 'https://vjol.info.vn/jmp/vi/issue/archive', filter: VN_DENTAL, insecure: true },
   // ===== VIET NAM - muc 3: hoi chuyen khoa =====
   { name: 'Hội RHM Việt Nam (VOSA)', region: 'vn', kind: 'news', group: G.VASSOC, site: 'https://vosa.org.vn/tin-tuc' },
   { name: 'Hội RHM TP.HCM (HOSA)',  region: 'vn', kind: 'news', group: G.VASSOC, site: 'https://hoiranghammat.vn/', off: 'chua tim duoc ten mien dung' },
@@ -178,10 +178,10 @@ const GUIDE_SOURCES = [
   // ===== VIET NAM - hoi nghi / trien lam (VIDEC do VOSA to chuc) =====
   { name: 'VIDEC', region: 'vn', kind: 'news', group: G.EVENT, site: 'https://videc.vn/', ua: 'browser', slow: true },
   { name: 'HIDEC',                  region: 'vn', kind: 'news', group: G.EVENT, site: 'https://hidec.vn/', off: 'chua tim duoc ten mien dung' },
-  { name: 'HAIDEC', region: 'vn', kind: 'news', group: G.EVENT, site: 'https://apdcvietnam2026.com/en/news/', ua: 'browser', slow: true },
+  { name: 'HAIDEC', region: 'vn', kind: 'news', group: G.EVENT, site: 'https://apdcvietnam2026.com/en/news/', ua: 'browser', slow: true, off: 'ten mien apdcvietnam2026.com bi ECONNREFUSED 127.0.0.1 (DNS tro ve loopback); bat lai khi tim duoc ten mien dung' },
   // ===== VIET NAM - muc 4: truong dai hoc y duoc =====
   { name: 'Viện Đào tạo RHM - ĐH Y Hà Nội', region: 'vn', kind: 'news', group: G.UNI, site: 'https://vrhm.edu.vn/default.aspx', insecure: true },
-  { name: 'ĐH Y Dược Huế', region: 'vn', kind: 'news', group: G.UNI, site: 'https://huemed-univ.edu.vn/tin-tuc/tin-tuc-su-kien', filter: VN_DENTAL },
+  { name: 'ĐH Y Dược Huế', region: 'vn', kind: 'news', group: G.UNI, site: 'https://huemed-univ.edu.vn/', filter: VN_DENTAL },
   { name: 'ĐH Y Dược Cần Thơ', region: 'vn', kind: 'news', group: G.UNI, site: 'https://www.ctump.edu.vn/tin-tuc-su-kien_portal_22.html', insecure: true },
   { name: 'ĐH Y khoa Phạm Ngọc Thạch', region: 'vn', kind: 'news', group: G.UNI, site: 'https://pnt.edu.vn/vi/su-kien-hoat-dong', filter: VN_DENTAL },
   { name: 'Khoa RHM - ĐH Y Dược TP.HCM', region: 'vn', kind: 'news', group: G.UNI, site: 'https://dent.ump.edu.vn/' },
@@ -189,7 +189,7 @@ const GUIDE_SOURCES = [
   { name: 'ĐH Y Dược Thái Bình', region: 'vn', kind: 'news', group: G.UNI, site: 'https://tbump.edu.vn/tin-hoat-dong/', filter: VN_DENTAL },
   { name: 'Khoa Y Dược - ĐH Đà Nẵng', region: 'vn', kind: 'news', group: G.UNI, site: 'https://smp.udn.vn/tin-tuc-su-kien', filter: VN_DENTAL },
   { name: 'ĐH Quốc tế Hồng Bàng',   region: 'vn', kind: 'news', group: G.UNI, site: 'https://hiu.vn/', filter: VN_DENTAL },
-  { name: 'ĐH Nguyễn Tất Thành', region: 'vn', kind: 'news', group: G.UNI, site: 'https://khoaranghammat.ntt.edu.vn/' },
+  { name: 'ĐH Nguyễn Tất Thành', region: 'vn', kind: 'news', group: G.UNI, site: 'https://ntt.edu.vn/', filter: VN_DENTAL },
   // ===== VIET NAM - muc 5: benh vien tuyen dau =====
   { name: 'BV RHM Trung ương TP.HCM', region: 'vn', kind: 'news', group: G.HOSP, site: 'https://benhvienranghammat.vn/', insecure: true },
   { name: 'BV RHM Trung ương Hà Nội', region: 'vn', kind: 'news', group: G.HOSP, site: 'https://ranghammat.org.vn/tin-tuc' },
@@ -386,7 +386,7 @@ export function extractArticle(page, base) {
   const headLinks = [...region.matchAll(/<h[1-4]\b[^>]*>(?:(?!<\/h[1-4]>)[\s\S])*?<a\b/gi)].length;
   const nDates = (strip(region).match(/\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+\d{1,2},?\s+20\d{2}\b|\b\d{1,2}\s*[\/.-]\s*\d{1,2}\s*[\/.-]\s*20\d{2}\b/gi) || []).length;
   const bodyLinkRatio = realLen ? anchorLen(body) / realLen : 0;
-  const listing = headLinks >= 4 || (headLinks >= 2 && nDates >= 5) || bodyLinkRatio > 0.4;
+  const listing = (realLen < 600 && (headLinks >= 4 || (headLinks >= 2 && nDates >= 5))) || bodyLinkRatio > 0.4;   // bai dai that (>= 600 ky tu) khong bi coi la trang danh sach chi vi sidebar/menu nhieu link
   return { title, listing, image: image2, desc, ogType, pubMeta, realLen, metaDate: !isNaN(metaTs), ts: isNaN(ts) ? 0 : ts, byline, html: body, textLen: strip(body).length };
 }
 
