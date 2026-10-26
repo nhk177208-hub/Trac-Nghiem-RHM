@@ -29,7 +29,10 @@ const EN_CMF = new RegExp('(?<![\\p{L}])(?:dental|dentist|dentition|tooth|teeth|
 const SECTION_VN = /^\s*(hợp tác (đối ngoại|quốc tế|trong nước)|tin tức( (và|&) sự kiện| sự kiện)?|sự kiện|hoạt động( chuyên môn)?|đào tạo|nghiên cứu( khoa học)?|thông tin|giới thiệu|liên hệ|tuyển sinh|văn bản|thông báo|tin (hội|trường|viện|bệnh viện)|chuyên môn|dịch vụ|bảng giá|tài liệu|thư viện)\s*$/i;
 const LISTING_TITLE = /(\b(category|categories|archives?|tag|tags)\s*$|^\s*(category|categories|archives?|tag|chuyên mục|danh mục|lưu trữ)\s*[:\-–|]\s*|\bpage \d+\s*$)/i;   // "Business of Dentistry Category" = trang danh sach, khong phai bai
 const PROFILE_TITLE = /^\s*(?:(?:GS|PGS|TS|ThS|BSCKI{1,2}|BSNT|CKI{1,2}|BS|DS|KTV|CN)\.?\s*)+(?:\p{Lu}\p{Ll}*\s*){2,4}$/u;   // "TS. BS. Lê Hồng Vân" = trang ho so ca nhan, khong phai bai
-const JUNK_VN = /(chức năng,? nhiệm vụ|cơ cấu tổ chức|sơ đồ tổ chức|lịch sử (hình thành|phát triển)|ban lãnh đạo|lãnh đạo (các )?(đơn vị|khoa|phòng|bộ môn)|quy trình (xuất bản|phản biện|nộp bài|đăng bài)|hướng dẫn (tác giả|nộp bài)|dành cho (tác giả|người đọc|phản biện)|quy chế|mời chào giá|chào giá|yêu cầu báo giá|cung cấp hàng hóa|nhu cầu (mua|tìm đơn vị)|thư mời (báo giá|chào giá|thầu)|mời thầu|báo giá|chọn nhà thầu|lựa chọn nhà thầu|kết quả lựa chọn|đấu thầu|mua sắm|danh sách (thí sinh|trúng tuyển|học viên|sinh viên)|lịch (thi|học|khai giảng)|thông báo (nghỉ|tuyển sinh|tuyển dụng|điểm|lịch|về việc|v\/v)|quyết định (về|số)|công văn|biểu mẫu|đăng ký (xét tuyển|học)|tuyển (sinh|dụng))/i;
+const JUNK_VN = /(gói thầu|nhà thầu|thông báo mời|thư mời|mời quan tâm|thanh lý|yêu cầu báo giá|chức năng,? nhiệm vụ|cơ cấu tổ chức|sơ đồ tổ chức|lịch sử (hình thành|phát triển)|ban lãnh đạo|lãnh đạo (các )?(đơn vị|khoa|phòng|bộ môn)|quy trình (xuất bản|phản biện|nộp bài|đăng bài)|hướng dẫn (tác giả|nộp bài)|dành cho (tác giả|người đọc|phản biện)|quy chế|mời chào giá|chào giá|yêu cầu báo giá|cung cấp hàng hóa|nhu cầu (mua|tìm đơn vị)|thư mời (báo giá|chào giá|thầu)|mời thầu|báo giá|chọn nhà thầu|lựa chọn nhà thầu|kết quả lựa chọn|đấu thầu|mua sắm|danh sách (thí sinh|trúng tuyển|học viên|sinh viên)|lịch (thi|học|khai giảng)|thông báo (nghỉ|tuyển sinh|tuyển dụng|điểm|lịch|về việc|v\/v)|quyết định (về|số)|công văn|biểu mẫu|đăng ký (xét tuyển|học)|tuyển (sinh|dụng))/i;
+// bao gia / dau thau / mua sam: bat ca o tieu de lan than bai (than bai can >= 2 dau hieu de tranh loai nham bai chuyen mon)
+const PROCURE = /(yêu cầu báo giá|mời chào giá|chào giá|báo giá|gói thầu|nhà thầu|mời thầu|đấu thầu|dự toán|xây dựng giá|thanh lý|mời quan tâm|hồ sơ (đề xuất|yêu cầu)|sửa chữa (máy|thiết bị)|bảo trì|bảo dưỡng (máy|thiết bị)|mua sắm|cung cấp (hàng hóa|vật tư|thiết bị)|vật tư (y tế|tiêu hao)|thiết bị y tế)/gi;
+export const isProcurement = (title, text) => { title = String(title || '').normalize('NFC'); if (/(báo giá|chào giá|gói thầu|nhà thầu|mời thầu|đấu thầu|thanh lý|mời quan tâm|mua sắm|sửa chữa (máy|thiết bị)|bảo trì)/i.test(title)) return true; return ((String(text || '').normalize('NFC').slice(0, 3000).match(PROCURE) || []).length >= 3); };
 const JUNK_TITLE = /^\s*(erratum|corrigendum|correction|retraction|editorial board|cover|front cover|issue information|table of contents|in this issue|announcement|publisher'?s note|masthead|thông báo tuyển dụng|tuyển dụng)\b/i;
 // trang tong hop / landing ("Find NIDCR events, grantee news, Headlines newsletter...") khong phai bai bao: ten kieu menu + than bai toan "Read more about..." / link
 const HUB_TITLE = /^\s*(find|browse|explore|discover|search|view|see|visit|subscribe|sign up|stay (informed|connected)|welcome to|about|contact|resources? for|information for)\b[^.!?]*\b(events?|news|newsletters?|headlines|resources|publications|stories|reporters|press|media|updates|information|images)\b/i;
@@ -50,7 +53,7 @@ const hits = (re, t) => (t.match(new RegExp(re.source, 'giu')) || []).length;
 // "bai bao dang hoang": tieu de >= 4 tu, khong phai ten muc/thong bao hanh chinh/mua sam
 // tin chinh sach/di tru/phap ly khong phai tin chuyen mon nha khoa
 const OFFTOPIC_EN = /\b(visa|h-?1b|immigra\w*|tariffs?|congress\w*|senate|legislat\w*|lobby\w*|election|executive order|proposed rule|lawsuit|antitrust|union(ize|izing)?)\b/i;
-export const isArticleTitle = t => { t = String(t || '').trim(); return t.split(/\s+/).length >= 4 && !JUNK_TITLE.test(t) && !SECTION_VN.test(t) && !JUNK_VN.test(t) && !PROFILE_TITLE.test(t) && !LISTING_TITLE.test(t) && !OFFTOPIC_EN.test(t); };
+export const isArticleTitle = t => { t = String(t || '').normalize('NFC').trim(); return t.split(/\s+/).length >= 4 && !JUNK_TITLE.test(t) && !SECTION_VN.test(t) && !JUNK_VN.test(t) && !PROFILE_TITLE.test(t) && !LISTING_TITLE.test(t) && !OFFTOPIC_EN.test(t); };
 // ngon ngu: chi nhan tieng Viet va tieng Anh. Loai chu khong phai Latin (Trung/Nhat/Han/Nga/Thai/A Rap...) va cac thu tieng Latin khac (Phap/TBN/Bo/Duc/Y/Indonesia) khi nhan dien chac chan
 const NONLATIN = /[\u0400-\u04FF\u0590-\u06FF\u0900-\u0DFF\u0E00-\u0EFF\u1100-\u11FF\u3040-\u30FF\u3400-\u9FFF\uAC00-\uD7AF]/gu;
 const W = x => new Set(x.split(' '));
@@ -92,36 +95,36 @@ const G = {
 };
 const GUIDE_SOURCES = [
   // ===== QUOC TE - muc 4: tin tuc / thuong mai =====
-  { name: 'Dental Tribune',         region: 'intl', kind: 'news', group: G.NEWS, feed: 'https://www.dental-tribune.com/feed/', site: 'https://www.dental-tribune.com/' },
+  { name: 'Dental Tribune', region: 'intl', kind: 'news', group: G.NEWS, feed: 'https://www.dental-tribune.com/news/feed/', site: 'https://www.dental-tribune.com/news/', ua: 'browser' },
   { name: 'Inside Dentistry',       region: 'intl', kind: 'news', group: G.NEWS, site: 'https://www.insidedentistry.net/' },
-  { name: 'Dental Update',          region: 'intl', kind: 'news', group: G.NEWS, site: 'https://dental-update.co.uk/', ua: 'browser' },
+  { name: 'Dental Update', region: 'intl', kind: 'news', group: G.NEWS, site: 'https://www.dental-update.co.uk/articles', ua: 'browser', slow: true },
   { name: 'DentistryIQ',            region: 'intl', kind: 'news', group: G.NEWS, site: 'https://www.dentistryiq.com/' },
   { name: 'Dentaltown',             region: 'intl', kind: 'news', group: G.NEWS, site: 'https://www.dentaltown.com/' },
   { name: 'Dentistry Today',        region: 'intl', kind: 'news', group: G.NEWS, feed: 'https://www.dentistrytoday.com/feed/', site: 'https://www.dentistrytoday.com/' },
   { name: 'Dentistry.co.uk',        region: 'intl', kind: 'news', group: G.NEWS, feed: 'https://dentistry.co.uk/feed/', site: 'https://dentistry.co.uk/' },
   // ===== QUOC TE - muc 2: hiep hoi / to chuc =====
   { name: 'ADA News',               region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://adanews.ada.org/' },
-  { name: 'FDI World Dental Federation', region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.fdiworlddental.org/node/190' },
+  { name: 'FDI World Dental Federation', region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.fdiworlddental.org/latest-news', ua: 'browser' },
   { name: 'IADR',                   region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.iadr.org/news' },
   { name: 'ADEE',                   region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://adee.org/' },
   { name: 'ITI',                    region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.iti.org/' },
   { name: 'EAO',                    region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.eao.org/' },
-  { name: 'Academy of Osseointegration', region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.osseo.org/', ua: 'browser' },
+  { name: 'Academy of Osseointegration', region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://osseo.org/news/', ua: 'browser', slow: true },
   { name: 'WFO (Orthodontists)',    region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.wfo.org/' },
   { name: 'AAO (Orthodontists)',    region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.aaoinfo.org/' },
-  { name: 'IAOMS',                  region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.iaoms.org/' },
+  { name: 'IAOMS', region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.iaoms.org/latest-news/' },
   { name: 'AAOMS',                  region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.aaoms.org/' },
-  { name: 'AO Foundation (CMF)',    region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.aofoundation.org/', filter: EN_CMF },
+  { name: 'AO Foundation (CMF)', region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.aofoundation.org/cmf/about-aocmf/news', filter: EN_CMF },
   { name: 'EFP',                    region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.efp.org/news-events/news/' },
-  { name: 'AAP (Periodontology)',   region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.perio.org/' },
+  { name: 'AAP (Periodontology)', region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.perio.org/about-aap/newsroom/', ua: 'browser' },
   { name: 'AAE',                    region: 'intl', kind: 'news', group: G.ASSOC, feed: 'https://newsroom.aae.org/feed/', site: 'https://newsroom.aae.org/' },
-  { name: 'APDF / APRO',           region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://asiapacificdf.com/' },
+  { name: 'APDF / APRO', region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://apdcvietnam2026.com/en/news/', ua: 'browser', slow: true },
   { name: 'ICP (Prosthodontists)',  region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://icp-org.com/' },
   { name: 'EOS (Orthodontic Society)', region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.eoseurope.org/' },
   // NIDCR (NIH): vien nghien cuu nha khoa nha nuoc My -> nhom Co quan quan ly
-  { name: 'NIDCR (NIH)',            region: 'intl', kind: 'news', group: G.GOV, feed: 'https://www.nidcr.nih.gov/news-events/news/rss.xml', site: 'https://www.nidcr.nih.gov/news-events/nidcr-news' },
+  { name: 'NIDCR (NIH)', region: 'intl', kind: 'news', group: G.GOV, site: 'https://www.nidcr.nih.gov/news-events/nidcr-news' },
   // ===== QUOC TE - muc 1: co so du lieu (PubMed lay rieng o duoi) =====
-  { name: 'Cochrane Oral Health',   region: 'intl', kind: 'journal', group: G.DB, site: 'https://oralhealth.cochrane.org/' },
+  { name: 'Cochrane Oral Health', region: 'intl', kind: 'journal', group: G.DB, site: 'https://oralhealth.cochrane.org/our-evidence/completed-priority-reviews' },
   // ===== QUOC TE - muc 3: tap chi khoa hoc (RSS muc luc moi nhat) =====
   { name: 'J Dent Res (JDR)',       region: 'intl', kind: 'journal', group: G.JOURNAL, feed: 'https://journals.sagepub.com/action/showFeed?ui=0&mi=ehikzz&ai=2b4&jc=jdrb&type=etoc&feed=rss' },
   { name: 'JADA',                   region: 'intl', kind: 'journal', group: G.JOURNAL, feed: 'https://jada.ada.org/current.rss' },
@@ -150,46 +153,46 @@ const GUIDE_SOURCES = [
   { name: 'SpringerLink (orthodontics)',   region: 'intl', kind: 'journal', group: G.DB, feed: 'https://link.springer.com/search.rss?query=orthodontics&sortOrder=newestFirst', strict: true },
   // ResearchGate: tam an (GitHub Actions bi chan 403). Bo comment neu co proxy.
   // { name: 'ResearchGate',                  region: 'intl', kind: 'journal', group: G.DB, site: 'https://www.researchgate.net/topic/Dentistry', filter: EN_CMF },
-  { name: 'Int J Oral Maxillofac Implants (IJOMI)', region: 'intl', kind: 'journal', group: G.JOURNAL, site: 'https://www.quintessence-publishing.com/usa/en/journal/the-international-journal-of-oral-maxillofacial-implants', ua: 'browser' },
+  { name: 'Int J Oral Maxillofac Implants (IJOMI)', region: 'intl', kind: 'journal', group: G.JOURNAL, site: 'https://www.quintessence-publishing.com/usa/en/journal/the-international-journal-of-oral-maxillofacial-implants/preprint', ua: 'browser' },
   // ===== QUOC TE - muc 5: trien lam / dai hoi =====
-  { name: 'IDS Cologne',            region: 'intl', kind: 'news', group: G.EVENT, site: 'https://www.english.ids-cologne.de/' },
-  { name: 'GNYDM',                  region: 'intl', kind: 'news', group: G.EVENT, site: 'https://www.gnydm.com/' },
+  { name: 'IDS Cologne', region: 'intl', kind: 'news', group: G.EVENT, site: 'https://www.english.ids-cologne.de/press/press-releases/' },
+  { name: 'GNYDM', region: 'intl', kind: 'news', group: G.EVENT, site: 'https://www.gnydm.com/media-press/' },
   { name: 'AEEDC Dubai',            region: 'intl', kind: 'news', group: G.EVENT, site: 'https://www.aeedc.com/' },
   { name: 'EuroPerio',              region: 'intl', kind: 'news', group: G.EVENT, site: 'https://www.efp.org/europerio/' },
   { name: 'Chicago Midwinter Meeting', region: 'intl', kind: 'news', group: G.EVENT, site: 'https://www.cds.org/' },
 
   // ===== VIET NAM - muc 1: co quan quan ly nha nuoc =====
-  { name: 'Bộ Y tế',                region: 'vn', kind: 'news', group: G.GOV, site: 'https://moh.gov.vn/', filter: VN_DENTAL, slow: true },
+  { name: 'Bộ Y tế', region: 'vn', kind: 'news', group: G.GOV, site: 'https://moh.gov.vn/tin-lien-quan', filter: VN_DENTAL, ua: 'browser', slow: true, insecure: true },
   { name: 'Cục Quản lý KCB',        region: 'vn', kind: 'news', group: G.GOV, site: 'https://kcb.vn/', filter: VN_DENTAL },
   // ===== VIET NAM - muc 2: tap chi hoc thuat =====
-  { name: 'Tạp chí Răng Hàm Mặt VN', region: 'vn', kind: 'journal', group: G.VJOURNAL, feed: 'https://vjol.info.vn/tcranghammat/gateway/plugin/WebFeedGatewayPlugin/rss2', site: 'https://vjol.info.vn/tcranghammat/vi/issue/archive' },
+  { name: 'Tạp chí Răng Hàm Mặt VN', region: 'vn', kind: 'journal', group: G.VJOURNAL, site: 'https://vjol.info.vn/index.php/tcranghammat/issue/current', insecure: true },
   { name: 'Tạp chí Y học Việt Nam', region: 'vn', kind: 'journal', group: G.VJOURNAL, feed: 'https://tapchiyhocvietnam.vn/index.php/vmj/gateway/plugin/WebFeedGatewayPlugin/rss2', site: 'https://tapchiyhocvietnam.vn/', filter: VN_DENTAL },
-  { name: 'Tạp chí Y học TP.HCM',   region: 'vn', kind: 'journal', group: G.VJOURNAL, site: 'https://tapchiyhoctphcm.vn/', filter: VN_DENTAL },
+  { name: 'Tạp chí Y học TP.HCM', region: 'vn', kind: 'journal', group: G.VJOURNAL, feed: 'https://ojs.tapchiyhoctphcm.vn/index.php/hcjmm/gateway/plugin/WebFeedGatewayPlugin/rss2', site: 'https://ojs.tapchiyhoctphcm.vn/index.php/hcjmm/issue/current', filter: VN_DENTAL, insecure: true },
   { name: 'Tạp chí Nghiên cứu Y học', region: 'vn', kind: 'journal', group: G.VJOURNAL, feed: 'https://tapchinghiencuuyhoc.vn/index.php/tcncyh/gateway/plugin/WebFeedGatewayPlugin/rss2', site: 'https://tapchinghiencuuyhoc.vn/', filter: VN_DENTAL },
   { name: 'Tạp chí Y Dược học Cần Thơ', region: 'vn', kind: 'journal', group: G.VJOURNAL, site: 'https://tapchi.ctump.edu.vn/', filter: VN_DENTAL },
-  { name: 'Tạp chí Y Dược Huế',     region: 'vn', kind: 'journal', group: G.VJOURNAL, site: 'https://jmp.huemed-univ.edu.vn/', filter: VN_DENTAL },
+  { name: 'Tạp chí Y Dược Huế', region: 'vn', kind: 'journal', group: G.VJOURNAL, feed: 'https://huejmp.vn/index.php/jmp/gateway/plugin/WebFeedGatewayPlugin/rss2', site: 'https://huejmp.vn/', filter: VN_DENTAL },
   // ===== VIET NAM - muc 3: hoi chuyen khoa =====
-  { name: 'Hội RHM Việt Nam (VOSA)', region: 'vn', kind: 'news', group: G.VASSOC, site: 'https://vosa.org.vn/trang-tin-tuc' },
+  { name: 'Hội RHM Việt Nam (VOSA)', region: 'vn', kind: 'news', group: G.VASSOC, site: 'https://vosa.org.vn/tin-tuc' },
   { name: 'Hội RHM TP.HCM (HOSA)',  region: 'vn', kind: 'news', group: G.VASSOC, site: 'https://hoiranghammat.vn/', off: 'chua tim duoc ten mien dung' },
-  { name: 'HSDI (Cấy ghép Nha khoa TP.HCM)', region: 'vn', kind: 'news', group: G.VASSOC, site: 'https://implanthcm.com/' },
+  { name: 'HSDI (Cấy ghép Nha khoa TP.HCM)', region: 'vn', kind: 'news', group: G.VASSOC, site: 'https://implanthcm.com/home/category?slug=bai-viet-chuyen-mon' },
   // ===== VIET NAM - hoi nghi / trien lam (VIDEC do VOSA to chuc) =====
-  { name: 'VIDEC',                  region: 'vn', kind: 'news', group: G.EVENT, site: 'https://videc.vn/' },
+  { name: 'VIDEC', region: 'vn', kind: 'news', group: G.EVENT, site: 'https://videc.vn/', ua: 'browser', slow: true },
   { name: 'HIDEC',                  region: 'vn', kind: 'news', group: G.EVENT, site: 'https://hidec.vn/', off: 'chua tim duoc ten mien dung' },
-  { name: 'HAIDEC',                 region: 'vn', kind: 'news', group: G.EVENT, site: 'https://apdcvietnam2026.com/' },
+  { name: 'HAIDEC', region: 'vn', kind: 'news', group: G.EVENT, site: 'https://apdcvietnam2026.com/en/news/', ua: 'browser', slow: true },
   // ===== VIET NAM - muc 4: truong dai hoc y duoc =====
-  { name: 'Viện Đào tạo RHM - ĐH Y Hà Nội', region: 'vn', kind: 'news', group: G.UNI, site: 'https://vrhm.edu.vn/' },
-  { name: 'ĐH Y Dược Huế',          region: 'vn', kind: 'news', group: G.UNI, site: 'https://huemed-univ.edu.vn/', filter: VN_DENTAL },
-  { name: 'ĐH Y Dược Cần Thơ',      region: 'vn', kind: 'news', group: G.UNI, site: 'https://ctump.edu.vn/', filter: VN_DENTAL, insecure: true },
-  { name: 'ĐH Y khoa Phạm Ngọc Thạch', region: 'vn', kind: 'news', group: G.UNI, site: 'https://pnt.edu.vn/', filter: VN_DENTAL },
-  { name: 'Khoa RHM - ĐH Y Dược TP.HCM', region: 'vn', kind: 'news', group: G.UNI, site: 'https://dent.ump.edu.vn/', filter: VN_DENTAL },
+  { name: 'Viện Đào tạo RHM - ĐH Y Hà Nội', region: 'vn', kind: 'news', group: G.UNI, site: 'https://vrhm.edu.vn/default.aspx', insecure: true },
+  { name: 'ĐH Y Dược Huế', region: 'vn', kind: 'news', group: G.UNI, site: 'https://huemed-univ.edu.vn/tin-tuc/tin-tuc-su-kien', filter: VN_DENTAL },
+  { name: 'ĐH Y Dược Cần Thơ', region: 'vn', kind: 'news', group: G.UNI, site: 'https://www.ctump.edu.vn/tin-tuc-su-kien_portal_22.html', insecure: true },
+  { name: 'ĐH Y khoa Phạm Ngọc Thạch', region: 'vn', kind: 'news', group: G.UNI, site: 'https://pnt.edu.vn/vi/su-kien-hoat-dong', filter: VN_DENTAL },
+  { name: 'Khoa RHM - ĐH Y Dược TP.HCM', region: 'vn', kind: 'news', group: G.UNI, site: 'https://dent.ump.edu.vn/' },
   { name: 'ĐH Y Dược Hải Phòng',    region: 'vn', kind: 'news', group: G.UNI, site: 'https://hpmu.edu.vn/', filter: VN_DENTAL },
-  { name: 'ĐH Y Dược Thái Bình',    region: 'vn', kind: 'news', group: G.UNI, site: 'https://tbump.edu.vn/', filter: VN_DENTAL },
-  { name: 'Khoa Y Dược - ĐH Đà Nẵng', region: 'vn', kind: 'news', group: G.UNI, site: 'https://smp.udn.vn/', filter: VN_DENTAL },
+  { name: 'ĐH Y Dược Thái Bình', region: 'vn', kind: 'news', group: G.UNI, site: 'https://tbump.edu.vn/tin-hoat-dong/', filter: VN_DENTAL },
+  { name: 'Khoa Y Dược - ĐH Đà Nẵng', region: 'vn', kind: 'news', group: G.UNI, site: 'https://smp.udn.vn/tin-tuc-su-kien', filter: VN_DENTAL },
   { name: 'ĐH Quốc tế Hồng Bàng',   region: 'vn', kind: 'news', group: G.UNI, site: 'https://hiu.vn/', filter: VN_DENTAL },
-  { name: 'ĐH Nguyễn Tất Thành',    region: 'vn', kind: 'news', group: G.UNI, site: 'https://ntt.edu.vn/', filter: VN_DENTAL },
+  { name: 'ĐH Nguyễn Tất Thành', region: 'vn', kind: 'news', group: G.UNI, site: 'https://khoaranghammat.ntt.edu.vn/' },
   // ===== VIET NAM - muc 5: benh vien tuyen dau =====
   { name: 'BV RHM Trung ương TP.HCM', region: 'vn', kind: 'news', group: G.HOSP, site: 'https://benhvienranghammat.vn/', insecure: true },
-  { name: 'BV RHM Trung ương Hà Nội', region: 'vn', kind: 'news', group: G.HOSP, site: 'https://ranghammat.org.vn/' },
+  { name: 'BV RHM Trung ương Hà Nội', region: 'vn', kind: 'news', group: G.HOSP, site: 'https://ranghammat.org.vn/tin-tuc' },
   { name: 'BV RHM TP.HCM',          region: 'vn', kind: 'news', group: G.HOSP, site: 'https://bvranghammat.com/' },
 ];
 
@@ -222,7 +225,7 @@ const decode = s => s.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (m, e) => {
   return ENT[e] ?? ENT[e.toLowerCase()] ?? m;
 });
 const unCdata = s => s.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1');
-const strip = s => { let t = unCdata(s); for (let k = 0; k < 3; k++) { const u = decode(t.replace(/<[^>]*>/g, ' ')); if (u === t) break; t = u; } return t.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim(); };
+const strip = s => { let t = unCdata(s); for (let k = 0; k < 3; k++) { const u = decode(t.replace(/<[^>]*>/g, ' ')); if (u === t) break; t = u; } return t.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().normalize('NFC'); };
 const trunc = (s, n) => s.length > n ? s.slice(0, n).replace(/\s+\S*$/, '') + '…' : s;
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const tag = (x, name) => { const m = x.match(new RegExp('<' + name + '(?:\\s[^>]*)?>([\\s\\S]*?)</' + name + '>', 'i')); return m ? m[1] : ''; };
@@ -237,6 +240,8 @@ function cleanUrl(u) {
 }
 
 const BROWSER_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
+const BROWSER_HDR = { 'Sec-Ch-Ua': '"Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"', 'Sec-Ch-Ua-Mobile': '?0', 'Sec-Ch-Ua-Platform': '"Windows"', 'Sec-Fetch-Dest': 'document', 'Sec-Fetch-Mode': 'navigate', 'Sec-Fetch-Site': 'none', 'Upgrade-Insecure-Requests': '1' };
+const hdrs = (accept, opt) => ({ 'User-Agent': opt.ua === 'browser' ? BROWSER_UA : UA, Accept: accept, 'Accept-Language': 'vi,en;q=0.8', ...(opt.ua === 'browser' ? BROWSER_HDR : {}) });
 // opt: { insecure, slow, ua } lay tu cau hinh nguon. insecure = bo kiem tra chuoi chung chi (chi dung cho vai site VN thieu intermediate cert, chi doc tin cong khai)
 async function get(url, accept = '*/*', opt = {}) {
   let err;
@@ -254,7 +259,7 @@ function getNode(url, accept, opt, hops = 0) {
   return new Promise((resolve, reject) => {
     const u = new URL(url); const lib = u.protocol === 'http:' ? http : https;
     const req = lib.request(u, { method: 'GET', timeout: opt.slow ? 60000 : 40000, rejectUnauthorized: !opt.insecure,
-      headers: { 'User-Agent': opt.ua === 'browser' ? BROWSER_UA : UA, Accept: accept, 'Accept-Language': 'vi,en;q=0.8' } }, res => {
+      headers: hdrs(accept, opt) }, res => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location && hops < 5) { res.resume(); return resolve(getNode(new URL(res.headers.location, url).toString(), accept, opt, hops + 1)); }
       if (res.statusCode < 200 || res.statusCode >= 300) { res.resume(); return reject(new Error('HTTP ' + res.statusCode)); }
       const ch = []; res.on('data', c => ch.push(c)); res.on('end', () => resolve(decodeBuf(Buffer.concat(ch), res.headers['content-type']))); res.on('error', reject);
@@ -267,7 +272,7 @@ function getNode(url, accept, opt, hops = 0) {
 async function get1(url, accept = '*/*', opt = {}) {
   const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 40000);
   try {
-    const r = await fetch(url, { headers: { 'User-Agent': opt.ua === 'browser' ? BROWSER_UA : UA, Accept: accept, 'Accept-Language': 'vi,en;q=0.8' }, signal: ctl.signal, redirect: 'follow' });
+    const r = await fetch(url, { headers: hdrs(accept, opt), signal: ctl.signal, redirect: 'follow' });
     if (!r.ok) throw new Error('HTTP ' + r.status);
     const buf = Buffer.from(await r.arrayBuffer());
     let cs = ((r.headers.get('content-type') || '').match(/charset=([\w-]+)/i) || [])[1] || (buf.subarray(0, 2048).toString('latin1').match(/<meta[^>]+charset=["']?([\w-]+)/i) || [])[1] || 'utf-8';
@@ -400,15 +405,20 @@ export function parseFeed(xml, source, opt = {}) {
     }
     if (!/^https?:/i.test(link)) link = strip(tag(b, 'guid'));
     link = cleanUrl(link);
-    const dRaw = strip(tag(b, 'pubDate') || tag(b, 'published') || tag(b, 'updated') || tag(b, 'dc:date') || tag(b, 'prism:publicationDate'));
-    const ts = Date.parse(dRaw);
     const rawBody = tag(b, 'content:encoded') || tag(b, 'description') || tag(b, 'summary') || tag(b, 'content');
+    const dRaw = strip(tag(b, 'pubDate') || tag(b, 'published') || tag(b, 'updated') || tag(b, 'dc:date') || tag(b, 'prism:publicationDate') || tag(b, 'prism:coverDate'));
+    let ts = Date.parse(dRaw);
+    if (isNaN(ts)) {   // ScienceDirect: ngay nam trong <description> ("Publication date: ...", "Available online ...")
+      const dm = strip(rawBody).match(/(?:Publication date|Available online)\s*[:\-]?\s*([A-Za-z]+\s+\d{1,2},?\s+20\d{2}|\d{1,2}\s+[A-Za-z]+\s+20\d{2}|[A-Za-z]+\s+20\d{2})/i);
+      ts = dm ? Date.parse(dm[1]) : textDate(strip(rawBody));
+      if (isNaN(ts) && opt.kind === 'journal') ts = Date.now();
+    }
     let summary = strip(rawBody).replace(/\s*(The post|Read more|Continue reading).*$/i, '');
     if (summary.slice(0, 30).toLowerCase() === title.slice(0, 30).toLowerCase()) summary = '';   // mo ta chi lap lai tieu de (Google News)
     let image = attr(b, 'media:content', 'url') || attr(b, 'media:thumbnail', 'url');
     if (!image) { const e = b.match(/<enclosure\b[^>]*>/i); if (e && /image/i.test(e[0])) image = attr(e[0], 'enclosure', 'url'); }
     if (!image) { const m = decode(unCdata(rawBody)).match(/<img[^>]+src=["']([^"']+)["']/i); if (m) image = m[1]; }
-    if (!title || !link || !ts) continue;
+    if (!title || !link || !ts || isNaN(ts)) continue;
     out.push({
       id: 'n' + sha(link), type: opt.kind === 'journal' ? 'research' : 'news', region: opt.region || 'intl', group: opt.group || '', title: trunc(title, 220), url: link, source: srcName,
       date: new Date(ts).toISOString(), summary: trunc(summary, 420), image: /^https?:/i.test(image) ? image : '',
@@ -440,9 +450,13 @@ export function extractAnchors(html, base, max = SCRAPE_PER_SITE * 3) {
   for (const m of body.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi)) {
     const tagA = '<a ' + m[1] + '>';
     const href = cleanUrl(abs(attr(tagA, 'a', 'href'), base));
-    let text = strip(m[2]); if (!text) text = decode(attr(tagA, 'a', 'title') || '');
-    if (!href || seen.has(href) || text.length < 12) continue;
+    let text = strip(m[2]); if (!text) text = decode(attr(tagA, 'a', 'title') || attr(m[2], 'img', 'alt') || '');
+    if (!href || seen.has(href)) continue;
     let u; try { u = new URL(href); } catch { continue; }
+    if (text.length < 12) {   // link "Chi tiet"/"Xem tiep"/anh: neu URL giong bai viet thi giu (tieu de that se lay lai khi mo trang)
+      if (articleLike(u) || /\/(article\/view|home\/detail|tin-tuc|su-kien)\b/i.test(u.pathname)) text = u.pathname.split('/').pop().replace(/[-_]/g, ' ');
+      else continue;
+    }
     const h = u.hostname.replace(/^www\./, '');
     if (!(h === host || h.endsWith('.' + host) || host.endsWith('.' + h))) continue;
     if (NAV_BAD.test(u.pathname + u.search) || u.pathname.length < 4 || u.pathname === basePath) continue;
@@ -551,9 +565,10 @@ async function enrichScraped(items, s, isKnown, minTs) {
     const title = trunc((page.title || '').replace(/\s*[|–-]\s*[^|–-]{3,40}$/, ''), 220);
     if (title.length < 8 || page.textLen < 100) return;                            // khong phai bai viet
     if (page.listing || isHubPage(title, page.html)) return;                                                        // trang danh sach/chuyen muc (Category, Archive...) -> bo
-    if (page.realLen < 300) return;                                                // khong co than bai that (trang muc/landing chi co mo ta) -> bo
+    if (page.realLen < (s.kind === 'journal' ? 100 : 220)) return;                                                // khong co than bai that (trang muc/landing chi co mo ta) -> bo
     if (page.ogType === 'website' && !page.pubMeta) return;                        // trang chu/trang muc, khong phai bai
-    if (!isArticleTitle(title)) return;                                            // ten muc ("Grantee News"), thong bao hanh chinh, mua sam...
+    if (!isArticleTitle(title) || isProcurement(title, strip(page.html))) return;   // tin bao gia / dau thau / mua sam
+                                            // ten muc ("Grantee News"), thong bao hanh chinh, mua sam...
     if (!langOk(title + ' ' + (page.desc || '') + ' ' + strip(page.html).slice(0, 1500))) return;   // khong phai tieng Viet/Anh
     if (JUNK_TITLE.test(title) || !isRelevant(reFor(s), title, (page.desc || '') + ' ' + strip(page.html).slice(0, 2500), needFor(s))) return;   // phai lien quan nha khoa/RHM
     it.title = title; it.date = new Date(page.ts).toISOString();
@@ -607,7 +622,7 @@ async function main() {
     const m2 = m.slice(0, 30).toLowerCase() === t.slice(0, 30).toLowerCase() ? '' : m;
     if (t !== i.title || m2 !== (i.summary || '')) { i.title = t; i.summary = m2; fixed++; }
   }
-  const n0 = db.items.length; db.items = db.items.filter(i => i.group !== 'Khác' && !(i.type !== 'research' && isHubPage(i.title, '')) && langOk((i.title || '') + ' ' + (i.summary || '')) && (i.type === 'research' || isArticleTitle(i.title) || (i.region === 'vn' && !JUNK_TITLE.test(i.title) && !JUNK_VN.test(i.title) && !OFFTOPIC_EN.test(i.title)))); const dropped = n0 - db.items.length; fixed += dropped;
+  const n0 = db.items.length; db.items = db.items.filter(i => i.group !== 'Khác' && !(i.type !== 'research' && isProcurement(i.title, i.summary)) && !(i.type !== 'research' && isHubPage(i.title, '')) && langOk((i.title || '') + ' ' + (i.summary || '')) && (i.type === 'research' || isArticleTitle(i.title) || (i.region === 'vn' && !JUNK_TITLE.test(i.title) && !JUNK_VN.test(i.title) && !OFFTOPIC_EN.test(i.title)))); const dropped = n0 - db.items.length; fixed += dropped;
   if (dropped) log(`Da go ${dropped} tin cu tu nguon du phong`);
   if (fixed) log(`Da sua/lam sach tin cu: ${fixed}`);
   const have = new Set(db.items.map(i => i.id)); const haveUrl = new Set(db.items.map(i => i.url));
@@ -625,7 +640,7 @@ async function main() {
       let { items, via } = await collect(s, log);
       const scraped = items.length > 0 && items.every(i => i._scraped);
       if (scraped) items = await enrichScraped(items, s, i => have.has(i.id) || haveUrl.has(i.url), (s.p === 1 || s.region === 'vn') ? backTs : minTsFor(s));
-      else items = items.filter(i => isArticleTitle(i.title) && !isHubPage(i.title, i._html || '') && langOk(i.title + ' ' + (i._full || i.summary || '')) && isRelevant(reFor(s), i.title, i._full || i.summary, needFor(s)));
+      else items = items.filter(i => isArticleTitle(i.title) && !isProcurement(i.title, i._full || i.summary) && !isHubPage(i.title, i._html || '') && langOk(i.title + ' ' + (i._full || i.summary || '')) && isRelevant(reFor(s), i.title, i._full || i.summary, needFor(s)));
       const isNew = i => !have.has(i.id) && !haveUrl.has(i.url) && !haveTitle.has(normT(i.title));
       const byDate = (x, y) => Date.parse(y.date) - Date.parse(x.date);
       const freshAll = items.filter(i => isNew(i) && Date.parse(i.date) >= minTsFor(s)).sort(byDate);
