@@ -664,7 +664,9 @@ async function buildArticle(it, s) {
   let html = it._html ? stripBoiler(sanitize(it._html, it.url)) : '';
   let page = null;
   if (it._art) { page = it._art; if (page.textLen > strip(html).length) html = page.html; }
-  else if (strip(html).length < 600 || it._scraped || !it.image) {
+  else {
+    // Bai tin RSS: mo trang goc de lay anh dai dien og:image, vi anh nay thuong khong co trong feed
+    // (vi du Dentistry Today: og:image 10.08.06-AM.png khong co trong content:encoded, chi co 5 anh Figure trong bai).
     try { page = extractArticle(await get(it.url, 'text/html,*/*', s || {}), it.url); } catch { page = null; }
     if (page && page.textLen > strip(html).length) html = page.html;
   }
@@ -674,7 +676,7 @@ async function buildArticle(it, s) {
       if (page.title && page.title.length >= 15) it.title = trunc(page.title.replace(/\s*[|–-]\s*[^|–-]{3,40}$/, ''), 220);
       if (page.desc && !it.summary) it.summary = trunc(page.desc, 420);
     }
-    if (!it.image && page.image) it.image = page.image;
+    if (page.image && !badImg(page.image)) it.image = page.image;   // anh dai dien that (og:image), thay vi anh Figure dau tien trong bai
     if (page.video && !it.video) it.video = page.video;
     if (page.videoPoster && !it.videoPoster) it.videoPoster = page.videoPoster;
     if (!it.image && page.videoPoster) it.image = page.videoPoster;
