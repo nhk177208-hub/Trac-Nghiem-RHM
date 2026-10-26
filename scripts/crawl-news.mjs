@@ -31,6 +31,20 @@ const LISTING_TITLE = /(\b(category|categories|archives?|tag|tags)\s*$|^\s*(cate
 const PROFILE_TITLE = /^\s*(?:(?:GS|PGS|TS|ThS|BSCKI{1,2}|BSNT|CKI{1,2}|BS|DS|KTV|CN)\.?\s*)+(?:\p{Lu}\p{Ll}*\s*){2,4}$/u;   // "TS. BS. Lê Hồng Vân" = trang ho so ca nhan, khong phai bai
 const JUNK_VN = /(chức năng,? nhiệm vụ|cơ cấu tổ chức|sơ đồ tổ chức|lịch sử (hình thành|phát triển)|ban lãnh đạo|lãnh đạo (các )?(đơn vị|khoa|phòng|bộ môn)|quy trình (xuất bản|phản biện|nộp bài|đăng bài)|hướng dẫn (tác giả|nộp bài)|dành cho (tác giả|người đọc|phản biện)|quy chế|mời chào giá|chào giá|yêu cầu báo giá|cung cấp hàng hóa|nhu cầu (mua|tìm đơn vị)|thư mời (báo giá|chào giá|thầu)|mời thầu|báo giá|chọn nhà thầu|lựa chọn nhà thầu|kết quả lựa chọn|đấu thầu|mua sắm|danh sách (thí sinh|trúng tuyển|học viên|sinh viên)|lịch (thi|học|khai giảng)|thông báo (nghỉ|tuyển sinh|tuyển dụng|điểm|lịch|về việc|v\/v)|quyết định (về|số)|công văn|biểu mẫu|đăng ký (xét tuyển|học)|tuyển (sinh|dụng))/i;
 const JUNK_TITLE = /^\s*(erratum|corrigendum|correction|retraction|editorial board|cover|front cover|issue information|table of contents|in this issue|announcement|publisher'?s note|masthead|thông báo tuyển dụng|tuyển dụng)\b/i;
+// trang tong hop / landing ("Find NIDCR events, grantee news, Headlines newsletter...") khong phai bai bao: ten kieu menu + than bai toan "Read more about..." / link
+const HUB_TITLE = /^\s*(find|browse|explore|discover|search|view|see|visit|subscribe|sign up|stay (informed|connected)|welcome to|about|contact|resources? for|information for)\b[^.!?]*\b(events?|news|newsletters?|headlines|resources|publications|stories|reporters|press|media|updates|information|images)\b/i;
+const HUB_BODY_RM = /\b(read more|learn more|view more|see more)(\s+about)?\b/gi;
+export function isHubPage(title, html) {
+  if (HUB_TITLE.test(String(title || '').trim())) return true;
+  const h = String(html || ''); if (!h) return false;
+  const txt = h.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+  if ((txt.match(HUB_BODY_RM) || []).length >= 2) return true;                       // nhieu khoi "Read more about ..."
+  let linkLen = 0; for (const m of h.matchAll(/<a\b[^>]*>([\s\S]*?)<\/a>/gi)) linkLen += m[1].replace(/<[^>]*>/g, '').trim().length;
+  if (txt.length < 3000 && txt.length > 0 && linkLen / txt.length > 0.5) return true;   // phan lon la link
+  const ps = (h.match(/<p\b[\s\S]*?<\/p>/gi) || []).map(x => x.replace(/<[^>]*>/g, '').trim()).filter(Boolean);
+  if (ps.length >= 6 && ps.filter(x => x.length < 70).length / ps.length > 0.8 && txt.length < 1500) return true;   // toan dong ngan = menu / the tin
+  return false;
+}
 const hits = (re, t) => (t.match(new RegExp(re.source, 'giu')) || []).length;
 // lien quan = tieu de co tu khoa, hoac noi dung co >= need lan (nguon tong hop thi need = 2)
 // "bai bao dang hoang": tieu de >= 4 tu, khong phai ten muc/thong bao hanh chinh/mua sam
@@ -534,7 +548,7 @@ async function enrichScraped(items, s, isKnown, minTs) {
     if (!page.metaDate && page.ts > Date.now() + 864e5) return;                      // ngay doan tu text ma o tuong lai -> bo
     const title = trunc((page.title || '').replace(/\s*[|–-]\s*[^|–-]{3,40}$/, ''), 220);
     if (title.length < 8 || page.textLen < 100) return;                            // khong phai bai viet
-    if (page.listing) return;                                                        // trang danh sach/chuyen muc (Category, Archive...) -> bo
+    if (page.listing || isHubPage(title, page.html)) return;                                                        // trang danh sach/chuyen muc (Category, Archive...) -> bo
     if (page.realLen < 300) return;                                                // khong co than bai that (trang muc/landing chi co mo ta) -> bo
     if (page.ogType === 'website' && !page.pubMeta) return;                        // trang chu/trang muc, khong phai bai
     if (!isArticleTitle(title)) return;                                            // ten muc ("Grantee News"), thong bao hanh chinh, mua sam...
@@ -591,7 +605,7 @@ async function main() {
     const m2 = m.slice(0, 30).toLowerCase() === t.slice(0, 30).toLowerCase() ? '' : m;
     if (t !== i.title || m2 !== (i.summary || '')) { i.title = t; i.summary = m2; fixed++; }
   }
-  const n0 = db.items.length; db.items = db.items.filter(i => i.group !== 'Khác' && langOk((i.title || '') + ' ' + (i.summary || '')) && (i.type === 'research' || isArticleTitle(i.title) || (i.region === 'vn' && !JUNK_TITLE.test(i.title) && !JUNK_VN.test(i.title) && !OFFTOPIC_EN.test(i.title)))); const dropped = n0 - db.items.length; fixed += dropped;
+  const n0 = db.items.length; db.items = db.items.filter(i => i.group !== 'Khác' && !(i.type !== 'research' && isHubPage(i.title, '')) && langOk((i.title || '') + ' ' + (i.summary || '')) && (i.type === 'research' || isArticleTitle(i.title) || (i.region === 'vn' && !JUNK_TITLE.test(i.title) && !JUNK_VN.test(i.title) && !OFFTOPIC_EN.test(i.title)))); const dropped = n0 - db.items.length; fixed += dropped;
   if (dropped) log(`Da go ${dropped} tin cu tu nguon du phong`);
   if (fixed) log(`Da sua/lam sach tin cu: ${fixed}`);
   const have = new Set(db.items.map(i => i.id)); const haveUrl = new Set(db.items.map(i => i.url));
@@ -609,7 +623,7 @@ async function main() {
       let { items, via } = await collect(s, log);
       const scraped = items.length > 0 && items.every(i => i._scraped);
       if (scraped) items = await enrichScraped(items, s, i => have.has(i.id) || haveUrl.has(i.url), s.p === 1 ? backTs : minTsFor(s));
-      else items = items.filter(i => isArticleTitle(i.title) && langOk(i.title + ' ' + (i._full || i.summary || '')) && isRelevant(reFor(s), i.title, i._full || i.summary, needFor(s)));
+      else items = items.filter(i => isArticleTitle(i.title) && !isHubPage(i.title, i._html || '') && langOk(i.title + ' ' + (i._full || i.summary || '')) && isRelevant(reFor(s), i.title, i._full || i.summary, needFor(s)));
       const isNew = i => !have.has(i.id) && !haveUrl.has(i.url) && !haveTitle.has(normT(i.title));
       const byDate = (x, y) => Date.parse(y.date) - Date.parse(x.date);
       const freshAll = items.filter(i => isNew(i) && Date.parse(i.date) >= minTsFor(s)).sort(byDate);
@@ -631,7 +645,19 @@ async function main() {
   // thieu bai moi -> bu bang bai cu hon cua cac nguon uu tien 1 (moi nguon 1 bai), khong trung bai moi
   const taken = new Set([...pools.news, ...pools.research, ...pools.vn].map(i => i.url));
   const topUp = (pool, quota) => { const need = quota - pool.length; if (need <= 0) return; const cand = dedupe(old[pool === pools.vn ? 'vn' : pool === pools.research ? 'research' : 'news']).filter(i => !taken.has(i.url)); const add = pickNews(cand, need); add.forEach(i => taken.add(i.url)); pool.push(...add); if (add.length) log(`Bu ${add.length} bai cu tu nguon uu tien 1`); };
-  topUp(pools.news, NEWS_N); topUp(pools.research, RESEARCH_N); topUp(pools.vn, VN_N);
+  topUp(pools.news, NEWS_N); topUp(pools.vn, VN_N);
+  // NGHIEN CUU: moi lan chi lay tu 1 nguon, lan sau doi sang nguon ke tiep (xoay vong); nguon nao khong co bai thi bo qua
+  {
+    const rkey = i => /^PubMed/.test(i.source) ? 'PubMed' : i.source;
+    const order = [...SOURCES.filter(x => x.kind === 'journal' && x.region !== 'vn' && !x.off).map(x => x.name), 'PubMed'].sort((a, b) => a.localeCompare(b));
+    const freshR = pools.research, oldR = dedupe(old.research).filter(i => !taken.has(i.url));
+    const start = Math.max(0, order.indexOf(db.researchLast) + 1);
+    let chosen = null, list = [];
+    for (let k = 0; k < order.length && !chosen; k++) { const nm = order[(start + k) % order.length]; const f = freshR.filter(i => rkey(i) === nm); if (f.length) { chosen = nm; list = f.slice(0, 1); } }
+    for (let k = 0; k < order.length && !chosen; k++) { const nm = order[(start + k) % order.length]; const o = pickNews(oldR.filter(i => rkey(i) === nm), 1); if (o.length) { chosen = nm; list = o; log('Bu 1 bai nghien cuu cu tu nguon uu tien 1'); } }
+    pools.research = list; db.researchLast = chosen || db.researchLast;
+    log(chosen ? `Nghien cuu: luot nay lay tu nguon "${chosen}"` : 'Nghien cuu: khong nguon nao co bai moi');
+  }
   let pickedN = pickTiered(pools.news.slice(), NEWS_N), pickedR = pickTiered(pools.research.slice(), RESEARCH_N);
   let short = PER_RUN - pickedN.length - pickedR.length;       // thieu o ben nao thi lay bu tu ben kia
   if (short > 0) {
