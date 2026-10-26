@@ -233,6 +233,10 @@ const attr = (x, name, a) => { const m = x.match(new RegExp('<' + name + '\\b[^>
 const sha = s => crypto.createHash('sha1').update(s).digest('hex').slice(0, 12);
 const fname = id => id.replace(/[^a-z0-9_-]/gi, '_');
 const abs = (u, base) => { try { return new URL(decode(u).trim(), base).toString(); } catch { return ''; } };
+const pickLargestSrcsetUrl = ss => { let best = '', bestN = -1; for (const part of String(ss || '').split(',')) { const t = part.trim().split(/\s+/); if (!t[0]) continue; const d = (t[1] || '').match(/([\d.]+)(w|x)/); const n = d ? parseFloat(d[1]) : 0; if (n >= bestN) { bestN = n; best = t[0]; } } return best; };
+const absSrcset = (ss, base) => String(ss || '').split(',').map(p => { const t = p.trim().split(/\s+/); if (!t[0]) return ''; const u = abs(t[0], base); return u ? [u, ...t.slice(1)].join(' ') : ''; }).filter(Boolean).join(', ');
+const ytId = u => { const m = String(u || '').match(/(?:youtube\.com\/(?:embed\/|watch\?[^#]*v=|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{6,})/); return m ? m[1] : ''; };
+const isVideoEmbed = u => { try { const x = new URL(u); return ((x.hostname === 'www.youtube.com' || x.hostname === 'youtube.com' || x.hostname === 'www.youtube-nocookie.com' || x.hostname === 'youtube-nocookie.com') && x.pathname.startsWith('/embed/')) || (x.hostname === 'player.vimeo.com' && x.pathname.startsWith('/video/')); } catch { return false; } };
 
 function cleanUrl(u) {
   try { const x = new URL(u.trim()); [...x.searchParams.keys()].forEach(k => /^(utm_|fbclid|gclid|mc_|ref$)/i.test(k) && x.searchParams.delete(k)); x.hash = ''; return x.toString(); }
@@ -285,12 +289,13 @@ async function get1(url, accept = '*/*', opt = {}) {
 async function pool(items, n, fn) { const q = items.slice(); await Promise.all(Array.from({ length: Math.min(n, q.length) }, async () => { while (q.length) { const it = q.shift(); try { await fn(it); } catch (e) { if (process.env.NEWS_DEBUG) console.log('  ! ' + (e.message || e)); } } })); }
 
 /* ---------- lam sach HTML (khong dung thu vien; chi giu whitelist) ---------- */
-const OK_TAGS = new Set(['p', 'br', 'h2', 'h3', 'h4', 'ul', 'ol', 'li', 'blockquote', 'strong', 'b', 'em', 'i', 'u', 'a', 'img', 'figure', 'figcaption', 'table', 'thead', 'tbody', 'tr', 'td', 'th', 'sup', 'sub']);
-const VOID = new Set(['br', 'img']);
+const OK_TAGS = new Set(['p', 'br', 'h2', 'h3', 'h4', 'ul', 'ol', 'li', 'blockquote', 'strong', 'b', 'em', 'i', 'u', 'a', 'img', 'figure', 'figcaption', 'table', 'thead', 'tbody', 'tr', 'td', 'th', 'sup', 'sub', 'video', 'source', 'picture', 'iframe']);
+const VOID = new Set(['br', 'img', 'source']);
 const BAD_IMG = /logo|icon|avatar|pixel|spacer|blank|1x1|sprite|emoji|badge|share|button|loading|placeholder/i;
 const badImg = u => BAD_IMG.test(String(u).split(/[?#]/)[0].split('/').pop());   // chi xet ten file, khong xet ca duong dan (tranh loai nham anh bai that)
 export function sanitize(html, base) {
-  html = html.replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style|noscript|svg|iframe|object|embed|form|button|select|textarea|template)\b[\s\S]*?<\/\1\s*>/gi, '');
+  let lastPicSrcset = '';
+  html = html.replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style|noscript|svg|object|embed|form|button|select|textarea|template)\b[\s\S]*?<\/\1\s*>/gi, '');
   const out = []; const stack = []; const re = /<(\/?)([a-zA-Z][a-zA-Z0-9]*)\b([^>]*)>|([^<]+)|</g; let m;
   while ((m = re.exec(html))) {
     if (m[4] !== undefined) { out.push(m[4]); continue; }
@@ -306,9 +311,37 @@ export function sanitize(html, base) {
     if (t === 'img') {
       const raw = '<img ' + m[3] + '>';
       let src = attr(raw, 'img', 'data-src') || attr(raw, 'img', 'data-lazy-src') || attr(raw, 'img', 'data-original') || attr(raw, 'img', 'src');
-      if (!src) { const ss = attr(raw, 'img', 'srcset') || attr(raw, 'img', 'data-srcset'); if (ss) src = ss.split(',').pop().trim().split(/\s+/)[0]; }
+      if (!src) { const ss = attr(raw, 'img', 'srcset') || attr(raw, 'img', 'data-srcset') || lastPicSrcset; if (ss) src = pickLargestSrcsetUrl(ss); lastPicSrcset = ''; }
       src = abs(src, base); if (!/^https?:/i.test(src) || badImg(src)) continue;
       out.push('<img src="' + esc(src) + '" alt="' + esc(attr(raw, 'img', 'alt')) + '" loading="lazy">'); continue;
+    }
+    if (t === 'picture') { out.push('<picture>'); stack.push('picture'); continue; }
+    if (t === 'source') {
+      const raw = '<source ' + m[3] + '>';
+      const ss = attr(raw, 'source', 'srcset') || attr(raw, 'source', 'data-srcset');
+      const sr = attr(raw, 'source', 'src');
+      const ty = attr(raw, 'source', 'type');
+      if (ss && (!ty || /^(image|video)\//i.test(ty))) { lastPicSrcset = absSrcset(ss, base); out.push('<source srcset="' + esc(absSrcset(ss, base)) + '"' + (ty ? ' type="' + esc(ty) + '"' : '') + '>'); }
+      else if (sr && /^https?:/i.test(abs(sr, base)) && (!ty || /^(image|video)\//i.test(ty))) out.push('<source src="' + esc(abs(sr, base)) + '"' + (ty ? ' type="' + esc(ty) + '"' : '') + '>');
+      continue;
+    }
+    if (t === 'video') {
+      const raw = '<video ' + m[3] + '>';
+      let vs = attr(raw, 'video', 'data-src') || attr(raw, 'video', 'src');
+      vs = vs ? abs(vs, base) : '';
+      let vp = attr(raw, 'video', 'poster');
+      vp = vp ? abs(vp, base) : '';
+      if (vp && badImg(vp)) vp = '';
+      out.push('<video controls preload="metadata"' + (vs && /^https?:/i.test(vs) ? ' src="' + esc(vs) + '"' : '') + (vp && /^https?:/i.test(vp) ? ' poster="' + esc(vp) + '"' : '') + '>');
+      stack.push('video'); continue;
+    }
+    if (t === 'iframe') {
+      const raw = '<iframe ' + m[3] + '>';
+      const is = attr(raw, 'iframe', 'src');
+      const iu = is ? abs(is, base) : '';
+      if (!iu || !isVideoEmbed(iu)) continue;
+      out.push('<iframe src="' + esc(iu) + '" loading="lazy" referrerpolicy="no-referrer" allowfullscreen sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"></iframe>');
+      continue;
     }
     out.push('<' + t + '>'); if (!VOID.has(t)) stack.push(t);
   }
@@ -331,7 +364,7 @@ function textDate(s) {
 
 /* ---------- trich noi dung bai bao tu HTML trang (heuristic, khong can thu vien) ---------- */
 export function extractArticle(page, base) {
-  let h = page.replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style|noscript|svg|iframe|nav|footer|aside)\b[\s\S]*?<\/\1\s*>/gi, '');
+  let h = page.replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style|noscript|svg|nav|footer|aside)\b[\s\S]*?<\/\1\s*>/gi, '');
   const metaOf = (re) => { const m = page.match(re); return m ? decode(m[1]).trim() : ''; };
   const og = n => metaOf(new RegExp('<meta[^>]+(?:property|name)=["\']' + n + '["\'][^>]*content=["\']([^"\']*)["\']', 'i')) || metaOf(new RegExp('<meta[^>]+content=["\']([^"\']*)["\'][^>]*(?:property|name)=["\']' + n + '["\']', 'i'));
   let title = og('og:title') || strip(tag(page, 'title'));
@@ -353,12 +386,31 @@ export function extractArticle(page, base) {
     if (!best || cur.len > best.len) best = cur;
   }
   let rs = best ? best.i : 0;   // lay them anh/hinh dung ngay truoc doan van dau (anh mo bai thuong nam ngoai the <p>)
-  if (best) { const before = region.slice(Math.max(0, best.i - 2500), best.i); const k = before.search(/<(figure|picture|img)\b/i); if (k >= 0) rs = Math.max(0, best.i - 2500) + k; }
+  if (best) { const before = region.slice(Math.max(0, best.i - 2500), best.i); const k = before.search(/<(figure|picture|img|video|iframe)\b/i); if (k >= 0) rs = Math.max(0, best.i - 2500) + k; }
   let raw = best && best.len >= 60 ? region.slice(rs, best.e) : '';
   for (let k = 0; k < 6; k++) { const m = raw.match(/^\s*<p\b[^>]*>[\s\S]*?<\/p>/i); if (m && strip(m[0]).length < 50) raw = raw.slice(m[0].length); else break; }
   let body = raw ? sanitize(raw, base) : '';
+  if (body) {   // anh/video nam ngoai cum doan van chinh (sau quang cao, muc lien quan...) cung giu lai, theo thu tu xuat hien trong bai
+    const haveSrc = new Set([...body.matchAll(/<(?:img|video|source|iframe)[^>]*\bsrc=["']([^"']+)["']/gi)].map(m => decode(m[1])));
+    let added = 0;
+    for (const bm of region.matchAll(/<(figure|picture|video|iframe)\b[\s\S]*?<\/\1\s*>/gi)) {
+      if (added >= 12) break;
+      const clean = sanitize(bm[0], base);
+      if (!clean) continue;
+      const srcs = [...clean.matchAll(/<(?:img|video|source|iframe)[^>]*\bsrc=["']([^"']+)["']/gi)].map(m => decode(m[1]));
+      if (srcs.length && srcs.every(x => haveSrc.has(x))) continue;
+      if (!srcs.length && body.includes(clean)) continue;
+      body += clean; srcs.forEach(x => haveSrc.add(x)); added++;
+    }
+  }
   const realLen = strip(body).length;
   let image2 = image; if (!image2 || badImg(image2)) { const m1 = body.match(/<img src="([^"]+)"/); image2 = m1 ? decode(m1[1]) : ''; }                       // do dai doan van that (chua tinh mo ta du phong)
+  let video = '', videoPoster = '';
+  const vBlock = body.match(/<video\b[\s\S]*?<\/video>/i);
+  if (vBlock) { videoPoster = (vBlock[0].match(/\bposter=["']([^"']+)["']/i) || [])[1] || ''; video = (vBlock[0].match(/\bsrc=["']([^"']+)["']/i) || [])[1] || ''; }
+  if (!video) { const f = body.match(/<iframe[^>]*\bsrc=["']([^"']+)["']/i); if (f) video = decode(f[1]); }
+  if (!videoPoster && video) { const y = ytId(video); if (y) videoPoster = 'https://i.ytimg.com/vi/' + y + '/hqdefault.jpg'; }
+  if (!image2 && videoPoster && !badImg(videoPoster)) image2 = videoPoster;
   if (!body && desc) body = '<p>' + esc(desc) + '</p>';
   // tieu de la ten muc ("Hợp tác đối ngoại") hoac < 4 tu ma khong co h1 dung: KHONG bo bai, tu dat tieu de tu h2 / mo ta / cau dau cua bai
   if (SECTION_VN.test(title) || title.split(/\s+/).length < 4) {
@@ -387,7 +439,7 @@ export function extractArticle(page, base) {
   const nDates = (strip(region).match(/\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+\d{1,2},?\s+20\d{2}\b|\b\d{1,2}\s*[\/.-]\s*\d{1,2}\s*[\/.-]\s*20\d{2}\b/gi) || []).length;
   const bodyLinkRatio = realLen ? anchorLen(body) / realLen : 0;
   const listing = (realLen < 600 && (headLinks >= 4 || (headLinks >= 2 && nDates >= 5))) || bodyLinkRatio > 0.4;   // bai dai that (>= 600 ky tu) khong bi coi la trang danh sach chi vi sidebar/menu nhieu link
-  return { title, listing, image: image2, desc, ogType, pubMeta, realLen, metaDate: !isNaN(metaTs), ts: isNaN(ts) ? 0 : ts, byline, html: body, textLen: strip(body).length };
+  return { title, listing, image: image2, desc, ogType, pubMeta, realLen, metaDate: !isNaN(metaTs), ts: isNaN(ts) ? 0 : ts, byline, html: body, textLen: strip(body).length, video, videoPoster };
 }
 
 /* ---------- RSS / Atom ---------- */
@@ -415,13 +467,23 @@ export function parseFeed(xml, source, opt = {}) {
     }
     let summary = strip(rawBody).replace(/\s*(The post|Read more|Continue reading).*$/i, '');
     if (summary.slice(0, 30).toLowerCase() === title.slice(0, 30).toLowerCase()) summary = '';   // mo ta chi lap lai tieu de (Google News)
-    let image = attr(b, 'media:content', 'url') || attr(b, 'media:thumbnail', 'url');
+    let image = '';
+    for (const mc of b.matchAll(/<media:content\b[^>]*>/gi)) { const ty = attr(mc[0], 'media:content', 'type') || '', med = attr(mc[0], 'media:content', 'medium') || ''; if (/^video\//i.test(ty) || med.toLowerCase() === 'video') continue; image = attr(mc[0], 'media:content', 'url'); if (image) break; }
+    if (!image) image = attr(b, 'media:thumbnail', 'url');
     if (!image) { const e = b.match(/<enclosure\b[^>]*>/i); if (e && /image/i.test(e[0])) image = attr(e[0], 'enclosure', 'url'); }
     if (!image) { const m = decode(unCdata(rawBody)).match(/<img[^>]+src=["']([^"']+)["']/i); if (m) image = m[1]; }
+    if (!image) { const sm = decode(unCdata(rawBody)).match(/<source[^>]+srcset=["']([^"']+)["']/i); if (sm) image = pickLargestSrcsetUrl(sm[1]); }
+    let video = '', videoPoster = '';
+    for (const mc of b.matchAll(/<media:content\b[^>]*>/gi)) { const u = attr(mc[0], 'media:content', 'url'), ty = attr(mc[0], 'media:content', 'type') || '', med = attr(mc[0], 'media:content', 'medium') || ''; if (u && (/^video\//i.test(ty) || med.toLowerCase() === 'video')) { video = u; break; } }
+    if (!video) { const e = b.match(/<enclosure\b[^>]*>/i); if (e && /video/i.test(e[0])) video = attr(e[0], 'enclosure', 'url'); }
+    if (!video) { const vm = decode(unCdata(rawBody)).match(/<video\b[^>]*\bposter=["']([^"']+)["']/i); if (vm) videoPoster = vm[1]; const vs = decode(unCdata(rawBody)).match(/<video\b[^>]*\bsrc=["']([^"']+)["']/i) || decode(unCdata(rawBody)).match(/<source\b[^>]*\bsrc=["']([^"']+)["']/i); if (vs) video = vs[1]; }
+    if (!video) { const im = decode(unCdata(rawBody)).match(/<iframe[^>]*\bsrc=["']([^"']+)["']/i); if (im && isVideoEmbed(im[1])) video = im[1]; }
+    if (!videoPoster && video) { const y = ytId(video); if (y) videoPoster = 'https://i.ytimg.com/vi/' + y + '/hqdefault.jpg'; }
+    if (!image && videoPoster) image = videoPoster;
     if (!title || !link || !ts || isNaN(ts)) continue;
     out.push({
       id: 'n' + sha(link), type: opt.kind === 'journal' ? 'research' : 'news', region: opt.region || 'intl', group: opt.group || '', title: trunc(title, 220), url: link, source: srcName,
-      date: new Date(ts).toISOString(), summary: trunc(summary, 420), image: /^https?:/i.test(image) ? image : '',
+      date: new Date(ts).toISOString(), summary: trunc(summary, 420), image: /^https?:/i.test(image) ? image : '', video: /^https?:/i.test(video) ? video : '', videoPoster: /^https?:/i.test(videoPoster) ? videoPoster : '',
       _html: decode(unCdata(tag(b, 'content:encoded'))), _full: summary,
     });
   }
@@ -574,6 +636,9 @@ async function enrichScraped(items, s, isKnown, minTs) {
     it.title = title; it.date = new Date(page.ts).toISOString();
     it.summary = trunc(page.desc || strip(page.html), 420);
     if (page.image) it.image = page.image;
+    if (page.video) it.video = page.video;
+    if (page.videoPoster) it.videoPoster = page.videoPoster;
+    if (!it.image && page.videoPoster) it.image = page.videoPoster;
     it._art = page; ok.push(it);
   });
   return ok;
@@ -606,6 +671,13 @@ async function buildArticle(it, s) {
       if (page.desc && !it.summary) it.summary = trunc(page.desc, 420);
     }
     if (!it.image && page.image) it.image = page.image;
+    if (page.video && !it.video) it.video = page.video;
+    if (page.videoPoster && !it.videoPoster) it.videoPoster = page.videoPoster;
+    if (!it.image && page.videoPoster) it.image = page.videoPoster;
+  }
+  if (!/<(?:video|iframe)\b/i.test(html) && it.video) {
+    if (isVideoEmbed(it.video)) html += '<figure><iframe src="' + esc(it.video) + '" loading="lazy" referrerpolicy="no-referrer" allowfullscreen sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"></iframe></figure>';
+    else if (/^https?:/i.test(it.video)) html += '<figure><video controls preload="metadata"' + (it.videoPoster ? ' poster="' + esc(it.videoPoster) + '"' : '') + '><source src="' + esc(it.video) + '"></video></figure>';
   }
   if (strip(html).length < 150) return null;
   if (!/<img\b/i.test(html) && it.image && !badImg(it.image)) html = '<figure><img src="' + esc(it.image) + '" alt="" loading="lazy"></figure>' + html;   // bai co anh ma than bai khong giu duoc -> chen anh dai dien len dau
@@ -703,6 +775,18 @@ async function main() {
     if (art) { fs.writeFileSync(path.join(ART_DIR, fname(it.id) + '.json'), JSON.stringify(art)); it.body = 1; }
   });
   log(`Co noi dung doc trong app: ${picked.filter(i => i.body).length}/${picked.length}`);
+  if (process.env.NEWS_REBUILD_ARTICLES === '1') {   // che do tuy chon, mac dinh TAT: crawl lai noi dung cho bai cu (chi bai tin, khong phai nghien cuu) de lay lai anh/video
+    const nRe = +(process.env.NEWS_REBUILD_N || 50);
+    const oldArts = db.items.filter(i => i.body && i.type !== 'research').slice(0, nRe);
+    let rebuilt = 0;
+    await pool(oldArts, 4, async it => {
+      try {
+        const art = await buildArticle({ ...it, _html: '', _scraped: false }, bySrc.get(it.source) || {});
+        if (art && strip(art.html).length >= 150) { fs.writeFileSync(path.join(ART_DIR, fname(it.id) + '.json'), JSON.stringify(art)); if (art.image && !it.image) it.image = art.image; rebuilt++; }
+      } catch {}
+    });
+    log(`Crawl lai noi dung: ${rebuilt}/${oldArts.length} bai cu`);
+  }
 
   const now = Date.now();
   const clean = picked.map(i => { const o = { ...i }; delete o._html; delete o._full; delete o._abs; delete o._s; delete o._p; delete o._rank; o.prio = i._p || 2; delete o._scraped; delete o._art; o.crawled = now; return o; });
