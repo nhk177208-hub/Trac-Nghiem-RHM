@@ -232,7 +232,7 @@ const tag = (x, name) => { const m = x.match(new RegExp('<' + name + '(?:\\s[^>]
 const attr = (x, name, a) => { const m = x.match(new RegExp('<' + name + '\\b[^>]*\\b' + a + '=["\']([^"\']+)["\']', 'i')); return m ? decode(m[1]) : ''; };
 const sha = s => crypto.createHash('sha1').update(s).digest('hex').slice(0, 12);
 const fname = id => id.replace(/[^a-z0-9_-]/gi, '_');
-const abs = (u, base) => { try { return new URL(decode(u).trim(), base).toString(); } catch { return ''; } };
+const abs = (u, base) => { if (!u || !String(u).trim()) return ''; try { return new URL(decode(u).trim(), base).toString(); } catch { return ''; } };
 const pickLargestSrcsetUrl = ss => { let best = '', bestN = -1; for (const part of String(ss || '').split(',')) { const t = part.trim().split(/\s+/); if (!t[0]) continue; const d = (t[1] || '').match(/([\d.]+)(w|x)/); const n = d ? parseFloat(d[1]) : 0; if (n >= bestN) { bestN = n; best = t[0]; } } return best; };
 const absSrcset = (ss, base) => String(ss || '').split(',').map(p => { const t = p.trim().split(/\s+/); if (!t[0]) return ''; const u = abs(t[0], base); return u ? [u, ...t.slice(1)].join(' ') : ''; }).filter(Boolean).join(', ');
 const ytId = u => { const m = String(u || '').match(/(?:youtube\.com\/(?:embed\/|watch\?[^#]*v=|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{6,})/); return m ? m[1] : ''; };
@@ -369,7 +369,7 @@ export function extractArticle(page, base) {
   const og = n => metaOf(new RegExp('<meta[^>]+(?:property|name)=["\']' + n + '["\'][^>]*content=["\']([^"\']*)["\']', 'i')) || metaOf(new RegExp('<meta[^>]+content=["\']([^"\']*)["\'][^>]*(?:property|name)=["\']' + n + '["\']', 'i'));
   let title = og('og:title') || strip(tag(page, 'title'));
   if (SECTION_VN.test(title) || (title.split(/\s+/).length < 4)) { const h1 = strip(tag(h, 'h1')); if (h1 && !SECTION_VN.test(h1) && h1.split(/\s+/).length >= 4) title = h1; }
-  const image = abs(og('og:image') || og('twitter:image'), base);
+  const image = abs(og('og:image') || og('og:image:secure_url') || og('og:image:url') || og('twitter:image') || og('twitter:image:src'), base);
   const desc = og('og:description') || og('description');
   const dateStr = og('article:published_time') || og('og:published_time') || og('datePublished') || (page.match(/"datePublished"\s*:\s*"([^"]+)"/) || [])[1] || attr(page.match(/<time\b[^>]*>/i)?.[0] || '', 'time', 'datetime');
   const metaTs = Date.parse(dateStr || ''); let ts = metaTs;
@@ -405,6 +405,10 @@ export function extractArticle(page, base) {
   }
   const realLen = strip(body).length;
   let image2 = image; if (!image2 || badImg(image2)) { const m1 = body.match(/<img src="([^"]+)"/); image2 = m1 ? decode(m1[1]) : ''; }                       // do dai doan van that (chua tinh mo ta du phong)
+  if (!image2) {   // anh nam ngoai cum doan van chinh / ngoai vung article-main (anh dai dien o header, gallery): quet toan vung bai roi toan trang, bo qua logo/icon
+    const scanImg = htmlSrc => { for (const im of String(htmlSrc || '').matchAll(/<img\b[^>]*>/gi)) { const tagI = im[0]; let u = attr(tagI, 'img', 'data-src') || attr(tagI, 'img', 'data-lazy-src') || attr(tagI, 'img', 'src'); if (!u) { const ss = attr(tagI, 'img', 'srcset') || attr(tagI, 'img', 'data-srcset'); if (ss) u = pickLargestSrcsetUrl(ss); } u = u ? abs(u, base) : ''; if (u && /^https?:/i.test(u) && !badImg(u)) return u; } return ''; };
+    image2 = scanImg(region) || scanImg(page);
+  }
   let video = '', videoPoster = '';
   const vBlock = body.match(/<video\b[\s\S]*?<\/video>/i);
   if (vBlock) { videoPoster = (vBlock[0].match(/\bposter=["']([^"']+)["']/i) || [])[1] || ''; video = (vBlock[0].match(/\bsrc=["']([^"']+)["']/i) || [])[1] || ''; }
@@ -660,7 +664,7 @@ async function buildArticle(it, s) {
   let html = it._html ? stripBoiler(sanitize(it._html, it.url)) : '';
   let page = null;
   if (it._art) { page = it._art; if (page.textLen > strip(html).length) html = page.html; }
-  else if (strip(html).length < 600 || it._scraped) {
+  else if (strip(html).length < 600 || it._scraped || !it.image) {
     try { page = extractArticle(await get(it.url, 'text/html,*/*', s || {}), it.url); } catch { page = null; }
     if (page && page.textLen > strip(html).length) html = page.html;
   }
@@ -782,7 +786,7 @@ async function main() {
     await pool(oldArts, 4, async it => {
       try {
         const art = await buildArticle({ ...it, _html: '', _scraped: false }, bySrc.get(it.source) || {});
-        if (art && strip(art.html).length >= 150) { fs.writeFileSync(path.join(ART_DIR, fname(it.id) + '.json'), JSON.stringify(art)); if (art.image && !it.image) it.image = art.image; rebuilt++; }
+        if (art && strip(art.html).length >= 150) { fs.writeFileSync(path.join(ART_DIR, fname(it.id) + '.json'), JSON.stringify(art)); if (art.image && (!it.image || it.image === it.url || !/\.(jpg|jpeg|png|webp|gif|avif)(\?|#|$)/i.test(it.image))) it.image = art.image; rebuilt++; }
       } catch {}
     });
     log(`Crawl lai noi dung: ${rebuilt}/${oldArts.length} bai cu`);
