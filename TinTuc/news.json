@@ -1,21 +1,6 @@
 {
  "items": [
   {
-   "id": "n3a26d829d1ac",
-   "type": "news",
-   "region": "intl",
-   "group": "Cơ quan quản lý",
-   "title": "Find NIDCR events, grantee news, Headlines newsletter, images, and information for reporters",
-   "url": "https://www.nidcr.nih.gov/news-events",
-   "source": "NIDCR (NIH)",
-   "date": "2027-01-27T12:00:00.000Z",
-   "summary": "Find NIDCR events, grantee news, Headlines newsletter, images, and information for reporters",
-   "image": "https://www.nidcr.nih.gov/news-events",
-   "body": 1,
-   "prio": 1,
-   "crawled": 1792972346834
-  },
-  {
    "id": "pmid:42924934",
    "type": "research",
    "region": "intl",
@@ -31,6 +16,21 @@
    "body": 1,
    "prio": 1,
    "crawled": 1792972346834
+  },
+  {
+   "id": "n8aa032418edd",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "When Invisalign Teeth Stop Tracking: Early Warning Signs, Clinical Decisions, and Refinement Strategy - Dr Sneha poeghal - Orthodontics & Invisalign Insights",
+   "url": "https://www.dentaltown.com/channel/post/27145/when-invisalign-teeth-stop-tracking-early-warning-signs-clinical-decisions-and-refinement-strategy",
+   "source": "Dentaltown",
+   "date": "2026-10-25T00:00:00.000Z",
+   "summary": "Explore the early signs of Invisalign tracking loss, common causes of underachieved tooth movement, clinical monitoring strategies, and how orthodontists make informed decisions about treatment adjustments and refinements.",
+   "image": "https://prod.cdn.dentaltown.com/useruploads/357469/blog/ceab9d47-202d-4d49-8ad9-47de078cf941.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1792990713602
   },
   {
    "id": "nd4765f1871f0",
@@ -123,6 +123,21 @@
    "crawled": 1792972346834
   },
   {
+   "id": "n71e6fcf726f6",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Ergo Trinity Loupes Feature 3 Magnifications",
+   "url": "https://www.dentistrytoday.com/ergo-trinity-loupes-feature-3-magnifications/",
+   "source": "Dentistry Today",
+   "date": "2026-10-23T14:44:02.000Z",
+   "summary": "Clinicians can quickly toggle between the magnifications to maximize efficiency. The Ergo Trinity loupes from LumaDent seamlessly switches between 3 magnifications, allowing this single system to follow clinicians through every stage of their career and every type of procedure. Experience the only loupe that takes you from general dentistry to microsurgery without changing your glasses. The Ergo Trinity Multi-Mag…",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/10/reduced_Ergo-Trinity-1024x775.png",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1792990713602
+  },
+  {
    "id": "n65b716b3a7af",
    "type": "news",
    "region": "intl",
@@ -136,6 +151,21 @@
    "body": 1,
    "prio": 2,
    "crawled": 1792972346834
+  },
+  {
+   "id": "nb67e5c14ab3e",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Autumn Budget 2026: everything dentists need to know",
+   "url": "https://dentistry.co.uk/2026/10/23/autumn-budget-2026-everything-dentists-need-to-know/",
+   "source": "Dentistry.co.uk",
+   "date": "2026-10-23T09:58:21.000Z",
+   "summary": "The UK government is set to announce the Autumn Budget for 2026 on 28 October – Iain Stevenson considers what dentists should expect and what they should brace themselves for . The rumour mill has been uncharacteristically quiet in the run-up to this year’s budget. Early signals that capital gains tax could be equalised with income tax now appear to have been quashed, which is good news for dentists planning to sell…",
+   "image": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1792990713602
   },
   {
    "id": "n362e6abe9703",
@@ -228,6 +258,21 @@
    "crawled": 1792972346834
   },
   {
+   "id": "nf906e25a4d73",
+   "type": "news",
+   "region": "vn",
+   "group": "Bệnh viện",
+   "title": "TỌA ĐÀM CHUYÊN ĐỀ “BÌNH ĐẲNG GIỚI VÀ LỒNG GHÉP GIỚI TRONG HOẠT ĐỘNG CÔNG ĐOÀN” NHÂN NGÀY PHỤ NỮ VIỆT NAM 20/10",
+   "url": "https://benhvienranghammat.vn/toa-dam-chuyen-de-binh-dang-gioi-va-long-ghep-gioi-trong-hoat-dong-cong-doan-nhan-ngay-phu-nu-viet-nam-20-10/",
+   "source": "BV RHM Trung ương TP.HCM",
+   "date": "2026-10-21T01:36:22.000Z",
+   "summary": "Chiều ngày 20/10, nhân kỷ niệm 96 năm Ngày thành lập Hội Liên hiệp Phụ nữ Việt Nam (20/10/1930 – 20/10/2026) và 16 năm Ngày Phụ nữ Việt Nam (20/10/2010 – 20/10/2026), Công đoàn Bệnh viện Răng Hàm Mặt Trung ương TP.HCM tổ chức chương trình họp mặt và tọa đàm chuyên đề “Bình đẳng giới và lồng ghép giới trong hoạt động Công đoàn” , với sự tham gia của nữ đoàn viên công đoàn, viên chức và người lao động. Phát biểu tại…",
+   "image": "https://benhvienranghammat.vn/wp-content/uploads/2026/10/1-2-1-1024x683.jpg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1792990713602
+  },
+  {
    "id": "n8728cf0fe583",
    "type": "news",
    "region": "intl",
@@ -256,6 +301,21 @@
    "body": 1,
    "prio": 1,
    "crawled": 1792972346834
+  },
+  {
+   "id": "n96f5cfd44a39",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Align Prevails in Orthodontic Patent Case",
+   "url": "https://www.insidedentistry.net/news/?newsID=107157",
+   "source": "Inside Dentistry",
+   "date": "2026-10-20T12:00:00.000Z",
+   "summary": "The Unified Patent Court (UPC) ruled that aligner systems incorporating Angelalign Technology’s Torque Ridges feature infringed Align Technology’s European patent relating to its Power Ridge technolog...",
+   "image": "https://www.insidedentistry.net/media/p2onklnp/align_tagline_vertical_rgb_charcoal.jpg",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1792990713602
   },
   {
    "id": "n4387e10e549b",
@@ -288,6 +348,51 @@
    "crawled": 1792972346834
   },
   {
+   "id": "ne2f0d05471d6",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "HHS awards $51M to expand dental care for children with neurodevelopmental disorders",
+   "url": "https://adanews.ada.org/ada-news/2026/october/hhs-awards-51m-to-expand-dental-care-for-children-with-neurodevelopmental-disorders/",
+   "source": "ADA News",
+   "date": "2026-10-16T00:00:00.000Z",
+   "summary": "HHS announced $51 million in funding to 28 health centers to improve access to dental care for children with neurodevelopmental disorders,",
+   "image": "https://adanews.useast01.umbraco.io/media/icvly3st/pediatric-dental-care.jpg?width=1110&height=700",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1792990713602
+  },
+  {
+   "id": "n87d8da9f7ab8",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "American Association of Endodontists Featured in New Book Chronicling Associations’ Response to COVID-19",
+   "url": "https://newsroom.aae.org/featured-stories/american-association-of-endodontists-featured-in-new-book-chronicling-associations-response-to-covid-19/",
+   "source": "AAE",
+   "date": "2026-10-15T14:00:00.000Z",
+   "summary": "FOR IMMEDIATE RELEASE When It Mattered Most highlights AAE and endodontists’ work to support patients and the specialty during an unprecedented time CHICAGO – The American Association of Endodontists (AAE) is featured in a new book documenting how professional associations helped their members, professions and communities navigate the COVID-19 pandemic. When It Mattered Most: The Untold Story of How Associations…",
+   "image": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1792990713602
+  },
+  {
+   "id": "n067279baec5f",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Association between root resorption severity and alveolar bone loss after fixed orthodontic treatment: A tooth-based radiographic study",
+   "url": "https://www.ajodo.org/article/S0889-5406(26)00453-1/fulltext?rss=yes",
+   "source": "AJODO",
+   "date": "2026-10-14T00:00:00.000Z",
+   "summary": "This study aimed to assess whether the severity of orthodontically induced inflammatory root resorption (OIIRR) and alveolar bone loss follows a parallel pattern during orthodontic treatment.",
+   "image": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1792990713602
+  },
+  {
    "id": "n43bd06e1aab3",
    "type": "news",
    "region": "intl",
@@ -303,6 +408,21 @@
    "crawled": 1792972346834
   },
   {
+   "id": "n348b21c834d3",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "OMS named as NIDCR director",
+   "url": "https://aaoms.org/advocacy/get-involved/advocacy-news/oms-named-as-nidcr-director/",
+   "source": "AAOMS",
+   "date": "2026-10-13T14:59:12.000Z",
+   "summary": "National Institutes of Health (NIH) Director Jay Bhattacharya, MD, PhD, announced the selection of AAOMS Fellow Jonathan E. Burke, DMD, as Director of the National Institute of Dental and Craniofacial Research (NIDCR). As noted in the press release , Dr. Burke served as the Medical Director of an oral and maxillofacial consulting firm in Philadelphia at the time of his appointment. He previously served as Assistant…",
+   "image": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1792990713602
+  },
+  {
    "id": "n7fd2b2ee03d2",
    "type": "news",
    "region": "vn",
@@ -316,6 +436,21 @@
    "body": 1,
    "prio": 1,
    "crawled": 1792972346834
+  },
+  {
+   "id": "n1001b6c678cf",
+   "type": "news",
+   "region": "vn",
+   "group": "Bệnh viện",
+   "title": "Bệnh Viện Răng Hàm Mặt TPHCM: ra mắt mô hình “Bệnh viện không ma túy” – vì môi trường y tế an toàn, lành mạnh, văn minh",
+   "url": "https://bvranghammat.com/tin-tuc-thong-bao/benh-vien-rang-ham-mat-tphcm-ra-mat-mo-hinh-benh-vien-khong-ma-tuy-vi-moi-truong-te-toan-lanh-manh-van-minh/",
+   "source": "BV RHM TP.HCM",
+   "date": "2026-10-12T04:15:07.000Z",
+   "summary": "Sáng ngày 12/10/2026, Bệnh viện Răng Hàm Mặt TP.HCM đã chính thức tổ chức lễ ra mắt mô hình “Bệnh viện không ma túy”. Đây là bước đi chiến lược nhằm xây dựng một môi trường y tế an toàn, lành mạnh và văn minh, giúp người dân hoàn toàn an tâm khi đến khám và điều trị. Nâng cao nhận thức và bảo đảm an ninh trật tự y tế Mô hình ý nghĩa này được triển khai nhằm giúp viên chức, người lao động nâng cao khả năng nhận thức,…",
+   "image": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1792990713602
   },
   {
    "id": "n7a3b24b9f217",
@@ -376,7 +511,53 @@
    "body": 1,
    "prio": 1,
    "crawled": 1792972346834
+  },
+  {
+   "id": "ncf8a5dca5169",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "New EFP clinical practice guideline addresses management of acute periodontal conditions",
+   "url": "https://www.efp.org/news-events/news/new-efp-clinical-practice-guideline-addresses-management-of-acute-periodontal-conditions/",
+   "source": "EFP",
+   "date": "2026-09-18T16:30:00.000Z",
+   "summary": "",
+   "image": "https://www.efp.org/fileadmin/_processed_/9/d/csm_PerioWS_25__20b0cf9bf6.jpg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1792990713602
+  },
+  {
+   "id": "n87653a0348c7",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Second Certificate in Implant Dentistry - The European Association for Osseointegration",
+   "url": "https://eao.org/education/second-certificate-in-implant-dentistry/",
+   "source": "EAO",
+   "date": "2026-09-17T13:36:35.000Z",
+   "summary": "EAO Second Certificate in Implant Dentistry The EAO Second Certificate is our advanced level certificate covering more complex techniques including prosthetics, soft tissue augmentation around implants and immediate implant placement.  Access wherever you are in the world with a fully online programme developed and led by our expert faculty. The EAO Certificates offer complete flexibility […]",
+   "image": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1792990713602
+  },
+  {
+   "id": "nabcf231da34e",
+   "type": "news",
+   "region": "intl",
+   "group": "Cơ quan quản lý",
+   "title": "Empowering Data Driven Discovery: Inside the DDS Hub",
+   "url": "https://www.nidcr.nih.gov/news-events/nidcr-news/empowering-data-driven-discovery-inside-dds-hub",
+   "source": "NIDCR (NIH)",
+   "date": "2026-08-24T12:00:00.000Z",
+   "summary": "Learn about NIDCR's Data-Driven Science (DDS) Hub, a collection of resources to enhance data-driven science skills and knowledge and a forum to highlight data and tools.",
+   "image": "https://www.nidcr.nih.gov/news-events/nidcr-news/empowering-data-driven-discovery-inside-dds-hub",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1792990713602
   }
  ],
- "updated": 1792972346834
+ "updated": 1792990713602,
+ "researchLast": "AJODO"
 }
