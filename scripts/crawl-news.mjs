@@ -644,11 +644,11 @@ async function main() {
       const isNew = i => !have.has(i.id) && !haveUrl.has(i.url) && !haveTitle.has(normT(i.title));
       const byDate = (x, y) => Date.parse(y.date) - Date.parse(x.date);
       const freshAll = items.filter(i => isNew(i) && Date.parse(i.date) >= minTsFor(s)).sort(byDate);
-      const fresh = freshAll.slice(0, 1);          // moi nguon chi lay 1 bai / lan crawl; lan sau se lay bai ke tiep
+      const fresh = freshAll.slice(0, 3);          // giu toi da 3 bai moi / nguon (_rank 0,1,2); mac dinh chi dung 1 bai / nguon, thieu so luong thi nha len 2 roi 3 (xem expandCap)
       const older = (s.p === 1 || s.region === 'vn') ? items.filter(i => isNew(i) && Date.parse(i.date) < minTsFor(s) && Date.parse(i.date) >= backTs).sort(byDate).slice(0, s.region === 'vn' ? 2 : 1) : [];   // nguon hay: du phong bai cu hon
       log(`OK   [${s.region}] ${s.name} (${via || 'khong co bai'}): ${items.length} bai sau loc, ${freshAll.length} moi${older.length && !fresh.length ? ', co bai cu du phong' : ''}`);
       const bucket = x => s.region === 'vn' ? x.vn : (s.kind === 'journal' ? x.research : x.news);
-      bucket(pools).push(...fresh.map(i => ({ ...i, _s: s.name, _p: s.p })));
+      bucket(pools).push(...fresh.map((i, k) => ({ ...i, _s: s.name, _p: s.p, _rank: k })));
       bucket(old).push(...older.map(i => ({ ...i, _s: s.name, _p: s.p })));
       okCount++;
     } catch (e) { log(`LOI  [${s.region}] ${s.name}: ${e.message}`); }
@@ -662,6 +662,15 @@ async function main() {
   // thieu bai moi -> bu bang bai cu hon cua cac nguon uu tien 1 (moi nguon 1 bai), khong trung bai moi
   const taken = new Set([...pools.news, ...pools.research, ...pools.vn].map(i => i.url));
   const topUp = (pool, quota) => { const need = quota - pool.length; if (need <= 0) return; const cand = dedupe(old[pool === pools.vn ? 'vn' : pool === pools.research ? 'research' : 'news']).filter(i => !taken.has(i.url)); const add = pickNews(cand, need); add.forEach(i => taken.add(i.url)); pool.push(...add); if (add.length) log(`Bu ${add.length} bai cu tu nguon uu tien 1`); };
+  // moi nguon mac dinh toi da 1 bai / lan; neu chua du so luong thi nha gioi han len 2 bai / nguon, van thieu thi len 3
+  const expandCap = (pool, quota, label) => {
+    let cap = 1, sel = pool.filter(i => (i._rank || 0) < cap);
+    while (sel.length < quota && cap < 3) { cap++; sel = pool.filter(i => (i._rank || 0) < cap); }
+    if (cap > 1) log(`Nha gioi han len ${cap} bai/nguon cho ${label}: ${sel.length}/${quota} bai`);
+    return sel;
+  };
+  pools.news = expandCap(pools.news, NEWS_N, 'tin quoc te'); pools.vn = expandCap(pools.vn, VN_N, 'tin trong nuoc');
+  pools.research = pools.research.filter(i => !i._rank);   // nghien cuu: giu co che xoay vong, moi lan 1 bai
   topUp(pools.news, NEWS_N); topUp(pools.vn, VN_N);
   // NGHIEN CUU: moi lan chi lay tu 1 nguon, lan sau doi sang nguon ke tiep (xoay vong); nguon nao khong co bai thi bo qua
   {
@@ -696,7 +705,7 @@ async function main() {
   log(`Co noi dung doc trong app: ${picked.filter(i => i.body).length}/${picked.length}`);
 
   const now = Date.now();
-  const clean = picked.map(i => { const o = { ...i }; delete o._html; delete o._full; delete o._abs; delete o._s; delete o._p; o.prio = i._p || 2; delete o._scraped; delete o._art; o.crawled = now; return o; });
+  const clean = picked.map(i => { const o = { ...i }; delete o._html; delete o._full; delete o._abs; delete o._s; delete o._p; delete o._rank; o.prio = i._p || 2; delete o._scraped; delete o._art; o.crawled = now; return o; });
   if (!clean.length) {
     if (fixed) { fs.writeFileSync(OUT, JSON.stringify(db, null, 1) + '\n'); log('Khong co tin moi, chi ghi lai tin cu da sua.'); }
     else log('Khong co tin moi, khong ghi file.');
