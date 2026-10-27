@@ -20,6 +20,40 @@
    "crawled": 1793096917890
   },
   {
+   "id": "n5850a96798ce",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Scottish children have best oral health on record – but disparities remain stark",
+   "url": "https://dentistry.co.uk/2026/10/27/scottish-children-have-best-oral-health-on-record-but-disparities-remain-stark/",
+   "source": "Dentistry.co.uk",
+   "date": "2026-10-27T15:37:59.000Z",
+   "summary": "A record 76% of Scottish Primary 1 children had no obvious tooth decay according to a new report, but children’s oral health varied drastically with deprivation. Similarly to levels of obvious decay, average decay experience also reached its lowest level on record, at 0.92 affected, missing or filled teeth per child. However, the percentage of children with no obvious decay dropped to 62% in the most deprived areas,…",
+   "image": "https://dentistry.co.uk/app/uploads/2026/10/scottish_children.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793119090134
+  },
+  {
+   "id": "n1f067abd9dd4",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Tuesday Morning Reflections With Dr. Silverman",
+   "url": "https://www.dentistrytoday.com/tuesday-morning-reflections-with-dr-silverman-12/",
+   "source": "Dentistry Today",
+   "date": "2026-10-27T13:37:10.000Z",
+   "summary": "Reflection #12 One Simple Conversation Can Change Everything Imagine this… A patient arrives for a routine hygiene appointment. Nothing on today’s schedule suggests they’re interested in cosmetic dentistry. The hygienist reviews the patient’s updated dental history form and notices they’ve indicated they’re unhappy with the appearance of their smile. Instead of simply moving on with the appointment, she hands the…",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/08/Screenshot-2026-08-12-at-12.07.52-PM.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793119090134
+  },
+  {
    "id": "ne075829463de",
    "type": "news",
    "region": "intl",
@@ -37,6 +71,23 @@
    "crawled": 1793096917890
   },
   {
+   "id": "n2c9f8585c68e",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Scotland approves NHS dental pay rise, but BDA questions practice funding",
+   "url": "https://www.dental-tribune.com/news/scotland-announces-nhs-dental-pay-rise-amid-concerns-over-practice-costs/",
+   "source": "Dental Tribune",
+   "date": "2026-10-27T09:30:00.000Z",
+   "summary": "EDINBURGH, Scotland: The Scottish government has confirmed a 3.75% pay increase for National Health Service (NHS) general dental practitioners for the 2026/2027 financial year. Although the award follows the recommendation of the independent Review Body on Doctors’ and Dentists’ Remuneration (DDRB), the British Dental Association (BDA) has raised concerns that the increase does not adequately address the wider…",
+   "image": "https://cdn.dental-tribune.com/dti/0001/1c8705f7/cmVzaXplLWNyb3Aodz0xMjAwO2g9NjI3KTpzaGFycGVuKGxldmVsPTApOm91dHB1dChmb3JtYXQ9anBlZyk/up/dt/2026/10/Scotland-announces-NHS-dental-pay-rise-amid-concerns-over-practice-costs-1-1.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793119090134
+  },
+  {
    "id": "ncd3876bfb471",
    "type": "news",
    "region": "intl",
@@ -52,6 +103,40 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793096917890
+  },
+  {
+   "id": "ncee9df86e12c",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Gargle Updates Dental Website Development for SEO",
+   "url": "https://www.dentistrytoday.com/gargle-updates-dental-website-development-for-seo/",
+   "source": "Dentistry Today",
+   "date": "2026-10-27T07:40:26.000Z",
+   "summary": "Gargle, a leading dental marketing company trusted by hundreds of dental practices, is introducing a new approach to website development designed to improve security, performance, and search engine optimization (SEO) capabilities for dental practices across North America. As the digital landscape continues to evolve, Gargle is moving away from traditional WordPress-based website development in favor of a more…",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/08/Screenshot-2026-08-04-at-9.57.39-AM.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793119090134
+  },
+  {
+   "id": "nc8547ebe909e",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "ESTELITE ASTERIA: The science behind natural-looking restorations",
+   "url": "https://dentistry.co.uk/2026/10/27/estelite-asteria-the-science-behind-natural-looking-restorations/",
+   "source": "Dentistry.co.uk",
+   "date": "2026-10-27T07:12:00.000Z",
+   "summary": "Reproducing the optical characteristics of natural teeth is one of the key challenges in direct restorative dentistry. ESTELITE ASTERIA by TOKUYAMA DENTAL combines spherical sub-micron fillers, a coordinated shade system and efficient handling. Spherical sub-micron fillers at the heart of the material The shape and size of filler particles play an important role in the optical and surface characteristics of…",
+   "image": "https://dentistry.co.uk/app/uploads/2026/10/estelite-asteria-tokuyama-dental-feature-reference.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793119090134
   },
   {
    "id": "n5fa4fe15be8a",
@@ -256,6 +341,21 @@
    "crawled": 1793081757479
   },
   {
+   "id": "n1666c9b5230c",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Drs. Stephanie Ganter & Robert McNeill : Dentistry Uncensored w/ Howard Farran #1745 - Dentistry Uncensored with Howard Farran",
+   "url": "https://www.dentaltown.com/channel/post/27154/drs-stephanie-ganter-robert-mcneill-dentistry-uncensored-w-howard-farran-1745",
+   "source": "Dentaltown",
+   "date": "2026-10-26T00:00:00.000Z",
+   "summary": "Why would two established surgeons go back to law school mid-career? What does it teach you about regulation, risk, and clinical independence? And how do you build an ambitious career that still leaves room for an actual life?",
+   "image": "https://prod.cdn.dentaltown.com/useruploads/11499/blog/b60e6c36-67d9-429e-8ea7-1e321ebe3880.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1793119090134
+  },
+  {
    "id": "n142de53e2eaa",
    "type": "news",
    "region": "intl",
@@ -318,6 +418,42 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793096917890
+  },
+  {
+   "id": "n362e6abe9703",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Incidental carotid calcification in a young dental patient",
+   "url": "https://www.nature.com/articles/s41415-026-0296-1",
+   "source": "British Dental Journal",
+   "date": "2026-10-23T00:00:00.000Z",
+   "summary": "British Dental Journal, Published online: 23 October 2026; doi:10.1038/s41415-026-0296-1 Incidental carotid calcification in a young dental patient",
+   "image": "https://media.springernature.com/full/nature-cms/uploads/product/nature/header-86f1267ea01eccd46b530284be10585e.svg",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793119090134
+  },
+  {
+   "id": "n0fe0b137e926",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "NextDent 300 streamlines digital denture fabrication",
+   "url": "https://www.dental-tribune.com/news/nextdent-300-streamlines-digital-denture-fabrication/",
+   "source": "Dental Tribune",
+   "date": "2026-10-22T07:41:59.000Z",
+   "summary": "ROCK HILL, S.C., US: Digital denture production has evolved considerably over the past decade, but many laboratories continue to balance the benefits of digital design with the practical limitations of manufacturing. Separate printing processes, manual assembly, post-polymerisation and time-intensive finishing can reduce the efficiency gains promised by a fully digital workflow. The NextDent Jetted Denture Solution…",
+   "image": "https://cdn.dental-tribune.com/dti/0001/4411e0b6/cmVzaXplLWNyb3Aodz0xMjAwO2g9NjI3KTpzaGFycGVuKGxldmVsPTApOm91dHB1dChmb3JtYXQ9anBlZyk/up/dt/2026/10/NextDent-300-streamlines-digital-denture-fabrication.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793119090134
   },
   {
    "id": "ne0c5257951a2",
@@ -576,6 +712,21 @@
    "crawled": 1793096917890
   },
   {
+   "id": "nb8e8561270e7",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "ADA governance evaluation town hall gathers feedback from more than 600 attendees",
+   "url": "https://adanews.ada.org/ada-news/2026/october/ada-governance-evaluation-town-hall-gathers-feedback-from-more-than-600-attendees/",
+   "source": "ADA News",
+   "date": "2026-10-10T00:00:00.000Z",
+   "summary": "More than 600 stakeholders came together to discuss the ADA governance and organizational health evaluation during a town hall Oct. 9.",
+   "image": "https://adanews.useast01.umbraco.io/media/t0hlxfs3/20261010_governanceevaltownhall_thumbnail.jpg?width=1110&height=700",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793119090134
+  },
+  {
    "id": "n3817abd9a53f",
    "type": "news",
    "region": "vn",
@@ -593,6 +744,21 @@
    "crawled": 1793096917890
   },
   {
+   "id": "n69202deb5835",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Advertisement Advertisement Privacy Policy Last Updated",
+   "url": "https://www.insidedentistry.net/privacy-policy",
+   "source": "Inside Dentistry",
+   "date": "2026-10-01T12:00:00.000Z",
+   "summary": "Advertisement Advertisement Privacy Policy Last Updated: October 1, 2026 Introduction Please read this Privacy Policy carefully so that you can understand how we treat and process your personal information. By using this website, you acknowledge and agree to be bound by the terms of this policy. If you do not agree to this policy, then do not access or use this website. Use of the Sites is also governed by AEGIS…",
+   "image": "https://www.facebook.com/tr?id=3272569282894917&ev=PageView&noscript=1",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793119090134
+  },
+  {
    "id": "n88a990dc2bce",
    "type": "news",
    "region": "intl",
@@ -601,7 +767,7 @@
    "url": "https://www.insidedentistry.net/2026/10/advancingendodonticcare/",
    "source": "Inside Dentistry",
    "date": "2026-10-01T12:00:00.000Z",
-   "summary": "EdgeEndo’s EdgePiezo supports efficient procedures  with versatility, precision, and enhanced visibility.",
+   "summary": "EdgeEndo’s EdgePiezo supports efficient procedures with versatility, precision, and enhanced visibility.",
    "image": "https://res.cloudinary.com/broadcastmed/image/fetch/f_jpg,q_auto,c_fill,g_faces:center,h_225,w_400/https://www.insidedentistry.net/media/qsvg22e2/1026-702-why-i-invested-edgeendo-edgepiezo.jpg",
    "body": 1,
    "prio": 2,
@@ -640,6 +806,21 @@
    "crawled": 1793081757479
   },
   {
+   "id": "n9702249c87a5",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Manufacturers report flumazenil injection shortage",
+   "url": "https://adanews.ada.org/ada-news/2026/october/manufacturers-report-flumazenil-injection-shortage/",
+   "source": "ADA News",
+   "date": "2026-10-01T00:00:00.000Z",
+   "summary": "Dentists may have trouble accessing flumazenil because of an ongoing shortage.",
+   "image": "https://adanews.useast01.umbraco.io/media/5jkmqft3/20261001_flumazenilshortage_thumbnail.jpeg?width=1110&height=700",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793119090134
+  },
+  {
    "id": "n9700f53bdd19",
    "type": "news",
    "region": "vn",
@@ -672,11 +853,26 @@
    "crawled": 1793096917890
   },
   {
+   "id": "n8c41cc0f6173",
+   "type": "news",
+   "region": "vn",
+   "group": "Trường đại học",
+   "title": "KHOẢNG THỜI GIAN TRAO ĐỔI VÔ CÙNG ĐÁNG NHỚ CÙNG VỚI ĐOÀN SINH VIÊN TRAO ĐỔI TẠI KHOA RĂNG HÀM MẶT TRƯỜNG ĐẠI HỌC Y DƯỢC CẦN THƠ",
+   "url": "https://www.ctump.edu.vn/khoang-thoi-gian-trao-doi-vo-cung-dang-nho-cung-voi-doan-sinh-vien-trao-doi-tai-khoa-rang-ham-mat-truong-dai-hoc-y-duoc-can-tho.html",
+   "source": "ĐH Y Dược Cần Thơ",
+   "date": "2026-09-12T12:00:00.000Z",
+   "summary": "Từ ngày 03/9 đến 11/9/2026, Khoa Răng Hàm Mặt – Trường Đại học Y Dược Cần Thơ (CTUMP) đã đem lại một hành trình trải nghiệm và giao lưu văn hóa, kiến thức vô cùng bùng nổ cho đoàn sinh viên Đại học Washington, Hoa Kỳ, thuộc chương trình VAW Global Health Alliances tại Cần Thơ.",
+   "image": "https://www.ctump.edu.vn/Themes/TH1079/Assets/imgs/icon/calendar.png",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793119090134
+  },
+  {
    "id": "ncb244fa0db9a",
    "type": "news",
    "region": "vn",
    "group": "Trường đại học",
-   "title": "KHOA RĂNG HÀM MẶT XÉT DUYỆT ĐỀ TÀI CƠ SỞ  CỦA CÁN BỘ NĂM 2026",
+   "title": "KHOA RĂNG HÀM MẶT XÉT DUYỆT ĐỀ TÀI CƠ SỞ CỦA CÁN BỘ NĂM 2026",
    "url": "https://www.ctump.edu.vn/khoa-rang-ham-mat-xet-duyet-de-tai-co-so-cua-can-bo-nam-2026.html",
    "source": "ĐH Y Dược Cần Thơ",
    "date": "2026-09-12T12:00:00.000Z",
@@ -685,6 +881,21 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793096917890
+  },
+  {
+   "id": "nc7680ccde354",
+   "type": "news",
+   "region": "vn",
+   "group": "Trường đại học",
+   "title": "SINH VIÊN KHOA RĂNG HÀM MẶT TRƯỜNG ĐẠI HỌC Y DƯỢC CẦN THƠ XUẤT SẮC TỎA SÁNG TẠI LỄ TRAO HỌC BỔNG ODON VALLET 2026",
+   "url": "https://www.ctump.edu.vn/sinh-vien-khoa-rang-ham-mat-truong-dai-hoc-y-duoc-can-tho-xuat-sac-toa-sang-tai-le-trao-hoc-bong-odon-vallet-2026.html",
+   "source": "ĐH Y Dược Cần Thơ",
+   "date": "2026-09-11T12:00:00.000Z",
+   "summary": "Vừa qua, tại Trường Đại học Bách khoa - ĐHQG TP.HCM, lễ trao học bổng Odon Vallet năm 2026 đã được tổ chức thành công với bầu không khí vô cùng rộn ràng. Học bổng Odon Vallet là quỹ học bổng danh giá và uy tín nhằm mục đích vinh danh các tài năng trẻ có những thành tích xuất sắc trong quá trình học tập và nghiên cứu. Với giá trị 34 triệu đồng cho mỗi suất, đây là quả ngọt vô cùng xứng đáng và là lời động viên to lớn…",
+   "image": "https://www.ctump.edu.vn/Themes/TH1079/Assets/imgs/icon/calendar.png",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793119090134
   },
   {
    "id": "nf40667a03bd6",
@@ -704,6 +915,6 @@
    "crawled": 1793096917890
   }
  ],
- "updated": 1793096917890,
- "researchLast": "Arch Oral Biol (ScienceDirect)"
+ "updated": 1793119090134,
+ "researchLast": "British Dental Journal"
 }
