@@ -35,6 +35,110 @@
    "crawled": 1793153635499
   },
   {
+   "id": "neb4745088c47",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Comparative wear behavior of lithium disilicate CAD/CAM ceramics under simulated mastication",
+   "url": "https://www.sciencedirect.com/science/article/pii/S010956412600357X?dgcid=rss_sd_all",
+   "source": "Dental Materials (ScienceDirect)",
+   "date": "2026-11-01T00:00:00.000Z",
+   "summary": "Publication date: November 2026 Source: Dental Materials, Volume 42, Issue 11 Author(s): Putsadeeporn Thammajaruk, Michael V. Swain, Massimiliano Guazzato, Chanya Chuenarrom, Chaimongkon Peampring",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=www.sciencedirect.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793310522632
+  },
+  {
+   "id": "ne2f7f76cf5b9",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "2026-27 AAOMS officers and trustees announced",
+   "url": "https://aaoms.org/about/who-we-are/press-releases/2026-27-aaoms-officers-and-trustees-announced/",
+   "source": "AAOMS",
+   "date": "2026-10-29T17:04:47.000Z",
+   "summary": "ROSEMONT, Ill. – Charles A. Crago, DMD, MD, FACS, was introduced as the 2026-27 President of the American Association of Oral and Maxillofacial Surgeons (AAOMS) during the 2026 AAOMS Annual Meeting in Seattle, Wash., in September. With AAOMS’s other officers and Board of Trustees, Dr. Crago assumes leadership of the professional organization representing more than 9,000 oral and maxillofacial surgeons. Dr. Crago, of…",
+   "image": "https://aaoms.org/wp-content/uploads/2026/03/joms_thumb.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793310522632
+  },
+  {
+   "id": "ne5e09f10c198",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Three-Dimensional Facial Scanning in Dentistry: Why and How?",
+   "url": "https://www.dentistrytoday.com/three-dimensional-facial-scanning-in-dentistry-why-and-how/",
+   "source": "Dentistry Today",
+   "date": "2026-10-29T15:30:47.000Z",
+   "summary": "Written by: Dean C. Vafiadis, DDS INTRODUCTION Three-dimensional facial scanning has been utilized in dentistry for the past 7 years. This technology allows the clinician to visualize the patient’s face in a digital format in order to establish the ideal central incisor position and incisal edge position, buccal corridor, and establish an ideal horizontal plane for facial analysis and the horizontal occlusion plane.…",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/10/Screenshot-2026-10-29-at-11.17.09-AM.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793310522632
+  },
+  {
+   "id": "n7ffd78c30950",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Amann Girrbach North America and Spear Education Partner to Advance Digital Dentistry",
+   "url": "https://www.dentistrytoday.com/amann-girrbach-north-america-and-spear-education-partner-to-advance-digital-dentistry/",
+   "source": "Dentistry Today",
+   "date": "2026-10-29T15:27:18.000Z",
+   "summary": "Collaboration connects advanced clinical education with digital workflows and CAD/CAM technology to help clinicians confidently deliver complex restorative care. Amann Girrbach North America recently announced a new strategic partnership with Spear Education, a leading provider of advanced dental education and professional development. The collaboration brings together Spear’s expertise in comprehensive treatment…",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/10/reduced-partnership.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793310522632
+  },
+  {
+   "id": "n4b00347884b4",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Rising MHRA registration fees: a mounting burden for dental labs",
+   "url": "https://dentistry.co.uk/2026/10/29/mhra-registration-fees-a-mounting-burden-for-dental-labs/",
+   "source": "Dentistry.co.uk",
+   "date": "2026-10-29T14:28:51.000Z",
+   "summary": "Steve Campbell explains why the proposed rise in MHRA registration fees could disproportionately affect dental laboratories – and what is being done to challenge it. From April 2026, the Medicines and Healthcare Products Regulatory Agency (MHRA) introduced a new annual charging structure for medical device registration. Manufacturers are now charged £300 each year for every chargeable GMDN Level 2 category, or Level…",
+   "image": "https://dentistry.co.uk/app/uploads/2026/10/MHRA.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793310522632
+  },
+  {
+   "id": "n7e1c8e987993",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "MegaGen Partners With USC Ostrow School of Dentistry",
+   "url": "https://www.dentistrytoday.com/megagen-partners-with-usc-ostrow-school-of-dentistry/",
+   "source": "Dentistry Today",
+   "date": "2026-10-29T14:14:18.000Z",
+   "summary": "MegaGen Implant, a global dental implant specialist, announced today that it has established a new philanthropic partnership with the Herman Ostrow School of Dentistry at the University of Southern California (USC). MegaGen is the first Korean implant company to support a U.S. dental school’s implant clinical education and research. MegaGen Implant CEO Park Kwang-bum (left) and Dr. Yang Chai, dean of the USC Herman…",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/10/mg-talk-media-2016x1512px.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793310522632
+  },
+  {
    "id": "n54463a8cce37",
    "type": "news",
    "region": "intl",
@@ -103,6 +207,21 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793273447703
+  },
+  {
+   "id": "n4bea135e12ce",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "TMD Demystified- Episode 276: The Status Quo Versus the Truth About TMD - TMD DEMYSTIFIED- Learn the Truth about TMD and Why You Feel Lost and Confused When You Hear The Acronym \"TMJ\"",
+   "url": "https://www.dentaltown.com/channel/post/27173/tmd-demystified-episode-276-the-status-quo-versus-the-truth-about-tmd",
+   "source": "Dentaltown",
+   "date": "2026-10-29T00:00:00.000Z",
+   "summary": "In this episode you will find out why and how the dental profession wants to avoid the truth about TMD.",
+   "image": "https://prod.cdn.dentaltown.com/useruploads/316381/blog/dfeca25a-6603-4f49-a26f-01b82d3f7201.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1793310522632
   },
   {
    "id": "n963d60a899a0",
@@ -292,6 +411,21 @@
    "body": 1,
    "prio": 1,
    "crawled": 1793240666499
+  },
+  {
+   "id": "n6806564ff582",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "ADA urges House committee to address cybersecurity concerns for dental practices",
+   "url": "https://adanews.ada.org/ada-news/2026/october/ada-urges-house-committee-to-address-cybersecurity-concerns-for-dental-practices/",
+   "source": "ADA News",
+   "date": "2026-10-28T00:00:00.000Z",
+   "summary": "The ADA is urging Congress to consider the needs of small dental practices as it reviews legislation aimed at strengthening cybersecurity.",
+   "image": "https://adanews.useast01.umbraco.io/media/slqopydw/cybersecurity.jpg?width=1110&height=700",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793310522632
   },
   {
    "id": "n429df8421c66",
@@ -807,6 +941,21 @@
    "crawled": 1793223674726
   },
   {
+   "id": "n23d6f1097cec",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Indianapolis high schoolers explore dental careers at Planet Smilez Discovering Dentistry Symposium",
+   "url": "https://adanews.ada.org/ada-news/2026/october/indianapolis-high-schoolers-explore-dental-careers-at-planet-smilez-discovering-dentistry-symposium/",
+   "source": "ADA News",
+   "date": "2026-10-22T00:00:00.000Z",
+   "summary": "More than 50 students gathered Oct. 10 in Indianapolis, ready to explore the careers that could await them in dentistry.",
+   "image": "https://adanews.useast01.umbraco.io/media/0hlnzlwd/20261022_discoveringdentistrysymposium4_thumbnail.jpg?width=1110&height=700",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793310522632
+  },
+  {
    "id": "ne0c5257951a2",
    "type": "news",
    "region": "intl",
@@ -1095,6 +1244,21 @@
    "body": 1,
    "prio": 1,
    "crawled": 1793186446259
+  },
+  {
+   "id": "nae93cec48c1e",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Survey finds strong interest in using HSA, FSA funds for oral care products",
+   "url": "https://adanews.ada.org/ada-news/2026/october/survey-finds-strong-interest-in-using-hsa-fsa-funds-for-oral-care-products/",
+   "source": "ADA News",
+   "date": "2026-10-08T00:00:00.000Z",
+   "summary": "New survey findings found that most HSA/FSA holders would use those funds to buy over-the-counter oral care products if they were eligible.",
+   "image": "https://adanews.useast01.umbraco.io/media/tqwnglwf/toothbrush.jpg?width=1110&height=700",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793310522632
   },
   {
    "id": "n3817abd9a53f",
@@ -1409,6 +1573,6 @@
    "crawled": 1793240666499
   }
  ],
- "updated": 1793273447703,
- "researchLast": "Community Dent Oral Epidemiol (Wiley)"
+ "updated": 1793310522632,
+ "researchLast": "Dental Materials (ScienceDirect)"
 }
