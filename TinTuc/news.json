@@ -139,6 +139,23 @@
    "crawled": 1793310522632
   },
   {
+   "id": "nf3e99de83fec",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Dental Innovations Group Advances AI in Dentistry",
+   "url": "https://www.dentistrytoday.com/dental-innovations-group-advances-ai-in-dentistry/",
+   "source": "Dentistry Today",
+   "date": "2026-10-29T13:56:02.000Z",
+   "summary": "Dentistry has never had more information available to guide patient care. Artificial intelligence (AI) can enhance diagnostic capabilities, salivary testing can provide new insights into disease risk, and digital technologies continue to expand what clinicians can identify and recommend. But as innovation accelerates, dental hygienist and founder Lindsey Bieligk, RDH, MSDH, believes another challenge is becoming…",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/10/shutterstock_2666715463.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793327787327
+  },
+  {
    "id": "n54463a8cce37",
    "type": "news",
    "region": "intl",
@@ -171,6 +188,23 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793273447703
+  },
+  {
+   "id": "n6e2f39918d43",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "First Choice Dental Expands in Wisconsin With 3 Practices",
+   "url": "https://www.dentistrytoday.com/first-choice-dental-expands-in-wisconsin-with-3-practices/",
+   "source": "Dentistry Today",
+   "date": "2026-10-29T06:30:00.000Z",
+   "summary": "Partnership adds three family dental practices in West Bend, Jackson, and Saukville, extending First Choice Dental’s presence in southeastern Wisconsin First Choice Dental, a multi-specialty dental group serving Wisconsin families since 1996, today announced a partnership with Milwaukee Dental Partners (“MDP”), a three-practice dental group serving Washington and Ozaukee counties. Effective October 26, 2026,…",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/10/shutterstock_2319330653.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793327787327
   },
   {
    "id": "n26e87837dbb2",
@@ -207,6 +241,21 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793273447703
+  },
+  {
+   "id": "n82ebef32f80c",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Where Is Your Server? - Dental Law - What You Need To Know",
+   "url": "https://www.dentaltown.com/channel/post/27002/where-is-your-server",
+   "source": "Dentaltown",
+   "date": "2026-10-29T00:00:00.000Z",
+   "summary": "Physical security matters, too. Dental practices should know where their servers and other critical systems are located—and who can access them.\r\n🤝 Learn more: http://obermanlaw.com/dental-practice-attorney",
+   "image": "https://prod.cdn.dentaltown.com/useruploads/112428/blog/blog_112428_41631.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1793327787327
   },
   {
    "id": "n4bea135e12ce",
@@ -273,6 +322,25 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793240666499
+  },
+  {
+   "id": "n1f89a576c700",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "A Cross‐Sectional Study on Apical Periodontitis in Root‐Filled Teeth: Do Clinically Available Factors Reflect Inflammation Level?",
+   "url": "https://onlinelibrary.wiley.com/doi/10.1111/iej.70299?af=R",
+   "source": "Int Endod J (Wiley)",
+   "date": "2026-10-28T12:31:10.000Z",
+   "summary": "ABSTRACT Aim Perceived severity of the condition is one of several factors influencing clinical decision-making regarding the management of root-filled teeth with persistent apical radiolucency. However, whether clinically available factors can indicate the severity of persistent apical lesions remains unclear, particularly in asymptomatic cases. The present study aimed to investigate whether factors relating to…",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=onlinelibrary.wiley.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793327787327
   },
   {
    "id": "n87c207e5d057",
@@ -1278,6 +1346,21 @@
    "crawled": 1793153635499
   },
   {
+   "id": "n88f408d32ebd",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "ADA, American Board of Dental Examiners collaborate to advance dental hygiene licensure",
+   "url": "https://adanews.ada.org/ada-news/2026/october/ada-american-board-of-dental-examiners-collaborate-to-advance-dental-hygiene-licensure/",
+   "source": "ADA News",
+   "date": "2026-10-05T00:00:00.000Z",
+   "summary": "This work builds on the organizations’ agreement from earlier this year to incorporate the DLOSCE into the ADEX Dental Examination.",
+   "image": "https://adanews.useast01.umbraco.io/media/kvbbi10v/20261005_ada_adex_dentalhygiene_thumbnail.jpg?width=1110&height=700",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793327787327
+  },
+  {
    "id": "n69202deb5835",
    "type": "news",
    "region": "intl",
@@ -1451,6 +1534,38 @@
    "crawled": 1793273447703
   },
   {
+   "id": "n563d205622fb",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "New white paper calls for oral health to be integrated into general healthcare",
+   "url": "https://www.efp.org/news-events/news/new-white-paper-calls-for-oral-health-to-be-integrated-into-general-healthcare/",
+   "source": "EFP",
+   "date": "2026-09-18T12:00:00.000Z",
+   "summary": "",
+   "image": "https://www.efp.org/fileadmin/_processed_/8/3/csm_White_paper_oral_health_26_5f1c1dc200.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793327787327
+  },
+  {
+   "id": "n87653a0348c7",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Second Certificate in Implant Dentistry - The European Association for Osseointegration",
+   "url": "https://eao.org/education/second-certificate-in-implant-dentistry/",
+   "source": "EAO",
+   "date": "2026-09-17T13:36:35.000Z",
+   "summary": "EAO Second Certificate in Implant Dentistry The EAO Second Certificate is our advanced level certificate covering more complex techniques including prosthetics, soft tissue augmentation around implants and immediate implant placement.  Access wherever you are in the world with a fully online programme developed and led by our expert faculty. The EAO Certificates offer complete flexibility […]",
+   "image": "https://eao.org/wp-content/uploads/2025/06/Cosyn-Jan.jpg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793327787327
+  },
+  {
    "id": "n8c41cc0f6173",
    "type": "news",
    "region": "vn",
@@ -1573,6 +1688,6 @@
    "crawled": 1793240666499
   }
  ],
- "updated": 1793310522632,
- "researchLast": "Dental Materials (ScienceDirect)"
+ "updated": 1793327787327,
+ "researchLast": "Int Endod J (Wiley)"
 }
