@@ -54,6 +54,40 @@
    "crawled": 1793310522632
   },
   {
+   "id": "n648669f8edfb",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Osstem shares implant planning and guided surgery workflows at Paris seminar",
+   "url": "https://www.dental-tribune.com/news/osstem-shares-implant-planning-and-guided-surgery-workflows-at-paris-seminar/",
+   "source": "Dental Tribune",
+   "date": "2026-10-30T10:41:48.000Z",
+   "summary": "PARIS, France: A seminar marking 140 years of diplomatic relations between France and South Korea has facilitated the sharing of South Korean expertise in digital implant dentistry with French dental practitioners. Organised by the South Korean embassy in France with support from Osstem Implant’s local subsidiary, the seminar was attended by 40 local dental professionals and aimed to strengthen clinical knowledge…",
+   "image": "https://cdn.dental-tribune.com/dti/0001/252311ca/cmVzaXplLWNyb3Aodz0xMjAwO2g9NjI3KTpzaGFycGVuKGxldmVsPTApOm91dHB1dChmb3JtYXQ9anBlZyk/up/dt/2026/10/Osstem_Paris_Seminar_2026_Prof_Chang_Joo_Park1.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793359369116
+  },
+  {
+   "id": "n69a88523d99c",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Philips Sonicare introduces AI toothbrush designed to transform daily brushing habits",
+   "url": "https://dentistry.co.uk/2026/10/30/philips-sonicare-introduces-ai-toothbrush-designed-to-transform-daily-brushing-habits/",
+   "source": "Dentistry.co.uk",
+   "date": "2026-10-30T08:12:56.000Z",
+   "summary": "Philips’ new AI toothbrush uses real-time personalised guidance to help patients improve their brushing technique, remove more plaque and develop healthier oral care habits between dental appointments. Good oral health has never been more important. Research increasingly links oral health with wider wellbeing, including cardiovascular disease, diabetes and cognitive health, yet many patients still struggle to know…",
+   "image": "https://dentistry.co.uk/app/uploads/2026/08/AI_toothbrush.jpg",
+   "video": "https://www.youtube.com/embed/zpa6bn_dOes?feature=oembed",
+   "videoPoster": "https://i.ytimg.com/vi/zpa6bn_dOes/hqdefault.jpg",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793359369116
+  },
+  {
    "id": "ne2f7f76cf5b9",
    "type": "news",
    "region": "intl",
@@ -243,6 +277,21 @@
    "crawled": 1793273447703
   },
   {
+   "id": "nbe022ffe7180",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "The 90-Day Culture Turnaround Challenge - Dental A Team with Kiera Dent",
+   "url": "https://www.dentaltown.com/channel/post/27161/the-90-day-culture-turnaround-challenge",
+   "source": "Dentaltown",
+   "date": "2026-10-29T00:00:00.000Z",
+   "summary": "Did you know you can change the entire culture of your office in three months by leaning into consistent leadership and clear standards? Kiera shares how to know what truly matters for your practice, including returning to the basics of leadership, future visualizations, and core areas to focus on.",
+   "image": "https://prod.cdn.dentaltown.com/useruploads/269433/blog/691e9474-a88c-4585-9ff2-f453936bda9e.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1793359369116
+  },
+  {
    "id": "n82ebef32f80c",
    "type": "news",
    "region": "intl",
@@ -251,7 +300,7 @@
    "url": "https://www.dentaltown.com/channel/post/27002/where-is-your-server",
    "source": "Dentaltown",
    "date": "2026-10-29T00:00:00.000Z",
-   "summary": "Physical security matters, too. Dental practices should know where their servers and other critical systems are located—and who can access them.\r\n🤝 Learn more: http://obermanlaw.com/dental-practice-attorney",
+   "summary": "Physical security matters, too. Dental practices should know where their servers and other critical systems are located—and who can access them. 🤝 Learn more: http://obermanlaw.com/dental-practice-attorney",
    "image": "https://prod.cdn.dentaltown.com/useruploads/112428/blog/blog_112428_41631.jpg",
    "body": 1,
    "prio": 3,
@@ -743,6 +792,25 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793144000321
+  },
+  {
+   "id": "nbbee97d05311",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Contralateral condylar remodeling following unilateral total temporomandibular joint replacement",
+   "url": "https://www.ijoms.com/article/S0901-5027(26)00426-1/fulltext?rss=yes",
+   "source": "Int J Oral Maxillofac Surg",
+   "date": "2026-10-27T00:00:00.000Z",
+   "summary": "The aim of this study was to investigate the three-dimensional bone remodeling of the contralateral condyle following unilateral temporomandibular joint replacement (TMJR) and to measure the positional stability of the condyle prosthesis postoperatively. The retrospective study included patients who received unilateral total TMJR and underwent computed tomography immediately after surgery (T1) and during long-term…",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=www.ijoms.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793359369116
   },
   {
    "id": "nc462a58a87ef",
@@ -1559,11 +1627,28 @@
    "url": "https://eao.org/education/second-certificate-in-implant-dentistry/",
    "source": "EAO",
    "date": "2026-09-17T13:36:35.000Z",
-   "summary": "EAO Second Certificate in Implant Dentistry The EAO Second Certificate is our advanced level certificate covering more complex techniques including prosthetics, soft tissue augmentation around implants and immediate implant placement.  Access wherever you are in the world with a fully online programme developed and led by our expert faculty. The EAO Certificates offer complete flexibility […]",
+   "summary": "EAO Second Certificate in Implant Dentistry The EAO Second Certificate is our advanced level certificate covering more complex techniques including prosthetics, soft tissue augmentation around implants and immediate implant placement. Access wherever you are in the world with a fully online programme developed and led by our expert faculty. The EAO Certificates offer complete flexibility […]",
    "image": "https://eao.org/wp-content/uploads/2025/06/Cosyn-Jan.jpg",
    "body": 1,
    "prio": 1,
    "crawled": 1793327787327
+  },
+  {
+   "id": "n065d7c435a22",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "First Certificate in Implant Dentistry - The European Association for Osseointegration",
+   "url": "https://eao.org/education/first-certificate-in-implant-dentistry/",
+   "source": "EAO",
+   "date": "2026-09-17T08:20:36.000Z",
+   "summary": "EAO First Certificate in Implant Dentistry A comprehensive online programme designed to give implant dentists and general practitioners the essential knowledge and confidence to deliver predictable implant treatment. EARLY BIRD DEADLINE: 25 NOVEMBER 2026 Flexible, expert-led learning in implant dentistry The EAO First Certificate is an online education programme designed to build a strong foundation […]",
+   "image": "https://eao.org/wp-content/uploads/2026/09/72347d5b-56d5-47e8-89dc-4f26a3e96d08-edited-225x300-1.webp",
+   "video": "https://www.youtube.com/embed/D-ixamFp5jI?feature=oembed&enablejsapi=1",
+   "videoPoster": "https://i.ytimg.com/vi/D-ixamFp5jI/hqdefault.jpg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793359369116
   },
   {
    "id": "n8c41cc0f6173",
@@ -1643,6 +1728,23 @@
    "crawled": 1793153635499
   },
   {
+   "id": "n7f227104a615",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "EFP and ESC join forces to explore links between periodontitis and cardiovascular health",
+   "url": "https://www.efp.org/news-events/news/efp-and-esc-join-forces-to-explore-links-between-periodontitis-and-cardiovascular-health/",
+   "source": "EFP",
+   "date": "2026-09-09T15:47:00.000Z",
+   "summary": "",
+   "image": "https://www.efp.org/fileadmin/_processed_/c/4/csm_ESC_joint_Mia_systemic_link_816fe27a85.jpeg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793359369116
+  },
+  {
    "id": "nb9205d36611f",
    "type": "news",
    "region": "vn",
@@ -1656,6 +1758,21 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793223674726
+  },
+  {
+   "id": "n833c4b28458e",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Register for the 2026 Young Dentists Forum",
+   "url": "https://www.fdiworlddental.org/register-2026-young-dentists-forum",
+   "source": "FDI World Dental Federation",
+   "date": "2026-09-05T12:00:00.000Z",
+   "summary": "The programme will start with a keynote lecture by Christina Radics, who will share insights on professional wellbeing, resilience, and navigating the evolving realities of modern dental practice. Eunhyuk Lee, winner of…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-05/YDF_Announcement.png?itok=2VafK-s9",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793359369116
   },
   {
    "id": "ne6b12a4c3497",
@@ -1688,6 +1805,6 @@
    "crawled": 1793240666499
   }
  ],
- "updated": 1793327787327,
- "researchLast": "Int Endod J (Wiley)"
+ "updated": 1793359369116,
+ "researchLast": "Int J Oral Maxillofac Surg"
 }
