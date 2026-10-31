@@ -224,6 +224,23 @@
    "crawled": 1793359369116
   },
   {
+   "id": "n2e6459c89973",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Busy But Not Profitable: The Six Patterns We Keep Seeing Holding Dentists Back - Welcome to Dental Unscripted",
+   "url": "https://www.dentaltown.com/channel/post/27188/busy-but-not-profitable-the-six-patterns-we-keep-seeing-holding-dentists-back",
+   "source": "Dentaltown",
+   "date": "2026-10-30T00:00:00.000Z",
+   "summary": "After hundreds of financial reviews, the same profit leaks keep showing up: adding clinical days before ops produce $35K/month, owners doing hygiene at $150/hr instead of $500/hr restorative, spending $80K on marketing while half the new patients never rebook, and hiring associates too early.",
+   "image": "https://prod.cdn.dentaltown.com/useruploads/320115/blog/61fa5fe8-c163-4d90-b46d-4b58ecc73db9.jpg",
+   "video": "https://www.youtube.com/embed/hZ9EvNv627g?si=ZMOTIpV_wMYPiflp",
+   "videoPoster": "https://i.ytimg.com/vi/hZ9EvNv627g/hqdefault.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1793444098184
+  },
+  {
    "id": "nabd6a2821589",
    "type": "news",
    "region": "intl",
@@ -1422,6 +1439,25 @@
    "crawled": 1793144000321
   },
   {
+   "id": "n569df791db48",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Fanconi Anemia: Matrix Remodeling and Oral Carcinogenesis",
+   "url": "https://journals.sagepub.com/doi/abs/10.1177/00220345261478636?ai=2b4&mi=ehikzz&af=R",
+   "source": "J Dent Res (JDR)",
+   "date": "2026-10-16T04:42:18.000Z",
+   "summary": "Journal of Dental Research, Ahead of Print. Fanconi anemia (FA) increases the risk of oral potentially malignant disorders (OPMDs) and oral squamous cell carcinoma; however, the stromal alterations associated with FA-related oral lesions remain poorly defined. We investigated whether extracellular ...",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=journals.sagepub.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793444098184
+  },
+  {
    "id": "n0e9ea3af033d",
    "type": "news",
    "region": "vn",
@@ -2037,6 +2073,21 @@
    "crawled": 1793413157710
   },
   {
+   "id": "n74f59f9283c5",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "EAO Focused Training - The European Association for Osseointegration",
+   "url": "https://eao.org/education/focused-training/",
+   "source": "EAO",
+   "date": "2026-08-21T15:58:34.000Z",
+   "summary": "Join EAO Focused Training - an intensive three-day implant dentistry course with hands-on workshops led by world-renowned experts.",
+   "image": "https://eao.org/wp-content/uploads/2026/08/1.png",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793444098184
+  },
+  {
    "id": "ne00d4682ece8",
    "type": "news",
    "region": "intl",
@@ -2067,8 +2118,70 @@
    "body": 1,
    "prio": 1,
    "crawled": 1793413157710
+  },
+  {
+   "id": "n236844d916fb",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "FDI remembers Dr Guillermo Rivero and his contribution to oral health",
+   "url": "https://www.fdiworlddental.org/fdi-remembers-dr-guillermo-rivero-and-his-contribution-oral-health",
+   "source": "FDI World Dental Federation",
+   "date": "2026-08-10T12:00:00.000Z",
+   "summary": "FDI World Dental Federation (FDI) is deeply saddened by the passing of Dr Guillermo Rivero. Throughout his career, Dr Rivero promoted oral health locally, regionally, and globally, and stood out as a passionate oral health advocate whose…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-10/FDI_WDC_18-Buenos_Aires-20180905-329.jpg?itok=ZlTxIt1j",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793444098184
+  },
+  {
+   "id": "n96911299aed7",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Wall Street Journal: Your Mouth Could Hold the Secrets to a Longer and Healthier Life",
+   "url": "https://www.perio.org/press-release/wall-street-journal-your-mouth-could-hold-the-secrets-to-a-longer-and-healthier-life/",
+   "source": "AAP (Periodontology)",
+   "date": "2026-07-27T19:51:39.000Z",
+   "summary": "“Dr. Ana Becil Giglio, a New York periodontist and president of the American Academy of Periodontology, says some of the most promising future treatments for gum disease are aimed at controlling the body’s inflammatory response rather than simply removing plaque or killing bacteria.” Read the full article here. About the American Academy of Periodontology The American Academy of Periodontology (AAP) represents…",
+   "image": "https://www.perio.org/wp-content/uploads/2019/05/Perio-2026-Q1.jpg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793444098184
+  },
+  {
+   "id": "n5745ef6efb8b",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "New Research Highlights the Importance of Exploring Treatment Options Before Tooth Loss",
+   "url": "https://newsroom.aae.org/featured-stories/new-research-highlights-the-importance-of-exploring-treatment-options-before-tooth-loss/",
+   "source": "AAE",
+   "date": "2026-06-25T14:04:00.000Z",
+   "summary": "FOR IMMEDIATE RELEASE Study published in the Journal of Endodontics suggests many cracked teeth can be successfully treated and preserved CHICAGO — A diagnosis of a cracked tooth can leave patients fearing the worst. Many assume a crack means the tooth will eventually need to be removed. However, new research published in the Journal of Endodontics highlights the importance of exploring treatment options before…",
+   "image": "https://newsroom.aae.org/wp-content/uploads/2026/06/JuneJOE.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793444098184
+  },
+  {
+   "id": "nfe3fd21169c7",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Orthodontic Financial Treatment Planning: How to Save for Orthodontic Care",
+   "url": "https://aaoinfo.org/blog/plan-now-save-throughout-the-year/",
+   "source": "AAO (Orthodontists)",
+   "date": "2026-03-12T21:02:59.000Z",
+   "summary": "Orthodontic Financial Treatment Planning: How to Save for Orthodontic Care. A custom smile created just for you by an AAO orthodontist.",
+   "image": "https://aaoinfo.org/wp-content/uploads/2022/03/How-to-Save-for-Orthodontic-Care.jpeg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793444098184
   }
  ],
- "updated": 1793413157710,
- "researchLast": "J Dent (ScienceDirect)"
+ "updated": 1793444098184,
+ "researchLast": "J Dent Res (JDR)"
 }
