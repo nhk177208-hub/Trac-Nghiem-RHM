@@ -1,6 +1,25 @@
 {
  "items": [
   {
+   "id": "n26ad2d1e9288",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Beyond measuring wear: Are we measuring what really matters?",
+   "url": "https://www.sciencedirect.com/science/article/pii/S0300571226007906?dgcid=rss_sd_all",
+   "source": "J Dent (ScienceDirect)",
+   "date": "2027-02-01T00:00:00.000Z",
+   "summary": "Publication date: February 2027 Source: Journal of Dentistry, Volume 177 Author(s): Felipe Somavilla Binotto, Luiza Freitas Brum Souza, Mutlu Özcan, Paula Benetti",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=www.sciencedirect.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793413157710
+  },
+  {
    "id": "n93983be0bb4b",
    "type": "news",
    "region": "intl",
@@ -152,6 +171,23 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793395788773
+  },
+  {
+   "id": "nf551c595025d",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Aspen Dental Offers Veterans Free Dental Savings Plan Enrollment",
+   "url": "https://www.dentistrytoday.com/aspen-dental-offers-veterans-free-dental-savings-plan-enrollment/",
+   "source": "Dentistry Today",
+   "date": "2026-10-30T11:11:20.000Z",
+   "summary": "Aspen Dental announces free Aspen Dental Savings Plan enrollment in November and expanded benefits for VFW members The Aspen Group (TAG) today announced new initiatives designed to make dental care more accessible and affordable for veterans, building on its five-year, $100 million commitment to expand access to care for underserved patients. As part of this commitment, Aspen Dental is offering veterans free…",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2024/12/aspen-1.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793413157710
   },
   {
    "id": "n648669f8edfb",
@@ -409,6 +445,21 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793273447703
+  },
+  {
+   "id": "n17ca48fe9526",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "ADA Report Finds Dentists Less Busy and Less Confident as Costs Outpace Payments",
+   "url": "https://www.dentaltown.com/news/details/15421/ada-report-finds-dentists-less-busy-and-less-confident-as-costs-outpace-payments",
+   "source": "Dentaltown",
+   "date": "2026-10-29T00:00:00.000Z",
+   "summary": "Two in five dentists said they weren’t busy enough in Q3, and ADA data show reimbursement up 1.5% against 2.3% inflation as the practice fiscal squeeze goes on.",
+   "image": "https://prod.cdn.dentaltown.com/images/dentaltown/pressreleases/5510a9b309794078972a8c973a5c3d79.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1793413157710
   },
   {
    "id": "ne801bc465672",
@@ -1952,8 +2003,72 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793240666499
+  },
+  {
+   "id": "n83799e7e5e78",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "EAO Expert Clinician Course",
+   "url": "https://eao.org/education/expert-clinician-course/",
+   "source": "EAO",
+   "date": "2026-08-27T16:08:09.000Z",
+   "summary": "The EAO Expert Clinician Course equips dental professionals with the advanced knowledge and skills to excel in the field of implantology.",
+   "image": "https://eao.org/wp-content/uploads/2026/08/EAO_Cadevers_social_v84.jpg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793413157710
+  },
+  {
+   "id": "nabcf231da34e",
+   "type": "news",
+   "region": "intl",
+   "group": "Cơ quan quản lý",
+   "title": "Empowering Data Driven Discovery: Inside the DDS Hub",
+   "url": "https://www.nidcr.nih.gov/news-events/nidcr-news/empowering-data-driven-discovery-inside-dds-hub",
+   "source": "NIDCR (NIH)",
+   "date": "2026-08-24T12:00:00.000Z",
+   "summary": "Learn about NIDCR's Data-Driven Science (DDS) Hub, a collection of resources to enhance data-driven science skills and knowledge and a forum to highlight data and tools.",
+   "image": "https://www.nidcr.nih.gov/themes/custom/guswds/logo.svg",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793413157710
+  },
+  {
+   "id": "ne00d4682ece8",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Finding the Right Fit: How to Choose Your Orthodontist",
+   "url": "https://aaoinfo.org/resources/how-to-choose-an-orthodontist/",
+   "source": "AAO (Orthodontists)",
+   "date": "2026-08-19T13:40:00.000Z",
+   "summary": "Your smile is a lifelong investment. Learn what questions to ask, what credentials to look for, and why an AAO Orthodontist is your best choice for safe, effective treatment.",
+   "image": "https://aaoinfo.org/wp-content/uploads/2023/01/AdobeStock_402131430-scaled.jpeg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793413157710
+  },
+  {
+   "id": "n9ac7fcd35b87",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "AAE Launches AI-Optimized Patient Resources to Reach More Patients",
+   "url": "https://newsroom.aae.org/featured-stories/aae-launches-ai-optimized-patient-resources-to-reach-more-patients/",
+   "source": "AAE",
+   "date": "2026-08-18T16:36:35.000Z",
+   "summary": "Patients are changing how they search for health information. Increasingly, they’re turning not only to Google, but also to AI-powered tools like ChatGPT, Gemini and other conversational platforms to answer questions about root canals. To help ensure patients find accurate, evidence-based information—and to position the AAE as the trusted voice in those conversations—we’ve launched a series of new and enhanced…",
+   "image": "https://newsroom.aae.org/wp-content/uploads/2026/08/Screenshot-2026-08-05-091018.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793413157710
   }
  ],
- "updated": 1793395788773,
- "researchLast": "J Clin Periodontol"
+ "updated": 1793413157710,
+ "researchLast": "J Dent (ScienceDirect)"
 }
