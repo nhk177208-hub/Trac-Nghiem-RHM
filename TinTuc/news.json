@@ -224,6 +224,40 @@
    "crawled": 1793359369116
   },
   {
+   "id": "n876839777cb0",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Why Your Dental Marketing Isn't Working Together (And What It's Costing You) - Practice Growth & Dental Marketing",
+   "url": "https://www.dentaltown.com/channel/post/27184/why-your-dental-marketing-isnt-working-together-and-what-its-costing-you",
+   "source": "Dentaltown",
+   "date": "2026-10-30T00:00:00.000Z",
+   "summary": "Are your dental marketing channels working together? Becky Spicer, VP of Firegang Dental Marketing, explains why disconnected SEO, Google Ads, websites, and front desk communication can limit growth and complicate marketing attribution.",
+   "image": "https://prod.cdn.dentaltown.com/useruploads/357784/blog/9a3b7e62-6b27-491b-a82a-cbf68d60f80b.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1793462734590
+  },
+  {
+   "id": "n7d51517ca825",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Preserving tooth structure after instrument separation: Effects of management strategy on root fracture resistance and structural outcomes related to tooth preservation",
+   "url": "https://www.jendodon.com/article/S0099-2399(26)00568-6/fulltext?rss=yes",
+   "source": "J Endodontics (JOE)",
+   "date": "2026-10-30T00:00:00.000Z",
+   "summary": "A separated endodontic instrument can limit cleaning apical to the fragment. However, removal may require substantial sacrifice of radicular dentin. This narrative review examined how nonsurgical retrieval, bypass, retention, and surgical management affect fracture resistance, healing, and tooth retention.",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=www.jendodon.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793462734590
+  },
+  {
    "id": "n2e6459c89973",
    "type": "news",
    "region": "intl",
@@ -2150,6 +2184,21 @@
    "crawled": 1793444098184
   },
   {
+   "id": "ne6ca0e67c347",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Ten years of patient-reported data provide global insights into oral health, FDI report finds",
+   "url": "https://www.fdiworlddental.org/ten-years-patient-reported-data-provide-global-insights-oral-health-fdi-report-finds",
+   "source": "FDI World Dental Federation",
+   "date": "2026-07-17T12:00:00.000Z",
+   "summary": "Geneva, Switzerland, 17 July 2026 – A new report released today by FDI World Dental Federation (FDI) highlights how more than a decade of patient-reported data from over 10,000 people across 12 countries is…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-07/report-oho-10-years-oral-health-data.jpg?itok=IGiWYa_p",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793462734590
+  },
+  {
    "id": "n5745ef6efb8b",
    "type": "news",
    "region": "intl",
@@ -2167,6 +2216,38 @@
    "crawled": 1793444098184
   },
   {
+   "id": "nb58037bd3d57",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "AAE Members Secure 12 Save Your Tooth Month Proclamations Across the United States",
+   "url": "https://newsroom.aae.org/featured-stories/aae-members-secure-12-save-your-tooth-month-proclamations-across-the-united-states/",
+   "source": "AAE",
+   "date": "2026-06-11T14:00:00.000Z",
+   "summary": "Grassroots advocacy efforts help raise awareness of endodontic care and the importance of saving natural teeth CHICAGO, June 11, 2026 /PRNewswire/ — The American Association of Endodontists (AAE) is proud to announce that 12 official Save Your Tooth Month proclamations were secured across the United States during May 2026, thanks to the advocacy efforts of dedicated AAE members who engaged with state and local…",
+   "image": "https://newsroom.aae.org/wp-content/uploads/2026/04/SYTM-RGB-png-white-background-1.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793462734590
+  },
+  {
+   "id": "n698830e4f156",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "New Research Reveals Link Between Gum Health, Tooth Loss, and Weight Gain in Older Adults",
+   "url": "https://www.perio.org/press-release/new-research-reveals-link-between-gum-health-tooth-loss-and-weight-gain-in-older-adults/",
+   "source": "AAP (Periodontology)",
+   "date": "2026-04-08T16:10:28.000Z",
+   "summary": "CHICAGO – April 8, 2026 — Losing teeth may do more than change a smile – it may also affect your weight. A new study published in the Journal of Periodontology highlights a compelling connection between poor gum health, tooth loss, and weight gain in older adults, adding to growing evidence that periodontal health plays a critical role in overall health as we age. The research draws on data collected over a four…",
+   "image": "https://www.perio.org/wp-content/uploads/2019/05/Perio-2026-Q1.jpg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793462734590
+  },
+  {
    "id": "nfe3fd21169c7",
    "type": "news",
    "region": "intl",
@@ -2175,13 +2256,43 @@
    "url": "https://aaoinfo.org/blog/plan-now-save-throughout-the-year/",
    "source": "AAO (Orthodontists)",
    "date": "2026-03-12T21:02:59.000Z",
-   "summary": "Orthodontic Financial Treatment Planning: How to Save for Orthodontic Care. A custom smile created just for you by an AAO orthodontist.",
+   "summary": "",
    "image": "https://aaoinfo.org/wp-content/uploads/2022/03/How-to-Save-for-Orthodontic-Care.jpeg",
    "body": 1,
    "prio": 1,
    "crawled": 1793444098184
+  },
+  {
+   "id": "n10428db18642",
+   "type": "news",
+   "region": "intl",
+   "group": "Cơ quan quản lý",
+   "title": "Why Studying Human Nerves Could Unlock Better Treatments for Chronic Pain",
+   "url": "https://www.nidcr.nih.gov/news-events/nidcr-news/why-studying-human-nerves-could-unlock-better-treatments-chronic-pain",
+   "source": "NIDCR (NIH)",
+   "date": "2026-02-05T12:00:00.000Z",
+   "summary": "Read about two NIDCR researchers who are studying what goes wrong in the nervous system during chronic pain. Their focus is on two common but very different pain conditions: diabetic painful neuropathy (DPN) and rheumatoid arthritis (RA).",
+   "image": "https://www.nidcr.nih.gov/sites/default/files/AdobeStock_821256950.jpeg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793462734590
+  },
+  {
+   "id": "n3dc0ce475261",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Podcast: Clinical Matters - The European Association for Osseointegration EAO",
+   "url": "https://eao.org/scientific-resources/clinical-matters/",
+   "source": "EAO",
+   "date": "2025-11-26T15:42:56.000Z",
+   "summary": "The EAO podcast brings you closer to the science behind implant dentistry, translating cutting-edge research into practical insights.",
+   "image": "https://eao.org/wp-content/uploads/2025/11/EAO_podcast_Teaser_V2_Square.jpg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793462734590
   }
  ],
- "updated": 1793444098184,
- "researchLast": "J Dent Res (JDR)"
+ "updated": 1793462734590,
+ "researchLast": "J Endodontics (JOE)"
 }
