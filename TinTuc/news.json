@@ -224,6 +224,40 @@
    "crawled": 1793359369116
   },
   {
+   "id": "ne003da1f89ee",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Is Your Dental PPC Agency Actually Delivering Results? What Every Dentist Should Ask - Practice Growth & Dental Marketing",
+   "url": "https://www.dentaltown.com/channel/post/27187/is-your-dental-ppc-agency-actually-delivering-results-what-every-dentist-should-ask",
+   "source": "Dentaltown",
+   "date": "2026-10-30T00:00:00.000Z",
+   "summary": "Are your Google Ads generating new patients or just clicks? Becky Spicer, VP of Firegang Dental Marketing, shares key questions every dentist should ask their PPC agency to evaluate performance, identify wasted spending, and uncover opportunities for growth.",
+   "image": "https://prod.cdn.dentaltown.com/useruploads/357784/blog/c4b970cb-cbb5-4dd9-abde-c98d37cff75d.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1793478584803
+  },
+  {
+   "id": "n8aea935d542c",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Processed Peripheral Nerve Allografts for Reconstruction of Trigeminal Sensory Nerve Injuries: A Systematic Review and Meta-Analysis",
+   "url": "https://www.sciencedirect.com/science/article/pii/S0278239126010384?dgcid=rss_sd_all",
+   "source": "J Oral Maxillofac Surg (ScienceDirect)",
+   "date": "2026-10-30T00:00:00.000Z",
+   "summary": "Publication date: Available online 30 October 2026 Source: Journal of Oral and Maxillofacial Surgery Author(s): Frederic Van der Cruyssen, Michael Miloro",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=www.sciencedirect.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793478584803
+  },
+  {
    "id": "n876839777cb0",
    "type": "news",
    "region": "intl",
@@ -2199,6 +2233,21 @@
    "crawled": 1793462734590
   },
   {
+   "id": "n07784a497d68",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "FDI brings occupational oral health to the forefront of global policy at the 79th World Health Assembly",
+   "url": "https://www.fdiworlddental.org/fdi-oral-health-79th-world-health-assembly",
+   "source": "FDI World Dental Federation",
+   "date": "2026-07-05T12:00:00.000Z",
+   "summary": "FDI will launch its global report on occupational oral health during a high-level side event at the 79th World Health Assembly, shining a spotlight on workplaces as a critical setting to improve oral health, prevention, and workforce resilience.",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-05/news-WHA79-flyer.jpg?itok=nGWXMU7P",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793478584803
+  },
+  {
    "id": "n5745ef6efb8b",
    "type": "news",
    "region": "intl",
@@ -2233,6 +2282,23 @@
    "crawled": 1793462734590
   },
   {
+   "id": "n1dfe5d5c00aa",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "More Dentists Are Referring to Endodontists, New AAE Survey Finds",
+   "url": "https://newsroom.aae.org/featured-stories/more-dentists-are-referring-to-endodontists-new-aae-survey-finds/",
+   "source": "AAE",
+   "date": "2026-05-04T13:00:00.000Z",
+   "summary": "FOR IMMEDIATE RELEASE CHICAGO – A new survey from the American Association of Endodontists (AAE) reveals that referrals from general dentists continue to play a critical and growing role in endodontic care, underscoring the importance of specialist treatment in saving patients’ natural teeth —and the strong confidence general dentists have in endodontists as trusted partners in patient care. The AAE’s 2026…",
+   "image": "https://newsroom.aae.org/wp-content/uploads/2026/05/reportimage.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793478584803
+  },
+  {
    "id": "n698830e4f156",
    "type": "news",
    "region": "intl",
@@ -2261,6 +2327,21 @@
    "body": 1,
    "prio": 1,
    "crawled": 1793444098184
+  },
+  {
+   "id": "nedf1e2c9c3ac",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "American Heart Month Brings Awareness to the Connection Between Periodontal Disease and Cardiovascular Health",
+   "url": "https://www.perio.org/press-release/american-heart-month-brings-awareness-to-the-connection-between-periodontal-disease-and-cardiovascular-health/",
+   "source": "AAP (Periodontology)",
+   "date": "2026-02-20T19:21:14.000Z",
+   "summary": "Ongoing research confirms that periodontal health can contribute to heart health. Chicago – Feb. 20, 2026 – In recognition of American Heart Month, the American Academy of Periodontology (AAP) is highlighting a powerful and often overlooked connection between periodontal and cardiovascular health. Mounting evidence shows that gum disease is not just a dental issue; it may be a warning sign for serious heart…",
+   "image": "https://www.perio.org/wp-content/uploads/2019/05/Perio-2026-Q1.jpg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793478584803
   },
   {
    "id": "n10428db18642",
@@ -2293,6 +2374,6 @@
    "crawled": 1793462734590
   }
  ],
- "updated": 1793462734590,
- "researchLast": "J Endodontics (JOE)"
+ "updated": 1793478584803,
+ "researchLast": "J Oral Maxillofac Surg (ScienceDirect)"
 }
