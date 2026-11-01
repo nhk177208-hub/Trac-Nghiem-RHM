@@ -90,6 +90,21 @@
    "crawled": 1793499026029
   },
   {
+   "id": "n2ec6fb7f8ad1",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Diagnosing the Dental Staffing Bottleneck - blog",
+   "url": "https://www.dentaltown.com/channel/post/27191/diagnosing-the-dental-staffing-bottleneck",
+   "source": "Dentaltown",
+   "date": "2026-10-31T00:00:00.000Z",
+   "summary": "Empty operatories and scrambled morning schedules have become an exhausting routine for independent dental practices.",
+   "image": "https://prod.cdn.dentaltown.com/images/dentaltown/magimages/1026/8978e428c5e447a1bdd10d33bbca2a53.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1793533841178
+  },
+  {
    "id": "n8886ac554852",
    "type": "news",
    "region": "intl",
@@ -222,6 +237,25 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793359369116
+  },
+  {
+   "id": "n8130737f5432",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Periodontal disease, biomarkers of ADRD risk, and cognitive functioning",
+   "url": "https://aap.onlinelibrary.wiley.com/doi/10.1002/jper.70210?af=R",
+   "source": "J Periodontol (Wiley)",
+   "date": "2026-10-30T10:15:24.000Z",
+   "summary": "Abstract Background Periodontitis is a hypothesized risk factor for cognitive impairment. Many prior studies lack information on biological markers of Alzheimer's disease and related dementias (ADRD) risk or genetic risk markers. We assessed the association between periodontitis, biological markers of ADRD risk, and cognitive test performance with robust adjustment for risk factors including high risk genotypes for…",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=aap.onlinelibrary.wiley.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793533841178
   },
   {
    "id": "n69a88523d99c",
@@ -2329,6 +2363,21 @@
    "crawled": 1793499026029
   },
   {
+   "id": "n4e2111d6dc3d",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Workplaces a ‘missed opportunity’ to address global oral health burden, landmark report finds",
+   "url": "https://www.fdiworlddental.org/workplaces-missed-opportunity-address-global-oral-health-burden-landmark-report-finds",
+   "source": "FDI World Dental Federation",
+   "date": "2026-05-19T12:00:00.000Z",
+   "summary": "Geneva, Switzerland, 19 May 2026 — A new global report identifies workplaces as one of the most promising and underused platforms to improve oral health, boost productivity and strengthen workforce well-being. The report,…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-05/report-work-oral-health.png?itok=8A04b8O-",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793533841178
+  },
+  {
    "id": "n1dfe5d5c00aa",
    "type": "news",
    "region": "intl",
@@ -2423,6 +2472,23 @@
    "crawled": 1793462734590
   },
   {
+   "id": "n60854a2d1c65",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "AAE and AAOMR Release Joint Position Statement on the Use of CBCT in Endodontics",
+   "url": "https://newsroom.aae.org/press-releases/aae-and-aaomr-release-joint-position-statement-on-the-use-of-cbct-in-endodontics/",
+   "source": "AAE",
+   "date": "2026-01-14T22:30:18.000Z",
+   "summary": "FOR IMMEDIATE RELEASE Streamlined Recommendations, Emphasis on Training, and Emerging Technologies Signal Evolution in Imaging Standards CHICAGO and MINNEAPOLIS — The American Association of Endodontists (AAE) and the American Academy of Oral and Maxillofacial Radiology (AAOMR) have released an updated joint position statement titled “Use of Cone-Beam Computed Tomography in Endodontics 2025 Update.” This important…",
+   "image": "https://newsroom.aae.org/wp-content/uploads/2020/05/aae-newsroom-org.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793533841178
+  },
+  {
    "id": "n3dc0ce475261",
    "type": "news",
    "region": "intl",
@@ -2438,6 +2504,6 @@
    "crawled": 1793462734590
   }
  ],
- "updated": 1793499026029,
- "researchLast": "J Oral Rehabil (Wiley)"
+ "updated": 1793533841178,
+ "researchLast": "J Periodontol (Wiley)"
 }
