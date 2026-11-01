@@ -90,6 +90,21 @@
    "crawled": 1793499026029
   },
   {
+   "id": "ncaf5db5b29d4",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Don’t Assume Your IT Team Has Everything Covered - Dental Law - What You Need To Know",
+   "url": "https://www.dentaltown.com/channel/post/27004/dont-assume-your-it-team-has-everything-covered",
+   "source": "Dentaltown",
+   "date": "2026-10-31T00:00:00.000Z",
+   "summary": "Your IT provider plays an important role, but dental practice owners still need to understand their cybersecurity responsibilities and know what protections are actually in place.\r\n🤝 Learn more: http://obermanlaw.com/dental-practice-attorney",
+   "image": "https://prod.cdn.dentaltown.com/useruploads/112428/blog/blog_112428_41631.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1793567411798
+  },
+  {
    "id": "n2ec6fb7f8ad1",
    "type": "news",
    "region": "intl",
@@ -273,6 +288,25 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793359369116
+  },
+  {
+   "id": "nb380b8a7b578",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Preservation of the preexisting occlusal plane and vertical dimension in subtotal maxillectomy reconstruction using Jaw-in-a-Day protocol",
+   "url": "https://www.thejpd.org/article/S0022-3913(26)00668-2/fulltext?rss=yes",
+   "source": "J Prosthet Dent (JPD)",
+   "date": "2026-10-30T00:00:00.000Z",
+   "summary": "Maxillary reconstruction following oncologic resection requires the reestablishment of functional occlusion in the absence of conventional dentoalveolar reference landmarks. Although virtual surgical planning has improved precision in fibula free flap reconstruction, the maintenance of the planned occlusal relationship during maxillary Jaw-in-a-Day procedures remains technique-sensitive. This clinical report…",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=www.thejpd.org",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793567411798
   },
   {
    "id": "n3189e9bf67ce",
@@ -2378,6 +2412,21 @@
    "crawled": 1793533841178
   },
   {
+   "id": "n5b3856c6d1f4",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "FDI releases concise two-page summary of advice sheet on STDs and the oral cavity",
+   "url": "https://www.fdiworlddental.org/fdi-releases-concise-two-page-summary-advice-sheet-stds-and-oral-cavity",
+   "source": "FDI World Dental Federation",
+   "date": "2026-05-08T12:00:00.000Z",
+   "summary": "Access the key messages from FDI's advice sheet on sexually transmitted diseases and the oral cavity in a concise two-page summary.",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-08/two-pager-oral-cavity-sexually-transmitted-diseases-2.png?itok=9FyzAlTM",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793567411798
+  },
+  {
    "id": "n1dfe5d5c00aa",
    "type": "news",
    "region": "intl",
@@ -2504,6 +2553,6 @@
    "crawled": 1793462734590
   }
  ],
- "updated": 1793533841178,
- "researchLast": "J Periodontol (Wiley)"
+ "updated": 1793567411798,
+ "researchLast": "J Prosthet Dent (JPD)"
 }
