@@ -73,6 +73,23 @@
    "crawled": 1793310522632
   },
   {
+   "id": "ndd10b771ee5e",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Applicability of the Modified Brief Diagnostic Criteria for Temporomandibular Disorders in a Population‐Based Study: A Retrospective Evaluation",
+   "url": "https://onlinelibrary.wiley.com/doi/10.1111/joor.70364?af=R",
+   "source": "J Oral Rehabil (Wiley)",
+   "date": "2026-10-31T06:01:31.000Z",
+   "summary": "The modified brief DC/TMD protocol showed excellent agreement with the DC/TMD for pain-related TMDs (specificity > 0.99; κ = 0.88–0.89) but lower agreement for joint diagnoses ( κ = 0.44–0.70) in a population-based cohort. An exploratory ultra-brief screening protocol showed high agreement for myalgia and arthralgia ( κ = 0.84–0.86), supporting time-efficient use. ABSTRACT Background Temporomandibular disorders…",
+   "image": "https://onlinelibrary.wiley.com/cms/asset/54a8c6cb-dee6-44c5-8c18-d7b6501d7082/joor70364-toc-0001-m.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793499026029
+  },
+  {
    "id": "n8886ac554852",
    "type": "news",
    "region": "intl",
@@ -222,6 +239,21 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793359369116
+  },
+  {
+   "id": "n3189e9bf67ce",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Dental Chain Collapse in Spain Leaves Kids in Braces and 30,000 Treatments Unfinished",
+   "url": "https://www.dentaltown.com/news/details/15427/dental-chain-collapse-in-spain-leaves-kids-in-braces-and-30000-treatments-unfinished",
+   "source": "Dentaltown",
+   "date": "2026-10-30T00:00:00.000Z",
+   "summary": "A Spanish dental chain’s insolvency closed more than 100 clinics overnight, leaving kids mid-orthodontic treatment and an estimated 30,000 cases unfinished.",
+   "image": "https://prod.cdn.dentaltown.com/images/dentaltown/pressreleases/873b84937d4441cea656a2641d483611.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1793499026029
   },
   {
    "id": "ne003da1f89ee",
@@ -2282,6 +2314,21 @@
    "crawled": 1793462734590
   },
   {
+   "id": "n1bbf85a87119",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "FDI World Dental Federation launches Generation Smile, the oral health movement for all",
+   "url": "https://www.fdiworlddental.org/fdi-world-dental-federation-launches-generation-smile-oral-health-movement-all",
+   "source": "FDI World Dental Federation",
+   "date": "2026-06-09T12:00:00.000Z",
+   "summary": "Generation Smile is a generation unlike any other. It isn't defined by the year you were born. It unites people of every age, background and culture around one shared purpose: making oral…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-09/Generation%20Smile%20image.jpg?itok=BzmpW43M",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793499026029
+  },
+  {
    "id": "n1dfe5d5c00aa",
    "type": "news",
    "region": "intl",
@@ -2297,6 +2344,23 @@
    "body": 1,
    "prio": 1,
    "crawled": 1793478584803
+  },
+  {
+   "id": "n5175306c898b",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "American Association of Endodontists Releases Updated Guidelines for the Treatment of Traumatic Dental Injuries",
+   "url": "https://newsroom.aae.org/featured-stories/american-association-of-endodontists-releases-updated-guidelines-for-the-treatment-of-traumatic-dental-injuries/",
+   "source": "AAE",
+   "date": "2026-04-14T12:53:00.000Z",
+   "summary": "Press Release FOR IMMEDIATE RELEASE Updated guidelines appear online in the April 2026 Articles in Press of the Journal of Endodontics . The American Association of Endodontists (AAE) has released its updated Recommended Guidelines for the Treatment of Traumatic Dental Injuries, providing clinicians with the latest evidence-based recommendations to support timely, accurate care following dental trauma. The…",
+   "image": "https://newsroom.aae.org/wp-content/uploads/2022/06/JOE-wtext-COLOR-e1655152788611.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793499026029
   },
   {
    "id": "n698830e4f156",
@@ -2374,6 +2438,6 @@
    "crawled": 1793462734590
   }
  ],
- "updated": 1793478584803,
- "researchLast": "J Oral Maxillofac Surg (ScienceDirect)"
+ "updated": 1793499026029,
+ "researchLast": "J Oral Rehabil (Wiley)"
 }
