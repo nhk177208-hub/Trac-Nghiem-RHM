@@ -90,6 +90,21 @@
    "crawled": 1793499026029
   },
   {
+   "id": "n90a9fdf2bb54",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Removing a Baby Tooth at Home vs. at a Dental Clinic: What Parents Should Know - Kids Dentistry Gurgaon",
+   "url": "https://www.dentaltown.com/channel/post/27189/removing-a-baby-tooth-at-home-vs-at-a-dental-clinic-what-parents-should-know",
+   "source": "Dentaltown",
+   "date": "2026-10-31T00:00:00.000Z",
+   "summary": "Removing a loose baby tooth at home is safe only when it is naturally ready to fall out. Pulling it too early can cause bleeding, infection, or damage. Learn when home removal is safe and when to consult a pediatric dentist.",
+   "image": "https://prod.cdn.dentaltown.com/images/dentaltown/magimages/1026/8978e428c5e447a1bdd10d33bbca2a53.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1793586376071
+  },
+  {
    "id": "ncaf5db5b29d4",
    "type": "news",
    "region": "intl",
@@ -98,7 +113,7 @@
    "url": "https://www.dentaltown.com/channel/post/27004/dont-assume-your-it-team-has-everything-covered",
    "source": "Dentaltown",
    "date": "2026-10-31T00:00:00.000Z",
-   "summary": "Your IT provider plays an important role, but dental practice owners still need to understand their cybersecurity responsibilities and know what protections are actually in place.\r\n🤝 Learn more: http://obermanlaw.com/dental-practice-attorney",
+   "summary": "Your IT provider plays an important role, but dental practice owners still need to understand their cybersecurity responsibilities and know what protections are actually in place. 🤝 Learn more: http://obermanlaw.com/dental-practice-attorney",
    "image": "https://prod.cdn.dentaltown.com/useruploads/112428/blog/blog_112428_41631.jpg",
    "body": 1,
    "prio": 3,
@@ -288,6 +303,25 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793359369116
+  },
+  {
+   "id": "nc24eaa3e6e63",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Positioning oral health into the global environmental and public health agendas",
+   "url": "https://jada.ada.org/article/S0002-8177(26)00568-4/fulltext?rss=yes",
+   "source": "JADA",
+   "date": "2026-10-30T00:00:00.000Z",
+   "summary": "The health care sector contributes substantially to global greenhouse gas emissions and environmental pollution, and oral health is an integral part of this footprint. Consequently, oral health is increasingly recognized as being closely connected to environmental sustainability, climate resilience, planetary health, and sustainable development. The World Health Organization (WHO) reaffirms its commitment to…",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=jada.ada.org",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793586376071
   },
   {
    "id": "nb380b8a7b578",
@@ -2427,6 +2461,21 @@
    "crawled": 1793567411798
   },
   {
+   "id": "nc1587849917f",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "New Dental Check-up podcast explores the oral health risks of vaping",
+   "url": "https://www.fdiworlddental.org/new-dental-check-podcast-explores-oral-health-risks-vaping",
+   "source": "FDI World Dental Federation",
+   "date": "2026-05-06T12:00:00.000Z",
+   "summary": "As vaping continues to grow in popularity worldwide, concerns are mounting about its effects on oral and overall health. In the latest episode of the Dental Check-up Podcast, Prof. Purnima Kumar discusses what current research reveals about the risks of e-cigarette use and the questions that remain unanswered. More than 100 million adults and 15 million adolescents worldwide now use e-cigarettes, making vaping an…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/large/public/2026-07/FDI-Podcast_S2ep1.jpg?itok=khZKw1cQ",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793586376071
+  },
+  {
    "id": "n1dfe5d5c00aa",
    "type": "news",
    "region": "intl",
@@ -2553,6 +2602,6 @@
    "crawled": 1793462734590
   }
  ],
- "updated": 1793567411798,
- "researchLast": "J Prosthet Dent (JPD)"
+ "updated": 1793586376071,
+ "researchLast": "JADA"
 }
