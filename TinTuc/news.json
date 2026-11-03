@@ -54,6 +54,57 @@
    "crawled": 1793153635499
   },
   {
+   "id": "nf3a7c7feb9b8",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Perry Lowe on PerioStōm, BioArmor, and Premier Dental Products’ Innovation",
+   "url": "https://www.dentistrytoday.com/perry-lowe-on-periostom-bioarmor-and-premier-dental-products-innovation/",
+   "source": "Dentistry Today",
+   "date": "2026-11-03T12:37:00.000Z",
+   "summary": "In this episode of Speaking of Dentistry… The Editor’s Cut with Stan Goff , Stan Goff, Senior Managing Editor of Dentistry Today , interviews Perry Lowe, CEO of Premier Dental Products and Premier Medical Manufacturing. Lowe discusses Premier Dental Products’ exclusive distribution partnership with Forward Science for PerioStōm, a product designed to support tissue recovery after scaling and root planing. He…",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/a76c497d-dda9-4e18-b098-e81a4213639b.png",
+   "video": "https://www.youtube.com/embed/qguignYxIM8?feature=oembed",
+   "videoPoster": "https://i.ytimg.com/vi/qguignYxIM8/hqdefault.jpg",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793744443272
+  },
+  {
+   "id": "n574d8078b23c",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "FDA Grants Breakthrough Designation to OraLiva Oral Cancer Test",
+   "url": "https://www.dentistrytoday.com/fda-grants-breakthrough-designation-to-oraliva-oral-cancer-test/",
+   "source": "Dentistry Today",
+   "date": "2026-11-03T12:22:43.000Z",
+   "summary": "Investigational cytology test is designed to help clinicians assess suspicious oral lesions with a quantitative index. OraLiva, Inc., an early cancer detection company developing AI-enabled cytology diagnostics, recently announced that the U.S. Food and Drug Administration (FDA) has granted Breakthrough Device Designation to ORAL ONC-InCYT, an investigational test designed to help clinicians assess suspicious white…",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/04/oraliva.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793744443272
+  },
+  {
+   "id": "nb00b8061168d",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Dentsply Sirona’s Primescan 2 Cart Wins 2026 Red Dot Award",
+   "url": "https://www.dentistrytoday.com/dentsply-sironas-primescan-2-cart-wins-2026-red-dot-award/",
+   "source": "Dentistry Today",
+   "date": "2026-11-03T12:02:38.000Z",
+   "summary": "Key features include intuitive usability, highlighted by an integrated display that enhances patient understanding of scan results and supports informed treatment decisions. Dentsply Sirona announced that Primescan 2 Cart has been honored with the 2026 Red Dot Award: Product Design , one of the world’s most respected design competitions. The award recognizes the company’s commitment to developing innovative…",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/Screenshot-2026-11-03-at-11.01.58-AM.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793744443272
+  },
+  {
    "id": "nc0fa72f64196",
    "type": "news",
    "region": "intl",
@@ -120,6 +171,42 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793710027816
+  },
+  {
+   "id": "nb1c3dce5808e",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Thinking of sinking your teeth into your first dental practice?",
+   "url": "https://dentistry.co.uk/2026/11/03/thinking-of-sinking-your-teeth-into-your-first-dental-practice/",
+   "source": "Dentistry.co.uk",
+   "date": "2026-11-03T07:11:00.000Z",
+   "summary": "Buying your first dental practice is likely to be one of the largest investments of your career. Here are the legal, financial and practical questions to consider before making your first purchase. Buying a practice doesn’t have to be scary! Knowing what to expect from the outset, and having the right advisers around you, can help make the process considerably smoother. Here are some key questions to bear in mind…",
+   "image": "https://dentistry.co.uk/app/uploads/2026/10/thorntons.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793744443272
+  },
+  {
+   "id": "nc4d0a76881f6",
+   "type": "research",
+   "region": "intl",
+   "group": "Cơ sở dữ liệu",
+   "title": "Biomarker-Based Precision Dentistry: Current Evidence, Clinical Translation, and Future Directions in Personalized Oral Healthcare",
+   "url": "https://link.springer.com/article/10.1007/s40496-026-00450-w",
+   "source": "SpringerLink (dentistry)",
+   "date": "2026-11-03T00:00:00.000Z",
+   "summary": "Purpose of Review Precision dentistry aims to integrate molecular biomarkers into clinical decision-making, enabling personalized prevention, diagnosis, prognosis, and treatment of oral diseases. Although many biomarkers have been identified, their use in dentistry is limited. This review critically assesses the evidence supporting biomarker-based precision dentistry, highlighting its clinical applicability,…",
+   "image": "https://link.springer.com/oscar-static/images/darwin/header/img/logo-springer-nature-link-05805fde18.svg",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793744443272
   },
   {
    "id": "nd57a02981dda",
@@ -577,7 +664,7 @@
    "url": "https://www.insidedentistry.net/news/?newsID=e05da728-b496-4cf7-a6e9-c1acb68fd863",
    "source": "Inside Dentistry",
    "date": "2026-10-30T12:00:00.000Z",
-   "summary": "Dental Intelligence  launched DI Voice, a voice-over-internet-protocol (VoIP) phone system integrated directly into its practice performance platform, allowing dental practices to manage patient calls...",
+   "summary": "Dental Intelligence launched DI Voice, a voice-over-internet-protocol (VoIP) phone system integrated directly into its practice performance platform, allowing dental practices to manage patient calls...",
    "image": "https://www.insidedentistry.net/media/cfiivnqx/6adf70b7df0be3e1c9023da4_press-rel-voice.png",
    "body": 1,
    "prio": 2,
@@ -1671,6 +1758,23 @@
    "body": 1,
    "prio": 3,
    "crawled": 1793186446259
+  },
+  {
+   "id": "n2fb43c6603c6",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "When immediate loading should not be the goal in full-arch implant cases",
+   "url": "https://www.dentistryiq.com/clinical/article/55414520/when-immediate-loading-should-not-be-the-goal-in-full-arch-implant-cases",
+   "source": "DentistryIQ",
+   "date": "2026-10-26T19:53:30.000Z",
+   "summary": "Immediate full-arch implant loading can provide patients with fixed teeth quickly, but success depends on careful patient selection, primary stability, prosthetic planning, and a controlled healing process.",
+   "image": "https://img.dentistryiq.com/files/base/ebm/diq/image/2026/10/6adfaf233a16feea90555d2a-gettyimages2287357349.png?auto=format,compress&fit=fill&fill=blur&w=1200&h=630",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1793744443272
   },
   {
    "id": "n481a4d1bdcce",
@@ -2955,6 +3059,21 @@
    "crawled": 1793462734590
   },
   {
+   "id": "n520eecc1c65d",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "FDI strengthens collaboration with UNHCR to advance refugee oral health",
+   "url": "https://www.fdiworlddental.org/fdi-strengthens-collaboration-unhcr-advance-refugee-oral-health",
+   "source": "FDI World Dental Federation",
+   "date": "2026-04-08T12:00:00.000Z",
+   "summary": "FDI takes part in a dedicated UNHCR webinar highlighting practical opportunities to integrate oral health into refugee health services worldwide. Learn more about this important topic.",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-08/unchr-webinar.jpg?itok=yZBPZtpZ",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793744443272
+  },
+  {
    "id": "nfe3fd21169c7",
    "type": "news",
    "region": "intl",
@@ -3032,6 +3151,6 @@
    "crawled": 1793462734590
   }
  ],
- "updated": 1793710027816,
- "researchLast": "SpringerLink (dental implant)"
+ "updated": 1793744443272,
+ "researchLast": "SpringerLink (dentistry)"
 }
