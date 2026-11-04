@@ -105,6 +105,40 @@
    "crawled": 1793744443272
   },
   {
+   "id": "n79abb21b4ba3",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Align Technology Opens 2027 Dental Research Award Program",
+   "url": "https://www.dentistrytoday.com/align-technology-opens-2027-dental-research-award-program/",
+   "source": "Dentistry Today",
+   "date": "2026-11-03T11:50:00.000Z",
+   "summary": "2027 Grant Application Process Now Open for Up to $300,000 in Funding Align Technology, Inc. (NASDAQ: ALGN), a leading global medical device company that designs, manufactures, and sells the Invisalign® System of clear aligners, iTero™ intraoral scanners, and exocad™ CAD/CAM software for digital orthodontics and restorative dentistry, today announced the opening of its 2027 Annual Research Award Program to support…",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2025/03/align.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793761348302
+  },
+  {
+   "id": "nfb3a300ea93f",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Parkview Dental Partners Appoints Jon Gregoire as CEO",
+   "url": "https://www.dentistrytoday.com/parkview-dental-partners-appoints-jon-gregoire-as-ceo/",
+   "source": "Dentistry Today",
+   "date": "2026-11-03T11:48:20.000Z",
+   "summary": "Experienced DSO executive and former founder brings a proven track record of driving organic growth, operational excellence, and M&A. Parkview Dental Partners, a leading dental service organization (DSO) backed by Cathay Capital, today announced the appointment of Jon Gregoire as Chief Executive Officer. Gregoire, a veteran DSO operator and former founder, will lead Parkview’s next phase of growth. “Jon has spent…",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/Parkview-Dental-Headshot.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793761348302
+  },
+  {
    "id": "nc0fa72f64196",
    "type": "news",
    "region": "intl",
@@ -188,6 +222,40 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793744443272
+  },
+  {
+   "id": "nf402d907f201",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Your Schedule Is Full. So Where Did the Production Go? - Sandy Pardue, Consultant/Classic Practice Resources",
+   "url": "https://www.dentaltown.com/channel/post/27193/your-schedule-is-full-so-where-did-the-production-go",
+   "source": "Dentaltown",
+   "date": "2026-11-03T00:00:00.000Z",
+   "summary": "A full schedule doesn't always mean a productive day. In the final episode of their Finish the Year Strong series, Dana and Sandy share practical strategies to reduce cancellations, fill openings, strengthen confirmations, and improve production through better scheduling systems and accountability.",
+   "image": "https://prod.cdn.dentaltown.com/useruploads/8508/blog/a00e1ed6-6b74-4e0c-b086-bf61ff113a47.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1793761348302
+  },
+  {
+   "id": "n104c585b73aa",
+   "type": "research",
+   "region": "intl",
+   "group": "Cơ sở dữ liệu",
+   "title": "Biomechanical analysis of variable thickness direct-printed aligners for mandibular intrusion",
+   "url": "https://link.springer.com/article/10.1007/s44525-026-00017-1",
+   "source": "SpringerLink (orthodontics)",
+   "date": "2026-11-03T00:00:00.000Z",
+   "summary": "Purpose This in vitro study evaluated the effect of global and localized thickness modifications in direct-printed aligners (DPAs) on force and moment systems during mandibular intrusion for curve of Spee leveling. A secondary objective was to compare DPA forces and moments against a thermoformed aligner (TFA) control under selected activation conditions. Methods A multi-axis sensor was used to measure…",
+   "image": "https://link.springer.com/oscar-static/images/darwin/header/img/logo-springer-nature-link-05805fde18.svg",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793761348302
   },
   {
    "id": "nc4d0a76881f6",
@@ -3059,6 +3127,21 @@
    "crawled": 1793462734590
   },
   {
+   "id": "nf616761f1e7b",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Pakistan Dental Association strengthens tobacco cessation action through two-day workshop in Islamabad",
+   "url": "https://www.fdiworlddental.org/pakistan-dental-association-strengthens-tobacco-cessation-action-through-two-day-workshop-islamabad",
+   "source": "FDI World Dental Federation",
+   "date": "2026-04-08T12:00:00.000Z",
+   "summary": "PDA’s two-day Islamabad workshop equipped dental teams with practical tools to integrate tobacco screening and cessation support into routine care.",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-08/tobacco-cessation-pakistan-fdi-01.jpg?itok=V_jtf_gO",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793761348302
+  },
+  {
    "id": "n520eecc1c65d",
    "type": "news",
    "region": "intl",
@@ -3151,6 +3234,6 @@
    "crawled": 1793462734590
   }
  ],
- "updated": 1793744443272,
- "researchLast": "SpringerLink (dentistry)"
+ "updated": 1793761348302,
+ "researchLast": "SpringerLink (orthodontics)"
 }
