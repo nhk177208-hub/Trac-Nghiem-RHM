@@ -35,6 +35,25 @@
    "crawled": 1793144000321
   },
   {
+   "id": "nf521ef517582",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Identification of Candida spp. in denture wearers by two amplicon-based molecular typing techniques",
+   "url": "https://www.sciencedirect.com/science/article/pii/S0003996926002943?dgcid=rss_sd_all",
+   "source": "Arch Oral Biol (ScienceDirect)",
+   "date": "2027-01-01T00:00:00.000Z",
+   "summary": "Publication date: January 2027 Source: Archives of Oral Biology, Volume 193 Author(s): Yuliana Vega-Chacón, Arian Guardiano Savadkouhi, Abraão Bonani, Ewerton Garcia de Oliveira Mima",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=www.sciencedirect.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793831740440
+  },
+  {
    "id": "nbab37ebb2036",
    "type": "research",
    "region": "intl",
@@ -52,6 +71,74 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793153635499
+  },
+  {
+   "id": "nd8f00ce245c3",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "FREE CE WEBINAR | Tonight | Register Now!",
+   "url": "https://www.dentistrytoday.com/free-ce-webinar-tonight-register-now/",
+   "source": "Dentistry Today",
+   "date": "2026-11-04T16:46:28.000Z",
+   "summary": "Our next FREE CE WEBINAR goes down tonight at 8 PM (Eastern Time). Click here to head right to the registration page and sign up now! Keep reading for more information. The Analog Impression Isn’t Dead: It Just Needs to Be Done Right TONIGHT AT 8 PM (EASTERN TIME) Presented by: Jimmy Stegall, CDT 1 CE CREDIT Analog implant impressions remain widely used in North American practices because, when executed correctly,…",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/Screenshot-2026-11-04-at-10.52.38-AM.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793831740440
+  },
+  {
+   "id": "n109fe943f5ae",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Desiccation Technology Offers New Approach to Periodontal Therapy",
+   "url": "https://www.dentistrytoday.com/desiccation-technology-offers-new-approach-to-periodontal-therapy/",
+   "source": "Dentistry Today",
+   "date": "2026-11-04T16:44:52.000Z",
+   "summary": "A moisture-removing approach targets biofilm and diseased tissue, providing dental professionals with an additional tool for periodontal therapy. Periodontal disease remains a significant oral health concern in the United States, affecting approximately 47% of adults over the age of 30 at some level. As clinicians continue to seek effective approaches to periodontal treatment, advances in technology are creating…",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/PerioDT-Application-800x533-1.jpg",
+   "video": "https://www.youtube.com/embed/Uh8FJWoGiQo?feature=oembed",
+   "videoPoster": "https://i.ytimg.com/vi/Uh8FJWoGiQo/hqdefault.jpg",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793831740440
+  },
+  {
+   "id": "n140cbb50c129",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Phoenix Dental Agency Launches Social Studio for Dentists",
+   "url": "https://www.dentistrytoday.com/phoenix-dental-agency-launches-social-studio-for-dentists/",
+   "source": "Dentistry Today",
+   "date": "2026-11-04T16:42:00.000Z",
+   "summary": "New Service Combines In-Office Photography, Custom Creative Content, and a Yearlong Posting Plan to Help Patients Get to Know the People Behind Their Care To help dental practices catch the attention of prospective patients in crowded social media feeds, Phoenix Dental Agency has launched Social Studio, a new service that turns authentic photos of dental teams into creative, personality-filled content. Combining…",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2025/10/phoenix.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793831740440
+  },
+  {
+   "id": "nf02440dc5c41",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Asia-Pacific symposium advances dental laser education",
+   "url": "https://www.dental-tribune.com/news/asia-pacific-symposium-advances-dental-laser-education/",
+   "source": "Dental Tribune",
+   "date": "2026-11-04T13:31:14.000Z",
+   "summary": "TAIPEI, Taiwan: The World Clinical Laser Institute (WCLI) held its 2026 Asia-Pacific Symposium in Taipei in October, attracting 224 dental professionals. Aimed at expanding access to clinical laser education, the event featured lectures and a panel discussion on the clinical applications of laser technology across various areas of dentistry, including implantology, periodontics, prosthodontics, and aesthetic and…",
+   "image": "https://cdn.dental-tribune.com/dti/0001/ab8ed161/cmVzaXplLWNyb3Aodz0xMjAwO2g9NjI3KTpzaGFycGVuKGxldmVsPTApOm91dHB1dChmb3JtYXQ9anBlZyk/up/dt/2026/11/Asia-Pacific-symposium-advances-dental-laser-education.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793831740440
   },
   {
    "id": "n12170c2d9ddd",
@@ -122,6 +209,21 @@
    "crawled": 1793797093287
   },
   {
+   "id": "n95bdbfb47775",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "ADA webinar to cover infection control requirements",
+   "url": "https://adanews.ada.org/ada-news/2026/november/ada-webinar-to-cover-infection-control-requirements/",
+   "source": "ADA News",
+   "date": "2026-11-04T00:00:00.000Z",
+   "summary": "The ADA will cover infection control requirements, recommendations and industry regulations during a live webinar for dental professionals.",
+   "image": "https://adanews.useast01.umbraco.io/media/uwvbzzmf/20261104_oshawebinar_thumbnail.jpg?width=1110&height=700",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793831740440
+  },
+  {
    "id": "nff635c92ad35",
    "type": "research",
    "region": "intl",
@@ -190,6 +292,21 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793744443272
+  },
+  {
+   "id": "n16e2a68843f9",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Dentira Releases Dental Spend Index Based on Procurement Data From 267 DSOs",
+   "url": "https://www.insidedentistry.net/news/?newsID=196433cb-fe66-4286-814b-761fda08fb70",
+   "source": "Inside Dentistry",
+   "date": "2026-11-03T12:00:00.000Z",
+   "summary": "Dentira has released its inaugural Dental Spend Index (DSI), a semiannual report examining dental supply purchasing patterns, formulary compliance, and supplier strategies among dental service organiz...",
+   "image": "https://www.insidedentistry.net/media/kf5b0thh/istock-2231147275_1440_810.jpg",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793831740440
   },
   {
    "id": "n79abb21b4ba3",
@@ -615,6 +732,36 @@
    "body": 1,
    "prio": 3,
    "crawled": 1793663690990
+  },
+  {
+   "id": "n678d337512c0",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Beyond the Weekend: Building Confidence With Implant Mentorship",
+   "url": "https://www.insidedentistry.net/2026/11/beyondtheweekend/",
+   "source": "Inside Dentistry",
+   "date": "2026-11-01T12:00:00.000Z",
+   "summary": "Ongoing clinical support can help dentists translate education into successful implementation.",
+   "image": "https://res.cloudinary.com/broadcastmed/image/fetch/f_jpg,q_auto,c_fill,g_faces:center,h_225,w_400/https://www.insidedentistry.net/media/1galh4vk/millard_main_art.jpg",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793831740440
+  },
+  {
+   "id": "n94a13712a625",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Reducing Injection Discomfort with Cryogenic Topical Anesthesia",
+   "url": "https://www.insidedentistry.net/2026/11/cryogenictopicalanesthesia/",
+   "source": "Inside Dentistry",
+   "date": "2026-11-01T12:00:00.000Z",
+   "summary": "Rapid mucosal cooling offers a drug-free approach to patient comfort and clinical efficiency.",
+   "image": "https://res.cloudinary.com/broadcastmed/image/fetch/f_jpg,q_auto,c_fill,g_faces:center,h_225,w_400/https://www.insidedentistry.net/media/5odb5ki2/fig-1.jpg",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793831740440
   },
   {
    "id": "n334b345f9e20",
@@ -1630,6 +1777,23 @@
    "body": 1,
    "prio": 1,
    "crawled": 1793223674726
+  },
+  {
+   "id": "n8d376f45380a",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Dyson halts sales of CameraJet after reports of product failures",
+   "url": "https://www.dentistryiq.com/newsworthy/news/55409631/dyson-camerajet-update-pulled-from-shelves-after-technical-shortcomings",
+   "source": "DentistryIQ",
+   "date": "2026-10-27T20:29:00.000Z",
+   "summary": "Less than a month after launch, Dyson’s CameraJet toothbrush has became temporarily unavailable as the company addresses a manufacturing issue affecting some units.",
+   "image": "https://img.dentistryiq.com/files/base/ebm/diq/image/2026/10/6ac3d6b35da638c8c8886d71-screenshot_20261005_at_11.png?auto=format,compress&fit=fill&fill=blur&w=1200&h=630",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1793831740440
   },
   {
    "id": "n5850a96798ce",
@@ -3353,6 +3517,6 @@
    "crawled": 1793462734590
   }
  ],
- "updated": 1793797093287,
- "researchLast": "AJODO"
+ "updated": 1793831740440,
+ "researchLast": "Arch Oral Biol (ScienceDirect)"
 }
