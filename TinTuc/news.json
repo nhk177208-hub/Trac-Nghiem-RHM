@@ -141,6 +141,40 @@
    "crawled": 1793884106222
   },
   {
+   "id": "n30a1ea586a56",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Dentsply Sirona Announces Five Free Dental Webinars for November and December",
+   "url": "https://www.dentistrytoday.com/dentsply-sirona-announces-five-free-dental-webinars-for-november-and-december/",
+   "source": "Dentistry Today",
+   "date": "2026-11-05T07:44:18.000Z",
+   "summary": "Five complimentary webinars in November and December explore digital workflows, clear aligner treatment planning, and orthodontic treatment, with one CE credit available per session. Dentsply Sirona is inviting dental professionals to expand their clinical and practice management knowledge through five complimentary live webinars taking place in November and December 2026. Covering clear aligner case selection,…",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/CORP-press-image-elearning.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793918546272
+  },
+  {
+   "id": "n5f17d8c475c3",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Admetec Introduces PLUS Family Dental Loupe Headlights",
+   "url": "https://www.dentistrytoday.com/admetec-introduces-plus-family-dental-loupe-headlights/",
+   "source": "Dentistry Today",
+   "date": "2026-11-05T07:42:58.000Z",
+   "summary": "Admetec Announces Butterfly EVO+ and Orchid+ Headlights Delivering Up to 200,000 LUX Butterfly Evo+: A new generation of wireless illumination, engineered for high-magnification loupes from the PLUS Family. Advanced LED technology and precision optics combine powerful light with a focused 95 mm beam. Move freely, work comfortably, and keep your attention where it belongs. Admetec , a leader in custom-fitted optical…",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/Admetec-Butterfly-Evo-scaled.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793918546272
+  },
+  {
    "id": "nb0d20ef3a6c9",
    "type": "news",
    "region": "intl",
@@ -158,6 +192,23 @@
    "crawled": 1793884106222
   },
   {
+   "id": "n4987a234929a",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Delta Dental Foundation Awards $16.3M in Dental Care Grants",
+   "url": "https://www.dentistrytoday.com/delta-dental-foundation-awards-16-3m-in-dental-care-grants/",
+   "source": "Dentistry Today",
+   "date": "2026-11-05T07:22:45.000Z",
+   "summary": "The Delta Dental Community Care Foundation, the philanthropic arm of Delta Dental of California and its affiliates, announced $16.3 million in Access to Care Grant funding, continuing its longstanding commitment to partnering with nonprofits that provide essential oral health services to underserved populations. These grants support initiatives across the company’s 15-state service area and Washington, D.C., helping…",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/ATC-Grants-CommUnityCare-Hancock-Health-Center-scaled.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793918546272
+  },
+  {
    "id": "n12e5d8f5a944",
    "type": "news",
    "region": "intl",
@@ -173,6 +224,23 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793884106222
+  },
+  {
+   "id": "n134ae89e1e75",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Duraphat fluoride varnish for caries control",
+   "url": "https://dentistry.co.uk/2026/11/05/duraphat-fluoride-varnish-for-caries-control/",
+   "source": "Dentistry.co.uk",
+   "date": "2026-11-05T06:23:00.000Z",
+   "summary": "Colgate explains the product licence, evidence and application considerations for Duraphat fluoride varnish in caries control. Dental teams have access to a wide range of professional products to support caries prevention, including fluoride varnish. It is important to understand that not all fluoride varnishes are intended for the same use. The distinction can be identified by their regulatory status, as defined by…",
+   "image": "https://dentistry.co.uk/app/uploads/2026/11/duraphat-fluoride-varnish-feature.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793918546272
   },
   {
    "id": "nf3a155bae67a",
@@ -825,6 +893,25 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793626008117
+  },
+  {
+   "id": "n13a50f07f5fa",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "AI Enabled Automated Digital Image Analysis for Peri‐Implant Health Monitoring: A Preliminary Diagnostic Study",
+   "url": "https://onlinelibrary.wiley.com/doi/10.1111/clr.70200?af=R",
+   "source": "Clin Oral Implants Res",
+   "date": "2026-11-02T05:40:10.000Z",
+   "summary": "ABSTRACT Objectives To develop and validate an AI-driven Digital Erythema Score (DES) for objective, non-invasive assessment of peri-implant mucosal erythema using intraoral scan (IOS) data. Materials and Methods An internal dataset (200 patients, 265 implants) was utilized, with the reference standard established via consensus by two independent experts. We developed a U-Net model to automatically segment the…",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=onlinelibrary.wiley.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793918546272
   },
   {
    "id": "n8a3903e14f43",
@@ -2640,6 +2727,23 @@
    "crawled": 1793153635499
   },
   {
+   "id": "n8728cf0fe583",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Higher costs, tighter margins: 2 ways dental practices can respond",
+   "url": "https://www.dentistryiq.com/revenue-cycle-management/article/55409030/higher-costs-tighter-margins-2-ways-dental-practices-can-respond",
+   "source": "DentistryIQ",
+   "date": "2026-10-20T14:52:00.000Z",
+   "summary": "Rising expenses are putting pressure on dental service organizations. Discover how DSOs can improve collections, expand patient payment options, and use compliant credit card surcharging to reduce processing costs and strengthen revenue.",
+   "image": "https://img.dentistryiq.com/files/base/ebm/diq/image/2026/10/6abe73420e8465bbcda02d59-gettyimages1283575571.png?auto=format,compress&fit=fill&fill=blur&w=1200&h=630",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1793918546272
+  },
+  {
    "id": "n313bcafff64b",
    "type": "news",
    "region": "intl",
@@ -3554,6 +3658,21 @@
    "crawled": 1793478584803
   },
   {
+   "id": "n88ab00fc8e27",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Whole mouth health in focus: Discover how co-design is improving prevention and patient care in the upcoming FDI webinar",
+   "url": "https://www.fdiworlddental.org/whole-mouth-health-focus-discover-how-co-design-improving-prevention-and-patient-care-upcoming-fdi",
+   "source": "FDI World Dental Federation",
+   "date": "2026-05-03T12:00:00.000Z",
+   "summary": "Register for our upcoming FDI Oral Health Campus webinar where experts explore Whole Mouth Health and explain how co-design principles can support more effective prevention and patient care. Image FDI will host a webinar on 10 March at 09:00 CET on the FDI Oral Health Campus, exploring how the Whole Mouth Health approach is advancing prevention and patient-centred care. Register here This session will present new…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-03/webinar-02102026-whole-mouth-health.jpg?itok=QsZj35N5",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793918546272
+  },
+  {
    "id": "n5175306c898b",
    "type": "news",
    "region": "intl",
@@ -3738,6 +3857,6 @@
    "crawled": 1793462734590
   }
  ],
- "updated": 1793884106222,
- "researchLast": "Clin Implant Dent Relat Res (Wiley)"
+ "updated": 1793918546272,
+ "researchLast": "Clin Oral Implants Res"
 }
