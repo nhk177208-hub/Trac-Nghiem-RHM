@@ -226,6 +226,23 @@
    "crawled": 1793884106222
   },
   {
+   "id": "n76b82acef06b",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Henry Schein Announces Upcoming Investor Conference Presentations",
+   "url": "https://www.dentistrytoday.com/henry-schein-announces-upcoming-investor-conference-presentations/",
+   "source": "Dentistry Today",
+   "date": "2026-11-05T07:11:47.000Z",
+   "summary": "Henry Schein, Inc. (Nasdaq: HSIC), the world’s largest provider of healthcare solutions to office-based dental and medical practitioners, announced today that the Company will present at the following investor conferences in November and December 2026: Jefferies Healthcare Conference: Waldorf Hilton, London, on November 17, 2026, at 9:00 a.m. Greenwich Mean Time (GMT)/4:00 a.m. Eastern Time (ET). Piper Sandler…",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2024/12/henry-schein.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793935540037
+  },
+  {
    "id": "n134ae89e1e75",
    "type": "news",
    "region": "intl",
@@ -260,6 +277,21 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793884106222
+  },
+  {
+   "id": "n17d32e442994",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "TMD Demystified- Episode 277: TMD Patients Know They Are Being Abused by the System - TMD DEMYSTIFIED- Learn the Truth about TMD and Why You Feel Lost and Confused When You Hear The Acronym \"TMJ\"",
+   "url": "https://www.dentaltown.com/channel/post/27231/tmd-demystified-episode-277-tmd-patients-know-they-are-being-abused-by-the-system",
+   "source": "Dentaltown",
+   "date": "2026-11-05T00:00:00.000Z",
+   "summary": "There is an important difference between suffering from a disease and suffering because the healthcare system has failed to adequately address that disease.",
+   "image": "https://prod.cdn.dentaltown.com/useruploads/316381/blog/cd1b1be6-3c74-4140-b2ff-7a45e1a39e7d.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1793935540037
   },
   {
    "id": "nd8f00ce245c3",
@@ -1674,6 +1706,25 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793273447703
+  },
+  {
+   "id": "na1a7a02b4ec3",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Area‐Level Determinants of Oral Health Behaviours Among Australian Adolescents",
+   "url": "https://onlinelibrary.wiley.com/doi/10.1111/cdoe.70138?af=R",
+   "source": "Community Dent Oral Epidemiol (Wiley)",
+   "date": "2026-10-29T04:57:58.000Z",
+   "summary": "ABSTRACT Objectives Oral health behaviours are key determinants of oral health. Studies show that area-level factors are closely associated with individual-level oral health behaviours and outcomes. However, different area-level factors can influence oral health behaviours differently. The aim of this study was to examine variations in the associations between geographic remoteness and area deprivation on oral…",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=onlinelibrary.wiley.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793935540037
   },
   {
    "id": "n17ca48fe9526",
@@ -3780,6 +3831,21 @@
    "crawled": 1793884106222
   },
   {
+   "id": "ne69ede43325b",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "WOHD26: Together, let’s create a record-breaking chain of happy moments!",
+   "url": "https://www.fdiworlddental.org/wohd26-together-lets-create-record-breaking-chain-happy-moments",
+   "source": "FDI World Dental Federation",
+   "date": "2026-04-03T12:00:00.000Z",
+   "summary": "World Oral Health Day (WOHD) is just a few weeks away. To continue building momentum towards 20 March, we launched our digital activation on 13 February, bringing the campaign to life across digital platforms worldwide.Under this year’s…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-03/wohd26-digital-activation_0.jpg?itok=LltU5cOJ",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793935540037
+  },
+  {
    "id": "nfe3fd21169c7",
    "type": "news",
    "region": "intl",
@@ -3857,6 +3923,6 @@
    "crawled": 1793462734590
   }
  ],
- "updated": 1793918546272,
- "researchLast": "Clin Oral Implants Res"
+ "updated": 1793935540037,
+ "researchLast": "Community Dent Oral Epidemiol (Wiley)"
 }
