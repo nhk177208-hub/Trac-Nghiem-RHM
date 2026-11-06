@@ -73,6 +73,57 @@
    "crawled": 1793153635499
   },
   {
+   "id": "n4a18c331b8c4",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Independent buyers return to Scottish dental practice market",
+   "url": "https://dentistry.co.uk/2026/11/06/independent-buyers-return-to-scottish-dental-practice-market/",
+   "source": "Dentistry.co.uk",
+   "date": "2026-11-06T11:43:00.000Z",
+   "summary": "Independent dentists are returning to Scotland’s dental practice acquisition market as larger corporate operators concentrate on their existing businesses, according to observations shared following the NASDAL Scotland Forum. Corporate groups had previously exercised considerable influence over the market, making it harder for independent purchasers to compete for practices. ‘The corporates ruled the roost and…",
+   "image": "https://dentistry.co.uk/app/uploads/2026/10/nasdal.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793969728035
+  },
+  {
+   "id": "n710796479765",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Nearly two thirds of whitening products tested exceeded peroxide limit",
+   "url": "https://dentistry.co.uk/2026/11/06/nearly-two-thirds-of-whitening-products-tested-exceeded-peroxide-limit/",
+   "source": "Dentistry.co.uk",
+   "date": "2026-11-06T09:24:00.000Z",
+   "summary": "Almost two thirds of tooth whitening products in a targeted safety assessment exceeded the hydrogen peroxide limit for products sold directly to consumers, the UK product safety regulator has revealed. The Office for Product Safety and Standards (OPSS) tested 70 products during 2025/26 and found that 45 contained more than the permitted consumer limit of 0.1% hydrogen peroxide. Its annual delivery report also…",
+   "image": "https://dentistry.co.uk/app/uploads/2026/11/whitening.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793969728035
+  },
+  {
+   "id": "ncaa85c3e9392",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Responding to patient complaints: a practical guide",
+   "url": "https://dentistry.co.uk/2026/11/06/responding-to-patient-complaints-a-practical-guide/",
+   "source": "Dentistry.co.uk",
+   "date": "2026-11-06T06:04:00.000Z",
+   "summary": "Paul Lambden, chairman of Densura Indemnity, outlines a constructive, practical approach to responding to patient complaints. Few professionals welcome a complaint, but a well-managed response can protect the patient relationship, support learning and reduce the risk of concerns escalating. The starting point is simple: ensure patients can easily find and understand your practice’s written complaints procedure. Why…",
+   "image": "https://dentistry.co.uk/app/uploads/2026/11/complaints.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1793969728035
+  },
+  {
    "id": "nb25d222069b1",
    "type": "news",
    "region": "intl",
@@ -445,6 +496,25 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793797093287
+  },
+  {
+   "id": "nd8ec6c06cfd4",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Effect of restorative dental materials on cellular responses relevant to periodontal soft-tissue attachment. A narrative review of in-vitro studies and future perspectives.",
+   "url": "https://www.sciencedirect.com/science/article/pii/S0109564126004768?dgcid=rss_sd_all",
+   "source": "Dental Materials (ScienceDirect)",
+   "date": "2026-11-04T00:00:00.000Z",
+   "summary": "Publication date: Available online 4 November 2026 Source: Dental Materials Author(s): Diana Abduallah, Richard M. Shelton, Michael R. Milward, Josette Camilleri",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=www.sciencedirect.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793969728035
   },
   {
    "id": "n95bdbfb47775",
@@ -2827,6 +2897,23 @@
    "crawled": 1793144000321
   },
   {
+   "id": "n729d13ee1120",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Why treatment acceptance starts before the financial conversation",
+   "url": "https://www.dentistryiq.com/business-management-leadership/article/55412889/why-treatment-acceptance-starts-before-the-financial-conversation",
+   "source": "DentistryIQ",
+   "date": "2026-10-19T19:11:39.000Z",
+   "summary": "Improve dental treatment acceptance by addressing patient concerns beyond insurance and cost. Strong team communication, empathetic conversations, and patient-centered care help build trust and encourage patients to move forward with recommended treatment.",
+   "image": "https://img.dentistryiq.com/files/base/ebm/diq/image/2026/10/6ad66b1492eb13e815642d0e-gettyimages2149561853.png?auto=format,compress&fit=fill&fill=blur&w=1200&h=630",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1793969728035
+  },
+  {
    "id": "n613de7fd1ff5",
    "type": "news",
    "region": "vn",
@@ -3846,6 +3933,21 @@
    "crawled": 1793935540037
   },
   {
+   "id": "n8d66712e034f",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "World Oral Health Day 2026: FDI urges governments to turn UN oral health commitments into action",
+   "url": "https://www.fdiworlddental.org/world-oral-health-day-2026-fdi-urges-governments-turn-un-oral-health-commitments-action",
+   "source": "FDI World Dental Federation",
+   "date": "2026-03-20T12:00:00.000Z",
+   "summary": "Landmark UN political declaration recognizes oral health as essential to tackling noncommunicable diseasesGENEVA, 20 March 2026 – On World Oral…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-03/wohd26-media-release.jpg?itok=Rcd_y_v7",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1793969728035
+  },
+  {
    "id": "nfe3fd21169c7",
    "type": "news",
    "region": "intl",
@@ -3923,6 +4025,6 @@
    "crawled": 1793462734590
   }
  ],
- "updated": 1793935540037,
- "researchLast": "Community Dent Oral Epidemiol (Wiley)"
+ "updated": 1793969728035,
+ "researchLast": "Dental Materials (ScienceDirect)"
 }
