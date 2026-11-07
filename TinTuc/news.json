@@ -190,6 +190,21 @@
    "crawled": 1793969728035
   },
   {
+   "id": "n24f6df40c7b6",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Happy Patients, Few Reviews—Are You Asking Consistently? - Patient Communication Solutions for DENTRIX, Eaglesoft, and Opendental Users!",
+   "url": "https://www.dentaltown.com/channel/post/27240/happy-patients-few-reviewsare-you-asking-consistently",
+   "source": "Dentaltown",
+   "date": "2026-11-06T00:00:00.000Z",
+   "summary": "Happy patients don’t always remember to leave a review. A simple reminder can help!\r\n\r\nWith PracticeDilly, dental practices can send review requests by text or email, making it easier for patients to share their experiences.\r\nHow does your office ask for reviews—at checkout, through follow-ups, or b",
+   "image": "https://prod.cdn.dentaltown.com/useruploads/318805/blog/9bca7b96-a755-4518-ad87-95c6551e45cd.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1794051770351
+  },
+  {
    "id": "n57662552d758",
    "type": "research",
    "region": "intl",
@@ -222,6 +237,25 @@
    "body": 1,
    "prio": 3,
    "crawled": 1794002643673
+  },
+  {
+   "id": "nbecbe57bfd8a",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "A Split‐Mouth Randomised Controlled Clinical Trial: Comparing Ostectomy Performed With Piezosurgery Versus Burs for Aesthetic Crown‐Lengthening Surgery",
+   "url": "https://onlinelibrary.wiley.com/doi/10.1111/jcpe.70223?af=R",
+   "source": "J Clin Periodontol",
+   "date": "2026-11-05T22:35:38.000Z",
+   "summary": "ABSTRACT Aim To assess the clinical, profilometric, radiographic and patient-reported outcomes following aesthetic crown lengthening (ECL) with ostectomy performed using either piezosurgery (PS) or rotary burs (RB). Methods Fifteen patients with altered passive eruption underwent ECL from maxillary premolar to premolar in a 6-month split-mouth randomised design. Ostectomy was performed with either PS or RB.…",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=onlinelibrary.wiley.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794051770351
   },
   {
    "id": "nb25d222069b1",
@@ -453,7 +487,7 @@
    "url": "https://www.dentaltown.com/channel/post/27233/patients-text-after-hours-practicedilly-replies-instantl",
    "source": "Dentaltown",
    "date": "2026-11-05T00:00:00.000Z",
-   "summary": "Patient messages don’t stop after office hours. With PracticeDilly’s out-of-office auto-reply, patients receive an instant response and know when your team will be back.\r\n\r\nWatch the short video to see how it works.\r\n\r\nDoes your office use automated replies for after-hours texts?",
+   "summary": "Patient messages don’t stop after office hours. With PracticeDilly’s out-of-office auto-reply, patients receive an instant response and know when your team will be back. Watch the short video to see how it works. Does your office use automated replies for after-hours texts?",
    "image": "https://prod.cdn.dentaltown.com/useruploads/318805/blog/4a582006-99db-4974-8e09-2dd087af8ce1.jpg",
    "body": 1,
    "prio": 3,
@@ -4142,6 +4176,21 @@
    "crawled": 1794019528095
   },
   {
+   "id": "nf3d82194a27f",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Register now for WDC26 in Prague before early bird rates end this Thursday 4 June",
+   "url": "https://www.fdiworlddental.org/register-now-wdc26-prague-early-bird-rates-end-thursday-4-june",
+   "source": "FDI World Dental Federation",
+   "date": "2026-03-06T12:00:00.000Z",
+   "summary": "Join colleagues from around the world for four days of high-level science, fresh perspectives, and valuable professional connections.The scientific programme will feature…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-06/Copy%20of%20wdc26%20prague%20website%20news%20%282%29.png?itok=nbJ52tol",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794051770351
+  },
+  {
    "id": "nedf1e2c9c3ac",
    "type": "news",
    "region": "intl",
@@ -4204,6 +4253,6 @@
    "crawled": 1793462734590
   }
  ],
- "updated": 1794019528095,
- "researchLast": "Int J Oral Maxillofac Surg"
+ "updated": 1794051770351,
+ "researchLast": "J Clin Periodontol"
 }
