@@ -1,6 +1,25 @@
 {
  "items": [
   {
+   "id": "nbff45de089b7",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Thiourethane oligomers and functionalized TiO 2 nanostructures in experimental resin composites",
+   "url": "https://www.sciencedirect.com/science/article/pii/S0300571226008201?dgcid=rss_sd_all",
+   "source": "J Dent (ScienceDirect)",
+   "date": "2027-02-01T00:00:00.000Z",
+   "summary": "Publication date: February 2027 Source: Journal of Dentistry, Volume 177 Author(s): Genine Moreira Freitas Guimarães, Fernanda Sandes de Lucena, Steven H. Lewis, Adilson Yoshio Furuse, Carmem S. Pfeifer",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=www.sciencedirect.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794084727662
+  },
+  {
    "id": "n26ad2d1e9288",
    "type": "research",
    "region": "intl",
@@ -190,6 +209,21 @@
    "crawled": 1793969728035
   },
   {
+   "id": "n36c6619630f0",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "YOUR DENTAL PRACTICE COULD BE THE KEY TO YOUR RETIREMENT! - CORNERSTONE DENTAL TRANSITIONS - 60 YEARS COMBINED EXPERIENCE",
+   "url": "https://www.dentaltown.com/channel/post/27239/your-dental-practice-could-be-the-key-to-your-retirement",
+   "source": "Dentaltown",
+   "date": "2026-11-06T00:00:00.000Z",
+   "summary": "WHAT IF YOUR PRACTICE COULD FUND YOUR RETIREMENT TODAY—WITHOUT FORCING YOU TO RETIRE?",
+   "image": "https://prod.cdn.dentaltown.com/useruploads/105720/blog/d9bdbe54-3a12-4ada-9f64-a8819a45539f.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1794084727662
+  },
+  {
    "id": "n24f6df40c7b6",
    "type": "news",
    "region": "intl",
@@ -198,7 +232,7 @@
    "url": "https://www.dentaltown.com/channel/post/27240/happy-patients-few-reviewsare-you-asking-consistently",
    "source": "Dentaltown",
    "date": "2026-11-06T00:00:00.000Z",
-   "summary": "Happy patients don’t always remember to leave a review. A simple reminder can help!\r\n\r\nWith PracticeDilly, dental practices can send review requests by text or email, making it easier for patients to share their experiences.\r\nHow does your office ask for reviews—at checkout, through follow-ups, or b",
+   "summary": "Happy patients don’t always remember to leave a review. A simple reminder can help! With PracticeDilly, dental practices can send review requests by text or email, making it easier for patients to share their experiences. How does your office ask for reviews—at checkout, through follow-ups, or b",
    "image": "https://prod.cdn.dentaltown.com/useruploads/318805/blog/9bca7b96-a755-4518-ad87-95c6551e45cd.jpg",
    "body": 1,
    "prio": 3,
@@ -3714,6 +3748,21 @@
    "crawled": 1793240666499
   },
   {
+   "id": "n6db728712f8d",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "World Oral Health Day 2026 starts now: Download the new video, sing along and join the movement",
+   "url": "https://www.fdiworlddental.org/world-oral-health-day-2026-starts-now-download-new-video-sing-along-and-join-movement",
+   "source": "FDI World Dental Federation",
+   "date": "2026-09-02T12:00:00.000Z",
+   "summary": "2026: Shines a spotlight on the importance of caring for your mouth at every stage of life—from birth through later years.To help bring this powerful message to life, FDI…",
+   "image": "https://www.fdiworlddental.org/modules/contrib/social_media/icons/linkedin.svg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794084727662
+  },
+  {
    "id": "nfeed58a95736",
    "type": "news",
    "region": "vn",
@@ -4253,6 +4302,6 @@
    "crawled": 1793462734590
   }
  ],
- "updated": 1794051770351,
- "researchLast": "J Clin Periodontol"
+ "updated": 1794084727662,
+ "researchLast": "J Dent (ScienceDirect)"
 }
