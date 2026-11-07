@@ -190,6 +190,25 @@
    "crawled": 1793969728035
   },
   {
+   "id": "n57662552d758",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Is virtual planning using standardized temporomandibular joint prostheses appropriate? Case series",
+   "url": "https://www.ijoms.com/article/S0901-5027(26)00473-X/fulltext?rss=yes",
+   "source": "Int J Oral Maxillofac Surg",
+   "date": "2026-11-06T00:00:00.000Z",
+   "summary": "The evolution of virtual surgical planning of advanced corrections of the temporomandibular joint with a total joint replacement (TJR), and with simultaneous corrections of dentofacial deformities, has contributed to a profound improvement of treatment possibilities. However, in cases where virtual surgical planning has been desirable, a customized TJR has up to now been preferred. As such, a customized…",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=www.ijoms.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794019528095
+  },
+  {
    "id": "n592125297bd2",
    "type": "news",
    "region": "intl",
@@ -424,6 +443,21 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793884106222
+  },
+  {
+   "id": "ne5d4508cfe72",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Patients Text After Hours? PracticeDilly Replies Instantl - Patient Communication Solutions for DENTRIX, Eaglesoft, and Opendental Users!",
+   "url": "https://www.dentaltown.com/channel/post/27233/patients-text-after-hours-practicedilly-replies-instantl",
+   "source": "Dentaltown",
+   "date": "2026-11-05T00:00:00.000Z",
+   "summary": "Patient messages don’t stop after office hours. With PracticeDilly’s out-of-office auto-reply, patients receive an instant response and know when your team will be back.\r\n\r\nWatch the short video to see how it works.\r\n\r\nDoes your office use automated replies for after-hours texts?",
+   "image": "https://prod.cdn.dentaltown.com/useruploads/318805/blog/4a582006-99db-4974-8e09-2dd087af8ce1.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1794019528095
   },
   {
    "id": "n17d32e442994",
@@ -4093,6 +4127,21 @@
    "crawled": 1793444098184
   },
   {
+   "id": "nf8257053b43b",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "International Dental Journal publishes FDI's latest Policy Statements",
+   "url": "https://www.fdiworlddental.org/international-dental-journal-publishes-fdis-latest-policy-statements",
+   "source": "FDI World Dental Federation",
+   "date": "2026-03-11T12:00:00.000Z",
+   "summary": "Six FDI Policy Statements adopted at the 2026 FDI General Assembly in Prague have now been published in the International Dental Journal (IDJ). The statements set out FDI's current positions on issues…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-11/news-idj-magazine.jpg?itok=WtImfqVs",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794019528095
+  },
+  {
    "id": "nedf1e2c9c3ac",
    "type": "news",
    "region": "intl",
@@ -4155,6 +4204,6 @@
    "crawled": 1793462734590
   }
  ],
- "updated": 1794002643673,
- "researchLast": "Int Endod J (Wiley)"
+ "updated": 1794019528095,
+ "researchLast": "Int J Oral Maxillofac Surg"
 }
