@@ -209,6 +209,21 @@
    "crawled": 1793969728035
   },
   {
+   "id": "n0eb71c578bc0",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Biohazard Pickup Once a Year, Expired Wipes Put Colorado Pediatric Dentist on Probation",
+   "url": "https://www.dentaltown.com/news/details/15482/biohazard-pickup-once-a-year-expired-wipes-put-colorado-pediatric-dentist-on-probation",
+   "source": "Dentaltown",
+   "date": "2026-11-06T00:00:00.000Z",
+   "summary": "Expired disinfecting wipes and biohazard waste picked up yearly: A Colorado pediatric dentist admitted the findings and now faces dental board probation.",
+   "image": "https://prod.cdn.dentaltown.com/images/dentaltown/pressreleases/197a4f73ff914045aaaf30d6083e4852.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1794172122814
+  },
+  {
    "id": "n7ab9f34139de",
    "type": "news",
    "region": "intl",
@@ -743,6 +758,25 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793797093287
+  },
+  {
+   "id": "n55caec47c017",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Piecemeal Resection without Craniotomy for Diffuse Tenosynovial Giant Cell Tumor of the Temporomandibular Joint",
+   "url": "https://www.sciencedirect.com/science/article/pii/S0278239126010463?dgcid=rss_sd_all",
+   "source": "J Oral Maxillofac Surg (ScienceDirect)",
+   "date": "2026-11-04T00:00:00.000Z",
+   "summary": "Publication date: Available online 4 November 2026 Source: Journal of Oral and Maxillofacial Surgery Author(s): Yumo Wang, Minjun Dong, Chuan Lu, Dongmei He",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=www.sciencedirect.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794172122814
   },
   {
    "id": "nd8ec6c06cfd4",
@@ -4338,6 +4372,21 @@
    "crawled": 1793478584803
   },
   {
+   "id": "nd78e3208aca5",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "FDI President visits Lion Corporation in Tokyo to mark new World Oral Health Day partnership",
+   "url": "https://www.fdiworlddental.org/fdi-president-visits-lion-corporation-tokyo-mark-new-world-oral-health-day-partnership",
+   "source": "FDI World Dental Federation",
+   "date": "2026-02-11T12:00:00.000Z",
+   "summary": "FDI and Lion Corporation have signed a global partnership agreement for World Oral Health Day (WOHD), beginning in 2027. The agreement was formalized on 5 October 2026 during an official signing ceremony at Lion’s headquarters in Tokyo, Japan,…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-11/wohd-20261102-nsharkov.jpg?itok=xJ6FvWIz",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794172122814
+  },
+  {
    "id": "n6d1a2c58ffa1",
    "type": "news",
    "region": "intl",
@@ -4400,6 +4449,6 @@
    "crawled": 1793462734590
   }
  ],
- "updated": 1794138919536,
- "researchLast": "J Endodontics (JOE)"
+ "updated": 1794172122814,
+ "researchLast": "J Oral Maxillofac Surg (ScienceDirect)"
 }
