@@ -209,6 +209,21 @@
    "crawled": 1793969728035
   },
   {
+   "id": "n6a13baafe53a",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Firegang Dental Marketing Explains: Why Dentists Need to Understand Answer Engine Optimization (AEO) - Practice Growth & Dental Marketing",
+   "url": "https://www.dentaltown.com/channel/post/27241/firegang-dental-marketing-explains-why-dentists-need-to-understand-answer-engine-optimization-aeo",
+   "source": "Dentaltown",
+   "date": "2026-11-06T00:00:00.000Z",
+   "summary": "AI is changing how patients find dental practices. Learn how Answer Engine Optimization (AEO) works alongside traditional SEO to improve your practice's visibility in AI-powered searches and help more potential patients discover your services.",
+   "image": "https://prod.cdn.dentaltown.com/useruploads/357784/blog/37dee118-1882-439c-9705-7b520b5bce68.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1794104632720
+  },
+  {
    "id": "n36c6619630f0",
    "type": "news",
    "region": "intl",
@@ -677,6 +692,25 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793797093287
+  },
+  {
+   "id": "n28032f98c517",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Metabolic Memory in Oral Inflammation",
+   "url": "https://journals.sagepub.com/doi/abs/10.1177/00220345261489570?ai=2b4&mi=ehikzz&af=R",
+   "source": "J Dent Res (JDR)",
+   "date": "2026-11-04T06:55:36.000Z",
+   "summary": "Journal of Dental Research, Ahead of Print. The global rise in metabolic diseases has increased the severity and therapeutic complexity of oral inflammatory disorders. Persistent inflammation driven by metabolic memory presents a central pathological mechanism. Even after metabolic parameters are ...",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=journals.sagepub.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794104632720
   },
   {
    "id": "n363bdf97e724",
@@ -3748,6 +3782,21 @@
    "crawled": 1793240666499
   },
   {
+   "id": "n474285375e87",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "FDI releases French, Spanish and Japanese versions of its Oral Health for an Ageing Population Advocacy Guide",
+   "url": "https://www.fdiworlddental.org/fdi-releases-french-spanish-and-japanese-versions-its-oral-health-ageing-population-advocacy-guide",
+   "source": "FDI World Dental Federation",
+   "date": "2026-09-02T12:00:00.000Z",
+   "summary": "Following the successful launch of the Advocacy Guide – Promoting Oral Health for an Ageing Population at the FDI World Dental Congress 2025 (WDC25) in Shanghai, FDI is pleased to announce that the guide is now available in French, Spanish and Japanese , expanding its accessibility to a broader global audience. Image Supporting healthy ageing through oral health Originally presented during the Oral Health for an…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/large/public/2025-09/ohap-advocacy-guide.jpg?itok=MDBmQiwK",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794104632720
+  },
+  {
    "id": "n6db728712f8d",
    "type": "news",
    "region": "intl",
@@ -4302,6 +4351,6 @@
    "crawled": 1793462734590
   }
  ],
- "updated": 1794084727662,
- "researchLast": "J Dent (ScienceDirect)"
+ "updated": 1794104632720,
+ "researchLast": "J Dent Res (JDR)"
 }
