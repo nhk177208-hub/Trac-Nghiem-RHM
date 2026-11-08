@@ -101,12 +101,11 @@ const GUIDE_SOURCES = [
   { name: 'Dental Update', region: 'intl', kind: 'news', group: G.NEWS, site: 'https://www.dental-update.co.uk/articles', ua: 'browser', slow: true },
   { name: 'DentistryIQ',            region: 'intl', kind: 'news', group: G.NEWS, site: 'https://www.dentistryiq.com/' },
   { name: 'Dentaltown',             region: 'intl', kind: 'news', group: G.NEWS, site: 'https://www.dentaltown.com/' },
-  { name: 'Dentistry Today',        region: 'intl', kind: 'news', group: G.NEWS, feed: 'https://www.dentistrytoday.com/feed/', site: 'https://www.dentistrytoday.com/' },
+  { name: 'Dentistry Today',        region: 'intl', kind: 'news', group: G.NEWS, feed: 'https://www.dentistrytoday.com/feed/', site: 'https://www.dentistrytoday.com/', ua: 'browser' },
   { name: 'Dentistry.co.uk',        region: 'intl', kind: 'news', group: G.NEWS, feed: 'https://dentistry.co.uk/feed/', site: 'https://dentistry.co.uk/' },
   // ===== QUOC TE - muc 2: hiep hoi / to chuc =====
   { name: 'ADA News',               region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://adanews.ada.org/' },
   { name: 'FDI World Dental Federation', region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.fdiworlddental.org/latest-news', ua: 'browser' },
-  { name: 'IADR',                   region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.iadr.org/news' },
   { name: 'ADEE',                   region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://adee.org/' },
   { name: 'ITI',                    region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.iti.org/' },
   { name: 'EAO',                    region: 'intl', kind: 'news', group: G.ASSOC, site: 'https://www.eao.org/' },
@@ -199,7 +198,7 @@ const GUIDE_SOURCES = [
 
 /* Do uu tien nguon (prio): 1 = cao (co quan quan ly, hiep hoi lon, tap chi hang dau, benh vien/truong dau nganh),
    2 = trung binh, 3 = thap (bao thuong mai/cong dong, trien lam quoc te). Nguon prio cao (so nho) duoc chon truoc khi gioi han so bai. */
-const P1 = ['ADA News', 'FDI World Dental Federation', 'IADR', 'ITI', 'EAO', 'AAO (Orthodontists)', 'IAOMS', 'AAOMS', 'EFP', 'AAP (Periodontology)', 'AAE', 'NIDCR (NIH)', 'Cochrane Oral Health',
+const P1 = ['ADA News', 'FDI World Dental Federation', 'ITI', 'EAO', 'AAO (Orthodontists)', 'IAOMS', 'AAOMS', 'EFP', 'AAP (Periodontology)', 'AAE', 'NIDCR (NIH)', 'Cochrane Oral Health',
   'J Dent Res (JDR)', 'JADA', 'British Dental Journal', 'J Clin Periodontol', 'J Endodontics (JOE)', 'Int J Oral Maxillofac Surg', 'J Prosthet Dent (JPD)', 'AJODO', 'Clin Oral Implants Res',
   'J Dent (ScienceDirect)', 'Dental Materials (ScienceDirect)', 'J Periodontol (Wiley)', 'Int Endod J (Wiley)', 'J Oral Maxillofac Surg (ScienceDirect)',
   'Bộ Y tế', 'Cục Quản lý KCB', 'BV RHM Trung ương TP.HCM', 'BV RHM Trung ương Hà Nội', 'Viện Đào tạo RHM - ĐH Y Hà Nội', 'Khoa RHM - ĐH Y Dược TP.HCM',
@@ -236,6 +235,7 @@ const fname = id => id.replace(/[^a-z0-9_-]/gi, '_');
 const abs = (u, base) => { if (!u || !String(u).trim()) return ''; try { return new URL(decode(u).trim(), base).toString(); } catch { return ''; } };
 const pickLargestSrcsetUrl = ss => { let best = '', bestN = -1; for (const part of String(ss || '').split(',')) { const t = part.trim().split(/\s+/); if (!t[0]) continue; const d = (t[1] || '').match(/([\d.]+)(w|x)/); const n = d ? parseFloat(d[1]) : 0; if (n >= bestN) { bestN = n; best = t[0]; } } return best; };
 const absSrcset = (ss, base) => String(ss || '').split(',').map(p => { const t = p.trim().split(/\s+/); if (!t[0]) return ''; const u = abs(t[0], base); return u ? [u, ...t.slice(1)].join(' ') : ''; }).filter(Boolean).join(', ');
+const doiOf = t => { const m = String(t || '').match(/(?:doi\.org\/|doi:\s*|\/doi\/(?:abs\/|full\/|epdf\/|pdf\/)?|citation_doi"\s+content=")(10\.\d{4,9}\/[^\s"'<>&?#]+)/i); return m ? decodeURIComponent(m[1]).replace(/[.,;)]+$/, '') : ''; };
 const ytId = u => { const m = String(u || '').match(/(?:youtube\.com\/(?:embed\/|watch\?[^#]*v=|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{6,})/); return m ? m[1] : ''; };
 const isVideoEmbed = u => { try { const x = new URL(u); return ((x.hostname === 'www.youtube.com' || x.hostname === 'youtube.com' || x.hostname === 'www.youtube-nocookie.com' || x.hostname === 'youtube-nocookie.com') && x.pathname.startsWith('/embed/')) || (x.hostname === 'player.vimeo.com' && x.pathname.startsWith('/video/')); } catch { return false; } };
 
@@ -244,15 +244,51 @@ function cleanUrl(u) {
   catch { return ''; }
 }
 
-const BROWSER_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
-const BROWSER_HDR = { 'Sec-Ch-Ua': '"Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"', 'Sec-Ch-Ua-Mobile': '?0', 'Sec-Ch-Ua-Platform': '"Windows"', 'Sec-Fetch-Dest': 'document', 'Sec-Fetch-Mode': 'navigate', 'Sec-Fetch-Site': 'none', 'Upgrade-Insecure-Requests': '1' };
-const hdrs = (accept, opt) => ({ 'User-Agent': opt.ua === 'browser' ? BROWSER_UA : UA, Accept: accept, 'Accept-Language': 'vi,en;q=0.8', ...(opt.ua === 'browser' ? BROWSER_HDR : {}) });
+const BROWSER_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
+const BROWSER_HDR = { 'Sec-Ch-Ua': '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'Sec-Ch-Ua-Mobile': '?0', 'Sec-Ch-Ua-Platform': '"Windows"', 'Sec-Fetch-Dest': 'document', 'Sec-Fetch-Mode': 'navigate', 'Sec-Fetch-Site': 'none', 'Upgrade-Insecure-Requests': '1' };
+const hdrs = (accept, opt) => (opt = (!process.env.NEWS_UA && !opt.ua) ? { ...opt, ua: 'browser' } : opt, { 'User-Agent': opt.ua === 'browser' ? BROWSER_UA : UA, Accept: opt.ua === 'browser' && /html/i.test(accept) ? 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8' : accept, 'Accept-Language': opt.ua === 'browser' ? 'en-US,en;q=0.9,vi;q=0.8' : 'vi,en;q=0.8', ...(opt.ua === 'browser' ? BROWSER_HDR : {}), ...(opt._alt ? { Referer: 'https://www.google.com/', 'Sec-Fetch-Site': 'cross-site', 'Cache-Control': 'no-cache', Pragma: 'no-cache' } : {}), ...(opt._hdr || {}) });
 // opt: { insecure, slow, ua } lay tu cau hinh nguon. insecure = bo kiem tra chuoi chung chi (chi dung cho vai site VN thieu intermediate cert, chi doc tin cong khai)
-async function get(url, accept = '*/*', opt = {}) {
+// trang chan robot (Cloudflare "Just a moment", Akamai/ScienceDirect "problem providing the content", captcha...) tra ve 200/403 voi trang thu thach -> coi nhu loi de thu cach khac
+const BLOCK_PAGE = /<title>\s*(?:just a moment|attention required|access denied|are you a robot|robot check|security check|please wait|one more step|ddos-guard)|cf-browser-verification|cf_chl_opt|There was a problem providing the content you requested|px-captcha|captcha-delivery\.com|_Incapsula_Resource/i;
+const isBlockPage = h => { const t = String(h || ''); return t.length < 60000 && BLOCK_PAGE.test(t.slice(0, 60000)); };
+const BLOCKED = /HTTP (401|403|406|429|451|503)|BLOCKED/;
+const READER = process.env.NEWS_READER_FALLBACK !== '0';   // dich vu doc trang (r.jina.ai) khi trang chan robot; dat NEWS_READER_FALLBACK=0 de tat
+const PROXY = process.env.NEWS_PROXY || '';                 // tuy chon: proxy rieng dang https://proxy.example/?url={url}
+export async function get(url, accept = '*/*', opt = {}) {
+  try { return await get0(url, accept, opt); }
+  catch (e) {
+    if (!BLOCKED.test(e.message) || opt._fb) throw e;
+    if (process.env.NEWS_DEBUG) console.log('  ! bi chan ' + url + ' (' + e.message + '), thu cach khac');
+    const isHtml = /html/i.test(accept);
+    if (opt.ua !== 'browser' && process.env.NEWS_UA) { try { return await get0(url, accept, { ...opt, ua: 'browser' }); } catch {} }                 // 1) gia lap trinh duyet day du
+    try { return await get0(url, accept, { ...opt, ua: 'browser', _alt: true }); } catch {}                                   // 2) trinh duyet + Referer Google, http/1 (node)
+    if (isHtml) { const w = await wpFallback(url, opt); if (w) return w; }                                                  // 3) WordPress REST API cua chinh trang
+    if (PROXY) { try { return await get0(PROXY.replace('{url}', encodeURIComponent(url)), accept, { ...opt, _fb: true }); } catch {} }
+    if (READER && isHtml) { try { const h = await get0('https://r.jina.ai/' + url, 'text/html', { _fb: true, slow: true, _hdr: { 'X-Return-Format': 'html', 'X-With-Images-Summary': 'false' } }); if (h && !isBlockPage(h) && h.length > 1500) return '<!--rhm-reader-->' + h; } catch {} }   // 4) dich vu doc trang
+    throw e;
+  }
+}
+// WordPress: /wp-json/wp/v2/posts?slug=<slug> tra ve toan van + anh dai dien, thuong khong qua lop chan cua trang HTML
+async function wpFallback(url, opt) {
+  let u; try { u = new URL(url); } catch { return ''; }
+  const slug = u.pathname.split('/').filter(Boolean).pop(); if (!slug || /\./.test(slug)) return '';
+  try {
+    const j = JSON.parse(await get0(u.origin + '/wp-json/wp/v2/posts?_embed=wp:featuredmedia&slug=' + encodeURIComponent(slug), 'application/json', { ...opt, ua: 'browser', _fb: true }));
+    const p = Array.isArray(j) && j[0]; if (!p || !p.content || !p.content.rendered) return '';
+    const fm = (((p._embedded || {})['wp:featuredmedia'] || [])[0] || {}).source_url || '';
+    const t = (p.title && p.title.rendered) || '', d = p.date_gmt ? p.date_gmt + 'Z' : (p.date || ''), ex = strip((p.excerpt && p.excerpt.rendered) || '');
+    return '<html><head><title>' + t + '</title><meta property="og:type" content="article"><meta property="og:title" content="' + esc(strip(t)) + '">' + (fm ? '<meta property="og:image" content="' + esc(fm) + '">' : '') + '<meta property="article:published_time" content="' + esc(d) + '"><meta name="description" content="' + esc(ex) + '"></head><body><article>' + p.content.rendered + '</article></body></html>';
+  } catch { return ''; }
+}
+async function get0(url, accept = '*/*', opt = {}) {
   let err;
   for (let k = 0; k < 3; k++) {
-    try { return (opt.insecure || opt.slow) ? await getNode(url, accept, opt) : await get1(url, accept, opt); }
-    catch (e) { err = e; if (/HTTP (401|403|404|410)|ENOTFOUND/.test(e.message)) break; await new Promise(r => setTimeout(r, 1500 * (k + 1) + (/HTTP 5\d\d/.test(e.message) ? 3000 : 0))); }
+    try {
+      const h = (opt.insecure || opt.slow || opt._alt) ? await getNode(url, accept, opt) : await get1(url, accept, opt);
+      if (/html/i.test(accept) && isBlockPage(h)) throw new Error('BLOCKED (trang thu thach chong robot)');
+      return h;
+    }
+    catch (e) { err = e; if (/HTTP (401|403|404|406|410|451)|ENOTFOUND|BLOCKED/.test(e.message)) break; await new Promise(r => setTimeout(r, 1500 * (k + 1) + (/HTTP 5\d\d/.test(e.message) ? 3000 : 0))); }
   }
   throw err;
 }
@@ -300,8 +336,11 @@ const LAZY_ATTRS = ['data-src', 'data-lazy-src', 'data-original', 'data-url', 'd
 const imgUrlOf = (raw, base) => {
   let u = '';
   for (const a of LAZY_ATTRS) { u = attr(raw, 'img', a); if (u && !/^data:/i.test(u)) break; u = ''; }
-  if (!u) { const sr = attr(raw, 'img', 'src'); if (sr && !/^data:/i.test(sr)) u = sr; }
-  if (!u) { const ss = attr(raw, 'img', 'srcset') || attr(raw, 'img', 'data-srcset'); if (ss) u = pickLargestSrcsetUrl(ss); }
+  const ss = attr(raw, 'img', 'data-srcset') || attr(raw, 'img', 'data-lazy-srcset') || attr(raw, 'img', 'srcset');
+  const big = ss && !/^\s*data:/i.test(ss) ? pickLargestSrcsetUrl(ss) : '';
+  if (big && (!u || THUMB.test(u))) u = big;                                   // srcset co ban lon nhat (anh goc) -> dung thay anh thu nho 300x200
+  if (!u) { const sr = attr(raw, 'img', 'src'); if (sr && !/^data:/i.test(sr)) u = THUMB.test(sr) && big ? big : sr; }
+  if (!u && big) u = big;
   return u ? abs(u, base) : '';
 };
 const tinyImg = raw => { const n = a => { const m = String(attr(raw, 'img', a) || '').match(/^\s*(\d+)(?:px)?\s*$/); return m ? +m[1] : 0; }; const w = n('width'), h = n('height'); return (w && w <= 64) || (h && h <= 40); };   // icon 16-64px / duong ke mong
@@ -314,9 +353,19 @@ const JOURNAL_LOGO = { 'AJODO': { url: 'https://www.ajodo.org/pb-assets/ux3/logo
 const isSiteIcon = u => { const t = String(u || ''); const fn = t.split(/[?#]/)[0].split('/').pop(); return /flag|language|vietnamese|english|french|favicon/i.test(fn) || /\/languages?\//i.test(t); };
 const GENERIC_COVER = /(^|[^a-z])(home|homepage|house|noimage|no-image|no_image|default|ico|ic|placeholder|nophoto|no-photo)([^a-z]|$)/i;   // anh mac dinh/icon trang (vd icon cai nha) khong phai anh bia bai
 const badCover = u => { const t = String(u || ''); const fn = t.split(/[?#]/)[0].split('/').pop(); return BAD_IMG.test(fn) || ICON_NAME.test(fn) || GENERIC_COVER.test(fn) || /flag|language|vietnamese|english|french|favicon|banner/i.test(fn) || /\/languages?\//i.test(t) || /\/thumb\//i.test(t); };   // anh bia: bo qua them co ngon ngu / flag / banner cua trang (vi du pnt.edu.vn/.../languages/vietnamese.png)   // chi xet ten file, khong xet ca duong dan (tranh loai nham anh bai that)
+// video nhung kieu lazy-load (WP Rocket rll-youtube-player, lite-youtube, iframe data-src, WordPress embed chi co URL) -> iframe YouTube that
+const YT_IFR = id => '<iframe src="https://www.youtube.com/embed/' + id + '"></iframe>';
+export function normEmbeds(html) {
+  return String(html || '')
+    .replace(/<div\b[^>]*class=["'][^"']*rll-youtube-player[^"']*["'][^>]*>/gi, m => { const id = (m.match(/data-id=["']([A-Za-z0-9_-]{6,})["']/i) || [])[1] || ytId(attr(m, 'div', 'data-src')); return id ? YT_IFR(id) + m : m; })
+    .replace(/<lite-youtube\b[^>]*>/gi, m => { const id = (m.match(/videoid=["']([A-Za-z0-9_-]{6,})["']/i) || [])[1]; return id ? YT_IFR(id) + m : m; })
+    .replace(/<iframe\b[^>]*>/gi, m => { const ds = attr(m, 'iframe', 'data-lazy-src') || attr(m, 'iframe', 'data-src') || attr(m, 'iframe', 'data-litespeed-src') || attr(m, 'iframe', 'data-rocket-src'); const sr = attr(m, 'iframe', 'src'); if (ds && (!sr || /^about:|^data:|^javascript:/i.test(sr) || !isVideoEmbed(abs(sr, 'https://x.invalid/')))) { const id = ytId(ds); return '<iframe src="' + esc(id ? 'https://www.youtube.com/embed/' + id : ds) + '">'; } const id = ytId(sr); if (id && !/\/embed\//.test(sr)) return '<iframe src="https://www.youtube.com/embed/' + id + '">'; return m; })
+    .replace(/(<div\b[^>]*class=["'][^"']*wp-block-embed__wrapper[^"']*["'][^>]*>)\s*(https?:\/\/(?:www\.)?(?:youtube\.com\/(?:watch\?[^\s<]*v=|shorts\/)|youtu\.be\/)[A-Za-z0-9_-]{6,}[^\s<]*)\s*(?=<\/div>)/gi, (m, d, u) => d + YT_IFR(ytId(u)))
+    .replace(/<p>\s*(https?:\/\/(?:www\.)?(?:youtube\.com\/watch\?[^\s<]*v=|youtu\.be\/)[A-Za-z0-9_-]{6,}[^\s<]*)\s*<\/p>/gi, (m, u) => '<figure>' + YT_IFR(ytId(u)) + '</figure>');
+}
 export function sanitize(html, base) {
   let lastPicSrcset = '';
-  html = html.replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style|noscript|svg|object|embed|form|button|select|textarea|template)\b[\s\S]*?<\/\1\s*>/gi, '');
+  html = normEmbeds(html).replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style|noscript|svg|object|embed|form|button|select|textarea|template)\b[\s\S]*?<\/\1\s*>/gi, '');
   const out = []; const stack = []; const re = /<(\/?)([a-zA-Z][a-zA-Z0-9]*)\b([^>]*)>|([^<]+)|</g; let m;
   while ((m = re.exec(html))) {
     if (m[4] !== undefined) { out.push(m[4]); continue; }
@@ -361,7 +410,7 @@ export function sanitize(html, base) {
       const is = attr(raw, 'iframe', 'src');
       const iu = is ? abs(is, base) : '';
       if (!iu || !isVideoEmbed(iu)) continue;
-      out.push('<iframe src="' + esc(iu) + '" loading="lazy" referrerpolicy="no-referrer" allowfullscreen sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"></iframe>');
+      out.push('<iframe src="' + esc(iu) + '" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"></iframe>');
       continue;
     }
     out.push('<' + t + '>'); if (!VOID.has(t)) stack.push(t);
@@ -437,7 +486,8 @@ export function extractArticle(page, base) {
   const og = n => metaOf(new RegExp('<meta[^>]+(?:property|name)=["\']' + n + '["\'][^>]*content=["\']([^"\']*)["\']', 'i')) || metaOf(new RegExp('<meta[^>]+content=["\']([^"\']*)["\'][^>]*(?:property|name)=["\']' + n + '["\']', 'i'));
   let title = og('og:title') || strip(tag(page, 'title'));
   if (SECTION_VN.test(title) || (title.split(/\s+/).length < 4)) { const h1 = strip(tag(h, 'h1')); if (h1 && !SECTION_VN.test(h1) && h1.split(/\s+/).length >= 4) title = h1; }
-  const image = abs(og('og:image') || og('og:image:secure_url') || og('og:image:url') || og('twitter:image') || og('twitter:image:src'), base);
+  const ldImg = (() => { for (const m of page.matchAll(/<script[^>]+application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi)) { const mm = m[1].match(/"(?:image|thumbnailUrl)"\s*:\s*(?:\[\s*)?(?:"([^"]+)"|\{[^{}]*?"url"\s*:\s*"([^"]+)")/); if (mm) return (mm[1] || mm[2]).replace(/\\\//g, '/'); } return ''; })();
+  const image = abs(og('og:image') || og('og:image:secure_url') || og('og:image:url') || og('twitter:image') || og('twitter:image:src') || ldImg, base);
   const desc = og('og:description') || og('description');
   const dateStr = og('article:published_time') || og('og:published_time') || og('datePublished') || (page.match(/"datePublished"\s*:\s*"([^"]+)"/) || [])[1] || attr(page.match(/<time\b[^>]*>/i)?.[0] || '', 'time', 'datetime');
   const metaTs = Date.parse(dateStr || ''); let ts = metaTs;
@@ -490,6 +540,7 @@ export function extractArticle(page, base) {
   if (!image2) {   // anh nam ngoai cum doan van chinh / ngoai vung article-main (anh dai dien o header, gallery): quet toan vung bai roi toan trang, bo qua logo/icon
     const scanImg = htmlSrc => { for (const im of String(htmlSrc || '').matchAll(/<img\b[^>]*>/gi)) { const tagI = im[0]; let u = attr(tagI, 'img', 'data-src') || attr(tagI, 'img', 'data-lazy-src') || attr(tagI, 'img', 'src'); if (!u) { const ss = attr(tagI, 'img', 'srcset') || attr(tagI, 'img', 'data-srcset'); if (ss) u = pickLargestSrcsetUrl(ss); } u = u ? abs(u, base) : ''; if (u && /^https?:/i.test(u) && !badCover(u)) return u; } return ''; };
     image2 = scanImg(region) || scanImg(page);
+    if (!image2) { const bg = (region.match(/background(?:-image)?\s*:\s*url\(\s*['"]?([^'")]+\.(?:jpe?g|png|webp|avif)[^'")]*)/i) || [])[1]; const u = bg ? abs(decode(bg), base) : ''; if (u && !badCover(u) && !isLogoImg(u)) image2 = u; }   // anh hero dang background CSS
   }
   let video = '', videoPoster = '';
   const vBlock = body.match(/<video\b[\s\S]*?<\/video>/i);
@@ -539,14 +590,69 @@ async function siteDefaultOg(url, s) {
 }
 async function pickCover(page, url, s) {
   if (page._cover !== undefined) return page._cover;
-  let cv = page.image;
-  if (page.bodyImg && page.ogImage && imgKey(page.bodyImg) !== imgKey(page.ogImage)) {
-    let generic = !!s?.bodyCover;
-    if (!generic) { let set = ogCount.get(page.ogImage); if (!set) ogCount.set(page.ogImage, set = new Set()); set.add(url); if (set.size >= 2) generic = true; }
-    if (!generic) { const d = await siteDefaultOg(url, s); if (d && imgKey(d) === imgKey(page.ogImage)) generic = true; }
-    if (generic) cv = page.bodyImg;
+  // UU TIEN hinh dau tien trong bai (anh that cua bai); khong co moi dung og:image (tru khi og:image la anh mac dinh cua ca trang = logo/anh chia se chung); logo trang chi dung khi bai hoan toan khong co hinh (xu ly o noi goi)
+  let cv = '';
+  if (page.bodyImg && !isLogoImg(page.bodyImg) && !badCover(page.bodyImg)) cv = page.bodyImg;
+  else if (page.image && !isLogoImg(page.image) && !badCover(page.image)) {
+    let generic = false;
+    if (page.ogImage && imgKey(page.ogImage) === imgKey(page.image)) {
+      let set = ogCount.get(page.ogImage); if (!set) ogCount.set(page.ogImage, set = new Set()); set.add(url); if (set.size >= 3) generic = true;   // cung 1 og:image o >= 3 bai khac nhau -> anh chung cua trang
+      if (!generic) { const d = await siteDefaultOg(url, s); if (d && imgKey(d) === imgKey(page.ogImage)) generic = true; }   // trung og:image trang chu
+    }
+    if (!generic) cv = page.image;
   }
   page._cover = cv; return cv;
+}
+
+/* ---------- tap chi: lay abstract + hinh (graphical abstract / Fig.1) tu trang bai; ScienceDirect bi chan thi dung Crossref/OpenAlex + CDN anh Elsevier ---------- */
+const JCOVER = /(^|[^a-z])(cover|cov\d+\w*|journal-?image|default|logo|banner)([^a-z]|$)/i;
+export function journalFromPage(page, url) {
+  const P = String(page || ''); let abs = '', img = '';
+  let blk = extractDivById(P, 'abstracts') || extractDivById(P, 'abs0001');
+  if (!blk) { const m = P.match(/<(section|div)\b[^>]*(?:class|id)=["'][^"']*\babstract(?:-content|Section|__content)?\b[^"']*["'][^>]*>([\s\S]*?)<\/\1>/i); if (m) blk = m[2]; }
+  if (blk) { blk = blk.replace(/<div\b[^>]*class=["'][^"']*abstract graphical[\s\S]*$/i, ''); abs = sanitize(blk.replace(/<div\b[^>]*>/gi, '<p>').replace(/<\/div>/gi, '</p>'), url).replace(/<h2>\s*Abstract\s*<\/h2>/i, ''); for (let k = 0; k < 4; k++) abs = abs.replace(/<p>(\s*<(?:p|h[2-4]|ul|ol|figure)>)/g, '$1').replace(/(<\/(?:p|h[2-4]|ul|ol|figure)>\s*)<\/p>/g, '$1').replace(/<p>\s*<\/p>/g, ''); }
+  if (strip(abs).length < 150) { const ca = (P.match(/<meta[^>]+name=["'](?:citation_abstract|dc\.description)["'][^>]*content=["']([^"']{150,})["']/i) || [])[1]; abs = ca ? '<p>' + esc(strip(decode(ca))) + '</p>' : ''; }
+  const og = (P.match(/<meta[^>]+property=["']og:image["'][^>]*content=["']([^"']+)["']/i) || P.match(/<meta[^>]+content=["']([^"']+)["'][^>]*property=["']og:image["']/i) || [])[1];
+  const ogU = og ? abs_(decode(og), url) : '';
+  const fn = x => String(x).split(/[?#]/)[0].split('/').pop();
+  if (ogU && !badCover(ogU) && !JCOVER.test(fn(ogU))) img = ogU;
+  if (!img) { const f = P.match(/<figure\b[\s\S]*?<\/figure>/i); if (f) { const t = f[0].match(/<img\b[^>]*>/i); const u = t ? imgUrlOf(t[0], url) : ''; if (u && /^https?:/i.test(u) && !badCover(u) && !JCOVER.test(fn(u))) img = u; } }
+  return { abs, img };
+}
+const abs_ = (u, b) => abs(u, b);
+async function urlOk(u) {
+  const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 15000);
+  try { const r = await fetch(u, { method: 'HEAD', headers: { 'User-Agent': BROWSER_UA, Accept: 'image/*' }, signal: ctl.signal, redirect: 'follow' }); return r.ok && /image/i.test(r.headers.get('content-type') || 'image'); } catch { return false; } finally { clearTimeout(t); }
+}
+const jatsToHtml = x => String(x || '').replace(/<jats:title>([\s\S]*?)<\/jats:title>/gi, '<h3>$1</h3>').replace(/<jats:p>/gi, '<p>').replace(/<\/jats:p>/gi, '</p>').replace(/<\/?jats:[^>]*>/gi, '');
+const PII_RE = /\/(?:pii|article)\/(S\d{4}-?\d{3}[\dX](?:\(\d{2}\)|\d{2})\d{5}-?[\dX])/i;
+export const piiOf = u => { const m = String(u || '').match(PII_RE); return m ? m[1].replace(/[^0-9A-Z]/gi, '').toUpperCase() : ''; };
+export async function doiAbstract(doi) {
+  if (!doi) return '';
+  try {
+    const j = JSON.parse(await get0('https://api.crossref.org/works/' + encodeURIComponent(doi) + (process.env.CROSSREF_MAILTO ? '?mailto=' + encodeURIComponent(process.env.CROSSREF_MAILTO) : ''), 'application/json'));
+    const a = j.message && j.message.abstract; if (a) { const h = sanitize(jatsToHtml(a), 'https://doi.org/'); if (strip(h).length > 150) return h; }
+  } catch {}
+  try {
+    const o = JSON.parse(await get0('https://api.openalex.org/works/https://doi.org/' + doi + '?select=abstract_inverted_index', 'application/json'));
+    const inv = o.abstract_inverted_index; if (inv) { const w = []; for (const [word, pos] of Object.entries(inv)) for (const i of pos) w[i] = word; const t = w.filter(Boolean).join(' '); if (t.length > 150) return '<p>' + esc(t) + '</p>'; }
+  } catch {}
+  return '';
+}
+export async function elsevierExtra(pii) {
+  const out = { abs: '', img: '', doi: '' };
+  for (const k of ['ga1', 'gr1']) { const u = 'https://ars.els-cdn.com/content/image/1-s2.0-' + pii + '-' + k + '.jpg'; if (await urlOk(u)) { out.img = u; break; } }
+  try {
+    const j = JSON.parse(await get0('https://api.crossref.org/works?rows=1&select=DOI,abstract&filter=alternative-id:' + encodeURIComponent(pii) + (process.env.CROSSREF_MAILTO ? '&mailto=' + encodeURIComponent(process.env.CROSSREF_MAILTO) : ''), 'application/json'));
+    const w = (j.message && j.message.items || [])[0]; if (w) { out.doi = w.DOI || ''; if (w.abstract) out.abs = sanitize(jatsToHtml(w.abstract), 'https://doi.org/'); }
+  } catch {}
+  if (!out.abs && out.doi) {
+    try {
+      const o = JSON.parse(await get0('https://api.openalex.org/works/https://doi.org/' + out.doi + '?select=abstract_inverted_index', 'application/json'));
+      const inv = o.abstract_inverted_index; if (inv) { const w = []; for (const [word, pos] of Object.entries(inv)) for (const i of pos) w[i] = word; const t = w.filter(Boolean).join(' '); if (t.length > 150) out.abs = '<p>' + esc(t) + '</p>'; }
+    } catch {}
+  }
+  return out;
 }
 
 /* ---------- RSS / Atom ---------- */
@@ -578,19 +684,19 @@ export function parseFeed(xml, source, opt = {}) {
     for (const mc of b.matchAll(/<media:content\b[^>]*>/gi)) { const ty = attr(mc[0], 'media:content', 'type') || '', med = attr(mc[0], 'media:content', 'medium') || ''; if (/^video\//i.test(ty) || med.toLowerCase() === 'video') continue; image = attr(mc[0], 'media:content', 'url'); if (image) break; }
     if (!image) image = attr(b, 'media:thumbnail', 'url');
     if (!image) { const e = b.match(/<enclosure\b[^>]*>/i); if (e && /image/i.test(e[0])) image = attr(e[0], 'enclosure', 'url'); }
-    if (!image) { const m = decode(unCdata(rawBody)).match(/<img[^>]+src=["']([^"']+)["']/i); if (m) image = m[1]; }
+    if (!image) { const bodyH = decode(unCdata(rawBody)); for (const im of bodyH.matchAll(/<img\b[^>]*>/gi)) { const u = imgUrlOf(im[0], link || 'https://x.invalid/'); if (u && !badCover(u) && !tinyImg(im[0])) { image = u; break; } } }
     if (!image) { const sm = decode(unCdata(rawBody)).match(/<source[^>]+srcset=["']([^"']+)["']/i); if (sm) image = pickLargestSrcsetUrl(sm[1]); }
     let video = '', videoPoster = '';
     for (const mc of b.matchAll(/<media:content\b[^>]*>/gi)) { const u = attr(mc[0], 'media:content', 'url'), ty = attr(mc[0], 'media:content', 'type') || '', med = attr(mc[0], 'media:content', 'medium') || ''; if (u && (/^video\//i.test(ty) || med.toLowerCase() === 'video')) { video = u; break; } }
     if (!video) { const e = b.match(/<enclosure\b[^>]*>/i); if (e && /video/i.test(e[0])) video = attr(e[0], 'enclosure', 'url'); }
     if (!video) { const vm = decode(unCdata(rawBody)).match(/<video\b[^>]*\bposter=["']([^"']+)["']/i); if (vm) videoPoster = vm[1]; const vs = decode(unCdata(rawBody)).match(/<video\b[^>]*\bsrc=["']([^"']+)["']/i) || decode(unCdata(rawBody)).match(/<source\b[^>]*\bsrc=["']([^"']+)["']/i); if (vs) video = vs[1]; }
-    if (!video) { const im = decode(unCdata(rawBody)).match(/<iframe[^>]*\bsrc=["']([^"']+)["']/i); if (im && isVideoEmbed(im[1])) video = im[1]; }
+    if (!video) { const im = normEmbeds(decode(unCdata(rawBody))).match(/<iframe[^>]*\bsrc=["']([^"']+)["']/i); if (im && isVideoEmbed(decode(im[1]))) video = decode(im[1]); }
     if (!videoPoster && video) { const y = ytId(video); if (y) videoPoster = 'https://i.ytimg.com/vi/' + y + '/hqdefault.jpg'; }
     if (!image && videoPoster) image = videoPoster;
     if (!title || !link || !ts || isNaN(ts)) continue;
     out.push({
       id: 'n' + sha(link), type: opt.kind === 'journal' ? 'research' : 'news', region: opt.region || 'intl', group: opt.group || '', title: trunc(title, 220), url: link, source: srcName,
-      date: new Date(ts).toISOString(), summary: trunc(summary, 420), image: /^https?:/i.test(image) ? image : '', video: /^https?:/i.test(video) ? video : '', videoPoster: /^https?:/i.test(videoPoster) ? videoPoster : '',
+      date: new Date(ts).toISOString(), summary: trunc(summary, 420), doi: strip(tag(b, 'prism:doi')) || doiOf(strip(tag(b, 'dc:identifier'))) || doiOf(link), image: /^https?:/i.test(image) ? image : '', video: /^https?:/i.test(video) ? video : '', videoPoster: /^https?:/i.test(videoPoster) ? videoPoster : '',
       _html: decode(unCdata(tag(b, 'content:encoded'))), _full: summary,
     });
   }
@@ -743,12 +849,12 @@ async function enrichScraped(items, s, isKnown, minTs) {
     if (JUNK_TITLE.test(title) || !isRelevant(reFor(s), title, (page.desc || '') + ' ' + strip(page.html).slice(0, 2500), needFor(s))) return;   // phai lien quan nha khoa/RHM
     it.title = title; it.date = new Date(page.ts).toISOString();
     it.summary = trunc(page.desc || strip(page.html), 420);
-    { const cv = page.image ? await pickCover(page, it.url, s) : ''; if (cv) it.image = cv; }
+    { const cv = (page.bodyImg || page.image) ? await pickCover(page, it.url, s) : ''; if (cv) it.image = cv; }
+    if (!it.image && page.videoPoster) it.image = page.videoPoster;
     if (!it.image && page.logo) { it.image = page.logo; it.imageKind = 'logo'; it.imageBg = logoBg(it.source, page.logo); }
     if (!it.image && SITE_LOGO[it.source]) { it.image = SITE_LOGO[it.source]; it.imageKind = 'logo'; it.imageBg = logoBg(it.source, SITE_LOGO[it.source]); }
     if (page.video) it.video = page.video;
     if (page.videoPoster) it.videoPoster = page.videoPoster;
-    if (!it.image && page.videoPoster) it.image = page.videoPoster;
     it._art = page; ok.push(it);
   });
   return ok;
@@ -810,9 +916,16 @@ async function buildArticle(it, s) {
     return { ...base, byline: it.authors || '', image: it.image || '', imageKind: it.imageKind || '', imageBg: it.imageBg || '', html, kind: 'abstract' };
   }
   if (it.type === 'research' && !it._scraped) {      // tap chi: RSS thuong chi co abstract
-    try { const _ph = await get(it.url, 'text/html,*/*', s || {}); if (_ph && isPaywalled(_ph)) return null; } catch {}   // bai tra phi: bo luon, bai mo cua cung trang khong co hop tra phi nen van giu; fetch loi thi giu (khong bo tren chung cu khong chac)
-    const h = it._html ? stripBoiler(sanitize(it._html, it.url)) : '';
+    let _ph = ''; try { _ph = await get(it.url, 'text/html,*/*', s || {}); if (_ph && isPaywalled(_ph)) return null; } catch {}   // bai tra phi: bo luon, bai mo cua cung trang khong co hop tra phi nen van giu; fetch loi thi giu (khong bo tren chung cu khong chac)
+    let h = it._html ? stripBoiler(sanitize(it._html, it.url)) : '';
+    const jp = _ph ? journalFromPage(_ph, it.url) : { abs: '', img: '' };
+    const pii = piiOf(it.url);
+    if (pii && (!jp.img || strip(jp.abs).length < 150)) { const ex = await elsevierExtra(pii); if (!jp.img) jp.img = ex.img; if (strip(jp.abs).length < 150) jp.abs = ex.abs; if (!it.doi && ex.doi) it.doi = ex.doi; }   // Elsevier (ScienceDirect, AJODO, JPD, JOE, IJOMS, JADA): hinh tu CDN Elsevier, abstract tu Crossref/OpenAlex
+    if (strip(jp.abs).length < 150 && strip(h).length < 300) { const doi = it.doi || doiOf(it.url) || doiOf(_ph.slice(0, 200000)); const da = await doiAbstract(doi); if (da) jp.abs = da; }   // Wiley/Sage... bi chan: abstract theo DOI   // ScienceDirect chan robot: abstract tu Crossref/OpenAlex, hinh tu CDN Elsevier
+    if (jp.abs && strip(jp.abs).length > strip(h).length) h = jp.abs;
+    if (jp.img && (!it.image || it.imageKind === 'logo')) { it.image = jp.img; it.imageKind = ''; it.imageBg = ''; }   // bai co hinh -> uu tien hinh cua bai
     if (!it.image) { let jl = null; if (it.source === 'AJODO' || /ajodo\.org/i.test(it.url || '')) jl = JOURNAL_LOGO.AJODO; else if (/vjol\.info\.vn/i.test(it.url || '')) jl = JOURNAL_LOGO.VJOL; if (jl) { it.image = jl.url; it.imageKind = 'logo'; it.imageBg = jl.bg; } else setLogo(it, await findSiteLogo(it.url, s)); }   // bai nghien cuu tap chi: gan logo tap chi (da xac minh) hoac logo trang, khong de trong
+    if (it.image && it.imageKind !== 'logo' && !/<img\b/i.test(h)) h = '<figure><img src="' + esc(it.image) + '" alt="" loading="lazy"></figure>' + h;
     return { ...base, byline: '', image: it.image || '', imageKind: it.imageKind || '', imageBg: it.imageBg || '', html: h || (it._full ? '<p>' + esc(it._full) + '</p>' : ''), kind: 'abstract' };
   }
   if (!FULLTEXT || s?.noBody) return null;
@@ -832,16 +945,17 @@ async function buildArticle(it, s) {
       if (page.title && page.title.length >= 15) it.title = trunc(page.title.replace(/\s*[|–-]\s*[^|–-]{3,40}$/, ''), 220);
       if (page.desc && !it.summary) it.summary = trunc(page.desc, 420);
     }
-    { const cv = page.image ? await pickCover(page, it.url, s) : ''; if (cv && !badCover(cv)) it.image = cv; }   // anh dai dien that (og:image), thay vi anh Figure dau tien trong bai; co/icon/banner cua trang khong duoc ghi de
+    { const cv = (page.bodyImg || page.image) ? await pickCover(page, it.url, s) : ''; if (cv && !badCover(cv)) it.image = cv; }   // anh dai dien that (og:image), thay vi anh Figure dau tien trong bai; co/icon/banner cua trang khong duoc ghi de
+    if (!it.image && page.videoPoster) it.image = page.videoPoster;
     if (!it.image && page.logo) { it.image = page.logo; it.imageKind = 'logo'; it.imageBg = logoBg(it.source, page.logo); }   // tin khong co anh that: lay logo trang lam anh list (da xac nhan voi nguoi dung)
     if (!it.image && SITE_LOGO[it.source]) { it.image = SITE_LOGO[it.source]; it.imageKind = 'logo'; it.imageBg = logoBg(it.source, SITE_LOGO[it.source]); }   // Dentistry Today: nameplate da xac minh, dung khi trang bai khong de lo <img> logo
     if (page.video && !it.video) it.video = page.video;
     if (page.videoPoster && !it.videoPoster) it.videoPoster = page.videoPoster;
-    if (!it.image && page.videoPoster) it.image = page.videoPoster;
   }
+  if (!it.image || it.imageKind === 'logo') { for (const m1 of html.matchAll(/<img src="([^"]+)"/g)) { const c = decode(m1[1]); if (c && !badCover(c) && !isLogoImg(c)) { it.image = c; it.imageKind = ''; it.imageBg = ''; break; } } if ((!it.image || it.imageKind === 'logo') && it.videoPoster) { it.image = it.videoPoster; it.imageKind = ''; it.imageBg = ''; } }   // trang bai bi chan: lay hinh dau tien trong noi dung RSS truoc khi dung logo
   if (!it.image) setLogo(it, await findSiteLogo(it.url, s));   // van khong co anh (trang bai khong de lo logo): lay logo tu trang chu cua nguon
   if (!/<(?:video|iframe)\b/i.test(html) && it.video) {
-    if (isVideoEmbed(it.video)) html += '<figure><iframe src="' + esc(it.video) + '" loading="lazy" referrerpolicy="no-referrer" allowfullscreen sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"></iframe></figure>';
+    if (isVideoEmbed(it.video)) html += '<figure><iframe src="' + esc(it.video) + '" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"></iframe></figure>';
     else if (/^https?:/i.test(it.video)) html += '<figure><video controls preload="metadata"' + (it.videoPoster ? ' poster="' + esc(it.videoPoster) + '"' : '') + '><source src="' + esc(it.video) + '"></video></figure>';
   }
   if (strip(html).length < 150) return null;
@@ -888,6 +1002,30 @@ async function main() {
   }
   const n0 = db.items.length; db.items = db.items.filter(i => i.group !== 'Khác' && !isJournalPage(i.url, i.title) && !(i.type !== 'research' && isProcurement(i.title, i.summary)) && !(i.type !== 'research' && isHubPage(i.title, '')) && langOk((i.title || '') + ' ' + (i.summary || '')) && (i.type === 'research' || isArticleTitle(i.title) || (i.region === 'vn' && !JUNK_TITLE.test(i.title) && !JUNK_VN.test(i.title) && !OFFTOPIC_EN.test(i.title)))); const dropped = n0 - db.items.length; fixed += dropped;
   if (dropped) log(`Da go ${dropped} tin cu tu nguon du phong`);
+  {   // bo nguon IADR (theo yeu cau): go tin cu + file noi dung
+    const isIadr = i => i.source === 'IADR' || /(^|\.)iadr\.org\//i.test(String(i.url || '').replace(/^https?:\/\//, ''));
+    const gone = db.items.filter(isIadr); if (gone.length) { gone.forEach(i => { try { fs.unlinkSync(path.join(ART_DIR, fname(i.id) + '.json')); } catch {} }); db.items = db.items.filter(i => !isIadr(i)); fixed += gone.length; log(`Da go ${gone.length} tin IADR`); }
+  }
+  {   // tin cu dang dung logo lam anh (vi trang chan robot luc crawl): thu lay lai hinh dau tien cua bai, moi lan toi da NEWS_IMG_REPAIR bai
+    const todo = db.items.filter(i => i.imageKind === 'logo' && !/^PubMed/.test(i.source || '') && !i._imgTried).slice(0, +(process.env.NEWS_IMG_REPAIR ?? 40));
+    let got = 0;
+    await pool(todo, 3, async i => {
+      const s = SOURCES.find(x => x.name === i.source) || {};
+      let img = '';
+      const pii = piiOf(i.url);
+      try {
+        const raw = await get(i.url, 'text/html,*/*', s);
+        if (i.type === 'research') img = journalFromPage(raw, i.url).img;
+        else { const pg = extractArticle(raw, i.url); img = await pickCover(pg, i.url, s); if (img && (badCover(img) || isLogoImg(img))) img = ''; }
+      } catch {}
+      if (!img && pii) img = (await elsevierExtra(pii)).img;
+      if (!img) { i._imgTried = 1; return; }
+      i.image = img; i.imageKind = ''; i.imageBg = ''; got++;
+      const f = path.join(ART_DIR, fname(i.id) + '.json');
+      try { const a = JSON.parse(fs.readFileSync(f, 'utf8')); a.image = img; a.imageKind = ''; a.imageBg = ''; if (!/<img\b/i.test(a.html || '')) a.html = '<figure><img src="' + esc(img) + '" alt="" loading="lazy"></figure>' + (a.html || ''); fs.writeFileSync(f, JSON.stringify(a)); } catch {}
+    });
+    if (got) { fixed += got; log(`Lay lai hinh bai cho ${got} tin cu dang dung logo`); }
+  }
   if (fixed) log(`Da sua/lam sach tin cu: ${fixed}`);
   {   // tin cu dang trong anh (ke ca nghien cuu): bo sung logo trang, moi lan toi da NEWS_LOGO_BACKFILL bai (tin moi nhat truoc)
     const todo = db.items.filter(i => !i.image).slice(0, +(process.env.NEWS_LOGO_BACKFILL ?? 400));
@@ -900,6 +1038,7 @@ async function main() {
     });
     if (got) { fixed += got; log(`Bo sung logo trang cho ${got} tin cu dang trong anh`); }
   }
+  try { let nf = 0; for (const f of fs.readdirSync(ART_DIR)) { const fp = path.join(ART_DIR, f); const t = fs.readFileSync(fp, 'utf8'); if (t.includes('referrerpolicy=\\"no-referrer\\" allowfullscreen')) { fs.writeFileSync(fp, t.split('referrerpolicy=\\"no-referrer\\" allowfullscreen').join('referrerpolicy=\\"strict-origin-when-cross-origin\\" allowfullscreen')); nf++; } } if (nf) log(`Sua referrer video YouTube (Error 153) trong ${nf} bai cu`); } catch {}
   const have = new Set(db.items.map(i => i.id)); const haveUrl = new Set(db.items.map(i => i.url));
   const normT = x => String(x || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim().slice(0, 80);
   const haveTitle = new Set(db.items.map(i => normT(i.title)));
