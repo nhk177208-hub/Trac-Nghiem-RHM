@@ -209,6 +209,21 @@
    "crawled": 1793969728035
   },
   {
+   "id": "n7ab9f34139de",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Dental Trephination for Endodontic Pain: Ancient Surgery, Modern Evidence",
+   "url": "https://www.dentaltown.com/news/details/15481/dental-trephination-for-endodontic-pain-ancient-surgery-modern-evidence",
+   "source": "Dentaltown",
+   "date": "2026-11-06T00:00:00.000Z",
+   "summary": "Explore the history of dental trephination, from ancient practices to modern endodontics, and what clinical evidence reveals about its effectiveness for pain relief.",
+   "image": "https://prod.cdn.dentaltown.com/images/dentaltown/pressreleases/6da764624d0f49f0866c8619ffe200e1.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1794138919536
+  },
+  {
    "id": "n6a13baafe53a",
    "type": "news",
    "region": "intl",
@@ -966,6 +981,25 @@
    "body": 1,
    "prio": 2,
    "crawled": 1793744443272
+  },
+  {
+   "id": "n59f7213d5477",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Generative AI in Endodontics: A Scoping Review of Applications, Performance, and Limitations",
+   "url": "https://www.jendodon.com/article/S0099-2399(26)00566-2/fulltext?rss=yes",
+   "source": "J Endodontics (JOE)",
+   "date": "2026-11-03T00:00:00.000Z",
+   "summary": "Generative artificial intelligence (AI), particularly large language models (LLMs), has been increasingly studied and applied in endodontics, offering accessible tools for clinical decision support, education, and patient communication without requiring advanced technical expertise. This scoping review aimed to map current applications of LLM-based generative AI in endodontics and to synthesize evidence on their…",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=www.jendodon.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794138919536
   },
   {
    "id": "nf402d907f201",
@@ -4304,6 +4338,21 @@
    "crawled": 1793478584803
   },
   {
+   "id": "n6d1a2c58ffa1",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "World AMR Awareness Week 2026: One Health, one action to prevent AMR now",
+   "url": "https://www.fdiworlddental.org/world-amr-awareness-week-2026-one-health-one-action-prevent-amr-now",
+   "source": "FDI World Dental Federation",
+   "date": "2026-02-11T12:00:00.000Z",
+   "summary": "Antimicrobial resistance (AMR) is a growing global health threat that requires coordinated action across human, animal and environmental health. Under this year’s World AMR Awareness Week theme, “One Health, one action: Prevent AMR…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-11/one_health_one_action_AMR.png?itok=uog2uoeX",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794138919536
+  },
+  {
    "id": "n10428db18642",
    "type": "news",
    "region": "intl",
@@ -4351,6 +4400,6 @@
    "crawled": 1793462734590
   }
  ],
- "updated": 1794104632720,
- "researchLast": "J Dent Res (JDR)"
+ "updated": 1794138919536,
+ "researchLast": "J Endodontics (JOE)"
 }
