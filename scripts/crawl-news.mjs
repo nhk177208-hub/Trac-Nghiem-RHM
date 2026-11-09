@@ -100,7 +100,7 @@ const GUIDE_SOURCES = [
   { name: 'Inside Dentistry',       region: 'intl', kind: 'news', group: G.NEWS, site: 'https://www.insidedentistry.net/' },
   { name: 'Dental Update', region: 'intl', kind: 'news', group: G.NEWS, site: 'https://www.dental-update.co.uk/articles', ua: 'browser', slow: true },
   { name: 'DentistryIQ',            region: 'intl', kind: 'news', group: G.NEWS, site: 'https://www.dentistryiq.com/' },
-  { name: 'Dentaltown',             region: 'intl', kind: 'news', group: G.NEWS, site: 'https://www.dentaltown.com/' },
+  { name: 'Dentaltown',             region: 'intl', kind: 'news', group: G.NEWS, site: 'https://www.dentaltown.com/news', link: /^\/(?:news\/details|magazine\/article)\/\d+\/[a-z0-9-]{8,}/i, noFeed: true },
   { name: 'Dentistry Today',        region: 'intl', kind: 'news', group: G.NEWS, feed: 'https://www.dentistrytoday.com/feed/', site: 'https://www.dentistrytoday.com/', ua: 'browser' },
   { name: 'Dentistry.co.uk',        region: 'intl', kind: 'news', group: G.NEWS, feed: 'https://dentistry.co.uk/feed/', site: 'https://dentistry.co.uk/' },
   // ===== QUOC TE - muc 2: hiep hoi / to chuc =====
@@ -330,7 +330,21 @@ const OK_TAGS = new Set(['p', 'br', 'h2', 'h3', 'h4', 'ul', 'ol', 'li', 'blockqu
 const VOID = new Set(['br', 'img', 'source']);
 const BAD_IMG = /logo|icon|avatar|pixel|spacer|blank|1x1|sprite|emoji|badge|share|button|loading|placeholder/i;
 const ICON_NAME = /(^|[^a-z])(calendar|lich|clock|eye|views?|print|rss|mail|email|phone|zalo|arrow|chevron|bullet|dot)([^a-z]|$)/i;   // icon nho cua trang (lich, dong ho, con mat...) khong phai anh bai
-const badImg = u => { const fn = String(u).split(/[?#]/)[0].split('/').pop(); return BAD_IMG.test(fn) || ICON_NAME.test(fn); };
+// anh quang cao: ten file kieu "..._Inpost-AdsetA_348x217_...", "Billboard_970x250", kich thuoc banner chuan IAB
+const AD_IMG = /(?:^|[_\-.\s])(?:ads?|adset\w*|inpost|billboard|leaderboard|skyscraper|mpu|sponsor(?:ed)?|promo|advert\w*)(?=[_\-.\d\s]|$)|(?:^|_)(?:300x250|336x280|728x90|970x250|970x90|160x600|300x600|320x50|320x100|348x217|468x60|300x50|120x600)(?=[_\-.]|$)/i;
+const AD_HREF = /\/linkout\/|\/(?:ads?|adserver|adclick|banners?)\/|doubleclick\.net|googlesyndication|googleadservices|adbutler|servedby\.|clickserve|\/track(?:ing)?\/click|[?&]utm_medium=(?:banner|display|ads?|paid)\b|[?&](?:adid|ad_id|bannerid)=/i;
+const AD_BLOCK = /<(div|aside|section|ins|figure|span|p)\b[^>]*(?:\b(?:class|id)=["'][^"']*(?:\b(?:advads|adsbygoogle|adrotate|ad-?container|ad-?slot|ad-?unit|ad-?wrap(?:per)?|ad-?zone|ad-?block|ad-?banner|gpt-ad|dfp-ad|code-block|ai-placement|advertisement|inpost-ad|banner-ad|[a-z]{2,10}-target)\b|\bad\b)[^"']*["']|\bdata-[a-z-]*trackid=)[^>]*>/gi;
+export function dropAds(html) {   // go bo khoi quang cao (ca the con) truoc khi trich noi dung
+  let h = String(html || ''), out = '', last = 0; AD_BLOCK.lastIndex = 0; let m;
+  while ((m = AD_BLOCK.exec(h))) {
+    const tagN = m[1].toLowerCase(), re = new RegExp('<(/?)' + tagN + '\\b[^>]*>', 'gi'); re.lastIndex = m.index + m[0].length; let d = 1, t, end = -1;
+    while ((t = re.exec(h))) { if (t[1]) { if (!--d) { end = t.index + t[0].length; break; } } else if (!/\/>$/.test(t[0])) d++; }
+    if (end < 0 || end - m.index > 30000) continue;   // khong dong duoc / khoi qua lon (co the la vung bai) -> giu
+    out += h.slice(last, m.index); last = end; AD_BLOCK.lastIndex = end;
+  }
+  return out + h.slice(last);
+}
+const badImg = u => { const fn = String(u).split(/[?#]/)[0].split('/').pop(); return BAD_IMG.test(fn) || ICON_NAME.test(fn) || AD_IMG.test(fn); };
 const LAZY_ATTRS = ['data-src', 'data-lazy-src', 'data-original', 'data-url', 'data-echo', 'data-lazy', 'data-full-url', 'data-orig-file', 'data-large-file', 'data-actualsrc'];
 // lay URL anh that tu the <img ...>: uu tien thuoc tinh lazy-load, bo qua src dang data: (placeholder), cuoi cung la srcset
 const imgUrlOf = (raw, base) => {
@@ -352,7 +366,7 @@ const isPaywalled = (html) => { const t = String(html || ''); return (/get full 
 const JOURNAL_LOGO = { 'AJODO': { url: 'https://www.ajodo.org/pb-assets/ux3/logos/ha/ymod-1589387154040.svg', bg: '#1f2937' }, 'VJOL': { url: 'https://vjol.info.vn/plugins/themes/vjol/images/LogoV3.png', bg: '#ffffff' } };   // logo tap chi da xac minh: AJODO SVG trang tren nen xanh dam (hex header khong duoc expose, dung nen toi de logo trang hien), VJOL LogoV3.png (logo cua VJOL, khong phai logo rieng tung tap chi)   // trang landing tap chi (vd iadr.org/journals/journal-dental-research), khong phai bai tin
 const isSiteIcon = u => { const t = String(u || ''); const fn = t.split(/[?#]/)[0].split('/').pop(); return /flag|language|vietnamese|english|french|favicon/i.test(fn) || /\/languages?\//i.test(t); };
 const GENERIC_COVER = /(^|[^a-z])(home|homepage|house|noimage|no-image|no_image|default|ico|ic|placeholder|nophoto|no-photo)([^a-z]|$)/i;   // anh mac dinh/icon trang (vd icon cai nha) khong phai anh bia bai
-const badCover = u => { const t = String(u || ''); const fn = t.split(/[?#]/)[0].split('/').pop(); return BAD_IMG.test(fn) || ICON_NAME.test(fn) || GENERIC_COVER.test(fn) || /flag|language|vietnamese|english|french|favicon|banner/i.test(fn) || /\/languages?\//i.test(t) || /\/thumb\//i.test(t); };   // anh bia: bo qua them co ngon ngu / flag / banner cua trang (vi du pnt.edu.vn/.../languages/vietnamese.png)   // chi xet ten file, khong xet ca duong dan (tranh loai nham anh bai that)
+const badCover = u => { const t = String(u || ''); const fn = t.split(/[?#]/)[0].split('/').pop(); return BAD_IMG.test(fn) || AD_IMG.test(fn) || ICON_NAME.test(fn) || GENERIC_COVER.test(fn) || /flag|language|vietnamese|english|french|favicon|banner/i.test(fn) || /\/languages?\//i.test(t) || /\/thumb\//i.test(t); };   // anh bia: bo qua them co ngon ngu / flag / banner cua trang (vi du pnt.edu.vn/.../languages/vietnamese.png)   // chi xet ten file, khong xet ca duong dan (tranh loai nham anh bai that)
 // video nhung kieu lazy-load (WP Rocket rll-youtube-player, lite-youtube, iframe data-src, WordPress embed chi co URL) -> iframe YouTube that
 const YT_IFR = id => '<iframe src="https://www.youtube.com/embed/' + id + '"></iframe>';
 export function normEmbeds(html) {
@@ -365,16 +379,19 @@ export function normEmbeds(html) {
 }
 export function sanitize(html, base) {
   let lastPicSrcset = '';
-  html = normEmbeds(html).replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style|noscript|svg|object|embed|form|button|select|textarea|template)\b[\s\S]*?<\/\1\s*>/gi, '');
-  const out = []; const stack = []; const re = /<(\/?)([a-zA-Z][a-zA-Z0-9]*)\b([^>]*)>|([^<]+)|</g; let m;
+  html = dropAds(normEmbeds(html)).replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style|noscript|svg|object|embed|form|button|select|textarea|template)\b[\s\S]*?<\/\1\s*>/gi, '');
+  const out = []; const stack = []; const re = /<(\/?)([a-zA-Z][a-zA-Z0-9]*)\b([^>]*)>|([^<]+)|</g; let m; let adA = 0;   // adA: dang o trong link quang cao -> bo anh/chu ben trong
   while ((m = re.exec(html))) {
-    if (m[4] !== undefined) { out.push(m[4]); continue; }
+    if (m[4] !== undefined) { if (!adA) out.push(m[4]); continue; }
     if (m[2] === undefined) { out.push('&lt;'); continue; }
     let t = m[2].toLowerCase(); if (t === 'h1') t = 'h2'; if (t === 'h5' || t === 'h6') t = 'h4';
     if (!OK_TAGS.has(t)) continue;
     if (m[1]) { const i = stack.lastIndexOf(t); if (i >= 0) { while (stack.length > i) out.push('</' + stack.pop() + '>'); } continue; }
+    if (t === 'a' && m[1] && adA) { adA--; continue; }
+    if (adA && t !== 'a') continue;
     if (t === 'a') {
       const h = abs(attr('<a ' + m[3] + '>', 'a', 'href'), base);
+      if (AD_HREF.test(h) || /\bdata-(?:bid|[a-z-]*trackid)=/i.test(m[3])) { adA++; continue; }
       if (!/^https?:/i.test(h)) { continue; }
       out.push('<a href="' + esc(h) + '" target="_blank" rel="noopener noreferrer">'); stack.push('a'); continue;
     }
@@ -416,7 +433,7 @@ export function sanitize(html, base) {
     out.push('<' + t + '>'); if (!VOID.has(t)) stack.push(t);
   }
   while (stack.length) out.push('</' + stack.pop() + '>');
-  return out.join('').replace(/<(p|li|h[2-4]|a|strong|b|em|i|blockquote)>\s*<\/\1>/g, '').replace(/\s{3,}/g, ' ').trim();
+  return out.join('').replace(/<(p|li|h[2-4]|a|strong|b|em|i|blockquote)>\s*<\/\1>/g, '').replace(/\s{3,}/g, ' ').trim().normalize('NFC');   // NFC: trang VN go dau to hop (NFD) -> dau bi tach roi khi hien thi
 }
 
 const MON = 'Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec';
@@ -481,7 +498,7 @@ function cleanLead(html, title) {
   return h.replace(/<(p|li|h[2-4])>\s*<\/\1>/g, '').trim();
 }
 export function extractArticle(page, base) {
-  let h = page.replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style|noscript|svg|nav|footer|aside)\b[\s\S]*?<\/\1\s*>/gi, '');
+  let h = dropAds(page).replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style|noscript|svg|nav|footer|aside)\b[\s\S]*?<\/\1\s*>/gi, '');
   const metaOf = (re) => { const m = page.match(re); return m ? decode(m[1]).trim() : ''; };
   const og = n => metaOf(new RegExp('<meta[^>]+(?:property|name)=["\']' + n + '["\'][^>]*content=["\']([^"\']*)["\']', 'i')) || metaOf(new RegExp('<meta[^>]+content=["\']([^"\']*)["\'][^>]*(?:property|name)=["\']' + n + '["\']', 'i'));
   let title = og('og:title') || strip(tag(page, 'title'));
@@ -713,11 +730,11 @@ export function discoverFeed(html, base) {
   }
   return '';
 }
-const NAV_BAD = /\/(tag|tags|category|danh-muc|chuyen-muc|page|trang|author|login|dang-nhap|lien-he|contact|gioi-thieu|about|search|tim-kiem|feed|wp-admin|wp-content|cart|privacy|terms|sitemap)(\/|$|\?)|\.(jpg|jpeg|png|gif|pdf|zip|docx?|xlsx?|css|js)(\?|$)/i;
+const NAV_BAD = /\/(tag|tags|category|danh-muc|chuyen-muc|page|trang|author|login|dang-nhap|lien-he|contact|gioi-thieu|about|search|tim-kiem|feed|wp-admin|wp-content|cart|privacy|terms|sitemap|whatsnew|whats-new|what-s-new|changelog|release-notes|site-updates|poll|polls|webinars?|classifieds|ebooks?|townieperks|mediakit|media-kit|advertis\w*|subscribe|subscription|register|signup|sign-up|help|faq|events?-calendar|linkout|messageboard|forum|forums)(\/|$|\?)|\.(jpg|jpeg|png|gif|pdf|zip|docx?|xlsx?|css|js)(\?|$)/i;
 // link bai viet that thuong co slug dai / nam-thang / ma so; link menu ("news-and-events", "/about"...) thi khong
 const articleLike = u => { const segs = u.pathname.split('/').filter(Boolean), last = segs[segs.length - 1] || '', hy = (last.match(/-/g) || []).length;
   return /\/(19|20)\d{2}\/\d{1,2}(\/|$)/.test(u.pathname) || /\d{5,}/.test(u.pathname) || hy >= 4 || (segs.length >= 3 && hy >= 2); };
-export function extractAnchors(html, base, max = SCRAPE_PER_SITE * 3) {
+export function extractAnchors(html, base, max = SCRAPE_PER_SITE * 3, linkRe = null) {
   let host; try { host = new URL(base).hostname.replace(/^www\./, ''); } catch { return []; }
   const basePath = new URL(base).pathname;
   const seen = new Set(), good = [], rest = [];
@@ -735,6 +752,7 @@ export function extractAnchors(html, base, max = SCRAPE_PER_SITE * 3) {
     const h = u.hostname.replace(/^www\./, '');
     if (!(h === host || h.endsWith('.' + host) || host.endsWith('.' + h))) continue;
     if (NAV_BAD.test(u.pathname + u.search) || u.pathname.length < 4 || u.pathname === basePath) continue;
+    if (linkRe && !linkRe.test(u.pathname)) continue;   // nguon co mau link bai rieng (vd Dentaltown: /news/details/<id>/..., /magazine/article/<id>/...)
     seen.add(href); (articleLike(u) ? good : rest).push({ title: trunc(text, 220), url: href });
   }
   return [...good, ...rest].slice(0, max);
@@ -811,14 +829,14 @@ async function collect(s, log) {
   if (feed) { try { xml = await get(feed, 'application/rss+xml,application/atom+xml,application/xml,text/xml,*/*', s); } catch (e) { if (!s.site) throw e; log(`     ${s.name}: feed loi (${e.message}), thu tu dong tim...`); feed = ''; } }
   if (!xml && s.site) {
     siteHtml = await get(s.site, 'text/html,*/*', s);
-    feed = discoverFeed(siteHtml, s.site);
+    feed = s.noFeed ? '' : discoverFeed(siteHtml, s.site);
     if (feed) { try { xml = await get(feed, '*/*', s); } catch { xml = ''; } }
   }
   let items = xml ? parseFeed(xml, s.name, s) : [];
   let via = xml ? 'rss' : '';
   if (!items.length && s.site) {   // khong co RSS dung duoc -> quet link tren trang
     if (!siteHtml) siteHtml = await get(s.site, 'text/html,*/*', s);
-    items = extractAnchors(siteHtml, s.site).map(a => ({
+    items = extractAnchors(siteHtml, s.site, undefined, s.link || null).map(a => ({
       id: 'n' + sha(a.url), type: s.kind === 'journal' ? 'research' : 'news', region: s.region, group: s.group || '', title: trunc(a.title, 220), url: a.url, source: s.name,
       date: new Date().toISOString(), summary: '', image: '', _scraped: true,
     }));
