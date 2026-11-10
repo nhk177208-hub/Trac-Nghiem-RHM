@@ -21,6 +21,78 @@
    "crawled": 1794191950461
   },
   {
+   "id": "nf5e3390ea6b7",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Tom’s of Maine Expands Oral Care Line to Include Hydroxyapatite Toothpaste",
+   "url": "https://www.dentistrytoday.com/toms-of-maine-expands-oral-care-line-to-include-hydroxyapatite-toothpaste/",
+   "source": "Dentistry Today",
+   "date": "2026-11-10T15:45:50.000Z",
+   "summary": "Fluoride-free, anti-sensitivity toothpaste formulated with naturally derived calcium carbonate and arginine to provide whitening and sensitivity relief. Tom’s of Maine has expanded its natural care portfolio with Hydroxyapatite Toothpaste, an anti-sensitivity toothpaste with naturally derived arginine and calcium carbonate. Arginine, a naturally derived amino acid, and calcium carbonate, a naturally derived mineral,…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/390e6011b0a4f6060cc84eba4fe12f67.webp",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794349370267
+  },
+  {
+   "id": "nad58112e24e9",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Dentsply Sirona Manufactures 100,000th Heliodent Plus X-Ray Unit",
+   "url": "https://www.dentistrytoday.com/dentsply-sirona-manufactures-100000th-heliodent-plus-x-ray-unit/",
+   "source": "Dentistry Today",
+   "date": "2026-11-10T15:45:24.000Z",
+   "summary": "The 100,000-unit milestone reflects decades of clinician trust and the growing importance of connected imaging workflows in modern dentistry. Dentsply Sirona has manufactured its 100,000th Heliodent® Plus intraoral X-ray unit at its Bensheim, Germany, facility, marking a significant milestone for one of the world’s most widely adopted intraoral imaging platforms. The achievement comes as dental practices around the…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/Corp-Press-Image-Safety-Day-Heliodent-2048x1218.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794349370267
+  },
+  {
+   "id": "n1ca1d6ccded8",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Delta Dental Survey Examines Oral Health and Cognitive Decline",
+   "url": "https://www.dentistrytoday.com/delta-dental-survey-examines-oral-health-and-cognitive-decline/",
+   "source": "Dentistry Today",
+   "date": "2026-11-10T15:30:21.000Z",
+   "summary": "New Delta Dental Insurance Company research reveals gaps in older adults’ awareness of the possible link between oral and cognitive health, caregivers’ need for guidance, and dental providers’ firsthand experience with changing patient needs. Delta Dental Insurance Company’s 2026 Cognitive Decline and Oral Health Survey found that 73% of caregivers say oral care management adds to the emotional demands of caregiving…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/SOH-large-image.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794349370267
+  },
+  {
+   "id": "nde34a820a923",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Melatonin may improve bone healing around immediate dental implants",
+   "url": "https://www.dental-tribune.com/news/melatonin-may-improve-bone-healing-around-immediate-dental-implants/",
+   "source": "Dental Tribune",
+   "date": "2026-11-10T15:05:11.000Z",
+   "summary": "ALEXANDRIA, Egypt: Melatonin is being studied as a local adjunct to immediate implant placement for its potential to influence both bone formation and resorption. A new randomised controlled clinical trial conducted by researchers at Alexandria University investigated whether applying melatonin around newly placed implants could improve bone preservation and influence the biological processes involved in early…",
+   "doi": "",
+   "image": "https://cdn.dental-tribune.com/dti/0001/ae55a8d2/cmVzaXplLWNyb3Aodz04MDA7aD04MDApOnNoYXJwZW4obGV2ZWw9MCk6b3V0cHV0KGZvcm1hdD1naWYp/wp-content/themes/dt/images/dt-user.gif",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794349370267
+  },
+  {
    "id": "nc99be7f70f69",
    "type": "news",
    "region": "intl",
@@ -110,7 +182,38 @@
    "imageBg": "#ffffff",
    "body": 1,
    "prio": 1,
-   "crawled": 1794317311054
+   "crawled": 1794317311054,
+   "_imgTried": 1
+  },
+  {
+   "id": "nc03019188868",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "ADA supports major expansion of VA dental benefits for veterans",
+   "url": "https://adanews.ada.org/ada-news/2026/november/ada-supports-major-expansion-of-va-dental-benefits-for-veterans/",
+   "source": "ADA News",
+   "date": "2026-11-10T00:00:00.000Z",
+   "summary": "The ADA is supporting legislation that would expand access to dental care for veterans enrolled in the VA health care system.",
+   "image": "https://adanews.ada.org/media/w1cldirf/veterans.jpeg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794349370267
+  },
+  {
+   "id": "nefdddc2120a4",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "How a Dog Named Cupcake Led Police to a Man Accused of Scamming Two Dental Practices",
+   "url": "https://www.dentaltown.com/news/details/15483/how-a-dog-named-cupcake-led-police-to-a-man-accused-of-scamming-two-dental-practices",
+   "source": "Dentaltown",
+   "date": "2026-11-10T00:00:00.000Z",
+   "summary": "A $200 working-interview check and a $75 dog-food spat on TikTok are at the center of a dental office theft case that ended with an arrest in Newport Beach.",
+   "image": "https://prod.cdn.dentaltown.com/images/dentaltown/pressreleases/25ffa948-f9f3-4219-8392-20ec536a6060.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1794349370267
   },
   {
    "id": "n957e759454c2",
@@ -252,6 +355,21 @@
    "body": 1,
    "prio": 2,
    "crawled": 1794317311054
+  },
+  {
+   "id": "n455f7c55fb54",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "ADA thanks dental community following 2026 Scientific Session",
+   "url": "https://adanews.ada.org/ada-news/2026/november/ada-thanks-dental-community-following-2026-scientific-session/",
+   "source": "ADA News",
+   "date": "2026-11-09T00:00:00.000Z",
+   "summary": "Following the session, which took place Oct. 8-10 in Indianapolis, the ADA decided to pause its annual meeting until further notice.",
+   "image": "https://adanews.ada.org/media/f4mnatpq/20261109_scientificsessionthankyou.png",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794349370267
   },
   {
    "id": "nc7d9d3958610",
@@ -609,6 +727,26 @@
    "body": 1,
    "prio": 1,
    "crawled": 1794182508151
+  },
+  {
+   "id": "n9a75b147c16b",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Fifteen Years of the PUFA Index in Oral Epidemiology: A Systematic Review of Global Application and Reporting",
+   "url": "https://onlinelibrary.wiley.com/doi/10.1111/cdoe.70142?af=R",
+   "source": "Community Dent Oral Epidemiol (Wiley)",
+   "date": "2026-11-05T09:28:09.000Z",
+   "summary": "ABSTRACT Objectives The PUFA index records the presence of pulpal involvement, ulceration, fistula, and abscess to quantify the clinical consequences of untreated dental caries. The PUFA index captures the prevalence and severity of oral conditions, making it useful for surveillance, research, and advocacy. After 15 years of global use, this systematic review synthesises how the PUFA index has been applied and…",
+   "doi": "10.1111/cdoe.70142",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=onlinelibrary.wiley.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794349370267
   },
   {
    "id": "n30a1ea586a56",
@@ -1234,6 +1372,21 @@
    "_imgTried": 1
   },
   {
+   "id": "n192a6df2f12f",
+   "type": "news",
+   "region": "vn",
+   "group": "Sự kiện",
+   "title": "🚨WORKSHOP THIẾT KẾ NỤ CƯỜI THỰC CHIẾN VỚI ỨNG DỤNG WEB TÍCH HỢP AI MIỄN PHÍ - VIDEC 2026",
+   "url": "https://videc.vn/workshop-ai-trong-thiet-ke-nu-cuoi-videc-2026/",
+   "source": "VIDEC",
+   "date": "2026-08-13T02:54:48.000Z",
+   "summary": "🤖(VIDEC 2026 - Workshop AI trong thiết kế nụ cười) Với sự hướng dẫn của PGS.TS. Ding-Han Wang và TS.BS. Hsuan Chen - các chuyên gia có kinh nghiệm trong ứng dụng AI và công nghệ số vào thiết kế nụ cười - workshop sẽ đưa bác sĩ đi từ nguyên tắc DSD đến thực hành trực tiếp trên ứng dụng web tích hợp AI miễn phí.",
+   "image": "https://videc.vn/wp-content/uploads/2026/08/AI-DSD.jpg",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794349370267
+  },
+  {
    "id": "nf0883668deaa",
    "type": "news",
    "region": "vn",
@@ -1275,7 +1428,7 @@
    "url": "https://videc.vn/so-do-trien-lam/",
    "source": "VIDEC",
    "date": "2026-06-20T06:48:24.000Z",
-   "summary": "Sơ đồ triển lãm",
+   "summary": "",
    "image": "https://videc.vn/wp-content/uploads/2026/06/VIDEC-2026-thum-1024x639.png",
    "body": 1,
    "prio": 2,
@@ -1312,6 +1465,6 @@
    "crawled": 1794271417622
   }
  ],
- "updated": 1794317311054,
- "researchLast": "Clin Oral Implants Res"
+ "updated": 1794349370267,
+ "researchLast": "Community Dent Oral Epidemiol (Wiley)"
 }
