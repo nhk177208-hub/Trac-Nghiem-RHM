@@ -21,6 +21,93 @@
    "crawled": 1794191950461
   },
   {
+   "id": "n422d60c8bde5",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "American Academy of Periodontology Installs Dr. Kristi M. Soileau as President",
+   "url": "https://www.perio.org/press-release/american-academy-of-periodontology-installs-dr-kristi-m-soileau-as-president/",
+   "source": "AAP (Periodontology)",
+   "date": "2026-11-11T22:25:08.000Z",
+   "summary": "New Orleans periodontist to lead during the 2026–2027 term Media Contact: Adam Natali, American Academy of Periodontology Phone: 312-573-3240 | Email: [email protected] CHICAGO — November 10, 2026 — The American Academy of Periodontology (AAP) has installed Kristi M. Soileau, DDS, MEd, MSHCE, as its president for the 2026–2027 term. Dr. Soileau began her term on Oct. 31, 2026, at the AAP Annual Meeting in Seattle. A…",
+   "image": "https://www.perio.org/wp-content/uploads/2023/11/Soileau-4-Oct.23.jpg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794439752755
+  },
+  {
+   "id": "nad27e2834345",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Prior approval in Scotland: what has changed and why?",
+   "url": "https://dentistry.co.uk/2026/11/11/prior-approval-in-scotland-what-has-changed-and-why/",
+   "source": "Dentistry.co.uk",
+   "date": "2026-11-11T14:23:04.000Z",
+   "summary": "From 1 November 2026, dentists in Scotland no longer have to request prior approval due to treatment cost, with the new trigger based on treatment count. The new system moves away from the general £660 financial trigger for new courses of general dental treatment to clinical treatment count thresholds. This aims to focus scrutiny on plans that may carry greater clinical complexity or risk, rather than on their price…",
+   "doi": "",
+   "image": "https://dentistry.co.uk/app/uploads/2026/11/prior_approvak.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794439752755
+  },
+  {
+   "id": "n292942a152de",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "GDC English-language proposals could add £300 to ORE applicants’ costs",
+   "url": "https://dentistry.co.uk/2026/11/11/gdc-english-language-proposals-could-add-300-to-ore-applicants-costs/",
+   "source": "Dentistry.co.uk",
+   "date": "2026-11-11T12:44:52.000Z",
+   "summary": "Overseas-qualified dentists could face English-language test costs of £200-£300 under General Dental Council (GDC) proposals to restrict the evidence accepted for registration. GDC modelling suggested approximately 90% of dentist applicants currently using a qualification taught and examined in English would lose access to that evidence route. The proposals would limit qualification and clinical-experience evidence…",
+   "doi": "",
+   "image": "https://dentistry.co.uk/wp-content/uploads/2023/08/thumbs-up.svg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794439752755
+  },
+  {
+   "id": "n75b3ff38e4e6",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Jacob R. Dent, DDS on Special Needs Dentistry, Desensitization, and Restorative Techniques",
+   "url": "https://www.dentistrytoday.com/jacob-r-dent-dds-on-special-needs-dentistry-desensitization-and-restorative-techniques/",
+   "source": "Dentistry Today",
+   "date": "2026-11-11T10:42:00.000Z",
+   "summary": "Dr. Paul Feuerstein, Editor-in-Chief of Dentistry Today , sits down with Jacob R. Dent, DDS, special needs dentist, professional speaker, and co-founder of the Dental Desensitization Systems kit, for a discussion on improving dental care for patients with intellectual and developmental disabilities (IDD) and dental anxiety. Dr. Dent shares how sensory sensitivities can affect dental visits and explains how…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/10/Screenshot-2026-10-26-at-10.43.20-AM-1.png",
+   "video": "https://www.youtube.com/embed/ibo5p4NJPso?feature=oembed",
+   "videoPoster": "https://i.ytimg.com/vi/ibo5p4NJPso/hqdefault.jpg",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794439752755
+  },
+  {
+   "id": "ne6fa920669bb",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "US researchers investigate tooth protein’s potential for dentine regeneration",
+   "url": "https://www.dental-tribune.com/news/us-researchers-investigate-proteins-potential-for-dentin-regeneration/",
+   "source": "Dental Tribune",
+   "date": "2026-11-11T09:26:31.000Z",
+   "summary": "CHICAGO, US: Nearly three decades of research into the proteins involved in tooth formation have laid the groundwork for Prof. Anne George of the University of Illinois Chicago (UIC) to investigate whether one of these proteins could one day help damaged teeth repair themselves. Prof. George has received a grant to further investigate dentine phosphophoryn (DPP), a protein involved in dentine mineralisation.…",
+   "doi": "",
+   "image": "https://cdn.dental-tribune.com/dti/0001/ae55a8d2/cmVzaXplLWNyb3Aodz04MDA7aD04MDApOnNoYXJwZW4obGV2ZWw9MCk6b3V0cHV0KGZvcm1hdD1naWYp/wp-content/themes/dt/images/dt-user.gif",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794439752755
+  },
+  {
    "id": "ndcbd1d4253c6",
    "type": "news",
    "region": "intl",
@@ -55,6 +142,41 @@
    "body": 1,
    "prio": 2,
    "crawled": 1794400895533
+  },
+  {
+   "id": "n95bfcf79d948",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Low-Level Laser Eased Orthodontic Pain but Did Not Reduce Root Resorption in RCT",
+   "url": "https://www.dentaltown.com/news/details/15488/low-level-laser-eased-orthodontic-pain-but-did-not-reduce-root-resorption-in-rct",
+   "source": "Dentaltown",
+   "date": "2026-11-11T00:00:00.000Z",
+   "summary": "Diode laser therapy cut short-term pain in fixed orthodontic patients, but root resorption and alignment time were no better than sham in a 12-month trial.",
+   "image": "https://prod.cdn.dentaltown.com/images/dentaltown/pressreleases/5638fcb8-4dcb-4c16-a4e6-b29e3fd0a882.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1794439752755
+  },
+  {
+   "id": "n87c33c92eaeb",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Classification and surgical treatment of temporomandibular joint calcium pyrophosphate deposition disease: a single-center case series",
+   "url": "https://www.ijoms.com/article/S0901-5027(26)00494-7/fulltext?rss=yes",
+   "source": "Int J Oral Maxillofac Surg",
+   "date": "2026-11-11T00:00:00.000Z",
+   "summary": "This study aimed to classify calcium pyrophosphate deposition disease of the temporomandibular joint and evaluate the therapeutic outcomes. Surgically treated patients from January 2020 to September 2025 were classified into three types based on lesion location and extent. Type I involved the superior compartment with or without skull base destruction. Type II affected the inferior compartment with or without…",
+   "doi": "",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=www.ijoms.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794439752755
   },
   {
    "id": "nf5e3390ea6b7",
@@ -201,6 +323,36 @@
    "crawled": 1794317311054
   },
   {
+   "id": "n700103b8b49d",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "exocad Expands AI Capabilities With DentalCAD Update",
+   "url": "https://www.insidedentistry.net/news/?newsID=95c75080-c740-452f-9f4f-0580bea77c94",
+   "source": "Inside Dentistry",
+   "date": "2026-11-10T12:00:00.000Z",
+   "summary": "exocad, an Align Technology, Inc. company, has introduced DentalCAD 3.3 Chemnitz service release 2 (SR2), expanding the software's artificial intelligence capabilities for dental restoration design. T...",
+   "image": "https://www.insidedentistry.net/media/sr2fci5b/dentalcad-chemnitz-33-sr2_ai-design-batch-submission.png",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794439752755
+  },
+  {
+   "id": "n0c5307a5a4ed",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Registration Opens for THRIVELIVE 2027 in Las Vegas",
+   "url": "https://www.insidedentistry.net/news/?newsID=b25fb222-1285-44e6-a774-39c71ffd6436",
+   "source": "Inside Dentistry",
+   "date": "2026-11-10T12:00:00.000Z",
+   "summary": "Registration is now open for THRIVELIVE 2027, an annual dental industry event co-hosted by Henry Schein, Inc. and Henry Schein One. The event will return to Resorts World Las Vegas from April 28 throu...",
+   "image": "https://www.insidedentistry.net/media/bqwdjpwh/thrivelive2027.jpeg",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794439752755
+  },
+  {
    "id": "n1e41da8feaae",
    "type": "research",
    "region": "intl",
@@ -218,7 +370,8 @@
    "imageBg": "#ffffff",
    "body": 1,
    "prio": 1,
-   "crawled": 1794400895533
+   "crawled": 1794400895533,
+   "_imgTried": 1
   },
   {
    "id": "ndfbac7ce639b",
@@ -1559,7 +1712,7 @@
    "url": "https://eao.org/education/second-certificate-in-implant-dentistry/",
    "source": "EAO",
    "date": "2026-09-17T13:36:35.000Z",
-   "summary": "EAO Second Certificate in Implant Dentistry The EAO Second Certificate is our advanced level certificate covering more complex techniques including prosthetics, soft tissue augmentation around implants and immediate implant placement.  Access wherever you are in the world with a fully online programme developed and led by our expert faculty. The EAO Certificates offer complete flexibility […]",
+   "summary": "EAO Second Certificate in Implant Dentistry The EAO Second Certificate is our advanced level certificate covering more complex techniques including prosthetics, soft tissue augmentation around implants and immediate implant placement. Access wherever you are in the world with a fully online programme developed and led by our expert faculty. The EAO Certificates offer complete flexibility […]",
    "image": "https://eao.org/wp-content/uploads/2025/06/Cosyn-Jan.jpg",
    "body": 1,
    "prio": 1,
@@ -1628,7 +1781,8 @@
    "imageBg": "#ffffff",
    "body": 1,
    "prio": 1,
-   "crawled": 1794400895533
+   "crawled": 1794400895533,
+   "_imgTried": 1
   },
   {
    "id": "ne00d4682ece8",
@@ -1787,6 +1941,6 @@
    "crawled": 1794400895533
   }
  ],
- "updated": 1794400895533,
- "researchLast": "Int Endod J (Wiley)"
+ "updated": 1794439752755,
+ "researchLast": "Int J Oral Maxillofac Surg"
 }
