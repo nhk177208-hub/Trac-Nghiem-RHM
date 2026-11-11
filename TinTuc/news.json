@@ -75,6 +75,42 @@
    "crawled": 1794349370267
   },
   {
+   "id": "n39b1b6e7056e",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "DentScribe Announces AI Periodontal Charting Benchmark",
+   "url": "https://www.dentistrytoday.com/dentscribe-announces-ai-periodontal-charting-benchmark/",
+   "source": "Dentistry Today",
+   "date": "2026-11-10T15:22:47.000Z",
+   "summary": "DentScribe 2.165.0 passed 68 of 68 tests, with all 1,967 expected entries correct and zero extra entries in the company’s text-to-chart evaluation. DentScribe achieves 100% accuracy across all 8 AI dental charting benchmark levels! With 1,967 of 1,967 expected chart entries correct, zero extra entries, and all 68 benchmark tests passed, DentScribe demonstrates exceptional precision across periodontal charting,…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/Screenshot-2026-11-09-at-8-40-08-PM.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794365212137
+  },
+  {
+   "id": "n7034f0c43f89",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Tend Reveals Dentist Compensation Model and Earnings",
+   "url": "https://www.dentistrytoday.com/tend-reveals-dentist-compensation-model-and-earnings/",
+   "source": "Dentistry Today",
+   "date": "2026-11-10T15:16:32.000Z",
+   "summary": "The dental group is disclosing its compensation formula, top-earner figures, and offer acceptance rate—numbers most DSOs keep private. Tend offers a modern approach to dentistry through technology and hospitality-infused touchpoints. Tend, the dental group operating 33 studios across six markets, today released one year of results from a compensation model that pays general dentists up to 40% of adjusted production.…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/Tend-offers-a-modern-approach-to-dentistry-2048x1365.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794365212137
+  },
+  {
    "id": "nde34a820a923",
    "type": "news",
    "region": "intl",
@@ -91,6 +127,24 @@
    "body": 1,
    "prio": 2,
    "crawled": 1794349370267
+  },
+  {
+   "id": "n70b4c52ca96e",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Tuesday Morning Reflections With Dr. Silverman",
+   "url": "https://www.dentistrytoday.com/tuesday-morning-reflections-with-dr-silverman-14/",
+   "source": "Dentistry Today",
+   "date": "2026-11-10T15:01:13.000Z",
+   "summary": "Reflection #14 The most rewarding part of cosmetic dentistry isn’t creating beautiful smiles. By Harvey N. Silverman , DMD It’s watching people rediscover their confidence. As dentists, it’s easy to focus on what we do. We restore teeth. We close spaces. We whiten smiles. Weplace veneers. Those are the procedures. But they’re not theoutcome. The real outcome is seeing a patient smile without hesitation for the first…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/08/Screenshot-2026-08-12-at-12.07.52-PM.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794365212137
   },
   {
    "id": "nc99be7f70f69",
@@ -357,6 +411,21 @@
    "crawled": 1794317311054
   },
   {
+   "id": "n205e0c203dd4",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Howard Speaks: A Beautiful Root Canal Does Not Always Mean a Successful One by Dr. Howard Farran, DDS, MBA",
+   "url": "https://www.dentaltown.com/magazine/article/10108/howard-speaks-a-beautiful-root-canal-does-not-always-mean-a-successful-one",
+   "source": "Dentaltown",
+   "date": "2026-11-09T00:00:00.000Z",
+   "summary": "Dr. Howard Farran explains why a beautiful postoperative radiograph documents technical quality, not success, and why diagnosis, restoration, and follow-up determine whether the tooth thrives.",
+   "image": "https://prod.cdn.dentaltown.com/images/dentaltown/magimages/1126/e73ae6c9-fb8d-48bb-a808-19f67627c7ce.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1794365212137
+  },
+  {
    "id": "n455f7c55fb54",
    "type": "news",
    "region": "intl",
@@ -400,6 +469,26 @@
    "body": 1,
    "prio": 3,
    "crawled": 1794271417622
+  },
+  {
+   "id": "n7f8011526304",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "3D-printed holder devices: An alternative approach for cell culture assays",
+   "url": "https://www.sciencedirect.com/science/article/pii/S0109564126004719?dgcid=rss_sd_all",
+   "source": "Dental Materials (ScienceDirect)",
+   "date": "2026-11-07T00:00:00.000Z",
+   "summary": "Publication date: Available online 7 November 2026 Source: Dental Materials Author(s): Joana Cordeiro, Isabel Vasconcelos, Joana Marques, Margarida Franco, Nuno Alves, António Mata, Josette Camilleri, António Ginjeira",
+   "doi": "10.1016/j.dental.2026.10.015",
+   "image": "https://ars.els-cdn.com/content/image/1-s2.0-S0109564126004719-ga1.jpg",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "",
+   "imageBg": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794365212137
   },
   {
    "id": "n109fe943f5ae",
@@ -746,7 +835,8 @@
    "imageBg": "#ffffff",
    "body": 1,
    "prio": 2,
-   "crawled": 1794349370267
+   "crawled": 1794349370267,
+   "_imgTried": 1
   },
   {
    "id": "n30a1ea586a56",
@@ -1303,6 +1393,21 @@
    "crawled": 1794271417622
   },
   {
+   "id": "nb8e8561270e7",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "ADA governance evaluation town hall gathers feedback from more than 600 attendees",
+   "url": "https://adanews.ada.org/ada-news/2026/october/ada-governance-evaluation-town-hall-gathers-feedback-from-more-than-600-attendees/",
+   "source": "ADA News",
+   "date": "2026-10-10T00:00:00.000Z",
+   "summary": "More than 600 stakeholders came together to discuss the ADA governance and organizational health evaluation during a town hall Oct. 9.",
+   "image": "https://adanews.ada.org/media/lnvbngg1/20261010_governanceevaltownhall.jpg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794365212137
+  },
+  {
    "id": "n3817abd9a53f",
    "type": "news",
    "region": "vn",
@@ -1319,6 +1424,24 @@
    "body": 1,
    "prio": 2,
    "crawled": 1794182508151
+  },
+  {
+   "id": "nd57c340dcbd7",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "American Association of Endodontists Earns Four PRSA Chicago Skyline Awards of Excellence",
+   "url": "https://newsroom.aae.org/featured-stories/american-association-of-endodontists-earns-four-prsa-chicago-skyline-awards-of-excellence/",
+   "source": "AAE",
+   "date": "2026-09-18T17:56:28.000Z",
+   "summary": "AAE recognized for integrated communications, misinformation response and innovative efforts to reach consumers with evidence-based information about saving natural teeth CHICAGO – Sept. 18, 2026 – The American Association of Endodontists (AAE) earned four honors at the 2026 Public Relations Society of America (PRSA) Chicago Skyline Awards, recognizing the Association’s work to combat health misinformation, educate…",
+   "doi": "",
+   "image": "https://newsroom.aae.org/wp-content/uploads/2026/09/AwardPicture-crop-2048x1612.jpeg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794365212137
   },
   {
    "id": "nf40667a03bd6",
@@ -1352,6 +1475,21 @@
    "body": 1,
    "prio": 2,
    "crawled": 1794182508151
+  },
+  {
+   "id": "n3edbd2a00fc4",
+   "type": "news",
+   "region": "vn",
+   "group": "Sự kiện",
+   "title": "🔥WORKSHOP | PHỤC HÌNH FP1 & XỬ LÝ CÁC SỰ CỐ TRONG PHỤC HÌNH TRÊN IMPLANT",
+   "url": "https://videc.vn/phuc-hinh-fp1-xu-ly-cac-su-co-tren-implant-videc-2026/",
+   "source": "VIDEC",
+   "date": "2026-08-17T08:09:16.000Z",
+   "summary": "Trong khuôn khổ VIDEC 2026, workshop cùng ThS.BS. Gabriele Vaccaro sẽ đi sâu vào chiến lược tiếp cận phục hình FP1, từ nguyên tắc thiết kế, tối ưu mô mềm đến chẩn đoán và xử lý các biến chứng, kết hợp nền tảng khoa học với ứng dụng lâm sàng.",
+   "image": "https://videc.vn/wp-content/uploads/2026/08/Workshop-FP1.jpg",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794365212137
   },
   {
    "id": "ne7829d4a5f3f",
@@ -1465,6 +1603,6 @@
    "crawled": 1794271417622
   }
  ],
- "updated": 1794349370267,
- "researchLast": "Community Dent Oral Epidemiol (Wiley)"
+ "updated": 1794365212137,
+ "researchLast": "Dental Materials (ScienceDirect)"
 }
