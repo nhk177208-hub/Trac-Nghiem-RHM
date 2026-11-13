@@ -95,6 +95,60 @@
    "crawled": 1794523486448
   },
   {
+   "id": "ne4341248e6cb",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Lyon College Hosts First Give Veterans a Smile Event",
+   "url": "https://www.dentistrytoday.com/lyon-college-hosts-first-give-veterans-a-smile-event/",
+   "source": "Dentistry Today",
+   "date": "2026-11-12T15:02:36.000Z",
+   "summary": "80 dental students participate in Give Veterans a Smile event The Lyon College School of Dental Medicine hosted its first “Give Veterans a Smile” event on Tuesday, Nov. 10, providing free preventive dental services to military veterans at its campus in Little Rock. Eighty dental school students participated, along with the school’s entire faculty and staff. Veterans were offered free dental screening exams, fluoride…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2025/07/lyon-college.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794540388647
+  },
+  {
+   "id": "ne939bf871d4c",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Aspen Dental Provides $2.8 Million in Free Veteran Care",
+   "url": "https://www.dentistrytoday.com/aspen-dental-provides-2-8-million-in-free-veteran-care/",
+   "source": "Dentistry Today",
+   "date": "2026-11-12T14:57:39.000Z",
+   "summary": "More than 6,000 doctors and team members at Aspen Dental-branded practices cared for veterans on Nov. 7, advancing TAG’s five-year commitment to expand access to care . The Aspen Group (TAG) shared the results of Aspen Dental’s annual Day of Service, held Saturday. More than 6,000 doctors and team members at participating Aspen Dental-branded practices provided free dental care valued at more than $2.8 million to…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2025/02/aspen-dental.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794540388647
+  },
+  {
+   "id": "naef90bde0b5e",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Kristi M. Soileau Installed as AAP President for 2026–2027",
+   "url": "https://www.dentistrytoday.com/kristi-m-soileau-installed-as-aap-president-for-2026-2027/",
+   "source": "Dentistry Today",
+   "date": "2026-11-12T14:45:33.000Z",
+   "summary": "New Orleans periodontist to lead during the 2026–2027 term Kristi M. Soileau, DDS, MEd, MSHCE The American Academy of Periodontology (AAP) has installed Kristi M. Soileau, DDS, MEd, MSHCE, as its president for the 2026–2027 term. Dr. Soileau began her term on October 31, 2026, at the AAP Annual Meeting in Seattle. A board-certified periodontist in private practice in New Orleans, Dr. Soileau brings extensive…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/Soileau4Oct.23-1794436190578-40bbedcf-61a8-4370-a8ad-6e380ea8102d-2048x1565.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794540388647
+  },
+  {
    "id": "ncead6184527a",
    "type": "news",
    "region": "intl",
@@ -1422,6 +1476,26 @@
    "crawled": 1794271417622
   },
   {
+   "id": "n28032f98c517",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Metabolic Memory in Oral Inflammation",
+   "url": "https://journals.sagepub.com/doi/abs/10.1177/00220345261489570?ai=2b4&mi=ehikzz&af=R",
+   "source": "J Dent Res (JDR)",
+   "date": "2026-11-04T06:55:36.000Z",
+   "summary": "Journal of Dental Research, Ahead of Print. The global rise in metabolic diseases has increased the severity and therapeutic complexity of oral inflammatory disorders. Persistent inflammation driven by metabolic memory presents a central pathological mechanism. Even after metabolic parameters are ...",
+   "doi": "10.1177/00220345261489570",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=journals.sagepub.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794540388647
+  },
+  {
    "id": "n363bdf97e724",
    "type": "news",
    "region": "vn",
@@ -1761,6 +1835,24 @@
    "crawled": 1794182508151
   },
   {
+   "id": "n2fb43c6603c6",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "When immediate loading should not be the goal in full-arch implant cases",
+   "url": "https://www.dentistryiq.com/clinical/article/55414520/when-immediate-loading-should-not-be-the-goal-in-full-arch-implant-cases",
+   "source": "DentistryIQ",
+   "date": "2026-10-26T19:53:30.000Z",
+   "summary": "Immediate full-arch implant loading can provide patients with fixed teeth quickly, but success depends on careful patient selection, primary stability, prosthetic planning, and a controlled healing process.",
+   "doi": "",
+   "image": "https://img.dentistryiq.com/files/base/ebm/diq/image/2026/10/6adfaf233a16feea90555d2a-gettyimages2287357349.png?auto=format,compress&fit=fill&fill=blur&q=45&w=250&width=250",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1794540388647
+  },
+  {
    "id": "n362e6abe9703",
    "type": "research",
    "region": "intl",
@@ -2066,6 +2158,24 @@
    "crawled": 1794182508151
   },
   {
+   "id": "n7f227104a615",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "EFP and ESC join forces to explore links between periodontitis and cardiovascular health",
+   "url": "https://www.efp.org/news-events/news/efp-and-esc-join-forces-to-explore-links-between-periodontitis-and-cardiovascular-health/",
+   "source": "EFP",
+   "date": "2026-09-09T15:47:00.000Z",
+   "summary": "",
+   "doi": "",
+   "image": "https://www.efp.org/fileadmin/_processed_/c/4/csm_ESC_joint_Mia_systemic_link_816fe27a85.jpeg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794540388647
+  },
+  {
    "id": "n4ea8bf709c1e",
    "type": "news",
    "region": "vn",
@@ -2094,6 +2204,21 @@
    "body": 1,
    "prio": 1,
    "crawled": 1794400895533
+  },
+  {
+   "id": "n83799e7e5e78",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "EAO Expert Clinician Course",
+   "url": "https://eao.org/education/expert-clinician-course/",
+   "source": "EAO",
+   "date": "2026-08-27T16:08:09.000Z",
+   "summary": "The EAO Expert Clinician Course equips dental professionals with the advanced knowledge and skills to excel in the field of implantology.",
+   "image": "https://eao.org/wp-content/uploads/2026/08/EAO_Cadevers_social_v84-900x1024.jpg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794540388647
   },
   {
    "id": "nabcf231da34e",
@@ -2127,6 +2252,24 @@
    "body": 1,
    "prio": 1,
    "crawled": 1794400895533
+  },
+  {
+   "id": "n9ac7fcd35b87",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "AAE Launches AI-Optimized Patient Resources to Reach More Patients",
+   "url": "https://newsroom.aae.org/featured-stories/aae-launches-ai-optimized-patient-resources-to-reach-more-patients/",
+   "source": "AAE",
+   "date": "2026-08-18T16:36:35.000Z",
+   "summary": "Patients are changing how they search for health information. Increasingly, they’re turning not only to Google, but also to AI-powered tools like ChatGPT, Gemini and other conversational platforms to answer questions about root canals. To help ensure patients find accurate, evidence-based information—and to position the AAE as the trusted voice in those conversations—we’ve launched a series of new and enhanced…",
+   "doi": "",
+   "image": "https://newsroom.aae.org/wp-content/uploads/2026/08/Screenshot-2026-08-05-091018.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794540388647
   },
   {
    "id": "n3edbd2a00fc4",
@@ -2177,6 +2320,21 @@
    "crawled": 1794349370267
   },
   {
+   "id": "n236844d916fb",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "FDI remembers Dr Guillermo Rivero and his contribution to oral health",
+   "url": "https://www.fdiworlddental.org/fdi-remembers-dr-guillermo-rivero-and-his-contribution-oral-health",
+   "source": "FDI World Dental Federation",
+   "date": "2026-08-10T12:00:00.000Z",
+   "summary": "FDI World Dental Federation (FDI) is deeply saddened by the passing of Dr Guillermo Rivero. Throughout his career, Dr Rivero promoted oral health locally, regionally, and globally, and stood out as a passionate oral health advocate whose…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-10/FDI_WDC_18-Buenos_Aires-20180905-329.jpg?itok=ZlTxIt1j",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794540388647
+  },
+  {
    "id": "nf0883668deaa",
    "type": "news",
    "region": "vn",
@@ -2190,6 +2348,21 @@
    "body": 1,
    "prio": 2,
    "crawled": 1794317311054
+  },
+  {
+   "id": "n96911299aed7",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Wall Street Journal: Your Mouth Could Hold the Secrets to a Longer and Healthier Life",
+   "url": "https://www.perio.org/press-release/wall-street-journal-your-mouth-could-hold-the-secrets-to-a-longer-and-healthier-life/",
+   "source": "AAP (Periodontology)",
+   "date": "2026-07-27T19:51:39.000Z",
+   "summary": "“Dr. Ana Becil Giglio, a New York periodontist and president of the American Academy of Periodontology, says some of the most promising future treatments for gum disease are aimed at controlling the body’s inflammatory response rather than simply removing plaque or killing bacteria.” Read the full article here. About the American Academy of Periodontology The American Academy of Periodontology (AAP) represents…",
+   "image": "https://www.perio.org/wp-content/uploads/2019/05/Perio-2026-Q1.jpg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794540388647
   },
   {
    "id": "n9672d0578e5d",
@@ -2268,8 +2441,23 @@
    "body": 1,
    "prio": 2,
    "crawled": 1794400895533
+  },
+  {
+   "id": "nfe3fd21169c7",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Orthodontic Financial Treatment Planning: How to Save for Orthodontic Care",
+   "url": "https://aaoinfo.org/blog/plan-now-save-throughout-the-year/",
+   "source": "AAO (Orthodontists)",
+   "date": "2026-03-12T21:02:59.000Z",
+   "summary": "Orthodontic Financial Treatment Planning: How to Save for Orthodontic Care. A custom smile created just for you by an AAO orthodontist.",
+   "image": "https://aaoinfo.org/wp-content/uploads/2022/03/How-to-Save-for-Orthodontic-Care.jpeg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794540388647
   }
  ],
- "updated": 1794523486448,
- "researchLast": "J Dent (ScienceDirect)"
+ "updated": 1794540388647,
+ "researchLast": "J Dent Res (JDR)"
 }
