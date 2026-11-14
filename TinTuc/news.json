@@ -637,7 +637,8 @@
    "imageBg": "#ffffff",
    "body": 1,
    "prio": 1,
-   "crawled": 1794658071427
+   "crawled": 1794658071427,
+   "_imgTried": 1
   },
   {
    "id": "n4322e7e5ef95",
@@ -860,6 +861,26 @@
    "prio": 1,
    "crawled": 1794491099060,
    "_imgTried": 1
+  },
+  {
+   "id": "n3dc03f58b8d1",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Effect of cyclic loading on screw loosening in fixed partial dentures supported by the OT bridge versus multi-unit angled abutments: An in vitro study",
+   "url": "https://www.thejpd.org/article/S0022-3913(26)00709-2/fulltext?rss=yes",
+   "source": "J Prosthet Dent (JPD)",
+   "date": "2026-11-11T00:00:00.000Z",
+   "summary": "The use of angled abutments may be the method of choice when anatomic limitations preclude the axial placement of an implant. However, the most common complication in tilted implants is abutment screw loosening.",
+   "doi": "10.1016/j.prosdent.2026.10.013",
+   "image": "https://ars.els-cdn.com/content/image/1-s2.0-S0022391326007092-gr1.jpg",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "",
+   "imageBg": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794691573027
   },
   {
    "id": "n766598699678",
@@ -1713,6 +1734,24 @@
    "body": 1,
    "prio": 1,
    "crawled": 1794182508151
+  },
+  {
+   "id": "n04d014ba7ae5",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Wellness Corner: Is the RICE method cooked? When icing pain isn’t the same as healing injury",
+   "url": "https://www.dentistryiq.com/clinical/article/55417057/wellness-corner-is-the-rice-method-cooked-when-icing-pain-isnt-the-same-as-healing-injury",
+   "source": "DentistryIQ",
+   "date": "2026-11-05T19:46:38.000Z",
+   "summary": "New research challenges the traditional RICE method for injury recovery, highlighting the role of inflammation, progressive loading, and rehabilitation. Find out what dental clinicians can do to address persistent neck, shoulder, and back pain beyond temporary symptom relief.",
+   "doi": "",
+   "image": "https://img.dentistryiq.com/files/base/ebm/diq/image/2026/11/6aecdb987a55ca16582c0b2c-gettyimages478249724.png?auto=format,compress&fit=fill&fill=blur&q=45&w=250&width=250",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1794691573027
   },
   {
    "id": "nb25d222069b1",
@@ -3011,6 +3050,24 @@
    "crawled": 1794400895533
   },
   {
+   "id": "nb58037bd3d57",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "AAE Members Secure 12 Save Your Tooth Month Proclamations Across the United States",
+   "url": "https://newsroom.aae.org/featured-stories/aae-members-secure-12-save-your-tooth-month-proclamations-across-the-united-states/",
+   "source": "AAE",
+   "date": "2026-06-11T14:00:00.000Z",
+   "summary": "Grassroots advocacy efforts help raise awareness of endodontic care and the importance of saving natural teeth CHICAGO, June 11, 2026 /PRNewswire/ — The American Association of Endodontists (AAE) is proud to announce that 12 official Save Your Tooth Month proclamations were secured across the United States during May 2026, thanks to the advocacy efforts of dedicated AAE members who engaged with state and local…",
+   "doi": "",
+   "image": "https://newsroom.aae.org/wp-content/uploads/2026/04/SYTM-RGB-png-white-background-1.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794691573027
+  },
+  {
    "id": "n1bbf85a87119",
    "type": "news",
    "region": "intl",
@@ -3024,6 +3081,21 @@
    "body": 1,
    "prio": 1,
    "crawled": 1794658071427
+  },
+  {
+   "id": "n4e2111d6dc3d",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Workplaces a ‘missed opportunity’ to address global oral health burden, landmark report finds",
+   "url": "https://www.fdiworlddental.org/workplaces-missed-opportunity-address-global-oral-health-burden-landmark-report-finds",
+   "source": "FDI World Dental Federation",
+   "date": "2026-05-19T12:00:00.000Z",
+   "summary": "Geneva, Switzerland, 19 May 2026 — A new global report identifies workplaces as one of the most promising and underused platforms to improve oral health, boost productivity and strengthen workforce well-being. The report,…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-05/report-work-oral-health.png?itok=8A04b8O-",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794691573027
   },
   {
    "id": "n698830e4f156",
@@ -3054,8 +3126,38 @@
    "body": 1,
    "prio": 1,
    "crawled": 1794540388647
+  },
+  {
+   "id": "n10428db18642",
+   "type": "news",
+   "region": "intl",
+   "group": "Cơ quan quản lý",
+   "title": "Why Studying Human Nerves Could Unlock Better Treatments for Chronic Pain",
+   "url": "https://www.nidcr.nih.gov/news-events/nidcr-news/why-studying-human-nerves-could-unlock-better-treatments-chronic-pain",
+   "source": "NIDCR (NIH)",
+   "date": "2026-02-05T12:00:00.000Z",
+   "summary": "Read about two NIDCR researchers who are studying what goes wrong in the nervous system during chronic pain. Their focus is on two common but very different pain conditions: diabetic painful neuropathy (DPN) and rheumatoid arthritis (RA).",
+   "image": "https://www.nidcr.nih.gov/sites/default/files/AdobeStock_821256950.jpeg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794691573027
+  },
+  {
+   "id": "n3dc0ce475261",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Podcast: Clinical Matters - The European Association for Osseointegration EAO",
+   "url": "https://eao.org/scientific-resources/clinical-matters/",
+   "source": "EAO",
+   "date": "2025-11-26T15:42:56.000Z",
+   "summary": "The EAO podcast brings you closer to the science behind implant dentistry, translating cutting-edge research into practical insights.",
+   "image": "https://eao.org/wp-content/uploads/2025/11/EAO_podcast_Teaser_V2_Square.jpg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794691573027
   }
  ],
- "updated": 1794658071427,
- "researchLast": "J Periodontol (Wiley)"
+ "updated": 1794691573027,
+ "researchLast": "J Prosthet Dent (JPD)"
 }
