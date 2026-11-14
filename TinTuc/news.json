@@ -41,6 +41,24 @@
    "crawled": 1794191950461
   },
   {
+   "id": "nfb21fe7b0ed1",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Shining a light on digital imaging in undergraduate education",
+   "url": "https://dentistry.co.uk/2026/11/14/shining-a-light-on-digital-imaging-in-undergraduate-education/",
+   "source": "Dentistry.co.uk",
+   "date": "2026-11-14T07:17:00.000Z",
+   "summary": "As Acteon’s national dental imaging education initiative, Illuminate, gets underway, leading clinicians and educators consider how well students are prepared for practice and where digital imaging could help. When theory meets practice There is comfort in knowing someone experienced is nearby when a clinical decision feels uncertain. During training, students can discuss their thinking and seek reassurance. Once in…",
+   "doi": "",
+   "image": "https://dentistry.co.uk/app/uploads/2026/11/imaging.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794658071427
+  },
+  {
    "id": "n68f6d9703b80",
    "type": "news",
    "region": "intl",
@@ -147,6 +165,42 @@
    "body": 1,
    "prio": 2,
    "crawled": 1794625686116
+  },
+  {
+   "id": "nc116cd7f6fee",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Envista Prices $430 Million Senior Notes Offering Due 2033",
+   "url": "https://www.dentistrytoday.com/envista-prices-430-million-senior-notes-offering-due-2033/",
+   "source": "Dentistry Today",
+   "date": "2026-11-13T15:09:22.000Z",
+   "summary": "Envista Holdings Corporation (NYSE: NVST ) (“Envista”) recently announced that it has priced an offering (the “Offering”) of $430 million in aggregate principal amount of its 6.250% Senior Notes due 2033 (the “Notes”) at an issue price of 99.482% of their principal amount. The Offering is expected to close on or about November 24, 2026, subject to the satisfaction of customary closing conditions. Envista intends to…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2025/05/envista24.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794658071427
+  },
+  {
+   "id": "n74427d6bde97",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Align Technology to Present at Jefferies Healthcare Conference",
+   "url": "https://www.dentistrytoday.com/align-technology-to-present-at-jefferies-healthcare-conference/",
+   "source": "Dentistry Today",
+   "date": "2026-11-13T15:09:02.000Z",
+   "summary": "Align Technology, Inc. (“Align”) (Nasdaq: ALGN), a leading global medical device company that designs, manufactures, and sells the Invisalign® System of clear aligners, iTero™ intraoral scanners, and exocad™ CAD/CAM software for digital orthodontics and restorative dentistry, today announced that the company is scheduled to speak at the following financial conference. The presentation will be webcast live via the…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2025/02/align-768x512-1-1-1-1.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794658071427
   },
   {
    "id": "n32e1f278d546",
@@ -566,6 +620,26 @@
    "crawled": 1794625686116
   },
   {
+   "id": "ne2ce390fc8c0",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Effect of enamel matrix derivative in soft tissue healing on post‐extraction sockets: Histological evaluation in humans",
+   "url": "https://aap.onlinelibrary.wiley.com/doi/10.1002/jper.70205?af=R",
+   "source": "J Periodontol (Wiley)",
+   "date": "2026-11-12T04:50:37.000Z",
+   "summary": "Abstract Background The use of enamel matrix derivative (EMD) has the potential to stimulate soft tissue healing and reduce inflammatory response. Our aim was to evaluate histological and immunohistochemical soft tissue healing with the use of EMD in post-extraction sockets. Methods A total of 20 single-rooted teeth with indication of extraction were selected for the study. The patients were randomly assigned to two…",
+   "doi": "10.1002/jper.70205",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=aap.onlinelibrary.wiley.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794658071427
+  },
+  {
    "id": "n4322e7e5ef95",
    "type": "news",
    "region": "vn",
@@ -582,6 +656,21 @@
    "body": 1,
    "prio": 1,
    "crawled": 1794491099060
+  },
+  {
+   "id": "nee42ec5c3b5f",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "ADA Receives CDC Grant to Advance Antibiotic Stewardship and Tissue Graft Safety",
+   "url": "https://www.dentaltown.com/news/details/15511/ada-receives-cdc-grant-to-advance-antibiotic-stewardship-and-tissue-graft-safety",
+   "source": "Dentaltown",
+   "date": "2026-11-12T00:00:00.000Z",
+   "summary": "A five-year CDC cooperative agreement will help the ADA develop antibiotic prescribing guidance and tissue graft safety guidance for dentistry.",
+   "image": "https://prod.cdn.dentaltown.com/images/dentaltown/pressreleases/be9414938bfc4735926abf969bcd5b96.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1794658071427
   },
   {
    "id": "n4338ebf66ffb",
@@ -1956,7 +2045,7 @@
    "url": "https://www.insidedentistry.net/2026/11/bythenumbers/",
    "source": "Inside Dentistry",
    "date": "2026-11-01T12:00:00.000Z",
-   "summary": "November 1, 2026 Volume 22 , Issue 8 , November/December 2026 Page(s): 48 Share 49% of treatment plans created in the first half of 2026 led to completed treatment in that same period. 2 3% increase in the number of dental practice locations associated with private equity-backed DSOs in the first half of 2026 compared to the first half of 2025. The number of those practices increased by 23% from 2021 to 2022. 23.5%…",
+   "summary": "",
    "image": "https://www.insidedentistry.net/media/ri3lz1sv/infographic_1.jpg",
    "body": 1,
    "prio": 2,
@@ -2826,6 +2915,24 @@
    "crawled": 1794625686116
   },
   {
+   "id": "n5745ef6efb8b",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "New Research Highlights the Importance of Exploring Treatment Options Before Tooth Loss",
+   "url": "https://newsroom.aae.org/featured-stories/new-research-highlights-the-importance-of-exploring-treatment-options-before-tooth-loss/",
+   "source": "AAE",
+   "date": "2026-06-25T14:04:00.000Z",
+   "summary": "FOR IMMEDIATE RELEASE Study published in the Journal of Endodontics suggests many cracked teeth can be successfully treated and preserved CHICAGO — A diagnosis of a cracked tooth can leave patients fearing the worst. Many assume a crack means the tooth will eventually need to be removed. However, new research published in the Journal of Endodontics highlights the importance of exploring treatment options before…",
+   "doi": "",
+   "image": "https://newsroom.aae.org/wp-content/uploads/2026/06/JuneJOE.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794658071427
+  },
+  {
    "id": "n9672d0578e5d",
    "type": "news",
    "region": "vn",
@@ -2904,6 +3011,36 @@
    "crawled": 1794400895533
   },
   {
+   "id": "n1bbf85a87119",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "FDI World Dental Federation launches Generation Smile, the oral health movement for all",
+   "url": "https://www.fdiworlddental.org/fdi-world-dental-federation-launches-generation-smile-oral-health-movement-all",
+   "source": "FDI World Dental Federation",
+   "date": "2026-06-09T12:00:00.000Z",
+   "summary": "Generation Smile is a generation unlike any other. It isn't defined by the year you were born. It unites people of every age, background and culture around one shared purpose: making oral…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-09/Generation%20Smile%20image.jpg?itok=BzmpW43M",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794658071427
+  },
+  {
+   "id": "n698830e4f156",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "New Research Reveals Link Between Gum Health, Tooth Loss, and Weight Gain in Older Adults",
+   "url": "https://www.perio.org/press-release/new-research-reveals-link-between-gum-health-tooth-loss-and-weight-gain-in-older-adults/",
+   "source": "AAP (Periodontology)",
+   "date": "2026-04-08T16:10:28.000Z",
+   "summary": "CHICAGO – April 8, 2026 — Losing teeth may do more than change a smile – it may also affect your weight. A new study published in the Journal of Periodontology highlights a compelling connection between poor gum health, tooth loss, and weight gain in older adults, adding to growing evidence that periodontal health plays a critical role in overall health as we age. The research draws on data collected over a four…",
+   "image": "https://www.perio.org/wp-content/uploads/2019/05/Perio-2026-Q1.jpg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794658071427
+  },
+  {
    "id": "nfe3fd21169c7",
    "type": "news",
    "region": "intl",
@@ -2919,6 +3056,6 @@
    "crawled": 1794540388647
   }
  ],
- "updated": 1794625686116,
- "researchLast": "J Oral Rehabil (Wiley)"
+ "updated": 1794658071427,
+ "researchLast": "J Periodontol (Wiley)"
 }
