@@ -41,6 +41,42 @@
    "crawled": 1794191950461
   },
   {
+   "id": "n4f65ce7f0a55",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "WFO Opens Search for Its Next Secretary-General",
+   "url": "https://www.wfo.org/wfo-opens-search-for-its-next-secretary-general/",
+   "source": "WFO (Orthodontists)",
+   "date": "2026-11-15T12:25:52.000Z",
+   "summary": "The World Federation of Orthodontists (WFO) is inviting applications for the position of Secretary-General, the Federation’s chief executive and financial officer. Applications are due by Jan 31, 2027 . The Secretary-General leads the WFO’s day-to-day operations and serves the Executive Committee, the Council and the General Assembly. The appointment is for a five-year term, with an anticipated start date of Apr 1,…",
+   "doi": "",
+   "image": "https://secure.gravatar.com/avatar/46552f569b56a6be2ed35ed4543c226601e46c03ea4c7d49244ee6ace0a8f6d7?s=96&d=mm&r=g",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794746601961
+  },
+  {
+   "id": "n25ba1d866a0c",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Electricity-generating toothbrush shown to reduce plaque-causing bacteria",
+   "url": "https://dentistry.co.uk/2026/11/15/electricity-generating-toothbrush-shown-to-reduce-plaque-causing-bacteria/",
+   "source": "Dentistry.co.uk",
+   "date": "2026-11-15T07:51:00.000Z",
+   "summary": "An electricity-generating toothbrush may improve plaque control and reduce harmful oral bacteria – find out more about this and other new updates from the dental sector. The device uses piezoelectric monofilament bristles, which produce electrical charges as they bend during brushing. These charges generate reactive oxygen species that can disrupt bacterial biofilms – the protective communities that allow…",
+   "doi": "",
+   "image": "https://dentistry.co.uk/app/uploads/2026/07/This-Week-in-Dentistry-HERO-2.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794746601961
+  },
+  {
    "id": "nfb21fe7b0ed1",
    "type": "news",
    "region": "intl",
@@ -1255,6 +1291,26 @@
    "crawled": 1794317311054
   },
   {
+   "id": "n729eb34c1541",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Advances in the microbiological characteristics of peri‐implant health and peri‐implant diseases. A systematic review",
+   "url": "https://onlinelibrary.wiley.com/doi/10.1111/prd.70101?af=R",
+   "source": "Periodontology 2000 (Wiley)",
+   "date": "2026-11-10T05:18:02.000Z",
+   "summary": "Abstract Background Peri-implant diseases represent a major and increasingly prevalent clinical challenge. Peri-implant mucositis and peri-implantitis are inflammatory conditions associated with dysbiotic biofilms, yet the specific microbial features that distinguish peri-implant health from disease have still to be conclusively demonstrated. The present systematic review compared microbiological profiles across…",
+   "doi": "10.1111/prd.70101",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=onlinelibrary.wiley.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794746601961
+  },
+  {
    "id": "n3f6fb41a5126",
    "type": "research",
    "region": "intl",
@@ -2432,6 +2488,24 @@
    "crawled": 1794540388647
   },
   {
+   "id": "n6179a3a4d315",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Wellness Corner: Creatine—a boost of energy efficiency",
+   "url": "https://www.dentistryiq.com/clinical/article/55413988/wellness-corner-creatinea-boost-of-energy-efficiency",
+   "source": "DentistryIQ",
+   "date": "2026-10-24T13:41:00.000Z",
+   "summary": "Creatine offers potential benefits beyond muscle strength, including healthy aging, women’s health, and cognitive function. Katrina Klein examines the research on creatine supplementation, its role in energy production, and what dental professionals should know about its benefits and limitations.",
+   "doi": "",
+   "image": "https://img.dentistryiq.com/files/base/ebm/diq/image/2026/10/6adb637a25a002e7558b6616-gettyimages2257060041.png?auto=format,compress&fit=fill&fill=blur&q=45&w=250&width=250",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1794746601961
+  },
+  {
    "id": "n362e6abe9703",
    "type": "research",
    "region": "intl",
@@ -3148,6 +3222,21 @@
    "crawled": 1794710186378
   },
   {
+   "id": "nc1587849917f",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "New Dental Check-up podcast explores the oral health risks of vaping",
+   "url": "https://www.fdiworlddental.org/new-dental-check-podcast-explores-oral-health-risks-vaping",
+   "source": "FDI World Dental Federation",
+   "date": "2026-05-06T12:00:00.000Z",
+   "summary": "As vaping continues to grow in popularity worldwide, concerns are mounting about its effects on oral and overall health. In the latest episode of the Dental Check-up Podcast, Prof. Purnima Kumar discusses what current research reveals about the risks of e-cigarette use and the questions that remain unanswered. More than 100 million adults and 15 million adolescents worldwide now use e-cigarettes, making vaping an…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/large/public/2026-07/FDI-Podcast_S2ep1.jpg?itok=khZKw1cQ",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794746601961
+  },
+  {
    "id": "n1dfe5d5c00aa",
    "type": "news",
    "region": "intl",
@@ -3164,6 +3253,24 @@
    "body": 1,
    "prio": 1,
    "crawled": 1794710186378
+  },
+  {
+   "id": "n5175306c898b",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "American Association of Endodontists Releases Updated Guidelines for the Treatment of Traumatic Dental Injuries",
+   "url": "https://newsroom.aae.org/featured-stories/american-association-of-endodontists-releases-updated-guidelines-for-the-treatment-of-traumatic-dental-injuries/",
+   "source": "AAE",
+   "date": "2026-04-14T12:53:00.000Z",
+   "summary": "Press Release FOR IMMEDIATE RELEASE Updated guidelines appear online in the April 2026 Articles in Press of the Journal of Endodontics . The American Association of Endodontists (AAE) has released its updated Recommended Guidelines for the Treatment of Traumatic Dental Injuries, providing clinicians with the latest evidence-based recommendations to support timely, accurate care following dental trauma. The…",
+   "doi": "",
+   "image": "https://newsroom.aae.org/wp-content/uploads/2022/06/JOE-wtext-COLOR-1024x249.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794746601961
   },
   {
    "id": "n698830e4f156",
@@ -3226,6 +3333,6 @@
    "crawled": 1794691573027
   }
  ],
- "updated": 1794710186378,
- "researchLast": "JADA"
+ "updated": 1794746601961,
+ "researchLast": "Periodontology 2000 (Wiley)"
 }
