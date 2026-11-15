@@ -59,6 +59,25 @@
    "crawled": 1794746601961
   },
   {
+   "id": "pmid:43033976",
+   "type": "research",
+   "region": "intl",
+   "group": "Cơ sở dữ liệu",
+   "title": "Optical-Fluorescence Decomposition Reveals Progressive Multimodal Divergence with Histologic Severity of Occlusal Caries.",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/43033976/",
+   "source": "PubMed · Photodiagnosis and photodynamic therapy",
+   "date": "2026-11-15T12:00:00.000Z",
+   "authors": "Jung EH",
+   "doi": "10.1016/j.pdpdt.2026.105712",
+   "summary": "Background: Occlusal caries remains difficult to characterize because surface changes do not always reflect demineralization depth. Quantitative light-induced fluorescence (QLF) provides complementary information through fluorescence loss and red fluorescence, but these features are typically evaluated independently of white-light appearance. Joint analysis of paired images may reveal modality-specific changes associated with lesion progression. This study developed an interpretable optical-fluorescence decomposition framework to quantify multimodal divergence and assess its relationship with histologic caries severity. Methods: Paired white-light optical and QLF images of 94 occlusal tooth…",
+   "image": "https://cdn.ncbi.nlm.nih.gov/coreutils/nwds/img/logos/AgencyLogo.svg",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794779067782
+  },
+  {
    "id": "n25ba1d866a0c",
    "type": "news",
    "region": "intl",
@@ -715,6 +734,21 @@
    "crawled": 1794491099060
   },
   {
+   "id": "ncd3e0f3547db",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Plastic Probes Matched Metal at Implants With Less Pain, While Electronic Probe Faltered",
+   "url": "https://www.dentaltown.com/news/details/15499/plastic-probes-matched-metal-at-implants-with-less-pain-while-electronic-probe-faltered",
+   "source": "Dentaltown",
+   "date": "2026-11-12T00:00:00.000Z",
+   "summary": "Against depths taken after restoration removal, metal and plastic probes were close at 85 implants, but an electronic probe was off 1.5 mm in 65% of readings.",
+   "image": "https://prod.cdn.dentaltown.com/images/dentaltown/pressreleases/0fa9df77f4f6433a9b870e3938db9ce4.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1794779067782
+  },
+  {
    "id": "n687d5b636de8",
    "type": "news",
    "region": "intl",
@@ -1308,7 +1342,8 @@
    "imageBg": "#ffffff",
    "body": 1,
    "prio": 2,
-   "crawled": 1794746601961
+   "crawled": 1794746601961,
+   "_imgTried": 1
   },
   {
    "id": "n3f6fb41a5126",
@@ -3222,6 +3257,21 @@
    "crawled": 1794710186378
   },
   {
+   "id": "n097df0af8769",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "FDI elevates oral health in key global health discussions at the 79th World Health Assembly",
+   "url": "https://www.fdiworlddental.org/fdi-elevates-oral-health-key-global-health-discussions-79th-world-health-assembly",
+   "source": "FDI World Dental Federation",
+   "date": "2026-05-06T12:00:00.000Z",
+   "summary": "The 79th World Health Assembly (WHA79) took place from 18 – 23 May, in Geneva, Switzerland. …",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-06/wha26.jpg?itok=l6R82nh5",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794779067782
+  },
+  {
    "id": "nc1587849917f",
    "type": "news",
    "region": "intl",
@@ -3333,6 +3383,6 @@
    "crawled": 1794691573027
   }
  ],
- "updated": 1794746601961,
- "researchLast": "Periodontology 2000 (Wiley)"
+ "updated": 1794779067782,
+ "researchLast": "PubMed"
 }
