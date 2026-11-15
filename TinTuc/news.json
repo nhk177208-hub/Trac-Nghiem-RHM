@@ -359,6 +359,26 @@
    "crawled": 1794609268349
   },
   {
+   "id": "n6fe50ea5df8e",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Cone-beam computed tomography in endodontics: patient perceptions, outcomes, and radiation awareness",
+   "url": "https://jada.ada.org/article/S0002-8177(26)00530-1/fulltext?rss=yes",
+   "source": "JADA",
+   "date": "2026-11-13T00:00:00.000Z",
+   "summary": "The impact of cone-beam computed tomography (CBCT) on patient-reported outcome measures in endodontics remains largely unexplored. This study aimed to identify patients’ perceived values in diagnostic imaging, investigate the impact of CBCT vs periapical radiography (PR), and assess patient knowledge of ionizing radiation.",
+   "doi": "10.1016/j.adaj.2026.07.029",
+   "image": "https://ars.els-cdn.com/content/image/1-s2.0-S0002817726005301-gr1.jpg",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "",
+   "imageBg": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794710186378
+  },
+  {
    "id": "nc674b7a5efe1",
    "type": "news",
    "region": "intl",
@@ -657,6 +677,21 @@
    "body": 1,
    "prio": 1,
    "crawled": 1794491099060
+  },
+  {
+   "id": "n687d5b636de8",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "No-Liner Composites Kept More Pulps Vital After Selective Caries Removal in 3",
+   "url": "https://www.dentaltown.com/news/details/15498/no-liner-composites-kept-more-pulps-vital-after-selective-caries-removal-in-3-year-rct",
+   "source": "Dentaltown",
+   "date": "2026-11-12T00:00:00.000Z",
+   "summary": "A 36-month RCT found skipping the glass ionomer liner under composite after selective caries removal kept 97.5% of pulps vital vs. 87.3% with a liner.",
+   "image": "https://prod.cdn.dentaltown.com/images/dentaltown/pressreleases/b252769d-1977-4e55-a21a-7adb2a8821e7.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1794710186378
   },
   {
    "id": "nee42ec5c3b5f",
@@ -3098,6 +3133,39 @@
    "crawled": 1794691573027
   },
   {
+   "id": "n5b3856c6d1f4",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "FDI releases concise two-page summary of advice sheet on STDs and the oral cavity",
+   "url": "https://www.fdiworlddental.org/fdi-releases-concise-two-page-summary-advice-sheet-stds-and-oral-cavity",
+   "source": "FDI World Dental Federation",
+   "date": "2026-05-08T12:00:00.000Z",
+   "summary": "Access the key messages from FDI's advice sheet on sexually transmitted diseases and the oral cavity in a concise two-page summary.",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-08/two-pager-oral-cavity-sexually-transmitted-diseases-2.png?itok=9FyzAlTM",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794710186378
+  },
+  {
+   "id": "n1dfe5d5c00aa",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "More Dentists Are Referring to Endodontists, New AAE Survey Finds",
+   "url": "https://newsroom.aae.org/featured-stories/more-dentists-are-referring-to-endodontists-new-aae-survey-finds/",
+   "source": "AAE",
+   "date": "2026-05-04T13:00:00.000Z",
+   "summary": "FOR IMMEDIATE RELEASE CHICAGO – A new survey from the American Association of Endodontists (AAE) reveals that referrals from general dentists continue to play a critical and growing role in endodontic care, underscoring the importance of specialist treatment in saving patients’ natural teeth —and the strong confidence general dentists have in endodontists as trusted partners in patient care. The AAE’s 2026…",
+   "doi": "",
+   "image": "https://newsroom.aae.org/wp-content/uploads/2026/05/reportimage.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794710186378
+  },
+  {
    "id": "n698830e4f156",
    "type": "news",
    "region": "intl",
@@ -3158,6 +3226,6 @@
    "crawled": 1794691573027
   }
  ],
- "updated": 1794691573027,
- "researchLast": "J Prosthet Dent (JPD)"
+ "updated": 1794710186378,
+ "researchLast": "JADA"
 }
