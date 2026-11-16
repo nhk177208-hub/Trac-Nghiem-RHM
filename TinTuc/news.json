@@ -734,6 +734,21 @@
    "crawled": 1794491099060
   },
   {
+   "id": "n5fef0a1ef055",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Piezosurgery and Burs Showed Similar Gingival Stability After Crown Lengthening",
+   "url": "https://www.dentaltown.com/news/details/15497/piezosurgery-and-burs-showed-similar-gingival-stability-after-crown-lengthening",
+   "source": "Dentaltown",
+   "date": "2026-11-12T00:00:00.000Z",
+   "summary": "A split-mouth RCT found piezosurgery and rotary burs gave similar gingival margin stability after aesthetic crown lengthening, with margins stable by 6 weeks.",
+   "image": "https://prod.cdn.dentaltown.com/images/dentaltown/pressreleases/b6ebd4be21544baa9b8ff5b9fbf6231d.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1794797062183
+  },
+  {
    "id": "ncd3e0f3547db",
    "type": "news",
    "region": "intl",
@@ -1810,6 +1825,26 @@
    "body": 1,
    "prio": 2,
    "crawled": 1794191950461
+  },
+  {
+   "id": "nfbe2d8512d70",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "S100A7 promotes orthodontic tooth movement by enhancing osteoclastogenesis via the receptor for advanced glycation end products",
+   "url": "https://www.ajodo.org/article/S0889-5406(26)00519-6/fulltext?rss=yes",
+   "source": "AJODO",
+   "date": "2026-11-06T00:00:00.000Z",
+   "summary": "Orthodontic tooth movement (OTM) requires coordinated remodeling of the periodontal ligament (PDL) and alveolar bone, but clinically relevant molecular regulators remain incompletely defined. We investigated damage-associated molecular patterns (DAMPs) in human PDL and the mechanism by which a candidate DAMP regulates OTM.",
+   "doi": "10.1016/j.ajodo.2026.09.013",
+   "image": "https://ars.els-cdn.com/content/image/1-s2.0-S0889540626005196-gr1.jpg",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "",
+   "imageBg": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794797062183
   },
   {
    "id": "n0eb71c578bc0",
@@ -3338,6 +3373,21 @@
    "crawled": 1794658071427
   },
   {
+   "id": "n520eecc1c65d",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "FDI strengthens collaboration with UNHCR to advance refugee oral health",
+   "url": "https://www.fdiworlddental.org/fdi-strengthens-collaboration-unhcr-advance-refugee-oral-health",
+   "source": "FDI World Dental Federation",
+   "date": "2026-04-08T12:00:00.000Z",
+   "summary": "FDI takes part in a dedicated UNHCR webinar highlighting practical opportunities to integrate oral health into refugee health services worldwide. Learn more about this important topic.",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-08/unchr-webinar.jpg?itok=yZBPZtpZ",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794797062183
+  },
+  {
    "id": "nfe3fd21169c7",
    "type": "news",
    "region": "intl",
@@ -3383,6 +3433,6 @@
    "crawled": 1794691573027
   }
  ],
- "updated": 1794779067782,
- "researchLast": "PubMed"
+ "updated": 1794797062183,
+ "researchLast": "AJODO"
 }
