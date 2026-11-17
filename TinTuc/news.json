@@ -61,6 +61,60 @@
    "crawled": 1794191950461
   },
   {
+   "id": "n2ef10d133087",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Saro Hatzakortzian of Alien Milling on Dental Innovations",
+   "url": "https://www.dentistrytoday.com/saro-hatzakortzian-of-alien-milling-technologies-on-dental-milling-zirconia-innovations/",
+   "source": "Dentistry Today",
+   "date": "2026-11-16T15:29:02.000Z",
+   "summary": "In this episode of Speaking of Dentistry… The Editor’s Cut with Stan Goff, Stan Goff, Managing Editor of Dentistry Today , speaks with Saro Hatzakortzian, CEO of Alien Milling Technologies, about the company’s growth, dental milling services, and advancements in zirconia materials. Saro discusses how Alien Milling Technologies has evolved since its founding in 2015, offering an à la carte milling model that gives…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/Screenshot-2026-11-16-at-10.30.44-AM.png",
+   "video": "https://www.youtube.com/embed/w6EeAjYrQ_s?feature=oembed",
+   "videoPoster": "https://i.ytimg.com/vi/w6EeAjYrQ_s/hqdefault.jpg",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794876506772
+  },
+  {
+   "id": "n475d2f53c7ca",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "vVARDIS Prices Initial Public Offering at $18 Per Share",
+   "url": "https://www.dentistrytoday.com/vvardis-prices-initial-public-offering-at-18-per-share/",
+   "source": "Dentistry Today",
+   "date": "2026-11-16T15:00:31.000Z",
+   "summary": "vVARDIS Holding AG (“vVARDIS”), a Swiss healthcare company operating in the dental med-tech sector, today announced the pricing of its initial public offering of 9,722,223 Class A ordinary shares at a public offering price of $18.00 per share. In connection with the offering, vVARDIS has granted the underwriters a 30-day option to purchase up to an additional 1,458,333 Class A ordinary shares at the initial public…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2025/07/vvardis-1.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794876506772
+  },
+  {
+   "id": "n27f4bb65760f",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Innovate 32 Partners With Houston’s Post Oak Dental",
+   "url": "https://www.dentistrytoday.com/innovate-32-partners-with-houstons-post-oak-dental/",
+   "source": "Dentistry Today",
+   "date": "2026-11-16T14:11:46.000Z",
+   "summary": "Houston Practice Led by Dr. Chris Gowan Strengthens Nashville-Based Dental Services Platform’s Growing Presence in Houston Innovate 32 (“Innovate” or the “Company”), a rapidly expanding, partner-driven dental services organization, announced its partnership with Post Oak Dental (“Post Oak” or “the practice”), a leading provider of comprehensive general and cosmetic dental care in Houston, Texas. Under the leadership…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2024/12/innovate-32.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1794876506772
+  },
+  {
    "id": "n1e32ce3c685e",
    "type": "news",
    "region": "intl",
@@ -167,6 +221,36 @@
    "body": 1,
    "prio": 2,
    "crawled": 1794836130202
+  },
+  {
+   "id": "nbffe343fc8e8",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "ADA responds to continued reports of MetLife offsetting payments owed to dentists",
+   "url": "https://adanews.ada.org/ada-news/2026/november/ada-responds-to-continued-reports-of-metlife-offsetting-payments-owed-to-dentists/",
+   "source": "ADA News",
+   "date": "2026-11-16T00:00:00.000Z",
+   "summary": "The ADA encourages dentists receiving a payment offset to request a detailed explanation of why the recovery was generated.",
+   "image": "https://adanews.ada.org/media/0mbhwtv2/20261116_metliferecoupmentupdate.jpg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794876506772
+  },
+  {
+   "id": "n75032a593258",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "ADEX Honors Dr. Ellis Hall With Its Highest Award",
+   "url": "https://www.dentaltown.com/news/details/15512/adex-honors-dr-ellis-hall-with-its-highest-award",
+   "source": "Dentaltown",
+   "date": "2026-11-16T00:00:00.000Z",
+   "summary": "The American Board of Dental Examiners presented Dr. Ellis Hall, longtime NERB director of examinations, with its Dr. Guy Shampaine/Dr. David Low Award.",
+   "image": "https://prod.cdn.dentaltown.com/images/dentaltown/pressreleases/c4c1df77a9e84d5e82d67855ab61f24e.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1794876506772
   },
   {
    "id": "n4f65ce7f0a55",
@@ -540,6 +624,26 @@
    "body": 1,
    "prio": 2,
    "crawled": 1794609268349
+  },
+  {
+   "id": "n15c3c3d49296",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "London Dental Fellowship welcomes new President",
+   "url": "https://www.nature.com/articles/s41415-026-0354-8",
+   "source": "British Dental Journal",
+   "date": "2026-11-13T00:00:00.000Z",
+   "summary": "British Dental Journal, Published online: 13 November 2026; doi:10.1038/s41415-026-0354-8 London Dental Fellowship welcomes new President",
+   "doi": "10.1038/s41415-026-0354-8",
+   "image": "https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41415-026-0354-8/MediaObjects/41415_2026_354_Fig1_HTML.jpg",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "",
+   "imageBg": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794876506772
   },
   {
    "id": "n6fe50ea5df8e",
@@ -3546,6 +3650,21 @@
    "crawled": 1794797062183
   },
   {
+   "id": "n4ea018010b3a",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Investing in health professionals: A shared commitment during World Health Worker Week",
+   "url": "https://www.fdiworlddental.org/investing-health-professionals-shared-commitment-during-world-health-worker-week",
+   "source": "FDI World Dental Federation",
+   "date": "2026-04-07T12:00:00.000Z",
+   "summary": "Investing in the health workforce is key to stronger health systems, better patient outcomes and more resilient economies. During World Health Worker Week, members of the World Health Professions Alliance call for sustained commitment to support and strengthen health professionals worldwide. Image From 1–7 April 2026 , the global health community marks World Health Worker Week , a moment to recognize the people who…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-03/Opening-title_0.png?itok=IDvvtn0Q",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1794876506772
+  },
+  {
    "id": "nfe3fd21169c7",
    "type": "news",
    "region": "intl",
@@ -3591,6 +3710,6 @@
    "crawled": 1794691573027
   }
  ],
- "updated": 1794836130202,
- "researchLast": "Arch Oral Biol (ScienceDirect)"
+ "updated": 1794876506772,
+ "researchLast": "British Dental Journal"
 }
