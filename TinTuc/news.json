@@ -61,6 +61,60 @@
    "crawled": 1794191950461
   },
   {
+   "id": "nf745ab605582",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "‘I’m going to lose everything’: a dentist’s four-year fitness to practise ordeal",
+   "url": "https://dentistry.co.uk/2026/11/18/im-going-to-lose-everything-a-dentists-four-year-fitness-to-practise-ordeal/",
+   "source": "Dentistry.co.uk",
+   "date": "2026-11-18T10:11:00.000Z",
+   "summary": "Months into what turned out to be one of Ireland’s longest fitness to practise cases, principal Tom Munroe was at breaking point, delivering parcels to make ends meet, wondering whether he would ever be allowed to return to dentistry. ‘I had no income. My practice was taken from me. I didn’t know if I was ever going to get back to work again,’ he tells Dentistry . Speaking during November’s Movember campaign, which…",
+   "doi": "",
+   "image": "https://dentistry.co.uk/app/uploads/2026/11/Tom-Munroe.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795010091422
+  },
+  {
+   "id": "nd1e4e0101833",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "From scale and polish to leadership in health optimisation",
+   "url": "https://dentistry.co.uk/2026/11/18/from-scale-and-polish-to-leadership-in-health-optimisation/",
+   "source": "Dentistry.co.uk",
+   "date": "2026-11-18T07:44:00.000Z",
+   "summary": "Oral-B explores how dental hygienists are moving beyond the outdated concept that their role is ‘just a scale and polish’ to reshape patient care. Since early last century, dental hygienists have been narrowly defined by the task of ‘scaling and polishing’, despite significant expansion of their role. To drive dentistry forward, the profession must challenge outdated perceptions and recognise the broader scope of…",
+   "doi": "",
+   "image": "https://dentistry.co.uk/app/uploads/2026/11/scale_and_polish.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795010091422
+  },
+  {
+   "id": "nafedd71c8268",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Indirect adhesive restoration in the posterior region: The power of universal materials in a digital workflow",
+   "url": "https://www.dental-tribune.com/news/indirect-adhesive-restoration-in-the-posterior-region-the-power-of-universal-materials-in-a-digital-workflow/",
+   "source": "Dental Tribune",
+   "date": "2026-11-18T07:00:18.000Z",
+   "summary": "Contemporary restorative dentistry is moving towards increasingly efficient, digital and simplified protocols. The integration of CAD/CAM technologies with universal materials can optimise clinical procedures, reduce treatment complexity and improve the predictability of restorative treatment outcomes. Resin-based hybrid materials, combined with self-adhesive resin cements and universal adhesives, provide excellent…",
+   "doi": "",
+   "image": "https://cdn.dental-tribune.com/dti/0001/d3eccb7b/cmVzaXplKHc9MzQwO2g9MTYwKTpzaGFycGVuKGxldmVsPTApOm91dHB1dChmb3JtYXQ9cG5nKQ/up/dt/2014/02/Planmeca.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795010091422
+  },
+  {
    "id": "n4f337935703c",
    "type": "news",
    "region": "intl",
@@ -131,6 +185,24 @@
    "body": 1,
    "prio": 2,
    "crawled": 1794959640431
+  },
+  {
+   "id": "na3d6438ed277",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Southern Orthodontic Partners Names Sarah Sharfstein COO",
+   "url": "https://www.dentistrytoday.com/southern-orthodontic-partners-names-sarah-sharfstein-coo/",
+   "source": "Dentistry Today",
+   "date": "2026-11-17T15:05:24.000Z",
+   "summary": "",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/Sharfstein_Sarah_D5R4861_72dpi.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795010091422
   },
   {
    "id": "n5581a70af032",
@@ -1793,7 +1865,8 @@
    "imageBg": "#ffffff",
    "body": 1,
    "prio": 1,
-   "crawled": 1794959640431
+   "crawled": 1794959640431,
+   "_imgTried": 1
   },
   {
    "id": "ndfbac7ce639b",
@@ -2549,6 +2622,26 @@
    "_imgTried": 1
   },
   {
+   "id": "nbfd8b1f80c28",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Prevalence and Risk Factors for Dental Anxiety and Dental Fear in Nigeria: A Systematic Review and Meta‐Analysis",
+   "url": "https://onlinelibrary.wiley.com/doi/10.1111/cdoe.70143?af=R",
+   "source": "Community Dent Oral Epidemiol (Wiley)",
+   "date": "2026-11-05T09:25:31.000Z",
+   "summary": "ABSTRACT Objective In Nigeria, the burden of dental anxiety and dental fear (DFA) remains poorly characterized despite its possible contribution to poor dental service utilization and treatment avoidance. This study aimed to estimate the pooled prevalence of dental anxiety in Nigerian populations and identify associated risk factors. Methods This systematic review and meta-analysis was registered in PROSPERO:…",
+   "doi": "10.1111/cdoe.70143",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=onlinelibrary.wiley.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795010091422
+  },
+  {
    "id": "n30a1ea586a56",
    "type": "news",
    "region": "intl",
@@ -3137,6 +3230,24 @@
    "body": 1,
    "prio": 1,
    "crawled": 1794232374934
+  },
+  {
+   "id": "nc2ff05ad8e39",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Bone health, systemic health, and dentistry",
+   "url": "https://www.dentistryiq.com/dental-hygiene/article/55412394/bone-health-systemic-health-and-dentistry-part-1",
+   "source": "DentistryIQ",
+   "date": "2026-10-22T21:41:53.000Z",
+   "summary": "Osteoporosis prevention starts early in life. Dental professionals can recognize risk factors, identify potential signs of low bone density, and support early screening to help prevent fractures and improve systemic health.",
+   "doi": "",
+   "image": "https://img.dentistryiq.com/files/base/ebm/diq/image/2026/10/6ad22dd8565743146239b7f9-gettyimages2085076357.png?auto=format,compress&fit=fill&fill=blur&q=45&w=250&width=250",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1795010091422
   },
   {
    "id": "n313bcafff64b",
@@ -3883,6 +3994,21 @@
    "crawled": 1794710186378
   },
   {
+   "id": "n88ab00fc8e27",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Whole mouth health in focus: Discover how co-design is improving prevention and patient care in the upcoming FDI webinar",
+   "url": "https://www.fdiworlddental.org/whole-mouth-health-focus-discover-how-co-design-improving-prevention-and-patient-care-upcoming-fdi",
+   "source": "FDI World Dental Federation",
+   "date": "2026-05-03T12:00:00.000Z",
+   "summary": "Register for our upcoming FDI Oral Health Campus webinar where experts explore Whole Mouth Health and explain how co-design principles can support more effective prevention and patient care. Image FDI will host a webinar on 10 March at 09:00 CET on the FDI Oral Health Campus, exploring how the Whole Mouth Health approach is advancing prevention and patient-centred care. Register here This session will present new…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-03/webinar-02102026-whole-mouth-health.jpg?itok=QsZj35N5",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795010091422
+  },
+  {
    "id": "n5175306c898b",
    "type": "news",
    "region": "intl",
@@ -4036,6 +4162,6 @@
    "crawled": 1794691573027
   }
  ],
- "updated": 1794959640431,
- "researchLast": "Clin Oral Implants Res"
+ "updated": 1795010091422,
+ "researchLast": "Community Dent Oral Epidemiol (Wiley)"
 }
