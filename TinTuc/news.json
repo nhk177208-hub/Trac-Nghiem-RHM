@@ -61,6 +61,77 @@
    "crawled": 1794191950461
   },
   {
+   "id": "n482ecf366a30",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "A multifunctional SACP-PEP/TMC film for enhanced resin-dentin interface via biomimetic remineralization, collagenase suppression, and bacterial inhibition",
+   "url": "https://www.sciencedirect.com/science/article/pii/S0109564126003763?dgcid=rss_sd_all",
+   "source": "Dental Materials (ScienceDirect)",
+   "date": "2026-12-01T00:00:00.000Z",
+   "summary": "Publication date: December 2026 Source: Dental Materials, Volume 42, Issue 12 Author(s): Minggao Jiang, Manxuan Liu, Yubing Zhang, Yili Guo, Ruomeng Li, Shuoshun Li, Qian Ren, Die Hu, Ziqian Lu, Yusen Liu, Linglin Zhang, Zhongcheng Li",
+   "doi": "10.1016/j.dental.2026.07.003",
+   "image": "https://ars.els-cdn.com/content/image/1-s2.0-S0109564126003763-ga1.jpg",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "",
+   "imageBg": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795044306982
+  },
+  {
+   "id": "n7475788f01ac",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "EyeSpecial Digital Dental Camera",
+   "url": "https://www.dentistrytoday.com/eyespecial-digital-dental-camera/",
+   "source": "Dentistry Today",
+   "date": "2026-11-18T20:57:28.000Z",
+   "summary": "",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/03-shofu.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795044306982
+  },
+  {
+   "id": "n8cdbdc244e40",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "ORTHOPANTOMOGRAPH OP 3D EX",
+   "url": "https://www.dentistrytoday.com/orthopantomograph-op-3d-ex/",
+   "source": "Dentistry Today",
+   "date": "2026-11-18T20:57:25.000Z",
+   "summary": "ORTHOPANTOMOGRAPH OP 3D EX from DEXIS was named one of Dentistry Today’s 2026 Readers’ Choice Top 50 Technology Products. Comprehensive 3D Imaging Platform Enables Confident Diagnosing Built on the OP 3D family technology, the ORTHOPANTOMOGRAPH OP 3D EX is a complete x-ray platform designed for general practitioners looking to expand their practice with 3D imaging. The OP 3D EX makes it easy to capture high-quality…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/06-dexis.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795044306982
+  },
+  {
+   "id": "n1ddc7f377a2d",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "American Academy of Periodontology Installs New President and Officers in Seattle",
+   "url": "https://www.perio.org/press-release/american-academy-of-periodontology-installs-new-president-and-officers-in-seattle/",
+   "source": "AAP (Periodontology)",
+   "date": "2026-11-18T16:24:12.000Z",
+   "summary": "Periodontist Kristi M. Soileau to Preside for 2026-2027 Year. Media Contact: Adam Natali, American Academy of Periodontology Phone: 312-573-3240 | Email: [email protected] CHICAGO — November 18, 2026 — The American Academy of Periodontology (AAP) installed Dr. Kristi M. Soileau as president during its 112th Annual Meeting in Seattle, held Oct. 29 – Nov. 1. Other newly appointed officers include President-Elect Dr.…",
+   "image": "https://www.perio.org/wp-content/uploads/2019/05/Perio-2026-Q1.jpg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795044306982
+  },
+  {
    "id": "nf745ab605582",
    "type": "news",
    "region": "intl",
@@ -113,6 +184,36 @@
    "body": 1,
    "prio": 2,
    "crawled": 1795010091422
+  },
+  {
+   "id": "nc39e4c8b7472",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "5 resources to help dentists prescribe antibiotics responsibly",
+   "url": "https://adanews.ada.org/ada-news/2026/november/5-resources-to-help-dentists-prescribe-antibiotics-responsibly/",
+   "source": "ADA News",
+   "date": "2026-11-18T00:00:00.000Z",
+   "summary": "The ADA is also accepting comments on a new antibiotic living guideline for dental implant surgery.",
+   "image": "https://adanews.ada.org/media/llzecryg/20261118_antibioticstewardshipresources.jpeg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795044306982
+  },
+  {
+   "id": "n9e7fb9b1427e",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Severe MIH Teeth Held Up Into Adulthood, but Fear",
+   "url": "https://www.dentaltown.com/news/details/15525/severe-mih-teeth-held-up-into-adulthood-but-fear-driven-dental-avoidance-was-more-common",
+   "source": "Dentaltown",
+   "date": "2026-11-18T00:00:00.000Z",
+   "summary": "Teeth with severe MIH showed no added caries or tooth loss from age 16 to 27 in a Norwegian cohort, but fear-driven avoidance was more than twice as common.",
+   "image": "https://prod.cdn.dentaltown.com/images/dentaltown/pressreleases/f3ee96bc-cf73-4024-9b4e-5d46376b60f1.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1795044306982
   },
   {
    "id": "n4f337935703c",
@@ -2639,7 +2740,8 @@
    "imageBg": "#ffffff",
    "body": 1,
    "prio": 2,
-   "crawled": 1795010091422
+   "crawled": 1795010091422,
+   "_imgTried": 1
   },
   {
    "id": "n30a1ea586a56",
@@ -4117,6 +4219,23 @@
    "crawled": 1794959640431
   },
   {
+   "id": "ne69ede43325b",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "WOHD26: Together, let’s create a record-breaking chain of happy moments!",
+   "url": "https://www.fdiworlddental.org/wohd26-together-lets-create-record-breaking-chain-happy-moments",
+   "source": "FDI World Dental Federation",
+   "date": "2026-04-03T12:00:00.000Z",
+   "summary": "World Oral Health Day (WOHD) is just a few weeks away. To continue building momentum towards 20 March, we launched our digital activation on 13 February, bringing the campaign to life across digital platforms worldwide.Under this year’s…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-03/wohd26-digital-activation_0.jpg?itok=LltU5cOJ",
+   "video": "https://www.youtube.com/embed/fN5AqObCbvY",
+   "videoPoster": "https://i.ytimg.com/vi/fN5AqObCbvY/hqdefault.jpg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795044306982
+  },
+  {
    "id": "nfe3fd21169c7",
    "type": "news",
    "region": "intl",
@@ -4162,6 +4281,6 @@
    "crawled": 1794691573027
   }
  ],
- "updated": 1795010091422,
- "researchLast": "Community Dent Oral Epidemiol (Wiley)"
+ "updated": 1795044306982,
+ "researchLast": "Dental Materials (ScienceDirect)"
 }
