@@ -1,6 +1,26 @@
 {
  "items": [
   {
+   "id": "nc508d181a845",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Three-dimensional geometric estimation of preoperative soft-tissue volume in mucogingival surgery: A proof-of-concept case series",
+   "url": "https://www.sciencedirect.com/science/article/pii/S0300571226008092?dgcid=rss_sd_all",
+   "source": "J Dent (ScienceDirect)",
+   "date": "2027-02-01T00:00:00.000Z",
+   "summary": "Publication date: February 2027 Source: Journal of Dentistry, Volume 177 Author(s): Edgar Daniel Vargas-Quiroga, Heloísa Correa Melo, Ana Carolina Duarte Firmino, Juliana Jendiroba Faraoni, Ana Paula Macedo, Bruna S.H. Tonin, Regina Guenka Palma-Dibb, Arthur Belém Novaes-Jr",
+   "doi": "10.1016/j.jdent.2026.107140",
+   "image": "https://ars.els-cdn.com/content/image/1-s2.0-S0300571226008092-gr1.jpg",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "",
+   "imageBg": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795215971116
+  },
+  {
    "id": "ndea8b0bb5265",
    "type": "research",
    "region": "intl",
@@ -81,6 +101,24 @@
    "crawled": 1795044306982
   },
   {
+   "id": "n8ce0b8423b6f",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Beyond the Title: How the DeW Retreat Is Redefining Leadership and Community in Dentistry",
+   "url": "https://www.dentistrytoday.com/beyond-the-title-dew-retreat-leadership-community-dentistry/",
+   "source": "Dentistry Today",
+   "date": "2026-11-20T14:55:28.000Z",
+   "summary": "At DeW Life’s 10th anniversary celebration, women across dentistry came together to explore courage, entrepreneurship, personal growth, and the power of genuine connection. What happens when you bring together a room full of accomplished women in dentistry and take away the very thing that often defines them professionally—their titles? Something remarkable. From November 12–14, 2026, DeW Life celebrated its 10th…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/dew-retreat-2026-kristie-clifton-strengths-name-tags.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795215971116
+  },
+  {
    "id": "n198bd2316af2",
    "type": "news",
    "region": "intl",
@@ -153,6 +191,42 @@
    "crawled": 1795183260915
   },
   {
+   "id": "n784057da4f37",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Does Our Dentistry Stand the Test of Time?",
+   "url": "https://www.dentistrytoday.com/does-our-dentistry-stand-the-test-of-time/",
+   "source": "Dentistry Today",
+   "date": "2026-11-20T06:51:00.000Z",
+   "summary": "75 Years of Dentistry. A Lifetime of Possibilities. Written by: Dr. Louis Kaufman, DDS, FAGD, MBA On November 3, 2026, I had the privilege of seeing a remarkable patient. At 93 years old, she shared a story that reminded me why I became a dentist and what truly defines excellence in our profession. Her story began more than 80 years ago, when she lost her two front teeth as a young child. Imagine growing up without…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/Kaufman-image-90-year-old-2048x1536.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795215971116
+  },
+  {
+   "id": "nfa97e1208784",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "MARK3 Launches Blue Streak Diamond Burs at Lower Prices",
+   "url": "https://www.dentistrytoday.com/mark3-launches-blue-streak-diamond-burs-at-lower-prices/",
+   "source": "Dentistry Today",
+   "date": "2026-11-20T06:30:14.000Z",
+   "summary": "Smarter Pricing. Comparable Performance. Maximum Value. MARK3, a leader in high-quality yet cost-effective dental supplies, announces the launch of Blue Streak™ Diamond Burs, precision-engineered diamond burs that deliver fast, accurate cutting performance at one of the most competitive price points in dentistry today. With quality comparable to premium dental bur brands—but at a significantly lower manufacturer’s…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/Diamonds-PR-2048x512.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795215971116
+  },
+  {
    "id": "n8f3cb9e19157",
    "type": "news",
    "region": "vn",
@@ -187,6 +261,21 @@
    "body": 1,
    "prio": 2,
    "crawled": 1795183260915
+  },
+  {
+   "id": "n1db32d95b88a",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Final HIPAA Privacy Rule affects dental practices’ records access requirements",
+   "url": "https://adanews.ada.org/ada-news/2026/november/final-hipaa-privacy-rule-affects-dental-practices-records-access-requirements/",
+   "source": "ADA News",
+   "date": "2026-11-20T00:00:00.000Z",
+   "summary": "The U.S. Department of Health and Human Services’ Office for Civil Rights has issued a final rule modifying the HIPAA Privacy Rule.",
+   "image": "https://adanews.ada.org/media/30kjfj4r/hipaa2.jpeg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795215971116
   },
   {
    "id": "n7ebfdf4b04b1",
@@ -365,7 +454,8 @@
    "imageBg": "#000000",
    "body": 1,
    "prio": 2,
-   "crawled": 1795183260915
+   "crawled": 1795183260915,
+   "_imgTried": 1
   },
   {
    "id": "nf47448c96beb",
@@ -458,6 +548,21 @@
    "crawled": 1795131215200
   },
   {
+   "id": "nb26046dc5f08",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "New ADA standards on medical devices, endodontic materials available for review",
+   "url": "https://adanews.ada.org/ada-news/2026/november/new-ada-standards-on-medical-devices-endodontic-materials-available-for-review/",
+   "source": "ADA News",
+   "date": "2026-11-19T00:00:00.000Z",
+   "summary": "Three proposed standards are available for review and comment from the ADA Standards Program by Dec. 12.",
+   "image": "https://res.cloudinary.com/broadcastmed/image/fetch/q_auto,c_fill,g_faces:center,f_auto,h_313,w_588/",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795215971116
+  },
+  {
    "id": "n69bc2e7aa9d8",
    "type": "news",
    "region": "intl",
@@ -525,7 +630,26 @@
    "imageBg": "#ffffff",
    "body": 1,
    "prio": 1,
-   "crawled": 1795183260915
+   "crawled": 1795183260915,
+   "_imgTried": 1
+  },
+  {
+   "id": "na412b07646f2",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Building stronger foundations: Actionable strategies for lifelong skeletal health",
+   "url": "https://www.dentistryiq.com/dental-hygiene/article/55420122/building-stronger-foundations-actionable-strategies-for-lifelong-skeletal-health",
+   "source": "DentistryIQ",
+   "date": "2026-11-18T22:17:55.000Z",
+   "summary": "Bone health is shaped throughout life by hormones, nutrition, sleep, and physical activity. This article examines the factors that influence bone density, fracture risk, and osteoporosis prevention, and how dental professionals can connect skeletal health with overall systemic health.",
+   "doi": "",
+   "image": "https://img.dentistryiq.com/files/base/ebm/diq/image/2026/11/6afe2225e6af63ce8990fbed-gettyimages846633156.png?auto=format,compress&fit=fill&fill=blur&q=45&w=250&width=250",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1795215971116
   },
   {
    "id": "n7475788f01ac",
@@ -4794,6 +4918,21 @@
    "crawled": 1795183260915
   },
   {
+   "id": "nf3d82194a27f",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Register now for WDC26 in Prague before early bird rates end this Thursday 4 June",
+   "url": "https://www.fdiworlddental.org/register-now-wdc26-prague-early-bird-rates-end-thursday-4-june",
+   "source": "FDI World Dental Federation",
+   "date": "2026-03-06T12:00:00.000Z",
+   "summary": "Join colleagues from around the world for four days of high-level science, fresh perspectives, and valuable professional connections.The scientific programme will feature…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-06/Copy%20of%20wdc26%20prague%20website%20news%20%282%29.png?itok=nbJ52tol",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795215971116
+  },
+  {
    "id": "n10428db18642",
    "type": "news",
    "region": "intl",
@@ -4824,6 +4963,6 @@
    "crawled": 1794691573027
   }
  ],
- "updated": 1795183260915,
- "researchLast": "J Clin Periodontol"
+ "updated": 1795215971116,
+ "researchLast": "J Dent (ScienceDirect)"
 }
