@@ -101,6 +101,24 @@
    "crawled": 1795044306982
   },
   {
+   "id": "nde4809c1a943",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Private Dentistry Awards 2026: the winners!",
+   "url": "https://dentistry.co.uk/2026/11/21/private-dentistry-awards-2026-the-winners/",
+   "source": "Dentistry.co.uk",
+   "date": "2026-11-21T07:04:00.000Z",
+   "summary": "The Private Dentistry Awards 2026 celebrated the individuals, teams and practices raising standards across private dentistry – discover this year’s winners below. On Friday 20 November 2026, the UK’s private dental sector gathered at the JW Marriott Grosvenor House London for the Private Dentistry Awards 2026. Held in the hotel’s Great Room, the evening brought together finalists, judges, sponsors and guests to…",
+   "doi": "",
+   "image": "https://dentistry.co.uk/app/uploads/2026/11/PDA-26_2000x1333-HERO-Winners-Announced.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795267637026
+  },
+  {
    "id": "n8ce0b8423b6f",
    "type": "news",
    "region": "intl",
@@ -297,6 +315,41 @@
    "body": 1,
    "prio": 2,
    "crawled": 1795183260915
+  },
+  {
+   "id": "n049d638e3ace",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Two Patient Deaths Put Tustin Oral Surgeon’s License and Anesthesia Permit on the Line",
+   "url": "https://www.dentaltown.com/news/details/15556/two-patient-deaths-put-tustin-oral-surgeons-license-and-anesthesia-permit-on-the-line",
+   "source": "Dentaltown",
+   "date": "2026-11-20T00:00:00.000Z",
+   "summary": "California’s dental board alleges 911 wasn’t called for an hour after an implant patient stopped breathing. A second patient died after a single extraction.",
+   "image": "https://prod.cdn.dentaltown.com/images/dentaltown/pressreleases/ed1694f2-1e7d-4241-9601-4f66e9d45625.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1795267637026
+  },
+  {
+   "id": "n88ca0552deab",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Tooth Survival and Periapical Healing After Nonsurgical Root Canal Treatment: A Systematic Review and Paired Meta-analysis of Reporting Discordance",
+   "url": "https://www.jendodon.com/article/S0099-2399(26)00617-5/fulltext?rss=yes",
+   "source": "J Endodontics (JOE)",
+   "date": "2026-11-20T00:00:00.000Z",
+   "summary": "Tooth survival and strict periapical healing are commonly presented as parallel outcomes, although differences in endpoint definitions, denominators, and follow-up can make the estimates non-equivalent. This review quantified the within-study difference and examined its value as a marker of reporting discordance.",
+   "doi": "10.1016/j.joen.2026.11.010",
+   "image": "https://ars.els-cdn.com/content/image/1-s2.0-S0099239926006175-gr1.jpg",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "",
+   "imageBg": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795267637026
   },
   {
    "id": "n1db32d95b88a",
@@ -3554,7 +3607,8 @@
    "imageBg": "#ffffff",
    "body": 1,
    "prio": 1,
-   "crawled": 1795233470332
+   "crawled": 1795233470332,
+   "_imgTried": 1
   },
   {
    "id": "n363bdf97e724",
@@ -4396,6 +4450,21 @@
    "crawled": 1794400895533
   },
   {
+   "id": "n474285375e87",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "FDI releases French, Spanish and Japanese versions of its Oral Health for an Ageing Population Advocacy Guide",
+   "url": "https://www.fdiworlddental.org/fdi-releases-french-spanish-and-japanese-versions-its-oral-health-ageing-population-advocacy-guide",
+   "source": "FDI World Dental Federation",
+   "date": "2026-09-02T12:00:00.000Z",
+   "summary": "Following the successful launch of the Advocacy Guide – Promoting Oral Health for an Ageing Population at the FDI World Dental Congress 2025 (WDC25) in Shanghai, FDI is pleased to announce that the guide is now available in French, Spanish and Japanese , expanding its accessibility to a broader global audience. Image Supporting healthy ageing through oral health Originally presented during the Oral Health for an…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/large/public/2025-09/ohap-advocacy-guide.jpg?itok=MDBmQiwK",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795267637026
+  },
+  {
    "id": "n6db728712f8d",
    "type": "news",
    "region": "intl",
@@ -5054,6 +5123,6 @@
    "crawled": 1794691573027
   }
  ],
- "updated": 1795233470332,
- "researchLast": "J Dent Res (JDR)"
+ "updated": 1795267637026,
+ "researchLast": "J Endodontics (JOE)"
 }
