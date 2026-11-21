@@ -227,6 +227,42 @@
    "crawled": 1795215971116
   },
   {
+   "id": "n0d28a043074e",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "ADA Promotes David Waldschmidt to Senior Vice President",
+   "url": "https://www.dentistrytoday.com/ada-promotes-david-waldschmidt-to-senior-vice-president/",
+   "source": "Dentistry Today",
+   "date": "2026-11-20T06:22:47.000Z",
+   "summary": "The American Dental Association (ADA) is pleased to announce the promotion of David Waldschmidt, Ph.D., to Senior Vice President, Testing Services & Joint Commission on National Dental Examinations (JCNDE). In this new role, Dr. Waldschmidt provides strategic and operational leadership for the ADA’s licensure and admissions examination programs, overseeing development, psychometric standards, stakeholder relations,…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2025/08/ADA.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795233470332
+  },
+  {
+   "id": "n4c44e1ecff2d",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Phoenix Dental Agency Offers 50% Off Website Builds",
+   "url": "https://www.dentistrytoday.com/phoenix-dental-agency-offers-50-off-website-builds/",
+   "source": "Dentistry Today",
+   "date": "2026-11-20T06:15:37.000Z",
+   "summary": "Dental practices can save up to $3,000 with 50% off a Foreversite™ build fee when paired with Social Studio, November 30 through December 4, 2026. A dental practice’s website introduces the care it provides. Its social media introduces the personalities of its people. This Cyber Monday, Phoenix Dental Agency is helping practices bring those introductions together with 50% off the Foreversite™ build fee when they…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2025/10/phoenix.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795233470332
+  },
+  {
    "id": "n8f3cb9e19157",
    "type": "news",
    "region": "vn",
@@ -983,6 +1019,24 @@
    "body": 1,
    "prio": 2,
    "crawled": 1794925226405
+  },
+  {
+   "id": "n0a73f4dbe3bb",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Behind the swag: Why dental reps play by different rules",
+   "url": "https://www.dentistryiq.com/clinical/article/55419354/behind-the-swag-why-dental-reps-play-by-different-rules",
+   "source": "DentistryIQ",
+   "date": "2026-11-16T21:51:24.000Z",
+   "summary": "Dental vendor gifts, meals, and sponsorships can vary widely based on a company's obligations under the Physician Payments Sunshine Act. Federal reporting requirements, FDA classifications, and corporate ownership all influence what dental industry representatives can offer—and what practices should consider when evaluating vendor relationships.",
+   "doi": "",
+   "image": "https://img.dentistryiq.com/files/base/ebm/diq/image/2026/11/6afc6dcd9a47ebe4795184a7-gettyimages2155438715.png?auto=format,compress&fit=fill&fill=blur&q=45&w=250&width=250",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1795233470332
   },
   {
    "id": "n2ef10d133087",
@@ -3483,6 +3537,26 @@
    "_imgTried": 1
   },
   {
+   "id": "n3b0fd6fa968d",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "A Quantitative Framework for Characterizing Oral pH Dynamics",
+   "url": "https://journals.sagepub.com/doi/abs/10.1177/00220345261474858?ai=2b4&mi=ehikzz&af=R",
+   "source": "J Dent Res (JDR)",
+   "date": "2026-11-04T06:54:08.000Z",
+   "summary": "Journal of Dental Research, Ahead of Print. Dental caries is a polymicrobial biofilm-based disease whereby acidogenic and aciduric microorganisms within dental plaque generate an acidic milieu resulting in dissolution of enamel and dentin below their critical pH. The relationship of pH over time ...",
+   "doi": "10.1177/00220345261474858",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=journals.sagepub.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795233470332
+  },
+  {
    "id": "n363bdf97e724",
    "type": "news",
    "region": "vn",
@@ -4322,6 +4396,23 @@
    "crawled": 1794400895533
   },
   {
+   "id": "n6db728712f8d",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "World Oral Health Day 2026 starts now: Download the new video, sing along and join the movement",
+   "url": "https://www.fdiworlddental.org/world-oral-health-day-2026-starts-now-download-new-video-sing-along-and-join-movement",
+   "source": "FDI World Dental Federation",
+   "date": "2026-09-02T12:00:00.000Z",
+   "summary": "2026: Shines a spotlight on the importance of caring for your mouth at every stage of life—from birth through later years.To help bring this powerful message to life, FDI…",
+   "image": "https://www.fdiworlddental.org/modules/contrib/social_media/icons/linkedin.svg",
+   "video": "https://www.youtube.com/embed/0dtwVTGe1l4",
+   "videoPoster": "https://i.ytimg.com/vi/0dtwVTGe1l4/hqdefault.jpg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795233470332
+  },
+  {
    "id": "n83799e7e5e78",
    "type": "news",
    "region": "intl",
@@ -4963,6 +5054,6 @@
    "crawled": 1794691573027
   }
  ],
- "updated": 1795215971116,
- "researchLast": "J Dent (ScienceDirect)"
+ "updated": 1795233470332,
+ "researchLast": "J Dent Res (JDR)"
 }
