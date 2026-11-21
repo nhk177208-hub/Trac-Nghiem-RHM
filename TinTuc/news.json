@@ -1074,6 +1074,26 @@
    "crawled": 1794925226405
   },
   {
+   "id": "n253b868965c6",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Removal and Complications of Additively Manufactured Subperiosteal Implants in the Atrophic Mandible: A Meta-analysis",
+   "url": "https://www.sciencedirect.com/science/article/pii/S0278239126010773?dgcid=rss_sd_all",
+   "source": "J Oral Maxillofac Surg (ScienceDirect)",
+   "date": "2026-11-17T00:00:00.000Z",
+   "summary": "Publication date: Available online 17 November 2026 Source: Journal of Oral and Maxillofacial Surgery Author(s): Luigi Angelo Vaira",
+   "doi": "10.1016/j.joms.2026.11.005",
+   "image": "https://ars.els-cdn.com/content/image/1-s2.0-S0278239126010773-gr1.jpg",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "",
+   "imageBg": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795299174689
+  },
+  {
    "id": "n0a73f4dbe3bb",
    "type": "news",
    "region": "intl",
@@ -5093,6 +5113,21 @@
    "crawled": 1795215971116
   },
   {
+   "id": "n6d1a2c58ffa1",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "World AMR Awareness Week 2026: One Health, one action to prevent AMR now",
+   "url": "https://www.fdiworlddental.org/world-amr-awareness-week-2026-one-health-one-action-prevent-amr-now",
+   "source": "FDI World Dental Federation",
+   "date": "2026-02-11T12:00:00.000Z",
+   "summary": "Antimicrobial resistance (AMR) is a growing global health threat that requires coordinated action across human, animal and environmental health. Under this year’s World AMR Awareness Week theme, “One Health, one action: Prevent AMR…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-11/one_health_one_action_AMR.png?itok=uog2uoeX",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795299174689
+  },
+  {
    "id": "n10428db18642",
    "type": "news",
    "region": "intl",
@@ -5123,6 +5158,6 @@
    "crawled": 1794691573027
   }
  ],
- "updated": 1795267637026,
- "researchLast": "J Endodontics (JOE)"
+ "updated": 1795299174689,
+ "researchLast": "J Oral Maxillofac Surg (ScienceDirect)"
 }
