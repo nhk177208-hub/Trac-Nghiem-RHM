@@ -101,6 +101,60 @@
    "crawled": 1795044306982
   },
   {
+   "id": "nc7546824c0d1",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Building on dental nursing: the rise of the oral health practitioner",
+   "url": "https://dentistry.co.uk/2026/11/22/building-on-dental-nursing-the-rise-of-the-oral-health-practitioner/",
+   "source": "Dentistry.co.uk",
+   "date": "2026-11-22T10:22:00.000Z",
+   "summary": "Charlee Cummins explores the role of an oral health practitioner, plus the benefits of employing one in practice and training into the role. National Dental Nurse Day is a great opportunity to celebrate dental nurses – but it is also a chance to talk about where a career in dental nursing can take you. I think we can all agree that dental nursing is a respected career in its own right. It is not just cleaning up…",
+   "doi": "",
+   "image": "https://dentistry.co.uk/app/uploads/2026/11/oral_health_practitioner.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795353515149
+  },
+  {
+   "id": "n5e78e475773c",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "National Dental Nurse Day 2026: marking a turning point",
+   "url": "https://dentistry.co.uk/2026/11/22/national-dental-nurse-day-2026-marking-a-turning-point/",
+   "source": "Dentistry.co.uk",
+   "date": "2026-11-22T09:04:00.000Z",
+   "summary": "As we celebrate National Dental Nurse Day, Fiona Ellwood discusses the contrast of the dental nursing profession’s growing influence with persistent questions about pay, training and recognition. Dental nursing is entering a decisive period. The profession is now the largest registrable group on the General Dental Council register, with numbers exceeding 68,000 after a reported 5.4% rise. Yet growth has not resolved…",
+   "doi": "",
+   "image": "https://dentistry.co.uk/app/uploads/2026/11/Dental_nurse_day.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795353515149
+  },
+  {
+   "id": "n041e0be1e998",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Bupa Dental Care launches international exchange programme for dental nurses in UK and Australia",
+   "url": "https://dentistry.co.uk/2026/11/22/bupa-dental-care-launches-international-exchange-programme-for-dental-nurses-in-uk-and-australia/",
+   "source": "Dentistry.co.uk",
+   "date": "2026-11-22T06:57:00.000Z",
+   "summary": "Colleagues across Bupa’s global dental network will have the opportunity to gain international experience through a newly launched dental nurse exchange programme, enabling them to work alongside colleagues around the Bupa world to develop their careers and skills. Dental nurses Hannah Foster from Bupa Dental Care Bramhall and Amy Connolly from Bupa Dental Care Stockbridge are among the first colleagues selected to…",
+   "doi": "",
+   "image": "https://dentistry.co.uk/app/uploads/2026/11/international_nurse_day.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795353515149
+  },
+  {
    "id": "nde4809c1a943",
    "type": "news",
    "region": "intl",
@@ -135,6 +189,26 @@
    "body": 1,
    "prio": 2,
    "crawled": 1795316873943
+  },
+  {
+   "id": "na059a44d0d83",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Long‐term radiographic marginal bone level changes around implants placed in periodontally healthy and periodontally compromised patients: A retrospective case series with 17–27 years of follow‐up",
+   "url": "https://aap.onlinelibrary.wiley.com/doi/10.1002/jper.70206?af=R",
+   "source": "J Periodontol (Wiley)",
+   "date": "2026-11-20T16:39:37.000Z",
+   "summary": "Abstract Background The aim of this retrospective radiographic case series analysis was to assess the marginal bone loss (mBL) of implants placed in periodontally healthy (PHP) and periodontally compromised (PCP) patients after an observation period of at least 17 years. Methods A total of 32 patients (16 PHP and 16 PCP) rehabilitated with 57 implants (16 transmucosal and 41 submerged) with a mean follow-up of 19.5…",
+   "doi": "10.1002/jper.70206",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=aap.onlinelibrary.wiley.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795353515149
   },
   {
    "id": "n8ce0b8423b6f",
@@ -5176,6 +5250,21 @@
    "crawled": 1795299174689
   },
   {
+   "id": "n70d8447b6366",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "International day of older persons: Healthy ageing starts across the life course",
+   "url": "https://www.fdiworlddental.org/international-day-older-persons-healthy-ageing-starts-across-life-course",
+   "source": "FDI World Dental Federation",
+   "date": "2026-02-10T12:00:00.000Z",
+   "summary": "See the infographic In celebrating the International Day of Older…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-08/OHAP%2010-Year%20Anniversary%20Infographic_2026.jpg?itok=1Izul_JA",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795353515149
+  },
+  {
    "id": "n10428db18642",
    "type": "news",
    "region": "intl",
@@ -5206,6 +5295,6 @@
    "crawled": 1794691573027
   }
  ],
- "updated": 1795316873943,
- "researchLast": "J Oral Rehabil (Wiley)"
+ "updated": 1795353515149,
+ "researchLast": "J Periodontol (Wiley)"
 }
