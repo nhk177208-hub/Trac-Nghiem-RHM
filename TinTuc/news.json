@@ -119,6 +119,24 @@
    "crawled": 1795267637026
   },
   {
+   "id": "nfe6e102eaf8c",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Longitudinal Clinical Outcomes After Intra‐Articular Dexamethasone–Lidocaine Injection for Temporomandibular Joint Arthralgia",
+   "url": "https://onlinelibrary.wiley.com/doi/10.1111/joor.70347?af=R",
+   "source": "J Oral Rehabil (Wiley)",
+   "date": "2026-11-21T05:11:55.000Z",
+   "summary": "Among 191 adults with temporomandibular joint arthralgia, intra-articular dexamethasone–lidocaine injection was followed by reductions in pain intensity and pain-location burden and a modest increase in comfortable mouth opening, while maximum mouth opening showed no consistent longitudinal change. Multidomain assessment captured complementary clinical trajectories after injection. ABSTRACT Background Longitudinal…",
+   "doi": "10.1111/joor.70347",
+   "image": "https://onlinelibrary.wiley.com/cms/asset/7df4d2c0-0f80-40bb-9a2d-fcdd8e10c6d7/joor70347-toc-0001-m.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795316873943
+  },
+  {
    "id": "n8ce0b8423b6f",
    "type": "news",
    "region": "intl",
@@ -315,6 +333,21 @@
    "body": 1,
    "prio": 2,
    "crawled": 1795183260915
+  },
+  {
+   "id": "na282a11cfd27",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Sinus Elevation Implants Had 94.3% Estimated 5-Year Survival; Approach Comparison Unclear",
+   "url": "https://www.dentaltown.com/news/details/15535/sinus-elevation-implants-had-943-estimated-5-year-survival-approach-comparison-unclear",
+   "source": "Dentaltown",
+   "date": "2026-11-20T00:00:00.000Z",
+   "summary": "Sinus floor elevation implants had estimated survival of 94.29% at 5 years and 92.85% at 10 years, but the lateral vs. crestal comparison was inconclusive.",
+   "image": "https://prod.cdn.dentaltown.com/images/dentaltown/pressreleases/9a60298c-7edd-4efa-a0b0-69e6b6d97f34.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1795316873943
   },
   {
    "id": "n049d638e3ace",
@@ -5113,6 +5146,21 @@
    "crawled": 1795215971116
   },
   {
+   "id": "nd78e3208aca5",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "FDI President visits Lion Corporation in Tokyo to mark new World Oral Health Day partnership",
+   "url": "https://www.fdiworlddental.org/fdi-president-visits-lion-corporation-tokyo-mark-new-world-oral-health-day-partnership",
+   "source": "FDI World Dental Federation",
+   "date": "2026-02-11T12:00:00.000Z",
+   "summary": "FDI and Lion Corporation have signed a global partnership agreement for World Oral Health Day (WOHD), beginning in 2027. The agreement was formalized on 5 October 2026 during an official signing ceremony at Lion’s headquarters in Tokyo, Japan,…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-11/wohd-20261102-nsharkov.jpg?itok=xJ6FvWIz",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795316873943
+  },
+  {
    "id": "n6d1a2c58ffa1",
    "type": "news",
    "region": "intl",
@@ -5158,6 +5206,6 @@
    "crawled": 1794691573027
   }
  ],
- "updated": 1795299174689,
- "researchLast": "J Oral Maxillofac Surg (ScienceDirect)"
+ "updated": 1795316873943,
+ "researchLast": "J Oral Rehabil (Wiley)"
 }
