@@ -208,7 +208,8 @@
    "imageBg": "#ffffff",
    "body": 1,
    "prio": 1,
-   "crawled": 1795353515149
+   "crawled": 1795353515149,
+   "_imgTried": 1
   },
   {
    "id": "n8ce0b8423b6f",
@@ -407,6 +408,26 @@
    "body": 1,
    "prio": 2,
    "crawled": 1795183260915
+  },
+  {
+   "id": "n31ae960b2ccf",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Response to Letter to the Editor on “Oral rehabilitation using a sectional maxillary complete denture and mandibular removable partial denture for a patient with microstomia: A clinical report”",
+   "url": "https://www.thejpd.org/article/S0022-3913(26)00701-8/fulltext?rss=yes",
+   "source": "J Prosthet Dent (JPD)",
+   "date": "2026-11-20T00:00:00.000Z",
+   "summary": "Dear Editor:",
+   "doi": "10.1016/j.prosdent.2026.08.032",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=www.thejpd.org",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795386544495
   },
   {
    "id": "na282a11cfd27",
@@ -742,6 +763,21 @@
    "body": 1,
    "prio": 2,
    "crawled": 1795131215200
+  },
+  {
+   "id": "n21a9f48aebd3",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "ADA Tells Dentists to Question MetLife Payment Offsets After Continued Reports",
+   "url": "https://www.dentaltown.com/news/details/15536/ada-tells-dentists-to-question-metlife-payment-offsets-after-continued-reports",
+   "source": "Dentaltown",
+   "date": "2026-11-19T00:00:00.000Z",
+   "summary": "The ADA advises dentists who get MetLife recoupment or offset notices to request the reason, the provider involved, and the recovery method after new reports.",
+   "image": "https://prod.cdn.dentaltown.com/images/dentaltown/pressreleases/c7c261b6-c6d8-4dc6-869d-7d63956f366f.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1795386544495
   },
   {
    "id": "nb26046dc5f08",
@@ -5265,6 +5301,21 @@
    "crawled": 1795353515149
   },
   {
+   "id": "n5ecff2fcfe49",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "From Data to Action: 10 Years of Impact with FDI’s Oral Health Observatory",
+   "url": "https://www.fdiworlddental.org/data-action-10-years-impact-fdis-oral-health-observatory",
+   "source": "FDI World Dental Federation",
+   "date": "2026-02-09T12:00:00.000Z",
+   "summary": "As part of the continued dissemination of the Oral Health Observatory (OHO) 10 Years Impact Report, FDI has developed and released French and Spanish versions of the report, opening up the…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-09/OHO-news-translations.png?itok=GLIDyfiy",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795386544495
+  },
+  {
    "id": "n10428db18642",
    "type": "news",
    "region": "intl",
@@ -5295,6 +5346,6 @@
    "crawled": 1794691573027
   }
  ],
- "updated": 1795353515149,
- "researchLast": "J Periodontol (Wiley)"
+ "updated": 1795386544495,
+ "researchLast": "J Prosthet Dent (JPD)"
 }
