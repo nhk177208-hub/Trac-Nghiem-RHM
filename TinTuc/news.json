@@ -101,6 +101,24 @@
    "crawled": 1795044306982
   },
   {
+   "id": "n768461b29d9d",
+   "type": "news",
+   "region": "vn",
+   "group": "Trường đại học",
+   "title": "HIU đón nhận Bằng khen của UBND TP.HCM nhân Ngày Nhà giáo Việt Nam 20/11",
+   "url": "https://hiu.vn/tin-tuc/hiu-don-nhan-bang-khen-cua-ubnd-tp-hcm-nhan-ngay-nha-giao-viet-nam-20-11/",
+   "source": "ĐH Quốc tế Hồng Bàng",
+   "date": "2026-11-23T03:34:49.000Z",
+   "summary": "Cập nhật lần cuối vào 23/11/2026 Tại Lễ kỷ niệm Ngày Nhà giáo Việt Nam 20/11, Trường Đại học Quốc tế Hồng Bàng (HIU) vinh dự đón nhận Bằng khen của Chủ tịch UBND TP.HCM vì hoàn thành xuất sắc nhiệm vụ năm học 2025 – 2026. Dịp này, sáu tập thể thuộc Trường cũng được trao danh hiệu Tập thể Lao động xuất sắc. Ông Trương Quốc Lâm – Phó Trưởng Ban Tuyên giáo và Dân vận Thành ủy, Giám đốc Sở Y tế TP.HCM (bìa phải) trao…",
+   "doi": "",
+   "image": "https://hiu.vn/wp-content/uploads/2026/11/913216401_2559065267851728_6819121040702217221_n-1-765x285.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795405476266
+  },
+  {
    "id": "nc7546824c0d1",
    "type": "news",
    "region": "intl",
@@ -427,7 +445,8 @@
    "imageBg": "#ffffff",
    "body": 1,
    "prio": 1,
-   "crawled": 1795386544495
+   "crawled": 1795386544495,
+   "_imgTried": 1
   },
   {
    "id": "na282a11cfd27",
@@ -763,6 +782,41 @@
    "body": 1,
    "prio": 2,
    "crawled": 1795131215200
+  },
+  {
+   "id": "nf921b70184d6",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Henry Schein Opens Registration for THRIVELIVE 2027 in Las Vegas",
+   "url": "https://www.dentaltown.com/news/details/15555/henry-schein-opens-registration-for-thrivelive-2027-in-las-vegas",
+   "source": "Dentaltown",
+   "date": "2026-11-19T00:00:00.000Z",
+   "summary": "Henry Schein and Henry Schein One open registration for THRIVELIVE 2027, set for April 28–May 1 at Resorts World Las Vegas with 100-plus CE courses.",
+   "image": "https://prod.cdn.dentaltown.com/images/dentaltown/pressreleases/21d4bfd9a4604d4a823e906a37969143.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1795405476266
+  },
+  {
+   "id": "nba96f3367902",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "When dental benefits do not cover the cost of delivering oral health care",
+   "url": "https://jada.ada.org/article/S0002-8177(26)00649-5/fulltext?rss=yes",
+   "source": "JADA",
+   "date": "2026-11-19T00:00:00.000Z",
+   "summary": "Dentistry has never been more capable. Advances in diagnosis, treatment, and prevention have improved the ability to preserve oral health. However, the financial model supporting that progress is under increasing strain because 45% of US dentists report concerns about rising overhead costs,1 whereas dental benefit plans increasingly fail to keep pace with the actual cost of delivering care.",
+   "doi": "10.1016/j.adaj.2026.09.017",
+   "image": "https://ars.els-cdn.com/content/image/1-s2.0-S0002817726006495-gr1.jpg",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "",
+   "imageBg": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795405476266
   },
   {
    "id": "n21a9f48aebd3",
@@ -5316,6 +5370,21 @@
    "crawled": 1795386544495
   },
   {
+   "id": "n0a2daba23b8e",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "FDI releases a two-page summary of global report on illegal dental practice",
+   "url": "https://www.fdiworlddental.org/fdi-releases-two-page-summary-global-report-illegal-dental-practice",
+   "source": "FDI World Dental Federation",
+   "date": "2026-02-07T12:00:00.000Z",
+   "summary": "Illegal dental practice remains a significant threat to patient safety worldwide. To support advocacy and policy action, FDI has released a concise two-page summary of its global report on illegal dental practice, bringing together the…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-07/news-illegal.jpg?itok=SzL5ZJmg",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795405476266
+  },
+  {
    "id": "n10428db18642",
    "type": "news",
    "region": "intl",
@@ -5346,6 +5415,6 @@
    "crawled": 1794691573027
   }
  ],
- "updated": 1795386544495,
- "researchLast": "J Prosthet Dent (JPD)"
+ "updated": 1795405476266,
+ "researchLast": "JADA"
 }
