@@ -41,6 +41,26 @@
    "crawled": 1794523486448
   },
   {
+   "id": "n3c60f9432f92",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Integrated genomic and transcriptomic profiling identifies PFKM as a candidate biomarker of nodal metastasis in oral squamous cell carcinoma",
+   "url": "https://www.sciencedirect.com/science/article/pii/S0003996926003031?dgcid=rss_sd_all",
+   "source": "Arch Oral Biol (ScienceDirect)",
+   "date": "2027-01-01T00:00:00.000Z",
+   "summary": "Publication date: January 2027 Source: Archives of Oral Biology, Volume 193 Author(s): Su Kyung Kuk, Jae-Han Lee, Hyun-Ji Kim, Dong-Guk Park, Su-Jung Choi, Jae Il Lee, Sung-Dae Cho",
+   "doi": "10.1016/j.archoralbio.2026.106795",
+   "image": "https://ars.els-cdn.com/content/image/1-s2.0-S0003996926003031-gr1.jpg",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "",
+   "imageBg": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795569913925
+  },
+  {
    "id": "n87d7a09e5fa9",
    "type": "research",
    "region": "intl",
@@ -99,6 +119,60 @@
    "body": 1,
    "prio": 1,
    "crawled": 1795044306982
+  },
+  {
+   "id": "n0ee89932e7d2",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Which Alien Beanie Landed in Your Dental Lab?",
+   "url": "https://www.dentistrytoday.com/which-alien-beanie-landed-in-your-dental-lab/",
+   "source": "Dentistry Today",
+   "date": "2026-11-24T21:24:47.000Z",
+   "summary": "If you’ve got an Alien Beanie tucked in a drawer, hanging by the door, or still in your Lab Day bag, go grab it. The Official Editions archive is live, and you can finally see which edition of the Alien Milling Technologies’ hat you own. Match the colors on your beanie to the photos, find out what year it came from, and see how many you recognize along the way. It Began With a Cold February in Chicago Alien Milling…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/Reduced_alien-beanies-blog-2400x1350-1.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795569913925
+  },
+  {
+   "id": "n011ce1692ad9",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Bioactive Restorative Materials to Preserve and Help Rebuild Compromised Tooth Structure",
+   "url": "https://www.dentistrytoday.com/bioactive-restorative-materials-to-preserve-and-help-rebuild-compromised-tooth-structure/",
+   "source": "Dentistry Today",
+   "date": "2026-11-24T16:21:58.000Z",
+   "summary": "Written by: Robert A. Lowe, DDS INTRODUCTION Prolonging the functional lifespan of teeth and helping to maintain the patient’s dentition for their entire lifetime….is that not the mission of all restorative dentistry? The need for dental restorations made with artificial “tooth-like” materials results from prolonged contact between bacterial metabolic byproducts (acids) and the tooth surface, which demineralize…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/Screenshot-2026-11-24-at-10.55.59-AM.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795569913925
+  },
+  {
+   "id": "neffda8c622db",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Ergonomics Isn’t a Stretch Break: Rethinking the Operatory to Protect the Dental Team",
+   "url": "https://www.dentistrytoday.com/ergonomics-isnt-a-stretch-break-rethinking-the-operatory-to-protect-the-dental-team/",
+   "source": "Dentistry Today",
+   "date": "2026-11-24T15:43:13.000Z",
+   "summary": "By Michael C. Couch, MBA, EDAC, LEED AP BD+C For dental professionals, ergonomics is hardly a new conversation. Clinicians are routinely reminded to maintain neutral posture, adjust their seating, stretch between patients and pay attention to how they position themselves throughout the day. Those habits matter, but they only address part of the problem. Thoughtful operatory design can help support positioning,…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/Reduced_den-high-overhead-dentist-hygienist-adult-patient-procedure-touchpad-handpieces-set-1.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795569913925
   },
   {
    "id": "n66bddcb7809c",
@@ -227,6 +301,39 @@
    "crawled": 1795535293980
   },
   {
+   "id": "n6d356ad659b8",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Oral Health Index reveals hidden burden of disease and importance of early detection",
+   "url": "https://dentistry.co.uk/2026/11/24/oral-health-index-reveals-hidden-burden-of-disease-and-importance-of-early-detection/",
+   "source": "Dentistry.co.uk",
+   "date": "2026-11-24T07:03:00.000Z",
+   "summary": "The newly published Oral Health Index, which draws on data amassed by Hello Pearl, highlights significant differences in oral health outcomes between the UK and the US and reinforces the importance of identifying dental disease before symptoms develop. Based on 737 million tooth observations from 26 million dental visits across both countries, the Index found that UK patients in the full-mouth radiograph cohort had…",
+   "doi": "",
+   "image": "https://dentistry.co.uk/app/uploads/2026/11/oral_health_index.jpg",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795569913925
+  },
+  {
+   "id": "nb32b8b27920a",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Fluoride Supplement Fills Reached 14.5% of Young Children Without Fluoridated Water",
+   "url": "https://www.dentaltown.com/news/details/15561/fluoride-supplement-fills-reached-145-of-young-children-without-fluoridated-water",
+   "source": "Dentaltown",
+   "date": "2026-11-24T00:00:00.000Z",
+   "summary": "Only 14.5% of Massachusetts children ages 1–4 without fluoridated water had a fluoride supplement prescription filled, a study of insurance claims found.",
+   "image": "https://prod.cdn.dentaltown.com/images/dentaltown/pressreleases/cb7a4453-4f78-45a6-b9f4-2a95c503555e.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1795569913925
+  },
+  {
    "id": "n5bb3cba635ad",
    "type": "research",
    "region": "intl",
@@ -237,11 +344,11 @@
    "date": "2026-11-24T00:00:00.000Z",
    "summary": "This study aimed to evaluate root volume changes in maxillary posterior teeth of patients undergoing dentoalveolar expansion with clear aligners (CA).",
    "doi": "",
-   "image": "https://www.ajodo.org/pb-assets/ux3/logos/ha/ymod-1589387154040.svg",
+   "image": "https://ars.els-cdn.com/content/image/1-s2.0-S0889540626005536-gr1.jpg",
    "video": "",
    "videoPoster": "",
-   "imageKind": "logo",
-   "imageBg": "#1f2937",
+   "imageKind": "",
+   "imageBg": "",
    "body": 1,
    "prio": 1,
    "crawled": 1795535293980
@@ -5948,6 +6055,21 @@
    "crawled": 1795490452795
   },
   {
+   "id": "nb3d1daeae3df",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "The February issue of the international dental journal places a strong focus on global dental policy",
+   "url": "https://www.fdiworlddental.org/february-issue-international-dental-journal-places-strong-focus-global-dental-policy",
+   "source": "FDI World Dental Federation",
+   "date": "2026-02-02T12:00:00.000Z",
+   "summary": "The latest issue of the International Dental Journal showcases the 2025 FDI Policy Statements, placing global dental policy at the centre of discussions on professional standards, clinical practice, and public health.",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2024-11/IDJ-new-issue.png?itok=pk7tKE5L",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795569913925
+  },
+  {
    "id": "n3dc0ce475261",
    "type": "news",
    "region": "intl",
@@ -5963,6 +6085,6 @@
    "crawled": 1794691573027
   }
  ],
- "updated": 1795535293980,
- "researchLast": "AJODO"
+ "updated": 1795569913925,
+ "researchLast": "Arch Oral Biol (ScienceDirect)"
 }
