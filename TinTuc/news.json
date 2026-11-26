@@ -121,6 +121,42 @@
    "crawled": 1795044306982
   },
   {
+   "id": "n809e8a12d92f",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Owandy Radiology to Debut AI Segmentation to QuickVision 3D Implant Planning Software at GNYDM",
+   "url": "https://www.dentistrytoday.com/owandy-radiology-to-debut-ai-segmentation-to-quickvision-3d-implant-planning-software-at-gnydm/",
+   "source": "Dentistry Today",
+   "date": "2026-11-25T20:17:44.000Z",
+   "summary": "Automatic separation of teeth, jawbones and canals helps clinicians review CBCT scans and plan guided implant surgery. Owandy Radiology Inc., will introduce automatic AI Segmentation for QuickVision 3D, its advanced implant planning software, at booth #3614 during the Greater New York Dental Meeting (GNYDM), which opens on Sunday, November 29, and runs through December 1 at the Jacob K. Javits Convention Center in…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/Owandy-Quick-Vision-AI-Segmentation.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795654838967
+  },
+  {
+   "id": "n9e2dce888bc7",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Tooth Whitening and Aesthetic Treatment Planning: Expectations and Maintenance Recommendations",
+   "url": "https://www.dentistrytoday.com/tooth-whitening-and-aesthetic-treatment-planning-expectations-and-maintenance-recommendations-2/",
+   "source": "Dentistry Today",
+   "date": "2026-11-25T19:28:55.000Z",
+   "summary": "Written by: Dr. Alex Rubinov In modern aesthetic dentistry, achieving a brighter smile involves far more than selecting a whitening agent and measuring a change on the shade guide. As patient expectations continue to evolve, clinicians must consider not only the desired shade but also the health of the dentition, existing restorations, sensitivity and long-term maintenance. While patients may measure success by…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2026/11/philips-zoom-dr-alex-rubinov-whitening-editorial-970x250-1.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795654838967
+  },
+  {
    "id": "n1dff8e833603",
    "type": "news",
    "region": "intl",
@@ -226,6 +262,24 @@
    "crawled": 1795620723892
   },
   {
+   "id": "n85e233cb3642",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Making the invisible visible: how AI is transforming patient understanding of dental radiographs",
+   "url": "https://dentistry.co.uk/2026/11/25/making-the-invisible-visible-how-ai-is-transforming-patient-understanding-of-dental-radiographs/",
+   "source": "Dentistry.co.uk",
+   "date": "2026-11-25T08:52:24.000Z",
+   "summary": "From identifying early bone loss to supporting more meaningful conversations about oral health, AI visualisation of dental radiograph s is helping Gensmile’s dental professionals bridge the gap between clinical findings and patient understanding. For dental professionals, interpreting radiographs is an essential part of everyday clinical practice, but for patients, the subtle variations in grey which reveal…",
+   "doi": "",
+   "image": "https://dentistry.co.uk/app/uploads/2026/11/pearl.jpg",
+   "video": "https://www.youtube.com/embed/tvOW7kcnx6k?feature=oembed",
+   "videoPoster": "https://i.ytimg.com/vi/tvOW7kcnx6k/hqdefault.jpg",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795654838967
+  },
+  {
    "id": "n60153d204b80",
    "type": "news",
    "region": "intl",
@@ -298,6 +352,24 @@
    "crawled": 1795620723892
   },
   {
+   "id": "n2332902e4ca7",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "3Shape Unite Integrates With Henry Schein One Platforms",
+   "url": "https://www.dentistrytoday.com/3shape-unite-integrates-with-henry-schein-one-platforms/",
+   "source": "Dentistry Today",
+   "date": "2026-11-25T05:07:45.000Z",
+   "summary": "New integration brings patient information, diagnosis, and practice management together in Dentrix, Ascend by Dentrix, and Dentally. 3Shape recently announced a workflow integration between 3Shape Unite and the Henry Schein One dental technology platforms: Ascend by Dentrix, Dentrix, and Dentally. “By integrating 3Shape Unite with Henry Schein One’s dental technology platforms, we’re creating value at scale for a…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2025/02/3shape.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795654838967
+  },
+  {
    "id": "n827666072a1c",
    "type": "news",
    "region": "vn",
@@ -314,6 +386,21 @@
    "body": 1,
    "prio": 2,
    "crawled": 1795620723892
+  },
+  {
+   "id": "n9b37beed674a",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Chlorhexidine Reduced Plaque, Gingivitis in Fixed",
+   "url": "https://www.dentaltown.com/news/details/15569/chlorhexidine-reduced-plaque-gingivitis-in-fixed-appliance-patients-02-fared-best",
+   "source": "Dentaltown",
+   "date": "2026-11-25T00:00:00.000Z",
+   "summary": "A meta-analysis of 21 RCTs found 0.2% chlorhexidine mouthwash cut plaque and gingival index scores in fixed orthodontic patients; 0.12% effects were weaker.",
+   "image": "https://prod.cdn.dentaltown.com/images/dentaltown/pressreleases/097bc7db-ed9b-483d-81a5-6111b51d5cae.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1795654838967
   },
   {
    "id": "nb6b8d99ca0d9",
@@ -542,6 +629,24 @@
    "body": 1,
    "prio": 2,
    "crawled": 1795569913925
+  },
+  {
+   "id": "n6d49ceae9bd9",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Accuracy and Efficiency of Proprietary Navigation, Haptic, and Optical Robotic Systems: An In Vitro Study",
+   "url": "https://onlinelibrary.wiley.com/doi/10.1111/cid.70193?af=R",
+   "source": "Clin Implant Dent Relat Res (Wiley)",
+   "date": "2026-11-24T00:35:53.000Z",
+   "summary": "In this in vitro study, all three tested proprietary systems achieved clinically acceptable accuracy, while the robotic systems showed lower deviations than dynamic navigation and the haptic-feedback system demonstrated greater procedural efficiency. These findings are specific to the evaluated systems and should not be generalized to other systems within the same technological categories. ABSTRACT Objectives This…",
+   "doi": "10.1111/cid.70193",
+   "image": "https://onlinelibrary.wiley.com/cms/asset/a7c23047-e573-485b-a2df-d8660b15d396/cid70193-toc-0001-m.png",
+   "video": "",
+   "videoPoster": "",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795654838967
   },
   {
    "id": "nb32b8b27920a",
@@ -4747,6 +4852,21 @@
    "crawled": 1794191950461
   },
   {
+   "id": "n334b345f9e20",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "By Robert C. Margeas, DDS November 1, 2026 Volume 22 , Issue 8 , November/December 2026 Page(s)",
+   "url": "https://www.insidedentistry.net/2026/11/movingforward/",
+   "source": "Inside Dentistry",
+   "date": "2026-11-01T12:00:00.000Z",
+   "summary": "By Robert C. Margeas, DDS November 1, 2026 Volume 22 , Issue 8 , November/December 2026 Page(s): 7 Share Dentistry has never stood still. The instruments we use, the technology available to us, and even the way we run our practices continue to evolve. As we head into a new year, however, I think the pace of change makes this a particularly exciting time to be a dentist. That doesn’t mean there aren’t challenges. In…",
+   "image": "https://res.cloudinary.com/broadcastmed/image/fetch/f_jpg,q_auto,c_fill,g_faces:center,h_225,w_400/https://www.insidedentistry.net/media/llhhq1hs/margeas.jpg",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795654838967
+  },
+  {
    "id": "n129cf014cc4a",
    "type": "news",
    "region": "intl",
@@ -6330,6 +6450,21 @@
    "crawled": 1795569913925
   },
   {
+   "id": "n1983c6f64793",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Register now for our upcoming webinar on oral health and healthy ageing",
+   "url": "https://www.fdiworlddental.org/register-now-our-upcoming-webinar-oral-health-and-healthy-ageing",
+   "source": "FDI World Dental Federation",
+   "date": "2026-01-22T12:00:00.000Z",
+   "summary": "The CE accredited webinar will take place on 22 January at 3PM CET on the FDI Oral Health Campus. Don’t miss this opportunity to learn about system-based approaches to improving oral health in long-term care settings. Image FDI is pleased to announce an upcoming webinar on the FDI Oral Health Campus , titled \"Oral Health and Healthy Ageing: Prevention and Integration in Long-Term Care Systems\". The webinar will take…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-01/webinar-ohap-01.jpg?itok=jXTnzONC",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795654838967
+  },
+  {
    "id": "n3dc0ce475261",
    "type": "news",
    "region": "intl",
@@ -6345,6 +6480,6 @@
    "crawled": 1794691573027
   }
  ],
- "updated": 1795620723892,
- "researchLast": "British Dental Journal"
+ "updated": 1795654838967,
+ "researchLast": "Clin Implant Dent Relat Res (Wiley)"
 }
