@@ -496,6 +496,26 @@
    "crawled": 1795620723892
   },
   {
+   "id": "n243eab6d5615",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Utilization of Dental Care Among Young American Indian Children From the Northern Plains",
+   "url": "https://onlinelibrary.wiley.com/doi/10.1111/cdoe.70146?af=R",
+   "source": "Community Dent Oral Epidemiol (Wiley)",
+   "date": "2026-11-25T05:14:53.000Z",
+   "summary": "ABSTRACT Objectives American Indian (AI) children have high rates of caries. This study described dental service utilization among AI children and examined relationships of social determinants of health (SDOH) with utilization and oral health. Methods This secondary data analysis used data extracted from a randomized controlled trial of a motivational interviewing (MI) intervention implemented to reduce dental decay…",
+   "doi": "10.1111/cdoe.70146",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=onlinelibrary.wiley.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795741408106
+  },
+  {
    "id": "n2332902e4ca7",
    "type": "news",
    "region": "intl",
@@ -1325,7 +1345,8 @@
    "imageBg": "#ffffff",
    "body": 1,
    "prio": 1,
-   "crawled": 1795705453993
+   "crawled": 1795705453993,
+   "_imgTried": 1
   },
   {
    "id": "na059a44d0d83",
@@ -6680,6 +6701,21 @@
    "crawled": 1795705453993
   },
   {
+   "id": "n90e510acd24b",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "In the June issue of the International Dental Journal a new editorial reflects on dentistry’s global evolution and future directions",
+   "url": "https://www.fdiworlddental.org/june-issue-international-dental-journal-new-editorial-reflects-dentistrys-global-evolution-and",
+   "source": "FDI World Dental Federation",
+   "date": "2026-01-06T12:00:00.000Z",
+   "summary": "A centerpiece of this issue is the newly published editorial, which reflects on more than 75 years of progress of the IDJ and the changing role of dentistry within global healthcare systems. The editorial explores the…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2025-06/IDJ-Anniversary75.png?itok=i8z0bl_r",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795741408106
+  },
+  {
    "id": "n3dc0ce475261",
    "type": "news",
    "region": "intl",
@@ -6695,6 +6731,6 @@
    "crawled": 1794691573027
   }
  ],
- "updated": 1795705453993,
- "researchLast": "Clin Oral Implants Res"
+ "updated": 1795741408106,
+ "researchLast": "Community Dent Oral Epidemiol (Wiley)"
 }
