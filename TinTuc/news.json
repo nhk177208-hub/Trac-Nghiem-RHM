@@ -141,6 +141,26 @@
    "crawled": 1795044306982
   },
   {
+   "id": "n8dfac01cef68",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Pearl Launches Practice Intelligence Dental AI in Canada",
+   "url": "https://www.dentistrytoday.com/pearl-launches-practice-intelligence-dental-ai-in-canada/",
+   "source": "Dentistry Today",
+   "date": "2026-11-28T07:09:36.000Z",
+   "summary": "Pearl, the global leader in dental AI solutions, recently announced the Canadian launch of Practice Intelligence®, a platform that connects what AI sees in dental x-rays with what the practice does next. By bringing AI findings together with treatment plans, patient histories, and appointment data, Practice Intelligence helps teams move from identifying a potential need to reviewing it clinically, scheduling planned…",
+   "doi": "",
+   "image": "https://www.dentistrytoday.com/wp-content/uploads/2025/02/Pearl_Logo-768x401-1-1-1-1.jpg",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#000000",
+   "body": 1,
+   "prio": 2,
+   "crawled": 1795874902643
+  },
+  {
    "id": "n27b7647f951a",
    "type": "news",
    "region": "intl",
@@ -266,7 +286,8 @@
    "imageBg": "#ffffff",
    "body": 1,
    "prio": 1,
-   "crawled": 1795825928881
+   "crawled": 1795825928881,
+   "_imgTried": 1
   },
   {
    "id": "ndf7bea19634e",
@@ -444,6 +465,26 @@
    "body": 1,
    "prio": 2,
    "crawled": 1795705453993
+  },
+  {
+   "id": "n44d7732ed066",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Machined vs fully roughened zygomatic implants: randomized split-mouth clinical trial",
+   "url": "https://www.ijoms.com/article/S0901-5027(26)00504-7/fulltext?rss=yes",
+   "source": "Int J Oral Maxillofac Surg",
+   "date": "2026-11-26T00:00:00.000Z",
+   "summary": "Comparative evidence on zygomatic implant surface design is scarce. This prospective study with a randomized split-mouth component evaluated whether a partially machined-coronal zygomatic implant (Zygan, test) achieved different clinical and peri-implant outcomes compared with a fully roughened zygomatic implant (Zyg-55, control) in severely atrophic maxillae. Adults requiring maxillary full-arch fixed…",
+   "doi": "10.1016/j.ijom.2026.11.007",
+   "image": "https://ars.els-cdn.com/content/image/1-s2.0-S0901502726005047-gr1.jpg",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "",
+   "imageBg": "",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795874902643
   },
   {
    "id": "n809e8a12d92f",
@@ -6930,6 +6971,21 @@
    "crawled": 1795791567014
   },
   {
+   "id": "nabbb80b34353",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "UN Declaration seals global commitment to oral health and NCD action",
+   "url": "https://www.fdiworlddental.org/un-declaration-seals-global-commitment-oral-health-and-ncd-action",
+   "source": "FDI World Dental Federation",
+   "date": "2025-12-16T12:00:00.000Z",
+   "summary": "Adoption marks a new phase for oral health in the global NCD response",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2025-12/un-new-york.jpg?itok=QpmM_Pu0",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795874902643
+  },
+  {
    "id": "n3dc0ce475261",
    "type": "news",
    "region": "intl",
@@ -6945,6 +7001,6 @@
    "crawled": 1794691573027
   }
  ],
- "updated": 1795825928881,
- "researchLast": "Int Endod J (Wiley)"
+ "updated": 1795874902643,
+ "researchLast": "Int J Oral Maxillofac Surg"
 }
