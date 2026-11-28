@@ -249,6 +249,41 @@
    "crawled": 1795791567014
   },
   {
+   "id": "n912d8c687013",
+   "type": "research",
+   "region": "intl",
+   "group": "Tạp chí khoa học",
+   "title": "Epigenome Editing in Endodontics: Current Evidence and Translational Prospects",
+   "url": "https://onlinelibrary.wiley.com/doi/10.1111/iej.70317?af=R",
+   "source": "Int Endod J (Wiley)",
+   "date": "2026-11-27T05:43:59.000Z",
+   "summary": "ABSTRACT Aim Epigenome editing permits locus-specific control of gene expression without intentionally changing the deoxyribonucleic acid (DNA) sequence. This critical narrative perspective assesses the small direct dental evidence base, separates molecular target engagement from tissue repair and identifies experiments needed to judge therapeutic value. Methods A focused narrative search examined PubMed, Embase,…",
+   "doi": "10.1111/iej.70317",
+   "image": "https://www.google.com/s2/favicons?sz=128&domain=onlinelibrary.wiley.com",
+   "video": "",
+   "videoPoster": "",
+   "imageKind": "logo",
+   "imageBg": "#ffffff",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795825928881
+  },
+  {
+   "id": "ndf7bea19634e",
+   "type": "news",
+   "region": "intl",
+   "group": "Tin tức & thương mại",
+   "title": "Dental Unit Water Failed Standards More Often at Outlets Than at the Inlet in China Study",
+   "url": "https://www.dentaltown.com/news/details/15574/dental-unit-water-failed-standards-more-often-at-outlets-than-at-the-inlet-in-china-study",
+   "source": "Dentaltown",
+   "date": "2026-11-27T00:00:00.000Z",
+   "summary": "Only 73.87% of 620 dental unit waterline samples met water quality standards, with scaler, syringe, and handpiece outlets faring worse than inlet water.",
+   "image": "https://prod.cdn.dentaltown.com/images/dentaltown/pressreleases/0cc8b4b3-d299-4b45-9ede-a772e97df518.jpg",
+   "body": 1,
+   "prio": 3,
+   "crawled": 1795825928881
+  },
+  {
    "id": "ne0b93c2d3826",
    "type": "news",
    "region": "intl",
@@ -6863,6 +6898,21 @@
    "crawled": 1795741408106
   },
   {
+   "id": "n1e74facc1483",
+   "type": "news",
+   "region": "intl",
+   "group": "Hiệp hội",
+   "title": "Register for the Massive Open Online Course on tackling antibiotic resistance in dentistry",
+   "url": "https://www.fdiworlddental.org/register-massive-open-online-course-tackling-antibiotic-resistance-dentistry",
+   "source": "FDI World Dental Federation",
+   "date": "2026-01-05T12:00:00.000Z",
+   "summary": "Antimicrobial resistance (AMR) continues to pose a significant threat to global health, compromising the effectiveness of essential treatments and increasing the complexity of managing infections. Dentists and dental teams play a critical role in…",
+   "image": "https://www.fdiworlddental.org/sites/default/files/styles/ino_plain_1x_xs/public/2026-05/dentist-consultation-woman.jpg?itok=wwBJJcx4",
+   "body": 1,
+   "prio": 1,
+   "crawled": 1795825928881
+  },
+  {
    "id": "n5a660a7349b5",
    "type": "news",
    "region": "intl",
@@ -6895,6 +6945,6 @@
    "crawled": 1794691573027
   }
  ],
- "updated": 1795791567014,
- "researchLast": "Dental Materials (ScienceDirect)"
+ "updated": 1795825928881,
+ "researchLast": "Int Endod J (Wiley)"
 }
